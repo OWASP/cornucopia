@@ -1,0 +1,2 @@
+output/*.idml filter=lfs diff=lfs merge=lfs -text
+output/*.docx filter=lfs diff=lfs merge=lfs -text
