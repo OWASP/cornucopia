@@ -12,7 +12,6 @@
       - id: 'VE2'
         card: '2'
         desc: 'Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code'
-        misc: ''
         mappings:
           - OWASP SCP: [ 69, 107, 108, 109, 136, 137, 153, 156, 158, 162 ]
             OWASP ASVS: [ 1.10, 4.5, 8.1, 11.5, 19.1, 19.5 ]
@@ -22,7 +21,6 @@
       - id: 'VE3'
         card: '3'
         desc: 'Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats'
-        misc: ''
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 5.1, 5.16, 5.17, 5.18, 5.19, 5.20, 11.1, 11.2 ]
@@ -32,7 +30,6 @@
       - id: 'VE4'
         card: '4'
         desc: 'Dave can input malicious field names or data because it is not being checked within the context of the current user and process'
-        misc: ''
         mappings:
           - OWASP SCP: [ 8, 10, 183 ]
             OWASP ASVS: [ 4.16, 5.16, 5.17, 15.1 ]
@@ -42,7 +39,6 @@
       - id: 'VE5'
         card: '5'
         desc: 'Jee can bypass the centralized encoding routines since they are not being used everywhere, or the wrong encodings are being used'
-        misc: ''
         mappings:
           - OWASP SCP: [ 3, 15, 18, 19, 20, 21, 22, 168 ]
             OWASP ASVS: [ 1.7, 5.15, 5.21, 5.22, 5.23 ]
@@ -52,7 +48,6 @@
       - id: 'VE6'
         card: '6'
         desc: 'Jason can bypass the centralized validation routines since they are not being used on all inputs'
-        misc: ''
         mappings:
           - OWASP SCP: [ 3, 168 ]
             OWASP ASVS: [ 1.7, 5.6, 5.19 ]
@@ -62,7 +57,6 @@
       - id: 'VE7'
         card: '7'
         desc: 'Jan can craft special payloads to foil input validation because the character set is not specified/enforced, or the data is encoded multiple times, or the data is not fully converted into the same format the application uses (e.g. canonicalization) before being validated, or variables are not strongly typed'
-        misc: ''
         mappings:
           - OWASP SCP: [ 4, 5, 7, 150 ]
             OWASP ASVS: [ 5.6, 11.8 ]
@@ -72,7 +66,6 @@
       - id: 'VE8'
         card: '8'
         desc: 'Sarah can bypass the centralized sanitization routines since they are not being used comprehensively'
-        misc: ''
         mappings:
           - OWASP SCP: [ 15, 169 ]
             OWASP ASVS: [ 1.7, 5.21, 5.23 ]
@@ -82,7 +75,6 @@
       - id: 'VE9'
         card: '9'
         desc: 'Shamun can bypass input validation or output validation checks because validation failures are not rejected and/or sanitized'
-        misc: ''
         mappings:
           - OWASP SCP: [ 6, 21, 22, 168 ]
             OWASP ASVS: [ 5.3 ]
@@ -92,7 +84,6 @@
       - id: 'VE0'
       - card: '10'
         desc: 'Darío can exploit the trust the application places in a source of data (e.g. user-definable data, manipulation of locally stored data, alteration to state data on a client device, lack of verification of identity during data validation such as Darío can pretend to be Colin)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 2, 19, 92, 95, 180 ]
             OWASP ASVS: [ 5.19, 10.6, 16.2, 16.3, 16.4, 16.5, 16.8 ]
@@ -102,7 +93,6 @@
       - id: 'VEJ'
         card: 'J'
         desc: 'Dennis has control over input validation, output validation or output encoding code or routines so they can be bypassed'
-        misc: ''
         mappings:
           - OWASP SCP: [ 1, 17 ]
             OWASP ASVS: [ 5.5, 5.18 ]
@@ -112,7 +102,6 @@
       - id: 'VEQ'
         card: 'Q'
         desc: 'Geoff can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes'
-        misc: ''
         mappings:
           - OWASP SCP: [ 10, 15, 16, 19, 20 ]
             OWASP ASVS: [ 5.15, 5.22, 5.23, 5.24, 5.25 ]
@@ -122,7 +111,6 @@
       - id: 'VEK'
         card: 'K'
         desc: 'Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly'
-        misc: ''
         mappings:
           - OWASP SCP: [ 15, 19, 20, 21, 22, 167, 180, 204, 211, 212 ]
             OWASP ASVS: [ 5.10, 5.11, 5.12, 5.13, 5.14, 5.16, 5.21 ]
@@ -137,7 +125,6 @@
       - id: 'AT2'
         card: '2'
         desc: 'James can undertake authentication functions without the real user ever being aware this has occurred (e.g. attempt to log in, log in with stolen credentials, reset the password) '
-        misc: ''
         mappings:
           - OWASP SCP: [ 47, 52 ]
             OWASP ASVS: [ 2.12, 8.4, 8.10 ]
@@ -147,7 +134,6 @@
       - id: 'AT3'
         card: '3'
         desc: 'Muhammad can obtain a user’s password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password'
-        misc: ''
         mappings:
           - OWASP SCP: [ 36, 37, 40, 43, 48, 51, 119, 139, 140, 146 ]
             OWASP ASVS: [ 2.2, 2.17, 2.24, 8.7, 9.1, 9.4, 9.5, 9.9, 9.11 ]
@@ -157,7 +143,6 @@
       - id: 'AT4'
         card: '4'
         desc: 'Sebastien can easily identify user names or can enumerate them'
-        misc: ''
         mappings:
           - OWASP SCP: [ 33, 53 ]
             OWASP ASVS: [ 2.18, 2.28 ]
@@ -167,7 +152,6 @@
       - id: 'AT5'
         card: '5'
         desc: 'Javier can use default, test or easily guessable credentials to authenticate, or can use an old account or an account not necessary for the application'
-        misc: ''
         mappings:
           - OWASP SCP: [ 54, 175, 178 ]
             OWASP ASVS: [ 2.19 ]
@@ -177,7 +161,6 @@
       - id: 'AT6'
         card: '6'
         desc: 'Sven can reuse a temporary password because the user does not have to change it on first use, or it has too long or no expiry, or it does not use an out-of-band delivery method (e.g. post, mobile app, SMS)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 37, 45, 46, 178 ]
             OWASP ASVS: [ ]
@@ -187,7 +170,6 @@
       - id: 'AT7'
         card: '7'
         desc: 'Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords'
-        misc: ''
         mappings:
           - OWASP SCP: [ 33, 38, 39, 41, 50, 53 ]
             OWASP ASVS: [ 2.7, 2.20, 2.23, 2.25, 2.27 ]
@@ -197,7 +179,6 @@
       - id: 'AT8'
         card: '8'
         desc: 'Kate can bypass authentication because it does not fail secure (i.e. it defaults to allowing unauthenticated access)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 28 ]
             OWASP ASVS: [ 2.6 ]
@@ -207,7 +188,6 @@
       - id: 'AT9'
         card: '9'
         desc: 'Claudia can undertake more critical functions because authentication requirements are too weak (e.g. do not use strong authentication such as two factor), or there is no requirement to re-authenticate for these'
-        misc: ''
         mappings:
           - OWASP SCP: [ 55, 56 ]
             OWASP ASVS: [ 2.1, 2.9, 2.26, 2.31, 4.15 ]
@@ -217,7 +197,6 @@
       - id: 'AT0'
         card: '10'
         desc: 'Pravin can bypass authentication controls because a centralized standard, tested, proven and approved authentication module/framework/service, separate to the resource being requested, is not being used'
-        misc: ''
         mappings:
           - OWASP SCP: [ 25, 26, 27 ]
             OWASP ASVS: [ 1.7, 2.30 ]
@@ -227,7 +206,6 @@
       - id: 'ATJ'
         card: 'J'
         desc: 'Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action'
-        misc: ''
         mappings:
           - OWASP SCP: [ 23, 32, 34 ]
             OWASP ASVS: [ 2.1 ]
@@ -237,7 +215,6 @@
       - id: 'ATQ'
         card: 'Q'
         desc: 'Jaime can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 23, 29, 42, 49 ]
             OWASP ASVS: [ 2.1, 2.8 ]
@@ -247,7 +224,6 @@
       - id: 'ATK'
         card: 'K'
         desc: 'Olga can influence or alter authentication code/routines so they can be bypassed'
-        misc: ''
         mappings:
           - OWASP SCP: [ 24 ]
             OWASP ASVS: [ 2.4, 13.2 ]
@@ -262,7 +238,6 @@
       - id: 'SM2'
         card: '2'
         desc: 'William has control over the generation of session identifiers'
-        misc: ''
         mappings:
           - OWASP SCP: [ 58, 59 ]
             OWASP ASVS: [ 3.10 ]
@@ -290,7 +265,6 @@
       - id: 'SM5'
         card: '5'
         desc: 'John can predict or guess session identifiers because they are not changed when the user’s role alters (e.g. pre and post authentication) and when switching between non-encrypted and encrypted communications, or are not sufficiently long and random, or are not changed periodically'
-        misc: ''
         mappings:
           - OWASP SCP: [ 60, 62, 66, 67, 71, 72 ]
             OWASP ASVS: [ 3.2, 3.7, 3.11 ]
@@ -300,7 +274,6 @@
       - id: 'SM6'
         card: '6'
         desc: 'Gary can take over a user’s session because there is a long or no inactivity timeout, or a long or no overall session time limit, or the same session can be used from more than one device/location'
-        misc: ''
         mappings:
           - OWASP SCP: [ 64, 65 ]
             OWASP ASVS: [ 3.3, 3.4, 3.16, 3.17, 3.18 ]
@@ -310,7 +283,6 @@
       - id: 'SM7'
         card: '7'
         desc: 'Casey can utilize Adam’s session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session'
-        misc: ''
         mappings:
           - OWASP SCP: [ 62, 63 ]
             OWASP ASVS: [ 3.2, 3.5 ]
@@ -320,7 +292,6 @@
       - id: 'SM8'
         card: '8'
         desc: 'Matt can abuse long sessions because the application does not require periodic re-authentication to check if privileges have changed'
-        misc: ''
         mappings:
           - OWASP SCP: [ 96 ]
             OWASP ASVS: [ ]
@@ -330,7 +301,6 @@
       - id: 'SM9'
         card: '9'
         desc: 'Ivan can steal session identifiers because they are sent over insecure channels, or are logged, or are revealed in error messages, or are included in URLs, or are accessible un-necessarily by code which the attacker can influence or alter'
-        misc: ''
         mappings:
           - OWASP SCP: [ 69, 75, 76, 119, 138 ]
             OWASP ASVS: [ 3.6, 8.7, 10.3 ]
@@ -340,7 +310,6 @@
       - id: 'SM0'
         card: '10'
         desc: 'Marce can forge requests because per-session, or per-request for more critical actions, strong random tokens (i.e. anti-CSRF tokens) or similar are not being used for actions that change state'
-        misc: ''
         mappings:
           - OWASP SCP: [ 73, 74 ]
             OWASP ASVS: [ 4.13 ]
@@ -350,7 +319,6 @@
       - id: 'SMJ'
         card: 'J'
         desc: 'Jeff can resend an identical repeat interaction (e.g. HTTP request, signal, button press) and it is accepted, not rejected'
-        misc: ''
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 15.1, 15.2 ]
@@ -360,7 +328,6 @@
       - id: 'SMQ'
         card: 'Q'
         desc: 'Salim can bypass session management because it is not applied comprehensively and consistently across the application'
-        misc: ''
         mappings:
           - OWASP SCP: [ 58 ]
             OWASP ASVS: [ 3.1 ]
@@ -370,7 +337,6 @@
       - id: 'SMK'
         card: 'K'
         desc: 'Peter can bypass the session management controls because they have been self-built and/or are weak, instead of using a standard framework or approved tested module'
-        misc: ''
         mappings:
           - OWASP SCP: [ 58, 60 ]
             OWASP ASVS: [ 1.7 ]
@@ -385,7 +351,6 @@
       - id: 'AZ2'
         card: '2'
         desc: 'Tim can influence where data is sent or forwarded to'
-        misc: ''
         mappings:
           - OWASP SCP: [ 44 ]
             OWASP ASVS: [ 4.1, 4.16, 16.1 ]
@@ -395,7 +360,6 @@
       - id: 'AZ3'
         card: '3'
         desc: 'Christian can access information, which they should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or other information leakage'
-        misc: ''
         mappings:
           - OWASP SCP: [ 51, 100, 135, 139, 140, 141, 150 ]
             OWASP ASVS: [ 4.1, 8.2, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.11, 16.6, 16.7 ]
@@ -405,7 +369,6 @@
       - id: 'AZ4'
         card: '4'
         desc: 'Kelly can bypass authorization controls because they do not fail securely (i.e. they default to allowing access)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 79, 80 ]
             OWASP ASVS: [ 4.8 ]
@@ -415,7 +378,6 @@
       - id: 'AZ5'
         card: '5'
         desc: 'Chad can access resources (including services, processes, AJAX, Flash, video, images, documents, temporary files, session data, system properties, configuration data, registry settings, logs) he should not be able to due to missing authorization, or due to excessive privileges (e.g. not using the principle of least privilege)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 70, 81, 83, 84, 87, 88, 89, 99, 117, 131, 132, 142, 154, 170, 179 ]
             OWASP ASVS: [ 4.1, 4.4, 4.9, 19.3 ]
@@ -425,7 +387,6 @@
       - id: 'AZ6'
         card: '6'
         desc: 'Eduardo can access data he does not have permission to, even though he has permission to the form/page/URL/entry point'
-        misc: ''
         mappings:
           - OWASP SCP: [ 81, 88, 131 ]
             OWASP ASVS: [ 4.1, 4.4 ]
@@ -435,7 +396,6 @@
       - id: 'AZ7'
         card: '7'
         desc: 'Yuanjing can access application functions, objects, or properties he is not authorized to access'
-        misc: ''
         mappings:
           - OWASP SCP: [ 81, 85, 86, 131 ]
             OWASP ASVS: [ 4.1, 4.4 ]
@@ -445,7 +405,6 @@
       - id: 'AZ8'
         card: '8'
         desc: 'Tom can bypass business rules by altering the usual process sequence or flow, or by undertaking the process in the incorrect order, or by manipulating date and time values used by the application, or by using valid features for unintended purposes, or by otherwise manipulating control data'
-        misc: ''
         mappings:
           - OWASP SCP: [ 10, 32, 93, 94, 189 ]
             OWASP ASVS: [ 4.10, 4.15, 4.16, 8.13, 15.1 ]
@@ -455,7 +414,6 @@
       - id: 'AZ9'
         card: '9'
         desc: 'Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application’s resources, or causes race conditions, or over-utilizes a feature'
-        misc: ''
         mappings:
           - OWASP SCP: [ 94 ]
             OWASP ASVS: [ 4.14, 15.2 ]
@@ -465,7 +423,6 @@
       - id: 'AZ0'
         card: '10'
         desc: 'Richard can bypass the centralized authorization controls since they are not being used comprehensively on all interactions'
-        misc: ''
         mappings:
           - OWASP SCP: [ 78, 91 ]
             OWASP ASVS: [ 1.7, 4.11 ]
@@ -475,7 +432,6 @@
       - id: 'AZJ'
         card: 'J'
         desc: 'Dinis can access security configuration information, or access control lists'
-        misc: ''
         mappings:
           - OWASP SCP: [ 89, 90 ]
             OWASP ASVS: [ 4.10, 13.2 ]
@@ -485,7 +441,6 @@
       - id: 'AZQ'
         card: 'Q'
         desc: 'Christopher can inject a command that the application will run at a higher privilege level'
-        misc: ''
         mappings:
           - OWASP SCP: [ 209 ]
             OWASP ASVS: [ 5.12 ]
@@ -495,7 +450,6 @@
       - id: 'AZK'
         card: 'K'
         desc: 'Ryan can influence or alter authorization controls and permissions, and can therefore bypass them'
-        misc: ''
         mappings:
           - OWASP SCP: [ 77, 89, 91 ]
             OWASP ASVS: [ 4.9, 4.10, 13.2 ]
@@ -510,7 +464,6 @@
       - id: 'CR2'
         card: '2'
         desc: 'Kyun can access data because it has been obfuscated rather than using an approved cryptographic function'
-        misc: ''
         mappings:
           - OWASP SCP: [ 105, 133, 135 ]
             OWASP ASVS: [ ]
@@ -520,7 +473,6 @@
       - id: 'CR3'
         card: '3'
         desc: 'Axel can modify transient or permanent data (stored or in transit), or source code, or updates/patches, or configuration data, because it is not subject to integrity checking'
-        misc: ''
         mappings:
           - OWASP SCP: [ 92, 205, 212 ]
             OWASP ASVS: [ 8.11, 11.7, 13.2, 19.5, 19.6, 19.7, 19.8 ]
@@ -530,7 +482,6 @@
       - id: 'CR4'
         card: '4'
         desc: 'Paulo can access data in transit that is not encrypted, even though the channel is encrypted'
-        misc: ''
         mappings:
           - OWASP SCP: [ 37, 88, 143, 214 ]
             OWASP ASVS: [ 7.12, 9.2 ]
@@ -540,7 +491,6 @@
       - id: 'CR5'
         card: '5'
         desc: 'Kyle can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 103, 145 ]
             OWASP ASVS: [ 7.2, 10.3 ]
@@ -550,7 +500,6 @@
       - id: 'CR6'
         card: '6'
         desc: 'Romain can read and modify unencrypted data in memory or in transit (e.g. cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems'
-        misc: ''
         mappings:
           - OWASP SCP: [ 36, 37, 143, 146, 147 ]
             OWASP ASVS: [ 2.16, 9.2, 9.11, 10.3, 19.2 ]
@@ -560,7 +509,6 @@
       - id: 'CR7'
         card: '7'
         desc: 'Gunter can intercept or modify encrypted data in transit because the protocol is poorly deployed, or weakly configured, or certificates are invalid, or certificates are not trusted, or the connection can be degraded to a weaker or un-encrypted communication'
-        misc: ''
         mappings:
           - OWASP SCP: [ 75, 144, 145, 148 ]
             OWASP ASVS: [ 10.1, 10.5, 10.10, 10.11, 10.12, 10.13, 10.14 ]
@@ -570,7 +518,6 @@
       - id: 'CR8'
         card: '8'
         desc: 'Eoin can access stored business data (e.g. passwords, session identifiers, PII, cardholder data) because it is not securely encrypted or securely hashed'
-        misc: ''
         mappings:
           - OWASP SCP: [ 30, 31, 70, 133, 135 ]
             OWASP ASVS: [ 2.13, 7.7, 7.8, 9.2 ]
@@ -580,7 +527,6 @@
       - id: 'CR9'
         card: '9'
         desc: 'Andy can bypass random number generation, random GUID generation, hashing and encryption functions because they have been self-built and/or are weak'
-        misc: ''
         mappings:
           - OWASP SCP: [ 60, 104, 105 ]
             OWASP ASVS: [ 7.6, 7.7, 7.8, 7.15 ]
@@ -590,7 +536,6 @@
       - id: 'CR0'
         card: '10'
         desc: 'Susanna can break the cryptography in use because it is not strong enough for the degree of protection required, or it is not strong enough for the amount of effort the attacker is willing to make'
-        misc: ''
         mappings:
           - OWASP SCP: [ 104, 105 ]
             OWASP ASVS: [ ]
@@ -600,7 +545,6 @@
       - id: 'CRJ'
         card: 'J'
         desc: 'Justin can read credentials for accessing internal or external resources, services and others systems because they are stored in an unencrypted format, or saved in the source code'
-        misc: ''
         mappings:
           - OWASP SCP: [ 35, 90, 171, 172 ]
             OWASP ASVS: [ 2.29 ]
@@ -610,7 +554,6 @@
       - id: 'CRQ'
         card: 'Q'
         desc: 'Randolph can access or predict the master cryptographic secrets'
-        misc: ''
         mappings:
           - OWASP SCP: [ 35, 102 ]
             OWASP ASVS: [ 7.8, 7.9, 7.11, 7.13, 7.14 ]
@@ -620,7 +563,6 @@
       - id: 'CRK'
         card: 'K'
         desc: 'Dan can influence or alter cryptography code/routines (encryption, hashing, digital signatures, random number and GUID generation) and can therefore bypass them'
-        misc: ''
         mappings:
           - OWASP SCP: [ 31, 101 ]
             OWASP ASVS: [ ]
@@ -635,7 +577,6 @@
       - id: 'CO2'
         card: '2'
         desc: 'Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur'
-        misc: ''
         mappings:
           - OWASP SCP: [ 194, 195, 196, 197, 198, 199, 200, 201, 202, 205, 206, 207, 208, 209 ]
             OWASP ASVS: [ 5.1 ]
@@ -645,7 +586,6 @@
       - id: 'CO3'
         card: '3'
         desc: 'Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained'
-        misc: ''
         mappings:
           - OWASP SCP: [ 134 ]
             OWASP ASVS: [ 19.5 ]
@@ -655,7 +595,6 @@
       - id: 'CO4'
         card: '4'
         desc: 'Keith can perform an action and it is not possible to attribute it to him'
-        misc: ''
         mappings:
           - OWASP SCP: [ 23, 32, 34, 42, 51, 181 ]
             OWASP ASVS: [ 8.10 ]
@@ -665,7 +604,6 @@
       - id: 'CO5'
         card: '5'
         desc: 'Larry can influence the trust other parties including users have in the application, or abuse that trust elsewhere (e.g. in another application)'
-        misc: ''
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ ]
@@ -675,7 +613,6 @@
       - id: 'CO6'
         card: '6'
         desc: 'Aaron can bypass controls because error/exception handling is missing, or is implemented inconsistently or partially, or does not deny access by default (i.e. errors should terminate access/execution), or relies on handling by some other service or system'
-        misc: ''
         mappings:
           - OWASP SCP: [ 109, 110, 111, 112, 155 ]
             OWASP ASVS: [ 8.2, 8.4 ]
@@ -685,7 +622,6 @@
       - id: 'CO7'
         card: '7'
         desc: 'Mwengu’s actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service'
-        misc: ''
         mappings:
           - OWASP SCP: [ 113, 114, 115, 117, 118, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130 ]
             OWASP ASVS: [ 2.12, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10, 8.11, 8.12, 9.10, 10.4 ]
@@ -695,7 +631,6 @@
       - id: 'CO8'
         card: '8'
         desc: 'David can bypass the application to gain access to data because the network and host infrastructure, and supporting services/applications, have not been securely configured, the configuration rechecked periodically and security patches applied, or the data is stored locally, or the data is not physically protected'
-        misc: ''
         mappings:
           - OWASP SCP: [ 151, 152, 156, 160, 161, 173174, 175, 176, 177 ]
             OWASP ASVS: [ 19.1, 19.4, 19.6, 19.7, 19.8 ]
@@ -705,7 +640,6 @@
       - id: 'CO9'
         card: '9'
         desc: 'Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately'
-        misc: ''
         mappings:
           - OWASP SCP: [ 23, 29, 56, 81, 82, 84, 85, 86, 87, 88, 89, 90 ]
             OWASP ASVS: [ 2.1, 2.32 ]
@@ -715,7 +649,6 @@
       - id: 'CO0'
         card: '10'
         desc: 'Xavier can circumvent the application’s controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)'
-        misc: ''
         mappings:
           - OWASP SCP: [ 57, 151, 152, 204, 205, 213, 214 ]
             OWASP ASVS: [ 1.11- ]
@@ -725,7 +658,6 @@
       - id: 'COJ'
         ard: 'J'
         desc: 'Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented and passed on to operational teams'
-        misc: ''
         mappings:
           - OWASP SCP: [ 90, 137, 148, 151, 152, 153, 154, 175, 176, 177, 178, 179, 186, 192 ]
             OWASP ASVS: [ 19.5, 19.9 ]
@@ -735,7 +667,6 @@
       - id: 'COQ'
         card: 'Q'
         desc: 'Jim can undertake malicious, non-normal, actions without real-time detection and response by the application'
-        misc: ''
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 4.14, 9.8, 15.1, 15.2 ]
@@ -745,7 +676,6 @@
       - id: 'COK'
         card: 'K'
         desc: 'Gareth can utilize the application to deny service to some or all of its users'
-        misc: ''
         mappings:
           - OWASP SCP: [ 41, 55 ]
             OWASP ASVS: [ ]
