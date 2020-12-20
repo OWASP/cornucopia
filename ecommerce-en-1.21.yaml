@@ -14,7 +14,7 @@
         desc: 'Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code'
         misc: ''
         mappings:
-          - OWASP SCP: [ 69, 107-109, 136, 137, 153, 156, 158, 162 ]
+          - OWASP SCP: [ 69, 107, 108, 109, 136, 137, 153, 156, 158, 162 ]
             OWASP ASVS: [ 1.10, 4.5, 8.1, 11.5, 19.1, 19.5 ]
             OWASP AppSensor: [ HT1-3 ]
             CAPEC: [ 54, 541 ]
@@ -44,7 +44,7 @@
         desc: 'Jee can bypass the centralized encoding routines since they are not being used everywhere, or the wrong encodings are being used'
         misc: ''
         mappings:
-          - OWASP SCP: [ 3, 15, 18-22, 168 ]
+          - OWASP SCP: [ 3, 15, 18, 19, 20, 21, 22, 168 ]
             OWASP ASVS: [ 1.7, 5.15, 5.21, 5.22, 5.23 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 28, 31, 152, 160, 468 ]
@@ -124,7 +124,7 @@
         desc: 'Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly'
         misc: ''
         mappings:
-          - OWASP SCP: [ 15, 19-22, 167, 180, 204, 211, 212 ]
+          - OWASP SCP: [ 15, 19, 20, 21, 22, 167, 180, 204, 211, 212 ]
             OWASP ASVS: [ 5.10, 5.11, 5.12, 5.13, 5.14, 5.16, 5.21 ]
             OWASP AppSensor: [ CIE1-2 ]
             CAPEC: [ 23, 28, 76, 152, 160, 261 ]
@@ -149,7 +149,7 @@
         desc: 'Muhammad can obtain a user’s password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password'
         misc: ''
         mappings:
-          - OWASP SCP: [ 36-7, 40, 43, 48, 51, 119, 139-40, 146 ]
+          - OWASP SCP: [ 36, 37, 40, 43, 48, 51, 119, 139, 140, 146 ]
             OWASP ASVS: [ 2.2, 2.17, 2.24, 8.7, 9.1, 9.4, 9.5, 9.9, 9.11 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 37, 546 ]
@@ -398,7 +398,7 @@
         misc: ''
         mappings:
           - OWASP SCP: [ 51, 100, 135, 139, 140, 141, 150 ]
-            OWASP ASVS: [ 4.1, 8.2, 9.1-9.6, 9.11, 16.6, 16.7 ]
+            OWASP ASVS: [ 4.1, 8.2, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.11, 16.6, 16.7 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 69, 213 ]
             SAFECode: [ 8, 10, 11 ]
@@ -417,10 +417,10 @@
         desc: 'Chad can access resources (including services, processes, AJAX, Flash, video, images, documents, temporary files, session data, system properties, configuration data, registry settings, logs) he should not be able to due to missing authorization, or due to excessive privileges (e.g. not using the principle of least privilege)'
         misc: ''
         mappings:
-          - OWASP SCP: [ 70, 81, 83-4, 87-9, 99, 117, 131-2, 142, 154, 170, 179 ]
+          - OWASP SCP: [ 70, 81, 83, 84, 87, 88, 89, 99, 117, 131, 132, 142, 154, 170, 179 ]
             OWASP ASVS: [ 4.1, 4.4, 4.9, 19.3 ]
             OWASP AppSensor: [ ACE1-4, HT2 ]
-            CAPEC: [ 75, 87, 95, 126, 149, 155, 203, 213, 264-5 ]
+            CAPEC: [ 75, 87, 95, 126, 149, 155, 203, 213, 264, 265 ]
             SAFECode: [ 8, 10, 11, 13 ]
       - id: 'AZ6'
         card: '6'
@@ -637,11 +637,11 @@
         desc: 'Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur'
         misc: ''
         mappings:
-          - OWASP SCP: [ 194-202, 205-209 ]
+          - OWASP SCP: [ 194, 195, 196, 197, 198, 199, 200, 201, 202, 205, 206, 207, 208, 209 ]
             OWASP ASVS: [ 5.1 ]
             OWASP AppSensor: [ ]
-            CAPEC: [ 25, 26, 29, 96, 123-4, 128-9, 264-5 ]
-            SAFECode: [ 3, 5-7, 9, 22, 25-26, 34 ]
+            CAPEC: [ 25, 26, 29, 96, 123, 124, 128, 129, 264, 265 ]
+            SAFECode: [ 3, 5, 6, 7, 9, 22, 25, 26, 34 ]
       - id: 'CO3'
         card: '3'
         desc: 'Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained'
@@ -687,8 +687,8 @@
         desc: 'Mwengu’s actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service'
         misc: ''
         mappings:
-          - OWASP SCP: [ 113-115, 117, 118, 121-130 ]
-            OWASP ASVS: [ 2.12, 8.3-8.12, 9.10, 10.4 ]
+          - OWASP SCP: [ 113, 114, 115, 117, 118, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130 ]
+            OWASP ASVS: [ 2.12, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10, 8.11, 8.12, 9.10, 10.4 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 93 ]
             SAFECode: [ 4 ]
@@ -697,7 +697,7 @@
         desc: 'David can bypass the application to gain access to data because the network and host infrastructure, and supporting services/applications, have not been securely configured, the configuration rechecked periodically and security patches applied, or the data is stored locally, or the data is not physically protected'
         misc: ''
         mappings:
-          - OWASP SCP: [ 151, 152, 156, 160, 161, 173-177 ]
+          - OWASP SCP: [ 151, 152, 156, 160, 161, 173174, 175, 176, 177 ]
             OWASP ASVS: [ 19.1, 19.4, 19.6, 19.7, 19.8 ]
             OWASP AppSensor: [ RE1, RE2 ]
             CAPEC: [ 37, 220, 310, 436, 536 ]
@@ -707,7 +707,7 @@
         desc: 'Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately'
         misc: ''
         mappings:
-          - OWASP SCP: [ 23, 29, 56, 81, 82, 84-90 ]
+          - OWASP SCP: [ 23, 29, 56, 81, 82, 84, 85, 86, 87, 88, 89, 90 ]
             OWASP ASVS: [ 2.1, 2.32 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 122, 233 ]
@@ -727,7 +727,7 @@
         desc: 'Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented and passed on to operational teams'
         misc: ''
         mappings:
-          - OWASP SCP: [ 90, 137, 148, 151-154, 175-179, 186, 192 ]
+          - OWASP SCP: [ 90, 137, 148, 151, 152, 153, 154, 175, 176, 177, 178, 179, 186, 192 ]
             OWASP ASVS: [ 19.5, 19.9 ]
             OWASP AppSensor: [ ]
             CAPEC: [ ]
