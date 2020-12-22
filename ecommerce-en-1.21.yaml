@@ -4,7 +4,7 @@
     language: 'EN'
     version: '1.21'
   data:
-    Data validation & encoding:
+    VE: "Data validation & encoding"
       - id: 'VEA'
         card: 'A'
         desc: 'You have invented a new attack against Data Validation and Encoding'
@@ -117,7 +117,7 @@
             OWASP AppSensor: [ CIE1-2 ]
             CAPEC: [ 23, 28, 76, 152, 160, 261 ]
             SAFECode: [ 2, 19, 20 ]
-    Authentication:
+    AT: "Authentication"
       - id: 'ATA'
         card: 'A'
         desc: 'You have invented a new attack against Authentication'
@@ -230,7 +230,7 @@
             OWASP AppSensor: [ ]
             CAPEC: [ 115, 207, 554 ]
             SAFECode: [ 14, 28 ]
-    Session management:
+    SM: "Session management"
       - id: 'SMA'
         card: 'A'
         desc: 'You have invented a new attack against Session Management'
@@ -343,7 +343,7 @@
             OWASP AppSensor: [ ]
             CAPEC: [ 21 ]
             SAFECode: [ 14, 28 ]
-    Authorization:
+    AZ: "Authorization"
       - id: 'AZA'
         card: 'A'
         desc: 'You have invented a new attack against Authorization'
@@ -456,7 +456,7 @@
             OWASP AppSensor: [ ]
             CAPEC: [ 207, 554 ]
             SAFECode: [ 8, 10, 11 ]
-    Cryptography:
+    CR: "Cryptography"
       - id: 'CRA'
         card: 'A'
         desc: 'You have invented a new attack against Cryptography'
@@ -569,7 +569,7 @@
             OWASP AppSensor: [ 7.11 ]
             CAPEC: [ 207, 554 ]
             SAFECode: [ 14, 21, 29 ]
-    Cornucopia:
+    CO: "Cornucopia"
       - id: 'COA'
         card: 'A'
         desc: 'You have invented a new attack of any type'
@@ -682,7 +682,7 @@
             OWASP AppSensor: [ UT1-4, STE3 ]
             CAPEC: [ 2, 25, 119, 125 ]
             SAFECode: [ 1 ]
-    Joker:
+    JO: "Joker"
       - id: 'JOA'
         card: 'A'
         desc: 'Alice can utilize the application to attack users’ systems and data'
