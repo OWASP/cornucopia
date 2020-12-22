@@ -1,116 +1,116 @@
 ---
 - meta:
-    edition: 'ecommerce'
-    language: 'ES'
-    version: '1.20'
+    edition: "ecommerce"
+    language: "ES"
+    version: "1.20"
   data:
     VE: "Validación de datos & Codificación"
-      - id: 'VEA'
-        card: 'A'
-        desc: 'Has creado un nuevo ataque contra validación de datos y codificación'
-        misc: 'Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas'
-      - id: 'VE2'
-        card: '2'
-        desc: 'Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente'
+      - id: "VEA"
+        card: "A"
+        desc: "Has creado un nuevo ataque contra validación de datos y codificación"
+        misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
+      - id: "VE2"
+        card: "2"
+        desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente"
         mappings:
           - OWASP SCP: [ 69, 107, 108, 109, 136, 137, 153, 156, 158, 162 ]
             OWASP ASVS: [ 1.10, 4.5, 8.1, 11.5, 19.1, 19.5 ]
             OWASP AppSensor: [ HT1-3 ]
             CAPEC: [ 54, 541 ]
             SAFECode: [ 4, 23 ]
-      - id: 'VE3'
-        card: '3'
-        desc: 'Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos'
+      - id: "VE3"
+        card: "3"
+        desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 5.1, 5.16, 5.17, 5.18, 5.19, 5.20, 11.1, 11.2 ]
             OWASP AppSensor: [ RE7-8, AE4-7, IE2-3, CIE1, CIE3-4, HT1-3 ]
             CAPEC: [ 28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272 ]
             SAFECode: [ 3, 16, 24, 35 ]
-      - id: 'VE4'
-        card: '4'
-        desc: 'Dave puede ingresar datos o nombres maliciosos en campos porque actualmente no hay una revisión o monitoreo a nivel de usuario o proceso'
+      - id: "VE4"
+        card: "4"
+        desc: "Dave puede ingresar datos o nombres maliciosos en campos porque actualmente no hay una revisión o monitoreo a nivel de usuario o proceso"
         mappings:
           - OWASP SCP: [ 8, 10, 183 ]
             OWASP ASVS: [ 4.16, 5.16, 5.17, 15.1 ]
             OWASP AppSensor: [ RE3-6, AE8-11, SE1, 3-6, IE2-4, HT1-3 ]
             CAPEC: [ 28, 31, 48, 126, 162, 165, 213, 220, 221, 261 ]
             SAFECode: [ 24, 35 ]
-      - id: 'VE5'
-        card: '5'
-        desc: 'Jee puede eludir las rutinas de codificación centralizadas, ya que dichas rutinas no son usadas por todos los activos o se están utilizando codificaciones incorrectas'
+      - id: "VE5"
+        card: "5"
+        desc: "Jee puede eludir las rutinas de codificación centralizadas, ya que dichas rutinas no son usadas por todos los activos o se están utilizando codificaciones incorrectas"
         mappings:
           - OWASP SCP: [ 3, 15, 18, 19, 20, 21, 22, 168 ]
             OWASP ASVS: [ 1.7, 5.15, 5.21, 5.22, 5.23 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 28, 31, 152, 160, 468 ]
             SAFECode: [ 2, 17 ]
-      - id: 'VE6'
-        card: '6'
-        desc: 'Jason puede eludir las rutinas de validación centralizadas, ya que no se utilizan en todas las entradas'
+      - id: "VE6"
+        card: "6"
+        desc: "Jason puede eludir las rutinas de validación centralizadas, ya que no se utilizan en todas las entradas"
         mappings:
           - OWASP SCP: [ 3, 168 ]
             OWASP ASVS: [ 1.7, 5.6, 5.19 ]
             OWASP AppSensor: [ IE2-3 ]
             CAPEC: [ 28 ]
             SAFECode: [ 3, 16, 24 ]
-      - id: 'VE7'
-        card: '7'
-        desc: 'Jan puede crear cargas especiales para frustrar la validación de entrada, porque el conjunto de caracteres no es especificado/aplicado, o los datos se codifican varias veces, o los datos no están completamente transformados en el mismo formato que la aplicación usa (por ejemplo, canonicalización) antes de ser validados, o las variables no están configuradas de manera robusta'
+      - id: "VE7"
+        card: "7"
+        desc: "Jan puede crear cargas especiales para frustrar la validación de entrada, porque el conjunto de caracteres no es especificado/aplicado, o los datos se codifican varias veces, o los datos no están completamente transformados en el mismo formato que la aplicación usa (por ejemplo, canonicalización) antes de ser validados, o las variables no están configuradas de manera robusta"
         mappings:
           - OWASP SCP: [ 4, 5, 7, 150 ]
             OWASP ASVS: [ 5.6, 11.8 ]
             OWASP AppSensor: [ E2-3, EE1-2 ]
             CAPEC: [ 28, 153, 165 ]
             SAFECode: [ 3, 16, 24 ]
-      - id: 'VE8'
-        card: '8'
-        desc: 'Sarah puede pasar por alto las rutinas de sanitización centralizadas ya que no están siendo utilizadas exhaustivamente'
+      - id: "VE8"
+        card: "8"
+        desc: "Sarah puede pasar por alto las rutinas de sanitización centralizadas ya que no están siendo utilizadas exhaustivamente"
         mappings:
           - OWASP SCP: [ 15, 169 ]
             OWASP ASVS: [ 1.7, 5.21, 5.23 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 28, 31, 152, 160, 468 ]
             SAFECode: [ 2, 17 ]
-      - id: 'VE9'
-        card: '9'
-        desc: 'Shamun puede pasar por alto los checks de validaciones de entrada o salida porque los fallos en las validaciones no son rechazados y/o sanitizados'
+      - id: "VE9"
+        card: "9"
+        desc: "Shamun puede pasar por alto los checks de validaciones de entrada o salida porque los fallos en las validaciones no son rechazados y/o sanitizados"
         mappings:
           - OWASP SCP: [ 6, 21, 22, 168 ]
             OWASP ASVS: [ 5.3 ]
             OWASP AppSensor: [ IE2-3 ]
             CAPEC: [ 28 ]
             SAFECode: [ 3, 16, 24 ]
-      - id: 'VE0'
-        card: '10'
-        desc: 'Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (por ejemplo, datos definibles por el usuario, manipulación de datos almacenados localmente, alteración de los datos del estado en un dispositivo cliente, falta de verificación de identidad durante la validación de datos, como Darío puede pretender ser Colin)'
+      - id: "VE0"
+        card: "10"
+        desc: "Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (por ejemplo, datos definibles por el usuario, manipulación de datos almacenados localmente, alteración de los datos del estado en un dispositivo cliente, falta de verificación de identidad durante la validación de datos, como Darío puede pretender ser Colin)"
         mappings:
           - OWASP SCP: [ 2, 19, 92, 95, 180 ]
             OWASP ASVS: [ 5.19, 10.6, 16.2, 16.3, 16.4, 16.5, 16.8 ]
             OWASP AppSensor: [ E4, IE5 ]
             CAPEC: [ 12, 51, 57, 90, 111, 145, 194, 195, 202, 218, 463 ]
             SAFECode: [ 14 ]
-      - id: 'VEJ'
-        card: 'J'
-        desc: 'Dennis tiene control sobre la validación de entrada, la validación de salida o código de codificación de salida o rutinas para que puedan ser evitados'
+      - id: "VEJ"
+        card: "J"
+        desc: "Dennis tiene control sobre la validación de entrada, la validación de salida o código de codificación de salida o rutinas para que puedan ser evitados"
         mappings:
           - OWASP SCP: [ 1, 17 ]
             OWASP ASVS: [ 5.5, 5.18 ]
             OWASP AppSensor: [ RE3, RE4 ]
             CAPEC: [ 87, 207, 554 ]
             SAFECode: [ 2, 17 ]
-      - id: 'VEQ'
-        card: 'Q'
-        desc: 'Geoff puede inyectar datos en el lado del cliente o en el dispositivo porque no se está utilizando una interfaz parametrizada, o no ha sido implementada correctamente, o los datos no han sido codificados correctamente, o no hay una política restrictiva en el código o los datos incluidos'
+      - id: "VEQ"
+        card: "Q"
+        desc: "Geoff puede inyectar datos en el lado del cliente o en el dispositivo porque no se está utilizando una interfaz parametrizada, o no ha sido implementada correctamente, o los datos no han sido codificados correctamente, o no hay una política restrictiva en el código o los datos incluidos"
         mappings:
           - OWASP SCP: [ 10, 15, 16, 19, 20 ]
             OWASP ASVS: [ 5.15, 5.22, 5.23, 5.24, 5.25 ]
             OWASP AppSensor: [ IE1, RP3 ]
             CAPEC: [ 28, 31, 152, 160, 468 ]
             SAFECode: [ 2, 17 ]
-      - id: 'VEK'
-        card: 'K'
-        desc: 'Gabe puede inyectar datos en un intérprete del lado del servidor (por ejemplo, SQL, comandos del sistema operativo, Xpath, servidor JavaScript, SMTP) porque no se está utilizando una interfaz parametrizada fuertemente tipificada o no se ha implementado correctamente'
+      - id: "VEK"
+        card: "K"
+        desc: "Gabe puede inyectar datos en un intérprete del lado del servidor (por ejemplo, SQL, comandos del sistema operativo, Xpath, servidor JavaScript, SMTP) porque no se está utilizando una interfaz parametrizada fuertemente tipificada o no se ha implementado correctamente"
         mappings:
           - OWASP SCP: [ 15, 19, 20, 21, 22, 167, 180, 204, 211, 212 ]
             OWASP ASVS: [ 5.10, 5.11, 5.12, 5.13, 5.14, 5.16, 5.21 ]
@@ -118,112 +118,112 @@
             CAPEC: [ 23, 28, 76, 152, 160, 261 ]
             SAFECode: [ 2, 19, 20 ]
     AT: "Autenticación"
-      - id: 'ATA'
-        card: 'A'
-        desc: 'Usted tiene inventado un nuevo ataque contra la autenticación'
-        misc: 'Leer mas sobre este tema en OWASP’s free Authentication Cheat Sheet'
-      - id: 'AT2'
-        card: '2'
-        desc: 'James puede emprender funciones de autenticación sin que el usuario real se dé cuenta alguna vez de lo ocurrido (por ejemplo, intento de logueo, inicio de sesión con credenciales robadas, restablecimiento de la contraseña)'
+      - id: "ATA"
+        card: "A"
+        desc: "Usted tiene inventado un nuevo ataque contra la autenticación"
+        misc: "Leer mas sobre este tema en OWASP’s free Authentication Cheat Sheet"
+      - id: "AT2"
+        card: "2"
+        desc: "James puede emprender funciones de autenticación sin que el usuario real se dé cuenta alguna vez de lo ocurrido (por ejemplo, intento de logueo, inicio de sesión con credenciales robadas, restablecimiento de la contraseña)"
         mappings:
           - OWASP SCP: [ 47, 52 ]
             OWASP ASVS: [ 2.12, 8.4, 8.10 ]
             OWASP AppSensor: [ UT1 ]
             CAPEC: [ ]
             SAFECode: [ 28 ]
-      - id: 'AT3'
-        card: '3'
-        desc: 'Muhammad puede obtener una contraseña de usuario u otros secretos tales como preguntas de seguridad, por observación durante el ingreso o desde el cache, o desde la memoria, o en tránsito, o leyéndolo de alguna ubicación desprotegida, o porque es ampliamente conocido, o porque nunca caduca, o porque el usuario no puede cambiar su propia contraseña'
+      - id: "AT3"
+        card: "3"
+        desc: "Muhammad puede obtener una contraseña de usuario u otros secretos tales como preguntas de seguridad, por observación durante el ingreso o desde el cache, o desde la memoria, o en tránsito, o leyéndolo de alguna ubicación desprotegida, o porque es ampliamente conocido, o porque nunca caduca, o porque el usuario no puede cambiar su propia contraseña"
         mappings:
           - OWASP SCP: [ 36, 37, 40, 43, 48, 51, 119, 139, 140, 146 ]
             OWASP ASVS: [ 2.2, 2.17, 2.24, 8.7, 9.1, 9.4, 9.5, 9.9, 9.11 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 37, 546 ]
             SAFECode: [ 28 ]
-      - id: 'AT4'
-        card: '4'
-        desc: 'Sebastien puede fácilmente identificar nombres de usuario o puede enumerarlos'
+      - id: "AT4"
+        card: "4"
+        desc: "Sebastien puede fácilmente identificar nombres de usuario o puede enumerarlos"
         mappings:
           - OWASP SCP: [ 33, 53 ]
             OWASP ASVS: [ 2.18, 2.28 ]
             OWASP AppSensor: [ AE1 ]
             CAPEC: [ 383 ]
             SAFECode: [ 28 ]
-      - id: 'AT5'
-        card: '5'
-        desc: 'Javier puede usar credenciales por defecto, de prueba o fáciles de adivinar para autenticar, o puede usar una cuenta antigua o una cuenta no necesaria para la aplicación'
+      - id: "AT5"
+        card: "5"
+        desc: "Javier puede usar credenciales por defecto, de prueba o fáciles de adivinar para autenticar, o puede usar una cuenta antigua o una cuenta no necesaria para la aplicación"
         mappings:
           - OWASP SCP: [ 54, 175, 178 ]
             OWASP ASVS: [ 2.19 ]
             OWASP AppSensor: [ AE12, HT3 ]
             CAPEC: [ 70 ]
             SAFECode: [ 28 ]
-      - id: 'AT6'
-        card: '6'
-        desc: 'Sven puede reutilizar contraseñas temporales porque el usuario no realizó el cambio en el primer logueo. o tiene demasiado tiempo y no tiene vencimiento, o no usa un método correcto de entrega  (por ejemplo, publicación, aplicación móvil, SMS)'
+      - id: "AT6"
+        card: "6"
+        desc: "Sven puede reutilizar contraseñas temporales porque el usuario no realizó el cambio en el primer logueo. o tiene demasiado tiempo y no tiene vencimiento, o no usa un método correcto de entrega  (por ejemplo, publicación, aplicación móvil, SMS)"
         mappings:
           - OWASP SCP: [ 37, 45, 46, 178 ]
             OWASP ASVS: [ ]
             OWASP AppSensor: [ 2.22 ]
             CAPEC: [ 50 ]
             SAFECode: [ 28 ]
-      - id: 'AT7'
-        card: '7'
-        desc: 'Cecilia puede usar ataques de  fuerza bruta y ataques de diccionario sin límites contra uno o muchas cuentas, o estos ataques se simplifican debido a una complejidad insuficiente, longitud, caducidad inadecuada y reutilización de requisitos para las contraseñas'
+      - id: "AT7"
+        card: "7"
+        desc: "Cecilia puede usar ataques de  fuerza bruta y ataques de diccionario sin límites contra uno o muchas cuentas, o estos ataques se simplifican debido a una complejidad insuficiente, longitud, caducidad inadecuada y reutilización de requisitos para las contraseñas"
         mappings:
           - OWASP SCP: [ 33, 38, 39, 41, 50, 53 ]
             OWASP ASVS: [ 2.7, 2.20, 2.23, 2.25, 2.27 ]
             OWASP AppSensor: [ AE2, AE3 ]
             CAPEC: [ 2, 16 ]
             SAFECode: [ 27 ]
-      - id: 'AT8'
-        card: '8'
-        desc: 'Kate puede pasar por alto la autenticación porque ésta no falla de forma segura (es decir, por defecto permite acceso no autenticado)'
+      - id: "AT8"
+        card: "8"
+        desc: "Kate puede pasar por alto la autenticación porque ésta no falla de forma segura (es decir, por defecto permite acceso no autenticado)"
         mappings:
           - OWASP SCP: [ 28 ]
             OWASP ASVS: [ 2.6 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 115 ]
             SAFECode: [ 28 ]
-      - id: 'AT9'
-        card: '9'
-        desc: 'Claudia puede utilizar Funciones más críticas porque los requisitos de autenticación son demasiado débiles (por ejemplo, no usa autenticación robusta como el doble factor), o no hay requisitos de re-autenticación para éstos'
+      - id: "AT9"
+        card: "9"
+        desc: "Claudia puede utilizar Funciones más críticas porque los requisitos de autenticación son demasiado débiles (por ejemplo, no usa autenticación robusta como el doble factor), o no hay requisitos de re-autenticación para éstos"
         mappings:
           - OWASP SCP: [ 55, 56 ]
             OWASP ASVS: [ 2.1, 2.9, 2.26, 2.31, 4.15 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 21 ]
             SAFECode: [ 14, 28 ]
-      - id: 'AT0'
-        card: '10'
-        desc: 'Pravin puede omitir el control de autenticación porque no se está utilizando un módulo/framework/servicio de autenticación centralizado, estándar, testeado, probado y aprobado, separado del recurso solicitado'
+      - id: "AT0"
+        card: "10"
+        desc: "Pravin puede omitir el control de autenticación porque no se está utilizando un módulo/framework/servicio de autenticación centralizado, estándar, testeado, probado y aprobado, separado del recurso solicitado"
         mappings:
           - OWASP SCP: [ 25, 26, 27 ]
             OWASP ASVS: [ 1.7, 2.30 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 90, 115 ]
             SAFECode: [ 14, 28 ]
-      - id: 'ATJ'
-        card: 'J'
-        desc: 'Mark puede acceder a los recursos o servicios porque no hay requisitos de autenticación, o fue asumido erróneamente que la autentificación sería realizada por algún otro sistema o realizada en alguna acción previa'
+      - id: "ATJ"
+        card: "J"
+        desc: "Mark puede acceder a los recursos o servicios porque no hay requisitos de autenticación, o fue asumido erróneamente que la autentificación sería realizada por algún otro sistema o realizada en alguna acción previa"
         mappings:
           - OWASP SCP: [ 23, 32, 34 ]
             OWASP ASVS: [ 2.1 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 115 ]
             SAFECode: [ 14, 28 ]
-      - id: 'ATQ'
-        card: 'Q'
-        desc: 'Jaime puede omitir la autenticación porque no se aplica con igual rigor para todos los tipos de funcionalidad de autenticación (por ejemplo, registro, cambio de contraseña, recuperación de contraseña, cierre de sesión, administración) o en todas las versiones / canales (por ejemplo, sitio web móvil, aplicación móvil, sitio web completo, API, call center)'
+      - id: "ATQ"
+        card: "Q"
+        desc: "Jaime puede omitir la autenticación porque no se aplica con igual rigor para todos los tipos de funcionalidad de autenticación (por ejemplo, registro, cambio de contraseña, recuperación de contraseña, cierre de sesión, administración) o en todas las versiones / canales (por ejemplo, sitio web móvil, aplicación móvil, sitio web completo, API, call center)"
         mappings:
           - OWASP SCP: [ 23, 29, 42, 49 ]
             OWASP ASVS: [ 2.1, 2.8 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 36, 50, 115, 121, 179 ]
             SAFECode: [ 14, 28 ]
-      - id: 'ATK'
-        card: 'K'
-        desc: 'Olga puede influir o alterar el código o rutina de autenticación o puede evitarlo'
+      - id: "ATK"
+        card: "K"
+        desc: "Olga puede influir o alterar el código o rutina de autenticación o puede evitarlo"
         mappings:
           - OWASP SCP: [ 24 ]
             OWASP ASVS: [ 2.4, 13.2 ]
@@ -231,112 +231,112 @@
             CAPEC: [ 115, 207, 554 ]
             SAFECode: [ 14, 28 ]
     SM: "Gestión de Sesión"
-      - id: 'SMA'
-        card: 'A'
-        desc: 'Has inventado un nuevo ataque contra la gestión de sesión'
-        misc: 'Read more about this topic in OWASP’s free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention'
-      - id: 'SM2'
-        card: '2'
-        desc: 'William tiene el control sobre la generación de identificadores de sesión'
+      - id: "SMA"
+        card: "A"
+        desc: "Has inventado un nuevo ataque contra la gestión de sesión"
+        misc: "Read more about this topic in OWASP’s free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
+      - id: "SM2"
+        card: "2"
+        desc: "William tiene el control sobre la generación de identificadores de sesión"
         mappings:
           - OWASP SCP: [ 58, 59 ]
             OWASP ASVS: [ 3.10 ]
             OWASP AppSensor: [ SE2 ]
             CAPEC: [ 31, 60, 61 ]
             SAFECode: [ 28 ]
-      - id: 'SM3'
-        card: '3'
-        desc: 'Ryan puede usar una sola cuenta en paralelo ya que permite sesiones concurrentes'
+      - id: "SM3"
+        card: "3"
+        desc: "Ryan puede usar una sola cuenta en paralelo ya que permite sesiones concurrentes"
         mappings:
           - OWASP SCP: [ 68 ]
             OWASP ASVS: [ 3.16, 3.17, 3.18 ]
             OWASP AppSensor: [ ]
             CAPEC: [ ]
             SAFECode: [ 28 ]
-      - id: 'SM4'
-        card: '4'
-        desc: 'Alison puede configurar cookies de identificación de sesión en otra aplicación web porque el dominio y la ruta no están suficientemente restringidos'
+      - id: "SM4"
+        card: "4"
+        desc: "Alison puede configurar cookies de identificación de sesión en otra aplicación web porque el dominio y la ruta no están suficientemente restringidos"
         mappings:
           - OWASP SCP: [ 59, 61 ]
             OWASP ASVS: [ 3.12 ]
             OWASP AppSensor: [ SE2 ]
             CAPEC: [ 31, 61 ]
             SAFECode: [ 28 ]
-      - id: 'SM5'
-        card: '5'
-        desc: 'John puede predecir o adivinar los identificadores de sesión porque no se cambian cuando se modifica la función del usuario (por ejemplo, la autenticación previa y posterior) y cuando se cambia entre comunicaciones no cifradas y cifradas, o no son lo suficientemente largas y aleatorias, o no se cambian periódicamente'
+      - id: "SM5"
+        card: "5"
+        desc: "John puede predecir o adivinar los identificadores de sesión porque no se cambian cuando se modifica la función del usuario (por ejemplo, la autenticación previa y posterior) y cuando se cambia entre comunicaciones no cifradas y cifradas, o no son lo suficientemente largas y aleatorias, o no se cambian periódicamente"
         mappings:
           - OWASP SCP: [ 60, 62, 66, 67, 71, 72 ]
             OWASP ASVS: [ 3.2, 3.7, 3.11 ]
             OWASP AppSensor: [ SE4-6 ]
             CAPEC: [ 31 ]
             SAFECode: [ 28 ]
-      - id: 'SM6'
-        card: '6'
-        desc: 'Gary puede hacerse cargo de la sesión de un usuario porque hay un tiempo de espera de inactividad largo o nulo, un límite de tiempo de sesión general largo o nulo, o la misma sesión puede usarse desde más de un dispositivo / ubicación'
+      - id: "SM6"
+        card: "6"
+        desc: "Gary puede hacerse cargo de la sesión de un usuario porque hay un tiempo de espera de inactividad largo o nulo, un límite de tiempo de sesión general largo o nulo, o la misma sesión puede usarse desde más de un dispositivo / ubicación"
         mappings:
           - OWASP SCP: [ 64, 65 ]
             OWASP ASVS: [ 3.3, 3.4, 3.16, 3.17, 3.18 ]
             OWASP AppSensor: [ SE5, SE6 ]
             CAPEC: [ 21 ]
             SAFECode: [ 28 ]
-      - id: 'SM7'
-        card: '7'
-        desc: 'Casey puede utilizar la sesión de Adam después de que haya terminado, porque no hay una función de cierre de sesión, o no puede cerrar sesión fácilmente, o el cierre de sesión no termina la sesión correctamente'
+      - id: "SM7"
+        card: "7"
+        desc: "Casey puede utilizar la sesión de Adam después de que haya terminado, porque no hay una función de cierre de sesión, o no puede cerrar sesión fácilmente, o el cierre de sesión no termina la sesión correctamente"
         mappings:
           - OWASP SCP: [ 62, 63 ]
             OWASP ASVS: [ 3.2, 3.5 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 21 ]
             SAFECode: [ 28 ]
-      - id: 'SM8'
-        card: '8'
-        desc: 'Matt puede abusar de sesiones largas porque la aplicación no requiere una autenticación periódica para verificar si los privilegios han cambiado'
+      - id: "SM8"
+        card: "8"
+        desc: "Matt puede abusar de sesiones largas porque la aplicación no requiere una autenticación periódica para verificar si los privilegios han cambiado"
         mappings:
           - OWASP SCP: [ 96 ]
             OWASP ASVS: [ ]
             OWASP AppSensor: [ ]
             CAPEC: [ 21 ]
             SAFECode: [ 28 ]
-      - id: 'SM9'
-        card: '9'
-        desc: 'Ivan puede robar identificadores de sesión porque se envían a través de canales inseguros, se registran, se revelan en mensajes de error, se incluyen en URL o son accesibles de manera innecesaria mediante el código que el atacante puede influir o modificar'
+      - id: "SM9"
+        card: "9"
+        desc: "Ivan puede robar identificadores de sesión porque se envían a través de canales inseguros, se registran, se revelan en mensajes de error, se incluyen en URL o son accesibles de manera innecesaria mediante el código que el atacante puede influir o modificar"
         mappings:
           - OWASP SCP: [ 69, 75, 76, 119, 138 ]
             OWASP ASVS: [ 3.6, 8.7, 10.3 ]
             OWASP AppSensor: [ SE4-6 ]
             CAPEC: [ 31, 60 ]
             SAFECode: [ 28 ]
-      - id: 'SM0'
-        card: '10'
-        desc: 'Marce puede forjar solicitudes porque las sesiones por sesión o por acciones más críticas, los tokens aleatorios fuertes (es decir, los tokens anti-CSRF) o similares no se utilizan para acciones que cambian de estado'
+      - id: "SM0"
+        card: "10"
+        desc: "Marce puede forjar solicitudes porque las sesiones por sesión o por acciones más críticas, los tokens aleatorios fuertes (es decir, los tokens anti-CSRF) o similares no se utilizan para acciones que cambian de estado"
         mappings:
           - OWASP SCP: [ 73, 74 ]
             OWASP ASVS: [ 4.13 ]
             OWASP AppSensor: [ IE4 ]
             CAPEC: [ 62, 111 ]
             SAFECode: [ 18 ]
-      - id: 'SMJ'
-        card: 'J'
-        desc: 'Jeff puede reenviar una interacción de repetición idéntica (por ejemplo, solicitud HTTP, señal, pulsación de botón) y se acepta, no se rechaza'
+      - id: "SMJ"
+        card: "J"
+        desc: "Jeff puede reenviar una interacción de repetición idéntica (por ejemplo, solicitud HTTP, señal, pulsación de botón) y se acepta, no se rechaza"
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 15.1, 15.2 ]
             OWASP AppSensor: [ IE5 ]
             CAPEC: [ 60 ]
             SAFECode: [ 12, 14 ]
-      - id: 'SMQ'
-        card: 'Q'
-        desc: 'Salim puede omitir la administración de sesiones porque no se aplica de manera integral y coherente en toda la aplicación'
+      - id: "SMQ"
+        card: "Q"
+        desc: "Salim puede omitir la administración de sesiones porque no se aplica de manera integral y coherente en toda la aplicación"
         mappings:
           - OWASP SCP: [ 58 ]
             OWASP ASVS: [ 3.1 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 21 ]
             SAFECode: [ 14, 28 ]
-      - id: 'SMK'
-        card: 'K'
-        desc: 'Peter puede omitir los controles de administración de la sesión porque se construyeron por sí mismos y / o son débiles, en lugar de usar un marco estándar o un módulo aprobado aprobado'
+      - id: "SMK"
+        card: "K"
+        desc: "Peter puede omitir los controles de administración de la sesión porque se construyeron por sí mismos y / o son débiles, en lugar de usar un marco estándar o un módulo aprobado aprobado"
         mappings:
           - OWASP SCP: [ 58, 60 ]
             OWASP ASVS: [ 1.7 ]
@@ -344,112 +344,112 @@
             CAPEC: [ 21 ]
             SAFECode: [ 14, 28 ]
     AZ: "Autorización"
-      - id: 'AZA'
-        card: 'A'
-        desc: 'Has inventado un nuevo ataque contra la Autorización'
-        misc: 'Read more about this topic in OWASP’s Development and Testing Guides'
-      - id: 'AZ2'
-        card: '2'
-        desc: 'Tim puede influir a donde se envía o reenvía la data'
+      - id: "AZA"
+        card: "A"
+        desc: "Has inventado un nuevo ataque contra la Autorización"
+        misc: "Read more about this topic in OWASP’s Development and Testing Guides"
+      - id: "AZ2"
+        card: "2"
+        desc: "Tim puede influir a donde se envía o reenvía la data"
         mappings:
           - OWASP SCP: [ 44 ]
             OWASP ASVS: [ 4.1, 4.16, 16.1 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 153 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZ3'
-        card: '3'
-        desc: 'Christian puede acceder a información, a la que no debería tener permiso, a través de otro mecanismo al que sí tiene permiso (por ejemplo, indexador de búsqueda, registrador, reporte), o porque está en caché, o guardada por más tiempo del necesario u otro medio de fuga de información'
+      - id: "AZ3"
+        card: "3"
+        desc: "Christian puede acceder a información, a la que no debería tener permiso, a través de otro mecanismo al que sí tiene permiso (por ejemplo, indexador de búsqueda, registrador, reporte), o porque está en caché, o guardada por más tiempo del necesario u otro medio de fuga de información"
         mappings:
           - OWASP SCP: [ 51, 100, 135, 139, 140, 141, 150 ]
             OWASP ASVS: [ 4.1, 8.2, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.11, 16.6, 16.7 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 69, 213 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZ4'
-        card: '4'
-        desc: 'Kelly puede eludir los controles de autorización porque no fallan de forma segura (es decir, por defecto permiten el acceso)'
+      - id: "AZ4"
+        card: "4"
+        desc: "Kelly puede eludir los controles de autorización porque no fallan de forma segura (es decir, por defecto permiten el acceso)"
         mappings:
           - OWASP SCP: [ 79, 80 ]
             OWASP ASVS: [ 4.8 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 122 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZ5'
-        card: '5'
-        desc: 'Chad puede acceder a los recursos (incluidos servicios, procesos, AJAX, Flash, video, imágenes, documentos, archivos temporales, datos de sesión, propiedades del sistema, datos de configuración, registro de configuración, logs) a los que no debería poder acceder debido a la falta de autorización, o debido a privilegios excesivos(por ejemplo, no usar el principio de menor privilegio)'
+      - id: "AZ5"
+        card: "5"
+        desc: "Chad puede acceder a los recursos (incluidos servicios, procesos, AJAX, Flash, video, imágenes, documentos, archivos temporales, datos de sesión, propiedades del sistema, datos de configuración, registro de configuración, logs) a los que no debería poder acceder debido a la falta de autorización, o debido a privilegios excesivos(por ejemplo, no usar el principio de menor privilegio)"
         mappings:
           - OWASP SCP: [ 70, 81, 83, 84, 87, 88, 89, 99, 117, 131, 132, 142, 154, 170, 179 ]
             OWASP ASVS: [ 4.1, 4.4, 4.9, 19.3 ]
             OWASP AppSensor: [ ACE1-4, HT2 ]
             CAPEC: [ 75, 87, 95, 126, 149, 155, 203, 213, 264, 265 ]
             SAFECode: [ 8, 10, 11, 13 ]
-      - id: 'AZ6'
-        card: '6'
-        desc: 'Eduardo puede acceder a los datos a los que él no tiene permiso, incluso aunque tiene permiso para formulario / página / URL / punto de entrada'
+      - id: "AZ6"
+        card: "6"
+        desc: "Eduardo puede acceder a los datos a los que él no tiene permiso, incluso aunque tiene permiso para formulario / página / URL / punto de entrada"
         mappings:
           - OWASP SCP: [ 81, 88, 131 ]
             OWASP ASVS: [ 4.1, 4.4 ]
             OWASP AppSensor: [ ACE1-4 ]
             CAPEC: [ 122 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZ7'
-        card: '7'
-        desc: 'Yuanjing puede acceder a funciones de la aplicación, objetos o propiedades a las que él no está autorizado para acceder'
+      - id: "AZ7"
+        card: "7"
+        desc: "Yuanjing puede acceder a funciones de la aplicación, objetos o propiedades a las que él no está autorizado para acceder"
         mappings:
           - OWASP SCP: [ 81, 85, 86, 131 ]
             OWASP ASVS: [ 4.1, 4.4 ]
             OWASP AppSensor: [ ACE1-4 ]
             CAPEC: [ 122 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZ8'
-        card: '8'
-        desc: 'Tom puede omitir las reglas de negocios al alterar la secuencia o flujo de proceso habitual, o realizar el proceso en el orden incorrecto, o manipular los valores de fecha y hora utilizados por la aplicación, o usar características válidas para propósitos no intencionados, o manipulando los datos de control'
+      - id: "AZ8"
+        card: "8"
+        desc: "Tom puede omitir las reglas de negocios al alterar la secuencia o flujo de proceso habitual, o realizar el proceso en el orden incorrecto, o manipular los valores de fecha y hora utilizados por la aplicación, o usar características válidas para propósitos no intencionados, o manipulando los datos de control"
         mappings:
           - OWASP SCP: [ 10, 32, 93, 94, 189 ]
             OWASP ASVS: [ 4.10, 4.15, 4.16, 8.13, 15.1 ]
             OWASP AppSensor: [ ACE3 ]
             CAPEC: [ 25, 39, 74, 162, 166, 207 ]
             SAFECode: [ 8, 10, 11, 12 ]
-      - id: 'AZ9'
-        card: '9'
-        desc: 'Mike puede hacer uso incorrecto de una aplicación al usar una función válida demasiado rápido, o con demasiada frecuencia, o de otra forma sin intención, o que consuma los recursos de la aplicación, o cause condiciones de carrera, o sobreutilice una función'
+      - id: "AZ9"
+        card: "9"
+        desc: "Mike puede hacer uso incorrecto de una aplicación al usar una función válida demasiado rápido, o con demasiada frecuencia, o de otra forma sin intención, o que consuma los recursos de la aplicación, o cause condiciones de carrera, o sobreutilice una función"
         mappings:
           - OWASP SCP: [ 94 ]
             OWASP ASVS: [ 4.14, 15.2 ]
             OWASP AppSensor: [ AE3, FIO1-2, UT2-4, STE1-3 ]
             CAPEC: [ 26, 29, 119, 261 ]
             SAFECode: [ 1, 35 ]
-      - id: 'AZ0'
-        card: '10'
-        desc: 'Richard puede eludir los controles de autorización centralizados ya que no están siendo utilizados exhaustivamente en todas las interacciones'
+      - id: "AZ0"
+        card: "10"
+        desc: "Richard puede eludir los controles de autorización centralizados ya que no están siendo utilizados exhaustivamente en todas las interacciones"
         mappings:
           - OWASP SCP: [ 78, 91 ]
             OWASP ASVS: [ 1.7, 4.11 ]
             OWASP AppSensor: [ ACE1-4 ]
             CAPEC: [ 36, 95, 121, 179 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZJ'
-        card: 'J'
-        desc: 'Dinis puede acceder a la información de configuración de seguridad, o listas de control de acceso'
+      - id: "AZJ"
+        card: "J"
+        desc: "Dinis puede acceder a la información de configuración de seguridad, o listas de control de acceso"
         mappings:
           - OWASP SCP: [ 89, 90 ]
             OWASP ASVS: [ 4.10, 13.2 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 75, 133, 203 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZQ'
-        card: 'Q'
-        desc: 'Christopher puede inyectar un comando para que la aplicación se ejecute con un nivel de privilegios más alto'
+      - id: "AZQ"
+        card: "Q"
+        desc: "Christopher puede inyectar un comando para que la aplicación se ejecute con un nivel de privilegios más alto"
         mappings:
           - OWASP SCP: [ 209 ]
             OWASP ASVS: [ 5.12 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 17, 30, 69, 234 ]
             SAFECode: [ 8, 10, 11 ]
-      - id: 'AZK'
-        card: 'K'
-        desc: 'Ryan puede influir o alterar controles y permisos de autorización, y por ende puede '
+      - id: "AZK"
+        card: "K"
+        desc: "Ryan puede influir o alterar controles y permisos de autorización, y por ende puede "
         mappings:
           - OWASP SCP: [ 77, 89, 91 ]
             OWASP ASVS: [ 4.9, 4.10, 13.2 ]
@@ -457,112 +457,112 @@
             CAPEC: [ 207, 554 ]
             SAFECode: [ 8, 10, 11 ]
     CR: "Criptografía"
-      - id: 'CRA'
-        card: 'A'
-        desc: 'Has inventado un nuevo ataque contra la Criptografía'
-        misc: 'Read more about this topic in OWASP’s free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection'
-      - id: 'CR2'
-        card: '2'
-        desc: 'Kyun puede acceder a los datos porque ha sido ofuscado en lugar de utilizar una función criptográfica aprobada'
+      - id: "CRA"
+        card: "A"
+        desc: "Has inventado un nuevo ataque contra la Criptografía"
+        misc: "Read more about this topic in OWASP’s free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
+      - id: "CR2"
+        card: "2"
+        desc: "Kyun puede acceder a los datos porque ha sido ofuscado en lugar de utilizar una función criptográfica aprobada"
         mappings:
           - OWASP SCP: [ 105, 133, 135 ]
             OWASP ASVS: [ ]
             OWASP AppSensor: [ ]
             CAPEC: [ ]
             SAFECode: [ 21, 29 ]
-      - id: 'CR3'
-        card: '3'
-        desc: 'Axel puede modificar datos transitorios o permanentes (almacenados o en tránsito), código fuente, actualizaciones / parches o datos de configuración, ya que no están sujetos a verificación de integridad'
+      - id: "CR3"
+        card: "3"
+        desc: "Axel puede modificar datos transitorios o permanentes (almacenados o en tránsito), código fuente, actualizaciones / parches o datos de configuración, ya que no están sujetos a verificación de integridad"
         mappings:
           - OWASP SCP: [ 92, 205, 212 ]
             OWASP ASVS: [ 8.11, 11.7, 13.2, 19.5, 19.6, 19.7, 19.8 ]
             OWASP AppSensor: [ SE1, IE4 ]
             CAPEC: [ 31, 39, 68, 75, 133, 145, 162, 203, 438-9, 442 ]
             SAFECode: [ 12, 14 ]
-      - id: 'CR4'
-        card: '4'
-        desc: 'Paulo puede acceder a datos en tránsito que no están encriptados, incluso aunque el canal está encriptado'
+      - id: "CR4"
+        card: "4"
+        desc: "Paulo puede acceder a datos en tránsito que no están encriptados, incluso aunque el canal está encriptado"
         mappings:
           - OWASP SCP: [ 37, 88, 143, 214 ]
             OWASP ASVS: [ 7.12, 9.2 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 185, 186, 187 ]
             SAFECode: [ 14, 29, 30 ]
-      - id: 'CR5'
-        card: '5'
-        desc: 'Kyle puede pasar por alto controles criptográficos porque estos no fallan de forma segura (es decir, por defecto no protegen)'
+      - id: "CR5"
+        card: "5"
+        desc: "Kyle puede pasar por alto controles criptográficos porque estos no fallan de forma segura (es decir, por defecto no protegen)"
         mappings:
           - OWASP SCP: [ 103, 145 ]
             OWASP ASVS: [ 7.2, 10.3 ]
             OWASP AppSensor: [ ]
             CAPEC: [ ]
             SAFECode: [ 21, 29 ]
-      - id: 'CR6'
-        card: '6'
-        desc: 'Romain puede leer y modificar datos sin cifrar en la memoria o en tránsito (por ejemplo, secretos criptográficos, credenciales, identificadores de sesión, datos personales y comerciales), en uso o en comunicaciones dentro de la aplicación, o entre la aplicación y los usuarios, o entre la aplicación y sistemas externos'
+      - id: "CR6"
+        card: "6"
+        desc: "Romain puede leer y modificar datos sin cifrar en la memoria o en tránsito (por ejemplo, secretos criptográficos, credenciales, identificadores de sesión, datos personales y comerciales), en uso o en comunicaciones dentro de la aplicación, o entre la aplicación y los usuarios, o entre la aplicación y sistemas externos"
         mappings:
           - OWASP SCP: [ 36, 37, 143, 146, 147 ]
             OWASP ASVS: [ 2.16, 9.2, 9.11, 10.3, 19.2 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 31, 57, 102, 157, 158, 384, 466, 546 ]
             SAFECode: [ 29 ]
-      - id: 'CR7'
-        card: '7'
-        desc: 'Gunter puede interceptar o modificar datos encriptados en tránsito porque el protocolo está mal implementado o configurado de manera débil, o los certificados no son válidos, los certificados no son confiables o la conexión puede degradarse a una comunicación más débil o no encriptada'
+      - id: "CR7"
+        card: "7"
+        desc: "Gunter puede interceptar o modificar datos encriptados en tránsito porque el protocolo está mal implementado o configurado de manera débil, o los certificados no son válidos, los certificados no son confiables o la conexión puede degradarse a una comunicación más débil o no encriptada"
         mappings:
           - OWASP SCP: [ 75, 144, 145, 148 ]
             OWASP ASVS: [ 10.1, 10.5, 10.10, 10.11, 10.12, 10.13, 10.14 ]
             OWASP AppSensor: [ IE4 ]
             CAPEC: [ 31, 216 ]
             SAFECode: [ 14, 29, 30 ]
-      - id: 'CR8'
-        card: '8'
-        desc: 'Eoin puede acceder a los datos comerciales almacenados (por ejemplo, contraseñas, identificadores de sesión, PII, datos del titular de la tarjeta) porque no está cifrado de forma segura ni hash de forma segura'
+      - id: "CR8"
+        card: "8"
+        desc: "Eoin puede acceder a los datos comerciales almacenados (por ejemplo, contraseñas, identificadores de sesión, PII, datos del titular de la tarjeta) porque no está cifrado de forma segura ni hash de forma segura"
         mappings:
           - OWASP SCP: [ 30, 31, 70, 133, 135 ]
             OWASP ASVS: [ 2.13, 7.7, 7.8, 9.2 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 31, 37, 55 ]
             SAFECode: [ 21, 29, 31 ]
-      - id: 'CR9'
-        card: '9'
-        desc: 'Andy puede omitir la generación de números aleatorios, la generación aleatoria de GUID, el hash y las funciones de cifrado porque han sido construidos por sí mismos y / o son débiles'
+      - id: "CR9"
+        card: "9"
+        desc: "Andy puede omitir la generación de números aleatorios, la generación aleatoria de GUID, el hash y las funciones de cifrado porque han sido construidos por sí mismos y / o son débiles"
         mappings:
           - OWASP SCP: [ 60, 104, 105 ]
             OWASP ASVS: [ 7.6, 7.7, 7.8, 7.15 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 97 ]
             SAFECode: [ 14, 21, 29, 32, 33 ]
-      - id: 'CR0'
-        card: '10'
-        desc: 'Susanna puede romper la criptografía en uso porque no es lo suficientemente fuerte para el grado de protección requerido, o no lo es para la cantidad de esfuerzo que el atacante está dispuesto a hacer'
+      - id: "CR0"
+        card: "10"
+        desc: "Susanna puede romper la criptografía en uso porque no es lo suficientemente fuerte para el grado de protección requerido, o no lo es para la cantidad de esfuerzo que el atacante está dispuesto a hacer"
         mappings:
           - OWASP SCP: [ 104, 105 ]
             OWASP ASVS: [ ]
             OWASP AppSensor: [ ]
             CAPEC: [ 97, 463 ]
             SAFECode: [ 14, 21, 29, 31, 32, 33 ]
-      - id: 'CRJ'
-        card: 'J'
-        desc: 'Justin puede leer las credenciales para acceder a recursos, servicios y otros sistemas internos o externos porque se almacenan en un formato no cifrado o se guardan en el código fuente'
+      - id: "CRJ"
+        card: "J"
+        desc: "Justin puede leer las credenciales para acceder a recursos, servicios y otros sistemas internos o externos porque se almacenan en un formato no cifrado o se guardan en el código fuente"
         mappings:
           - OWASP SCP: [ 35, 90, 171, 172 ]
             OWASP ASVS: [ 2.29 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 116 ]
             SAFECode: [ 21, 29 ]
-      - id: 'CRQ'
-        card: 'Q'
-        desc: 'Randolph puede acceder o predecir los algoritmos o llaves de los secretos criptográficos'
+      - id: "CRQ"
+        card: "Q"
+        desc: "Randolph puede acceder o predecir los algoritmos o llaves de los secretos criptográficos"
         mappings:
           - OWASP SCP: [ 35, 102 ]
             OWASP ASVS: [ 7.8, 7.9, 7.11, 7.13, 7.14 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 116, 117 ]
             SAFECode: [ 21, 29 ]
-      - id: 'CRK'
-        card: 'K'
-        desc: 'Dan puede influir o alterar el código / las rutinas criptográficas (cifrado, hash, firmas digitales, números aleatorios y generación de GUID) y, por lo tanto, puede omitirlos'
+      - id: "CRK"
+        card: "K"
+        desc: "Dan puede influir o alterar el código / las rutinas criptográficas (cifrado, hash, firmas digitales, números aleatorios y generación de GUID) y, por lo tanto, puede omitirlos"
         mappings:
           - OWASP SCP: [ 31, 101 ]
             OWASP ASVS: [ ]
@@ -570,112 +570,112 @@
             CAPEC: [ 207, 554 ]
             SAFECode: [ 14, 21, 29 ]
     CO: "Cornucopia"
-      - id: 'COA'
-        card: 'A'
-        desc: 'Has inventado un nuevo ataque de cualquier tipo'
-        misc: 'Read more about application security in OWASP’s free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model'
-      - id: 'CO2'
-        card: '2'
-        desc: 'Lee puede omitir los controles de la aplicación porque se han usado funciones de lenguaje de programación peligrosas/riesgosas en lugar de alternativas más seguras, o hay errores de conversión de tipo, o porque la aplicación no es confiable cuando un recurso externo no está disponible, o hay race conditions, o hay problemas en la inicialización/asignación de recursos, o pueden ocurrir desbordamientos'
+      - id: "COA"
+        card: "A"
+        desc: "Has inventado un nuevo ataque de cualquier tipo"
+        misc: "Read more about application security in OWASP’s free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
+      - id: "CO2"
+        card: "2"
+        desc: "Lee puede omitir los controles de la aplicación porque se han usado funciones de lenguaje de programación peligrosas/riesgosas en lugar de alternativas más seguras, o hay errores de conversión de tipo, o porque la aplicación no es confiable cuando un recurso externo no está disponible, o hay race conditions, o hay problemas en la inicialización/asignación de recursos, o pueden ocurrir desbordamientos"
         mappings:
           - OWASP SCP: [ 194, 195, 196, 197, 198, 199, 200, 201, 202, 205, 206, 207, 208, 209 ]
             OWASP ASVS: [ 5.1 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 25, 26, 29, 96, 123, 124, 128, 129, 264, 265 ]
             SAFECode: [ 3, 5, 6, 7, 9, 22, 25, 26, 34 ]
-      - id: 'CO3'
-        card: '3'
-        desc: 'Andrew puede acceder al código fuente, o descompilar, o de otro modo acceder a la lógica de negocio para entender cómo la aplicación y cualquier secreto contenido funciona'
+      - id: "CO3"
+        card: "3"
+        desc: "Andrew puede acceder al código fuente, o descompilar, o de otro modo acceder a la lógica de negocio para entender cómo la aplicación y cualquier secreto contenido funciona"
         mappings:
           - OWASP SCP: [ 134 ]
             OWASP ASVS: [ 19.5 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 189, 207 ]
             SAFECode: [ ]
-      - id: 'CO4'
-        card: '4'
-        desc: 'Keith puede realizar una acción y no es posible atribuirla a él'
+      - id: "CO4"
+        card: "4"
+        desc: "Keith puede realizar una acción y no es posible atribuirla a él"
         mappings:
           - OWASP SCP: [ 23, 32, 34, 42, 51, 181 ]
             OWASP ASVS: [ 8.10 ]
             OWASP AppSensor: [ ]
             CAPEC: [ ]
             SAFECode: [ ]
-      - id: 'CO5'
-        card: '5'
-        desc: 'Larry puede influir en la confianza que otras partes, incluidos los usuarios tienen en la aplicación, o abusar de esa confianza en otra parte (por ejemplo, en otra aplicación)'
+      - id: "CO5"
+        card: "5"
+        desc: "Larry puede influir en la confianza que otras partes, incluidos los usuarios tienen en la aplicación, o abusar de esa confianza en otra parte (por ejemplo, en otra aplicación)"
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ ]
             OWASP AppSensor: [ ]
             CAPEC: [ 89, 103, 181, 459 ]
             SAFECode: [ ]
-      - id: 'CO6'
-        card: '6'
-        desc: 'Aaron puede omitir los controles porque falta el manejo de errores/excepciones, o se implementa de manera inconsistente o parcial, o no niega el acceso por defecto (es decir, los errores deben terminar el acceso / ejecución), o se basan en el manejo por parte de otro servicio o sistema'
+      - id: "CO6"
+        card: "6"
+        desc: "Aaron puede omitir los controles porque falta el manejo de errores/excepciones, o se implementa de manera inconsistente o parcial, o no niega el acceso por defecto (es decir, los errores deben terminar el acceso / ejecución), o se basan en el manejo por parte de otro servicio o sistema"
         mappings:
           - OWASP SCP: [ 109, 110, 111, 112, 155 ]
             OWASP ASVS: [ 8.2, 8.4 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 54, 98, 164 ]
             SAFECode: [ 4, 11, 23 ]
-      - id: 'CO7'
-        card: '7'
-        desc: 'Las acciones de Mwengu no se pueden investigar porque no hay un registro adecuado de los eventos de seguridad con una marca de tiempo adecuada, o no hay un registro de auditoría completo, o Mwengu puede modificarlas o eliminarlas, o no existe un servicio de registro centralizado'
+      - id: "CO7"
+        card: "7"
+        desc: "Las acciones de Mwengu no se pueden investigar porque no hay un registro adecuado de los eventos de seguridad con una marca de tiempo adecuada, o no hay un registro de auditoría completo, o Mwengu puede modificarlas o eliminarlas, o no existe un servicio de registro centralizado"
         mappings:
           - OWASP SCP: [ 113, 114, 115, 117, 118, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130 ]
             OWASP ASVS: [ 2.12, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10, 8.11, 8.12, 9.10, 10.4 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 93 ]
             SAFECode: [ 4 ]
-      - id: 'CO8'
-        card: '8'
-        desc: 'David puede omitir la aplicación para obtener acceso a los datos debido a que la red y la infraestructura del host, y los servicios/aplicaciones compatibles, no se han configurado de manera segura, la configuración no se verificó periódicamente ni se aplicaron parches de seguridad, o los datos se almacenaron localmente, o los datos no se guardaron protegidos físicamente'
+      - id: "CO8"
+        card: "8"
+        desc: "David puede omitir la aplicación para obtener acceso a los datos debido a que la red y la infraestructura del host, y los servicios/aplicaciones compatibles, no se han configurado de manera segura, la configuración no se verificó periódicamente ni se aplicaron parches de seguridad, o los datos se almacenaron localmente, o los datos no se guardaron protegidos físicamente"
         mappings:
           - OWASP SCP: [ 151, 152, 156, 160, 161, 173174, 175, 176, 177 ]
             OWASP ASVS: [ 19.1, 19.4, 19.6, 19.7, 19.8 ]
             OWASP AppSensor: [ RE1, RE2 ]
             CAPEC: [ 37, 220, 310, 436, 536 ]
             SAFECode: [ ]
-      - id: 'CO9'
-        card: '9'
-        desc: 'Michael puede pasar por alto la aplicación para acceder a los datos porque las herramientas administrativas o las interfaces administrativas no están  aseguradas adecuadamente'
+      - id: "CO9"
+        card: "9"
+        desc: "Michael puede pasar por alto la aplicación para acceder a los datos porque las herramientas administrativas o las interfaces administrativas no están  aseguradas adecuadamente"
         mappings:
           - OWASP SCP: [ 23, 29, 56, 81, 82, 84, 85, 86, 87, 88, 89, 90 ]
             OWASP ASVS: [ 2.1, 2.32 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 122, 233 ]
             SAFECode: [ ]
-      - id: 'CO0'
-        card: '10'
-        desc: 'Xavier puede eludir los controles de la aplicación porque los frameworks de código, librerías y componentes contienen código malicioso o vulnerabilidades (por ejemplo, inhouse, software comercial, servicio tercerizado, de código abierto, ubicado externamente)'
+      - id: "CO0"
+        card: "10"
+        desc: "Xavier puede eludir los controles de la aplicación porque los frameworks de código, librerías y componentes contienen código malicioso o vulnerabilidades (por ejemplo, inhouse, software comercial, servicio tercerizado, de código abierto, ubicado externamente)"
         mappings:
           - OWASP SCP: [ 57, 151, 152, 204, 205, 213, 214 ]
             OWASP ASVS: [ 1.11- ]
             OWASP AppSensor: [ ]
             CAPEC: [ 68, 438, 439, 442, 524, 538 ]
             SAFECode: [ 15 ]
-      - id: 'COJ'
-        ard: 'J'
-        desc: 'Roman puede explotar la aplicación porque fue compilada utilizando herramientas obsoletas, o su configuración no es segura por defecto, o la seguridad de la información no fue documentada y pasada a equipos operacionales'
+      - id: "COJ"
+        ard: "J"
+        desc: "Roman puede explotar la aplicación porque fue compilada utilizando herramientas obsoletas, o su configuración no es segura por defecto, o la seguridad de la información no fue documentada y pasada a equipos operacionales"
         mappings:
           - OWASP SCP: [ 90, 137, 148, 151, 152, 153, 154, 175, 176, 177, 178, 179, 186, 192 ]
             OWASP ASVS: [ 19.5, 19.9 ]
             OWASP AppSensor: [ ]
             CAPEC: [ ]
             SAFECode: [ 4 ]
-      - id: 'COQ'
-        card: 'Q'
-        desc: 'Jim puede emprender acciones maliciosas, no normales sin detección y respuesta por la aplicación en tiempo real'
+      - id: "COQ"
+        card: "Q"
+        desc: "Jim puede emprender acciones maliciosas, no normales sin detección y respuesta por la aplicación en tiempo real"
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 4.14, 9.8, 15.1, 15.2 ]
             OWASP AppSensor: [ (All) ]
             CAPEC: [ ]
             SAFECode: [ 1, 27 ]
-      - id: 'COK'
-        card: 'K'
-        desc: 'Gareth puede utilizar la aplicación para negar el servicio a algunos o todos sus usuarios'
+      - id: "COK"
+        card: "K"
+        desc: "Gareth puede utilizar la aplicación para negar el servicio a algunos o todos sus usuarios"
         mappings:
           - OWASP SCP: [ 41, 55 ]
             OWASP ASVS: [ ]
@@ -683,11 +683,11 @@
             CAPEC: [ 2, 25, 119, 125 ]
             SAFECode: [ 1 ]
     JO: "Joker"
-      - id: 'JOA'
-        card: 'A'
-        desc: 'Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios.'
-        misc: 'Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP.'
-      - id: 'JOB'
-        card: 'B'
-        desc: 'Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales'
-        misc: 'Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis'
+      - id: "JOA"
+        card: "A"
+        desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
+        misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
+      - id: "JOB"
+        card: "B"
+        desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
+        misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
