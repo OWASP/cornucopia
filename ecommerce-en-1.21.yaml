@@ -82,7 +82,7 @@
             CAPEC: [ 28 ]
             SAFECode: [ 3, 16, 24 ]
       - id: 'VE0'
-      - card: '10'
+        card: '10'
         desc: 'Darío can exploit the trust the application places in a source of data (e.g. user-definable data, manipulation of locally stored data, alteration to state data on a client device, lack of verification of identity during data validation such as Darío can pretend to be Colin)'
         mappings:
           - OWASP SCP: [ 2, 19, 92, 95, 180 ]
