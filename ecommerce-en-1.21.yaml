@@ -8,7 +8,7 @@
       - id: "VEA"
         card: "A"
         desc: "You have invented a new attack against Data Validation and Encoding"
-        misc: "Read more about this topic in OWASP’s free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
+        misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
       - id: "VE2"
         card: "2"
         desc: "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
@@ -121,7 +121,7 @@
       - id: "ATA"
         card: "A"
         desc: "You have invented a new attack against Authentication"
-        misc: "Read more about this topic in OWASP’s free Authentication Cheat Sheet"
+        misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
       - id: "AT2"
         card: "2"
         desc: "James can undertake authentication functions without the real user ever being aware this has occurred (e.g. attempt to log in, log in with stolen credentials, reset the password) "
@@ -133,7 +133,7 @@
             SAFECode: [ 28 ]
       - id: "AT3"
         card: "3"
-        desc: "Muhammad can obtain a user’s password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password"
+        desc: "Muhammad can obtain a user's password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password"
         mappings:
           - OWASP SCP: [ 36, 37, 40, 43, 48, 51, 119, 139, 140, 146 ]
             OWASP ASVS: [ 2.2, 2.17, 2.24, 8.7, 9.1, 9.4, 9.5, 9.9, 9.11 ]
@@ -234,7 +234,7 @@
       - id: "SMA"
         card: "A"
         desc: "You have invented a new attack against Session Management"
-        misc: "Read more about this topic in OWASP’s free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
+        misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
       - id: "SM2"
         card: "2"
         desc: "William has control over the generation of session identifiers"
@@ -264,7 +264,7 @@
             SAFECode: [ 28 ]
       - id: "SM5"
         card: "5"
-        desc: "John can predict or guess session identifiers because they are not changed when the user’s role alters (e.g. pre and post authentication) and when switching between non-encrypted and encrypted communications, or are not sufficiently long and random, or are not changed periodically"
+        desc: "John can predict or guess session identifiers because they are not changed when the user's role alters (e.g. pre and post authentication) and when switching between non-encrypted and encrypted communications, or are not sufficiently long and random, or are not changed periodically"
         mappings:
           - OWASP SCP: [ 60, 62, 66, 67, 71, 72 ]
             OWASP ASVS: [ 3.2, 3.7, 3.11 ]
@@ -273,7 +273,7 @@
             SAFECode: [ 28 ]
       - id: "SM6"
         card: "6"
-        desc: "Gary can take over a user’s session because there is a long or no inactivity timeout, or a long or no overall session time limit, or the same session can be used from more than one device/location"
+        desc: "Gary can take over a user's session because there is a long or no inactivity timeout, or a long or no overall session time limit, or the same session can be used from more than one device/location"
         mappings:
           - OWASP SCP: [ 64, 65 ]
             OWASP ASVS: [ 3.3, 3.4, 3.16, 3.17, 3.18 ]
@@ -282,7 +282,7 @@
             SAFECode: [ 28 ]
       - id: "SM7"
         card: "7"
-        desc: "Casey can utilize Adam’s session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
+        desc: "Casey can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
         mappings:
           - OWASP SCP: [ 62, 63 ]
             OWASP ASVS: [ 3.2, 3.5 ]
@@ -347,7 +347,7 @@
       - id: "AZA"
         card: "A"
         desc: "You have invented a new attack against Authorization"
-        misc: "Read more about this topic in OWASP’s Development and Testing Guides"
+        misc: "Read more about this topic in OWASP's Development and Testing Guides"
       - id: "AZ2"
         card: "2"
         desc: "Tim can influence where data is sent or forwarded to"
@@ -413,7 +413,7 @@
             SAFECode: [ 8, 10, 11, 12 ]
       - id: "AZ9"
         card: "9"
-        desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application’s resources, or causes race conditions, or over-utilizes a feature"
+        desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature"
         mappings:
           - OWASP SCP: [ 94 ]
             OWASP ASVS: [ 4.14, 15.2 ]
@@ -460,7 +460,7 @@
       - id: "CRA"
         card: "A"
         desc: "You have invented a new attack against Cryptography"
-        misc: "Read more about this topic in OWASP’s free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
+        misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
       - id: "CR2"
         card: "2"
         desc: "Kyun can access data because it has been obfuscated rather than using an approved cryptographic function"
@@ -573,7 +573,7 @@
       - id: "COA"
         card: "A"
         desc: "You have invented a new attack of any type"
-        misc: "Read more about application security in OWASP’s free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
+        misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
       - id: "CO2"
         card: "2"
         desc: "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur"
@@ -621,7 +621,7 @@
             SAFECode: [ 4, 11, 23 ]
       - id: "CO7"
         card: "7"
-        desc: "Mwengu’s actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service"
+        desc: "Mwengu's actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service"
         mappings:
           - OWASP SCP: [ 113, 114, 115, 117, 118, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130 ]
             OWASP ASVS: [ 2.12, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10, 8.11, 8.12, 9.10, 10.4 ]
@@ -648,7 +648,7 @@
             SAFECode: [ ]
       - id: "CO0"
         card: "10"
-        desc: "Xavier can circumvent the application’s controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
+        desc: "Xavier can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
         mappings:
           - OWASP SCP: [ 57, 151, 152, 204, 205, 213, 214 ]
             OWASP ASVS: [ 1.11- ]
@@ -685,8 +685,8 @@
     JO: "Joker"
       - id: "JOA"
         card: "A"
-        desc: "Alice can utilize the application to attack users’ systems and data"
-        misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP’s work"
+        desc: "Alice can utilize the application to attack users' systems and data"
+        misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
       - id: "JOB"
         card: "B"
         desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
