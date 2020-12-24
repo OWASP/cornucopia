@@ -15,7 +15,7 @@
         mappings:
           - OWASP SCP: [ 69, 107, 108, 109, 136, 137, 153, 156, 158, 162 ]
             OWASP ASVS: [ 1.10, 4.5, 8.1, 11.5, 19.1, 19.5 ]
-            OWASP AppSensor: [ HT1-3 ]
+            OWASP AppSensor: [ HT1, HT2, HT3 ]
             CAPEC: [ 54, 541 ]
             SAFECode: [ 4, 23 ]
       - id: "VE3"
@@ -24,7 +24,7 @@
         mappings:
           - OWASP SCP: [ ]
             OWASP ASVS: [ 5.1, 5.16, 5.17, 5.18, 5.19, 5.20, 11.1, 11.2 ]
-            OWASP AppSensor: [ RE7-8, AE4-7, IE2-3, CIE1, CIE3-4, HT1-3 ]
+            OWASP AppSensor: [ RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3 ]
             CAPEC: [ 28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272 ]
             SAFECode: [ 3, 16, 24, 35 ]
       - id: "VE4"
@@ -33,7 +33,7 @@
         mappings:
           - OWASP SCP: [ 8, 10, 183 ]
             OWASP ASVS: [ 4.16, 5.16, 5.17, 15.1 ]
-            OWASP AppSensor: [ RE3-6, AE8-11, SE1, 3-6, IE2-4, HT1-3 ]
+            OWASP AppSensor: [ RE3, RE4, RE5, RE6, AE8, AE9, AE10, AE11, SE1, SE3, SE4, SE5, SE6, IE2, IE3, IE4, HT1, HT2, HT3 ]
             CAPEC: [ 28, 31, 48, 126, 162, 165, 213, 220, 221, 261 ]
             SAFECode: [ 24, 35 ]
       - id: "VE5"
@@ -51,7 +51,7 @@
         mappings:
           - OWASP SCP: [ 3, 168 ]
             OWASP ASVS: [ 1.7, 5.6, 5.19 ]
-            OWASP AppSensor: [ IE2-3 ]
+            OWASP AppSensor: [ IE2, IE3 ]
             CAPEC: [ 28 ]
             SAFECode: [ 3, 16, 24 ]
       - id: "VE7"
@@ -60,7 +60,7 @@
         mappings:
           - OWASP SCP: [ 4, 5, 7, 150 ]
             OWASP ASVS: [ 5.6, 11.8 ]
-            OWASP AppSensor: [ E2-3, EE1-2 ]
+            OWASP AppSensor: [ E2, E3, EE1, EE2 ]
             CAPEC: [ 28, 153, 165 ]
             SAFECode: [ 3, 16, 24 ]
       - id: "VE8"
@@ -78,7 +78,7 @@
         mappings:
           - OWASP SCP: [ 6, 21, 22, 168 ]
             OWASP ASVS: [ 5.3 ]
-            OWASP AppSensor: [ IE2-3 ]
+            OWASP AppSensor: [ IE2, IE3 ]
             CAPEC: [ 28 ]
             SAFECode: [ 3, 16, 24 ]
       - id: "VE0"
@@ -114,7 +114,7 @@
         mappings:
           - OWASP SCP: [ 15, 19, 20, 21, 22, 167, 180, 204, 211, 212 ]
             OWASP ASVS: [ 5.10, 5.11, 5.12, 5.13, 5.14, 5.16, 5.21 ]
-            OWASP AppSensor: [ CIE1-2 ]
+            OWASP AppSensor: [ CIE1, CIE2 ]
             CAPEC: [ 23, 28, 76, 152, 160, 261 ]
             SAFECode: [ 2, 19, 20 ]
     AT: "Autenticación"
@@ -268,7 +268,7 @@
         mappings:
           - OWASP SCP: [ 60, 62, 66, 67, 71, 72 ]
             OWASP ASVS: [ 3.2, 3.7, 3.11 ]
-            OWASP AppSensor: [ SE4-6 ]
+            OWASP AppSensor: [ SE4, SE5, SE6 ]
             CAPEC: [ 31 ]
             SAFECode: [ 28 ]
       - id: "SM6"
@@ -304,7 +304,7 @@
         mappings:
           - OWASP SCP: [ 69, 75, 76, 119, 138 ]
             OWASP ASVS: [ 3.6, 8.7, 10.3 ]
-            OWASP AppSensor: [ SE4-6 ]
+            OWASP AppSensor: [ SE4, SE5, SE6 ]
             CAPEC: [ 31, 60 ]
             SAFECode: [ 28 ]
       - id: "SM0"
@@ -390,7 +390,7 @@
         mappings:
           - OWASP SCP: [ 81, 88, 131 ]
             OWASP ASVS: [ 4.1, 4.4 ]
-            OWASP AppSensor: [ ACE1-4 ]
+            OWASP AppSensor: [ ACE1, ACE2, ACE3, ACE4 ]
             CAPEC: [ 122 ]
             SAFECode: [ 8, 10, 11 ]
       - id: "AZ7"
@@ -417,7 +417,7 @@
         mappings:
           - OWASP SCP: [ 94 ]
             OWASP ASVS: [ 4.14, 15.2 ]
-            OWASP AppSensor: [ AE3, FIO1-2, UT2-4, STE1-3 ]
+            OWASP AppSensor: [ AE3, FIO1, FIO2, UT2, UT3, UT4, STE1, STE2, STE3 ]
             CAPEC: [ 26, 29, 119, 261 ]
             SAFECode: [ 1, 35 ]
       - id: "AZ0"
@@ -426,7 +426,7 @@
         mappings:
           - OWASP SCP: [ 78, 91 ]
             OWASP ASVS: [ 1.7, 4.11 ]
-            OWASP AppSensor: [ ACE1-4 ]
+            OWASP AppSensor: [ ACE1, ACE2, ACE3, ACE4 ]
             CAPEC: [ 36, 95, 121, 179 ]
             SAFECode: [ 8, 10, 11 ]
       - id: "AZJ"
@@ -477,7 +477,7 @@
           - OWASP SCP: [ 92, 205, 212 ]
             OWASP ASVS: [ 8.11, 11.7, 13.2, 19.5, 19.6, 19.7, 19.8 ]
             OWASP AppSensor: [ SE1, IE4 ]
-            CAPEC: [ 31, 39, 68, 75, 133, 145, 162, 203, 438-9, 442 ]
+            CAPEC: [ 31, 39, 68, 75, 133, 145, 162, 203, 438, 439, 442 ]
             SAFECode: [ 12, 14 ]
       - id: "CR4"
         card: "4"
@@ -651,7 +651,7 @@
         desc: "Xavier puede eludir los controles de la aplicación porque los frameworks de código, librerías y componentes contienen código malicioso o vulnerabilidades (por ejemplo, inhouse, software comercial, servicio tercerizado, de código abierto, ubicado externamente)"
         mappings:
           - OWASP SCP: [ 57, 151, 152, 204, 205, 213, 214 ]
-            OWASP ASVS: [ 1.11- ]
+            OWASP ASVS: [ 1.11 ]
             OWASP AppSensor: [ ]
             CAPEC: [ 68, 438, 439, 442, 524, 538 ]
             SAFECode: [ 15 ]
@@ -679,7 +679,7 @@
         mappings:
           - OWASP SCP: [ 41, 55 ]
             OWASP ASVS: [ ]
-            OWASP AppSensor: [ UT1-4, STE3 ]
+            OWASP AppSensor: [ UT1, UT2, UT3, UT4, STE3 ]
             CAPEC: [ 2, 25, 119, 125 ]
             SAFECode: [ 1 ]
     JO: "Joker"
