@@ -682,7 +682,7 @@
             OWASP AppSensor: [ UT1, UT2, UT3, UT4, STE3 ]
             CAPEC: [ 2, 25, 119, 125 ]
             SAFECode: [ 1 ]
-    JO: "Joker"
+    WC: "Joker"
       - id: "JOA"
         card: "A"
         desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
