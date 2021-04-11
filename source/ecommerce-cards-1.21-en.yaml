@@ -1,5 +1,7 @@
+---
 meta:
   edition: "ecommerce"
+  component: "cards"
   language: "EN"
   version: "1.21"
 data:

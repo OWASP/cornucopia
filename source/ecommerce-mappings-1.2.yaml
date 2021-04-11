@@ -1,6 +1,8 @@
+---
 meta:
   edition: "ecommerce"
   component: "mappings"
+  language: "ALL"
   version: "1.2"
 data:
   VE:
