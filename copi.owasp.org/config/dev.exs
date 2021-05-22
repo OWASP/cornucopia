@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :copi, Copi.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "y9EAY7xeVucjM2yM",
   database: "copi_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
@@ -25,7 +25,8 @@ config :copi, CopiWeb.Endpoint,
       "node_modules/webpack/bin/webpack.js",
       "--mode",
       "development",
-      "--watch-stdin",
+      "--watch",
+      "--watch-options-stdin",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
