@@ -21,9 +21,12 @@ defmodule CopiWeb.Router do
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
-
-
     live "/games/:id", GameLive.Show, :show
+
+    live "/games/:game_id/players", PlayerLive.Index, :index
+    live "/games/:game_id/players/new", PlayerLive.Index, :new
+
+    live "/games/:game_id/players/:id", PlayerLive.Show, :show
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,13 @@
+<h1>Show Player</h1>
+
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @player.name %>
+  </li>
+
+</ul>
+
+<span><%= live_redirect "Back", to: Routes.player_index_path(@socket, :index, @player.game_id) %></span>

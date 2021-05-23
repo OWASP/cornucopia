@@ -8,4 +8,8 @@
   <h3><%= gettext "Waiting for players..." %></h3>
 <% end %>
 
-<span><%= live_redirect "Back", to: Routes.game_index_path(@socket, :index) %></span>
+<p>Share the link to this game with everyone who wants to join or watch.</p>
+
+<p>Use the button below to join as a player. <strong>Don't share the full link once you've joined as a player or they'll join as you.</strong></p>
+
+<span><%= live_patch gettext("Join game as a player"), to: Routes.player_index_path(@socket, :new, @game.id), class: "button" %></span>

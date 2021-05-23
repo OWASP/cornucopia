@@ -1,12 +1,14 @@
-defmodule Copi.Player do
+defmodule Copi.Cornucopia.Player do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key {:id, Ecto.ULID, autogenerate: true}
+  @foreign_key_type Ecto.ULID
+
   schema "players" do
     field :name, :string
-    #field :game_id, :id
 
-    belongs_to :game, Copi.Game
+    belongs_to :game, Copi.Cornucopia.Game, type: Ecto.ULID
     has_many :dealt_cards, Copi.DealtCard
 
     timestamps()
@@ -15,7 +17,7 @@ defmodule Copi.Player do
   @doc false
   def changeset(player, attrs) do
     player
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :game_id])
     |> validate_required([:name])
   end
 end

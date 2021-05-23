@@ -35,3 +35,6 @@ npm-debug.log
 
 # Ignore MacOS filesystem housekeeping
 .DS_Store
+
+# Ignore any VSCode settings
+.vscode
