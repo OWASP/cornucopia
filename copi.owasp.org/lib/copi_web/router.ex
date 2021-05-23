@@ -18,6 +18,13 @@ defmodule CopiWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    live "/games", GameLive.Index, :index
+    live "/games/new", GameLive.Index, :new
+    live "/games/:id/edit", GameLive.Index, :edit
+
+    live "/games/:id", GameLive.Show, :show
+    live "/games/:id/show/edit", GameLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

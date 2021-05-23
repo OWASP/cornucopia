@@ -1,0 +1,41 @@
+<h1>Listing Games</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, CopiWeb.GameLive.FormComponent,
+    id: @game.id || :new,
+    title: @page_title,
+    action: @live_action,
+    game: @game,
+    return_to: Routes.game_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Created at</th>
+      <th>Started at</th>
+      <th>Finished at</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="games">
+    <%= for game <- @games do %>
+      <tr id="game-<%= game.id %>">
+        <td><%= game.name %></td>
+        <td><%= game.created_at %></td>
+        <td><%= game.started_at %></td>
+        <td><%= game.finished_at %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.game_show_path(@socket, :show, game) %></span>
+          <span><%= live_patch "Edit", to: Routes.game_index_path(@socket, :edit, game) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: game.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Game", to: Routes.game_index_path(@socket, :new) %></span>

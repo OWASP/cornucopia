@@ -1,0 +1,37 @@
+<h1>Show Game</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, CopiWeb.GameLive.FormComponent,
+    id: @game.id,
+    title: @page_title,
+    action: @live_action,
+    game: @game,
+    return_to: Routes.game_show_path(@socket, :show, @game) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @game.name %>
+  </li>
+
+  <li>
+    <strong>Created at:</strong>
+    <%= @game.created_at %>
+  </li>
+
+  <li>
+    <strong>Started at:</strong>
+    <%= @game.started_at %>
+  </li>
+
+  <li>
+    <strong>Finished at:</strong>
+    <%= @game.finished_at %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.game_show_path(@socket, :edit, @game), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.game_index_path(@socket, :index) %></span>
