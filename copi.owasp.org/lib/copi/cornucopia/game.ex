@@ -10,7 +10,16 @@ defmodule Copi.Cornucopia.Game do
     field :name, :string
     field :started_at, :utc_datetime
 
+    has_many :players, Copi.Cornucopia.Player
+
     timestamps()
+  end
+
+  def find(id) do
+    case Copi.Repo.get(Copi.Cornucopia.Game, id) do
+      nil -> {:error, :not_found}
+      game -> {:ok, game |> Copi.Repo.preload(:players)}
+    end
   end
 
   @doc false

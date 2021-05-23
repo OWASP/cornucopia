@@ -1,7 +1,7 @@
 defmodule CopiWeb.GameLive.Show do
   use CopiWeb, :live_view
 
-  alias Copi.Cornucopia
+  alias Copi.Cornucopia.Game
 
   @impl true
   def mount(_params, _session, socket) do
@@ -10,12 +10,12 @@ defmodule CopiWeb.GameLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:game, Cornucopia.get_game!(id))}
+    with {:ok, game} <- Game.find(id) do
+      {:noreply, socket |> assign(:game, game)}
+    else
+      {:error, _reason} ->
+        {:ok, redirect(socket, to: "/error")}
+    end
   end
 
-  defp page_title(:show), do: "Show Game"
-  defp page_title(:edit), do: "Edit Game"
 end
