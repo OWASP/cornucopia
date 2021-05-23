@@ -1,4 +1,4 @@
-<h1>Listing Games</h1>
+<h1>How to play</h1>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, CopiWeb.GameLive.FormComponent,
@@ -9,33 +9,14 @@
     return_to: Routes.game_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Created at</th>
-      <th>Started at</th>
-      <th>Finished at</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="games">
-    <%= for game <- @games do %>
-      <tr id="game-<%= game.id %>">
-        <td><%= game.name %></td>
-        <td><%= game.created_at %></td>
-        <td><%= game.started_at %></td>
-        <td><%= game.finished_at %></td>
-
-        <td>
-          <span><%= live_redirect "Show", to: Routes.game_show_path(@socket, :show, game) %></span>
-          <span><%= live_patch "Edit", to: Routes.game_index_path(@socket, :edit, game) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: game.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<span><%= live_patch "New Game", to: Routes.game_index_path(@socket, :new) %></span>
+<h2>Preparations</h2>
+<ol>
+  <li>Identify an application or application process to review; this might be a concept, design or an actual implementation</li>
+  <li>Have a data flow diagram, or make one!</li>
+  <li>Invite a group of 3-6 people on your team who know what's been built, or what's going to be built, inside out</li>
+  <li>Have some prizes to hand (gold stars, chocolate, pizza, beer, flowers, whatever you need)
+</ol>
+<p>
+  Copi will manage dealing cards and scoring, and you'll have more help on how to play in the game.
+</p>
+<span><%= live_patch gettext("Enough already, let's start!"), to: Routes.game_index_path(@socket, :new), class: "button" %></span>

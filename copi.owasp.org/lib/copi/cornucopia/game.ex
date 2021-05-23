@@ -17,6 +17,6 @@ defmodule Copi.Cornucopia.Game do
   def changeset(game, attrs) do
     game
     |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> validate_required([:name], message: "No really, give your game session a name")
   end
 end

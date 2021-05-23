@@ -4,9 +4,9 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%= label f, :name, gettext "Give it a name" %>
+  <%= label f, :name, gettext "Give your game session a friendly name so people joining know what's up" %>
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
 
-  <%= submit gettext "Let's go!", phx_disable_with: "Starting game..." %>
+  <%= submit gettext "Goooooooo!", phx_disable_with: "Starting game..." %>
 </form>
