@@ -7,7 +7,7 @@ defmodule Copi.DealtCard do
     #field :player_id, :id
     field :played_in_round, :id
 
-    belongs_to :player, Copi.Player
+    belongs_to :player, Copi.Cornucopia.Player, type: Ecto.ULID
 
     timestamps()
   end

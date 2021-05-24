@@ -1,0 +1,276 @@
+---
+meta:
+  edition: "ecommerce"
+  component: "cards"
+  language: "EN"
+  version: "1.21"
+suits:
+-
+  name: "Data validation & encoding"
+  cards:
+  -
+    value: "A"
+    desc: "You have invented a new attack against Data Validation and Encoding"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
+  -
+    value: "2"
+    desc: "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
+  -
+    value: "3"
+    desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats"
+  -
+    value: "4"
+    desc: "Dave can input malicious field names or data because it is not being checked within the context of the current user and process"
+  -
+    value: "5"
+    desc: "Jee can bypass the centralized encoding routines since they are not being used everywhere, or the wrong encodings are being used"
+  -
+    value: "6"
+    desc: "Jason can bypass the centralized validation routines since they are not being used on all inputs"
+  -
+    value: "7"
+    desc: "Jan can craft special payloads to foil input validation because the character set is not specified/enforced, or the data is encoded multiple times, or the data is not fully converted into the same format the application uses (e.g. canonicalization) before being validated, or variables are not strongly typed"
+  -
+    value: "8"
+    desc: "Sarah can bypass the centralized sanitization routines since they are not being used comprehensively"
+  -
+    value: "9"
+    desc: "Shamun can bypass input validation or output validation checks because validation failures are not rejected and/or sanitized"
+  -
+    value: "10"
+    desc: "Darío can exploit the trust the application places in a source of data (e.g. user-definable data, manipulation of locally stored data, alteration to state data on a client device, lack of verification of identity during data validation such as Darío can pretend to be Colin)"
+  -
+    value: "J"
+    desc: "Dennis has control over input validation, output validation or output encoding code or routines so they can be bypassed"
+  -
+    value: "Q"
+    desc: "Geoff can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes"
+  -
+    value: "K"
+    desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly"
+-
+  name: "Authentication"
+  cards:
+  -
+    value: "A"
+    desc: "You have invented a new attack against Authentication"
+    misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
+  -
+    value: "2"
+    desc: "James can undertake authentication functions without the real user ever being aware this has occurred (e.g. attempt to log in, log in with stolen credentials, reset the password) "
+  -
+    value: "3"
+    desc: "Muhammad can obtain a user's password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password"
+  -
+    value: "4"
+    desc: "Sebastien can easily identify user names or can enumerate them"
+  -
+    value: "5"
+    desc: "Javier can use default, test or easily guessable credentials to authenticate, or can use an old account or an account not necessary for the application"
+  -
+    value: "6"
+    desc: "Sven can reuse a temporary password because the user does not have to change it on first use, or it has too long or no expiry, or it does not use an out-of-band delivery method (e.g. post, mobile app, SMS)"
+  -
+    value: "7"
+    desc: "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords"
+  -
+    value: "8"
+    desc: "Kate can bypass authentication because it does not fail secure (i.e. it defaults to allowing unauthenticated access)"
+  -
+    value: "9"
+    desc: "Claudia can undertake more critical functions because authentication requirements are too weak (e.g. do not use strong authentication such as two factor), or there is no requirement to re-authenticate for these"
+  -
+    value: "10"
+    desc: "Pravin can bypass authentication controls because a centralized standard, tested, proven and approved authentication module/framework/service, separate to the resource being requested, is not being used"
+  -
+    value: "J"
+    desc: "Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
+  -
+    value: "Q"
+    desc: "Jaime can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
+  -
+    value: "K"
+    desc: "Olga can influence or alter authentication code/routines so they can be bypassed"
+-
+  name: "Session management"
+  cards:
+  -
+    value: "A"
+    desc: "You have invented a new attack against Session Management"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
+  -
+    value: "2"
+    desc: "William has control over the generation of session identifiers"
+  -
+    value: "3"
+    desc: "Ryan can use a single account in parallel since concurrent sessions are allowed"
+  -
+    value: "4"
+    desc: "Alison can set session identification cookies on another web application because the domain and path are not restricted sufficiently"
+  -
+    value: "5"
+    desc: "John can predict or guess session identifiers because they are not changed when the user's role alters (e.g. pre and post authentication) and when switching between non-encrypted and encrypted communications, or are not sufficiently long and random, or are not changed periodically"
+  -
+    value: "6"
+    desc: "Gary can take over a user's session because there is a long or no inactivity timeout, or a long or no overall session time limit, or the same session can be used from more than one device/location"
+  -
+    value: "7"
+    desc: "Casey can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
+  -
+    value: "8"
+    desc: "Matt can abuse long sessions because the application does not require periodic re-authentication to check if privileges have changed"
+  -
+    value: "9"
+    desc: "Ivan can steal session identifiers because they are sent over insecure channels, or are logged, or are revealed in error messages, or are included in URLs, or are accessible un-necessarily by code which the attacker can influence or alter"
+  -
+    value: "10"
+    desc: "Marce can forge requests because per-session, or per-request for more critical actions, strong random tokens (i.e. anti-CSRF tokens) or similar are not being used for actions that change state"
+  -
+    value: "J"
+    desc: "Jeff can resend an identical repeat interaction (e.g. HTTP request, signal, button press) and it is accepted, not rejected"
+  -
+    value: "Q"
+    desc: "Salim can bypass session management because it is not applied comprehensively and consistently across the application"
+  -
+    value: "K"
+    desc: "Peter can bypass the session management controls because they have been self-built and/or are weak, instead of using a standard framework or approved tested module"
+-
+  name: "Authorization"
+  cards:
+  -
+    value: "A"
+    desc: "You have invented a new attack against Authorization"
+    misc: "Read more about this topic in OWASP's Development and Testing Guides"
+  -
+    value: "2"
+    desc: "Tim can influence where data is sent or forwarded to"
+  -
+    value: "3"
+    desc: "Christian can access information, which they should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or other information leakage"
+  -
+    value: "4"
+    desc: "Kelly can bypass authorization controls because they do not fail securely (i.e. they default to allowing access)"
+  -
+    value: "5"
+    desc: "Chad can access resources (including services, processes, AJAX, Flash, video, images, documents, temporary files, session data, system properties, configuration data, registry settings, logs) he should not be able to due to missing authorization, or due to excessive privileges (e.g. not using the principle of least privilege)"
+  -
+    value: "6"
+    desc: "Eduardo can access data he does not have permission to, even though he has permission to the form/page/URL/entry point"
+  -
+    value: "7"
+    desc: "Yuanjing can access application functions, objects, or properties he is not authorized to access"
+  -
+    value: "8"
+    desc: "Tom can bypass business rules by altering the usual process sequence or flow, or by undertaking the process in the incorrect order, or by manipulating date and time values used by the application, or by using valid features for unintended purposes, or by otherwise manipulating control data"
+  -
+    value: "9"
+    desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature"
+  -
+    value: "10"
+    desc: "Richard can bypass the centralized authorization controls since they are not being used comprehensively on all interactions"
+  -
+    value: "J"
+    desc: "Dinis can access security configuration information, or access control lists"
+  -
+    value: "Q"
+    desc: "Christopher can inject a command that the application will run at a higher privilege level"
+  -
+    value: "K"
+    desc: "Ryan can influence or alter authorization controls and permissions, and can therefore bypass them"
+-
+  name: "Cryptography"
+  cards:
+  -
+    value: "A"
+    desc: "You have invented a new attack against Cryptography"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
+  -
+    value: "2"
+    desc: "Kyun can access data because it has been obfuscated rather than using an approved cryptographic function"
+  -
+    value: "3"
+    desc: "Axel can modify transient or permanent data (stored or in transit), or source code, or updates/patches, or configuration data, because it is not subject to integrity checking"
+  -
+    value: "4"
+    desc: "Paulo can access data in transit that is not encrypted, even though the channel is encrypted"
+  -
+    value: "5"
+    desc: "Kyle can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)"
+  -
+    value: "6"
+    desc: "Romain can read and modify unencrypted data in memory or in transit (e.g. cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems"
+  -
+    value: "7"
+    desc: "Gunter can intercept or modify encrypted data in transit because the protocol is poorly deployed, or weakly configured, or certificates are invalid, or certificates are not trusted, or the connection can be degraded to a weaker or un-encrypted communication"
+  -
+    value: "8"
+    desc: "Eoin can access stored business data (e.g. passwords, session identifiers, PII, cardholder data) because it is not securely encrypted or securely hashed"
+  -
+    value: "9"
+    desc: "Andy can bypass random number generation, random GUID generation, hashing and encryption functions because they have been self-built and/or are weak"
+  -
+    value: "10"
+    desc: "Susanna can break the cryptography in use because it is not strong enough for the degree of protection required, or it is not strong enough for the amount of effort the attacker is willing to make"
+  -
+    value: "J"
+    desc: "Justin can read credentials for accessing internal or external resources, services and others systems because they are stored in an unencrypted format, or saved in the source code"
+  -
+    value: "Q"
+    desc: "Randolph can access or predict the master cryptographic secrets"
+  -
+    value: "K"
+    desc: "Dan can influence or alter cryptography code/routines (encryption, hashing, digital signatures, random number and GUID generation) and can therefore bypass them"
+-
+  name: "Cornucopia"
+  cards:
+  -
+    value: "A"
+    desc: "You have invented a new attack of any type"
+    misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
+  -
+    value: "2"
+    desc: "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur"
+  -
+    value: "3"
+    desc: "Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained"
+  -
+    value: "4"
+    desc: "Keith can perform an action and it is not possible to attribute it to him"
+  -
+    value: "5"
+    desc: "Larry can influence the trust other parties including users have in the application, or abuse that trust elsewhere (e.g. in another application)"
+  -
+    value: "6"
+    desc: "Aaron can bypass controls because error/exception handling is missing, or is implemented inconsistently or partially, or does not deny access by default (i.e. errors should terminate access/execution), or relies on handling by some other service or system"
+  -
+    value: "7"
+    desc: "Mwengu's actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service"
+  -
+    value: "8"
+    desc: "David can bypass the application to gain access to data because the network and host infrastructure, and supporting services/applications, have not been securely configured, the configuration rechecked periodically and security patches applied, or the data is stored locally, or the data is not physically protected"
+  -
+    value: "9"
+    desc: "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
+  -
+    value: "10"
+    desc: "Xavier can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
+  -
+    ard: "J"
+    desc: "Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented and passed on to operational teams"
+  -
+    value: "Q"
+    desc: "Jim can undertake malicious, non-normal, actions without real-time detection and response by the application"
+  -
+    value: "K"
+    desc: "Gareth can utilize the application to deny service to some or all of its users"
+-
+  name: "Jokers"
+  cards:
+  -
+    value: "Joker"
+    desc: "Alice can utilize the application to attack users' systems and data"
+    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+  -
+    value: "Joker"
+    desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
+    misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab"

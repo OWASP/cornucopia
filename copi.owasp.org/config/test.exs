@@ -10,8 +10,7 @@ config :copi, Copi.Repo,
   password: "postgres",
   database: "copi_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox,
-  migration_primary_key: [name: :id, type: :binary_id]
+  pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

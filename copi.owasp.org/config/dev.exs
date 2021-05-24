@@ -7,8 +7,7 @@ config :copi, Copi.Repo,
   database: "copi_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10,
-  migration_primary_key: [name: :id, type: :binary_id]
+  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

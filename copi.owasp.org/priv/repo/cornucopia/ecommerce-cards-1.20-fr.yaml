@@ -1,0 +1,260 @@
+---
+meta:
+  edition: "ecommerce"
+  component: "cards"
+  language: "FR"
+  version: "1.20"
+data:
+  VE: "Validation des Données & Encodage"
+    VEA:
+      card: "A"
+      desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
+      misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
+    VE2:
+      card: "2"
+      desc: "Brian peut recueillir des informations sur les configurations sous-jacentes, les schémas, la logique, le code, le logiciel, les services et l'infrastructure, de par le contenu des messages d'erreur, ou une mauvaise configuration, ou la présence de fichiers d'installation par défaut, ou des ressources de test, de sauvegarde, de copie, ou l'exposition de code source"
+    VE3:
+      card: "3"
+      desc: "Robert peut saisir des données malveillantes, car le format attendu n'est pas vérifié, ou des duplicatas sont acceptés, ou la structure n'est pas vérifiée, ou les éléments individuels des données ne sont pas validées : type, plage, longueur, liste blanche de caractères ou de formats autorisés"
+    VE4:
+      card: "4"
+      desc: "Dave peut saisir des noms de champs ou des données malveillantes, car ils ne sont pas vérifiés dans le contexte de l'utilisateur ou du processus en cours"
+    VE5:
+      card: "5"
+      desc: "Jee peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées partout, ou bien de mauvais encodages sont utilisés"
+    VE6:
+      card: "6"
+      desc: "Jason peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
+    VE7:
+      card: "7"
+      desc: "Jan peut générer des messages de sorte à tromper la validation des données, car le jeu de caractères n'est pas spécifié/imposé, ou les données sont encodées plusieurs fois, ou les données ne sont pas pleinement converties dans le format que l'application utilise (par exemple canonicalisation) avant leur validation, ou les variables sont insuffisamment typées"
+    VE8:
+      card: "8"
+      desc: "Sarah peut contourner les routines de sanitisation centralisées, car celles-ci ne sont pas pleinement utilisées"
+    VE9:
+      card: "9"
+      desc: "Shamun peut contourner la validation des saisies ou la validation des sorties, car les échecs de validation ne sont pas rejetés et/ou sanitisés"
+    VE0:
+      card: "10"
+      desc: "Darío peut exploiter la confiance que l'application place dans une source de données (par exemple données définies par l'utilisateur, manipulation de données stockées localement, changement de déclaration des données sur un système client, manque de vérification de l'identité pendant la validation de données de telle manière que Darío peut se faire passer pour Colin)"
+    VEJ:
+      card: "J"
+      desc: "Dennis a le contrôle sur la validation des saisies, la validation des sorties, ou le code d'encodage des sorties, ou les routines, de telle manière que celles-ci peuvent être contournées"
+    VEQ:
+      card: "Q"
+      desc: "Geoff peut injecter des données dans un client ou un système interpréteur, car une interface paramétrée n'est pas utilisée, ou n'a pas été implémentée correctement, ou les données n'ont pas été encodées correctement dans ce contexte, ou il n'y a pas de politique restrictive sur le code ou les ajouts de données"
+    VEK:
+      card: "K"
+      desc: "Gabe peut injecter des données dans un interpréteur côté serveur (ex : SQL, commandes OS, Xpath, Server JavaScript, SMTP), car une interface paramétrée fortement typée n'est pas utilisée ou n'a pas été implémentée correctement"
+  AT: "Authentification"
+    ATA:
+      card: "A"
+      desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
+      misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur l'Authentification"
+    AT2:
+      card: "2"
+      desc: "James peut entreprendre des fonctions d'authentification sans que l'utilisateur légitime ne s'en aperçoive (par exemple tentative d'authentification, authentification avec des identifiants volés, mise à jour du mot de passe)"
+    AT3:
+      card: "3"
+      desc: "Muhammad peut obtenir le mot de passe d'un utilisateur ou d'autres secrets comme des questions de sécurité, de par l'observation pendant la saisie, ou à partir d'un cache local, de la mémoire, en transit, par lecture d'une ressource non protégée, parce qu'ils sont communément répandus, qu'ils n'expirent jamais, que l'utilisateur ne peut pas changer son propre mot de passe"
+    AT4:
+      card: "4"
+      desc: "Sebastien peut facilement identifier les noms des utilisateurs ou peut les énumérer"
+    AT5:
+      card: "5"
+      desc: "Javier peut utiliser les identifiants par défaut, de test, ou facilement devinables, ou peut utiliser un ancien compte ou un compte dont l'application n'a pas besoin"
+    AT6:
+      card: "6"
+      desc: "Sven peut réutiliser un mot de passe temporaire car l'utilisateur n'a pas besoin de le changer à la première connexion, ou sa durée de vie est trop longue ou n'expire pas, ou sa communication ne nécessite pas de deuxième canal distinct (par exemple voie postale, application mobile, SMS)"
+    AT7:
+      card: "7"
+      desc: "Cecilia peut réaliser des attaques de type brute force ou de dictionnaire contre un ou plusieurs comptes sans limitation, ou ses attaques sont simplifiées du fait d'une faible politique de mots de passe (faible complexité, longueur, historique, ou durée de vie insuffisante)"
+    AT8:
+      card: "8"
+      desc: "Kate peut contourner l'authentification car son échec n'est pas contrôlé (passage en accès non authentifié)"
+    AT9:
+      card: "9"
+      desc: "Claudia peut effectuer davantage de fonctions critiques car l'authentification est trop faible (ex : pas d'authentification forte à deux facteurs), ou la réauthentification n'est pas requise pour ces fonctions"
+    AT0:
+      card: "10"
+      desc: "Pravin peut contourner les contrôles d'authentification car un module/framework/service d'authentification, qui est centralisé, standardisé, testé, autorisé, et séparé de la ressource requêtée, n'est pas utilisé"
+    ATJ:
+      card: "J"
+      desc: "Mark peut accéder à des ressources ou des services parce qu'il n'y a pas d'authentification, ou il a été pensé à tort que l'authentification était prise en compte par un autre système ou réalisée dans une action précédente"
+    ATQ:
+      card: "Q"
+      desc: "Jaime peut contourner l'authentification car celle-ci n'est pas implémentée avec la même rigueur dans toutes les fonctionnalités (ex : inscription, changement de mot de passe, recouvrement de mot de passe, déconnexion, administration) ou dans toutes les versions/canaux (ex : site web mobile, appli mobile, site web, API, centre d'appel)"
+    ATK:
+      card: "K"
+      desc: "Olga peut influencer ou modifier du code/routines d'authentification de telle manière que celle-ci soit contournée"
+  SM: "Gestion des Sessions"
+    SMA:
+      card: "A"
+      desc: "Vous avez inventé une nouvelle attaque contre la Gestion des Sessions"
+      misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Gestion des Sessions, et sur la prévention des Cross Site Request Forgery (CSRF)"
+    SM2:
+      card: "2"
+      desc: "William a le contrôle sur la génération des identifiants de session"
+    SM3:
+      card: "3"
+      desc: "Ryan peut utiliser le même compte en parallèle, puisque les sessions concurrentes sont autorisées"
+    SM4:
+      card: "4"
+      desc: "Alison peut régler les cookies d'identification de session vers une autre application web, car le chemin et le domaine sont insuffisamment restreints"
+    SM5:
+      card: "5"
+      desc: "John peut prédire ou deviner les identifiants de session car ceux-ci ne sont pas modifiés lorsque le rôle de l'utilisateur change (par exemple pré et post authentification) et lors de la bascule entre communications chiffrées et non chiffrées, ou ne sont pas suffisamment longs et aléatoires, ou ne sont pas changés périodiquement"
+    SM6:
+      card: "6"
+      desc: "Gary peut prendre la main sur une session d'un utilisateur car le délai d'attente sur l'inactivité est trop long ou inexistant, ou la même session peut être utilisée depuis plus d'un équipement/site"
+    SM7:
+      card: "7"
+      desc: "Casey peut utiliser la session d'Adam après qu'il ait terminé, car il n'existe pas de fonction de déconnexion, ou il ne peut pas se déconnecter facilement, ou la déconnexion ne clôt pas proprement la session"
+    SM8:
+      card: "8"
+      desc: "Matt peut profiter abusivement de sessions longues car l'application ne réauthentifie pas régulièrement pour vérifier si les privilèges ont changé"
+    SM9:
+      card: "9"
+      desc: "Ivan peut voler des identifiants de session car ceux-ci sont transmis via des canaux non sécurisés, ou sont journalisés, ou sont révélés dans les messages d'erreur, ou sont inutilement accessibles par du code que l'attaquant peut influencer ou modifier"
+    SM0:
+      card: "10"
+      desc: "Marce peut contrefaire des requêtes car des tokens per-session, ou per-request pour des actions plus critiques (ex : tokens anti-CSRF ou similaires), ne sont pas utilisés lors des actions qui changent l'état d'une session"
+    SMJ:
+      card: "J"
+      desc: "Jeff peut rejouer une interaction identique (ex : requête HTTP, signal, click sur bouton), celle-ci est acceptée et non rejetée"
+    SMQ:
+      card: "Q"
+      desc: "Salim peut contourner la gestion de session car celle-ci n'est pas globalement et régulièrement appliquée à travers l'application"
+    SMK:
+      card: "K"
+      desc: "Peter peut contourner les contrôles de gestion de session car ceux-ci ont été développés en interne, au lieu d'utiliser un framework standard ou un module approuvé et testé"
+  AZ: "Habilitation"
+    AZA:
+      card: "A"
+      desc: "Vous avez inventé une nouvelle attaque contre les Habilitations"
+      misc: "Apprenez-en plus à ce sujet dans les guides gratuits OWASP sur le Développement et les Tests"
+    AZ2:
+      card: "2"
+      desc: "Tim peut modifier l'emplacement où la donnée est envoyée ou renvoyée"
+    AZ3:
+      card: "3"
+      desc: "Christian peut accéder à des informations auxquelles il n'est pas habilité via un autre canal pour lequel il l'est (ex : résultats de recherche, journaux, reporting) ou parce que celles-ci sont en cache, ou l'information est conservée plus longtemps que nécessaire, ou toute autre fuite de données"
+    AZ4:
+      card: "4"
+      desc: "Kelly peut contourner les contrôles d'habilitation car ils n'échouent pas de façon sécurisée (c'est-à-dire qu'en cas d'échec, retour au comportement par défaut qui est un accès autorisé)"
+    AZ5:
+      card: "5"
+      desc: "Chad peut accéder à des ressources (services, processus, AJAX, Flash, vidéo, images, documents, fichiers temporaires, données de session, de configuration, propriétés système, registre, journaux) auxquelles il ne devrait pas à cause d'habilitations défaillantes ou de privilèges excessifs (par exemple en n'appliquant pas le principe de moindre privilège)"
+    AZ6:
+      card: "6"
+      desc: "Eduardo peut avoir accès à des données auxquelles il n'est pas habilité, même s'il a un accès légitime au formulaire/page/ URL/point d'entrée"
+    AZ7:
+      card: "7"
+      desc: "Yuanjing peut accéder à des fonctions de l'application, des objets ou des propriétés auxquels elle n'est pas habilitée"
+    AZ8:
+      card: "8"
+      desc: "Tom peut contourner les règles métier en altérant la séquence normale du processus ou du flux, ou en réalisant celui-ci dans un ordre incorrect, ou en manipulant la date et l'heure utilisée par l'application, ou en détournant l'usage d'outils légitimes, ou encore en manipulant les données de contrôle."
+    AZ9:
+      card: "9"
+      desc: "Mike peut altérer le fonctionnement d'une application en utilisant une fonctionnalité légitime trop rapidement ou trop fréquemment, ou d'une façon différente de celle qui est prévue, ou consomme les ressources de l'application, ou cause des situations de compétition (accès concurrent), ou surutilise une fonctionnalité"
+    AZ0:
+      card: "10"
+      desc: "Richard peut contourner les contrôles d'habilitation centralisés puisqu'ils ne sont pas utilisés de façon exhaustive pour toutes les interactions."
+    AZJ:
+      card: "J"
+      desc: "Dinis peut accéder à des informations sur la configuration de sécurité, ou des listes des contrôles d'accès"
+    AZQ:
+      card: "Q"
+      desc: "Christopher peut injecter une commande que l'application exécutera avec un niveau de privilège plus élevé"
+    AZK:
+      card: "K"
+      desc: "Ryan peut influencer ou altérer les contrôles d'habilitations et les permissions, et peut ainsi les contourner"
+  CR: "Cryptographie"
+    CRA:
+      card: "A"
+      desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
+      misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur le Stockage Cryptographique et la Protection de la Couche de Transport"
+    CR2:
+      card: "2"
+      desc: "Kyun peut accéder aux données parce qu'elles ont été obfusquées au lieu d'être protégées par une fonction de cryptographie approuvée"
+    CR3:
+      card: "3"
+      desc: "Axel peut modifier des données temporaires ou permanentes (stockées ou en transit), ou du code source, ou des mises à jour/patchs, ou des données de configuration, parce qu'elles ne sont protégées par aucun contrôle d'intégrité"
+    CR4:
+      card: "4"
+      desc: "Paulo peut accéder aux données en transit qui ne sont pas chiffrées, même si le canal de communication est chiffré"
+    CR5:
+      card: "5"
+      desc: "Kyle peut contourner les contrôles cryptographiques car ils n'échouent pas de façon sécurisée (c'est-à-dire qu'ils reviennent à leur état non protégé par défaut)"
+    CR6:
+      card: "6"
+      desc: "Romain peut lire et modifier des données non chiffrées en mémoire ou en transit (ex. secrets cryptographiques, informations d'identification,  identifiants de session, données à caractère personnel et commercialement sensibles), en cours d'utilisation, dans les échanges au sein de l'application, entre l'application et des utilisateurs, entre l'application et des systèmes externes"
+    CR7:
+      card: "7"
+      desc: "Gunter peut intercepter ou modifier des données chiffrées en transit parce que le protocole est mal déployé, ou faiblement configuré, ou les certificats sont invalides, or les certificats ne sont pas fiables, ou la connexion peut être dégradée plus faible ou en communication non chiffrée"
+    CR8:
+      card: "8"
+      desc: "Eoin peut accéder à des données métier stockées (par exemple des mots de passe, des identifiants de session, des informations à caractère personnel, des données de titulaires de cartes bancaires) parce qu'elles ne sont pas chiffrées ou hachées de façon sécurisée"
+    CR9:
+      card: "9"
+      desc: "Andy peut contourner les fonctions de génération de nombres aléatoires, de génération de GUID aléatoires, de hachage ou de chiffrement parce qu'elles ont été construites par lui-même, ou sont faibles"
+    CR0:
+      card: "10"
+      desc: "Susanna peut casser la cryptographie utilisée parce qu'elle n'est pas suffisamment robuste vis-à-vis du niveau de protection requis, ou elle n'est pas suffisamment robuste vis-à-vis de la quantité d'effort que l'attaquant est prêt à faire"
+    CRJ:
+      card: "J"
+      desc: "Justin peut lire des informations d'identification pour l'accès à des ressources internes ou externes, des services ou d'autres systèmes parce qu'elles sont stockées dans un format non chiffré, ou intégrées dans le code source"
+    CRQ:
+      card: "Q"
+      desc: "Randolph peut accéder ou prédire les secrets cryptographiques maîtres"
+    CRK:
+      card: "K"
+      desc: "Dan peut influencer ou altérer le code/les routines de cryptographie (chiffrement, hachage, signatures numériques, nombre aléatoire et génération de GUID) et peut ainsi les contourner"
+  CO: "Cornucopia"
+    COA:
+      card: "A"
+      desc: "Vous avez inventé une nouvelle attaque de n'importe quel type"
+      misc: "Apprenez-en plus à propos de la sécurité applicative dans les guides gratuits OWASP : Exigences, Développement, Revue de Code et Tests, antisèches, et framework Open Software Assurance Maturity Model"
+    CO2:
+      card: "2"
+      desc: "Lee peut contourner les contrôles applicatifs car des fonctions à risque ont été utilisées à la place d'alternatives plus sûres, ou il y a des erreurs de conversion de type, ou car l'application n'est pas fiable lorsqu'une ressource externe est indisponible, ou il y a des situations d'accès concurrent, des problèmes d'initialisation ou d'allocation de ressources, ou des débordements peuvent survenir"
+    CO3:
+      card: "3"
+      desc: "Andrew peut accéder au code source, ou décompiler, ou accéder à la logique métier pour comprendre le fonctionnement de l'application et les secrets qu'elle contient"
+    CO4:
+      card: "4"
+      desc: "Keith peut effectuer une action et il n'est pas possible de la lui attribuer."
+    CO5:
+      card: "5"
+      desc: "Larry peut influencer la confiance que les autres parties, y compris les utilisateurs, ont dans l'application, ou abuser de cette confiance ailleurs (par exemple dans une autre application)."
+    CO6:
+      card: "6"
+      desc: "Aaron peut contourner les contrôles parce que la gestion des erreurs/exceptions est absente, ou est implémentée de manière incohérente ou partielle, ou ne refuse pas l'accès par défaut (c'est-à-dire que les erreurs doivent mettre fin à l'accès/à l'exécution), ou dépend de la gestion par un autre service ou système."
+    CO7:
+      card: "7"
+      desc: "Les actions de Mwengu ne peuvent pas être étudiées parce qu'il n'y a pas d'enregistrement des événements de sécurité correctement horodaté, parce qu'il n'y a pas de piste d'audit complète, ou parce que ceux-ci peuvent être modifiées ou supprimées par Mwengu, ou parce qu'il n'y a pas de service de centralisation des traces"
+    CO8:
+      card: "8"
+      desc: "David peut contourner l'application pour accéder aux données car l'infrastructure réseau et hôte et les services / applications de support n'ont pas été configurés de manière sécurisée, ni la configuration périodiquement vérifiée, ni les correctifs de sécurité appliqués, ou les données sont stockées localement, ou les données ne sont pas physiquement protégées"
+    CO9:
+      card: "9"
+      desc: "Michael peut contourner l'application pour accéder aux données car les outils ou les interfaces d'administration ne sont pas sécurisés de manière adéquate"
+    CO0:
+      card: "10"
+      desc: "Xavier peut contourner les contrôles de l'application car les frameworks, les bibliothèques et les composants applicatifs contiennent du code malveillant ou des vulnérabilités (par exemple: interne, sur étagère, externalisé, open source, externe)"
+    COJ:
+      ard: "J"
+      desc: "Roman peut exploiter l'application car elle a été compilée à l'aide d'outils obsolètes ou sa configuration n'est pas sécurisée par défaut, ou les informations de sécurité n'ont pas été documentées et transmises aux équipes opérationnelles"
+    COQ:
+      card: "Q"
+      desc: "Jim peut entreprendre des actions malveillantes, non légitimes, sans détection et réponse en temps réel par l'application"
+    COK:
+      card: "K"
+      desc: "Gareth peut utiliser l'application pour refuser le service à certains ou à tous ses utilisateurs"
+  WC: "Joker"
+    JOA:
+      desc: "Alice peut utiliser l'application pour attaquer les systèmes et les données des utilisateurs"
+      misc: "Avez-vous déjà songé à devenir membre OWASP? Tous les outils, conseils et réunions locales sont gratuits pour tous, mais l'adhésion individuelle aide à soutenir le travail de l'OWASP"
+    JOB:
+      desc: "Bob peut influencer, altérer ou affecter l'application de façon à ce qu'elle ne soit plus conforme aux exigences légales, réglementaires, contractuelles ou autres exigences de l'organisation"
+      misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans les applications de formation de la VM gratuite OWASP Broken Web Applications, ou en utilisant les défis en ligne du Hacking Lab gratuit"

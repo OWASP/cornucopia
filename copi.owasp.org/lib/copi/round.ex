@@ -7,7 +7,7 @@ defmodule Copi.Round do
     #field :game_id, :id
     field :winner, :id
 
-    belongs_to :game, Copi.Game
+    belongs_to :game, Copi.Cornucopia.Game, type: Ecto.ULID
     has_many :dealt_cards, Copi.DealtCard, foreign_key: :played_in_round
 
     timestamps()

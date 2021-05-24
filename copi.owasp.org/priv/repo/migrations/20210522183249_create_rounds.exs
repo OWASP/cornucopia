@@ -4,8 +4,8 @@ defmodule Copi.Repo.Migrations.CreateRounds do
   def change do
     create table(:rounds) do
       add :number, :integer
-      add :game_id, references(:games, on_delete: :nothing)
-      add :winner, references(:players, on_delete: :nothing)
+      add :game_id, references(:games, type: :uuid, on_delete: :nothing)
+      add :winner, references(:players, type: :uuid, on_delete: :nothing)
 
       timestamps()
     end

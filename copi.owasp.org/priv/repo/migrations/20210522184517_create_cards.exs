@@ -5,7 +5,7 @@ defmodule Copi.Repo.Migrations.CreateCards do
     create table(:cards) do
       add :category, :string
       add :value, :string
-      add :description, :string
+      add :description, :text
       add :misc, :string
       add :edition, :string
       add :language, :string
