@@ -1,0 +1,59 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :category %>
+  <%= text_input f, :category %>
+  <%= error_tag f, :category %>
+
+  <%= label f, :value %>
+  <%= text_input f, :value %>
+  <%= error_tag f, :value %>
+
+  <%= label f, :description %>
+  <%= textarea f, :description %>
+  <%= error_tag f, :description %>
+
+  <%= label f, :misc %>
+  <%= text_input f, :misc %>
+  <%= error_tag f, :misc %>
+
+  <%= label f, :edition %>
+  <%= text_input f, :edition %>
+  <%= error_tag f, :edition %>
+
+  <%= label f, :language %>
+  <%= text_input f, :language %>
+  <%= error_tag f, :language %>
+
+  <%= label f, :version %>
+  <%= text_input f, :version %>
+  <%= error_tag f, :version %>
+
+  <%= label f, :owasp_scp %>
+  <%= multiple_select f, :owasp_scp, ["Option 1": "option1", "Option 2": "option2"] %>
+  <%= error_tag f, :owasp_scp %>
+
+  <%= label f, :owasp_asvs %>
+  <%= multiple_select f, :owasp_asvs, ["Option 1": "option1", "Option 2": "option2"] %>
+  <%= error_tag f, :owasp_asvs %>
+
+  <%= label f, :owasp_appsensor %>
+  <%= multiple_select f, :owasp_appsensor, ["Option 1": "option1", "Option 2": "option2"] %>
+  <%= error_tag f, :owasp_appsensor %>
+
+  <%= label f, :capec %>
+  <%= multiple_select f, :capec, ["Option 1": "option1", "Option 2": "option2"] %>
+  <%= error_tag f, :capec %>
+
+  <%= label f, :safecode %>
+  <%= multiple_select f, :safecode, ["Option 1": "option1", "Option 2": "option2"] %>
+  <%= error_tag f, :safecode %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

@@ -48,7 +48,8 @@ defmodule Copi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ecto_ulid, "~> 0.3.0"},
-      {:yaml_elixir, "~> 2.7.0"}
+      {:yaml_elixir, "~> 2.7.0"},
+      {:slugify, "~> 1.3.1"},
     ]
   end
 

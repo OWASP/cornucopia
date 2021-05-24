@@ -27,6 +27,8 @@ defmodule CopiWeb.Router do
     live "/games/:game_id/players/new", PlayerLive.Index, :new
 
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
+
+    resources "/cards", CardController
   end
 
   # Other scopes may use custom stacks.

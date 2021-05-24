@@ -88,3 +88,116 @@
   display: block;
   margin: -1rem 0 2rem;
 }
+
+.button a {
+  color: #fff;
+}
+
+.card {
+  float: left;
+  display: flex;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 200px;
+  height: 293px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+ Helvetica, Arial, sans-serif,
+ "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+.card .left-bar {
+  float: left;
+  height: 100%;
+  width: 40px;
+  padding: 16px 8px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  color: #fff;
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.data-validation-encoding .left-bar {
+  background-color: #92929b
+}
+
+.data-validation-encoding .value {
+  color: #92929b
+}
+
+.authentication .left-bar {
+  background-color:#70a6be
+}
+
+.authentication .value {
+  color:#70a6be
+}
+
+.authorization .left-bar {
+  background-color: #c6b571
+}
+
+.authorization .value {
+  color: #c6b571
+}
+
+.session-management .left-bar {
+  background-color:#9ecd90
+}
+
+.session-management .value {
+  color:#9ecd90
+}
+
+.cryptography .left-bar {
+  background-color:#9792c7
+}
+
+.cryptography .value {
+  color:#9792c7
+}
+
+.cornucopia .left-bar {
+  background-color:#405369
+}
+
+.cornucopia .value {
+  color:#405369
+}
+
+.jokers .left-bar {
+  background-color:#fddaad
+}
+
+.jokers .value {
+  color:#fddaad
+}
+
+.card .main-content {
+  height: 100%;
+  padding: 10px 8px;
+}
+
+.card p.value {
+  margin: 0 0 8px 0;
+  text-align: right;
+  vertical-align: top;
+  font-size: 40px;
+  line-height: 40px;
+  font-weight:bold
+}
+
+.card p.description {
+  margin: 0;
+  font-size: 8.5px;
+  font-weight: 400;
+}

@@ -1,0 +1,68 @@
+<h1>Show Card</h1>
+
+<ul>
+
+  <li>
+    <strong>Category:</strong>
+    <%= @card.category %>
+  </li>
+
+  <li>
+    <strong>Value:</strong>
+    <%= @card.value %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @card.description %>
+  </li>
+
+  <li>
+    <strong>Misc:</strong>
+    <%= @card.misc %>
+  </li>
+
+  <li>
+    <strong>Edition:</strong>
+    <%= @card.edition %>
+  </li>
+
+  <li>
+    <strong>Language:</strong>
+    <%= @card.language %>
+  </li>
+
+  <li>
+    <strong>Version:</strong>
+    <%= @card.version %>
+  </li>
+
+  <li>
+    <strong>Owasp scp:</strong>
+    <%= @card.owasp_scp %>
+  </li>
+
+  <li>
+    <strong>Owasp asvs:</strong>
+    <%= @card.owasp_asvs %>
+  </li>
+
+  <li>
+    <strong>Owasp appsensor:</strong>
+    <%= @card.owasp_appsensor %>
+  </li>
+
+  <li>
+    <strong>Capec:</strong>
+    <%= @card.capec %>
+  </li>
+
+  <li>
+    <strong>Safecode:</strong>
+    <%= @card.safecode %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.card_path(@conn, :edit, @card) %></span>
+<span><%= link "Back", to: Routes.card_path(@conn, :index) %></span>

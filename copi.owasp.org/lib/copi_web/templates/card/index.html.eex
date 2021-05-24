@@ -1,0 +1,60 @@
+<h1>Cornucopia Card Deck</h1>
+
+<%= for card <- @cards do %>
+
+<div class="card <%= Slug.slugify card.category %>">
+  <div class="left-bar"><%= card.category %></div>
+  <div class="main-content">
+    <p class="value"><%= card.value %></p>
+    <p class="description"><%= card.description %></p>
+  </div>
+</div>
+
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Value</th>
+      <th>Description</th>
+      <th>Misc</th>
+      <th>Edition</th>
+      <th>Language</th>
+      <th>Version</th>
+      <th>Owasp scp</th>
+      <th>Owasp asvs</th>
+      <th>Owasp appsensor</th>
+      <th>Capec</th>
+      <th>Safecode</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for card <- @cards do %>
+    <tr>
+      <td><%= card.category %></td>
+      <td><%= card.value %></td>
+      <td><%= card.description %></td>
+      <td><%= card.misc %></td>
+      <td><%= card.edition %></td>
+      <td><%= card.language %></td>
+      <td><%= card.version %></td>
+      <td><%= card.owasp_scp %></td>
+      <td><%= card.owasp_asvs %></td>
+      <td><%= card.owasp_appsensor %></td>
+      <td><%= card.capec %></td>
+      <td><%= card.safecode %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.card_path(@conn, :show, card) %></span>
+        <span><%= link "Edit", to: Routes.card_path(@conn, :edit, card) %></span>
+        <span><%= link "Delete", to: Routes.card_path(@conn, :delete, card), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Card", to: Routes.card_path(@conn, :new) %></span>
