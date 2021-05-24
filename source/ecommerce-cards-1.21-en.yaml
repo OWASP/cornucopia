@@ -6,7 +6,7 @@ meta:
   version: "1.21"
 data:
   VE:
-    suit: "Data validation & encoding"
+    suit: "Data Validation & Encoding"
     VEA:
       card: "A"
       desc: "You have invented a new attack against Data Validation and Encoding"
@@ -90,7 +90,7 @@ data:
       card: "K"
       desc: "Olga can influence or alter authentication code/routines so they can be bypassed"
   SM:
-    suit: "Session management"
+    suit: "Session Management"
     SMA:
       card: "A"
       desc: "You have invented a new attack against Session Management"
