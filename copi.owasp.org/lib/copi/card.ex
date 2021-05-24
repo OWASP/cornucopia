@@ -3,16 +3,16 @@ defmodule Copi.Card do
   import Ecto.Changeset
 
   schema "cards" do
-    field :capec, :string
+    field :capec, {:array, :string}
     field :category, :string
     field :description, :string
     field :edition, :string
     field :language, :string
     field :misc, :string
-    field :owasp_appsensor, :string
-    field :owasp_asvs, :string
-    field :owasp_scp, :string
-    field :safecode, :string
+    field :owasp_appsensor, {:array, :string}
+    field :owasp_asvs, {:array, :string}
+    field :owasp_scp, {:array, :string}
+    field :safecode, {:array, :string}
     field :value, :string
     field :version, :string
 

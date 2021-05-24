@@ -37,3 +37,23 @@ case YamlElixir.read_from_file(path) do
       end
     end
 end
+
+path = Path.join(File.cwd!(), "priv/repo/cornucopia/ecommerce-mappings-1.2.yaml")
+
+case YamlElixir.read_from_file(path) do
+  {:ok, cards} ->
+    for suit <- cards["suits"] do
+      for card <- suit["cards"] do
+        this_card = Repo.get_by!(Card, [category: suit["name"], value: card["value"]])
+
+        this_card = Ecto.Changeset.change this_card,
+                      owasp_scp: Enum.map(card["owasp_scp"], fn x -> to_string(x) end),
+                      owasp_asvs: Enum.map(card["owasp_asvs"], fn x -> to_string(x) end),
+                      owasp_appsensor: Enum.map(card["owasp_appsensor"], fn x -> to_string(x) end),
+                      capec: Enum.map(card["capec"], fn x -> to_string(x) end),
+                      safecode:  Enum.map(card["safecode"], fn x -> to_string(x) end)
+
+        Repo.update this_card
+      end
+    end
+end

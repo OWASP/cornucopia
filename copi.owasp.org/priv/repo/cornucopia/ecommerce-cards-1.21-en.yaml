@@ -255,7 +255,7 @@ suits:
     value: "10"
     desc: "Xavier can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
   -
-    ard: "J"
+    value: "J"
     desc: "Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented and passed on to operational teams"
   -
     value: "Q"

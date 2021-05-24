@@ -10,11 +10,11 @@ defmodule Copi.Repo.Migrations.CreateCards do
       add :edition, :string
       add :language, :string
       add :version, :string
-      add :owasp_scp, :string
-      add :owasp_asvs, :string
-      add :owasp_appsensor, :string
-      add :capec, :string
-      add :safecode, :string
+      add :owasp_scp, {:array, :string}
+      add :owasp_asvs, {:array, :string}
+      add :owasp_appsensor, {:array, :string}
+      add :capec, {:array, :string}
+      add :safecode, {:array, :string}
 
       timestamps()
     end
