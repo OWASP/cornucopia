@@ -265,3 +265,5 @@ data:
     JOB:
       desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
       misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
+  Common:
+    NoCard: "No Tarjeta"
