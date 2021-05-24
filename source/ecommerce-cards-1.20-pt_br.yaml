@@ -2,7 +2,7 @@
 meta:
   edition: "ecommerce"
   component: "cards"
-  language: "PR-BR"
+  language: "PT-BR"
   version: "1.20"
 data:
   VE:
@@ -265,3 +265,5 @@ data:
     JOB:
       desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
       misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do aplicativo de treinamento OWASP Broken Web Applications VM, ou usando o desafio online Hacking Lab. Ambos são gratuitos"
+  Common:
+    NoCard: "Nenhum Cartão"
