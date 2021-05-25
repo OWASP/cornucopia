@@ -34,7 +34,7 @@ def main() -> None:
     if len(yaml_files) == 0:
         msg = "Error. No language files found in folder: " + SCRIPT_PATH + "/../source"
         print(msg)
-        # log this error
+        ## Todo: log this error
         exit()
 
     for file in yaml_files:
@@ -43,158 +43,73 @@ def main() -> None:
             data = yaml.safe_load(f)
         # if args.debug: print("--- loaded data successfully. " + str(file) + " with " + str(len(data)) + " keys: " + str(data.keys()))
 
-        if (data["meta"]["language"].lower() == args.language.lower()) or (data["meta"]["language"].lower() == "en" and args.language.lower() == "template"):
+        if (data["meta"]["language"].lower() == args.language.lower()) \
+            or (data["meta"]["language"].lower() == "en" and args.language.lower() == "template"):
             lang_out_data = data
-            if args.debug: print("--- found output language file: " + os.path.split(file)[1])
-        if data["meta"]["language"].lower() == "en":
-            lang_template_data = data
-            if args.debug: print("--- found template language file: " + os.path.split(file)[1])
+            if args.debug: print("--- found source language file: " + os.path.split(file)[1])
+            break
 
-    if "data" not in list(lang_out_data) or "data" not in list(lang_template_data):
+    ## If no language found
+    if "data" not in list(lang_out_data): # or "data" not in list(lang_template_data):
         msg = "Error. Could not find the `data` tag in one- or both of the language files."
         print(msg)
         # log this error
         exit()
-        
-    ## Loop through language files and build up a find-replace dict
-    data = {}
-    card_numbers = ['a','2','3','4','5','6','7','8','9','j','q','k']
-    for suit, suit_out in lang_out_data["data"].items():
-        if suit in lang_template_data["data"].keys():
-            suit_find = lang_template_data["data"][suit]
-            for tag, tag_out in suit_out.items():
-                if tag in suit_find.keys():
-                    tag_find = suit_find[tag]
-                    if isinstance(tag_out, dict):
-                        for tag_sub, tag_sub_out in tag_out.items():
-                            if tag_sub in tag_find.keys():
-                                tag_sub_find = tag_find[tag_sub]
-                                #Do not need replace if input and output are the same
-                                if tag_sub_find.lower() not in card_numbers:
-                                    if args.language == "template":
-                                        # use placeholders in the form ${PlaceholderName}
-                                        key_name =  "_".join([suit,tag,tag_sub])
-                                        data[tag_sub_find] = '${{{}}}'.format(key_name)
-                                    else:
-                                        if tag_sub_find != tag_sub_out:
-                                            data[tag_sub_find] = tag_sub_out
-                    else:
-                        #Do not need replace if input and output are the same
-                        if tag_find.lower() not in card_numbers:
-                            if args.language == "template":
-                                # use placeholders in the form ${PlaceholderName}
-                                key_name =  "_".join([suit,tag])
-                                data[tag_find] = '${{{}}}'.format(key_name)
-                            else:
-                                #Do not need replace if input and output are the same
-                                if tag_find != tag_out:
-                                    data[tag_find] = tag_out
 
-    # if args.debug: print("--- data keys()[:5]:\n* " + "\n* ".join(list(data.keys())[:5]))
-    
+
+    ## Get the dict of replacement data
+    data = get_replacement_dict(lang_out_data)
+
+
     ## Work with docx file
-    # template_doc = SCRIPT_PATH + "/../../owasp_cornucopia_v1.21.docx"
-    template_doc = SCRIPT_PATH + "/../../www-project-cornucopia/assets/files/ecommerce/EN/OWASP-Cornucopia-Ecommerce_Website-EN-1v20.docx"
-    if args.language == "template":
-        output_file_name = SCRIPT_PATH + "/../../template.docx" #Ignore type for now + args.output
+    if args.inputfile == "":
+        template_doc = SCRIPT_PATH + "/../source/owasp_cornucopia_template_v1.21.docx"
     else:
-        output_file_name = SCRIPT_PATH + "/../../test_output.docx" #Ignore type for now + args.output
+        template_doc = args.inputfile
+    template_doc = os.path.normpath(template_doc)
 
+    ## If outputting a template
+    if args.language == "template":
+        if args.outputfile in ["", None]:
+            output_file = SCRIPT_PATH + "/../source/owasp_cornucopia_template.docx"
+        else:
+            output_file = args.outputfile
+    else:
+        if args.debug: print("--- args.outputfile = " + str(args.outputfile))
+        if args.outputfile in ["", None]:
+            output_file = template_doc.replace("_template_", "_"+args.language+"_").replace("source","output")
+        else:
+            output_file = args.outputfile
+    output_file = os.path.normpath(output_file)
+
+
+    ## Get the input (template) document
     doc = docx.Document(template_doc)
+
+    ## Replace the text with the data from the source translation file
     docx_replace(doc, data)
-    doc.save(output_file_name)
-    
+
+    ## Check output path exists
+    if not os.path.exists(os.path.dirname(output_file)):
+        os.mkdir(os.path.dirname(output_file))
+
+    ## Save the output file
+    doc.save(output_file)
+    print("New file saved: " + str(output_file))
+
+
 
 
 ##
 # function: docx_replace()
 # Credits: github/adejones
 # URL: https://gist.github.com/adejones/a6d42984f66ea9990d78974531863bee
-# Credits: github/GastonDonnet
-# URL: https://gist.github.com/GastonDonnet/cff16e773a6245e536f957bd8b5eba6c
+# Modified and simplified by GDBryant
 ##
-def docx_replace(doc, data):
-    def replace_inline(key_name, val, inline):
-        # Replace strings and retain the same style.
-        # The text to be replaced can be split over several runs so
-        # search through, identify which runs need to have text replaced
-        # then replace the text in those identified
-        started = False
-        key_index = 0
-        # found_runs is a list of (inline index, index of match, length of match)
-        found_runs = list()
-        found_all = False
-        replace_done = False
-        for i in range(len(inline)):
-    
-            # case 1: found in single run so short circuit the replace
-            # if key_name in inline[i].text and not started:
-            if key_name == inline[i].text and not started:
-                found_runs.append((i, inline[i].text.find(key_name), len(key_name)))
-                text = inline[i].text.replace(key_name, str(val))
-                inline[i].text = text
-                replace_done = True
-                found_all = True
-                break
-    
-            # if key_name[key_index] not in inline[i].text and not started:
-            if key_name[key_index] != inline[i].text and not started:
-                # keep looking ...
-                continue
-    
-            # case 2: search for partial text, find first run
-            # if key_name[key_index] in inline[i].text and inline[i].text[-1] in key_name and not started:
-            if key_name[key_index] == inline[i].text and inline[i].text[-1] in key_name and not started:
-                # check sequence
-                start_index = inline[i].text.find(key_name[key_index])
-                check_length = len(inline[i].text)
-                for text_index in range(start_index, check_length):
-                    if inline[i].text[text_index] != key_name[key_index]:
-                        # no match so must be false positive
-                        break
-                if key_index == 0:
-                    started = True
-                chars_found = check_length - start_index
-                key_index += chars_found
-                found_runs.append((i, start_index, chars_found))
-                if key_index != len(key_name):
-                    continue
-                else:
-                    # found all chars in key_name
-                    found_all = True
-                    break
-    
-            # case 2: search for partial text, find subsequent run
-            # if key_name[key_index] in inline[i].text and started and not found_all:
-            if key_name[key_index] == inline[i].text and started and not found_all:
-                # check sequence
-                chars_found = 0
-                check_length = min(len(inline[i].text), len(key_name[key_index]) - key_index)
-                for text_index in range(0, check_length):
-                    if inline[i].text[text_index] == key_name[key_index]:
-                        key_index += 1
-                        chars_found += 1
-                    else:
-                        break
-                # no match so must be end
-                found_runs.append((i, 0, chars_found))
-                if key_index == len(key_name):
-                    found_all = True
-                    break
-    
-        if found_all and not replace_done:
-            for i, item in enumerate(found_runs):
-                index, start, length = [t for t in item]
-                if i == 0:
-                    text = inline[index].text.replace(inline[index].text[start:start + length], str(val))
-                    inline[index].text = text
-                else:
-                    text = inline[index].text.replace(inline[index].text[start:start + length], '')
-                    inline[index].text = text
-            if key_name in p.text:
-                replace_inline(key_name, val, inline)
+def docx_replace(doc, data) -> docx.Document:
+    if args.debug: print("--- starting docx_replace")
 
-    ## Now start the work
+    ## Get all the paragraphs together
     paragraphs = list(doc.paragraphs)
     for t in doc.tables:
         for row in t.rows:
@@ -203,12 +118,52 @@ def docx_replace(doc, data):
                     paragraphs.append(paragraph)
     for p in paragraphs:
         for key, val in data.items():
-            # key_name = '${{{}}}'.format(key) # use placeholders in the form ${PlaceholderName}
             key_name = key
-            if key_name in p.text:
-                inline = p.runs
-                replace_inline(key_name, val, inline)    
+            # key_name = '${{{}}}'.format(key) # use placeholders in the form ${PlaceholderName}
+            runs_text = "".join(r.text for r in p.runs)
+            if key_name in runs_text:
+                if args.debug and key.find("VE_VEA_misc") != -1: print("--- found key: " + str(key) + ", \n--- runs = " + str("; ".join(r.text for r in p.runs)), ", val = " + str(val))
+                t = runs_text.replace(key_name, val)
+                # if args.debug and key == "VE_VEA_misc": print("--- new text = " + str(t))
+                p.clear()
+                p.add_run(str(t))
+                if args.debug and key.find("VE_VEA_misc") != -1: print("--- runs after = " + str("; ".join(r.text for r in p.runs)))
+    if args.debug: print("--- finished replacing text")
 
+
+def get_replacement_dict(lang_out_data) -> dict:
+    ## Loop through language files and build up a find-replace dict
+    data = {}
+    ## Stuff to ignore
+    card_numbers = ['a','2','3','4','5','6','7','8','9', '10', '0', 'j','q','k']
+    for suit, suit_out in lang_out_data["data"].items():
+        for card, card_out in suit_out.items():
+            if isinstance(card_out, dict):
+                for tag, tag_out in card_out.items():
+                    ## Ignore the card numbers/letters
+                    if tag_out.lower() not in card_numbers:
+                        ## Create template placeholders in the form ${suit_card_tag}.
+                        key_name =  "_".join([suit,card,tag])
+                        if args.language == "template":
+                            data[tag_out] = '${{{}}}'.format(key_name)
+                            # data[tag_out] = key_name
+                        else:
+                            data['${{{}}}'.format(key_name)] = tag_out
+                            # data[key_name] = tag_out
+                            # if args.debug and suit == "VE": print("--- tag = " + '${{{}}}'.format(key_name) + ", out [:20] = " + tag_out[:20])
+            else:
+                ## Ignore the card numbers/letters
+                if card_out.lower() not in card_numbers:
+                    ## Create template placeholders in the form ${suit_card}
+                    key_name =  "_".join([suit,card])
+                    if args.language == "template":
+                        data[card_out] = '${{{}}}'.format(key_name)
+                        # data[card_out] = key_name
+                    else:
+                        data['${{{}}}'.format(key_name)] = card_out
+                        # data[key_name] = card_out
+    if args.debug: print("--- data keys()[:5]:\n* " + "\n* ".join(list(data.keys())[:5]))
+    return data
 
 
 def get_docx(docx_file) -> docx.Document:
@@ -243,14 +198,7 @@ def parse_arguments(args: List[str]) -> argparse.Namespace:
         "--inputfile",
         type=str,
         default="",
-        help="Input file to use. ",
-    )
-    parser.add_argument(
-        "-ift",
-        "--inputfiletype",
-        type=str,
-        default="docxtemplate",
-        help="Input file is of type: [`docxtemplate`,`docx`]. Default = docxtemplate",
+        help="Input (template) file to use. ",
     )
     parser.add_argument(
         "-of",
@@ -267,13 +215,15 @@ def parse_arguments(args: List[str]) -> argparse.Namespace:
         default="docx",
         help="Output format to produce. Default = docx",
     )
+    # group = parser.add_mutually_exclusive_group(required=False)
+    # group.add_argument(
     parser.add_argument(
         "-l",
         "--language",
         type=str,
-        # choices=["en", "es", "fr", "pr-br"],
+        # choices=["en", "es", "fr", "pt-br"],
         default="en",
-        help="Output language to produce. [`en`, `es`, `fr`, `pr-br`, `template`] (template will generate a new template file using english input)",
+        help="Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] (template will attempt to create a template from the english input file - replacing strings with the template lookup codes",
     )
     parser.add_argument(
         "-d",
