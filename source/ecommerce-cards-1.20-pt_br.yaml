@@ -2,10 +2,11 @@
 meta:
   edition: "ecommerce"
   component: "cards"
-  language: "PR-BR"
+  language: "PT-BR"
   version: "1.20"
 data:
-  VE: "Validação de Dados de Entrada e Codificação de Dados de Saída"
+  VE:
+    suit: "Validação de Dados de Entrada e Codificação de Dados de Saída"
     VEA:
       card: "A"
       desc: "Você inventou um novo ataque contra a Validação de Dados de Entrada e Codificação de Dados de Saída"
@@ -46,7 +47,8 @@ data:
     VEK:
       card: "K"
       desc: "Gabe consegue injetar dados num interpretador no lado do servidor (ex: SQL, comandos para o sistema operacional, Xpath, Server JavaScript, SMTP) porque uma interface parametrizada não foi usada ou não foi implementada corretamente"
-  AT: "Autenticação e Gerenciamento de Credenciais"
+  AT:
+    suit: "Autenticação e Gerenciamento de Credenciais"
     ATA:
       card: "A"
       desc: "Você inventou um novo ataque contra a Autenticação e Gerenciamento de Credenciais"
@@ -87,7 +89,8 @@ data:
     ATK:
       card: "K"
       desc: "Olga consegue influenciar ou alterar o código ou a rotina de autenticação e com isto ignorar a autenticação"
-  SM: "Gerenciamento de Sessões"
+  SM:
+    suit: "Gerenciamento de Sessões"
     SMA:
       card: "A"
       desc: "Você inventou um novo ataque contra o Gerenciamento de Sessões"
@@ -128,7 +131,8 @@ data:
     SMK:
       card: "K"
       desc: "Peter consegue ignorar o controle de gerenciamento de sessão porque este foi autoconstruído e/ou é fraco, ao invés de ter sido usado a estrutura padrão de um framework ou um modulo testado e aprovado"
-  AZ: "Controle de Acessos"
+  AZ:
+    suit: "Controle de Acessos"
     AZA:
       card: "A"
       desc: "Você inventou um novo ataque contra Controle de Acessos"
@@ -169,7 +173,8 @@ data:
     AZK:
       card: "K"
       desc: "Ryan consegue influenciar ou alterar controles de acesso e permissões e consegue ignora-los"
-  CR: "Práticas de Criptografia"
+  CR:
+    suit: "Práticas de Criptografia"
     CRA:
       card: "A"
       desc: "Você inventou um novo ataque contra Práticas de Criptografia"
@@ -210,7 +215,8 @@ data:
     CRK:
       card: "K"
       desc: "Dan consegue influenciar ou alternar as rotinas/codificações de criptografia (encriptação, hashing, assinaturas digitais, números aleatórios e geração de GUID) e consegue ignorá-los também"
-  CO: "Cornucopia"
+  CO:
+    suit: "Cornucopia"
     COA:
       card: "A"
       desc: "Você inventou um novo ataque de qualquer tipo"
@@ -251,10 +257,13 @@ data:
     COK:
       card: "K"
       desc: "Gareth pode utilizar o aplicativo para negar o serviço a alguns ou a todos os usuários"
-  WC: "Joker"
+  WC:
+    suit: "Joker"
     JOA:
       desc: "Alice consegue utilizar a aplicação para realizar ataques a dados e usuários do sistema"
       misc: "Você pensou em se tornar membro individual da OWASP? Todas as ferramentas, guias e reuniões locais são gratuitas para todos, mas ser um membro individual apoia o trabalho da OWASP"
     JOB:
       desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
       misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do aplicativo de treinamento OWASP Broken Web Applications VM, ou usando o desafio online Hacking Lab. Ambos são gratuitos"
+  Common:
+    NoCard: "Nenhum Cartão"
