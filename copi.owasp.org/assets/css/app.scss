@@ -118,8 +118,6 @@ $cornucopia-color: #405369;
 $wildcard-color: #fccd8f;
 
 .card {
-  
-
 
   .left-bar {
     float: left;
@@ -205,31 +203,31 @@ $wildcard-color: #fccd8f;
 
 .J, .Q, .K {
 
-  &.authentication .main-content {
+  &.authentication {
     background-color: scale-color($authentication-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.authorization .main-content {
+  &.authorization {
     background-color: scale-color($authorization-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.data-validation-encoding .main-content {
+  &.data-validation-encoding {
     background-color: scale-color($data-validation-encoding-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.session-management .main-content {
+  &.session-management {
     background-color: scale-color($session-management-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.cryptography .main-content {
+  &.cryptography {
     background-color: scale-color($cryptography-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.cornucopia .main-content {
+  &.cornucopia {
     background-color: scale-color($cornucopia-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.wildcard .main-content {
+  &.wildcard {
     background-color: scale-color($wildcard-color, $lightness: 75%, $saturation:  -20%);
   }
 
