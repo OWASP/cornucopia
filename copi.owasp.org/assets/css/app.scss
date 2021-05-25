@@ -109,78 +109,91 @@
  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+$authentication-color: #70a6be;
+$authorization-color: #c6b571;
+$data-validation-encoding-color: #92929b;
+$session-management-color: #9ecd90;
+$cryptography-color: #9792c7;
+$cornucopia-color: #405369;
+$wildcard-color: #fccd8f;
 
-.card .left-bar {
-  float: left;
-  height: 100%;
-  width: 32px;
-  padding: 16px 8px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+.card {
+  
 
-  color: #fff;
-  writing-mode: vertical-rl;
-  text-transform: uppercase;
-  font-size: 13px;
-  font-weight: 600;
-  text-align: left;
-  line-height: 14px;
+
+  .left-bar {
+    float: left;
+    height: 100%;
+    width: 32px;
+    padding: 16px 8px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  
+    color: #fff;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    line-height: 14px;
+  }
 }
 
+
 .data-validation-encoding .left-bar {
-  background-color: #92929b
+  background-color: $data-validation-encoding-color;
 }
 
 .data-validation-encoding .value {
-  color: #92929b
+  color: $data-validation-encoding-color;
 }
 
 .authentication .left-bar {
-  background-color:#70a6be
+  background-color: $authentication-color;
 }
 
 .authentication .value {
-  color:#70a6be
+  color: $authentication-color;
 }
 
 .authorization .left-bar {
-  background-color: #c6b571
+  background-color: $authorization-color;
 }
 
 .authorization .value {
-  color: #c6b571
+  color: $authorization-color;
 }
 
 .session-management .left-bar {
-  background-color:#9ecd90
+  background-color:$session-management-color;
 }
 
 .session-management .value {
-  color:#9ecd90
+  color:$session-management-color;
 }
 
 .cryptography .left-bar {
-  background-color:#9792c7
+  background-color: $cryptography-color;
 }
 
 .cryptography .value {
-  color:#9792c7
+  color: $cryptography-color;
 }
 
 .cornucopia .left-bar {
-  background-color:#405369
+  background-color:$cornucopia-color;
 }
 
 .cornucopia .value {
-  color:#405369
+  color:$cornucopia-color;
 }
 
-.jokers .left-bar {
-  background-color:#fddaad
+.wild-card .left-bar {
+  background-color:$wildcard-color;
 }
 
-.jokers .value {
-  color:#fddaad
+.wild-card .value {
+  color:$wildcard-color;
 }
 
 .card .main-content {
@@ -188,6 +201,39 @@
   height: 100%;
   padding: 11px 9px;
   color:#333;
+}
+
+.J, .Q, .K {
+
+  &.authentication .main-content {
+    background-color: scale-color($authentication-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.authorization .main-content {
+    background-color: scale-color($authorization-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.data-validation-encoding .main-content {
+    background-color: scale-color($data-validation-encoding-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.session-management .main-content {
+    background-color: scale-color($session-management-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.cryptography .main-content {
+    background-color: scale-color($cryptography-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.cornucopia .main-content {
+    background-color: scale-color($cornucopia-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.wildcard .main-content {
+    background-color: scale-color($wildcard-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  p.value { color: #fff; }
 }
 
 .card p.value {
@@ -203,7 +249,16 @@
   flex-grow: 1;
   margin: 0;
   font-size: 8.5px;
-  font-weight: 500;
+  font-weight: 00;
+  letter-spacing: -0.05em;
+  line-height: 1.4em;
+}
+
+.card p.misc {
+  margin-top: 60px;
+  font-size: 11px;
+  font-weight: 400;
+  font-style: italic;
   letter-spacing: -0.05em;
   line-height: 1.4em;
 }

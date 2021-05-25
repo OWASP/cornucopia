@@ -2,11 +2,17 @@
 
 <%= for card <- @cards do %>
 
-<div class="card <%= Slug.slugify card.category %>">
+<div class="card <%= card.value %> <%= Slug.slugify card.category %>">
   <div class="left-bar"><%= card.category %></div>
   <div class="main-content">
     <p class="value"><%= card.value %></p>
     <p class="description"><%= card.description %></p>
+
+    <%= if card.value == "A" do %>
+
+    <p class="misc"><%= card.misc %></p>
+
+    <% else %>
 
     <dl class="mappings">
       <dt>OWASP SCP</dt>
@@ -36,9 +42,7 @@
       <dt>CAPEC</dt>
       <dd>
         <%= if card.capec != nil and Enum.count(card.capec) > 0 do %>
-          <%= for capec <- card.capec do %>
-            <a href="https://capec.mitre.org/data/definitions/<%= capec %>.html"><%= capec %></a>
-          <% end %>
+          <%= format_capec(card.capec) %>
         <% else %>
           &ndash;
         <% end %>
@@ -52,6 +56,8 @@
         <% end %>
       </dd>
     </dl>
+
+    <% end %>
   </div>
 </div>
 
