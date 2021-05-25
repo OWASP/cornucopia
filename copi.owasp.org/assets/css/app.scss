@@ -113,7 +113,7 @@
 .card .left-bar {
   float: left;
   height: 100%;
-  width: 40px;
+  width: 32px;
   padding: 16px 8px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -121,9 +121,10 @@
   color: #fff;
   writing-mode: vertical-rl;
   text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   text-align: left;
+  line-height: 14px;
 }
 
 .data-validation-encoding .left-bar {
@@ -183,21 +184,47 @@
 }
 
 .card .main-content {
+  position: relative;
   height: 100%;
-  padding: 10px 8px;
+  padding: 11px 9px;
+  color:#333;
 }
 
 .card p.value {
   margin: 0 0 8px 0;
   text-align: right;
   vertical-align: top;
-  font-size: 40px;
+  font-size: 46px;
   line-height: 40px;
   font-weight:bold
 }
 
 .card p.description {
+  flex-grow: 1;
   margin: 0;
   font-size: 8.5px;
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.4em;
+}
+
+.card .mappings {
+  position: absolute;
+  bottom: 0;
+  width: 85%;
+  margin: 0 0 16px 0;
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.2em;
+
+  dt {
+    margin: 0;
+  }
+
+  dd {
+    
+    margin: 0 0 1px 0;
+    border-bottom: solid 1px rgb(128, 127, 127);
+  }
 }

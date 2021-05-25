@@ -264,7 +264,7 @@ suits:
     value: "K"
     desc: "Gareth can utilize the application to deny service to some or all of its users"
 -
-  name: "Jokers"
+  name: "Wild Card"
   cards:
   -
     value: "Joker"
