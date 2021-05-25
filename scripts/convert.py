@@ -39,7 +39,7 @@ def main() -> None:
 
     for file in yaml_files:
         # if args.debug: print("--- file = " + str(file))
-        with open(file, "r") as f:
+        with open(file, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
         # if args.debug: print("--- loaded data successfully. " + str(file) + " with " + str(len(data)) + " keys: " + str(data.keys()))
 
@@ -118,17 +118,15 @@ def docx_replace(doc, data) -> docx.Document:
                     paragraphs.append(paragraph)
     for p in paragraphs:
         for key, val in data.items():
-            key_name = key
-            # key_name = '${{{}}}'.format(key) # use placeholders in the form ${PlaceholderName}
             runs_text = "".join(r.text for r in p.runs)
-            if key_name in runs_text:
-                if args.debug and key.find("VE_VEA_misc") != -1: print("--- found key: " + str(key) + ", \n--- runs = " + str("; ".join(r.text for r in p.runs)), ", val = " + str(val))
-                t = runs_text.replace(key_name, val)
-                # if args.debug and key == "VE_VEA_misc": print("--- new text = " + str(t))
-                p.clear()
-                p.add_run(str(t))
-                if args.debug and key.find("VE_VEA_misc") != -1: print("--- runs after = " + str("; ".join(r.text for r in p.runs)))
-    if args.debug: print("--- finished replacing text")
+            if key in runs_text:
+                if args.debug and key.find("VE_VE0_desc") != -1: print("--- found key: " + str(key) + ", \n--- runs before = [" + str(",".join(r.text for r in p.runs)), "] val = " + str(val))
+                t = runs_text.replace(key, val)
+                for i,r in enumerate(p.runs):
+                    p.runs[i].text = ""
+                p.runs[0].text = str(t).strip()
+                if args.debug and key.find("VE_VE0_desc") != -1: print("--- runs after = " + str("; ".join(r.text for r in p.runs)))
+    if args.debug: print("--- finished replacing text in doc")
 
 
 def get_replacement_dict(lang_out_data) -> dict:
@@ -146,10 +144,8 @@ def get_replacement_dict(lang_out_data) -> dict:
                         key_name =  "_".join([suit,card,tag])
                         if args.language == "template":
                             data[tag_out] = '${{{}}}'.format(key_name)
-                            # data[tag_out] = key_name
                         else:
                             data['${{{}}}'.format(key_name)] = tag_out
-                            # data[key_name] = tag_out
                             # if args.debug and suit == "VE": print("--- tag = " + '${{{}}}'.format(key_name) + ", out [:20] = " + tag_out[:20])
             else:
                 ## Ignore the card numbers/letters
@@ -158,36 +154,26 @@ def get_replacement_dict(lang_out_data) -> dict:
                     key_name =  "_".join([suit,card])
                     if args.language == "template":
                         data[card_out] = '${{{}}}'.format(key_name)
-                        # data[card_out] = key_name
                     else:
                         data['${{{}}}'.format(key_name)] = card_out
-                        # data[key_name] = card_out
-    if args.debug: print("--- data keys()[:5]:\n* " + "\n* ".join(list(data.keys())[:5]))
+    if args.debug: print("--- data keys()[:10]:\n* " + "\n* ".join(list(data.keys())[:10]))
     return data
 
 
 def get_docx(docx_file) -> docx.Document:
     if os.path.isfile(docx_file):
-        return docx.Document(docx_file)
+        return docx.Document(docx_file, encoding="utf-8")
     else:
         print("Error. Could not find file at: " + str(docx_file))
         return docx.Document()
 
-
-# def get_idml_package(idml_file) -> idml.IDMLPackage:
-#     if os.path.isfile(idml_file):
-#         idml_package = idml.IDMLPackage(idml_file)
-#         # if args.debug: print("--- idml_package stories [:5] = " + str(idml_package.spreads[:5]))
-#         return idml_package
-#     else:
-#         return None
 
 def get_yaml_files(path) -> List[str]:
     yaml_files = []
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*.yaml"):
             yaml_files.append(os.path.join(root, filename))
-    if args.debug: print("--- yaml_files = " + str(yaml_files))
+    if args.debug: print("--- found yaml files:\n* " + str("\n* ".join(yaml_files)))
     return yaml_files
 
 
