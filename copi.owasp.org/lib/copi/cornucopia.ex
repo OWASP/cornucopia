@@ -212,7 +212,7 @@ defmodule Copi.Cornucopia do
 
   """
   def list_cards do
-    Repo.all(Card)
+    Card |> order_by(:id) |> Repo.all()
   end
 
   @doc """

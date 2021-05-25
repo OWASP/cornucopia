@@ -2,18 +2,35 @@
 
 <h2><%= @game.name %></h2>
 
-<%= if @game.started_at do %>
-  <h3>Started: <%= @game.started_at %></h3>
-<% else %>
-  <h3><%= gettext "Waiting for players..." %></h3>
-<% end %>
+<p><em>Share the link to this page with everyone who wants to join or watch. You'll be able to start the game once at least 3 players have joined.</em></p>
 
-<%= for player <- @game.players do %>
-  <p><%= player.name %></p>
-<% end %>
-
-<p>Share the link to this game with everyone who wants to join or watch.</p>
+<button phx-click="start_game" <%= if Enum.count(@game.players) <= 3 do %>disabled<% end %>>Start Game</button>
+<p></p>
+<h3>Waiting for players</h3>
 
 <span><%= live_patch gettext("Join game as a player"), to: Routes.player_index_path(@socket, :new, @game.id), class: "button" %></span>
 
 <p><strong>Don't share the full link once you've joined as a player or they'll join as you.</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Joined At</th>
+      <th>Cards</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody id="players">
+    <%= for player <- @game.players do %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.inserted_at %></td>
+        <td><%= Enum.count(player.dealt_cards) %></td>
+        <td>0</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="loader">Loading...</div>

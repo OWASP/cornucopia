@@ -42,14 +42,22 @@ defmodule CopiWeb.PlayerLive.FormComponent do
 
   defp save_player(socket, :new, player_params) do
     case Cornucopia.create_player(player_params) do
-      {:ok, _player} ->
+      {:ok, player} ->
+
+        {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
+        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
         {:noreply,
          socket
-         |> put_flash(:info, "Player created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> assign(:game, updated_game)
+         |> push_redirect(to: Routes.player_show_path(socket, :show, player.game_id, player))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+
+  def topic(game_id) do
+    "game:#{game_id}"
   end
 end
