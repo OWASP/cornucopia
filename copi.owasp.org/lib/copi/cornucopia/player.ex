@@ -9,9 +9,16 @@ defmodule Copi.Cornucopia.Player do
     field :name, :string
 
     belongs_to :game, Copi.Cornucopia.Game, type: Ecto.ULID
-    has_many :dealt_cards, Copi.DealtCard
+    has_many :dealt_cards, Copi.Cornucopia.DealtCard
 
     timestamps()
+  end
+
+  def find(id) do
+    case Copi.Repo.get(Copi.Cornucopia.Player, id) do
+      nil -> {:error, :not_found}
+      player -> {:ok, player |> Copi.Repo.preload(dealt_cards: [:card])}
+    end
   end
 
   @doc false

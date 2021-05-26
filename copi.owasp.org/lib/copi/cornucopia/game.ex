@@ -18,14 +18,14 @@ defmodule Copi.Cornucopia.Game do
   def find(id) do
     case Copi.Repo.get(Copi.Cornucopia.Game, id) do
       nil -> {:error, :not_found}
-      game -> {:ok, game |> Copi.Repo.preload(players: [:dealt_cards])}
+      game -> {:ok, game |> Copi.Repo.preload(players: [dealt_cards: [:card]])}
     end
   end
 
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :started_at, :finished_at])
     |> validate_required([:name], message: "No really, give your game session a name")
   end
 end

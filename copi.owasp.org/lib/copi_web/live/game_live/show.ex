@@ -2,6 +2,7 @@ defmodule CopiWeb.GameLive.Show do
   use CopiWeb, :live_view
 
   alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.DealtCard
 
   @impl true
   def mount(_params, _session, socket) do
@@ -29,7 +30,41 @@ defmodule CopiWeb.GameLive.Show do
     end
   end
 
+  @impl true
+  def handle_event("start_game", _, socket) do
+    game = socket.assigns.game
+
+    if game.started_at do
+      # Do nothing, game's already started
+    else
+      all_cards = Copi.Cornucopia.list_cards_shuffled()
+      players = game.players
+
+      all_cards
+      |> Enum.with_index
+      |> Enum.each(fn({card, i}) ->
+        Copi.Repo.insert! %DealtCard{
+          card_id: card.id,
+          player_id: Enum.fetch!(players, rem(i, Enum.count(players))).id
+        }
+      end)
+
+      Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+
+      {:ok, updated_game} = Game.find(game.id)
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+      {:noreply, assign(socket, :game, updated_game)}
+    end
+  end
+
   def topic(game_id) do
     "game:#{game_id}"
+  end
+
+  def format_capec(refs) do
+    refs
+    |> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
+    |> Enum.intersperse(", ")
   end
 end

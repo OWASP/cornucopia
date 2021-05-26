@@ -1,13 +1,12 @@
-defmodule Copi.DealtCard do
+defmodule Copi.Cornucopia.DealtCard do
   use Ecto.Schema
   import Ecto.Changeset
 
   schema "dealt_cards" do
-    field :card_id, :id
-    #field :player_id, :id
     field :played_in_round, :id
 
     belongs_to :player, Copi.Cornucopia.Player, type: Ecto.ULID
+    belongs_to :card, Copi.Cornucopia.Card
 
     timestamps()
   end

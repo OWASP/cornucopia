@@ -215,6 +215,10 @@ defmodule Copi.Cornucopia do
     Card |> order_by(:id) |> Repo.all()
   end
 
+  def list_cards_shuffled do
+    Card |> order_by(fragment("RANDOM()")) |> Repo.all()
+  end
+
   @doc """
   Gets a single card.
 

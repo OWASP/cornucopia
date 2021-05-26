@@ -2,15 +2,22 @@
 
 <h2><%= @game.name %></h2>
 
-<p><em>Share the link to this page with everyone who wants to join or watch. You'll be able to start the game once at least 3 players have joined.</em></p>
+<%= if @game.started_at do %>
+<h3>Game started at <%= @game.started_at %></h3>
+<% else %>
+<p><em>Share the link to this page with everyone who wants to join or watch.
+You'll be able to start the game once at least 3 players have joined.
+No more players will be allowed to join once the game is started.</em></p>
 
-<button phx-click="start_game" <%= if Enum.count(@game.players) <= 3 do %>disabled<% end %>>Start Game</button>
+<button phx-click="start_game" <%= if Enum.count(@game.players) < 3 do %>disabled<% end %>>Start Game</button>
 <p></p>
 <h3>Waiting for players</h3>
 
 <span><%= live_patch gettext("Join game as a player"), to: Routes.player_index_path(@socket, :new, @game.id), class: "button" %></span>
 
 <p><strong>Don't share the full link once you've joined as a player or they'll join as you.</strong></p>
+
+<% end %>
 
 <table>
   <thead>
@@ -33,4 +40,6 @@
   </tbody>
 </table>
 
+<%= if @game.started_at == nil do %>
 <div class="loader">Loading...</div>
+<% end %>
