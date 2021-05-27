@@ -11,14 +11,10 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
+    IO.puts "In handle_params"
     with {:ok, player} <- Player.find(player_id) do
-      with {:ok, game} <- Game.find(player.game_id) do
-        CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:page_title, page_title(socket.assigns.live_action)) |> assign(:game, game) |> assign(:player, player)}
-      else
-        {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
-      end
+      CopiWeb.Endpoint.subscribe(topic(player.game_id))
+      {:noreply, socket |> assign(:page_title, page_title(socket.assigns.live_action)) |> assign(:player, player)}
     else
       {:error, _reason} ->
         {:ok, redirect(socket, to: "/error")}
@@ -27,11 +23,12 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_info(%{topic: message_topic, event: "game:updated", payload: game}, socket) do
-    cond do
-      topic(game.id) == message_topic ->
-        {:noreply, socket |> assign(:game, Copi.Repo.preload(game, players: :dealt_cards))}
-      true ->
-        {:noreply, socket}
+    IO.puts "In handle_info"
+    with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
+      {:noreply, socket |> assign(:player, updated_player)}
+    else
+      {:error, _reason} ->
+        {:ok, redirect(socket, to: "/error")}
     end
   end
 

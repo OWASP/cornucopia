@@ -2,10 +2,10 @@
 
 <h1>Cornucopia Session</h1>
 
-<h2><%= @game.name %></h2>
+<h2><%= @player.game.name %></h2>
 
-<%= if @game.started_at do %>
-<h3>Game started at <%= @game.started_at %></h3>
+<%= if @player.game.started_at do %>
+<h3>Game started at <%= @player.game.started_at %></h3>
 <% end %>
 
 <div id="table"></div>

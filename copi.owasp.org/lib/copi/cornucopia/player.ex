@@ -17,7 +17,7 @@ defmodule Copi.Cornucopia.Player do
   def find(id) do
     case Copi.Repo.get(Copi.Cornucopia.Player, id) do
       nil -> {:error, :not_found}
-      player -> {:ok, player |> Copi.Repo.preload(dealt_cards: [:card])}
+      player -> {:ok, player |> Copi.Repo.preload([:game, dealt_cards: [:card]])}
     end
   end
 
