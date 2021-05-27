@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :copi, CopiWeb.Endpoint,
-  url: [host: "copi.securedelivery.io/", port: 443, scheme: "https"],
+  url: [host: "copi.securedelivery.io", port: 443, scheme: "https"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

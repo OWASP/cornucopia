@@ -12,10 +12,7 @@ defmodule CopiWeb.Endpoint do
 
   socket "/socket", CopiWeb.UserSocket,
     websocket: true,
-    longpoll: false,
-    check_origin: [
-      "https//copi.securedelivery.io"
-    ]
+    longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
