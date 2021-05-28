@@ -5,7 +5,8 @@ meta:
   language: "EN"
   version: "1.21"
 data:
-  VE: "Data validation & encoding"
+  VE:
+    suit: "Data Validation & Encoding"
     VEA:
       card: "A"
       desc: "You have invented a new attack against Data Validation and Encoding"
@@ -46,7 +47,8 @@ data:
     VEK:
       card: "K"
       desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly"
-  AT: "Authentication"
+  AT:
+    suit: "Authentication"
     ATA:
       card: "A"
       desc: "You have invented a new attack against Authentication"
@@ -87,7 +89,8 @@ data:
     ATK:
       card: "K"
       desc: "Olga can influence or alter authentication code/routines so they can be bypassed"
-  SM: "Session management"
+  SM:
+    suit: "Session Management"
     SMA:
       card: "A"
       desc: "You have invented a new attack against Session Management"
@@ -128,7 +131,8 @@ data:
     SMK:
       card: "K"
       desc: "Peter can bypass the session management controls because they have been self-built and/or are weak, instead of using a standard framework or approved tested module"
-  AZ: "Authorization"
+  AZ:
+    suit: "Authorization"
     AZA:
       card: "A"
       desc: "You have invented a new attack against Authorization"
@@ -169,7 +173,8 @@ data:
     AZK:
       card: "K"
       desc: "Ryan can influence or alter authorization controls and permissions, and can therefore bypass them"
-  CR: "Cryptography"
+  CR:
+    suit: "Cryptography"
     CRA:
       card: "A"
       desc: "You have invented a new attack against Cryptography"
@@ -210,7 +215,8 @@ data:
     CRK:
       card: "K"
       desc: "Dan can influence or alter cryptography code/routines (encryption, hashing, digital signatures, random number and GUID generation) and can therefore bypass them"
-  CO: "Cornucopia"
+  CO:
+    suit: "Cornucopia"
     COA:
       card: "A"
       desc: "You have invented a new attack of any type"
@@ -251,10 +257,15 @@ data:
     COK:
       card: "K"
       desc: "Gareth can utilize the application to deny service to some or all of its users"
-  WC: "Joker"
+  WC:
+    suit: "Wild Card"
     JOA:
+      card: "Joker"
       desc: "Alice can utilize the application to attack users' systems and data"
       misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
     JOB:
+      card: "Joker"
       desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
       misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab"
+  Common:
+    NoCard: "No Card"
