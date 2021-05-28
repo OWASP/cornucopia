@@ -5,256 +5,263 @@ meta:
   language: "ES"
   version: "1.20"
 data:
-  VE: "Validación de datos & Codificación"
-    VEA:
-      card: "A"
-      desc: "Has creado un nuevo ataque contra validación de datos y codificación"
-      misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
-    VE2:
-      card: "2"
-      desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente"
-    VE3:
-      card: "3"
-      desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
-    VE4:
-      card: "4"
-      desc: "Dave puede ingresar datos o nombres maliciosos en campos porque actualmente no hay una revisión o monitoreo a nivel de usuario o proceso"
-    VE5:
-      card: "5"
-      desc: "Jee puede eludir las rutinas de codificación centralizadas, ya que dichas rutinas no son usadas por todos los activos o se están utilizando codificaciones incorrectas"
-    VE6:
-      card: "6"
-      desc: "Jason puede eludir las rutinas de validación centralizadas, ya que no se utilizan en todas las entradas"
-    VE7:
-      card: "7"
-      desc: "Jan puede crear cargas especiales para frustrar la validación de entrada, porque el conjunto de caracteres no es especificado/aplicado, o los datos se codifican varias veces, o los datos no están completamente transformados en el mismo formato que la aplicación usa (por ejemplo, canonicalización) antes de ser validados, o las variables no están configuradas de manera robusta"
-    VE8:
-      card: "8"
-      desc: "Sarah puede pasar por alto las rutinas de sanitización centralizadas ya que no están siendo utilizadas exhaustivamente"
-    VE9:
-      card: "9"
-      desc: "Shamun puede pasar por alto los checks de validaciones de entrada o salida porque los fallos en las validaciones no son rechazados y/o sanitizados"
-    VE0:
-      card: "10"
-      desc: "Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (por ejemplo, datos definibles por el usuario, manipulación de datos almacenados localmente, alteración de los datos del estado en un dispositivo cliente, falta de verificación de identidad durante la validación de datos, como Darío puede pretender ser Colin)"
-    VEJ:
-      card: "J"
-      desc: "Dennis tiene control sobre la validación de entrada, la validación de salida o código de codificación de salida o rutinas para que puedan ser evitados"
-    VEQ:
-      card: "Q"
-      desc: "Geoff puede inyectar datos en el lado del cliente o en el dispositivo porque no se está utilizando una interfaz parametrizada, o no ha sido implementada correctamente, o los datos no han sido codificados correctamente, o no hay una política restrictiva en el código o los datos incluidos"
-    VEK:
-      card: "K"
-      desc: "Gabe puede inyectar datos en un intérprete del lado del servidor (por ejemplo, SQL, comandos del sistema operativo, Xpath, servidor JavaScript, SMTP) porque no se está utilizando una interfaz parametrizada fuertemente tipificada o no se ha implementado correctamente"
-  AT: "Autenticación"
-    ATA:
-      card: "A"
-      desc: "Usted tiene inventado un nuevo ataque contra la autenticación"
-      misc: "Leer mas sobre este tema en OWASP's free Authentication Cheat Sheet"
-    AT2:
-      card: "2"
-      desc: "James puede emprender funciones de autenticación sin que el usuario real se dé cuenta alguna vez de lo ocurrido (por ejemplo, intento de logueo, inicio de sesión con credenciales robadas, restablecimiento de la contraseña)"
-    AT3:
-      card: "3"
-      desc: "Muhammad puede obtener una contraseña de usuario u otros secretos tales como preguntas de seguridad, por observación durante el ingreso o desde el cache, o desde la memoria, o en tránsito, o leyéndolo de alguna ubicación desprotegida, o porque es ampliamente conocido, o porque nunca caduca, o porque el usuario no puede cambiar su propia contraseña"
-    AT4:
-      card: "4"
-      desc: "Sebastien puede fácilmente identificar nombres de usuario o puede enumerarlos"
-    AT5:
-      card: "5"
-      desc: "Javier puede usar credenciales por defecto, de prueba o fáciles de adivinar para autenticar, o puede usar una cuenta antigua o una cuenta no necesaria para la aplicación"
-    AT6:
-      card: "6"
-      desc: "Sven puede reutilizar contraseñas temporales porque el usuario no realizó el cambio en el primer logueo. o tiene demasiado tiempo y no tiene vencimiento, o no usa un método correcto de entrega  (por ejemplo, publicación, aplicación móvil, SMS)"
-    AT7:
-      card: "7"
-      desc: "Cecilia puede usar ataques de  fuerza bruta y ataques de diccionario sin límites contra uno o muchas cuentas, o estos ataques se simplifican debido a una complejidad insuficiente, longitud, caducidad inadecuada y reutilización de requisitos para las contraseñas"
-    AT8:
-      card: "8"
-      desc: "Kate puede pasar por alto la autenticación porque ésta no falla de forma segura (es decir, por defecto permite acceso no autenticado)"
-    AT9:
-      card: "9"
-      desc: "Claudia puede utilizar Funciones más críticas porque los requisitos de autenticación son demasiado débiles (por ejemplo, no usa autenticación robusta como el doble factor), o no hay requisitos de re-autenticación para éstos"
-    AT0:
-      card: "10"
-      desc: "Pravin puede omitir el control de autenticación porque no se está utilizando un módulo/framework/servicio de autenticación centralizado, estándar, testeado, probado y aprobado, separado del recurso solicitado"
-    ATJ:
-      card: "J"
-      desc: "Mark puede acceder a los recursos o servicios porque no hay requisitos de autenticación, o fue asumido erróneamente que la autentificación sería realizada por algún otro sistema o realizada en alguna acción previa"
-    ATQ:
-      card: "Q"
-      desc: "Jaime puede omitir la autenticación porque no se aplica con igual rigor para todos los tipos de funcionalidad de autenticación (por ejemplo, registro, cambio de contraseña, recuperación de contraseña, cierre de sesión, administración) o en todas las versiones / canales (por ejemplo, sitio web móvil, aplicación móvil, sitio web completo, API, call center)"
-    ATK:
-      card: "K"
-      desc: "Olga puede influir o alterar el código o rutina de autenticación o puede evitarlo"
-  SM: "Gestión de Sesión"
-    SMA:
-      card: "A"
-      desc: "Has inventado un nuevo ataque contra la gestión de sesión"
-      misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
-    SM2:
-      card: "2"
-      desc: "William tiene el control sobre la generación de identificadores de sesión"
-    SM3:
-      card: "3"
-      desc: "Ryan puede usar una sola cuenta en paralelo ya que permite sesiones concurrentes"
-    SM4:
-      card: "4"
-      desc: "Alison puede configurar cookies de identificación de sesión en otra aplicación web porque el dominio y la ruta no están suficientemente restringidos"
-    SM5:
-      card: "5"
-      desc: "John puede predecir o adivinar los identificadores de sesión porque no se cambian cuando se modifica la función del usuario (por ejemplo, la autenticación previa y posterior) y cuando se cambia entre comunicaciones no cifradas y cifradas, o no son lo suficientemente largas y aleatorias, o no se cambian periódicamente"
-    SM6:
-      card: "6"
-      desc: "Gary puede hacerse cargo de la sesión de un usuario porque hay un tiempo de espera de inactividad largo o nulo, un límite de tiempo de sesión general largo o nulo, o la misma sesión puede usarse desde más de un dispositivo / ubicación"
-    SM7:
-      card: "7"
-      desc: "Casey puede utilizar la sesión de Adam después de que haya terminado, porque no hay una función de cierre de sesión, o no puede cerrar sesión fácilmente, o el cierre de sesión no termina la sesión correctamente"
-    SM8:
-      card: "8"
-      desc: "Matt puede abusar de sesiones largas porque la aplicación no requiere una autenticación periódica para verificar si los privilegios han cambiado"
-    SM9:
-      card: "9"
-      desc: "Ivan puede robar identificadores de sesión porque se envían a través de canales inseguros, se registran, se revelan en mensajes de error, se incluyen en URL o son accesibles de manera innecesaria mediante el código que el atacante puede influir o modificar"
-    SM0:
-      card: "10"
-      desc: "Marce puede forjar solicitudes porque las sesiones por sesión o por acciones más críticas, los tokens aleatorios fuertes (es decir, los tokens anti-CSRF) o similares no se utilizan para acciones que cambian de estado"
-    SMJ:
-      card: "J"
-      desc: "Jeff puede reenviar una interacción de repetición idéntica (por ejemplo, solicitud HTTP, señal, pulsación de botón) y se acepta, no se rechaza"
-    SMQ:
-      card: "Q"
-      desc: "Salim puede omitir la administración de sesiones porque no se aplica de manera integral y coherente en toda la aplicación"
-    SMK:
-      card: "K"
-      desc: "Peter puede omitir los controles de administración de la sesión porque se construyeron por sí mismos y / o son débiles, en lugar de usar un marco estándar o un módulo aprobado aprobado"
-  AZ: "Autorización"
-    AZA:
-      card: "A"
-      desc: "Has inventado un nuevo ataque contra la Autorización"
-      misc: "Read more about this topic in OWASP's Development and Testing Guides"
-    AZ2:
-      card: "2"
-      desc: "Tim puede influir a donde se envía o reenvía la data"
-    AZ3:
-      card: "3"
-      desc: "Christian puede acceder a información, a la que no debería tener permiso, a través de otro mecanismo al que sí tiene permiso (por ejemplo, indexador de búsqueda, registrador, reporte), o porque está en caché, o guardada por más tiempo del necesario u otro medio de fuga de información"
-    AZ4:
-      card: "4"
-      desc: "Kelly puede eludir los controles de autorización porque no fallan de forma segura (es decir, por defecto permiten el acceso)"
-    AZ5:
-      card: "5"
-      desc: "Chad puede acceder a los recursos (incluidos servicios, procesos, AJAX, Flash, video, imágenes, documentos, archivos temporales, datos de sesión, propiedades del sistema, datos de configuración, registro de configuración, logs) a los que no debería poder acceder debido a la falta de autorización, o debido a privilegios excesivos(por ejemplo, no usar el principio de menor privilegio)"
-    AZ6:
-      card: "6"
-      desc: "Eduardo puede acceder a los datos a los que él no tiene permiso, incluso aunque tiene permiso para formulario / página / URL / punto de entrada"
-    AZ7:
-      card: "7"
-      desc: "Yuanjing puede acceder a funciones de la aplicación, objetos o propiedades a las que él no está autorizado para acceder"
-    AZ8:
-      card: "8"
-      desc: "Tom puede omitir las reglas de negocios al alterar la secuencia o flujo de proceso habitual, o realizar el proceso en el orden incorrecto, o manipular los valores de fecha y hora utilizados por la aplicación, o usar características válidas para propósitos no intencionados, o manipulando los datos de control"
-    AZ9:
-      card: "9"
-      desc: "Mike puede hacer uso incorrecto de una aplicación al usar una función válida demasiado rápido, o con demasiada frecuencia, o de otra forma sin intención, o que consuma los recursos de la aplicación, o cause condiciones de carrera, o sobreutilice una función"
-    AZ0:
-      card: "10"
-      desc: "Richard puede eludir los controles de autorización centralizados ya que no están siendo utilizados exhaustivamente en todas las interacciones"
-    AZJ:
-      card: "J"
-      desc: "Dinis puede acceder a la información de configuración de seguridad, o listas de control de acceso"
-    AZQ:
-      card: "Q"
-      desc: "Christopher puede inyectar un comando para que la aplicación se ejecute con un nivel de privilegios más alto"
-    AZK:
-      card: "K"
-      desc: "Ryan puede influir o alterar controles y permisos de autorización, y por ende puede "
-  CR: "Criptografía"
-    CRA:
-      card: "A"
-      desc: "Has inventado un nuevo ataque contra la Criptografía"
-      misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
-    CR2:
-      card: "2"
-      desc: "Kyun puede acceder a los datos porque ha sido ofuscado en lugar de utilizar una función criptográfica aprobada"
-    CR3:
-      card: "3"
-      desc: "Axel puede modificar datos transitorios o permanentes (almacenados o en tránsito), código fuente, actualizaciones / parches o datos de configuración, ya que no están sujetos a verificación de integridad"
-    CR4:
-      card: "4"
-      desc: "Paulo puede acceder a datos en tránsito que no están encriptados, incluso aunque el canal está encriptado"
-    CR5:
-      card: "5"
-      desc: "Kyle puede pasar por alto controles criptográficos porque estos no fallan de forma segura (es decir, por defecto no protegen)"
-    CR6:
-      card: "6"
-      desc: "Romain puede leer y modificar datos sin cifrar en la memoria o en tránsito (por ejemplo, secretos criptográficos, credenciales, identificadores de sesión, datos personales y comerciales), en uso o en comunicaciones dentro de la aplicación, o entre la aplicación y los usuarios, o entre la aplicación y sistemas externos"
-    CR7:
-      card: "7"
-      desc: "Gunter puede interceptar o modificar datos encriptados en tránsito porque el protocolo está mal implementado o configurado de manera débil, o los certificados no son válidos, los certificados no son confiables o la conexión puede degradarse a una comunicación más débil o no encriptada"
-    CR8:
-      card: "8"
-      desc: "Eoin puede acceder a los datos comerciales almacenados (por ejemplo, contraseñas, identificadores de sesión, PII, datos del titular de la tarjeta) porque no está cifrado de forma segura ni hash de forma segura"
-    CR9:
-      card: "9"
-      desc: "Andy puede omitir la generación de números aleatorios, la generación aleatoria de GUID, el hash y las funciones de cifrado porque han sido construidos por sí mismos y / o son débiles"
-    CR0:
-      card: "10"
-      desc: "Susanna puede romper la criptografía en uso porque no es lo suficientemente fuerte para el grado de protección requerido, o no lo es para la cantidad de esfuerzo que el atacante está dispuesto a hacer"
-    CRJ:
-      card: "J"
-      desc: "Justin puede leer las credenciales para acceder a recursos, servicios y otros sistemas internos o externos porque se almacenan en un formato no cifrado o se guardan en el código fuente"
-    CRQ:
-      card: "Q"
-      desc: "Randolph puede acceder o predecir los algoritmos o llaves de los secretos criptográficos"
-    CRK:
-      card: "K"
-      desc: "Dan puede influir o alterar el código / las rutinas criptográficas (cifrado, hash, firmas digitales, números aleatorios y generación de GUID) y, por lo tanto, puede omitirlos"
-  CO: "Cornucopia"
-    COA:
-      card: "A"
-      desc: "Has inventado un nuevo ataque de cualquier tipo"
-      misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
-    CO2:
-      card: "2"
-      desc: "Lee puede omitir los controles de la aplicación porque se han usado funciones de lenguaje de programación peligrosas/riesgosas en lugar de alternativas más seguras, o hay errores de conversión de tipo, o porque la aplicación no es confiable cuando un recurso externo no está disponible, o hay race conditions, o hay problemas en la inicialización/asignación de recursos, o pueden ocurrir desbordamientos"
-    CO3:
-      card: "3"
-      desc: "Andrew puede acceder al código fuente, o descompilar, o de otro modo acceder a la lógica de negocio para entender cómo la aplicación y cualquier secreto contenido funciona"
-    CO4:
-      card: "4"
-      desc: "Keith puede realizar una acción y no es posible atribuirla a él"
-    CO5:
-      card: "5"
-      desc: "Larry puede influir en la confianza que otras partes, incluidos los usuarios tienen en la aplicación, o abusar de esa confianza en otra parte (por ejemplo, en otra aplicación)"
-    CO6:
-      card: "6"
-      desc: "Aaron puede omitir los controles porque falta el manejo de errores/excepciones, o se implementa de manera inconsistente o parcial, o no niega el acceso por defecto (es decir, los errores deben terminar el acceso / ejecución), o se basan en el manejo por parte de otro servicio o sistema"
-    CO7:
-      card: "7"
-      desc: "Las acciones de Mwengu no se pueden investigar porque no hay un registro adecuado de los eventos de seguridad con una marca de tiempo adecuada, o no hay un registro de auditoría completo, o Mwengu puede modificarlas o eliminarlas, o no existe un servicio de registro centralizado"
-    CO8:
-      card: "8"
-      desc: "David puede omitir la aplicación para obtener acceso a los datos debido a que la red y la infraestructura del host, y los servicios/aplicaciones compatibles, no se han configurado de manera segura, la configuración no se verificó periódicamente ni se aplicaron parches de seguridad, o los datos se almacenaron localmente, o los datos no se guardaron protegidos físicamente"
-    CO9:
-      card: "9"
-      desc: "Michael puede pasar por alto la aplicación para acceder a los datos porque las herramientas administrativas o las interfaces administrativas no están  aseguradas adecuadamente"
-    CO0:
-      card: "10"
-      desc: "Xavier puede eludir los controles de la aplicación porque los frameworks de código, librerías y componentes contienen código malicioso o vulnerabilidades (por ejemplo, inhouse, software comercial, servicio tercerizado, de código abierto, ubicado externamente)"
-    COJ:
-      card: "J"
-      desc: "Roman puede explotar la aplicación porque fue compilada utilizando herramientas obsoletas, o su configuración no es segura por defecto, o la seguridad de la información no fue documentada y pasada a equipos operacionales"
-    COQ:
-      card: "Q"
-      desc: "Jim puede emprender acciones maliciosas, no normales sin detección y respuesta por la aplicación en tiempo real"
-    COK:
-      card: "K"
-      desc: "Gareth puede utilizar la aplicación para negar el servicio a algunos o todos sus usuarios"
-  WC: "Joker"
-    JOA:
-      desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
-      misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
-    JOB:
-      desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
-      misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
+-
+  name: "Validación de datos & Codificación"
+  -
+    card: "A"
+    desc: "Has creado un nuevo ataque contra validación de datos y codificación"
+    misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
+  -
+    card: "2"
+    desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente"
+  -
+    card: "3"
+    desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
+  -
+    card: "4"
+    desc: "Dave puede ingresar datos o nombres maliciosos en campos porque actualmente no hay una revisión o monitoreo a nivel de usuario o proceso"
+  -
+    card: "5"
+    desc: "Jee puede eludir las rutinas de codificación centralizadas, ya que dichas rutinas no son usadas por todos los activos o se están utilizando codificaciones incorrectas"
+  -
+    card: "6"
+    desc: "Jason puede eludir las rutinas de validación centralizadas, ya que no se utilizan en todas las entradas"
+  -
+    card: "7"
+    desc: "Jan puede crear cargas especiales para frustrar la validación de entrada, porque el conjunto de caracteres no es especificado/aplicado, o los datos se codifican varias veces, o los datos no están completamente transformados en el mismo formato que la aplicación usa (por ejemplo, canonicalización) antes de ser validados, o las variables no están configuradas de manera robusta"
+  -
+    card: "8"
+    desc: "Sarah puede pasar por alto las rutinas de sanitización centralizadas ya que no están siendo utilizadas exhaustivamente"
+  -
+    card: "9"
+    desc: "Shamun puede pasar por alto los checks de validaciones de entrada o salida porque los fallos en las validaciones no son rechazados y/o sanitizados"
+  -
+    card: "10"
+    desc: "Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (por ejemplo, datos definibles por el usuario, manipulación de datos almacenados localmente, alteración de los datos del estado en un dispositivo cliente, falta de verificación de identidad durante la validación de datos, como Darío puede pretender ser Colin)"
+  -
+    card: "J"
+    desc: "Dennis tiene control sobre la validación de entrada, la validación de salida o código de codificación de salida o rutinas para que puedan ser evitados"
+  -
+    card: "Q"
+    desc: "Geoff puede inyectar datos en el lado del cliente o en el dispositivo porque no se está utilizando una interfaz parametrizada, o no ha sido implementada correctamente, o los datos no han sido codificados correctamente, o no hay una política restrictiva en el código o los datos incluidos"
+  -
+    card: "K"
+    desc: "Gabe puede inyectar datos en un intérprete del lado del servidor (por ejemplo, SQL, comandos del sistema operativo, Xpath, servidor JavaScript, SMTP) porque no se está utilizando una interfaz parametrizada fuertemente tipificada o no se ha implementado correctamente"
+-
+  name: "Autenticación"
+  -
+    card: "A"
+    desc: "Usted tiene inventado un nuevo ataque contra la autenticación"
+    misc: "Leer mas sobre este tema en OWASP's free Authentication Cheat Sheet"
+  -
+    card: "2"
+    desc: "James puede emprender funciones de autenticación sin que el usuario real se dé cuenta alguna vez de lo ocurrido (por ejemplo, intento de logueo, inicio de sesión con credenciales robadas, restablecimiento de la contraseña)"
+  -
+    card: "3"
+    desc: "Muhammad puede obtener una contraseña de usuario u otros secretos tales como preguntas de seguridad, por observación durante el ingreso o desde el cache, o desde la memoria, o en tránsito, o leyéndolo de alguna ubicación desprotegida, o porque es ampliamente conocido, o porque nunca caduca, o porque el usuario no puede cambiar su propia contraseña"
+  -
+    card: "4"
+    desc: "Sebastien puede fácilmente identificar nombres de usuario o puede enumerarlos"
+  -
+    card: "5"
+    desc: "Javier puede usar credenciales por defecto, de prueba o fáciles de adivinar para autenticar, o puede usar una cuenta antigua o una cuenta no necesaria para la aplicación"
+  -
+    card: "6"
+    desc: "Sven puede reutilizar contraseñas temporales porque el usuario no realizó el cambio en el primer logueo. o tiene demasiado tiempo y no tiene vencimiento, o no usa un método correcto de entrega  (por ejemplo, publicación, aplicación móvil, SMS)"
+  -
+    card: "7"
+    desc: "Cecilia puede usar ataques de  fuerza bruta y ataques de diccionario sin límites contra uno o muchas cuentas, o estos ataques se simplifican debido a una complejidad insuficiente, longitud, caducidad inadecuada y reutilización de requisitos para las contraseñas"
+  -
+    card: "8"
+    desc: "Kate puede pasar por alto la autenticación porque ésta no falla de forma segura (es decir, por defecto permite acceso no autenticado)"
+  -
+    card: "9"
+    desc: "Claudia puede utilizar Funciones más críticas porque los requisitos de autenticación son demasiado débiles (por ejemplo, no usa autenticación robusta como el doble factor), o no hay requisitos de re-autenticación para éstos"
+  -
+    card: "10"
+    desc: "Pravin puede omitir el control de autenticación porque no se está utilizando un módulo/framework/servicio de autenticación centralizado, estándar, testeado, probado y aprobado, separado del recurso solicitado"
+  -
+    card: "J"
+    desc: "Mark puede acceder a los recursos o servicios porque no hay requisitos de autenticación, o fue asumido erróneamente que la autentificación sería realizada por algún otro sistema o realizada en alguna acción previa"
+  -
+    card: "Q"
+    desc: "Jaime puede omitir la autenticación porque no se aplica con igual rigor para todos los tipos de funcionalidad de autenticación (por ejemplo, registro, cambio de contraseña, recuperación de contraseña, cierre de sesión, administración) o en todas las versiones / canales (por ejemplo, sitio web móvil, aplicación móvil, sitio web completo, API, call center)"
+  -
+    card: "K"
+    desc: "Olga puede influir o alterar el código o rutina de autenticación o puede evitarlo"
+-
+  name: "Gestión de Sesión"
+  -
+    card: "A"
+    desc: "Has inventado un nuevo ataque contra la gestión de sesión"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
+  -
+    card: "2"
+    desc: "William tiene el control sobre la generación de identificadores de sesión"
+  -
+    card: "3"
+    desc: "Ryan puede usar una sola cuenta en paralelo ya que permite sesiones concurrentes"
+  -
+    card: "4"
+    desc: "Alison puede configurar cookies de identificación de sesión en otra aplicación web porque el dominio y la ruta no están suficientemente restringidos"
+  -
+    card: "5"
+    desc: "John puede predecir o adivinar los identificadores de sesión porque no se cambian cuando se modifica la función del usuario (por ejemplo, la autenticación previa y posterior) y cuando se cambia entre comunicaciones no cifradas y cifradas, o no son lo suficientemente largas y aleatorias, o no se cambian periódicamente"
+  -
+    card: "6"
+    desc: "Gary puede hacerse cargo de la sesión de un usuario porque hay un tiempo de espera de inactividad largo o nulo, un límite de tiempo de sesión general largo o nulo, o la misma sesión puede usarse desde más de un dispositivo / ubicación"
+  -
+    card: "7"
+    desc: "Casey puede utilizar la sesión de Adam después de que haya terminado, porque no hay una función de cierre de sesión, o no puede cerrar sesión fácilmente, o el cierre de sesión no termina la sesión correctamente"
+  -
+    card: "8"
+    desc: "Matt puede abusar de sesiones largas porque la aplicación no requiere una autenticación periódica para verificar si los privilegios han cambiado"
+  -
+    card: "9"
+    desc: "Ivan puede robar identificadores de sesión porque se envían a través de canales inseguros, se registran, se revelan en mensajes de error, se incluyen en URL o son accesibles de manera innecesaria mediante el código que el atacante puede influir o modificar"
+  -
+    card: "10"
+    desc: "Marce puede forjar solicitudes porque las sesiones por sesión o por acciones más críticas, los tokens aleatorios fuertes (es decir, los tokens anti-CSRF) o similares no se utilizan para acciones que cambian de estado"
+  -
+    card: "J"
+    desc: "Jeff puede reenviar una interacción de repetición idéntica (por ejemplo, solicitud HTTP, señal, pulsación de botón) y se acepta, no se rechaza"
+  -
+    card: "Q"
+    desc: "Salim puede omitir la administración de sesiones porque no se aplica de manera integral y coherente en toda la aplicación"
+  -
+    card: "K"
+    desc: "Peter puede omitir los controles de administración de la sesión porque se construyeron por sí mismos y / o son débiles, en lugar de usar un marco estándar o un módulo aprobado aprobado"
+-
+  name: "Autorización"
+  -
+    card: "A"
+    desc: "Has inventado un nuevo ataque contra la Autorización"
+    misc: "Read more about this topic in OWASP's Development and Testing Guides"
+  -
+    card: "2"
+    desc: "Tim puede influir a donde se envía o reenvía la data"
+  -
+    card: "3"
+    desc: "Christian puede acceder a información, a la que no debería tener permiso, a través de otro mecanismo al que sí tiene permiso (por ejemplo, indexador de búsqueda, registrador, reporte), o porque está en caché, o guardada por más tiempo del necesario u otro medio de fuga de información"
+  -
+    card: "4"
+    desc: "Kelly puede eludir los controles de autorización porque no fallan de forma segura (es decir, por defecto permiten el acceso)"
+  -
+    card: "5"
+    desc: "Chad puede acceder a los recursos (incluidos servicios, procesos, AJAX, Flash, video, imágenes, documentos, archivos temporales, datos de sesión, propiedades del sistema, datos de configuración, registro de configuración, logs) a los que no debería poder acceder debido a la falta de autorización, o debido a privilegios excesivos(por ejemplo, no usar el principio de menor privilegio)"
+  -
+    card: "6"
+    desc: "Eduardo puede acceder a los datos a los que él no tiene permiso, incluso aunque tiene permiso para formulario / página / URL / punto de entrada"
+  -
+    card: "7"
+    desc: "Yuanjing puede acceder a funciones de la aplicación, objetos o propiedades a las que él no está autorizado para acceder"
+  -
+    card: "8"
+    desc: "Tom puede omitir las reglas de negocios al alterar la secuencia o flujo de proceso habitual, o realizar el proceso en el orden incorrecto, o manipular los valores de fecha y hora utilizados por la aplicación, o usar características válidas para propósitos no intencionados, o manipulando los datos de control"
+  -
+    card: "9"
+    desc: "Mike puede hacer uso incorrecto de una aplicación al usar una función válida demasiado rápido, o con demasiada frecuencia, o de otra forma sin intención, o que consuma los recursos de la aplicación, o cause condiciones de carrera, o sobreutilice una función"
+  -
+    card: "10"
+    desc: "Richard puede eludir los controles de autorización centralizados ya que no están siendo utilizados exhaustivamente en todas las interacciones"
+  -
+    card: "J"
+    desc: "Dinis puede acceder a la información de configuración de seguridad, o listas de control de acceso"
+  -
+    card: "Q"
+    desc: "Christopher puede inyectar un comando para que la aplicación se ejecute con un nivel de privilegios más alto"
+  -
+    card: "K"
+    desc: "Ryan puede influir o alterar controles y permisos de autorización, y por ende puede "
+-
+  name: "Criptografía"
+  -
+    card: "A"
+    desc: "Has inventado un nuevo ataque contra la Criptografía"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
+  -
+    card: "2"
+    desc: "Kyun puede acceder a los datos porque ha sido ofuscado en lugar de utilizar una función criptográfica aprobada"
+  -
+    card: "3"
+    desc: "Axel puede modificar datos transitorios o permanentes (almacenados o en tránsito), código fuente, actualizaciones / parches o datos de configuración, ya que no están sujetos a verificación de integridad"
+  -
+    card: "4"
+    desc: "Paulo puede acceder a datos en tránsito que no están encriptados, incluso aunque el canal está encriptado"
+  -
+    card: "5"
+    desc: "Kyle puede pasar por alto controles criptográficos porque estos no fallan de forma segura (es decir, por defecto no protegen)"
+  -
+    card: "6"
+    desc: "Romain puede leer y modificar datos sin cifrar en la memoria o en tránsito (por ejemplo, secretos criptográficos, credenciales, identificadores de sesión, datos personales y comerciales), en uso o en comunicaciones dentro de la aplicación, o entre la aplicación y los usuarios, o entre la aplicación y sistemas externos"
+  -
+    card: "7"
+    desc: "Gunter puede interceptar o modificar datos encriptados en tránsito porque el protocolo está mal implementado o configurado de manera débil, o los certificados no son válidos, los certificados no son confiables o la conexión puede degradarse a una comunicación más débil o no encriptada"
+  -
+    card: "8"
+    desc: "Eoin puede acceder a los datos comerciales almacenados (por ejemplo, contraseñas, identificadores de sesión, PII, datos del titular de la tarjeta) porque no está cifrado de forma segura ni hash de forma segura"
+  -
+    card: "9"
+    desc: "Andy puede omitir la generación de números aleatorios, la generación aleatoria de GUID, el hash y las funciones de cifrado porque han sido construidos por sí mismos y / o son débiles"
+  -
+    card: "10"
+    desc: "Susanna puede romper la criptografía en uso porque no es lo suficientemente fuerte para el grado de protección requerido, o no lo es para la cantidad de esfuerzo que el atacante está dispuesto a hacer"
+  -
+    card: "J"
+    desc: "Justin puede leer las credenciales para acceder a recursos, servicios y otros sistemas internos o externos porque se almacenan en un formato no cifrado o se guardan en el código fuente"
+  -
+    card: "Q"
+    desc: "Randolph puede acceder o predecir los algoritmos o llaves de los secretos criptográficos"
+  -
+    card: "K"
+    desc: "Dan puede influir o alterar el código / las rutinas criptográficas (cifrado, hash, firmas digitales, números aleatorios y generación de GUID) y, por lo tanto, puede omitirlos"
+-
+  name: "Cornucopia"
+  -
+    card: "A"
+    desc: "Has inventado un nuevo ataque de cualquier tipo"
+    misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
+  -
+    card: "2"
+    desc: "Lee puede omitir los controles de la aplicación porque se han usado funciones de lenguaje de programación peligrosas/riesgosas en lugar de alternativas más seguras, o hay errores de conversión de tipo, o porque la aplicación no es confiable cuando un recurso externo no está disponible, o hay race conditions, o hay problemas en la inicialización/asignación de recursos, o pueden ocurrir desbordamientos"
+  -
+    card: "3"
+    desc: "Andrew puede acceder al código fuente, o descompilar, o de otro modo acceder a la lógica de negocio para entender cómo la aplicación y cualquier secreto contenido funciona"
+  -
+    card: "4"
+    desc: "Keith puede realizar una acción y no es posible atribuirla a él"
+  -
+    card: "5"
+    desc: "Larry puede influir en la confianza que otras partes, incluidos los usuarios tienen en la aplicación, o abusar de esa confianza en otra parte (por ejemplo, en otra aplicación)"
+  -
+    card: "6"
+    desc: "Aaron puede omitir los controles porque falta el manejo de errores/excepciones, o se implementa de manera inconsistente o parcial, o no niega el acceso por defecto (es decir, los errores deben terminar el acceso / ejecución), o se basan en el manejo por parte de otro servicio o sistema"
+  -
+    card: "7"
+    desc: "Las acciones de Mwengu no se pueden investigar porque no hay un registro adecuado de los eventos de seguridad con una marca de tiempo adecuada, o no hay un registro de auditoría completo, o Mwengu puede modificarlas o eliminarlas, o no existe un servicio de registro centralizado"
+  -
+    card: "8"
+    desc: "David puede omitir la aplicación para obtener acceso a los datos debido a que la red y la infraestructura del host, y los servicios/aplicaciones compatibles, no se han configurado de manera segura, la configuración no se verificó periódicamente ni se aplicaron parches de seguridad, o los datos se almacenaron localmente, o los datos no se guardaron protegidos físicamente"
+  -
+    card: "9"
+    desc: "Michael puede pasar por alto la aplicación para acceder a los datos porque las herramientas administrativas o las interfaces administrativas no están  aseguradas adecuadamente"
+  -
+    card: "10"
+    desc: "Xavier puede eludir los controles de la aplicación porque los frameworks de código, librerías y componentes contienen código malicioso o vulnerabilidades (por ejemplo, inhouse, software comercial, servicio tercerizado, de código abierto, ubicado externamente)"
+  -
+    card: "J"
+    desc: "Roman puede explotar la aplicación porque fue compilada utilizando herramientas obsoletas, o su configuración no es segura por defecto, o la seguridad de la información no fue documentada y pasada a equipos operacionales"
+  -
+    card: "Q"
+    desc: "Jim puede emprender acciones maliciosas, no normales sin detección y respuesta por la aplicación en tiempo real"
+  -
+    card: "K"
+    desc: "Gareth puede utilizar la aplicación para negar el servicio a algunos o todos sus usuarios"
+-
+  name: "Joker"
+  -
+    desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
+    misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
+  -
+    desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
+    misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
