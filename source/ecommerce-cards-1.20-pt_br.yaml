@@ -267,3 +267,4 @@ data:
       misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do aplicativo de treinamento OWASP Broken Web Applications VM, ou usando o desafio online Hacking Lab. Ambos são gratuitos"
   Common:
     NoCard: "Nenhum Cartão"
+    Title: "OWASP Cornucopia Edição de Ecomércio v1.20-PT-BR"
