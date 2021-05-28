@@ -269,3 +269,4 @@ data:
       misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab"
   Common:
     NoCard: "No Card"
+    Title: "OWASP Cornucopia Ecommerce Edition v1.21-EN"
