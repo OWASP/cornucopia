@@ -25,7 +25,7 @@ def main() -> None:
 
 
     ## Get the language files and find the output language needed
-    yaml_files = get_files_from_of_type(SCRIPT_PATH + "/../source", "yaml")
+    yaml_files = get_files_from_of_type(os.path.normpath(SCRIPT_PATH + "/../source"), "yaml")
 
     if len(yaml_files) == 0:
         msg = "Error. No language files found in folder: " + SCRIPT_PATH + "/../source"
@@ -129,32 +129,24 @@ def main() -> None:
                     if el.text.lower() == k.lower(): 
                         new_text = data2[k]
                         el.text = new_text
-                        if args.debug: print("--- found content element in file (" + str(file) + ") with text:\n--- " + str(el.text))
-
-                        # if args.debug:
-                        #     print("--- output file before update:")
-                        #     print("###################")
-                        #     print(str(ET.dump(tree)))
-                        #     print("###################")
+                        # if args.debug: print("--- found content element in file (" + str(file) + ") with text:\n--- " + str(el.text))
                         with open(file,'bw') as f:
                             f.write(ET.tostring(tree.getroot(), encoding="utf-8"))
-                        # if args.debug:
-                        #     ## Test content updated
-                        #     tree = ET.parse(file)
-                        #     print("--- output file after update:")
-                        #     print("###################")
-                        #     print(str(ET.dump(tree)))
-                        #     print("###################")
 
-        ## Todo: Zip the files and save as idml file in output folder
+        ## Zip the files and save as idml file in output folder
         if args.debug: print("--- finished replacing text in xml files. Now zipping into idml file")
         fname = os.path.split(src)[1].replace("template",str(args.language))
         zipdir(temp_output_path, output_path + "/" + fname + ".idml")
         print("new output idml file created: " + str(output_path + "/" + fname + ".idml"))
-        
+
+        ## If not debugging, delete temp folder and files
+        if not args.debug:
+            if os.path.exists(temp_output_path):
+                shutil.rmtree(temp_output_path, ignore_errors=True)
 
 
-def zipdir(path, zipfilename):
+## Zip all the files recursively from path into zipfilename (excluding root path)
+def zipdir(path, zipfilename) -> None:
     with zipfile.ZipFile(zipfilename, 'w', zipfile.ZIP_DEFLATED) as zipf: 
         for root, dirs, files in os.walk(path):
             for file in files:
@@ -195,8 +187,8 @@ def docx_replace(doc, data) -> docx.Document:
     if args.debug: print("--- finished replacing text in doc")
 
 
+## Loop through language file and build up a find-replace dict
 def get_replacement_dict(lang_out_data) -> dict:
-    ## Loop through language files and build up a find-replace dict
     data = {}
     ## Stuff to ignore
     card_numbers = ['a','2','3','4','5','6','7','8','9', '10', '0', 'j','q','k']
@@ -222,7 +214,7 @@ def get_replacement_dict(lang_out_data) -> dict:
                         data[card_out] = '${{{}}}'.format(key_name)
                     else:
                         data['${{{}}}'.format(key_name)] = card_out
-    if args.debug: print("--- data keys()[:5]:\n* [" + "]\n* [".join(l + "] : " + data[l] for l in list(data.keys())[:5]))
+    if args.debug: print("--- Translation data [key]: text. showing first 5:\n* [" + "]\n* [".join(l + "] : " + data[l] for l in list(data.keys())[:5]))
     return data
 
 
@@ -239,7 +231,7 @@ def get_files_from_of_type(path,ext) -> List[str]:
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*."+str(ext)):
             files.append(os.path.join(root, filename))
-    if args.debug: print("--- found files[:5] of type " + str(ext) + ":\n* " + str("\n* ".join(files[:5])))
+    if args.debug: print("--- found " + str(len(files)) + " files of type " + str(ext) + ". Showing first 5:\n* " + str("\n* ".join(files[:5])))
     return files
 
 
@@ -286,8 +278,8 @@ def parse_arguments(args: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "-idml",
         "--process_idml",
-        # action="store_true",
-        action="store_false",
+        action="store_true",
+        # action="store_false",
         help="Populate the idml xml files with the selected language and save the pack to the output folder as a zipped idml file. default False.",
         )
     parser.add_argument(
