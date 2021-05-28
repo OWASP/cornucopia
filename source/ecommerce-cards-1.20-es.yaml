@@ -5,7 +5,8 @@ meta:
   language: "ES"
   version: "1.20"
 data:
-  VE: "Validación de datos & Codificación"
+  VE:
+    suit: "Validación de datos & Codificación"
     VEA:
       card: "A"
       desc: "Has creado un nuevo ataque contra validación de datos y codificación"
@@ -46,7 +47,8 @@ data:
     VEK:
       card: "K"
       desc: "Gabe puede inyectar datos en un intérprete del lado del servidor (por ejemplo, SQL, comandos del sistema operativo, Xpath, servidor JavaScript, SMTP) porque no se está utilizando una interfaz parametrizada fuertemente tipificada o no se ha implementado correctamente"
-  AT: "Autenticación"
+  AT:
+    suit: "Autenticación"
     ATA:
       card: "A"
       desc: "Usted tiene inventado un nuevo ataque contra la autenticación"
@@ -87,7 +89,8 @@ data:
     ATK:
       card: "K"
       desc: "Olga puede influir o alterar el código o rutina de autenticación o puede evitarlo"
-  SM: "Gestión de Sesión"
+  SM:
+    suit: "Gestión de Sesión"
     SMA:
       card: "A"
       desc: "Has inventado un nuevo ataque contra la gestión de sesión"
@@ -128,7 +131,8 @@ data:
     SMK:
       card: "K"
       desc: "Peter puede omitir los controles de administración de la sesión porque se construyeron por sí mismos y / o son débiles, en lugar de usar un marco estándar o un módulo aprobado aprobado"
-  AZ: "Autorización"
+  AZ:
+    suit: "Autorización"
     AZA:
       card: "A"
       desc: "Has inventado un nuevo ataque contra la Autorización"
@@ -169,7 +173,8 @@ data:
     AZK:
       card: "K"
       desc: "Ryan puede influir o alterar controles y permisos de autorización, y por ende puede "
-  CR: "Criptografía"
+  CR:
+    suit: "Criptografía"
     CRA:
       card: "A"
       desc: "Has inventado un nuevo ataque contra la Criptografía"
@@ -210,7 +215,8 @@ data:
     CRK:
       card: "K"
       desc: "Dan puede influir o alterar el código / las rutinas criptográficas (cifrado, hash, firmas digitales, números aleatorios y generación de GUID) y, por lo tanto, puede omitirlos"
-  CO: "Cornucopia"
+  CO:
+    suit: "Cornucopia"
     COA:
       card: "A"
       desc: "Has inventado un nuevo ataque de cualquier tipo"
@@ -251,10 +257,13 @@ data:
     COK:
       card: "K"
       desc: "Gareth puede utilizar la aplicación para negar el servicio a algunos o todos sus usuarios"
-  WC: "Joker"
+  WC:
+    suit: "Joker"
     JOA:
       desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
       misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
     JOB:
       desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
       misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
+  Common:
+    NoCard: "No Tarjeta"
