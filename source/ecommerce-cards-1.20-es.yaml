@@ -267,3 +267,4 @@ data:
       misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
   Common:
     NoCard: "No Tarjeta"
+    Title: "OWASP Cornucopia Edición de Ecomercio v1.20-ES"
