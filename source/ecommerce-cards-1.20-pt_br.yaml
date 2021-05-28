@@ -1,0 +1,267 @@
+---
+meta:
+  edition: "ecommerce"
+  component: "cards"
+  language: "PT-BR"
+  version: "1.20"
+data:
+-
+  name: "Validação de Dados de Entrada e Codificação de Dados de Saída"
+  -
+    card: "A"
+    desc: "Você inventou um novo ataque contra a Validação de Dados de Entrada e Codificação de Dados de Saída"
+    misc: "Leia mais sobre este tópico em OWASP Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
+  -
+    card: "2"
+    desc: "Brian consegue reunir o básico de informações sobre a utilização e configuração de base de dados, lógica, codificação, além da utilização de softwares, serviços e infraestrutura nas mensagens de erro ou em mensagens de configuração, ou na presença de arquivos de  instalação (padrões ou antigos), ou em evidências de testes, ou em backups ou em exposição de código fonte"
+  -
+    card: "3"
+    desc: "Robert consegue inserir dados maliciosos pois o formato de protocolo não foi checado, ou duplicações são aceitas, ou a estrutura não está sendo verificada, ou os dados individuais não foram validados por formato, tipo, intervalo, tamanho e por uma lista de caracteres ou formatos possíveis"
+  -
+    card: "4"
+    desc: "Dave consegue inserir nomes ou dados de campos mal intencionados porque isto não está sendo verificado no contexto de cada usuário e processo"
+  -
+    card: "5"
+    desc: "Jee consegue ignorar as rotinas centralizadas de codificação de saída pois elas não estão sendo usadas em todos os lugares, ou a codificação errada está sendo usada"
+  -
+    card: "6"
+    desc: "Jason consegue ignorar as rotinas centralizadas de validação de dados de entrada pois elas não estão sendo usadas em todos os campos de entrada de dados"
+  -
+    card: "7"
+    desc: "Jan consegue carregar/enviar informações especiais visando evitar validações de campos porque o conjunto de caracteres não é especificado e aplicado, ou o dado de entrada é codificado diversas vezes, ou o dado não é totalmente convertido no mesmo formado que a aplicação usa (ex: canonicalização) antes da validação, ou as variáveis não são fortemente tipadas"
+  -
+    card: "8"
+    desc: "Sarah consegue ignorar as rotinas centralizadas de tratamento (sanitização) pois elas não estão sendo usadas de forma abrangente"
+  -
+    card: "9"
+    desc: "Shamun consegue ignorar as verificações de validação de entrada ou de saída porque as falhas de validação não são rejeitadas e/ou tratadas (sanitização)"
+  -
+    card: "10"
+    desc: "Dario consegue explorar a confiabilidade da aplicação em fonte de dados (ex: dados definidos pelo usuário, manipulação de dados armazenados localmente, mudança do estado dos dados em dispositivos clientes, falta de verificação da identidade durante uma validação de dados, como Dario pode fingir ser Colin)"
+  -
+    card: "J"
+    desc: "Dennis tem o controle sobre validações de entrada de dados, validações de saída de dados ou codificação de saída ou rotinas que ele consegue ignorar/burlar"
+  -
+    card: "Q"
+    desc: "Geoff consegue injetar dados num dispositivo ou num interpretador no lado do cliente porque uma interface parametrizada não foi usada, ou não foi implementada corretamente, ou os dados não foram codificados corretamente para o contexto proposto, ou não há uma política restritiva para a codificação ou a inclusão de dados"
+  -
+    card: "K"
+    desc: "Gabe consegue injetar dados num interpretador no lado do servidor (ex: SQL, comandos para o sistema operacional, Xpath, Server JavaScript, SMTP) porque uma interface parametrizada não foi usada ou não foi implementada corretamente"
+-
+  name: "Autenticação e Gerenciamento de Credenciais"
+  -
+    card: "A"
+    desc: "Você inventou um novo ataque contra a Autenticação e Gerenciamento de Credenciais"
+    misc: "Leia mais sobre este tópico em OWASP Authentication Cheat Sheet"
+  -
+    card: "2"
+    desc: "James pode assumir as funções de autenticação sem que o usuário real esteja ciente do uso destas funções (ex: tente fazer login, logar com credenciais, redefinir a senha)"
+  -
+    card: "3"
+    desc: "Muhammad consegue obter a senha de um usuário ou outros dados, pela observação durante a autenticação, ou cache local, ou pela memória, ou pelo tráfego de dados, ou pela leitura de algum local desprotegido, ou porque isto é amplamente conhecido, ou porque não há expiração de dados, ou por que o usuário não consegue trocar sua própria senha"
+  -
+    card: "4"
+    desc: "Sebastien pode identificar facilmente nomes de usuários ou consegue elencar quem eles são"
+  -
+    card: "5"
+    desc: "Javier pode usar credenciais padrões (default), de teste ou facilmente adivinhadas para autenticação, ou consegue autenticar através de contas inativas ou autentica-se por contas não necessariamente da aplicação"
+  -
+    card: "6"
+    desc: "Sven consegue reutilizar uma senha temporária porque o usuário não precisa troca-la no primeiro acesso, ou o tempo de expiração é muito longo, ou o tempo de expiração não existe, ou não é usado um método de entrega out-of-band (ex: aplicação mobile, SMS)"
+  -
+    card: "7"
+    desc: "Cecilia consegue usar força bruta e ataques de dicionário (dictionary attacks) contra uma ou muitas contas sem limitação, ou estes ataques são simplificados pois as senhas tem baixa complexidade, tamanho reduzido, inexistência de expiração e regras para reuso"
+  -
+    card: "8"
+    desc: "Kate consegue ignorar a autenticação porque isto não é uma falha de segurança (ex: o acesso sem autenticação está assinalado como padrão)"
+  -
+    card: "9"
+    desc: "Claudia consegue assumir funções críticas porque os requisitos de autenticação são muito fracos (ex: não é usado autenticação com força de senha), ou não é um requisito revalidar a autenticação com frequência"
+  -
+    card: "10"
+    desc: "Pravin consegue ignorar controle de autenticação porque não está sendo usado um módulo/framework/serviço de autenticação que seja centralizado, testado, comprovado e aprovado para gerir requisições"
+  -
+    card: "J"
+    desc: "Mark consegue acessar recursos ou serviços porque não há requisitos de autenticação, ou, por engano, um outro sistema ou outra ação realizou autenticação"
+  -
+    card: "Q"
+    desc: "Jaime consegue ignorar a autenticação porque não é aplicado o mesmo rigor para todas as funções de autenticação (ex: logar, troca de senha, recuperação de senha, logout, acesso administrador) ou não é aplicado o mesmo rigor nos diversos locais de acesso e versões do sistema(ex:mobile website, mobile app, full website, API, call center)"
+  -
+    card: "K"
+    desc: "Olga consegue influenciar ou alterar o código ou a rotina de autenticação e com isto ignorar a autenticação"
+-
+  name: "Gerenciamento de Sessões"
+  -
+    card: "A"
+    desc: "Você inventou um novo ataque contra o Gerenciamento de Sessões"
+    misc: "Leia mais sobre este tópico em OWASP Session Management Cheat Sheet e prevenção de ataques do tipo Cross Site Request Forgery (CSRF)"
+  -
+    card: "2"
+    desc: "William tem o controle sobre a geração de identificadores de sessão"
+  -
+    card: "3"
+    desc: "Ryan consegue usar uma única conta em paralelo, pois as sessões simultâneas são permitidas"
+  -
+    card: "4"
+    desc: "Alison consegue configurar identificadores de cookies em outras aplicações web porque o domínio ou o caminho não são suficientemente limitados"
+  -
+    card: "5"
+    desc: "John consegue prever ou adivinhar identificadores de sessão porque estes não são alterados quando uma regra de usuário é alterada (ex: antes e depois da autenticação) e quando uma troca entre meios de comunicação criptografados e não criptografados acontece, ou os identificadores são curtos e não randômicos, ou não são modificados periodicamente"
+  -
+    card: "6"
+    desc: "Gary consegue ter o controle da sessão de um usuário porque o tempo de encerramento(timeout) da sessão é longo ou inexiste, ou o tempo limite da sessão é longo ou inexiste, ou a mesma sessão pode ser usada para mais de um dispositivo/local"
+  -
+    card: "7"
+    desc: "Casey consegue utilizar a sessão de Adam depois dele ter finalizado o uso da aplicação, porque a função de logout inexiste, ou Adam não fez logout, ou a função de logout não termina a sessão de forma adequada"
+  -
+    card: "8"
+    desc: "Matt consegue utilizar longas sessões porque a aplicação não solicita uma nova autenticação de forma periódica para validar se os privilégios do usuário foram alterados"
+  -
+    card: "9"
+    desc: "Ivan consegue roubar identificadores de sessão porque estes são transmitidos em canais inseguros, ou estão logados, ou são exibidos em mensagens de erros, ou estão em URLs, ou são acessíveis pelo código que o atacante consegue alterar ou influenciar"
+  -
+    card: "10"
+    desc: "Marce consegue inventar requisições porque tokens randômicos e fortes (ou seja, tokens anti-CSRF) ou similares não estão sendo usados ​​para ações que mudam estado. Estas requisições podem ser por sessão ou por requisição (request) em ações mais críticas"
+  -
+    card: "J"
+    desc: "Jeff consegue reenviar uma interação de repetição idêntica (ex: requisição HTTP, sinal, botão pressionado) e ela é aceita, sem rejeição"
+  -
+    card: "Q"
+    desc: "Salim consegue ignorar o gerenciamento de sessão porque este não é aplicado de forma abrangente e consistente por toda a aplicação"
+  -
+    card: "K"
+    desc: "Peter consegue ignorar o controle de gerenciamento de sessão porque este foi autoconstruído e/ou é fraco, ao invés de ter sido usado a estrutura padrão de um framework ou um modulo testado e aprovado"
+-
+  name: "Controle de Acessos"
+  -
+    card: "A"
+    desc: "Você inventou um novo ataque contra Controle de Acessos"
+    misc: "Leia mais sobre este tópico em OWASP Development Guide e OWAPS Testing Guide"
+  -
+    card: "2"
+    desc: "Tim consegue alterar nomes/endereços (paths) onde os dados são enviados ou encaminhados para alguém"
+  -
+    card: "3"
+    desc: "Christian consegue acessar informações, que ele não deveria ter permissão, por meio de outro mecanismo que tenha permissão (ex: indexador de pesquisa, log, relatórios) ou porque a informação está armazenada em cache, ou mantida por mais tempo do que o necessário, ou outra vazamento de informação"
+  -
+    card: "4"
+    desc: "Kelly consegue ignorar controles de acesso porque estes não falham seguramente (ex: a permissão de acesso está assinalada como padrão)"
+  -
+    card: "5"
+    desc: "Chad consegue acessar recursos que não deveria ter acesso devido a inexistência de uma autorização ou por concessão de privilégios excessivos (ex: não usar o princípio de menor privilégio possível). Os recursos podem ser serviços, processos, AJAX, Flash, vídeo, imagens, documentos, arquivos temporários, dados de sessão, propriedades do sistema, dados de configuração, logs"
+  -
+    card: "6"
+    desc: "Eduardo consegue acessar dados que ele não tem permissão embora ele tem permissão em formulários, páginas, URL ou pontos de entrada"
+  -
+    card: "7"
+    desc: "Yuanjing consegue acessar funções, telas e propriedades do aplicativo, a qual ele não está autorizado a ter acesso"
+  -
+    card: "8"
+    desc: "Tom consegue ignorar regras de negócios alterando o fluxo/sequência usual do processo, ou realizando o processo na forma incorreta, ou manipulando valores de data e hora usados pela aplicação, ou usando recursos válidos para fins não intencionais, ou pela manipulação incorreta do controle de dados"
+  -
+    card: "9"
+    desc: "Mike consegue usar indevidamente uma aplicação quando uma funcionalidade é usada de forma muito rápida, ou com muita frequência, ou de outra maneira a qual a funcionalidade não se destina, ou pelo consumo de recursos da aplicação ou pela condição de corrida (race conditions) ou utilização excessiva da funcionalidade"
+  -
+    card: "10"
+    desc: "Richard consegue ignorar os controles de acesso centralizados pois estes não estão sendo utilizados de forma abrangente em todas as interações"
+  -
+    card: "J"
+    desc: "Dinis consegue acessar informações referente a configurações de segurança ou consegue acessar a lista de controle de acesso"
+  -
+    card: "Q"
+    desc: "Christopher consegue injetar um comando que a aplicação vai executar no mais alto nível de privilégio"
+  -
+    card: "K"
+    desc: "Ryan consegue influenciar ou alterar controles de acesso e permissões e consegue ignora-los"
+-
+  name: "Práticas de Criptografia"
+  -
+    card: "A"
+    desc: "Você inventou um novo ataque contra Práticas de Criptografia"
+    misc: "Leia mais sobre este tópico em OWASP Cryptographic Storage Cheat Sheet e OWASP Transport Layer Protection Cheat Sheet"
+  -
+    card: "2"
+    desc: "Kyun consegue acesso a dados porque isto foi ocultado/ofuscado/escondido ao invés de ser usada uma função de criptografia aprovada"
+  -
+    card: "3"
+    desc: "Axel consegue modificar dados que estão armazenados ou que são temporários ou transitórios, ou consegue modificar código fonte, ou consegue modificar patches/atualizações, ou alterar dados de configuração, pois a integridade não foi checada"
+  -
+    card: "4"
+    desc: "Paulo consegue acesso a dados transitórios não criptografados, embora o canal de comunicação esteja criptografado"
+  -
+    card: "5"
+    desc: "Kyle consegue ignorar controles criptográficos porque eles não falham de forma segura (ex: eles são desprotegidos por padrão)"
+  -
+    card: "6"
+    desc: "Romain consegue ler e modificar dados descriptografados que estão na memória ou são transitórios (ex: credenciais, identificadores de sessão, dados pessoais e comercialmente relevantes), em uso ou em comunicação dentro da aplicação, ou entre aplicação e usuário, ou entre a aplicação e sistemas externos"
+  -
+    card: "7"
+    desc: "Gunter consegue interceptar ou modificar dados criptografados em trânsito porque o protocolo está mal implantado, ou configurado de forma fraca, ou os certificados estão inválidos, ou os certificados não são confiáveis, ou a conexão pode ser deteriorada para uma comunicação mais fraca ou descriptografada"
+  -
+    card: "8"
+    desc: "Eoin consegue acesso a dados de negócios armazenados (ex: senhas, identificadores de sessão, informações de identificação pessoal - PII, dados de titular de cartão) pois estes dados não estão criptografados de forma segura ou com segurança"
+  -
+    card: "9"
+    desc: "Andy consegue ignorar a geração de números aleatórios/randômicos, ou ignorar a geração aleatória de GUID, ou ignorar as funções de criptografia e hashing porque eles são fracos ou foram autoconstruídos"
+  -
+    card: "10"
+    desc: "Susanna consegue quebrar a criptografia em uso pois a criptografia não é forte o suficiente para oferecer a proteção exigida, ou esta não é forte o suficiente para tratar a quantidade de esforço que o atacante está disposto a fazer"
+  -
+    card: "J"
+    desc: "Justin consegue ler credenciais para acessar recursos internos e externos, serviços e outros sistemas porque estas credenciais estão armazenadas num formato descriptografado ou salvos no código fonte"
+  -
+    card: "Q"
+    desc: "Randolph consegue acessar ou prever os dados mestres de criptografia"
+  -
+    card: "K"
+    desc: "Dan consegue influenciar ou alternar as rotinas/codificações de criptografia (encriptação, hashing, assinaturas digitais, números aleatórios e geração de GUID) e consegue ignorá-los também"
+-
+  name: "Cornucopia"
+  -
+    card: "A"
+    desc: "Você inventou um novo ataque de qualquer tipo"
+    misc: "Leia mais sobre segurança da aplicação nos guias da OWASP (Requirements, Development, Code Review and Testing) e na série OWASP Cheat Sheet, e no modelo de maturidade Open SAMM (Software Assurance Maturity Model)"
+  -
+    card: "2"
+    desc: "Lee consegue ignorar os controles do aplicativo pois foram usadas funções arriscadas da linguagem de programação ao invés de opções seguras, ou há erros de conversão, ou porque o aplicativo está inseguro quando um recurso externo está indisponível, ou há race condition, ou há problemas na inicialização ou alocação de recursos, ou quando há sobrecarga"
+  -
+    card: "3"
+    desc: "Andrew consegue acessar o código fonte, ou descompilar o aplicativo, ou consegue acessar a lógica do negócio para entender como a aplicação funciona e quais segredos ela contêm"
+  -
+    card: "4"
+    desc: "Keith consegue realizar uma ação e isto não é atribuído a ele"
+  -
+    card: "5"
+    desc: "Larry consegue induzir a confiança de outras partes, incluindo usuários autenticados, ou violar esta confiança em outro lugar (ex: em outro aplicativo)"
+  -
+    card: "6"
+    desc: "Aaron consegue ignorar os controles porque a manipulação de erros/exceções é perdida/ignorada, ou é implementada de forma inconsistente ou parcial, ou não há negação de acesso por padrão (ex: erros devem terminar o acesso/execução da funcionalidade), ou depende do tratamento por algum outro serviço ou sistema"
+  -
+    card: "7"
+    desc: "As ações de Mwengu não podem ser investigadas porque não há um registro correto de eventos de segurança com precisão, ou não há uma trilha de auditoria completa, ou estas podem ser alteradas ou excluídas pelo Mwengu, ou não existe um serviço de registro centralizado"
+  -
+    card: "8"
+    desc: "David consegue ignorar o aplicativo para obter acesso aos dados porque a infraestrutura de rede e servidores e os serviços suportados não foram configurados de forma segura, as configurações não são verificadas periodicamente e os patches de segurança não são aplicados, ou os dados armazenados localmente não são fisicamente protegidos"
+  -
+    card: "9"
+    desc: "Michael consegue ignorar o aplicativo para obter acesso aos dados porque ferramentas ou interfaces administrativas não estão adequadamente seguras"
+  -
+    card: "10"
+    desc: "Xavier consegue contornar os controles do aplicativo porque os códigos fontes tanto dos frameworks, como de bibliotecas e componentes utilizados contêm código malicioso ou vulnerabilidades"
+  -
+    ard: "J"
+    desc: "Roman consegue explorar o aplicativo pois este foi compilado usando ferramentas desatualizadas ou configurações não seguras como padrão ou informações de segurança não foram documentadas e passadas para o time operacional"
+  -
+    card: "Q"
+    desc: "Jim pode realizar ações mal-intencionadas, não normais, sem detecção e resposta em tempo real pela aplicação"
+  -
+    card: "K"
+    desc: "Gareth pode utilizar o aplicativo para negar o serviço a alguns ou a todos os usuários"
+-
+  name: "Joker"
+  -
+    desc: "Alice consegue utilizar a aplicação para realizar ataques a dados e usuários do sistema"
+    misc: "Você pensou em se tornar membro individual da OWASP? Todas as ferramentas, guias e reuniões locais são gratuitas para todos, mas ser um membro individual apoia o trabalho da OWASP"
+  -
+    desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
+    misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do aplicativo de treinamento OWASP Broken Web Applications VM, ou usando o desafio online Hacking Lab. Ambos são gratuitos"
