@@ -5,7 +5,7 @@
 		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
 		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Main Body">
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="4" KerningMethod="$ID/None" KerningValue="0">
-				<Content>OWASP Cornucopia Ecommerce Website Edition v1.04</Content>
+				<Content>${Common_Title}</Content>
 			</CharacterStyleRange>
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="6" KerningMethod="$ID/None" KerningValue="0">
 				<Br />
