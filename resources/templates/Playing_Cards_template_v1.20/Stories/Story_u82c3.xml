@@ -21,7 +21,7 @@
 		</ParagraphStyleRange>
 		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Ace Text">
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-				<Content>Read more about application security in OWASP’s free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model</Content>
+				<Content>${CO_COA_misc}</Content>
 				<Br />
 			</CharacterStyleRange>
 		</ParagraphStyleRange>

@@ -21,7 +21,7 @@
 		</ParagraphStyleRange>
 		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Ace Text">
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-				<Content>Read more about this topic in OWASP’s free Authentication Cheat Sheet</Content>
+				<Content>${AT_ATA_misc}</Content>
 				<Br />
 			</CharacterStyleRange>
 		</ParagraphStyleRange>
