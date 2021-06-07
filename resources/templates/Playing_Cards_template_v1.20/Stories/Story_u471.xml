@@ -16,7 +16,7 @@
 		</ParagraphStyleRange>
 		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Ace Text">
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-				<Content>Read more about this topic in OWASP’s free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization</Content>
+				<Content>${VE_VEA_misc}</Content>
 				<Br />
 			</CharacterStyleRange>
 		</ParagraphStyleRange>

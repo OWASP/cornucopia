@@ -50,6 +50,7 @@ suits:
     desc: "Gabe peut injecter des données dans un interpréteur côté serveur (ex : SQL, commandes OS, Xpath, Server JavaScript, SMTP), car une interface paramétrée fortement typée n'est pas utilisée ou n'a pas été implémentée correctement"
 -
   name: "Authentification"
+  cards:
   -
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
@@ -92,6 +93,7 @@ suits:
     desc: "Olga peut influencer ou modifier du code/routines d'authentification de telle manière que celle-ci soit contournée"
 -
   name: "Gestion des Sessions"
+  cards:
   -
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre la Gestion des Sessions"
@@ -134,6 +136,7 @@ suits:
     desc: "Peter peut contourner les contrôles de gestion de session car ceux-ci ont été développés en interne, au lieu d'utiliser un framework standard ou un module approuvé et testé"
 -
   name: "Habilitation"
+  cards:
   -
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre les Habilitations"
@@ -176,6 +179,7 @@ suits:
     desc: "Ryan peut influencer ou altérer les contrôles d'habilitations et les permissions, et peut ainsi les contourner"
 -
   name: "Cryptographie"
+  cards:
   -
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
@@ -218,6 +222,7 @@ suits:
     desc: "Dan peut influencer ou altérer le code/les routines de cryptographie (chiffrement, hachage, signatures numériques, nombre aléatoire et génération de GUID) et peut ainsi les contourner"
 -
   name: "Cornucopia"
+  cards:
   -
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque de n'importe quel type"
@@ -250,7 +255,7 @@ suits:
     value: "10"
     desc: "Xavier peut contourner les contrôles de l'application car les frameworks, les bibliothèques et les composants applicatifs contiennent du code malveillant ou des vulnérabilités (par exemple: interne, sur étagère, externalisé, open source, externe)"
   -
-    ard: "J"
+    value: "J"
     desc: "Roman peut exploiter l'application car elle a été compilée à l'aide d'outils obsolètes ou sa configuration n'est pas sécurisée par défaut, ou les informations de sécurité n'ont pas été documentées et transmises aux équipes opérationnelles"
   -
     value: "Q"
@@ -260,9 +265,21 @@ suits:
     desc: "Gareth peut utiliser l'application pour refuser le service à certains ou à tous ses utilisateurs"
 -
   name: "Joker"
+  cards:
   -
+    value: "Joker"
     desc: "Alice peut utiliser l'application pour attaquer les systèmes et les données des utilisateurs"
     misc: "Avez-vous déjà songé à devenir membre OWASP? Tous les outils, conseils et réunions locales sont gratuits pour tous, mais l'adhésion individuelle aide à soutenir le travail de l'OWASP"
   -
+    value: "Joker"
     desc: "Bob peut influencer, altérer ou affecter l'application de façon à ce qu'elle ne soit plus conforme aux exigences légales, réglementaires, contractuelles ou autres exigences de l'organisation"
     misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans les applications de formation de la VM gratuite OWASP Broken Web Applications, ou en utilisant les défis en ligne du Hacking Lab gratuit"
+-
+  name: "Common"
+  cards:
+  -
+    value: "NoCard"
+    desc: "Pas de Carte"
+  -
+    value: "title"
+    desc: "OWASP Cornucopia Édition de Ecommerce v1.20-FR"
