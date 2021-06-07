@@ -23,7 +23,7 @@
 		</ParagraphStyleRange>
 		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Ace Text">
 			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-				<Content>Read more about this topic in OWASP’s free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention</Content>
+				<Content>${SM_SMA_misc}</Content>
 			</CharacterStyleRange>
 		</ParagraphStyleRange>
 	</Story>
