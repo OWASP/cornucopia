@@ -38,7 +38,8 @@ def main() -> None:
         ## Todo: log this error
         return
 
-    language_data = get_language_data(yaml_files)
+    ## Get the language data from the correct language file (checks args.language to select the correct file)
+    language_data = get_replacement_data(yaml_files, data_type = "translation", language_code = args.language.lower())
 
     ## Get meta data from language file
     meta = get_meta_data(language_data)
@@ -52,21 +53,27 @@ def main() -> None:
     if args.debug: print("--- meta data = " + str(meta))
 
     ## If no data found in the language file, then exit with error
-    if "data" not in list(language_data.keys()): # or "data" not in list(lang_template_data):
-        msg = "Error. Could not find the `data` tag in one- or both of the language files."
+    if "suits" not in list(language_data.keys()):
+        msg = "Error. Could not find the `suits` tag in the language file."
         print(msg)
         if not args.debug: warnings.warn(msg)
         ## Todo: Log this error
         return
 
     ## Get the dict of replacement data
-    data = get_replacement_dict(language_data)
+    data = get_replacement_dict(language_data, mappings = False, make_template = (args.language.lower() == "template"))
 
     ## Work with docx file (and maybe convert to pdf afterwards)
     if file_type in ("docx", "pdf"):
         ## Creating a new template
-        if args.language == "template":
-            template_doc = BASE_PATH + "/source/owasp_cornucopia_en.docx"
+        if args.language.lower() == "template":
+            if args.inputfile == "../resources/templates/owasp_cornucopia_edition_lang_ver_template.docx":
+                template_doc = os.sep.join([BASE_PATH,"source","owasp_cornucopia_en.docx"])
+            else:
+                if os.path.isabs(args.inputfile):
+                    template_doc = args.inputfile
+                else:
+                    template_doc = os.path.normpath(SCRIPT_PATH + os.sep + args.inputfile)
         ## Use source template docx file as intput
         else:
             template_doc = os.path.normpath(SCRIPT_PATH + os.sep + args.inputfile)
@@ -77,11 +84,13 @@ def main() -> None:
                 template_doc = os.path.splitext(template_doc)[0] + "." + file_type
                 if args.debug: print("--- template_doc with new ext = " + str(template_doc))
 
+        if args.debug: print("--- template_doc = " + str(template_doc))
         if not os.path.isfile(template_doc):
-            msg = "Source file not found: " + template_doc + ". Please ensure file exists and try again."
-            print("--- " + msg)
+            msg = "Error. Source file not found: " + template_doc + ". Please ensure file exists and try again."
+            print(msg)
             if not args.debug: warnings.warn(msg)
             ## Todo: Log this msg
+            return
 
         ## Name output file with correct edition, component, language & version
         output_file = rename_output_file(args.outputfile, meta)
@@ -136,14 +145,15 @@ def main() -> None:
     ## Process idml xml files
     if file_type == "idml":
         if args.debug: print("--- Starting the processing of the idml-pack xml files")
-        ## Check if we are creating the template files and only do higher level text
-        # if args.language == "template":
-        #     data2 = {}
-        #     for key, text in data.items():
-        #         if len(text.split("_")) > 2:
-        #             data2[key] = text
-        #     if args.debug: print("--- len data = " + str(len(data)) + ", len data2 = " + str(len(data2)))
-        #     data = data2
+        ## Check if we are creating the template files and exclude card numbers
+        card_numbers = ["A","2","3","4","5","6","7","8","9","10","0","J","Q","K"]
+        data2 = {}
+        if args.language.lower() == "template":
+            for key, text in data.items():
+                if key not in card_numbers:
+                    data2[key] = text
+            if args.debug: print("--- len data = " + str(len(data)) + ", len data2 = " + str(len(data2)))
+            data = data2
 
 
         ## Extract source xml files and place in temp output folder
@@ -243,17 +253,76 @@ def get_meta_data(language_data) -> dict:
         return meta
 
 
-def get_language_data(yaml_files) -> dict:
+##
+# function  get_replacement_data()
+# Description: opens each file and checks if the meta data matches the data_type and language short-code specified
+# var: list[string] (list of yaml files containing translations and/or mappings)
+# var: string [translations|mappings]
+# var: string language short-code identifying which translation file data to return. Ignored if data_type is mappings.
+# returns: dict 
+##
+def get_replacement_data(yaml_files, data_type = "translation", language_code = "en") -> dict:
     for file in yaml_files:
-        # if args.debug: print("--- file = " + str(file))
+        if args.debug: print("--- file = " + str(file))
         with open(file, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
         # if args.debug: print("--- loaded data successfully. " + str(file) + " with " + str(len(data)) + " keys: " + str(data.keys()))
 
-        if (data["meta"]["language"].lower() == args.language.lower()) \
-            or (data["meta"]["language"].lower() == "en" and args.language.lower() == "template"):
-            if args.debug: print("--- found source language file: " + os.path.split(file)[1])
-            return data
+        if data_type == "translation":
+            if (data["meta"]["language"].lower() == language_code.lower()) \
+                or (data["meta"]["language"].lower() == "en" and language_code.lower() == "template"):
+                if args.debug: print("--- found source language file: " + os.path.split(file)[1])
+                return data
+        elif data_type == "mappings":
+            if ("meta" in data.keys() and "component" in data["meta"].keys() and data["meta"]["component"] == "mappings"):
+                return data
+                
+
+
+## Loop through language file and build up a find-replace dict
+def get_replacement_dict(input_data, mappings = False, make_template = False) -> dict:
+    data = {}
+    ## Short tags to match the tags in the template documents
+    suit_tags = ["VE","AT","SM","AZ","CR","CO","WC","Common"]
+    for suit, suit_tag in zip(input_data["suits"], suit_tags):
+        # if args.debug: print("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
+        if suit_tag != "Common":
+            if make_template:
+                data[suit["name"]] = '${{{}}}'.format(suit_tag + "_suit")
+            else:
+                data['${{{}}}'.format(suit_tag + "_suit")] = suit["name"]
+        card_tag = ""
+        for card in suit["cards"]:
+            # if args.debug: print("--- card.keys() = " + str(card.keys()))
+            if suit_tag == "WC":
+                if card_tag == "JOA":
+                    card_tag = "JOB"
+                else:
+                    card_tag = "JOA"
+            else:
+                card_tag = suit_tag + card["value"]
+            for tag, tag_out in card.items():
+                if tag != "value":
+                    full_tag = '${{{}}}'.format("_".join([suit_tag, card_tag, tag]))
+                    ## Common (suit) is additional data added to the language files for Title, No Card, etc
+                    if suit_tag == "Common":
+                        full_tag = '${{{}}}'.format("_".join([suit_tag, card["value"]]))
+                    # if args.debug: print("--- full_tag = " + str(full_tag))
+                    if make_template:
+                        data[tag_out] = full_tag
+                    else:
+                        data[full_tag] = tag_out
+                ## Add a translation for "Joker"
+                if suit_tag == "WC" and tag == "value":
+                    full_tag = '${{{}}}'.format("_".join([suit_tag, card_tag, tag]))
+                    if make_template:
+                        data[tag_out] = full_tag
+                    else:
+                        data[full_tag] = tag_out
+
+    # if args.debug: print("--- Translation data showing first 5 (key: text):\n* [" + "]\n* [".join(l + "] : " + data[l] for l in list(data.keys())[:5]))
+    # if args.debug: print("--- Translation data showing last 12 (key: text):\n* [" + "]\n* [".join(l + "] : " + data[l] for l in list(data.keys())[-12:]))
+    return data
 
 
 ## Zip all the files recursively from path into zipfilename (excluding root path)
@@ -298,37 +367,6 @@ def docx_replace(doc, data) -> docx.Document:
                 p.runs[0].text = str(t).strip()
                 if args.debug and key.find("VE_VE0_desc") != -1: print("--- runs after = " + str("; ".join(r.text for r in p.runs)))
     if args.debug: print("--- finished replacing text in doc")
-
-
-## Loop through language file and build up a find-replace dict
-def get_replacement_dict(language_data) -> dict:
-    data = {}
-    ## Stuff to ignore
-    card_numbers = ['a','2','3','4','5','6','7','8','9', '10', '0', 'j','q','k']
-    for suit, suit_out in language_data["data"].items():
-        for card, card_out in suit_out.items():
-            if isinstance(card_out, dict):
-                for tag, tag_out in card_out.items():
-                    ## Ignore the card numbers/letters
-                    if tag_out.lower() not in card_numbers:
-                        ## Create template placeholders in the form ${suit_card_tag}.
-                        key_name =  "_".join([suit,card,tag])
-                        if args.language == "template":
-                            data[tag_out] = '${{{}}}'.format(key_name)
-                        else:
-                            data['${{{}}}'.format(key_name)] = tag_out
-                            # if args.debug and suit == "VE": print("--- tag = " + '${{{}}}'.format(key_name) + ", out [:20] = " + tag_out[:20])
-            else:
-                ## Ignore the card numbers/letters
-                if card_out.lower() not in card_numbers:
-                    ## Create template placeholders in the form ${suit_card}
-                    key_name =  "_".join([suit,card])
-                    if args.language == "template":
-                        data[card_out] = '${{{}}}'.format(key_name)
-                    else:
-                        data['${{{}}}'.format(key_name)] = card_out
-    if args.debug: print("--- Translation data [key]: text. showing first 5:\n* [" + "]\n* [".join(l + "] : " + data[l] for l in list(data.keys())[:5]))
-    return data
 
 
 def get_docx(docx_file) -> docx.Document:
