@@ -21,6 +21,7 @@ BASE_PATH = os.path.normpath(SCRIPT_PATH + "/..")
 FILETYPE_CHOICES: List[str] = ["docx", "pdf", "idml"]
 LANGUAGE_CHOICES: List[str] = ["en", "es", "fr", "pt-br", "template"]
 DEFAULT_TEMPLATE_FILENAME: str = "../resources/templates/owasp_cornucopia_edition_lang_ver_template"
+DEFAULT_OUTPUT_FILENAME: str = "../output/owasp_cornucopia_edition_component_lang_ver"
 args: argparse.Namespace
 
 
@@ -85,23 +86,16 @@ def main() -> None:
     args.debug and print("--- meta data = {}".format(meta))
 
     # Name output file with correct edition, component, language & version
-    output_file: str = rename_output_file(args.outputfile, meta, make_template)
-
-    # If the output file has the wrong extension, then replace the file extension with the file_type
-    args.debug and print("--- output_file = {}; file_type = {}".format(output_file.split(os.sep)[-1:], file_type))
-    if not output_file.endswith(file_type):
-        output_file = ".".join([os.path.splitext(output_file)[0],  file_type])
-        args.debug and print("--- output_file with new ext = {}".format(output_file))
+    output_file: str = rename_output_file(args.outputfile, file_type, meta, make_template)
 
     # Work with docx file (and maybe convert to pdf afterwards)
     if file_type in ("docx", "pdf"):
-        template_doc: str = get_template_doc(file_type, make_template)
+        template_doc: str = get_template_doc(args.inputfile, file_type, make_template)
         # Get the input (template) document
         doc: docx.Document = docx.Document(template_doc)
 
         # Replace the text with the data from the source translation file
         docx_replace(doc, language_dict)
-
         # Replace the text with the data from the source mapping file
         docx_replace(doc, mapping_dict)
 
@@ -110,7 +104,7 @@ def main() -> None:
             doc.save(output_file)
 
         # If file type is (not docx) pdf, then save a temp docx file, convert the pdf to a docx
-        # and remove the temp docx file
+        # and remove the temp docx file if not debugging
         else:
             temp_output_file = os.sep.join([BASE_PATH, "output", "temp.docx"])
             doc.save(temp_output_file)
@@ -122,6 +116,7 @@ def main() -> None:
             if operating_system.lower().find("win") != -1:
                 # Use docx2pdf for windows with MS Word installed
                 docx2pdf.convert(temp_output_file, output_file)
+            # Todo: Test additional methods to convert docx to pdf in linux.
             # elif operating_system.lower().find("linux") != -1:
             #     # Use pandoc (with pypandoc)
             #     import pypandoc
@@ -144,11 +139,10 @@ def main() -> None:
     # Process idml xml files
     if file_type == "idml":
         args.debug and print("--- Starting the processing of the idml-pack xml files")
-        # Check if we are creating the template files and exclude card numbers
-        card_numbers = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "0", "J", "Q", "K"]
         if make_template:
+            # If we are creating the template files, then exclude card numbers
+            card_numbers = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "0", "J", "Q", "K"]
             data2: dict = {}
-            # Remove the lookup text that matches the card numbers
             for key, text in language_dict.items():
                 if key not in card_numbers and text != "${WC_JOB_misc}":
                     data2[key] = text
@@ -156,123 +150,129 @@ def main() -> None:
                                   "len data2 = {}").format(len(language_dict),len(data2)))
             language_dict = data2
 
-        # Extract source xml files and place in temp output folder
-        template_doc: str = get_template_doc(file_type, make_template)
-        args.debug and print("--- template_doc = {}".format(template_doc))
-        exit()
-        # if args.inputfile == DEFAULT_TEMPLATE_FILENAME:
-        #     src_idml_file = os.path.normpath(os.sep.join([SCRIPT_PATH, DEFAULT_TEMPLATE_FILENAME, ".idml"]))
-        # else:
-        #     if os.path.isabs(args.inputfile):
-        #         src_idml_file = args.inputfile
-        #     else:
-        #         src_idml_file = os.path.normpath(os.sep.join([SCRIPT_PATH, args.inputfile]))
-        # if not os.path.isfile(src_idml_file):
-        #     msg = "Error. Source .IDML file does not exists. Please ensure the idml template file exists: " + str(
-        #         src_idml_file)
-        #     # Todo: log this error
-        #     print(msg)
-        #     return None
-        #
+        # Get the source file
+        template_doc: str = get_template_doc(args.inputfile, file_type, make_template)
+
         # Get the output path and temp output path to put the temp xml files
         output_path = BASE_PATH + "/output"
         temp_output_path = output_path + "/temp"
-
         # Ensure the output path exists
         ensure_destination_folder_exists(temp_output_path)
-        args.debug and print("--- temp_folder = " + str(temp_output_path))
+        args.debug and print("--- temp_folder for extraction of xml files = " + str(temp_output_path))
 
-        # Unzip the files
+        # Unzip source xml files and place in temp output folder
         with zipfile.ZipFile(template_doc) as idml_archive:
             idml_archive.extractall(temp_output_path)
-            args.debug and print("--- namelist of files in archive = " + str(idml_archive.namelist()[:15]))
+            args.debug and print("--- namelist of first few files in archive = " + str(idml_archive.namelist()[:5]))
 
         xml_files = get_files_from_of_type(temp_output_path, "xml")
-
+        language_dict_keys = list(language_dict.keys())
+        mapping_dict_keys = list(mapping_dict.keys())
         # Only Stories files have content to update
         for file in fnmatch.filter(xml_files, "*Stories*Story*"):
-            # Check file size
             if os.path.getsize(file) == 0:
+                # Skip empty files
                 continue
-            # args.debug and print("--- starting on file: " + str(file))
             tree = ElTree.parse(file)
             all_content_elements = tree.findall('.//Content')
             found_el = False
             for el in all_content_elements:
-                for k in language_dict.keys():
-                    if el.text.lower() == k.lower():
-                        found_el = True
-                        new_text = language_dict[k]
-                        el.text = new_text
+                if el.text in language_dict_keys:
+                    found_el = True
+                    new_text = language_dict[el.text]
+                    el.text = new_text
+                elif el.text in mapping_dict_keys:
+                    found_el = True
+                    new_text = mapping_dict[el.text]
+                    el.text = new_text
             if found_el:
                 with open(file, 'bw') as f:
                     f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
         # Zip the files as an idml file in output folder
         args.debug and print("--- finished replacing text in xml files. Now zipping into idml file")
-
         zip_dir(temp_output_path, output_file)
 
         # If not debugging, delete temp folder and files
         if not args.debug and os.path.exists(temp_output_path):
             shutil.rmtree(temp_output_path, ignore_errors=True)
-
     print("New file saved: " + str(output_file))
 
 
-def get_template_doc(file_type: str, make_template: bool = False) -> str:
+def get_template_doc(args_input_file: str, file_type: str, make_template: bool = False) -> str:
     template_doc: str
-    if make_template:
-        # Creating a new template from an original docx or idml file
-        if args.inputfile == DEFAULT_TEMPLATE_FILENAME + "." + file_type:
-            template_doc = os.sep.join([BASE_PATH, "source", "owasp_cornucopia_en." + file_type])
+    source_file_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
+    if args_input_file:
+        # Input file was specified
+        if os.path.isabs(args_input_file):
+            template_doc = args_input_file
         else:
-            if os.path.isabs(args.inputfile):
-                template_doc = args.inputfile
-            else:
-                template_doc = os.path.normpath(os.sep.join([SCRIPT_PATH, args.inputfile]))
+            template_doc = os.path.normpath(SCRIPT_PATH + os.sep + args_input_file)
     else:
-        # Use source template file as input
-        if os.path.isabs(args.inputfile):
-            template_doc = args.inputfile
+        # No input file specified - using defaults
+        if make_template:
+            # Creating a new template from an original docx or idml file
+            template_doc = os.sep.join([BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext])
         else:
-            template_doc = os.path.normpath(SCRIPT_PATH + os.sep + args.inputfile)
+            template_doc = os.path.normpath(
+                SCRIPT_PATH + os.sep + DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext)
+
         # If the input file has the wrong extension, then replace the file extension with the filetype
-        source_file_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
         if not template_doc.endswith(source_file_ext):
             template_doc = ".".join([os.path.splitext(template_doc)[0], source_file_ext])
             args.debug and print("--- template_doc with new ext = {}".format(template_doc))
     args.debug and print("--- template_doc = {}".format(template_doc))
+
     if not os.path.isfile(template_doc):
         msg = "Error. Source file not found: {}. Please ensure file exists and try again.".format(template_doc)
         print(msg)
         not args.debug and warnings.warn(msg)
         # Todo: Log this msg
         return None
+
     return template_doc
 
+
 # Name output file with correct edition, component, language & version
-def rename_output_file(filename: str, meta: dict, make_template: bool = False) -> str:
+def rename_output_file(args_output_file: str, file_type: str, meta: dict, make_template: bool = False) -> str:
+    if args_output_file:
+        # Output file specified
+        if os.path.isabs(args_output_file):
+            output_filename = args_output_file
+        else:
+            output_filename = os.path.normpath(SCRIPT_PATH + os.sep + args_output_file)
+    else:
+        # No output file specified - using default
+        if make_template:
+            # Creating a new template from an original docx or idml file
+            output_filename = os.path.normpath(SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "_template." + file_type)
+        else:
+            # Use source template file as input
+            output_filename = os.path.normpath(SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "." + file_type)
+
+    # If the output file has the wrong extension, then replace the file extension with the filetype
+    if not output_filename.endswith(file_type):
+        output_filename = ".".join([os.path.splitext(output_filename)[0], file_type])
+        args.debug and print("--- output_filename with new ext = {}".format(output_filename))
+
+    # Do the replacement of filename place-holders with meta data
     find_replace = [("_type", "_" + meta["edition"].lower()),
                     ("_edition", "_" + meta["edition"].lower()),
                     ("_component", "_" + meta["component"].lower()),
                     ("_language", "_" + meta["language"].lower()),
                     ("_lang", "_" + meta["language"].lower()),
                     ("_version", "_" + meta["version"].lower()),
-                    ("_ver", "_" + meta["version"].lower()), ("_template", "")]
-    dirname = os.path.dirname(filename)
-    if not os.path.isabs(dirname):
-        dirname = SCRIPT_PATH + os.sep + dirname
-    f = os.path.basename(filename)
-    # Do the replacement
+                    ("_ver", "_" + meta["version"].lower()),
+                    ]
+    if not make_template:
+        find_replace.append(("_template", ""))
+    f = os.path.basename(output_filename)
     for r in find_replace:
         f = f.replace(*r)
-    if make_template:
-        f = os.path.splitext(f)[0] + "_template" + os.path.splitext(f)[1]
+    output_filename = os.path.dirname(output_filename) + os.sep + f
 
-    filename = os.path.abspath(os.sep.join([dirname, f]))
-    args.debug and print("--- output_file = " + str(filename))
-    return filename
+    args.debug and print("--- output_filename = {}".format(output_filename))
+    return output_filename
 
 
 def get_meta_data(language_data) -> dict:
@@ -434,8 +434,8 @@ def get_files_from_of_type(path, ext) -> List[str]:
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
-    args.debug and print("--- found " + str(len(files)) + " files of type " + str(ext) + ". Showing first 5:\n* " + str(
-        "\n* ".join(files[:5])))
+    args.debug and print(("--- found {} files of type {}. Showing first few:\n* "
+                          ).format(len(files), ext) + str("\n* ".join(files[:3])))
     return files
 
 
@@ -450,9 +450,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "-i",
         "--inputfile",
         type=str,
-        default=DEFAULT_TEMPLATE_FILENAME + ".docx",
+        default="",
         help=("Input (template) file to use."
-             "\nDefault={}[.docx|.idml]"
+             "\nDefault={}.(docx|idml)"
              "\nTemplate type is dependent on output type (-t) or file (-o) specified."
              ).format(DEFAULT_TEMPLATE_FILENAME),
     )
@@ -468,10 +468,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "-o",
         "--outputfile",
-        default="../output/owasp_cornucopia_edition_lang_ver.docx",
+        default="",
         type=str,
-        help="Path and name of output file to generate. (caution: existing file will be overwritten). "
-             "\ndefault = ../output/owasp_cornucopia_edition_lang_ver.docx",
+        help=("Path and name of output file to generate. (caution: existing file will be overwritten). "
+             "\ndefault = {}.(docx|pdf|idml)").format(DEFAULT_OUTPUT_FILENAME),
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
