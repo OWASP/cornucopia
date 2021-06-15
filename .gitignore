@@ -1,5 +1,3 @@
-## Komodo IDE
-*.komodoproject
-.komodotools
-
-test_output
+output
+.idea
+venv
