@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION
 
 FROM python:${PYTHON_VERSION}-alpine AS linter-base
-RUN apk add --no-cache shadow~=4.6
+RUN apk add --no-cache shadow~=4.8.1
 # UID of current user who runs the build
 ARG user_id
 # GID of current user who runs the build
