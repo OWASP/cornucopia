@@ -48,13 +48,13 @@ def main() -> None:
     yaml_files = get_files_from_of_type(os.sep.join([BASE_PATH, "source"]), "yaml")
 
     if not yaml_files:
-        msg = "Error. No language files found in folder: " + str(os.sep.join([BASE_PATH, 'source']))
+        msg = "Error. No language files found in folder: " + str(os.sep.join([BASE_PATH, "source"]))
         print(msg)
         not args.debug and warnings.warn(msg)
         # Todo: log this error
         return None
 
-    make_template: bool = (args.language.lower() == "template")
+    make_template: bool = args.language.lower() == "template"
     # Get the language data from the correct language file (checks args.language to select the correct file)
     language_data: {} = get_replacement_data(yaml_files, data_type="translation", language_code=args.language.lower())
     # Get the dict of replacement data
@@ -76,8 +76,10 @@ def main() -> None:
     meta: dict = get_meta_data(language_data)
     # If no meta data found, then exit with an error
     if meta in (None, {}):
-        msg = ("Error. Could not find meta tag in the language file. "
-               "Please ensure required language file is in the source folder.")
+        msg = (
+            "Error. Could not find meta tag in the language file. "
+            "Please ensure required language file is in the source folder."
+        )
         print(msg)
         not args.debug and warnings.warn(msg)
         # Todo: Log this error
@@ -91,7 +93,7 @@ def main() -> None:
     if file_type in ("docx", "pdf"):
         template_doc: str = get_template_doc(args.inputfile, file_type, make_template)
         # Get the input (template) document
-        doc: docx.document.Document = get_docx_document(template_doc)
+        doc: document.Document = get_docx_document(template_doc)
 
         # Replace the text with the data from the source translation file
         replace_docx_inline_text(doc, language_dict)
@@ -110,8 +112,7 @@ def main() -> None:
             # and remove the temp docx file if not debugging
             temp_output_file = os.sep.join([BASE_PATH, "output", "temp.docx"])
             doc.save(temp_output_file)
-            args.debug and print(
-                f"--- temp_output_file = {temp_output_file}\n--- starting pdf conversion now.")
+            args.debug and print(f"--- temp_output_file = {temp_output_file}\n--- starting pdf conversion now.")
 
             # Check which operating system we are on to use different methods for converting docx to pdf
             operating_system: str = sys.platform
@@ -128,9 +129,11 @@ def main() -> None:
             #     extra_args = ['--pdf-engine=pdflatex']
             #     pypandoc.convert_file(temp_output_file, "pdf", extra_args=extra_args, outputfile=output_file)
             else:
-                msg = ("Error. A temporary docx file was created in the output folder but cannot be converted "
-                       f"to pdf (yet) on operating system: {operating_system}\n"
-                       "This does work in Windows with MS Word installed.")
+                msg = (
+                    "Error. A temporary docx file was created in the output folder but cannot be converted "
+                    f"to pdf (yet) on operating system: {operating_system}\n"
+                    "This does work in Windows with MS Word installed."
+                )
                 print(msg)
                 not args.debug and warnings.warn(msg)
                 return None
@@ -148,8 +151,12 @@ def main() -> None:
             for key, text in language_dict.items():
                 if key not in card_numbers and text != "${WC_JOB_misc}":
                     data2[key] = text
-            args.debug and print(("--- Making template. Removed card_numbers. len language_dict = "
-                                  f"{len(language_dict)}, len data2 = {len(data2)}"))
+            args.debug and print(
+                (
+                    "--- Making template. Removed card_numbers. len language_dict = "
+                    f"{len(language_dict)}, len data2 = {len(data2)}"
+                )
+            )
             language_dict = data2
 
         # Get the source file
@@ -176,7 +183,7 @@ def main() -> None:
                 # Skip empty files
                 continue
             tree = ElTree.parse(file)
-            all_content_elements = tree.findall('.//Content')
+            all_content_elements = tree.findall(".//Content")
             found_el = False
             for el in all_content_elements:
                 if el.text in language_dict_keys:
@@ -188,7 +195,7 @@ def main() -> None:
                     new_text = mapping_dict[el.text]
                     el.text = new_text
             if found_el:
-                with open(file, 'bw') as f:
+                with open(file, "bw") as f:
                     f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
         # Zip the files as an idml file in output folder
@@ -216,8 +223,7 @@ def get_template_doc(args_input_file: str, file_type: str, make_template: bool =
             # Creating a new template from an original docx or idml file
             template_doc = os.sep.join([BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext])
         else:
-            template_doc = os.path.normpath(
-                SCRIPT_PATH + os.sep + DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext)
+            template_doc = os.path.normpath(SCRIPT_PATH + os.sep + DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext)
 
         # If the input file has the wrong extension, then replace the file extension with the filetype
         if not template_doc.endswith(source_file_ext):
@@ -248,7 +254,8 @@ def rename_output_file(args_output_file: str, file_type: str, meta: dict, make_t
         if make_template:
             # Creating a new template from an original docx or idml file
             output_filename = os.path.normpath(
-                SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "_template." + file_type)
+                SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "_template." + file_type
+            )
         else:
             # Use source template file as input
             output_filename = os.path.normpath(SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "." + file_type)
@@ -259,14 +266,15 @@ def rename_output_file(args_output_file: str, file_type: str, meta: dict, make_t
         args.debug and print(f"--- output_filename with new ext = {output_filename}")
 
     # Do the replacement of filename place-holders with meta data
-    find_replace = [("_type", "_" + meta["edition"].lower()),
-                    ("_edition", "_" + meta["edition"].lower()),
-                    ("_component", "_" + meta["component"].lower()),
-                    ("_language", "_" + meta["language"].lower()),
-                    ("_lang", "_" + meta["language"].lower()),
-                    ("_version", "_" + meta["version"].lower()),
-                    ("_ver", "_" + meta["version"].lower()),
-                    ]
+    find_replace = [
+        ("_type", "_" + meta["edition"].lower()),
+        ("_edition", "_" + meta["edition"].lower()),
+        ("_component", "_" + meta["component"].lower()),
+        ("_language", "_" + meta["language"].lower()),
+        ("_lang", "_" + meta["language"].lower()),
+        ("_version", "_" + meta["version"].lower()),
+        ("_ver", "_" + meta["version"].lower()),
+    ]
     if not make_template:
         find_replace.append(("_template", ""))
     f = os.path.basename(output_filename)
@@ -302,22 +310,14 @@ def get_replacement_data(yaml_files: List[str], data_type: str = "translation", 
         with open(file, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
 
-        if (
-            data_type in ("translation", "translations") and
-            (
-                (data["meta"]["language"].lower() == language_code.lower()) or
-                (data["meta"]["language"].lower() == "en" and language_code.lower() == "template")
-            )
+        if data_type in ("translation", "translations") and (
+            (data["meta"]["language"].lower() == language_code.lower())
+            or (data["meta"]["language"].lower() == "en" and language_code.lower() == "template")
         ):
             args.debug and print("--- found source language file: " + os.path.split(file)[1])
             return data
-        elif (
-            data_type in ("mapping", "mappings") and
-            (
-                "meta" in data.keys() and
-                "component" in data["meta"].keys() and
-                data["meta"]["component"] == "mappings"
-            )
+        elif data_type in ("mapping", "mappings") and (
+            "meta" in data.keys() and "component" in data["meta"].keys() and data["meta"]["component"] == "mappings"
         ):
             args.debug and print("--- found source mappings file: " + os.path.split(file)[1])
             return data
@@ -332,9 +332,9 @@ def get_replacement_dict(input_data, mappings=False, make_template=False) -> dic
         # args.debug and print("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
         if suit_tag != "Common":
             if make_template:
-                data[suit["name"]] = '${{{}}}'.format(suit_tag + "_suit")
+                data[suit["name"]] = "${{{}}}".format(suit_tag + "_suit")
             else:
-                data['${{{}}}'.format(suit_tag + "_suit")] = suit["name"]
+                data["${{{}}}".format(suit_tag + "_suit")] = suit["name"]
         card_tag = ""
         for card in suit["cards"]:
             # args.debug and print("--- card.keys() = " + str(card.keys()))
@@ -347,10 +347,10 @@ def get_replacement_dict(input_data, mappings=False, make_template=False) -> dic
                 card_tag = suit_tag + card["value"]
             for tag, tag_out in card.items():
                 if tag != "value":
-                    full_tag = '${{{}}}'.format("_".join([suit_tag, card_tag, tag]))
+                    full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
                     # Common (suit) is additional data added to the language files for Title, No Card, etc
                     if suit_tag == "Common":
-                        full_tag = '${{{}}}'.format("_".join([suit_tag, card["value"]]))
+                        full_tag = "${{{}}}".format("_".join([suit_tag, card["value"]]))
 
                     # Mappings is seen as a list. Convert to string
                     if mappings:
@@ -366,22 +366,26 @@ def get_replacement_dict(input_data, mappings=False, make_template=False) -> dic
                         data[full_tag] = tag_out
                 # Add a translation for "Joker"
                 if suit_tag == "WC" and tag == "value":
-                    full_tag = '${{{}}}'.format("_".join([suit_tag, card_tag, tag]))
+                    full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
                     if make_template:
                         data[tag_out] = full_tag
                     else:
                         data[full_tag] = tag_out
 
-    args.debug and print("--- Translation data showing first 4 (key: text):\n* [" + "]\n* [".join(
-        l1 + "] : " + data[l1] for l1 in list(data.keys())[:4]))
-    args.debug and print("--- Translation data showing last 4 (key: text):\n* [" + "]\n* [".join(
-        l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:]))
+    args.debug and print(
+        "--- Translation data showing first 4 (key: text):\n* ["
+        + "]\n* [".join(l1 + "] : " + data[l1] for l1 in list(data.keys())[:4])
+    )
+    args.debug and print(
+        "--- Translation data showing last 4 (key: text):\n* ["
+        + "]\n* [".join(l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:])
+    )
     return data
 
 
 def zip_dir(path, zip_filename) -> None:
     """Zip all the files recursively from path into zip_filename (excluding root path)"""
-    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+    with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
@@ -396,7 +400,7 @@ def ensure_folder_exists(file_or_path) -> None:
 
 def replace_docx_inline_text(doc, data) -> None:
     """Replace the text in the docx document.
-    
+
     :param doc: docx document object
     :param data: dict of replacement data
     :return: docx document object
@@ -414,17 +418,20 @@ def replace_docx_inline_text(doc, data) -> None:
         runs_text = "".join(r.text for r in p.runs)
         for key, val in data.items():
             args.debug and runs_text.find("28") != -1 and print(
-                "--- found run with 28 in it. key = " + str(key) + "; val = " + str(val))
+                "--- found run with 28 in it. key = " + str(key) + "; val = " + str(val)
+            )
             if key in runs_text:
                 args.debug and key.find("28") != -1 and print(
                     "--- found key: " + str(key) + ", \n--- runs before = [" + str(",".join(r.text for r in p.runs)),
-                    "] val = " + str(val))
+                    "] val = " + str(val),
+                )
                 t = runs_text.replace(key, val)
                 for i, r in enumerate(p.runs):
                     p.runs[i].text = ""
                 p.runs[0].text = str(t).strip()
                 args.debug and key.find("VE_VE0_desc") != -1 and print(
-                    "--- runs after = " + str("; ".join(r.text for r in p.runs)))
+                    "--- runs after = " + str("; ".join(r.text for r in p.runs))
+                )
                 if key.find("${Common_") != -1 and val.find("${Common_") != -1:
                     # Not a repeated key. Used it so now remove it in case of repeat
                     data[key] = None
@@ -446,8 +453,9 @@ def get_files_from_of_type(path, ext) -> List[str]:
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
-    args.debug and print((f"--- found {len(files)} files of type {ext}. Showing first few:\n* "
-                          ) + str("\n* ".join(files[:3])))
+    args.debug and print(
+        (f"--- found {len(files)} files of type {ext}. Showing first few:\n* ") + str("\n* ".join(files[:3]))
+    )
     return files
 
 
@@ -455,7 +463,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
     description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es "
-    description += "\nExample usage: c:\cornucopia\scripts\convert.py -t idml -l fr "
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr "
     description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
@@ -463,10 +471,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--inputfile",
         type=str,
         default="",
-        help=("Input (template) file to use."
-              f"\nDefault={DEFAULT_TEMPLATE_FILENAME}.(docx|idml)"
-              "\nTemplate type is dependent on output type (-t) or file (-o) specified."
-              ),
+        help=(
+            "Input (template) file to use."
+            f"\nDefault={DEFAULT_TEMPLATE_FILENAME}.(docx|idml)"
+            "\nTemplate type is dependent on output type (-t) or file (-o) specified."
+        ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
@@ -482,8 +491,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--outputfile",
         default="",
         type=str,
-        help=("Path and name of output file to generate. (caution: existing file will be overwritten). "
-              f"\ndefault = {DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"),
+        help=(
+            "Path and name of output file to generate. (caution: existing file will be overwritten). "
+            f"\ndefault = {DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
+        ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
@@ -494,8 +505,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=LANGUAGE_CHOICES,
         default="en",
         help="Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
-             "\nTemplate will attempt to create a template from the english input file and "
-             "\nreplacing strings with the template lookup codes",
+        "\nTemplate will attempt to create a template from the english input file and "
+        "\nreplacing strings with the template lookup codes",
     )
     parser.add_argument(
         "-d",
