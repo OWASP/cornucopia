@@ -389,7 +389,7 @@ def zip_dir(path, zip_filename) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path):])
+                zip_file.write(f, f[len(path) :])
 
 
 def ensure_folder_exists(file_or_path) -> None:
