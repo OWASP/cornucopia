@@ -388,10 +388,10 @@ def zip_dir(path, zip_filename) -> None:
                 zip_file.write(f, f[len(path):])
 
 
-def ensure_folder_exists(file_or_path) -> None:
+def ensure_folder_exists(folder_path: str) -> None:
     """Check if folder exists and if not, create folders recursively."""
-    if not os.path.exists(os.path.dirname(file_or_path)):
-        os.makedirs(os.path.dirname(file_or_path))
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
 
 
 def replace_docx_inline_text(doc, data) -> None:
