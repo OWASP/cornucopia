@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION
 
 FROM python:${PYTHON_VERSION}-alpine AS linter-base
-RUN apk add --no-cache shadow~=4.6
+RUN apk add --no-cache shadow~=4.8.1
 # UID of current user who runs the build
 ARG user_id
 # GID of current user who runs the build
@@ -53,13 +53,17 @@ ENTRYPOINT [ "/bin/shellcheck" ]
 FROM linter-base AS pipenv
 RUN apk add --no-cache \
     bash=~5.0 \
-    curl=~7.66 \
-    docker~=18.09 \
-    gcc~=8.3 \
-    git~=2.22 \
+    curl=~7.77 \
+    docker~=20.10 \
+    gcc~=9.3 \
+    git~=2.26 \
     libc-dev~=0.7 \
-    make=~4.2 \
-    && pip install pipenv==2020.8.13
+    libxml2-dev=~2.9 \
+    python3-dev=~3.8 \
+    libxslt-dev \
+    libffi-dev \
+    make=~4.3 \
+    && pip install pipenv==2021.5.29
 USER builder
 # Install Python dependencies so they are cached
 ARG workdir
