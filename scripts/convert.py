@@ -9,11 +9,12 @@ import fnmatch
 import shutil
 import zipfile
 import warnings
-import docx
 import docx2pdf
+import docx
 import xml.etree.ElementTree as ElTree
 from typing import List
 from docx import document
+from docx import Document
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 BASE_PATH = os.path.normpath(SCRIPT_PATH + "/..")
@@ -389,7 +390,7 @@ def zip_dir(path, zip_filename) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path) :])
+                zip_file.write(f, f[len(path):])
 
 
 def ensure_folder_exists(folder_path: str) -> None:
@@ -438,13 +439,13 @@ def replace_docx_inline_text(doc, data) -> None:
     args.debug and print("--- finished replacing text in doc")
 
 
-def get_docx_document(docx_file) -> docx.document.Document:
+def get_docx_document(docx_file) -> document.Document:
     """Open the file and return the docx document."""
     if os.path.isfile(docx_file):
-        return docx.Document(docx_file)
+        return Document(docx_file)
     else:
         print("Error. Could not find file at: " + str(docx_file))
-        return docx.Document()
+        return Document()
 
 
 def get_files_from_of_type(path, ext) -> List[str]:
@@ -454,7 +455,7 @@ def get_files_from_of_type(path, ext) -> List[str]:
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
     args.debug and print(
-        (f"--- found {len(files)} files of type {ext}. Showing first few:\n* ") + str("\n* ".join(files[:3]))
+        f"--- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3]))
     )
     return files
 
