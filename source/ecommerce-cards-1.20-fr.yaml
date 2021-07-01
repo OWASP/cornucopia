@@ -267,11 +267,11 @@ suits:
   name: "Joker"
   cards:
   -
-    value: "Joker"
+    value: "JokerA"
     desc: "Alice peut utiliser l'application pour attaquer les systèmes et les données des utilisateurs"
     misc: "Avez-vous déjà songé à devenir membre OWASP? Tous les outils, conseils et réunions locales sont gratuits pour tous, mais l'adhésion individuelle aide à soutenir le travail de l'OWASP"
   -
-    value: "Joker"
+    value: "JokerB"
     desc: "Bob peut influencer, altérer ou affecter l'application de façon à ce qu'elle ne soit plus conforme aux exigences légales, réglementaires, contractuelles ou autres exigences de l'organisation"
     misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans les applications de formation de la VM gratuite OWASP Broken Web Applications, ou en utilisant les défis en ligne du Hacking Lab gratuit"
 -
