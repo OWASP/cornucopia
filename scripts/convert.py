@@ -8,12 +8,10 @@ import yaml
 import fnmatch
 import shutil
 import zipfile
-import warnings
-import docx
 import docx2pdf
+import docx
 import xml.etree.ElementTree as ElTree
 from typing import List
-from docx import document
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 BASE_PATH = os.path.normpath(SCRIPT_PATH + "/..")
@@ -31,27 +29,24 @@ def main() -> None:
     )
     global args
     args = parse_arguments(sys.argv[1:])
-    args.debug and print("--- args = " + str(args))
+    print("--- args = " + str(args)) if args.debug else None
 
     # Get the file type to output.
     file_type: str
-    if args.outputfiletype is None:
+    if args.outputfiletype:
+        file_type = args.outputfiletype.strip(".")
+    else:
         file_type = os.path.splitext(os.path.basename(args.outputfile))[1].strip(".")
         # Specify a fallback default
         if file_type in ("", None):
             file_type = "docx"
-    else:
-        file_type = args.outputfiletype.strip(".")
-    args.debug and print(f"--- file_type = {file_type}")
+    print(f"--- file_type = {file_type}") if args.debug else None
 
     # Get the language files and find the output language needed
     yaml_files = get_files_from_of_type(os.sep.join([BASE_PATH, "source"]), "yaml")
 
     if not yaml_files:
-        msg = "Error. No language files found in folder: " + str(os.sep.join([BASE_PATH, "source"]))
-        print(msg)
-        not args.debug and warnings.warn(msg)
-        # Todo: log this error
+        logging.error("Error. No language files found in folder: " + str(os.sep.join([BASE_PATH, "source"])))
         return None
 
     make_template: bool = args.language.lower() == "template"
@@ -61,10 +56,7 @@ def main() -> None:
     language_dict: dict = get_replacement_dict(language_data, False, make_template)
     # If no data found in the language file, then exit with error
     if "suits" not in list(language_data.keys()):
-        msg = "Error. Could not find the `suits` tag in the language file."
-        print(msg)
-        not args.debug and warnings.warn(msg)
-        # Todo: Log this error
+        logging.error("Error. Could not find the `suits` tag in the language file.")
         return None
 
     # Get the mapping data
@@ -76,15 +68,12 @@ def main() -> None:
     meta: dict = get_meta_data(language_data)
     # If no meta data found, then exit with an error
     if meta in (None, {}):
-        msg = (
+        logging.error(
             "Error. Could not find meta tag in the language file. "
             "Please ensure required language file is in the source folder."
         )
-        print(msg)
-        not args.debug and warnings.warn(msg)
-        # Todo: Log this error
         return None
-    args.debug and print(f"--- meta data = {meta}")
+    print(f"--- meta data = {meta}") if args.debug else None
 
     # Name output file with correct edition, component, language & version
     output_file: str = rename_output_file(args.outputfile, file_type, meta, make_template)
@@ -93,7 +82,7 @@ def main() -> None:
     if file_type in ("docx", "pdf"):
         template_doc: str = get_template_doc(args.inputfile, file_type, make_template)
         # Get the input (template) document
-        doc: document.Document = get_docx_document(template_doc)
+        doc: docx.document.Document = get_docx_document(template_doc)
 
         # Replace the text with the data from the source translation file
         replace_docx_inline_text(doc, language_dict)
@@ -112,7 +101,9 @@ def main() -> None:
             # and remove the temp docx file if not debugging
             temp_output_file = os.sep.join([BASE_PATH, "output", "temp.docx"])
             doc.save(temp_output_file)
-            args.debug and print(f"--- temp_output_file = {temp_output_file}\n--- starting pdf conversion now.")
+            print(
+                f"--- temp_output_file = {temp_output_file}\n--- starting pdf conversion now."
+            ) if args.debug else None
 
             # Check which operating system we are on to use different methods for converting docx to pdf
             operating_system: str = sys.platform
@@ -129,13 +120,11 @@ def main() -> None:
             #     extra_args = ['--pdf-engine=pdflatex']
             #     pypandoc.convert_file(temp_output_file, "pdf", extra_args=extra_args, outputfile=output_file)
             else:
-                msg = (
+                logging.error(
                     "Error. A temporary docx file was created in the output folder but cannot be converted "
                     f"to pdf (yet) on operating system: {operating_system}\n"
                     "This does work in Windows with MS Word installed."
                 )
-                print(msg)
-                not args.debug and warnings.warn(msg)
                 return None
 
             # If not debugging then delete the temp file
@@ -143,7 +132,7 @@ def main() -> None:
 
     # Process idml xml files
     if file_type == "idml":
-        args.debug and print("--- Starting the processing of the idml-pack xml files")
+        print("--- Starting the processing of the idml-pack xml files") if args.debug else None
         if make_template:
             # If we are creating the template files, then exclude card numbers
             card_numbers = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "0", "J", "Q", "K"]
@@ -151,12 +140,12 @@ def main() -> None:
             for key, text in language_dict.items():
                 if key not in card_numbers and text != "${WC_JOB_misc}":
                     data2[key] = text
-            args.debug and print(
+            print(
                 (
                     "--- Making template. Removed card_numbers. len language_dict = "
                     f"{len(language_dict)}, len data2 = {len(data2)}"
                 )
-            )
+            ) if args.debug else None
             language_dict = data2
 
         # Get the source file
@@ -167,12 +156,14 @@ def main() -> None:
         temp_output_path = output_path + "/temp"
         # Ensure the output folder and temp output folder exist
         ensure_folder_exists(temp_output_path)
-        args.debug and print("--- temp_folder for extraction of xml files = " + str(temp_output_path))
+        print("--- temp_folder for extraction of xml files = " + str(temp_output_path)) if args.debug else None
 
         # Unzip source xml files and place in temp output folder
         with zipfile.ZipFile(template_doc) as idml_archive:
             idml_archive.extractall(temp_output_path)
-            args.debug and print("--- namelist of first few files in archive = " + str(idml_archive.namelist()[:5]))
+            print(
+                "--- namelist of first few files in archive = " + str(idml_archive.namelist()[:5])
+            ) if args.debug else None
 
         xml_files = get_files_from_of_type(temp_output_path, "xml")
         language_dict_keys = list(language_dict.keys())
@@ -199,7 +190,7 @@ def main() -> None:
                     f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
         # Zip the files as an idml file in output folder
-        args.debug and print("--- finished replacing text in xml files. Now zipping into idml file")
+        print("--- finished replacing text in xml files. Now zipping into idml file") if args.debug else None
         zip_dir(temp_output_path, output_file)
 
         # If not debugging, delete temp folder and files
@@ -228,14 +219,11 @@ def get_template_doc(args_input_file: str, file_type: str, make_template: bool =
         # If the input file has the wrong extension, then replace the file extension with the filetype
         if not template_doc.endswith(source_file_ext):
             template_doc = ".".join([os.path.splitext(template_doc)[0], source_file_ext])
-            args.debug and print(f"--- template_doc with new ext = {template_doc}")
-    args.debug and print(f"--- template_doc = {template_doc}")
+            print(f"--- template_doc with new ext = {template_doc}") if args.debug else None
+    print(f"--- template_doc = {template_doc}") if args.debug else None
 
     if not os.path.isfile(template_doc):
-        msg = f"Error. Source file not found: {template_doc}. Please ensure file exists and try again."
-        print(msg)
-        not args.debug and warnings.warn(msg)
-        # Todo: Log this msg
+        logging.error(f"Error. Source file not found: {template_doc}. Please ensure file exists and try again.")
         return ""
 
     return template_doc
@@ -244,29 +232,36 @@ def get_template_doc(args_input_file: str, file_type: str, make_template: bool =
 def rename_output_file(args_output_file: str, file_type: str, meta: dict, make_template: bool = False) -> str:
     """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
     if args_output_file:
-        # Output file specified
+        # Output file is specified as an argument
         if os.path.isabs(args_output_file):
             output_filename = args_output_file
         else:
             output_filename = os.path.normpath(SCRIPT_PATH + os.sep + args_output_file)
     else:
         # No output file specified - using default
-        if make_template:
-            # Creating a new template from an original docx or idml file
-            output_filename = os.path.normpath(
-                SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "_template." + file_type
-            )
-        else:
-            # Use source template file as input
-            output_filename = os.path.normpath(SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + "." + file_type)
+        output_filename = os.path.normpath(
+            SCRIPT_PATH + os.sep + DEFAULT_OUTPUT_FILENAME + ("_template." if make_template else None) + file_type
+        )
 
     # If the output file has the wrong extension, then replace the file extension with the filetype
     if not output_filename.endswith(file_type):
         output_filename = ".".join([os.path.splitext(output_filename)[0], file_type])
-        args.debug and print(f"--- output_filename with new ext = {output_filename}")
+        print(f"--- output_filename with new ext = {output_filename}") if args.debug else None
 
     # Do the replacement of filename place-holders with meta data
-    find_replace = [
+    find_replace = get_find_replace_list(meta, make_template)
+
+    f = os.path.basename(output_filename)
+    for r in find_replace:
+        f = f.replace(*r)
+    output_filename = os.path.dirname(output_filename) + os.sep + f
+
+    print(f"--- output_filename = {output_filename}") if args.debug else None
+    return output_filename
+
+
+def get_find_replace_list(meta: dict, make_template: bool) -> List[dict]:
+    l = [
         ("_type", "_" + meta["edition"].lower()),
         ("_edition", "_" + meta["edition"].lower()),
         ("_component", "_" + meta["component"].lower()),
@@ -276,15 +271,8 @@ def rename_output_file(args_output_file: str, file_type: str, meta: dict, make_t
         ("_ver", "_" + meta["version"].lower()),
     ]
     if not make_template:
-        find_replace.append(("_template", ""))
-    f = os.path.basename(output_filename)
-    for r in find_replace:
-        f = f.replace(*r)
-    output_filename = os.path.dirname(output_filename) + os.sep + f
-
-    args.debug and print(f"--- output_filename = {output_filename}")
-    return output_filename
-
+        l.append(("_template", ""))
+    return l
 
 def get_meta_data(language_data) -> dict:
     if "meta" in list(language_data):
@@ -298,14 +286,8 @@ def get_meta_data(language_data) -> dict:
 
 
 def get_replacement_data(yaml_files: List[str], data_type: str = "translation", language_code="en") -> dict:
-    """Get the raw data of the replacement text from correct yaml file
-
-    :param yaml_files: list of files containing replacement language data or replacement mapping data
-    :param data_type: type of data requested. Either translation data or mapping data
-    :param language_code: code of the language requested. Looked up in the meta data of language files
-    :return: dict of lookup tags and replacement text
-    """
-    args.debug and print("--- Starting get_replacement_data()")
+    """Get the raw data of the replacement text from correct yaml file"""
+    print("--- Starting get_replacement_data()") if args.debug else None
     for file in yaml_files:
         with open(file, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
@@ -314,12 +296,12 @@ def get_replacement_data(yaml_files: List[str], data_type: str = "translation", 
             (data["meta"]["language"].lower() == language_code.lower())
             or (data["meta"]["language"].lower() == "en" and language_code.lower() == "template")
         ):
-            args.debug and print("--- found source language file: " + os.path.split(file)[1])
+            print("--- found source language file: " + os.path.split(file)[1]) if args.debug else None
             return data
         elif data_type in ("mapping", "mappings") and (
             "meta" in data.keys() and "component" in data["meta"].keys() and data["meta"]["component"] == "mappings"
         ):
-            args.debug and print("--- found source mappings file: " + os.path.split(file)[1])
+            print("--- found source mappings file: " + os.path.split(file)[1]) if args.debug else None
             return data
 
 
@@ -329,7 +311,7 @@ def get_replacement_dict(input_data, mappings=False, make_template=False) -> dic
     # Short tags to match the tags in the template documents
     suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC", "Common"]
     for suit, suit_tag in zip(input_data["suits"], suit_tags):
-        # args.debug and print("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
+        # print ("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag)) if args.debug else None
         if suit_tag != "Common":
             if make_template:
                 data[suit["name"]] = "${{{}}}".format(suit_tag + "_suit")
@@ -337,50 +319,52 @@ def get_replacement_dict(input_data, mappings=False, make_template=False) -> dic
                 data["${{{}}}".format(suit_tag + "_suit")] = suit["name"]
         card_tag = ""
         for card in suit["cards"]:
-            # args.debug and print("--- card.keys() = " + str(card.keys()))
-            if suit_tag == "WC":
-                if card_tag == "JOA":
-                    card_tag = "JOB"
-                else:
-                    card_tag = "JOA"
-            else:
-                card_tag = suit_tag + card["value"]
-            for tag, tag_out in card.items():
+            # print ("--- card.keys() = " + str(card.keys())) if args.debug else None
+            check_update_card_tag(suit_tag, card_tag, card["value"])
+            for tag, text_output in card.items():
                 if tag != "value":
-                    full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
+                    # If no output text then do not include this replacement tag
+                    if len(text_output) == 0:
+                        continue
+
                     # Common (suit) is additional data added to the language files for Title, No Card, etc
                     if suit_tag == "Common":
                         full_tag = "${{{}}}".format("_".join([suit_tag, card["value"]]))
+                    else:
+                        full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
 
                     # Mappings is seen as a list. Convert to string
-                    if mappings:
-                        if isinstance(tag_out, list):
-                            tag_out = ", ".join(str(s) for s in list(tag_out))
+                    if mappings and isinstance(text_output, list):
+                        text_output = ", ".join(str(s) for s in list(text_output))
 
-                    # If no output text then do not include this replacement tag
-                    if len(tag_out) == 0:
-                        continue
-                    if make_template:
-                        data[tag_out] = full_tag
-                    else:
-                        data[full_tag] = tag_out
                 # Add a translation for "Joker"
                 if suit_tag == "WC" and tag == "value":
                     full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
-                    if make_template:
-                        data[tag_out] = full_tag
-                    else:
-                        data[full_tag] = tag_out
 
-    args.debug and print(
+                if make_template:
+                    data[text_output] = full_tag
+                else:
+                    data[full_tag] = text_output
+
+    print(
         "--- Translation data showing first 4 (key: text):\n* ["
         + "]\n* [".join(l1 + "] : " + data[l1] for l1 in list(data.keys())[:4])
-    )
-    args.debug and print(
+    ) if args.debug else None
+    print(
         "--- Translation data showing last 4 (key: text):\n* ["
         + "]\n* [".join(l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:])
-    )
+    ) if args.debug else None
     return data
+
+
+def check_update_card_tag(suit_tag: str, card_tag: str, card_value: str) -> None:
+    if suit_tag == "WC":
+        if card_tag == "JOA":
+            card_tag = "JOB"
+        else:
+            card_tag = "JOA"
+    else:
+        card_tag = suit_tag + card_value
 
 
 def zip_dir(path, zip_filename) -> None:
@@ -389,7 +373,7 @@ def zip_dir(path, zip_filename) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path) :])
+                zip_file.write(f, f[len(path):])
 
 
 def ensure_folder_exists(folder_path: str) -> None:
@@ -399,13 +383,8 @@ def ensure_folder_exists(folder_path: str) -> None:
 
 
 def replace_docx_inline_text(doc, data) -> None:
-    """Replace the text in the docx document.
-
-    :param doc: docx document object
-    :param data: dict of replacement data
-    :return: docx document object
-    """
-    args.debug and print("--- starting docx_replace")
+    """Replace the text in the docx document."""
+    print("--- starting docx_replace") if args.debug else None
 
     # Get all the paragraphs together
     paragraphs = list(doc.paragraphs)
@@ -417,25 +396,25 @@ def replace_docx_inline_text(doc, data) -> None:
     for p in paragraphs:
         runs_text = "".join(r.text for r in p.runs)
         for key, val in data.items():
-            args.debug and runs_text.find("28") != -1 and print(
+            print(
                 "--- found run with 28 in it. key = " + str(key) + "; val = " + str(val)
-            )
+            ) if args.debug and runs_text.find("28") != -1 else None
             if key in runs_text:
-                args.debug and key.find("28") != -1 and print(
+                print(
                     "--- found key: " + str(key) + ", \n--- runs before = [" + str(",".join(r.text for r in p.runs)),
                     "] val = " + str(val),
-                )
+                ) if args.debug and key.find("28") != -1 else None
                 t = runs_text.replace(key, val)
                 for i, r in enumerate(p.runs):
                     p.runs[i].text = ""
                 p.runs[0].text = str(t).strip()
-                args.debug and key.find("VE_VE0_desc") != -1 and print(
-                    "--- runs after = " + str("; ".join(r.text for r in p.runs))
-                )
+                print("--- runs after = " + str("; ".join(r.text for r in p.runs))) if args.debug and key.find(
+                    "VE_VE0_desc"
+                ) != -1 else None
                 if key.find("${Common_") != -1 and val.find("${Common_") != -1:
                     # Not a repeated key. Used it so now remove it in case of repeat
                     data[key] = None
-    args.debug and print("--- finished replacing text in doc")
+    print("--- finished replacing text in doc") if args.debug else None
 
 
 def get_docx_document(docx_file) -> docx.document.Document:
@@ -453,9 +432,8 @@ def get_files_from_of_type(path, ext) -> List[str]:
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
-    args.debug and print(
-        (f"--- found {len(files)} files of type {ext}. Showing first few:\n* ") + str("\n* ".join(files[:3]))
-    )
+
+    print(f"--- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3])))
     return files
 
 
