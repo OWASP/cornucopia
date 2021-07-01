@@ -1,0 +1,11 @@
+<ns0:Story xmlns:ns0="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="16.2">
+	<Story Self="u84b4" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Main Body">
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+				<Content>Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained</Content>
+			</CharacterStyleRange>
+		</ParagraphStyleRange>
+	</Story>
+</ns0:Story>

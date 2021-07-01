@@ -512,7 +512,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "-d",
         "--debug",
         action="store_true",
-        help="Output additional information to debug script",
+        help="Output additional information to debug script.",
     )
     return parser.parse_args(input_args)
 

@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bd762c55baaa22697980a72850a69ea0b0e868955c85d19a5250c3a7937442a2"
+            "sha256": "965559cc6bde7d4aa74380cf732f281081c747608efd82807a98f8cf3d9e6f41"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.8"
+            "python_version": "3.9"
         },
         "sources": [
             {
@@ -16,6 +16,17 @@
         ]
     },
     "default": {
+        "appscript": {
+            "hashes": [
+                "sha256:15727bda6f4049be5436e1974461f96b088d14ad154950417a7cda04587e6097",
+                "sha256:2137c3dec0371243e8cac2c134e5f439cc8eccba77756ade59f1597ca9f1b7e5",
+                "sha256:25c4be8fee83d69997952a7e378dd22d7d83d025566135b0b1d5552339b8ec1f",
+                "sha256:2948e5cd04718718230b2e9756656c1155b16f3421e5bc4c28ccc345a4b1536f",
+                "sha256:829f718984577d3f0e936d8d1b0ca842d28be302d013b8ae7e3d2ed3e52cd119"
+            ],
+            "markers": "sys_platform == 'darwin'",
+            "version": "==1.1.2"
+        },
         "docx2pdf": {
             "hashes": [
                 "sha256:90528dbc6324868cbbdfa9a0dc0bb2998e79e20cde3a6ba82be58d3582fe008f",
