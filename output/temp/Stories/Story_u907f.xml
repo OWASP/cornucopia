@@ -1,0 +1,30 @@
+<ns0:Story xmlns:ns0="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="16.2">
+	<Story Self="u907f" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Main Body">
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+				<Content>Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates</Content>
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="6" KerningMethod="$ID/None" KerningValue="0">
+				<Br />
+			</CharacterStyleRange>
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]" PointSize="6" KerningMethod="$ID/None" KerningValue="0">
+				<Properties>
+					<AppliedFont type="string">Minion Pro</AppliedFont>
+				</Properties>
+				<Br />
+				<Br />
+				<Br />
+				<Br />
+				<Br />
+				<Br />
+			</CharacterStyleRange>
+		</ParagraphStyleRange>
+		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Ace Text">
+			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+				<Content>Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab</Content>
+			</CharacterStyleRange>
+		</ParagraphStyleRange>
+	</Story>
+</ns0:Story>
