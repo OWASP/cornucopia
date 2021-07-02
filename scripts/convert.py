@@ -329,20 +329,22 @@ class Convert:
         for key in list(k for k in input_data.keys() if k != "meta"):
             if key == "suits":
                 suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
+                suit_key = "cards"
             elif key == "paragraphs":
                 suit_tags = ["Common"]
+                suit_key = "sentences"
             for suit, suit_tag in zip(input_data[key], suit_tags):
                 if self.args.debug:
                     print ("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
                 data.update(self.get_tag_for_suit_name(suit, suit_tag))
 
                 card_tag = ""
-                for card in suit["cards"]:
+                for card in suit[suit_key]:
                     # if self.args.debug:
                     #     print ("--- card.keys() = " + str(card.keys()))
                     for tag, text_output in card.items():
                         if self.args.debug:
-                            print(f"--- tag = {tag}, text output[:10] = {text_output[:10]}")
+                            print(f"--- tag = {tag}, text output[:20] = {text_output[:20]}")
                         if tag != "value":
                             # If no output text then do not include this replacement tag
                             if len(text_output) == 0:
@@ -366,11 +368,10 @@ class Convert:
                             else:
                                 data[full_tag] = text_output
         if self.args.debug:
-            print("--- Translation data showing first 4 (key: text):\n* ["
-                  "]\n* [".join(l1 + "] : " + data[l1] for l1 in list(data.keys())[:4]))
-            print("--- Translation data showing last 4 (key: text):\n* ["
-                  "]\n* [".join(l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:]))
-        exit()
+            print("\n--- Translation data showing first 4 (key: text):\n* ",
+                  "\n* [".join(l1 + "] : " + data[l1][:30] for l1 in list(data.keys())[:4]))
+            print("\n--- Translation data showing last 4 (key: text):\n* "
+                  "\n* [".join(l2 + "] : " + data[l2][:30] for l2 in list(data.keys())[-4:]))
         return data
 
     def get_tag_for_suit_name(self, suit, suit_tag) -> dict:
