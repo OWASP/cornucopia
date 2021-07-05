@@ -345,28 +345,26 @@ class Convert:
                     for tag, text_output in card.items():
                         if self.args.debug:
                             print(f"--- tag = {tag}, text output[:20] = {text_output[:20]}")
-                        if tag != "value":
-                            # If no output text then do not include this replacement tag
-                            if len(text_output) == 0:
-                                continue
+                        if tag == "value" or len(text_output) == 0:
+                            continue
 
-                            full_tag = self.get_full_tag(suit_tag, card["value"], tag)
+                        full_tag = self.get_full_tag(suit_tag, card["value"], tag)
 
-                            # Mappings is seen as a list. Convert to string
-                            if mappings and isinstance(text_output, list):
-                                text_output = ", ".join(str(s) for s in list(text_output))
+                        # Mappings is seen as a list. Convert to string
+                        if mappings and isinstance(text_output, list):
+                            text_output = ", ".join(str(s) for s in list(text_output))
 
-                            # Add a translation for "Joker"
-                            if suit_tag == "WC" and tag == "value":
-                                full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
+                        # Add a translation for "Joker"
+                        if suit_tag == "WC" and tag == "value":
+                            full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
 
-                            if self.args.debug:
-                                print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
+                        if self.args.debug:
+                            print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
 
-                            if self.make_template():
-                                data[text_output] = full_tag
-                            else:
-                                data[full_tag] = text_output
+                        if self.make_template():
+                            data[text_output] = full_tag
+                        else:
+                            data[full_tag] = text_output
         if self.args.debug:
             print("\n--- Translation data showing first 4 (key: text):\n* ",
                   "\n* [".join(l1 + "] : " + data[l1][:30] for l1 in list(data.keys())[:4]))
