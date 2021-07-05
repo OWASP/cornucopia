@@ -326,6 +326,7 @@ class Convert:
         """Loop through language file and build up a find-replace dict"""
         data = {}
         # Short tags to match the suits in the template documents
+        suit_tags = suit_key = ""
         for key in list(k for k in input_data.keys() if k != "meta"):
             if key == "suits":
                 suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
