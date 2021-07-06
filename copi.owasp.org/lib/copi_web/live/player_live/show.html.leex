@@ -1,8 +1,6 @@
 <script></script>
 
-<h1>Cornucopia Session</h1>
-
-<h2><%= @player.game.name %></h2>
+<h1>Cornucopia Session (<%= @player.game.name %>)</h1>
 
 <%= if @player.game.started_at do %>
 <h3>Game started at <%= @player.game.started_at %></h3>
@@ -15,7 +13,7 @@
 
 <div id="hand">
 
-  <%= for dealt_card <- @player.dealt_cards do %>
+  <%= for dealt_card <- (@player.dealt_cards |> ordered_cards) do %>
 
   <% card = dealt_card.card %>
 

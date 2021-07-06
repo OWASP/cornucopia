@@ -356,7 +356,18 @@ $wildcard-color: #fccd8f;
 }
 
 #hand {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 
+  .card {
+    flex: 0 0 auto;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  padding: 10px;
 }
 
 /* Dragula Styles */@at-root.gu-mirror {

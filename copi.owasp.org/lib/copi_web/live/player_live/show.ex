@@ -44,4 +44,8 @@ defmodule CopiWeb.PlayerLive.Show do
   def topic(game_id) do
     "game:#{game_id}"
   end
+
+  def ordered_cards(cards) do
+    Enum.sort_by(cards, &(&1.card.id))
+  end
 end
