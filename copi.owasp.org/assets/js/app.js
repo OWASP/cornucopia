@@ -35,4 +35,15 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-dragula([document.querySelector('#hand'), document.querySelector('#table')]);
+dragula([document.querySelector('#hand'), document.querySelector('#table')])
+.on('drop', (element, target) => {
+    fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        dealt_card_id: element.dataset.dealtcard
+      })
+    }).then(_res => console.log('played card!'))
+  });

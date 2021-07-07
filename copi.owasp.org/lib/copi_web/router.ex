@@ -31,6 +31,12 @@ defmodule CopiWeb.Router do
     resources "/cards", CardController
   end
 
+  scope "/api", CopiWeb do
+    pipe_through :api
+
+    put "/games/:game_id/players/:player_id/card", ApiController, :play_card
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CopiWeb do
   #   pipe_through :api
