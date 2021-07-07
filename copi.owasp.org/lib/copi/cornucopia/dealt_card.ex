@@ -4,6 +4,7 @@ defmodule Copi.Cornucopia.DealtCard do
 
   schema "dealt_cards" do
     field :played_in_round, :integer
+    field :scores, :boolean
 
     belongs_to :player, Copi.Cornucopia.Player, type: Ecto.ULID
     belongs_to :card, Copi.Cornucopia.Card
