@@ -1,68 +1,58 @@
-<h1>Show Card</h1>
+<div class="card <%= @card.value %> <%= Slug.slugify @card.category %>">
+  <div class="left-bar"><%= @card.category %></div>
+  <div class="main-content">
+    <p class="value"><%= @card.value %></p>
+    <p class="description"><%= @card.description %></p>
 
-<ul>
+    <%= if @card.value in ["A", "Joker"] do %>
 
-  <li>
-    <strong>Category:</strong>
-    <%= @card.category %>
-  </li>
+    <p class="misc"><%= @card.misc %></p>
 
-  <li>
-    <strong>Value:</strong>
-    <%= @card.value %>
-  </li>
+    <% else %>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @card.description %>
-  </li>
+    <dl class="mappings">
+      <dt>OWASP SCP</dt>
+      <dd>
+        <%= if @card.owasp_scp != nil and Enum.count(@card.owasp_scp) > 0 do %>
+          <%= Enum.join @card.owasp_scp, ", " %>
+        <% else %>
+          &ndash;
+        <% end %>
+      </dd>
+      <dt>OWASP ASVS</dt>
+      <dd>
+        <%= if @card.owasp_asvs != nil and Enum.count(@card.owasp_asvs) > 0 do %>
+          <%= Enum.join @card.owasp_asvs, ", " %>
+        <% else %>
+          &ndash;
+        <% end %>
+      </dd>
+      <dt>OWASP AppSensor</dt>
+      <dd>
+        <%= if @card.owasp_appsensor != nil and Enum.count(@card.owasp_appsensor) > 0 do %>
+          <%= Enum.join @card.owasp_appsensor, ", " %>
+        <% else %>
+          &ndash;
+        <% end %>
+      </dd>
+      <dt>CAPEC</dt>
+      <dd>
+        <%= if @card.capec != nil and Enum.count(@card.capec) > 0 do %>
+          <%= format_capec(@card.capec) %>
+        <% else %>
+          &ndash;
+        <% end %>
+      </dd>
+      <dt>SAFECODE</dt>
+      <dd>
+        <%= if @card.safecode != nil and Enum.count(@card.safecode) > 0 do %>
+          <%= Enum.join @card.safecode, ", " %>
+        <% else %>
+          &ndash;
+        <% end %>
+      </dd>
+    </dl>
 
-  <li>
-    <strong>Misc:</strong>
-    <%= @card.misc %>
-  </li>
-
-  <li>
-    <strong>Edition:</strong>
-    <%= @card.edition %>
-  </li>
-
-  <li>
-    <strong>Language:</strong>
-    <%= @card.language %>
-  </li>
-
-  <li>
-    <strong>Version:</strong>
-    <%= @card.version %>
-  </li>
-
-  <li>
-    <strong>Owasp scp:</strong>
-    <%= @card.owasp_scp %>
-  </li>
-
-  <li>
-    <strong>Owasp asvs:</strong>
-    <%= @card.owasp_asvs %>
-  </li>
-
-  <li>
-    <strong>Owasp appsensor:</strong>
-    <%= @card.owasp_appsensor %>
-  </li>
-
-  <li>
-    <strong>Capec:</strong>
-    <%= @card.capec %>
-  </li>
-
-  <li>
-    <strong>Safecode:</strong>
-    <%= @card.safecode %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.card_path(@conn, :edit, @card) %></span>
-<span><%= link "Back", to: Routes.card_path(@conn, :index) %></span>
+    <% end %>
+  </div>
+</div>

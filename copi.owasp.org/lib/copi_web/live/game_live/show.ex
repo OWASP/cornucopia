@@ -61,10 +61,4 @@ defmodule CopiWeb.GameLive.Show do
   def topic(game_id) do
     "game:#{game_id}"
   end
-
-  def format_capec(refs) do
-    refs
-    |> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
-    |> Enum.intersperse(", ")
-  end
 end

@@ -15,66 +15,7 @@
 
   <%= for dealt_card <- (@player.dealt_cards |> ordered_cards) do %>
 
-  <% card = dealt_card.card %>
-
-  <div class="card <%= card.value %> <%= Slug.slugify card.category %>">
-    <div class="left-bar"><%= card.category %></div>
-    <div class="main-content">
-      <p class="value"><%= card.value %></p>
-      <p class="description"><%= card.description %></p>
-
-      <%= if card.value in ["A", "Joker"] do %>
-
-      <p class="misc"><%= card.misc %></p>
-
-      <% else %>
-
-      <dl class="mappings">
-        <dt>OWASP SCP</dt>
-        <dd>
-          <%= if card.owasp_scp != nil and Enum.count(card.owasp_scp) > 0 do %>
-            <%= Enum.join card.owasp_scp, ", " %>
-          <% else %>
-            &ndash;
-          <% end %>
-        </dd>
-        <dt>OWASP ASVS</dt>
-        <dd>
-          <%= if card.owasp_asvs != nil and Enum.count(card.owasp_asvs) > 0 do %>
-            <%= Enum.join card.owasp_asvs, ", " %>
-          <% else %>
-            &ndash;
-          <% end %>
-        </dd>
-        <dt>OWASP AppSensor</dt>
-        <dd>
-          <%= if card.owasp_appsensor != nil and Enum.count(card.owasp_appsensor) > 0 do %>
-            <%= Enum.join card.owasp_appsensor, ", " %>
-          <% else %>
-            &ndash;
-          <% end %>
-        </dd>
-        <dt>CAPEC</dt>
-        <dd>
-          <%= if card.capec != nil and Enum.count(card.capec) > 0 do %>
-            <%= format_capec(card.capec) %>
-          <% else %>
-            &ndash;
-          <% end %>
-        </dd>
-        <dt>SAFECODE</dt>
-        <dd>
-          <%= if card.safecode != nil and Enum.count(card.safecode) > 0 do %>
-            <%= Enum.join card.safecode, ", " %>
-          <% else %>
-            &ndash;
-          <% end %>
-        </dd>
-      </dl>
-
-      <% end %>
-    </div>
-  </div>
+    <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
 
   <% end %>
 

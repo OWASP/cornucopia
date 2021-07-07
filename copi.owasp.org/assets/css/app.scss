@@ -96,8 +96,7 @@
 .card {
   float: left;
   display: flex;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   width: 200px;
   height: 293px;
   border-radius: 10px;
@@ -367,7 +366,7 @@ $wildcard-color: #fccd8f;
   -webkit-overflow-scrolling: touch;
 
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  padding: 10px;
+  
 }
 
 /* Dragula Styles */@at-root.gu-mirror {
