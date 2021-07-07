@@ -70,7 +70,7 @@ set_proposed_version() {
         return
     fi
 
-    error "no chnages, no release"
+    error "no changes, no release"
 }
 
 # Verify given proposed version with a user with option to enforce user's own
@@ -102,7 +102,7 @@ verify_version_with_user() {
     fi
 
     local new_version
-    while ! [[ "${new_version:-}" =~ ^[0-9]+\.[0-9]+.[0-9]+$ ]]; do
+    while ! [[ "${new_version:-}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; do
         read \
             -p $'New version in semver format: ' \
             -r \
