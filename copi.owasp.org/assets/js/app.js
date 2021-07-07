@@ -35,8 +35,11 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-dragula([document.querySelector('#hand'), document.querySelector('#table')])
-.on('drop', (element, target) => {
+dragula([document.querySelector('#hand'), document.querySelector('#table')], {
+    accepts: function (el, target) {
+        return target !== document.getElementById('hand')
+    }
+}).on('drop', (element, target) => {
     fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
       method: 'PUT',
       headers: {
