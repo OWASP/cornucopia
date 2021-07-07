@@ -6,14 +6,25 @@
 <h3>Game started at <%= @player.game.started_at %></h3>
 <% end %>
 
-<div id="table"></div>
+<div id="table">
+  <%= for player <- @game.players do %>
+
+    <%= for dealt_card <- (player.dealt_cards |> played_cards) do %>
+      <%= if dealt_card.played_in_round == @game.rounds_played + 1 do %>
+        <%= player.name %>
+        <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
+      <% end %>
+    <% end %>
+
+ <% end %>
+</div>
 
 
 <h4><%= @player.name %></h4>
 
 <div id="hand">
 
-  <%= for dealt_card <- (@player.dealt_cards |> ordered_cards) do %>
+  <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
     <div data-game="<%= @player.game.id %>" data-player="<%= @player.id %>" data-dealtcard="<%= dealt_card.id %>">
       <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
     </div>

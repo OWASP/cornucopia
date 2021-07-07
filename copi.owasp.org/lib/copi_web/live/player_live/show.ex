@@ -12,8 +12,13 @@ defmodule CopiWeb.PlayerLive.Show do
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
     with {:ok, player} <- Player.find(player_id) do
-      CopiWeb.Endpoint.subscribe(topic(player.game_id))
-      {:noreply, socket |> assign(:page_title, page_title(socket.assigns.live_action)) |> assign(:player, player)}
+      with {:ok, game} <- Game.find(player.game_id) do
+        CopiWeb.Endpoint.subscribe(topic(player.game_id))
+        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
+      else
+        {:error, _reason} ->
+          {:ok, redirect(socket, to: "/error")}
+      end
     else
       {:error, _reason} ->
         {:ok, redirect(socket, to: "/error")}
@@ -21,9 +26,14 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   @impl true
-  def handle_info(%{topic: message_topic, event: "game:updated", payload: game}, socket) do
+  def handle_info(%{topic: _message_topic, event: "game:updated", payload: _game}, socket) do
     with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      {:noreply, socket |> assign(:player, updated_player)}
+      with {:ok, updated_game} <- Game.find(updated_player.game_id) do
+        {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+      else
+        {:error, _reason} ->
+          {:ok, redirect(socket, to: "/error")}
+      end
     else
       {:error, _reason} ->
         {:ok, redirect(socket, to: "/error")}
@@ -45,5 +55,13 @@ defmodule CopiWeb.PlayerLive.Show do
 
   def ordered_cards(cards) do
     Enum.sort_by(cards, &(&1.card.id))
+  end
+
+  def unplayed_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round in [0, nil] end)
+  end
+
+  def played_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round not in [0, nil] end)
   end
 end

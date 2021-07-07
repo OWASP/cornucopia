@@ -19,10 +19,6 @@ defmodule CopiWeb.ApiController do
           {:error, _changeset} ->
             conn |> json(%{"error" => "Could not update dealt card"})
         end
-
-
-
-
       else
         conn |> json(%{"error" => "Could not find player and dealt card"})
       end
