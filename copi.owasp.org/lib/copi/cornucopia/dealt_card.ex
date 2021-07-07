@@ -3,7 +3,7 @@ defmodule Copi.Cornucopia.DealtCard do
   import Ecto.Changeset
 
   schema "dealt_cards" do
-    field :played_in_round, :id
+    field :played_in_round, :integer
 
     belongs_to :player, Copi.Cornucopia.Player, type: Ecto.ULID
     belongs_to :card, Copi.Cornucopia.Card

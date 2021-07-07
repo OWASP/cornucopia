@@ -9,10 +9,6 @@ suits:
   name: "Data validation & encoding"
   cards:
   -
-    value: "A"
-    desc: "You have invented a new attack against Data Validation and Encoding"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
-  -
     value: "2"
     desc: "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
   -
@@ -48,13 +44,13 @@ suits:
   -
     value: "K"
     desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly"
+  -
+    value: "A"
+    desc: "You have invented a new attack against Data Validation and Encoding"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
 -
   name: "Authentication"
   cards:
-  -
-    value: "A"
-    desc: "You have invented a new attack against Authentication"
-    misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
   -
     value: "2"
     desc: "James can undertake authentication functions without the real user ever being aware this has occurred (e.g. attempt to log in, log in with stolen credentials, reset the password) "
@@ -91,13 +87,13 @@ suits:
   -
     value: "K"
     desc: "Olga can influence or alter authentication code/routines so they can be bypassed"
+  -
+    value: "A"
+    desc: "You have invented a new attack against Authentication"
+    misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
 -
   name: "Session management"
   cards:
-  -
-    value: "A"
-    desc: "You have invented a new attack against Session Management"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
   -
     value: "2"
     desc: "William has control over the generation of session identifiers"
@@ -134,13 +130,13 @@ suits:
   -
     value: "K"
     desc: "Peter can bypass the session management controls because they have been self-built and/or are weak, instead of using a standard framework or approved tested module"
+  -
+    value: "A"
+    desc: "You have invented a new attack against Session Management"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
   name: "Authorization"
   cards:
-  -
-    value: "A"
-    desc: "You have invented a new attack against Authorization"
-    misc: "Read more about this topic in OWASP's Development and Testing Guides"
   -
     value: "2"
     desc: "Tim can influence where data is sent or forwarded to"
@@ -177,13 +173,13 @@ suits:
   -
     value: "K"
     desc: "Ryan can influence or alter authorization controls and permissions, and can therefore bypass them"
+  -
+    value: "A"
+    desc: "You have invented a new attack against Authorization"
+    misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
   name: "Cryptography"
   cards:
-  -
-    value: "A"
-    desc: "You have invented a new attack against Cryptography"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
   -
     value: "2"
     desc: "Kyun can access data because it has been obfuscated rather than using an approved cryptographic function"
@@ -220,13 +216,13 @@ suits:
   -
     value: "K"
     desc: "Dan can influence or alter cryptography code/routines (encryption, hashing, digital signatures, random number and GUID generation) and can therefore bypass them"
+  -
+    value: "A"
+    desc: "You have invented a new attack against Cryptography"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
   name: "Cornucopia"
   cards:
-  -
-    value: "A"
-    desc: "You have invented a new attack of any type"
-    misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
   -
     value: "2"
     desc: "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur"
@@ -263,6 +259,10 @@ suits:
   -
     value: "K"
     desc: "Gareth can utilize the application to deny service to some or all of its users"
+  -
+    value: "A"
+    desc: "You have invented a new attack of any type"
+    misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
   name: "Wild Card"
   cards:

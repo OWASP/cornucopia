@@ -9,6 +9,7 @@ defmodule Copi.Cornucopia.Game do
     field :finished_at, :utc_datetime
     field :name, :string
     field :started_at, :utc_datetime
+    field :rounds_played, :integer, default: 0
 
     has_many :players, Copi.Cornucopia.Player
 

@@ -11,7 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 alias Copi.Repo
-alias Copi.Card
+alias Copi.Cornucopia.Card
 
 path = Path.join(File.cwd!(), "priv/repo/cornucopia/ecommerce-cards-1.21-en.yaml")
 

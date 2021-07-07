@@ -11,7 +11,6 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    IO.puts "In handle_params"
     with {:ok, player} <- Player.find(player_id) do
       CopiWeb.Endpoint.subscribe(topic(player.game_id))
       {:noreply, socket |> assign(:page_title, page_title(socket.assigns.live_action)) |> assign(:player, player)}
@@ -23,7 +22,6 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_info(%{topic: message_topic, event: "game:updated", payload: game}, socket) do
-    IO.puts "In handle_info"
     with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
       {:noreply, socket |> assign(:player, updated_player)}
     else

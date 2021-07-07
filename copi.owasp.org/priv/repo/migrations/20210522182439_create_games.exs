@@ -8,6 +8,7 @@ defmodule Copi.Repo.Migrations.CreateGames do
       add :created_at, :utc_datetime
       add :started_at, :utc_datetime
       add :finished_at, :utc_datetime
+      add :rounds_played, :integer, default: 0
 
       timestamps()
     end
