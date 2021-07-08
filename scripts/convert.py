@@ -344,8 +344,8 @@ class Convert:
                     # if self.args.debug:
                     #     print ("--- card.keys() = " + str(card.keys()))
                     for tag, text_output in card.items():
-                        if self.args.debug:
-                            print(f"--- tag = {tag}, text output[:20] = {text_output[:20]}")
+                        # if self.args.debug:
+                        #     print(f"--- tag = {tag}, text output[:20] = {text_output[:20]}")
                         if tag == "value" or len(text_output) == 0:
                             continue
 
@@ -359,8 +359,8 @@ class Convert:
                         if suit_tag == "WC" and tag == "value":
                             full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
 
-                        if self.args.debug:
-                            print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
+                        # if self.args.debug:
+                        #     print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
 
                         if self.make_template():
                             data[text_output] = full_tag
@@ -391,6 +391,8 @@ class Convert:
     def get_full_tag(suit_tag, card, tag) -> str:
         if suit_tag == "WC":
             full_tag = "${{{}}}".format("_".join([suit_tag, card, tag]))
+        elif suit_tag == "Common":
+            full_tag = "${{{}}}".format("_".join([suit_tag, card]))
         else:
             full_tag = "${{{}}}".format("_".join([suit_tag, suit_tag + card, tag]))
         return full_tag
@@ -438,6 +440,10 @@ class Convert:
                     if key.find("${Common_") != -1 and val.find("${Common_") != -1:
                         # Not a repeated key. Used it so now remove it in case of repeat
                         data[key] = None
+                elif len(runs_text) > 2 and runs_text in key:
+                    if self.args.debug:
+                        print(f"--- text found inside yaml key: text = `{runs_text}`, key = `{key}`; val = `{val}`")
+
         if self.args.debug:
             print("--- finished replacing text in doc")
 
@@ -461,7 +467,7 @@ class Convert:
         return files
 
     def make_template(self) -> bool:
-        return self.args.language.lower == "template"
+        return self.args.language.lower() == "template"
 
     def parse_arguments(self, input_args: List[str]) -> argparse.Namespace:
         """Parse and validate the input arguments. Return object containing argument values."""
