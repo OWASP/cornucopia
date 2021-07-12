@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import re
 import sys
 import argparse
 import logging
@@ -9,9 +10,9 @@ import shutil
 import zipfile
 import docx2pdf
 import docx
+from docx import Document
 import xml.etree.ElementTree as ElTree
 from typing import List
-
 
 class Convert:
     SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -67,7 +68,7 @@ class Convert:
 
         language_dict.update(mapping_dict)
         if self.make_template():
-            language_dict = self.remove_card_numbers(language_dict)
+            language_dict = self.remove_short_keys(language_dict)
 
         # Get meta data from language file
         meta: dict = self.get_meta_data(language_data)
@@ -117,7 +118,8 @@ class Convert:
                 #     # texlive-latex-extra texlive-fonts-recommended
                 #     pypandoc.convert_file(temp_output_file, "pdf", outputfile=output_file)
                 #     extra_self.args = ['--pdf-engine=pdflatex']
-                #     pypandoc.convert_file(temp_output_file, "pdf", extra_self.args=extra_self.args, outputfile=output_file)
+                #     pypandoc.convert_file(temp_output_file, "pdf", extra_self.args=extra_self.args,
+                #     outputfile=output_file)
                 else:
                     logging.error(
                         "Error. A temporary docx file was created in the output folder but cannot be converted "
@@ -201,12 +203,11 @@ class Convert:
             return True
         return False
 
-    def remove_card_numbers(self, replacement_dict) -> dict:
-        card_numbers = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "0", "J", "Q", "K"]
+    def remove_short_keys(self, replacement_dict) -> dict:
         data2: dict = {}
-        for key, text in replacement_dict.items():
-            if key not in card_numbers and text != "${WC_JOB_misc}":
-                data2[key] = text
+        for key, value in replacement_dict.items():
+            if len(key) > 3:
+                data2[key] = value
         if self.args.debug:
             print("--- Making template. Removed card_numbers. len replacement_dict = "
                   f"{len(replacement_dict)}, len data2 = {len(data2)}")
@@ -326,20 +327,23 @@ class Convert:
         """Loop through language file and build up a find-replace dict"""
         data = {}
         # Short tags to match the suits in the template documents
+        suit_tags = suit_key = ""
         for key in list(k for k in input_data.keys() if k != "meta"):
             if key == "suits":
                 suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
+                suit_key = "cards"
             elif key == "paragraphs":
                 suit_tags = ["Common"]
+                suit_key = "sentences"
             for suit, suit_tag in zip(input_data[key], suit_tags):
                 if self.args.debug:
-                    print ("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
+                    print("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
                 data.update(self.get_tag_for_suit_name(suit, suit_tag))
 
                 card_tag = ""
-                for card in suit["cards"]:
-                    # if self.args.debug:
-                    #     print ("--- card.keys() = " + str(card.keys()))
+                for card in suit[suit_key]:
+                    if self.args.debug:
+                        print("--- card.keys() = " + str(card.keys()))
                     for tag, text_output in card.items():
                         if self.args.debug:
                             print(f"--- tag = {tag}, text output[:10] = {text_output[:10]}")
@@ -370,7 +374,6 @@ class Convert:
                   "]\n* [".join(l1 + "] : " + data[l1] for l1 in list(data.keys())[:4]))
             print("--- Translation data showing last 4 (key: text):\n* ["
                   "]\n* [".join(l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:]))
-        exit()
         return data
 
     def get_tag_for_suit_name(self, suit, suit_tag) -> dict:
@@ -391,6 +394,8 @@ class Convert:
     def get_full_tag(suit_tag, card, tag) -> str:
         if suit_tag == "WC":
             full_tag = "${{{}}}".format("_".join([suit_tag, card, tag]))
+        elif suit_tag == "Common":
+            full_tag = "${{{}}}".format("_".join([suit_tag, card]))
         else:
             full_tag = "${{{}}}".format("_".join([suit_tag, suit_tag + card, tag]))
         return full_tag
@@ -419,6 +424,8 @@ class Convert:
             replacement_values = self.sort_keys_longest_to_shortest(data)
         else:
             replacement_values = data.items()
+        if self.args.debug:
+            print(f"--- replacement values is = \n\n{replacement_values[-5:]}")
 
         # Get all the paragraphs together
         paragraphs = list(doc.paragraphs)
@@ -429,6 +436,8 @@ class Convert:
                         paragraphs.append(paragraph)
         for p in paragraphs:
             runs_text = "".join(r.text for r in p.runs)
+            if self.make_template() and re.search("\$\{.*\}", runs_text):
+                continue
             for key, val in replacement_values:
                 if key in runs_text:
                     t = runs_text.replace(key, val)
@@ -461,7 +470,7 @@ class Convert:
         return files
 
     def make_template(self) -> bool:
-        return self.args.language.lower == "template"
+        return self.args.language.lower() == "template"
 
     def parse_arguments(self, input_args: List[str]) -> argparse.Namespace:
         """Parse and validate the input arguments. Return object containing argument values."""
@@ -519,6 +528,7 @@ class Convert:
             help="Output additional information to debug script",
         )
         return parser.parse_args(input_args)
+
 
 
 if __name__ == "__main__":
