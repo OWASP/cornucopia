@@ -1,7 +1,7 @@
 import argparse
 import unittest
 
-from scripts.convert import (
+from scripts.convert import (Convert,
     parse_arguments,
 )
 
