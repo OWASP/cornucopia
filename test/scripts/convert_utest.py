@@ -1,9 +1,7 @@
 import argparse
 import unittest
 
-from scripts.convert import (Convert,
-    parse_arguments,
-)
+from scripts.convert import Convert as c
 
 
 class TestParseArguments(unittest.TestCase):
@@ -17,7 +15,7 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = parse_arguments(input_args)
+        got_args = c.parse_arguments(c, input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
@@ -31,7 +29,7 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = parse_arguments(input_args)
+        got_args = c.parse_arguments(c, input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
@@ -45,7 +43,7 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = parse_arguments(input_args)
+        got_args = c.parse_arguments(c, input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
@@ -59,6 +57,6 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = parse_arguments(input_args)
+        got_args = c.parse_arguments(c, input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
