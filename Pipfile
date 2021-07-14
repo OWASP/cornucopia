@@ -16,4 +16,4 @@ PyYAML = "==5.4.1"
 docx2pdf = "==0.1.7"
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
