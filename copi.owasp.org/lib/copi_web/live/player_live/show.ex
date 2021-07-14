@@ -61,7 +61,7 @@ defmodule CopiWeb.PlayerLive.Show do
     Enum.filter(cards, fn card -> card.played_in_round in [0, nil] end)
   end
 
-  def played_cards(cards) do
-    Enum.filter(cards, fn card -> card.played_in_round not in [0, nil] end)
+  def played_cards(cards, round) do
+    Enum.filter(cards, fn card -> card.played_in_round == round end)
   end
 end

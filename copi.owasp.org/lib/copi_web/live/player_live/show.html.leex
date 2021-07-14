@@ -3,24 +3,25 @@
 <h1>Cornucopia Session (<%= @player.game.name %>)</h1>
 
 <%= if @player.game.started_at do %>
-<h3>Game started at <%= @player.game.started_at %></h3>
+<h2>Game started at <%= @player.game.started_at %></h2>
 <% end %>
+
+<h3>Round <%= @game.rounds_played + 1 %></h3>
 
 <div id="table">
   <%= for player <- @game.players do %>
 
-    <%= for dealt_card <- (player.dealt_cards |> played_cards) do %>
-      <%= if dealt_card.played_in_round == @game.rounds_played + 1 do %>
-        <%= player.name %>
+    <%= for dealt_card <- (player.dealt_cards |> played_cards(@game.rounds_played + 1)) do %>
+      <div class="card-player">
+        <span class="name"><%= player.name %></span>
         <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
-      <% end %>
+      </div>
     <% end %>
 
  <% end %>
 </div>
 
-
-<h4><%= @player.name %></h4>
+<h4>Your Hand (<%= @player.name %>)</h4>
 
 <div id="hand">
 
