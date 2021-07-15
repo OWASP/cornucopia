@@ -26,7 +26,7 @@ defmodule Copi.Cornucopia.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:name, :started_at, :finished_at])
+    |> cast(attrs, [:name, :started_at, :finished_at, :rounds_played])
     |> validate_required([:name], message: "No really, give your game session a name")
   end
 end

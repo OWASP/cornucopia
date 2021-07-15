@@ -33,6 +33,10 @@
  <% end %>
 </div>
 
+<p class="next-round">
+  <button <%= if round_open?(@game) do %>disabled<% end %> phx-click="next_round" phx-value-game_id="<%= @game.id %>">Next round</button>
+</p>
+
 <%= if card_played do %>
   <div id="round-played"></div>
   <h4>Your hand: you've played a card in this round</h4>

@@ -40,8 +40,18 @@ defmodule CopiWeb.PlayerLive.Show do
     end
   end
 
-  defp page_title(:show), do: "Show Player"
-  defp page_title(:edit), do: "Edit Player"
+  @impl true
+  def handle_event("next_round", _, socket) do
+    game = socket.assigns.game
+
+    Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1})
+
+    {:ok, updated_game} = Game.find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
 
   def format_capec(refs) do
     refs
@@ -73,5 +83,17 @@ defmodule CopiWeb.PlayerLive.Show do
 
   def player_first(players, player) do
     Enum.sort_by(players, &(&1.id != player.id))
+  end
+
+  def round_open?(game) do
+    latest_round = game.rounds_played + 1
+
+    players_still_to_play = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil end)
+
+    Enum.count(players_still_to_play) > 0
+  end
+
+  def round_closed?(game) do
+    !round_open?(game)
   end
 end
