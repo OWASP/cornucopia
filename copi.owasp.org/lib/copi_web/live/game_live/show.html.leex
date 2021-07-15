@@ -24,7 +24,8 @@ No more players will be allowed to join once the game is started.</em></p>
     <tr>
       <th>Name</th>
       <th>Joined At</th>
-      <th>Cards</th>
+      <th>Played Cards</th>
+      <th>Cards In Hand</th>
       <th>Points</th>
     </tr>
   </thead>
@@ -33,7 +34,8 @@ No more players will be allowed to join once the game is started.</em></p>
       <tr>
         <td><%= player.name %></td>
         <td><%= player.inserted_at %></td>
-        <td><%= Enum.count(player.dealt_cards) %></td>
+        <td><%= player.dealt_cards |> played_cards |> Enum.count %></td>
+        <td><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
         <td>0</td>
       </tr>
     <% end %>

@@ -61,4 +61,12 @@ defmodule CopiWeb.GameLive.Show do
   def topic(game_id) do
     "game:#{game_id}"
   end
+
+  def unplayed_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round == nil end)
+  end
+
+  def played_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round != nil end)
+  end
 end
