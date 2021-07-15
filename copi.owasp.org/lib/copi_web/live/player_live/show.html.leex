@@ -11,7 +11,7 @@
 <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
 
 <div id="table">
-  <%= for player <- @game.players do %>
+  <%= for player <- @game.players |> player_first(@player) do %>
     <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
 
       <div class="card-player">

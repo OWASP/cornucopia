@@ -19,8 +19,8 @@ pre{padding: 1em;}
 
 .container{
   margin: 0 auto;
-  max-width: 80.0rem;
-  padding: 0 2.0rem;
+  /*max-width: 80.0rem;*/
+  padding: 0 3.0rem;
   position: relative;
   width: 100%
 }

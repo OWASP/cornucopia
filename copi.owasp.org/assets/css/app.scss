@@ -284,13 +284,13 @@ $wildcard-color: #fccd8f;
 @keyframes ants { to { background-position: 100% 100% } }
 
 .card-player {
-  margin: 10px 20px;
+  margin: 10px 15px;
   float: left;
   display: flex;
 
   .name {
-    margin-right: 10px;
-
+    margin-right: 5px;
+    text-align: right;
   }
 
   .drop-zone {
@@ -309,6 +309,7 @@ $wildcard-color: #fccd8f;
     .placeholder {
       text-align: center;
       margin-top: 60px;
+      padding: 10px;
     }
   }
 }

@@ -70,4 +70,8 @@ defmodule CopiWeb.PlayerLive.Show do
 
     if dealt_card, do: dealt_card.card, else: nil
   end
+
+  def player_first(players, player) do
+    Enum.sort_by(players, &(&1.id != player.id))
+  end
 end
