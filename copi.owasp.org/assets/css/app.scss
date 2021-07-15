@@ -298,12 +298,17 @@ $wildcard-color: #fccd8f;
     height: 317px;
     width: 224px;
 
-    &.mine {
+    &.empty {
       border: 2px solid transparent;
       background: linear-gradient(white, white) padding-box,
                   repeating-linear-gradient(-45deg, #666 0, #666 25%, transparent 0, transparent 50%) 0 / .6em .6em;
       animation: ants 12s linear infinite;
       width: 248px;
+    }
+
+    .placeholder {
+      text-align: center;
+      margin-top: 60px;
     }
   }
 }

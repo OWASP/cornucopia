@@ -12,11 +12,21 @@
 
 <div id="table">
   <%= for player <- @game.players do %>
+    <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
 
       <div class="card-player">
         <span class="name"><%= player.name %></span>
-        <div class="drop-zone <%= if player.id == @player.id && card_played == nil do %>mine<% end %>">
-          <%= render(CopiWeb.CardView, "show.html", card: card_played_in_round(player.dealt_cards, @game.rounds_played + 1)) %>
+        <div class="drop-zone <%= if player.id == @player.id do %>mine<% end %> <%= if player_card == nil do %>empty<% end %>">
+
+          <%= if player_card == nil do %>
+            <%= if player.id == @player.id do %>
+            <p class="placeholder">Drop a card from your hand here to play it</p>
+            <% else %>
+            <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
+            <% end %>
+          <% else %>
+          <%= render(CopiWeb.CardView, "show.html", card: player_card) %>
+          <% end %>
         </div>
       </div>
 
