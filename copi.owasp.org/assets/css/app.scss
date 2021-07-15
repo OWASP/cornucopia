@@ -281,14 +281,30 @@ $wildcard-color: #fccd8f;
   }
 }
 
+@keyframes ants { to { background-position: 100% 100% } }
+
 .card-player {
   margin: 10px 20px;
   float: left;
   display: flex;
 
   .name {
-    
+    margin-right: 10px;
 
+  }
+
+  .drop-zone {
+    border: dashed 1px #666;
+    height: 317px;
+    width: 224px;
+
+    &.mine {
+      border: 2px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  repeating-linear-gradient(-45deg, #666 0, #666 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+      animation: ants 12s linear infinite;
+      width: 248px;
+    }
   }
 }
 
@@ -406,7 +422,12 @@ $wildcard-color: #fccd8f;
   user-select: none !important;
 }
 .gu-transit {
+  display: none;
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
+}
+
+.gu-mirror {
+  
 }

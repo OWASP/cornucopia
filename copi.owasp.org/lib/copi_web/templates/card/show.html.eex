@@ -1,3 +1,4 @@
+<%= if @card do %>
 <div class="card <%= @card.value %> <%= Slug.slugify @card.category %>">
   <div class="left-bar"><%= @card.category %></div>
   <div class="main-content">
@@ -56,3 +57,4 @@
     <% end %>
   </div>
 </div>
+<% end %>

@@ -35,16 +35,31 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-dragula([document.querySelector('#hand')], {
-    removeOnSpill: true
-}).on('remove', (element, target) => {
-    fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        dealt_card_id: element.dataset.dealtcard
+dragula([document.querySelector('#hand'), document.querySelector('#table')], {
+    invalid: function (el, handle) {
+      // Don't allow dragging cards off the table
+      return el.className === 'card-player' || document.querySelector('#round-played');
+    }
+}).on('drop', (element, target, source, sibling) => {
+    if (target.id === 'table') {
+      fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          dealt_card_id: element.dataset.dealtcard
+        })
+      }).then(response => {
+        console.log(response)
+  
+        if (response.ok) {
+          return true;
+        }
+        else {
+          // Need to cancel the drop here
+          return false;
+        }
       })
-    }).then(_res => console.log('played card!'))
+    }
   });

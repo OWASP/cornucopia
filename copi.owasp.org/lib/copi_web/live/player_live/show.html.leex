@@ -1,27 +1,34 @@
 <script></script>
 
-<h1>Cornucopia Session (<%= @player.game.name %>)</h1>
+<h1>Cornucopia Session: <%= @player.game.name %></h1>
 
 <%= if @player.game.started_at do %>
-<h2>Game started at <%= @player.game.started_at %></h2>
-<% end %>
 
-<h3>Round <%= @game.rounds_played + 1 %></h3>
+<h2>Hi <%= @player.name %>! This game started at <%= @player.game.started_at %></h2>
+
+<h4>Round <%= @game.rounds_played + 1 %></h4>
+
+<% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
 
 <div id="table">
   <%= for player <- @game.players do %>
 
-    <%= for dealt_card <- (player.dealt_cards |> played_cards(@game.rounds_played + 1)) do %>
       <div class="card-player">
         <span class="name"><%= player.name %></span>
-        <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
+        <div class="drop-zone <%= if player.id == @player.id && card_played == nil do %>mine<% end %>">
+          <%= render(CopiWeb.CardView, "show.html", card: card_played_in_round(player.dealt_cards, @game.rounds_played + 1)) %>
+        </div>
       </div>
-    <% end %>
 
  <% end %>
 </div>
 
-<h4>Your Hand (<%= @player.name %>)</h4>
+<%= if card_played do %>
+  <div id="round-played"></div>
+  <h4>Your hand: you've played a card in this round</h4>
+<% else %>
+  <h4>Your hand: drag a card onto the table to play a card in this round!</h4>
+<% end %>
 
 <div id="hand">
 
@@ -33,3 +40,7 @@
   <% end %>
 
 </div>
+<% else %>
+ <p>Hi <%= @player.name %>, waiting for game to start...</p>
+ <div class="loader">Loading...</div>
+<% end %>
