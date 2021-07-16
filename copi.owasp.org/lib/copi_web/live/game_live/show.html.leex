@@ -4,6 +4,8 @@
 
 <%= if @game.started_at do %>
 <h3>Game started at <%= @game.started_at %></h3>
+
+<h4>Round <strong><%= @game.rounds_played + 1 %></strong> in progress</h4>
 <% else %>
 <p><em>Share the link to this page with everyone who wants to join or watch.
 You'll be able to start the game once at least 3 players have joined.
