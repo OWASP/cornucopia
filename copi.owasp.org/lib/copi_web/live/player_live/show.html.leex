@@ -2,59 +2,72 @@
 
 <h1>Cornucopia Session: <%= @player.game.name %></h1>
 
-<%= if @player.game.started_at do %>
+<%= if @player.game.finished_at do %>
 
-<h2>Hi <%= @player.name %>! This game started at <%= @player.game.started_at %></h2>
+  <h2>Thanks for playing, <%= @player.name %>! This game finished at <%= @player.game.finished_at %></h2>
 
-<h4>Round <%= @game.rounds_played + 1 %></h4>
-
-<% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
-
-<div id="table">
-  <%= for player <- @game.players |> player_first(@player) do %>
-    <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
-
-      <div class="card-player">
-        <span class="name"><%= player.name %></span>
-        <div class="drop-zone <%= if player.id == @player.id do %>mine<% end %> <%= if player_card == nil do %>empty<% end %>">
-
-          <%= if player_card == nil do %>
-            <%= if player.id == @player.id do %>
-            <p class="placeholder">Drop a card from your hand here to play it</p>
-            <% else %>
-            <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
-            <% end %>
-          <% else %>
-          <%= render(CopiWeb.CardView, "show.html", card: player_card) %>
-          <% end %>
-        </div>
-      </div>
-
- <% end %>
-</div>
-
-<p class="next-round">
-  <button <%= if round_open?(@game) do %>disabled<% end %> phx-click="next_round" phx-value-game_id="<%= @game.id %>">Next round</button>
-</p>
-
-<%= if card_played do %>
-  <div id="round-played"></div>
-  <h4>Your hand: you've played a card in this round</h4>
 <% else %>
-  <h4>Your hand: drag a card onto the table to play a card in this round!</h4>
-<% end %>
 
-<div id="hand" phx-hook="DragDrop">
+  <%= if @player.game.started_at do %>
 
-  <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
-    <div data-game="<%= @player.game.id %>" data-player="<%= @player.id %>" data-dealtcard="<%= dealt_card.id %>">
-      <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
-    </div>
+  <h2>Hi <%= @player.name %>! This game started at <%= @player.game.started_at %></h2>
+
+  <h4>Round <%= @game.rounds_played + 1 %></h4>
+
+  <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
+
+  <div id="table">
+    <%= for player <- @game.players |> player_first(@player) do %>
+      <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
+
+        <div class="card-player">
+          <span class="name"><%= player.name %></span>
+          <div class="drop-zone <%= if player.id == @player.id do %>mine<% end %> <%= if player_card == nil do %>empty<% end %>">
+
+            <%= if player_card == nil do %>
+              <%= if player.id == @player.id do %>
+              <p class="placeholder">Drop a card from your hand here to play it</p>
+              <% else %>
+              <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
+              <% end %>
+            <% else %>
+            <%= render(CopiWeb.CardView, "show.html", card: player_card) %>
+            <% end %>
+          </div>
+        </div>
 
   <% end %>
+  </div>
 
-</div>
-<% else %>
- <p>Hi <%= @player.name %>, waiting for game to start...</p>
- <div class="loader">Loading...</div>
+  <p class="next-round">
+    <button <%= if round_open?(@game) do %>disabled<% end %> phx-click="next_round" phx-value-game_id="<%= @game.id %>">
+      <%= if last_round?(@game) do %>
+      Finish game
+      <% else %>
+      Next round
+      <% end %>
+    </button>
+  </p>
+
+  <%= if card_played do %>
+    <div id="round-played"></div>
+    <h4>Your hand: you've played a card in this round</h4>
+  <% else %>
+    <h4>Your hand: drag a card onto the table to play a card in this round!</h4>
+  <% end %>
+
+  <div id="hand" phx-hook="DragDrop">
+
+    <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
+      <div data-game="<%= @player.game.id %>" data-player="<%= @player.id %>" data-dealtcard="<%= dealt_card.id %>">
+        <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
+      </div>
+
+    <% end %>
+
+  </div>
+  <% else %>
+    <p>Hi <%= @player.name %>, waiting for game to start...</p>
+    <div class="loader">Loading...</div>
+  <% end %>
 <% end %>

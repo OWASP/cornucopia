@@ -46,6 +46,10 @@ defmodule CopiWeb.PlayerLive.Show do
 
     Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1})
 
+    if last_round?(game) do
+      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+    end
+
     {:ok, updated_game} = Game.find(game.id)
 
     CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
@@ -95,5 +99,11 @@ defmodule CopiWeb.PlayerLive.Show do
 
   def round_closed?(game) do
     !round_open?(game)
+  end
+
+  def last_round?(game) do
+    players_with_no_cards = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil end)
+
+    Enum.count(players_with_no_cards) > 0
   end
 end
