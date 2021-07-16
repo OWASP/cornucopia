@@ -44,7 +44,7 @@
   <h4>Your hand: drag a card onto the table to play a card in this round!</h4>
 <% end %>
 
-<div id="hand">
+<div id="hand" phx-hook="DragDrop">
 
   <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
     <div data-game="<%= @player.game.id %>" data-player="<%= @player.id %>" data-dealtcard="<%= dealt_card.id %>">
