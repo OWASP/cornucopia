@@ -95,3 +95,6 @@ python-coverage:
 python-test-update-golden-files:
 	UPDATE_GOLDEN_FILES=true $(MAKE) python-unit-test PYTHON_TEST_FILE=$(PYTHON_TEST_FILE)
 	UPDATE_GOLDEN_FILES=true $(MAKE) python-integration-test PYTHON_TEST_FILE=$(PYTHON_TEST_FILE)
+
+.PHONY: google-account
+google-account:
