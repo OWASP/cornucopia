@@ -4,21 +4,28 @@ import re
 import sys
 import argparse
 import logging
+
+import google
 import yaml
 import fnmatch
 import shutil
 import zipfile
 import docx2pdf
 import docx
-from docx import Document
 import xml.etree.ElementTree as ElTree
 from typing import List
+from docx2pdf import convert
+from sys import platform
+
+
+
+
 
 class Convert:
     SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
     BASE_PATH = os.path.normpath(SCRIPT_PATH + "/..")
-    FILETYPE_CHOICES: List[str] = ["docx", "pdf", "idml"]
-    LANGUAGE_CHOICES: List[str] = ["en", "es", "fr", "pt-br", "template"]
+    FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
+    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "pt-br"]
     DEFAULT_TEMPLATE_FILENAME: str = "../resources/templates/owasp_cornucopia_edition_lang_ver_template"
     DEFAULT_OUTPUT_FILENAME: str = "../output/owasp_cornucopia_edition_component_lang_ver"
     args: argparse.Namespace
@@ -31,19 +38,42 @@ class Convert:
         self.args = self.parse_arguments(sys.argv[1:])
         if self.args.debug:
             print("--- args = " + str(self.args))
-
-        # Get the file type to output.
-        file_type: str
         if self.args.outputfiletype:
-            file_type = self.args.outputfiletype.strip(".")
+            file_type = self.args.outputfiletype
         else:
             file_type = os.path.splitext(os.path.basename(self.args.outputfile))[1].strip(".")
             # Specify a fallback default
             if file_type in ("", None):
                 file_type = "docx"
         if self.args.debug:
-            print(f"--- file_type = {file_type}")
+             print(f"--- file_type = {file_type}")
+        if self.args.language.lower() == "all":
+            # Start language loop
+            for language in self.LANGUAGE_CHOICES:
+                if language in ("all", "template"):
+                    continue
 
+                if file_type.lower() == "all":
+                    for type in self.FILETYPE_CHOICES:
+                        if type == "all":
+                            continue
+                        self.convert_type_language(type, language)
+                else:
+                    self.convert_type_language(file_type, language)
+                # End language loop
+        else:
+            if file_type.lower() == "all":
+                for type in self.FILETYPE_CHOICES:
+                    if type == "all" or (type == "pdf" and self.args.language.lower() == "template"):
+                        continue
+                    self.convert_type_language(type, self.args.language.lower())
+            else:
+                self.convert_type_language(file_type, self.args.language.lower())
+            # End language loop
+
+    def convert_type_language(self, file_type: str, language: str = "en") -> None:
+
+        # Get the file type to output.
         # Get the language files and find the output language needed
         yaml_files = self.get_files_from_of_type(os.sep.join([self.BASE_PATH, "source"]), "yaml")
 
@@ -110,6 +140,12 @@ class Convert:
                 if operating_system.lower().find("win") != -1:
                     # Use docx2pdf for windows with MS Word installed
                     docx2pdf.convert(temp_output_file, output_file)
+
+                operating_system: str = sys.platform
+                if operating_system.lower().find("darwin") != -1:
+                    print("--- PDF file has been converted")
+                    docx2pdf.convert(temp_output_file, output_file)
+
                 # Todo: Test additional methods to convert docx to pdf in linux.
                 # elif operating_system.lower().find("linux") != -1:
                 #     # Use pandoc (with pypandoc)
@@ -372,7 +408,6 @@ class Convert:
                  "]\n* [".join(l1 + "] : " + data[l1] for l1 in list(data.keys())[:4]))
             print("--- Translation data showing last 4 (key: text):\n* ["
                  "]\n* [".join(l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:]))
-        exit()
         return data
 
     def get_tag_for_suit_name(self, suit, suit_tag) -> dict:
@@ -424,7 +459,8 @@ class Convert:
         else:
             replacement_values = data.items()
         if self.args.debug:
-            print(f"--- replacement values is = \n\n{replacement_values[-5:]}")
+            rv = list(k + ": " + v + "; " for k, v in replacement_values)
+            print(f"--- replacement values is = \n\n{rv[-5:]}")
 
         # Get all the paragraphs together
         paragraphs = list(doc.paragraphs)
@@ -508,7 +544,7 @@ class Convert:
             default="",
             type=str,
             help=(
-                "Path and name of output file to generate. (caution: existing file will be overwritten). "
+                "Specify a path and name of output file to generate. (caution: existing file will be overwritten). "
                 f"\ndefault = {self.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
             ),
         )
@@ -531,8 +567,6 @@ class Convert:
             help="Output additional information to debug script",
         )
         return parser.parse_args(input_args)
-
-
 
 if __name__ == "__main__":
     c = Convert()
