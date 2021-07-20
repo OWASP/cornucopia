@@ -1,4 +1,4 @@
-UNAME := $(shell uname -s)
+UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	DOCKER_GROUP_ID ?= $(shell getent group docker | cut -d: -f3)
 endif
