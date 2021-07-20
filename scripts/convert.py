@@ -4,8 +4,6 @@ import re
 import sys
 import argparse
 import logging
-
-import google
 import yaml
 import fnmatch
 import shutil
@@ -13,12 +11,8 @@ import zipfile
 import docx2pdf
 import docx
 import xml.etree.ElementTree as ElTree
+import parser
 from typing import List
-from docx2pdf import convert
-from sys import platform
-
-
-
 
 
 class Convert:
@@ -46,35 +40,40 @@ class Convert:
             if file_type in ("", None):
                 file_type = "docx"
         if self.args.debug:
-             print(f"--- file_type = {file_type}")
+            print(f"--- file_type = {file_type}")
+        can_convert_to_pdf = self.can_convert_to_pdf()
+        if file_type == "pdf" and not can_convert_to_pdf:
+            logging.error("Cannot convert to pdf on this system. "
+                          "Pdf conversion is available on Windows and Mac, if MS Word is installed")
+            return
+
         if self.args.language.lower() == "all":
             # Start language loop
             for language in self.LANGUAGE_CHOICES:
                 if language in ("all", "template"):
                     continue
+                # self.args.language = language
 
                 if file_type.lower() == "all":
-                    for type in self.FILETYPE_CHOICES:
-                        if type == "all":
+                    for file_type_choice in self.FILETYPE_CHOICES:
+                        if file_type_choice == "all" or (file_type_choice == "pdf" and not self.can_convert_to_pdf()):
                             continue
-                        self.convert_type_language(type, language)
+                        self.convert_type_language(file_type_choice, language)
                 else:
                     self.convert_type_language(file_type, language)
                 # End language loop
         else:
             if file_type.lower() == "all":
-                for type in self.FILETYPE_CHOICES:
-                    if type == "all" or (type == "pdf" and self.args.language.lower() == "template"):
+                for file_type_choice in self.FILETYPE_CHOICES:
+                    if file_type_choice == "all" or (
+                            file_type_choice == "pdf" and self.args.language.lower() == "template"):
                         continue
-                    self.convert_type_language(type, self.args.language.lower())
+                    self.convert_type_language(file_type_choice, self.args.language.lower())
             else:
                 self.convert_type_language(file_type, self.args.language.lower())
-            # End language loop
 
     def convert_type_language(self, file_type: str, language: str = "en") -> None:
-
-        # Get the file type to output.
-        # Get the language files and find the output language needed
+        # Get the language files
         yaml_files = self.get_files_from_of_type(os.sep.join([self.BASE_PATH, "source"]), "yaml")
 
         if not yaml_files:
@@ -82,11 +81,26 @@ class Convert:
             return None
 
         # Get the language data from the correct language file (checks self.args.language to select the correct file)
-        language_data: {} = self.get_replacement_data(yaml_files, "translation")
+        language_data: {} = self.get_replacement_data(yaml_files, "translation", language)
+        if self.args.debug:
+            print(f"--- Len language_data = {len(language_data)}.")
+            # print(f"--- language_data meta = {language_data['meta']}")
+
         # If no data found in the language file, then exit with error
-        if "suits" not in list(language_data.keys()):
+        if len(language_data) == 0 or "suits" not in list(language_data.keys()):
             logging.error("Error. Could not find the `suits` tag in the language file.")
             return None
+        # Get meta data from language file
+        meta: dict = self.get_meta_data(language_data)
+        # If no meta data found, then exit with an error
+        if meta in (None, {}):
+            logging.error(
+                "Error. Could not find meta tag in the language file. "
+                "Please ensure required language file is in the source folder."
+            )
+            return None
+        if self.args.debug:
+            print(f"--- meta data = {meta}")
 
         # Get the dict of replacement data
         language_dict: dict = self.get_replacement_dict(language_data, False)
@@ -99,18 +113,6 @@ class Convert:
         language_dict.update(mapping_dict)
         if self.make_template():
             language_dict = self.remove_short_keys(language_dict)
-
-        # Get meta data from language file
-        meta: dict = self.get_meta_data(language_data)
-        # If no meta data found, then exit with an error
-        if meta in (None, {}):
-            logging.error(
-                "Error. Could not find meta tag in the language file. "
-                "Please ensure required language file is in the source folder."
-            )
-            return None
-        if self.args.debug:
-            print(f"--- meta data = {meta}")
 
         template_doc: str = self.get_template_doc(self.args.inputfile, file_type)
 
@@ -135,32 +137,14 @@ class Convert:
                 if self.args.debug:
                     print(f"--- temp_output_file = {temp_output_file}\n--- starting pdf conversion now.")
 
-                # Currently only Windows with Word installed can converting docx to pdf
-                operating_system: str = sys.platform
-                if operating_system.lower().find("win") != -1:
-                    # Use docx2pdf for windows with MS Word installed
+                if self.can_convert_to_pdf():
+                    # Use docx2pdf for windows and mac with MS Word installed
                     docx2pdf.convert(temp_output_file, output_file)
-
-                operating_system: str = sys.platform
-                if operating_system.lower().find("darwin") != -1:
-                    print("--- PDF file has been converted")
-                    docx2pdf.convert(temp_output_file, output_file)
-
-                # Todo: Test additional methods to convert docx to pdf in linux.
-                # elif operating_system.lower().find("linux") != -1:
-                #     # Use pandoc (with pypandoc)
-                #     import pypandoc
-                #     # Required additional packages: pandoc, pypandoc, texlive-latex-recommended, librsvg2-bin,
-                #     # texlive-latex-extra texlive-fonts-recommended
-                #     pypandoc.convert_file(temp_output_file, "pdf", outputfile=output_file)
-                #     extra_self.args = ['--pdf-engine=pdflatex']
-                #     pypandoc.convert_file(temp_output_file, "pdf", extra_self.args=extra_self.args,
-                #     outputfile=output_file)
                 else:
                     logging.error(
                         "Error. A temporary docx file was created in the output folder but cannot be converted "
-                        f"to pdf (yet) on operating system: {operating_system}\n"
-                        "This does work in Windows with MS Word installed."
+                        f"to pdf (yet) on operating system: {sys.platform}\n"
+                        "This does work on Windows and Mac with MS Word installed."
                     )
                     return None
 
@@ -197,6 +181,11 @@ class Convert:
             if not self.args.debug and os.path.exists(temp_output_path):
                 shutil.rmtree(temp_output_path, ignore_errors=True)
         print("New file saved: " + str(output_file))
+
+    @staticmethod
+    def can_convert_to_pdf() -> bool:
+        operating_system: str = sys.platform
+        return operating_system.lower().find("win") >= 0
 
     @staticmethod
     def sort_keys_longest_to_shortest(replacement_dict) -> List[tuple]:
@@ -292,7 +281,11 @@ class Convert:
                     "_template" if self.make_template() else "") + "." + file_type.strip(".")
             )
 
+        if self.args.debug:
+            print(f"--- output_filename = {output_filename}")
         self.check_fix_file_type(output_filename, file_type)
+        if self.args.debug:
+            print(f"--- meta = {meta}")
 
         # Do the replacement of filename place-holders with meta data
         find_replace = self.get_find_replace_list(meta)
@@ -336,28 +329,40 @@ class Convert:
         else:
             return {}
 
-    def get_replacement_data(self, yaml_files: List[str], data_type: str = "translation") -> dict:
+    def get_replacement_data(self, yaml_files: List[str], data_type: str = "translation", language: str = "") -> dict:
         """Get the raw data of the replacement text from correct yaml file"""
+        data = {}
         if self.args.debug:
             print("--- Starting get_replacement_data()")
         for file in yaml_files:
-            with open(file, "r", encoding="utf-8") as f:
-                data = yaml.safe_load(f)
+            if self.args.debug:
+                print(f"--- starting to try parse file {file}. language = {language}")
+                print(f"--- filename language find = " + str(os.path.basename(file).find("-" + language + ".")))
+            if os.path.basename(file).find("-" + language + ".") >= 0 or os.path.basename(file).find("-" + language.replace("-","_") + ".") >= 0:
+                with open(file, "r", encoding="utf-8") as f:
+                    try:
+                        data = yaml.safe_load(f)
+                    except yaml.parser.ParserError as e:
+                        msg = f"Error parsing yaml file: {f}. Error = {e}"
+                        if self.args.debug:
+                            print("--- " + msg)
+                        else:
+                            logging.info(msg)
+                        continue
 
-            if data_type in ("translation", "translations") and (
-                    (data["meta"]["language"].lower() == self.args.language.lower())
-                    or (data["meta"]["language"].lower() == "en" and self.args.language.lower() == "template")
-            ):
-                if self.args.debug:
-                    print("--- found source language file: " + os.path.split(file)[1])
-                return data
-            elif (data_type in ("mapping", "mappings")
-                    and "meta" in data.keys()
-                    and "component" in data["meta"].keys()
-                    and data["meta"]["component"] == "mappings"):
-                if self.args.debug:
-                    print("--- found source mappings file: " + os.path.split(file)[1])
-                return data
+                if data_type in ("translation", "translations") and (
+                        (data["meta"]["language"].lower() == language)
+                        or (data["meta"]["language"].lower() == "en" and language == "template")):
+                    if self.args.debug:
+                        print("--- found source language file: " + os.path.split(file)[1])
+                    return data
+                elif (data_type in ("mapping", "mappings")
+                      and "meta" in data.keys()
+                      and "component" in data["meta"].keys()
+                      and data["meta"]["component"] == "mappings"):
+                    if self.args.debug:
+                        print("--- found source mappings file: " + os.path.split(file)[1])
+        return data
 
     def get_replacement_dict(self, input_data, mappings=False) -> dict:
         """Loop through language file and build up a find-replace dict"""
@@ -378,8 +383,8 @@ class Convert:
 
                 card_tag = ""
                 for card in suit[suit_key]:
-                   # if self.args.debug:
-                 #     print ("--- card.keys() = " + str(card.keys()))
+                    # if self.args.debug:
+                    #     print ("--- card.keys() = " + str(card.keys()))
                     for tag, text_output in card.items():
                         # if self.args.debug:
                         #     print(f"--- tag = {tag}, text output[:20] = {text_output[:20]}")
@@ -395,7 +400,6 @@ class Convert:
                         # Add a translation for "Joker"
                         if suit_tag == "WC" and tag == "value":
                             full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
-
                         # if self.args.debug:
                         #     print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
 
@@ -405,9 +409,9 @@ class Convert:
                             data[full_tag] = text_output
         if self.args.debug:
             print("--- Translation data showing first 4 (key: text):\n* ["
-                 "]\n* [".join(l1 + "] : " + data[l1] for l1 in list(data.keys())[:4]))
+                  "]\n* [".join(l1 + "] : " + str(data[l1]) for l1 in list(data.keys())[:4]))
             print("--- Translation data showing last 4 (key: text):\n* ["
-                 "]\n* [".join(l2 + "] : " + data[l2] for l2 in list(data.keys())[-4:]))
+                  "]\n* [".join(l2 + "] : " + str(data[l2]) for l2 in list(data.keys())[-4:]))
         return data
 
     def get_tag_for_suit_name(self, suit, suit_tag) -> dict:
@@ -460,7 +464,7 @@ class Convert:
             replacement_values = data.items()
         if self.args.debug:
             rv = list(k + ": " + v + "; " for k, v in replacement_values)
-            print(f"--- replacement values is = \n\n{rv[-5:]}")
+            print(f"--- replacement values are:\n{rv[-5:]}")
 
         # Get all the paragraphs together
         paragraphs = list(doc.paragraphs)
@@ -471,7 +475,7 @@ class Convert:
                         paragraphs.append(paragraph)
         for p in paragraphs:
             runs_text = "".join(r.text for r in p.runs)
-            if self.make_template() and re.search("\$\{.*\}", runs_text):
+            if self.make_template() and re.search(re.escape("${")+".*"+re.escape("}"), runs_text):
                 continue
             for key, val in replacement_values:
                 if key in runs_text:
@@ -482,9 +486,9 @@ class Convert:
                     if key.find("${Common_") != -1 and val.find("${Common_") != -1:
                         # Not a repeated key. Used it so now remove it in case of repeat
                         data[key] = None
-                elif len(runs_text) > 2 and runs_text in key:
-                    if self.args.debug:
-                        print(f"--- text found inside yaml key: text = `{runs_text}`, key = `{key}`; val = `{val}`")
+                # elif len(runs_text) > 2 and runs_text in key:
+                #     if self.args.debug:
+                #         print(f"--- text found inside yaml key: text = `{runs_text}`, key = `{key}`; val = `{val}`")
 
         if self.args.debug:
             print("--- finished replacing text in doc")
@@ -567,6 +571,7 @@ class Convert:
             help="Output additional information to debug script",
         )
         return parser.parse_args(input_args)
+
 
 if __name__ == "__main__":
     c = Convert()
