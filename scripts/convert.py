@@ -11,7 +11,6 @@ import zipfile
 import docx2pdf
 import docx
 import xml.etree.ElementTree as ElTree
-import parser
 from typing import List
 
 
@@ -335,10 +334,8 @@ class Convert:
         if self.args.debug:
             print("--- Starting get_replacement_data()")
         for file in yaml_files:
-            if self.args.debug:
-                print(f"--- starting to try parse file {file}. language = {language}")
-                print(f"--- filename language find = " + str(os.path.basename(file).find("-" + language + ".")))
-            if os.path.basename(file).find("-" + language + ".") >= 0 or os.path.basename(file).find("-" + language.replace("-","_") + ".") >= 0:
+            if os.path.basename(file).find("-" + language + ".") >= 0 \
+                    or os.path.basename(file).find("-" + language.replace("-","_") + ".") >= 0:
                 with open(file, "r", encoding="utf-8") as f:
                     try:
                         data = yaml.safe_load(f)
@@ -513,7 +510,10 @@ class Convert:
         return files
 
     def make_template(self) -> bool:
-        return self.args.language.lower() == "template"
+        if hasattr(self.args, "language"):
+            return self.args.language.lower() == "template"
+        else:
+            return False
 
     def parse_arguments(self, input_args: List[str]) -> argparse.Namespace:
         """Parse and validate the input arguments. Return object containing argument values."""
