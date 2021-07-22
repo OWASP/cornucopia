@@ -81,6 +81,9 @@ class Convert:
 
         # Get the language data from the correct language file (checks self.args.language to select the correct file)
         language_data: {} = self.get_replacement_data(yaml_files, "translation", language)
+        if len(language_data) == 0:
+            logging.error("Could not get language data from yaml files.")
+
         if self.args.debug:
             print(f"--- Len language_data = {len(language_data)}.")
             # print(f"--- language_data meta = {language_data['meta']}")
@@ -110,13 +113,13 @@ class Convert:
         mapping_dict: dict = self.get_replacement_dict(mapping_data, True)
 
         language_dict.update(mapping_dict)
-        if self.make_template():
+        if Convert.make_template(self):
             language_dict = self.remove_short_keys(language_dict)
 
-        template_doc: str = self.get_template_doc(self.args.inputfile, file_type)
+        template_doc: str = self.get_template_doc(file_type)
 
         # Name output file with correct edition, component, language & version
-        output_file: str = self.rename_output_file(self.args.outputfile, file_type, meta)
+        output_file: str = self.rename_output_file(file_type, meta)
         self.ensure_folder_exists(os.path.dirname(output_file))
 
         # Work with docx file (and maybe convert to pdf afterwards)
@@ -140,7 +143,7 @@ class Convert:
                     # Use docx2pdf for windows and mac with MS Word installed
                     docx2pdf.convert(temp_output_file, output_file)
                 else:
-                    logging.error(
+                    logging.warning(
                         "Error. A temporary docx file was created in the output folder but cannot be converted "
                         f"to pdf (yet) on operating system: {sys.platform}\n"
                         "This does work on Windows and Mac with MS Word installed."
@@ -194,7 +197,7 @@ class Convert:
     def replace_text_in_xml_file(self, file, replacement_dict) -> None:
         if os.path.getsize(file) == 0:
             return
-        if self.make_template():
+        if Convert.make_template(self):
             replacement_values = self.sort_keys_longest_to_shortest(replacement_dict)
         else:
             replacement_values = replacement_dict.items()
@@ -230,15 +233,16 @@ class Convert:
     def remove_short_keys(self, replacement_dict) -> dict:
         data2: dict = {}
         for key, value in replacement_dict.items():
-            if len(key) > 3:
+            if len(key) > 40:
                 data2[key] = value
         if self.args.debug:
             print("--- Making template. Removed card_numbers. len replacement_dict = "
                   f"{len(replacement_dict)}, len data2 = {len(data2)}")
         return data2
 
-    def get_template_doc(self, args_input_file: str, file_type: str) -> str:
+    def get_template_doc(self, file_type: str) -> str:
         template_doc: str
+        args_input_file: str = self.args.inputfile
         source_file_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
         if args_input_file:
             # Input file was specified
@@ -248,7 +252,7 @@ class Convert:
                 template_doc = os.path.normpath(self.SCRIPT_PATH + os.sep + args_input_file)
         else:
             # No input file specified - using defaults
-            if self.make_template():
+            if Convert.make_template(self):
                 # Creating a new template from an original docx or idml file
                 template_doc = os.sep.join(
                     [self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext])
@@ -265,8 +269,9 @@ class Convert:
             return ""
         return template_doc
 
-    def rename_output_file(self, args_output_file: str, file_type: str, meta: dict) -> str:
+    def rename_output_file(self, file_type: str, meta: dict) -> str:
         """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
+        args_output_file: str = self.args.outputfile
         if args_output_file:
             # Output file is specified as an argument
             if os.path.isabs(args_output_file):
@@ -277,7 +282,7 @@ class Convert:
             # No output file specified - using default
             output_filename = os.path.normpath(
                 self.SCRIPT_PATH + os.sep + self.DEFAULT_OUTPUT_FILENAME + (
-                    "_template" if self.make_template() else "") + "." + file_type.strip(".")
+                    "_template" if Convert.make_template(self) else "") + "." + file_type.strip(".")
             )
 
         if self.args.debug:
@@ -313,7 +318,7 @@ class Convert:
             ("_version", "_" + meta["version"].lower()),
             ("_ver", "_" + meta["version"].lower()),
         ]
-        if not self.make_template():
+        if not Convert.make_template(self):
             ll.append(("_template", ""))
         return ll
 
@@ -333,9 +338,13 @@ class Convert:
         data = {}
         if self.args.debug:
             print("--- Starting get_replacement_data()")
+        if Convert.make_template(self):
+            lang = "en"
+        else:
+            lang = language
         for file in yaml_files:
-            if os.path.basename(file).find("-" + language + ".") >= 0 \
-                    or os.path.basename(file).find("-" + language.replace("-","_") + ".") >= 0:
+            if os.path.basename(file).find("-" + lang + ".") >= 0 \
+                    or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0:
                 with open(file, "r", encoding="utf-8") as f:
                     try:
                         data = yaml.safe_load(f)
@@ -362,7 +371,7 @@ class Convert:
         return data
 
     def get_replacement_dict(self, input_data, mappings=False) -> dict:
-        """Loop through language file and build up a find-replace dict"""
+        """Loop through language file data and build up a find-replace dict"""
         data = {}
         # Short tags to match the suits in the template documents
         suit_tags = suit_key = ""
@@ -376,7 +385,8 @@ class Convert:
             for suit, suit_tag in zip(input_data[key], suit_tags):
                 if self.args.debug:
                     print("--- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
-                data.update(self.get_tag_for_suit_name(suit, suit_tag))
+                tag_for_suit_name = Convert.get_tag_for_suit_name(self, suit, suit_tag)
+                data.update(tag_for_suit_name)
 
                 card_tag = ""
                 for card in suit[suit_key]:
@@ -400,7 +410,7 @@ class Convert:
                         # if self.args.debug:
                         #     print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
 
-                        if self.make_template():
+                        if Convert.make_template(self):
                             data[text_output] = full_tag
                         else:
                             data[full_tag] = text_output
@@ -413,7 +423,7 @@ class Convert:
 
     def get_tag_for_suit_name(self, suit, suit_tag) -> dict:
         data = {}
-        if self.make_template():
+        if Convert.make_template(self):
             data[suit["name"]] = "${{{}}}".format(suit_tag + "_suit")
             if suit_tag == "WC":
                 data["Joker"] = "${WC_Joker}"
@@ -422,7 +432,7 @@ class Convert:
             if suit_tag == "WC":
                 data["${WC_Joker}"] = "Joker"
         if self.args.debug:
-            print(f"--- make_template = {self.make_template()}, suit_tag dict = {data}")
+            print(f"--- make_template = {Convert.make_template(self)}, suit_tag dict = {data}")
         return data
 
     @staticmethod
@@ -455,7 +465,7 @@ class Convert:
         if self.args.debug:
             print("--- starting docx_replace")
 
-        if self.make_template():
+        if Convert.make_template(self):
             replacement_values = self.sort_keys_longest_to_shortest(data)
         else:
             replacement_values = data.items()
@@ -472,7 +482,7 @@ class Convert:
                         paragraphs.append(paragraph)
         for p in paragraphs:
             runs_text = "".join(r.text for r in p.runs)
-            if self.make_template() and re.search(re.escape("${")+".*"+re.escape("}"), runs_text):
+            if Convert.make_template(self) and re.search(re.escape("${")+".*"+re.escape("}"), runs_text):
                 continue
             for key, val in replacement_values:
                 if key in runs_text:
@@ -496,7 +506,7 @@ class Convert:
         if os.path.isfile(docx_file):
             return docx.Document(docx_file)
         else:
-            print("Error. Could not find file at: " + str(docx_file))
+            logging.error("Error. Could not find file at: " + str(docx_file))
             return docx.Document()
 
     def get_files_from_of_type(self, path, ext) -> List[str]:
