@@ -1,3 +1,11 @@
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	DOCKER_GROUP_ID ?= $(shell getent group docker | cut -d: -f3)
+endif
+ifeq ($(UNAME_S),Darwin)
+	DOCKER_GROUP_ID ?= $(shell dscl . -read /Groups/docker | awk '($1 == "PrimaryGroupID:") { print $2 }')
+endif
+
 DOCKER = docker run \
 	--interactive \
 	--rm \
@@ -26,7 +34,7 @@ shfmt shellcheck pipenv:
 		--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 		--build-arg "user_id=$(shell id -u)" \
 		--build-arg "group_id=$(shell id -g)" \
-		--build-arg "docker_group_id=$(shell getent group docker | cut -d: -f3)" \
+		--build-arg "docker_group_id=$(DOCKER_GROUP_ID)" \
 		--build-arg "home=${HOME}" \
 		--build-arg "workdir=${PWD}" \
 		--target $@ . \
