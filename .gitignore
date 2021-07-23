@@ -5,3 +5,5 @@ output/temp
 resources/.DS_Store
 __pycache__
 vm.command
+coverage
+
