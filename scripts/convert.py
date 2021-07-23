@@ -482,7 +482,7 @@ class Convert:
                         paragraphs.append(paragraph)
         for p in paragraphs:
             runs_text = "".join(r.text for r in p.runs)
-            if Convert.make_template(self) and re.search(re.escape("${")+".*"+re.escape("}"), runs_text):
+            if Convert.make_template(self) and re.search(re.escape("${") + ".*" + re.escape("}"), runs_text):
                 continue
             for key, val in replacement_values:
                 if key in runs_text:
