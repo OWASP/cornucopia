@@ -4,3 +4,4 @@ output/temp
 .DS_Store
 resources/.DS_Store
 __pycache__
+vm.command
