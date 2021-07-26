@@ -470,16 +470,10 @@ paragraphs:
     text: "The best place to use to discuss or contribute is the mailing list for the OWASP project:"
   -
     value: "T01040"
-    text: "•Mailing list "
+    text: "•Mailing list"
   -
     value: "T01050"
-    text: "https://lists.owasp.org/mailman/listinfo/owasp_cornucopia"
-  -
-    value: "T01060"
-    text: "•Project home page "
-  -
-    value: "T01070"
-    text: "https://www.owasp.org/index.php/OWASP_Cornucopia"
+    text: "•Project home page"
   -
     value: "T01080"
     text: "All OWASP documents and tools are free to download and use."
