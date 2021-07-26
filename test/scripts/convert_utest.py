@@ -206,3 +206,7 @@ class TestGetReplacementDict(unittest.TestCase):
         self.assertIsInstance(got_data, want_type)
         self.assertEqual(len(got_data), want_length)
         self.assertDictEqual(got_data, want_data)
+
+class TestGetTagForSuitName(unittest.TestCase):
+    def test_get_tag_for_suit_name_ve(self) -> None:
+        Convert.args = argparse.Namespace(debug=False)
