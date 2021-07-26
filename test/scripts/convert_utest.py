@@ -158,6 +158,18 @@ class TestGetTagForSuitName(unittest.TestCase):
         want_tag_data = {"${VE_suit}": suit["name"]}
 
         got_tag_data = Convert.get_tag_for_suit_name(Convert, suit, suit_tag)
+        print(f"--- got tag data = {got_tag_data}")
+        self.assertDictEqual(want_tag_data, got_tag_data)
+
+    def test_get_tag_for_suit_name_ve_template(self) -> None:
+        Convert.args = argparse.Namespace(debug=False,
+                                          language="template")
+        suit = {"name": "Data validation & encoding",
+                "cards": []}
+        suit_tag = "VE"
+        want_tag_data = {suit["name"]: "${VE_suit}"}
+
+        got_tag_data = Convert.get_tag_for_suit_name(Convert, suit, suit_tag)
         self.assertDictEqual(want_tag_data, got_tag_data)
 
 
@@ -207,6 +219,30 @@ class TestGetReplacementDict(unittest.TestCase):
         self.assertEqual(len(got_data), want_length)
         self.assertDictEqual(got_data, want_data)
 
+<<<<<<< HEAD
 class TestGetTagForSuitName(unittest.TestCase):
     def test_get_tag_for_suit_name_ve(self) -> None:
         Convert.args = argparse.Namespace(debug=False)
+=======
+    def test_get_replacement_dict_template(self) -> None:
+        Convert.args = argparse.Namespace(debug=False,
+                                          language="template")
+        logging.basicConfig(level=logging.ERROR)
+        input_data = self.test_data
+        want_type = dict
+        want_length = 8
+        want_data = {"Data validation & encoding": "${VE_suit}",
+                     "You have invented a new attack against Data Validation": "${VE_VEA_desc}",
+                     "Read more about this topic in OWASP's free Cheat Sheets": "${VE_VEA_misc}",
+                     "Brian can gather information about the underlying configurations": "${VE_VE2_desc}",
+                     "Authentication": "${AT_suit}",
+                     "You have invented a new attack against Authentication": "${AT_ATA_desc}",
+                     "Read more about this topic in OWASP's free Cheat Sheet": "${AT_ATA_misc}",
+                     "James can undertake authentication functions without": "${AT_AT2_desc}",
+                     }
+
+        got_data = Convert.get_replacement_dict(Convert, input_data)
+        self.assertIsInstance(got_data, want_type)
+        self.assertEqual(len(got_data), want_length)
+        self.assertDictEqual(got_data, want_data)
+>>>>>>> afb11ef408ce7013664d784e44eecf1b3ec6515a
