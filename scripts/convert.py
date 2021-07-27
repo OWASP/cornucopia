@@ -127,7 +127,7 @@ class Convert:
             # Get the input (template) document
             doc: docx.document.Document = self.get_docx_document(template_doc)
 
-            self.replace_docx_inline_text(doc, language_dict)
+            doc = self.replace_docx_inline_text(doc, language_dict)
 
             if file_type == "docx":
                 doc.save(output_file)
@@ -460,7 +460,7 @@ class Convert:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-    def replace_docx_inline_text(self, doc, data) -> None:
+    def replace_docx_inline_text(self, doc, data) -> docx.Document:
         """Replace the text in the docx document."""
         if self.args.debug:
             print("--- starting docx_replace")
@@ -480,25 +480,33 @@ class Convert:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
                         paragraphs.append(paragraph)
+                    for t2 in cell.tables:
+                        for row2 in t2.rows:
+                            for cell2 in row2.cells:
+                                for paragraph in cell2.paragraphs:
+                                    paragraphs.append(paragraph)
+
         for p in paragraphs:
             runs_text = "".join(r.text for r in p.runs)
             if Convert.make_template(self) and re.search(re.escape("${") + ".*" + re.escape("}"), runs_text):
                 continue
             for key, val in replacement_values:
-                if key in runs_text:
-                    t = runs_text.replace(key, val)
-                    for i, r in enumerate(p.runs):
-                        p.runs[i].text = ""
-                    p.runs[0].text = str(t).strip()
-                    if key.find("${Common_") != -1 and val.find("${Common_") != -1:
-                        # Not a repeated key. Used it so now remove it in case of repeat
-                        data[key] = None
-                # elif len(runs_text) > 2 and runs_text in key:
-                #     if self.args.debug:
-                #         print(f"--- text found inside yaml key: text = `{runs_text}`, key = `{key}`; val = `{val}`")
+                replaced_key = False
+                for i, run in enumerate(p.runs):
+                    if run.text.find(key) != -1:
+                        p.runs[i].text = run.text.replace(key, val)
+                        replaced_key = True
+                        runs_text = runs_text.replace(key, val)
+                if not replaced_key:
+                    if runs_text.find(key) != -1:
+                        runs_text = runs_text.replace(key, val)
+                        for i, r in enumerate(p.runs):
+                            p.runs[i].text = ""
+                        p.runs[0].text = runs_text
 
         if self.args.debug:
             print("--- finished replacing text in doc")
+        return doc
 
     @staticmethod
     def get_docx_document(docx_file) -> docx.document.Document:
