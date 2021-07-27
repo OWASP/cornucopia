@@ -158,7 +158,6 @@ class TestGetTagForSuitName(unittest.TestCase):
         want_tag_data = {"${VE_suit}": suit["name"]}
 
         got_tag_data = Convert.get_tag_for_suit_name(Convert, suit, suit_tag)
-        print(f"--- got tag data = {got_tag_data}")
         self.assertDictEqual(want_tag_data, got_tag_data)
 
     def test_get_tag_for_suit_name_ve_template(self) -> None:
