@@ -260,7 +260,7 @@ class Convert:
                 template_doc = os.path.normpath(
                     self.SCRIPT_PATH + os.sep + self.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext)
 
-            self.check_fix_file_type(template_doc, source_file_ext)
+            self.check_fix_file_extension(template_doc, source_file_ext)
         if self.args.debug:
             print(f"--- template_doc = {template_doc}")
 
@@ -287,7 +287,7 @@ class Convert:
 
         if self.args.debug:
             print(f"--- output_filename = {output_filename}")
-        self.check_fix_file_type(output_filename, file_type)
+        self.check_fix_file_extension(output_filename, file_type)
         if self.args.debug:
             print(f"--- meta = {meta}")
 
@@ -302,11 +302,12 @@ class Convert:
             print(f"--- output_filename = {output_filename}")
         return output_filename
 
-    def check_fix_file_type(self, filename: str, file_type: str) -> None:
+    def check_fix_file_extension(self, filename: str, file_type: str) -> str:
         if not filename.endswith(file_type):
-            filename = ".".join([os.path.splitext(filename)[0], file_type])
+            filename = ".".join([os.path.splitext(filename)[0], file_type.strip(".")])
             if self.args.debug:
                 print(f"--- output_filename with new ext = {filename}")
+        return filename
 
     def get_find_replace_list(self, meta: dict) -> List[tuple]:
         ll = [
@@ -344,7 +345,8 @@ class Convert:
             lang = language
         for file in yaml_files:
             if os.path.basename(file).find("-" + lang + ".") >= 0 \
-                    or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0:
+                    or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0 \
+                    or os.path.basename(file).find("mappings") >= 0:
                 with open(file, "r", encoding="utf-8") as f:
                     try:
                         data = yaml.safe_load(f)
@@ -368,6 +370,10 @@ class Convert:
                       and data["meta"]["component"] == "mappings"):
                     if self.args.debug:
                         print("--- found source mappings file: " + os.path.split(file)[1])
+                if self.args.debug:
+                    print("--- found source file: " + os.path.split(file)[1])
+                    meta_keys = data["meta"].keys()
+                    print(f"--- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
         return data
 
     def get_replacement_dict(self, input_data, mappings=False) -> dict:
@@ -395,7 +401,7 @@ class Convert:
                     for tag, text_output in card.items():
                         # if self.args.debug:
                         #     print(f"--- tag = {tag}, text output[:20] = {text_output[:20]}")
-                        if tag == "value" or len(text_output) == 0:
+                        if tag == "value":
                             continue
 
                         full_tag = self.get_full_tag(suit_tag, card["value"], tag)
@@ -403,12 +409,14 @@ class Convert:
                         # Mappings is seen as a list. Convert to string
                         if mappings and isinstance(text_output, list):
                             text_output = ", ".join(str(s) for s in list(text_output))
+                            if len(text_output.strip()) == 0:
+                                text_output = " - "
 
                         # Add a translation for "Joker"
                         if suit_tag == "WC" and tag == "value":
                             full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
-                        # if self.args.debug:
-                        #     print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
+                        if self.args.debug and mappings:
+                            print(f"--- full_tag = {full_tag}, text[:10] = {text_output[:10]}")
 
                         if Convert.make_template(self):
                             data[text_output] = full_tag
