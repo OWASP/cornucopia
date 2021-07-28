@@ -281,22 +281,19 @@ suits:
     value: "NoCard"
     desc: "Pas de Carte"
   -
-    value: "title"
+    value: "Title"
     desc: "OWASP Cornucopia Édition de Ecommerce v1.20-FR"
   -
-   value: "T00010"
-   desc: "FR"
-  -
-    value: "T00020"
+    value: "T00010"
     text: "OWASP Cornucopia est un mécanisme qui permet aux équipes de développement logiciel d’identifier les exigences sécurité dans les processus de développement Agile, conventionnels et formels"
   -
-    value: "T00030"
+    value: "T00020"
     text: "Auteur"
   -
-    value: "T00040"
+    value: "T00030"
     text: "Chefs de Projet"
   -
-    value: "T00050"
+    value: "T00040"
     text: "Traducteurs / Relecteurs (version française)"
   -
     value: "T00100"
@@ -322,6 +319,9 @@ suits:
   -
     value: "T00170"
     text: "Colin Watson en tant qu’auteur et chef de projet avec Darío De Filippis, avec d’autres volontaires OWASP qui ont aidé en bien des manières."
+  -
+    value: "T00180"
+    text: "OWASP n’apporte pas de soutien ou ne recommande pas des produits ou des services commerciaux © 2012-2016 OWASP Foundation Ce document est diffusé sous la licence Creative Commons Attribution-ShareAlike 3.0"
   -
     value: "T00200"
     text: "Introduction"
@@ -357,22 +357,22 @@ suits:
     text: "Ceux-ci ont permis de constituer cinq couleurs, et une sixième, appelée « Cornucopia » a été créée pour tout le reste :"
   -
     value: "T00330"
-    text: "•	Validation des données et encodage (VE -EN)"
+    text: "Validation des données et encodage (VE -EN)"
   -
     value: "T00340"
-    text: "•	Authentification (AT -EN)"
+    text: "Authentification (AT -EN)"
   -
     value: "T00350"
-    text: "•	Gestion des sessions (SM -EN)"
+    text: "Gestion des sessions (SM -EN)"
   -
     value: "T00360"
-    text: "•	Habilitation (AZ -EN)"
+    text: "Habilitation (AZ -EN)"
   -
     value: "T00370"
-    text: "•	Cryptographie (CR -EN)"
+    text: "Cryptographie (CR -EN)"
   -
     value: "T00380"
-    text: "•	Cornucopia (C -EN)"
+    text: "Cornucopia (C -EN)"
   -
     value: "T00390"
     text: "Comme au jeu de cartes de poker, chaque couleur comprend 13 cartes (As, 2-10, Valet, Dame et Roi) mais, contrairement à EoP, il y a aussi 2 cartes Joker. "
@@ -435,10 +435,10 @@ suits:
     text: "Un style optionnel de dos de carte (tartan OWASP) est fourni dans la dernière page de ce document."
   -
     value: "T00820"
-    text: "Il n’y a pas d’alignement spécial à prendre en compte. "
+    text: "Il n’y a pas d’alignement spécial à prendre en compte."
   -
     value: "T00830"
-    text: "L’impression recto-verso doit être faite avec soin. "
+    text: "L’impression recto-verso doit être faite avec soin."
   -
     value: "T00840"
     text: "Vous pouvez personnaliser les rectos ou les versos pour coller aux préférences de votre organisation."
@@ -468,479 +468,451 @@ suits:
     text: "• Liste de diffusion"
   -
     value: "T01050"
-    text: "https://lists.owasp.org/mailman/listinfo/owasp_cornucopia"
-  -
-    value: "T01060"
     text: "• Page d’accueil du projet"
   -
-    value: "T01070"
-    text: "https://www.owasp.org/index.php/OWASP_Cornucopia"
-  -
-    value: "T01080"
+    value: "T01060"
     text: "Tous les documents et outils OWASP sont libres de téléchargement et d’utilisation. "
   -
-    value: "T01090"
+    value: "T01070"
     text: "OWASP Cornucopia est publié sous une licence Creative Commons Attribution-ShareAlike 3.0 ."
   -
-    value: "T01010"
-    text: "Le texte de chaque carte décrit une attaque, sauf que l’attaquant a un nom, qui est unique à chaque carte. "
-  -
-    value: "T01020"
-    text: "Ce nom peut représenter un système informatique (ex : base de données, système de fichiers, une autre application, un service lié, un botnet), un particulier (ex : un citoyen, client, employé, criminel), ou même un groupe de personnes (ex : organisation concurrente, activistes œuvrant pour une cause)."
-  -
-    value: "T01030"
-    text: "L’attaquant peut opérer depuis un autre lieu/équipement, ou avoir un accès local/interne au même équipement, hôte, ou réseau dans lequel l’application fonctionne. "
-  -
-    value: "T01040"
-    text: "L’attaquant est toujours nommé au début de chaque description"
-  -
-    value: "T01050"
-    text: "Par exemple : William a le contrôle sur la génération des identifiants de session."
-  -
-    value: "T01060"
-    text: " Ce qui veut dire que l’attaquant (William) est en mesure de créer de nouveaux identifiants de session que l’application accepte. "
-  -
-    value: "T01070"
-    text: "Ces attaques sont principalement tirées des exigences de sécurité listées dans le SCP v2, mais ont été complétées avec les objectifs de vérification « Application Security Verification Standard for Web Applications » de l’OWASP, les scenarii de sécurité du « Practical Security Stories and Security Tasks for Agile Development Environments » de SAFECode, et une revue des cartes de l’EoP."
-  -
-    value: "T01080"
-    text: "De l’aide supplémentaire pour chaque carte est disponible dans la description en ligne du jeu : "
-  -
-    value: "T01090"
-    text: "https://www.owasp.org/index.php/Cornucopia_-_Ecommerce_Website_Edition_-_Wiki_Deck"
-  -
     value: "T01100"
-    text: "Des renvois entre les attaques et cinq ressources sont fournis sur la plupart des cartes"
+    text: "Instructions"
   -
     value: "T01110"
-    text: "•	Exigences dans “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, novembre 2010"
+    text: "Le texte de chaque carte décrit une attaque, sauf que l’attaquant a un nom, qui est unique à chaque carte. "
   -
     value: "T01120"
-    text: "https://www.owasp.org/index.php/File:OWASP_SCP_Quick_Reference_Guide_v2.pdf"
+    text: "Ce nom peut représenter un système informatique (ex : base de données, système de fichiers, une autre application, un service lié, un botnet), un particulier (ex : un citoyen, client, employé, criminel), ou même un groupe de personnes (ex : organisation concurrente, activistes œuvrant pour une cause)."
   -
     value: "T01130"
-    text: "• Identifiants de vérification dans “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (sauf sections 18 and 19)"
+    text: "L’attaquant peut opérer depuis un autre lieu/équipement, ou avoir un accès local/interne au même équipement, hôte, ou réseau dans lequel l’application fonctionne. "
   -
     value: "T01140"
-    text: "https://www.owasp.org/images/3/33/OWASP_Application_Security_Verification_Standard_3.0.1.pdf"
+    text: "L’attaquant est toujours nommé au début de chaque description"
   -
     value: "T01150"
-    text: "• Identifiants de points de détection d’attaque dans “AppSensor”, OWASP, août 2010-2015"
+    text: "Par exemple : William a le contrôle sur la génération des identifiants de session."
   -
     value: "T01160"
-    text: "https://www.owasp.org/index.php/AppSensor_DetectionPoints"
+    text: "William a le contrôle sur la génération des identifiants de session."
   -
     value: "T01170"
-    text: "•Identifiants dans “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, novembre 2015"
+    text: " Ce qui veut dire que l’attaquant (William) est en mesure de créer de nouveaux identifiants de session que l’application accepte. "
   -
     value: "T01180"
-    text: "http://capec.mitre.org/data/archive/capec_v2.8.zip"
+    text: "Ces attaques sont principalement tirées des exigences de sécurité listées dans le SCP v2, mais ont été complétées avec les objectifs de vérification « Application Security Verification Standard for Web Applications » de l’OWASP, les scenarii de sécurité du « Practical Security Stories and Security Tasks for Agile Development Environments » de SAFECode, et une revue des cartes de l’EoP."
   -
     value: "T01190"
-    text: "• Scenarii de sécurité dans 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, juillet 2012"
+    text: "De l’aide supplémentaire pour chaque carte est disponible dans la description en ligne du jeu : "
   -
     value: "T01200"
-    text: "http://www.safecode.org/publications/SAFECode_Agile_Dev_Security0712.pdf"
+    text: "Des renvois entre les attaques et cinq ressources sont fournis sur la plupart des cartes"
   -
     value: "T01210"
-    text: "Un renvoi signifie que l’attaque est incluse dans l’objet référencé, mais ne comprend pas nécessairement l’ensemble de son objectif. "
+    text: "Exigences dans “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, novembre 2010"
   -
     value: "T01220"
-    text: "Pour des données structurées comme CAPEC, la référence la plus spécifique est fournie, mais parfois est présente une référence croisée qui a aussi des exemples plus spécifiques (enfants)."
+    text: "Identifiants de vérification dans “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (sauf sections 18 and 19)"
   -
     value: "T01230"
-    text: "Il n’y a pas de renvois dans les six As et les deux Jokers. "
+    text: "Identifiants de points de détection d’attaque dans “AppSensor”, OWASP, août 2010-2015"
   -
     value: "T01240"
-    text: "Ces dernières cartes présentent des conseils généraux en italique."
+    text: "Identifiants dans “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, novembre 2015"
   -
     value: "T01250"
-    text: "Il y a bien des manières de jouer à Cornucopia."
+    text: "Scenarii de sécurité dans 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, juillet 2012"
   -
     value: "T01260"
-    text: "Il y a bien des manières de jouer à Cornucopia. En voici une, en situation dans une vidéo en ligne sur https://youtu.be/i5Y0akWj31k, qui utilise la nouvelle (mai 2015) feuille de scores disponible ici : https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
+    text: "Un renvoi signifie que l’attaque est incluse dans l’objet référencé, mais ne comprend pas nécessairement l’ensemble de son objectif. "
+  -
+    value: "T01270"
+    text: "Pour des données structurées comme CAPEC, la référence la plus spécifique est fournie, mais parfois est présente une référence croisée qui a aussi des exemples plus spécifiques (enfants)."
+  -
+    value: "T01280"
+    text: "Il n’y a pas de renvois dans les six As et les deux Jokers. "
+  -
+    value: "T01290"
+    text: "Ces dernières cartes présentent des conseils généraux en italique."
   -
     value: "T01300"
-    text: "A - Préparations"
+    text: "Il y a bien des manières de jouer à Cornucopia."
   -
     value: "T01310"
-    text: "A1.	Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes."
-  -
-    value: "T01320"
-    text: "A2.	Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation"
-  -
-    value: "T01330"
-    text: "A3.	Créez un diagramme de flux de données, des cas d’utilisation, ou d’autres supports pour aider à l’évaluation."
-  -
-    value: "T01340"
-    text: "A4.	Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d’une table (essayez d’inclure un profil sensibilisé à la sécurité applicative)."
-  -
-    value: "T01350"
-    text: "A5.	Prévoyez une distribution de prix (étoiles, pizza, bière ou fleurs en fonction de la culture d’entreprise)."
+    text: "Il y a bien des manières de jouer à Cornucopia. En voici une, en situation dans une vidéo en ligne sur https://youtu.be/i5Y0akWj31k, qui utilise la nouvelle (mai 2015) feuille de scores disponible ici : https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
   -
     value: "T01400"
-    text: "B - Jouer"
+    text: "A - Préparations"
   -
     value: "T01410"
-    text: "Une couleur – Cornucopia – fait office d’atouts. "
+    text: "A1.	Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes."
   -
     value: "T01420"
-    text: "Les As sont les plus forts (battent les Rois). "
+    text: "A2.	Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation"
   -
     value: "T01430"
-    text: "Le fait d’avoir un participant non-joueur facilite le relevé des questions et des scores."
+    text: "A3.	Créez un diagramme de flux de données, des cas d’utilisation, ou d’autres supports pour aider à l’évaluation."
   -
     value: "T01440"
-    text: "B1.	Retirez les Jokers et quelques cartes de bas niveau (2, 3, 4) du jeu Cornucopia pour s’assurer que chaque joueur ait le même nombre de cartes."
+    text: "A4.	Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d’une table (essayez d’inclure un profil sensibilisé à la sécurité applicative)."
   -
     value: "T01450"
-    text: "B2.	Battez les cartes et distribuez-les toutes."
-  -
-    value: "T01460"
-    text: "B3.	Pour commencer, choisissez au hasard un joueur qui jouera en premier – qui peut jouer n’importe quelle carte en main sauf un atout – Cornucopia"
-  -
-    value: "T01470"
-    text: "B4.	Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s’appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s’accorde à dire qu’il s’agit d’un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n’écartez pas une menace au motif que celle-ci fait déjà l’objet d’une contre-mesure – quelqu’un note la carte et relève les questions rencontrés."
-  -
-    value: "T01480"
-    text: "B5.	Jouez ainsi dans le sens des aiguilles d’une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n’importe quelle couleur. "
-  -
-    value: "T01490"
-    text: "Seule la carte la plus forte de la couleur appelée, ou l’atout Cornucopia le plus fort qui a été joué, gagne la main."
+    text: "A5.	Prévoyez une distribution de prix (étoiles, pizza, bière ou fleurs en fonction de la culture d’entreprise)."
   -
     value: "T01500"
-    text: "B6.	Le joueur qui gagne la main, commence au tour suivant, donnant une couleur à suivre."
+    text: "B - Jouer"
   -
     value: "T01510"
-    text: "B7.	Continuez jusqu’à ce que toutes les cartes soient jouées."
+    text: "Une couleur – Cornucopia – fait office d’atouts. "
+  -
+    value: "T01520"
+    text: "Les As sont les plus forts (battent les Rois). "
+  -
+    value: "T01530"
+    text: "Le fait d’avoir un participant non-joueur facilite le relevé des questions et des scores."
+  -
+    value: "T01540"
+    text: "B1.	Retirez les Jokers et quelques cartes de bas niveau (2, 3, 4) du jeu Cornucopia pour s’assurer que chaque joueur ait le même nombre de cartes."
+  -
+    value: "T01550"
+    text: "B2.	Battez les cartes et distribuez-les toutes."
+  -
+    value: "T01560"
+    text: "B3.	Pour commencer, choisissez au hasard un joueur qui jouera en premier – qui peut jouer n’importe quelle carte en main sauf un atout – Cornucopia"
+  -
+    value: "T01570"
+    text: "B4.	Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s’appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s’accorde à dire qu’il s’agit d’un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n’écartez pas une menace au motif que celle-ci fait déjà l’objet d’une contre-mesure – quelqu’un note la carte et relève les questions rencontrés."
+  -
+    value: "T01580"
+    text: "B5.	Jouez ainsi dans le sens des aiguilles d’une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n’importe quelle couleur. "
+  -
+    value: "T01590"
+    text: "Seule la carte la plus forte de la couleur appelée, ou l’atout Cornucopia le plus fort qui a été joué, gagne la main."
   -
     value: "T01600"
-    text: "C - Scores"
+    text: "B6.	Le joueur qui gagne la main, commence au tour suivant, donnant une couleur à suivre."
   -
     value: "T01610"
-    text: "L’objectif est d’identifier des menaces applicables, et de gagner des mains (des tours):"
-  -
-    value: "T01620"
-    text: "C1.	+1 point à chaque carte jouée pour laquelle le groupe s’accorde à dire qu’il s’agit d’une menace applicable."
-  -
-    value: "T01630"
-    text: "C2.	+1 point si vous gagnez une main."
-  -
-    value: "T01640"
-    text: "C3.	Lorsque toutes les cartes sont jouées, le plus grand score remporte la partie."
+    text: "B7.	Continuez jusqu’à ce que toutes les cartes soient jouées."
   -
     value: "T01700"
-    text: "D - Clôture"
+    text: "C - Scores"
   -
     value: "T01710"
-    text: "D1.	Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes."
+    text: "L’objectif est d’identifier des menaces applicables, et de gagner des mains (des tours):"
   -
     value: "T01720"
-    text: "D2.	Créez des cas d’utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement."
+    text: "C1.	+1 point à chaque carte jouée pour laquelle le groupe s’accorde à dire qu’il s’agit d’une menace applicable."
+  -
+    value: "T01730"
+    text: "C2.	+1 point si vous gagnez une main."
+  -
+    value: "T01740"
+    text: "C3.	Lorsque toutes les cartes sont jouées, le plus grand score remporte la partie."
   -
     value: "T01800"
-    text: "Règles alternatives"
+    text: "D - Clôture"
   -
     value: "T01810"
-    text: "Si vous jouez pour la première fois, retirez les As et les deux Jokers pour commencer."
+    text: "D1.	Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes."
   -
     value: "T01820"
-    text: "Rajoutez les Jokers lorsque les participants sont habitués au principe du jeu."
-  -
-    value: "T01830"
-    text: "A part les règles de comptage « à base d’atouts » décrites ci-dessus et qui sont très similaires à l’EoP, le jeu peut être joué « à la blackjack » (21 points), ce qui réduit habituellement le nombre de cartes joués à chaque tour."
-  -
-    value: "T01840"
-    text: "Entraînez-vous sur une application imaginaire, ou même une application qui est encore en projet, plutôt que d’essayer de trouver des failles sur des applications existantes, jusqu’à ce que les participants soient conscients de l’utilité et du plaisir que procure le jeu."
-  -
-    value: "T01850"
-    text: "Vous pourriez ne jouer qu’avec une seule couleur pour raccourcir la partie – mais pensez à couvrir toutes les couleurs pour chaque projet. "
-  -
-    value: "T01860"
-    text: "Mieux encore, jouez un seul tour avec quelques cartes présélectionnées, et ne comptez les points que sur la capacité à identifier les exigences de sécurité. "
-  -
-    value: "T01870"
-    text: "Vous pourriez ne jouer qu’une partie à une seule couleur par jour, pendant une semaine environ, si les participants ne peuvent pas consacrer de créneaux assez longs pour une partie entière."
-  -
-    value: "T01880"
-    text: "Certaines équipes ont préféré jouer un tour complet sans interruption, puis seulement après, échanger sur les contenus des cartes jouées (au lieu de le faire après chaque carte)."
-  -
-    value: "T01890"
-    text: "Une autre suggestion est que si un joueur n’arrive pas à identifier que la carte est applicable, on peut permettre aux autres joueurs de suggérer des idées, et potentiellement les laisser gagner le point correspondant à la carte. "
+    text: "D2.	Créez des cas d’utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement."
   -
     value: "T01900"
-    text: "Vous pouvez distribuer des points supplémentaires pour des contributions particulièrement bonnes."
+    text: "Règles alternatives"
   -
     value: "T01910"
-    text: "Vous pouvez même jouer tout seul. "
+    text: "Si vous jouez pour la première fois, retirez les As et les deux Jokers pour commencer."
   -
-    value: "01920"
-    text: "Utilisez les cartes comme point de départ à des raisonnements."
+    value: "T01920"
+    text: "Rajoutez les Jokers lorsque les participants sont habitués au principe du jeu."
   -
     value: "T01930"
-    text: "Il est néanmoins avantageux d’impliquer des personnes supplémentaires."
+    text: "A part les règles de comptage « à base d’atouts » décrites ci-dessus et qui sont très similaires à l’EoP, le jeu peut être joué « à la blackjack » (21 points), ce qui réduit habituellement le nombre de cartes joués à chaque tour."
   -
     value: "T01940"
-    text: "L’EoP Microsoft recommande la tricherie en tant que stratégie de jeu."
+    text: "Entraînez-vous sur une application imaginaire, ou même une application qui est encore en projet, plutôt que d’essayer de trouver des failles sur des applications existantes, jusqu’à ce que les participants soient conscients de l’utilité et du plaisir que procure le jeu."
+  -
+    value: "T01950"
+    text: "Vous pourriez ne jouer qu’avec une seule couleur pour raccourcir la partie – mais pensez à couvrir toutes les couleurs pour chaque projet. "
+  -
+    value: "T01960"
+    text: "Mieux encore, jouez un seul tour avec quelques cartes présélectionnées, et ne comptez les points que sur la capacité à identifier les exigences de sécurité. "
+  -
+    value: "T01970"
+    text: "Vous pourriez ne jouer qu’une partie à une seule couleur par jour, pendant une semaine environ, si les participants ne peuvent pas consacrer de créneaux assez longs pour une partie entière."
+  -
+    value: "T01980"
+    text: "Certaines équipes ont préféré jouer un tour complet sans interruption, puis seulement après, échanger sur les contenus des cartes jouées (au lieu de le faire après chaque carte)."
+  -
+    value: "T01990"
+    text: "Une autre suggestion est que si un joueur n’arrive pas à identifier que la carte est applicable, on peut permettre aux autres joueurs de suggérer des idées, et potentiellement les laisser gagner le point correspondant à la carte. "
   -
     value: "T02000"
-    text: "Jeux de cartes spécifiques aux frameworks de développement"
+    text: "Vous pouvez distribuer des points supplémentaires pour des contributions particulièrement bonnes."
   -
     value: "T02010"
-    text: "Le OWASP Framework Security Matrix qui a été publié fin 2012 documente les contrôles de sécurité présents par défaut dans les langages et frameworks de développement web et mobile couramment utilisés."
+    text: "Vous pouvez même jouer tout seul. "
   -
     value: "T02020"
-    text: "Sous certaines conditions, l’utilisation de ces contrôles peut simplifier l’identification d’exigences supplémentaires – à supposer évidemment que ces contrôles soient inclus, actives, et configurés correctement."
+    text: "Utilisez les cartes comme point de départ à des raisonnements."
   -
     value: "T02030"
-    text: "Vous pouvez retirer les cartes suivantes du jeu si vous êtes sûr qu’elles sont prises en compte dans la manière dont vous utilisez le langage / framework."
+    text: "Il est néanmoins avantageux d’impliquer des personnes supplémentaires."
   -
     value: "T02040"
-    text: "Les éléments entre crochets sont « optionnels »."
-
+    text: "L’EoP Microsoft recommande la tricherie en tant que stratégie de jeu."
   -
     value: "T02100"
-    text: "Standards et librairies de code internes"
+    text: "Jeux de cartes spécifiques aux frameworks de développement"
   -
     value: "T02110"
-    text: "Ajoutez votre propre liste de cartes exclues, qui est basée sur les standards de code de votre organisation (à supposer qu’elles soient confirmées par des étapes de vérification appropriées dans le cycle de développement)."
+    text: "Le OWASP Framework Security Matrix qui a été publié fin 2012 documente les contrôles de sécurité présents par défaut dans les langages et frameworks de développement web et mobile couramment utilisés."
   -
     value: "T02120"
-    text: "Vos standards et librairies de code"
+    text: "Sous certaines conditions, l’utilisation de ces contrôles peut simplifier l’identification d’exigences supplémentaires – à supposer évidemment que ces contrôles soient inclus, actives, et configurés correctement."
   -
     value: "T02130"
-    text: "Validation des données et encodage"
+    text: "Vous pouvez retirer les cartes suivantes du jeu si vous êtes sûr qu’elles sont prises en compte dans la manière dont vous utilisez le langage / framework."
   -
     value: "T02140"
-    text: "[votre liste]"
-  -
-    value: "T02150"
-    text: "Authentification"
-  -
-    value: "T02160"
-    text: "[votre liste]"
-  -
-    value: "T02170"
-    text: "Gestion des sessions"
-  -
-    value: "T02180"
-    text: "[votre liste]"
-  -
-    value: "T02190"
-    text: "Habilitation"
+    text: "Les éléments entre crochets sont « optionnels »."
   -
     value: "T02200"
-    text: "[votre liste]"
+    text: "Standards et librairies de code internes"
   -
     value: "T02210"
-    text: "Cryptographie"
+    text: "Ajoutez votre propre liste de cartes exclues, qui est basée sur les standards de code de votre organisation (à supposer qu’elles soient confirmées par des étapes de vérification appropriées dans le cycle de développement)."
   -
     value: "T02220"
-    text: "[votre liste]"
+    text: "Vos standards et librairies de code"
   -
     value: "T02230"
-    text: "Cornucopia"
+    text: "Validation des données et encodage"
   -
     value: "T02240"
     text: "[votre liste]"
   -
-    value: "T02300"
-    text: "Jeux d’exigences de conformité"
-  -
-    value: "T02310"
-    text: "Créez un jeu de cartes plus petit en ne prenant en compte que des cartes concernant une exigence particulière de conformité."
-  -
-    value: "T02320"
-    text: "Exigences de conformité"
-  -
-    value: "T02330"
-    text: "Validation des données et encodage"
-  -
-    value: "T02340"
-    text: "[liste de conformité]"
-  -
-    value: "T02350"
+    value: "T02250"
     text: "Authentification"
   -
-    value: "T02360"
-    text: "[liste de conformité]"
+    value: "T02260"
+    text: "[votre liste]"
   -
-    value: "T02370"
+    value: "T02270"
     text: "Gestion des sessions"
   -
-    value: "T02380"
-    text: "[liste de conformité]"
+    value: "T02280"
+    text: "[votre liste]"
   -
-    value: "T02390"
+    value: "T02290"
     text: "Habilitation"
   -
-    value: "T02400"
-    text: "[liste de conformité]"
+    value: "T02300"
+    text: "[votre liste]"
   -
-    value: "T02410"
+    value: "T02310"
     text: "Cryptographie"
   -
+    value: "T02320"
+    text: "[votre liste]"
+  -
+    value: "T02330"
+    text: "Cornucopia"
+  -
+    value: "T02340"
+    text: "[votre liste]"
+  -
+    value: "T02400"
+    text: "Jeux d’exigences de conformité"
+  -
+    value: "T02410"
+    text: "Créez un jeu de cartes plus petit en ne prenant en compte que des cartes concernant une exigence particulière de conformité."
+  -
     value: "T02420"
-    text: "[liste de conformité]"
+    text: "Exigences de conformité"
   -
     value: "T02430"
-    text: "Cornucopia"
+    text: "Validation des données et encodage"
   -
     value: "T02440"
     text: "[liste de conformité]"
   -
+    value: "T02450"
+    text: "Authentification"
+  -
+    value: "T02460"
+    text: "[liste de conformité]"
+  -
+    value: "T02470"
+    text: "Gestion des sessions"
+  -
+    value: "T02480"
+    text: "[liste de conformité]"
+  -
+    value: "T02490"
+    text: "Habilitation"
+  -
     value: "T02500"
-    text: "Foire aux questions"
+    text: "[liste de conformité]"
   -
     value: "T02510"
-    text: "1. Est-ce que je peux copier ou éditer ce jeu?"
+    text: "Cryptographie"
   -
     value: "T02520"
-    text: "Bien entendu."
+    text: "[liste de conformité]"
   -
     value: "T02530"
-    text: "Tous les travaux OWASP sont libres d’utilisation, à condition de se conformer à la licence Creative Commons Attribution-ShareAlike 3.0. Peut-être souhaitez-vous créer une nouvelle version et l’offrir au projet Cornucopia OWASP?"
+    text: "Cornucopia"
   -
     value: "T02540"
-    text: "2. Comment m’impliquer?"
-  -
-    value: "T02550"
-    text: "Envoyez des idées ou des offres d’aide à la liste de diffusion du projet."
-  -
-    value: "T02560"
-    text: "3. Comment ont été choisis les noms des attaquants?"
-  -
-    value: "T02570"
-    text: "EoP démarre chaque description avec des termes comme “Un attaquant peut…” Ceux-ci doivent être présentés comme une attaque, mais je n’étais pas pour cette terminologie anonyme, je voulais quelque chose de plus engageant, et donc, j’ai utilisé des prénoms. "
-  -
-    value: "T02580"
-    text: "On peut faire l’analogie avec une personne interne ou externe, ou un alias de machine."
-  -
-    value: "T02590"
-    text: "Mais au lieu de choisir des prénoms au hasard, j’ai réfléchi à comment mettre en avant la communauté OWASP. "
+    text: "[liste de conformité]"
   -
     value: "T02600"
-    text: "Du coup, à part “Alice et Bob”, j’ai choisi parmi les prénoms des employés et des membres dirigeants d’OWASP, passés et présents (sans notion d’ordre), puis j’ai choisi au hasard les quelques 50 prénoms restants à partir de la liste des particuliers cotisants."
+    text: "Foire aux questions"
   -
     value: "T02610"
-    text: "Aucun prénom n’a été utilisé plus d’une fois, et dans les cas où deux prénoms coexistaient, j’ai coupé une partie pour m’assurer que personne ne soit facilement reconnu."
+    text: "1. Est-ce que je peux copier ou éditer ce jeu?"
   -
     value: "T02620"
-    text: "Les prénoms n’ont pas été délibérément alloués à une attaque, défense ou exigence particulière."
+    text: "Bien entendu."
   -
     value: "T02630"
-    text: "Le mélange des cultures et des genres reflète simplement ces sources de prénoms, et n’a pas vocation à être multi culturellement exhaustif. "
+    text: "Tous les travaux OWASP sont libres d’utilisation, à condition de se conformer à la licence Creative Commons Attribution-ShareAlike 3.0. Peut-être souhaitez-vous créer une nouvelle version et l’offrir au projet Cornucopia OWASP?"
   -
     value: "T02640"
-    text: "Dans la v1.20, le prénom de la carte VE-10 a changé pour refléter le nouveau co-chef de projet – cette carte est aussi la seule à présenter deux prénoms."
+    text: "2. Comment m’impliquer?"
   -
     value: "T02650"
-    text: "4. Pourquoi n’y a-t-il pas d’images sur les cartes?"
+    text: "Envoyez des idées ou des offres d’aide à la liste de diffusion du projet."
   -
     value: "T02660"
-    text: "Il y a pas mal de texte sur les cartes, et les références croisées prennent également beaucoup d’espace. "
+    text: "3. Comment ont été choisis les noms des attaquants?"
   -
     value: "T02670"
-    text: "Mais cela serait bien d’ajouter des éléments supplémentaires de design. "
+    text: "EoP démarre chaque description avec des termes comme “Un attaquant peut…” Ceux-ci doivent être présentés comme une attaque, mais je n’étais pas pour cette terminologie anonyme, je voulais quelque chose de plus engageant, et donc, j’ai utilisé des prénoms. "
   -
     value: "T02680"
-    text: "Un volontaire?"
+    text: "On peut faire l’analogie avec une personne interne ou externe, ou un alias de machine."
   -
     value: "T02690"
-    text: "5. Est-ce que les attaques sont classées en fonction de leur valeur faciale"
+    text: "Mais au lieu de choisir des prénoms au hasard, j’ai réfléchi à comment mettre en avant la communauté OWASP. "
   -
     value: "T02700"
-    text: "Approximativement."
+    text: "Du coup, à part “Alice et Bob”, j’ai choisi parmi les prénoms des employés et des membres dirigeants d’OWASP, passés et présents (sans notion d’ordre), puis j’ai choisi au hasard les quelques 50 prénoms restants à partir de la liste des particuliers cotisants."
   -
     value: "T02710"
-    text: "Le risque sera dépendant de l’application et de l’organisation, à cause des exigences de sécurité et de conformité qui sont variables, du coup votre propre échelle de notation peut classer les cartes dans un ordre différent que celui de leur valeur faciale."
+    text: "Aucun prénom n’a été utilisé plus d’une fois, et dans les cas où deux prénoms coexistaient, j’ai coupé une partie pour m’assurer que personne ne soit facilement reconnu."
   -
     value: "T02720"
-    text: "6. Combien de temps faut-il pour jouer une main en utilisant le jeu complet?"
+    text: "Les prénoms n’ont pas été délibérément alloués à une attaque, défense ou exigence particulière."
   -
     value: "T02730"
-    text: "Cela dépend du niveau de discussion et du degré de connaissance des joueurs vis-à-vis de l’application. "
+    text: "Le mélange des cultures et des genres reflète simplement ces sources de prénoms, et n’a pas vocation à être multi culturellement exhaustif. "
   -
     value: "T02740"
-    text: "Comptez 1 heure et demie à 2 heures pour 4 à 6 joueurs."
+    text: "Dans la v1.20, le prénom de la carte VE-10 a changé pour refléter le nouveau co-chef de projet – cette carte est aussi la seule à présenter deux prénoms."
   -
     value: "T02750"
-    text: "7. Quels profils de joueurs peuvent participer?"
+    text: "4. Pourquoi n’y a-t-il pas d’images sur les cartes?"
   -
     value: "T02760"
-    text: "Essayez toujours de panacher des profils qui peuvent contribuer de manière différente."
+    text: "Il y a pas mal de texte sur les cartes, et les références croisées prennent également beaucoup d’espace. "
   -
     value: "T02770"
-    text: "Mais choisissez une personne qui a une connaissance suffisante de la terminologie des vulnérabilités des applications. "
+    text: "Mais cela serait bien d’ajouter des éléments supplémentaires de design. "
   -
     value: "T02780"
-    text: "Sinon, essayez d’inclure un mélange d’architectes, de développeurs, de testeurs, et un chef de projet ou un responsable métier adéquats."
+    text: "Un volontaire?"
   -
     value: "T02790"
-    text: "8. Qui doit prendre des notes et noter les scores?"
+    text: "5. Est-ce que les attaques sont classées en fonction de leur valeur faciale"
   -
     value: "T02800"
-    text: "Il est conseillé qu’une tierce personne, qui ne participe pas au jeu, prenne des notes sur les exigences identifiées et les questions soulevées. "
+    text: "Approximativement."
   -
     value: "T02810"
-    text: "Cette activité peut faire office de formation pour un développeur junior, ou bien menée par le chef de projet. "
+    text: "Le risque sera dépendant de l’application et de l’organisation, à cause des exigences de sécurité et de conformité qui sont variables, du coup votre propre échelle de notation peut classer les cartes dans un ordre différent que celui de leur valeur faciale."
   -
     value: "T02820"
-    text: "Quelques organisations ont enregistré leur partie afin de revenir dessus lorsque les exigences ont été formellement écrites."
+    text: "6. Combien de temps faut-il pour jouer une main en utilisant le jeu complet?"
   -
     value: "T02830"
-    text: "9. Doit-on toujours utiliser un jeu complet de cartes?"
+    text: "Cela dépend du niveau de discussion et du degré de connaissance des joueurs vis-à-vis de l’application. "
   -
     value: "T02840"
-    text: "Non. "
+    text: "Comptez 1 heure et demie à 2 heures pour 4 à 6 joueurs."
   -
     value: "T02850"
-    text: "Un jeu plus petit est plus rapide à jouer. "
+    text: "7. Quels profils de joueurs peuvent participer?"
   -
     value: "T02860"
-    text: "Démarrez votre première partie avec assez de cartes pour deux ou trois tours."
+    text: "Essayez toujours de panacher des profils qui peuvent contribuer de manière différente."
   -
     value: "T02870"
-    text: "Pensez toujours à retirer les cartes qui ne sont pas du tout en rapport avec l’application ou la fonction qui est évaluée. "
+    text: "Mais choisissez une personne qui a une connaissance suffisante de la terminologie des vulnérabilités des applications. "
   -
     value: "T02880"
-    text: "Les joueurs débutants seront généralement plus à l’aise pendant les premières parties, si l’on retire les As et les deux Jokers. "
+    text: "Sinon, essayez d’inclure un mélange d’architectes, de développeurs, de testeurs, et un chef de projet ou un responsable métier adéquats."
   -
     value: "T02890"
-    text: "De même, les atouts peuvent être écartés jusqu’à ce que les participants soient plus à l’aise avec le concept du jeu."
+    text: "8. Qui doit prendre des notes et noter les scores?"
   -
     value: "T02900"
-    text: "10. Que doivent faire les joueurs lorsqu’ils possèdent un As qui stipule “Vous avez inventé une nouvelle attaque contre…”?"
+    text: "Il est conseillé qu’une tierce personne, qui ne participe pas au jeu, prenne des notes sur les exigences identifiées et les questions soulevées. "
   -
     value: "T02910"
-    text: "Le joueur peut imaginer n’importe quelle attaque qu’il juge valide, à condition que le thème de la couleur (ex : Validation des Données et Encodage) corresponde."
+    text: "Cette activité peut faire office de formation pour un développeur junior, ou bien menée par le chef de projet. "
   -
     value: "T02920"
-    text: "Les joueurs débutants seront plus à l’aise sans ces cartes (voir FAQ 9)."
+    text: "Quelques organisations ont enregistré leur partie afin de revenir dessus lorsque les exigences ont été formellement écrites."
   -
     value: "T02930"
-    text: "11. Je ne comprends pas la description de l’attaque sur une carte – comment trouver plus d’information?"
+    text: "9. Doit-on toujours utiliser un jeu complet de cartes?"
   -
     value: "T02940"
-    text: "Le Wiki Deck en ligne a été créé pour aider les joueurs à comprendre les attaques."
+    text: "Non. "
   -
     value: "T02950"
-    text: "Voir :"
+    text: "Un jeu plus petit est plus rapide à jouer. "
   -
     value: "T02960"
-    text: "https://www.owasp.org/index.php/Cornucopia_-_Ecommerce_Website_Edition_-_Wiki_Deck"
+    text: "Démarrez votre première partie avec assez de cartes pour deux ou trois tours."
   -
     value: "T02970"
-    text: "12. Mon entreprise souhaite imprimer sa propre version de l’OWASP Cornucopia – à quelle licence devons-nous nous référer?"
+    text: "Pensez toujours à retirer les cartes qui ne sont pas du tout en rapport avec l’application ou la fonction qui est évaluée. "
   -
     value: "T02980"
-    text: "La réponse complète à cette question se trouve sur les pages web du projet. "
+    text: "Les joueurs débutants seront généralement plus à l’aise pendant les premières parties, si l’on retire les As et les deux Jokers. "
   -
     value: "T02990"
-    text: "Voir :"
+    text: "De même, les atouts peuvent être écartés jusqu’à ce que les participants soient plus à l’aise avec le concept du jeu."
   -
     value: "T03000"
-    text: "https://www.owasp.org/index.php/OWASP_Cornucopia - tab=FAQs"
+    text: "10. Que doivent faire les joueurs lorsqu’ils possèdent un As qui stipule “Vous avez inventé une nouvelle attaque contre…”?"
+  -
+    value: "T03010"
+    text: "Le joueur peut imaginer n’importe quelle attaque qu’il juge valide, à condition que le thème de la couleur (ex : Validation des Données et Encodage) corresponde."
+  -
+    value: "T03020"
+    text: "Les joueurs débutants seront plus à l’aise sans ces cartes (voir FAQ 9)."
+  -
+    value: "T03030"
+    text: "11. Je ne comprends pas la description de l’attaque sur une carte – comment trouver plus d’information?"
+  -
+    value: "T03040"
+    text: "Le Wiki Deck en ligne a été créé pour aider les joueurs à comprendre les attaques."
+  -
+    value: "T03050"
+    text: "Voir :"
+  -
+    value: "T03060"
+    text: "12. Mon entreprise souhaite imprimer sa propre version de l’OWASP Cornucopia – à quelle licence devons-nous nous référer?"
+  -
+    value: "T03070"
+    text: "La réponse complète à cette question se trouve sur les pages web du projet."
   -
     value: "T03100"
     text: "Changelog"
@@ -1141,16 +1113,16 @@ suits:
     text: "Veuillez contacter la liste de diffusion ou les chefs du projet directement, s’il manque quelqu’un dans les listes ci-dessous."
   -
     value: "T03850"
-    text: "•	Les employés de l’OWASP travaillant dur, en particulier Kate Hartmann"
+    text: "•Les employés de l’OWASP travaillant dur, en particulier Kate Hartmann"
   -
     value: "T03860"
-    text: "•	Les participants aux réunions des branches de l'OWASP Londres, de l'OWASP Manchester, de l'OWASP Pays-Bas et de l'OWASP Écosse, ainsi qu'au London Gamification meetup, qui ont fait des suggestions utiles et posé des questions pertinentes"
+    text: "•Les participants aux réunions des branches de l'OWASP Londres, de l'OWASP Manchester, de l'OWASP Pays-Bas et de l'OWASP Écosse, ainsi qu'au London Gamification meetup, qui ont fait des suggestions utiles et posé des questions pertinentes"
   -
     value: "T03870"
-    text: "•	Blackfoot UK Limited pour le don des fichiers prêt-à-imprimer et des centaines de jeux de cartes imprimées professionnellement pour distribution par la Poste et dans les réunions de branche de l’OWASP"
+    text: "•Blackfoot UK Limited pour le don des fichiers prêt-à-imprimer et des centaines de jeux de cartes imprimées professionnellement pour distribution par la Poste et dans les réunions de branche de l’OWASP"
   -
     value: "T03880"
-    text: "•	OWASP NYC pour la création d’un design de boîte OWASP et la distribution de packs à AppSec USA 2014."
+    text: "•OWASP NYC pour la création d’un design de boîte OWASP et la distribution de packs à AppSec USA 2014."
   -
     value: "T03900"
     text: "Podcasts et vidéos"
@@ -1159,22 +1131,13 @@ suits:
     text: "Les ressources suivantes de l’OWASP Cornucopia sont disponibles en ligne:"
   -
     value: "T03920"
-    text: "•	Vidéo - Using the cards, créée lors du sommet AppSec EU 2015 project, 20 mai 2015"
+    text: "Vidéo - Using the cards, créée lors du sommet AppSec EU 2015 project, 20 mai 2015"
   -
     value: "T03930"
-    text: "https://www.youtube.com/watch?v=i5Y0akWj31k"
+    text: "Interview Podcast, OWASP 24/7 Podcast channel, 21 mars 2014"
   -
     value: "T03940"
-    text: "•	Interview Podcast, OWASP 24/7 Podcast channel, 21 mars 2014"
+    text: "Vidéo de présentation, lors de l’OWASP EU Tour 2013 London, 3 juin 2013"
   -
     value: "T03950"
-    text: "http://trustedsoftwarealliance.com/2014/03/21/the-owasp-cornucopia-project-with-colin-watson/"
-  -
-    value: "T03960"
-    text: "•	Vidéo de présentation, lors de l’OWASP EU Tour 2013 London, 3 juin 2013"
-  -
-    value: "T03970"
-    text: "https://www.youtube.com/watch?v=Q_LE-8xNXVk"
-  -
-    value: "T03980"
     text: "Visitez le site web du projet pour de plus amples informations et des documents de présentation."
