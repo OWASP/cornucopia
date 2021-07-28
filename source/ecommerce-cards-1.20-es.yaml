@@ -97,7 +97,7 @@ suits:
   -
     value: "A"
     desc: "Has inventado un nuevo ataque contra la gestión de sesión"
-    misc: "Read more about this topic in OWASP"s free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
   -
     value: "2"
     desc: "William tiene el control sobre la generación de identificadores de sesión"
@@ -140,7 +140,7 @@ suits:
   -
     value: "A"
     desc: "Has inventado un nuevo ataque contra la Autorización"
-    misc: "Read more about this topic in OWASP"s Development and Testing Guides"
+    misc: "Read more about this topic in OWASP's Development and Testing Guides"
   -
     value: "2"
     desc: "Tim puede influir a donde se envía o reenvía la data"
@@ -183,7 +183,7 @@ suits:
   -
     value: "A"
     desc: "Has inventado un nuevo ataque contra la Criptografía"
-    misc: "Read more about this topic in OWASP"s free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
   -
     value: "2"
     desc: "Kyun puede acceder a los datos porque ha sido ofuscado en lugar de utilizar una función criptográfica aprobada"
@@ -226,7 +226,7 @@ suits:
   -
     value: "A"
     desc: "Has inventado un nuevo ataque de cualquier tipo"
-    misc: "Read more about application security in OWASP"s free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
+    misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
   -
     value: "2"
     desc: "Lee puede omitir los controles de la aplicación porque se han usado funciones de lenguaje de programación peligrosas/riesgosas en lugar de alternativas más seguras, o hay errores de conversión de tipo, o porque la aplicación no es confiable cuando un recurso externo no está disponible, o hay race conditions, o hay problemas en la inicialización/asignación de recursos, o pueden ocurrir desbordamientos"
@@ -481,19 +481,19 @@ suits:
     text: "Las relaciones entre los ataques y cinco recursos se ofrecen en la mayoría de las tarjetas"
   -
     value: "T00910"
-    text: "• Requisitos en "Prácticas de codificación segura (SCP) - Guía de referencia rápida", v2, OWASP, noviembre de 2010"
+    text: "• Requisitos en \"Prácticas de codificación segura (SCP) - Guía de referencia rápida\", v2, OWASP, noviembre de 2010"
   -
     value: "T00920"
     text: "https://www.owasp.org/index.php/File:OWASP_SCP_Quick_ Reference_Guide_v2.pdf"
   -
     value: "T00930"
-    text: "• ID de verificación en "Application Security Verification Standard (ASVS) para aplicaciones web", OWASP, 2016"
+    text: "• ID de verificación en \"Application Security Verification Standard (ASVS) para aplicaciones web\", OWASP, 2016"
   -
     value: "T00940"
     text: "https://www.owasp.org/images/3/33/OWASP_Application_ Security_Verification_Standard_3.0.1.pdf"
   -
     value: "T00950"
-    text: "• ID de puntos de detección de ataque en "AppSensor", OWASP, agosto de 2012"
+    text: "• ID de puntos de detección de ataque en \"AppSensor\", OWASP, agosto de 2012"
   -
     value: "T00960"
     text: "https://www.owasp.org/index.php/AppSensor_ DetectionPoints"
