@@ -243,7 +243,7 @@ class TestGetReplacementDict(unittest.TestCase):
 
 class TestGetCheckFixFileExtension(unittest.TestCase):
     def test_get_check_fix_file_extension_no_extension(self) -> None:
-        Convert.args = argparse.Namespace(debug=True)
+        Convert.args = argparse.Namespace(debug=False)
         input_filename = "hello"
         input_extension = ".docx"
         want_filename = "hello.docx"
@@ -252,7 +252,7 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_wrong_extension(self) -> None:
-        Convert.args = argparse.Namespace(debug=True)
+        Convert.args = argparse.Namespace(debug=False)
         input_filename = "hello.docx"
         input_extension = ".pdf"
         want_filename = "hello.pdf"
@@ -261,7 +261,7 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_correct_extension(self) -> None:
-        Convert.args = argparse.Namespace(debug=True)
+        Convert.args = argparse.Namespace(debug=False)
         input_filename = "hello.docx"
         input_extension = ".docx"
         want_filename = "hello.docx"
@@ -278,14 +278,5 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
 #
 #         got_folder_path = Convert.ensure_folder_exists(input_folder_path)
 #         self.assertEqual(want_folder_path, got_folder_path )
-
-
-
-
-
-
-
-
-
 
 
