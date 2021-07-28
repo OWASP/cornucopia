@@ -317,7 +317,7 @@ paragraphs:
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees, especially Kate Hartmann, for managing the ordering, stocking and despatch of printed card decks."
+    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees, especially Kate Hartmann, for managing the ordering, stocking and despatch of printed card decks. "
   -
     value: "T00160"
     text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
@@ -325,20 +325,17 @@ paragraphs:
     value: "T00170"
     text: "Colin Watson as author and co-project leader with Darío De Filippis, along with other OWASP volunteers who have helped in many ways."
   -
-    value: "T00180"
-    text: "OWASP does not endorse or recommend commercial products or services © 2012-2016 OWASP Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
-  -
     value: "T00200"
     text: "Introduction"
   -
     value: "T00210"
-    text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories."
+    text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories. "
   -
     value: "T00220"
     text: "Although the idea had been waiting for enough time to progress it, the final motivation came when SAFECode published its Practical Security Stories and Security Tasks for Agile Development Environments in July 2012."
   -
     value: "T00230"
-    text: "The Microsoft SDL team had already published its super Elevation of Privilege: The Threat Modeling Game (EoP) but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address."
+    text: "The Microsoft SDL team had already published its super Elevation of Privilege: The Threat Modeling Game (EoP) but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address. "
   -
     value: "T00240"
     text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
@@ -356,28 +353,28 @@ paragraphs:
     text: "The card deck (pack)"
   -
     value: "T00310"
-    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development."
+    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development. "
   -
     value: "T00320"
     text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
   -
     value: "T00330"
-    text: "Data validation and encoding (VE)"
+    text: "• Data validation and encoding (VE)"
   -
     value: "T00340"
-    text: "Authentication (AT)"
+    text: "• Authentication (AT)"
   -
     value: "T00350"
-    text: "Session Management (SM)"
+    text: "• Session Management (SM)"
   -
     value: "T00360"
-    text: "Authorization (AZ)"
+    text: "• Authorization (AZ)"
   -
     value: "T00370"
-    text: "Cryptography (CR)"
+    text: "• Cryptography (CR)"
   -
     value: "T00380"
-    text: "Cornucopia (C)"
+    text: "• Cornucopia (C)"
   -
     value: "T00390"
     text: "Smilar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
@@ -473,454 +470,485 @@ paragraphs:
     text: "The best place to use to discuss or contribute is the mailing list for the OWASP project:"
   -
     value: "T01040"
-    text: "•Mailing list"
+    text: "•Mailing list "
   -
     value: "T01050"
-    text: "•Project home page"
+    text: "https://lists.owasp.org/mailman/listinfo/owasp_cornucopia"
   -
     value: "T01060"
-    text: "All OWASP documents and tools are free to download and use."
+    text: "•Project home page "
   -
     value: "T01070"
+    text: "https://www.owasp.org/index.php/OWASP_Cornucopia"
+  -
+    value: "T01080"
+    text: "All OWASP documents and tools are free to download and use."
+  -
+    value: "T01090"
     text: "OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
   -
-    value: "T01100"
+    value: "T01000"
     text: "Instructions"
   -
-    value: "T01110"
+    value: "T01010"
     text: "The text on each card describes an attack, but the attacker is given a name, which are unique across all the cards."
   -
-    value: "T01120"
-    text: "The name can represent a computer system (e.g. the database, the file system, another application, a related service, a botnet), an individual person (e.g. a citizen, a customer, a client, an employee, a criminal, a spy), or even a group of people (e.g. a competitive organization, activists with a common cause)."
+    value: "T01020"
+    text: "The name can represent a computer system (e.g. the database, the file system, another application, a related service, a botnet), an individual person (e.g. a citizen, a customer, a client, an employee, a criminal, a spy), or even a group of people (e.g. a competitive organization, activists with a common cause). "
   -
-    value: "T01130"
+    value: "T01030"
     text: "The attacker might be remote in some other device/location, or local/internal with access to the same device, host or network as the application is running on."
   -
-    value: "T01140"
+    value: "T01040"
     text: "The attacker is always named at the start of each description"
   -
-    value: "T01150"
-    text: "An example is:"
+    value: "T01050"
+    text: "An example is: William has control over the generation of session identifiers."
   -
-    value: "T01160"
-    text: "William has control over the generation of session identifiers."
-  -
-    value: "T01170"
+    value: "T01060"
     text: "This means the attacker (William) can create new session identifiers that the application accepts."
   -
-    value: "T01180"
+    value: "T01070"
     text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
   -
-    value: "T01190"
+    value: "T01080"
     text: "Further guidance about each card is available in the online Wiki Deck at "
   -
-    value: "T01200"
+    value: "T01090"
+    text: "https://www.owasp.org/index.php/Cornucopia_-_Ecommerce_Website_Edition_-_Wiki_Deck"
+  -
+    value: "T01100"
     text: "Lookups between the attacks and five resources are provided on most cards:"
   -
+    value: "T01110"
+    text: "•  Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, November 2010 "
+  -
+    value: "T01120"
+    text: "https://www.owasp.org/index.php/File:OWASP_SCP_Quick_Reference_Guide_v2.pdf"
+  -
+    value: "T01130"
+    text: "•	Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (excluding sections 18 and 19)"
+  -
+    value: "T01140"
+    text: "https://www.owasp.org/images/3/33/OWASP_Application_Security_Verification_Standard_3.0.1.pdf"
+  -
+    value: "T01150"
+    text: "•	Attack detection points IDs in “AppSensor”, OWASP, August 2010-2015"
+  -
+    value: "T01160"
+    text: "https://www.owasp.org/index.php/AppSensor_DetectionPoints"
+  -
+    value: "T01170"
+    text: "•	IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
+  -
+    value: "T01180"
+    text: "http://capec.mitre.org/data/archive/capec_v2.8.zip"
+  -
+    value: "T01190"
+    text: "•  Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, July 2012"
+  -
+    value: "T01200"
+    text: "http://www.safecode.org/publications/SAFECode_Agile_Dev_Security0712.pdf"
+  -
     value: "T01210"
-    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, November 2010 "
-  -
-    value: "T01220"
-    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (excluding sections 18 and 19)"
-  -
-    value: "T01230"
-    text: "Attack detection points IDs in “AppSensor”, OWASP, August 2010-2015"
-  -
-    value: "T01240"
-    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
-  -
-    value: "T01250"
-    text: "Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, July 2012"
-  -
-    value: "T01260"
     text: "A look-up means the attack is included within the referenced item, but does not necessarily encompass the whole of its intent. "
   -
-    value: "T01270"
+    value: "T01220"
     text: "For structured data like CAPEC, the most specific reference is provided but sometimes a cross-reference is provided that also has more specific (child) examples."
   -
-    value: "T01280"
+    value: "T01230"
     text: "There are no lookups on the six Aces and two Jokers. "
   -
-    value: "T01290"
+    value: "T01240"
     text: "Instead these cards have some general tips in italicized text."
   -
-    value: "T01300"
+    value: "T01250"
     text: "It is possible to play Cornucopia in many different ways. "
   -
-    value: "T01310"
+    value: "T01260"
     text: "Here is one way, demonstrated online in a video at https://youtu.be/i5Y0akWj31k , which uses the new (May 2015) score/record sheet at https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
   -
-    value: "T01400"
+    value: "T01300"
     text: "A - Preparations"
   -
-    value: "T01410"
+    value: "T01310"
     text: "A1. Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
   -
-    value: "T01420"
+    value: "T01320"
     text: "A2. Identify an application or application process to review; this might be a concept, design or an actual implementation"
   -
-    value: "T01430"
+    value: "T01330"
     text: "A3. Create a data flow diagram, user stories, or other artefacts to help the review"
   -
-    value: "T01440"
+    value: "T01340"
     text: "A4. Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
   -
-    value: "T01450"
+    value: "T01350"
     text: "A5. Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
   -
-    value: "T01500"
+    value: "T01400"
     text: "B - Play"
   -
-    value: "T01510"
+    value: "T01410"
     text: "One suit - Cornucopia - acts as trumps."
   -
-    value: "T01520"
+    value: "T01420"
     text: "Aces are high (i.e. they beat Kings)."
   -
-    value: "T01530"
+    value: "T01430"
     text: "It helps if there is a non-player to document the issues and scores."
   -
-    value: "T01540"
+    value: "T01440"
     text: "B1. Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
   -
-    value: "T01550"
+    value: "T01450"
     text: "B2. Shuffle the deck and deal all the cards"
   -
-    value: "T01560"
+    value: "T01460"
     text: "B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
   -
-    value: "T01570"
+    value: "T01470"
     text: "B4. To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
   -
-    value: "T01580"
+    value: "T01480"
     text: "B5. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
   -
-    value: "T01590"
+    value: "T01490"
     text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand."
   -
-    value: "T01600"
+    value: "T01500"
     text: "B6. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
   -
-    value: "T01610"
+    value: "T01510"
     text: "B7. Repeat until all the cards are played"
   -
-    value: "T01700"
+    value: "T01600"
     text: "C - Scoring"
   -
-    value: "T01710"
+    value: "T01610"
     text: "The objective is to identify applicable threats, and win hands (rounds):"
   -
-    value: "T01720"
+    value: "T01620"
     text: "C1. Score +1 for each card you can identify as a valid threat to the application under consideration"
   -
-    value: "T01730"
+    value: "T01630"
     text: "C2. Score +1 if you win a round"
   -
-    value: "T01740"
+    value: "T01640"
     text: "C3. Once all cards have been played, whoever has the most points wins"
   -
-    value: "T01800"
+    value: "T01700"
     text: "D - Closure"
   -
-    value: "T01810"
+    value: "T01710"
     text: "D1. Review all the applicable threats and the matching security requirements"
   -
-    value: "T01820"
+    value: "T01720"
     text: "D2. Create user stories, specifications and test cases as required for your development methodology."
   -
-    value: "T01900"
+    value: "T01800"
     text: "Alternative game rules"
   -
-    value: "T01910"
+    value: "T01810"
     text: "If you are new to the game, remove the Aces and two Joker cards to begin with."
   -
-    value: "T01920"
+    value: "T01820"
     text: "Add the Joker cards back in once people become more familiar with the process."
   -
-    value: "T01930"
+    value: "T01830"
     text: "Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round."
   -
-    value: "T01940"
+    value: "T01840"
     text: "Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game."
   -
-    value: "T01950"
+    value: "T01850"
     text: "Consider just playing with one suit to make a shorter session – but try to cover all the suits for every project. "
   -
-    value: "T01960"
+    value: "T01860"
     text: "Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. "
   -
-    value: "T01970"
+    value: "T01870"
     text: "Perhaps have one game of each suit each day for a week or so, if the participants cannot spare long enough for a full deck."
   -
-    value: "T01980"
+    value: "T01880"
     text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
   -
-    value: "T01990"
+    value: "T01890"
     text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
   -
-    value: "T02000"
+    value: "T01900"
     text: "Consider allowing extra points for especially good contributions."
   -
-    value: "T02010"
+    value: "T01910"
     text: "You can even play by yourself. "
   -
-    value: "T02020"
+    value: "01920"
     text: "Just use the cards to act as thought-provokers. "
   -
-    value: "T02030"
+    value: "T01930"
     text: "Involving more people will be beneficial though."
   -
-    value: "T02040"
+    value: "T01940"
     text: "In Microsoft's EoP guidance, they recommend cheating as a good game strategy."
   -
-    value: "T02100"
+
+    value: "T02000"
     text: "Development framework-specific modified card decks"
   -
-    value: "T02110"
+    value: "T02010"
     text: "At the end of 2012, the OWASP Framework Security Matrix was published which documents built in security controls in some commonly used languages and frameworks for web and mobile application development."
   -
-    value: "T02120"
+    value: "T02020"
     text: "With certain provisos it is useful to consider how using these controls can simplify the identification of additional requirements – provided of course the controls are included, enabled and configured correctly."
   -
-    value: "T02130"
+    value: "T02030"
     text: "Consider removing the following cards from the decks if you are confidence they are addressed by the way you are using the language/framework. "
   -
-    value: "T02140"
+    value: "T02040"
     text: "Items in parentheses are “maybes”."
   -
-    value: "T02200"
+    value: "T02100"
     text: "Internal coding standards and libraries"
   -
-    value: "T02210"
+    value: "T02110"
     text: "Add your own list of excluded cards based on your organisation’s coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
   -
-    value: "T02220"
+    value: "T02120"
     text: "Your coding standards and libraries"
   -
-    value: "T02230"
+    value: "T02130"
     text: "Data validation and encoding"
+  -
+    value: "T02140"
+    text: "[your list]"
+  -
+    value: "T02150"
+    text: "Authentication"
+  -
+    value: "T02160"
+    text: "[your list]"
+  -
+    value: "T02170"
+    text: "Session management"
+  -
+    value: "T02180"
+    text: "[your list]"
+  -
+    value: "T02190"
+    text: "Authorization"
+  -
+    value: "T02200"
+    text: "[your list]"
+  -
+    value: "T02210"
+    text: "Cryptography"
+  -
+    value: "T02220"
+    text: "[your list]"
+  -
+    value: "T02230"
+    text: "Cornucopia"
   -
     value: "T02240"
     text: "[your list]"
   -
-    value: "T02250"
-    text: "Authentication"
-  -
-    value: "T02260"
-    text: "[your list]"
-  -
-    value: "T02270"
-    text: "Session management"
-  -
-    value: "T02280"
-    text: "[your list]"
-  -
-    value: "T02290"
-    text: "Authorization"
-  -
     value: "T02300"
-    text: "[your list]"
-  -
-    value: "T02310"
-    text: "Cryptography"
-  -
-    value: "T02320"
-    text: "[your list]"
-  -
-    value: "T02330"
-    text: "Cornucopia"
-  -
-    value: "T02340"
-    text: "[your list]"
-  -
-    value: "T02400"
     text: "Compliance requirement decks"
   -
-    value: "T02410"
+    value: "T02310"
     text: "Create a smaller deck by only including cards for a particular compliance requirement."
   -
-    value: "T02420"
+    value: "T02320"
     text: "Compliance requirement"
   -
-    value: "T02430"
+    value: "T02330"
     text: "Data validation and encoding"
+  -
+    value: "T02340"
+    text: "[compliance list]"
+  -
+    value: "T02350"
+    text: "Authentication"
+  -
+    value: "T02360"
+    text: "[compliance list]"
+  -
+    value: "T02370"
+    text: "Session management"
+  -
+    value: "T02380"
+    text: "[compliance list]"
+  -
+    value: "T02390"
+    text: "Authorization"
+  -
+    value: "T02400"
+    text: "[compliance list]"
+  -
+    value: "T02410"
+    text: "Cryptography"
+  -
+    value: "T02420"
+    text: "[compliance list]"
+  -
+    value: "T02430"
+    text: "Cornucopia"
   -
     value: "T02440"
     text: "[compliance list]"
   -
-    value: "T02450"
-    text: "Authentication"
-  -
-    value: "T02460"
-    text: "[compliance list]"
-  -
-    value: "T02470"
-    text: "Session management"
-  -
-    value: "T02480"
-    text: "[compliance list]"
-  -
-    value: "T02490"
-    text: "Authorization"
-  -
     value: "T02500"
-    text: "[compliance list]"
-  -
-    value: "T02510"
-    text: "Cryptography"
-  -
-    value: "T02520"
-    text: "[compliance list]"
-  -
-    value: "T02530"
-    text: "Cornucopia"
-  -
-    value: "T02540"
-    text: "[compliance list]"
-  -
-    value: "T02600"
     text: "Frequently asked questions"
   -
-    value: "T02610"
+    value: "T02510"
     text: "1. Can I copy or edit the game?"
   -
-    value: "T02620"
+    value: "T02520"
     text: "Yes of course."
   -
-    value: "T02630"
+    value: "T02530"
     text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
   -
-    value: "T02640"
+    value: "T02540"
     text: "Perhaps if you create a new version, you might donate it to the OWASP Cornucopia Project?"
   -
-    value: "T02650"
+    value: "T02550"
     text: "2. How can I get involved?"
   -
-    value: "T02660"
+    value: "T02560"
     text: "Please send ideas or offers of help to the project’s mailing list."
   -
-    value: "T02670"
+    value: "T02570"
     text: "3. How were the attackers’ names chosen?"
   -
-    value: "T02680"
+    value: "T02580"
     text: "EoP begins every description with words like 'An attacker can...'. "
   -
-    value: "T02690"
+    value: "T02590"
     text: "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
   -
-    value: "T02700"
+    value: "T02600"
     text: "These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. "
   -
-    value: "T02710"
+    value: "T02610"
     text: "Therefore, apart from 'Alice and Bob' I use the given (first) names of current and recent OWASP employees and Board members (assigned in no order), and then randomly selected the remaining 50 or so names from the current list of paying individual OWASP members. "
   -
-    value: "T02720"
+    value: "T02620"
     text: "No name was used more than once, and where people had provided two personal names, I dropped one part to try to ensure no-one can be easily identified. "
   -
-    value: "T02730"
+    value: "T02630"
     text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
   -
-    value: "T02740"
+    value: "T02640"
     text: "In v1.20, the name on VE-10 changed to reflect the project’s new co-leader - this card is also the only one with two names in the attack."
   -
-    value: "T02750"
+    value: "T02650"
     text: "4. Why aren’t there any images on the card faces?"
   -
-    value: "T02760"
+    value: "T02660"
     text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too. "
   -
-    value: "T02770"
+    value: "T02670"
     text: "But it would be great to have additional design elements included. "
   -
-    value: "T02780"
+    value: "T02680"
     text: "Any volunteer"
   -
-    value: "T02790"
+    value: "T02690"
     text: "5. Are the attacks ranked by the number on the card?"
   -
-    value: "T02800"
+    value: "T02700"
     text: "Only approximately."
   -
-    value: "T02810"
+    value: "T02710"
     text: "The risk will be application and organisation dependent, due to varying security and compliance requirements, so your own severity rating may place the cards in some other order than the numbers on the cards."
   -
-    value: "T02820"
+    value: "T02720"
     text: "6. How long does it take to play a round of cards using the full deck?"
   -
-    value: "T02830"
+    value: "T02730"
     text: "This depends upon the amount of discussion and how familiar the players are with application security concepts."
   -
-    value: "T02840"
+    value: "T02740"
     text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
   -
-    value: "T02850"
+    value: "T02750"
     text: "7. What sort of people should play the game?"
   -
-    value: "T02860"
+    value: "T02760"
     text: "Always try to have a mix of roles who can contribute alternative perspectives."
   -
-    value: "T02870"
+    value: "T02770"
     text: "But include someone who has a reasonable knowledge of application vulnerability terminology. "
   -
-    value: "T02880"
+    value: "T02780"
     text: "Otherwise try to include a mix of architects, developers, testers and a relevant project manager or business owner."
   -
-    value: "T02890"
+    value: "T02790"
     text: "8. Who should take notes and record scores?"
   -
-    value: "T02900"
+    value: "T02800"
     text: "It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed."
   -
-    value: "T02910"
+    value: "T02810"
     text: "This could be used as training for a more junior developer, or performed by the project manager."
   -
-    value: "T02920"
+    value: "T02820"
     text: "Some organisations have made a recording to review afterwards when the requirements are written up more formally."
   -
-    value: "T02930"
+    value: "T02830"
     text: "9. Should we always use the full deck of cards?"
   -
-    value: "T02940"
+    value: "T02840"
     text: "No. "
   -
-    value: "T02950"
+    value: "T02850"
     text: "A smaller deck is quicker to play. "
   -
-    value: "T02960"
+    value: "T02860"
     text: "Start your first game with only enough cards for two or three rounds. "
   -
-    value: "T02970"
+    value: "T02870"
     text: "Always consider removing cards that are not appropriate at all of the target application or function being reviewed. "
   -
-    value: "T02980"
+    value: "T02880"
     text: "For the first few times people play the game it is also usually better to remove the Aces and the two Jokers."
   -
-    value: "T02990"
+    value: "T02890"
     text: "It is also usual to play the game without any trumps suit until people are more familiar with the idea."
   -
-    value: "T03000"
+    value: "T02900"
     text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
   -
-    value: "T03010"
+    value: "T02910"
     text: "The player can make up any attack they think is valid, but must match the suit of the card e.g. data validation and encoding)."
   -
-    value: "T03020"
+    value: "T02920"
     text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
   -
-    value: "T03030"
+    value: "T02930"
     text: "11. I don’t understand what the attack means on each card - is there more detailed information?"
   -
-    value: "T03040"
+    value: "T02940"
     text: "Yes, the online Wiki Deck at was created to help players understand the attacks. "
   -
-    value: "T03050"
+    value: "T02950"
     text: "See"
   -
-    value: "T03060"
+    value: "T02960"
+    text: "https://www.owasp.org/index.php/Cornucopia_-_Ecommerce_Website_Edition_-_Wiki_Deck"
+  -
+    value: "T02970"
     text: "12. My company wants to print its own version of OWASP Cornucopia - what license do we need to refer to?"
   -
-    value: "T03070"
-    text: "Please refer to the full answer to this question on the project’s web pages at"
+    value: "T02980"
+    text: "Please refer to the full answer to this question on the project’s web pages at "
+  -
+    value: "T02990"
+    text: "https://www.owasp.org/index.php/OWASP_Cornucopia - tab=FAQs"
+  -
+    value: "T03000"
+    text: "https://www.owasp.org/index.php/Cornucopia_-_Ecommerce_Website_Edition_-_Wiki_Deck"
   -
     value: "T03100"
     text: "Change Log"
@@ -1139,14 +1167,23 @@ paragraphs:
     text: 'The following supporting OWASP Cornucopia resources are available online:'
   -
     value: "T03920"
-    text: "Video - Using the cards, created during AppSec EU 2015 project summit, 20th May 2015"
+    text: "•	Video - Using the cards, created during AppSec EU 2015 project summit, 20th May 2015"
   -
     value: "T03930"
-    text: "Podcast interview, OWASP 24/7 Podcast channel, 21st March 2014"
+    text: "https://www.youtube.com/watch?v=i5Y0akWj31k"
   -
     value: "T03940"
-    text: "	Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "•	Podcast interview, OWASP 24/7 Podcast channel, 21st March 2014"
   -
     value: "T03950"
+    text: "http://trustedsoftwarealliance.com/2014/03/21/the-owasp-cornucopia-project-with-colin-watson/"
+  -
+    value: "T03960"
+    text: "	•	Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+  -
+    value: "T03970"
+    text: "https://www.youtube.com/watch?v=Q_LE-8xNXVk"
+  -
+    value: "T03980"
     text: "See the project website for further information and presentation materials."
 
