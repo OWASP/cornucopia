@@ -287,7 +287,7 @@ paragraphs:
     text: "No Card"
   -
     value: "Title"
-    text: "OWASP Cornucopia Ecommerce Edition v1.21-EN"
+    text: "Ecommerce Website Edition v1.21-EN"
   -
     value: "T00010"
     text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
@@ -356,7 +356,7 @@ paragraphs:
     text: "The card deck (pack)"
   -
     value: "T00310"
-    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development."
+    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development. "
   -
     value: "T00320"
     text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
