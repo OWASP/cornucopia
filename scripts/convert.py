@@ -73,20 +73,21 @@ class Convert:
             for language in self.LANGUAGE_CHOICES:
                 if language not in ("all", "template"):
                     languages.append(language)
+        elif self.args.language == "":
+            languages.append("en")
         else:
             languages.append(self.args.language)
         return languages
 
     @staticmethod
     def set_logging(self) -> None:
-        if self.args.debug:
-            logging_level = logging.DEBUG
-        else:
-            logging_level = logging.INFO
         logging.basicConfig(
             format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s",
-            level=logging_level,
         )
+        if self.args.debug:
+            logging.getLogger().setLevel(logging.DEBUG)
+        else:
+            logging.getLogger().setLevel(logging.INFO)
 
     def convert_type_language(self, file_type: str, language: str = "en") -> None:
         # Get the list of available translation files
@@ -194,8 +195,10 @@ class Convert:
         return self.get_replacement_dict(mapping_data, True)
 
     def set_can_convert_to_pdf(self):
-        operating_system: str = sys.platform
-        self.can_convert_to_pdf = operating_system.lower().find("win") >= 0
+        operating_system: str = sys.platform.lower()
+        can_convert_to_pdf = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
+        logging.info(f" --- operating system = {operating_system}, can_convert_to_pdf = {can_convert_to_pdf}")
+        self.can_convert_to_pdf = can_convert_to_pdf
 
     @staticmethod
     def sort_keys_longest_to_shortest(replacement_dict) -> List[tuple]:

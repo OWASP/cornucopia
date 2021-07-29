@@ -7,6 +7,142 @@ import logging
 from scripts.convert import Convert
 
 
+class TestGetValidFileTypes(unittest.TestCase):
+    def test_get_valid_file_types_idml(self) -> None:
+        Convert.args = argparse.Namespace(outputfiletype="idml")
+        want_list = ["idml"]
+
+        got_list = Convert.get_valid_file_types(Convert)
+        self.assertListEqual(want_list, got_list)
+
+    def test_get_valid_file_types_blank_filetype(self) -> None:
+        Convert.args = argparse.Namespace(outputfiletype="", outputfile="cornucopia_en_template.pdf")
+        want_list = ["pdf"]
+
+        got_list = Convert.get_valid_file_types(Convert)
+        self.assertListEqual(want_list, got_list)
+
+    def test_get_valid_file_types_revert_default(self) -> None:
+        Convert.args = argparse.Namespace(outputfiletype="", outputfile="cornucopia_en_template")
+        want_list = ["docx"]
+
+        got_list = Convert.get_valid_file_types(Convert)
+        self.assertListEqual(want_list, got_list)
+
+    def test_get_valid_file_types_all_with_pdf(self) -> None:
+        Convert.args = argparse.Namespace(outputfiletype="all")
+        Convert.can_convert_to_pdf = True
+        want_list = ["docx", "idml", "pdf"]
+
+        got_list = Convert.get_valid_file_types(Convert)
+        got_list.sort()
+        self.assertListEqual(want_list, got_list)
+
+    def test_get_valid_file_types_all_without_pdf(self) -> None:
+        Convert.args = argparse.Namespace(outputfiletype="all")
+        Convert.can_convert_to_pdf = False
+        want_list = ["docx", "idml"]
+
+        got_list = Convert.get_valid_file_types(Convert)
+        got_list.sort()
+        self.assertListEqual(want_list, got_list)
+
+    def test_get_valid_file_types_pdf_without_pdf_ability(self) -> None:
+        Convert.args = argparse.Namespace(outputfiletype="pdf")
+        Convert.can_convert_to_pdf = False
+        want_list = []
+
+        logging.getLogger().setLevel(logging.CRITICAL)
+        got_list = Convert.get_valid_file_types(Convert)
+        logging.getLogger().setLevel(logging.ERROR)
+        self.assertListEqual(want_list, got_list)
+
+
+class TestGetValidLanguagesChoices(unittest.TestCase):
+    def test_get_valid_language_choices_fr(self) -> None:
+        Convert.args = argparse.Namespace(language="fr")
+        want_language = ["fr"]
+
+        got_language = Convert.get_valid_language_choices(Convert)
+        self.assertListEqual(want_language, got_language)
+
+    def test_get_valid_language_choices_blank(self) -> None:
+        Convert.args = argparse.Namespace(language="")
+        want_language = ["en"]
+
+        got_language = Convert.get_valid_language_choices(Convert)
+        self.assertListEqual(want_language, got_language)
+
+    def test_get_valid_language_choices_all(self) -> None:
+        Convert.args = argparse.Namespace(language="all")
+        want_language = Convert.LANGUAGE_CHOICES
+        want_language.remove("template")
+        want_language.remove("all")
+
+        got_language = Convert.get_valid_language_choices(Convert)
+        self.assertListEqual(want_language, got_language)
+
+    def test_get_valid_language_choices_template(self) -> None:
+        Convert.args = argparse.Namespace(language="template")
+        want_language = ["template"]
+
+        got_language = Convert.get_valid_language_choices(Convert)
+        self.assertListEqual(want_language, got_language)
+
+
+class TestSetCanConvertToPdf(unittest.TestCase):
+    def test_set_can_convert_to_pdf(self) -> None:
+        Convert.can_convert_to_pdf = None
+        want_can_convert_in = [True, False]
+
+        Convert.set_can_convert_to_pdf(Convert)
+        got_can_convert = Convert.can_convert_to_pdf
+        self.assertIn(got_can_convert, want_can_convert_in)
+
+
+class TestSortKeysLongestToShortest(unittest.TestCase):
+    def test_sort_keys_longest_to_shortest_success(self) -> None:
+        source_data = {
+            "key shortest": "value1",
+            "key ------------- longest": "value2",
+            "key ------ middle": "value3",
+        }
+        want_data = [
+            ("key ------------- longest", "value2"),
+            ("key ------ middle", "value3"),
+            ("key shortest", "value1"),
+        ]
+
+        got_data = Convert.sort_keys_longest_to_shortest(source_data)
+        self.assertEqual(want_data, got_data)
+
+
+class TestSetLogging(unittest.TestCase):
+    def test_set_logging_default(self) -> None:
+        Convert.args = argparse.Namespace(debug=False)
+        want_logging_level = logging.INFO
+
+        Convert.set_logging(Convert)
+        got_logging_level = logging.getLogger().level
+        self.assertEqual(want_logging_level, got_logging_level)
+
+    def test_set_logging_true(self) -> None:
+        Convert.args = argparse.Namespace(debug=True)
+        want_logging_level = logging.DEBUG
+
+        Convert.set_logging(Convert)
+        got_logging_level = logging.getLogger().level
+        self.assertEqual(want_logging_level, got_logging_level)
+
+    def test_set_logging_info(self) -> None:
+        Convert.args = argparse.Namespace(debug=None)
+        want_logging_level = logging.INFO
+
+        Convert.set_logging(Convert)
+        got_logging_level = logging.getLogger().level
+        self.assertEqual(want_logging_level, got_logging_level)
+
+
 class TestParseArguments(unittest.TestCase):
     def test_successfully_parsing_arguments_short_form_basic(self) -> None:
         input_args = ["-t", "idml"]
