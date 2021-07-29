@@ -219,7 +219,7 @@ class Convert:
         found_element = False
         for el in all_content_elements:
             for k, v in replacement_values:
-                if self.key_matches_text(el.text, k, v):
+                if el.text.find(k):
                     found_element = True
                     new_text = el.text.replace(k, v)
                     el.text = new_text
@@ -228,19 +228,10 @@ class Convert:
                 f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
     @staticmethod
-    def key_matches_text(txt: str, key: str, val: str) -> bool:
-        if txt == key:
-            return True
-        tmp = txt.lower()[: -len(key) - 1].replace(" ", "_")
-        if txt.endswith(key) and (key[:-1].endswith(tmp) or val[:-1].endswith(tmp)):
-            return True
-        return False
-
-    @staticmethod
-    def remove_short_keys(replacement_dict) -> dict:
+    def remove_short_keys(replacement_dict, min_length: int = 40) -> dict:
         data2: dict = {}
         for key, value in replacement_dict.items():
-            if len(key) > 40:
+            if len(key) >= min_length:
                 data2[key] = value
         logging.debug(
             " --- Making template. Removed card_numbers. len replacement_dict = "
@@ -270,7 +261,7 @@ class Convert:
                     self.SCRIPT_PATH + os.sep + self.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext
                 )
 
-            self.check_fix_file_extension(template_doc, source_file_ext)
+            template_doc = self.check_fix_file_extension(template_doc, source_file_ext)
         logging.debug(f" --- template_doc = {template_doc}")
 
         if not os.path.isfile(template_doc):
@@ -281,6 +272,7 @@ class Convert:
     def rename_output_file(self, file_type: str, meta: dict) -> str:
         """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
         args_output_file: str = self.args.outputfile
+        logging.debug(f" --- args_output_file = {args_output_file}")
         if args_output_file:
             # Output file is specified as an argument
             if os.path.isabs(args_output_file):
@@ -298,7 +290,9 @@ class Convert:
                 + file_type.strip(".")
             )
 
-        self.check_fix_file_extension(output_filename, file_type)
+        logging.debug(f" --- output_filename before fix extension = {output_filename}")
+        output_filename = self.check_fix_file_extension(output_filename, file_type)
+        logging.debug(f" --- output_filename AFTER fix extension = {output_filename}")
 
         # Do the replacement of filename place-holders with meta data
         find_replace = self.get_find_replace_list(meta)
@@ -313,7 +307,11 @@ class Convert:
     @staticmethod
     def check_fix_file_extension(filename: str, file_type: str) -> str:
         if not filename.endswith(file_type):
-            filename = ".".join([os.path.splitext(filename)[0], file_type.strip(".")])
+            filename_split = os.path.splitext(filename)
+            if filename_split[1].strip(".").isnumeric():
+                filename = filename + "." + file_type.strip(".")
+            else:
+                filename = ".".join([os.path.splitext(filename)[0], file_type.strip(".")])
             logging.debug(f" --- output_filename with new ext = {filename}")
         return filename
 
@@ -342,7 +340,7 @@ class Convert:
             return meta
         else:
             logging.error(
-                "Could not find meta tag in the language file. "
+                "Could not find meta tag in the language data. "
                 "Please ensure required language file is in the source folder."
             )
         logging.debug(f" --- meta data = {meta}")

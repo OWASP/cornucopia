@@ -143,6 +143,295 @@ class TestSetLogging(unittest.TestCase):
         self.assertEqual(want_logging_level, got_logging_level)
 
 
+class TestRemoveShortKeys(unittest.TestCase):
+    def test_remove_short_keys_10_chars(self) -> None:
+        input_dict = {
+            "1": "txt2",
+            "123": "txt123",
+            "0123456789": "txt0123456789",
+            "0123456789012345678901234567890123456789": "txt0123456789",
+        }
+        min_length = 10
+        want_dict = {
+            "0123456789": "txt0123456789",
+            "0123456789012345678901234567890123456789": "txt0123456789",
+        }
+
+        got_dict = Convert.remove_short_keys(input_dict, min_length)
+        self.assertDictEqual(want_dict, got_dict)
+
+    def test_remove_short_keys_default_40_chars(self) -> None:
+        input_dict = {
+            "1": "txt2",
+            "123": "txt123",
+            "0123456789": "txt0123456789",
+            "01234567890123456789012345678901234567890123456789012345678901234567890123456789": "txt long",
+        }
+        want_dict = {
+            "01234567890123456789012345678901234567890123456789012345678901234567890123456789": "txt long",
+        }
+
+        got_dict = Convert.remove_short_keys(input_dict)
+        self.assertDictEqual(want_dict, got_dict)
+
+
+class TestGetTemplateDoc(unittest.TestCase):
+    def test_get_template_doc_default_docx(self) -> None:
+        Convert.args = argparse.Namespace(inputfile="")
+        Convert.making_template = False
+        input_filetype = "docx"
+        want_template_doc = Convert.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.docx"
+
+        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_doc_default_idml(self) -> None:
+        Convert.args = argparse.Namespace(inputfile="")
+        Convert.making_template = False
+        input_filetype = "idml"
+        want_template_doc = Convert.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.idml"
+
+        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_doc_make_template_docx(self) -> None:
+        Convert.args = argparse.Namespace(inputfile="")
+        Convert.making_template = True
+        input_filetype = "docx"
+        want_template_doc = Convert.BASE_PATH + "/resources/originals/owasp_cornucopia_en.docx"
+
+        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_doc_make_template_idml(self) -> None:
+        Convert.args = argparse.Namespace(inputfile="")
+        Convert.making_template = True
+        input_filetype = "idml"
+        want_template_doc = Convert.BASE_PATH + "/resources/originals/owasp_cornucopia_en.idml"
+
+        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_doc_relative_path(self) -> None:
+        Convert.args = argparse.Namespace(
+            inputfile="../test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+        )
+        Convert.making_template = False
+        input_filetype = "docx"
+        want_template_doc = Convert.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+
+        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_doc_file_not_exist(self) -> None:
+        Convert.args = argparse.Namespace(inputfile="../resources/templates/owasp_cornucopia_template.docx")
+        Convert.making_template = False
+        input_filetype = "docx"
+        want_template_doc = ""
+
+        logging.getLogger().setLevel(logging.CRITICAL)
+        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        logging.getLogger().setLevel(logging.ERROR)
+        self.assertEqual(want_template_doc, got_template_doc)
+
+
+class TestRenameOutputFile(unittest.TestCase):
+    def test_rename_output_file_short(self) -> None:
+        Convert.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver.docx")
+        input_file_type = "docx"
+        input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "121"}
+        want_filename = "/output/cornucopia_ecommerce_cards_en_121.docx"
+
+        got_filename = Convert.rename_output_file(Convert, input_file_type, input_meta_data)
+        self.assertEqual(want_filename, got_filename)
+
+    def test_rename_output_file_no_extension(self) -> None:
+        Convert.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver")
+        input_file_type = "idml"
+        input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "121"}
+        want_filename = "/output/cornucopia_ecommerce_cards_en_121.idml"
+
+        got_filename = Convert.rename_output_file(Convert, input_file_type, input_meta_data)
+        self.assertEqual(want_filename, got_filename)
+
+    def test_rename_output_file_using_defaults(self) -> None:
+        Convert.args = argparse.Namespace(outputfile=Convert.DEFAULT_OUTPUT_FILENAME)
+        input_file_type = "docx"
+        input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
+        want_filename = Convert.BASE_PATH + "/output/owasp_cornucopia_ecommerce_cards_en_1.21.docx"
+
+        # logging.getLogger().setLevel(logging.DEBUG)
+        got_filename = Convert.rename_output_file(Convert, input_file_type, input_meta_data)
+        self.assertEqual(want_filename, got_filename)
+
+
+class TestGetFindReplaceList(unittest.TestCase):
+    want_list_default = [
+        ("_type", "_ecommerce"),
+        ("_edition", "_ecommerce"),
+        ("_component", "_cards"),
+        ("_language", "_en"),
+        ("_lang", "_en"),
+        ("_version", "_1.21"),
+        ("_ver", "_1.21"),
+    ]
+
+    def test_get_find_replace_list_default(self) -> None:
+        Convert.making_template = False
+        input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
+        want_list = self.want_list_default.copy()
+        want_list.append(("_template", ""))
+
+        got_list = Convert.get_find_replace_list(input_meta_data)
+        self.assertListEqual(want_list, got_list)
+
+    def test_get_find_replace_list_making_template(self) -> None:
+        Convert.making_template = True
+        input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
+        want_list = self.want_list_default.copy()
+
+        got_list = Convert.get_find_replace_list(input_meta_data)
+        self.assertListEqual(want_list, got_list)
+
+
+class TestGetMetaData(unittest.TestCase):
+    test_data = {
+        "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
+        "suits": [
+            {
+                "name": "Data validation & encoding",
+                "cards": [
+                    {
+                        "value": "A",
+                        "desc": "You have invented a new attack against Data Validation",
+                        "misc": "Read more about this topic in OWASP's free Cheat Sheets",
+                    },
+                    {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                ],
+            },
+        ],
+    }
+
+    def test_get_meta_data_defaults(self) -> None:
+        input_data = self.test_data.copy()
+        want_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
+
+        got_data = Convert.get_meta_data(input_data)
+        self.assertDictEqual(want_data, got_data)
+
+    def test_get_meta_data_failure(self) -> None:
+        input_data = self.test_data.copy()
+        del input_data["meta"]
+        want_data = {}
+
+        logging.getLogger().setLevel(logging.CRITICAL)
+        got_data = Convert.get_meta_data(input_data)
+        logging.getLogger().setLevel(logging.ERROR)
+        self.assertDictEqual(want_data, got_data)
+
+
+class TestGetReplacementData(unittest.TestCase):
+    test_data = {
+        "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
+        "suits": [
+            {
+                "name": "Data validation & encoding",
+                "cards": [
+                    {
+                        "value": "A",
+                        "desc": "You have invented a new attack against Data Validation and Encoding",
+                        "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
+                        "XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, "
+                        "and Query Parameterization",
+                    },
+                    {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                ],
+            },
+        ],
+        "paragraphs": [
+            {
+                "name": "Common",
+                "cards": [
+                    {
+                        "value": "NoCard",
+                        "text": "No Card",
+                    },
+                    {
+                        "value": "Title",
+                        "text": "OWASP Cornucopia Ecommerce Edition v1.21-EN",
+                    },
+                ],
+            },
+        ],
+    }
+
+    def test_get_replacement_data_translation_meta(self) -> None:
+        input_yaml_files = [
+            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+        ]
+        input_data_type = "translation"
+        input_language = "en"
+        want_meta = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
+
+        got_data = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        self.assertEqual(want_meta, got_data["meta"])
+
+    def test_get_replacement_data_translation_first_suit_first_card(self) -> None:
+        input_yaml_files = [
+            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+        ]
+        input_data_type = "translation"
+        input_language = "en"
+        want_first_suit_keys = self.test_data["suits"][0].keys()
+        want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
+        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["value"]
+
+        got_suits = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_first_suit_keys = got_suits[0].keys()
+        self.assertEqual(want_first_suit_keys, got_first_suit_keys)
+        got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
+        got_first_suit_first_card_value = got_suits[0]["cards"][0]["value"]
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
+
+    def test_get_replacement_data_mappings_meta(self) -> None:
+        input_yaml_files = [
+            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+        ]
+        input_data_type = "mappings"
+        input_language = "en"
+        want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.2"}
+
+        got_data = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        self.assertEqual(want_meta, got_data["meta"])
+
+    def test_get_replacement_data_mappings_first_suit_first_card(self) -> None:
+        input_yaml_files = [
+            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+        ]
+        input_data_type = "mappings"
+        input_language = "en"
+        want_first_suit_keys = {"name": "", "cards": ""}.keys()
+        want_first_suit_first_card = {
+            "value": "2",
+            "owasp_scp": [69, 107, 108, 109, 136, 137, 153, 156, 158, 162],
+            "owasp_asvs": [1.10, 4.5, 8.1, 11.5, 19.1, 19.5],
+            "owasp_appsensor": ["HT1", "HT2", "HT3"],
+            "capec": [54, 541],
+            "safecode": [4, 23],
+        }
+
+        got_suits = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_first_suit_keys = got_suits[0].keys()
+        self.assertEqual(want_first_suit_keys, got_first_suit_keys)
+        got_first_suit_first_card = got_suits[0]["cards"][0]
+        self.assertEqual(want_first_suit_first_card, got_first_suit_first_card)
+
+
 class TestParseArguments(unittest.TestCase):
     def test_successfully_parsing_arguments_short_form_basic(self) -> None:
         input_args = ["-t", "idml"]
@@ -337,8 +626,9 @@ class TestGetReplacementDict(unittest.TestCase):
 
     def test_get_replacement_dict_success(self) -> None:
         Convert.args = argparse.Namespace(debug=False)
+        Convert.making_template = False
         logging.basicConfig(level=logging.ERROR)
-        input_data = self.test_data
+        input_data = self.test_data.copy()
         want_type = dict
         want_length = 8
         want_data = {
@@ -360,7 +650,7 @@ class TestGetReplacementDict(unittest.TestCase):
     def test_get_replacement_dict_template(self) -> None:
         Convert.making_template = True
         logging.basicConfig(level=logging.ERROR)
-        input_data = self.test_data
+        input_data = self.test_data.copy()
         want_type = dict
         want_length = 8
         want_data = {
@@ -384,6 +674,24 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
     def test_get_check_fix_file_extension_no_extension(self) -> None:
         Convert.args = argparse.Namespace(debug=False)
         input_filename = "hello"
+        input_extension = "docx"
+        want_filename = "hello.docx"
+
+        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        self.assertEqual(want_filename, got_filename)
+
+    def test_get_check_fix_file_extension_no_extension_with_version(self) -> None:
+        Convert.args = argparse.Namespace(debug=False)
+        input_filename = "hello_v1.21"
+        input_extension = "docx"
+        want_filename = "hello_v1.21.docx"
+
+        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        self.assertEqual(want_filename, got_filename)
+
+    def test_get_check_fix_file_extension_with_leading_dot(self) -> None:
+        Convert.args = argparse.Namespace(debug=False)
+        input_filename = "hello"
         input_extension = ".docx"
         want_filename = "hello.docx"
 
@@ -393,7 +701,7 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
     def test_get_check_fix_file_extension_wrong_extension(self) -> None:
         Convert.args = argparse.Namespace(debug=False)
         input_filename = "hello.docx"
-        input_extension = ".pdf"
+        input_extension = "pdf"
         want_filename = "hello.pdf"
 
         got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
@@ -404,6 +712,15 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         input_filename = "hello.docx"
         input_extension = ".docx"
         want_filename = "hello.docx"
+
+        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        self.assertEqual(want_filename, got_filename)
+
+    def test_get_check_fix_file_extension_with_folders(self) -> None:
+        Convert.args = argparse.Namespace(debug=False)
+        input_filename = "output/folder/hello_v1.21"
+        input_extension = "docx"
+        want_filename = "output/folder/hello_v1.21.docx"
 
         got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
