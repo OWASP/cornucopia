@@ -11,9 +11,10 @@ flake8 = "==3.8.3"
 httpretty = "==1.0.2"
 
 [packages]
-python-docx = "*"
+python-docx = "==0.8.11"
 PyYAML = "==5.4.1"
-docx2pdf = "==0.1.7"
+docx2pdf = "*"
+lxml = "==4.5.0"
 
 [requires]
 python_version = "3.8"
