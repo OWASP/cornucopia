@@ -37,4 +37,4 @@ jobs:
           echo `date` > updated.txt
           git add updated.txt
           git commit -m "auto updated by git actions"
-          git push origin main
+          git push origin dev
