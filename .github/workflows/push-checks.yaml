@@ -39,6 +39,11 @@ jobs:
 #          git commit -m "auto updated by git actions"
 #          git push origin dev
 
+      # Run checks
+      - name: Run environment checks
+        run: |
+          make pipenv
+
       # Runs the make fmt to check and update the format
       - name: Runs fmt checks
         run: |
