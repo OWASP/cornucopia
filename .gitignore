@@ -8,3 +8,4 @@ vm.command
 .coverage
 coverage.xml
 *~*docx
+pre-commit
