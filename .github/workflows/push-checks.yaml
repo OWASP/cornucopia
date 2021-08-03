@@ -36,8 +36,6 @@ jobs:
         run: |
           echo `date` > updated.txt
           git add updated.txt
-#          git commit -m "auto updated by git actions"
-#          git push origin dev
 
       # Run checks
       - name: Run environment checks
@@ -47,11 +45,9 @@ jobs:
       # Runs the make fmt to check and update the format
       - name: Runs fmt checks
         run: |
-          echo `date` > github-feedback.txt
           echo "make fmt:"
-          make fmt 2>&1 >> github-feedback.txt
+          make fmt
           echo "make static-check:"
-          make static-check 2>&1 | grep -v "packages" >> github-feedback.txt
-          git add github-feedback.txt
+          make static-check 2>&1 | grep -v "packages"
           git commit -m "code format updated by git actions"
           git push origin dev
