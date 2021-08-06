@@ -5,6 +5,7 @@ on:
   push:
     branches: 
       - master
+      - dev
     paths:
       - 'sources/**'
       - 'scripts/convert**'
@@ -12,6 +13,7 @@ on:
   pull_request:
     branches: 
       - master
+      - dev
     paths:
       - 'sources/**'
       - 'scripts/convert**'
@@ -73,3 +75,4 @@ jobs:
           git add output**
           git commit -m "Github Actions updated output files"
           git push
+          
