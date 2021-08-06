@@ -524,6 +524,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         got_files = Convert.get_files_from_of_type(Convert, path, ext)
         self.assertEqual(len(got_files), want_count)
         got_files = list(os.path.basename(f) for f in got_files)
+        got_files.sort()
         self.assertListEqual(got_files, want_files)
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:

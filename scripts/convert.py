@@ -128,7 +128,7 @@ class Convert:
         # Work with docx file (and maybe convert to pdf afterwards)
         if file_type in ("docx", "pdf"):
             # Get the input (template) document
-            doc: docx.document.Document = self.get_docx_document(template_doc)
+            doc: docx.Document = self.get_docx_document(template_doc)
             doc = self.replace_docx_inline_text(doc, language_dict)
 
             if file_type == "docx":
@@ -197,7 +197,7 @@ class Convert:
     def set_can_convert_to_pdf(self):
         operating_system: str = sys.platform.lower()
         can_convert_to_pdf = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
-        logging.info(f" --- operating system = {operating_system}, can_convert_to_pdf = {can_convert_to_pdf}")
+        logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {can_convert_to_pdf}")
         self.can_convert_to_pdf = can_convert_to_pdf
 
     @staticmethod
@@ -364,7 +364,7 @@ class Convert:
                 with open(file, "r", encoding="utf-8") as f:
                     try:
                         data = yaml.safe_load(f)
-                    except yaml.parser.ParserError as e:
+                    except yaml.YAMLError as e:
                         logging.info(f"Error loading yaml file: {f}. Error = {e}")
                         continue
 
@@ -396,7 +396,7 @@ class Convert:
             suit_tags, suit_key = self.get_suit_tags_and_key(key)
 
             for suit, suit_tag in zip(input_data[key], suit_tags):
-                logging.debug(" --- suit [name] = " + str(suit["name"]), "\n--- suit_tag = " + str(suit_tag))
+                logging.debug(" --- suit [name] = " + str(suit["name"]) + "\n --- suit_tag = " + str(suit_tag))
                 tag_for_suit_name = Convert.get_tag_for_suit_name(suit, suit_tag)
                 data.update(tag_for_suit_name)
 
@@ -482,7 +482,7 @@ class Convert:
             for root, dirs, files in os.walk(path):
                 for file in files:
                     f = os.path.join(root, file)
-                    zip_file.write(f, f[len(path) :])
+                    zip_file.write(f, f[len(path):])
 
     @staticmethod
     def ensure_folder_exists(folder_path: str) -> None:
@@ -540,7 +540,7 @@ class Convert:
         return paragraphs
 
     @staticmethod
-    def get_docx_document(docx_file) -> docx.document.Document:
+    def get_docx_document(docx_file) -> docx.Document:
         """Open the file and return the docx document."""
         if os.path.isfile(docx_file):
             return docx.Document(docx_file)
