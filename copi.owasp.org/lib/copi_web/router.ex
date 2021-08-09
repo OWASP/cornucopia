@@ -7,7 +7,7 @@ defmodule CopiWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, {CopiWeb.LayoutView, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug :put_secure_browser_headers, %{"content-security-policy" => "default-src 'self'"}
   end
 
   pipeline :api do
@@ -21,7 +21,7 @@ defmodule CopiWeb.Router do
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
-    live "/games/:id", GameLive.Show, :show
+    live "/games/:game_id", GameLive.Show, :show
 
     live "/games/:game_id/players", PlayerLive.Index, :index
     live "/games/:game_id/players/new", PlayerLive.Index, :new
