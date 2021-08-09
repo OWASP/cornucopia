@@ -11,14 +11,14 @@ import zipfile
 import docx2pdf
 import docx
 import xml.etree.ElementTree as ElTree
-from typing import List
+import typing
 
 
 class Convert:
     SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
     BASE_PATH = os.path.normpath(SCRIPT_PATH + "/..")
-    FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
-    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "pt-br"]
+    FILETYPE_CHOICES: typing.List[str] = ["all", "docx", "pdf", "idml"]
+    LANGUAGE_CHOICES: typing.List[str] = ["template", "all", "en", "es", "fr", "pt-br"]
     DEFAULT_TEMPLATE_FILENAME: str = "../resources/templates/owasp_cornucopia_edition_lang_ver_template"
     DEFAULT_OUTPUT_FILENAME: str = "../output/owasp_cornucopia_edition_component_lang_ver"
     args: argparse.Namespace
@@ -45,7 +45,7 @@ class Convert:
             for language in self.get_valid_language_choices():
                 self.convert_type_language(file_type, language)
 
-    def get_valid_file_types(self) -> List:
+    def get_valid_file_types(self) -> typing.List[str]:
         if not self.args.outputfiletype:
             file_type = os.path.splitext(os.path.basename(self.args.outputfile))[1].strip(".")
             if file_type in ("", None):
@@ -67,7 +67,7 @@ class Convert:
             return [self.args.outputfiletype.lower()]
         return []
 
-    def get_valid_language_choices(self) -> List:
+    def get_valid_language_choices(self) -> typing.List[str]:
         languages = []
         if self.args.language.lower() == "all":
             for language in self.LANGUAGE_CHOICES:
@@ -96,7 +96,7 @@ class Convert:
             return
 
         # Get the language data from the correct language file (checks self.args.language to select the correct file)
-        language_data: dict = self.get_replacement_data(yaml_files, "translation", language)
+        language_data: typing.Dict = self.get_replacement_data(yaml_files, "translation", language)
         if not language_data:
             return
         # If no data found in the language file, then exit with error
@@ -104,14 +104,14 @@ class Convert:
             logging.error("Could not find the `suits` tag in the language file.")
             return
         # Get the dict of replacement data
-        language_dict: dict = self.get_replacement_dict(language_data, False)
+        language_dict: typing.Dict = self.get_replacement_dict(language_data, False)
 
         # Get meta data from language data
-        meta: dict = self.get_meta_data(language_data)
+        meta: typing.Dict = self.get_meta_data(language_data)
         if not meta:
             return
 
-        mapping_dict: dict = self.get_mapping_dict(yaml_files)
+        mapping_dict: typing.Dict = self.get_mapping_dict(yaml_files)
         if not mapping_dict:
             return
 
@@ -188,20 +188,20 @@ class Convert:
         if not self.args.debug:
             os.remove(temp_output_file)
 
-    def get_mapping_dict(self, yaml_files):
-        mapping_data: dict = self.get_replacement_data(yaml_files, "mappings")
+    def get_mapping_dict(self, yaml_files: typing.List[str]) -> typing.Dict:
+        mapping_data: typing.Dict = self.get_replacement_data(yaml_files, "mappings")
         if not mapping_data:
             return {}
         return self.get_replacement_dict(mapping_data, True)
 
-    def set_can_convert_to_pdf(self):
+    def set_can_convert_to_pdf(self) -> None:
         operating_system: str = sys.platform.lower()
         can_convert_to_pdf = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
         logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {can_convert_to_pdf}")
         self.can_convert_to_pdf = can_convert_to_pdf
 
     @staticmethod
-    def sort_keys_longest_to_shortest(replacement_dict) -> List[tuple]:
+    def sort_keys_longest_to_shortest(replacement_dict) -> typing.List[tuple]:
         new_list = replacement_dict.items()
         return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
 
@@ -218,18 +218,19 @@ class Convert:
 
         found_element = False
         for el in all_content_elements:
-            for k, v in replacement_values:
-                if el.text.find(k):
-                    found_element = True
-                    new_text = el.text.replace(k, v)
-                    el.text = new_text
+            if el is not None:
+                for k, v in replacement_values:
+                    if el.text.find(k):
+                        found_element = True
+                        new_text = el.text.replace(k, v)
+                        el.text = new_text
         if found_element:
             with open(file, "bw") as f:
                 f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
     @staticmethod
-    def remove_short_keys(replacement_dict, min_length: int = 40) -> dict:
-        data2: dict = {}
+    def remove_short_keys(replacement_dict: typing.Dict, min_length: int = 40) -> typing.Dict:
+        data2: typing.Dict = {}
         for key, value in replacement_dict.items():
             if len(key) >= min_length:
                 data2[key] = value
@@ -269,7 +270,7 @@ class Convert:
             return ""
         return template_doc
 
-    def rename_output_file(self, file_type: str, meta: dict) -> str:
+    def rename_output_file(self, file_type: str, meta: typing.Dict) -> str:
         """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
         args_output_file: str = self.args.outputfile
         logging.debug(f" --- args_output_file = {args_output_file}")
@@ -316,7 +317,7 @@ class Convert:
         return filename
 
     @staticmethod
-    def get_find_replace_list(meta: dict) -> List[tuple]:
+    def get_find_replace_list(meta: typing.Dict) -> typing.Sequence[tuple]:
         ll = [
             ("_type", "_" + meta["edition"].lower()),
             ("_edition", "_" + meta["edition"].lower()),
@@ -331,9 +332,9 @@ class Convert:
         return ll
 
     @staticmethod
-    def get_meta_data(language_data) -> dict:
+    def get_meta_data(language_data: typing.Dict) -> typing.Dict:
         meta = {}
-        if "meta" in list(language_data):
+        if "meta" in list(language_data.keys()):
             for key, value in language_data["meta"].items():
                 if key in ("edition", "component", "language", "version"):
                     meta[key] = value
@@ -347,7 +348,8 @@ class Convert:
         return meta
 
     @staticmethod
-    def get_replacement_data(yaml_files: List[str], data_type: str = "translation", language: str = "") -> dict:
+    def get_replacement_data(yaml_files: typing.List[str], data_type: str = "translation", language: str = "") \
+            -> typing.Dict:
         """Get the raw data of the replacement text from correct yaml file"""
         data = {}
         logging.debug(f" --- Starting get_replacement_data() for data_type = {data_type} and language = {language}")
@@ -389,7 +391,7 @@ class Convert:
         logging.debug(f" --- Len = {len(data)}.")
         return data
 
-    def get_replacement_dict(self, input_data, mappings=False) -> dict:
+    def get_replacement_dict(self, input_data: typing.Dict, mappings=False) -> typing.Dict:
         """Loop through language file data and build up a find-replace dict"""
         data = {}
         for key in list(k for k in input_data.keys() if k != "meta"):
@@ -440,9 +442,10 @@ class Convert:
             return var
 
     @staticmethod
-    def get_suit_tags_and_key(key) -> tuple:
+    def get_suit_tags_and_key(key: str) -> typing.Tuple:
         # Short tags to match the suits in the template documents
-        suit_tags = suit_key = ""
+        suit_tags = []
+        suit_key = ""
         if key == "suits":
             suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
             suit_key = "cards"
@@ -452,7 +455,7 @@ class Convert:
         return suit_tags, suit_key
 
     @staticmethod
-    def get_tag_for_suit_name(suit, suit_tag) -> dict:
+    def get_tag_for_suit_name(suit, suit_tag) -> typing.Dict:
         data = {}
         if Convert.making_template:
             data[suit["name"]] = "${{{}}}".format(suit_tag + "_suit")
@@ -524,7 +527,7 @@ class Convert:
         return doc
 
     @staticmethod
-    def get_document_paragraphs(doc) -> List:
+    def get_document_paragraphs(doc) -> typing.List:
         paragraphs = list(doc.paragraphs)
         l1 = l2 = len(paragraphs)
         for t in doc.tables:
@@ -540,7 +543,7 @@ class Convert:
         return paragraphs
 
     @staticmethod
-    def get_docx_document(docx_file) -> docx.Document:
+    def get_docx_document(docx_file: str) -> docx.Document:
         """Open the file and return the docx document."""
         if os.path.isfile(docx_file):
             return docx.Document(docx_file)
@@ -548,7 +551,7 @@ class Convert:
             logging.error("Could not find file at: " + str(docx_file))
             return docx.Document()
 
-    def get_files_from_of_type(self, path, ext) -> List[str]:
+    def get_files_from_of_type(self, path: str, ext: str) -> typing.List[str]:
         """Get a list of files from a specified folder recursively, that have the specified extension."""
         files = []
         for root, dirnames, filenames in os.walk(path):
@@ -568,7 +571,7 @@ class Convert:
         else:
             self.making_template = False
 
-    def parse_arguments(self, input_args: List[str]) -> argparse.Namespace:
+    def parse_arguments(self, input_args: typing.List[str]) -> argparse.Namespace:
         """Parse and validate the input arguments. Return object containing argument values."""
         description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
         description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es "

@@ -44,6 +44,23 @@ jobs:
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: run python -m unittest discover -s 'test/scripts/' -p '*_utest.py'
+      - name: Check formatting of files with Black
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run black --line-length=120 --check .
+      - name: Check formatting of files with flake
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+      - name: Check coverage
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run coverage xml ; pipenv run coverage report --fail-under 91
+#      - name: Check formatting of files for correct spelling and namespace names
+#        uses: VaultVulp/action-pipenv@v2.0.1
+#        with:
+#          command: run mypy --namespace-packages ./**/*.py
+##          command: run mypy --namespace-packages --strict ./**/*.py
 
   # If Tests pass, generate new output files and commit to repo
   updateoutputfiles:
@@ -75,4 +92,3 @@ jobs:
           git add output**
           git commit -m "Github Actions updated output files"
           git push
-          

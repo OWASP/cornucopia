@@ -26,7 +26,7 @@ RUN groupmod -g 64 dialout \
     && adduser -S \
     -u "${user_id}" \
     -h "${home}" \
-    -s "/bin/sh" \
+    -s "/bin/bash" \
     -G union \
     builder \
     && gpasswd --add builder docker \
