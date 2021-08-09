@@ -391,6 +391,16 @@ $wildcard-color: #fccd8f;
   }
 }
 
+.round-nav {
+  text-align: center;
+
+  span {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
 #table {
   display: flex;
   flex-wrap: nowrap;

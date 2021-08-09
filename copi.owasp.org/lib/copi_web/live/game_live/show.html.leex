@@ -1,18 +1,21 @@
-<h1>Cornucopia Session</h1>
-
-<h2><%= @game.name %></h2>
+<h1>Cornucopia Session: <%= @game.name %></h1>
 
 <%= if @game.started_at do %>
-<h3>Game started at <%= @game.started_at %></h3>
+<h2>You're watching this game that started at <%= @game.started_at %></h2>
 
   <%= if @game.finished_at do %>
   <h4>Thanks for playing! This game finished at <%= @game.finished_at %></h4>
   <% else %>
+
+  <%= if @requested_round == @game.rounds_played + 1 do %>
   <h4>Round <strong><%= @game.rounds_played + 1 %></strong> in progress</h4>
+  <% else %>
+  <h4>Viewing round <strong><%= @requested_round %></strong></h4>
+  <% end %>
 
   <div id="table">
     <%= for player <- @game.players do %>
-      <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
+      <% player_card = card_played_in_round(player.dealt_cards, @requested_round) %>
 
         <div class="card-player">
           <span class="name"><%= player.name %></span>
@@ -28,6 +31,17 @@
 
   <% end %>
   </div>
+
+  <p class="round-nav">
+  <%= if @requested_round > 1 do %>
+    <span class="previous"><a href="?round=<%= @requested_round - 1 %>">&lt;</a></span>
+  <% end %>
+
+  <%= if @requested_round < @game.rounds_played + 1 do %>
+    <span class="next"><a href="?round=<%= @requested_round + 1 %>">&gt;</a></span>
+  <% end %>
+  </p>
+
   <% end %>
 <% else %>
 <p><em>Share the link to this page with everyone who wants to join or watch.

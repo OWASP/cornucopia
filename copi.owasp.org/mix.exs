@@ -50,6 +50,7 @@ defmodule Copi.MixProject do
       {:ecto_ulid, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.7.0"},
       {:slugify, "~> 1.3.1"},
+      {:want, "~> 1.7"},
     ]
   end
 

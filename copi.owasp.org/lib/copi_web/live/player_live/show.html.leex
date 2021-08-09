@@ -12,7 +12,7 @@
 
   <h2>Hi <%= @player.name %>! This game started at <%= @player.game.started_at %></h2>
 
-  <h4>Round <%= @game.rounds_played + 1 %></h4>
+  <h4>Round <strong><%= @game.rounds_played + 1 %></strong></h4>
 
   <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
 
@@ -67,7 +67,7 @@
 
   </div>
   <% else %>
-    <p>Hi <%= @player.name %>, waiting for game to start...</p>
+    <p>Hi <%= @player.name %>, waiting for the game to start...</p>
     <div class="loader">Loading...</div>
   <% end %>
 <% end %>
