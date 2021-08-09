@@ -38,7 +38,11 @@
   <% end %>
 
   <%= if @requested_round < @game.rounds_played + 1 do %>
-    <span class="next"><a href="?round=<%= @requested_round + 1 %>">&gt;</a></span>
+    <%= if @requested_round == @game.rounds_played do %>
+      <span class="next"><a href="?round=current">&gt;</a></span>
+    <% else %>
+      <span class="next"><a href="?round=<%= @requested_round + 1 %>">&gt;</a></span>
+    <% end %>
   <% end %>
   </p>
 
