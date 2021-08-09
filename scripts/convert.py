@@ -348,8 +348,9 @@ class Convert:
         return meta
 
     @staticmethod
-    def get_replacement_data(yaml_files: typing.List[str], data_type: str = "translation", language: str = "") \
-            -> typing.Dict:
+    def get_replacement_data(
+        yaml_files: typing.List[str], data_type: str = "translation", language: str = ""
+    ) -> typing.Dict:
         """Get the raw data of the replacement text from correct yaml file"""
         data = {}
         logging.debug(f" --- Starting get_replacement_data() for data_type = {data_type} and language = {language}")
@@ -485,7 +486,7 @@ class Convert:
             for root, dirs, files in os.walk(path):
                 for file in files:
                     f = os.path.join(root, file)
-                    zip_file.write(f, f[len(path):])
+                    zip_file.write(f, f[len(path) :])
 
     @staticmethod
     def ensure_folder_exists(folder_path: str) -> None:

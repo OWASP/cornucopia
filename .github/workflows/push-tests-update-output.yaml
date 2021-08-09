@@ -81,7 +81,7 @@ jobs:
       - name: Generate new output files
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run python scripts/convert.py -l en -t docx
+          command: run python scripts/convert.py -l all -t all
       # Set the git username and email up.
       - name: setup git config
         run: |
