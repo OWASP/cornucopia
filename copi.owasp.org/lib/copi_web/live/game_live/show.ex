@@ -33,7 +33,7 @@ defmodule CopiWeb.GameLive.Show do
   def handle_info(%{topic: message_topic, event: "game:updated", payload: updated_game}, socket) do
     cond do
       topic(updated_game.id) == message_topic ->
-        {:noreply, assign(socket, :game, updated_game)}
+        {:noreply, assign(socket, :game, updated_game) |> assign(:requested_round, updated_game.rounds_played + 1)}
       true ->
         {:noreply, socket}
     end
