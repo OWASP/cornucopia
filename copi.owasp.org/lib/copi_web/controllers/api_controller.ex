@@ -22,7 +22,13 @@ defmodule CopiWeb.ApiController do
 
             case Copi.Repo.update dealt_card do
               {:ok, dealt_card} ->
-                CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", game)
+                with {:ok, updated_game} <- Game.find(game.id) do
+                  CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
+                else
+                  {:error, _reason} ->
+                    conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not find updated game"})
+                end
+
                 conn |> json(%{"id" => dealt_card.id})
               {:error, _changeset} ->
                 conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not update dealt card"})

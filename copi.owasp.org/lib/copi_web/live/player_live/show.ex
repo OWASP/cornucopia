@@ -26,14 +26,9 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   @impl true
-  def handle_info(%{topic: _message_topic, event: "game:updated", payload: _game}, socket) do
+  def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
     with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      with {:ok, updated_game} <- Game.find(updated_player.game_id) do
-        {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
-      else
-        {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
-      end
+      {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
     else
       {:error, _reason} ->
         {:ok, redirect(socket, to: "/error")}

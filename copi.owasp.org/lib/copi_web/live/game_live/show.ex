@@ -21,10 +21,10 @@ defmodule CopiWeb.GameLive.Show do
   end
 
   @impl true
-  def handle_info(%{topic: message_topic, event: "game:updated", payload: game}, socket) do
+  def handle_info(%{topic: message_topic, event: "game:updated", payload: updated_game}, socket) do
     cond do
-      topic(game.id) == message_topic ->
-        {:noreply, assign(socket, :game, Copi.Repo.preload(game, players: :dealt_cards))}
+      topic(updated_game.id) == message_topic ->
+        {:noreply, assign(socket, :game, updated_game)}
       true ->
         {:noreply, socket}
     end
@@ -68,5 +68,11 @@ defmodule CopiWeb.GameLive.Show do
 
   def played_cards(cards) do
     Enum.filter(cards, fn card -> card.played_in_round != nil end)
+  end
+
+  def card_played_in_round(cards, round) do
+    dealt_card = Enum.find(cards, fn card -> card.played_in_round == round end)
+
+    if dealt_card, do: dealt_card.card, else: nil
   end
 end

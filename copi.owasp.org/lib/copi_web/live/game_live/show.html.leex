@@ -9,6 +9,25 @@
   <h4>Thanks for playing! This game finished at <%= @game.finished_at %></h4>
   <% else %>
   <h4>Round <strong><%= @game.rounds_played + 1 %></strong> in progress</h4>
+
+  <div id="table">
+    <%= for player <- @game.players do %>
+      <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
+
+        <div class="card-player">
+          <span class="name"><%= player.name %></span>
+          <div class="drop-zone <%= if player_card == nil do %>empty<% end %>">
+
+            <%= if player_card == nil do %>
+              <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
+            <% else %>
+            <%= render(CopiWeb.CardView, "show.html", card: player_card) %>
+            <% end %>
+          </div>
+        </div>
+
+  <% end %>
+  </div>
   <% end %>
 <% else %>
 <p><em>Share the link to this page with everyone who wants to join or watch.
