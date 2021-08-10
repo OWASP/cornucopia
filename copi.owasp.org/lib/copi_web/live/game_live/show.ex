@@ -14,7 +14,11 @@ defmodule CopiWeb.GameLive.Show do
     with {:ok, game} <- Game.find(params["game_id"]) do
       CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
 
-      current_round = game.rounds_played + 1
+      current_round = if game.finished_at do
+        game.rounds_played
+      else
+        game.rounds_played + 1
+      end
 
       case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
         {:ok, requested_round} ->

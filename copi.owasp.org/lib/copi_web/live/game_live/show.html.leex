@@ -4,8 +4,8 @@
 <h2>You're watching this game that started at <%= @game.started_at %></h2>
 
   <%= if @game.finished_at do %>
-  <h4>Thanks for playing! This game finished at <%= @game.finished_at %></h4>
-  <% else %>
+  <h3>Thanks for playing! This game finished at <%= @game.finished_at %></h3>
+  <% end %>
 
   <%= if @requested_round == @game.rounds_played + 1 do %>
   <h4>Round <strong><%= @game.rounds_played + 1 %></strong> in progress</h4>
@@ -35,6 +35,8 @@
   <p class="round-nav">
   <%= if @requested_round > 1 do %>
     <span class="previous"><a href="?round=<%= @requested_round - 1 %>">&lt;</a></span>
+  <% else %>
+    <span class="previous">&nbsp;</span>
   <% end %>
 
   <%= if @requested_round < @game.rounds_played + 1 do %>
@@ -43,10 +45,11 @@
     <% else %>
       <span class="next"><a href="?round=<%= @requested_round + 1 %>">&gt;</a></span>
     <% end %>
+  <% else %>
+    <span class="next">&nbsp;</span>
   <% end %>
   </p>
 
-  <% end %>
 <% else %>
 <p><em>Share the link to this page with everyone who wants to join or watch.
 You'll be able to start the game once at least 3 players have joined.
