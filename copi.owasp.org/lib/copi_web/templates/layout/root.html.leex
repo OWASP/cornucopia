@@ -13,12 +13,17 @@
     <header>
       <section class="container">
         <nav role="navigation">
+          <a href="https://securedelivery.io/" class="sd-logo">
+            <img src="<%= Routes.static_path(@conn, "/images/sd-logo-line.png") %>" alt="Secure Delivery Logo"/>
+          </a>
+          <!--
           <ul>
             <li><a href="faq/">FAQ</a></li>
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
           </ul>
+          -->
         </nav>
         <a href="/" class="phx-logo">
           <img src="<%= Routes.static_path(@conn, "/images/copi-logo.png") %>" alt="Copi Logo"/>
