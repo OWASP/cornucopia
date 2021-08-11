@@ -1,102 +1,106 @@
 import unittest
 import argparse
 import os
-import docx
+import docx  # type: ignore
 import logging
+import typing
+from typing import List, Dict, Any, Tuple
 
-from scripts.convert import Convert
+import scripts.convert as c
+
+c.convert_vars = c.ConvertVars()
 
 
 class TestGetValidFileTypes(unittest.TestCase):
     def test_get_valid_file_types_idml(self) -> None:
-        Convert.args = argparse.Namespace(outputfiletype="idml")
+        c.convert_vars.args = argparse.Namespace(outputfiletype="idml")
         want_list = ["idml"]
 
-        got_list = Convert.get_valid_file_types(Convert)
+        got_list = c.get_valid_file_types()
         self.assertListEqual(want_list, got_list)
 
     def test_get_valid_file_types_blank_filetype(self) -> None:
-        Convert.args = argparse.Namespace(outputfiletype="", outputfile="cornucopia_en_template.pdf")
+        c.convert_vars.args = argparse.Namespace(outputfiletype="", outputfile="cornucopia_en_template.pdf")
         want_list = ["pdf"]
 
-        got_list = Convert.get_valid_file_types(Convert)
+        got_list = c.get_valid_file_types()
         self.assertListEqual(want_list, got_list)
 
     def test_get_valid_file_types_revert_default(self) -> None:
-        Convert.args = argparse.Namespace(outputfiletype="", outputfile="cornucopia_en_template")
+        c.convert_vars.args = argparse.Namespace(outputfiletype="", outputfile="cornucopia_en_template")
         want_list = ["docx"]
 
-        got_list = Convert.get_valid_file_types(Convert)
+        got_list = c.get_valid_file_types()
         self.assertListEqual(want_list, got_list)
 
     def test_get_valid_file_types_all_with_pdf(self) -> None:
-        Convert.args = argparse.Namespace(outputfiletype="all")
-        Convert.can_convert_to_pdf = True
+        c.convert_vars.args = argparse.Namespace(outputfiletype="all")
+        c.convert_vars.can_convert_to_pdf = True
         want_list = ["docx", "idml", "pdf"]
 
-        got_list = Convert.get_valid_file_types(Convert)
+        got_list = c.get_valid_file_types()
         got_list.sort()
         self.assertListEqual(want_list, got_list)
 
     def test_get_valid_file_types_all_without_pdf(self) -> None:
-        Convert.args = argparse.Namespace(outputfiletype="all")
-        Convert.can_convert_to_pdf = False
+        c.convert_vars.args = argparse.Namespace(outputfiletype="all")
+        c.convert_vars.can_convert_to_pdf = False
         want_list = ["docx", "idml"]
 
-        got_list = Convert.get_valid_file_types(Convert)
+        got_list = c.get_valid_file_types()
         got_list.sort()
         self.assertListEqual(want_list, got_list)
 
     def test_get_valid_file_types_pdf_without_pdf_ability(self) -> None:
-        Convert.args = argparse.Namespace(outputfiletype="pdf")
-        Convert.can_convert_to_pdf = False
-        want_list = []
+        c.convert_vars.args = argparse.Namespace(outputfiletype="pdf")
+        c.convert_vars.can_convert_to_pdf = False
+        want_list: List[str] = []
 
         logging.getLogger().setLevel(logging.CRITICAL)
-        got_list = Convert.get_valid_file_types(Convert)
+        got_list = c.get_valid_file_types()
         logging.getLogger().setLevel(logging.ERROR)
         self.assertListEqual(want_list, got_list)
 
 
 class TestGetValidLanguagesChoices(unittest.TestCase):
     def test_get_valid_language_choices_fr(self) -> None:
-        Convert.args = argparse.Namespace(language="fr")
+        c.convert_vars.args = argparse.Namespace(language="fr")
         want_language = ["fr"]
 
-        got_language = Convert.get_valid_language_choices(Convert)
+        got_language = c.get_valid_language_choices()
         self.assertListEqual(want_language, got_language)
 
     def test_get_valid_language_choices_blank(self) -> None:
-        Convert.args = argparse.Namespace(language="")
+        c.convert_vars.args = argparse.Namespace(language="")
         want_language = ["en"]
 
-        got_language = Convert.get_valid_language_choices(Convert)
+        got_language = c.get_valid_language_choices()
         self.assertListEqual(want_language, got_language)
 
     def test_get_valid_language_choices_all(self) -> None:
-        Convert.args = argparse.Namespace(language="all")
-        want_language = Convert.LANGUAGE_CHOICES
+        c.convert_vars.args = argparse.Namespace(language="all")
+        want_language = c.convert_vars.LANGUAGE_CHOICES
         want_language.remove("template")
         want_language.remove("all")
 
-        got_language = Convert.get_valid_language_choices(Convert)
+        got_language = c.get_valid_language_choices()
         self.assertListEqual(want_language, got_language)
 
     def test_get_valid_language_choices_template(self) -> None:
-        Convert.args = argparse.Namespace(language="template")
+        c.convert_vars.args = argparse.Namespace(language="template")
         want_language = ["template"]
 
-        got_language = Convert.get_valid_language_choices(Convert)
+        got_language = c.get_valid_language_choices()
         self.assertListEqual(want_language, got_language)
 
 
 class TestSetCanConvertToPdf(unittest.TestCase):
     def test_set_can_convert_to_pdf(self) -> None:
-        Convert.can_convert_to_pdf = None
-        want_can_convert_in = [True, False]
+        # c.convert_vars.can_convert_to_pdf = None
+        want_can_convert_in: List[bool] = [True, False]
 
-        Convert.set_can_convert_to_pdf(Convert)
-        got_can_convert = Convert.can_convert_to_pdf
+        c.set_can_convert_to_pdf()
+        got_can_convert = c.convert_vars.can_convert_to_pdf
         self.assertIn(got_can_convert, want_can_convert_in)
 
 
@@ -113,32 +117,32 @@ class TestSortKeysLongestToShortest(unittest.TestCase):
             ("key shortest", "value1"),
         ]
 
-        got_data = Convert.sort_keys_longest_to_shortest(source_data)
+        got_data = c.sort_keys_longest_to_shortest(source_data)
         self.assertEqual(want_data, got_data)
 
 
 class TestSetLogging(unittest.TestCase):
-    def test_set_logging_default(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+    def test_set_logging_level_default(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
         want_logging_level = logging.INFO
 
-        Convert.set_logging(Convert)
+        c.set_logging()
         got_logging_level = logging.getLogger().level
         self.assertEqual(want_logging_level, got_logging_level)
 
-    def test_set_logging_true(self) -> None:
-        Convert.args = argparse.Namespace(debug=True)
+    def test_set_logging_level_debug(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=True)
         want_logging_level = logging.DEBUG
 
-        Convert.set_logging(Convert)
+        c.set_logging()
         got_logging_level = logging.getLogger().level
         self.assertEqual(want_logging_level, got_logging_level)
 
-    def test_set_logging_info(self) -> None:
-        Convert.args = argparse.Namespace(debug=None)
+    def test_set_logging_level_info(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=None)
         want_logging_level = logging.INFO
 
-        Convert.set_logging(Convert)
+        c.set_logging()
         got_logging_level = logging.getLogger().level
         self.assertEqual(want_logging_level, got_logging_level)
 
@@ -157,7 +161,7 @@ class TestRemoveShortKeys(unittest.TestCase):
             "0123456789012345678901234567890123456789": "txt0123456789",
         }
 
-        got_dict = Convert.remove_short_keys(input_dict, min_length)
+        got_dict = c.remove_short_keys(input_dict, min_length)
         self.assertDictEqual(want_dict, got_dict)
 
     def test_remove_short_keys_default_40_chars(self) -> None:
@@ -171,102 +175,108 @@ class TestRemoveShortKeys(unittest.TestCase):
             "01234567890123456789012345678901234567890123456789012345678901234567890123456789": "txt long",
         }
 
-        got_dict = Convert.remove_short_keys(input_dict)
+        got_dict = c.remove_short_keys(input_dict)
         self.assertDictEqual(want_dict, got_dict)
 
 
 class TestGetTemplateDoc(unittest.TestCase):
     def test_get_template_doc_default_docx(self) -> None:
-        Convert.args = argparse.Namespace(inputfile="")
-        Convert.making_template = False
+        c.convert_vars.args = argparse.Namespace(inputfile="")
+        c.convert_vars.making_template = False
         input_filetype = "docx"
-        want_template_doc = Convert.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.docx"
+        want_template_doc = (
+            c.convert_vars.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.docx"
+        )
 
-        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_default_idml(self) -> None:
-        Convert.args = argparse.Namespace(inputfile="")
-        Convert.making_template = False
+        c.convert_vars.args = argparse.Namespace(inputfile="")
+        c.convert_vars.making_template = False
         input_filetype = "idml"
-        want_template_doc = Convert.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.idml"
+        want_template_doc = (
+            c.convert_vars.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.idml"
+        )
 
-        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_make_template_docx(self) -> None:
-        Convert.args = argparse.Namespace(inputfile="")
-        Convert.making_template = True
+        c.convert_vars.args = argparse.Namespace(inputfile="")
+        c.convert_vars.making_template = True
         input_filetype = "docx"
-        want_template_doc = Convert.BASE_PATH + "/resources/originals/owasp_cornucopia_en.docx"
+        want_template_doc = c.convert_vars.BASE_PATH + "/resources/originals/owasp_cornucopia_en.docx"
 
-        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_make_template_idml(self) -> None:
-        Convert.args = argparse.Namespace(inputfile="")
-        Convert.making_template = True
+        c.convert_vars.args = argparse.Namespace(inputfile="")
+        c.convert_vars.making_template = True
         input_filetype = "idml"
-        want_template_doc = Convert.BASE_PATH + "/resources/originals/owasp_cornucopia_en.idml"
+        want_template_doc = c.convert_vars.BASE_PATH + "/resources/originals/owasp_cornucopia_en.idml"
 
-        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_relative_path(self) -> None:
-        Convert.args = argparse.Namespace(
+        c.convert_vars.args = argparse.Namespace(
             inputfile="../test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
         )
-        Convert.making_template = False
+        c.convert_vars.making_template = False
         input_filetype = "docx"
-        want_template_doc = Convert.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+        want_template_doc = (
+            c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+        )
 
-        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_file_not_exist(self) -> None:
-        Convert.args = argparse.Namespace(inputfile="../resources/templates/owasp_cornucopia_template.docx")
-        Convert.making_template = False
+        c.convert_vars.args = argparse.Namespace(inputfile="../resources/templates/owasp_cornucopia_template.docx")
+        c.convert_vars.making_template = False
         input_filetype = "docx"
         want_template_doc = ""
 
         logging.getLogger().setLevel(logging.CRITICAL)
-        got_template_doc = Convert.get_template_doc(Convert, input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype)
         logging.getLogger().setLevel(logging.ERROR)
         self.assertEqual(want_template_doc, got_template_doc)
 
 
 class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_short(self) -> None:
-        Convert.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver.docx")
+        c.convert_vars.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver.docx")
         input_file_type = "docx"
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "121"}
         want_filename = "/output/cornucopia_ecommerce_cards_en_121.docx"
 
-        got_filename = Convert.rename_output_file(Convert, input_file_type, input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_no_extension(self) -> None:
-        Convert.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver")
+        c.convert_vars.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver")
         input_file_type = "idml"
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "121"}
         want_filename = "/output/cornucopia_ecommerce_cards_en_121.idml"
 
-        got_filename = Convert.rename_output_file(Convert, input_file_type, input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_using_defaults(self) -> None:
-        Convert.args = argparse.Namespace(outputfile=Convert.DEFAULT_OUTPUT_FILENAME)
+        c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
         input_file_type = "docx"
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
-        want_filename = Convert.BASE_PATH + "/output/owasp_cornucopia_ecommerce_cards_en_1.21.docx"
+        want_filename = c.convert_vars.BASE_PATH + "/output/owasp_cornucopia_ecommerce_cards_en_1.21.docx"
 
         # logging.getLogger().setLevel(logging.DEBUG)
-        got_filename = Convert.rename_output_file(Convert, input_file_type, input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
 
 class TestGetFindReplaceList(unittest.TestCase):
-    want_list_default = [
+    want_list_default: List[Tuple[str, str]] = [
         ("_type", "_ecommerce"),
         ("_edition", "_ecommerce"),
         ("_component", "_cards"),
@@ -277,25 +287,25 @@ class TestGetFindReplaceList(unittest.TestCase):
     ]
 
     def test_get_find_replace_list_default(self) -> None:
-        Convert.making_template = False
+        c.convert_vars.making_template = False
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
         want_list = self.want_list_default.copy()
         want_list.append(("_template", ""))
 
-        got_list = Convert.get_find_replace_list(input_meta_data)
+        got_list = c.get_find_replace_list(input_meta_data)
         self.assertListEqual(want_list, got_list)
 
     def test_get_find_replace_list_making_template(self) -> None:
-        Convert.making_template = True
+        c.convert_vars.making_template = True
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
         want_list = self.want_list_default.copy()
 
-        got_list = Convert.get_find_replace_list(input_meta_data)
+        got_list = c.get_find_replace_list(input_meta_data)
         self.assertListEqual(want_list, got_list)
 
 
 class TestGetMetaData(unittest.TestCase):
-    test_data = {
+    test_data: Dict[str, Any] = {
         "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
         "suits": [
             {
@@ -316,22 +326,22 @@ class TestGetMetaData(unittest.TestCase):
         input_data = self.test_data.copy()
         want_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
 
-        got_data = Convert.get_meta_data(input_data)
+        got_data = c.get_meta_data(input_data)
         self.assertDictEqual(want_data, got_data)
 
     def test_get_meta_data_failure(self) -> None:
         input_data = self.test_data.copy()
         del input_data["meta"]
-        want_data = {}
+        want_data: Dict[str, str] = {}
 
         logging.getLogger().setLevel(logging.CRITICAL)
-        got_data = Convert.get_meta_data(input_data)
+        got_data = c.get_meta_data(input_data)
         logging.getLogger().setLevel(logging.ERROR)
         self.assertDictEqual(want_data, got_data)
 
 
 class TestGetReplacementData(unittest.TestCase):
-    test_data = {
+    test_data: Dict[str, Any] = {
         "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
         "suits": [
             {
@@ -367,20 +377,20 @@ class TestGetReplacementData(unittest.TestCase):
 
     def test_get_replacement_data_translation_meta(self) -> None:
         input_yaml_files = [
-            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
         ]
         input_data_type = "translation"
         input_language = "en"
         want_meta = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
 
-        got_data = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        got_data = c.get_replacement_data(input_yaml_files, input_data_type, input_language)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_replacement_data_translation_first_suit_first_card(self) -> None:
         input_yaml_files = [
-            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
         ]
         input_data_type = "translation"
         input_language = "en"
@@ -388,7 +398,7 @@ class TestGetReplacementData(unittest.TestCase):
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
         want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["value"]
 
-        got_suits = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
@@ -398,20 +408,20 @@ class TestGetReplacementData(unittest.TestCase):
 
     def test_get_replacement_data_mappings_meta(self) -> None:
         input_yaml_files = [
-            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
         ]
         input_data_type = "mappings"
         input_language = "en"
         want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.2"}
 
-        got_data = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        got_data = c.get_replacement_data(input_yaml_files, input_data_type, input_language)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_replacement_data_mappings_first_suit_first_card(self) -> None:
         input_yaml_files = [
-            Convert.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            Convert.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
         ]
         input_data_type = "mappings"
         input_language = "en"
@@ -425,7 +435,7 @@ class TestGetReplacementData(unittest.TestCase):
             "safecode": [4, 23],
         }
 
-        got_suits = Convert.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -443,7 +453,7 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = Convert.parse_arguments(Convert, input_args)
+        got_args = c.parse_arguments(input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
@@ -457,7 +467,7 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = Convert.parse_arguments(Convert, input_args)
+        got_args = c.parse_arguments(input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
@@ -471,7 +481,7 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = Convert.parse_arguments(Convert, input_args)
+        got_args = c.parse_arguments(input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
@@ -485,91 +495,91 @@ class TestParseArguments(unittest.TestCase):
             debug=False,
         )
 
-        got_args = Convert.parse_arguments(Convert, input_args)
+        got_args = c.parse_arguments(input_args)
         self.maxDiff = None
         self.assertEqual(got_args, want_args)
 
 
 class TestMakeTemplate(unittest.TestCase):
     def test_set_making_template_true(self) -> None:
-        Convert.args = argparse.Namespace(language="template")
+        c.convert_vars.args = argparse.Namespace(language="template")
 
-        Convert.set_making_template(Convert)
-        result = Convert.making_template
+        c.set_making_template()
+        result = c.convert_vars.making_template
         self.assertTrue(result)
 
     def test_set_making_template_false(self) -> None:
-        Convert.args = argparse.Namespace(language="en")
+        c.convert_vars.args = argparse.Namespace(language="en")
 
-        Convert.set_making_template(Convert)
-        result = Convert.making_template
+        c.set_making_template()
+        result = c.convert_vars.making_template
         self.assertFalse(result)
 
     def test_set_making_template_empty(self) -> None:
-        Convert.args = argparse.Namespace()
+        c.convert_vars.args = argparse.Namespace()
 
-        Convert.set_making_template(Convert)
-        result = Convert.making_template
+        c.set_making_template()
+        result = c.convert_vars.making_template
         self.assertFalse(result)
 
 
 class TestGetFilesFromOfType(unittest.TestCase):
     def test_get_files_from_of_type_source_yaml_files(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
-        path = Convert.BASE_PATH + "/test/test_files/"
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        path = c.convert_vars.BASE_PATH + "/test/test_files/"
         ext = "yaml"
         want_files = ["ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml"]
         want_count = len(want_files)
 
-        got_files = Convert.get_files_from_of_type(Convert, path, ext)
+        got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(len(got_files), want_count)
         got_files = list(os.path.basename(f) for f in got_files)
         got_files.sort()
         self.assertListEqual(got_files, want_files)
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
-        path = Convert.BASE_PATH + "/test/test_files/"
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        path = c.convert_vars.BASE_PATH + "/test/test_files/"
         ext = "docx"
         want_files = ["owasp_cornucopia_edition_lang_ver_template.docx"]
 
-        got_files = Convert.get_files_from_of_type(Convert, path, ext)
+        got_files = c.get_files_from_of_type(path, ext)
         got_files = list(os.path.basename(f) for f in got_files)
         self.assertListEqual(got_files, want_files)
         for f in want_files:
             self.assertIn(f, got_files)
 
     def test_get_files_from_of_type_source_empty_list(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
-        path = Convert.BASE_PATH + "/test/test_files/"
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        path = c.convert_vars.BASE_PATH + "/test/test_files/"
         ext = "ext"
-        want_files = []
+        want_files: typing.List[str] = []
 
         logging.getLogger().setLevel(logging.CRITICAL)
-        got_files = Convert.get_files_from_of_type(Convert, path, ext)
+        got_files = c.get_files_from_of_type(path, ext)
         logging.getLogger().setLevel(logging.ERROR)
         self.assertListEqual(got_files, want_files)
 
 
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:
-        file = Convert.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+        file = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
         want_type = docx.document.Document
         want_len_paragraphs = 36
 
-        got_file = Convert.get_docx_document(file)
+        got_file = c.get_docx_document(file)
         got_type = type(got_file)
         self.assertEqual(want_type, got_type)
         got_len_paragraphs = len(got_file.paragraphs)
         self.assertEqual(want_len_paragraphs, got_len_paragraphs)
 
     def test_get_docx_document_failure(self) -> None:
-        file = Convert.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.d"
+        file = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.d"
         want_type = docx.document.Document
         want_len_paragraphs = 0
 
         logging.getLogger().setLevel(logging.CRITICAL)
-        got_file = Convert.get_docx_document(file)
+        got_file = c.get_docx_document(file)
         logging.getLogger().setLevel(logging.ERROR)
         self.assertIsInstance(got_file, want_type)
         got_len_paragraphs = len(got_file.paragraphs)
@@ -578,21 +588,23 @@ class TestGetDocxDocument(unittest.TestCase):
 
 class TestGetTagForSuitName(unittest.TestCase):
     def test_get_tag_for_suit_name_ve(self) -> None:
-        Convert.making_template = False
+        c.convert_vars.making_template = False
         suit = {"name": "Data validation & encoding", "cards": []}
         suit_tag = "VE"
         want_tag_data = {"${VE_suit}": suit["name"]}
 
-        got_tag_data = Convert.get_tag_for_suit_name(suit, suit_tag)
+        got_tag_data = c.get_tag_for_suit_name(suit, suit_tag)
         self.assertDictEqual(want_tag_data, got_tag_data)
 
     def test_get_tag_for_suit_name_ve_template(self) -> None:
-        Convert.making_template = True
+        c.convert_vars.making_template = True
         suit = {"name": "Data validation & encoding", "cards": []}
         suit_tag = "VE"
         want_tag_data = {suit["name"]: "${VE_suit}"}
 
-        got_tag_data = Convert.get_tag_for_suit_name(suit, suit_tag)
+        # logging.basicConfig(level=logging.DEBUG)
+        got_tag_data = c.get_tag_for_suit_name(suit, suit_tag)
+        logging.basicConfig(level=logging.ERROR)
         self.assertDictEqual(want_tag_data, got_tag_data)
 
 
@@ -626,8 +638,8 @@ class TestGetReplacementDict(unittest.TestCase):
     }
 
     def test_get_replacement_dict_success(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
-        Convert.making_template = False
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        c.convert_vars.making_template = False
         logging.basicConfig(level=logging.ERROR)
         input_data = self.test_data.copy()
         want_type = dict
@@ -643,13 +655,14 @@ class TestGetReplacementDict(unittest.TestCase):
             "${AT_AT2_desc}": "James can undertake authentication functions without",
         }
 
-        got_data = Convert.get_replacement_dict(Convert, input_data)
+        got_data = c.get_replacement_dict(input_data)
         self.assertIsInstance(got_data, want_type)
         self.assertEqual(len(got_data), want_length)
         self.assertDictEqual(got_data, want_data)
 
     def test_get_replacement_dict_template(self) -> None:
-        Convert.making_template = True
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        c.convert_vars.making_template = True
         logging.basicConfig(level=logging.ERROR)
         input_data = self.test_data.copy()
         want_type = dict
@@ -665,7 +678,7 @@ class TestGetReplacementDict(unittest.TestCase):
             "James can undertake authentication functions without": "${AT_AT2_desc}",
         }
 
-        got_data = Convert.get_replacement_dict(Convert, input_data)
+        got_data = c.get_replacement_dict(input_data=input_data)
         self.assertIsInstance(got_data, want_type)
         self.assertEqual(len(got_data), want_length)
         self.assertDictEqual(got_data, want_data)
@@ -673,55 +686,55 @@ class TestGetReplacementDict(unittest.TestCase):
 
 class TestGetCheckFixFileExtension(unittest.TestCase):
     def test_get_check_fix_file_extension_no_extension(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_filename = "hello"
         input_extension = "docx"
         want_filename = "hello.docx"
 
-        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_no_extension_with_version(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_filename = "hello_v1.21"
         input_extension = "docx"
         want_filename = "hello_v1.21.docx"
 
-        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_with_leading_dot(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_filename = "hello"
         input_extension = ".docx"
         want_filename = "hello.docx"
 
-        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_wrong_extension(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_filename = "hello.docx"
         input_extension = "pdf"
         want_filename = "hello.pdf"
 
-        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_correct_extension(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_filename = "hello.docx"
         input_extension = ".docx"
         want_filename = "hello.docx"
 
-        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
 
     def test_get_check_fix_file_extension_with_folders(self) -> None:
-        Convert.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_filename = "output/folder/hello_v1.21"
         input_extension = "docx"
         want_filename = "output/folder/hello_v1.21.docx"
 
-        got_filename = Convert.check_fix_file_extension(input_filename, input_extension)
+        got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
