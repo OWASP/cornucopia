@@ -8,4 +8,4 @@ vm.command
 .coverage
 coverage.xml
 *~*docx
-pre-commit
+.mypy_cache
