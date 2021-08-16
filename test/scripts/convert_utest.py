@@ -340,6 +340,8 @@ class TestGetMetaData(unittest.TestCase):
         self.assertDictEqual(want_data, got_data)
 
 
+
+
 class TestGetReplacementData(unittest.TestCase):
     test_data: Dict[str, Any] = {
         "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
@@ -738,3 +740,30 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
 
         got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
+
+# class TestSaveIdmlFile
+class TestWritePdfFile:
+    def test_write_pdf_file_true(self) -> None:
+
+
+
+    def test_write_pdf_file_false(self) -> None:
+        want_data = ""
+
+
+
+
+
+class TestGetMappingDict(unittest.TestCase):
+    def test_get_mapping_dict_true(self, yaml_files=None) -> None:
+        input_filename = yaml_files
+        want_mapping_data = c.get_mapping_dict(yaml_files)
+        got_filename = c.get_mapping_dict(input_filename, want_mapping_data)
+        self.assertEqual(got_filename)
+
+    def test_get_mapping_dict_false(self, yaml_files=None) -> None:
+        input_filename = yaml_files
+        want_mapping_data = ""
+
+        got_filename = c.get_mapping_dict(input_filename, want_mapping_data)
+        self.assertEqual(got_filename)
