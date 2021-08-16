@@ -649,5 +649,6 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 
 
 if __name__ == "__main__":
+
     convert_vars: ConvertVars = ConvertVars()
     main()
