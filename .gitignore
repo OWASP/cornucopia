@@ -1,2 +1,11 @@
 .idea
 *venv
+output/temp
+.DS_Store
+resources/.DS_Store
+__pycache__
+vm.command
+.coverage
+coverage.xml
+*~*docx
+.mypy_cache

@@ -267,19 +267,578 @@ suits:
   name: "Joker"
   cards:
   -
-    value: "Joker"
+    value: "JokerA"
     desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
     misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
   -
-    value: "Joker"
+    value: "JokerB"
     desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
     misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando aplicaciones de entrenamiento en OWASP Broken Web Applications VM gratis, o utilizando los desafíos en línea en el laboratorio de hacking gratis"
 -
   name: "Common"
   cards:
+
   -
     value: "NoCard"
     desc: "No Tarjeta"
   -
-    value: "title"
-    desc: "OWASP Cornucopia Edición de Ecomercio v1.20-ES"
+    value: "Title"
+    desc: "Ecommerce Website Edition v1.20-ES"
+  -
+    value: "T00010"
+    text: "OWASP Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requerimientos de seguridad en procesos de desarrollo de software ágiles, convencionales y formales."
+  -
+    value: "T00020"
+    text: "Author"
+  -
+    value: "T00100"
+    text: "Index"
+  -
+    value: "T00110"
+    text: "Introducción 3"
+  -
+    value: "T00120"
+    text: "El mazo de cartas(paquete)4"
+  -
+    value: "T00130"
+    text: "Mapeos 4 "
+  -
+    value: "T00140"
+    text: "Estrategia de juego 5"
+  -
+    value: "T00150"
+    text: "Brindar retroalimentación 5 "
+  -
+    value: "T00160"
+    text: "Instrucciones 6"
+  -
+    value: "T00170"
+    text: "Preparativos 8"
+  -
+    value: "T00180"
+    text: "Juego 9 "
+  -
+    value: "T00190"
+    text: "Puntuación 10 "
+  -
+    value: "T00200"
+    text: "Cierre 10"
+  -
+    value: "T00210"
+    text: "Reglas alternativas de juego 10"
+  -
+    value: "T00220"
+    text: "Marco específico de desarrollo 11"
+  -
+    value: "T00230"
+    text: "Estándares internos de codificación y librerías 12"
+  -
+    value: "T00240"
+    text: "Mazo de requerimientos de cumplimiento 12 "
+  -
+    value: "T00250"
+    text: "Preguntas frecuentes 13"
+  -
+    value: "T00300"
+    text: "Introducción"
+  -
+    value: "T00310"
+    text: "La idea detrás de Cornucopia es ayudar a los equipos de desarrollo, especialmente aquellos que usan metodologías ágiles, a identificar los requisitos de seguridad de las aplicaciones y desarrollar historias de usuarios basadas en la seguridad. "
+  -
+    value: "T00320"
+    text: "Aunque la idea había estado esperando mucho tiempo para progresar, la motivación final llegó cuando SAFECode publicó sus Historias Prácticas de Seguridad y Tareas de seguridad para entornos de desarrollo ágil en julio de 2012."
+  -
+    value: "T00330"
+    text: "El equipo SDL de Microsoft ya había publicado su súper Elevación de Privilegios: el juego de Modelado de Amenazas (EoP), pero eso no parecía abordar el tipo de problemas más apropiado que los equipos de desarrollo de aplicaciones web, en su mayoría, tienen que enfrentar. "
+  -
+    value: "T00340"
+    text: "EoP es un gran concepto y estrategia de juego, y fue publicado bajo una Licencia de Creative Commons Attribution."
+  -
+    value: "T00350"
+    text: "Cornucopia Ecommerce Website Edition se basa en los conceptos e ideas de juegos de EoP, pero se han modificado para que sean más relevantes para los tipos de problemas que enfrentan los desarrolladores de sitios web de comercio electrónico."
+  -
+    value: "T00360"
+    text: "Intenta introducir ideas de modelado de amenazas en los equipos de desarrollo que utilizan metodologías ágiles, o están más enfocados en las debilidades de las aplicaciones web que otros tipos de vulnerabilidades de software o no están familiarizados con STRIDE y DREAD. "
+  -
+    value: "T00370"
+    text: "Cornucopia Ecommerce Website Edition es referenciada como un recurso de información en el PCI Security Standard Council's Supplement Information PCI DSS E-commerce Guidelines, v2, enero de 2013."
+  -
+    value: "T00400"
+    text: "El mazo de cartas (paquete)"
+  -
+    value: "T00410"
+    text: "A diferencia del juego EoP de STRIDE (juegos de tarjetas con diseños asociados), las cartas de Cornucopia se basan en la estructura de las Prácticas de codificación segura de OWASP - Guía de referencia rápida (SCP), pero con una consideración adicional de las secciones en el Estándar de verificación de seguridad de aplicaciones de OWASP (ASVS), la Guía de pruebas de OWASP y Principios de desarrollo seguro de David Rook. Estos proporcionaron cinco dominios, y un sexto llamado 'Cornucopia' fue creado para todo lo demás:"
+  -
+    value: "T00420"
+    text: "Validación y codificación de datos (VE) "
+  -
+    value: "T00430"
+    text: "Autenticación (AT)"
+  -
+    value: "T00440"
+    text: "Gestión de sesiones (SM)"
+  -
+    value: "T00450"
+    text: "Autorización (AZ)"
+  -
+    value: "T00460"
+    text: "Criptografía (CR)"
+  -
+    value: "T00470"
+    text: "Cornucopia (C)"
+  -
+    value: "T00480"
+    text: "Similar a las cartas de póker, cada palo contiene 13 cartas (As, 2 10, Jack, Queen y King) pero, a diferencia de EoP, también hay dos cartas Joker. "
+  -
+    value: "T00490"
+    text: "El contenido se extrajo principalmente del SCP."
+  -
+    value: "T00500"
+    text: "Mapeos"
+  -
+    value: "T00510"
+    text: "TOtra motivación para Cornucopia es vincular los ataques con los requisitos y las técnicas de verificación."
+  -
+    value: "T00520"
+    text: "Un objetivo inicial había sido hacer referencia a los ID de debilidad de CWE, pero estos resultaron ser demasiados, y en su lugar se decidió asignar cada tarjeta a los ID de patrón de ataque de software CAPEC, que a su vez se relacionan a CWE, por lo que se logra el resultado deseado."
+  -
+    value: "T00530"
+    text: "Cada tarjeta también se asocia a las 36 historias de seguridad principales en el documento SAFECode, así como a OWASP SCP v2, ASVS v3.0.1 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad para su uso en procesos ágiles."
+  -
+    value: "T00600"
+    text: "Estrategia de Juego"
+  -
+    value: "T00610"
+    text: "Además de las diferencias de contenido, las reglas del juego son prácticamente idénticas a las de EoP."
+  -
+    value: "T00700"
+    text: "Brindar retroalimentación"
+  -
+    value: "T00710"
+    text: "Si tiene ideas o comentarios sobre el uso de OWASP Cornucopia, compártalos."
+  -
+    value: "T00720"
+    text: "Aún mejor si crea versiones alternativas de las tarjetas, o produce versiones profesionales listas para imprimir, comparta eso con los voluntarios que crearon esta edición y con la comunidad más amplia de desarrollo y seguridad de aplicaciones."
+  -
+    value: "T00730"
+    text: "El mejor lugar para usar para discutir o contribuir es la lista de correo para el proyecto OWASP:"
+  -
+    value: "T00740"
+    text: "Lista de correo "
+  -
+    value: "T00750"
+    text: "Página de inicio del proyecto "
+  -
+    value: "T00760"
+    text: "Todos los documentos y herramientas de OWASP son de descarga y uso gratuito."
+  -
+    value: "T00770"
+    text: "OWASP Cornucopia tiene licencia de Creative Commons Attribution ShareAlike 3.0."
+  -
+    value: "T00800"
+    text: "Instrucciones"
+  -
+    value: "T00810"
+    text: "El texto en cada carta describe un ataque, pero el atacante recibe un nombre, que es único en todas las cartas. "
+  -
+    value: "T00820"
+    text: "El nombre puede representar un sistema informático (por ejemplo, la base de datos, el sistema de archivos, otra aplicación, un servicio relacionado, una botnet), una persona individual (por ejemplo, un ciudadano, un cliente, un usuario, un empleado, un criminal, un espía), o incluso un grupo de personas (por ejemplo, una organización competitiva, activistas con una causa común). "
+  -
+    value: "T00830"
+    text: "El atacante puede ser remoto en algún otro dispositivo / ubicación, o local / interno con acceso al mismo dispositivo, host o red en el que se ejecuta la aplicación. "
+  -
+    value: "T00840"
+    text: "El atacante siempre se nombra al comienzo de cada descripción."
+  -
+    value: "T00850"
+    text: "Un ejemplo es: William tiene control sobre la generación de identificadores de sesión."
+  -
+    value: "T00860"
+    text: "Esto significa que el atacante (William) puede crear nuevos identificadores de sesión que la aplicación acepta."
+  -
+    value: "T00870"
+    text: "Los ataques se basaron principalmente en los requisitos de seguridad enumerados en SCP, v2, pero luego se complementaron con los objetivos de verificación del 'Estándar de verificación de seguridad de aplicaciones para aplicaciones web' de OWASP, las historias centradas en la seguridad en 'Historias Prácticas de seguridad y tareas de seguridad de SAFECode para el desarrollo ágil', y finalmente una revisión de las tarjetas en EoP."
+  -
+    value: "T00880"
+    text: "Las relaciones entre los ataques y cinco recursos se ofrecen en la mayoría de las tarjetas"
+  -
+    value: "T00890"
+    text: "Las relaciones entre los ataques y cinco recursos se ofrecen en la mayoría de las tarjetas"
+  -
+    value: "T00900"
+    text: "Requisitos en \"Prácticas de codificación segura (SCP) - Guía de referencia rápida\", v2, OWASP, noviembre de 2010"
+  -
+    value: "T00910"
+    text: "ID de verificación en \"Application Security Verification Standard (ASVS) para aplicaciones web\", OWASP, 2016"
+  -
+    value: "T00920"
+    text: "• ID de puntos de detección de ataque en \"AppSensor\", OWASP, agosto de 2012"
+  -
+    value: "T00930"
+    text: "• ID en 'Enumeración y clasificación de patrones de ataque común (CAPEC)', v2.6, Mitre Corporation, noviembre de 2015"
+  -
+    value: "T00940"
+    text: "• Historias centradas en la seguridad en 'Historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágil', SAFECode, julio de 2012"
+  -
+    value: "T01000"
+    text: "OWASP Cornucopia es de uso gratuito."
+  -
+    value: "T01010"
+    text: "Tiene licencia de Creative Commons Attribution ShareAlike 3.0, por lo que puede copiar, distribuir y transmitir el trabajo, y puede adaptarlo y usarlo comercialmente, pero todo siempre que atribuya el trabajo al autor; y si lo altera, transforma sobre la base de este trabajo, puede distribuir el trabajo resultante solo bajo la misma licencia o una similar a esta."
+  -
+    value: "T01020"
+    text: "© 2012-2016 Fundación OWASP"
+  -
+    value: "T01100"
+    text: "Reconocimientos del proyecto:"
+  -
+    value: "T01110"
+    text: "Colin Watson y Darío De Filippis"
+  -
+    value: "T01120"
+    text: "Blackfoot UK Limited para los diseños de tarjetas listos para imprimir"
+  -
+    value: "T01130"
+    text: "Tom Brennan y OWASP por la caja y el folleto"
+  -
+    value: "T01140"
+    text: "Empleados de OWASP, especialmente Kate Hartmann"
+  -
+    value: "T01150"
+    text: "Oana Cornea y otros participantes en AppSec EU 2015"
+  -
+    value: "T01160"
+    text: "Max Gómez-Sánchez Vergaray por la traducción al español"
+  -
+    value: "T01170"
+    text: "(continúa en la página 16)"
+  -
+    value: "T01180"
+    text: "Una mejora es que el ataque está incluido dentro del elemento referenciado, pero no necesariamente abarca la totalidad de su intención. "
+  -
+    value: "T01190"
+    text: "Para datos estructurados como CAPEC, se proporciona la referencia más específica, pero a veces se proporciona una referencia cruzada que también tiene ejemplos más específicos (secundarios)."
+  -
+    value: "T01200"
+    text: "No hay referencias ni asociaciones directas de los seis ases ni de los dos comodines. "
+  -
+    value: "T01210"
+    text: "En cambio, estas tarjetas tienen algunos consejos generales en texto en cursiva."
+  -
+    value: "T01220"
+    text: "Es posible jugar Cornucopia de muchas formas diferentes."
+  -
+    value: "T01230"
+    text: "He aquí una forma."
+  -
+    value: "T01300"
+    text: "A - Preparativos"
+  -
+    value: "T01310"
+    text: "A1.Use las cartas de este paquete"
+  -
+    value: "T01320"
+    text: "A2.Identifique una solicitud o proceso de solicitud para revisar; esto podría ser un concepto, diseño o una implementación real"
+  -
+    value: "T01330"
+    text: "A3.Cree un diagrama de flujo de datos, historias de usuarios u otros artefactos para ayudar en la revisión. "
+  -
+    value: "T01340"
+    text: "A4.Identifique e invite a un grupo de 3 a 6 personas, Se recomienda que los roles a considerar sean arquitectos, desarrolladores, evaluadores y otras partes interesadas del negocio, Siéntelos juntos alrededor de una mesa (intente incluir a alguien bastante familiarizado con la seguridad de las aplicaciones)"
+  -
+    value: "T01350"
+    text: "A5.Tenga algunos premios a mano (estrellas doradas, chocolate, pizza, cerveza o flores según la cultura de su oficina)"
+  -
+    value: "T01400"
+    text: "B - El juego"
+  -
+    value: "T01410"
+    text: "Un palo, Cornucopia, actúa como triunfo. "
+  -
+    value: "T01420"
+    text: "Los ases son altos (es decir, vencieron a los reyes). "
+  -
+    value: "T01430"
+    text: "Ayuda si hay alguien que no es jugador para documentar los problemas y las puntuaciones."
+  -
+    value: "T01440"
+    text: "B1. Retire los comodines y algunas cartas de puntuación baja (2, 3, 4) del palo de Cornucopia para asegurarse de que cada jugador tenga la misma cantidad de cartas. "
+  -
+    value: "T01450"
+    text: "B2. Baraja la baraja y reparte todas las cartas.."
+  -
+    value: "T01460"
+    text: "B3. Para comenzar, elija un jugador al azar que jugará la primera carta; puede jugar cualquier carta de su mano, excepto del palo de triunfo: Cornucopia"
+  -
+    value: "T01470"
+    text: "B4. Para jugar una carta, cada jugador debe leerla en voz alta y explicar (consulte el Wiki Deck en línea para obtener consejos) cómo podría aplicarse la amenaza (el jugador obtiene un punto por los ataques que podrían funcionar y que el grupo cree que es un error procesable). No intente pensar en mitigaciones en esta etapa, y no excluya una amenaza solo por creer que ya está mitigada; alguien anote la tarjeta y registre los problemas planteados."
+  -
+    value: "T01480"
+    text: "B5. Juegue en el sentido de las agujas del reloj, cada persona debe jugar una carta de la misma manera; si tienes una carta del mismo palo, debes jugar una de esas; de lo contrario, pueden jugar una carta de cualquier otro palo, sólo una carta más alta del mismo palo, o la carta más alta del palo de triunfo Cornucopia, gana la mano."
+  -
+    value: "T01490"
+    text: "B6. La persona que gana la ronda lidera la siguiente ronda (es decir, juega primero) y, por lo tanto, define el siguiente palo principal."
+  -
+    value: "T01500"
+    text: "B7. Repita hasta que se jueguen todas las cartas."
+  -
+    value: "T01600"
+    text: "C - Puntuación"
+  -
+    value: "T01610"
+    text: "El objetivo es identificar las amenazas aplicables y ganar manos (rondas):"
+  -
+    value: "T01620"
+    text: "C1. Obtenga +1 por cada tarjeta que pueda identificar como una amenaza válida para la aplicación en cuestión."
+  -
+    value: "T01630"
+    text: "C2. Obtén +1 si ganas una ronda."
+  -
+    value: "T01640"
+    text: "C3. Una vez que se han jugado todas las cartas, gana el que tenga más puntos."
+  -
+    value: "T01700"
+    text: "D - Cierre"
+  -
+    value: "T01710"
+    text: "D1. Revise todas las amenazas aplicables y los requisitos de seguridad correspondientes."
+  -
+    value: "T01720"
+    text: "D2. Cree historias de usuario, especificaciones y casos de prueba según sea necesario para su metodología de desarrollo."
+  -
+    value: "T01800"
+    text: "Reglas alternativas de juego"
+  -
+    value: "T01810"
+    text: "Si es nuevo en el juego, elimine los Ases y dos cartas de Joker para empezar."
+  -
+    value: "T01820"
+    text: "Vuelva a agregar las tarjetas Joker una vez que la gente se familiarice con el proceso. "
+  -
+    value: "T01830"
+    text: "Aparte de las reglas del 'juego de cartas de triunfos' descritas anteriormente que son muy similares a la EoP, el mazo también se puede jugar como el 'juego de veintiún cartas' (también conocido como 'pontón' o 'blackjack') que normalmente reduce el número de cartas jugadas en cada ronda."
+  -
+    value: "T01840"
+    text: "Practique con una aplicación imaginaria, o incluso una aplicación planificada para el futuro, en lugar de tratar de encontrar fallas en las aplicaciones existentes hasta que los participantes estén contentos con la utilidad del juego."
+  -
+    value: "T01850"
+    text: "Considere simplemente jugar con un dominio para hacer una sesión más corta, pero trate de cubrir todos los dominios para cada proyecto. "
+  -
+    value: "T01860"
+    text: "O incluso mejor, simplemente juegue una mano con algunas cartas preseleccionadas y puntúe solo en la capacidad de identificar los requisitos de seguridad. "
+  -
+    value: "T01870"
+    text: "Quizás tenga un juego de cada palo cada día durante una semana más o menos, si los participantes no pueden disponer del tiempo suficiente para una baraja completa."
+  -
+    value: "T01880"
+    text: "Algunos equipos han preferido jugar una mano completa de cartas y luego discutir lo que hay en las cartas después de cada ronda (en lugar de después de que cada persona juegue una carta)."
+  -
+    value: "T01890"
+    text: "Otra sugerencia es que, si un jugador no identifica que la carta es relevante, permita que otros jugadores sugieran ideas y, potencialmente, déjeles ganar el punto por la carta. "
+  -
+    value: "T01900"
+    text: "Considere la posibilidad de conceder puntos extra por contribuciones especialmente buenas."
+  -
+    value: "T01910"
+    text: "Incluso puedes jugar solo. "
+  -
+    value: "T01920"
+    text: "Solo usa las tarjetas para que actúen como lluvia de ideas. "
+  -
+    value: "T01930"
+    text: "Sin embargo, involucrar a más personas siempre será beneficioso."
+  -
+    value: "T01940"
+    text: "En la guía EoP de Microsoft, recomiendan hacer trampa como una buena estrategia de juego."
+  -
+    value: "T02000"
+    text: "Marco de desarrollo específico - barajas de cartas modificadas"
+  -
+    value: "T02010"
+    text: "A finales de 2012, se publicó la Matriz de seguridad del marco de OWASP, cuyos documentos incorporaron controles de seguridad en algunos lenguajes y marcos de uso común para el desarrollo de aplicaciones web y móviles."
+  -
+    value: "T02020"
+    text: "Con ciertas salvedades, es útil considerar cómo el uso de estos controles puede simplificar la identificación de requisitos adicionales, siempre que, por supuesto, los controles estén incluidos, habilitados y configurados correctamente."
+  -
+    value: "T02030"
+    text: "Considere quitar las siguientes cartas de los mazos si está seguro de que se tratan por la forma en que está usando el lenguaje / marco ork. Los elementos entre paréntesis son 'maybes'."
+  -
+    value: "T02040"
+    text: "Bibliotecas y estándares de codificación internos."
+  -
+    value: "T02100"
+    text: "Estándares de codificación internos"
+  -
+    value: "T02110"
+    text: "Agregue su propia lista de tarjetas excluidas según los estándares de codificación de su organización (siempre que estén confirmados por los pasos de verificación apropiados en el ciclo de vida del desarrollo)."
+  -
+    value: "T02120"
+    text: "Tus estándares de Codificación y Librerías"
+  -
+    value: "T02130"
+    text: "Validación de Data"
+  -
+    value: "T02140"
+    text: "[your list]"
+  -
+    value: "T02150"
+    text: "Autenticación"
+  -
+    value: "T02160"
+    text: "[your list]"
+  -
+    value: "T02170"
+    text: "Gestión de Sesiones"
+  -
+    value: "T02180"
+    text: "[your list]"
+  -
+    value: "T02190"
+    text: "Autorización"
+  -
+    value: "T02200"
+    text: "[your list]"
+  -
+    value: "T02210"
+    text: "Criptografía"
+  -
+    value: "T02220"
+    text: "[your list]"
+  -
+    value: "T02230"
+    text: "Cornucopia"
+  -
+    value: "T02240"
+    text: "[your list]"
+  -
+    value: "T02300"
+    text: "Mazos de requisitos de cumplimiento"
+  -
+    value: "T02310"
+    text: "Cree una baraja más pequeña al incluir solo tarjetas para un requisito de cumplimiento particular."
+  -
+    value: "T02320"
+    text: " Requerimientos de Cumplimiento"
+  -
+    value: "T02330"
+    text: "Validación de Data"
+  -
+    value: "T02340"
+    text: "[your list]"
+  -
+    value: "T02350"
+    text: "Autenticación"
+  -
+    value: "T02360"
+    text: "[your list]"
+  -
+    value: "T02370"
+    text: "Gestión de Sesiones"
+  -
+    value: "T02380"
+    text: "[your list]"
+  -
+    value: "T02390"
+    text: "Autorización"
+  -
+    value: "T02400"
+    text: "[your list]"
+  -
+    value: "T02410"
+    text: "Criptografía"
+  -
+    value: "T02420"
+    text: "[your list]"
+  -
+    value: "T02430"
+    text: "Cornucopia"
+  -
+    value: "T02440"
+    text: "[your list]"
+  -
+    value: "T02500"
+    text: "Preguntas frecuentes"
+  -
+    value: "T02510"
+    text: "1. ¿Puedo copiar o editar el juego?"
+  -
+    value: "T02520"
+    text: "Sí, por supuesto."
+  -
+    value: "T02530"
+    text: " Son libres de hacer lo que desee con todos los materiales de OWASP, siempre que cumpla con la licencia Creative Commons Attribution ShareAlike 3.0. Quizás si crea una nueva versión, ¿podría donarla al Proyecto Cornucopia de OWASP?"
+  -
+    value: "T02540"
+    text: "¿podría donarla al Proyecto Cornucopia de OWASP?"
+  -
+    value: "T02550"
+    text: "2. ¿Cómo puedo involucrarme?"
+  -
+    value: "T02560"
+    text: "Envíe ideas u ofertas de ayuda a la lista de distribución del proyecto."
+  -
+    value: "T02570"
+    text: "3. ¿Cómo se eligieron los nombres de los atacantes?"
+  -
+    value: "T02580"
+    text: "EoP comienza cada descripción con palabras como “Un atacante puede ...”. Deben expresarse como un ataque, pero no me gustaba la terminología anónima, quería algo más atractivo y, por lo tanto, usé nombres personales. "
+  -
+    value: "T02590"
+    text: "Estos pueden considerarse personas externas o internas o alias para sistemas informáticos. "
+  -
+    value: "T02600"
+    text: "Pero en lugar de solo nombres aleatorios, pensé en cómo podrían reflejar el aspecto de la comunidad OWASP. "
+  -
+    value: "T02610"
+    text: "Por lo tanto, además de 'Alice y Bob', utilizo los (primeros) nombres de los empleados y miembros de la junta actuales y recientes de OWASP (asignados sin orden), y luego selecciono al azar los"
+  -
+    value: "T02620"
+    text: "50 nombres restantes de la lista actual de pagos miembros individuales de OWASP."
+  -
+    value: "T02630"
+    text: "No se usó ningún nombre más de una vez, y cuando las personas habían proporcionado dos nombres personales, eliminé una parte para tratar de asegurar que nadie pueda ser identificado fácilmente. "
+  -
+    value: "T02640"
+    text: "Los nombres no se asignaron deliberadamente a ningún ataque, defensa o requisito en particular. La mezcla cultural y de género simplemente refleja estas fuentes de nombres, y no pretende ser representativa mundial."
+  -
+    value: "T02650"
+    text: "4. ¿Por qué no hay imágenes en las caras de las tarjetas?"
+  -
+    value: "T02660"
+    text: "Hay mucho texto en las tarjetas y las referencias cruzadas también ocupan espacio. "
+  -
+    value: "T02670"
+    text: "Pero sería genial tener elementos de diseño adicionales incluidos."
+  -
+    value: "T02680"
+    text: "¿Algún voluntario?"
+  -
+    value: "T02690"
+    text: "5. ¿Se clasifican los ataques según el número de la tarjeta?"
+  -
+    value: "T02700"
+    text: "Solo aproximadamente. "
+  -
+    value: "T02710"
+    text: "El riesgo dependerá de la aplicación y la organización, debido a los diferentes requisitos de seguridad y cumplimiento, por lo que su propia clasificación de criticidad puede colocar las tarjetas en un orden diferente al de los números de las tarjetas."
+  -
+    value: "T02720"
+    text: "6. ¿Cuánto tiempo se tarda en jugar una ronda de cartas con la baraja completa?"
+  -
+    value: "T02730"
+    text: "Esto depende de la cantidad de discusión y de lo familiarizados que estén los jugadores con los conceptos de seguridad de las aplicaciones. "
+  -
+    value: "T02740"
+    text: "Pero quizás tome de 1,5 a 2,0 horas para 4-6 personas."
+  -
+    value: "T02800"
+    text: "Reconocimientos del proyecto"
+  -
+    value: "T02810"
+    text: "• Microsoft SDL Team para el juego de modelado de amenazas Elevation of Privilege, publicado bajo una licencia Creative Commons Attribution, como inspiración para Cornucopia y del que se copiaron muchas ideas, especialmente la teoría de juego."
+  -
+    value: "T02820"
+    text: "• Keith Turpin y colaboradores de las “Prácticas de codificación segura de OWASP - Guía de referencia rápida”, originalmente donada a OWASP por Boeing, que se utiliza como fuente principal de información sobre requisitos de seguridad para formular el contenido de las tarjetas."
+  -
+    value: "T02830"
+    text: "• Colaboradores, patrocinadores y voluntarios de los proyectos OWASP ASVS, AppSensor y Web Framework Security Matrix, la enumeración y clasificación de patrones de ataque común de Mitre (CAPEC) y las 'historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágiles' de SAFECode, que se utilizan en las referencias cruzadas proporcionadas."
