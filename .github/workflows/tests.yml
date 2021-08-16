@@ -1,0 +1,111 @@
+name: Run Tests and Update output files
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches:
+      - master
+      - dev
+    paths:
+      - 'sources/**'
+      - 'scripts/convert**'
+      - 'test/**'
+  pull_request:
+    branches:
+      - master
+      - dev
+    paths:
+      - 'sources/**'
+      - 'scripts/convert**'
+      - 'test/**'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  runtests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      # Make sure we have some code to test
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # Set the pip environment up
+      - name: Install dependecies
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: install -d # Install all dependencies, including development ones
+
+      # Run the tests
+      - name: Run unit tests
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run python -m unittest discover -s 'test/scripts/' -p '*_utest.py'
+      - name: Run integration
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run python -m unittest discover -s 'test/scripts/' -p '*_itest.py'
+
+      - name: Check test coverage - run tests
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run coverage run -m unittest discover -s 'test/scripts/' -p '*_*test.py'
+      - name: Check test coverage - generate xml
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run coverage xml
+      - name: Check test coverage - Report
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run coverage report scripts/convert*
+#          command: run coverage report --fail-under 50 scripts/convert*
+#          command: run coverage report --fail-under 91 scripts/convert*
+
+      # Check formatting of files
+      - name: Check formatting of files with Black
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run black --line-length=120 --check .
+      - name: Check formatting of files with flake
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+      - name: Check formatting of files for correct spelling and namespace names
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run mypy --namespace-packages --strict ./**/*.py ./**/**/*.py
+
+  # If Tests pass, generate new output files and commit to repo
+  updateoutputfiles:
+    name: Update Output Files
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    needs: runtests
+    steps:
+      # Make sure we have some code to diff.
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # Set the environment up
+      - name: Install dependecies
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: install -d # Install all dependencies, including development ones
+
+      - name: Generate new output files
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
+          command: run python scripts/convert.py -l all -t all
+
+      # Set the git username and email up.
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions@github.com"
+      - name: Commit changes back into git repo
+        run: |
+          git add scripts/**
+          git add output/**
+          git commit -m "Github Actions updated output files"
+          git pull
+          git push
