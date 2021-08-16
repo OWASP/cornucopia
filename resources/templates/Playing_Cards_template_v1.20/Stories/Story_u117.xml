@@ -1,21 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="16.2">
-	<Story Self="u117" UserText="true" IsEndnoteStory="false" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
-		<StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
-		<InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-		<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Answers Paragraph">
-			<CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-				<Content>OWASP SCP 92, 205, 212 </Content>
-				<Br />
-				<Content>OWASP ASVS 12.3, 13.2</Content>
-				<Br />
-				<Content>OWASP AppSensor SE1, IE4</Content>
-				<Br />
-				<Content>CAPEC 31, 39, 68, 75, 133, 145, 162, 203,438-9,442</Content>
-				<Br />
-				<Content>SAFECODE 2, 14</Content>
-				<Br />
-			</CharacterStyleRange>
-		</ParagraphStyleRange>
-	</Story>
-</idPkg:Story>
