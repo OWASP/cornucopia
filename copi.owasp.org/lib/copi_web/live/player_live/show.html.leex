@@ -22,7 +22,43 @@
       <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
 
         <div class="card-player">
-          <span class="name"><%= player.name %></span>
+          <p class="name">
+            <%= if player.id == @player.id do %>
+              Your Card<br />
+              <%= if player_card != nil do %>
+              <span class="vote voted mine">
+                <img src="/images/vote.png" title="You can't vote for your own card" alt="A thumbs-up image for voting"/>
+                <br />
+                <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
+              </span>
+                <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+                <br /><span class="scored">Scored!</span>
+                <% end %>
+              <% else %>
+              <span class="vote none">
+                &nbsp;
+              </span>
+              <% end %>
+            <% else %>
+              <%= player.name %><br />
+              <%= if player_card != nil do %>
+              <span class="vote <%= if get_vote(player_card, @player) do %>voted<% end %>">
+                <img phx-click="toggle_vote" phx-value-dealt_card_id="<%= player_card.id %>" src="/images/vote.png" title="Vote for this card if it's a valid attack" alt="A thumbs-up image for voting"/>
+                <br />
+                <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
+              </span>
+                <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+                <br /><span class="scored">Scored!</span>
+                <% end %>
+              <% else %>
+              <span class="vote none">
+                &nbsp;
+              </span>
+              <% end %>
+
+            <% end %>
+          </p>
+
           <div class="drop-zone <%= if player.id == @player.id do %>mine<% end %> <%= if player_card == nil do %>empty<% end %>">
 
             <%= if player_card == nil do %>
@@ -32,7 +68,7 @@
               <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
               <% end %>
             <% else %>
-            <%= render(CopiWeb.CardView, "show.html", card: player_card) %>
+            <%= render(CopiWeb.CardView, "show.html", card: player_card.card) %>
             <% end %>
           </div>
         </div>

@@ -3,6 +3,7 @@ defmodule CopiWeb.PlayerLive.Show do
 
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.DealtCard
 
   @impl true
   def mount(_params, _session, socket) do
@@ -52,6 +53,35 @@ defmodule CopiWeb.PlayerLive.Show do
     {:noreply, assign(socket, :game, updated_game)}
   end
 
+  @impl true
+  def handle_event("toggle_vote", %{"dealt_card_id" => dealt_card_id}, socket) do
+    game = socket.assigns.game
+    player = socket.assigns.player
+
+    {:ok, dealt_card} = DealtCard.find(dealt_card_id)
+
+    vote = get_vote(dealt_card, player)
+
+    if vote do
+      IO.puts("player has voted")
+      Copi.Repo.delete!(vote)
+    else
+      IO.puts("player hasn't voted")
+      case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
+        {:ok, vote} ->
+          IO.puts("voted successfully")
+        {:error, changeset} ->
+          IO.puts("voting failed")
+      end
+    end
+
+    {:ok, updated_game} = Game.find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
+
   def format_capec(refs) do
     refs
     |> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
@@ -75,9 +105,9 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   def card_played_in_round(cards, round) do
-    dealt_card = Enum.find(cards, fn card -> card.played_in_round == round end)
+    Enum.find(cards, fn card -> card.played_in_round == round end)
 
-    if dealt_card, do: dealt_card.card, else: nil
+    #if dealt_card, do: dealt_card.card, else: nil
   end
 
   def player_first(players, player) do
@@ -100,5 +130,9 @@ defmodule CopiWeb.PlayerLive.Show do
     players_with_no_cards = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil end)
 
     Enum.count(players_with_no_cards) > 0
+  end
+
+  def get_vote(dealt_card, player) do
+    Enum.find(dealt_card.votes, fn vote -> vote.player_id == player.id end)
   end
 end

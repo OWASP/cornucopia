@@ -285,12 +285,49 @@ $wildcard-color: #fccd8f;
 
 .card-player {
   margin: 10px 15px;
-  float: left;
   display: flex;
 
   .name {
     margin-right: 5px;
-    text-align: right;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 16px;
+  }
+
+  .vote {
+    font-size: 24px;
+    opacity: 20%;
+
+    &.none {
+      cursor: default;
+    }
+
+    img {
+      cursor: pointer;
+      padding-top: 20px;
+    }
+
+    .badge {
+      font-size: 14px;
+      line-height: 14px;
+      margin-bottom: 20px;
+     }
+  }
+
+  .voted {
+    opacity: 100%;
+  }
+
+  .scored {
+    font-size: 14px;
+    position: relative;
+    top: 20px;
+  }
+
+  .mine {
+    img {
+      cursor: default;
+    }
   }
 
   .drop-zone {
