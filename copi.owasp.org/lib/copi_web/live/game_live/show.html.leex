@@ -18,13 +18,29 @@
       <% player_card = card_played_in_round(player.dealt_cards, @requested_round) %>
 
         <div class="card-player">
-          <span class="name"><%= player.name %></span>
+          <span class="name">
+            <%= player.name %><br />
+            <%= if player_card != nil do %>
+            <span class="vote voted mine">
+              <img src="/images/vote.png" title="Only players can vote" alt="A thumbs-up image for voting"/>
+              <br />
+              <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
+            </span>
+              <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+              <br /><span class="scored">Scored!</span>
+              <% end %>
+            <% else %>
+            <span class="vote none">
+              &nbsp;
+            </span>
+            <% end %>
+          </span>
           <div class="drop-zone <%= if player_card == nil do %>empty<% end %>">
 
             <%= if player_card == nil do %>
               <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
             <% else %>
-            <%= render(CopiWeb.CardView, "show.html", card: player_card) %>
+            <%= render(CopiWeb.CardView, "show.html", card: player_card.card) %>
             <% end %>
           </div>
         </div>
@@ -72,6 +88,7 @@ No more players will be allowed to join once the game is started.</em></p>
       <th>Joined At</th>
       <th>Played Cards</th>
       <th>Cards In Hand</th>
+      <th>Score</th>
     </tr>
   </thead>
   <tbody id="players">
@@ -81,6 +98,7 @@ No more players will be allowed to join once the game is started.</em></p>
         <td><%= player.inserted_at %></td>
         <td><%= player.dealt_cards |> played_cards |> Enum.count %></td>
         <td><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
+        <td><%= player.dealt_cards |> scoring_cards(Enum.count(@game.players)) |> Enum.count %></td>
       </tr>
     <% end %>
   </tbody>

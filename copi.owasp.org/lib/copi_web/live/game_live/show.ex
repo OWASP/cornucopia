@@ -83,9 +83,11 @@ defmodule CopiWeb.GameLive.Show do
     Enum.filter(cards, fn card -> card.played_in_round != nil end)
   end
 
-  def card_played_in_round(cards, round) do
-    dealt_card = Enum.find(cards, fn card -> card.played_in_round == round end)
+  def scoring_cards(cards, number_of_players) do
+    Enum.filter(cards, fn card -> card.played_in_round != nil && Enum.count(card.votes) > (number_of_players - 1) / 2 end)
+  end
 
-    if dealt_card, do: dealt_card.card, else: nil
+  def card_played_in_round(cards, round) do
+    Enum.find(cards, fn card -> card.played_in_round == round end)
   end
 end

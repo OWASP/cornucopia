@@ -77,6 +77,7 @@
   </div>
 
   <p class="next-round">
+    <%= if round_closed?(@game) do %>Make sure you've finished voting on cards before moving on!&nbsp;&nbsp;<% end %>
     <button <%= if round_open?(@game) do %>disabled<% end %> phx-click="next_round" phx-value-game_id="<%= @game.id %>">
       <%= if last_round?(@game) do %>
       Finish game
