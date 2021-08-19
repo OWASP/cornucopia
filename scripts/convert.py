@@ -374,15 +374,16 @@ def get_replacement_data(
         lang = language
     for file in yaml_files:
         if (
-            os.path.basename(file).find("-" + lang + ".") >= 0
+            (os.path.basename(file).find("-" + lang + ".") >= 0
             or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0
-            or os.path.basename(file).find("mappings") >= 0
+            or os.path.basename(file).find("mappings") >= 0) and
+            os.path.splitext(file)[1] in (".yaml", ".yml")
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
                     data = yaml.safe_load(f)
                 except yaml.YAMLError as e:
-                    logging.info(f"Error loading yaml file: {f}. Error = {e}")
+                    logging.info(f"Error loading yaml file: {file}. Error = {e}")
                     continue
 
             if data_type in ("translation", "translations") and (
@@ -390,7 +391,7 @@ def get_replacement_data(
                 or (data["meta"]["language"].lower() == "en" and language == "template")
             ):
                 logging.debug(" --- found source language file: " + os.path.split(file)[1])
-                return data
+                break
             elif (
                 data_type in ("mapping", "mappings")
                 and "meta" in data.keys()
@@ -398,6 +399,11 @@ def get_replacement_data(
                 and data["meta"]["component"] == "mappings"
             ):
                 logging.debug(" --- found mappings file: " + os.path.split(file)[1])
+                break
+
+            else:
+                data = {}
+                continue
             logging.debug(" --- found source file: " + os.path.split(file)[1])
             meta_keys = data["meta"].keys()
             logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
