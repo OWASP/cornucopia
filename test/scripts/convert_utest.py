@@ -340,8 +340,6 @@ class TestGetMetaData(unittest.TestCase):
         self.assertDictEqual(want_data, got_data)
 
 
-
-
 class TestGetReplacementData(unittest.TestCase):
     test_data: Dict[str, Any] = {
         "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
@@ -437,7 +435,7 @@ class TestGetReplacementData(unittest.TestCase):
             "safecode": [4, 23],
         }
 
-        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language,)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -741,29 +739,60 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
 
-# class TestSaveIdmlFile
-class TestWritePdfFile:
+
+class TestWritePdfFile(unittest.TestCase):
     def test_write_pdf_file_true(self) -> None:
-
-
-
-    def test_write_pdf_file_false(self) -> None:
-        want_data = ""
-
-
-
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        want_filename = 'hello'
+        c.set_can_convert_to_pdf()
+        got_filename = c.convert_vars.can_convert_to_pdf
+        self.assertEqual(want_filename, got_filename)
 
 
 class TestGetMappingDict(unittest.TestCase):
-    def test_get_mapping_dict_true(self, yaml_files=None) -> None:
-        input_filename = yaml_files
-        want_mapping_data = c.get_mapping_dict(yaml_files)
-        got_filename = c.get_mapping_dict(input_filename, want_mapping_data)
-        self.assertEqual(got_filename)
+    def test_get_mapping_dict_true(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        input_yaml_files = [
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+        ]
+        want_mapping_dict = {
+            '${VE_suit}': 'Data validation & encoding',
+            '${VE_VE2_owasp_scp}': '69, 107, 108, 109, 136, 137, 153, 156, 158, 162',
+            '${VE_VE2_owasp_asvs}': '1.1, 4.5, 8.1, 11.5, 19.1, 19.5',
+            '${VE_VE2_owasp_appsensor}': 'HT1, HT2, HT3',
+            '${VE_VE2_capec}': '54, 541',
+            '${VE_VE2_safecode}': '4, 23',
+            '${VE_VE3_owasp_scp}': ' - ',
+            '${VE_VE3_owasp_asvs}': '5.1, 5.16, 5.17, 5.18, 5.19, 5.2, 11.1, 11.2',
+            '${VE_VE3_owasp_appsensor}': 'RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3',
+            '${VE_VE3_capec}': '28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272',
+            '${VE_VE3_safecode}': '3, 16, 24, 35'
+        }
 
-    def test_get_mapping_dict_false(self, yaml_files=None) -> None:
-        input_filename = yaml_files
-        want_mapping_data = ""
+        got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+        self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
-        got_filename = c.get_mapping_dict(input_filename, want_mapping_data)
-        self.assertEqual(got_filename)
+    def test_get_mapping_dict_empty(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        input_yaml_files = [
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-es.yaml",
+        ]
+        want_mapping_dict = {}
+        logging.getLogger().setLevel(logging.DEBUG)
+        got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+        logging.getLogger().setLevel(logging.ERROR)
+        self.assertDictEqual(want_mapping_dict, got_mapping_dict)
+
+    def test_get_mapping_dict_wrong_file_type(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        input_yaml_files = [
+            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.idml",
+            c.convert_vars.BASE_PATH + "owasp_cornucopia_edition_lang_ver_template.docx",
+        ]
+        want_mapping_dict = {}
+        logging.getLogger().setLevel(logging.DEBUG)
+        got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+        logging.getLogger().setLevel(logging.ERROR)
+        self.assertDictEqual(want_mapping_dict, got_mapping_dict)
