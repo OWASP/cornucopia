@@ -40,10 +40,15 @@ defmodule CopiWeb.PlayerLive.Show do
   def handle_event("next_round", _, socket) do
     game = socket.assigns.game
 
-    Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1})
+    if round_open?(game) do
+      # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
 
-    if last_round?(game) do
-      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+    else
+      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1})
+
+      if last_round?(game) do
+        Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+      end
     end
 
     {:ok, updated_game} = Game.find(game.id)
