@@ -435,7 +435,7 @@ class TestGetReplacementData(unittest.TestCase):
             "safecode": [4, 23],
         }
 
-        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language,)["suits"]
+        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -751,7 +751,8 @@ class TestWritePdfFile(unittest.TestCase):
 
 class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_true(self) -> None:
-        c.convert_vars.args = argparse.Namespace(debug=False)
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        c.convert_vars.making_template = False
         input_yaml_files = [
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
@@ -780,7 +781,7 @@ class TestGetMappingDict(unittest.TestCase):
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-es.yaml",
         ]
         want_mapping_dict = {}
-        logging.getLogger().setLevel(logging.DEBUG)
+        logging.getLogger().setLevel(logging.CRITICAL)
         got_mapping_dict = c.get_mapping_dict(input_yaml_files)
         logging.getLogger().setLevel(logging.ERROR)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
@@ -792,7 +793,7 @@ class TestGetMappingDict(unittest.TestCase):
             c.convert_vars.BASE_PATH + "owasp_cornucopia_edition_lang_ver_template.docx",
         ]
         want_mapping_dict = {}
-        logging.getLogger().setLevel(logging.DEBUG)
+        logging.getLogger().setLevel(logging.CRITICAL)
         got_mapping_dict = c.get_mapping_dict(input_yaml_files)
         logging.getLogger().setLevel(logging.ERROR)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)

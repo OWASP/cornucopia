@@ -33,9 +33,9 @@ def main() -> None:
 
     set_can_convert_to_pdf()
     if (
-        convert_vars.args.outputfiletype == "pdf"
-        and not convert_vars.can_convert_to_pdf
-        and not convert_vars.args.debug
+            convert_vars.args.outputfiletype == "pdf"
+            and not convert_vars.can_convert_to_pdf
+            and not convert_vars.args.debug
     ):
         logging.error(
             "Cannot convert to pdf on this system. "
@@ -363,7 +363,7 @@ def get_meta_data(language_data: Dict[str, Dict[str, str]]) -> Dict[str, str]:
 
 
 def get_replacement_data(
-    yaml_files: List[str], data_type: str = "translation", language: str = ""
+        yaml_files: List[str], data_type: str = "translation", language: str = ""
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
@@ -374,10 +374,12 @@ def get_replacement_data(
         lang = language
     for file in yaml_files:
         if (
-            (os.path.basename(file).find("-" + lang + ".") >= 0
-            or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0
-            or os.path.basename(file).find("mappings") >= 0) and
-            os.path.splitext(file)[1] in (".yaml", ".yml")
+                os.path.splitext(file)[1] in (".yaml", ".yml") and
+                (
+                        os.path.basename(file).find("-" + lang + ".") >= 0 or
+                        os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0 or
+                        os.path.basename(file).find("mappings") >= 0
+                )
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
@@ -387,16 +389,16 @@ def get_replacement_data(
                     continue
 
             if data_type in ("translation", "translations") and (
-                (data["meta"]["language"].lower() == language)
-                or (data["meta"]["language"].lower() == "en" and language == "template")
+                    (data["meta"]["language"].lower() == language)
+                    or (data["meta"]["language"].lower() == "en" and language == "template")
             ):
                 logging.debug(" --- found source language file: " + os.path.split(file)[1])
                 break
             elif (
-                data_type in ("mapping", "mappings")
-                and "meta" in data.keys()
-                and "component" in data["meta"].keys()
-                and data["meta"]["component"] == "mappings"
+                    data_type in ("mapping", "mappings")
+                    and "meta" in data.keys()
+                    and "component" in data["meta"].keys()
+                    and data["meta"]["component"] == "mappings"
             ):
                 logging.debug(" --- found mappings file: " + os.path.split(file)[1])
                 break
@@ -509,7 +511,7 @@ def zip_dir(path: str, zip_filename: str) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path) :])
+                zip_file.write(f, f[len(path):])
 
 
 def ensure_folder_exists(folder_path: str) -> None:
@@ -642,8 +644,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.LANGUAGE_CHOICES,
         default="en",
         help="Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
-        "\nTemplate will attempt to create a template from the english input file and "
-        "\nreplacing strings with the template lookup codes",
+             "\nTemplate will attempt to create a template from the english input file and "
+             "\nreplacing strings with the template lookup codes",
     )
     parser.add_argument(
         "-d",
@@ -655,6 +657,5 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 
 
 if __name__ == "__main__":
-
     convert_vars: ConvertVars = ConvertVars()
     main()
