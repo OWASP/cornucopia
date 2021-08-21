@@ -93,6 +93,13 @@
   color: #fff;
 }
 
+th {
+  font-weight: normal;
+}
+th.numeric, td.numeric {
+  text-align: right;
+}
+
 .card {
   float: left;
   display: flex;

@@ -85,20 +85,26 @@ No more players will be allowed to join once the game is started.</em></p>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Joined At</th>
-      <th>Played Cards</th>
-      <th>Cards In Hand</th>
-      <th>Score</th>
+      <th class="numeric">Joined At</th>
+      <th class="numeric">Played Cards</th>
+      <th class="numeric">Cards In Hand</th>
+      <th class="numeric">Score</th>
+      <th class="numeric">Highest Card Bonus</th>
+      <th class="numeric">Total Score</th>
     </tr>
   </thead>
   <tbody id="players">
     <%= for player <- @game.players do %>
+      <% score = player.dealt_cards |> scoring_cards(Enum.count(@game.players)) |> Enum.count %>
+      <% highest_card_bonus = player |> highest_scoring_cards(@game) |> Enum.count %>
       <tr>
         <td><%= player.name %></td>
-        <td><%= player.inserted_at %></td>
-        <td><%= player.dealt_cards |> played_cards |> Enum.count %></td>
-        <td><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
-        <td><%= player.dealt_cards |> scoring_cards(Enum.count(@game.players)) |> Enum.count %></td>
+        <td class="numeric"><%= player.inserted_at %></td>
+        <td class="numeric"><%= player.dealt_cards |> played_cards |> Enum.count %></td>
+        <td class="numeric"><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
+        <td class="numeric"><%= score %></td>
+        <td class="numeric"><%= highest_card_bonus %></td>
+        <td class="numeric"><strong><%= score + highest_card_bonus %></strong>
       </tr>
     <% end %>
   </tbody>
