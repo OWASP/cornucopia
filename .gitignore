@@ -9,3 +9,4 @@ vm.command
 coverage.xml
 *~*docx
 .mypy_cache
+client_secrets
