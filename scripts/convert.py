@@ -276,11 +276,27 @@ def get_template_doc(file_type: str) -> str:
             )
 
         template_doc = check_fix_file_extension(template_doc, source_file_ext)
-    logging.debug(f" --- template_doc = {template_doc}")
 
-    if not os.path.isfile(template_doc):
-        logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
-        return ""
+    template_doc = template_doc.replace("\\ ", " ")
+    # template_doc = os.path.exists(template_doc)
+    if os.path.isfile(template_doc):
+        logging.debug(f" --- Returning template_doc = {template_doc}")
+        return template_doc
+    else:
+        logging.debug(f" --- Template_doc NOT found = {template_doc}")
+        template_doc = template_doc.replace("/scripts/", "/")
+    if os.path.isfile(template_doc):
+        logging.debug(f" --- Returning template_doc = {template_doc}")
+        return template_doc
+    else:
+        logging.debug(f" --- Template_doc NOT found = {template_doc}")
+        template_doc = template_doc.replace("../", "/")
+
+        logging.debug(f" --- trying Template_doc = {template_doc}")
+        if not os.path.isfile(template_doc):
+            logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again. (2)")
+            template_doc = ""
+    logging.debug(f" --- Returning template_doc = {template_doc}")
     return template_doc
 
 
