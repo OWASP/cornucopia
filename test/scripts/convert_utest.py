@@ -740,13 +740,15 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
 
-class TestWritePdfFile(unittest.TestCase):
-    def test_write_pdf_file_true(self) -> None:
+class TestConvertPdfToDocx(unittest.TestCase):
+    def test_convert_pdf_to_docx_true(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=True)
-        want_filename = 'hello'
-        c.set_can_convert_to_pdf()
-        got_filename = c.convert_vars.can_convert_to_pdf
-        self.assertEqual(want_filename, got_filename)
+        input_docx_filename = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+        input_pdf_filename = c.convert_vars.BASE_PATH + "/test/test_files/test.pdf"
+
+        c.convert_vars.can_convert_to_pdf = True
+        c.convert_docx_to_pdf(input_docx_filename, input_pdf_filename)
+        self.assertTrue(os.path.isfile(input_pdf_filename))
 
 
 class TestGetMappingDict(unittest.TestCase):

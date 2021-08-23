@@ -13,6 +13,8 @@ import docx  # type: ignore
 import xml.etree.ElementTree as ElTree
 from typing import List, Dict, Union, Tuple, Any
 
+import convert
+
 
 class ConvertVars:
     SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -142,7 +144,9 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
         if file_type == "docx":
             doc.save(output_file)
         else:
-            save_pdf_file(doc, output_file)
+            temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
+            save_docx_file(doc, temp_docx_file)
+            convert_docx_to_pdf(temp_docx_file, output_file)
 
     elif file_type == "idml":
         save_idml_file(template_doc, language_dict, output_file)
@@ -177,15 +181,18 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
         shutil.rmtree(temp_output_path, ignore_errors=True)
 
 
-def save_pdf_file(doc: docx.Document, output_file: str) -> None:
+def save_docx_file(doc: docx.Document, output_file: str) -> None:
+    ensure_folder_exists(os.path.dirname(output_file))
+    doc.save(output_file)
+
+
+def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
     # If file type is pdf, then save a temp docx file, convert the docx to pdf
-    temp_output_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
-    doc.save(temp_output_file)
-    logging.debug(f" --- temp_output_file = {temp_output_file}\n--- starting pdf conversion now.")
+    logging.debug(f" --- docx_file = {docx_filename}\n--- starting pdf conversion now.")
 
     if convert_vars.can_convert_to_pdf:
         # Use docx2pdf for windows and mac with MS Word installed
-        docx2pdf.convert(temp_output_file, output_file)
+        docx2pdf.convert(docx_filename, output_pdf_filename)
     else:
         logging.warning(
             "Error. A temporary docx file was created in the output folder but cannot be converted "
@@ -196,7 +203,7 @@ def save_pdf_file(doc: docx.Document, output_file: str) -> None:
 
     # If not debugging then delete the temp file
     if not convert_vars.args.debug:
-        os.remove(temp_output_file)
+        os.remove(docx_filename)
 
 
 def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
