@@ -3,10 +3,10 @@ import requests
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
-gauth = GoogleAuth()
+google_auth = GoogleAuth()
 
-gauth.LocalWebserverAuth()
-drive = GoogleDrive(gauth)
+google_auth.LocalWebserverAuth()
+drive = GoogleDrive(google_auth)
 
 def upload():
     headers = {"Authorization": "Bearer ya29.a0ARrdaM-fW6IdnWdu_mt-EXf_lxRU7vJn2Q3Weaf2CpvblUlilX-s9tTJgNo7AjsaOpzoDI-SbGMN96Pbb18Y0x7Td2-AkOUshCCGsh13MSmTU37q_lXLacOhzhkMxHtZXZBXFQvq38XnzMVUruWSfcF-heDj"}
@@ -25,40 +25,6 @@ def upload():
     print(r.text)
 
 upload()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # from __future__ import print_function
