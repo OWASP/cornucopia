@@ -13,8 +13,6 @@ import docx  # type: ignore
 import xml.etree.ElementTree as ElTree
 from typing import List, Dict, Union, Tuple, Any
 
-import convert
-
 
 class ConvertVars:
     SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -125,7 +123,7 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     if not mapping_dict:
         return
 
-    language_dict.update(mapping_dict)
+    # language_dict.update(mapping_dict)
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
 
@@ -144,6 +142,7 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
         if file_type == "docx":
             doc.save(output_file)
         else:
+            # If file type is pdf, then save a temp docx file, convert the docx to pdf
             temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
             save_docx_file(doc, temp_docx_file)
             convert_docx_to_pdf(temp_docx_file, output_file)
@@ -177,8 +176,9 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
     zip_dir(temp_output_path, output_file)
 
     # If not debugging, delete temp folder and files
-    if not convert_vars.args.debug and os.path.exists(temp_output_path):
-        shutil.rmtree(temp_output_path, ignore_errors=True)
+    # ToDo: Uncomment below
+    # if not convert_vars.args.debug and os.path.exists(temp_output_path):
+    #     shutil.rmtree(temp_output_path, ignore_errors=True)
 
 
 def save_docx_file(doc: docx.Document, output_file: str) -> None:
@@ -187,12 +187,14 @@ def save_docx_file(doc: docx.Document, output_file: str) -> None:
 
 
 def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
-    # If file type is pdf, then save a temp docx file, convert the docx to pdf
     logging.debug(f" --- docx_file = {docx_filename}\n--- starting pdf conversion now.")
-
     if convert_vars.can_convert_to_pdf:
         # Use docx2pdf for windows and mac with MS Word installed
-        docx2pdf.convert(docx_filename, output_pdf_filename)
+        try:
+            docx2pdf.convert(docx_filename, output_pdf_filename)
+        except Exception as e:
+            logging.error(f"Could not convert docx to pdf. Error: {e}")
+            return None
     else:
         logging.warning(
             "Error. A temporary docx file was created in the output folder but cannot be converted "
@@ -213,10 +215,12 @@ def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
     return get_replacement_dict(mapping_data, True)
 
 
-def set_can_convert_to_pdf() -> None:
+def set_can_convert_to_pdf() -> bool:
     operating_system: str = sys.platform.lower()
-    convert_vars.can_convert_to_pdf = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
+    can_convert = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
+    convert_vars.can_convert_to_pdf = can_convert
     logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {convert_vars.can_convert_to_pdf}")
+    return can_convert
 
 
 def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
@@ -224,31 +228,71 @@ def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tupl
     return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
 
 
-def replace_text_in_xml_file(file: str, replacement_dict: Dict[str, str]) -> None:
-    if os.path.getsize(file) == 0:
+def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) -> None:
+    # debug: bool = (filename.find("u30e0.") != -1)
+    # if debug:
+    #     print(f"--- filename = {filename}")
+    if os.path.getsize(filename) == 0:
         return
     if convert_vars.making_template:
         replacement_values = sort_keys_longest_to_shortest(replacement_dict)
     else:
         replacement_values = list(replacement_dict.items())
 
-    tree = ElTree.parse(file)
+    # if debug:
+    #     for (k, v) in replacement_values:
+    #         if k.find("You have invented") != -1:
+    #             print(f"--- k = {k}\n--- v = {v}")
+
+    tree = ElTree.parse(filename)
     all_content_elements = tree.findall(".//Content")
 
     found_element = False
-    for el in [el for el in all_content_elements if el.text is not None]:
-        assert el.text is not None
-        for k, v in replacement_values:
-            if el.text.find(k):
+    for el in [el for el in all_content_elements]:
+        # if debug:
+        #     print(f"--- el.text (you have created a new attack... = {el.text}")
+        # assert el.text is not None
+        for (k, v) in replacement_values:
+            k2 = k.replace("'", "’").strip()
+            v2 = v.replace("'", "’").strip()
+            # if debug and \
+            #         (k.upper().find("DATA VALIDATION") == 0 or
+            #          v.upper().find("DATA VALIDATION") != -1):
+            #     print(f"--- k, v = {k}, v = {v}")
+            #     print(f"--- el.text = {el.text}")
+            #     print(f"--- el.text.find(k) = {el.text.find(k)}")
+            #     print(f"--- k.find(el.text) = {k.find(el.text)} \n")
+            if el.text == k:
                 found_element = True
-                new_text = el.text.replace(k, v)
-                el.text = new_text
+                el.text = v
+                # if debug:
+                #     print(f"--- found element = True. new_text = {v}")
+                break
+            elif el.text == k2:
+                found_element = True
+                el.text = v2
+                # if debug:
+                #     print(f"--- found element = True. new_text = {v2}")
+                break
+            elif el.text.lower() == k.lower():
+                found_element = True
+                el.text = v
+                # if debug:
+                #     print(f"--- found element = True. new_text = {v}")
+                break
+            elif el.text.lower() == k2.lower():
+                found_element = True
+                el.text = v2
+                # if debug:
+                #     print(f"--- found element = True. new_text = {v2}")
+                break
+
     if found_element:
-        with open(file, "bw") as f:
+        with open(filename, "bw") as f:
             f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
 
-def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 40) -> Dict[str, str]:
+def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 10) -> Dict[str, str]:
     data2: Dict[str, str] = {}
     for key, value in replacement_dict.items():
         if len(key) >= min_length:
@@ -301,7 +345,7 @@ def get_template_doc(file_type: str) -> str:
 
         logging.debug(f" --- trying Template_doc = {template_doc}")
         if not os.path.isfile(template_doc):
-            logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again. (2)")
+            logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
             template_doc = ""
     logging.debug(f" --- Returning template_doc = {template_doc}")
     return template_doc
@@ -427,11 +471,12 @@ def get_replacement_data(
                 break
 
             else:
+                logging.debug(" --- found source file: " + os.path.split(file)[1])
+                if "meta" in list(data.keys()):
+                    meta_keys = data["meta"].keys()
+                    logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
                 data = {}
                 continue
-            logging.debug(" --- found source file: " + os.path.split(file)[1])
-            meta_keys = data["meta"].keys()
-            logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
     if not data:
         logging.error("Could not get language data from yaml files.")
     logging.debug(f" --- Len = {len(data)}.")
