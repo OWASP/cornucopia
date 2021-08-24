@@ -1,79 +1,78 @@
-import json
-import requests
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
+from __future__ import print_function
+import httplib2
+import os
 
-google_auth = GoogleAuth()
+from apiclient import discovery
+from oauth2client import client
+from oauth2client import tools
+from oauth2client.file import Storage
 
-google_auth.LocalWebserverAuth()
-drive = GoogleDrive(google_auth)
+try:
+    import argparse
+    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+except ImportError:
+    flags = None
 
-def upload():
-    headers = {"Authorization": "Bearer ya29.a0ARrdaM-fW6IdnWdu_mt-EXf_lxRU7vJn2Q3Weaf2CpvblUlilX-s9tTJgNo7AjsaOpzoDI-SbGMN96Pbb18Y0x7Td2-AkOUshCCGsh13MSmTU37q_lXLacOhzhkMxHtZXZBXFQvq38XnzMVUruWSfcF-heDj"}
-    para = {
-        "name": "testfile.png",
-    }
-    files = {
-        'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
-        'file': open("./testimage.png", "rb")
-    }
-    r = requests.post(
-        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-        headers=headers,
-        files=files
-    )
-    print(r.text)
-
-upload()
+# If modifying these scopes, delete your previously saved credentials
+# at ~/.credentials/drive-python-quickstart.json
+SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
+CLIENT_SECRET_FILE = 'client_secrets.json'
+APPLICATION_NAME = 'Drive API Python Quickstart'
 
 
-# from __future__ import print_function
-# import os.path
-# from googleapiclient.discovery import build
-# from google_auth_oauthlib.flow import InstalledAppFlow
-# from google.auth.transport.requests import Request
-# from google.oauth2.credentials import Credentials
-#
-# # If modifying these scopes, delete the file token.json.
-# SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
-#
-# def main():
-#     """Shows basic usage of the Drive v3 API.
-#     Prints the names and ids of the first 10 files the user has access to.
-#     """
-#     creds = None
-#     # The file token.json stores the user's access and refresh tokens, and is
-#     # created automatically when the authorization flow completes for the first
-#     # time.
-#     if os.path.exists('token.json'):
-#         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-#     # If there are no (valid) credentials available, let the user log in.
-#     if not creds or not creds.valid:
-#         if creds and creds.expired and creds.refresh_token:
-#             creds.refresh(Request())
-#         else:
-#             flow = InstalledAppFlow.from_client_secrets_file(
-#                 'credentials.json', SCOPES)
-#             creds = flow.run_local_server(port=0)
-#         # Save the credentials for the next run
-#         with open('token.json', 'w') as token:
-#             token.write(creds.to_json())
-#
-#     service = build('drive', 'v3', credentials=creds)
-#
-#     # Call the Drive v3 API
-#     results = service.files().list(
-#         pageSize=10, fields="nextPageToken, files(id, name)").execute()
-#     items = results.get('files', [])
-#
-#     if not items:
-#         print('No files found.')
-#     else:
-#         print('Files:')
-#         for item in items:
-#             print(u'{0} ({1})'.format(item['name'], item['id']))
-#
-# if __name__ == '__main__':
-#     main()
-# # [END drive_quickstart]
-#
+def get_credentials():
+    """Gets valid user credentials from storage.
+    If nothing has been stored, or if the stored credentials are invalid,
+    the OAuth2 flow is completed to obtain the new credentials.
+    Returns:
+        Credentials, the obtained credential.
+    """
+    home_dir = os.path.expanduser('~')
+    credential_dir = os.path.join(home_dir, '.credentials')
+    if not os.path.exists(credential_dir):
+        os.makedirs(credential_dir)
+    credential_path = os.path.join(credential_dir,
+                                   'drive-python-quickstart.json')
+
+    store = Storage(credential_path)
+    credentials = store.get()
+    if not credentials or credentials.invalid:
+        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+        flow.user_agent = APPLICATION_NAME
+        if flags:
+            credentials = tools.run_flow(flow, store, flags)
+        else: # Needed only for compatibility with Python 2.6
+            credentials = tools.run(flow, store)
+        print('Storing credentials to ' + credential_path)
+    return credentials
+
+def main():
+    """Shows basic usage of the Google Drive API.
+    Creates a Google Drive API service object and outputs the names and IDs
+    for up to 10 files.
+    """
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build('drive', 'v3', http=http)
+
+    results = service.files().list(
+        pageSize=10,fields="nextPageToken, files(id, name)").execute()
+    items = results.get('files', [])
+    if not items:
+        print('No files found.')
+    else:
+        print('Files:')
+        for item in items:
+            print('{0} ({1})'.format(item['name'], item['id']))
+
+if __name__ == '__main__':
+    main()
+
+def uploadFile(filename, filepath):
+    media = MediaFileUpload('files/photo.jpg', mimetype='image/jpeg')
+    file = drive_service.files().create(body=file_metadata,
+                                        media_body=media,
+                                        fields='id').execute()
+    print('File ID: %s' % file.get('id'))
+uploadFile('testimage.jpg')
+
