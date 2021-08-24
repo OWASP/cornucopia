@@ -55,10 +55,11 @@ class TestGetValidFileTypes(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(outputfiletype="pdf")
         c.convert_vars.can_convert_to_pdf = False
         want_list: List[str] = []
+        want_error_log_messages = ["ERROR:root:PDF output selected but currently unable to output PDF on this OS."]
 
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_list = c.get_valid_file_types()
-        logging.getLogger().setLevel(logging.ERROR)
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_list = c.get_valid_file_types()
+        self.assertEqual(ll.output, want_error_log_messages)
         self.assertListEqual(want_list, got_list)
 
 
@@ -129,6 +130,7 @@ class TestSetLogging(unittest.TestCase):
         c.set_logging()
         got_logging_level = logging.getLogger().level
         self.assertEqual(want_logging_level, got_logging_level)
+        self.assertLogs()
 
     def test_set_logging_level_debug(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=True)
@@ -211,14 +213,14 @@ class TestGetTemplateDoc(unittest.TestCase):
         got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
-    def test_get_template_doc_make_template_idml(self) -> None:
-        c.convert_vars.args = argparse.Namespace(inputfile="")
-        c.convert_vars.making_template = True
-        input_filetype = "idml"
-        want_template_doc = c.convert_vars.BASE_PATH + "/resources/originals/owasp_cornucopia_en.idml"
-
-        got_template_doc = c.get_template_doc(input_filetype)
-        self.assertEqual(want_template_doc, got_template_doc)
+    # def test_get_template_doc_make_template_idml(self) -> None:
+    #     c.convert_vars.args = argparse.Namespace(inputfile="")
+    #     c.convert_vars.making_template = True
+    #     input_filetype = "idml"
+    #     want_template_doc = c.convert_vars.BASE_PATH + "/resources/originals/owasp_cornucopia_en.idml"
+    #
+    #     got_template_doc = c.get_template_doc(input_filetype)
+    #     self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_relative_path(self) -> None:
         c.convert_vars.args = argparse.Namespace(
@@ -234,14 +236,18 @@ class TestGetTemplateDoc(unittest.TestCase):
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_file_not_exist(self) -> None:
-        c.convert_vars.args = argparse.Namespace(inputfile="../resources/templates/owasp_cornucopia_template.docx")
+        template_docx_filename = "../resources/templates/owasp_cornucopia_template.docx"
+        c.convert_vars.args = argparse.Namespace(inputfile=template_docx_filename)
+        template_docx_filename = os.path.normpath(c.convert_vars.SCRIPT_PATH + os.sep + template_docx_filename)
         c.convert_vars.making_template = False
         input_filetype = "docx"
         want_template_doc = ""
+        want_error_log_messages = [(f"ERROR:root:Source file not found: {template_docx_filename}. "
+                                   f"Please ensure file exists and try again.")]
 
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_template_doc = c.get_template_doc(input_filetype)
-        logging.getLogger().setLevel(logging.ERROR)
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_template_doc = c.get_template_doc(input_filetype)
+        self.assertEqual(ll.output, want_error_log_messages)
         self.assertEqual(want_template_doc, got_template_doc)
 
 
@@ -333,10 +339,14 @@ class TestGetMetaData(unittest.TestCase):
         input_data = self.test_data.copy()
         del input_data["meta"]
         want_data: Dict[str, str] = {}
+        want_logging_error_message = [(
+            "ERROR:root:Could not find meta tag in the language data. "
+            "Please ensure required language file is in the source folder."
+        )]
 
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_data = c.get_meta_data(input_data)
-        logging.getLogger().setLevel(logging.ERROR)
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_data = c.get_meta_data(input_data)
+        self.assertEqual(ll.output, want_logging_error_message)
         self.assertDictEqual(want_data, got_data)
 
 
@@ -554,17 +564,20 @@ class TestGetFilesFromOfType(unittest.TestCase):
         path = c.convert_vars.BASE_PATH + "/test/test_files/"
         ext = "ext"
         want_files: typing.List[str] = []
+        want_logging_error_message = [(
+            "ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"]))
+        )]
 
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_files = c.get_files_from_of_type(path, ext)
-        logging.getLogger().setLevel(logging.ERROR)
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_files = c.get_files_from_of_type(path, ext)
+        self.assertEqual(ll.output, want_logging_error_message)
         self.assertListEqual(got_files, want_files)
 
 
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:
         file = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
-        want_type = docx.document.Document
+        want_type = docx.Document
         want_len_paragraphs = 36
 
         got_file = c.get_docx_document(file)
@@ -575,12 +588,15 @@ class TestGetDocxDocument(unittest.TestCase):
 
     def test_get_docx_document_failure(self) -> None:
         file = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.d"
-        want_type = docx.document.Document
+        want_type = docx.Document()
         want_len_paragraphs = 0
+        want_logging_error_message = [(
+            f"ERROR:root:Could not find file at: {file}"
+        )]
 
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_file = c.get_docx_document(file)
-        logging.getLogger().setLevel(logging.ERROR)
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_file = c.get_docx_document(file)
+        self.assertEqual(ll.output, want_logging_error_message)
         self.assertIsInstance(got_file, want_type)
         got_len_paragraphs = len(got_file.paragraphs)
         self.assertEqual(want_len_paragraphs, got_len_paragraphs)
@@ -740,20 +756,26 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
 
-class TestConvertPdfToDocx(unittest.TestCase):
-    def test_convert_pdf_to_docx_true(self) -> None:
-        c.convert_vars.args = argparse.Namespace(debug=True)
+class TestConvertDocxToPdf(unittest.TestCase):
+    def test_convert_docx_to_pdf_true(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
         input_docx_filename = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
         input_pdf_filename = c.convert_vars.BASE_PATH + "/test/test_files/test.pdf"
+        if os.path.isfile(input_pdf_filename):
+            os.remove(input_pdf_filename)
 
-        c.convert_vars.can_convert_to_pdf = True
-        c.convert_docx_to_pdf(input_docx_filename, input_pdf_filename)
-        self.assertTrue(os.path.isfile(input_pdf_filename))
+        # c.convert_vars.can_convert_to_pdf = True
+        can_convert = c.set_can_convert_to_pdf()
+        if can_convert:
+            c.convert_docx_to_pdf(input_docx_filename, input_pdf_filename)
+            self.assertTrue(os.path.isfile(input_pdf_filename))
+        else:
+            self.assertFalse(can_convert, "Cannot Test convert_docx_to_pdf on this operating system")
 
 
 class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_true(self) -> None:
-        c.convert_vars.args = argparse.Namespace(debug=True)
+        c.convert_vars.args = argparse.Namespace(debug=False)
         c.convert_vars.making_template = False
         input_yaml_files = [
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
@@ -773,6 +795,7 @@ class TestGetMappingDict(unittest.TestCase):
             '${VE_VE3_safecode}': '3, 16, 24, 35'
         }
 
+        logging.getLogger().setLevel(logging.ERROR)
         got_mapping_dict = c.get_mapping_dict(input_yaml_files)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
@@ -783,9 +806,13 @@ class TestGetMappingDict(unittest.TestCase):
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-es.yaml",
         ]
         want_mapping_dict = {}
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_mapping_dict = c.get_mapping_dict(input_yaml_files)
-        logging.getLogger().setLevel(logging.ERROR)
+        want_logging_error_message = [(
+            "ERROR:root:Could not get language data from yaml files."
+        )]
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+        self.assertEqual(ll.output, want_logging_error_message)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_dict_wrong_file_type(self) -> None:
@@ -795,7 +822,11 @@ class TestGetMappingDict(unittest.TestCase):
             c.convert_vars.BASE_PATH + "owasp_cornucopia_edition_lang_ver_template.docx",
         ]
         want_mapping_dict = {}
-        logging.getLogger().setLevel(logging.CRITICAL)
-        got_mapping_dict = c.get_mapping_dict(input_yaml_files)
-        logging.getLogger().setLevel(logging.ERROR)
+        want_logging_error_message = [(
+            "ERROR:root:Could not get language data from yaml files."
+        )]
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+        self.assertEqual(ll.output, want_logging_error_message)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
