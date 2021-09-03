@@ -166,7 +166,7 @@ class TestRemoveShortKeys(unittest.TestCase):
         got_dict = c.remove_short_keys(input_dict, min_length)
         self.assertDictEqual(want_dict, got_dict)
 
-    def test_remove_short_keys_default_40_chars(self) -> None:
+    def test_remove_short_keys_default_8_chars(self) -> None:
         input_dict = {
             "1": "txt2",
             "123": "txt123",
@@ -174,6 +174,7 @@ class TestRemoveShortKeys(unittest.TestCase):
             "01234567890123456789012345678901234567890123456789012345678901234567890123456789": "txt long",
         }
         want_dict = {
+            "0123456789": "txt0123456789",
             "01234567890123456789012345678901234567890123456789012345678901234567890123456789": "txt long",
         }
 
@@ -186,8 +187,8 @@ class TestGetTemplateDoc(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(inputfile="")
         c.convert_vars.making_template = False
         input_filetype = "docx"
-        want_template_doc = (
-            c.convert_vars.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.docx"
+        want_template_doc = os.sep.join(
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.docx"]
         )
 
         got_template_doc = c.get_template_doc(input_filetype)
@@ -197,8 +198,8 @@ class TestGetTemplateDoc(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(inputfile="")
         c.convert_vars.making_template = False
         input_filetype = "idml"
-        want_template_doc = (
-            c.convert_vars.BASE_PATH + "/resources/templates/owasp_cornucopia_edition_lang_ver_template.idml"
+        want_template_doc = os.sep.join(
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.idml"]
         )
 
         got_template_doc = c.get_template_doc(input_filetype)
@@ -208,7 +209,9 @@ class TestGetTemplateDoc(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(inputfile="")
         c.convert_vars.making_template = True
         input_filetype = "docx"
-        want_template_doc = c.convert_vars.BASE_PATH + "/resources/originals/owasp_cornucopia_en.docx"
+        want_template_doc = os.sep.join(
+            [c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"]
+        )
 
         got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
@@ -224,26 +227,30 @@ class TestGetTemplateDoc(unittest.TestCase):
 
     def test_get_template_doc_relative_path(self) -> None:
         c.convert_vars.args = argparse.Namespace(
-            inputfile="../test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+            inputfile=os.sep.join(["..", "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"])
         )
         c.convert_vars.making_template = False
         input_filetype = "docx"
-        want_template_doc = (
-            c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
+        want_template_doc = os.sep.join(
+            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
         )
 
         got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_file_not_exist(self) -> None:
-        template_docx_filename = "../resources/templates/owasp_cornucopia_template.docx"
+        template_docx_filename = os.sep.join(["..", "resources", "templates", "owasp_cornucopia_template.docx"])
         c.convert_vars.args = argparse.Namespace(inputfile=template_docx_filename)
         template_docx_filename = os.path.normpath(c.convert_vars.SCRIPT_PATH + os.sep + template_docx_filename)
         c.convert_vars.making_template = False
         input_filetype = "docx"
         want_template_doc = ""
-        want_error_log_messages = [(f"ERROR:root:Source file not found: {template_docx_filename}. "
-                                   f"Please ensure file exists and try again.")]
+        want_error_log_messages = [
+            (
+                f"ERROR:root:Source file not found: {template_docx_filename}. "
+                f"Please ensure file exists and try again."
+            )
+        ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_template_doc = c.get_template_doc(input_filetype)
@@ -253,19 +260,21 @@ class TestGetTemplateDoc(unittest.TestCase):
 
 class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_short(self) -> None:
-        c.convert_vars.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver.docx")
+        output_file = os.sep + "output" + os.sep + "cornucopia_edition_component_lang_ver.docx"
+        c.convert_vars.args = argparse.Namespace(outputfile=output_file)
         input_file_type = "docx"
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "121"}
-        want_filename = "/output/cornucopia_ecommerce_cards_en_121.docx"
+        want_filename = os.sep + os.sep.join(["output", "cornucopia_ecommerce_cards_en_121.docx"])
 
         got_filename = c.rename_output_file(input_file_type, input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_no_extension(self) -> None:
-        c.convert_vars.args = argparse.Namespace(outputfile="/output/cornucopia_edition_component_lang_ver")
+        output_file = os.sep + "output" + os.sep + "cornucopia_edition_component_lang_ver"
+        c.convert_vars.args = argparse.Namespace(outputfile=output_file)
         input_file_type = "idml"
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "121"}
-        want_filename = "/output/cornucopia_ecommerce_cards_en_121.idml"
+        want_filename = os.sep + os.sep.join(["output", "cornucopia_ecommerce_cards_en_121.idml"])
 
         got_filename = c.rename_output_file(input_file_type, input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -274,7 +283,9 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
         input_file_type = "docx"
         input_meta_data = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
-        want_filename = c.convert_vars.BASE_PATH + "/output/owasp_cornucopia_ecommerce_cards_en_1.21.docx"
+        want_filename = os.sep.join(
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.docx"]
+        )
 
         # logging.getLogger().setLevel(logging.DEBUG)
         got_filename = c.rename_output_file(input_file_type, input_meta_data)
@@ -339,10 +350,12 @@ class TestGetMetaData(unittest.TestCase):
         input_data = self.test_data.copy()
         del input_data["meta"]
         want_data: Dict[str, str] = {}
-        want_logging_error_message = [(
-            "ERROR:root:Could not find meta tag in the language data. "
-            "Please ensure required language file is in the source folder."
-        )]
+        want_logging_error_message = [
+            (
+                "ERROR:root:Could not find meta tag in the language data. "
+                "Please ensure required language file is in the source folder."
+            )
+        ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_data = c.get_meta_data(input_data)
@@ -438,11 +451,11 @@ class TestGetReplacementData(unittest.TestCase):
         want_first_suit_keys = {"name": "", "cards": ""}.keys()
         want_first_suit_first_card = {
             "value": "2",
-            "owasp_scp": [69, 107, 108, 109, 136, 137, 153, 156, 158, 162],
-            "owasp_asvs": [1.10, 4.5, 8.1, 11.5, 19.1, 19.5],
+            "owasp_scp": ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"],
+            "owasp_asvs": ["1.10", "4.5", "8.1", "11.5", "19.1", "19.5"],
             "owasp_appsensor": ["HT1", "HT2", "HT3"],
-            "capec": [54, 541],
-            "safecode": [4, 23],
+            "capec": ["54", "541"],
+            "safecode": ["4", "23"],
         }
 
         got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
@@ -549,7 +562,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = c.convert_vars.BASE_PATH + "/test/test_files/"
+        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files"])
         ext = "docx"
         want_files = ["owasp_cornucopia_edition_lang_ver_template.docx"]
 
@@ -564,9 +577,9 @@ class TestGetFilesFromOfType(unittest.TestCase):
         path = c.convert_vars.BASE_PATH + "/test/test_files/"
         ext = "ext"
         want_files: typing.List[str] = []
-        want_logging_error_message = [(
-            "ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"]))
-        )]
+        want_logging_error_message = [
+            ("ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"])))
+        ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_files = c.get_files_from_of_type(path, ext)
@@ -576,9 +589,11 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:
-        file = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
-        want_type = docx.Document
-        want_len_paragraphs = 36
+        file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
+        )
+        want_type = type(docx.Document())
+        want_len_paragraphs = 33
 
         got_file = c.get_docx_document(file)
         got_type = type(got_file)
@@ -587,12 +602,12 @@ class TestGetDocxDocument(unittest.TestCase):
         self.assertEqual(want_len_paragraphs, got_len_paragraphs)
 
     def test_get_docx_document_failure(self) -> None:
-        file = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.d"
-        want_type = docx.Document()
+        file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.d"]
+        )
+        want_type = type(docx.Document())
         want_len_paragraphs = 0
-        want_logging_error_message = [(
-            f"ERROR:root:Could not find file at: {file}"
-        )]
+        want_logging_error_message = [(f"ERROR:root:Could not find file at: {file}")]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_file = c.get_docx_document(file)
@@ -758,19 +773,24 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
 
 class TestConvertDocxToPdf(unittest.TestCase):
     def test_convert_docx_to_pdf_true(self) -> None:
-        c.convert_vars.args = argparse.Namespace(debug=False)
-        input_docx_filename = c.convert_vars.BASE_PATH + "/test/test_files/owasp_cornucopia_edition_lang_ver_template.docx"
-        input_pdf_filename = c.convert_vars.BASE_PATH + "/test/test_files/test.pdf"
-        if os.path.isfile(input_pdf_filename):
-            os.remove(input_pdf_filename)
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        input_docx_filename = os.sep.join(
+            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
+        )
+        want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "test.pdf"])
+        if os.path.isfile(want_pdf_filename):
+            os.remove(want_pdf_filename)
 
         # c.convert_vars.can_convert_to_pdf = True
         can_convert = c.set_can_convert_to_pdf()
         if can_convert:
-            c.convert_docx_to_pdf(input_docx_filename, input_pdf_filename)
-            self.assertTrue(os.path.isfile(input_pdf_filename))
+            c.convert_docx_to_pdf(input_docx_filename, want_pdf_filename)
+            self.assertTrue(os.path.isfile(want_pdf_filename))
+            if os.path.isfile(want_pdf_filename):
+                os.remove(want_pdf_filename)
         else:
             self.assertFalse(can_convert, "Cannot Test convert_docx_to_pdf on this operating system")
+        c.convert_vars.args = argparse.Namespace(debug=False)
 
 
 class TestGetMappingDict(unittest.TestCase):
@@ -782,17 +802,17 @@ class TestGetMappingDict(unittest.TestCase):
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
         ]
         want_mapping_dict = {
-            '${VE_suit}': 'Data validation & encoding',
-            '${VE_VE2_owasp_scp}': '69, 107, 108, 109, 136, 137, 153, 156, 158, 162',
-            '${VE_VE2_owasp_asvs}': '1.1, 4.5, 8.1, 11.5, 19.1, 19.5',
-            '${VE_VE2_owasp_appsensor}': 'HT1, HT2, HT3',
-            '${VE_VE2_capec}': '54, 541',
-            '${VE_VE2_safecode}': '4, 23',
-            '${VE_VE3_owasp_scp}': ' - ',
-            '${VE_VE3_owasp_asvs}': '5.1, 5.16, 5.17, 5.18, 5.19, 5.2, 11.1, 11.2',
-            '${VE_VE3_owasp_appsensor}': 'RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3',
-            '${VE_VE3_capec}': '28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272',
-            '${VE_VE3_safecode}': '3, 16, 24, 35'
+            "${VE_suit}": "Data validation & encoding",
+            "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
+            "${VE_VE2_owasp_asvs}": "1.10, 4.5, 8.1, 11.5, 19.1, 19.5",
+            "${VE_VE2_owasp_appsensor}": "HT1, HT2, HT3",
+            "${VE_VE2_capec}": "54, 541",
+            "${VE_VE2_safecode}": "4, 23",
+            "${VE_VE3_owasp_scp}": " - ",
+            "${VE_VE3_owasp_asvs}": "5.1, 5.16, 5.17, 5.18, 5.19, 5.20, 11.1, 11.2",
+            "${VE_VE3_owasp_appsensor}": "RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3",
+            "${VE_VE3_capec}": "28, 48, 126, 165, 213, 220-221, 261-262, 271-272",
+            "${VE_VE3_safecode}": "3, 16, 24, 35",
         }
 
         logging.getLogger().setLevel(logging.ERROR)
@@ -805,10 +825,8 @@ class TestGetMappingDict(unittest.TestCase):
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
             c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-es.yaml",
         ]
-        want_mapping_dict = {}
-        want_logging_error_message = [(
-            "ERROR:root:Could not get language data from yaml files."
-        )]
+        want_mapping_dict: Dict[str, str] = {}
+        want_logging_error_message = [("ERROR:root:Could not get language data from yaml files.")]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
@@ -818,13 +836,11 @@ class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_wrong_file_type(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=True)
         input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.idml",
-            c.convert_vars.BASE_PATH + "owasp_cornucopia_edition_lang_ver_template.docx",
+            os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "ecommerce-cards-1.21-en.idml"]),
+            c.convert_vars.BASE_PATH + os.sep + "owasp_cornucopia_edition_lang_ver_template.docx",
         ]
-        want_mapping_dict = {}
-        want_logging_error_message = [(
-            "ERROR:root:Could not get language data from yaml files."
-        )]
+        want_mapping_dict: Dict[str, str] = {}
+        want_logging_error_message = [("ERROR:root:Could not get language data from yaml files.")]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
