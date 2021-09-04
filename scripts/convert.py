@@ -636,7 +636,7 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
     for p in paragraphs:
         runs_text = "".join(r.text for r in p.runs)
         if runs_text.strip() == "" or (
-                convert_vars.making_template and re.search(re.escape("${") + ".*" + re.escape("}"), runs_text)
+            convert_vars.making_template and re.search(re.escape("${") + ".*" + re.escape("}"), runs_text)
         ):
             continue
         for key, val in replacement_values:
