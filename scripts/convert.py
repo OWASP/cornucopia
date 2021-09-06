@@ -505,9 +505,13 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
     data = {}
     for key in list(k for k in input_data.keys() if k != "meta"):
         suit_tags, suit_key = get_suit_tags_and_key(key)
+        logging.debug(f" --- key = {key}.")
+        logging.debug(f" --- suit_tags = {suit_tags}")
+        logging.debug(f" --- suit_key = {suit_key}")
 
         for suit, suit_tag in zip(input_data[key], suit_tags):
-            logging.debug(" --- suit [name] = " + str(suit["name"]) + "\n --- suit_tag = " + str(suit_tag))
+            logging.debug(f" --- suit [name] = {suit['name']}")
+            logging.debug(f" --- suit_tag = {suit_tag}")
             tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
             data.update(tag_for_suit_name)
 
@@ -533,7 +537,7 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
                             data[text1] = full_tag
                     else:
                         data[full_tag] = check_make_list_into_text(text_output, True)
-    if convert_vars.args.debug:
+    if convert_vars.args.debug and not mappings:
         debug_txt = " --- Translation data showing First 4 (key: text):\n* "
         debug_txt += "\n* ".join(l1 + ": " + str(data[l1]) for l1 in list(data.keys())[:4])
         logging.debug(debug_txt)

@@ -274,15 +274,19 @@ suits:
     value: "JokerB"
     desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
     misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do aplicativo de treinamento OWASP Broken Web Applications VM, ou usando o desafio online Hacking Lab. Ambos são gratuitos"
+paragraphs:
 -
   name: "Common"
-  cards:
+  sentences:
   -
     value: "NoCard"
-    desc: "Nenhum Cartão"
+    text: "Nenhum Cartão"
   -
     value: "Title"
-    desc: "OWASP Cornucopia Edição de Ecomércio v1.20-PT-BR"
+    text: "Edição de Ecomércio v1.20-PT-BR"
+  -
+    value: "Title_Full"
+    text: "OWASP Cornucopia Edição de Ecomércio v1.20-PT-BR"
   -
     value: "T00010"
     text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes"
@@ -319,6 +323,9 @@ suits:
   -
     value: "T00170"
     text: "Colin Watson as author and co-project leader with Darío De Filippis, along with other OWASP volunteers who have helped in many ways."
+  -
+    value: "T00180"
+    text: "OWASP does not endorse or recommend commercial products or services © 2012-2016 OWASP Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
   -
     value: "T00200"
     text: "Introduction"
