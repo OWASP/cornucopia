@@ -771,26 +771,13 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
 
-class TestConvertDocxToPdf(unittest.TestCase):
-    def test_convert_docx_to_pdf_true(self) -> None:
+class TestWritePdfFile(unittest.TestCase):
+    def test_write_pdf_file_true(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=True)
-        input_docx_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
-        )
-        want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "test.pdf"])
-        if os.path.isfile(want_pdf_filename):
-            os.remove(want_pdf_filename)
-
-        # c.convert_vars.can_convert_to_pdf = True
-        can_convert = c.set_can_convert_to_pdf()
-        if can_convert:
-            c.convert_docx_to_pdf(input_docx_filename, want_pdf_filename)
-            self.assertTrue(os.path.isfile(want_pdf_filename))
-            if os.path.isfile(want_pdf_filename):
-                os.remove(want_pdf_filename)
-        else:
-            self.assertFalse(can_convert, "Cannot Test convert_docx_to_pdf on this operating system")
-        c.convert_vars.args = argparse.Namespace(debug=False)
+        want_filename = 'hello'
+        c.set_can_convert_to_pdf()
+        got_filename = c.convert_vars.can_convert_to_pdf
+        self.assertEqual(want_filename, got_filename)
 
 
 class TestGetMappingDict(unittest.TestCase):
