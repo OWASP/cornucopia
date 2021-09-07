@@ -11,16 +11,20 @@ import zipfile
 import docx2pdf  # type: ignore
 import docx  # type: ignore
 import xml.etree.ElementTree as ElTree
-from typing import List, Dict, Union, Tuple, Any
+from typing import List, Dict, Tuple, Any
+from operator import itemgetter
+from itertools import groupby
 
 
 class ConvertVars:
     SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
-    BASE_PATH = os.path.normpath(SCRIPT_PATH + "/..")
+    BASE_PATH = os.path.normpath(SCRIPT_PATH + os.sep + "..")
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "pt-br"]
-    DEFAULT_TEMPLATE_FILENAME: str = "../resources/templates/owasp_cornucopia_edition_lang_ver_template"
-    DEFAULT_OUTPUT_FILENAME: str = "../output/owasp_cornucopia_edition_component_lang_ver"
+    DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
+        ["..", "resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
+    )
+    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["..", "output", "owasp_cornucopia_edition_component_lang_ver"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
     making_template: bool = False
@@ -33,9 +37,9 @@ def main() -> None:
 
     set_can_convert_to_pdf()
     if (
-            convert_vars.args.outputfiletype == "pdf"
-            and not convert_vars.can_convert_to_pdf
-            and not convert_vars.args.debug
+        convert_vars.args.outputfiletype == "pdf"
+        and not convert_vars.can_convert_to_pdf
+        and not convert_vars.args.debug
     ):
         logging.error(
             "Cannot convert to pdf on this system. "
@@ -107,10 +111,7 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     language_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "translation", language)
     if not language_data:
         return
-    # If no data found in the language file, then exit with error
-    if "suits" not in list(language_data.keys()):
-        logging.error("Could not find the `suits` tag in the language file.")
-        return
+
     # Get the dict of replacement data
     language_dict: Dict[str, str] = get_replacement_dict(language_data, False)
 
@@ -123,7 +124,6 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     if not mapping_dict:
         return
 
-    language_dict.update(mapping_dict)
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
 
@@ -137,14 +137,23 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     if file_type in ("docx", "pdf"):
         # Get the input (template) document
         doc: docx.Document = get_docx_document(template_doc)
-        doc = replace_docx_inline_text(doc, language_dict)
+        if convert_vars.making_template:
+            doc = replace_docx_inline_text(doc, language_dict)
+            doc = replace_docx_inline_text(doc, mapping_dict)
+        else:
+            language_dict.update(mapping_dict)
+            doc = replace_docx_inline_text(doc, language_dict)
 
         if file_type == "docx":
             doc.save(output_file)
         else:
-            save_pdf_file(doc, output_file)
+            # If file type is pdf, then save a temp docx file, convert the docx to pdf
+            temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
+            save_docx_file(doc, temp_docx_file)
+            output_file = convert_docx_to_pdf(temp_docx_file, output_file)
 
     elif file_type == "idml":
+        language_dict.update(mapping_dict)
         save_idml_file(template_doc, language_dict, output_file)
 
     logging.info("New file saved: " + str(output_file))
@@ -166,6 +175,8 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
     xml_files = get_files_from_of_type(temp_output_path, "xml")
     # Only Stories files have content to update
     for file in fnmatch.filter(xml_files, "*Stories*Story*"):
+        if os.path.getsize(file) == 0:
+            continue
         replace_text_in_xml_file(file, language_dict)
 
     # Zip the files as an idml file in output folder
@@ -177,26 +188,37 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
         shutil.rmtree(temp_output_path, ignore_errors=True)
 
 
-def save_pdf_file(doc: docx.Document, output_file: str) -> None:
-    # If file type is pdf, then save a temp docx file, convert the docx to pdf
-    temp_output_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
-    doc.save(temp_output_file)
-    logging.debug(f" --- temp_output_file = {temp_output_file}\n--- starting pdf conversion now.")
+def save_docx_file(doc: docx.Document, output_file: str) -> None:
+    ensure_folder_exists(os.path.dirname(output_file))
+    doc.save(output_file)
 
+
+def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
+    logging.debug(f" --- docx_file = {docx_filename}\n--- starting pdf conversion now.")
+    fail: bool = False
+    msg: str = ""
     if convert_vars.can_convert_to_pdf:
         # Use docx2pdf for windows and mac with MS Word installed
-        docx2pdf.convert(temp_output_file, output_file)
+        try:
+            docx2pdf.convert(docx_filename, output_pdf_filename)
+        except Exception as e:
+            msg = f"\nConvert error: {e}"
+            fail = True
     else:
-        logging.warning(
+        fail = True
+    if fail:
+        msg = (
             "Error. A temporary docx file was created in the output folder but cannot be converted "
             f"to pdf (yet) on operating system: {sys.platform}\n"
             "This does work on Windows and Mac with MS Word installed."
-        )
-        return None
+        ) + msg
+        logging.warning(msg)
+        return docx_filename
 
     # If not debugging then delete the temp file
     if not convert_vars.args.debug:
-        os.remove(temp_output_file)
+        os.remove(docx_filename)
+    return output_pdf_filename
 
 
 def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
@@ -206,10 +228,12 @@ def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
     return get_replacement_dict(mapping_data, True)
 
 
-def set_can_convert_to_pdf() -> None:
+def set_can_convert_to_pdf() -> bool:
     operating_system: str = sys.platform.lower()
-    convert_vars.can_convert_to_pdf = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
+    can_convert = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
+    convert_vars.can_convert_to_pdf = can_convert
     logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {convert_vars.can_convert_to_pdf}")
+    return can_convert
 
 
 def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
@@ -217,31 +241,78 @@ def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tupl
     return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
 
 
-def replace_text_in_xml_file(file: str, replacement_dict: Dict[str, str]) -> None:
-    if os.path.getsize(file) == 0:
-        return
+def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) -> None:
     if convert_vars.making_template:
         replacement_values = sort_keys_longest_to_shortest(replacement_dict)
     else:
         replacement_values = list(replacement_dict.items())
 
-    tree = ElTree.parse(file)
+    try:
+        tree = ElTree.parse(filename)
+    except ElTree.ParseError as e:
+        logging.error(f" --- parsing xml file: {filename}. error = {e}")
+        return
+
     all_content_elements = tree.findall(".//Content")
 
     found_element = False
-    for el in [el for el in all_content_elements if el.text is not None]:
-        assert el.text is not None
-        for k, v in replacement_values:
-            if el.text.find(k):
-                found_element = True
-                new_text = el.text.replace(k, v)
-                el.text = new_text
+    for el in [el for el in all_content_elements]:
+        if el.text == "" or el.text is None:
+            continue
+        el_text = get_replacement_value_from_dict(el.text, replacement_values)
+        if el_text:
+            el.text = el_text
+            found_element = True
+
     if found_element:
-        with open(file, "bw") as f:
+        with open(filename, "bw") as f:
             f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
 
-def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 40) -> Dict[str, str]:
+def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
+    for (k, v) in replacement_values:
+        k2: str = k.replace("'", "’").strip()
+        v2: str = v.replace("'", "’").strip()
+        if el_text == k:
+            return v
+        elif el_text.strip() == k2:
+            return v2
+        elif el_text.lower() == k.lower():
+            return v
+        elif el_text.strip().lower() == k2.lower():
+            return v2
+        elif convert_vars.making_template:
+            reg_str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace(" ", "").strip() + "$"
+            value_name = v[9:-1].replace("_", " ").lower().strip()
+            new_text_test = (
+                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1 :].replace(" ", "").strip()
+            )
+            if re.match(reg_str, new_text_test) and el_text.lower().startswith(value_name):
+                return el_text[: len(value_name)] + "\u2028" + v
+        else:
+            el_new = get_replacement_mapping_value(k, v, el_text)
+            if el_new:
+                return el_new
+    return ""
+
+
+def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
+    reg_str: str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace("$", "\\$").strip() + "$"
+    if re.match(reg_str, el_text.strip()):
+        pretext = el_text[: el_text.find("\u2028")]
+        v_new = v
+        if len(v) + len(pretext) > 60:
+            v_new = v.replace(", ", ",")
+        if len(v_new) >= 34:
+            v_split = v_new.find(",", 25 - len(pretext)) + 1
+            el_new = pretext + "    " + v_new[:v_split] + "\u2028" + v_new[v_split:].strip()
+            return el_new
+        else:
+            return el_text.replace(k, v)
+    return ""
+
+
+def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 8) -> Dict[str, str]:
     data2: Dict[str, str] = {}
     for key, value in replacement_dict.items():
         if len(key) >= min_length:
@@ -276,11 +347,27 @@ def get_template_doc(file_type: str) -> str:
             )
 
         template_doc = check_fix_file_extension(template_doc, source_file_ext)
-    logging.debug(f" --- template_doc = {template_doc}")
 
-    if not os.path.isfile(template_doc):
-        logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
-        return ""
+    template_doc = template_doc.replace("\\ ", " ")
+    # template_doc = os.path.exists(template_doc)
+    if os.path.isfile(template_doc):
+        logging.debug(f" --- Returning template_doc = {template_doc}")
+        return template_doc
+    else:
+        logging.debug(f" --- Template_doc NOT found = {template_doc}")
+        template_doc = template_doc.replace(os.sep + "scripts" + os.sep, os.sep)
+    if os.path.isfile(template_doc):
+        logging.debug(f" --- Returning template_doc = {template_doc}")
+        return template_doc
+    else:
+        logging.debug(f" --- Template_doc NOT found = {template_doc}")
+        template_doc = template_doc.replace(".." + os.sep, os.sep)
+
+        logging.debug(f" --- trying Template_doc = {template_doc}")
+        if not os.path.isfile(template_doc):
+            logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
+            template_doc = ""
+    logging.debug(f" --- Returning template_doc = {template_doc}")
     return template_doc
 
 
@@ -363,7 +450,7 @@ def get_meta_data(language_data: Dict[str, Dict[str, str]]) -> Dict[str, str]:
 
 
 def get_replacement_data(
-        yaml_files: List[str], data_type: str = "translation", language: str = ""
+    yaml_files: List[str], data_type: str = "translation", language: str = ""
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
@@ -373,43 +460,41 @@ def get_replacement_data(
     else:
         lang = language
     for file in yaml_files:
-        if (
-                os.path.splitext(file)[1] in (".yaml", ".yml") and
-                (
-                        os.path.basename(file).find("-" + lang + ".") >= 0 or
-                        os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0 or
-                        os.path.basename(file).find("mappings") >= 0
-                )
+        if os.path.splitext(file)[1] in (".yaml", ".yml") and (
+            os.path.basename(file).find("-" + lang + ".") >= 0
+            or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0
+            or os.path.basename(file).find("mappings") >= 0
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
-                    data = yaml.safe_load(f)
+                    data = yaml.load(f, Loader=yaml.BaseLoader)
                 except yaml.YAMLError as e:
                     logging.info(f"Error loading yaml file: {file}. Error = {e}")
                     continue
 
             if data_type in ("translation", "translations") and (
-                    (data["meta"]["language"].lower() == language)
-                    or (data["meta"]["language"].lower() == "en" and language == "template")
+                (data["meta"]["language"].lower() == language)
+                or (data["meta"]["language"].lower() == "en" and language == "template")
             ):
                 logging.debug(" --- found source language file: " + os.path.split(file)[1])
                 break
             elif (
-                    data_type in ("mapping", "mappings")
-                    and "meta" in data.keys()
-                    and "component" in data["meta"].keys()
-                    and data["meta"]["component"] == "mappings"
+                data_type in ("mapping", "mappings")
+                and "meta" in data.keys()
+                and "component" in data["meta"].keys()
+                and data["meta"]["component"] == "mappings"
             ):
                 logging.debug(" --- found mappings file: " + os.path.split(file)[1])
                 break
 
             else:
+                logging.debug(" --- found source file: " + os.path.split(file)[1])
+                if "meta" in list(data.keys()):
+                    meta_keys = data["meta"].keys()
+                    logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
                 data = {}
                 continue
-            logging.debug(" --- found source file: " + os.path.split(file)[1])
-            meta_keys = data["meta"].keys()
-            logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
-    if not data:
+    if not data or "suits" not in list(data.keys()):
         logging.error("Could not get language data from yaml files.")
     logging.debug(f" --- Len = {len(data)}.")
     return data
@@ -420,9 +505,13 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
     data = {}
     for key in list(k for k in input_data.keys() if k != "meta"):
         suit_tags, suit_key = get_suit_tags_and_key(key)
+        logging.debug(f" --- key = {key}.")
+        logging.debug(f" --- suit_tags = {suit_tags}")
+        logging.debug(f" --- suit_key = {suit_key}")
 
         for suit, suit_tag in zip(input_data[key], suit_tags):
-            logging.debug(" --- suit [name] = " + str(suit["name"]) + "\n --- suit_tag = " + str(suit_tag))
+            logging.debug(f" --- suit [name] = {suit['name']}")
+            logging.debug(f" --- suit_tag = {suit_tag}")
             tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
             data.update(tag_for_suit_name)
 
@@ -434,19 +523,21 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
 
                     full_tag = get_full_tag(suit_tag, card["value"], tag)
 
-                    # Mappings is sometimes loaded as a list. Convert to string
-                    if mappings:
-                        text_output = check_make_list_into_text(text_output)
-
                     # Add a translation for "Joker"
                     if suit_tag == "WC" and tag == "value":
                         full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
 
+                    # Mappings is sometimes loaded as a list. Convert to string
                     if convert_vars.making_template:
-                        data[text_output] = full_tag
+                        text1 = check_make_list_into_text(text_output, False)
+                        data[text1] = full_tag
+                        if mappings:
+                            data[text1.replace(", ", ",")] = full_tag
+                            text1 = check_make_list_into_text(text_output, True)
+                            data[text1] = full_tag
                     else:
-                        data[full_tag] = text_output
-    if convert_vars.args.debug:
+                        data[full_tag] = check_make_list_into_text(text_output, True)
+    if convert_vars.args.debug and not mappings:
         debug_txt = " --- Translation data showing First 4 (key: text):\n* "
         debug_txt += "\n* ".join(l1 + ": " + str(data[l1]) for l1 in list(data.keys())[:4])
         logging.debug(debug_txt)
@@ -456,14 +547,32 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
     return data
 
 
-def check_make_list_into_text(var: Union[List[Union[str, int]], str]) -> str:
+def check_make_list_into_text(var: List[str], group_numbers: bool = True) -> str:
     if isinstance(var, list):
+        if group_numbers:
+            var = group_number_ranges(var)
         text_output = ", ".join(str(s) for s in list(var))
         if len(text_output.strip()) == 0:
             text_output = " - "
         return text_output
     else:
         return str(var)
+
+
+def group_number_ranges(data: List[str]) -> List[str]:
+    if len(data) < 2 or len([s for s in data if not s.isnumeric()]):
+        return data
+    list_ranges: List[str] = []
+    data_numbers = [int(s) for s in data]
+    for k, g in groupby(enumerate(data_numbers), lambda x: x[0] - x[1]):
+        group: List[int] = list(map(itemgetter(1), g))
+        group = list(map(int, group))
+        if group[0] == group[-1]:
+            list_ranges.append(str(group[0]))
+        else:
+            list_ranges.append(str(group[0]) + "-" + str(group[-1]))
+    # logging.debug(f" --- combined numbers to return: {list_ranges}")
+    return list_ranges
 
 
 def get_suit_tags_and_key(key: str) -> Tuple[List[str], str]:
@@ -490,8 +599,6 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
         if suit_tag == "WC":
             data["${WC_Joker}"] = "Joker"
     logging.debug(f" --- making_template = {convert_vars.making_template}, suit_tag dict = {data}")
-    # logging.debug(f" --- Type of data = {type(data)}, "
-    #               f"type of data[Data validation & encoding] = {type(data['Data validation & encoding'])}")
     return data
 
 
@@ -511,7 +618,7 @@ def zip_dir(path: str, zip_filename: str) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path):])
+                zip_file.write(f, f[len(path) :])
 
 
 def ensure_folder_exists(folder_path: str) -> None:
@@ -528,13 +635,13 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
         replacement_values = sort_keys_longest_to_shortest(data)
     else:
         replacement_values = list(data.items())
-    rv = list(k + ": " + v + "; " for k, v in replacement_values)
-    logging.debug(f" --- last 5 replacement values are:\n{rv[-5:]}")
 
     paragraphs = get_document_paragraphs(doc)
     for p in paragraphs:
         runs_text = "".join(r.text for r in p.runs)
-        if convert_vars.making_template and re.search(re.escape("${") + ".*" + re.escape("}"), runs_text):
+        if runs_text.strip() == "" or (
+            convert_vars.making_template and re.search(re.escape("${") + ".*" + re.escape("}"), runs_text)
+        ):
             continue
         for key, val in replacement_values:
             replaced_key = False
@@ -557,16 +664,24 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
 def get_document_paragraphs(doc: docx) -> List[docx.Document]:
     paragraphs = list(doc.paragraphs)
     l1 = l2 = len(paragraphs)
-    for t in doc.tables:
-        for row in t.rows:
-            for cell in row.cells:
-                for paragraph in cell.paragraphs:
-                    if len(paragraph.runs):
-                        paragraphs.append(paragraph)
-                l2 = len(paragraphs)
+    for table in doc.tables:
+        paragraphs += get_paragraphs_from_table_in_doc(table)
+    l2 = len(paragraphs)
     if not len(paragraphs):
         logging.error("No paragraphs found in doc")
     logging.debug(f" --- count doc paragraphs = {l1}, with table paragraphs = {l2}")
+    return paragraphs
+
+
+def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Document]:
+    paragraphs: List[docx.Document] = []
+    for row in doc_table.rows:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                if len(paragraph.runs):
+                    paragraphs.append(paragraph)
+            for t2 in cell.tables:
+                paragraphs += get_paragraphs_from_table_in_doc(t2)
     return paragraphs
 
 
@@ -643,9 +758,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=str,
         choices=convert_vars.LANGUAGE_CHOICES,
         default="en",
-        help="Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
-             "\nTemplate will attempt to create a template from the english input file and "
-             "\nreplacing strings with the template lookup codes",
+        help=(
+            "Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
+            "\nTemplate will attempt to create a template from the english input file and "
+            "\nreplacing strings with the template lookup codes"
+        ),
     )
     parser.add_argument(
         "-d",
