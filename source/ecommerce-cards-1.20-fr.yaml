@@ -274,15 +274,19 @@ suits:
     value: "JokerB"
     desc: "Bob peut influencer, altérer ou affecter l'application de façon à ce qu'elle ne soit plus conforme aux exigences légales, réglementaires, contractuelles ou autres exigences de l'organisation"
     misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans les applications de formation de la VM gratuite OWASP Broken Web Applications, ou en utilisant les défis en ligne du Hacking Lab gratuit"
+paragraphs:
 -
   name: "Common"
-  cards:
+  sentences:
   -
     value: "NoCard"
-    desc: "Pas de Carte"
+    text: "Pas de Carte"
   -
     value: "Title"
-    desc: "OWASP Cornucopia Édition de Ecommerce v1.20-FR"
+    text: "Édition de Ecommerce v1.20-FR"
+  -
+    value: "Title_full"
+    text: "OWASP Cornucopia Édition de Ecommerce v1.20-FR"
   -
     value: "T00010"
     text: "OWASP Cornucopia est un mécanisme qui permet aux équipes de développement logiciel d’identifier les exigences sécurité dans les processus de développement Agile, conventionnels et formels"
@@ -442,6 +446,9 @@ suits:
   -
     value: "T00840"
     text: "Vous pouvez personnaliser les rectos ou les versos pour coller aux préférences de votre organisation."
+  -
+    value: "T00850"
+    text: "Vous pouvez personnaliser les faces ou le dos des cartes selon les préférences de votre propre organisation."
   -
     value: "T00900"
     text: "Personnalisation"

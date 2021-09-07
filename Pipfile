@@ -15,6 +15,7 @@ python-docx = "==0.8.11"
 PyYAML = "==5.4.1"
 docx2pdf = "*"
 lxml = "==4.5.0"
+docx = "*"
 
 [requires]
 python_version = "3"
