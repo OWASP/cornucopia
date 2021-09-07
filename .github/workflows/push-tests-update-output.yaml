@@ -9,7 +9,7 @@ on:
     paths:
       - 'sources/**'
       - 'scripts/convert**'
-      - 'test/**'
+      - 'resources/templates/**'
   pull_request:
     branches:
       - master
@@ -17,7 +17,7 @@ on:
     paths:
       - 'sources/**'
       - 'scripts/convert**'
-      - 'test/**'
+      - 'resources/templates/**'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -40,16 +40,16 @@ jobs:
       - name: Run unit tests
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run python -m unittest discover -s 'test/scripts/' -p '*_utest.py'
+          command: run python -m unittest discover -s "test/scripts" -p "*_utest.py"
       - name: Run integration
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run python -m unittest discover -s 'test/scripts/' -p '*_itest.py'
+          command: run python -m unittest discover -s "test/scripts" -p "*_itest.py"
 
       - name: Check test coverage - run tests
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run coverage run -m unittest discover -s 'test/scripts/' -p '*_*test.py'
+          command: run coverage run -m unittest discover -s "test/scripts" -p "*_*test.py"
       - name: Check test coverage - generate xml
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
@@ -57,8 +57,8 @@ jobs:
       - name: Check test coverage - Report
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run coverage report scripts/convert*
-#          command: run coverage report --fail-under 50 scripts/convert*
+#          command: run coverage report scripts/convert*
+          command: run coverage report --fail-under 50 scripts/convert*
 #          command: run coverage report --fail-under 91 scripts/convert*
 
       # Check formatting of files
