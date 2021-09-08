@@ -161,8 +161,8 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
 
 def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
     # Get the output path and temp output path to put the temp xml files
-    output_path = convert_vars.BASE_PATH + "/output"
-    temp_output_path = output_path + "/temp"
+    output_path = convert_vars.BASE_PATH + os.sep + "output"
+    temp_output_path = output_path + os.sep + "temp"
     # Ensure the output folder and temp output folder exist
     ensure_folder_exists(temp_output_path)
     logging.debug(" --- temp_folder for extraction of xml files = " + str(temp_output_path))
@@ -663,7 +663,7 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
 
 def get_document_paragraphs(doc: docx) -> List[docx.Document]:
     paragraphs = list(doc.paragraphs)
-    l1 = l2 = len(paragraphs)
+    l1 = len(paragraphs)
     for table in doc.tables:
         paragraphs += get_paragraphs_from_table_in_doc(table)
     l2 = len(paragraphs)
