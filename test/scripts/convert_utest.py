@@ -183,9 +183,15 @@ class TestRemoveShortKeys(unittest.TestCase):
 
 
 class TestGetTemplateDoc(unittest.TestCase):
-    def test_get_template_doc_default_docx(self) -> None:
-        c.convert_vars.args = argparse.Namespace(inputfile="")
+    b = c.convert_vars.BASE_PATH
+
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
         c.convert_vars.making_template = False
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        logging.getLogger().setLevel(logging.INFO)
+
+    def test_get_template_doc_default_docx(self) -> None:
         input_filetype = "docx"
         want_template_doc = os.sep.join(
             [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.docx"]
@@ -195,8 +201,6 @@ class TestGetTemplateDoc(unittest.TestCase):
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_default_idml(self) -> None:
-        c.convert_vars.args = argparse.Namespace(inputfile="")
-        c.convert_vars.making_template = False
         input_filetype = "idml"
         want_template_doc = os.sep.join(
             [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.idml"]
@@ -206,7 +210,6 @@ class TestGetTemplateDoc(unittest.TestCase):
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_make_template_docx(self) -> None:
-        c.convert_vars.args = argparse.Namespace(inputfile="")
         c.convert_vars.making_template = True
         input_filetype = "docx"
         want_template_doc = os.sep.join(
@@ -216,23 +219,22 @@ class TestGetTemplateDoc(unittest.TestCase):
         got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_template_doc, got_template_doc)
 
-    # def test_get_template_doc_make_template_idml(self) -> None:
-    #     c.convert_vars.args = argparse.Namespace(inputfile="")
-    #     c.convert_vars.making_template = True
-    #     input_filetype = "idml"
-    #     want_template_doc = c.convert_vars.BASE_PATH + "/resources/originals/owasp_cornucopia_en.idml"
-    #
-    #     got_template_doc = c.get_template_doc(input_filetype)
-    #     self.assertEqual(want_template_doc, got_template_doc)
+    def test_get_template_doc_make_template_idml(self) -> None:
+        c.convert_vars.making_template = True
+        input_filetype = "idml"
+        want_template_doc = os.sep.join(
+            [c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.idml"]
+        )
+        got_template_doc = c.get_template_doc(input_filetype)
+        self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_relative_path(self) -> None:
-        c.convert_vars.args = argparse.Namespace(
-            inputfile=os.sep.join(["..", "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"])
+        c.convert_vars.args.inputfile = os.sep.join(
+            ["..", "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.docx"]
         )
-        c.convert_vars.making_template = False
         input_filetype = "docx"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.docx"]
         )
 
         got_template_doc = c.get_template_doc(input_filetype)
@@ -240,9 +242,7 @@ class TestGetTemplateDoc(unittest.TestCase):
 
     def test_get_template_doc_file_not_exist(self) -> None:
         template_docx_filename = os.sep.join(["..", "resources", "templates", "owasp_cornucopia_template.docx"])
-        c.convert_vars.args = argparse.Namespace(inputfile=template_docx_filename)
-        template_docx_filename = os.path.normpath(c.convert_vars.SCRIPT_PATH + os.sep + template_docx_filename)
-        c.convert_vars.making_template = False
+        c.convert_vars.args.inputfile = template_docx_filename
         input_filetype = "docx"
         want_template_doc = ""
         want_error_log_messages = [
@@ -259,6 +259,12 @@ class TestGetTemplateDoc(unittest.TestCase):
 
 
 class TestRenameOutputFile(unittest.TestCase):
+    b = c.convert_vars.BASE_PATH
+
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+
     def test_rename_output_file_short(self) -> None:
         output_file = os.sep + "output" + os.sep + "cornucopia_edition_component_lang_ver.docx"
         c.convert_vars.args = argparse.Namespace(outputfile=output_file)
@@ -364,64 +370,59 @@ class TestGetMetaData(unittest.TestCase):
 
 
 class TestGetReplacementData(unittest.TestCase):
-    test_data: Dict[str, Any] = {
-        "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
-        "suits": [
-            {
-                "name": "Data validation & encoding",
-                "cards": [
-                    {
-                        "value": "A",
-                        "desc": "You have invented a new attack against Data Validation and Encoding",
-                        "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
-                        "XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, "
-                        "and Query Parameterization",
-                    },
-                    {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
-                ],
-            },
-        ],
-        "paragraphs": [
-            {
-                "name": "Common",
-                "cards": [
-                    {
-                        "value": "NoCard",
-                        "text": "No Card",
-                    },
-                    {
-                        "value": "Title",
-                        "text": "OWASP Cornucopia Ecommerce Edition v1.21-EN",
-                    },
-                ],
-            },
-        ],
-    }
+    def setUp(self) -> None:
+        self.input_yaml_files = [
+            os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source", "ecommerce-cards-1.21-en.yaml"]),
+            os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source", "ecommerce-mappings-1.2.yaml"]),
+        ]
+        self.input_data_type = "translation"
+        self.input_language = "en"
+        self.test_data: Dict[str, Any] = {
+            "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"},
+            "suits": [
+                {
+                    "name": "Data validation & encoding",
+                    "cards": [
+                        {
+                            "value": "A",
+                            "desc": "You have invented a new attack against Data Validation and Encoding",
+                            "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
+                            "XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, "
+                            "and Query Parameterization",
+                        },
+                        {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                    ],
+                },
+            ],
+            "paragraphs": [
+                {
+                    "name": "Common",
+                    "cards": [
+                        {
+                            "value": "NoCard",
+                            "text": "No Card",
+                        },
+                        {
+                            "value": "Title",
+                            "text": "OWASP Cornucopia Ecommerce Edition v1.21-EN",
+                        },
+                    ],
+                },
+            ],
+        }
 
     def test_get_replacement_data_translation_meta(self) -> None:
-        input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
-        ]
-        input_data_type = "translation"
-        input_language = "en"
         want_meta = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.21"}
 
-        got_data = c.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        got_data = c.get_replacement_data(self.input_yaml_files, self.input_data_type, self.input_language)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_replacement_data_translation_first_suit_first_card(self) -> None:
-        input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
-        ]
-        input_data_type = "translation"
-        input_language = "en"
         want_first_suit_keys = self.test_data["suits"][0].keys()
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
         want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["value"]
 
-        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_suits = c.get_replacement_data(self.input_yaml_files, self.input_data_type, self.input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
@@ -430,24 +431,14 @@ class TestGetReplacementData(unittest.TestCase):
         self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_replacement_data_mappings_meta(self) -> None:
-        input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
-        ]
         input_data_type = "mappings"
-        input_language = "en"
         want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.2"}
 
-        got_data = c.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_replacement_data_mappings_first_suit_first_card(self) -> None:
-        input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
-        ]
         input_data_type = "mappings"
-        input_language = "en"
         want_first_suit_keys = {"name": "", "cards": ""}.keys()
         want_first_suit_first_card = {
             "value": "2",
@@ -458,7 +449,7 @@ class TestGetReplacementData(unittest.TestCase):
             "safecode": ["4", "23"],
         }
 
-        got_suits = c.get_replacement_data(input_yaml_files, input_data_type, input_language)["suits"]
+        got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -549,20 +540,20 @@ class TestMakeTemplate(unittest.TestCase):
 class TestGetFilesFromOfType(unittest.TestCase):
     def test_get_files_from_of_type_source_yaml_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = c.convert_vars.BASE_PATH + "/test/test_files/"
+        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source"])
         ext = "yaml"
-        want_files = ["ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml"]
+        want_files = ["ecommerce-cards-1.20-es.yaml", "ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml"]
         want_count = len(want_files)
 
         got_files = c.get_files_from_of_type(path, ext)
-        self.assertEqual(len(got_files), want_count)
+        self.assertEqual(want_count, len(got_files))
         got_files = list(os.path.basename(f) for f in got_files)
         got_files.sort()
         self.assertListEqual(got_files, want_files)
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files"])
+        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "resources", "templates"])
         ext = "docx"
         want_files = ["owasp_cornucopia_edition_lang_ver_template.docx"]
 
@@ -574,7 +565,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_empty_list(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = c.convert_vars.BASE_PATH + "/test/test_files/"
+        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source"])
         ext = "ext"
         want_files: typing.List[str] = []
         want_logging_error_message = [
@@ -590,7 +581,14 @@ class TestGetFilesFromOfType(unittest.TestCase):
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:
         file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
+            [
+                c.convert_vars.BASE_PATH,
+                "test",
+                "test_files",
+                "resources",
+                "templates",
+                "owasp_cornucopia_edition_lang_ver_template.docx",
+            ]
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 33
@@ -607,7 +605,7 @@ class TestGetDocxDocument(unittest.TestCase):
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 0
-        want_logging_error_message = [(f"ERROR:root:Could not find file at: {file}")]
+        want_logging_error_message = [f"ERROR:root:Could not find file at: {file}"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_file = c.get_docx_document(file)
@@ -763,9 +761,9 @@ class TestGetCheckFixFileExtension(unittest.TestCase):
 
     def test_get_check_fix_file_extension_with_folders(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        input_filename = "output/folder/hello_v1.21"
+        input_filename = "output" + os.sep + "folder" + os.sep + "hello_v1.21"
         input_extension = "docx"
-        want_filename = "output/folder/hello_v1.21.docx"
+        want_filename = "output" + os.sep + "folder" + os.sep + "hello_v1.21.docx"
 
         got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
@@ -794,13 +792,16 @@ class TestConvertDocxToPdf(unittest.TestCase):
 
 
 class TestGetMappingDict(unittest.TestCase):
-    def test_get_mapping_dict_true(self) -> None:
+    def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
         c.convert_vars.making_template = False
-        input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-mappings-1.2.yaml",
+        self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files"])
+        self.input_yaml_files = [
+            os.sep.join([self.BASE_PATH, "source", "ecommerce-cards-1.21-en.yaml"]),
+            os.sep.join([self.BASE_PATH, "source", "ecommerce-mappings-1.2.yaml"]),
         ]
+
+    def test_get_mapping_dict_true(self) -> None:
         want_mapping_dict = {
             "${VE_suit}": "Data validation & encoding",
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
@@ -816,33 +817,153 @@ class TestGetMappingDict(unittest.TestCase):
         }
 
         logging.getLogger().setLevel(logging.ERROR)
-        got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+        got_mapping_dict = c.get_mapping_dict(self.input_yaml_files)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_dict_empty(self) -> None:
-        c.convert_vars.args = argparse.Namespace(debug=False)
-        input_yaml_files = [
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-en.yaml",
-            c.convert_vars.BASE_PATH + "/test/test_files/ecommerce-cards-1.21-es.yaml",
-        ]
+        self.input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "ecommerce-cards-1.21-en.yaml"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = [("ERROR:root:Could not get language data from yaml files.")]
+        want_logging_error_message = ["ERROR:root:Could not get language data from yaml files."]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
-            got_mapping_dict = c.get_mapping_dict(input_yaml_files)
+            got_mapping_dict = c.get_mapping_dict(self.input_yaml_files)
         self.assertEqual(ll.output, want_logging_error_message)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_dict_wrong_file_type(self) -> None:
-        c.convert_vars.args = argparse.Namespace(debug=False)
         input_yaml_files = [
-            os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "ecommerce-cards-1.21-en.idml"]),
-            c.convert_vars.BASE_PATH + os.sep + "owasp_cornucopia_edition_lang_ver_template.docx",
+            os.sep.join([self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"]),
         ]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = [("ERROR:root:Could not get language data from yaml files.")]
+        want_logging_error_message = ["ERROR:root:Could not get language data from yaml files."]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
         self.assertEqual(ll.output, want_logging_error_message)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
+
+
+class TestConvertTypeLanguage(unittest.TestCase):
+    b = c.convert_vars.BASE_PATH
+
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(
+            inputfile="",
+            outputfile="",
+            language="en",
+            debug=False,
+        )
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.can_convert_to_pdf = False
+        c.convert_vars.making_template = False
+        logging.getLogger().setLevel(logging.INFO)
+        self.temp_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp.docx"])
+        self.want_file = ""
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+        if os.path.isfile(self.temp_file):
+            os.remove(self.temp_file)
+
+    def test_convert_type_language_defaults(self) -> None:
+        input_filetype = "docx"
+        self.want_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.docx"]
+        )
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
+
+        with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+            c.convert_type_language(input_filetype)
+        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertTrue(os.path.isfile(self.want_file))
+
+    def test_convert_type_language_spanish(self) -> None:
+        input_filetype = "docx"
+        language = "es"
+        self.want_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_es_1.20.docx"]
+        )
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
+
+        with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+            c.convert_type_language(input_filetype, language)
+        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertTrue(os.path.isfile(self.want_file))
+
+    def test_convert_type_language_en_idml(self) -> None:
+        input_filetype = "idml"
+        language = "en"
+        self.want_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.20.idml"]
+        )
+        c.convert_vars.args.outputfile = self.want_file
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
+
+        with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+            c.convert_type_language(input_filetype, language)
+        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertTrue(os.path.isfile(self.want_file))
+
+    def test_convert_type_language_es_specify_output(self) -> None:
+        input_filetype = "idml"
+        language = "es"
+        c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_cards_es.idml"])
+        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile])
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
+
+        with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+            c.convert_type_language(input_filetype, language)
+        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertTrue(os.path.isfile(self.want_file))
+
+
+class TestSaveIdmlFile(unittest.TestCase):
+    b = c.convert_vars.BASE_PATH
+
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(
+            inputfile="",
+            outputfile="",
+            language="en",
+            debug=False,
+        )
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.can_convert_to_pdf = False
+        c.convert_vars.making_template = False
+        logging.getLogger().setLevel(logging.INFO)
+        self.language_dict = {
+            "${VE_suit}": "Data validation & encoding",
+            "${VE_VEA_desc}": "You have invented a new attack against Data Validation",
+            "${VE_VEA_misc}": "Read more about this topic in OWASP's free Cheat Sheets",
+            "${VE_VE2_desc}": "Brian can gather information about the underlying configurations",
+            "${AT_suit}": "Authentication",
+            "${AT_ATA_desc}": "You have invented a new attack against Authentication",
+            "${AT_ATA_misc}": "Read more about this topic in OWASP's free Cheat Sheet",
+            "${AT_AT2_desc}": "James can undertake authentication functions without",
+        }
+
+    def tearDown(self) -> None:
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+        c.convert_vars.DEFAULT_OUTPUT_FILENAME = os.sep.join(["output", "owasp_cornucopia_edition_component_lang_ver"])
+
+    def test_save_idml_file_test_location(self) -> None:
+        input_template_doc = os.sep.join(
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.idml"]
+        )
+        self.want_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.idml"]
+        )
+
+        c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
+        self.assertTrue(os.path.isfile(self.want_file))
