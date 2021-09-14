@@ -268,7 +268,7 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
 def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
     for (k, v) in replacement_values:
         k2: str = k.replace("'", "’").strip()
-        v2: str = v.replace("'", "’").strip()
+        v2: str = v.strip()
         if el_text == k:
             return v
         elif el_text.strip() == k2:
@@ -566,7 +566,6 @@ def group_number_ranges(data: List[str]) -> List[str]:
             list_ranges.append(str(group[0]))
         else:
             list_ranges.append(str(group[0]) + "-" + str(group[-1]))
-    # logging.debug(f" --- combined numbers to return: {list_ranges}")
     return list_ranges
 
 
@@ -585,6 +584,7 @@ def get_suit_tags_and_key(key: str) -> Tuple[List[str], str]:
 
 def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
     data: Dict[str, str] = {}
+    logging.debug(f" --- suit_tag = {suit_tag}, suit[name] = {suit['name']}")
     if convert_vars.making_template:
         data[suit["name"]] = "${{{}}}".format(suit_tag + "_suit")
         if suit_tag == "WC":
@@ -593,7 +593,7 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
         data["${{{}}}".format(suit_tag + "_suit")] = suit["name"]
         if suit_tag == "WC":
             data["${WC_Joker}"] = "Joker"
-    logging.debug(f" --- making_template = {convert_vars.making_template}, suit_tag dict = {data}")
+    logging.debug(f" --- making_template {convert_vars.making_template}. suit_tag dict = {data}")
     return data
 
 
@@ -732,7 +732,6 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--outputfiletype",
         type=str,
         choices=convert_vars.FILETYPE_CHOICES,
-        # default="docx",
         help="Type of file to output. Default = docx. If specified, this overwrites the output file extension",
     )
     parser.add_argument(
@@ -765,7 +764,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         action="store_true",
         help="Output additional information to debug script",
     )
-    return parser.parse_args(input_args)
+    args = parser.parse_args(input_args)
+    return args
 
 
 if __name__ == "__main__":
