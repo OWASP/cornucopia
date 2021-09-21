@@ -1,6 +1,6 @@
 <script></script>
 
-<h1>Cornucopia Session: <%= @player.game.name %></h1>
+<h1>Session: <%= @player.game.name %></h1>
 
 <%= if @player.game.finished_at do %>
 
@@ -11,7 +11,7 @@
 
   <%= if @player.game.started_at do %>
 
-  <h2>Hi <%= @player.name %>! This game started at <%= @player.game.started_at %></h2>
+  <h3>Hi <%= @player.name %>! Game started at <%= @game.started_at %> with <%= Enum.count(@game.players) %> players</h3>
 
   <h4>Round <strong><%= @game.rounds_played + 1 %></strong></h4>
 
