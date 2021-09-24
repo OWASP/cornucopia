@@ -58,7 +58,7 @@ jobs:
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
 #          command: run coverage report scripts/convert*
-          command: run coverage report --fail-under 50 scripts/convert*
+          command: run coverage report --fail-under 85 scripts/convert*
 #          command: run coverage report --fail-under 91 scripts/convert*
 
       # Check formatting of files
