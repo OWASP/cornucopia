@@ -17,14 +17,13 @@ from itertools import groupby
 
 
 class ConvertVars:
-    SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
-    BASE_PATH = os.path.normpath(SCRIPT_PATH + os.sep + "..")
+    BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "pt-br"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
-        ["..", "resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
+        ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
-    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["..", "output", "owasp_cornucopia_edition_component_lang_ver"])
+    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_component_lang_ver"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
     making_template: bool = False
@@ -109,25 +108,22 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
 
     # Get the language data from the correct language file (checks vars.args.language to select the correct file)
     language_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "translation", language)
-    if not language_data:
-        return
 
     # Get the dict of replacement data
     language_dict: Dict[str, str] = get_replacement_dict(language_data, False)
 
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
-    if not meta:
-        return
 
     mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files)
-    if not mapping_dict:
-        return
 
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
 
     template_doc: str = get_template_doc(file_type)
+
+    if not language_data or not mapping_dict or not meta or not template_doc:
+        return
 
     # Name output file with correct edition, component, language & version
     output_file: str = rename_output_file(file_type, meta)
@@ -161,8 +157,8 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
 
 def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
     # Get the output path and temp output path to put the temp xml files
-    output_path = convert_vars.BASE_PATH + "/output"
-    temp_output_path = output_path + "/temp"
+    output_path = convert_vars.BASE_PATH + os.sep + "output"
+    temp_output_path = output_path + os.sep + "temp"
     # Ensure the output folder and temp output folder exist
     ensure_folder_exists(temp_output_path)
     logging.debug(" --- temp_folder for extraction of xml files = " + str(temp_output_path))
@@ -272,7 +268,7 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
 def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
     for (k, v) in replacement_values:
         k2: str = k.replace("'", "’").strip()
-        v2: str = v.replace("'", "’").strip()
+        v2: str = v.strip()
         if el_text == k:
             return v
         elif el_text.strip() == k2:
@@ -332,42 +328,41 @@ def get_template_doc(file_type: str) -> str:
         # Input file was specified
         if os.path.isabs(args_input_file):
             template_doc = args_input_file
+        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file):
+            template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_input_file)
+        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file.replace(".." + os.sep, "")):
+            template_doc = os.path.normpath(
+                convert_vars.BASE_PATH + os.sep + args_input_file.replace(".." + os.sep, "")
+            )
+        elif args_input_file.find("..") == -1 and os.path.isfile(
+            convert_vars.BASE_PATH + os.sep + ".." + os.sep + args_input_file
+        ):
+            template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + ".." + os.sep + args_input_file)
+        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file.replace("scripts" + os.sep, "")):
+            template_doc = os.path.normpath(
+                convert_vars.BASE_PATH + os.sep + args_input_file.replace("scripts" + os.sep, "")
+            )
         else:
-            template_doc = os.path.normpath(convert_vars.SCRIPT_PATH + os.sep + args_input_file)
+            template_doc = args_input_file
+            logging.debug(f" --- Template_doc NOT found. Input File = {args_input_file}")
     else:
         # No input file specified - using defaults
         if convert_vars.making_template:
-            # Creating a new template from an original docx or idml file
             template_doc = os.sep.join(
                 [convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext]
             )
         else:
             template_doc = os.path.normpath(
-                convert_vars.SCRIPT_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext
+                convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext
             )
 
-        template_doc = check_fix_file_extension(template_doc, source_file_ext)
-
     template_doc = template_doc.replace("\\ ", " ")
-    # template_doc = os.path.exists(template_doc)
     if os.path.isfile(template_doc):
+        template_doc = check_fix_file_extension(template_doc, source_file_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
-        return template_doc
     else:
-        logging.debug(f" --- Template_doc NOT found = {template_doc}")
-        template_doc = template_doc.replace(os.sep + "scripts" + os.sep, os.sep)
-    if os.path.isfile(template_doc):
-        logging.debug(f" --- Returning template_doc = {template_doc}")
-        return template_doc
-    else:
-        logging.debug(f" --- Template_doc NOT found = {template_doc}")
-        template_doc = template_doc.replace(".." + os.sep, os.sep)
-
-        logging.debug(f" --- trying Template_doc = {template_doc}")
-        if not os.path.isfile(template_doc):
-            logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
-            template_doc = ""
-    logging.debug(f" --- Returning template_doc = {template_doc}")
+        logging.error(f"Source file not found: {args_input_file}. Please ensure file exists and try again.")
+        template_doc = ""
     return template_doc
 
 
@@ -380,11 +375,11 @@ def rename_output_file(file_type: str, meta: Dict[str, str]) -> str:
         if os.path.isabs(args_output_file):
             output_filename = args_output_file
         else:
-            output_filename = os.path.normpath(convert_vars.SCRIPT_PATH + os.sep + args_output_file)
+            output_filename = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_output_file)
     else:
         # No output file specified - using default
         output_filename = os.path.normpath(
-            convert_vars.SCRIPT_PATH
+            convert_vars.BASE_PATH
             + os.sep
             + convert_vars.DEFAULT_OUTPUT_FILENAME
             + ("_template" if convert_vars.making_template else "")
@@ -408,7 +403,7 @@ def rename_output_file(file_type: str, meta: Dict[str, str]) -> str:
 
 
 def check_fix_file_extension(filename: str, file_type: str) -> str:
-    if not filename.endswith(file_type):
+    if filename and not filename.endswith(file_type):
         filename_split = os.path.splitext(filename)
         if filename_split[1].strip(".").isnumeric():
             filename = filename + "." + file_type.strip(".")
@@ -571,7 +566,6 @@ def group_number_ranges(data: List[str]) -> List[str]:
             list_ranges.append(str(group[0]))
         else:
             list_ranges.append(str(group[0]) + "-" + str(group[-1]))
-    # logging.debug(f" --- combined numbers to return: {list_ranges}")
     return list_ranges
 
 
@@ -590,6 +584,7 @@ def get_suit_tags_and_key(key: str) -> Tuple[List[str], str]:
 
 def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
     data: Dict[str, str] = {}
+    logging.debug(f" --- suit_tag = {suit_tag}, suit[name] = {suit['name']}")
     if convert_vars.making_template:
         data[suit["name"]] = "${{{}}}".format(suit_tag + "_suit")
         if suit_tag == "WC":
@@ -598,7 +593,7 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
         data["${{{}}}".format(suit_tag + "_suit")] = suit["name"]
         if suit_tag == "WC":
             data["${WC_Joker}"] = "Joker"
-    logging.debug(f" --- making_template = {convert_vars.making_template}, suit_tag dict = {data}")
+    logging.debug(f" --- making_template {convert_vars.making_template}. suit_tag dict = {data}")
     return data
 
 
@@ -663,7 +658,7 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
 
 def get_document_paragraphs(doc: docx) -> List[docx.Document]:
     paragraphs = list(doc.paragraphs)
-    l1 = l2 = len(paragraphs)
+    l1 = len(paragraphs)
     for table in doc.tables:
         paragraphs += get_paragraphs_from_table_in_doc(table)
     l2 = len(paragraphs)
@@ -737,7 +732,6 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--outputfiletype",
         type=str,
         choices=convert_vars.FILETYPE_CHOICES,
-        # default="docx",
         help="Type of file to output. Default = docx. If specified, this overwrites the output file extension",
     )
     parser.add_argument(
@@ -770,7 +764,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         action="store_true",
         help="Output additional information to debug script",
     )
-    return parser.parse_args(input_args)
+    args = parser.parse_args(input_args)
+    return args
 
 
 if __name__ == "__main__":
