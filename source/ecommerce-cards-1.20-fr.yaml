@@ -9,11 +9,6 @@ suits:
   name: "Validation des Données & Encodage"
   cards:
   -
-    id: "DVA"
-    value: "A"
-    desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
-    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
-  -
     id: "DV2"
     value: "2"
     desc: "Brian peut recueillir des informations sur les configurations sous-jacentes, les schémas, la logique, le code, le logiciel, les services et l'infrastructure, de par le contenu des messages d'erreur, ou une mauvaise configuration, ou la présence de fichiers d'installation par défaut, ou des ressources de test, de sauvegarde, de copie, ou l'exposition de code source"
@@ -61,14 +56,14 @@ suits:
     id: "DVK"
     value: "K"
     desc: "Gabe peut injecter des données dans un interpréteur côté serveur (ex : SQL, commandes OS, Xpath, Server JavaScript, SMTP), car une interface paramétrée fortement typée n'est pas utilisée ou n'a pas été implémentée correctement"
+  -
+    id: "DVA"
+    value: "A"
+    desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
+    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
 -
   name: "Authentification"
   cards:
-  -
-    id: "ACA"
-    value: "A"
-    desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
-    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur l'Authentification"
   -
     id: "AC2"
     value: "2"
@@ -117,14 +112,14 @@ suits:
     id: "ACK"
     value: "K"
     desc: "Olga peut influencer ou modifier du code/routines d'authentification de telle manière que celle-ci soit contournée"
+  -
+    id: "ACA"
+    value: "A"
+    desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
+    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur l'Authentification"
 -
   name: "Gestion des Sessions"
   cards:
-  -
-    id: "SMA"
-    value: "A"
-    desc: "Vous avez inventé une nouvelle attaque contre la Gestion des Sessions"
-    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Gestion des Sessions, et sur la prévention des Cross Site Request Forgery (CSRF)"
   -
     id: "SM2"
     value: "2"
@@ -173,14 +168,14 @@ suits:
     id: "SMK"
     value: "K"
     desc: "Peter peut contourner les contrôles de gestion de session car ceux-ci ont été développés en interne, au lieu d'utiliser un framework standard ou un module approuvé et testé"
+  -
+    id: "SMA"
+    value: "A"
+    desc: "Vous avez inventé une nouvelle attaque contre la Gestion des Sessions"
+    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Gestion des Sessions, et sur la prévention des Cross Site Request Forgery (CSRF)"
 -
   name: "Habilitation"
   cards:
-  -
-    id: "AZA"
-    value: "A"
-    desc: "Vous avez inventé une nouvelle attaque contre les Habilitations"
-    misc: "Apprenez-en plus à ce sujet dans les guides gratuits OWASP sur le Développement et les Tests"
   -
     id: "AZ2"
     value: "2"
@@ -229,14 +224,14 @@ suits:
     id: "AZK"
     value: "K"
     desc: "Ryan peut influencer ou altérer les contrôles d'habilitations et les permissions, et peut ainsi les contourner"
+  -
+    id: "AZA"
+    value: "A"
+    desc: "Vous avez inventé une nouvelle attaque contre les Habilitations"
+    misc: "Apprenez-en plus à ce sujet dans les guides gratuits OWASP sur le Développement et les Tests"
 -
   name: "Cryptographie"
   cards:
-  -
-    id: "CRA"
-    value: "A"
-    desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
-    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur le Stockage Cryptographique et la Protection de la Couche de Transport"
   -
     id: "CR2"
     value: "2"
@@ -285,14 +280,14 @@ suits:
     id: "CRK"
     value: "K"
     desc: "Dan peut influencer ou altérer le code/les routines de cryptographie (chiffrement, hachage, signatures numériques, nombre aléatoire et génération de GUID) et peut ainsi les contourner"
+  -
+    id: "CRA"
+    value: "A"
+    desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
+    misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur le Stockage Cryptographique et la Protection de la Couche de Transport"
 -
   name: "Cornucopia"
   cards:
-  -
-    id: "COA"
-    value: "A"
-    desc: "Vous avez inventé une nouvelle attaque de n'importe quel type"
-    misc: "Apprenez-en plus à propos de la sécurité applicative dans les guides gratuits OWASP : Exigences, Développement, Revue de Code et Tests, antisèches, et framework Open Software Assurance Maturity Model"
   -
     id: "CO2"
     value: "2"
@@ -341,6 +336,11 @@ suits:
     id: "COK"
     value: "K"
     desc: "Gareth peut utiliser l'application pour refuser le service à certains ou à tous ses utilisateurs"
+  -
+    id: "COA"
+    value: "A"
+    desc: "Vous avez inventé une nouvelle attaque de n'importe quel type"
+    misc: "Apprenez-en plus à propos de la sécurité applicative dans les guides gratuits OWASP : Exigences, Développement, Revue de Code et Tests, antisèches, et framework Open Software Assurance Maturity Model"
 -
   name: "Joker"
   cards:
