@@ -1,9 +1,71 @@
-<h1>Cornucopia Session</h1>
-
-<h2><%= @game.name %></h2>
+<h2>Session: <%= @game.name %></h2>
 
 <%= if @game.started_at do %>
-<h3>Game started at <%= @game.started_at %></h3>
+<h3>You're watching this game that started at <%= @game.started_at %> with <%= Enum.count(@game.players) %> players</h3>
+
+  <%= if @game.finished_at do %>
+  <h3>Thanks for playing! This game finished at <%= @game.finished_at %></h3>
+  <% end %>
+
+  <%= if @requested_round == @game.rounds_played + 1 do %>
+  <h4>Round <strong><%= @game.rounds_played + 1 %></strong> in progress</h4>
+  <% else %>
+  <h4>Viewing round <strong><%= @requested_round %></strong></h4>
+  <% end %>
+
+  <div id="table">
+    <%= for player <- @game.players do %>
+      <% player_card = card_played_in_round(player.dealt_cards, @requested_round) %>
+
+        <div class="card-player">
+          <span class="name">
+            <%= player.name %><br />
+            <%= if player_card != nil do %>
+            <span class="vote voted mine">
+              <img src="/images/vote.png" title="Only players can vote" alt="A thumbs-up image for voting"/>
+              <br />
+              <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
+            </span>
+              <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+              <br /><span class="scored">Scored!</span>
+              <% end %>
+            <% else %>
+            <span class="vote none">
+              &nbsp;
+            </span>
+            <% end %>
+          </span>
+          <div class="drop-zone <%= if player_card == nil do %>empty<% end %>">
+
+            <%= if player_card == nil do %>
+              <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
+            <% else %>
+            <%= render(CopiWeb.CardView, "show.html", card: player_card.card) %>
+            <% end %>
+          </div>
+        </div>
+
+  <% end %>
+  </div>
+
+  <p class="round-nav">
+  <%= if @requested_round > 1 do %>
+    <span class="previous"><a href="?round=<%= @requested_round - 1 %>">&lt;</a></span>
+  <% else %>
+    <span class="previous">&nbsp;</span>
+  <% end %>
+
+  <%= if @requested_round < @game.rounds_played + 1 do %>
+    <%= if @requested_round == @game.rounds_played do %>
+      <span class="next"><a href="?round=current">&gt;</a></span>
+    <% else %>
+      <span class="next"><a href="?round=<%= @requested_round + 1 %>">&gt;</a></span>
+    <% end %>
+  <% else %>
+    <span class="next">&nbsp;</span>
+  <% end %>
+  </p>
+
 <% else %>
 <p><em>Share the link to this page with everyone who wants to join or watch.
 You'll be able to start the game once at least 3 players have joined.
@@ -15,7 +77,7 @@ No more players will be allowed to join once the game is started.</em></p>
 
 <span><%= live_patch gettext("Join game as a player"), to: Routes.player_index_path(@socket, :new, @game.id), class: "button" %></span>
 
-<p><strong>Don't share the full link once you've joined as a player or they'll join as you.</strong></p>
+<p><strong>Don't share your player URL with anyone once you've joined as a player or they'll join as you. You can use it to move your player session to another computer though!</strong></p>
 
 <% end %>
 
@@ -23,18 +85,26 @@ No more players will be allowed to join once the game is started.</em></p>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Joined At</th>
-      <th>Cards</th>
-      <th>Points</th>
+      <th class="numeric">Joined At</th>
+      <th class="numeric">Played Cards</th>
+      <th class="numeric">Cards In Hand</th>
+      <th class="numeric">Score</th>
+      <th class="numeric">Highest Card Bonus</th>
+      <th class="numeric">Total Score</th>
     </tr>
   </thead>
   <tbody id="players">
     <%= for player <- @game.players do %>
+      <% score = player.dealt_cards |> scoring_cards(Enum.count(@game.players)) |> Enum.count %>
+      <% highest_card_bonus = player |> highest_scoring_cards(@game) |> Enum.count %>
       <tr>
         <td><%= player.name %></td>
-        <td><%= player.inserted_at %></td>
-        <td><%= Enum.count(player.dealt_cards) %></td>
-        <td>0</td>
+        <td class="numeric"><%= player.inserted_at %></td>
+        <td class="numeric"><%= player.dealt_cards |> played_cards |> Enum.count %></td>
+        <td class="numeric"><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
+        <td class="numeric"><%= score %></td>
+        <td class="numeric"><%= highest_card_bonus %></td>
+        <td class="numeric"><strong><%= score + highest_card_bonus %></strong>
       </tr>
     <% end %>
   </tbody>

@@ -21,7 +21,7 @@ defmodule CopiWeb.Router do
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
-    live "/games/:id", GameLive.Show, :show
+    live "/games/:game_id", GameLive.Show, :show
 
     live "/games/:game_id/players", PlayerLive.Index, :index
     live "/games/:game_id/players/new", PlayerLive.Index, :new
@@ -29,6 +29,12 @@ defmodule CopiWeb.Router do
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
 
     resources "/cards", CardController
+  end
+
+  scope "/api", CopiWeb do
+    pipe_through :api
+
+    put "/games/:game_id/players/:player_id/card", ApiController, :play_card
   end
 
   # Other scopes may use custom stacks.

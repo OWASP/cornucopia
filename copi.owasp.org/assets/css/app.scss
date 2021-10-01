@@ -89,15 +89,33 @@
   margin: -1rem 0 2rem;
 }
 
+.phx-logo img {
+  height: 80px;
+}
+
+.sd-logo img {
+  height: 80px;
+}
+
+.screenshots td {
+  text-align: center;
+}
+
 .button a {
   color: #fff;
+}
+
+th {
+  font-weight: normal;
+}
+th.numeric, td.numeric {
+  text-align: right;
 }
 
 .card {
   float: left;
   display: flex;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   width: 200px;
   height: 293px;
   border-radius: 10px;
@@ -282,6 +300,87 @@ $wildcard-color: #fccd8f;
   }
 }
 
+@keyframes ants { to { background-position: 100% 100% } }
+
+.card-player {
+  margin: 10px 15px;
+  display: flex;
+
+  .name {
+    margin-right: 5px;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 16px;
+  }
+
+  .vote {
+    font-size: 24px;
+    opacity: 20%;
+
+    &.none {
+      cursor: default;
+    }
+
+    img {
+      cursor: pointer;
+      padding-top: 20px;
+    }
+
+    .badge {
+      font-size: 14px;
+      line-height: 14px;
+      margin-bottom: 20px;
+     }
+  }
+
+  .voted {
+    opacity: 100%;
+  }
+
+  .scored {
+    font-size: 14px;
+    position: relative;
+    top: 20px;
+  }
+
+  .mine {
+    img {
+      cursor: default;
+    }
+  }
+
+  .drop-zone {
+    border: dashed 1px #666;
+    height: 317px;
+    width: 224px;
+
+    &.empty {
+      border: 2px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  repeating-linear-gradient(-45deg, #BBB 0, #BBB 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+      animation: ants 12s linear infinite;
+      width: 248px;
+      color: #BBB;
+    }
+
+    &.mine {
+      background: linear-gradient(white, white) padding-box,
+                  repeating-linear-gradient(-45deg, #666 0, #666 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+      color:#333;
+    }
+
+    .placeholder {
+      text-align: center;
+      margin-top: 60px;
+      padding: 10px;
+    }
+  }
+}
+
+.next-round {
+  text-align: right;
+}
+
 /* Spinner CSS */
 
 .loader {
@@ -348,15 +447,44 @@ $wildcard-color: #fccd8f;
   }
 }
 
+.round-nav {
+  text-align: center;
+
+  span {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
 #table {
-  overflow: scroll;
-  border: 2px solid #999;
-  width: 100%;
-  height: 306px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .card {
+    flex: 0 0 auto;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  
+  margin-bottom: 20px;
 }
 
 #hand {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 
+  .card {
+    flex: 0 0 auto;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
 }
 
 /* Dragula Styles */@at-root.gu-mirror {
@@ -377,7 +505,12 @@ $wildcard-color: #fccd8f;
   user-select: none !important;
 }
 .gu-transit {
+  display: none;
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
+}
+
+.gu-mirror {
+  
 }

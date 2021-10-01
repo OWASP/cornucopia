@@ -18,8 +18,41 @@ import topbar from "topbar"
 import {LiveSocket} from "phoenix_live_view"
 import dragula from "dragula"
 
+let Hooks = {}
+Hooks.DragDrop = {
+  mounted() {
+    dragula([document.querySelector('#hand'), document.querySelector('#table')], {
+      invalid: function (el, handle) {
+        // Don't allow dragging cards off the table
+        return el.className === 'card-player' || document.querySelector('#round-played');
+      }
+  }).on('drop', (element, target, source, sibling) => {
+      if (target.id === 'table') {
+        fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            dealt_card_id: element.dataset.dealtcard
+          })
+        }).then(response => {
+          console.log(response)
+    
+          if (response.ok) {
+            return true;
+          }
+          else {
+            // Need to cancel the drop here
+            return false;
+          }
+        })
+      }
+    });
+  }
+}
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
@@ -34,5 +67,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
-dragula([document.querySelector('#hand'), document.querySelector('#table')]);
