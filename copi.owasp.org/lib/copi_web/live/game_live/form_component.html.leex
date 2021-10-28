@@ -8,5 +8,11 @@
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
 
+  <%= label f, :name, gettext "Choose the type of game you wish to play" %>
+  <%= select f, :edition, ["Cornucopia": "ecommerce", "Elevation of Privilege": "eop"] %>
+  <%= error_tag f, :edition %>
+
+  <br>
+
   <%= submit gettext "Create the game", phx_disable_with: "Starting game..." %>
 </form>
