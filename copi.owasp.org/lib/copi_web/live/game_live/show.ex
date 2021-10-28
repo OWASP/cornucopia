@@ -50,7 +50,7 @@ defmodule CopiWeb.GameLive.Show do
     if game.started_at do
       # Do nothing, game's already started
     else
-      all_cards = Copi.Cornucopia.list_cards_shuffled()
+      all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition)
       players = game.players
 
       all_cards
