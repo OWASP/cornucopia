@@ -8,6 +8,7 @@ defmodule Copi.Cornucopia.Game do
     field :created_at, :utc_datetime, default: DateTime.truncate(DateTime.utc_now(), :second)
     field :finished_at, :utc_datetime
     field :name, :string
+    field :edition, :string
     field :started_at, :utc_datetime
     field :rounds_played, :integer, default: 0
 
@@ -26,7 +27,7 @@ defmodule Copi.Cornucopia.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:name, :started_at, :finished_at, :rounds_played])
+    |> cast(attrs, [:name, :edition, :started_at, :finished_at, :rounds_played])
     |> validate_required([:name], message: "No really, give your game session a name")
   end
 end
