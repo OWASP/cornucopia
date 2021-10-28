@@ -1,6 +1,10 @@
 <script></script>
 
-<h1>Session: <%= @player.game.name %></h1>
+<%= if @player.game.edition == "ecommerce" do %>
+  <h2>Cornucopia Session: <%= @player.game.name %></h2>
+<%= else %>
+  <h2>EoP Session: <%= @player.game.name %></h2>
+<% end %>
 
 <%= if @player.game.finished_at do %>
 

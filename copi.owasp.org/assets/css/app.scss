@@ -300,6 +300,176 @@ $wildcard-color: #fccd8f;
   }
 }
 
+/* EOP Card Styles */
+
+.card.eop {
+
+  .left-value {
+    flex: none;
+    position: relative;
+    top: 30px;
+
+    height: 60px;
+    width: 46px;
+
+    background: grey;
+
+    padding: 22px 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 14px;
+  }
+
+  .main-content {
+    overflow: hidden;
+    flex: auto;
+    padding: 11px 10px;
+
+    .value {
+      position: absolute;
+      bottom: 35px;
+      right: -28px;
+      color: rgb(180, 180, 180);
+      font-size: 168px;
+      font-weight: 400;
+    }
+
+    .category {
+      margin: 32px 0 0 0;
+      font-size: 18px;
+    }
+
+    .description {
+      font-size: 10px;
+      padding-right: 0px;
+      line-height: 1.3em;
+    }
+  }
+
+ 
+  &.spoofing {
+
+    .left-value {
+      background: rgb(117, 35, 26)
+    }
+
+    .value {
+      color: rgb(180, 180, 180);
+    }
+
+    &.J, &.Q, &.K {
+      background: rgb(178, 25, 74);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+  }
+
+  &.tampering {
+    .left-value {
+      background: rgb(2, 113, 55)
+    }
+    
+    .value {
+      color: rgb(185, 217, 165);
+    }
+
+    &.J, &.Q, &.K {
+      background: rgb(116, 187, 99);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+  }
+
+  &.repudiation {
+    .left-value {
+      background: rgb(117, 35, 26)
+    }
+
+    .value {
+      color: rgb(229, 114, 63);
+    }
+
+    &.J, &.Q, &.K {
+      background: rgb(229, 114, 63);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+  }
+
+  &.information-disclosure {
+    .left-value {
+      background: rgb(255, 240, 39)
+    }
+
+    .value {
+      color: rgb(0, 159, 156);
+    }
+
+    &.J, &.Q, &.K {
+      background: rgb(0, 159, 156);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+  }
+
+  &.denial-of-service {
+    .left-value {
+      background: rgb(26, 25, 25)
+    }
+
+    .value {
+      color: rgb(180, 181, 180);
+    }
+
+    &.J, &.Q, &.K {
+      background: rgb(102, 102, 101);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+  }
+
+  &.elevation-of-privilege {
+    .left-value {
+      background: rgb(229, 114, 63)
+    }
+
+    .value {
+      color: rgb(69, 139, 189);
+    }
+
+    &.J, &.Q, &.K {
+      background: rgb(69, 139, 189);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+  }
+
+}
+
 @keyframes ants { to { background-position: 100% 100% } }
 
 .card-player {

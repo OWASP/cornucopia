@@ -1,4 +1,8 @@
 <%= if @card do %>
+
+<%= cond do %>
+    <%= @card.edition == "ecommerce" -> %>
+
 <div class="card <%= @card.value %> <%= Slug.slugify @card.category %>">
   <div class="left-bar"><%= @card.category %></div>
   <div class="main-content">
@@ -57,4 +61,27 @@
     <% end %>
   </div>
 </div>
+
+    <%= @card.edition == "eop" -> %>
+
+<div class="card eop <%= @card.value %> <%= Slug.slugify @card.category %>">
+  <div class="left-value"><%= @card.value %></div>
+  <div class="main-content">
+    <p class="category"><%= @card.category %></p>
+
+    <p class="description"><%= @card.description %></p>
+
+    <%= if @card.value in ["J", "Q", "K"] do %>
+
+    <%= else %>
+       <p class="value"><%= @card.value %></p>
+
+    <% end %>
+
+  </div>
+</div>
+
+<%= end %>
+
+
 <% end %>
