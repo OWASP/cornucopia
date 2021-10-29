@@ -64,7 +64,7 @@
 
     <%= @card.edition == "eop" -> %>
 
-<div class="card eop <%= @card.value %> <%= Slug.slugify @card.category %>">
+<div class="card eop <%= Slug.slugify @card.category %> n<%= @card.value %> ">
   <div class="left-value"><%= @card.value %></div>
   <div class="main-content">
     <p class="category"><%= @card.category %></p>
