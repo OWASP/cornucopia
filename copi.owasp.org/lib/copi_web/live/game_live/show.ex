@@ -99,17 +99,20 @@ defmodule CopiWeb.GameLive.Show do
       |> lead_suit_cards # Filter to just the lead suit cards
       |> scoring_cards(Enum.count(game.players)) # Filter to just the cards that scored
       |> Enum.group_by(fn card -> card.played_in_round end) # Convert to map where {round, [scoring_cards]}
-      |> Enum.map(fn {_, cards} -> highest_scoring_card(cards) end) # Back to a list of just the highest scoring card in each round
+      |> Enum.flat_map(fn {_, cards} -> highest_scoring_cards(cards) end) # Back to a list of just the highest scoring card in each round
       |> Enum.filter(fn dealt_card -> dealt_card.player_id == player.id end) # Filter out just the highest scoring cards for the player provided
 
   end
 
-  def highest_scoring_card(cards) do
+  def highest_scoring_cards(cards) do
     card_order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "Joker"]
 
-    Enum.max_by(cards, fn dealt_card -> Enum.find_index(card_order, fn value -> value == dealt_card.card.value end) end)
+    Enum.group_by(cards, fn dealt_card -> Enum.find_index(card_order, fn value -> value == dealt_card.card.value end) end)
+      |> Enum.max_by(fn {index, _cards} -> index end)
+      |> elem(1)
   end
 
+  @spec card_played_in_round(any, any) :: any
   def card_played_in_round(cards, round) do
     Enum.find(cards, fn card -> card.played_in_round == round end)
   end
