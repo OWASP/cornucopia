@@ -138,4 +138,13 @@ defmodule CopiWeb.PlayerLive.Show do
   def get_vote(dealt_card, player) do
     Enum.find(dealt_card.votes, fn vote -> vote.player_id == player.id end)
   end
+
+  def all_dealt_cards(game) do
+    Enum.reduce(game.players, [], fn player, cards -> player.dealt_cards ++ cards end)
+  end
+  def ordered_cards_played_in_round(game, round) do
+    all_dealt_cards(game)
+      |> Enum.filter(fn card -> card.played_in_round == round end)
+      |> Enum.sort_by(&(&1.updated_at))
+  end
 end

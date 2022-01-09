@@ -15,10 +15,11 @@
 
   <%= if @player.game.started_at do %>
 
-  <h3>Hi <%= @player.name %>! Game started at <%= @game.started_at %> with <%= Enum.count(@game.players) %> players</h3>
+  <h3>Hi <%= @player.name %>, let's play!</h3>
 
   <h4>Round <strong><%= @game.rounds_played + 1 %></strong></h4>
 
+  <% first_card_played = ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>
   <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
 
   <div id="table">
@@ -81,7 +82,7 @@
   </div>
 
   <p class="next-round">
-    <%= if round_closed?(@game) do %>Make sure you've finished voting on cards before moving on!&nbsp;&nbsp;<% end %>
+    <%= if round_closed?(@game) do %>Make sure everyone's finished voting on cards before moving on!&nbsp;&nbsp;<% end %>
     <button <%= if round_open?(@game) do %>disabled<% end %> phx-click="next_round" phx-value-game_id="<%= @game.id %>">
       <%= if last_round?(@game) do %>
       Finish game
@@ -93,10 +94,17 @@
 
   <%= if card_played do %>
     <div id="round-played"></div>
-    <h4>Your hand: you've played a card in this round</h4>
+    <h4>Tip: You've played a card in this round, vote on other peoples' cards and described attacks!</h4>
   <% else %>
-    <h4>Your hand: drag a card onto the table to play a card in this round!</h4>
+    <h4>
+      Tip: Drag a card onto the table to play a card in this round!
+        <%= if first_card_played do %>
+          (you <em>should</em> play a card from the <strong><%= first_card_played.card.category %></strong> suit, if you have one)
+        <% end %>
+    </h4>
   <% end %>
+
+
 
   <div id="hand" phx-hook="DragDrop">
 
