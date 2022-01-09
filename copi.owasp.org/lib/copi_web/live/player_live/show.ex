@@ -73,9 +73,9 @@ defmodule CopiWeb.PlayerLive.Show do
     else
       IO.puts("player hasn't voted")
       case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-        {:ok, vote} ->
+        {:ok, _vote} ->
           IO.puts("voted successfully")
-        {:error, changeset} ->
+        {:error, _changeset} ->
           IO.puts("voting failed")
       end
     end
