@@ -18,6 +18,8 @@ config :copi, CopiWeb.Endpoint,
   pubsub_server: Copi.PubSub,
   live_view: [signing_salt: "41WxPtFA"]
 
+config :copi, env: Mix.env()
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
