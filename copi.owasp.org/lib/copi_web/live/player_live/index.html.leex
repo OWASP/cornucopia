@@ -1,4 +1,17 @@
-<h1>Listing Players</h1>
+<h1>Ah ha, you found it!</h1>
+
+<p>
+  This is a good example of a system being vulnerable to
+  <a href="https://en.wikipedia.org/wiki/Spoofing_attack">spoofing</a>. Copi is built without authentication requiring
+  <a href="https://csrc.nist.gov/glossary/term/memorized_secret">memorised secrets</a>, instead it assigns a
+  <a href="https://en.wikipedia.org/wiki/Shared_secret">shared secret</a> (the player id) when you first join the game.
+  This is secure enough for the purposes of an anonymous team game as our threat model is just stopping other players from sneaking
+  a look at your cards, or playing one for you when you aren't looking.
+</p>
+<p>
+  As long as the shared secret is very hard to guess, this approach is all well and good. Unless you leave an endpoint
+  available that lists everyone's shared secrets! Which is what this is. Oops...
+</p>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, CopiWeb.PlayerLive.FormComponent,
@@ -31,5 +44,3 @@
     <% end %>
   </tbody>
 </table>
-
-<span><%= live_patch "New Player", to: Routes.player_index_path(@socket, :new, @game) %></span>
