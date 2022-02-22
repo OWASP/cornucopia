@@ -51,6 +51,7 @@ defmodule Copi.MixProject do
       {:yaml_elixir, "~> 2.7.0"},
       {:slugify, "~> 1.3.1"},
       {:want, "~> 1.7"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
     ]
   end
 
