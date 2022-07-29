@@ -767,7 +767,7 @@ paragrafen:
     text: "Overweeg om de volgende kaarten van de stapels te verwijderen als je er zeker van bent dat ze worden aangesproken door de manier waarop je de taal/het kader gebruikt."
   -
     value: "T02140"
-    text: "Items tussen haakjes zijn “misschien"."
+    text: "Items tussen haakjes zijn “misschien”."
   -
     value: "T02200"
     text: "Interne codeerstandaarden en bibliotheken"
@@ -1046,7 +1046,7 @@ paragrafen:
     text: "Sectie met bijdragers, paginanummering, veelgestelde vragen en wijzigingslogboek toegevoegd."
   -
     value: "T03240"
-    Tekst 1"
+    text: "1"
   -
     value: "T03250"
     text: "Laat los."

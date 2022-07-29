@@ -19,7 +19,7 @@ from itertools import groupby
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
-    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "pt-br"]
+    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "pt-br"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
