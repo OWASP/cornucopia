@@ -4,18 +4,21 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-coverage = "==5.2.1"
-mypy = "==0.782"
-black = "==21.6b0"
-flake8 = "==3.8.3"
-httpretty = "==1.0.2"
+black = "==22.3.0"
+coverage = "==6.3.1"
+flake8 = "==4.0.1"
+httpretty = "==1.1.4"
+mypy = "==0.931"
+pytest = "==7.0.0"
+pytest-cov = "==3.0.0"
+freezegun = "==1.2.1"
 
 [packages]
 python-docx = "==0.8.11"
-PyYAML = "==5.4.1"
+PyYAML = "==6.0"
 docx2pdf = "*"
-lxml = "==4.5.0"
+lxml = "==4.5.2"
 docx = "*"
 
 [requires]
-python_version = "3"
+python_version = "3.9.10"
