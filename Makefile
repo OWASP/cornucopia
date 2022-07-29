@@ -32,10 +32,6 @@ shfmt shellcheck pipenv:
 	@docker build \
 		--tag $@ \
 		--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
-		--build-arg "user_id=$(shell id -u)" \
-		--build-arg "group_id=$(shell id -g)" \
-		--build-arg "docker_group_id=$(DOCKER_GROUP_ID)" \
-		--build-arg "home=${HOME}" \
 		--build-arg "workdir=${PWD}" \
 		--target $@ . \
 		>/dev/null
@@ -53,7 +49,7 @@ fmt-check: shfmt pipenv
 .PHONY: static-check
 static-check: shellcheck pipenv
 	@$(DOCKER) pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
-	@$(DOCKER) pipenv run mypy --namespace-packages --strict ./**/*.py
+	@$(DOCKER) pipenv run mypy --namespace-packages --strict ./scripts/
 	@$(DOCKER) shellcheck $(shell git ls-files '*.sh')
 
 .PHONY: coverage-check
@@ -62,10 +58,6 @@ coverage-check: python-coverage-only
 .PHONY: test
 test: python-unit-test python-integration-test
 	@$(MAKE) -C docker smoke-test
-
-.PHONY: release
-release:
-	@./scripts/release.sh
 
 .PHONY: python-test
 python-test: pipenv
