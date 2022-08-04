@@ -34,8 +34,9 @@ jobs:
       - name: Install dependencies
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: install -d --install-types # Install all dependencies, including development ones
-
+          command: |
+            install -d
+            install types-PyYAML
       # Run the tests
       - name: Run unit tests
         uses: VaultVulp/action-pipenv@v2.0.1
