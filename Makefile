@@ -47,10 +47,9 @@ fmt-check: shfmt pipenv
 	@$(DOCKER) pipenv run black --line-length=120 --check .
 
 .PHONY: static-check
-static-check: shellcheck pipenv
+static-check: pipenv
 	@$(DOCKER) pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
 	@$(DOCKER) pipenv run mypy --namespace-packages --strict ./scripts/
-	@$(DOCKER) shellcheck $(shell git ls-files '*.sh')
 
 .PHONY: coverage-check
 coverage-check: python-coverage-only
