@@ -35,6 +35,8 @@ jobs:
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: install -d # Install all dependencies, including development ones
+       with:
+          command: install types-PyYAM # Install PyYAM types
 
       # Run the tests
       - name: Run unit tests
