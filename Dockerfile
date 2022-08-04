@@ -10,11 +10,8 @@ ENV PYTHONFAULTHANDLER 1
 COPY Pipfile Pipfile.lock ./
 RUN apt-get update && apt-get install -y --no-install-recommends gcc
 RUN python -m pip install --upgrade pip
-RUN pip install pipenv && pip install types-PyYAML && pipenv install --dev --system --deploy
+RUN pip install pipenv && pipenv install --dev --system --deploy
 ENTRYPOINT [ "/usr/local/bin/pipenv" ]
 
 FROM mvdan/shfmt AS shfmt
 ENTRYPOINT [ "/bin/shfmt" ]
-
-FROM koalaman/shellcheck AS shellcheck
-ENTRYPOINT [ "/bin/shellcheck" ]
