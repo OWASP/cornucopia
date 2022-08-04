@@ -31,11 +31,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       # Set the pip environment up
-      - name: Install dependecies
+      - name: Install dependencies
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: install -d # Install all dependencies, including development ones
-       with:
+      - name: Install types
+        uses: VaultVulp/action-pipenv@v2.0.1
+        with:
           command: install types-PyYAM # Install PyYAM types
 
       # Run the tests
