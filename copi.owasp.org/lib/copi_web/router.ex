@@ -28,7 +28,7 @@ defmodule CopiWeb.Router do
 
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
 
-    resources "/cards", CardController
+    resources "/cards", CardController, only: [:index, :show]
   end
 
   scope "/api", CopiWeb do
