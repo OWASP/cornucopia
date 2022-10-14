@@ -2,7 +2,6 @@ defmodule CopiWeb.CardController do
   use CopiWeb, :controller
 
   alias Copi.Cornucopia
-  alias Copi.Cornucopia.Card
 
   def index(conn, _params) do
     cards = Cornucopia.list_cards()
@@ -13,5 +12,4 @@ defmodule CopiWeb.CardController do
     card = Cornucopia.get_card!(id)
     render(conn, "show.html", card: card)
   end
-
 end

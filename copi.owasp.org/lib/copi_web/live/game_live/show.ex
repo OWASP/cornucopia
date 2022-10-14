@@ -90,7 +90,7 @@ defmodule CopiWeb.GameLive.Show do
   def lead_suit_cards(cards) do
     Enum.group_by(cards, fn card -> card.played_in_round end) # Convert to map where {round, [played_cards]}
       |> Map.new(fn {round, played_cards} -> {round, Enum.sort_by(played_cards, &(&1.updated_at))} end) # Sort played cards in rounds by when played
-      |> Enum.flat_map(fn {_round, ordered_played_cards} -> Enum.filter(ordered_played_cards, fn card -> card.card.category == List.first(ordered_played_cards).card.category or card.card.value == "Joker" end) end) # Back to a list of just the lead suit cards in each round
+      |> Enum.flat_map(fn {_round, ordered_played_cards} -> Enum.filter(ordered_played_cards, fn card -> card.card.category == List.first(ordered_played_cards).card.category or card.card.value in ["JokerA", "JokerB"] end) end) # Back to a list of just the lead suit cards in each round
   end
 
   def highest_scoring_cards(player, game) do
@@ -105,7 +105,7 @@ defmodule CopiWeb.GameLive.Show do
   end
 
   def highest_scoring_cards(cards) do
-    card_order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "Joker"]
+    card_order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "JokerB", "JokerA"]
 
     Enum.group_by(cards, fn dealt_card -> Enum.find_index(card_order, fn value -> value == dealt_card.card.value end) end)
       |> Enum.max_by(fn {index, _cards} -> index end)

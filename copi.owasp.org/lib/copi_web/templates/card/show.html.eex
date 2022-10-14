@@ -9,7 +9,7 @@
     <p class="value"><%= @card.value %></p>
     <p class="description"><%= @card.description %></p>
 
-    <%= if @card.value in ["A", "Joker"] do %>
+    <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
 
     <p class="misc"><%= @card.misc %></p>
 

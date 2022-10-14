@@ -7,6 +7,7 @@ defmodule Copi.Cornucopia.Card do
     field :category, :string
     field :description, :string
     field :edition, :string
+    field :external_id, :string
     field :language, :string
     field :misc, :string
     field :owasp_appsensor, {:array, :string}
@@ -22,7 +23,7 @@ defmodule Copi.Cornucopia.Card do
   @doc false
   def changeset(card, attrs) do
     card
-    |> cast(attrs, [:category, :value, :description, :misc, :edition, :language, :version, :owasp_scp, :owasp_asvs, :owasp_appsensor, :capec, :safecode])
-    |> validate_required([:category, :value, :description, :misc, :edition, :language, :version, :owasp_scp, :owasp_asvs, :owasp_appsensor, :capec, :safecode])
+    |> cast(attrs, [:category, :value, :description, :misc, :edition, :external_id, :language, :version, :owasp_scp, :owasp_asvs, :owasp_appsensor, :capec, :safecode])
+    |> validate_required([:category, :value, :description, :misc, :edition, :external_id, :language, :version, :owasp_scp, :owasp_asvs, :owasp_appsensor, :capec, :safecode])
   end
 end
