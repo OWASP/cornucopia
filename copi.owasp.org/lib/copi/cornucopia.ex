@@ -236,6 +236,22 @@ defmodule Copi.Cornucopia do
   def get_card!(id), do: Repo.get!(Card, id)
 
   @doc """
+  Gets a single card from its external id.
+
+  Raises `Ecto.NoResultsError` if the Card does not exist.
+
+  ## Examples
+
+      iex> get_card_by_external_id!(DV2)
+      %Card{}
+
+      iex>get_card_by_external_id!(XXX)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_card_by_external_id!(external_id), do: Repo.get_by!(Card, external_id: external_id)
+
+  @doc """
   Creates a card.
 
   ## Examples

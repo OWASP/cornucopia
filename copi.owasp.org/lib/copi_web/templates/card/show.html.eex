@@ -6,7 +6,7 @@
 <div class="card <%= @card.value %> <%= Slug.slugify @card.category %>">
   <div class="left-bar"><%= @card.category %></div>
   <div class="main-content">
-    <p class="value"><%= @card.value %></p>
+    <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
     <p class="description"><%= @card.description %></p>
 
     <%= if @card.value in ["A", "JokerA", "JokerB"] do %>

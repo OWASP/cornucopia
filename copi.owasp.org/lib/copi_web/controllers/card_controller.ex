@@ -9,7 +9,7 @@ defmodule CopiWeb.CardController do
   end
 
   def show(conn, %{"id" => id}) do
-    card = Cornucopia.get_card!(id)
+    card = Cornucopia.get_card_by_external_id!(id)
     render(conn, "show.html", card: card)
   end
 end
