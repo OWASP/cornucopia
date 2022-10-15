@@ -32,7 +32,7 @@
   </thead>
   <tbody id="players">
     <%= for player <- @players do %>
-      <tr id="player-<%= player.id %>">
+      <tr id={@player.id}>
         <td><%= player.name %></td>
 
         <td>

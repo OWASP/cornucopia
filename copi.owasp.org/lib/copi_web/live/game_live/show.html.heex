@@ -39,7 +39,7 @@
             </span>
             <% end %>
           </span>
-          <div class="drop-zone <%= if player_card == nil do %>empty<% end %>">
+          <div class={["drop-zone"] ++ [(if player_card == nil, do: "empty")]}>
 
             <%= if player_card == nil do %>
               <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
@@ -54,7 +54,7 @@
 
   <p class="round-nav">
   <%= if @requested_round > 1 do %>
-    <span class="previous"><a href="?round=<%= @requested_round - 1 %>">&lt;</a></span>
+    <span class="previous"><a href={"?round=#{@requested_round - 1}"}>&lt;</a></span>
   <% else %>
     <span class="previous">&nbsp;</span>
   <% end %>
@@ -63,7 +63,7 @@
     <%= if @requested_round == @game.rounds_played do %>
       <span class="next"><a href="?round=current">&gt;</a></span>
     <% else %>
-      <span class="next"><a href="?round=<%= @requested_round + 1 %>">&gt;</a></span>
+      <span class="next"><a href={"?round=#{@requested_round + 1}"}>&gt;</a></span>
     <% end %>
   <% else %>
     <span class="next">&nbsp;</span>
@@ -75,7 +75,7 @@
 You'll be able to start the game once at least 3 players have joined.
 No more players will be allowed to join once the game is started.</em></p>
 
-<button phx-click="start_game" <%= if Enum.count(@game.players) < 3 do %>disabled<% end %>>Start Game</button>
+<button phx-click="start_game" disabled={Enum.count(@game.players) < 3}>Start Game</button>
 <p></p>
 <h3>Waiting for players</h3>
 
@@ -108,7 +108,7 @@ No more players will be allowed to join once the game is started.</em></p>
         <td class="numeric"><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
         <td class="numeric"><%= score %></td>
         <td class="numeric"><%= highest_card_bonus %></td>
-        <td class="numeric"><strong><%= score + highest_card_bonus %></strong>
+        <td class="numeric"><strong><%= score + highest_card_bonus %></strong></td>
       </tr>
     <% end %>
   </tbody>
