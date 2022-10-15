@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Copi", suffix: " · Play Cornucopia Online" %>
-    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/css/app.css")}/>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/js/app.js")}></script>
 
     <%= if Application.get_env(:copi, :env) == :prod do %>
       <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -26,7 +26,7 @@
       <section class="container">
         <nav role="navigation">
           <a href="https://securedelivery.io/" class="sd-logo">
-            <img src="<%= Routes.static_path(@conn, "/images/sd-logo-line.png") %>" alt="Secure Delivery Logo"/>
+            <img src={Routes.static_path(@conn, "/images/sd-logo-line.png")} alt="Secure Delivery Logo"/>
           </a>
           <!--
           <ul>
@@ -38,7 +38,7 @@
           -->
         </nav>
         <a href="/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/copi-logo.png") %>" alt="Copi Logo"/>
+          <img src={Routes.static_path(@conn, "/images/copi-logo.png")} alt="Copi Logo"/>
         </a>
       </section>
     </header>

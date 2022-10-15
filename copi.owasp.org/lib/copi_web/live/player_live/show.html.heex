@@ -10,7 +10,7 @@
 
   <h2>Thanks for playing, <%= @player.name %>! This game finished at <%= @player.game.finished_at %></h2>
 
-  <span class="button"><a href="../">Go to game summary</span>
+  <span class="button"><a href="../">Go to game summary</a></span>
 <% else %>
 
   <%= if @player.game.started_at do %>
@@ -47,8 +47,8 @@
             <% else %>
               <%= player.name %><br />
               <%= if player_card != nil do %>
-              <span class="vote <%= if get_vote(player_card, @player) do %>voted<% end %>">
-                <img phx-click="toggle_vote" phx-value-dealt_card_id="<%= player_card.id %>" src="/images/vote.png" title="Vote for this card if it's a valid attack" alt="A thumbs-up image for voting"/>
+              <span class={["vote"] ++ [(if get_vote(player_card, @player), do: "voted")]}>
+                <img phx-click="toggle_vote" phx-value-dealt_card_id={player_card.id} src="/images/vote.png" title="Vote for this card if it's a valid attack" alt="A thumbs-up image for voting"/>
                 <br />
                 <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
               </span>
@@ -64,7 +64,7 @@
             <% end %>
           </p>
 
-          <div class="drop-zone <%= if player.id == @player.id do %>mine<% end %> <%= if player_card == nil do %>empty<% end %>">
+          <div class={["drop-zone"] ++ [(if player.id == @player.id, do: "mine")] ++ [(if player_card == nil, do: "empty")]}>
 
             <%= if player_card == nil do %>
               <%= if player.id == @player.id do %>
@@ -83,7 +83,7 @@
 
   <p class="next-round">
     <%= if round_closed?(@game) do %>Make sure everyone's finished voting on cards before moving on!&nbsp;&nbsp;<% end %>
-    <button <%= if round_open?(@game) do %>disabled<% end %> phx-click="next_round" phx-value-game_id="<%= @game.id %>">
+    <button disabled={round_open?(@game)} phx-click="next_round" phx-value-game_id={@game.id}>
       <%= if last_round?(@game) do %>
       Finish game
       <% else %>
@@ -109,7 +109,7 @@
   <div id="hand" phx-hook="DragDrop">
 
     <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
-      <div data-game="<%= @player.game.id %>" data-player="<%= @player.id %>" data-dealtcard="<%= dealt_card.id %>">
+      <div data-game={@player.game.id} data-player={@player.id} data-dealtcard={dealt_card.id}>
         <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
       </div>
 

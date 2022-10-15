@@ -3,7 +3,7 @@
 <%= cond do %>
     <% @card.edition == "ecommerce" -> %>
 
-<div class="card <%= @card.value %> <%= Slug.slugify @card.category %>">
+<div class={["card", @card.value, Slug.slugify @card.category]}>
   <div class="left-bar"><%= @card.category %></div>
   <div class="main-content">
     <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
@@ -64,7 +64,7 @@
 
     <% @card.edition == "eop" -> %>
 
-<div class="card eop <%= Slug.slugify @card.category %> n<%= @card.value %> ">
+<div class={["card", "eop", Slug.slugify(@card.category), "n" <> @card.value]}>
   <div class="left-value"><%= @card.value %></div>
   <div class="main-content">
     <p class="category"><%= @card.category %></p>
@@ -73,7 +73,7 @@
 
     <%= if @card.value in ["J", "Q", "K"] do %>
 
-    <%= else %>
+    <% else %>
        <p class="value"><%= @card.value %></p>
 
     <% end %>
