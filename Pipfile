@@ -22,4 +22,4 @@ lxml = "==4.5.2"
 docx = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
