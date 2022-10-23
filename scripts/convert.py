@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-import os
-import re
-import sys
 import argparse
-import logging
-import yaml
-import fnmatch
-import shutil
-import zipfile
 import docx2pdf  # type: ignore
 import docx  # type: ignore
+import fnmatch
+import logging
+import os
+import re
+import shutil
+import sys
+import yaml
+import zipfile
 import xml.etree.ElementTree as ElTree
 from typing import List, Dict, Tuple, Any
 from operator import itemgetter
@@ -153,6 +153,13 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
         save_idml_file(template_doc, language_dict, output_file)
 
     logging.info("New file saved: " + str(output_file))
+
+
+def generate_qr_code(card_id: str, card_url: str = "https://copi.securedelivery.io/cards/") -> None:
+    i = qrcode.make('{}{}'.format(card_url, card_id), image_factory=qrcode.image.svg.SvgImage)
+    with open('qr.svg', 'wb') as qr:
+        ...
+        i.save(qr)
 
 
 def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
