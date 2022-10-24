@@ -39,16 +39,16 @@ jobs:
       - name: Run unit tests
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run python -m unittest discover -s "test/scripts" -p "*_utest.py"
+          command: run python -m unittest discover -s "tests/scripts" -p "*_utest.py"
       - name: Run integration
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run python -m unittest discover -s "test/scripts" -p "*_itest.py"
+          command: run python -m unittest discover -s "tests/scripts" -p "*_itest.py"
 
       - name: Check test coverage - run tests
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run coverage run -m unittest discover -s "test/scripts" -p "*_*test.py"
+          command: run coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"
       - name: Check test coverage - generate xml
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
