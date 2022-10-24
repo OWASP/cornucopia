@@ -1415,5 +1415,5 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         self.assertGreater(len(paragraphs), want_min_len_paragraphs)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
