@@ -29,7 +29,7 @@ jobs:
     steps:
       # Make sure we have some code to test
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       # Set the pip environment up
       - name: Install dependencies
         uses: VaultVulp/action-pipenv@v2.0.1
@@ -84,7 +84,7 @@ jobs:
     steps:
       # Make sure we have some code to diff.
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       # Set the environment up
       - name: Install dependecies
         uses: VaultVulp/action-pipenv@v2.0.1
