@@ -67,7 +67,7 @@ python-test: pipenv
 		--module unittest \
 			discover \
 			--verbose \
-			--start-directory "test/scripts" \
+			--start-directory "tests/scripts" \
 			--pattern $(PYTHON_TEST_FILE)$(PYTHON_TEST_PATTERN)
 
 .PHONY: python-unit-test
