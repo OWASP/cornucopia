@@ -11,7 +11,7 @@ COPY Pipfile Pipfile.lock ./
 RUN apt-get update && apt-get install -y --no-install-recommends gcc
 RUN python -m pip install --upgrade pip
 RUN pip install pipenv && pipenv install --dev --system --deploy
-ENTRYPOINT [ "/usr/local/bin/pipenv" ]
+ENTRYPOINT [ "/bin/sh" ]
 
 FROM mvdan/shfmt AS shfmt
 ENTRYPOINT [ "/bin/shfmt" ]
