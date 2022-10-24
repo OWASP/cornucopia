@@ -156,8 +156,8 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
 
 
 def generate_qr_code(card_id: str, card_url: str = "https://copi.securedelivery.io/cards/") -> None:
-    i = qrcode.make('{}{}'.format(card_url, card_id), image_factory=qrcode.image.svg.SvgImage)
-    with open('qr.svg', 'wb') as qr:
+    i = qrcode.make("{}{}".format(card_url, card_id), image_factory=qrcode.image.svg.SvgImage)
+    with open("qr.svg", "wb") as qr:
         ...
         i.save(qr)
 
