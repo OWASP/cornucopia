@@ -408,7 +408,7 @@ class TestGetMetaData(unittest.TestCase):
 
 class TestGetReplacementData(unittest.TestCase):
     def setUp(self) -> None:
-        test_source_yaml = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source", "*.yaml"])
+        test_source_yaml = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"])
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
         self.test_data: Dict[str, Any] = {
@@ -603,7 +603,7 @@ class TestSetMakingTemplate(unittest.TestCase):
 class TestGetFilesFromOfType(unittest.TestCase):
     def test_get_files_from_of_type_source_yaml_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source"])
+        path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source"])
         ext = "yaml"
         want_files = list(
             path + os.sep + f
@@ -616,7 +616,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "resources", "templates"])
+        path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"])
         ext = "docx"
         want_files = [path + os.sep + "owasp_cornucopia_edition_lang_ver_template.docx"]
 
@@ -627,7 +627,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_empty_list(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "source"])
+        path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source"])
         ext = "ext"
         want_files: typing.List[str] = []
         want_logging_error_message = [
@@ -645,7 +645,7 @@ class TestGetDocxDocument(unittest.TestCase):
         file = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
-                "test",
+                "tests",
                 "test_files",
                 "resources",
                 "templates",
@@ -663,7 +663,7 @@ class TestGetDocxDocument(unittest.TestCase):
 
     def test_get_docx_document_failure(self) -> None:
         file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.d"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_edition_lang_ver_template.d"]
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 0
@@ -830,9 +830,9 @@ class TestConvertDocxToPdf(unittest.TestCase):
 
     def test_convert_docx_to_pdf_true(self) -> None:
         input_docx_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "test", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
         )
-        want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files", "test.pdf"])
+        want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
         if os.path.isfile(want_pdf_filename):
             os.remove(want_pdf_filename)
 
@@ -851,7 +851,7 @@ class TestGetMappingDict(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
         c.convert_vars.making_template = False
-        self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "test", "test_files"])
+        self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files"])
 
     def tearDown(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
@@ -906,7 +906,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
             debug=False,
         )
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
         c.convert_vars.can_convert_to_pdf = False
         c.convert_vars.making_template = False
         logging.getLogger().setLevel(logging.INFO)
@@ -989,7 +989,7 @@ class TestSaveIdmlFile(unittest.TestCase):
             debug=False,
         )
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
         c.convert_vars.can_convert_to_pdf = False
         c.convert_vars.making_template = False
         logging.getLogger().setLevel(logging.INFO)
@@ -1032,7 +1032,7 @@ class TestSaveDocxFile(unittest.TestCase):
         )
         self.want_file = ""
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
         c.convert_vars.can_convert_to_pdf = False
         c.convert_vars.making_template = False
         logging.getLogger().setLevel(logging.INFO)
@@ -1068,7 +1068,7 @@ class TestReplaceTextInXmlFile(unittest.TestCase):
             "${WC_WCA_desc}": "Alice can utilize the application to attack users' systems and data",
         }
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
         self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
@@ -1255,7 +1255,7 @@ class TestGetFullTag(unittest.TestCase):
 class TestZipDir(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
         self.input_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "test.zip"])
 
     def tearDown(self) -> None:
@@ -1278,7 +1278,7 @@ class TestZipDir(unittest.TestCase):
 class TestEnsureFolderExists(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
 
     def tearDown(self) -> None:
         temp_path = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp"])
@@ -1304,7 +1304,7 @@ class TestEnsureFolderExists(unittest.TestCase):
 class TestReplaceDocxInlineText(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
@@ -1363,7 +1363,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
 class TestGetDocumentParagraphs(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
@@ -1398,7 +1398,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
 class TestGetParagraphsFromTableInDoc(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "test", "test_files"])
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
@@ -1413,3 +1413,7 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         for table in doc_tables:
             paragraphs += c.get_paragraphs_from_table_in_doc(table)
         self.assertGreater(len(paragraphs), want_min_len_paragraphs)
+
+
+if __name__ == '__main__':
+    unittest.main()
