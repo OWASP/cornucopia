@@ -155,13 +155,6 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     logging.info("New file saved: " + str(output_file))
 
 
-def generate_qr_code(card_id: str, card_url: str = "https://copi.securedelivery.io/cards/") -> None:
-    i = qrcode.make("{}{}".format(card_url, card_id), image_factory=qrcode.image.svg.SvgImage)
-    with open("qr.svg", "wb") as qr:
-        ...
-        i.save(qr)
-
-
 def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
     # Get the output path and temp output path to put the temp xml files
     output_path = convert_vars.BASE_PATH + os.sep + "output"
