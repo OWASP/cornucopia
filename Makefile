@@ -32,6 +32,10 @@ shfmt shellcheck pipenv:
 	@docker build \
 		--tag $@ \
 		--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
+		--build-arg "user_id=$(shell id -u)" \
+		--build-arg "group_id=$(shell id -g)" \
+		--build-arg "docker_group_id=$(shell getent group docker | cut -d: -f3)" \
+		--build-arg "home=${HOME}" \
 		--build-arg "workdir=${PWD}" \
 		--target $@ . \
 		>/dev/null
@@ -48,7 +52,7 @@ fmt-check: shfmt pipenv
 
 .PHONY: static-check
 static-check: pipenv
-	@$(DOCKER) pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+	@$(DOCKER) pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503 --exclude ./.venv/
 	@$(DOCKER) pipenv run mypy --namespace-packages --strict ./scripts/
 
 .PHONY: coverage-check
