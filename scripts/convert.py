@@ -29,75 +29,55 @@ class ConvertVars:
     making_template: bool = False
 
 
-def main() -> None:
-    convert_vars.args = parse_arguments(sys.argv[1:])
-    set_logging()
-    logging.debug(" --- args = " + str(convert_vars.args))
-
-    set_can_convert_to_pdf()
-    if (
-        convert_vars.args.outputfiletype == "pdf"
-        and not convert_vars.can_convert_to_pdf
-        and not convert_vars.args.debug
-    ):
-        logging.error(
-            "Cannot convert to pdf on this system. "
-            "Pdf conversion is available on Windows and Mac, if MS Word is installed"
-        )
-        return
-
-    set_making_template()
-
-    # Create output files
-    for file_type in get_valid_file_types():
-        for language in get_valid_language_choices():
-            convert_type_language(file_type, language)
-
-
-def get_valid_file_types() -> List[str]:
-    if not convert_vars.args.outputfiletype:
-        file_type = os.path.splitext(os.path.basename(convert_vars.args.outputfile))[1].strip(".")
-        if file_type in ("", None):
-            file_type = "docx"
-        return [file_type]
-    if convert_vars.args.outputfiletype.lower() == "pdf":
-        if convert_vars.can_convert_to_pdf:
-            return ["pdf"]
+def check_fix_file_extension(filename: str, file_type: str) -> str:
+    if filename and not filename.endswith(file_type):
+        filename_split = os.path.splitext(filename)
+        if filename_split[1].strip(".").isnumeric():
+            filename = filename + "." + file_type.strip(".")
         else:
-            logging.error("PDF output selected but currently unable to output PDF on this OS.")
-            return []
-    if convert_vars.args.outputfiletype.lower() == "all":
-        file_types = []
-        for file_type in convert_vars.FILETYPE_CHOICES:
-            if file_type != "all" and (file_type != "pdf" or convert_vars.can_convert_to_pdf):
-                file_types.append(file_type)
-        return file_types
-    if convert_vars.args.outputfiletype.lower() in convert_vars.FILETYPE_CHOICES:
-        return [convert_vars.args.outputfiletype.lower()]
-    return []
+            filename = ".".join([os.path.splitext(filename)[0], file_type.strip(".")])
+        logging.debug(f" --- output_filename with new ext = {filename}")
+    return filename
 
 
-def get_valid_language_choices() -> List[str]:
-    languages = []
-    if convert_vars.args.language.lower() == "all":
-        for language in convert_vars.LANGUAGE_CHOICES:
-            if language not in ("all", "template"):
-                languages.append(language)
-    elif convert_vars.args.language == "":
-        languages.append("en")
+def check_make_list_into_text(var: List[str], group_numbers: bool = True) -> str:
+    if isinstance(var, list):
+        if group_numbers:
+            var = group_number_ranges(var)
+        text_output = ", ".join(str(s) for s in list(var))
+        if len(text_output.strip()) == 0:
+            text_output = " - "
+        return text_output
     else:
-        languages.append(convert_vars.args.language)
-    return languages
+        return str(var)
 
 
-def set_logging() -> None:
-    logging.basicConfig(
-        format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s",
-    )
-    if convert_vars.args.debug:
-        logging.getLogger().setLevel(logging.DEBUG)
+def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
+    logging.debug(f" --- docx_file = {docx_filename}\n--- starting pdf conversion now.")
+    fail: bool = False
+    msg: str = ""
+    if convert_vars.can_convert_to_pdf:
+        # Use docx2pdf for windows and mac with MS Word installed
+        try:
+            docx2pdf.convert(docx_filename, output_pdf_filename)
+        except Exception as e:
+            msg = f"\nConvert error: {e}"
+            fail = True
     else:
-        logging.getLogger().setLevel(logging.INFO)
+        fail = True
+    if fail:
+        msg = (
+            "Error. A temporary docx file was created in the output folder but cannot be converted "
+            f"to pdf (yet) on operating system: {sys.platform}\n"
+            "This does work on Windows and Mac with MS Word installed."
+        ) + msg
+        logging.warning(msg)
+        return docx_filename
+
+    # If not debugging then delete the temp file
+    if not convert_vars.args.debug:
+        os.remove(docx_filename)
+    return output_pdf_filename
 
 
 def convert_type_language(file_type: str, language: str = "en") -> None:
@@ -155,262 +135,128 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     logging.info("New file saved: " + str(output_file))
 
 
-def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
-    # Get the output path and temp output path to put the temp xml files
-    output_path = convert_vars.BASE_PATH + os.sep + "output"
-    temp_output_path = output_path + os.sep + "temp"
-    # Ensure the output folder and temp output folder exist
-    ensure_folder_exists(temp_output_path)
-    logging.debug(" --- temp_folder for extraction of xml files = " + str(temp_output_path))
-
-    # Unzip source xml files and place in temp output folder
-    with zipfile.ZipFile(template_doc) as idml_archive:
-        idml_archive.extractall(temp_output_path)
-        logging.debug(" --- namelist of first few files in archive = " + str(idml_archive.namelist()[:5]))
-
-    xml_files = get_files_from_of_type(temp_output_path, "xml")
-    # Only Stories files have content to update
-    for file in fnmatch.filter(xml_files, "*Stories*Story*"):
-        if os.path.getsize(file) == 0:
-            continue
-        replace_text_in_xml_file(file, language_dict)
-
-    # Zip the files as an idml file in output folder
-    logging.debug(" --- finished replacing text in xml files. Now zipping into idml file")
-    zip_dir(temp_output_path, output_file)
-
-    # If not debugging, delete temp folder and files
-    if not convert_vars.args.debug and os.path.exists(temp_output_path):
-        shutil.rmtree(temp_output_path, ignore_errors=True)
+def ensure_folder_exists(folder_path: str) -> None:
+    """Check if folder exists and if not, create folders recursively."""
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
 
 
-def save_docx_file(doc: docx.Document, output_file: str) -> None:
-    ensure_folder_exists(os.path.dirname(output_file))
-    doc.save(output_file)
+def main() -> None:
+    convert_vars.args = parse_arguments(sys.argv[1:])
+    set_logging()
+    logging.debug(" --- args = " + str(convert_vars.args))
 
-
-def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
-    logging.debug(f" --- docx_file = {docx_filename}\n--- starting pdf conversion now.")
-    fail: bool = False
-    msg: str = ""
-    if convert_vars.can_convert_to_pdf:
-        # Use docx2pdf for windows and mac with MS Word installed
-        try:
-            docx2pdf.convert(docx_filename, output_pdf_filename)
-        except Exception as e:
-            msg = f"\nConvert error: {e}"
-            fail = True
-    else:
-        fail = True
-    if fail:
-        msg = (
-            "Error. A temporary docx file was created in the output folder but cannot be converted "
-            f"to pdf (yet) on operating system: {sys.platform}\n"
-            "This does work on Windows and Mac with MS Word installed."
-        ) + msg
-        logging.warning(msg)
-        return docx_filename
-
-    # If not debugging then delete the temp file
-    if not convert_vars.args.debug:
-        os.remove(docx_filename)
-    return output_pdf_filename
-
-
-def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
-    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings")
-    if not mapping_data:
-        return {}
-    return get_replacement_dict(mapping_data, True)
-
-
-def set_can_convert_to_pdf() -> bool:
-    operating_system: str = sys.platform.lower()
-    can_convert = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
-    convert_vars.can_convert_to_pdf = can_convert
-    logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {convert_vars.can_convert_to_pdf}")
-    return can_convert
-
-
-def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
-    new_list = list((k, v) for k, v in replacement_dict.items())
-    return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
-
-
-def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) -> None:
-    if convert_vars.making_template:
-        replacement_values = sort_keys_longest_to_shortest(replacement_dict)
-    else:
-        replacement_values = list(replacement_dict.items())
-
-    try:
-        tree = ElTree.parse(filename)
-    except ElTree.ParseError as e:
-        logging.error(f" --- parsing xml file: {filename}. error = {e}")
+    set_can_convert_to_pdf()
+    if (
+        convert_vars.args.outputfiletype == "pdf"
+        and not convert_vars.can_convert_to_pdf
+        and not convert_vars.args.debug
+    ):
+        logging.error(
+            "Cannot convert to pdf on this system. "
+            "Pdf conversion is available on Windows and Mac, if MS Word is installed"
+        )
         return
 
-    all_content_elements = tree.findall(".//Content")
+    set_making_template()
 
-    found_element = False
-    for el in [el for el in all_content_elements]:
-        if el.text == "" or el.text is None:
-            continue
-        el_text = get_replacement_value_from_dict(el.text, replacement_values)
-        if el_text:
-            el.text = el_text
-            found_element = True
-
-    if found_element:
-        with open(filename, "bw") as f:
-            f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
+    # Create output files
+    for file_type in get_valid_file_types():
+        for language in get_valid_language_choices():
+            convert_type_language(file_type, language)
 
 
-def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
-    for (k, v) in replacement_values:
-        k2: str = k.replace("'", "’").strip()
-        v2: str = v.strip()
-        if el_text == k:
-            return v
-        elif el_text.strip() == k2:
-            return v2
-        elif el_text.lower() == k.lower():
-            return v
-        elif el_text.strip().lower() == k2.lower():
-            return v2
-        elif convert_vars.making_template:
-            reg_str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace(" ", "").strip() + "$"
-            value_name = v[9:-1].replace("_", " ").lower().strip()
-            new_text_test = (
-                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1 :].replace(" ", "").strip()
-            )
-            if re.match(reg_str, new_text_test) and el_text.lower().startswith(value_name):
-                return el_text[: len(value_name)] + "\u2028" + v
-        else:
-            el_new = get_replacement_mapping_value(k, v, el_text)
-            if el_new:
-                return el_new
-    return ""
-
-
-def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
-    reg_str: str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace("$", "\\$").strip() + "$"
-    if re.match(reg_str, el_text.strip()):
-        pretext = el_text[: el_text.find("\u2028")]
-        v_new = v
-        if len(v) + len(pretext) > 60:
-            v_new = v.replace(", ", ",")
-        if len(v_new) >= 34:
-            v_split = v_new.find(",", 25 - len(pretext)) + 1
-            el_new = pretext + "    " + v_new[:v_split] + "\u2028" + v_new[v_split:].strip()
-            return el_new
-        else:
-            return el_text.replace(k, v)
-    return ""
-
-
-def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 8) -> Dict[str, str]:
-    data2: Dict[str, str] = {}
-    for key, value in replacement_dict.items():
-        if len(key) >= min_length:
-            data2[key] = value
-    logging.debug(
-        " --- Making template. Removed card_numbers. len replacement_dict = "
-        f"{len(replacement_dict)}, len data2 = {len(data2)}"
+def parse_arguments(input_args: List[str]) -> argparse.Namespace:
+    """Parse and validate the input arguments. Return object containing argument values."""
+    description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
+    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es "
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr "
+    description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
+    parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
+    parser.add_argument(
+        "-i",
+        "--inputfile",
+        type=str,
+        default="",
+        help=(
+            "Input (template) file to use."
+            f"\nDefault={convert_vars.DEFAULT_TEMPLATE_FILENAME}.(docx|idml)"
+            "\nTemplate type is dependent on output type (-t) or file (-o) specified."
+        ),
     )
-    return data2
+    group = parser.add_mutually_exclusive_group(required=False)
+    group.add_argument(
+        "-t",
+        "--outputfiletype",
+        type=str,
+        choices=convert_vars.FILETYPE_CHOICES,
+        help="Type of file to output. Default = docx. If specified, this overwrites the output file extension",
+    )
+    parser.add_argument(
+        "-o",
+        "--outputfile",
+        default="",
+        type=str,
+        help=(
+            "Specify a path and name of output file to generate. (caution: existing file will be overwritten). "
+            f"\ndefault = {convert_vars.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
+        ),
+    )
+    group = parser.add_mutually_exclusive_group(required=False)
+    group.add_argument(
+        # parser.add_argument(
+        "-l",
+        "--language",
+        type=str,
+        choices=convert_vars.LANGUAGE_CHOICES,
+        default="en",
+        help=(
+            "Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
+            "\nTemplate will attempt to create a template from the english input file and "
+            "\nreplacing strings with the template lookup codes"
+        ),
+    )
+    parser.add_argument(
+        "-d",
+        "--debug",
+        action="store_true",
+        help="Output additional information to debug script",
+    )
+    args = parser.parse_args(input_args)
+    return args
 
 
-def get_template_doc(file_type: str) -> str:
-    template_doc: str
-    args_input_file: str = convert_vars.args.inputfile
-    source_file_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
-    if args_input_file:
-        # Input file was specified
-        if os.path.isabs(args_input_file):
-            template_doc = args_input_file
-        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file):
-            template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_input_file)
-        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file.replace(".." + os.sep, "")):
-            template_doc = os.path.normpath(
-                convert_vars.BASE_PATH + os.sep + args_input_file.replace(".." + os.sep, "")
-            )
-        elif args_input_file.find("..") == -1 and os.path.isfile(
-            convert_vars.BASE_PATH + os.sep + ".." + os.sep + args_input_file
-        ):
-            template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + ".." + os.sep + args_input_file)
-        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file.replace("scripts" + os.sep, "")):
-            template_doc = os.path.normpath(
-                convert_vars.BASE_PATH + os.sep + args_input_file.replace("scripts" + os.sep, "")
-            )
-        else:
-            template_doc = args_input_file
-            logging.debug(f" --- Template_doc NOT found. Input File = {args_input_file}")
+def get_document_paragraphs(doc: docx) -> List[docx.Document]:
+    paragraphs = list(doc.paragraphs)
+    l1 = len(paragraphs)
+    for table in doc.tables:
+        paragraphs += get_paragraphs_from_table_in_doc(table)
+    l2 = len(paragraphs)
+    if not len(paragraphs):
+        logging.error("No paragraphs found in doc")
+    logging.debug(f" --- count doc paragraphs = {l1}, with table paragraphs = {l2}")
+    return paragraphs
+
+
+def get_docx_document(docx_file: str) -> docx.Document:
+    """Open the file and return the docx document."""
+    if os.path.isfile(docx_file):
+        return docx.Document(docx_file)
     else:
-        # No input file specified - using defaults
-        if convert_vars.making_template:
-            template_doc = os.sep.join(
-                [convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext]
-            )
-        else:
-            template_doc = os.path.normpath(
-                convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext
-            )
-
-    template_doc = template_doc.replace("\\ ", " ")
-    if os.path.isfile(template_doc):
-        template_doc = check_fix_file_extension(template_doc, source_file_ext)
-        logging.debug(f" --- Returning template_doc = {template_doc}")
-    else:
-        logging.error(f"Source file not found: {args_input_file}. Please ensure file exists and try again.")
-        template_doc = ""
-    return template_doc
+        logging.error("Could not find file at: " + str(docx_file))
+        return docx.Document()
 
 
-def rename_output_file(file_type: str, meta: Dict[str, str]) -> str:
-    """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
-    args_output_file: str = convert_vars.args.outputfile
-    logging.debug(f" --- args_output_file = {args_output_file}")
-    if args_output_file:
-        # Output file is specified as an argument
-        if os.path.isabs(args_output_file):
-            output_filename = args_output_file
-        else:
-            output_filename = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_output_file)
-    else:
-        # No output file specified - using default
-        output_filename = os.path.normpath(
-            convert_vars.BASE_PATH
-            + os.sep
-            + convert_vars.DEFAULT_OUTPUT_FILENAME
-            + ("_template" if convert_vars.making_template else "")
-            + "."
-            + file_type.strip(".")
-        )
-
-    logging.debug(f" --- output_filename before fix extension = {output_filename}")
-    output_filename = check_fix_file_extension(output_filename, file_type)
-    logging.debug(f" --- output_filename AFTER fix extension = {output_filename}")
-
-    # Do the replacement of filename place-holders with meta data
-    find_replace = get_find_replace_list(meta)
-    f = os.path.basename(output_filename)
-    for r in find_replace:
-        f = f.replace(*r)
-    output_filename = os.path.dirname(output_filename) + os.sep + f
-
-    logging.debug(f" --- output_filename = {output_filename}")
-    return output_filename
-
-
-def check_fix_file_extension(filename: str, file_type: str) -> str:
-    if filename and not filename.endswith(file_type):
-        filename_split = os.path.splitext(filename)
-        if filename_split[1].strip(".").isnumeric():
-            filename = filename + "." + file_type.strip(".")
-        else:
-            filename = ".".join([os.path.splitext(filename)[0], file_type.strip(".")])
-        logging.debug(f" --- output_filename with new ext = {filename}")
-    return filename
+def get_files_from_of_type(path: str, ext: str) -> List[str]:
+    """Get a list of files from a specified folder recursively, that have the specified extension."""
+    files = []
+    for root, dirnames, filenames in os.walk(path):
+        for filename in fnmatch.filter(filenames, "*." + str(ext)):
+            files.append(os.path.join(root, filename))
+    if not files:
+        logging.error("No language files found in folder: " + str(os.sep.join([convert_vars.BASE_PATH, "source"])))
+    logging.debug(f" --- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3])))
+    return files
 
 
 def get_find_replace_list(meta: Dict[str, str]) -> List[Tuple[str, str]]:
@@ -428,6 +274,23 @@ def get_find_replace_list(meta: Dict[str, str]) -> List[Tuple[str, str]]:
     return ll
 
 
+def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
+    if suit_tag == "WC":
+        full_tag = "${{{}}}".format("_".join([suit_tag, card, tag]))
+    elif suit_tag == "Common":
+        full_tag = "${{{}}}".format("_".join([suit_tag, card]))
+    else:
+        full_tag = "${{{}}}".format("_".join([suit_tag, suit_tag + card, tag]))
+    return full_tag
+
+
+def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
+    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings")
+    if not mapping_data:
+        return {}
+    return get_replacement_dict(mapping_data, True)
+
+
 def get_meta_data(language_data: Dict[str, Dict[str, str]]) -> Dict[str, str]:
     meta = {}
     if "meta" in list(language_data.keys()):
@@ -442,6 +305,18 @@ def get_meta_data(language_data: Dict[str, Dict[str, str]]) -> Dict[str, str]:
         )
     logging.debug(f" --- meta data = {meta}")
     return meta
+
+
+def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Document]:
+    paragraphs: List[docx.Document] = []
+    for row in doc_table.rows:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                if len(paragraph.runs):
+                    paragraphs.append(paragraph)
+            for t2 in cell.tables:
+                paragraphs += get_paragraphs_from_table_in_doc(t2)
+    return paragraphs
 
 
 def get_replacement_data(
@@ -542,31 +417,47 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
     return data
 
 
-def check_make_list_into_text(var: List[str], group_numbers: bool = True) -> str:
-    if isinstance(var, list):
-        if group_numbers:
-            var = group_number_ranges(var)
-        text_output = ", ".join(str(s) for s in list(var))
-        if len(text_output.strip()) == 0:
-            text_output = " - "
-        return text_output
-    else:
-        return str(var)
-
-
-def group_number_ranges(data: List[str]) -> List[str]:
-    if len(data) < 2 or len([s for s in data if not s.isnumeric()]):
-        return data
-    list_ranges: List[str] = []
-    data_numbers = [int(s) for s in data]
-    for k, g in groupby(enumerate(data_numbers), lambda x: x[0] - x[1]):
-        group: List[int] = list(map(itemgetter(1), g))
-        group = list(map(int, group))
-        if group[0] == group[-1]:
-            list_ranges.append(str(group[0]))
+def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
+    reg_str: str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace("$", "\\$").strip() + "$"
+    if re.match(reg_str, el_text.strip()):
+        pretext = el_text[: el_text.find("\u2028")]
+        v_new = v
+        if len(v) + len(pretext) > 60:
+            v_new = v.replace(", ", ",")
+        if len(v_new) >= 34:
+            v_split = v_new.find(",", 25 - len(pretext)) + 1
+            el_new = pretext + "    " + v_new[:v_split] + "\u2028" + v_new[v_split:].strip()
+            return el_new
         else:
-            list_ranges.append(str(group[0]) + "-" + str(group[-1]))
-    return list_ranges
+            return el_text.replace(k, v)
+    return ""
+
+
+def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
+    for (k, v) in replacement_values:
+        k2: str = k.replace("'", "’").strip()
+        v2: str = v.strip()
+        if el_text == k:
+            return v
+        elif el_text.strip() == k2:
+            return v2
+        elif el_text.lower() == k.lower():
+            return v
+        elif el_text.strip().lower() == k2.lower():
+            return v2
+        elif convert_vars.making_template:
+            reg_str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace(" ", "").strip() + "$"
+            value_name = v[9:-1].replace("_", " ").lower().strip()
+            new_text_test = (
+                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1 :].replace(" ", "").strip()
+            )
+            if re.match(reg_str, new_text_test) and el_text.lower().startswith(value_name):
+                return el_text[: len(value_name)] + "\u2028" + v
+        else:
+            el_new = get_replacement_mapping_value(k, v, el_text)
+            if el_new:
+                return el_new
+    return ""
 
 
 def get_suit_tags_and_key(key: str) -> Tuple[List[str], str]:
@@ -597,29 +488,206 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
     return data
 
 
-def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
-    if suit_tag == "WC":
-        full_tag = "${{{}}}".format("_".join([suit_tag, card, tag]))
-    elif suit_tag == "Common":
-        full_tag = "${{{}}}".format("_".join([suit_tag, card]))
+def get_template_doc(file_type: str) -> str:
+    template_doc: str
+    args_input_file: str = convert_vars.args.inputfile
+    source_file_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
+    if args_input_file:
+        # Input file was specified
+        if os.path.isabs(args_input_file):
+            template_doc = args_input_file
+        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file):
+            template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_input_file)
+        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file.replace(".." + os.sep, "")):
+            template_doc = os.path.normpath(
+                convert_vars.BASE_PATH + os.sep + args_input_file.replace(".." + os.sep, "")
+            )
+        elif args_input_file.find("..") == -1 and os.path.isfile(
+            convert_vars.BASE_PATH + os.sep + ".." + os.sep + args_input_file
+        ):
+            template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + ".." + os.sep + args_input_file)
+        elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file.replace("scripts" + os.sep, "")):
+            template_doc = os.path.normpath(
+                convert_vars.BASE_PATH + os.sep + args_input_file.replace("scripts" + os.sep, "")
+            )
+        else:
+            template_doc = args_input_file
+            logging.debug(f" --- Template_doc NOT found. Input File = {args_input_file}")
     else:
-        full_tag = "${{{}}}".format("_".join([suit_tag, suit_tag + card, tag]))
-    return full_tag
+        # No input file specified - using defaults
+        if convert_vars.making_template:
+            template_doc = os.sep.join(
+                [convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext]
+            )
+        else:
+            template_doc = os.path.normpath(
+                convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext
+            )
+
+    template_doc = template_doc.replace("\\ ", " ")
+    if os.path.isfile(template_doc):
+        template_doc = check_fix_file_extension(template_doc, source_file_ext)
+        logging.debug(f" --- Returning template_doc = {template_doc}")
+    else:
+        logging.error(f"Source file not found: {args_input_file}. Please ensure file exists and try again.")
+        template_doc = ""
+    return template_doc
 
 
-def zip_dir(path: str, zip_filename: str) -> None:
-    """Zip all the files recursively from path into zip_filename (excluding root path)"""
-    with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                f = os.path.join(root, file)
-                zip_file.write(f, f[len(path) :])
+def get_valid_file_types() -> List[str]:
+    if not convert_vars.args.outputfiletype:
+        file_type = os.path.splitext(os.path.basename(convert_vars.args.outputfile))[1].strip(".")
+        if file_type in ("", None):
+            file_type = "docx"
+        return [file_type]
+    if convert_vars.args.outputfiletype.lower() == "pdf":
+        if convert_vars.can_convert_to_pdf:
+            return ["pdf"]
+        else:
+            logging.error("PDF output selected but currently unable to output PDF on this OS.")
+            return []
+    if convert_vars.args.outputfiletype.lower() == "all":
+        file_types = []
+        for file_type in convert_vars.FILETYPE_CHOICES:
+            if file_type != "all" and (file_type != "pdf" or convert_vars.can_convert_to_pdf):
+                file_types.append(file_type)
+        return file_types
+    if convert_vars.args.outputfiletype.lower() in convert_vars.FILETYPE_CHOICES:
+        return [convert_vars.args.outputfiletype.lower()]
+    return []
 
 
-def ensure_folder_exists(folder_path: str) -> None:
-    """Check if folder exists and if not, create folders recursively."""
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
+def get_valid_language_choices() -> List[str]:
+    languages = []
+    if convert_vars.args.language.lower() == "all":
+        for language in convert_vars.LANGUAGE_CHOICES:
+            if language not in ("all", "template"):
+                languages.append(language)
+    elif convert_vars.args.language == "":
+        languages.append("en")
+    else:
+        languages.append(convert_vars.args.language)
+    return languages
+
+
+def group_number_ranges(data: List[str]) -> List[str]:
+    if len(data) < 2 or len([s for s in data if not s.isnumeric()]):
+        return data
+    list_ranges: List[str] = []
+    data_numbers = [int(s) for s in data]
+    for k, g in groupby(enumerate(data_numbers), lambda x: x[0] - x[1]):
+        group: List[int] = list(map(itemgetter(1), g))
+        group = list(map(int, group))
+        if group[0] == group[-1]:
+            list_ranges.append(str(group[0]))
+        else:
+            list_ranges.append(str(group[0]) + "-" + str(group[-1]))
+    return list_ranges
+
+
+def save_docx_file(doc: docx.Document, output_file: str) -> None:
+    ensure_folder_exists(os.path.dirname(output_file))
+    doc.save(output_file)
+
+
+def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
+    # Get the output path and temp output path to put the temp xml files
+    output_path = convert_vars.BASE_PATH + os.sep + "output"
+    temp_output_path = output_path + os.sep + "temp"
+    # Ensure the output folder and temp output folder exist
+    ensure_folder_exists(temp_output_path)
+    logging.debug(" --- temp_folder for extraction of xml files = " + str(temp_output_path))
+
+    # Unzip source xml files and place in temp output folder
+    with zipfile.ZipFile(template_doc) as idml_archive:
+        idml_archive.extractall(temp_output_path)
+        logging.debug(" --- namelist of first few files in archive = " + str(idml_archive.namelist()[:5]))
+
+    xml_files = get_files_from_of_type(temp_output_path, "xml")
+    # Only Stories files have content to update
+    for file in fnmatch.filter(xml_files, "*Stories*Story*"):
+        if os.path.getsize(file) == 0:
+            continue
+        replace_text_in_xml_file(file, language_dict)
+
+    # Zip the files as an idml file in output folder
+    logging.debug(" --- finished replacing text in xml files. Now zipping into idml file")
+    zip_dir(temp_output_path, output_file)
+
+    # If not debugging, delete temp folder and files
+    if not convert_vars.args.debug and os.path.exists(temp_output_path):
+        shutil.rmtree(temp_output_path, ignore_errors=True)
+
+
+def set_can_convert_to_pdf() -> bool:
+    operating_system: str = sys.platform.lower()
+    can_convert = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
+    convert_vars.can_convert_to_pdf = can_convert
+    logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {convert_vars.can_convert_to_pdf}")
+    return can_convert
+
+
+def set_logging() -> None:
+    logging.basicConfig(
+        format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s",
+    )
+    if convert_vars.args.debug:
+        logging.getLogger().setLevel(logging.DEBUG)
+    else:
+        logging.getLogger().setLevel(logging.INFO)
+
+
+def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
+    new_list = list((k, v) for k, v in replacement_dict.items())
+    return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
+
+
+def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 8) -> Dict[str, str]:
+    data2: Dict[str, str] = {}
+    for key, value in replacement_dict.items():
+        if len(key) >= min_length:
+            data2[key] = value
+    logging.debug(
+        " --- Making template. Removed card_numbers. len replacement_dict = "
+        f"{len(replacement_dict)}, len data2 = {len(data2)}"
+    )
+    return data2
+
+
+def rename_output_file(file_type: str, meta: Dict[str, str]) -> str:
+    """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
+    args_output_file: str = convert_vars.args.outputfile
+    logging.debug(f" --- args_output_file = {args_output_file}")
+    if args_output_file:
+        # Output file is specified as an argument
+        if os.path.isabs(args_output_file):
+            output_filename = args_output_file
+        else:
+            output_filename = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_output_file)
+    else:
+        # No output file specified - using default
+        output_filename = os.path.normpath(
+            convert_vars.BASE_PATH
+            + os.sep
+            + convert_vars.DEFAULT_OUTPUT_FILENAME
+            + ("_template" if convert_vars.making_template else "")
+            + "."
+            + file_type.strip(".")
+        )
+
+    logging.debug(f" --- output_filename before fix extension = {output_filename}")
+    output_filename = check_fix_file_extension(output_filename, file_type)
+    logging.debug(f" --- output_filename AFTER fix extension = {output_filename}")
+
+    # Do the replacement of filename place-holders with meta data
+    find_replace = get_find_replace_list(meta)
+    f = os.path.basename(output_filename)
+    for r in find_replace:
+        f = f.replace(*r)
+    output_filename = os.path.dirname(output_filename) + os.sep + f
+
+    logging.debug(f" --- output_filename = {output_filename}")
+    return output_filename
 
 
 def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.Document:
@@ -656,49 +724,32 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
     return doc
 
 
-def get_document_paragraphs(doc: docx) -> List[docx.Document]:
-    paragraphs = list(doc.paragraphs)
-    l1 = len(paragraphs)
-    for table in doc.tables:
-        paragraphs += get_paragraphs_from_table_in_doc(table)
-    l2 = len(paragraphs)
-    if not len(paragraphs):
-        logging.error("No paragraphs found in doc")
-    logging.debug(f" --- count doc paragraphs = {l1}, with table paragraphs = {l2}")
-    return paragraphs
-
-
-def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Document]:
-    paragraphs: List[docx.Document] = []
-    for row in doc_table.rows:
-        for cell in row.cells:
-            for paragraph in cell.paragraphs:
-                if len(paragraph.runs):
-                    paragraphs.append(paragraph)
-            for t2 in cell.tables:
-                paragraphs += get_paragraphs_from_table_in_doc(t2)
-    return paragraphs
-
-
-def get_docx_document(docx_file: str) -> docx.Document:
-    """Open the file and return the docx document."""
-    if os.path.isfile(docx_file):
-        return docx.Document(docx_file)
+def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) -> None:
+    if convert_vars.making_template:
+        replacement_values = sort_keys_longest_to_shortest(replacement_dict)
     else:
-        logging.error("Could not find file at: " + str(docx_file))
-        return docx.Document()
+        replacement_values = list(replacement_dict.items())
 
+    try:
+        tree = ElTree.parse(filename)
+    except ElTree.ParseError as e:
+        logging.error(f" --- parsing xml file: {filename}. error = {e}")
+        return
 
-def get_files_from_of_type(path: str, ext: str) -> List[str]:
-    """Get a list of files from a specified folder recursively, that have the specified extension."""
-    files = []
-    for root, dirnames, filenames in os.walk(path):
-        for filename in fnmatch.filter(filenames, "*." + str(ext)):
-            files.append(os.path.join(root, filename))
-    if not files:
-        logging.error("No language files found in folder: " + str(os.sep.join([convert_vars.BASE_PATH, "source"])))
-    logging.debug(f" --- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3])))
-    return files
+    all_content_elements = tree.findall(".//Content")
+
+    found_element = False
+    for el in [el for el in all_content_elements]:
+        if el.text == "" or el.text is None:
+            continue
+        el_text = get_replacement_value_from_dict(el.text, replacement_values)
+        if el_text:
+            el.text = el_text
+            found_element = True
+
+    if found_element:
+        with open(filename, "bw") as f:
+            f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
 
 def set_making_template() -> None:
@@ -708,64 +759,13 @@ def set_making_template() -> None:
         convert_vars.making_template = False
 
 
-def parse_arguments(input_args: List[str]) -> argparse.Namespace:
-    """Parse and validate the input arguments. Return object containing argument values."""
-    description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
-    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es "
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr "
-    description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
-    parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument(
-        "-i",
-        "--inputfile",
-        type=str,
-        default="",
-        help=(
-            "Input (template) file to use."
-            f"\nDefault={convert_vars.DEFAULT_TEMPLATE_FILENAME}.(docx|idml)"
-            "\nTemplate type is dependent on output type (-t) or file (-o) specified."
-        ),
-    )
-    group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument(
-        "-t",
-        "--outputfiletype",
-        type=str,
-        choices=convert_vars.FILETYPE_CHOICES,
-        help="Type of file to output. Default = docx. If specified, this overwrites the output file extension",
-    )
-    parser.add_argument(
-        "-o",
-        "--outputfile",
-        default="",
-        type=str,
-        help=(
-            "Specify a path and name of output file to generate. (caution: existing file will be overwritten). "
-            f"\ndefault = {convert_vars.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
-        ),
-    )
-    group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument(
-        # parser.add_argument(
-        "-l",
-        "--language",
-        type=str,
-        choices=convert_vars.LANGUAGE_CHOICES,
-        default="en",
-        help=(
-            "Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
-            "\nTemplate will attempt to create a template from the english input file and "
-            "\nreplacing strings with the template lookup codes"
-        ),
-    )
-    parser.add_argument(
-        "-d",
-        "--debug",
-        action="store_true",
-        help="Output additional information to debug script",
-    )
-    args = parser.parse_args(input_args)
-    return args
+def zip_dir(path: str, zip_filename: str) -> None:
+    """Zip all the files recursively from path into zip_filename (excluding root path)"""
+    with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                f = os.path.join(root, file)
+                zip_file.write(f, f[len(path) :])
 
 
 if __name__ == "__main__":
