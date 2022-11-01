@@ -6,42 +6,45 @@ meta:
   version: "1.20"
 suits:
 -
-  name: "Data validation & encoding"
+  name: "Validación de datos & Codificación"
   cards:
   -
+    id: "DVA"
     value: "A"
-    desc: "You have invented a new attack against Data Validation and Encoding"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
+    desc: "Has creado un nuevo ataque contra validación de datos y codificación"
+    misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
   -
+    id: "DV2"
     value: "2"
-    desc: "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
+    desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente"
   -
+    id: "DV3"
     value: "3"
-    desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats"
+    desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
 -
   name: "Wild Card"
   cards:
   -
-    value: "JokerA"
-    card: "Joker"
-    desc: "Alice can utilize the application to attack users' systems and data"
-    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+    id: "JOA"
+    value: "Joker"
+    desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
+    misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
 paragraphs:
 -
   name: "Common"
   sentences:
   -
     value: "NoCard"
-    text: "No Card"
+    text: "No Tarjeta"
   -
     value: "Title"
-    text: "Ecommerce Website Edition v1.21-EN"
+    text: "Ecommerce Website Edition v1.20-ES"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia Ecommerce Website Edition v1.21-EN"
+    text: "OWASP Cornucopia Ecommerce Website Edition v1.20-ES"
   -
     value: "T00010"
-    text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+    text: "OWASP Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requerimientos de seguridad en procesos de desarrollo de software ágiles, convencionales y formales."
   -
     value: "T00020"
     text: "Author"
@@ -53,4 +56,4 @@ paragraphs:
     text: "Reviewers"
   -
     value: "T00100"
-    text: "Acknowledgments"
+    text: "Reconocimientos del proyecto"

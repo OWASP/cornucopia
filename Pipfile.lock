@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "868a4bb48aaf3285e22dc559783e2a622698e75a47a5489f71f5326c4f8de050"
+            "sha256": "816997eec3beabc6b1b2480a345d60723273d954accf987c0561c423484e4b33"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -168,8 +168,24 @@
                 "sha256:fa768eff5f9f958270b081bb33581b4b569faabf8774726b283edb06617101dc",
                 "sha256:fac2d65901fb0fdf20363fbd345c01958a742f2dc62a8dd4495af66e3ff502a4"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==9.2.0"
+        },
+        "pypng": {
+            "hashes": [
+                "sha256:76f8a1539ec56451da7ab7121f12a361969fe0f2d48d703d198ce2a99d6c5afd"
+            ],
+            "index": "pypi",
+            "version": "==0.0.21"
+        },
+        "pyqrcode": {
+            "hashes": [
+                "sha256:1b2812775fa6ff5c527977c4cd2ccb07051ca7d0bc0aecf937a43864abe5eff6",
+                "sha256:fdbf7634733e56b72e27f9bce46e4550b75a3a2c420414035cae9d9d26b234d5"
+            ],
+            "index": "pypi",
+            "version": "==1.2.1"
         },
         "python-docx": {
             "hashes": [
@@ -223,6 +239,13 @@
             ],
             "index": "pypi",
             "version": "==6.0"
+        },
+        "qrcode": {
+            "hashes": [
+                "sha256:375a6ff240ca9bd41adc070428b5dfc1dcfbb0f2507f1ac848f6cded38956578"
+            ],
+            "index": "pypi",
+            "version": "==7.3.1"
         },
         "tqdm": {
             "hashes": [
@@ -501,7 +524,7 @@
                 "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
                 "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.8.2"
         },
         "six": {
@@ -509,7 +532,7 @@
                 "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.16.0"
         },
         "tomli": {

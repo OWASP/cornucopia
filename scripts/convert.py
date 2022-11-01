@@ -5,13 +5,14 @@ import docx  # type: ignore
 import fnmatch
 import logging
 import os
+import pyqrcode  # type: ignore
 import re
 import shutil
 import sys
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
-from typing import List, Dict, Tuple, Any
+from typing import Any, Dict, Generator, List, Tuple, Union
 from operator import itemgetter
 from itertools import groupby
 
@@ -20,6 +21,7 @@ class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "pt-br"]
+    STYLE_CHOICES: List[str] = ["all", "static", "dynamic"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
@@ -68,7 +70,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
     if fail:
         msg = (
             "Error. A temporary docx file was created in the output folder but cannot be converted "
-            f"to pdf (yet) on operating system: {sys.platform}\n"
+            "to pdf (yet) on operating system: {sys.platform}\n"
             "This does work on Windows and Mac with MS Word installed."
         ) + msg
         logging.warning(msg)
@@ -80,7 +82,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
     return output_pdf_filename
 
 
-def convert_type_language(file_type: str, language: str = "en") -> None:
+def convert_type_language_style(file_type: str, language: str = "en", style: str = "static") -> None:
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
     if not yaml_files:
@@ -100,14 +102,19 @@ def convert_type_language(file_type: str, language: str = "en") -> None:
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
 
-    template_doc: str = get_template_doc(file_type)
+    template_doc: str = get_template_doc(file_type, style)
 
     if not language_data or not mapping_dict or not meta or not template_doc:
         return
 
     # Name output file with correct edition, component, language & version
-    output_file: str = rename_output_file(file_type, meta)
+    output_file: str = rename_output_file(file_type, style, meta)
     ensure_folder_exists(os.path.dirname(output_file))
+
+    # Generate QR Code images if required
+    if style == "dynamic":
+        for card_id in get_card_ids(language_data, "id"):
+            save_qrcode_image(card_id, convert_vars.args.url)
 
     # Work with docx file (and maybe convert to pdf afterwards)
     if file_type in ("docx", "pdf"):
@@ -163,7 +170,8 @@ def main() -> None:
     # Create output files
     for file_type in get_valid_file_types():
         for language in get_valid_language_choices():
-            convert_type_language(file_type, language)
+            for style in get_valid_styles():
+                convert_type_language_style(file_type, language, style)
 
 
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
@@ -222,8 +230,42 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         action="store_true",
         help="Output additional information to debug script",
     )
+    group = parser.add_mutually_exclusive_group(required=False)
+    group.add_argument(
+        # parser.add_argument(
+        "-s",
+        "--style",
+        type=str,
+        choices=convert_vars.STYLE_CHOICES,
+        default="static",
+        help=(
+            "Output style to produce. [`static` or `dynamic`] "
+            "\nStatic cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list."
+        ),
+    )
+    parser.add_argument(
+        "-u",
+        "--url",
+        default="https://copi.securedelivery.io/cards",
+        type=str,
+        help=(
+            "Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID). "
+        ),
+    )
     args = parser.parse_args(input_args)
     return args
+
+
+def get_card_ids(language_data: Union[Dict[Any, Any], List[Any]], key: str = "id") -> Generator[str, None, None]:
+    if isinstance(language_data, dict):
+        for k, v in language_data.items():
+            if k == key:
+                yield v
+            if isinstance(v, (dict, list)):
+                yield from get_card_ids(v, key)
+    elif isinstance(language_data, list):
+        for d in language_data:
+            yield from get_card_ids(d, key)
 
 
 def get_document_paragraphs(doc: docx) -> List[docx.Document]:
@@ -365,7 +407,7 @@ def get_replacement_data(
                 data = {}
                 continue
     if not data or "suits" not in list(data.keys()):
-        logging.error("Could not get language data from yaml files.")
+        logging.error("Could not get language data from yaml " + os.path.split(file)[1])
     logging.debug(f" --- Len = {len(data)}.")
     return data
 
@@ -449,7 +491,7 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
             reg_str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace(" ", "").strip() + "$"
             value_name = v[9:-1].replace("_", " ").lower().strip()
             new_text_test = (
-                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1 :].replace(" ", "").strip()
+                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1:].replace(" ", "").strip()
             )
             if re.match(reg_str, new_text_test) and el_text.lower().startswith(value_name):
                 return el_text[: len(value_name)] + "\u2028" + v
@@ -488,10 +530,10 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
     return data
 
 
-def get_template_doc(file_type: str) -> str:
+def get_template_doc(file_type: str, style: str = "static") -> str:
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
-    source_file_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
+    sfile_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
     if args_input_file:
         # Input file was specified
         if os.path.isabs(args_input_file):
@@ -517,21 +559,20 @@ def get_template_doc(file_type: str) -> str:
         # No input file specified - using defaults
         if convert_vars.making_template:
             template_doc = os.sep.join(
-                [convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en." + source_file_ext]
+                [convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en_static." + sfile_ext]
             )
         else:
             template_doc = os.path.normpath(
-                convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "." + source_file_ext
+                convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "_" + style + "." + sfile_ext
             )
 
     template_doc = template_doc.replace("\\ ", " ")
     if os.path.isfile(template_doc):
-        template_doc = check_fix_file_extension(template_doc, source_file_ext)
+        template_doc = check_fix_file_extension(template_doc, sfile_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
+        return template_doc
     else:
-        logging.error(f"Source file not found: {args_input_file}. Please ensure file exists and try again.")
-        template_doc = ""
-    return template_doc
+        logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
 
 
 def get_valid_file_types() -> List[str]:
@@ -568,6 +609,19 @@ def get_valid_language_choices() -> List[str]:
     else:
         languages.append(convert_vars.args.language)
     return languages
+
+
+def get_valid_styles() -> List[str]:
+    styles = []
+    if convert_vars.args.style.lower() == "all":
+        for style in convert_vars.STYLE_CHOICES:
+            if style != "all":
+                styles.append(style)
+    elif convert_vars.args.style == "":
+        styles.append("static")
+    else:
+        styles.append(convert_vars.args.style)
+    return styles
 
 
 def group_number_ranges(data: List[str]) -> List[str]:
@@ -619,6 +673,17 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
         shutil.rmtree(temp_output_path, ignore_errors=True)
 
 
+def save_qrcode_image(card_id: str, location_url: str = "https://copi.securedelivery.io/cards") -> None:
+    output_file = os.sep.join([convert_vars.BASE_PATH, "resources", "images", card_id + ".png"])
+    ensure_folder_exists(os.path.dirname(output_file))
+    if os.path.exists(output_file):
+        pass
+    else:
+        url = location_url + "/" + card_id
+        img = pyqrcode.create(url)
+        img.svg(output_file, scale=8)
+
+
 def set_can_convert_to_pdf() -> bool:
     operating_system: str = sys.platform.lower()
     can_convert = operating_system.find("win") != -1 or operating_system.find("darwin") != -1
@@ -654,7 +719,7 @@ def remove_short_keys(replacement_dict: Dict[str, str], min_length: int = 8) -> 
     return data2
 
 
-def rename_output_file(file_type: str, meta: Dict[str, str]) -> str:
+def rename_output_file(file_type: str, style: str, meta: Dict[str, str]) -> str:
     """Rename output file replacing place-holders from meta dict (edition, component, language, version)."""
     args_output_file: str = convert_vars.args.outputfile
     logging.debug(f" --- args_output_file = {args_output_file}")
@@ -671,6 +736,8 @@ def rename_output_file(file_type: str, meta: Dict[str, str]) -> str:
             + os.sep
             + convert_vars.DEFAULT_OUTPUT_FILENAME
             + ("_template" if convert_vars.making_template else "")
+            + "_"
+            + style
             + "."
             + file_type.strip(".")
         )
@@ -765,7 +832,7 @@ def zip_dir(path: str, zip_filename: str) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path) :])
+                zip_file.write(f, f[len(path):])
 
 
 if __name__ == "__main__":

@@ -24,7 +24,7 @@ HOST_IP ?= $(shell ip addr show dev docker0 | grep -oP "(?<=inet )[0-9]+\.[0-9]+
 RETRY_DELAY = 0.01
 
 PYTHON_TEST_PATTERN ?= "*_?test.py" # Default to all types of tests
-PYTHON_COVERAGE_MIN = 91 # %
+PYTHON_COVERAGE_MIN = 85 # %
 PYTHON_VERSION = $(shell head -1 .python-version)
 
 .PHONY: shfmt shellcheck pipenv
@@ -101,3 +101,6 @@ python-test-update-golden-files:
 
 .PHONY: google-account
 google-account:
+
+.PHONY: ready
+ready: fmt static-check python-unit-test python-integration-test python-coverage
