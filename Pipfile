@@ -16,6 +16,7 @@ freezegun = "==1.2.2"
 [packages]
 python-docx = "==0.8.11"
 PyYAML = "==6.0"
+pyqrcode = "==1.2.1"
 types-PyYAML = "==6.0.12"
 docx2pdf = "==0.1.8"
 lxml = "==4.9.1"
