@@ -14,6 +14,11 @@ import scripts.convert as c
 c.convert_vars = c.ConvertVars()
 
 
+if 'unittest.util' in __import__('sys').modules:
+    # Show full diff in self.assertEqual.
+    __import__('sys').modules['unittest.util']._MAX_LENGTH = 999999999
+
+
 class TestGetValidFileTypes(unittest.TestCase):
     def test_get_valid_file_types_idml(self) -> None:
         c.convert_vars.args = argparse.Namespace(outputfiletype="idml")
@@ -64,6 +69,30 @@ class TestGetValidFileTypes(unittest.TestCase):
             got_list = c.get_valid_file_types()
         self.assertEqual(ll.output, want_error_log_messages)
         self.assertListEqual(want_list, got_list)
+
+
+class TestGetValidStyleChoices(unittest.TestCase):
+    def test_get_valid_style_choices_dynamic(self) -> None:
+        c.convert_vars.args = argparse.Namespace(style="dynamic")
+        want_style = ["dynamic"]
+
+        got_style = c.get_valid_styles()
+        self.assertListEqual(want_style, got_style)
+
+    def test_get_valid_style_choices_blank(self) -> None:
+        c.convert_vars.args = argparse.Namespace(style="")
+        want_style = ["static"]
+
+        got_style = c.get_valid_styles()
+        self.assertListEqual(want_style, got_style)
+
+    def test_get_valid_style_choices_all(self) -> None:
+        c.convert_vars.args = argparse.Namespace(style="all")
+        want_style = c.convert_vars.STYLE_CHOICES
+        want_style.remove("all")
+
+        got_style = c.get_valid_styles()
+        self.assertListEqual(want_style, got_style)
 
 
 class TestGetValidLanguagesChoices(unittest.TestCase):
@@ -199,39 +228,43 @@ class TestGetTemplateDoc(unittest.TestCase):
 
     def test_get_template_doc_default_docx(self) -> None:
         input_filetype = "docx"
+        input_style_type = "static"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.docx"]
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template_static.docx"]
         )
 
-        got_template_doc = c.get_template_doc(input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype, input_style_type)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_default_idml(self) -> None:
         input_filetype = "idml"
+        input_style_type = "static"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.idml"]
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template_static.idml"]
         )
 
-        got_template_doc = c.get_template_doc(input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype, input_style_type)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_make_template_docx(self) -> None:
         c.convert_vars.making_template = True
         input_filetype = "docx"
+        input_style_type = "static"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"]
+            [c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en_static.docx"]
         )
 
-        got_template_doc = c.get_template_doc(input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype, input_style_type)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_make_template_idml(self) -> None:
         c.convert_vars.making_template = True
         input_filetype = "idml"
+        input_style_type = "static"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.idml"]
+            [c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en_static.idml"]
         )
-        got_template_doc = c.get_template_doc(input_filetype)
+        got_template_doc = c.get_template_doc(input_filetype, input_style_type)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_relative_path(self) -> None:
@@ -259,10 +292,10 @@ class TestGetTemplateDoc(unittest.TestCase):
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_doc_file_not_exist(self) -> None:
-        template_docx_filename = os.sep.join(["resources", "templates", "owasp_cornucopia_template.docx"])
+        template_docx_filename = os.sep.join(["resources", "templates", "owasp_cornucopia_template_static.docx"])
         c.convert_vars.args.inputfile = template_docx_filename
         input_filetype = "docx"
-        want_template_doc = ""
+        want_template_doc = None
         want_error_log_messages = [
             (
                 f"ERROR:root:Source file not found: {template_docx_filename}. "
@@ -274,6 +307,32 @@ class TestGetTemplateDoc(unittest.TestCase):
             got_template_doc = c.get_template_doc(input_filetype)
         self.assertEqual(want_error_log_messages, ll.output)
         self.assertEqual(want_template_doc, got_template_doc)
+
+
+class TestGetCardIDs(unittest.TestCase):
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
+        c.convert_vars.making_template = False
+        self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files"])
+
+    def tearDown(self) -> None:
+        c.convert_vars.args.outputfile = ""
+        c.convert_vars.making_template = False
+
+    def test_get_card_ids_from_file(self) -> None:
+        input_language = "en"
+        input_data_type = "translation"
+        input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "ecommerce-cards-1.21-en.yaml"])]
+        language_data = c.get_replacement_data(input_yaml_files, input_data_type, input_language)
+        want_ids = ["DVA", "DV2", "DV3", "JOA"]
+        got_ids = list(c.get_card_ids(language_data, "id"))
+        self.assertEqual(want_ids, got_ids)
+
+    def test_get_card_ids_from_list(self) -> None:
+        input_dict = {"id": "This", "identity": "is", "di": "a", "value": "pointless", "not": "dictionary"}
+        want_ids = ["This"]
+        got_ids = list(c.get_card_ids(input_dict, "id"))
+        self.assertEqual(want_ids, got_ids)
 
 
 class TestRenameOutputFile(unittest.TestCase):
@@ -289,48 +348,53 @@ class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_short(self) -> None:
         c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_edition_component_lang_ver.docx"])
         input_file_type = "docx"
+        input_style_type = "static"
         want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_ecommerce_cards_en_1.21.docx"])
 
-        got_filename = c.rename_output_file(input_file_type, self.input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_no_extension(self) -> None:
         c.convert_vars.args.outputfile = "output" + os.sep + "cornucopia_edition_component_lang_ver"
         input_file_type = "idml"
+        input_style_type = "static"
         want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_ecommerce_cards_en_1.21.idml"])
 
-        got_filename = c.rename_output_file(input_file_type, self.input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_using_defaults(self) -> None:
         c.convert_vars.args.outputfile = c.convert_vars.DEFAULT_OUTPUT_FILENAME
         input_file_type = "docx"
+        input_style_type = "static"
         want_filename = os.sep.join(
             [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.docx"]
         )
 
-        got_filename = c.rename_output_file(input_file_type, self.input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_blank(self) -> None:
         c.convert_vars.args.outputfile = ""
         input_file_type = "docx"
+        input_style_type = "static"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_static.docx"]
         )
 
-        got_filename = c.rename_output_file(input_file_type, self.input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_template(self) -> None:
         c.convert_vars.args.outputfile = ""
         c.convert_vars.making_template = True
         input_file_type = "docx"
+        input_style_type = "static"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_template.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_template_static.docx"]
         )
 
-        got_filename = c.rename_output_file(input_file_type, self.input_meta_data)
+        got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
 
@@ -418,6 +482,7 @@ class TestGetReplacementData(unittest.TestCase):
                     "name": "Data validation & encoding",
                     "cards": [
                         {
+                            "id": "DVA",
                             "value": "A",
                             "desc": "You have invented a new attack against Data Validation and Encoding",
                             "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
@@ -456,14 +521,14 @@ class TestGetReplacementData(unittest.TestCase):
         input_data_type = "translation"
         want_first_suit_keys = self.test_data["suits"][0].keys()
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
-        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["value"]
+        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
 
         got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
         self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
-        got_first_suit_first_card_value = got_suits[0]["cards"][0]["value"]
+        got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
         self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_replacement_data_translation_es_first_suit_first_card(self) -> None:
@@ -471,14 +536,14 @@ class TestGetReplacementData(unittest.TestCase):
         input_data_type = "translation"
         want_first_suit_keys = self.test_data["suits"][0].keys()
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
-        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["value"]
+        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
 
         got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
         self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
-        got_first_suit_first_card_value = got_suits[0]["cards"][0]["value"]
+        got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
         self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_replacement_data_mappings_meta(self) -> None:
@@ -516,6 +581,8 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="en",
             debug=False,
+            style="static",
+            url="https://copi.securedelivery.io/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -529,6 +596,8 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="fr",
             debug=False,
+            style="static",
+            url="https://copi.securedelivery.io/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -543,6 +612,8 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="en",
             debug=False,
+            style="static",
+            url="https://copi.securedelivery.io/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -557,6 +628,8 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="fr",
             debug=False,
+            style="static",
+            url="https://copi.securedelivery.io/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -571,6 +644,8 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="en",
             debug=False,
+            style="static",
+            url="https://copi.securedelivery.io/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -618,7 +693,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(debug=False)
         path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"])
         ext = "docx"
-        want_files = [path + os.sep + "owasp_cornucopia_edition_lang_ver_template.docx"]
+        want_files = [path + os.sep + "owasp_cornucopia_edition_lang_ver_template_static.docx"]
 
         got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(len(want_files), len(got_files))
@@ -649,7 +724,7 @@ class TestGetDocxDocument(unittest.TestCase):
                 "test_files",
                 "resources",
                 "templates",
-                "owasp_cornucopia_edition_lang_ver_template.docx",
+                "owasp_cornucopia_edition_lang_ver_template_static.docx",
             ]
         )
         want_type = type(docx.Document())
@@ -828,23 +903,20 @@ class TestConvertDocxToPdf(unittest.TestCase):
     def tearDown(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
 
-    def test_convert_docx_to_pdf_true(self) -> None:
+    def test_convert_docx_to_pdf_false(self) -> None:
         input_docx_filename = os.sep.join(
             [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_edition_lang_ver_template.docx"]
         )
         want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
-        if os.path.isfile(want_pdf_filename):
-            os.remove(want_pdf_filename)
+        want_logging_warn_message = [
+            "WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
+            "to pdf (yet) on operating system: {sys.platform}\n"
+            "This does work on Windows and Mac with MS Word installed."]
 
-        # c.convert_vars.can_convert_to_pdf = True
-        can_convert = c.set_can_convert_to_pdf()
-        if can_convert:
-            c.convert_docx_to_pdf(input_docx_filename, want_pdf_filename)
-            self.assertTrue(os.path.isfile(want_pdf_filename))
-            if os.path.isfile(want_pdf_filename):
-                os.remove(want_pdf_filename)
-        else:
-            self.assertFalse(can_convert, "Cannot Test convert_docx_to_pdf on this operating system")
+        with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+            can_convert = c.convert_docx_to_pdf(input_docx_filename, want_pdf_filename)
+        self.assertEqual(ll.output, want_logging_warn_message)
+        self.assertTrue(can_convert, "Cannot Test convert_docx_to_pdf on this operating system")
 
 
 class TestGetMappingDict(unittest.TestCase):
@@ -879,7 +951,7 @@ class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_empty(self) -> None:
         input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "ecommerce-cards-1.21-en.yaml"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = ["ERROR:root:Could not get language data from yaml files."]
+        want_logging_error_message = ["ERROR:root:Could not get language data from yaml ecommerce-cards-1.21-en.yaml"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
@@ -889,7 +961,7 @@ class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_wrong_file_type(self) -> None:
         input_yaml_files = [os.sep.join([self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = ["ERROR:root:Could not get language data from yaml files."]
+        want_logging_error_message = ["ERROR:root:Could not get language data from yaml owasp_cornucopia_en.docx"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
@@ -920,40 +992,43 @@ class TestConvertTypeLanguage(unittest.TestCase):
         if os.path.isfile(self.temp_file):
             os.remove(self.temp_file)
 
-    def test_convert_type_language_defaults(self) -> None:
-        input_filetype = "docx"
-        self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.docx"]
-        )
-        if os.path.isfile(self.want_file):
-            os.remove(self.want_file)
-        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
-
-        with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
-            c.convert_type_language(input_filetype)
-        self.assertEqual(ll.output, want_info_log_messages)
-        self.assertTrue(os.path.isfile(self.want_file))
-
+    # def test_convert_type_language_defaults(self) -> None:
+    #     input_filetype = "docx"
+    #     input_style_type = "static"
+    #     self.want_file = os.sep.join(
+    #         [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_static.docx"]
+    #     )
+    #     if os.path.isfile(self.want_file):
+    #         os.remove(self.want_file)
+    #     want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
+    #
+    #     with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+    #         c.convert_type_language_style(input_filetype, input_style_type)
+    #     self.assertEqual(ll.output, want_info_log_messages)
+    #     self.assertTrue(os.path.isfile(self.want_file))
+    #
     def test_convert_type_language_spanish(self) -> None:
         input_filetype = "docx"
+        input_style_type = "static"
         language = "es"
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_es_1.20.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_es_1.20_static.docx"]
         )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
         want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
-            c.convert_type_language(input_filetype, language)
+            c.convert_type_language_style(input_filetype, language, input_style_type)
         self.assertEqual(ll.output, want_info_log_messages)
         self.assertTrue(os.path.isfile(self.want_file))
 
     def test_convert_type_language_en_idml(self) -> None:
         input_filetype = "idml"
+        input_style_type = "static"
         language = "en"
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.20.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.20_static.idml"]
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
@@ -961,12 +1036,13 @@ class TestConvertTypeLanguage(unittest.TestCase):
         want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
-            c.convert_type_language(input_filetype, language)
+            c.convert_type_language_style(input_filetype, language, input_style_type)
         self.assertEqual(ll.output, want_info_log_messages)
         self.assertTrue(os.path.isfile(self.want_file))
 
     def test_convert_type_language_es_specify_output(self) -> None:
         input_filetype = "idml"
+        input_style_type = "static"
         language = "es"
         c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_cards_es.idml"])
         self.want_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile])
@@ -975,7 +1051,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
         want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
-            c.convert_type_language(input_filetype, language)
+            c.convert_type_language_style(input_filetype, language, input_style_type)
         self.assertEqual(ll.output, want_info_log_messages)
         self.assertTrue(os.path.isfile(self.want_file))
 
@@ -1012,10 +1088,10 @@ class TestSaveIdmlFile(unittest.TestCase):
 
     def test_save_idml_file_test_location(self) -> None:
         input_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template.idml"]
+            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template_static.idml"]
         )
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_static.idml"]
         )
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
@@ -1043,9 +1119,9 @@ class TestSaveDocxFile(unittest.TestCase):
             os.remove(self.want_file)
 
     def test_save_docx_file_defaults(self) -> None:
-        filename = os.sep.join([c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"])
+        filename = os.sep.join([c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en_static.docx"])
         input_doc = docx.Document(filename)
-        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_en.docx"])
+        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_en_static.docx"])
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -1322,7 +1398,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
         return text_list
 
     def test_replace_docx_inline_text_expected_keys_present(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + ".docx"])
+        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
             "${Common_T03100}": "Alice can utilize the application to attack users' systems and data",
@@ -1334,7 +1410,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
             self.assertIn(t, text_list)
 
     def test_replace_docx_inline_text_new_text_present(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + ".docx"])
+        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
             "${Common_T03100}": "Alice can utilize the application to attack users' systems and data",
@@ -1347,7 +1423,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
             self.assertIn(t, text_list)
 
     def test_replace_docx_inline_text_keys_replaced(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + ".docx"])
+        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
             "${Common_T03100}": "Alice can utilize the application to attack users' systems and data",
@@ -1369,7 +1445,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
         c.convert_vars.BASE_PATH = self.b
 
     def test_get_document_paragraphs_len_paragraphs(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + ".docx"])
+        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
         doc = docx.Document(template_docx_file)
         want_len_paragraphs = 2007
 
@@ -1377,7 +1453,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
         self.assertEqual(want_len_paragraphs, len(paragraphs))
 
     def test_get_document_paragraphs_find_text(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + ".docx"])
+        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
         doc = docx.Document(template_docx_file)
         want_text_list = [
             "${VE_suit}",
@@ -1404,7 +1480,7 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         c.convert_vars.BASE_PATH = self.b
 
     def test_get_paragraphs_from_table_in_doc(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + ".docx"])
+        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
         doc = docx.Document(template_docx_file)
         doc_tables = doc.tables
         want_min_len_paragraphs = 1000
