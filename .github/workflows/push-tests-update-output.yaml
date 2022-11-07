@@ -30,39 +30,53 @@ jobs:
       # Make sure we have some code to test
       - name: Checkout repository
         uses: actions/checkout@v3
-
       # Set the pip environment up
-      - name: Get base python
+      - name: Install dependencies
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
           cache: 'pipenv' # caching pip dependencies
-      - name: Install dependencies
-        run: |
-          pip install pipenv
-          pipenv install --ignore-pipfile --dev
-
+          command: |
+            run pip install pipenv
+            run pipenv install --ignore-pipfile --dev
       # Run the tests
       - name: Run unit tests
-        run: python -m unittest discover -s "tests/scripts" -p "*_utest.py"
-      - name: Run integration tests
-        run: python -m unittest discover -s "tests/scripts" -p "*_itest.py"
+        uses: actions/setup-python@v4
+        with:
+          command: run python -m unittest discover -s "tests/scripts" -p "*_utest.py"
+      - name: Run integration
+        uses: actions/setup-python@v4
+        with:
+          command: run python -m unittest discover -s "tests/scripts" -p "*_itest.py"
 
-      # Check test coverage
       - name: Check test coverage - run tests
-        run: coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"
+        uses: actions/setup-python@v4
+        with:
+          command: run coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"
       - name: Check test coverage - generate xml
-        run: coverage xml
+        uses: actions/setup-python@v4
+        with:
+          command: run coverage xml
       - name: Check test coverage - Report
-        run: coverage report --fail-under 85 scripts/convert*
+        uses: actions/setup-python@v4
+        with:
+#          command: run coverage report scripts/convert*
+          command: run coverage report --fail-under 85 scripts/convert*
+#          command: run coverage report --fail-under 91 scripts/convert*
 
       # Check formatting of files
       - name: Check formatting of files with Black
-        run: black --line-length=120 --check .
+        uses: actions/setup-python@v4
+        with:
+          command: run black --line-length=120 --check .
       - name: Check formatting of files with flake
-        run: flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+        uses: actions/setup-python@v4
+        with:
+          command: run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
       - name: Check formatting of files for correct spelling and namespace names
-        run: mypy --namespace-packages --strict ./scripts/
+        uses: actions/setup-python@v4
+        with:
+          command: run mypy --namespace-packages --strict ./scripts/
 
   # If Tests pass, generate new output files and commit to repo
   updateoutputfiles:
@@ -78,14 +92,13 @@ jobs:
       # Set the environment up
       - name: Install dependecies
         uses: actions/setup-python@v4
-      - with:
-          python-version: '3.10'
-          cache: 'pipenv' # caching pip dependencies
-      - name: Install dependencies
-        run: pipenv install -d # Install all dependencies, including development ones
+        with:
+          command: run pipenv install -d # Install all dependencies, including development ones
 
       - name: Generate new output files
-        run: python scripts/convert.py -l all -t all -s all
+        uses: actions/setup-python@v4
+        with:
+          command: run python scripts/convert.py -l all -t all
 
       # Set the git username and email up.
       - name: setup git config
