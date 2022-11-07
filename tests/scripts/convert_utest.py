@@ -14,9 +14,9 @@ import scripts.convert as c
 c.convert_vars = c.ConvertVars()
 
 
-if 'unittest.util' in __import__('sys').modules:
+if "unittest.util" in __import__("sys").modules:
     # Show full diff in self.assertEqual.
-    __import__('sys').modules['unittest.util']._MAX_LENGTH = 999999999
+    __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
 
 
 class TestGetValidFileTypes(unittest.TestCase):
@@ -230,7 +230,12 @@ class TestGetTemplateDoc(unittest.TestCase):
         input_filetype = "docx"
         input_style_type = "static"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template_static.docx"]
+            [
+                c.convert_vars.BASE_PATH,
+                "resources",
+                "templates",
+                "owasp_cornucopia_edition_lang_ver_template_static.docx",
+            ]
         )
 
         got_template_doc = c.get_template_doc(input_filetype, input_style_type)
@@ -240,7 +245,12 @@ class TestGetTemplateDoc(unittest.TestCase):
         input_filetype = "idml"
         input_style_type = "static"
         want_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template_static.idml"]
+            [
+                c.convert_vars.BASE_PATH,
+                "resources",
+                "templates",
+                "owasp_cornucopia_edition_lang_ver_template_static.idml",
+            ]
         )
 
         got_template_doc = c.get_template_doc(input_filetype, input_style_type)
@@ -911,7 +921,8 @@ class TestConvertDocxToPdf(unittest.TestCase):
         want_logging_warn_message = [
             "WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
             "to pdf (yet) on operating system: {sys.platform}\n"
-            "This does work on Windows and Mac with MS Word installed."]
+            "This does work on Windows and Mac with MS Word installed."
+        ]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             can_convert = c.convert_docx_to_pdf(input_docx_filename, want_pdf_filename)
@@ -1088,7 +1099,12 @@ class TestSaveIdmlFile(unittest.TestCase):
 
     def test_save_idml_file_test_location(self) -> None:
         input_template_doc = os.sep.join(
-            [c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_edition_lang_ver_template_static.idml"]
+            [
+                c.convert_vars.BASE_PATH,
+                "resources",
+                "templates",
+                "owasp_cornucopia_edition_lang_ver_template_static.idml",
+            ]
         )
         self.want_file = os.sep.join(
             [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_static.idml"]
@@ -1398,7 +1414,9 @@ class TestReplaceDocxInlineText(unittest.TestCase):
         return text_list
 
     def test_replace_docx_inline_text_expected_keys_present(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
+        template_docx_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
+        )
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
             "${Common_T03100}": "Alice can utilize the application to attack users' systems and data",
@@ -1410,7 +1428,9 @@ class TestReplaceDocxInlineText(unittest.TestCase):
             self.assertIn(t, text_list)
 
     def test_replace_docx_inline_text_new_text_present(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
+        template_docx_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
+        )
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
             "${Common_T03100}": "Alice can utilize the application to attack users' systems and data",
@@ -1423,7 +1443,9 @@ class TestReplaceDocxInlineText(unittest.TestCase):
             self.assertIn(t, text_list)
 
     def test_replace_docx_inline_text_keys_replaced(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
+        template_docx_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
+        )
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
             "${Common_T03100}": "Alice can utilize the application to attack users' systems and data",
@@ -1445,7 +1467,9 @@ class TestGetDocumentParagraphs(unittest.TestCase):
         c.convert_vars.BASE_PATH = self.b
 
     def test_get_document_paragraphs_len_paragraphs(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
+        template_docx_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
+        )
         doc = docx.Document(template_docx_file)
         want_len_paragraphs = 2007
 
@@ -1453,7 +1477,9 @@ class TestGetDocumentParagraphs(unittest.TestCase):
         self.assertEqual(want_len_paragraphs, len(paragraphs))
 
     def test_get_document_paragraphs_find_text(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
+        template_docx_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
+        )
         doc = docx.Document(template_docx_file)
         want_text_list = [
             "${VE_suit}",
@@ -1480,7 +1506,9 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         c.convert_vars.BASE_PATH = self.b
 
     def test_get_paragraphs_from_table_in_doc(self) -> None:
-        template_docx_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"])
+        template_docx_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
+        )
         doc = docx.Document(template_docx_file)
         doc_tables = doc.tables
         want_min_len_paragraphs = 1000

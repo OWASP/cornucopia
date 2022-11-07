@@ -491,7 +491,7 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
             reg_str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace(" ", "").strip() + "$"
             value_name = v[9:-1].replace("_", " ").lower().strip()
             new_text_test = (
-                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1:].replace(" ", "").strip()
+                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1 :].replace(" ", "").strip()
             )
             if re.match(reg_str, new_text_test) and el_text.lower().startswith(value_name):
                 return el_text[: len(value_name)] + "\u2028" + v
@@ -573,6 +573,7 @@ def get_template_doc(file_type: str, style: str = "static") -> str:
         return template_doc
     else:
         logging.error(f"Source file not found: {template_doc}. Please ensure file exists and try again.")
+        return "None"
 
 
 def get_valid_file_types() -> List[str]:
@@ -832,7 +833,7 @@ def zip_dir(path: str, zip_filename: str) -> None:
         for root, dirs, files in os.walk(path):
             for file in files:
                 f = os.path.join(root, file)
-                zip_file.write(f, f[len(path):])
+                zip_file.write(f, f[len(path) :])
 
 
 if __name__ == "__main__":
