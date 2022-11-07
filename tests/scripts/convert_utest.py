@@ -305,7 +305,7 @@ class TestGetTemplateDoc(unittest.TestCase):
         template_docx_filename = os.sep.join(["resources", "templates", "owasp_cornucopia_template_static.docx"])
         c.convert_vars.args.inputfile = template_docx_filename
         input_filetype = "docx"
-        want_template_doc = None
+        want_template_doc = "None"
         want_error_log_messages = [
             (
                 f"ERROR:root:Source file not found: {template_docx_filename}. "
