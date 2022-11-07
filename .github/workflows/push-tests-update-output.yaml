@@ -83,7 +83,7 @@ jobs:
           pipenv install -d
 
       - name: Generate new output files
-        run: pipenv run python scripts/convert.py -l all -t all
+        run: pipenv run python scripts/convert.py -l all -t all -s all
 
       # Set the git username and email up.
       - name: setup git config
