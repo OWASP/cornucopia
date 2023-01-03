@@ -48,14 +48,10 @@ def get_cres_based_on_standard(standard_name):
             standard_to_cre = get_standard_page(page,standard_name,standard_to_cre)
     return standard_to_cre
 
-asvs = get_cres_based_on_standard("ASVS")
-asvs_to_cres = {}
 
 capec_to_cres = get_cres_based_on_standard("CAPEC")
 
 # cornucopia specific part, ASVS in cornucopia is mapped only to section, we map subsections
-for k,v in asvs.items():
-    asvs_to_cres[remove_last_digit(k)] =v
 
 card_val_to_desc = {}
 for src in source:
@@ -69,17 +65,17 @@ for index,m in enumerate(mappings):
         for cardIndex, card in enumerate(mapping.get("cards")):
             
             my_set = set()
-            res = [asvs_to_cres.get(f"{asvs}") for asvs in card.get("owasp_asvs") if  asvs_to_cres.get(f"{asvs}") ]
+            # res = [asvs_to_cres.get(f"{asvs}") for asvs in card.get("owasp_asvs") if  asvs_to_cres.get(f"{asvs}") ]
             res2 = []
-            if not res:
-                pprint(f"could not find asvs {[asvs for asvs in card.get('owasp_asvs')]}")
-                res2 = [capec_to_cres.get(f"{capec}") for capec in card.get("capec") if  capec_to_cres.get(f"{capec}")]
-                if not len(res2):
-                    pprint(f"could not find capec {[capec for capec in card.get('capec')]}")
-                    pprint(f"for manual mapping card is {card_val_to_desc[card.get('value')]}")
+            # if not res:
+            # pprint(f"could not find asvs {[asvs for asvs in card.get('owasp_asvs')]}")
+            res2 = [capec_to_cres.get(f"{capec}") for capec in card.get("capec") if  capec_to_cres.get(f"{capec}")]
+            if not len(res2):
+                pprint(f"could not find capec {[capec for capec in card.get('capec')]}")
+                pprint(f"for manual mapping card is {card_val_to_desc[card.get('value')]}")
                 pprint("-------------------")
 
-            my_set = set(itertools.chain.from_iterable(res)).union(set(itertools.chain.from_iterable(res2)))
+            my_set = set(itertools.chain.from_iterable(res2))
             result[index]['suits'][suitsIndex]['cards'][cardIndex]['cre'] = list(my_set)
 
 with open("./cre-mappings-1.2.yaml", 'w') as outf:
