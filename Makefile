@@ -94,4 +94,4 @@ python-test-update-golden-files:
 google-account:
 
 .PHONY: ready
-ready: fmt static-check python-unit-test python-integration-test python-coverage
+ready: fmt static-check python-coverage
