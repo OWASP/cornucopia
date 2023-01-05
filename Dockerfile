@@ -28,7 +28,8 @@ RUN apk add --no-cache \
     git \
     libc-dev \
     make \
-    && pip install pipenv
+    && pip install --upgrade pip
+RUN pip install --upgrade pipenv
 USER builder
 # Install Python dependencies so they are cached
 ARG workdir
