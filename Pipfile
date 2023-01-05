@@ -20,7 +20,6 @@ pyqrcode = "==1.2.1"
 types-PyYAML = "==6.0.12"
 docx2pdf = "==0.1.8"
 lxml = "==4.9.1"
-docx = "==0.2.4"
 
 [requires]
 python_version = "3.10"
