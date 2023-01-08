@@ -25,7 +25,7 @@ suits:
     safecode: [3, 16, 24, 35]
     value: '3'
   - capec: [28, 31, 48, 126, 162, 165, 213, 220, 221, 261]
-    cre: [503-455,TODO: too generic, maybe 010-308?] 
+    cre: [503-455,TODO : too generic, maybe 010-308?] 
     description: Dave can input malicious field names or data because it is not being
       checked within the context of the current user and process
     owasp_appsensor: [RE3-6, AE8-11, SE1, SE3-6, IE2-4, HT1-3]
@@ -52,7 +52,7 @@ suits:
     safecode: [3, 16, 24]
     value: '6'
   - capec: [28, 153, 165]
-    cre: [TODO: missing CRE 'Normalize all input before validating' child of CRE 503-455 - >>Input and output verification]
+    cre: [TODO : missing CRE 'Normalize all input before validating' child of CRE 503-455 - >>Input and output verification]
     description: Jan can craft special payloads to foil input validation because the
       character set is not specified/enforced, or the data is encoded multiple times,
       or the data is not fully converted into the same format the application uses
@@ -113,7 +113,7 @@ suits:
     safecode: [2, 17]
     value: Q
   - capec: [23, 28, 76, 152, 160, 261]
-    cre: [ "TODO: we are missing Server Side Injection which is a parent of the below", 664-080, 675-168, 612-252, 368-633, 737-086, 653-242, 316-272,
+    cre: [ "TODO : we are missing Server Side Injection which is a parent of the below", 664-080, 675-168, 612-252, 368-633, 737-086, 653-242, 316-272,
       480-071, 268-272, 540-566, 146-706, 443-447, 031-447, 624-716, 405-411, 082-327,
       166-151]
     description: Gabe can inject data into an server-side interpreter (e.g. SQL, OS
@@ -169,7 +169,7 @@ suits:
     safecode: [28]
     value: '5'
   - capec: [50]
-    cre: [581-525,"TODO: maybe a better fit would be a CRE: 'temporary credential handling' with 581-525 and all of those https://www.opencre.org/node/standard/Cheat_sheets/section/Forgot%20Password%20Cheat%20Sheet as a child"]
+    cre: [581-525,"TODO : maybe a better fit would be a CRE: 'temporary credential handling' with 581-525 and all of those https://www.opencre.org/node/standard/Cheat_sheets/section/Forgot%20Password%20Cheat%20Sheet as a child"]
     description: Sven can reuse a temporary password because the user does not have
       to change it on first use, or it has too long or no expiry, or it does not use
       an out-of-band delivery method (e.g. post, mobile app, SMS)
@@ -239,7 +239,7 @@ suits:
     safecode: [14, 28]
     value: Q
   - capec: [115, 207, 554]
-    cre: [TODO: we need an Authentication bypass tag that groups together CREs https://www.opencre.org/node/standard/CAPEC/section/115]
+    cre: [TODO : we need an Authentication bypass tag that groups together CREs https://www.opencre.org/node/standard/CAPEC/section/115]
     description: Olga can influence or alter authentication code/routines so they
       can be bypassed
     owasp_appsensor: []
@@ -250,7 +250,7 @@ suits:
   name: Authentication
 - cards:
   - capec: [31, 60, 61]
-    cre: [114-277, 470-731, TODO: both need to be linked to standards]
+    cre: [114-277, 470-731, TODO : both need to be linked to standards]
     description: William has control over the generation of session identifiers
     owasp_appsensor: [SE2]
     owasp_asvs: [3.1]
@@ -258,7 +258,7 @@ suits:
     safecode: [28]
     value: '2'
   - capec: []
-    cre: [TODO: missing CRE? although this seems like a redundant card]
+    cre: [TODO : missing CRE? although this seems like a redundant card]
     description: Ryan can use a single account in parallel since concurrent sessions
       are allowed
     owasp_appsensor: []
@@ -267,7 +267,7 @@ suits:
     safecode: [28]
     value: '3'
   - capec: [31, 61]
-    cre: [110-531, TODO: create CRE, child of this one with the Domain requirement]
+    cre: [110-531, TODO : create CRE, child of this one with the Domain requirement]
     description: Alison can set session identification cookies on another web application
       because the domain and path are not restricted sufficiently
     owasp_appsensor: [SE2]
@@ -316,7 +316,7 @@ suits:
     safecode: [28]
     value: '8'
   - capec: [31, 60]
-    cre: [177-260, TODO: ideally, we'd have a "secure session token cre that contains all relevant cres"]
+    cre: [177-260, TODO : ideally, we'd have a "secure session token cre that contains all relevant cres"]
     description: Ivan can steal session identifiers because they are sent over insecure
       channels, or are logged, or are revealed in error messages, or are included
       in URLs, or are accessible un-necessarily by code which the attacker can influence
@@ -327,7 +327,7 @@ suits:
     safecode: [28]
     value: '9'
   - capec: [62, 111]
-    cre: [060-472, "TODO: this needs to split in USE CSRF, USE anti-automation"]
+    cre: [060-472, "TODO : this needs to split in USE CSRF, USE anti-automation"]
     description: Marce can forge requests because per-session, or per-request for
       more critical actions, strong random tokens (i.e. anti-CSRF tokens) or similar
       are not being used for actions that change state
@@ -337,7 +337,7 @@ suits:
     safecode: [18]
     value: '10'
   - capec: [60]
-    cre: [TODO: missing CRE related to action repeatability]
+    cre: [TODO : missing CRE related to action repeatability]
     description: Jeff can resend an identical repeat interaction (e.g. HTTP request,
       signal, button press) and it is accepted, not rejected
     owasp_appsensor: [IE5]
@@ -346,7 +346,7 @@ suits:
     safecode: [12, 14]
     value: J
   - capec: [21]
-    cre: [TODO: do we really need to create a  cre: "consistently apply session controls"? ]
+    cre: [TODO : do we really need to create a  cre: "consistently apply session controls"? ]
     description: Salim can bypass session management because it is not applied comprehensively
       and consistently across the application
     owasp_appsensor: []
@@ -355,7 +355,7 @@ suits:
     safecode: [14, 28]
     value: Q
   - capec: [21]
-    cre: [TODO: missing?]
+    cre: [TODO : missing?]
     description: Peter can bypass the session management controls because they have
       been self-built and/or are weak, instead of using a standard framework or approved
       tested module
@@ -425,7 +425,7 @@ suits:
     safecode: [8, 10, 11]
     value: '7'
   - capec: [25, 39, 74, 162, 166, 207]
-    cre: [TODO: apply authentication consistently?]
+    cre: [TODO : apply authentication consistently?]
     description: Tom can bypass business rules by altering the usual process sequence
       or flow, or by undertaking the process in the incorrect order, or by manipulating
       date and time values used by the application, or by using valid features for
@@ -473,7 +473,7 @@ suits:
     safecode: [8, 10, 11]
     value: Q
   - capec: [207, 554]
-    cre: [TODO: ???]
+    cre: [TODO : ???]
     description: Ryan can influence or alter authorization controls and permissions,
       and can therefore bypass them
     owasp_appsensor: []
@@ -493,7 +493,7 @@ suits:
     safecode: [21, 29]
     value: '2'
   - capec: [31, 39, 68, 75, 133, 145, 162, 203, 438, 439, 442]
-    cre: [TODO: cre about checksums]
+    cre: [TODO : cre about checksums]
     description: Axel can modify transient or permanent data (stored or in transit),
       or source code, or updates/patches, or configuration data, because it is not
       subject to integrity checking
@@ -503,7 +503,7 @@ suits:
     safecode: [12, 14]
     value: '3'
   - capec: [185, 186, 187]
-    cre: [TODO: cre about encrypting sensitive data in transit, a parent of 270-634]
+    cre: [TODO : cre about encrypting sensitive data in transit, a parent of 270-634]
     description: Paulo can access data in transit that is not encrypted, even though
       the channel is encrypted
     owasp_appsensor: []
@@ -521,7 +521,7 @@ suits:
     safecode: [21, 29]
     value: '5'
   - capec: [31, 57, 102, 157, 158, 384, 466, 546]
-    cre: [TODO: what?]
+    cre: [TODO : what?]
     description: Romain can read and modify unencrypted data in memory or in transit
       (e.g. cryptographic secrets, credentials, session identifiers, personal and
       commercially-sensitive data), in use or in communications within the application,
@@ -533,7 +533,7 @@ suits:
     safecode: [29]
     value: '6'
   - capec: [31, 216]
-    cre: [TODO: too broad, includes certs, configuration, revocation etc]
+    cre: [TODO : too broad, includes certs, configuration, revocation etc]
     description: Gunter can intercept or modify encrypted data in transit because
       the protocol is poorly deployed, or weakly configured, or certificates are invalid,
       or certificates are not trusted, or the connection can be degraded to a weaker
@@ -563,7 +563,7 @@ suits:
     safecode: [14, 21, 29, 32, 33]
     value: '9'
   - capec: [97, 463]
-    cre: [TODO: need CRE about key strength]
+    cre: [TODO : need CRE about key strength]
     description: Susanna can break the cryptography in use because it is not strong
       enough for the degree of protection required, or it is not strong enough for
       the amount of effort the attacker is willing to make
@@ -591,7 +591,7 @@ suits:
     safecode: [21, 29]
     value: Q
   - capec: [207, 554]
-    cre: [TODO: ??? business logic?]
+    cre: [TODO : ??? business logic?]
     description: Dan can influence or alter cryptography code/routines (encryption,
       hashing, digital signatures, random number and GUID generation) and can therefore
       bypass them
@@ -616,7 +616,7 @@ suits:
     safecode: [3, 5, 6, 7, 9, 22, 25, 26, 34]
     value: '2'
   - capec: [189, 207]
-    cre: ["TODO: missing CRE 'application logic disclosure' child of CRE info disclosure"]
+    cre: ["TODO : missing CRE 'application logic disclosure' child of CRE info disclosure"]
     description: Andrew can access source code, or decompile, or otherwise access
       business logic to understand how the application works and any secrets contained
     owasp_appsensor: []
@@ -634,7 +634,7 @@ suits:
     safecode: []
     value: '4'
   - capec: [89, 103, 181, 459]
-    cre: ["TODO: what?"]
+    cre: ["TODO : what?"]
     description: Larry can influence the trust other parties including users have
       in the application, or abuse that trust elsewhere (e.g. in another application)
     owasp_appsensor: []
@@ -707,7 +707,7 @@ suits:
     safecode: [4]
     value: J
   - capec: []
-    cre: [418-853, TODO: missing CRE for response]
+    cre: [418-853, TODO : missing CRE for response]
     description: Jim can undertake malicious, non-normal, actions without real-time
       detection and response by the application
     owasp_appsensor: [(All)]
