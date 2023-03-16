@@ -22,11 +22,11 @@ if "unittest.util" in __import__("sys").modules:
 
 
 class TestSaveQRCodeImage(unittest.TestCase):
-    @patch('os.path.exists')
+    @patch("os.path.exists")
     def test_existing_file_is_not_overwritten(self, mock_exists):
         mock_exists.return_value = True
-        with patch('pyqrcode.create') as mock_pyqrcode_create:
-            c.save_qrcode_image('test_card_id')
+        with patch("pyqrcode.create") as mock_pyqrcode_create:
+            c.save_qrcode_image("test_card_id")
         mock_pyqrcode_create.assert_not_called()
 
 
