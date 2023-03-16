@@ -1,4 +1,5 @@
 # OWASP Cornucopia project
+[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7125/badge)](https://bestpractices.coreinfrastructure.org/projects/7125)
 OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams 
 identify security requirements in Agile, conventional and formal development processes. 
 It is language, platform and technology agnostic.
