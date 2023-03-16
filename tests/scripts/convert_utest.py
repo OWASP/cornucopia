@@ -4,12 +4,11 @@ import os
 import sys
 import docx  # type: ignore
 import logging
-import pyqrcode
 import glob
 import shutil
 import typing
 from typing import List, Dict, Any, Tuple
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 import scripts.convert as c
 
