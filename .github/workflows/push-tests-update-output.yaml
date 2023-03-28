@@ -22,17 +22,25 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions:
+  contents: read
+
 jobs:
   runtests:
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
       # Make sure we have some code to test
+      - name: Harden Runner
+        uses: step-security/harden-runner@1f99358870fe1c846a3ccba386cc2b2246836776 # v2.2.1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
       # Set the pip environment up
       - name: Get Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435 # v4.5.0
         with:
           python-version: '3.10'
           cache: 'pipenv' # caching pip dependencies
@@ -62,6 +70,8 @@ jobs:
 
   # If Tests pass, generate new output files and commit to repo
   updateoutputfiles:
+    permissions:
+      contents: write  # for Git to git push
     name: Update Output Files
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -69,11 +79,16 @@ jobs:
     needs: runtests
     steps:
       # Make sure we have some code to diff.
+      - name: Harden Runner
+        uses: step-security/harden-runner@1f99358870fe1c846a3ccba386cc2b2246836776 # v2.2.1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
       # Set the pip environment up
       - name: Get Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435 # v4.5.0
         with:
           python-version: '3.10'
           cache: 'pipenv' # caching pip dependencies
