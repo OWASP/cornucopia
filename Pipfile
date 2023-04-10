@@ -9,7 +9,7 @@ coverage = "==7.2.2"
 flake8 = "==6.0.0"
 httpretty = "==1.1.4"
 mypy = "==1.1.1"
-pytest = "==7.2.2"
+pytest = "==7.3.0"
 pytest-cov = "==4.0.0"
 freezegun = "==1.2.2"
 
