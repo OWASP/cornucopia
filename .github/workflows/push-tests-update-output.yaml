@@ -46,7 +46,7 @@ jobs:
           cache: 'pipenv' # caching pip dependencies
       - name: Install dependencies
         run: |
-          pip install pipenv
+          pip install pipenv==2023.4.29
           pipenv install --ignore-pipfile --dev
       # Run the tests
       - name: Run unit tests
@@ -94,7 +94,7 @@ jobs:
           cache: 'pipenv' # caching pip dependencies
       - name: Install dependencies
         run: |
-          pip install pipenv
+          pip install pipenv==2023.4.29
           pipenv install -d
 
       - name: Generate new output files
