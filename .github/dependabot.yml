@@ -9,22 +9,16 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      
+      interval: "daily"
+
   # Maintain dependencies for Docker
-  - package-ecosystem: ""
-    directory: "/"
-    schedule:
-      interval: "weekly"
-
-
-  - package-ecosystem: docker
+  - package-ecosystem: "docker"
     directory: /
     schedule:
-      interval: daily
+      interval: "daily"
