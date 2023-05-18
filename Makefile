@@ -17,13 +17,11 @@ RETRY_DELAY = 0.01
 
 PYTHON_TEST_PATTERN ?= "*_?test.py" # Default to all types of tests
 PYTHON_COVERAGE_MIN = 85 # %
-PYTHON_VERSION = $(shell head -1 .python-version)
 
 .PHONY: shfmt shellcheck pipenv
 shfmt shellcheck pipenv:
 	@docker build \
 		--tag $@ \
-		--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 		--build-arg "user_id=$(shell id -u)" \
 		--build-arg "group_id=$(shell id -g)" \
 		--build-arg "home=${HOME}" \
