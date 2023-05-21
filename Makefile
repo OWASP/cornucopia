@@ -44,11 +44,11 @@ static-check: pipenv
 	@$(DOCKER) pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503 --exclude ./.venv/
 	@$(DOCKER) pipenv run mypy --namespace-packages --strict ./scripts/
 
-.PHONY: coverage-check
+.PHONY:
 coverage-check: python-coverage-only
 
 .PHONY: test
-test: python-unit-test python-integration-test
+test: python-unit-test python-integration-test coverage-check
 	@$(MAKE) -C docker smoke-test
 
 .PHONY: python-test
