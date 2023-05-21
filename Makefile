@@ -44,7 +44,7 @@ static-check: pipenv
 	@$(DOCKER) pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503 --exclude ./.venv/
 	@$(DOCKER) pipenv run mypy --namespace-packages --strict ./scripts/
 
-.PHONY:
+.PHONY: coverage-check
 coverage-check: python-coverage-only
 
 .PHONY: test
