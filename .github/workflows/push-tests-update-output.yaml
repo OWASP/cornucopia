@@ -94,7 +94,15 @@ jobs:
           cache: 'pipenv' # caching pip dependencies
       - name: Install dependencies
         run: |
-          pip install pipenv==2023.4.29
+          echo pipenv == 2023.4.29 --hash=sha256:ee86355e1965bbcabf6702a01622a5bbb7f086c45e93ed4a1ccc106bab54021e > requirements.txt
+          echo virtualenv == 20.23.0 --hash=sha256:6abec7670e5802a528357fdc75b26b9f57d5d92f29c5462ba0fbe45feacc685e >> requirements.txt
+          echo virtualenv-clone == 0.5.7 --hash=sha256:44d5263bceed0bac3e1424d64f798095233b64def1c5689afa43dc3223caf5b0 >> requirements.txt
+          echo certifi == 2023.5.7 --hash=sha256:c6c2e98f5c7869efca1f8916fed228dd91539f9f1b444c314c06eef02980c716 >> requirements.txt
+          echo setuptools == 67.7.2 --hash=sha256:23aaf86b85ca52ceb801d32703f12d77517b2556af839621c641fca11287952b >> requirements.txt
+          echo platformdirs == 3.5.1 --hash=sha256:e2378146f1964972c03c085bb5662ae80b2b8c06226c54b2ff4aa9483e8a13a5 >> requirements.txt
+          echo filelock == 3.12.0 --hash=sha256:ad98852315c2ab702aeb628412cbf7e95b7ce8c3bf9565670b4eaecf1db370a9 >> requirements.txt
+          echo distlib == 0.3.6 --hash=sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e >> requirements.txt
+          pip install -r requirements.txt --require-hashes
           pipenv install -d
 
       - name: Generate new output files
