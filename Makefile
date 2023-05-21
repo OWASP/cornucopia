@@ -48,7 +48,7 @@ static-check: pipenv
 coverage-check: python-coverage-only
 
 .PHONY: test
-test: python-unit-test python-integration-test
+test: python-unit-test python-integration-test coverage-check
 	@$(MAKE) -C docker smoke-test
 
 .PHONY: python-test
