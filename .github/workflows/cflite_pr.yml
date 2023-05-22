@@ -2,7 +2,8 @@ name: ClusterFuzzLite PR fuzzing
 on:
   pull_request:
     paths:
-      - '**'
+      - 'scripts/convert**'
+      - 'test/scripts/convert**'
 permissions: read-all
 jobs:
   PR:
