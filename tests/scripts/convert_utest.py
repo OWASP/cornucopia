@@ -8,6 +8,7 @@ import glob
 import shutil
 import typing
 from typing import List, Dict, Any, Tuple
+from unittest.mock import patch
 
 import scripts.convert as c
 
@@ -17,6 +18,15 @@ c.convert_vars = c.ConvertVars()
 if "unittest.util" in __import__("sys").modules:
     # Show full diff in self.assertEqual.
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
+
+
+class TestSaveQRCodeImage(unittest.TestCase):
+    @patch("os.path.exists")
+    def test_existing_file_is_not_overwritten(self, mock_exists):
+        mock_exists.return_value = True
+        with patch("pyqrcode.create") as mock_pyqrcode_create:
+            c.save_qrcode_image("test_card_id")
+        mock_pyqrcode_create.assert_not_called()
 
 
 class TestGetValidFileTypes(unittest.TestCase):
