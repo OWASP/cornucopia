@@ -476,7 +476,7 @@ def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
 
 
 def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
-    for (k, v) in replacement_values:
+    for k, v in replacement_values:
         k2: str = k.replace("'", "’").strip()
         v2: str = v.strip()
         if el_text == k:

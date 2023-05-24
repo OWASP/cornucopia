@@ -17,13 +17,11 @@ RETRY_DELAY = 0.01
 
 PYTHON_TEST_PATTERN ?= "*_?test.py" # Default to all types of tests
 PYTHON_COVERAGE_MIN = 85 # %
-PYTHON_VERSION = $(shell head -1 .python-version)
 
 .PHONY: shfmt shellcheck pipenv
 shfmt shellcheck pipenv:
 	@docker build \
 		--tag $@ \
-		--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 		--build-arg "user_id=$(shell id -u)" \
 		--build-arg "group_id=$(shell id -g)" \
 		--build-arg "home=${HOME}" \
@@ -50,7 +48,7 @@ static-check: pipenv
 coverage-check: python-coverage-only
 
 .PHONY: test
-test: python-unit-test python-integration-test
+test: python-unit-test python-integration-test coverage-check
 	@$(MAKE) -C docker smoke-test
 
 .PHONY: python-test
@@ -94,4 +92,4 @@ python-test-update-golden-files:
 google-account:
 
 .PHONY: ready
-ready: fmt static-check python-unit-test python-integration-test python-coverage
+ready: fmt static-check python-coverage
