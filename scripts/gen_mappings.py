@@ -1,22 +1,25 @@
 import argparse
 import yaml
 import requests
-import qrcode
-import qrcode.image.svg
+import qrcode  # type: ignore
+import qrcode.image.svg  # type: ignore
+from typing import Any, Dict
 
 opencre_base_url = "https://opencre.org"
 opencre_rest_url = "https://opencre.org/rest/v1"
 CORNUCOPIA_VERSION = "1.20"
 
 
-def make_cre_link(id: str, frontend: bool = False):
+def make_cre_link(cre_id: str, frontend: bool = False) -> str:
     if frontend:
-        return f"{opencre_base_url}/cre/{id}"
+        return f"{opencre_base_url}/cre/{cre_id}"
     else:
-        return f"{opencre_rest_url}/id/{id}"
+        return f"{opencre_rest_url}/id/{cre_id}"
 
 
-def produce_ecommerce_mappings(source_file, standards_to_add=["ASVS", "CAPEC", "SCP"]) -> dict:
+def produce_ecommerce_mappings(
+    source_file: Dict[Any, Any], standards_to_add: list[str] = ["ASVS", "CAPEC", "SCP"]
+) -> Dict[Any, Any]:
     base = {
         "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
     }
@@ -39,7 +42,7 @@ def produce_ecommerce_mappings(source_file, standards_to_add=["ASVS", "CAPEC", "
     return base
 
 
-def generate_qr_images(existing_mappings: dict, directory_path: str):
+def generate_qr_images(existing_mappings: Dict[Any, Any], directory_path: str) -> None:
     for suit in existing_mappings["suits"]:
         for card in suit["cards"]:
             cre = card["cre"][0]
@@ -50,7 +53,7 @@ def generate_qr_images(existing_mappings: dict, directory_path: str):
                 img.save(f)
 
 
-def main():
+def main() -> None:
     global opencre_base_url, opencre_rest_url
     parser = argparse.ArgumentParser(description="generate mappings")
     parser.add_argument("-c", "--cres", help="Where to find the file mapping cornucopia to CREs", required=True)
