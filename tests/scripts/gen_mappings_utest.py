@@ -3,30 +3,9 @@ import qrcode
 from unittest.mock import MagicMock, patch
 from scripts import gen_mappings as gm
 
-
 if "unittest.util" in __import__("sys").modules:
     # Show full diff in self.assertEqual.
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
-
-
-class TestProduceEcommerceMappings(unittest.TestCase):
-    def test_can_add_one_standard(self):
-        input = {
-            "suits": [
-                {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
-                {"cards": [{"cre": ["138-448"], "value": "2"}], "name": "Session management"},
-            ]
-        }
-        standards = ["ASVS"]
-        expected = {
-            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": "1.20"},
-            "suits": [
-                {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
-                {"cards": [{"ASVS": "V2.3.3", "cre": ["138-448"], "value": "2"}], "name": "Session management"},
-            ],
-        }
-
-        self.assertEqual(gm.produce_ecommerce_mappings(input, standards), expected)
 
 
 class TestGenerateQRImages(unittest.TestCase):
@@ -57,9 +36,27 @@ class TestGenerateQRImages(unittest.TestCase):
 
 
 class TestProduceEcommerceMappings(unittest.TestCase):
+    def test_can_add_one_standard(self):
+        test_input = {
+            "suits": [
+                {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
+                {"cards": [{"cre": ["138-448"], "value": "2"}], "name": "Session management"},
+            ]
+        }
+        standards = ["ASVS"]
+        expected = {
+            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": "1.20"},
+            "suits": [
+                {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
+                {"cards": [{"ASVS": "V2.3.3", "cre": ["138-448"], "value": "2"}], "name": "Session management"},
+            ],
+        }
+
+        self.assertEqual(gm.produce_ecommerce_mappings(test_input, standards), expected)
+
     @patch("requests.get")
     def test_produce_ecommerce_mappings(self, mock_requests_get):
-        CORNUCOPIA_VERSION = "1.20"
+        cornucopia_version = "1.20"
         source_file = {
             "suits": [
                 {
@@ -89,7 +86,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         result = gm.produce_ecommerce_mappings(source_file, standards_to_add)
 
         expected_result = {
-            "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
+            "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
             "suits": [{"cards": [{"cre": ["cre1"], "ASVS": "123", "CAPEC": "456"}]}],
         }
 
@@ -101,7 +98,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
 
     @patch("requests.get")
     def test_produce_ecommerce_mappings_cre_not_found(self, mock_requests_get):
-        CORNUCOPIA_VERSION = "1.20"
+        cornucopia_version = "1.20"
         source_file = {
             "suits": [
                 {
@@ -122,7 +119,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         result = gm.produce_ecommerce_mappings(source_file, standards_to_add)
 
         expected_result = {
-            "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
+            "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
             "suits": [
                 {
                     "cards": [
@@ -141,23 +138,23 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_make_cre_link_frontend(self):
-        id = "cre1"
+        test_id = "cre1"
         frontend = True
 
-        result = gm.make_cre_link(id, frontend)
+        result = gm.make_cre_link(test_id, frontend)
 
-        expected_result = f"{gm.opencre_base_url}/cre/{id}"
+        expected_result = f"{gm.opencre_base_url}/cre/{test_id}"
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
 
     def test_make_cre_link_rest(self):
-        id = "cre1"
+        test_id = "cre1"
         frontend = False
 
-        result = gm.make_cre_link(id, frontend)
+        result = gm.make_cre_link(test_id, frontend)
 
-        expected_result = f"{gm.opencre_rest_url}/id/{id}"
+        expected_result = f"{gm.opencre_rest_url}/id/{test_id}"
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
