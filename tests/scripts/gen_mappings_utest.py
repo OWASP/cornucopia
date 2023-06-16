@@ -1,5 +1,7 @@
 import unittest
 import qrcode
+import argparse
+import yaml
 from unittest.mock import MagicMock, patch
 from scripts import gen_mappings as gm
 
@@ -158,6 +160,50 @@ class TestProduceEcommerceMappings(unittest.TestCase):
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
+
+
+class MainTestCase(unittest.TestCase):
+    @patch('builtins.print')
+    @patch('builtins.open')
+    def test_main_with_staging(self, mock_open, mock_print):
+        args = {
+            'cres': 'source/cre-mappings.yaml',
+            'staging': True,
+            'qr_images': None,
+            'target': None
+        }
+        mock_file = mock_open.return_value.__enter__.return_value
+        mock_file.read.return_value = 'content'
+
+        with patch.object(argparse, 'ArgumentParser') as mock_parser:
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**args)
+            with patch.object(yaml, 'safe_load') as mock_load:
+                mock_load.return_value = {'key': 'value'}
+                with patch.object(yaml, 'safe_dump') as mock_dump:
+                    gm.main()
+                    mock_print.assert_called_with('Using staging.opencre.org')
+                    mock_open.assert_called_with('source/cre-mappings.yaml')
+
+    @patch('builtins.print')
+    @patch('builtins.open')
+    def test_main_without_staging(self, mock_open, mock_print):
+        args = {
+            'cres': 'source/cre-mappings.yaml',
+            'staging': False,
+            'qr_images': None,
+            'target': None
+        }
+        mock_file = mock_open.return_value.__enter__.return_value
+        mock_file.read.return_value = 'content'
+
+        with patch.object(argparse, 'ArgumentParser') as mock_parser:
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**args)
+            with patch.object(yaml, 'safe_load') as mock_load:
+                mock_load.return_value = {'key': 'value'}
+                with patch.object(yaml, 'safe_dump') as mock_dump:
+                    gm.main()
+                    mock_print.assert_not_called()
+                    mock_open.assert_called_with('source/cre-mappings.yaml')
 
 
 if __name__ == "__main__":
