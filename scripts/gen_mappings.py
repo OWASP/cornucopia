@@ -8,6 +8,11 @@ from typing import Any, Dict
 opencre_base_url = "https://opencre.org"
 opencre_rest_url = "https://opencre.org/rest/v1"
 CORNUCOPIA_VERSION = "1.20"
+STANDARDS_TO_ADD = [
+    "ASVS",
+    "CAPEC",
+    "SCP",
+]
 
 
 def make_cre_link(cre_id: str, frontend: bool = False) -> str:
@@ -17,9 +22,7 @@ def make_cre_link(cre_id: str, frontend: bool = False) -> str:
         return f"{opencre_rest_url}/id/{cre_id}"
 
 
-def produce_ecommerce_mappings(
-    source_file: Dict[Any, Any], standards_to_add: list[str] = ["ASVS", "CAPEC", "SCP"]
-) -> Dict[Any, Any]:
+def produce_ecommerce_mappings(source_file: Dict[Any, Any], standards_to_add: list[str]) -> Dict[Any, Any]:
     base = {
         "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
     }
@@ -57,7 +60,7 @@ def main() -> None:
     global opencre_base_url, opencre_rest_url
     parser = argparse.ArgumentParser(description="generate mappings")
     parser.add_argument("-c", "--cres", help="Where to find the file mapping cornucopia to CREs", required=True)
-    parser.add_argument("-t", "--target", help="Path where to store the result")
+    parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
     parser.add_argument(
         "-s", "--staging", action="store_true", help="If provided will use staging.opencre.org instead of opencre.org"
     )
@@ -72,7 +75,7 @@ def main() -> None:
     with open(args["cres"]) as f:
         mappings = yaml.safe_load(f)
         if args["target"]:
-            ecommerce = produce_ecommerce_mappings(mappings)
+            ecommerce = produce_ecommerce_mappings(mappings, STANDARDS_TO_ADD)
             with open(args["target"], "w") as ef:
                 yaml.safe_dump(ecommerce, ef)
         if args["qr_images"]:
