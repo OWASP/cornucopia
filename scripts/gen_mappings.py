@@ -31,9 +31,9 @@ def produce_ecommerce_mappings(
             for mapping_id in card[mapping_type]:
                 response = requests.get(make_mapping_link(mapping_id, mapping_type))
                 if response.status_code == 200:
-                    cre_object = response.json().get("data")
+                    map_object = response.json().get("data")
                     for standard in standards_to_add:
-                        for link in cre_object.get("links"):
+                        for link in map_object.get("links"):
                             if link.get("document").get("name") == standard:
                                 source_file["suits"][indx]["cards"][card_indx][standard] = link.get("document").get(
                                     "sectionID"
