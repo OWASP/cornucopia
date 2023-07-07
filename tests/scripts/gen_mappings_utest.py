@@ -1,5 +1,4 @@
 import unittest
-import qrcode
 import argparse
 import yaml
 from unittest.mock import MagicMock, patch
@@ -8,33 +7,6 @@ from scripts import gen_mappings as gm
 if "unittest.util" in __import__("sys").modules:
     # Show full diff in self.assertEqual.
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
-
-
-class TestGenerateQRImages(unittest.TestCase):
-    @patch("scripts.gen_mappings.make_cre_link")
-    @patch("qrcode.make")
-    def test_generate_qr_images(self, mock_qrcode_make, mock_make_cre_link):
-        existing_mappings = {"suits": [{"cards": [{"cre": ["cre1", "cre2"]}]}]}
-        directory_path = "/path/to/directory"
-
-        mock_make_cre_link.return_value = "https://example.com/cre1"
-
-        # Mock the qrcode.make() function to return a MagicMock object
-        mock_img = MagicMock()
-        mock_qrcode_make.return_value = mock_img
-
-        # Mock the 'open' function to return a MagicMock object
-        mock_open = MagicMock()
-        with patch("builtins.open", mock_open):
-            gm.generate_qr_images(existing_mappings, directory_path)
-
-        # Assert that the necessary functions were called
-        mock_make_cre_link.assert_called_with("cre1", frontend=True)
-        mock_qrcode_make.assert_called_with("https://example.com/cre1", image_factory=qrcode.image.svg.SvgImage)
-        mock_open.assert_called_with("/path/to/directory/cre1", "wb")
-
-        # Assert that the img.save() method was called on the MagicMock object
-        mock_img.save.assert_called_with(mock_open().__enter__())
 
 
 class TestProduceEcommerceMappings(unittest.TestCase):
@@ -54,7 +26,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
             ],
         }
 
-        self.assertEqual(gm.produce_ecommerce_mappings(test_input, standards), expected)
+        self.assertEqual(gm.produce_ecommerce_mappings(test_input, standards, "cre"), expected)
 
     @patch("requests.get")
     def test_produce_ecommerce_mappings(self, mock_requests_get):
@@ -85,7 +57,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add)
+        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre")
 
         expected_result = {
             "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
@@ -93,7 +65,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
 
         # Assert that the necessary functions were called
-        mock_requests_get.assert_called_with(gm.make_cre_link("cre1"))
+        mock_requests_get.assert_called_with(gm.make_mapping_link("cre1", "cre"))
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
@@ -118,7 +90,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         mock_response.status_code = 404
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add)
+        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre")
 
         expected_result = {
             "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
@@ -134,7 +106,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
 
         # Assert that the necessary functions were called
-        mock_requests_get.assert_called_with(gm.make_cre_link("cre1"))
+        mock_requests_get.assert_called_with(gm.make_mapping_link("cre1", "cre"))
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
@@ -143,7 +115,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         test_id = "cre1"
         frontend = True
 
-        result = gm.make_cre_link(test_id, frontend)
+        result = gm.make_mapping_link(test_id, "cre", frontend)
 
         expected_result = f"{gm.opencre_base_url}/cre/{test_id}"
 
@@ -154,7 +126,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         test_id = "cre1"
         frontend = False
 
-        result = gm.make_cre_link(test_id, frontend)
+        result = gm.make_mapping_link(test_id, "cre", frontend)
 
         expected_result = f"{gm.opencre_rest_url}/id/{test_id}"
 
@@ -181,7 +153,7 @@ class MainTestCase(unittest.TestCase):
     @patch("builtins.print")
     @patch("builtins.open")
     def test_main_without_staging(self, mock_open, mock_print):
-        args = {"cres": "source/cre-mappings.yaml", "staging": False, "qr_images": None, "target": None}
+        args = {"cre": "source/cre-mappings.yaml", "staging": False, "qr_images": None, "target": None}
         mock_file = mock_open.return_value.__enter__.return_value
         mock_file.read.return_value = "content"
 
