@@ -13,7 +13,6 @@ class TestProduceEcommerceMappings(unittest.TestCase):
     def test_can_add_one_standard(self):
         test_input = {
             "suits": [
-                {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
                 {"cards": [{"cre": ["138-448"], "value": "2"}], "name": "Session management"},
             ]
         }
@@ -21,7 +20,6 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         expected = {
             "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": "1.20"},
             "suits": [
-                {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
                 {"cards": [{"ASVS": "V2.3.3", "cre": ["138-448"], "value": "2"}], "name": "Session management"},
             ],
         }
@@ -111,22 +109,20 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         # Assert the expected result
         self.assertEqual(result, expected_result)
 
-    def test_make_cre_link_frontend(self):
+    def test_make_cre_link_capec(self):
         test_id = "cre1"
-        frontend = True
 
-        result = gm.make_mapping_link(test_id, "cre", frontend)
+        result = gm.make_mapping_link(test_id, "CAPEC")
 
-        expected_result = f"{gm.opencre_base_url}/cre/{test_id}"
+        expected_result = f"{gm.opencre_rest_url}/standard/CAPEC?sectionID={test_id}"
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
 
-    def test_make_cre_link_rest(self):
+    def test_make_cre_link_cre(self):
         test_id = "cre1"
-        frontend = False
 
-        result = gm.make_mapping_link(test_id, "cre", frontend)
+        result = gm.make_mapping_link(test_id, "cre")
 
         expected_result = f"{gm.opencre_rest_url}/id/{test_id}"
 
