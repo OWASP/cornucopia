@@ -14,10 +14,12 @@ STANDARDS_TO_ADD = [
 
 
 def make_mapping_link(mapping_id: str, mapping_type: str) -> str:
-    if mapping_type == "cre":
-        return f"{opencre_rest_url}/id/{mapping_id}"
-    else:
-        return f"{opencre_rest_url}/standard/{mapping_type}?sectionID={mapping_id}"
+    url = (
+        f"{opencre_rest_url}/id/{mapping_id}"
+        if mapping_type == "cre"
+        else f"{opencre_rest_url}/standard/{mapping_type}?sectionID={mapping_id}"
+    )
+    return url
 
 
 def produce_ecommerce_mappings(

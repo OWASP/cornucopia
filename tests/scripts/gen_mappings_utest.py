@@ -12,6 +12,7 @@ if "unittest.util" in __import__("sys").modules:
 class TestProduceEcommerceMappings(unittest.TestCase):
     def test_can_add_one_standard(self):
         test_input = {
+            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": '1.20'},
             "suits": [
                 {"cards": [{"cre": ["138-448"], "value": "2"}], "name": "Session management"},
             ]
@@ -30,6 +31,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
     def test_produce_ecommerce_mappings(self, mock_requests_get):
         cornucopia_version = "1.20"
         source_file = {
+            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": '1.20'},
             "suits": [
                 {
                     "cards": [
@@ -72,6 +74,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
     def test_produce_ecommerce_mappings_cre_not_found(self, mock_requests_get):
         cornucopia_version = "1.20"
         source_file = {
+            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": '1.20'},
             "suits": [
                 {
                     "cards": [
