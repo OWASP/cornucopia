@@ -6,7 +6,7 @@ from typing import Any, Dict
 opencre_rest_url = "https://opencre.org/rest/v1"
 CORNUCOPIA_VERSION = "1.20"
 STANDARDS_TO_ADD = [
-    "ASVS",
+    "CRE" "ASVS",
     "CAPEC",
     "OWASP Cheat Sheets",
     "OWASP Proactive Controls",
@@ -21,27 +21,28 @@ def make_mapping_link(mapping_id: str, mapping_type: str) -> str:
 
 
 def produce_ecommerce_mappings(
-    source_file: Dict[Any, Any], standards_to_add: list[str], mapping_type: str
+    src_file: Dict[Any, Any], standards_to_add: list[str], mapping_type: str
 ) -> Dict[Any, Any]:
-    base = {
-        "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
-    }
-    for indx, suit in enumerate(source_file.copy()["suits"]):
+    base = {"meta": src_file.copy()["meta"]}
+    for indx, suit in enumerate(src_file.copy()["suits"]):
         for card_indx, card in enumerate(suit["cards"]):
             for mapping_id in card[mapping_type]:
                 response = requests.get(make_mapping_link(mapping_id, mapping_type))
                 if response.status_code == 200:
                     map_object = response.json().get("data")
-                    for standard in standards_to_add:
-                        for link in map_object.get("links"):
-                            if link.get("document").get("name") == standard:
-                                source_file["suits"][indx]["cards"][card_indx][standard] = link.get("document").get(
-                                    "sectionID"
-                                )
+                    for std in standards_to_add:
+                        id_name = "id" if std == "cre" else "section" if std.startswith("OWASP ") else "sectionID"
+                        try:
+                            for link in map_object.get("links"):
+                                if link.get("document").get("name") == std:
+                                    src_file["suits"][indx]["cards"][card_indx][std] = link.get("document").get(id_name)
+                        except AttributeError:
+                            print(f"no links from {mapping_type} {mapping_id}")
+                            continue
                 else:
                     print(f"could not find {mapping_type} {mapping_id}, status code {response.status_code}")
 
-    base["suits"] = source_file["suits"]
+    base["suits"] = src_file["suits"]
     return base
 
 
@@ -69,7 +70,7 @@ def main() -> None:
         if args["target"]:
             ecommerce = produce_ecommerce_mappings(mappings, STANDARDS_TO_ADD, mapping_base)
             with open(args["target"], "w") as ef:
-                yaml.safe_dump(ecommerce, ef)
+                yaml.safe_dump(ecommerce, ef, default_flow_style=None)
 
 
 if __name__ == "__main__":
