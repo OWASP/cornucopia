@@ -40,10 +40,6 @@ def produce_ecommerce_mappings(
                     if map_type == "standards":
                         map_object = map_object[0]
 
-                    from pprint import pprint
-                    pprint(map_object)
-                    pprint(make_mapping_link(mapping_id, mapping_base))
-
                     for std in standards_to_add:
                         map_id = "id" if std == "CRE" else "section" if std.startswith("OWASP ") else "sectionID"
                         if "links" in map_object:
