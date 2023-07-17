@@ -24,18 +24,14 @@ def make_mapping_link(mapping_id: str, mapping_type: str) -> str:
 
 
 def produce_ecommerce_mappings(
-    src_file: Dict[Any, Any], standards_to_add: list[str], mapping_type: str
+    src_file: Dict[Any, Any], standards_to_add: list[str], mapping_base: str, map_type: str, map_name: str
 ) -> Dict[Any, Any]:
     base = {"meta": src_file.copy()["meta"]}
     for indx, suit in enumerate(src_file.copy()["suits"]):
         for card_indx, card in enumerate(suit["cards"]):
-            for mapping_id in card[mapping_type]:
-                response = requests.get(make_mapping_link(mapping_id, mapping_type))
+            for mapping_id in card[mapping_base]:
+                response = requests.get(make_mapping_link(mapping_id, mapping_base))
                 if response.status_code == 200:
-                    if mapping_type == "capec":
-                        map_type, map_name = "standards", "doctype"
-                    else:
-                        map_type, map_name = "data", "name"
                     map_object = response.json().get(map_type)
                     for std in standards_to_add:
                         map_id = "id" if std == "CRE" else "section" if std.startswith("OWASP ") else "sectionID"
@@ -44,10 +40,10 @@ def produce_ecommerce_mappings(
                                 if link.get("document").get(map_name) == std:
                                     src_file["suits"][indx]["cards"][card_indx][std] = link.get("document").get(map_id)
                         except AttributeError:
-                            print(f"no links from {mapping_type} {mapping_id}")
+                            print(f"no links from {mapping_base} {mapping_id}")
                             continue
                 else:
-                    print(f"could not find {mapping_type} {mapping_id}, status code {response.status_code}")
+                    print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
 
     base["suits"] = src_file["suits"]
     return base
@@ -64,19 +60,24 @@ def main() -> None:
         "-s", "--staging", action="store_true", help="If provided will use staging.opencre.org instead of opencre.org"
     )
     args = vars(parser.parse_args())
-    basefile = mapping_base = standards_adding = ""
+    basefile = mapping_base = ""
+    standards_2_add = []
     if args["cre"]:
         basefile = args["cre"]
         mapping_base = "cre"
-        standards_adding = STANDARDS_TO_ADD
+        map_type = "data"
+        map_name = "name"
+        standards_2_add = STANDARDS_TO_ADD
     elif args["capec"]:
         basefile = args["capec"]
         mapping_base = "capec"
-        standards_adding = STANDARDS_FROM
+        map_type = "standards"
+        map_name = "doctype"
+        standards_2_add = STANDARDS_FROM
     with open(basefile) as f:
         mappings = yaml.safe_load(f)
         if args["target"]:
-            ecommerce = produce_ecommerce_mappings(mappings, standards_adding, mapping_base)
+            ecommerce = produce_ecommerce_mappings(mappings, standards_2_add, mapping_base, map_type, map_name)
             with open(args["target"], "w") as ef:
                 yaml.safe_dump(ecommerce, ef, default_flow_style=None)
 

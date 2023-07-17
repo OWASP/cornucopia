@@ -25,7 +25,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
             ],
         }
 
-        self.assertEqual(gm.produce_ecommerce_mappings(test_input, standards, "cre"), expected)
+        self.assertEqual(gm.produce_ecommerce_mappings(test_input, standards, "cre", "data", "name"), expected)
 
     @patch("requests.get")
     def test_produce_ecommerce_mappings(self, mock_requests_get):
@@ -57,7 +57,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre")
+        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre", "data", "name")
 
         expected_result = {
             "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
@@ -91,7 +91,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         mock_response.status_code = 404
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre")
+        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre", "data", "name")
 
         expected_result = {
             "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
