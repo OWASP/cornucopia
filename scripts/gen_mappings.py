@@ -35,7 +35,7 @@ def produce_ecommerce_mappings(
                 
                 if response.status_code == 200:
                     map_object = response.json().get(map_type)
-                    time.sleep(1)
+                    time.sleep(1) # important as cloudflare throttled me
                     
                     if map_type == "standards":
                         map_object = map_object[0]
