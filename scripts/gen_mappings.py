@@ -56,9 +56,6 @@ def main() -> None:
     group.add_argument("-c", "--cre", help="Where to find the file mapping cornucopia to CREs")
     group.add_argument("-k", "--capec", help="Where to find the file mapping cornucopia to CAPEC")
     parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
-    parser.add_argument(
-        "-s", "--staging", action="store_true", help="If provided will use staging.opencre.org instead of opencre.org"
-    )
     args = vars(parser.parse_args())
     basefile = mapping_base = ""
     standards_2_add = []
