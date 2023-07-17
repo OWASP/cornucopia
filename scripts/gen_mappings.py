@@ -2,6 +2,7 @@ import argparse
 import yaml
 import requests
 from typing import Any, Dict
+import time
 
 opencre_rest_url = "https://opencre.org/rest/v1"
 CORNUCOPIA_VERSION = "1.20"
@@ -31,17 +32,34 @@ def produce_ecommerce_mappings(
         for card_indx, card in enumerate(suit["cards"]):
             for mapping_id in card[mapping_base]:
                 response = requests.get(make_mapping_link(mapping_id, mapping_base))
+                
                 if response.status_code == 200:
                     map_object = response.json().get(map_type)
+                    time.sleep(1)
+                    
+                    if map_type == "standards":
+                        map_object = map_object[0]
+
+                    from pprint import pprint
+                    pprint(map_object)
+                    pprint(make_mapping_link(mapping_id, mapping_base))
+
                     for std in standards_to_add:
                         map_id = "id" if std == "CRE" else "section" if std.startswith("OWASP ") else "sectionID"
-                        try:
-                            for link in map_object.get("links"):
-                                if link.get("document").get(map_name) == std:
-                                    src_file["suits"][indx]["cards"][card_indx][std] = link.get("document").get(map_id)
-                        except AttributeError:
+                        if "links" in map_object:
+                            try:
+                                for link in map_object.get("links"):
+                                    if link.get("document").get(map_name) == std:
+                                        if not std in src_file["suits"][indx]["cards"][card_indx]:
+                                            src_file["suits"][indx]["cards"][card_indx][std] = []
+                                        src_file["suits"][indx]["cards"][card_indx][std].append(link.get("document").get(map_id))
+                            except AttributeError:
+                                print(f"no links from {mapping_base} {mapping_id}")
+                                continue
+                        else:
                             print(f"no links from {mapping_base} {mapping_id}")
                             continue
+ 
                 else:
                     print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
 
