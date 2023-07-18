@@ -5,230 +5,230 @@ meta:
   version: '1.20'
 suits:
 - cards:
-  - cre:
+  - CRE:
     - 308-515
     value: '2'
-  - cre:
+  - CRE:
     - 010-308
     value: '3'
-  - cre:
+  - CRE:
     - 064-808
     value: '4'
-  - cre:
+  - CRE:
     - 161-451
     value: '5'
-  - cre:
+  - CRE:
     - 848-711
     value: '6'
-  - cre:
+  - CRE:
     - 538-446
     value: '7'
-  - cre:
+  - CRE:
     - 764-765
     value: '8'
-  - cre:
+  - CRE:
     - 118-602
     value: '9'
-  - cre:
+  - CRE:
     - 650-560
     value: '10'
-  - cre:
+  - CRE:
     - 848-711
     value: J
-  - cre:
+  - CRE:
     - 161-451
     value: Q
-  - cre:
+  - CRE:
     - 760-764
     value: K
   name: Data validation & encoding
 - cards:
-  - cre:
+  - CRE:
     - 138-448
     value: '2'
-  - cre:
+  - CRE:
     - 223-780
     value: '3'
-  - cre:
+  - CRE:
     - 224-321
     value: '4'
-  - cre:
+  - CRE:
     - 774-888
     value: '5'
-  - cre:
+  - CRE:
     - 581-525
     value: '6'
-  - cre:
+  - CRE:
     - 270-568
     value: '7'
-  - cre:
+  - CRE:
     - 166-151
     value: '8'
-  - cre:
+  - CRE:
     - 258-115
     value: '9'
-  - cre:
+  - CRE:
     - 113-133
     value: '10'
-  - cre:
+  - CRE:
     - 146-556
     value: J
-  - cre:
+  - CRE:
     - 146-556
     value: Q
-  - cre:
+  - CRE:
     - 633-428
     value: K
   name: Authentication
 - cards:
-  - cre:
+  - CRE:
     - 716-526
     value: '2'
-  - cre:
+  - CRE:
     - 177-260
     value: '3'
-  - cre:
+  - CRE:
     - 177-260
     value: '4'
-  - cre:
+  - CRE:
     - 716-526
     value: '5'
-  - cre:
+  - CRE:
     - 470-731
     value: '6'
-  - cre:
+  - CRE:
     - 457-165
     value: '7'
-  - cre:
+  - CRE:
     - 470-731
     value: '8'
-  - cre:
+  - CRE:
     - 177-260
     value: '9'
-  - cre:
+  - CRE:
     - 060-472
     value: '10'
-  - cre:
+  - CRE:
     - 060-472
     value: J
-  - cre:
+  - CRE:
     - 576-042
     value: Q
-  - cre:
+  - CRE:
     - 177-260
     value: K
   name: Session management
 - cards:
-  - cre:
+  - CRE:
     - 657-084
     value: '2'
-  - cre:
+  - CRE:
     - 330-281
     value: '3'
-  - cre:
+  - CRE:
     - 284-521
     value: '4'
-  - cre:
+  - CRE:
     - 284-521
     value: '5'
-  - cre:
+  - CRE:
     - 284-521
     value: '6'
-  - cre:
+  - CRE:
     - 284-521
     value: '7'
-  - cre:
+  - CRE:
     - 576-042
     value: '8'
-  - cre:
+  - CRE:
     - 854-643
     value: '9'
-  - cre:
+  - CRE:
     - 128-128
     value: '10'
-  - cre:
+  - CRE:
     - 308-515
     value: J
-  - cre:
+  - CRE:
     - 857-718
     value: Q
-  - cre:
+  - CRE:
     - 284-521
     value: K
   name: Authorization
 - cards:
-  - cre:
+  - CRE:
     - 504-340
     value: '2'
-  - cre:
+  - CRE:
     - 762-616
     value: '3'
-  - cre:
+  - CRE:
     - 504-340
     value: '4'
-  - cre:
+  - CRE:
     - 036-810
     value: '5'
-  - cre:
+  - CRE:
     - 504-340
     value: '6'
-  - cre:
+  - CRE:
     - 504-340
     value: '7'
-  - cre:
+  - CRE:
     - 400-007
     value: '8'
-  - cre:
+  - CRE:
     - 664-571
     value: '9'
-  - cre:
+  - CRE:
     - 002-801
     value: '10'
-  - cre:
+  - CRE:
     - 223-780
     value: J
-  - cre:
+  - CRE:
     - 223-780
     value: Q
-  - cre:
+  - CRE:
     - 170-772
     value: K
   name: Cryptography
 - cards:
-  - cre:
+  - CRE:
     - 724-770
     value: '2'
-  - cre:
+  - CRE:
     - 308-515
     value: '3'
-  - cre:
+  - CRE:
     - 184-284
     value: '4'
-  - cre: 
+  - CRE:
     - 155-155
     value: '5'
-  - cre:
+  - CRE:
     - 513-183
     value: '6'
-  - cre:
+  - CRE:
     - 402-706
     value: '7'
-  - cre:
+  - CRE:
     - 724-770
     value: '8'
-  - cre:
+  - CRE:
     - 152-725
     value: '9'
-  - cre:
+  - CRE:
     - 613-285
     value: '10'
-  - cre:
+  - CRE:
     - 180-488
     value: J
-  - cre:
+  - CRE:
     - 132-146
     value: Q
-  - cre:
+  - CRE:
     - 623-550
     value: K
   name: Cornucopia

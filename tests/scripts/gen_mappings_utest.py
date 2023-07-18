@@ -21,7 +21,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         expected = {
             "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": "1.20"},
             "suits": [
-                {"cards": [{"ASVS": "V2.3.3", "cre": ["138-448"], "value": "2"}], "name": "Session management"},
+                {"cards": [{"ASVS": ["V2.3.3"], "cre": ["138-448"], "value": "2"}], "name": "Session management"},
             ],
         }
 
@@ -36,7 +36,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
                 {
                     "cards": [
                         {
-                            "cre": ["cre1"],
+                            "CRE": ["cre1"],
                         }
                     ]
                 }
@@ -57,15 +57,15 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre", "data", "name")
+        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "CRE", "data", "name")
 
         expected_result = {
             "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
-            "suits": [{"cards": [{"cre": ["cre1"], "ASVS": "123", "CAPEC": "456"}]}],
+            "suits": [{"cards": [{"CRE": ["cre1"], "ASVS": ["123"], "CAPEC": ["456"]}]}],
         }
 
         # Assert that the necessary functions were called
-        mock_requests_get.assert_called_with(gm.make_mapping_link("cre1", "cre"))
+        mock_requests_get.assert_called_with(gm.make_mapping_link("cre1", "CRE"))
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
@@ -79,7 +79,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
                 {
                     "cards": [
                         {
-                            "cre": ["cre1"],
+                            "CRE": ["cre1"],
                         }
                     ]
                 }
@@ -91,7 +91,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         mock_response.status_code = 404
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "cre", "data", "name")
+        result = gm.produce_ecommerce_mappings(source_file, standards_to_add, "CRE", "data", "name")
 
         expected_result = {
             "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
@@ -99,7 +99,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
                 {
                     "cards": [
                         {
-                            "cre": ["cre1"],
+                            "CRE": ["cre1"],
                         }
                     ]
                 }
@@ -107,7 +107,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
 
         # Assert that the necessary functions were called
-        mock_requests_get.assert_called_with(gm.make_mapping_link("cre1", "cre"))
+        mock_requests_get.assert_called_with(gm.make_mapping_link("cre1", "CRE"))
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
@@ -134,25 +134,10 @@ class TestProduceEcommerceMappings(unittest.TestCase):
 
 
 class MainTestCase(unittest.TestCase):
-    # @patch("builtins.print")
-    # @patch("builtins.open")
-    # def test_main_with_staging(self, mock_open, mock_print):
-    #     args = {"cres": "source/cre-mappings.yaml", "staging": True, "qr_images": None, "target": None}
-    #     mock_file = mock_open.return_value.__enter__.return_value
-    #     mock_file.read.return_value = "content"
-    #
-    #     with patch.object(argparse, "ArgumentParser") as mock_parser:
-    #         mock_parser.return_value.parse_args.return_value = argparse.Namespace(**args)
-    #         with patch.object(yaml, "safe_load") as mock_load:
-    #             mock_load.return_value = {"key": "value"}
-    #             gm.main()
-    #             mock_print.assert_called_with("Using staging.opencre.org")
-    #             mock_open.assert_called_with("source/cre-mappings.yaml")
-
     @patch("builtins.print")
     @patch("builtins.open")
     def test_main_without_staging(self, mock_open, mock_print):
-        args = {"cre": "source/cre-mappings.yaml", "staging": False, "qr_images": None, "target": None}
+        args = {"cre": "source/cre-mappings.yaml", "target": None}
         mock_file = mock_open.return_value.__enter__.return_value
         mock_file.read.return_value = "content"
 

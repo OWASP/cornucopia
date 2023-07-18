@@ -32,11 +32,11 @@ def produce_ecommerce_mappings(
         for card_indx, card in enumerate(suit["cards"]):
             for mapping_id in card[mapping_base]:
                 response = requests.get(make_mapping_link(mapping_id, mapping_base))
-                
+
                 if response.status_code == 200:
                     map_object = response.json().get(map_type)
-                    time.sleep(1) # important as cloudflare throttled me
-                    
+                    time.sleep(1)  # important as cloudflare throttled me
+
                     if map_type == "standards":
                         map_object = map_object[0]
 
@@ -46,16 +46,18 @@ def produce_ecommerce_mappings(
                             try:
                                 for link in map_object.get("links"):
                                     if link.get("document").get(map_name) == std:
-                                        if not std in src_file["suits"][indx]["cards"][card_indx]:
+                                        if std not in src_file["suits"][indx]["cards"][card_indx]:
                                             src_file["suits"][indx]["cards"][card_indx][std] = []
-                                        src_file["suits"][indx]["cards"][card_indx][std].append(link.get("document").get(map_id))
+                                        src_file["suits"][indx]["cards"][card_indx][std].append(
+                                            link.get("document").get(map_id)
+                                        )
                             except AttributeError:
                                 print(f"no links from {mapping_base} {mapping_id}")
                                 continue
                         else:
                             print(f"no links from {mapping_base} {mapping_id}")
                             continue
- 
+
                 else:
                     print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
 
@@ -75,13 +77,13 @@ def main() -> None:
     standards_2_add = []
     if args["cre"]:
         basefile = args["cre"]
-        mapping_base = "cre"
+        mapping_base = "CRE"
         map_type = "data"
         map_name = "name"
         standards_2_add = STANDARDS_TO_ADD
     elif args["capec"]:
         basefile = args["capec"]
-        mapping_base = "capec"
+        mapping_base = "CAPEC"
         map_type = "standards"
         map_name = "doctype"
         standards_2_add = STANDARDS_FROM
