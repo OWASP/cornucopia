@@ -6,7 +6,7 @@ import time
 
 opencre_rest_url = "https://opencre.org/rest/v1"
 CORNUCOPIA_VERSION = "1.20"
-STANDARDS_FROM = ["CRE"]
+STANDARDS_FROM = ["cre"]
 STANDARDS_TO_ADD = [
     "ASVS",
     "CAPEC",
@@ -30,36 +30,40 @@ def produce_ecommerce_mappings(
     base = {"meta": src_file.copy()["meta"]}
     for indx, suit in enumerate(src_file.copy()["suits"]):
         for card_indx, card in enumerate(suit["cards"]):
-            for mapping_id in card[mapping_base]:
-                response = requests.get(make_mapping_link(mapping_id, mapping_base))
+            try:
+                for mapping_id in card[mapping_base]:
+                    response = requests.get(make_mapping_link(mapping_id, mapping_base))
 
-                if response.status_code == 200:
-                    map_object = response.json().get(map_type)
-                    time.sleep(1)  # important as cloudflare throttled me
+                    if response.status_code == 200:
+                        map_object = response.json().get(map_type)
+                        time.sleep(1)  # important as cloudflare throttled me
 
-                    if map_type == "standards":
-                        map_object = map_object[0]
+                        if map_type == "standards":
+                            map_object = map_object[0]
 
-                    for std in standards_to_add:
-                        map_id = "id" if std == "CRE" else "section" if std.startswith("OWASP ") else "sectionID"
-                        if "links" in map_object:
-                            try:
-                                for link in map_object.get("links"):
-                                    if link.get("document").get(map_name) == std:
-                                        if std not in src_file["suits"][indx]["cards"][card_indx]:
-                                            src_file["suits"][indx]["cards"][card_indx][std] = []
-                                        src_file["suits"][indx]["cards"][card_indx][std].append(
-                                            link.get("document").get(map_id)
-                                        )
-                            except AttributeError:
+                        for std in standards_to_add:
+                            map_id = "id" if std == "cre" else "section" if std.startswith("OWASP ") else "sectionID"
+                            if "links" in map_object:
+                                try:
+                                    for link in map_object.get("links"):
+                                        if link.get("document").get(map_name).lower() == std.lower():
+                                            if std not in src_file["suits"][indx]["cards"][card_indx]:
+                                                src_file["suits"][indx]["cards"][card_indx][std] = []
+                                            src_file["suits"][indx]["cards"][card_indx][std].append(
+                                                link.get("document").get(map_id)
+                                            )
+                                except AttributeError:
+                                    print(f"no links from {mapping_base} {mapping_id}")
+                                    continue
+                            else:
                                 print(f"no links from {mapping_base} {mapping_id}")
                                 continue
-                        else:
-                            print(f"no links from {mapping_base} {mapping_id}")
-                            continue
 
-                else:
-                    print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
+                    else:
+                        print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
+            except KeyError:
+                print(f"no {mapping_base} in {suit} - {card}")
+                continue
 
     base["suits"] = src_file["suits"]
     return base
@@ -77,13 +81,13 @@ def main() -> None:
     standards_2_add = []
     if args["cre"]:
         basefile = args["cre"]
-        mapping_base = "CRE"
+        mapping_base = "cre"
         map_type = "data"
         map_name = "name"
         standards_2_add = STANDARDS_TO_ADD
     elif args["capec"]:
         basefile = args["capec"]
-        mapping_base = "CAPEC"
+        mapping_base = "capec"
         map_type = "standards"
         map_name = "doctype"
         standards_2_add = STANDARDS_FROM
