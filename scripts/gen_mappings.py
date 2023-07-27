@@ -1,7 +1,7 @@
 import argparse
 import yaml
 import requests
-from typing import Any, Dict
+from typing import Any, Dict, List
 import time
 
 opencre_rest_url = "https://opencre.org/rest/v1"
@@ -62,7 +62,7 @@ def produce_ecommerce_mappings(
                     else:
                         print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
             except KeyError:
-                print(f"no {mapping_base} in {suit} - {card}")
+                print(f"No {mapping_base} in {card}")
                 continue
 
     base["suits"] = src_file["suits"]
@@ -77,24 +77,24 @@ def main() -> None:
     group.add_argument("-k", "--capec", help="Where to find the file mapping cornucopia to CAPEC")
     parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
     args = vars(parser.parse_args())
-    basefile = mapping_base = ""
-    standards_2_add = []
+    basefile = map_base = map_type = map_name = ""
+    stds_to_add = []
     if args["cre"]:
         basefile = args["cre"]
-        mapping_base = "cre"
+        map_base = "cre"
         map_type = "data"
         map_name = "name"
-        standards_2_add = STANDARDS_TO_ADD
+        stds_to_add = STANDARDS_TO_ADD
     elif args["capec"]:
         basefile = args["capec"]
-        mapping_base = "capec"
+        map_base = "capec"
         map_type = "standards"
         map_name = "doctype"
-        standards_2_add = STANDARDS_FROM
+        stds_to_add = STANDARDS_FROM
     with open(basefile) as f:
         mappings = yaml.safe_load(f)
         if args["target"]:
-            ecommerce = produce_ecommerce_mappings(mappings, standards_2_add, mapping_base, map_type, map_name)
+            ecommerce = produce_ecommerce_mappings(mappings, stds_to_add, map_base, map_type, map_name)
             with open(args["target"], "w") as ef:
                 yaml.safe_dump(ecommerce, ef, default_flow_style=None)
 
