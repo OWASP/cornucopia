@@ -3,86 +3,86 @@ meta:
   edition: "ecommerce"
   component: "mappings"
   language: "ALL"
-  version: "1.20"
+  version: "1.30"
 suits:
 -
   name: "Data validation & encoding"
   cards:
   -
     value: "2"
-    capec: [ 54, 541 ]
+    capec: [ 54, 150, 215, 497, 541 ]
   -
     value: "3"
-    capec: [ 28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272 ]
+    capec: [ 48, 126, 130, 152, 165, 220, 271, 278 ]
   -
     value: "4"
-    capec: [ 28, 31, 48, 126, 162, 165, 213, 220, 221, 261 ]
+    capec: [ 28, 31, 36, 126, 140, 162, 212, 220 ]
   -
     value: "5"
-    capec: [ 28, 31, 152, 160, 468 ]
+    capec: [ 28, 152, 242 ]
   -
     value: "6"
-    capec: [ 28 ]
+    capec: [ 28, 152, 153 ]
   -
     value: "7"
-    capec: [ 28, 153, 165 ]
+    capec: [ 28, 152, 153, 267 ]
   -
     value: "8"
-    capec: [ 28, 31, 152, 160, 468 ]
+    capec: [ 28, 36, 152, 242 ]
   -
     value: "9"
-    capec: [ 28 ]
+    capec: [ 28, 152, 153 ]
   -
     value: "10"
-    capec: [ 12, 51, 57, 90, 111, 145, 194, 195, 202, 218, 463 ]
+    capec: [ 12, 22, 51, 57, 90, 111, 145, 194, 195, 200, 218, 502 ]
   -
     value: "J"
-    capec: [ 87, 207, 554 ]
+    capec: [ 200, 443, 445, 446, 511, 523 ]
   -
     value: "Q"
-    capec: [ 28, 31, 152, 160, 468 ]
+    capec: [ 28, 152, 242 ]
   -
     value: "K"
-    capec: [ 23, 28, 76, 152, 160, 261 ]
+    capec: [ 23, 66, 76, 88, 136, 160, 183, 250, 676 ]
 -
   name: "Authentication"
   cards:
   -
     value: "2"
-    capec: [ ]
+    capec: [ 268 ]
   -
     value: "3"
-    capec: [ 37, 546 ]
+    capec: [ 37, 546, 546 ]
   -
     value: "4"
-    capec: [ 383 ]
+    capec: [ 70 ]
   -
     value: "5"
-    capec: [ 70 ]
+    capec: [ 565 ]
   -
     value: "6"
     capec: [ 50 ]
   -
     value: "7"
-    capec: [ 2, 16 ]
+    capec: [ 16, 565, 600 ]
   -
     value: "8"
-    capec: [ 115 ]
+    capec: [ 87, 461 ]
   -
     value: "9"
-    capec: [ 21 ]
+    capec: [ 58, 90, 114 ]
   -
     value: "10"
-    capec: [ 90, 115 ]
+    capec: [ 114 ]
   -
     value: "J"
     capec: [ 115 ]
   -
     value: "Q"
-    capec: [ 36, 50, 115, 121, 179 ]
+    capec: [ 36, 50, 115, 121, 179, 554 ]
   -
     value: "K"
-    capec: [ 115, 207, 554 ]
+    capec: [ 443, 445, 446, 511, 523 ]
 -
   name: "Session management"
   cards:
@@ -97,7 +97,7 @@ suits:
     capec: [ 31, 61 ]
   -
     value: "5"
-    capec: [ 31 ]
+    capec: [ 31, 59, 226 ]
   -
     value: "6"
     capec: [ 21 ]
@@ -112,13 +112,13 @@ suits:
     capec: [ 31, 60 ]
   -
     value: "10"
-    capec: [ 62, 111 ]
+    capec: [ 62 ]
   -
     value: "J"
     capec: [ 60 ]
   -
     value: "Q"
-    capec: [ 21 ]
+    capec: [ 21, 36 ]
   -
     value: "K"
     capec: [ 21 ]
@@ -130,13 +130,13 @@ suits:
     capec: [ 153 ]
   -
     value: "3"
-    capec: [ 69, 213 ]
+    capec: [ 69, 126 ]
   -
     value: "4"
     capec: [ 122 ]
   -
     value: "5"
-    capec: [ 75, 87, 95, 126, 149, 155, 203, 213, 264, 265 ]
+    capec: [ 54, 87, 126, 143, 144, 149, 155 ]
   -
     value: "6"
     capec: [ 122 ]
@@ -145,52 +145,52 @@ suits:
     capec: [ 122 ]
   -
     value: "8"
-    capec: [ 25, 39, 74, 162, 166, 207 ]
+    capec: [ 31, 39, 74, 162, 172 ]
   -
     value: "9"
-    capec: [ 26, 29, 119, 261 ]
+    capec: [ 26, 29, 469, 488 ]
   -
     value: "10"
-    capec: [ 36, 95, 121, 179 ]
+    capec: [ 36, 121, 554 ]
   -
     value: "J"
-    capec: [ 75, 133, 203 ]
+    capec: [ 75, 133, 176, 203 ]
   -
     value: "Q"
-    capec: [ 17, 30, 69, 234 ]
+    capec: [ 17, 69, 234 ]
   -
     value: "K"
-    capec: [ 207, 554 ]
+    capec: [ 554 ]
 -
   name: "Cryptography"
   cards:
   -
     value: "2"
-    capec: [ ]
+    capec: [ 39, 162 ]
   -
     value: "3"
-    capec: [ 31, 39, 68, 75, 133, 145, 162, 203, 438, 439, 442 ]
+    capec: [ 68, 75, 145, 268, 438, 439, 442 ]
   -
     value: "4"
-    capec: [ 185, 186, 187 ]
+    capec: [ 153, 185, 186 ]
   -
     value: "5"
-    capec: [ ]
+    capec: [ 620 ]
   -
     value: "6"
-    capec: [ 31, 57, 102, 157, 158, 384, 466, 546 ]
+    capec: [ 31, 102, 157, 158, 384, 466 ]
   -
     value: "7"
     capec: [ 31, 216 ]
   -
     value: "8"
-    capec: [ 31, 37, 55 ]
+    capec: [ 20, 31, 37, 55 ]
   -
     value: "9"
-    capec: [ 97 ]
+    capec: [ 20, 97, 620 ]
   -
     value: "10"
-    capec: [ 97, 463 ]
+    capec: [ 20, 49, 97 ]
   -
     value: "J"
     capec: [ 116 ]
@@ -199,43 +199,43 @@ suits:
     capec: [ 116, 117 ]
   -
     value: "K"
-    capec: [ 207, 554 ]
+    capec: [ 554 ]
 -
   name: "Cornucopia"
   cards:
   -
     value: "2"
-    capec: [ 25, 26, 29, 96, 123, 124, 128, 129, 264, 265 ]
+    capec: [ 25, 26, 100, 124, 128, 129, 446 ]
   -
     value: "3"
-    capec: [ 189, 207 ]
+    capec: [ 167 ]
   -
     value: "4"
-    capec: [ ]
+    capec: [ 268 ]
   -
     value: "5"
-    capec: [ 89, 103, 181, 459 ]
+    capec: [ 21, 22, 57, 89, 103, 459 ]
   -
     value: "6"
-    capec: [ 54, 98, 164 ]
+    capec: [ 172, 554 ]
   -
     value: "7"
-    capec: [ 93 ]
+    capec: [ 81, 93, 268 ]
   -
     value: "8"
-    capec: [ 37, 220, 310, 436, 536 ]
+    capec: [ 161, 176, 289, 310 ]
   -
     value: "9"
     capec: [ 122, 233 ]
   -
     value: "10"
-    capec: [ 68, 438, 439, 442, 524, 538 ]
+    capec: [ 68, 310, 438, 439, 442, 446 ]
   -
     value: "J"
-    capec: [ ]
+    capec: [ 445, 447 ]
   -
     value: "Q"
-    capec: [ ]
+    capec: [ 212 ]
   -
     value: "K"
-    capec: [ 2, 25, 119, 125 ]
+    capec: [ 125, 212, 227 ]
