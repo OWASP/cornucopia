@@ -1,4 +1,4 @@
-FROM python:3.11-alpine@sha256:25df32b602118dab046b58f0fe920e3301da0727b5b07430c8bcd4b139627fdc AS pipenv
+FROM python:3.12-alpine@sha256:a5d1738d6abbdff3e81c10b7f86923ebcb340ca536e21e8c5ee7d938d263dba1 AS pipenv
 RUN apk add --no-cache shadow
 # UID of current user who runs the build
 ARG user_id
@@ -34,5 +34,5 @@ COPY --chown=builder:union Pipfile Pipfile.lock ./
 RUN pipenv --python `which python` install --ignore-pipfile --dev
 ENTRYPOINT [ "/usr/local/bin/pipenv" ]
 
-FROM mvdan/shfmt@sha256:e519dc438b6d081970737dea866e788bebc7510c2993878b83471fe05445ded4 AS shfmt
+FROM mvdan/shfmt@sha256:8b4a7a6e1246a922bde122a6343c68e96bad336cd69dbcc4963fc965d1893bb6 AS shfmt
 ENTRYPOINT [ "/bin/shfmt" ]
