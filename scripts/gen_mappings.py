@@ -1,7 +1,7 @@
 import argparse
 import yaml
 import requests
-from typing import Any, Dict, List
+from typing import Dict, List, Any
 import time
 
 opencre_rest_url = "https://opencre.org/rest/v1"
@@ -25,47 +25,34 @@ def make_mapping_link(mapping_id: str, mapping_type: str) -> str:
 
 
 def produce_ecommerce_mappings(
-    src_file: Dict[Any, Any], standards_to_add: list[str], mapping_base: str, map_type: str, map_name: str
-) -> Dict[Any, Any]:
-    base = {"meta": src_file.copy()["meta"]}
-    for indx, suit in enumerate(src_file.copy()["suits"]):
-        for card_indx, card in enumerate(suit["cards"]):
-            try:
-                for mapping_id in card[mapping_base]:
-                    response = requests.get(make_mapping_link(mapping_id, mapping_base))
+    src_file: Dict[str, Any], standards_to_add: List[str], mapping_base: str, map_type: str, map_name: str
+) -> Dict[str, Any]:
+    base = {"meta": src_file["meta"]}
+    suits = base["suits"] = src_file["suits"]
 
-                    if response.status_code == 200:
-                        map_object = response.json().get(map_type)
-                        time.sleep(1)  # important as cloudflare throttled me
+    for suit in suits:
+        for card in suit["cards"]:
+            mapping_ids = card.get(mapping_base, [])
+            for mapping_id in mapping_ids:
+                response = requests.get(make_mapping_link(mapping_id, mapping_base))
+                if response.status_code != 200:
+                    print(f"Could not find {mapping_base} {mapping_id}, status code {response.status_code}")
+                    continue
 
-                        if map_type == "standards":
-                            map_object = map_object[0]
+                map_object = response.json().get(map_type)
+                time.sleep(1)  # Important as Cloudflare throttled me
 
-                        for std in standards_to_add:
-                            map_id = "id" if std == "cre" else "section" if std.startswith("OWASP ") else "sectionID"
-                            if "links" in map_object:
-                                try:
-                                    for link in map_object.get("links"):
-                                        if link.get("document").get(map_name).lower() == std.lower():
-                                            if std not in src_file["suits"][indx]["cards"][card_indx]:
-                                                src_file["suits"][indx]["cards"][card_indx][std] = []
-                                            src_file["suits"][indx]["cards"][card_indx][std].append(
-                                                link.get("document").get(map_id)
-                                            )
-                                except AttributeError:
-                                    print(f"no links from {mapping_base} {mapping_id}")
-                                    continue
-                            else:
-                                print(f"no links from {mapping_base} {mapping_id}")
-                                continue
+                if map_type == "standards":
+                    map_object = map_object[0]
 
-                    else:
-                        print(f"could not find {mapping_base} {mapping_id}, status code {response.status_code}")
-            except KeyError:
-                print(f"No {mapping_base} in {card}")
-                continue
-
-    base["suits"] = src_file["suits"]
+                for std in standards_to_add:
+                    map_id = "id" if std == "cre" else "section" if std.startswith("OWASP ") else "sectionID"
+                    links = map_object.get("links", [])
+                    for link in links:
+                        document = link.get("document", {})
+                        if document.get(map_name, "").lower() == std.lower():
+                            std_card = card.setdefault(std, [])
+                            std_card.append(document.get(map_id))
     return base
 
 
