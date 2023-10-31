@@ -53,6 +53,7 @@ def produce_ecommerce_mappings(
                         if document.get(map_name, "").lower() == std.lower():
                             std_card = card.setdefault(std, [])
                             std_card.append(document.get(map_id))
+                    std_card = list(dict.fromkeys(std_card))
     return base
 
 
