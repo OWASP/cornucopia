@@ -14,7 +14,7 @@ pytest-cov = "==4.1.0"
 freezegun = "==1.2.2"
 
 [packages]
-idna = "==3.4"
+idna = "==3.6"
 pypng = "==0.20220715.0"
 qrcode = "==7.4.2"
 requests = "==2.31.0"
