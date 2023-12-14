@@ -568,7 +568,7 @@ class TestGetReplacementData(unittest.TestCase):
 
     def test_get_replacement_data_mappings_meta(self) -> None:
         input_data_type = "mappings"
-        want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.2"}
+        want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.40"}
 
         got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)
         self.assertEqual(want_meta, got_data["meta"])

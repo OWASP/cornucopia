@@ -1,25 +1,19 @@
----
 meta:
   edition: "ecommerce"
   component: "mappings"
   language: "ALL"
-  version: "1.2"
+  version: "1.40"
 suits:
--
   name: "Data validation & encoding"
   cards:
-  -
-    value: "2"
-    owasp_scp: [ 69, 107, 108, 109, 136, 137, 153, 156, 158, 162 ]
-    owasp_asvs: [ 1.10, 4.5, 8.1, 11.5, 19.1, 19.5 ]
-    owasp_appsensor: [ HT1, HT2, HT3 ]
-    capec: [ 54, 541 ]
-    safecode: [ 4, 23 ]
-  -
-    value: "3"
-    owasp_scp: [ ]
-    owasp_asvs: [ 5.1, 5.16, 5.17, 5.18, 5.19, 5.20, 11.1, 11.2 ]
-    owasp_appsensor: [ RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3 ]
-    capec: [ 28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272 ]
-    safecode: [ 3, 16, 24, 35 ]
-
+  - owasp_asvs: [V12.5.1, V12.4.1, V7.1.1, V7.1.2, V8.3.5, V8.3.4, V14.3.3, V7.3.3]
+    owasp_cheatsheets: [Logging Cheat Sheet, Error Handling Cheat Sheet]
+    owasp_proactive_controls: [C9, C8, C9]
+    capec: [54, 150, 215, 497, 541]
+    cre: [314-701, 307-111, 067-050, 240-274, 015-063, 227-045, 743-110, 713-683]
+    value: '2'
+  - owasp_asvs: [V12.3.1, V11.1.4, V12.1.3, V8.1.4, V13.4.1, V11.1.3]
+    owasp_cheatsheets: [Abuse Case Cheat Sheet, File Upload Cheat Sheet]
+    capec: [48, 126, 130, 152, 165, 220, 271, 278]
+    cre: [675-168, 630-573, 463-820, 176-154, 268-088, 746-705]
+    value: '3'
