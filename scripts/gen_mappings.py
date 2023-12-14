@@ -9,7 +9,6 @@ CORNUCOPIA_VERSION = "1.20"
 STANDARDS_FROM = ["cre"]
 STANDARDS_TO_ADD = [
     "ASVS",
-    "CAPEC",
     "OWASP Cheat Sheets",
     "OWASP Proactive Controls",
 ]
