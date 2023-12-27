@@ -1049,7 +1049,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
         input_style_type = "static"
         language = "en"
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.20_static.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_en_1.21_static.idml"]
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
