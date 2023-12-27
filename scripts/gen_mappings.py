@@ -7,11 +7,11 @@ import time
 opencre_rest_url = "https://opencre.org/rest/v1"
 CORNUCOPIA_VERSION = "1.20"
 STANDARDS_FROM = ["cre"]
-STANDARDS_TO_ADD = [
-    "ASVS",
-    "OWASP Cheat Sheets",
-    "OWASP Proactive Controls",
-]
+STANDARDS_TO_ADD = {
+    "ASVS": "owasp_asvs",
+    "OWASP Cheat Sheets": "owasp_cheat_sheets",
+    "OWASP Proactive Controls": "owasp_proactive_controls",
+}
 
 
 def make_mapping_link(mapping_id: str, mapping_type: str) -> str:
@@ -24,7 +24,7 @@ def make_mapping_link(mapping_id: str, mapping_type: str) -> str:
 
 
 def produce_ecommerce_mappings(
-    src_file: Dict[str, Any], standards_to_add: List[str], mapping_base: str, map_type: str, map_name: str
+    src_file: Dict[str, Any], standards_to_add: Dict[str, Any], mapping_base: str, map_type: str, map_name: str
 ) -> Dict[str, Any]:
     base = {"meta": src_file["meta"]}
     suits = base["suits"] = src_file["suits"]
@@ -44,13 +44,13 @@ def produce_ecommerce_mappings(
                 if map_type == "standards":
                     map_object = map_object[0]
 
-                for std in standards_to_add:
-                    map_id = "id" if std == "cre" else "section" if std.startswith("OWASP ") else "sectionID"
+                for std_name in list(standards_to_add):
+                    map_id = "id" if std_name == "cre" else "section" if std_name.startswith("OWASP ") else "sectionID"
                     links = map_object.get("links", [])
                     for link in links:
                         document = link.get("document", {})
-                        if document.get(map_name, "").lower() == std.lower():
-                            std_card = card.setdefault(std, [])
+                        if document.get(map_name, "").lower() == std_name.lower():
+                            std_card = card.setdefault(std_name, [])
                             std_card.append(document.get(map_id))
                     std_card = list(dict.fromkeys(std_card))
     return base
