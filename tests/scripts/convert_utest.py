@@ -732,7 +732,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         ext = "yaml"
         want_files = list(
             path + os.sep + f
-            for f in ["ecommerce-cards-1.20-es.yaml", "ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml", "ecommerce-mappings-1.3.yaml"]
+            for f in ["ecommerce-cards-1.20-es.yaml", "ecommerce-cards-1.21-en.yaml", "ecommerce-cards-1.30-en.yaml", "ecommerce-mappings-1.2.yaml", "ecommerce-mappings-1.3.yaml"]
         )
 
         got_files = c.get_files_from_of_type(path, ext)
@@ -1511,7 +1511,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
             [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
         )
         doc = docx.Document(template_docx_file)
-        want_len_paragraphs = 2007
+        want_len_paragraphs = 2010
 
         paragraphs = c.get_document_paragraphs(doc)
         self.assertEqual(want_len_paragraphs, len(paragraphs))
