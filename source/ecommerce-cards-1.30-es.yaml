@@ -3,7 +3,7 @@ meta:
   edition: "ecommerce"
   component: "cards"
   language: "ES"
-  version: "1.20"
+  version: "1.30"
 suits:
 -
   name: "Validación de datos & Codificación"
