@@ -82,7 +82,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
     return output_pdf_filename
 
 
-def convert_type_language_style(file_type: str, language: str = "en", style: str = "static") -> None:
+def convert_type_language_style(file_type: str, language: str = "en", style: str = "static", mapping_version: str = "1.2") -> None:
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
     if not yaml_files:
@@ -97,7 +97,7 @@ def convert_type_language_style(file_type: str, language: str = "en", style: str
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
 
-    mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files)
+    mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files, mapping_version)
 
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
@@ -326,8 +326,8 @@ def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
     return full_tag
 
 
-def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
-    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings")
+def get_mapping_dict(yaml_files: List[str], mapping_version: str = "1.2") -> Dict[str, str]:
+    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings", mapping_version)
     if not mapping_data:
         return {}
     return get_replacement_dict(mapping_data, True)
@@ -362,7 +362,7 @@ def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Docu
 
 
 def get_replacement_data(
-    yaml_files: List[str], data_type: str = "translation", language: str = ""
+    yaml_files: List[str], data_type: str = "translation", language: str = "", mapping_version: str = "1.2"
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
@@ -375,7 +375,8 @@ def get_replacement_data(
         if os.path.splitext(file)[1] in (".yaml", ".yml") and (
             os.path.basename(file).find("-" + lang + ".") >= 0
             or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0
-            or os.path.basename(file).find("mappings") >= 0
+            or (os.path.basename(file).find("mappings") >= 0 and 
+                os.path.basename(file).find(mapping_version) >= 0)
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:

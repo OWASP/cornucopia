@@ -568,9 +568,18 @@ class TestGetReplacementData(unittest.TestCase):
 
     def test_get_replacement_data_mappings_meta(self) -> None:
         input_data_type = "mappings"
+        input_version = "1.2"
         want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.2"}
 
-        got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)
+        got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language, input_version)
+        self.assertEqual(want_meta, got_data["meta"])
+
+    def test_get_replacement_data_mappings_meta_asvs4(self) -> None:
+        input_data_type = "mappings"
+        mapping_version = "1.3"
+        want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.3"}
+
+        got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language, mapping_version)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_replacement_data_mappings_first_suit_first_card(self) -> None:
@@ -586,6 +595,27 @@ class TestGetReplacementData(unittest.TestCase):
         }
 
         got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)["suits"]
+        got_first_suit_keys = got_suits[0].keys()
+        self.assertEqual(want_first_suit_keys, got_first_suit_keys)
+        got_first_suit_first_card = got_suits[0]["cards"][0]
+        self.assertEqual(want_first_suit_first_card, got_first_suit_first_card)
+
+    def test_get_replacement_data_mappings_first_suit_first_card_asvs4(self) -> None:
+        input_data_type = "mappings"
+        mapping_version = "1.3"
+        want_first_suit_keys = {"name": "", "cards": ""}.keys()
+        want_first_suit_first_card = {
+            "value": "2",
+            "owasp_scp": ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"],
+            "owasp_asvs": ["1.6.4", "2.10.4", "4.3.2", "7.1.1", "10.2.3", "14.1.1", "14.2.2", "14.3.3"],
+            "owasp_appsensor": ["HT1", "HT2", "HT3"],
+            "capec": ["54", "541"],
+            "safecode": ["4", "23"],
+        }
+
+        got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language, mapping_version)[
+            "suits"
+        ]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -702,7 +732,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         ext = "yaml"
         want_files = list(
             path + os.sep + f
-            for f in ["ecommerce-cards-1.20-es.yaml", "ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml"]
+            for f in ["ecommerce-cards-1.20-es.yaml", "ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml", "ecommerce-mappings-1.3.yaml"]
         )
 
         got_files = c.get_files_from_of_type(path, ext)
