@@ -711,7 +711,7 @@ class TestGetReplacementDataFor1dot30(unittest.TestCase):
 
 class TestParseArguments(unittest.TestCase):
     def test_parse_arguments_short_form_basic_success(self) -> None:
-        input_args = ["-t", "idml", "-v", "1.30"]
+        input_args = ["-t", "idml", "-v", "1.21"]
         want_args = argparse.Namespace(
             inputfile="",
             outputfiletype="idml",
@@ -719,7 +719,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             style="static",
-            version="1.30",
+            version="1.21",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -735,7 +735,7 @@ class TestParseArguments(unittest.TestCase):
             language="fr",
             debug=False,
             style="static",
-            version="1.21",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -752,7 +752,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             style="static",
-            version="1.21",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -769,7 +769,7 @@ class TestParseArguments(unittest.TestCase):
             language="fr",
             debug=False,
             style="static",
-            version="1.21",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -786,7 +786,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             style="static",
-            version="1.21",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 

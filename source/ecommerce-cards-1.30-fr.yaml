@@ -1148,38 +1148,41 @@ paragraphs:
     value: "T03580"
     text: "Modifications mineures du texte des cartes pour améliorer la lisibilité."
   -
-    value: "T03590"
+    value: "T03580"
     text: "1.2"
   -
-    value: "T03600"
+    value: "T03590"
     text: "Vidéo mentionnée et indiquée en lien. "
   -
-    value: "T03610"
+    value: "T03600"
     text: "Feuille de scores séparée mentionnée et indiquée en lien. "
   -
-    value: "T03620"
+    value: "T03610"
     text: "Suppression des précédentes pages intégrées de la feuille de score. "
   -
-    value: "T03630"
+    value: "T03620"
     text: "Correction (identifié par Tom Brennan) et ajout dans le texte de la carte 8 Authentification. "
   -
-    value: "T03640"
+    value: "T03630"
     text: "Ajout d’Oana Cornea et d’autres participants du sommet AppSec EU 2015 project à la liste des contributeurs. "
   -
-    value: "T03650"
+    value: "T03640"
     text: "Ajout de Darío De Filippis en tant que co-leader du projet. "
   -
-    value: "T03660"
+    value: "T03650"
     text: "Ajout du lien Wiki Deck. "
   -
-    value: "T03670"
+    value: "T03660"
     text: "Mise à jour des références croisées en fonction de la v3.0.1 d’ASVS et de la v2.8 de CAPEC."
   -
-    value: "T03680"
+    value: "T03670"
     text: "Modifications mineures de texte pour un petit nombre de cartes. "
   -
+    value: "T03680"
+    text: "Ajout de “-EN” au numéro de version en préparation de la version “-ES”."
+  -
     value: "T03690"
-    text: "Ajout de “-EN” au numéro de version en préparation de la version “-ES”. Ajout de Susana Romaniz en tant que contributeur à la traduction espagnole. "
+    text: "Ajout de Susana Romaniz en tant que contributeur à la traduction espagnole."
   -
     value: "T03700"
     text: "Modifications mineures de texte dans les instructions et les FAQs."

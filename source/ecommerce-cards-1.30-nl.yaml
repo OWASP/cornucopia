@@ -347,28 +347,28 @@ suits:
   -
     id: "JOA"
     value: "JokerA"
-    kaart: "Joker"
+    card: "Joker"
     desc: "Alice kan de applicatie gebruiken om systemen en gegevens van gebruikers aan te vallen"
     misc: "Heb je erover nagedacht om individueel OWASP-lid te worden? Alle tools, begeleiding en lokale bijeenkomsten zijn gratis voor iedereen, maar individueel lidmaatschap helpt het werk van OWASP te ondersteunen"
   -
     id: "VACATURE"
     value: "JokerB"
-    kaart: "Joker"
+    card: "Joker"
     desc: "Bob kan de applicatie beïnvloeden, wijzigen of beïnvloeden zodat deze niet langer voldoet aan wettelijke, reglementaire, contractuele of andere organisatorische mandaten"
     misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van trainingsapplicaties in de gratis OWASP Broken Web Applications VM, of met behulp van de online uitdagingen in het gratis Hacking Lab"
-paragrafen:
+paragraphs:
 -
-  name: "Algemeen"
-  zinnen:
+  name: "Common"
+  sentences:
   -
     value: "NoCard"
     text: "Geen kaart"
   -
-    value: "Titel"
-    text: "E-commerce Website Editie v1.30-EN"
+    value: "Title"
+    text: "E-commerce Website Editie v1.30-NL"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia E-commerce Website Editie v1.30-EN"
+    text: "OWASP Cornucopia E-commerce Website Editie v1.30-NL"
   -
     value: "T00010"
     text: "OWASP Cornucopia is een mechanisme om softwareontwikkelingsteams te helpen bij het identificeren van beveiligingsvereisten in Agile, conventionele en formele ontwikkelingsprocessen."

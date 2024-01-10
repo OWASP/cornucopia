@@ -1052,7 +1052,7 @@ paragraphs:
     text: "Release."
   -
     value: "T03260"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.01"
   -
     value: "T03270"
     text: "Framework-specific card deck discussion added"
@@ -1079,7 +1079,7 @@ paragraphs:
     text: "Project contributors added."
   -
     value: "T03350"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.02"
   -
     value: "T03360"
     text: "Warning about time to print added. "
@@ -1100,7 +1100,7 @@ paragraphs:
     text: "Project contributors added."
   -
     value: "T03420"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.03"
   -
     value: "T03430"
     text: "Minor attack wording changes on two cards. "
@@ -1115,13 +1115,13 @@ paragraphs:
     text: "All remaining attack descriptions on cards changed to black (from dark grey) and background colours amended to provide more contrast and increase readability."
   -
     value: "T03470"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.04"
   -
     value: "T03480"
     text: "Text “password change, password change,” corrected to “password change, password recovery,” on Queen of Authentication card. "
   -
     value: "T03490"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.05"
   -
     value: "T03500"
     text: "Updates to alternative game rules. "
@@ -1136,7 +1136,7 @@ paragraphs:
     text: "Podcast and video links added."
   -
     value: "T03540"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.1"
   -
     value: "T03550"
     text: "Change log date corrected for v1.05. Cross-references updated for 2014 version of ASVS. "
@@ -1148,7 +1148,7 @@ paragraphs:
     text: "Minor text changes to cards to improve readability."
   -
     value: "T03580"
-    text: "1. ¿Puedo copiar o editar el juego?"
+    text: "1.2"
   -
     value: "T03590"
     text: "Video mentioned/linked"
