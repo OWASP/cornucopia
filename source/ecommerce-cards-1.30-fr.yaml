@@ -474,7 +474,7 @@ paragraphs:
     text: "Le but initial était de référencer les identifiants des faiblesses CWE, mais celles-ci étant trop nombreuses, il a été décidé de relier chaque carte à une attaque référencée dans CAPEC, elle-même reliée aux CWE, pour que le but recherché soit atteint. "
   -
     value: "T00530"
-    text: "Chaque carte est également liée aux 36 scénarii de sécurité du document SAFECode, de même à l’OWASP SCP v2, ASVS v3.0.1 et AppSensor (application attack detection and response) pour aider les équipes à créer leurs propres scenarii de sécurité pour utilisation dans les processus Agile."
+    text: "Chaque carte est également liée aux 36 scénarii de sécurité du document SAFECode, de même à l’OWASP SCP v2, ASVS v4.0 et AppSensor (application attack detection and response) pour aider les équipes à créer leurs propres scenarii de sécurité pour utilisation dans les processus Agile."
   -
     value: "T00600"
     text: "Stratégie de jeu"

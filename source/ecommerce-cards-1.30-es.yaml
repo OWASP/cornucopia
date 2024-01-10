@@ -476,7 +476,7 @@ paragraphs:
     text: "Un objetivo inicial había sido hacer referencia a los ID de debilidad de CWE, pero estos resultaron ser demasiados, y en su lugar se decidió asignar cada tarjeta a los ID de patrón de ataque de software CAPEC, que a su vez se relacionan a CWE, por lo que se logra el resultado deseado."
   -
     value: "T00530"
-    text: "Cada tarjeta también se asocia a las 36 historias de seguridad principales en el documento SAFECode, así como a OWASP SCP v2, ASVS v3.0.1 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad para su uso en procesos ágiles."
+    text: "Cada tarjeta también se asocia a las 36 historias de seguridad principales en el documento SAFECode, así como a OWASP SCP v2, ASVS v4.0 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad para su uso en procesos ágiles."
   -
     value: "T00600"
     text: "Estrategia de Juego"
