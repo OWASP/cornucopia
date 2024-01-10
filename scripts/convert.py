@@ -181,8 +181,8 @@ def main() -> None:
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
-    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es "
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr "
+    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es -v 1.30"
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr -v 1.30"
     description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
