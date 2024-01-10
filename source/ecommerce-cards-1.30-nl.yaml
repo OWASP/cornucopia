@@ -476,7 +476,7 @@ paragrafen:
     text: "Een eerste doel was om te verwijzen naar CWE-zwakte-ID's, maar deze bleken te talrijk, en in plaats daarvan werd besloten om elke kaart toe te wijzen aan CAPEC-software-aanvalspatroon-ID's die zelf zijn toegewezen aan CWE's, zodat het gewenste resultaat wordt bereikt."
   -
     value: "T00530"
-    text: "Elke kaart is ook toegewezen aan de 36 primaire beveiligingsverhalen in het SAFECode-document, evenals aan de OWASP SCP v2, ASVS v3.0.1 en AppSensor (detectie en reactie van toepassingsaanvallen) om teams te helpen hun eigen beveiligingsgerelateerde verhalen voor gebruik in Agile-processen."
+    text: "Elke kaart is ook toegewezen aan de 36 primaire beveiligingsverhalen in het SAFECode-document, evenals aan de OWASP SCP v2, ASVS v4.0 en AppSensor (detectie en reactie van toepassingsaanvallen) om teams te helpen hun eigen beveiligingsgerelateerde verhalen voor gebruik in Agile-processen."
   -
     value: "T00600"
     text: "Spelstrategie"
