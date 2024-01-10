@@ -26,7 +26,7 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 usage: convert.py [-h] [-i INPUTFILE] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,pt-br}] [-d] [-s {all,static,dynamic}] [-u URL]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages. 
-Example usage: $ ./cornucopia/convert.py -t docx -l es 
+Example usage: $ ./cornucopia/convert.py -t docx -l es -v 1.30
 Example usage: c:\cornucopia\scripts\convert.py -t idml -l fr -s static -v 1.30 -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
 
 options:
