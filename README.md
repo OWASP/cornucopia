@@ -7,7 +7,7 @@ It is language, platform and technology agnostic.
 
 ### The cross-references relate to the following versions of other OWASP and external resources:
 * OWASP SCP OWASP_Secure_Coding_Practices_Checklist v2
-* OWASP ASVS OWASP_Application_Security_Verification_Standard v2 (2014)
+* OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
 * OWASP AppSensor AppSensor_DetectionPoints
 * CAPEC Mitre Common Attack Pattern Enumeration and Classification v1.7.1
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
