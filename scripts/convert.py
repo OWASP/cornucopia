@@ -358,10 +358,7 @@ def get_meta_data(language_data: Dict[str, Dict[str, str]]) -> Dict[str, str]:
                 meta[key] = value
         return meta
     else:
-        logging.error(
-            "Could not find meta tag in the language data. "
-            "Please ensure required language file is in the source folder."
-        )
+        logging.error("Could not find meta tag in the language data. " "Please ensure the language file is available.")
     logging.debug(f" --- meta data = {meta}")
     return meta
 
@@ -383,7 +380,10 @@ def get_replacement_data(
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
-    logging.debug(f" --- Starting get_replacement_data() for data_type = {data_type} and language = {language} and version {version} with mapping to version {get_valid_mapping_for_version(version)}")
+    logging.debug(
+        f" --- Starting get_replacement_data() for data_type: {data_type}, language: {language} and version: {version} "
+        f"     with mapping to version {get_valid_mapping_for_version(version)}"
+    )
     if convert_vars.making_template:
         lang = "en"
     else:
