@@ -480,7 +480,7 @@ class TestGetMetaData(unittest.TestCase):
         want_logging_error_message = [
             (
                 "ERROR:root:Could not find meta tag in the language data. "
-                "Please ensure required language file is in the source folder."
+                "Please ensure the language file is available."
             )
         ]
 
@@ -1157,21 +1157,22 @@ class TestConvertTypeLanguage(unittest.TestCase):
     #     self.assertEqual(ll.output, want_info_log_messages)
     #     self.assertTrue(os.path.isfile(self.want_file))
     #
-            
+
     def test_convert_type_language_style_none_valid_input(self) -> None:
         input_filetype = "invalid"
         input_style_type = "invalid"
         input_version = "invalid"
         language = "invalid"
-        self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_invalid.docx"]
-        )
+        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_invalid.docx"])
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as l2:
             c.convert_type_language_style(input_filetype, language, input_style_type, input_version)
-        self.assertIn('ERROR:root:Could not find meta tag in the language data. Please ensure required language file is in the source folder.', l2.output)
+        self.assertIn(
+            "ERROR:root:Could not find meta tag in the language data. Please ensure the language file is available.",
+            l2.output,
+        )
 
     def test_convert_type_language_spanish(self) -> None:
         input_filetype = "docx"
