@@ -554,11 +554,14 @@ class TestGetReplacementData(unittest.TestCase):
     def test_get_replacement_data_translation_es_first_suit_first_card(self) -> None:
         input_language = "es"
         input_data_type = "translation"
+        input_version = "1.20"
         want_first_suit_keys = self.test_data["suits"][0].keys()
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
         want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
 
-        got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, input_language)["suits"]
+        got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, input_language, input_version)[
+            "suits"
+        ]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
@@ -568,9 +571,10 @@ class TestGetReplacementData(unittest.TestCase):
 
     def test_get_replacement_data_mappings_meta(self) -> None:
         input_data_type = "mappings"
+        input_version = "1.2"
         want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.2"}
 
-        got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language)
+        got_data = c.get_replacement_data(self.input_yaml_files, input_data_type, self.input_language, input_version)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_replacement_data_mappings_first_suit_first_card(self) -> None:
@@ -592,9 +596,122 @@ class TestGetReplacementData(unittest.TestCase):
         self.assertEqual(want_first_suit_first_card, got_first_suit_first_card)
 
 
+class TestGetReplacementDataFor1dot30(unittest.TestCase):
+    def setUp(self) -> None:
+        test_source_yaml = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"])
+        self.input_yaml_files = glob.glob(test_source_yaml)
+        self.input_language = "en"
+        self.input_version = "1.30"
+        self.test_data: Dict[str, Any] = {
+            "meta": {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.30"},
+            "suits": [
+                {
+                    "name": "Data validation & encoding",
+                    "cards": [
+                        {
+                            "id": "DVA",
+                            "value": "A",
+                            "desc": "You have invented a new attack against Data Validation and Encoding",
+                            "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
+                            "XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, "
+                            "and Query Parameterization",
+                        },
+                        {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                    ],
+                },
+            ],
+            "paragraphs": [
+                {
+                    "name": "Common",
+                    "cards": [
+                        {
+                            "value": "NoCard",
+                            "text": "No Card",
+                        },
+                        {
+                            "value": "Title",
+                            "text": "OWASP Cornucopia Ecommerce Edition v1.30-EN",
+                        },
+                    ],
+                },
+            ],
+        }
+
+    def test_get_replacement_data_translation_meta(self) -> None:
+        input_data_type = "translation"
+        want_meta = {"edition": "ecommerce", "component": "cards", "language": "EN", "version": "1.30"}
+
+        got_data = c.get_replacement_data(
+            self.input_yaml_files, input_data_type, self.input_language, self.input_version
+        )
+        self.assertEqual(want_meta, got_data["meta"])
+
+    def test_get_replacement_data_translation_en_first_suit_first_card(self) -> None:
+        input_data_type = "translation"
+        want_first_suit_keys = self.test_data["suits"][0].keys()
+        want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
+        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
+
+        got_suits = c.get_replacement_data(
+            self.input_yaml_files, input_data_type, self.input_language, self.input_version
+        )["suits"]
+        got_first_suit_keys = got_suits[0].keys()
+        self.assertEqual(want_first_suit_keys, got_first_suit_keys)
+        got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
+        got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
+
+    def test_get_replacement_data_translation_es_first_suit_first_card(self) -> None:
+        input_language = "es"
+        input_data_type = "translation"
+        want_first_suit_keys = self.test_data["suits"][0].keys()
+        want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
+        want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
+
+        got_suits = c.get_replacement_data(self.input_yaml_files, input_data_type, input_language, self.input_version)[
+            "suits"
+        ]
+        got_first_suit_keys = got_suits[0].keys()
+        self.assertEqual(want_first_suit_keys, got_first_suit_keys)
+        got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
+        got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
+
+    def test_get_replacement_data_mappings_meta_asvs4(self) -> None:
+        input_data_type = "mappings"
+        want_meta = {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": "1.3"}
+
+        got_data = c.get_replacement_data(
+            self.input_yaml_files, input_data_type, self.input_language, self.input_version
+        )
+        self.assertEqual(want_meta, got_data["meta"])
+
+    def test_get_replacement_data_mappings_first_suit_first_card_asvs4(self) -> None:
+        input_data_type = "mappings"
+        want_first_suit_keys = {"name": "", "cards": ""}.keys()
+        want_first_suit_first_card = {
+            "value": "2",
+            "owasp_scp": ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"],
+            "owasp_asvs": ["1.6.4", "2.10.4", "4.3.2", "7.1.1", "10.2.3", "14.1.1", "14.2.2", "14.3.3"],
+            "owasp_appsensor": ["HT1", "HT2", "HT3"],
+            "capec": ["54", "541"],
+            "safecode": ["4", "23"],
+        }
+
+        got_suits = c.get_replacement_data(
+            self.input_yaml_files, input_data_type, self.input_language, self.input_version
+        )["suits"]
+        got_first_suit_keys = got_suits[0].keys()
+        self.assertEqual(want_first_suit_keys, got_first_suit_keys)
+        got_first_suit_first_card = got_suits[0]["cards"][0]
+        self.assertEqual(want_first_suit_first_card, got_first_suit_first_card)
+
+
 class TestParseArguments(unittest.TestCase):
     def test_parse_arguments_short_form_basic_success(self) -> None:
-        input_args = ["-t", "idml"]
+        input_args = ["-t", "idml", "-v", "1.21"]
         want_args = argparse.Namespace(
             inputfile="",
             outputfiletype="idml",
@@ -602,6 +719,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             style="static",
+            version="1.21",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -617,6 +735,7 @@ class TestParseArguments(unittest.TestCase):
             language="fr",
             debug=False,
             style="static",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -633,6 +752,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             style="static",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -649,6 +769,7 @@ class TestParseArguments(unittest.TestCase):
             language="fr",
             debug=False,
             style="static",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -665,6 +786,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             style="static",
+            version="1.30",
             url="https://copi.securedelivery.io/cards",
         )
 
@@ -702,7 +824,14 @@ class TestGetFilesFromOfType(unittest.TestCase):
         ext = "yaml"
         want_files = list(
             path + os.sep + f
-            for f in ["ecommerce-cards-1.20-es.yaml", "ecommerce-cards-1.21-en.yaml", "ecommerce-mappings-1.2.yaml"]
+            for f in [
+                "ecommerce-cards-1.20-es.yaml",
+                "ecommerce-cards-1.21-en.yaml",
+                "ecommerce-cards-1.30-en.yaml",
+                "ecommerce-cards-1.30-es.yaml",
+                "ecommerce-mappings-1.2.yaml",
+                "ecommerce-mappings-1.3.yaml",
+            ]
         )
 
         got_files = c.get_files_from_of_type(path, ext)
@@ -1028,9 +1157,26 @@ class TestConvertTypeLanguage(unittest.TestCase):
     #     self.assertEqual(ll.output, want_info_log_messages)
     #     self.assertTrue(os.path.isfile(self.want_file))
     #
+            
+    def test_convert_type_language_style_none_valid_input(self) -> None:
+        input_filetype = "invalid"
+        input_style_type = "invalid"
+        input_version = "invalid"
+        language = "invalid"
+        self.want_file = os.sep.join(
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_invalid.docx"]
+        )
+        if os.path.isfile(self.want_file):
+            os.remove(self.want_file)
+
+        with self.assertLogs(logging.getLogger(), logging.INFO) as l2:
+            c.convert_type_language_style(input_filetype, language, input_style_type, input_version)
+        self.assertIn('ERROR:root:Could not find meta tag in the language data. Please ensure required language file is in the source folder.', l2.output)
+
     def test_convert_type_language_spanish(self) -> None:
         input_filetype = "docx"
         input_style_type = "static"
+        input_version = "1.20"
         language = "es"
         self.want_file = os.sep.join(
             [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_ecommerce_cards_es_1.20_static.docx"]
@@ -1040,7 +1186,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
         want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
-            c.convert_type_language_style(input_filetype, language, input_style_type)
+            c.convert_type_language_style(input_filetype, language, input_style_type, input_version)
         self.assertEqual(ll.output, want_info_log_messages)
         self.assertTrue(os.path.isfile(self.want_file))
 
@@ -1064,6 +1210,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
     def test_convert_type_language_es_specify_output(self) -> None:
         input_filetype = "idml"
         input_style_type = "static"
+        input_version = "1.20"
         language = "es"
         c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_cards_es.idml"])
         self.want_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile])
@@ -1072,7 +1219,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
         want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
-            c.convert_type_language_style(input_filetype, language, input_style_type)
+            c.convert_type_language_style(input_filetype, language, input_style_type, input_version)
         self.assertEqual(ll.output, want_info_log_messages)
         self.assertTrue(os.path.isfile(self.want_file))
 
@@ -1481,7 +1628,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
             [c.convert_vars.BASE_PATH, c.convert_vars.DEFAULT_TEMPLATE_FILENAME + "_static.docx"]
         )
         doc = docx.Document(template_docx_file)
-        want_len_paragraphs = 2007
+        want_len_paragraphs = 2010
 
         paragraphs = c.get_document_paragraphs(doc)
         self.assertEqual(want_len_paragraphs, len(paragraphs))
