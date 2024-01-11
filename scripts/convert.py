@@ -21,6 +21,7 @@ class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "pt-br"]
+    VERSION_CHOICES: List[str] = ["1.20", "1.21", "1.30"]
     STYLE_CHOICES: List[str] = ["all", "static", "dynamic"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
@@ -82,14 +83,16 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
     return output_pdf_filename
 
 
-def convert_type_language_style(file_type: str, language: str = "en", style: str = "static") -> None:
+def convert_type_language_style(
+    file_type: str, language: str = "en", style: str = "static", version: str = "1.21"
+) -> None:
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
     if not yaml_files:
         return
 
     # Get the language data from the correct language file (checks vars.args.language to select the correct file)
-    language_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "translation", language)
+    language_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "translation", language, version)
 
     # Get the dict of replacement data
     language_dict: Dict[str, str] = get_replacement_dict(language_data, False)
@@ -97,7 +100,7 @@ def convert_type_language_style(file_type: str, language: str = "en", style: str
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
 
-    mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files)
+    mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files, version)
 
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
@@ -171,14 +174,15 @@ def main() -> None:
     for file_type in get_valid_file_types():
         for language in get_valid_language_choices():
             for style in get_valid_styles():
-                convert_type_language_style(file_type, language, style)
+                for version in get_valid_version_choices():
+                    convert_type_language_style(file_type, language, style, version)
 
 
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
-    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es "
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr "
+    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es -v 1.30"
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr -v 1.30"
     description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
@@ -190,6 +194,19 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "Input (template) file to use."
             f"\nDefault={convert_vars.DEFAULT_TEMPLATE_FILENAME}.(docx|idml)"
             "\nTemplate type is dependent on output type (-t) or file (-o) specified."
+        ),
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        type=str,
+        choices=convert_vars.VERSION_CHOICES,
+        required=False,
+        default="1.30",
+        help=(
+            "Output version to produce. [`1.20`, `1.21`, `1.30`] "
+            "\nVersion 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1"
+            "\nVersion 1.30 and 1.3x will deliver cards mapped to ASVS 4.0"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
@@ -326,8 +343,8 @@ def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
     return full_tag
 
 
-def get_mapping_dict(yaml_files: List[str]) -> Dict[str, str]:
-    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings")
+def get_mapping_dict(yaml_files: List[str], version: str = "1.21") -> Dict[str, str]:
+    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings", "", version)
     if not mapping_data:
         return {}
     return get_replacement_dict(mapping_data, True)
@@ -362,20 +379,18 @@ def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Docu
 
 
 def get_replacement_data(
-    yaml_files: List[str], data_type: str = "translation", language: str = ""
+    yaml_files: List[str], data_type: str = "translation", language: str = "", version: str = "1.21"
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
-    logging.debug(f" --- Starting get_replacement_data() for data_type = {data_type} and language = {language}")
+    logging.debug(f" --- Starting get_replacement_data() for data_type = {data_type} and language = {language} and version {version} with mapping to version {get_valid_mapping_for_version(version)}")
     if convert_vars.making_template:
         lang = "en"
     else:
         lang = language
     for file in yaml_files:
-        if os.path.splitext(file)[1] in (".yaml", ".yml") and (
-            os.path.basename(file).find("-" + lang + ".") >= 0
-            or os.path.basename(file).find("-" + lang.replace("-", "_") + ".") >= 0
-            or os.path.basename(file).find("mappings") >= 0
+        if is_yaml_file(file) and (
+            is_lang_file_for_version(file, version, lang) or is_mapping_file_for_version(file, version)
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
@@ -410,6 +425,24 @@ def get_replacement_data(
         logging.error("Could not get language data from yaml " + os.path.split(file)[1])
     logging.debug(f" --- Len = {len(data)}.")
     return data
+
+
+def is_mapping_file_for_version(path: str, version: str) -> bool:
+    return (
+        os.path.basename(path).find("mappings") >= 0
+        and os.path.basename(path).find(get_valid_mapping_for_version(version)) >= 0
+    )
+
+
+def is_lang_file_for_version(path: str, version: str, lang: str) -> bool:
+    return (os.path.basename(path).find("-" + lang + ".") >= 0 and os.path.basename(path).find(version) >= 0) or (
+        os.path.basename(path).find("-" + lang.replace("-", "_") + ".") >= 0
+        and os.path.basename(path).find(version) >= 0
+    )
+
+
+def is_yaml_file(path: str) -> bool:
+    return os.path.splitext(path)[1] in (".yaml", ".yml")
 
 
 def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> Dict[str, str]:
@@ -610,6 +643,23 @@ def get_valid_language_choices() -> List[str]:
     else:
         languages.append(convert_vars.args.language)
     return languages
+
+
+def get_valid_version_choices() -> List[str]:
+    versions = []
+    if convert_vars.args.version.lower() == "all":
+        for version in convert_vars.VERSION_CHOICES:
+            if version not in ("all"):
+                versions.append(version)
+    elif convert_vars.args.version == "":
+        versions.append("1.21")
+    else:
+        versions.append(convert_vars.args.version)
+    return versions
+
+
+def get_valid_mapping_for_version(version: str) -> str:
+    return {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"}.get(version, "")
 
 
 def get_valid_styles() -> List[str]:
