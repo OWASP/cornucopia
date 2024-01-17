@@ -1,4 +1,4 @@
-FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:28fe69f883e32eb0274d8c85f2c007e2d8186c1b9fb0f6a7f7aece472f9bc20d
+FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:95bed996ec54b0a38087bbc48f7945b31fbe00548a7adf7d8f3b564566b2123e
 RUN apt-get update && apt-get install -y make autoconf automake libtool
 COPY . $SRC/cornucopia
 WORKDIR cornucopia
