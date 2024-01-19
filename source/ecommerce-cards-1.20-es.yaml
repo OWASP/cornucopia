@@ -386,13 +386,13 @@ paragraphs:
     text: "Reconocimientos del proyecto"
   -
     value: "T00110"
-    text: "• Microsoft SDL Team para el juego de modelado de amenazas Elevation of Privilege, publicado bajo una licencia Creative Commons Attribution, como inspiración para Cornucopia y del que se copiaron muchas ideas, especialmente la teoría de juego."
+    text: "Microsoft SDL Team para el juego de modelado de amenazas Elevation of Privilege, publicado bajo una licencia Creative Commons Attribution, como inspiración para Cornucopia y del que se copiaron muchas ideas, especialmente la teoría de juego."
   -
     value: "T00120"
-    text: "• Keith Turpin y colaboradores de las “Prácticas de codificación segura de OWASP - Guía de referencia rápida”, originalmente donada a OWASP por Boeing, que se utiliza como fuente principal de información sobre requisitos de seguridad para formular el contenido de las tarjetas."
+    text: "Keith Turpin y colaboradores de las “Prácticas de codificación segura de OWASP - Guía de referencia rápida”, originalmente donada a OWASP por Boeing, que se utiliza como fuente principal de información sobre requisitos de seguridad para formular el contenido de las tarjetas."
   -
     value: "T00130"
-    text: "• Colaboradores, patrocinadores y voluntarios de los proyectos OWASP ASVS, AppSensor y Web Framework Security Matrix, la enumeración y clasificación de patrones de ataque común de Mitre (CAPEC) y las \"historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágiles\" de SAFECode, que se utilizan en las referencias cruzadas proporcionadas."
+    text: "Colaboradores, patrocinadores y voluntarios de los proyectos OWASP ASVS, AppSensor y Web Framework Security Matrix, la enumeración y clasificación de patrones de ataque común de Mitre (CAPEC) y las \"historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágiles\" de SAFECode, que se utilizan en las referencias cruzadas proporcionadas."
   -
     value: "T00140"
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
@@ -554,10 +554,10 @@ paragraphs:
     text: "El mejor lugar para usar para discutir o contribuir es la lista de correo para el proyecto OWASP:"
   -
     value: "T01040"
-    text: "•Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
   -
     value: "T01050"
-    text: "•OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "OWASP’s hard-working employees, especially Kate Hartmann"
   -
     value: "T01060"
     text: "Todos los documentos y herramientas de OWASP son de descarga y uso gratuito."
@@ -629,25 +629,29 @@ paragraphs:
     text: "Es posible jugar Cornucopia de muchas formas diferentes."
   -
     value: "T01310"
-    text: "Here is one way, demonstrated online in a video at https://youtu.be/i5Y0akWj31k , which uses the new (May 2015) score/record sheet at https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
+    text: "Here is one way, demonstrated online in a video at "
+   -
+    value: "T01311"
+    text: ", which uses the new (May 2015) score/record sheet at "
+
   -
     value: "T01400"
     text: "A - Preparativos"
   -
     value: "T01410"
-    text: "A1.Use las cartas de este paquete"
+    text: "A1. Use las cartas de este paquete"
   -
     value: "T01420"
-    text: "A2.Identifique una solicitud o proceso de solicitud para revisar; esto podría ser un concepto, diseño o una implementación real"
+    text: "A2. Identifique una solicitud o proceso de solicitud para revisar; esto podría ser un concepto, diseño o una implementación real"
   -
     value: "T01430"
-    text: "A3.Cree un diagrama de flujo de datos, historias de usuarios u otros artefactos para ayudar en la revisión. "
+    text: "A3. Cree un diagrama de flujo de datos, historias de usuarios u otros artefactos para ayudar en la revisión. "
   -
     value: "T01440"
-    text: "A4.Identifique e invite a un grupo de 3 a 6 personas, Se recomienda que los roles a considerar sean arquitectos, desarrolladores, evaluadores y otras partes interesadas del negocio, Siéntelos juntos alrededor de una mesa (intente incluir a alguien bastante familiarizado con la seguridad de las aplicaciones)"
+    text: "A4. Identifique e invite a un grupo de 3 a 6 personas, Se recomienda que los roles a considerar sean arquitectos, desarrolladores, evaluadores y otras partes interesadas del negocio, Siéntelos juntos alrededor de una mesa (intente incluir a alguien bastante familiarizado con la seguridad de las aplicaciones)"
   -
     value: "T01450"
-    text: "A5.Tenga algunos premios a mano (estrellas doradas, chocolate, pizza, cerveza o flores según la cultura de su oficina)"
+    text: "A5. Tenga algunos premios a mano (estrellas doradas, chocolate, pizza, cerveza o flores según la cultura de su oficina)"
   -
     value: "T01500"
     text: "B - El juego"
@@ -1202,22 +1206,22 @@ paragraphs:
     text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
   -
     value: "T03850"
-    text: "•OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "OWASP’s hard-working employees, especially Kate Hartmann"
   -
     value: "T03860"
-    text: "•Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
+    text: "Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
   -
     value: "T03870"
-    text: "•Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
   -
     value: "T03880"
-    text: " • Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
   -
     value: "T03900"
     text: "Podcasts and videos"
   -
     value: "T03910"
-    text: " • Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
   -
     value: "T03920"
     text: "Version / Date"
@@ -1226,7 +1230,7 @@ paragraphs:
     text: "Podcast and video links added."
   -
     value: "T03940"
-    text: " • Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
   -
     value: "T03950"
     text: "See the project website for further information and presentation materials."
