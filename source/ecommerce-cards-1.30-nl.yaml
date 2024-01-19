@@ -71,7 +71,7 @@ suits:
   -
     id: "AC3"
     value: "3"
-    desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het nooit verloopt, of omdat de gebruiker haar eigen wachtwoord niet kan wijzigen"
+    desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie uit:  invoer, een lokale cache, het geheugen, tijdens het transport, een onbeveiligde locatie, of omdat het grote schaal gebruikt, bekend is, nooit verloopt, of omdat de gebruiker haar ewachtwoord niet kan wijzigen"
   -
     id: "AC4"
     value: "4"
@@ -191,7 +191,7 @@ suits:
   -
     id: "AZ5"
     value: "5"
-    desc: "Chad heeft toegang tot bronnen (inclusief services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie , of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
+    desc: "Chad heeft toegang tot bronnen (waaronder services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeem- eigenschappen, configuratie-gegevens, registerinstellingen, logs) hij geen toegang zou moeten hebben vanwege ontbrekende autorisatie of tot buitensporige privileges (bv. het niet gebruiken principe van de minste privileges)"
   -
     id: "AZ6"
     value: "6"
@@ -291,7 +291,7 @@ suits:
   -
     id: "CO2"
     value: "2"
-    desc: "Lee kan applicatiecontroles omzeilen omdat er gevaarlijke/risicovolle programmeertaalfuncties zijn gebruikt in plaats van veiligere alternatieven, of omdat er typeconversiefouten zijn, of omdat de applicatie onbetrouwbaar is wanneer een externe bron niet beschikbaar is, of er race-omstandigheden zijn, of er zijn resource-initialisatie- of toewijzingsproblemen, of er kunnen overflows optreden"
+    desc: "Lee kancontrole applicaties omzeilen omdat: er gevaarlijke/risicovolle programmeerfuncties worden gebruikt in plaats van veiligere alternatieven, typeconversiefouten , de applicatie onbetrouwbaar is wanneer een externe bron niet beschikbaar is, of vanwege race-omstandigheden-, resource- initialisatie-, toewijzings-, of overflowprobleme"
   -
     id: "CO3"
     value: "3"
@@ -315,7 +315,7 @@ suits:
   -
     id: "CO8"
     value: "8"
-    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie periodiek opnieuw is gecontroleerd en beveiligingspatches zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
+    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat het netwerk, hostinfrastructuur of ondersteunende diensten/applicaties niet veilig zijn geconfigureerd, configuratie periodiek opnieuw gecontroleerd en beveiligingspatches zijn toegepast, of omdat de gegevens lokaal zijn opgeslagen of niet fysiek zijn beschermd"
   -
     id: "CO9"
     value: "9"
@@ -554,10 +554,10 @@ paragraphs:
     text: "De beste plaats om te discussiëren of bij te dragen is de mailinglijst voor het OWASP-project:"
   -
     value: "T01040"
-    text: "•Mailinglijst"
+    text: "Mailinglijst"
   -
     value: "T01050"
-    text: "•Project startpagina"
+    text: "Project startpagina"
   -
     value: "T01060"
     text: "Alle OWASP-documenten en -hulpmiddelen zijn gratis te downloaden en te gebruiken."
@@ -602,7 +602,7 @@ paragraphs:
     text: "Vereisten in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, november 2010 "
   -
     value: "T01220"
-    text: "Verificatie-ID's in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (exclusief secties 18 en 19)"
+    text: "Verificatie-ID's in “Application Security Verification Standard (ASVS) for Web Applications”"
   -
     value: "T01230"
     text: "Aanvalsdetectiepunten-ID's in “AppSensor”, OWASP, augustus 2010-2015"
@@ -629,7 +629,10 @@ paragraphs:
     text: "Het is mogelijk om Cornucopia op veel verschillende manieren te spelen."
   -
     value: "T01310"
-    text: "Hier is een manier, online gedemonstreerd in een video op https://youtu.be/i5Y0akWj31k , die het nieuwe (mei 2015) score-/recordblad gebruikt op https://www.owasp.org/index.php /Bestand:Cornucopia-scoresheet.pdf"
+    text: "Hier is een manier, online gedemonstreerd in een video op "
+  -
+    value: "T01311"
+    text: ", die het nieuwe (mei 2015) score-/recordblad gebruikt op "
   -
     value: "T01400"
     text: "A - Voorbereidingen"
@@ -1208,16 +1211,16 @@ paragraphs:
     text: "Neem rechtstreeks contact op met de mailinglijst of met de projectleiders als er iemand ontbreekt op de onderstaande lijsten."
   -
     value: "T03850"
-    text: "•OWASP's hardwerkende medewerkers, vooral Kate Hartmann"
+    text: "OWASP's hardwerkende medewerkers, vooral Kate Hartmann"
   -
     value: "T03860"
-    text: "•Aanwezigen bij OWASP Londen, OWASP Manchester, OWASP Nederland en OWASP Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
+    text: "Aanwezigen bij OWASP Londen, OWASP Manchester, OWASP Nederland en OWASP Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
   -
     value: "T03870"
-    text: "•Blackfoot UK Limited voor het schenken van drukklare ontwerpbestanden en honderden professioneel bedrukte kaartendecks voor distributie per post en op OWASP-hoofdstukvergaderingen"
+    text: "Blackfoot UK Limited voor het schenken van drukklare ontwerpbestanden en honderden professioneel bedrukte kaartendecks voor distributie per post en op OWASP-hoofdstukvergaderingen"
   -
     value: "T03880"
-    text: '•OWASP NYC voor het maken van een OWASP-doosontwerp en het distribueren van pakketten op AppSec USA 2014.'
+    text: 'OWASP NYC voor het maken van een OWASP-doosontwerp en het distribueren van pakketten op AppSec USA 2014.'
   -
     value: "T03900"
     text: "Podcasts en video's"
