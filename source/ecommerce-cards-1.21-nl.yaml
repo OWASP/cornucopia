@@ -71,7 +71,7 @@ suits:
   -
     id: "AC3"
     value: "3"
-    desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het nooit verloopt, of omdat de gebruiker haar eigen wachtwoord niet kan wijzigen"
+    desc: "Muhammad kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie vanuit: ingress, een lokale cache, het geheugen, in doorvoer, een onbeschermde locatie, of omdat het algemeen bekend is, nooit verloopt, of omdat de gebruiker eigen wachtwoord niet wijzigen kan"
   -
     id: "AC4"
     value: "4"
@@ -191,7 +191,7 @@ suits:
   -
     id: "AZ5"
     value: "5"
-    desc: "Chad heeft toegang tot bronnen (inclusief services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie , of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
+    desc: "Chad heeft toegang tot bronnen (inclusief services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten vanwege ontbrekende autorisatie of overmatigeprivileges (bv. missend principe van de minste privileges)"
   -
     id: "AZ6"
     value: "6"
@@ -554,10 +554,10 @@ paragrafen:
     text: "De beste plaats om te discussiëren of bij te dragen is de mailinglijst voor het OWASP-project:"
   -
     value: "T01040"
-    text: "•Mailinglijst"
+    text: "Mailinglijst"
   -
     value: "T01050"
-    text: "•Project startpagina"
+    text: "Project startpagina"
   -
     value: "T01060"
     text: "Alle OWASP-documenten en -hulpmiddelen zijn gratis te downloaden en te gebruiken."
@@ -602,7 +602,7 @@ paragrafen:
     text: "Vereisten in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, november 2010 "
   -
     value: "T01220"
-    text: "Verificatie-ID's in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (exclusief secties 18 en 19)"
+    text: "Verificatie-ID's in “Application Security Verification Standard (ASVS) for Web Applications”"
   -
     value: "T01230"
     text: "Aanvalsdetectiepunten-ID's in “AppSensor”, OWASP, augustus 2010-2015"
@@ -629,7 +629,10 @@ paragrafen:
     text: "Het is mogelijk om Cornucopia op veel verschillende manieren te spelen."
   -
     value: "T01310"
-    text: "Hier is een manier, online gedemonstreerd in een video op https://youtu.be/i5Y0akWj31k , die het nieuwe (mei 2015) score-/recordblad gebruikt op https://www.owasp.org/index.php /Bestand:Cornucopia-scoresheet.pdf"
+    text: "Hier is een manier, online gedemonstreerd in een video op "
+  -
+    value: "T01311"
+    text: ", die het nieuwe (mei 2015) score-/recordblad gebruikt op "
   -
     value: "T01400"
     text: "A - Voorbereidingen"
@@ -1202,16 +1205,16 @@ paragrafen:
     text: "Neem rechtstreeks contact op met de mailinglijst of met de projectleiders als er iemand ontbreekt op de onderstaande lijsten."
   -
     value: "T03850"
-    text: "•OWASP's hardwerkende medewerkers, vooral Kate Hartmann"
+    text: "OWASP's hardwerkende medewerkers, vooral Kate Hartmann"
   -
     value: "T03860"
-    text: "•Aanwezigen bij OWASP Londen, OWASP Manchester, OWASP Nederland en OWASP Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
+    text: "Aanwezigen bij OWASP Londen, OWASP Manchester, OWASP Nederland en OWASP Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
   -
     value: "T03870"
-    text: "•Blackfoot UK Limited voor het schenken van drukklare ontwerpbestanden en honderden professioneel bedrukte kaartendecks voor distributie per post en op OWASP-hoofdstukvergaderingen"
+    text: "Blackfoot UK Limited voor het schenken van drukklare ontwerpbestanden en honderden professioneel bedrukte kaartendecks voor distributie per post en op OWASP-hoofdstukvergaderingen"
   -
     value: "T03880"
-    text: '•OWASP NYC voor het maken van een OWASP-doosontwerp en het distribueren van pakketten op AppSec USA 2014.'
+    text: 'OWASP NYC voor het maken van een OWASP-doosontwerp en het distribueren van pakketten op AppSec USA 2014.'
   -
     value: "T03900"
     text: "Podcasts en video's"
