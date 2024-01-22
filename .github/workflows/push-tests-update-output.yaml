@@ -110,5 +110,5 @@ jobs:
           git add scripts/**
           git add output/**
           git commit -m "Github Actions updated output files"
-          git pull
-          git push
+          git pull origin ${{ env.GITHUB_REF_NAME }}
+          git push origin ${{ env.GITHUB_REF_NAME }} 
