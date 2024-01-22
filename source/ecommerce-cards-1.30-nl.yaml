@@ -71,7 +71,7 @@ suits:
   -
     id: "AC3"
     value: "3"
-    desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie uit:  invoer, een lokale cache, het geheugen, tijdens het transport, een onbeveiligde locatie, of omdat het grote schaal gebruikt, bekend is, nooit verloopt, of omdat de gebruiker haar ewachtwoord niet kan wijzigen"
+    desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het nooit verloopt, of omdat de gebruiker haar eigen wachtwoord niet kan wijzigen"
   -
     id: "AC4"
     value: "4"
@@ -191,7 +191,7 @@ suits:
   -
     id: "AZ5"
     value: "5"
-    desc: "Chad heeft toegang tot bronnen (waaronder services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeem- eigenschappen, configuratie-gegevens, registerinstellingen, logs) hij geen toegang zou moeten hebben vanwege ontbrekende autorisatie of tot buitensporige privileges (bv. het niet gebruiken principe van de minste privileges)"
+    desc: "Chad heeft toegang tot bronnen (inclusief services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie , of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
   -
     id: "AZ6"
     value: "6"
@@ -291,7 +291,7 @@ suits:
   -
     id: "CO2"
     value: "2"
-    desc: "Lee kancontrole applicaties omzeilen omdat: er gevaarlijke/risicovolle programmeerfuncties worden gebruikt in plaats van veiligere alternatieven, typeconversiefouten , de applicatie onbetrouwbaar is wanneer een externe bron niet beschikbaar is, of vanwege race-omstandigheden-, resource- initialisatie-, toewijzings-, of overflowprobleme"
+    desc: "Lee kan applicatiecontroles omzeilen omdat er gevaarlijke/risicovolle programmeertaalfuncties zijn gebruikt in plaats van veiligere alternatieven, of omdat er typeconversiefouten zijn, of omdat de applicatie onbetrouwbaar is wanneer een externe bron niet beschikbaar is, of er race-omstandigheden zijn, of er zijn resource-initialisatie- of toewijzingsproblemen, of er kunnen overflows optreden"
   -
     id: "CO3"
     value: "3"
@@ -315,7 +315,7 @@ suits:
   -
     id: "CO8"
     value: "8"
-    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat het netwerk, hostinfrastructuur of ondersteunende diensten/applicaties niet veilig zijn geconfigureerd, configuratie periodiek opnieuw gecontroleerd en beveiligingspatches zijn toegepast, of omdat de gegevens lokaal zijn opgeslagen of niet fysiek zijn beschermd"
+    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie periodiek opnieuw is gecontroleerd en beveiligingspatches zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
   -
     id: "CO9"
     value: "9"
