@@ -71,7 +71,7 @@ suits:
   -
     id: "AC3"
     value: "3"
-    desc: "Muhammad kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie vanuit: ingress, een lokale cache, het geheugen, in doorvoer, een onbeschermde locatie, of omdat het algemeen bekend is, nooit verloopt, of omdat de gebruiker eigen wachtwoord niet wijzigen kan"
+    desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het nooit verloopt, of omdat de gebruiker haar eigen wachtwoord niet kan wijzigen"
   -
     id: "AC4"
     value: "4"
@@ -191,7 +191,7 @@ suits:
   -
     id: "AZ5"
     value: "5"
-    desc: "Chad heeft toegang tot bronnen (inclusief services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten vanwege ontbrekende autorisatie of overmatigeprivileges (bv. missend principe van de minste privileges)"
+    desc: "Chad heeft toegang tot bronnen (inclusief services, processen, AJAX, Flash, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie , of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
   -
     id: "AZ6"
     value: "6"
