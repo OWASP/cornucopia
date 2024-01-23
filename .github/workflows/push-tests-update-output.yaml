@@ -106,9 +106,12 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions@github.com"
       - name: Commit changes back into git repo
+        env:
+          PULL_REQUEST_BRANCH_NAME: ${{ github.event.pull_request.base.ref }}
         run: |
           git add scripts/**
           git add output/**
+          git checkout -b ${{ env.PULL_REQUEST_BRANCH_NAME }}
           git commit -m "Github Actions updated output files"
-          git pull origin ${{ env.GITHUB_REF_NAME }}
-          git push origin ${{ env.GITHUB_REF_NAME }} 
+          git pull origin ${{ env.PULL_REQUEST_BRANCH_NAME }}
+          git push origin ${{ env.PULL_REQUEST_BRANCH_NAME }} 
