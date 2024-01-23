@@ -111,7 +111,6 @@ jobs:
         run: |
           git add scripts/**
           git add output/**
-          git checkout -b ${{ env.PULL_REQUEST_BRANCH_NAME }}
           git commit -m "Github Actions updated output files"
-          git pull origin ${{ env.PULL_REQUEST_BRANCH_NAME }}
-          git push origin ${{ env.PULL_REQUEST_BRANCH_NAME }} 
+          git pull
+          git push
