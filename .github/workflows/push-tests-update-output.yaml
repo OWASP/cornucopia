@@ -106,8 +106,6 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions@github.com"
       - name: Commit changes back into git repo
-        env:
-          PULL_REQUEST_BRANCH_NAME: ${{ github.event.pull_request.base.ref }}
         run: |
           git add scripts/**
           git add output/**
