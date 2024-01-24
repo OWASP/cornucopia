@@ -23,7 +23,7 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 
 ```bash
 (cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,pt-br}] [-d] [-s {all,static,dynamic}] [-u URL]
+usage: convert.py [-h] [-i INPUTFILE] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,no-nb,pt-br}] [-d] [-s {all,static,dynamic}] [-u URL]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages. 
 Example usage: $ ./cornucopia/convert.py -t docx -l es -v 1.30
@@ -44,8 +44,8 @@ options:
   -o OUTPUTFILE, --outputfile OUTPUTFILE
                         Specify a path and name of output file to generate. (caution: existing file will be overwritten). 
                         default = output/owasp_cornucopia_edition_component_lang_ver.(docx|pdf|idml)
-  -l {template,all,en,es,fr,nl,pt-br}, --language {template,all,en,es,fr,nl,pt-br}
-                        Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] 
+  -l {template,all,en,es,fr,nl,no-nb,pt-br}, --language {template,all,en,es,fr,nl,no-nb,pt-br}
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `template`] 
                         Template will attempt to create a template from the english input file and 
                         replacing strings with the template lookup codes
   -d, --debug           Output additional information to debug script
