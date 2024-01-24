@@ -600,7 +600,7 @@ paragraphs:
     text: "Requisitos em “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, Novembro 2010"
   -
     value: "T01220"
-    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (excluindo as sessões 18 e 19)"
+    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”"
   -
     value: "T01230"
     text: "Attack detection points IDs in “AppSensor”, OWASP, Agosto 2010-2015"
@@ -627,7 +627,10 @@ paragraphs:
     text: "It is possible to play Cornucopia in many different ways. "
   -
     value: "T01310"
-    text: "Here is one way, demonstrated online in a video at https://youtu.be/i5Y0akWj31k , which uses the new (May 2015) score/record sheet at https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
+    text: "Here is one way, demonstrated online in a video at "
+  -
+    value: "T01311"
+    text: ", which uses the new (May 2015) score/record sheet at "
   -
     value: "T01400"
     text: "PREPAROS"
@@ -1206,16 +1209,16 @@ paragraphs:
     text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
   -
     value: "T03850"
-    text: "•OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "OWASP’s hard-working employees, especially Kate Hartmann"
   -
     value: "T03860"
-    text: "•Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
+    text: "Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
   -
     value: "T03870"
-    text: "•Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
   -
     value: "T03880"
-    text: "•OWASP NYC for creating an OWASP box design and distributing packs at AppSec USA 2014."
+    text: "OWASP NYC for creating an OWASP box design and distributing packs at AppSec USA 2014."
   -
     value: "T03900"
     text: "Podcasts and videos"
