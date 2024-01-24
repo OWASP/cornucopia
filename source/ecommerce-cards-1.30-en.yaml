@@ -183,7 +183,7 @@ suits:
   -
     id: "AZ3"
     value: "3"
-    desc: "Christian can access information, which they should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or other information leakage"
+    desc: "Christian can access information, which he should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or through other information leakage"
   -
     id: "AZ4"
     value: "4"
@@ -554,10 +554,10 @@ paragraphs:
     text: "The best place to use to discuss or contribute is the mailing list for the OWASP project:"
   -
     value: "T01040"
-    text: "•Mailing list"
+    text: "Mailing list"
   -
     value: "T01050"
-    text: "•Project home page"
+    text: "Project home page"
   -
     value: "T01060"
     text: "All OWASP documents and tools are free to download and use."
@@ -602,7 +602,7 @@ paragraphs:
     text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, November 2010 "
   -
     value: "T01220"
-    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (excluding sections 18 and 19)"
+    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”"
   -
     value: "T01230"
     text: "Attack detection points IDs in “AppSensor”, OWASP, August 2010-2015"
@@ -629,7 +629,10 @@ paragraphs:
     text: "It is possible to play Cornucopia in many different ways. "
   -
     value: "T01310"
-    text: "Here is one way, demonstrated online in a video at https://youtu.be/i5Y0akWj31k , which uses the new (May 2015) score/record sheet at https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
+    text: "Here is one way, demonstrated online in a video at "
+  -
+    value: "T01311"
+    text: " which uses the new (May 2015) score/record sheet at "
   -
     value: "T01400"
     text: "A - Preparations"
@@ -1208,16 +1211,16 @@ paragraphs:
     text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
   -
     value: "T03850"
-    text: "•OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "OWASP’s hard-working employees, especially Kate Hartmann"
   -
     value: "T03860"
-    text: "•Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
+    text: "Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
   -
     value: "T03870"
-    text: "•Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
   -
     value: "T03880"
-    text: '•OWASP NYC for creating an OWASP box design and distributing packs at AppSec USA 2014.'
+    text: 'OWASP NYC for creating an OWASP box design and distributing packs at AppSec USA 2014.'
   -
     value: "T03900"
     text: "Podcasts and videos"

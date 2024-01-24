@@ -552,10 +552,10 @@ paragraphs:
     text: "Le meilleur moyen de contribution et de discussion est la liste de diffusion du projet OWASP :"
   -
     value: "T01040"
-    text: "• Liste de diffusion"
+    text: "Liste de diffusion"
   -
     value: "T01050"
-    text: "• Page d’accueil du projet"
+    text: "Page d’accueil du projet"
   -
     value: "T01060"
     text: "Tous les documents et outils OWASP sont libres de téléchargement et d’utilisation. "
@@ -627,25 +627,28 @@ paragraphs:
     text: "Il y a bien des manières de jouer à Cornucopia."
   -
     value: "T01310"
-    text: "Il y a bien des manières de jouer à Cornucopia. En voici une, en situation dans une vidéo en ligne sur https://youtu.be/i5Y0akWj31k, qui utilise la nouvelle (mai 2015) feuille de scores disponible ici : https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
+    text: "Il y a bien des manières de jouer à Cornucopia. En voici une, en situation dans une vidéo en ligne sur "
+  -
+    value: "T01311"
+    text: ", qui utilise la nouvelle (mai 2015) feuille de scores disponible ici:" 
   -
     value: "T01400"
     text: "A - Préparations"
   -
     value: "T01410"
-    text: "A1.	Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes."
+    text: "A1. Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes."
   -
     value: "T01420"
-    text: "A2.	Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation"
+    text: "A2. Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation"
   -
     value: "T01430"
-    text: "A3.	Créez un diagramme de flux de données, des cas d’utilisation, ou d’autres supports pour aider à l’évaluation."
+    text: "A3. Créez un diagramme de flux de données, des cas d’utilisation, ou d’autres supports pour aider à l’évaluation."
   -
     value: "T01440"
-    text: "A4.	Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d’une table (essayez d’inclure un profil sensibilisé à la sécurité applicative)."
+    text: "A4. Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d’une table (essayez d’inclure un profil sensibilisé à la sécurité applicative)."
   -
     value: "T01450"
-    text: "A5.	Prévoyez une distribution de prix (étoiles, pizza, bière ou fleurs en fonction de la culture d’entreprise)."
+    text: "A5. Prévoyez une distribution de prix (étoiles, pizza, bière ou fleurs en fonction de la culture d’entreprise)."
   -
     value: "T01500"
     text: "B - Jouer"
@@ -660,28 +663,28 @@ paragraphs:
     text: "Le fait d’avoir un participant non-joueur facilite le relevé des questions et des scores."
   -
     value: "T01540"
-    text: "B1.	Retirez les Jokers et quelques cartes de bas niveau (2, 3, 4) du jeu Cornucopia pour s’assurer que chaque joueur ait le même nombre de cartes."
+    text: "B1. Retirez les Jokers et quelques cartes de bas niveau (2, 3, 4) du jeu Cornucopia pour s’assurer que chaque joueur ait le même nombre de cartes."
   -
     value: "T01550"
-    text: "B2.	Battez les cartes et distribuez-les toutes."
+    text: "B2. Battez les cartes et distribuez-les toutes."
   -
     value: "T01560"
-    text: "B3.	Pour commencer, choisissez au hasard un joueur qui jouera en premier – qui peut jouer n’importe quelle carte en main sauf un atout – Cornucopia"
+    text: "B3. Pour commencer, choisissez au hasard un joueur qui jouera en premier – qui peut jouer n’importe quelle carte en main sauf un atout – Cornucopia"
   -
     value: "T01570"
-    text: "B4.	Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s’appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s’accorde à dire qu’il s’agit d’un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n’écartez pas une menace au motif que celle-ci fait déjà l’objet d’une contre-mesure – quelqu’un note la carte et relève les questions rencontrés."
+    text: "B4. Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s’appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s’accorde à dire qu’il s’agit d’un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n’écartez pas une menace au motif que celle-ci fait déjà l’objet d’une contre-mesure – quelqu’un note la carte et relève les questions rencontrés."
   -
     value: "T01580"
-    text: "B5.	Jouez ainsi dans le sens des aiguilles d’une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n’importe quelle couleur. "
+    text: "B5. Jouez ainsi dans le sens des aiguilles d’une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n’importe quelle couleur. "
   -
     value: "T01590"
     text: "Seule la carte la plus forte de la couleur appelée, ou l’atout Cornucopia le plus fort qui a été joué, gagne la main."
   -
     value: "T01600"
-    text: "B6.	Le joueur qui gagne la main, commence au tour suivant, donnant une couleur à suivre."
+    text: "B6. Le joueur qui gagne la main, commence au tour suivant, donnant une couleur à suivre."
   -
     value: "T01610"
-    text: "B7.	Continuez jusqu’à ce que toutes les cartes soient jouées."
+    text: "B7. Continuez jusqu’à ce que toutes les cartes soient jouées."
   -
     value: "T01700"
     text: "C - Scores"
@@ -690,22 +693,22 @@ paragraphs:
     text: "L’objectif est d’identifier des menaces applicables, et de gagner des mains (des tours):"
   -
     value: "T01720"
-    text: "C1.	+1 point à chaque carte jouée pour laquelle le groupe s’accorde à dire qu’il s’agit d’une menace applicable."
+    text: "C1. +1 point à chaque carte jouée pour laquelle le groupe s’accorde à dire qu’il s’agit d’une menace applicable."
   -
     value: "T01730"
-    text: "C2.	+1 point si vous gagnez une main."
+    text: "C2. +1 point si vous gagnez une main."
   -
     value: "T01740"
-    text: "C3.	Lorsque toutes les cartes sont jouées, le plus grand score remporte la partie."
+    text: "C3. Lorsque toutes les cartes sont jouées, le plus grand score remporte la partie."
   -
     value: "T01800"
     text: "D - Clôture"
   -
     value: "T01810"
-    text: "D1.	Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes."
+    text: "D1. Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes."
   -
     value: "T01820"
-    text: "D2.	Créez des cas d’utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement."
+    text: "D2. Créez des cas d’utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement."
   -
     value: "T01900"
     text: "Règles alternatives"
@@ -1200,16 +1203,16 @@ paragraphs:
     text: "Veuillez contacter la liste de diffusion ou les chefs du projet directement, s’il manque quelqu’un dans les listes ci-dessous."
   -
     value: "T03850"
-    text: "•Les employés de l’OWASP travaillant dur, en particulier Kate Hartmann"
+    text: "Les employés de l’OWASP travaillant dur, en particulier Kate Hartmann"
   -
     value: "T03860"
-    text: "•Les participants aux réunions des branches de l'OWASP Londres, de l'OWASP Manchester, de l'OWASP Pays-Bas et de l'OWASP Écosse, ainsi qu'au London Gamification meetup, qui ont fait des suggestions utiles et posé des questions pertinentes"
+    text: "Les participants aux réunions des branches de l'OWASP Londres, de l'OWASP Manchester, de l'OWASP Pays-Bas et de l'OWASP Écosse, ainsi qu'au London Gamification meetup, qui ont fait des suggestions utiles et posé des questions pertinentes"
   -
     value: "T03870"
-    text: "•Blackfoot UK Limited pour le don des fichiers prêt-à-imprimer et des centaines de jeux de cartes imprimées professionnellement pour distribution par la Poste et dans les réunions de branche de l’OWASP"
+    text: "Blackfoot UK Limited pour le don des fichiers prêt-à-imprimer et des centaines de jeux de cartes imprimées professionnellement pour distribution par la Poste et dans les réunions de branche de l’OWASP"
   -
     value: "T03880"
-    text: "•OWASP NYC pour la création d’un design de boîte OWASP et la distribution de packs à AppSec USA 2014."
+    text: "OWASP NYC pour la création d’un design de boîte OWASP et la distribution de packs à AppSec USA 2014."
   -
     value: "T03900"
     text: "Podcasts et vidéos"
