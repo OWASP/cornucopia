@@ -20,7 +20,7 @@ from itertools import groupby
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
-    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "pt-br"]
+    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["1.20", "1.21", "1.30"]
     STYLE_CHOICES: List[str] = ["all", "static", "dynamic"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
@@ -236,7 +236,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.LANGUAGE_CHOICES,
         default="en",
         help=(
-            "Output language to produce. [`en`, `es`, `fr`, `pt-br`, `template`] "
+            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `template`] "
             "\nTemplate will attempt to create a template from the english input file and "
             "\nreplacing strings with the template lookup codes"
         ),
