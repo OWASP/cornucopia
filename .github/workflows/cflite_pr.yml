@@ -1,9 +1,5 @@
 name: ClusterFuzzLite PR fuzzing
 on:
-  push:
-    paths:
-      - 'scripts/convert**'
-      - 'test/scripts/convert**'
   pull_request:
     paths:
       - 'scripts/convert**'
