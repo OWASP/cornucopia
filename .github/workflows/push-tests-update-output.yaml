@@ -99,10 +99,9 @@ jobs:
           TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
           echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
       - name: Checkout target branch
-        env:
-          TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git checkout ${{ env.TARGET_BRANCH_NAME }}
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with: 
+          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
       - run: git lfs fetch --all
       - name: setup git config
         run: |
@@ -126,8 +125,8 @@ jobs:
           TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git add scripts/**
-          git add output/**
-          git commit -m "skip ci, desc: Github Actions updated output files"
-          git pull ${{ env.TARGET_BRANCH_NAME }}
-          git push ${{ env.TARGET_BRANCH_NAME }}
+            git add scripts/**
+            git add output/**
+            git commit -m "skip ci, desc: Github Actions updated output files"
+            git pull ${{ env.TARGET_BRANCH_NAME }}
+            git push ${{ env.TARGET_BRANCH_NAME }}
