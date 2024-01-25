@@ -102,7 +102,7 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
-      - run: git lfs checkout
+      - run: git lfs fetch --all
       - name: setup git config
         run: |
           git config user.name "GitHub Actions Bot"
