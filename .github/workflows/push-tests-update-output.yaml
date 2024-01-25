@@ -86,6 +86,27 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Set target branch
+        id: find-target
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y hub
+          echo "Searching for pr branch for number $PR_NUMBER"
+          echo "List all prs:"
+          hub pr list -f "%I|%H|%n"
+          TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
+          echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
+      - name: Checkout target branch
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - run: git lfs fetch --all
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions@github.com"
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
@@ -96,19 +117,16 @@ jobs:
         run: |
           pip install -r requirements.txt --require-hashes
           pipenv install -d
-
       - name: Generate new output files
-        run: pipenv run python scripts/convert.py -l all -t all -s all
-
-      # Set the git username and email up.
-      - name: setup git config
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "github-actions@github.com"
-      - name: Commit changes back into git repo
-        run: |
+          pipenv run python scripts/convert.py -l all -t all -s all
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        name: Commit changes back into git repo
+        env:
+          TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - run: |
           git add scripts/**
           git add output/**
-          git commit -m "Github Actions updated output files"
-          git pull
-          git push
+          git commit -m "skip ci, desc: Github Actions updated output files"
+          git pull ${{ env.TARGET_BRANCH_NAME }}
+          git push ${{ env.TARGET_BRANCH_NAME }}
