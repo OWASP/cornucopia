@@ -104,9 +104,12 @@ jobs:
           ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
       - run: git lfs fetch --all
       - name: setup git config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions@github.com"
+          git config --global credential.helper '!f() { sleep 1; echo "username=git token=${{ env.GITHUB_TOKEN }}"; }; f'
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
