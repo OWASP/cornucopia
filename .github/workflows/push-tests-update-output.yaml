@@ -97,18 +97,26 @@ jobs:
           pip install -r requirements.txt --require-hashes
           pipenv install -d
 
-      - name: Generate new output files
-        run: pipenv run python scripts/convert.py -l all -t all -s all
-
-      # Set the git username and email up.
       - name: setup git config
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "github-actions@github.com"
-      - name: Commit changes back into git repo
+      - name: Set target branch for pull-request
+        id: find-target
+        env:
+          PR_NUMBER: ${{ github.event.number }}
         run: |
+          TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "${{ env.PR_NUMBER }}.*" | cut -d "|" -f2)
+          echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
+      - name: Generate new output files and Commit changes back into git repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+        run: |
+          git checkout ${{ env.TARGET_BRANCH_NAME }}
+          pipenv run python scripts/convert.py -l all -t all -s all
           git add scripts/**
           git add output/**
-          git commit -m "Github Actions updated output files"
-          git pull
-          git push
+          git commit -m "skip ci, desc: Github Actions updated output files"
+          git pull ${{ env.TARGET_BRANCH_NAME }}
+          git push ${{ env.TARGET_BRANCH_NAME }}
