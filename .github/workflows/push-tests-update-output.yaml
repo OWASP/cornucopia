@@ -128,8 +128,9 @@ jobs:
           TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            git add scripts/**
-            git add output/**
-            git commit -m "skip ci, desc: Github Actions updated output files"
-            git pull ${{ env.TARGET_BRANCH_NAME }}
-            git push ${{ env.TARGET_BRANCH_NAME }}
+            git config --global credential.helper '!f() { sleep 1; echo "username=git token=${{ env.GITHUB_TOKEN }}"; }; f'
+            git add scripts/** || echo "Unable to add script files"
+            git add output/** || echo "Unable to add output files"
+            git commit -v -m "skip ci, desc: Github Actions updated output files" || echo "Unable to commit"
+            git pull -v ${{ env.TARGET_BRANCH_NAME }} || echo "could not pull from remote repo"
+            git push -v ${{ env.TARGET_BRANCH_NAME }} || echo "could not push to remote repo"
