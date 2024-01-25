@@ -112,6 +112,7 @@ jobs:
           TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
         run: |
           git checkout ${{ env.TARGET_BRANCH_NAME }}
+          git lfs checkout
           pipenv run python scripts/convert.py -l all -t all -s all
           git add scripts/**
           git add output/**
