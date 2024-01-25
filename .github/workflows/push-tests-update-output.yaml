@@ -86,22 +86,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      # Set the pip environment up
-      - name: Get Python
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
-        with:
-          python-version: '3.10'
-          cache: 'pipenv' # caching pip dependencies
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt --require-hashes
-          pipenv install -d
-
-      - name: setup git config
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "github-actions@github.com"
-      - name: Set target branch for pull-request
+      - name: Set target branch
         id: find-target
         env:
           PR_NUMBER: ${{ github.event.number }}
@@ -113,14 +98,33 @@ jobs:
           hub pr list -f "%I|%H|%n"
           TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
           echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
-      - name: Generate new output files and Commit changes back into git repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - name: Checkout target branch
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - run: git lfs checkout
+      - name: setup git config
         run: |
-          git checkout ${{ env.TARGET_BRANCH_NAME }}
-          git lfs checkout
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions@github.com"
+      # Set the pip environment up
+      - name: Get Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        with:
+          python-version: '3.10'
+          cache: 'pipenv' # caching pip dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install -d
+      - name: Generate new output files
+        run: |
           pipenv run python scripts/convert.py -l all -t all -s all
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        name: Commit changes back into git repo
+        env:
+          TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - run: |
           git add scripts/**
           git add output/**
           git commit -m "skip ci, desc: Github Actions updated output files"
