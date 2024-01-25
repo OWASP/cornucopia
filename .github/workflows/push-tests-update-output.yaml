@@ -104,6 +104,7 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
         run: |
+          sudo apt-get update && sudo apt-get install -y hub
           TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "${{ env.PR_NUMBER }}.*" | cut -d "|" -f2)
           echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
       - name: Generate new output files and Commit changes back into git repo
