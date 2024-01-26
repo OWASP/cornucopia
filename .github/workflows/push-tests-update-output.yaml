@@ -128,9 +128,10 @@ jobs:
           TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+            git remote -v || echo "Could not find any origin"
             git config --global credential.helper '!f() { sleep 1; echo "username=git token=${{ env.GITHUB_TOKEN }}"; }; f'
             git add scripts/** || echo "Unable to add script files"
             git add output/** || echo "Unable to add output files"
             git commit -v -m "skip ci, desc: Github Actions updated output files" || echo "Unable to commit"
-            git pull -v ${{ env.TARGET_BRANCH_NAME }} || echo "could not pull from remote repo"
-            git push -v ${{ env.TARGET_BRANCH_NAME }} || echo "could not push to remote repo"
+            git pull -v origin ${{ env.TARGET_BRANCH_NAME }} || echo "could not pull from remote repo"
+            git push -v origin ${{ env.TARGET_BRANCH_NAME }} || echo "could not push to remote repo"
