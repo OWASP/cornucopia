@@ -70,6 +70,12 @@ jobs:
 
   # If Tests pass, generate new output files and commit to repo
   updateoutputfiles:
+    # This doesn't work since the commit has to be signed. 
+    # TODO: We need to create a bot that can update the output files and 
+    # create a pull-request with the necessary changes
+    # or that commits directly to the pull-requests.
+    # Remove the if below if you still want to experiment with this job.
+    if: false
     permissions:
       contents: write  # for Git to git push
     name: Update Output Files
