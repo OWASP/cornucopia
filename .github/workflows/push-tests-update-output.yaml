@@ -70,6 +70,12 @@ jobs:
 
   # If Tests pass, generate new output files and commit to repo
   updateoutputfiles:
+    # This doesn't work since the commit has to be signed. 
+    # TODO: We need to create a bot that can update the output files and 
+    # create a pull-request with the necessary changes
+    # or that commits directly to the pull-requests.
+    # Remove the if below if you still want to experiment with this job.
+    if: false
     permissions:
       contents: write  # for Git to git push
     name: Update Output Files
@@ -86,6 +92,30 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Set target branch
+        id: find-target
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y hub
+          echo "Searching for pr branch for number $PR_NUMBER"
+          echo "List all prs:"
+          hub pr list -f "%I|%H|%n"
+          TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
+          echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
+      - name: Checkout target branch
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with: 
+          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - run: git lfs fetch --all
+      - name: setup git config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "github-actions@github.com"
+          git config --global credential.helper '!f() { sleep 1; echo "username=git token=${{ env.GITHUB_TOKEN }}"; }; f'
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
@@ -96,19 +126,18 @@ jobs:
         run: |
           pip install -r requirements.txt --require-hashes
           pipenv install -d
-
       - name: Generate new output files
-        run: pipenv run python scripts/convert.py -l all -t all -s all
-
-      # Set the git username and email up.
-      - name: setup git config
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "github-actions@github.com"
+          pipenv run python scripts/convert.py -l all -t all -s all
       - name: Commit changes back into git repo
+        env:
+          TARGET_BRANCH_NAME: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git add scripts/**
-          git add output/**
-          git commit -m "Github Actions updated output files"
-          git pull
-          git push
+            git remote -v || echo "Could not find any origin"
+            git config --global credential.helper '!f() { sleep 1; echo "username=git token=${{ env.GITHUB_TOKEN }}"; }; f'
+            git add scripts/** || echo "Unable to add script files"
+            git add output/** || echo "Unable to add output files"
+            git commit -v -m "skip ci, desc: Github Actions updated output files" || echo "Unable to commit"
+            git pull -v origin ${{ env.TARGET_BRANCH_NAME }} || echo "could not pull from remote repo"
+            git push -v origin ${{ env.TARGET_BRANCH_NAME }} || echo "could not push to remote repo"

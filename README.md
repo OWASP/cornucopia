@@ -57,11 +57,29 @@ options:
 
 ## Contributing to Development
 
+### Large binary files
+
+Please install git-lfs to ensure you can download the output files.
+
+Install from https://git-lfs.com/ 
+
+Then pull the binaries from git lfs.
+
+```bash
+git lfs pull
+
+```
+
+### Coding style 
+
+
 Before you push your changes please format files with
 
 ```bash
 make fmt
 ```
+
+### Static analysis
 
 run static analysis checks
 
@@ -69,11 +87,15 @@ run static analysis checks
 make static-check
 ```
 
+### Tests
+
 run all available smoke, unit and integration tests
 
 ```bash
 make test
 ```
+
+###  Code coverage
 
 check that your code have sufficient test coverage
 
@@ -81,8 +103,9 @@ check that your code have sufficient test coverage
 make coverage-check
 ```
 
-All python unit tests with fixtures in `testdata` folder support updating
-_golden_ files from real output of tests
+### Golden files
+
+All python unit tests with fixtures in `testdata` folder support updating _golden_ files from real output of tests
 
 ```bash
 make python-test-update-golden-files
