@@ -55,6 +55,15 @@ options:
   -u URL, --url URL     Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID). 
 ```
 
+## Printing
+
+The latest printable files are added to the `output` folder in this repository.
+The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work. 
+In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/fonts` in this repository. They are both open source and free for commercial use.
+The fonts can also be downloaded from the web.
+Fivo Sans: https://www.fontsc.com/font/fivo-sans
+Atkinson Hyperlegible: https://brailleinstitute.org/freefont
+
 ## Contributing to Development
 
 ### Large binary files
