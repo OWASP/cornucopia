@@ -64,7 +64,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
         env:
-          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+          CC_TEST_REPORTER_ID: 7482a81acb1b6de49fa6fd2769a014bb9ae8bee408161c23d400b2ac9e95b7cf
       # Check formatting of files
       - name: Check formatting of files with Black
         run: pipenv run black --line-length=120 --check .
