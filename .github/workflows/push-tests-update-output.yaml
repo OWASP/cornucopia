@@ -62,7 +62,7 @@ jobs:
         run: pipenv run coverage report --fail-under 85 scripts/convert*
       # Upload Code COverage for Codeclimate
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
+        uses: paambaati/codeclimate-action@a1831d7162ea1fbc612ffe5fb3b90278b7999d59 # v5.0.0
         env:
           CC_TEST_REPORTER_ID: <code_climate_reporter_id>
       # Check formatting of files
