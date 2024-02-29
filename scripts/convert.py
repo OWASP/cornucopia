@@ -5,6 +5,7 @@ import docx  # type: ignore
 import fnmatch
 import logging
 import os
+import platform
 import pyqrcode  # type: ignore
 import re
 import shutil
@@ -44,42 +45,43 @@ def check_fix_file_extension(filename: str, file_type: str) -> str:
 
 
 def check_make_list_into_text(var: List[str], group_numbers: bool = True) -> str:
-    if isinstance(var, list):
-        if group_numbers:
-            var = group_number_ranges(var)
-        text_output = ", ".join(str(s) for s in list(var))
-        if len(text_output.strip()) == 0:
-            text_output = " - "
-        return text_output
-    else:
+    if not isinstance(var, list):
         return str(var)
+
+    if group_numbers:
+        var = group_number_ranges(var)
+
+    text_output = ", ".join(str(s) for s in var)
+    if not text_output.strip():
+        text_output = " - "
+
+    return text_output
 
 
 def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
     logging.debug(f" --- docx_file = {docx_filename}\n--- starting pdf conversion now.")
-    fail: bool = False
-    msg: str = ""
+
     if convert_vars.can_convert_to_pdf:
-        # Use docx2pdf for windows and mac with MS Word installed
         try:
             docx2pdf.convert(docx_filename, output_pdf_filename)
         except Exception as e:
-            msg = f"\nConvert error: {e}"
-            fail = True
+            error_msg = f"\nConvert error: {e}"
+            logging.warning(error_msg)
+            return docx_filename
+
     else:
-        fail = True
-    if fail:
-        msg = (
-            "Error. A temporary docx file was created in the output folder but cannot be converted "
-            "to pdf (yet) on operating system: {sys.platform}\n"
+        error_msg = (
+            f"Error. A temporary docx file was created in the output folder but cannot be converted "
+            f"to pdf (yet) on operating system: {platform.system()}\n"
             "This does work on Windows and Mac with MS Word installed."
-        ) + msg
-        logging.warning(msg)
+        )
+        logging.warning(error_msg)
         return docx_filename
 
     # If not debugging then delete the temp file
     if not convert_vars.args.debug:
         os.remove(docx_filename)
+
     return output_pdf_filename
 
 
