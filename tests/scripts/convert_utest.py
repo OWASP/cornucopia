@@ -1,6 +1,7 @@
 import unittest
 import argparse
 import os
+import platform
 import sys
 import docx  # type: ignore
 import logging
@@ -1058,9 +1059,9 @@ class TestConvertDocxToPdf(unittest.TestCase):
         )
         want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
         want_logging_warn_message = [
-            "WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
-            "to pdf (yet) on operating system: {sys.platform}\n"
-            "This does work on Windows and Mac with MS Word installed."
+            f"WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
+            f"to pdf (yet) on operating system: {platform.system()}\n"
+            f"This does work on Windows and Mac with MS Word installed."
         ]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
