@@ -31,7 +31,7 @@ elixir -v
 mix archive.install hex phx_new 1.7.0-rc.0
 ```
 
-# You'll also need to get Docker for MacOS (easiest way to get a postgres instance running)
+### You'll also need to get Docker for MacOS (easiest way to get a postgres instance running)
 https://docs.docker.com/desktop/install/mac-install/
 
 There's a button on the app to grab the latest stable Postgres image and run it
@@ -41,6 +41,7 @@ You've now got Elixir, Hex, Phoenix and Postgres
 
 Bonus: set up vscode for elixir dev https://fly.io/phoenix-files/setup-vscode-for-elixir-development/
 
+### Clone the copi code, then
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -52,7 +53,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+## More about Phoenix
 
   * Official website: https://www.phoenixframework.org/
   * Guides: https://hexdocs.pm/phoenix/overview.html
