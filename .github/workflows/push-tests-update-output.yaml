@@ -37,7 +37,7 @@ jobs:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
       - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
@@ -96,7 +96,7 @@ jobs:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
       - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
       - name: Set target branch
         id: find-target
         env:
@@ -110,7 +110,7 @@ jobs:
           TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
           echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
       - name: Checkout target branch
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:
           ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
       - run: git lfs fetch --all
