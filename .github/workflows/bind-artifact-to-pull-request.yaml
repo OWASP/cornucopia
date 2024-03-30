@@ -1,0 +1,48 @@
+name: Bind artifacts to Pull-Request
+
+# Triggered by the name of the previos
+on:
+  workflow_run:
+    workflows: [Run Tests and Update output files]
+    types: [completed]
+# Enable the option to post a comment
+permissions:
+  pull-requests: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Check that the previos workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Get Artifacts Link
+        env:
+          WORKFLOW_RUN_EVENT_OBJ: ${{ toJSON(github.event.workflow_run) }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PREVIOUS_JOB_ID=$(jq -r '.id' <<< "$WORKFLOW_RUN_EVENT_OBJ")
+          SUITE_ID=$(jq -r '.check_suite_id' <<< "$WORKFLOW_RUN_EVENT_OBJ")
+          # Sample for a single artifact, can be improved for a multiple artifacts
+          ARTIFACT_ID=$(gh api "/repos/${{ github.repository }}/actions/artifacts" \
+            --jq ".artifacts.[] |
+            select(.workflow_run.id==${PREVIOUS_JOB_ID}) |
+            .id")
+          echo "ARTIFACT_URL=https://github.com/${{ github.repository }}/suites/${SUITE_ID}/artifacts/${ARTIFACT_ID}" >> $GITHUB_ENV
+          PR_NUMBER=$(jq -r '.pull_requests[0].number' <<< "$WORKFLOW_RUN_EVENT_OBJ")
+          echo "PR_NUMBER=${PR_NUMBER}" >> $GITHUB_ENV
+
+      - uses: actions/github-script@60a0d83
+        env:
+          PR_NUMBER: ${{ env.PR_NUMBER }}
+          PR_NOTES: |
+            Build artifacts:
+            | Name | Link |
+            |------|------|
+            | Ecommerce cards | [Cards](${{ env.ARTIFACT_URL }}) |
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: process.env.PR_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.PR_NOTES
+            })
