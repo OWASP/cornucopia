@@ -160,9 +160,29 @@ twice.
 To avoid common mistakes there is a script which will guide you through process
 and push correct tag from your machine.
 
+
+To release a new patch:
+
 ```bash
 make release
 ```
+
+```bash
+make release-patch
+```
+
+To release a new minor version:
+
+```bash
+make release-minor
+```
+To release a new major version:
+
+```bash
+make release-major
+```
+
+Once the 
 
 Docker images are build in [Jenkins][4] and published to [Artifactory][5]
 keeping 3 tags:
