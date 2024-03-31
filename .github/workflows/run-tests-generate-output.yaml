@@ -1,0 +1,178 @@
+name: Run Tests and generate output files
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'sources/**'
+      - 'scripts/convert**'
+      - 'resources/templates/**'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  runtests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      # Make sure we have some code to test
+      - name: Harden Runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            azure.archive.ubuntu.com:80
+            esm.ubuntu.com:443
+            files.pythonhosted.org:443
+            github-cloud.githubusercontent.com:443
+            github.com:443
+            motd.ubuntu.com:443
+            packages.microsoft.com:443
+            ppa.launchpadcontent.net:443
+            pypi.org:443
+            opencre.org:443
+            codeclimate.com:443
+            d3iz1jjs17r6kg.cloudfront.net:443
+            keys.openpgp.org:443
+            api.codeclimate.com:443
+      - name: Checkout repository
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+      # Set the pip environment up
+      - name: Get Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        with:
+          python-version: '3.10'
+          cache: 'pipenv' # caching pip dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install --ignore-pipfile --dev
+      # Run the tests
+      - name: Run unit tests
+        run: pipenv run python -m unittest discover -s "tests/scripts" -p "*_utest.py"
+      - name: Run integration
+        run: pipenv run python -m unittest discover -s "tests/scripts" -p "*_itest.py"
+      # Test coverage reports
+      - name: Check test coverage - run tests
+        run: pipenv run coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"
+      - name: Check test coverage - generate xml
+        run: pipenv run coverage xml
+      - name: Check test coverage - Report
+        run: pipenv run coverage report --fail-under 85 scripts/convert*
+      # Check formatting of files
+      - name: Check formatting of files with Black
+        run: pipenv run black --line-length=120 --check .
+      - name: Check formatting of files with flake
+        run: pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+      - name: Check formatting of files for correct spelling and namespace names
+        run: pipenv run mypy --namespace-packages --strict ./scripts/
+
+  # If Tests pass, generate new output files
+  uploadoutputfiles:
+    name: Upload Output Files
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    needs: runtests
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # Make sure we have some code to diff.
+      - name: Harden Runner
+        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+      - name: Checkout repository
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+      - name: Set target branch
+        id: find-target
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y hub
+          echo "Searching for pr branch for number $PR_NUMBER"
+          echo "List all prs:"
+          hub pr list -f "%I|%H|%n"
+          TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
+          echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
+      - name: Checkout target branch
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+        with:
+          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+      - run: git lfs fetch --all
+      # Set the pip environment up
+      - name: Get Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        with:
+          python-version: '3.10'
+          cache: 'pipenv' # caching pip dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install -d
+      - name: Generate new output files
+        run: |
+          pipenv run python scripts/convert.py -l all -t all -s all
+      - name: Create pull request artifacts
+        uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
+        with:
+          commit: ${{ github.event.pull_request.head.sha }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-message: "The generated Cornucopia cards in this pull request."
+          artifacts: |
+            output/owasp_cornucopia_ecommerce_cards_en_1.21_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_en_1.21_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_en_1.21_static.docx
+            output/owasp_cornucopia_ecommerce_cards_en_1.21_static.idml
+            output/owasp_cornucopia_ecommerce_cards_en_1.30_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_en_1.30_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_en_1.30_dynamic.pdf
+            output/owasp_cornucopia_ecommerce_cards_en_1.30_static.docx
+            output/owasp_cornucopia_ecommerce_cards_en_1.30_static.idml
+            output/owasp_cornucopia_ecommerce_cards_en_1.30_static.pdf
+            output/owasp_cornucopia_ecommerce_cards_es_1.20_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_es_1.20_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_es_1.20_static.docx
+            output/owasp_cornucopia_ecommerce_cards_es_1.20_static.idml
+            output/owasp_cornucopia_ecommerce_cards_fr_1.20_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_fr_1.20_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_fr_1.20_static.docx
+            output/owasp_cornucopia_ecommerce_cards_fr_1.20_static.idml
+            output/owasp_cornucopia_ecommerce_cards_fr_1.30_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_fr_1.30_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_fr_1.30_dynamic.pdf
+            output/owasp_cornucopia_ecommerce_cards_fr_1.30_static.docx
+            output/owasp_cornucopia_ecommerce_cards_fr_1.30_static.idml
+            output/owasp_cornucopia_ecommerce_cards_fr_1.30_static.pdf
+            output/owasp_cornucopia_ecommerce_cards_nl_1.21_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_nl_1.21_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_nl_1.21_static.docx
+            output/owasp_cornucopia_ecommerce_cards_nl_1.21_static.idml
+            output/owasp_cornucopia_ecommerce_cards_nl_1.30_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_nl_1.30_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_nl_1.30_dynamic.pdf
+            output/owasp_cornucopia_ecommerce_cards_nl_1.30_static.docx
+            output/owasp_cornucopia_ecommerce_cards_nl_1.30_static.idml
+            output/owasp_cornucopia_ecommerce_cards_nl_1.30_static.pdf
+            output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_dynamic.pdf
+            output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_static.docx
+            output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_static.idml
+            output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_static.pdf
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.20_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.20_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.20_static.docx
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.20_static.idml
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_dynamic.docx
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_dynamic.idml
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_dynamic.pdf
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.docx
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.idml
+            output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.pdf
