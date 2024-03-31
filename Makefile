@@ -114,8 +114,8 @@ release-patch:
 	#
 	# To release a new version:
 	# git push origin --tag <name of tag>
-.PHONY: release-minor-update
-release-minor-update:
+.PHONY: release-minor
+release-minor:
 	@rm -f .version.properties
 	git tag -d pre-release 2> /dev/null || echo ok
 	git checkout master
@@ -126,8 +126,8 @@ release-minor-update:
 	#
 	# To release a new version:
 	# git push origin --tag <name of tag>
-.PHONY: release-major-update
-release-major-update:
+.PHONY: release-major
+release-major:
 	@rm -f .version.properties
 	git tag -d pre-release 2> /dev/null || echo ok
 	git checkout master
