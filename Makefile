@@ -91,5 +91,52 @@ python-test-update-golden-files:
 .PHONY: google-account
 google-account:
 
+.PHONY: release
+release:
+	@rm -f .version.properties
+	git tag -d pre-release 2> /dev/null || echo ok
+	git checkout master
+	git fetch --all
+	git pull origin master
+	./version-up.sh --patch -r --prefix v --apply
+	@rm -f .version.properties
+	# To release a new version:
+	# git push origin --tag <name of tag>
+.PHONY: release-patch
+release-patch:
+	@rm -f .version.properties
+	git tag -d pre-release 2> /dev/null || echo ok
+	git checkout master
+	git fetch --all
+	git pull origin master
+	./version-up.sh --patch -r --prefix v --apply
+	@rm -f .version.properties
+	#
+	# To release a new version:
+	# git push origin --tag <name of tag>
+.PHONY: release-minor
+release-minor:
+	@rm -f .version.properties
+	git tag -d pre-release 2> /dev/null || echo ok
+	git checkout master
+	git fetch --all
+	git pull origin master
+	./version-up.sh --minor -r --prefix v --apply
+	@rm -f .version.properties
+	#
+	# To release a new version:
+	# git push origin --tag <name of tag>
+.PHONY: release-major
+release-major:
+	@rm -f .version.properties
+	git tag -d pre-release 2> /dev/null || echo ok
+	git checkout master
+	git fetch --all
+	git pull origin master
+	./version-up.sh --major -r --prefix v --apply
+	@rm -f .version.properties
+	# 
+	# To release a new version:
+	# git push origin --tag <name of tag>
 .PHONY: ready
 ready: fmt static-check python-coverage
