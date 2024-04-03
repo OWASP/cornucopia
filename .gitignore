@@ -10,3 +10,4 @@ coverage.xml
 *~*docx
 .mypy_cache
 client_secrets.json
+version.properties
