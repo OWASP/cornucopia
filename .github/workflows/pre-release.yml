@@ -4,6 +4,9 @@
       push:
         branches:
           - "master"
+    permissions:
+      contents: read
+
     jobs:
       pre-release:
         name: "Pre Release"
