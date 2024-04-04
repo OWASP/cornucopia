@@ -5,6 +5,9 @@
       push:
         tags:
           - "v*"
+    permissions:
+      contents: read
+
     jobs:
       tagged-release:
         name: "Tagged Release"
