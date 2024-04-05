@@ -1,0 +1,65 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Elixir CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Or another supported runner
+    services:
+      postgres:
+        image: postgres14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: y9EAY7xeVucjM2yM
+          POSTGRES_DB: copi_test
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache deps
+        id: cache-deps
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-elixir-deps
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+
+      - name: Cache compiled build
+        id: cache-build
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-compiled-build
+        with:
+          path: _build
+          key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ env.cache-name }}-
+            ${{ runner.os }}-mix-
+
+      - name: Use Elixir 1.7
+        uses: erlef/setup-beam@v1.15
+        with:
+          elixir-version: 1.13.3 # Only accept exact Elixir 1.7.x version
+          otp-version: 24.3.4
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Build the project
+        run: mix compile
+        
+      - name: run tests
+        run: mix test

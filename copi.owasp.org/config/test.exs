@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :copi, Copi.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "y9EAY7xeVucjM2yM",
   database: "copi_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
