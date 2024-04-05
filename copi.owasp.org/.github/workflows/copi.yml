@@ -9,6 +9,12 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  MIX_ENV: test
+
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest # Or another supported runner
