@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest # Or another supported runner
     services:
       postgres:
-        image: postgres14
+        image: postgres:14
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: y9EAY7xeVucjM2yM
