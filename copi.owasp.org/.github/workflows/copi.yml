@@ -15,8 +15,9 @@ env:
 permissions:
   contents: read
 
+
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest # Or another supported runner
     services:
       postgres:
