@@ -1,0 +1,20 @@
+name: Delete artifact branch when pull requests are closed
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  delete-branch:
+    name: Delete artifact branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}-artifacts
+      - name: Delete artifact target branch
+        id: delete-artifact-target-branch
+        env:
+          TARGET_BRANCH: ${{ github.event.pull_request.head.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin :"tmp-$TARGET_BRANCH-artifacts" || echo "Could not delete $TARGET_BRANCH-artifacts"

@@ -92,23 +92,47 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
-      - name: Set target branch
+      - name: Create tmp branch for artifacts and get parent and object ref
         id: find-target
         env:
           PR_NUMBER: ${{ github.event.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         run: |
-          sudo apt-get update && sudo apt-get install -y hub
-          echo "Searching for pr branch for number $PR_NUMBER"
-          echo "List all prs:"
-          hub pr list -f "%I|%H|%n"
-          TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
-          echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
-      - name: Checkout target branch
+          echo "parent=`git rev-parse HEAD`" >> "$GITHUB_ENV"
+          echo "object_tree=`git write-tree`" >> "$GITHUB_ENV"
+          git switch --orphan "tmp-$BRANCH_NAME-artifacts"
+      - name: Commit empty commit to the tmp artifact branch
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        env:
+          TARGET_BRANCH: ${{ github.event.pull_request.head.ref }}
+        with:
+          script: |
+            const { TARGET_BRANCH } = process.env
+            const commit_msg = "Upload artifacts"
+            const parent = "${{ env.parent}}";
+            const object_tree = "${{ env.object_tree}}";
+            const { data: commit } = await github.rest.git.createCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              message: commit_msg,
+              tree: object_tree,
+              parents: [parent]
+            });
+            try {
+              const { data: ref } = await github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: `refs/heads/tmp-${TARGET_BRANCH}-artifacts`,
+                sha: commit.sha
+              })
+            } catch (e) {
+              //The branch already exists
+            }
+      - name: Checkout branch for pull request
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:
-          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
-      - run: git lfs fetch --all
+          ref: ${{ github.event.pull_request.head.ref }}
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
@@ -128,6 +152,7 @@ jobs:
           commit: ${{ github.event.pull_request.head.sha }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           comment-message: "The generated Cornucopia cards in this pull request."
+          artifacts-branch: tmp-${{ github.event.pull_request.head.ref }}-artifacts
           artifacts: |
             output/owasp_cornucopia_ecommerce_cards_en_1.21_dynamic.docx
             output/owasp_cornucopia_ecommerce_cards_en_1.21_dynamic.idml
