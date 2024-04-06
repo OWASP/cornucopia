@@ -18,6 +18,22 @@ permissions:
   contents: read
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    steps:
+    permission:
+      pull-requests: read
+    outputs:
+      uploadoutputfiles: ${{ steps.filter.outputs.uploadoutputfiles }}
+    steps:
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        id: filter
+        with:
+          filters: |
+            uploadoutputfiles:
+              - 'sources/**'
+              - 'scripts/convert**'
+              - 'resources/templates/**'
   runtests:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -78,6 +94,8 @@ jobs:
   # If Tests pass, generate new output files
   uploadoutputfiles:
     name: Upload Output Files
+    needs: changes
+    if: ${{ needs.changes.outputs.uploadoutputfiles == 'true' }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
