@@ -7,8 +7,13 @@ on:
       - master
     paths:
       - 'sources/**'
+      - 'tests/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
+      - 'Pipfile'
+      - '.github/workflows/**'
+      - 'requirements.txt'
+      - 'Makefile'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -104,10 +109,13 @@ jobs:
           hub pr list -f "%I|%H|%n"
           TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
           echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
+          git switch --orphan artifacts
+          git commit --allow-empty -m "Initial commit on orphan branch"
+          git push -u origin artifacts
       - name: Checkout target branch
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:
-          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
+          ref: artifacts
       - run: git lfs fetch --all
       # Set the pip environment up
       - name: Get Python
@@ -128,6 +136,7 @@ jobs:
           commit: ${{ github.event.pull_request.head.sha }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           comment-message: "The generated Cornucopia cards in this pull request."
+          artifacts-branch: ${{ steps.find-target.outputs.TARGET_BRANCH }}
           artifacts: |
             output/owasp_cornucopia_ecommerce_cards_en_1.21_dynamic.docx
             output/owasp_cornucopia_ecommerce_cards_en_1.21_dynamic.idml
