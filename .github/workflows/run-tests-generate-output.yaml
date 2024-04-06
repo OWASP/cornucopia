@@ -18,22 +18,6 @@ permissions:
   contents: read
 
 jobs:
-  changes:
-    runs-on: ubuntu-latest
-    steps:
-    permission:
-      pull-requests: read
-    outputs:
-      uploadoutputfiles: ${{ steps.filter.outputs.uploadoutputfiles }}
-    steps:
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
-        id: filter
-        with:
-          filters: |
-            uploadoutputfiles:
-              - 'sources/**'
-              - 'scripts/convert**'
-              - 'resources/templates/**'
   runtests:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -90,7 +74,22 @@ jobs:
         run: pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
       - name: Check formatting of files for correct spelling and namespace names
         run: pipenv run mypy --namespace-packages --strict ./scripts/
-
+  changes:
+    runs-on: ubuntu-latest
+    steps:
+    permission:
+      pull-requests: read
+    outputs:
+      uploadoutputfiles: ${{ steps.filter.outputs.uploadoutputfiles }}
+    steps:
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        id: filter
+        with:
+          filters: |
+            uploadoutputfiles:
+              - 'sources/**'
+              - 'scripts/convert**'
+              - 'resources/templates/**'
   # If Tests pass, generate new output files
   uploadoutputfiles:
     name: Upload Output Files
