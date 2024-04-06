@@ -7,13 +7,8 @@ on:
       - master
     paths:
       - 'sources/**'
-      - 'tests/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
-      - '.github/workflows/**'
-      - 'Pipfile'
-      - 'requirements.txt'
-      - 'Makefile'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -50,7 +45,7 @@ jobs:
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
       # Set the pip environment up
       - name: Get Python
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
         with:
           python-version: '3.10'
           cache: 'pipenv' # caching pip dependencies
@@ -140,7 +135,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
       # Set the pip environment up
       - name: Get Python
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
         with:
           python-version: '3.10'
           cache: 'pipenv' # caching pip dependencies
