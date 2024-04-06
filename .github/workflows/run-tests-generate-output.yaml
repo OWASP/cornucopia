@@ -10,8 +10,8 @@ on:
       - 'tests/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
-      - 'Pipfile'
       - '.github/workflows/**'
+      - 'Pipfile'
       - 'requirements.txt'
       - 'Makefile'
   # Allows you to run this workflow manually from the Actions tab
@@ -109,13 +109,10 @@ jobs:
           hub pr list -f "%I|%H|%n"
           TARGET_BRANCH_NAME=$(hub pr list -f "%I|%H|%n" | grep "$PR_NUMBER.*" | cut -d "|" -f2)
           echo "TARGET_BRANCH=$TARGET_BRANCH_NAME" >> "$GITHUB_OUTPUT"
-          git switch --orphan artifacts
-          git commit --allow-empty -m "Initial commit on orphan branch"
-          git push -u origin artifacts
       - name: Checkout target branch
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:
-          ref: artifacts
+          ref: ${{ steps.find-target.outputs.TARGET_BRANCH }}
       - run: git lfs fetch --all
       # Set the pip environment up
       - name: Get Python

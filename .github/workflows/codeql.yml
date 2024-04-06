@@ -22,6 +22,7 @@ on:
       - 'scripts/convert**'
       - 'resources/templates/**'
       - 'tests/**'
+      - '.github/**'
   schedule:
     - cron: "0 0 * * 1"
 
