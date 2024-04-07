@@ -4,6 +4,9 @@ on:
     paths:
       - 'scripts/convert**'
       - 'test/scripts/convert**'
+      - '.github/workflows/cflite_pr.yml'
+      - 'test/scripts/*_fuzzer.py'
+      - '.clusterfuzzlite/**'
 permissions: read-all
 jobs:
   PR:
