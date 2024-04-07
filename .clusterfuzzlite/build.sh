@@ -34,8 +34,9 @@ echo "fuzzing now, this is what is here"
 ls
 pwd
 this_dir=\$(dirname \"\$0\")
+echo "this_dir=$this_dir"
 ASAN_OPTIONS=\$ASAN_OPTIONS:symbolize=1:external_symbolizer_path=\$this_dir/llvm-symbolizer:detect_leaks=0 \
-\$this_dir/tests/scripts/$fuzzer_package \$@" > $SRC/$fuzzer_basename
+\$this_dir/tests/scripts/$fuzzer_package \$@" > $OUT/$fuzzer_basename
   chmod +x $OUT/$fuzzer_basename
 done
 
