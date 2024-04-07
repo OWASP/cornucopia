@@ -31,9 +31,7 @@ for fuzzer in $(find "$SRC/cornucopia/tests/scripts" -name '*_fuzzer.py'); do
   echo "#!/bin/sh
 # LLVMFuzzerTestOneInput for fuzzer detection.
 echo "fuzzing now, this is what is here"
-ls
-pwd
-$this_dir=\$(dirname \"\$0\")
+this_dir=\$(dirname \"\$0\")
 echo "this_dir=\$this_dir"
 ASAN_OPTIONS=\$ASAN_OPTIONS:symbolize=1:external_symbolizer_path=\$this_dir/llvm-symbolizer:detect_leaks=0 \
 \$this_dir/tests/scripts/$fuzzer_package \$@" > $OUT/$fuzzer_basename
