@@ -3,9 +3,9 @@ on:
   pull_request:
     paths:
       - 'scripts/convert**'
-      - 'test/scripts/convert**'
+      - 'tests/scripts/convert**'
       - '.github/workflows/cflite_pr.yml'
-      - 'test/scripts/*_fuzzer.py'
+      - 'tests/scripts/*_fuzzer.py'
       - '.clusterfuzzlite/**'
 permissions: read-all
 jobs:
