@@ -9,8 +9,15 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  MIX_ENV: test
+
+permissions:
+  contents: read
+
+
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest # Or another supported runner
     services:
       postgres:
@@ -61,5 +68,5 @@ jobs:
       - name: Build the project
         run: mix compile
         
-      - name: run tests
+      - name: Run tests
         run: mix test
