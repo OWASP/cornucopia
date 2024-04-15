@@ -21,4 +21,5 @@ jobs:
   hardening:
     uses: ./.github/workflows/hardening.yaml
   call-run-tests:
+    needs: hardening
     uses: ./.github/workflows/run-tests.yaml
