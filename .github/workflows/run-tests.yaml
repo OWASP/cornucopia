@@ -1,3 +1,4 @@
+name: Just run tests
 on:
   workflow_call:
   workflow_dispatch:
