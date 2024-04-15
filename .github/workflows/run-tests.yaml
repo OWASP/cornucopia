@@ -1,0 +1,43 @@
+on:
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  runtests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+      # Set the pip environment up
+      - name: Get Python
+        uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
+        with:
+          python-version: '3.10'
+          cache: 'pipenv' # caching pip dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install --ignore-pipfile --dev
+      # Run the tests
+      - name: Run unit tests
+        run: pipenv run python -m unittest discover -s "tests/scripts" -p "*_utest.py"
+      - name: Run integration
+        run: pipenv run python -m unittest discover -s "tests/scripts" -p "*_itest.py"
+      # Test coverage reports
+      - name: Check test coverage - run tests
+        run: pipenv run coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"
+      - name: Check test coverage - generate xml
+        run: pipenv run coverage xml
+      - name: Check test coverage - Report
+        run: pipenv run coverage report --fail-under 85 scripts/convert*
+      # Check formatting of files
+      - name: Check formatting of files with Black
+        run: pipenv run black --line-length=120 --check .
+      - name: Check formatting of files with flake
+        run: pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+      - name: Check formatting of files for correct spelling and namespace names
+        run: pipenv run mypy --namespace-packages --strict ./scripts/
+  
+    
