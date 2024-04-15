@@ -18,5 +18,7 @@ on:
 permissions:
   contents: read
 jobs:
+  hardening:
+    uses: ./.github/workflows/hardening.yaml
   call-run-tests:
     uses: ./.github/workflows/run-tests.yaml
