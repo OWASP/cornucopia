@@ -11,6 +11,7 @@
       hardening:
         uses: ./.github/workflows/hardening.yaml
       pre-release:
+        needs: hardening
         name: "Pre Release"
         permissions:
           contents: write

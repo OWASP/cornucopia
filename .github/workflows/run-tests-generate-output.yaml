@@ -16,6 +16,7 @@ jobs:
   hardening:
     uses: ./.github/workflows/hardening.yaml
   runtests:
+    needs: hardening
     uses: ./.github/workflows/run-tests.yaml
   # If Tests pass, generate new output files
   uploadoutputfiles:
