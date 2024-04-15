@@ -4,6 +4,8 @@ on:
     paths:
       - 'scripts/convert**'
       - 'test/scripts/convert**'
+      - '.clusterfuzzlite/Dockerfile'
+      - '.clusterfuzzlite/build.sh'
 permissions: read-all
 jobs:
   PR:
