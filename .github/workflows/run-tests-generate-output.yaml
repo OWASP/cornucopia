@@ -14,30 +14,7 @@ permissions:
   contents: read
 jobs:
   hardening:
-    name: Hardening
-    runs-on: ubuntu-latest
-    steps:
-      # Make sure we have some code to test
-      - name: Run harden runner
-        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            azure.archive.ubuntu.com:80
-            esm.ubuntu.com:443
-            files.pythonhosted.org:443
-            github-cloud.githubusercontent.com:443
-            github.com:443
-            motd.ubuntu.com:443
-            packages.microsoft.com:443
-            ppa.launchpadcontent.net:443
-            pypi.org:443
-            opencre.org:443
-            codeclimate.com:443
-            d3iz1jjs17r6kg.cloudfront.net:443
-            keys.openpgp.org:443
-            api.codeclimate.com:443
+    uses: ./.github/workflows/hardening.yaml
   runtests:
     uses: ./.github/workflows/run-tests.yaml
   # If Tests pass, generate new output files
