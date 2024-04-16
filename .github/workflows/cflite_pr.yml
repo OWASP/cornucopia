@@ -9,8 +9,11 @@ on:
       - '.clusterfuzzlite/**'
 permissions: read-all
 jobs:
+  hardening:
+    uses: ./.github/workflows/hardening.yaml
   PR:
     runs-on: ubuntu-latest
+    needs: hardening
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.sanitizer }}-${{ github.ref }}
       cancel-in-progress: true
@@ -21,11 +24,6 @@ jobs:
         - address
         - undefined
     steps:
-    - name: Harden Runner
-      uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
-      with:
-        egress-policy: audit
-
     - name: Build Fuzzers (${{ matrix.sanitizer }})
       id: build
       uses: google/clusterfuzzlite/actions/build_fuzzers@884713a6c30a92e5e8544c39945cd7cb630abcd1 # v1
