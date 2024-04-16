@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-black = "==24.3.0"
+black = "==24.4.0"
 coverage = "==7.4.4"
 flake8 = "==7.0.0"
 httpretty = "==1.1.4"
@@ -14,11 +14,11 @@ pytest-cov = "==5.0.0"
 freezegun = "==1.4.0"
 
 [packages]
-idna = "==3.6"
+idna = "==3.7"
 pypng = "==0.20220715.0"
 qrcode = "==7.4.2"
 requests = "==2.31.0"
-types-requests = "==2.31.0.20240403"
+types-requests = "==2.31.0.20240406"
 typing_extensions = "==4.8.0"
 urllib3 = "==2.2.1"
 charset-normalizer = "==3.3.2"
