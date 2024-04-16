@@ -115,6 +115,23 @@ check that your code have sufficient test coverage
 make coverage-check
 ```
 
+### Developing fuzzers
+
+We are using ClusterFuzzlite as a continuous fuzzing solution in order to run tests locally you need oss-fuzz.
+For more information on how to write tests see: https://google.github.io/clusterfuzzlite/build-integration/python-lang/
+
+How to test locally:
+
+```bash
+export PATH_TO_PROJECT=$(pwd)
+cd ../
+git clone https://github.com/google/oss-fuzz
+cd ../oss-fuzz
+python infra/helper.py build_image --external $PATH_TO_PROJECT
+python infra/helper.py build_fuzzers --external $PATH_TO_PROJECT --sanitizer address 
+python infra/helper.py check_build --external $PATH_TO_PROJECT --sanitizer address
+```
+
 ### Golden files
 
 All python unit tests with fixtures in `testdata` folder support updating _golden_ files from real output of tests
