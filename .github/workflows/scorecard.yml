@@ -12,21 +12,19 @@ on:
 permissions: read-all
 
 jobs:
+  hardening:
+    name: Harden runner
+    uses: ./.github/workflows/hardening.yaml
   analysis:
     name: Scorecard analysis
+    needs: hardening
     runs-on: ubuntu-latest
     permissions:
       # Needed if using Code scanning alerts
       security-events: write
       # Needed for GitHub OIDC token if publish_results is true
       id-token: write
-
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
-        with:
-          egress-policy: audit
-
       - name: "Checkout code"
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
         with:

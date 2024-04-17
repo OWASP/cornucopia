@@ -3,8 +3,12 @@ on:
   pull_request:
     types: [closed]
 jobs:
+  hardening:
+    name: Harden runner
+    uses: ./.github/workflows/hardening.yaml
   delete-branch:
     name: Delete artifact branch
+    needs: hardening
     runs-on: ubuntu-latest
     steps:
       - name: Checkout target branch
