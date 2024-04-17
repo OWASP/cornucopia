@@ -9,8 +9,12 @@
       contents: read
 
     jobs:
+      hardening:
+        name: Harden runner
+        uses: ./.github/workflows/hardening.yaml
       tagged-release:
         name: "Tagged Release"
+        needs: hardening
         permissions:
           contents: write
         runs-on: "ubuntu-latest"

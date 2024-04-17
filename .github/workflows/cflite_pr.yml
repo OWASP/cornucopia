@@ -10,6 +10,7 @@ on:
 permissions: read-all
 jobs:
   hardening:
+    name: Harden runner
     uses: ./.github/workflows/hardening.yaml
   PR:
     runs-on: ubuntu-latest

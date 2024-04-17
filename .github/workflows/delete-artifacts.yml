@@ -4,6 +4,7 @@ on:
     types: [closed]
 jobs:
   hardening:
+    name: Harden runner
     uses: ./.github/workflows/hardening.yaml
   delete-branch:
     name: Delete artifact branch
