@@ -5,8 +5,12 @@ on:
 permissions:
   contents: read
 jobs:
+  hardening:
+    name: Harden runner
+    uses: ./.github/workflows/hardening.yaml
   runtests:
     name: Run Tests
+    needs: hardening
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
