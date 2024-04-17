@@ -9,6 +9,7 @@
 
     jobs:
       hardening:
+        name: Harden runner
         uses: ./.github/workflows/hardening.yaml
       pre-release:
         needs: hardening

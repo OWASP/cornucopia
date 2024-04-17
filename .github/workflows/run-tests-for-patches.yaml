@@ -19,6 +19,7 @@ permissions:
   contents: read
 jobs:
   hardening:
+    name: Harden runner
     uses: ./.github/workflows/hardening.yaml
   call-run-tests:
     needs: hardening
