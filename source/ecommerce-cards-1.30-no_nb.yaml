@@ -370,6 +370,9 @@ paragraphs:
     value: "Title_full"
     text: "OWASP Cornucopia Ecommerce Website Edition v1.30-NO_NB"
   -
+    value: "T00005"
+    text: "Indeks"
+  -
     value: "T00010"
     text: "OWASP Cornucopia er en mekanisme for å hjelpe programvareutviklingsteam med å identifisere sikkerhetskrav i smidige, konvensjonelle og formelle utviklingsprosesser."
   -
@@ -402,6 +405,9 @@ paragraphs:
   -
     value: "T00160"
     text: "Oana Cornea og andre deltakere på AppSec EU 2015-prosjekttoppmøtet for deres hjelp med å lage demonstrasjonsvideoen."
+  -
+    value: "T00161"
+    text: "(fortsetter på side 20)"
   -
     value: "T00170"
     text: "Colin Watson som forfatter og medprosjektleder sammen med Grant Ongers, sammen med andre OWASP-frivillige som har hjulpet til på mange måter."
@@ -628,6 +634,9 @@ paragraphs:
     value: "T01300"
     text: "Det er mulig å spille Cornucopia på mange forskjellige måter. "
   -
+    value: "T01301"
+    text: "For hvordan du spiller, les sidene: 11-19."
+  -
     value: "T01310"
     text: "Her er en måte, demonstrert online i en video: "
   -
@@ -635,25 +644,25 @@ paragraphs:
     text: ", som benytter det nye skåre/funn arket fra mai (2015) lastet ned fra "
   -
     value: "T01400"
-    text: "A - Forberedelser"
+    text: "Forberedelser"
   -
     value: "T01410"
-    text: "A1. Skaff deg en kortstokk, eller skriv ut din egen kortstokk med Cornucopia-kort (se side 2 i dette dokumentet) og skjær/klipp ut kortene"
+    text: "Skaff deg en kortstokk, eller skriv ut din egen kortstokk med Cornucopia-kort (se side 2 i dette dokumentet) og skjær/klipp ut kortene"
   -
     value: "T01420"
-    text: "A2. Identifiser en applikasjon eller applikasjonsfunksjon som skal gjennomgås; dette kan være et konsept, design eller en faktisk implementering"
+    text: "Identifiser en applikasjon eller applikasjonsfunksjon som skal gjennomgås; dette kan være et konsept, design eller en faktisk implementering"
   -
     value: "T01430"
-    text: "A3. Lag et dataflytdiagram, brukerhistorier eller andre artefakter for å hjelpe til med utforskningen"
+    text: "Lag et dataflytdiagram, brukerhistorier eller andre artefakter for å hjelpe til med utforskningen"
   -
     value: "T01440"
-    text: "A4. Identifiser og inviter en gruppe på 3-6; arkitekter, utviklere, testere og andre forretningsinteressenter og sett deg rundt et bord (forsøk å inkluder noen som er ganske kjent med applikasjonssikkerhet)"
+    text: "Identifiser og inviter en gruppe på 3-6; arkitekter, utviklere, testere og andre forretningsinteressenter og sett deg rundt et bord (forsøk å inkluder noen som er ganske kjent med applikasjonssikkerhet)"
   -
     value: "T01450"
-    text: "A5. Ha noen premier for hånden (gullstjerner, sjokolade, pizza, øl eller blomster avhengig av organisasjonskulturen din)"
+    text: "Ha noen premier for hånden (gullstjerner, sjokolade, pizza, øl eller blomster avhengig av organisasjonskulturen din)"
   -
     value: "T01500"
-    text: "B - Spill"
+    text: "Spill"
   -
     value: "T01510"
     text: "Fargen - Cornucopia - fungerer som trumfer."
@@ -665,52 +674,52 @@ paragraphs:
     text: "Det hjelper hvis det er en ikke-spiller som kan dokumentere problemene og poengsummene."
   -
     value: "T01540"
-    text: "B1. Fjern jokerne og noen få kort med lav poengsum (2, 3, 4) fra Cornucopia-fargen for å sikre at hver spiller har samme antall kort"
+    text: "Fjern jokerne og noen få kort med lav poengsum (2, 3, 4) fra Cornucopia-fargen for å sikre at hver spiller har samme antall kort"
   -
     value: "T01550"
-    text: "B2. Bland kortene og del ut alle"
+    text: "Bland kortene og del ut alle"
   -
     value: "T01560"
-    text: "B3. For å begynne, velg en tilfeldig spiller som skal spille det første kortet - de kan spille hvilket som helst kort fra hånden deres bortsett fra trumffargen - Cornucopia"
+    text: "For å begynne, velg en tilfeldig spiller som skal spille det første kortet - de kan spille hvilket som helst kort fra hånden deres bortsett fra trumffargen - Cornucopia"
   -
     value: "T01570"
-    text: "B4. For å spille et kort, må hver spiller lese det opp, og forklare (se online Wiki Deck for tips) hvordan trusselen kan fungere (spilleren får et poeng for angrep som kan fungere som gruppen mener er en håndterbar feil) - ikke prøv å tenke på avbøtende tiltak på dette stadiet, og ikke utelukk en trussel bare på grunn av en tro på at den allerede er mitigert - noen noterer kortet og noterer problemene som tas opp"
+    text: "For å spille et kort, må hver spiller lese det opp, og forklare (se online Wiki Deck for tips) hvordan trusselen kan fungere (spilleren får et poeng for angrep som kan fungere som gruppen mener er en håndterbar feil) - ikke prøv å tenke på avbøtende tiltak på dette stadiet, og ikke utelukk en trussel bare på grunn av en tro på at den allerede er mitigert - noen noterer kortet og noterer problemene som tas opp"
   -
     value: "T01580"
-    text: "B5. Spill med klokken, hver person må spille et kort på samme måte; hvis du har et kort i den matchende hovedfargen, må du spille ett av disse, ellers kan det spilles et kort fra en hvilken som helst annen farge. "
+    text: "Spill med klokken, hver person må spille et kort på samme måte; hvis du har et kort i den matchende hovedfargen, må du spille ett av disse, ellers kan det spilles et kort fra en hvilken som helst annen farge. "
   -
     value: "T01590"
     text: "Bare et høyere kort i samme farge, eller det høyeste kortet i trumffargen Cornucopia, vinner hånden."
   -
     value: "T01600"
-    text: "B6. Personen som vinner runden, leder neste runde (dvs. de spiller først), og definerer dermed neste hovedfarge"
+    text: "Personen som vinner runden, leder neste runde (dvs. de spiller først), og definerer dermed neste hovedfarge"
   -
     value: "T01610"
-    text: "B7. Gjenta til alle kortene er spilt"
+    text: "Gjenta til alle kortene er spilt"
   -
     value: "T01700"
-    text: "C - Scoring"
+    text: "Scoring"
   -
     value: "T01710"
     text: "Målet er å identifisere aktuelle trusler og vinne hender (runder):"
   -
     value: "T01720"
-    text: "C1. Poeng +1 for hvert kort du kan identifisere som en gyldig trussel mot applikasjonen som vurderes"
+    text: "Poeng +1 for hvert kort du kan identifisere som en gyldig trussel mot applikasjonen som vurderes"
   -
     value: "T01730"
-    text: "C2. Få +1 poeng hvis du vinner en runde"
+    text: "Få +1 poeng hvis du vinner en runde"
   -
     value: "T01740"
-    text: "C3. Når alle kortene er spilt, vinner den som har flest poeng"
+    text: "Når alle kortene er spilt, vinner den som har flest poeng"
   -
     value: "T01800"
-    text: "D - Avslutning"
+    text: "Avslutning"
   -
     value: "T01810"
-    text: "D1. Gå gjennom alle gjeldende trusler og samsvarende sikkerhetskrav"
+    text: "Gå gjennom alle gjeldende trusler og samsvarende sikkerhetskrav"
   -
     value: "T01820"
-    text: "D2. Lag brukerhistorier, spesifikasjoner og testtilfeller iht. utviklingsmetodikken din."
+    text: "Lag brukerhistorier, spesifikasjoner og testtilfeller iht. utviklingsmetodikken din."
   -
     value: "T01900"
     text: "Alternative spilleregler"
@@ -1226,7 +1235,7 @@ paragraphs:
     text: "Podcasts and videoer"
   -
     value: "T03910"
-    text: 'Følgende støttende OWASP Cornucopia-ressurser er tilgjengelige online:'
+    text: "Følgende støttende OWASP Cornucopia-ressurser er tilgjengelige online:"
   -
     value: "T03920"
     text: "Video – Bruk av kortene, opprettet under AppSec EU 2015 project summit, 20. mai 2015"
@@ -1235,7 +1244,7 @@ paragraphs:
     text: "Podcastintervju, OWASP 24/7 Podcast-kanal, 21. mars 2014"
   -
     value: "T03940"
-    text: "	Video av presentasjonen, OWASP EU Tour 2013 London, 3. juni 2013"
+    text: "Video av presentasjonen, OWASP EU Tour 2013 London, 3. juni 2013"
   -
     value: "T03950"
     text: "Se prosjektets hjemmeside for mer informasjon og presentasjonsmateriell."

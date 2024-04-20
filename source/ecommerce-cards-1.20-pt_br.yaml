@@ -368,6 +368,9 @@ paragraphs:
     value: "Title_Full"
     text: "OWASP Cornucopia Edição de Ecomércio v1.20-PT-BR"
   -
+    value: "T00005"
+    text: "Índice"
+  -
     value: "T00010"
     text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes"
   -
@@ -400,6 +403,9 @@ paragraphs:
   -
     value: "T00160"
     text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
+  -
+    value: "T00161"
+    text: "(continua na página 20)"
   -
     value: "T00170"
     text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
@@ -626,6 +632,9 @@ paragraphs:
     value: "T01300"
     text: "It is possible to play Cornucopia in many different ways. "
   -
+    value: "T01301"
+    text: "Para saber como jogar, leia as páginas: 11-19."
+  -
     value: "T01310"
     text: "Here is one way, demonstrated online in a video at "
   -
@@ -687,28 +696,28 @@ paragraphs:
     text: "Repita o modo de jogo até que todas as cartas tenham sido jogadas"
   -
     value: "T01700"
-    text: "C - Scoring"
+    text: "Scoring"
   -
     value: "T01710"
     text: "The objective is to identify applicable threats, and win hands (rounds):"
   -
     value: "T01720"
-    text: "C1. Score +1 for each card you can identify as a valid threat to the application under consideration"
+    text: "Score +1 for each card you can identify as a valid threat to the application under consideration"
   -
     value: "T01730"
-    text: "C2. Score +1 if you win a round"
+    text: "Score +1 if you win a round"
   -
     value: "T01740"
-    text: "C3. Once all cards have been played, whoever has the most points wins"
+    text: "Once all cards have been played, whoever has the most points wins"
   -
     value: "T01800"
-    text: "D - Closure"
+    text: "Closure"
   -
     value: "T01810"
-    text: "D1. Review all the applicable threats and the matching security requirements"
+    text: "Review all the applicable threats and the matching security requirements"
   -
     value: "T01820"
-    text: "D2. Create user stories, specifications and test cases as required for your development methodology."
+    text: "Create user stories, specifications and test cases as required for your development methodology."
   -
     value: "T01900"
     text: "Alternative game rules"

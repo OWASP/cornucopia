@@ -70,6 +70,7 @@
                 output/owasp_cornucopia_ecommerce_cards_en_1.30_dynamic.docx
                 output/owasp_cornucopia_ecommerce_cards_en_1.30_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_en_1.30_dynamic.pdf
+                output/owasp_cornucopia_ecommerce_cards_en_1.30_leaflet.idml
                 output/owasp_cornucopia_ecommerce_cards_en_1.30_static.docx
                 output/owasp_cornucopia_ecommerce_cards_en_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_en_1.30_static.pdf
@@ -77,6 +78,13 @@
                 output/owasp_cornucopia_ecommerce_cards_es_1.20_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_es_1.20_static.docx
                 output/owasp_cornucopia_ecommerce_cards_es_1.20_static.idml
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_dynamic.docx
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_dynamic.pdf
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_dynamic.idml
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_leaflet.idml
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_static.docx
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_static.pdf
+                output/owasp_cornucopia_ecommerce_cards_es_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_fr_1.20_dynamic.docx
                 output/owasp_cornucopia_ecommerce_cards_fr_1.20_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_fr_1.20_static.docx
@@ -84,6 +92,7 @@
                 output/owasp_cornucopia_ecommerce_cards_fr_1.30_dynamic.docx
                 output/owasp_cornucopia_ecommerce_cards_fr_1.30_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_fr_1.30_dynamic.pdf
+                output/owasp_cornucopia_ecommerce_cards_fr_1.30_leaflet.idml
                 output/owasp_cornucopia_ecommerce_cards_fr_1.30_static.docx
                 output/owasp_cornucopia_ecommerce_cards_fr_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_fr_1.30_static.pdf
@@ -94,12 +103,14 @@
                 output/owasp_cornucopia_ecommerce_cards_nl_1.30_dynamic.docx
                 output/owasp_cornucopia_ecommerce_cards_nl_1.30_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_nl_1.30_dynamic.pdf
+                output/owasp_cornucopia_ecommerce_cards_nl_1.30_leaflet.idml
                 output/owasp_cornucopia_ecommerce_cards_nl_1.30_static.docx
                 output/owasp_cornucopia_ecommerce_cards_nl_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_nl_1.30_static.pdf
                 output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_dynamic.docx
                 output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_dynamic.pdf
+                output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_leaflet.idml
                 output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_static.docx
                 output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_no-nb_1.30_static.pdf
@@ -110,6 +121,7 @@
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_dynamic.docx
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_dynamic.idml
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_dynamic.pdf
+                output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_leaflet.idml
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.docx
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.pdf
