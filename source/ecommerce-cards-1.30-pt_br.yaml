@@ -368,77 +368,83 @@ paragraphs:
     value: "Title_full"
     text: "OWASP Cornucopia Edição de Ecomércio v1.30-PT-BR"
   -
+    value: "T00005"
+    text: "Índice"
+  -
     value: "T00010"
-    text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes"
+    text: "OWASP Cornucopia é um mecanismo para auxiliar equipes de desenvolvimento de software a identificar requisitos de segurança em processos de desenvolvimento Ágeis, convencionais e formais."
   -
     value: "T00020"
-    text: "Author "
+    text: "Autor "
   -
     value: "T00030"
-    text: "Project Leaders "
+    text: "Líderes de Projeto "
   -
     value: "T00040"
-    text: "Reviewers"
+    text: "Revisores"
   -
     value: "T00100"
-    text: "Acknowledgments"
+    text: "Agradecimentos"
   -
     value: "T00110"
-    text: "Microsoft SDL Team for the Elevation of Privilege Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
+    text: "Equipe Microsoft SDL para o jogo de modelagem de ameaças \"Elevation of Privilege\", publicado sob uma licença \"Creative Commons Attribution\", como inspiração para Cornucopia e do qual muitas ideias, especialmente a teoria dos jogos, foram copiadas."
   -
     value: "T00120"
-    text: "Keith Turpin and contributors to the “OWASP Secure Coding Practices - Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards."
+    text: "Keith Turpin e colaboradores do “OWASP Secure Coding Practices – Quick Reference Guide”, originalmente doado ao OWASP pela Boeing, que é usado como fonte primária de informações sobre requisitos de segurança para formular o conteúdo dos cartões."
   -
     value: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Colaboradores, apoiadores, patrocinadores e voluntários dos projetos OWASP ASVS, AppSensor e \"Web Framework Security Matrix\", \"Common Attack Pattern Enumeration and Classification (CAPEC)\" de Mitre e \"Practical Security Stories and Security Tasks for Agile Development Environments\" de SAFECode que são todos usados ​​nas referências cruzadas fornecidas."
   -
     value: "T00140"
-    text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
+    text: "Playgen por fornecer um seminário esclarecedor à tarde sobre gamificação de tarefas, e tartanmaker.com pela ferramenta on-line para ajudar a criar o padrão do verso do cartão."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees, especially Kate Hartmann, for managing the ordering, stocking and despatch of printed card decks. "
+    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP, e funcionários da OWASP, especialmente Kate Hartmann, por gerenciar o pedido, estoque e envio de impressos baralhos de cartas."
   -
     value: "T00160"
-    text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
+    text: "Oana Cornea e outros participantes na cimeira do projeto \"AppSec EU 2015\" pela sua ajuda na criação do vídeo de demonstração."
+  -
+    value: "T00161"
+    text: "(continua na página 20)"
   -
     value: "T00170"
-    text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
+    text: "Colin Watson como autor e co-líder do projeto com Grant Ongers, juntamente com outros voluntários do OWASP que ajudaram de diversas maneiras."
   -
     value: "T00180"
-    text: "OWASP does not endorse or recommend commercial products or services © 2012-2024 OWASP Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
+    text: "A OWASP não endossa nem recomenda produtos ou serviços comerciais © 2012-2024 OWASP Foundation Este documento está licenciado sob a licença \"Creative Commons Attribution-ShareAlike 3.0\" license"
   -
     value: "T00200"
-    text: "Introduction"
+    text: "Introdução"
   -
     value: "T00210"
-    text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories. "
+    text: "A ideia por trás do Cornucopia é ajudar as equipes de desenvolvimento, especialmente aquelas que usam metodologias Agile, a identificar requisitos de segurança de aplicativos e desenvolver histórias de usuários baseadas em segurança."
   -
     value: "T00220"
-    text: "Although the idea had been waiting for enough time to progress it, the final motivation came when SAFECode published its Practical Security Stories and Security Tasks for Agile Development Environments in July 2012."
+    text: "Embora a ideia já esperasse tempo suficiente para progredir, a motivação final veio quando a SAFECode publicou suas \"Practical Security Stories and Security Tasks for Agile Development Environments\" em julho de 2012."
   -
     value: "T00230"
-    text: "The Microsoft SDL team had already published its super Elevation of Privilege: The Threat Modeling Game (EoP) but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address. "
+    text: "A equipe do Microsoft SDL já havia publicado seu super \"Elevation of Privilege: The Threat Modeling Game (EoP)\", mas isso não parecia abordar o tipo mais apropriado de problemas que as equipes de desenvolvimento de aplicativos da web geralmente precisam resolver."
   -
     value: "T00240"
-    text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
+    text: "EoP é um ótimo conceito e estratégia de jogo e foi publicado sob uma licença Creative Commons Attribution."
   -
     value: "T00250"
-    text: "Cornucopia Ecommerce Website Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues ecommerce website developers encounter."
+    text: "Cornucopia Ecommerce Website Edition é baseado nos conceitos e ideias de jogos do EoP, mas eles foram modificados para serem mais relevantes para os tipos de problemas que os desenvolvedores de sites de comércio eletrônico encontram."
   -
     value: "T00260"
-    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+    text: "Ele tenta introduzir ideias de modelagem de ameaças em equipes de desenvolvimento que usam metodologias Agile, ou estão mais focadas nos pontos fracos de aplicativos da web do que em outros tipos de vulnerabilidades de software ou não estão familiarizadas com STRIDE e DREAD."
   -
     value: "T00270"
-    text: "Cornucopia Ecommerce Website Edition is referenced as an information resource in the PCI Security Standard Council’s Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
+    text: "Cornucopia Ecommerce Website Edition é referenciado como um recurso de informações no Suplemento de informações do PCI Security Standard Council \"PCI DSS E-commerce Guidelines\", v2, janeiro de 2013."
   -
     value: "T00300"
-    text: "The card deck (pack)"
+    text: "O baralho de cartas (pacote)"
   -
     value: "T00310"
-    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development. "
+    text: "Em vez dos naipes STRIDE do EoP (conjuntos de cartas com designs correspondentes), os naipes Cornucopia são baseados na estrutura das \"OWASP Secure Coding Practices - Quick Reference Guide (SCP)\", mas com consideração adicional das seções do \"OWASP Application Security Verification Standard\", o \"OWASP Testing Guide\" e os \"Principles of Secure Development\" de David Rook."
   -
     value: "T00320"
-    text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
+    text: "Estes forneceram cinco naipes, e um sexto chamado “Cornucópia” foi criado para todo o resto:"
   -
     value: "T00330"
     text: "Data validation and encoding (VE)"
@@ -459,109 +465,109 @@ paragraphs:
     text: "Cornucopia (C)"
   -
     value: "T00390"
-    text: "Smilar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
+    text: "Semelhante às cartas de pôquer, cada naipe contém 13 cartas (Ás, 2-10, Valete, Dama e Rei), mas, ao contrário do EoP, também existem duas cartas do Coringa."
   -
     value: "T00400"
-    text: "The content was mainly drawn from the SCP."
+    text: "O conteúdo foi extraído principalmente do SCP."
   -
     value: "T00500"
-    text: "Mappings"
+    text: "Mapeamentos"
   -
     value: "T00510"
-    text: "The other driver for Cornucopia is to link the attacks with requirements and verification techniques."
+    text: "O outro motivador do Cornucopia é vincular os ataques a requisitos e técnicas de verificação."
   -
     value: "T00520"
-    text: "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
+    text: "Um objetivo inicial era fazer referência aos IDs de pontos fracos do CWE, mas estes se mostraram muito numerosos e, em vez disso, foi decidido mapear cada placa para IDs de padrão de ataque de software CAPEC, que são mapeados para CWEs, para que o resultado desejado seja alcançado."
   -
     value: "T00530"
-    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP SCP v2, ASVS v4.0 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
+    text: "Cada cartão também é mapeado para as 36 histórias de segurança primárias no documento SAFECode, bem como para o OWASP SCP v2, ASVS v4.0 e AppSensor (detecção e resposta a ataques de aplicativos) para ajudar as equipes a criar sua própria segurança. histórias relacionadas para uso em processos Agile."
   -
     value: "T00600"
-    text: "Game strategy"
+    text: "Estratégia de jogo"
   -
     value: "T00610"
-    text: "Apart from the content differences, the game rules are virtually identical to those for EoP."
+    text: "Além das diferenças de conteúdo, as regras do jogo são virtualmente idênticas às do EoP."
   -
     value: "T00700"
-    text: "Printing the cards"
+    text: "Imprimindo os cartões"
   -
     value: "T00710"
-    text: "Check the Cornucopia project page for how to obtain pre-printed decks on glossy card."
+    text: "Verifique a página do projeto Cornucópia para saber como obter baralhos pré-impressos em cartão brilhante."
   -
     value: "T00720"
-    text: "The cards can be printed from this document in black & white but are more effective in color."
+    text: "Os cartões podem ser impressos a partir deste documento em preto e branco, mas são mais eficazes em cores."
   -
     value: "T00730"
-    text: "The cards in the later pages of this document have been laid out to fit on one type of pre-scored business A4 card sheets. "
+    text: "Os cartões nas páginas posteriores deste documento foram dispostos para caber em um tipo de folha de cartão comercial A4 pré-cortada."
   -
     value: "T00740"
-    text: "This appeared to be the quickest way to initially provide to create playing cards quickly. "
+    text: "Esta parecia ser a maneira mais rápida de criar inicialmente cartas de jogar rapidamente."
   -
     value: "T00750"
-    text: "Avery product codes C32015 and C32030 have been tested successfully, but any 10 up 85mm x 54 mm cards on A4 paper should work with a little adjustment."
+    text: "Os códigos de produto Avery C32015 e C32030 foram testados com sucesso, mas quaisquer cartões de 10 até 85 mm x 54 mm em papel A4 devem funcionar com um pequeno ajuste."
   -
     value: "T00760"
-    text: "Other stationery suppliers like Ryman and Sigel produce similar sheets"
+    text: "Outros fornecedores de papelaria como Ryman e Sigel produzem folhas semelhantes."
   -
     value: "T00770"
-    text: "These card sheets are not inexpensive, so care should be taken in deciding what to print and using what media and printer type."
+    text: "Essas folhas de cartão não são baratas, portanto, deve-se tomar cuidado ao decidir o que imprimir e usar qual mídia e tipo de impressora."
   -
     value: "T00780"
-    text: "The cards can of course just be printed on any size of paper or card and then cut-up manually, or a commercial printer would be able to print larger volumes and cut the cards to size. "
+    text: "É claro que os cartões podem ser impressos em qualquer tamanho de papel ou cartão e depois cortados manualmente, ou uma impressora comercial seria capaz de imprimir volumes maiores e cortar os cartões no tamanho certo."
   -
     value: "T00790"
-    text: "The cut lines are shown on the penultimate page of this document, but Avery also produce a landscape A4 template (A-0017-01_L.doc) that can be used as a guide."
+    text: "As linhas de corte são mostradas na penúltima página deste documento, mas a Avery também produz um modelo A4 paisagem (A-0017-01_L.doc) que pode ser usado como guia."
   -
     value: "T00800"
-    text: "Printing and cutting up can take an hour or so, and using a faster printer helps."
+    text: "Imprimir e cortar podem levar cerca de uma hora, e usar uma impressora mais rápida ajuda."
   -
     value: "T00810"
-    text: "Try to print add higher quality to increase legibility."
+    text: "Tente imprimir com qualidade superior para aumentar a legibilidade."
   -
     value: "T00820"
-    text: "An optional card back design (in OWASP tartan) has been provided as the last page of this document. "
+    text: "Um desenho opcional do verso do cartão (em tartan OWASP) foi fornecido na última página deste documento."
   -
     value: "T00830"
-    text: "There is no special alignment needed. "
+    text: "Não há necessidade de alinhamento especial."
   -
     value: "T00840"
-    text: "Dual-sided printing needs special care taken. "
+    text: "A impressão frente e verso requer cuidados especiais."
   -
     value: "T00850"
-    text: "You could customize the card faces or the backs for your own organization’s preferences."
+    text: "Você pode personalizar as faces ou o verso do cartão de acordo com as preferências da sua organização."
   -
     value: "T00900"
-    text: "Customization"
+    text: "Costumização"
   -
     value: "T00910"
-    text: "After you have used Cornucopia a few times, you may feel that some cards are less relevant to your applications, or the threats are different for your organization."
+    text: "Depois de usar o Cornucopia algumas vezes, você poderá achar que alguns cartões são menos relevantes para seus aplicativos ou que as ameaças são diferentes para sua organização."
   -
     value: "T00920"
-    text: "Edit this document yourself to make the cards more suitable for your teams, or create new decks completely."
+    text: "Edite você mesmo este documento para tornar as cartas mais adequadas para suas equipes ou crie novos baralhos completamente."
   -
     value: "T01000"
-    text: "Provide feedback"
+    text: "Dar uma resposta"
   -
     value: "T01010"
-    text: "If you have ideas or feedback on the use of OWASP Cornucopia, please share them."
+    text: "Se você tiver ideias ou comentários sobre o uso do OWASP Cornucopia, compartilhe-os."
   -
     value: "T01020"
-    text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
+    text: "Melhor ainda, se você criar versões alternativas dos cartões ou produzir versões profissionais prontas para impressão, compartilhe isso com os voluntários que criaram esta edição e com a comunidade mais ampla de desenvolvimento de aplicativos e segurança de aplicativos."
   -
     value: "T01030"
-    text: "The best place to use to discuss or contribute is the mailing list for the OWASP project:"
+    text: "O melhor lugar para discutir ou contribuir é a lista de discussão do projeto OWASP:"
   -
     value: "T01040"
-    text: "Mailing list"
+    text: "Lista de discussão"
   -
     value: "T01050"
-    text: "Project home page"
+    text: "Página inicial do projeto"
   -
     value: "T01060"
-    text: "All OWASP documents and tools are free to download and use. "
+    text: "Todos os documentos e ferramentas do OWASP são gratuitos para download e uso."
   -
     value: "T01070"
-    text: "OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
+    text: "OWASP Cornucopia está licenciado sob a licença Creative Commons Attribution-ShareAlike 3.0."
   -
     value: "T01100"
     text: "Instruções"
@@ -582,7 +588,7 @@ paragraphs:
     text: "Um exemplo segue:"
   -
     value: "T01160"
-    text: " William tem o controle sobre a geração de identificadores de sessão"
+    text: "William tem o controle sobre a geração de identificadores de sessão"
   -
     value: "T01170"
     text: "Isso significa que o atacante (William) pode criar novos identificadores de sessão que a aplicação aceita. "
@@ -600,37 +606,40 @@ paragraphs:
     text: "Requisitos em “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, Novembro 2010"
   -
     value: "T01220"
-    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”"
+    text: "Verification IDs em “Application Security Verification Standard (ASVS) para aplicativos da Web”"
   -
     value: "T01230"
-    text: "Attack detection points IDs in “AppSensor”, OWASP, Agosto 2010-2015"
+    text: "Attack detection points IDs em “AppSensor”, OWASP, Agosto 2010-2015"
   -
     value: "T01240"
-    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, Novembro 2015"
+    text: "IDs em “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, Novembro 2015"
   -
     value: "T01250"
-    text: "Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, Julho 2012"
+    text: "Histórias focadas em segurança em 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, Julho 2012"
   -
     value: "T01260"
-    text: "A look-up means the attack is included within the referenced item, but does not necessarily encompass the whole of its intent."
+    text: "Uma \"pesquisa\" significa que o ataque está incluído no item referenciado, mas não abrange necessariamente toda a sua intenção."
   -
     value: "T01270"
-    text: "For structured data like CAPEC, the most specific reference is provided but sometimes a cross-reference is provided that also has more specific (child) examples."
+    text: "Para dados estruturados como CAPEC, é fornecida a referência mais específica, mas às vezes é fornecida uma referência cruzada que também contém exemplos mais específicos (filhos)."
   -
     value: "T01280"
-    text: "There are no lookups on the six Aces and two Jokers. "
+    text: "Não há pesquisas sobre os seis Ases e dois Jokers."
   -
     value: "T01290"
-    text: "Instead these cards have some general tips in italicized text."
+    text: "Em vez disso, esses cartões contêm algumas dicas gerais em itálico."
   -
     value: "T01300"
-    text: "It is possible to play Cornucopia in many different ways. "
+    text: "É possível jogar Cornucópia de muitas maneiras diferentes."
+  -
+    value: "T01301"
+    text: "Para saber como jogar, leia as páginas: 11-19."
   -
     value: "T01310"
-    text: "Here is one way, demonstrated online in a video at "
+    text: "Aqui está uma maneira, demonstrada online em um vídeo em "
   -
     value: "T01311"
-    text: ", which uses the new (May 2015) score/record sheet at "
+    text: ", que usa a nova folha de pontuação/registro (maio de 2015) em "
   -
     value: "T01400"
     text: "PREPAROS"
@@ -687,322 +696,322 @@ paragraphs:
     text: "Repita o modo de jogo até que todas as cartas tenham sido jogadas"
   -
     value: "T01700"
-    text: "C - Scoring"
+    text: "Pontuação"
   -
     value: "T01710"
-    text: "The objective is to identify applicable threats, and win hands (rounds):"
+    text: "O objetivo é identificar ameaças aplicáveis ​​e ganhar mãos (rodadas):"
   -
     value: "T01720"
-    text: "C1. Score +1 for each card you can identify as a valid threat to the application under consideration"
+    text: "Pontuação +1 para cada cartão que você puder identificar como uma ameaça válida ao aplicativo em consideração"
   -
     value: "T01730"
-    text: "C2. Score +1 if you win a round"
+    text: "Marque +1 se você vencer uma rodada"
   -
     value: "T01740"
-    text: "C3. Once all cards have been played, whoever has the most points wins"
+    text: "Depois que todas as cartas forem jogadas, quem tiver mais pontos vence"
   -
     value: "T01800"
-    text: "D - Closure"
+    text: "Fecho"
   -
     value: "T01810"
-    text: "D1. Review all the applicable threats and the matching security requirements"
+    text: "Revise todas as ameaças aplicáveis ​​e os requisitos de segurança correspondentes"
   -
     value: "T01820"
-    text: "D2. Create user stories, specifications and test cases as required for your development methodology."
+    text: "Crie histórias de usuários, especificações e casos de teste conforme necessário para sua metodologia de desenvolvimento."
   -
     value: "T01900"
-    text: "Alternative game rules"
+    text: "Regras alternativas do jogo"
   -
     value: "T01910"
-    text: "If you are new to the game, remove the Aces and two Joker cards to begin with."
+    text: "Se você é novo no jogo, remova os Ases e duas cartas do Coringa para começar."
   -
     value: "T01920"
-    text: "Add the Joker cards back in once people become more familiar with the process."
+    text: "Adicione as cartas do Coringa de volta quando as pessoas se familiarizarem com o processo."
   -
     value: "T01930"
-    text: "Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round."
+    text: "Além das regras do “jogo de trunfos” descritas acima, que são muito semelhantes às do EoP, o baralho também pode ser jogado como o “jogo de vinte e uma cartas” (também conhecido como “pontão” ou “blackjack”), o que normalmente reduz o número de cartas jogadas em cada rodada."
   -
     value: "T01940"
-    text: "Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game."
+    text: "Pratique em um aplicativo imaginário, ou mesmo em um aplicativo planejado para o futuro, em vez de tentar encontrar falhas nos aplicativos existentes até que os participantes estejam satisfeitos com a utilidade do jogo."
   -
     value: "T01950"
-    text: "Consider just playing with one suit to make a shorter session – but try to cover all the suits for every project. "
+    text: "Considere apenas brincar com um naipe para fazer uma sessão mais curta – mas tente cobrir todos os naipes para cada projeto."
   -
     value: "T01960"
-    text: "Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. "
+    text: "Ou melhor ainda, apenas jogue uma mão com algumas cartas pré-selecionadas e pontue apenas na capacidade de identificar requisitos de segurança."
   -
     value: "T01970"
-    text: "Perhaps have one game of each suit each day for a week or so, if the participants cannot spare long enough for a full deck."
+    text: "Talvez faça uma partida de cada naipe por dia durante uma semana ou mais, se os participantes não puderem gastar tempo suficiente para um baralho completo."
   -
     value: "T01980"
-    text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
+    text: "Algumas equipes preferiram jogar uma mão inteira de cartas e depois discutir o que há nas cartas após cada rodada (em vez de depois de cada pessoa jogar uma carta)."
   -
     value: "T01990"
-    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+    text: "Outra sugestão é que se um jogador não conseguir identificar se a carta é relevante, permita que outros jogadores sugiram ideias e, potencialmente, deixe-os ganhar o ponto pela carta."
   -
     value: "T02000"
-    text: "Consider allowing extra points for especially good contributions."
+    text: "Considere permitir pontos extras para contribuições especialmente boas."
   -
     value: "T02010"
-    text: "You can even play by yourself. "
+    text: "Você pode até jogar sozinho."
   -
     value: "T02020"
-    text: "Just use the cards to act as thought-provokers. "
+    text: "Basta usar os cartões para agir como instigadores de pensamento."
   -
     value: "T02030"
-    text: "Involving more people will be beneficial though."
+    text: "Envolver mais pessoas será benéfico."
   -
     value: "T02040"
-    text: "In Microsoft's EoP guidance, they recommend cheating as a good game strategy."
+    text: "Nas orientações EoP da Microsoft, eles recomendam trapaça como uma boa estratégia de jogo."
   -
     value: "T02100"
-    text: "Development framework-specific modified card decks"
+    text: "Desenvolvimento de baralhos de cartas modificados específicos da estrutura"
   -
     value: "T02110"
-    text: "At the end of 2012, the OWASP Framework Security Matrix was published which documents built in security controls in some commonly used languages and frameworks for web and mobile application development."
+    text: "No final de 2012, foi publicada a \"OWASP Framework Security Matrix\", que documenta controles de segurança integrados em algumas linguagens e frameworks comumente usados ​​para desenvolvimento de aplicativos web e móveis."
   -
     value: "T02120"
-    text: "With certain provisos it is useful to consider how using these controls can simplify the identification of additional requirements – provided of course the controls are included, enabled and configured correctly."
+    text: "Com certas ressalvas, é útil considerar como o uso desses controles pode simplificar a identificação de requisitos adicionais – desde que, é claro, os controles estejam incluídos, habilitados e configurados corretamente."
   -
     value: "T02130"
-    text: "Consider removing the following cards from the decks if you are confidence they are addressed by the way you are using the language/framework. "
+    text: "Considere remover as seguintes cartas dos baralhos se tiver certeza de que elas serão abordadas pela maneira como você está usando a linguagem/estrutura."
   -
     value: "T02140"
-    text: "Items in parentheses are “maybes”."
+    text: "Os itens entre parênteses são “talvez”."
   -
     value: "T02200"
-    text: "Internal coding standards and libraries"
+    text: "Padrões e bibliotecas de codificação interna"
   -
     value: "T02210"
-    text: "Add your own list of excluded cards based on your organisation’s coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
+    text: "Adicione sua própria lista de cartões excluídos com base nos padrões de codificação da sua organização (desde que sejam confirmados por etapas de verificação apropriadas no ciclo de vida de desenvolvimento)."
   -
     value: "T02220"
-    text: "Your coding standards and libraries"
+    text: "Seus padrões de codificação e bibliotecas"
   -
     value: "T02230"
     text: "Data validation and encoding"
   -
     value: "T02240"
-    text: "[your list]"
+    text: "[su lista]"
   -
     value: "T02250"
     text: "Authentication"
   -
     value: "T02260"
-    text: "[your list]"
+    text: "[su lista]"
   -
     value: "T02270"
     text: "Session management"
   -
     value: "T02280"
-    text: "[your list]"
+    text: "[su lista]"
   -
     value: "T02290"
     text: "Authorization"
   -
     value: "T02300"
-    text: "[your list]"
+    text: "[su lista]"
   -
     value: "T02310"
     text: "Cryptography"
   -
     value: "T02320"
-    text: "[your list]"
+    text: "[su lista]"
   -
     value: "T02330"
     text: "Cornucopia"
   -
     value: "T02340"
-    text: "[your list]"
+    text: "[su lista]"
   -
     value: "T02400"
-    text: "Compliance requirement decks"
+    text: "Conjuntos de requisitos de conformidade"
   -
     value: "T02410"
-    text: "Create a smaller deck by only including cards for a particular compliance requirement."
+    text: "Crie um baralho menor incluindo apenas cartas para um requisito de conformidade específico."
   -
     value: "T02420"
-    text: "Compliance requirement"
+    text: "Requisito de conformidade"
   -
     value: "T02430"
     text: "Data validation and encoding"
   -
     value: "T02440"
-    text: "[compliance list]"
+    text: "[lista]"
   -
     value: "T02450"
     text: "Authentication"
   -
     value: "T02460"
-    text: "[compliance list]"
+    text: "[lista]"
   -
     value: "T02470"
     text: "Session management"
   -
     value: "T02480"
-    text: "[compliance list]"
+    text: "[lista]"
   -
     value: "T02490"
     text: "Authorization"
   -
     value: "T02500"
-    text: "[compliance list]"
+    text: "[lista]"
   -
     value: "T02510"
     text: "Cryptography"
   -
     value: "T02520"
-    text: "[compliance list]"
+    text: "[lista]"
   -
     value: "T02530"
     text: "Cornucopia"
   -
     value: "T02540"
-    text: "[compliance list]"
+    text: "[lista]"
   -
     value: "T02600"
-    text: "Frequently asked questions"
+    text: "Perguntas frequentes"
   -
     value: "T02610"
-    text: "1. Can I copy or edit the game?"
+    text: "1. Posso copiar ou editar o jogo?"
   -
     value: "T02620"
-    text: "Yes of course."
+    text: "Sim claro."
   -
     value: "T02630"
-    text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
+    text: "Todos os materiais do OWASP são gratuitos para você usar como quiser, desde que cumpra a licença Creative Commons Attribution-ShareAlike 3.0."
   -
     value: "T02640"
-    text: "Perhaps if you create a new version, you might donate it to the OWASP Cornucopia Project?"
+    text: "Talvez se você criar uma nova versão, você possa doá-la para o Projeto Cornucópia OWASP?"
   -
     value: "T02650"
-    text: "2. How can I get involved?"
+    text: "2. Como posso participar?"
   -
     value: "T02660"
-    text: "Please send ideas or offers of help to the project’s mailing list."
+    text: "Por favor, envie ideias ou ofertas de ajuda para a mailing list do projeto."
   -
     value: "T02670"
-    text: "3. How were the attackers’ names chosen?"
+    text: "3. Como foram escolhidos os nomes dos agressores?"
   -
     value: "T02680"
-    text: "EoP begins every description with words like 'An attacker can...'. "
+    text: "EoP começa cada descrição com palavras como 'Um invasor pode...'."
   -
     value: "T02690"
-    text: "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
+    text: "Estas devem ser formuladas como um ataque, mas eu não gostei da terminologia anônima, querendo algo mais envolvente e, portanto, usei nomes pessoais."
   -
     value: "T02700"
-    text: "These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. "
+    text: "Eles podem ser considerados pessoas externas ou internas ou apelidos para sistemas de computador. Mas em vez de apenas nomes aleatórios, pensei em como eles poderiam refletir o aspecto da comunidade OWASP."
   -
     value: "T02710"
-    text: "Therefore, apart from 'Alice and Bob', I use the given (first) names of current and recent OWASP employees and Board members (assigned in no order), and then randomly selected the remaining 50 or so names from the current list of paying individual OWASP members. "
+    text: "Portanto, além de 'Alice e Bob', eu uso os (primeiros) nomes dos funcionários e membros do Conselho atuais e recentes da OWASP (atribuídos sem ordem) e, em seguida, selecionei aleatoriamente os 50 nomes restantes da lista atual de pagadores. membros individuais da OWASP."
   -
     value: "T02720"
-    text: "No name was used more than once, and where people had provided two personal names, I dropped one part to try to ensure no-one can be easily identified. "
+    text: "Nenhum nome foi usado mais de uma vez e, nos casos em que as pessoas forneceram dois nomes pessoais, deixei cair uma parte para tentar garantir que ninguém pudesse ser facilmente identificado."
   -
     value: "T02730"
-    text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
+    text: "Os nomes não foram atribuídos deliberadamente a nenhum ataque, defesa ou requisito específico. A mistura cultural e de género reflecte simplesmente estas fontes de nomes e não pretende ser representativa mundial."
   -
     value: "T02740"
-    text: "In v1.20, the name on VE-10 changed to reflect the project’s new co-leader - this card is also the only one with two names in the attack."
+    text: "Na v1.20, o nome do VE-10 foi alterado para refletir o novo co-líder do projeto – esta carta também é a única com dois nomes no ataque."
   -
     value: "T02750"
-    text: "4. Why aren’t there any images on the card faces?"
+    text: "4. Por que não há imagens nas faces dos cartões?"
   -
     value: "T02760"
-    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too. "
+    text: "Há muito texto nos cartões e as referências cruzadas também ocupam espaço."
   -
     value: "T02770"
-    text: "But it would be great to have additional design elements included. "
+    text: "Mas seria ótimo incluir elementos de design adicionais."
   -
     value: "T02780"
-    text: "Any volunteer"
+    text: "Qualquer voluntário"
   -
     value: "T02790"
-    text: "5. Are the attacks ranked by the number on the card?"
+    text: "5. Os ataques são classificados pelo número da carta?"
   -
     value: "T02800"
-    text: "Only approximately. "
+    text: "Apenas aproximadamente."
   -
     value: "T02810"
-    text: "The risk will be application and organisation dependent, due to varying security and compliance requirements, so your own severity rating may place the cards in some other order than the numbers on the cards."
+    text: "O risco dependerá da aplicação e da organização, devido aos diversos requisitos de segurança e conformidade, portanto, sua própria classificação de gravidade poderá colocar os cartões em alguma ordem diferente da dos números nos cartões."
   -
     value: "T02820"
-    text: "6. How long does it take to play a round of cards using the full deck?"
+    text: "6. Quanto tempo leva para jogar uma rodada de cartas usando o baralho completo?"
   -
     value: "T02830"
-    text: "This depends upon the amount of discussion and how familiar the players are with application security concepts."
+    text: "Isso depende da quantidade de discussão e da familiaridade dos participantes com os conceitos de segurança de aplicativos."
   -
     value: "T02840"
-    text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
+    text: "Mas talvez permita de 1,5 a 2,0 horas para 4 a 6 pessoas."
   -
     value: "T02850"
-    text: "7. What sort of people should play the game?"
+    text: "7. Que tipo de pessoas deveriam jogar?"
   -
     value: "T02860"
-    text: "Always try to have a mix of roles who can contribute alternative perspectives."
+    text: "Sempre tente ter uma combinação de funções que possam contribuir com perspectivas alternativas."
   -
     value: "T02870"
-    text: "But include someone who has a reasonable knowledge of application vulnerability terminology. "
+    text: "Mas inclua alguém que tenha um conhecimento razoável da terminologia de vulnerabilidade de aplicativos."
   -
     value: "T02880"
-    text: "Otherwise try to include a mix of architects, developers, testers and a relevant project manager or business owner."
+    text: "Caso contrário, tente incluir uma mistura de arquitetos, desenvolvedores, testadores e um gerente de projeto ou proprietário de empresa relevante."
   -
     value: "T02890"
-    text: "8. Who should take notes and record scores?"
+    text: "8. Quem deve tomar notas e registar as pontuações?"
   -
     value: "T02900"
-    text: "It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed."
+    text: "É melhor que outra pessoa, que não esteja jogando, faça anotações sobre os requisitos identificados e as questões discutidas."
   -
     value: "T02910"
-    text: "This could be used as training for a more junior developer, or performed by the project manager."
+    text: "Isso poderia ser usado como treinamento para um desenvolvedor júnior ou realizado pelo gerente de projeto."
   -
     value: "T02920"
-    text: "Some organisations have made a recording to review afterwards when the requirements are written up more formally."
+    text: "Algumas organizações fizeram uma gravação para revisão posterior, quando os requisitos forem redigidos de forma mais formal."
   -
     value: "T02930"
-    text: "9. Should we always use the full deck of cards?"
+    text: "9. Devemos sempre usar o baralho completo?"
   -
     value: "T02940"
-    text: "No. "
+    text: "Não."
   -
     value: "T02950"
-    text: "A smaller deck is quicker to play. "
+    text: "Um deck menor é mais rápido de jogar."
   -
     value: "T02960"
-    text: "Start your first game with only enough cards for two or three rounds. "
+    text: "Comece seu primeiro jogo com cartas suficientes apenas para duas ou três rodadas."
   -
     value: "T02970"
-    text: "Always consider removing cards that are not appropriate at all of the target application or function being reviewed. "
+    text: "Sempre considere remover cartões que não sejam apropriados para o aplicativo ou função alvo que está sendo revisado."
   -
     value: "T02980"
-    text: "For the first few times people play the game it is also usually better to remove the Aces and the two Jokers."
+    text: "Nas primeiras vezes que as pessoas jogam, geralmente é melhor remover os Ases e os dois Jokers."
   -
     value: "T02990"
-    text: "It is also usual to play the game without any trumps suit until people are more familiar with the idea."
+    text: "Também é comum jogar sem nenhum naipe de trunfo até que as pessoas estejam mais familiarizadas com a ideia."
   -
     value: "T03000"
-    text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
+    text: "10. O que os jogadores devem fazer quando têm uma carta Ás que diz “inventaram um novo ataque X”?"
   -
     value: "T03010"
-    text: "The player can make up any attack they think is valid, but must match the suit of the card e.g. data validation and encoding)."
+    text: "O jogador pode inventar qualquer ataque que considere válido, mas deve corresponder ao naipe da carta, por exemplo. \"data validation and encoding\")."
   -
     value: "T03020"
-    text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
+    text: "Com jogadores novos no jogo, pode ser melhor removê-los para começar (veja também a FAQ 9)."
   -
     value: "T03030"
-    text: "11. I don’t understand what the attack means on each card - is there more detailed information?"
+    text: "11. Não entendo o que significa o ataque em cada carta - há informações mais detalhadas?"
   -
     value: "T03040"
-    text: "Yes, the online Wiki Deck at was created to help players understand the attacks. "
+    text: "Sim, o Wiki Deck online foi criado para ajudar os jogadores a entender os ataques."
   -
     value: "T03050"
-    text: "See"
+    text: "Ver"
   -
     value: "T03060"
-    text: "12. My company wants to print its own version of OWASP Cornucopia - what license do we need to refer to?"
+    text: "12. Minha empresa deseja imprimir sua própria versão do OWASP Cornucopi, a qual licença precisamos nos referir?"
   -
     value: "T03070"
-    text: "Please refer to the full answer to this question on the project’s web pages at"
+    text: "Consulte a resposta completa a esta pergunta nas páginas web do projeto em"
   -
     value: "T03100"
     text: "Change Log"
@@ -1194,46 +1203,46 @@ paragraphs:
     text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
   -
     value: "T03800"
-    text: "Project contributors"
+    text: "Colaboradores do projeto"
   -
     value: "T03810"
-    text: "All OWASP projects rely on the voluntary efforts of people in the software development and information security sectors. "
+    text: "Todos os projetos OWASP dependem dos esforços voluntários de pessoas nos setores de desenvolvimento de software e segurança da informação."
   -
     value: "T03820"
-    text: "They have contributed their time and energy to make suggestions, provide feedback, write, review and edit documentation, give encouragement, trial the game, and promote the concept. "
+    text: "Eles contribuíram com seu tempo e energia para fazer sugestões, fornecer feedback, escrever, revisar e editar documentação, encorajar, testar o jogo e promover o conceito."
   -
     value: "T03830"
-    text: "Without all their efforts, the project would not have progressed to this point. "
+    text: "Sem todos os seus esforços, o projeto não teria progredido até este ponto. "
   -
     value: "T03840"
-    text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
+    text: "Por favor, entre em contato diretamente com a lista de discussão ou com os líderes do projeto, se alguém estiver faltando nas listas abaixo."
   -
     value: "T03850"
-    text: "OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "Os funcionários esforçados da OWASP, especialmente Kate Hartmann"
   -
     value: "T03860"
-    text: "Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
+    text: "Participantes das reuniões dos capítulos da OWASP Londres, OWASP Manchester, OWASP Holanda e OWASP Escócia, e do encontro de Gamificação em Londres, que fizeram sugestões úteis e fizeram perguntas desafiadoras"
   -
     value: "T03870"
-    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited para presentear arquivos de design prontos para impressão e centenas de baralhos de cartas impressos profissionalmente para distribuição por correio e nas reuniões do capítulo da OWASP"
   -
     value: "T03880"
-    text: "OWASP NYC for creating an OWASP box design and distributing packs at AppSec USA 2014."
+    text: "OWASP NYC por criar um design de caixa OWASP e distribuir pacotes na AppSec USA 2014."
   -
     value: "T03900"
-    text: "Podcasts and videos"
+    text: "Podcasts e vídeos"
   -
     value: "T03910"
-    text: "The following supporting OWASP Cornucopia resources are available online:"
+    text: "Os seguintes recursos de suporte do OWASP Cornucopia estão disponíveis online:"
   -
     value: "T03920"
-    text: "	Video - Using the cards, created during AppSec EU 2015 project summit, 20th May 2015"
+    text: "Vídeo - Usando os cartões, criado durante a cúpula do projeto AppSec EU 2015, 20 de maio de 2015"
   -
     value: "T03930"
-    text: "	Podcast interview, OWASP 24/7 Podcast channel, 21st March 2014"
+    text: "Entrevista em podcast, canal OWASP 24/7 Podcast, 21 de março de 2014"
   -
     value: "T03940"
-    text: "Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "Vídeo de apresentação, OWASP EU Tour 2013 Londres, 3 de junho de 2013"
   -
     value: "T03950"
-    text: "See the project website for further information and presentation materials."
+    text: "Consulte o site do projeto para mais informações e materiais de apresentação."

@@ -370,6 +370,9 @@ paragraphs:
     value: "Title_full"
     text: "OWASP Cornucopia E-commerce Website Editie v1.30-NL"
   -
+    value: "T00005"
+    text: "Inhoudsopgave"
+  -
     value: "T00010"
     text: "OWASP Cornucopia is een mechanisme om softwareontwikkelingsteams te helpen bij het identificeren van beveiligingsvereisten in Agile, conventionele en formele ontwikkelingsprocessen."
   -
@@ -402,6 +405,9 @@ paragraphs:
   -
     value: "T00160"
     text: "Oana Cornea en andere deelnemers aan de AppSec EU 2015-projecttop voor hun hulp bij het maken van de demonstratievideo."
+  -
+    value: "T00161"
+    text: "(vervolg op pagina 20)"
   -
     value: "T00170"
     text: "Colin Watson als auteur en co-projectleider met Grant Ongers, samen met andere OWASP-vrijwilligers die op veel manieren hebben geholpen."
@@ -628,6 +634,9 @@ paragraphs:
     value: "T01300"
     text: "Het is mogelijk om Cornucopia op veel verschillende manieren te spelen."
   -
+    value: "T01301"
+    text: "Lees pagina's 11-19 voor meer informatie over het spelen."
+  -
     value: "T01310"
     text: "Hier is een manier, online gedemonstreerd in een video op "
   -
@@ -635,28 +644,28 @@ paragraphs:
     text: ", die het nieuwe (mei 2015) score-/recordblad gebruikt op "
   -
     value: "T01400"
-    text: "A - Voorbereidingen"
+    text: "Voorbereidingen"
   -
     value: "T01410"
-    text: "A1. Verkrijg een stapel kaarten, of print uw eigen stapel Cornucopia-kaarten (zie pagina 2 van dit document) en scheid/knip de kaarten uit"
+    text: "Verkrijg een stapel kaarten, of print uw eigen stapel Cornucopia-kaarten (zie pagina 2 van dit document) en scheid/knip de kaarten uit"
   -
     value: "T01420"
-    text: "A2. Identificeer een aanvraag of aanvraagproces om te beoordelen; dit kan een concept, ontwerp of een daadwerkelijke implementatie zijn"
+    text: "Identificeer een aanvraag of aanvraagproces om te beoordelen; dit kan een concept, ontwerp of een daadwerkelijke implementatie zijn"
   -
     value: "T01430"
-    text: "A3. Maak een gegevensstroomdiagram, gebruikersverhalen of andere artefacten om de beoordeling te vergemakkelijken"
+    text: "Maak een gegevensstroomdiagram, gebruikersverhalen of andere artefacten om de beoordeling te vergemakkelijken"
   -
     value: "T01440"
-    text: "A4. Identificeer en nodig een groep van 3-6 architecten, ontwikkelaars, testers en andere zakelijke belanghebbenden samen uit en ga rond een tafel zitten (probeer iemand die redelijk bekend is met applicatiebeveiliging erbij te betrekken)"
+    text: "Identificeer en nodig een groep van 3-6 architecten, ontwikkelaars, testers en andere zakelijke belanghebbenden samen uit en ga rond een tafel zitten (probeer iemand die redelijk bekend is met applicatiebeveiliging erbij te betrekken)"
   -
     value: "T01450"
-    text: "A5. Houd wat prijzen bij de hand (gouden sterren, chocolade, pizza, bier of bloemen, afhankelijk van je kantoorcultuur)"
+    text: "Houd wat prijzen bij de hand (gouden sterren, chocolade, pizza, bier of bloemen, afhankelijk van je kantoorcultuur)"
   -
     value: "T01500"
-    text: "B - Spelen"
+    text: "Spelen"
   -
     value: "T01510"
-    text: "Eén kleur - Cornucopia - fungeert als troef."
+    text: "Eén kleur - Cornucopifungeert als troef."
   -
     value: "T01520"
     text: "Azen zijn hoog (d.w.z. ze verslaan koningen)."
@@ -665,52 +674,52 @@ paragraphs:
     text: "Het helpt als er een niet-speler is om de problemen en scores te documenteren."
   -
     value: "T01540"
-    text: "B1. Verwijder de jokers en een paar kaarten met een lage score (2, 3, 4) uit de Cornucopia-reeks om ervoor te zorgen dat elke speler hetzelfde aantal kaarten heeft"
+    text: "Verwijder de jokers en een paar kaarten met een lage score (2, 3, 4) uit de Cornucopia-reeks om ervoor te zorgen dat elke speler hetzelfde aantal kaarten heeft"
   -
     value: "T01550"
-    text: "B2. Schud de stapel en deel alle kaarten"
+    text: "Schud de stapel en deel alle kaarten"
   -
     value: "T01560"
-    text: "B3. Om te beginnen, kies willekeurig een speler die de eerste kaart zal spelen - ze kunnen elke kaart uit hun hand spelen behalve die van de troefkleur - Hoorn des overvloeds"
+    text: "Om te beginnen, kies willekeurig een speler die de eerste kaart zal spelen - ze kunnen elke kaart uit hun hand spelen behalve die van de troefkleur - Hoorn des overvloeds"
   -
     value: "T01570"
-    text: "B4. Om een ​​kaart te spelen, moet elke speler deze hardop voorlezen en uitleggen (zie het online Wiki Deck voor tips) hoe de dreiging van toepassing kan zijn (de speler krijgt een punt voor aanvallen die mogelijk werken waarvan de groep denkt dat een bruikbare bug) - probeer in dit stadium geen oplossingen te bedenken en sluit een bedreiging niet uit alleen omdat u denkt dat deze al is verholpen - iemand noteert de kaart en noteert de problemen die aan de orde zijn gesteld"
+    text: "Om een ​​kaart te spelen, moet elke speler deze hardop voorlezen en uitleggen (zie het online Wiki Deck voor tips) hoe de dreiging van toepassing kan zijn (de speler krijgt een punt voor aanvallen die mogelijk werken waarvan de groep denkt dat een bruikbare bug) - probeer in dit stadium geen oplossingen te bedenken en sluit een bedreiging niet uit alleen omdat u denkt dat deze al is verholpen - iemand noteert de kaart en noteert de problemen die aan de orde zijn gesteld"
   -
     value: "T01580"
-    text: "B5. Speel met de klok mee, elke persoon moet een kaart op dezelfde manier spelen; als je een kaart van de overeenkomende eerste reeks hebt, moet je een van die kaarten spelen, anders kunnen ze een kaart uit een andere reeks spelen. "
+    text: "Speel met de klok mee, elke persoon moet een kaart op dezelfde manier spelen; als je een kaart van de overeenkomende eerste reeks hebt, moet je een van die kaarten spelen, anders kunnen ze een kaart uit een andere reeks spelen. "
   -
     value: "T01590"
     text: "Alleen een hogere kaart van dezelfde kleur, of de hoogste kaart in de troefkleur Cornucopia, wint de hand."
   -
     value: "T01600"
-    text: "B6. De persoon die de ronde wint, leidt de volgende ronde (d.w.z. zij spelen eerst), en bepaalt zo de volgende leidende kleur"
+    text: "De persoon die de ronde wint, leidt de volgende ronde (d.w.z. zij spelen eerst), en bepaalt zo de volgende leidende kleur"
   -
     value: "T01610"
-    text: "B7. Herhaal totdat alle kaarten zijn gespeeld"
+    text: "Herhaal totdat alle kaarten zijn gespeeld"
   -
     value: "T01700"
-    text: "C - Scoren"
+    text: "Scoren"
   -
     value: "T01710"
     text: "Het doel is om toepasselijke bedreigingen te identificeren en handen te winnen (rondes):"
   -
     value: "T01720"
-    text: "C1. Score +1 voor elke kaart die u kunt identificeren als een geldige bedreiging voor de betreffende toepassing"
+    text: "Score +1 voor elke kaart die u kunt identificeren als een geldige bedreiging voor de betreffende toepassing"
   -
     value: "T01730"
-    text: "C2. Scoor +1 als je een ronde wint"
+    text: "Scoor +1 als je een ronde wint"
   -
     value: "T01740"
-    text: "C3. Als alle kaarten zijn gespeeld, wint degene die de meeste punten heeft"
+    text: "Als alle kaarten zijn gespeeld, wint degene die de meeste punten heeft"
   -
     value: "T01800"
-    text: "D - Sluiting"
+    text: "Sluiting"
   -
     value: "T01810"
-    text: "D1. Bekijk alle van toepassing zijnde dreigingen en de bijbehorende beveiligingseisen"
+    text: "Bekijk alle van toepassing zijnde dreigingen en de bijbehorende beveiligingseisen"
   -
     value: "T01820"
-    text: "D2. Maak gebruiker stories, specificaties en testcases zoals vereist voor uw ontwikkelingsmethodologie."
+    text: "Maak gebruiker stories, specificaties en testcases zoals vereist voor uw ontwikkelingsmethodologie."
   -
     value: "T01900"
     text: "Alternatieve spelregels"
@@ -875,7 +884,7 @@ paragraphs:
     text: "Alle OWASP-materialen zijn vrij om mee te doen wat je wilt, op voorwaarde dat je voldoet aan de Creative Commons Attribution-ShareAlike 3.0-licentie. "
   -
     value: "T02640"
-    text: "Als u een nieuwe versie maakt, kunt u deze misschien doneren aan het OWASP Cornucopia Project?"
+    text: "Als u een nieuwe versie maakt, kunt u deze misschien doneren aan het OWASP Cornucopia?"
   -
     value: "T02650"
     text: "2. Hoe kan ik meedoen?"
