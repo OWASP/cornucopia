@@ -147,13 +147,16 @@ def convert_type_language_style(
     logging.info("New file saved: " + str(output_file))
 
 
-def has_no_matching_translations(language_data, mapping_dict, meta) -> bool:
+def has_no_matching_translations(
+    language_data: Dict[str, Dict[str, str]], mapping_dict: Dict[str, str], meta: Dict[str, str]
+) -> bool:
     if not language_data or not mapping_dict or not meta:
         return True
+    return False
 
 
 # Generate QR Code images if required
-def generate_qr_code_images(style, language_data) -> None:
+def generate_qr_code_images(style: str, language_data: Dict[str, Dict[str, str]]) -> None:
     if style == "dynamic":
         for card_id in get_card_ids(language_data, "id"):
             save_qrcode_image(card_id, convert_vars.args.url)
