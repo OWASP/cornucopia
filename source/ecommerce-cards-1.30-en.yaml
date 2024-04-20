@@ -370,6 +370,12 @@ paragraphs:
     value: "Title_full"
     text: "OWASP Cornucopia Ecommerce Website Edition v1.30-EN"
   -
+    value: "T00005"
+    text: "Index"
+  -
+    value: "T00005"
+    text: "Index"
+  -
     value: "T00010"
     text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
   -
@@ -383,7 +389,7 @@ paragraphs:
     text: "Reviewers"
   -
     value: "T00100"
-    text: "Acknowledgments"
+    text: "Acknowledgements"
   -
     value: "T00110"
     text: "Microsoft SDL Team for the Elevation of Privilege Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
@@ -402,6 +408,9 @@ paragraphs:
   -
     value: "T00160"
     text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
+  -
+    value: "T00161"
+    text: "(continued on page 20)"
   -
     value: "T00170"
     text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
@@ -628,6 +637,9 @@ paragraphs:
     value: "T01300"
     text: "It is possible to play Cornucopia in many different ways. "
   -
+    value: "T01301"
+    text: "For how to play, read pages: 11-19."
+  -
     value: "T01310"
     text: "Here is one way, demonstrated online in a video at "
   -
@@ -635,25 +647,28 @@ paragraphs:
     text: " which uses the new (May 2015) score/record sheet at "
   -
     value: "T01400"
-    text: "A - Preparations"
+    text: "Preparations"
   -
     value: "T01410"
-    text: "A1. Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+    text: "Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+  -
+    value: "T01411"
+    text: "Use the cards in this pack"
   -
     value: "T01420"
-    text: "A2. Identify an application or application process to review; this might be a concept, design or an actual implementation"
+    text: "Identify an application or application process to review; this might be a concept, design or an actual implementation"
   -
     value: "T01430"
-    text: "A3. Create a data flow diagram, user stories, or other artefacts to help the review"
+    text: "Create a data flow diagram, user stories, or other artefacts to help the review"
   -
     value: "T01440"
-    text: "A4. Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
+    text: "Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
   -
     value: "T01450"
-    text: "A5. Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
+    text: "Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
   -
     value: "T01500"
-    text: "B - Play"
+    text: "Play"
   -
     value: "T01510"
     text: "One suit - Cornucopia - acts as trumps."
@@ -665,52 +680,52 @@ paragraphs:
     text: "It helps if there is a non-player to document the issues and scores."
   -
     value: "T01540"
-    text: "B1. Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
+    text: "Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
   -
     value: "T01550"
-    text: "B2. Shuffle the deck and deal all the cards"
+    text: "Shuffle the deck and deal all the cards"
   -
     value: "T01560"
-    text: "B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
+    text: "To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
   -
     value: "T01570"
-    text: "B4. To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
+    text: "To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
   -
     value: "T01580"
-    text: "B5. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
+    text: "Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
   -
     value: "T01590"
     text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand."
   -
     value: "T01600"
-    text: "B6. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
+    text: "The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
   -
     value: "T01610"
-    text: "B7. Repeat until all the cards are played"
+    text: "Repeat until all the cards are played"
   -
     value: "T01700"
-    text: "C - Scoring"
+    text: "Scoring"
   -
     value: "T01710"
     text: "The objective is to identify applicable threats, and win hands (rounds):"
   -
     value: "T01720"
-    text: "C1. Score +1 for each card you can identify as a valid threat to the application under consideration"
+    text: "Score +1 for each card you can identify as a valid threat to the application under consideration"
   -
     value: "T01730"
-    text: "C2. Score +1 if you win a round"
+    text: "Score +1 if you win a round"
   -
     value: "T01740"
-    text: "C3. Once all cards have been played, whoever has the most points wins"
+    text: "Once all cards have been played, whoever has the most points wins"
   -
     value: "T01800"
-    text: "D - Closure"
+    text: "Closure"
   -
     value: "T01810"
-    text: "D1. Review all the applicable threats and the matching security requirements"
+    text: "Review all the applicable threats and the matching security requirements"
   -
     value: "T01820"
-    text: "D2. Create user stories, specifications and test cases as required for your development methodology."
+    text: "Create user stories, specifications and test cases as required for your development methodology."
   -
     value: "T01900"
     text: "Alternative game rules"
