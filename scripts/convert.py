@@ -88,8 +88,9 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
 def convert_type_language_style(
     file_type: str, language: str = "en", style: str = "static", version: str = "1.21"
 ) -> None:
-    if has_valid_file_style(style, file_type) == False:
+    if has_not_valid_file_style(style, file_type):
         return
+
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
     if not yaml_files:
@@ -111,17 +112,14 @@ def convert_type_language_style(
 
     template_doc: str = get_template_doc(file_type, style)
 
-    if not language_data or not mapping_dict or not meta:
+    if has_no_matching_translations(language_data, mapping_dict, meta):
         return
 
     # Name output file with correct edition, component, language & version
     output_file: str = rename_output_file(file_type, style, meta)
     ensure_folder_exists(os.path.dirname(output_file))
 
-    # Generate QR Code images if required
-    if style == "dynamic":
-        for card_id in get_card_ids(language_data, "id"):
-            save_qrcode_image(card_id, convert_vars.args.url)
+    generate_qr_code_images(style, language_data)
 
     # Work with docx file (and maybe convert to pdf afterwards)
     if file_type in ("docx", "pdf"):
@@ -147,6 +145,18 @@ def convert_type_language_style(
         save_idml_file(template_doc, language_dict, output_file)
 
     logging.info("New file saved: " + str(output_file))
+
+
+def has_no_matching_translations(language_data, mapping_dict, meta) -> bool:
+    if not language_data or not mapping_dict or not meta:
+        return True
+
+
+# Generate QR Code images if required
+def generate_qr_code_images(style, language_data) -> None:
+    if style == "dynamic":
+        for card_id in get_card_ids(language_data, "id"):
+            save_qrcode_image(card_id, convert_vars.args.url)
 
 
 def ensure_folder_exists(folder_path: str) -> None:
@@ -260,8 +270,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.STYLE_CHOICES,
         default="static",
         help=(
-            "Output style to produce. [`static`, `dynamic` or `leaflet`] "
-            "\nStatic cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list. The leaflet contains the instructions"
+            "Output style to produce. [`static`, `dynamic` or `leaflet`]\n"
+            "Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list."
+            "The leaflet contains the instructions"
         ),
     )
     parser.add_argument(
@@ -613,10 +624,10 @@ def get_template_doc(file_type: str, style: str = "static") -> str:
         return "None"
 
 
-def has_valid_file_style(style: str, file_type: str) -> bool:
+def has_not_valid_file_style(style: str, file_type: str) -> bool:
     if style == "leaflet" and file_type != "idml":
-        return False
-    return True
+        return True
+    return False
 
 
 def get_valid_file_types() -> List[str]:
