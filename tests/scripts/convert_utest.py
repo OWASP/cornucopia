@@ -1304,8 +1304,103 @@ class TestSaveDocxFile(unittest.TestCase):
         self.assertTrue(os.path.isfile(self.want_file))
 
 
+class TestReplaceTextInLeafletlFile(unittest.TestCase):
+    def setUp(self) -> None:
+        self.input_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>${Common_T00210} ${Common_T00220}</Content>
+    </CharacterStyleRange>
+</ParagraphStyleRange>"""
+        self.input_dict = {
+            "${Common_T00210}": "The idea behind Cornucopia is to help development teams, especially those using \
+Agile methodologies, to identify application security requirements and develop security-based \
+user stories.",
+            "${Common_T00220}": "\
+Although the idea had been waiting for enough time to progress it, the final \
+motivation came when SAFECode published its Practical Security Stories and Security Tasks for Agile \
+Development Environments in July 2012.",
+        }
+        self.b = c.convert_vars.BASE_PATH
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        if not os.path.exists(os.path.dirname(self.input_xml_file)):
+            os.makedirs(os.path.dirname(self.input_xml_file))
+        if os.path.isfile(self.input_xml_file):
+            os.remove(self.input_xml_file)
+        with open(self.input_xml_file, "x", encoding="utf-8") as f:
+            f.writelines(self.input_data)
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+        if os.path.isfile(self.input_xml_file):
+            os.remove(self.input_xml_file)
+
+    def test_replace_text_in_xml_file_success(self) -> None:
+        want_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>The idea behind Cornucopia is to help development teams, especially those using \
+Agile methodologies, to identify application security requirements and develop security-based \
+user stories. \
+Although the idea had been waiting for enough time to progress it, the final \
+motivation came when SAFECode published its Practical Security Stories and Security Tasks for Agile \
+Development Environments in July 2012.</Content>
+    </CharacterStyleRange>
+</ParagraphStyleRange>"""
+
+        c.replace_text_in_xml_file(self.input_xml_file, self.input_dict)
+        with open(self.input_xml_file, "r", encoding="utf-8") as f:
+            got_data = f.read()
+        self.assertEqual(want_data, got_data)
+
+
+class TestReplaceTextInEmptyLeafletlFile(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.input_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content></Content>
+    </CharacterStyleRange>
+</ParagraphStyleRange>"""
+        self.input_dict = {
+            "${Common_T00210}": "The idea behind Cornucopia is to help development teams, especially those using \
+Agile methodologies, to identify application security requirements and develop security-based \
+user stories.",
+            "${Common_T00220}": "\
+Although the idea had been waiting for enough time to progress it, the final \
+motivation came when SAFECode published its Practical Security Stories and Security Tasks for Agile \
+Development Environments in July 2012.",
+        }
+        self.b = c.convert_vars.BASE_PATH
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        if not os.path.exists(os.path.dirname(self.input_xml_file)):
+            os.makedirs(os.path.dirname(self.input_xml_file))
+        if os.path.isfile(self.input_xml_file):
+            os.remove(self.input_xml_file)
+        with open(self.input_xml_file, "x", encoding="utf-8") as f:
+            f.writelines(self.input_data)
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+        if os.path.isfile(self.input_xml_file):
+            os.remove(self.input_xml_file)
+
+    def test_replace_text_in_xml_file_success_but_empty(self) -> None:
+        want_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content></Content>
+    </CharacterStyleRange>
+</ParagraphStyleRange>"""
+
+        c.replace_text_in_xml_file(self.input_xml_file, self.input_dict)
+        with open(self.input_xml_file, "r", encoding="utf-8") as f:
+            got_data = f.read()
+        self.assertEqual(want_data, got_data)
+
+
 class TestReplaceTextInXmlFile(unittest.TestCase):
     def setUp(self) -> None:
+        c.convert_vars.making_template = True
         self.input_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
     <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
         <Content>${WC_suit}</Content>
@@ -1330,6 +1425,7 @@ class TestReplaceTextInXmlFile(unittest.TestCase):
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
+        c.convert_vars.making_template = False
         if os.path.isfile(self.input_xml_file):
             os.remove(self.input_xml_file)
 
@@ -1341,6 +1437,47 @@ class TestReplaceTextInXmlFile(unittest.TestCase):
 </ParagraphStyleRange>"""
 
         c.replace_text_in_xml_file(self.input_xml_file, self.input_dict)
+        with open(self.input_xml_file, "r", encoding="utf-8") as f:
+            got_data = f.read()
+        self.assertEqual(want_data, got_data)
+
+
+class TestReplaceTextInXmlFileFail(unittest.TestCase):
+    def setUp(self) -> None:
+        self.input_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
+    CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content></Content>
+    </CharacterStyleRange>
+</ParagraphStyleRange>"""
+        self.input_dict = {}
+        self.b = c.convert_vars.BASE_PATH
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        if not os.path.exists(os.path.dirname(self.input_xml_file)):
+            os.makedirs(os.path.dirname(self.input_xml_file))
+        if os.path.isfile(self.input_xml_file):
+            os.remove(self.input_xml_file)
+        with open(self.input_xml_file, "x", encoding="utf-8") as f:
+            f.writelines(self.input_data)
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+        if os.path.isfile(self.input_xml_file):
+            os.remove(self.input_xml_file)
+
+    def test_replace_text_in_xml_file_fail(self) -> None:
+        want_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
+    CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content></Content>
+    </CharacterStyleRange>
+</ParagraphStyleRange>"""
+
+        want_error_log_messages = "ERROR:root: --- parsing xml file:"
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            c.replace_text_in_xml_file(self.input_xml_file, self.input_dict)
+        self.assertIn(want_error_log_messages, ll.output.pop(), "No xml parsing error was caught.")
+
         with open(self.input_xml_file, "r", encoding="utf-8") as f:
             got_data = f.read()
         self.assertEqual(want_data, got_data)

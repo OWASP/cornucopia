@@ -23,7 +23,7 @@ class ConvertVars:
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["1.20", "1.21", "1.30"]
-    STYLE_CHOICES: List[str] = ["all", "static", "dynamic"]
+    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
@@ -88,6 +88,8 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
 def convert_type_language_style(
     file_type: str, language: str = "en", style: str = "static", version: str = "1.21"
 ) -> None:
+    if has_valid_file_style(style, file_type) == False:
+        return
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
     if not yaml_files:
@@ -109,7 +111,7 @@ def convert_type_language_style(
 
     template_doc: str = get_template_doc(file_type, style)
 
-    if not language_data or not mapping_dict or not meta or not template_doc:
+    if not language_data or not mapping_dict or not meta:
         return
 
     # Name output file with correct edition, component, language & version
@@ -258,8 +260,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.STYLE_CHOICES,
         default="static",
         help=(
-            "Output style to produce. [`static` or `dynamic`] "
-            "\nStatic cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list."
+            "Output style to produce. [`static`, `dynamic` or `leaflet`] "
+            "\nStatic cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list. The leaflet contains the instructions"
         ),
     )
     parser.add_argument(
@@ -611,6 +613,12 @@ def get_template_doc(file_type: str, style: str = "static") -> str:
         return "None"
 
 
+def has_valid_file_style(style: str, file_type: str) -> bool:
+    if style == "leaflet" and file_type != "idml":
+        return False
+    return True
+
+
 def get_valid_file_types() -> List[str]:
     if not convert_vars.args.outputfiletype:
         file_type = os.path.splitext(os.path.basename(convert_vars.args.outputfile))[1].strip(".")
@@ -862,11 +870,17 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
     for el in [el for el in all_content_elements]:
         if el.text == "" or el.text is None:
             continue
-        el_text = get_replacement_value_from_dict(el.text, replacement_values)
-        if el_text:
-            el.text = el_text
-            found_element = True
-
+        words = el.text.split()
+        replaced_text = ""
+        is_replaced = False
+        for key, word in enumerate(words):
+            replaced_text = get_replacement_value_from_dict(word, replacement_values)
+            if replaced_text:
+                words[key] = replaced_text
+                found_element = True
+                is_replaced = True
+        if is_replaced:
+            el.text = " ".join(words)
     if found_element:
         with open(filename, "bw") as f:
             f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
