@@ -368,6 +368,9 @@ paragraphs:
     value: "Title_full"
     text: "OWASP Cornucopia Édition de Ecommerce v1.30-FR"
   -
+    value: "T00005"
+    text: "Indice"
+  -
     value: "T00010"
     text: "OWASP Cornucopia est un mécanisme qui permet aux équipes de développement logiciel d’identifier les exigences sécurité dans les processus de développement Agile, conventionnels et formels"
   -
@@ -400,6 +403,9 @@ paragraphs:
   -
     value: "T00160"
     text: "Oana Cornea et d’autres participants du sommet AppSec EU 2015 project, pour leur aide à la création d’une démo vidéo."
+  -
+    value: "T00161"
+    text: "(suite à la page 20)"
   -
     value: "T00170"
     text: "Colin Watson en tant qu’auteur et chef de projet avec Grant Ongers, avec d’autres volontaires OWASP qui ont aidé en bien des manières."
@@ -626,32 +632,35 @@ paragraphs:
     value: "T01300"
     text: "Il y a bien des manières de jouer à Cornucopia."
   -
+    value: "T01301"
+    text: "Pour savoir comment jouer, lisez les pages : 11-19."
+  -
     value: "T01310"
-    text: "Il y a bien des manières de jouer à Cornucopia. En voici une, en situation dans une vidéo en ligne sur "
+    text: "En voici une, en situation dans une vidéo en ligne sur "
   -
     value: "T01311"
     text: ", qui utilise la nouvelle (mai 2015) feuille de scores disponible ici:" 
   -
     value: "T01400"
-    text: "A - Préparations"
+    text: "Préparations"
   -
     value: "T01410"
-    text: "A1. Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes. "
+    text: "Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes. "
   -
     value: "T01420"
-    text: "A2. Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation. "
+    text: "Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation. "
   -
     value: "T01430"
-    text: "A3. Créez un diagramme de flux de données, des cas d’utilisation, ou d’autres supports pour aider à l’évaluation. "
+    text: "Créez un diagramme de flux de données, des cas d’utilisation, ou d’autres supports pour aider à l’évaluation. "
   -
     value: "T01440"
-    text: "A4. Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d’une table (essayez d’inclure un profil sensibilisé à la sécurité applicative). "
+    text: "Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d’une table (essayez d’inclure un profil sensibilisé à la sécurité applicative). "
   -
     value: "T01450"
-    text: "A5. Prévoyez une distribution de prix (étoiles, pizza, bière ou fleurs en fonction de la culture d’entreprise). "
+    text: "Prévoyez une distribution de prix (étoiles, pizza, bière ou fleurs en fonction de la culture d’entreprise). "
   -
     value: "T01500"
-    text: "B - Jouer"
+    text: "Jouer"
   -
     value: "T01510"
     text: "Une couleur – Cornucopia – fait office d’atouts. "
@@ -663,52 +672,52 @@ paragraphs:
     text: "Le fait d’avoir un participant non-joueur facilite le relevé des questions et des scores."
   -
     value: "T01540"
-    text: "B1. Retirez les Jokers et quelques cartes de bas niveau (2, 3, 4) du jeu Cornucopia pour s’assurer que chaque joueur ait le même nombre de cartes. "
+    text: "Retirez les Jokers et quelques cartes de bas niveau (2, 3, 4) du jeu Cornucopia pour s’assurer que chaque joueur ait le même nombre de cartes. "
   -
     value: "T01550"
-    text: "B2. Battez les cartes et distribuez-les toutes. "
+    text: "Battez les cartes et distribuez-les toutes. "
   -
     value: "T01560"
-    text: "B3. Pour commencer, choisissez au hasard un joueur qui jouera en premier – qui peut jouer n’importe quelle carte en main sauf un atout – Cornucopia. "
+    text: "Pour commencer, choisissez au hasard un joueur qui jouera en premier – qui peut jouer n’importe quelle carte en main sauf un atout – Cornucopia. "
   -
     value: "T01570"
-    text: "B4. Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s’appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s’accorde à dire qu’il s’agit d’un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n’écartez pas une menace au motif que celle-ci fait déjà l’objet d’une contre-mesure – quelqu’un note la carte et relève les questions rencontrés. "
+    text: "Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s’appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s’accorde à dire qu’il s’agit d’un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n’écartez pas une menace au motif que celle-ci fait déjà l’objet d’une contre-mesure – quelqu’un note la carte et relève les questions rencontrés. "
   -
     value: "T01580"
-    text: "B5. Jouez ainsi dans le sens des aiguilles d’une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n’importe quelle couleur. "
+    text: "Jouez ainsi dans le sens des aiguilles d’une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n’importe quelle couleur. "
   -
     value: "T01590"
     text: "Seule la carte la plus forte de la couleur appelée, ou l’atout Cornucopia le plus fort qui a été joué, gagne la main. "
   -
     value: "T01600"
-    text: "B6. Le joueur qui gagne la main, commence au tour suivant, donnant une couleur à suivre. "
+    text: "Le joueur qui gagne la main, commence au tour suivant, donnant une couleur à suivre. "
   -
     value: "T01610"
-    text: "B7. Continuez jusqu’à ce que toutes les cartes soient jouées. "
+    text: "Continuez jusqu’à ce que toutes les cartes soient jouées. "
   -
     value: "T01700"
-    text: "C - Scores"
+    text: "Scores"
   -
     value: "T01710"
     text: "L’objectif est d’identifier des menaces applicables, et de gagner des mains (des tours):"
   -
     value: "T01720"
-    text: "C1. +1 point à chaque carte jouée pour laquelle le groupe s’accorde à dire qu’il s’agit d’une menace applicable. "
+    text: "+1 point à chaque carte jouée pour laquelle le groupe s’accorde à dire qu’il s’agit d’une menace applicable. "
   -
     value: "T01730"
-    text: "C2. +1 point si vous gagnez une main. "
+    text: "+1 point si vous gagnez une main. "
   -
     value: "T01740"
-    text: "C3. Lorsque toutes les cartes sont jouées, le plus grand score remporte la partie. "
+    text: "Lorsque toutes les cartes sont jouées, le plus grand score remporte la partie. "
   -
     value: "T01800"
-    text: "D - Clôture"
+    text: "Clôture"
   -
     value: "T01810"
-    text: "D1. Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes. "
+    text: "Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes. "
   -
     value: "T01820"
-    text: "D2. Créez des cas d’utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement. "
+    text: "Créez des cas d’utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement. "
   -
     value: "T01900"
     text: "Règles alternatives"

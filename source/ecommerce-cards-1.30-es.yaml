@@ -370,6 +370,9 @@ paragraphs:
     value: "Title_full"
     text: "OWASP Cornucopia Ecommerce Website Edition v1.30-ES"
   -
+    value: "T00005"
+    text: "Índice"
+  -
     value: "T00010"
     text: "OWASP Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requerimientos de seguridad en procesos de desarrollo de software ágiles, convencionales y formales."
   -
@@ -402,6 +405,9 @@ paragraphs:
   -
     value: "T00160"
     text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
+  -
+    value: "T00161"
+    text: "(continúa en la página 20)"
   -
     value: "T00170"
     text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
@@ -628,6 +634,9 @@ paragraphs:
     value: "T01300"
     text: "Es posible jugar Cornucopia de muchas formas diferentes."
   -
+    value: "T01301"
+    text: "Para saber cómo jugar, lea las páginas: 11-19."
+  -
     value: "T01310"
     text: "Aquí hay una manera, como demonstrado online en un video de "
   -
@@ -635,25 +644,25 @@ paragraphs:
     text: ", qué usa la nueva (May 2015) oja para anotar puntos "
   -
     value: "T01400"
-    text: "A - Preparativos"
+    text: "Preparativos"
   -
     value: "T01410"
-    text: "A1. Usa las cartas de este paquete. "
+    text: "Usa las cartas de este paquete. "
   -
     value: "T01420"
-    text: "A2. Identifique una solicitud o proceso de solicitud para revisar; esto podría ser un concepto, diseño o una implementación real. "
+    text: "Identifique una solicitud o proceso de solicitud para revisar; esto podría ser un concepto, diseño o una implementación real. "
   -
     value: "T01430"
-    text: "A3. Cree un diagrama de flujo de datos, historias de usuarios u otros artefactos para ayudar en la revisión. "
+    text: "Cree un diagrama de flujo de datos, historias de usuarios u otros artefactos para ayudar en la revisión. "
   -
     value: "T01440"
-    text: "A4. Identifique e invite a un grupo de 3 a 6 personas, Se recomienda que los roles a considerar sean arquitectos, desarrolladores, evaluadores y otras partes interesadas del negocio, Siéntelos juntos alrededor de una mesa (intente incluir a alguien bastante familiarizado con la seguridad de las aplicaciones) "
+    text: "Identifique e invite a un grupo de 3 a 6 personas, Se recomienda que los roles a considerar sean arquitectos, desarrolladores, evaluadores y otras partes interesadas del negocio, Siéntelos juntos alrededor de una mesa (intente incluir a alguien bastante familiarizado con la seguridad de las aplicaciones) "
   -
     value: "T01450"
-    text: "A5. Tenga algunos premios a mano (estrellas doradas, chocolate, pizza, cerveza o flores según la cultura de su oficina). "
+    text: "Tenga algunos premios a mano (estrellas doradas, chocolate, pizza, cerveza o flores según la cultura de su oficina). "
   -
     value: "T01500"
-    text: "B - El juego"
+    text: "El juego"
   -
     value: "T01510"
     text: "Un palo, Cornucopia, actúa como triunfo. "
@@ -665,52 +674,52 @@ paragraphs:
     text: "Ayuda si hay alguien que no es jugador para documentar los problemas y las puntuaciones. "
   -
     value: "T01540"
-    text: "B1. Retire los comodines y algunas cartas de puntuación baja (2, 3, 4) del palo de Cornucopia para asegurarse de que cada jugador tenga la misma cantidad de cartas. "
+    text: "Retire los comodines y algunas cartas de puntuación baja (2, 3, 4) del palo de Cornucopia para asegurarse de que cada jugador tenga la misma cantidad de cartas. "
   -
     value: "T01550"
-    text: "B2. Baraja la baraja y reparte todas las cartas. "
+    text: "Baraja la baraja y reparte todas las cartas. "
   -
     value: "T01560"
-    text: "B3. Para comenzar, elija un jugador al azar que jugará la primera carta; puede jugar cualquier carta de su mano, excepto del palo de triunfo: Cornucopia. "
+    text: "Para comenzar, elija un jugador al azar que jugará la primera carta; puede jugar cualquier carta de su mano, excepto del palo de triunfo: Cornucopia. "
   -
     value: "T01570"
-    text: "B4. Para jugar una carta, cada jugador debe leerla en voz alta y explicar (consulte el Wiki Deck en línea para obtener consejos) cómo podría aplicarse la amenaza (el jugador obtiene un punto por los ataques que podrían funcionar y que el grupo cree que es un error procesable). No intente pensar en mitigaciones en esta etapa, y no excluya una amenaza solo por creer que ya está mitigada; alguien anote la tarjeta y registre los problemas planteados. "
+    text: "Para jugar una carta, cada jugador debe leerla en voz alta y explicar (consulte el Wiki Deck en línea para obtener consejos) cómo podría aplicarse la amenaza (el jugador obtiene un punto por los ataques que podrían funcionar y que el grupo cree que es un error procesable). No intente pensar en mitigaciones en esta etapa, y no excluya una amenaza solo por creer que ya está mitigada; alguien anote la tarjeta y registre los problemas planteados. "
   -
     value: "T01580"
-    text: "B5. Juegue en el sentido de las agujas del reloj, cada persona debe jugar una carta de la misma manera; si tienes una carta del mismo palo, debes jugar una de esas; de lo contrario, pueden jugar una carta de cualquier otro palo, sólo una carta más alta del mismo palo, o la carta más alta del palo de triunfo Cornucopia, gana la mano. "
+    text: "Juegue en el sentido de las agujas del reloj, cada persona debe jugar una carta de la misma manera; si tienes una carta del mismo palo, debes jugar una de esas; de lo contrario, pueden jugar una carta de cualquier otro palo, sólo una carta más alta del mismo palo, o la carta más alta del palo de triunfo Cornucopia, gana la mano. "
   -
     value: "T01590"
     text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand. "
   -
     value: "T01600"
-    text: "B6. La persona que gana la ronda lidera la siguiente ronda (es decir, juega primero) y, por lo tanto, define el siguiente palo principal. "
+    text: "La persona que gana la ronda lidera la siguiente ronda (es decir, juega primero) y, por lo tanto, define el siguiente palo principal. "
   -
     value: "T01610"
-    text: "B7. Repita hasta que se jueguen todas las cartas. "
+    text: "Repita hasta que se jueguen todas las cartas. "
   -
     value: "T01700"
-    text: "C - Puntuación"
+    text: "Puntuación"
   -
     value: "T01710"
     text: "El objetivo es identificar las amenazas aplicables y ganar manos (rondas): "
   -
     value: "T01720"
-    text: "C1. Obtenga +1 por cada tarjeta que pueda identificar como una amenaza válida para la aplicación en cuestión. "
+    text: "Obtenga +1 por cada tarjeta que pueda identificar como una amenaza válida para la aplicación en cuestión. "
   -
     value: "T01730"
-    text: "C2. Obtén +1 si ganas una ronda."
+    text: "Obtén +1 si ganas una ronda."
   -
     value: "T01740"
-    text: "C3. Una vez que se han jugado todas las cartas, gana el que tenga más puntos. "
+    text: "Una vez que se han jugado todas las cartas, gana el que tenga más puntos. "
   -
     value: "T01800"
-    text: "D - Cierre"
+    text: "Cierre"
   -
     value: "T01810"
-    text: "D1. Revise todas las amenazas aplicables y los requisitos de seguridad correspondientes. "
+    text: "Revise todas las amenazas aplicables y los requisitos de seguridad correspondientes. "
   -
     value: "T01820"
-    text: "D2. Cree historias de usuario, especificaciones y casos de prueba según sea necesario para su metodología de desarrollo. "
+    text: "Cree historias de usuario, especificaciones y casos de prueba según sea necesario para su metodología de desarrollo. "
   -
     value: "T01900"
     text: "Reglas alternativas de juego"
