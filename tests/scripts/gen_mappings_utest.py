@@ -12,12 +12,20 @@ if "unittest.util" in __import__("sys").modules:
 class TestProduceEcommerceMappings(unittest.TestCase):
     def test_can_produce_ecommerce_mappings(self):
         test_input = {
+            "meta": {
+                "language": "EN",
+                "version": "1.30"
+            },
             "suits": [
                 {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding", "code": "VE"},
                 {"cards": [{"cre": ["138-448"], "value": "2"}], "name": "Session management", "code": "SM"},
             ]
         }
         language_mapping = {
+            "meta": {
+                "language": "EN",
+                "version": "1.30"
+            },
             "suits": [
                 {"name": "Data validation & encoding", "cards": [{"desc": "DV2 test"}]},
                 {"name": "Session management", "cards": [{"desc": "SM2 test"}]},
@@ -70,6 +78,10 @@ class MainTestCase(unittest.TestCase):
                 with open("output/mapping.json", "w") as mock_write:
                     mock_write("test")
                     mock_load.return_value = {
+                        "meta": {
+                            "language": "EN",
+                            "version": "1.30"
+                        },
                         "suits": [
                             {
                                 "cards": [{"cre": ["308-515"], "value": "2", "desc": ""}],
