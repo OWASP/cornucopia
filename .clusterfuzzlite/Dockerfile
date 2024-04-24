@@ -1,4 +1,4 @@
-FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:5679387b62b9e2a3cf48f6a4bc627e77d41c8c17129a39e8ff3c025bd606c860
+FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:0eeb0219dbd3d33fcc28934752066c5fd1f00e4670992441383b4c827f65fd9f
 RUN apt-get update && apt-get install -y make autoconf automake libtool curl gcc libc-dev software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt upgrade -y && apt-get install -y python3.10 python3.10-dev python3.10-distutils 
