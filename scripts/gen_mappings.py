@@ -6,12 +6,16 @@ import qrcode.image.svg  # type: ignore
 from typing import Any, Dict
 
 base_url = "https://github.com/OWASP/cornucopia/wiki/"
-CORNUCOPIA_VERSION = "1.30"
 
 
 def produce_ecommerce_mappings(source_file: Dict[Any, Any], language_mapping: Dict[Any, Any]) -> Dict[Any, Any]:
     base = {
-        "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
+        "meta": {
+            "edition": "ecommerce",
+            "component": "mappings",
+            "language": language_mapping["meta"]["language"],
+            "version": language_mapping["meta"]["version"]
+        },
         "standards": [],
     }
     for indx, suit in enumerate(source_file.copy()["suits"]):

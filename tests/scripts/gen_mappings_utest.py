@@ -24,7 +24,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
             ]
         }
         expected = {
-            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": "1.30"},
+            "meta": {"component": "mappings", "edition": "ecommerce", "language": "EN", "version": "1.30"},
             "standards": [
                 {
                     "doctype": "Tool",
