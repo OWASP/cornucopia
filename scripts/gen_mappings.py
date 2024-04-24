@@ -14,7 +14,7 @@ def produce_ecommerce_mappings(source_file: Dict[Any, Any], language_mapping: Di
             "edition": "ecommerce",
             "component": "mappings",
             "language": language_mapping["meta"]["language"],
-            "version": language_mapping["meta"]["version"]
+            "version": language_mapping["meta"]["version"],
         },
         "standards": [],
     }
