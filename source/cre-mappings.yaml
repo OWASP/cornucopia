@@ -139,6 +139,7 @@ suits:
     - 134-207
     value: K
   name: Data validation & encoding
+  code: VE
 - cards:
   - cre:
     - 138-448
@@ -250,6 +251,7 @@ suits:
     - 650-560
     value: K
   name: Authentication
+  code: AT
 - cards:
   - cre:
     - 177-260
@@ -340,6 +342,7 @@ suits:
     - 650-560
     value: K
   name: Session management
+  code: SM
 - cards:
   - cre:
     - 657-084
@@ -428,6 +431,7 @@ suits:
     - 838-636
     value: K
   name: Authorization
+  code: AZ
 - cards:
   - cre:
     - 170-772
@@ -541,6 +545,7 @@ suits:
     - 878-880
     value: K
   name: Cryptography
+  code: CR
 - cards:
   - cre:
     - 155-155
@@ -651,3 +656,4 @@ suits:
     - 463-820
     value: K
   name: Cornucopia
+  code: C
