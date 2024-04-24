@@ -51,6 +51,7 @@
           - name: Generate new output files
             run: |
               pipenv run python scripts/convert.py -l all -t all -s all
+              pipenv run python scripts/gen_mappings.py --cres source/cre-mappings.yaml --target output/owasp_cornucopia_ecommerce_cre_mapping_1.30.json --lang source/ecommerce-cards-1.30-en.yaml
           - uses: marvinpinto/action-automatic-releases@919008cf3f741b179569b7a6fb4d8860689ab7f0 # v1.2.1
             name: "Create pre-release"
             with:

@@ -1,58 +1,45 @@
 import argparse
 import yaml
-import requests
+import json
 import qrcode  # type: ignore
 import qrcode.image.svg  # type: ignore
 from typing import Any, Dict
 
-opencre_base_url = "https://opencre.org"
-opencre_rest_url = "https://opencre.org/rest/v1"
-CORNUCOPIA_VERSION = "1.20"
-STANDARDS_TO_ADD = [
-    "ASVS",
-    "CAPEC",
-    "SCP",
-]
+base_url = "https://github.com/OWASP/cornucopia/wiki/"
+CORNUCOPIA_VERSION = "1.30"
 
 
-def make_cre_link(cre_id: str, frontend: bool = False) -> str:
-    if frontend:
-        return f"{opencre_base_url}/cre/{cre_id}"
-    else:
-        return f"{opencre_rest_url}/id/{cre_id}"
-
-
-def produce_ecommerce_mappings(source_file: Dict[Any, Any], standards_to_add: list[str]) -> Dict[Any, Any]:
+def produce_ecommerce_mappings(source_file: Dict[Any, Any], language_mapping: Dict[Any, Any]) -> Dict[Any, Any]:
     base = {
         "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
+        "standards": [],
     }
     for indx, suit in enumerate(source_file.copy()["suits"]):
-        for card_indx, card in enumerate(suit["cards"]):
-            cre = card["cre"][0]
-            response = requests.get(make_cre_link(cre))
-            if response.status_code == 200:
-                cre_object = response.json().get("data")
-                for standard in standards_to_add:
-                    for link in cre_object.get("links"):
-                        if link.get("document").get("name") == standard:
-                            source_file["suits"][indx]["cards"][card_indx][standard] = link.get("document").get(
-                                "sectionID"
-                            )
-            else:
-                print(f"could not find CRE {cre}, status code {response.status_code}")
-
-    base["suits"] = source_file["suits"]
+        cards = language_mapping["suits"][indx]["cards"]
+        for index, card in enumerate(suit["cards"]):
+            standard = {
+                "doctype": "Tool",
+                "name": suit["name"],
+                "section": cards[index]["desc"],
+                "sectionID": suit["code"] + card["value"],
+                "hyperlink": base_url + suit["code"] + card["value"],
+                "links": [],
+                "tags": [],
+                "tooltype": "Defensive",
+            }
+            for cre in card["cre"]:
+                standard["links"].append({"document": {"doctype": "CRE", "id": cre}})
+            base["standards"].append(standard)  # type: ignore
     return base
 
 
 def generate_qr_images(existing_mappings: Dict[Any, Any], directory_path: str) -> None:
     for suit in existing_mappings["suits"]:
         for card in suit["cards"]:
-            cre = card["cre"][0]
-            link = make_cre_link(cre, frontend=True)
-            print(f"making qr code for {cre}")
+            link = base_url + suit["code"] + card["value"]
             img = qrcode.make(link, image_factory=qrcode.image.svg.SvgImage)
-            with open(f"{directory_path}/{cre}", "wb") as f:
+            base_name = suit["code"] + card["value"]
+            with open(f"{directory_path}/{base_name}.svg", "wb") as f:
                 img.save(f)
 
 
@@ -60,24 +47,25 @@ def main() -> None:
     global opencre_base_url, opencre_rest_url
     parser = argparse.ArgumentParser(description="generate mappings")
     parser.add_argument("-c", "--cres", help="Where to find the file mapping cornucopia to CREs", required=True)
-    parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
     parser.add_argument(
-        "-s", "--staging", action="store_true", help="If provided will use staging.opencre.org instead of opencre.org"
+        "-l",
+        "--lang",
+        help="Where to find the language file mapping CREs to the Cornucopia card scenarios",
+        required=True,
     )
+    parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
     parser.add_argument(
         "-q", "--qr_images", help="If provided will populate the target dir with qr image pointing to every cre"
     )
     args = vars(parser.parse_args())
-    if args["staging"]:
-        print("Using staging.opencre.org")
-        opencre_base_url = "https://staging.opencre.org"
-        opencre_rest_url = "https://staging.opencre.org/rest/v1"
+    with open(args["lang"]) as f:
+        language_mapping = yaml.safe_load(f)
     with open(args["cres"]) as f:
         mappings = yaml.safe_load(f)
         if args["target"]:
-            ecommerce = produce_ecommerce_mappings(mappings, STANDARDS_TO_ADD)
+            ecommerce = produce_ecommerce_mappings(mappings, language_mapping)
             with open(args["target"], "w") as ef:
-                yaml.safe_dump(ecommerce, ef)
+                ef.write(json.dumps(ecommerce, indent=4))
         if args["qr_images"]:
             generate_qr_images(mappings, args["qr_images"])
 
