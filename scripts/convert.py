@@ -513,14 +513,8 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
 def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
     reg_str: str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace("$", "\\$").strip() + "$"
     if re.match(reg_str, el_text.strip()):
-        pretext = el_text[: el_text.find("\u2028")]
-        v_new = v
-        if len(v) + len(pretext) > 60:
-            v_new = v.replace(", ", ",")
-        if len(v_new) >= 34:
-            v_split = v_new.find(",", 25 - len(pretext)) + 1
-            el_new = pretext + "    " + v_new[:v_split] + "\u2028" + v_new[v_split:].strip()
-            return el_new
+        if len(v) >= 38:
+            return el_text[: el_text.find("\u2028")] + ": " + v
         else:
             return el_text.replace(k, v)
     return ""
@@ -528,29 +522,13 @@ def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
 
 def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
     for k, v in replacement_values:
-        k2: str = k.replace("'", "’").strip()
-        v2: str = v.strip()
-        if el_text == k:
-            return v
-        elif el_text.strip() == k2:
-            return v2
-        elif el_text.lower() == k.lower():
-            return v
-        elif el_text.strip().lower() == k2.lower():
-            return v2
-        elif convert_vars.making_template:
-            reg_str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace(" ", "").strip() + "$"
-            value_name = v[9:-1].replace("_", " ").lower().strip()
-            new_text_test = (
-                el_text[: len(value_name)] + "\u2028" + el_text[len(value_name) + 1 :].replace(" ", "").strip()
-            )
-            if re.match(reg_str, new_text_test) and el_text.lower().startswith(value_name):
-                return el_text[: len(value_name)] + "\u2028" + v
-        else:
-            el_new = get_replacement_mapping_value(k, v, el_text)
-            if el_new:
-                return el_new
-    return ""
+        el_new = get_replacement_mapping_value(k, v, el_text)
+        if el_new:
+            return el_new
+        if k.strip() in el_text:
+            reg = r"(?<!\S)" + re.escape(k.strip()) + "(?!\S)"  # # noqa: W605
+            el_text = re.sub(reg, v, el_text)
+    return el_text
 
 
 def get_suit_tags_and_key(key: str) -> Tuple[List[str], str]:
@@ -880,23 +858,12 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
 
     all_content_elements = tree.findall(".//Content")
 
-    found_element = False
     for el in [el for el in all_content_elements]:
         if el.text == "" or el.text is None:
             continue
-        words = el.text.split()
-        replaced_text = ""
-        is_replaced = False
-        for key, word in enumerate(words):
-            replaced_text = get_replacement_value_from_dict(word, replacement_values)
-            if replaced_text:
-                words[key] = replaced_text
-                found_element = True
-                is_replaced = True
-        if is_replaced:
-            el.text = " ".join(words)
-    if found_element:
+        el.text = get_replacement_value_from_dict(el.text, replacement_values)
         with open(filename, "bw") as f:
+            tree.write("output/test_leaflet.xml")
             f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
 
