@@ -863,7 +863,6 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
             continue
         el.text = get_replacement_value_from_dict(el.text, replacement_values)
         with open(filename, "bw") as f:
-            tree.write("output/test_leaflet.xml")
             f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
 
 
