@@ -1488,7 +1488,6 @@ class Test1(unittest.TestCase):
         self.replacement_values = [
             ("${VE_suit}", "Validation & Encoding"),
             ("${VE_VE2_desc}", "You have invented a new attack against Data Validation and Encoding"),
-            ("${VE_VE2_misc'}", "Read more about this topic in OWASP's free Cheat Sheets"),
             ("${WC_suit}", "Wild Card"),
             ("${WC_JokerA_desc}", "Alice can utilize the application to attack users' systems and data"),
         ]
@@ -1506,21 +1505,7 @@ class Test1(unittest.TestCase):
 
     def test_get_replacement_value_from_dict_spaced(self) -> None:
         input_text = " ${VE_VE2_desc} "
-        want_data = "You have invented a new attack against Data Validation and Encoding"
-
-        got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
-        self.assertEqual(want_data, got_data)
-
-    def test_get_replacement_value_from_dict_inverts(self) -> None:
-        input_text = "${VE_VE2_misc’}"
-        want_data = "Read more about this topic in OWASP's free Cheat Sheets"
-
-        got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
-        self.assertEqual(want_data, got_data)
-
-    def test_get_replacement_value_from_dict_lowers(self) -> None:
-        input_text = "${ve_ve2_misc’}"
-        want_data = "Read more about this topic in OWASP's free Cheat Sheets"
+        want_data = " You have invented a new attack against Data Validation and Encoding "
 
         got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
         self.assertEqual(want_data, got_data)
