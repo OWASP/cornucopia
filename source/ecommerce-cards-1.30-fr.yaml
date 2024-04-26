@@ -35,7 +35,7 @@ suits:
   -
     id: "DV8"
     value: "8"
-    desc: "Sarah peut contourner les routines de sanitisation centralisées, car celles-ci ne sont pas pleinement utilisées"
+    desc: "Oana peut contourner les routines de sanitisation centralisées, car celles-ci ne sont pas pleinement utilisées"
   -
     id: "DV9"
     value: "9"
@@ -47,7 +47,7 @@ suits:
   -
     id: "DVJ"
     value: "J"
-    desc: "Dennis a le contrôle sur la validation des saisies, la validation des sorties, ou le code d'encodage des sorties, ou les routines, de telle manière que celles-ci peuvent être contournées"
+    desc: "Toby a le contrôle sur la validation des saisies, la validation des sorties, ou le code d'encodage des sorties, ou les routines, de telle manière que celles-ci peuvent être contournées"
   -
     id: "DVQ"
     value: "Q"
@@ -143,7 +143,7 @@ suits:
   -
     id: "SM7"
     value: "7"
-    desc: "Casey peut utiliser la session d'Adam après qu'il ait terminé, car il n'existe pas de fonction de déconnexion, ou il ne peut pas se déconnecter facilement, ou la déconnexion ne clôt pas proprement la session"
+    desc: "Graham peut utiliser la session d'Adam après qu'il ait terminé, car il n'existe pas de fonction de déconnexion, ou il ne peut pas se déconnecter facilement, ou la déconnexion ne clôt pas proprement la session"
   -
     id: "SM8"
     value: "8"
@@ -275,7 +275,7 @@ suits:
   -
     id: "CRQ"
     value: "Q"
-    desc: "Randolph peut accéder ou prédire les secrets cryptographiques maîtres"
+    desc: "Artim peut accéder ou prédire les secrets cryptographiques maîtres"
   -
     id: "CRK"
     value: "K"
@@ -323,7 +323,7 @@ suits:
   -
     id: "COX"
     value: "10"
-    desc: "Xavier peut contourner les contrôles de l'application car les frameworks, les bibliothèques et les composants applicatifs contiennent du code malveillant ou des vulnérabilités (par exemple: interne, sur étagère, externalisé, open source, externe)"
+    desc: "Spyros peut contourner les contrôles de l'application car les frameworks, les bibliothèques et les composants applicatifs contiennent du code malveillant ou des vulnérabilités (par exemple: interne, sur étagère, externalisé, open source, externe)"
   -
     id: "COJ"
     value: "J"
@@ -335,7 +335,7 @@ suits:
   -
     id: "COK"
     value: "K"
-    desc: "Gareth peut utiliser l'application pour refuser le service à certains ou à tous ses utilisateurs"
+    desc: "Grant peut utiliser l'application pour refuser le service à certains ou à tous ses utilisateurs"
   -
     id: "COA"
     value: "A"
