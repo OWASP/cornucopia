@@ -35,7 +35,7 @@ suits:
   -
     id: "DV8"
     value: "8"
-    desc: "Sarah consegue ignorar as rotinas centralizadas de tratamento (sanitização) pois elas não estão sendo usadas de forma abrangente"
+    desc: "Oana consegue ignorar as rotinas centralizadas de tratamento (sanitização) pois elas não estão sendo usadas de forma abrangente"
   -
     id: "DV9"
     value: "9"
@@ -47,7 +47,7 @@ suits:
   -
     id: "DVJ"
     value: "J"
-    desc: "Dennis tem o controle sobre validações de entrada de dados, validações de saída de dados ou codificação de saída ou rotinas que ele consegue ignorar/burlar"
+    desc: "Toby tem o controle sobre validações de entrada de dados, validações de saída de dados ou codificação de saída ou rotinas que ele consegue ignorar/burlar"
   -
     id: "DVQ"
     value: "Q"
@@ -143,7 +143,7 @@ suits:
   -
     id: "SM7"
     value: "7"
-    desc: "Casey consegue utilizar a sessão de Adam depois dele ter finalizado o uso da aplicação, porque a função de logout inexiste, ou Adam não fez logout, ou a função de logout não termina a sessão de forma adequada"
+    desc: "Graham consegue utilizar a sessão de Adam depois dele ter finalizado o uso da aplicação, porque a função de logout inexiste, ou Adam não fez logout, ou a função de logout não termina a sessão de forma adequada"
   -
     id: "SM8"
     value: "8"
@@ -275,7 +275,7 @@ suits:
   -
     id: "CRQ"
     value: "Q"
-    desc: "Randolph consegue acessar ou prever os dados mestres de criptografia"
+    desc: "Artim consegue acessar ou prever os dados mestres de criptografia"
   -
     id: "CRK"
     value: "K"
@@ -323,7 +323,7 @@ suits:
   -
     id: "COX"
     value: "10"
-    desc: "Xavier consegue contornar os controles do aplicativo porque os códigos fontes tanto dos frameworks, como de bibliotecas e componentes utilizados contêm código malicioso ou vulnerabilidades"
+    desc: "Spyros consegue contornar os controles do aplicativo porque os códigos fontes tanto dos frameworks, como de bibliotecas e componentes utilizados contêm código malicioso ou vulnerabilidades"
   -
     id: "COJ"
     value: "J"
@@ -335,7 +335,7 @@ suits:
   -
     id: "COK"
     value: "K"
-    desc: "Gareth pode utilizar o aplicativo para negar o serviço a alguns ou a todos os usuários"
+    desc: "Grant pode utilizar o aplicativo para negar o serviço a alguns ou a todos os usuários"
   -
     id: "COA"
     value: "A"

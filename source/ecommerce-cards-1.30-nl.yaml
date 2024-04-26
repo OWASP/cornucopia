@@ -35,7 +35,7 @@ suits:
   -
     id: "DV8"
     value: "8"
-    desc: "Sarah kan de gecentraliseerde reinigingsroutines omzeilen omdat ze niet volledig worden gebruikt"
+    desc: "Oana kan de gecentraliseerde reinigingsroutines omzeilen omdat ze niet volledig worden gebruikt"
   -
     id: "DV9"
     value: "9"
@@ -47,7 +47,7 @@ suits:
   -
     id: "DVJ"
     value: "J"
-    desc: "Dennis heeft controle over invoervalidatie, uitvoervalidatie of uitvoercoderingscode of routines zodat ze kunnen worden omzeild"
+    desc: "Toby heeft controle over invoervalidatie, uitvoervalidatie of uitvoercoderingscode of routines zodat ze kunnen worden omzeild"
   -
     id: "DVQ"
     value: "Q"
@@ -143,7 +143,7 @@ suits:
   -
     id: "SM7"
     value: "7"
-    desc: "Casey kan de sessie van Adam gebruiken nadat hij klaar is, omdat er geen uitlogfunctie is, of hij kan niet gemakkelijk uitloggen, of uitloggen beëindigt de sessie niet correct"
+    desc: "Graham kan de sessie van Adam gebruiken nadat hij klaar is, omdat er geen uitlogfunctie is, of hij kan niet gemakkelijk uitloggen, of uitloggen beëindigt de sessie niet correct"
   -
     id: "SM8"
     value: "8"
@@ -275,7 +275,7 @@ suits:
   -
     id: "CRQ"
     value: "Q"
-    desc: "Randolph kan de hoofdcryptografische geheimen openen of voorspellen"
+    desc: "Artim kan de hoofdcryptografische geheimen openen of voorspellen"
   -
     id: "CRK"
     value: "K"
@@ -323,7 +323,7 @@ suits:
   -
     id: "COX"
     value: "10"
-    desc: "Xavier kan de controles van de applicatie omzeilen omdat codeframeworks, bibliotheken en componenten kwaadaardige code of kwetsbaarheden bevatten (bijv. intern, commercieel kant-en-klaar, uitbesteed, open source, extern gelokaliseerd)"
+    desc: "Spyros kan de controles van de applicatie omzeilen omdat codeframeworks, bibliotheken en componenten kwaadaardige code of kwetsbaarheden bevatten (bijv. intern, commercieel kant-en-klaar, uitbesteed, open source, extern gelokaliseerd)"
   -
     id: "COJ"
     value: "J"
@@ -335,7 +335,7 @@ suits:
   -
     id: "COK"
     value: "K"
-    desc: "Gareth kan de applicatie gebruiken om service aan sommige of alle gebruikers te weigeren"
+    desc: "Grant kan de applicatie gebruiken om service aan sommige of alle gebruikers te weigeren"
   -
     id: "COA"
     value: "A"
