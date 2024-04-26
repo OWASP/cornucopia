@@ -35,7 +35,7 @@ suits:
   -
     id: "DV8"
     value: "8"
-    desc: "Sarah can bypass the centralized sanitization routines since they are not being used comprehensively"
+    desc: "Oana can bypass the centralized sanitization routines since they are not being used comprehensively"
   -
     id: "DV9"
     value: "9"
@@ -47,7 +47,7 @@ suits:
   -
     id: "DVJ"
     value: "J"
-    desc: "Dennis has control over input validation, output validation or output encoding code or routines so they can be bypassed"
+    desc: "Toby has control over input validation, output validation or output encoding code or routines so they can be bypassed"
   -
     id: "DVQ"
     value: "Q"
@@ -143,7 +143,7 @@ suits:
   -
     id: "SM7"
     value: "7"
-    desc: "Casey can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
+    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
   -
     id: "SM8"
     value: "8"
@@ -275,7 +275,7 @@ suits:
   -
     id: "CRQ"
     value: "Q"
-    desc: "Randolph can access or predict the master cryptographic secrets"
+    desc: "Artim can access or predict the master cryptographic secrets"
   -
     id: "CRK"
     value: "K"
@@ -323,7 +323,7 @@ suits:
   -
     id: "COX"
     value: "10"
-    desc: "Xavier can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
+    desc: "Spyros can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
   -
     id: "COJ"
     value: "J"
@@ -335,7 +335,7 @@ suits:
   -
     id: "COK"
     value: "K"
-    desc: "Gareth can utilize the application to deny service to some or all of its users"
+    desc: "Grant can utilize the application to deny service to some or all of its users"
   -
     id: "COA"
     value: "A"
