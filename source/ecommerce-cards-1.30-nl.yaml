@@ -440,7 +440,7 @@ paragraphs:
     text: "Cornucopia Ecommerce Website Edition wordt vermeld als een informatiebron in de PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, januari 2013."
   -
     value: "T00300"
-    text: "The card deck (pack)"
+    text: "Het kaartspel (pakket)"
   -
     value: "T00310"
     text: "In plaats van EoP's STRIDE-kleuren (sets van kaarten met bijpassende ontwerpen), zijn Cornucopia-kleuren gebaseerd op de structuur van de OWASP Secure Coding Practices - Quick Reference Guide (SCP), maar met extra aandacht voor secties in de OWASP Application Security Verification Standard, de OWASP Testing Guide en David Rook's Principles of Secure Development."
