@@ -473,7 +473,7 @@ paragraphs:
     text: "De inhoud is voornamelijk afkomstig uit het SCP."
   -
     value: "T00500"
-    text: "Toewijzingen"
+    text: "Mappings"
   -
     value: "T00510"
     text: "De andere driver voor Cornucopia is om de aanvallen te koppelen aan vereisten en verificatietechnieken."
