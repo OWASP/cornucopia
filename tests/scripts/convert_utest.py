@@ -1102,7 +1102,7 @@ class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_empty(self) -> None:
         input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "ecommerce-cards-1.21-en.yaml"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = ["ERROR:root:Could not get language data from yaml ecommerce-cards-1.21-en.yaml"]
+        want_logging_error_message = ["ERROR:root:Could not get  language data from yaml ecommerce-cards-1.21-en.yaml"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
@@ -1112,7 +1112,7 @@ class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_wrong_file_type(self) -> None:
         input_yaml_files = [os.sep.join([self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = ["ERROR:root:Could not get language data from yaml owasp_cornucopia_en.docx"]
+        want_logging_error_message = ["ERROR:root:Could not get  language data from yaml owasp_cornucopia_en.docx"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_mapping_dict = c.get_mapping_dict(input_yaml_files)
@@ -1582,7 +1582,7 @@ class TestGetSuitTagsAndKey(unittest.TestCase):
         want_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
         want_key = "cards"
 
-        got_tags, got_key = c.get_suit_tags_and_key(input_key)
+        got_tags, got_key = c.get_suit_tags_and_key(input_key, "ecommerce")
         self.assertEqual(want_tags, got_tags)
         self.assertEqual(want_key, got_key)
 
@@ -1591,7 +1591,16 @@ class TestGetSuitTagsAndKey(unittest.TestCase):
         want_tags = ["Common"]
         want_key = "sentences"
 
-        got_tags, got_key = c.get_suit_tags_and_key(input_key)
+        got_tags, got_key = c.get_suit_tags_and_key(input_key, "ecommerce")
+        self.assertEqual(want_tags, got_tags)
+        self.assertEqual(want_key, got_key)
+
+    def test_get_suit_tags_and_key_suits_for_masvs(self) -> None:
+        input_key = "suits"
+        want_tags = ["PC", "AA", "NS", "RS", "CR", "COM", "WC"]
+        want_key = "cards"
+
+        got_tags, got_key = c.get_suit_tags_and_key(input_key, "masvs")
         self.assertEqual(want_tags, got_tags)
         self.assertEqual(want_key, got_key)
 
