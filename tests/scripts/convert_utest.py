@@ -30,6 +30,38 @@ class TestSaveQRCodeImage(unittest.TestCase):
         mock_pyqrcode_create.assert_not_called()
 
 
+class TextGetValidEditionChoices(unittest.TestCase):
+    def test_get_valid_edition_choices(self) -> None:
+        c.convert_vars.args = argparse.Namespace(edition="all")
+        got_list = c.get_valid_edition_choices()
+        want_list = ["ecommerce", "masvs"]
+        self.assertListEqual(want_list, got_list)
+        c.convert_vars.args = argparse.Namespace(edition="masvs")
+        got_list = c.get_valid_edition_choices()
+        want_list = ["masvs"]
+        self.assertListEqual(want_list, got_list)
+        c.convert_vars.args = argparse.Namespace(edition="")
+        got_list = c.get_valid_edition_choices()
+        want_list = ["ecommerce"]
+        self.assertListEqual(want_list, got_list)
+
+
+class TextGetValidVersionChoices(unittest.TestCase):
+    def test_get_valid_edition_choices(self) -> None:
+        c.convert_vars.args = argparse.Namespace(version="all")
+        got_list = c.get_valid_version_choices()
+        want_list = ["1.00", "1.20", "1.21", "1.30"]
+        self.assertListEqual(want_list, got_list)
+        c.convert_vars.args = argparse.Namespace(version="latest")
+        got_list = c.get_valid_version_choices()
+        want_list = ["1.00", "1.30"]
+        self.assertListEqual(want_list, got_list)
+        c.convert_vars.args = argparse.Namespace(version="")
+        got_list = c.get_valid_version_choices()
+        want_list = ["1.00", "1.30"]
+        self.assertListEqual(want_list, got_list)
+
+
 class TestGetValidFileTypes(unittest.TestCase):
     def test_get_valid_file_types_idml(self) -> None:
         c.convert_vars.args = argparse.Namespace(outputfiletype="idml")
@@ -540,6 +572,12 @@ class TestGetReplacementData(unittest.TestCase):
                 },
             ],
         }
+
+    def test_has_no_matching_translations(self) -> None:
+        self.assertTrue(c.has_no_matching_translations({"test": {"test"}}, {"test"}, None))
+        self.assertTrue(c.has_no_matching_translations({"test": {"test"}}, None, {"test"}))
+        self.assertTrue(c.has_no_matching_translations(None, {"test"}, {"test"}))
+        self.assertFalse(c.has_no_matching_translations({"test": {"test"}}, {"test"}, {"test"}))
 
     def test_get_replacement_data_translation_meta(self) -> None:
         input_data_type = "translation"
