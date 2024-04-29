@@ -22,8 +22,8 @@ class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
-    VERSION_CHOICES: List[str] = ["1.20", "1.21", "1.30"]
-    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet"]
+    VERSION_CHOICES: List[str] = ["1.00", "1.20", "1.21", "1.30"]
+    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet", "masvs"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
@@ -221,9 +221,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="1.30",
         help=(
-            "Output version to produce. [`1.20`, `1.21`, `1.30`] "
+            "Output version to produce. [`1.00`, `1.20`, `1.21`, `1.30`] "
             "\nVersion 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1"
             "\nVersion 1.30 and 1.3x will deliver cards mapped to ASVS 4.0"
+            "\nVersion 1.00 and 1.0x will deliver cards mapped to MASVS 2.0"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
@@ -246,7 +247,6 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
-        # parser.add_argument(
         "-l",
         "--language",
         type=str,
@@ -266,16 +266,16 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
-        # parser.add_argument(
         "-s",
         "--style",
         type=str,
         choices=convert_vars.STYLE_CHOICES,
         default="static",
         help=(
-            "Output style to produce. [`static`, `dynamic` or `leaflet`]\n"
+            "Output style to produce. [`static`, `dynamic`, `masvs` or `leaflet`]\n"
             "Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list."
             "The leaflet contains the instructions"
+            "MASVS will print the Cornucopia MASVS/MASTG edition"
         ),
     )
     parser.add_argument(
@@ -440,7 +440,7 @@ def get_replacement_data(
                 data = {}
                 continue
     if not data or "suits" not in list(data.keys()):
-        logging.error("Could not get language data from yaml " + os.path.split(file)[1])
+        logging.error("Could not get " + language + " language data from yaml " + os.path.split(file)[1])
     logging.debug(f" --- Len = {len(data)}.")
     return data
 
@@ -467,7 +467,7 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
     """Loop through language file data and build up a find-replace dict"""
     data = {}
     for key in list(k for k in input_data.keys() if k != "meta"):
-        suit_tags, suit_key = get_suit_tags_and_key(key)
+        suit_tags, suit_key = get_suit_tags_and_key(key, input_data["meta"]["edition"])
         logging.debug(f" --- key = {key}.")
         logging.debug(f" --- suit_tags = {suit_tags}")
         logging.debug(f" --- suit_key = {suit_key}")
@@ -511,7 +511,11 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
 
 
 def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
-    reg_str: str = "^(OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028" + k.replace("$", "\\$").strip() + "$"
+    reg_str: str = (
+        "^(OWASP MASTG|OWASP MASVS|OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028"
+        + k.replace("$", "\\$").strip()
+        + "$"
+    )
     if re.match(reg_str, el_text.strip()):
         if len(v) >= 38:
             return el_text[: el_text.find("\u2028")] + ": " + v
@@ -531,12 +535,15 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
     return el_text
 
 
-def get_suit_tags_and_key(key: str) -> Tuple[List[str], str]:
+def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
     # Short tags to match the suits in the template documents
     suit_tags: List[str] = []
     suit_key: str = ""
-    if key == "suits":
+    if key == "suits" and edition == "ecommerce":
         suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
+        suit_key = "cards"
+    if key == "suits" and edition == "masvs":
+        suit_tags = ["PC", "AA", "NS", "RS", "CR", "COM", "WC"]
         suit_key = "cards"
     elif key == "paragraphs":
         suit_tags = ["Common"]
@@ -606,7 +613,7 @@ def get_template_doc(file_type: str, style: str = "static") -> str:
 
 
 def has_not_valid_file_style(style: str, file_type: str) -> bool:
-    if style == "leaflet" and file_type != "idml":
+    if (style == "leaflet" or style == "masvs") and file_type != "idml":
         return True
     return False
 
@@ -661,7 +668,9 @@ def get_valid_version_choices() -> List[str]:
 
 
 def get_valid_mapping_for_version(version: str) -> str:
-    return {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"}.get(version, "")
+    return {"1.00": "1.0", "1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2", "1.0": "1.0"}.get(
+        version, ""
+    )
 
 
 def get_valid_styles() -> List[str]:
