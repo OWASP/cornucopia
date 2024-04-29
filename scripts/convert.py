@@ -242,8 +242,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "\nVersion 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1"
             "\nVersion 1.30 and 1.3x will deliver cards mapped to ASVS 4.0"
             "\nVersion 1.00 and 1.0x will deliver cards mapped to MASVS 2.0"
-            "\nVersion all and 1.0x will deliver all versions"
-            "\nVersion latest and 1.0x will deliver the latest deck versions"
+            "\nVersion all will deliver all versions"
+            "\nVersion latest will deliver the latest deck versions"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
