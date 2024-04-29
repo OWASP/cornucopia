@@ -12,9 +12,10 @@ def TestOneInput(data):
     test = unittest.TestCase()
     fdp = atheris.FuzzedDataProvider(data)
     input_key = fdp.ConsumeUnicodeNoSurrogates(1024)
+    edition = fdp.ConsumeUnicodeNoSurrogates(1024)
     want_tags: List[str] = []
     want_key: str = ""
-    got_tags, got_key = c.get_suit_tags_and_key(input_key)
+    got_tags, got_key = c.get_suit_tags_and_key(input_key, edition)
     assert got_key == want_key
     test.assertEqual(want_tags, got_tags)
 
