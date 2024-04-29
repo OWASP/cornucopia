@@ -38,10 +38,13 @@ options:
                         Input (template) file to use.
                         Default=resources/templates/owasp_cornucopia_edition_lang_ver_template.(docx|idml)
                         Template type is dependent on output type (-t) or file (-o) specified.
-  -v {1.20,1.21,1.30}, --version {1.20,1.21,1.30}
+  -v {1.00,1.20,1.21,1.30}, --version {1.00,1.20,1.21,1.30}
                         Output version to produce. [`1.20`, `1.21`, `1.30`]
                         Version 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1
                         Version 1.30 and 1.3x will deliver cards mapped to ASVS 4.0
+                        Version 1.00 and 1.0x will deliver cards mapped to MASVS 2.0
+                        Version all will deliver all versions
+                        Version latest will deliver the latest deck versions
   -t {all,docx,pdf,idml}, --outputfiletype {all,docx,pdf,idml}
                         Type of file to output. Default = docx. If specified, this overwrites the output file extension
   -o OUTPUTFILE, --outputfile OUTPUTFILE
@@ -52,9 +55,12 @@ options:
                         Template will attempt to create a template from the english input file and 
                         replacing strings with the template lookup codes
   -d, --debug           Output additional information to debug script
-  -s {all,static,dynamic}, --style {all,static,dynamic}
-                        Output style to produce. [`static` or `dynamic`] 
-                        Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.
+  -e {all,ecommerce,masvs}, --edition {all,ecommerce,masvs}
+                        Output decks to produce. [`all`, `ecommerce` or `masvs`]
+                        The various Cornucopia decks. `web` will give you the web ecommerce edition.`masvs` will give you the MASVS/MASTG edition.
+  -s {all,static,dynamic,leaflet}, --style {all,static,dynamic,leaflet}
+                        Output style to produce. [`static`, `dynamic` or `leaflet`] 
+                        Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.The leaflet contains the instructions
   -u URL, --url URL     Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID). 
 ```
 
