@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Validation des Données & Encodage"
+  name: "VALIDATION DES DONNÉES & ENCODAGE"
   cards:
   -
     id: "DV2"
@@ -62,7 +62,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
 -
-  name: "Authentification"
+  name: "AUTHENTIFICATION"
   cards:
   -
     id: "AC2"
@@ -118,7 +118,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur l'Authentification"
 -
-  name: "Gestion des Sessions"
+  name: "GESTION DES SESSIONS"
   cards:
   -
     id: "SM2"
@@ -174,7 +174,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Gestion des Sessions"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Gestion des Sessions, et sur la prévention des Cross Site Request Forgery (CSRF)"
 -
-  name: "Habilitation"
+  name: "HABILITATION"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre les Habilitations"
     misc: "Apprenez-en plus à ce sujet dans les guides gratuits OWASP sur le Développement et les Tests"
 -
-  name: "Cryptographie"
+  name: "CRYPTOGRAPHIE"
   cards:
   -
     id: "CR2"
@@ -286,7 +286,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur le Stockage Cryptographique et la Protection de la Couche de Transport"
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -447,13 +447,13 @@ paragraphs:
     text: "Ceux-ci ont permis de constituer cinq couleurs, et une sixième, appelée « Cornucopia » a été créée pour tout le reste :"
   -
     value: "T00330"
-    text: "Validation des données et encodage (VE -EN)"
+    text: "Validation des Données & l'Encodage (VE -EN)"
   -
     value: "T00340"
     text: "Authentification (AT -EN)"
   -
     value: "T00350"
-    text: "Gestion des sessions (SM -EN)"
+    text: "Gestion des Sessions (SM -EN)"
   -
     value: "T00360"
     text: "Habilitation (AZ -EN)"
@@ -789,7 +789,7 @@ paragraphs:
     text: "Vos standards et librairies de code"
   -
     value: "T02230"
-    text: "Validation des données et encodage"
+    text: "Validation des Données & l'Encodage"
   -
     value: "T02240"
     text: "[votre liste]"
@@ -834,7 +834,7 @@ paragraphs:
     text: "Exigences de conformité"
   -
     value: "T02430"
-    text: "Validation des données et encodage"
+    text: "Validation des Données & l'Encodage"
   -
     value: "T02440"
     text: "[liste de conformité]"
@@ -993,7 +993,7 @@ paragraphs:
     text: "10. Que doivent faire les joueurs lorsqu’ils possèdent un As qui stipule “Vous avez inventé une nouvelle attaque contre…”?"
   -
     value: "T03010"
-    text: "Le joueur peut imaginer n’importe quelle attaque qu’il juge valide, à condition que le thème de la couleur (ex : Validation des Données et Encodage) corresponde."
+    text: "Le joueur peut imaginer n’importe quelle attaque qu’il juge valide, à condition que le thème de la couleur (ex : Validation des Données & l'Encodage) corresponde."
   -
     value: "T03020"
     text: "Les joueurs débutants seront plus à l’aise sans ces cartes (voir FAQ 9)."

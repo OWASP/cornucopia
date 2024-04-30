@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Validación de datos & Codificación"
+  name: "VALIDACIÓN DE DATOS & CODIFICACIÓN"
   cards:
   -
     id: "DV2"
@@ -59,10 +59,10 @@ suits:
   -
     id: "DVA"
     value: "A"
-    desc: "Has creado un nuevo ataque contra validación de datos y codificación"
+    desc: "Has creado un nuevo ataque contra Validación de Datos y Codificación"
     misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
 -
-  name: "Autenticación"
+  name: "AUTENTICACIÓN"
   cards:
   -
     id: "AC2"
@@ -115,10 +115,10 @@ suits:
   -
     id: "ACA"
     value: "A"
-    desc: "Usted tiene inventado un nuevo ataque contra la autenticación"
+    desc: "Usted tiene inventado un nuevo ataque contra la Autenticación"
     misc: "Leer mas sobre este tema en OWASP's free Authentication Cheat Sheet"
 -
-  name: "Gestión de Sesión"
+  name: "GESTIÓN DE SESIÓN"
   cards:
   -
     id: "SM2"
@@ -171,10 +171,10 @@ suits:
   -
     id: "SMA"
     value: "A"
-    desc: "Has inventado un nuevo ataque contra la gestión de sesión"
+    desc: "Has inventado un nuevo ataque contra la Gestión de Sesión"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
-  name: "Autorización"
+  name: "AUTORIZACIÓN"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "Has inventado un nuevo ataque contra la Autorización"
     misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
-  name: "Criptografía"
+  name: "CRIPTOGRAFÍA"
   cards:
   -
     id: "CR2"
@@ -286,7 +286,7 @@ suits:
     desc: "Has inventado un nuevo ataque contra la Criptografía"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -342,7 +342,7 @@ suits:
     desc: "Has inventado un nuevo ataque de cualquier tipo"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
-  name: "Joker"
+  name: "COMODÍN"
   cards:
   -
     id: "JOA"
@@ -449,22 +449,22 @@ paragraphs:
     text: "Estos proporcionaron cinco dominios, y un sexto llamado \"Cornucopia\" fue creado para todo lo demás:"
   -
     value: "T00330"
-    text: "Validación de Data"
+    text: "Validación de Datos & Codificación (VE)"
   -
     value: "T00340"
-    text: "Autenticación"
+    text: "Autenticación (AT)"
   -
     value: "T00350"
-    text: "Gestión de Sesiones"
+    text: "Gestión de Sesión (SM)"
   -
     value: "T00360"
-    text: "Autorización"
+    text: "Autorización (AZ)"
   -
     value: "T00370"
-    text: "Criptografía"
+    text: "Criptografía (CR)"
   -
     value: "T00380"
-    text: "Cornucopia"
+    text: "Cornucopia (C)"
   -
     value: "T00390"
     text: "Similar a las cartas de póker, cada palo contiene 13 cartas (As, 2 10, Jack, Queen y King) pero, a diferencia de EoP, también hay dos cartas Joker. "
@@ -791,7 +791,7 @@ paragraphs:
     text: "Tus estándares de Codificación y Librerías"
   -
     value: "T02230"
-    text: "Validación de Data"
+    text: "Validación de Datos & Codificación"
   -
     value: "T02240"
     text: "[lista tuya]"
@@ -803,7 +803,7 @@ paragraphs:
     text: "[lista tuya]"
   -
     value: "T02270"
-    text: "Gestión de Sesiones"
+    text: "Gestión de Sesión"
   -
     value: "T02280"
     text: "[lista tuya]"
@@ -836,7 +836,7 @@ paragraphs:
     text: "Requerimientos de Cumplimiento"
   -
     value: "T02430"
-    text: "Validación de Data"
+    text: "Validación de Datos & Codificación"
   -
     value: "T02440"
     text: "[lista tuya]"
@@ -848,7 +848,7 @@ paragraphs:
     text: "[lista tuya]"
   -
     value: "T02470"
-    text: "Gestión de Sesiones"
+    text: "Gestión de Sesion"
   -
     value: "T02480"
     text: "[lista tuya]"
@@ -995,7 +995,7 @@ paragraphs:
     text: "10. ¿Qué deben hacer los jugadores cuando tienen una carta As que dice “inventó un nuevo ataque X”?"
   -
     value: "T03010"
-    text: "El jugador puede inventar cualquier ataque que considere válido, pero debe coincidir con el palo de la carta (por ejemplo, validación y codificación de datos)."
+    text: "El jugador puede inventar cualquier ataque que considere válido, pero debe coincidir con el palo de la carta (por ejemplo, Validación de Datos y Codificación)."
   -
     value: "T03020"
     text: "Para los jugadores nuevos en el juego, puede ser mejor eliminarlos para empezar (consulte también la pregunta frecuente 9)."

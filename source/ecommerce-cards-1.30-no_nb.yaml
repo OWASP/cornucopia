@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Datavalidering og -koding"
+  name: "DATAVALIDERING OG TEGNKODING"
   cards:
   -
     id: "DV2"
@@ -59,10 +59,10 @@ suits:
   -
     id: "DVA"
     value: "A"
-    desc: "Du har funnet opp et nytt angrep mot datavalidering og -koding"
+    desc: "Du har funnet opp et nytt angrep mot Datavalidering og Tegnkoding"
     misc: "Les mer om dette emnet i OWASPs gratis jukseark om “Input Validation, XSS Prevention, DOM-basert XSS Prevention, SQL Injection Prevention og Query Parameterization”"
 -
-  name: "Autentisering"
+  name: "AUTENTISERING"
   cards:
   -
     id: "AC2"
@@ -115,10 +115,10 @@ suits:
   -
     id: "ACA"
     value: "A"
-    desc: "Du har funnet opp et nytt angrep mot autentisering"
+    desc: "Du har funnet opp et nytt angrep mot Autentisering"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Authentication”"
 -
-  name: "Sesjonshåndtering"
+  name: "SESJONSHÅNDTERING"
   cards:
   -
     id: "SM2"
@@ -174,7 +174,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Sesjonshåndtering"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Session Management, and Cross Site Request Forgery (CSRF) Prevention”"
 -
-  name: "Autorisasjon"
+  name: "AUTORISASJON"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Autorisasjon"
     misc: "Les mer om dette emnet i “OWASP's Development and Testing Guides”"
 -
-  name: "Kryptografi"
+  name: "KRYPTOGRAFI"
   cards:
   -
     id: "CR2"
@@ -283,10 +283,10 @@ suits:
   -
     id: "CRA"
     value: "A"
-    desc: "Du har funnet opp et nytt angrep mot kryptografi"
+    desc: "Du har funnet opp et nytt angrep mot Kryptografi"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Cryptographic Storage, and Transport Layer Protection”"
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -449,7 +449,7 @@ paragraphs:
     text: "Disse har resultert i fem farger, og en sjette kalt “Cornucopia” som har blitt opprettet for alt annet: "
   -
     value: "T00330"
-    text: "Datavalidering og -koding (VE)"
+    text: "Datavalidering og Tegnkoding (VE)"
   -
     value: "T00340"
     text: "Autentisering (AT)"
@@ -791,7 +791,7 @@ paragraphs:
     text: "Dine kodestandarder og biblioteker"
   -
     value: "T02230"
-    text: "Datavalidering og koding"
+    text: "Datavalidering og Tegnkoding"
   -
     value: "T02240"
     text: "[din liste]"
@@ -836,7 +836,7 @@ paragraphs:
     text: "Krav knyttet til overholdelse av standarder, lover og regler"
   -
     value: "T02430"
-    text: "Datavalidering og koding"
+    text: "Datavalidering og Tegnkoding"
   -
     value: "T02440"
     text: "[overholdelsesliste iht. standarder, lover og regler]"
@@ -995,7 +995,7 @@ paragraphs:
     text: "10. Hva bør spillere gjøre når de har et ess-kort som sier “oppfunnet et nytt X angrep”?"
   -
     value: "T03010"
-    text: "Spilleren kan gjøre opp ethvert angrep de tror er gyldige, men må matche fargen på kortet (f.eks. datavalidering og koding)."
+    text: "Spilleren kan gjøre opp ethvert angrep de tror er gyldige, men må matche fargen på kortet (f.eks. datavalidering og Tegnkoding)."
   -
     value: "T03020"
     text: "Med spillere som er nye i spillet, kan det være bedre å fjerne disse til å begynne med (se også FAQ 9)."

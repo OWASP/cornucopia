@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Validação de Dados de Entrada e Codificação de Dados de Saída"
+  name: "VALIDAÇÃO E CODIFICAÇÃO DE DADOS"
   cards:
   -
     id: "DV2"
@@ -59,10 +59,10 @@ suits:
   -
     id: "DVA"
     value: "A"
-    desc: "Você inventou um novo ataque contra a Validação de Dados de Entrada e Codificação de Dados de Saída"
+    desc: "Você inventou um novo ataque contra a Validação e Codificação de Dados"
     misc: "Leia mais sobre este tópico em OWASP Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
 -
-  name: "Autenticação e Gerenciamento de Credenciais"
+  name: "AUTENTICAÇÃO"
   cards:
   -
     id: "AC2"
@@ -115,10 +115,10 @@ suits:
   -
     id: "ACA"
     value: "A"
-    desc: "Você inventou um novo ataque contra a Autenticação e Gerenciamento de Credenciais"
+    desc: "Você inventou um novo ataque contra a Autenticação"
     misc: "Leia mais sobre este tópico em OWASP Authentication Cheat Sheet"
 -
-  name: "Gerenciamento de Sessões"
+  name: "GERENCIAMENTO DE SESSÕES"
   cards:
   -
     id: "SM2"
@@ -174,7 +174,7 @@ suits:
     desc: "Você inventou um novo ataque contra o Gerenciamento de Sessões"
     misc: "Leia mais sobre este tópico em OWASP Session Management Cheat Sheet e prevenção de ataques do tipo Cross Site Request Forgery (CSRF)"
 -
-  name: "Controle de Acessos"
+  name: "CONTROLE DE ACESSOS"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "Você inventou um novo ataque contra Controle de Acessos"
     misc: "Leia mais sobre este tópico em OWASP Development Guide e OWAPS Testing Guide"
 -
-  name: "Práticas de Criptografia"
+  name: "PRÁTICAS DE CRIPTOGRAFIA"
   cards:
   -
     id: "CR2"
@@ -283,10 +283,10 @@ suits:
   -
     id: "CRA"
     value: "A"
-    desc: "Você inventou um novo ataque contra Práticas de Criptografia"
+    desc: "Você inventou um novo ataque contra Criptografia"
     misc: "Leia mais sobre este tópico em OWASP Cryptographic Storage Cheat Sheet e OWASP Transport Layer Protection Cheat Sheet"
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -447,19 +447,19 @@ paragraphs:
     text: "Estes forneceram cinco naipes, e um sexto chamado “Cornucópia” foi criado para todo o resto:"
   -
     value: "T00330"
-    text: "Data validation and encoding (VE)"
+    text: "Validação e Codificação de Dados (VE)"
   -
     value: "T00340"
-    text: "Authentication (AT)"
+    text: "Autenticação (AT)"
   -
     value: "T00350"
-    text: "Session Management (SM)"
+    text: "Gerenciamento de Sessões (SM)"
   -
     value: "T00360"
-    text: "Authorization (AZ)"
+    text: "Controle de Acessos (AZ)"
   -
     value: "T00370"
-    text: "Cryptography (CR)"
+    text: "Criptografia (C)"
   -
     value: "T00380"
     text: "Cornucopia (C)"
