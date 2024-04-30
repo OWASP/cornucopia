@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Data validation & encoding"
+  name: "DATA VALIDATION & ENCODING"
   cards:
   -
     id: "DV2"
@@ -62,7 +62,7 @@ suits:
     desc: "You have invented a new attack against Data Validation and Encoding"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
 -
-  name: "Authentication"
+  name: "AUTHENTICATION"
   cards:
   -
     id: "AC2"
@@ -118,7 +118,7 @@ suits:
     desc: "You have invented a new attack against Authentication"
     misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
 -
-  name: "Session management"
+  name: "SESSION MANAGEMENT"
   cards:
   -
     id: "SM2"
@@ -174,7 +174,7 @@ suits:
     desc: "You have invented a new attack against Session Management"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
-  name: "Authorization"
+  name: "AUTHORIZATION"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "You have invented a new attack against Authorization"
     misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
-  name: "Cryptography"
+  name: "CRYPTOGRAPHY"
   cards:
   -
     id: "CR2"
@@ -286,7 +286,7 @@ suits:
     desc: "You have invented a new attack against Cryptography"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -342,7 +342,7 @@ suits:
     desc: "You have invented a new attack of any type"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
-  name: "Wild Card"
+  name: "WILD CARD"
   cards:
   -
     id: "JOA"
@@ -452,7 +452,7 @@ paragraphs:
     text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
   -
     value: "T00330"
-    text: "Data validation and encoding (VE)"
+    text: "Data Validation and Encoding (VE)"
   -
     value: "T00340"
     text: "Authentication (AT)"
@@ -797,7 +797,7 @@ paragraphs:
     text: "Your coding standards and libraries"
   -
     value: "T02230"
-    text: "Data validation and encoding"
+    text: "Data Validation and Encoding"
   -
     value: "T02240"
     text: "[your list]"
@@ -809,7 +809,7 @@ paragraphs:
     text: "[your list]"
   -
     value: "T02270"
-    text: "Session management"
+    text: "Session Management"
   -
     value: "T02280"
     text: "[your list]"
@@ -842,7 +842,7 @@ paragraphs:
     text: "Compliance requirement"
   -
     value: "T02430"
-    text: "Data validation and encoding"
+    text: "Data validation and Encoding"
   -
     value: "T02440"
     text: "[compliance list]"
@@ -854,7 +854,7 @@ paragraphs:
     text: "[compliance list]"
   -
     value: "T02470"
-    text: "Session management"
+    text: "Session Management"
   -
     value: "T02480"
     text: "[compliance list]"
@@ -1001,7 +1001,7 @@ paragraphs:
     text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
   -
     value: "T03010"
-    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. data validation and encoding)."
+    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Data Validation and Encoding)."
   -
     value: "T03020"
     text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."

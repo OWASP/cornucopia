@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Datavalidatie & codering"
+  name: "DATAVALIDATIE & -CODERING"
   cards:
   -
     id: "DV2"
@@ -59,10 +59,10 @@ suits:
   -
     id: "DVA"
     value: "A"
-    desc: "Je hebt een nieuwe aanval uitgevonden tegen gegevensvalidatie en -codering"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Gegevensvalidatie en -codering"
     misc: "Lees meer over dit onderwerp in OWASP's gratis spiekbriefjes over invoervalidatie, XSS-preventie, op DOM gebaseerde XSS-preventie, SQL-injectiepreventie en queryparameterisatie"
 -
-  name: "Authenticatie"
+  name: "AUTHENTICATIE"
   cards:
   -
     id: "AC2"
@@ -115,10 +115,10 @@ suits:
   -
     id: "ACA"
     value: "A"
-    desc: "Je hebt een nieuwe aanval tegen authenticatie uitgevonden"
+    desc: "Je hebt een nieuwe aanval tegen Authenticatie uitgevonden"
     misc: "Lees meer over dit onderwerp in de gratis verificatie-cheatsheet van OWASP"
 -
-  name: "Sessiebeheer"
+  name: "SESSIEBEHEER"
   cards:
   -
     id: "SM2"
@@ -174,7 +174,7 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Session Management uitgevonden"
     misc: "Lees meer over dit onderwerp in OWASP's gratis spiekbriefjes over sessiebeheer en preventie van Cross Site Request Forgery (CSRF)"
 -
-  name: "Autorisatie"
+  name: "AUTORISATIE"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Autorisatie uitgevonden"
     misc: "Lees meer over dit onderwerp in de ontwikkelings- en testhandleidingen van OWASP"
 -
-  name: "Cryptografie"
+  name: "CRYPTOGRAFIE"
   cards:
   -
     id: "CR2"
@@ -283,10 +283,10 @@ suits:
   -
     id: "CRA"
     value: "A"
-    desc: "Je hebt een nieuwe aanval tegen cryptografie uitgevonden"
+    desc: "Je hebt een nieuwe aanval tegen Cryptografie uitgevonden"
     misc: "Lees meer over dit onderwerp in de gratis spiekbriefjes van OWASP over cryptografische opslag en bescherming van transportlagen"
 -
-  name: "hoorn des overvloeds"
+  name: "HOORN DES OVERVLOEDS"
   cards:
   -
     id: "CO2"
@@ -342,7 +342,7 @@ suits:
     desc: "Je hebt een nieuwe aanval van elk type uitgevonden"
     misc: "Lees meer over applicatiebeveiliging in OWASP's gratis Guides on Requirements, Development, Code Review and Testing, de Cheat Sheet-serie en het Open Software Assurance Maturity Model"
 -
-  name: "Wild Card"
+  name: "WILDE KAART"
   cards:
   -
     id: "JOA"
@@ -351,7 +351,7 @@ suits:
     desc: "Alice kan de applicatie gebruiken om systemen en gegevens van gebruikers aan te vallen"
     misc: "Heb je erover nagedacht om individueel OWASP-lid te worden? Alle tools, begeleiding en lokale bijeenkomsten zijn gratis voor iedereen, maar individueel lidmaatschap helpt het werk van OWASP te ondersteunen"
   -
-    id: "VACATURE"
+    id: "JOB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob kan de applicatie beïnvloeden, wijzigen of beïnvloeden zodat deze niet langer voldoet aan wettelijke, reglementaire, contractuele of andere organisatorische mandaten"
@@ -449,7 +449,7 @@ paragraphs:
     text: "Deze leverden vijf kleuren op, en een zesde genaamd “Cornucopia“ werd gemaakt voor al het andere: "
   -
     value: "T00330"
-    text: "Data validatie en codering (VE)"
+    text: "Datavalidatie & -codering (VE)"
   -
     value: "T00340"
     text: "Authenticatie (AT)"
@@ -464,7 +464,7 @@ paragraphs:
     text: "Cryptografie (CR)"
   -
     value: "T00380"
-    text: "Hoorn des overvloeds (C)"
+    text: "Hoorn des Overvloeds (C)"
   -
     value: "T00390"
     text: "Net als bij pokerkaarten, bevat elke reeks 13 kaarten (Aas, 2-10, Boer, Vrouw en Koning), maar in tegenstelling tot EoP zijn er ook twee Joker-kaarten."
@@ -680,7 +680,7 @@ paragraphs:
     text: "Schud de stapel en deel alle kaarten"
   -
     value: "T01560"
-    text: "Om te beginnen, kies willekeurig een speler die de eerste kaart zal spelen - ze kunnen elke kaart uit hun hand spelen behalve die van de troefkleur - Hoorn des overvloeds"
+    text: "Om te beginnen, kies willekeurig een speler die de eerste kaart zal spelen - ze kunnen elke kaart uit hun hand spelen behalve die van de troefkleur - Hoorn des Overvloeds"
   -
     value: "T01570"
     text: "Om een ​​kaart te spelen, moet elke speler deze hardop voorlezen en uitleggen (zie het online Wiki Deck voor tips) hoe de dreiging van toepassing kan zijn (de speler krijgt een punt voor aanvallen die mogelijk werken waarvan de groep denkt dat een bruikbare bug) - probeer in dit stadium geen oplossingen te bedenken en sluit een bedreiging niet uit alleen omdat u denkt dat deze al is verholpen - iemand noteert de kaart en noteert de problemen die aan de orde zijn gesteld"
@@ -791,7 +791,7 @@ paragraphs:
     text: "Uw codeerstandaarden en bibliotheken"
   -
     value: "T02230"
-    text: "Datavalidatie en codering"
+    text: "Datavalidatie & -codering"
   -
     value: "T02240"
     text: "[uw lijst]"
@@ -821,7 +821,7 @@ paragraphs:
     text: "[uw lijst]"
   -
     value: "T02330"
-    text: "Hoorn des overvloeds"
+    text: "Hoorn des Overvloeds"
   -
     value: "T02340"
     text: "[uw lijst]"
@@ -836,7 +836,7 @@ paragraphs:
     text: "Compliance-eis"
   -
     value: "T02430"
-    text: "Datavalidatie en codering"
+    text: "Datavalidatie & -codering"
   -
     value: "T02440"
     text: "[nalevingslijst]"
@@ -866,7 +866,7 @@ paragraphs:
     text: "[nalevingslijst]"
   -
     value: "T02530"
-    text: "Hoorn des overvloeds"
+    text: "Hoorn des Overvloeds"
   -
     value: "T02540"
     text: "[nalevingslijst]"
@@ -995,7 +995,7 @@ paragraphs:
     text: "10. Wat moeten spelers doen als ze een aaskaart hebben met de tekst 'inve'een nieuwe X-aanval gedaan”?"
   -
     value: "T03010"
-    text: "De speler kan elke aanval verzinnen waarvan hij denkt dat deze geldig is, maar moet overeenkomen met de kleur van de kaart (bijvoorbeeld gegevensvalidatie en codering)."
+    text: "De speler kan elke aanval verzinnen waarvan hij denkt dat deze geldig is, maar moet overeenkomen met de kleur van de kaart (bijvoorbeeld Gegevensvalidatie en -codering)."
   -
     value: "T03020"
     text: "Bij spelers die nieuw zijn in het spel, kan het beter zijn om deze te verwijderen om mee te beginnen (zie ook FAQ 9)."
