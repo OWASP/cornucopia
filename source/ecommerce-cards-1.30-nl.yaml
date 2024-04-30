@@ -51,7 +51,7 @@ suits:
   -
     id: "DVQ"
     value: "Q"
-    desc: "Geoff kan gegevens in een client- of device-side-interpreter injecteren omdat een geparametriseerde interface niet wordt gebruikt, of niet correct is geïmplementeerd, of de gegevens niet correct zijn gecodeerd voor de context, of er is geen beperkend beleid ten aanzien van code of gegevens omvat"
+    desc: "Xavier kan gegevens in een client- of device-side-interpreter injecteren omdat een geparametriseerde interface niet wordt gebruikt, of niet correct is geïmplementeerd, of de gegevens niet correct zijn gecodeerd voor de context, of er is geen beperkend beleid ten aanzien van code of gegevens omvat"
   -
     id: "DVK"
     value: "K"
@@ -107,7 +107,7 @@ suits:
   -
     id: "ACQ"
     value: "Q"
-    desc: "Jaime kan authenticatie omzeilen omdat het niet even strikt wordt afgedwongen voor alle soorten authenticatiefunctionaliteit (bijv. registreren, wachtwoordwijziging, wachtwoordherstel, uitloggen, beheer) of voor alle versies/kanalen (bijv. mobiele website, mobiele app, volledige website, API, callcenter)"
+    desc: "Johan kan authenticatie omzeilen omdat het niet even strikt wordt afgedwongen voor alle soorten authenticatiefunctionaliteit (bijv. registreren, wachtwoordwijziging, wachtwoordherstel, uitloggen, beheer) of voor alle versies/kanalen (bijv. mobiele website, mobiele app, volledige website, API, callcenter)"
   -
     id: "ACK"
     value: "K"
