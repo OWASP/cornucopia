@@ -51,7 +51,7 @@ suits:
   -
     id: "DVQ"
     value: "Q"
-    desc: "Geoff kan injisere data inn i en datatolk på klient- eller enhetssiden fordi et parameterisert grensesnitt ikke blir brukt, eller ikke har blitt implementert riktig, eller fordi dataene ikke er kodet riktig innenfor konteksten, eller det er ingen restriktive retningslinjer for kode eller datainkludering"
+    desc: "Xavier kan injisere data inn i en datatolk på klient- eller enhetssiden fordi et parameterisert grensesnitt ikke blir brukt, eller ikke har blitt implementert riktig, eller fordi dataene ikke er kodet riktig innenfor konteksten, eller det er ingen restriktive retningslinjer for kode eller datainkludering"
   -
     id: "DVK"
     value: "K"
@@ -107,7 +107,7 @@ suits:
   -
     id: "ACQ"
     value: "Q"
-    desc: "Jaime kan omgå autentisering fordi den ikke håndheves med like strenghet for alle typer autentiseringsrelatert funksjonalitet (f.eks. registrering, passordendring, passordgjenoppretting, utlogging, administrasjon) eller på tvers av alle versjoner/kanaler (f.eks. mobil nettsted, mobilapp, nettsted, API, hjelpesenter)"
+    desc: "Johan kan omgå autentisering fordi den ikke håndheves med like strenghet for alle typer autentiseringsrelatert funksjonalitet (f.eks. registrering, passordendring, passordgjenoppretting, utlogging, administrasjon) eller på tvers av alle versjoner/kanaler (f.eks. mobil nettsted, mobilapp, nettsted, API, hjelpesenter)"
   -
     id: "ACK"
     value: "K"
