@@ -51,7 +51,7 @@ suits:
   -
     id: "DVQ"
     value: "Q"
-    desc: "Geoff can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes"
+    desc: "Xavier can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes"
   -
     id: "DVK"
     value: "K"
@@ -107,7 +107,7 @@ suits:
   -
     id: "ACQ"
     value: "Q"
-    desc: "Jaime can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
+    desc: "Johan can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
   -
     id: "ACK"
     value: "K"
