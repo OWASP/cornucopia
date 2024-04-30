@@ -38,3 +38,7 @@ npm-debug.log
 
 # Ignore any VSCode settings
 .vscode
+
+.idea/
+
+copi.iml
