@@ -55,7 +55,7 @@ suits:
   -
     id: "PCK"
     value: "K"
-    desc: "Isreal can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
+    desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
   -
     id: "PCA"
     value: "A"
@@ -355,7 +355,7 @@ suits:
     value: "JokerB"
     card: "Joker"
     desc: "Bob can use the app installed on Alice's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Alice, without consent and/or notification"
-    misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free MASTG reference applications on the OWASP MAS website"
+    misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
 paragraphs:
 -
   name: "Common"
