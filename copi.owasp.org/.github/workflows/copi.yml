@@ -24,7 +24,7 @@ jobs:
         image: postgres:14
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: y9EAY7xeVucjM2yM
+          POSTGRES_PASSWORD: "$POSTGRES_TEST_PWD"
           POSTGRES_DB: copi_test
         ports:
           - 5432:5432
