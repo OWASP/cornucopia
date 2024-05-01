@@ -44,7 +44,7 @@
             <%= if player_card == nil do %>
               <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
             <% else %>
-            <%= render(CopiWeb.CardView, "show.html", card: player_card.card) %>
+            <CopiWeb.CardHTML.show card={player_card.card} />
             <% end %>
           </div>
         </div>

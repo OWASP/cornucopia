@@ -1,15 +1,19 @@
 <h1>How to play</h1>
 
-<span><%= live_patch gettext("Enough already, let's start!"), to: Routes.game_index_path(@socket, :new), class: "button" %></span>
+<.link patch={~p"/games/new"}>
+  <.button><%= gettext("Enough already, let's start!") %></.button>
+</.link>
 
-<%= if @live_action in [:new, :edit] do %>
-  <%= live_modal @socket, CopiWeb.GameLive.FormComponent,
-    id: @game.id || :new,
-    title: @page_title,
-    action: @live_action,
-    game: @game,
-    return_to: Routes.game_index_path(@socket, :index) %>
-<% end %>
+<.modal :if={@live_action in [:new, :edit]} id="game-modal" show on_cancel={JS.patch(~p"/games")}>
+  <.live_component
+    module={CopiWeb.GameLive.FormComponent}
+    id={@game.id || :new}
+    title={@page_title}
+    action={@live_action}
+    game={@game}
+    patch={~p"/games"}
+  />
+</.modal>
 
 <h2>Preparations</h2>
 <ol>
@@ -47,4 +51,6 @@
   <li>Create user stories, specifications and test cases as required for your development methodology</li>
 </ol>
 
-<span><%= live_patch gettext("Ok I've read it all, let's go!"), to: Routes.game_index_path(@socket, :new), class: "button" %></span>
+<.link patch={~p"/games/new"}>
+  <.button><%= gettext("Ok I've read it all, let's go!") %></.button>
+</.link>

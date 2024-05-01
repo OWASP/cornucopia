@@ -10,7 +10,7 @@ defmodule CopiWeb.GameLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign_form(changeset)}
   end
 
   @impl true
@@ -20,11 +20,15 @@ defmodule CopiWeb.GameLive.FormComponent do
       |> Cornucopia.change_game(game_params)
       |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+      {:noreply, assign_form(socket, changeset)}
   end
 
   def handle_event("save", %{"game" => game_params}, socket) do
     save_game(socket, socket.assigns.action, game_params)
+  end
+
+  defp assign_form(socket, %Ecto.Changeset{} = changeset) do
+    assign(socket, :form, to_form(changeset))
   end
 
   defp save_game(socket, :edit, game_params) do
@@ -36,7 +40,7 @@ defmodule CopiWeb.GameLive.FormComponent do
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, :changeset, changeset)}
+        {:noreply, assign_form(socket, changeset)}
     end
   end
 
@@ -49,7 +53,7 @@ defmodule CopiWeb.GameLive.FormComponent do
          |> push_redirect(to: Routes.game_show_path(socket, :show, game))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        {:noreply, assign_form(socket, changeset)}
     end
   end
 end

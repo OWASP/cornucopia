@@ -12,4 +12,10 @@ defmodule CopiWeb.CardController do
     card = Cornucopia.get_card_by_external_id!(id)
     render(conn, "show.html", card: card)
   end
+
+  def format_capec(refs) do
+    refs
+    #|> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
+    #|> Enum.intersperse(", ")
+  end
 end

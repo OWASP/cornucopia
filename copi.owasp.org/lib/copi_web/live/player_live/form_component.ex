@@ -1,5 +1,6 @@
 defmodule CopiWeb.PlayerLive.FormComponent do
   use CopiWeb, :live_component
+  use Phoenix.Component
 
   alias Copi.Cornucopia
 

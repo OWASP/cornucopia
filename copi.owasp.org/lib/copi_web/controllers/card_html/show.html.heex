@@ -43,7 +43,7 @@
       <dt>CAPEC</dt>
       <dd>
         <%= if @card.capec != nil and Enum.count(@card.capec) > 0 do %>
-          <%= format_capec(@card.capec) %>
+          <%= Enum.join @card.capec, ", " %>
         <% else %>
           &ndash;
         <% end %>
