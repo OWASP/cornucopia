@@ -475,8 +475,9 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
         for suit, suit_tag in zip(input_data[key], suit_tags):
             logging.debug(f" --- suit [name] = {suit['name']}")
             logging.debug(f" --- suit_tag = {suit_tag}")
-            tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
-            data.update(tag_for_suit_name)
+            if mappings == False:
+                tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
+                data.update(tag_for_suit_name)
 
             card_tag = ""
             for card in suit[suit_key]:

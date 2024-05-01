@@ -355,7 +355,7 @@ suits:
     value: "JokerB"
     card: "Joker"
     desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
-    misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab"
+    misc: "Examine vulnerabilities and discover how they can be fixed using the free OWASP Juice Shop, Security Shepherd, or using the online challenges in the free OWASP Hacking-lab"
 paragraphs:
 -
   name: "Common"
@@ -368,7 +368,7 @@ paragraphs:
     text: "Ecommerce Website Edition v1.30-EN"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia Ecommerce Website Edition v1.30-EN"
+    text: "OWASP® Cornucopia Ecommerce Website Edition v1.30-EN"
   -
     value: "T00005"
     text: "Index"
@@ -377,7 +377,7 @@ paragraphs:
     text: "Index"
   -
     value: "T00010"
-    text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+    text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
   -
     value: "T00020"
     text: "Author"
@@ -392,25 +392,34 @@ paragraphs:
     text: "Acknowledgements"
   -
     value: "T00110"
-    text: "Microsoft SDL Team for the Elevation of Privilege Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
+    text: "Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
   -
     value: "T00120"
     text: "Keith Turpin and contributors to the “OWASP Secure Coding Practices - Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards."
   -
     value: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor and Web Framework Security Matrix projects, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
     value: "T00140"
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
   -
+    value: "T00145"
+    text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
+  -
     value: "T00150"
     text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees, especially Kate Hartmann, for managing the ordering, stocking and despatch of printed card decks."
+  -
+    value: "T00155"
+    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet."
   -
     value: "T00160"
     text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
   -
     value: "T00161"
     text: "(continued on page 20)"
+  -
+    value: "T00162"
+    text: "(continued from page 10)"
   -
     value: "T00170"
     text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
@@ -440,13 +449,13 @@ paragraphs:
     text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
   -
     value: "T00270"
-    text: "Cornucopia Ecommerce Website Edition is referenced as an information resource in the PCI Security Standard Council’s Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
+    text: "Cornucopia Ecommerce Website Edition is referenced as an information resource in the PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
   -
     value: "T00300"
     text: "The card deck (pack)"
   -
     value: "T00310"
-    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development. "
+    text: "Instead of EoP's STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook's Principles of Secure Development. "
   -
     value: "T00320"
     text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
@@ -539,7 +548,7 @@ paragraphs:
     text: "Dual-sided printing needs special care taken. "
   -
     value: "T00850"
-    text: "You could customize the card faces or the backs for your own organization’s preferences."
+    text: "You could customize the card faces or the backs for your own organization's preferences."
   -
     value: "T00900"
     text: "Customization"
@@ -554,16 +563,16 @@ paragraphs:
     text: "Provide feedback"
   -
     value: "T01010"
-    text: "If you have ideas or feedback on the use of OWASP Cornucopia, please share them."
+    text: "If you have ideas or feedback on the use of OWASP® Cornucopia, please share them."
   -
     value: "T01020"
     text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
   -
     value: "T01030"
-    text: "The best place to use to discuss or contribute is the mailing list for the OWASP project:"
+    text: "The best place to use to discuss or contribute is the list/group for the OWASP project:"
   -
     value: "T01040"
-    text: "Mailing list"
+    text: "List/Group"
   -
     value: "T01050"
     text: "Project home page"
@@ -572,7 +581,7 @@ paragraphs:
     text: "All OWASP documents and tools are free to download and use."
   -
     value: "T01070"
-    text: "OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
+    text: "OWASP® Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
   -
     value: "T01100"
     text: "Instructions"
@@ -599,7 +608,7 @@ paragraphs:
     text: "This means the attacker (William) can create new session identifiers that the application accepts."
   -
     value: "T01180"
-    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
+    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
   -
     value: "T01190"
     text: "Further guidance about each card is available in the online Wiki Deck at "
@@ -608,13 +617,13 @@ paragraphs:
     text: "Lookups between the attacks and five resources are provided on most cards:"
   -
     value: "T01210"
-    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, November 2010 "
+    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, November 2010 "
   -
     value: "T01220"
     text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”"
   -
     value: "T01230"
-    text: "Attack detection points IDs in “AppSensor”, OWASP, August 2010-2015"
+    text: "Attack detection points IDs in “AppSensor”, OWASP®, August 2010-2015"
   -
     value: "T01240"
     text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
@@ -776,13 +785,13 @@ paragraphs:
     text: "Development framework-specific modified card decks"
   -
     value: "T02110"
-    text: "At the end of 2012, the OWASP Framework Security Matrix was published which documents built in security controls in some commonly used languages and frameworks for web and mobile application development."
+    text: "There can be built in security controls in some commonly used languages and frameworks for web and mobile application development."
   -
     value: "T02120"
     text: "With certain provisos it is useful to consider how using these controls can simplify the identification of additional requirements – provided of course the controls are included, enabled and configured correctly."
   -
     value: "T02130"
-    text: "Consider removing the following cards from the decks if you are confidence they are addressed by the way you are using the language/framework. "
+    text: "Consider removing cards from the decks if you are confident they are addressed by the way you are using the language/framework."
   -
     value: "T02140"
     text: "Items in parentheses are “maybes”."
@@ -791,7 +800,7 @@ paragraphs:
     text: "Internal coding standards and libraries"
   -
     value: "T02210"
-    text: "Add your own list of excluded cards based on your organisation’s coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
+    text: "Add your own list of excluded cards based on your organisation's coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
   -
     value: "T02220"
     text: "Your coding standards and libraries"
@@ -890,16 +899,16 @@ paragraphs:
     text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
   -
     value: "T02640"
-    text: "Perhaps if you create a new version, you might donate it to the OWASP Cornucopia Project?"
+    text: "Perhaps if you create a new version, you might donate it to the OWASP® Cornucopia Project?"
   -
     value: "T02650"
     text: "2. How can I get involved?"
   -
     value: "T02660"
-    text: "Please send ideas or offers of help to the project’s mailing list."
+    text: "Please send ideas or offers of help to the project's mailing list."
   -
     value: "T02670"
-    text: "3. How were the attackers’ names chosen?"
+    text: "3. How were the attackers' names chosen?"
   -
     value: "T02680"
     text: "EoP begins every description with words like 'An attacker can...'. "
@@ -920,19 +929,19 @@ paragraphs:
     text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
   -
     value: "T02740"
-    text: "In v1.20, the name on VE-10 changed to reflect the project’s new co-leader - this card is also the only one with two names in the attack."
+    text: "In v1.20, the name on VE-10 changed to reflect the project's new co-leader - this card is also the only one with two names in the attack."
   -
     value: "T02750"
-    text: "4. Why aren’t there any images on the card faces?"
+    text: "4. Why aren't there any images on the card faces?"
   -
     value: "T02760"
-    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too. "
+    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too."
   -
     value: "T02770"
-    text: "But it would be great to have additional design elements included. "
+    text: "But it would be great to have additional design elements included."
   -
     value: "T02780"
-    text: "Any volunteer"
+    text: "Any volunteers"
   -
     value: "T02790"
     text: "5. Are the attacks ranked by the number on the card?"
@@ -947,7 +956,7 @@ paragraphs:
     text: "6. How long does it take to play a round of cards using the full deck?"
   -
     value: "T02830"
-    text: "This depends upon the amount of discussion and how familiar the players are with application security concepts."
+    text: "This depends upon the scope of the application, amount of discussion and how familiar the players are with application security concepts."
   -
     value: "T02840"
     text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
@@ -1007,7 +1016,7 @@ paragraphs:
     text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
   -
     value: "T03030"
-    text: "11. I don’t understand what the attack means on each card - is there more detailed information?"
+    text: "11. I don't understand what the attack means on each card - is there more detailed information?"
   -
     value: "T03040"
     text: "Yes, the online Wiki Deck at was created to help players understand the attacks. "
@@ -1016,10 +1025,10 @@ paragraphs:
     text: "See"
   -
     value: "T03060"
-    text: "12. My company wants to print its own version of OWASP Cornucopia - what license do we need to refer to?"
+    text: "12. My company wants to print its own version of OWASP® Cornucopia - what license do we need to refer to?"
   -
     value: "T03070"
-    text: "Please refer to the full answer to this question on the project’s web pages at"
+    text: "Please refer to the full answer to this question on the project's web pages at"
   -
     value: "T03100"
     text: "Change Log"
@@ -1226,7 +1235,7 @@ paragraphs:
     text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
   -
     value: "T03850"
-    text: "OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "OWASP's hard-working employees."
   -
     value: "T03860"
     text: "Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
@@ -1241,7 +1250,7 @@ paragraphs:
     text: "Podcasts and videos"
   -
     value: "T03910"
-    text: 'The following supporting OWASP Cornucopia resources are available online:'
+    text: 'The following supporting OWASP® Cornucopia resources are available online:'
   -
     value: "T03920"
     text: "Video - Using the cards, created during AppSec EU 2015 project summit, 20th May 2015"
