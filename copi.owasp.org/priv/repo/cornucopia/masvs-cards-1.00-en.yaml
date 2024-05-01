@@ -1,0 +1,371 @@
+---
+meta:
+  edition: "masvs"
+  component: "cards"
+  language: "EN"
+  version: "1.00"
+suits:
+-
+  name: "Platform & code"
+  cards:
+  -
+    id: "PC2"
+    value: "2"
+    desc: "Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background"
+  -
+    id: "PC3"
+    value: "3"
+    desc: "Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use"
+  -
+    id: "PC4"
+    value: "4"
+    desc: "Kelly can expose sensitive data by taking advantage of the app's excessive permissions connected to the app's use of location, camera, microphone, storage, etc"
+  -
+    id: "PC5"
+    value: "5"
+    desc: "Jason can provoke memory leak or corruption because the app has cyclic dependencies, manages pointers inadequately, keeps an incorrect reference count, does not release shared resources or apply stack protection"
+  -
+    id: "PC6"
+    value: "6"
+    desc: "Dawn can expose and intercept sensitive functionality through interprocess communication because permissions for broadcast and sharing are not set, not narrow enough or appropriately excluded when sharing"
+  -
+    id: "PC7"
+    value: "7"
+    desc: "Lauren can traverse or modify otherwise protected files through access to the underlying file system by exploiting weaknesses in file system-based content providers, resolvers or its configuration"
+  -
+    id: "PC8"
+    value: "8"
+    desc: "Colin can expose sensitive data through the app's interprocess communication because the content provider's query methods are not properly parameterized and arguments sanitized"
+  -
+    id: "PC9"
+    value: "9"
+    desc: "Toby can modify or expose data by injection because the response from implicit intents is not properly validated"
+  -
+    id: "PCX"
+    value: "10"
+    desc: "Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
+  -
+    id: "PCJ"
+    value: "J"
+    desc: "Johan can modify or expose sensitive data by exploiting weaknesses in the SDK or third party libraries because updates to the app and platform are not enforced or do not patch known software vulnerabilities"
+  -
+    id: "PCQ"
+    value: "Q"
+    desc: "Xavier can inject scripts into the web view because it allows embedding content using deep linking without proper authorization and validation of the host, schema and path of the target as these can be changed by the user or because safe browsing is disabled"
+  -
+    id: "PCK"
+    value: "K"
+    desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
+  -
+    id: "PCA"
+    value: "A"
+    desc: "You have invented a new attack against “Platform and Code”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Code Quality” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Authentication & Authorization"
+  cards:
+  -
+    id: "AA2"
+    value: "2"
+    desc: "Jie can use the app to do sensitive operations because the “unlocked key” is not used during the application flow"
+  -
+    id: "AA3"
+    value: "3"
+    desc: "Choi can access capabilities, objects, resources, or properties they should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
+  -
+    id: "AA4"
+    value: "4"
+    desc: "Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly"
+  -
+    id: "AA5"
+    value: "5"
+    desc: "Eiman can bypass the local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded"
+  -
+    id: "AA6"
+    value: "6"
+    desc: "Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing"
+  -
+    id: "AA7"
+    value: "7"
+    desc: "Abdullah can bypass authentication by altering the usual process sequence or flow, or by undertaking the process in incorrect order, or by manipulating date and time values used by the app, or by using valid features for unintended purposes"
+  -
+    id: "AA8"
+    value: "8"
+    desc: "Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking"
+  -
+    id: "AA9"
+    value: "9"
+    desc: "Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)"
+  -
+    id: "AAX"
+    value: "10"
+    desc: "Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions"
+  -
+    id: "AAJ"
+    value: "J"
+    desc: "Ade can bypass authentication because it is not enforced using a remote endpoint, or it is not based on a cryptographic primitive protected by keystore/keychain access control flags"
+  -
+    id: "AAQ"
+    value: "Q"
+    desc: "Riotaro can inject and run a command that the application will run at a higher privilege level without being authenticated or authorized to do so"
+  -
+    id: "AAK"
+    value: "K"
+    desc: "Aatif can influence or alter authentication controls and can therefore bypass them"
+  -
+    id: "AAA"
+    value: "A"
+    desc: "You have invented a new attack against “Authentication & Authorization”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Authentication Architectures” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Network & Storage"
+  cards:
+  -
+    id: "NS2"
+    value: "2"
+    desc: "Matt can inspect sensitive application log data because logging statements have not been removed or reviewed as safe before the production release"
+  -
+    id: "NS3"
+    value: "3"
+    desc: "Bil can access sensitive data for sensitive fields from the pasteboard/clipboard or keyboard cache because the pasteboard/clipboard is not timely cleared, disabled or restricted for sensitive fields, or the keyboard cache is not disabled"
+  -
+    id: "NS4"
+    value: "4"
+    desc: "Ricardo can extract data stored by the app on a stolen or decommissioned device  because it does not enforce device access security policies (e.g. PIN protected locking, app-/os-version, USB debug deactivation, device encryption and rooting)"
+  -
+    id: "NS5"
+    value: "5"
+    desc: "Kevin can read sensitive data mapped to user accounts or sessions by extracting data sent through third-party libraries and/or notifications sent between the app and embedded services (e.g. logs, notifications, backups, cache, local db)"
+  -
+    id: "NS6"
+    value: "6"
+    desc: "Sam can dump sensitive data from memory because the data is not stored as primitive data types and overwritten with random data after use or because the app's input fields use insecure SDKs to store the data in RAM"
+  -
+    id: "NS7"
+    value: "7"
+    desc: "Steve can access sensitive data by reading backups and/or local, internal/external storage"
+  -
+    id: "NS8"
+    value: "8"
+    desc: "Martin can modify or expose sensitive data through unsafe reflection when reading data from public data storage (e.g. shared preferences) because the data is not validated before being read by the app"
+  -
+    id: "NS9"
+    value: "9"
+    desc: "Adrian can compromise the app communication through a proxy because the app does not make use of certificate pinning or implements it incorrectly"
+  -
+    id: "NSX"
+    value: "10"
+    desc: "Maarten can compromise the communication between the app and the external services because the app does not verify TLS certificates and -chains, trust insecure sources, lack hostname verification or ignore TLS verification issues"
+  -
+    id: "NSJ"
+    value: "J"
+    desc: "Nihel can compromise the communication as it may fall back to an insecure or unencrypted channel,  because encryption is optional, or because of client-server protocol or security provider weaknesses"
+  -
+    id: "NSQ"
+    value: "Q"
+    desc: "Ahmed can read and modify data in transit because the communication is transmitted over an unencrypted channel"
+  -
+    id: "NSK"
+    value: "K"
+    desc: "Taher can intercept, extract or modify sensitive data at rest or in transit by influencing or altering methods for transferring or storing data at rest or in transit"
+  -
+    id: "NSA"
+    value: "A"
+    desc: "You have invented a new attack against “Network & Storage”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Network Communication” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Resilience"
+  cards:
+  -
+    id: "RS2"
+    value: "2"
+    desc: " Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
+  -
+    id: "RS3"
+    value: "3"
+    desc: "Tobias can disclose sensitive data by dumping debug symbols while the application is running"
+  -
+    id: "RS4"
+    value: "4"
+    desc: "Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate"
+  -
+    id: "RS5"
+    value: "5"
+    desc: "Matteo can bypass access controls and trigger functionality because debugging is left enabled in the production build"
+  -
+    id: "RS6"
+    value: "6"
+    desc: "Joren can bypass access controls because the anti-debugging controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RS7"
+    value: "7"
+    desc: "Erlend can compromise the app by running it in an emulator because the prevention against emulators are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RS8"
+    value: "8"
+    desc: "Carlos can reverse engineer the app because the prevention against the use of anti reverse engineering tools are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RS9"
+    value: "9"
+    desc: "Sean can reverse engineer the app because the code obfuscation is not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RSX"
+    value: "10"
+    desc: "Juan can bypass jailbreak and root detection and execute administrative functions to bypass integrity checks and access controls and trigger app functionality"
+  -
+    id: "RSJ"
+    value: "J"
+    desc: "Pekka can compromise the integrity of the storage because the file integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RSQ"
+    value: "Q"
+    desc: "Titus can patch out critical functionality because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RSK"
+    value: "K"
+    desc: "Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them"
+  -
+    id: "RSA"
+    value: "A"
+    desc: "You have invented a new attack against Authorization"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Tampering and Reverse Engineering” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Cryptography"
+  cards:
+  -
+    id: "CR2"
+    value: "2"
+    desc: "Lesego can compromise cryptographic operations and resources because keys are reused for multiple purposes, or not used according to the purpose for which they were created"
+  -
+    id: "CR3"
+    value: "3"
+    desc: "Emery can access data because it has been obfuscated rather than using an approved cryptographic function"
+  -
+    id: "CR4"
+    value: "4"
+    desc: "Enselme can modify sensitive data (stored or in transit) because it is not subject to integrity checking"
+  -
+    id: "CR5"
+    value: "5"
+    desc: "Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key"
+  -
+    id: "CR6"
+    value: "6"
+    desc: "Kouti can extract sensitive data because the cryptographic key, used, is hard-coded or stored insecurely such as in local, internal/external storage"
+  -
+    id: "CR7"
+    value: "7"
+    desc: "Ramsey can access stored sensitive data because it is not securely encrypted"
+  -
+    id: "CR8"
+    value: "8"
+    desc: "Adel can predict and use the app's cryptographic keys because they are insufficiently long and random, can be enumerated, or derived from known values"
+  -
+    id: "CR9"
+    value: "9"
+    desc: "Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)"
+  -
+    id: "CRX"
+    value: "10"
+    desc: "Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "CRJ"
+    value: "J"
+    desc: "Hassan can extract or modify sensitive data because functions for storage and/or encryption are weak, deprecated or used incorrectly"
+  -
+    id: "CRQ"
+    value: "Q"
+    desc: "Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented"
+  -
+    id: "CRK"
+    value: "K"
+    desc: "Tarik can influence or alter cryptographic operations and can therefore bypass them"
+  -
+    id: "CRA"
+    value: "A"
+    desc: "You have invented a new attack against “Cryptography”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Cryptography” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Cornucopia"
+  cards:
+  -
+    id: "COM2"
+    value: "2"
+    desc: "Garth can reduce app users' privacy because the app is not transparent about the app's data collection and usage in a concise, easily accessible and understandable way"
+  -
+    id: "COM3"
+    value: "3"
+    desc: " Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
+  -
+    id: "COM4"
+    value: "4"
+    desc: "Elizabeth can reduce app users' privacy because the app sends too much personal data without the user's consent to downstream services that are outside the user's control"
+  -
+    id: "COM5"
+    value: "5"
+    desc: "Debarghaya can reduce app users' privacy because the app repurpose personal information (e.g. device IDs, IP addresses, behavioral patterns) collected for security concerns in order to cater for commercial interests without consent"
+  -
+    id: "COM6"
+    value: "6"
+    desc: "Kim can reduce app users' privacy because the app repurpose biometric information (e.g. fingerprints, facial recognition data, etc.) collected for security concerns in order to cater for commercial interests"
+  -
+    id: "COM7"
+    value: "7"
+    desc: "Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable"
+  -
+    id: "COM8"
+    value: "8"
+    desc: "Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated"
+  -
+    id: "COM9"
+    value: "9"
+    desc: "Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space"
+  -
+    id: "COMX"
+    value: "10"
+    desc: "Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices"
+  -
+    id: "COMJ"
+    value: "J"
+    desc: "Luis can influence or alter cryptographic methods to corrupt other users' data because the integrity of the encrypted data is not verified before being shared with external services"
+  -
+    id: "COMQ"
+    value: "Q"
+    desc: "Victor can patch the app and use it to distribute malicious code because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "COMK"
+    value: "K"
+    desc: "Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation"
+  -
+    id: "COMA"
+    value: "A"
+    desc: "You have invented a new attack of any type"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App User Privacy Protection” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Wild Card"
+  cards:
+  -
+    id: "JOA"
+    value: "JokerA"
+    card: "Joker"
+    desc: "Mallory can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates"
+    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+  -
+    id: "JOB"
+    value: "JokerB"
+    card: "Joker"
+    desc: "Bob can use the app installed on Alice's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Alice, without consent and/or notification"
+    misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
+paragraphs:
+-
+  name: "Common"
+  sentences:
+  -
+    value: "NoCard"
+    text: "No Card"
+  -
+    value: "Title"
+    text: "Mobile Edition v1.00-EN"
+  -
+    value: "Title_full"
+    text: "OWASP Cornucopia Mobile Edition v1.00-EN"
