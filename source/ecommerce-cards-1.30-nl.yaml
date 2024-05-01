@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "DATAVALIDATIE & -CODERING"
+  name: "DATAVALIDATIE & KARAKTERCODERING"
   cards:
   -
     id: "DV2"
@@ -355,7 +355,7 @@ suits:
     value: "JokerB"
     card: "Joker"
     desc: "Bob kan de applicatie beïnvloeden, wijzigen of beïnvloeden zodat deze niet langer voldoet aan wettelijke, reglementaire, contractuele of andere organisatorische mandaten"
-    misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van trainingsapplicaties in de gratis OWASP Broken Web Applications VM, of met behulp van de online uitdagingen in het gratis Hacking Lab"
+    misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van OWASP Juice Shop, Security Shepherd, of met behulp van de online uitdagingen in het OWASP Hacking-lab gratis"
 paragraphs:
 -
   name: "Common"
@@ -368,13 +368,13 @@ paragraphs:
     text: "E-commerce Website Editie v1.30-NL"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia E-commerce Website Editie v1.30-NL"
+    text: "OWASP® Cornucopia E-commerce Website Editie v1.30-NL"
   -
     value: "T00005"
     text: "Inhoudsopgave"
   -
     value: "T00010"
-    text: "OWASP Cornucopia is een mechanisme om softwareontwikkelingsteams te helpen bij het identificeren van beveiligingsvereisten in Agile, conventionele en formele ontwikkelingsprocessen."
+    text: "OWASP® Cornucopia is een mechanisme om softwareontwikkelingsteams te helpen bij het identificeren van beveiligingsvereisten in Agile, conventionele en formele ontwikkelingsprocessen."
   -
     value: "T00020"
     text: "Auteur"
@@ -389,7 +389,7 @@ paragraphs:
     text: "Erkenningen"
   -
     value: "T00110"
-    text: "Microsoft SDL Team for the Elevation of Privilege Threat Modeling Game, gepubliceerd onder een Creative Commons Attribution-licentie, als inspiratie voor Cornucopia en waaruit veel ideeën, vooral de speltheorie, zijn gekopieerd."
+    text: "Adam Shostack en het Microsoft SDL Team voor de “Elevation of Privilege Threat Modeling Game”, gepubliceerd onder een Creative Commons Attribution-licentie, als inspiratie voor Cornucopia en waaruit veel ideeën, vooral de speltheorie, zijn gekopieerd."
   -
     value: "T00120"
     text: "Keith Turpin en bijdragers aan de “OWASP Secure Coding Practices - Quick Reference Guide”, oorspronkelijk geschonken aan OWASP door Boeing, die wordt gebruikt als de primaire bron van informatie over beveiligingsvereisten om de inhoud van de kaarten te formuleren."
@@ -408,6 +408,9 @@ paragraphs:
   -
     value: "T00161"
     text: "(vervolg op pagina 20)"
+  -
+    value: "T00162"
+    text: "(vervolg van pagina 10)"
   -
     value: "T00170"
     text: "Colin Watson als auteur en co-projectleider met Grant Ongers, samen met andere OWASP-vrijwilligers die op veel manieren hebben geholpen."
@@ -449,7 +452,7 @@ paragraphs:
     text: "Deze leverden vijf kleuren op, en een zesde genaamd “Cornucopia“ werd gemaakt voor al het andere: "
   -
     value: "T00330"
-    text: "Datavalidatie & -codering (VE)"
+    text: "Datavalidatie & karaktercodering (VE)"
   -
     value: "T00340"
     text: "Authenticatie (AT)"
@@ -551,16 +554,16 @@ paragraphs:
     text: "Geef feedback"
   -
     value: "T01010"
-    text: "Als u ideeën of feedback heeft over het gebruik van OWASP Cornucopia, deel deze dan alstublieft."
+    text: "Als u ideeën of feedback heeft over het gebruik van OWASP® Cornucopia, deel deze dan alstublieft."
   -
     value: "T01020"
     text: "Nog beter als je alternatieve versies van de kaarten maakt, of professionele drukklare versies maakt, deel dat dan met de vrijwilligers die deze editie hebben gemaakt en met de bredere gemeenschap voor applicatieontwikkeling en applicatiebeveiliging."
   -
     value: "T01030"
-    text: "De beste plaats om te discussiëren of bij te dragen is de mailinglijst voor het OWASP-project:"
+    text: "De beste plaats om te bespreken of bij te dragen is in de lijst of groep voor het OWASP-project:"
   -
     value: "T01040"
-    text: "Mailinglijst"
+    text: "Lijst/Groep"
   -
     value: "T01050"
     text: "Project startpagina"
@@ -569,7 +572,7 @@ paragraphs:
     text: "Alle OWASP-documenten en -hulpmiddelen zijn gratis te downloaden en te gebruiken."
   -
     value: "T01070"
-    text: "OWASP Cornucopia is gelicentieerd onder de Creative Commons Attribution-ShareAlike 3.0-licentie."
+    text: "OWASP® Cornucopia is gelicentieerd onder de Creative Commons Attribution-ShareAlike 3.0-licentie."
   -
     value: "T01100"
     text: "Instructies"
@@ -586,8 +589,14 @@ paragraphs:
     value: "T01140"
     text: "De aanvaller wordt altijd genoemd aan het begin van elke beschrijving"
   -
+    value: "T01145"
+    text: "Huidige en voormalige bijdragers en leiders aan het OWASP® Cornucopia-project, vooral degenen die het meest recent betrokken waren, werkten de kruisverwijzingen bij, creëerden online versies en schreven scripts om de uitvoerbestanden van Cornucopia dynamisch te genereren."
+  -
     value: "T01150"
     text: "Een voorbeeld is:"
+  -
+    value: "T00155"
+    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot de creatie van een OWASP-doos en folder."
   -
     value: "T01160"
     text: "William heeft controle over het genereren van sessie-ID's."
@@ -605,13 +614,13 @@ paragraphs:
     text: "Lookups tussen de aanvallen en fOp de meeste kaarten staan ​​hulpmiddelen:"
   -
     value: "T01210"
-    text: "Vereisten in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, november 2010 "
+    text: "Vereisten in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, november 2010 "
   -
     value: "T01220"
     text: "Verificatie-ID's in “Application Security Verification Standard (ASVS) for Web Applications”"
   -
     value: "T01230"
-    text: "Aanvalsdetectiepunten-ID's in “AppSensor”, OWASP, augustus 2010-2015"
+    text: "Aanvalsdetectiepunten-ID's in “AppSensor”, OWASP®, augustus 2010-2015"
   -
     value: "T01240"
     text: "ID's in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, november 2015"
@@ -770,13 +779,13 @@ paragraphs:
     text: "Ontwikkelingsraamwerk-specifieke aangepaste kaartspellen"
   -
     value: "T02110"
-    text: "Eind 2012 werd de OWASP Framework Security Matrix gepubliceerd waarin beveiligingscontroles zijn ingebouwd in enkele veelgebruikte talen en frameworks voor de ontwikkeling van web- en mobiele applicaties."
+    text: "Er kunnen beveiligingscontroles worden ingebouwd in enkele veelgebruikte talen en frameworks voor de ontwikkeling van web- en mobiele applicaties."
   -
     value: "T02120"
     text: "Onder bepaalde voorwaarden is het nuttig om na te gaan hoe het gebruik van deze bedieningselementen de identificatie van aanvullende vereisten kan vereenvoudigen - op voorwaarde natuurlijk dat de bedieningselementen correct zijn opgenomen, ingeschakeld en geconfigureerd."
   -
     value: "T02130"
-    text: "Overweeg om de volgende kaarten van de stapels te verwijderen als je er zeker van bent dat ze worden aangesproken door de manier waarop je de taal/het kader gebruikt."
+    text: "Overweeg om kaarten uit de stapels te verwijderen als je er zeker van bent dat ze worden aangesproken door de manier waarop je de taal/het kader gebruikt."
   -
     value: "T02140"
     text: "Items tussen haakjes zijn “misschien”."
@@ -791,7 +800,7 @@ paragraphs:
     text: "Uw codeerstandaarden en bibliotheken"
   -
     value: "T02230"
-    text: "Datavalidatie & -codering"
+    text: "Datavalidatie & koderingcodering"
   -
     value: "T02240"
     text: "[uw lijst]"
@@ -836,7 +845,7 @@ paragraphs:
     text: "Compliance-eis"
   -
     value: "T02430"
-    text: "Datavalidatie & -codering"
+    text: "Datavalidatie & koderingcodering"
   -
     value: "T02440"
     text: "[nalevingslijst]"
@@ -884,7 +893,7 @@ paragraphs:
     text: "Alle OWASP-materialen zijn vrij om mee te doen wat je wilt, op voorwaarde dat je voldoet aan de Creative Commons Attribution-ShareAlike 3.0-licentie. "
   -
     value: "T02640"
-    text: "Als u een nieuwe versie maakt, kunt u deze misschien doneren aan het OWASP Cornucopia?"
+    text: "Als u een nieuwe versie maakt, kunt u deze misschien doneren aan het OWASP® Cornucopia?"
   -
     value: "T02650"
     text: "2. Hoe kan ik meedoen?"
@@ -941,7 +950,7 @@ paragraphs:
     text: "6. Hoe lang duurt het om een ​​ronde kaarten te spelen met het volledige kaartspel?"
   -
     value: "T02830"
-    text: "Dit hangt af van de hoeveelheid discussie en hoe vertrouwd de spelers zijn met applicatiebeveiligingsconcepten."
+    text: "Dit hangt af van de omvang van de applicatie, de hoeveelheid discussie en hoe vertrouwd de spelers zijn met applicatiebeveiligingsconcepten."
   -
     value: "T02840"
     text: "Maar misschien 1,5 tot 2,0 uur voor 4-6 personen."
@@ -1010,7 +1019,7 @@ paragraphs:
     text: "Zie"
   -
     value: "T03060"
-    text: "12. Mijn bedrijf wil zijn eigen versie van OWASP Cornucopia afdrukken - naar welke licentie moeten we verwijzen?"
+    text: "12. Mijn bedrijf wil zijn eigen versie van OWASP® Cornucopia afdrukken - naar welke licentie moeten we verwijzen?"
   -
     value: "T03070"
     text: "Raadpleeg het volledige antwoord op deze vraag op de webpagina's van het project op"
@@ -1220,7 +1229,7 @@ paragraphs:
     text: "Neem rechtstreeks contact op met de mailinglijst of met de projectleiders als er iemand ontbreekt op de onderstaande lijsten."
   -
     value: "T03850"
-    text: "OWASP's hardwerkende medewerkers, vooral Kate Hartmann"
+    text: "OWASP's hardwerkende medewerkers."
   -
     value: "T03860"
     text: "Aanwezigen bij OWASP Londen, OWASP Manchester, OWASP Nederland en OWASP Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
@@ -1235,7 +1244,7 @@ paragraphs:
     text: "Podcasts en video's"
   -
     value: "T03910"
-    text: 'De volgende ondersteunende OWASP Cornucopia-bronnen zijn online beschikbaar:'
+    text: 'De volgende ondersteunende OWASP® Cornucopia-bronnen zijn online beschikbaar:'
   -
     value: "T03920"
     text: "Video - Gebruik van de kaarten, gemaakt tijdens de AppSec EU 2015-projecttop, 20 mei 2015"
