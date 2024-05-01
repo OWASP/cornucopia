@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "DATA VALIDATION & ENCODING"
+  name: "Data Validation & Encoding"
   cards:
   -
     value: "2"
@@ -93,7 +93,7 @@ suits:
     capec: [ 23, 28, 76, 152, 160, 261 ]
     safecode: [ 2, 19, 20 ]
 - 
-  name: "AUTHENTICATION"
+  name: "Authentication"
   cards:
   -
     value: "2"
@@ -180,7 +180,7 @@ suits:
     capec: [ 115, 207, 554 ]
     safecode: [ 14, 28 ]
 -
-  name: "SESSION MANAGEMENT"
+  name: "Session Management"
   cards:
   -
     value: "2"
@@ -267,7 +267,7 @@ suits:
     capec: [ 21 ]
     safecode: [ 14, 28 ]
 -
-  name: "AUTHORIZATION"
+  name: "Authorization"
   cards:
   -
     value: "2"
@@ -354,7 +354,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 8, 10, 11 ]
 -
-  name: "CRYPTOGRAPHY"
+  name: "Cryptography"
   cards:
   -
     value: "2"
@@ -441,7 +441,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 14, 21, 29 ]
 -
-  name: "CORNUCOPIA"
+  name: "Cornucopia"
   cards:
   -
     value: "2"

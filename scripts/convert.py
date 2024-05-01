@@ -465,7 +465,7 @@ def is_yaml_file(path: str) -> bool:
 
 def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> Dict[str, str]:
     """Loop through language file data and build up a find-replace dict"""
-    data = {}
+    data: Dict[str, str] = {}
     for key in list(k for k in input_data.keys() if k != "meta"):
         suit_tags, suit_key = get_suit_tags_and_key(key, input_data["meta"]["edition"])
         logging.debug(f" --- key = {key}.")
@@ -475,10 +475,7 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
         for suit, suit_tag in zip(input_data[key], suit_tags):
             logging.debug(f" --- suit [name] = {suit['name']}")
             logging.debug(f" --- suit_tag = {suit_tag}")
-            if mappings == False:
-                tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
-                data.update(tag_for_suit_name)
-
+            data = update_tag_for_suit_name(data, suit, suit_tag, mappings)
             card_tag = ""
             for card in suit[suit_key]:
                 for tag, text_output in card.items():
@@ -508,6 +505,15 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
         debug_txt = " --- Translation data showing Last 4 (key: text):\n* "
         debug_txt += "\n* ".join(l1 + ": " + str(data[l1]) for l1 in list(data.keys())[-4:])
         logging.debug(debug_txt)
+    return data
+
+
+def update_tag_for_suit_name(
+    data: Dict[str, str], suit: Dict[str, Any], suit_tag: str, is_mappings: bool
+) -> Dict[str, str]:
+    if is_mappings is False:
+        tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
+        data.update(tag_for_suit_name)
     return data
 
 
