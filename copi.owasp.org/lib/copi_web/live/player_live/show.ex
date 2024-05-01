@@ -1,5 +1,6 @@
 defmodule CopiWeb.PlayerLive.Show do
   use CopiWeb, :live_view
+  use Phoenix.Component
 
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
@@ -85,12 +86,6 @@ defmodule CopiWeb.PlayerLive.Show do
     CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
     {:noreply, assign(socket, :game, updated_game)}
-  end
-
-  def format_capec(refs) do
-    refs
-    |> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
-    |> Enum.intersperse(", ")
   end
 
   def topic(game_id) do

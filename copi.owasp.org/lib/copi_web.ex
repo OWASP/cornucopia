@@ -19,35 +19,64 @@ defmodule CopiWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: CopiWeb
+        use Phoenix.Controller,
+            formats: [:html, :json],
+            layouts: [html: CopiWeb.Layouts]
 
-      import Plug.Conn
-      import CopiWeb.Gettext
-      alias CopiWeb.Router.Helpers, as: Routes
+        import Plug.Conn
+        import CopiWeb.Gettext
+
+        unquote(verified_routes())
     end
   end
 
-  def view do
+  def html do
     quote do
-      use Phoenix.View,
-        root: "lib/copi_web/templates",
-        namespace: CopiWeb
+        use Phoenix.Component
+        # Import convenience functions from controllers
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+        import Phoenix.Controller,
+            only: [get_csrf_token: 0, view_module: 1, view_template: 1]
 
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
+        # Include general helpers for rendering HTML
+        unquote(html_helpers())
     end
   end
+
+  defp html_helpers do
+    quote do
+        # HTML escaping functionality
+        import Phoenix.HTML
+
+        # Core UI components and translation
+        import CopiWeb.CoreComponents
+        import CopiWeb.Gettext
+
+        # Shortcut for generating JS commands
+        alias Phoenix.LiveView.JS
+
+        # Routes generation with the ~p sigil
+        unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+        use Phoenix.VerifiedRoutes,
+            endpoint: CopiWeb.Endpoint,
+            router: CopiWeb.Router,
+            statics: CopiWeb.static_paths()
+    end
+  end
+
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
 
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {CopiWeb.LayoutView, "live.html"}
+        layout: {CopiWeb.Layouts, :app}
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -55,7 +84,7 @@ defmodule CopiWeb do
     quote do
       use Phoenix.LiveComponent
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -73,25 +102,6 @@ defmodule CopiWeb do
     quote do
       use Phoenix.Channel
       import CopiWeb.Gettext
-    end
-  end
-
-  defp view_helpers do
-    quote do
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
-
-      # Import LiveView helpers (live_render, live_component, live_patch, etc)
-      import Phoenix.Component
-      import Phoenix.LiveView.Helpers
-      import CopiWeb.LiveHelpers
-
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
-
-      import CopiWeb.ErrorHelpers
-      import CopiWeb.Gettext
-      alias CopiWeb.Router.Helpers, as: Routes
     end
   end
 

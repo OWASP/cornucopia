@@ -71,7 +71,7 @@
               <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
               <% end %>
             <% else %>
-            <%= render(CopiWeb.CardView, "show.html", card: player_card.card) %>
+            <CopiWeb.CardHTML.show card={player_card.card} />
             <% end %>
           </div>
         </div>
@@ -108,7 +108,7 @@
 
     <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
       <div data-game={@player.game.id} data-player={@player.id} data-dealtcard={dealt_card.id}>
-        <%= render(CopiWeb.CardView, "show.html", card: dealt_card.card) %>
+        <CopiWeb.CardHTML.show card={dealt_card.card} />
       </div>
 
     <% end %>
