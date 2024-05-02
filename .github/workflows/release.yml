@@ -113,3 +113,4 @@
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.pdf
                 README.md
                 source/*.yaml
+                resources/case/*
