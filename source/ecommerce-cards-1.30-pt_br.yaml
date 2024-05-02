@@ -6,7 +6,7 @@ meta:
   version: "1.30"
 suits:
 -
-  name: "Validação de Dados de Entrada e Codificação de Dados de Saída"
+  name: "VALIDAÇÃO & CODIFICAÇÃO DE DADOS"
   cards:
   -
     id: "DV2"
@@ -59,10 +59,10 @@ suits:
   -
     id: "DVA"
     value: "A"
-    desc: "Você inventou um novo ataque contra a Validação de Dados de Entrada e Codificação de Dados de Saída"
+    desc: "Você inventou um novo ataque contra a Validação & Codificação de Dados"
     misc: "Leia mais sobre este tópico em OWASP Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
 -
-  name: "Autenticação e Gerenciamento de Credenciais"
+  name: "AUTENTICAÇÃO"
   cards:
   -
     id: "AC2"
@@ -115,10 +115,10 @@ suits:
   -
     id: "ACA"
     value: "A"
-    desc: "Você inventou um novo ataque contra a Autenticação e Gerenciamento de Credenciais"
+    desc: "Você inventou um novo ataque contra a Autenticação"
     misc: "Leia mais sobre este tópico em OWASP Authentication Cheat Sheet"
 -
-  name: "Gerenciamento de Sessões"
+  name: "GERENCIAMENTO DE SESSÕES"
   cards:
   -
     id: "SM2"
@@ -174,7 +174,7 @@ suits:
     desc: "Você inventou um novo ataque contra o Gerenciamento de Sessões"
     misc: "Leia mais sobre este tópico em OWASP Session Management Cheat Sheet e prevenção de ataques do tipo Cross Site Request Forgery (CSRF)"
 -
-  name: "Controle de Acessos"
+  name: "CONTROLE DE ACESSOS"
   cards:
   -
     id: "AZ2"
@@ -230,7 +230,7 @@ suits:
     desc: "Você inventou um novo ataque contra Controle de Acessos"
     misc: "Leia mais sobre este tópico em OWASP Development Guide e OWAPS Testing Guide"
 -
-  name: "Práticas de Criptografia"
+  name: "PRÁTICAS DE CRIPTOGRAFIA"
   cards:
   -
     id: "CR2"
@@ -283,10 +283,10 @@ suits:
   -
     id: "CRA"
     value: "A"
-    desc: "Você inventou um novo ataque contra Práticas de Criptografia"
+    desc: "Você inventou um novo ataque contra Criptografia"
     misc: "Leia mais sobre este tópico em OWASP Cryptographic Storage Cheat Sheet e OWASP Transport Layer Protection Cheat Sheet"
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -342,7 +342,7 @@ suits:
     desc: "Você inventou um novo ataque de qualquer tipo"
     misc: "Leia mais sobre segurança da aplicação nos guias da OWASP (Requirements, Development, Code Review and Testing) e na série OWASP Cheat Sheet, e no modelo de maturidade Open SAMM (Software Assurance Maturity Model)"
 -
-  name: "Joker"
+  name: "CURINGA"
   cards:
   -
     id: "JOA"
@@ -353,7 +353,7 @@ suits:
     id: "JOB"
     value: "JokerB"
     desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
-    misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do aplicativo de treinamento OWASP Broken Web Applications VM, ou usando o desafio online Hacking Lab. Ambos são gratuitos"
+    misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do OWASP Juice Shop, Security Shepherd, ou usando o desafio online OWASP Hacking-lab. Ambos são gratuitos"
 paragraphs:
 -
   name: "Common"
@@ -366,13 +366,13 @@ paragraphs:
     text: "Edição de Ecomércio v1.30-PT-BR"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia Edição de Ecomércio v1.30-PT-BR"
+    text: "OWASP® Cornucopia Edição de Ecomércio v1.30-PT-BR"
   -
     value: "T00005"
     text: "Índice"
   -
     value: "T00010"
-    text: "OWASP Cornucopia é um mecanismo para auxiliar equipes de desenvolvimento de software a identificar requisitos de segurança em processos de desenvolvimento Ágeis, convencionais e formais."
+    text: "OWASP® Cornucopia é um mecanismo para auxiliar equipes de desenvolvimento de software a identificar requisitos de segurança em processos de desenvolvimento Ágeis, convencionais e formais."
   -
     value: "T00020"
     text: "Autor "
@@ -387,10 +387,10 @@ paragraphs:
     text: "Agradecimentos"
   -
     value: "T00110"
-    text: "Equipe Microsoft SDL para o jogo de modelagem de ameaças \"Elevation of Privilege\", publicado sob uma licença \"Creative Commons Attribution\", como inspiração para Cornucopia e do qual muitas ideias, especialmente a teoria dos jogos, foram copiadas."
+    text: "Equipe Microsoft SDL para o “Jogo de Modelagem de Ameaças de Elevação de Privilégios”, publicado sob uma licença \"Creative Commons Attribution\", como inspiração para Cornucopia e do qual muitas ideias, especialmente a teoria dos jogos, foram copiadas."
   -
     value: "T00120"
-    text: "Keith Turpin e colaboradores do “OWASP Secure Coding Practices – Quick Reference Guide”, originalmente doado ao OWASP pela Boeing, que é usado como fonte primária de informações sobre requisitos de segurança para formular o conteúdo dos cartões."
+    text: "Keith Turpin e colaboradores do “OWASP Secure Coding Practices - Quick Reference Guide”, originalmente doado ao OWASP pela Boeing, que é usado como fonte primária de informações sobre requisitos de segurança para formular o conteúdo dos cartões."
   -
     value: "T00130"
     text: "Colaboradores, apoiadores, patrocinadores e voluntários dos projetos OWASP ASVS, AppSensor e \"Web Framework Security Matrix\", \"Common Attack Pattern Enumeration and Classification (CAPEC)\" de Mitre e \"Practical Security Stories and Security Tasks for Agile Development Environments\" de SAFECode que são todos usados ​​nas referências cruzadas fornecidas."
@@ -407,11 +407,14 @@ paragraphs:
     value: "T00161"
     text: "(continua na página 20)"
   -
+    value: "T00162"
+    text: "(continuação da página 10)"
+  -
     value: "T00170"
     text: "Colin Watson como autor e co-líder do projeto com Grant Ongers, juntamente com outros voluntários do OWASP que ajudaram de diversas maneiras."
   -
     value: "T00180"
-    text: "A OWASP não endossa nem recomenda produtos ou serviços comerciais © 2012-2024 OWASP Foundation Este documento está licenciado sob a licença \"Creative Commons Attribution-ShareAlike 3.0\" license"
+    text: "OWASP não endossa nem recomenda produtos ou serviços comerciais © 2012-2024 OWASP Foundation Este documento está licenciado sob a licença \"Creative Commons Attribution-ShareAlike 3.0\" license"
   -
     value: "T00200"
     text: "Introdução"
@@ -447,19 +450,19 @@ paragraphs:
     text: "Estes forneceram cinco naipes, e um sexto chamado “Cornucópia” foi criado para todo o resto:"
   -
     value: "T00330"
-    text: "Data validation and encoding (VE)"
+    text: "Validação & Codificação de Dados (VE)"
   -
     value: "T00340"
-    text: "Authentication (AT)"
+    text: "Autenticação (AT)"
   -
     value: "T00350"
-    text: "Session Management (SM)"
+    text: "Gerenciamento de Sessões (SM)"
   -
     value: "T00360"
-    text: "Authorization (AZ)"
+    text: "Controle de Acessos (AZ)"
   -
     value: "T00370"
-    text: "Cryptography (CR)"
+    text: "Criptografia (C)"
   -
     value: "T00380"
     text: "Cornucopia (C)"
@@ -549,16 +552,16 @@ paragraphs:
     text: "Dar uma resposta"
   -
     value: "T01010"
-    text: "Se você tiver ideias ou comentários sobre o uso do OWASP Cornucopia, compartilhe-os."
+    text: "Se você tiver ideias ou comentários sobre o uso do OWASP® Cornucopia, compartilhe-os."
   -
     value: "T01020"
     text: "Melhor ainda, se você criar versões alternativas dos cartões ou produzir versões profissionais prontas para impressão, compartilhe isso com os voluntários que criaram esta edição e com a comunidade mais ampla de desenvolvimento de aplicativos e segurança de aplicativos."
   -
     value: "T01030"
-    text: "O melhor lugar para discutir ou contribuir é a lista de discussão do projeto OWASP:"
+    text: "O melhor lugar para discutir ou contribuir é na lista ou grupo do projeto OWASP:"
   -
     value: "T01040"
-    text: "Lista de discussão"
+    text: "Lista/Grupo"
   -
     value: "T01050"
     text: "Página inicial do projeto"
@@ -567,7 +570,7 @@ paragraphs:
     text: "Todos os documentos e ferramentas do OWASP são gratuitos para download e uso."
   -
     value: "T01070"
-    text: "OWASP Cornucopia está licenciado sob a licença Creative Commons Attribution-ShareAlike 3.0."
+    text: "OWASP® Cornucopia está licenciado sob a licença Creative Commons Attribution-ShareAlike 3.0."
   -
     value: "T01100"
     text: "Instruções"
@@ -584,8 +587,14 @@ paragraphs:
     value: "T01140"
     text: "O atacante sempre é nomeado no começo de cada descrição. "
   -
+    value: "T00145"
+    text: "Colaboradores e líderes atuais e anteriores do projeto OWASP® Cornucopia, especialmente aqueles envolvidos mais recentemente, atualizaram as referências cruzadas, criaram versões online e escreveram scripts para gerar dinamicamente os arquivos de saída do Cornucopia."
+  -
     value: "T01150"
     text: "Um exemplo segue:"
+  -
+    value: "T00155"
+    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP."
   -
     value: "T01160"
     text: "William tem o controle sobre a geração de identificadores de sessão"
@@ -603,13 +612,13 @@ paragraphs:
     text: "Gabaritos entre os ataques e as cinco fontes estão providas na maioria das cartas:"
   -
     value: "T01210"
-    text: "Requisitos em “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, Novembro 2010"
+    text: "Requisitos em “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, Novembro 2010"
   -
     value: "T01220"
     text: "Verification IDs em “Application Security Verification Standard (ASVS) para aplicativos da Web”"
   -
     value: "T01230"
-    text: "Attack detection points IDs em “AppSensor”, OWASP, Agosto 2010-2015"
+    text: "Attack detection points IDs em “AppSensor”, OWASP®, Agosto 2010-2015"
   -
     value: "T01240"
     text: "IDs em “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, Novembro 2015"
@@ -768,13 +777,13 @@ paragraphs:
     text: "Desenvolvimento de baralhos de cartas modificados específicos da estrutura"
   -
     value: "T02110"
-    text: "No final de 2012, foi publicada a \"OWASP Framework Security Matrix\", que documenta controles de segurança integrados em algumas linguagens e frameworks comumente usados ​​para desenvolvimento de aplicativos web e móveis."
+    text: "Podem ser integrados controles de segurança em algumas linguagens e frameworks comumente usados ​​para desenvolvimento de aplicativos web e móveis."
   -
     value: "T02120"
     text: "Com certas ressalvas, é útil considerar como o uso desses controles pode simplificar a identificação de requisitos adicionais – desde que, é claro, os controles estejam incluídos, habilitados e configurados corretamente."
   -
     value: "T02130"
-    text: "Considere remover as seguintes cartas dos baralhos se tiver certeza de que elas serão abordadas pela maneira como você está usando a linguagem/estrutura."
+    text: "Considere remover cartas dos baralhos se tiver certeza de que elas serão abordadas pela maneira como você está usando a linguagem/estrutura."
   -
     value: "T02140"
     text: "Os itens entre parênteses são “talvez”."
@@ -939,7 +948,7 @@ paragraphs:
     text: "6. Quanto tempo leva para jogar uma rodada de cartas usando o baralho completo?"
   -
     value: "T02830"
-    text: "Isso depende da quantidade de discussão e da familiaridade dos participantes com os conceitos de segurança de aplicativos."
+    text: "Isso depende de la portée de l'application, da quantidade de discussão e da familiaridade dos participantes com os conceitos de segurança de aplicativos."
   -
     value: "T02840"
     text: "Mas talvez permita de 1,5 a 2,0 horas para 4 a 6 pessoas."
@@ -1008,7 +1017,7 @@ paragraphs:
     text: "Ver"
   -
     value: "T03060"
-    text: "12. Minha empresa deseja imprimir sua própria versão do OWASP Cornucopi, a qual licença precisamos nos referir?"
+    text: "12. Minha empresa deseja imprimir sua própria versão do OWASP® Cornucopia, a qual licença precisamos nos referir?"
   -
     value: "T03070"
     text: "Consulte a resposta completa a esta pergunta nas páginas web do projeto em"
@@ -1218,7 +1227,7 @@ paragraphs:
     text: "Por favor, entre em contato diretamente com a lista de discussão ou com os líderes do projeto, se alguém estiver faltando nas listas abaixo."
   -
     value: "T03850"
-    text: "Os funcionários esforçados da OWASP, especialmente Kate Hartmann"
+    text: "Os funcionários esforçados da OWASP."
   -
     value: "T03860"
     text: "Participantes das reuniões dos capítulos da OWASP Londres, OWASP Manchester, OWASP Holanda e OWASP Escócia, e do encontro de Gamificação em Londres, que fizeram sugestões úteis e fizeram perguntas desafiadoras"
@@ -1233,7 +1242,7 @@ paragraphs:
     text: "Podcasts e vídeos"
   -
     value: "T03910"
-    text: "Os seguintes recursos de suporte do OWASP Cornucopia estão disponíveis online:"
+    text: "Os seguintes recursos de suporte do OWASP® Cornucopia estão disponíveis online:"
   -
     value: "T03920"
     text: "Vídeo - Usando os cartões, criado durante a cúpula do projeto AppSec EU 2015, 20 de maio de 2015"

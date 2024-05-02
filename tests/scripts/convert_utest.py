@@ -1083,7 +1083,6 @@ class TestGetMappingDict(unittest.TestCase):
     def test_get_mapping_dict_true(self) -> None:
         input_yaml_files = glob.glob(os.sep.join([self.BASE_PATH, "source", "*.yaml"]))
         want_mapping_dict = {
-            "${VE_suit}": "Data validation & encoding",
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
             "${VE_VE2_owasp_asvs}": "1.10, 4.5, 8.1, 11.5, 19.1, 19.5",
             "${VE_VE2_owasp_appsensor}": "HT1, HT2, HT3",
