@@ -20,10 +20,12 @@ from itertools import groupby
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
+    EDITION_CHOICES: List[str] = ["all", "ecommerce", "masvs"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
-    VERSION_CHOICES: List[str] = ["1.00", "1.20", "1.21", "1.30"]
-    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet", "masvs"]
+    VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.20", "1.21", "1.30"]
+    LATEST_VERSION_CHOICES: List[str] = ["1.00", "1.30"]
+    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
@@ -86,18 +88,22 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
 
 
 def convert_type_language_style(
-    file_type: str, language: str = "en", style: str = "static", version: str = "1.21"
+    file_type: str, language: str = "en", style: str = "static", version: str = "1.21", edition: str = "ecommerce"
 ) -> None:
-    if has_not_valid_file_style(style, file_type):
+    if has_not_valid_file_style(style, edition, file_type):
         return
-
+    if not get_valid_mapping_for_version(version, edition):
+        logging.debug("No deck with version: " + version + " for edition: " + edition + " exists")
+        return
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
     if not yaml_files:
         return
 
     # Get the language data from the correct language file (checks vars.args.language to select the correct file)
-    language_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "translation", language, version)
+    language_data: Dict[str, Dict[str, str]] = get_replacement_data(
+        yaml_files, "translation", language, version, edition
+    )
 
     # Get the dict of replacement data
     language_dict: Dict[str, str] = get_replacement_dict(language_data, False)
@@ -105,14 +111,24 @@ def convert_type_language_style(
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
 
-    mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files, version)
+    mapping_dict: Dict[str, str] = get_mapping_dict(yaml_files, version, language, edition)
 
     if convert_vars.making_template:
         language_dict = remove_short_keys(language_dict)
 
-    template_doc: str = get_template_doc(file_type, style)
+    template_doc: str = get_template_doc(file_type, style, edition)
 
     if has_no_matching_translations(language_data, mapping_dict, meta):
+        logging.debug(
+            "Has not matching translations for deck with language: "
+            + language
+            + ", version: "
+            + version
+            + ", style: "
+            + style
+            + ", edition: "
+            + edition
+        )
         return
 
     # Name output file with correct edition, component, language & version
@@ -188,11 +204,12 @@ def main() -> None:
     set_making_template()
 
     # Create output files
-    for file_type in get_valid_file_types():
-        for language in get_valid_language_choices():
-            for style in get_valid_styles():
-                for version in get_valid_version_choices():
-                    convert_type_language_style(file_type, language, style, version)
+    for edition in get_valid_edition_choices():
+        for file_type in get_valid_file_types():
+            for language in get_valid_language_choices():
+                for style in get_valid_styles():
+                    for version in get_valid_version_choices():
+                        convert_type_language_style(file_type, language, style, version, edition)
 
 
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
@@ -219,12 +236,14 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=str,
         choices=convert_vars.VERSION_CHOICES,
         required=False,
-        default="1.30",
+        default="latest",
         help=(
-            "Output version to produce. [`1.00`, `1.20`, `1.21`, `1.30`] "
+            "Output version to produce. [`all`, `latest`, `1.00`, `1.20`, `1.21`, `1.30`] "
             "\nVersion 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1"
             "\nVersion 1.30 and 1.3x will deliver cards mapped to ASVS 4.0"
             "\nVersion 1.00 and 1.0x will deliver cards mapped to MASVS 2.0"
+            "\nVersion all and 1.0x will deliver all versions"
+            "\nVersion latest and 1.0x will deliver the latest deck versions"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
@@ -272,12 +291,25 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.STYLE_CHOICES,
         default="static",
         help=(
-            "Output style to produce. [`static`, `dynamic`, `masvs` or `leaflet`]\n"
+            "Output style to produce. [`static`, `dynamic` or `leaflet`]\n"
             "Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list."
             "The leaflet contains the instructions"
-            "MASVS will print the Cornucopia MASVS/MASTG edition"
         ),
     )
+    group = parser.add_mutually_exclusive_group(required=False)
+    group.add_argument(
+        "-e",
+        "--edition",
+        type=str,
+        choices=convert_vars.EDITION_CHOICES,
+        default="all",
+        help=(
+            "Output decks to produce. [`all`, `ecommerce` or `masvs`]\n"
+            "The various Cornucopia decks. `web` will give you the web ecommerce edition."
+            "`masvs` will give you the MASVS/MASTG edition."
+        ),
+    )
+
     parser.add_argument(
         "-u",
         "--url",
@@ -361,8 +393,10 @@ def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
     return full_tag
 
 
-def get_mapping_dict(yaml_files: List[str], version: str = "1.21") -> Dict[str, str]:
-    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings", "", version)
+def get_mapping_dict(
+    yaml_files: List[str], version: str = "1.21", language: str = "en", edition: str = "ecommerce"
+) -> Dict[str, str]:
+    mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings", language, version, edition)
     if not mapping_data:
         return {}
     return get_replacement_dict(mapping_data, True)
@@ -394,13 +428,17 @@ def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Docu
 
 
 def get_replacement_data(
-    yaml_files: List[str], data_type: str = "translation", language: str = "", version: str = "1.21"
+    yaml_files: List[str],
+    data_type: str = "translation",
+    language: str = "",
+    version: str = "1.21",
+    edition: str = "ecommerce",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
     logging.debug(
         f" --- Starting get_replacement_data() for data_type: {data_type}, language: {language} and version: {version} "
-        f"     with mapping to version {get_valid_mapping_for_version(version)}"
+        f"     with mapping to version {get_valid_mapping_for_version(version, edition)}"
     )
     if convert_vars.making_template:
         lang = "en"
@@ -408,7 +446,8 @@ def get_replacement_data(
         lang = language
     for file in yaml_files:
         if is_yaml_file(file) and (
-            is_lang_file_for_version(file, version, lang) or is_mapping_file_for_version(file, version)
+            is_lang_file_for_version(file, version, lang, edition)
+            or is_mapping_file_for_version(file, version, edition)
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
@@ -439,23 +478,49 @@ def get_replacement_data(
                     logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
                 data = {}
                 continue
+        else:
+            logging.debug(
+                "This file: "
+                + file
+                + " did not load for version: "
+                + version
+                + ", lang: "
+                + lang
+                + ", edition: "
+                + edition
+            )
     if not data or "suits" not in list(data.keys()):
-        logging.error("Could not get " + language + " language data from yaml " + os.path.split(file)[1])
+        logging.error(
+            "Could not get "
+            + language
+            + " language data from yaml "
+            + os.path.split(file)[1]
+            + " for edition: "
+            + edition
+            + " under version:"
+            + version
+        )
     logging.debug(f" --- Len = {len(data)}.")
     return data
 
 
-def is_mapping_file_for_version(path: str, version: str) -> bool:
+def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
     return (
         os.path.basename(path).find("mappings") >= 0
-        and os.path.basename(path).find(get_valid_mapping_for_version(version)) >= 0
+        and os.path.basename(path).find(edition) >= 0
+        and os.path.basename(path).find(get_valid_mapping_for_version(version, edition)) >= 0
     )
 
 
-def is_lang_file_for_version(path: str, version: str, lang: str) -> bool:
-    return (os.path.basename(path).find("-" + lang + ".") >= 0 and os.path.basename(path).find(version) >= 0) or (
+def is_lang_file_for_version(path: str, version: str, lang: str, edition: str) -> bool:
+    return (
+        os.path.basename(path).find("-" + lang + ".") >= 0
+        and os.path.basename(path).find(version) >= 0
+        and os.path.basename(path).find(edition) >= 0
+    ) or (
         os.path.basename(path).find("-" + lang.replace("-", "_") + ".") >= 0
         and os.path.basename(path).find(version) >= 0
+        and os.path.basename(path).find(edition) >= 0
     )
 
 
@@ -573,7 +638,7 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
     return data
 
 
-def get_template_doc(file_type: str, style: str = "static") -> str:
+def get_template_doc(file_type: str, style: str = "static", edition: str = "ecommerce") -> str:
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
     sfile_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
@@ -606,7 +671,13 @@ def get_template_doc(file_type: str, style: str = "static") -> str:
             )
         else:
             template_doc = os.path.normpath(
-                convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_TEMPLATE_FILENAME + "_" + style + "." + sfile_ext
+                convert_vars.BASE_PATH
+                + os.sep
+                + convert_vars.DEFAULT_TEMPLATE_FILENAME.replace("edition", edition)
+                + "_"
+                + style
+                + "."
+                + sfile_ext
             )
 
     template_doc = template_doc.replace("\\ ", " ")
@@ -619,8 +690,8 @@ def get_template_doc(file_type: str, style: str = "static") -> str:
         return "None"
 
 
-def has_not_valid_file_style(style: str, file_type: str) -> bool:
-    if (style == "leaflet" or style == "masvs") and file_type != "idml":
+def has_not_valid_file_style(style: str, edition: str, file_type: str) -> bool:
+    if (style == "leaflet" or edition == "masvs") and file_type != "idml":
         return True
     return False
 
@@ -665,18 +736,24 @@ def get_valid_version_choices() -> List[str]:
     versions = []
     if convert_vars.args.version.lower() == "all":
         for version in convert_vars.VERSION_CHOICES:
-            if version not in ("all"):
+            if version not in ("all", "latest"):
                 versions.append(version)
-    elif convert_vars.args.version == "":
-        versions.append("1.21")
+    elif convert_vars.args.version == "" or convert_vars.args.version == "latest":
+        for version in convert_vars.LATEST_VERSION_CHOICES:
+            versions.append(version)
     else:
         versions.append(convert_vars.args.version)
     return versions
 
 
-def get_valid_mapping_for_version(version: str) -> str:
-    return {"1.00": "1.0", "1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2", "1.0": "1.0"}.get(
-        version, ""
+def get_valid_mapping_for_version(version: str, edition: str) -> str:
+    return (
+        {
+            "ecommerce": {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"},
+            "masvs": {"1.0": "1.0", "1.00": "1.0"},
+        }
+        .get(edition, {})
+        .get(version, "")
     )
 
 
@@ -691,6 +768,19 @@ def get_valid_styles() -> List[str]:
     else:
         styles.append(convert_vars.args.style)
     return styles
+
+
+def get_valid_edition_choices() -> List[str]:
+    editions = []
+    if convert_vars.args.edition.lower() == "all":
+        for edition in convert_vars.EDITION_CHOICES:
+            if edition != "all":
+                editions.append(edition)
+    elif convert_vars.args.edition == "":
+        editions.append("ecommerce")
+    else:
+        editions.append(convert_vars.args.edition)
+    return editions
 
 
 def group_number_ranges(data: List[str]) -> List[str]:
@@ -743,14 +833,17 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
 
 
 def save_qrcode_image(card_id: str, location_url: str = "https://copi.securedelivery.io/cards") -> None:
-    output_file = os.sep.join([convert_vars.BASE_PATH, "resources", "images", card_id + ".png"])
+    output_file = os.sep.join([convert_vars.BASE_PATH, "output", "images", card_id + ".png"])
     ensure_folder_exists(os.path.dirname(output_file))
     if os.path.exists(output_file):
         pass
     else:
-        url = location_url + "/" + card_id
-        img = pyqrcode.create(url)
-        img.svg(output_file, scale=8)
+        try:
+            url = location_url + "/" + card_id
+            img = pyqrcode.create(url)
+            img.svg(output_file, scale=8)
+        except Exception as e:
+            logging.debug("Could not create qr code for file: " + output_file + ", exception: " + str(e))
 
 
 def set_can_convert_to_pdf() -> bool:
