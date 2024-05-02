@@ -1,8 +1,6 @@
-<%= if @game.edition == "ecommerce" do %>
-  <h2>Cornucopia Session: <%= @game.name %></h2>
-<% else %>
-  <h2>EoP Session: <%= @game.name %></h2>
-<% end %>
+<h2>
+  Cornucopia <%= CopiWeb.LiveHelpers.display_game_session(@game.edition) %> <%= @game.name %>
+</h2>
 
 <%= if @game.started_at do %>
 <h3>You're watching this game that started at <%= @game.started_at %> with <%= Enum.count(@game.players) %> players</h3>
