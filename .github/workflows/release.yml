@@ -111,6 +111,5 @@
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.docx
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.idml
                 output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.pdf
-                output/owasp_cornucopia_masvs_cards_en_1.00_masvs.idml
                 README.md
                 source/*.yaml
