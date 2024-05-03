@@ -69,7 +69,7 @@ defmodule CopiWeb do
     end
   end
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths, do: ~w(assets fonts images downloads favicon.ico robots.txt)
 
   def live_view do
     quote do

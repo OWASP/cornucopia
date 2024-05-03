@@ -10,9 +10,11 @@
       <%= assigns[:page_title] || "Copi" %>
     </.live_title>
 
-    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"}/>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"}/>
 
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/css/cards.css"}/>
+
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}></script>
 
     <%= if Application.get_env(:copi, :env) == :prod do %>
       <!-- Global site tag (gtag.js) - Google Analytics -->

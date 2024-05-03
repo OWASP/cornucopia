@@ -1,0 +1,951 @@
+/*  
+  This file is just for cleanly defining the nested css for presenting card decks.
+  All application styling is done with tailwind css classes directly in the templates.
+*/
+
+@font-face {
+  font-family: 'Segoe';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Segoe'), url('/fonts/segoe.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Segoe Light';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Segoe'), url('/fonts/segoe-light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Segoe'), url('/fonts/segoe-ui.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Segoe Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Segoe Condensed'), url('/fonts/segoe-condensed.woff') format('woff');
+}
+@font-face {
+  font-family: 'Segoe Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Segoe Condensed'), url('/fonts/segoe-condensed-bold.woff') format('woff');
+}
+
+/* LiveView specific classes for your customizations */
+.phx-no-feedback.invalid-feedback,
+.phx-no-feedback .invalid-feedback {
+  display: none;
+}
+
+.phx-click-loading {
+  opacity: 0.5;
+  transition: opacity 1s ease-out;
+}
+
+.phx-disconnected{
+  cursor: wait;
+}
+.phx-disconnected *{
+  pointer-events: none;
+}
+
+.phx-modal {
+  opacity: 1!important;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.phx-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.phx-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.phx-modal-close:hover,
+.phx-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Alerts and form errors */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert p {
+  margin-bottom: 0;
+}
+.alert:empty {
+  display: none;
+}
+.invalid-feedback {
+  color: #a94442;
+  display: block;
+  margin: -1rem 0 2rem;
+}
+
+.phx-logo img {
+  height: 80px;
+}
+
+.sd-logo img {
+  height: 80px;
+}
+
+.screenshots td {
+  text-align: center;
+}
+
+.button a {
+  color: #fff;
+}
+
+th {
+  font-weight: normal;
+}
+th.numeric, td.numeric {
+  text-align: right;
+}
+
+.card {
+  float: left;
+  display: flex;
+  margin: 10px;
+  width: 200px;
+  height: 293px;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+ Helvetica, Arial, sans-serif,
+ "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+$authentication-color: #70a6be;
+$authorization-color: #c6b571;
+$data-validation-encoding-color: #92929b;
+$session-management-color: #9ecd90;
+$cryptography-color: #9792c7;
+$cornucopia-color: #405369;
+$wildcard-color: #fccd8f;
+
+.card {
+
+  .left-bar {
+    float: left;
+    height: 100%;
+    width: 32px;
+    padding: 16px 8px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  
+    color: #fff;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    line-height: 14px;
+  }
+}
+
+
+.data-validation-encoding .left-bar {
+  background-color: $data-validation-encoding-color;
+}
+
+.data-validation-encoding .value {
+  color: $data-validation-encoding-color;
+}
+
+.authentication .left-bar {
+  background-color: $authentication-color;
+}
+
+.authentication .value {
+  color: $authentication-color;
+}
+
+.authorization .left-bar {
+  background-color: $authorization-color;
+}
+
+.authorization .value {
+  color: $authorization-color;
+}
+
+.session-management .left-bar {
+  background-color:$session-management-color;
+}
+
+.session-management .value {
+  color:$session-management-color;
+}
+
+.cryptography .left-bar {
+  background-color: $cryptography-color;
+}
+
+.cryptography .value {
+  color: $cryptography-color;
+}
+
+.cornucopia .left-bar {
+  background-color:$cornucopia-color;
+}
+
+.cornucopia .value {
+  color:$cornucopia-color;
+}
+
+.wild-card .left-bar {
+  background-color:$wildcard-color;
+}
+
+.wild-card .value {
+  color:$wildcard-color;
+}
+
+.card .main-content {
+  position: relative;
+  height: 100%;
+  padding: 11px 8px;
+  color:#333;
+}
+
+.J, .Q, .K {
+
+  &.authentication {
+    background-color: scale-color($authentication-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.authorization {
+    background-color: scale-color($authorization-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.data-validation-encoding {
+    background-color: scale-color($data-validation-encoding-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.session-management {
+    background-color: scale-color($session-management-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.cryptography {
+    background-color: scale-color($cryptography-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.cornucopia {
+    background-color: scale-color($cornucopia-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  &.wildcard {
+    background-color: scale-color($wildcard-color, $lightness: 75%, $saturation:  -20%);
+  }
+
+  p.value { color: #fff; }
+}
+
+.card p.value {
+  margin: 0 0 8px 0;
+  text-align: right;
+  vertical-align: top;
+  font-size: 46px;
+  line-height: 40px;
+  font-weight:bold
+}
+
+.card p.description {
+  flex-grow: 1;
+  margin: 0;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.4em;
+}
+
+.card p.misc {
+  margin-top: 60px;
+  font-size: 11px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  line-height: 1.4em;
+}
+
+.card .mappings {
+  position: absolute;
+  bottom: 0;
+  width: 85%;
+  margin: 0 0 16px 0;
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.2em;
+
+  dt {
+    margin: 0;
+  }
+
+  dd {
+    
+    margin: 0 0 1px 0;
+    border-bottom: solid 1px rgb(128, 127, 127);
+  }
+}
+
+/* EOP Card Styles */
+
+.card.eop {
+
+  .left-value {
+    flex: none;
+    position: relative;
+    top: 30px;
+
+    height: 60px;
+    width: 46px;
+
+    background: grey;
+
+    padding: 23px 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Segoe Condensed';
+    font-size: 34px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 14px;
+  }
+
+  .main-content {
+    overflow: hidden;
+    flex: auto;
+    padding: 11px 10px;
+
+    .value {
+      position: absolute;
+      bottom: 40px;
+      right: -24px;
+      color: rgb(180, 180, 180);
+      font-family: 'Segoe UI';
+      font-size: 168px;
+      font-weight: 400;
+      z-index: -1;
+    }
+
+    .category {
+      margin: 32px 0 0 0;
+      font-family: 'Segoe Light';
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    .description {
+      font-family: 'Segoe';
+      font-size: 10px;
+      padding-right: 0px;
+      line-height: 1.3em;
+    }
+  }
+
+ 
+  &.spoofing {
+
+    .left-value {
+      background: rgb(117, 35, 26)
+    }
+
+    .value {
+      color: rgb(180, 180, 180);
+    }
+
+    &.nJ, &.nQ, &.nK {
+      background: rgb(178, 25, 74);
+
+      .main-content {
+        color: #fff;
+      }
+      
+    }
+
+    &.n2 {
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-2.png");
+    }
+    &.n3 {
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-3.png");
+    }
+    &.n4 {
+      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-4.png");
+    }
+    &.n5 {
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-5.png");
+    }
+    &.n6 {
+      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-6.png");
+    }
+    &.n7 {
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-7.png");
+    }
+    &.n8 {
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-8.png");
+    }
+    &.n9 {
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-9.png");
+    }
+    &.n10 {
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-10.png");
+    }
+    &.nJ {
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-j.png");
+    }
+    &.nQ {
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-q.png");
+    }
+    &.nK {
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-k.png");
+    }
+    &.nA {
+      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-a.png");
+    }
+  }
+
+  &.tampering {
+    .left-value {
+      background: rgb(2, 113, 55)
+    }
+    
+    .value {
+      color: rgb(185, 217, 165);
+    }
+
+    &.nJ, &.nQ, &.nK {
+      background: rgb(116, 187, 99);
+
+      .main-content {
+        color: #fff;
+      }
+    }
+
+    &.n3 {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-3.png");
+    }
+    &.n4 {
+      background: no-repeat bottom/100% url("/images/eop-cards/tampering-4.png");
+    }
+    &.n5 {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-5.png");
+    }
+    &.n6 {
+      background: no-repeat bottom/100% url("/images/eop-cards/tampering-6.png");
+    }
+    &.n7 {
+      background: no-repeat center/100% url("/images/eop-cards/tampering-7.png");
+    }
+    &.n8 {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-8.png");
+    }
+    &.n9 {
+      background: no-repeat center/100% url("/images/eop-cards/tampering-9.png");
+    }
+    &.n10 {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-10.png");
+    }
+    &.nJ {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-j.png");
+    }
+    &.nQ {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-q.png");
+    }
+    &.nK {
+      background: no-repeat center/100% url("/images/eop-cards/tampering-k.png");
+    }
+    &.nA {
+      background: no-repeat bottom/100% url("/images/eop-cards/tampering-a.png");
+    }
+  }
+
+  &.repudiation {
+    .left-value {
+      background: rgb(117, 35, 26)
+    }
+
+    .value {
+      color: rgb(229, 114, 63);
+    }
+
+    &.nJ, &.nQ, &.nK {
+      background: rgb(229, 114, 63);
+
+      .main-content {
+        color: #fff;
+      }
+    }
+
+    &.n2 {
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-2.png");
+    }
+    &.n3 {
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-3.png");
+    }
+    &.n4 {
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-4.png");
+    }
+    &.n5 {
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-5.png");
+    }
+    &.n6 {
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-6.png");
+    }
+    &.n7 {
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-7.png");
+    }
+    &.n8 {
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-8.png");
+    }
+    &.n9 {
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-9.png");
+    }
+    &.n10 {
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-10.png");
+    }
+    &.nJ {
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-j.png");
+    }
+    &.nQ {
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-q.png");
+    }
+    &.nK {
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-k.png");
+    }
+    &.nA {
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-a.png");
+    }    
+  }
+
+  &.information-disclosure {
+    .left-value {
+      background: rgb(255, 240, 39)
+    }
+
+    .value {
+      color: rgb(0, 159, 156);
+    }
+
+    &.nJ, &.nQ, &.nK {
+      background: rgb(0, 159, 156);
+
+      .main-content {
+        color: #fff;
+      }
+    }
+
+    &.n2 {
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-2.png");
+    }
+    &.n3 {
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-3.png");
+    }
+    &.n4 {
+      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-4.png");
+    }
+    &.n5 {
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-5.png");
+    }
+    &.n6 {
+      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-6.png");
+    }
+    &.n7 {
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-7.png");
+    }
+    &.n8 {
+      background: no-repeat top 15px left/100% url("/images/eop-cards/information-disclosure-8.png");
+    }
+    &.n9 {
+      background: no-repeat center/100% url("/images/eop-cards/information-disclosure-9.png");
+    }
+    &.n10 {
+      background: no-repeat top 28px left/100% url("/images/eop-cards/information-disclosure-10.png");
+    }
+    &.nJ {
+      background: no-repeat center/100% url("/images/eop-cards/information-disclosure-j.png");
+    }
+    &.nQ {
+      background: no-repeat top 18px left/100% url("/images/eop-cards/information-disclosure-q.png");
+    }
+    &.nK {
+      background: no-repeat top 9px left/100% url("/images/eop-cards/information-disclosure-k.png");
+    }
+    &.nA {
+      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-a.png");
+    }
+  }
+
+  &.denial-of-service {
+    .left-value {
+      background: rgb(26, 25, 25)
+    }
+
+    .value {
+      color: rgb(180, 181, 180);
+    }
+
+    &.nJ, &.nQ, &.nK {
+      background: rgb(102, 102, 101);
+
+      .main-content {
+        color: #fff;
+      }
+    }
+
+    &.n2 {
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-2.png");
+    }
+    &.n3 {
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-3.png");
+    }
+    &.n4 {
+      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-4.png");
+    }
+    &.n5 {
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-5.png");
+    }
+    &.n6 {
+      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-6.png");
+    }
+    &.n7 {
+      background: no-repeat center/100% url("/images/eop-cards/denial-of-service-7.png");
+    }
+    &.n8 {
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-8.png");
+    }
+    &.n9 {
+      background: no-repeat top -15px left/100% url("/images/eop-cards/denial-of-service-9.png");
+    }
+    &.n10 {
+      background: no-repeat top 2px left/100% url("/images/eop-cards/denial-of-service-10.png");
+    }
+    &.nJ {
+      background: no-repeat center/100% url("/images/eop-cards/denial-of-service-j.png");
+    }
+    &.nQ {
+      background: no-repeat top -10px left/100% url("/images/eop-cards/denial-of-service-q.png");
+    }
+    &.nK {
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-k.png");
+    }
+    &.nA {
+      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-a.png");
+    }
+  }
+
+  &.elevation-of-privilege {
+    .left-value {
+      background: rgb(229, 114, 63)
+    }
+
+    .value {
+      color: rgb(69, 139, 189);
+    }
+
+    &.nJ, &.nQ, &.nK {
+      background: rgb(69, 139, 189);
+
+      .main-content {
+        color: #fff;
+      }
+    }
+
+    &.n5 {
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-5.png");
+    }
+    &.n6 {
+      background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-6.png");
+    }
+    &.n7 {
+      background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-7.png");
+    }
+    &.n8 {
+      background: no-repeat top 15px left/100% url("/images/eop-cards/elevation-of-privilege-8.png");
+    }
+    &.n9 {
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-9.png");
+    }
+    &.n10 {
+      background: no-repeat top 30px left/100% url("/images/eop-cards/elevation-of-privilege-10.png");
+    }
+    &.nJ {
+      background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-j.png");
+    }
+    &.nQ {
+      background: no-repeat top -9px left/100% url("/images/eop-cards/elevation-of-privilege-q.png");
+    }
+    &.nK {
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-k.png");
+    }
+    &.nA {
+      background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-a.png");
+    }
+  }
+
+}
+
+@keyframes ants { to { background-position: 100% 100% } }
+
+.card-player {
+  margin: 10px 15px;
+  display: flex;
+
+  .name {
+    margin-right: 5px;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 16px;
+  }
+
+  .vote {
+    font-size: 24px;
+    opacity: 20%;
+
+    &.none {
+      cursor: default;
+    }
+
+    img {
+      cursor: pointer;
+      padding-top: 20px;
+    }
+
+    .badge {
+      font-size: 14px;
+      line-height: 14px;
+      margin-bottom: 20px;
+     }
+  }
+
+  .voted {
+    opacity: 100%;
+  }
+
+  .scored {
+    font-size: 14px;
+    position: relative;
+    top: 20px;
+  }
+
+  .mine {
+    img {
+      cursor: default;
+    }
+  }
+
+  .drop-zone {
+    border: dashed 1px #666;
+    height: 317px;
+    width: 224px;
+
+    &.empty {
+      border: 2px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  repeating-linear-gradient(-45deg, #BBB 0, #BBB 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+      animation: ants 12s linear infinite;
+      width: 248px;
+      color: #BBB;
+    }
+
+    &.mine {
+      background: linear-gradient(white, white) padding-box,
+                  repeating-linear-gradient(-45deg, #666 0, #666 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+      color:#333;
+    }
+
+    .placeholder {
+      text-align: center;
+      margin-top: 60px;
+      padding: 10px;
+    }
+  }
+}
+
+.next-round {
+  text-align: right;
+}
+
+/* Spinner CSS */
+
+.loader {
+  font-size: 10px;
+  margin: 0;
+  text-indent: -9999em;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: #7a7a7a;
+  background: -moz-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
+  background: -webkit-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
+  background: -o-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
+  background: -ms-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
+  background: linear-gradient(to right, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #7a7a7a;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: #fff;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.round-nav {
+  text-align: center;
+
+  span {
+    font-size: 24px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+#table {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .card {
+    flex: 0 0 auto;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  
+  margin-bottom: 20px;
+}
+
+#hand {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .card {
+    flex: 0 0 auto;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+}
+
+/* Dragula Styles */@at-root.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  display: none;
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+.gu-mirror {
+  
+}
