@@ -233,55 +233,55 @@ suits:
   name: "Cryptography"
   cards:
   -
-    id: "CR2"
+    id: "CRM2"
     value: "2"
     desc: "Lesego can compromise cryptographic operations and resources because keys are reused for multiple purposes, or not used according to the purpose for which they were created"
   -
-    id: "CR3"
+    id: "CRM3"
     value: "3"
     desc: "Emery can access data because it has been obfuscated rather than using an approved cryptographic function"
   -
-    id: "CR4"
+    id: "CRM4"
     value: "4"
     desc: "Enselme can modify sensitive data (stored or in transit) because it is not subject to integrity checking"
   -
-    id: "CR5"
+    id: "CRM5"
     value: "5"
     desc: "Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key"
   -
-    id: "CR6"
+    id: "CRM6"
     value: "6"
     desc: "Kouti can extract sensitive data because the cryptographic key, used, is hard-coded or stored insecurely such as in local, internal/external storage"
   -
-    id: "CR7"
+    id: "CRM7"
     value: "7"
     desc: "Ramsey can access stored sensitive data because it is not securely encrypted"
   -
-    id: "CR8"
+    id: "CRM8"
     value: "8"
     desc: "Adel can predict and use the app's cryptographic keys because they are insufficiently long and random, can be enumerated, or derived from known values"
   -
-    id: "CR9"
+    id: "CRM9"
     value: "9"
     desc: "Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)"
   -
-    id: "CRX"
+    id: "CRMX"
     value: "10"
     desc: "Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
-    id: "CRJ"
+    id: "CRMJ"
     value: "J"
     desc: "Hassan can extract or modify sensitive data because functions for storage and/or encryption are weak, deprecated or used incorrectly"
   -
-    id: "CRQ"
+    id: "CRMQ"
     value: "Q"
     desc: "Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented"
   -
-    id: "CRK"
+    id: "CRMK"
     value: "K"
     desc: "Tarik can influence or alter cryptographic operations and can therefore bypass them"
   -
-    id: "CRA"
+    id: "CRMA"
     value: "A"
     desc: "You have invented a new attack against “Cryptography”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Cryptography” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
@@ -345,13 +345,13 @@ suits:
   name: "Wild Card"
   cards:
   -
-    id: "JOA"
+    id: "JOAM"
     value: "JokerA"
     card: "Joker"
     desc: "Mallory can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates"
     misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
   -
-    id: "JOB"
+    id: "JOBM"
     value: "JokerB"
     card: "Joker"
     desc: "Bob can use the app installed on Alice's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Alice, without consent and/or notification"
