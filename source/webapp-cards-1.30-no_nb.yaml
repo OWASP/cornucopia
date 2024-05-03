@@ -365,10 +365,10 @@ paragraphs:
     text: "Ikke et kort"
   -
     value: "Title"
-    text: "Web App Edition v1.30-NO_NB"
+    text: "Website App Edition v1.30-NO_NB"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Web App Edition v1.30-NO_NB"
+    text: "OWASP® Cornucopia Website App Edition v1.30-NO_NB"
   -
     value: "T00005"
     text: "Indeks"
@@ -434,13 +434,13 @@ paragraphs:
     text: "EoP er et flott konsept og spillstrategi, og ble publisert under en “Creative Commons Attribution” lisensen."
   -
     value: "T00250"
-    text: "“Cornucopia Web App Edition” er basert på konseptene og spillideene i EoP, men de har blitt modifisert for å være mer relevante for den typen problemer som utviklere av webapp-nettsteder møter."
+    text: "“Cornucopia Website App Edition” er basert på konseptene og spillideene i EoP, men de har blitt modifisert for å være mer relevante for den typen problemer som utviklere av webapp-nettsteder møter."
   -
     value: "T00260"
     text: "Den prøver å introdusere trusselmodellerings ideer i utviklingsteam som bruker smidige metoder, eller som er mer fokusert på svakheter i nettapplikasjoner enn andre typer programvaresårbarheter eller som ikke er kjent med STRIDE og DREAD."
   -
     value: "T00270"
-    text: "“Cornucopia Web App Edition” er referert til som en informasjonsressurs i “PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2”, januar 2013."
+    text: "“Cornucopia Website App Edition” er referert til som en informasjonsressurs i “PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2”, januar 2013."
   -
     value: "T00300"
     text: "Kortstokken (pakke)"
