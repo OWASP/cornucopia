@@ -1,5 +1,10 @@
 # Copi
 
+## What is Copi?
+
+Copi is where the world plays Cornucopia and Elevation of Privilege. You can play all the editions (website and mobile) of Cornucopia as well as the Elevation of Privileges card game. 
+
+
 ## Dev Environment Setup
 
 ### Mac
