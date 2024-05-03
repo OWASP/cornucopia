@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full bg-gray-100">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -28,19 +28,7 @@
       </script>
     <% end %>
   </head>
-  <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <a href="https://securedelivery.io/" class="sd-logo">
-            <img src={~p"/images/sd-logo-line.png"} alt="Secure Delivery Logo"/>
-          </a>
-        </nav>
-        <a href="/" class="phx-logo">
-          <img src={~p"/images/copi-logo.png"} alt="Copi Logo"/>
-        </a>
-      </section>
-    </header>
+  <body class="h-full">
     <%= @inner_content %>
   </body>
 </html>
