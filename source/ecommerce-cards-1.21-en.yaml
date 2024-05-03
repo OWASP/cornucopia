@@ -365,10 +365,10 @@ paragraphs:
     text: "No Card"
   -
     value: "Title"
-    text: "Ecommerce Website Edition v1.21-EN"
+    text: "Web App Edition v1.21-EN"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia Ecommerce Website Edition v1.21-EN"
+    text: "OWASP Cornucopia Web App Edition v1.21-EN"
   -
     value: "T00005"
     text: "Index"
@@ -431,13 +431,13 @@ paragraphs:
     text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
   -
     value: "T00250"
-    text: "Cornucopia Ecommerce Website Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues ecommerce website developers encounter."
+    text: "Cornucopia Web App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues ecommerce website developers encounter."
   -
     value: "T00260"
     text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
   -
     value: "T00270"
-    text: "Cornucopia Ecommerce Website Edition is referenced as an information resource in the PCI Security Standard Council’s Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
+    text: "Cornucopia Web App Edition is referenced as an information resource in the PCI Security Standard Council’s Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
   -
     value: "T00300"
     text: "The card deck (pack)"

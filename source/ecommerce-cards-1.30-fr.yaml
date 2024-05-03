@@ -363,10 +363,10 @@ paragraphs:
     text: "Pas de Carte"
   -
     value: "Title"
-    text: "Édition de Ecommerce v1.30-FR"
+    text: "Édition d'application Web v1.30-FR"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Édition de Ecommerce v1.30-FR"
+    text: "OWASP® Cornucopia Édition d'application Web v1.30-FR"
   -
     value: "T00005"
     text: "Indice"
@@ -432,13 +432,13 @@ paragraphs:
     text: "EoP est un grand concept de stratégie de jeu, et a été publié sous une licence Creative Commons d'Attribution."
   -
     value: "T00250"
-    text: "L'Édition Site Web e-commerce de Cornucopia est basé sur les concepts et les idées de jeu d'EoP, mais ceux-ci ont été modifiés pour être plus en accord avec les types de problèmes que les développeurs de sites web d'e-commerce rencontrent."
+    text: "L'Édition d'application web de Cornucopia est basé sur les concepts et les idées de jeu d'EoP, mais ceux-ci ont été modifiés pour être plus en accord avec les types de problèmes que les développeurs de sites web d'e-commerce rencontrent."
   -
     value: "T00260"
     text: "Elle essaie d'apporter des idées de modélisation de menace au niveau des équipes de développement qui utilisent les méthodologies Agile, ou qui sont plus portées sur les faiblesses des applications web que les autres types de vulnérabilité logicielle, ou ne sont pas familiarisées avec STRIDE et DREAD."
   -
     value: "T00270"
-    text: "L'Édition Site Web e-commerce de Cornucopia est référencé comme ressource d'information dans le PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, janvier 2013."
+    text: "L'ÉÉdition d'application web de Cornucopia est référencé comme ressource d'information dans le PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, janvier 2013."
   -
     value: "T00300"
     text: "Le jeu de cartes (paquet)"
@@ -648,7 +648,7 @@ paragraphs:
     text: "En voici une, en situation dans une vidéo en ligne sur "
   -
     value: "T01311"
-    text: ", qui utilise la nouvelle (mai 2015) feuille de scores disponible ici:" 
+    text: ", qui utilise la nouvelle (mai 2015) feuille de scores disponible ici:"
   -
     value: "T01400"
     text: "Préparations"
