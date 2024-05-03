@@ -564,7 +564,7 @@ class TestGetReplacementData(unittest.TestCase):
                         },
                         {
                             "value": "Title",
-                            "text": "OWASP Cornucopia webapp Edition v1.21-EN",
+                            "text": "OWASP Cornucopia Website App Edition v1.21-EN",
                         },
                     ],
                 },
@@ -677,7 +677,7 @@ class TestGetReplacementDataFor1dot30(unittest.TestCase):
                         },
                         {
                             "value": "Title",
-                            "text": "OWASP Cornucopia webapp Edition v1.30-EN",
+                            "text": "OWASP Cornucopia Website App Edition v1.30-EN",
                         },
                     ],
                 },
