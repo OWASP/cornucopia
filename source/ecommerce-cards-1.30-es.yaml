@@ -365,10 +365,10 @@ paragraphs:
     text: "No Tarjeta"
   -
     value: "Title"
-    text: "Ecommerce Website Edition v1.30-ES"
+    text: "Web App Edition v1.30-ES"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Ecommerce Website Edition v1.30-ES"
+    text: "OWASP® Cornucopia Web App Edition v1.30-ES"
   -
     value: "T00005"
     text: "Índice"
@@ -434,13 +434,13 @@ paragraphs:
     text: "EoP es un gran concepto y estrategia de juego, y fue publicado bajo una Licencia de Creative Commons Attribution."
   -
     value: "T00250"
-    text: "Cornucopia Ecommerce Website Edition se basa en los conceptos e ideas de juegos de EoP, pero se han modificado para que sean más relevantes para los tipos de problemas que enfrentan los desarrolladores de sitios web de comercio electrónico."
+    text: "Cornucopia Web App Edition se basa en los conceptos e ideas de juegos de EoP, pero se han modificado para que sean más relevantes para los tipos de problemas que enfrentan los desarrolladores de sitios web de comercio electrónico."
   -
     value: "T00260"
     text: "Intenta introducir ideas de modelado de amenazas en los equipos de desarrollo que utilizan metodologías ágiles, o están más enfocados en las debilidades de las aplicaciones web que otros tipos de vulnerabilidades de software o no están familiarizados con STRIDE y DREAD. "
   -
     value: "T00270"
-    text: "Cornucopia Ecommerce Website Edition es referenciada como un recurso de información en el PCI Security Standard Council's Supplement Information PCI DSS E-commerce Guidelines, v2, enero de 2013."
+    text: "Cornucopia Web App Edition es referenciada como un recurso de información en el PCI Security Standard Council's Supplement Information PCI DSS E-commerce Guidelines, v2, enero de 2013."
   -
     value: "T00300"
     text: "El mazo de cartas (paquete)"
