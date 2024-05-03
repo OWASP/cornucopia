@@ -4,6 +4,43 @@ defmodule CopiWeb.GameLive.FormComponent do
   alias Copi.Cornucopia
 
   @impl true
+
+  def render(assigns) do
+    ~H"""
+    <div>
+      <.header>
+        <%= @title %>
+        <:subtitle>Use this form to manage game records in your database.</:subtitle>
+      </.header>
+
+      <.simple_form
+        for={@form}
+        id="game-form"
+        phx-target={@myself}
+        phx-change="validate"
+        phx-submit="save"
+      >
+        <.input field={@form[:name]} type="text" label={gettext "Give your game session a friendly name so people joining know what's up"} />
+
+        <.input
+          field={@form[:edition]}
+          type="select"
+          label={gettext "Choose the type of game you wish to play"}
+          options={[
+              {"Cornucopia", "ecommerce"},
+              {"Elevation of Privilege", "eop"},
+          ]}
+          >
+        </.input>
+
+        <:actions>
+          <.button phx-disable-with="Starting game..." class="py-2 px-3"><%= gettext "Create the game" %></.button>
+        </:actions>
+      </.simple_form>
+    </div>
+    """
+  end
+
   def update(%{game: game} = assigns, socket) do
     changeset = Cornucopia.change_game(game)
 
@@ -50,7 +87,7 @@ defmodule CopiWeb.GameLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Game created successfully")
-         |> push_redirect(to: Routes.game_show_path(socket, :show, game))}
+         |> push_navigate(to: ~p"/games/#{game.id}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}

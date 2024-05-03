@@ -77,7 +77,9 @@ No more players will be allowed to join once the game is started.</em></p>
 <p></p>
 <h3>Waiting for players</h3>
 
-<span><%= live_patch gettext("Join game as a player"), to: Routes.player_index_path(@socket, :new, @game.id), class: "button" %></span>
+<.link patch={~p"/games/#{@game.id}/players/new"}>
+  <.button><%= gettext("Join game as a player") %></.button>
+</.link>
 
 <p><strong>Don't share your player URL with anyone once you've joined as a player or they'll join as you. You can use it to move your player session to another computer though!</strong></p>
 
