@@ -19,6 +19,5 @@ defmodule Copi.Repo.Migrations.CreateCards do
       add :owasp_mastg, {:array, :string}
       timestamps()
     end
-
   end
 end

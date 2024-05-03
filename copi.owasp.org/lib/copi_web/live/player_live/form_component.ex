@@ -43,7 +43,6 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   defp save_player(socket, :new, player_params) do
     case Cornucopia.create_player(player_params) do
       {:ok, player} ->
-
         {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
         CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 

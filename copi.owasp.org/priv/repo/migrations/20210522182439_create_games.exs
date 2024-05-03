@@ -12,6 +12,5 @@ defmodule Copi.Repo.Migrations.CreateGames do
 
       timestamps()
     end
-
   end
 end
