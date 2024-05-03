@@ -171,11 +171,11 @@ $wildcard-color: #fccd8f;
 
 $platform-code-mobile-color: rgb(79, 185, 145);
 $authentication-authorization-mobile-color: rgb(240, 146, 54);
-$network-storage-mobile-color: rgb( 242, 194, 0);
-$resilience-mobile-color: rgb(  49, 124, 192);
-$cryptography-mobile-color: rgb(  246, 89, 40);
-$cornucopia-mobile-color: rgb( 10, 58, 94);
-$wildcard-mobile-color: rgb( 251, 182, 124);
+$network-storage-mobile-color: rgb(242, 194, 0);
+$resilience-mobile-color: rgb(49, 124, 192);
+$cryptography-mobile-color: rgb(246, 89, 40);
+$cornucopia-mobile-color: rgb(10, 58, 94);
+$wildcard-mobile-color: rgb(251, 182, 124);
 
 .card {
 
@@ -214,7 +214,7 @@ $wildcard-mobile-color: rgb( 251, 182, 124);
 }
 
 .network-storage-mobile .left-bar {
-  background-image: linear-gradient(rgb( 242, 194, 0), rgb( 223, 92, 141));
+  background-image: linear-gradient(rgb(242, 194, 0), rgb( 223, 92, 141));
 }
 
 .network-storage-mobile .value {
@@ -222,7 +222,7 @@ $wildcard-mobile-color: rgb( 251, 182, 124);
 }
 
 .resilience-mobile .left-bar {
-  background-image: linear-gradient(rgb( 49, 124, 192), rgb(  79, 138 ,192));
+  background-image: linear-gradient(rgb(49, 124, 192), rgb(79, 138 ,192));
 }
 
 .resilience-mobile .value {
@@ -230,7 +230,7 @@ $wildcard-mobile-color: rgb( 251, 182, 124);
 }
 
 .cryptography-mobile .left-bar {
-  background-image: linear-gradient(rgb( 246, 89, 40), rgb( 246, 135, 101));
+  background-image: linear-gradient(rgb(246, 89, 40), rgb(246, 135, 101));
 }
 
 .cryptography-mobile .value {
@@ -238,7 +238,7 @@ $wildcard-mobile-color: rgb( 251, 182, 124);
 }
 
 .cornucopia-mobile .left-bar {
-  background-image: linear-gradient(rgb(  10, 58, 94), rgb( 39, 70, 94));
+  background-image: linear-gradient(rgb(10, 58, 94), rgb(39, 70, 94));
 }
 
 .cornucopia-mobile .value {
@@ -246,11 +246,11 @@ $wildcard-mobile-color: rgb( 251, 182, 124);
 }
 
 .wild-card-mobile .left-bar {
-  background-image: linear-gradient(rgb( 251, 182, 124), rgb(   255, 230, 209));
+  background-image: linear-gradient(rgb(251, 182, 124), rgb(255, 230, 209));
 }
 
 .wild-card-mobile {
-  background-image: linear-gradient(to left,rgb( 251, 182, 124, 0.49), rgb(  255, 230, 209, 0.49));
+  background-image: linear-gradient(to left,rgb(251, 182, 124, 0.49), rgb(255, 230, 209, 0.49));
 }
 
 .wild-card-mobile .value {

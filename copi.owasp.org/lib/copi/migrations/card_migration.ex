@@ -2,7 +2,15 @@ defmodule Copi.CardMigration do
   alias Copi.Repo
   alias Copi.Cornucopia.Card
 
-  def populate_cards(path) do
+  def migrate_cards_to_database(cards_file_path, mappings_file_path)do
+    populate_cards Path.join(File.cwd!(), cards_file_path)
+
+    if(mappings_file_path) do
+      map_cards Path.join(File.cwd!(), mappings_file_path)
+    end
+  end
+
+  defp populate_cards(path) do
     case YamlElixir.read_from_file(path) do
       {:ok, cards} ->
         edition = cards["meta"]["edition"]
@@ -32,13 +40,13 @@ defmodule Copi.CardMigration do
     end
   end
 
-  def update_card(card)do
+  defp update_card(card)do
     card
     |> Ecto.Changeset.change(external_id: card["id"])
     |> Repo.update()
   end
 
-  def map_cards(path) do
+  defp map_cards(path) do
     case YamlElixir.read_from_file(path) do
       {:ok, cards} ->
         edition = cards["meta"]["edition"]
@@ -72,16 +80,10 @@ defmodule Copi.CardMigration do
     end
   end
 
-  def set_mappings_for_card(mappings) do
+  defp set_mappings_for_card(mappings) do
     mappings |> Enum.map(fn x -> to_string(x) end)
   end
 
-  def migrate_cards_to_database(cards_file_path, mappings_file_path)do
-    populate_cards Path.join(File.cwd!(), cards_file_path)
 
-    if(mappings_file_path) do
-      map_cards Path.join(File.cwd!(), mappings_file_path)
-    end
-  end
 
 end
