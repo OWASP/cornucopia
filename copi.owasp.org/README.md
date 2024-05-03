@@ -54,7 +54,7 @@ docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PA
 ```
 Note: the password must be the same as the one in the config file of your dev environment.
 
-You've now got Elixir, Hex, Phoenix and Postgres
+You've now got Elixir, Hex, Phoenix and Postgres. You are ready to run Copi locally and contribute.
 
 Bonus: set up vscode for elixir dev https://fly.io/phoenix-files/setup-vscode-for-elixir-development/
 
