@@ -136,3 +136,4 @@ jobs:
             output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.idml
             output/owasp_cornucopia_ecommerce_cards_pt-br_1.30_static.pdf
             output/owasp_cornucopia_masvs_cards_en_1.00_static.idml
+            output/owasp_cornucopia_masvs_cards_en_1.00_leaflet.idml
