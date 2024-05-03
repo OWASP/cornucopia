@@ -5,13 +5,41 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   alias Copi.Cornucopia
 
   @impl true
+
+  def render(assigns) do
+    ~H"""
+    <div>
+      <.header>
+        <%= @title %>
+        <:subtitle>Use this form to manage player records in your database.</:subtitle>
+      </.header>
+
+      <.simple_form
+        for={@form}
+        id="player-form"
+        phx-target={@myself}
+        phx-change="validate"
+        phx-submit="save"
+      >
+        <.input field={@form[:name]} type="text" label={gettext "Player Name"} />
+
+        <.input field={@form[:game_id]} type="hidden" />
+
+        <:actions>
+          <.button phx-disable-with="Joining..." class="py-2 px-3"><%= gettext "Join the game" %></.button>
+        </:actions>
+      </.simple_form>
+    </div>
+    """
+  end
+
   def update(%{player: player} = assigns, socket) do
     changeset = Cornucopia.change_player(player)
 
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign_form(changeset)}
   end
 
   @impl true
@@ -21,11 +49,15 @@ defmodule CopiWeb.PlayerLive.FormComponent do
       |> Cornucopia.change_player(player_params)
       |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+      {:noreply, assign_form(socket, changeset)}
   end
 
   def handle_event("save", %{"player" => player_params}, socket) do
     save_player(socket, socket.assigns.action, player_params)
+  end
+
+  defp assign_form(socket, %Ecto.Changeset{} = changeset) do
+    assign(socket, :form, to_form(changeset))
   end
 
   defp save_player(socket, :edit, player_params) do
@@ -37,7 +69,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, :changeset, changeset)}
+        {:noreply, assign_form(socket, changeset)}
     end
   end
 
@@ -51,10 +83,10 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         {:noreply,
          socket
          |> assign(:game, updated_game)
-         |> push_redirect(to: Routes.player_show_path(socket, :show, player.game_id, player))}
+         |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        {:noreply, assign_form(socket, changeset)}
     end
   end
 
