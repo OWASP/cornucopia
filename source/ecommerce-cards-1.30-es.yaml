@@ -1,6 +1,6 @@
 ---
 meta:
-  edition: "ecommerce"
+  edition: "webapp"
   component: "cards"
   language: "ES"
   version: "1.30"

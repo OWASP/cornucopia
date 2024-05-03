@@ -1,6 +1,6 @@
 ---
 meta:
-  edition: "ecommerce"
+  edition: "webapp"
   component: "mappings"
   language: "ALL"
   version: "1.20"
