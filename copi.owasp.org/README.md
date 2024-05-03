@@ -7,6 +7,8 @@ Copi is where the world can play Cornucopia and Elevation of Privilege. You can 
 
 ## Dev Environment Setup
 
+If you want to contribute to Copi, follow the guide below to set up your development environment.
+
 ### Installation by Operating System
 #### Mac
 
