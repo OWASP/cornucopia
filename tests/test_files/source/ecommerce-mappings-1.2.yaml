@@ -1,6 +1,6 @@
 ---
 meta:
-  edition: "ecommerce"
+  edition: "webapp"
   component: "mappings"
   language: "ALL"
   version: "1.2"
@@ -22,4 +22,3 @@ suits:
     owasp_appsensor: [ RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3 ]
     capec: [ 28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272 ]
     safecode: [ 3, 16, 24, 35 ]
-

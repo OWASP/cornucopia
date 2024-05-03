@@ -1,6 +1,6 @@
 ---
 meta:
-  edition: "ecommerce"
+  edition: "webapp"
   component: "cards"
   language: "NO-NB"
   version: "1.30"
@@ -434,7 +434,7 @@ paragraphs:
     text: "EoP er et flott konsept og spillstrategi, og ble publisert under en “Creative Commons Attribution” lisensen."
   -
     value: "T00250"
-    text: "“Cornucopia Web App Edition” er basert på konseptene og spillideene i EoP, men de har blitt modifisert for å være mer relevante for den typen problemer som utviklere av ecommerce-nettsteder møter."
+    text: "“Cornucopia Web App Edition” er basert på konseptene og spillideene i EoP, men de har blitt modifisert for å være mer relevante for den typen problemer som utviklere av webapp-nettsteder møter."
   -
     value: "T00260"
     text: "Den prøver å introdusere trusselmodellerings ideer i utviklingsteam som bruker smidige metoder, eller som er mer fokusert på svakheter i nettapplikasjoner enn andre typer programvaresårbarheter eller som ikke er kjent med STRIDE og DREAD."
