@@ -22,9 +22,9 @@ def make_cre_link(cre_id: str, frontend: bool = False) -> str:
         return f"{opencre_rest_url}/id/{cre_id}"
 
 
-def produce_ecommerce_mappings(source_file: Dict[Any, Any], standards_to_add: list[str]) -> Dict[Any, Any]:
+def produce_webapp_mappings(source_file: Dict[Any, Any], standards_to_add: list[str]) -> Dict[Any, Any]:
     base = {
-        "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
+        "meta": {"edition": "webapp", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
     }
     for indx, suit in enumerate(source_file.copy()["suits"]):
         for card_indx, card in enumerate(suit["cards"]):
@@ -75,9 +75,9 @@ def main() -> None:
     with open(args["cres"]) as f:
         mappings = yaml.safe_load(f)
         if args["target"]:
-            ecommerce = produce_ecommerce_mappings(mappings, STANDARDS_TO_ADD)
+            webapp = produce_webapp_mappings(mappings, STANDARDS_TO_ADD)
             with open(args["target"], "w") as ef:
-                yaml.safe_dump(ecommerce, ef)
+                yaml.safe_dump(webapp, ef)
         if args["qr_images"]:
             generate_qr_images(mappings, args["qr_images"])
 

@@ -20,7 +20,7 @@ from itertools import groupby
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-    EDITION_CHOICES: List[str] = ["all", "ecommerce", "masvs"]
+    EDITION_CHOICES: List[str] = ["all", "webapp", "masvs"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.20", "1.21", "1.30"]
@@ -88,7 +88,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
 
 
 def convert_type_language_style(
-    file_type: str, language: str = "en", style: str = "static", version: str = "1.21", edition: str = "ecommerce"
+    file_type: str, language: str = "en", style: str = "static", version: str = "1.21", edition: str = "webapp"
 ) -> None:
     if has_not_valid_file_style(style, edition, file_type):
         return
@@ -304,8 +304,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.EDITION_CHOICES,
         default="all",
         help=(
-            "Output decks to produce. [`all`, `ecommerce` or `masvs`]\n"
-            "The various Cornucopia decks. `web` will give you the web ecommerce edition."
+            "Output decks to produce. [`all`, `webapp` or `masvs`]\n"
+            "The various Cornucopia decks. `web` will give you the web webapp edition."
             "`masvs` will give you the MASVS/MASTG edition."
         ),
     )
@@ -394,7 +394,7 @@ def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
 
 
 def get_mapping_dict(
-    yaml_files: List[str], version: str = "1.21", language: str = "en", edition: str = "ecommerce"
+    yaml_files: List[str], version: str = "1.21", language: str = "en", edition: str = "webapp"
 ) -> Dict[str, str]:
     mapping_data: Dict[str, Dict[str, str]] = get_replacement_data(yaml_files, "mappings", language, version, edition)
     if not mapping_data:
@@ -432,7 +432,7 @@ def get_replacement_data(
     data_type: str = "translation",
     language: str = "",
     version: str = "1.21",
-    edition: str = "ecommerce",
+    edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
@@ -611,7 +611,7 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
     # Short tags to match the suits in the template documents
     suit_tags: List[str] = []
     suit_key: str = ""
-    if key == "suits" and edition == "ecommerce":
+    if key == "suits" and edition == "webapp":
         suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
         suit_key = "cards"
     if key == "suits" and edition == "masvs":
@@ -638,7 +638,7 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
     return data
 
 
-def get_template_doc(file_type: str, style: str = "static", edition: str = "ecommerce") -> str:
+def get_template_doc(file_type: str, style: str = "static", edition: str = "webapp") -> str:
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
     sfile_ext = file_type.replace("pdf", "docx")  # Pdf output uses docx source file
@@ -749,7 +749,7 @@ def get_valid_version_choices() -> List[str]:
 def get_valid_mapping_for_version(version: str, edition: str) -> str:
     return (
         {
-            "ecommerce": {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"},
+            "webapp": {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"},
             "masvs": {"1.0": "1.0", "1.00": "1.0"},
         }
         .get(edition, {})
@@ -777,7 +777,7 @@ def get_valid_edition_choices() -> List[str]:
             if edition != "all":
                 editions.append(edition)
     elif convert_vars.args.edition == "":
-        editions.append("ecommerce")
+        editions.append("webapp")
     else:
         editions.append(convert_vars.args.edition)
     return editions
