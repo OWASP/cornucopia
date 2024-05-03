@@ -430,9 +430,7 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args.outputfile = c.convert_vars.DEFAULT_OUTPUT_FILENAME
         input_file_type = "docx"
         input_style_type = "static"
-        want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.21.docx"]
-        )
+        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.21.docx"])
 
         got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
