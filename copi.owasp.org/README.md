@@ -1,8 +1,11 @@
 # Copi
 
-## Dev Environment Setup (Mac)
+## Dev Environment Setup
 
-### Get Homebrew
+### Mac
+
+#### Get Homebrew
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -11,31 +14,37 @@ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/tai/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-### Get Elixir
+#### Get Elixir
 ```bash
 brew install elixir
 ```
+
+### Linux and Windows
+Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows). 
 
 ### Install the Elixir package manager, Hex
 ```bash
 mix local.hex
 ```
 
-### Check you've got Elixir 1.14 and Erlang 25
+#### Check you've got Elixir 1.16 and Erlang 26, or higher
 ```bash
 elixir -v
 ```
 
 ### Install the web application framework, Phoenix (this line will change when 1.7 goes GA)
 ```bash
-mix archive.install hex phx_new 1.7.0-rc.0
+mix archive.install hex phx_new
 ```
 
-### You'll also need to get Docker for MacOS (easiest way to get a postgres instance running)
+### PostgreSQL with Docker
 https://docs.docker.com/desktop/install/mac-install/
 
-There's a button on the app to grab the latest stable Postgres image and run it
-Click that button
+After installing docker, You can create an instance of the Postgres image:
+```bash
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
+```
+Note: the password must be the same as the one in the config file of your dev environment.
 
 You've now got Elixir, Hex, Phoenix and Postgres
 
