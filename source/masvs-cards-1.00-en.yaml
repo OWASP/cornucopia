@@ -6,7 +6,7 @@ meta:
   version: "1.00"
 suits:
 -
-  name: "Platform & code"
+  name: "Platform & Code"
   cards:
   -
     id: "PC2"
@@ -382,6 +382,9 @@ paragraphs:
     value: "T00110"
     text: "Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
   -
+    value: "T00120"
+    text: "Colin Watson for coming up with Cornucopia which OWASP Cornucopia Mobile App Edition is based on."
+  -
     value: "T00130"
     text: "Contributors, supporters, sponsors and volunteers to the OWASP MASVS/MASTG, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
@@ -422,7 +425,7 @@ paragraphs:
     text: "These provided five suits, and a sixth called “Cornucopia” was created as a trump suite: "
   -
     value: "T00330"
-    text: "Platform & code (PC)"
+    text: "Platform & Code (PC)"
   -
     value: "T00340"
     text: "Authentication & Authorization (AA)"
@@ -698,25 +701,22 @@ paragraphs:
     text: "3. How were the attackers' names chosen?"
   -
     value: "T02680"
-    text: "EoP begins every description with words like 'An attacker can...'. "
+    text: "EoP begins every description with words like 'An attacker can...',"
   -
     value: "T02690"
-    text: "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
+    text: "but Colin Watson used personal names in Cornucopia which can be thought of as external or internal people or aliases for computer systems."
   -
     value: "T02700"
-    text: "These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. "
+    text: "Likewise, the Mobile App Edition names reflect the OWASP community aspect."
   -
     value: "T02710"
-    text: "Therefore, apart from 'Alice and Bob' I use the given (first) names of current and recent OWASP employees and Board members (assigned in no order), and then randomly selected the remaining 50 or so names from the current list of paying individual OWASP members. "
+    text: "Therefore, apart from 'Alice, Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile Edition authors and contributors, and OWASP Chapter leaders around the world."
   -
     value: "T02720"
-    text: "No name was used more than once, and where people had provided two personal names, I dropped one part to try to ensure no-one can be easily identified. "
+    text: "The cultural and gender mix simply reflects these sources of names"
   -
     value: "T02730"
-    text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
-  -
-    value: "T02740"
-    text: "In v1.20, the name on VE-10 changed to reflect the project's new co-leader - this card is also the only one with two names in the attack."
+    text: ", and is not meant to be world-representative."
   -
     value: "T02750"
     text: "4. Why aren't there any images on the card faces?"
@@ -797,7 +797,7 @@ paragraphs:
     text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
   -
     value: "T03010"
-    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Data Validation and Encoding)."
+    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Platform & Code)."
   -
     value: "T03020"
     text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
