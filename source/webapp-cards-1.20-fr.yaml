@@ -365,10 +365,10 @@ paragraphs:
     text: "Pas de Carte"
   -
     value: "Title"
-    text: "Édition d'application Web v1.20-FR"
+    text: "Édition d'application site Web v1.20-FR"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia Édition d'application Web v1.20-FR"
+    text: "OWASP Cornucopia Édition d'application site Web v1.20-FR"
   -
     value: "T00005"
     text: "Indice"
