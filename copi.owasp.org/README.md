@@ -2,14 +2,15 @@
 
 ## What is Copi?
 
-Copi is where the world plays Cornucopia and Elevation of Privilege. You can play all the editions (website and mobile) of Cornucopia as well as the Elevation of Privileges card game. 
+Copi is where the world can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia  (website and mobile) as well as the Elevation of Privileges game. 
 
 
 ## Dev Environment Setup
 
-### Mac
+### By Operating System
+#### Mac
 
-#### Get Homebrew
+##### Get Homebrew
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -19,12 +20,12 @@ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/tai/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-#### Get Elixir
+##### Get Elixir
 ```bash
 brew install elixir
 ```
 
-### Linux and Windows
+#### Linux and Windows
 Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows). 
 
 ### Install the Elixir package manager, Hex
