@@ -37,7 +37,7 @@ class TestGenerateQRImages(unittest.TestCase):
         mock_img.save.assert_called_with(mock_open().__enter__())
 
 
-class TestProduceEcommerceMappings(unittest.TestCase):
+class TestProducewebappMappings(unittest.TestCase):
     def test_can_add_one_standard(self):
         test_input = {
             "suits": [
@@ -47,17 +47,17 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
         standards = ["ASVS"]
         expected = {
-            "meta": {"component": "mappings", "edition": "ecommerce", "language": "ALL", "version": "1.20"},
+            "meta": {"component": "mappings", "edition": "webapp", "language": "ALL", "version": "1.20"},
             "suits": [
                 {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
                 {"cards": [{"ASVS": "V2.3.3", "cre": ["138-448"], "value": "2"}], "name": "Session management"},
             ],
         }
 
-        self.assertEqual(gm.produce_ecommerce_mappings(test_input, standards), expected)
+        self.assertEqual(gm.produce_webapp_mappings(test_input, standards), expected)
 
     @patch("requests.get")
-    def test_produce_ecommerce_mappings(self, mock_requests_get):
+    def test_produce_webapp_mappings(self, mock_requests_get):
         cornucopia_version = "1.20"
         source_file = {
             "suits": [
@@ -85,10 +85,10 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         }
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add)
+        result = gm.produce_webapp_mappings(source_file, standards_to_add)
 
         expected_result = {
-            "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
+            "meta": {"edition": "webapp", "component": "mappings", "language": "ALL", "version": cornucopia_version},
             "suits": [{"cards": [{"cre": ["cre1"], "ASVS": "123", "CAPEC": "456"}]}],
         }
 
@@ -99,7 +99,7 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     @patch("requests.get")
-    def test_produce_ecommerce_mappings_cre_not_found(self, mock_requests_get):
+    def test_produce_webapp_mappings_cre_not_found(self, mock_requests_get):
         cornucopia_version = "1.20"
         source_file = {
             "suits": [
@@ -118,10 +118,10 @@ class TestProduceEcommerceMappings(unittest.TestCase):
         mock_response.status_code = 404
         mock_requests_get.return_value = mock_response
 
-        result = gm.produce_ecommerce_mappings(source_file, standards_to_add)
+        result = gm.produce_webapp_mappings(source_file, standards_to_add)
 
         expected_result = {
-            "meta": {"edition": "ecommerce", "component": "mappings", "language": "ALL", "version": cornucopia_version},
+            "meta": {"edition": "webapp", "component": "mappings", "language": "ALL", "version": cornucopia_version},
             "suits": [
                 {
                     "cards": [

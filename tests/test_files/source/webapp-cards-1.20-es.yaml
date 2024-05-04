@@ -1,6 +1,6 @@
 ---
 meta:
-  edition: "ecommerce"
+  edition: "webapp"
   component: "cards"
   language: "ES"
   version: "1.20"
@@ -38,10 +38,10 @@ paragraphs:
     text: "No Tarjeta"
   -
     value: "Title"
-    text: "Ecommerce Website Edition v1.20-ES"
+    text: "Website App Edition v1.20-ES"
   -
     value: "Title_full"
-    text: "OWASP Cornucopia Ecommerce Website Edition v1.20-ES"
+    text: "OWASP Cornucopia Website App Edition v1.20-ES"
   -
     value: "T00010"
     text: "OWASP Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requerimientos de seguridad en procesos de desarrollo de software ágiles, convencionales y formales."
