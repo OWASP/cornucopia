@@ -8,7 +8,7 @@ OWASP Cornucopia is a mechanism in the form of a card game to assist software de
 identify security requirements in Agile, conventional and formal development processes. 
 It is language, platform and technology agnostic.
 
-### The cross-references relate to the following versions of other OWASP and external resources:
+### The cross-references on the Web App Edition deck relate to the following versions of other OWASP and external resources:
 * OWASP SCP OWASP_Secure_Coding_Practices_Checklist v2
 * OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
 * OWASP AppSensor AppSensor_DetectionPoints
@@ -16,7 +16,7 @@ It is language, platform and technology agnostic.
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
 
 ### Credits
-Cornucopia was originally conceived and created by Darío De Filippis 
+Cornucopia was originally conceived and created by Colin Watson 
 and has since had contributions from a worldwide team of volunteers.
 Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more details.
 
@@ -55,9 +55,9 @@ options:
                         Template will attempt to create a template from the english input file and 
                         replacing strings with the template lookup codes
   -d, --debug           Output additional information to debug script
-  -e {all,ecommerce,masvs}, --edition {all,ecommerce,masvs}
-                        Output decks to produce. [`all`, `ecommerce` or `masvs`]
-                        The various Cornucopia decks. `web` will give you the web ecommerce edition.`masvs` will give you the MASVS/MASTG edition.
+  -e {all,webapp,masvs}, --edition {all,webapp,masvs}
+                        Output decks to produce. [`all`, `webapp` or `masvs`]
+                        The various Cornucopia decks. `web` will give you the web webapp edition.`masvs` will give you the MASVS/MASTG edition.
   -s {all,static,dynamic,leaflet}, --style {all,static,dynamic,leaflet}
                         Output style to produce. [`static`, `dynamic` or `leaflet`] 
                         Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.The leaflet contains the instructions
