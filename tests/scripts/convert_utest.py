@@ -34,11 +34,11 @@ class TextGetValidEditionChoices(unittest.TestCase):
     def test_get_valid_edition_choices(self) -> None:
         c.convert_vars.args = argparse.Namespace(edition="all")
         got_list = c.get_valid_edition_choices()
-        want_list = ["webapp", "masvs"]
+        want_list = ["webapp", "mobileapp"]
         self.assertListEqual(want_list, got_list)
-        c.convert_vars.args = argparse.Namespace(edition="masvs")
+        c.convert_vars.args = argparse.Namespace(edition="mobileapp")
         got_list = c.get_valid_edition_choices()
-        want_list = ["masvs"]
+        want_list = ["mobileapp"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(edition="")
         got_list = c.get_valid_edition_choices()
@@ -1635,12 +1635,12 @@ class TestGetSuitTagsAndKey(unittest.TestCase):
         self.assertEqual(want_tags, got_tags)
         self.assertEqual(want_key, got_key)
 
-    def test_get_suit_tags_and_key_suits_for_masvs(self) -> None:
+    def test_get_suit_tags_and_key_suits_for_mobileapp(self) -> None:
         input_key = "suits"
         want_tags = ["PC", "AA", "NS", "RS", "CRM", "COM", "WC"]
         want_key = "cards"
 
-        got_tags, got_key = c.get_suit_tags_and_key(input_key, "masvs")
+        got_tags, got_key = c.get_suit_tags_and_key(input_key, "mobileapp")
         self.assertEqual(want_tags, got_tags)
         self.assertEqual(want_key, got_key)
 

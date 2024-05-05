@@ -55,9 +55,9 @@ options:
                         Template will attempt to create a template from the english input file and 
                         replacing strings with the template lookup codes
   -d, --debug           Output additional information to debug script
-  -e {all,webapp,masvs}, --edition {all,webapp,masvs}
-                        Output decks to produce. [`all`, `webapp` or `masvs`]
-                        The various Cornucopia decks. `web` will give you the web webapp edition.`masvs` will give you the MASVS/MASTG edition.
+  -e {all,webapp,mobileapp}, --edition {all,webapp,mobileapp}
+                        Output decks to produce. [`all`, `webapp` or `mobileapp`]
+                        The various Cornucopia decks. `web` will give you the web webapp edition.`mobileapp` will give you the MASVS/MASTG edition.
   -s {all,static,dynamic,leaflet}, --style {all,static,dynamic,leaflet}
                         Output style to produce. [`static`, `dynamic` or `leaflet`] 
                         Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.The leaflet contains the instructions
