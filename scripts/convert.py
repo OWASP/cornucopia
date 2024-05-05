@@ -20,7 +20,7 @@ from itertools import groupby
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-    EDITION_CHOICES: List[str] = ["all", "webapp", "masvs"]
+    EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.20", "1.21", "1.30"]
@@ -304,9 +304,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.EDITION_CHOICES,
         default="all",
         help=(
-            "Output decks to produce. [`all`, `webapp` or `masvs`]\n"
+            "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
             "The various Cornucopia decks. `web` will give you the web webapp edition."
-            "`masvs` will give you the MASVS/MASTG edition."
+            "`mobileapp` will give you the MASVS/MASTG edition."
         ),
     )
 
@@ -614,7 +614,7 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
     if key == "suits" and edition == "webapp":
         suit_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
         suit_key = "cards"
-    if key == "suits" and edition == "masvs":
+    if key == "suits" and edition == "mobileapp":
         suit_tags = ["PC", "AA", "NS", "RS", "CRM", "COM", "WC"]
         suit_key = "cards"
     elif key == "paragraphs":
@@ -691,7 +691,7 @@ def get_template_doc(file_type: str, style: str = "static", edition: str = "weba
 
 
 def has_not_valid_file_style(style: str, edition: str, file_type: str) -> bool:
-    if (style == "leaflet" or edition == "masvs") and file_type != "idml":
+    if (style == "leaflet" or edition == "mobileapp") and file_type != "idml":
         return True
     return False
 
@@ -750,7 +750,7 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
     return (
         {
             "webapp": {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"},
-            "masvs": {"1.0": "1.0", "1.00": "1.0"},
+            "mobileapp": {"1.0": "1.0", "1.00": "1.0"},
         }
         .get(edition, {})
         .get(version, "")
