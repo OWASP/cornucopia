@@ -8,17 +8,29 @@ OWASP Cornucopia is a mechanism in the form of a card game to assist software de
 identify security requirements in Agile, conventional and formal development processes. 
 It is language, platform and technology agnostic.
 
-### The cross-references on the Web App Edition deck relate to the following versions of other OWASP and external resources:
+## The cross-references on the Web App Edition deck relate to the following versions of other OWASP and external resources:
 * OWASP SCP OWASP_Secure_Coding_Practices_Checklist v2
 * OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
 * OWASP AppSensor AppSensor_DetectionPoints
 * CAPEC Mitre Common Attack Pattern Enumeration and Classification v1.7.1
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
 
-### Credits
+## Credits
 Cornucopia was originally conceived and created by Colin Watson 
 and has since had contributions from a worldwide team of volunteers.
 Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more details.
+
+## License
+
+Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-3.0](./LICENSE.md)
+
+Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
+
+Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+
+Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [Apache License 2.0](./source/LICENSE.md)
+
+
 
 ## Building the Deck
 
