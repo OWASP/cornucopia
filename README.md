@@ -28,7 +28,7 @@ Except, where otherwise noted, content in this repository is licensed under a [C
 
 ### Elevation of Privilege (EoP)
 
-Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
+© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
 
 ### OWASP Cornucopia Mobile App Edition
 
