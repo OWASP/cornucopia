@@ -22,15 +22,29 @@ Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more de
 
 ## License
 
+### General Licensing Terms
+
 Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-3.0](./LICENSE.md)
+
+### Elevation of Privilege (EoP)
 
 Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
 
+### OWASP Cornucopia Mobile App Edition
+
 Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+
+### OWASP Cornucopia Website App Edition
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [Apache License 2.0](./source/LICENSE.md)
 
+### Font licensing
+
 The font licensing, please read font [README.md](./resources/fonts/README.md)
+
+### version-up.sh
+
+ Copyright (C) 2017, Oleksandr Kucherenko under [MIT](https://opensource.org/license/mit)
 
 ## Building the Deck
 
