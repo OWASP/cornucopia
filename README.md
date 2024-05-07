@@ -26,9 +26,9 @@ Except, where otherwise noted, content in this repository is licensed under a [C
 
 Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
 
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
 
-Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [Apache License 2.0](./source/LICENSE.md)
+Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [Apache License 2.0](./source/LICENSE.md)
 
 
 
