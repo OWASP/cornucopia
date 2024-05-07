@@ -66,7 +66,7 @@ options:
 
 ## Printing
 
-The latest printable files are added to the `output` folder in this repository.
+The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there.
 The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work. 
 In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/fonts` in this repository. They are both open source and free for commercial use.
 The fonts can also be downloaded from the web.
