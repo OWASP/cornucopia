@@ -401,7 +401,10 @@ paragraphs:
     text: "Playgen voor het geven van een verhelderend middagseminar over taakgamificatie, en tartanmaker.com voor de online tool om het kaartrugpatroon te helpen creëren."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot het maken van een doos en folder met het OWASP-merk, en OWASP-medewerkers, met name Kate Hartmann, voor het beheren van de bestelling, bevoorrading en verzending van bedrukte kaartspellen."
+    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot het maken van een doos en folder met het OWASP-merk."
+  -
+    value: "T00155"
+    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot de creatie van een OWASP-doos en folder."
   -
     value: "T00160"
     text: "Oana Cornea en andere deelnemers aan de AppSec EU 2015-projecttop voor hun hulp bij het maken van de demonstratievideo."
@@ -594,9 +597,6 @@ paragraphs:
   -
     value: "T01150"
     text: "Een voorbeeld is:"
-  -
-    value: "T00155"
-    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot de creatie van een OWASP-doos en folder."
   -
     value: "T01160"
     text: "William heeft controle over het genereren van sessie-ID's."
