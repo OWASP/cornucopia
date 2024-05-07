@@ -30,7 +30,7 @@ Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under 
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [Apache License 2.0](./source/LICENSE.md)
 
-
+The font licensing, please read font [README.md](./resources/fonts/README.md)
 
 ## Building the Deck
 
