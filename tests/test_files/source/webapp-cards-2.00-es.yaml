@@ -1,0 +1,59 @@
+---
+meta:
+  edition: "webapp"
+  component: "cards"
+  language: "ES"
+  version: "2.00"
+suits:
+-
+  name: "Validación de datos & Codificación"
+  cards:
+  -
+    id: "DVA"
+    value: "A"
+    desc: "Has creado un nuevo ataque contra validación de datos y codificación"
+    misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
+  -
+    id: "DV2"
+    value: "2"
+    desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente"
+  -
+    id: "DV3"
+    value: "3"
+    desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
+-
+  name: "Wild Card"
+  cards:
+  -
+    id: "JOA"
+    value: "Joker"
+    desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
+    misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
+paragraphs:
+-
+  name: "Common"
+  sentences:
+  -
+    value: "NoCard"
+    text: "No Tarjeta"
+  -
+    value: "Title"
+    text: "Website App Edition v1.20-ES"
+  -
+    value: "Title_full"
+    text: "OWASP Cornucopia Website App Edition v1.20-ES"
+  -
+    value: "T00010"
+    text: "OWASP Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requerimientos de seguridad en procesos de desarrollo de software ágiles, convencionales y formales."
+  -
+    value: "T00020"
+    text: "Author"
+  -
+    value: "T00030"
+    text: "Project Leaders"
+  -
+    value: "T00040"
+    text: "Reviewers"
+  -
+    value: "T00100"
+    text: "Reconocimientos del proyecto"

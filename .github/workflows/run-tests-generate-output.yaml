@@ -84,7 +84,9 @@ jobs:
           pipenv install -d
       - name: Generate new output files
         run: |
-          pipenv run python scripts/convert.py -l all -t all -s all
+          pipenv run python scripts/convert.py -l all -t all -s all -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l all -t all -s all -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l all -t all -s all -v 1.00 -e mobileapp
       - name: Create pull request artifacts
         uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
         with:
@@ -93,47 +95,23 @@ jobs:
           comment-message: "The generated Cornucopia cards in this pull request."
           artifacts-branch: tmp-${{ github.event.pull_request.head.ref }}-artifacts
           artifacts: |
-            output/owasp_cornucopia_webapp_cards_en_1.30_dynamic.docx
-            output/owasp_cornucopia_webapp_cards_en_1.30_dynamic.idml
-            output/owasp_cornucopia_webapp_cards_en_1.30_dynamic.pdf
-            output/owasp_cornucopia_webapp_cards_en_1.30_leaflet.idml
-            output/owasp_cornucopia_webapp_cards_en_1.30_static.docx
-            output/owasp_cornucopia_webapp_cards_en_1.30_static.idml
-            output/owasp_cornucopia_webapp_cards_en_1.30_static.pdf
-            output/owasp_cornucopia_webapp_cards_es_1.30_dynamic.docx
-            output/owasp_cornucopia_webapp_cards_es_1.30_dynamic.pdf
-            output/owasp_cornucopia_webapp_cards_es_1.30_dynamic.idml
-            output/owasp_cornucopia_webapp_cards_es_1.30_leaflet.idml
-            output/owasp_cornucopia_webapp_cards_es_1.30_static.docx
-            output/owasp_cornucopia_webapp_cards_es_1.30_static.pdf
-            output/owasp_cornucopia_webapp_cards_es_1.30_static.idml
-            output/owasp_cornucopia_webapp_cards_fr_1.30_dynamic.docx
-            output/owasp_cornucopia_webapp_cards_fr_1.30_dynamic.idml
-            output/owasp_cornucopia_webapp_cards_fr_1.30_dynamic.pdf
-            output/owasp_cornucopia_webapp_cards_fr_1.30_leaflet.idml
-            output/owasp_cornucopia_webapp_cards_fr_1.30_static.docx
-            output/owasp_cornucopia_webapp_cards_fr_1.30_static.idml
-            output/owasp_cornucopia_webapp_cards_fr_1.30_static.pdf
-            output/owasp_cornucopia_webapp_cards_nl_1.30_dynamic.docx
-            output/owasp_cornucopia_webapp_cards_nl_1.30_dynamic.idml
-            output/owasp_cornucopia_webapp_cards_nl_1.30_dynamic.pdf
-            output/owasp_cornucopia_webapp_cards_nl_1.30_leaflet.idml
-            output/owasp_cornucopia_webapp_cards_nl_1.30_static.docx
-            output/owasp_cornucopia_webapp_cards_nl_1.30_static.idml
-            output/owasp_cornucopia_webapp_cards_nl_1.30_static.pdf
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_dynamic.docx
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_dynamic.idml
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_dynamic.pdf
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_leaflet.idml
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_static.docx
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_static.idml
-            output/owasp_cornucopia_webapp_cards_no-nb_1.30_static.pdf
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_dynamic.docx
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_dynamic.idml
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_dynamic.pdf
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_leaflet.idml
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_static.docx
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_static.idml
-            output/owasp_cornucopia_webapp_cards_pt-br_1.30_static.pdf
+            output/owasp_cornucopia_webapp_guide_en_1.22_dynamic.docx
+            output/owasp_cornucopia_webapp_cards_en_1.22_leaflet.idml
+            output/owasp_cornucopia_webapp_guide_en_1.22_static.docx
+            output/owasp_cornucopia_webapp_cards_en_1.22_static.idml
+            output/owasp_cornucopia_webapp_guide_es_1.22_static.docx
+            output/owasp_cornucopia_webapp_guide_fr_1.22_static.docx
+            output/owasp_cornucopia_webapp_guide_nl_1.22_static.docx
+            output/owasp_cornucopia_webapp_guide_no-nb_1.22_static.docx
+            output/owasp_cornucopia_webapp_guide_pt-br_1.22_static.docx
+            output/owasp_cornucopia_webapp_guide_en_2.00_dynamic.docx
+            output/owasp_cornucopia_webapp_guide_en_2.00_static.docx
+            output/owasp_cornucopia_webapp_cards_en_2.00_leaflet.idml
+            output/owasp_cornucopia_webapp_cards_en_2.00_static.idml
+            output/owasp_cornucopia_webapp_guide_es_2.00_static.docx
+            output/owasp_cornucopia_webapp_guide_fr_2.00_static.docx
+            output/owasp_cornucopia_webapp_guide_nl_2.00_static.docx
+            output/owasp_cornucopia_webapp_guide_no-nb_2.00_static.docx
+            output/owasp_cornucopia_webapp_guide_pt-br_2.00_static.docx
             output/owasp_cornucopia_mobileapp_cards_en_1.00_static.idml
             output/owasp_cornucopia_mobileapp_cards_en_1.00_leaflet.idml
