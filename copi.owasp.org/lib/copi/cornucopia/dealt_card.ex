@@ -17,10 +17,9 @@ defmodule Copi.Cornucopia.DealtCard do
   def find(id) do
     case Copi.Repo.get(Copi.Cornucopia.DealtCard, id) do
       nil -> {:error, :not_found}
-      dealt_card -> {:ok, dealt_card |> Copi.Repo.preload([:card, :votes])}
+      dealt_card -> {:ok, dealt_card  |> Copi.Repo.preload([:card, :votes])}
     end
   end
-
   @doc false
   def changeset(dealt_card, attrs) do
     dealt_card

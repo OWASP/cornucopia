@@ -115,6 +115,7 @@ defmodule Copi.Cornucopia do
   """
 
   def list_players(game_id) do
+
     Repo.all(from p in Player, where: p.game_id == ^game_id)
   end
 

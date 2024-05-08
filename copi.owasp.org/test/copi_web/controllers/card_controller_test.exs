@@ -3,48 +3,9 @@ defmodule CopiWeb.CardControllerTest do
 
   alias Copi.Cornucopia
 
-  @create_attrs %{
-    capec: [],
-    category: "some category",
-    description: "some description",
-    edition: "some edition",
-    language: "some language",
-    misc: "some misc",
-    owasp_appsensor: [],
-    owasp_asvs: [],
-    owasp_scp: [],
-    safecode: [],
-    value: "some value",
-    version: "some version"
-  }
-  @update_attrs %{
-    capec: [],
-    category: "some updated category",
-    description: "some updated description",
-    edition: "some updated edition",
-    language: "some updated language",
-    misc: "some updated misc",
-    owasp_appsensor: [],
-    owasp_asvs: [],
-    owasp_scp: [],
-    safecode: [],
-    value: "some updated value",
-    version: "some updated version"
-  }
-  @invalid_attrs %{
-    capec: nil,
-    category: nil,
-    description: nil,
-    edition: nil,
-    language: nil,
-    misc: nil,
-    owasp_appsensor: nil,
-    owasp_asvs: nil,
-    owasp_scp: nil,
-    safecode: nil,
-    value: nil,
-    version: nil
-  }
+  @create_attrs %{capec: [], category: "some category", description: "some description", edition: "some edition", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_scp: [], safecode: [], value: "some value", version: "some version"}
+  @update_attrs %{capec: [], category: "some updated category", description: "some updated description", edition: "some updated edition", language: "some updated language", misc: "some updated misc", owasp_appsensor: [], owasp_asvs: [], owasp_scp: [], safecode: [], value: "some updated value", version: "some updated version"}
+  @invalid_attrs %{capec: nil, category: nil, description: nil, edition: nil, language: nil, misc: nil, owasp_appsensor: nil, owasp_asvs: nil, owasp_scp: nil, safecode: nil, value: nil, version: nil}
 
   def fixture(:card) do
     {:ok, card} = Cornucopia.create_card(@create_attrs)
@@ -114,7 +75,6 @@ defmodule CopiWeb.CardControllerTest do
     test "deletes chosen card", %{conn: conn, card: card} do
       conn = delete(conn, Routes.card_path(conn, :delete, card))
       assert redirected_to(conn) == Routes.card_path(conn, :index)
-
       assert_error_sent 404, fn ->
         get(conn, Routes.card_path(conn, :show, card))
       end

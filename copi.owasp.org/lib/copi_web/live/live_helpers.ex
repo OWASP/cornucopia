@@ -21,11 +21,12 @@ defmodule CopiWeb.LiveHelpers do
     live_component(CopiWeb.ModalComponent, modal_opts)
   end
 
-  def display_game_session(edition) do
-    case edition do
-      "ecommerce" -> "Web Session:"
-      "masvs" -> "Mobile Session:"
-      _ -> "EoP Session:"
-    end
+
+    def display_game_session(edition) do
+      case edition do
+        "ecommerce" -> "Web Session:"
+        "masvs" -> "Mobile Session:"
+        _ -> "EoP Session:"
+      end
   end
 end

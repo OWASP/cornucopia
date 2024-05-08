@@ -5,18 +5,8 @@ defmodule CopiWeb.GameLiveTest do
 
   alias Copi.Cornucopia
 
-  @create_attrs %{
-    created_at: "2010-04-17T14:00:00Z",
-    finished_at: "2010-04-17T14:00:00Z",
-    name: "some name",
-    started_at: "2010-04-17T14:00:00Z"
-  }
-  @update_attrs %{
-    created_at: "2011-05-18T15:01:01Z",
-    finished_at: "2011-05-18T15:01:01Z",
-    name: "some updated name",
-    started_at: "2011-05-18T15:01:01Z"
-  }
+  @create_attrs %{created_at: "2010-04-17T14:00:00Z", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
+  @update_attrs %{created_at: "2011-05-18T15:01:01Z", finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
   @invalid_attrs %{created_at: nil, finished_at: nil, name: nil, started_at: nil}
 
   defp fixture(:game) do

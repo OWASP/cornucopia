@@ -42,13 +42,12 @@ defmodule CopiWeb.PlayerLive.Show do
 
     if round_open?(game) do
       # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
+
     else
       Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1})
 
       if last_round?(game) do
-        Copi.Cornucopia.update_game(game, %{
-          finished_at: DateTime.truncate(DateTime.utc_now(), :second)
-        })
+        Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
       end
     end
 
@@ -73,14 +72,9 @@ defmodule CopiWeb.PlayerLive.Show do
       Copi.Repo.delete!(vote)
     else
       IO.puts("player hasn't voted")
-
-      case Copi.Repo.insert(%Copi.Cornucopia.Vote{
-             dealt_card_id: String.to_integer(dealt_card_id),
-             player_id: player.id
-           }) do
+      case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
         {:ok, _vote} ->
           IO.puts("voted successfully")
-
         {:error, _changeset} ->
           IO.puts("voting failed")
       end
@@ -95,9 +89,7 @@ defmodule CopiWeb.PlayerLive.Show do
 
   def format_capec(refs) do
     refs
-    |> Enum.map(fn ref ->
-      link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html")
-    end)
+    |> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
     |> Enum.intersperse(", ")
   end
 
@@ -106,7 +98,7 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   def ordered_cards(cards) do
-    Enum.sort_by(cards, & &1.card.id)
+    Enum.sort_by(cards, &(&1.card.id))
   end
 
   def unplayed_cards(cards) do
@@ -128,11 +120,7 @@ defmodule CopiWeb.PlayerLive.Show do
   def round_open?(game) do
     latest_round = game.rounds_played + 1
 
-    players_still_to_play =
-      game.players
-      |> Enum.filter(fn player ->
-        Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil
-      end)
+    players_still_to_play = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil end)
 
     Enum.count(players_still_to_play) > 0
   end
@@ -142,11 +130,7 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   def last_round?(game) do
-    players_with_no_cards =
-      game.players
-      |> Enum.filter(fn player ->
-        Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil
-      end)
+    players_with_no_cards = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil end)
 
     Enum.count(players_with_no_cards) > 0
   end
@@ -158,10 +142,9 @@ defmodule CopiWeb.PlayerLive.Show do
   def all_dealt_cards(game) do
     Enum.reduce(game.players, [], fn player, cards -> player.dealt_cards ++ cards end)
   end
-
   def ordered_cards_played_in_round(game, round) do
     all_dealt_cards(game)
-    |> Enum.filter(fn card -> card.played_in_round == round end)
-    |> Enum.sort_by(& &1.updated_at)
+      |> Enum.filter(fn card -> card.played_in_round == round end)
+      |> Enum.sort_by(&(&1.updated_at))
   end
 end
