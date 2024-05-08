@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "ES"
-  version: "1.30"
+  version: "2.00"
 suits:
 -
   name: "Validación de datos & Codificación"

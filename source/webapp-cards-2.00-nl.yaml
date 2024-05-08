@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "NL"
-  version: "1.30"
+  version: "2.00"
 suits:
 -
   name: "DATAVALIDATIE & KARAKTERCODERING"
@@ -355,7 +355,7 @@ suits:
     value: "JokerB"
     card: "Joker"
     desc: "Bob kan de applicatie beïnvloeden, wijzigen of beïnvloeden zodat deze niet langer voldoet aan wettelijke, reglementaire, contractuele of andere organisatorische mandaten"
-    misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van OWASP Juice Shop, Security Shepherd, of met behulp van de online uitdagingen in het OWASP Hacking-lab gratis"
+    misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van OWASP Juice Shop, Security Shepherd, of met behulp van de online uitdagingen in het OWASP® Hacking-lab gratis"
 paragraphs:
 -
   name: "Common"
@@ -365,10 +365,10 @@ paragraphs:
     text: "Geen kaart"
   -
     value: "Title"
-    text: "E-commerce Website Editie v1.30-NL"
+    text: "E-commerce Website Editie v2.00-NL"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia E-commerce Website Editie v1.30-NL"
+    text: "OWASP® Cornucopia E-commerce Website Editie v2.00-NL"
   -
     value: "T00005"
     text: "Inhoudsopgave"
@@ -382,9 +382,6 @@ paragraphs:
     value: "T00030"
     text: "Projectleiders"
   -
-    value: "T00040"
-    text: "Recensenten"
-  -
     value: "T00100"
     text: "Erkenningen"
   -
@@ -392,19 +389,19 @@ paragraphs:
     text: "Adam Shostack en het Microsoft SDL Team voor de “Elevation of Privilege Threat Modeling Game”, gepubliceerd onder een Creative Commons Attribution-licentie, als inspiratie voor Cornucopia en waaruit veel ideeën, vooral de speltheorie, zijn gekopieerd."
   -
     value: "T00120"
-    text: "Keith Turpin en bijdragers aan de “OWASP Secure Coding Practices - Quick Reference Guide”, oorspronkelijk geschonken aan OWASP door Boeing, die wordt gebruikt als de primaire bron van informatie over beveiligingsvereisten om de inhoud van de kaarten te formuleren."
+    text: "Keith Turpin en bijdragers aan de “OWASP® Secure Coding Practices - Quick Reference Guide”, oorspronkelijk geschonken aan OWASP® door Boeing, die wordt gebruikt als de primaire bron van informatie over beveiligingsvereisten om de inhoud van de kaarten te formuleren."
   -
     value: "T00130"
-    text: "Bijdragers, supporters, sponsors en vrijwilligers aan de OWASP ASVS-, AppSensor- en Web Framework Security Matrix-projecten, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), en SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, die allemaal gebruikt in de verstrekte kruisverwijzingen."
+    text: "Bijdragers, supporters, sponsors en vrijwilligers aan de OWASP® ASVS-, AppSensor- en Web Framework Security Matrix-projecten, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), en SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, die allemaal gebruikt in de verstrekte kruisverwijzingen."
   -
     value: "T00140"
     text: "Playgen voor het geven van een verhelderend middagseminar over taakgamificatie, en tartanmaker.com voor de online tool om het kaartrugpatroon te helpen creëren."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot het maken van een doos en folder met het OWASP-merk, en OWASP-medewerkers, met name Kate Hartmann, voor het beheren van de bestelling, bevoorrading en verzending van bedrukte kaartspellen."
+    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP® Foundation voor het aanzetten tot het maken van een doos en folder met het OWASP-merk."
   -
-    value: "T00160"
-    text: "Oana Cornea en andere deelnemers aan de AppSec EU 2015-projecttop voor hun hulp bij het maken van de demonstratievideo."
+    value: "T00155"
+    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP® Foundation voor het aanzetten tot de creatie van een OWASP-doos en folder."
   -
     value: "T00161"
     text: "(vervolg op pagina 20)"
@@ -416,7 +413,7 @@ paragraphs:
     text: "Colin Watson als auteur en co-projectleider met Grant Ongers, samen met andere OWASP-vrijwilligers die op veel manieren hebben geholpen."
   -
     value: "T00180"
-    text: "OWASP onderschrijft of beveelt geen commerciële producten of diensten aan © 2012-2024 OWASP Foundation Dit document is gelicentieerd onder de Creative Commons Attribution-ShareAlike 3.0-licentie"
+    text: "OWASP onderschrijft of beveelt geen commerciële producten of diensten aan © 2012-2024 OWASP® Foundation Dit document is gelicentieerd onder de Creative Commons Attribution-ShareAlike 3.0-licentie"
   -
     value: "T00200"
     text: "Inleiding"
@@ -446,7 +443,7 @@ paragraphs:
     text: "Het kaartspel (pakket)"
   -
     value: "T00310"
-    text: "In plaats van EoP's STRIDE-kleuren (sets van kaarten met bijpassende ontwerpen), zijn Cornucopia-kleuren gebaseerd op de structuur van de OWASP Secure Coding Practices - Quick Reference Guide (SCP), maar met extra aandacht voor secties in de OWASP Application Security Verification Standard, de OWASP Testing Guide en David Rook's Principles of Secure Development."
+    text: "In plaats van EoP's STRIDE-kleuren (sets van kaarten met bijpassende ontwerpen), zijn Cornucopia-kleuren gebaseerd op de structuur van de OWASP® Secure Coding Practices - Quick Reference Guide (SCP), maar met extra aandacht voor secties in de OWASP® Application Security Verification Standard, de OWASP® Web Application Testing Guide en David Rook's Principles of Secure Development."
   -
     value: "T00320"
     text: "Deze leverden vijf kleuren op, en een zesde genaamd “Cornucopia“ werd gemaakt voor al het andere: "
@@ -485,7 +482,7 @@ paragraphs:
     text: "Een eerste doel was om te verwijzen naar CWE-zwakte-ID's, maar deze bleken te talrijk, en in plaats daarvan werd besloten om elke kaart toe te wijzen aan CAPEC-software-aanvalspatroon-ID's die zelf zijn toegewezen aan CWE's, zodat het gewenste resultaat wordt bereikt."
   -
     value: "T00530"
-    text: "Elke kaart is ook toegewezen aan de 36 primaire beveiligingsverhalen in het SAFECode-document, evenals aan de OWASP SCP v2, ASVS v4.0 en AppSensor (detectie en reactie van toepassingsaanvallen) om teams te helpen hun eigen beveiligingsgerelateerde verhalen voor gebruik in Agile-processen."
+    text: "Elke kaart is ook toegewezen aan de 36 primaire beveiligingsverhalen in het SAFECode-document, evenals aan de OWASP® SCP v2, ASVS v4.0 en AppSensor (detectie en reactie van toepassingsaanvallen) om teams te helpen hun eigen beveiligingsgerelateerde verhalen voor gebruik in Agile-processen."
   -
     value: "T00600"
     text: "Spelstrategie"
@@ -595,9 +592,6 @@ paragraphs:
     value: "T01150"
     text: "Een voorbeeld is:"
   -
-    value: "T00155"
-    text: "Blackfoot UK Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP Foundation voor het aanzetten tot de creatie van een OWASP-doos en folder."
-  -
     value: "T01160"
     text: "William heeft controle over het genereren van sessie-ID's."
   -
@@ -605,7 +599,7 @@ paragraphs:
     text: "Dit betekent dat de aanvaller (William) nieuwe sessie-ID's kan maken die de toepassing accepteert."
   -
     value: "T01180"
-    text: "De aanvallen waren voornamelijk afgeleid van de beveiligingsvereisten die zijn vermeld in het SCP, v2, maar vervolgens aangevuld met verificatiedoelstellingen uit de OWASP “Application Security Verification Standard for Web Applications”, de op beveiliging gerichte verhalen in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, en tot slot een overzicht van de kaarten in EOP."
+    text: "De aanvallen waren voornamelijk afgeleid van de beveiligingsvereisten die zijn vermeld in het SCP, v2, maar vervolgens aangevuld met verificatiedoelstellingen uit de OWASP® “Application Security Verification Standard for Web Applications”, de op beveiliging gerichte verhalen in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, en tot slot een overzicht van de kaarten in EOP."
   -
     value: "T01190"
     text: "Meer informatie over elke kaart is beschikbaar in het online Wiki Deck op "
@@ -934,9 +928,6 @@ paragraphs:
     value: "T02770"
     text: "Maar het zou geweldig zijn om extra ontwerpelementen toe te voegen."
   -
-    value: "T02780"
-    text: "Elke vrijwilliger"
-  -
     value: "T02790"
     text: "5. Staan de aanvallen gerangschikt op het nummer op de kaart?"
   -
@@ -1009,17 +1000,8 @@ paragraphs:
     value: "T03020"
     text: "Bij spelers die nieuw zijn in het spel, kan het beter zijn om deze te verwijderen om mee te beginnen (zie ook FAQ 9)."
   -
-    value: "T03030"
-    text: "11. Ik begrijp niet wat de aanval op elke kaart betekent - is er meer gedetailleerde informatie?"
-  -
-    value: "T03040"
-    text: "Ja, het online Wiki Deck at is gemaakt om spelers te helpen de aanvallen te begrijpen."
-  -
-    value: "T03050"
-    text: "Zie"
-  -
     value: "T03060"
-    text: "12. Mijn bedrijf wil zijn eigen versie van OWASP® Cornucopia afdrukken - naar welke licentie moeten we verwijzen?"
+    text: "11. Mijn bedrijf wil zijn eigen versie van OWASP® Cornucopia afdrukken - naar welke licentie moeten we verwijzen?"
   -
     value: "T03070"
     text: "Raadpleeg het volledige antwoord op deze vraag op de webpagina's van het project op"
@@ -1049,7 +1031,7 @@ paragraphs:
     text: "0.3"
   -
     value: "T03180"
-    text: "Concept heeft OWASP SCP-mailinglijst aangekondigd voor commentaar."
+    text: "Concept heeft OWASP® SCP-mailinglijst aangekondigd voor commentaar."
   -
     value: "T03190"
     text: "0.4"
@@ -1127,7 +1109,7 @@ paragraphs:
     text: "Kleine wijziging in de bewoording van de aanval op twee kaarten."
   -
     value: "T03440"
-    text: "OWASP SCP en ASVS kruisverwijzingen gecontroleerd en bijgewerkt."
+    text: "OWASP® SCP en ASVS kruisverwijzingen gecontroleerd en bijgewerkt."
   -
     value: "T03450"
     text: "Codeletters toegevoegd voor pakken."
@@ -1208,7 +1190,7 @@ paragraphs:
     text: "Kleine tekstwijzigingen in instructies en veelgestelde vragen."
   -
     value: "T03710"
-    text: "1.3"
+    text: "2.0"
   -
     value: "T03720"
     text: "Kruisverwijzingen bijgewerkt van ASVS v3.0.1 naar ASVS v4.0 door Johan Sydseter. "
@@ -1232,13 +1214,13 @@ paragraphs:
     text: "OWASP's hardwerkende medewerkers."
   -
     value: "T03860"
-    text: "Aanwezigen bij OWASP Londen, OWASP Manchester, OWASP Nederland en OWASP Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
+    text: "Aanwezigen bij OWASP® Londen, OWASP® Manchester, OWASP® Nederland en OWASP® Schotland Chapter meetings, en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
   -
     value: "T03870"
     text: "Blackfoot UK Limited voor het schenken van drukklare ontwerpbestanden en honderden professioneel bedrukte kaartendecks voor distributie per post en op OWASP-hoofdstukvergaderingen"
   -
     value: "T03880"
-    text: 'OWASP NYC voor het maken van een OWASP-doosontwerp en het distribueren van pakketten op AppSec USA 2014.'
+    text: 'OWASP® NYC voor het maken van een OWASP-doosontwerp en het distribueren van pakketten op AppSec USA 2014.'
   -
     value: "T03900"
     text: "Podcasts en video's"
@@ -1250,10 +1232,10 @@ paragraphs:
     text: "Video - Gebruik van de kaarten, gemaakt tijdens de AppSec EU 2015-projecttop, 20 mei 2015"
   -
     value: "T03930"
-    text: "Podcast-interview, OWASP 24/7 Podcast-kanaal, 21 maart 2014"
+    text: "Podcast-interview, OWASP® 24/7 Podcast-kanaal, 21 maart 2014"
   -
     value: "T03940"
-    text: "Video presentatie, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "Video presentatie, OWASP® EU Tour 2013 London, 3rd June 2013"
   -
     value: "T03950"
     text: "Zie de projectwebsite voor meer informatie en presentatiemateriaal."

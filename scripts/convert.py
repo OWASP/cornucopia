@@ -23,8 +23,8 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.20", "1.21", "1.30"]
-    LATEST_VERSION_CHOICES: List[str] = ["1.00", "1.30"]
+    VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.20", "1.21", "1.22", "2.00"]
+    LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
@@ -215,8 +215,8 @@ def main() -> None:
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
-    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es -v 1.30"
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr -v 1.30"
+    description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es -v 2.00"
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr -v 2.00"
     description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
@@ -238,9 +238,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="latest",
         help=(
-            "Output version to produce. [`all`, `latest`, `1.00`, `1.20`, `1.21`, `1.30`] "
+            "Output version to produce. [`all`, `latest`, `1.00`, `1.20`, `1.21`, `1.22`, `2.00`] "
             "\nVersion 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1"
-            "\nVersion 1.30 and 1.3x will deliver cards mapped to ASVS 4.0"
+            "\nVersion 2.00 and 2.0x will deliver cards mapped to ASVS 4.0"
             "\nVersion 1.00 and 1.0x will deliver cards mapped to MASVS 2.0"
             "\nVersion all will deliver all versions"
             "\nVersion latest will deliver the latest deck versions"
@@ -368,7 +368,9 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
     return files
 
 
-def get_find_replace_list(meta: Dict[str, str]) -> List[Tuple[str, str]]:
+def get_find_replace_list(meta: Dict[str, str], file_type: str) -> List[Tuple[str, str]]:
+    if file_type in ["docx", "pdf"]:
+        meta["component"] = "guide"
     ll: List[Tuple[str, str]] = [
         ("_type", "_" + meta["edition"].lower()),
         ("_edition", "_" + meta["edition"].lower()),
@@ -749,7 +751,7 @@ def get_valid_version_choices() -> List[str]:
 def get_valid_mapping_for_version(version: str, edition: str) -> str:
     return (
         {
-            "webapp": {"1.20": "1.2", "1.21": "1.2", "1.30": "1.3", "1.3": "1.3", "1.2": "1.2"},
+            "webapp": {"1.20": "1.2", "1.21": "1.2", "1.22": "1.2", "2.00": "2.0", "2.0": "2.0", "1.2": "1.2"},
             "mobileapp": {"1.0": "1.0", "1.00": "1.0"},
         }
         .get(edition, {})
@@ -909,7 +911,7 @@ def rename_output_file(file_type: str, style: str, meta: Dict[str, str]) -> str:
     logging.debug(f" --- output_filename AFTER fix extension = {output_filename}")
 
     # Do the replacement of filename place-holders with meta data
-    find_replace = get_find_replace_list(meta)
+    find_replace = get_find_replace_list(meta, file_type)
     f = os.path.basename(output_filename)
     for r in find_replace:
         f = f.replace(*r)
