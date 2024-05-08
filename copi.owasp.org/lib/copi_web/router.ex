@@ -17,7 +17,7 @@ defmodule CopiWeb.Router do
   scope "/", CopiWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    get "/", PageController, :home
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
