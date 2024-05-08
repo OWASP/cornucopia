@@ -399,7 +399,10 @@ paragraphs:
     text: "Playgen por fornecer um seminário esclarecedor à tarde sobre gamificação de tarefas, e tartanmaker.com pela ferramenta on-line para ajudar a criar o padrão do verso do cartão."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP, e funcionários da OWASP, especialmente Kate Hartmann, por gerenciar o pedido, estoque e envio de impressos baralhos de cartas."
+    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP."
+  -
+    value: "T00155"
+    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP."
   -
     value: "T00160"
     text: "Oana Cornea e outros participantes na cimeira do projeto \"AppSec EU 2015\" pela sua ajuda na criação do vídeo de demonstração."
@@ -592,9 +595,6 @@ paragraphs:
   -
     value: "T01150"
     text: "Um exemplo segue:"
-  -
-    value: "T00155"
-    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP."
   -
     value: "T01160"
     text: "William tem o controle sobre a geração de identificadores de sessão"

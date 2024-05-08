@@ -401,7 +401,10 @@ paragraphs:
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees, especially Kate Hartmann, for managing the ordering, stocking and despatch of printed card decks. "
+    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees. "
+  -
+    value: "T00155"
+    text: "Blackfoot UK Limited por crear y donar archivos de diseño listos para imprimir, Tom Brennan y la Fundación OWASP por impulsar la creación de una caja y un folleto con la marca OWASP."
   -
     value: "T00160"
     text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
@@ -594,9 +597,6 @@ paragraphs:
   -
     value: "T01150"
     text: "Trate siempre de tener una combinación de roles que puedan aportar perspectivas alternativas."
-  -
-    value: "T00155"
-    text: "Blackfoot UK Limited por crear y donar archivos de diseño listos para imprimir, Tom Brennan y la Fundación OWASP por impulsar la creación de una caja y un folleto con la marca OWASP."
   -
     value: "T01160"
     text: "Wiki Deck link added"
