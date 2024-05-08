@@ -9,6 +9,10 @@ jobs:
     name: Harden runner
     uses: ./.github/workflows/hardening.yaml
   cleanup:
+    permissions:
+      # Required to delete artifact, otherwise you'll get
+      # "Error: Resource not accessible by integration"
+      contents: write
     name: Run Tests
     needs: hardening
     runs-on: ubuntu-latest
