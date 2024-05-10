@@ -27,8 +27,9 @@ defmodule CopiWeb.GameLive.FormComponent do
           type="select"
           label={gettext "Choose the type of game you wish to play"}
           options={[
-              {"Cornucopia", "ecommerce"},
-              {"Elevation of Privilege", "eop"},
+              {"Cornucopia Web (for web apps and APIs)", "ecommerce"},
+              {"Cornucopia Mobile (for mobile apps)", "masvs"},
+              {"Elevation of Privilege (for cloud platforms, infrastructure, apps, anything!)", "eop"},
           ]}
           >
         </.input>
