@@ -83,6 +83,7 @@ defmodule Copi.MixProject do
       "assets.build": ["tailwind copi", "cmd --cd assets node build.js"],
       "assets.deploy": [
         "tailwind copi --minify",
+        "cmd --cd assets npm install",
         "cmd --cd assets node build.js --deploy",
         "phx.digest"
       ]
