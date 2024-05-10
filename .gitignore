@@ -12,3 +12,4 @@ coverage.xml
 client_secrets.json
 version.properties
 .hypothesis/**
+output/**
