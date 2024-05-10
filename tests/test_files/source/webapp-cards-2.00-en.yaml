@@ -1,0 +1,59 @@
+---
+meta:
+  edition: "webapp"
+  component: "cards"
+  language: "EN"
+  version: "2.00"
+suits:
+-
+  name: "Data validation & encoding"
+  cards:
+  -
+    id: "DVA"
+    value: "A"
+    desc: "You have invented a new attack against Data Validation and Encoding"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
+  -
+    id: "DV2"
+    value: "2"
+    desc: "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
+  -
+    id: "DV3"
+    value: "3"
+    desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats"
+-
+  name: "Wild Card"
+  cards:
+  -
+    id: "JOA"
+    value: "Joker"
+    desc: "Alice can utilize the application to attack users' systems and data"
+    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+paragraphs:
+-
+  name: "Common"
+  sentences:
+  -
+    value: "NoCard"
+    text: "No Card"
+  -
+    value: "Title"
+    text: "Website App Edition v1.21-EN"
+  -
+    value: "Title_full"
+    text: "OWASP Cornucopia Website App Edition v1.21-EN"
+  -
+    value: "T00010"
+    text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+  -
+    value: "T00020"
+    text: "Author"
+  -
+    value: "T00030"
+    text: "Project Leaders"
+  -
+    value: "T00040"
+    text: "Reviewers"
+  -
+    value: "T00100"
+    text: "Acknowledgments"

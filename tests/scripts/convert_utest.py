@@ -50,15 +50,15 @@ class TextGetValidVersionChoices(unittest.TestCase):
     def test_get_valid_edition_choices(self) -> None:
         c.convert_vars.args = argparse.Namespace(version="all")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.00", "1.20", "1.21", "1.30"]
+        want_list = ["1.00", "1.20", "1.21", "1.22", "2.00"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(version="latest")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.00", "1.30"]
+        want_list = ["1.00", "2.00"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(version="")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.00", "1.30"]
+        want_list = ["1.00", "2.00"]
         self.assertListEqual(want_list, got_list)
 
 
@@ -412,7 +412,7 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_edition_component_lang_ver.docx"])
         input_file_type = "docx"
         input_style_type = "static"
-        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_cards_en_1.21.docx"])
+        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_guide_en_1.21.docx"])
 
         got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -430,7 +430,7 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args.outputfile = c.convert_vars.DEFAULT_OUTPUT_FILENAME
         input_file_type = "docx"
         input_style_type = "static"
-        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.21.docx"])
+        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_guide_en_1.21.docx"])
 
         got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -440,7 +440,7 @@ class TestRenameOutputFile(unittest.TestCase):
         input_file_type = "docx"
         input_style_type = "static"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.21_static.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_guide_en_1.21_static.docx"]
         )
 
         got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
@@ -452,7 +452,7 @@ class TestRenameOutputFile(unittest.TestCase):
         input_file_type = "docx"
         input_style_type = "static"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.21_template_static.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_guide_en_1.21_template_static.docx"]
         )
 
         got_filename = c.rename_output_file(input_file_type, input_style_type, self.input_meta_data)
@@ -464,7 +464,7 @@ class TestGetFindReplaceList(unittest.TestCase):
         self.want_list_default: List[Tuple[str, str]] = [
             ("_type", "_webapp"),
             ("_edition", "_webapp"),
-            ("_component", "_cards"),
+            ("_component", "_guide"),
             ("_language", "_en"),
             ("_lang", "_en"),
             ("_version", "_1.21"),
@@ -477,14 +477,14 @@ class TestGetFindReplaceList(unittest.TestCase):
         want_list = self.want_list_default
         want_list.append(("_template", ""))
 
-        got_list = c.get_find_replace_list(self.input_meta_data)
+        got_list = c.get_find_replace_list(self.input_meta_data, "docx")
         self.assertListEqual(want_list, got_list)
 
     def test_get_find_replace_list_making_template(self) -> None:
         c.convert_vars.making_template = True
         want_list = self.want_list_default
 
-        got_list = c.get_find_replace_list(self.input_meta_data)
+        got_list = c.get_find_replace_list(self.input_meta_data, "docx")
         self.assertListEqual(want_list, got_list)
 
 
@@ -648,9 +648,9 @@ class TestGetReplacementDataFor1dot30(unittest.TestCase):
         test_source_yaml = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"])
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
-        self.input_version = "1.30"
+        self.input_version = "2.00"
         self.test_data: Dict[str, Any] = {
-            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.30"},
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.00"},
             "suits": [
                 {
                     "name": "Data validation & encoding",
@@ -677,7 +677,7 @@ class TestGetReplacementDataFor1dot30(unittest.TestCase):
                         },
                         {
                             "value": "Title",
-                            "text": "OWASP Cornucopia Website App Edition v1.30-EN",
+                            "text": "OWASP Cornucopia Website App Edition v2.00-EN",
                         },
                     ],
                 },
@@ -686,7 +686,7 @@ class TestGetReplacementDataFor1dot30(unittest.TestCase):
 
     def test_get_replacement_data_translation_meta(self) -> None:
         input_data_type = "translation"
-        want_meta = {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.30"}
+        want_meta = {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.00"}
 
         got_data = c.get_replacement_data(
             self.input_yaml_files, input_data_type, self.input_language, self.input_version
@@ -728,7 +728,7 @@ class TestGetReplacementDataFor1dot30(unittest.TestCase):
 
     def test_get_replacement_data_mappings_meta_asvs4(self) -> None:
         input_data_type = "mappings"
-        want_meta = {"edition": "webapp", "component": "mappings", "language": "ALL", "version": "1.3"}
+        want_meta = {"edition": "webapp", "component": "mappings", "language": "ALL", "version": "2.0"}
 
         got_data = c.get_replacement_data(
             self.input_yaml_files, input_data_type, self.input_language, self.input_version
@@ -879,10 +879,10 @@ class TestGetFilesFromOfType(unittest.TestCase):
             for f in [
                 "webapp-cards-1.20-es.yaml",
                 "webapp-cards-1.21-en.yaml",
-                "webapp-cards-1.30-en.yaml",
-                "webapp-cards-1.30-es.yaml",
+                "webapp-cards-2.00-en.yaml",
+                "webapp-cards-2.00-es.yaml",
                 "webapp-mappings-1.2.yaml",
-                "webapp-mappings-1.3.yaml",
+                "webapp-mappings-2.0.yaml",
             ]
         )
 
@@ -1221,7 +1221,7 @@ class TestConvertTypeLanguage(unittest.TestCase):
         input_version = "1.20"
         language = "es"
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_es_1.20_static.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_guide_es_1.20_static.docx"]
         )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
