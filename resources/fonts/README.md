@@ -7,3 +7,5 @@ Reserved Typeface Name [Atkinson Hyperlegible Font](Atkinson-Hyperlegible-Font-P
 
 Copyright 2017 Alexander Slobzheninov (www.behance.net/slobzheninov) with
 Reserved Typeface Name [Fivo Sans](fivo_sans.zip).
+
+Copyright 2022 The Noto Project Authors (https://github.com/notofonts/latin-greek-cyrillic) [Noto Sans](Noto_Sans.zip)
