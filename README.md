@@ -29,8 +29,8 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 usage: convert.py [-h] [-i INPUTFILE] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,no-nb,pt-br}] [-d] [-s {all,static,dynamic}] [-u URL]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages. 
-Example usage: $ ./cornucopia/convert.py -t docx -l es -v 1.30
-Example usage: c:\cornucopia\scripts\convert.py -t idml -l fr -s static -v 1.30 -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
+Example usage: $ ./cornucopia/convert.py -t docx -l es -v 2.00
+Example usage: c:\cornucopia\scripts\convert.py -t idml -l fr -s static -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
 
 options:
   -h, --help            show this help message and exit
@@ -38,10 +38,10 @@ options:
                         Input (template) file to use.
                         Default=resources/templates/owasp_cornucopia_edition_lang_ver_template.(docx|idml)
                         Template type is dependent on output type (-t) or file (-o) specified.
-  -v {1.00,1.20,1.21,1.30}, --version {1.00,1.20,1.21,1.30}
-                        Output version to produce. [`1.20`, `1.21`, `1.30`]
+  -v {1.00,1.20,1.21,1.22,2.00}, --version {1.00,1.20,1.21,1.22,2.00}
+                        Output version to produce. [`1.20`, `1.21`, `1.22`, `2.00`]
                         Version 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1
-                        Version 1.30 and 1.3x will deliver cards mapped to ASVS 4.0
+                        Version 2.00 and 2.0x will deliver cards mapped to ASVS 4.0
                         Version 1.00 and 1.0x will deliver cards mapped to MASVS 2.0
                         Version all will deliver all versions
                         Version latest will deliver the latest deck versions

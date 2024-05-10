@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "NO-NB"
-  version: "1.30"
+  version: "1.22"
 suits:
 -
   name: "DATAVALIDERING & TEGNKODING"
@@ -365,10 +365,10 @@ paragraphs:
     text: "Ikke et kort"
   -
     value: "Title"
-    text: "Website App Edition v1.30-NO_NB"
+    text: "Website App Edition v1.22-NO_NB"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v1.30-NO_NB"
+    text: "OWASP® Cornucopia Website App Edition v1.22-NO_NB"
   -
     value: "T00005"
     text: "Indeks"
@@ -382,9 +382,6 @@ paragraphs:
     value: "T00030"
     text: "Prosjektledere"
   -
-    value: "T00040"
-    text: "Redaksjonell bearbeidelse"
-  -
     value: "T00100"
     text: "Takk til"
   -
@@ -392,22 +389,19 @@ paragraphs:
     text: "Adam Shostack og Microsoft SDL Team for “Elevation of Privilege Threat Modeling Game”, publisert under “Creative Commons Attribution” som ble brukt som inspirasjon til Cornucopia og som mange ideer, spesielt spillteorien, ble kopiert fra."
   -
     value: "T00120"
-    text: "Keith Turpin og bidragsytere til “OWASP Secure Coding Practices - Quick Reference Guide”, opprinnelig donert til OWASP av Boeing, som brukes som den primære kilden til informasjon om sikkerhetskrav for å formulere innholdet på kortene."
+    text: "Keith Turpin og bidragsytere til OWASP® “Secure Coding Practices - Quick Reference Guide”, opprinnelig donert til OWASP® av Boeing, som brukes som den primære kilden til informasjon om sikkerhetskrav for å formulere innholdet på kortene."
   -
     value: "T00130"
-    text: "Bidragsytere, støttespillere, sponsorer og frivillige til OWASP ASVS-, AppSensor- og Web Framework Security Matrix-prosjektene, Mitre's “Common Attack Pattern Enumeration and Classification (CAPEC)”, og SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments” som alle brukes i oppgitte kryssreferanser."
+    text: "Bidragsytere, støttespillere, sponsorer og frivillige til OWASP® ASVS-, AppSensor- og Web Framework Security Matrix-prosjektene, Mitre's “Common Attack Pattern Enumeration and Classification (CAPEC)”, og SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments” som alle brukes i oppgitte kryssreferanser."
   -
     value: "T00140"
     text: "Playgen for å tilby et opplysende ettermiddagsseminar om oppgave gamification, og tartanmaker.com for bruk av nettverktøyet for å hjelpe til å lage mønsteret på baksiden av kortene."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited for å lage og donere utskriftsklare designfiler, Tom Brennan og OWASP Foundation for å ha startet opprettingen av en OWASP-merket boks og brosjyre."
+    text: "Blackfoot UK Limited for å lage og donere utskriftsklare designfiler, Tom Brennan og OWASP® Foundation for å ha startet opprettingen av en OWASP-merket boks og brosjyre."
   -
     value: "T00155"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet."
-  -
-    value: "T00160"
-    text: "Oana Cornea og andre deltakere på AppSec EU 2015-prosjekttoppmøtet for deres hjelp med å lage demonstrasjonsvideoen."
+    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet."
   -
     value: "T00161"
     text: "(fortsetter på side 20)"
@@ -419,7 +413,7 @@ paragraphs:
     text: "Colin Watson som forfatter og medprosjektleder sammen med Grant Ongers, sammen med andre OWASP-frivillige som har hjulpet til på mange måter."
   -
     value: "T00180"
-    text: "OWASP støtter eller anbefaler ikke kommersielle produkter eller tjenester © 2012-2024 OWASP Foundation. Dette dokumentet er lisensiert under “Creative Commons Attribution-ShareAlike 3.0” lisensen"
+    text: "OWASP støtter eller anbefaler ikke kommersielle produkter eller tjenester © 2012-2024 OWASP® Foundation. Dette dokumentet er lisensiert under “Creative Commons Attribution-ShareAlike 3.0” lisensen"
   -
     value: "T00200"
     text: "Introduksjon"
@@ -449,7 +443,7 @@ paragraphs:
     text: "Kortstokken (pakke)"
   -
     value: "T00310"
-    text: "I stedet for EoPs STRIDE-farger (sett med kort med matchende design), er Cornucopia-fargene basert på strukturen til “OWASP Secure Coding Practices - Quick Reference Guide (SCP)”, men med ytterligere hensyn tatt fra avsnitt i “OWASP Application Security Verification Standard”, “OWASP Testing Guide” og David Rooks prinsipper for sikker utvikling. "
+    text: "I stedet for EoPs STRIDE-farger (sett med kort med matchende design), er Cornucopia-fargene basert på strukturen til OWASP® “Secure Coding Practices - Quick Reference Guide (SCP)”, men med ytterligere hensyn tatt fra avsnitt i OWASP® “Application Security Verification Standard”, OWASP® “Web Application Testing Guide” og David Rooks prinsipper for sikker utvikling. "
   -
     value: "T00320"
     text: "Disse har resultert i fem farger, og en sjette kalt “Cornucopia” som har blitt opprettet for alt annet: "
@@ -488,7 +482,7 @@ paragraphs:
     text: "Et av de første målene var å referere til CWE-svakhets-ID-er, men disse viste seg å være for mange, og i stedet ble det besluttet å kartlegge hvert kort til CAPEC-programvareangrepsmønster-IDer som i seg selv er kartlagt til CWE-er, slik at det ønskede resultatet ble oppnådd."
   -
     value: "T00530"
-    text: "Hvert kort er også tilordnet de 36 primære sikkerhetshistoriene i SAFECode-dokumentet, samt til OWASP SCP v2, ASVS v4.0 og AppSensor (applikasjonsangrepsdeteksjon og respons) for å hjelpe team med å lage sine egne sikkerhetsrelaterte historier for bruk i smidige prosesser."
+    text: "Hvert kort er også tilordnet de 36 primære sikkerhetshistoriene i SAFECode-dokumentet, samt til OWASP® SCP v2, ASVS v4.0 og AppSensor (applikasjonsangrepsdeteksjon og respons) for å hjelpe team med å lage sine egne sikkerhetsrelaterte historier for bruk i smidige prosesser."
   -
     value: "T00600"
     text: "Spillstrategi"
@@ -533,7 +527,7 @@ paragraphs:
     text: "Prøv å skrive ut og velge høyere kvalitet for økt lesbarhet."
   -
     value: "T00820"
-    text: "Et valgfritt baksidedesign (i OWASP tartan) er opprettet som siste side i dette dokumentet."
+    text: "Et valgfritt baksidedesign (i OWASP® tartan) er opprettet som siste side i dette dokumentet."
   -
     value: "T00830"
     text: "Ingen spesiell justering er nødvendig. "
@@ -593,7 +587,7 @@ paragraphs:
     text: "Nåværende og tidligere OWASP® Cornucopia-prosjektbidragsytere og ledere, spesielt de involverte som sist oppdaterte kryss-referanser, laget nettversjoner og skrev skript for dynamisk å genererert Cornucopias utdatafiler."
   -
     value: "T01145"
-    text: "Blackfoot UK Limited for å lage og donere utskriftsklare designfiler, Tom Brennan og OWASP Foundation for å ha startet opprettelsen av en OWASP-merket boks og brosjyre."
+    text: "Blackfoot UK Limited for å lage og donere utskriftsklare designfiler, Tom Brennan og OWASP® Foundation for å ha startet opprettelsen av en OWASP-merket boks og brosjyre."
   -
     value: "T01150"
     text: "Eksempelvis:"
@@ -605,7 +599,7 @@ paragraphs:
     text: "Dette betyr at angriperen (William) kan opprette nye sesjonsidentifikatorer som applikasjonen godtar."
   -
     value: "T01180"
-    text: "Angrepene ble primært hentet fra sikkerhetskravene oppført i SCP, v2, men deretter supplert med verifiseringskrav fra OWASP “Application Security Verification Standard for Web Applications”, de sikkerhetsfokuserte historiene i SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments”, og til slutt en gjennomgang av kortene i EOP."
+    text: "Angrepene ble primært hentet fra sikkerhetskravene oppført i SCP, v2, men deretter supplert med verifiseringskrav fra OWASP® “Application Security Verification Standard for Web Applications”, de sikkerhetsfokuserte historiene i SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments”, og til slutt en gjennomgang av kortene i EOP."
   -
     value: "T01190"
     text: "Ytterligere veiledning til hvert kort er tilgjengelig på online Wiki kortstokken på "
@@ -934,9 +928,6 @@ paragraphs:
     value: "T02770"
     text: "Men det ville vært flott å ha flere designelementer inkludert."
   -
-    value: "T02780"
-    text: "Finnes det noen frivillige?"
-  -
     value: "T02790"
     text: "5. Er angrepene rangert etter nummeret på kortet?"
   -
@@ -1009,17 +1000,8 @@ paragraphs:
     value: "T03020"
     text: "Med spillere som er nye i spillet, kan det være bedre å fjerne disse til å begynne med (se også FAQ 9)."
   -
-    value: "T03030"
-    text: "11. Jeg forstår ikke hva angrepet betyr på hvert kort - finnes det mer detaljert informasjon?"
-  -
-    value: "T03040"
-    text: "Ja, online Wiki Deck ble opprettet for å hjelpe spillere med å forstå angrepene. "
-  -
-    value: "T03050"
-    text: "See"
-  -
     value: "T03060"
-    text: "12. Firmaet mitt ønsker å skrive ut sin egen versjon av OWASP® Cornucopia – hvilken lisens må vi referere til?"
+    text: "11. Firmaet mitt ønsker å skrive ut sin egen versjon av OWASP® Cornucopia – hvilken lisens må vi referere til?"
   -
     value: "T03070"
     text: "Vennligst se det fullstendige svaret på dette spørsmålet på prosjektets nettsider:"
@@ -1049,7 +1031,7 @@ paragraphs:
     text: "0.3"
   -
     value: "T03180"
-    text: "Draft announced OWASP SCP mailing list for comment."
+    text: "Draft announced OWASP® SCP mailing list for comment."
   -
     value: "T03190"
     text: "0.4"
@@ -1127,7 +1109,7 @@ paragraphs:
     text: "Minor attack wording changes on two cards. "
   -
     value: "T03440"
-    text: "OWASP SCP and ASVS cross-references checked and updated. "
+    text: "OWASP® SCP and ASVS cross-references checked and updated. "
   -
     value: "T03450"
     text: "Code letters added for suits. "
@@ -1208,7 +1190,7 @@ paragraphs:
     text: "Minor text changes to instructions and FAQs."
   -
     value: "T03710"
-    text: "1.3"
+    text: "2.0"
   -
     value: "T03720"
     text: "- Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. \n- Norwegian language version added."
@@ -1232,13 +1214,13 @@ paragraphs:
     text: "OWASPs hardtarbeidende ansatte."
   -
     value: "T03860"
-    text: "Deltakere på OWASP London, OWASP Manchester, OWASP Netherlands og OWASP Scotland chapter meetings, og London Gamification Meetup, som kom med nyttige forslag og stilte utfordrende spørsmål"
+    text: "Deltakere på OWASP® London, OWASP® Manchester, OWASP® Netherlands og OWASP® Scotland chapter meetings, og London Gamification Meetup, som kom med nyttige forslag og stilte utfordrende spørsmål"
   -
     value: "T03870"
     text: "Blackfoot UK Limited for å gi utskriftsklare designfiler og hundrevis av profesjonelt trykte kortstokker for distribusjon via post og på OWASP-chapter meetings"
   -
     value: "T03880"
-    text: 'OWASP NYC for å lage en OWASP-boksdesign og distribuere pakker på AppSec USA 2014.'
+    text: 'OWASP® NYC for å lage en OWASP-boksdesign og distribuere pakker på AppSec USA 2014.'
   -
     value: "T03900"
     text: "Podcasts and videoer"
@@ -1250,10 +1232,10 @@ paragraphs:
     text: "Video – Bruk av kortene, opprettet under AppSec EU 2015 project summit, 20. mai 2015"
   -
     value: "T03930"
-    text: "Podcastintervju, OWASP 24/7 Podcast-kanal, 21. mars 2014"
+    text: "Podcastintervju, OWASP® 24/7 Podcast-kanal, 21. mars 2014"
   -
     value: "T03940"
-    text: "Video av presentasjonen, OWASP EU Tour 2013 London, 3. juni 2013"
+    text: "Video av presentasjonen, OWASP® EU Tour 2013 London, 3. juni 2013"
   -
     value: "T03950"
     text: "Se prosjektets hjemmeside for mer informasjon og presentasjonsmateriell."

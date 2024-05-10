@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "PT-BR"
-  version: "1.30"
+  version: "1.22"
 suits:
 -
   name: "VALIDAÇÃO & CODIFICAÇÃO DE DADOS"
@@ -60,7 +60,7 @@ suits:
     id: "DVA"
     value: "A"
     desc: "Você inventou um novo ataque contra a Validação & Codificação de Dados"
-    misc: "Leia mais sobre este tópico em OWASP Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
+    misc: "Leia mais sobre este tópico em OWASP® Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
 -
   name: "AUTENTICAÇÃO"
   cards:
@@ -116,7 +116,7 @@ suits:
     id: "ACA"
     value: "A"
     desc: "Você inventou um novo ataque contra a Autenticação"
-    misc: "Leia mais sobre este tópico em OWASP Authentication Cheat Sheet"
+    misc: "Leia mais sobre este tópico em OWASP® Authentication Cheat Sheet"
 -
   name: "GERENCIAMENTO DE SESSÕES"
   cards:
@@ -172,7 +172,7 @@ suits:
     id: "SMA"
     value: "A"
     desc: "Você inventou um novo ataque contra o Gerenciamento de Sessões"
-    misc: "Leia mais sobre este tópico em OWASP Session Management Cheat Sheet e prevenção de ataques do tipo Cross Site Request Forgery (CSRF)"
+    misc: "Leia mais sobre este tópico em OWASP® Session Management Cheat Sheet e prevenção de ataques do tipo Cross Site Request Forgery (CSRF)"
 -
   name: "CONTROLE DE ACESSOS"
   cards:
@@ -228,7 +228,7 @@ suits:
     id: "AZA"
     value: "A"
     desc: "Você inventou um novo ataque contra Controle de Acessos"
-    misc: "Leia mais sobre este tópico em OWASP Development Guide e OWAPS Testing Guide"
+    misc: "Leia mais sobre este tópico em OWASP® Development Guide e OWAPS® Testing Guide"
 -
   name: "PRÁTICAS DE CRIPTOGRAFIA"
   cards:
@@ -284,7 +284,7 @@ suits:
     id: "CRA"
     value: "A"
     desc: "Você inventou um novo ataque contra Criptografia"
-    misc: "Leia mais sobre este tópico em OWASP Cryptographic Storage Cheat Sheet e OWASP Transport Layer Protection Cheat Sheet"
+    misc: "Leia mais sobre este tópico em OWASP® Cryptographic Storage Cheat Sheet e OWASP® Transport Layer Protection Cheat Sheet"
 -
   name: "CORNUCOPIA"
   cards:
@@ -353,7 +353,7 @@ suits:
     id: "JOB"
     value: "JokerB"
     desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
-    misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do OWASP Juice Shop, Security Shepherd, ou usando o desafio online OWASP Hacking-lab. Ambos são gratuitos"
+    misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do OWASP® Juice Shop, Security Shepherd, ou usando o desafio online OWASP® Hacking-lab. Ambos são gratuitos"
 paragraphs:
 -
   name: "Common"
@@ -363,10 +363,10 @@ paragraphs:
     text: "Nenhum Cartão"
   -
     value: "Title"
-    text: "Edição de Ecomércio v1.30-PT-BR"
+    text: "Edição de Ecomércio v1.22-PT-BR"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Edição de Ecomércio v1.30-PT-BR"
+    text: "OWASP® Cornucopia Edição de Ecomércio v1.22-PT-BR"
   -
     value: "T00005"
     text: "Índice"
@@ -380,9 +380,6 @@ paragraphs:
     value: "T00030"
     text: "Líderes de Projeto "
   -
-    value: "T00040"
-    text: "Revisores"
-  -
     value: "T00100"
     text: "Agradecimentos"
   -
@@ -390,22 +387,19 @@ paragraphs:
     text: "Equipe Microsoft SDL para o “Jogo de Modelagem de Ameaças de Elevação de Privilégios”, publicado sob uma licença \"Creative Commons Attribution\", como inspiração para Cornucopia e do qual muitas ideias, especialmente a teoria dos jogos, foram copiadas."
   -
     value: "T00120"
-    text: "Keith Turpin e colaboradores do “OWASP Secure Coding Practices - Quick Reference Guide”, originalmente doado ao OWASP pela Boeing, que é usado como fonte primária de informações sobre requisitos de segurança para formular o conteúdo dos cartões."
+    text: "Keith Turpin e colaboradores do OWASP® “Secure Coding Practices - Quick Reference Guide”, originalmente doado ao OWASP® pela Boeing, que é usado como fonte primária de informações sobre requisitos de segurança para formular o conteúdo dos cartões."
   -
     value: "T00130"
-    text: "Colaboradores, apoiadores, patrocinadores e voluntários dos projetos OWASP ASVS, AppSensor e \"Web Framework Security Matrix\", \"Common Attack Pattern Enumeration and Classification (CAPEC)\" de Mitre e \"Practical Security Stories and Security Tasks for Agile Development Environments\" de SAFECode que são todos usados ​​nas referências cruzadas fornecidas."
+    text: "Colaboradores, apoiadores, patrocinadores e voluntários dos projetos OWASP® ASVS, AppSensor e \"Web Framework Security Matrix\", \"Common Attack Pattern Enumeration and Classification (CAPEC)\" de Mitre e \"Practical Security Stories and Security Tasks for Agile Development Environments\" de SAFECode que são todos usados ​​nas referências cruzadas fornecidas."
   -
     value: "T00140"
     text: "Playgen por fornecer um seminário esclarecedor à tarde sobre gamificação de tarefas, e tartanmaker.com pela ferramenta on-line para ajudar a criar o padrão do verso do cartão."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP."
+    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP® por instigar a criação de uma caixa e folheto com a marca OWASP."
   -
     value: "T00155"
-    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP por instigar a criação de uma caixa e folheto com a marca OWASP."
-  -
-    value: "T00160"
-    text: "Oana Cornea e outros participantes na cimeira do projeto \"AppSec EU 2015\" pela sua ajuda na criação do vídeo de demonstração."
+    text: "Blackfoot UK Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP® por instigar a criação de uma caixa e folheto com a marca OWASP."
   -
     value: "T00161"
     text: "(continua na página 20)"
@@ -417,7 +411,7 @@ paragraphs:
     text: "Colin Watson como autor e co-líder do projeto com Grant Ongers, juntamente com outros voluntários do OWASP que ajudaram de diversas maneiras."
   -
     value: "T00180"
-    text: "OWASP não endossa nem recomenda produtos ou serviços comerciais © 2012-2024 OWASP Foundation Este documento está licenciado sob a licença \"Creative Commons Attribution-ShareAlike 3.0\" license"
+    text: "OWASP® não endossa nem recomenda produtos ou serviços comerciais © 2012-2024 OWASP® Foundation Este documento está licenciado sob a licença \"Creative Commons Attribution-ShareAlike 3.0\" license"
   -
     value: "T00200"
     text: "Introdução"
@@ -447,7 +441,7 @@ paragraphs:
     text: "O baralho de cartas (pacote)"
   -
     value: "T00310"
-    text: "Em vez dos naipes STRIDE do EoP (conjuntos de cartas com designs correspondentes), os naipes Cornucopia são baseados na estrutura das \"OWASP Secure Coding Practices - Quick Reference Guide (SCP)\", mas com consideração adicional das seções do \"OWASP Application Security Verification Standard\", o \"OWASP Testing Guide\" e os \"Principles of Secure Development\" de David Rook."
+    text: "Em vez dos naipes STRIDE do EoP (conjuntos de cartas com designs correspondentes), os naipes Cornucopia são baseados na estrutura das OWASP® \"Secure Coding Practices - Quick Reference Guide (SCP)\", mas com consideração adicional das seções do OWASP® \"Application Security Verification Standard\", o OWASP® \"Web Application Testing Guide\" e os \"Principles of Secure Development\" de David Rook."
   -
     value: "T00320"
     text: "Estes forneceram cinco naipes, e um sexto chamado “Cornucópia” foi criado para todo o resto:"
@@ -486,7 +480,7 @@ paragraphs:
     text: "Um objetivo inicial era fazer referência aos IDs de pontos fracos do CWE, mas estes se mostraram muito numerosos e, em vez disso, foi decidido mapear cada placa para IDs de padrão de ataque de software CAPEC, que são mapeados para CWEs, para que o resultado desejado seja alcançado."
   -
     value: "T00530"
-    text: "Cada cartão também é mapeado para as 36 histórias de segurança primárias no documento SAFECode, bem como para o OWASP SCP v2, ASVS v4.0 e AppSensor (detecção e resposta a ataques de aplicativos) para ajudar as equipes a criar sua própria segurança. histórias relacionadas para uso em processos Agile."
+    text: "Cada cartão também é mapeado para as 36 histórias de segurança primárias no documento SAFECode, bem como para o OWASP® SCP v2, ASVS v4.0 e AppSensor (detecção e resposta a ataques de aplicativos) para ajudar as equipes a criar sua própria segurança. histórias relacionadas para uso em processos Agile."
   -
     value: "T00600"
     text: "Estratégia de jogo"
@@ -932,9 +926,6 @@ paragraphs:
     value: "T02770"
     text: "Mas seria ótimo incluir elementos de design adicionais."
   -
-    value: "T02780"
-    text: "Qualquer voluntário"
-  -
     value: "T02790"
     text: "5. Os ataques são classificados pelo número da carta?"
   -
@@ -1007,17 +998,8 @@ paragraphs:
     value: "T03020"
     text: "Com jogadores novos no jogo, pode ser melhor removê-los para começar (veja também a FAQ 9)."
   -
-    value: "T03030"
-    text: "11. Não entendo o que significa o ataque em cada carta - há informações mais detalhadas?"
-  -
-    value: "T03040"
-    text: "Sim, o Wiki Deck online foi criado para ajudar os jogadores a entender os ataques."
-  -
-    value: "T03050"
-    text: "Ver"
-  -
     value: "T03060"
-    text: "12. Minha empresa deseja imprimir sua própria versão do OWASP® Cornucopia, a qual licença precisamos nos referir?"
+    text: "11. Minha empresa deseja imprimir sua própria versão do OWASP® Cornucopia, a qual licença precisamos nos referir?"
   -
     value: "T03070"
     text: "Consulte a resposta completa a esta pergunta nas páginas web do projeto em"
@@ -1047,7 +1029,7 @@ paragraphs:
     text: "0.3"
   -
     value: "T03180"
-    text: "Draft announced OWASP SCP mailing list for comment."
+    text: "Draft announced OWASP® SCP mailing list for comment."
   -
     value: "T03190"
     text: "0.4"
@@ -1125,7 +1107,7 @@ paragraphs:
     text: "Minor attack wording changes on two cards. "
   -
     value: "T03440"
-    text: "OWASP SCP and ASVS cross-references checked and updated. "
+    text: "OWASP® SCP and ASVS cross-references checked and updated. "
   -
     value: "T03450"
     text: "Code letters added for suits. "
@@ -1206,7 +1188,7 @@ paragraphs:
     text: "Minor text changes to instructions and FAQs."
   -
     value: "T03710"
-    text: "1.3"
+    text: "2.0"
   -
     value: "T03720"
     text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
@@ -1230,13 +1212,13 @@ paragraphs:
     text: "Os funcionários esforçados da OWASP."
   -
     value: "T03860"
-    text: "Participantes das reuniões dos capítulos da OWASP Londres, OWASP Manchester, OWASP Holanda e OWASP Escócia, e do encontro de Gamificação em Londres, que fizeram sugestões úteis e fizeram perguntas desafiadoras"
+    text: "Participantes das reuniões dos capítulos da OWASP® Londres, OWASP® Manchester, OWASP® Holanda e OWASP® Escócia, e do encontro de Gamificação em Londres, que fizeram sugestões úteis e fizeram perguntas desafiadoras"
   -
     value: "T03870"
     text: "Blackfoot UK Limited para presentear arquivos de design prontos para impressão e centenas de baralhos de cartas impressos profissionalmente para distribuição por correio e nas reuniões do capítulo da OWASP"
   -
     value: "T03880"
-    text: "OWASP NYC por criar um design de caixa OWASP e distribuir pacotes na AppSec USA 2014."
+    text: "OWASP® NYC por criar um design de caixa OWASP e distribuir pacotes na AppSec USA 2014."
   -
     value: "T03900"
     text: "Podcasts e vídeos"
@@ -1248,10 +1230,10 @@ paragraphs:
     text: "Vídeo - Usando os cartões, criado durante a cúpula do projeto AppSec EU 2015, 20 de maio de 2015"
   -
     value: "T03930"
-    text: "Entrevista em podcast, canal OWASP 24/7 Podcast, 21 de março de 2014"
+    text: "Entrevista em podcast, canal OWASP® 24/7 Podcast, 21 de março de 2014"
   -
     value: "T03940"
-    text: "Vídeo de apresentação, OWASP EU Tour 2013 Londres, 3 de junho de 2013"
+    text: "Vídeo de apresentação, OWASP® EU Tour 2013 Londres, 3 de junho de 2013"
   -
     value: "T03950"
     text: "Consulte o site do projeto para mais informações e materiais de apresentação."
