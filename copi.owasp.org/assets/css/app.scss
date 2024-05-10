@@ -169,6 +169,14 @@ $cryptography-color: #9792c7;
 $cornucopia-color: #405369;
 $wildcard-color: #fccd8f;
 
+$platform-code-mobile-color: rgb(79, 185, 145);
+$authentication-authorization-mobile-color: rgb(240, 146, 54);
+$network-storage-mobile-color: rgb(242, 194, 0);
+$resilience-mobile-color: rgb(49, 124, 192);
+$cryptography-mobile-color: rgb(246, 89, 40);
+$cornucopia-mobile-color: rgb(10, 58, 94);
+$wildcard-mobile-color: rgb(251, 182, 124);
+
 .card {
 
   .left-bar {
@@ -189,6 +197,65 @@ $wildcard-color: #fccd8f;
   }
 }
 
+.platform-code-mobile .left-bar {
+  background-image: linear-gradient(rgb(79, 185, 145), rgb(95, 172, 211));
+}
+
+.platform-code-mobile .value {
+  color: $platform-code-mobile-color;
+}
+
+.authentication-authorization-mobile .left-bar {
+  background-image: linear-gradient(rgb(240, 146, 54), rgb(240, 179, 98));
+}
+
+.authentication-authorization-mobile .value {
+  color: $authentication-authorization-mobile-color;
+}
+
+.network-storage-mobile .left-bar {
+  background-image: linear-gradient(rgb(242, 194, 0), rgb( 223, 92, 141));
+}
+
+.network-storage-mobile .value {
+  color: $network-storage-mobile-color;
+}
+
+.resilience-mobile .left-bar {
+  background-image: linear-gradient(rgb(49, 124, 192), rgb(79, 138 ,192));
+}
+
+.resilience-mobile .value {
+  color: $resilience-mobile-color;
+}
+
+.cryptography-mobile .left-bar {
+  background-image: linear-gradient(rgb(246, 89, 40), rgb(246, 135, 101));
+}
+
+.cryptography-mobile .value {
+  color: $cryptography-mobile-color;
+}
+
+.cornucopia-mobile .left-bar {
+  background-image: linear-gradient(rgb(10, 58, 94), rgb(39, 70, 94));
+}
+
+.cornucopia-mobile .value {
+  color:$cornucopia-mobile-color;
+}
+
+.wild-card-mobile .left-bar {
+  background-image: linear-gradient(rgb(251, 182, 124), rgb(255, 230, 209));
+}
+
+.wild-card-mobile {
+  background-image: linear-gradient(to left,rgb(251, 182, 124, 0.49), rgb(255, 230, 209, 0.49));
+}
+
+.wild-card-mobile .value {
+  color:$wildcard-mobile-color;
+}
 
 .data-validation-encoding .left-bar {
   background-color: $data-validation-encoding-color;
@@ -242,6 +309,7 @@ $wildcard-color: #fccd8f;
   background-color:$wildcard-color;
 }
 
+
 .wild-card .value {
   color:$wildcard-color;
 }
@@ -254,6 +322,33 @@ $wildcard-color: #fccd8f;
 }
 
 .J, .Q, .K {
+  &.platform-code-mobile {
+    background-image: linear-gradient(to left,rgba(79, 185, 145,  0.49), rgba(95, 172, 211,  0.49));
+  }
+
+  &.authentication-authorization-mobile {
+    background-image: linear-gradient(to left, rgb(240, 146, 54, 0.49), rgb(240, 179, 98, 0.49));
+  }
+
+  &.network-storage-mobile {
+    background-image: linear-gradient(to left,rgb( 242, 194, 0, 0.49), rgb( 223, 92, 141, 0.49));
+  }
+
+  &.resilience-mobile {
+    background-image: linear-gradient(to left,rgb( 49, 124, 192, 0.49), rgb( 79, 138 ,192, 0.49));
+  }
+
+  &.cryptography-mobile {
+    background-image: linear-gradient(to left,rgb(  246, 89, 40, 0.49), rgb( 246, 135, 101, 0.49));
+  }
+
+  &.cornucopia-mobile {
+    background-image: linear-gradient(to left,rgb( 10, 58, 94, 0.20), rgb( 39, 70, 94, 0.20));
+  }
+
+
+
+  // 
 
   &.authentication {
     background-color: scale-color($authentication-color, $lightness: 75%, $saturation:  -20%);

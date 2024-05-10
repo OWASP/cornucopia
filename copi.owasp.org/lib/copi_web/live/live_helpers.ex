@@ -20,4 +20,13 @@ defmodule CopiWeb.LiveHelpers do
     modal_opts = [id: :modal, return_to: path, component: component, opts: opts]
     live_component(CopiWeb.ModalComponent, modal_opts)
   end
+
+
+    def display_game_session(edition) do
+      case edition do
+        "ecommerce" -> "Web Session:"
+        "masvs" -> "Mobile Session:"
+        _ -> "EoP Session:"
+      end
+  end
 end
