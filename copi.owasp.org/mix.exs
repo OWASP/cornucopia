@@ -63,8 +63,7 @@ defmodule Copi.MixProject do
       {:slugify, "~> 1.3.1"},
       {:want, "~> 1.10.1"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
-      {:hackney, "~> 1.9"},
-      {:dns_cluster, "~> 0.1.1"}
+      {:hackney, "~> 1.9"}
     ]
   end
 
