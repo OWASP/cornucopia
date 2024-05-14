@@ -104,6 +104,7 @@ Atkinson Hyperlegible: https://brailleinstitute.org/freefont
 The following fonts are used:
 
 - Deck: Fivo Sans and Atkinson Hyperlegible
+- Leaflet: Fivo Sans
 - case
   - Noto Sans Condensed Bold
   - Noto Sans Condensed Extra Bold
