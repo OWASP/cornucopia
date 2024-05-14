@@ -101,6 +101,21 @@ The fonts can also be downloaded from the web.
 Fivo Sans: https://www.fontsc.com/font/fivo-sans
 Atkinson Hyperlegible: https://brailleinstitute.org/freefont
 
+The following fonts are used:
+
+- Deck: Fivo Sans and Atkinson Hyperlegible
+- case
+  - Noto Sans Condensed Bold
+  - Noto Sans Condensed Extra Bold
+  - Noto Sans Condensed Medium
+  - Noto Sans ExtraCondensed Extra Bold
+  - Noto Sans ExtraCondensed Extra Medium
+- Logos:
+  - Noto Sans Condensed Bold
+  - Noto Sans Condensed Extra Bold
+  - Noto Sans Extra Condensed Extra Bold
+
+
 NB: Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 
 This is because indesign does not support auto adjusting the TOC.
 
