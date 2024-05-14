@@ -1,4 +1,4 @@
-<img src="./resources/logos/cornucopia_logo.png?raw=true" width="150">
+<img src="./resources/logos/cornucopia_logo.svg?raw=true" width="150">
 
 [![OWASP Lab](https://img.shields.io/badge/owasp-lab%20project-yellow.svg)](https://owasp.org/other_projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7125/badge)](https://bestpractices.coreinfrastructure.org/projects/7125)
@@ -104,6 +104,7 @@ Atkinson Hyperlegible: https://brailleinstitute.org/freefont
 The following fonts are used:
 
 - Deck: Fivo Sans and Atkinson Hyperlegible
+- Leaflet: Fivo Sans
 - case
   - Noto Sans Condensed Bold
   - Noto Sans Condensed Extra Bold
