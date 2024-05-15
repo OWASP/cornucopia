@@ -16,6 +16,8 @@ It is language, platform and technology agnostic.
 * OWASP AppSensor AppSensor_DetectionPoints
 * CAPEC Mitre Common Attack Pattern Enumeration and Classification v1.7.1
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
+* MASTG OWASP Mobile Application Security Testing Guide 1.7
+* MASVS OWASP Mobile Application Security Verification Standard 2.0
 
 ## Credits
 Cornucopia was originally conceived and created by Colin Watson 
