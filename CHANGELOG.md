@@ -21,6 +21,6 @@ Add testing.
 ### 2024-04-30
 
 - Adding editions, languages and versions to the deck converter.
-- Adding the mobile edition.
+- Adding the mobile app edition.
 - Adding functionality for building the leaflet.
 - Update the ASVS mapping version to ASVS 4.0.3.
