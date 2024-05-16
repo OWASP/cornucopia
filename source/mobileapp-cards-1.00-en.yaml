@@ -365,10 +365,10 @@ paragraphs:
     text: "No Card"
   -
     value: "Title"
-    text: "Mobile Edition v1.00-EN"
+    text: "Mobile App Edition v1.00-EN"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Mobile Edition v1.00-EN"
+    text: "OWASP® Cornucopia Mobile App Edition v1.00-EN"
   -
     value: "T00010"
     text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
@@ -407,7 +407,7 @@ paragraphs:
     text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories."
   -
     value: "T00220"
-    text: "Cornucopia Mobile Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for developement team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
+    text: "Cornucopia Mobile App Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for developement team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
   -
     value: "T00240"
     text: "Cornucopia attempts to introduce threat-modelling ideas into mobile development teams that use Agile methodologies, or are more focused on mobile application weaknesses than other types of software vulnerabilities."
@@ -419,7 +419,7 @@ paragraphs:
     text: "The card scenarios are meant to cover all the MASVS 2.0 requirements, all the tests from the MASTG and any additional guidelines from the Android and IOS secure coding guides. This was done in order to allow the game to be as aligned as possible with the latest guidelines for secure mobile development. Still, it's important to keep in mind that security guidelines and requirements are always in motion and that the game first of all should be used as a support when doing mobile application threat modeling and not as a complete guide into security requirements and guidelines."
   -
     value: "T00311"
-    text: "Cornucopia Mobile Edition suits are based on the sections in the Mobile Application Security Verification Standard."
+    text: "Cornucopia Mobile App Edition suits are based on the sections in the Mobile Application Security Verification Standard."
   -
     value: "T00320"
     text: "These provided five suits, and a sixth called “Cornucopia” was created as a trump suite: "
@@ -710,7 +710,7 @@ paragraphs:
     text: "Likewise, the Mobile App Edition names reflect the OWASP community aspect."
   -
     value: "T02710"
-    text: "Therefore, apart from 'Alice, Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile Edition authors and contributors, and OWASP Chapter leaders around the world."
+    text: "Therefore, apart from 'Alice, Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
   -
     value: "T02720"
     text: "The cultural and gender mix simply reflects these sources of names"
