@@ -354,7 +354,7 @@ suits:
     id: "JOBM"
     value: "JokerB"
     card: "Joker"
-    desc: "Mallory can use the app installed on Alice's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Alice, without consent and/or notification"
+    desc: "Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification"
     misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
 paragraphs:
 -
@@ -710,7 +710,7 @@ paragraphs:
     text: "Likewise, the Mobile App Edition names reflect the OWASP community aspect."
   -
     value: "T02710"
-    text: "Therefore, apart from 'Alice, Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
+    text: "Therefore, apart from 'Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
   -
     value: "T02720"
     text: "The cultural and gender mix simply reflects these sources of names"
