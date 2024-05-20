@@ -769,7 +769,7 @@ class TestParseArguments(unittest.TestCase):
             style="static",
             version="1.21",
             edition="all",
-            url="https://copi.securedelivery.io/cards",
+            url="https://copi.owasp.org/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -786,7 +786,7 @@ class TestParseArguments(unittest.TestCase):
             style="static",
             version="latest",
             edition="all",
-            url="https://copi.securedelivery.io/cards",
+            url="https://copi.owasp.org/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -804,7 +804,7 @@ class TestParseArguments(unittest.TestCase):
             style="static",
             version="latest",
             edition="all",
-            url="https://copi.securedelivery.io/cards",
+            url="https://copi.owasp.org/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -822,7 +822,7 @@ class TestParseArguments(unittest.TestCase):
             style="static",
             version="latest",
             edition="all",
-            url="https://copi.securedelivery.io/cards",
+            url="https://copi.owasp.org/cards",
         )
 
         got_args = c.parse_arguments(input_args)
@@ -840,7 +840,7 @@ class TestParseArguments(unittest.TestCase):
             style="static",
             version="latest",
             edition="all",
-            url="https://copi.securedelivery.io/cards",
+            url="https://copi.owasp.org/cards",
         )
 
         got_args = c.parse_arguments(input_args)
