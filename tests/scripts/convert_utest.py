@@ -133,6 +133,7 @@ class TestGetValidStyleChoices(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(style="all")
         want_style = c.convert_vars.STYLE_CHOICES
         want_style.remove("all")
+        want_style.remove("dynamic")
 
         got_style = c.get_valid_styles()
         self.assertListEqual(want_style, got_style)
