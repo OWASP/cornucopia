@@ -217,7 +217,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
     description += "\nExample usage: $ ./cornucopia/convert.py -t docx -l es -v 2.00"
     description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t idml -l fr -v 2.00"
-    description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
+    description += " -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
         "-i",
@@ -252,7 +252,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--outputfiletype",
         type=str,
         choices=convert_vars.FILETYPE_CHOICES,
-        help="Type of file to output. Default = docx. If specified, this overwrites the output file extension",
+        help="Type of file to output. Default = (docx, idml). If specified, this overwrites the output file extension",
     )
     parser.add_argument(
         "-o",
@@ -313,7 +313,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "-u",
         "--url",
-        default="https://copi.securedelivery.io/cards",
+        default="https://copi.owasp.org/cards",
         type=str,
         help=(
             "Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID). "
@@ -762,9 +762,8 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 def get_valid_styles() -> List[str]:
     styles = []
     if convert_vars.args.style.lower() == "all":
-        for style in convert_vars.STYLE_CHOICES:
-            if style != "all":
-                styles.append(style)
+        styles.append("static")
+        styles.append("leaflet")
     elif convert_vars.args.style == "":
         styles.append("static")
     else:

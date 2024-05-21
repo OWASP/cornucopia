@@ -55,43 +55,44 @@ For font licensing, please read font [README.md](./resources/fonts/README.md)
 Merges to the main branch will generate new DOCX and IDML files to use to print off new version of the deck but if you wish to produce these locally yourself then use the ./scripts/convert.py scipt to do this:
 
 ```bash
-(cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,no-nb,pt-br}] [-d] [-s {all,static,dynamic}] [-u URL]
+-(cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
+usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.20,1.21,1.22,2.00}] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,no-nb,pt-br}] [-d]
+                  [-s {all,static,dynamic,leaflet}] [-e {all,webapp,mobileapp}] [-u URL]
 
-Tool to output OWASP Cornucopia playing cards into different file types and languages. 
+Tool to output OWASP Cornucopia playing cards into different file types and languages.
 Example usage: $ ./cornucopia/convert.py -t docx -l es -v 2.00
-Example usage: c:\cornucopia\scripts\convert.py -t idml -l fr -s static -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
+Example usage: c:\cornucopia\scripts\convert.py -t idml -l fr -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
 
 options:
   -h, --help            show this help message and exit
   -i INPUTFILE, --inputfile INPUTFILE
                         Input (template) file to use.
-                        Default=resources/templates/owasp_cornucopia_edition_lang_ver_template.(docx|idml)
+                        Default=resources\templates\owasp_cornucopia_edition_lang_ver_template.(docx|idml)
                         Template type is dependent on output type (-t) or file (-o) specified.
-  -v {1.00,1.20,1.21,1.22,2.00}, --version {1.00,1.20,1.21,1.22,2.00}
-                        Output version to produce. [`1.20`, `1.21`, `1.22`, `2.00`]
+  -v {all,latest,1.00,1.20,1.21,1.22,2.00}, --version {all,latest,1.00,1.20,1.21,1.22,2.00}
+                        Output version to produce. [`all`, `latest`, `1.00`, `1.20`, `1.21`, `1.22`, `2.00`]
                         Version 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1
                         Version 2.00 and 2.0x will deliver cards mapped to ASVS 4.0
                         Version 1.00 and 1.0x will deliver cards mapped to MASVS 2.0
                         Version all will deliver all versions
                         Version latest will deliver the latest deck versions
   -t {all,docx,pdf,idml}, --outputfiletype {all,docx,pdf,idml}
-                        Type of file to output. Default = docx. If specified, this overwrites the output file extension
+                        Type of file to output. Default = (docx, idml). If specified, this overwrites the output file extension
   -o OUTPUTFILE, --outputfile OUTPUTFILE
-                        Specify a path and name of output file to generate. (caution: existing file will be overwritten). 
-                        default = output/owasp_cornucopia_edition_component_lang_ver.(docx|pdf|idml)
+                        Specify a path and name of output file to generate. (caution: existing file will be overwritten).
+                        default = output\owasp_cornucopia_edition_component_lang_ver.(docx|pdf|idml)
   -l {template,all,en,es,fr,nl,no-nb,pt-br}, --language {template,all,en,es,fr,nl,no-nb,pt-br}
-                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `template`] 
-                        Template will attempt to create a template from the english input file and 
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `template`]
+                        Template will attempt to create a template from the english input file and
                         replacing strings with the template lookup codes
   -d, --debug           Output additional information to debug script
+  -s {all,static,dynamic,leaflet}, --style {all,static,dynamic,leaflet}
+                        Output style to produce. [`static`, `dynamic` or `leaflet`]
+                        Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.The leaflet contains the instructions
   -e {all,webapp,mobileapp}, --edition {all,webapp,mobileapp}
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
                         The various Cornucopia decks. `web` will give you the web webapp edition.`mobileapp` will give you the MASVS/MASTG edition.
-  -s {all,static,dynamic,leaflet}, --style {all,static,dynamic,leaflet}
-                        Output style to produce. [`static`, `dynamic` or `leaflet`] 
-                        Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.The leaflet contains the instructions
-  -u URL, --url URL     Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID). 
+  -u URL, --url URL     Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID).
 ```
 
 ## Printing
