@@ -453,7 +453,7 @@ def get_replacement_data(
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
-                    data = yaml.load(f, Loader=yaml.BaseLoader)
+                    data = yaml.load(f, Loader=yaml.SafeLoader)
                 except yaml.YAMLError as e:
                     logging.info(f"Error loading yaml file: {file}. Error = {e}")
                     continue
