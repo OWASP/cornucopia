@@ -16,6 +16,7 @@ import xml.etree.ElementTree as ElTree
 from typing import Any, Dict, Generator, List, Tuple, Union
 from operator import itemgetter
 from itertools import groupby
+import defusedxml.ElementTree
 
 
 class ConvertVars:
@@ -453,7 +454,7 @@ def get_replacement_data(
         ):
             with open(file, "r", encoding="utf-8") as f:
                 try:
-                    data = yaml.load(f, Loader=yaml.SafeLoader)
+                    data = yaml.load(f, Loader=yaml.BaseLoader)
                 except yaml.YAMLError as e:
                     logging.info(f"Error loading yaml file: {file}. Error = {e}")
                     continue
@@ -961,7 +962,7 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
         replacement_values = list(replacement_dict.items())
 
     try:
-        tree = ElTree.parse(filename)
+        tree = defusedxml.ElementTree.parse(filename)
     except ElTree.ParseError as e:
         logging.error(f" --- parsing xml file: {filename}. error = {e}")
         return
