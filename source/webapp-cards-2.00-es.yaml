@@ -395,13 +395,10 @@ paragraphs:
     text: "Colaboradores, patrocinadores y voluntarios de los proyectos OWASP® ASVS, AppSensor y Web Framework Security Matrix, la enumeración y clasificación de patrones de ataque común de Mitre (CAPEC) y las \"historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágiles\" de SAFECode, que se utilizan en las referencias cruzadas proporcionadas."
   -
     value: "T00140"
-    text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
+    text: "Playgen por brindar un seminario esclarecedor por la tarde sobre gamificación de tareas, y tartanmaker.com por la herramienta en línea para ayudar a crear el patrón del dorso de la tarjeta."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees. "
-  -
-    value: "T00155"
-    text: "Blackfoot UK Limited por crear y donar archivos de diseño listos para imprimir, Tom Brennan y la Fundación OWASP® por impulsar la creación de una caja y un folleto con la marca OWASP."
+    text: "Blackfoot (UK) Limited por crear y donar archivos de diseño listos para imprimir, Tom Brennan y la Fundación OWASP® por instigar la creación de una caja y un folleto con la marca OWASP, y Secure Delivery Ltd por desarrollar y donar Copi, la plataforma para jugar Cornucopia y EoP en línea."
   -
     value: "T00161"
     text: "(continúa en la página 20)"
@@ -410,10 +407,10 @@ paragraphs:
     text: "(continúa de la página 10)"
   -
     value: "T00170"
-    text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
+    text: "Colin Watson como autor y líder del coproyecto con Grant Ongers, junto con otros voluntarios de OWASP que han ayudado de muchas maneras."
   -
     value: "T00180"
-    text: "OWASP does not endorse or recommend commercial products or services © 2012-2024 OWASP® Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
+    text: "OWASP no respalda ni recomienda productos o servicios comerciales © 2012-2024 Fundación OWASP® Este documento está bajo la licencia Creative Commons Attribution-ShareAlike 3.0"
   -
     value: "T00200"
     text: "Introducción"
