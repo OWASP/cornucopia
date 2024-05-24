@@ -404,10 +404,7 @@ paragraphs:
     text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
   -
     value: "T00150"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet."
-  -
-    value: "T00155"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet."
+    text: "Blackfoot (UK) Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet, and Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online."
   -
     value: "T00161"
     text: "(continued on page 20)"

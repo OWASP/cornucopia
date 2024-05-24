@@ -785,7 +785,7 @@ def get_valid_edition_choices() -> List[str]:
 
 
 def group_number_ranges(data: List[str]) -> List[str]:
-    if len(data) < 2 or len([s for s in data if not s.isnumeric()]):
+    if len(data) < 2 or len([s for s in data if not str(s).isnumeric()]):
         return data
     list_ranges: List[str] = []
     data_numbers = [int(s) for s in data]
