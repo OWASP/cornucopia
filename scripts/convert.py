@@ -74,7 +74,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
 
     else:
         error_msg = (
-            f"Error. A temporary docx file was created in the output folder but cannot be converted "
+            "Error. A temporary docx file was created in the output folder but cannot be converted "
             f"to pdf (yet) on operating system: {platform.system()}\n"
             "This does work on Windows and Mac with MS Word installed."
         )
