@@ -1,19 +1,13 @@
-<h1>How to play</h1>
-
-<.link patch={~p"/games/new"}>
-  <.button><%= gettext("Enough already, let's start!") %></.button>
-</.link>
-
-<.modal :if={@live_action in [:new, :edit]} id="game-modal" show on_cancel={JS.patch(~p"/games")}>
   <.live_component
-    module={CopiWeb.GameLive.FormComponent}
-    id={@game.id || :new}
+    module={CopiWeb.GameLive.CreateGameForm}
+    id={:new}
     title={@page_title}
     action={@live_action}
     game={@game}
     patch={~p"/games"}
   />
-</.modal>
+
+<h1>How to play</h1>
 
 <h2>Preparations</h2>
 <ol>
@@ -50,7 +44,3 @@
   <li>Review all the applicable threats and the matching security requirements</li>
   <li>Create user stories, specifications and test cases as required for your development methodology</li>
 </ol>
-
-<.link patch={~p"/games/new"}>
-  <.button><%= gettext("Ok I've read it all, let's go!") %></.button>
-</.link>

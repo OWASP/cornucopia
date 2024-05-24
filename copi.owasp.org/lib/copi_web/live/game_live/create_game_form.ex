@@ -1,4 +1,4 @@
-defmodule CopiWeb.GameLive.FormComponent do
+defmodule CopiWeb.GameLive.CreateGameForm do
   use CopiWeb, :live_component
 
   alias Copi.Cornucopia
@@ -10,8 +10,9 @@ defmodule CopiWeb.GameLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage game records in your database.</:subtitle>
       </.header>
+
+      <h1> </h1>
 
       <.simple_form
         for={@form}

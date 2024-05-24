@@ -18,7 +18,7 @@ defmodule CopiWeb.GameLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Game")
+    |> assign(:page_title, "Create a new game")
     |> assign(:game, %Game{})
   end
 
