@@ -416,9 +416,7 @@ def get_mapping_data_for_edition(
         if is_yaml_file(file) and is_mapping_file_for_version(file, version, edition):
             mappingfile = file
     if not mappingfile:
-        logging.warning(
-            f"No mapping file found for version: {version} lang: {language} edition: {edition}"
-        )
+        logging.warning(f"No mapping file found for version: {version} lang: {language} edition: {edition}")
         return data
 
     with open(mappingfile, "r", encoding="utf-8") as f:
