@@ -184,7 +184,7 @@ def ensure_folder_exists(folder_path: str) -> None:
 def main() -> None:
     convert_vars.args = parse_arguments(sys.argv[1:])
     set_logging()
-    logging.debug(" --- args = " + str(convert_vars.args))
+    logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
     if convert_vars.args.pdf and not convert_vars.can_convert_to_pdf and not convert_vars.args.debug:
@@ -352,7 +352,7 @@ def get_docx_document(docx_file: str) -> docx.Document:
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
     else:
-        logging.error("Could not find file at: " + str(docx_file))
+        logging.error("Could not find file at: %s", str(docx_file))
         return docx.Document()
 
 
@@ -363,9 +363,9 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
     if not files:
-        logging.error("No language files found in folder: " + str(os.sep.join([convert_vars.BASE_PATH, "source"])))
+        logging.error("No language files found in folder: %s", str(os.sep.join([convert_vars.BASE_PATH, "source"])))
         return files
-    logging.debug(f" --- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3])))
+    logging.debug("%s%s", f" --- found {len(files)} files of type {ext}. Showing first few:\n* ", str("\n* ".join(files[:3])))
     return files
 
 
@@ -416,7 +416,9 @@ def get_mapping_data_for_edition(
         if is_yaml_file(file) and is_mapping_file_for_version(file, version, edition):
             mappingfile = file
     if not mappingfile:
-        logging.warning(f"No mapping file found for version: {version} lang: {language} edition: {edition}")
+        logging.warning(
+            f"No mapping file found for version: {version} lang: {language} edition: {edition}"
+        )
         return data
 
     with open(mappingfile, "r", encoding="utf-8") as f:
@@ -811,12 +813,12 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
     temp_output_path = output_path + os.sep + "temp"
     # Ensure the output folder and temp output folder exist
     ensure_folder_exists(temp_output_path)
-    logging.debug(" --- temp_folder for extraction of xml files = " + str(temp_output_path))
+    logging.debug(" --- temp_folder for extraction of xml files = %s", str(temp_output_path))
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
         idml_archive.extractall(temp_output_path)
-        logging.debug(" --- namelist of first few files in archive = " + str(idml_archive.namelist()[:5]))
+        logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
     # Only Stories files have content to update
