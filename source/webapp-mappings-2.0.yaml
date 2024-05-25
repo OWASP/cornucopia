@@ -154,7 +154,7 @@ suits:
     id: "AC7"
     value: "7"
     owasp_scp: [ 33, 38, 39, 41, 50, 53 ]
-    owasp_asvs: [ 2.1.2, 2.1.7, 2.1.10, 2.2.1 ]
+    owasp_asvs: [ 2.1.2, 2.1.7, '2.1.10', 2.2.1 ]
     owasp_appsensor: [ AE2, AE3 ]
     capec: [ 2, 16 ]
     safecode: [ 27 ]

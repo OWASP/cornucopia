@@ -31,6 +31,7 @@ class ConvertVars:
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
         "webapp": {"1.22": "1.2", "2.00": "2.0", "2.0": "2.0", "1.2": "1.2"},
         "mobileapp": {"1.0": "1.0", "1.00": "1.0"},
+        "all": {"1.0": "1.0", "1.00": "1.0", "1.22": "1.2", "2.00": "2.0", "2.0": "2.0", "1.2": "1.2"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_layout_lang_ver_document_template"]
@@ -62,7 +63,7 @@ def check_make_list_into_text(var: List[str]) -> str:
     return text_output
 
 
-def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
+def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
     logging.debug(
         f" --- docx_file = {docx_filename} convert to {output_pdf_filename}\n--- starting pdf conversion now."
     )
@@ -70,11 +71,10 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
     if convert_vars.can_convert_to_pdf:
         try:
             docx2pdf.convert(docx_filename, output_pdf_filename)
+            logging.info(f"New file saved: {output_pdf_filename}")
         except Exception as e:
             error_msg = f"\nConvert error: {e}"
             logging.warning(error_msg)
-            return docx_filename
-
     else:
         error_msg = (
             f"Error. A temporary docx file was created in the output folder but cannot be converted "
@@ -82,13 +82,10 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> str:
             "This does work on Windows and Mac with MS Word installed."
         )
         logging.warning(error_msg)
-        return docx_filename
 
     # If not debugging then delete the temp file
     if not convert_vars.args.debug:
         os.remove(docx_filename)
-
-    return output_pdf_filename
 
 
 def create_edition_from_template(
@@ -103,21 +100,24 @@ def create_edition_from_template(
     mapping: Dict[str, str] = get_mapping_for_edition(yaml_files, version, language, edition)
 
     if not has_translation_for_edition(mapping["meta"], language):
-        logging.warn(
+        logging.warning(
             f"Translation in {language} does not exist for edition: {edition}, version: {version} "
-            "or the translation choices are missing from the meta-> languages section in the mappings file")
+            "or the translation choices are missing from the meta -> languages section in the mappings file"
+        )
         return
 
     if not has_template_for_edition(mapping["meta"], template) and not convert_vars.args.inputfile:
-        logging.warn(
+        logging.warning(
             f"The template: {template} does not exist for edition: {edition}, version: {version} "
-            "or the template choices are missing from the meta-> templates section in the mappings file")
+            "or the template choices are missing from the meta templates section in the mappings file"
+        )
         return
 
     if not has_layout_for_edition(mapping["meta"], layout) and not convert_vars.args.inputfile:
-        logging.warn(
+        logging.warning(
             f"The layout: {layout} does not exist for edition: {edition}, version: {version} "
-            "or the layout choices are missing from the meta-> layouts section in the mappings file")
+            "or the layout choices are missing from the meta -> layouts section in the mappings file"
+        )
         return
 
     # Get the language data from the correct language file (checks vars.args.language to select the correct file)
@@ -153,25 +153,25 @@ def create_edition_from_template(
         # If file type is pdf, then save a temp docx file, convert the docx to pdf
         temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
         save_docx_file(doc, temp_docx_file)
-        output_file = convert_docx_to_pdf(temp_docx_file, output_file)
-
-    logging.info(f"New file of type: {file_extension} saved: {output_file}")
+        convert_docx_to_pdf(temp_docx_file, output_file)
+        return
+    logging.info(f"New file saved: {output_file}")
 
 
 def has_translation_for_edition(meta: Dict[str, str], language: str) -> bool:
-    if meta and language in meta["languages"]:
+    if meta and "languages" in meta and language in meta["languages"]:
         return True
     return False
 
 
 def has_template_for_edition(meta: Dict[str, str], template: str) -> bool:
-    if meta and template in meta["templates"]:
+    if meta and "templates" in meta and template in meta["templates"]:
         return True
     return False
 
 
 def has_layout_for_edition(meta: Dict[str, str], layout: str) -> bool:
-    if meta and layout in meta["layouts"]:
+    if meta and "layouts" in meta and layout in meta["layouts"]:
         return True
     return False
 
@@ -373,6 +373,7 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
             files.append(os.path.join(root, filename))
     if not files:
         logging.error("No language files found in folder: " + str(os.sep.join([convert_vars.BASE_PATH, "source"])))
+        return files
     logging.debug(f" --- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3])))
     return files
 
@@ -417,14 +418,16 @@ def get_mapping_data_for_edition(
     data = {}
     logging.debug(
         f" --- Starting get_mapping_data() for edition: {edition} , language: {language} and version: {version} "
-        f"     with mapping to version {get_valid_mapping_for_version(version, edition)}"
+        f" with mapping to version {get_valid_mapping_for_version(version, edition)}"
     )
     mappingfile: str = ""
     for file in yaml_files:
         if is_yaml_file(file) and is_mapping_file_for_version(file, version, edition):
             mappingfile = file
     if not mappingfile:
-        logging.debug("No mapping file found for version: " + version + ", lang: " + language + ", edition: " + edition)
+        logging.warning(
+            f"No mapping file found for version: {version} lang: {language} edition: {edition}"
+        )
         return data
 
     with open(mappingfile, "r", encoding="utf-8") as f:
@@ -611,8 +614,7 @@ def get_replacement_dict(input_data: Dict[str, Any]) -> Dict[str, str]:
     return data
 
 
-def update_tag_for_suit_name(
-    data: Dict[str, str], suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
+def update_tag_for_suit_name(data: Dict[str, str], suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
     tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
     data.update(tag_for_suit_name)
     return data
@@ -745,7 +747,7 @@ def get_valid_language_choices() -> List[str]:
 
 def get_valid_version_choices() -> List[str]:
     versions = []
-    edition: str = convert_vars.args.edition.lower();
+    edition: str = convert_vars.args.edition.lower()
     if convert_vars.args.version.lower() == "all":
         for version in convert_vars.VERSION_CHOICES:
             if version not in ("all", "latest") and not get_valid_mapping_for_version(version, edition) == "":
@@ -774,7 +776,7 @@ def get_valid_templates() -> List[str]:
         return templates
     if convert_vars.args.template.lower() == "all":
         for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all")]:
-            templates.append(template)         
+            templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("static")
     else:
@@ -784,11 +786,11 @@ def get_valid_templates() -> List[str]:
 
 def get_valid_edition_choices() -> List[str]:
     editions = []
-    if convert_vars.args.edition.lower() == "all":
+    if convert_vars.args.edition.lower() == "all" or not convert_vars.args.edition.lower():
         for edition in convert_vars.EDITION_CHOICES:
             if edition not in ("all"):
                 editions.append(edition)
-    if convert_vars.args.edition:
+    if convert_vars.args.edition and convert_vars.args.edition not in ("all"):
         editions.append(convert_vars.args.edition)
     return editions
 
