@@ -84,11 +84,11 @@ jobs:
           pipenv install -d
       - name: Generate new output files
         run: |
-          pipenv run python scripts/convert.py -l en -t docx -s dynamic -v 1.22 -e webapp
-          pipenv run python scripts/convert.py -l en -t docx -s dynamic -v 2.00 -e webapp
-          pipenv run python scripts/convert.py -l all -t all -s all -v 1.22 -e webapp
-          pipenv run python scripts/convert.py -l all -t all -s all -v 2.00 -e webapp
-          pipenv run python scripts/convert.py -l en -t all -s all -v 1.00 -e mobileapp
+          pipenv run python scripts/convert.py -l en -lt guide -t dynamic -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l en -lt guide -t dynamic -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l all -lt all -t all -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l all -lt all -t all -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l en -lt all -t all -v 1.00 -e mobileapp
       - name: Create pull request artifacts
         uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
         with:
