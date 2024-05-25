@@ -366,7 +366,9 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
     if not files:
         logging.error("No language files found in folder: %s", str(os.sep.join([convert_vars.BASE_PATH, "source"])))
         return files
-    logging.debug("%s%s", f" --- found {len(files)} files of type {ext}. Showing first few:\n* ", str("\n* ".join(files[:3])))
+    logging.debug(
+        "%s%s", f" --- found {len(files)} files of type {ext}. Showing first few:\n* ", str("\n* ".join(files[:3]))
+    )
     return files
 
 
@@ -417,9 +419,7 @@ def get_mapping_data_for_edition(
         if is_yaml_file(file) and is_mapping_file_for_version(file, version, edition):
             mappingfile = file
     if not mappingfile:
-        logging.warning(
-            f"No mapping file found for version: {version} lang: {language} edition: {edition}"
-        )
+        logging.warning(f"No mapping file found for version: {version}, lang: {language}, edition: {edition}")
         return data
 
     with open(mappingfile, "r", encoding="utf-8") as f:
