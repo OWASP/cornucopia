@@ -4,6 +4,9 @@ meta:
   component: "mappings"
   language: "ALL"
   version: "2.0"
+  layouts: ["cards", "leaflet", "guide"]
+  templates: ["qr", "static"]
+  languages: ["en", "es"]
 suits:
 -
   name: "Data validation & encoding"

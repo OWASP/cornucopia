@@ -51,13 +51,10 @@ def check_fix_file_extension(filename: str, file_type: str) -> str:
     return filename
 
 
-def check_make_list_into_text(var: List[str], group_numbers: bool = True) -> str:
+def check_make_list_into_text(var: List[str]) -> str:
     if not isinstance(var, list):
         return str(var)
-
-    if group_numbers:
-        var = group_number_ranges(var)
-
+    var = group_number_ranges(var)
     text_output = ", ".join(str(s) for s in var)
     if not text_output.strip():
         text_output = " - "
@@ -106,22 +103,28 @@ def create_edition_from_template(
     mapping: Dict[str, str] = get_mapping_for_edition(yaml_files, version, language, edition)
 
     if not has_translation_for_edition(mapping["meta"], language):
-        logging.warn(f"Translation in {language} does not exist for edition: {edition} for version: {version}")
+        logging.warn(
+            f"Translation in {language} does not exist for edition: {edition}, version: {version} "
+            "or the translation choices are missing from the meta-> languages section in the mappings file")
         return
 
     if not has_template_for_edition(mapping["meta"], template) and not convert_vars.args.inputfile:
-        logging.warn(f"The template: {template} does not exist for edition: {edition} for version: {version}")
+        logging.warn(
+            f"The template: {template} does not exist for edition: {edition}, version: {version} "
+            "or the template choices are missing from the meta-> templates section in the mappings file")
         return
 
     if not has_layout_for_edition(mapping["meta"], layout) and not convert_vars.args.inputfile:
-        logging.warn(f"The layout: {layout} does not exist for edition: {edition} for version: {version}")
+        logging.warn(
+            f"The layout: {layout} does not exist for edition: {edition}, version: {version} "
+            "or the layout choices are missing from the meta-> layouts section in the mappings file")
         return
 
     # Get the language data from the correct language file (checks vars.args.language to select the correct file)
     language_data: Dict[str, Dict[str, str]] = get_language_data(yaml_files, language, version, edition)
 
     # Get the dict of replacement data
-    language_dict: Dict[str, str] = get_replacement_dict(language_data, False)
+    language_dict: Dict[str, str] = get_replacement_dict(language_data)
 
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
@@ -195,10 +198,10 @@ def main() -> None:
 
     # Create output files
     for edition in get_valid_edition_choices():
-        for layout in get_valid_document_layout_choices(edition):
+        for layout in get_valid_layout_choices():
             for language in get_valid_language_choices():
-                for template in get_valid_templates(layout):
-                    for version in get_valid_version_choices(edition):
+                for template in get_valid_templates():
+                    for version in get_valid_version_choices():
                         create_edition_from_template(layout, language, template, version, edition)
 
 
@@ -230,8 +233,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="latest",
         help=(
-            "Output version to produce. [`all`, `latest`, `1.22`, `2.00`] "
-            "\nVersion 1.22 and 1.2x will deliver cards mapped to ASVS 3.0.1"
+            "Output version to produce. [`all`, `latest`, `1.00`, `1.22`, `2.00`] "
+            "\nVersion 1.22 and 1.2x will deliver cards mapped to ASVS 3.0"
             "\nVersion 2.00 and 2.0x will deliver cards mapped to ASVS 4.0"
             "\nVersion 1.00 and 1.0x will deliver cards mapped to MASVS 2.0"
             "\nVersion all will deliver all versions"
@@ -284,7 +287,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.TEMPLATE_CHOICES,
         default="static",
         help=(
-            "From which template to produce the document. [`static` or `qr`]\n"
+            "From which template to produce the document. [`static`, `qr`, `all`]\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Static cards do not have qr codes, the qr template have QRCodes that points to an "
             "maintained list of requirement codes related to each card."
@@ -374,12 +377,11 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
     return files
 
 
-def get_find_replace_list(meta: Dict[str, str], file_type: str, template: str, layout: str) -> List[Tuple[str, str]]:
+def get_find_replace_list(meta: Dict[str, str], template: str, layout: str) -> List[Tuple[str, str]]:
     ll: List[Tuple[str, str]] = [
         ("_edition", "_" + meta["edition"].lower()),
         ("_layout", "_" + layout.lower()),
         ("_document_template", "_" + template.lower()),
-        ("_language", "_" + meta["language"].lower()),
         ("_lang", "_" + meta["language"].lower()),
         ("_ver", "_" + meta["version"].lower()),
     ]
@@ -407,7 +409,7 @@ def get_mapping_for_edition(
 
 def get_mapping_data_for_edition(
     yaml_files: List[str],
-    language: str = "",
+    language: str,
     version: str = "1.22",
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
@@ -468,7 +470,7 @@ def get_replacement_mapping_data(input_data: Dict[str, Any]) -> Dict[str, str]:
                     if suit_tag == "WC" and tag == "value":
                         full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
 
-                    data[full_tag] = check_make_list_into_text(text_output, True)
+                    data[full_tag] = check_make_list_into_text(text_output)
     return data
 
 
@@ -499,7 +501,7 @@ def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Docu
 
 def get_language_data(
     yaml_files: List[str],
-    language: str = "",
+    language: str,
     version: str = "1.22",
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
@@ -573,7 +575,7 @@ def is_yaml_file(path: str) -> bool:
     return os.path.splitext(path)[1] in (".yaml", ".yml")
 
 
-def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> Dict[str, str]:
+def get_replacement_dict(input_data: Dict[str, Any]) -> Dict[str, str]:
     """Loop through language file data and build up a find-replace dict"""
     data: Dict[str, str] = {}
     for key in list(k for k in input_data.keys() if k != "meta"):
@@ -585,7 +587,7 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
         for suit, suit_tag in zip(input_data[key], suit_tags):
             logging.debug(f" --- suit [name] = {suit['name']}")
             logging.debug(f" --- suit_tag = {suit_tag}")
-            data = update_tag_for_suit_name(data, suit, suit_tag, mappings)
+            data = update_tag_for_suit_name(data, suit, suit_tag)
             card_tag = ""
             for card in suit[suit_key]:
                 for tag, text_output in card.items():
@@ -598,8 +600,8 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
                     if suit_tag == "WC" and tag == "value":
                         full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
 
-                    data[full_tag] = check_make_list_into_text(text_output, True)
-    if convert_vars.args.debug and not mappings:
+                    data[full_tag] = check_make_list_into_text(text_output)
+    if convert_vars.args.debug:
         debug_txt = " --- Translation data showing First 4 (key: text):\n* "
         debug_txt += "\n* ".join(l1 + ": " + str(data[l1]) for l1 in list(data.keys())[:4])
         logging.debug(debug_txt)
@@ -610,11 +612,9 @@ def get_replacement_dict(input_data: Dict[str, Any], mappings: bool = False) -> 
 
 
 def update_tag_for_suit_name(
-    data: Dict[str, str], suit: Dict[str, Any], suit_tag: str, is_mappings: bool
-) -> Dict[str, str]:
-    if is_mappings is False:
-        tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
-        data.update(tag_for_suit_name)
+    data: Dict[str, str], suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
+    tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
+    data.update(tag_for_suit_name)
     return data
 
 
@@ -717,13 +717,13 @@ def get_template_for_edition(layout: str = "guide", template: str = "static", ed
         return "None"
 
 
-def get_valid_document_layout_choices(edition: str) -> List[str]:
+def get_valid_layout_choices() -> List[str]:
     layouts = []
     if convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
         for layout in convert_vars.LAYOUT_CHOICES:
             if layout not in ("all", "guide"):
                 layouts.append(layout)
-            if layout == "guide" and edition == "webapp":
+            if layout == "guide" and convert_vars.args.edition.lower() in ("webapp"):
                 layouts.append(layout)
     else:
         layouts.append(convert_vars.args.layout)
@@ -743,8 +743,9 @@ def get_valid_language_choices() -> List[str]:
     return languages
 
 
-def get_valid_version_choices(edition: str) -> List[str]:
+def get_valid_version_choices() -> List[str]:
     versions = []
+    edition: str = convert_vars.args.edition.lower();
     if convert_vars.args.version.lower() == "all":
         for version in convert_vars.VERSION_CHOICES:
             if version not in ("all", "latest") and not get_valid_mapping_for_version(version, edition) == "":
@@ -766,15 +767,14 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
     return ConvertVars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
 
 
-def get_valid_templates(layout: str) -> List[str]:
+def get_valid_templates() -> List[str]:
     templates = []
-    if layout in ("leaflet"):
+    if convert_vars.args.layout.lower() in ("leaflet"):
         templates.append("static")
         return templates
     if convert_vars.args.template.lower() == "all":
-        for template in convert_vars.TEMPLATE_CHOICES:
-            if template != "all":
-                templates.append(template)
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all")]:
+            templates.append(template)         
     elif convert_vars.args.template == "":
         templates.append("static")
     else:
@@ -786,7 +786,7 @@ def get_valid_edition_choices() -> List[str]:
     editions = []
     if convert_vars.args.edition.lower() == "all":
         for edition in convert_vars.EDITION_CHOICES:
-            if edition != "all":
+            if edition not in ("all"):
                 editions.append(edition)
     if convert_vars.args.edition:
         editions.append(convert_vars.args.edition)
@@ -905,7 +905,7 @@ def rename_output_file(file_extension: str, template: str, layout: str, meta: Di
     logging.debug(f" --- output_filename AFTER fix extension = {output_filename}")
 
     # Do the replacement of filename place-holders with meta data
-    find_replace = get_find_replace_list(meta, file_extension, template, layout)
+    find_replace = get_find_replace_list(meta, template, layout)
     f = os.path.basename(output_filename)
     for r in find_replace:
         f = f.replace(*r)
