@@ -1168,9 +1168,9 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.WARNING) as l2:
             c.create_edition_from_template("guide", "es")
         self.assertIn(
-            "WARNING:root:Error. A temporary docx file was created in the output folder "
-            "but cannot be converted to pdf (yet) on operating system: Windows\nThis does "
-            "work on Windows and Mac with MS Word installed.",
+            f"WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
+            f"to pdf (yet) on operating system: {platform.system()}\n"
+            f"This does work on Windows and Mac with MS Word installed.",
             l2.output,
         )
 
