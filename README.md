@@ -56,7 +56,7 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 
 ```bash
 (cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {template,all,en,es,fr,nl,no-nb,pt-br}] [-t {all,static,qr}]
+usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {all,en,es,fr,nl,no-nb,pt-br}] [-t {all,static,qr}]
                   [-e {all,webapp,mobileapp}] [-lt {all,leaflet,guide,cards}]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
@@ -81,7 +81,7 @@ options:
                         default = output\owasp_cornucopia_edition_document_template_layout_lang_ver.(docx|pdf|idml)
   -p, --pdf             whether to generate a pdf in addition to the printable document. Default = Does not generate pdf
   -d, --debug           Output additional information to debug script
-  -l {template,all,en,es,fr,nl,no-nb,pt-br}, --language {template,all,en,es,fr,nl,no-nb,pt-br}
+  -l {all,en,es,fr,nl,no-nb,pt-br}, --language {all,en,es,fr,nl,no-nb,pt-br}
                         Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
   -t {all,static,qr}, --template {all,static,qr}
                         From which template to produce the document. [`static`, `qr`, `all`]
