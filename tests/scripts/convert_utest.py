@@ -9,7 +9,6 @@ import glob
 import shutil
 import typing
 from typing import List, Dict, Any, Tuple
-from unittest.mock import patch
 
 import scripts.convert as c
 
@@ -358,13 +357,10 @@ class TestGetTemplateForEdition(unittest.TestCase):
         self.assertEqual(want_template_doc, got_template_doc)
 
 
-class TestGetLanguageData(unittest.TestCase):
+class TestGetCardIds(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
         self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files"])
-
-    def tearDown(self) -> None:
-        c.convert_vars.args.outputfile = ""
 
     def test_get_language_data_from_file(self) -> None:
         input_language = "en"
@@ -1200,13 +1196,14 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
             c.create_edition_from_template("invalid", "es")
-        self.assertEqual(
-            ll.output,
+
+        self.assertIn(
             "WARNING:root:The layout: invalid does not exist for edition: webapp, version: 1.22 "
             "or the layout choices are missing from the meta -> layouts section in the mappings file",
+            ll.output,
         )
 
-    def test_create_edition_from_template_with_wrong_layout(self) -> None:
+    def test_create_edition_from_template_with_wrong_template(self) -> None:
 
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
             c.create_edition_from_template("guide", "es", "invalid")
