@@ -84,8 +84,8 @@ jobs:
           pipenv install -d
       - name: Generate new output files
         run: |
-          pipenv run python scripts/convert.py -l en -lt guide -t dynamic -v 1.22 -e webapp
-          pipenv run python scripts/convert.py -l en -lt guide -t dynamic -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l en -lt guide -t qr -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l en -lt guide -t qr -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l all -lt all -t static -v 1.22 -e webapp
           pipenv run python scripts/convert.py -l all -lt all -t static -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t static -v 1.00 -e mobileapp
