@@ -5,6 +5,7 @@ import docx  # type: ignore
 import fnmatch
 import logging
 import os
+import pathvalidate
 import platform
 import re
 import shutil
