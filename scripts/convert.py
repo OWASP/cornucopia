@@ -5,7 +5,6 @@ import docx  # type: ignore
 import fnmatch
 import logging
 import os
-import pathvalidate
 import platform
 import re
 import shutil
@@ -17,7 +16,7 @@ from typing import Any, Dict, Generator, List, Tuple, Union
 from operator import itemgetter
 from itertools import groupby
 from pathvalidate.argparse import validate_filepath_arg
-import defusedxml.ElementTree  # type: ignore
+import defusedxml.ElementTree
 
 
 class ConvertVars:
