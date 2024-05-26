@@ -50,9 +50,9 @@
               CC_TEST_REPORTER_ID: 7482a81acb1b6de49fa6fd2769a014bb9ae8bee408161c23d400b2ac9e95b7cf          
           - name: Generate new output files
             run: |
-              pipenv run python scripts/convert.py -l all -lt all -t all -v 1.22 -e webapp
-              pipenv run python scripts/convert.py -l all -lt all -t all -v 2.00 -e webapp
-              pipenv run python scripts/convert.py -l en -lt all -t all -v 1.00 -e mobileapp
+              pipenv run python scripts/convert.py -l all -lt all -t static -v 1.22 -e webapp
+              pipenv run python scripts/convert.py -l all -lt all -t static -v 2.00 -e webapp
+              pipenv run python scripts/convert.py -l en -lt all -t static -v 1.00 -e mobileapp
           - uses: marvinpinto/action-automatic-releases@919008cf3f741b179569b7a6fb4d8860689ab7f0 # v1.2.1
             name: "Create pre-release"
             with:

@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 import argparse
 import os
 import platform
@@ -158,15 +159,7 @@ class TestGetValidLanguagesChoices(unittest.TestCase):
     def test_get_valid_language_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(language="all")
         want_language = c.convert_vars.LANGUAGE_CHOICES
-        want_language.remove("template")
         want_language.remove("all")
-
-        got_language = c.get_valid_language_choices()
-        self.assertListEqual(want_language, got_language)
-
-    def test_get_valid_language_choices_template(self) -> None:
-        c.convert_vars.args = argparse.Namespace(language="template")
-        want_language = ["template"]
 
         got_language = c.get_valid_language_choices()
         self.assertListEqual(want_language, got_language)
@@ -460,6 +453,30 @@ class TestGetFindReplaceList(unittest.TestCase):
         self.assertListEqual(want_list, got_list)
 
 
+class TestValidMeta(unittest.TestCase):
+    def setUp(self) -> None:
+        self.meta = {
+            "edition": "webapp",
+            "component": "mappings",
+            "language": "ALL",
+            "version": "1.22",
+            "languages": ["en"],
+            "layouts": ["cards", "leaflet", "guide"],
+            "templates": ["qr", "static"],
+        }
+
+    def test_valid_meta(self) -> None:
+        want_logging_error_message = (
+            "WARNING:root:Translation in fr does not exist for edition: webapp, "
+            "version: 1.22 or the translation choices are missing from the meta "
+            "-> languages section in the mappings file"
+        )
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+            valid: bool = c.valid_meta(self.meta, "fr", "webapp", "1.22", "static", "cards")
+        self.assertFalse(valid)
+        self.assertIn(want_logging_error_message, ll.output[0])
+
+
 class TestGetMetaData(unittest.TestCase):
     def setUp(self) -> None:
         self.test_data: Dict[str, Any] = {
@@ -586,7 +603,7 @@ class TestGetLanguageData(unittest.TestCase):
             "edition": "webapp",
             "component": "mappings",
             "language": "ALL",
-            "version": "1.2",
+            "version": "1.22",
             "languages": ["en", "es"],
             "layouts": ["cards", "leaflet", "guide"],
             "templates": ["qr", "static"],
@@ -691,7 +708,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "edition": "webapp",
             "component": "mappings",
             "language": "ALL",
-            "version": "2.0",
+            "version": "2.00",
             "layouts": ["cards", "leaflet", "guide"],
             "templates": ["qr", "static"],
             "languages": ["en", "es"],
@@ -821,8 +838,8 @@ class TestGetFilesFromOfType(unittest.TestCase):
                 "webapp-cards-1.22-es.yaml",
                 "webapp-cards-2.00-en.yaml",
                 "webapp-cards-2.00-es.yaml",
-                "webapp-mappings-1.2.yaml",
-                "webapp-mappings-2.0.yaml",
+                "webapp-mappings-1.22.yaml",
+                "webapp-mappings-2.00.yaml",
             ]
         )
 
@@ -1048,7 +1065,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "edition": "webapp",
                 "component": "mappings",
                 "language": "ALL",
-                "version": "1.2",
+                "version": "1.22",
                 "layouts": ["cards", "leaflet", "guide"],
                 "templates": ["qr", "static"],
                 "languages": ["en", "es"],
@@ -1065,27 +1082,25 @@ class TestGetMappingForEdition(unittest.TestCase):
             "${VE_VE3_safecode}": "3, 16, 24, 35",
         }
 
-        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files)
+        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "static", "cards")
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_empty(self) -> None:
         input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "webapp-cards-1.22-en.yaml"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = ["WARNING:root:No mapping file found for version: 1.22, lang: en, edition: webapp"]
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files)
-        self.assertEqual(ll.output, want_logging_error_message)
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "static", "cards")
+        self.assertIn("WARNING:root:Could not retrieve valid mapping information", ll.output)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_wrong_file_type(self) -> None:
         input_yaml_files = [os.sep.join([self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"])]
         want_mapping_dict: Dict[str, str] = {}
-        want_logging_error_message = ["WARNING:root:No mapping file found for version: 1.22, lang: en, edition: webapp"]
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files)
-        self.assertEqual(ll.output, want_logging_error_message)
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "static", "cards")
+        self.assertIn("WARNING:root:Could not retrieve valid mapping information", ll.output)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
 
@@ -1119,9 +1134,8 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.WARNING) as l2:
             c.create_edition_from_template("invalid", "invalid", "invalid", "invalid")
         self.assertIn(
-            "WARNING:root:Translation in invalid does not exist for edition: webapp, version: "
-            "invalid or the translation choices are missing from the meta -> languages section "
-            "in the mappings file",
+            "WARNING:root:No mapping file found for version: invalid, lang: invalid, edition: webapp, "
+            "template: invalid, layout: invalid",
             l2.output,
         )
 
@@ -1140,7 +1154,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
     def test_create_edition_from_template_with_wrong_default_template_file_name(self) -> None:
         c.convert_vars.DEFAULT_TEMPLATE_FILENAME = "does_not_exists"
 
-        with self.assertLogs(logging.getLogger(), logging.ERROR) as l2:
+        with self.assertLogs(logging.getLogger(), logging.DEBUG) as l2:
             c.create_edition_from_template("guide", "es")
         self.assertIn(
             "ERROR:root:Source file not found: "
@@ -1831,6 +1845,62 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         for table in doc_tables:
             paragraphs += c.get_paragraphs_from_table_in_doc(table)
         self.assertGreater(len(paragraphs), want_min_len_paragraphs)
+
+
+class TestMain(unittest.TestCase):
+    def setUp(self) -> None:
+        self.b = c.convert_vars.BASE_PATH
+        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        self.template_docx_file = os.sep.join(
+            [
+                c.convert_vars.BASE_PATH,
+                "resources",
+                "templates",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
+            ]
+        )
+        self.args = ["-t", "static", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", self.template_docx_file]
+        self.argp = {
+            "debug": False,
+            "pdf": False,
+            "edition": "webapp",
+            "template": "static",
+            "layout": "guide",
+            "language": "en",
+            "version": "1.22",
+            "inputfile": self.template_docx_file,
+            "outputfile": "",
+        }
+        self.mapping_file = os.sep.join(
+            [
+                c.convert_vars.BASE_PATH,
+                "source",
+                "webapp-mappings-1.22.yaml",
+            ]
+        )
+
+        self.outputfile = os.sep.join(
+            [
+                c.convert_vars.BASE_PATH,
+                "output",
+                "owasp_cornucopia_webapp_1.22_guide_en_static.docx",
+            ]
+        )
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+
+    def test_main(self):
+
+        with patch.object(argparse, "ArgumentParser") as mock_parser:
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**self.argp)
+            with self.assertLogs(logging.getLogger(), logging.INFO) as l6:
+                with patch("sys.argv", self.args):
+                    c.main()
+            self.assertIn(
+                f"INFO:root:New file saved: {self.outputfile}",
+                l6.output,
+            )
 
 
 if __name__ == "__main__":
