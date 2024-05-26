@@ -15,7 +15,8 @@ import xml.etree.ElementTree as ElTree
 from typing import Any, Dict, Generator, List, Tuple, Union
 from operator import itemgetter
 from itertools import groupby
-import defusedxml.ElementTree
+from pathvalidate.argparse import validate_filepath_arg
+import defusedxml.ElementTree  # type: ignore
 
 
 class ConvertVars:
@@ -23,14 +24,14 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
+    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     TEMPLATE_CHOICES: List[str] = ["all", "static", "qr", "leaflet", "80x120mm", "leaflet_80x120mm"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
-        "webapp": {"1.22": "1.2", "2.00": "2.0", "2.0": "2.0", "1.2": "1.2"},
-        "mobileapp": {"1.0": "1.0", "1.00": "1.0"},
-        "all": {"1.0": "1.0", "1.00": "1.0", "1.22": "1.2", "2.00": "2.0", "2.0": "2.0", "1.2": "1.2"},
+        "webapp": {"1.22": "1.22", "2.00": "2.00"},
+        "mobileapp": {"1.00": "1.00"},
+        "all": {"1.22": "1.22", "2.00": "2.00", "1.00": "1.00"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_lang_document_template"]
@@ -96,26 +97,12 @@ def create_edition_from_template(
     if not yaml_files:
         return
 
-    mapping: Dict[str, Any] = get_mapping_for_edition(yaml_files, version, language, edition)
+    mapping: Dict[str, Any] = get_mapping_for_edition(yaml_files, version, language, edition, template, layout)
 
-    if not has_translation_for_edition(mapping["meta"], language):
+    if not mapping:
         logging.warning(
-            f"Translation in {language} does not exist for edition: {edition}, version: {version} "
-            "or the translation choices are missing from the meta -> languages section in the mappings file"
-        )
-        return
-
-    if not has_template_for_edition(mapping["meta"], template) and not convert_vars.args.inputfile:
-        logging.warning(
-            f"The template: {template} does not exist for edition: {edition}, version: {version} "
-            "or the template choices are missing from the meta templates section in the mappings file"
-        )
-        return
-
-    if not has_layout_for_edition(mapping["meta"], layout) and not convert_vars.args.inputfile:
-        logging.warning(
-            f"The layout: {layout} does not exist for edition: {edition}, version: {version} "
-            "or the layout choices are missing from the meta -> layouts section in the mappings file"
+            f"No mapping file found for version: {version}, lang: {language}, edition: {edition},"
+            f" template: {template}, layout: {layout}"
         )
         return
 
@@ -127,6 +114,9 @@ def create_edition_from_template(
 
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
+
+    if not meta:
+        return
 
     template_doc: str = get_template_for_edition(layout, template, edition)
     if template_doc == "None":
@@ -155,6 +145,30 @@ def create_edition_from_template(
         convert_docx_to_pdf(temp_docx_file, output_file)
         return
     logging.info(f"New file saved: {output_file}")
+
+
+def valid_meta(meta: Dict[str, Any], language: str, edition: str, version: str, template: str, layout: str) -> bool:
+    if not has_translation_for_edition(meta, language):
+        logging.warning(
+            f"Translation in {language} does not exist for edition: {edition}, version: {version} "
+            "or the translation choices are missing from the meta -> languages section in the mappings file"
+        )
+        return False
+
+    if not has_template_for_edition(meta, template) and not convert_vars.args.inputfile:
+        logging.warning(
+            f"The template: {template} does not exist for edition: {edition}, version: {version} "
+            "or the template choices are missing from the meta templates section in the mappings file"
+        )
+        return False
+
+    if not has_layout_for_edition(meta, layout) and not convert_vars.args.inputfile:
+        logging.warning(
+            f"The layout: {layout} does not exist for edition: {edition}, version: {version} "
+            "or the layout choices are missing from the meta -> layouts section in the mappings file"
+        )
+        return False
+    return True
 
 
 def has_translation_for_edition(meta: Dict[str, Any], language: str) -> bool:
@@ -215,7 +229,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "-i",
         "--inputfile",
-        type=str,
+        type=validate_filepath_arg,
         default="",
         help=(
             "Input (template) file to use."
@@ -226,8 +240,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "-v",
         "--version",
-        type=str,
-        choices=convert_vars.VERSION_CHOICES,
+        type=is_valid_string_argument,
         required=False,
         default="latest",
         help=(
@@ -243,7 +256,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "-o",
         "--outputfile",
         default="",
-        type=str,
+        type=validate_filepath_arg,
         help=(
             "Specify a path and name of output file to generate. (caution: existing file will be overwritten). "
             f"\ndefault = {convert_vars.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
@@ -266,8 +279,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     group.add_argument(
         "-l",
         "--language",
-        type=str,
-        choices=convert_vars.LANGUAGE_CHOICES,
+        type=is_valid_string_argument,
         default="en",
         help=("Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]"),
     )
@@ -275,8 +287,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     group.add_argument(
         "-t",
         "--template",
-        type=str,
-        choices=convert_vars.TEMPLATE_CHOICES,
+        type=is_valid_string_argument,
         default="static",
         help=(
             "From which template to produce the document. [`static`, `qr` or `80x120mm`]\n"
@@ -290,8 +301,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     group.add_argument(
         "-e",
         "--edition",
-        type=str,
-        choices=convert_vars.EDITION_CHOICES,
+        type=is_valid_string_argument,
         default="all",
         help=(
             "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
@@ -304,8 +314,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     group.add_argument(
         "-lt",
         "--layout",
-        type=str,
-        choices=convert_vars.LAYOUT_CHOICES,
+        type=is_valid_string_argument,
         default="all",
         help=(
             "Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]\n"
@@ -322,6 +331,24 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         logging.error(exc.message)
         sys.exit()
     return args
+
+
+def is_valid_string_argument(argument: str) -> str:
+    if len(argument) > 255:
+        raise argparse.ArgumentTypeError("The option can not have more the 255 char.")
+    if not re.match(r"^[A-Za-z0-9\._-]+$", argument):
+        raise argparse.ArgumentTypeError(
+            "The option can only contain a-z letters, numbers, periods, dash or underscore"
+        )
+    return argument
+
+
+def is_valid_argument_list(arguments: List[str]) -> Any:
+    if not isinstance(arguments, List):
+        return arguments
+    for argument in arguments:
+        is_valid_string_argument(argument)
+    return arguments
 
 
 def get_card_ids(language_data: Union[Dict[Any, Any], List[Any]], key: str = "id") -> Generator[str, None, None]:
@@ -394,10 +421,16 @@ def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
 
 
 def get_mapping_for_edition(
-    yaml_files: List[str], version: str = "1.22", language: str = "en", edition: str = "webapp"
+    yaml_files: List[str], version: str, language: str, edition: str, template: str, layout: str
 ) -> Dict[str, Any]:
     mapping_data: Dict[str, Dict[str, str]] = get_mapping_data_for_edition(yaml_files, language, version, edition)
     if not mapping_data:
+        logging.warning("Could not retrieve valid mapping information")
+        return {}
+    if "meta" not in mapping_data.keys() or not valid_meta(
+        mapping_data["meta"], language, edition, version, template, layout
+    ):
+        logging.warning("Could not retrieve valid meta information from the mapping file")
         return {}
     return get_replacement_mapping_data(mapping_data)
 
@@ -411,7 +444,8 @@ def get_mapping_data_for_edition(
     """Get the raw data of the replacement text from correct yaml file"""
     data: Dict[Any, Dict[Any, Any]] = {}
     logging.debug(
-        f" --- Starting get_mapping_data() for edition: {edition} , language: {language} and version: {version} "
+        f" --- Starting get_mapping_data_for_edition() for edition: "
+        f"{edition} , language: {language} and version: {version} "
         f" with mapping to version {get_valid_mapping_for_version(version, edition)}"
     )
     mappingfile: str = ""
@@ -419,7 +453,6 @@ def get_mapping_data_for_edition(
         if is_yaml_file(file) and is_mapping_file_for_version(file, version, edition):
             mappingfile = file
     if not mappingfile:
-        logging.warning(f"No mapping file found for version: {version}, lang: {language}, edition: {edition}")
         return data
 
     with open(mappingfile, "r", encoding="utf-8") as f:
@@ -471,14 +504,22 @@ def get_replacement_mapping_data(input_data: Dict[str, Any]) -> Dict[str, str]:
 
 def get_meta_data(data: Dict[str, Dict[str, str]]) -> Dict[str, Any]:
     meta = {}
-    if "meta" in list(data.keys()):
-        for key, value in data["meta"].items():
-            if key in ("edition", "component", "language", "version", "languages", "layouts", "templates"):
-                meta[key] = value
-        return meta
-    else:
-        logging.error("Could not find meta tag in the language data. " "Please ensure the language file is available.")
-    logging.debug(f" --- meta data = {meta}")
+    try:
+        if "meta" in list(data.keys()):
+            for key, value in data["meta"].items():
+                if key in ("edition", "component", "language", "version", "languages", "layouts", "templates"):
+                    meta[key] = (isinstance(value, str) and is_valid_string_argument(value)) or (
+                        isinstance(value, List) and is_valid_argument_list(value)
+                    )
+            return meta
+        else:
+            logging.error(
+                "Could not find meta tag in the language data. " "Please ensure the language file is available."
+            )
+        logging.debug(f" --- meta data = {meta}")
+    except argparse.ArgumentError as exc:
+        logging.error(f"Could not get meta because of invalid data. error: {exc.message}")
+        return {}
     return meta
 
 
@@ -551,7 +592,7 @@ def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
     return (
         os.path.basename(path).find("mappings") >= 0
         and os.path.basename(path).find(edition) >= 0
-        and os.path.basename(path).find(get_valid_mapping_for_version(version, edition)) >= 0
+        and os.path.basename(path).find(version) >= 0
     )
 
 
@@ -575,7 +616,7 @@ def get_replacement_dict(input_data: Dict[str, Any]) -> Dict[str, str]:
     """Loop through language file data and build up a find-replace dict"""
     data: Dict[str, str] = {}
     for key in list(k for k in input_data.keys() if k != "meta"):
-        suit_tags, suit_key = get_suit_tags_and_key(key, input_data["meta"]["edition"])
+        suit_tags, suit_key = get_suit_tags_and_key(key, is_valid_string_argument(input_data["meta"]["edition"]))
         logging.debug(f" --- key = {key}.")
         logging.debug(f" --- suit_tags = {suit_tags}")
         logging.debug(f" --- suit_key = {suit_key}")
@@ -751,8 +792,7 @@ def get_valid_version_choices() -> List[str]:
             if not get_valid_mapping_for_version(version, edition) == "":
                 versions.append(version)
     else:
-        if not get_valid_mapping_for_version(convert_vars.args.version, edition) == "":
-            versions.append(convert_vars.args.version)
+        versions.append(convert_vars.args.version)
 
     if not versions:
         logging.debug(f"No deck with version: {convert_vars.args.version} for edition: {edition} exists")

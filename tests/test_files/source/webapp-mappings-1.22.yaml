@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "mappings"
   language: "ALL"
-  version: "1.2"
+  version: "1.22"
   layouts: ["cards", "leaflet", "guide"]
   templates: ["qr", "static"]
   languages: ["en", "es"]
