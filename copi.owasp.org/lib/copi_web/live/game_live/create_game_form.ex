@@ -7,12 +7,11 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   def render(assigns) do
     ~H"""
-    <div>
-      <.header>
+    <div >
+      <.header1  class="pb">
         <%= @title %>
-      </.header>
-
-      <h1> </h1>
+        <:subtitle>Use this form to manage game records in your database.</:subtitle>
+      </.header1>
 
       <.simple_form
         for={@form}
@@ -36,7 +35,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
         </.input>
 
         <:actions>
-          <.button phx-disable-with="Starting game..." class="py-2 px-3"><%= gettext "Create the game" %></.button>
+          <.primary_button phx-disable-with="Starting game..." class="m-auto block text-gray-300 bg-white rounded-md px-3 py-2 text-sm font-medium"><%= gettext "Create the game" %></.primary_button>
         </:actions>
       </.simple_form>
     </div>
@@ -59,7 +58,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       |> Cornucopia.change_game(game_params)
       |> Map.put(:action, :validate)
 
-      {:noreply, assign_form(socket, changeset)}
+    {:noreply, assign_form(socket, changeset)}
   end
 
   def handle_event("save", %{"game" => game_params}, socket) do

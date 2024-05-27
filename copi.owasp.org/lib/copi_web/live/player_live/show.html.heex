@@ -1,8 +1,5 @@
-<script></script>
+<.header1>Cornucopia <%= CopiWeb.LiveHelpers.display_game_session(@game.edition) %> <%= @player.game.name %> </.header1>
 
-<h2>
-  Cornucopia <%= CopiWeb.LiveHelpers.display_game_session(@game.edition) %> <%= @player.game.name %>
-</h2>
 
 <%= if @player.game.finished_at do %>
 
@@ -24,11 +21,12 @@
     <%= for player <- @game.players |> player_first(@player) do %>
       <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
 
-        <div class="card-player">
-          <p class="name">
+        <div class="card-player flex-col justify-start">
+          <div class="name">
             <%= if player.id == @player.id do %>
-              Your Card<br />
-              <%= if player_card != nil do %>
+              <p>Your Card</p>
+              <br />
+              <%!-- <%= if player_card != nil do %>
               <span class="vote voted mine">
                 <img src="/images/vote.png" title="You can't vote for your own card" alt="A thumbs-up image for voting"/>
                 <br />
@@ -41,10 +39,11 @@
               <span class="vote none">
                 &nbsp;
               </span>
-              <% end %>
+              <% end %> --%>
             <% else %>
-              <%= player.name %><br />
-              <%= if player_card != nil do %>
+             <p> <%= player.name %></p>
+              <br />
+              <%!-- <%= if player_card != nil do %>
               <span class={["vote"] ++ [(if get_vote(player_card, @player), do: "voted")]}>
                 <img phx-click="toggle_vote" phx-value-dealt_card_id={player_card.id} src="/images/vote.png" title="Vote for this card if it's a valid attack" alt="A thumbs-up image for voting"/>
                 <br />
@@ -57,10 +56,10 @@
               <span class="vote none">
                 &nbsp;
               </span>
-              <% end %>
+              <% end %> --%>
 
             <% end %>
-          </p>
+          </div>
 
           <div class={["drop-zone"] ++ [(if player.id == @player.id, do: "mine")] ++ [(if player_card == nil, do: "empty")]}>
 
@@ -115,7 +114,8 @@
 
   </div>
   <% else %>
-    <p>Hi <%= @player.name %>, waiting for the game to start...</p>
-    <div class="loader">Loading...</div>
+    <p class="my-10">Hi <%= @player.name %>, waiting for the game to start...</p>
+    <div class="flex place-content-center"> <div class="loader ">Loading...</div></div>
+   
   <% end %>
 <% end %>

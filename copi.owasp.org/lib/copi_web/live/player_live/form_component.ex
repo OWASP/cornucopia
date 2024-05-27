@@ -9,10 +9,10 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.header>
+      <.header1>
         <%= @title %>
         <:subtitle>Use this form to manage player records in your database.</:subtitle>
-      </.header>
+      </.header1>
 
       <.simple_form
         for={@form}
@@ -26,7 +26,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         <.input field={@form[:game_id]} type="hidden" />
 
         <:actions>
-          <.button phx-disable-with="Joining..." class="py-2 px-3"><%= gettext "Join the game" %></.button>
+          <.primary_button phx-disable-with="Joining..." class="m-auto block py-2 px-3"><%= gettext "Join the game" %></.primary_button>
         </:actions>
       </.simple_form>
     </div>

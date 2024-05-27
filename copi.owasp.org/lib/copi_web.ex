@@ -50,6 +50,8 @@ defmodule CopiWeb do
 
         # Core UI components and translation
         import CopiWeb.CoreComponents
+        import CopiWeb.CoreComponents.Headers
+        import CopiWeb.CoreComponents.Buttons
         import CopiWeb.Gettext
 
         # Shortcut for generating JS commands
