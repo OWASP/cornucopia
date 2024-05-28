@@ -106,6 +106,7 @@ jobs:
             output/owasp_cornucopia_webapp_guide_nl_1.22_static.docx
             output/owasp_cornucopia_webapp_guide_no-nb_1.22_static.docx
             output/owasp_cornucopia_webapp_guide_pt-br_1.22_static.docx
+            output/owasp_cornucopia_webapp_cards_en_2.00_80x120mm.idml
             output/owasp_cornucopia_webapp_guide_en_2.00_dynamic.docx
             output/owasp_cornucopia_webapp_guide_en_2.00_static.docx
             output/owasp_cornucopia_webapp_cards_en_2.00_leaflet.idml
@@ -115,5 +116,6 @@ jobs:
             output/owasp_cornucopia_webapp_guide_nl_2.00_static.docx
             output/owasp_cornucopia_webapp_guide_no-nb_2.00_static.docx
             output/owasp_cornucopia_webapp_guide_pt-br_2.00_static.docx
+            output/owasp_cornucopia_mobileapp_cards_en_1.00_80x120mm.idml
             output/owasp_cornucopia_mobileapp_cards_en_1.00_static.idml
             output/owasp_cornucopia_mobileapp_cards_en_1.00_leaflet.idml

@@ -26,7 +26,7 @@ class ConvertVars:
     LANGUAGE_CHOICES: List[str] = ["template", "all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.20", "1.21", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
-    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet"]
+    STYLE_CHOICES: List[str] = ["all", "static", "dynamic", "leaflet", "80x120mm"]
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_lang_ver_template"]
     )
@@ -292,8 +292,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         choices=convert_vars.STYLE_CHOICES,
         default="static",
         help=(
-            "Output style to produce. [`static`, `dynamic` or `leaflet`]\n"
-            "Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list."
+            "Output style to produce. [`static`, `dynamic`, `80x120mm` or `leaflet`]\n"
+            "Static cards are 56x87mm and have the mappings printed on them, "
+            "80x120mm cards are 80 mm x 120mm large, "
+            "dynamic ones a QRCode that points to an maintained list."
             "The leaflet contains the instructions"
         ),
     )
@@ -764,9 +766,11 @@ def get_valid_styles() -> List[str]:
     styles = []
     if convert_vars.args.style.lower() == "all":
         styles.append("static")
+        styles.append("80x120mm")
         styles.append("leaflet")
     elif convert_vars.args.style == "":
         styles.append("static")
+        styles.append("80x120mm")
     else:
         styles.append(convert_vars.args.style)
     return styles
