@@ -119,6 +119,14 @@ The following fonts are used:
   - Noto Sans Condensed Extra Bold
   - Noto Sans Extra Condensed Extra Bold
 
+Blead:
+
+A standard blead set to 3mm for all 4 sides.
+
+Currently the cards are provided in two sizes:
+
+The "static" files are 56mm x 87mm standard playing cards.
+The 80x120mm files are 80mm x 120 mm (Recommended for readability)
 
 NB: Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 
 This is because indesign does not support auto adjusting the TOC.
