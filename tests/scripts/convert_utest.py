@@ -279,7 +279,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
 
@@ -295,7 +295,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_cards_lang_ver_static.idml",
+                "owasp_cornucopia_webapp_ver_cards_lang_static.idml",
             ]
         )
 
@@ -307,14 +307,14 @@ class TestGetTemplateForEdition(unittest.TestCase):
         template = "static"
         edition = "webapp"
         c.convert_vars.args.inputfile = os.sep.join(
-            ["..", "resources", "templates", "owasp_cornucopia_webapp_guide_lang_ver_static.docx"]
+            ["..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_static.docx"]
         )
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
 
@@ -326,14 +326,14 @@ class TestGetTemplateForEdition(unittest.TestCase):
         template = "static"
         edition = "webapp"
         c.convert_vars.args.inputfile = os.sep.join(
-            ["resources", "templates", "owasp_cornucopia_webapp_guide_lang_ver_static.docx"]
+            ["resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_static.docx"]
         )
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
 
@@ -386,21 +386,21 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args.outputfile = ""
 
     def test_rename_output_file_short(self) -> None:
-        c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_edition_layout_lang_ver.docx"])
+        c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_edition_ver_layout_lang.docx"])
         file_extension = ".docx"
         template = "static"
         layout = "guide"
-        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_guide_en_1.22.docx"])
+        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.docx"])
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_no_extension(self) -> None:
-        c.convert_vars.args.outputfile = "output" + os.sep + "cornucopia_edition_layout_lang_ver"
+        c.convert_vars.args.outputfile = "output" + os.sep + "cornucopia_edition_ver_layout_lang"
         file_extension = ".idml"
         template = "static"
         layout = "guide"
-        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_guide_en_1.22.idml"])
+        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.idml"])
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -411,7 +411,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "static"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_static_guide_en_1.22.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_static.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -423,7 +423,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "static"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_static_guide_en_1.22.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_static.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -435,7 +435,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "static"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_static_guide_en_1.22.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_static.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -834,7 +834,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(debug=False)
         path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"])
         ext = "docx"
-        want_files = [path + os.sep + "owasp_cornucopia_webapp_guide_lang_ver_static.docx"]
+        want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_lang_static.docx"]
 
         got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(len(want_files), len(got_files))
@@ -865,7 +865,7 @@ class TestGetDocxDocument(unittest.TestCase):
                 "test_files",
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         want_type = type(docx.Document())
@@ -879,7 +879,7 @@ class TestGetDocxDocument(unittest.TestCase):
 
     def test_get_docx_document_failure(self) -> None:
         file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_guide_lang_ver_static.d"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_static.d"]
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 0
@@ -1019,7 +1019,7 @@ class TestConvertDocxToPdf(unittest.TestCase):
     def test_convert_docx_to_pdf_false(self) -> None:
         c.convert_vars.can_convert_to_pdf = False
         input_docx_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_guide_lang_ver_static.docx"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_static.docx"]
         )
         want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
         want_logging_warn_message = [
@@ -1215,7 +1215,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_spanish(self) -> None:
         want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_static_guide_es_1.22.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_es_static.docx"]
         )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
@@ -1228,7 +1228,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_en_idml(self) -> None:
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.22_static.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_static.idml"]
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
@@ -1289,11 +1289,11 @@ class TestSaveIdmlFile(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_cards_lang_ver_static.idml",
+                "owasp_cornucopia_webapp_ver_cards_lang_static.idml",
             ]
         )
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_cards_en_1.22_static.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_static.idml"]
         )
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
@@ -1703,7 +1703,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1722,7 +1722,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1742,7 +1742,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1771,7 +1771,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1786,7 +1786,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1820,7 +1820,7 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_guide_lang_ver_static.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_static.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
