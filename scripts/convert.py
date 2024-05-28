@@ -6,7 +6,6 @@ import fnmatch
 import logging
 import os
 import platform
-import pyqrcode  # type: ignore
 import re
 import shutil
 import sys
@@ -97,7 +96,7 @@ def create_edition_from_template(
     if not yaml_files:
         return
 
-    mapping: Dict[str, str] = get_mapping_for_edition(yaml_files, version, language, edition)
+    mapping: Dict[str, Any] = get_mapping_for_edition(yaml_files, version, language, edition)
 
     if not has_translation_for_edition(mapping["meta"], language):
         logging.warning(
@@ -158,19 +157,19 @@ def create_edition_from_template(
     logging.info(f"New file saved: {output_file}")
 
 
-def has_translation_for_edition(meta: Dict[str, str], language: str) -> bool:
+def has_translation_for_edition(meta: Dict[str, Any], language: str) -> bool:
     if meta and "languages" in meta and language in meta["languages"]:
         return True
     return False
 
 
-def has_template_for_edition(meta: Dict[str, str], template: str) -> bool:
+def has_template_for_edition(meta: Dict[str, Any], template: str) -> bool:
     if meta and "templates" in meta and template in meta["templates"]:
         return True
     return False
 
 
-def has_layout_for_edition(meta: Dict[str, str], layout: str) -> bool:
+def has_layout_for_edition(meta: Dict[str, Any], layout: str) -> bool:
     if meta and "layouts" in meta and layout in meta["layouts"]:
         return True
     return False
@@ -185,7 +184,6 @@ def ensure_folder_exists(folder_path: str) -> None:
 def main() -> None:
     convert_vars.args = parse_arguments(sys.argv[1:])
     set_logging()
-    set_print_pdf()
     logging.debug(" --- args = " + str(convert_vars.args))
 
     set_can_convert_to_pdf()
@@ -251,13 +249,18 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             f"\ndefault = {convert_vars.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
         ),
     )
-    group = parser.add_mutually_exclusive_group(required=False)
     parser.add_argument(
         "-p",
         "--pdf",
         action="store_true",
         default=False,
         help="whether to generate a pdf in addition to the printable document. Default = Does not generate pdf",
+    )
+    parser.add_argument(
+        "-d",
+        "--debug",
+        action="store_true",
+        help="Output additional information to debug script",
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
@@ -266,18 +269,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=str,
         choices=convert_vars.LANGUAGE_CHOICES,
         default="en",
-        help=(
-            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `template`] "
-            "\nTemplate will attempt to create a template from the english input file and "
-            "\nreplacing strings with the template lookup codes"
-        ),
-    )
-    group = parser.add_mutually_exclusive_group(required=False)
-    parser.add_argument(
-        "-d",
-        "--debug",
-        action="store_true",
-        help="Output additional information to debug script",
+        help=("Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]"),
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
@@ -303,8 +295,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         default="all",
         help=(
             "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
-            "The various Cornucopia decks. `web` will give you the web webapp edition."
-            "`mobileapp` will give you the MASVS/MASTG edition."
+            "The various Cornucopia decks. `web` will give you the Website App edition."
+            "`mobileapp` will give you the Mobile App edition."
         ),
     )
 
@@ -323,7 +315,6 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "`leaflet` will output the high quality print leaflet.\n"
         ),
     )
-    args: Any
     try:
         args = parser.parse_args(input_args)
     except argparse.ArgumentError as exc:
@@ -402,7 +393,7 @@ def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
 
 def get_mapping_for_edition(
     yaml_files: List[str], version: str = "1.22", language: str = "en", edition: str = "webapp"
-) -> Dict[str, str]:
+) -> Dict[str, Any]:
     mapping_data: Dict[str, Dict[str, str]] = get_mapping_data_for_edition(yaml_files, language, version, edition)
     if not mapping_data:
         return {}
@@ -416,7 +407,7 @@ def get_mapping_data_for_edition(
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
-    data = {}
+    data: Dict[Any, Dict[Any, Any]] = {}
     logging.debug(
         f" --- Starting get_mapping_data() for edition: {edition} , language: {language} and version: {version} "
         f" with mapping to version {get_valid_mapping_for_version(version, edition)}"
@@ -451,7 +442,7 @@ def get_mapping_data_for_edition(
 
 def get_replacement_mapping_data(input_data: Dict[str, Any]) -> Dict[str, str]:
     """Loop through language file data and build up a find-replace dict"""
-    data: Dict[str, str] = {}
+    data: Dict[str, Any] = {}
     data["meta"] = get_meta_data(input_data)
     for key in list(k for k in input_data.keys() if k != "meta"):
         suit_tags, suit_key = get_suit_tags_and_key(key, input_data["meta"]["edition"])
@@ -478,7 +469,7 @@ def get_replacement_mapping_data(input_data: Dict[str, Any]) -> Dict[str, str]:
     return data
 
 
-def get_meta_data(data: Dict[str, Dict[str, str]]) -> Dict[str, str]:
+def get_meta_data(data: Dict[str, Dict[str, str]]) -> Dict[str, Any]:
     meta = {}
     if "meta" in list(data.keys()):
         for key, value in data["meta"].items():
@@ -512,7 +503,8 @@ def get_language_data(
     """Get the raw data of the replacement text from correct yaml file"""
     data = {}
     logging.debug(
-        f" --- Starting get_language_data() for edition: {edition} requesting language: {language} for version: {version} "
+        f" --- Starting get_language_data() for edition: {edition} "
+        "requesting language: {language} for version: {version} "
     )
     language_file: str = ""
     for file in yaml_files:
@@ -853,12 +845,6 @@ def set_can_convert_to_pdf() -> bool:
     convert_vars.can_convert_to_pdf = can_convert
     logging.debug(f" --- operating system = {operating_system}, can_convert_to_pdf = {convert_vars.can_convert_to_pdf}")
     return can_convert
-
-
-def set_print_pdf() -> None:
-    print_pdf = False
-    if convert_vars.args.pdf:
-        print_pdf = True
 
 
 def set_logging() -> None:
