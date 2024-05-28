@@ -124,16 +124,14 @@ class TestGetValidStyleChoices(unittest.TestCase):
 
     def test_get_valid_style_choices_blank(self) -> None:
         c.convert_vars.args = argparse.Namespace(style="")
-        want_style = ["static"]
+        want_style = ["static", "80x120mm"]
 
         got_style = c.get_valid_styles()
         self.assertListEqual(want_style, got_style)
 
     def test_get_valid_style_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(style="all")
-        want_style = c.convert_vars.STYLE_CHOICES
-        want_style.remove("all")
-        want_style.remove("dynamic")
+        want_style = ["static", "80x120mm", "leaflet"]
 
         got_style = c.get_valid_styles()
         self.assertListEqual(want_style, got_style)

@@ -79,6 +79,12 @@
                 creative-commons-attribution-3.0.txt
                 LICENSE
                 LICENSE.md
+                output/owasp_cornucopia_webapp_cards_en_2.00_80x120mm.idml
+                output/owasp_cornucopia_webapp_cards_es_2.00_80x120mm.idml
+                output/owasp_cornucopia_webapp_cards_fr_2.00_80x120mm.idml
+                output/owasp_cornucopia_webapp_cards_nl_2.00_80x120mm.idml
+                output/owasp_cornucopia_webapp_cards_pt-br_2.00_80x120mm.idml
+                output/owasp_cornucopia_webapp_cards_no-nb_2.00_80x120mm.idml
                 output/owasp_cornucopia_webapp_cards_en_2.00_leaflet.idml
                 output/owasp_cornucopia_webapp_guide_en_2.00_static.docx
                 output/owasp_cornucopia_webapp_cards_en_2.00_static.idml
@@ -97,9 +103,16 @@
                 output/owasp_cornucopia_webapp_cards_pt-br_2.00_leaflet.idml
                 output/owasp_cornucopia_webapp_guide_pt-br_2.00_static.docx
                 output/owasp_cornucopia_webapp_cards_pt-br_2.00_static.idml
+                output/owasp_cornucopia_mobileapp_cards_en_1.00_80x120mm.idml
                 output/owasp_cornucopia_mobileapp_cards_en_1.00_static.idml
                 output/owasp_cornucopia_mobileapp_cards_en_1.00_leaflet.idml
                 README.md
                 source/*.yaml
-                resources/case/owasp_cornucopia_webapp_1.22_case.ai
-                resources/case/owasp_cornucopia_webapp_1.22_case.pdf
+                resources/case/owasp_cornucopia_webapp_1.22_case_56x87mm.ai
+                resources/case/owasp_cornucopia_webapp_1.22_case_56x87mm.pdf
+                resources/case/owasp_cornucopia_webapp_1.22_case_56x87mm.ai
+                resources/case/owasp_cornucopia_webapp_1.22_case_56x87mm.pdf
+                resources/case/owasp_cornucopia_webapp_1.22_case_80x120mm.ai
+                resources/case/owasp_cornucopia_webapp_1.22_case_80x120mm.pdf
+                resources/case/owasp_cornucopia_webapp_1.22_case_80x120mm.ai
+                resources/case/owasp_cornucopia_webapp_1.22_case_80x120mm.pdf
