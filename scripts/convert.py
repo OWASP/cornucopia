@@ -809,7 +809,7 @@ def get_valid_templates() -> List[str]:
         templates.append("static")
         return templates
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all")]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all", "qr")]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("static")

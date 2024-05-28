@@ -113,7 +113,7 @@ class TestGetValidTemplateChoices(unittest.TestCase):
 
     def test_get_valid_style_choices_blank(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="", layout="")
-        want_template = ["static", "80x120mm"]
+        want_template = ["static"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
@@ -121,7 +121,6 @@ class TestGetValidTemplateChoices(unittest.TestCase):
     def test_get_valid_style_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="cards")
         want_template = ["static", "80x120mm"]
-        want_template.remove("all")
 
         got_style = c.get_valid_templates()
         self.assertListEqual(want_template, got_style)
@@ -462,7 +461,7 @@ class TestValidMeta(unittest.TestCase):
             "version": "1.22",
             "languages": ["en"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["qr", "static"],
+            "templates": ["qr", "static", "80x120mm"],
         }
 
     def test_valid_meta(self) -> None:
@@ -606,7 +605,7 @@ class TestGetLanguageData(unittest.TestCase):
             "version": "1.22",
             "languages": ["en", "es"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["qr", "static"],
+            "templates": ["qr", "static", "80x120mm"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "1.2", "webapp")
         self.assertEqual(want_meta, got_data["meta"])
@@ -710,7 +709,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "language": "ALL",
             "version": "2.00",
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["qr", "static"],
+            "templates": ["qr", "static", "80x120mm"],
             "languages": ["en", "es"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, self.input_version)
@@ -1067,7 +1066,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "language": "ALL",
                 "version": "1.22",
                 "layouts": ["cards", "leaflet", "guide"],
-                "templates": ["qr", "static"],
+                "templates": ["qr", "static", "80x120mm"],
                 "languages": ["en", "es"],
             },
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
