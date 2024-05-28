@@ -87,6 +87,7 @@ jobs:
           pipenv run python scripts/convert.py -l en -lt guide -t 56x87mm_qr -v 1.22 -e webapp
           pipenv run python scripts/convert.py -l en -lt guide -t 56x87mm_qr -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l all -lt all -t 56x87mm -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l en -lt all -t 80x120mm -v 1.22 -e webapp
           pipenv run python scripts/convert.py -l all -lt all -t 56x87mm -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t 80x120mm -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t 56x87mm -v 1.00 -e mobileapp
@@ -103,6 +104,7 @@ jobs:
             output/owasp_cornucopia_mobileapp_1.00_cards_en_56x87mm.idml
             output/owasp_cornucopia_mobileapp_1.00_leaflet_en_56x87mm.idml
             output/owasp_cornucopia_webapp_1.22_cards_en_56x87mm.idml
+            output/owasp_cornucopia_webapp_1.22_cards_en_80x120mm.idml
             output/owasp_cornucopia_webapp_1.22_guide_en_56x87mm_qr.docx
             output/owasp_cornucopia_webapp_1.22_guide_en_56x87mm.docx
             output/owasp_cornucopia_webapp_1.22_guide_es_56x87mm.docx
