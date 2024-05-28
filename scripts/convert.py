@@ -33,9 +33,9 @@ class ConvertVars:
         "all": {"1.0": "1.0", "1.00": "1.0", "1.22": "1.2", "2.00": "2.0", "2.0": "2.0", "1.2": "1.2"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
-        ["resources", "templates", "owasp_cornucopia_edition_layout_lang_ver_document_template"]
+        ["resources", "templates", "owasp_cornucopia_edition_ver_layout_lang_document_template"]
     )
-    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_document_template_layout_lang_ver"])
+    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_lang_document_template"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
 
@@ -208,7 +208,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
     description += "\nExample usage: $ ./cornucopia/convert.py --pdf -lt guide -l es -v 2.00"
     description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t static -lt cards -l fr -v 2.00"
-    description += "-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'"
+    description += "-o 'my_output_folder/owasp_cornucopia_edition_version_layout_language_template.idml'"
     parser = argparse.ArgumentParser(
         description=description, formatter_class=argparse.RawTextHelpFormatter, exit_on_error=False
     )
