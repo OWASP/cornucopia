@@ -1,6 +1,8 @@
 defmodule CopiWeb.CoreComponents.Buttons do
+
   use Phoenix.Component
 
+  import CopiWeb.CoreComponents
   alias Phoenix.LiveView.JS
   import CopiWeb.Gettext
 
@@ -37,6 +39,7 @@ defmodule CopiWeb.CoreComponents.Buttons do
   attr :type, :string, default: nil
   attr :class, :string, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
+  attr :disabled, :boolean, default: false
 
   slot :inner_block, required: true
 
@@ -55,23 +58,4 @@ defmodule CopiWeb.CoreComponents.Buttons do
     </button>
     """
   end
-
-  # def vote() do
-  #   ~H"""
-  #       <%= if player_card != nil do %>
-  #   <span class="vote voted mine">
-  #     <img src="/images/vote.png" title="You can't vote for your own card" alt="A thumbs-up image for voting"/>
-  #     <br />
-  #     <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
-  #   </span>
-  #     <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
-  #     <br /><span class="scored">Scored!</span>
-  #     <% end %>
-  #   <% else %>
-  #   <span class="vote none">
-  #     &nbsp;
-  #   </span>
-  #   <% end %>
-  #   """
-  # end
 end

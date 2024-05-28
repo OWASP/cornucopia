@@ -879,22 +879,15 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   .drop-zone {
-    border: dashed 1px #666;
     height: 317px;
     width: 224px;
 
     &.empty {
-      border: 2px solid transparent;
-      background: linear-gradient(white, white) padding-box,
-                  repeating-linear-gradient(-45deg, #BBB 0, #BBB 25%, transparent 0, transparent 50%) 0 / .6em .6em;
-      animation: ants 12s linear infinite;
       width: 248px;
       color: #BBB;
     }
 
     &.mine {
-      background: linear-gradient(white, white) padding-box,
-                  repeating-linear-gradient(-45deg, #666 0, #666 25%, transparent 0, transparent 50%) 0 / .6em .6em;
       color:#333;
     }
 

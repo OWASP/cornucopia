@@ -41,7 +41,7 @@ defmodule CopiWeb.CoreComponents.Headers do
 
   def header1(assigns) do
     ~H"""
-      <h1 class="my-4 py-4 text-4xl font-bold leading-8 text-zinc-800">
+      <h1 class="my-4 text-4xl font-bold leading-8 text-zinc-800">
         <%= render_slot(@inner_block) %>
       </h1>
     """

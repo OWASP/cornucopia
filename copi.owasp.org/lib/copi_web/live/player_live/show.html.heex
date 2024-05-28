@@ -10,95 +10,75 @@
 
   <%= if @player.game.started_at do %>
 
-  <h3>Hi <%= @player.name %>, let's play!</h3>
+  <p>Hi <%= @player.name %>, let's play!</p>
+  <br/>
 
-  <h4>Round <strong><%= @game.rounds_played + 1 %></strong></h4>
+  <p class="mb-2">Round <strong><%= @game.rounds_played + 1 %></strong></p>
 
   <% first_card_played = ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>
   <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
 
-  <div id="table">
+  <div class="flex flex-row justify-evenly" id="table">
     <%= for player <- @game.players |> player_first(@player) do %>
       <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
 
         <div class="card-player flex-col justify-start">
-          <div class="name">
+          <div class="name mb-4">
             <%= if player.id == @player.id do %>
-              <p>Your Card</p>
-              <br />
-              <%!-- <%= if player_card != nil do %>
-              <span class="vote voted mine">
-                <img src="/images/vote.png" title="You can't vote for your own card" alt="A thumbs-up image for voting"/>
-                <br />
-                <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
-              </span>
-                <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
-                <br /><span class="scored">Scored!</span>
-                <% end %>
-              <% else %>
-              <span class="vote none">
-                &nbsp;
-              </span>
-              <% end %> --%>
+            <%= if player_card != nil && Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+             <p class="font-bold">You scored!</p> 
+             <% else %>
+                <p>Your Card</p>
+            <% end %>      
             <% else %>
-             <p> <%= player.name %></p>
-              <br />
-              <%!-- <%= if player_card != nil do %>
-              <span class={["vote"] ++ [(if get_vote(player_card, @player), do: "voted")]}>
-                <img phx-click="toggle_vote" phx-value-dealt_card_id={player_card.id} src="/images/vote.png" title="Vote for this card if it's a valid attack" alt="A thumbs-up image for voting"/>
-                <br />
-                <span class="badge"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></span>
-              </span>
-                <%= if Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
-                <br /><span class="scored">Scored!</span>
-                <% end %>
-              <% else %>
-              <span class="vote none">
-                &nbsp;
-              </span>
-              <% end %> --%>
-
+            <%= if player_card != nil &&  Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+             <p class="font-bold"> <%= player.name %> Scored!</p> 
+             <% else %>
+               <p> <%= player.name %></p> 
+            <% end %>
             <% end %>
           </div>
-
-          <div class={["drop-zone"] ++ [(if player.id == @player.id, do: "mine")] ++ [(if player_card == nil, do: "empty")]}>
-
-            <%= if player_card == nil do %>
-              <%= if player.id == @player.id do %>
-              <p class="placeholder">Drop a card from your hand here to play it</p>
-              <% else %>
-              <p class="placeholder">Waiting for <%= player.name %> to play their card</p>
-              <% end %>
-            <% else %>
+          
+          <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card}> 
             <CopiWeb.CardHTML.show card={player_card.card} />
-            <% end %>
-          </div>
-        </div>
+          </.card_drop_zone>
 
+          <%= if player_card != nil do %>
+          <%= if player.id == @player.id do %>
+            <.vote_card player_card={player_card}  game={@game} />
+          <% else %>
+              <div phx-click="toggle_vote" phx-value-dealt_card_id={player_card.id}  class="cursor-pointer my-2 flex flex-row justify-start items-center" class={["vote"] ++ [(if get_vote(player_card, @player), do: "voted")]}>
+              <.icon name="hero-hand-thumb-up" class="h-8 w-8" />
+              
+              <p class="badge ml-4"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></p>
+            </div>
+          <% end %>
+           <% end %>
+        </div>
   <% end %>
   </div>
 
-  <p class="next-round">
-    <%= if round_closed?(@game) do %>Make sure everyone's finished voting on cards before moving on!&nbsp;&nbsp;<% end %>
-    <button disabled={round_open?(@game)} phx-click="next_round" phx-value-game_id={@game.id}>
+  <div class="next-round">
+    <%= if round_closed?(@game) do %><p class="py-8">Make sure everyone's finished voting on cards before moving on!&nbsp;&nbsp;</p><% end %>
+    <.primary_button class={if round_open?(@game) do "bg-zinc-900/15 pointer-events-none" end} disabled={round_open?(@game)} phx-click="next_round" phx-value-game_id={@game.id}>
       <%= if last_round?(@game) do %>
       Finish game
       <% else %>
       Next round
       <% end %>
-    </button>
-  </p>
+    </.primary_button>
+  </div>
 
   <%= if card_played do %>
     <div id="round-played"></div>
-    <h4>Tip: You've played a card in this round, vote on other peoples' cards and described attacks!</h4>
+    <p class="py-4">Tip: You've played a card in this round, vote on other peoples' cards and described attacks!</p>
   <% else %>
-    <h4>
+    <p class="py-4">
       Tip: Drag a card onto the table to play a card in this round!
         <%= if first_card_played do %>
           (you <em>should</em> play a card from the <strong><%= first_card_played.card.category %></strong> suit, if you have one)
         <% end %>
-    </h4>
+    </p>
   <% end %>
 
 
