@@ -8,7 +8,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   def render(assigns) do
     ~H"""
     <div >
-      <.header1  class="pb">
+      <.header1 >
         <%= @title %>
         <:subtitle>Use this form to manage game records in your database.</:subtitle>
       </.header1>
