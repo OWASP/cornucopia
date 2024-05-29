@@ -94,7 +94,7 @@ def convert_type_language_style(
     if has_not_valid_file_style(style, edition, file_type):
         return
     if not get_valid_mapping_for_version(version, edition):
-        logging.debug("No deck with version: " + version + " for edition: " + edition + " exists")
+        logging.debug("No deck with version: %s for edition: %s exists", version, edition)
         return
     # Get the list of available translation files
     yaml_files = get_files_from_of_type(os.sep.join([convert_vars.BASE_PATH, "source"]), "yaml")
@@ -161,7 +161,7 @@ def convert_type_language_style(
         language_dict.update(mapping_dict)
         save_idml_file(template_doc, language_dict, output_file)
 
-    logging.info("New file saved: " + str(output_file))
+    logging.info("New file saved: %s", str(output_file))
 
 
 def has_no_matching_translations(
@@ -188,7 +188,7 @@ def ensure_folder_exists(folder_path: str) -> None:
 def main() -> None:
     convert_vars.args = parse_arguments(sys.argv[1:])
     set_logging()
-    logging.debug(" --- args = " + str(convert_vars.args))
+    logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
     if (
@@ -355,7 +355,7 @@ def get_docx_document(docx_file: str) -> docx.Document:
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
     else:
-        logging.error("Could not find file at: " + str(docx_file))
+        logging.error("Could not find file at: %s", str(docx_file))
         return docx.Document()
 
 
@@ -366,8 +366,8 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
     if not files:
-        logging.error("No language files found in folder: " + str(os.sep.join([convert_vars.BASE_PATH, "source"])))
-    logging.debug(f" --- found {len(files)} files of type {ext}. Showing first few:\n* " + str("\n* ".join(files[:3])))
+        logging.error("No language files found in folder: %s", str(os.sep.join([convert_vars.BASE_PATH, "source"])))
+    logging.debug("%s%s", f" --- found {len(files)} files of type {ext}. Showing first few:\n* ", str("\n* ".join(files[:3])))
     return files
 
 
@@ -816,12 +816,12 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
     temp_output_path = output_path + os.sep + "temp"
     # Ensure the output folder and temp output folder exist
     ensure_folder_exists(temp_output_path)
-    logging.debug(" --- temp_folder for extraction of xml files = " + str(temp_output_path))
+    logging.debug(" --- temp_folder for extraction of xml files = %s", str(temp_output_path))
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
         idml_archive.extractall(temp_output_path)
-        logging.debug(" --- namelist of first few files in archive = " + str(idml_archive.namelist()[:5]))
+        logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
     # Only Stories files have content to update
@@ -850,7 +850,7 @@ def save_qrcode_image(card_id: str, location_url: str = "https://copi.securedeli
             img = pyqrcode.create(url)
             img.svg(output_file, scale=8)
         except Exception as e:
-            logging.debug("Could not create qr code for file: " + output_file + ", exception: " + str(e))
+            logging.debug("Could not create qr code for file: %s, exception: %s", output_file, str(e))
 
 
 def set_can_convert_to_pdf() -> bool:
