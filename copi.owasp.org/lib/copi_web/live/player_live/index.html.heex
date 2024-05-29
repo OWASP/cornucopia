@@ -1,13 +1,13 @@
-<.modal :if={@live_action in [:new, :edit]} id="player-modal" show on_cancel={JS.patch(~p"/games/#{@game.id}")}>
+
   <.live_component
     module={CopiWeb.PlayerLive.FormComponent}
-    id={@player.id || :new}
+    id={:new}
     title={@page_title}
     action={@live_action}
     player={@player}
     patch={~p"/games/#{@game.id}"}
   />
-</.modal>
+
 
 <!--
 <table>

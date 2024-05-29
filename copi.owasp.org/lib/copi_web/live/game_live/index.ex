@@ -1,6 +1,7 @@
 defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
+  
   import CopiWeb.LiveHelpers
 
   alias Copi.Cornucopia
@@ -18,7 +19,7 @@ defmodule CopiWeb.GameLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Game")
+    |> assign(:page_title, "Create a new game")
     |> assign(:game, %Game{})
   end
 

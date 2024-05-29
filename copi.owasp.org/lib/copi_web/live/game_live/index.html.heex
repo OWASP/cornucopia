@@ -1,30 +1,29 @@
-<h1>How to play</h1>
-
-<.link patch={~p"/games/new"}>
-  <.button><%= gettext("Enough already, let's start!") %></.button>
-</.link>
-
-<.modal :if={@live_action in [:new, :edit]} id="game-modal" show on_cancel={JS.patch(~p"/games")}>
+<div>
   <.live_component
-    module={CopiWeb.GameLive.FormComponent}
-    id={@game.id || :new}
+    module={CopiWeb.GameLive.CreateGameForm}
+    id={:new}
     title={@page_title}
     action={@live_action}
     game={@game}
     patch={~p"/games"}
   />
-</.modal>
+</div>
 
-<h2>Preparations</h2>
-<ol>
-  <li>Identify an application or application process to review; this might be a concept, design or an actual implementation</li>
-  <li>Have a data flow diagram, or make one!</li>
-  <li>Invite a group of 3-6 people on your team who know what's been built, or what's going to be built, inside out</li>
-  <li>Have some prizes to hand (gold stars, chocolate, pizza, beer, flowers, whatever you need)</li>
-</ol>
+<hr class="h-2 mx-40 rounded bg-gray-800 my-8">
 
-<h2>Play</h2>
-<ol>
+      <.header1 >How to play</.header1>
+
+      <.header2>Preparations</.header2>
+
+  <ol class=" ml-12 list-decimal">
+    <li>Identify an application or application process to review; this might be a concept, design or an actual implementation</li>
+    <li>Have a data flow diagram, or make one!</li>
+    <li>Invite a group of 3-6 people on your team who know what's been built, or what's going to be built, inside out</li>
+    <li>Have some prizes to hand (gold stars, chocolate, pizza, beer, flowers, whatever you need)</li>
+  </ol>
+
+<.header2>Play</.header2>
+<ol class=" ml-12 list-decimal">
   <li>Create a game in Copi using the button below</li>
   <li>Share the link to the game page with everyone playing or watching</li>
   <li>Players can click the button to join as a player</li>
@@ -37,20 +36,17 @@
   <li>Repeat until all the cards are played</li>
 </ol>
 
-<h2>Scoring</h2>
-<ol>
+<.header2>Scoring</.header2>
+
+<ol class=" ml-12 list-decimal">
   <li>Score +1 for each card you can identify as a valid threat to the application under consideration</li>
   <li>Score +1 if you win a round</li>
   <li>Once all cards have been played, whoever has the most points wins</li>
   <li>The winner receives fabulous prizes</li>
 </ol>
 
-<h2>Closure</h2>
-<ol>
+<.header2>Closure</.header2>
+<ol class=" ml-12 list-decimal">
   <li>Review all the applicable threats and the matching security requirements</li>
   <li>Create user stories, specifications and test cases as required for your development methodology</li>
 </ol>
-
-<.link patch={~p"/games/new"}>
-  <.button><%= gettext("Ok I've read it all, let's go!") %></.button>
-</.link>
