@@ -29,7 +29,7 @@ def produce_webapp_mappings(source_file: Dict[Any, Any], standards_to_add: list[
     for indx, suit in enumerate(source_file.copy()["suits"]):
         for card_indx, card in enumerate(suit["cards"]):
             cre = card["cre"][0]
-            response = requests.get(make_cre_link(cre))
+            response = requests.get(make_cre_link(cre), timeout=60)
             if response.status_code == 200:
                 cre_object = response.json().get("data")
                 for standard in standards_to_add:
