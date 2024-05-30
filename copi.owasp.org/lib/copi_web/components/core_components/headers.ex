@@ -15,7 +15,7 @@ defmodule CopiWeb.CoreComponents.Headers do
 
   def header(assigns) do
     ~H"""
-    <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
+    <header  class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
         <h1 class="text-lg font-semibold leading-8 text-zinc-800">
           <%= render_slot(@inner_block) %>
@@ -34,14 +34,14 @@ defmodule CopiWeb.CoreComponents.Headers do
   Renders a header with title.
   """
   attr :class, :string, default: nil
-
+  attr :id, :string, default: ""
   slot :inner_block, required: true
   slot :subtitle
   slot :actions
 
   def header1(assigns) do
     ~H"""
-      <h1 class="my-4 text-4xl font-bold leading-8 text-zinc-800">
+      <h1 id={@id} class={["my-4 text-4xl font-bold leading-8 text-zinc-800", @class]}>
         <%= render_slot(@inner_block) %>
       </h1>
     """
@@ -56,7 +56,7 @@ defmodule CopiWeb.CoreComponents.Headers do
 
   def header2(assigns) do
     ~H"""
-      <h2 class="my-4 text-2xl font-semibold leading-8 text-zinc-800">
+      <h2 class={["my-4 text-2xl font-semibold leading-8 text-zinc-800", @class]}>
         <%= render_slot(@inner_block) %>
       </h2>
     """
