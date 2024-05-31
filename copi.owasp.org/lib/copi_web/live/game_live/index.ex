@@ -1,7 +1,7 @@
 defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
-  
+
   import CopiWeb.LiveHelpers
 
   alias Copi.Cornucopia
@@ -43,8 +43,6 @@ defmodule CopiWeb.GameLive.Index do
 
   @impl true
   def handle_info({:update_parent, new_state}, socket) do
-    message = "BLABLA new_state" <> inspect(new_state)
-    IO.puts(message)
     {:noreply, assign(socket, :games, new_state)}
   end
 
