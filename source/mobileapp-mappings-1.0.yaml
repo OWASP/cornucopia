@@ -4,6 +4,9 @@ meta:
   component: "mappings"
   language: "ALL"
   version: "1.0"
+  layouts: ["cards", "leaflet"]
+  templates: ["qr", "static"]
+  languages: ["en"]
 suits:
 -
   name: "Platform & Code"
