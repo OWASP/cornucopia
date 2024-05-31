@@ -27,7 +27,7 @@ class ConvertVars:
     LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
-    TEMPLATE_CHOICES: List[str] = ["all", "static", "qr", "leaflet", "80x120mm", "leaflet_80x120mm"]
+    TEMPLATE_CHOICES: List[str] = ["all", "56x87mm", "56x87mm_qr", "80x120mm"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
         "webapp": {"1.22": "1.22", "2.00": "2.00"},
         "mobileapp": {"1.00": "1.00"},
@@ -89,7 +89,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
 
 
 def create_edition_from_template(
-    layout: str, language: str = "en", template: str = "static", version: str = "1.22", edition: str = "webapp"
+    layout: str, language: str = "en", template: str = "56x87mm", version: str = "1.22", edition: str = "webapp"
 ) -> None:
 
     # Get the list of available translation files
@@ -288,7 +288,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "-t",
         "--template",
         type=is_valid_string_argument,
-        default="static",
+        default="56x87mm",
         help=(
             "From which template to produce the document. [`static`, `qr` or `80x120mm`]\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
@@ -704,7 +704,7 @@ def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]
     return data
 
 
-def get_template_for_edition(layout: str = "guide", template: str = "static", edition: str = "webapp") -> str:
+def get_template_for_edition(layout: str = "guide", template: str = "56x87mm", edition: str = "webapp") -> str:
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
     sfile_ext = "idml"
@@ -806,13 +806,13 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.layout.lower() in ("leaflet"):
-        templates.append("static")
+        templates.append("56x87mm")
         return templates
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all", "qr")]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all", "56x87mm_qr")]:
             templates.append(template)
     elif convert_vars.args.template == "":
-        templates.append("static")
+        templates.append("56x87mm")
         templates.append("80x120mm")
     else:
         templates.append(convert_vars.args.template)
