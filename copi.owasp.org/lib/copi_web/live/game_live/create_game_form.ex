@@ -57,7 +57,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       socket.assigns.game
       |> Cornucopia.change_game(game_params)
       |> Map.put(:action, :validate)
-
+      send(self(), {:update_parent, changeset})
     {:noreply, assign_form(socket, changeset)}
   end
 
