@@ -56,12 +56,12 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 
 ```bash
 (cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {all,en,es,fr,nl,no-nb,pt-br}] [-t {all,static,qr}]
+usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {all,en,es,fr,nl,no-nb,pt-br}] [-t {all,56x87mm,qr}]
                   [-e {all,webapp,mobileapp}] [-lt {all,leaflet,guide,cards}]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
 Example usage: $ ./cornucopia/convert.py --pdf -lt guide  -l es -v 2.00
-Example usage: c:\cornucopia\scripts\convert.py -t static -lt cards -l fr -v 2.00-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
+Example usage: c:\cornucopia\scripts\convert.py -t 56x87mm -lt cards -l fr -v 2.00-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
 
 options:
   -h, --help            show this help message and exit
@@ -83,10 +83,10 @@ options:
   -d, --debug           Output additional information to debug script
   -l {all,en,es,fr,nl,no-nb,pt-br}, --language {all,en,es,fr,nl,no-nb,pt-br}
                         Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
-  -t {all,static,qr}, --template {all,static,qr}
-                        From which template to produce the document. [`static`, `qr`, `all`]
+  -t {all,56x87mm,qr}, --template {all,56x87mm,80x120mm,qr}
+                        From which template to produce the document. [`all`, `56x87mm`, `80x120mm`, `qr`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
-                        Static cards do not have qr codes, the qr templates have QRCodes that points to an maintained list of requirement codes related to each card.
+                        56x87mm cards do not have qr codes, the 56x87mm_qr templates have QRCodes that points to an maintained list of requirement codes related to each card.
   -e {all,webapp,mobileapp}, --edition {all,webapp,mobileapp}
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
                         The various Cornucopia decks. `web` will give you the Website App edition.`mobileapp` will give you the Mobile App edition.
@@ -128,7 +128,7 @@ A standard blead set to 3mm for all 4 sides.
 
 Currently the cards are provided in two sizes:
 
-The "static" files are 56mm x 87mm standard playing cards.
+The 56x87mm files are 56mm x 87mm standard playing cards.
 The 80x120mm files are 80mm x 120 mm (Recommended for readability)
 
 NB: Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 

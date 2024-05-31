@@ -84,11 +84,11 @@ jobs:
           pipenv install -d
       - name: Generate new output files
         run: |
-          pipenv run python scripts/convert.py -l en -lt guide -t qr -v 1.22 -e webapp
-          pipenv run python scripts/convert.py -l en -lt guide -t qr -v 2.00 -e webapp
-          pipenv run python scripts/convert.py -l all -lt all -t static -v 1.22 -e webapp
-          pipenv run python scripts/convert.py -l all -lt all -t static -v 2.00 -e webapp
-          pipenv run python scripts/convert.py -l en -lt all -t static -v 1.00 -e mobileapp
+          pipenv run python scripts/convert.py -l en -lt guide -t 56x87mm_qr -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l en -lt guide -t 56x87mm_qr -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l all -lt all -t 56x87mm -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l all -lt all -t 56x87mm -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l en -lt all -t 56x87mm -v 1.00 -e mobileapp
       - name: Create pull request artifacts
         uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
         with:
@@ -98,24 +98,24 @@ jobs:
           artifacts-branch: tmp-${{ github.event.pull_request.head.ref }}-artifacts
           artifacts: |
             output/owasp_cornucopia_mobileapp_1.00_cards_en_80x120mm.idml
-            output/owasp_cornucopia_mobileapp_1.00_cards_en_static.idml
-            output/owasp_cornucopia_mobileapp_1.00_leaflet_en_static.idml
-            output/owasp_cornucopia_webapp_1.22_cards_en_static.idml
-            output/owasp_cornucopia_webapp_1.22_guide_en_qr.docx
-            output/owasp_cornucopia_webapp_1.22_guide_en_static.docx
-            output/owasp_cornucopia_webapp_1.22_guide_es_static.docx
-            output/owasp_cornucopia_webapp_1.22_guide_fr_static.docx
-            output/owasp_cornucopia_webapp_1.22_guide_nl_static.docx
-            output/owasp_cornucopia_webapp_1.22_guide_no-nb_static.docx
-            output/owasp_cornucopia_webapp_1.22_guide_pt-br_static.docx
-            output/owasp_cornucopia_webapp_1.22_leaflet_en_static.idml
+            output/owasp_cornucopia_mobileapp_1.00_cards_en_56x87mm.idml
+            output/owasp_cornucopia_mobileapp_1.00_leaflet_en_56x87mm.idml
+            output/owasp_cornucopia_webapp_1.22_cards_en_56x87mm.idml
+            output/owasp_cornucopia_webapp_1.22_guide_en_56x87mm_qr.docx
+            output/owasp_cornucopia_webapp_1.22_guide_en_56x87mm.docx
+            output/owasp_cornucopia_webapp_1.22_guide_es_56x87mm.docx
+            output/owasp_cornucopia_webapp_1.22_guide_fr_56x87mm.docx
+            output/owasp_cornucopia_webapp_1.22_guide_nl_56x87mm.docx
+            output/owasp_cornucopia_webapp_1.22_guide_no-nb_56x87mm.docx
+            output/owasp_cornucopia_webapp_1.22_guide_pt-br_56x87mm.docx
+            output/owasp_cornucopia_webapp_1.22_leaflet_en_56x87mm.idml
             output/owasp_cornucopia_webapp_2.00_cards_en_80x120mm.idml
-            output/owasp_cornucopia_webapp_2.00_cards_en_static.idml
-            output/owasp_cornucopia_webapp_2.00_guide_en_qr.docx
-            output/owasp_cornucopia_webapp_2.00_guide_en_static.docx
-            output/owasp_cornucopia_webapp_2.00_guide_es_static.docx
-            output/owasp_cornucopia_webapp_2.00_guide_fr_static.docx
-            output/owasp_cornucopia_webapp_2.00_guide_nl_static.docx
-            output/owasp_cornucopia_webapp_2.00_guide_no-nb_static.docx
-            output/owasp_cornucopia_webapp_2.00_guide_pt-br_static.docx
-            output/owasp_cornucopia_webapp_2.00_leaflet_en_static.idml
+            output/owasp_cornucopia_webapp_2.00_cards_en_56x87mm.idml
+            output/owasp_cornucopia_webapp_2.00_guide_en_56x87mm_qr.docx
+            output/owasp_cornucopia_webapp_2.00_guide_en_56x87mm.docx
+            output/owasp_cornucopia_webapp_2.00_guide_es_56x87mm.docx
+            output/owasp_cornucopia_webapp_2.00_guide_fr_56x87mm.docx
+            output/owasp_cornucopia_webapp_2.00_guide_nl_56x87mm.docx
+            output/owasp_cornucopia_webapp_2.00_guide_no-nb_56x87mm.docx
+            output/owasp_cornucopia_webapp_2.00_guide_pt-br_56x87mm.docx
+            output/owasp_cornucopia_webapp_2.00_leaflet_en_56x87mm.idml

@@ -5,7 +5,7 @@ meta:
   language: "ALL"
   version: "1.0"
   layouts: ["cards", "leaflet"]
-  templates: ["qr", "static"]
+  templates: ["56x87mm_qr", "56x87mm"]
   languages: ["en"]
 suits:
 -
