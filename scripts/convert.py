@@ -766,7 +766,6 @@ def get_valid_layout_choices() -> List[str]:
     return layouts
 
 
-
 def get_valid_language_choices() -> List[str]:
     languages = []
     if convert_vars.args.language.lower() == "all":
