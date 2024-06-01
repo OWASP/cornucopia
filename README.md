@@ -56,20 +56,20 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 
 ```bash
 (cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {all,en,es,fr,nl,no-nb,pt-br}] [-t {all,bridge,qr}]
-                  [-e {all,webapp,mobileapp}] [-lt {all,leaflet,guide,cards}]
+usage: convert.py [-h] [-i INPUTFILE] [-v VERSION] [-o OUTPUTFILE] [-p] [-d] [-l LANGUAGE] [-t TEMPLATE] [-e EDITION]
+                  [-lt LAYOUT]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
-Example usage: $ ./cornucopia/convert.py --pdf -lt guide  -l es -v 2.00
-Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
+Example usage: $ ./cornucopia/convert.py --pdf -lt guide -l es -v 2.00
+Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_version_layout_language_template.idml'
 
 options:
   -h, --help            show this help message and exit
   -i INPUTFILE, --inputfile INPUTFILE
                         Input (template) file to use.
-                        Default=resources\templates\owasp_cornucopia_edition_layout_lang_ver_document_template.(docx|idml)
+                        Default=resources\templates\owasp_cornucopia_edition_ver_layout_lang_document_template.(docx|idml)
                         Template type is dependent on the file (-o) specified.
-  -v {all,latest,1.00,1.22,2.00}, --version {all,latest,1.00,1.22,2.00}
+  -v VERSION, --version VERSION
                         Output version to produce. [`all`, `latest`, `1.00`, `1.22`, `2.00`]
                         Version 1.22 and 1.2x will deliver cards mapped to ASVS 3.0
                         Version 2.00 and 2.0x will deliver cards mapped to ASVS 4.0
@@ -78,19 +78,19 @@ options:
                         Version latest will deliver the latest deck versions
   -o OUTPUTFILE, --outputfile OUTPUTFILE
                         Specify a path and name of output file to generate. (caution: existing file will be overwritten).
-                        default = output\owasp_cornucopia_edition_document_template_layout_lang_ver.(docx|pdf|idml)
+                        default = output\owasp_cornucopia_edition_ver_layout_lang_document_template.(docx|pdf|idml)
   -p, --pdf             whether to generate a pdf in addition to the printable document. Default = Does not generate pdf
   -d, --debug           Output additional information to debug script
-  -l {all,en,es,fr,nl,no-nb,pt-br}, --language {all,en,es,fr,nl,no-nb,pt-br}
+  -l LANGUAGE, --language LANGUAGE
                         Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
-  -t {all,bridge,qr}, --template {all,bridge,tarot,qr}
-                        From which template to produce the document. [`all`, `bridge`, `tarot`, `qr`]
+  -t TEMPLATE, --template TEMPLATE
+                        From which template to produce the document. [`bridge`, `qr` or `tarot`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
-                        bridge cards do not have qr codes, the bridge_qr templates have QRCodes that points to an maintained list of requirement codes related to each card.
-  -e {all,webapp,mobileapp}, --edition {all,webapp,mobileapp}
+                        Static cards are bridge and have the mappings printed on them, tarot cards are 80 mm x 120mm large, qr cards have a QRCode that points to an maintained list.
+  -e EDITION, --edition EDITION
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
                         The various Cornucopia decks. `web` will give you the Website App edition.`mobileapp` will give you the Mobile App edition.
-  -lt {all,leaflet,guide,cards}, --layout {all,leaflet,guide,cards}
+  -lt LAYOUT, --layout LAYOUT
                         Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]
                         The various Cornucopia document layouts.
                         `cards` will output the high quality print card deck.
