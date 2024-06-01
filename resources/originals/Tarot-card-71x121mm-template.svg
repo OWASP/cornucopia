@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 218.27 360">
+  <rect width="218.27" height="360" fill="#00adee" stroke-width="0"/>
+  <path d="M209.73,328.93c0,12.63-10.3,22.87-23,22.87H31.47c-12.7,0-23-10.24-23-22.87V31.67c0-12.63,10.3-22.87,23-22.87h155.26c12.7,0,23,10.24,23,22.87v297.26Z" fill="#fff" stroke="#231f20" stroke-miterlimit="10" stroke-width=".5"/>
+  <rect x="24.06" y="24.4" width="170.08" height="311.81" rx="14.17" ry="14.17" fill="none" stroke="#eb008b" stroke-miterlimit="10" stroke-width=".5"/>
+  <g>
+    <rect x="84.24" y="165.66" width="8.5" height="8.5" fill="#00adee" stroke-width="0"/>
+    <rect x="84.24" y="175.83" width="8.5" height="8.5" fill="#fff" stroke="#231f20" stroke-linejoin="bevel" stroke-width=".5"/>
+    <text transform="translate(98.24 172.16)" fill="#231f20" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0">Bleed </tspan><tspan x="20.45" y="0" letter-spacing="0em">A</tspan><tspan x="25.32" y="0" letter-spacing="-.01em">r</tspan><tspan x="27.86" y="0" letter-spacing="0em">ea</tspan></text>
+    <text transform="translate(98.24 182.65)" fill="#231f20" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0" letter-spacing="-.03em">F</tspan><tspan x="3.69" y="0">inal Si</tspan><tspan x="23.26" y="0" letter-spacing="0em">z</tspan><tspan x="26.62" y="0">e</tspan></text>
+    <rect x="84.24" y="185.99" width="8.5" height="8.5" fill="none" stroke="#eb008b" stroke-width=".5"/>
+    <text transform="translate(98.24 193.14)" fill="#231f20" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="8"><tspan x="0" y="0" letter-spacing="0em">S</tspan><tspan x="3.97" y="0">a</tspan><tspan x="7.82" y="0" letter-spacing="-.01em">f</tspan><tspan x="10.06" y="0" letter-spacing="0em">e </tspan><tspan x="15.76" y="0" letter-spacing="0em">A</tspan><tspan x="20.63" y="0" letter-spacing="-.01em">r</tspan><tspan x="23.17" y="0">ea</tspan></text>
+  </g>
+</svg>

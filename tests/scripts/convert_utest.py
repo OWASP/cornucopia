@@ -105,35 +105,35 @@ class TestGetValidLayouts(unittest.TestCase):
 
 class TestGetValidTemplateChoices(unittest.TestCase):
     def test_get_valid_style_choices_dynamic(self) -> None:
-        c.convert_vars.args = argparse.Namespace(template="56x87mm_qr", layout="cards")
-        want_template = ["56x87mm_qr"]
+        c.convert_vars.args = argparse.Namespace(template="bridge_qr", layout="cards")
+        want_template = ["bridge_qr"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
 
     def test_get_valid_style_choices_blank(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="", layout="")
-        want_template = ["56x87mm"]
+        want_template = ["bridge"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
 
     def test_get_valid_style_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="cards")
-        want_template = ["56x87mm", "80x120mm"]
+        want_template = ["bridge", "tarot"]
 
         got_style = c.get_valid_templates()
         self.assertListEqual(want_template, got_style)
 
     def test_get_valid_style_choices_for_leaflet(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="leaflet")
-        want_template = ["56x87mm"]
+        want_template = ["bridge"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
 
     def test_get_valid_style_choices_for_custom_template(self) -> None:
-        c.convert_vars.args = argparse.Namespace(template="test", layout="56x87mm")
+        c.convert_vars.args = argparse.Namespace(template="test", layout="bridge")
         want_template = ["test"]
 
         got_template = c.get_valid_templates()
@@ -264,14 +264,14 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
     def test_get_template_for_edition_default_docx(self) -> None:
         layout = "guide"
-        template = "56x87mm"
+        template = "bridge"
         edition = "webapp"
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
 
@@ -280,14 +280,14 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
     def test_get_template_for_edition_default_idml(self) -> None:
         layout = "cards"
-        template = "56x87mm"
+        template = "bridge"
         edition = "webapp"
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_cards_lang_56x87mm.idml",
+                "owasp_cornucopia_webapp_ver_cards_lang_bridge.idml",
             ]
         )
 
@@ -296,17 +296,17 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
     def test_get_template_for_edition_relative_path(self) -> None:
         layout = "guide"
-        template = "56x87mm"
+        template = "bridge"
         edition = "webapp"
         c.convert_vars.args.inputfile = os.sep.join(
-            ["..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx"]
+            ["..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
         )
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
 
@@ -315,17 +315,17 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
     def test_get_template_for_edition_relative_path_root(self) -> None:
         layout = "guide"
-        template = "56x87mm"
+        template = "bridge"
         edition = "webapp"
         c.convert_vars.args.inputfile = os.sep.join(
-            ["resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx"]
+            ["resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
         )
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
 
@@ -336,7 +336,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
         template_docx_filename = os.sep.join(["resources", "templates", "owasp_cornucopia_template_template.docx"])
         c.convert_vars.args.inputfile = template_docx_filename
         layout = "guide"
-        template = "56x87mm"
+        template = "bridge"
         edition = "webapp"
         want_template_doc = "None"
         want_error_log_messages = [
@@ -380,7 +380,7 @@ class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_short(self) -> None:
         c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_edition_ver_layout_lang.docx"])
         file_extension = ".docx"
-        template = "56x87mm"
+        template = "bridge"
         layout = "guide"
         want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.docx"])
 
@@ -390,7 +390,7 @@ class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_no_extension(self) -> None:
         c.convert_vars.args.outputfile = "output" + os.sep + "cornucopia_edition_ver_layout_lang"
         file_extension = ".idml"
-        template = "56x87mm"
+        template = "bridge"
         layout = "guide"
         want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.idml"])
 
@@ -400,10 +400,10 @@ class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_using_defaults(self) -> None:
         c.convert_vars.args.outputfile = c.convert_vars.DEFAULT_OUTPUT_FILENAME
         file_extension = ".docx"
-        template = "56x87mm"
+        template = "bridge"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_56x87mm.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -412,10 +412,10 @@ class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_blank(self) -> None:
         c.convert_vars.args.outputfile = ""
         file_extension = ".docx"
-        template = "56x87mm"
+        template = "bridge"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_56x87mm.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -424,10 +424,10 @@ class TestRenameOutputFile(unittest.TestCase):
     def test_rename_output_file_template(self) -> None:
         c.convert_vars.args.outputfile = ""
         file_extension = ".docx"
-        template = "56x87mm"
+        template = "bridge"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_56x87mm.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -438,7 +438,7 @@ class TestGetFindReplaceList(unittest.TestCase):
     def setUp(self) -> None:
         self.want_list_default: List[Tuple[str, str]] = [
             ("_edition", "_webapp"),
-            ("_layout", "_56x87mm"),
+            ("_layout", "_bridge"),
             ("_document_template", "_guide"),
             ("_lang", "_en"),
             ("_ver", "_1.22"),
@@ -448,7 +448,7 @@ class TestGetFindReplaceList(unittest.TestCase):
     def test_get_find_replace_list_default(self) -> None:
         want_list = self.want_list_default
 
-        got_list = c.get_find_replace_list(self.input_meta_data, "guide", "56x87mm")
+        got_list = c.get_find_replace_list(self.input_meta_data, "guide", "bridge")
         self.assertListEqual(want_list, got_list)
 
 
@@ -461,7 +461,7 @@ class TestValidMeta(unittest.TestCase):
             "version": "1.22",
             "languages": ["en"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["56x87mm_qr", "56x87mm", "80x120mm"],
+            "templates": ["bridge_qr", "bridge", "tarot"],
         }
 
     def test_valid_meta(self) -> None:
@@ -471,7 +471,7 @@ class TestValidMeta(unittest.TestCase):
             "-> languages section in the mappings file"
         )
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
-            valid: bool = c.valid_meta(self.meta, "fr", "webapp", "1.22", "56x87mm", "cards")
+            valid: bool = c.valid_meta(self.meta, "fr", "webapp", "1.22", "bridge", "cards")
         self.assertFalse(valid)
         self.assertIn(want_logging_error_message, ll.output[0])
 
@@ -605,7 +605,7 @@ class TestGetLanguageData(unittest.TestCase):
             "version": "1.22",
             "languages": ["en", "es"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["56x87mm_qr", "56x87mm", "80x120mm"],
+            "templates": ["bridge_qr", "bridge", "tarot"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "1.2", "webapp")
         self.assertEqual(want_meta, got_data["meta"])
@@ -709,7 +709,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "language": "ALL",
             "version": "2.00",
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["56x87mm_qr", "56x87mm", "80x120mm"],
+            "templates": ["bridge_qr", "bridge", "tarot"],
             "languages": ["en", "es"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, self.input_version)
@@ -744,7 +744,7 @@ class TestParseArguments(unittest.TestCase):
             pdf=False,
             language="en",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="1.22",
             edition="all",
             layout="cards",
@@ -760,7 +760,7 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="fr",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="latest",
             layout="cards",
             pdf=False,
@@ -778,7 +778,7 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="en",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="latest",
             layout="cards",
             pdf=False,
@@ -796,7 +796,7 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="fr",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="latest",
             layout="cards",
             pdf=False,
@@ -814,7 +814,7 @@ class TestParseArguments(unittest.TestCase):
             outputfile="",
             language="en",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="latest",
             layout="all",
             pdf=False,
@@ -850,7 +850,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(debug=False)
         path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"])
         ext = "docx"
-        want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx"]
+        want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
 
         got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(len(want_files), len(got_files))
@@ -881,7 +881,7 @@ class TestGetDocxDocument(unittest.TestCase):
                 "test_files",
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         want_type = type(docx.Document())
@@ -895,7 +895,7 @@ class TestGetDocxDocument(unittest.TestCase):
 
     def test_get_docx_document_failure(self) -> None:
         file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.d"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_bridge.d"]
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 0
@@ -1035,7 +1035,7 @@ class TestConvertDocxToPdf(unittest.TestCase):
     def test_convert_docx_to_pdf_false(self) -> None:
         c.convert_vars.can_convert_to_pdf = False
         input_docx_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
         )
         want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
         want_logging_warn_message = [
@@ -1066,7 +1066,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "language": "ALL",
                 "version": "1.22",
                 "layouts": ["cards", "leaflet", "guide"],
-                "templates": ["56x87mm_qr", "56x87mm", "80x120mm"],
+                "templates": ["bridge_qr", "bridge", "tarot"],
                 "languages": ["en", "es"],
             },
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
@@ -1081,7 +1081,7 @@ class TestGetMappingForEdition(unittest.TestCase):
             "${VE_VE3_safecode}": "3, 16, 24, 35",
         }
 
-        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "56x87mm", "cards")
+        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "bridge", "cards")
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_empty(self) -> None:
@@ -1089,7 +1089,7 @@ class TestGetMappingForEdition(unittest.TestCase):
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "56x87mm", "cards")
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:Could not retrieve valid mapping information", ll.output)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
@@ -1098,7 +1098,7 @@ class TestGetMappingForEdition(unittest.TestCase):
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "56x87mm", "cards")
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:Could not retrieve valid mapping information", ll.output)
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
@@ -1171,7 +1171,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             outputfile="",
             language="es",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="1.22",
             layout="guide",
             pdf=True,
@@ -1194,7 +1194,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             outputfile="",
             language="es",
             debug=False,
-            template="56x87mm",
+            template="bridge",
             version="1.22",
             layout="guide",
             pdf=True,
@@ -1228,7 +1228,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_spanish(self) -> None:
         want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_es_56x87mm.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_es_bridge.docx"]
         )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
@@ -1241,7 +1241,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_en_idml(self) -> None:
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_56x87mm.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_bridge.idml"]
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
@@ -1302,11 +1302,11 @@ class TestSaveIdmlFile(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_cards_lang_56x87mm.idml",
+                "owasp_cornucopia_webapp_ver_cards_lang_bridge.idml",
             ]
         )
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_56x87mm.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_bridge.idml"]
         )
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
@@ -1716,7 +1716,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1735,7 +1735,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1755,7 +1755,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1784,7 +1784,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1799,7 +1799,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1833,7 +1833,7 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1855,15 +1855,15 @@ class TestMain(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_56x87mm.docx",
+                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
             ]
         )
-        self.args = ["-t", "56x87mm", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", self.template_docx_file]
+        self.args = ["-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", self.template_docx_file]
         self.argp = {
             "debug": False,
             "pdf": False,
             "edition": "webapp",
-            "template": "56x87mm",
+            "template": "bridge",
             "layout": "guide",
             "language": "en",
             "version": "1.22",
@@ -1882,7 +1882,7 @@ class TestMain(unittest.TestCase):
             [
                 c.convert_vars.BASE_PATH,
                 "output",
-                "owasp_cornucopia_webapp_1.22_guide_en_56x87mm.docx",
+                "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx",
             ]
         )
 
