@@ -56,12 +56,12 @@ Merges to the main branch will generate new DOCX and IDML files to use to print 
 
 ```bash
 (cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {all,en,es,fr,nl,no-nb,pt-br}] [-t {all,56x87mm,qr}]
+usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.22,2.00}] [-o OUTPUTFILE] [-p] [-d] [-l {all,en,es,fr,nl,no-nb,pt-br}] [-t {all,bridge,qr}]
                   [-e {all,webapp,mobileapp}] [-lt {all,leaflet,guide,cards}]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
 Example usage: $ ./cornucopia/convert.py --pdf -lt guide  -l es -v 2.00
-Example usage: c:\cornucopia\scripts\convert.py -t 56x87mm -lt cards -l fr -v 2.00-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
+Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00-o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
 
 options:
   -h, --help            show this help message and exit
@@ -83,10 +83,10 @@ options:
   -d, --debug           Output additional information to debug script
   -l {all,en,es,fr,nl,no-nb,pt-br}, --language {all,en,es,fr,nl,no-nb,pt-br}
                         Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
-  -t {all,56x87mm,qr}, --template {all,56x87mm,80x120mm,qr}
-                        From which template to produce the document. [`all`, `56x87mm`, `80x120mm`, `qr`]
+  -t {all,bridge,qr}, --template {all,bridge,tarot,qr}
+                        From which template to produce the document. [`all`, `bridge`, `tarot`, `qr`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
-                        56x87mm cards do not have qr codes, the 56x87mm_qr templates have QRCodes that points to an maintained list of requirement codes related to each card.
+                        bridge cards do not have qr codes, the bridge_qr templates have QRCodes that points to an maintained list of requirement codes related to each card.
   -e {all,webapp,mobileapp}, --edition {all,webapp,mobileapp}
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
                         The various Cornucopia decks. `web` will give you the Website App edition.`mobileapp` will give you the Mobile App edition.
@@ -122,17 +122,41 @@ The following fonts are used:
   - Noto Sans Condensed Extra Bold
   - Noto Sans Extra Condensed Extra Bold
 
-Blead:
+### Dimensions
 
-A standard blead set to 3mm for all 4 sides.
+#### Card decks:
 
-Currently the cards are provided in two sizes:
+The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
+The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 
-The 56x87mm files are 56mm x 87mm standard playing cards.
-The 80x120mm files are 80mm x 120 mm (Recommended for readability)
+#### Cases:
 
-NB: Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 
+The "bridge" is 60 x 89.25 mm x 27.15 mm
+The "tarot" is 122.2 x 73.1 x 29.1 mm
+
+the "tarrot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
+the "bridge" box may need some refitting if used.
+
+#### Leaflets:
+
+The "bridge" files are  55mm x 87mm
+The "tarot" files are (2.75 x 4.75")
+
+The "bridge" and "tarot" version is 16-20 page spread depending on in which language you print.
+
+Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 
 This is because indesign does not support auto adjusting the TOC.
+You may need to adjust the font size to fit either a 16 or a 20 page leaflet spread.
+DO NOT PRINT an 18 Page leaflet! It won't look good.
+
+### Blead:
+
+A standard blead set to 3mm for all 4 sides. 
+
+### Paper
+
+Use 0.300mm for the bridge cards and 0.350mm for the tarot cards.
+For the case and leaflet, just use common sense, The case should have enough room for a 20 page leaflet (printed front and back) with the 0.150-0.250mm paper if need be.
 
 ## Contributing to Development
 
