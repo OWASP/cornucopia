@@ -56,7 +56,7 @@ class TestProducewebappMappings(unittest.TestCase):
 
         self.assertEqual(gm.produce_webapp_mappings(test_input, standards), expected)
 
-    @patch("requests.get")
+    @patch("security.safe_requests.get")
     def test_produce_webapp_mappings(self, mock_requests_get):
         cornucopia_version = "1.20"
         source_file = {
@@ -93,12 +93,12 @@ class TestProducewebappMappings(unittest.TestCase):
         }
 
         # Assert that the necessary functions were called
-        mock_requests_get.assert_called_with(gm.make_cre_link("cre1"))
+        mock_requests_get.assert_called_with(gm.make_cre_link("cre1"), timeout=60)
 
         # Assert the expected result
         self.assertEqual(result, expected_result)
 
-    @patch("requests.get")
+    @patch("security.safe_requests.get")
     def test_produce_webapp_mappings_cre_not_found(self, mock_requests_get):
         cornucopia_version = "1.20"
         source_file = {
@@ -134,7 +134,7 @@ class TestProducewebappMappings(unittest.TestCase):
         }
 
         # Assert that the necessary functions were called
-        mock_requests_get.assert_called_with(gm.make_cre_link("cre1"))
+        mock_requests_get.assert_called_with(gm.make_cre_link("cre1"), timeout=60)
 
         # Assert the expected result
         self.assertEqual(result, expected_result)

@@ -12,6 +12,7 @@ mypy = "==1.10.0"
 pytest = "==8.2.1"
 pytest-cov = "==5.0.0"
 freezegun = "==1.5.1"
+security = "==1.2.1"
 
 [packages]
 idna = "==3.7"
@@ -31,6 +32,7 @@ lxml = "==5.2.2"
 defusedxml = "==0.7.1"
 types-defusedxml = "==0.7.0.20240218"
 pathvalidate = "==3.1.0"
+security = "==1.2.1"
 
 [requires]
 python_version = "3.10"

@@ -221,7 +221,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
     description += "\nExample usage: $ ./cornucopia/convert.py --pdf -lt guide -l es -v 2.00"
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t static -lt cards -l fr -v 2.00"
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.00 "
     description += "-o 'my_output_folder/owasp_cornucopia_edition_version_layout_language_template.idml'"
     parser = argparse.ArgumentParser(
         description=description, formatter_class=argparse.RawTextHelpFormatter, exit_on_error=False
@@ -290,10 +290,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="bridge",
         help=(
-            "From which template to produce the document. [`static`, `qr` or `tarot`]\n"
+            "From which template to produce the document. [`bridge`, `qr` or `tarot`]\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
-            "Static cards are bridge and have the mappings printed on them, "
-            "tarot cards are 80 mm x 120mm large, "
+            "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, "
+            "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, "
             "qr cards have a QRCode that points to an maintained list."
         ),
     )
