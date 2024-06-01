@@ -3,7 +3,6 @@ import yaml
 import qrcode  # type: ignore
 import qrcode.image.svg  # type: ignore
 from typing import Any, Dict
-import security
 from security import safe_requests
 
 opencre_base_url = "https://opencre.org"
