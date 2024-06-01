@@ -67,7 +67,7 @@ options:
   -h, --help            show this help message and exit
   -i INPUTFILE, --inputfile INPUTFILE
                         Input (template) file to use.
-                        Default=resources\templates\owasp_cornucopia_edition_ver_layout_lang_document_template.(docx|idml)
+                        Default=resources\templates\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|idml)
                         Template type is dependent on the file (-o) specified.
   -v VERSION, --version VERSION
                         Output version to produce. [`all`, `latest`, `1.00`, `1.22`, `2.00`]
@@ -78,7 +78,7 @@ options:
                         Version latest will deliver the latest deck versions
   -o OUTPUTFILE, --outputfile OUTPUTFILE
                         Specify a path and name of output file to generate. (caution: existing file will be overwritten).
-                        default = output\owasp_cornucopia_edition_ver_layout_lang_document_template.(docx|pdf|idml)
+                        default = output\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|pdf|idml)
   -p, --pdf             whether to generate a pdf in addition to the printable document. Default = Does not generate pdf
   -d, --debug           Output additional information to debug script
   -l LANGUAGE, --language LANGUAGE

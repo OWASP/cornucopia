@@ -36,9 +36,9 @@ class ConvertVars:
         "all": {"1.22": "1.22", "2.00": "2.00", "1.00": "1.00"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
-        ["resources", "templates", "owasp_cornucopia_edition_ver_layout_lang_document_template"]
+        ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
     )
-    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_lang_document_template"])
+    DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_document_template_lang"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
 
