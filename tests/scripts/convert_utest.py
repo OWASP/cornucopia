@@ -271,7 +271,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
 
@@ -287,7 +287,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_cards_lang_bridge.idml",
+                "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml",
             ]
         )
 
@@ -299,14 +299,14 @@ class TestGetTemplateForEdition(unittest.TestCase):
         template = "bridge"
         edition = "webapp"
         c.convert_vars.args.inputfile = os.sep.join(
-            ["..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
+            ["..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
         )
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
 
@@ -318,14 +318,14 @@ class TestGetTemplateForEdition(unittest.TestCase):
         template = "bridge"
         edition = "webapp"
         c.convert_vars.args.inputfile = os.sep.join(
-            ["resources", "templates", "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
+            ["resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
         )
         want_template_doc = os.sep.join(
             [
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
 
@@ -403,7 +403,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "bridge"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -415,7 +415,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "bridge"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -427,7 +427,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "bridge"
         layout = "guide"
         want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"]
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -850,7 +850,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(debug=False)
         path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"])
         ext = "docx"
-        want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
+        want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
 
         got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(len(want_files), len(got_files))
@@ -881,7 +881,7 @@ class TestGetDocxDocument(unittest.TestCase):
                 "test_files",
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         want_type = type(docx.Document())
@@ -895,7 +895,7 @@ class TestGetDocxDocument(unittest.TestCase):
 
     def test_get_docx_document_failure(self) -> None:
         file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_bridge.d"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.d"]
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 0
@@ -1035,7 +1035,7 @@ class TestConvertDocxToPdf(unittest.TestCase):
     def test_convert_docx_to_pdf_false(self) -> None:
         c.convert_vars.can_convert_to_pdf = False
         input_docx_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx"]
+            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
         )
         want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
         want_logging_warn_message = [
@@ -1228,7 +1228,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_spanish(self) -> None:
         want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_es_bridge.docx"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_es.docx"]
         )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
@@ -1241,7 +1241,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_en_idml(self) -> None:
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_bridge.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_bridge_en.idml"]
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
@@ -1302,11 +1302,11 @@ class TestSaveIdmlFile(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_cards_lang_bridge.idml",
+                "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml",
             ]
         )
         self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_en_bridge.idml"]
+            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_bridge_en.idml"]
         )
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
@@ -1716,7 +1716,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1735,7 +1735,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1755,7 +1755,7 @@ class TestReplaceDocxInlineText(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1784,7 +1784,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1799,7 +1799,7 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1833,7 +1833,7 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         doc = docx.Document(template_docx_file)
@@ -1855,7 +1855,7 @@ class TestMain(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_lang_bridge.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
         self.args = ["-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", self.template_docx_file]
@@ -1882,7 +1882,7 @@ class TestMain(unittest.TestCase):
             [
                 c.convert_vars.BASE_PATH,
                 "output",
-                "owasp_cornucopia_webapp_1.22_guide_en_bridge.docx",
+                "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx",
             ]
         )
 
