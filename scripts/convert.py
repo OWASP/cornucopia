@@ -16,6 +16,8 @@ from typing import Any, Dict, Generator, List, Tuple, Union
 from operator import itemgetter
 from itertools import groupby
 from pathvalidate.argparse import validate_filepath_arg
+from pathvalidate import sanitize_filepath
+
 import defusedxml.ElementTree
 
 
@@ -744,6 +746,7 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
         )
 
     template_doc = template_doc.replace("\\ ", " ")
+    template_doc = sanitize_filepath(template_doc)
     if os.path.isfile(template_doc):
         template_doc = check_fix_file_extension(template_doc, sfile_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
@@ -940,6 +943,7 @@ def rename_output_file(file_extension: str, template: str, layout: str, meta: Di
     for r in find_replace:
         f = f.replace(*r)
     output_filename = os.path.dirname(output_filename) + os.sep + f
+    output_filename = sanitize_filepath(output_filename)
 
     logging.debug(f" --- output_filename = {output_filename}")
     return output_filename
