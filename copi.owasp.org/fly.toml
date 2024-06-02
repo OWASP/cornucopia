@@ -13,7 +13,7 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'copi.fly.dev'
+  PHX_HOST = 'copi.securedelivery.io'
   PORT = '8080'
   DNS_CLUSTER_QUERY = "copi.internal"
 
