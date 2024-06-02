@@ -1,6 +1,6 @@
-<.header1>
-  Cornucopia <%= CopiWeb.LiveHelpers.display_game_session(@game.edition) %> <%= @game.name %>
-</.header1>
+<h2>
+  <%= display_game_session(@game.edition) %> <%= @game.name %>
+</h2>
 
 <%= if @game.started_at do %>
 <p class="my-8  ">You're watching this game that started at <%= @game.started_at %> with <%= Enum.count(@game.players) %> players.</p>

@@ -1,6 +1,5 @@
 defmodule CopiWeb.PlayerLive.Index do
   use CopiWeb, :live_view
-  import CopiWeb.LiveHelpers
 
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Player

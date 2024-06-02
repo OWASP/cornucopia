@@ -11,7 +11,6 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     <div>
       <.header1>
         <%= @title %>
-        <:subtitle>Use this form to manage player records in your database.</:subtitle>
       </.header1>
 
       <.simple_form
