@@ -92,6 +92,9 @@ jobs:
           pipenv run python scripts/convert.py -l en -lt all -t tarot -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t bridge -v 1.00 -e mobileapp
           pipenv run python scripts/convert.py -l en -lt all -t tarot -v 1.00 -e mobileapp
+          zip output/owasp_cornucopia_mobileapp_1.00_en.zip output/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml
+          zip output/owasp_cornucopia_webapp_1.22_en.zip output/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml output/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml output/owasp_cornucopia_webapp_1.22_guide_bridge_en.docx output/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml
+          zip output/owasp_cornucopia_webapp_2.00_en.zip output/owasp_cornucopia_webapp_2.00_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.00_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.00_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.00_leaflet_tarot_en.idml
       - name: Create pull request artifacts
         uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
         with:
@@ -100,21 +103,15 @@ jobs:
           comment-message: "The generated Cornucopia cards in this pull request."
           artifacts-branch: tmp-${{ github.event.pull_request.head.ref }}-artifacts
           artifacts: |
-            output/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml
-            output/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml
-            output/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml
-            output/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml
-            output/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml
-            output/owasp_cornucopia_webapp_1.22_guide_bridge_en.docx
+            output/owasp_cornucopia_mobileapp_1.00_en.zip
+            output/owasp_cornucopia_webapp_1.22_en.zip
+            output/owasp_cornucopia_webapp_2.00_en.zip
             output/owasp_cornucopia_webapp_1.22_guide_bridge_es.docx
             output/owasp_cornucopia_webapp_1.22_guide_bridge_fr.docx
             output/owasp_cornucopia_webapp_1.22_guide_bridge_nl.docx
             output/owasp_cornucopia_webapp_1.22_guide_bridge_no-nb.docx
             output/owasp_cornucopia_webapp_1.22_guide_bridge_pt-br.docx
             output/owasp_cornucopia_webapp_1.22_guide_bridge_qr_en.docx
-            output/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml
-            output/owasp_cornucopia_webapp_2.00_cards_bridge_en.idml
-            output/owasp_cornucopia_webapp_2.00_cards_tarot_en.idml
             output/owasp_cornucopia_webapp_2.00_guide_bridge_en.docx
             output/owasp_cornucopia_webapp_2.00_guide_bridge_es.docx
             output/owasp_cornucopia_webapp_2.00_guide_bridge_fr.docx
@@ -122,4 +119,3 @@ jobs:
             output/owasp_cornucopia_webapp_2.00_guide_bridge_no-nb.docx
             output/owasp_cornucopia_webapp_2.00_guide_bridge_pt-br.docx
             output/owasp_cornucopia_webapp_2.00_guide_bridge_qr_en.docx
-            output/owasp_cornucopia_webapp_2.00_leaflet_bridge_en.idml
