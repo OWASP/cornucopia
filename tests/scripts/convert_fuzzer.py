@@ -2,13 +2,13 @@ import argparse
 import logging
 import unittest
 from unittest.mock import patch
-from typing import List
 import sys
 import atheris
 import os
 import convert as c
 
 c.convert_vars = c.ConvertVars()
+
 
 def test_main(data):
     test = unittest.TestCase()
@@ -21,7 +21,7 @@ def test_main(data):
     inputtemplate = fdp.ConsumeUnicodeNoSurrogates(1024)
     outputfile = fdp.ConsumeUnicodeNoSurrogates(1024)
     b = c.convert_vars.BASE_PATH
-    c.convert_vars.BASE_PATH = os.sep.join([b, "tests", "test_files"])
+    c.convert_vars.BASE_PATH = os.sep.join([b, "test_files"])
     template_docx_file = os.sep.join(
         [
             c.convert_vars.BASE_PATH,
@@ -42,13 +42,6 @@ def test_main(data):
         "inputfile": template_docx_file,
         "outputfile": "",
     }
-    mapping_file = os.sep.join(
-        [
-            c.convert_vars.BASE_PATH,
-            "source",
-            "webapp-mappings-1.22.yaml",
-        ]
-    )
 
     outputfile = os.sep.join(
         [
@@ -155,7 +148,22 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", template_docx_file, "-o", outputfile]
+            args = [
+                "-e",
+                "webapp",
+                "-t",
+                "bridge",
+                "-lt",
+                "guide",
+                "-l",
+                "en",
+                "-v",
+                "1.22",
+                "-i",
+                template_docx_file,
+                "-o",
+                outputfile,
+            ]
             argp = {
                 "debug": False,
                 "pdf": False,
@@ -172,7 +180,6 @@ def test_main(data):
             with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
                 with patch("sys.argv", args):
                     c.main()
-
 
             args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", inputtemplate]
             argp = {
@@ -192,13 +199,12 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-    except:
+    except Exception:
         c.convert_vars.BASE_PATH = b
-        print(16)
+        print(f"{l6}")
         raise Exception("Convert main died!")
     test.assertTrue(True)
     c.convert_vars.BASE_PATH = b
-
 
 
 def main():
