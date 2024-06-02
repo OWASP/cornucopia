@@ -21,8 +21,9 @@ defmodule CopiWeb.PlayerLive.Index do
   end
 
   defp apply_action(socket, :new, %{"game_id" => game_id}) do
+    game = socket.assigns.game
     socket
-    |> assign(:page_title, "New Player")
+    |> assign(:page_title, "You're joining the game: #{game.name}")
     |> assign(:player, %Player{game_id: game_id})
   end
 
