@@ -1,5 +1,6 @@
 defmodule CopiWeb.PlayerLive.Show do
   use CopiWeb, :live_view
+  use Phoenix.Component
 
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
@@ -87,12 +88,6 @@ defmodule CopiWeb.PlayerLive.Show do
     {:noreply, assign(socket, :game, updated_game)}
   end
 
-  def format_capec(refs) do
-    refs
-    |> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
-    |> Enum.intersperse(", ")
-  end
-
   def topic(game_id) do
     "game:#{game_id}"
   end
@@ -142,9 +137,18 @@ defmodule CopiWeb.PlayerLive.Show do
   def all_dealt_cards(game) do
     Enum.reduce(game.players, [], fn player, cards -> player.dealt_cards ++ cards end)
   end
+
   def ordered_cards_played_in_round(game, round) do
     all_dealt_cards(game)
       |> Enum.filter(fn card -> card.played_in_round == round end)
       |> Enum.sort_by(&(&1.updated_at))
+  end
+
+  def display_game_session(edition) do
+    case edition do
+      "ecommerce" -> "Cornucopia Web Session:"
+      "masvs" -> "Cornucopia Mobile Session:"
+      _ -> "EoP Session:"
+    end
   end
 end

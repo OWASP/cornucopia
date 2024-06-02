@@ -22,14 +22,8 @@ config :copi, CopiWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch",
-      "--watch-options-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    node: ["build.js", "--watch", cd: Path.expand("../assets", __DIR__)],
+    tailwind: {Tailwind, :install_and_run, [:copi, ~w(--watch)]}
   ]
 
 # ## SSL Support

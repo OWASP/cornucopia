@@ -13,6 +13,8 @@ defmodule Copi.Application do
       CopiWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Copi.PubSub},
+      # Start the DNS clustering
+      {DNSCluster, query: Application.get_env(:copi, :dns_cluster_query) || :ignore},
       # Start the Endpoint (http/https)
       CopiWeb.Endpoint
       # Start a worker by calling: Copi.Worker.start_link(arg)

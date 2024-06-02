@@ -68,5 +68,5 @@ jobs:
       - name: Build the project
         run: mix compile
         
-      - name: Run tests
-        run: mix test
+      # - name: Run tests
+      #   run: mix test

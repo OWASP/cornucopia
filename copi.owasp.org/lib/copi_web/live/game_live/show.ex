@@ -116,4 +116,12 @@ defmodule CopiWeb.GameLive.Show do
   def card_played_in_round(cards, round) do
     Enum.find(cards, fn card -> card.played_in_round == round end)
   end
+
+  def display_game_session(edition) do
+    case edition do
+      "ecommerce" -> "Cornucopia Web Session:"
+      "masvs" -> "Cornucopia Mobile Session:"
+      _ -> "EoP Session:"
+    end
+  end
 end

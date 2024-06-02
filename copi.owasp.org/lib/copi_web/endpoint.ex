@@ -7,14 +7,13 @@ defmodule CopiWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_copi_key",
-    signing_salt: "K7VwkdRe"
+    signing_salt: "K7VwkdRe",
+    same_site: "Lax"
   ]
 
-  socket "/socket", CopiWeb.UserSocket,
-    websocket: true,
-    longpoll: false
-
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]],
+    longpoll: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -24,7 +23,7 @@ defmodule CopiWeb.Endpoint do
     at: "/",
     from: :copi,
     gzip: false,
-    only: ~w(css fonts images js downloads favicon.ico robots.txt)
+    only: CopiWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

@@ -1,5 +1,6 @@
 defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
+  use Phoenix.Component
 
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
@@ -16,7 +17,7 @@ defmodule CopiWeb.GameLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Game")
+    |> assign(:page_title, "Create a new game")
     |> assign(:game, %Game{})
   end
 
@@ -37,4 +38,10 @@ defmodule CopiWeb.GameLive.Index do
   defp list_games do
     Cornucopia.list_games()
   end
+
+  @impl true
+  def handle_info({:update_parent, new_state}, socket) do
+    {:noreply, assign(socket, :games, new_state)}
+  end
+
 end

@@ -5,7 +5,7 @@ defmodule CopiWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {CopiWeb.LayoutView, :root}
+    plug :put_root_layout, html: {CopiWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -17,7 +17,7 @@ defmodule CopiWeb.Router do
   scope "/", CopiWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    get "/", PageController, :home
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
@@ -27,6 +27,8 @@ defmodule CopiWeb.Router do
     live "/games/:game_id/players/new", PlayerLive.Index, :new
 
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
+
+    live "/resources", ResourcesLive.Index, :index
 
     resources "/cards", CardController, only: [:index, :show]
   end

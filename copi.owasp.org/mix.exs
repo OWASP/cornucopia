@@ -5,9 +5,8 @@ defmodule Copi.MixProject do
     [
       app: :copi,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -33,25 +32,38 @@ defmodule Copi.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.14"},
-      {:phoenix_ecto, "~> 4.4.0"},
+      {:phoenix, "~> 1.7.12"},
+      {:phoenix_ecto, "~> 4.5.1"},
       {:ecto_sql, "~> 3.11.1"},
-      {:postgrex, ">= 0.16.5"},
-      {:phoenix_live_view, "~> 0.18.2"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 4.0"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_view, "~> 0.20.2"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_html, "~> 3.2.0"},
-      {:phoenix_live_reload, "~> 1.3.3", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.7.1"},
-      {:telemetry_metrics, "~> 0.6.1"},
-      {:telemetry_poller, "~> 1.0.0"},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.1",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1},
+      {:swoosh, "~> 1.5"},
+      {:finch, "~> 0.13"},
+      {:telemetry_metrics, "~> 1.0"},
+      {:telemetry_poller, "~> 1.0"},
+      {:gettext, "~> 0.20"},
+      {:jason, "~> 1.2"},
+      {:dns_cluster, "~> 0.1.1"},
+      {:bandit, "~> 1.2"},
+      {:plug_cowboy, "~> 2.7.1"},
       {:ecto_ulid, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.9.0"},
       {:slugify, "~> 1.3.1"},
-      {:want, "~> 1.9"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:want, "~> 1.10.1"},
+      {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
+      {:hackney, "~> 1.9"}
     ]
   end
 
@@ -63,10 +75,18 @@ defmodule Copi.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
+      setup: ["deps.get", "ecto.setup", "cmd --cd assets npm install"],
       "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets node build.js"],
+      "assets.build": ["tailwind copi", "cmd --cd assets node build.js"],
+      "assets.deploy": [
+        "tailwind copi --minify",
+        "cmd --cd assets npm install",
+        "cmd --cd assets node build.js --deploy",
+        "phx.digest"
+      ]
     ]
   end
 end

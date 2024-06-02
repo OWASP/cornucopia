@@ -65,6 +65,9 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+    config :copi, dns_cluster_query: System.get_env("DNS_CLUSTER_QUERY")
+
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key

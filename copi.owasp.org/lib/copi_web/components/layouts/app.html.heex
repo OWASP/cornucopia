@@ -1,0 +1,60 @@
+<div class="min-h-full">
+  <div class="bg-gray-800">
+    <nav class="bg-gray-800">
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="border-b border-gray-700">
+          <div class="flex h-16 items-center justify-between px-4 sm:px-0">
+            <div class="flex items-center">
+              <div class="block">
+                <div class="flex items-baseline space-x-4">
+                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                  <a href="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                  <a href="/games/new" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Start A Game</a>
+                  <%!-- <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Join A Game</a> --%>
+                  <a href="/cards" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Game Cards</a>
+                  <a href="/resources" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Resources</a>
+                </div>
+              </div>
+            </div>
+            <div class="hidden sm:block">
+              <div class="ml-4 flex items-center md:ml-6">
+
+                <!-- Secure Delivery Link -->
+                <div class="relative ml-3">
+                  <div>
+                    <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm">
+                      <a href="https://securedelivery.io/">
+                        <img class="h-8  rounded-full" src="/images/sd-logomark.png" alt="Secure Delivery Logo">
+                      </a>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- OWASP Link -->
+                <div class="relative ml-3">
+                  <div>
+                    <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm">
+                      <a href="https://github.com/secure-delivery/copi">
+                        <img class="h-8  rounded-full" src="/images/owasp-logomark.png" alt="OWASP Logo">
+                      </a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="">
+    <div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+      <div class="h-auto bg-white rounded-lg  p-5 shadow sm:px-6">
+        <.flash_group flash={@flash} />
+        <%= @inner_content %>
+      </div>
+    </div>
+  </main>
+</div>

@@ -3,10 +3,10 @@ defmodule Copi.CardMigration do
   alias Copi.Cornucopia.Card
 
   def add_cards_to_database(cards_file_path, mappings_file_path)do
-    populate_cards Path.join(File.cwd!(), cards_file_path)
+    populate_cards cards_file_path
 
-    if(mappings_file_path) do
-      map_cards Path.join(File.cwd!(), mappings_file_path)
+    if mappings_file_path do
+      map_cards mappings_file_path
     end
   end
 

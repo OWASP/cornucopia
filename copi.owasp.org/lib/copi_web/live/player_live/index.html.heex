@@ -1,11 +1,13 @@
-<%= if @live_action in [:new, :edit] do %>
-  <%= live_modal @socket, CopiWeb.PlayerLive.FormComponent,
-    id: @player.id || :new,
-    title: @page_title,
-    action: @live_action,
-    player: @player,
-    return_to: Routes.player_index_path(@socket, :index, @game.id) %>
-<% end %>
+
+  <.live_component
+    module={CopiWeb.PlayerLive.FormComponent}
+    id={:new}
+    title={@page_title}
+    action={@live_action}
+    player={@player}
+    patch={~p"/games/#{@game.id}"}
+  />
+
 
 <!--
 <table>
@@ -22,7 +24,9 @@
         <td><%= player.name %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.player_show_path(@socket, :show, @game, player) %></span>
+          <span><.link patch={~p"/games/#{player.game_id}/players/#{player.id}"}>
+  <.button><%= gettext("Join game as this player") %></.button>
+</.link></span>
 
 
         </td>
