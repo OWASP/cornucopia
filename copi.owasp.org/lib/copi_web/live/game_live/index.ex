@@ -38,4 +38,10 @@ defmodule CopiWeb.GameLive.Index do
   defp list_games do
     Cornucopia.list_games()
   end
+
+  @impl true
+  def handle_info({:update_parent, new_state}, socket) do
+    {:noreply, assign(socket, :games, new_state)}
+  end
+
 end
