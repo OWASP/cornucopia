@@ -155,7 +155,7 @@ th.numeric, td.numeric {
   width: 200px;
   height: 293px;
   border-radius: 10px;
-  background: #fff;
+  background-color: #fff;
   -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
   box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -510,43 +510,43 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.n2 {
-      background: no-repeat top/100% url("/images/eop-cards/spoofing-2.png");
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-2.png") #fff;
     }
     &.n3 {
-      background: no-repeat top/100% url("/images/eop-cards/spoofing-3.png");
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-3.png") #fff;
     }
     &.n4 {
-      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-4.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-4.png") #fff;
     }
     &.n5 {
-      background: no-repeat top/100% url("/images/eop-cards/spoofing-5.png");
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-5.png") #fff;
     }
     &.n6 {
-      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-6.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-6.png") #fff;
     }
     &.n7 {
-      background: no-repeat center/100% url("/images/eop-cards/spoofing-7.png");
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-7.png") #fff;
     }
     &.n8 {
-      background: no-repeat top/100% url("/images/eop-cards/spoofing-8.png");
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-8.png") #fff;
     }
     &.n9 {
-      background: no-repeat center/100% url("/images/eop-cards/spoofing-9.png");
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-9.png") #fff;
     }
     &.n10 {
-      background: no-repeat top/100% url("/images/eop-cards/spoofing-10.png");
+      background: no-repeat top/100% url("/images/eop-cards/spoofing-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat center/100% url("/images/eop-cards/spoofing-j.png");
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat center/100% url("/images/eop-cards/spoofing-q.png");
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-q.png") #fff;
     }
     &.nK {
-      background: no-repeat center/100% url("/images/eop-cards/spoofing-k.png");
+      background: no-repeat center/100% url("/images/eop-cards/spoofing-k.png") #fff;
     }
     &.nA {
-      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-a.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/spoofing-a.png") #fff;
     }
   }
 
@@ -568,40 +568,40 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.n3 {
-      background: no-repeat top/100% url("/images/eop-cards/tampering-3.png");
+      background: no-repeat top/100% url("/images/eop-cards/tampering-3.png") #fff;
     }
     &.n4 {
-      background: no-repeat bottom/100% url("/images/eop-cards/tampering-4.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/tampering-4.png") #fff;
     }
     &.n5 {
-      background: no-repeat top/100% url("/images/eop-cards/tampering-5.png");
+      background: no-repeat top/100% url("/images/eop-cards/tampering-5.png") #fff;
     }
     &.n6 {
-      background: no-repeat bottom/100% url("/images/eop-cards/tampering-6.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/tampering-6.png") #fff;
     }
     &.n7 {
-      background: no-repeat center/100% url("/images/eop-cards/tampering-7.png");
+      background: no-repeat center/100% url("/images/eop-cards/tampering-7.png") #fff;
     }
     &.n8 {
-      background: no-repeat top/100% url("/images/eop-cards/tampering-8.png");
+      background: no-repeat top/100% url("/images/eop-cards/tampering-8.png") #fff;
     }
     &.n9 {
-      background: no-repeat center/100% url("/images/eop-cards/tampering-9.png");
+      background: no-repeat center/100% url("/images/eop-cards/tampering-9.png") #fff;
     }
     &.n10 {
-      background: no-repeat top/100% url("/images/eop-cards/tampering-10.png");
+      background: no-repeat top/100% url("/images/eop-cards/tampering-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat top/100% url("/images/eop-cards/tampering-j.png");
+      background: no-repeat top/100% url("/images/eop-cards/tampering-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat top/100% url("/images/eop-cards/tampering-q.png");
+      background: no-repeat top/100% url("/images/eop-cards/tampering-q.png") #fff;
     }
     &.nK {
-      background: no-repeat center/100% url("/images/eop-cards/tampering-k.png");
+      background: no-repeat center/100% url("/images/eop-cards/tampering-k.png") #fff;
     }
     &.nA {
-      background: no-repeat bottom/100% url("/images/eop-cards/tampering-a.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/tampering-a.png") #fff;
     }
   }
 
@@ -623,43 +623,43 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.n2 {
-      background: no-repeat top/100% url("/images/eop-cards/repudiation-2.png");
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-2.png") #fff;
     }
     &.n3 {
-      background: no-repeat top/100% url("/images/eop-cards/repudiation-3.png");
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-3.png") #fff;
     }
     &.n4 {
-      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-4.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-4.png") #fff;
     }
     &.n5 {
-      background: no-repeat top/100% url("/images/eop-cards/repudiation-5.png");
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-5.png") #fff;
     }
     &.n6 {
-      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-6.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-6.png") #fff;
     }
     &.n7 {
-      background: no-repeat center/100% url("/images/eop-cards/repudiation-7.png");
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-7.png") #fff;
     }
     &.n8 {
-      background: no-repeat top/100% url("/images/eop-cards/repudiation-8.png");
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-8.png") #fff;
     }
     &.n9 {
-      background: no-repeat center/100% url("/images/eop-cards/repudiation-9.png");
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-9.png") #fff;
     }
     &.n10 {
-      background: no-repeat top/100% url("/images/eop-cards/repudiation-10.png");
+      background: no-repeat top/100% url("/images/eop-cards/repudiation-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat center/100% url("/images/eop-cards/repudiation-j.png");
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat center/100% url("/images/eop-cards/repudiation-q.png");
+      background: no-repeat center/100% url("/images/eop-cards/repudiation-q.png") #fff;
     }
     &.nK {
-      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-k.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-k.png") #fff;
     }
     &.nA {
-      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-a.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/repudiation-a.png") #fff;
     }    
   }
 
@@ -681,43 +681,43 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.n2 {
-      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-2.png");
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-2.png") #fff;
     }
     &.n3 {
-      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-3.png");
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-3.png") #fff;
     }
     &.n4 {
-      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-4.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-4.png") #fff;
     }
     &.n5 {
-      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-5.png");
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-5.png") #fff;
     }
     &.n6 {
-      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-6.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-6.png") #fff;
     }
     &.n7 {
-      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-7.png");
+      background: no-repeat top/100% url("/images/eop-cards/information-disclosure-7.png") #fff;
     }
     &.n8 {
-      background: no-repeat top 15px left/100% url("/images/eop-cards/information-disclosure-8.png");
+      background: no-repeat top 15px left/100% url("/images/eop-cards/information-disclosure-8.png") #fff;
     }
     &.n9 {
-      background: no-repeat center/100% url("/images/eop-cards/information-disclosure-9.png");
+      background: no-repeat center/100% url("/images/eop-cards/information-disclosure-9.png") #fff;
     }
     &.n10 {
-      background: no-repeat top 28px left/100% url("/images/eop-cards/information-disclosure-10.png");
+      background: no-repeat top 28px left/100% url("/images/eop-cards/information-disclosure-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat center/100% url("/images/eop-cards/information-disclosure-j.png");
+      background: no-repeat center/100% url("/images/eop-cards/information-disclosure-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat top 18px left/100% url("/images/eop-cards/information-disclosure-q.png");
+      background: no-repeat top 18px left/100% url("/images/eop-cards/information-disclosure-q.png") #fff;
     }
     &.nK {
-      background: no-repeat top 9px left/100% url("/images/eop-cards/information-disclosure-k.png");
+      background: no-repeat top 9px left/100% url("/images/eop-cards/information-disclosure-k.png") #fff;
     }
     &.nA {
-      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-a.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-a.png") #fff;
     }
   }
 
@@ -739,43 +739,43 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.n2 {
-      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-2.png");
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-2.png") #fff;
     }
     &.n3 {
-      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-3.png");
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-3.png") #fff;
     }
     &.n4 {
-      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-4.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-4.png") #fff;
     }
     &.n5 {
-      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-5.png");
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-5.png") #fff;
     }
     &.n6 {
-      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-6.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-6.png") #fff;
     }
     &.n7 {
-      background: no-repeat center/100% url("/images/eop-cards/denial-of-service-7.png");
+      background: no-repeat center/100% url("/images/eop-cards/denial-of-service-7.png") #fff;
     }
     &.n8 {
-      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-8.png");
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-8.png") #fff;
     }
     &.n9 {
-      background: no-repeat top -15px left/100% url("/images/eop-cards/denial-of-service-9.png");
+      background: no-repeat top -15px left/100% url("/images/eop-cards/denial-of-service-9.png") #fff;
     }
     &.n10 {
-      background: no-repeat top 2px left/100% url("/images/eop-cards/denial-of-service-10.png");
+      background: no-repeat top 2px left/100% url("/images/eop-cards/denial-of-service-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat center/100% url("/images/eop-cards/denial-of-service-j.png");
+      background: no-repeat center/100% url("/images/eop-cards/denial-of-service-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat top -10px left/100% url("/images/eop-cards/denial-of-service-q.png");
+      background: no-repeat top -10px left/100% url("/images/eop-cards/denial-of-service-q.png") #fff;
     }
     &.nK {
-      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-k.png");
+      background: no-repeat top/100% url("/images/eop-cards/denial-of-service-k.png") #fff;
     }
     &.nA {
-      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-a.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-a.png") #fff;
     }
   }
 
@@ -797,34 +797,34 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.n5 {
-      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-5.png");
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-5.png") #fff;
     }
     &.n6 {
-      background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-6.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-6.png") #fff;
     }
     &.n7 {
-      background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-7.png");
+      background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-7.png") #fff;
     }
     &.n8 {
-      background: no-repeat top 15px left/100% url("/images/eop-cards/elevation-of-privilege-8.png");
+      background: no-repeat top 15px left/100% url("/images/eop-cards/elevation-of-privilege-8.png") #fff;
     }
     &.n9 {
-      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-9.png");
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-9.png") #fff;
     }
     &.n10 {
-      background: no-repeat top 30px left/100% url("/images/eop-cards/elevation-of-privilege-10.png");
+      background: no-repeat top 30px left/100% url("/images/eop-cards/elevation-of-privilege-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-j.png");
+      background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat top -9px left/100% url("/images/eop-cards/elevation-of-privilege-q.png");
+      background: no-repeat top -9px left/100% url("/images/eop-cards/elevation-of-privilege-q.png") #fff;
     }
     &.nK {
-      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-k.png");
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-k.png") #fff;
     }
     &.nA {
-      background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-a.png");
+      background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-a.png") #fff;
     }
   }
 
@@ -833,7 +833,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 @keyframes ants { to { background-position: 100% 100% } }
 
 .card-player {
-  margin: 10px 15px;
+  
   display: flex;
 
   .name {
@@ -989,10 +989,6 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   -webkit-overflow-scrolling: touch;
-
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  
-  margin-bottom: 20px;
 }
 
 #hand {
