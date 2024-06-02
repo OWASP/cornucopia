@@ -1,4 +1,4 @@
-<.header1>Cornucopia <%= display_game_session(@game.edition) %> <%= @player.game.name %> </.header1>
+<.header1><%= display_game_session(@game.edition) %> <%= @player.game.name %> </.header1>
 
 <%= if @player.game.finished_at do %>
 
@@ -24,11 +24,17 @@
         <div class="card-player flex-col justify-start">
           <div class="name mb-4">
             <%= if player.id == @player.id do %>
-            <%= if player_card != nil && Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
-             <p class="font-bold">You scored!</p> 
-             <% else %>
-                <p>Your Card</p>
-            <% end %>      
+
+              <%= if player_card == nil do %>
+                <p>Drop a card here to play it</p>
+              <% else %>
+                <%= if player_card != nil && Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+                <p class="font-bold">Your Card Scored!</p> 
+                <% else %>
+                    <p>Your Card</p>
+                <% end %>
+              <% end %>
+
             <% else %>
             <%= if player_card != nil &&  Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
              <p class="font-bold"> <%= player.name %> Scored!</p> 
@@ -38,7 +44,7 @@
             <% end %>
           </div>
           
-          <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card}> 
+          <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card} first_card_played={first_card_played}> 
             <CopiWeb.CardHTML.show card={player_card.card} />
           </.card_drop_zone>
 

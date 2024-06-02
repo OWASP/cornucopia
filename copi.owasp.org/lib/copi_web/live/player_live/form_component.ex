@@ -32,6 +32,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     """
   end
 
+  @impl true
   def update(%{player: player} = assigns, socket) do
     changeset = Cornucopia.change_player(player)
 
