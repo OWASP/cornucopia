@@ -137,9 +137,18 @@ defmodule CopiWeb.PlayerLive.Show do
   def all_dealt_cards(game) do
     Enum.reduce(game.players, [], fn player, cards -> player.dealt_cards ++ cards end)
   end
+
   def ordered_cards_played_in_round(game, round) do
     all_dealt_cards(game)
       |> Enum.filter(fn card -> card.played_in_round == round end)
       |> Enum.sort_by(&(&1.updated_at))
+  end
+
+  def display_game_session(edition) do
+    case edition do
+      "ecommerce" -> "Cornucopia Web Session:"
+      "masvs" -> "Cornucopia Mobile Session:"
+      _ -> "EoP Session:"
+    end
   end
 end
