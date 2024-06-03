@@ -1,4 +1,4 @@
-defmodule Copi.Repo.Migrations.PopulateCards do
+defmodule Copi.Repo.Migrations.PopulateNewCards do
   use Ecto.Migration
 
   import Copi.CardMigration

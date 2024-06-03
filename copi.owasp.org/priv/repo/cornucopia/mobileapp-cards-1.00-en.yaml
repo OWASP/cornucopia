@@ -3,7 +3,7 @@ meta:
   edition: "mobileapp"
   component: "cards"
   language: "EN"
-  version: "1.00"
+  version: "1.01"
 suits:
 -
   name: "Platform & Code"
