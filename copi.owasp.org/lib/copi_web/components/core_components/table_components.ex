@@ -2,14 +2,11 @@ defmodule CopiWeb.CoreComponents.TableComponents do
   use Phoenix.Component
 
   import CopiWeb.CoreComponents
-  alias Phoenix.LiveView.JS
-  import CopiWeb.Gettext
-
-
 
   attr :player, :map
   attr :player_card, :map
   attr :is_current_player, :boolean, default: false
+  attr :first_card_played, :map
   slot :inner_block, required: true
 
   def card_drop_zone(assigns) do
