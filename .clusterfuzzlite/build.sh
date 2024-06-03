@@ -9,7 +9,7 @@ for fuzzer in $(find "$SRC/cornucopia/tests/scripts" -name '*_fuzzer.py'); do
     fuzzer_basename=$(basename -s .py $fuzzer)
     fuzzer_package=${fuzzer_basename}.pkg
 
-    python3.10 -m PyInstaller --distpath $OUT --onefile --exclude IPython --paths $SRC/cornucopia:$SRC/cornucopia/scripts --hidden-import scripts --collect-submodules scripts --name $fuzzer_package $fuzzer
+    python3.10 -m PyInstaller --distpath $OUT --onefile --exclude IPython --paths $SRC/cornucopia:$SRC/cornucopia/scripts:$SRC/cornucopia/tests/test-files --hidden-import scripts --collect-submodules scripts --name $fuzzer_package $fuzzer
 
     echo "#!/bin/sh
 # LLVMFuzzerTestOneInput for fuzzer detection.

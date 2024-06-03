@@ -55,44 +55,47 @@ For font licensing, please read font [README.md](./resources/fonts/README.md)
 Merges to the main branch will generate new DOCX and IDML files to use to print off new version of the deck but if you wish to produce these locally yourself then use the ./scripts/convert.py scipt to do this:
 
 ```bash
--(cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
-usage: convert.py [-h] [-i INPUTFILE] [-v {all,latest,1.00,1.20,1.21,1.22,2.00}] [-t {all,docx,pdf,idml}] [-o OUTPUTFILE] [-l {template,all,en,es,fr,nl,no-nb,pt-br}] [-d]
-                  [-s {all,static,dynamic,leaflet}] [-e {all,webapp,mobileapp}] [-u URL]
+(cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
+usage: convert.py [-h] [-i INPUTFILE] [-v VERSION] [-o OUTPUTFILE] [-p] [-d] [-l LANGUAGE] [-t TEMPLATE] [-e EDITION]
+                  [-lt LAYOUT]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
-Example usage: $ ./cornucopia/convert.py -t docx -l es -v 2.00
-Example usage: c:\cornucopia\scripts\convert.py -t idml -l fr -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_language_version.idml'
+Example usage: $ ./cornucopia/convert.py --pdf -lt guide -l es -v 2.00
+Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_version_layout_language_template.idml'
 
 options:
   -h, --help            show this help message and exit
   -i INPUTFILE, --inputfile INPUTFILE
                         Input (template) file to use.
-                        Default=resources\templates\owasp_cornucopia_edition_lang_ver_template.(docx|idml)
-                        Template type is dependent on output type (-t) or file (-o) specified.
-  -v {all,latest,1.00,1.20,1.21,1.22,2.00}, --version {all,latest,1.00,1.20,1.21,1.22,2.00}
-                        Output version to produce. [`all`, `latest`, `1.00`, `1.20`, `1.21`, `1.22`, `2.00`]
-                        Version 1.20 and 1.2x will deliver cards mapped to ASVS 3.0.1
+                        Default=resources\templates\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|idml)
+                        Template type is dependent on the file (-o) specified.
+  -v VERSION, --version VERSION
+                        Output version to produce. [`all`, `latest`, `1.00`, `1.22`, `2.00`]
+                        Version 1.22 and 1.2x will deliver cards mapped to ASVS 3.0
                         Version 2.00 and 2.0x will deliver cards mapped to ASVS 4.0
                         Version 1.00 and 1.0x will deliver cards mapped to MASVS 2.0
                         Version all will deliver all versions
                         Version latest will deliver the latest deck versions
-  -t {all,docx,pdf,idml}, --outputfiletype {all,docx,pdf,idml}
-                        Type of file to output. Default = (docx, idml). If specified, this overwrites the output file extension
   -o OUTPUTFILE, --outputfile OUTPUTFILE
                         Specify a path and name of output file to generate. (caution: existing file will be overwritten).
-                        default = output\owasp_cornucopia_edition_component_lang_ver.(docx|pdf|idml)
-  -l {template,all,en,es,fr,nl,no-nb,pt-br}, --language {template,all,en,es,fr,nl,no-nb,pt-br}
-                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `template`]
-                        Template will attempt to create a template from the english input file and
-                        replacing strings with the template lookup codes
+                        default = output\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|pdf|idml)
+  -p, --pdf             whether to generate a pdf in addition to the printable document. Default = Does not generate pdf
   -d, --debug           Output additional information to debug script
-  -s {all,static,dynamic,leaflet}, --style {all,static,dynamic,leaflet}
-                        Output style to produce. [`static`, `dynamic` or `leaflet`]
-                        Static cards have the mappings printed on them, dynamic ones a QRCode that points to an maintained list.The leaflet contains the instructions
-  -e {all,webapp,mobileapp}, --edition {all,webapp,mobileapp}
+  -l LANGUAGE, --language LANGUAGE
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
+  -t TEMPLATE, --template TEMPLATE
+                        From which template to produce the document. [`bridge`, `qr` or `tarot`]
+                        Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
+                        Static cards are bridge and have the mappings printed on them, tarot cards are 80 mm x 120mm large, qr cards have a QRCode that points to an maintained list.
+  -e EDITION, --edition EDITION
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
-                        The various Cornucopia decks. `web` will give you the web webapp edition.`mobileapp` will give you the MASVS/MASTG edition.
-  -u URL, --url URL     Specify a URL to use in generating dynamic cards. (caution: URL will be suffixed with / and the card ID).
+                        The various Cornucopia decks. `web` will give you the Website App edition.`mobileapp` will give you the Mobile App edition.
+  -lt LAYOUT, --layout LAYOUT
+                        Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]
+                        The various Cornucopia document layouts.
+                        `cards` will output the high quality print card deck.
+                        `guide` will generate the docx guide with the low quality print deck.
+                        `leaflet` will output the high quality print leaflet.
 ```
 
 ## Printing
@@ -119,17 +122,41 @@ The following fonts are used:
   - Noto Sans Condensed Extra Bold
   - Noto Sans Extra Condensed Extra Bold
 
-Blead:
+### Dimensions
 
-A standard blead set to 3mm for all 4 sides.
+#### Card decks:
 
-Currently the cards are provided in two sizes:
+The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
+The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 
-The "static" files are 56mm x 87mm standard playing cards.
-The 80x120mm files are 80mm x 120 mm (Recommended for readability)
+#### Cases:
 
-NB: Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 
+The "bridge" is 60 x 89.25 mm x 27.15 mm
+The "tarot" is 122.2 x 73.1 x 29.1 mm
+
+the "tarrot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
+the "bridge" box may need some refitting if used.
+
+#### Leaflets:
+
+The "bridge" files are  55mm x 87mm
+The "tarot" files are (2.75 x 4.75")
+
+The "bridge" and "tarot" version is 16-20 page spread depending on in which language you print.
+
+Please be aware, that the table of content for the indesign leaflet has to be adjusted for all language versions before printing except for the english version!! 
 This is because indesign does not support auto adjusting the TOC.
+You may need to adjust the font size to fit either a 16 or a 20 page leaflet spread.
+DO NOT PRINT an 18 Page leaflet! It won't look good.
+
+### Blead:
+
+A standard blead set to 3mm for all 4 sides. 
+
+### Paper
+
+Use 0.300mm for the bridge cards and 0.350mm for the tarot cards.
+For the case and leaflet, just use common sense, The case should have enough room for a 20 page leaflet (printed front and back) with the 0.150-0.250mm paper if need be.
 
 ## Contributing to Development
 

@@ -24,3 +24,13 @@ Add testing.
 - Adding the mobile app edition.
 - Adding functionality for building the leaflet.
 - Update the ASVS mapping version to ASVS 4.0.3.
+
+## Changes & Updates
+### 2024-06-03
+
+- Adding layouts
+- Remove styles as an option, use layouts instead.
+- Remove filetypes and introduce templates instead.
+- Adding the tarot layout and renaming static to bridge
+- Removing old versions prior to 1.22
+- Adding fuzzing
