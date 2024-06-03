@@ -30,7 +30,8 @@ defmodule CopiWeb.Router do
 
     live "/resources", ResourcesLive.Index, :index
 
-    resources "/cards", CardController, only: [:index, :show]
+    get "/cards", CardController, :index
+    get "/cards/:version/:id", CardController, :show
   end
 
   scope "/api", CopiWeb do
