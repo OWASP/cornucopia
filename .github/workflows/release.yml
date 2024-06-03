@@ -65,7 +65,7 @@
             run: pipenv run coverage xml
           - name: Check test coverage - Report
             run: pipenv run coverage report --fail-under 85 scripts/convert*        
-          - name: Generate new output files
+          - name: Generate new output file
             run: | 
               pipenv run python scripts/convert.py -l all -lt all -t bridge -v 1.22 -e webapp
               pipenv run python scripts/convert.py -l all -lt all -t tarot -v 1.22 -e webapp
@@ -94,11 +94,10 @@
               prerelease: false
               files: |
                 CHANGELOG.md
-                LICENSE
                 LICENSE.md
                 README.md
                 creative-commons-attribution-3.0.txt
-                output/owasp_cornucopia_mobileapp_1.00.zip
+                output/owasp_cornucopia_mobileapp_1.00_en.zip
                 output/owasp_cornucopia_webapp_1.22_en.zip
                 output/owasp_cornucopia_webapp_1.22_es.zip
                 output/owasp_cornucopia_webapp_1.22_fr.zip

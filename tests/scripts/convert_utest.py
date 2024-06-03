@@ -113,7 +113,7 @@ class TestGetValidTemplateChoices(unittest.TestCase):
 
     def test_get_valid_style_choices_blank(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="", layout="")
-        want_template = ["bridge"]
+        want_template = ["bridge", "tarot"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
@@ -127,7 +127,7 @@ class TestGetValidTemplateChoices(unittest.TestCase):
 
     def test_get_valid_style_choices_for_leaflet(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="leaflet")
-        want_template = ["bridge"]
+        want_template = ["bridge", "tarot"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
