@@ -13,7 +13,7 @@
 alias Copi.Repo
 alias Copi.Cornucopia.Card
 
-path = Path.join(File.cwd!(), "priv/repo/cornucopia/ecommerce-cards-1.21-en.yaml")
+path = Path.join(File.cwd!(), "priv/repo/cornucopia/webapp-cards-2.00-en.yaml")
 
 case YamlElixir.read_from_file(path) do
   {:ok, cards} ->
@@ -38,7 +38,7 @@ case YamlElixir.read_from_file(path) do
     end
 end
 
-path = Path.join(File.cwd!(), "priv/repo/cornucopia/ecommerce-mappings-1.2.yaml")
+path = Path.join(File.cwd!(), "priv/repo/cornucopia/webapp-mappings-2.00.yaml")
 
 case YamlElixir.read_from_file(path) do
   {:ok, cards} ->

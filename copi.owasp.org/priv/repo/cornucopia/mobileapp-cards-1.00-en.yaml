@@ -1,0 +1,806 @@
+---
+meta:
+  edition: "mobileapp"
+  component: "cards"
+  language: "EN"
+  version: "1.00"
+suits:
+-
+  name: "Platform & Code"
+  cards:
+  -
+    id: "PC2"
+    value: "2"
+    desc: "Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background"
+  -
+    id: "PC3"
+    value: "3"
+    desc: "Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use"
+  -
+    id: "PC4"
+    value: "4"
+    desc: "Kelly can expose sensitive data by taking advantage of the app's excessive permissions connected to the app's use of location, camera, microphone, storage, etc"
+  -
+    id: "PC5"
+    value: "5"
+    desc: "Jason can provoke memory leak or corruption because the app has cyclic dependencies, manages pointers inadequately, keeps an incorrect reference count, does not release shared resources or apply stack protection"
+  -
+    id: "PC6"
+    value: "6"
+    desc: "Dawn can expose and intercept sensitive functionality through interprocess communication because permissions for broadcast and sharing are not set, not narrow enough or appropriately excluded when sharing"
+  -
+    id: "PC7"
+    value: "7"
+    desc: "Lauren can traverse or modify otherwise protected files through access to the underlying file system by exploiting weaknesses in file system-based content providers, resolvers or its configuration"
+  -
+    id: "PC8"
+    value: "8"
+    desc: "Colin can expose sensitive data through the app's interprocess communication because the content provider's query methods are not properly parameterized and arguments sanitized"
+  -
+    id: "PC9"
+    value: "9"
+    desc: "Toby can modify or expose data by injection because the response from implicit intents is not properly validated"
+  -
+    id: "PCX"
+    value: "10"
+    desc: "Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
+  -
+    id: "PCJ"
+    value: "J"
+    desc: "Johan can modify or expose sensitive data by exploiting weaknesses in the SDK or third party libraries because updates to the app and platform are not enforced or do not patch known software vulnerabilities"
+  -
+    id: "PCQ"
+    value: "Q"
+    desc: "Xavier can inject scripts into the web view because it allows embedding content using deep linking without proper authorization and validation of the host, schema and path of the target as these can be changed by the user or because safe browsing is disabled"
+  -
+    id: "PCK"
+    value: "K"
+    desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
+  -
+    id: "PCA"
+    value: "A"
+    desc: "You have invented a new attack against “Platform and Code”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Code Quality” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Authentication & Authorization"
+  cards:
+  -
+    id: "AA2"
+    value: "2"
+    desc: "Jie can use the app to do sensitive operations because the “unlocked key” is not used during the application flow"
+  -
+    id: "AA3"
+    value: "3"
+    desc: "Choi can access capabilities, objects, resources, or properties they should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
+  -
+    id: "AA4"
+    value: "4"
+    desc: "Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly"
+  -
+    id: "AA5"
+    value: "5"
+    desc: "Eiman can bypass the local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded"
+  -
+    id: "AA6"
+    value: "6"
+    desc: "Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing"
+  -
+    id: "AA7"
+    value: "7"
+    desc: "Abdullah can bypass authentication by altering the usual process sequence or flow, or by undertaking the process in incorrect order, or by manipulating date and time values used by the app, or by using valid features for unintended purposes"
+  -
+    id: "AA8"
+    value: "8"
+    desc: "Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking"
+  -
+    id: "AA9"
+    value: "9"
+    desc: "Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)"
+  -
+    id: "AAX"
+    value: "10"
+    desc: "Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions"
+  -
+    id: "AAJ"
+    value: "J"
+    desc: "Ade can bypass authentication because it is not enforced using a remote endpoint, or it is not based on a cryptographic primitive protected by keystore/keychain access control flags"
+  -
+    id: "AAQ"
+    value: "Q"
+    desc: "Riotaro can inject and run a command that the application will run at a higher privilege level without being authenticated or authorized to do so"
+  -
+    id: "AAK"
+    value: "K"
+    desc: "Aatif can influence or alter authentication controls and can therefore bypass them"
+  -
+    id: "AAA"
+    value: "A"
+    desc: "You have invented a new attack against “Authentication & Authorization”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Authentication Architectures” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Network & Storage"
+  cards:
+  -
+    id: "NS2"
+    value: "2"
+    desc: "Matt can inspect sensitive application log data because logging statements have not been removed or reviewed as safe before the production release"
+  -
+    id: "NS3"
+    value: "3"
+    desc: "Bil can access sensitive data for sensitive fields from the pasteboard/clipboard or keyboard cache because the pasteboard/clipboard is not timely cleared, disabled or restricted for sensitive fields, or the keyboard cache is not disabled"
+  -
+    id: "NS4"
+    value: "4"
+    desc: "Ricardo can extract data stored by the app on a stolen or decommissioned device  because it does not enforce device access security policies (e.g. PIN protected locking, app-/os-version, USB debug deactivation, device encryption and rooting)"
+  -
+    id: "NS5"
+    value: "5"
+    desc: "Kevin can read sensitive data mapped to user accounts or sessions by extracting data sent through third-party libraries and/or notifications sent between the app and embedded services (e.g. logs, notifications, backups, cache, local db)"
+  -
+    id: "NS6"
+    value: "6"
+    desc: "Sam can dump sensitive data from memory because the data is not stored as primitive data types and overwritten with random data after use or because the app's input fields use insecure SDKs to store the data in RAM"
+  -
+    id: "NS7"
+    value: "7"
+    desc: "Steve can access sensitive data by reading backups and/or local, internal/external storage"
+  -
+    id: "NS8"
+    value: "8"
+    desc: "Martin can modify or expose sensitive data through unsafe reflection when reading data from public data storage (e.g. shared preferences) because the data is not validated before being read by the app"
+  -
+    id: "NS9"
+    value: "9"
+    desc: "Adrian can compromise the app communication through a proxy because the app does not make use of certificate pinning or implements it incorrectly"
+  -
+    id: "NSX"
+    value: "10"
+    desc: "Maarten can compromise the communication between the app and the external services because the app does not verify TLS certificates and -chains, trust insecure sources, lack hostname verification or ignore TLS verification issues"
+  -
+    id: "NSJ"
+    value: "J"
+    desc: "Nihel can compromise the communication as it may fall back to an insecure or unencrypted channel,  because encryption is optional, or because of client-server protocol or security provider weaknesses"
+  -
+    id: "NSQ"
+    value: "Q"
+    desc: "Ahmed can read and modify data in transit because the communication is transmitted over an unencrypted channel"
+  -
+    id: "NSK"
+    value: "K"
+    desc: "Taher can intercept, extract or modify sensitive data at rest or in transit by influencing or altering methods for transferring or storing data at rest or in transit"
+  -
+    id: "NSA"
+    value: "A"
+    desc: "You have invented a new attack against “Network & Storage”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Network Communication” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Resilience"
+  cards:
+  -
+    id: "RS2"
+    value: "2"
+    desc: " Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
+  -
+    id: "RS3"
+    value: "3"
+    desc: "Tobias can disclose sensitive data by dumping debug symbols while the application is running"
+  -
+    id: "RS4"
+    value: "4"
+    desc: "Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate"
+  -
+    id: "RS5"
+    value: "5"
+    desc: "Matteo can bypass access controls and trigger functionality because debugging is left enabled in the production build"
+  -
+    id: "RS6"
+    value: "6"
+    desc: "Joren can bypass access controls because the anti-debugging controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RS7"
+    value: "7"
+    desc: "Erlend can compromise the app by running it in an emulator because the prevention against emulators are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RS8"
+    value: "8"
+    desc: "Carlos can reverse engineer the app because the prevention against the use of anti reverse engineering tools are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RS9"
+    value: "9"
+    desc: "Sean can reverse engineer the app because the code obfuscation is not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RSX"
+    value: "10"
+    desc: "Juan can bypass jailbreak and root detection and execute administrative functions to bypass integrity checks and access controls and trigger app functionality"
+  -
+    id: "RSJ"
+    value: "J"
+    desc: "Pekka can compromise the integrity of the storage because the file integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RSQ"
+    value: "Q"
+    desc: "Titus can patch out critical functionality because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "RSK"
+    value: "K"
+    desc: "Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them"
+  -
+    id: "RSA"
+    value: "A"
+    desc: "You have invented a new attack against Authorization"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Tampering and Reverse Engineering” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Cryptography"
+  cards:
+  -
+    id: "CRM2"
+    value: "2"
+    desc: "Lesego can compromise cryptographic operations and resources because keys are reused for multiple purposes, or not used according to the purpose for which they were created"
+  -
+    id: "CRM3"
+    value: "3"
+    desc: "Emery can access data because it has been obfuscated rather than using an approved cryptographic function"
+  -
+    id: "CRM4"
+    value: "4"
+    desc: "Enselme can modify sensitive data (stored or in transit) because it is not subject to integrity checking"
+  -
+    id: "CRM5"
+    value: "5"
+    desc: "Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key"
+  -
+    id: "CRM6"
+    value: "6"
+    desc: "Kouti can extract sensitive data because the cryptographic key, used, is hard-coded or stored insecurely such as in local, internal/external storage"
+  -
+    id: "CRM7"
+    value: "7"
+    desc: "Ramsey can access stored sensitive data because it is not securely encrypted"
+  -
+    id: "CRM8"
+    value: "8"
+    desc: "Adel can predict and use the app's cryptographic keys because they are insufficiently long and random, can be enumerated, or derived from known values"
+  -
+    id: "CRM9"
+    value: "9"
+    desc: "Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)"
+  -
+    id: "CRMX"
+    value: "10"
+    desc: "Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "CRMJ"
+    value: "J"
+    desc: "Hassan can extract or modify sensitive data because functions for storage and/or encryption are weak, deprecated or used incorrectly"
+  -
+    id: "CRMQ"
+    value: "Q"
+    desc: "Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented"
+  -
+    id: "CRMK"
+    value: "K"
+    desc: "Tarik can influence or alter cryptographic operations and can therefore bypass them"
+  -
+    id: "CRMA"
+    value: "A"
+    desc: "You have invented a new attack against “Cryptography”"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Cryptography” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Cornucopia"
+  cards:
+  -
+    id: "COM2"
+    value: "2"
+    desc: "Garth can reduce app users' privacy because the app is not transparent about the app's data collection and usage in a concise, easily accessible and understandable way"
+  -
+    id: "COM3"
+    value: "3"
+    desc: " Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
+  -
+    id: "COM4"
+    value: "4"
+    desc: "Elizabeth can reduce app users' privacy because the app sends too much personal data without the user's consent to downstream services that are outside the user's control"
+  -
+    id: "COM5"
+    value: "5"
+    desc: "Debarghaya can reduce app users' privacy because the app repurpose personal information (e.g. device IDs, IP addresses, behavioral patterns) collected for security concerns in order to cater for commercial interests without consent"
+  -
+    id: "COM6"
+    value: "6"
+    desc: "Kim can reduce app users' privacy because the app repurpose biometric information (e.g. fingerprints, facial recognition data, etc.) collected for security concerns in order to cater for commercial interests"
+  -
+    id: "COM7"
+    value: "7"
+    desc: "Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable"
+  -
+    id: "COM8"
+    value: "8"
+    desc: "Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated"
+  -
+    id: "COM9"
+    value: "9"
+    desc: "Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space"
+  -
+    id: "COMX"
+    value: "10"
+    desc: "Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices"
+  -
+    id: "COMJ"
+    value: "J"
+    desc: "Luis can influence or alter cryptographic methods to corrupt other users' data because the integrity of the encrypted data is not verified before being shared with external services"
+  -
+    id: "COMQ"
+    value: "Q"
+    desc: "Victor can patch the app and use it to distribute malicious code because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+  -
+    id: "COMK"
+    value: "K"
+    desc: "Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation"
+  -
+    id: "COMA"
+    value: "A"
+    desc: "You have invented a new attack of any type"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App User Privacy Protection” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+-
+  name: "Wild Card"
+  cards:
+  -
+    id: "JOAM"
+    value: "JokerA"
+    card: "Joker"
+    desc: "Starr can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates"
+    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+  -
+    id: "JOBM"
+    value: "JokerB"
+    card: "Joker"
+    desc: "Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification"
+    misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
+paragraphs:
+-
+  name: "Common"
+  sentences:
+  -
+    value: "NoCard"
+    text: "No Card"
+  -
+    value: "Title"
+    text: "Mobile App Edition v1.00-EN"
+  -
+    value: "Title_full"
+    text: "OWASP® Cornucopia Mobile App Edition v1.00-EN"
+  -
+    value: "T00010"
+    text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+  -
+    value: "T00020"
+    text: "Authors"
+  -
+    value: "T00100"
+    text: "Acknowledgements"
+  -
+    value: "T00110"
+    text: "Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
+  -
+    value: "T00120"
+    text: "Colin Watson for coming up with Cornucopia which OWASP Cornucopia Mobile App Edition is based on."
+  -
+    value: "T00130"
+    text: "Contributors, supporters, sponsors and volunteers to the OWASP MASVS/MASTG, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+  -
+    value: "T00145"
+    text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
+  -
+    value: "T00150"
+    text: "Blackfoot (UK) Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet, and Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online."
+  -
+    value: "T00161"
+    text: "(continued on page 20)"
+  -
+    value: "T00162"
+    text: "(continued from page 10)"
+  -
+    value: "T00200"
+    text: "Introduction"
+  -
+    value: "T00210"
+    text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories."
+  -
+    value: "T00220"
+    text: "Cornucopia Mobile App Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for developement team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
+  -
+    value: "T00240"
+    text: "Cornucopia attempts to introduce threat-modelling ideas into mobile development teams that use Agile methodologies, or are more focused on mobile application weaknesses than other types of software vulnerabilities."
+  -
+    value: "T00300"
+    text: "The card deck (pack)"
+  -
+    value: "T00310"
+    text: "The card scenarios are meant to cover all the MASVS 2.0 requirements, all the tests from the MASTG and any additional guidelines from the Android and IOS secure coding guides. This was done in order to allow the game to be as aligned as possible with the latest guidelines for secure mobile development. Still, it's important to keep in mind that security guidelines and requirements are always in motion and that the game first of all should be used as a support when doing mobile application threat modeling and not as a complete guide into security requirements and guidelines."
+  -
+    value: "T00311"
+    text: "Cornucopia Mobile App Edition suits are based on the sections in the Mobile Application Security Verification Standard."
+  -
+    value: "T00320"
+    text: "These provided five suits, and a sixth called “Cornucopia” was created as a trump suite: "
+  -
+    value: "T00330"
+    text: "Platform & Code (PC)"
+  -
+    value: "T00340"
+    text: "Authentication & Authorization (AA)"
+  -
+    value: "T00350"
+    text: "Network & Storage (NS)"
+  -
+    value: "T00360"
+    text: "Resilience (RS)"
+  -
+    value: "T00370"
+    text: "Cryptography (CRM)"
+  -
+    value: "T00380"
+    text: "Cornucopia (COM)"
+  -
+    value: "T00390"
+    text: "Smilar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King)."
+  -
+    value: "T00400"
+    text: "There are also two Joker cards similar to the Cornucopia Website App Edition."
+  -
+    value: "T00500"
+    text: "Mappings"
+  -
+    value: "T00510"
+    text: "The other driver for Mobile Cornucopia is to link the attacks with requirements and verification techniques."
+  -
+    value: "T00520"
+    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC software attack pattern IDs which themselves are mapped to CWEs."
+  -
+    value: "T00530"
+    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document to help teams create their own security-related stories for use in Agile processes."
+  -
+    value: "T00600"
+    text: "Game strategy"
+  -
+    value: "T00610"
+    text: "Apart from the content differences, the game rules are virtually identical to those for the Corncuopia Website App Edition."
+  -
+    value: "T01000"
+    text: "Provide feedback"
+  -
+    value: "T01010"
+    text: "If you have ideas or feedback on the use of OWASP® Mobile Cornucopia, please share them."
+  -
+    value: "T01020"
+    text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
+  -
+    value: "T01030"
+    text: "The best place to use to discuss or contribute is the list/group for the OWASP project:"
+  -
+    value: "T01040"
+    text: "List/Group"
+  -
+    value: "T01050"
+    text: "Project home page"
+  -
+    value: "T01060"
+    text: "All OWASP documents and tools are free to download and use."
+  -
+    value: "T01070"
+    text: "OWASP® Mobile Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
+  -
+    value: "T01100"
+    text: "Instructions"
+  -
+    value: "T01110"
+    text: "The text on each card describes an attack, but the attacker is given a name, which are unique across all the cards."
+  -
+    value: "T01120"
+    text: "The name can represent a computer system (e.g. the database, the file system, another application, a related service, a botnet), an individual person (e.g. a citizen, a customer, a client, an employee, a criminal, a spy), or even a group of people (e.g. a competitive organization, activists with a common cause)."
+  -
+    value: "T01130"
+    text: "The attacker might be remote in some other device/location, or local/internal with access to the same device, host or network as the application is running on."
+  -
+    value: "T01140"
+    text: "The attacker is always named at the start of each description"
+  -
+    value: "T01150"
+    text: "An example is:"
+  -
+    value: "T01160"
+    text: "Wong can bypass the authentication because it does not fail securely."
+  -
+    value: "T01170"
+    text: "This means the attacker, Wong, can log into the app without providing credentials because the login mechanism allows access when it fails."
+  -
+    value: "T01180"
+    text: "The attacks were primarily drawn from the MASVS 2.0 Mobile Application Testing guide and the Android and IOS secure coding guides"
+  -
+    value: "T01200"
+    text: "Lookups between the attacks and the guides are provided on most cards:"
+  -
+    value: "T01210"
+    text: "Test codes from the MASVS Mobile application Test Guide:"
+  -
+    value: "T01220"
+    text: "Verification IDs in “Mobile Application Security Verification Standard (MASVS) 2.0 for Mobile Applications”"
+  -
+    value: "T01240"
+    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
+  -
+    value: "T01250"
+    text: "Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, July 2012"
+  -
+    value: "T01260"
+    text: "A look-up means the attack is included within the referenced item, but does not necessarily encompass the whole of its intent. "
+  -
+    value: "T01270"
+    text: "For structured data like CAPEC, the most specific reference is provided but sometimes a cross-reference is provided that also has more specific (child) examples."
+  -
+    value: "T01280"
+    text: "There are no lookups on the six Aces and two Jokers. "
+  -
+    value: "T01290"
+    text: "Instead these cards have some general tips in italicized text."
+  -
+    value: "T01300"
+    text: "It is possible to play Cornucopia in many different ways. "
+  -
+    value: "T01301"
+    text: "For how to play, continue on pages: 11-19."
+  -
+    value: "T01400"
+    text: "Preparations"
+  -
+    value: "T01410"
+    text: "Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+  -
+    value: "T01411"
+    text: "Use the cards in this pack"
+  -
+    value: "T01420"
+    text: "Identify an application or application process to review; this might be a concept, design or an actual implementation"
+  -
+    value: "T01430"
+    text: "Create a data flow diagram, user stories, or other artefacts to help the review"
+  -
+    value: "T01440"
+    text: "Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
+  -
+    value: "T01450"
+    text: "Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
+  -
+    value: "T01500"
+    text: "Play"
+  -
+    value: "T01510"
+    text: "One suit - Cornucopia - acts as trumps."
+  -
+    value: "T01520"
+    text: "Aces are high (i.e. they beat Kings)."
+  -
+    value: "T01530"
+    text: "It helps if there is a non-player to document the issues and scores."
+  -
+    value: "T01540"
+    text: "Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
+  -
+    value: "T01550"
+    text: "Shuffle the deck and deal all the cards"
+  -
+    value: "T01560"
+    text: "To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
+  -
+    value: "T01570"
+    text: "To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
+  -
+    value: "T01580"
+    text: "Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
+  -
+    value: "T01590"
+    text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand."
+  -
+    value: "T01600"
+    text: "The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
+  -
+    value: "T01610"
+    text: "Repeat until all the cards are played"
+  -
+    value: "T01700"
+    text: "Scoring"
+  -
+    value: "T01710"
+    text: "The objective is to identify applicable threats, and win hands (rounds):"
+  -
+    value: "T01720"
+    text: "Score +1 for each card you can identify as a valid threat to the application under consideration"
+  -
+    value: "T01730"
+    text: "Score +1 if you win a round"
+  -
+    value: "T01740"
+    text: "Once all cards have been played, whoever has the most points wins"
+  -
+    value: "T01800"
+    text: "Closure"
+  -
+    value: "T01810"
+    text: "Review all the applicable threats and the matching security requirements"
+  -
+    value: "T01820"
+    text: "Create user stories, specifications and test cases as required for your development methodology."
+  -
+    value: "T01900"
+    text: "Alternative game rules"
+  -
+    value: "T01910"
+    text: "If you are new to the game, remove the Aces and two Joker cards to begin with."
+  -
+    value: "T01920"
+    text: "Add the Joker cards back in once people become more familiar with the process."
+  -
+    value: "T01930"
+    text: "Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round."
+  -
+    value: "T01940"
+    text: "Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game."
+  -
+    value: "T01950"
+    text: "Consider just playing with one suit to make a shorter session - but try to cover all the suits for every project. "
+  -
+    value: "T01960"
+    text: "Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. "
+  -
+    value: "T01970"
+    text: "Perhaps have one game of each suit each day for a week or so, if the participants cannot spare long enough for a full deck."
+  -
+    value: "T01980"
+    text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
+  -
+    value: "T01990"
+    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+  -
+    value: "T02000"
+    text: "Consider allowing extra points for especially good contributions."
+  -
+    value: "T02010"
+    text: "You can even play by yourself. "
+  -
+    value: "T02020"
+    text: "Just use the cards to act as thought-provokers. "
+  -
+    value: "T02030"
+    text: "Involving more people will be beneficial though."
+  -
+    value: "T02040"
+    text: "In Microsoft's EoP guidance, they recommend cheating as a good game strategy."
+  -
+    value: "T02600"
+    text: "Frequently asked questions"
+  -
+    value: "T02610"
+    text: "1. Can I copy or edit the game?"
+  -
+    value: "T02620"
+    text: "Yes of course."
+  -
+    value: "T02630"
+    text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
+  -
+    value: "T02640"
+    text: "Perhaps if you create a new version, you might donate it to the OWASP® Cornucopia Project?"
+  -
+    value: "T02650"
+    text: "2. How can I get involved?"
+  -
+    value: "T02660"
+    text: "Please send ideas or offers of help to the project's mailing list."
+  -
+    value: "T02670"
+    text: "3. How were the attackers' names chosen?"
+  -
+    value: "T02680"
+    text: "EoP begins every description with words like 'An attacker can...',"
+  -
+    value: "T02690"
+    text: "but Colin Watson used personal names in Cornucopia which can be thought of as external or internal people or aliases for computer systems."
+  -
+    value: "T02700"
+    text: "Likewise, the Mobile App Edition names reflect the OWASP community aspect."
+  -
+    value: "T02710"
+    text: "Therefore, apart from 'Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
+  -
+    value: "T02720"
+    text: "The cultural and gender mix simply reflects these sources of names"
+  -
+    value: "T02730"
+    text: ", and is not meant to be world-representative."
+  -
+    value: "T02750"
+    text: "4. Why aren't there any images on the card faces?"
+  -
+    value: "T02760"
+    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too."
+  -
+    value: "T02770"
+    text: "But it would be great to have additional design elements included."
+  -
+    value: "T02780"
+    text: "Any volunteers"
+  -
+    value: "T02790"
+    text: "5. Are the attacks ranked by the number on the card?"
+  -
+    value: "T02800"
+    text: "Only approximately."
+  -
+    value: "T02810"
+    text: "The risk will be application and organisation dependent, due to varying security and compliance requirements, so your own severity rating may place the cards in some other order than the numbers on the cards."
+  -
+    value: "T02820"
+    text: "6. How long does it take to play a round of cards using the full deck?"
+  -
+    value: "T02830"
+    text: "This depends upon the scope of the application, amount of discussion and how familiar the players are with application security concepts."
+  -
+    value: "T02840"
+    text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
+  -
+    value: "T02850"
+    text: "7. What sort of people should play the game?"
+  -
+    value: "T02860"
+    text: "Always try to have a mix of roles who can contribute alternative perspectives."
+  -
+    value: "T02870"
+    text: "But include someone who has a reasonable knowledge of application vulnerability terminology. "
+  -
+    value: "T02880"
+    text: "Otherwise try to include a mix of architects, developers, testers and a relevant project manager or business owner."
+  -
+    value: "T02890"
+    text: "8. Who should take notes and record scores?"
+  -
+    value: "T02900"
+    text: "It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed."
+  -
+    value: "T02910"
+    text: "This could be used as training for a more junior developer, or performed by the project manager."
+  -
+    value: "T02920"
+    text: "Some organisations have made a recording to review afterwards when the requirements are written up more formally."
+  -
+    value: "T02930"
+    text: "9. Should we always use the full deck of cards?"
+  -
+    value: "T02940"
+    text: "No. "
+  -
+    value: "T02950"
+    text: "A smaller deck is quicker to play. "
+  -
+    value: "T02960"
+    text: "Start your first game with only enough cards for two or three rounds. "
+  -
+    value: "T02970"
+    text: "Always consider removing cards that are not appropriate at all of the target application or function being reviewed. "
+  -
+    value: "T02980"
+    text: "For the first few times people play the game it is also usually better to remove the Aces and the two Jokers."
+  -
+    value: "T02990"
+    text: "It is also usual to play the game without any trumps suit until people are more familiar with the idea."
+  -
+    value: "T03000"
+    text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
+  -
+    value: "T03010"
+    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Platform & Code)."
+  -
+    value: "T03020"
+    text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
+  -
+    value: "T03850"
+    text: "OWASP's hard-working employees."
