@@ -81,11 +81,10 @@
               title: "Latest pre-release"
               files: |
                 CHANGELOG.md
-                LICENSE
                 LICENSE.md
                 README.md
                 creative-commons-attribution-3.0.txt
-                output/owasp_cornucopia_mobileapp_1.00.zip
+                output/owasp_cornucopia_mobileapp_1.00_en.zip
                 output/owasp_cornucopia_webapp_1.22_en.zip
                 output/owasp_cornucopia_webapp_1.22_es.zip
                 output/owasp_cornucopia_webapp_1.22_fr.zip
