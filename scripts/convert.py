@@ -445,7 +445,7 @@ def get_mapping_data_for_edition(
     """Get the raw data of the replacement text from correct yaml file"""
     data: Dict[Any, Dict[Any, Any]] = {}
     logging.debug(
-        f" --- Starting get_mapping_data_for_edition() for edition: "
+        " --- Starting get_mapping_data_for_edition() for edition: "
         f"{edition} , language: {language} and version: {version} "
         f" with mapping to version {get_valid_mapping_for_version(version, edition)}"
     )
@@ -804,9 +804,6 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 
 def get_valid_templates() -> List[str]:
     templates = []
-    if convert_vars.args.layout.lower() in "leaflet":
-        templates.append("bridge")
-        return templates
     if convert_vars.args.template.lower() == "all":
         for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all", "bridge_qr")]:
             templates.append(template)

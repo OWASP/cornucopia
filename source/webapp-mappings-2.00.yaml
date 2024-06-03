@@ -9,7 +9,7 @@ meta:
   languages: ["en", "es", "fr", "nl", "nl", "no-nb", "pt-br"]
 suits:
 -
-  name: "Data Validation & Encoding"
+  name: "DATA VALIDATION & ENCODING"
   cards:
   -
     id: "DV2"
@@ -108,7 +108,7 @@ suits:
     capec: [ 23, 28, 76, 152, 160, 261 ]
     safecode: [ 2, 19, 20 ]
 -
-  name: "Authentication"
+  name: "AUTHENTICATION"
   cards:
   -
     id: "AC2"
@@ -207,7 +207,7 @@ suits:
     capec: [ 115, 207, 554 ]
     safecode: [ 14, 28 ]
 -
-  name: "Session Management"
+  name: "SESSION MANAGEMENT"
   cards:
   -
     id: "SM2"
@@ -306,7 +306,7 @@ suits:
     capec: [ 21 ]
     safecode: [ 14, 28 ]
 -
-  name: "Authorization"
+  name: "AUTHORIZATION"
   cards:
   -
     id: "AZ2"
@@ -405,7 +405,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 8, 10, 11 ]
 -
-  name: "Cryptography"
+  name: "CRYPTOGRAPHY"
   cards:
   -
     id: "CR2"
@@ -504,7 +504,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 14, 21, 29 ]
 -
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
