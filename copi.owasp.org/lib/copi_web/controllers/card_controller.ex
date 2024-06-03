@@ -8,8 +8,8 @@ defmodule CopiWeb.CardController do
     render(conn, "index.html", cards: cards)
   end
 
-  def show(conn, %{"id" => id}) do
-    card = Cornucopia.get_card_by_external_id!(id)
+  def show(conn, %{"version" => version, "id" => id}) do
+    card = Cornucopia.get_card_by_external_id!(version, id)
     render(conn, "show.html", card: card)
   end
 

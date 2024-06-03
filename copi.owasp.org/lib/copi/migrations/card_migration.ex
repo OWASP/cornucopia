@@ -59,16 +59,34 @@ defmodule Copi.CardMigration do
                   owasp_appsensor: set_mappings_for_card(card["owasp_appsensor"]),
                   capec: set_mappings_for_card(card["capec"]),
                   safecode: set_mappings_for_card(card["safecode"])
-                )
-                "masvs" -> Ecto.Changeset.change(this_card,
-                owasp_scp: [],
-                owasp_asvs: [],
-                owasp_masvs: set_mappings_for_card(card["owasp_masvs"]),
-                owasp_mastg: set_mappings_for_card(card["owasp_mastg"]),
-                owasp_appsensor: [],
-                capec: set_mappings_for_card(card["capec"]),
-                safecode: set_mappings_for_card(card["safecode"])
-                )
+              )
+              "webapp" -> Ecto.Changeset.change(this_card,
+                  owasp_scp: set_mappings_for_card(card["owasp_scp"]),
+                  owasp_asvs: set_mappings_for_card(card["owasp_asvs"]),
+                  owasp_masvs: [],
+                  owasp_mastg: [],
+                  owasp_appsensor: set_mappings_for_card(card["owasp_appsensor"]),
+                  capec: set_mappings_for_card(card["capec"]),
+                  safecode: set_mappings_for_card(card["safecode"])
+              )
+              "masvs" -> Ecto.Changeset.change(this_card,
+                  owasp_scp: [],
+                  owasp_asvs: [],
+                  owasp_masvs: set_mappings_for_card(card["owasp_masvs"]),
+                  owasp_mastg: set_mappings_for_card(card["owasp_mastg"]),
+                  owasp_appsensor: [],
+                  capec: set_mappings_for_card(card["capec"]),
+                  safecode: set_mappings_for_card(card["safecode"])
+              )
+              "mobileapp" -> Ecto.Changeset.change(this_card,
+                  owasp_scp: [],
+                  owasp_asvs: [],
+                  owasp_masvs: set_mappings_for_card(card["owasp_masvs"]),
+                  owasp_mastg: set_mappings_for_card(card["owasp_mastg"]),
+                  owasp_appsensor: [],
+                  capec: set_mappings_for_card(card["capec"]),
+                  safecode: set_mappings_for_card(card["safecode"])
+              )
             end
             Repo.update this_card
           end

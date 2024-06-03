@@ -119,7 +119,9 @@ defmodule CopiWeb.GameLive.Show do
 
   def display_game_session(edition) do
     case edition do
+      "webapp" -> "Cornucopia Web Session:"
       "ecommerce" -> "Cornucopia Web Session:"
+      "mobileapp" -> "Cornucopia Mobile Session:"
       "masvs" -> "Cornucopia Mobile Session:"
       _ -> "EoP Session:"
     end
