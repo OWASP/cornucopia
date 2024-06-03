@@ -6,8 +6,8 @@ defmodule Copi.CornucopiaTest do
   describe "games" do
     alias Copi.Cornucopia.Game
 
-    @valid_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "ecommerce", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
-    @update_attrs %{created_at: "2011-05-18T15:01:01Z", edition: "ecommerce", finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
+    @valid_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
+    @update_attrs %{created_at: "2011-05-18T15:01:01Z", edition: "webapp", finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
     @invalid_attrs %{created_at: nil, finished_at: nil, edition: nil, name: nil, started_at: nil}
 
     def game_fixture(attrs \\ %{}) do
@@ -130,7 +130,7 @@ defmodule Copi.CornucopiaTest do
   describe "cards" do
     alias Copi.Cornucopia.Card
 
-    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "masvs", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: ["sadf"], owasp_masvs: [], owasp_scp: [], safecode: [], value: "some value", version: "some version"}
+    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "mobileapp", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: ["sadf"], owasp_masvs: [], owasp_scp: [], safecode: [], value: "some value", version: "some version"}
     @update_attrs %{external_id: "R2", capec: [], category: "some updated category", description: "some updated description", edition: "some updated edition", language: "some updated language", misc: "some updated misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], owasp_scp: [], safecode: [],  value: "some updated value", version: "some updated version"}
     @invalid_attrs %{external_id: nil, capec: nil, category: nil, description: nil, edition: nil, language: nil, misc: nil, owasp_appsensor: nil, owasp_asvs: nil, owasp_mastg: nil, owasp_masvs: nil, owasp_scp: nil, safecode: nil,  value: nil, version: nil}
 
@@ -158,7 +158,7 @@ defmodule Copi.CornucopiaTest do
       assert card.capec == []
       assert card.category == "some category"
       assert card.description == "some description"
-      assert card.edition == "masvs"
+      assert card.edition == "mobileapp"
       assert card.language == "some language"
       assert card.misc == "some misc"
       assert card.owasp_appsensor == []
