@@ -13,3 +13,4 @@ client_secrets.json
 version.properties
 .hypothesis/**
 output/**
+tests/test_files/output/**
