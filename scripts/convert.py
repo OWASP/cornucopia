@@ -130,22 +130,21 @@ def create_edition_from_template(
     ensure_folder_exists(os.path.dirname(output_file))
 
     # Work with docx file (and maybe convert to pdf afterwards)
-    if file_extension in (".docx"):
+    if file_extension in ".docx":
         # Get the input (template) document
         doc: docx.Document = get_docx_document(template_doc)
         language_dict.update(mapping)
         doc = replace_docx_inline_text(doc, language_dict)
         doc.save(output_file)
+        if convert_vars.args.pdf:
+            # If file type is pdf, then save a temp docx file, convert the docx to pdf
+            temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
+            save_docx_file(doc, temp_docx_file)
+            convert_docx_to_pdf(temp_docx_file, output_file)
     elif file_extension == ".idml":
         language_dict.update(mapping)
         save_idml_file(template_doc, language_dict, output_file)
 
-    if file_extension in (".docx") and convert_vars.args.pdf:
-        # If file type is pdf, then save a temp docx file, convert the docx to pdf
-        temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
-        save_docx_file(doc, temp_docx_file)
-        convert_docx_to_pdf(temp_docx_file, output_file)
-        return
     logging.info(f"New file saved: {output_file}")
 
 
@@ -283,7 +282,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--language",
         type=is_valid_string_argument,
         default="en",
-        help=("Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]"),
+        help="Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]",
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
@@ -338,7 +337,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 def is_valid_string_argument(argument: str) -> str:
     if len(argument) > 255:
         raise argparse.ArgumentTypeError("The option can not have more the 255 char.")
-    if not re.match(r"^[A-Za-z0-9\._-]+$", argument):
+    if not re.match(r"^[A-Za-z0-9._-]+$", argument):
         raise argparse.ArgumentTypeError(
             "The option can only contain a-z letters, numbers, periods, dash or underscore"
         )
@@ -461,12 +460,12 @@ def get_mapping_data_for_edition(
         try:
             data = yaml.safe_load(f)
         except yaml.YAMLError as e:
-            logging.info(f"Error loading yaml file: {file}. Error = {e}")
+            logging.info(f"Error loading yaml file: {mappingfile}. Error = {e}")
             data = {}
     if "meta" in data.keys() and "component" in data["meta"].keys() and data["meta"]["component"] == "mappings":
-        logging.debug(" --- found mappings file: " + os.path.split(file)[1])
+        logging.debug(" --- found mappings file: " + os.path.split(mappingfile)[1])
     else:
-        logging.debug(" --- found source file, but it was missing metadata: " + os.path.split(file)[1])
+        logging.debug(" --- found source file, but it was missing metadata: " + os.path.split(mappingfile)[1])
         if "meta" in list(data.keys()):
             meta_keys = data["meta"].keys()
             logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
@@ -477,8 +476,7 @@ def get_mapping_data_for_edition(
 
 def get_replacement_mapping_data(input_data: Dict[str, Any]) -> Dict[str, str]:
     """Loop through language file data and build up a find-replace dict"""
-    data: Dict[str, Any] = {}
-    data["meta"] = get_meta_data(input_data)
+    data: Dict[str, Any] = {"meta": get_meta_data(input_data)}
     for key in list(k for k in input_data.keys() if k != "meta"):
         suit_tags, suit_key = get_suit_tags_and_key(key, input_data["meta"]["edition"])
         logging.debug(f" --- key = {key}.")
@@ -544,7 +542,6 @@ def get_language_data(
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
-    data = {}
     logging.debug(
         f" --- Starting get_language_data() for edition: {edition} "
         "requesting language: {language} for version: {version} "
@@ -561,15 +558,15 @@ def get_language_data(
 
     with open(language_file, "r", encoding="utf-8") as f:
         try:
-            data = yaml.safe_load(f)
+            data: dict[Any, Any] = yaml.safe_load(f)
         except yaml.YAMLError as e:
-            logging.info(f"Error loading yaml file: {file}. Error = {e}")
+            logging.info(f"Error loading yaml file: {language_file}. Error = {e}")
             data = {}
 
     if data["meta"]["language"].lower() == language:
-        logging.debug(" --- found source language file: " + os.path.split(file)[1])
+        logging.debug(" --- found source language file: " + os.path.split(language_file)[1])
     else:
-        logging.debug(" --- found source file: " + os.path.split(file)[1])
+        logging.debug(" --- found source file: " + os.path.split(language_file)[1])
         if "meta" in list(data.keys()):
             meta_keys = data["meta"].keys()
             logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
@@ -762,7 +759,7 @@ def get_valid_layout_choices() -> List[str]:
         for layout in convert_vars.LAYOUT_CHOICES:
             if layout not in ("all", "guide"):
                 layouts.append(layout)
-            if layout == "guide" and convert_vars.args.edition.lower() in ("webapp"):
+            if layout == "guide" and convert_vars.args.edition.lower() in "webapp":
                 layouts.append(layout)
     else:
         layouts.append(convert_vars.args.layout)
@@ -807,7 +804,7 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 
 def get_valid_templates() -> List[str]:
     templates = []
-    if convert_vars.args.layout.lower() in ("leaflet"):
+    if convert_vars.args.layout.lower() in "leaflet":
         templates.append("bridge")
         return templates
     if convert_vars.args.template.lower() == "all":
@@ -825,9 +822,9 @@ def get_valid_edition_choices() -> List[str]:
     editions = []
     if convert_vars.args.edition.lower() == "all" or not convert_vars.args.edition.lower():
         for edition in convert_vars.EDITION_CHOICES:
-            if edition not in ("all"):
+            if edition not in "all":
                 editions.append(edition)
-    if convert_vars.args.edition and convert_vars.args.edition not in ("all"):
+    if convert_vars.args.edition and convert_vars.args.edition not in "all":
         editions.append(convert_vars.args.edition)
     return editions
 
@@ -937,7 +934,7 @@ def rename_output_file(file_extension: str, template: str, layout: str, meta: Di
     output_filename = check_fix_file_extension(output_filename, file_extension)
     logging.debug(f" --- output_filename AFTER fix extension = {output_filename}")
 
-    # Do the replacement of filename place-holders with meta data
+    # Do the replacement of filename place-holders with metadata
     find_replace = get_find_replace_list(meta, template, layout)
     f = os.path.basename(output_filename)
     for r in find_replace:
