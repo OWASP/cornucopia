@@ -50,12 +50,9 @@
               CC_TEST_REPORTER_ID: 7482a81acb1b6de49fa6fd2769a014bb9ae8bee408161c23d400b2ac9e95b7cf          
           - name: Generate new output files
             run: |
-              pipenv run python scripts/convert.py -l all -lt all -t bridge -v 1.22 -e webapp
-              pipenv run python scripts/convert.py -l all -lt cards -t tarot -v 1.22 -e webapp
-              pipenv run python scripts/convert.py -l all -lt all -t bridge -v 2.00 -e webapp
-              pipenv run python scripts/convert.py -l all -lt cards -t tarot -v 2.00 -e webapp
-              pipenv run python scripts/convert.py -l en -lt all -t bridge -v 1.00 -e mobileapp
-              pipenv run python scripts/convert.py -l en -lt cards -t tarot -v 1.00 -e mobileapp
+              pipenv run python scripts/convert.py -l all -lt all -t all -v 1.22 -e webapp
+              pipenv run python scripts/convert.py -l all -lt all -t all -v 2.00 -e webapp
+              pipenv run python scripts/convert.py -l en -lt all -t all -v 1.00 -e mobileapp
 
               zip output/owasp_cornucopia_mobileapp_1.00_en.zip output/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml 
               zip output/owasp_cornucopia_webapp_1.22_en.zip output/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml output/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml output/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_1.22_leaflet_tarot_en.idml
