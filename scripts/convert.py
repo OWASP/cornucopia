@@ -445,7 +445,7 @@ def get_mapping_data_for_edition(
     """Get the raw data of the replacement text from correct yaml file"""
     data: Dict[Any, Dict[Any, Any]] = {}
     logging.debug(
-        f" --- Starting get_mapping_data_for_edition() for edition: "
+        " --- Starting get_mapping_data_for_edition() for edition: "
         f"{edition} , language: {language} and version: {version} "
         f" with mapping to version {get_valid_mapping_for_version(version, edition)}"
     )
