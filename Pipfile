@@ -31,7 +31,7 @@ docx2pdf = "==0.1.8"
 lxml = "==5.2.2"
 defusedxml = "==0.7.1"
 types-defusedxml = "==0.7.0.20240218"
-pathvalidate = "==3.1.0"
+pathvalidate = "==3.2.0"
 security = "==1.2.1"
 
 [requires]
