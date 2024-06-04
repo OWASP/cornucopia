@@ -3,6 +3,8 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   alias Copi.Cornucopia
 
+  import Copi.Models.DeckSuits
+
   @impl true
 
   def render(assigns) do
@@ -34,6 +36,16 @@ defmodule CopiWeb.GameLive.CreateGameForm do
           >
         </.input>
 
+        <.label>Choose the suits you want to play:</.label>
+        <div class="bg-zinc-400 flex flex-row justify-start">
+        <%= for suit <- get_ecommerce_suits(assigns) do %>
+
+       <.input label={"#{suit}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
+
+        <% end %>
+        </div>
+
+
         <:actions>
           <.primary_button phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
         </:actions>
@@ -53,6 +65,10 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   @impl true
   def handle_event("validate", %{"game" => game_params}, socket) do
+
+    selected_suits = get_list_of_suits_from_checkbox(game_params)
+
+
     changeset =
       socket.assigns.game
       |> Cornucopia.change_game(game_params)
@@ -62,6 +78,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   end
 
   def handle_event("save", %{"game" => game_params}, socket) do
+    IO.puts("game created: " <> inspect(game_params))
     save_game(socket, socket.assigns.action, game_params)
   end
 
