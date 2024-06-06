@@ -76,8 +76,12 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   end
 
   def handle_event("save", %{"game" => game_params}, socket) do
-    IO.puts("game created: " <> inspect(game_params))
-    save_game(socket, socket.assigns.action, game_params)
+    game_with_suits = %{
+      name: game_params["name"],
+      edition: game_params["edition"],
+      suits: get_list_of_suits_from_checkbox(game_params)
+    }
+    save_game(socket, socket.assigns.action, game_with_suits)
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
