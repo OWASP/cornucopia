@@ -37,11 +37,9 @@ defmodule CopiWeb.GameLive.CreateGameForm do
         </.input>
 
         <.label>Choose the suits you want to play:</.label>
-        <div class="bg-zinc-400 flex flex-row justify-start">
-        <%= for suit <- get_ecommerce_suits(assigns) do %>
-
-       <.input label={"#{suit}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
-
+        <div class="flex flex-row justify-start">
+        <%= for suit <- Copi.Cornucopia.get_suits_from_deck(assigns) do %>
+          <.input label={"#{suit}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
         <% end %>
         </div>
 

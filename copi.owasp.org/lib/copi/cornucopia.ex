@@ -115,7 +115,6 @@ defmodule Copi.Cornucopia do
   """
 
   def list_players(game_id) do
-
     Repo.all(from p in Player, where: p.game_id == ^game_id)
   end
 
@@ -314,5 +313,22 @@ defmodule Copi.Cornucopia do
   """
   def change_card(%Card{} = card, attrs \\ %{}) do
     Card.changeset(card, attrs)
+  end
+
+  def get_suits_from_deck(selected_edition) do
+    database_query =
+      if selected_edition.form.source.changes == nil || selected_edition.form.source.changes == %{}  do
+        from c in Card,
+          where: c.edition == "ecommerce",
+          select: c.category,
+          distinct: true
+      else
+        from c in Card,
+            where: c.edition == ^selected_edition.form.source.changes.edition,
+            select: c.category,
+            distinct: true
+      end
+
+    List.delete(Repo.all(database_query), "Wild Card") |> Enum.sort()
   end
 end
