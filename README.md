@@ -82,7 +82,7 @@ options:
   -p, --pdf             whether to generate a pdf in addition to the printable document. Default = Does not generate pdf
   -d, --debug           Output additional information to debug script
   -l LANGUAGE, --language LANGUAGE
-                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`,  `hu`]
   -t TEMPLATE, --template TEMPLATE
                         From which template to produce the document. [`bridge`, `qr` or `tarot`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
