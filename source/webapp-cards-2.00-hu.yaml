@@ -35,7 +35,7 @@ suits:
   -
     id: "DV8"
     value: "8"
-    desc: "Sarah meg tudja kerülni a központi ellenőrző rutinokat, mert azok nem mindenhol vannak használatban"
+    desc: "Oana meg tudja kerülni a központi ellenőrző rutinokat, mert azok nem mindenhol vannak használatban"
   -
     id: "DV9"
     value: "9"
@@ -47,11 +47,11 @@ suits:
   -
     id: "DVJ"
     value: "J"
-    desc: "Dennis át tudja venni az irányítást a bemenet ellenőrzés fölött, vagy a kimenet kódolást végző kód, bemeneti vagy kimeneti adat ellenőrzés, vagy a kimeneti kódolás vagy rutinok fölött, hogy kijátssza azokat."
+    desc: "Toby át tudja venni az irányítást a bemenet ellenőrzés fölött, vagy a kimenet kódolást végző kód, bemeneti vagy kimeneti adat ellenőrzés, vagy a kimeneti kódolás vagy rutinok fölött, hogy kijátssza azokat."
   -
     id: "DVQ"
     value: "Q"
-    desc: "Geoff adatot tud beszúrni egy kliens vagy eszköz oldali fordítóba, mert a paraméterezett interfész nincs használatban, vagy nem megfelelően implementálták, vagy az adatot nem megfelelően kódolták a környezet függvényében, vagy nincs korlátozás a kódon, vagy a kezelt adaton"
+    desc: "Xavier adatot tud beszúrni egy kliens vagy eszköz oldali fordítóba, mert a paraméterezett interfész nincs használatban, vagy nem megfelelően implementálták, vagy az adatot nem megfelelően kódolták a környezet függvényében, vagy nincs korlátozás a kódon, vagy a kezelt adaton"
   -
     id: "DVK"
     value: "K"
@@ -107,7 +107,7 @@ suits:
   -
     id: "ACQ"
     value: "Q"
-    desc: "Jaime can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
+    desc: "Johan can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
   -
     id: "ACK"
     value: "K"
@@ -143,7 +143,7 @@ suits:
   -
     id: "SM7"
     value: "7"
-    desc: "Casey can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
+    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out does not properly terminate the session"
   -
     id: "SM8"
     value: "8"
@@ -275,7 +275,7 @@ suits:
   -
     id: "CRQ"
     value: "Q"
-    desc: "Randolph can access or predict the master cryptographic secrets"
+    desc: "Artim can access or predict the master cryptographic secrets"
   -
     id: "CRK"
     value: "K"
@@ -323,7 +323,7 @@ suits:
   -
     id: "COX"
     value: "10"
-    desc: "Xavier can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
+    desc: "Spyros can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
   -
     id: "COJ"
     value: "J"
@@ -335,7 +335,7 @@ suits:
   -
     id: "COK"
     value: "K"
-    desc: "Gareth can utilize the application to deny service to some or all of its users"
+    desc: "Grant can utilize the application to deny service to some or all of its users"
   -
     id: "COA"
     value: "A"
