@@ -3,7 +3,7 @@ meta:
   edition: "ecommerce"
   component: "cards"
   language: "HU"
-  version: "1.21"
+  version: "2.00"
 suits:
 -
   name: "Adat ellenőrzés & kódolás"
@@ -1230,4 +1230,3 @@ paragraphs:
   -
     value: "T03950"
     text: "See the project website for further information and presentation materials."
-

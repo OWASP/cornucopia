@@ -26,7 +26,7 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-br"]
+    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-br", "hu"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot"]
