@@ -36,12 +36,15 @@ defmodule CopiWeb.GameLive.CreateGameForm do
           >
         </.input>
 
+      <div>
         <.label>Choose the suits you want to play:</.label>
         <div class="flex flex-row justify-start">
         <%= for suit <- Copi.Cornucopia.get_suits_from_deck(assigns) do %>
           <.input label={"#{suit}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
         <% end %>
         </div>
+      </div>
+
 
 
         <:actions>
@@ -63,15 +66,14 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   @impl true
   def handle_event("validate", %{"game" => game_params}, socket) do
-
     selected_suits = get_list_of_suits_from_checkbox(game_params)
-
 
     changeset =
       socket.assigns.game
       |> Cornucopia.change_game(game_params)
       |> Map.put(:action, :validate)
-      send(self(), {:update_parent, changeset})
+
+    send(self(), {:update_parent, changeset})
     {:noreply, assign_form(socket, changeset)}
   end
 
@@ -81,6 +83,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       edition: game_params["edition"],
       suits: get_list_of_suits_from_checkbox(game_params)
     }
+
     save_game(socket, socket.assigns.action, game_with_suits)
   end
 
