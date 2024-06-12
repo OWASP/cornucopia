@@ -252,7 +252,7 @@ defmodule Copi.Cornucopia do
       ** (Ecto.NoResultsError)
 
   """
-  def get_card_by_external_id!(external_id), do: Repo.get_by!(Card, external_id: external_id)
+  def get_card_by_external_id!(version, external_id), do: Repo.get_by!(Card, [version: version, external_id: external_id])
 
   @doc """
   Creates a card.

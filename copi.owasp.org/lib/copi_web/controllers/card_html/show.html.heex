@@ -1,7 +1,7 @@
 <%= if @card do %>
 
   <%= cond do %>
-      <% @card.edition == "ecommerce" -> %>
+      <% @card.edition in ["webapp", "ecommerce"] -> %>
 
     <div class={["card", @card.value, Slug.slugify @card.category]}>
       <div class="left-bar"><%= @card.category %></div>
@@ -80,7 +80,7 @@
       </div>
     </div>
 
-  <% @card.edition == "masvs" -> %>
+  <% @card.edition in ["mobileapp", "masvs"] -> %>
 
       <div class={["card", @card.value, "#{Slug.slugify @card.category}-mobile"]}>
         <div class="left-bar"><%= @card.category %></div>

@@ -29,8 +29,8 @@ defmodule CopiWeb.GameLive.CreateGameForm do
           type="select"
           label={gettext "Choose the type of game you wish to play"}
           options={[
-              {"Cornucopia Web (for web apps and APIs)", "ecommerce"},
-              {"Cornucopia Mobile (for mobile apps)", "masvs"},
+              {"Cornucopia Web (for web apps and APIs)", "webapp"},
+              {"Cornucopia Mobile (for mobile apps)", "mobileapp"},
               {"Elevation of Privilege (for cloud platforms, infrastructure, apps, anything!)", "eop"},
           ]}
           >
