@@ -155,8 +155,8 @@ A standard blead set to 3mm for all 4 sides.
 
 ### Paper
 
-Use 0.300mm for the bridge cards and 0.350mm for the tarot cards.
-For the case and leaflet, just use common sense, The case should have enough room for a 20 page leaflet (printed front and back) with the 0.150-0.250mm paper if need be.
+Use 300gsm for both the bridge cards and the tarot cards.
+For the case, we would recommend folding box board with anti-scuff lamination and 100gsm uncoated stock for the leaflet. The leaflets could also be laminated, but it might make them springy.
 
 ## Contributing to Development
 
