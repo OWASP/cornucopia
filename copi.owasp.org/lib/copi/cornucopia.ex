@@ -218,9 +218,9 @@ defmodule Copi.Cornucopia do
     all_cards = Card |> where(edition: ^edition) |> order_by(fragment("RANDOM()")) |> Repo.all()
 
     Enum.filter(all_cards, fn card ->
-     card.category in suits
-     end)
-   end
+      card.category in suits
+    end)
+  end
 
   @doc """
   Gets a single card.
@@ -252,7 +252,8 @@ defmodule Copi.Cornucopia do
       ** (Ecto.NoResultsError)
 
   """
-  def get_card_by_external_id!(version, external_id), do: Repo.get_by!(Card, [version: version, external_id: external_id])
+  def get_card_by_external_id!(version, external_id),
+    do: Repo.get_by!(Card, version: version, external_id: external_id)
 
   @doc """
   Creates a card.
@@ -321,18 +322,22 @@ defmodule Copi.Cornucopia do
 
   def get_suits_from_deck(selected_edition) do
     database_query =
-      if selected_edition.form.source.changes == nil || selected_edition.form.source.changes == %{}  do
+      if selected_edition.form.source.changes == nil ||
+           selected_edition.form.source.changes == %{} do
         from c in Card,
-          where: c.edition == "ecommerce",
+          where: c.edition == "webapp",
           select: c.category,
           distinct: true
       else
         from c in Card,
-            where: c.edition == ^selected_edition.form.source.changes.edition,
-            select: c.category,
-            distinct: true
+          where: c.edition == ^selected_edition.form.source.changes.edition,
+          select: c.category,
+          distinct: true
       end
 
-    List.delete(Repo.all(database_query), "Wild Card") |> Enum.sort()
+    Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
+      List.delete(acc, item)
+    end)
+    |> Enum.sort()
   end
 end

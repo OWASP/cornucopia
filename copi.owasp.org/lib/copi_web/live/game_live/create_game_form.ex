@@ -38,14 +38,12 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
       <div>
         <.label>Choose the suits you want to play:</.label>
-        <div class="flex flex-row justify-start">
+        <div class="mt-2 flex flex-row justify-start">
         <%= for suit <- Copi.Cornucopia.get_suits_from_deck(assigns) do %>
-          <.input label={"#{suit}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
+          <.input label={"#{String.capitalize(suit)}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
         <% end %>
         </div>
       </div>
-
-
 
         <:actions>
           <.primary_button phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
