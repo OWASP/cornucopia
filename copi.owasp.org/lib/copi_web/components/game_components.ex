@@ -82,6 +82,6 @@ defmodule CopiWeb.GameComponents do
   defp lead_suit_cards(cards) do
     Enum.group_by(cards, fn card -> card.played_in_round end) # Convert to map where {round, [played_cards]}
       |> Map.new(fn {round, played_cards} -> {round, Enum.sort_by(played_cards, &(&1.updated_at))} end) # Sort played cards in rounds by when played
-      |> Enum.flat_map(fn {_round, ordered_played_cards} -> Enum.filter(ordered_played_cards, fn card -> card.card.category == List.first(ordered_played_cards).card.category or card.card.value in ["JokerA", "JokerB"] end) end) # Back to a list of just the lead suit cards in each round
+      |> Enum.flat_map(fn {_round, ordered_played_cards} -> Enum.filter(ordered_played_cards, fn card -> card.card.category == List.first(ordered_played_cards).card.category or card.card.value in ["JokerA", "JokerB"] or String.upcase(card.card.category) == "CORNUCOPIA" end) end) # Back to a list of just the lead suit cards in each round (plus jokers and trump cards)
   end
 end
