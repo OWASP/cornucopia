@@ -9,8 +9,9 @@
 
   <%= if @player.game.started_at do %>
 
-  <% first_card_played = ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>
+  <% first_card_played = Copi.Cornucopia.ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>
   <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
+  <% highest_scoring_card = Copi.Cornucopia.highest_scoring_card_in_round(@game, @game.rounds_played + 1) %>
 
   <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
     <div class="px-4 py-4 sm:px-6">
@@ -18,7 +19,14 @@
 
         <div class="flex flex-row gap-4 place-items-center justify-between">
 
-          <div>Hi <%= @player.name %>, it's round <strong><%= @game.rounds_played + 1 %></strong></div>
+          <div>Hi <%= @player.name %>, it's round <strong><%= @game.rounds_played + 1 %></strong>:
+            <%= if first_card_played do %>
+              <em><%= first_card_played.card.category %></em>
+            <% else %>
+              <em>No lead suit yet</em>
+            <% end %>
+            
+          </div>
 
           <div class="flex gap-4 place-items-center">
             <%= if round_closed?(@game) do %>
@@ -38,7 +46,7 @@
     </div>
     <div class="px-4 py-5 sm:p-6">
 
-      <div class="flex flex-row justify-between gap-x-4" id="table">
+      <div class="flex flex-row justify-between gap-x-4 px-1" id="table">
         <%= for player <- @game.players |> player_first(@player) do %>
           <% player_card = card_played_in_round(player.dealt_cards, @game.rounds_played + 1) %>
 
@@ -50,7 +58,13 @@
                     <p>Drop a card here to play it!</p>
                   <% else %>
                     <%= if player_card != nil && Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
-                    <p class="font-bold">Your Card Scored!</p> 
+                    <p class="font-bold">Your Card Scored
+                      <%= if highest_scoring_card && highest_scoring_card.id == player_card.id do %>
+                        +2!
+                      <% else %>
+                        +1!
+                      <% end %>
+                    </p> 
                     <% else %>
                         <p>Your Card</p>
                     <% end %>
@@ -58,14 +72,20 @@
 
                 <% else %>
                 <%= if player_card != nil &&  Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
-                <p class="font-bold"> <%= player.name %> Scored!</p> 
+                  <p class="font-bold"> <%= player.name %> Scored
+                    <%= if highest_scoring_card && highest_scoring_card.id == player_card.id do %>
+                      +2!
+                    <% else %>
+                      +1!
+                    <% end %>
+                  </p> 
                 <% else %>
                   <p> <%= player.name %></p> 
                 <% end %>
                 <% end %>
               </div>
               
-              <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card} first_card_played={first_card_played}> 
+              <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card} first_card_played={first_card_played} highest_scoring_card={highest_scoring_card}> 
                 <CopiWeb.CardHTML.show card={player_card.card} />
               </.card_drop_zone>
 
