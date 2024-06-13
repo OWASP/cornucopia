@@ -90,9 +90,9 @@
   
 
 
+  <p class="mt-4">Your cards</p>
 
   <div id="hand" phx-hook="DragDrop">
-
     <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
       <div data-game={@player.game.id} data-player={@player.id} data-dealtcard={dealt_card.id}>
         <CopiWeb.CardHTML.show card={dealt_card.card} />
@@ -117,4 +117,7 @@
     </div>
    
   <% end %>
+
+  <.game_scores id="game_scores" game={@game} />
+
 <% end %>
