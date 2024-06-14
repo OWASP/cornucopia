@@ -9,6 +9,7 @@ meta:
   languages: ["en"]
 suits:
 -
+  id: "PC"
   name: "Platform & Code"
   cards:
   -
@@ -96,6 +97,7 @@ suits:
     capec: [ 137, 138, 499, 502, 586 ]
     safecode: [ "-" ]
 -
+  id: "AA"
   name: "Authentication & Authorization"
   cards:
   -
@@ -183,6 +185,7 @@ suits:
     capec: [ 114, 115, 207, 554 ]
     safecode: [ 8, 10, 11 ]
 -
+  id: "NS"
   name: "Network & Storage"
   cards:
   -
@@ -270,6 +273,7 @@ suits:
     capec: [ 75, 76, 113, 153, 161, 165, 176, 190, 207, 210, 554, 562 ]
     safecode: [ 12, 19 ]
 -
+  id: "RS"
   name: "Resilience"
   cards:
   -
@@ -357,6 +361,7 @@ suits:
     capec: [ 167, 554 ]
     safecode: [ "-" ]
 -
+  id: "CRM"
   name: "Cryptography"
   cards:
   -
@@ -444,6 +449,7 @@ suits:
     capec: [ 54, 97, 116, 117, 220 ]
     safecode: [ 14, 21, 29 ]
 -
+  id: "COM"
   name: "Cornucopia"
   cards:
   -

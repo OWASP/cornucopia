@@ -349,26 +349,6 @@ class TestGetTemplateForEdition(unittest.TestCase):
         self.assertEqual(want_template_doc, got_template_doc)
 
 
-class TestGetCardIds(unittest.TestCase):
-    def setUp(self) -> None:
-        c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
-        self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files"])
-
-    def test_get_language_data_from_file(self) -> None:
-        input_language = "en"
-        input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "webapp-cards-1.22-en.yaml"])]
-        language_data = c.get_language_data(input_yaml_files, input_language)
-        want_ids = ["DVA", "DV2", "DV3", "JOA"]
-        got_ids = list(c.get_card_ids(language_data, "id"))
-        self.assertEqual(want_ids, got_ids)
-
-    def test_get_language_data_from_list(self) -> None:
-        input_dict = {"id": "This", "identity": "is", "di": "a", "value": "pointless", "not": "dictionary"}
-        want_ids = ["This"]
-        got_ids = list(c.get_card_ids(input_dict, "id"))
-        self.assertEqual(want_ids, got_ids)
-
-
 class TestRenameOutputFile(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
@@ -482,6 +462,7 @@ class TestGetMetaData(unittest.TestCase):
             "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.22"},
             "suits": [
                 {
+                    "id": "VE",
                     "name": "Data validation & encoding",
                     "cards": [
                         {
@@ -528,6 +509,7 @@ class TestGetLanguageData(unittest.TestCase):
             "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.22"},
             "suits": [
                 {
+                    "id": "VE",
                     "name": "Data validation & encoding",
                     "cards": [
                         {
@@ -544,6 +526,7 @@ class TestGetLanguageData(unittest.TestCase):
             ],
             "paragraphs": [
                 {
+                    "id": "Common",
                     "name": "Common",
                     "cards": [
                         {
@@ -611,7 +594,7 @@ class TestGetLanguageData(unittest.TestCase):
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_mapping_data_for_edition_first_suit_first_card(self) -> None:
-        want_first_suit_keys = {"name": "", "cards": ""}.keys()
+        want_first_suit_keys = {"id": "", "name": "", "cards": ""}.keys()
         want_first_suit_first_card = {
             "value": "2",
             "owasp_scp": [69, 107, 108, 109, 136, 137, 153, 156, 158, 162],
@@ -638,6 +621,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.00"},
             "suits": [
                 {
+                    "id": "VE",
                     "name": "Data validation & encoding",
                     "cards": [
                         {
@@ -654,6 +638,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             ],
             "paragraphs": [
                 {
+                    "id": "Common",
                     "name": "Common",
                     "cards": [
                         {
@@ -716,7 +701,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_mapping_data_for_edition_first_suit_first_card_asvs4(self) -> None:
-        want_first_suit_keys = {"name": "", "cards": ""}.keys()
+        want_first_suit_keys = {"id": "", "name": "", "cards": ""}.keys()
         want_first_suit_first_card = {
             "value": "2",
             "owasp_scp": [69, 107, 108, 109, 136, 137, 153, 156, 158, 162],
@@ -934,6 +919,7 @@ class TestGetReplacementDict(unittest.TestCase):
             "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.22"},
             "suits": [
                 {
+                    "id": "VE",
                     "name": "Data validation & encoding",
                     "cards": [
                         {
@@ -945,6 +931,7 @@ class TestGetReplacementDict(unittest.TestCase):
                     ],
                 },
                 {
+                    "id": "AT",
                     "name": "Authentication",
                     "cards": [
                         {
@@ -958,8 +945,9 @@ class TestGetReplacementDict(unittest.TestCase):
             ],
         }
 
-    def test_get_replacement_dict_success(self) -> None:
+    def test_build_template_dict_success(self) -> None:
         want_data = {
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.22"},
             "${VE_suit}": "Data validation & encoding",
             "${VE_VEA_desc}": "You have invented a new attack against Data Validation",
             "${VE_VEA_misc}": "Read more about this topic in OWASP's free Cheat Sheets",
@@ -970,7 +958,7 @@ class TestGetReplacementDict(unittest.TestCase):
             "${AT_AT2_desc}": "James can undertake authentication functions without",
         }
 
-        got_data = c.get_replacement_dict(self.input_data)
+        got_data = c.build_template_dict(self.input_data)
         self.assertDictEqual(got_data, want_data)
 
 
@@ -1069,6 +1057,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "templates": ["bridge_qr", "bridge", "tarot"],
                 "languages": ["en", "es"],
             },
+            "${VE_suit}": "Data validation & encoding",
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
             "${VE_VE2_owasp_asvs}": "1.10, 4.5, 8.1, 11.5, 19.1, 19.5",
             "${VE_VE2_owasp_appsensor}": "HT1, HT2, HT3",

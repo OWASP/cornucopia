@@ -6,6 +6,7 @@ meta:
   version: "1.00"
 suits:
 -
+  id: "PC"
   name: "Platform & Code"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "You have invented a new attack against “Platform and Code”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Code Quality” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
+  id: "AA"
   name: "Authentication & Authorization"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "You have invented a new attack against “Authentication & Authorization”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Authentication Architectures” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
+  id: "NS"
   name: "Network & Storage"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "You have invented a new attack against “Network & Storage”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Network Communication” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
+  id: "RS"
   name: "Resilience"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "You have invented a new attack against Authorization"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Tampering and Reverse Engineering” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
+  id: "CRM"
   name: "Cryptography"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "You have invented a new attack against “Cryptography”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Cryptography” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
+  id: "CO"
   name: "Cornucopia"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "You have invented a new attack of any type"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App User Privacy Protection” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
+  id: "WC"
   name: "Wild Card"
   cards:
   -
@@ -358,6 +365,7 @@ suits:
     misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

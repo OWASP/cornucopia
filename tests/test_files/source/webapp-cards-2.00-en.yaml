@@ -6,6 +6,7 @@ meta:
   version: "2.00"
 suits:
 -
+  id: "VE"
   name: "Data validation & encoding"
   cards:
   -
@@ -22,6 +23,7 @@ suits:
     value: "3"
     desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats"
 -
+  id: "WC"
   name: "Wild Card"
   cards:
   -
@@ -31,6 +33,7 @@ suits:
     misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

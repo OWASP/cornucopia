@@ -60,8 +60,9 @@ usage: convert.py [-h] [-i INPUTFILE] [-v VERSION] [-o OUTPUTFILE] [-p] [-d] [-l
                   [-lt LAYOUT]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
-Example usage: $ ./cornucopia/convert.py --pdf -lt guide -l es -v 2.00
-Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00 -o 'my_output_folder/owasp_cornucopia_edition_version_layout_language_template.idml'
+Example usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.00
+Example usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 1.0 -e eop -i ./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-1.0-cards-en.idml
+Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00 -o 'my_output_folder\owasp_cornucopia_edition_version_layout_language_template.idml'
 
 options:
   -h, --help            show this help message and exit
@@ -74,28 +75,35 @@ options:
                         Version 1.22 and 1.2x will deliver cards mapped to ASVS 3.0
                         Version 2.00 and 2.0x will deliver cards mapped to ASVS 4.0
                         Version 1.00 and 1.0x will deliver cards mapped to MASVS 2.0
-                        Version all will deliver all versions
-                        Version latest will deliver the latest deck versions
+                        Version all will deliver all versions of cornucopia
+                        Version latest will deliver the latest deck versions of cornucopia
+                        You can also specify another version explicitly if needed. If so, there needs to be a yaml file in the source folder where the name contains the version code. Eg. edition-template-ver-lang.yaml
   -o OUTPUTFILE, --outputfile OUTPUTFILE
                         Specify a path and name of output file to generate. (caution: existing file will be overwritten).
-                        default = output\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|pdf|idml)
-  -p, --pdf             whether to generate a pdf in addition to the printable document. Default = Does not generate pdf
+                        Eg. output\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|pdf|idml)
+  -p, --pdf             Whether to generate a pdf in addition to the printable document. Does not generate a pdf by default. Only docx can be converted to pdf for the moment.
   -d, --debug           Output additional information to debug script
   -l LANGUAGE, --language LANGUAGE
-                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`] you can also specify your own language file. If so, there needs to be a yaml file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml
   -t TEMPLATE, --template TEMPLATE
                         From which template to produce the document. [`bridge`, `qr` or `tarot`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
-                        Static cards are bridge and have the mappings printed on them, tarot cards are 80 mm x 120mm large, qr cards have a QRCode that points to an maintained list.
+                        Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them,
+                        tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large,
+                        qr cards have a QRCode that points to an maintained list.
+                        You can also speficy your own template. If so, there needs to be a file in the templates folder where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml
   -e EDITION, --edition EDITION
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
-                        The various Cornucopia decks. `web` will give you the Website App edition.`mobileapp` will give you the Mobile App edition.
+                        The various Cornucopia decks. `web` will give you the Website App edition.
+                        `mobileapp` will give you the Mobile App edition.
+                        You can also speficy your own edition. If so, there needs to be a yaml file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml
   -lt LAYOUT, --layout LAYOUT
                         Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]
                         The various Cornucopia document layouts.
                         `cards` will output the high quality print card deck.
                         `guide` will generate the docx guide with the low quality print deck.
                         `leaflet` will output the high quality print leaflet.
+                        You can also speficy your own layout. If so, there needs to be a yaml file in the source folder where the name contains the layout code. Eg. edition-layout-ver-lang.yaml
 ```
 
 ## Printing

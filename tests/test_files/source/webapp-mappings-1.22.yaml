@@ -9,6 +9,7 @@ meta:
   languages: ["en", "es"]
 suits:
 -
+  id: "VE"
   name: "Data validation & encoding"
   cards:
   -

@@ -12,7 +12,7 @@ import sys
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
-from typing import Any, Dict, Generator, List, Tuple, Union
+from typing import Any, Dict, List, Tuple
 from operator import itemgetter
 from itertools import groupby
 from pathvalidate.argparse import validate_filepath_arg
@@ -32,6 +32,7 @@ class ConvertVars:
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
         "webapp": {"1.22": "1.22", "2.00": "2.00"},
+        "against-security": {"1.00": "1.00"},
         "mobileapp": {"1.00": "1.00"},
         "all": {"1.22": "1.22", "2.00": "2.00", "1.00": "1.00"},
     }
@@ -106,13 +107,13 @@ def create_edition_from_template(
             f"No mapping file found for version: {version}, lang: {language}, edition: {edition},"
             f" template: {template}, layout: {layout}"
         )
-        return
+        # return
 
     # Get the language data from the correct language file (checks vars.args.language to select the correct file)
     language_data: Dict[str, Dict[str, str]] = get_language_data(yaml_files, language, version, edition)
 
-    # Get the dict of replacement data
-    language_dict: Dict[str, str] = get_replacement_dict(language_data)
+    # Transform the language data into the template mapping
+    language_dict: Dict[str, str] = map_language_data_to_template(language_data)
 
     # Get meta data from language data
     meta: Dict[str, str] = get_meta_data(language_data)
@@ -221,9 +222,11 @@ def main() -> None:
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
-    description += "\nExample usage: $ ./cornucopia/convert.py --pdf -lt guide -l es -v 2.00"
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.00 "
-    description += "-o 'my_output_folder/owasp_cornucopia_edition_version_layout_language_template.idml'"
+    description += "\nExample usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.00"
+    description += "\nExample usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 1.0 -e eop -i "
+    description += "./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-1.0-cards-en.idml"
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.00 -o"
+    description += " my_output_folder\\owasp_cornucopia_edition_version_layout_language_template.idml"
     parser = argparse.ArgumentParser(
         description=description, formatter_class=argparse.RawTextHelpFormatter, exit_on_error=False
     )
@@ -249,8 +252,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "\nVersion 1.22 and 1.2x will deliver cards mapped to ASVS 3.0"
             "\nVersion 2.00 and 2.0x will deliver cards mapped to ASVS 4.0"
             "\nVersion 1.00 and 1.0x will deliver cards mapped to MASVS 2.0"
-            "\nVersion all will deliver all versions"
-            "\nVersion latest will deliver the latest deck versions"
+            "\nVersion all will deliver all versions of cornucopia"
+            "\nVersion latest will deliver the latest deck versions of cornucopia"
+            "\nYou can also specify another version explicitly if needed. "
+            "If so, there needs to be a yaml file in the source folder where the name contains "
+            "the version code. Eg. edition-template-ver-lang.yaml"
         ),
     )
     parser.add_argument(
@@ -260,7 +266,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=validate_filepath_arg,
         help=(
             "Specify a path and name of output file to generate. (caution: existing file will be overwritten). "
-            f"\ndefault = {convert_vars.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
+            f"\nEg. {convert_vars.DEFAULT_OUTPUT_FILENAME}.(docx|pdf|idml)"
         ),
     )
     parser.add_argument(
@@ -268,7 +274,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--pdf",
         action="store_true",
         default=False,
-        help="whether to generate a pdf in addition to the printable document. Default = Does not generate pdf",
+        help=(
+            "Whether to generate a pdf in addition to the printable document. "
+            "Does not generate a pdf by default. Only docx can be converted to pdf for the moment."
+        ),
     )
     parser.add_argument(
         "-d",
@@ -282,7 +291,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         "--language",
         type=is_valid_string_argument,
         default="en",
-        help="Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`]",
+        help=(
+            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`] "
+            "you can also specify your own language file. If so, there needs to be a yaml "
+            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
+        ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument(
@@ -293,9 +306,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         help=(
             "From which template to produce the document. [`bridge`, `qr` or `tarot`]\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
-            "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, "
-            "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, "
-            "qr cards have a QRCode that points to an maintained list."
+            "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
+            "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
+            "qr cards have a QRCode that points to an maintained list.\n"
+            "You can also speficy your own template. If so, there needs to be a file in the templates folder "
+            "where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
@@ -306,8 +321,10 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         default="all",
         help=(
             "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
-            "The various Cornucopia decks. `web` will give you the Website App edition."
-            "`mobileapp` will give you the Mobile App edition."
+            "The various Cornucopia decks. `web` will give you the Website App edition.\n"
+            "`mobileapp` will give you the Mobile App edition.\n"
+            "You can also speficy your own edition. If so, there needs to be a yaml "
+            "file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml"
         ),
     )
 
@@ -323,6 +340,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "`cards` will output the high quality print card deck.\n"
             "`guide` will generate the docx guide with the low quality print deck.\n"
             "`leaflet` will output the high quality print leaflet.\n"
+            "You can also speficy your own layout. If so, there needs to be a yaml "
+            "file in the source folder where the name contains the layout code. Eg. edition-layout-ver-lang.yaml"
         ),
     )
     try:
@@ -350,18 +369,6 @@ def is_valid_argument_list(arguments: List[str]) -> Any:
     for argument in arguments:
         is_valid_string_argument(argument)
     return arguments
-
-
-def get_card_ids(language_data: Union[Dict[Any, Any], List[Any]], key: str = "id") -> Generator[str, None, None]:
-    if isinstance(language_data, dict):
-        for k, v in language_data.items():
-            if k == key:
-                yield v
-            if isinstance(v, (dict, list)):
-                yield from get_card_ids(v, key)
-    elif isinstance(language_data, list):
-        for d in language_data:
-            yield from get_card_ids(d, key)
 
 
 def get_document_paragraphs(doc: docx) -> List[docx.Document]:
@@ -433,7 +440,11 @@ def get_mapping_for_edition(
     ):
         logging.warning("Could not retrieve valid meta information from the mapping file")
         return {}
-    return get_replacement_mapping_data(mapping_data)
+    try:
+        mapping_data = build_template_dict(mapping_data)
+    except Exception as e:
+        logging.warning(f"Could not build valid template mapping. The Yaml file is not valid. Got exception: {e}")
+    return mapping_data
 
 
 def get_mapping_data_for_edition(
@@ -474,30 +485,37 @@ def get_mapping_data_for_edition(
     return data
 
 
-def get_replacement_mapping_data(input_data: Dict[str, Any]) -> Dict[str, str]:
-    """Loop through language file data and build up a find-replace dict"""
+def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Build template dictionary from the input data"""
     data: Dict[str, Any] = {"meta": get_meta_data(input_data)}
     for key in list(k for k in input_data.keys() if k != "meta"):
-        suit_tags, suit_key = get_suit_tags_and_key(key, input_data["meta"]["edition"])
-        logging.debug(f" --- key = {key}.")
-        logging.debug(f" --- suit_tags = {suit_tags}")
-        logging.debug(f" --- suit_key = {suit_key}")
-
-        for suit, suit_tag in zip(input_data[key], suit_tags):
-            logging.debug(f" --- suit [name] = {suit['name']}")
-            logging.debug(f" --- suit_tag = {suit_tag}")
-            card_tag = ""
-            for card in suit[suit_key]:
-                for tag, text_output in card.items():
+        for paragraphs in input_data[key]:
+            type = ""
+            if key == "suits":
+                type = "cards"
+            if key == "paragraphs":
+                type = "sentences"
+            logging.debug(f" --- key = {key}.")
+            logging.debug(f" --- suit name = {paragraphs['name']}")
+            logging.debug(f" --- suit id = {is_valid_string_argument(paragraphs['id'])}")
+            full_tag = "${{{}}}".format("_".join([is_valid_string_argument(paragraphs["id"]), "suit"]))
+            logging.debug(f" --- suit tag = {full_tag}")
+            data[full_tag] = paragraphs["name"]
+            for paragraph in paragraphs[type]:
+                for tag, text_output in paragraph.items():
                     if tag == "value":
                         continue
-
-                    full_tag = get_full_tag(suit_tag, card["value"], tag)
-
+                    full_tag = get_full_tag(
+                        is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["value"]), tag
+                    )
+                    logging.debug(f" --- tag = {full_tag}")
                     # Add a translation for "Joker"
-                    if suit_tag == "WC" and tag == "value":
-                        full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
-
+                    if paragraphs["id"] == "WC" and tag == "value":
+                        full_tag = "${{{}}}".format(
+                            "_".join([is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(tag)])
+                        )
+                    logging.debug(f" --- tag = {full_tag}")
+                    logging.debug(f" --- text = {text_output}")
                     data[full_tag] = check_make_list_into_text(text_output)
     return data
 
@@ -563,7 +581,7 @@ def get_language_data(
             logging.info(f"Error loading yaml file: {language_file}. Error = {e}")
             data = {}
 
-    if data["meta"]["language"].lower() == language:
+    if data and data["meta"]["language"].lower() == language:
         logging.debug(" --- found source language file: " + os.path.split(language_file)[1])
     else:
         logging.debug(" --- found source file: " + os.path.split(language_file)[1])
@@ -611,32 +629,13 @@ def is_yaml_file(path: str) -> bool:
     return os.path.splitext(path)[1] in (".yaml", ".yml")
 
 
-def get_replacement_dict(input_data: Dict[str, Any]) -> Dict[str, str]:
-    """Loop through language file data and build up a find-replace dict"""
-    data: Dict[str, str] = {}
-    for key in list(k for k in input_data.keys() if k != "meta"):
-        suit_tags, suit_key = get_suit_tags_and_key(key, is_valid_string_argument(input_data["meta"]["edition"]))
-        logging.debug(f" --- key = {key}.")
-        logging.debug(f" --- suit_tags = {suit_tags}")
-        logging.debug(f" --- suit_key = {suit_key}")
+def map_language_data_to_template(input_data: Dict[str, Any]) -> Dict[str, str]:
+    try:
+        data = build_template_dict(input_data)
+    except Exception as e:
+        logging.warning(f"Could not build valid template mapping. The Yaml file is not valid. Got exception: {e}")
+        data = input_data
 
-        for suit, suit_tag in zip(input_data[key], suit_tags):
-            logging.debug(f" --- suit [name] = {suit['name']}")
-            logging.debug(f" --- suit_tag = {suit_tag}")
-            data = update_tag_for_suit_name(data, suit, suit_tag)
-            card_tag = ""
-            for card in suit[suit_key]:
-                for tag, text_output in card.items():
-                    if tag == "value":
-                        continue
-
-                    full_tag = get_full_tag(suit_tag, card["value"], tag)
-
-                    # Add a translation for "Joker"
-                    if suit_tag == "WC" and tag == "value":
-                        full_tag = "${{{}}}".format("_".join([suit_tag, card_tag, tag]))
-
-                    data[full_tag] = check_make_list_into_text(text_output)
     if convert_vars.args.debug:
         debug_txt = " --- Translation data showing First 4 (key: text):\n* "
         debug_txt += "\n* ".join(l1 + ": " + str(data[l1]) for l1 in list(data.keys())[:4])
@@ -644,12 +643,6 @@ def get_replacement_dict(input_data: Dict[str, Any]) -> Dict[str, str]:
         debug_txt = " --- Translation data showing Last 4 (key: text):\n* "
         debug_txt += "\n* ".join(l1 + ": " + str(data[l1]) for l1 in list(data.keys())[-4:])
         logging.debug(debug_txt)
-    return data
-
-
-def update_tag_for_suit_name(data: Dict[str, str], suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
-    tag_for_suit_name = get_tag_for_suit_name(suit, suit_tag)
-    data.update(tag_for_suit_name)
     return data
 
 

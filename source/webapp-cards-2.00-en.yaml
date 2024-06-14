@@ -6,6 +6,7 @@ meta:
   version: "2.00"
 suits:
 -
+  id: "VE"
   name: "DATA VALIDATION & ENCODING"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "You have invented a new attack against Data Validation and Encoding"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
 -
+  id: "AT"
   name: "AUTHENTICATION"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "You have invented a new attack against Authentication"
     misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
 -
+  id: "SM"
   name: "SESSION MANAGEMENT"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "You have invented a new attack against Session Management"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
+  id: "AZ"
   name: "AUTHORIZATION"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "You have invented a new attack against Authorization"
     misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
+  id: "CR"
   name: "CRYPTOGRAPHY"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "You have invented a new attack against Cryptography"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
+  id: "CO"
   name: "CORNUCOPIA"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "You have invented a new attack of any type"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
+  id: "WC"
   name: "WILD CARD"
   cards:
   -
@@ -358,6 +365,7 @@ suits:
     misc: "Examine vulnerabilities and discover how they can be fixed using the free OWASP® Juice Shop, Security Shepherd, or using the online challenges in the free OWASP® Hacking-lab"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

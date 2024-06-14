@@ -6,6 +6,7 @@ meta:
   version: "1.22"
 suits:
 -
+  id: "VE"
   name: "Validación de datos & Codificación"
   cards:
   -
@@ -22,6 +23,7 @@ suits:
     value: "3"
     desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
 -
+  id: "WC"
   name: "Wild Card"
   cards:
   -
@@ -31,6 +33,7 @@ suits:
     misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

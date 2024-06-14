@@ -6,6 +6,7 @@ meta:
   version: "1.22"
 suits:
 -
+  id: "VE"
   name: "VALIDATION DES DONNÉES & ENCODAGE"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
 -
+  id: "AT"
   name: "AUTHENTIFICATION"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur l'Authentification"
 -
+  id: "SM"
   name: "GESTION DES SESSIONS"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Gestion des Sessions"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Gestion des Sessions, et sur la prévention des Cross Site Request Forgery (CSRF)"
 -
+  id: "AZ"
   name: "HABILITATION"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre les Habilitations"
     misc: "Apprenez-en plus à ce sujet dans les guides gratuits OWASP sur le Développement et les Tests"
 -
+  id: "CR"
   name: "CRYPTOGRAPHIE"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur le Stockage Cryptographique et la Protection de la Couche de Transport"
 -
+  id: "CO"
   name: "CORNUCOPIA"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque de n'importe quel type"
     misc: "Apprenez-en plus à propos de la sécurité applicative dans les guides gratuits OWASP : Exigences, Développement, Revue de Code et Tests, antisèches, et framework Open Software Assurance Maturity Model"
 -
+  id: "WC"
   name: "JOKER"
   cards:
   -
@@ -356,6 +363,7 @@ suits:
     misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans la OWASP® Juice Shop, Security Shepherd, ou en utilisant les défis en ligne du OWASP® Hacking-lab gratuit"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -
