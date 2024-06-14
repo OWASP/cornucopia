@@ -6,6 +6,7 @@ meta:
   version: "2.00"
 suits:
 -
+  id: "VE"
   name: "DATAVALIDATIE & KARAKTERCODERING"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "Je hebt een nieuwe aanval uitgevonden tegen Gegevensvalidatie en -codering"
     misc: "Lees meer over dit onderwerp in OWASP's gratis spiekbriefjes over invoervalidatie, XSS-preventie, op DOM gebaseerde XSS-preventie, SQL-injectiepreventie en queryparameterisatie"
 -
+  id: "AT"
   name: "AUTHENTICATIE"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Authenticatie uitgevonden"
     misc: "Lees meer over dit onderwerp in de gratis verificatie-cheatsheet van OWASP"
 -
+  id: "SM"
   name: "SESSIEBEHEER"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Session Management uitgevonden"
     misc: "Lees meer over dit onderwerp in OWASP's gratis spiekbriefjes over sessiebeheer en preventie van Cross Site Request Forgery (CSRF)"
 -
+  id: "AZ"
   name: "AUTORISATIE"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Autorisatie uitgevonden"
     misc: "Lees meer over dit onderwerp in de ontwikkelings- en testhandleidingen van OWASP"
 -
+  id: "CR"
   name: "CRYPTOGRAFIE"
   cards:
   -
@@ -286,7 +291,8 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Cryptografie uitgevonden"
     misc: "Lees meer over dit onderwerp in de gratis spiekbriefjes van OWASP over cryptografische opslag en bescherming van transportlagen"
 -
-  name: "HOORN DES OVERVLOEDS"
+  id: "CO"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "CO2"
@@ -342,6 +348,7 @@ suits:
     desc: "Je hebt een nieuwe aanval van elk type uitgevonden"
     misc: "Lees meer over applicatiebeveiliging in OWASP's gratis Guides on Requirements, Development, Code Review and Testing, de Cheat Sheet-serie en het Open Software Assurance Maturity Model"
 -
+  id: "WC"
   name: "WILDE KAART"
   cards:
   -
@@ -358,6 +365,7 @@ suits:
     misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van OWASP Juice Shop, Security Shepherd, of met behulp van de online uitdagingen in het OWASP® Hacking-lab gratis"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

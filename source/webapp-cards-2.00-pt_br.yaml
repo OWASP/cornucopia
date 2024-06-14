@@ -6,6 +6,7 @@ meta:
   version: "2.00"
 suits:
 -
+  id: "VE"
   name: "VALIDAÇÃO & CODIFICAÇÃO DE DADOS"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "Você inventou um novo ataque contra a Validação & Codificação de Dados"
     misc: "Leia mais sobre este tópico em OWASP® Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
 -
+  id: "AT"
   name: "AUTENTICAÇÃO"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "Você inventou um novo ataque contra a Autenticação"
     misc: "Leia mais sobre este tópico em OWASP® Authentication Cheat Sheet"
 -
+  id: "SM"
   name: "GERENCIAMENTO DE SESSÕES"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "Você inventou um novo ataque contra o Gerenciamento de Sessões"
     misc: "Leia mais sobre este tópico em OWASP® Session Management Cheat Sheet e prevenção de ataques do tipo Cross Site Request Forgery (CSRF)"
 -
+  id: "AZ"
   name: "CONTROLE DE ACESSOS"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "Você inventou um novo ataque contra Controle de Acessos"
     misc: "Leia mais sobre este tópico em OWASP® Development Guide e OWAPS® Testing Guide"
 -
+  id: "CR"
   name: "PRÁTICAS DE CRIPTOGRAFIA"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "Você inventou um novo ataque contra Criptografia"
     misc: "Leia mais sobre este tópico em OWASP® Cryptographic Storage Cheat Sheet e OWASP® Transport Layer Protection Cheat Sheet"
 -
+  id: "CO"
   name: "CORNUCOPIA"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "Você inventou um novo ataque de qualquer tipo"
     misc: "Leia mais sobre segurança da aplicação nos guias da OWASP (Requirements, Development, Code Review and Testing) e na série OWASP Cheat Sheet, e no modelo de maturidade Open SAMM (Software Assurance Maturity Model)"
 -
+  id: "WC"
   name: "CURINGA"
   cards:
   -
@@ -356,6 +363,7 @@ suits:
     misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do OWASP® Juice Shop, Security Shepherd, ou usando o desafio online OWASP® Hacking-lab. Ambos são gratuitos"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

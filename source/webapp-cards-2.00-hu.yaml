@@ -6,6 +6,7 @@ meta:
   version: "2.00"
 suits:
 -
+  id: "VE"
   name: "Adat ellenőrzés & kódolás"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "You have invented a new attack against Data Validation and Encoding"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
 -
+  id: "AT"
   name: "Authentication"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "You have invented a new attack against Authentication"
     misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
 -
+  id: "SM"
   name: "Session management"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "You have invented a new attack against Session Management"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
+  id: "AZ"
   name: "Authorization"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "You have invented a new attack against Authorization"
     misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
+  id: "CR"
   name: "Cryptography"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "You have invented a new attack against Cryptography"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
+  id: "CO"
   name: "Cornucopia"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "You have invented a new attack of any type"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
+  id: "WC"
   name: "Wild Card"
   cards:
   -
@@ -358,6 +365,7 @@ suits:
     misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

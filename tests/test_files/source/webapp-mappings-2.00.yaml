@@ -9,6 +9,7 @@ meta:
   languages: ["en", "es"]
 suits:
 -
+  id: "VE"
   name: "Data validation & encoding"
   cards:
   -
@@ -96,6 +97,7 @@ suits:
     capec: [ 23, 28, 76, 152, 160, 261 ]
     safecode: [ 2, 19, 20 ]
 - 
+  id: "AT"
   name: "Authentication"
   cards:
   -
@@ -183,6 +185,7 @@ suits:
     capec: [ 115, 207, 554 ]
     safecode: [ 14, 28 ]
 -
+  id: "SM"
   name: "Session management"
   cards:
   -
@@ -270,6 +273,7 @@ suits:
     capec: [ 21 ]
     safecode: [ 14, 28 ]
 -
+  id: "AZ"
   name: "Authorization"
   cards:
   -
@@ -357,6 +361,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 8, 10, 11 ]
 -
+  id: "CR"
   name: "Cryptography"
   cards:
   -
@@ -444,6 +449,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 14, 21, 29 ]
 -
+  id: "CO"
   name: "Cornucopia"
   cards:
   -

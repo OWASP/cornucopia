@@ -6,6 +6,7 @@ meta:
   version: "1.22"
 suits:
 -
+  id: "VE"
   name: "DATAVALIDERING & TEGNKODING"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Datavalidering og Tegnkoding"
     misc: "Les mer om dette emnet i OWASPs gratis jukseark om “Input Validation, XSS Prevention, DOM-basert XSS Prevention, SQL Injection Prevention og Query Parameterization”"
 -
+  id: "AT"
   name: "AUTENTISERING"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Autentisering"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Authentication”"
 -
+  id: "SM"
   name: "SESJONSHÅNDTERING"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Sesjonshåndtering"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Session Management, and Cross Site Request Forgery (CSRF) Prevention”"
 -
+  id: "AZ"
   name: "AUTORISASJON"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Autorisasjon"
     misc: "Les mer om dette emnet i “OWASP's Development and Testing Guides”"
 -
+  id: "CR"
   name: "KRYPTOGRAFI"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Kryptografi"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Cryptographic Storage, and Transport Layer Protection”"
 -
+  id: "CO"
   name: "CORNUCOPIA"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "Du har funnet opp et nytt angrep av hvilken som helst type"
     misc: "Les mer om applikasjonssikkerhet i OWASPs gratis guider som omhandler krav, utvikling, kodegjennomgang og testingg, the “Cheat Sheet series”, og OWASPs “Software Assurance Maturity Model”"
 -
+  id: "WC"
   name: "JOKER"
   cards:
   -
@@ -358,6 +365,7 @@ suits:
     misc: "Undersøk sårbarheter og oppdag hvordan de kan fikses ved å bruke OWASPs Juice Shop, Security Shepherd, eller ved å bruke nettutfordringene i OWASPs hacking-lab gratis"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -

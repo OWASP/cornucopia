@@ -6,6 +6,7 @@ meta:
   version: "1.22"
 suits:
 -
+  id: "VE"
   name: "VALIDACIÓN DE DATOS & CODIFICACIÓN"
   cards:
   -
@@ -62,6 +63,7 @@ suits:
     desc: "Has creado un nuevo ataque contra Validación de Datos y Codificación"
     misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
 -
+  id: "AT"
   name: "AUTENTICACIÓN"
   cards:
   -
@@ -118,6 +120,7 @@ suits:
     desc: "Usted tiene inventado un nuevo ataque contra la Autenticación"
     misc: "Leer mas sobre este tema en OWASP's free Authentication Cheat Sheet"
 -
+  id: "SM"
   name: "GESTIÓN DE SESIÓN"
   cards:
   -
@@ -174,6 +177,7 @@ suits:
     desc: "Has inventado un nuevo ataque contra la Gestión de Sesión"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
+  id: "AZ"
   name: "AUTORIZACIÓN"
   cards:
   -
@@ -230,6 +234,7 @@ suits:
     desc: "Has inventado un nuevo ataque contra la Autorización"
     misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
+  id: "CR"
   name: "CRIPTOGRAFÍA"
   cards:
   -
@@ -286,6 +291,7 @@ suits:
     desc: "Has inventado un nuevo ataque contra la Criptografía"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
+  id: "CO"
   name: "CORNUCOPIA"
   cards:
   -
@@ -342,6 +348,7 @@ suits:
     desc: "Has inventado un nuevo ataque de cualquier tipo"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
+  id: "WC"
   name: "COMODÍN"
   cards:
   -
@@ -358,6 +365,7 @@ suits:
     misc: "Examine las vulnerabilidades y descubre cómo se pueden arreglar usando OWASP Juice Shop, Security Shepherd, o utilizando los desafíos en línea en el OWASP hacking-lab gratis"
 paragraphs:
 -
+  id: "Common"
   name: "Common"
   sentences:
   -
