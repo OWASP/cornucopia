@@ -269,8 +269,8 @@ suits:
     - 
       id: "DS8"
       value: "8"
-      desc: "An attacker can make a server unavailable or unusable and the problem persists after the attacker goes away (server, auth, persist)"
-      misc: "(client, auth, persist)"
+      desc: "An attacker can make a server unavailable or unusable and the problem persists after the attacker goes away "
+      misc: "(server, auth, persist)"
     - 
       id: "DS9"
       value: "9"
