@@ -12,7 +12,7 @@ suits:
     - 
       id: "SP2"
       value: "2"
-      desc: "An attacker could take over the port or socket that the server normally uses."
+      desc: "An attacker could take over the port or socket that the server normally uses"
     - 
       id: "SP3"
       value: "3"
@@ -280,7 +280,7 @@ suits:
       id: "DSX"
       value: "X"
       desc: "An attacker can make a server unavailable or unusable without ever authenticating and the problem persists after the attacker goes away "
-      misc: "(server, anonymous, persistent)."
+      misc: "(server, anonymous, persistent)"
     - 
       id: "DSJ"
       value: "J"
