@@ -12,7 +12,7 @@ suits:
     - 
       id: "SP2"
       value: "2"
-      desc: "Un atacante podría apoderarse del puerto o socket que normalmente utiliza el servidor."
+      desc: "Un atacante podría apoderarse del puerto o socket que normalmente utiliza el servidor"
     - 
       id: "SP3"
       value: "3"
@@ -280,7 +280,7 @@ suits:
       id: "DSX"
       value: "X"
       desc: "An attacker can make a server unavailable or unusable without ever authenticating and the problem persists after the attacker goes away "
-      misc: "(servidor, anónimo, persistir)."
+      misc: "(servidor, anónimo, persistir)"
     - 
       id: "DSJ"
       value: "J"
@@ -345,7 +345,7 @@ suits:
     - 
       id: "EPQ"
       value: "Q"
-      desc: "Incluye contenido generado por el usuario dentro de su página, posiblemente incluyendo el contenido de URL aleatorias."
+      desc: "Incluye contenido generado por el usuario dentro de su página, posiblemente incluyendo el contenido de URL aleatorias"
     - 
       id: "EPK"
       value: "K"
