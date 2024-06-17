@@ -44,7 +44,7 @@ Text and code mapping for OWASP Cornucopia Website App Edition is licensed under
 
 ### Font licensing
 
-For font licensing, please read font [README.md](./resources/fonts/README.md)
+For font licensing, please read font [README.md](./resources/templates/Fonts/README.md)
 
 ### version-up.sh
 

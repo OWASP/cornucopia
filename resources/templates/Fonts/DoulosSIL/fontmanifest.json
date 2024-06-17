@@ -1,0 +1,16 @@
+{
+"doulossil": {
+    "defaults": {
+        "ttf": "DoulosSIL-Regular.ttf",
+        "woff": "DoulosSIL-Regular.woff",
+        "woff2": "DoulosSIL-Regular.woff2"
+    },
+    "family": "Doulos SIL",
+    "files": {
+        "DoulosSIL-Regular.ttf": { "axes": { "ital": 0, "wght": 400.0 }, "packagepath": "DoulosSIL-Regular.ttf" },
+        "DoulosSIL-Regular.woff": { "axes": { "ital": 0, "wght": 400.0 }, "packagepath": "web/DoulosSIL-Regular.woff" },
+        "DoulosSIL-Regular.woff2": { "axes": { "ital": 0, "wght": 400.0 }, "packagepath": "web/DoulosSIL-Regular.woff2" }
+    },
+    "version": "6.200"
+}
+}
