@@ -264,7 +264,7 @@ suits:
     - 
       id: "DS7"
       value: "7"
-      desc: "An attacker can make a client unavailable or unusable and the problem persists after the attacker goes away "
+      desc: "Un atacante puede hacer que un cliente no esté disponible o sea inutilizable y el problema persista después de que el atacante desaparezca "
       misc: "(cliente, autenticación, persistir)"
     - 
       id: "DS8"
@@ -279,7 +279,7 @@ suits:
     - 
       id: "DSX"
       value: "X"
-      desc: "An attacker can make a server unavailable or unusable without ever authenticating and the problem persists after the attacker goes away "
+      desc: "Un atacante puede hacer que un servidor no esté disponible o sea inutilizable sin siquiera autenticarse y el problema persiste después de que el atacante desaparece "
       misc: "(servidor, anónimo, persistir)"
     - 
       id: "DSJ"
