@@ -191,11 +191,11 @@ suits:
     - 
       id: "ID4"
       value: "4"
-      desc: "Un atacante puede leer contenido porque los mensajes (por ejemplo, un correo electrónico o una cookie HTTP) no está encriptado incluso si el canal está encriptado"
+      desc: "Un atacante puede leer contenido porque los mensajes (por ejemplo, un correo electrónico o una cookie HTTP) no está cifrado incluso si el canal está cifrado"
     - 
       id: "ID5"
       value: "5"
-      desc: "Un atacante puede ser capaz de leer un documento o datos porque están encriptados con un algoritmo no estándar"
+      desc: "Un atacante puede ser capaz de leer un documento o datos porque están cifrados con un algoritmo no estándar"
     - 
       id: "ID6"
       value: "6"
@@ -223,7 +223,7 @@ suits:
     - 
       id: "IDQ"
       value: "Q"
-      desc: "Un atacante puede leer el canal completo porque el canal (por ejemplo, HTTP o SMTP) no está encriptado."
+      desc: "Un atacante puede leer el canal completo porque el canal (por ejemplo, HTTP o SMTP) no está cifrado."
     - 
       id: "IDK"
       value: "K"
