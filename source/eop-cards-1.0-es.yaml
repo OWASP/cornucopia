@@ -235,7 +235,7 @@ suits:
       misc: "Leer más sobre este tema ..."
 -
   id: "DS"
-  name: "Negación de servicio"
+  name: "Denegación de servicio"
   cards:
     - 
       id: "DS2"
