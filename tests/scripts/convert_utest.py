@@ -894,24 +894,6 @@ class TestGetDocxDocument(unittest.TestCase):
         self.assertEqual(want_len_paragraphs, got_len_paragraphs)
 
 
-class TestGetTagForSuitName(unittest.TestCase):
-    def test_get_tag_for_suit_name_ve(self) -> None:
-        suit = {"name": "Data validation & encoding", "cards": []}
-        suit_tag = "VE"
-        want_tag_data = {"${VE_suit}": suit["name"]}
-
-        got_tag_data = c.get_tag_for_suit_name(suit, suit_tag)
-        self.assertDictEqual(want_tag_data, got_tag_data)
-
-    def test_get_tag_for_suit_name_wildcard(self) -> None:
-        suit = {"name": "Wild card", "cards": []}
-        suit_tag = "WC"
-        want_tag_data = {"${WC_suit}": suit["name"], "${WC_Joker}": "Joker"}
-
-        got_tag_data = c.get_tag_for_suit_name(suit, suit_tag)
-        self.assertDictEqual(want_tag_data, got_tag_data)
-
-
 class TestGetReplacementDict(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
@@ -1057,7 +1039,6 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "templates": ["bridge_qr", "bridge", "tarot"],
                 "languages": ["en", "es"],
             },
-            "${VE_suit}": "Data validation & encoding",
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
             "${VE_VE2_owasp_asvs}": "1.10, 4.5, 8.1, 11.5, 19.1, 19.5",
             "${VE_VE2_owasp_appsensor}": "HT1, HT2, HT3",
