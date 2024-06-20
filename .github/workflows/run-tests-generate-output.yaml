@@ -105,7 +105,7 @@ jobs:
           pipenv run python scripts/convert.py -t tarot -l en -lt threat-denialofsvc-cards -v 1.0 -e eop -i ./resources/templates/eop_ver_threat-denialofsvc-cards_tarot_lang.idml -o ./output/eop/4_5THREATCARD-DenialofSvc.idml
           pipenv run python scripts/convert.py -t tarot -l en -lt threat-elevofpriv-cards -v 1.0 -e eop -i ./resources/templates/eop_ver_threat-elevofpriv-cards_tarot_lang.idml -o ./output/eop/4_6THREATCARD-ElevofPriv.idml
           pipenv run python scripts/convert.py -t tarot -l en -lt about -v 1.0 -e eop -i ./resources/templates/eop_ver_about_tarot_lang.idml -o ./output/eop/5_AboutCard.idml
-          zip output/eop-1.0.zip output/eop
+          zip -r output/eop-1.0.zip output/eop
           #
           # Building Cornucopia
           pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 1.22 -e webapp
