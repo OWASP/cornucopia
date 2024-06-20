@@ -71,10 +71,9 @@
               pipenv run python scripts/convert.py -t tarot -l en -lt threat-denialofsvc-cards -v 1.0 -e eop -i ./resources/templates/eop_ver_threat-denialofsvc-cards_tarot_lang.idml -o ./output/eop/4_5THREATCARD-DenialofSvc.idml
               pipenv run python scripts/convert.py -t tarot -l en -lt threat-elevofpriv-cards -v 1.0 -e eop -i ./resources/templates/eop_ver_threat-elevofpriv-cards_tarot_lang.idml -o ./output/eop/4_6THREATCARD-ElevofPriv.idml
               pipenv run python scripts/convert.py -t tarot -l en -lt about -v 1.0 -e eop -i ./resources/templates/eop_ver_about_tarot_lang.idml -o ./output/eop/5_AboutCard.idml
-              zip output/eop-1.0.zip output/eop
+              zip -r output/eop-1.0.zip output/eop
               #
               # Building Cornucopia
-              pipenv run python scripts/convert.py -t tarot -l en -lt cards  -v 1.0 -e eop -i ./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-1.0-cards-en.idml
               pipenv run python scripts/convert.py -l all -lt all -t all -v 1.22 -e webapp
               pipenv run python scripts/convert.py -l all -lt all -t all -v 2.00 -e webapp
               pipenv run python scripts/convert.py -l en -lt all -t all -v 1.00 -e mobileapp
