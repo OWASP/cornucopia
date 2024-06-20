@@ -500,7 +500,8 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
             logging.debug(f" --- suit id = {is_valid_string_argument(paragraphs['id'])}")
             full_tag = "${{{}}}".format("_".join([is_valid_string_argument(paragraphs["id"]), "suit"]))
             logging.debug(f" --- suit tag = {full_tag}")
-            data[full_tag] = paragraphs["name"]
+            if data["meta"]["component"] == "cards":
+                data[full_tag] = paragraphs["name"]
             for paragraph in paragraphs[type]:
                 for tag, text_output in paragraph.items():
                     if tag == "value":
@@ -562,7 +563,7 @@ def get_language_data(
     """Get the raw data of the replacement text from correct yaml file"""
     logging.debug(
         f" --- Starting get_language_data() for edition: {edition} "
-        "requesting language: {language} for version: {version} "
+        f"requesting language: {language} for version: {version} "
     )
     language_file: str = ""
     for file in yaml_files:
@@ -581,26 +582,27 @@ def get_language_data(
             logging.info(f"Error loading yaml file: {language_file}. Error = {e}")
             data = {}
 
-    if data and data["meta"]["language"].lower() == language:
+    if data and (data["meta"]["language"].lower() == language):
         logging.debug(" --- found source language file: " + os.path.split(language_file)[1])
     else:
         logging.debug(" --- found source file: " + os.path.split(language_file)[1])
         if "meta" in list(data.keys()):
             meta_keys = data["meta"].keys()
             logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
-        data = {}
 
     if not data or "suits" not in list(data.keys()):
         logging.error(
             "Could not get "
             + language
-            + " language data from yaml "
+            + " data from yaml "
             + os.path.split(language_file)[1]
             + " for edition: "
             + edition
             + " under version:"
             + version
         )
+        data = {}
+
     logging.debug(f" --- Len = {len(data)}.")
     return data
 
@@ -685,15 +687,6 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
         suit_tags = ["Common"]
         suit_key = "sentences"
     return suit_tags, suit_key
-
-
-def get_tag_for_suit_name(suit: Dict[str, Any], suit_tag: str) -> Dict[str, str]:
-    data: Dict[str, str] = {}
-    logging.debug(f" --- suit_tag = {suit_tag}, suit[name] = {suit['name']}")
-    data["${{{}}}".format(suit_tag + "_suit")] = suit["name"]
-    if suit_tag == "WC":
-        data["${WC_Joker}"] = "Joker"
-    return data
 
 
 def get_template_for_edition(layout: str = "guide", template: str = "bridge", edition: str = "webapp") -> str:

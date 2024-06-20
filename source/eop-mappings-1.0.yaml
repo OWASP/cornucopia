@@ -1,0 +1,46 @@
+---
+meta:
+  edition: "eop"
+  component: "mappings"
+  language: "ALL"
+  version: "1.0"
+  layouts: [
+    "cards",
+    "about",
+    "threat-denialofsvc-cards",
+    "threat-infodisclosure-cards",
+    "threat-repudation-cards",
+    "threat-spoofing-cards",
+    "threat-tampering-cards",
+    "strategy-cards",
+    "instructions1",
+    "instructions2",
+    "deck"
+    ]
+  templates: ["tarot"]
+  languages: ["en", "es"]
+suits:
+- 
+  id: "SP"
+  name: "Spoofing"
+  cards: []
+-
+  id: "TA"
+  name: "Tampering"
+  cards: []
+-
+  id: "RE"
+  name: "Repudiation"
+  cards: []
+-
+  id: "ID"
+  name: "Information Disclosure"
+  cards: []
+-
+  id: "DS"
+  name: "Denial of Service"
+  cards: []
+-
+  id: "EP"
+  name: "Elevation of Privilege"
+  cards: []
