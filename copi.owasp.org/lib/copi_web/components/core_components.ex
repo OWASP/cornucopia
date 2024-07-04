@@ -282,10 +282,9 @@ defmodule CopiWeb.CoreComponents do
   ~H"""
     <div phx-feedback-for={@name} class="text-sm">
       <.label for={@id}><%= @label %></.label>
-      <div class="mt-1 w-full border border-gray-900 border-2 p-2 rounded-lg">
-        <div class="grid grid-cols-1 gap-1 text-sm items-baseline">
+      <div class="pt-4 mt-1 w-full border border-gray-900 border-2 p-2 rounded-lg">
           <input type="hidden" name={@name} value="" />
-          <div class="..." :for={{label, value} <- @options}>
+          <div class="mb-2"  :for={{label, value} <- @options}>
             <label
               for={"#{@name}-#{value}"} class="text-lg">
               <input
@@ -299,7 +298,6 @@ defmodule CopiWeb.CoreComponents do
               />
               <%= value %>
             </label>
-          </div>
         </div>
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
