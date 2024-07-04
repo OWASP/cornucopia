@@ -2,11 +2,9 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   use CopiWeb, :live_component
 
   alias Copi.Cornucopia
-
-  import Copi.Models.DeckSuits
+  alias Copi.Cornucopia.Game
 
   @impl true
-
   def render(assigns) do
     ~H"""
     <div >
@@ -36,14 +34,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
           >
         </.input>
 
-      <div>
-        <.label>Choose the suits you want to play:</.label>
-        <div class="mt-2 flex flex-row justify-start">
-        <%= for suit <- Copi.Cornucopia.get_suits_from_deck(assigns) do %>
-          <.input label={"#{String.capitalize(suit)}"} field={@form[String.to_atom(suit)]} type="checkbox"  />
-        <% end %>
-        </div>
-      </div>
+        <.input field={@form[:suits]} label={gettext("Select the suits you want to play:")} multiple={true}  type="checkbox" options={get_suits_from_selected_deck(assigns)} />
 
         <:actions>
           <.primary_button phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
@@ -53,8 +44,13 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     """
   end
 
-  def update(%{game: game} = assigns, socket) do
-    changeset = Cornucopia.change_game(game)
+  def update(%{game: _} = assigns, socket) do
+    changeset =
+      Cornucopia.change_game(%Game{
+        edition: "",
+        name: "",
+        suits: generate_displayable_suits_from_suits_tuple_list("webapp")
+      })
 
     {:ok,
      socket
@@ -64,22 +60,25 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   @impl true
   def handle_event("validate", %{"game" => game_params}, socket) do
-    selected_suits = get_list_of_suits_from_checkbox(game_params)
 
     changeset =
       socket.assigns.game
-      |> Cornucopia.change_game(game_params)
+      |> Cornucopia.change_game(%{
+        edition: game_params["edition"],
+        name: game_params["name"],
+        suits: display_correct_suit_list(game_params["edition"], game_params["suits"])
+      })
       |> Map.put(:action, :validate)
 
-    send(self(), {:update_parent, changeset})
     {:noreply, assign_form(socket, changeset)}
   end
 
   def handle_event("save", %{"game" => game_params}, socket) do
+
     game_with_suits = %{
       name: game_params["name"],
       edition: game_params["edition"],
-      suits: get_list_of_suits_from_checkbox(game_params)
+      suits: format_suits_before_saving_game(game_params["suits"])
     }
 
     save_game(socket, socket.assigns.action, game_with_suits)
@@ -113,5 +112,44 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
     end
+  end
+
+  defp get_suits_from_selected_deck(assigns) do
+    edition = get_deck_edition_from_assigns(assigns)
+    Copi.Cornucopia.get_suits_from_selected_deck(edition)
+  end
+
+  defp get_deck_edition_from_assigns(assigns) do
+    if assigns.form.source.changes == nil || assigns.form.source.changes == %{} do
+      "webapp"
+    else
+      assigns.form.source.changes.edition
+    end
+  end
+
+  defp display_correct_suit_list(edition, suits) do
+    if hd(suits) == "" && length(suits) == 1 do
+      generate_displayable_suits_from_suits_tuple_list(edition)
+    else
+      [_first, second | _rest] = suits
+      String.contains?(second, edition)
+      case String.contains?(second, edition) do
+        true -> suits
+        false -> generate_displayable_suits_from_suits_tuple_list(edition)
+      end
+    end
+  end
+
+  def generate_displayable_suits_from_suits_tuple_list(edition) do
+    Copi.Cornucopia.get_suits_from_selected_deck(edition)
+    |> Enum.map(fn {key, _} -> key end)
+  end
+
+  defp format_suits_before_saving_game(suits) do
+    regex = ~r/\A\w+-/
+
+      suits
+      |> Enum.filter(fn str -> str != "" end)
+      |> Enum.map(fn suit -> String.replace(suit, regex, "") end)
   end
 end

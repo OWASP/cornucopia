@@ -279,22 +279,29 @@ defmodule CopiWeb.CoreComponents do
       assign_new(assigns, :checked, fn ->
         Phoenix.HTML.Form.normalize_value("checkbox", assigns[:value])
       end)
-
-    ~H"""
-    <div phx-feedback-for={@name}>
-      <label class="flex items-center gap-2 mr-4  p-2 text-sm leading-6 text-zinc-600">
-        <input type="hidden" name={@name} value="false" />
-        <input
-          type="checkbox"
-          id={@id}
-          name={@name}
-          value="true"
-          checked={@checked}
-          class="rounded border-zinc-300 text-zinc-900 focus:ring-0"
-          {@rest}
-        />
-        <%= @label %>
-      </label>
+  ~H"""
+    <div phx-feedback-for={@name} class="text-sm">
+      <.label for={@id}><%= @label %></.label>
+      <div class="mt-1 w-full border border-gray-900 border-2 p-2 rounded-lg">
+        <div class="grid grid-cols-1 gap-1 text-sm items-baseline">
+          <input type="hidden" name={@name} value="" />
+          <div class="..." :for={{label, value} <- @options}>
+            <label
+              for={"#{@name}-#{value}"} class="text-lg">
+              <input
+                type="checkbox"
+                id={"#{@name}-#{value}"}
+                name={@name}
+                value={label}
+                checked={label in @value}
+                class="mr-2 text-gray-700 h-6 w-6 rounded-full"
+                {@rest}
+              />
+              <%= value %>
+            </label>
+          </div>
+        </div>
+      </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
     """

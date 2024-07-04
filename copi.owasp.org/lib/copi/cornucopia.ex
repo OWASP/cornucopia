@@ -320,24 +320,16 @@ defmodule Copi.Cornucopia do
     Card.changeset(card, attrs)
   end
 
-  def get_suits_from_deck(selected_edition) do
-    database_query =
-      if selected_edition.form.source.changes == nil ||
-           selected_edition.form.source.changes == %{} do
-        from c in Card,
-          where: c.edition == "webapp",
-          select: c.category,
-          distinct: true
-      else
-        from c in Card,
-          where: c.edition == ^selected_edition.form.source.changes.edition,
-          select: c.category,
-          distinct: true
-      end
+  def get_suits_from_selected_deck(selected_edition) do
+    database_query = from c in Card,
+    where: c.edition == ^selected_edition,
+    select: c.category,
+    distinct: true
 
     Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
       List.delete(acc, item)
     end)
     |> Enum.sort()
+    |> Enum.map(fn suit -> {"#{selected_edition}-#{suit}" , String.capitalize(suit) } end)
   end
 end

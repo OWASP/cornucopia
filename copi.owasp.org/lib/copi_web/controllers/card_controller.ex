@@ -13,6 +13,7 @@ defmodule CopiWeb.CardController do
     render(conn, "show.html", card: card)
   end
 
+  @spec format_capec(any()) :: any()
   def format_capec(refs) do
     refs
     #|> Enum.map(fn ref -> link(ref, to: "https://capec.mitre.org/data/definitions/#{ref}.html") end)
