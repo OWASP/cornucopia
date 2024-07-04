@@ -107,7 +107,24 @@ jobs:
           pipenv run python scripts/convert.py -t tarot -l en -lt about -v 1.0 -e eop -i ./resources/templates/eop_ver_about_tarot_lang.idml -o ./output/eop/5_AboutCard.idml
           zip -r output/eop-1.0.zip output/eop
           #
-          # Building Cornucopia
+          # Building Cornucopia WebApp Edition
+          mkdir -p output/cornucopia_webapp || echo "Ignore error"
+          mkdir -p output/cornucopia_webapp/Links || echo "Ignore error"
+          mkdir -p output/cornucopia_webapp/Fonts || echo "Ignore error"
+          cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_webapp/Links/
+          cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_webapp/Fonts/
+          cp -rf ./resources/templates/Fonts/FivoSans/* output/cornucopia_webapp/Fonts/
+          cp -rf ./resources/templates/Fonts/Atkinson-Hyperlegible/* output/cornucopia_webapp/Fonts/
+          #
+          # Building Cornucopia MobileApp Edition
+          mkdir -p output/cornucopia_mobileapp || echo "Ignore error"
+          mkdir -p output/cornucopia_mobileapp/Links || echo "Ignore error"
+          mkdir -p output/cornucopia_mobileapp/Fonts || echo "Ignore error"
+          cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
+          cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
+          cp -rf ./resources/templates/Fonts/FivoSans/* output/cornucopia_mobileapp/Fonts/
+          cp -rf ./resources/templates/Fonts/Atkinson-Hyperlegible/* output/cornucopia_mobileapp/Fonts/
+          #
           pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 1.22 -e webapp
           pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l all -lt all -t bridge -v 1.22 -e webapp
@@ -116,9 +133,12 @@ jobs:
           pipenv run python scripts/convert.py -l en -lt all -t tarot -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t bridge -v 1.00 -e mobileapp
           pipenv run python scripts/convert.py -l en -lt all -t tarot -v 1.00 -e mobileapp
-          zip output/owasp_cornucopia_mobileapp_1.00_en.zip output/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml
-          zip output/owasp_cornucopia_webapp_1.22_en.zip output/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml output/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml output/owasp_cornucopia_webapp_1.22_guide_bridge_en.docx output/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml
-          zip output/owasp_cornucopia_webapp_2.00_en.zip output/owasp_cornucopia_webapp_2.00_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.00_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.00_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.00_leaflet_tarot_en.idml
+          cp output/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml output/cornucopia_mobileapp/
+          cp output/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml output/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml output/owasp_cornucopia_webapp_1.22_guide_bridge_en.docx output/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml output/cornucopia_webapp/
+          cp output/owasp_cornucopia_webapp_2.00_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.00_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.00_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.00_leaflet_tarot_en.idml output/cornucopia_webapp/
+          zip output/owasp_cornucopia_mobileapp_1.00_en.zip -r output/cornucopia_mobileapp/Links/* output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_en.zip output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml
+          zip output/owasp_cornucopia_webapp_1.22_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_1.22_en.zip output/cornucopia_webapp/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_1.22_guide_bridge_en.docx output/cornucopia_webapp/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml
+          zip output/owasp_cornucopia_webapp_2.00_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.00_en.zip output/cornucopia_webapp/owasp_cornucopia_webapp_2.00_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.00_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.00_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.00_leaflet_tarot_en.idml
       - name: Create pull request artifacts
         uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
         with:
