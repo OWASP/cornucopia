@@ -111,7 +111,7 @@
               pipenv run python scripts/convert.py -l all -lt all -t all -v 1.22 -e webapp
               pipenv run python scripts/convert.py -l all -lt all -t all -v 2.00 -e webapp
               pipenv run python scripts/convert.py -l en -lt all -t all -v 1.00 -e mobileapp
-              zip output/eop-1.0-cards-en.zip output/eop-1.0-cards-en.idml resources/fonts/Segoecbd.ttf resources/fonts/SegoeL.ttf  resources/fonts/SegoeRg.ttf resources/templates/Links
+              #
               cp output/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml /output/cornucopia_mobileapp/
               zip -r output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_en.zip /output/cornucopia_mobileapp/Links/* /output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.00_leaflet_tarot_en.idml
               cp output/owasp_cornucopia_webapp_1.22_cards_bridge_en.idml output/owasp_cornucopia_webapp_1.22_cards_tarot_en.idml output/owasp_cornucopia_webapp_1.22_guide_bridge_en.docx output/owasp_cornucopia_webapp_1.22_leaflet_bridge_en.idml output/cornucopia_webapp/
