@@ -10,55 +10,55 @@ suits:
   name: "DATAVALIDERING & TEGNKODING"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian kan samle informasjon om underliggende konfigurasjoner, skjemaer, logikk, kode, programvare, tjenester og infrastruktur på grunn av innholdet i feilmeldinger, eller dårlig konfigurasjon, eller tilstedeværelsen av standard installasjonsfiler eller gamle-, test-, sikkerhetskopier eller kopier av ressurser, eller eksponering av kildekode"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert kan legge inn ondsinnede data fordi det tillatte protokollformatet ikke blir sjekket, duplikater akseptert, strukturen blir ikke verifisert, eller de individuelle dataelementene blir ikke validert iht. format, type, rekkevidde, lengde og en hviteliste over tillatte data. tegn eller formater"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave kan legge inn ondsinnede feltnavn eller data fordi de ikke blir sjekket innenfor konteksten til gjeldende bruker og prosess"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee kan omgå de sentraliserte datakodingsrutinene siden de ikke brukes overalt, eller feil datakoding blir brukt"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason kan omgå de sentraliserte valideringsrutinene siden de ikke brukes på all input"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan kan lage spesielle datalast for å hindre inndatavalidering fordi tegnsettet ikke er spesifisert/håndhevet, dataene er kodet flere ganger, dataene er ikke fullstendig konvertert til det samme formatet som applikasjonen bruker (f.eks. kanonisering) før de valideres, eller hvis variabler ikke benytter sterke typer"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana kan omgå de sentraliserte datarensingsrutinene siden de ikke brukes fullt ut"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun kan omgå inndatavaliderings- eller utdatavalideringskontroller fordi valideringsfeil ikke blir avvist og/eller renset"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Darío kan utnytte tilliten applikasjonen har til en datakilde (f.eks. brukerdefinerbare data, manipulering av lokalt lagrede data, endring av tilstandsdata på en klientenhet, mangel på verifisering av identitet under datavalidering slik at Darío kan utgi seg for å være Colin)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby has control over input validation, output validation or output encoding code or routines so they can be bypassed"
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier kan injisere data inn i en datatolk på klient- eller enhetssiden fordi et parameterisert grensesnitt ikke blir brukt, eller ikke har blitt implementert riktig, eller fordi dataene ikke er kodet riktig innenfor konteksten, eller det er ingen restriktive retningslinjer for kode eller datainkludering"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe kan injisere data inn i en tolk på serversiden (f.eks. SQL, OS-kommandoer, Xpath, Server JavaScript, SMTP) fordi et parameterisert grensesnitt med sterke typer ikke brukes eller ikke er implementert riktig"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Du har funnet opp et nytt angrep mot Datavalidering og Tegnkoding"
     misc: "Les mer om dette emnet i OWASPs gratis jukseark om “Input Validation, XSS Prevention, DOM-basert XSS Prevention, SQL Injection Prevention og Query Parameterization”"
@@ -67,55 +67,55 @@ suits:
   name: "AUTENTISERING"
   cards:
   -
-    id: "AC2"
+    id: "AT2"
     value: "2"
     desc: "James kan utføre autentiseringsfunksjoner uten at den virkelige brukeren noen gang er klar over at dette har skjedd (f.eks. forsøk på å logge på, logge på med stjålet legitimasjon, tilbakestille passordet)"
   -
-    id: "AC3"
+    id: "AT3"
     value: "3"
     desc: "Muhammad kan få tak i en brukers passord eller andre hemmeligheter som sikkerhetsspørsmål, ved observasjon under innreise, eller fra en lokal cache, eller fra minnet, eller under transport, eller ved å lese det fra et ubeskyttet sted, eller fordi det er allment kjent, eller fordi det aldri utløper, eller fordi brukeren ikke kan endre sitt eget passord"
   -
-    id: "AC4"
+    id: "AT4"
     value: "4"
     desc: "Sebastien kan enkelt identifisere brukernavn eller samle dem inn"
   -
-    id: "AC5"
+    id: "AT5"
     value: "5"
     desc: "Javier kan bruke forhåndsvalgte-, testrelaterte- eller lett-gjettelige autentiseringsfaktorer for å autentisere, eller bruke en gammel konto eller en konto som ikke nødvendig er tiltenkt applikasjonen"
   -
-    id: "AC6"
+    id: "AT6"
     value: "6"
     desc: "Sven kan gjenbruke et midlertidig passord fordi brukeren ikke trenger å endre det ved første gangs bruk, eller det har for lang- eller ingen utløpstid, eller det ikke bruker en leveringsmetode utenfor det spesifike telekommunikasjonsfrekvensbåndet (f.eks. post, mobilapp, SMS)"
   -
-    id: "AC7"
+    id: "AT7"
     value: "7"
     desc: "Cecilia kan bruke brute-force og ordbokangrep mot en eller flere kontoer uten å møte en øvre grense, eller fordi disse angrepene er forenklet på grunn av utilstrekkelig kompleksitet, lengde-, utløps- og gjenbrukskrav for passord"
   -
-    id: "AC8"
+    id: "AT8"
     value: "8"
     desc: "Kate kan omgå autentisering fordi den ikke feiler på en sikker måte (dvs. den tillater som standard uautentisert tilgang)"
   -
-    id: "AC9"
+    id: "AT9"
     value: "9"
     desc: "Claudia kan utføre mer kritiske funksjoner fordi autentiseringskravene er for svake (f.eks. mangler tofaktorautentisering), eller fordi krav om re-autentisering for disse ikke er tilstede"
   -
-    id: "ACX"
+    id: "ATX"
     value: "10"
     desc: "Pravin kan omgå autentiseringskontroll fordi en sentralisert standard-, testet-, utprøvd- og godkjent autentiseringsmodul/rammeverk/tjeneste, separat fra ressursen som forespørres, ikke benyttes"
   -
-    id: "ACJ"
+    id: "ATJ"
     value: "J"
     desc: "Mark kan få tilgang til ressurser eller tjenester fordi det ikke finnes noe autentiseringskrav, eller fordi det ble feilaktig antatt at autentisering skulle bli utført av et annet system eller utført av en tidligere handling"
   -
-    id: "ACQ"
+    id: "ATQ"
     value: "Q"
     desc: "Johan kan omgå autentisering fordi den ikke håndheves med like strenghet for alle typer autentiseringsrelatert funksjonalitet (f.eks. registrering, passordendring, passordgjenoppretting, utlogging, administrasjon) eller på tvers av alle versjoner/kanaler (f.eks. mobil nettsted, mobilapp, nettsted, API, hjelpesenter)"
   -
-    id: "ACK"
+    id: "ATK"
     value: "K"
     desc: "Olga kan påvirke eller endre autentiseringskode/rutiner slik at de kan omgås"
   -
-    id: "ACA"
+    id: "ATA"
     value: "A"
     desc: "Du har funnet opp et nytt angrep mot Autentisering"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Authentication”"
@@ -352,13 +352,13 @@ suits:
   name: "JOKER"
   cards:
   -
-    id: "JOA"
+    id: "WCA"
     value: "JokerA"
     card: "Joker"
     desc: "Alice kan bruke applikasjonen til å angripe brukernes systemer og data"
     misc: "Har du tenkt på å bli et individuelt OWASP-medlem? Alle verktøy, veiledning og lokale møter er gratis for alle, men individuelt medlemskap er med på å støtte OWASPs arbeid"
   -
-    id: "JOB"
+    id: "WCB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob kan øve innflytelse over, endre eller påvirke applikasjonen slik at den ikke lenger overholder juridiske, regulatoriske, kontraktsmessige eller andre organisatoriske mandater"
