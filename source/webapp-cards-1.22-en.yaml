@@ -352,13 +352,13 @@ suits:
   name: "WILD CARD"
   cards:
   -
-    id: "JOA"
+    id: "WCA"
     value: "JokerA"
     card: "Joker"
     desc: "Alice can utilize the application to attack users' systems and data"
     misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
   -
-    id: "JOB"
+    id: "WCB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
