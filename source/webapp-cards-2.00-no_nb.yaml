@@ -352,13 +352,13 @@ suits:
   name: "JOKER"
   cards:
   -
-    id: "WCA"
+    id: "JOA"
     value: "JokerA"
     card: "Joker"
     desc: "Alice kan bruke applikasjonen til å angripe brukernes systemer og data"
     misc: "Har du tenkt på å bli et individuelt OWASP-medlem? Alle verktøy, veiledning og lokale møter er gratis for alle, men individuelt medlemskap er med på å støtte OWASPs arbeid"
   -
-    id: "WCB"
+    id: "JOB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob kan øve innflytelse over, endre eller påvirke applikasjonen slik at den ikke lenger overholder juridiske, regulatoriske, kontraktsmessige eller andre organisatoriske mandater"

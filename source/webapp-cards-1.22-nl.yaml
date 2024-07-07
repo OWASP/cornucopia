@@ -352,13 +352,13 @@ suits:
   name: "WILDE KAART"
   cards:
   -
-    id: "WCA"
+    id: "JOA"
     value: "JokerA"
     card: "Joker"
     desc: "Alice kan de applicatie gebruiken om systemen en gegevens van gebruikers aan te vallen"
     misc: "Heb je erover nagedacht om individueel OWASP-lid te worden? Alle tools, begeleiding en lokale bijeenkomsten zijn gratis voor iedereen, maar individueel lidmaatschap helpt het werk van OWASP te ondersteunen"
   -
-    id: "WCB"
+    id: "JOB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob kan de applicatie beïnvloeden, wijzigen of beïnvloeden zodat deze niet langer voldoet aan wettelijke, reglementaire, contractuele of andere organisatorische mandaten"
