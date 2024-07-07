@@ -67,55 +67,55 @@ suits:
   name: "AUTENTICACIÓN"
   cards:
   -
-    id: "AC2"
+    id: "AT2"
     value: "2"
     desc: "James puede emprender funciones de autenticación sin que el usuario real se dé cuenta alguna vez de lo ocurrido (por ejemplo, intento de logueo, inicio de sesión con credenciales robadas, restablecimiento de la contraseña)"
   -
-    id: "AC3"
+    id: "AT3"
     value: "3"
     desc: "Muhammad puede obtener una contraseña de usuario u otros secretos tales como preguntas de seguridad, por observación durante el ingreso o desde el cache, o desde la memoria, o en tránsito, o leyéndolo de alguna ubicación desprotegida, o porque es ampliamente conocido, o porque nunca caduca, o porque el usuario no puede cambiar su propia contraseña"
   -
-    id: "AC4"
+    id: "AT4"
     value: "4"
     desc: "Sebastien puede fácilmente identificar nombres de usuario o puede enumerarlos"
   -
-    id: "AC5"
+    id: "AT5"
     value: "5"
     desc: "Javier puede usar credenciales por defecto, de prueba o fáciles de adivinar para autenticar, o puede usar una cuenta antigua o una cuenta no necesaria para la aplicación"
   -
-    id: "AC6"
+    id: "AT6"
     value: "6"
     desc: "Sven puede reutilizar contraseñas temporales porque el usuario no realizó el cambio en el primer logueo. o tiene demasiado tiempo y no tiene vencimiento, o no usa un método correcto de entrega  (por ejemplo, publicación, aplicación móvil, SMS)"
   -
-    id: "AC7"
+    id: "AT7"
     value: "7"
     desc: "Cecilia puede usar ataques de  fuerza bruta y ataques de diccionario sin límites contra uno o muchas cuentas, o estos ataques se simplifican debido a una complejidad insuficiente, longitud, caducidad inadecuada y reutilización de requisitos para las contraseñas"
   -
-    id: "AC8"
+    id: "AT8"
     value: "8"
     desc: "Kate puede pasar por alto la autenticación porque ésta no falla de forma segura (es decir, por defecto permite acceso no autenticado)"
   -
-    id: "AC9"
+    id: "AT9"
     value: "9"
     desc: "Claudia puede utilizar Funciones más críticas porque los requisitos de autenticación son demasiado débiles (por ejemplo, no usa autenticación robusta como el doble factor), o no hay requisitos de re-autenticación para éstos"
   -
-    id: "ACX"
+    id: "ATX"
     value: "10"
     desc: "Pravin puede omitir el control de autenticación porque no se está utilizando un módulo/framework/servicio de autenticación centralizado, estándar, testeado, probado y aprobado, separado del recurso solicitado"
   -
-    id: "ACJ"
+    id: "ATJ"
     value: "J"
     desc: "Mark puede acceder a los recursos o servicios porque no hay requisitos de autenticación, o fue asumido erróneamente que la autentificación sería realizada por algún otro sistema o realizada en alguna acción previa"
   -
-    id: "ACQ"
+    id: "ATQ"
     value: "Q"
     desc: "Johan puede omitir la autenticación porque no se aplica con igual rigor para todos los tipos de funcionalidad de autenticación (por ejemplo, registro, cambio de contraseña, recuperación de contraseña, cierre de sesión, administración) o en todas las versiones / canales (por ejemplo, sitio web móvil, aplicación móvil, sitio web completo, API, call center)"
   -
-    id: "ACK"
+    id: "ATK"
     value: "K"
     desc: "Olga puede influir o alterar el código o rutina de autenticación o puede evitarlo"
   -
-    id: "ACA"
+    id: "ATA"
     value: "A"
     desc: "Usted tiene inventado un nuevo ataque contra la Autenticación"
     misc: "Leer mas sobre este tema en OWASP's free Authentication Cheat Sheet"
