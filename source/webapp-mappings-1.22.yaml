@@ -513,6 +513,7 @@ suits:
   name: "CORNUCOPIA"
   cards:
   -
+    id: "CO2"
     value: "2"
     owasp_scp: [ 194, 195, 196, 197, 198, 199, 200, 201, 202, 205, 206, 207, 208, 209 ]
     owasp_asvs: [ 5.1 ]
@@ -520,6 +521,7 @@ suits:
     capec: [ 25, 26, 29, 96, 123, 124, 128, 129, 264, 265 ]
     safecode: [ 3, 5, 6, 7, 9, 22, 25, 26, 34 ]
   -
+    id: "CO3"
     value: "3"
     owasp_scp: [ 134 ]
     owasp_asvs: [ 19.5 ]
@@ -527,6 +529,7 @@ suits:
     capec: [ 189, 207 ]
     safecode: [ ]
   -
+    id: "CO4"
     value: "4"
     owasp_scp: [ 23, 32, 34, 42, 51, 181 ]
     owasp_asvs: [ '8.10' ]
@@ -534,6 +537,7 @@ suits:
     capec: [ ]
     safecode: [ ]
   -
+    id: "CO5"
     value: "5"
     owasp_scp: [ ]
     owasp_asvs: [ ]
@@ -541,6 +545,7 @@ suits:
     capec: [ 89, 103, 181, 459 ]
     safecode: [ ]
   -
+    id: "CO6"
     value: "6"
     owasp_scp: [ 109, 110, 111, 112, 155 ]
     owasp_asvs: [ 8.2, 8.4 ]
@@ -548,6 +553,7 @@ suits:
     capec: [ 54, 98, 164 ]
     safecode: [ 4, 11, 23 ]
   -
+    id: "CO7"
     value: "7"
     owasp_scp: [ 113, 114, 115, 117, 118, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130 ]
     owasp_asvs: [ 2.12, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, '8.10', 8.11, 8.12, '9.10', 10.4 ]
@@ -555,6 +561,7 @@ suits:
     capec: [ 93 ]
     safecode: [ 4 ]
   -
+    id: "CO8"
     value: "8"
     owasp_scp: [ 151, 152, 156, 160, 161, 173, 174, 175, 176, 177 ]
     owasp_asvs: [ 19.1, 19.4, 19.6, 19.7, 19.8 ]
@@ -562,6 +569,7 @@ suits:
     capec: [ 37, 220, 310, 436, 536 ]
     safecode: [ ]
   -
+    id: "CO9"
     value: "9"
     owasp_scp: [ 23, 29, 56, 81, 82, 84, 85, 86, 87, 88, 89, 90 ]
     owasp_asvs: [ 2.1, 2.32 ]
@@ -569,6 +577,7 @@ suits:
     capec: [ 122, 233 ]
     safecode: [ ]
   -
+    id: "COX"
     value: "10"
     owasp_scp: [ 57, 151, 152, 204, 205, 213, 214 ]
     owasp_asvs: [ 1.11 ]
@@ -576,6 +585,7 @@ suits:
     capec: [ 68, 438, 439, 442, 524, 538 ]
     safecode: [ 15 ]
   -
+    id: "COJ"
     value: "J"
     owasp_scp: [ 90, 137, 148, 151, 152, 153, 154, 175, 176, 177, 178, 179, 186, 192 ]
     owasp_asvs: [ 19.5, 19.9 ]
@@ -583,6 +593,7 @@ suits:
     capec: [ ]
     safecode: [ 4 ]
   -
+    id: "COQ"
     value: "Q"
     owasp_scp: [ ]
     owasp_asvs: [ 4.14, 9.8, 15.1, 15.2 ]
@@ -590,6 +601,7 @@ suits:
     capec: [ ]
     safecode: [ 1, 27 ]
   -
+    id: "COK"
     value: "K"
     owasp_scp: [ 41, 55 ]
     owasp_asvs: [ ]
