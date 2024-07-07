@@ -10,55 +10,55 @@ suits:
   name: "VALIDAÇÃO & CODIFICAÇÃO DE DADOS"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian consegue reunir o básico de informações sobre a utilização e configuração de base de dados, lógica, codificação, além da utilização de softwares, serviços e infraestrutura nas mensagens de erro ou em mensagens de configuração, ou na presença de arquivos de  instalação (padrões ou antigos), ou em evidências de testes, ou em backups ou em exposição de código fonte"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert consegue inserir dados maliciosos pois o formato de protocolo não foi checado, ou duplicações são aceitas, ou a estrutura não está sendo verificada, ou os dados individuais não foram validados por formato, tipo, intervalo, tamanho e por uma lista de caracteres ou formatos possíveis"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave consegue inserir nomes ou dados de campos mal intencionados porque isto não está sendo verificado no contexto de cada usuário e processo"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee consegue ignorar as rotinas centralizadas de codificação de saída pois elas não estão sendo usadas em todos os lugares, ou a codificação errada está sendo usada"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason consegue ignorar as rotinas centralizadas de validação de dados de entrada pois elas não estão sendo usadas em todos os campos de entrada de dados"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan consegue carregar/enviar informações especiais visando evitar validações de campos porque o conjunto de caracteres não é especificado e aplicado, ou o dado de entrada é codificado diversas vezes, ou o dado não é totalmente convertido no mesmo formado que a aplicação usa (ex: canonicalização) antes da validação, ou as variáveis não são fortemente tipadas"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana consegue ignorar as rotinas centralizadas de tratamento (sanitização) pois elas não estão sendo usadas de forma abrangente"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun consegue ignorar as verificações de validação de entrada ou de saída porque as falhas de validação não são rejeitadas e/ou tratadas (sanitização)"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Dario consegue explorar a confiabilidade da aplicação em fonte de dados (ex: dados definidos pelo usuário, manipulação de dados armazenados localmente, mudança do estado dos dados em dispositivos clientes, falta de verificação da identidade durante uma validação de dados, como Dario pode fingir ser Colin)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby tem o controle sobre validações de entrada de dados, validações de saída de dados ou codificação de saída ou rotinas que ele consegue ignorar/burlar"
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier consegue injetar dados num dispositivo ou num interpretador no lado do cliente porque uma interface parametrizada não foi usada, ou não foi implementada corretamente, ou os dados não foram codificados corretamente para o contexto proposto, ou não há uma política restritiva para a codificação ou a inclusão de dados"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe consegue injetar dados num interpretador no lado do servidor (ex: SQL, comandos para o sistema operacional, Xpath, Server JavaScript, SMTP) porque uma interface parametrizada não foi usada ou não foi implementada corretamente"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Você inventou um novo ataque contra a Validação & Codificação de Dados"
     misc: "Leia mais sobre este tópico em OWASP® Cheat Sheets. Pesquise sobre validação dos dados de entrada, Prevenção de XSS(Cross-site Scripting), Prevenção do DOM baseado em XSS, Prevenção de SQL Injection e Parametrização de Consultas"
@@ -67,55 +67,55 @@ suits:
   name: "AUTENTICAÇÃO"
   cards:
   -
-    id: "AC2"
+    id: "AT2"
     value: "2"
     desc: "James pode assumir as funções de autenticação sem que o usuário real esteja ciente do uso destas funções (ex: tente fazer login, logar com credenciais, redefinir a senha)"
   -
-    id: "AC3"
+    id: "AT3"
     value: "3"
     desc: "Muhammad consegue obter a senha de um usuário ou outros dados, pela observação durante a autenticação, ou cache local, ou pela memória, ou pelo tráfego de dados, ou pela leitura de algum local desprotegido, ou porque isto é amplamente conhecido, ou porque não há expiração de dados, ou por que o usuário não consegue trocar sua própria senha"
   -
-    id: "AC4"
+    id: "AT4"
     value: "4"
     desc: "Sebastien pode identificar facilmente nomes de usuários ou consegue elencar quem eles são"
   -
-    id: "AC5"
+    id: "AT5"
     value: "5"
     desc: "Javier pode usar credenciais padrões (default), de teste ou facilmente adivinhadas para autenticação, ou consegue autenticar através de contas inativas ou autentica-se por contas não necessariamente da aplicação"
   -
-    id: "AC6"
+    id: "AT6"
     value: "6"
     desc: "Sven consegue reutilizar uma senha temporária porque o usuário não precisa troca-la no primeiro acesso, ou o tempo de expiração é muito longo, ou o tempo de expiração não existe, ou não é usado um método de entrega out-of-band (ex: aplicação mobile, SMS)"
   -
-    id: "AC7"
+    id: "AT7"
     value: "7"
     desc: "Cecilia consegue usar força bruta e ataques de dicionário (dictionary attacks) contra uma ou muitas contas sem limitação, ou estes ataques são simplificados pois as senhas tem baixa complexidade, tamanho reduzido, inexistência de expiração e regras para reuso"
   -
-    id: "AC8"
+    id: "AT8"
     value: "8"
     desc: "Kate consegue ignorar a autenticação porque isto não é uma falha de segurança (ex: o acesso sem autenticação está assinalado como padrão)"
   -
-    id: "AC9"
+    id: "AT9"
     value: "9"
     desc: "Claudia consegue assumir funções críticas porque os requisitos de autenticação são muito fracos (ex: não é usado autenticação com força de senha), ou não é um requisito revalidar a autenticação com frequência"
   -
-    id: "ACX"
+    id: "ATX"
     value: "10"
     desc: "Pravin consegue ignorar controle de autenticação porque não está sendo usado um módulo/framework/serviço de autenticação que seja centralizado, testado, comprovado e aprovado para gerir requisições"
   -
-    id: "ACJ"
+    id: "ATJ"
     value: "J"
     desc: "Mark consegue acessar recursos ou serviços porque não há requisitos de autenticação, ou, por engano, um outro sistema ou outra ação realizou autenticação"
   -
-    id: "ACQ"
+    id: "ATQ"
     value: "Q"
     desc: "Johan consegue ignorar a autenticação porque não é aplicado o mesmo rigor para todas as funções de autenticação (ex: logar, troca de senha, recuperação de senha, logout, acesso administrador) ou não é aplicado o mesmo rigor nos diversos locais de acesso e versões do sistema(ex:mobile website, mobile app, full website, API, call center)"
   -
-    id: "ACK"
+    id: "ATK"
     value: "K"
     desc: "Olga consegue influenciar ou alterar o código ou a rotina de autenticação e com isto ignorar a autenticação"
   -
-    id: "ACA"
+    id: "ATA"
     value: "A"
     desc: "Você inventou um novo ataque contra a Autenticação"
     misc: "Leia mais sobre este tópico em OWASP® Authentication Cheat Sheet"
@@ -352,12 +352,12 @@ suits:
   name: "CURINGA"
   cards:
   -
-    id: "JOA"
+    id: "WCA"
     value: "JokerA"
     desc: "Alice consegue utilizar a aplicação para realizar ataques a dados e usuários do sistema"
     misc: "Você pensou em se tornar membro individual da OWASP? Todas as ferramentas, guias e reuniões locais são gratuitas para todos, mas ser um membro individual apoia o trabalho da OWASP"
   -
-    id: "JOB"
+    id: "WCB"
     value: "JokerB"
     desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
     misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do OWASP® Juice Shop, Security Shepherd, ou usando o desafio online OWASP® Hacking-lab. Ambos são gratuitos"
