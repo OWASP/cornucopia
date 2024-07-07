@@ -10,55 +10,55 @@ suits:
   name: "Adat ellenőrzés & kódolás"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian információt szerzett a belső konfigurációról, sémákról, logikáról, kódról, szoftverekről, szolgáltatásokról, vagy infrastruktúráról egy hibaüzenet, hibás konfiguráció, vagy alapértelmezett telepítőfájl, esetleg régi, teszt, biztonsági mentés, vagy másolt erőforrás, netán forráskód kiszivárgása révén"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert kártékony bemenetet tud megadni, mert az engedélyezett protokoll formátum nincs ellenőrizve, vagy több bemenetet is elfogad a rendszer, vagy a struktúra nincs ellenőrizve, esetleg az egyedi adat elemek nincsenek ellenőrizve formátum, típus, tartomány, hossz, és egy elfogadott karaktereket vagy formátumokat engedélyező lista alapján"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave kártékony mezőnevet, vagy adatot tud megadni, mert ez nincs ellenőrizve az aktuális felhasználó és folyamat kontextusában"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee meg tudja kerülni a központi kódoló rutinokat, mert ezek nincsenek használva mindenhol, vagy a rossz kódolás van használatban"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason meg tudja kerülni a központi ellenőrző rutinokat, mert azokat nem minden bemeneten használják"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan különleges adatokat tud készíteni, hogy kikerülje a bemenet ellenőrzését, ugyanis a karakterkészlet nincs specifikálva/érvényesítve, vagy az adat többször van kódolva, vagy az adat nem teljesen van átalakítva ugyanarra a formátumra, mint amit az alkalmazás használ mielőtt ellenőriznék, vagy a változók nem erősen típusosak"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana meg tudja kerülni a központi ellenőrző rutinokat, mert azok nem mindenhol vannak használatban"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun meg tudja kerülni a bemeneti, vagy a kimeneti adatok ellenőrzését, mert a sikertelen ellenőrzéseket nem utasítják el, vagy tisztítják meg"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Dario vissza tud élni az alkamazás bizalmával egy adatforrás felé (például felhasználó által definiált adat, helyben tárolt adat manipulálása, állapotadattá konvertálás egy kliens eszközön, személyazonosság ellenőrzésének hiánya adatellenőrzés közben, például Dario Colinnak tudja kiadni magát)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby át tudja venni az irányítást a bemenet ellenőrzés fölött, vagy a kimenet kódolást végző kód, bemeneti vagy kimeneti adat ellenőrzés, vagy a kimeneti kódolás vagy rutinok fölött, hogy kijátssza azokat."
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier adatot tud beszúrni egy kliens vagy eszköz oldali fordítóba, mert a paraméterezett interfész nincs használatban, vagy nem megfelelően implementálták, vagy az adatot nem megfelelően kódolták a környezet függvényében, vagy nincs korlátozás a kódon, vagy a kezelt adaton"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe adatot tud beszúrni egy szerver oldali kiértékelésbe (pl. SQL, operációs rendszer parancsok, Xpath, szerver oldali JavaScript, SMTP), mert egyerősen típusos paraméteres interfész nincs használatban, vagy nem implementálták megfelelően"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "You have invented a new attack against Data Validation and Encoding"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
@@ -67,55 +67,55 @@ suits:
   name: "Authentication"
   cards:
   -
-    id: "AC2"
+    id: "AT2"
     value: "2"
     desc: "James can undertake authentication functions without the real user ever being aware this has occurred (e.g. attempt to log in, log in with stolen credentials, reset the password) "
   -
-    id: "AC3"
+    id: "AT3"
     value: "3"
     desc: "Muhammad can obtain a user's password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password"
   -
-    id: "AC4"
+    id: "AT4"
     value: "4"
     desc: "Sebastien can easily identify user names or can enumerate them"
   -
-    id: "AC5"
+    id: "AT5"
     value: "5"
     desc: "Javier can use default, test or easily guessable credentials to authenticate, or can use an old account or an account not necessary for the application"
   -
-    id: "AC6"
+    id: "AT6"
     value: "6"
     desc: "Sven can reuse a temporary password because the user does not have to change it on first use, or it has too long or no expiry, or it does not use an out-of-band delivery method (e.g. post, mobile app, SMS)"
   -
-    id: "AC7"
+    id: "AT7"
     value: "7"
     desc: "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords"
   -
-    id: "AC8"
+    id: "AT8"
     value: "8"
     desc: "Kate can bypass authentication because it does not fail secure (i.e. it defaults to allowing unauthenticated access)"
   -
-    id: "AC9"
+    id: "AT9"
     value: "9"
     desc: "Claudia can undertake more critical functions because authentication requirements are too weak (e.g. do not use strong authentication such as two factor), or there is no requirement to re-authenticate for these"
   -
-    id: "ACX"
+    id: "ATX"
     value: "10"
     desc: "Pravin can bypass authentication controls because a centralized standard, tested, proven and approved authentication module/framework/service, separate to the resource being requested, is not being used"
   -
-    id: "ACJ"
+    id: "ATJ"
     value: "J"
     desc: "Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
   -
-    id: "ACQ"
+    id: "ATQ"
     value: "Q"
     desc: "Johan can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
   -
-    id: "ACK"
+    id: "ATK"
     value: "K"
     desc: "Olga can influence or alter authentication code/routines so they can be bypassed"
   -
-    id: "ACA"
+    id: "ATA"
     value: "A"
     desc: "You have invented a new attack against Authentication"
     misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
@@ -352,13 +352,13 @@ suits:
   name: "Wild Card"
   cards:
   -
-    id: "JOA"
+    id: "WCA"
     value: "JokerA"
     card: "Joker"
     desc: "Alice can utilize the application to attack users' systems and data"
     misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
   -
-    id: "JOB"
+    id: "WCB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
