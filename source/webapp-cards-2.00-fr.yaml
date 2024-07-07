@@ -10,55 +10,55 @@ suits:
   name: "VALIDATION DES DONNÉES & ENCODAGE"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian peut recueillir des informations sur les configurations sous-jacentes, les schémas, la logique, le code, le logiciel, les services et l'infrastructure, de par le contenu des messages d'erreur, ou une mauvaise configuration, ou la présence de fichiers d'installation par défaut, ou des ressources de test, de sauvegarde, de copie, ou l'exposition de code source"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert peut saisir des données malveillantes, car le format attendu n'est pas vérifié, ou des duplicatas sont acceptés, ou la structure n'est pas vérifiée, ou les éléments individuels des données ne sont pas validées : type, plage, longueur, liste blanche de caractères ou de formats autorisés"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave peut saisir des noms de champs ou des données malveillantes, car ils ne sont pas vérifiés dans le contexte de l'utilisateur ou du processus en cours"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées partout, ou bien de mauvais encodages sont utilisés"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan peut générer des messages de sorte à tromper la validation des données, car le jeu de caractères n'est pas spécifié/imposé, ou les données sont encodées plusieurs fois, ou les données ne sont pas pleinement converties dans le format que l'application utilise (par exemple canonicalisation) avant leur validation, ou les variables sont insuffisamment typées"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana peut contourner les routines de sanitisation centralisées, car celles-ci ne sont pas pleinement utilisées"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun peut contourner la validation des saisies ou la validation des sorties, car les échecs de validation ne sont pas rejetés et/ou sanitisés"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Darío peut exploiter la confiance que l'application place dans une source de données (par exemple données définies par l'utilisateur, manipulation de données stockées localement, changement de déclaration des données sur un système client, manque de vérification de l'identité pendant la validation de données de telle manière que Darío peut se faire passer pour Colin)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby a le contrôle sur la validation des saisies, la validation des sorties, ou le code d'encodage des sorties, ou les routines, de telle manière que celles-ci peuvent être contournées"
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier peut injecter des données dans un client ou un système interpréteur, car une interface paramétrée n'est pas utilisée, ou n'a pas été implémentée correctement, ou les données n'ont pas été encodées correctement dans ce contexte, ou il n'y a pas de politique restrictive sur le code ou les ajouts de données"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe peut injecter des données dans un interpréteur côté serveur (ex : SQL, commandes OS, Xpath, Server JavaScript, SMTP), car une interface paramétrée fortement typée n'est pas utilisée ou n'a pas été implémentée correctement"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
@@ -67,55 +67,55 @@ suits:
   name: "AUTHENTIFICATION"
   cards:
   -
-    id: "AC2"
+    id: "AT2"
     value: "2"
     desc: "James peut entreprendre des fonctions d'authentification sans que l'utilisateur légitime ne s'en aperçoive (par exemple tentative d'authentification, authentification avec des identifiants volés, mise à jour du mot de passe)"
   -
-    id: "AC3"
+    id: "AT3"
     value: "3"
     desc: "Muhammad peut obtenir le mot de passe d'un utilisateur ou d'autres secrets comme des questions de sécurité, de par l'observation pendant la saisie, ou à partir d'un cache local, de la mémoire, en transit, par lecture d'une ressource non protégée, parce qu'ils sont communément répandus, qu'ils n'expirent jamais, que l'utilisateur ne peut pas changer son propre mot de passe"
   -
-    id: "AC4"
+    id: "AT4"
     value: "4"
     desc: "Sebastien peut facilement identifier les noms des utilisateurs ou peut les énumérer"
   -
-    id: "AC5"
+    id: "AT5"
     value: "5"
     desc: "Javier peut utiliser les identifiants par défaut, de test, ou facilement devinables, ou peut utiliser un ancien compte ou un compte dont l'application n'a pas besoin"
   -
-    id: "AC6"
+    id: "AT6"
     value: "6"
     desc: "Sven peut réutiliser un mot de passe temporaire car l'utilisateur n'a pas besoin de le changer à la première connexion, ou sa durée de vie est trop longue ou n'expire pas, ou sa communication ne nécessite pas de deuxième canal distinct (par exemple voie postale, application mobile, SMS)"
   -
-    id: "AC7"
+    id: "AT7"
     value: "7"
     desc: "Cecilia peut réaliser des attaques de type brute force ou de dictionnaire contre un ou plusieurs comptes sans limitation, ou ses attaques sont simplifiées du fait d'une faible politique de mots de passe (faible complexité, longueur, historique, ou durée de vie insuffisante)"
   -
-    id: "AC8"
+    id: "AT8"
     value: "8"
     desc: "Kate peut contourner l'authentification car son échec n'est pas contrôlé (passage en accès non authentifié)"
   -
-    id: "AC9"
+    id: "AT9"
     value: "9"
     desc: "Claudia peut effectuer davantage de fonctions critiques car l'authentification est trop faible (ex : pas d'authentification forte à deux facteurs), ou la réauthentification n'est pas requise pour ces fonctions"
   -
-    id: "ACX"
+    id: "ATX"
     value: "10"
     desc: "Pravin peut contourner les contrôles d'authentification car un module/framework/service d'authentification, qui est centralisé, standardisé, testé, autorisé, et séparé de la ressource requêtée, n'est pas utilisé"
   -
-    id: "ACJ"
+    id: "ATJ"
     value: "J"
     desc: "Mark peut accéder à des ressources ou des services parce qu'il n'y a pas d'authentification, ou il a été pensé à tort que l'authentification était prise en compte par un autre système ou réalisée dans une action précédente"
   -
-    id: "ACQ"
+    id: "ATQ"
     value: "Q"
     desc: "Johan peut contourner l'authentification car celle-ci n'est pas implémentée avec la même rigueur dans toutes les fonctionnalités (ex : inscription, changement de mot de passe, recouvrement de mot de passe, déconnexion, administration) ou dans toutes les versions/canaux (ex : site web mobile, appli mobile, site web, API, centre d'appel)"
   -
-    id: "ACK"
+    id: "ATK"
     value: "K"
     desc: "Olga peut influencer ou modifier du code/routines d'authentification de telle manière que celle-ci soit contournée"
   -
-    id: "ACA"
+    id: "ATA"
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre l'Authentification"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur l'Authentification"
@@ -352,12 +352,12 @@ suits:
   name: "JOKER"
   cards:
   -
-    id: "JOA"
+    id: "WCA"
     value: "JokerA"
     desc: "Alice peut utiliser l'application pour attaquer les systèmes et les données des utilisateurs"
     misc: "Avez-vous déjà songé à devenir membre OWASP? Tous les outils, conseils et réunions locales sont gratuits pour tous, mais l'adhésion individuelle aide à soutenir le travail de l'OWASP"
   -
-    id: "JOB"
+    id: "WCB"
     value: "JokerB"
     desc: "Bob peut influencer, altérer ou affecter l'application de façon à ce qu'elle ne soit plus conforme aux exigences légales, réglementaires, contractuelles ou autres exigences de l'organisation"
     misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans la OWASP® Juice Shop, Security Shepherd, ou en utilisant les défis en ligne du OWASP® Hacking-lab gratuit"
