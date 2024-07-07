@@ -413,6 +413,7 @@ suits:
   name: "CRYPTOGRAPHY"
   cards:
   -
+    id: "CR2"
     value: "2"
     owasp_scp: [ 105, 133, 135 ]
     owasp_asvs: [ ]
@@ -420,6 +421,7 @@ suits:
     capec: [ ]
     safecode: [ 21, 29 ]
   -
+    id: "CR3"
     value: "3"
     owasp_scp: [ 92, 205, 212 ]
     owasp_asvs: [ 8.11, 11.7, 13.2, 19.5, 19.6, 19.7, 19.8 ]
@@ -427,6 +429,7 @@ suits:
     capec: [ 31, 39, 68, 75, 133, 145, 162, 203, 438, 439, 442 ]
     safecode: [ 12, 14 ]
   -
+    id: "CR4"
     value: "4"
     owasp_scp: [ 37, 88, 143, 214 ]
     owasp_asvs: [ 7.12, 9.2 ]
@@ -434,6 +437,7 @@ suits:
     capec: [ 185, 186, 187 ]
     safecode: [ 14, 29, 30 ]
   -
+    id: "CR5"
     value: "5"
     owasp_scp: [ 103, 145 ]
     owasp_asvs: [ 7.2, 10.3 ]
@@ -441,6 +445,7 @@ suits:
     capec: [ ]
     safecode: [ 21, 29 ]
   -
+    id: "CR6"
     value: "6"
     owasp_scp: [ 36, 37, 143, 146, 147 ]
     owasp_asvs: [ 2.16, 9.2, 9.11, 10.3, 19.2 ]
@@ -448,6 +453,7 @@ suits:
     capec: [ 31, 57, 102, 157, 158, 384, 466, 546 ]
     safecode: [ 29 ]
   -
+    id: "CR7"
     value: "7"
     owasp_scp: [ 75, 144, 145, 148 ]
     owasp_asvs: [ 10.1, 10.5, '10.10', 10.11, 10.12, 10.13, 10.14 ]
@@ -455,6 +461,7 @@ suits:
     capec: [ 31, 216 ]
     safecode: [ 14, 29, 30 ]
   -
+    id: "CR8"
     value: "8"
     owasp_scp: [ 30, 31, 70, 133, 135 ]
     owasp_asvs: [ 2.13, 7.7, 7.8, 9.2 ]
@@ -462,6 +469,7 @@ suits:
     capec: [ 31, 37, 55 ]
     safecode: [ 21, 29, 31 ]
   -
+    id: "CR9"
     value: "9"
     owasp_scp: [ 60, 104, 105 ]
     owasp_asvs: [ 7.6, 7.7, 7.8, 7.15 ]
@@ -469,6 +477,7 @@ suits:
     capec: [ 97 ]
     safecode: [ 14, 21, 29, 32, 33 ]
   -
+    id: "CRX"
     value: "10"
     owasp_scp: [ 104, 105 ]
     owasp_asvs: [ ]
@@ -476,6 +485,7 @@ suits:
     capec: [ 97, 463 ]
     safecode: [ 14, 21, 29, 31, 32, 33 ]
   -
+    id: "CRJ"
     value: "J"
     owasp_scp: [ 35, 90, 171, 172 ]
     owasp_asvs: [ 2.29 ]
@@ -483,6 +493,7 @@ suits:
     capec: [ 116 ]
     safecode: [ 21, 29 ]
   -
+    id: "CRQ"
     value: "Q"
     owasp_scp: [ 35, 102 ]
     owasp_asvs: [ 7.8, 7.9, 7.11, 7.13, 7.14 ]
@@ -490,6 +501,7 @@ suits:
     capec: [ 116, 117 ]
     safecode: [ 21, 29 ]
   -
+    id: "CRK"
     value: "K"
     owasp_scp: [ 31, 101 ]
     owasp_asvs: [ 7.11 ]
