@@ -10,55 +10,55 @@ suits:
   name: "VALIDACIÓN DE DATOS & CODIFICACIÓN"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, a la presencia de archivos de instalación predeterminados o antiguos, prueba, copia de seguridad o los recursos, o exposición de código fuente"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave puede ingresar datos o nombres maliciosos en campos porque actualmente no hay una revisión o monitoreo a nivel de usuario o proceso"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee puede eludir las rutinas de codificación centralizadas, ya que dichas rutinas no son usadas por todos los activos o se están utilizando codificaciones incorrectas"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason puede eludir las rutinas de validación centralizadas, ya que no se utilizan en todas las entradas"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan puede crear cargas especiales para frustrar la validación de entrada, porque el conjunto de caracteres no es especificado/aplicado, los datos se codifican varias veces, los datos no están completamente transformados en el mismo formato que la aplicación usa (p. ej. canonicalización) antes de ser validados, o las variables no están configuradas de manera robusta"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana puede pasar por alto las rutinas de sanitización centralizadas ya que no están siendo utilizadas exhaustivamente"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun puede pasar por alto los checks de validaciones de entrada o salida porque los fallos en las validaciones no son rechazados y/o sanitizados"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (por ejemplo, datos definibles por el usuario, manipulación de datos almacenados localmente, alteración de los datos del estado en un dispositivo cliente, falta de verificación de identidad durante la validación de datos, como Darío puede pretender ser Colin)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby tiene control sobre la validación de entrada, la validación de salida o código de codificación de salida o rutinas para que puedan ser evitados"
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier puede inyectar datos en el lado del cliente o en el dispositivo porque no se está utilizando una interfaz parametrizada, o no ha sido implementada correctamente, o los datos no han sido codificados correctamente, o no hay una política restrictiva en el código o los datos incluidos"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe puede inyectar datos en un intérprete del lado del servidor (por ejemplo, SQL, comandos del sistema operativo, Xpath, servidor JavaScript, SMTP) porque no se está utilizando una interfaz parametrizada fuertemente tipificada o no se ha implementado correctamente"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Has creado un nuevo ataque contra Validación de Datos y Codificación"
     misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
