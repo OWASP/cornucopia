@@ -352,13 +352,13 @@ suits:
   name: "COMODÍN"
   cards:
   -
-    id: "JOA"
+    id: "WCA"
     value: "JokerA"
     card: "Joker"
     desc: "Alice puede utilizar la aplicación para atacar los sistemas y datos de los usuarios."
     misc: "Has pensado convertirte en un individuo Miembro de OWASP? Todas las herramientas, orientación y reuniones locales son gratis para todos, pero la membresía individual ayuda Apoyar el trabajo de OWASP."
   -
-    id: "JOB"
+    id: "WCB"
     value: "JokerB"
     card: "Joker"
     desc: "Bob puede influir, alterar o afectar la aplicación para que ya no cumpla con mandatos legales, regulatorios, contractuales u otros mandatos organizacionales"
