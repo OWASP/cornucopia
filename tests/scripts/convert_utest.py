@@ -113,21 +113,21 @@ class TestGetValidTemplateChoices(unittest.TestCase):
 
     def test_get_valid_style_choices_blank(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="", layout="")
-        want_template = ["bridge", "tarot"]
+        want_template = ["bridge", "tarot_qr"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
 
     def test_get_valid_style_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="cards")
-        want_template = ["bridge", "tarot"]
+        want_template = ["bridge", "tarot", "tarot_qr"]
 
         got_style = c.get_valid_templates()
         self.assertListEqual(want_template, got_style)
 
     def test_get_valid_style_choices_for_leaflet(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="leaflet")
-        want_template = ["bridge", "tarot"]
+        want_template = ["bridge", "tarot", "tarot_qr"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
@@ -441,7 +441,7 @@ class TestValidMeta(unittest.TestCase):
             "version": "1.22",
             "languages": ["en"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["bridge_qr", "bridge", "tarot"],
+            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
         }
 
     def test_valid_meta(self) -> None:
@@ -588,7 +588,7 @@ class TestGetLanguageData(unittest.TestCase):
             "version": "1.22",
             "languages": ["en", "es"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["bridge_qr", "bridge", "tarot"],
+            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "1.2", "webapp")
         self.assertEqual(want_meta, got_data["meta"])
@@ -694,7 +694,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "language": "ALL",
             "version": "2.00",
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["bridge_qr", "bridge", "tarot"],
+            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
             "languages": ["en", "es"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, self.input_version)
@@ -1036,7 +1036,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "language": "ALL",
                 "version": "1.22",
                 "layouts": ["cards", "leaflet", "guide"],
-                "templates": ["bridge_qr", "bridge", "tarot"],
+                "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
                 "languages": ["en", "es"],
             },
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
