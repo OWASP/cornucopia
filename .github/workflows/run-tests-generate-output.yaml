@@ -125,8 +125,8 @@ jobs:
           cp -rf ./resources/templates/Fonts/FivoSans/* output/cornucopia_mobileapp/Fonts/
           cp -rf ./resources/templates/Fonts/Atkinson-Hyperlegible/* output/cornucopia_mobileapp/Fonts/
           #
-          pipenv run python scripts/convert.py -l en -lt guide -t bridge -v 1.22 -e webapp
-          pipenv run python scripts/convert.py -l en -lt guide -t bridge -v 2.00 -e webapp
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 1.22 -e webapp
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t all -v 1.22 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t all -v 2.00 -e webapp
           pipenv run python scripts/convert.py -l en -lt all -t all -v 1.00 -e mobileapp
