@@ -10,55 +10,55 @@ suits:
   name: "DATAVALIDATIE & KARAKTERCODERING"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian kan informatie verzamelen over de onderliggende configuraties, schema's, logica, code, software, services en infrastructuur vanwege de inhoud van foutmeldingen, of een slechte configuratie, of de aanwezigheid van standaard installatiebestanden of oude, test, back-up of kopieën van bronnen, of blootstelling van broncode"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert kan kwaadaardige gegevens invoeren omdat het toegestane protocolformaat niet wordt gecontroleerd, of duplicaten worden geaccepteerd, of de structuur niet wordt geverifieerd, of de individuele gegevenselementen niet worden gevalideerd voor formaat, type, bereik, lengte en een witte lijst met toegestane tekens of formaten"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave kan kwaadaardige veldnamen of gegevens invoeren omdat het niet wordt gecontroleerd binnen de context van de huidige gebruiker en het huidige proces"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee kan de gecentraliseerde coderingsroutines omzeilen omdat ze niet overal worden gebruikt, of de verkeerde coderingen worden gebruikt"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason kan de gecentraliseerde validatieroutines omzeilen omdat ze niet op alle invoer worden gebruikt"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan kan speciale payloads maken om invoervalidatie te dwarsbomen omdat de tekenset niet is gespecificeerd/afgedwongen, of de gegevens meerdere keren worden gecodeerd, of de gegevens niet volledig worden geconverteerd naar hetzelfde formaat dat de toepassing gebruikt (bijv. gevalideerd, of variabelen zijn niet sterk getypt"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana kan de gecentraliseerde reinigingsroutines omzeilen omdat ze niet volledig worden gebruikt"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun kan invoervalidatie of uitvoervalidatiecontroles omzeilen omdat validatiefouten niet worden afgewezen en/of opgeschoond"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Darío kan misbruik maken van het vertrouwen dat de toepassing stelt in een gegevensbron (bijv. door de gebruiker te definiëren gegevens, manipulatie van lokaal opgeslagen gegevens, wijziging van statusgegevens op een clientapparaat, gebrek aan verificatie van identiteit tijdens gegevensvalidatie zoals Darío kan doe alsof je Colin bent)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby heeft controle over invoervalidatie, uitvoervalidatie of uitvoercoderingscode of routines zodat ze kunnen worden omzeild"
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier kan gegevens in een client- of device-side-interpreter injecteren omdat een geparametriseerde interface niet wordt gebruikt, of niet correct is geïmplementeerd, of de gegevens niet correct zijn gecodeerd voor de context, of er is geen beperkend beleid ten aanzien van code of gegevens omvat"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe kan gegevens injecteren in een server-side interpreter (bijv. SQL, OS-commando's, Xpath, Server JavaScript, SMTP) omdat een sterk getypeerde geparametriseerde interface niet wordt gebruikt of niet correct is geïmplementeerd"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Je hebt een nieuwe aanval uitgevonden tegen Gegevensvalidatie en -codering"
     misc: "Lees meer over dit onderwerp in OWASP's gratis spiekbriefjes over invoervalidatie, XSS-preventie, op DOM gebaseerde XSS-preventie, SQL-injectiepreventie en queryparameterisatie"
@@ -67,55 +67,55 @@ suits:
   name: "AUTHENTICATIE"
   cards:
   -
-    id: "AC2"
+    id: "AT2"
     value: "2"
     desc: "James kan authenticatiefuncties uitvoeren zonder dat de echte gebruiker er ooit van op de hoogte is dat dit is gebeurd (bijv. poging om in te loggen, inloggen met gestolen inloggegevens, het wachtwoord opnieuw instellen) "
   -
-    id: "AC3"
+    id: "AT3"
     value: "3"
     desc: "Mohammed kan het wachtwoord van een gebruiker of andere geheimen, zoals beveiligingsvragen, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het nooit verloopt, of omdat de gebruiker haar eigen wachtwoord niet kan wijzigen"
   -
-    id: "AC4"
+    id: "AT4"
     value: "4"
     desc: "Sebastien kan gebruikersnamen gemakkelijk identificeren of opsommen"
   -
-    id: "AC5"
+    id: "AT5"
     value: "5"
     desc: "Javier kan standaard-, test- of gemakkelijk te raden inloggegevens gebruiken om te verifiëren, of kan een oud account gebruiken of een account dat niet nodig is voor de toepassing"
   -
-    id: "AC6"
+    id: "AT6"
     value: "6"
     desc: "Sven kan een tijdelijk wachtwoord opnieuw gebruiken omdat de gebruiker het bij het eerste gebruik niet hoeft te wijzigen, of omdat het te lang of niet verloopt, of omdat het geen out-of-band bezorgingsmethode gebruikt (bijv. post, mobiele app , SMS)"
   -
-    id: "AC7"
+    id: "AT7"
     value: "7"
     desc: "Cecilia kan brute kracht en woordenboekaanvallen gebruiken tegen een of meerdere accounts zonder limiet, of deze aanvallen worden vereenvoudigd vanwege onvoldoende complexiteit, lengte, vervaldatum en hergebruikvereisten voor wachtwoorden"
   -
-    id: "AC8"
+    id: "AT8"
     value: "8"
     desc: "Kate kan authenticatie omzeilen omdat het niet beveiligd is (d.w.z. het staat standaard niet-geverifieerde toegang toe)"
   -
-    id: "AC9"
+    id: "AT9"
     value: "9"
     desc: "Claudia kan meer kritieke functies uitvoeren omdat de authenticatievereisten te zwak zijn (gebruik bijvoorbeeld geen sterke authenticatie zoals two-factor), of er is geen vereiste om opnieuw te authenticeren voor deze"
   -
-    id: "ACX"
+    id: "ATX"
     value: "10"
     desc: "Pravin kan authenticatiecontroles omzeilen omdat een gecentraliseerde standaard, geteste, bewezen en goedgekeurde authenticatiemodule/framework/service, los van de resource die wordt aangevraagd, niet wordt gebruikt"
   -
-    id: "ACJ"
+    id: "ATJ"
     value: "J"
     desc: "Mark heeft toegang tot bronnen of services omdat er geen authenticatievereiste is, of er werd ten onrechte aangenomen dat authenticatie zou worden uitgevoerd door een ander systeem of uitgevoerd in een eerdere actie"
   -
-    id: "ACQ"
+    id: "ATQ"
     value: "Q"
     desc: "Johan kan authenticatie omzeilen omdat het niet even strikt wordt afgedwongen voor alle soorten authenticatiefunctionaliteit (bijv. registreren, wachtwoordwijziging, wachtwoordherstel, uitloggen, beheer) of voor alle versies/kanalen (bijv. mobiele website, mobiele app, volledige website, API, callcenter)"
   -
-    id: "ACK"
+    id: "ATK"
     value: "K"
     desc: "Olga kan authenticatiecode/routines beïnvloeden of wijzigen zodat ze kunnen worden omzeild"
   -
-    id: "ACA"
+    id: "ATA"
     value: "A"
     desc: "Je hebt een nieuwe aanval tegen Authenticatie uitgevonden"
     misc: "Lees meer over dit onderwerp in de gratis verificatie-cheatsheet van OWASP"

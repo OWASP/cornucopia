@@ -29,7 +29,7 @@ class ConvertVars:
     LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-br", "hu"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
-    TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot"]
+    TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
         "webapp": {"1.22": "1.22", "2.00": "2.00"},
         "against-security": {"1.00": "1.00"},
@@ -304,7 +304,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="bridge",
         help=(
-            "From which template to produce the document. [`bridge`, `qr` or `tarot`]\n"
+            "From which template to produce the document. [`bridge`, `tarot` or `tarot_qr`]\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
@@ -791,11 +791,11 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all", "bridge_qr")]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all")]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
-        templates.append("tarot")
+        templates.append("tarot_qr")
     else:
         templates.append(convert_vars.args.template)
     return templates

@@ -10,55 +10,55 @@ suits:
   name: "VALIDATION DES DONNÉES & ENCODAGE"
   cards:
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian peut recueillir des informations sur les configurations sous-jacentes, les schémas, la logique, le code, le logiciel, les services et l'infrastructure, de par le contenu des messages d'erreur, ou une mauvaise configuration, ou la présence de fichiers d'installation par défaut, ou des ressources de test, de sauvegarde, de copie, ou l'exposition de code source"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert peut saisir des données malveillantes, car le format attendu n'est pas vérifié, ou des duplicatas sont acceptés, ou la structure n'est pas vérifiée, ou les éléments individuels des données ne sont pas validées : type, plage, longueur, liste blanche de caractères ou de formats autorisés"
   -
-    id: "DV4"
+    id: "VE4"
     value: "4"
     desc: "Dave peut saisir des noms de champs ou des données malveillantes, car ils ne sont pas vérifiés dans le contexte de l'utilisateur ou du processus en cours"
   -
-    id: "DV5"
+    id: "VE5"
     value: "5"
     desc: "Jee peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées partout, ou bien de mauvais encodages sont utilisés"
   -
-    id: "DV6"
+    id: "VE6"
     value: "6"
     desc: "Jason peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
   -
-    id: "DV7"
+    id: "VE7"
     value: "7"
     desc: "Jan peut générer des messages de sorte à tromper la validation des données, car le jeu de caractères n'est pas spécifié/imposé, ou les données sont encodées plusieurs fois, ou les données ne sont pas pleinement converties dans le format que l'application utilise (par exemple canonicalisation) avant leur validation, ou les variables sont insuffisamment typées"
   -
-    id: "DV8"
+    id: "VE8"
     value: "8"
     desc: "Oana peut contourner les routines de sanitisation centralisées, car celles-ci ne sont pas pleinement utilisées"
   -
-    id: "DV9"
+    id: "VE9"
     value: "9"
     desc: "Shamun peut contourner la validation des saisies ou la validation des sorties, car les échecs de validation ne sont pas rejetés et/ou sanitisés"
   -
-    id: "DVX"
+    id: "VEX"
     value: "10"
     desc: "Darío peut exploiter la confiance que l'application place dans une source de données (par exemple données définies par l'utilisateur, manipulation de données stockées localement, changement de déclaration des données sur un système client, manque de vérification de l'identité pendant la validation de données de telle manière que Darío peut se faire passer pour Colin)"
   -
-    id: "DVJ"
+    id: "VEJ"
     value: "J"
     desc: "Toby a le contrôle sur la validation des saisies, la validation des sorties, ou le code d'encodage des sorties, ou les routines, de telle manière que celles-ci peuvent être contournées"
   -
-    id: "DVQ"
+    id: "VEQ"
     value: "Q"
     desc: "Xavier peut injecter des données dans un client ou un système interpréteur, car une interface paramétrée n'est pas utilisée, ou n'a pas été implémentée correctement, ou les données n'ont pas été encodées correctement dans ce contexte, ou il n'y a pas de politique restrictive sur le code ou les ajouts de données"
   -
-    id: "DVK"
+    id: "VEK"
     value: "K"
     desc: "Gabe peut injecter des données dans un interpréteur côté serveur (ex : SQL, commandes OS, Xpath, Server JavaScript, SMTP), car une interface paramétrée fortement typée n'est pas utilisée ou n'a pas été implémentée correctement"
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque contre la Validation des Données et l'Encodage"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur la Validation des Entrées, la Prévention des XSS, DOM-XSS, et des Injections SQL, ainsi que sur les Requêtes Paramétrées"
