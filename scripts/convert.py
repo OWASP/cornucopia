@@ -791,7 +791,7 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all", "bridge_qr")]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all")]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
