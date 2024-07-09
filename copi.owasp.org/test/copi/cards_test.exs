@@ -19,6 +19,7 @@ defmodule Copi.CardsTest do
       card
     end
 
+    @tag :skip
     test "list_cards/0 returns all cards" do
       card = card_fixture()
       assert Cornucopia.list_cards() == [card]

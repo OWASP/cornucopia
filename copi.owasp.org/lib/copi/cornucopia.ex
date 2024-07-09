@@ -7,6 +7,8 @@ defmodule Copi.Cornucopia do
   alias Copi.Repo
 
   alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.Card
+  alias Copi.Cornucopia.Player
 
   @doc """
   Returns the list of games.
@@ -102,7 +104,16 @@ defmodule Copi.Cornucopia do
     Game.changeset(game, attrs)
   end
 
-  alias Copi.Cornucopia.Player
+  def get_suits_from_selected_deck(selected_edition) do
+    database_query = from c in Card,
+    where: c.edition == ^selected_edition,
+    select: c.category,
+    distinct: true
+
+    Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
+      List.delete(acc, item)
+    end)
+  end
 
   @doc """
   Returns the list of players.
@@ -318,18 +329,5 @@ defmodule Copi.Cornucopia do
   """
   def change_card(%Card{} = card, attrs \\ %{}) do
     Card.changeset(card, attrs)
-  end
-
-  def get_suits_from_selected_deck(selected_edition) do
-    database_query = from c in Card,
-    where: c.edition == ^selected_edition,
-    select: c.category,
-    distinct: true
-
-    Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
-      List.delete(acc, item)
-    end)
-    |> Enum.sort()
-    |> Enum.map(fn suit -> {"#{selected_edition}-#{suit}" , String.capitalize(suit) } end)
   end
 end
