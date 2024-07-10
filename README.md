@@ -90,11 +90,11 @@ options:
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
                         Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them,
                         tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large,
-                        qr cards have a QRCode that points to an maintained list.
+                        qr cards have a QRCode that points to a page with the latest mapped requirements and guidelines.
                         You can also speficy your own template. If so, there needs to be a file in the templates folder where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml
   -e EDITION, --edition EDITION
-                        Output decks to produce. [`all`, `webapp` or `mobileapp`]
-                        The various Cornucopia decks. `web` will give you the Website App edition.
+                        Output decks to produce. [`all`, `webapp`, `mobileapp`, `eop`]
+                        The various Cornucopia decks. `webapp` will give you the Website App edition.
                         `mobileapp` will give you the Mobile App edition.
                         You can also speficy your own edition. If so, there needs to be a yaml file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml
   -lt LAYOUT, --layout LAYOUT
@@ -110,10 +110,8 @@ options:
 
 The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there.
 The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work. 
-In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/fonts` in this repository. They are both open source and free for commercial use.
+In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/templates/fonts` in this repository. They are both open source and free for commercial use.
 The fonts can also be downloaded from the web.
-Fivo Sans: https://www.fontsc.com/font/fivo-sans
-Atkinson Hyperlegible: https://brailleinstitute.org/freefont
 
 The following fonts are used:
 
