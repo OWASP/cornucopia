@@ -71,6 +71,8 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       })
       |> Map.put(:action, :validate)
 
+    send(self(), {:update_parent, changeset})
+
     {:noreply, assign_form(socket, changeset)}
   end
 
