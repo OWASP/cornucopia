@@ -30,7 +30,6 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ game.name
     end
 
-
     test "saves new game", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, Routes.game_index_path(conn, :index))
 
@@ -52,7 +51,6 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ "Game created successfully"
       assert html =~ "some name"
     end
-
 
     test "updates game in listing", %{conn: conn, game: game} do
       {:ok, index_live, _html} = live(conn, Routes.game_index_path(conn, :index))
@@ -76,7 +74,6 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ "some updated name"
     end
 
-
     test "deletes game in listing", %{conn: conn, game: game} do
       {:ok, index_live, _html} = live(conn, Routes.game_index_path(conn, :index))
 
@@ -88,14 +85,12 @@ defmodule CopiWeb.GameLiveTest do
   describe "Show" do
     setup [:create_game]
 
-
     test "displays game", %{conn: conn, game: game} do
       {:ok, _show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
 
       assert html =~ "Show Game"
       assert html =~ game.name
     end
-
 
     test "updates game within modal", %{conn: conn, game: game} do
       {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, game))
