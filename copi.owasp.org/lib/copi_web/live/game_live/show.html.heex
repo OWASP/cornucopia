@@ -3,31 +3,53 @@
 </.header1>
 
 <%= if @game.started_at do %>
-<p class="">You're watching this game! You'll see all the cards as they're played and votes as they're cast.</p>
+
+  <% first_card_played = Copi.Cornucopia.ordered_cards_played_in_round(@game, @requested_round) |> List.first %>
+  <% highest_scoring_card = Copi.Cornucopia.highest_scoring_card_in_round(@game, @requested_round) %>
+
+  <p class="">You're watching this game! You'll see all the cards as they're played and votes as they're cast.</p>
 
   <%= if @game.finished_at do %>
   <h3>Thanks for playing! This game finished at <%= @game.finished_at %></h3>
   <% end %>
 
   <%= if @requested_round == @game.rounds_played + 1 do %>
-  <p class="my-8">Round <strong><%= @game.rounds_played + 1 %></strong> in progress</p>
+  <p class="my-8">Round <strong><%= @game.rounds_played + 1 %></strong>:
+    <%= if first_card_played do %>
+      <em><%= first_card_played.card.category %></em>
+    <% else %>
+      <em>No lead suit yet</em>
+    <% end %>
+  </p>
   <% else %>
-  <p class="my-8">Viewing round <strong><%= @requested_round %></strong></p>
+  <p class="my-8">Viewing round <strong><%= @requested_round %></strong>:
+    <%= if first_card_played do %>
+      <em><%= first_card_played.card.category %></em>
+    <% else %>
+      <em>No lead suit yet</em>
+    <% end %>
+  </p>
   <% end %>
 
-  <div class="flex flex-row justify-between gap-x-4" id="table">
+  <div class="flex flex-row justify-between gap-x-4 px-1" id="table">
     <%= for player <- @game.players do %>
       <% player_card = card_played_in_round(player.dealt_cards, @requested_round) %>
 
         <div class="card-player flex-col justify-start">
           <div class="name mb-4">
             <%= if player_card != nil && (Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2) do %>
-              <p class="font-bold"> <%= player.name %> Scored!</p> 
+              <p class="font-bold"> <%= player.name %> Scored
+                <%= if highest_scoring_card && highest_scoring_card.id == player_card.id do %>
+                  +2!
+                <% else %>
+                  +1!
+                <% end %>
+              </p> 
             <% else %>
               <p> <%= player.name %></p> 
             <% end %>
           </div>
-          <.card_drop_zone player={player} player_card={player_card}> 
+          <.card_drop_zone player={player} player_card={player_card} highest_scoring_card={highest_scoring_card}> 
             <CopiWeb.CardHTML.show card={player_card.card} />
           </.card_drop_zone>
           
@@ -100,38 +122,6 @@
 
 <% end %>
 
-<div class="mt-8 flow-root">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-300">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Cards</th>
-                <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Played</th>
-                <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Score</th>
-                <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Highest Card</th>
-                <th scope="col" class="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Total</th>
-              </tr>
-            </thead>
-            <tbody id="players" class="divide-y divide-gray-200 bg-white">
-              <%= for {player, index} <- Enum.with_index(@game.players) do %>
-                <% score = player.dealt_cards |> scoring_cards(Enum.count(@game.players)) |> Enum.count %>
-                <% highest_card_bonus = player |> highest_scoring_cards(@game) |> Enum.count %>
-                <tr>
-                  <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"><%= player.name %></td>
-                    <td  class="text-right whitespace-nowrap px-3 py-3.5 text-sm text-gray-500"><%= player.dealt_cards |> played_cards |> Enum.count %></td>
-                    <td  class="text-right whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= player.dealt_cards |> unplayed_cards |> Enum.count %></td>
-                    <td  class="text-right whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= score %></td>
-                    <td  class="text-right whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= highest_card_bonus %></td>
-                    <td  class="text-right whitespace-nowrap px-3 py-4 text-sm text-gray-500"><strong><%= score + highest_card_bonus %></strong></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+<.game_scores id="game_scores" game={@game} />
+
 

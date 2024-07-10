@@ -50,6 +50,7 @@ defmodule CopiWeb do
 
         # Core UI components and translation
         import CopiWeb.CoreComponents
+        import CopiWeb.GameComponents
         import CopiWeb.CoreComponents.Headers
         import CopiWeb.CoreComponents.Buttons
         import CopiWeb.CoreComponents.TableComponents
