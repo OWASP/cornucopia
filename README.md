@@ -93,7 +93,7 @@ options:
                         qr cards have a QRCode that points to a page with the latest mapped requirements and guidelines.
                         You can also speficy your own template. If so, there needs to be a file in the templates folder where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml
   -e EDITION, --edition EDITION
-                        Output decks to produce. [`all`, `webapp`, `mobileapp`, `eop`]
+                        Output decks to produce. [`all`, `webapp`, `mobileapp`]
                         The various Cornucopia decks. `webapp` will give you the Website App edition.
                         `mobileapp` will give you the Mobile App edition.
                         You can also speficy your own edition. If so, there needs to be a yaml file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml
