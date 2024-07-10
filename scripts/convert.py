@@ -308,7 +308,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
-            "qr cards have a QRCode that points to a web page with the latest requierments and guidelines.\n"
+            "qr cards have a QRCode that points to a page with the latest mapped requirements and guidelines.\n"
             "You can also speficy your own template. If so, there needs to be a file in the templates folder "
             "where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml"
         ),
@@ -321,7 +321,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         default="all",
         help=(
             "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
-            "The various Cornucopia decks. `web` will give you the Website App edition.\n"
+            "The various Cornucopia decks. `webapp` will give you the Website App edition.\n"
             "`mobileapp` will give you the Mobile App edition.\n"
             "You can also speficy your own edition. If so, there needs to be a yaml "
             "file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml"
