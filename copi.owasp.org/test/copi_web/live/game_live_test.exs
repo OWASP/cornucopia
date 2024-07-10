@@ -5,9 +5,9 @@ defmodule CopiWeb.GameLiveTest do
 
   alias Copi.Cornucopia
 
-  @create_attrs %{created_at: "2010-04-17T14:00:00Z", suits: ["Cornucopia", "Authorization"] ,  finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
-  @update_attrs %{created_at: "2011-05-18T15:01:01Z", suits: ["Cornucopia", "Authorization"] ,  finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
-  @invalid_attrs %{created_at: nil, suits: nil, finished_at: nil, name: nil, started_at: nil}
+  @create_attrs %{created_at: "2010-04-17T14:00:00Z", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
+  @update_attrs %{created_at: "2011-05-18T15:01:01Z", finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
+  @invalid_attrs %{created_at: nil, finished_at: nil, name: nil, started_at: nil}
 
   defp fixture(:game) do
     {:ok, game} = Cornucopia.create_game(@create_attrs)
@@ -18,7 +18,6 @@ defmodule CopiWeb.GameLiveTest do
     game = fixture(:game)
     %{game: game}
   end
-
 
   describe "Index" do
     setup [:create_game]

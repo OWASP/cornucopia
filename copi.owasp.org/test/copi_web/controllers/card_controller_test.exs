@@ -13,7 +13,6 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "index" do
-
     test "lists all cards", %{conn: conn} do
       conn = get(conn, Routes.card_path(conn, :index))
       assert html_response(conn, 200) =~ "Listing Cards"
@@ -21,7 +20,6 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "new card" do
-
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.card_path(conn, :new))
       assert html_response(conn, 200) =~ "New Card"
@@ -29,7 +27,6 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "create card" do
-
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.card_path(conn, :create), card: @create_attrs)
 
