@@ -50,7 +50,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       Cornucopia.change_game(%Game{
         edition: "",
         name: "",
-        suits: GameFormHelpers.generate_displayable_suits_from_suits_tuple_list("webapp")
+        suits: GameFormHelpers.generate_suit_list_formatted_for_checkbox("webapp")
       })
 
     {:ok,
@@ -67,7 +67,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       |> Cornucopia.change_game(%{
         edition: game_params["edition"],
         name: game_params["name"],
-        suits: GameFormHelpers.display_correct_suit_list(game_params["edition"], game_params["suits"])
+        suits: GameFormHelpers.display_appropriate_suits_list(game_params["edition"], game_params["suits"])
       })
       |> Map.put(:action, :validate)
 

@@ -4,7 +4,7 @@ defmodule CopiWeb.GameLive.GameFormHelpers do
   alias Copi.Cornucopia.Game
   alias Copi.Games
 
-  def generate_displayable_suits_from_suits_tuple_list(edition) do
+  def generate_suit_list_formatted_for_checkbox(edition) do
     format_list_of_suits_for_checkbox(edition)
     |> Enum.map(fn {key, _} -> key end)
   end
@@ -23,15 +23,15 @@ defmodule CopiWeb.GameLive.GameFormHelpers do
     |> Enum.map(fn suit -> {"#{selected_edition}-#{suit}" , String.capitalize(suit) } end)
   end
 
-  def display_correct_suit_list(edition, suits) do
+  def display_appropriate_suits_list(edition, suits) do
     if hd(suits) == "" && length(suits) == 1 do
-      generate_displayable_suits_from_suits_tuple_list(edition)
+      generate_suit_list_formatted_for_checkbox(edition)
     else
       [_first, second | _rest] = suits
       String.contains?(second, edition)
       case String.contains?(second, edition) do
         true -> suits
-        false -> generate_displayable_suits_from_suits_tuple_list(edition)
+        false -> generate_suit_list_formatted_for_checkbox(edition)
       end
     end
   end
