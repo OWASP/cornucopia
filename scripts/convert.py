@@ -308,7 +308,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
-            "qr cards have a QRCode that points to an maintained list.\n"
+            "qr cards have a QRCode that points to a web page with the latest requierments and guidelines.\n"
             "You can also speficy your own template. If so, there needs to be a file in the templates folder "
             "where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml"
         ),
