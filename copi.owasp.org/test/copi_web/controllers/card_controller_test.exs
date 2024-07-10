@@ -13,7 +13,7 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "index" do
-    @tag :skip
+
     test "lists all cards", %{conn: conn} do
       conn = get(conn, Routes.card_path(conn, :index))
       assert html_response(conn, 200) =~ "Listing Cards"
@@ -21,7 +21,7 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "new card" do
-    @tag :skip
+
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.card_path(conn, :new))
       assert html_response(conn, 200) =~ "New Card"
@@ -29,7 +29,7 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "create card" do
-    @tag :skip
+
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.card_path(conn, :create), card: @create_attrs)
 
@@ -40,7 +40,7 @@ defmodule CopiWeb.CardControllerTest do
       assert html_response(conn, 200) =~ "Show Card"
     end
 
-    @tag :skip
+
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.card_path(conn, :create), card: @invalid_attrs)
       assert html_response(conn, 200) =~ "New Card"
@@ -50,7 +50,7 @@ defmodule CopiWeb.CardControllerTest do
   describe "edit card" do
     setup [:create_card]
 
-    @tag :skip
+
     test "renders form for editing chosen card", %{conn: conn, card: card} do
       conn = get(conn, Routes.card_path(conn, :edit, card))
       assert html_response(conn, 200) =~ "Edit Card"
@@ -60,7 +60,7 @@ defmodule CopiWeb.CardControllerTest do
   describe "update card" do
     setup [:create_card]
 
-    @tag :skip
+
     test "redirects when data is valid", %{conn: conn, card: card} do
       conn = put(conn, Routes.card_path(conn, :update, card), card: @update_attrs)
       assert redirected_to(conn) == Routes.card_path(conn, :show, card)
@@ -69,7 +69,7 @@ defmodule CopiWeb.CardControllerTest do
       assert html_response(conn, 200) =~ ""
     end
 
-    @tag :skip
+
     test "renders errors when data is invalid", %{conn: conn, card: card} do
       conn = put(conn, Routes.card_path(conn, :update, card), card: @invalid_attrs)
       assert html_response(conn, 200) =~ "Edit Card"
@@ -79,7 +79,7 @@ defmodule CopiWeb.CardControllerTest do
   describe "delete card" do
     setup [:create_card]
 
-    @tag :skip
+
     test "deletes chosen card", %{conn: conn, card: card} do
       conn = delete(conn, Routes.card_path(conn, :delete, card))
       assert redirected_to(conn) == Routes.card_path(conn, :index)

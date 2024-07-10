@@ -103,18 +103,6 @@ defmodule Copi.Cornucopia do
   def change_game(%Game{} = game, attrs \\ %{}) do
     Game.changeset(game, attrs)
   end
-
-  def get_suits_from_selected_deck(selected_edition) do
-    database_query = from c in Card,
-    where: c.edition == ^selected_edition,
-    select: c.category,
-    distinct: true
-
-    Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
-      List.delete(acc, item)
-    end)
-  end
-
   @doc """
   Returns the list of players.
 

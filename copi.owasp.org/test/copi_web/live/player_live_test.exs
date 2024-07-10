@@ -22,7 +22,7 @@ defmodule CopiWeb.PlayerLiveTest do
   describe "Index" do
     setup [:create_player]
 
-    @tag :skip
+
     test "lists all players", %{conn: conn, player: player} do
       {:ok, _index_live, html} = live(conn, Routes.player_index_path(conn, :index))
 
@@ -30,7 +30,7 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ player.name
     end
 
-    @tag :skip
+
     test "saves new player", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, Routes.player_index_path(conn, :index))
 
@@ -53,7 +53,7 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "some name"
     end
 
-    @tag :skip
+
     test "updates player in listing", %{conn: conn, player: player} do
       {:ok, index_live, _html} = live(conn, Routes.player_index_path(conn, :index))
 
@@ -76,7 +76,7 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "some updated name"
     end
 
-    @tag :skip
+
     test "deletes player in listing", %{conn: conn, player: player} do
       {:ok, index_live, _html} = live(conn, Routes.player_index_path(conn, :index))
 
@@ -88,7 +88,7 @@ defmodule CopiWeb.PlayerLiveTest do
   describe "Show" do
     setup [:create_player]
 
-    @tag :skip
+
     test "displays player", %{conn: conn, player: player} do
       {:ok, _show_live, html} = live(conn, Routes.player_show_path(conn, :show, player))
 
@@ -96,7 +96,7 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ player.name
     end
 
-    @tag :skip
+
     test "updates player within modal", %{conn: conn, player: player} do
       {:ok, show_live, _html} = live(conn, Routes.player_show_path(conn, :show, player))
 
