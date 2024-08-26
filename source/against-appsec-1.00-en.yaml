@@ -615,10 +615,15 @@ suits:
     desc: "Our worthless WAF"
 paragraphs:
 -
-  name: "Common"
   id: "Common"
+  name: "Common"
   sentences:
   -
-    id: "NoCard"
     value: "NoCard"
     text: "No Card"
+  -
+    value: "Title"
+    text: "Cards Against AppSec EN 1.00"
+  -
+    value: "Title_full"
+    text: "Semgrep's Cards Against AppSec EN 1.00"
