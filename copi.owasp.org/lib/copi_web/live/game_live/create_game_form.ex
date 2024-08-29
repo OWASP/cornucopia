@@ -2,9 +2,10 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   use CopiWeb, :live_component
 
   alias Copi.Cornucopia
+  alias Copi.Cornucopia.Game
+  alias CopiWeb.GameLive.GameFormHelpers, as: GameFormHelpers
 
   @impl true
-
   def render(assigns) do
     ~H"""
     <div >
@@ -34,6 +35,8 @@ defmodule CopiWeb.GameLive.CreateGameForm do
           >
         </.input>
 
+        <.input field={@form[:suits]} label={gettext("Select the suits you want to play:")} multiple={true}  type="checkbox" options={GameFormHelpers.get_suits_from_selected_deck(assigns)} />
+
         <:actions>
           <.primary_button phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
         </:actions>
@@ -42,8 +45,13 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     """
   end
 
-  def update(%{game: game} = assigns, socket) do
-    changeset = Cornucopia.change_game(game)
+  def update(%{game: _} = assigns, socket) do
+    changeset =
+      Cornucopia.change_game(%Game{
+        edition: "",
+        name: "",
+        suits: GameFormHelpers.generate_suit_list_formatted_for_checkbox("webapp")
+      })
 
     {:ok,
      socket
@@ -53,16 +61,30 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   @impl true
   def handle_event("validate", %{"game" => game_params}, socket) do
+
     changeset =
       socket.assigns.game
-      |> Cornucopia.change_game(game_params)
+      |> Cornucopia.change_game(%{
+        edition: game_params["edition"],
+        name: game_params["name"],
+        suits: GameFormHelpers.display_appropriate_suits_list(game_params["edition"], game_params["suits"])
+      })
       |> Map.put(:action, :validate)
-      send(self(), {:update_parent, changeset})
+
+    send(self(), {:update_parent, changeset})
+
     {:noreply, assign_form(socket, changeset)}
   end
 
   def handle_event("save", %{"game" => game_params}, socket) do
-    save_game(socket, socket.assigns.action, game_params)
+
+    game_with_suits = %{
+      name: game_params["name"],
+      edition: game_params["edition"],
+      suits: GameFormHelpers.format_suits_before_saving_game(game_params["suits"])
+    }
+
+    save_game(socket, socket.assigns.action, game_with_suits)
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do

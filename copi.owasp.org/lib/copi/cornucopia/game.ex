@@ -11,6 +11,7 @@ defmodule Copi.Cornucopia.Game do
     field :edition, :string
     field :started_at, :utc_datetime
     field :rounds_played, :integer, default: 0
+    field :suits, {:array, :string}, default: []
 
     has_many :players, Copi.Cornucopia.Player
 
@@ -27,7 +28,7 @@ defmodule Copi.Cornucopia.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:name, :created_at, :edition, :started_at, :finished_at, :rounds_played])
+    |> cast(attrs, [:name, :created_at, :edition, :started_at, :finished_at, :rounds_played, :suits])
     |> validate_required([:name], message: "No really, give your game session a name")
   end
 end
