@@ -291,59 +291,59 @@ suits:
     desc: "Je hebt een nieuwe aanval tegen Cryptografie uitgevonden"
     misc: "Lees meer over dit onderwerp in de gratis spiekbriefjes van OWASP over cryptografische opslag en bescherming van transportlagen"
 -
-  id: "CO"
+  id: "C"
   name: "CORNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     desc: "Lee kan applicatiecontroles omzeilen omdat er gevaarlijke/risicovolle programmeertaalfuncties zijn gebruikt in plaats van veiligere alternatieven, of omdat er typeconversiefouten zijn, of omdat de applicatie onbetrouwbaar is wanneer een externe bron niet beschikbaar is, of er race-omstandigheden zijn, of er zijn resource-initialisatie- of toewijzingsproblemen, of er kunnen overflows optreden"
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     desc: "Andrew heeft toegang tot de broncode of kan decompileren, of anderszins toegang krijgen tot bedrijfslogica om te begrijpen hoe de applicatie werkt en eventuele geheimen die erin zitten"
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     desc: "Keith kan een actie uitvoeren en het is niet mogelijk om deze aan hem toe te schrijven"
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     desc: "Larry kan het vertrouwen van andere partijen, inclusief gebruikers, in de applicatie beïnvloeden, of dat vertrouwen ergens anders misbruiken (bijvoorbeeld in een andere applicatie)"
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     desc: "Aaron kan controles omzeilen omdat de afhandeling van fouten/uitzonderingen ontbreekt, of inconsistent of gedeeltelijk is geïmplementeerd, of de toegang niet standaard weigert (d.w.z. fouten zouden de toegang/uitvoering moeten beëindigen), of vertrouwt op afhandeling door een andere service of systeem"
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     desc: "Mwengu's acties kunnen niet worden onderzocht omdat er geen adequaat nauwkeurig tijdstempel is van beveiligingsgebeurtenissen, of er is geen volledige audittrail, of deze kunnen worden gewijzigd of verwijderd door Mwengu, of er is geen gecentraliseerde logservice"
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie periodiek opnieuw is gecontroleerd en beveiligingspatches zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     desc: "Michael kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat administratieve tools of administratieve interfaces niet adequaat zijn beveiligd"
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     desc: "Spyros kan de controles van de applicatie omzeilen omdat codeframeworks, bibliotheken en componenten kwaadaardige code of kwetsbaarheden bevatten (bijv. intern, commercieel kant-en-klaar, uitbesteed, open source, extern gelokaliseerd)"
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     desc: "Roman kan de applicatie misbruiken omdat deze is gecompileerd met verouderde tools, of de configuratie ervan is niet standaard beveiligd, of de beveiligingsinformatie is niet gedocumenteerd en doorgegeven aan operationele teams"
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     desc: "Jim kan kwaadaardige, niet-normale acties ondernemen zonder realtime detectie en reactie door de applicatie"
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     desc: "Grant kan de applicatie gebruiken om service aan sommige of alle gebruikers te weigeren"
   -
-    id: "COA"
+    id: "CA"
     value: "A"
     desc: "Je hebt een nieuwe aanval van elk type uitgevonden"
     misc: "Lees meer over applicatiebeveiliging in OWASP's gratis Guides on Requirements, Development, Code Review and Testing, de Cheat Sheet-serie en het Open Software Assurance Maturity Model"

@@ -291,59 +291,59 @@ suits:
     desc: "You have invented a new attack against Cryptography"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
-  id: "CO"
+  id: "C"
   name: "CORNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     desc: "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur"
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     desc: "Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained"
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     desc: "Keith can perform an action and it is not possible to attribute it to him"
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     desc: "Larry can influence the trust other parties including users have in the application, or abuse that trust elsewhere (e.g. in another application)"
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     desc: "Aaron can bypass controls because error/exception handling is missing, or is implemented inconsistently or partially, or does not deny access by default (i.e. errors should terminate access/execution), or relies on handling by some other service or system"
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     desc: "Mwengu's actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service"
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     desc: "David can bypass the application to gain access to data because the network and host infrastructure, and supporting services/applications, have not been securely configured, the configuration rechecked periodically and security patches applied, or the data is stored locally, or the data is not physically protected"
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     desc: "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     desc: "Spyros can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     desc: "Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented and passed on to operational teams"
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     desc: "Jim can undertake malicious, non-normal, actions without real-time detection and response by the application"
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     desc: "Grant can utilize the application to deny service to some or all of its users"
   -
-    id: "COA"
+    id: "CA"
     value: "A"
     desc: "You have invented a new attack of any type"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"

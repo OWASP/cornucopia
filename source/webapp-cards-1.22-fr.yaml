@@ -291,59 +291,59 @@ suits:
     desc: "Vous avez inventé une nouvelle attaque contre la Cryptographie"
     misc: "Apprenez-en plus à ce sujet dans les antisèches gratuites OWASP sur le Stockage Cryptographique et la Protection de la Couche de Transport"
 -
-  id: "CO"
-  name: "CORNUCOPIA"
+  id: "C"
+  name: "CRNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     desc: "Lee peut contourner les contrôles applicatifs car des fonctions à risque ont été utilisées à la place d'alternatives plus sûres, ou il y a des erreurs de conversion de type, ou car l'application n'est pas fiable lorsqu'une ressource externe est indisponible, ou il y a des situations d'accès concurrent, des problèmes d'initialisation ou d'allocation de ressources, ou des débordements peuvent survenir"
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     desc: "Andrew peut accéder au code source, ou décompiler, ou accéder à la logique métier pour comprendre le fonctionnement de l'application et les secrets qu'elle contient"
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     desc: "Keith peut effectuer une action et il n'est pas possible de la lui attribuer."
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     desc: "Larry peut influencer la confiance que les autres parties, y compris les utilisateurs, ont dans l'application, ou abuser de cette confiance ailleurs (par exemple dans une autre application)."
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     desc: "Aaron peut contourner les contrôles parce que la gestion des erreurs/exceptions est absente, ou est implémentée de manière incohérente ou partielle, ou ne refuse pas l'accès par défaut (c'est-à-dire que les erreurs doivent mettre fin à l'accès/à l'exécution), ou dépend de la gestion par un autre service ou système."
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     desc: "Les actions de Mwengu ne peuvent pas être étudiées parce qu'il n'y a pas d'enregistrement des événements de sécurité correctement horodaté, parce qu'il n'y a pas de piste d'audit complète, ou parce que ceux-ci peuvent être modifiées ou supprimées par Mwengu, ou parce qu'il n'y a pas de service de centralisation des traces"
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     desc: "David peut contourner l'application pour accéder aux données car l'infrastructure réseau et hôte et les services / applications de support n'ont pas été configurés de manière sécurisée, ni la configuration périodiquement vérifiée, ni les correctifs de sécurité appliqués, ou les données sont stockées localement, ou les données ne sont pas physiquement protégées"
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     desc: "Michael peut contourner l'application pour accéder aux données car les outils ou les interfaces d'administration ne sont pas sécurisés de manière adéquate"
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     desc: "Spyros peut contourner les contrôles de l'application car les frameworks, les bibliothèques et les composants applicatifs contiennent du code malveillant ou des vulnérabilités (par exemple: interne, sur étagère, externalisé, open source, externe)"
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     desc: "Roman peut exploiter l'application car elle a été compilée à l'aide d'outils obsolètes ou sa configuration n'est pas sécurisée par défaut, ou les informations de sécurité n'ont pas été documentées et transmises aux équipes opérationnelles"
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     desc: "Jim peut entreprendre des actions malveillantes, non légitimes, sans détection et réponse en temps réel par l'application"
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     desc: "Grant peut utiliser l'application pour refuser le service à certains ou à tous ses utilisateurs"
   -
-    id: "COA"
+    id: "CA"
     value: "A"
     desc: "Vous avez inventé une nouvelle attaque de n'importe quel type"
     misc: "Apprenez-en plus à propos de la sécurité applicative dans les guides gratuits OWASP : Exigences, Développement, Revue de Code et Tests, antisèches, et framework Open Software Assurance Maturity Model"

@@ -291,59 +291,59 @@ suits:
     desc: "Has inventado un nuevo ataque contra la Criptografía"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
-  id: "CO"
+  id: "C"
   name: "CORNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     desc: "Lee puede omitir los controles de la aplicación porque se han usado funciones de programación peligrosas/riesgosas en lugar de alternativas más seguras, errores de conversión de tipo, porque la aplicación no es confiable porque un recurso externo no está disponible, o por las problemas con condición de carrera, - inicialización / asignación de recursos o - desbordamientos"
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     desc: "Andrew puede acceder al código fuente, o descompilar, o de otro modo acceder a la lógica de negocio para entender cómo la aplicación y cualquier secreto contenido funciona"
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     desc: "Keith puede realizar una acción y no es posible atribuirla a él"
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     desc: "Larry puede influir en la confianza que otras partes, incluidos los usuarios tienen en la aplicación, o abusar de esa confianza en otra parte (por ejemplo, en otra aplicación)"
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     desc: "Aaron puede omitir los controles porque falta el manejo de errores/excepciones, o se implementa de manera inconsistente o parcial, o no niega el acceso por defecto (es decir, los errores deben terminar el acceso / ejecución), o se basan en el manejo por parte de otro servicio o sistema"
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     desc: "Las acciones de Mwengu no se pueden investigar porque no hay un registro adecuado de los eventos de seguridad con una marca de tiempo adecuada, o no hay un registro de auditoría completo, o Mwengu puede modificarlas o eliminarlas, o no existe un servicio de registro centralizado"
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     desc: "David puede omitir la aplicación para obtener acceso a los datos debido a que la red y la infraestructura del host, y los servicios/aplicaciones compatibles, no se han configurado de manera segura, la configuración no se verificó periódicamente ni se aplicaron parches de seguridad, los datos se almacenaron localmente o no se guardaron protegidos físicamente"
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     desc: "Michael puede pasar por alto la aplicación para acceder a los datos porque las herramientas administrativas o las interfaces administrativas no están  aseguradas adecuadamente"
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     desc: "Spyros puede eludir los controles de la aplicación porque los frameworks de código, librerías y componentes contienen código malicioso o vulnerabilidades (por ejemplo, inhouse, software comercial, servicio tercerizado, de código abierto, ubicado externamente)"
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     desc: "Roman puede explotar la aplicación porque fue compilada utilizando herramientas obsoletas, o su configuración no es segura por defecto, o la seguridad de la información no fue documentada y pasada a equipos operacionales"
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     desc: "Jim puede emprender acciones maliciosas, no normales sin detección y respuesta por la aplicación en tiempo real"
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     desc: "Grant puede utilizar la aplicación para negar el servicio a algunos o todos sus usuarios"
   -
-    id: "COA"
+    id: "CA"
     value: "A"
     desc: "Has inventado un nuevo ataque de cualquier tipo"
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
