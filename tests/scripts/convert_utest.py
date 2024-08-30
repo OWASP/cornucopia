@@ -1556,7 +1556,7 @@ class TestGroupNumberRanges(unittest.TestCase):
 class TestGetSuitTagsAndKey(unittest.TestCase):
     def test_get_suit_tags_and_key_suits(self) -> None:
         input_key = "suits"
-        want_tags = ["VE", "AT", "SM", "AZ", "CR", "CO", "WC"]
+        want_tags = ["VE", "AT", "SM", "AZ", "CR", "C", "WC"]
         want_key = "cards"
 
         got_tags, got_key = c.get_suit_tags_and_key(input_key, "webapp")

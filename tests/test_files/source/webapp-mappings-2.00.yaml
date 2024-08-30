@@ -449,7 +449,7 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 14, 21, 29 ]
 -
-  id: "CO"
+  id: "C"
   name: "Cornucopia"
   cards:
   -

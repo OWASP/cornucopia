@@ -509,11 +509,11 @@ suits:
     capec: [ 207, 554 ]
     safecode: [ 14, 21, 29 ]
 -
-  id: "CO"
+  id: "C"
   name: "CORNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     owasp_scp: [ 194-202, 205-209 ]
     owasp_asvs: [ 14.1.2 ]
@@ -521,7 +521,7 @@ suits:
     capec: [ 25, 26, 29, 96, 123, 124, 128, 129, 264, 265 ]
     safecode: [ 3, 5, 6, 7, 9, 22, 25, 26, 34 ]
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     owasp_scp: [ 134 ]
     owasp_asvs: [ 14.1.1 ]
@@ -529,7 +529,7 @@ suits:
     capec: [ 189, 207 ]
     safecode: [ ]
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     owasp_scp: [ 23, 32, 34, 42, 51, 181 ]
     owasp_asvs: [ 7.2.1, 7.2.2 ]
@@ -537,7 +537,7 @@ suits:
     capec: [ ]
     safecode: [ ]
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     owasp_scp: [ ]
     owasp_asvs: [ 1.9.2, 9.1.1, 5.1.5, 9.2.1, 9.2.4 ]
@@ -545,7 +545,7 @@ suits:
     capec: [ 89, 103, 181, 459 ]
     safecode: [ ]
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     owasp_scp: [ 109-112, 155 ]
     owasp_asvs: [ 4.1.5, 7.1.4 ]
@@ -553,7 +553,7 @@ suits:
     capec: [ 54, 98, 164 ]
     safecode: [ 4, 11, 23 ]
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     owasp_scp: [ 113, 114, 115, 117, 118, 121-130 ]
     owasp_asvs: [ 7.1.2, 7.1.4, 7.2.1, 7.2.2, 7.3.1, 7.3.3, 8.3.5, 9.2.5 ]
@@ -561,7 +561,7 @@ suits:
     capec: [ 93 ]
     safecode: [ 4 ]
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     owasp_scp: [ 151, 152, 156, 160, 161, 173-177 ]
     owasp_asvs: [ 1.4.5, 10.3.1, 10.3.2, 14.1.4, 14.1.5, 14.2.1, 14.2.2 ]
@@ -569,7 +569,7 @@ suits:
     capec: [ 37, 220, 310, 436, 536 ]
     safecode: [ ]
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     owasp_scp: [ 23, 29, 56, 81, 82, 84-90 ]
     owasp_asvs: [ 1.4.5, 4.3.1 ]
@@ -577,7 +577,7 @@ suits:
     capec: [ 122, 233 ]
     safecode: [ ]
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     owasp_scp: [ 57, 151, 152, 204, 205, 213, 214 ]
     owasp_asvs: [ 1.14.3, 10.1.1, 10.2.3-6, 14.2.1 ]
@@ -585,7 +585,7 @@ suits:
     capec: [ 68, 438, 439, 442, 524, 538 ]
     safecode: [ 15 ]
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     owasp_scp: [ 90, 137, 148, 151-154, 175-179, 186, 192 ]
     owasp_asvs: [ 1.14.3, 14.1.1-5, 14.2.1 ]
@@ -593,7 +593,7 @@ suits:
     capec: [ ]
     safecode: [ 4 ]
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     owasp_scp: [ ]
     owasp_asvs: [ 8.1.4, 11.1.1-4 ]
@@ -601,7 +601,7 @@ suits:
     capec: [ ]
     safecode: [ 1, 27 ]
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     owasp_scp: [ 41, 55 ]
     owasp_asvs: [ 2.2.1, 11.1.3, 11.1.4 ]

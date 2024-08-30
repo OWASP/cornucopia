@@ -291,59 +291,59 @@ suits:
     desc: "Você inventou um novo ataque contra Criptografia"
     misc: "Leia mais sobre este tópico em OWASP® Cryptographic Storage Cheat Sheet e OWASP® Transport Layer Protection Cheat Sheet"
 -
-  id: "CO"
+  id: "C"
   name: "CORNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     desc: "Lee consegue ignorar os controles do aplicativo pois foram usadas funções arriscadas da linguagem de programação ao invés de opções seguras, ou há erros de conversão, ou porque o aplicativo está inseguro quando um recurso externo está indisponível, ou há race condition, ou há problemas na inicialização ou alocação de recursos, ou quando há sobrecarga"
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     desc: "Andrew consegue acessar o código fonte, ou descompilar o aplicativo, ou consegue acessar a lógica do negócio para entender como a aplicação funciona e quais segredos ela contêm"
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     desc: "Keith consegue realizar uma ação e isto não é atribuído a ele"
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     desc: "Larry consegue induzir a confiança de outras partes, incluindo usuários autenticados, ou violar esta confiança em outro lugar (ex: em outro aplicativo)"
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     desc: "Aaron consegue ignorar os controles porque a manipulação de erros/exceções é perdida/ignorada, ou é implementada de forma inconsistente ou parcial, ou não há negação de acesso por padrão (ex: erros devem terminar o acesso/execução da funcionalidade), ou depende do tratamento por algum outro serviço ou sistema"
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     desc: "As ações de Mwengu não podem ser investigadas porque não há um registro correto de eventos de segurança com precisão, ou não há uma trilha de auditoria completa, ou estas podem ser alteradas ou excluídas pelo Mwengu, ou não existe um serviço de registro centralizado"
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     desc: "David consegue ignorar o aplicativo para obter acesso aos dados porque a infraestrutura de rede e servidores e os serviços suportados não foram configurados de forma segura, as configurações não são verificadas periodicamente e os patches de segurança não são aplicados, ou os dados armazenados localmente não são fisicamente protegidos"
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     desc: "Michael consegue ignorar o aplicativo para obter acesso aos dados porque ferramentas ou interfaces administrativas não estão adequadamente seguras"
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     desc: "Spyros consegue contornar os controles do aplicativo porque os códigos fontes tanto dos frameworks, como de bibliotecas e componentes utilizados contêm código malicioso ou vulnerabilidades"
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     desc: "Roman consegue explorar o aplicativo pois este foi compilado usando ferramentas desatualizadas ou configurações não seguras como padrão ou informações de segurança não foram documentadas e passadas para o time operacional"
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     desc: "Jim pode realizar ações mal-intencionadas, não normais, sem detecção e resposta em tempo real pela aplicação"
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     desc: "Grant pode utilizar o aplicativo para negar o serviço a alguns ou a todos os usuários"
   -
-    id: "COA"
+    id: "CA"
     value: "A"
     desc: "Você inventou um novo ataque de qualquer tipo"
     misc: "Leia mais sobre segurança da aplicação nos guias da OWASP (Requirements, Development, Code Review and Testing) e na série OWASP Cheat Sheet, e no modelo de maturidade Open SAMM (Software Assurance Maturity Model)"
@@ -464,7 +464,7 @@ paragraphs:
     text: "Controle de Acessos (AZ)"
   -
     value: "T00370"
-    text: "Criptografia (C)"
+    text: "Criptografia (CR)"
   -
     value: "T00380"
     text: "Cornucopia (C)"

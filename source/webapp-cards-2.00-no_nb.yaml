@@ -291,59 +291,59 @@ suits:
     desc: "Du har funnet opp et nytt angrep mot Kryptografi"
     misc: "Les mer om dette emnet i OWASP's gratis jukseark om “Cryptographic Storage, and Transport Layer Protection”"
 -
-  id: "CO"
+  id: "C"
   name: "CORNUCOPIA"
   cards:
   -
-    id: "CO2"
+    id: "C2"
     value: "2"
     desc: "Lee kan omgå applikasjonskontroller fordi farlige/risikofylte programmeringsfunksjoner har blitt brukt istf. sikrere alternativer, fordi typekonverteringsfeil finnes, applikasjonen er upålitelig når ekstern ressurs er utilgjengelig, eller pga. kappløpssituasjons-, ressursinitialiserings- ,allokerings- eller overflytproblemer"
   -
-    id: "CO3"
+    id: "C3"
     value: "3"
     desc: "Andrew kan få tilgang til kildekode, dekompilere, eller på annen måte få tilgang til forretningslogikk for å forstå hvordan applikasjonen fungerer og avdekke eventuelle hemmeligheter den inneholder"
   -
-    id: "CO4"
+    id: "C4"
     value: "4"
     desc: "Keith kan utføre en handling og det er ikke mulig å tilskrive ham den"
   -
-    id: "CO5"
+    id: "C5"
     value: "5"
     desc: "Larry kan påvirke tilliten andre parter, inkludert brukere, har til applikasjonen, eller misbruke denne tilliten andre steder (f.eks. i en annen applikasjon)"
   -
-    id: "CO6"
+    id: "C6"
     value: "6"
     desc: "Aaron kan omgå kontroller fordi feil/unntakshåndtering mangler, eller er implementert inkonsekvent eller delvis, eller nekter ikke tilgang som standard (dvs. feil bør avslutte tilgang/utførelse), eller er avhengig av håndtering fra en annen tjeneste eller system"
   -
-    id: "CO7"
+    id: "C7"
     value: "7"
     desc: "Mwengus handlinger kan ikke undersøkes fordi det ikke finnes tilstrekkelig nøyaktige tidsstempelregistrering av sikkerhetshendelsene, eller fordi det ikke finnes et fullstendig revisjonsspor, eller fordi disse kan endres eller slettes av Mwengu, eller fordi det ikke finnes en sentralisert loggingstjeneste"
   -
-    id: "CO8"
+    id: "C8"
     value: "8"
     desc: "David kan omgå applikasjonen for å få tilgang til data fordi nettverket og vertsinfrastrukturen, og støttetjenester/applikasjoner, ikke er sikkert konfigurert, konfigurasjonen sjekket på nytt med jevne mellomrom og sikkerhetsoppdateringer utført, eller fordi dataene er lagret lokalt, eller fordi dataene ikke er fysisk beskyttet"
   -
-    id: "CO9"
+    id: "C9"
     value: "9"
     desc: "Michael kan omgå applikasjonen for å få tilgang til data fordi administrative verktøy eller administrative grensesnitt ikke er tilstrekkelig sikret"
   -
-    id: "COX"
+    id: "CX"
     value: "10"
     desc: "Spyros kan omgå applikasjonens kontroller fordi koderammeverk, biblioteker og komponenter inneholder ondsinnet kode eller sårbarheter i (f.eks. internt utviklede-, kommersielt ikke-standardiserte- eller tjenesteutsatte systemer , eller i systemer som benytter åpen kildekode eller er eksternt plassert)"
   -
-    id: "COJ"
+    id: "CJ"
     value: "J"
     desc: "Roman kan utnytte applikasjonen fordi den ble kompilert ved hjelp av utdaterte verktøy, eller fordi konfigurasjonen ikke er sikker som standard, eller fordi sikkerhetsinformasjon ikke ble dokumentert og gitt videre til operative team"
   -
-    id: "COQ"
+    id: "CQ"
     value: "Q"
     desc: "Jim kan utføre ondsinnede-, ikke-normale handlinger uten sanntidsdeteksjon og respons fra applikasjonen"
   -
-    id: "COK"
+    id: "CK"
     value: "K"
     desc: "Grant kan bruke applikasjonen til å nekte noen eller alle brukerne tjenesten"
   -
-    id: "COA"
+    id: "CA"
     value: "A"
     desc: "Du har funnet opp et nytt angrep av hvilken som helst type"
     misc: "Les mer om applikasjonssikkerhet i OWASPs gratis guider som omhandler krav, utvikling, kodegjennomgang og testingg, the “Cheat Sheet series”, og OWASPs “Software Assurance Maturity Model”"
