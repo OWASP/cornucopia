@@ -7,6 +7,8 @@ defmodule Copi.Cornucopia do
   alias Copi.Repo
 
   alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.Card
+  alias Copi.Cornucopia.Player
 
   @doc """
   Returns the list of games.
@@ -102,7 +104,16 @@ defmodule Copi.Cornucopia do
     Game.changeset(game, attrs)
   end
 
-  alias Copi.Cornucopia.Player
+  def get_suits_from_selected_deck(selected_edition) do
+    database_query = from c in Card,
+    where: c.edition == ^selected_edition,
+    select: c.category,
+    distinct: true
+
+    Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
+      List.delete(acc, item)
+    end)
+  end
 
   @doc """
   Returns the list of players.
@@ -115,7 +126,6 @@ defmodule Copi.Cornucopia do
   """
 
   def list_players(game_id) do
-
     Repo.all(from p in Player, where: p.game_id == ^game_id)
   end
 
@@ -215,8 +225,12 @@ defmodule Copi.Cornucopia do
     Card |> order_by(:id) |> Repo.all()
   end
 
-  def list_cards_shuffled(edition) do
-    Card |> where(edition: ^edition) |> order_by(fragment("RANDOM()")) |> Repo.all()
+  def list_cards_shuffled(edition, suits) do
+    all_cards = Card |> where(edition: ^edition) |> order_by(fragment("RANDOM()")) |> Repo.all()
+
+    Enum.filter(all_cards, fn card ->
+      card.category in suits
+    end)
   end
 
   @doc """
@@ -249,7 +263,8 @@ defmodule Copi.Cornucopia do
       ** (Ecto.NoResultsError)
 
   """
-  def get_card_by_external_id!(version, external_id), do: Repo.get_by!(Card, [version: version, external_id: external_id])
+  def get_card_by_external_id!(version, external_id),
+    do: Repo.get_by!(Card, version: version, external_id: external_id)
 
   @doc """
   Creates a card.
@@ -314,5 +329,59 @@ defmodule Copi.Cornucopia do
   """
   def change_card(%Card{} = card, attrs \\ %{}) do
     Card.changeset(card, attrs)
+  end
+
+  def highest_scoring_cards_in_game(game) do
+    Enum.reduce(game.players, [], fn player, cards -> (player.dealt_cards |> played_cards) ++ cards end) # Combine all played cards from all players
+      |> lead_suit_cards # Filter to just the lead suit cards
+      |> scoring_cards(Enum.count(game.players)) # Filter to just the cards that scored
+      |> Enum.group_by(fn card -> card.played_in_round end) # Convert to map where {round, [scoring_cards]}
+      |> Enum.flat_map(fn {_, cards} -> highest_card(cards) end) # Back to a list of just the highest scoring card in each round
+  end
+
+  def highest_scoring_cards_for_player(player, game) do
+    highest_scoring_cards_in_game(game)
+      |> Enum.filter(fn dealt_card -> dealt_card.player_id == player.id end)
+  end
+
+  def highest_scoring_card_in_round(game, round) do
+    highest_scoring_cards_in_game(game)
+      |> Enum.find(fn dealt_card -> dealt_card.played_in_round == round end)
+  end
+
+  defp highest_card(cards) do
+    card_order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "JokerB", "JokerA"]
+
+    Enum.group_by(cards, fn dealt_card -> Enum.find_index(card_order, fn value -> value == dealt_card.card.value end) end)
+      |> Enum.max_by(fn {index, _cards} -> index end)
+      |> elem(1)
+  end
+
+  def unplayed_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round == nil end)
+  end
+
+  def played_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round != nil end)
+  end
+
+  def scoring_cards(cards, number_of_players) do
+    Enum.filter(cards, fn card -> card.played_in_round != nil && Enum.count(card.votes) > (number_of_players - 1) / 2 end)
+  end
+
+  def lead_suit_cards(cards) do
+    Enum.group_by(cards, fn card -> card.played_in_round end) # Convert to map where {round, [played_cards]}
+      |> Map.new(fn {round, played_cards} -> {round, Enum.sort_by(played_cards, &(&1.updated_at))} end) # Sort played cards in rounds by when played
+      |> Enum.flat_map(fn {_round, ordered_played_cards} -> Enum.filter(ordered_played_cards, fn card -> card.card.category == List.first(ordered_played_cards).card.category or card.card.value in ["JokerA", "JokerB"] or String.upcase(card.card.category) == "CORNUCOPIA" end) end) # Back to a list of just the lead suit cards in each round (plus jokers and trump cards)
+  end
+
+  def all_dealt_cards(game) do
+    Enum.reduce(game.players, [], fn player, cards -> player.dealt_cards ++ cards end)
+  end
+
+  def ordered_cards_played_in_round(game, round) do
+    all_dealt_cards(game)
+      |> Enum.filter(fn card -> card.played_in_round == round end)
+      |> Enum.sort_by(&(&1.updated_at))
   end
 end

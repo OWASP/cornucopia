@@ -7,6 +7,7 @@ defmodule CopiWeb.CoreComponents.TableComponents do
   attr :player_card, :map
   attr :is_current_player, :boolean, default: false
   attr :first_card_played, :map
+  attr :highest_scoring_card, :map
   slot :inner_block, required: true
 
   def card_drop_zone(assigns) do
@@ -25,7 +26,14 @@ defmodule CopiWeb.CoreComponents.TableComponents do
           <p class="text-center">Waiting for <%= @player.name %> to play their card</p>
         <% end %>
         <% else %>
-          <%= render_slot(@inner_block) %>
+          <div
+          class={[
+          "",
+          @player_card && @highest_scoring_card && @player_card.id == @highest_scoring_card.id && "ring-offset-2 ring-4 ring-amber-300"
+        ]}
+          >
+            <%= render_slot(@inner_block) %>
+          </div>
       <% end %>
     </div>
     """
