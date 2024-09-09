@@ -1,0 +1,11 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @rewtd, and @sydseter  will be requested for
+# review when someone opens a pull request.
+*       @rewtd @sydseter
+
+# Resources added or modified need to be checked by @sydseter
+/resources/ @sydseter
+
+# Source files (new games) should be reviewed by @cw-owasp
+/source/ @cw-owasp
