@@ -11,178 +11,178 @@ suits:
   cards:
   -
     id: "CAAB1"
-    desc: "Next from Adam Shostack: Threats, what every engineer should learn from _______________"
+    desc: "Next from Adam Shostack: Threats, what every engineer should learn from $CARD1"
   -
     id: "CAAB2"
-    desc: "Introducing X-treme programming. It’s like programming but with __________________"
+    desc: "Introducing X-treme programming. It’s like programming but with $CARD1"
   -
     id: "CAAB3"
-    desc: "And the OWASP WASPY award goes to ___________ for _______________"
+    desc: "And the OWASP WASPY award goes to $CARD1 for $CARD2"
   -
     id: "CAAB4"
-    desc: "It’s a pity these days that bounty hunters are all getting involved with ____________________."
+    desc: "It’s a pity these days that bounty hunters are all getting involved with $CARD1."
   -
     id: "CAAB5"
-    desc: "Clint Gibler can’t sleep without _____________."
+    desc: "Clint Gibler can’t sleep without $CARD1."
   -
     id: "CAAB6"
     desc: "What’s my secret AppSec Power?"
   -
     id: "CAAB7"
-    desc: "Just once I’d like to hear a dev say “Thanks, thanks for ____________________.”"
+    desc: "Just once I’d like to hear a dev say “Thanks, thanks for $CARD1.”"
   -
     id: "CAAB8"
     desc: "“Why is the AppSec guy crying?”"
   -
     id: "CAAB9"
-    desc: "Instead of copies of Alice and Bob Learn AppSec, security champion programs now give out __________________ to champions."
+    desc: "Instead of copies of Alice and Bob Learn AppSec, security champion programs now give out $CARD1 to champions."
   -
     id: "CAAB10"
-    desc: "Neckbeards be like _____________________."
+    desc: "Neckbeards be like $CARD1."
   -
     id: "CAAB11"
     desc: "What’s EC-Council plagiarized most recently?"
   -
     id: "CAAB12"
-    desc: "The pentest engagement was completely ruined by _______________."
+    desc: "The pentest engagement was completely ruined by $CARD1."
   -
     id: "CAAB13"
-    desc: "When I am CISO, I will create the department of __________________________________."
+    desc: "When I am CISO, I will create the department of $CARD1."
   -
     id: "CAAB14"
     desc: "What are the devs hiding from me?"
   -
     id: "CAAB15"
-    desc: "Today’s broken build is thanks to _________"
+    desc: "Today’s broken build is thanks to $CARD1"
   -
     id: "CAAB16"
-    desc: "My fav programming language is _______"
+    desc: "My fav programming language is $CARD1"
   -
     id: "CAAB17"
-    desc: "Asking the internet to hack _______________"
+    desc: "Asking the internet to hack $CARD1"
   -
     id: "CAAB18"
-    desc: "HR told me I could not longer _____________"
+    desc: "HR told me I could not longer $CARD1"
   -
     id: "CAAB19"
-    desc: "After reviewing the PenTest report we all gathered for a fun session of ______________"
+    desc: "After reviewing the PenTest report we all gathered for a fun session of $CARD1"
   -
     id: "CAAB20"
-    desc: "Just put _____________ in the IDE. That will solve everything."
+    desc: "Just put $CARD1 in the IDE. That will solve everything."
   -
     id: "CAAB21"
-    desc: "I dare you to say __________, motherfucker."
+    desc: "I dare you to say $CARD1, motherfucker."
   -
     id: "CAAB22"
-    desc: "Secure coding is essentially ______________"
+    desc: "Secure coding is essentially $CARD1"
   -
     id: "CAAB23"
-    desc: "Secure Design is ___________"
+    desc: "Secure Design is $CARD1"
   -
     id: "CAAB24"
-    desc: "The only thing bigger than our attack surface is ___________________"
+    desc: "The only thing bigger than our attack surface is $CARD1"
   -
     id: "CAAB25"
-    desc: "I scan my servers with ______________"
+    desc: "I scan my servers with $CARD1"
   -
     id: "CAAB26"
-    desc: "The most recent edition of TL;DR Sec focused exclusively on the risk of _________________"
+    desc: "The most recent edition of TL;DR Sec focused exclusively on the risk of $CARD1"
   -
     id: "CAAB27"
-    desc: "This broken build is brought to you by _______"
+    desc: "This broken build is brought to you by $CARD1"
   -
     id: "CAAB28"
-    desc: "Dude, do not look in that repo. There’s ________ in there."
+    desc: "Dude, do not look in that repo. There’s $CARD1 in there."
   -
     id: "CAAB29"
     desc: "What is SheHacksPurple’s guilty pleasure?"
   -
     id: "CAAB30"
-    desc: "I’m sorry boss, I couldn’t fix the bug because of ____________________"
+    desc: "I’m sorry boss, I couldn’t fix the bug because of $CARD1"
   -
     id: "CAAB31"
-    desc: "Step 1: __________
-           Step 2:___________
+    desc: "Step 1: $CARD1
+           Step 2: $CARD2
            Step 3: Hack."
   -
     id: "CAAB32"
-    desc: "For my next hack, I will exfiltrate _____________"
+    desc: "For my next hack, I will exfiltrate $CARD1"
   -
     id: "CAAB33"
-    desc: "out of __________________."
+    desc: "out of $CARD1."
   -
     id: "CAAB34"
-    desc: "I’m doing a Pentest this week. Nothing but ______________ and _________________."
+    desc: "I’m doing a Pentest this week. Nothing but $CARD1 and $CARD2."
   -
     id: "CAAB35"
-    desc: "__________________ + _________________
-           = _____________________________"
+    desc: "$CARD1 + $CARD2
+           = $CARD3"
   -
     id: "CAAB36"
-    desc: "50% of all Pentests end in _________________."
+    desc: "50% of all Pentests end in $CARD1."
   -
     id: "CAAB37"
     desc: "Why is the developer crying?"
   -
     id: "CAAB38"
-    desc: "Life for software developers changed forever when the security team introduced them to ____________________."
+    desc: "Life for software developers changed forever when the security team introduced them to $CARD1."
   -
     id: "CAAB39"
-    desc: "The grey hairs be like ___________________."
+    desc: "The grey hairs be like $CARD1."
   -
     id: "CAAB40"
     desc: "What’s an AppSec Pro’s best friend?"
   -
     id: "CAAB41"
-    desc: "Fun tip! When the scanner starts, try surprising the PenTester with ______________________."
+    desc: "Fun tip! When the scanner starts, try surprising the PenTester with $CARD1."
   -
     id: "CAAB42"
-    desc: "If you like ________________________, you might be a bounty hunter."
+    desc: "If you like $CARD1, you might be a bounty hunter."
   -
     id: "CAAB43"
-    desc: "I’ve got 99 problems but _________________ ain’t one."
+    desc: "I’ve got 99 problems but $CARD1 ain’t one."
   -
     id: "CAAB44"
-    desc: "The devs and I were not getting along until we discussed our shared interest in ___________"
+    desc: "The devs and I were not getting along until we discussed our shared interest in $CARD1"
   -
     id: "CAAB45"
-    desc: "I fucking love _________________"
+    desc: "I fucking love $CARD1"
   -
     id: "CAAB45"
-    desc: "Praying to the AppSec Gods for ____________"
+    desc: "Praying to the AppSec Gods for $CARD1"
   -
     id: "CAAB46"
-    desc: "I don’t like make believe things like the Easter bunny, Santa Clause and __________________"
+    desc: "I don’t like make believe things like the Easter bunny, Santa Clause and $CARD1"
   -
     id: "CAAB47"
-    desc: "AI is going to solve the ______________ problem."
+    desc: "AI is going to solve the $CARD1 problem."
   -
     id: "CAAB48"
-    desc: "I defend against zero days using _________"
+    desc: "I defend against zero days using $CARD1"
   -
     id: "CAAB49"
-    desc: "What’s the risk of _________________?"
+    desc: "What’s the risk of $CARD1?"
   -
     id: "CAAB50"
-    desc: "Copilot told me to use code that is ___________"
+    desc: "Copilot told me to use code that is $CARD1"
   -
     id: "CAAB51"
-    desc: "The most important part of AppSec is ________"
+    desc: "The most important part of AppSec is $CARD1"
   -
     id: "CAAB52"
-    desc: "The largest bounty we give is for when they find _______________"
+    desc: "The largest bounty we give is for when they find $CARD1"
   -
     id: "CAAB3"
-    desc: "The focus of this audit will be _____________"
+    desc: "The focus of this audit will be $CARD1"
   -
     id: "CAAB54"
-    desc: "This policy is going to prevent ______________"
+    desc: "This policy is going to prevent $CARD1"
   -
     id: "CAAB55"
-    desc: "The developers and I were not getting along, until we discovered our shared interst in ________."
+    desc: "The developers and I were not getting along, until we discovered our shared interest in $CARD1."
   -
     id: "CAAB56"
-    desc: "NIST 800 now prohibits ___________________ in new web apps and APIs."
+    desc: "NIST 800 now prohibits $CARD1 in new web apps and APIs."
 -
   name: "Cards Against AppSec - White"
   id: "CAAW"
