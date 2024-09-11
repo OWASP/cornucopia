@@ -14,18 +14,3 @@ jobs:
         uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
         with:
           egress-policy: block
-          allowed-endpoints: >
-            azure.archive.ubuntu.com:80 # api.github.com:443
-            esm.ubuntu.com:443
-            files.pythonhosted.org:443
-            github-cloud.githubusercontent.com:443
-            github.com:443
-            motd.ubuntu.com:443
-            packages.microsoft.com:443
-            ppa.launchpadcontent.net:443
-            pypi.org:443
-            opencre.org:443
-            codeclimate.com:443
-            d3iz1jjs17r6kg.cloudfront.net:443
-            keys.openpgp.org:443
-            api.codeclimate.com:443
