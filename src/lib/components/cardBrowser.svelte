@@ -27,7 +27,7 @@
     function getCurrentIndex(card : Card)
     {
         // cards are equal when both their suit and card value (e.g. authentication 4) are equal.
-        return cards.map(card => card.suit + card.card).indexOf(card.suit + card.card);
+        return cards.map(card => card.suit + String(card.card).toUpperCase()).indexOf(card.suit + String(card.card).toUpperCase());
     }
 
 

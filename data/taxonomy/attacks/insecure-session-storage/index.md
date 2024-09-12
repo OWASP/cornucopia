@@ -10,4 +10,4 @@ In a fictional scenario, an attacker named Eve exploits an online banking applic
 
 ## Cards
 ### Authentication
-- [Authentication 3](/authentication/3)
+- [Authentication 3](/authentication/AT3)

@@ -34,24 +34,24 @@ Do not mitigate SSRF via the use of a deny list or regular expression. Attackers
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/data-validation-&-encoding/2)
-- [Data-validation-&-encoding 7](/data-validation-&-encoding/7)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/Q)
+- [Data-validation-&-encoding 2](/data-validation-&-encoding/VE2)
+- [Data-validation-&-encoding 7](/data-validation-&-encoding/VE7)
+- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
 
 ### Session-management
-- [Session-management 4](/session-management/4)
-- [Session-management 10](/session-management/10)
+- [Session-management 4](/session-management/SM4)
+- [Session-management 10](/session-management/SMX)
 
 ### Authorization
-- [Authorization 2](/authorization/2)
-- [Authorization 8](/authorization/8)
-- [Authorization 9](/authorization/9)
+- [Authorization 2](/authorization/AZ2)
+- [Authorization 8](/authorization/AZ8)
+- [Authorization 9](/authorization/AZ9)
 
 ### Cryptography
-- [Cryptography 7](/cryptography/7)
-- [Cryptography J](/cryptography/J)
+- [Cryptography 7](/cryptography/CR7)
+- [Cryptography J](/cryptography/CRJ)
 
 ### Cornucopia
-- [Cornucopia 3](/cornucopia/3)
-- [Cornucopia 5](/cornucopia/5)
-- [Cornucopia Q](/cornucopia/Q)
+- [Cornucopia 3](/cornucopia/C3)
+- [Cornucopia 5](/cornucopia/C5)
+- [Cornucopia Q](/cornucopia/CQ)

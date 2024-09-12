@@ -11,30 +11,30 @@ In June 2022, a privilege escalation vulnerability in MikroTik RouterOS was disc
 ## Cards
 
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 5](/data-validation-&-encoding/5)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/6)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/9)
+- [Data-validation-&-encoding 5](/data-validation-&-encoding/VE5)
+- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
+- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
+- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
 
 ### Authentication
-- [Authentication 8](/authentication/8)
-- [Authentication J](/authentication/J)
+- [Authentication 8](/authentication/AT8)
+- [Authentication J](/authentication/ATJ)
 
 ### Authorization
-- [Authorization 4](/authorization/4)
-- [Authorization 5](/authorization/5)
-- [Authorization 8](/authorization/8)
-- [Authorization J](/authorization/J)
-- [Authorization Q](/authorization/Q)
-- [Authorization K](/authorization/K)
+- [Authorization 4](/authorization/AZ4)
+- [Authorization 5](/authorization/AZ5)
+- [Authorization 8](/authorization/AZ8)
+- [Authorization J](/authorization/AZJ)
+- [Authorization Q](/authorization/AZQ)
+- [Authorization K](/authorization/AZK)
 
 ### Session-management
-- [Session-management 8](/session-management/8)
+- [Session-management 8](/session-management/SM8)
 
 ### Cryptography
-- [Cryptography J](/cryptography/J)
+- [Cryptography J](/cryptography/CRJ)
 
 ### Cornucopia
-- [Cornucopia 4](/cornucopia/4)
-- [Cornucopia Q](/cornucopia/Q)
-- [Cornucopia A](/cornucopia/A)
+- [Cornucopia 4](/cornucopia/C4)
+- [Cornucopia Q](/cornucopia/CQ)
+- [Cornucopia A](/cornucopia/CA)

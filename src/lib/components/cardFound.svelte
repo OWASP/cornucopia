@@ -21,7 +21,7 @@
   export let ASVSRoutes: Route[];
 
   function linkASVS(input: string) {
-    input = input.split("-")[0]; // if it's a range of topics, link to the first one
+    input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
     let routes: Route[] = ASVSRoutes;
     let searchString = FormatToDoubleDigitSearchstring(input);
     let result: Route | undefined = routes.find(
@@ -31,6 +31,7 @@
   }
 
   function FormatToDoubleDigitSearchstring(input: string) {
+    input = String(input)
     let str =
       input.lastIndexOf(".") !== -1
         ? input.substring(0, input.lastIndexOf("."))
@@ -49,21 +50,21 @@
 
   $: {
     title =
-      card.suit[0].toUpperCase() +
-      card.suit.substring(1, card.suit.length) +
-      " " +
-      card.card.toUpperCase();
+      card.suitName +
+      " (" +
+      card.card +
+      ") ";
     mappings = GetCardMappings(card.suit, card.card);
     attacks = GetCardAttacks(card.suit, card.card);
   }
 </script>
 
 <div class="container">
-  <h1 class="title">{Text.Format(title)}</h1>
+  <h1 class="title">{title}</h1>
   <Summary {card}></Summary>
   <CardBrowser {card} {cards}></CardBrowser>
   <a class="link" href="/how-to-play">How to play?</a>
-  <p>{GetCardDescription(card.suit, card.card)}</p>
+  <p>{GetCardDescription(card.suit, String(card.card).toUpperCase())}</p>
   {#if mappings}
     <h1 class="title">Mappings</h1>
     <MappingsList
@@ -86,7 +87,7 @@
 
   <h1 class="title">ASVS (4.0) Cheatsheetseries Index</h1>
   {#if mappings}
-    <AsvsOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +s.split('.').slice(0, 2).join('.')))]}></AsvsOverview>
+    <AsvsOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></AsvsOverview>
   {/if}
   <h1 class="title">Attacks</h1>
   {#each attacks as attack}
@@ -94,7 +95,7 @@
   {/each}
 
     {#key card}
-        <Utterances name={card.suit + '-' + card.card.toUpperCase()}></Utterances>
+        <Utterances name={card.suit + '-' + String(card.card).toUpperCase()}></Utterances>
         <ViewSourceOnGithub path="{card.githubUrl}"></ViewSourceOnGithub>
     {/key}
 </div>

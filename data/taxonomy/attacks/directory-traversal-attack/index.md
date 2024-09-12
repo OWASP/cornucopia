@@ -10,4 +10,4 @@ The Cisco Duo Device Health Application for Windows has a vulnerability allowing
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/data-validation-&-encoding/2)
+- [Data-validation-&-encoding 2](/data-validation-&-encoding/VE2)

@@ -24,41 +24,41 @@ Note: SQL structures such as table names, column names, and so on cannot be esca
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/data-validation-&-encoding/2)
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/3)
-- [Data-validation-&-encoding 4](/data-validation-&-encoding/4)
-- [Data-validation-&-encoding 5](/data-validation-&-encoding/5)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/6)
-- [Data-validation-&-encoding 7](/data-validation-&-encoding/7)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/9)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/J)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/Q)
-- [Data-validation-&-encoding K](/data-validation-&-encoding/K)
+- [Data-validation-&-encoding 2](/data-validation-&-encoding/VE2)
+- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
+- [Data-validation-&-encoding 4](/data-validation-&-encoding/VE4)
+- [Data-validation-&-encoding 5](/data-validation-&-encoding/VE5)
+- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
+- [Data-validation-&-encoding 7](/data-validation-&-encoding/VE7)
+- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
+- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
+- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
+- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
+- [Data-validation-&-encoding K](/data-validation-&-encoding/VEK)
 
 ### Authentication
-- [Authentication 2](/authentication/2)
-- [Authentication 3](/authentication/3)
-- [Authentication 4](/authentication/4)
-- [Authentication 5](/authentication/5)
-- [Authentication 8](/authentication/8)
-- [Authentication J](/authentication/J)
-- [Authentication Q](/authentication/Q)
-- [Authentication K](/authentication/K)
+- [Authentication 2](/authentication/AT2)
+- [Authentication 3](/authentication/AT3)
+- [Authentication 4](/authentication/AT4)
+- [Authentication 5](/authentication/AT5)
+- [Authentication 8](/authentication/AT8)
+- [Authentication J](/authentication/ATJ)
+- [Authentication Q](/authentication/ATQ)
+- [Authentication K](/authentication/ATK)
 
 ### Session-management
-- [Session-management 2](/session-management/2)
+- [Session-management 2](/session-management/SM2)
 
 ### Authorization
-- [Authorization 2](/authorization/2)
-- [Authorization 3](/authorization/3)
-- [Authorization 8](/authorization/8)
-- [Authorization 9](/authorization/9)
-- [Authorization Q](/authorization/Q)
+- [Authorization 2](/authorization/AZ2)
+- [Authorization 3](/authorization/AZ3)
+- [Authorization 8](/authorization/AZ8)
+- [Authorization 9](/authorization/AZ9)
+- [Authorization Q](/authorization/AZQ)
 
 ### Cryptography
-- [Cryptography 8](/cryptography/8)
+- [Cryptography 8](/cryptography/CR8)
 
 ### Cornucopia
-- [Cornucopia 3](/cornucopia/3)
-- [Cornucopia 5](/cornucopia/5)
+- [Cornucopia 3](/cornucopia/C3)
+- [Cornucopia 5](/cornucopia/C5)

@@ -3,29 +3,30 @@ import fm from "front-matter"
 import type { Card } from './card';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { order } from './order';
-import { getSuits } from '../suit/suitController';
+import { getSuitNameByCardId, getSuits } from '../suit/suitController';
 import type { Suit } from '../suit/suit';
 
 export function getCardBySuitAndName(suit : string, card : string) : Card
 {
-    let base : string = './data/cards/cornucopia-v1/';
-    let path : string = base + suit + '/' + (card.length == 1 ? card.toUpperCase() : card) + '/technical-note.md'// '/explanation.md';
+    let base : string = './data/cards/webapp-cards-1.22/';
+    let path : string = base + suit + '/' + (card.length == 1 ? card : card) + '/technical-note.md'// '/explanation.md';
     let file = fs.readFileSync(path, 'utf8');
     let parsed = fm(file);
 
     let cardObject = {} as Card;
     cardObject.summary = parsed.body;
     cardObject.suit = suit;
-    cardObject.card = card.toLowerCase();
-    cardObject.url = '/' + suit + '/' + card.toLowerCase();
-    cardObject.githubUrl = 'data/cards/cornucopia-v1/' + suit + '/' + card;
+    cardObject.suitName = getSuitNameByCardId(card);
+    cardObject.card = card;
+    cardObject.url = '/' + suit + '/' + card;
+    cardObject.githubUrl = 'data/cards/webapp-cards-1.22/' + suit + '/' + card;
 
     return cardObject;
 }
 
 export function getCardsBySuit(suit : string) : Card[]
 {
-    let base : string = './data/cards/cornucopia-v1/';
+    let base : string = './data/cards/webapp-cards-1.22/';
     let path : string = base + suit;
     let directories = FileSystemHelper.getDirectories(path);
     let cards = new Array<Card>();
@@ -38,6 +39,29 @@ export function getCardsBySuit(suit : string) : Card[]
     }
 
     return cards.sort(orderFunction);
+}
+
+export function getCardById(id : string) : Card
+{
+    let suits : Suit[] = getSuits();
+    let cardObject = {} as Card;
+    let suit : string = '';
+    for(let i = 0 ; i < suits.length ; i++)
+    {
+        for(let j = 0 ; j < suits[i].cards.length ; j++)
+        {
+            let card : Card = suits[i].cards[j];
+            if (card.card == String(id).toUpperCase())
+                cardObject = card
+                suit = suits[i].name;
+                
+        }
+    }
+    cardObject.suitName = getSuitNameByCardId(cardObject.card);
+    cardObject.url = '/' + suit + '/' + cardObject.card;
+    cardObject.githubUrl = 'data/cards/webapp-cards-1.22/' + suit + '/' + cardObject.card;
+
+    return cardObject;
 }
 
 export function getCardsFlat() : Card[]
@@ -58,7 +82,7 @@ export function getCardsFlat() : Card[]
 
 function orderFunction(a : Card, b : Card) : number
 {
-    let orderA = order.get(a.card.toLowerCase()) || -1;
-    let orderB = order.get(b.card.toLowerCase()) || -1;
+    let orderA = order.get(a.card) || -1;
+    let orderB = order.get(b.card) || -1;
     return orderA < orderB ? -1 : 1
 }

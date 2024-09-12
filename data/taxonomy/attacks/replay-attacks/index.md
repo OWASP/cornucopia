@@ -11,9 +11,9 @@ Honda vehicles are reportedly vulnerable to the Rolling PWN attack, allowing rem
 
 ## Cards
 ### Authentication
-- [Authentication 6](/authentication/6)
-- [Authentication J](/authentication/J)
+- [Authentication 6](/authentication/AT6)
+- [Authentication J](/authentication/ATJ)
 
 ### Session-management
-- [Session-management 5](/session-management/5)
-- [Session-management J](/session-management/J)
+- [Session-management 5](/session-management/SM5)
+- [Session-management J](/session-management/SMJ)

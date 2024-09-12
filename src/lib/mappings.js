@@ -1,15 +1,37 @@
 let mappings = {
   "meta": {
-    "edition": "ecommerce",
+    "edition": "webapp",
     "component": "mappings",
     "language": "ALL",
-    "version": "1.30"
+    "version": "1.22",
+    "layouts": [
+      "cards",
+      "leaflet",
+      "guide"
+    ],
+    "templates": [
+      "bridge_qr",
+      "bridge",
+      "tarot",
+      "tarot_qr"
+    ],
+    "languages": [
+      "en",
+      "es",
+      "fr",
+      "nl",
+      "nl",
+      "no-nb",
+      "pt-br"
+    ]
   },
   "suits": [
     {
-      "name": "Data validation & encoding",
+      "id": "VE",
+      "name": "DATA VALIDATION & ENCODING",
       "cards": [
         {
+          "id": "VE2",
           "value": "2",
           "owasp_scp": [
             69,
@@ -24,14 +46,12 @@ let mappings = {
             162
           ],
           "owasp_asvs": [
-            "1.6.4",
-            "2.10.4",
-            "4.3.2",
-            "7.1.1",
-            "10.2.3",
-            "14.1.1",
-            "14.2.2",
-            "14.3.3"
+            "1.10",
+            4.5,
+            8.1,
+            11.5,
+            19.1,
+            19.5
           ],
           "owasp_appsensor": [
             "HT1-3"
@@ -46,14 +66,18 @@ let mappings = {
           ]
         },
         {
+          "id": "VE3",
           "value": "3",
           "owasp_scp": [],
           "owasp_asvs": [
-            "1.5.3",
-            "5.1.1-5.1.4",
-            "13.2.1",
-            "14.1.2",
-            "14.4.1"
+            5.1,
+            5.16,
+            5.17,
+            5.18,
+            5.19,
+            "5.20",
+            11.1,
+            11.2
           ],
           "owasp_appsensor": [
             "RE7-8",
@@ -84,6 +108,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VE4",
           "value": "4",
           "owasp_scp": [
             8,
@@ -91,11 +116,10 @@ let mappings = {
             183
           ],
           "owasp_asvs": [
-            "4.2.1",
-            "5.1.1",
-            "5.1.2",
-            "11.1.1",
-            "11.1.2"
+            4.16,
+            5.16,
+            5.17,
+            15.1
           ],
           "owasp_appsensor": [
             "RE3-6",
@@ -123,6 +147,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VE5",
           "value": "5",
           "owasp_scp": [
             3,
@@ -135,11 +160,11 @@ let mappings = {
             168
           ],
           "owasp_asvs": [
-            "1.1.6",
-            "5.3.3",
-            "5.2.1",
-            "5.2.2",
-            "5.2.5"
+            1.7,
+            5.15,
+            5.21,
+            5.22,
+            5.23
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -155,17 +180,16 @@ let mappings = {
           ]
         },
         {
+          "id": "VE6",
           "value": "6",
           "owasp_scp": [
             3,
             168
           ],
           "owasp_asvs": [
-            "1.1.6",
-            "1.5.3",
-            "5.1.3",
-            "13.2.2",
-            "13.2.5"
+            1.7,
+            5.6,
+            5.19
           ],
           "owasp_appsensor": [
             "IE2-3"
@@ -180,6 +204,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VE7",
           "value": "7",
           "owasp_scp": [
             4,
@@ -188,9 +213,8 @@ let mappings = {
             150
           ],
           "owasp_asvs": [
-            "1.5.3",
-            "13.2.2",
-            "13.2.5"
+            5.6,
+            11.8
           ],
           "owasp_appsensor": [
             "IE2-3",
@@ -208,15 +232,16 @@ let mappings = {
           ]
         },
         {
+          "id": "VE8",
           "value": "8",
           "owasp_scp": [
             15,
             169
           ],
           "owasp_asvs": [
-            "1.1.6",
-            "5.2.2",
-            "5.2.5"
+            1.7,
+            5.21,
+            5.23
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -232,6 +257,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VE9",
           "value": "9",
           "owasp_scp": [
             6,
@@ -240,7 +266,7 @@ let mappings = {
             168
           ],
           "owasp_asvs": [
-            "7.1.3"
+            5.3
           ],
           "owasp_appsensor": [
             "IE2-3"
@@ -255,6 +281,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VEX",
           "value": "10",
           "owasp_scp": [
             2,
@@ -264,14 +291,13 @@ let mappings = {
             180
           ],
           "owasp_asvs": [
-            "1.12.2",
-            "5.1.3",
-            "9.2.3",
-            "12.2.1",
-            "12.3.1-12.3.3",
-            "12.4.2",
-            "12.5.2",
-            "14.5.3"
+            5.19,
+            10.6,
+            16.2,
+            16.3,
+            16.4,
+            16.5,
+            16.8
           ],
           "owasp_appsensor": [
             "IE4",
@@ -295,13 +321,15 @@ let mappings = {
           ]
         },
         {
+          "id": "VEJ",
           "value": "J",
           "owasp_scp": [
             1,
             17
           ],
           "owasp_asvs": [
-            "1.5.3"
+            5.5,
+            5.18
           ],
           "owasp_appsensor": [
             "RE3",
@@ -318,6 +346,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VEQ",
           "value": "Q",
           "owasp_scp": [
             10,
@@ -327,10 +356,11 @@ let mappings = {
             20
           ],
           "owasp_asvs": [
-            "5.2.1",
-            "5.2.5",
-            "5.3.3",
-            "5.5.4"
+            5.15,
+            5.22,
+            5.23,
+            5.24,
+            5.25
           ],
           "owasp_appsensor": [
             "IE1",
@@ -349,6 +379,7 @@ let mappings = {
           ]
         },
         {
+          "id": "VEK",
           "value": "K",
           "owasp_scp": [
             15,
@@ -363,10 +394,13 @@ let mappings = {
             212
           ],
           "owasp_asvs": [
-            "5.2.1",
-            "5.2.2",
-            "5.3.4",
-            "5.3.7-5.3.10"
+            "5.10",
+            5.11,
+            5.12,
+            5.13,
+            5.14,
+            5.16,
+            5.21
           ],
           "owasp_appsensor": [
             "CIE1",
@@ -389,21 +423,20 @@ let mappings = {
       ]
     },
     {
-      "name": "Authentication",
+      "id": "AT",
+      "name": "AUTHENTICATION",
       "cards": [
         {
+          "id": "AT2",
           "value": "2",
           "owasp_scp": [
             47,
             52
           ],
           "owasp_asvs": [
-            "2.5.2",
-            "7.1.2",
-            "7.1.4",
-            "7.2.1",
-            "8.2.1-8.2.3",
-            "8.3.6"
+            2.12,
+            8.4,
+            "8.10"
           ],
           "owasp_appsensor": [
             "UT1"
@@ -414,6 +447,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AT3",
           "value": "3",
           "owasp_scp": [
             36,
@@ -428,8 +462,15 @@ let mappings = {
             146
           ],
           "owasp_asvs": [
-            "2.5.2",
-            "2.5.3"
+            2.2,
+            2.17,
+            2.24,
+            8.7,
+            9.1,
+            9.4,
+            9.5,
+            9.9,
+            9.11
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -441,14 +482,15 @@ let mappings = {
           ]
         },
         {
+          "id": "AT4",
           "value": "4",
           "owasp_scp": [
             33,
             53
           ],
           "owasp_asvs": [
-            "2.2.1",
-            "4.1.5"
+            2.18,
+            2.28
           ],
           "owasp_appsensor": [
             "AE1"
@@ -461,6 +503,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AT5",
           "value": "5",
           "owasp_scp": [
             54,
@@ -468,7 +511,7 @@ let mappings = {
             178
           ],
           "owasp_asvs": [
-            "4.1.5"
+            2.19
           ],
           "owasp_appsensor": [
             "AE12",
@@ -482,6 +525,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AT6",
           "value": "6",
           "owasp_scp": [
             37,
@@ -490,7 +534,7 @@ let mappings = {
             178
           ],
           "owasp_asvs": [
-            "2.5.6"
+            2.22
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -501,6 +545,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AT7",
           "value": "7",
           "owasp_scp": [
             33,
@@ -511,11 +556,11 @@ let mappings = {
             53
           ],
           "owasp_asvs": [
-            "2.1.2",
-            "2.1.7",
-            "2.1.10",
-            "2.2.1",
-            "2.2.1"
+            2.7,
+            "2.20",
+            2.23,
+            2.25,
+            2.27
           ],
           "owasp_appsensor": [
             "AE2",
@@ -530,12 +575,13 @@ let mappings = {
           ]
         },
         {
+          "id": "AT8",
           "value": "8",
           "owasp_scp": [
             28
           ],
           "owasp_asvs": [
-            "4.1.5"
+            2.6
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -546,17 +592,18 @@ let mappings = {
           ]
         },
         {
+          "id": "AT9",
           "value": "9",
           "owasp_scp": [
             55,
             56
           ],
           "owasp_asvs": [
-            "1.4.3",
-            "1.4.5",
-            "2.1.6",
-            "2.2.4",
-            "4.3.3"
+            2.1,
+            2.9,
+            2.26,
+            2.31,
+            4.15
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -568,6 +615,7 @@ let mappings = {
           ]
         },
         {
+          "id": "ATX",
           "value": "10",
           "owasp_scp": [
             25,
@@ -575,8 +623,8 @@ let mappings = {
             27
           ],
           "owasp_asvs": [
-            "1.1.6",
-            "1.4.4"
+            1.7,
+            "2.30"
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -589,6 +637,7 @@ let mappings = {
           ]
         },
         {
+          "id": "ATJ",
           "value": "J",
           "owasp_scp": [
             23,
@@ -596,8 +645,7 @@ let mappings = {
             34
           ],
           "owasp_asvs": [
-            "1.4.3",
-            "1.4.5"
+            2.1
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -609,6 +657,7 @@ let mappings = {
           ]
         },
         {
+          "id": "ATQ",
           "value": "Q",
           "owasp_scp": [
             23,
@@ -617,10 +666,8 @@ let mappings = {
             49
           ],
           "owasp_asvs": [
-            "1.4.3",
-            "1.4.5",
-            "2.5.6",
-            "2.5.7"
+            2.1,
+            2.8
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -636,13 +683,14 @@ let mappings = {
           ]
         },
         {
+          "id": "ATK",
           "value": "K",
           "owasp_scp": [
             24
           ],
           "owasp_asvs": [
-            "4.1.1",
-            "10.2.3-10.2.6"
+            2.4,
+            13.2
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -658,16 +706,18 @@ let mappings = {
       ]
     },
     {
-      "name": "Session management",
+      "id": "SM",
+      "name": "SESSION MANAGEMENT",
       "cards": [
         {
+          "id": "SM2",
           "value": "2",
           "owasp_scp": [
             58,
             59
           ],
           "owasp_asvs": [
-            "3.7.1"
+            "3.10"
           ],
           "owasp_appsensor": [
             "SE2"
@@ -682,13 +732,15 @@ let mappings = {
           ]
         },
         {
+          "id": "SM3",
           "value": "3",
           "owasp_scp": [
             68
           ],
           "owasp_asvs": [
-            "3.3.3",
-            "3.3.4"
+            3.16,
+            3.17,
+            3.18
           ],
           "owasp_appsensor": [],
           "capec": [],
@@ -697,13 +749,14 @@ let mappings = {
           ]
         },
         {
+          "id": "SM4",
           "value": "4",
           "owasp_scp": [
             59,
             61
           ],
           "owasp_asvs": [
-            "3.4.1-3.4.5"
+            3.12
           ],
           "owasp_appsensor": [
             "SE2"
@@ -717,6 +770,7 @@ let mappings = {
           ]
         },
         {
+          "id": "SM5",
           "value": "5",
           "owasp_scp": [
             60,
@@ -727,10 +781,9 @@ let mappings = {
             72
           ],
           "owasp_asvs": [
-            "3.2.1",
-            "3.2.2",
-            "3.2.4",
-            "3.3.1"
+            3.2,
+            3.7,
+            3.11
           ],
           "owasp_appsensor": [
             "SE4-6"
@@ -743,13 +796,18 @@ let mappings = {
           ]
         },
         {
+          "id": "SM6",
           "value": "6",
           "owasp_scp": [
             64,
             65
           ],
           "owasp_asvs": [
-            "3.3.2-3.3.4"
+            3.3,
+            3.4,
+            3.16,
+            3.17,
+            3.18
           ],
           "owasp_appsensor": [
             "SE5",
@@ -763,14 +821,15 @@ let mappings = {
           ]
         },
         {
+          "id": "SM7",
           "value": "7",
           "owasp_scp": [
             62,
             63
           ],
           "owasp_asvs": [
-            "3.3.1",
-            "3.3.4"
+            3.2,
+            3.5
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -781,14 +840,12 @@ let mappings = {
           ]
         },
         {
+          "id": "SM8",
           "value": "8",
           "owasp_scp": [
             96
           ],
-          "owasp_asvs": [
-            "3.6.1",
-            "3.3.2"
-          ],
+          "owasp_asvs": [],
           "owasp_appsensor": [],
           "capec": [
             21
@@ -798,6 +855,7 @@ let mappings = {
           ]
         },
         {
+          "id": "SM9",
           "value": "9",
           "owasp_scp": [
             69,
@@ -807,13 +865,9 @@ let mappings = {
             138
           ],
           "owasp_asvs": [
-            "1.9.1",
-            "3.1.1",
-            "7.1.1",
-            "7.1.2",
-            "7.2.1",
-            "9.1.3",
-            "9.2.2"
+            3.6,
+            8.7,
+            10.3
           ],
           "owasp_appsensor": [
             "SE4-6"
@@ -827,13 +881,14 @@ let mappings = {
           ]
         },
         {
+          "id": "SMX",
           "value": "10",
           "owasp_scp": [
             73,
             74
           ],
           "owasp_asvs": [
-            "4.2.2"
+            4.13
           ],
           "owasp_appsensor": [
             "IE4"
@@ -847,10 +902,12 @@ let mappings = {
           ]
         },
         {
+          "id": "SMJ",
           "value": "J",
           "owasp_scp": [],
           "owasp_asvs": [
-            "11.1.1-11.1.3"
+            15.1,
+            15.2
           ],
           "owasp_appsensor": [
             "IE5"
@@ -864,13 +921,13 @@ let mappings = {
           ]
         },
         {
+          "id": "SMQ",
           "value": "Q",
           "owasp_scp": [
             58
           ],
           "owasp_asvs": [
-            "1.1.6",
-            "3.7.1"
+            3.1
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -882,13 +939,14 @@ let mappings = {
           ]
         },
         {
+          "id": "SMK",
           "value": "K",
           "owasp_scp": [
             58,
             60
           ],
           "owasp_asvs": [
-            "1.1.6"
+            1.7
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -902,17 +960,19 @@ let mappings = {
       ]
     },
     {
-      "name": "Authorization",
+      "id": "AZ",
+      "name": "AUTHORIZATION",
       "cards": [
         {
+          "id": "AZ2",
           "value": "2",
           "owasp_scp": [
             44
           ],
           "owasp_asvs": [
-            "4.1.3",
-            "4.2.1",
-            "5.1.5"
+            4.1,
+            4.16,
+            16.1
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -925,6 +985,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ3",
           "value": "3",
           "owasp_scp": [
             51,
@@ -936,16 +997,11 @@ let mappings = {
             150
           ],
           "owasp_asvs": [
-            "1.12.1",
-            "4.1.3",
-            "4.1.5",
-            "8.1.2",
-            "8.2.1",
-            "8.3.1",
-            "8.3.4",
-            "8.3.6",
-            "8.3.8",
-            "12.4.1"
+            4.1,
+            8.2,
+            "9.1-9.6",
+            9.11,
+            "16.6-16.7"
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -959,13 +1015,14 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ4",
           "value": "4",
           "owasp_scp": [
             79,
             80
           ],
           "owasp_asvs": [
-            "4.1.5"
+            4.8
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -978,6 +1035,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ5",
           "value": "5",
           "owasp_scp": [
             70,
@@ -993,16 +1051,16 @@ let mappings = {
             179
           ],
           "owasp_asvs": [
-            "1.2.2",
-            "4.1.1",
-            "4.1.3",
-            "4.2.1"
+            4.1,
+            4.4,
+            4.9,
+            19.3
           ],
           "owasp_appsensor": [
-            "ACE1",
-            "ACE2",
-            "ACE3",
-            "ACE4",
+            "ATE1",
+            "ATE2",
+            "ATE3",
+            "ATE4",
             "HT2"
           ],
           "capec": [
@@ -1025,6 +1083,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ6",
           "value": "6",
           "owasp_scp": [
             81,
@@ -1032,11 +1091,11 @@ let mappings = {
             131
           ],
           "owasp_asvs": [
-            "4.1.3",
-            "4.2.1"
+            4.1,
+            4.4
           ],
           "owasp_appsensor": [
-            "ACE1-4"
+            "ATE1-4"
           ],
           "capec": [
             122
@@ -1048,6 +1107,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ7",
           "value": "7",
           "owasp_scp": [
             81,
@@ -1056,11 +1116,11 @@ let mappings = {
             131
           ],
           "owasp_asvs": [
-            "4.1.3",
-            "4.2.1"
+            4.1,
+            4.4
           ],
           "owasp_appsensor": [
-            "ACE1-4"
+            "ATE1-4"
           ],
           "capec": [
             122
@@ -1072,6 +1132,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ8",
           "value": "8",
           "owasp_scp": [
             10,
@@ -1081,15 +1142,14 @@ let mappings = {
             189
           ],
           "owasp_asvs": [
-            "4.1.2",
-            "4.2.1",
-            "4.3.3",
-            "7.3.4",
-            "11.1.1",
-            "11.1.2"
+            "4.10",
+            4.15,
+            4.16,
+            8.13,
+            15.1
           ],
           "owasp_appsensor": [
-            "ACE3"
+            "ATE3"
           ],
           "capec": [
             25,
@@ -1107,13 +1167,14 @@ let mappings = {
           ]
         },
         {
+          "id": "AZ9",
           "value": "9",
           "owasp_scp": [
             94
           ],
           "owasp_asvs": [
-            "11.1.3",
-            "11.1.4"
+            4.14,
+            15.2
           ],
           "owasp_appsensor": [
             "AE3",
@@ -1133,17 +1194,18 @@ let mappings = {
           ]
         },
         {
+          "id": "AZX",
           "value": "10",
           "owasp_scp": [
             78,
             91
           ],
           "owasp_asvs": [
-            "1.1.6",
-            "4.1.1"
+            1.7,
+            4.11
           ],
           "owasp_appsensor": [
-            "ACE1-4"
+            "ATE1-4"
           ],
           "capec": [
             36,
@@ -1158,15 +1220,15 @@ let mappings = {
           ]
         },
         {
+          "id": "AZJ",
           "value": "J",
           "owasp_scp": [
             89,
             90
           ],
           "owasp_asvs": [
-            "4.1.2",
-            "10.2.3",
-            "10.2.3-10.2.6"
+            "4.10",
+            13.2
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1181,12 +1243,13 @@ let mappings = {
           ]
         },
         {
+          "id": "AZQ",
           "value": "Q",
           "owasp_scp": [
             209
           ],
           "owasp_asvs": [
-            "5.3.8"
+            5.12
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1202,6 +1265,7 @@ let mappings = {
           ]
         },
         {
+          "id": "AZK",
           "value": "K",
           "owasp_scp": [
             77,
@@ -1209,9 +1273,9 @@ let mappings = {
             91
           ],
           "owasp_asvs": [
-            "4.1.1",
-            "4.1.2",
-            "10.2.3-10.2.6"
+            4.9,
+            "4.10",
+            13.2
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1227,18 +1291,18 @@ let mappings = {
       ]
     },
     {
-      "name": "Cryptography",
+      "id": "CR",
+      "name": "CRYPTOGRAPHY",
       "cards": [
         {
+          "id": "CR2",
           "value": "2",
           "owasp_scp": [
             105,
             133,
             135
           ],
-          "owasp_asvs": [
-            "6.2.2"
-          ],
+          "owasp_asvs": [],
           "owasp_appsensor": [],
           "capec": [],
           "safecode": [
@@ -1247,6 +1311,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CR3",
           "value": "3",
           "owasp_scp": [
             92,
@@ -1254,12 +1319,13 @@ let mappings = {
             212
           ],
           "owasp_asvs": [
-            "14.1.1",
-            "14.1.4",
-            "14.1.5",
-            "10.2.3-10.2.6",
-            "10.3.1",
-            "10.3.2"
+            8.11,
+            11.7,
+            13.2,
+            19.5,
+            19.6,
+            19.7,
+            19.8
           ],
           "owasp_appsensor": [
             "SE1",
@@ -1284,6 +1350,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CR4",
           "value": "4",
           "owasp_scp": [
             37,
@@ -1292,9 +1359,8 @@ let mappings = {
             214
           ],
           "owasp_asvs": [
-            "6.1.1",
-            "8.3.4",
-            "9.1.1"
+            7.12,
+            9.2
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1309,16 +1375,15 @@ let mappings = {
           ]
         },
         {
+          "id": "CR5",
           "value": "5",
           "owasp_scp": [
             103,
             145
           ],
           "owasp_asvs": [
-            "1.9.1",
-            "6.2.1",
-            "9.1.3",
-            "9.2.2"
+            7.2,
+            10.3
           ],
           "owasp_appsensor": [],
           "capec": [],
@@ -1328,6 +1393,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CR6",
           "value": "6",
           "owasp_scp": [
             36,
@@ -1337,13 +1403,11 @@ let mappings = {
             147
           ],
           "owasp_asvs": [
-            "1.9.1",
-            "2.2.5",
-            "2.5.1",
-            "8.3.4",
-            "8.3.6",
-            "9.1.3",
-            "9.2.2"
+            2.16,
+            9.2,
+            9.11,
+            10.3,
+            19.2
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1361,6 +1425,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CR7",
           "value": "7",
           "owasp_scp": [
             75,
@@ -1369,12 +1434,13 @@ let mappings = {
             148
           ],
           "owasp_asvs": [
-            "1.9.2",
-            "6.2.7",
-            "9.1.1",
-            "9.2.1",
-            "9.2.4",
-            "14.4.5"
+            10.1,
+            10.5,
+            "10.10",
+            10.11,
+            10.12,
+            10.13,
+            10.14
           ],
           "owasp_appsensor": [
             "IE4"
@@ -1390,6 +1456,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CR8",
           "value": "8",
           "owasp_scp": [
             30,
@@ -1399,10 +1466,10 @@ let mappings = {
             135
           ],
           "owasp_asvs": [
-            "2.4.1",
-            "6.2.2",
-            "6.2.3",
-            "8.3.4"
+            2.13,
+            7.7,
+            7.8,
+            9.2
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1417,6 +1484,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CR9",
           "value": "9",
           "owasp_scp": [
             60,
@@ -1424,10 +1492,10 @@ let mappings = {
             105
           ],
           "owasp_asvs": [
-            "6.2.2",
-            "6.2.3",
-            "6.3.1",
-            "6.3.3"
+            7.6,
+            7.7,
+            7.8,
+            7.15
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1442,14 +1510,13 @@ let mappings = {
           ]
         },
         {
+          "id": "CRX",
           "value": "10",
           "owasp_scp": [
             104,
             105
           ],
-          "owasp_asvs": [
-            "6.3.3"
-          ],
+          "owasp_asvs": [],
           "owasp_appsensor": [],
           "capec": [
             97,
@@ -1465,6 +1532,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CRJ",
           "value": "J",
           "owasp_scp": [
             35,
@@ -1473,12 +1541,7 @@ let mappings = {
             172
           ],
           "owasp_asvs": [
-            "1.6.1",
-            "1.6.2",
-            "1.6.4",
-            "2.10.4",
-            "6.4.1",
-            "6.4.2"
+            2.29
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1490,17 +1553,18 @@ let mappings = {
           ]
         },
         {
+          "id": "CRQ",
           "value": "Q",
           "owasp_scp": [
             35,
             102
           ],
           "owasp_asvs": [
-            "1.6.1",
-            "1.6.2",
-            "1.6.3",
-            "6.2.3",
-            "8.3.6"
+            7.8,
+            7.9,
+            7.11,
+            7.13,
+            7.14
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1513,14 +1577,14 @@ let mappings = {
           ]
         },
         {
+          "id": "CRK",
           "value": "K",
           "owasp_scp": [
             31,
             101
           ],
           "owasp_asvs": [
-            "1.6.2",
-            "6.2.5-6.2.8"
+            7.11
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1536,9 +1600,11 @@ let mappings = {
       ]
     },
     {
-      "name": "Cornucopia",
+      "id": "C",
+      "name": "CORNUCOPIA",
       "cards": [
         {
+          "id": "C2",
           "value": "2",
           "owasp_scp": [
             194,
@@ -1557,7 +1623,7 @@ let mappings = {
             209
           ],
           "owasp_asvs": [
-            "14.1.2"
+            5.1
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1585,12 +1651,13 @@ let mappings = {
           ]
         },
         {
+          "id": "C3",
           "value": "3",
           "owasp_scp": [
             134
           ],
           "owasp_asvs": [
-            "14.1.1"
+            19.5
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1600,6 +1667,7 @@ let mappings = {
           "safecode": []
         },
         {
+          "id": "C4",
           "value": "4",
           "owasp_scp": [
             23,
@@ -1610,23 +1678,17 @@ let mappings = {
             181
           ],
           "owasp_asvs": [
-            "7.2.1",
-            "7.2.2"
+            "8.10"
           ],
           "owasp_appsensor": [],
           "capec": [],
           "safecode": []
         },
         {
+          "id": "C5",
           "value": "5",
           "owasp_scp": [],
-          "owasp_asvs": [
-            "1.9.2",
-            "9.1.1",
-            "5.1.5",
-            "9.2.1",
-            "9.2.4"
-          ],
+          "owasp_asvs": [],
           "owasp_appsensor": [],
           "capec": [
             89,
@@ -1637,6 +1699,7 @@ let mappings = {
           "safecode": []
         },
         {
+          "id": "C6",
           "value": "6",
           "owasp_scp": [
             109,
@@ -1646,8 +1709,8 @@ let mappings = {
             155
           ],
           "owasp_asvs": [
-            "4.1.5",
-            "7.1.4"
+            8.2,
+            8.4
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1662,6 +1725,7 @@ let mappings = {
           ]
         },
         {
+          "id": "C7",
           "value": "7",
           "owasp_scp": [
             113,
@@ -1681,13 +1745,19 @@ let mappings = {
             130
           ],
           "owasp_asvs": [
-            "7.1.2",
-            "7.1.4",
-            "7.2.1",
-            "7.2.2",
-            "7.3.1-7.3.3",
-            "8.3.5",
-            "9.2.5"
+            2.12,
+            8.3,
+            8.4,
+            8.5,
+            8.6,
+            8.7,
+            8.8,
+            8.9,
+            "8.10",
+            8.11,
+            8.12,
+            "9.10",
+            10.4
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1698,6 +1768,7 @@ let mappings = {
           ]
         },
         {
+          "id": "C8",
           "value": "8",
           "owasp_scp": [
             151,
@@ -1712,13 +1783,11 @@ let mappings = {
             177
           ],
           "owasp_asvs": [
-            "1.4.5",
-            "10.3.1",
-            "10.3.2",
-            "14.1.4",
-            "14.1.5",
-            "14.2.1",
-            "14.2.2"
+            19.1,
+            19.4,
+            19.6,
+            19.7,
+            19.8
           ],
           "owasp_appsensor": [
             "RE1",
@@ -1734,6 +1803,7 @@ let mappings = {
           "safecode": []
         },
         {
+          "id": "C9",
           "value": "9",
           "owasp_scp": [
             23,
@@ -1750,9 +1820,8 @@ let mappings = {
             90
           ],
           "owasp_asvs": [
-            "1.4.3",
-            "1.4.5",
-            "4.3.1"
+            2.1,
+            2.32
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1762,6 +1831,7 @@ let mappings = {
           "safecode": []
         },
         {
+          "id": "CX",
           "value": "10",
           "owasp_scp": [
             57,
@@ -1773,10 +1843,7 @@ let mappings = {
             214
           ],
           "owasp_asvs": [
-            "1.14.3",
-            "10.1.1",
-            "10.2.3-10.2.6",
-            "14.2.1"
+            1.11
           ],
           "owasp_appsensor": [],
           "capec": [
@@ -1792,6 +1859,7 @@ let mappings = {
           ]
         },
         {
+          "id": "CJ",
           "value": "J",
           "owasp_scp": [
             90,
@@ -1810,9 +1878,8 @@ let mappings = {
             192
           ],
           "owasp_asvs": [
-            "1.14.3",
-            "14.1.1-14.1.5",
-            "14.2.1"
+            19.5,
+            19.9
           ],
           "owasp_appsensor": [],
           "capec": [],
@@ -1821,11 +1888,14 @@ let mappings = {
           ]
         },
         {
+          "id": "CQ",
           "value": "Q",
           "owasp_scp": [],
           "owasp_asvs": [
-            "8.1.4",
-            "11.1.1-11.1.4"
+            4.14,
+            9.8,
+            15.1,
+            15.2
           ],
           "owasp_appsensor": [
             "(All)"
@@ -1837,16 +1907,13 @@ let mappings = {
           ]
         },
         {
+          "id": "CK",
           "value": "K",
           "owasp_scp": [
             41,
             55
           ],
-          "owasp_asvs": [
-            "2.2.1",
-            "11.1.3",
-            "11.1.4"
-          ],
+          "owasp_asvs": [],
           "owasp_appsensor": [
             "UT1-4",
             "STE3"

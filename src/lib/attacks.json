@@ -23,9 +23,9 @@
                 "url" : "https://owasp.org/www-community/attacks/SQL_Injection"
             }
         ],
-        "cards" : ["DV2","DV3","DV4","DV5","DV6","DV7","DV8","DV9","DV10","DVJ","DVQ","DVK",
-                   "AC8","ACJ","ACQ",
-                   "AZ6","AZ7","AZ8","AZ10","AZQ"
+        "cards" : ["VE2","VE3","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
+                   "AT8","ATJ","ATQ",
+                   "AZ6","AZ7","AZ8","AZX","AZQ"
                 ]
         },
         {
@@ -46,12 +46,12 @@
                     "url" : "https://portswigger.net/web-security/cross-site-scripting"
                 }
            ],
-            "cards" : ["DV2","DV4","DV5","DV6","DV7","DV8","DV9","DV10","DVJ","DVQ","DVK",
-                       "AC8","ACJ",
-                       "AZ5","AZ6","AZ7","AZ8","AZ10","AZQ",
+            "cards" : ["VE2","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
+                       "AT8","ATJ",
+                       "AZ5","AZ6","AZ7","AZ8","AZX","AZQ",
                        "SM2","SM3","SM4","SM6","SM7","SM9","SMQ",
                        "CR8",
-                       "CO9","CO10","COQ"
+                       "C9","CX","CQ"
                     ]
         },
         {
@@ -68,10 +68,10 @@
                     "url" : "https://owasp.org/www-community/attacks/Command_Injection#:~:text=Command%20injection%20is%20an%20attack,.)%20to%20a%20system%20shell."
                 }        
             ],
-            "cards" : ["DV3","DV4","DV7","DV9","DVJ","DVQ","DVK",
+            "cards" : ["VE3","VE4","VE7","VE9","VEJ","VEQ","VEK",
                        "AZQ", 
                        "CR7", 
-                       "CO2","CO6","CO10","COJ","COQ"
+                       "C2","C6","CX","CJ","CQ"
                     ]
         },
         {
@@ -88,8 +88,8 @@
                     "url" : "https://owasp.org/www-community/vulnerabilities/Buffer_Overflow#:~:text=A%20buffer%20overflow%20condition%20exists,to%20an%20array%20of%20integers."
                 }  
             ],
-            "cards" : ["DV7",
-                       "CO2"
+            "cards" : ["VE7",
+                       "C2"
                     ]
         },
         {
@@ -106,7 +106,7 @@
                     "url" : "https://owasp.org/www-community/attacks/Path_Traversal"
                 }  
             ],
-            "cards" : ["DV2"]
+            "cards" : ["VE2"]
         },
         {
             "name" : "(Session) Data tampering",
@@ -126,12 +126,12 @@
                     "url" : "https://www.tributech.io/blog/cybersecurity-threat-data-tampering"
                 } 
             ],
-            "cards" : ["DV3","DV6","DV8","DV9","DV10","DVJ","DVQ",
-                       "AC8","ACJ",
+            "cards" : ["VE3","VE6","VE8","VE9","VEX","VEJ","VEQ",
+                       "AT8","ATJ",
                        "AZ2","AZ3","AZ5","AZ8","AZK",
-                       "SM10","SMJ","SMK",
+                       "SMX","SMJ","SMK",
                        "CR2","CR3","CR6",
-                       "CO5","CO7"
+                       "C5","C7"
                     ]
         },
         {
@@ -152,7 +152,7 @@
                     "url" : "https://portswigger.net/web-security/file-upload#:~:text=File%20upload%20vulnerabilities%20are%20when,type%2C%20contents%2C%20or%20size."
                 }  
             ],
-            "cards" : ["DV4","DVJ",                        
+            "cards" : ["VE4","VEJ",                        
                        "AZQ"
                     ]
         },
@@ -170,12 +170,12 @@
                     "url" : "https://purplesec.us/privilege-escalation-attacks/#Examples"
                 }  
             ],
-            "cards" : ["DV5","DV6","DV8","DV9",
-                       "AC8","ACJ",
+            "cards" : ["VE5","VE6","VE8","VE9",
+                       "AT8","ATJ",
                        "AZ4","AZ5","AZ8","AZJ","AZQ","AZK",
                        "SM8", 
                        "CRJ",
-                       "CO4","CO10", "COQ"
+                       "C4","CX", "CQ"
                     ]
         },
         {
@@ -196,11 +196,11 @@
                     "url" : "https://www.kaspersky.com/resource-center/definitions/brute-force-attack"
                 }
             ],
-            "cards" : ["AC2","AC4","AC5","AC6","AC7","AC8","AC10","ACQ",
-                       "AZ3","AZ4","AZ6","AZ7","AZ10",
+            "cards" : ["AT2","AT4","AT5","AT6","AT7","AT8","ATX","ATQ",
+                       "AZ3","AZ4","AZ6","AZ7","AZX",
                        "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SMQ","SMK",
-                       "CR2","CR5","CR7","CR10","CRJ","CRQ",
-                       "CO6","CO9","COK"
+                       "CR2","CR5","CR7","CRX","CRJ","CRQ",
+                       "C6","C9","CK"
                     ]
         },
         {
@@ -221,8 +221,8 @@
                     "url" : "https://owasp.org/www-community/attacks/Credential_stuffing"
                 }
                 ],
-            "cards" : ["AC2","AC5","AC9","AC10","ACQ",
-                       "AZ10"
+            "cards" : ["AT2","AT5","AT9","ATX","ATQ",
+                       "AZX"
                     ]
         },
         {
@@ -239,10 +239,10 @@
                     "url" : "https://affinity-it-security.com/what-is-weak-authentication/"
                 }
             ],
-            "cards" : ["AC7","AC9","ACK",
+            "cards" : ["AT7","AT9","ATK",
                        "AZ6",
                        "CR4","CR7",
-                       "CO3","CO4"
+                       "C3","C4"
                     ]
         },
         {
@@ -263,7 +263,7 @@
                     "url" : "https://www.vectra.ai/topics/account-takeover#:~:text=What%20is%20an%20Account%20Takeover,delivery%20or%20generate%20fraudulent%20transactions."
                 } 
             ],
-            "cards" : ["AC6","AC7","AC8"]
+            "cards" : ["AT6","AT7","AT8"]
         },
         {
             "name" : "Insider Threats",
@@ -283,10 +283,10 @@
                     "url" : "https://www.fortinet.com/resources/cyberglossary/insider-threats"
                 }
             ],
-            "cards" : ["AC6","AC9","AC10","ACQ","ACK",
-                       "AZ2","AZ4","AZ7","AZ10","AZJ","AZK",
+            "cards" : ["AT6","AT9","ATX","ATQ","ATK",
+                       "AZ2","AZ4","AZ7","AZX","AZJ","AZK",
                        "CR4","CR5","CR8","CRJ","CRQ",
-                       "CO3","CO5","CO8","CO10","COQ","COK"
+                       "C3","C5","C8","CX","CQ","CK"
                     ]
         },
         {
@@ -307,10 +307,10 @@
                     "url" : "https://www.imperva.com/learn/application-security/social-engineering-attack/"
                 }
             ],
-            "cards" : ["AC2","AC4","AC5","AC10","ACJ",
+            "cards" : ["AT2","AT4","AT5","ATX","ATJ",
                        "AZ2","AZ3","AZ4",
-                       "CR6","CR10","CRQ",
-                       "CO4","CO5","CO7","CO8","CO9","COJ","COQ"
+                       "CR6","CRX","CRQ",
+                       "C4","C5","C7","C8","C9","CJ","CQ"
                     ]
         },
         {
@@ -327,7 +327,7 @@
                     "url" : "https://www.cloudflare.com/learning/security/threats/meltdown-spectre/"
                 }
             ],
-            "cards" : ["AC3"]
+            "cards" : ["AT3"]
         },
         {
             "name" : "Replay attacks",
@@ -343,7 +343,7 @@
                     "url" : "https://www.kaspersky.com/resource-center/definitions/replay-attack"
                 }
             ],
-            "cards" : ["AC6","ACJ",
+            "cards" : ["AT6","ATJ",
                        "SM5","SMJ"
                     ]
         },
@@ -365,7 +365,7 @@
                     "url" : "https://cybersecuritynews.com/almost-40000-entries-found/"
                 }
             ],
-            "cards" : ["AC7"]
+            "cards" : ["AT7"]
         },
         {
             "name" : "Session Fixation",
@@ -382,7 +382,7 @@
                 }
             ],
             "cards" : ["AZ7",
-                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SM10","SMQ","SMK"
+                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMQ","SMK"
                     ]
         },
         {
@@ -399,12 +399,12 @@
                     "url" : "https://usa.kaspersky.com/resource-center/definitions/what-is-session-hijacking"
                 }
             ],
-            "cards" : ["DV10",
-                       "AC2","AC4","AC9","AC10","ACJ","ACQ",
-                       "AZ3","AZ4","AZ5","AZ6","AZ7","AZ8","AZ10","AZJ","AZQ","AZK",
-                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SM10","SMJ","SMQ","SMK",
-                       "CR3","CR4","CR5","CR6","CR7","CR8","CR10","CRJ",
-                       "CO5","CO9","CO10","COJ"
+            "cards" : ["VEX",
+                       "AT2","AT4","AT9","ATX","ATJ","ATQ",
+                       "AZ3","AZ4","AZ5","AZ6","AZ7","AZ8","AZX","AZJ","AZQ","AZK",
+                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMJ","SMQ","SMK",
+                       "CR3","CR4","CR5","CR6","CR7","CR8","CRX","CRJ",
+                       "C5","C9","CX","CJ"
                     ]
         },
         {
@@ -437,7 +437,7 @@
                     "url" : "https://shahjerry33.medium.com/idor-inside-the-session-storage-88af485fc899"
                 }
             ],
-            "cards" : ["AC3"]
+            "cards" : ["AT3"]
         },
         {
             "name" : "Error message exploitation",
@@ -458,7 +458,7 @@
                 }
             ],
             "cards" : ["SM9","SMQ",
-                       "CO3","CO6"
+                       "C3","C6"
                     ]   
         },
         {

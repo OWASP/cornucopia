@@ -26,21 +26,21 @@ Every organization must ensure an ongoing plan for monitoring, triaging, and app
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/data-validation-&-encoding/2)
+- [Data-validation-&-encoding 2](/data-validation-&-encoding/VE2)
 
 ### Authentication
-- [Authentication 9](/authentication/9)
+- [Authentication 9](/authentication/AT9)
 
 ### Authorization
-- [Authorization 8](/authorization/8)
-- [Authorization 9](/authorization/9)
+- [Authorization 8](/authorization/AZ8)
+- [Authorization 9](/authorization/AZ9)
 
 ### Cryptography
-- [Cryptography 7](/cryptography/7)
-- [Cryptography 9](/cryptography/9)
+- [Cryptography 7](/cryptography/CR7)
+- [Cryptography 9](/cryptography/CR9)
 
 ### Cornucopia
-- [Cornucopia 6](/cornucopia/6)
-- [Cornucopia 8](/cornucopia/8)
-- [Cornucopia 10](/cornucopia/10)
-- [Cornucopia J](/cornucopia/J)
+- [Cornucopia 6](/cornucopia/C6)
+- [Cornucopia 8](/cornucopia/C8)
+- [Cornucopia 10](/cornucopia/CX)
+- [Cornucopia J](/cornucopia/CJ)

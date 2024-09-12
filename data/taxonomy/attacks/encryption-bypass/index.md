@@ -10,4 +10,4 @@ security specialist Zara confronts a challenge in bypassing a company's robust e
 
 ## Cards
 ### Cryptography
-- [Cryptography 9](/cryptography/9)
+- [Cryptography 9](/cryptography/CR9)

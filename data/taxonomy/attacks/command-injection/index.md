@@ -20,14 +20,14 @@ Shellshock was a series of security vulnerabilities discovered in the Bash shell
 - [Data-validation-&-encoding K](/data-validation-&-encoding/K)
 
 ### Authorization
-- [Authorization Q](/authorization/Q)
+- [Authorization Q](/authorization/AZQ)
 
 ### Cryptography
-- [Cryptography 7](/cryptography/7)
+- [Cryptography 7](/cryptography/CR7)
 
 ### Cornucopia
-- [Cornucopia 2](/cornucopia/2)
-- [Cornucopia 6](/cornucopia/6)
-- [Cornucopia J](/cornucopia/J)
-- [Cornucopia Q](/cornucopia/Q)
-- [Cornucopia A](/cornucopia/A)
+- [Cornucopia 2](/cornucopia/C2)
+- [Cornucopia 6](/cornucopia/C6)
+- [Cornucopia J](/cornucopia/CJ)
+- [Cornucopia Q](/cornucopia/CQ)
+- [Cornucopia A](/cornucopia/CA)

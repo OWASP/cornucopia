@@ -10,5 +10,5 @@ In a session timeout exploit, an attacker manipulates a captured session token, 
 
 ## Cards
 ### Session-management
-- [Session-management 2](/session-management/2)
-- [Session-management 3](/session-management/3)
+- [Session-management 2](/session-management/SM2)
+- [Session-management 3](/session-management/SM3)

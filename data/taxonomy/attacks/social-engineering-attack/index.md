@@ -11,27 +11,27 @@ Caesar's Entertainment and MGM, two major casino operators, fell victim to cyber
 
 ## Cards
 ### Authentication
-- [Authentication 2](/authentication/2)
-- [Authentication 4](/authentication/4)
-- [Authentication 5](/authentication/5)
-- [Authentication J](/authentication/J)
-- [Authentication A](/authentication/A)
+- [Authentication 2](/authentication/AT2)
+- [Authentication 4](/authentication/AT4)
+- [Authentication 5](/authentication/AT5)
+- [Authentication J](/authentication/ATJ)
+- [Authentication A](/authentication/ATA)
 
 ### Authorization
-- [Authorization 2](/authorization/2)
-- [Authorization 3](/authorization/3)
-- [Authorization 4](/authorization/4)
+- [Authorization 2](/authorization/AZ2)
+- [Authorization 3](/authorization/AZ3)
+- [Authorization 4](/authorization/AZ4)
 
 ### Cryptography
-- [Cryptography 6](/cryptography/6)
-- [Cryptography Q](/cryptography/Q)
-- [Cryptography A](/cryptography/A)
+- [Cryptography 6](/cryptography/CR6)
+- [Cryptography Q](/cryptography/CRQ)
+- [Cryptography A](/cryptography/CRA)
 
 ### Cornucopia
-- [Cornucopia 4](/cornucopia/4)
-- [Cornucopia 5](/cornucopia/5)
-- [Cornucopia 7](/cornucopia/7)
-- [Cornucopia 8](/cornucopia/8)
-- [Cornucopia 9](/cornucopia/9)
-- [Cornucopia J](/cornucopia/J)
-- [Cornucopia Q](/cornucopia/Q)
+- [Cornucopia 4](/cornucopia/C4)
+- [Cornucopia 5](/cornucopia/C5)
+- [Cornucopia 7](/cornucopia/C7)
+- [Cornucopia 8](/cornucopia/C8)
+- [Cornucopia 9](/cornucopia/C9)
+- [Cornucopia J](/cornucopia/CJ)
+- [Cornucopia Q](/cornucopia/CQ)

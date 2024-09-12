@@ -4,12 +4,12 @@ export class Text
 {
     public static Capitalize(input : string)
     {
-        return input.slice(0,1).toUpperCase() + input.slice(1,input.length).toLowerCase();
+        return String(input).slice(0,1).toUpperCase() + String(input).slice(1,input.length).toLowerCase();
     }
 
     public static Format(input : string)
     {
-        input = ('' + input).replaceAll('-',' ')
+        input = String(input).replaceAll('-',' ')
         input = this.Capitalize(input);
         return input;
     }
@@ -17,7 +17,7 @@ export class Text
     public static FormatDate(input : string) : string
     {
         // This method expects 19 december 2020 as 20201219 (YYYMMDD)
-        var dateString = '' + input;
+        var dateString = '' + String(input);
         var year = parseInt(dateString.substring(0,4));
         var month = parseInt(dateString.substring(4,6));
         var day = parseInt(dateString.substring(6,8));
@@ -45,6 +45,6 @@ export class Text
 
     public static DisplayLink(input : string) : string
     {
-        return input.trim().replaceAll('https','').replaceAll('http','').replaceAll('://','')
+        return String(input).trim().replaceAll('https','').replaceAll('http','').replaceAll('://','')
     }
 }

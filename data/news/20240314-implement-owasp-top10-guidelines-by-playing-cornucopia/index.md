@@ -38,20 +38,20 @@ A few conclusions can be drawn based on our heatmap:
 - Once a team reaches a certain threshold of Cornucopia-coverage, it could be interesting to look at ASVS
 
 Through the next chapters, I'll go briefly through each suit and its mappings.
-- Data Validation & Encoding (DVE) suit
+- Data Validation & Encoding (VE) suit
 - Authentication (AT) suit
 - Session Management (SM) suit
 - Authorization (AZ) suit
 - Cryptography (CR) suit
 - Cornucopia (C) suit
 	
-## DVE suit has an excellent overall coverage of OWASP Top 10
+## VE suit has an excellent overall coverage of OWASP Top 10
 ![Data Validation & Encoding[medium]](dve-suit.png)
 
-### My observations and opinion for the DVE-suit
+### My observations and opinion for the VE-suit
 This suit has a strong coverage of the OWASP Top 10 items.  
 
-This makes the DVE suit an ideal choice for teams who start with their AppSec program by playing OWASP Cornucopia.  
+This makes the VE suit an ideal choice for teams who start with their AppSec program by playing OWASP Cornucopia.  
 
 ## The AZ (AuthoriZation) suit has a strong focus on #1 - Broken Access Control
 ![Authorization[medium]](az-suit.png)

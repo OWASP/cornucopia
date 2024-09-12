@@ -9,4 +9,4 @@ Cryptographic algorithms are designed to secure information and protect against 
 
 ## Cards
 ### Cryptography
-- [Cryptography 9](/cryptography/9)
+- [Cryptography 9](/cryptography/CR9)

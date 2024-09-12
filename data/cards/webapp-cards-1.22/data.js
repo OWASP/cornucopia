@@ -10,67 +10,67 @@ let data = {
         "name": "Data validation & encoding",
         "cards": [
           {
-            "id": "DV2",
+            "id": "VE2",
             "value": "2",
             "desc": "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
           },
           {
-            "id": "DV3",
+            "id": "VE3",
             "value": "3",
             "desc": "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats"
           },
           {
-            "id": "DV4",
+            "id": "VE4",
             "value": "4",
             "desc": "Dave can input malicious field names or data because it is not being checked within the context of the current user and process"
           },
           {
-            "id": "DV5",
+            "id": "VE5",
             "value": "5",
             "desc": "Jee can bypass the centralized encoding routines since they are not being used everywhere, or the wrong encodings are being used"
           },
           {
-            "id": "DV6",
+            "id": "VE6",
             "value": "6",
             "desc": "Jason can bypass the centralized validation routines since they are not being used on all inputs"
           },
           {
-            "id": "DV7",
+            "id": "VE7",
             "value": "7",
             "desc": "Jan can craft special payloads to foil input validation because the character set is not specified/enforced, or the data is encoded multiple times, or the data is not fully converted into the same format the application uses (e.g. canonicalization) before being validated, or variables are not strongly typed"
           },
           {
-            "id": "DV8",
+            "id": "VE8",
             "value": "8",
             "desc": "Sarah can bypass the centralized sanitization routines since they are not being used comprehensively"
           },
           {
-            "id": "DV9",
+            "id": "VE9",
             "value": "9",
             "desc": "Shamun can bypass input validation or output validation checks because validation failures are not rejected and/or sanitized"
           },
           {
-            "id": "DVX",
+            "id": "VEX",
             "value": "10",
             "desc": "Darío can exploit the trust the application places in a source of data (e.g. user-definable data, manipulation of locally stored data, alteration to state data on a client device, lack of verification of identity during data validation such as Darío can pretend to be Colin)"
           },
           {
-            "id": "DVJ",
+            "id": "VEJ",
             "value": "J",
             "desc": "Dennis has control over input validation, output validation or output encoding code or routines so they can be bypassed"
           },
           {
-            "id": "DVQ",
+            "id": "VEQ",
             "value": "Q",
             "desc": "Geoff can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes"
           },
           {
-            "id": "DVK",
+            "id": "VEK",
             "value": "K",
             "desc": "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly"
           },
           {
-            "id": "DVA",
+            "id": "VEA",
             "value": "A",
             "desc": "You have invented a new attack against Data Validation and Encoding",
             "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
@@ -81,67 +81,67 @@ let data = {
         "name": "Authentication",
         "cards": [
           {
-            "id": "AC2",
+            "id": "AT2",
             "value": "2",
             "desc": "James can undertake authentication functions without the real user ever being aware this has occurred (e.g. attempt to log in, log in with stolen credentials, reset the password) "
           },
           {
-            "id": "AC3",
+            "id": "AT3",
             "value": "3",
             "desc": "Muhammad can obtain a user's password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password"
           },
           {
-            "id": "AC4",
+            "id": "AT4",
             "value": "4",
             "desc": "Sebastien can easily identify user names or can enumerate them"
           },
           {
-            "id": "AC5",
+            "id": "AT5",
             "value": "5",
             "desc": "Javier can use default, test or easily guessable credentials to authenticate, or can use an old account or an account not necessary for the application"
           },
           {
-            "id": "AC6",
+            "id": "AT6",
             "value": "6",
             "desc": "Sven can reuse a temporary password because the user does not have to change it on first use, or it has too long or no expiry, or it does not use an out-of-band delivery method (e.g. post, mobile app, SMS)"
           },
           {
-            "id": "AC7",
+            "id": "AT7",
             "value": "7",
             "desc": "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords"
           },
           {
-            "id": "AC8",
+            "id": "AT8",
             "value": "8",
             "desc": "Kate can bypass authentication because it does not fail secure (i.e. it defaults to allowing unauthenticated access)"
           },
           {
-            "id": "AC9",
+            "id": "AT9",
             "value": "9",
             "desc": "Claudia can undertake more critical functions because authentication requirements are too weak (e.g. do not use strong authentication such as two factor), or there is no requirement to re-authenticate for these"
           },
           {
-            "id": "ACX",
+            "id": "ATX",
             "value": "10",
             "desc": "Pravin can bypass authentication controls because a centralized standard, tested, proven and approved authentication module/framework/service, separate to the resource being requested, is not being used"
           },
           {
-            "id": "ACJ",
+            "id": "ATJ",
             "value": "J",
             "desc": "Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
           },
           {
-            "id": "ACQ",
+            "id": "ATQ",
             "value": "Q",
             "desc": "Jaime can bypass authentication because it is not enforced with equal rigor for all types of authentication functionality (e.g. register, password change, password recovery, log out, administration) or across all versions/channels (e.g. mobile website, mobile app, full website, API, call centre)"
           },
           {
-            "id": "ACK",
+            "id": "ATK",
             "value": "K",
             "desc": "Olga can influence or alter authentication code/routines so they can be bypassed"
           },
           {
-            "id": "ACA",
+            "id": "ATA",
             "value": "A",
             "desc": "You have invented a new attack against Authentication",
             "misc": "Read more about this topic in OWASP's free Authentication Cheat Sheet"
@@ -365,67 +365,67 @@ let data = {
         "name": "Cornucopia",
         "cards": [
           {
-            "id": "CO2",
+            "id": "C2",
             "value": "2",
             "desc": "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur"
           },
           {
-            "id": "CO3",
+            "id": "C3",
             "value": "3",
             "desc": "Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained"
           },
           {
-            "id": "CO4",
+            "id": "C4",
             "value": "4",
             "desc": "Keith can perform an action and it is not possible to attribute it to him"
           },
           {
-            "id": "CO5",
+            "id": "C5",
             "value": "5",
             "desc": "Larry can influence the trust other parties including users have in the application, or abuse that trust elsewhere (e.g. in another application)"
           },
           {
-            "id": "CO6",
+            "id": "C6",
             "value": "6",
             "desc": "Aaron can bypass controls because error/exception handling is missing, or is implemented inconsistently or partially, or does not deny access by default (i.e. errors should terminate access/execution), or relies on handling by some other service or system"
           },
           {
-            "id": "CO7",
+            "id": "C7",
             "value": "7",
             "desc": "Mwengu's actions cannot be investigated because there is not an adequate accurately time-stamped record of security events, or there is not a full audit trail, or these can be altered or deleted by Mwengu, or there is no centralized logging service"
           },
           {
-            "id": "CO8",
+            "id": "C8",
             "value": "8",
             "desc": "David can bypass the application to gain access to data because the network and host infrastructure, and supporting services/applications, have not been securely configured, the configuration rechecked periodically and security patches applied, or the data is stored locally, or the data is not physically protected"
           },
           {
-            "id": "CO9",
+            "id": "C9",
             "value": "9",
             "desc": "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
           },
           {
-            "id": "COX",
+            "id": "CX",
             "value": "10",
             "desc": "Xavier can circumvent the application's controls because code frameworks, libraries and components contain malicious code or vulnerabilities (e.g. in-house, commercial off the shelf, outsourced, open source, externally-located)"
           },
           {
-            "id": "COJ",
+            "id": "CJ",
             "value": "J",
             "desc": "Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented and passed on to operational teams"
           },
           {
-            "id": "COQ",
+            "id": "CQ",
             "value": "Q",
             "desc": "Jim can undertake malicious, non-normal, actions without real-time detection and response by the application"
           },
           {
-            "id": "COK",
+            "id": "CK",
             "value": "K",
             "desc": "Gareth can utilize the application to deny service to some or all of its users"
           },
           {
-            "id": "COA",
+            "id": "CA",
             "value": "A",
             "desc": "You have invented a new attack of any type",
             "misc": "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"

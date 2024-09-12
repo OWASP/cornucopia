@@ -12,35 +12,35 @@ In 2017, Equifax, one of the largest credit reporting agencies, suffered a massi
 ## Cards
 
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/3)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/6)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/9)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/J)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/Q)
-- [Data-validation-&-encoding A](/data-validation-&-encoding/A)
+- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
+- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
+- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
+- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
+- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
+- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
+- [Data-validation-&-encoding A](/data-validation-&-encoding/VEA)
 
 ### Authentication
-- [Authentication 8](/authentication/8)
-- [Authentication J](/authentication/J)
+- [Authentication 8](/authentication/AT8)
+- [Authentication J](/authentication/ATJ)
 
 ### Authorization
-- [Authorization 2](/authorization/2)
-- [Authorization 3](/authorization/3)
-- [Authorization 5](/authorization/5)
-- [Authorization 8](/authorization/8)
-- [Authorization K](/authorization/K)
+- [Authorization 2](/authorization/AZ2)
+- [Authorization 3](/authorization/AZ3)
+- [Authorization 5](/authorization/AZ5)
+- [Authorization 8](/authorization/AZ8)
+- [Authorization K](/authorization/AZK)
 
 ### Session-management
-- [Session-management J](/session-management/J)
-- [Session-management K](/session-management/K)
-- [Session-management A](/session-management/A)
+- [Session-management J](/session-management/SMJ)
+- [Session-management K](/session-management/SMK)
+- [Session-management A](/session-management/SMA)
 
 ### Cryptography
-- [Cryptography 2](/cryptography/2)
-- [Cryptography 3](/cryptography/3)
-- [Cryptography 6](/cryptography/6)
+- [Cryptography 2](/cryptography/CR2)
+- [Cryptography 3](/cryptography/CR3)
+- [Cryptography 6](/cryptography/CR6)
 
 ### Cornucopia
-- [Cornucopia 5](/cornucopia/5)
-- [Cornucopia 7](/cornucopia/7)
+- [Cornucopia 5](/cornucopia/C5)
+- [Cornucopia 7](/cornucopia/C7)

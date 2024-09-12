@@ -32,25 +32,25 @@ Secure software requires a secure development lifecycle, some form of secure des
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/3)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/6)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/8)
-- [Data-validation-&-encoding 10](/data-validation-&-encoding/10)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/J)
+- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
+- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
+- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
+- [Data-validation-&-encoding 10](/data-validation-&-encoding/VEX)
+- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
 
 ### Authentication
-- [Authentication 3](/authentication/3)
-- [Authentication 4](/authentication/4)
-- [Authentication 10](/authentication/10)
+- [Authentication 3](/authentication/AT3)
+- [Authentication 4](/authentication/AT4)
+- [Authentication 10](/authentication/ATX)
 
 ### Authorization
-- [Authorization 2](/authorization/2)
-- [Authorization 4](/authorization/4)
+- [Authorization 2](/authorization/AZ2)
+- [Authorization 4](/authorization/AZ4)
 
 ### Cryptography
-- [Cryptography 3](/cryptography/3)
-- [Cryptography 4](/cryptography/4)
-- [Cryptography 5](/cryptography/5)
+- [Cryptography 3](/cryptography/CR3)
+- [Cryptography 4](/cryptography/CR4)
+- [Cryptography 5](/cryptography/CR5)
 
 ### Cornucopia
-- [Cornucopia 3](/cornucopia/3)
+- [Cornucopia 3](/cornucopia/C3)
