@@ -10,7 +10,7 @@ Lenovo faced backlash in 2015 when it was revealed that some of its laptops were
 
 ## Cards
 ### Authorization
-- [Authorization 7](/authorization/7)
+- [Authorization 7](/authorization/AZ7)
 
 ### Session-management
 - [Session-management 2](/session-management/SM2)

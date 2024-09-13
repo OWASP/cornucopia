@@ -40,12 +40,12 @@ Access control enforces policy such that users cannot act outside of their inten
 - [Data-validation-&-encoding K](/data-validation-&-encoding/VEK)
 
 ### Authentication
-- [Authentication 2](/authentication/VE2)
-- [Authentication 8](/authentication/VE8)
-- [Authentication 9](/authentication/VE9)
-- [Authentication 10](/authentication/VEX)
-- [Authentication Q](/authentication/VEQ)
-- [Authentication K](/authentication/VEK)
+- [Authentication 2](/authentication/AT2)
+- [Authentication 8](/authentication/AT8)
+- [Authentication 9](/authentication/AT9)
+- [Authentication 10](/authentication/ATX)
+- [Authentication Q](/authentication/ATQ)
+- [Authentication K](/authentication/ATK)
 
 ### Authorization
 - [Authorization 3](/authorization/AZ3)

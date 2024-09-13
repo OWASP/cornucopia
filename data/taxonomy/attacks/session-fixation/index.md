@@ -10,7 +10,7 @@ In 2011, security researcher Rishi Narang discovered a session fixation vulnerab
 
 ## Cards
 ### Authorization
-- [Authorization 7](/authorization/7)
+- [Authorization 7](/authorization/AZ7)
 
 ### Session-management
 - [Session-management 2](/session-management/SM2)
