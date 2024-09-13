@@ -1,7 +1,7 @@
 import type { Suit } from "./suit";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { getCardsBySuit } from "../card/cardController";
-import mappings from "../../lib/mappings";
+import data from "../../lib/data";
 import { order } from "./order";
 import { SuiteContext } from "node:test";
 
@@ -28,13 +28,12 @@ export function getSuits() : Suit[]
 
 export function getSuitNameByCardId(id: string) : string
 {
-    const suit = mappings.suits.filter((suit) => {
-        const card = suit.cards.filter(card => card.id = id)
-        if (card) {
-            return suit;
-        }
+    const suit = data.suits.filter((suit) => {
+        const card = suit.cards.filter(card => card.id == id)
+        if (card != undefined && card.length > 0) return true;
+        return false;
     })
-    return suit[0].name;
+    return suit[0]?.name;
 }
 
 function orderFunction(a : Suit, b : Suit) : number

@@ -457,6 +457,19 @@ let data = {
           "misc": "Examine vulnerabilities and discover how they can be fixed using the free OWASP® Juice Shop, Security Shepherd, or using the online challenges in the free OWASP® Hacking-lab"
         }
       ]
+    },
+    {
+      "id": "explanation",
+      "name": "EXPLANATION",
+      "cards": [
+        {
+          "id": "CORNUCOPIA",
+          "value": "CORNUCOPIA",
+          "card": "CORNUCOPIA",
+          "desc": "Check out our website by scanning the QR codes on the cards to find out how to tackle common security risks in software development.",
+          "misc": "Scan the QR code on this card for more information on how to play the game!"
+        }
+      ]
     }
   ],
   "paragraphs": [

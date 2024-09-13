@@ -87,11 +87,7 @@ export function GetCardExplanation(suit : string , card : string) : string
 export function GetCardImageUrl(suit : string , card : string, addition : number = 0) : string
 {
     if(!suit || !card)
-        return "/cards/all/VE2.png";
-
-    let id : number = -1;
-    // find the correct card
-    let cid = '000';
+        return "/cards/all/CORNUCOPIA.png";
 
     let thisCard : Card | undefined = GetCard(suit,card);
 
