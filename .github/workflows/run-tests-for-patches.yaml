@@ -1,18 +1,10 @@
-name: Run Tests for patches and ci changes.
+name: Run tests status check.
 # Runs tests when updating patches or the ci pipeline
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
     branches:
       - master
-    paths:
-      - '.github/workflows/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
-      - 'Dockerfile'
-      - 'requirements.txt'
-      - 'Makefile'
-      - 'tests/**'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 permissions:
