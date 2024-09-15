@@ -17,11 +17,6 @@ jobs:
     needs: hardening
     runs-on: ubuntu-latest
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
-        with:
-          egress-policy: audit
-
       - name: Delete Old Artifacts
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         id: artifact
