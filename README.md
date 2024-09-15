@@ -24,6 +24,7 @@ Cornucopia was originally conceived and created by Colin Watson
 and has since had contributions from a worldwide team of volunteers.
 Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more details.
 
+
 ## License
 
 ### General Licensing Terms
