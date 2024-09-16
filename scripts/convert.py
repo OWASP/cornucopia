@@ -490,11 +490,11 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
     data: Dict[str, Any] = {"meta": get_meta_data(input_data)}
     for key in list(k for k in input_data.keys() if k != "meta"):
         for paragraphs in input_data[key]:
-            type = ""
+            text_type = ""
             if key == "suits":
-                type = "cards"
+                text_type = "cards"
             if key == "paragraphs":
-                type = "sentences"
+                text_type = "sentences"
             logging.debug(f" --- key = {key}.")
             logging.debug(f" --- suit name = {paragraphs['name']}")
             logging.debug(f" --- suit id = {is_valid_string_argument(paragraphs['id'])}")
@@ -502,7 +502,7 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
             logging.debug(f" --- suit tag = {full_tag}")
             if data["meta"]["component"] == "cards":
                 data[full_tag] = paragraphs["name"]
-            for paragraph in paragraphs[type]:
+            for paragraph in paragraphs[text_type]:
                 for tag, text_output in paragraph.items():
                     if tag == "value":
                         continue
@@ -791,7 +791,7 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in ("all")]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in "all"]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
