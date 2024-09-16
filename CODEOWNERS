@@ -5,7 +5,7 @@
 *       @rewtd @sydseter
 
 # Resources added or modified need to be checked by @sydseter
-/resources/ @sydseter
+/resources/ @sydseter @rewtd
 
 # Source files (new games) should be reviewed by @cw-owasp
-/source/ @cw-owasp
+/source/ @cw-owasp @rewtd
