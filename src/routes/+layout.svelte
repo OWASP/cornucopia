@@ -3,14 +3,12 @@
     import Footer from "$lib/components/footer.svelte";
     import GoogleAnalytics from "$lib/components/googleAnalytics.svelte";
     import Metadata from "$lib/components/metadata.svelte";
-    import MicrosoftClarity from "$lib/components/microsoftClarity.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
     export let data;
 </script>
 
 <Metadata></Metadata>
 <GoogleAnalytics></GoogleAnalytics>
-<MicrosoftClarity></MicrosoftClarity>
 <CookieNotice></CookieNotice>
 
 <div>
