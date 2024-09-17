@@ -18,10 +18,25 @@ export function getCardBySuitAndName(suit : string, card : string) : Card
     cardObject.suit = suit;
     cardObject.suitName = getSuitNameByCardId(card);
     cardObject.card = card;
+    cardObject.cardName = getCardNameById(card);
     cardObject.url = '/' + suit + '/' + card;
     cardObject.githubUrl = 'data/cards/webapp-cards-1.22/' + suit + '/' + card;
 
     return cardObject;
+}
+
+function getCardNameById(id : string) : string
+{
+    // Given the card id (e.g. AZ1, SMQ) return the card value (e.g. 1, Q) by stripping out the following parts:
+    return id
+        .replace('CORNUCOPIA','Explanation')
+        .replace('CR','')
+        .replace('C','')
+        .replace('JO','')
+        .replace('VE','')
+        .replace('AT','')
+        .replace('SM','')
+        .replace('AZ','')
 }
 
 export function getCardsBySuit(suit : string) : Card[]

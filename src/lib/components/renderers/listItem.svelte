@@ -1,4 +1,4 @@
-<li>bob <slot></slot></li>
+<li><slot></slot></li>
 
 <style>
     li

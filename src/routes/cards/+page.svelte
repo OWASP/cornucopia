@@ -2,10 +2,13 @@
     import { GetCardImageUrl } from "$lib/cards";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
+    import type { Card } from "../../domain/card/card.js";
+    import { getCardBySuitAndName } from "../../domain/card/cardController.js";
     //import data from "./data";
     export let data;
     let card : string;
     let suit : string;
+    let currentCard : Card = data.cards[0];
 
     let map : Map<string,boolean> = new Map();
     for(let i = 0 ; i < data.suits.length ; i++)
@@ -24,6 +27,7 @@
     {
         suit = suitParam;
         card = cardParam;
+        currentCard = data.cards.find(card => card.suit == suitParam && card.card == cardParam) ?? {} as Card
     }
 </script>
 
@@ -47,6 +51,8 @@
                 {/each}
             {/if}
         {/each}
+
+
         <h1>Mobile version</h1>
         {#each data.suits as suit}
             <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
@@ -61,7 +67,7 @@
         {/each}
     </div>
     <div class="preview-container">
-            <CardPreview url={GetCardImageUrl(suit,card)}></CardPreview>
+            <CardPreview card={currentCard}></CardPreview>
     </div>
 </div>
 

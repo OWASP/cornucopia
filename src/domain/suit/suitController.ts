@@ -3,7 +3,6 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { getCardsBySuit } from "../card/cardController";
 import data from "../../lib/data";
 import { order } from "./order";
-import { SuiteContext } from "node:test";
 
 export function getSuits() : Suit[]
 {

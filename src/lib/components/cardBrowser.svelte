@@ -63,7 +63,7 @@
         <a href={getPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
     </div>
     <div class="center">
-        <CardPreview url={GetCardImageUrl(card.suit,card.card)}></CardPreview>
+        <CardPreview {card}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
         <a href={getNext(card)} class="arrow" title="View next card">{">"}</a>
