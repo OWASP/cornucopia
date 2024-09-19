@@ -1,9 +1,7 @@
 <script lang="ts">
-    import { GetCardImageUrl } from "$lib/cards";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
     import type { Card } from "../../domain/card/card.js";
-    import { getCardBySuitAndName } from "../../domain/card/cardController.js";
     //import data from "./data";
     export let data;
     let card : string;
@@ -67,7 +65,7 @@
         {/each}
     </div>
     <div class="preview-container">
-            <CardPreview card={currentCard}></CardPreview>
+            <CardPreview card={currentCard} cardData={data.cardData}></CardPreview>
     </div>
 </div>
 

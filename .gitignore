@@ -28,3 +28,4 @@ vite.config.ts.timestamp-*
 .vs
 /.vs
 package-lock.json
+coverage/**

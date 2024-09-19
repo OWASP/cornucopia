@@ -1,24 +1,22 @@
 <script lang="ts">
   import {
-    GetCardAttacks,
-    GetCardDescription,
-    GetCardMappings,
-    type Attack,
-    type Mapping,
-  } from "$lib/cards";
+    GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import AsvsOverview from "$lib/components/ASVSOverview.svelte";
   import MappingsList from "$lib/components/mappingsList.svelte";
   import Utterances from "$lib/components/utterances.svelte";
   import Summary from "./summary.svelte";
-  import { Text } from "$lib/utils/text";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "../../domain/card/card";
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
   import type { Route } from "../../domain/routes/route";
-
+  import { CardController } from "../../domain/card/cardController";
+    import { MappingController, type Mapping } from "../../domain/mapping/mappingController";
+  export let cardData;
+  export let mappingData;
   export let card: Card;
   export let cards: Card[];
   export let ASVSRoutes: Route[];
+  const controller: MappingController = new MappingController(mappingData);
 
   function linkASVS(input: string) {
     input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
@@ -45,8 +43,8 @@
     return "https://capec.mitre.org/data/definitions/" + input + ".html";
   }
   let title: string = "";
-  let mappings: Mapping | undefined = GetCardMappings(card.suit, card.card);
-  let attacks: Attack[] = GetCardAttacks(card.suit, card.card);
+  let mappings: Mapping | undefined = controller.getCardMappings(card.suit, card.card);
+  let attacks: Attack[] = GetCardAttacks(card.card);
 
   $: {
     title =
@@ -54,17 +52,17 @@
       " (" +
       card.card +
       ") ";
-    mappings = GetCardMappings(card.suit, card.card);
-    attacks = GetCardAttacks(card.suit, card.card);
+    mappings = controller.getCardMappings(card.suit, card.card);
+    attacks = GetCardAttacks(card.card);
   }
 </script>
 
 <div class="container">
   <h1 class="title">{title}</h1>
   <Summary {card}></Summary>
-  <CardBrowser {card} {cards}></CardBrowser>
+  <CardBrowser {card} {cards} cardData={cardData}></CardBrowser>
   <a class="link" href="/how-to-play">How to play?</a>
-  <p>{GetCardDescription(card.suit, String(card.card).toUpperCase())}</p>
+  <p>{(new CardController(cardData)).getCardDescription(card.suit, String(card.card).toUpperCase())}</p>
   {#if mappings}
     <h1 class="title">Mappings</h1>
     <MappingsList

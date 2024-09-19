@@ -23,7 +23,7 @@
 
 <p><a href="/cards">Back to overview</a></p>
 {#if cardFound()}
-  <CardFound ASVSRoutes={data.ASVSRoutes} cards={data.cards} card={data.card} />
+  <CardFound ASVSRoutes={data.ASVSRoutes} cards={data.cards} card={data.card} cardData={data.cardData}  mappingData={data.mappingData} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}

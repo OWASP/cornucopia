@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { GetCardImageUrl } from "$lib/cards";
     import CardPreview from "./cardPreview.svelte";
     import { onDestroy } from "svelte";
     import { browser } from "$app/environment";
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
-
+    export let cardData;
     export let card : Card;
     export let cards : Card[];
   
@@ -63,7 +62,7 @@
         <a href={getPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
     </div>
     <div class="center">
-        <CardPreview {card}></CardPreview>
+        <CardPreview card={card} cardData={cardData}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
         <a href={getNext(card)} class="arrow" title="View next card">{">"}</a>

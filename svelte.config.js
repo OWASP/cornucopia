@@ -8,6 +8,9 @@ const config =
 	kit: 
 	{
 		adapter: adapter(),
+		alias: {
+			$data: "data",
+		},
 		prerender: {
 			entries: [
 				'/cards/VE2',

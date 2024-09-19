@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { GetCardDescription } from "$lib/cards";
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
-
+    import { CardController } from "../../domain/card/cardController";
+    export let cardData;
     export let card : Card = {} as Card;
 
     function getSuitColor(suit : string)
@@ -17,7 +17,7 @@
     </div>
     <div class="right">
         <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.cardName ?? "?"}</h1>
-        <p class="property-card-description">{GetCardDescription(card.suit,card.card) ?? "?"}</p>
+        <p class="property-card-description">{(new CardController(cardData)).getCardDescription(card.suit,card.card) ?? "?"}</p>
         <p class="mapping-title">OWASP SCP</p>
         <p class="mapping-value">47, 52</p>
         <p class="mapping-title">OWASP ASVS</p>

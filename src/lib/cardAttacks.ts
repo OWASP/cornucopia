@@ -1,5 +1,3 @@
-import data from "./data";
-import mappings from "./mappings";
 import attacks from '$lib/attacks.json'
 
 export type Card = 
@@ -100,7 +98,7 @@ export type Attack =
     url : string
 }
 
-export function GetCardAttacks(suit : string, card : string) : Attack[]
+export function GetCardAttacks(card : string) : Attack[]
 {
     let id = card;
     let result : Attack[] = []
