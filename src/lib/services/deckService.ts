@@ -1,8 +1,12 @@
 import yaml from "js-yaml";
 import request from "sync-request";
+import { type Response } from 'then-request';
 
 export class DeckService {
-    private static srcPath: string = "data/cornucopia/source/";
+    private request: any;
+    constructor(request: any) {
+        this.request = request;
+    }
     private static repoUrl: string = 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/';
     private static cache: object[] = [];
     private static mappings: object[] = [];
@@ -28,43 +32,49 @@ export class DeckService {
         return DeckService.languages.find((deck) => (deck.edition == edition && deck.lang.includes(lang))) ? lang : 'en';
     }
 
-    private static getCardMappingData(edition: string)
+    private getCardMappingData(edition: string)
     {
         const requestOptions = {
             method: "GET",
             keepalive: true,
         };
-        const response = request('GET', `${this.repoUrl}${this.getEdition(edition)}-mappings-${this.getVersion(edition)}.yaml`);
+        const response = this.request('GET', `${DeckService.repoUrl}${DeckService.getEdition(edition)}-mappings-${DeckService.getVersion(edition)}.yaml`);
         if (response.statusCode !== 200) {
             console.error('Request error in deckService. status: ' + response.statusCode + ' , message: ' + response.getBody())
         }
         const data = yaml.load(response.getBody().toString());
-        DeckService.mappings.push({edition: this.getEdition(edition), data: data});
+        DeckService.mappings.push({edition: DeckService.getEdition(edition), data: data});
         return data;
     }
 
-    public static getCardMapping(edition: string)
+    public getCardMapping(edition: string)
     {
         return DeckService.mappings.find((mapping) => mapping?.edition == DeckService.getEdition(edition))?.data || this.getCardMappingData(edition);
     }
 
-    public static getCards(edition: string, lang: string)
+    public getCards(edition: string, lang: string)
     {
-        return DeckService.cache.find((mapping) => mapping?.deck == `${this.getEdition(edition)}-${this.getLanguage(edition, lang)}`)?.data || this.getCardData(edition, lang);
+        return DeckService.cache.find((mapping) => mapping?.deck == `${DeckService.getEdition(edition)}-${DeckService.getLanguage(edition, lang)}`)?.data || this.getCardData(edition, lang);
     }
 
-    private static getCardData(edition: string, lang: string)
+    private getCardData(edition: string, lang: string)
     {
         const requestOptions = {
             method: "GET",
             keepalive: true,
         };
-        const response = request('GET', `${this.repoUrl}${this.getEdition(edition)}-cards-${this.getVersion(edition)}-${this.getLanguage(edition, lang)}.yaml`);
+        const response = this.request('GET', `${DeckService.repoUrl}${DeckService.getEdition(edition)}-cards-${DeckService.getVersion(edition)}-${DeckService.getLanguage(edition, lang)}.yaml`);
         if (response.statusCode !== 200) {
             console.error('Request error in deckService. status: ' + response.statusCode + ' , message: ' + response.getBody())
         }
         const data = yaml.load(response.getBody().toString());
-        DeckService.cache.push({deck: `${this.getEdition(edition)}-${this.getLanguage(edition, lang)}`, data: data});
+        DeckService.cache.push({deck: `${DeckService.getEdition(edition)}-${DeckService.getLanguage(edition, lang)}`, data: data});
         return data;
+    }
+
+    public static clear(): void
+    {
+        DeckService.cache = [];
+        DeckService.mappings = [];
     }
 }

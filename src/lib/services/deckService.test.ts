@@ -1,25 +1,100 @@
-import {expect, test} from 'vitest';
+import {expect, vi, describe, it} from 'vitest';
 import { DeckService } from './deckService';
+import { type Response } from 'then-request';
+import fs from "fs";
 
-test('Test that the card mapping exist for all editions.', () => {
-    expect(DeckService.getCardMapping('webapp')).toBeDefined();
-    expect(DeckService.getCardMapping('mobileapp')).toBeDefined();
-    expect(DeckService.getCardMapping('doesntexist')).toBeDefined();
-    expect(DeckService.getCardMapping('doesntexist')).toHaveProperty('suits');
-    expect(DeckService.getCardMapping('doesntexist').meta.edition).toEqual('webapp');
-    expect(DeckService.getCardMapping('doesntexist').meta.version).toEqual('2.00');
-});
+describe('DeckService tests', () => {
+    it("should return card mapping data and call the correct url.", async () => {
+        const body = fs.readFileSync("data/mock/mapping.yaml", 'utf8');
+        const mockResponse = {
+            statusCode: 200,
+            headers: {},
+            body: '',
+            url: '',
+            isError: () => false,
+            getBody: () => body
+        } as Response;
+        const request = vi.fn(() => mockResponse);
+        request.prototype = vi.fn(() => mockResponse);
+        vi.doMock('sync-request', async () => {
+            await import('sync-request');
+            
+            return { request };
+          });
+        expect((new DeckService(request)).getCardMapping('doesntexist')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-mappings-2.00.yaml');
+        request.mockClear();
+        DeckService.clear();
+        expect((new DeckService(request)).getCardMapping('webapp')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-mappings-2.00.yaml');
+        request.mockClear();
+        DeckService.clear();
+        expect((new DeckService(request)).getCardMapping('mobileapp')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/mobileapp-mappings-1.00.yaml');
+        DeckService.clear();
 
-test('Test that the cards has been defined for all supported languages.', () => {
-    expect(DeckService.getCards('mobileapp', 'en')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'en')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'es')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'fr')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'nl')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'no_nb')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'pt_br')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'doesnotexist')).toBeDefined();
-    expect(DeckService.getCards('webapp', 'doesnotexist')).toHaveProperty('suits');
-    expect(DeckService.getCards('webapp', 'doesnotexist').meta.edition).toEqual('webapp');
-    expect(DeckService.getCards('webapp', 'doesnotexist').meta.version).toEqual('2.00');
+    });
+    it("should return card deck data and call the correct url.", async () => {
+        const body = fs.readFileSync("data/mock/cards.yaml", 'utf8');
+        const mockResponse = {
+            statusCode: 200,
+            headers: {},
+            body: '',
+            url: '',
+            isError: () => false,
+            getBody: () => body
+        } as Response;
+        const request = vi.fn(() => mockResponse);
+        request.prototype = vi.fn(() => mockResponse);
+        vi.doMock('sync-request', async () => {
+            await import('sync-request');
+            
+            return { request };
+          });
+        request.mockClear();
+        DeckService.clear();
+        expect((new DeckService(request)).getCards('doesntexist', 'en')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-en.yaml');
+        request.mockClear();
+        DeckService.clear();
+        expect((new DeckService(request)).getCards('doesntexist', 'doesntexist')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-en.yaml');
+        request.mockClear();
+        DeckService.clear();
+        expect((new DeckService(request)).getCards('webapp', 'en')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-en.yaml');
+        request.mockClear();
+        DeckService.clear();
+        expect((new DeckService(request)).getCards('mobileapp', 'en')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/mobileapp-cards-1.00-en.yaml');
+        request.mockClear();
+        expect((new DeckService(request)).getCards('webapp', 'es')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-es.yaml');
+        request.mockClear();
+        expect((new DeckService(request)).getCards('webapp', 'fr')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-fr.yaml');
+        request.mockClear();
+        expect((new DeckService(request)).getCards('webapp', 'nl')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-nl.yaml');
+        request.mockClear();
+        expect((new DeckService(request)).getCards('webapp', 'no_nb')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-no_nb.yaml');
+        request.mockClear();
+        expect((new DeckService(request)).getCards('webapp', 'pt_br')).toBeDefined();
+        expect(request).toHaveBeenCalled();
+        expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-cards-2.00-pt_br.yaml');
+        request.mockClear();
+        DeckService.clear();
+    });
 });

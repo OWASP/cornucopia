@@ -57,6 +57,9 @@ importers:
       svelte-sitemap:
         specifier: ^2.6.0
         version: 2.6.0
+      then-request:
+        specifier: ^6.0.2
+        version: 6.0.2
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
