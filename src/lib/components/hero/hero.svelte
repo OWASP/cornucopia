@@ -4,7 +4,8 @@
     import Chevron from "./chevron.svelte";
     import HeroText from "./heroText.svelte";
 
-    export let suits : Suit[]
+    export let suits : Suit[];
+    export let cardData : any;
 </script>
 
 <div class="hero">
@@ -12,7 +13,7 @@
         <HeroText></HeroText>
     </div>
     <div class="card-container">
-        <Deck {suits}></Deck>
+        <Deck {cardData} {suits}></Deck>
     </div>
     <Chevron href="/#top"></Chevron>
 </div>

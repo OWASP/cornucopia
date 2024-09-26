@@ -4,15 +4,15 @@
     import type { Card } from "../../../domain/card/card";
 
     export let suits : Suit[];
+    export let cardData : any;
     // Get a card from every suit
     let cards : Card[] = suits.map((suit) => suit.cards[0]).reverse()
 </script>
 
-
 <div class="deck">
     {#each cards as card,index}
     <div style="transform: translate(150%,35%) rotate({-45 + index*10}deg) " class="card-container">
-        <CardPreview card={card}></CardPreview>
+        <CardPreview {cardData} {card}></CardPreview>
     </div>
     {/each}
 </div>

@@ -7,7 +7,7 @@
 </script>
 
 
-<Hero suits={data.suits}></Hero>
+<Hero cardData={data.cardData} suits={data.suits}></Hero>
 <TextImage src="/images/cornucopia_logo.svg" align="right">
     <h1 id="top">Identify threats</h1>
     <p>
