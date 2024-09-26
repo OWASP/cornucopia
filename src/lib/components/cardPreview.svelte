@@ -91,6 +91,12 @@
         margin-top: 2rem;
         border: 1px rgb(197, 197, 197) solid;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        background-color: white;
+    }
+
+    .card-render:hover
+    {
+        filter: brightness(105%);
     }
 
     .left

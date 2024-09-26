@@ -1,7 +1,10 @@
-<script>
+<script lang="ts">
+    import type { Suit } from "../../../domain/suit/suit";
     import Deck from "../deck/deck.svelte";
     import Chevron from "./chevron.svelte";
     import HeroText from "./heroText.svelte";
+
+    export let suits : Suit[]
 </script>
 
 <div class="hero">
@@ -9,7 +12,7 @@
         <HeroText></HeroText>
     </div>
     <div class="card-container">
-        <Deck></Deck>
+        <Deck {suits}></Deck>
     </div>
     <Chevron href="/#top"></Chevron>
 </div>

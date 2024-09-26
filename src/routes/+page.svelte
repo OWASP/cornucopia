@@ -2,10 +2,12 @@
     import Hero from "$lib/components/hero/hero.svelte";
     import Spacer from "$lib/components/spacer.svelte";
     import TextImage from "$lib/components/textImage.svelte";
+
+    export let data;
 </script>
 
 
-<Hero></Hero>
+<Hero suits={data.suits}></Hero>
 <TextImage src="/images/cornucopia_logo.svg" align="right">
     <h1 id="top">Identify threats</h1>
     <p>
