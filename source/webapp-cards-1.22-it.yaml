@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "IT"
-  version: "2.00"
+  version: "1.22"
 suits:
 -
   id: "VE"
