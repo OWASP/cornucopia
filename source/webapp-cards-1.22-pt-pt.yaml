@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "PT-PT"
-  version: "2.00"
+  version: "1.22"
 suits:
 -
   id: "VE"
@@ -373,10 +373,10 @@ paragraphs:
     text: "Sem carta"
   -
     value: "Title"
-    text: "Website App v2.00-EN"
+    text: "Website App v1.22-EN"
   -
     value: "Title_full"
-    text: "OWASP® Cornucopia Website App v2.00-EN"
+    text: "OWASP® Cornucopia Website App v1.22-EN"
   -
     value: "T00005"
     text: "Índice"
@@ -1202,6 +1202,12 @@ paragraphs:
   -
     value: "T03720"
     text: "Referências cruzadas atualizadas de ASVS v3.0.1 para ASVS v4.0 por Johan Sydseter. "
+  -
+    value: "T03730"
+    text: "2.1"
+  -
+    value: "T03740"
+    text: "Addciona a traduçã0 italiana por Ruggero DallAglio"
   -
     value: "T03800"
     text: "Colaboradores do projeto"
