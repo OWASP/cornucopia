@@ -1200,6 +1200,12 @@ paragraphs:
     value: "T03720"
     text: "Kruisverwijzingen bijgewerkt van ASVS v3.0.1 naar ASVS v4.0 door Johan Sydseter. "
   -
+    value: "T03730"
+    text: "2.1"
+  -
+    value: "T03740"
+    text: "Italiaanse vertaling toegevoegd door Ruggero DallAglio"
+  -
     value: "T03800"
     text: "Projectbijdragers"
   -

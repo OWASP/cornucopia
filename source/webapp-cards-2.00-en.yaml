@@ -1206,6 +1206,12 @@ paragraphs:
     value: "T03720"
     text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
   -
+    value: "T03730"
+    text: "2.1"
+  -
+    value: "T03740"
+    text: "Adding italian translation done by Ruggero DallAglio"
+  -
     value: "T03800"
     text: "Project contributors"
   -
