@@ -34,3 +34,9 @@ Add testing.
 - Adding the tarot layout and renaming static to bridge
 - Removing old versions prior to 1.22
 - Adding fuzzing
+
+## Changes & Updates
+### 2024-10-25
+
+ - Adding the italian translation
+ - Fixing the card codes ensuring they are in line with the documentation.

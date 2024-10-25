@@ -1201,6 +1201,12 @@ paragraphs:
     value: "T03720"
     text: "Références croisées mises à jour d'ASVS v3.0.1 vers ASVS v4.0 par Johan Sydseter. "
   -
+    value: "T03730"
+    text: "2.1"
+  -
+    value: "T03740"
+    text: "Ajout de la traduction italienne réalisée par Ruggero DallAglio"
+  -
     value: "T03800"
     text: "Contributeurs du projet"
   -
