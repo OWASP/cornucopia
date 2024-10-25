@@ -349,18 +349,18 @@ suits:
     misc: "Approfondisci la sicurezza delle applicazioni con le guide gratuite OWASP sui requisiti, lo sviluppo, la revisione e il test del codice, la serie di Cheat Sheet, e il modello di maturità dell'Open Software Assurance"
 -
   id: "WC"
-  name: "WILD CARD"
+  name: "Jolly"
   cards:
   -
     id: "JOA"
     value: "JokerA"
-    card: "Joker"
+    card: "Jolly"
     desc: "Alice può utilizzare l'applicazione per attaccare i sistemi e i dati degli utenti"
     misc: "Hai pensato a diventare un membro di OWASP? Tutti gli strumenti, la guida e gli incontri locali sono gratuiti per tutti, ma l'iscrizione individuale aiuta a sostenere il lavoro di OWASP"
   -
     id: "JOB"
     value: "JokerB"
-    card: "Joker"
+    card: "Jolly"
     desc: "Bob può influenzare, alterare o impattare l'applicazione in modo che non sia più conforme ai requisiti legali, normativi, contrattuali o ad altri obblighi organizzativi"
     misc: "Esamina le vulnerabilità e scopri come possono essere risolte utilizzando gratuitamente l'OWASP® Juice Shop, Security Shepherd, o utilizzando liberamente le sfide online dell'OWASP® Hackinglab"
 paragraphs:
@@ -400,7 +400,7 @@ paragraphs:
     text: "Adam Shostack e il team Microsoft SDL per il gioco “Elevation of Privilege Threat Modelling”, pubblicato con licenza Creative Commons Attribution, come ispirazione per Cornucopia e da cui sono state copiate molte idee, soprattutto la teoria del gioco."
   -
     value: "T00120"
-    text: "Keith Turpin e i collaboratori della guida OWASP® "Secure Coding Practices - Quick Reference Guide", originariamente donata a OWASP da Boeing, utilizzata come fonte primaria di informazioni sui requisiti di sicurezza per formulare il contenuto delle carte."
+    text: "Keith Turpin e i collaboratori della guida OWASP® \"Secure Coding Practices - Quick Reference Guide\", originariamente donata a OWASP da Boeing, utilizzata come fonte primaria di informazioni sui requisiti di sicurezza per formulare il contenuto delle carte."
   -
     value: "T00130"
     text: "Collaboratori, sostenitori, sponsor e volontari dei progetti OWASP® ASVS, AppSensor e Web Framework Security Matrix, Common Attack Pattern Enumeration and Classification (CAPEC) di Mitre e “Practical Security Stories and Security Tasks for Agile Development Environments” di SAFECode, tutti utilizzati nei riferimenti incrociati forniti."
@@ -457,7 +457,7 @@ paragraphs:
     text: "Invece dei semi STRIDE di EoP (serie di carte con disegni corrispondenti), i semi di Cornucopia si basano sulla struttura della OWASP® Secure Coding Practices - Quick Reference Guide (SCP), ma con un'ulteriore considerazione delle sezioni dell'OWASP® Application Security Verification Standard, della Web Security Testing Guide (WSTG) e dei Principles of Secure Development di David Rook. "
   -
     value: "T00320"
-    text: "Questi fornivano cinque semi, e un sesto chiamato "Cornucopia" fu creato per tutto il resto: "
+    text: "Questi fornivano cinque semi, e un sesto chiamato \"Cornucopia\" fu creato per tutto il resto: "
   -
     value: "T00330"
     text: "Convalida e codifica dei dati (VE)"
