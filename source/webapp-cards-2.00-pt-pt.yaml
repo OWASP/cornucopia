@@ -1,0 +1,1249 @@
+---
+meta:
+  edition: "webapp"
+  component: "cards"
+  language: "PT-PT"
+  version: "2.00"
+suits:
+-
+  id: "VE"
+  name: "VALIDAÇÃO & CODIFICAÇÃO DE DADOS"
+  cards:
+  -
+    id: "VE2"
+    value: "2"
+    desc: "O Brian pode reunir informação acerca das configurações subjacentes, esquemas, lógica, código, software, serviços e infraestrutura devido ao conteúdo das mensagens de erro, ou configuração deficiente, ou da presença de ficheiros de instalação padrão ou antigos testes, cópias de segurança, cópias de recursos ou à exposição de código fonte"
+  -
+    id: "VE3"
+    value: "3"
+    desc: "O Robert pode introduzir dados maliciosos porque: o formato do protocolo não está a ser verificado; duplicados são aceites; a estrutura não está a ser validada; ou os elementos de dados individuais não estão a ser validados em relação ao formato, tipo, intervalo, comprimento e contra uma lista de caracteres ou formatos permitidos"
+  -
+    id: "VE4"
+    value: "4"
+    desc: "O Dave pode introduzir nomes de campo ou dados maliciosos porque estes não estão a ser verificados no contexto do utilizador ou no processo atual"
+  -
+    id: "VE5"
+    value: "5"
+    desc: "O Jee pode contornar as rotinas de codificacao centrais, uma vez que não estão a ser usadas em todo o lado, ou porque as codificações utilizadas estão erradas"
+  -
+    id: "VE6"
+    value: "6"
+    desc: "O Jason pode contornar as rotinas de validação central, pois não são usadas em todos os campos"
+  -
+    id: "VE7"
+    value: "7"
+    desc: "O Jan pode confeccionar cargas (payloads) especiais capazes de frustrar a validação de dados de entrada porque: o conjunto de caracteres não é especificado/imposto; os dados estão codificados múltiplas vezes; os dados não foram completamente convertidos para o formato que a aplicação usa (ex: canonização) antes de serem validados; ou o tipo das variáveis não é forte"
+  -
+    id: "VE8"
+    value: "8"
+    desc: "A Oana pode contornar as rotinas de sanitização centrais, upois não estão a ser implementadas de forma abrangente"
+  -
+    id: "VE9"
+    value: "9"
+    desc: "O Shamun pode contornar as validações de entrada ou as verificações de validação de saída porque as falhas de validação não são rejeitadas e/ou sanitizadas"
+  -
+    id: "VEX"
+    value: "10"
+    desc: "O Darío pode abusar da confiança que a aplicação deposita numa fonte de dados (por exemplo, dados definidos pelo utilizador, manipulação de dados armazenados localmente, alteração de dados de estado num dispositivo cliente, falta de verificação de identidade durante a validação de dados, como quando Darío pode se passar por Colin)."
+  -
+    id: "VEJ"
+    value: "J"
+    desc: "O Toby tem controlo sobre o código ou as rotinas de validação de entrada, validação de saída ou codificação de saída, podendo assim ser contornadas"
+  -
+    id: "VEQ"
+    value: "Q"
+    desc: "O Xavier pode injetar dados num cliente ou intérprete no dispositivo porque: uma interface parametrizada não está a ser utilizada ou não foi implementada corretamente; os dados não foram codificados corretamente para o contexto; ou não existe uma política restritiva sobre inclusões de código ou dados"
+  -
+    id: "VEK"
+    value: "K"
+    desc: "O Gabe pode injetar dados num intérprete do lado do servidor (por exemplo, SQL, comandos do SO, XPath, JavaScript do servidor, SMTP) porque não está a ser utilizada uma interface parametrizada que impõe o tipo (strong typed), ou porque não foi implementada corretamente"
+  -
+    id: "VEA"
+    value: "A"
+    desc: "Inventaste um novo ataque contra a Validação e Codificação de Dados"
+    misc: "Lê mais sobre este tópico nas Cheat Sheets gratuitas da OWASP sobre Validação de Entrada, Prevenção de XSS, Prevenção de XSS Baseado em DOM, Prevenção de Injeção SQL e Parametrização de Consultas."
+-
+  id: "AT"
+  name: "AUTENTICAÇÃO"
+  cards:
+  -
+    id: "AT2"
+    value: "2"
+    desc: "O James pode realizar funções de autenticação sem que o verdadeiro utilizador tenha conhecimento (ex.: tentar iniciar sessão, iniciar sessão com credenciais roubadas, redefinir a palavra-passe)"
+  -
+    id: "AT3"
+    value: "3"
+    desc: "O Muhammad pode obter a palavra-passe de um utilizador ou outros segredos, como perguntas de segurança, através: da observação durante a entrada; de uma cache local; da memória; enquanto em trânsito; lendo-a de algum local desprotegido; porque a mesma é amplamente conhecida; porque nunca expira; ou porque o utilizador não pode alterar a sua própria palavra-passe"
+  -
+    id: "AT4"
+    value: "4"
+    desc: "O Sebastien pode facilmente identificar nomes de utilizador ou enumerá-los"
+  -
+    id: "AT5"
+    value: "5"
+    desc: "O Javier pode utilizar credenciais padrão, de teste ou facilmente adivinháveis para autenticar, ou pode usar uma conta antiga ou uma conta que não é necessária para a aplicação."
+  -
+    id: "AT6"
+    value: "6"
+    desc: "O Sven pode reutilizar uma senha temporária porque: o utilizador não é obrigado a alterá-la no primeiro uso; tem um prazo de validade demasiado longo ou inexistente; ou não utiliza um método de entrega fora de banda (por exemplo, correio, aplicação móvel, SMS)"
+  -
+    id: "AT7"
+    value: "7"
+    desc: "A Cecília pode usar ataques de força bruta e de dicionário contra uma ou várias contas sem limite; ou esses ataques são simplificados devido a requisitos insuficientes de complexidade, comprimento, expiração e reutilização de palavras-passe"
+  -
+    id: "AT8"
+    value: "8"
+    desc: "A Kate pode contornar a autenticação porque esta não falha de forma segura (ou seja, por padrão permite o acesso não autenticado)"
+  -
+    id: "AT9"
+    value: "9"
+    desc: "A Claudia pode realizar funções mais críticas porque os requisitos de autenticação são demasiado fracos (por exemplo, não utilizam autenticação forte, como a autenticação em duas etapas) ou não há exigência de reautenticação para estas funções"
+  -
+    id: "ATX"
+    value: "10"
+    desc: "O Pravin pode contornar os controles de autenticação porque não está a ser utilizado um módulo/framework/serviço de autenticação centralizado, padronizado, testado, comprovado e aprovado, separado do recurso que está a ser solicitado"
+  -
+    id: "ATJ"
+    value: "J"
+    desc: "O Mark pode aceder a recursos ou serviços porque não existe uma exigência de autenticação, ou foi assumido erroneamente que a autenticação seria realizada por outro sistema ou executada numa ação anterior"
+  -
+    id: "ATQ"
+    value: "Q"
+    desc: "O Johan pode contornar a autenticação porque esta não é aplicada com o mesmo rigor em todas as funcionalidades de autenticação (por exemplo, registo, alteração de palavra-passe, recuperação de palavra-passe, encerramento de sessão, administração) ou em todas as versões/canais (por exemplo, site móvel, aplicação móvel, site completo, API, centro de atendimento)"
+  -
+    id: "ATK"
+    value: "K"
+    desc: "A Olga pode influenciar ou alterar o código/rutinas de autenticação para que possam ser contornados"
+  -
+    id: "ATA"
+    value: "A"
+    desc: "Inventaste um novo ataque contra a Autenticação"
+    misc: "Leia mais sobre este tópico no Cheat Sheet de Autenticação gratuito da OWASP"
+-
+  id: "SM"
+  name: "GESTÃO DE SESSÃO"
+  cards:
+  -
+    id: "SM2"
+    value: "2"
+    desc: "O William tem controlo sobre a geração de identificadores de sessão"
+  -
+    id: "SM3"
+    value: "3"
+    desc: "O Ryan pode usar uma única conta em paralelo, uma vez que sessões concorrentes são permitidas"
+  -
+    id: "SM4"
+    value: "4"
+    desc: "A Alison pode definir cookies de identificação de sessão em outra aplicação web porque o domínio e o caminho não estão restritos de forma suficiente"
+  -
+    id: "SM5"
+    value: "5"
+    desc: "O John pode prever ou adivinhar identificadores de sessão porque não são alterados quando o papel do utilizador muda (por exemplo, antes e depois da autenticação) e ao alternar entre comunicações não encriptadas e encriptadas; ou porque não são suficientemente longos e aleatórios; ou porque não são alterados periodicamente."
+  -
+    id: "SM6"
+    value: "6"
+    desc: "O Gary pode assumir a sessão de um utilizador porque existe um tempo de inatividade longo ou inexistente, ou um limite de tempo total de sessão longo ou inexistente, ou a mesma sessão pode ser utilizada a partir de mais de um dispositivo/localização"
+  -
+    id: "SM7"
+    value: "7"
+    desc: "O Graham pode utilizar a sessão do Adam depois de ele ter terminado, porque não existe uma função de saída, ou ele não pode sair facilmente, ou a saída não termina a sessão corretamente"
+  -
+    id: "SM8"
+    value: "8"
+    desc: "O Matt pode abusar de sessões longas porque a aplicação não exige re-autenticação periódica para verificar se os privilégios mudaram"
+  -
+    id: "SM9"
+    value: "9"
+    desc: "O Ivan pode roubar identificadores de sessão porque: são enviados por canais inseguros; estão registados; são revelados em mensagens de erro; estão incluídos em URLs; ou são acessíveis desnecessariamente por código que o atacante pode influenciar ou alterar"
+  -
+    id: "SMX"
+    value: "10"
+    desc: "O Marce pode falsificar pedidos porque, por sessão ou por pedido para ações mais críticas, não estão a ser utilizados tokens aleatórios fortes (ou seja, tokens anti-CSRF) ou semelhantes para ações que alteram o estado"
+  -
+    id: "SMJ"
+    value: "J"
+    desc: "O Jeff pode reenviar uma interação repetida idêntica (por exemplo, uma solicitação HTTP, sinal ou pressionar de botão) e esta é aceite, não rejeitada"
+  -
+    id: "SMQ"
+    value: "Q"
+    desc: "O Salim pode contornar a gestão de sessões porque não é aplicada de forma abrangente e consistente em toda a aplicação"
+  -
+    id: "SMK"
+    value: "K"
+    desc: "O Peter pode contornar os controlos de gestão de sessões porque foram construídos internamente e/ou são fracos, em vez de utilizar um framework padrão ou um módulo aprovado e testado"
+  -
+    id: "SMA"
+    value: "A"
+    desc: "Inventaste um novo ataque contra a Gestão de Sessões"
+    misc: "Leia mais sobre este tópico nas Cheat Sheets gratuitas da OWASP sobre Gestão de Sessões e Prevenção de Cross Site Request Forgery (CSRF)"
+-
+  id: "AZ"
+  name: "AUTORIZAÇÃO"
+  cards:
+  -
+    id: "AZ2"
+    value: "2"
+    desc: "O Tim pode influenciar para onde os dados são enviados ou encaminhados"
+  -
+    id: "AZ3"
+    value: "3"
+    desc: "O Christian pode aceder a informações às quais não deveria ter permissão através: de outro mecanismo que possui essa permissão (por exemplo, indexador de pesquisa, registo, relatórios); ou porque está em cache; ou porque é mantida por mais tempo do que o necessário; ou através de outras fugas de informação"
+  -
+    id: "AZ4"
+    value: "4"
+    desc: "A Kelly pode contornar os controlos de autorização porque estes não falham de forma segura (ou seja, por defeito permitem o acesso)"
+  -
+    id: "AZ5"
+    value: "5"
+    desc: "O Chad pode aceder a recursos (incluindo serviços, processos, AJAX, Flash, vídeos, imagens, documentos, ficheiros temporários, dados de sessão, propriedades do sistema, dados de configuração, definições do registo, logs) que não deveria conseguir devido à ausência de autorização ou a privilégios excessivos (por exemplo, não aplicar o princípio do menor privilégio)"
+  -
+    id: "AZ6"
+    value: "6"
+    desc: "O Eduardo pode aceder a dados aos quais não tem permissão, mesmo tendo autorização para o formulário/página/URL/ponto de entrada"
+  -
+    id: "AZ7"
+    value: "7"
+    desc: "O Yuanjing pode aceder a funções, objetos ou propriedades da aplicação aos quais não está autorizado"
+  -
+    id: "AZ8"
+    value: "8"
+    desc: "O Tom pode contornar regras de negócio alterando a sequência ou o fluxo habitual do processo; realizando o processo numa ordem incorreta; manipulando os valores de data e hora utilizados pela aplicação; utilizando funcionalidades válidas para propósitos não intencionais; ou manipulando, de outra forma, dados de controlo"
+  -
+    id: "AZ9"
+    value: "9"
+    desc: "O Mike pode fazer um uso indevido da aplicação utilizando uma funcionalidade válida de forma demasiado rápida, ou frequente, ou de outra maneira que não é intencionada; consumindo os recursos da aplicação; causando condições de corrida; ou sobreutilizando uma funcionalidade"
+  -
+    id: "AZX"
+    value: "10"
+    desc: "O Richard pode contornar os controlos de autorização centrais, uma vez que estes não estão a ser aplicados de forma abrangente em todas as interações"
+  -
+    id: "AZJ"
+    value: "J"
+    desc: "O Dinis pode aceder a informações de configuração de segurança ou a listas de controlo de acesso"
+  -
+    id: "AZQ"
+    value: "Q"
+    desc: "O Christopher pode injetar um comando que a aplicação irá executar a um nível de privilégio mais elevado"
+  -
+    id: "AZK"
+    value: "K"
+    desc: "O Ryan pode influenciar ou alterar os controlos e permissões de autorização, podendo, assim, contorná-los"
+  -
+    id: "AZA"
+    value: "A"
+    desc: "Inventaste um novo ataque contra a Autorização"
+    misc: "Leia mais sobre este tema nos Guias de Desenvolvimento e Teste da OWASP"
+-
+  id: "CR"
+  name: "CRIPTOGRAFIA"
+  cards:
+  -
+    id: "CR2"
+    value: "2"
+    desc: "O Kyun pode aceder aos dados porque estes foram ofuscados em vez de terem sido utilizados uma função criptográfica aprovada"
+  -
+    id: "CR3"
+    value: "3"
+    desc: "O Axel pode modificar dados transitórios ou permanentes (armazenados ou em trânsito); código fonte; atualizações ou correções; e dados de configuração, porque não estão sujeitos a verificações de integridade"
+  -
+    id: "CR4"
+    value: "4"
+    desc: "O Paulo pode aceder a dados em trânsito que não estão encriptados, mesmo que o canal esteja encriptado"
+  -
+    id: "CR5"
+    value: "5"
+    desc: "O Kyle pode contornar os controlos criptográficos porque estes não falham de forma segura (ou seja, por defeito ficam desprotegidos)"
+  -
+    id: "CR6"
+    value: "6"
+    desc: "O Romain pode ler e modificar dados não encriptados em memória ou em trânsito; por exemplo, segredos criptográficos, credenciais, identificadores de sessão, dados pessoais e sensíveis comercialmente; em uso ou nas comunicações dentro da aplicação; ou entre a aplicação e os utilizadores; ou entre a aplicação e sistemas externos"
+  -
+    id: "CR7"
+    value: "7"
+    desc: "O Gunter pode interceptar ou modificar dados encriptados em trânsito porque o protocolo está mal implementado; ou mal configurado; ou os certificados são inválidos; ou os certificados não são confiáveis; ou a conexão pode ser degradada para uma comunicação mais fraca ou não encriptada"
+  -
+    id: "CR8"
+    value: "8"
+    desc: "O Eoin pode aceder a dados empresariais armazenados (por exemplo, palavras-passe, identificadores de sessão, informações pessoais identificáveis, dados de titulares de cartões) porque não estão devidamente encriptados ou não estão devidamente convertidos numa hash"
+  -
+    id: "CR9"
+    value: "9"
+    desc: "O Andy pode contornar a geração de números aleatórios, a geração de GUIDs aleatórios, funções de hash e funções de encriptação porque foram construídas internamente e/ou são fracas"
+  -
+    id: "CRX"
+    value: "10"
+    desc: "SA Susanna pode quebrar a criptografia em uso porque não é suficientemente forte para o nível de proteção exigido, ou não é forte o suficiente para o esforço que o atacante está disposto a empregar"
+  -
+    id: "CRJ"
+    value: "J"
+    desc: "O Justin pode ler credenciais para aceder a recursos internos ou externos, serviços e outros sistemas porque estão armazenadas em formato não encriptado, ou guardadas no código-fonte"
+  -
+    id: "CRQ"
+    value: "Q"
+    desc: "O Artim pode aceder ou prever os segredos criptográficos principais"
+  -
+    id: "CRK"
+    value: "K"
+    desc: "O Dan pode influenciar ou alterar o código/rutinas de criptografia (encriptação, hashing, assinaturas digitais, geração de números aleatórios e GUID), podendo assim contorná-los"
+  -
+    id: "CRA"
+    value: "A"
+    desc: "Inventaste um novo ataque contra a Criptografia"
+    misc: "Leia mais sobre este tópico nas folhas de dicas gratuitas da OWASP sobre Armazenamento Criptográfico e Proteção da Camada de Transporte"
+-
+  id: "C"
+  name: "CORNUCOPIA"
+  cards:
+  -
+    id: "C2"
+    value: "2"
+    desc: "O Lee pode contornar os controlos da aplicação porque foram utilizadas funções de linguagem de programação perigosas ou arriscadas em vez de alternativas mais seguras; ou existem erros de conversão de tipo; ou a aplicação é instável quando um recurso externo não está disponível; ou existem condições de corrida; ou há problemas de inicialização ou alocação de recursos; ou podem ocorrer overflows"
+  -
+    id: "C3"
+    value: "3"
+    desc: "O Andrew pode aceder ao código-fonte; descompilar; ou de outra forma aceder à lógica de negócio para compreender como a aplicação funciona e quaisquer segredos que contenha"
+  -
+    id: "C4"
+    value: "4"
+    desc: "Keith pode realizar uma ação e não é possível atribuí-la a ele"
+  -
+    id: "C5"
+    value: "5"
+    desc: "O Larry pode influenciar a confiança que outras partes, incluindo os utilizadores da aplicação, têm nela, ou abusar dessa confiança em outro lugar (por exemplo, noutra aplicação"
+  -
+    id: "C6"
+    value: "6"
+    desc: "O Aaron pode contornar os controlos porque a gestão de erros/exceções está ausente, ou é implementada de forma inconsistente ou parcial, ou não nega o acesso por defeito (ou seja, os erros devem terminar o acesso/executação), ou depende da gestão feita por outro serviço ou sistema"
+  -
+    id: "C7"
+    value: "7"
+    desc: "As ações do Mwengu não podem ser investigadas: não existe um registo adequado de eventos de segurança com carimbo de data/hora preciso; não há um histórico de auditoria completo; estes podem ser alterados ou eliminados pelo Mwengu; ou não existe um serviço de registo central"
+  -
+    id: "C8"
+    value: "8"
+    desc: "O David pode contornar a aplicação para ganhar acesso a dados porque a infraestrutura de rede e de host, e os serviços/aplicações de suporte, não foram configurados de forma segura; a configuração não é verificada periodicamente e as atualizações de segurança não são aplicadas; ou os dados estão armazenados localmente; ou os dados não estão fisicamente protegidos"
+  -
+    id: "C9"
+    value: "9"
+    desc: "O Michael pode contornar a aplicação para ganhar acesso aos dados porque as ferramentas administrativas ou as interfaces administrativas não estão adequadamente protegidas"
+  -
+    id: "CX"
+    value: "10"
+    desc: "Spyros pode contornar os controlos da aplicação porque os frameworks de código, bibliotecas e componentes contêm código malicioso ou vulnerabilidades (por exemplo, internos, comerciais, terceirizados, de código aberto, localizados externamente)"
+  -
+    id: "CJ"
+    value: "J"
+    desc: "O Roman pode explorar a aplicação porque foi compilada usando ferramentas desatualizadas, ou a sua configuração não é segura por defeito, ou as informações de segurança não foram documentadas e transmitidas às equipas operacionais"
+  -
+    id: "CQ"
+    value: "Q"
+    desc: "O Jim pode realizar ações maliciosas, fora do comum, sem deteção e resposta em tempo real por parte da aplicação."
+  -
+    id: "CK"
+    value: "K"
+    desc: "O Grant pode utilizar a aplicação para negar serviço a alguns ou a todos os seus utilizadores"
+  -
+    id: "CA"
+    value: "A"
+    desc: "Inventaste um novo ataque de qualquer tipo"
+    misc: "Leia mais sobre segurança de aplicações nos Guias gratuitos da OWASP sobre Requisitos, Desenvolvimento, Revisão de Código e Testes, na série de Cheat Sheets e no Modelo de Maturidade de Garantia de Software Aberto"
+-
+  id: "WC"
+  name: "JOKERS"
+  cards:
+  -
+    id: "JOA"
+    value: "JokerA"
+    card: "Joker"
+    desc: "A Alice pode utilizar a aplicação para atacar os sistemas e dados"
+    misc: "Já pensaste em tornar-te membro individual da OWASP? Todas as ferramentas, orientações e reuniões locais são gratuitas para todos, mas a adesão individual ajuda a apoiar o trabalho da OWASP"
+  -
+    id: "JOB"
+    value: "JokerB"
+    card: "Joker"
+    desc: "O Bob pode influenciar, alterar ou afetar a aplicação de forma que esta deixe de cumprir leis, regulamentos, contratos ou outras normas organizacionais"
+    misc: "Analise as vulnerabilidades e descubra como podem ser corrigidas utilizando o OWASP® Juice Shop, o Security Shepherd ou os desafios online no gratuito OWASP® Hacking-lab"
+paragraphs:
+-
+  id: "Common"
+  name: "Common"
+  sentences:
+  -
+    value: "NoCard"
+    text: "Sem carta"
+  -
+    value: "Title"
+    text: "Website App v2.00-EN"
+  -
+    value: "Title_full"
+    text: "OWASP® Cornucopia Website App v2.00-EN"
+  -
+    value: "T00005"
+    text: "Índice"
+  -
+    value: "T00010"
+    text: "O OWASP® Cornucopia é um mecanismo de ajuda às equipas de desenvolvimento de software na identificação de requisitos de segurança em processos de desenvolvimento ágeis, convencionais e formais."
+  -
+    value: "T00020"
+    text: "Autor"
+  -
+    value: "T00030"
+    text: "Líderes do Projeto"
+  -
+    value: "T00100"
+    text: "Agradecimentos"
+  -
+    value: "T00110"
+    text: "Adam Shostack e a equipa Microsoft SDL pelo \"Elevation of Privilege Threat Modelling Game\", publicado sob uma licença Creative Commons Attribution, como a inspiração para o Cornucopia e de onde muitas ideias, especialmente a teoria dos jogos, foram copiadas."
+  -
+    value: "T00120"
+    text: "Keith Turpin e os colaboradores do guia OWASP® “Práticas de Codificação Segura - Guia de Referência Rápida”, originalmente doado à OWASP pela Boeing, que é usado como a fonte principal de informação sobre requisitos de segurança para formular o conteúdo das cartas."
+  -
+    value: "T00130"
+    text: "Colaboradores, apoiantes, patrocinadores e voluntários dos projetos OWASP® ASVS, AppSensor e Web Framework Security Matrix, da enumeração e classificação de padrões de ataque comuns da Mitre (CAPEC), e das \"Histórias de Segurança Práticas e Tarefas de Segurança para Ambientes de Desenvolvimento Ágil\" da SAFECode, todos utilizados nas referências cruzadas fornecidas."
+  -
+    value: "T00140"
+    text: "Playgen por proporcionar um seminário esclarecedor sobre a gamificação de tarefas, e tartanmaker.com pela ferramenta online para ajudar a criar o padrão do verso das cartas."
+  -
+    value: "T00145"
+    text: "Colaboradores, líderes atuais e passados do projeto OWASP® Cornucopia, especialmente aqueles envolvidos mais recentemente na atualização das referências cruzadas, na criação de versões online e na escrita de scripts para gerar dinamicamente os arquivos de saída do Cornucopia."
+  -
+    value: "T00150"
+    text: "Blackfoot (UK) Limited por criar e doar arquivos de design prontos para impressão, Tom Brennan e a Fundação OWASP® por instigar a criação de uma caixa e panfleto com a marca OWASP, e a Secure Delivery Ltd por desenvolver e doar Copi, a plataforma para jogar Cornucopia e EoP online."
+  -
+    value: "T00161"
+    text: "(continua na página 20)"
+  -
+    value: "T00162"
+    text: "(continua na página 10)"
+  -
+    value: "T00170"
+    text: "Colin Watson como autor e co-líder do projeto com Grant Ongers, juntamente com outros voluntários da OWASP que ajudaram de muitas maneiras."
+  -
+    value: "T00180"
+    text: "A OWASP® não endossa nem recomenda produtos ou serviços comerciais © 2012-2024 Fundação OWASP®. Este documento está licenciado sob a licença Creative Commons Attribution-ShareAlike 3.0"
+  -
+    value: "T00200"
+    text: "Introdução"
+  -
+    value: "T00210"
+    text: "A ideia por trás do Cornucopia é ajudar as equipas de desenvolvimento, especialmente aquelas que utilizam metodologias ágeis, a identificar requisitos de segurança de aplicações e desenvolver histórias de utilizador baseadas em segurança."
+  -
+    value: "T00220"
+    text: "Embora a ideia tenho sido guardada durante algum tempo antes de ser avançada, a motivação final surgiu quando a SAFECode publicou as suas Histórias de Segurança Práticas e Tarefas de Segurança para Ambientes de Desenvolvimento Ágil em julho de 2012."
+  -
+    value: "T00230"
+    text: "A equipa Microsoft SDL já havia publicado o seu super Elevation of Privilege: The Threat Modeling Game (EoP), mas este não parecia abordar o tipo mais apropriado de problemas que as equipas de desenvolvimento de aplicações web têm de lidar."
+  -
+    value: "T00240"
+    text: "O EoP é um grande conceito e estratégia de jogo, e foi publicado sob uma Licença Creative Commons Attribution."
+  -
+    value: "T00250"
+    text: "A Edição da Aplicação para Websites do Cornucopia é baseada nos conceitos e ideias de jogo do EoP, mas estas foram modificadas para serem mais relevantes aos tipos de problemas que os desenvolvedores de websites enfrentam."
+  -
+    value: "T00260"
+    text: "Tenta introduzir ideias de modelação de ameaças nas equipas de desenvolvimento que usam metodologias ágeis, ou que estão mais focadas nas fragilidades de aplicações web do que em outros tipos de vulnerabilidades de software ou que não estão familiarizadas com STRIDE e DREAD."
+  -
+    value: "T00270"
+    text: "A Edição da Aplicação para Websites do Cornucopia é referenciada como um recurso informativo nas Diretrizes de Comércio Eletrónico do PCI Security Standards Council, v2, Janeiro de 2013."
+  -
+    value: "T00300"
+    text: "O baralho de cartas"
+  -
+    value: "T00310"
+    text: "Em vez dos naipes STRIDE do EoP (conjuntos de cartas com designs correspondentes), os naipes do Cornucopia são baseados na estrutura do guia OWASP® Práticas de Codificação Segura - Guia de Referência Rápida (SCP), mas com consideração adicional das seções do OWASP® Application Security Verification Standard, do Web Security Testing Guide (WSTG) e dos Princípios de Desenvolvimento Seguro de David Rook."
+  -
+    value: "T00320"
+    text: "Estes forneceram cinco naipes, e um sexto chamado “Cornucopia” que foi criado para tudo o resto: "
+  -
+    value: "T00330"
+    text: "Validação e Codificação de Dados (VE)"
+  -
+    value: "T00340"
+    text: "Autenticação (AT)"
+  -
+    value: "T00350"
+    text: "Gestão de Sessão (SM)"
+  -
+    value: "T00360"
+    text: "Autorização (AZ)"
+  -
+    value: "T00370"
+    text: "Criptografia (CR)"
+  -
+    value: "T00380"
+    text: "Cornucopia (C)"
+  -
+    value: "T00390"
+    text: "Semelhante a cartas de poker, cada naipe contém 13 cartas (Ás, 2-10, Valete, Dama e Rei), mas, ao contrário do EoP, há também dois jokers"
+  -
+    value: "T00400"
+    text: "O conteúdo foi principalmente retirado do SCP."
+  -
+    value: "T00500"
+    text: "Mapeamentos"
+  -
+    value: "T00510"
+    text: "O outro impulsionador do Cornucopia é ligar os ataques com requisitos e técnicas de verificação."
+  -
+    value: "T00520"
+    text: "Um objetivo inicial era referenciar IDs de fraquezas CWE, mas estes provaram ser demasiados, e em vez disso decidiu-se mapear cada carta para IDs de padrões de ataque de software CAPEC, que por sua vez estão mapeados para CWEs, de modo a alcançar o resultado desejado."
+  -
+    value: "T00530"
+    text: "Cada carta também é mapeada para as 36 histórias de segurança primárias no documento SAFECode, bem como para o OWASP® SCP v2, ASVS v4.0 e AppSensor (deteção e resposta a ataques de aplicações) para ajudar as equipas a criar as suas próprias histórias relacionadas com segurança para uso em processos ágeis."
+  -
+    value: "T00600"
+    text: "Estratégia de jogo"
+  -
+    value: "T00610"
+    text: "Além das diferenças de conteúdo, as regras do jogo são virtualmente idênticas às do EoP."
+  -
+    value: "T00700"
+    text: "Impressão das cartas"
+  -
+    value: "T00710"
+    text: "Consulte a página do projeto Cornucopia para saber como obter baralhos pré-impressos em papel brilhante."
+  -
+    value: "T00720"
+    text: "As cartas podem ser impressas a partir deste documento em preto e branco, mas são mais eficazes a cores."
+  -
+    value: "T00730"
+    text: "As cartas nas páginas posteriores deste documento foram formatadas em A4 e podem ser recortadas ao longo das linhas pretas em torno de cada carta para permitir um melhor resultado de impressão."
+  -
+    value: "T00740"
+    text: "Esta pareceu ser a forma mais rápida de criar rapidamente cartas de jogo."
+  -
+    value: "T00750"
+    text: "Os códigos de produto Avery C32015 e C32030 foram testados com sucesso, mas quaisquer cartas de 10 até 85 mm x 54 mm em papel A4 devem funcionar com alguns ajustes."
+  -
+    value: "T00760"
+    text: "Outros fornecedores de papelaria, como Ryman e Sigel, produzem folhas semelhantes."
+  -
+    value: "T00770"
+    text: "Estas folhas de cartas não são baratas, por isso deve-se ter cuidado ao decidir o que imprimir e com que tipo de mídia e impressora usar."
+  -
+    value: "T00780"
+    text: "As cartas podem, claro, ser impressas em qualquer tamanho de papel ou cartão e depois cortadas manualmente, ou uma impressora comercial poderá imprimir volumes maiores e cortar as cartas ao tamanho."
+  -
+    value: "T00790"
+    text: "As linhas de corte estão mostradas na penúltima página deste documento, mas a Avery também produz um modelo de A4 em paisagem (A-0017-01_L.doc) que pode ser usado como guia."
+  -
+    value: "T00800"
+    text: "Imprimir e cortar pode levar cerca de uma hora, e usar uma impressora mais rápida ajuda."
+  -
+    value: "T00810"
+    text: "Tente imprimir em qualidade superior para aumentar a legibilidade."
+  -
+    value: "T00820"
+    text: "Um design opcional para o verso das cartas (no padrão tartã da OWASP®) foi fornecido como a última página deste documento."
+  -
+    value: "T00830"
+    text: "Não é necessária uma alinhamento especial."
+  -
+    value: "T00840"
+    text: "A impressão em ambos os lados requer cuidados especiais."
+  -
+    value: "T00850"
+    text: "Pode personalizar as faces ou os versos das cartas de acordo com as preferências da sua organização."
+  -
+    value: "T00900"
+    text: "Personalização"
+  -
+    value: "T00910"
+    text: "Depois de usar o Cornucopia algumas vezes, pode sentir que algumas cartas são menos relevantes para suas aplicações, ou que as ameaças são diferentes para sua organização."
+  -
+    value: "T00920"
+    text: "Edite este documento para tornar as cartas mais adequadas para suas equipes, ou crie novos baralhos completamente."
+  -
+    value: "T01000"
+    text: "Fornecer feedback"
+  -
+    value: "T01010"
+    text: "Se você tiver ideias ou feedback sobre o uso do OWASP® Cornucopia, por favor, compartilhe."
+  -
+    value: "T01020"
+    text: "Ainda melhor se criar versões alternativas das cartas ou produzir versões prontas para impressão profissional, por favor, partilhe com os voluntários que criaram esta edição e com a comunidade mais ampla de desenvolvimento de aplicativos e segurança de aplicativos."
+  -
+    value: "T01030"
+    text: "O melhor lugar para discutir ou contribuir é a lista/grupo do projeto OWASP:"
+  -
+    value: "T01040"
+    text: "Lista/Grupo"
+  -
+    value: "T01050"
+    text: "Página inicial do projeto"
+  -
+    value: "T01060"
+    text: "Todos os documentos e ferramentas da OWASP são gratuitos para download e uso."
+  -
+    value: "T01070"
+    text: "OWASP® Cornucopia está licenciado sob a licença Creative Commons Attribution-ShareAlike 3.0."
+  -
+    value: "T01100"
+    text: "Instruções"
+  -
+    value: "T01110"
+    text: "O texto em cada carta descreve um ataque, mas o atacante recebe um nome, que é único entre todas as cartas."
+  -
+    value: "T01120"
+    text: "O nome pode representar um sistema de computador (por exemplo, o banco de dados, o sistema de arquivos, outro aplicativo, um serviço relacionado, uma botnet), uma individuo (por exemplo, um cidadão, um cliente, um funcionário, um criminoso, um espião) ou até mesmo um grupo de pessoas (por exemplo, uma organização competitiva, ativistas com uma causa comum)."
+  -
+    value: "T01130"
+    text: "O atacante pode estar remoto em outro dispositivo/local ou local/interno com acesso ao mesmo dispositivo, host ou rede em que o aplicativo está sendo executado."
+  -
+    value: "T01140"
+    text: "O atacante é sempre nomeado no início de cada descrição"
+  -
+    value: "T01150"
+    text: "Um exemplo é:"
+  -
+    value: "T01160"
+    text: "O William tem controle sobre a geração de identificadores de sessão."
+  -
+    value: "T01170"
+    text: "Isso significa que o atacante (William) pode criar novos identificadores de sessão que a aplicação aceita."
+  -
+    value: "T01180"
+    text: "Os ataques foram principalmente extraídos dos requisitos de segurança listados no SCP, v2, mas depois suplementados com objetivos de verificação do OWASP® \"Application Security Verification Standard\", as histórias focadas em segurança no 'Practical Security Stories and Security Tasks for Agile Development Environments' da SAFECode, e finalmente uma revisão das cartas no EOP."
+  -
+    value: "T01190"
+    text: "Mais orientações sobre cada carta estão disponíveis no Wiki Deck online em"
+  -
+    value: "T01200"
+    text: "Referências entre os ataques e cinco recursos são fornecidas na maioria das cartas:"
+  -
+    value: "T01210"
+    text: "Requisitos no 'Secure Coding Practices (SCP) - Quick Reference Guide', v2, OWASP®, novembro de 2010 "
+  -
+    value: "T01220"
+    text: "IDs de verificação no OWASP® 'Application Security Verification Standard'."
+  -
+    value: "T01230"
+    text: "IDs de pontos de detecção de ataques em 'AppSensor', OWASP®, Agosto de 2010-2015."
+  -
+    value: "T01240"
+    text: "IDs em 'Common Attack Pattern Enumeration and Classification (CAPEC)', v2.8, Mitre Corporation, novembro de 2015."
+  -
+    value: "T01250"
+    text: "Histórias focadas em segurança em 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, julho de 2012."
+  -
+    value: "T01260"
+    text: "Uma referência significa que o ataque está incluído no item referenciado, mas não abrange necessariamente toda a sua intenção."
+  -
+    value: "T01270"
+    text: "Para dados estruturados como CAPEC, a referência mais específica é fornecida, mas às vezes uma referência cruzada é fornecida que também possui exemplos mais específicos (filhos)."
+  -
+    value: "T01280"
+    text: "Não há referências nas seis Aces e dois Jokers. "
+  -
+    value: "T01290"
+    text: "Em vez disso, essas cartas têm algumas dicas gerais em texto itálico."
+  -
+    value: "T01300"
+    text: "É possível jogar Cornucopia de muitas maneiras diferentes."
+  -
+    value: "T01301"
+    text: "Para saber como jogar, leia as páginas: 11-19."
+  -
+    value: "T01310"
+    text: "Aqui está uma maneira, demonstrada online em um vídeo em "
+  -
+    value: "T01311"
+    text: " que usa a nova ficha de pontuação/registros (maio de 2015) em "
+  -
+    value: "T01400"
+    text: "Preparações"
+  -
+    value: "T01410"
+    text: "Obtenha um baralho ou imprima seu próprio baralho de cartas Cornucopia (veja a página 2 deste documento) e separe/corte as cartas"
+  -
+    value: "T01411"
+    text: "Use as cartas neste baralho."
+  -
+    value: "T01420"
+    text: "Identifique uma aplicação ou processo de aplicação para rever; pode ser um conceito, design ou uma implementação real"
+  -
+    value: "T01430"
+    text: "Criar um diagrama de fluxo de dados, histórias de utilizador ou outros artefactos para ajudar na revisão"
+  -
+    value: "T01440"
+    text: "Identifique e convide um grupo de 3-6 arquitectos, programadores, testers e outras partes interessadas do negócio para se sentarem à volta de uma mesa (tente incluir alguém bastante familiarizado com a segurança da aplicação)"
+  -
+    value: "T01450"
+    text: "Tenha alguns prémios à mão (estrelas de ouro, chocolate, pizza, cerveja ou flores, dependendo da cultura da empresa)"
+  -
+    value: "T01500"
+    text: "Jogar"
+  -
+    value: "T01510"
+    text: "Um naipe - Cornucopia - actua como trunfo."
+  -
+    value: "T01520"
+    text: "Os ases são altos (ou seja, vencem os reis)."
+  -
+    value: "T01530"
+    text: "Ajuda se houver um não-jogador para documentar os problemas e pontuações."
+  -
+    value: "T01540"
+    text: "Remover os jokers e algumas cartas de baixa pontuação (2, 3, 4) do naipe Cornucopia para garantir que cada jogador tem o mesmo número de cartas"
+  -
+    value: "T01550"
+    text: "Embaralhar o baralho e distribuir todas as cartas"
+  -
+    value: "T01560"
+    text: "Para começar, escolher aleatoriamente um jogador que jogará a primeira carta - pode jogar qualquer carta da sua mão, exceto do naipe de trunfo - Cornucopia"
+  -
+    value: "T01570"
+    text: "Para jogar uma carta, cada jogador deve lê-la em voz alta e explicar (consulte o Wiki Deck online para dicas) como a ameaça pode aplicar-se (o jogador ganha um ponto por ataques que possam funcionar que o grupo considera um bug acionável) - não tente pensar em mitigações nesta fase e não exclua uma ameaça apenas porque acredita que já está mitigada - alguém deve anotar a carta e registar os problemas levantados"
+  -
+    value: "T01580"
+    text: "Jogar no sentido horário, cada pessoa deve jogar uma carta da mesma forma; se tiver alguma carta do naipe de liderança correspondente, deve jogar uma dessas, caso contrário, pode jogar uma carta de qualquer outro naipe. "
+  -
+    value: "T01590"
+    text: "Apenas uma carta mais alta do mesmo naipe, ou a carta mais alta no naipe de trunfo Cornucopia, vence a mão."
+  -
+    value: "T01600"
+    text: "TA pessoa que ganha a ronda, lidera a próxima ronda (ou seja, joga primeiro), e assim define o próximo naipe de liderança"
+  -
+    value: "T01610"
+    text: "Repetir até que todas as cartas tenham sido jogadas"
+  -
+    value: "T01700"
+    text: "Pontuação"
+  -
+    value: "T01710"
+    text: "O objetivo é identificar ameaças aplicáveis e ganhar mãos (rondas):"
+  -
+    value: "T01720"
+    text: "Pontuar +1 por cada carta que consiga identificar como uma ameaça válida para a aplicação em consideração"
+  -
+    value: "T01730"
+    text: "Pontuar +1 se ganhar uma ronda"
+  -
+    value: "T01740"
+    text: "Uma vez que todas as cartas tenham sido jogadas, quem tiver mais pontos ganha"
+  -
+    value: "T01800"
+    text: "Fecho"
+  -
+    value: "T01810"
+    text: "Rever todas as ameaças aplicáveis e os requisitos de segurança correspondentes"
+  -
+    value: "T01820"
+    text: "Criar histórias de utilizador, especificações e casos de teste conforme necessário para a sua metodologia de desenvolvimento."
+  -
+    value: "T01900"
+    text: "Regras alternativas do jogo"
+  -
+    value: "T01910"
+    text: "Se for novo ao jogo, remova os ases e dois jokers para começar."
+  -
+    value: "T01920"
+    text: "Adicione os jokers novamente uma vez que as pessoas se tornem mais familiares com o processo."
+  -
+    value: "T01930"
+    text: "Para além das regras do \"jogo de trunfos\" descritas acima, o baralho também pode ser jogado como o \"jogo de vinte e um\" (também conhecido como \"pontoon\" ou \"blackjack\"), que normalmente reduz o número de cartas jogadas em cada ronda."
+  -
+    value: "T01940"
+    text: "Pratique numa aplicação imaginária, ou até numa aplicação planeada no futuro, em vez de tentar encontrar falhas em aplicações existentes até que os participantes estejam felizes com a utilidade do jogo."
+  -
+    value: "T01950"
+    text: "Considere jogar apenas com um naipe para fazer uma sessão mais curta - mas tente cobrir todos os naipes para cada projeto. "
+  -
+    value: "T01960"
+    text: "Ou ainda melhor, jogue apenas uma mão com algumas cartas pré-selecionadas, e pontue apenas pela capacidade de identificar requisitos de segurança. "
+  -
+    value: "T01970"
+    text: "Talvez tenha um jogo de cada naipe a cada dia durante uma semana ou mais, se os participantes não puderem dispensar tempo suficiente para um baralho completo."
+  -
+    value: "T01980"
+    text: "Algumas equipas preferem jogar uma mão completa de cartas, e depois discutir o que está nas cartas após cada ronda (em vez de depois de cada jogador jogar uma carta)."
+  -
+    value: "T01990"
+    text: "Outra sugestão é que se um jogador não conseguir identificar que a carta é relevante, permita que outros jogadores sugiram ideias, e potencialmente deixe-os ganhar o ponto pela carta. "
+  -
+    value: "T02000"
+    text: "Considere permitir pontos extra para contribuições especialmente boas."
+  -
+    value: "T02010"
+    text: "Pode até jogar sozinho. "
+  -
+    value: "T02020"
+    text: "Basta usar as cartas como provocadores de pensamento. "
+  -
+    value: "T02030"
+    text: "Incluir mais pessoas será benéfico, no entanto."
+  -
+    value: "T02040"
+    text: "Na orientação da EoP da Microsoft, recomendam enganar como uma boa estratégia de jogo."
+  -
+    value: "T02100"
+    text: "Baralhos de cartas modificados específicos para frameworks de desenvolvimento"
+  -
+    value: "T02110"
+    text: "Pode haver controles de segurança integrados em algumas linguagens e frameworks comumente utilizados para desenvolvimento de aplicações web e móveis."
+  -
+    value: "T02120"
+    text: "Com certas provisões, é útil considerar como usar esses controles pode simplificar a identificação de requisitos adicionais – desde que, claro, os controles sejam incluídos, ativados e configurados corretamente."
+  -
+    value: "T02130"
+    text: "Considere remover cartas dos baralhos se tiver confiança de que estão abordadas pela forma como está a usar a linguagem/framework."
+  -
+    value: "T02140"
+    text: "Itens entre parênteses são 'talvez/potencialmente'."
+  -
+    value: "T02200"
+    text: "Normas de codificação internas e bibliotecas"
+  -
+    value: "T02210"
+    text: "Adicione a sua própria lista de cartas excluídas com base nas normas de codificação da sua organização (desde que sejam confirmadas por etapas de verificação apropriadas no ciclo de vida de desenvolvimento)."
+  -
+    value: "T02220"
+    text: "As suas normas de codificação e bibliotecas"
+  -
+    value: "T02230"
+    text: "Validação de Dados e Codificação"
+  -
+    value: "T02240"
+    text: "[a sua lista]"
+  -
+    value: "T02250"
+    text: "Autenticação"
+  -
+    value: "T02260"
+    text: "[a sua lista]"
+  -
+    value: "T02270"
+    text: "Gestão de Sessão"
+  -
+    value: "T02280"
+    text: "[a sua lista]"
+  -
+    value: "T02290"
+    text: "Autorização"
+  -
+    value: "T02300"
+    text: "[a sua lista]"
+  -
+    value: "T02310"
+    text: "Criptografia"
+  -
+    value: "T02320"
+    text: "[a sua lista]"
+  -
+    value: "T02330"
+    text: "Cornucopia"
+  -
+    value: "T02340"
+    text: "[a sua lista]"
+  -
+    value: "T02400"
+    text: "Baralhos de requisitos de conformidade"
+  -
+    value: "T02410"
+    text: "Criar um baralho menor, incluindo apenas cartas para um determinado requisito de conformidade."
+  -
+    value: "T02420"
+    text: "Requisito de conformidade"
+  -
+    value: "T02430"
+    text: "Validação de Dados e Codificação"
+  -
+    value: "T02440"
+    text: "[lista de conformidade]"
+  -
+    value: "T02450"
+    text: "Autenticação"
+  -
+    value: "T02460"
+    text: "[lista de conformidade]"
+  -
+    value: "T02470"
+    text: "Gestão de Sessão"
+  -
+    value: "T02480"
+    text: "[lista de conformidade]"
+  -
+    value: "T02490"
+    text: "Autorização"
+  -
+    value: "T02500"
+    text: "[lista de conformidade]"
+  -
+    value: "T02510"
+    text: "Criptografia"
+  -
+    value: "T02520"
+    text: "[lista de conformidade]"
+  -
+    value: "T02530"
+    text: "Cornucopia"
+  -
+    value: "T02540"
+    text: "[lista de conformidade]"
+  -
+    value: "T02600"
+    text: "Perguntas frequentes"
+  -
+    value: "T02610"
+    text: "1. Posso copiar ou editar o jogo?"
+  -
+    value: "T02620"
+    text: "Claro que sim."
+  -
+    value: "T02630"
+    text: "Todos os materiais da OWASP são livres para uso, desde que cumpra a licença Creative Commons Attribution-ShareAlike 3.0. "
+  -
+    value: "T02640"
+    text: "Se criar uma nova versão, talvez considere doá-la ao Projeto OWASP® Cornucopia?"
+  -
+    value: "T02650"
+    text: "2. Como posso envolver-me?"
+  -
+    value: "T02660"
+    text: "Por favor, envie ideias ou ofertas de ajuda para a lista de e-mails do projeto."
+  -
+    value: "T02670"
+    text: "3. Como foram escolhidos os nomes dos atacantes?"
+  -
+    value: "T02680"
+    text: "Cada descrição no EoP começa com palavras como 'Um atacante pode...'. "
+  -
+    value: "T02690"
+    text: "Estas têm de ser expressas como um ataque, mas não gostava de usar terminologia anónima, querendo algo mais envolvente, e por isso usei nomes pessoais. "
+  -
+    value: "T02700"
+    text: "TEstes nomes podem representar pessoas externas ou internas, ou apelidos para sistemas informáticos. Em vez de nomes aleatórios, pensei em refletir o aspeto comunitário da OWASP. "
+  -
+    value: "T02710"
+    text: "Portanto, além de 'Alice e Bob', utilizei os primeiros nomes de atuais e antigos funcionários da OWASP e membros do Conselho (sem ordem específica), e selecionei aleatoriamente os restantes 50 ou mais nomes da lista atual de membros pagantes individuais da OWASP. "
+  -
+    value: "T02720"
+    text: "Nenhum nome foi utilizado mais do que uma vez, e onde as pessoas tinham dois nomes próprios, removi um para tentar garantir que ninguém seja facilmente identificado. "
+  -
+    value: "T02730"
+    text: "Os nomes não foram atribuídos deliberadamente a qualquer ataque, defesa ou requisito em particular. A mistura cultural e de género reflete simplesmente as fontes dos nomes e não pretende ser representativa do mundo."
+  -
+    value: "T02740"
+    text: "Na versão 1.20, o nome no VE-10 foi alterado para refletir o novo co-líder do projeto - este é a única carta com dois nomes no ataque."
+  -
+    value: "T02750"
+    text: "4. Por que não há imagens nas faces das cartas?"
+  -
+    value: "T02760"
+    text: "Há bastante texto nos cartões, e as referências cruzadas também ocupam espaço."
+  -
+    value: "T02770"
+    text: "Mas seria ótimo incluir elementos de design adicionais."
+  -
+    value: "T02790"
+    text: "5. Os ataques estão classificados pelo número na carta?"
+  -
+    value: "T02800"
+    text: "Apenas aproximadamente."
+  -
+    value: "T02810"
+    text: "O risco depende da aplicação e da organização, devido a diferentes requisitos de segurança e conformidade, por isso a sua própria classificação de gravidade pode colocar as cartas em outra ordem além dos números nas cartas."
+  -
+    value: "T02820"
+    text: "6. Quanto tempo leva para jogar uma ronda com o baralho completo?"
+  -
+    value: "T02830"
+    text: "TDepende do escopo da aplicação, da quantidade de discussão e do quão familiar os jogadores estão com os conceitos de segurança de aplicações."
+  -
+    value: "T02840"
+    text: "Mas, talvez, considere 1,5 a 2,0 horas para 4-6 pessoas."
+  -
+    value: "T02850"
+    text: "7. Que tipo de pessoas deve jogar o jogo?"
+  -
+    value: "T02860"
+    text: "Tente sempre ter uma mistura de funções que possam contribuir com diferentes perspetivas."
+  -
+    value: "T02870"
+    text: "Mas inclua alguém que tenha um conhecimento razoável da terminologia de vulnerabilidades de aplicações. "
+  -
+    value: "T02880"
+    text: "Caso contrário, tente incluir uma mistura de arquitetos, desenvolvedores, testadores e um gestor de projeto ou proprietário de negócio relevante."
+  -
+    value: "T02890"
+    text: "8. Quem deve tomar notas e registar os pontos?"
+  -
+    value: "T02900"
+    text: "É melhor que outra pessoa, que não esteja a jogar, tome notas sobre os requisitos identificados e questões discutidas."
+  -
+    value: "T02910"
+    text: "Isto pode servir como formação para um desenvolvedor mais júnior, ou ser feito pelo gestor de projeto."
+  -
+    value: "T02920"
+    text: "Algumas organizações fizeram gravações para rever posteriormente quando os requisitos são formalmente escritos."
+  -
+    value: "T02930"
+    text: "9. Devemos sempre usar o baralho completo de cartas?"
+  -
+    value: "T02940"
+    text: "Não. "
+  -
+    value: "T02950"
+    text: "Um baralho menor é mais rápido de jogar. "
+  -
+    value: "T02960"
+    text: "Comece o primeiro jogo com apenas cartas suficientes para duas ou três rondas. "
+  -
+    value: "T02970"
+    text: "Considere sempre remover cartas que não são apropriadas para a aplicação ou função a ser revista."
+  -
+    value: "T02980"
+    text: "Nas primeiras vezes que as pessoas jogam o jogo, também costuma ser melhor remover os ases e os dois jokers."
+  -
+    value: "T02990"
+    text: "Nas primeiras vezes que as pessoas jogam o jogo, também costuma ser melhor remover os ases e os dois jokers."
+  -
+    value: "T03000"
+    text: "10. O que os jogadores devem fazer quando têm uma carta Ás que diz 'inventou um novo ataque X'?"
+  -
+    value: "T03010"
+    text: "O jogador pode inventar qualquer ataque que considere válido, mas deve corresponder ao naipe da carta (por exemplo, Validação e Codificação)."
+  -
+    value: "T03020"
+    text: "Com jogadores novos no jogo, pode ser melhor remover estas cartas para começar (ver também FAQ 9)."
+  -
+    value: "T03060"
+    text: "11. A minha empresa quer imprimir a sua própria versão do OWASP® Cornucopia - que licença precisamos de consultar?"
+  -
+    value: "T03070"
+    text: "Consulte a resposta completa a esta pergunta nas páginas do projeto em"
+  -
+    value: "T03100"
+    text: "Registo de Alterações"
+  -
+    value: "T03110"
+    text: "Versão / Data"
+  -
+    value: "T03120"
+    text: "Comentários"
+  -
+    value: "T03130"
+    text: "0.1"
+  -
+    value: "T03140"
+    text: "Rascunho Original"
+  -
+    value: "T03150"
+    text: "0.2"
+  -
+    value: "T03160"
+    text: "Rascunho revisto e atualizado"
+  -
+    value: "T03170"
+    text: "0.3"
+  -
+    value: "T03180"
+    text: "Rascunho anunciado na lista de emails OWASP® SCP para comentários."
+  -
+    value: "T03190"
+    text: "0.4"
+  -
+    value: "T03200"
+    text: "Regras de jogo atualizadas com base no feedback durante workshops. "
+  -
+    value: "T03210"
+    text: "Adicionada referência ao Suplemento de Informação PCI SSC: Diretrizes PCI DSS para E-commerce. "
+  -
+    value: "T03220"
+    text: "Texto descritivo expandido e atualizado."
+  -
+    value: "T03230"
+    text: "Adicionada seção de colaboradores, numeração de páginas, FAQs e registo de alterações."
+  -
+    value: "T03240"
+    text: "1"
+  -
+    value: "T03250"
+    text: "Lançamento."
+  -
+    value: "T03260"
+    text: "1.01"
+  -
+    value: "T03270"
+    text: "Discussão sobre baralho específico para frameworks adicionada."
+  -
+    value: "T03280"
+    text: "FAQs adicionais criados. "
+  -
+    value: "T03290"
+    text: "Texto descritivo atualizado. "
+  -
+    value: "T03300"
+    text: "Nova imagem de capa e imagem anterior movida para o verso. "
+  -
+    value: "T03310"
+    text: "Adicionadas linhas de corte."
+  -
+    value: "T03320"
+    text: "FAQs 5 e 6 adicionados."
+  -
+    value: "T03330"
+    text: "Descrições de ataques nas cartas com fundos coloridos alteradas para preto (de cinza escuro). "
+  -
+    value: "T03340"
+    text: "Colaboradores do projeto adicionados."
+  -
+    value: "T03350"
+    text: "1.02"
+  -
+    value: "T03360"
+    text: "Aviso sobre o tempo de impressão adicionado. "
+  -
+    value: "T03370"
+    text: "Regras alternativas de jogo adicionais incluídas (vinte e um, jogar um baralho por uma semana, jogar a mão inteira e depois discutir). "
+  -
+    value: "T03380"
+    text: "Conceito de baralho de conformidade adicionado. "
+  -
+    value: "T03390"
+    text: "FAQs 5 e 6 adicionados."
+  -
+    value: "T03400"
+    text: "Descrições de ataques nas cartas com fundos coloridos alteradas para preto (de cinza escuro). "
+  -
+    value: "T03410"
+    text: "Colaboradores do projeto adicionados."
+  -
+    value: "T03420"
+    text: "1.03"
+  -
+    value: "T03430"
+    text: "Pequenas alterações na formulação de ataques em duas cartas. "
+  -
+    value: "T03440"
+    text: "Referências cruzadas para OWASP® SCP e ASVS verificadas e atualizadas. "
+  -
+    value: "T03450"
+    text: "Letras de código adicionadas para os naipes. "
+  -
+    value: "T03460"
+    text: "Todas as descrições restantes de ataques nas cartas alteradas para preto (de cinza escuro) e cores de fundo ajustadas para aumentar o contraste e melhorar a legibilidade."
+  -
+    value: "T03470"
+    text: "1.04"
+  -
+    value: "T03480"
+    text: "Texto 'mudança de senha, mudança de senha,' corrigido para 'mudança de senha, recuperação de senha,' na carta Rainha de Autenticação. "
+  -
+    value: "T03490"
+    text: "1.05"
+  -
+    value: "T03500"
+    text: "Atualizações nas regras alternativas de jogo. "
+  -
+    value: "T03510"
+    text: "FAQs adicionais criados. "
+  -
+    value: "T03520"
+    text: "Colaboradores atualizados. "
+  -
+    value: "T03530"
+    text: "Links para podcasts e vídeos adicionados."
+  -
+    value: "T03540"
+    text: "1.1"
+  -
+    value: "T03550"
+    text: "Data do registo de alterações corrigida para v1.05. Referências cruzadas atualizadas para a versão 2014 do ASVS. "
+  -
+    value: "T03560"
+    text: "Colaboradores atualizados."
+  -
+    value: "T03570"
+    text: "Pequenas alterações de texto nas cartas para melhorar a legibilidade."
+  -
+    value: "T03580"
+    text: "1.2"
+  -
+    value: "T03590"
+    text: "Vídeo mencionado/link"
+  -
+    value: "T03600"
+    text: "Folha de pontuação separada mencionada/link."
+  -
+    value: "T03610"
+    text: "Páginas de folha de pontuação anteriores embutidas removidas"
+  -
+    value: "T03620"
+    text: "Correção (identificada por Tom Brennan) e adição ao texto na carta 8 de Autenticação. "
+  -
+    value: "T03630"
+    text: "texto na carta de Autenticação. "
+  -
+    value: "T03640"
+    text: "Oana Cornea e outros participantes da cimeira do projeto AppSec EU 2015 adicionados à lista de colaboradores. "
+  -
+    value: "T03650"
+    text: "Darío De Filippis adicionado como co-líder do projeto. "
+  -
+    value: "T03660"
+    text: "Link para Wiki Deck adicionado."
+  -
+    value: "T03670"
+    text: "Referências cruzadas atualizadas para ASVS v3.0.1 e CAPEC v2.8. Pequenas alterações de texto em algumas cartas. "
+  -
+    value: "T03680"
+    text: "Adicionado '-EN' ao número da versão em preparação para a versão '-ES'."
+  -
+    value: "T03690"
+    text: "Susana Romaniz adicionada como colaboradora na tradução para espanhol."
+  -
+    value: "T03700"
+    text: "Pequenas alterações de texto nas instruções e FAQs."
+  -
+    value: "T03710"
+    text: "2.0"
+  -
+    value: "T03720"
+    text: "Referências cruzadas atualizadas de ASVS v3.0.1 para ASVS v4.0 por Johan Sydseter. "
+  -
+    value: "T03800"
+    text: "Colaboradores do projeto"
+  -
+    value: "T03810"
+    text: "Todos os projetos OWASP dependem dos esforços voluntários de pessoas nos setores de desenvolvimento de software e segurança da informação. "
+  -
+    value: "T03820"
+    text: "Contribuíram com seu tempo e energia para fazer sugestões, fornecer feedback, escrever, revisar e editar documentação, dar incentivo, testar o jogo e promover o conceito. "
+  -
+    value: "T03830"
+    text: "Sem todos os seus esforços, o projeto não teria progredido até este ponto. "
+  -
+    value: "T03840"
+    text: "Por favor, contacte diretamente a lista de emails ou os líderes do projeto, caso alguém esteja em falta nas listas em baixo."
+  -
+    value: "T03850"
+    text: "Os dedicados colaboradores da OWASP."
+  -
+    value: "T03860"
+    text: "Participantes nas reuniões dos capítulos OWASP® em Londres, Manchester, Países Baixos e Escócia, e no meetup de Gamificação em Londres, que fizeram sugestões úteis e colocaram questões desafiadoras."
+  -
+    value: "T03870"
+    text: "Blackfoot UK Limited por oferecer ficheiros de design prontos para impressão e centenas de baralhos de cartas impressos profissionalmente para distribuição por correio e nas reuniões dos capítulos OWASP."
+  -
+    value: "T03880"
+    text: "OWASP® NYC por criar o design da caixa da OWASP e distribuir baralhos no AppSec USA 2014."
+  -
+    value: "T03900"
+    text: "Podcasts e vídeos"
+  -
+    value: "T03910"
+    text: "Os seguintes recursos de suporte para o OWASP® Cornucopia estão disponíveis online:"
+  -
+    value: "T03920"
+    text: "Vídeo - Usando as cartas, criado durante a cimeira do projeto AppSec EU 2015, 20 de maio de 2015"
+  -
+    value: "T03930"
+    text: "Entrevista em podcast, canal OWASP® 24/7 Podcast, 21 de março de 2014"
+  -
+    value: "T03940"
+    text: " Vídeo da apresentação, OWASP® EU Tour 2013 Londres, 3 de junho de 2013"
+  -
+    value: "T03950"
+    text: "Consulte o site do projeto para mais informações e materiais de apresentação."
