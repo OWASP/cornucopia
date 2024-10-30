@@ -26,7 +26,7 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-br", "hu", "it"]
+    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
@@ -292,7 +292,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `it`] "
+            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-pt`, `pt-br`, `it`] "
             "you can also specify your own language file. If so, there needs to be a yaml "
             "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
         ),

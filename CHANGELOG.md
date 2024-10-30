@@ -40,3 +40,7 @@ Add testing.
 
  - Adding the italian translation
  - Fixing the card codes ensuring they are in line with the documentation.
+
+## Changes & Updates
+### 2024-10-30
+ - Adding the portuguese pt-pt translation
