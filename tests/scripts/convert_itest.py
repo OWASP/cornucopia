@@ -2,14 +2,7 @@ import unittest
 from unittest.mock import patch
 import argparse
 import os
-import platform
-import sys
-import docx  # type: ignore
 import logging
-import glob
-import shutil
-import typing
-from typing import List, Dict, Any, Tuple
 
 import scripts.convert as c
 
