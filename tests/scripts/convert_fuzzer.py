@@ -199,8 +199,9 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-    except Exception:
+    except Exception as e:
         c.convert_vars.BASE_PATH = b
+        print(e)
         print(f"{l6}")
         raise Exception("Convert main died!")
     test.assertTrue(True)
