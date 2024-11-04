@@ -203,7 +203,7 @@ def test_main(data):
         c.convert_vars.BASE_PATH = b
         print(e)
         print(f"{l6}")
-        if not "no logs of level" in e:
+        if "no logs of level" not in e:
             raise Exception("Convert main died!")
     test.assertTrue(True)
     c.convert_vars.BASE_PATH = b
