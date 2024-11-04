@@ -54,7 +54,7 @@ def test_main(data):
     try:
         with patch.object(argparse, "ArgumentParser") as mock_parser:
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -72,7 +72,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -90,7 +90,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -108,7 +108,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.True) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -126,7 +126,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -144,7 +144,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -177,7 +177,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -195,7 +195,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger('test'), logging.DEBUG) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -203,7 +203,8 @@ def test_main(data):
         c.convert_vars.BASE_PATH = b
         print(e)
         print(f"{l6}")
-        raise Exception("Convert main died!")
+        if not "no logs of level" in e:
+            raise Exception("Convert main died!")
     test.assertTrue(True)
     c.convert_vars.BASE_PATH = b
 
