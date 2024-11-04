@@ -201,7 +201,7 @@ def main() -> None:
     convert_vars.args = parse_arguments(sys.argv[1:])
     set_logging()
     logging.debug(" --- args = %s", str(convert_vars.args))
-    
+
     set_can_convert_to_pdf()
     if convert_vars.args.pdf and not convert_vars.can_convert_to_pdf and not convert_vars.args.debug:
         logging.error(
