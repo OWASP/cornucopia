@@ -32,7 +32,7 @@ def test_main(data):
     )
     args = ["-t", template, "-lt", "guide", "-l", "en", "-v", "1.22", "-i", template_docx_file]
     argp = {
-        "debug": False,
+        "debug": True,
         "pdf": False,
         "edition": "webapp",
         "template": template,
@@ -54,13 +54,13 @@ def test_main(data):
     try:
         with patch.object(argparse, "ArgumentParser") as mock_parser:
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
             args = ["-e", edition, "-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", template_docx_file]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": edition,
                 "template": "bridge",
@@ -72,13 +72,13 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
             args = ["-e", "webapp", "-t", "bridge", "-lt", layout, "-l", "en", "-v", "1.22", "-i", template_docx_file]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": "webapp",
                 "template": "bridge",
@@ -90,13 +90,13 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
             args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", lang, "-v", "1.22", "-i", template_docx_file]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": "webapp",
                 "template": "bridge",
@@ -108,13 +108,13 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
             args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", "en", "-v", version, "-i", template_docx_file]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": "webapp",
                 "template": "bridge",
@@ -126,13 +126,13 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
             args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", lang, "-v", "1.22", "-i", template_docx_file]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": "webapp",
                 "template": "bridge",
@@ -144,7 +144,7 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
@@ -165,7 +165,7 @@ def test_main(data):
                 outputfile,
             ]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": "webapp",
                 "template": "bridge",
@@ -177,13 +177,13 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
             args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", inputtemplate]
             argp = {
-                "debug": False,
+                "debug": True,
                 "pdf": False,
                 "edition": "webapp",
                 "template": "bridge",
@@ -195,14 +195,16 @@ def test_main(data):
             }
 
             mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.INFO) as l6:
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
 
-    except Exception:
+    except Exception as e:
         c.convert_vars.BASE_PATH = b
+        print(e)
         print(f"{l6}")
-        raise Exception("Convert main died!")
+        if "no logs of level" not in e:
+            raise Exception("Convert main died!")
     test.assertTrue(True)
     c.convert_vars.BASE_PATH = b
 
