@@ -639,7 +639,6 @@
             "version": "==8.1.7"
         },
         "coverage": {
-            "extras": [],
             "hashes": [
                 "sha256:00a1d69c112ff5149cabe60d2e2ee948752c975d95f1e1096742e6077affd376",
                 "sha256:023bf8ee3ec6d35af9c1c6ccc1d18fa69afa1cb29eaac57cb064dbb262a517f9",
