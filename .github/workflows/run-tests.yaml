@@ -19,7 +19,7 @@ jobs:
       - name: Get Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
         with:
-          python-version: '3.13'
+          python-version: '3.11'
           cache: 'pipenv' # caching pip dependencies
       - name: Install dependencies
         run: |
@@ -44,5 +44,3 @@ jobs:
         run: pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
       - name: Check formatting of files for correct spelling and namespace names
         run: pipenv run mypy --namespace-packages --strict ./scripts/
-  
-    

@@ -24,7 +24,7 @@
           - name: Get Python
             uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
             with:
-              python-version: '3.13'
+              python-version: '3.11'
               cache: 'pipenv' # caching pip dependencies
           - name: Install dependencies
             run: |
@@ -46,7 +46,7 @@
           - name: Test & publish code coverage
             uses: paambaati/codeclimate-action@f429536ee076d758a24705203199548125a28ca7 # v9.0.0
             env:
-              CC_TEST_REPORTER_ID: 7482a81acb1b6de49fa6fd2769a014bb9ae8bee408161c23d400b2ac9e95b7cf          
+              CC_TEST_REPORTER_ID: 7482a81acb1b6de49fa6fd2769a014bb9ae8bee408161c23d400b2ac9e95b7cf
           - name: Generate new output files
             run: |
               #
