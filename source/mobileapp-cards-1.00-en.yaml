@@ -28,7 +28,7 @@ suits:
   -
     id: "PC6"
     value: "6"
-    desc: "Dawn can expose and intercept sensitive functionality through interprocess communication because permissions for broadcast and sharing are not set, not narrow enough or appropriately excluded when sharing"
+    desc: "Dawn can expose and intercept sensitive functionality through interprocess communication because permissions for broadcast and sharing are not set, not narrow enough or because sensitive functionality aren't appropriately excluded when sharing"
   -
     id: "PC7"
     value: "7"
