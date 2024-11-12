@@ -1,4 +1,4 @@
-### Scenario: Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background
+### Scenario: Jie can use the app to do sensitive operations because the “unlocked key” is not used during the application flow
 
 ### Example:
 
