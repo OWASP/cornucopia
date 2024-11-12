@@ -207,11 +207,11 @@ suits:
   -
     id: "RS8"
     value: "8"
-    desc: "Carlos can reverse engineer the app because the prevention against the use of anti reverse engineering tools are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Carlos can reverse engineer the app because the anti-reverse engineering controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "RS9"
     value: "9"
-    desc: "Sean can reverse engineer the app because the code obfuscation is not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Sean can reverse engineer the app because the code obfuscation isn't strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "RSX"
     value: "10"
@@ -219,7 +219,7 @@ suits:
   -
     id: "RSJ"
     value: "J"
-    desc: "Pekka can compromise the integrity of the storage because the file integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Pekka can compromise the integrity of the storage because the file integrity checks aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "RSQ"
     value: "Q"
