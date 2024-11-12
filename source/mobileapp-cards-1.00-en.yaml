@@ -231,7 +231,7 @@ suits:
   -
     id: "RSA"
     value: "A"
-    desc: "You have invented a new attack against Authorization"
+    desc: "You have invented a new attack against “Resilience”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Tampering and Reverse Engineering” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
   id: "CRM"
