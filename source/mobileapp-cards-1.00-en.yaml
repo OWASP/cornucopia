@@ -73,7 +73,7 @@ suits:
   -
     id: "AA3"
     value: "3"
-    desc: "Choi can access capabilities, objects, resources, or properties they should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
+    desc: "Choi can access capabilities, objects, resources, or properties he should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
   -
     id: "AA4"
     value: "4"
