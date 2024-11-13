@@ -1,4 +1,4 @@
-FROM python:alpine3.20@sha256:d2423444f204ba18e683b8bc2538f27c8033fdd9dd918540db2acc4aa8d3cb43 AS pipenv
+FROM python:alpine3.20@sha256:ee60f1fbb72e1844edce9ea169e0342b477822a3b5ec7a32637803bdca5c7362 AS pipenv
 RUN apk add --no-cache shadow
 # UID of current user who runs the build
 ARG user_id
