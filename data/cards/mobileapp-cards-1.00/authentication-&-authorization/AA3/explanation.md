@@ -1,6 +1,6 @@
 ### Scenario: Choi and Vandana's online romantic permission entanglement. 
  
-Consider a scenario where Vandana installs an app recommended by Choi, an online flirt that she trusts intimately. Given that the app is malicious, it can exploit other apps components if these apps share components with entitlements or permissions set to loosely. 
+Consider a scenario where Vandana installs an app recommended by Choi, an online flirt that she trusts intimately. Given that the app is malicious, it can exploit other apps components if these apps share components with entitlements or permissions set to loosely. It is not up to us to lecture Vandana on the dangers of online honeytrap scams, but we should do our best to minimise the damage in case it happens.
  
 ### Example: 
  
