@@ -291,7 +291,7 @@ suits:
     desc: "You have invented a new attack against “Cryptography”"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Cryptography” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
-  id: "CO"
+  id: "COM"
   name: "Cornucopia"
   cards:
   -
