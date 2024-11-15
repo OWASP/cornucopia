@@ -353,13 +353,13 @@ suits:
   cards:
   -
     id: "JOAM"
-    value: "Joker A"
+    value: "A"
     card: "Joker"
     desc: "Starr can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates"
     misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
   -
     id: "JOBM"
-    value: "Joker B"
+    value: "B"
     card: "Joker"
     desc: "Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification"
     misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"

@@ -353,13 +353,13 @@ suits:
   cards:
   -
     id: "JOA"
-    value: "Joker A"
+    value: "A"
     card: "Jolly"
     desc: "Alice può utilizzare l'applicazione per attaccare i sistemi e i dati degli utenti"
     misc: "Hai pensato a diventare un membro di OWASP? Tutti gli strumenti, la guida e gli incontri locali sono gratuiti per tutti, ma l'iscrizione individuale aiuta a sostenere il lavoro di OWASP"
   -
     id: "JOB"
-    value: "Joker B"
+    value: "B"
     card: "Jolly"
     desc: "Bob può influenzare, alterare o impattare l'applicazione in modo che non sia più conforme ai requisiti legali, normativi, contrattuali o ad altri obblighi organizzativi"
     misc: "Esamina le vulnerabilità e scopri come possono essere risolte utilizzando gratuitamente l'OWASP® Juice Shop, Security Shepherd, o utilizzando liberamente le sfide online dell'OWASP® Hackinglab"
