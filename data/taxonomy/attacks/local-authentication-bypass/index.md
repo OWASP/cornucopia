@@ -23,4 +23,4 @@ The Norton App Lock prior to version 1.3.0.13 was susceptible to an authenticati
 
 ## Cards
 ### Authentication & Authorization
-- [Authentication & Authorization 2](/authentication-authorization/AA2)
+- [Authentication & Authorization 2](/authentication-&-authorization/AA2)

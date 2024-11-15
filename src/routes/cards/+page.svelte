@@ -8,7 +8,7 @@
     let card : string;
     let suit : string;
     let currentCard : Card = data.cards[0];
-    let mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.card);
+    let mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.id);
 
     let map : Map<string,boolean> = new Map();
     for(let i = 0 ; i < data.suits.length ; i++)
@@ -27,14 +27,14 @@
     {
         suit = suitParam;
         card = cardParam;
-        currentCard = data.cards.find(card => card.suit == suitParam && card.card == cardParam) ?? {} as Card
-        mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.card);
+        currentCard = data.cards.find(card => card.suit == suitParam && card.id == cardParam) ?? {} as Card
+        mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.id);
     }
 </script>
 
 {#each data.suits as suit}
     {#each suit.cards as card}
-        <p><a style="display:none;" href="{card.url}">{suit.name} {card.card}</a></p>
+        <p><a style="display:none;" href="{card.url}">{suit.name} {card.id}</a></p>
     {/each}
 {/each}
 
@@ -46,8 +46,8 @@
             <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name)}</h2>
             {#if map.get(suit.name)}
                 {#each suit.cards as card}
-                    <p on:mouseenter={()=>{enter(suit.name,card.card)}}>
-                        <a href="{card.url}">├── {card.card}</a>
+                    <p on:mouseenter={()=>{enter(suit.name,card.id)}}>
+                        <a href="{card.url}">├── {card.id}</a>
                     </p>
                 {/each}
             {/if}
@@ -60,8 +60,8 @@
             <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name)}</h2>
             {#if map.get(suit.name)}
                 {#each suit.cards as card}
-                    <p on:mouseenter={()=>{enter(suit.name,card.card)}}>
-                        <a href="{card.url}">├── {card.card}</a>
+                    <p on:mouseenter={()=>{enter(suit.name,card.id)}}>
+                        <a href="{card.url}">├── {card.id}</a>
                     </p>
                 {/each}
             {/if}

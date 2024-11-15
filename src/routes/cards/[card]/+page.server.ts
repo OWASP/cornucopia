@@ -6,11 +6,15 @@ import { CardController } from "../../../domain/card/cardController";
 import type { PageServerLoad } from "./$types";
 
 export const load = (({ params }) => {
+  let deck = new DeckService(request).getCards('webapp', 'en');
+  
+  let cardController = new CardController(deck, 'webapp', '2.00');
+  let cardsFlat = cardController.getCardsFlat();
+  let card = cardController.getCardById(String(params.card).toUpperCase());
   return {
-    card: (new CardController((new DeckService(request)).getCards('webapp', 'en'))).getCardById(String(params.card).toUpperCase()),
-    cards: (new CardController((new DeckService(request)).getCards('webapp', 'en'))).getCardsFlat(),
+    cards: cardsFlat,
+    card: card,
     ASVSRoutes: FileSystemHelper.ASVSRouteMap(),
-    cardData: (new DeckService(request)).getCards('webapp', 'en'),
     mappingData: (new DeckService(request)).getCardMapping('webapp')
   };
 }) satisfies PageServerLoad;

@@ -25,4 +25,4 @@ In 2019 the Google and Samsung Camera app was identified as vulnerable to the "C
 
 ## Cards
 ### Authentication & Authorization
-- [Authentication & Authorization 3](/authentication-authorization/AA3)
+- [Authentication & Authorization 3](/authentication-&-authorization/AA3)

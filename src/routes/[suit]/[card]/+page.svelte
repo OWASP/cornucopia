@@ -16,14 +16,14 @@
       "SMA","SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMJ","SMQ","SMK",
       "VEA","VE2","VE3","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
       "JOA","JOB","CORNUCOPIA"]
-    let suits_options = ["data-validation-&-encoding","authentication","session-management","authorization","cryptography","cornucopia","wild-card","explanation"]
-    return (cards_options.includes(String(cardObject.card).toUpperCase()) && suits_options.includes(cardObject.suit.toLowerCase()))
+    let suits_options = ["platform-&-code", "authentication-&-authorization", "network-&-storage", "resilience", "data-validation-&-encoding","authentication","session-management","authorization","cryptography","cornucopia","wild-card","about"]
+    return (cards_options.includes(String(cardObject.id).toUpperCase()) && suits_options.includes(cardObject.suit.toLowerCase()))
   }
 </script>
 
 <p><a href="/cards">Back to overview</a></p>
 {#if cardFound()}
-  <CardFound ASVSRoutes={data.ASVSRoutes} cards={data.cards} card={data.card} cardData={data.cardData}  mappingData={data.mappingData} />
+  <CardFound ASVSRoutes={data.ASVSRoutes} cards={data.cards} card={data.card}  mappingData={data.mappingData} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}

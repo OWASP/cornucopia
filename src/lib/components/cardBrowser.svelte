@@ -4,7 +4,6 @@
     import { browser } from "$app/environment";
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
-    export let cardData;
     export let card : Card;
     export let cards : Card[];
     export let mappingData : any;
@@ -26,8 +25,12 @@
 
     function getCurrentIndex(card : Card)
     {
+
         // cards are equal when both their suit and card value (e.g. authentication 4) are equal.
-        return cards.map(card => card.suit + String(card.card).toUpperCase()).indexOf(card.suit + String(card.card).toUpperCase());
+        return cards.map(card => {
+            return card.suit + String(card.id).toUpperCase();
+
+        }).indexOf(card.suit + String(card.id).toUpperCase());
     }
 
 
@@ -40,7 +43,7 @@
             index = cards.length - 1;
 
         let previousCard = cards[index];
-        return '/' + previousCard.suit + '/' + previousCard.card + '/#card';    
+        return '/' + previousCard.suit + '/' + previousCard.id + '/#card';    
     }
 
     function getNext(card : Card)
@@ -49,7 +52,7 @@
         index += 1;
         index = index % cards.length;
         let nextCard = cards[index];
-        return '/' + nextCard.suit + '/' + nextCard.card + '/#card';
+        return '/' + nextCard.suit + '/' + nextCard.id + '/#card';
     }
 
     onDestroy(()=> {if(browser)document.onkeydown = null})
@@ -63,7 +66,7 @@
         <a href={getPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
     </div>
     <div class="center">
-        <CardPreview card={card} cardData={cardData} mapping={mappingData}></CardPreview>
+        <CardPreview card={card} mapping={mappingData}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
         <a href={getNext(card)} class="arrow" title="View next card">{">"}</a>

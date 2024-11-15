@@ -11,7 +11,6 @@
   import type { Route } from "../../domain/routes/route";
   import { CardController } from "../../domain/card/cardController";
     import { MappingController, type Mapping } from "../../domain/mapping/mappingController";
-  export let cardData;
   export let mappingData;
   export let card: Card;
   export let cards: Card[];
@@ -42,26 +41,21 @@
     return "https://capec.mitre.org/data/definitions/" + input + ".html";
   }
   let title: string = "";
-  let mappings: Mapping | undefined = controller.getCardMappings(card.card);
-  let attacks: Attack[] = GetCardAttacks(card.card);
+  let mappings: Mapping | undefined = controller.getCardMappings(card.id);
+  let attacks: Attack[] = GetCardAttacks(card.id);
 
   $: {
-    title =
-      card.suitName || 'Explanation' +
-      " (" +
-      card.card +
-      ") ";
-    mappings = controller.getCardMappings(card.card);
-    attacks = GetCardAttacks(card.card);
+    mappings = controller.getCardMappings(card.id);
+    attacks = GetCardAttacks(card.id);
   }
 </script>
 
 <div class="container">
-  <h1 class="title">{title}</h1>
-  <Summary {card}></Summary>
-  <CardBrowser {card} {cards} cardData={cardData} mappingData={mappings}></CardBrowser>
+  <h1 class="title">{card.name}</h1>
+  <p>{card.desc}</p>
+  <CardBrowser {card} {cards} mappingData={mappings}></CardBrowser>
   <a class="link" href="/how-to-play">How to play?</a>
-  <p>{(new CardController(cardData)).getCardDescription(card.suit, String(card.card).toUpperCase())}</p>
+  <Summary {card}></Summary>
   {#if mappings}
     <h1 class="title">Mappings</h1>
     <MappingsList
@@ -92,7 +86,7 @@
   {/each}
 
     {#key card}
-        <Utterances name={card.suit + '-' + String(card.card).toUpperCase()}></Utterances>
+        <Utterances name={card.suit + '-' + String(card.id).toUpperCase()}></Utterances>
         <ViewSourceOnGithub path="{card.githubUrl}"></ViewSourceOnGithub>
     {/key}
 </div>

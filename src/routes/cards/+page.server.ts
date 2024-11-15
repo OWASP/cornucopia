@@ -4,10 +4,11 @@ import { CardController } from '../../domain/card/cardController';
 import { SuitController } from '../../domain/suit/suitController';
  
 export const load = (({ params }) => {
+  let deck = new DeckService(request).getCards('webapp', 'en');
   return {
-    suits : (new SuitController((new DeckService(request)).getCards('webapp', 'en'))).getSuits(),
-    cards : (new CardController((new DeckService(request)).getCards('webapp', 'en'))).getCardsFlat(),
-    cardData: (new DeckService(request)).getCards('webapp', 'en'),
+    suits : (new SuitController(deck, 'webapp', '2.00')).getSuits(),
+    cards : (new CardController(deck, 'webapp', '2.00')).getCardsFlat(),
+    cardData: deck,
     mappingData: (new DeckService(request)).getCardMapping('webapp')
   };
 });

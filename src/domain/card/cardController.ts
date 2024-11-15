@@ -8,102 +8,20 @@ import type { Suit } from '../suit/suit';
 
 export class CardController {
 
-    private data: any;
+    private data: Card[];
+    private edition: string;
+    private version: string;
 
-    constructor(data: any) {
+    constructor(data: Card[], edition:string, version:string) {
         this.data = data;
-    }
-
-    public getCardBySuitAndName(suit : string, card : string) : Card
-    {
-        let base : string = './data/cards/webapp-cards-2.00/';
-        let path : string = base + suit + '/' + (card.length == 1 ? card : card) + '/technical-note.md'// '/explanation.md';
-        let file = fs.readFileSync(path, 'utf8');
-        let parsed = fm(file);
-
-        let cardObject = {} as Card;
-        cardObject.summary = parsed.body;
-        cardObject.suit = suit;
-        cardObject.suitName = (new SuitController(this.data)).getSuitNameByCardId(card);
-        cardObject.card = card;
-        cardObject.cardName = CardController.getCardNameById(card);
-        cardObject.url = '/' + suit + '/' + card;
-        cardObject.githubUrl = 'data/cards/webapp-cards-2.00/' + suit + '/' + card;
-
-        return cardObject;
-    }
-
-    public static getCardNameById(id : string) : string
-    {
-        // Given the card id (e.g. AZ1, SMQ) return the card value (e.g. 1, Q) by stripping out the following parts:
-        return id
-            .replace('CORNUCOPIA','Explanation')
-            .replace('CR','')
-            .replace('C','')
-            .replace('JO','')
-            .replace('VE','')
-            .replace('AT','')
-            .replace('SM','')
-            .replace('AZ','')
-    }
-
-    public getCard(suit : string, card : string) : Card | undefined
-    {
-        suit = CardController.parseSuit(suit);
-
-        for(let i = 0 ; i < this.data.suits.length ; i++)
-        {
-            if(this.data.suits[i].name.toLowerCase() == suit.toLowerCase())
-            {
-                for(let j = 0 ; j < this.data.suits[i].cards.length ; j++)
-                {
-                    if(this.data.suits[i].cards[j].id == card)
-                    {
-                        return this.data.suits[i].cards[j] as Card;
-                    }
-                }
-            }
-        }
-    }
-
-    private static parseSuit(suit : string) : string
-    {
-        suit = suit.replaceAll("-" , " ");
-        return suit;
-
-    }
-
-    public getCardDescription(suit : string , card : string) : string
-    {
-        let thisCard : Card | undefined = this.getCard(suit,card);
-        if(!thisCard)
-            return "";
-
-        return thisCard.desc
-    }
-
-    public getCardExplanation(suit : string , card : string) : string
-    {
-        let thisCard : Card | undefined = this.getCard(suit,card);
-        if(!thisCard)
-            return "";
-
-        return thisCard.desc
-    }
-
-    public getCardImageUrl(suit : string , card : string, addition : number = 0) : string
-    {
-        if(!suit || !card)
-            return "/cards/all/CORNUCOPIA.png";
-
-        let thisCard : Card | undefined = this.getCard(suit,card);
-
-        return '/cards/all/' + thisCard?.id + '.png';
+        
+        this.edition = edition;
+        this.version = version;
     }
 
     public getCardsBySuit(suit : string) : Card[]
     {
-        let base : string = './data/cards/webapp-cards-2.00/';
+        let base : string = `./data/cards/${this.edition}-cards-${this.version}/`;
         let path : string = base + suit;
         let directories = FileSystemHelper.getDirectories(path);
         let cards = new Array<Card>();
@@ -111,7 +29,7 @@ export class CardController {
         for(let i = 0 ; i < directories.length ; i++)
         {
             let name : string = directories[i];
-            let card : Card = this.getCardBySuitAndName(suit,name);
+            let card : Card = this.getCardById(name);
             cards.push(card);
         }
 
@@ -120,31 +38,13 @@ export class CardController {
 
     public getCardById(id : string) : Card
     {
-        let suits : Suit[] = (new SuitController(this.data)).getSuits();
-        let cardObject = {} as Card;
-        let suit : string = '';
-        for(let i = 0 ; i < suits.length ; i++)
-        {
-            for(let j = 0 ; j < suits[i].cards.length ; j++)
-            {
-                let card : Card = suits[i].cards[j];
-                if (card.card == String(id).toUpperCase())
-                    cardObject = card
-                    suit = suits[i].name;
-                    
-            }
-        }
-        cardObject.suitName = (new SuitController(this.data)).getSuitNameByCardId(cardObject.card);
-        cardObject.url = '/' + suit + '/' + cardObject.card;
-        cardObject.githubUrl = 'data/cards/webapp-cards-2.00/' + suit + '/' + cardObject.card;
-
-        return cardObject;
+        return this.data.find((card) => card.id == id) as Card;
     }
 
     public getCardsFlat() : Card[]
     {
         let result = new Array<Card>();
-        let suits : Suit[] = (new SuitController(this.data)).getSuits();
+        let suits : Suit[] = (new SuitController(this.data, this.edition, this.version)).getSuits();
         for(let i = 0 ; i < suits.length ; i++)
         {
             for(let j = 0 ; j < suits[i].cards.length ; j++)
@@ -153,14 +53,13 @@ export class CardController {
                 result.push(card);
             }
         }
-
         return result;
     }
 
     public static orderFunction(a : Card, b : Card) : number
     {
-        let orderA = order.get(a.card) || -1;
-        let orderB = order.get(b.card) || -1;
+        let orderA = order.get(a.id) || -1;
+        let orderB = order.get(b.id) || -1;
         return orderA < orderB ? -1 : 1
     }
 

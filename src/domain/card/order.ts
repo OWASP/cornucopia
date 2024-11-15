@@ -81,5 +81,5 @@ export const order = new Map<string,number>([
     // Special cards
     ["JOA", 13],
     ["JOB", 14],
-    ["explanation", 14],
+    ["CORNUCOPIA", 14],
 ]);

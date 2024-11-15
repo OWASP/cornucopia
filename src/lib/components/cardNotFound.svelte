@@ -3,7 +3,7 @@
     export let card : Card;
 </script>
 
-<p>Unknown card: {String(card.card).toUpperCase()} {card.suit}</p>
+<p>Unknown card: {String(card.id).toUpperCase()} {card.suit}</p>
 
 <style>
     p {

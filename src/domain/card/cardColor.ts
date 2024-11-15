@@ -7,4 +7,5 @@ export const cardColor = new Map<string,string>([
     ["cornucopia", "#526994"],
     ["session-management", "#B1D579"],
     ["cryptography", "#C3B2E3"],
-])
+    ["wild-card", "#FBB67C"]
+]) 
