@@ -349,7 +349,7 @@ suits:
     misc: "Leia mais sobre segurança de aplicações nos Guias gratuitos da OWASP sobre Requisitos, Desenvolvimento, Revisão de Código e Testes, na série de Cheat Sheets e no Modelo de Maturidade de Garantia de Software Aberto"
 -
   id: "WC"
-  name: "JOKERS"
+  name: "JOKER"
   cards:
   -
     id: "JOA"

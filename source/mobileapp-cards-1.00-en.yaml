@@ -349,7 +349,7 @@ suits:
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App User Privacy Protection” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
   id: "WC"
-  name: "Wild Card"
+  name: "WILD CARD"
   cards:
   -
     id: "JOAM"

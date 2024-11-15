@@ -349,7 +349,7 @@ suits:
     misc: "Approfondisci la sicurezza delle applicazioni con le guide gratuite OWASP sui requisiti, lo sviluppo, la revisione e il test del codice, la serie di Cheat Sheet, e il modello di maturità dell'Open Software Assurance"
 -
   id: "WC"
-  name: "Jolly"
+  name: "JOLLY"
   cards:
   -
     id: "JOA"
