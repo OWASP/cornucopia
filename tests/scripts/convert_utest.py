@@ -1593,7 +1593,7 @@ class TestGetFullTag(unittest.TestCase):
 
     def test_get_full_tag_wc(self) -> None:
         input_suit_tag = "WC"
-        input_card = "JokerA"
+        input_card = "Joker A"
         input_tag = "desc"
         want_full_tag = "${WC_JokerA_desc}"
 
