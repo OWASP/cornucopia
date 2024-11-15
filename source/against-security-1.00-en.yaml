@@ -23,13 +23,13 @@ suits:
   cards:
   -
     id: "JOA"
-    value: "JokerA"
+    value: "Joker A"
     card: "Joker"
     desc: "This is a wild card"
     misc: "Make something up!"
   -
     id: "JOB"
-    value: "JokerB"
+    value: "Joker B"
     card: "Joker"
     desc: "This is a wild card"
     misc: "Make something up!"
