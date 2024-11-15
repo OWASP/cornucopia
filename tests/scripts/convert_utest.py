@@ -1495,7 +1495,7 @@ class Test1(unittest.TestCase):
             ("${VE_suit}", "Validation & Encoding"),
             ("${VE_VE2_desc}", "You have invented a new attack against Data Validation and Encoding"),
             ("${WC_suit}", "Wild Card"),
-            ("${WC_JokerA_desc}", "Alice can utilize the application to attack users' systems and data"),
+            ("${WC_A_desc}", "Alice can utilize the application to attack users' systems and data"),
         ]
 
     def test_get_replacement_value_from_dict_exact(self) -> None:
