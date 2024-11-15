@@ -349,7 +349,7 @@ suits:
     misc: "Read more about application security in OWASP's free Guides on Requirements, Development, Code Review and Testing, the Cheat Sheet series, and the Open Software Assurance Maturity Model"
 -
   id: "WC"
-  name: "Wild Card"
+  name: "WILD CARD"
   cards:
   -
     id: "JOA"
