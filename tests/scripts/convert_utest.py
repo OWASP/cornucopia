@@ -1595,7 +1595,7 @@ class TestGetFullTag(unittest.TestCase):
         input_suit_tag = "WC"
         input_card = "A"
         input_tag = "desc"
-        want_full_tag = "${WC_JokerA_desc}"
+        want_full_tag = "${WC_A_desc}"
 
         got_full_tag = c.get_full_tag(input_suit_tag, input_card, input_tag)
         self.assertEqual(want_full_tag, got_full_tag)
