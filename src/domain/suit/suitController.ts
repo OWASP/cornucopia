@@ -38,7 +38,7 @@ export class SuitController {
 
     public getSuitNameByCardId(id: string) : string
     {
-        return this.data.find(card => card.id == id)?.suit_name as string;
+        return this.data.find(card => card.id == id)?.suitName as string;
     }
 
     public static orderFunction(a : Suit, b : Suit) : number
