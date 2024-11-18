@@ -1495,7 +1495,7 @@ class Test1(unittest.TestCase):
             ("${VE_suit}", "Validation & Encoding"),
             ("${VE_VE2_desc}", "You have invented a new attack against Data Validation and Encoding"),
             ("${WC_suit}", "Wild Card"),
-            ("${WC_JokerA_desc}", "Alice can utilize the application to attack users' systems and data"),
+            ("${WC_A_desc}", "Alice can utilize the application to attack users' systems and data"),
         ]
 
     def test_get_replacement_value_from_dict_exact(self) -> None:
@@ -1593,9 +1593,9 @@ class TestGetFullTag(unittest.TestCase):
 
     def test_get_full_tag_wc(self) -> None:
         input_suit_tag = "WC"
-        input_card = "JokerA"
+        input_card = "A"
         input_tag = "desc"
-        want_full_tag = "${WC_JokerA_desc}"
+        want_full_tag = "${WC_A_desc}"
 
         got_full_tag = c.get_full_tag(input_suit_tag, input_card, input_tag)
         self.assertEqual(want_full_tag, got_full_tag)
