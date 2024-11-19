@@ -1,5 +1,18 @@
 <div>
-    <h2 id="license">Acknowledgements</h2>
+    <h1 id="about">About</h1>
+    <h2>OWASP Cornucopia</h2>
+    <p>
+         The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories.
+    <br/>Although the idea had been waiting for enough time to progress it, the final motivation came when <a href="http://www.safecode.org/">SAFECode</a> published its <a href="https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf">Practical Security Stories and Security Tasks for Agile Development Environments</a> in July 2012.
+    <br/>Cornucopia was created and first used for developer training in August 2012.
+    </p>
+    <p>
+         The Microsoft SDL team had already published its super <a href="https://www.microsoft.com/en-gb/download/details.aspx?id=20303">Elevation of Privilege: The Threat Modeling Game (EoP)</a> but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address.
+    <br/>EoP is a great concept and game strategy, and was <a href="https://www.microsoft.com/security/blog/2010/03/02/announcing-elevation-of-privilege-the-threat-modeling-game/">published</a> under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License</a>.
+    <br/>Cornucopia is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues website app and mobile app developers encounter. 
+    <br/>It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD.
+    </p>
+    <h2 id="acknowledgements">Acknowledgements</h2>
     <h3 id="volunteers">Volunteers</h3>
     <p>
         Cornucopia is developed, maintained, updated and promoted by a worldwide team of volunteers. The contributors to date have been:
@@ -13,9 +26,10 @@
         <li>Fabio Cerullo</li>    
         <li>Oana Cornea</li> 
         <li>Johanna Curiel</li> 
-        <li>Todd Dahl</li> 
-        <li>Luis Enriquez</li> 
-        <li>Fabio Cerullo</li> 
+        <li>Todd Dahl</li>
+        <li>Ruggero DallAglio</li>
+        <li>Luis Enriquez</li>
+        <li>André Ferreira</li>
         <li>Ken Ferris</li> 
         <li>Darío De Filippis</li> 
         <li>Norbert Gaspar</li> 
@@ -29,15 +43,14 @@
         <li>John Herrlin</li> 
         <li>Jerry Hoff</li> 
         <li>Toby Irvine</li> 
-        <li>Marios Kourtesis</li> 
-        <li>Franck Lacosta</li> 
+        <li>Marios Kourtesis</li>
+        <li>Franck Lacosta</li>
+        <li>Mathias Lemaire</li>
         <li>Jim Manico</li> 
         <li>Mark Miller</li> 
-        <li>Mathias Lemaire</li> 
         <li>Cam Morris</li> 
         <li>Grant Ongers</li> 
         <li>Susana Romaniz</li> 
-        <li>Mathias Lemaire</li> 
         <li>Ravishankar Sahadevan</li> 
         <li>Tao Sauvage</li> 
         <li>Max Alejandro Gómez Sánchez Vergaray</li> 
@@ -67,7 +80,7 @@
     <h2 id="license">License</h2>
     <p>
         Created by Colin Watson.<br>
-        OWASP Cornucopia is open source and can be downloaded free of charge from the <a href="https://owasp.org/www-project-cornucopia/">OWASP Website</a>.<br>
+        OWASP Cornucopia is open source and can be downloaded free of charge from the <a rel="noopener" href="https://github.com/OWASP/cornucopia/blob/master/README.md#license">OWASP Cornucopia Github repository</a>.<br>
         OWASP Cornucopia is free to use.<br>
         It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.<br>
         OWASP and the OWASP logo are trademarks of the OWASP Foundation
@@ -75,8 +88,6 @@
 
     <img alt="Logo of the OWASP foundation" src="/images/owasp-logo.png"/>
 </div>
-
-
 
 <style>
     h2,h3
@@ -110,4 +121,23 @@
                 margin-left: 2rem
             }
         }
+    a,p,ol
+    {
+        font-size: 1.3rem;
+        font-family: var(--font-body);
+    }
+
+    a
+    {
+        display: inline-block;
+        text-decoration: none;
+        font-weight: bold;
+        color:var(--background);
+    }
+
+    a:hover
+    {
+        opacity: 70%;
+        color: rgb(41, 0, 176);
+    }
 </style>

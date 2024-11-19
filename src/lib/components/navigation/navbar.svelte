@@ -9,12 +9,13 @@
     let menuOpen : boolean = false;
 
     let links : Link[] = [];
-    AddLink(links,"How to play","/how-to-play");
+    AddLink(links,"About","/about");
+    AddLink(links,"Printing","/printing");
     AddLink(links,"Prizes & Swags","/prizes-and-swags");
-    AddLink(links,"Acknowledgements","/acknowledgements");
     AddLink(links,"News","/news");
     AddLink(links,"Taxonomy","/taxonomy");
     AddLink(links,"Cards","/cards");
+    AddLink(links,"How to play","/how-to-play");
     AddLink(links,"Home","/");
 
     function getMobile(w: number, h: number) {

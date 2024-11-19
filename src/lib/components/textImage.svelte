@@ -6,17 +6,18 @@
 	let innerWidth = 0;
 	let innerHeight = 0;
 	let mobile: boolean;
+	
 	$: {
 		mobile = innerWidth / innerHeight < 1;
 	}
 
-	function getStyle(isMobile: boolean) {
+	function getFlexStyle(isMobile: boolean) {
 		if (isMobile) return '';
 
 		if (align == 'left') {
-			return 'flex-direction:row';
+			return 'flex-direction:row ';
 		} else {
-			return 'flex-direction:row-reverse';
+			return 'flex-direction:row-reverse ';
 		}
 	}
 </script>
@@ -26,7 +27,7 @@
 {#if id != ""}
 	<div class="anchor" id={id}></div>
 {/if}
-<div class="container" style={getStyle(mobile)}>
+<div class="container" style={getFlexStyle(mobile)}>
 	<div class="image">
         <img alt={id} {src} />
     </div>
@@ -54,6 +55,9 @@
 		flex-direction: row;
 		flex-wrap: nowrap;
 		margin-top: 4rem;
+	}
+	.last {
+		margin-bottom: 1rem;
 	}
 
 	.text {

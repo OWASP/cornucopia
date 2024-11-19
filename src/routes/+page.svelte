@@ -9,34 +9,45 @@
 
 <Hero cardData={data.cardData} suits={data.suits} mapping={data.mappingData}></Hero>
 <TextImage src="/images/cornucopia_logo.svg" align="right">
-    <h1 id="top">Identify threats</h1>
+    <h1 id="top">Introduction</h1>
     <p>
-        Owasp Cornucopia is a card game, meant to be played in an agile development context.
-        It allows developers to identify and discuss security requirements for their software applications.
-        It is an easy way to introduce the practice of threat modeling in a software development team. 
-        Playing the card game encourages developers to actively think about the kind of threats that can emerge when creating software. 
+        The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories.
+    </p>
+    <p>
+        OWASP Cornucopia is an easy way to introduce the practice of threat modeling in a software development team. 
+        Playing the card game encourages the development team to actively think about the kind of threats that can emerge when creating software. 
         This empowers teams to independently secure their applications while building them. 
-        Doing so embraces the shift-left strategy, where security becomes an integrated part of the development cycle.      </p>
-    <a href="/how-to-play">Learn how to play ➔</a>
+        Doing so embraces the shift-left strategy, where security becomes an integrated part of the development cycle.</p>
+    <a href="/about" class="internal-links">➔ Read more</a>
 </TextImage>
-
-<TextImage src="/images/github-mark.svg" align="left">
+<TextImage src="/images/cornucopia_logo.svg" align="left">
+    <h1 id="top">How to start</h1>
+    <p>To start using Cornucopia:</p>
+    <ol>
+        <li><b>Either</b> Obtain or buy a pre-printed deck of cards;</li>
+        <li><b>Or:</b> Download the free Adobe Illustrator files and get them professionally printed (see: <a href="/printing">printing instructions</a>);</li>
+        <li><b>Or:</b> Play the game online at <a rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
+        <li>Identify an application, module or component to assess.</li>
+        <li>Invite business owners, architects, developers, testers along for a card game.</li>
+        <li>Get those infosec folk to provide chocolate, pizza, beer, flowers or all four as prizes.</li>
+        <li>Select a portion of the deck to start with.</li>
+        <li><a href="/how-to-play">Play the game</a> to discuss & document security requirements (and to win rounds).</li>
+        <li>Remember, to have fun!</li>
+    </ol>
+    <a href="/how-to-play" class="internal-links">➔ How to play</a>
+</TextImage>
+<TextImage src="/images/github-mark.svg" align="right">
     <h1>Open source</h1>
     <p>
-        One of the main advantages of the OWASP Cornucopia card game being open source is that it allows anyone to access and use the game without any licensing fees or restrictions. This encourages widespread adoption and makes it easier for teams to integrate the game into their security practices. Additionally, being open source means that the game is transparent and customizable. Teams can modify the game to suit their specific needs and address the security threats that are most relevant to their applications. They can also contribute back to the game's development by submitting new cards or improvements. Furthermore, open source software tends to have a large and active community of developers who contribute to the codebase and offer support. This can lead to faster bug fixes and updates, ensuring that the game remains relevant and effective in identifying security threats.    
+        There are a large number of source design files for the cards themselves in various languages and formats.
+        These design files together with the source code to generate the Word document, PDFs and InDesign files for printing are maintained in our <a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">Github repository</a>.
     </p>
-    <a href="https://github.com/OWASP/cornucopia">View source on Github ➔</a>
-</TextImage>
-
-<TextImage src="/images/cornucopia_logo.svg" align="right">
-    <h1>Agile</h1>
     <p>
-        The OWASP Cornucopia card game can be effectively integrated into an Agile development process. In Agile, the focus is on delivering working software quickly and continuously improving it based on feedback. The Cornucopia game can be used to identify potential security threats early in the development process, allowing teams to address them before they become major issues. The game can be played during planning sessions, where teams can discuss the security risks associated with each feature and prioritize them accordingly. It can also be used during testing to ensure that all identified risks have been addressed before releasing the software. The game can be played by cross-functional teams, including developers, testers, and security experts, to promote collaboration and shared responsibility for security. The game's flexible and customizable nature also allows teams to tailor it to their specific Agile process and development methodologies. By integrating the Cornucopia game into Agile development, teams can ensure that security is a key consideration throughout the entire software development lifecycle.
+        One of the main advantages of the OWASP Cornucopia card game being open source is that it allows anyone to access and use the game without any licensing fees or restrictions. This encourages widespread adoption and makes it easier for teams to integrate the game into their security practices. Additionally, being open source means that the game is transparent and customizable. Teams can modify the game to suit their specific needs and address the security threats that are most relevant to their applications. They can also contribute back to the game's development by submitting new cards or improvements. Furthermore, open source software tends to have a large and active community of developers who contribute to the codebase and offer support. This can lead to faster bug fixes and updates, ensuring that the game remains relevant and effective in identifying security threats.
     </p>
-    <a href="/how-to-play">Learn how to play ➔</a>
+    <a class="internal-links" href="https://github.com/OWASP/cornucopia">View source on Github ➔</a>
 </TextImage>
 <Spacer></Spacer>
-
 <style>
     h1
     {
@@ -45,7 +56,7 @@
         margin:0;
     }
 
-    a,p
+    a,p,ol
     {
         font-size: 1.3rem;
         font-family: var(--font-body);
@@ -57,13 +68,27 @@
         text-decoration: none;
         font-weight: bold;
         color:var(--background);
+    }
+
+    a:hover
+    {
+        opacity: 70%;
+        color: rgb(41, 0, 176);
+    }
+
+    a.internal-links
+    {
+        display: inline-block;
+        text-decoration: none;
+        font-weight: bold;
+        color:var(--background);
         padding: .5rem;
         border-radius: .5rem;
         transition: var(--transition);
         margin-top: 1rem;
     }
 
-    a:hover
+    a.internal-links:hover
     {
         opacity: 70%;
         transform: translate(1rem,0);
