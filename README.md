@@ -109,7 +109,31 @@ options:
 
 ## Printing
 
-The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there.
+There are many ways to print copies of the card decks yourself:
+
+1. Download the free Adobe Illustrator files and get them professionally printed;
+2. Print the Word document onto business card blanks;
+3. Print the Word document onto normal card and cut the cards out individually using the guide; or
+4. Generate your own cards from the free source XML data file in the repository.
+
+Here is the current version of Cornucopia Website App and Mobile App Edition guides, decks and leaflets (v2.00 with updated mapping to ASVS v4.0.3):
+
+*v2.0x (current version)*
+  * DOCX: [EN](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_guide_bridge_en.docx), [ES](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_guide_bridge_es.docx), [FR](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_guide_bridge_fr.docx), [PT-BR](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_guide_bridge_pt-br.docx), [NL](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_guide_bridge_nl.docx), [NO-NB](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_guide_bridge_no-nb.docx)
+
+*Print-ready design files*
+  * Website App Edition 2.0 card decks and leaflets: [EN](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_en.zip), [ES](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_es.zip), [FR](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_fr.zip), [PT-BR](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_pt-br.zip), [NL](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_nl.zip), [NO-NB](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_webapp_2.00_no-nb.zip)
+  * Mobile App Edition 1.0 card decks and leaflets: [EN](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_mobileapp_1.00_en.zip)
+  
+*Print ready files printed in time for OWASP Global AppSec 2024 Lisbon (EN)*
+  * [Mobile App Edition 1.0 tarot case](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_mobileapp_1.00_case_tarot_en.pdf)
+  * [Mobile App Edition 1.0 tarot leaflet](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_mobileapp_1.00_leaflet_tarot_en.pdf)
+  * [Mobile App Edition 1.0 tarot card deck](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_mobileapp_1.00_cards_tarot_en.pdf)
+  * [Website App Edition 2.0 tarot case](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_webapp_2.00_case_tarot_en.pdf)
+  * [Website App Edition 2.0 tarot leaflet](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_webapp_2.00_leaflet_tarot_en.pdf)
+  * [Website App Edition 2.0 tarot card deck](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_webapp_2.00_cards_tarot_en.pdf)
+
+The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there to ensure you get the latest updates and fixes done to the decks.
 The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work. 
 In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/templates/Fonts` in this repository. They are both open source and free for commercial use.
 The fonts can also be downloaded from the web.
