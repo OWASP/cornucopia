@@ -45,21 +45,20 @@
             <p class="title">OWASP Cornucopia</p>
             <p>
                 OWASP Cornucopia is originally created by Colin Watson.
-                It is open source and can be downloaded free of charge from the <a target='_blank' href="https://owasp.org/www-project-cornucopia/">OWASP website</a>.
-                It is is free to use.
-                It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, 
+                <br/>It is open source and can be downloaded free of charge from the <a target='_blank' href="https://owasp.org/www-project-cornucopia/">OWASP repository</a>.
+                <br/>It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, 
                 distribute and transmit the work, and you can adapt it, and use it commercially, 
                 but all provided that you attribute the work and if you alter, transform, 
                 or build upon this work, 
                 you may distribute the resulting work only under the same or similar license to this one.
-                OWASP does not endorse or recommend commercial products or services.
-                OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license and is © 2012-2024 OWASP Foundation.
+                <br/>OWASP does not endorse or recommend commercial products or services.
+                <br/>OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license and is © 2012-2024 OWASP Foundation.
             </p>
         </div>
         <div class="box">
             <p class="title">Get the cards</p>
             <p><a href="/webshop">Order online</a></p>
-            <p><a href="https://owasp.org/www-project-cornucopia/#div-cards">Print your own</a></p>
+            <p><a href="/printing">Print your own</a></p>
         </div>
 
         <div class="box">
@@ -73,7 +72,7 @@
     </div>
     <p class="footer">OWASP and the OWASP logo are trademarks of the <a href="https://owasp.org/">OWASP Foundation</a></p>
     <p class="footer">Last update was {getCurrentDate()}{timeAgo}</p>
-    <p class="footer"><a href="/acknowledgements#license">Licensing information</a></p>
+    <p class="footer"><a href="/about#license">Licensing information</a></p>
     <p class="footer">
         <a href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>

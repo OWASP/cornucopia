@@ -104,11 +104,6 @@
     {
         font-weight: bold;
     }
-    img
-    {
-        width : 60%;
-        margin-left:20%;
-    }
 
     div
     {
@@ -124,14 +119,8 @@
             {
                 width : 100%;
             }
-
-            img
-            {
-                width : calc(100% - 4rem);
-                margin-left: 2rem
-            }
         }
-        a,p,ol
+        a,p
     {
         font-size: 1.3rem;
         font-family: var(--font-body);

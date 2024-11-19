@@ -8,7 +8,7 @@
 
 
 <Hero cardData={data.cardData} suits={data.suits} mapping={data.mappingData}></Hero>
-<TextImage src="/images/cornucopia_logo.svg" align="right">
+<TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h1 id="top">Introduction</h1>
     <p>
         The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories.
@@ -20,7 +20,7 @@
         Doing so embraces the shift-left strategy, where security becomes an integrated part of the development cycle.</p>
     <a href="/about" class="internal-links">➔ Read more</a>
 </TextImage>
-<TextImage src="/images/cornucopia_logo.svg" align="left">
+<TextImage src="/images/cornucopia_logo_mobile_edition.svg" align="left">
     <h1 id="top">How to start</h1>
     <p>To start using Cornucopia:</p>
     <ol>
@@ -36,7 +36,7 @@
     </ol>
     <a href="/how-to-play" class="internal-links">➔ How to play</a>
 </TextImage>
-<TextImage src="/images/github-mark.svg" align="right">
+<TextImage src="/images/opensource.png" align="right">
     <h1>Open source</h1>
     <p>
         There are a large number of source design files for the cards themselves in various languages and formats.

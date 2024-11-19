@@ -56,15 +56,15 @@
 
 
   <style>
-    h2,h3
+    h2
     {
         font-weight: bold;
     }
-    h1,p,ol,li
+    h1,p,li
     {
       color:var(--background);
     }
-    a,p,ol,li
+    a,p,li
     {
         font-size: 1.3rem;
         font-family: var(--font-body);
