@@ -98,7 +98,7 @@
 
     .center
     {
-        width : max(15vw, 15vh);
+        width : max(20vw, 15vh);
     }
 
     .card-panel
