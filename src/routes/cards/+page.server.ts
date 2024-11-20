@@ -8,6 +8,8 @@ export const load = (({ params }) => {
   return {
     suits : (new SuitController(deck, 'webapp', '2.00')).getSuits(),
     cards : (new CardController(deck, 'webapp', '2.00')).getCardsFlat(),
+    suitsMobile : (new SuitController(deck, 'mobileapp', '1.00')).getSuits(),
+    cardsMobile : (new CardController(deck, 'mobileapp', '1.00')).getCardsFlat(),
     cardData: deck,
     mappingData: (new DeckService(request)).getCardMapping('webapp')
   };

@@ -5,6 +5,7 @@
     import { MappingController } from "../../domain/mapping/mappingController.js";
 
     export let data;
+    let version : string = "webapp";
     let card : string;
     let suit : string;
     let currentCard : Card = data.cards[0];
@@ -27,10 +28,22 @@
     {
         suit = suitParam;
         card = cardParam;
-        currentCard = data.cards.find(card => card.suit == suitParam && card.id == cardParam) ?? {} as Card
+        if(version == 'webapp')
+            currentCard = data.cards.find(card => card.suit == suitParam && card.id == cardParam) ?? {} as Card
+
+        if (version == 'mobileapp')
+            currentCard = data.cardsMobile.find(card => card.suit == suitParam && card.id == cardParam) ?? {} as Card
+
+        
         mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.id);
     }
 </script>
+
+
+<p>
+    <button on:click={()=>version = 'webapp'}>Webapp version</button>
+    <button on:click={()=>version = 'mobileapp'}>Mobile version</button>
+</p>
 
 {#each data.suits as suit}
     {#each suit.cards as card}
@@ -40,32 +53,36 @@
 
 <div class="container">
     <div class="tree">
-        <h1>Web app version</h1>
-        {#each data.suits as suit}
-            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-            <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name)}</h2>
-            {#if map.get(suit.name)}
-                {#each suit.cards as card}
-                    <p on:mouseenter={()=>{enter(suit.name,card.id)}}>
-                        <a href="{card.url}">├── {card.id}</a>
-                    </p>
-                {/each}
-            {/if}
-        {/each}
 
+        {#if version == 'webapp'}
+            <h1>Web app version</h1>
+            {#each data.suits as suit}
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name)}</h2>
+                {#if map.get(suit.name)}
+                    {#each suit.cards as card}
+                        <p on:mouseenter={()=>{enter(suit.name,card.id)}}>
+                            <a href="{card.url}">├── {card.id}</a>
+                        </p>
+                    {/each}
+                {/if}
+            {/each}
+        {/if}
 
-        <h1>Mobile version</h1>
-        {#each data.suits as suit}
-            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-            <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name)}</h2>
-            {#if map.get(suit.name)}
-                {#each suit.cards as card}
-                    <p on:mouseenter={()=>{enter(suit.name,card.id)}}>
-                        <a href="{card.url}">├── {card.id}</a>
-                    </p>
-                {/each}
-            {/if}
-        {/each}
+        {#if version == 'mobileapp'}
+            <h1>Mobile version</h1>
+            {#each data.suitsMobile as suit}
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name)}</h2>
+                {#if map.get(suit.name)}
+                    {#each suit.cards as card}
+                        <p on:mouseenter={()=>{enter(suit.name,card.id)}}>
+                            <a href="{card.url}">├── {card.id}</a>
+                        </p>
+                    {/each}
+                {/if}
+            {/each}
+        {/if}
     </div>
     <div class="preview-container">
             <CardPreview card={currentCard} cardData={data.cardData} {mapping}></CardPreview>
