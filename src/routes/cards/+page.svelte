@@ -5,6 +5,11 @@
     import { MappingController } from "../../domain/mapping/mappingController.js";
 
     export let data;
+
+    //TODO move these constants to a more sensible location
+    const VERSION_WEBAPP = "webapp"
+    const VERSION_MOBILEAPP = "mobileapp"
+
     let version : string = "webapp";
     let card : string;
     let suit : string;
@@ -28,10 +33,10 @@
     {
         suit = suitParam;
         card = cardParam;
-        if(version == 'webapp')
+        if(version == VERSION_WEBAPP)
             currentCard = data.cards.find(card => card.suit == suitParam && card.id == cardParam) ?? {} as Card
 
-        if (version == 'mobileapp')
+        if (version == VERSION_MOBILEAPP)
             currentCard = data.cardsMobile.find(card => card.suit == suitParam && card.id == cardParam) ?? {} as Card
 
         
@@ -40,9 +45,9 @@
 </script>
 
 
-<p>
-    <button on:click={()=>version = 'webapp'}>Webapp version</button>
-    <button on:click={()=>version = 'mobileapp'}>Mobile version</button>
+<p class="button-container">
+    <button class:button-selected={version == VERSION_WEBAPP} on:click={()=>version = VERSION_WEBAPP}>Webapp version</button>
+    <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>version = VERSION_MOBILEAPP}>Mobile version</button>
 </p>
 
 {#each data.suits as suit}
@@ -54,7 +59,7 @@
 <div class="container">
     <div class="tree">
 
-        {#if version == 'webapp'}
+        {#if version == VERSION_WEBAPP}
             <h1>Web app version</h1>
             {#each data.suits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
@@ -69,7 +74,7 @@
             {/each}
         {/if}
 
-        {#if version == 'mobileapp'}
+        {#if version == VERSION_MOBILEAPP}
             <h1>Mobile version</h1>
             {#each data.suitsMobile as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
@@ -90,6 +95,39 @@
 </div>
 
 <style>
+    .button-container
+    {
+        margin-top: 1rem;
+        margin-left: 1rem;
+    }
+
+    
+    button
+    {
+        font-weight: bold;
+        background: none;
+        border:none;
+        font-size: 1.2rem;
+        outline: 1px var(--background) solid;
+        color: var(--background);
+        background-color: white;
+        padding: .5rem;
+        cursor:pointer;
+    }
+
+    button:hover
+    {
+        opacity: 50%;
+    }
+
+    .button-selected
+    {
+        outline: 1px var(--background) solid;
+        background-color: var(--background);
+        color: var(--background);    
+        color:white;
+    }
+
     .preview-container
     {
         padding-top: 5rem;
