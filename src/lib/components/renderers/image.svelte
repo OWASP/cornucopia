@@ -44,7 +44,7 @@
   </script>
   
   <img loading="lazy" style="{getStyle()}" src={url} {title} alt={text}>
-  <p class="alt-text"><i>Image: {href} {text}</i></p>
+  <p class="alt-text"><i>Image: {text}</i></p>
 
   <style>
         .alt-text
