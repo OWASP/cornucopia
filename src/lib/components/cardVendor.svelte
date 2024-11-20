@@ -1,0 +1,109 @@
+<script lang="ts">
+    export let logoSource : string;
+    export let productImageSource : string;
+    export let webshopLink : string;
+</script>
+
+<div class="vendor">
+    <div class="image-container">
+        <img class="logo-image" alt="Vendor logo" src={logoSource}/>
+    </div>
+    <img alt="Box of cards" class="product-image" src={productImageSource}/>
+    <a class="shop-link" target="_blank" href={webshopLink}>Visit external webshop</a>
+</div>
+
+<style>
+    .shop-link
+    {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .image-container
+    {
+        background-color: var(--background);
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    .product-image
+    {
+        width: 100%;
+    }
+
+    .logo-image
+    {
+        width: 40%;
+        display: block;
+        margin:auto;
+    }
+    .vendor
+    {
+        width: 45%;
+        outline: 1px rgb(205, 205, 205) solid;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .vendor-container
+    {
+        display:flex;
+        outline: 1xp red solid;
+        justify-content: space-between;
+        overflow: none;
+    }
+
+    h2,h3
+    {
+        font-weight: bold;
+    }
+
+    .page-container
+    {
+        padding : 2rem;
+        width : 60%;
+        margin: auto;
+        margin-top: 2rem;
+        font-size: 1.2rem;
+    }
+        @media (max-aspect-ratio: 1/1)
+        {
+            .page-container
+            {
+                width : 90%;
+            }
+
+            .vendor-container
+            {
+                flex-direction: column;
+            }
+
+            .vendor
+            {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+
+        }
+    a,p
+    {
+        font-size: 1.3rem;
+        font-family: var(--font-body);
+    }
+
+    a
+    {
+        display: inline-block;
+        text-decoration: none;
+        font-weight: bold;
+        color:var(--background);
+    }
+
+    a:hover
+    {
+        opacity: 70%;
+        color: rgb(41, 0, 176);
+    }
+</style>
+
