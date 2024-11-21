@@ -60,16 +60,14 @@
 
     h1
     {
-      background: rgb(2,0,36);
-      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,78,94,1) 100%);
+      background: var(--background);
       padding: .5rem;
       color:white;
     }
 
     h2
     {
-      background: rgb(2,0,36);
-      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(0,78,94,1) 100%);
+      background: var(--background);
       padding: .5rem;
       color:white;   
      }

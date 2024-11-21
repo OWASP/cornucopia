@@ -1,19 +1,35 @@
 <blockquote>
     <p><b>Note</b></p>
-    <slot></slot>
+    <div>
+        <slot></slot>
+    </div>
 </blockquote>
 
 
 <style>
     blockquote
     {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        padding : 1rem;
         border-radius: .5rem;
         background-color: var(--color-note-background);
         text-align: justify;
         font-weight: 300;
-        border : .1rem solid var(--color-note-border)
-    }    
+        outline : .1rem solid var(--background);
+        width: 100%;
+        margin:0;
+    }
+
+    div
+    {
+        padding: .25rem;
+    }
+
+    p
+    {
+        background-color: var(--background);
+        margin:0;
+        color:white;
+        padding: .25rem;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
+    }
 </style>
