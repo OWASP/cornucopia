@@ -125,6 +125,7 @@
     {
         margin-top: 1rem;
         margin-left: 1rem;
+        width:auto;
     }
 
     
