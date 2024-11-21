@@ -45,6 +45,13 @@
         version = versionParam;
         // Collapse the entire tree down when switching between versions
         setTree(false);
+        // Show the following selected cards
+        if(version == VERSION_WEBAPP)
+            currentCard = data.cards[1];
+
+        if(version == VERSION_MOBILEAPP)
+            currentCard = data.cardsMobile[1];
+
     }
 
 
