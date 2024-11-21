@@ -43,42 +43,11 @@
         width: 45%;
         outline: 1px rgb(205, 205, 205) solid;
         border-radius: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        box-shadow: var(--box-shadow);
     }
 
-    .vendor-container
-    {
-        display:flex;
-        outline: 1xp red solid;
-        justify-content: space-between;
-        overflow: none;
-    }
-
-    h2,h3
-    {
-        font-weight: bold;
-    }
-
-    .page-container
-    {
-        padding : 2rem;
-        width : 60%;
-        margin: auto;
-        margin-top: 2rem;
-        font-size: 1.2rem;
-    }
         @media (max-aspect-ratio: 1/1)
         {
-            .page-container
-            {
-                width : 90%;
-            }
-
-            .vendor-container
-            {
-                flex-direction: column;
-            }
-
             .vendor
             {
                 width: 100%;
@@ -86,7 +55,7 @@
             }
 
         }
-    a,p
+    a
     {
         font-size: 1.3rem;
         font-family: var(--font-body);

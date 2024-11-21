@@ -56,9 +56,6 @@
 		flex-wrap: nowrap;
 		margin-top: 4rem;
 	}
-	.last {
-		margin-bottom: 1rem;
-	}
 
 	.text {
 		outline: 1px rgb(231, 231, 231) solid;
@@ -68,7 +65,7 @@
 		border-radius: 1rem;
 		background-color: rgb(255, 255, 255);
 		padding: 1rem;
-		box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+		box-shadow: var(--box-shadow);
 	}
 
 	.image {
