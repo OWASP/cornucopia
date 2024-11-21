@@ -10,16 +10,27 @@
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
 
-    let version : string = "webapp";
+    let version : string = VERSION_WEBAPP;
     let card : string;
     let suit : string;
     let currentCard : Card = data.cards[0];
     let mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.id);
 
     let map : Map<string,boolean> = new Map();
-    for(let i = 0 ; i < data.suits.length ; i++)
+    setTree(false);
+
+    function setTree(expand : boolean)
     {
-        map.set(data.suits[i].name,false);
+        // Collapse or expand the entire tree of suits
+        for(let i = 0 ; i < data.suits.length ; i++)
+        {
+            map.set(data.suits[i].name,expand);
+        }
+
+        for(let i = 0 ; i < data.suitsMobile.length ; i++)
+        {
+            map.set(data.suitsMobile[i].name,expand);
+        }
     }
 
     function toggle(suit : string)
@@ -28,6 +39,14 @@
         map.set(suit,!value);
         map = map;
     }
+
+    function changeVersion(versionParam : string)
+    {
+        version = versionParam;
+        // Collapse the entire tree down when switching between versions
+        setTree(false);
+    }
+
 
     function enter(suitParam : string, cardParam : string)
     {
@@ -46,8 +65,8 @@
 
 
 <p class="button-container">
-    <button class:button-selected={version == VERSION_WEBAPP} on:click={()=>version = VERSION_WEBAPP}>Webapp version</button>
-    <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>version = VERSION_MOBILEAPP}>Mobile version</button>
+    <button class:button-selected={(version == VERSION_WEBAPP)} on:click={()=>changeVersion(VERSION_WEBAPP)}>Webapp version</button>
+    <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>Mobile version</button>
 </p>
 
 {#each data.suits as suit}
