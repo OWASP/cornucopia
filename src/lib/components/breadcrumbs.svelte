@@ -31,7 +31,7 @@
 <p id="breadcrumbs">
     {#each parts as part,index}
         {#if index != 0}
-            <span>>> </span>
+            <span>> </span>
         {/if}
         <a href="{generateHref(index)}">{generateName(part)}</a>
         <span> </span>
