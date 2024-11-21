@@ -219,5 +219,10 @@
         {
             display: none;
         }
+
+        button
+        {
+            width: 90%;
+        }
     }
 </style>
