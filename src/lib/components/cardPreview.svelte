@@ -102,11 +102,6 @@
         background-color: white;
     }
 
-    .card-render:hover
-    {
-        filter: brightness(105%);
-    }
-
     .left
     {
         width: 15%;
