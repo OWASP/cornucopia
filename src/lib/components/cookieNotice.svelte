@@ -51,7 +51,8 @@
         padding: .5rem;
         width : 100%;
         background-color: var(--background);
-        border-top: 3px var(--white) solid;
+        border-top: 1px var(--white) solid;
+        color:white;
     }
 
     .right
@@ -73,6 +74,7 @@
         padding: 1rem;
         cursor: pointer;
         height : 100%;
+        font-weight: bold;
     }
 
     button:hover
