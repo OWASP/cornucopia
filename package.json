@@ -34,7 +34,9 @@
 		"@types/js-yaml": "^4.0.9",
 		"front-matter": "^4.0.2",
 		"js-yaml": "^4.1.0",
+		"svelte-i18n": "^4.0.1",
 		"svelte-markdown": "^0.4.1",
+		"sveltekit-i18n": "^2.4.2",
 		"sync-request": "^6.1.0",
 		"vite-plugin-restart": "^0.4.1",
 		"vite-plugin-static-copy": "^1.0.6"

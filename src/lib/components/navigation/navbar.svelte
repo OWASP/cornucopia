@@ -2,21 +2,23 @@
     import { goto } from "$app/navigation";
     import { fade } from "svelte/transition";
     import { AddLink, type Link } from "./utils";
-    import { page } from "$app/stores";
+    import {readTranslation} from "$lib/stores/stores";
+    let t = readTranslation();
+
     let width: number;
     let height: number;
     let mobile: boolean = false;
     let menuOpen : boolean = false;
 
     let links : Link[] = [];
-    AddLink(links,"About","/about");
-    AddLink(links,"Printing","/printing");
-    AddLink(links,"Prizes & Swags","/prizes-and-swags");
-    AddLink(links,"News","/news");
-    AddLink(links,"Taxonomy","/taxonomy");
-    AddLink(links,"Cards","/cards");
-    AddLink(links,"How to play","/how-to-play");
-    AddLink(links,"Home","/");
+    AddLink(links,$t('about.title'),"/about");
+    AddLink(links,$t('printing.title'),"/printing");
+    AddLink(links,$t('swags.title'),"/prizes-and-swags");
+    AddLink(links,$t('news.title'),"/news");
+    AddLink(links,$t('taxonomy.title'),"/taxonomy");
+    AddLink(links,$t('cards.title'),"/cards");
+    AddLink(links,$t('play.title'),"/how-to-play");
+    AddLink(links,$t('home.title'),"/");
 
     function getMobile(w: number, h: number) {
         mobile = w / h < 1;
@@ -53,7 +55,7 @@ $: getMobile(width, height);
             <button data-umami-event="mobile-navbar-close-button" in:fade on:click={toggleMenu}><img alt="button to open the menu" src="/icons/menu.png"/></button>
         {/if}
     {:else}
-        <a data-umami-event="desktop-webshop-button" class="link webshop" href="/webshop">Webshop</a>
+        <a data-umami-event="desktop-webshop-button" class="link webshop" href="/webshop">{$t('webshop.title')}</a>
         {#each links as link}
             <a data-umami-event="desktop-navbar-{link.name}-button" class="link" href="{link.href}">{link.name}</a>
         {/each}
