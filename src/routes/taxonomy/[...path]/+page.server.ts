@@ -2,7 +2,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 import fs from "fs";
 
 export async function load({ params }) {
-  let filePath: string = "./data/taxonomy/" + params.path;
+  let filePath: string = "./data/taxonomy-en/" + params.path;
   let [files, folders, content] = getDataFromPath(filePath);
 
   return {

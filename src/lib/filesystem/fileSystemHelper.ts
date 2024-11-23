@@ -24,7 +24,7 @@ export class FileSystemHelper {
   }
 
   public static ASVSRouteMap(): any[] {
-    const basePath: string = "data/taxonomy/ASVS-4.0.3";
+    const basePath: string = "data/taxonomy-en/ASVS-4.0.3";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
@@ -44,7 +44,7 @@ export class FileSystemHelper {
         const secondPart = secondLevelDir.match(sectionRegex)?.[1];
         const section = `${firstPart}.${secondPart}`;
         let fullPath = firstLevelPath + '/' + secondLevelDir;
-        fullPath = fullPath.replace("data/taxonomy", "/taxonomy");
+        fullPath = fullPath.replace("data/taxonomy-en", "/taxonomy");
 
         routes.push({
           Path: fullPath,

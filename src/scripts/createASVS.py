@@ -5,7 +5,7 @@ from os import walk
 import json
 import os 
 
-mypath = "../../data/taxonomy/ASVS-4.0.3"
+mypath = "../../data/taxonomy-en/ASVS-4.0.3"
 
 
 
