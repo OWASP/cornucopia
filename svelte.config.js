@@ -90,8 +90,7 @@ const config =
 				'/cards/SMJ',
 				'/cards/SMQ',
 				'/cards/SMK',
-				'/cards/SMA',
-				'/cards/CORNUCOPIA'
+				'/cards/SMA'
 			]
 		}
 	}
