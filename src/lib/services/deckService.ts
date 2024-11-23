@@ -2,6 +2,7 @@ import fm from "front-matter"
 import fs from 'fs'
 import yaml from "js-yaml";
 import type { Card } from "../../domain/card/card";
+import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 
 export class DeckService {
     private request: any;
@@ -92,7 +93,11 @@ export class DeckService {
             }
             let data : any = yaml.load(response.getBody().toString());
             let mapping = this.getCardMapping(deck.edition);
-            let base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}/`;
+            let base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}-${lang}/`;
+
+            if(!FileSystemHelper.hasDir(base)) {
+                base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}-en/`;
+            }
             
             for (let suit in data['suits']) {
                 let suitObject: any = data['suits'][suit];

@@ -3,9 +3,12 @@
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
     import type { Card } from "../../../domain/card/card";
+    import { readLang } from "$lib/stores/stores";
 
   export let data: PageData;
-  let cardObject : Card = data.card as Card;
+  const lang = readLang();
+  const cards = data.decks.get($lang);
+  let card : Card = cards.get(data.card) as Card;
 
   function cardFound() 
     {
@@ -38,15 +41,15 @@
       "network-&-storage",
       "resilience",
     ]
-    return (cards_options.includes(String(cardObject.id).toUpperCase()) && suits_options.includes(cardObject.suitName.toLowerCase().replaceAll(' ', '-')))
+    return (cards_options.includes(String(card.id).toUpperCase()) && suits_options.includes(card.suitName.toLowerCase().replaceAll(' ', '-')))
   }
 </script>
 
 <p><a href="/cards">Back to overview</a></p>
 {#if cardFound()}
-  <CardFound ASVSRoutes={data.ASVSRoutes} cards={data.cards} card={data.card}  mappingData={data.mappingData} />
+  <CardFound ASVSRoutes={data.ASVSRoutes} {cards} {card}  mappingData={data.mappingData} />
 {:else}
-  <CardNotFound card={data.card} />
+  <CardNotFound {card} />
 {/if}
 
 <style>

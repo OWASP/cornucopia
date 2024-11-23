@@ -1,13 +1,21 @@
-<script>
+<script lang="ts">
     import Hero from "$lib/components/hero/hero.svelte";
     import Spacer from "$lib/components/spacer.svelte";
     import TextImage from "$lib/components/textImage.svelte";
+    import { readLang } from "$lib/stores/stores.js";
+    import type { Suit } from "../domain/suit/suit.js";
 
     export let data;
+    const lang = readLang();
+    let suits = data.suits.get(`webapp-${$lang}`);
+
+    if (suits == undefined) {
+        suits = data.suits.get('webapp-en') as Suit[];
+    }
 </script>
 
 
-<Hero cards={data.cards} suits={data.suits} mapping={data.mapping}></Hero>
+<Hero cards={data.cards} {suits} mapping={data.mapping}></Hero>
 <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h1 id="top">Introduction</h1>
     <p>

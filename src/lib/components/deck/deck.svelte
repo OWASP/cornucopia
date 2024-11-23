@@ -3,11 +3,11 @@
     import type { Suit } from "../../../domain/suit/suit";
     import type { Card } from "../../../domain/card/card";
 
-    export let suits : Map<string, Suit[]>;
+    export let suits : Suit[];
     export let cards : any;
     export let mapping : any;
     // Get a card from every suit
-    let selectedCards : string[] = suits.get('webapp')?.map((suit) => suit.cards[0] as string).reverse() as string[];
+    let selectedCards : string[] = suits.map((suit) => suit.cards[0] as string).reverse() as string[];
     let mappingData : any[] = mapping.suits.map((suit: { cards: any[]; }) => suit.cards[0]).reverse();
     
     mappingData.unshift({

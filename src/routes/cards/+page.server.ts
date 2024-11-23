@@ -1,13 +1,12 @@
 import { DeckService } from '$lib/services/deckService';
 import request from 'sync-request';
 import { SuitController } from '../../domain/suit/suitController';
+import { readLang } from '$lib/stores/stores';
  
 export const load = (({ params }) => {
-  let deck = new DeckService(request).getCards('en');
   return {
     suits : SuitController.getSuits(),
-    cards : new DeckService(request).getCards('en'),
-    cardData: deck,
+    decks :new DeckService(request).getCardsForAllLanguages(),
     mappingData: (new DeckService(request)).getCardMapping('webapp')
   };
 });

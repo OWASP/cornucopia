@@ -2,6 +2,11 @@ import fs from "fs";
 import type { Route } from "../../domain/routes/route";
 
 export class FileSystemHelper {
+
+  public static hasDir(path: string): boolean {
+    return fs.existsSync(path);
+  }
+
   public static getDirectories(path: string): string[] {
     // console.log('📂 scanning ' + path + ' for directories')
     return fs

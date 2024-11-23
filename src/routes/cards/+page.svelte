@@ -3,18 +3,31 @@
     import {Text} from "$lib/utils/text.js"
     import type { Card } from "../../domain/card/card.js";
     import { MappingController } from "../../domain/mapping/mappingController.js";
-
+    import { readLang } from '$lib/stores/stores';
+    import type { Suit } from "../../domain/suit/suit.js";
+    const lang = readLang();
     export let data;
+    const cards = data.decks.get($lang);
 
     //TODO move these constants to a more sensible location
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
 
+    let mobileappSuits = data.suits.get(`${VERSION_MOBILEAPP}-${$lang}`);
+    let webappSuits = data.suits.get(`${VERSION_WEBAPP}-${$lang}`);
+
+    if (!mobileappSuits) {
+        mobileappSuits = data.suits.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
+    }
+
+    if (!webappSuits) {
+        webappSuits = data.suits.get(`${VERSION_WEBAPP}-en`) as Suit[];
+    }
+
     let version : string = VERSION_WEBAPP;
-    let card : string;
     let suit : string;
-    let currentCard : Card = data.cards.get('VE2') as Card;
-    let mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.id);
+    let card : Card = cards.get('VE2') as Card;
+    let mapping = (new MappingController(data.mappingData)).getCardMappings(card.id);
 
     let map : Map<string,boolean> = new Map();
     setTree(false);
@@ -22,14 +35,14 @@
     function setTree(expand : boolean)
     {
         // Collapse or expand the entire tree of suits
-        for(let i = 0 ; i < data.suits.get(VERSION_WEBAPP).length ; i++)
+        for(let i = 0 ; i < webappSuits.length ; i++)
         {
-            map.set(data.suits.get(VERSION_WEBAPP)[i].name,expand);
+            map.set(webappSuits[i].name,expand);
         }
 
-        for(let i = 0 ; i < data.suits.get(VERSION_MOBILEAPP).length ; i++)
+        for(let i = 0 ; i < mobileappSuits.length ; i++)
         {
-            map.set(data.suits.get(VERSION_MOBILEAPP)[i].name,expand);
+            map.set(mobileappSuits[i].name,expand);
         }
     }
 
@@ -47,10 +60,10 @@
         setTree(false);
         // Show the following selected cards
         if(version == VERSION_WEBAPP)
-            currentCard = data.cards.get('VE2') as Card;
+        card = cards.get('VE2') as Card;
 
         if(version == VERSION_MOBILEAPP)
-            currentCard = data.cards.get('PC2') as Card;
+        card = cards.get('PC2') as Card;
 
     }
 
@@ -58,9 +71,8 @@
     function enter(suitParam : string, cardParam : string)
     {
         suit = suitParam;
-        card = cardParam;
-        currentCard = data.cards.get(cardParam) as Card;
-        mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.id);
+        card = cards.get(cardParam) as Card;
+        mapping = (new MappingController(data.mappingData)).getCardMappings(card.id);
     }
 </script>
 
@@ -70,9 +82,9 @@
     <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>Mobile App version</button>
 </p>
 
-{#each data.suits.get(VERSION_WEBAPP) as suit}
+{#each webappSuits as suit}
     {#each suit.cards as card}
-        <p><a style="display:none;" href="{data.cards?.get(card)?.url}">{suit.name} {card}</a></p>
+        <p><a style="display:none;" href="{cards?.get(card)?.url}">{suit.name} {card}</a></p>
     {/each}
 {/each}
 
@@ -81,13 +93,13 @@
 
         {#if version == VERSION_WEBAPP}
             <h1>Website App version</h1>
-            {#each data.suits.get(VERSION_WEBAPP) as suit}
+            {#each webappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h2>
                 {#if map.get(suit.name)}
                     {#each suit.cards as card}
-                        <p on:mouseenter={()=>{enter(suit.name, data.cards?.get(card)?.id)}}>
-                            <a href="{data.cards?.get(card)?.url}">├── {data.cards?.get(card)?.id}</a>
+                        <p on:mouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
+                            <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                         </p>
                     {/each}
                 {/if}
@@ -96,13 +108,13 @@
 
         {#if version == VERSION_MOBILEAPP}
             <h1>Mobile App version</h1>
-            {#each data.suits.get(VERSION_MOBILEAPP) as suit}
+            {#each mobileappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h2>
                 {#if map.get(suit.name)}
                     {#each suit.cards as card}
-                        <p on:mouseenter={()=>{enter(suit.name,data.cards?.get(card)?.id)}}>
-                            <a href="{data.cards?.get(card)?.url}">├── {data.cards?.get(card)?.id}</a>
+                        <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                            <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                         </p>
                     {/each}
                 {/if}
@@ -110,7 +122,7 @@
         {/if}
     </div>
     <div class="preview-container">
-            <CardPreview card={currentCard} {mapping}></CardPreview>
+            <CardPreview {card} {mapping}></CardPreview>
     </div>
 </div>
 

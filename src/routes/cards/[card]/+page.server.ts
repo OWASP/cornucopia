@@ -5,10 +5,9 @@ import request from "sync-request";
 import type { PageServerLoad } from "./$types";
 
 export const load = (({ params }) => {
-  let decks = new DeckService(request).getCardsForAllLanguages();
   return {
-    cards: decks.get('en'),
-    card: decks.get('en').get(String(params.card).toUpperCase()),
+    decks: new DeckService(request).getCardsForAllLanguages(),
+    card: params.card.toUpperCase(),
     ASVSRoutes: FileSystemHelper.ASVSRouteMap(),
     mappingData: (new DeckService(request)).getCardMapping('webapp')
   };

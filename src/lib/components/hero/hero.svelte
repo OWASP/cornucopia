@@ -4,7 +4,7 @@
     import Chevron from "./chevron.svelte";
     import HeroText from "./heroText.svelte";
 
-    export let suits : Map<string, Suit[]>;
+    export let suits : Suit[];
     export let cards : any;
     export let mapping : any;
 </script>
