@@ -13,6 +13,8 @@ export const handle = async ({ event, resolve }) => {
   // Set default locale if user preferred locale does not match
   if (!supportedLocales.includes(userLocale)) userLocale = defaultLocale;
   await loading.toPromise();
+  await setLocale(userLocale);
+  locale.set(userLocale);
   
 
   // Add html `lang` attribute

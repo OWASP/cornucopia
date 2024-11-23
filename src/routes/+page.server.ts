@@ -5,8 +5,8 @@ import {SuitController } from "../domain/suit/suitController";
 export function load()
 {
     return {
-        suits : (new SuitController((new DeckService(request)).getCards('webapp', 'en'), 'webapp', '2.00')).getSuits(),
-        cardData: (new DeckService(request)).getCards('webapp', 'en'),
-        mappingData: (new DeckService(request)).getCardMapping('webapp')
+        suits : SuitController.getSuits(),
+        cards: (new DeckService(request)).getCards('en'),
+        mapping: (new DeckService(request)).getCardMapping('webapp')
     }
 }

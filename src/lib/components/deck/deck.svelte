@@ -4,12 +4,12 @@
     import type { Card } from "../../../domain/card/card";
 
     export let suits : Suit[];
-    export let cardData : any;
+    export let cards : any;
     export let mapping : any;
     // Get a card from every suit
-    let cards : Card[] = suits.map((suit) => suit.cards[0]).reverse();
+    let selectedCards : Card[] = suits.get('webapp').map((suit) => suit.cards[0]).reverse();
     let mappingData : any[] = mapping.suits.map((suit: { cards: any[]; }) => suit.cards[0]).reverse();
-
+    
     mappingData.unshift({
         id: "JOA",
         value: "A",
@@ -19,21 +19,13 @@
         owasp_scp: [],
         safecode: []
     });
-    mappingData.unshift({
-        id: "CORNUCOPIA",
-        value: "Explanation",
-        capec: [],
-        owasp_appsensor: [],
-        owasp_asvs: [],
-        owasp_scp: [],
-        safecode: []
-    });
+    
 </script>
 
 <div class="deck">
-    {#each cards as card,index}
+    {#each selectedCards as card,index}
     <div style="transform: translate(150%,35%) rotate({-45 + index*10}deg) " class="card-container">
-        <CardPreview cardData={cardData} {card} mapping={mappingData[index]}></CardPreview>
+        <CardPreview card={cards.get(card)} mapping={mappingData[index]}></CardPreview>
     </div>
     {/each}
 </div>

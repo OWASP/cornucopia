@@ -5,7 +5,7 @@
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
     export let card : Card;
-    export let cards : Card[];
+    export let cards : Map<string, Card>;
     export let mappingData : any;
   
     function checkKey(event : any) 
@@ -23,36 +23,14 @@
         }
     }
 
-    function getCurrentIndex(card : Card)
-    {
-
-        // cards are equal when both their suit and card value (e.g. authentication 4) are equal.
-        return cards.map(card => {
-            return card.suit + String(card.id).toUpperCase();
-
-        }).indexOf(card.suit + String(card.id).toUpperCase());
-    }
-
-
     function getPrevious(card : Card)
     {
-        let index = getCurrentIndex(card);
-        index -= 1;
-        index = index % cards.length;
-        if(index < 0)
-            index = cards.length - 1;
-
-        let previousCard = cards[index];
-        return '/' + previousCard.suit + '/' + previousCard.id + '/#card';    
+        return '/' + cards.get(card.prevous)?.suit + '/' + cards.get(card.prevous)?.id + '/#card';    
     }
 
     function getNext(card : Card)
     {
-        let index = getCurrentIndex(card);
-        index += 1;
-        index = index % cards.length;
-        let nextCard = cards[index];
-        return '/' + nextCard.suit + '/' + nextCard.id + '/#card';
+        return '/' + cards.get(card.next)?.suit + '/' + cards.get(card.next)?.id + '/#card';
     }
 
     onDestroy(()=> {if(browser)document.onkeydown = null})

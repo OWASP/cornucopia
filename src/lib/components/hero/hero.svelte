@@ -5,7 +5,7 @@
     import HeroText from "./heroText.svelte";
 
     export let suits : Suit[];
-    export let cardData : any;
+    export let cards : any;
     export let mapping : any;
 </script>
 
@@ -14,7 +14,7 @@
         <HeroText></HeroText>
     </div>
     <div class="card-container">
-        <Deck {cardData} {suits} {mapping}></Deck>
+        <Deck {cards} {suits} {mapping}></Deck>
     </div>
     <Chevron href="/#top"></Chevron>
 </div>

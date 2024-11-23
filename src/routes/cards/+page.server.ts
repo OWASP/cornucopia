@@ -1,15 +1,12 @@
 import { DeckService } from '$lib/services/deckService';
 import request from 'sync-request';
-import { CardController } from '../../domain/card/cardController';
 import { SuitController } from '../../domain/suit/suitController';
  
 export const load = (({ params }) => {
-  let deck = new DeckService(request).getCards('webapp', 'en');
+  let deck = new DeckService(request).getCards('en');
   return {
-    suits : (new SuitController(deck, 'webapp', '2.00')).getSuits(),
-    cards : (new CardController(deck, 'webapp', '2.00')).getCardsFlat(),
-    suitsMobile : (new SuitController(deck, 'mobileapp', '1.00')).getSuits(),
-    cardsMobile : (new CardController(deck, 'mobileapp', '1.00')).getCardsFlat(),
+    suits : SuitController.getSuits(),
+    cards : new DeckService(request).getCards('en'),
     cardData: deck,
     mappingData: (new DeckService(request)).getCardMapping('webapp')
   };

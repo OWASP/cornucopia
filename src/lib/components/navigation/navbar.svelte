@@ -4,7 +4,6 @@
     import { AddLink, type Link } from "./utils";
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
-
     let width: number;
     let height: number;
     let mobile: boolean = false;

@@ -7,7 +7,7 @@
 </script>
 
 
-<Hero cardData={data.cardData} suits={data.suits} mapping={data.mappingData}></Hero>
+<Hero cards={data.cards} suits={data.suits} mapping={data.mapping}></Hero>
 <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h1 id="top">Introduction</h1>
     <p>

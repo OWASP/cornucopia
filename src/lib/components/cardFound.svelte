@@ -9,8 +9,7 @@
   import type { Card } from "../../domain/card/card";
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
   import type { Route } from "../../domain/routes/route";
-  import { CardController } from "../../domain/card/cardController";
-    import { MappingController, type Mapping } from "../../domain/mapping/mappingController";
+  import { MappingController, type Mapping } from "../../domain/mapping/mappingController";
   export let mappingData;
   export let card: Card;
   export let cards: Card[];
@@ -40,7 +39,6 @@
   function linkCapec(input: string) {
     return "https://capec.mitre.org/data/definitions/" + input + ".html";
   }
-  let title: string = "";
   let mappings: Mapping | undefined = controller.getCardMappings(card.id);
   let attacks: Attack[] = GetCardAttacks(card.id);
 

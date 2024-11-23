@@ -1,1 +1,0 @@
-Visit the [How-to-play](/how-to-play) page for more information!
