@@ -10,6 +10,7 @@
   
     function checkKey(event : any) 
     {
+        console.log(event);
         const KEYCODE_RIGHT = 39;
         const KEYCODE_LEFT = 37;
         if(event.keyCode == KEYCODE_RIGHT)
@@ -25,11 +26,13 @@
 
     function getPrevious(card : Card)
     {
+        console.log('/' + cards.get(card.prevous)?.suit + '/' + cards.get(card.prevous)?.id + '/#card');
         return '/' + cards.get(card.prevous)?.suit + '/' + cards.get(card.prevous)?.id + '/#card';    
     }
 
     function getNext(card : Card)
     {
+        console.log('/' + cards.get(card.next)?.suit + '/' + cards.get(card.next)?.id + '/#card');
         return '/' + cards.get(card.next)?.suit + '/' + cards.get(card.next)?.id + '/#card';
     }
 
