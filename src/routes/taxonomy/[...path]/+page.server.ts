@@ -28,8 +28,6 @@ function getDataFromPath(path: string) {
   let content: string = "";
   let indexFile: string = path + "/index.md";
   if (fs.existsSync(indexFile)) content = fs.readFileSync(indexFile, "utf8");
-  else {
-    //console.log('🍎 ' + indexFile + ' doesnt exist')
   }
   var parentdir = path.split("/").slice(0, -1).join("/");
   let disclaimerFile: string = parentdir + "/Disclaimer.md";

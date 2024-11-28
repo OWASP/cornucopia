@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
+    import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
+    import WebAppCardMapping from "./webAppCardMapping.svelte";
     export let card : Card = {} as Card;
     export let mapping : any;
 
@@ -17,18 +19,14 @@
     <div class="right">
         
         {#if mapping}
-        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{mapping?.value ?? ""}</h1>
+        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.card ?? card?.value}</h1>
         <p class="property-card-description">{card.desc}</p>
-        <p class="mapping-title">OWASP SCP</p>
-        <p class="mapping-value">{mapping.owasp_scp || '-'}</p>
-        <p class="mapping-title">OWASP ASVS</p>
-        <p class="mapping-value">{mapping.owasp_asvs || '-'}</p>
-        <p class="mapping-title">OWASP AppSensor</p>
-        <p class="mapping-value">{mapping.owasp_appsensor || '-'}</p>
-        <p class="mapping-title">CAPEC</p>
-        <p class="mapping-value">{mapping.owasp_capec || '-'}</p>        
-        <p class="mapping-title">SAFECODE</p>
-        <p class="mapping-value">{mapping.safecode || '-'}</p>
+            {#if card.edition == 'webapp' && card.value != 'A' && card.value != 'B'}
+                <WebAppCardMapping {mapping}></WebAppCardMapping>
+            {/if}
+            {#if card.edition == 'mobileapp' && card.value != 'A' && card.value != 'B'}
+                <MobileAppCardMapping {mapping}></MobileAppCardMapping>
+            {/if}
         {:else if card.suitName == 'WILD CARD' }
         <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">Joker</h1>
         <p class="property-card-description">{card.desc}</p>
@@ -40,25 +38,6 @@
 </div>
 
 <style>
-    .mapping-title, .mapping-value
-    {
-        font-size: max(.60vw,1vh);
-        margin:0;
-        margin-left: .25rem;
-        margin-right: .25rem;
-    }
-
-    .mapping-title
-    {
-        font-weight: bold;
-    }
-
-    .mapping-value
-    {
-        border-bottom: 1px rgb(192, 192, 192) solid;
-    }
-
-    
     .property-card-suit
     {
         transform: rotate(90deg);

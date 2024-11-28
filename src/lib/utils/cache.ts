@@ -19,7 +19,6 @@ export async function LocalCache(func : Function, cacheSeconds : number, descrip
         logMessage += "\t💿 " + kiloBytes + " kb."
 
         let response = JSON.parse(responseAsString);
-        console.log(logMessage);
         return response; 
     }
     else

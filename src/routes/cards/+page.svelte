@@ -27,7 +27,7 @@
     let version : string = VERSION_WEBAPP;
     let suit : string;
     let card : Card = cards.get('VE2') as Card;
-    let mapping = (new MappingController(data.mappingData)).getCardMappings(card.id);
+    let mapping = (new MappingController(data.mappingData.get(version))).getCardMappings(card.id);
 
     let map : Map<string,boolean> = new Map();
     setTree(false);
@@ -72,7 +72,7 @@
     {
         suit = suitParam;
         card = cards.get(cardParam) as Card;
-        mapping = (new MappingController(data.mappingData)).getCardMappings(card.id);
+        mapping = (new MappingController(data.mappingData.get(version))).getCardMappings(card.id);
     }
 </script>
 

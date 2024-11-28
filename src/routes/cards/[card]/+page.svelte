@@ -26,7 +26,7 @@
       "REA","RE2","RE3","RE4","RE5","RE6","RE7","RE8","RE9","REX","REJ","REQ","REK",
       "SMA","SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMJ","SMQ","SMK",
       "VEA","VE2","VE3","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
-      "JOA","JOB","JOMA","JOMB","CORNUCOPIA"]
+      "JOA","JOB","JOAM","JOBM","CORNUCOPIA"]
     let suits_options = [
       "data-validation-&-encoding",
       "authentication",
@@ -47,7 +47,7 @@
 
 <p><a href="/cards">Back to overview</a></p>
 {#if cardFound()}
-  <CardFound ASVSRoutes={data.ASVSRoutes} {cards} {card}  mappingData={data.mappingData} />
+  <CardFound routes={data.routes} {cards} {card}  mappingData={data.mappingData.get(card.edition)} />
 {:else}
   <CardNotFound {card} />
 {/if}

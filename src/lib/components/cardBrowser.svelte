@@ -62,7 +62,7 @@
         <a href={getUrl(card)} on:click={goToPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
     </div>
     <div class="center">
-        <CardPreview {card} mapping={mappingData}></CardPreview>
+        <CardPreview bind:card={card} mapping={mappingData}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
         <a href={getUrl(card)} on:click={goToNext(card)} class="arrow" title="View next card">{">"}</a>

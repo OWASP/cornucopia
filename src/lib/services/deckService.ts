@@ -49,9 +49,17 @@ export class DeckService {
         return data;
     }
 
-    public getCardMapping(edition: string)
+    public getCardMapping() : Map<string, any>
     {
-        return DeckService.mappings.find((mapping) => mapping?.edition == DeckService.getEdition(edition))?.data || this.getCardMappingData(edition);
+        const decks = new Map<string, any>();
+        const editions = DeckService.languages;
+        editions.forEach((deck) => {
+            decks.set(
+                deck.edition, DeckService.mappings.find((mapping) => mapping?.edition == DeckService.getEdition(deck.edition))?.data || this.getCardMappingData(deck.edition)
+            );
+            
+        });
+        return decks;
     }
 
     public getCards(lang: string): Map<string, Card>
@@ -92,7 +100,7 @@ export class DeckService {
                 console.error('Request error in deckService. status: ' + response.statusCode + ' , message: ' + response.getBody())
             }
             let data : any = yaml.load(response.getBody().toString());
-            let mapping = this.getCardMapping(deck.edition);
+            let mapping = this.getCardMapping().get(deck.edition);
             let base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}-${lang}/`;
 
             if(!FileSystemHelper.hasDir(base)) {
@@ -105,6 +113,7 @@ export class DeckService {
                 for(let card in suitObject['cards']) {
                     let cardObject = suitObject['cards'][card];
                     cardObject.id = cardObject['id'].replace("COM", "CM");
+                    cardObject.edition = deck.edition;
                     cardObject.suitName = suitName.replace("COM", "CM");
                     cardObject.suitId = suitObject['id'].replace("COM", "CM");
                     cardObject.name = `${cardObject.suitName} (${cardObject.id})`;

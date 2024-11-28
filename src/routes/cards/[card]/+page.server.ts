@@ -8,8 +8,12 @@ export const load = (({ params }) => {
   return {
     card: legacyCardCodeFix(params.card.toUpperCase()),
     decks: new DeckService(request).getCardsForAllLanguages(),
-    ASVSRoutes: FileSystemHelper.ASVSRouteMap(),
-    mappingData: (new DeckService(request)).getCardMapping('webapp')
+    routes: new Map<string, Route[]>([
+      ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()],
+      ['MASVSRoutes', FileSystemHelper.MASVSRouteMap()],
+      ['MASTGRoutes', FileSystemHelper.MASTGRouteMap()]
+    ]),
+    mappingData: (new DeckService(request)).getCardMapping()
   };
 
   // Some QR code errors where done on the first printed decks. This will compensate for that.

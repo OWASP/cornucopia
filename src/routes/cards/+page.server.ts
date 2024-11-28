@@ -7,6 +7,6 @@ export const load = (({ params }) => {
   return {
     suits : SuitController.getSuits(),
     decks :new DeckService(request).getCardsForAllLanguages(),
-    mappingData: (new DeckService(request)).getCardMapping('webapp')
+    mappingData: (new DeckService(request)).getCardMapping()
   };
 });
