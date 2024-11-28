@@ -7,36 +7,51 @@
     export let card : Card;
     export let cards : Map<string, Card>;
     export let mappingData : any;
-  
+    let nextCard = cards.get(card.next);
+    let previousCard = cards.get(card.prevous);
     function checkKey(event : any) 
     {
-        console.log(event);
         const KEYCODE_RIGHT = 39;
         const KEYCODE_LEFT = 37;
         if(event.keyCode == KEYCODE_RIGHT)
         {
-            goto(getNext(card))
+            goto(getUrl(cards.get(card.next)));
+            card = cards.get(card.next);
+            nextCard = cards.get(card.next);
+            previousCard = cards.get(card.prevous);
         }   
 
         if(event.keyCode == KEYCODE_LEFT)
         {
-            goto(getPrevious(card))
+            goto(getUrl(cards.get(card.prevous)));
+            card = cards.get(card.prevous);
+            nextCard = cards.get(card.next);
+            previousCard = cards.get(card.prevous);
         }
     }
 
-    function getPrevious(card : Card)
+    function getUrl(card: Card)
     {
-        console.log('/' + cards.get(card.prevous)?.suit + '/' + cards.get(card.prevous)?.id + '/#card');
-        return '/' + cards.get(card.prevous)?.suit + '/' + cards.get(card.prevous)?.id + '/#card';    
-    }
-
-    function getNext(card : Card)
-    {
-        console.log('/' + cards.get(card.next)?.suit + '/' + cards.get(card.next)?.id + '/#card');
-        return '/' + cards.get(card.next)?.suit + '/' + cards.get(card.next)?.id + '/#card';
+        return '/' + cards.get(card.id)?.suit + '/' + cards.get(card.id)?.id + '/#card';
     }
 
     onDestroy(()=> {if(browser)document.onkeydown = null})
+
+    function goToNext(thisCard: Card)
+    {
+        card = cards.get(thisCard.next);
+        nextCard = cards.get(card.next);
+        previousCard = cards.get(card.prevous);
+        goto(getUrl(card));
+    }
+
+    function goToPrevious(thisCard: Card)
+    {
+        card = cards.get(thisCard.prevous);
+        nextCard = cards.get(thisCard.next);
+        previousCard = cards.get(card.prevous);
+        goto(getUrl(card));
+    }
 
     if(browser)
         document.onkeydown = checkKey;
@@ -44,13 +59,13 @@
 
 <div class="card-panel" id="card">
     <div class="left" data-umami-event="card-browser-left-button">
-        <a href={getPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
+        <a href={getUrl(card)} on:click={goToPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
     </div>
     <div class="center">
-        <CardPreview card={card} mapping={mappingData}></CardPreview>
+        <CardPreview {card} mapping={mappingData}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
-        <a href={getNext(card)} class="arrow" title="View next card">{">"}</a>
+        <a href={getUrl(card)} on:click={goToNext(card)} class="arrow" title="View next card">{">"}</a>
     </div>
 </div>
 

@@ -105,8 +105,8 @@ export class DeckService {
                 for(let card in suitObject['cards']) {
                     let cardObject = suitObject['cards'][card];
                     cardObject.id = cardObject['id'].replace("COM", "CM");
-                    cardObject.suitName = suitName;
-                    cardObject.suitId = suitObject['id'];
+                    cardObject.suitName = suitName.replace("COM", "CM");
+                    cardObject.suitId = suitObject['id'].replace("COM", "CM");
                     cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                     cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
                     cardObject.url = `/${cardObject.suit}/${cardObject.id}`;
@@ -131,6 +131,8 @@ export class DeckService {
                     } else {
                         cardObject.next = suitObject['cards'][+card+1]['id'];
                     }
+                    cardObject.prevous = cardObject.prevous.replace("COM", "CM");
+                    cardObject.next = cardObject.next.replace("COM", "CM");
                     
                     cards.set(cardObject.id, cardObject);
                 }

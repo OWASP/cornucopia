@@ -12,7 +12,7 @@
   import { MappingController, type Mapping } from "../../domain/mapping/mappingController";
   export let mappingData;
   export let card: Card;
-  export let cards: Card[];
+  export let cards: Map<string, Card>;
   export let ASVSRoutes: Route[];
   const controller: MappingController = new MappingController(mappingData);
   function linkASVS(input: string) {
@@ -51,9 +51,9 @@
 <div class="container">
   <h1 class="title">{card.name}</h1>
   <p>{card.desc}</p>
-  <CardBrowser {card} {cards} mappingData={mappings}></CardBrowser>
+  <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
   <a class="link" href="/how-to-play">How to play?</a>
-  <Summary {card}></Summary>
+  <Summary card={card}></Summary>
   {#if mappings}
     <h1 class="title">Mappings</h1>
     <MappingsList
