@@ -1,33 +1,41 @@
 <script lang="ts">
+    import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
     import type { Card } from "../../domain/card/card.js";
     import { MappingController } from "../../domain/mapping/mappingController.js";
     import { readLang } from '$lib/stores/stores';
     import type { Suit } from "../../domain/suit/suit.js";
+
+    export let data: PageData;
     const lang = readLang();
-    export let data;
-    const cards = data.decks.get($lang);
+
+    let decks = data?.decks;
+    let cards = decks?.get($lang);
+    let suits = data.suits;
+    let mappingData = data.mappingData;
 
     //TODO move these constants to a more sensible location
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
 
-    let mobileappSuits = data.suits.get(`${VERSION_MOBILEAPP}-${$lang}`);
-    let webappSuits = data.suits.get(`${VERSION_WEBAPP}-${$lang}`);
+
+
+    let mobileappSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
+    let webappSuits = suits?.get(`${VERSION_WEBAPP}-${$lang}`);
 
     if (!mobileappSuits) {
-        mobileappSuits = data.suits.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
+        mobileappSuits = suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
     }
 
     if (!webappSuits) {
-        webappSuits = data.suits.get(`${VERSION_WEBAPP}-en`) as Suit[];
+        webappSuits = suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
     }
 
     let version : string = VERSION_WEBAPP;
     let suit : string;
-    let card : Card = cards.get('VE2') as Card;
-    let mapping = (new MappingController(data.mappingData.get(version))).getCardMappings(card.id);
+    let card : Card = cards?.get('VE2') as Card;
+    let mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
 
     let map : Map<string,boolean> = new Map();
     setTree(false);
@@ -48,7 +56,7 @@
 
     function toggle(suit : string)
     {
-        let value : boolean = map.get(suit) || false;
+        let value : boolean = map?.get(suit) || false;
         map.set(suit,!value);
         map = map;
     }
@@ -60,10 +68,10 @@
         setTree(false);
         // Show the following selected cards
         if(version == VERSION_WEBAPP)
-        card = cards.get('VE2') as Card;
+        card = cards?.get('VE2') as Card;
 
         if(version == VERSION_MOBILEAPP)
-        card = cards.get('PC2') as Card;
+        card = cards?.get('PC2') as Card;
 
     }
 
@@ -71,8 +79,8 @@
     function enter(suitParam : string, cardParam : string)
     {
         suit = suitParam;
-        card = cards.get(cardParam) as Card;
-        mapping = (new MappingController(data.mappingData.get(version))).getCardMappings(card.id);
+        card = cards?.get(cardParam) as Card;
+        mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
     }
 </script>
 
@@ -96,7 +104,7 @@
             {#each webappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h2>
-                {#if map.get(suit.name)}
+                {#if map?.get(suit.name)}
                     {#each suit.cards as card}
                         <p on:mouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
                             <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
@@ -111,7 +119,7 @@
             {#each mobileappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h2>
-                {#if map.get(suit.name)}
+                {#if map?.get(suit.name)}
                     {#each suit.cards as card}
                         <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
                             <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>

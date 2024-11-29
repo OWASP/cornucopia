@@ -1,8 +1,9 @@
 <script lang="ts">
     export let path : string = ""
 
-    let base : string = "https://github.com/jefmeijvis/cornucopia.dotnetlab.eu/blob/master/";
-    let href : string = base + path;
+    let base : string = "https://github.com/jefmeijvis/cornucopia.dotnetlab.eu/tree/master/data/cards/";
+    //@TODO Would it be possible to link directly to the card?
+    let href : string = base; //+ path;
 </script>
 
 <div>

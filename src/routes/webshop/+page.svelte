@@ -39,11 +39,6 @@
         overflow: none;
     }
 
-    h2,h3
-    {
-        font-weight: bold;
-    }
-
     .page-container
     {
         padding : 2rem;
@@ -62,12 +57,6 @@
             .vendor-container
             {
                 flex-direction: column;
-            }
-
-            .vendor
-            {
-                width: 100%;
-                margin-bottom: 2rem;
             }
 
         }

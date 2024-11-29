@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type { Card } from "../../domain/card/card";
-    export let card : Card = {} as Card;
     export let mapping : any;
 
 </script>

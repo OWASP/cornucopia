@@ -15,7 +15,7 @@
 </script>
 
 
-<Hero cards={data.cards} {suits} mapping={data.mapping.get('webapp')}></Hero>
+<Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h1 id="top">Introduction</h1>
     <p>

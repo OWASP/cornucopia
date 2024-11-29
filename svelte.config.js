@@ -12,6 +12,13 @@ const config =
 			$data: "data",
 		},
 		prerender: {
+			handleHttpError: ({ path, referrer, message }) => {
+				console.log(message);
+				console.log(referrer);
+				console.log(path);
+				// otherwise fail the build
+				throw new Error(message);
+			},
 			entries: [
 				'/cards/VE2',
 				'/cards/VE3',
