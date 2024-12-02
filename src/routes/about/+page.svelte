@@ -33,7 +33,7 @@
             <li>Remember, to have fun!</li>
         </ol>
     </section>
-    <section>
+    <section id="mappings">
         <a href="#mappings"><h2>Mappings</h2></a>
         <p>The other driver for Cornucopia was to link the attacks with requirements and verification techniques. An initial aim had been to reference <a href="http://cwe.mitre.org/" rel="nofollow">CWE</a> weakness IDs, but these proved too numerous, and instead it was decided to map each card to <a href="http://capec.mitre.org/" rel="nofollow">CAPEC</a> software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved.</p>
         <p>Each Website App Edition card is also mapped to the 36 primary security stories in the <a href="https://safecode.org/resource-secure-development-practices/fundamental-practices-secure-software-development-2/" rel="nofollow">SAFECode document</a>, as well as to the OWASP <a href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/" rel="nofollow">SCP</a> v2, <a href="https://owasp.org/www-project-application-security-verification-standard/" rel="nofollow">ASVS</a> v4.0.3 and <a href="https://owasp.org/www-project-appsensor/" rel="nofollow">AppSensor</a> (application attack detection and response) to help teams create their own security-related stories for use in Agile processes.</p>
