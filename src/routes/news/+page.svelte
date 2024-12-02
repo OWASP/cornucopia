@@ -4,8 +4,9 @@
 
     export let data;
 </script>
-
+<div>
 <h1>News</h1>
+<hr>
 <p>Wondering what's new with Cornucopia? This is the place to look!</p>
 
 {#if data.posts.length == 0}
@@ -34,7 +35,7 @@
     </p>
 {/each}
 
-
+</div>
 <style>
     a
     {
@@ -90,6 +91,14 @@
     button:hover
     {
         opacity: 70%;
+    }
+
+    div
+    {
+        padding-left : 1rem;
+        width : 95%;
+        margin: auto;
+        font-size: 1.2rem;
     }
 
     p

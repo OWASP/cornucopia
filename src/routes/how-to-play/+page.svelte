@@ -1,5 +1,6 @@
 <div>
   <h1>How to play Cornucopia?</h1>
+  <hr>
   <p>It is possible to play Cornucopia in many different ways. Here is one way explained in this Youtube video</p>
   <iframe src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -72,9 +73,10 @@
     }
     div
     {
-        width : 50%;
-        margin:auto;
-        margin-top: 2rem;
+        padding-left : 1rem;
+        width : 95%;
+        margin: auto;
+        font-size: 1.2rem;
     }
 
     iframe

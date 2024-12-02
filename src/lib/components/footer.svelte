@@ -72,7 +72,7 @@
     </div>
     <p class="footer">OWASP and the OWASP logo are trademarks of the <a href="https://owasp.org/">OWASP Foundation</a></p>
     <p class="footer">Last update was {getCurrentDate()}{timeAgo}</p>
-    <p class="footer"><a href="/about#license">Licensing information</a></p>
+    <p class="footer"><a href="/about#license">Licensing information</a> | <a href="/about#acknowledgements">Acknowledgements</a> | <a href="/questionsandanswers">Q & A</a> | <a href="/roadmap">Roadmap</a></p>
     <p class="footer">
         <a href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>

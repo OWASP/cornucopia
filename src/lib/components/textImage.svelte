@@ -74,7 +74,7 @@
 	}
 
 	img {
-		width: 50%;
+		width: 80%;
 		object-fit: cover;
 		border-radius: .3rem;
 	}

@@ -83,13 +83,17 @@
         mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
     }
 </script>
-
-
+<a href="#decks"><h1>The card decks</h1></a>
+<section id="decks">
 <p class="button-container">
     <button class:button-selected={(version == VERSION_WEBAPP)} on:click={()=>changeVersion(VERSION_WEBAPP)}>Website App version</button>
     <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>Mobile App version</button>
 </p>
 
+<p class="text">Both current decks have six suits and there are also two Joker cards. Each suit contains 13 cards 
+    (Ace, 2-10, Jack, Queen and King). This page contains the card browser where you can browse through each of the
+    cards in the OWASP Cornucopia decks.</p>
+</section>
 {#each webappSuits as suit}
     {#each suit.cards as card}
         <p><a style="display:none;" href="{cards?.get(card)?.url}">{suit.name} {card}</a></p>
@@ -100,10 +104,17 @@
     <div class="tree">
 
         {#if version == VERSION_WEBAPP}
-            <h1>Website App version</h1>
+            <h2>Website App version (previously called Ecommerce Website Edition)</h2>
+            <p class="text">
+                Instead of EoP’s STRIDE suits, Cornucopia suits for the Website App Edition were selected based on the structure of the 
+                OWASP Secure Coding Practices - Quick Reference Guide (SCP). The content was mainly drawn from the SCP but with additional 
+                consideration of sections in the <a href="https://owasp.org/www-project-application-security-verification-standard/">OWASP Application Security Verification Standard</a>, the <a href="https://owasp.org/www-project-web-security-testing-guide">OWASP Web Security Testing Guide</a> and 
+                David Rook's <a href="https://owasp.org/www-pdf-archive//OWASP-SecureDevPrinciples-David-Rook.pdf">Principles of Secure Development</a>. These provided five suits, and a sixth called “Cornucopia” was created for 
+                everything else:
+            </p>
             {#each webappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h2>
+                <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
                 {#if map?.get(suit.name)}
                     {#each suit.cards as card}
                         <p on:mouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
@@ -115,10 +126,15 @@
         {/if}
 
         {#if version == VERSION_MOBILEAPP}
-            <h1>Mobile App version</h1>
+            <h2>Mobile App version</h2>
+            <p class="text">
+                The second Cornucopia deck, the “Mobile App Edition”, follows the same principles and game rules as the original 
+                OWASP Cornucopia, but has different suits based on the <a href="https://mas.owasp.org/MASVS/">MASVS categories</a>, 
+                in addition to the Cornucopia suit that contains threats related to mobile malware and privacy issues:
+            </p>
             {#each mobileappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <h2 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h2>
+                <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
                 {#if map?.get(suit.name)}
                     {#each suit.cards as card}
                         <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
@@ -171,7 +187,7 @@
 
     .preview-container
     {
-        padding-top: 5rem;
+        padding-left: 1rem;
         width : 20%;
     }
 
@@ -183,15 +199,30 @@
         height : 100%;
         margin-bottom: 50vh;
     }
+    .text
+    {
+        margin: 1rem;
+        font-size: 1.3rem;
+        font-family: var(--font-body);
+        font-weight: normal;
+    }
 
-    h2
+    h1
+    {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: 400;
+    }
+
+    h1,h2,h3
     {
         padding-left: 1rem;
         margin:0;
         cursor:pointer;
     }
 
-    h2:hover
+    h3:hover
     {
         opacity: 50%;
     }
@@ -202,7 +233,7 @@
         width : 50%;
     }
 
-    p,h1,a,h2 {
+    p,a,h2,h3 {
         font-weight: bold;
     }
 

@@ -1,5 +1,6 @@
 <div>
     <h1>Prizes and Swags</h1>
+    <hr>
     <p>
         We keep a large selection of design files that can be used for promoting, creating prizes and swag gifts. Here are some ideas, but feel free to use your imagination and come up with your own.
     </p>
@@ -65,10 +66,9 @@
 
     div
     {
-        padding : 2rem;
-        width : 60%;
+        padding-left : 1rem;
+        width : 95%;
         margin: auto;
-        margin-top: 2rem;
         font-size: 1.2rem;
     }
         @media (max-aspect-ratio: 1/1)

@@ -1,5 +1,13 @@
 <div>
     <h1 id="printing">Printing</h1>
+    <hr>
+    <p>The primary source document is a Word document. You can find it named under <a href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).docx</a> as part of the latest release.</p>
+    <p>Pre-printed card decks may, however, be more useful. To get this, click on <a href="/webshop">webshop</a> in the upper right corner.</p>
+    <p>There are links to the source design files for the cards themselves on this page so that you can print them out yourself with your own design if you want to.</p>
+    <p>You can also choose to play the OWASP Cornucopia Website App Edition and Mobile App Edition online at <a href="https://copi.owasp.org" rel="nofollow">copi.owasp.org</a></p>
+    <p>OWASP no longer has a stock of printed decks.</p>
+    <p dir="auto">OWASP does not endorse or recommend commercial products or services. However, <a href="https://agilestationery.co.uk/" rel="nofollow">Agile Stationary</a> offer <a href="https://agilestationery.com/products/owasp-cornucopia-2-0-website-app-edition-threat-modeling-cards?_pos=2&amp;_psq=cornucipia&amp;_ss=e&amp;_v=1.0" rel="nofollow">large print (v2.0) web app decks</a> and <a href="https://agilestationery.com/products/owasp-cornucopia-mobile-app-edition-threat-modeling-cards?_pos=3&amp;_psq=cornucip&amp;_ss=e&amp;_v=1.0" rel="nofollow">large print (v1.0) mobile app decks</a>. They also offer a <a href="https://croupier.agilestationery.co.uk/" rel="nofollow">croupier</a> to help you distribute cards to team members. Also, <a href="https://www.dotnetlab.eu/" rel="nofollow">dotNET lab</a> sell a <a href="https://webshop.dotnetlab.eu/product/cornucopia-card-deck/" rel="nofollow">printed deck</a> which complements their <a href="https://cornucopia.dotnetlab.eu/cards" rel="nofollow">online reference</a>.</p>
+    <p>For each deck bought, a small donation is made to the OWASP Foundation.</p>
     <h2 id="current-version">Current printable version</h2>
     <p>
         Here is the current version of Cornucopia Website App and Mobile App Edition guides, decks and leaflets (v2.00 with updated mapping to ASVS v4.0.3):
@@ -27,7 +35,7 @@
             </ul>
         </li>
     </ul>
-    <h2 id="instructions">Instructions</h2>
+    <h2 id="instructions">Printing instructions</h2>
     <p>
         The latest printable files are released under the <a href="https://github.com/OWASP/cornucopia/releases/tag/pre-release">pre-release</a>. Please download final printable files from there to ensure you get the latest updates and fixes done to the decks.<br/>
         The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work. <br/>
@@ -107,10 +115,9 @@
 
     div
     {
-        padding : 2rem;
-        width : 60%;
+        padding-left : 1rem;
+        width : 95%;
         margin: auto;
-        margin-top: 2rem;
         font-size: 1.2rem;
     }
         @media (max-aspect-ratio: 1/1)
