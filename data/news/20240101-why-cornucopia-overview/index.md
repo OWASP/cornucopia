@@ -20,13 +20,11 @@ We are writing blogposts in which we explain several parts of cornucopia and how
 ### Interactive mapping
 The cards provide interactive links to several standards.  When possible, we make the links interactive.  We have implemented ASVS and CAPEC.  
 
-We've also included the complete ASVS 4.0 standard on our website here: https://cornucopia.dotnetlab.eu/taxonomy/ASVS-4.0.3
+We've also included the complete ASVS 4.0 standard on our website here: https://cornucopia.owasp.org/taxonomy/ASVS-4.0.3
 
 ### buy a deck of cards now! (or two decks :-) )
 Cornucopia is the fastest way to learn about building more secure applications.  Play the game together with your teammembers and get a whole new perspective on how to build more secure applications.
 
-**[visit our webshop](https://webshop.dotnetlab.eu/product/cornucopia-card-deck/)** 
-
 ### want to get in touch?
 
-**Get in touch with us at [dotNET lab Belgium](https://www.dotnetlab.eu/en/contact-en/)** 
+**Get in touch with us at [our Github discussion forum](https://github.com/OWASP/cornucopia/discussions)** 

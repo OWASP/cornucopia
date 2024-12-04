@@ -32,7 +32,7 @@
     <h1 id="top">How to start</h1>
     <p>To start using Cornucopia:</p>
     <ol>
-        <li><b>Either</b> Obtain or buy a pre-printed deck of cards;</li>
+        <li><b>Either</b> obtain or buy a pre-printed deck of cards;</li>
         <li><b>Or:</b> Download the free Adobe Illustrator files and get them professionally printed (see: <a href="/printing">printing instructions</a>);</li>
         <li><b>Or:</b> Play the game online at <a rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
         <li>Identify an application, module or component to assess.</li>
@@ -53,7 +53,7 @@
     <p>
         One of the main advantages of the OWASP Cornucopia card game being open source is that it allows anyone to access and use the game without any licensing fees or restrictions. This encourages widespread adoption and makes it easier for teams to integrate the game into their security practices. Additionally, being open source means that the game is transparent and customizable. Teams can modify the game to suit their specific needs and address the security threats that are most relevant to their applications. They can also contribute back to the game's development by submitting new cards or improvements. Furthermore, open source software tends to have a large and active community of developers who contribute to the codebase and offer support. This can lead to faster bug fixes and updates, ensuring that the game remains relevant and effective in identifying security threats.
     </p>
-    <a class="internal-links" href="https://github.com/OWASP/cornucopia">View source on Github ➔</a>
+    <a class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">View source on Github ➔</a>
 </TextImage>
 <Spacer></Spacer>
 <style>

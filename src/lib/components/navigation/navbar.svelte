@@ -20,7 +20,7 @@
     AddLink(links,$t('home.title'),"/");
 
     function getMobile(w: number, h: number) {
-        mobile = w / h < 1;
+        mobile = w / h < 1.8;
     }
 
 
@@ -56,7 +56,7 @@ $: getMobile(width, height);
     {:else}
         <a data-umami-event="desktop-webshop-button" class="link webshop" href="/webshop">{$t('webshop.title')}</a>
         {#each links as link}
-            <a data-umami-event="desktop-navbar-{link.name}-button" class="link" href="{link.href}">{link.name}</a>
+        <a data-umami-event="desktop-navbar-{link.name}-button" class="link general-menu" href="{link.href}">{link.name}</a>
         {/each}
     {/if}
 </nav>
@@ -121,13 +121,19 @@ $: getMobile(width, height);
         float:right;
         color:white;
         text-decoration: none;
-        padding: .5rem;
-        font-size: 1.5rem;
-        margin-left:.2rem;
-        margin-right:.2rem;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        padding-top: .5rem;
+        font-size: calc(0.85vw + 0.90vh);
+        margin-left:.01rem;
+        margin-right:.01rem;
         margin-top: 1rem;
         transition: var(--transition);
         font-weight: bold;
+    }
+    .general-menu
+    {
+        padding-top: 0.8rem;
     }
 
     .link:hover

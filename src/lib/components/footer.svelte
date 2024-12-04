@@ -63,22 +63,22 @@
 
         <div class="box">
             <p class="title">Mappings</p>
-            <p><a href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">OWASP SCP</a></p>
-            <p><a href="https://owasp.org/www-project-application-security-verification-standard/">OWASP ASVS</a></p>
-            <p><a href="https://owasp.org/www-project-appsensor/">OWASP APPSENSOR</a></p>
-            <p><a href="https://capec.mitre.org/">CAPEC</a></p>
-            <p><a href="https://safecode.org/">SAFECODE</a></p>
+            <p><a rel="noopener" href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">OWASP SCP</a></p>
+            <p><a rel="noopener" href="https://owasp.org/www-project-application-security-verification-standard/">OWASP ASVS</a></p>
+            <p><a rel="noopener" href="https://owasp.org/www-project-appsensor/">OWASP APPSENSOR</a></p>
+            <p><a rel="noopener nofollow" href="https://capec.mitre.org/">CAPEC</a></p>
+            <p><a rel="noopener nofollow" href="https://safecode.org/">SAFECODE</a></p>
         </div>
     </div>
-    <p class="footer">OWASP and the OWASP logo are trademarks of the <a href="https://owasp.org/">OWASP Foundation</a></p>
+    <p class="footer">OWASP and the OWASP logo are trademarks of the <a rel="noopener" href="https://owasp.org/">OWASP Foundation</a></p>
     <p class="footer">Last update was {getCurrentDate()}{timeAgo}</p>
     <p class="footer"><a href="/about#license">Licensing information</a> | <a href="/about#acknowledgements">Acknowledgements</a> | <a href="/questionsandanswers">Q & A</a> | <a href="/roadmap">Roadmap</a></p>
     <p class="footer">
-        <a href="https://owasp.org/">© OWASP Foundation</a> 
+        <a rel="noopener" href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>
         <a href="/rss.xml"><img style="position:relative;top:3px;" height="15px" src="/images/rss.svg" alt="rss" /></a>
         <span> | </span>
-        <a href="https://cornucopia.dotnetlab.eu/sitemap.xml">Sitemap</a>
+        <a href="/sitemap.xml">Sitemap</a>
     </p>
 </footer>
 

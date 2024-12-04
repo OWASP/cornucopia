@@ -20,7 +20,7 @@ Each point represents an item in a list.
 ### This is a green title 
 Just as above, we have a bit of paragraph text underneath the green title.
 I'm writing some more text as a  placeholder.
-This is a link to [our website](https://www.dotnetlab.eu)
+This is a link to [our website](https://cornucopia.owasp.org)
 
 When I leave a single empty line in the markdown source file, I start a new paragraph.
 Underneath this paragraph I'm showing a picture. The picture is stored next to the index.md source file.
@@ -38,5 +38,3 @@ We can do this by adding the tag [medium] to the caption text of our image.
 We can go even a step further, and make the image smaller! We do this by adding the [small] tag to our image caption.
 
 ![The caption text for the small image [small]](dnl-logo.png)
-
-

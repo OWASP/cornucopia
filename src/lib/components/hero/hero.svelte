@@ -47,7 +47,7 @@
 
     .hero
     {
-        height : calc(100vh - 5rem);
+        height : calc(140vh - 5rem);
         width : 100%;
     }
 

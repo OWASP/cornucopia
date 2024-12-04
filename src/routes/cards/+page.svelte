@@ -108,8 +108,8 @@
             <p class="text">
                 Instead of EoP’s STRIDE suits, Cornucopia suits for the Website App Edition were selected based on the structure of the 
                 OWASP Secure Coding Practices - Quick Reference Guide (SCP). The content was mainly drawn from the SCP but with additional 
-                consideration of sections in the <a href="https://owasp.org/www-project-application-security-verification-standard/">OWASP Application Security Verification Standard</a>, the <a href="https://owasp.org/www-project-web-security-testing-guide">OWASP Web Security Testing Guide</a> and 
-                David Rook's <a href="https://owasp.org/www-pdf-archive//OWASP-SecureDevPrinciples-David-Rook.pdf">Principles of Secure Development</a>. These provided five suits, and a sixth called “Cornucopia” was created for 
+                consideration of sections in the <a rel="noopener" href="https://owasp.org/www-project-application-security-verification-standard/">OWASP Application Security Verification Standard</a>, the <a rel="noopener" href="https://owasp.org/www-project-web-security-testing-guide">OWASP Web Security Testing Guide</a> and 
+                David Rook's <a rel="noopener" href="https://owasp.org/www-pdf-archive//OWASP-SecureDevPrinciples-David-Rook.pdf">Principles of Secure Development</a>. These provided five suits, and a sixth called “Cornucopia” was created for 
                 everything else:
             </p>
             {#each webappSuits as suit}
@@ -129,7 +129,7 @@
             <h2>Mobile App version</h2>
             <p class="text">
                 The second Cornucopia deck, the “Mobile App Edition”, follows the same principles and game rules as the original 
-                OWASP Cornucopia, but has different suits based on the <a href="https://mas.owasp.org/MASVS/">MASVS categories</a>, 
+                OWASP Cornucopia, but has different suits based on the <a rel="noopener" href="https://mas.owasp.org/MASVS/">MASVS categories</a>, 
                 in addition to the Cornucopia suit that contains threats related to mobile malware and privacy issues:
             </p>
             {#each mobileappSuits as suit}

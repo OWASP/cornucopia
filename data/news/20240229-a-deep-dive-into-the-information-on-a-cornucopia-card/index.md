@@ -11,7 +11,7 @@ The OWASP Cornucopia card game provides lots of information about threats, more 
 
 To address this, we've added a unique QR code to each card, linking directly to additional information. At dotNET lab, our goal is to ensure that every card is as clear and understandable as possible for developers.
 
-Let's examine one card - [Authentication-3](https://cornucopia.dotnetlab.eu/authentication/3) - as a representative example and review the information it contains.
+Let's examine one card - [Authentication-3](/authentication/3) - as a representative example and review the information it contains.
 
 ## The General Structure of the Authentication-3 Card
 - Technical Note

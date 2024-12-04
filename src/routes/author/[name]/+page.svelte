@@ -16,7 +16,7 @@
                     <img alt="linkedin logo" class="icon" src="/icons/linkedin.png"/>
                 </td>
                 <td>
-                    <a target="_blank" href="{data.author.linkedin}">LinkedIn</a>
+                    <a target="_blank" rel="noopener" href="{data.author.linkedin}">LinkedIn</a>
                 </td>
             </tr>
             {/if}
@@ -27,7 +27,7 @@
                     <img alt="email logo" class="icon" src="/icons/mail.png"/>
                 </td>
                 <td>
-                    <a target="_blank" href="mailto:{data.author.email}">Mail</a>
+                    <a target="_blank" rel="noopener" href="mailto:{data.author.email}">Mail</a>
                 </td>
             </tr>
             {/if}
@@ -38,7 +38,7 @@
                     <img alt="globe logo" class="icon" src="/icons/globe.png"/>
                 </td>
                 <td>
-                    <a target="_blank" href="{data.author.website}">{Text.DisplayLink(data.author.website)}</a>
+                    <a target="_blank" rel="noopener" href="{data.author.website}">{Text.DisplayLink(data.author.website)}</a>
                 </td>
             </tr>
             {/if}   

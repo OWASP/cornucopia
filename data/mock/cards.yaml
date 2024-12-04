@@ -439,13 +439,13 @@ paragraphs:
     text: "The Microsoft SDL team had already published its super Elevation of Privilege: The Threat Modeling Game (EoP) but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address."
   -
     value: "T00240"
-    text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
+    text: "EoP is a great concept and game strategy and was published under a Creative Commons Attribution License."
   -
     value: "T00250"
     text: "Cornucopia Website App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
   -
     value: "T00260"
-    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
   -
     value: "T00270"
     text: "Cornucopia Website App Edition is referenced as an information resource in the PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
@@ -913,7 +913,7 @@ paragraphs:
     text: "EoP begins every description with words like 'An attacker can...'. "
   -
     value: "T02690"
-    text: "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
+    text: "These have to be phrased as an attack, but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
   -
     value: "T02700"
     text: "These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. "

@@ -28,7 +28,7 @@
 		let scriptTag = document.createElement('script');
 		scriptTag.classList.add("utterances-script")
 		scriptTag.setAttribute('id','comment-section')
-		scriptTag.setAttribute('repo', 'jefmeijvis/cornucopia.dotnetlab.eu');
+		scriptTag.setAttribute('repo', 'OWASP/www-project-cornucopia/cornucopia.owasp.org');
 		scriptTag.setAttribute('issue-term', name);
 		scriptTag.setAttribute('theme', 'github-light');
         scriptTag.setAttribute('label', '🔮 Utterances');

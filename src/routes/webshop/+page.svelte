@@ -4,22 +4,22 @@
 
 
 <div class="page-container">
-    <h1>Webshop</h1>
+    <h1>Web shop</h1>
     <p>
         While the easiest way to get started with OWASP Cornucopia is by <a href="/printing">printing</a> out the cards yourself, it is also possible to purchase the cards online.
-        OWASP no longer has a stock of printed decks. OWASP does not endorse or recommend commercial products or services. However, following companies do offer a card deck available for online purchase:
+        OWASP no longer has a stock of printed decks and does not endorse or recommend commercial products or services. However, the following companies do offer a card deck available for online purchase:
     <p>
-        <a href="https://agilestationery.com/" target="_blank">Agile Stationary</a> offer large print (v1.20) decks at a discount to OWASP Members. They also offer a <a href="https://croupier.agilestationery.co.uk/">croupier</a> to help you distribute cards to team members.
+        <a href="https://agilestationery.com/" target="_blank">Agile Stationary</a> offer large print decks. They also offer a <a rel="noopener nofollow" href="https://croupier.agilestationery.co.uk/">croupier</a> to help you distribute cards to team members. A small donation is made to the OWASP Foundation for each deck sold.
     </p>
     <p>
-        <a href="https://dotnetlab.eu/home-en/" target="_blank">DotNET lab</a> sell a printed deck which complements their <a href="https://cornucopia.dotnetlab.eu/">online reference</a>.
+        <a href="https://dotnetlab.eu/home-en/" target="_blank">DotNET lab</a> sell a smaller printed deck from an earlier version of the deck (v1.22). This deck has QR codes that works together with their online references. In collaboration with DotNET lab we will soon open a web shop that will be available from this site, so stay tuned!
     </p>
     <div class="vendor-container">
 
         <CardVendor 
         logoSource="/images/logo-agile-stationary.png"
         productImageSource="/images/agile-stationary-preview.png"
-        webshopLink="https://agilestationery.co.uk/products/owasp-cornucopia-card-deck-ecommerce-website-edition">
+        webshopLink="https://agilestationery.com/search?q=cornucopia">
         </CardVendor>
 
         <CardVendor 

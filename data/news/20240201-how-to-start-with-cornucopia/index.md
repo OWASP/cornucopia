@@ -29,7 +29,7 @@ Cornucopia was created by security professionals but often used by software deve
 
 **Data Validation & Encoding** is a third suit you could consider to include.
 
-Why these suits?  We looked at the [Owasp top 10](https://cornucopia.dotnetlab.eu/taxonomy/OWASP-top-10).  The first one; [#1: Broken access controls](https://cornucopia.dotnetlab.eu/taxonomy/OWASP-top-10/01-broken-access-controls) corresponds with the suits Data Validation & Encoding and Authorization.  We feel like Authentication should always be part of a Cornucopia game.  If you look at the Owasp Top  10, [#2 Cryptographic failures](https://cornucopia.dotnetlab.eu/taxonomy/OWASP-top-10/02-cryptographic-failures) corresponds best with the suit cryptography.  So you're not only limiting the complexity of playing the game, but you're also focusing on the most important threats according to Owasp Top 10.
+Why these suits?  We looked at the [Owasp top 10](/taxonomy/OWASP-top-10).  The first one; [#1: Broken access controls](/OWASP-top-10/01-broken-access-controls) corresponds with the suits Data Validation & Encoding and Authorization.  We feel like Authentication should always be part of a Cornucopia game.  If you look at the Owasp Top  10, [#2 Cryptographic failures](/taxonomy/OWASP-top-10/02-cryptographic-failures) corresponds best with the suit cryptography.  So you're not only limiting the complexity of playing the game, but you're also focusing on the most important threats according to Owasp Top 10.
 
 ## How to integrate playing the cornucopia game in your Scrum planning process
 

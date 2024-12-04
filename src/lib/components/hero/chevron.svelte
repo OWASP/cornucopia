@@ -21,7 +21,7 @@
         width : 4rem;
         height : 4rem;
         left: calc(50% - 2rem);
-        bottom:3rem;
+        bottom:-3rem;
         cursor:pointer;
         transition: var(--transition);
         filter:invert();

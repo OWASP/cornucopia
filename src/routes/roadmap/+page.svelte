@@ -4,18 +4,18 @@
         <hr>
         <h3 id="v2x">v2.x</h3>
         
-        <p>Below is a preliminary summary of our wishes, dreams and aspirations for Cornucopia. If you have suggestions, ideas, please feel free to discuss them on our <a href="https://groups.google.com/a/owasp.org/g/cornucopia-project">email list</a> or submit them to our <a href="https://github.com/OWASP/cornucopia/issues">list of issues</a> in our repository. 
-        If you feel like and have the oportunity to help with any of the issues below, do not hesitate to get in touch.</p>
+        <p>Below is a preliminary summary of our wishes, dreams and aspirations for Cornucopia. If you have suggestions, ideas, please feel free to discuss them on our <a rel="noopener nofollow" href="https://groups.google.com/a/owasp.org/g/cornucopia-project">email list</a> or submit them to our <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues">list of issues</a> in our repository. 
+        If you feel like and have the opportunity to help with any of the issues below, do not hesitate to get in touch.</p>
         
-        <p>Ordered alphabeticly and not according to priority.</p>
+        <p>Ordered alphabetically and not according to priority.</p>
         
         <ul>
-          <li>Build the requirement map on the card using OpenCRE for easier maintainence and collaboration. <a href="https://github.com/OWASP/cornucopia/issues/595">cornucopia #595</a></li>
-          <li>Endpoint per card with more information available on copi. <a href="https://github.com/secure-delivery/copi/issues/6">copi #6</a></li>
+          <li>Build the requirement map on the card using OpenCRE for easier maintenance and collaboration. <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues/595">cornucopia #595</a></li>
+          <li>Endpoint per card with more information available on copi. <a rel="noopener nofollow" href="https://github.com/secure-delivery/copi/issues/6">copi #6</a></li>
           <li>Ensure the converter can create print-ready proofs for print-on-demand jobs. <a href="https://github.com/OWASP/cornucopia/issues/583"></a></li>
-          <li>Include QR codes on the Cornucopia cards. <a href="https://github.com/OWASP/cornucopia/issues/382">cornucopia #382</a></li>
-          <li>Language review of the existing translations. <a href="https://github.com/OWASP/cornucopia/issues/596">cornucopia #596</a></li>
-          <li>Migrate the wiki deck to github wiki. <a href="https://github.com/OWASP/www-project-cornucopia/issues/1">cornucopia #1</a></li>
+          <li>Include QR codes on the Cornucopia cards. <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues/382">cornucopia #382</a></li>
+          <li>Language review of the existing translations. <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues/596">cornucopia #596</a></li>
+          <li>Migrate the wiki deck to github wiki. <a rel="noopener nofollow" href="https://github.com/OWASP/www-project-cornucopia/issues/1">cornucopia #1</a></li>
           <li>Seek worldwide translators and incorporate additional translations for other languages.</li>
         </ul>
         
@@ -31,7 +31,7 @@
         
         <p>Please help raise awareness of Cornucopia by:</p>
         <ul>
-          <li>Printing dcks of cards and giving them away</li>
+          <li>Printing decks of cards and giving them away</li>
           <li>Using Cornucopia with specifiers, architects, designers, developers, testers and others, in part to train them, but also to solicit feedback on their usability, practicality and appropriateness for their work</li>
           <li>Creating videos about how to play the game</li>
           <li>Developing a mobile app to play the game</li>
@@ -40,7 +40,7 @@
         <h3 id="feedback">Feedback</h3>
         
         
-        <p>Please use the friendly project <a href="https://groups.google.com/a/owasp.org/forum/#!forum/cornucopia-project">Google Group</a> for feedback:</p>
+        <p>Please use the friendly project <a rel="noopener nofollow" href="https://groups.google.com/a/owasp.org/forum/#!forum/cornucopia-project">Google Group</a> for feedback:</p>
         
         <ul>
           <li>What do like?</li>
@@ -52,7 +52,7 @@
         
         <h3 id="keep-the-cards-updated">Keep the Cards Updated</h3>
         
-        <p>As the source referenced documents change, we have to update the decks. You may also find errors and omissions. In the first instance, please send a message to the project’s <a href="https://groups.google.com/a/owasp.org/forum/#!forum/cornucopia-project">Google Group</a> if you have identified errors &amp; omissions, have some time to maintain the source documents, or can help in other ways.</p>
+        <p>As the source referenced documents change, we have to update the decks. You may also find errors and omissions. In the first instance, please send a message to the project’s <a rel="noopener nofollow" href="https://groups.google.com/a/owasp.org/forum/#!forum/cornucopia-project">Google Group</a> if you have identified errors &amp; omissions, have some time to maintain the source documents, or can help in other ways.</p>
         
         <h3 id="create-a-new-deck">Create a New Deck</h3>
         

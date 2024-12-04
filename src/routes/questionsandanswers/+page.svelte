@@ -10,16 +10,16 @@
     <section id="getinvolved">
         <a href="#getinvolved"><h3>How can I get involved?</h3></a>
         <p>
-            If you have questions, suggestions or ideas, please feel free to discuss them on our <a href="https://groups.google.com/a/owasp.org/g/cornucopia-project" rel="nofollow">email list</a> 
-    or submit them to our <a href="https://github.com/OWASP/cornucopia/issues">list of issues</a> in our repository.
-    If you feel like and have the oportunity to help, do not hesitate to get in touch with us.
+            If you have questions, suggestions or ideas, please feel free to discuss them on our <a rel="noopener nofollow" href="https://groups.google.com/a/owasp.org/g/cornucopia-project">email list</a> 
+    or submit them to our <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues">list of issues</a> in our repository.
+    If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
         </p>
     </section>
 
     <section id="attackers">
         <a href="#attackers"><h3>How were the attackers’ names chosen?</h3></a>
         <p>
-            EoP begins every description with words like "An attacker can...". These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. Therefore, apart from "Alice and Bob", the original Ecommerce Website Edition used the given (first) names of current and recent OWASP employees and Board members (assigned in no order), and then randomly selected the remaining 50 or so names from the current list of paying individual OWASP members. No name was used more than once, and where people had provided two personal names, we dropped one part to try to ensure no-one can be easily identified. Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative. Some names have been changed over the years to include some more recent project volunteers.
+            EoP begins every description with words like "An attacker can...". These have to be phrased as an attack, but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. Therefore, apart from "Alice and Bob", the original Ecommerce Website Edition used the given (first) names of current and recent OWASP employees and Board members (assigned in no order), and then randomly selected the remaining 50 or so names from the current list of paying individual OWASP members. No name was used more than once, and where people had provided two personal names, we dropped one part to try to ensure no-one can be easily identified. Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names and is not meant to be world-representative. Some names have been changed over the years to include some more recent project volunteers.
         </p>
     </section>
 
@@ -55,7 +55,7 @@
     <section id="notes">
         <a href="#notes"><h3>Who should take notes and record scores?</h3></a>
         <p>
-            It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed. This could be used as training for a more junior developer, or performed by the project manager. Some organisations have made a recording to review afterwards when the requirements are written up more formally.
+            It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed. This could be used as training for a more junior developer or performed by the project manager. Some organisations have made a recording to review afterwards when the requirements are written up more formally.
         </p>
     </section>
 
@@ -69,14 +69,14 @@
     <section id="invented-attack">
         <a href="#invented-attack"><h3>What should players do when they have an Ace card that says “invented a new X attack”?</h3></a>
         <p>
-            The player can make up any attack they think is valid, but must match the suit of the card e.g. data validation and encoding). With players new to the game, it can be better to remove these to begin with.
+            The player can make up any attack they think is valid but must match the suit of the card e.g. data validation and encoding). With players new to the game, it can be better to remove these to begin with.
         </p>
     </section>
 
     <section id="detailed-information">
         <a href="#detailed-information"><h3>I don’t understand what the attack means on each card - is there more detailed information?</h3></a>
         <p>
-            Yes, please look up the card in our <a href="/cards">card browser</a> on this website. This site specificly created to help players understand each attack.
+            Yes, please look up the card in our <a href="/cards">card browser</a> on this website. This site is specifically created to help players understand each attack.
         </p>
     </section>
     <img alt="Logo of the OWASP foundation" src="/images/owasp-logo.png"/>

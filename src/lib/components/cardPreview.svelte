@@ -8,7 +8,7 @@
 
     function getSuitColor(suit : string)
     {
-        return cardColor.get(suit) ?? "black";
+        return cardColor?.get(suit) ?? "black";
     }
 </script>
 

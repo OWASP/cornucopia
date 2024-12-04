@@ -47,6 +47,6 @@ After the presentations we had some time to network at the KDG institute in Antw
 Thanks to the organization of the Belgian OWASP Chapter for the great event!
 
 ## Presentation
-You can download the slidedeck we presented by clicking [here](/share/20240402-OWASP-CORNUCOPIA-KDG.pptx).
+You can download the slidedeck we presented by clicking [here](https://cornucopia.dotnetlab.eu/share/20240402-OWASP-CORNUCOPIA-KDG.pptx).
 
 ![Opening slide of the powerpoint presentation](powerpoint-preview.png)

@@ -558,7 +558,7 @@ let data = {
         },
         {
           "value": "T00240",
-          "text": "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
+          "text": "EoP is a great concept and game strategy and was published under a Creative Commons Attribution License."
         },
         {
           "value": "T00250",
@@ -566,7 +566,7 @@ let data = {
         },
         {
           "value": "T00260",
-          "text": "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+          "text": "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
         },
         {
           "value": "T00270",
@@ -1190,7 +1190,7 @@ let data = {
         },
         {
           "value": "T02690",
-          "text": "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
+          "text": "These have to be phrased as an attack, but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
         },
         {
           "value": "T02700",

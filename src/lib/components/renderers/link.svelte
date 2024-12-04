@@ -3,16 +3,14 @@
     export let title : string = ""
 
     let target : string = "_blank";
-
-
-    if(href.includes('www.jefmeijvis.com'))
-      target = '_self';
+    let rel : string = 'noopener';
 
     if(href.startsWith('/'))
       target = '_self';
+      rel = '';
   </script>
   
-  <a {target} {href} {title}><slot></slot></a>
+  <a {rel} {target} {href} {title}><slot></slot></a>
 
   <style>
     a

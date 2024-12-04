@@ -9,7 +9,7 @@
         <img class="logo-image" alt="Vendor logo" src={logoSource}/>
     </div>
     <img alt="Box of cards" class="product-image" src={productImageSource}/>
-    <a class="shop-link" target="_blank" href={webshopLink}>Visit external webshop</a>
+    <a rel="noopener nofollow" class="shop-link" target="_blank" href={webshopLink}>Visit external webshop</a>
 </div>
 
 <style>
@@ -75,4 +75,3 @@
         color: rgb(41, 0, 176);
     }
 </style>
-
