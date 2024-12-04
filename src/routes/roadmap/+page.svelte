@@ -12,7 +12,7 @@
         <ul>
           <li>Build the requirement map on the card using OpenCRE for easier maintenance and collaboration. <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues/595">cornucopia #595</a></li>
           <li>Endpoint per card with more information available on copi. <a rel="noopener nofollow" href="https://github.com/secure-delivery/copi/issues/6">copi #6</a></li>
-          <li>Ensure the converter can create print-ready proofs for print-on-demand jobs. <a href="https://github.com/OWASP/cornucopia/issues/583"></a></li>
+          <li>Ensure the converter can create print-ready proofs for print-on-demand jobs. <a href="https://github.com/OWASP/cornucopia/issues/583">cornucopia #583</a></li>
           <li>Include QR codes on the Cornucopia cards. <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues/382">cornucopia #382</a></li>
           <li>Language review of the existing translations. <a rel="noopener nofollow" href="https://github.com/OWASP/cornucopia/issues/596">cornucopia #596</a></li>
           <li>Migrate the wiki deck to github wiki. <a rel="noopener nofollow" href="https://github.com/OWASP/www-project-cornucopia/issues/1">cornucopia #1</a></li>

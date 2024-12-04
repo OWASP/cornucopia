@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let path : string = ""
+    //export let path : string = ""
 
     let base : string = "https://github.com/OWASP/www-project-cornucopia/cornucopia.owasp.org/tree/master/data/cards/";
     //@TODO Would it be possible to link directly to the card?

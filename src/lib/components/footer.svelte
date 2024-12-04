@@ -78,7 +78,7 @@
         <span> {new Date().getFullYear()} </span>
         <a href="/rss.xml"><img style="position:relative;top:3px;" height="15px" src="/images/rss.svg" alt="rss" /></a>
         <span> | </span>
-        <a href="/sitemap.xml">Sitemap</a>
+        <a href="https://cornucopia.dotnetlab.eu/sitemap.xml">Sitemap</a>
     </p>
 </footer>
 

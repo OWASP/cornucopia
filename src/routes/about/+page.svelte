@@ -2,7 +2,7 @@
     <h1 id="about">About</h1>
     <hr>
     <p>OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It is language, platform and technology-agnostic.</p>
-    <p>If you have questions concerning OWASP Cornucopia, please search for it first in our <a>Q & A section</a>.</p> 
+    <p>If you have questions concerning OWASP Cornucopia, please search for it first in our <a href="http://localhost:5173/questionsandanswers">Q & A section</a>.</p> 
     <p>If you have other questions, suggestions or ideas please feel free to discuss them on our <a href="https://groups.google.com/a/owasp.org/g/cornucopia-project" rel="noopener nofollow">email list</a> 
     or submit them to our <a href="https://github.com/OWASP/cornucopia/issues">list of issues</a> in our repository.
     If you feel like and have the opportunity to help, do not hesitate to get in touch with us.</p>
