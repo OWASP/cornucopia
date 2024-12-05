@@ -2,6 +2,6 @@
 
 ## Testing App Extensions
 
-Verify that the app restricts the use of app extensions appropriatly.
+Verify that the app restricts the use of app extensions appropritely.
 
 > Please see: (https://mas.owasp.org/MASTG/tests/ios/MASVS-PLATFORM/MASTG-TEST-0072/)

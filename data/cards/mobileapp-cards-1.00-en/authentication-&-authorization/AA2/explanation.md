@@ -8,11 +8,11 @@ There are various ways that Jie may get access to Choi's secrets.
  
 2. If Jie has been shoulder surfing when Choi used his mobile, he may know his pin. Even if Choi uses a different pin for his sensitive mobile apps that Jie doesn't have, given that Jie is a north korean spy and hacker, he could extract and decrypt Choi's data as long as the unlocked key not is used during sensitive operations like when decrypting local storage or when decrypting or signing a message before sending or receiving it from a remote endpoint. 
  
-3. If Choi has left his phone unlocked then Jie could steal back the money that he paid Choi for the "Bob Dylan concert" if he isn't required to re-authenticate before transfering the money back to him. 
+3. If Choi has left his phone unlocked then Jie could steal back the money that he paid Choi for the "Bob Dylan concert" if he isn't required to re-authenticate before transferring the money back to him. 
  
 ### Example: 
  
-Choi really wanted to pay his student loan, but he also really needed to go to the bathroom. Sadly he forgot to lock his phone, leaving the screen bright and tempting on the table for Jie. Jie really would like to know whether it is true that Choi didn't have any money and therefore had to borrow them from him. As Jie opens Chois banking app, he is able to do so without using pin or biometrics, effectively bypassing authentication. There, clear as day, Jie finds all of Chois bank transactions and reads that Choi did have enough money, it's just that he really wanted to attend this really expensive Bob Dylan concert as well. Oh boy, is Choi going to hear it. 
+Choi really wanted to pay his student loan, but he also really needed to go to the bathroom. Sadly, he forgot to lock his phone, leaving the screen bright and tempting on the table for Jie. Jie really would like to know whether it is true that Choi didn't have any money and therefore had to borrow them from him. As Jie opens Chois banking app, he is able to do so without using pin or biometrics, effectively bypassing authentication. There, clear as day, Jie finds all of Chois bank transactions and reads that Choi did have enough money, it's just that he really wanted to attend this really expensive Bob Dylan concert as well. Oh boy, is Choi going to hear it. 
  
 ### Risks:  
  
