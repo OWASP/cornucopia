@@ -101,7 +101,7 @@ class TestMain(unittest.TestCase):
     @patch("builtins.open", new_callable=MagicMock)
     @patch("yaml.safe_load")
     @patch("yaml.safe_dump")
-    @patch("scripts.gen_mappingsgit chec.produce_webapp_mappings")
+    @patch("scripts.gen_mappings.produce_webapp_mappings")
     @patch("argparse.ArgumentParser.parse_args")
     def test_main_generate_mappings(self, mock_args, mock_produce, mock_dump, mock_load, mock_open):
         mock_args.return_value = argparse.Namespace(
