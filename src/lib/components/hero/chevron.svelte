@@ -13,14 +13,13 @@
     }
     img
     {
-        width : 100%;
-        height : 100%;
         transform: translate(0,0rem) rotate(180deg);
         position: absolute;
         display: block;
-        width : 4rem;
-        height : 4rem;
+        width : 6vw;
+        height : 6vw;
         left: calc(50% - 2rem);
+        top: calc(80% - 1vh);
         bottom:-3rem;
         cursor:pointer;
         transition: var(--transition);
@@ -39,6 +38,7 @@
         img
         {
             bottom:0rem;
+            top: calc(50% - 10vh);
         }
     }
 </style>

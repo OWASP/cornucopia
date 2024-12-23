@@ -4,9 +4,11 @@
     import { browser } from "$app/environment";
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
+    import { readTranslation } from "$lib/stores/stores";
     export let card : Card;
     export let cards : Map<string, Card>;
     export let mappingData : any;
+    let t = readTranslation();
     let nextCard = cards.get(card.next);
     let previousCard = cards.get(card.prevous);
     function checkKey(event : any) 
@@ -59,13 +61,13 @@
 
 <div class="card-panel" id="card">
     <div class="left" data-umami-event="card-browser-left-button">
-        <a href={getUrl(card)} on:click={goToPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
+        <a href={getUrl(card)} on:click={goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
-        <a href={getUrl(card)} on:click={goToNext(card)} class="arrow" title="View next card">{">"}</a>
+        <a href={getUrl(card)} on:click={goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
     </div>
 </div>
 

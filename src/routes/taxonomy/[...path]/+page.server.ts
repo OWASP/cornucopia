@@ -2,7 +2,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 import fs from "fs";
 
 export async function load({ params }) {
-  let filePath: string = "./data/taxonomy-en/" + params.path;
+  let filePath: string = "./data/taxonomy/en/" + params.path;
   let [files, folders, content] = getDataFromPath(filePath);
 
   return {
@@ -12,13 +12,6 @@ export async function load({ params }) {
     path: params.path,
     timestamp: new Date().toUTCString(),
   };
-  /*
-    return {
-        category : params.category,
-        entry : params.entry,
-        markdown : getMarkdown(params.category, params.entry)
-    }
-    */
 }
 
 function getDataFromPath(path: string) {

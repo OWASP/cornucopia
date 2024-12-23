@@ -22,7 +22,7 @@ export class FileSystemHelper {
   }
 
   public static ASVSRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy-en/ASVS-4.0.3";
+    const basePath: string = "data/taxonomy/en/ASVS-4.0.3";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
@@ -42,7 +42,7 @@ export class FileSystemHelper {
         const secondPart = secondLevelDir.match(sectionRegex)?.[1];
         const section = `${firstPart}.${secondPart}`;
         let fullPath = firstLevelPath + '/' + secondLevelDir;
-        fullPath = fullPath.replace("data/taxonomy-en", "/taxonomy");
+        fullPath = fullPath.replace("data/taxonomy/en", "/taxonomy");
 
         routes.push({
           Path: fullPath,
@@ -55,7 +55,7 @@ export class FileSystemHelper {
   }
 
   public static MASVSRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy-en/masvs-2.1.0";
+    const basePath: string = "data/taxonomy/en/masvs-2.1.0";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
@@ -75,7 +75,7 @@ export class FileSystemHelper {
         const secondPart = secondLevelDir.match(sectionRegex)?.[1];
         const section = `${firstPart}.${secondPart}`;
         let fullPath = firstLevelPath + '/' + secondLevelDir;
-        fullPath = fullPath.replace("data/taxonomy-en", "/taxonomy");
+        fullPath = fullPath.replace("data/taxonomy/en", "/taxonomy");
 
         routes.push({
           Path: fullPath,
@@ -88,7 +88,7 @@ export class FileSystemHelper {
   }
 
   public static MASTGRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy-en/mastg-1.7.0";
+    const basePath: string = "data/taxonomy/en/mastg-1.7.0";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
@@ -108,7 +108,7 @@ export class FileSystemHelper {
         const secondPart = secondLevelDir.match(sectionRegex)?.[1];
         const section = `${firstPart}.${secondPart}`;
         let fullPath = firstLevelPath + '/' + secondLevelDir;
-        fullPath = fullPath.replace("data/taxonomy-en", "/taxonomy");
+        fullPath = fullPath.replace("data/taxonomy/en", "/taxonomy");
 
         routes.push({
           Path: fullPath,
@@ -118,5 +118,31 @@ export class FileSystemHelper {
     });
 
     return routes;
+  }
+
+  public static getDataFromPath(path: string) : Map<string, string>
+  {
+    let content = new Map<string, string>;
+  
+    let indexFile: string = path + "/index.md";
+    if (fs.existsSync(indexFile)) {
+      content.set(path, fs.readFileSync(indexFile, "utf8"));
+    }
+  
+    let folders: string[];
+    try {
+      folders = FileSystemHelper.getDirectories(path);
+    } catch (e) {
+      folders = [];
+    }
+    if (folders.length == 0) console.log("No folders found for path: " + path);
+  
+    folders.forEach((folder) => {
+      if (fs.existsSync(path + "/" + folder + "/index.md")) {
+        content.set(folder, fs.readFileSync(path + "/" + folder + "/index.md", "utf8"));
+      }
+    });
+  
+    return content;
   }
 }

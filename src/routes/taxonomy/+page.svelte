@@ -1,11 +1,14 @@
 <script>
     import { Text } from "$lib/utils/text";
+    import {readLang, readTranslation} from "$lib/stores/stores";
 
     export let data;
+    let t = readTranslation();
+    const lang = readLang();
 </script>
 <div>
-<h1 id="taxonomy">Taxonomy</h1>
-<hr>
+<h1 id="taxonomy">{$t('taxonomy.h1')}</h1>
+
 {#each data.categories as category}
     <p>├──<a href="/taxonomy/{category}">{Text.Format(category)}</a></p>
 {/each}

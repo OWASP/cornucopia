@@ -1,11 +1,12 @@
 <script>
     import Author from "$lib/components/author.svelte";
-import { Text } from "$lib/utils/text";
+    import {readTranslation} from "$lib/stores/stores";
+    let t = readTranslation();
 
     export let data;
 </script>
 
-<h1>Authors</h1>
+<h1>{$t('news.author.h1')}</h1>
 
 <div class="container">
     {#each data.authors as author}

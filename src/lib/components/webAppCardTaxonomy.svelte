@@ -6,10 +6,12 @@
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
     import { MappingController, type WebAppMapping } from "../../domain/mapping/mappingController";
+    import { readTranslation } from "$lib/stores/stores";
     export let mappingData;
     export let card: Card;
     export let routes: Map<string, Route[]>;
     const controller: MappingController = new MappingController(mappingData);
+    let t = readTranslation();
     function linkASVS(input: string) {
       input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
       let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
@@ -44,7 +46,7 @@
   </script>
 
     {#if card.value != 'A' && card.value != 'B' }
-      <h1 class="title">Mappings</h1>
+      <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.1')}</h1>
       <MappingsList
         title="OWASP ASVS (4.0):"
         mappings={mappings.owasp_asvs}
@@ -67,7 +69,7 @@
     {#if card.value != 'A' && card.value != 'B' }
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
     {/if}
-    <h1 class="title">Attacks</h1>
+    <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>
     {#each attacks || [] as attack}
       <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
     {/each}

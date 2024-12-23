@@ -4,12 +4,12 @@
     import {Text} from "$lib/utils/text.js"
     import type { Card } from "../../domain/card/card.js";
     import { MappingController } from "../../domain/mapping/mappingController.js";
-    import { readLang } from '$lib/stores/stores';
+    import { readLang, readTranslation } from '$lib/stores/stores';
     import type { Suit } from "../../domain/suit/suit.js";
 
     export let data: PageData;
     const lang = readLang();
-
+    let t = readTranslation();
     let decks = data?.decks;
     let cards = decks?.get($lang);
     let suits = data.suits;
@@ -83,78 +83,108 @@
         mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
     }
 </script>
-<a href="#decks"><h1>The card decks</h1></a>
 <section id="decks">
+<h1>{$t('cards.h1')}</h1>
+<p class="text">{$t('cards.p1')}</p>
 <p class="button-container">
-    <button class:button-selected={(version == VERSION_WEBAPP)} on:click={()=>changeVersion(VERSION_WEBAPP)}>Website App version</button>
-    <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>Mobile App version</button>
+    <button class:button-selected={(version == VERSION_WEBAPP)} on:click={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
+    <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
 </p>
-
-<p class="text">Both current decks have six suits and there are also two Joker cards. Each suit contains 13 cards 
-    (Ace, 2-10, Jack, Queen and King). This page contains the card browser where you can browse through each of the
-    cards in the OWASP Cornucopia decks.</p>
 </section>
-{#each webappSuits as suit}
-    {#each suit.cards as card}
-        <p><a style="display:none;" href="{cards?.get(card)?.url}">{suit.name} {card}</a></p>
+<div class="script">
+    {#each webappSuits as suit}
+        {#each suit.cards as card}
+            <p><a style="display:none;" href="{cards?.get(card)?.url}">{suit.name} {card}</a></p>
+        {/each}
     {/each}
-{/each}
 
-<div class="container">
-    <div class="tree">
+    {#if version == VERSION_WEBAPP}
+    <h2>{$t('cards.h2.1')}</h2>
+    <p class="text">
+        {@html $t('cards.p2')}
+    </p>
+    {/if}
+    {#if version == VERSION_MOBILEAPP}
+    <h2>{$t('cards.h2.2')}</h2>
+    <p class="text">
+        {@html $t('cards.p3')}
+    </p>
+    {/if}
+    <div class="container">
+        <div class="tree">
 
-        {#if version == VERSION_WEBAPP}
-            <h2>Website App version (previously called Ecommerce Website Edition)</h2>
+            {#if version == VERSION_WEBAPP}
+                
+                {#each webappSuits as suit}
+                    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                    <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card}
+                            <p on:mouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
+                                <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_MOBILEAPP}
+                {#each mobileappSuits as suit}
+                    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                    <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card}
+                            <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                                <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+        </div>
+        <div class="preview-container">
+                <CardPreview {card} {mapping}></CardPreview>
+        </div>
+    </div>
+</div>
+<noscript>
+    <div class="container">
+        <div class="tree">
+            <h2>{$t('cards.h2-1')}</h2>
             <p class="text">
-                Instead of EoP’s STRIDE suits, Cornucopia suits for the Website App Edition were selected based on the structure of the 
-                OWASP Secure Coding Practices - Quick Reference Guide (SCP). The content was mainly drawn from the SCP but with additional 
-                consideration of sections in the <a rel="noopener" href="https://owasp.org/www-project-application-security-verification-standard/">OWASP Application Security Verification Standard</a>, the <a rel="noopener" href="https://owasp.org/www-project-web-security-testing-guide">OWASP Web Security Testing Guide</a> and 
-                David Rook's <a rel="noopener" href="https://owasp.org/www-pdf-archive//OWASP-SecureDevPrinciples-David-Rook.pdf">Principles of Secure Development</a>. These provided five suits, and a sixth called “Cornucopia” was created for 
-                everything else:
+                {@html $t('cards.p2')}
             </p>
             {#each webappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
-                {#if map?.get(suit.name)}
-                    {#each suit.cards as card}
-                        <p on:mouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
-                            <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
-                        </p>
-                    {/each}
-                {/if}
+                <h3>└── {Text.Format(suit.name).toUpperCase()}</h3>
+                {#each suit.cards as card}
+                    <p>
+                        <a href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
             {/each}
-        {/if}
-
-        {#if version == VERSION_MOBILEAPP}
-            <h2>Mobile App version</h2>
+        </div>
+        <div class="tree">
+            <h2>{$t('cards.h2-2')}</h2>
             <p class="text">
-                The second Cornucopia deck, the “Mobile App Edition”, follows the same principles and game rules as the original 
-                OWASP Cornucopia, but has different suits based on the <a rel="noopener" href="https://mas.owasp.org/MASVS/">MASVS categories</a>, 
-                in addition to the Cornucopia suit that contains threats related to mobile malware and privacy issues:
+                {@html $t('cards.p3')}
             </p>
             {#each mobileappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                 <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
-                {#if map?.get(suit.name)}
-                    {#each suit.cards as card}
-                        <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
-                            <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
-                        </p>
-                    {/each}
-                {/if}
+                {#each suit.cards as card}
+                    <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                        <a href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
             {/each}
-        {/if}
+        </div>
     </div>
-    <div class="preview-container">
-            <CardPreview {card} {mapping}></CardPreview>
-    </div>
-</div>
-
+</noscript>
 <style>
     .button-container
     {
         margin-top: 1rem;
-        margin-left: 1rem;
         width:auto;
     }
 
@@ -188,7 +218,8 @@
     .preview-container
     {
         padding-left: 1rem;
-        width : 20%;
+        width : 40%;
+        min-width: 45%;
     }
 
     .container
@@ -201,23 +232,19 @@
     }
     .text
     {
-        margin: 1rem;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-family: var(--font-body);
         font-weight: normal;
     }
 
     h1
     {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
         font-size: 2rem;
         font-weight: 400;
     }
 
     h1,h2,h3
     {
-        padding-left: 1rem;
         margin:0;
         cursor:pointer;
     }
@@ -229,7 +256,6 @@
 
     .tree
     {
-        padding : 1rem;
         width : 50%;
     }
 
@@ -237,7 +263,12 @@
         font-weight: bold;
     }
 
-    p
+    .tree p:hover
+    {
+        background-color: rgba(255,255,255,.1);
+    }
+
+    .tree p
     {
         margin:0;
         padding : 0rem;
@@ -245,12 +276,8 @@
         width : 100%;
     }
 
-    p:hover
-    {
-        background-color: rgba(255,255,255,.1);
-    }
 
-    a
+    .tree a
     {
         text-decoration: none;
         color:black;
@@ -279,3 +306,11 @@
         }
     }
 </style>
+<noscript>
+    <style>
+        .script
+        {
+            display: none;
+        }
+    </style>
+</noscript>

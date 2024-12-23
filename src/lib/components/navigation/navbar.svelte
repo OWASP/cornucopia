@@ -12,7 +12,7 @@
     let links : Link[] = [];
     AddLink(links,$t('about.title'),"/about");
     AddLink(links,$t('printing.title'),"/printing");
-    AddLink(links,$t('swags.title'),"/prizes-and-swags");
+    AddLink(links,$t('swags.title'),"/swags");
     AddLink(links,$t('news.title'),"/news");
     AddLink(links,$t('taxonomy.title'),"/taxonomy");
     AddLink(links,$t('cards.title'),"/cards");

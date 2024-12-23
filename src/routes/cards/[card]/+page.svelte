@@ -2,11 +2,12 @@
   import type { PageData } from "./$types";
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
-    import type { Card } from "../../../domain/card/card";
-    import { readLang } from "$lib/stores/stores";
+  import type { Card } from "../../../domain/card/card";
+  import { readLang, readTranslation } from "$lib/stores/stores";
 
   export let data: PageData;
   const lang = readLang();
+  let t = readTranslation();
   const cards = data.decks.get($lang);
   let card : Card = cards.get(data.card) as Card;
 
@@ -45,7 +46,7 @@
   }
 </script>
 
-<p><a href="/cards">Back to overview</a></p>
+<p><a href="/cards">{$t('cards.card.p1')}</a></p>
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card}  mappingData={data.mappingData.get(card.edition)} />
 {:else}

@@ -1,7 +1,12 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import renderers from '$lib/components/renderers/renderers';
+    import SvelteMarkdown from "svelte-markdown";
 
     export let timestamp : Date;
+
+    export let content;
+    let source = content;
     let timeAgo : string = '';
 
     function doOnMount()
@@ -38,22 +43,13 @@
 
     onMount(doOnMount)
 </script>
-
 <footer>
     <div class="flex-container">
         <div class="box">
             <p class="title">OWASP Cornucopia</p>
-            <p>
-                OWASP Cornucopia is originally created by Colin Watson.
-                <br/>It is open source and can be downloaded free of charge from the <a target='_blank' href="https://owasp.org/www-project-cornucopia/">OWASP repository</a>.
-                <br/>It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, 
-                distribute and transmit the work, and you can adapt it, and use it commercially, 
-                but all provided that you attribute the work and if you alter, transform, 
-                or build upon this work, 
-                you may distribute the resulting work only under the same or similar license to this one.
-                <br/>OWASP does not endorse or recommend commercial products or services.
-                <br/>OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license and is © 2012-2024 OWASP Foundation.
-            </p>
+            {#if source != ''}
+                <SvelteMarkdown {renderers} {source}></SvelteMarkdown>
+            {/if}
         </div>
         <div class="box">
             <p class="title">Get the cards</p>
@@ -72,7 +68,7 @@
     </div>
     <p class="footer">OWASP and the OWASP logo are trademarks of the <a rel="noopener" href="https://owasp.org/">OWASP Foundation</a></p>
     <p class="footer">Last update was {getCurrentDate()}{timeAgo}</p>
-    <p class="footer"><a href="/about#license">Licensing information</a> | <a href="/about#acknowledgements">Acknowledgements</a> | <a href="/questionsandanswers">Q & A</a> | <a href="/roadmap">Roadmap</a></p>
+    <p class="footer"><a href="/about#License">Licensing information</a> | <a href="/about#Acknowledgements">Acknowledgements</a> | <a href="/questionsandanswers">Q & A</a> | <a href="/roadmap">Roadmap</a></p>
     <p class="footer">
         <a rel="noopener" href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>
@@ -118,6 +114,7 @@
     }
     .box
     {
+        color:var(--white);
         margin:1rem;
         flex:1;
     }

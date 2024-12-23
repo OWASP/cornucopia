@@ -9,5 +9,5 @@ export async function load({params})
 
 function getCategories() : string[]
 {
-    return FileSystemHelper.getDirectories("./data/taxonomy-en")
+    return FileSystemHelper.getDirectories("./data/taxonomy/en")
 }

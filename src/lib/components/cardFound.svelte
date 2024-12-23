@@ -10,12 +10,14 @@
   import { MappingController } from "../../domain/mapping/mappingController";
   import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
+  import { readTranslation } from "$lib/stores/stores";
   export let mappingData;
   export let card: Card;
   export let cards: Map<string, Card>;
   export let routes: Map<string, Route[]>;
+    
   const controller: MappingController = new MappingController(mappingData);
-
+  let t = readTranslation();
   let mappings = controller.getCardMappings(card.id);
   let attacks: Attack[] = GetCardAttacks(card.id);
 
@@ -29,7 +31,7 @@
   <h1 class="title">{card.name}</h1>
   <p>{card.desc}</p>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
-  <a class="link" href="/how-to-play">How to play?</a>
+  <a class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Summary card={card}></Summary>
   {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B' }
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>

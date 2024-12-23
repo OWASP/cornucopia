@@ -5,6 +5,12 @@
     import WebAppCardMapping from "./webAppCardMapping.svelte";
     export let card : Card = {} as Card;
     export let mapping : any;
+    export let hero : string = '';
+    let heroStyle = '';
+
+    if (hero == 'yes') {
+        heroStyle = ' hero-card-container';
+    }
 
     function getSuitColor(suit : string)
     {
@@ -14,25 +20,25 @@
 
 <div class="card-render">
     <div class="left" style="background-color:{getSuitColor(card.suit)}">
-        <h1 class="property-card-suit">{card?.suitName}</h1>
+        <h1 class="property-card-suit{heroStyle}">{card?.suitName}</h1>
     </div>
     <div class="right">
         
         {#if mapping}
         <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.card ?? card?.value}</h1>
-        <p class="property-card-description">{card.desc}</p>
+        <p class="property-card-description{heroStyle}">{card.desc}</p>
             {#if card.edition == 'webapp' && card.value != 'A' && card.value != 'B'}
-                <WebAppCardMapping {mapping}></WebAppCardMapping>
+                <WebAppCardMapping {mapping} {hero}></WebAppCardMapping>
             {/if}
             {#if card.edition == 'mobileapp' && card.value != 'A' && card.value != 'B'}
                 <MobileAppCardMapping {mapping}></MobileAppCardMapping>
             {/if}
         {:else if card.suitName == 'WILD CARD' }
         <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">Joker</h1>
-        <p class="property-card-description">{card.desc}</p>
+        <p class="property-card-description{heroStyle}">{card.desc}</p>
         {:else}
         <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.value}</h1>
-        <p class="property-card-description">{card.desc}</p>
+        <p class="property-card-description{heroStyle}">{card.desc}</p>
         {/if}
     </div>
 </div>
@@ -42,7 +48,7 @@
     {
         transform: rotate(90deg);
         text-orientation: mixed;
-        font-size: max(1.3vw, 3vh);
+        font-size: max(1.5vh, 1.8vw);
         padding-top: .70rem;
         font-weight: bold;
         padding-left: 1rem;
@@ -54,7 +60,7 @@
 
     .property-card-description
     {
-        font-size: max(.8vw, 1.5vh);
+        font-size: max(1.5vh, 0.9vw);
         padding: .25rem;
     }
     .property-card-number
@@ -75,10 +81,18 @@
         background-position: 50% 50%;
         background-size: 117%;
         transition: var(--transition);
-        margin-top: 2rem;
         border: 1px rgb(197, 197, 197) solid;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
         background-color: white;
+    }
+    p.hero-card-container
+    {
+        font-size: max(0.1vh, 0.6vw);
+    }
+
+    h1.hero-card-container
+    {
+        font-size: max(1.3vh, 1.2vw);
     }
 
     .left

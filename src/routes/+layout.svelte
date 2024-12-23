@@ -7,6 +7,9 @@
     export let data;
     updateTranslation(data.translation, data.fallbackTranslation);
     updateLang(data.lang);
+    
+    let content = data.content.get(data.lang) || data.content.get('en');
+    console.log(content);
 </script>
 
 <Metadata></Metadata>
@@ -17,7 +20,7 @@
     <div class="slot-container">
         <slot></slot>
     </div>
-    <Footer timestamp={data.timestamp}></Footer>
+    <Footer timestamp={data.timestamp} {content}></Footer>
 </div>
 
 <style>

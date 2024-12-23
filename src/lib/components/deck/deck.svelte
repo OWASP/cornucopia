@@ -25,7 +25,7 @@
 <div class="deck">
     {#each selectedCards as card,index}
     <div style="transform: translate(150%,35%) rotate({-45 + index*10}deg) " class="card-container">
-        <CardPreview card={cards.get(card)} mapping={mappingData[index]}></CardPreview>
+        <CardPreview card={cards.get(card)} mapping={mappingData[index]} hero='yes'></CardPreview>
     </div>
     {/each}
 </div>

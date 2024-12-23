@@ -63,20 +63,24 @@
       background: var(--background);
       padding: .5rem;
       color:white;
+      font-weight: bolder;
     }
 
     h2
     {
       background: var(--background);
       padding: .5rem;
-      color:white;   
+      color:white;
+      font-weight: bold;
      }
 
     h3
     {
-      color: var(--background);
+      background: var(--background);
+      padding: .5rem;
       font-size: 1.2rem;
-      margin-bottom: 0;
+      font-weight: bold;
+      color:white;
     }
  
   </style>

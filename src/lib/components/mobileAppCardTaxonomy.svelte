@@ -8,10 +8,12 @@
     import { MappingController, type MobileAppMapping} from "../../domain/mapping/mappingController";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import Attacks from "./attacks.svelte";
+    import { readTranslation } from "$lib/stores/stores";
     export let mappingData;
     export let card: Card;
     export let routes: Map<string, Route[]>;
     const controller: MappingController = new MappingController(mappingData);
+    let t = readTranslation();
     function linkMASVS(input: string) {
       input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
       let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
@@ -46,7 +48,7 @@
   </script>
 
     {#if card.value != 'A' && card.value != 'B' }
-      <h1 class="title">Mappings</h1>
+      <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h1>
       <MappingsList
         title="OWASP MASVS (4.0):"
         mappings={mappings.owasp_masvs}
@@ -64,7 +66,7 @@
       {#if card.value != 'A' && card.value != 'B' }
       <MASVSOverview mappings={[...new Set (mappings.owasp_masvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></MASVSOverview>
       {/if}
-      <h1 class="title">Attacks</h1>
+      <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h1>
       {#if card.value != 'A' && card.value != 'B' }
       <Attacks {mappings} {attacks}></Attacks>
       {/if}

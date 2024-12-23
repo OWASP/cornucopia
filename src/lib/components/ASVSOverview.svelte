@@ -2,7 +2,9 @@
     import { json } from '@sveltejs/kit';
     export let mappings : number[] | undefined;
     import {data} from '$lib/parsed';
+    import { readTranslation } from "$lib/stores/stores";
     let isEmpty = true;
+    let t = readTranslation();
 
     function getIndex(num : number) : any
     {
@@ -53,7 +55,7 @@
 {/if}
 
 {#if isEmpty}
-    <p>No suitable mappings were found.</p>
+    <p>{$t('cards.ASVSOverview.p1')}</p>
 {/if}
 
 <style>

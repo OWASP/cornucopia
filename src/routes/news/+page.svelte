@@ -1,16 +1,22 @@
 <script>
     import { goto } from '$app/navigation';
     import { Text } from '$lib/utils/text';
+    import SvelteMarkdown from 'svelte-markdown';
+    import renderers from '$lib/components/renderers/renderers';
+    import {readLang, readTranslation} from "$lib/stores/stores";
 
     export let data;
+    let t = readTranslation();
+    const lang = readLang();
+    let content = data.content.get($lang) || data.content.get('en');
 </script>
-<div>
-<h1>News</h1>
-<hr>
-<p>Wondering what's new with Cornucopia? This is the place to look!</p>
+
+{#if content != ''}
+<SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
+{/if}
 
 {#if data.posts.length == 0}
-<p>No blogposts have been published yet, come back soon!</p>
+<p>{$t('news.p1')}</p>
 {:else}
     <div class="list">
         {#each data.posts as post}
@@ -20,7 +26,7 @@
                     {Text.FormatDate(post.date)}
                      • 
                     {Text.Format(post.author)}
-                    <a class= "link" href="/news/{post.path}">>> Read more</a>
+                    <a class= "link" href="/news/{post.path}">>> {$t('news.a')}</a>
                 </p>
             </button>
         {/each}
@@ -28,14 +34,13 @@
 {/if}
 
 
-<p>View <a href="/author">All authors</a></p>
+<p>{$t('news.p2')} <a href="/author">{$t('news.slug.p1')}</a></p>
 {#each data.authors as author}
     <p style="display:none;">
         <a href="/author/{author.name}">{author.name}</a>
     </p>
 {/each}
 
-</div>
 <style>
     a
     {

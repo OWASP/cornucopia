@@ -4,8 +4,11 @@
     import TextImage from "$lib/components/textImage.svelte";
     import { readLang } from "$lib/stores/stores.js";
     import type { Suit } from "../domain/suit/suit.js";
+    import {readTranslation} from "$lib/stores/stores";
 
     export let data;
+
+    let t = readTranslation();
     const lang = readLang();
     let suits = data.suits.get(`webapp-${$lang}`);
 
@@ -17,43 +20,37 @@
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
-    <h1 id="top">Introduction</h1>
+    <h1 id="top">{$t('home.h1.1')}</h1>
     <p>
-        The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories.
+        {$t('home.p1')}
     </p>
     <p>
-        OWASP Cornucopia is an easy way to introduce the practice of threat modeling in a software development team. 
-        Playing the card game encourages the development team to actively think about the kind of threats that can emerge when creating software. 
-        This empowers teams to independently secure their applications while building them. 
-        Doing so embraces the shift-left strategy, where security becomes an integrated part of the development cycle.</p>
-    <a href="/about" class="internal-links">➔ Read more</a>
+        {$t('home.p2')}
+    </p>
+    <a href="/about" class="internal-links">➔ {$t('home.a1')}</a>
 </TextImage>
 <TextImage src="/images/cornucopia_logo_mobile_edition.svg" align="left">
-    <h1 id="top">How to start</h1>
-    <p>To start using Cornucopia:</p>
+    <h1 id="top">{$t('home.h1.2')}</h1>
+    <p>{$t('home.p3')}</p>
     <ol>
-        <li><b>Either</b> obtain or buy a pre-printed deck of cards;</li>
-        <li><b>Or:</b> Download the free Adobe Illustrator files and get them professionally printed (see: <a href="/printing">printing instructions</a>);</li>
-        <li><b>Or:</b> Play the game online at <a rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
-        <li>Identify an application, module or component to assess.</li>
-        <li>Invite business owners, architects, developers, testers along for a card game.</li>
-        <li>Get those infosec folk to provide chocolate, pizza, beer, flowers or all four as prizes.</li>
-        <li>Select a portion of the deck to start with.</li>
-        <li><a href="/how-to-play">Play the game</a> to discuss & document security requirements (and to win rounds).</li>
-        <li>Remember, to have fun!</li>
+        <li>{@html $t('home.ol.li1')}</li>
+        <li>{@html $t('home.ol.li2')}<a href="/printing">{$t('home.ol.li2a')}</a>);</li>
+        <li>{@html $t('home.ol.li3')}<a rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
+        <li>{$t('home.ol.li4')}</li>
+        <li>{$t('home.ol.li5')}</li>
+        <li>{$t('home.ol.li6')}</li>
+        <li>{$t('home.ol.li7')}</li>
+        <li><a href="/how-to-play">{$t('home.ol.li8a')}</a>{$t('home.ol.li8')}</li>
+        <li>{$t('home.ol.li9')}</li>
     </ol>
-    <a href="/how-to-play" class="internal-links">➔ How to play</a>
+    <a href="/how-to-play" class="internal-links">➔ {$t('home.a2')}</a>
 </TextImage>
 <TextImage src="/images/opensource.png" align="right">
-    <h1>Open source</h1>
-    <p>
-        There are a large number of source design files for the cards themselves in various languages and formats.
-        These design files together with the source code to generate the Word document, PDFs and InDesign files for printing are maintained in our <a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">Github repository</a>.
+    <h1>{$t('home.h1.3')}</h1>
+    <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.
     </p>
-    <p>
-        One of the main advantages of the OWASP Cornucopia card game being open source is that it allows anyone to access and use the game without any licensing fees or restrictions. This encourages widespread adoption and makes it easier for teams to integrate the game into their security practices. Additionally, being open source means that the game is transparent and customizable. Teams can modify the game to suit their specific needs and address the security threats that are most relevant to their applications. They can also contribute back to the game's development by submitting new cards or improvements. Furthermore, open source software tends to have a large and active community of developers who contribute to the codebase and offer support. This can lead to faster bug fixes and updates, ensuring that the game remains relevant and effective in identifying security threats.
-    </p>
-    <a class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">View source on Github ➔</a>
+    <p>{$t('home.p5')}</p>
+    <a class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} ➔</a>
 </TextImage>
 <Spacer></Spacer>
 <style>
@@ -66,7 +63,7 @@
 
     a,p,ol
     {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-family: var(--font-body);
     }
 

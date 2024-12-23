@@ -1,0 +1,24 @@
+{
+  "swags": {
+    "title": "Swags",
+    "h3": {
+      "1": "Stickers",
+      "2": "Cups and mugs",
+      "3": "Where to find the design file"
+    },
+    "alt": {
+      "1": "sticker - black for mobile",
+      "2": "sticker - black for web",
+      "4": "sticker - white for mobile",
+      "5": "T-shirt - in dev we trust - back",
+      "6": "T-shirt - in dev we trust - front",
+      "7": "T-shirt - in dev we trust - mobile - left side",
+      "8": "T-shirt - in dev we trust - mobile - right side",
+      "9": "Beer glass",
+      "10": "Beer mug",
+      "11": "Coffee cup",
+      "12": "Cornucopia mugs",
+      "13": "Cornucopia october fest beer mug"
+    }
+  }
+}

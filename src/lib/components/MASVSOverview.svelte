@@ -1,6 +1,8 @@
 <script lang="ts">
     export let mappings : number[] | undefined;
     import {data} from '$lib/parsed';
+    import { readTranslation } from "$lib/stores/stores";
+    let t = readTranslation();
     let isEmpty = true;
 
     function getIndex(num : number) : any
@@ -52,7 +54,7 @@
 {/if}
 
 {#if isEmpty}
-    <p>No suitable mappings were found.</p>
+    <p>{$t('cards.MASVSOverview.p1')}</p>
 {/if}
 
 <style>

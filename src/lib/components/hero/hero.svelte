@@ -43,13 +43,16 @@
     {
         flex:1;
         z-index: 50;
+        width: 56%
     }
 
     .hero
     {
-        height : calc(140vh - 5rem);
+        height : calc(160vh - 5rem);
         width : 100%;
     }
+
+    
 
     @media (max-aspect-ratio: 1/1) 
     {

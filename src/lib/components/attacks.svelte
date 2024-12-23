@@ -1,10 +1,12 @@
 <script lang="ts">
+    import { readTranslation } from "$lib/stores/stores";
     export let attacks;
+    let t = readTranslation();
   </script>
     {#each attacks as attack}
       <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
     {:else}
-      <p>No attacks registered!</p>
+      <p>{$t('cards.attacks.p1')}</p>
     {/each}
   
   <style>

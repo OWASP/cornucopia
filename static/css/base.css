@@ -26,12 +26,21 @@ html
 
 a
 {
-    text-decoration: underline;	
+    text-decoration: underline;
+    padding: .10rem;
+    border-radius: .25rem;
+    color: var(--background);
+    font-weight: bold;
+    transition: var(--transition);
 }
+
+
+
 
 a:hover
 {
     text-decoration: none;
+    opacity: 50%;
 }
 
 h1,h2,h3,h4

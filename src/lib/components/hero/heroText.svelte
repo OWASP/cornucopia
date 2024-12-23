@@ -7,7 +7,7 @@
 <style>
     img
     {
-        width: 30rem;
+        width: 45vw;
         margin:auto;
     }
 
@@ -30,13 +30,14 @@
         text-align: center;
         font-family: var(--font-title);
         font-weight: 500;
-        font-size: 2rem;
+        font-size: max(2.4vw, 1vh);
+        text-align: center;
         margin-top: 0;
     }
 
     h1
     {
-        font-size: 8rem;
+        font-size: max(10vw, 1vh);
         padding-top:8rem;
         margin: 0;
         width : 100%;
@@ -51,13 +52,7 @@
     {
         h1
         {
-            font-size: 4rem;
             padding-top: 1rem;
-        }
-
-        h3
-        {
-            font-size: 1.5rem;
         }
 
         img
