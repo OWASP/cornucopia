@@ -35,7 +35,7 @@
     </div>
     <h3>Where to find the design file</h3>
     <p>
-        Our designs are completly free to use for prizes and swag gifts. Download them from <a href="https://github.com/OWASP/cornucopia/tree/master/resources/logos">owasp/cornucopia</a>
+        Our designs are completely free to use for prizes and swag gifts. Download them from <a href="https://github.com/OWASP/cornucopia/tree/master/resources/logos">owasp/cornucopia</a>
         on github.
     </p>
 </div>
