@@ -47,6 +47,7 @@
     span
     {
         display: block;
+        margin-top: .5rem;
     }
     .property-card-suit
     {
