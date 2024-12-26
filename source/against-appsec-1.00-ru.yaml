@@ -1,0 +1,629 @@
+---
+meta:
+  edition: "against-appsec"
+  component: "cards"
+  language: "EN"
+  version: "1.00"
+suits:
+-
+  name: "Cards Against AppSec - Black"
+  id: "CAAB"
+  cards:
+  -
+    id: "CAAB1"
+    desc: "Next from Adam Shostack: Threats, what every engineer should learn from $CARD1"
+  -
+    id: "CAAB2"
+    desc: "Introducing X-treme programming. It’s like programming but with $CARD1"
+  -
+    id: "CAAB3"
+    desc: "And the OWASP WASPY award goes to $CARD1 for $CARD2"
+  -
+    id: "CAAB4"
+    desc: "It’s a pity these days that bounty hunters are all getting involved with $CARD1."
+  -
+    id: "CAAB5"
+    desc: "Clint Gibler can’t sleep without $CARD1."
+  -
+    id: "CAAB6"
+    desc: "What’s my secret AppSec Power?"
+  -
+    id: "CAAB7"
+    desc: "Just once I’d like to hear a dev say “Thanks, thanks for $CARD1.”"
+  -
+    id: "CAAB8"
+    desc: "“Why is the AppSec guy crying?”"
+  -
+    id: "CAAB9"
+    desc: "Instead of copies of Alice and Bob Learn AppSec, security champion programs now give out $CARD1 to champions."
+  -
+    id: "CAAB10"
+    desc: "Neckbeards be like $CARD1."
+  -
+    id: "CAAB11"
+    desc: "What’s EC-Council plagiarized most recently?"
+  -
+    id: "CAAB12"
+    desc: "The pentest engagement was completely ruined by $CARD1."
+  -
+    id: "CAAB13"
+    desc: "When I am CISO, I will create the department of $CARD1."
+  -
+    id: "CAAB14"
+    desc: "What are the devs hiding from me?"
+  -
+    id: "CAAB15"
+    desc: "Today’s broken build is thanks to $CARD1"
+  -
+    id: "CAAB16"
+    desc: "My fav programming language is $CARD1"
+  -
+    id: "CAAB17"
+    desc: "Asking the internet to hack $CARD1"
+  -
+    id: "CAAB18"
+    desc: "HR told me I could not longer $CARD1"
+  -
+    id: "CAAB19"
+    desc: "After reviewing the PenTest report we all gathered for a fun session of $CARD1"
+  -
+    id: "CAAB20"
+    desc: "Just put $CARD1 in the IDE. That will solve everything."
+  -
+    id: "CAAB21"
+    desc: "I dare you to say $CARD1, motherfucker."
+  -
+    id: "CAAB22"
+    desc: "Secure coding is essentially $CARD1"
+  -
+    id: "CAAB23"
+    desc: "Secure Design is $CARD1"
+  -
+    id: "CAAB24"
+    desc: "The only thing bigger than our attack surface is $CARD1"
+  -
+    id: "CAAB25"
+    desc: "I scan my servers with $CARD1"
+  -
+    id: "CAAB26"
+    desc: "The most recent edition of TL;DR Sec focused exclusively on the risk of $CARD1"
+  -
+    id: "CAAB27"
+    desc: "This broken build is brought to you by $CARD1"
+  -
+    id: "CAAB28"
+    desc: "Dude, do not look in that repo. There’s $CARD1 in there."
+  -
+    id: "CAAB29"
+    desc: "What is SheHacksPurple’s guilty pleasure?"
+  -
+    id: "CAAB30"
+    desc: "I’m sorry boss, I couldn’t fix the bug because of $CARD1"
+  -
+    id: "CAAB31"
+    desc: "Step 1: $CARD1
+           Step 2: $CARD2
+           Step 3: Hack."
+  -
+    id: "CAAB32"
+    desc: "For my next hack, I will exfiltrate $CARD1"
+  -
+    id: "CAAB33"
+    desc: "out of $CARD1."
+  -
+    id: "CAAB34"
+    desc: "I’m doing a Pentest this week. Nothing but $CARD1 and $CARD2."
+  -
+    id: "CAAB35"
+    desc: "$CARD1 + $CARD2
+           = $CARD3"
+  -
+    id: "CAAB36"
+    desc: "50% of all Pentests end in $CARD1."
+  -
+    id: "CAAB37"
+    desc: "Why is the developer crying?"
+  -
+    id: "CAAB38"
+    desc: "Life for software developers changed forever when the security team introduced them to $CARD1."
+  -
+    id: "CAAB39"
+    desc: "The grey hairs be like $CARD1."
+  -
+    id: "CAAB40"
+    desc: "What’s an AppSec Pro’s best friend?"
+  -
+    id: "CAAB41"
+    desc: "Fun tip! When the scanner starts, try surprising the PenTester with $CARD1."
+  -
+    id: "CAAB42"
+    desc: "If you like $CARD1, you might be a bounty hunter."
+  -
+    id: "CAAB43"
+    desc: "I’ve got 99 problems but $CARD1 ain’t one."
+  -
+    id: "CAAB44"
+    desc: "The devs and I were not getting along until we discussed our shared interest in $CARD1"
+  -
+    id: "CAAB45"
+    desc: "I fucking love $CARD1"
+  -
+    id: "CAAB45"
+    desc: "Praying to the AppSec Gods for $CARD1"
+  -
+    id: "CAAB46"
+    desc: "I don’t like make believe things like the Easter bunny, Santa Clause and $CARD1"
+  -
+    id: "CAAB47"
+    desc: "AI is going to solve the $CARD1 problem."
+  -
+    id: "CAAB48"
+    desc: "I defend against zero days using $CARD1"
+  -
+    id: "CAAB49"
+    desc: "What’s the risk of $CARD1?"
+  -
+    id: "CAAB50"
+    desc: "Copilot told me to use code that is $CARD1"
+  -
+    id: "CAAB51"
+    desc: "The most important part of AppSec is $CARD1"
+  -
+    id: "CAAB52"
+    desc: "The largest bounty we give is for when they find $CARD1"
+  -
+    id: "CAAB3"
+    desc: "The focus of this audit will be $CARD1"
+  -
+    id: "CAAB54"
+    desc: "This policy is going to prevent $CARD1"
+  -
+    id: "CAAB55"
+    desc: "The developers and I were not getting along, until we discovered our shared interest in $CARD1."
+  -
+    id: "CAAB56"
+    desc: "NIST 800 now prohibits $CARD1 in new web apps and APIs."
+-
+  name: "Cards Against AppSec - White"
+  id: "CAAW"
+  cards:
+  -
+    id: "CAAW1"
+    desc: "Log4J"
+  -
+    id: "CAAW2"
+    desc: "SolarWinds"
+  -
+    id: "CAAW3"
+    desc: "Threat modelling"
+  -
+    id: "CAAW4"
+    desc: "Shitty code"
+  -
+    id: "CAAW5"
+    desc: "A sorry excuse for a CISO"
+  -
+    id: "CAAW6"
+    desc: "45,000 vulnerabilities"
+  -
+    id: "CAAW7"
+    desc: "Secrets in the code. SO MANY SECRETS."
+  -
+    id: "CAAW8"
+    desc: "Password123!"
+  -
+    id: "CAAW9"
+    desc: "Stalkers on the internet bothering influencers for the fun of it"
+  -
+    id: "CAAW10"
+    desc: "See what happens when you lock the pentester in a room with angry devs that just read their scathing report"
+  -
+    id: "CAAW11"
+    desc: "A hacker"
+  -
+    id: "CAAW12"
+    desc: "A shitty bounty hunter"
+  -
+    id: "CAAW13"
+    desc: "A bounty hunter"
+  -
+    id: "CAAW14"
+    desc: "A sorry excuse for a pentester"
+  -
+    id: "CAAW15"
+    desc: "A SAST that takes 12 hours to run and produces 90% false positives."
+  -
+    id: "CAAW16"
+    desc: "A spineless CISO pro"
+  -
+    id: "CAAW17"
+    desc: "A threat model that produces no threats"
+  -
+    id: "CAAW18"
+    desc: "A loving version of crucifixion"
+  -
+    id: "CAAW19"
+    desc: "The coding version of a curbstomp"
+  -
+    id: "CAAW20"
+    desc: "300 API security startups with only enough market for 4"
+  -
+    id: "CAAW21"
+    desc: "Obscene compile time"
+  -
+    id: "CAAW22"
+    desc: "Ostensibly broken error handling"
+  -
+    id: "CAAW23"
+    desc: "Catching an error and then doing absolutely nothing"
+  -
+    id: "CAAW24"
+    desc: "Daddy issues on the QA team"
+  -
+    id: "CAAW25"
+    desc: "Doing crimes. So many Crimes."
+  -
+    id: "CAAW26"
+    desc: "Hack the planet"
+  -
+    id: "CAAW27"
+    desc: "Crippling technical debt"
+  -
+    id: "CAAW28"
+    desc: "Security debt"
+  -
+    id: "CAAW29"
+    desc: "Getting naked and starting the scanner"
+  -
+    id: "CAAW30"
+    desc: "Riddling myself in broken authorization because I am an API."
+  -
+    id: "CAAW31"
+    desc: "Our firewall. Also known as ‘the Swiss cheese’."
+  -
+    id: "CAAW32"
+    desc: "Copilot"
+  -
+    id: "CAAW33"
+    desc: "Github"
+  -
+    id: "CAAW34"
+    desc: "Bitcoin"
+  -
+    id: "CAAW35"
+    desc: "California Sober"
+  -
+    id: "CAAW36"
+    desc: "Twitter. I mean….. ‘X’."
+  -
+    id: "CAAW37"
+    desc: "My butthole"
+  -
+    id: "CAAW38"
+    desc: "Shift left. Or else!"
+  -
+    id: "CAAW39"
+    desc: "Supply chain security"
+  -
+    id: "CAAW40"
+    desc: "Open source"
+  -
+    id: "CAAW41"
+    desc: "Blaming it on the devs"
+  -
+    id: "CAAW42"
+    desc: "Secure Guardrails"
+  -
+    id: "CAAW43"
+    desc: "Downloading wildly insecure images from docker hub and then putting them directly into production"
+  -
+    id: "CAAW44"
+    desc: "Dropping criticals on a Friday"
+  -
+    id: "CAAW45"
+    desc: "Semgrep"
+  -
+    id: "CAAW46"
+    desc: "DockerHub"
+  -
+    id: "CAAW47"
+    desc: "StackOverflow"
+  -
+    id: "CAAW48"
+    desc: "Your Mom"
+  -
+    id: "CAAW49"
+    desc: "Your Dad"
+  -
+    id: "CAAW50"
+    desc: "A threesome with Dev, Sec, and Ops"
+  -
+    id: "CAAW51"
+    desc: "Working at the OWASP Juice Shop"
+  -
+    id: "CAAW52"
+    desc: "API Gateway"
+  -
+    id: "CAAW53"
+    desc: "Dumpster fire"
+  -
+    id: "CAAW54"
+    desc: "A one person AppSec Team"
+  -
+    id: "CAAW55"
+    desc: "Flamethrowers"
+  -
+    id: "CAAW56"
+    desc: "Gerbils"
+  -
+    id: "CAAW57"
+    desc: "Drones. Drones with flamethrowers."
+  -
+    id: "CAAW58"
+    desc: "Hamsters"
+  -
+    id: "CAAW59"
+    desc: "My dating profile"
+  -
+    id: "CAAW60"
+    desc: "Scope Creep"
+  -
+    id: "CAAW61"
+    desc: "IDOR"
+  -
+    id: "CAAW62"
+    desc: "SBOM"
+  -
+    id: "CAAW63"
+    desc: "300 blowfish"
+  -
+    id: "CAAW64"
+    desc: "New Semgrep rules"
+  -
+    id: "CAAW65"
+    desc: "Being OOO"
+  -
+    id: "CAAW66"
+    desc: "Stock options with a 10 year vest"
+  -
+    id: "CAAW67"
+    desc: "The dark art of writing a security policy that doesn’t actually mean anything"
+  -
+    id: "CAAW68"
+    desc: "Inexplicitly low security budgets"
+  -
+    id: "CAAW69"
+    desc: "3 Pedibites of cute cat videos"
+  -
+    id: "CAAW70"
+    desc: "A 14 year old hacking in their parent’s basement, in the dark"
+  -
+    id: "CAAW71"
+    desc: "The Canadian Revenue Agency"
+  -
+    id: "CAAW72"
+    desc: "Absolutely zero logging"
+  -
+    id: "CAAW73"
+    desc: "Fish"
+  -
+    id: "CAAW74"
+    desc: "Scanners that don’t suck"
+  -
+    id: "CAAW75"
+    desc: "Backdoor"
+  -
+    id: "CAAW76"
+    desc: "Honeypot"
+  -
+    id: "CAAW77"
+    desc: "Breaches"
+  -
+    id: "CAAW78"
+    desc: "Helpdesk"
+  -
+    id: "CAAW79"
+    desc: "Incident Response"
+  -
+    id: "CAAW80"
+    desc: "The department of “No”"
+  -
+    id: "CAAW81"
+    desc: "Web App Firewall (WAF)"
+  -
+    id: "CAAW82"
+    desc: "Untuned WAF"
+  -
+    id: "CAAW83"
+    desc: "Overly permissive access control"
+  -
+    id: "CAAW94"
+    desc: "Finding 100,000 bugs and not fixing a single one of them"
+  -
+    id: "CAAW85"
+    desc: "“Vulnerability management”"
+  -
+    id: "CAAW86"
+    desc: "An 8 figure backlog of security bugs"
+  -
+    id: "CAAW87"
+    desc: "Accepting ALL the risks."
+  -
+    id: "CAAW88"
+    desc: "Divorce"
+  -
+    id: "CAAW89"
+    desc: "AI"
+  -
+    id: "CAAW90"
+    desc: "BDSM"
+  -
+    id: "CAAW91"
+    desc: "The dev whisperer"
+  -
+    id: "CAAW92"
+    desc: "Brute Force"
+  -
+    id: "CAAW93"
+    desc: "Little Bobby Drop Tables"
+  -
+    id: "CAAW94"
+    desc: "XKCD"
+  -
+    id: "CAAW95"
+    desc: "Man-in-the-middle"
+  -
+    id: "CAAW96"
+    desc: "Support tickets"
+  -
+    id: "CAAW97"
+    desc: "Just how shitty DAST can be"
+  -
+    id: "CAAW98"
+    desc: "Sriracha eye drops"
+  -
+    id: "CAAW99"
+    desc: "Deploying on a Friday"
+  -
+    id: "CAAW100"
+    desc: "The OWASP Top Ten"
+  -
+    id: "CAAW101"
+    desc: "OWASP drama"
+  -
+    id: "CAAW102"
+    desc: "Hacker Mom"
+  -
+    id: "CAAW103"
+    desc: "Dismissal"
+  -
+    id: "CAAW104"
+    desc: "Runaway"
+  -
+    id: "CAAW105"
+    desc: "Burning down organizational risk"
+  -
+    id: "CAAW106"
+    desc: "Bigger muscles"
+  -
+    id: "CAAW107"
+    desc: "Un-deploy"
+  -
+    id: "CAAW108"
+    desc: "Unfuck that shit"
+  -
+    id: "CAAW109"
+    desc: "Giddy up!"
+  -
+    id: "CAAW110"
+    desc: "Remote Code Execution (RCE)"
+  -
+    id: "CAAW111"
+    desc: "Exploit"
+  -
+    id: "CAAW112"
+    desc: "It’s called input validation, asshole"
+  -
+    id: "CAAW113"
+    desc: "Waterfail"
+  -
+    id: "CAAW114"
+    desc: "Blue Screen of death"
+  -
+    id: "CAAW115"
+    desc: "Injection. Again."
+  -
+    id: "CAAW116"
+    desc: "Stack Trace"
+  -
+    id: "CAAW117"
+    desc: "Wondering if the sweet release of death will come because this damn SAST finishes its scan."
+  -
+    id: "CAAW118"
+    desc: "My safe word is ‘cyber’."
+  -
+    id: "CAAW119"
+    desc: "Just add AI. That will fix it."
+  -
+    id: "CAAW120"
+    desc: "We don’t have the budget for that."
+  -
+    id: "CAAW121"
+    desc: "The security budget growing exponentially after a breach."
+  -
+    id: "CAAW122"
+    desc: "Pentest reports so glorious it brings a tear to the eye."
+  -
+    id: "CAAW123"
+    desc: "Rolling your own crypto."
+  -
+    id: "CAAW124"
+    desc: "Crypto means cryptography, damnit."
+  -
+    id: "CAAW125"
+    desc: "What HR said"
+  -
+    id: "CAAW126"
+    desc: "Format EVERYTHING."
+  -
+    id: "CAAW127"
+    desc: "One library that happens to be maintained by one person, who also happens to work for the Russian government. No biggie."
+  -
+    id: "CAAW128"
+    desc: "Run it over with a tank."
+  -
+    id: "CAAW129"
+    desc: "Questionably legitimate libraries."
+  -
+    id: "CAAW130"
+    desc: "Set fire to it."
+  -
+    id: "CAAW131"
+    desc: "More disappointing than our security posture."
+  -
+    id: "CAAW132"
+    desc: "More disappointing than my performance review."
+  -
+    id: "CAAW133"
+    desc: "The PenTester that makes you wish for a company dress code."
+  -
+    id: "CAAW134"
+    desc: "<script>alert(‘xss’)</script>"
+  -
+    id: "CAAW135"
+    desc: "Burp Suite"
+  -
+    id: "CAAW136"
+    desc: "Zap"
+  -
+    id: "CAAW137"
+    desc: "The “S” in IOT stands for security."
+  -
+    id: "CAAW138"
+    desc: "NMAP"
+  -
+    id: "CAAW139"
+    desc: "Kali Linux"
+  -
+    id: "CAAW140"
+    desc: "Metasploit"
+  -
+    id: "CAAW141"
+    desc: "Turning it off and on again"
+  -
+    id: "CAAW142"
+    desc: "Our worthless WAF"
+paragraphs:
+-
+  id: "Common"
+  name: "Common"
+  sentences:
+  -
+    value: "NoCard"
+    text: "No Card"
+  -
+    value: "Title"
+    text: "Cards Against AppSec EN 1.00"
+  -
+    value: "Title_full"
+    text: "Semgrep's Cards Against AppSec EN 1.00"
