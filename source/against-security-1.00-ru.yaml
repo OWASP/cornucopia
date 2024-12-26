@@ -1,0 +1,51 @@
+---
+meta:
+  edition: "against-security"
+  component: "cards"
+  language: "EN"
+  version: "1.00"
+suits:
+-
+  name: "Cards Against Security"
+  id: "CAS"
+  cards:
+  -
+    id: "CAS2"
+    value: "2"
+    desc: "You favorite card"
+  -
+    id: "CAS3"
+    value: "3"
+    desc: "Another card you like"
+-
+  id: "WC"
+  name: "WILD CARD"
+  cards:
+  -
+    id: "JOA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOA"
+    card: "Joker"
+    desc: "This is a wild card"
+    misc: "Make something up!"
+  -
+    id: "JOB"
+    value: "B"
+    url: "https://cornucopia.owasp.org/cards/JOB"
+    card: "Joker"
+    desc: "This is a wild card"
+    misc: "Make something up!"
+paragraphs:
+-
+  name: "Common"
+  id: "Common"
+  sentences:
+  -
+    id: "NoCard"
+    text: "No Card"
+  -
+    id: "Title"
+    text: "Cards Against Security Edition v1.00-EN"
+  -
+    id: "Title_full"
+    text: "Cards Against Security Edition v1.00-EN"
