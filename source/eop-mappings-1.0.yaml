@@ -18,7 +18,7 @@ meta:
     "deck"
     ]
   templates: ["tarot"]
-  languages: ["en", "es"]
+  languages: ["en", "es", "ru"]
 suits:
 - 
   id: "SP"
