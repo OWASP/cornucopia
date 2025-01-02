@@ -52,13 +52,19 @@
     {
         h1
         {
-            padding-top: 1rem;
+            padding-top: 8rem;
+            font-size: max(15vw, 1vh);
+        }
+
+        h3
+        {
+            font-size: max(3.7vw, 2vh);
         }
 
         img
         {
             width: 80%;
-            margin:auto;
+            margin: auto;
         }  
     }
 </style>

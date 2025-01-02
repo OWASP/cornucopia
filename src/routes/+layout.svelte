@@ -1,5 +1,4 @@
 <script>
-    import CookieNotice from "$lib/components/cookieNotice.svelte";
     import Footer from "$lib/components/footer.svelte";
     import Metadata from "$lib/components/metadata.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
@@ -9,11 +8,9 @@
     updateLang(data.lang);
     
     let content = data.content.get(data.lang) || data.content.get('en');
-    console.log(content);
 </script>
 
 <Metadata></Metadata>
-<CookieNotice></CookieNotice>
 
 <div>
     <Navbar></Navbar>

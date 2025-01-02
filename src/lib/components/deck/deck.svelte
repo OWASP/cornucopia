@@ -52,5 +52,9 @@
         {
             display: none;
         }
+        .card-container
+        {
+            display: none;
+        }
     }
 </style>

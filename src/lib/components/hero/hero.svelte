@@ -43,7 +43,7 @@
     {
         flex:1;
         z-index: 50;
-        width: 56%
+        width: 100%
     }
 
     .hero
@@ -60,6 +60,12 @@
         {
             display: flex;
             flex-direction: column;
+            height: auto;
+        }
+
+        .card-container 
+        {
+            display: none;
         }
     }
 </style>

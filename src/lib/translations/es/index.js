@@ -6,8 +6,12 @@ import playPage from '$data/website/phrases/es/play.json';
 import printingPage from '$data/website/phrases/es/printing.json';
 import swagsPage from '$data/website/phrases/es/swags.json';
 import taxonomyPage from '$data/website/phrases/es/taxonomy.json';
+import webshopPage from '$data/website/phrases/es/webshop.json';
+import getTheGamePage from '$data/website/phrases/es/getthegame.json';
+import layoutPage from '$data/website/phrases/es/layout.json';
 
 export default {
+  layout: layoutPage.layout,
   about: aboutPage.about,
   cards: cardPage.cards,
   home: homePage.home,
@@ -16,5 +20,7 @@ export default {
   printing: printingPage.printing,
   swags: swagsPage.swags,
   taxonomy: taxonomyPage.taxonomy,
-  webshop: {title: "Tienda web"}
+  webshop: webshopPage.webshop,
+  getthegame: getTheGamePage.getthegame,
+
 }

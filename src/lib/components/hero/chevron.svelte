@@ -2,32 +2,38 @@
     export let href: string;
     export let style : string = "";
 </script>
-
-<a href="{href}"><img {style} alt="go-down" src="icons/chevron.png"/></a>
-
+<div id="chevron">
+    <a href="{href}"><img {style} alt="go-down" src="icons/chevron.png"/></a>
+</div>
 <style>   
 
     a
     {
         display: block;
     }
-    img
+
+    #chevron
     {
         transform: translate(0,0rem) rotate(180deg);
         position: absolute;
         display: block;
-        width : 6vw;
+        width : 20vw;
         height : 6vw;
-        left: calc(50% - 2rem);
+        left: calc(50% - 16vw);
         top: calc(80% - 1vh);
         bottom:-3rem;
         cursor:pointer;
         transition: var(--transition);
         filter:invert();
         padding: 1rem;
+        z-index: 100;
 ;    }
 
-    img:hover
+     img {
+        width : 10vw;
+     }
+
+    #chevron:hover
     {
         opacity: 50%;
         transform: translate(0,1rem) rotate(180deg);
@@ -35,10 +41,9 @@
 
     @media (max-aspect-ratio: 1/1) 
     {
-        img
+        #chevron
         {
-            bottom:0rem;
-            top: calc(50% - 10vh);
+            top: calc(80% - 35vh);
         }
     }
 </style>

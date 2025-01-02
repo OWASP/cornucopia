@@ -99,4 +99,9 @@
         transform: translate(1rem,0);
         color: rgb(41, 0, 176);
     }
+
+    @media (max-aspect-ratio: 1/1) 
+    {
+        
+    }
 </style>
