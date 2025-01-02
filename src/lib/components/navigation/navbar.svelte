@@ -160,6 +160,7 @@ $: getMobile(width, height);
 				
     header > nav > ul > li a + div > ul > li {
         margin: 0;
+        display: flex;
     }
 					
     header > nav > ul > li a + div > ul > li > a {

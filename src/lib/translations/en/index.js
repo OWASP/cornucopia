@@ -21,5 +21,5 @@ export default {
   swags: swagsPage.swags,
   taxonomy: taxonomyPage.taxonomy,
   webshop: webshopPage.webshop,
-  getthecards: getTheGamePage.getthegame
+  getthegame: getTheGamePage.getthegame
 };
