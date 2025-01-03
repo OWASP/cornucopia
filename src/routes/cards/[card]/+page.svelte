@@ -45,7 +45,6 @@
     return (cards_options.includes(String(card.id).toUpperCase()) && suits_options.includes(card.suitName.toLowerCase().replaceAll(' ', '-')))
   }
 </script>
-
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card}  mappingData={data.mappingData.get(card.edition)} />
 {:else}
@@ -53,9 +52,9 @@
 {/if}
 
 <style>
-  a {
-    font-family: var(--font-title);
-    color: var(--white);
-    margin: 1rem;
+  p 
+  {
+    background-color: red;
+    font-family: var(--background);
   }
 </style>

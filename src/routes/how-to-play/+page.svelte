@@ -2,7 +2,6 @@
   import SvelteMarkdown from 'svelte-markdown';
   import renderers from '$lib/components/renderers/renderers';
   import {readLang} from "$lib/stores/stores";
-
   export let data;
   const lang = readLang();
   let content = data.content.get($lang) || data.content.get('en');
@@ -16,7 +15,7 @@
     {
         font-weight: bold;
     }
-    h1,p,li
+    p,li
     {
       color:var(--background);
     }

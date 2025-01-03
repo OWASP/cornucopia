@@ -47,3 +47,10 @@ h1,h2,h3,h4
 {
     font-weight: 400;
 }
+
+h1
+{
+  background: var(--background);
+  padding: .5rem;
+  color:white;
+}

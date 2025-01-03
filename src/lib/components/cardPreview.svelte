@@ -44,6 +44,12 @@
 </div>
 
 <style>
+
+    span
+    {
+        display: block;
+    }
+
     .property-card-suit
     {
         transform: rotate(90deg);

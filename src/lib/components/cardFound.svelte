@@ -27,7 +27,7 @@
   }
 </script>
 
-<div class="container">
+<div>
   <h1 class="title">{card.name}</h1>
   <p>{card.desc}</p>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
@@ -69,15 +69,5 @@
     background: var(--background);
     color: white;
     padding: 0.5rem;
-  }
-
-  .container {
-    margin: auto;
-  }
-
-  @media (max-aspect-ratio: 1/1) {
-    .container {
-      width: calc(100% - 2rem);
-    }
   }
 </style>

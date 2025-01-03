@@ -57,7 +57,6 @@
     {
       opacity: 70%;
     }
-
     h1
     {
       background: var(--background);
@@ -65,7 +64,6 @@
       color:white;
       font-weight: bolder;
     }
-
     h2
     {
       background: var(--background);

@@ -20,7 +20,7 @@
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
-    <h1 id="top">{$t('home.h1.1')}</h1>
+    <span id="top">{$t('home.h1.1')}</span>
     <p>
         {$t('home.p1')}
     </p>
@@ -30,7 +30,8 @@
     <a href="/about" class="internal-links">➔ {$t('home.a1')}</a>
 </TextImage>
 <TextImage src="/images/cornucopia_logo_mobile_edition.svg" align="left">
-    <h1 id="top">{$t('home.h1.2')}</h1>
+
+    <span id="top">{$t('home.h1.2')}</span>
     <p>{$t('home.p3')}</p>
     <ol>
         <li>{@html $t('home.ol.li1')}</li>
@@ -46,7 +47,7 @@
     <a href="/how-to-play" class="internal-links">➔ {$t('home.a2')}</a>
 </TextImage>
 <TextImage src="/images/opensource.png" align="right">
-    <h1>{$t('home.h1.3')}</h1>
+    <span>{$t('home.h1.3')}</span>
     <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.
     </p>
     <p>{$t('home.p5')}</p>
@@ -54,12 +55,15 @@
 </TextImage>
 <Spacer></Spacer>
 <style>
-    h1
+    span
     {
+        display: block;
         color: var(--background);
         font-weight: bold;
         margin:0;
+        font-size: 3rem
     }
+    
 
     a,p,ol
     {

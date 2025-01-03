@@ -37,7 +37,7 @@
         margin-right: 2vw;
     }
 
-    h1
+    span
     {
         font-size: max(4vw, 1vh);
         padding-top:8rem;
