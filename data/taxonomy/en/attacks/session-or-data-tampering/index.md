@@ -12,35 +12,35 @@ In 2017, Equifax, one of the largest credit reporting agencies, suffered a massi
 ## Cards
 
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
-- [Data-validation-&-encoding A](/data-validation-&-encoding/VEA)
+- [Data-validation-&-encoding 3](/cards/VE3)
+- [Data-validation-&-encoding 6](/cards/VE6)
+- [Data-validation-&-encoding 8](/cards/VE8)
+- [Data-validation-&-encoding 9](/cards/VE9)
+- [Data-validation-&-encoding J](/cards/VEJ)
+- [Data-validation-&-encoding Q](/cards/VEQ)
+- [Data-validation-&-encoding A](/cards/VEA)
 
 ### Authentication
-- [Authentication 8](/authentication/AT8)
-- [Authentication J](/authentication/ATJ)
+- [Authentication 8](/cards/AT8)
+- [Authentication J](/cards/ATJ)
 
 ### Authorization
-- [Authorization 2](/authorization/AZ2)
-- [Authorization 3](/authorization/AZ3)
-- [Authorization 5](/authorization/AZ5)
-- [Authorization 8](/authorization/AZ8)
-- [Authorization K](/authorization/AZK)
+- [Authorization 2](/cards/AZ2)
+- [Authorization 3](/cards/AZ3)
+- [Authorization 5](/cards/AZ5)
+- [Authorization 8](/cards/AZ8)
+- [Authorization K](/cards/AZK)
 
 ### Session-management
-- [Session-management J](/session-management/SMJ)
-- [Session-management K](/session-management/SMK)
-- [Session-management A](/session-management/SMA)
+- [Session-management J](/cards/SMJ)
+- [Session-management K](/cards/SMK)
+- [Session-management A](/cards/SMA)
 
 ### Cryptography
-- [Cryptography 2](/cryptography/CR2)
-- [Cryptography 3](/cryptography/CR3)
-- [Cryptography 6](/cryptography/CR6)
+- [Cryptography 2](/cards/CR2)
+- [Cryptography 3](/cards/CR3)
+- [Cryptography 6](/cards/CR6)
 
 ### Cornucopia
-- [Cornucopia 5](/cornucopia/C5)
-- [Cornucopia 7](/cornucopia/C7)
+- [Cornucopia 5](/cards/C5)
+- [Cornucopia 7](/cards/C7)

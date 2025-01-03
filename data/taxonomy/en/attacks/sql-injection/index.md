@@ -11,25 +11,25 @@ Ashley Madison data breach involved a website specializing in extramarital affai
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/data-validation-&-encoding/VE2)
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
-- [Data-validation-&-encoding 4](/data-validation-&-encoding/VE5)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
-- [Data-validation-&-encoding 7](/data-validation-&-encoding/VE8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
-- [Data-validation-&-encoding K](/data-validation-&-encoding/VEK)
-- [Data-validation-&-encoding A](/data-validation-&-encoding/VEA)
+- [Data-validation-&-encoding 2](/cards/VE2)
+- [Data-validation-&-encoding 3](/cards/VE3)
+- [Data-validation-&-encoding 4](/cards/VE5)
+- [Data-validation-&-encoding 6](/cards/VE6)
+- [Data-validation-&-encoding 7](/cards/VE8)
+- [Data-validation-&-encoding 9](/cards/VE9)
+- [Data-validation-&-encoding J](/cards/VEJ)
+- [Data-validation-&-encoding Q](/cards/VEQ)
+- [Data-validation-&-encoding K](/cards/VEK)
+- [Data-validation-&-encoding A](/cards/VEA)
 
 ### Authentication
-- [Authentication 8](/authentication/AT8)
-- [Authentication J](/authentication/ATJ)
-- [Authentication Q](/authentication/ATQ)
+- [Authentication 8](/cards/AT8)
+- [Authentication J](/cards/ATJ)
+- [Authentication Q](/cards/ATQ)
 
 ### Authorization
-- [Authorization 6](/authorization/AZ6)
-- [Authorization 7](/authorization/AZ7)
-- [Authorization 8](/authorization/AZ8)
-- [Authorization Q](/authorization/AZQ)
-- [Authorization A](/authorization/AZA)
+- [Authorization 6](/cards/AZ6)
+- [Authorization 7](/cards/AZ7)
+- [Authorization 8](/cards/AZ8)
+- [Authorization Q](/cards/AZQ)
+- [Authorization A](/cards/AZA)

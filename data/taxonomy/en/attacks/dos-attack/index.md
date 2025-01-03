@@ -11,4 +11,4 @@ a website focused on the Royal Family was briefly taken down in a cyber attack c
 
 ## Cards
 ### Authorization
-- [Authorization 9](/authorization/AZ9)
+- [Authorization 9](/cards/AZ9)

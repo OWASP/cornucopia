@@ -10,4 +10,4 @@ Security specialist Ethan faces the challenge of compromising a company's robust
 
 ## Cards
 ### Cryptography
-- [Cryptography 9](/cryptography/CR9)
+- [Cryptography 9](/cards/CR9)

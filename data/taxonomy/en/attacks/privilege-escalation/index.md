@@ -11,30 +11,30 @@ In June 2022, a privilege escalation vulnerability in MikroTik RouterOS was disc
 ## Cards
 
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 5](/data-validation-&-encoding/VE5)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
+- [Data-validation-&-encoding 5](/cards/VE5)
+- [Data-validation-&-encoding 6](/cards/VE6)
+- [Data-validation-&-encoding 8](/cards/VE8)
+- [Data-validation-&-encoding 9](/cards/VE9)
 
 ### Authentication
-- [Authentication 8](/authentication/AT8)
-- [Authentication J](/authentication/ATJ)
+- [Authentication 8](/cards/AT8)
+- [Authentication J](/cards/ATJ)
 
 ### Authorization
-- [Authorization 4](/authorization/AZ4)
-- [Authorization 5](/authorization/AZ5)
-- [Authorization 8](/authorization/AZ8)
-- [Authorization J](/authorization/AZJ)
-- [Authorization Q](/authorization/AZQ)
-- [Authorization K](/authorization/AZK)
+- [Authorization 4](/cards/AZ4)
+- [Authorization 5](/cards/AZ5)
+- [Authorization 8](/cards/AZ8)
+- [Authorization J](/cards/AZJ)
+- [Authorization Q](/cards/AZQ)
+- [Authorization K](/cards/AZK)
 
 ### Session-management
-- [Session-management 8](/session-management/SM8)
+- [Session-management 8](/cards/SM8)
 
 ### Cryptography
-- [Cryptography J](/cryptography/CRJ)
+- [Cryptography J](/cards/CRJ)
 
 ### Cornucopia
-- [Cornucopia 4](/cornucopia/C4)
-- [Cornucopia Q](/cornucopia/CQ)
-- [Cornucopia A](/cornucopia/CA)
+- [Cornucopia 4](/cards/C4)
+- [Cornucopia Q](/cards/CQ)
+- [Cornucopia A](/cards/CA)

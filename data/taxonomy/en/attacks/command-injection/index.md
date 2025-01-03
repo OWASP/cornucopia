@@ -11,23 +11,23 @@ Shellshock was a series of security vulnerabilities discovered in the Bash shell
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
-- [Data-validation-&-encoding 4](/data-validation-&-encoding/VE4)
-- [Data-validation-&-encoding 7](/data-validation-&-encoding/VE7)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
-- [Data-validation-&-encoding K](/data-validation-&-encoding/VEK)
+- [Data-validation-&-encoding 3](/cards/VE3)
+- [Data-validation-&-encoding 4](/cards/VE4)
+- [Data-validation-&-encoding 7](/cards/VE7)
+- [Data-validation-&-encoding 9](/cards/VE9)
+- [Data-validation-&-encoding J](/cards/VEJ)
+- [Data-validation-&-encoding Q](/cards/VEQ)
+- [Data-validation-&-encoding K](/cards/VEK)
 
 ### Authorization
-- [Authorization Q](/authorization/AZQ)
+- [Authorization Q](/cards/AZQ)
 
 ### Cryptography
-- [Cryptography 7](/cryptography/CR7)
+- [Cryptography 7](/cards/CR7)
 
 ### Cornucopia
-- [Cornucopia 2](/cornucopia/C2)
-- [Cornucopia 6](/cornucopia/C6)
-- [Cornucopia J](/cornucopia/CJ)
-- [Cornucopia Q](/cornucopia/CQ)
-- [Cornucopia A](/cornucopia/CA)
+- [Cornucopia 2](/cards/C2)
+- [Cornucopia 6](/cards/C6)
+- [Cornucopia J](/cards/CJ)
+- [Cornucopia Q](/cards/CQ)
+- [Cornucopia A](/cards/CA)

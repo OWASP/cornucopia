@@ -12,31 +12,31 @@ In 2019 Microsoft employees made misconfiguration errors on a new version of Azu
 ## Cards
 
 ### Authentication
-- [Authentication 6](/authentication/AT6)
-- [Authentication 9](/authentication/AT9)
-- [Authentication Q](/authentication/ATQ)
-- [Authentication K](/authentication/ATK)
-- [Authentication A](/authentication/ATA)
+- [Authentication 6](/cards/AT6)
+- [Authentication 9](/cards/AT9)
+- [Authentication Q](/cards/ATQ)
+- [Authentication K](/cards/ATK)
+- [Authentication A](/cards/ATA)
 
 ### Authorization
-- [Authorization 2](/authorization/AZ2)
-- [Authorization 4](/authorization/AZ4)
-- [Authorization 7](/authorization/AZ7)
-- [Authorization J](/authorization/AZJ)
-- [Authorization K](/authorization/AZK)
-- [Authorization A](/authorization/AZA)
+- [Authorization 2](/cards/AZ2)
+- [Authorization 4](/cards/AZ4)
+- [Authorization 7](/cards/AZ7)
+- [Authorization J](/cards/AZJ)
+- [Authorization K](/cards/AZK)
+- [Authorization A](/cards/AZA)
 
 ### Cryptography
-- [Cryptography 4](/cryptography/CR4)
-- [Cryptography 5](/cryptography/CR5)
-- [Cryptography 8](/cryptography/CR8)
-- [Cryptography J](/cryptography/CRJ)
-- [Cryptography Q](/cryptography/CRQ)
+- [Cryptography 4](/cards/CR4)
+- [Cryptography 5](/cards/CR5)
+- [Cryptography 8](/cards/CR8)
+- [Cryptography J](/cards/CRJ)
+- [Cryptography Q](/cards/CRQ)
 
 ### Cornucopia
-- [Cornucopia 3](/cornucopia/C3)
-- [Cornucopia 5](/cornucopia/C5)
-- [Cornucopia 8](/cornucopia/C8)
-- [Cornucopia Q](/cornucopia/CQ)
-- [Cornucopia K](/cornucopia/CK)
-- [Cornucopia A](/cornucopia/CA)
+- [Cornucopia 3](/cards/C3)
+- [Cornucopia 5](/cards/C5)
+- [Cornucopia 8](/cards/C8)
+- [Cornucopia Q](/cards/CQ)
+- [Cornucopia K](/cards/CK)
+- [Cornucopia A](/cards/CA)

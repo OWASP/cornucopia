@@ -11,6 +11,6 @@ LinkedIn experienced a security breach in 2012 where attackers used compromised 
 
 ## Cards
 ### Authentication
-- [Authentication 6](/authentication/AT6)
-- [Authentication 7](/authentication/AT7)
-- [Authentication 8](/authentication/AT8)
+- [Authentication 6](/cards/AT6)
+- [Authentication 7](/cards/AT7)
+- [Authentication 8](/cards/AT8)

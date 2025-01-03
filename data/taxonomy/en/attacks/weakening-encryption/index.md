@@ -11,4 +11,4 @@ infiltrates a popular messaging platform's development environment. Through soci
 
 ## Cards
 ### Cryptography
-- [Cryptography K](/cryptography/CRK)
+- [Cryptography K](/cards/CRK)

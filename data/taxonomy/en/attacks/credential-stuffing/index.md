@@ -11,11 +11,11 @@ In 2018, credential stuffing attacks on popular platforms like Reddit and Spotif
 
 ## Cards
 ### Authentication
-- [Authentication 2](/authentication/AT2)
-- [Authentication 5](/authentication/AT5)
-- [Authentication 9](/authentication/AT9)
-- [Authentication A](/authentication/ATA)
-- [Authentication Q](/authentication/ATQ)
+- [Authentication 2](/cards/AT2)
+- [Authentication 5](/cards/AT5)
+- [Authentication 9](/cards/AT9)
+- [Authentication A](/cards/ATA)
+- [Authentication Q](/cards/ATQ)
 
 ### Authorization
-- [Authorization A](/authorization/AZA)
+- [Authorization A](/cards/AZA)

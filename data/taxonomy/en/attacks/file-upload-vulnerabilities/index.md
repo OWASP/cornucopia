@@ -11,8 +11,8 @@ A critical vulnerability in the Forminator WordPress Contact Form plugin, affect
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 4](/data-validation-&-encoding/VE4)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
+- [Data-validation-&-encoding 4](/cards/VE4)
+- [Data-validation-&-encoding J](/cards/VEJ)
 
 ### Authorization
-- [Authorization Q](/authorization/AZQ)
+- [Authorization Q](/cards/AZQ)

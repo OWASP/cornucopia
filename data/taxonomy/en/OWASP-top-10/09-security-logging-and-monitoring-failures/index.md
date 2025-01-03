@@ -31,20 +31,20 @@ There are commercial and open-source application protection frameworks such as t
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
-- [Data-validation-&-encoding 4](/data-validation-&-encoding/VE4)
+- [Data-validation-&-encoding 3](/cards/VE3)
+- [Data-validation-&-encoding 4](/cards/VE4)
 
 ### Authentication
-- [Authentication 3](/authentication/AT3)
+- [Authentication 3](/cards/AT3)
 
 ### Authorization
-- [Authorization 9](/authorization/AZ9)
+- [Authorization 9](/cards/AZ9)
 
 
 
 ### Cornucopia
-- [Cornucopia 2](/cornucopia/C2)
-- [Cornucopia 4](/cornucopia/C4)
-- [Cornucopia 7](/cornucopia/C7)
-- [Cornucopia 8](/cornucopia/C8)
-- [Cornucopia Q](/cornucopia/CQ)
+- [Cornucopia 2](/cards/C2)
+- [Cornucopia 4](/cards/C4)
+- [Cornucopia 7](/cards/C7)
+- [Cornucopia 8](/cards/C8)
+- [Cornucopia Q](/cards/CQ)

@@ -24,41 +24,41 @@ Note: SQL structures such as table names, column names, and so on cannot be esca
 
 ## Cards
 ### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/data-validation-&-encoding/VE2)
-- [Data-validation-&-encoding 3](/data-validation-&-encoding/VE3)
-- [Data-validation-&-encoding 4](/data-validation-&-encoding/VE4)
-- [Data-validation-&-encoding 5](/data-validation-&-encoding/VE5)
-- [Data-validation-&-encoding 6](/data-validation-&-encoding/VE6)
-- [Data-validation-&-encoding 7](/data-validation-&-encoding/VE7)
-- [Data-validation-&-encoding 8](/data-validation-&-encoding/VE8)
-- [Data-validation-&-encoding 9](/data-validation-&-encoding/VE9)
-- [Data-validation-&-encoding J](/data-validation-&-encoding/VEJ)
-- [Data-validation-&-encoding Q](/data-validation-&-encoding/VEQ)
-- [Data-validation-&-encoding K](/data-validation-&-encoding/VEK)
+- [Data-validation-&-encoding 2](/cards/VE2)
+- [Data-validation-&-encoding 3](/cards/VE3)
+- [Data-validation-&-encoding 4](/cards/VE4)
+- [Data-validation-&-encoding 5](/cards/VE5)
+- [Data-validation-&-encoding 6](/cards/VE6)
+- [Data-validation-&-encoding 7](/cards/VE7)
+- [Data-validation-&-encoding 8](/cards/VE8)
+- [Data-validation-&-encoding 9](/cards/VE9)
+- [Data-validation-&-encoding J](/cards/VEJ)
+- [Data-validation-&-encoding Q](/cards/VEQ)
+- [Data-validation-&-encoding K](/cards/VEK)
 
 ### Authentication
-- [Authentication 2](/authentication/AT2)
-- [Authentication 3](/authentication/AT3)
-- [Authentication 4](/authentication/AT4)
-- [Authentication 5](/authentication/AT5)
-- [Authentication 8](/authentication/AT8)
-- [Authentication J](/authentication/ATJ)
-- [Authentication Q](/authentication/ATQ)
-- [Authentication K](/authentication/ATK)
+- [Authentication 2](/cards/AT2)
+- [Authentication 3](/cards/AT3)
+- [Authentication 4](/cards/AT4)
+- [Authentication 5](/cards/AT5)
+- [Authentication 8](/cards/AT8)
+- [Authentication J](/cards/ATJ)
+- [Authentication Q](/cards/ATQ)
+- [Authentication K](/cards/ATK)
 
 ### Session-management
-- [Session-management 2](/session-management/SM2)
+- [Session-management 2](/cards/SM2)
 
 ### Authorization
-- [Authorization 2](/authorization/AZ2)
-- [Authorization 3](/authorization/AZ3)
-- [Authorization 8](/authorization/AZ8)
-- [Authorization 9](/authorization/AZ9)
-- [Authorization Q](/authorization/AZQ)
+- [Authorization 2](/cards/AZ2)
+- [Authorization 3](/cards/AZ3)
+- [Authorization 8](/cards/AZ8)
+- [Authorization 9](/cards/AZ9)
+- [Authorization Q](/cards/AZQ)
 
 ### Cryptography
-- [Cryptography 8](/cryptography/CR8)
+- [Cryptography 8](/cards/CR8)
 
 ### Cornucopia
-- [Cornucopia 3](/cornucopia/C3)
-- [Cornucopia 5](/cornucopia/C5)
+- [Cornucopia 3](/cards/C3)
+- [Cornucopia 5](/cards/C5)

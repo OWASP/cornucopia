@@ -9,4 +9,4 @@ Over years, a significant number of cryptographic hash functions have been broke
 
 ## Cards
 ### Cryptography
-- [Cryptography K](/cryptography/CRK)
+- [Cryptography K](/cards/CRK)

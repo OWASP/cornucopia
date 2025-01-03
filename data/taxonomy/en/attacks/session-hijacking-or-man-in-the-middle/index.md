@@ -10,17 +10,17 @@ Lenovo faced backlash in 2015 when it was revealed that some of its laptops were
 
 ## Cards
 ### Authorization
-- [Authorization 7](/authorization/AZ7)
+- [Authorization 7](/cards/AZ7)
 
 ### Session-management
-- [Session-management 2](/session-management/SM2)
-- [Session-management 3](/session-management/SM3)
-- [Session-management 4](/session-management/SM4)
-- [Session-management 5](/session-management/SM5)
-- [Session-management 6](/session-management/SM6)
-- [Session-management 7](/session-management/SM7)
-- [Session-management 8](/session-management/SM8)
-- [Session-management 9](/session-management/SM9)
-- [Session-management Q](/session-management/SMQ)
-- [Session-management K](/session-management/SMK)
-- [Session-management A](/session-management/SMA)
+- [Session-management 2](/cards/SM2)
+- [Session-management 3](/cards/SM3)
+- [Session-management 4](/cards/SM4)
+- [Session-management 5](/cards/SM5)
+- [Session-management 6](/cards/SM6)
+- [Session-management 7](/cards/SM7)
+- [Session-management 8](/cards/SM8)
+- [Session-management 9](/cards/SM9)
+- [Session-management Q](/cards/SMQ)
+- [Session-management K](/cards/SMK)
+- [Session-management A](/cards/SMA)

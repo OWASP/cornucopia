@@ -5,7 +5,7 @@ An incomplete list of things that need to be done, in no particular order:
 Include the mobile edition cornucopia deck along with their explanation to the website
 
 ## Rework URL scheme for cards
-Rework URL scheme from 'cornucopia.owasp.org/authorization/4' to 'cornucopia.owasp.org/AZ4
+Rework URL scheme from 'cornucopia.owasp.org/cards/AZ4' to 'cornucopia.owasp.org/AZ4
 
 ## Add CSS based card renderer
 Create CSS based card renderer module instead of using images to display the cards. With this setup the cards displayed on the website will always be up to date with the relevant data. 

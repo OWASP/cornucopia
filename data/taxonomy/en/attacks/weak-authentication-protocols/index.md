@@ -10,17 +10,17 @@ Heartbleed, a serious vulnerability discovered in the OpenSSL cryptographic soft
 
 ## Cards
 ### Authentication
-- [Authentication 7](/authentication/AT7)
-- [Authentication 9](/authentication/AT9)
-- [Authentication K](/authentication/ATK)
+- [Authentication 7](/cards/AT7)
+- [Authentication 9](/cards/AT9)
+- [Authentication K](/cards/ATK)
 
 ### Authorization
-- [Authorization 6](/authorization/AZ6)
+- [Authorization 6](/cards/AZ6)
 
 ### Cryptography
-- [Cryptography 4](/cryptography/CR4)
-- [Cryptography 7](/cryptography/CR7)
+- [Cryptography 4](/cards/CR4)
+- [Cryptography 7](/cards/CR7)
 
 ### Cornucopia
-- [Cornucopia 3](/cornucopia/C3)
-- [Cornucopia 4](/cornucopia/C4)
+- [Cornucopia 3](/cards/C3)
+- [Cornucopia 4](/cards/C4)
