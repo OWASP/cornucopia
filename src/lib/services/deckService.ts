@@ -118,7 +118,7 @@ export class DeckService {
                     cardObject.suitId = suitObject['id'].replace("COM", "CM");
                     cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                     cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
-                    cardObject.url = `/${cardObject.suit}/${cardObject.id}`;
+                    cardObject.url = `/cards/${cardObject.id}`;
                     cardObject.githubUrl = `` + cardObject.suit + '/' + cardObject.id;
                     let path : string = `./${base}${cardObject.githubUrl}/technical-note.md`;  // '/explanation.md';
                     let file = fs.readFileSync(path, 'utf8');

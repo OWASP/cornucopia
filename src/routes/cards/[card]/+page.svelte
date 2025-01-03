@@ -46,7 +46,6 @@
   }
 </script>
 
-<p><a href="/cards">{$t('cards.card.p1')}</a></p>
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card}  mappingData={data.mappingData.get(card.edition)} />
 {:else}

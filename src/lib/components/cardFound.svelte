@@ -73,8 +73,6 @@
 
   .container {
     margin: auto;
-    width: 60%;
-    padding: 1rem;
   }
 
   @media (max-aspect-ratio: 1/1) {

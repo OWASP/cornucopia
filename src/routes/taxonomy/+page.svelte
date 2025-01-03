@@ -1,14 +1,17 @@
 <script>
     import { Text } from "$lib/utils/text";
     import {readLang, readTranslation} from "$lib/stores/stores";
-
+    import renderers from '$lib/components/renderers/renderers';
+    import SvelteMarkdown from "svelte-markdown";
     export let data;
     let t = readTranslation();
     const lang = readLang();
+    let content = data.content.get($lang) || data.content.get('en');
 </script>
 <div>
-<h1 id="taxonomy">{$t('taxonomy.h1')}</h1>
-
+{#if content != ''}
+    <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
+{/if}
 {#each data.categories as category}
     <p>├──<a href="/taxonomy/{category}">{Text.Format(category)}</a></p>
 {/each}
@@ -22,9 +25,6 @@
 
     div
     {
-        padding-left : 1rem;
-        width : 95%;
-        margin: auto;
         font-size: 1.2rem;
     }
 

@@ -7,9 +7,10 @@
     $: 
     {
         parts = $page.url.pathname.split('/');
+        console.log(parts);
     }
 
-    function generateHref(index : number) : string
+    function generateHref(index : number, input : string) : string
     {
         let result = "";
         for(let i = 0 ; i < index + 1 ; i++)
@@ -19,31 +20,41 @@
         return result;
     }
 
-    function generateName(input : string)
+    function generateName(index : number, input : string)
     {
         if(input == '')
             return 'Home'
         else
             return Text.Format(input);
     }
+    
 </script>
 
-<p id="breadcrumbs">
-    {#each parts as part,index}
-        {#if index != 0}
-            <span>> </span>
-        {/if}
-        <a href="{generateHref(index)}">{generateName(part)}</a>
-        <span> </span>
-    {/each}
-</p>
+{#if $page.url.pathname != '/'}
+    <p id="breadcrumbs">
+        {#each parts as part,index}
+            {#if index != 0}
+                <span>{'>'} </span>
+            {/if}
+
+            {#if parts[index-1] && parts[index-1] == 'cards'}
+                <a class="card-code" href="{generateHref(index,part)}">{generateName(index,part)}</a>
+            {:else}
+                <a href="{generateHref(index,part)}">{generateName(index,part)}</a>
+            {/if}
+            <span> </span>
+        {/each}
+    </p>
+{/if}
 
 <style>
     p
     {
+        padding-top: 5.5rem;
         font-size: 1.5rem;
         font-weight: bold;
         text-decoration: none;
+        margin:0;
     }
 
     a:hover
@@ -56,5 +67,10 @@
         text-decoration: none;
         color:var(--background);
         transition: var(--transition);
+    }
+
+    .card-code 
+    {
+        text-transform: uppercase;
     }
 </style>

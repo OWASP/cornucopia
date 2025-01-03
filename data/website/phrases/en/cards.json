@@ -1,7 +1,6 @@
 {
   "cards": {
     "title": "Cards",
-    "h1": "The card decks",
     "p1": "Both current decks have six suits and there are also two Joker cards. Each suit contains 13 cards      (Ace, 2-10, Jack, Queen and King). This page contains the card browser where you can browse through each of the     cards in the OWASP Cornucopia decks.",
     "button": {
       "1": "Website App version",

@@ -29,8 +29,6 @@
     return (cards_options.includes(String(card.id).toUpperCase()) && suits_options.includes(card.suit.toLowerCase()))
   }
 </script>
-
-<p><a href="/cards">Back to overview</a></p>
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card}  mappingData={data.mappingData.get(card.edition)} />
 {:else}
@@ -40,7 +38,7 @@
 <style>
   a {
     font-family: var(--font-title);
-    color: var(--white);
+    color: #1f2937;
     margin: 1rem;
   }
 </style>

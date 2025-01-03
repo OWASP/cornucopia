@@ -8,12 +8,10 @@
     let content = data.content.get($lang) || data.content.get('en');
 </script>
 
-
 {#if content != ''}
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 <div class="vendor-container">
-
     <CardVendor 
     logoSource="/images/logo-agile-stationary.png"
     productImageSource="/images/owasp-cornucopia-preview.png"
@@ -26,23 +24,22 @@
     webshopLink="https://webshop.dotnetlab.eu/product/cornucopia-card-deck/">
     </CardVendor>
 </div>
-
 <style>
     .vendor-container
     {
         display:flex;
-        outline: 1xp red solid;
         justify-content: space-between;
         overflow: none;
     }
     @media (max-aspect-ratio: 1/1)
     {
-
-        .vendor-container
-        {
+        
+        .vendor-container {
             flex-direction: column;
+            margin: auto;
+            margin-top: 2rem;
+            font-size: 1.2rem;
         }
-
     }
 
 </style>

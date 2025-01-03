@@ -1,8 +1,8 @@
 <script>
     import Author from "$lib/components/author.svelte";
+
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
-
     export let data;
 </script>
 

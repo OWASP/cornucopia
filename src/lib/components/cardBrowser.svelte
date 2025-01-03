@@ -34,7 +34,7 @@
 
     function getUrl(card: Card)
     {
-        return '/' + cards.get(card.id)?.suit + '/' + cards.get(card.id)?.id + '/#card';
+        return cards.get(card.id)?.url + '/#card';
     }
 
     onDestroy(()=> {if(browser)document.onkeydown = null})
