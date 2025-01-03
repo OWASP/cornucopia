@@ -20,6 +20,9 @@ importers:
       js-yaml:
         specifier: ^4.1.0
         version: 4.1.0
+      normalize.css:
+        specifier: ^8.0.1
+        version: 8.0.1
       svelte-i18n:
         specifier: ^4.0.1
         version: 4.0.1(svelte@4.2.19)
@@ -1178,6 +1181,9 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+
+  normalize.css@8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
 
   object-inspect@1.13.3:
     resolution: {integrity: sha512-kDCGIbxkDSXE3euJZZXzc6to7fCrKHNI/hSRQnRuQ+BWjFNzZwiFF8fj/6o2t2G9/jTj8PSIYTfCLelLZEeRpA==}
@@ -2612,6 +2618,8 @@ snapshots:
   next-tick@1.1.0: {}
 
   normalize-path@3.0.0: {}
+
+  normalize.css@8.0.1: {}
 
   object-inspect@1.13.3: {}
 

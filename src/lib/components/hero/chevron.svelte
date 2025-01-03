@@ -26,7 +26,7 @@
         transition: var(--transition);
         filter:invert();
         padding: 1rem;
-        z-index: 100;
+        z-index: 99;
 ;    }
 
      img {

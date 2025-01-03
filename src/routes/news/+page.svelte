@@ -98,16 +98,6 @@
         opacity: 70%;
     }
 
-    div
-    {
-        font-size: 1.2rem;
-    }
-
-    p
-    {
-        font-size: 1.5rem;
-    }
-
     .list
     {
         padding-top: 1rem;
