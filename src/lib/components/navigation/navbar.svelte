@@ -274,8 +274,9 @@ $: getMobile(width, height);
         opacity: 50%;
     }
 
-    header > nav > .logo {
+    .logo {
         display:inline-block;
+        margin-top: 0.4rem;
         width : 36vw;
         max-width: 36vw;
         font-size: 3.1vw;
@@ -330,6 +331,9 @@ $: getMobile(width, height);
         {
             display: inline;
             font-size: 8vw;
+        }
+        .logo {
+            margin-top: 0rem;
         }
     }
 </style>
