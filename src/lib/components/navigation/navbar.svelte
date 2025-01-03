@@ -64,7 +64,7 @@ $: getMobile(width, height);
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 <header id="menu">
     <nav>
-        <a class="logo" href="/"><div>OWASP CORNUCOPIA</div></a>
+        <a class="logo" href="/"><div><span class="desktop">OWASP </span><span class="desktop mobile">Cornucopia</span></div></a>
         <ul>
         {#if mobile}
             {#if menuOpen}
@@ -284,6 +284,7 @@ $: getMobile(width, height);
         text-decoration: none;
         color:white;
         transition: var(--transition);
+        text-transform: uppercase;
     }
 
     header > nav > .logo > div {
@@ -320,6 +321,15 @@ $: getMobile(width, height);
         .link
         {
             display: block;
+        }
+        .desktop
+        {
+            display: none;
+        }
+        .mobile
+        {
+            display: inline;
+            font-size: 8vw;
         }
     }
 </style>

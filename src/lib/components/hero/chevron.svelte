@@ -43,7 +43,7 @@
     {
         #chevron
         {
-            top: calc(80% - 35vh);
+            top: calc(80% - 15vh);
         }
     }
 </style>

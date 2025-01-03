@@ -37,6 +37,7 @@
     .card-container
     {
         flex:1;
+        margin-top: 8vw;
     }
 
     .text-container

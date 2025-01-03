@@ -1,6 +1,6 @@
 <div class="hero-text">
-    <h1>Cornucopia</h1>
-    <h3>OWASP Cyber security threat modeling game</h3>
+    <h1>Threat modeling for everyone everywhere</h1>
+    <h3>Uncover the security flaws in your software's design before the bad guys do it for you! Get your team together on a call or in a room and use OWASP Cornucopia Web & Mobile card decks to guide your threat modelling.</h3>
     <img alt="OWASP Cornucopia" src="/images/cornucopia_logo_white.svg"/>
 </div>
 
@@ -30,14 +30,16 @@
         text-align: center;
         font-family: var(--font-title);
         font-weight: 500;
-        font-size: max(2.4vw, 1vh);
-        text-align: center;
+        font-size: max(1.5vw, 1vh);
+        text-align: left;
         margin-top: 0;
+        margin-left: 5vw;
+        margin-right: 2vw;
     }
 
     h1
     {
-        font-size: max(10vw, 1vh);
+        font-size: max(4vw, 1vh);
         padding-top:8rem;
         margin: 0;
         width : 100%;
@@ -53,12 +55,13 @@
         h1
         {
             padding-top: 8rem;
-            font-size: max(15vw, 1vh);
+            font-size: max(8vw, 1vh);
         }
 
         h3
         {
-            font-size: max(3.7vw, 2vh);
+            font-size: max(3.4vw, 2vh);
+            margin-left: 7vw;
         }
 
         img
