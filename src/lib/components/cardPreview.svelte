@@ -20,12 +20,12 @@
 
 <div class="card-render">
     <div class="left" style="background-color:{getSuitColor(card.suit)}">
-        <h1 class="property-card-suit{heroStyle}">{card?.suitName}</h1>
+        <span class="property-card-suit{heroStyle}">{card?.suitName}</span>
     </div>
     <div class="right">
         
         {#if mapping}
-        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.card ?? card?.value}</h1>
+        <span style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.card ?? card?.value}</span>
         <p class="property-card-description{heroStyle}">{card.desc}</p>
             {#if card.edition == 'webapp' && card.value != 'A' && card.value != 'B'}
                 <WebAppCardMapping {mapping} {hero}></WebAppCardMapping>
@@ -44,12 +44,10 @@
 </div>
 
 <style>
-
     span
     {
         display: block;
     }
-
     .property-card-suit
     {
         transform: rotate(90deg);
@@ -96,7 +94,7 @@
         font-size: max(0.1vh, 0.6vw);
     }
 
-    h1.hero-card-container
+    span.hero-card-container
     {
         font-size: max(1.3vh, 1.2vw);
     }
