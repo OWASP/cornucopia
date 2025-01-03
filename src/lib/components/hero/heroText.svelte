@@ -18,6 +18,13 @@
         text-align: center;
     }
 
+    h1 {
+        padding-top: 4rem;
+        font-size: max(3.5vw, 1vh);
+        font-weight: bolder;
+        background: none;
+    }
+
     h3
     {
         color:white;

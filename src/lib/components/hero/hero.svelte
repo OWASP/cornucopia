@@ -49,7 +49,6 @@
 
     .hero
     {
-        height : calc(160vh - 5rem);
         width : 100%;
     }
 

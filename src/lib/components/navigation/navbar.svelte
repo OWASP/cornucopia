@@ -24,7 +24,7 @@
     AddLink(subMenu,$t('swags.title'),"/swags");
 
     function getMobile(w: number, h: number) {
-        mobile = w / h < 1.8;
+        mobile = w / h < 1;
     }
 
 
@@ -56,9 +56,6 @@
     }
 
 
-$: getMobile(width, height);
-
-
 </script>
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
@@ -66,21 +63,18 @@ $: getMobile(width, height);
     <nav>
         <a class="logo" href="/"><div><span class="desktop">OWASP </span><span class="desktop mobile">Cornucopia</span></div></a>
         <ul>
-        {#if mobile}
             {#if menuOpen}
-                <button data-umami-event="mobile-navbar-open-button" in:fade on:click={toggleMenu}><img alt="button to close the menu" src="/icons/close.png"/></button>
+                <button data-umami-event="mobile-navbar-open-button" class="link-mobile" in:fade on:click={toggleMenu}><img alt="button to close the menu" src="/icons/close.png"/></button>
             {:else}
-                <button data-umami-event="mobile-navbar-close-button" in:fade on:click={toggleMenu}><img alt="button to open the menu" src="/icons/menu.png"/></button>
+                <button data-umami-event="mobile-navbar-close-button" class="link-mobile" in:fade on:click={toggleMenu}><img alt="button to open the menu" src="/icons/menu.png"/></button>
             {/if}
-        {:else}
-        
         
         {#each mainMenu as link}
             <li class="general-menu">
                 <a data-umami-event="desktop-navbar-{link.name}-button" class="link" href="{link.href}"><div>{link.name}</div></a>
             </li>
         {/each}
-            <li>
+            <li class="sub-menu">
                 <a data-umami-event="desktop-webshop-button" in:fade on:click={toggleSubMenu} class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
                 <div>
                     <ul class="sub-menu">
@@ -90,7 +84,6 @@ $: getMobile(width, height);
                     </ul>
                 </div>
             </li>
-        {/if}
         </ul>
     </nav>
 </header>
@@ -137,7 +130,7 @@ $: getMobile(width, height);
         display: none;
         font-size: 1vw;
         position: absolute;
-        top: 4.3rem;
+        top: 3.2rem;
         width: 14vw;
     }
 			
@@ -152,9 +145,9 @@ $: getMobile(width, height);
     header > nav > ul > li a + div > ul {
         list-style-type: none;
         height: 13.5rem;
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 2px 2px;
         background-color: rgb(31, 41, 55);
-        border: 1px white solid;
+        border: 2px white solid;
         
     }
 				
@@ -185,6 +178,7 @@ $: getMobile(width, height);
 
     .link-mobile
     {
+        display: none;
         color:var(--white);
         text-decoration: none;
         font-size: 2rem;
@@ -196,6 +190,10 @@ $: getMobile(width, height);
         border-bottom: 1px rgba(255, 255, 255, 0.203) solid;
     }
     .link-mobile:hover > span {
+        opacity: 50%;
+    }
+
+    .link-mobile > img:hover {
         opacity: 50%;
     }
     .mobile-menu
@@ -239,7 +237,7 @@ $: getMobile(width, height);
 
     .get-game
     {
-        border: 3px white solid;
+        border: 2px white solid;
         padding : .5rem;
         margin-right: 1.5rem!important;
         min-width: 14vw;
@@ -310,13 +308,18 @@ $: getMobile(width, height);
 
     @media (max-aspect-ratio: 1/1) 
     {
-        .link-mobile
+        .general-menu 
         {
             display: none;
         }
-        .mobile-menu 
+        li.sub-menu
         {
             display: none;
+        }
+
+        .link-mobile
+        {
+            display: block;
         }
 
         .link

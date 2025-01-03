@@ -20,7 +20,7 @@
         width : 20vw;
         height : 6vw;
         left: calc(50% - 16vw);
-        top: calc(80% - 1vh);
+        top: calc(80% - 20vh);
         bottom:-3rem;
         cursor:pointer;
         transition: var(--transition);

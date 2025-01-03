@@ -1,4 +1,5 @@
 <script lang="ts">
+    import 'normalize.css'
     import { page } from "$app/stores";
     import Breadcrumbs from "$lib/components/breadcrumbs.svelte";
     import Footer from "$lib/components/footer.svelte";
