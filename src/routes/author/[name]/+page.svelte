@@ -3,7 +3,7 @@
     import SvelteMarkdown from "svelte-markdown";
     export let data;
 </script>
-
+<div>
 <div class="container">
     <div class="left">
         <img class="profile-picture" title="{data.author.name}" alt="{data.author.name}" src="/data/author/{data.author.name}/profile-picture.jpg"/>
@@ -60,7 +60,7 @@
             {/each}
         </ul>
     {/if}
-
+</div>
 <style>
     .container
     {
@@ -84,5 +84,16 @@
     table
     {
         margin-left: 1rem;
+    }
+    @media (max-aspect-ratio: 1/1) 
+    {
+        .container
+        {
+            margin: auto;
+        }
+        div
+        {
+            margin: 0rem 1rem;
+        }
     }
 </style>

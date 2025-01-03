@@ -5,7 +5,7 @@
     let t = readTranslation();
     export let data;
 </script>
-
+<div>
 <h1>{$t('news.author.h1')}</h1>
 
 <div class="container">
@@ -13,7 +13,7 @@
         <Author {author}></Author>
     {/each}
 </div>
-
+</div>
 <style>
     .container
     {
@@ -27,11 +27,15 @@
     
     @media (max-aspect-ratio: 1/1) 
     {
+        div
+        {
+            margin: 0rem 1rem;
+        }
         .container
         {
             justify-content: center;
             flex-direction: column;
-            margin:auto;
+            margin: auto;
         } 
     }
 </style>

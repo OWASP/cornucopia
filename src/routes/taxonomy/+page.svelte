@@ -19,13 +19,7 @@
 <style>
     p
     {
-        font-size: 1.5rem;
         margin:0;
-    }
-
-    div
-    {
-        font-size: 1.2rem;
     }
 
     a
@@ -39,5 +33,12 @@
     a:hover
     {
         opacity:50%;
+    }
+    @media (max-aspect-ratio: 1/1)
+    {
+        div
+        {
+            margin: 0rem 1rem;
+        }
     }
 </style>

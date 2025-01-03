@@ -73,4 +73,11 @@
     {
         text-transform: uppercase;
     }
+    @media (max-aspect-ratio: 1/1)
+    {
+        #breadcrumbs
+        {
+            margin: 0rem 1rem;
+        }
+    }
 </style>

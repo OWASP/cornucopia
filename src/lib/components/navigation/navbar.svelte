@@ -23,11 +23,6 @@
     AddLink(subMenu,$t('printing.title'),"/printing");
     AddLink(subMenu,$t('swags.title'),"/swags");
 
-    function getMobile(w: number, h: number) {
-        mobile = w / h < 1;
-    }
-
-
     function toggleMenu()
     {
         menuOpen = !menuOpen;

@@ -8,8 +8,8 @@
     <div class="image-container">
         <img class="logo-image" alt="Vendor logo" src={logoSource}/>
     </div>
-    <img alt="Box of cards" class="product-image" src={productImageSource}/>
-    <a rel="noopener nofollow" class="shop-link" target="_blank" href={webshopLink}>Visit external webshop</a>
+    <a rel="noopener nofollow" target="_blank" href={webshopLink}><img alt="Box of cards" class="product-image" src={productImageSource}/></a>
+    <a rel="noopener nofollow" class="shop-link" target="_blank" href={webshopLink}>Visit external webshop
 </div>
 
 <style>

@@ -8,17 +8,24 @@
     export let data;
     let blogpost = data.blogpost;
 </script>
-
+<div>
 <BlogpostMetadata {blogpost}></BlogpostMetadata>
 <SvelteMarkdown {renderers} source={blogpost.markdown}></SvelteMarkdown>
 <Utterances delay={100} name={blogpost.title + ''}></Utterances>
 <p>
     <a rel="noopener" href="https://github.com/OWASP/www-project-cornucopia/cornucopia.owasp.org/tree/master/data/news/{blogpost.path}/index.md">{$t('news.slug.p1')}</a>
 </p>
-
+</div>
 <style>
     p
     {
         text-align: center;
+    }
+    @media (max-aspect-ratio: 1/1) 
+    {
+       div
+       {
+        margin: 0rem 1rem;
+       }
     }
 </style>

@@ -86,6 +86,7 @@
         mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
     }
 </script>
+<div>
 <section id="decks">
 {#if content != ''}
 <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
@@ -185,6 +186,7 @@
         </div>
     </div>
 </noscript>
+</div>
 <style>
     .button-container
     {
@@ -247,7 +249,7 @@
         font-weight: 400;
     }
 
-    h1,h2,h3
+    h2,h3
     {
         margin:0;
         cursor:pointer;
@@ -307,6 +309,11 @@
         button
         {
             width: 90%;
+        }
+
+        div
+        {
+            margin: 0rem 1rem;
         }
     }
 </style>

@@ -6,7 +6,7 @@
     import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte"
     import Utterances from "$lib/components/utterances.svelte"
 </script>
-
+<div>
 <!--The location is a file -->
 {#each data.files as file}
     <p>├──<a href="/taxonomy/{data.path}/{file}">{Text.Format(file)}</a></p>
@@ -23,11 +23,10 @@
     <ViewSourceOnGithub path={'./data/taxonomy/' + data.path + '/index.md'} ></ViewSourceOnGithub>
     <Utterances name={data.path} ></Utterances>
 {/if}
-
+</div>
 <style>
     p
     {
-        font-size: 1.5rem;
         margin:0;
     }
 
@@ -42,5 +41,12 @@
     a:hover
     {
         opacity:50%;
+    }
+    @media (max-aspect-ratio: 1/1)
+    {
+        div
+        {
+            margin: 0rem 1rem;
+        }
     }
 </style>

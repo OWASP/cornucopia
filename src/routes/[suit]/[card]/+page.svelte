@@ -36,9 +36,12 @@
 {/if}
 
 <style>
-  a {
-    font-family: var(--font-title);
-    color: #1f2937;
-    margin: 1rem;
-  }
+    @media (max-aspect-ratio: 1/1)
+    {
+        div
+        {
+            margin : 0rem 1rem;
+        }
+
+    }
 </style>
