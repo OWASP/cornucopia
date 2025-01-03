@@ -16,12 +16,12 @@
 
     <CardVendor 
     logoSource="/images/logo-agile-stationary.png"
-    productImageSource="/images/agile-stationary-preview.png"
+    productImageSource="/images/owasp-cornucopia-preview.png"
     webshopLink="https://agilestationery.com/search?q=cornucopia">
     </CardVendor>
 
     <CardVendor 
-    logoSource="/images/logo-dotNET-lab.png"
+    logoSource="/images/cornucopia_logo.svg"
     productImageSource="/images/dotNET-lab-preview.png"
     webshopLink="https://webshop.dotnetlab.eu/product/cornucopia-card-deck/">
     </CardVendor>

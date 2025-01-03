@@ -16,13 +16,13 @@ let bodyStart =
   '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' +
   "<channel>" +
   '<atom:link href="https://cornucopia.owasp.org/rss.xml" rel="self" type="application/rss+xml" />' +
-  "<title>Cornucopia dotnetlab</title>" +
+  "<title>OWASP Cornucopia</title>" +
   "<link>https://cornucopia.owasp.org</link>" +
   "<language>en</language>" +
   "<description>Owasp Cornucopia is a CyberSecurity card game, meant to be played in an agile development context. It allows developers to identify and discuss security requirements for their software applications. It is an easy way to introduce the practice of threat modeling in a software development team.</description>" +
   "<image>" +
   "<url>https://cornucopia.owasp.org/images/opengraph.png</url>" +
-  "<title>Cornucopia dotNET lab</title>" +
+  "<title>OWASP Cornucopia</title>" +
   "<link>https://cornucopia.owasp.org</link>" +
   "</image>";
 
@@ -57,7 +57,7 @@ export async function GET() {
 
     // Guid
     body += '<source url="https://cornucopia.owasp.org/rss">';
-    body += "Cornucopia dotNET lab";
+    body += "OWASP Cornucopia";
     body += "</source>";
 
     // Category

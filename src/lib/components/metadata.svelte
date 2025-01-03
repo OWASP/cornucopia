@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="OWASP Cornucopia">
     <meta property="og:description" content="{$t('layout.description')}">
-    <meta property="og:image" content="https://cornucopia.dotnetlab.eu/images/opengraph.png">
+    <meta property="og:image" content="https://owasp.org/www-project-cornucopia/assets/images/cornucopia_logo.svg">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -17,6 +17,6 @@
     <meta property="twitter:url" content="https://cornucopia.owasp.org/">
     <meta name="twitter:title" content="{$t('layout.title')}">
     <meta name="twitter:description" content="{$t('layout.twitter.description')}">
-    <meta name="twitter:image" content="https://cornucopia.dotnetlab.eu/images/opengraph.png">
+    <meta name="twitter:image" content="https://owasp.org/www-project-cornucopia/assets/images/cornucopia_logo.svg">
     <!-- END of Tags -->
 </svelte:head>
