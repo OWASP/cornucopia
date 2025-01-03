@@ -16,7 +16,6 @@
         // Add exceptions for page that need to be shown full page width
         if(path == '/')
             return true;
-
         return false;
     }
 </script>
