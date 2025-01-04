@@ -25,73 +25,55 @@
 
     function toggleMenu()
     {
-        menuOpen = !menuOpen;
-        if(menuOpen)
-        {
-             document.body.style["overflow"] = "hidden"
-        }
-        else
-        {
-            document.body.style["overflow"] = "auto"
-        }
+        let menuButton = document.getElementsByClassName('mobile-nav-button');
+        for (const item of menuButton) item.checked = false;
     }
-
-    function toggleSubMenu(e)
-    {
-        let menu = document.getElementsByClassName('sub-menu');
-        subMenuOpen = !subMenuOpen;
-        if(subMenuOpen)
-        {
-            for (const item of menu) item.style.display = 'none';
-        }
-        else
-        {
-            for (const item of menu) item.style.display = 'block';
-        }
-    }
-
 
 </script>
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 <header id="menu">
     <nav>
-        <a class="logo" href="/"><div><span class="desktop">OWASP </span><span class="desktop mobile">Cornucopia</span></div></a>
-        <ul>
-            {#if menuOpen}
-                <button data-umami-event="mobile-navbar-open-button" class="link-mobile" in:fade on:click={toggleMenu}><img alt="button to close the menu" src="/icons/close.png"/></button>
-            {:else}
-                <button data-umami-event="mobile-navbar-close-button" class="link-mobile" in:fade on:click={toggleMenu}><img alt="button to open the menu" src="/icons/menu.png"/></button>
-            {/if}
-        
-        {#each mainMenu as link}
-            <li class="general-menu">
-                <a data-umami-event="desktop-navbar-{link.name}-button" class="link" href="{link.href}"><div>{link.name}</div></a>
-            </li>
-        {/each}
-            <li class="sub-menu">
-                <a data-umami-event="desktop-webshop-button" in:fade on:click={toggleSubMenu} class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
-                <div>
-                    <ul class="sub-menu">
-                {#each subMenu as link}
-                        <li><a data-umami-event="desktop-navbar-{link.name}-button" class="link sub-menu" href="{link.href}"><div>{link.name}</div></a></li>
-                {/each}
+        <div id="mobile-menu">
+            <input data-umami-event="mobile-navbar-open-button" class="mobile-nav-button" in:fade type="checkbox" />
+            <ul class="mobile-menu">
+                <li>
+                    <ul>
+                        {#each [...mainMenu].reverse() as link}
+                        <li>
+                            <button data-umami-event="mobile-navbar-{link.name}-button" class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                        </li>
+                        {/each}
+                        {#each [...subMenu].reverse() as link}
+                        <li>
+                            <button data-umami-event="mobile-navbar-{link.name}-button" class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                        </li>
+                        {/each}
                     </ul>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
+        <ul class="desktop-menu">
+            {#each mainMenu as link}
+                <li class="general-menu">
+                    <a data-umami-event="desktop-navbar-{link.name}-button" class="link" href="{link.href}"><div>{link.name}</div></a>
+                </li>
+            {/each}
+                <li class="sub-menu">
+                    <a data-umami-event="desktop-webshop-button" in:fade class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
+                    <div>
+                        <ul class="sub-menu">
+                        {#each subMenu as link}
+                             <li><a data-umami-event="desktop-navbar-{link.name}-button" class="link sub-menu" href="{link.href}"><div>{link.name}</div></a></li>
+                        {/each}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        <a class="logo" href="/"><div><span class="desktop">OWASP </span><span class="desktop mobile">Cornucopia</span></div></a>
+        
     </nav>
 </header>
-{#if menuOpen}
-    <div class="mobile-menu">
-        {#each [...mainMenu].reverse() as link}
-            <button data-umami-event="mobile-navbar-{link.name}-button" class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
-        {/each}
-        {#each [...subMenu].reverse() as link}
-            <button data-umami-event="mobile-navbar-{link.name}-button" class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
-        {/each}
-    </div>
-{/if}
 
 <style>
     * {margin: 0;outline: none;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
@@ -99,32 +81,35 @@
     nav {  display: block;}
 
     header {
-		display: block;
-		position: fixed;
+        
+		position: sticky;
 		width: 100%;
-		z-index: 1000;
+		z-index: 100;
 	}
+
+    header > nav {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        justify-content: space-between;
+    }
 	
 	header > nav > ul {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-start;
+        display: flex;
 		list-style: none;
-        float: right;
 	}
 	
     header > nav > ul > li {
         flex: 0 1 auto;
         margin: 0;
         position: relative;
-        transition: all linear 0.1s;	
+        transition: all linear 0.1s;
+        white-space: nowrap;	
     }
     
     header > nav > ul > li a + div {
         border-radius: 0 0 2px 2px;
-        display: none;
         font-size: 1vw;
-        position: absolute;
         top: 3.2rem;
         width: 14vw;
     }
@@ -138,8 +123,9 @@
     }
     
     header > nav > ul > li a + div > ul {
+        display: flex;
         list-style-type: none;
-        height: 13.5rem;
+        height: 17.5vw;
         border-radius: 0 0 2px 2px;
         background-color: rgb(31, 41, 55);
         border: 2px white solid;
@@ -148,7 +134,7 @@
 				
     header > nav > ul > li a + div > ul > li {
         margin: 0;
-        display: flex;
+        flex-direction: column;
     }
 					
     header > nav > ul > li a + div > ul > li > a {
@@ -157,15 +143,12 @@
     }
 	
     header > nav > ul > li > a {
-        align-items: flex-start;
-        display: flex;
         max-width: 15vw;
         padding: 1vw 1.5vw;
     }
 
 
     .get-game {
-        display: flex;
         text-align: top;
         background-color: rgb(31, 41, 55);
     }
@@ -173,7 +156,6 @@
 
     .link-mobile
     {
-        display: none;
         color:var(--white);
         text-decoration: none;
         font-size: 2rem;
@@ -188,17 +170,49 @@
         opacity: 50%;
     }
 
-    .link-mobile > img:hover {
+    .mobile-nav-button {
+        content: url('/icons/menu.png');
+        appearance: none;
+        display: inline-flex;
+        width: 4.1rem;
+        height: 4.1rem;
+        align-self: flex-end;
+
+    }
+
+    .mobile-nav-button:checked {
+        content: url('/icons/close.png');
+
+    }
+
+    .mobile-nav-button:hover {
         opacity: 50%;
     }
-    .mobile-menu
+
+    #mobile-menu
     {
-        position: fixed;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        
+    }
+    .mobile-menu {
         width : 100%;
-        top: 5rem;
+        margin-top: 0.9rem;
         height : 25rem;
         background-color: var(--background);
         z-index: 100;
+    }
+    
+
+    input + ul.mobile-menu
+    {
+        display: none;
+    }
+    
+    header > nav > ul > li >  ul > li > .link-mobile:hover
+    {
+        display: grid;
     }
     button
     {
@@ -208,10 +222,7 @@
         padding-left: 1vw;
         padding-top: 0.5rem;
     }
-    img
-    {
-        width : 4rem;
-    }
+
     .link
     {
         float:right;
@@ -244,12 +255,22 @@
         color:black;
     }
 
+    .get-game + div
+    {
+        display: none;
+    }
+
+    .get-game:hover + div
+    {
+        display: block;
+    }
+
     ul.sub-menu {
         padding-inline-start: 0;
+        flex-direction: column;
     }
 
     a.sub-menu {
-        float: left;
         font-size: 1.3vw;
         margin-left: 0.2vw;
         padding: 0;
@@ -268,7 +289,6 @@
     }
 
     .logo {
-        display:inline-block;
         margin-top: 0.4rem;
         width : 36vw;
         max-width: 36vw;
@@ -303,23 +323,29 @@
 
     @media (max-aspect-ratio: 1/1) 
     {
-        .general-menu 
-        {
-            display: none;
-        }
-        li.sub-menu
-        {
+        .desktop-menu {
             display: none;
         }
 
-        .link-mobile
+        #mobile-menu
         {
-            display: block;
+            display: flex;
         }
 
+        input:checked + ul.mobile-menu
+        {
+            display: flex;
+        }
+
+        ul.mobile-menu {
+            
+        }
+
+        ul.mobile-menu:hover
+        {
+        }
         .link
         {
-            display: block;
         }
         .desktop
         {
