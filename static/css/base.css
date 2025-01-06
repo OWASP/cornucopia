@@ -51,14 +51,18 @@ a:visited
 }
 
 /* Add a 'external link' svg to all links that are external */
-a[href^="http"]:not([href*="cornucopia.owasp.com"]):not([href*="localhost"]):after {
+a[href^="http"]:not([href*="cornucopia-mvp.vercel.app"]):not([href*="localhost"]):after {
     content: '';
     display: inline-block;
-    margin-left: 0.5em;
+    margin-left: 0.2em;
     width: 1rem;
     height: 1rem;
-    background-image: url('/icons/external-link.svg');
+    -webkit-mask: url('/icons/external-link.svg') no-repeat 50% 50%;
+    mask: url('/icons/external-link.svg') no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-  }
+    background-color: currentColor; 
+}
