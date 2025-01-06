@@ -5,7 +5,7 @@
     export let author : Author;
 </script>
 
-<button data-umami-event="author-button" data-umami-event-author="{author.name}"
+<button
 on:click={()=>goto("/author/" + author.name)}>
     <img alt={author.name} src="./data/author/{author.name}/profile-picture.jpg"/>
     <p>{Text.Format(author.name)}</p>

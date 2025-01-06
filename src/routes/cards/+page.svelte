@@ -91,7 +91,7 @@
 {#if content != ''}
 <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
-<p class="button-container">
+<p class="button-container script">
     <button class:button-selected={(version == VERSION_WEBAPP)} on:click={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
     <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
 </p>
@@ -153,41 +153,77 @@
     </div>
 </div>
 <noscript>
-    <div class="container">
-        <div class="tree">
-            <h2>{$t('cards.h2-1')}</h2>
+    <div class="">
+        <div>
+            <h2>{$t('cards.h2.1')}</h2>
             <p class="text">
                 {@html $t('cards.p2')}
             </p>
             {#each webappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <h3>└── {Text.Format(suit.name).toUpperCase()}</h3>
+                <!-- svelte-ignore a11y-label-has-associated-control -->
+                <label for="{suit.name + '-web'}" class="suit-button"><h3>└── {Text.Format(suit.name).toUpperCase()}</h3></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
+                <div class="card-buttons">
                 {#each suit.cards as card}
                     <p>
                         <a href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
+                </div>
             {/each}
         </div>
-        <div class="tree">
-            <h2>{$t('cards.h2-2')}</h2>
+    </div>
+    <div class="">
+        <div>
+            <h2>{$t('cards.h2.2')}</h2>
             <p class="text">
                 {@html $t('cards.p3')}
             </p>
             {#each mobileappSuits as suit}
                 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
+                <!-- svelte-ignore a11y-label-has-associated-control -->
+                <label for="{suit.name + '-mobile'}" class="suit-button"><h3>└── {Text.Format(suit.name).toUpperCase()}</h3></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
+                <div class="card-buttons">
                 {#each suit.cards as card}
-                    <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                    <p>
                         <a href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
+                </div>
             {/each}
         </div>
     </div>
 </noscript>
 </div>
 <style>
+    .card-buttons {
+        display: none;
+    }
+
+    .suit-button 
+    {
+        appearance: none;
+    }
+
+    .suit-button:checked + .card-buttons
+    {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .card-buttons a 
+    {
+        text-decoration: none;
+    }
+
+    .card-buttons p 
+    {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+
     .button-container
     {
         margin-top: 1rem;

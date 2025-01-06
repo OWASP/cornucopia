@@ -32,7 +32,7 @@
             </p>
         </div>
         <div class="right">
-            <button data-umami-event="cookie-button" on:click={accept}>Accept</button>
+            <button on:click={accept}>Accept</button>
         </div>
     </div>
 {/if}

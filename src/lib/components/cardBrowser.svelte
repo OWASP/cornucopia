@@ -58,19 +58,30 @@
     if(browser)
         document.onkeydown = checkKey;
 </script>
-
-<div class="card-panel" id="card">
-    <div class="left" data-umami-event="card-browser-left-button">
+<noscript>
+    <div class="card-panel" id="card">
+        <div class="left">
+            <a href={card.prevous + '/#card'} class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
+        </div>
+        <div class="center">
+            <CardPreview bind:card={card} mapping={mappingData}></CardPreview>
+        </div>
+        <div class="right">
+            <a href={card.next + '/#card'} class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
+        </div>
+    </div>
+</noscript>
+<div class="card-panel script" id="card">
+    <div class="left">
         <a href={getUrl(card)} on:click={goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData}></CardPreview>
     </div>
-    <div class="right" data-umami-event="card-browser-right-button">
+    <div class="right">
         <a href={getUrl(card)} on:click={goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
     </div>
 </div>
-
 <style>
     .arrow
     {
@@ -124,3 +135,11 @@
         }
     }
 </style>
+<noscript>
+    <style>
+        .card-panel.script
+        {
+            display: none;
+        }
+    </style>
+</noscript>

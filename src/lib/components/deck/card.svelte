@@ -34,7 +34,6 @@
 
 <div 
 role='button'
-data-umami-event="card-deck-frontpage-button"
 tabindex="-1"
 on:keydown={reset} 
 on:click={reset}

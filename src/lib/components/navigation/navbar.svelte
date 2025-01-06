@@ -32,18 +32,18 @@
 <header id="menu">
     <nav>
         <div id="mobile-menu">
-            <input data-umami-event="mobile-navbar-open-button" class="mobile-nav-button" in:fade type="checkbox" />
+            <input class="mobile-nav-button" in:fade type="checkbox" />
             <ul class="mobile-menu">
                 <li>
                     <ul>
                         {#each [...mainMenu].reverse() as link}
                         <li>
-                            <button data-umami-event="mobile-navbar-{link.name}-button" class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                            <button class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
                         </li>
                         {/each}
                         {#each [...subMenu].reverse() as link}
                         <li>
-                            <button data-umami-event="mobile-navbar-{link.name}-button" class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                            <button class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
                         </li>
                         {/each}
                     </ul>
@@ -53,15 +53,15 @@
         <ul class="desktop-menu">
             {#each mainMenu as link}
                 <li class="general-menu">
-                    <a data-umami-event="desktop-navbar-{link.name}-button" class="link" href="{link.href}"><div>{link.name}</div></a>
+                    <a class="link" href="{link.href}"><div>{link.name}</div></a>
                 </li>
             {/each}
                 <li class="sub-menu">
-                    <a data-umami-event="desktop-webshop-button" in:fade class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
+                    <a in:fade class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
                     <div>
                         <ul class="sub-menu">
                         {#each subMenu as link}
-                             <li><a data-umami-event="desktop-navbar-{link.name}-button" class="link sub-menu" href="{link.href}"><div>{link.name}</div></a></li>
+                             <li><a class="link sub-menu" href="{link.href}"><div>{link.name}</div></a></li>
                         {/each}
                         </ul>
                     </div>
