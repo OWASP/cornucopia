@@ -6,9 +6,6 @@
     let t = readTranslation();
     let width: number;
     let height: number;
-    let mobile: boolean = false;
-    let menuOpen : boolean = false;
-    let subMenuOpen : boolean = false;
 
     let mainMenu : Link[] = [];
     AddLink(mainMenu,$t('home.title'),"/");
@@ -209,11 +206,7 @@
     {
         display: none;
     }
-    
-    header > nav > ul > li >  ul > li > .link-mobile:hover
-    {
-        display: grid;
-    }
+
     button
     {
         background: none;
@@ -274,8 +267,10 @@
         font-size: 1.3vw;
         margin-left: 0.2vw;
         padding: 0;
-        
+        width: 100%;
+        border-radius: 0rem;
     }
+
     a.sub-menu:hover {
         opacity: 100%;
         

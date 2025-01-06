@@ -7,7 +7,6 @@
     $: 
     {
         parts = $page.url.pathname.split('/');
-        console.log(parts);
     }
 
     function generateHref(index : number, input : string) : string

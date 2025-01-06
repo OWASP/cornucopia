@@ -19,10 +19,13 @@
     }
 
     h1 {
+        padding: 0;
         padding-top: 4rem;
         font-size: max(3.5vw, 1vh);
         font-weight: bolder;
         background: none;
+        margin-left: 5vw;
+        text-align: left;
     }
 
     h3
@@ -30,10 +33,6 @@
         color:white;
         opacity: 90%;
         text-shadow: 0 .2rem rgb(0, 0, 0);
-    }
-
-    h3
-    {
         text-align: center;
         font-family: var(--font-title);
         font-weight: 500;
@@ -44,18 +43,6 @@
         margin-right: 2vw;
     }
 
-    span
-    {
-        font-size: max(4vw, 1vh);
-        padding-top:8rem;
-        margin: 0;
-        width : 100%;
-        text-align: center;
-        color:white;
-        font-weight: bold;
-        text-shadow: 0 .2rem rgb(0, 0, 0);
-
-    }
 
     @media (max-aspect-ratio: 1/1) 
     {

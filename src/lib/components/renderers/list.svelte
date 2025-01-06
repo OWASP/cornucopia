@@ -12,7 +12,7 @@
 <style>
   ul,ol
   {
-    list-style-position: inside;
+    list-style-position: outside;
     overflow: hidden;
     margin-top: 1rem;
     font-size: 1.2rem;
