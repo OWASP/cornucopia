@@ -30,7 +30,7 @@
     }
 
     function linkMASTG(test: string) {
-      let base = '/taxonomy/MASTG-1.7.0/MASVS-';
+      let base = '/taxonomy/mastg-1.7.0/MASVS-';
       return MASTG_TESTS_MAPPING[test] ? base + MASTG_TESTS_MAPPING[test] + '/MASTG-' + test + '#MASTG-' + test : '';
     }
   

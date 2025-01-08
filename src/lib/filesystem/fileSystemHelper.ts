@@ -88,7 +88,7 @@ export class FileSystemHelper {
   }
 
   public static MASTGRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy/en/MASTG-1.7.0";
+    const basePath: string = "data/taxonomy/en/mastg-1.7.0";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
