@@ -4,7 +4,13 @@ export class Text
 {
     public static Capitalize(input : string)
     {
-        return String(input).slice(0,1).toUpperCase() + String(input).slice(1,input.length).toLowerCase();
+        const words = input.split(" ");
+
+        for (let i = 0; i < words.length; i++) {
+            words[i] = words[i].slice(0,1).toUpperCase() + words[i].slice(1,input.length);
+        }
+
+        return words.join(" ").replaceAll(' And ', ' and ').replaceAll(' Of ', ' of ');
     }
 
     public static Format(input : string)

@@ -7,7 +7,7 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
-<h1 class="clickable" id="{data.title}">{Text.FormatPlain(data.title)}</h1>
+<h1 class="clickable" id="{data.title}">{Text.Format(data.title)}</h1>
 <div>
 <!--The location is a file -->
 {#each data.files as file}
