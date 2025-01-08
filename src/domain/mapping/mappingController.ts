@@ -25,6 +25,7 @@ export type MobileAppMapping =
     safecode : number[],
 }
 
+
 export class MappingController {
     private mapping: any;
 

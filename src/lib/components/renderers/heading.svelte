@@ -90,5 +90,26 @@
       font-weight: bold;
       color:white;
     }
+    h4
+    {
+      padding: .3rem;
+      font-size: 1.2rem;
+      font-weight: bolder;
+      color: black;
+    }
+    h5
+    {
+      padding: .2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: black;
+    }
+    h6
+    {
+      padding: .2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: black;
+    }
  
   </style>

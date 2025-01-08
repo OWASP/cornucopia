@@ -7,27 +7,31 @@
     import MappingsList from "$lib/components/mappingsList.svelte";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
+    import { MASTG_TESTS_MAPPING } from "../../domain/mapping/mastg";
     import { MappingController, type MobileAppMapping} from "../../domain/mapping/mappingController";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import Attacks from "./attacks.svelte";
     import { readTranslation } from "$lib/stores/stores";
-  interface Props {
-    mappingData: any;
-    card: Card;
-    routes: Map<string, Route[]>;
-  }
+    interface Props {
+      mappingData: any;
+      card: Card;
+      routes: Map<string, Route[]>;
+    }
 
-  let { mappingData, card = $bindable(), routes }: Props = $props();
+    let { mappingData, card = $bindable(), routes }: Props = $props();
+    
     const controller: MappingController = new MappingController(mappingData);
     let t = readTranslation();
-    function linkMASVS(input: string) {
-      input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
-      let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
-      let searchString = FormatToDoubleDigitSearchstring(input);
-      let result: Route | undefined = ASVSRoutes.find(
-        (route) => route.Section === searchString
-      );
-      return result ? result.Path + "#V" + input : "";
+    function linkMASVS(requirement: string) {
+      let parts = String(requirement).split("-");
+      let category = 'MASVS-' + parts[0];
+      let base = '/taxonomy/MASVS-2.1.0/';
+      return category ? base + category + '/MASVS-' + requirement + '#MASVS-' + requirement : '';
+    }
+
+    function linkMASTG(test: string) {
+      let base = '/taxonomy/MASTG-1.7.0/MASVS-';
+      return MASTG_TESTS_MAPPING[test] ? base + MASTG_TESTS_MAPPING[test] + '/MASTG-' + test + '#MASTG-' + test : '';
     }
   
     function FormatToDoubleDigitSearchstring(input: string) {
@@ -56,11 +60,15 @@
     {#if card.value != 'A' && card.value != 'B'}
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h1>
       <MappingsList
-        title="OWASP MASVS (4.0):"
+        title="OWASP MASVS (2.1):"
         mappings={mappings.owasp_masvs}
         linkFunction={linkMASVS}
       />
-      <MappingsList title="OWASP MASTG:" mappings={mappings.owasp_mastg} />
+      <MappingsList 
+        title="OWASP MASTG (1.7):" 
+        mappings={mappings.owasp_mastg}
+        linkFunction={linkMASTG}
+      />
       <MappingsList
         title="Capec:"
         mappings={mappings.capec}
@@ -68,9 +76,9 @@
       />
       <MappingsList title="Safecode:" mappings={mappings.safecode} />
       {/if}
-      <h1 class="title">ASVS (4.0) Cheatsheetseries Index</h1>
+      <!--<h1 class="title">Cheatsheetseries Index</h1>-->
       {#if card.value != 'A' && card.value != 'B'}
-      <MASVSOverview mappings={[...new Set (mappings.owasp_masvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></MASVSOverview>
+      <!--<MASVSOverview mappings={[...new Set (mappings.owasp_masvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></MASVSOverview>-->
       {/if}
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h1>
       {#if card.value != 'A' && card.value != 'B'}
