@@ -1,4 +1,4 @@
-# Insecure Design
+## Insecure Design
 ## Description
 Insecure design is a broad category representing different weaknesses, expressed as “missing or ineffective control design.” Insecure design is not the source for all other Top 10 risk categories. There is a difference between insecure design and insecure implementation. We differentiate between design flaws and implementation defects for a reason, they have different root causes and remediation. A secure design can still have implementation defects leading to vulnerabilities that may be exploited. An insecure design cannot be fixed by a perfect implementation as by definition, needed security controls were never created to defend against specific attacks. One of the factors that contribute to insecure design is the lack of business risk profiling inherent in the software or system being developed, and thus the failure to determine what level of security design is required.
 
@@ -31,26 +31,26 @@ Secure software requires a secure development lifecycle, some form of secure des
 [Insecure Design Cheatcheats](https://cheatsheetseries.owasp.org/IndexTopTen.html#a042021-insecure-design)
 
 ## Cards
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 6](/cards/VE6)
 - [Data-validation-&-encoding 8](/cards/VE8)
 - [Data-validation-&-encoding 10](/cards/VEX)
 - [Data-validation-&-encoding J](/cards/VEJ)
 
-### Authentication
+#### Authentication
 - [Authentication 3](/cards/AT3)
 - [Authentication 4](/cards/AT4)
 - [Authentication 10](/cards/ATX)
 
-### Authorization
+#### Authorization
 - [Authorization 2](/cards/AZ2)
 - [Authorization 4](/cards/AZ4)
 
-### Cryptography
+#### Cryptography
 - [Cryptography 3](/cards/CR3)
 - [Cryptography 4](/cards/CR4)
 - [Cryptography 5](/cards/CR5)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 3](/cards/C3)

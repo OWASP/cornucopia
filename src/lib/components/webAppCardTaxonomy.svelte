@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
     import {
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import ASVSOverview from "$lib/components/ASVSOverview.svelte";
@@ -7,9 +9,13 @@
     import type { Route } from "../../domain/routes/route";
     import { MappingController, type WebAppMapping } from "../../domain/mapping/mappingController";
     import { readTranslation } from "$lib/stores/stores";
-    export let mappingData;
-    export let card: Card;
-    export let routes: Map<string, Route[]>;
+  interface Props {
+    mappingData: any;
+    card: Card;
+    routes: Map<string, Route[]>;
+  }
+
+  let { mappingData, card = $bindable(), routes }: Props = $props();
     const controller: MappingController = new MappingController(mappingData);
     let t = readTranslation();
     function linkASVS(input: string) {
@@ -36,16 +42,16 @@
     function linkCapec(input: string) {
       return "https://capec.mitre.org/data/definitions/" + input + ".html";
     }
-    let mappings: WebAppMapping = controller.getWebAppCardMappings(card.id);
-    let attacks: Attack[] = GetCardAttacks(card.id);
+    let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
+    let attacks: Attack[] = $state(GetCardAttacks(card.id));
   
-    $: {
+    run(() => {
       mappings = controller.getWebAppCardMappings(card.id);
       attacks = GetCardAttacks(card.id);
-    }
+    });
   </script>
 
-    {#if card.value != 'A' && card.value != 'B' }
+    {#if card.value != 'A' && card.value != 'B'}
       <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.1')}</h1>
       <MappingsList
         title="OWASP ASVS (4.0):"
@@ -66,7 +72,7 @@
     {/if}
   
     <h1 class="title">ASVS (4.0) Cheatsheetseries Index</h1>
-    {#if card.value != 'A' && card.value != 'B' }
+    {#if card.value != 'A' && card.value != 'B'}
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
     {/if}
     <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>

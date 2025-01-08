@@ -1,4 +1,4 @@
-# Cross-Site Scripting (XSS)
+## Cross-Site Scripting (XSS)
 Cross-Site Scripting (XSS) is a web security vulnerability where attackers inject malicious scripts into web pages. This could happen when the user input isn't properly validated, allowing scripts, often in JavaScript, to execute in other users' browsers. This can lead to unauthorized access, data theft, or other malicious activities.
 
 ## Example
@@ -11,7 +11,7 @@ Yahoo suffered from an XSS attack that affected its advertising network. Attacke
 
 ## Cards
 
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 2](/cards/VE2)
 - [Data-validation-&-encoding 4](/cards/VE4)
 - [Data-validation-&-encoding 5](/cards/VE5)
@@ -24,11 +24,11 @@ Yahoo suffered from an XSS attack that affected its advertising network. Attacke
 - [Data-validation-&-encoding K](/cards/VEK)
 - [Data-validation-&-encoding A](/cards/VEA)
 
-### Authentication
+#### Authentication
 - [Authentication 8](/cards/AT8)
 - [Authentication J](/cards/ATJ)
 
-### Authorization
+#### Authorization
 - [Authorization 5](/cards/AZ5)
 - [Authorization 6](/cards/AZ6)
 - [Authorization 7](/cards/AZ7)
@@ -36,7 +36,7 @@ Yahoo suffered from an XSS attack that affected its advertising network. Attacke
 - [Authorization Q](/cards/AZQ)
 - [Authorization A](/cards/AZA)
 
-### Session-management
+#### Session-management
 - [Session-management 2](/cards/SM2)
 - [Session-management 3](/cards/SM3)
 - [Session-management 4](/cards/SM4)
@@ -45,10 +45,10 @@ Yahoo suffered from an XSS attack that affected its advertising network. Attacke
 - [Session-management 9](/cards/SM9)
 - [Session-management Q](/cards/SMQ)
 
-### Cryptography
+#### Cryptography
 - [Cryptography 8](/cards/CR8)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 9](/cards/C9)
 - [Cornucopia Q](/cards/CQ)
 - [Cornucopia A](/cards/CA)

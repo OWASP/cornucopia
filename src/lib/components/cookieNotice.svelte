@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from "$app/environment";
 
-    let noticeAccepted : boolean = false;
+    let noticeAccepted : boolean = $state(false);
     const key : string = 'notice-accepted';
     const value : string = 'true';
 
@@ -32,7 +32,7 @@
             </p>
         </div>
         <div class="right">
-            <button on:click={accept}>Accept</button>
+            <button onclick={accept}>Accept</button>
         </div>
     </div>
 {/if}

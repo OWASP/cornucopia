@@ -1,6 +1,10 @@
 <script lang="ts">
     import {type Card} from "../../domain/card/card"
-    export let card : Card;
+    interface Props {
+        card: Card;
+    }
+
+    let { card }: Props = $props();
 </script>
 
 <p>Unknown card: {String(card.id).toUpperCase()} {card.suit}</p>

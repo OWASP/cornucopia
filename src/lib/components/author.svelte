@@ -2,11 +2,15 @@
     import { goto } from "$app/navigation";
     import { Text } from "$lib/utils/text";
     import type { Author } from "../../domain/author/author";
-    export let author : Author;
+    interface Props {
+        author: Author;
+    }
+
+    let { author }: Props = $props();
 </script>
 
 <button
-on:click={()=>goto("/author/" + author.name)}>
+onclick={()=>goto("/author/" + author.name)}>
     <img alt={author.name} src="./data/author/{author.name}/profile-picture.jpg"/>
     <p>{Text.Format(author.name)}</p>
 </button>

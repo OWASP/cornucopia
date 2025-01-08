@@ -1,7 +1,8 @@
 <script>
     import { Text } from "$lib/utils/text";
     import SvelteMarkdown from "svelte-markdown";
-    export let data;
+    /** @type {{data: any}} */
+    let { data } = $props();
 </script>
 <div>
 <div class="container">

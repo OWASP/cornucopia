@@ -4,7 +4,7 @@
     import { onDestroy } from "svelte";
 
     // Automatic return to homepage delay in milliseconds
-    let timer : number = 10000;
+    let timer : number = $state(10000);
 
     let timeoutId : number = -1;
 

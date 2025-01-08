@@ -1,4 +1,4 @@
-# Local authentication bypass
+## Local authentication bypass
 
 Local authentication bypass involves bypassing authentication, either because it's not implemented, through instrumentation by using a instrumentation tool like Frida to trick the app into exposing credentials or believing that authentication has happened, or by forcing the app to throw an error that leaves the app unlocked.
 
@@ -22,5 +22,5 @@ The Norton App Lock prior to version 1.3.0.13 was susceptible to an authenticati
 - [Android: Local authentication](https://developer.android.com/security/fraud-prevention/authentication)
 
 ## Cards
-### Authentication & Authorization
+#### Authentication & Authorization
 - [Authentication & Authorization 2](/cards/AA2)

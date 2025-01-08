@@ -1,10 +1,14 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
-    export let index : number;
-    export let reset : any;
-    export let image : string;
+    interface Props {
+        index: number;
+        reset: any;
+        image: string;
+    }
 
-    let hover : boolean = false;
+    let { index, reset, image }: Props = $props();
+
+    let hover : boolean = $state(false);
     
     // TODO: clean up this mess
     function generateStyle(hover : boolean) : string
@@ -35,13 +39,13 @@
 <div 
 role='button'
 tabindex="-1"
-on:keydown={reset} 
-on:click={reset}
-on:mouseenter={mouseenter}
-on:mouseleave={mouseleave}
+onkeydown={reset} 
+onclick={reset}
+onmouseenter={mouseenter}
+onmouseleave={mouseleave}
 in:fly="{{ y: 100, duration: 1000 , delay: index * 100}}" 
 class="card" 
-style={generateStyle(hover)}/>
+style={generateStyle(hover)}></div>
 
 
 <style>

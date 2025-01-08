@@ -1,4 +1,4 @@
-# Insider Threats
+## Insider Threats
 Insider threat in cybersecurity refers to the potential risk posed by individuals within an organization who may intentionally or unintentionally compromise security, often due to their access to sensitive information and systems.
 
 ## Example
@@ -11,14 +11,14 @@ In 2019 Microsoft employees made misconfiguration errors on a new version of Azu
 
 ## Cards
 
-### Authentication
+#### Authentication
 - [Authentication 6](/cards/AT6)
 - [Authentication 9](/cards/AT9)
 - [Authentication Q](/cards/ATQ)
 - [Authentication K](/cards/ATK)
 - [Authentication A](/cards/ATA)
 
-### Authorization
+#### Authorization
 - [Authorization 2](/cards/AZ2)
 - [Authorization 4](/cards/AZ4)
 - [Authorization 7](/cards/AZ7)
@@ -26,14 +26,14 @@ In 2019 Microsoft employees made misconfiguration errors on a new version of Azu
 - [Authorization K](/cards/AZK)
 - [Authorization A](/cards/AZA)
 
-### Cryptography
+#### Cryptography
 - [Cryptography 4](/cards/CR4)
 - [Cryptography 5](/cards/CR5)
 - [Cryptography 8](/cards/CR8)
 - [Cryptography J](/cards/CRJ)
 - [Cryptography Q](/cards/CRQ)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 3](/cards/C3)
 - [Cornucopia 5](/cards/C5)
 - [Cornucopia 8](/cards/C8)

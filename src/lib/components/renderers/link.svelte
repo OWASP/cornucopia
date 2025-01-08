@@ -1,12 +1,22 @@
 <script lang="ts">
-    export let href = '';
-    export let title : string = "";
-    export let raw : string = "";
+  interface Props {
+    href?: string;
+    title?: string;
+    raw?: string;
+    children?: import('svelte').Snippet;
+  }
 
-    let target : string = "_blank";
-    let rel : string = '';
-    let clazz : string = "";
-    let style : string = "";
+  let {
+    href = '',
+    title = "",
+    raw = "",
+    children
+  }: Props = $props();
+
+    let target : string = $state("_blank");
+    let rel : string = $state('');
+    let clazz : string = $state("");
+    let style : string = $state("");
 
     if(href.startsWith('/'))
       target = '_self';
@@ -28,7 +38,7 @@
     }
   </script>
   
-  <a {rel} {target} {href} {title} class={clazz} {style}><slot></slot></a>
+  <a {rel} {target} {href} {title} class={clazz} {style}>{@render children?.()}</a>
 
   <style>
     a

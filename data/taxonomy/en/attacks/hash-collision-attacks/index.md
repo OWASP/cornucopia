@@ -1,4 +1,4 @@
-# Hash Collision Attacks
+## Hash Collision Attacks
 A hash collision occurs when two different inputs produce the same hash value. Hash collision attacks aim to find such inputs, and they can have security implications in various applications that rely on hash functions. One common example involves cryptographic hash functions.
 
 ## Example
@@ -9,5 +9,5 @@ Security specialist Ethan faces the challenge of compromising a company's robust
 - [What is a Collision Attack?](https://www.ccn.com/education/cryptography-attacks-6-types-and-prevention-measures/#:~:text=Cryptography%20attacks%20come%20in%20various,to%20fortify%20defenses%20against%20attacks.)
 
 ## Cards
-### Cryptography
+#### Cryptography
 - [Cryptography 9](/cards/CR9)

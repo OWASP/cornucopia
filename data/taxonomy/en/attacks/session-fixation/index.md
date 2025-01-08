@@ -1,4 +1,4 @@
-# Session Fixation
+## Session Fixation
 Session fixation is a security attack where an attacker sets a user's session identifier, aiming to hijack their session and gain unauthorized access.
 
 ## Example
@@ -9,10 +9,10 @@ In 2011, security researcher Rishi Narang discovered a session fixation vulnerab
 - [Session fixation | OWASP Foundation](https://owasp.org/www-community/attacks/Session_fixation)
 
 ## Cards
-### Authorization
+#### Authorization
 - [Authorization 7](/cards/AZ7)
 
-### Session-management
+#### Session-management
 - [Session-management 2](/cards/SM2)
 - [Session-management 3](/cards/SM3)
 - [Session-management 4](/cards/SM4)

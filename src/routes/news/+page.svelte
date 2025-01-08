@@ -5,7 +5,8 @@
     import renderers from '$lib/components/renderers/renderers';
     import {readLang, readTranslation} from "$lib/stores/stores";
 
-    export let data;
+    /** @type {{data: any}} */
+    let { data } = $props();
     let t = readTranslation();
     const lang = readLang();
     let content = data.content.get($lang) || data.content.get('en');
@@ -20,7 +21,7 @@
 {:else}
     <div class="list">
         {#each data.posts as post}
-            <button title="View {Text.Format(post.path)}" on:click={()=>goto('/news/' + post.path)}>
+            <button title="View {Text.Format(post.path)}" onclick={()=>goto('/news/' + post.path)}>
                 <p class="title">{Text.Format(post.title)}</p>
                 <p class="info">
                     {Text.FormatDate(post.date)}

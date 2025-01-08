@@ -1,9 +1,12 @@
 <script lang="ts">
     import { json } from '@sveltejs/kit';
-    export let mappings : number[] | undefined;
     import {data} from '$lib/parsed';
     import { readTranslation } from "$lib/stores/stores";
-    let isEmpty = true;
+    interface Props {
+        mappings: number[] | undefined;
+    }
+
+    let { mappings }: Props = $props();
     let t = readTranslation();
 
     function getIndex(num : number) : any
@@ -34,7 +37,6 @@
         let title = data[lookupIndex as keyof typeof data];
         if (title)
         {
-            isEmpty = false;
             return true;
         }
         else
@@ -54,7 +56,7 @@
     {/each}
 {/if}
 
-{#if isEmpty}
+{#if mappings && (mappings.length > 0)}
     <p>{$t('cards.ASVSOverview.p1')}</p>
 {/if}
 

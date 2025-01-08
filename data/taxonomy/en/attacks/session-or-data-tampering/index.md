@@ -1,4 +1,4 @@
-# (Session) Data tampering
+## (Session) Data tampering
 Data tampering refers to the unauthorized or intentional alteration of data. It involves modifying, deleting, or adding information to manipulate the integrity and accuracy of data. This can occur in various contexts, such as computer systems, databases, financial records, or any other digital storage medium. It can lead to misinformation, security breaches, and compromised decision-making processes.
 
 ## Example
@@ -11,7 +11,7 @@ In 2017, Equifax, one of the largest credit reporting agencies, suffered a massi
 
 ## Cards
 
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 6](/cards/VE6)
 - [Data-validation-&-encoding 8](/cards/VE8)
@@ -20,27 +20,27 @@ In 2017, Equifax, one of the largest credit reporting agencies, suffered a massi
 - [Data-validation-&-encoding Q](/cards/VEQ)
 - [Data-validation-&-encoding A](/cards/VEA)
 
-### Authentication
+#### Authentication
 - [Authentication 8](/cards/AT8)
 - [Authentication J](/cards/ATJ)
 
-### Authorization
+#### Authorization
 - [Authorization 2](/cards/AZ2)
 - [Authorization 3](/cards/AZ3)
 - [Authorization 5](/cards/AZ5)
 - [Authorization 8](/cards/AZ8)
 - [Authorization K](/cards/AZK)
 
-### Session-management
+#### Session-management
 - [Session-management J](/cards/SMJ)
 - [Session-management K](/cards/SMK)
 - [Session-management A](/cards/SMA)
 
-### Cryptography
+#### Cryptography
 - [Cryptography 2](/cards/CR2)
 - [Cryptography 3](/cards/CR3)
 - [Cryptography 6](/cards/CR6)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 5](/cards/C5)
 - [Cornucopia 7](/cards/C7)

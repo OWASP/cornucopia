@@ -1,4 +1,4 @@
-# Security Misconfiguration
+## Security Misconfiguration
 ## Description
 The application might be vulnerable if the application is:
 
@@ -27,7 +27,7 @@ Without a concerted, repeatable application security configuration process, syst
 [Security Misconfiguration Cheatcheats](https://cheatsheetseries.owasp.org/IndexTopTen.html#a052021-security-misconfiguration)
 
 ## Cards
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 2](/cards/VE2)
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 4](/cards/VE4)
@@ -41,7 +41,7 @@ Without a concerted, repeatable application security configuration process, syst
 - [Data-validation-&-encoding Q](/cards/VEQ)
 - [Data-validation-&-encoding K](/cards/VEK)
 
-### Authentication
+#### Authentication
 - [Authentication 2](/cards/AT2)
 - [Authentication 3](/cards/AT3)
 - [Authentication 4](/cards/AT4)
@@ -52,7 +52,7 @@ Without a concerted, repeatable application security configuration process, syst
 - [Authentication J](/cards/ATJ)
 - [Authentication Q](/cards/ATQ)
 
-### Session-management
+#### Session-management
 - [Session-management 2](/cards/SM2)
 - [Session-management 3](/cards/SM3)
 - [Session-management 4](/cards/SM4)
@@ -66,14 +66,14 @@ Without a concerted, repeatable application security configuration process, syst
 - [Session-management Q](/cards/SMQ)
 - [Session-management K](/cards/SMK)
 
-### Authorization
+#### Authorization
 - [Authorization 3](/cards/AZ3)
 - [Authorization 4](/cards/AZ4)
 - [Authorization 8](/cards/AZ8)
 - [Authorization 9](/cards/AZ9)
 - [Authorization J](/cards/AZJ)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 2](/cards/C2)
 - [Cornucopia 3](/cards/C3)
 - [Cornucopia 6](/cards/C6)

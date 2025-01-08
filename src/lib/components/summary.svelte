@@ -2,7 +2,11 @@
     import SvelteMarkdown from "svelte-markdown";
     import renderers from "$lib/components/renderers/renderers"
     import type { Card } from "../../domain/card/card";
-    export let card : Card
+    interface Props {
+        card: Card;
+    }
+
+    let { card }: Props = $props();
 </script>
 
 <div>

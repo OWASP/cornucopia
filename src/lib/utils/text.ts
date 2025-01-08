@@ -14,6 +14,12 @@ export class Text
         return input;
     }
 
+    public static FormatPlain(input : string)
+    {
+        input = String(input).replaceAll('-',' ')
+        return input;
+    }
+
     public static FormatDate(input : string) : string
     {
         // This method expects 19 december 2020 as 20201219 (YYYMMDD)

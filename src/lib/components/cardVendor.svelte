@@ -1,7 +1,11 @@
 <script lang="ts">
-    export let logoSource : string;
-    export let productImageSource : string;
-    export let webshopLink : string;
+    interface Props {
+        logoSource: string;
+        productImageSource: string;
+        webshopLink: string;
+    }
+
+    let { logoSource, productImageSource, webshopLink }: Props = $props();
 </script>
 
 <div class="vendor">

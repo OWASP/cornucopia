@@ -1,4 +1,4 @@
-# Credential Stuffing
+## Credential Stuffing
 Credential stuffing is a cyber-attack method wherein attackers utilize automated tools to systematically input large volumes of username and password pairs, typically obtained from previous data breaches, to try and gain unauthorized access to user accounts across various online services. This method relies on the unfortunate reality that many users reuse passwords across multiple platforms, thereby exploiting the compromise of credentials from one source to compromise accounts on other platforms.
 
 ## Example
@@ -10,12 +10,12 @@ In 2018, credential stuffing attacks on popular platforms like Reddit and Spotif
 - [Credential stuffing | OWASP Foundation](https://owasp.org/www-community/attacks/Credential_stuffing)
 
 ## Cards
-### Authentication
+#### Authentication
 - [Authentication 2](/cards/AT2)
 - [Authentication 5](/cards/AT5)
 - [Authentication 9](/cards/AT9)
 - [Authentication A](/cards/ATA)
 - [Authentication Q](/cards/ATQ)
 
-### Authorization
+#### Authorization
 - [Authorization A](/cards/AZA)

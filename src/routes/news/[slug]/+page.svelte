@@ -5,7 +5,8 @@
     import Utterances from '$lib/components/utterances.svelte';
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
-    export let data;
+    /** @type {{data: any}} */
+    let { data } = $props();
     let blogpost = data.blogpost;
 </script>
 <div>

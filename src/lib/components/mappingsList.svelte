@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let title: string;
-  export let mappings: number[] | string[];
-  export let linkFunction: any = undefined;
+  interface Props {
+    title: string;
+    mappings: number[] | string[];
+    linkFunction?: any;
+  }
+
+  let { title, mappings, linkFunction = undefined }: Props = $props();
 </script>
 
 <p>

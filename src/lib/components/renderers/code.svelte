@@ -1,6 +1,10 @@
 <script lang="ts">
-    export let lang : string = "javascript"
-    export let text : string;
+  interface Props {
+    lang?: string;
+    text: string;
+  }
+
+  let { lang = "javascript", text }: Props = $props();
   </script>
 
 <p>{lang}</p>

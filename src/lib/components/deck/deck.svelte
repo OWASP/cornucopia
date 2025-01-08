@@ -2,9 +2,13 @@
     import CardPreview from "../cardPreview.svelte";
     import type { Suit } from "../../../domain/suit/suit";
 
-    export let suits : Suit[];
-    export let cards : any;
-    export let mapping : any;
+    interface Props {
+        suits: Suit[];
+        cards: any;
+        mapping: any;
+    }
+
+    let { suits, cards, mapping }: Props = $props();
 
     // Manual selection of cards to display on the frontpage 
     let selectedCards : string[] =  ["JOA","C7","CR6","AZ5","SM4","VE3","AT2",]  
@@ -25,7 +29,7 @@
 <div class="deck">
     {#each selectedCards as card,index}
     <div style="transform: translate(150%,35%) rotate({-45 + index*10}deg) " class="card-container">
-        <CardPreview card={cards.get(card)} mapping={mappingData[index]} hero='yes'></CardPreview>
+        <CardPreview card={cards.get(card)} mapping={mappingData[index]} style='hero-card-container'></CardPreview>
     </div>
     {/each}
 </div>

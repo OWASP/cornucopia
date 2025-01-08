@@ -1,4 +1,4 @@
-# Weakening Encryption
+## Weakening Encryption
 Weakening encryption attacks involve efforts to compromise the effectiveness of encryption, usually through exploiting vulnerabilities or introducing backdoors.
 
 ## Example
@@ -10,5 +10,5 @@ infiltrates a popular messaging platform's development environment. Through soci
 
 
 ## Cards
-### Cryptography
+#### Cryptography
 - [Cryptography K](/cards/CRK)

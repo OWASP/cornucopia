@@ -6,11 +6,15 @@
     import type { Suit } from "../domain/suit/suit.js";
     import {readTranslation} from "$lib/stores/stores";
 
-    export let data;
+    interface Props {
+        data: any;
+    }
+
+    let { data }: Props = $props();
 
     let t = readTranslation();
     const lang = readLang();
-    let suits = data.suits.get(`webapp-${$lang}`);
+    let suits = $state(data.suits.get(`webapp-${$lang}`));
 
     if (suits == undefined) {
         suits = data.suits.get('webapp-en') as Suit[];

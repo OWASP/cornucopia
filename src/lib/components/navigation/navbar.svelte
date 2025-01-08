@@ -4,8 +4,8 @@
     import { AddLink, type Link } from "./utils";
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
-    let width: number;
-    let height: number;
+    let width: number = $state();
+    let height: number = $state();
 
     let mainMenu : Link[] = [];
     AddLink(mainMenu,$t('home.title'),"/");
@@ -16,9 +16,10 @@
     AddLink(mainMenu,$t('about.title'),"/about");
     
     let subMenu : Link[] = [];
-    AddLink(subMenu,$t('webshop.title'),"/webshop");
+    AddLink(subMenu,$t('source.title'),"/source");
     AddLink(subMenu,$t('printing.title'),"/printing");
     AddLink(subMenu,$t('swags.title'),"/swags");
+    AddLink(subMenu,$t('webshop.title'),"/webshop");
 
     function toggleMenu()
     {
@@ -38,12 +39,12 @@
                     <ul>
                         {#each [...mainMenu].reverse() as link}
                         <li>
-                            <button class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
                         </li>
                         {/each}
                         {#each [...subMenu].reverse() as link}
                         <li>
-                            <button class="link-mobile" on:click={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
                         </li>
                         {/each}
                     </ul>
@@ -73,7 +74,7 @@
 </header>
 
 <style>
-    * {margin: 0;outline: none;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+    * {margin: 0;outline: none;padding-inline-start: 0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
     *:after, *:before { -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
     nav {  display: block;}
 
@@ -94,6 +95,7 @@
 	header > nav > ul {
         display: flex;
 		list-style: none;
+        padding: 0;
 	}
 	
     header > nav > ul > li {
@@ -196,15 +198,23 @@
     .mobile-menu {
         width : 100%;
         margin-top: 0.9rem;
-        height : 25rem;
+        height : 30rem;
         background-color: var(--background);
         z-index: 100;
+        border-radius: 0 0 10px 10px;
+        padding-bottom: 1rem;
+        padding: 0 1rem 1rem;
+        
     }
     
 
     input + ul.mobile-menu
     {
         display: none;
+        -webkit-animation: fadeOutFromNone 0.5s ease-out;
+        -moz-animation: fadeOutFromNone 0.5s ease-out;
+        -o-animation: fadeOutFromNone 0.5s ease-out;
+        animation: fadeOutFromNone 0.5s ease-out;
     }
 
     button
@@ -287,13 +297,16 @@
         margin-top: 0.4rem;
         width : 36vw;
         max-width: 36vw;
-        font-size: 3.1vw;
+        font-size: 3vw;
         padding: 1rem;
         font-weight: bold;
         text-decoration: none;
         color:white;
         transition: var(--transition);
         text-transform: uppercase;
+        white-space: pre;
+        overflow: hidden;
+        
     }
 
     header > nav > .logo > div {
@@ -330,18 +343,13 @@
         input:checked + ul.mobile-menu
         {
             display: flex;
+
+            -webkit-animation: fadeInFromNone 0.5s ease-out;
+            -moz-animation: fadeInFromNone 0.5s ease-out;
+            -o-animation: fadeInFromNone 0.5s ease-out;
+            animation: fadeInFromNone 0.5s ease-out;
         }
 
-        ul.mobile-menu {
-            
-        }
-
-        ul.mobile-menu:hover
-        {
-        }
-        .link
-        {
-        }
         .desktop
         {
             display: none;
@@ -353,6 +361,75 @@
         }
         .logo {
             margin-top: 0rem;
+            overflow: visible;
+        }
+
+        @-webkit-keyframes fadeInFromNone {
+            0% {
+                display: none;
+                opacity: 0;
+            }
+
+            1% {
+                display: flex;
+                opacity: 0;
+            }
+
+            100% {
+                display: flex;
+                opacity: 1;
+            }
+        }
+
+        @-moz-keyframes fadeInFromNone {
+            0% {
+                display: none;
+                opacity: 0;
+            }
+
+            1% {
+                display: flex;
+                opacity: 0;
+            }
+
+            100% {
+                display: flex;
+                opacity: 1;
+            }
+        }
+
+        @-o-keyframes fadeInFromNone {
+            0% {
+                display: none;
+                opacity: 0;
+            }
+
+            1% {
+                display: flex;
+                opacity: 0;
+            }
+
+            100% {
+                display: flex;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInFromNone {
+            0% {
+                display: none;
+                opacity: 0;
+            }
+
+            1% {
+                display: flex;
+                opacity: 0;
+            }
+
         }
     }
+
+
+
+
 </style>

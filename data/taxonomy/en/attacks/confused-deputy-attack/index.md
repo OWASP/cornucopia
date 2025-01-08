@@ -1,4 +1,4 @@
-# Confused deputy attack
+## Confused deputy attack
 
 If a legitimate application requests dangerous permissions and then exposes a feature that uses that dangerous permission to the system, it allows any other application installed on the device to enjoy the permission without the need of requesting it. Let's say that a developer accidently left the permission `android.permission.BIND_NOTIFICATION_LISTENER_SERVICE` in an application release build and exposed that permission to other apps on the system. It is used to intercept all the notifications received by the system. This means the malware can read all notifications, modify them before sending to the user or even reply to them if needed even if it does not have the `BIND_NOTIFICATION_LISTENER_SERVICE` permission. This is known as the confused deputy problem.
 
@@ -24,5 +24,5 @@ In 2019 the Google and Samsung Camera app was identified as vulnerable to the "C
 - [Apple: Security of runtime process in iOS and iPadOS](https://help.apple.com/pdf/security/en_US/apple-platform-security-guide.pdf)
 
 ## Cards
-### Authentication & Authorization
+#### Authentication & Authorization
 - [Authentication & Authorization 3](/cards/AA3)

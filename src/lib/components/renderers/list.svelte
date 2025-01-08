@@ -1,12 +1,17 @@
 <script lang="ts">
-    export let ordered : any
-    export let start : any
+  interface Props {
+    ordered: any;
+    start: any;
+    children?: import('svelte').Snippet;
+  }
+
+  let { ordered, start, children }: Props = $props();
 </script>
   
   {#if ordered}
-    <ol {start}><slot></slot></ol>
+    <ol {start}>{@render children?.()}</ol>
   {:else}
-    <ul><slot></slot></ul>
+    <ul>{@render children?.()}</ul>
   {/if}
 
 <style>

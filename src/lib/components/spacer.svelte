@@ -1,8 +1,12 @@
 <script lang="ts">
-	export let height: string = '5rem';
+	interface Props {
+		height?: string;
+	}
+
+	let { height = '5rem' }: Props = $props();
 </script>
 
-<div style="height:{height}" />
+<div style="height:{height}"></div>
 
 <style>
 	div {

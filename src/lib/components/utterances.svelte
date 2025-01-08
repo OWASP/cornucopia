@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	let bindingElement: HTMLElement;
-	let loading : boolean = true;
-	let percentage : number = 0;
+	let bindingElement: HTMLElement = $state();
+	let loading : boolean = $state(true);
+	let percentage : number = $state(0);
 
-    export let name : string;
-	export let delay : number = 250;
+	interface Props {
+		name: string;
+		delay?: number;
+	}
+
+	let { name, delay = 250 }: Props = $props();
 
 	onMount(async ()=> createCommentSection())
 
@@ -40,7 +44,7 @@
 	}
 </script>
 
-<div bind:this={bindingElement} />
+<div bind:this={bindingElement}></div>
 {#if loading}
 	<p>Loading comments {percentage}%</p>
 {/if}

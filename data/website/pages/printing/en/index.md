@@ -33,14 +33,17 @@ Here is the current version of Cornucopia Website App and Mobile App Edition gui
 
 ## Printing instructions
 
-The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there to ensure you get the latest updates and fixes done to the decks.<br/>
-The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work.<br/>
-In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/templates/Fonts` in this repository. They are both open source and free for commercial use.<br/>
+The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there to ensure you get the latest updates and fixes done to the decks.
+
+The docx/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work.
+
+In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/templates/Fonts` in this repository. They are both open source and free for commercial use.
+
 The fonts can also be downloaded from the web.
 - Fivo Sans: [https://www.fontsc.com/font/fivo-sans](https://www.fontsc.com/font/fivo-sans)
 - Atkinson Hyperlegible: [https://brailleinstitute.org/freefont](https://brailleinstitute.org/freefont)
 
-### The following fonts are used:
+#### The following fonts are used:
 
 - Deck: Fivo Sans and Atkinson Hyperlegible
 - Leaflet: Fivo Sans
@@ -56,39 +59,44 @@ The fonts can also be downloaded from the web.
     - Noto Sans Extra Condensed Extra Bold
         
 
-### Dimensions
+#### Dimensions
 
-#### Card decks:
+###### Card decks:
 
-The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.<br/>
+The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
+
 The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 
-#### Cases:
+###### Cases:
 
 the boxes has standard dimensions used by Agile Stationary to print their OWASP Cornucopia decks.
 
-The "bridge" is 60 x 89.25 mm x 27.15 mm<br/>
+The "bridge" is 60 x 89.25 mm x 27.15 mm
+
 The "tarot" is 122.2 x 73.1 x 29.1 mm
 
-#### Leaflets:
+###### Leaflets:
 
 The "bridge" and "tarot" version is a 16-20 page spread depending on which language you print it in.
 
-The "bridge" files are  55mm x 87mm<br/>
+The "bridge" files are  55mm x 87mm
+
 The "tarot" files are (2.75 x 4.75")
 
 Please be aware, that the table of content for the Indesign leaflet has to be adjusted for all language versions before printing except for the English version!!
 
-This is because Indesign does not support auto adjusting the TOC.<br/>
+This is because Indesign does not support auto adjusting the TOC.
+
 You may need to adjust the font size to fit either a 16 or a 20 page leaflet spread.
 
 DO NOT PRINT an 18 Page leaflet! It won't look good.
 
-#### Blead:
+###### Blead:
 
 A standard blead set to 3mm for all 4 sides.
 
-#### Paper:
+###### Paper:
 
-Use 300gsm for both the bridge cards and the tarot cards.<br/>
+Use 300gsm for both the bridge cards and the tarot cards.
+
 For the case, we would recommend folding box board with anti-scuff lamination and 100gsm uncoated stock for the leaflet. The leaflets could also be laminated, but it might make them springy.

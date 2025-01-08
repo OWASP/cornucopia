@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
     import {
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import MASVSOverview from "$lib/components/MASVSOverview.svelte";
@@ -9,9 +11,13 @@
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import Attacks from "./attacks.svelte";
     import { readTranslation } from "$lib/stores/stores";
-    export let mappingData;
-    export let card: Card;
-    export let routes: Map<string, Route[]>;
+  interface Props {
+    mappingData: any;
+    card: Card;
+    routes: Map<string, Route[]>;
+  }
+
+  let { mappingData, card = $bindable(), routes }: Props = $props();
     const controller: MappingController = new MappingController(mappingData);
     let t = readTranslation();
     function linkMASVS(input: string) {
@@ -38,16 +44,16 @@
     function linkCapec(input: string) {
       return "https://capec.mitre.org/data/definitions/" + input + ".html";
     }
-    let mappings: MobileAppMapping = {} as MobileAppCardMapping;
-    let attacks: Attack[] = [] as Attack[];
-    $: {
+    let mappings: MobileAppMapping = $state({} as MobileAppCardMapping);
+    let attacks: Attack[] = $state([] as Attack[]);
+    run(() => {
       mappings = controller.getMobileAppCardMappings(card.id.replace('CM', 'COM'));
       attacks = GetCardAttacks(card.id) as Attack[] | Attack[];
-    }
+    });
       
   </script>
 
-    {#if card.value != 'A' && card.value != 'B' }
+    {#if card.value != 'A' && card.value != 'B'}
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h1>
       <MappingsList
         title="OWASP MASVS (4.0):"
@@ -63,11 +69,11 @@
       <MappingsList title="Safecode:" mappings={mappings.safecode} />
       {/if}
       <h1 class="title">ASVS (4.0) Cheatsheetseries Index</h1>
-      {#if card.value != 'A' && card.value != 'B' }
+      {#if card.value != 'A' && card.value != 'B'}
       <MASVSOverview mappings={[...new Set (mappings.owasp_masvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></MASVSOverview>
       {/if}
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h1>
-      {#if card.value != 'A' && card.value != 'B' }
+      {#if card.value != 'A' && card.value != 'B'}
       <Attacks {mappings} {attacks}></Attacks>
       {/if}
     

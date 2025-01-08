@@ -1,12 +1,17 @@
 <script lang="ts">
-    export let header : any
-    export let align : any
+  interface Props {
+    header: any;
+    align: any;
+    children?: import('svelte').Snippet;
+  }
+
+  let { header, align, children }: Props = $props();
   </script>
   
   {#if header}
-    <th {align}><slot></slot></th>
+    <th {align}>{@render children?.()}</th>
   {:else}
-    <td {align}><slot></slot></td>
+    <td {align}>{@render children?.()}</td>
   {/if}
 
   <style>

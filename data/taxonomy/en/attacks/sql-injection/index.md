@@ -1,4 +1,4 @@
-# SQL Injection 
+## SQL Injection 
 SQL injection is a cyber-attack technique where in malicious SQL code is injected into input fields or parameters of an application. The objective is to exploit vulnerabilities in the application's input validation processes, thereby manipulating the underlying SQL queries to gain unauthorized access, retrieve sensitive data, or tamper with the database.
 
 ## Example
@@ -10,7 +10,7 @@ Ashley Madison data breach involved a website specializing in extramarital affai
 - [SQL Injection | OWASP](https://owasp.org/www-community/attacks/SQL_Injection)
 
 ## Cards
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 2](/cards/VE2)
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 4](/cards/VE5)
@@ -22,12 +22,12 @@ Ashley Madison data breach involved a website specializing in extramarital affai
 - [Data-validation-&-encoding K](/cards/VEK)
 - [Data-validation-&-encoding A](/cards/VEA)
 
-### Authentication
+#### Authentication
 - [Authentication 8](/cards/AT8)
 - [Authentication J](/cards/ATJ)
 - [Authentication Q](/cards/ATQ)
 
-### Authorization
+#### Authorization
 - [Authorization 6](/cards/AZ6)
 - [Authorization 7](/cards/AZ7)
 - [Authorization 8](/cards/AZ8)

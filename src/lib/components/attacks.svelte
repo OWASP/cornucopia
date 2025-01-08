@@ -1,6 +1,10 @@
 <script lang="ts">
     import { readTranslation } from "$lib/stores/stores";
-    export let attacks;
+  interface Props {
+    attacks: any;
+  }
+
+  let { attacks }: Props = $props();
     let t = readTranslation();
   </script>
     {#each attacks as attack}

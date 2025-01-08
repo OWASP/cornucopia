@@ -8,8 +8,13 @@
     import { MappingController } from "../../domain/mapping/mappingController.js";
     import { readLang, readTranslation } from '$lib/stores/stores';
     import type { Suit } from "../../domain/suit/suit.js";
+    import { SvelteMap } from 'svelte/reactivity';
 
-    export let data: PageData;
+    interface Props {
+        data: PageData;
+    }
+
+    let { data }: Props = $props();
     const lang = readLang();
     let t = readTranslation();
     let content = data.content.get($lang) || data.content.get('en');
@@ -24,8 +29,8 @@
 
 
 
-    let mobileappSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
-    let webappSuits = suits?.get(`${VERSION_WEBAPP}-${$lang}`);
+    let mobileappSuits = $state(suits?.get(`${VERSION_MOBILEAPP}-${$lang}`));
+    let webappSuits = $state(suits?.get(`${VERSION_WEBAPP}-${$lang}`));
 
     if (!mobileappSuits) {
         mobileappSuits = suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
@@ -35,12 +40,12 @@
         webappSuits = suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
     }
 
-    let version : string = VERSION_WEBAPP;
+    let version : string = $state(VERSION_WEBAPP);
     let suit : string;
-    let card : Card = cards?.get('VE2') as Card;
-    let mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
+    let card : Card = $state(cards?.get('VE2') as Card);
+    let mapping = $state((new MappingController(mappingData?.get(version))).getCardMappings(card.id));
 
-    let map : Map<string,boolean> = new Map();
+    let map : Map<string,boolean> = $state(new SvelteMap());
     setTree(false);
 
     function setTree(expand : boolean)
@@ -92,8 +97,8 @@
 <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 <p class="button-container script">
-    <button class:button-selected={(version == VERSION_WEBAPP)} on:click={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
-    <button class:button-selected={version == VERSION_MOBILEAPP} on:click={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
+    <button class:button-selected={(version == VERSION_WEBAPP)} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
+    <button class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
 </p>
 </section>
 <div class="script">
@@ -121,11 +126,11 @@
             {#if version == VERSION_WEBAPP}
                 
                 {#each webappSuits as suit}
-                    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                    <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
                         {#each suit.cards as card}
-                            <p on:mouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
+                            <p onmouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
                                 <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                             </p>
                         {/each}
@@ -135,11 +140,11 @@
 
             {#if version == VERSION_MOBILEAPP}
                 {#each mobileappSuits as suit}
-                    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                    <h3 on:keypress="{()=>toggle(suit.name)}" on:click="{()=>toggle(suit.name)}">└── {Text.Format(suit.name).toUpperCase()}</h3>
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
                         {#each suit.cards as card}
-                            <p on:mouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
                                 <a href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                             </p>
                         {/each}
@@ -148,7 +153,7 @@
             {/if}
         </div>
         <div class="preview-container">
-                <CardPreview {card} {mapping}></CardPreview>
+                <CardPreview {card} {mapping} style="preview-card-container"></CardPreview>
         </div>
     </div>
 </div>
@@ -160,8 +165,8 @@
                 {@html $t('cards.p2')}
             </p>
             {#each webappSuits as suit}
-                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <!-- svelte-ignore a11y-label-has-associated-control -->
+                <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                <!-- svelte-ignore a11y_label_has_associated_control -->
                 <label for="{suit.name + '-web'}" class="suit-button"><h3>└── {Text.Format(suit.name).toUpperCase()}</h3></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
                 <div class="card-buttons">
@@ -181,8 +186,8 @@
                 {@html $t('cards.p3')}
             </p>
             {#each mobileappSuits as suit}
-                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-                <!-- svelte-ignore a11y-label-has-associated-control -->
+                <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                <!-- svelte-ignore a11y_label_has_associated_control -->
                 <label for="{suit.name + '-mobile'}" class="suit-button"><h3>└── {Text.Format(suit.name).toUpperCase()}</h3></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
                 <div class="card-buttons">

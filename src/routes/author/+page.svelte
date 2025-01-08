@@ -3,7 +3,8 @@
 
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
-    export let data;
+    /** @type {{data: any}} */
+    let { data } = $props();
 </script>
 <div>
 <h1>{$t('news.author.h1')}</h1>

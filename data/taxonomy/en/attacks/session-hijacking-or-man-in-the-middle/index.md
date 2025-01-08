@@ -1,4 +1,4 @@
-# Session Hijacking (Man-in-the-Middle)
+## Session Hijacking (Man-in-the-Middle)
 Session hijacking, or man-in-the-middle (MitM) attack, is a security breach where an unauthorized party intercepts and possibly alters communication between a user and a server. This allows the attacker to gain unauthorized access to sensitive information, such as login credentials or session tokens, potentially leading to impersonation and unauthorized account access.
 
 ## Example
@@ -9,10 +9,10 @@ Lenovo faced backlash in 2015 when it was revealed that some of its laptops were
 - [Session Hijacking](https://usa.kaspersky.com/resource-center/definitions/what-is-session-hijacking)
 
 ## Cards
-### Authorization
+#### Authorization
 - [Authorization 7](/cards/AZ7)
 
-### Session-management
+#### Session-management
 - [Session-management 2](/cards/SM2)
 - [Session-management 3](/cards/SM3)
 - [Session-management 4](/cards/SM4)

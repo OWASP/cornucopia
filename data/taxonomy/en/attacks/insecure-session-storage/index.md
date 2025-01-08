@@ -1,4 +1,4 @@
-# Insecure Session Storage
+## Insecure Session Storage
 Insecure Session Storage refers to the unsafe use of session storage in web development, where sensitive data is stored without proper security measures. This can lead to vulnerabilities such as cross-site scripting and unauthorized access to confidential information.
 
 ## Example
@@ -9,5 +9,5 @@ In a fictional scenario, an attacker named Eve exploits an online banking applic
 - [IDOR - Inside the Session Storage](https://shahjerry33.medium.com/idor-inside-the-session-storage-88af485fc899)
 
 ## Cards
-### Authentication
+#### Authentication
 - [Authentication 3](/cards/AT3)

@@ -1,9 +1,19 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
 
-    export let depth : number;
-    export let raw : string;
-    export let text : string;
+  interface Props {
+    depth: number;
+    raw: string;
+    text: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let {
+    depth,
+    raw,
+    text,
+    children
+  }: Props = $props();
 
     function cleanText(input : string) : string
     {
@@ -12,36 +22,36 @@
 </script>
   
   {#if depth === 1}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <h1 class="clickable" on:keydown={()=>goto("#" + cleanText(text))} on:click={()=>goto("#" + cleanText(text))}
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <h1 class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))}
      id={cleanText(text)}>
-      <slot></slot>
+      {@render children?.()}
     </h1>
   {:else if depth === 2}
-      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <h2 class="clickable" on:keydown={()=>goto("#" + cleanText(text))} on:click={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
-      <slot></slot>
+      <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <h2 class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+      {@render children?.()}
     </h2>
   {:else if depth === 3}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <h3 class="clickable" on:keydown={()=>goto("#" + cleanText(text))} on:click={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
-      <slot></slot>
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <h3 class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+      {@render children?.()}
     </h3>
   {:else if depth === 4}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <h4 class="clickable" on:keydown={()=>goto("#" + cleanText(text))} on:click={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
-      <slot></slot>
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <h4 class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+      {@render children?.()}
     </h4>
   {:else if depth === 5}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 
-    <h5 class="clickable" on:keydown={()=>goto("#" + cleanText(text))} on:click={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
-      <slot></slot>
+    <h5 class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+      {@render children?.()}
     </h5>
   {:else if depth === 6}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <h6 class="clickable" on:keydown={()=>goto("#" + cleanText(text))} on:click={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
-      <slot></slot>
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <h6 class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+      {@render children?.()}
     </h6>
   {:else}
     {raw}

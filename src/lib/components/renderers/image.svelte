@@ -1,9 +1,13 @@
 <script lang="ts">
     import { page } from "$app/stores";
 
-    export let href = ''
-    export let title : string = ""
-    export let text = ''
+  interface Props {
+    href?: string;
+    title?: string;
+    text?: string;
+  }
+
+  let { href = $bindable(''), title = $bindable(""), text = $bindable('') }: Props = $props();
 
     let url : string = '/data' + $page.url.pathname + '/' + href
 

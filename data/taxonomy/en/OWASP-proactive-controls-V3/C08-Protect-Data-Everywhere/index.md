@@ -1,4 +1,4 @@
-# C8: Protect Data Everywhere
+## C8: Protect Data Everywhere
 
 ## Description
 Sensitive data such as passwords, credit card numbers, health records, personal information and business secrets require extra protection, particularly if that data falls under privacy laws (EU's General Data Protection Regulation GDPR), financial data protection rules such as PCI Data Security Standard (PCI DSS) or other regulations.
@@ -20,12 +20,12 @@ Cryptography (or crypto) is one of the more advanced topics of information secur
 
 Instead of building cryptographic capability from scratch, it is strongly recommended that peer reviewed and open solutions be used, such as the [Google Tink](https://github.com/google/tink) project, [Libsodium](https://www.libsodium.org), and secure storage capability built into many software frameworks and cloud services.
 
-### Mobile Application: Secure Local Storage
+#### Mobile Application: Secure Local Storage
 Mobile applications are at particular risk of data leakage because mobile devices are regularly lost or stolen yet contain sensitive data.
 
 As a general rule, only the minimum data required should be stored on the mobile device. But if you must store sensitive data on a mobile device, then sensitive data should be stored within each mobile operating systems specific data storage directory. On Android this will be the Android keystore and on iOS this will be the iOS keychain.
 
-### Key Lifecycle
+#### Key Lifecycle
 Secret keys are used in applications number of sensitive functions. For example, secret keys can be used to to sign JWTs, protect credit cards, provide various forms of authentication as well as facilitation other sensitive security features. In managing keys, a number of rules should be followed including:
 
 * Ensure that any secret key is protected from unauthorized access
@@ -34,7 +34,7 @@ Secret keys are used in applications number of sensitive functions. For example,
 * Build support for changing algorithms and keys when needed
 * Build application features to handle a key rotation
 
-### Application Secrets Management
+#### Application Secrets Management
 Applications contain numerous "secrets" that are needed for security operations. These include certificates, SQL connection passwords, third party service account credentials, passwords, SSH keys, encryption keys and more. The unauthorized disclosure or modification of these secrets could lead to complete system compromise. In managing application secrets, consider the following.
 
 * Don't store secrets in code, config files or pass them through environment variables. Use tools like [GitRob](https://github.com/michenriksen/gitrob) or [TruffleHog](https://github.com/dxa4481/truffleHog) to scan code repos for secrets.

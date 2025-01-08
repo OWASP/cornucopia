@@ -3,7 +3,11 @@
     import { Text } from "$lib/utils/text";
     import type { Blogpost } from "../../domain/blogpost/blogpost";
 
-    export let blogpost : Blogpost
+    interface Props {
+        blogpost: Blogpost;
+    }
+
+    let { blogpost }: Props = $props();
 
     let authorLink : string = '/author/' + blogpost.author;
 </script>
@@ -19,7 +23,7 @@
         </p>
     </div>
     <div class="right">
-        <button on:click={()=>goto(authorLink)}>
+        <button onclick={()=>goto(authorLink)}>
         <img title="{Text.Format(blogpost.author)}" alt="{blogpost.author} profile picture" src="/data/author/{blogpost.author}/profile-picture.jpg"/>
         </button>
     </div>

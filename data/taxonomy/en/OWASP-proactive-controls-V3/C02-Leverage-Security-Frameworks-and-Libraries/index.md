@@ -1,4 +1,4 @@
-# C2: Leverage Security Frameworks and Libraries
+## C2: Leverage Security Frameworks and Libraries
 
 ## Description
 Secure coding libraries and software frameworks with embedded security help software developers guard against security-related design and implementation flaws. A developer writing an application from scratch might not have sufficient knowledge, time, or budget to properly implement or maintain security features. Leveraging security frameworks helps accomplish security goals more efficiently and accurately.

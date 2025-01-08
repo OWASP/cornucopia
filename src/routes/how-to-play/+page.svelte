@@ -2,7 +2,8 @@
   import SvelteMarkdown from 'svelte-markdown';
   import renderers from '$lib/components/renderers/renderers';
   import {readLang} from "$lib/stores/stores";
-  export let data;
+  /** @type {{data: any}} */
+  let { data } = $props();
   const lang = readLang();
   let content = data.content.get($lang) || data.content.get('en');
 </script>

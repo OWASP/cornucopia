@@ -1,4 +1,4 @@
-# Buffer Overflow
+## Buffer Overflow
 A buffer overflow attack occurs when a program writes more data to a designated storage area (buffer) than it can handle, leading to data overflow into adjacent memory. This can be exploited by attackers to execute malicious code or compromise system integrity.
 
 ## Example
@@ -10,8 +10,8 @@ Equifax data breach in 2017 was caused by a vulnerability in the Apache Struts w
 
 ## Cards
 
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 7](/cards/VE7)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 2](/cards/C2)

@@ -4,9 +4,13 @@
     import Chevron from "./chevron.svelte";
     import HeroText from "./heroText.svelte";
 
-    export let suits : Suit[];
-    export let cards : any;
-    export let mapping : any;
+    interface Props {
+        suits: Suit[];
+        cards: any;
+        mapping: any;
+    }
+
+    let { suits, cards, mapping }: Props = $props();
 </script>
 
 <div class="hero">

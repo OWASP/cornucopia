@@ -1,4 +1,4 @@
-# File Upload Vulnerabilities
+## File Upload Vulnerabilities
 File upload vulnerabilities occur when websites or applications allow users to upload files without adequate security measures. Attackers exploit these weaknesses to upload malicious files, potentially leading to issues like remote code execution, bypassing file type restrictions, content-type manipulation, file overwriting, or denial of service attacks.
 
 ## Example
@@ -10,9 +10,9 @@ A critical vulnerability in the Forminator WordPress Contact Form plugin, affect
 - [File uploads | Web Security Academy](https://portswigger.net/web-security/file-upload#:~:text=File%20upload%20vulnerabilities%20are%20when,type%2C%20contents%2C%20or%20size.)
 
 ## Cards
-### Data-validation-&-encoding
+#### Data-validation-&-encoding
 - [Data-validation-&-encoding 4](/cards/VE4)
 - [Data-validation-&-encoding J](/cards/VEJ)
 
-### Authorization
+#### Authorization
 - [Authorization Q](/cards/AZQ)

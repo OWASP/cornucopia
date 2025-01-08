@@ -1,6 +1,10 @@
 <script lang="ts">
-    export let url : string;
-    export let position : number;
+    interface Props {
+        url: string;
+        position: number;
+    }
+
+    let { url, position }: Props = $props();
 
     function getStyle() : string
     {
@@ -22,7 +26,7 @@
 </script>
 
 <div class="card-preview">
-    <div class="card" style="{getStyle()}"/>
+    <div class="card" style="{getStyle()}"></div>
 </div>
 
 <style>

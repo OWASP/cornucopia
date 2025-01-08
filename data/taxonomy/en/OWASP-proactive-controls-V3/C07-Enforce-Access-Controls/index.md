@@ -1,4 +1,4 @@
-# C7: Enforce Access Controls
+## C7: Enforce Access Controls
 
 ## Description
 Access Control (or Authorization) is the process of granting or denying *specific requests* from a user, program, or process. Access control also involves the act of *granting and revoking those privileges*.
@@ -16,25 +16,25 @@ There are several different types of access control design that should be consid
 ## Access Control Design Principles
 The following "positive" access control design requirements should be considered at the initial stages of application development. 
 
-### 1) Design Access Control Thoroughly Up Front
+#### 1) Design Access Control Thoroughly Up Front
 Once you have chosen a specific access control design pattern, it is often difficult and time consuming to re-engineer access control in your application with a new pattern. Access Control is one of the main areas of application security design that must be thoroughly designed up front, especially when addressing requirements like multi-tenancy and horizontal (data dependent) access control.
 
 Access Control design may start simple but can often grow into a complex and feature-heavy security control. When evaluating access control capability of software frameworks, ensure that your access control functionality will allow for customization for your specific access control feature need.
 
-### 2) Force All Requests to Go Through Access Control Checks
+#### 2) Force All Requests to Go Through Access Control Checks
 Ensure that all request go through some kind of access control verification layer. Technologies like Java filters or other automatic request processing mechanisms are ideal programming artifacts that will help ensure that all requests go through some kind of access control check.
 
-### 3) Deny by Default
+#### 3) Deny by Default
 Deny by default is the principle that if a request is not specifically allowed, it is denied. There are many ways that this rule will manifest in application code. Some examples of these are:
 
 1. Application code may throw an error or exception while processing access control requests. In these cases access control should always be denied.
 2. When an administrator creates a new user or a user registers for a new account, that account should have minimal or no access by default until that access is configured.
 3. When a new feature is added to an application all users should be denied to use that feature until it's properly configured.
 
-### 4) Principle of Least Privilege
+#### 4) Principle of Least Privilege
 Ensure that all users, programs, or processes are only given as least or as little necessary access as possible. Be wary of systems that do not provide granular access control configuration capabilities.
 
-### 5) Don't Hardcode Roles
+#### 5) Don't Hardcode Roles
 Many application frameworks default to access control that is role based. It is common to find application code that is filled with checks of this nature.
 ```
     if (user.hasRole("ADMIN")) || (user.hasRole("MANAGER")) {
@@ -58,7 +58,7 @@ Instead, please consider the following access control programming methodology:
 
 Attribute or feature-based access control checks of this nature are the starting point to building well-designed and feature-rich access control systems. This type of programming also allows for greater access control customization capability over time.
 
-### 6) Log All Access Control Events
+#### 6) Log All Access Control Events
 All access control failures should be logged as these may be indicative of a malicious user probing the application for vulnerabilities.
 
 ## Vulnerabilities Prevented

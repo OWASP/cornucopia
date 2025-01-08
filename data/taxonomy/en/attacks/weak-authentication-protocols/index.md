@@ -1,4 +1,4 @@
-# Weak Authentication Protocols
+## Weak Authentication Protocols
 Weak authentication protocols refer to security mechanisms that inadequately verify the identity of users or systems. These protocols often entail vulnerabilities, such as easily guessable passwords, insufficiently encrypted credentials, or ineffective multifactor authentication processes. These shortcomings render the authentication process susceptible to exploitation by malicious actors, potentially leading to unauthorized access and compromise of sensitive information.
 
 ## Example
@@ -9,18 +9,18 @@ Heartbleed, a serious vulnerability discovered in the OpenSSL cryptographic soft
 - [What is Weak Authentication?](https://affinity-it-security.com/what-is-weak-authentication/)
 
 ## Cards
-### Authentication
+#### Authentication
 - [Authentication 7](/cards/AT7)
 - [Authentication 9](/cards/AT9)
 - [Authentication K](/cards/ATK)
 
-### Authorization
+#### Authorization
 - [Authorization 6](/cards/AZ6)
 
-### Cryptography
+#### Cryptography
 - [Cryptography 4](/cards/CR4)
 - [Cryptography 7](/cards/CR7)
 
-### Cornucopia
+#### Cornucopia
 - [Cornucopia 3](/cards/C3)
 - [Cornucopia 4](/cards/C4)

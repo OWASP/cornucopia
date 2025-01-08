@@ -5,7 +5,11 @@
   import type { Card } from "../../../domain/card/card";
   import { readLang, readTranslation } from "$lib/stores/stores";
 
-  export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
   const lang = readLang();
   let t = readTranslation();
   const cards = data.decks.get($lang);

@@ -1,9 +1,13 @@
 <script lang="ts">
-    export let mappings : number[] | undefined;
     import {data} from '$lib/parsed';
     import { readTranslation } from "$lib/stores/stores";
+    interface Props {
+        mappings: number[] | undefined;
+    }
+
+    let { mappings }: Props = $props();
     let t = readTranslation();
-    let isEmpty = true;
+    let isEmpty = $state(true);
 
     function getIndex(num : number) : any
     {

@@ -3,7 +3,8 @@
     import renderers from '$lib/components/renderers/renderers';
     import {readLang, readTranslation} from "$lib/stores/stores";
 
-    export let data;
+    /** @type {{data: any}} */
+    let { data } = $props();
     let t = readTranslation();
     const lang = readLang();
     let content = data.content.get($lang) || data.content.get('en');

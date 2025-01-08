@@ -55,7 +55,7 @@ export class FileSystemHelper {
   }
 
   public static MASVSRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy/en/masvs-2.1.0";
+    const basePath: string = "data/taxonomy/en/MASVS-2.1.0";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
@@ -88,7 +88,7 @@ export class FileSystemHelper {
   }
 
   public static MASTGRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy/en/mastg-1.7.0";
+    const basePath: string = "data/taxonomy/en/MASTG-1.7.0";
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 

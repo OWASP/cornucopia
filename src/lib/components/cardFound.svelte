@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import {
     GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Utterances from "$lib/components/utterances.svelte";
@@ -11,20 +13,29 @@
   import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
-  export let mappingData;
-  export let card: Card;
-  export let cards: Map<string, Card>;
-  export let routes: Map<string, Route[]>;
+  interface Props {
+    mappingData: any;
+    card: Card;
+    cards: Map<string, Card>;
+    routes: Map<string, Route[]>;
+  }
+
+  let {
+    mappingData,
+    card = $bindable(),
+    cards,
+    routes
+  }: Props = $props();
     
   const controller: MappingController = new MappingController(mappingData);
   let t = readTranslation();
-  let mappings = controller.getCardMappings(card.id);
-  let attacks: Attack[] = GetCardAttacks(card.id);
+  let mappings = $state(controller.getCardMappings(card.id));
+  let attacks: Attack[] = $state(GetCardAttacks(card.id));
 
-  $: {
+  run(() => {
     mappings = controller.getCardMappings(card.id);
     attacks = GetCardAttacks(card.id);
-  }
+  });
 </script>
 
 <div>
@@ -33,10 +44,10 @@
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
   <a class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Summary card={card}></Summary>
-  {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B' }
+  {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B'}
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
   {/if}
-  {#if card.edition == 'mobileapp' &&  card.value != 'A' && card.value != 'B' }
+  {#if card.edition == 'mobileapp' &&  card.value != 'A' && card.value != 'B'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
     {#key card}

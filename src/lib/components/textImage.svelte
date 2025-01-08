@@ -1,15 +1,23 @@
 <script lang="ts">
-	export let align: 'left' | 'right' = 'left';
-	export let id : string = "";
-	export let src : string;
-
-	let innerWidth = 0;
-	let innerHeight = 0;
-	let mobile: boolean;
-	
-	$: {
-		mobile = innerWidth / innerHeight < 1;
+	interface Props {
+		align?: 'left' | 'right';
+		id?: string;
+		src: string;
+		children?: import('svelte').Snippet;
 	}
+
+	let {
+		align = 'left',
+		id = "",
+		src,
+		children
+	}: Props = $props();
+
+	let innerWidth = $state(0);
+	let innerHeight = $state(0);
+	let mobile: boolean = $derived(innerWidth / innerHeight < 1);
+	
+	
 
 	function getFlexStyle(isMobile: boolean) {
 		if (isMobile) return '';
@@ -32,7 +40,7 @@
         <img alt={id} {src} />
     </div>
 	<div style="{align == 'left' && !mobile ? 'padding-left:2rem;' : 'padding-right:2rem;'}" class="text">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 

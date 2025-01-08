@@ -19,11 +19,11 @@ Ordered alphabetically and not according to priority.
 
 Involvement in the development and promotion of Cornucopia is actively encouraged! You do not have to be a security expert in order to contribute. Some of the ways you can help are listed below.
 
-### Localization
+#### Localization
 
 Are you fluent in another language? Can you help translate Cornucopia into that language? Note this is a very large task due to the number of documents involved, but the strings are now all available in textual data files.
 
-### Use and Promote the Cornucopia Card Decks
+#### Use and Promote the Cornucopia Card Decks
 
 Please help raise awareness of Cornucopia by:
 
@@ -34,7 +34,7 @@ Please help raise awareness of Cornucopia by:
 - Developing a mobile app to play the game
 
 
-### Feedback
+#### Feedback
 
 Please use the friendly project [Google Group](https://groups.google.com/a/owasp.org/forum/#!forum/cornucopia-project 'OWASP Cornucopia google mailing list [external]') for feedback:
 
@@ -44,11 +44,11 @@ Please use the friendly project [Google Group](https://groups.google.com/a/owasp
 - How could the guidance be improved?
 - What other decks would you like to see?
 
-### Keep the Cards Updated
+#### Keep the Cards Updated
 
 As the source referenced documents change, we have to update the decks. You may also find errors and omissions. In the first instance, please send a message to the project’s [Google Group](https://groups.google.com/a/owasp.org/forum/#!forum/cornucopia-project 'OWASP Cornucopia google mailing list [external]') if you have identified errors &amp; omissions, have some time to maintain the source documents, or can help in other ways.
 
-### Create a New Deck
+#### Create a New Deck
 
 The first deck, Cornucopia Ecommerce Website Edition, has been renamed Cornucopia Website App Edition and is currently available in six languages. There is also a mobile app specific deck called Cornucopia Mobile App Edition available in English only. Do you have an idea for your own application security requirements card deck?
 

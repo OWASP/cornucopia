@@ -6,7 +6,12 @@
     import Metadata from "$lib/components/metadata.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";    
-    export let data;
+    interface Props {
+        data: any;
+        children?: import('svelte').Snippet;
+    }
+
+    let { data, children }: Props = $props();
     updateTranslation(data.translation, data.fallbackTranslation);
     updateLang(data.lang);
     
@@ -27,7 +32,7 @@
     <Navbar></Navbar>
     <div class="slot-container" class:wide={getFullWidthPages($page.url.pathname)}>
         <Breadcrumbs></Breadcrumbs>
-        <slot></slot>
+        {@render children?.()}
     </div>
     <Footer timestamp={data.timestamp} {content}></Footer>
 </div>

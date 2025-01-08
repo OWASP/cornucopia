@@ -1,4 +1,4 @@
-# Encryption Bypass
+## Encryption Bypass
 Encryption bypass refers to attempting to circumvent or break through the security measures of encrypted data.
 
 ## Example
@@ -9,5 +9,5 @@ security specialist Zara confronts a challenge in bypassing a company's robust e
 - [Can hackers decrypt encrypted data?](https://www.vintageisthenewold.com/game-pedia/can-hackers-decrypt-encrypted-data#:~:text=Hackers%20can%20break%20encryption%20to,been%20decrypted%20by%20the%20recipient.)
 
 ## Cards
-### Cryptography
+#### Cryptography
 - [Cryptography 9](/cards/CR9)

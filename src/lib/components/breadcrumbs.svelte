@@ -1,13 +1,14 @@
 <script lang="ts">
+    import { run } from 'svelte/legacy';
+
     import { page } from "$app/stores";
     import { Text } from "$lib/utils/text";
 
-    let parts : string[];
+    let parts : string[] = $state();
 
-    $: 
-    {
+    run(() => {
         parts = $page.url.pathname.split('/');
-    }
+    });
 
     function generateHref(index : number, input : string) : string
     {
@@ -24,7 +25,7 @@
         if(input == '')
             return 'Home'
         else
-            return Text.Format(input);
+            return Text.FormatPlain(input);
     }
     
 </script>

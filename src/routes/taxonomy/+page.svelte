@@ -3,7 +3,8 @@
     import {readLang, readTranslation} from "$lib/stores/stores";
     import renderers from '$lib/components/renderers/renderers';
     import SvelteMarkdown from "svelte-markdown";
-    export let data;
+    /** @type {{data: any}} */
+    let { data } = $props();
     let t = readTranslation();
     const lang = readLang();
     let content = data.content.get($lang) || data.content.get('en');
@@ -13,7 +14,7 @@
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 {#each data.categories as category}
-    <p>├──<a href="/taxonomy/{category}">{Text.Format(category)}</a></p>
+    <p>├──<a href="/taxonomy/{category}">{Text.FormatPlain(category)}</a></p>
 {/each}
 </div>
 <style>
