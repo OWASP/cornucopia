@@ -14,7 +14,7 @@
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 {#each data.categories as category}
-    <p>├──<a href="/taxonomy/{category}">{Text.FormatPlain(category)}</a></p>
+    <p>├──<a href="/taxonomy/{category}">{Text.Format(category)}</a></p>
 {/each}
 </div>
 <style>
