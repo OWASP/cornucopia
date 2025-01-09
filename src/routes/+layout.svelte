@@ -1,6 +1,5 @@
 <script lang="ts">
     import 'normalize.css';
-    import 'sanitize.css';
     import { page } from "$app/stores";
     import Breadcrumbs from "$lib/components/breadcrumbs.svelte";
     import Footer from "$lib/components/footer.svelte";
@@ -39,7 +38,6 @@
 </div>
 
 <style>
-    @import 'sanitize.css';
     .page
     {
         background-color:var(--background-color);
