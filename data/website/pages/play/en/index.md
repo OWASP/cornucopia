@@ -46,6 +46,6 @@ See Márk Vinkovits leading a threat modelling <a rel="noopener" href="https://w
 - Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game.
 - Consider just playing with one suit to make a shorter session – but try to cover all the suits for every project. Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. Perhaps have one game of each suit each day for a week or so, if the participants cannot spare long enough for a full deck.
 - Some teams have preferred to play a full hand of cards and then discuss what is on the cards after each round (instead of after each person plays a card).
-- Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. Consider allowing extra points for especially good contributions.
+- Another suggestion is that if a player fails to identify the card as relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. Consider allowing extra points for especially good contributions.
 - You can even play by yourself. Just use the cards to act as thought-provokers. Involving more people will be beneficial though.
 - In Microsoft's EoP guidance, they recommend cheating as a good game strategy.

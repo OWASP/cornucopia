@@ -958,7 +958,7 @@ let data = {
           },
           {
             "value": "T01990",
-            "text": "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+            "text": "Another suggestion is that if a player fails to identify the card as relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
           },
           {
             "value": "T02000",
