@@ -3,7 +3,6 @@
 
   import {
     GetCardAttacks, type Attack } from "$lib/cardAttacks";
-  import Utterances from "$lib/components/utterances.svelte";
   import Summary from "./summary.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "../../domain/card/card";
@@ -51,7 +50,6 @@
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
     {#key card}
-        <Utterances name={card.suit + '-' + String(card.id).toUpperCase()}></Utterances>
         <ViewSourceOnGithub path="{card.githubUrl}"></ViewSourceOnGithub>
     {/key}
 </div>
