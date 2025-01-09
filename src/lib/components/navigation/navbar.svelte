@@ -68,7 +68,7 @@
                     </div>
                 </li>
             </ul>
-        <a class="logo" href="/"><div><span class="desktop">OWASP </span><span class="desktop mobile">Cornucopia</span></div></a>
+        <a class="logo" href="/"><div><span class="desktop">OWASP</span>&nbsp;<span class="desktop mobile">Cornucopia</span></div></a>
         
     </nav>
 </header>
