@@ -28,7 +28,7 @@ Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more de
 
 ### General Licensing Terms
 
-© 2024 OWASP Foundation
+© 2025 OWASP Foundation
 Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-3.0](./LICENSE.md)
 
 ### Elevation of Privilege (EoP)
