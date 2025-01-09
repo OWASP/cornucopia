@@ -56,15 +56,15 @@
             {/if}
         </div>
     </div>
-    <p class="footer">OWASP and the OWASP logo are trademarks of the <a rel="noopener" href="https://owasp.org/">OWASP Foundation</a></p>
+    <p class="footer">OWASP and the OWASP logo are trademarks of the <a class="link-with-external-indicator" rel="noopener" href="https://owasp.org/">OWASP Foundation</a></p>
     <p class="footer">Last update was {getCurrentDate()}{timeAgo}</p>
     <p class="footer"><a href="/about#License">Licensing information</a> | <a href="/about#Acknowledgements">Acknowledgements</a> | <a href="/questionsandanswers">Q & A</a> | <a href="/roadmap">Roadmap</a></p>
     <p class="footer">
-        <a rel="noopener" href="https://owasp.org/">© OWASP Foundation</a> 
+        <a class="link-with-external-indicator" rel="noopener" href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>
-        <a href="/rss.xml"><img style="position:relative;top:3px;" height="15px" src="/images/rss.svg" alt="rss" /></a>
+        <a class="link-with-external-indicator" href="/rss.xml"><img style="position:relative;top:3px;" height="15px" src="/images/rss.svg" alt="rss" /></a>
         <span> | </span>
-        <a href="https://cornucopia.dotnetlab.eu/sitemap.xml">Sitemap</a>
+        <a class="link-with-external-indicator" href="https://cornucopia.dotnetlab.eu/sitemap.xml">Sitemap</a>
     </p>
 </footer>
 

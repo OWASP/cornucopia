@@ -38,7 +38,7 @@
     }
   </script>
   
-  <a {rel} {target} {href} {title} class={clazz} {style}>{@render children?.()}</a>
+  <a {rel} {target} {href} {title} class="{clazz} link-with-external-indicator" {style}>{@render children?.()}</a>
 
   <style>
     a
