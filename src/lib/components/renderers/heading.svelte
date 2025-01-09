@@ -84,32 +84,39 @@
 
     h3
     {
-      background: var(--background);
-      padding: .5rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color:white;
-    }
-    h4
-    {
-      padding: .3rem;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
       font-size: 1.2rem;
       font-weight: bolder;
       color: black;
+      opacity: 90%;
     }
-    h5
+    h4
     {
-      padding: .2rem;
+      padding-top: .3rem;
+      padding-bottom: .3rem;
       font-size: 1.2rem;
       font-weight: bold;
       color: black;
+      opacity: 90%;
+    }
+    h5
+    {
+      padding-top: .2rem;
+      padding-bottom: .2rem;
+      font-size: 1rem;
+      font-weight: bolder;
+      color: black;
+      opacity: 90%;
     }
     h6
     {
-      padding: .2rem;
+      padding-top: .2rem;
+      padding-bottom: .2rem;
       font-size: 1rem;
       font-weight: bold;
       color: black;
+      opacity: 90%;
     }
  
   </style>

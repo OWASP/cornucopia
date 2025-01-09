@@ -6,6 +6,7 @@ import Link from '$lib/components/renderers/link.svelte';
 import List from '$lib/components/renderers/list.svelte';
 import ListItem from '$lib/components/renderers/listItem.svelte';
 import Paragraph from '$lib/components/renderers/paragraph.svelte';
+import Strong from '$lib/components/renderers/strong.svelte';
 import Table from '$lib/components/renderers/table.svelte';
 import TableCell from '$lib/components/renderers/tableCell.svelte';
 
@@ -19,6 +20,7 @@ let renderers =
     image : Image,
     blockquote : BlockQuote,
     link : Link,
+    strong : Strong,
     table : Table,
     tablecell: TableCell,
 }
