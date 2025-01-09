@@ -1,4 +1,4 @@
-##  MASTG-TEST-0005
+#  MASTG-TEST-0005
 
 ## Determining Whether Sensitive Data Is Shared with Third Parties via Notifications
 

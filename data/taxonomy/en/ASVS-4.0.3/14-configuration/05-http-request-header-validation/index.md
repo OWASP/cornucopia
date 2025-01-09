@@ -1,4 +1,4 @@
-##  HTTP Request Header Validation
+# HTTP Request Header Validation
 
 ## V14.5.1
 

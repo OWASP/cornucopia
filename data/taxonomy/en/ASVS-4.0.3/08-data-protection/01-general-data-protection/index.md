@@ -1,4 +1,4 @@
-##  General Data Protection
+# General Data Protection
 
 ## V8.1.1
 

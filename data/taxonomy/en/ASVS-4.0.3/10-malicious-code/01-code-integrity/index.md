@@ -1,4 +1,4 @@
-##  Code Integrity
+# Code Integrity
 
 ## V10.1.1
 

@@ -1,4 +1,4 @@
-##  Client-side Data Protection
+# Client-side Data Protection
 
 ## V8.2.1
 

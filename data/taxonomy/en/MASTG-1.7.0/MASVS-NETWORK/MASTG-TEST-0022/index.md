@@ -1,4 +1,4 @@
-##  MASTG-TEST-0022
+#  MASTG-TEST-0022
 
 ## Testing Custom Certificate Stores and Certificate Pinning
 

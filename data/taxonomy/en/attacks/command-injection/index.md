@@ -1,4 +1,4 @@
-## Command Injection
+# Command Injection
 Command injection is a security flaw that occurs when an application allows untrusted user input to be included in system commands. Attackers exploit this vulnerability to execute unauthorized commands on the underlying operating system. This can cause unauthorized access, data exfiltration, Denial of service, Malware injection,…
 
 ## Example

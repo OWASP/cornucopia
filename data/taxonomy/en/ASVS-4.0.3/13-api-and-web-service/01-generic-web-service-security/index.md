@@ -1,4 +1,4 @@
-##  Generic Web Service Security
+# Generic Web Service Security
 
 ## V13.1.1
 

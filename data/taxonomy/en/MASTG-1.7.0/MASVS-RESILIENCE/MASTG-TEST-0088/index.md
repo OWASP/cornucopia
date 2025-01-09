@@ -1,4 +1,4 @@
-##  MASTG-TEST-0088
+#  MASTG-TEST-0088
 
 ## Testing Jailbreak Detection
 

@@ -1,4 +1,4 @@
-## Session Timeout Issues
+# Session Timeout Issues
 A session timeout exploit involves manipulating or bypassing the session timeout mechanism in web applications, allowing unauthorized access to user accounts after the legitimate user has been logged out.
 
 ## Example

@@ -1,4 +1,4 @@
-## Manipulation of Hash Functions
+# Manipulation of Hash Functions
 Hash function manipulation involves exploiting vulnerabilities in hash functions, such as collision attacks, preimage attacks, chosen prefix collisions…. These manipulations can compromise the integrity and security of systems relying on hash functions.
 
 ## Example

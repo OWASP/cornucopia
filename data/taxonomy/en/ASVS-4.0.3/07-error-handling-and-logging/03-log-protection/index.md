@@ -1,4 +1,4 @@
-##  Log Protection
+# Log Protection
 
 ## V7.3.1
 

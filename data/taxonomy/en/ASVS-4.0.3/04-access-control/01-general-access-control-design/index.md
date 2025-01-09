@@ -1,4 +1,4 @@
-##  General Access Control Design
+# General Access Control Design
 
 ## V4.1.1
 

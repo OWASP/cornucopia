@@ -1,4 +1,4 @@
-##  MASTG-TEST-0040
+#  MASTG-TEST-0040
 
 ## Testing for Debugging Symbols
 

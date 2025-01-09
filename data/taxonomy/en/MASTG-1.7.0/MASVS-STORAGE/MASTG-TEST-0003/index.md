@@ -1,4 +1,4 @@
-##  MASTG-TEST-0003
+#  MASTG-TEST-0003
 
 ## Testing Logs for Sensitive Data
 

@@ -1,4 +1,4 @@
-##  Malicious Code Search
+# Malicious Code Search
 
 ## V10.2.1
 

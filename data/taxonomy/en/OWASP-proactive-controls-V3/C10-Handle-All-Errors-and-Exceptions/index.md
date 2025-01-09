@@ -1,4 +1,4 @@
-## C10: Handle all Errors and Exceptions
+# C10: Handle all Errors and Exceptions
 
 ## Description
 Exception handling is a programming concept that allows an application to respond to different error states (like network down, or database connection failed, etc) in various ways. Handling exceptions and errors correctly is critical to making your code reliable and secure.

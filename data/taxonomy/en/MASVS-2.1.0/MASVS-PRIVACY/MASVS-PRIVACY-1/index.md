@@ -1,6 +1,6 @@
-## MASVS-PRIVACY-1
+# MASVS-PRIVACY-1
 
-### The app minimizes access to sensitive data and resources.
+## The app minimizes access to sensitive data and resources.
 
 Apps should only request access to the data they absolutely need for their functionality and always with informed consent from the user. This control ensures that apps practice data minimization and restricts access control, reducing the potential impact of data breaches or leaks.
 

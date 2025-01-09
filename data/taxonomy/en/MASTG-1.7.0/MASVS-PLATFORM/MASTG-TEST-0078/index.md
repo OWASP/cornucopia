@@ -1,4 +1,4 @@
-##  MASTG-TEST-0078
+#  MASTG-TEST-0078
 
 ## Determining Whether Native Methods Are Exposed Through WebViews
 

@@ -1,4 +1,4 @@
-##  GraphQL
+# GraphQL
 
 ## V13.4.1
 

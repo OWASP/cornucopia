@@ -1,4 +1,4 @@
-## Weak Authentication Protocols
+# Weak Authentication Protocols
 Weak authentication protocols refer to security mechanisms that inadequately verify the identity of users or systems. These protocols often entail vulnerabilities, such as easily guessable passwords, insufficiently encrypted credentials, or ineffective multifactor authentication processes. These shortcomings render the authentication process susceptible to exploitation by malicious actors, potentially leading to unauthorized access and compromise of sensitive information.
 
 ## Example

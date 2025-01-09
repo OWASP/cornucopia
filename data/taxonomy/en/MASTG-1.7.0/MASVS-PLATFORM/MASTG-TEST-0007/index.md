@@ -1,4 +1,4 @@
-##  MASTG-TEST-0007
+#  MASTG-TEST-0007
 
 ## Determining Whether Sensitive Stored Data Has Been Exposed via IPC Mechanisms
 

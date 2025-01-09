@@ -1,4 +1,4 @@
-##  MASTG-TEST-0039
+#  MASTG-TEST-0039
 
 ## Testing whether the App is Debuggable
 

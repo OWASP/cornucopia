@@ -6,8 +6,12 @@
     import Utterances from "$lib/components/utterances.svelte"
     /** @type {{data: any}} */
     let { data } = $props();
+    console.log(data.files);
+    console.log(data.folders);
 </script>
+{#if data.folders.length != 0 }
 <h1 class="clickable" id="{data.title}">{Text.Format(data.title)}</h1>
+{/if}
 <div>
 <!--The location is a file -->
 {#each data.files as file}

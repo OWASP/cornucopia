@@ -1,4 +1,4 @@
-## Social engineering attack
+# Social engineering attack
 Social engineering attacks involve manipulating individuals through deception to gain unauthorized access to sensitive information or systems. These tactics rely on psychological manipulation, impersonation, and deceit to trick people into compromising security.
 
 ## Example

@@ -1,4 +1,4 @@
-##  MASTG-TEST-0061
+# MASTG-TEST-0061
 
 ## Verifying the Configuration of Cryptographic Standard Algorithms
 

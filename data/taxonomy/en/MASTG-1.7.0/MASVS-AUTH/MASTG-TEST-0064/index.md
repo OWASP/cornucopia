@@ -1,4 +1,4 @@
-##  MASTG-TEST-0064
+# MASTG-TEST-0064
 
 ## Testing Local Authentication
 

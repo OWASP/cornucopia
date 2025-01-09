@@ -1,6 +1,6 @@
-## MASVS-PRIVACY-2
+# MASVS-PRIVACY-2
 
-### The app prevents identification of the user.
+## The app prevents identification of the user.
 
 Protecting user identity is crucial. This control emphasizes the use of unlinkability techniques like data abstraction, anonymization and pseudonymization to prevent user identification and tracking.
 

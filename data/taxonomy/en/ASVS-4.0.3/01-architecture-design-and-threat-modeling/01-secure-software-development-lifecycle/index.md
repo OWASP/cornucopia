@@ -1,4 +1,4 @@
-##  Secure Software Development Lifecycle
+#  Secure Software Development Lifecycle
 
 ## V1.1.1
 

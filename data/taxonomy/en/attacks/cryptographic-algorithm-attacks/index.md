@@ -1,4 +1,4 @@
-## Cryptographic Algorithm Attacks
+# Cryptographic Algorithm Attacks
 Cryptographic algorithm attacks are systematic efforts to undermine the security of encryption methods. These attacks range from exhaustive attempts to guess passwords (Brute Force) and exploiting algorithm vulnerabilities (Cryptanalysis) to leveraging information leaks (Side-Channel). There are many more types of these attacks. Cryptographic algorithms are designed to secure information and protect against various types of attacks. However, no algorithm is completely immune to attacks, and vulnerabilities can be exploited under certain conditions.
 
 ## Example

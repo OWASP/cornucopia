@@ -1,4 +1,4 @@
-## Local authentication bypass
+# Local authentication bypass
 
 Local authentication bypass involves bypassing authentication, either because it's not implemented, through instrumentation by using a instrumentation tool like Frida to trick the app into exposing credentials or believing that authentication has happened, or by forcing the app to throw an error that leaves the app unlocked.
 

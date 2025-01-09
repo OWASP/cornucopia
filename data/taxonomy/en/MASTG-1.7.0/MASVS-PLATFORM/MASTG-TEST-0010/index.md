@@ -1,4 +1,4 @@
-##  MASTG-TEST-0010
+#  MASTG-TEST-0010
 
 ## Finding Sensitive Information in Auto-Generated Screenshots
 

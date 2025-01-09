@@ -1,4 +1,4 @@
-##  MASTG-TEST-0008
+#  MASTG-TEST-0008
 
 ## Checking for Sensitive Data Disclosure Through the User Interface
 

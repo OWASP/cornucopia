@@ -1,4 +1,4 @@
-##  Authenticator Lifecycle
+# Authenticator Lifecycle
 
 ## V2.3.1
 

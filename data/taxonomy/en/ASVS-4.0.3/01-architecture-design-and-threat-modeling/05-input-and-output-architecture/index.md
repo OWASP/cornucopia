@@ -1,4 +1,4 @@
-##  Input and Output Architecture
+#  Input and Output Architecture
 
 ## V1.5.1
 

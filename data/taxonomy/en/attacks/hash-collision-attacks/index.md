@@ -1,4 +1,4 @@
-## Hash Collision Attacks
+# Hash Collision Attacks
 A hash collision occurs when two different inputs produce the same hash value. Hash collision attacks aim to find such inputs, and they can have security implications in various applications that rely on hash functions. One common example involves cryptographic hash functions.
 
 ## Example

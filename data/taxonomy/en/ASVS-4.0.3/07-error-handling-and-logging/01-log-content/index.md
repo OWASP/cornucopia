@@ -1,4 +1,4 @@
-##  Log Content
+# Log Content
 
 ## V7.1.1
 

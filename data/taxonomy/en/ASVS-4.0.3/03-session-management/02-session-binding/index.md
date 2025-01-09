@@ -1,4 +1,4 @@
-##  Session Binding
+# Session Binding
 
 ## V3.2.1
 

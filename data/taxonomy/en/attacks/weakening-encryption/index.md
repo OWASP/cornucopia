@@ -1,4 +1,4 @@
-## Weakening Encryption
+# Weakening Encryption
 Weakening encryption attacks involve efforts to compromise the effectiveness of encryption, usually through exploiting vulnerabilities or introducing backdoors.
 
 ## Example

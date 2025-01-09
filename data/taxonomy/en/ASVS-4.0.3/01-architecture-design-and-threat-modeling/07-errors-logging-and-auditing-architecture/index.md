@@ -1,4 +1,4 @@
-##  Errors Logging and Auditing Architecture
+#  Errors Logging and Auditing Architecture
 
 ## V1.7.1
 

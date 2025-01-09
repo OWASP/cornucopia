@@ -1,4 +1,4 @@
-## Security Logging and Monitoring Failures
+# Security Logging and Monitoring Failures
 ## Description
 Returning to the OWASP Top 10 2021, this category is to help detect, escalate, and respond to active breaches. Without logging and monitoring, breaches cannot be detected. Insufficient logging, detection, monitoring, and active response occurs any time:
 
@@ -30,19 +30,19 @@ There are commercial and open-source application protection frameworks such as t
 [Security Logging and Monitoring Failures Cheatcheats](https://cheatsheetseries.owasp.org/IndexTopTen.html#a092021-security-logging-and-monitoring-failures)
 
 ## Cards
-#### Data-validation-&-encoding
+### Data-validation-&-encoding
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 4](/cards/VE4)
 
-#### Authentication
+### Authentication
 - [Authentication 3](/cards/AT3)
 
-#### Authorization
+### Authorization
 - [Authorization 9](/cards/AZ9)
 
 
 
-#### Cornucopia
+### Cornucopia
 - [Cornucopia 2](/cards/C2)
 - [Cornucopia 4](/cards/C4)
 - [Cornucopia 7](/cards/C7)

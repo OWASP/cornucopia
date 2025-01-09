@@ -1,4 +1,4 @@
-##  MASTG-TEST-0050
+#  MASTG-TEST-0050
 
 ## Testing Runtime Integrity Checks
 

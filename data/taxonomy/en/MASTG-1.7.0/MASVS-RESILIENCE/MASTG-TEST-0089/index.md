@@ -1,4 +1,4 @@
-##  MASTG-TEST-0089
+#  MASTG-TEST-0089
 
 ## Testing Anti-Debugging Detection
 

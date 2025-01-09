@@ -1,4 +1,4 @@
-## Password Guessing/Brute Force Attacks
+# Password Guessing/Brute Force Attacks
 Password guessing, or brute force attacks, are techniques used by malicious actors to gain unauthorized access to a system or an account by systematically trying all possible combinations of passwords until the correct one is found. It's like a digital version of trying every key in the keyhole until the door opens.
 
 ## Example

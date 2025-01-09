@@ -1,4 +1,4 @@
-##  MASTG-TEST-0048
+#  MASTG-TEST-0048
 
 ## Testing Reverse Engineering Tools Detection
 

@@ -1,4 +1,4 @@
-##  MASTG-TEST-0055
+#  MASTG-TEST-0055
 
 ## Finding Sensitive Data in the Keyboard Cache
 

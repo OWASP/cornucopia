@@ -1,4 +1,4 @@
-## Injection
+# Injection
 ## Description
 An application is vulnerable to attack when:
 
@@ -23,7 +23,7 @@ Note: SQL structures such as table names, column names, and so on cannot be esca
 [Injection Cheatcheats](https://cheatsheetseries.owasp.org/IndexTopTen.html#a032021-injection)
 
 ## Cards
-#### Data-validation-&-encoding
+### Data-validation-&-encoding
 - [Data-validation-&-encoding 2](/cards/VE2)
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 4](/cards/VE4)
@@ -36,7 +36,7 @@ Note: SQL structures such as table names, column names, and so on cannot be esca
 - [Data-validation-&-encoding Q](/cards/VEQ)
 - [Data-validation-&-encoding K](/cards/VEK)
 
-#### Authentication
+### Authentication
 - [Authentication 2](/cards/AT2)
 - [Authentication 3](/cards/AT3)
 - [Authentication 4](/cards/AT4)
@@ -46,19 +46,19 @@ Note: SQL structures such as table names, column names, and so on cannot be esca
 - [Authentication Q](/cards/ATQ)
 - [Authentication K](/cards/ATK)
 
-#### Session-management
+### Session-management
 - [Session-management 2](/cards/SM2)
 
-#### Authorization
+### Authorization
 - [Authorization 2](/cards/AZ2)
 - [Authorization 3](/cards/AZ3)
 - [Authorization 8](/cards/AZ8)
 - [Authorization 9](/cards/AZ9)
 - [Authorization Q](/cards/AZQ)
 
-#### Cryptography
+### Cryptography
 - [Cryptography 8](/cards/CR8)
 
-#### Cornucopia
+### Cornucopia
 - [Cornucopia 3](/cards/C3)
 - [Cornucopia 5](/cards/C5)

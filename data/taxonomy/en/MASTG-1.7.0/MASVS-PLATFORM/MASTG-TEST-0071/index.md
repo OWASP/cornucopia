@@ -1,4 +1,4 @@
-##  MASTG-TEST-0071
+#  MASTG-TEST-0071
 
 ## Testing UIActivity Sharing
 

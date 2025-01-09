@@ -1,4 +1,4 @@
-##  MASTG-TEST-0067
+#  MASTG-TEST-0067
 
 ## Testing Endpoint Identity Verification
 

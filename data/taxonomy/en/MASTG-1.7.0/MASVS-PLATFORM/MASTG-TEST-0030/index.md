@@ -1,4 +1,4 @@
-##  MASTG-TEST-0030
+#  MASTG-TEST-0030
 
 ## Testing for Vulnerable Implementation of PendingIntent
 

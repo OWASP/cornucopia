@@ -1,4 +1,4 @@
-##  Data Protection and Privacy Architecture
+#  Data Protection and Privacy Architecture
 
 ## V1.8.1
 

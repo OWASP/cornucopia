@@ -1,4 +1,4 @@
-##  Look-up Secret Verifier
+# Look-up Secret Verifier
 
 ## V2.6.1
 

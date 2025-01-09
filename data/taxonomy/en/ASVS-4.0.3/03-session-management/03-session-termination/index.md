@@ -1,4 +1,4 @@
-##  Session Termination
+# Session Termination
 
 ## V3.3.1
 

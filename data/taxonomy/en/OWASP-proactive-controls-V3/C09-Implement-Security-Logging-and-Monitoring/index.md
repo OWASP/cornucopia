@@ -1,4 +1,4 @@
-## C9: Implement Security Logging and Monitoring
+# C9: Implement Security Logging and Monitoring
 
 ## Description
 Logging is a concept that most developers already use for debugging and diagnostic purposes. Security logging is an equally basic concept: to log security information during the runtime operation of an application. Monitoring is the live review of application and security logs using various forms of automation. The same tools and patterns can be used for operations, debugging and security purposes.
@@ -17,7 +17,7 @@ The following is a list of security logging implementation best practices.
 * Pay close attention to time syncing across nodes to ensure that timestamps are consistent.
 
 
-#### Logging for Intrusion Detection and Response
+## Logging for Intrusion Detection and Response
 Use logging to identify activity that indicates that a user is behaving maliciously. Potentially malicious activity to log includes:
 
 * Submitted data that is outside of an expected numeric range.

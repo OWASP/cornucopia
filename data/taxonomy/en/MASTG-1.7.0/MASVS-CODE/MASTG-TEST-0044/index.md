@@ -1,4 +1,4 @@
-##  MASTG-TEST-0044
+#  MASTG-TEST-0044
 
 ## Make Sure That Free Security Features Are Activated
 

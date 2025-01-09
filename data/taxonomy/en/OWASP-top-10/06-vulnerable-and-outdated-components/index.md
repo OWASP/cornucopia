@@ -1,4 +1,4 @@
-## Vulnerable and Outdated Components
+# Vulnerable and Outdated Components
 ## Description
 You are likely vulnerable:
 
@@ -25,21 +25,21 @@ Every organization must ensure an ongoing plan for monitoring, triaging, and app
 [Vulnerable and Outdated Components Cheatcheats](https://cheatsheetseries.owasp.org/IndexTopTen.html#a062021-vulnerable-and-outdated-components)
 
 ## Cards
-#### Data-validation-&-encoding
+### Data-validation-&-encoding
 - [Data-validation-&-encoding 2](/cards/VE2)
 
-#### Authentication
+### Authentication
 - [Authentication 9](/cards/AT9)
 
-#### Authorization
+### Authorization
 - [Authorization 8](/cards/AZ8)
 - [Authorization 9](/cards/AZ9)
 
-#### Cryptography
+### Cryptography
 - [Cryptography 7](/cards/CR7)
 - [Cryptography 9](/cards/CR9)
 
-#### Cornucopia
+### Cornucopia
 - [Cornucopia 6](/cards/C6)
 - [Cornucopia 8](/cards/C8)
 - [Cornucopia 10](/cards/CX)

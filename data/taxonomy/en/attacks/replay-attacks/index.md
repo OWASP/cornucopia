@@ -1,4 +1,4 @@
-## Replay attacks
+# Replay attacks
 A replay attack refers to the unauthorized duplication or delayed retransmission of legitimate data transmissions. This method involves the interception of critical data, such as authentication credentials, followed by the subsequent reuse of said data to illicitly access a targeted system or network.
 
 ## Example

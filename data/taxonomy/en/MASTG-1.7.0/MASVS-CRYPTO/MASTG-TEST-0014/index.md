@@ -1,4 +1,4 @@
-##  MASTG-TEST-0014
+# MASTG-TEST-0014
 
 ## Testing the Configuration of Cryptographic Standard Algorithms
 

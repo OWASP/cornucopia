@@ -1,4 +1,4 @@
-##  Application Integrity
+# Application Integrity
 
 ## V10.3.1
 

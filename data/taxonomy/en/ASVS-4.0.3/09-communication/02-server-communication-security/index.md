@@ -1,4 +1,4 @@
-##  Server Communication Security
+# Server Communication Security
 
 ## V9.2.1
 

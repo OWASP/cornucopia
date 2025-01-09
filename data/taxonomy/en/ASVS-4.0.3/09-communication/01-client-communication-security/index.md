@@ -1,4 +1,4 @@
-##  Client Communication Security
+# Client Communication Security
 
 ## V9.1.1
 

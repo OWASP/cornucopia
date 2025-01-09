@@ -1,4 +1,4 @@
-## SQL Injection 
+# SQL Injection 
 SQL injection is a cyber-attack technique where in malicious SQL code is injected into input fields or parameters of an application. The objective is to exploit vulnerabilities in the application's input validation processes, thereby manipulating the underlying SQL queries to gain unauthorized access, retrieve sensitive data, or tamper with the database.
 
 ## Example

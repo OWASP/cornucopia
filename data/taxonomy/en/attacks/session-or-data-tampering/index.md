@@ -1,4 +1,4 @@
-## (Session) Data tampering
+# (Session) Data tampering
 Data tampering refers to the unauthorized or intentional alteration of data. It involves modifying, deleting, or adding information to manipulate the integrity and accuracy of data. This can occur in various contexts, such as computer systems, databases, financial records, or any other digital storage medium. It can lead to misinformation, security breaches, and compromised decision-making processes.
 
 ## Example

@@ -1,4 +1,4 @@
-## Credential Stuffing
+# Credential Stuffing
 Credential stuffing is a cyber-attack method wherein attackers utilize automated tools to systematically input large volumes of username and password pairs, typically obtained from previous data breaches, to try and gain unauthorized access to user accounts across various online services. This method relies on the unfortunate reality that many users reuse passwords across multiple platforms, thereby exploiting the compromise of credentials from one source to compromise accounts on other platforms.
 
 ## Example

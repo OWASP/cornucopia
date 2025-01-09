@@ -1,4 +1,4 @@
-##  MASTG-TEST-0013
+# MASTG-TEST-0013
 
 ## Testing Symmetric Cryptography
 

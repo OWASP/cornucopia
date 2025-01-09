@@ -1,4 +1,4 @@
-##  Cryptographic Verifier
+# Cryptographic Verifier
 
 ## V2.9.1
 

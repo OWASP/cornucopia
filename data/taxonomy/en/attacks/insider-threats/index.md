@@ -1,4 +1,4 @@
-## Insider Threats
+# Insider Threats
 Insider threat in cybersecurity refers to the potential risk posed by individuals within an organization who may intentionally or unintentionally compromise security, often due to their access to sensitive information and systems.
 
 ## Example

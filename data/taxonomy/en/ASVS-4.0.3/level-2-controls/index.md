@@ -1,50 +1,50 @@
-## Level 2 controls
+# Level 2 controls
 
 Level 2 contains 259 controls listed below: 
-#### 
-### 01-architecture-design-and-threat-modeling
+
+## 01-architecture-design-and-threat-modeling
 
 ### 01-secure-software-development-lifecycle
 
 - [V1.1.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.1) *Verify the use of a secure software development li ...* 
 
 - [V1.1.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.2) *Verify the use of threat modeling for every design ...* 
-#### 
+
 - [V1.1.3](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.3) *All user stories and features contain functional s ...* 
 
 - [V1.1.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.4) *Verify documentation and justification of all the  ...* 
 
-#### 1.1.5](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.5) *Verify definition and security analysis of the app ...* 
+- [V1.1.5](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.5) *Verify definition and security analysis of the app ...* 
 
 - [V1.1.6](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.6) *Verify implementation of centralized, simple (econ ...* 
 
-#### 1.1.7](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.7) *Verify availability of a secure coding checklist,  ...* 
+- [V1.1.7](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle#V1.1.7) *Verify availability of a secure coding checklist,  ...* 
 
 ### 02-authentication-architecture
 
 - [V1.2.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/02-authentication-architecture#V1.2.1) *Verify the use of unique or special low-privilege  ...* 
-#### 
+
 - [V1.2.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/02-authentication-architecture#V1.2.2) *Communications between application components, inc ...* 
 
 - [V1.2.3](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/02-authentication-architecture#V1.2.3) *The application uses a single vetted authenticatio ...* 
 
-#### 1.2.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/02-authentication-architecture#V1.2.4) *All authentication pathways and identity managemen ...* 
+- [V1.2.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/02-authentication-architecture#V1.2.4) *All authentication pathways and identity managemen ...* 
 
 ### 04-access-control-architecture
-#### 
+
 - [V1.4.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/04-access-control-architecture#V1.4.1) *Trusted enforcement points, such as access control ...* 
 
-#### 1.4.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/04-access-control-architecture#V1.4.4) *Verify the application uses a single and well-vett ...* 
+- [V1.4.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/04-access-control-architecture#V1.4.4) *Verify the application uses a single and well-vett ...* 
 
 - [V1.4.5](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/04-access-control-architecture#V1.4.5) *Attribute or feature-based access control is used  ...* 
-#### 
+
 ### 05-input-and-output-architecture
-#### 
+
 - [V1.5.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/05-input-and-output-architecture#V1.5.1) *Input and output requirements clearly define how t ...* 
 
-#### 1.5.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/05-input-and-output-architecture#V1.5.2) *Serialization is not used when communicating with  ...* 
+- [V1.5.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/05-input-and-output-architecture#V1.5.2) *Serialization is not used when communicating with  ...* 
 
-#### 1.5.3](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/05-input-and-output-architecture#V1.5.3) *Input validation is enforced on a trusted service  ...* 
+- [V1.5.3](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/05-input-and-output-architecture#V1.5.3) *Input validation is enforced on a trusted service  ...* 
 
 - [V1.5.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/05-input-and-output-architecture#V1.5.4) *Output encoding occurs close to or by the interpre ...* 
 
@@ -52,7 +52,7 @@ Level 2 contains 259 controls listed below:
 
 - [V1.6.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/06-cryptographic-architecture#V1.6.1) *There is an explicit policy for management of cryp ...* 
 
-#### 1.6.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/06-cryptographic-architecture#V1.6.2) *Consumers of cryptographic services protect key ma ...* 
+- [1.6.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/06-cryptographic-architecture#V1.6.2) *Consumers of cryptographic services protect key ma ...* 
 
 - [V1.6.3](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/06-cryptographic-architecture#V1.6.3) *All keys and passwords are replaceable and are par ...* 
 
@@ -65,21 +65,21 @@ Level 2 contains 259 controls listed below:
 - [V1.7.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/07-errors-logging-and-auditing-architecture#V1.7.2) *Logs are securely transmitted to a preferably remo ...* 
 
 ### 08-data-protection-and-privacy-architecture
-#### 
+
 - [V1.8.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/08-data-protection-and-privacy-architecture#V1.8.1) *All sensitive data is identified and classified in ...* 
 
 - [V1.8.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/08-data-protection-and-privacy-architecture#V1.8.2) *All protection levels have an associated set of pr ...* 
-#### 
+
 ### 09-communications-architecture
 
 - [V1.9.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/09-communications-architecture#V1.9.1) *Verify the application encrypts communications bet ...* 
-#### 
+
 - [V1.9.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/09-communications-architecture#V1.9.2) *Application components verify the authenticity of  ...* 
 
 ### 10-malicious-software-architecture
 
 - [V1.10.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/10-malicious-software-architecture#V1.10.1) *A source code control system is in use, with proce ...* 
-#### 
+
 ### 11-business-logic-architecture
 
 - [V1.11.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/11-business-logic-architecture#V1.11.1) *Verify the definition and documentation of all app ...* 
@@ -87,80 +87,80 @@ Level 2 contains 259 controls listed below:
 - [V1.11.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/11-business-logic-architecture#V1.11.2) *All high-value business logic flows, including aut ...* 
 
 ### 12-secure-file-upload-architecture
-#### 
+
 - [V1.12.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/12-secure-file-upload-architecture#V1.12.2) *User-uploaded files - if required to be displayed  ...* 
 
 ### 14-configuration-architecture
-#### 
+
 - [V1.14.1](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.1) *Verify the segregation of components of differing  ...* 
 
 - [V1.14.2](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.2) *Binary signatures, trusted connections, and verifi ...* 
 
 - [V1.14.3](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.3) *The build pipeline warns of out-of-date or insecur ...* 
 
-#### 1.14.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.4) *The build pipeline contains a build step to automa ...* 
+- [V1.14.4](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.4) *The build pipeline contains a build step to automa ...* 
 
 - [V1.14.5](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.5) *Application deployments adequately sandbox, contai ...* 
 
 - [V1.14.6](/taxonomy/asvs-4.0.3/01-architecture-design-and-threat-modeling/14-configuration-architecture#V1.14.6) *Verify the application does not use unsupported, i ...* 
 
-### 02-authentication
+## 02-authentication
 
-#### 01-password-security
+### 01-password-security
 
 - [V2.1.1](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.1) *User set passwords are at least 12 characters in l ...* 
 
-#### 2.1.2](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.2) *Passwords of at least 64 characters are permitted, ...* 
+- [V2.1.2](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.2) *Passwords of at least 64 characters are permitted, ...* 
 
 - [V2.1.3](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.3) *Password truncation is not performed. however, con ...* 
 
 - [V2.1.4](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.4) *Any printable unicode character, including languag ...* 
 
-#### 2.1.5](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.5) *Verify users can change their password. ...* 
+- [V2.1.5](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.5) *Verify users can change their password. ...* 
 
-#### 2.1.6](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.6) *Password change functionality requires the user's  ...* 
+- [V2.1.6](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.6) *Password change functionality requires the user's  ...* 
 
 - [V2.1.7](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.7) *Passwords submitted during account registration, l ...* 
 
 - [V2.1.8](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.8) *A password strength meter is provided to help user ...* 
-#### 
+
 - [V2.1.9](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.9) *There are no password composition rules limiting t ...* 
 
 - [V2.1.10](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.10) *There are no periodic credential rotation or passw ...* 
 
-#### 2.1.11](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.11) *"paste" functionality, browser password helpers, a ...* 
+- [V2.1.11](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.11) *"paste" functionality, browser password helpers, a ...* 
 
 - [V2.1.12](/taxonomy/asvs-4.0.3/02-authentication/01-password-security#V2.1.12) *The user can choose to either temporarily view the ...* 
 
 ### 02-general-authenticator-security
 
-#### 2.2.1](/taxonomy/asvs-4.0.3/02-authentication/02-general-authenticator-security#V2.2.1) *Anti-automation controls are effective at mitigati ...* 
+- [V2.2.1](/taxonomy/asvs-4.0.3/02-authentication/02-general-authenticator-security#V2.2.1) *Anti-automation controls are effective at mitigati ...* 
 
 - [V2.2.2](/taxonomy/asvs-4.0.3/02-authentication/02-general-authenticator-security#V2.2.2) *The use of weak authenticators (such as sms and em ...* 
 
-#### 2.2.3](/taxonomy/asvs-4.0.3/02-authentication/02-general-authenticator-security#V2.2.3) *Secure notifications are sent to users after updat ...* 
+- [V2.2.3](/taxonomy/asvs-4.0.3/02-authentication/02-general-authenticator-security#V2.2.3) *Secure notifications are sent to users after updat ...* 
 
 ### 03-authenticator-lifecycle
-#### 
+
 - [V2.3.1](/taxonomy/asvs-4.0.3/02-authentication/03-authenticator-lifecycle#V2.3.1) *Verify system generated initial passwords or activ ...* 
 
 - [V2.3.2](/taxonomy/asvs-4.0.3/02-authentication/03-authenticator-lifecycle#V2.3.2) *Enrollment and use of user-provided authentication ...* 
 
-#### 2.3.3](/taxonomy/asvs-4.0.3/02-authentication/03-authenticator-lifecycle#V2.3.3) *Renewal instructions are sent with sufficient time ...* 
+- [V2.3.3](/taxonomy/asvs-4.0.3/02-authentication/03-authenticator-lifecycle#V2.3.3) *Renewal instructions are sent with sufficient time ...* 
 
 ### 04-credential-storage
-#### 
+
 - [V2.4.1](/taxonomy/asvs-4.0.3/02-authentication/04-credential-storage#V2.4.1) *Passwords are stored in a form that is resistant t ...* 
 
 - [V2.4.2](/taxonomy/asvs-4.0.3/02-authentication/04-credential-storage#V2.4.2) *The salt is at least 32 bits in length and be chos ...* 
 
-#### 2.4.3](/taxonomy/asvs-4.0.3/02-authentication/04-credential-storage#V2.4.3) *If pbkdf2 is used, the iteration count should be a ...* 
+- [V2.4.3](/taxonomy/asvs-4.0.3/02-authentication/04-credential-storage#V2.4.3) *If pbkdf2 is used, the iteration count should be a ...* 
 
 - [V2.4.4](/taxonomy/asvs-4.0.3/02-authentication/04-credential-storage#V2.4.4) *If bcrypt is used, the work factor should be as la ...* 
 
 - [V2.4.5](/taxonomy/asvs-4.0.3/02-authentication/04-credential-storage#V2.4.5) *An additional iteration of a key derivation functi ...* 
 
-#### 05-credential-recovery
+### 05-credential-recovery
 
 - [V2.5.1](/taxonomy/asvs-4.0.3/02-authentication/05-credential-recovery#V2.5.1) *A system generated initial activation or recovery  ...* 
 
@@ -169,7 +169,7 @@ Level 2 contains 259 controls listed below:
 - [V2.5.3](/taxonomy/asvs-4.0.3/02-authentication/05-credential-recovery#V2.5.3) *Verify password credential recovery does not revea ...* 
 
 - [V2.5.4](/taxonomy/asvs-4.0.3/02-authentication/05-credential-recovery#V2.5.4) *Verify shared or default accounts are not present  ...* 
-#### 
+
 - [V2.5.5](/taxonomy/asvs-4.0.3/02-authentication/05-credential-recovery#V2.5.5) *If an authentication factor is changed or replaced ...* 
 
 - [V2.5.6](/taxonomy/asvs-4.0.3/02-authentication/05-credential-recovery#V2.5.6) *Verify forgotten password, and other recovery path ...* 
@@ -180,61 +180,61 @@ Level 2 contains 259 controls listed below:
 
 - [V2.6.1](/taxonomy/asvs-4.0.3/02-authentication/06-look-up-secret-verifier#V2.6.1) *Lookup secrets can be used only once. ...* 
 
-#### 2.6.2](/taxonomy/asvs-4.0.3/02-authentication/06-look-up-secret-verifier#V2.6.2) *Lookup secrets have sufficient randomness (112 bit ...* 
+- [V2.6.2](/taxonomy/asvs-4.0.3/02-authentication/06-look-up-secret-verifier#V2.6.2) *Lookup secrets have sufficient randomness (112 bit ...* 
 
 - [V2.6.3](/taxonomy/asvs-4.0.3/02-authentication/06-look-up-secret-verifier#V2.6.3) *Lookup secrets are resistant to offline attacks, s ...* 
 
-#### 07-out-of-band-verifier
+### 07-out-of-band-verifier
 
 - [V2.7.1](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.1) *Clear text out of band (nist "restricted") authent ...* 
 
 - [V2.7.2](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.2) *The out of band verifier expires out of band authe ...* 
 
-#### 2.7.3](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.3) *The out of band verifier authentication requests,  ...* 
+- [V2.7.3](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.3) *The out of band verifier authentication requests,  ...* 
 
 - [V2.7.4](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.4) *The out of band authenticator and verifier communi ...* 
 
-#### 2.7.5](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.5) *The out of band verifier retains only a hashed ver ...* 
+- [V2.7.5](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.5) *The out of band verifier retains only a hashed ver ...* 
 
 - [V2.7.6](/taxonomy/asvs-4.0.3/02-authentication/07-out-of-band-verifier#V2.7.6) *The initial authentication code is generated by a  ...* 
 
 ### 08-one-time-verifier
 
 - [V2.8.1](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.1) *Time-based otps have a defined lifetime before exp ...* 
-#### 
+
 - [V2.8.2](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.2) *Symmetric keys used to verify submitted otps are h ...* 
 
-#### 2.8.3](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.3) *Approved cryptographic algorithms are used in the  ...* 
+- [V2.8.3](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.3) *Approved cryptographic algorithms are used in the  ...* 
 
 - [V2.8.4](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.4) *Time-based otp can be used only once within the va ...* 
 
-#### 2.8.5](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.5) *If a time-based multi-factor otp token is re-used  ...* 
+- [V2.8.5](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.5) *If a time-based multi-factor otp token is re-used  ...* 
 
 - [V2.8.6](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.6) *Verify physical single-factor otp generator can be ...* 
 
 - [V2.8.7](/taxonomy/asvs-4.0.3/02-authentication/08-one-time-verifier#V2.8.7) *Biometric authenticators are limited to use only a ...* 
-#### 
+
 ### 09-cryptographic-verifier
 
-#### 2.9.1](/taxonomy/asvs-4.0.3/02-authentication/09-cryptographic-verifier#V2.9.1) *Cryptographic keys used in verification are stored ...* 
+- [V2.9.1](/taxonomy/asvs-4.0.3/02-authentication/09-cryptographic-verifier#V2.9.1) *Cryptographic keys used in verification are stored ...* 
 
 - [V2.9.2](/taxonomy/asvs-4.0.3/02-authentication/09-cryptographic-verifier#V2.9.2) *The challenge nonce is at least 64 bits in length, ...* 
 
-#### 2.9.3](/taxonomy/asvs-4.0.3/02-authentication/09-cryptographic-verifier#V2.9.3) *Approved cryptographic algorithms are used in the  ...* 
+- [V2.9.3](/taxonomy/asvs-4.0.3/02-authentication/09-cryptographic-verifier#V2.9.3) *Approved cryptographic algorithms are used in the  ...* 
 
 ### 10-service-authentication
 
 - [V2.10.1](/taxonomy/asvs-4.0.3/02-authentication/10-service-authentication#V2.10.1) *Intra-service secrets do not rely on unchanging cr ...* 
-#### 
+
 - [V2.10.2](/taxonomy/asvs-4.0.3/02-authentication/10-service-authentication#V2.10.2) *If passwords are required for service authenticati ...* 
 
 - [V2.10.3](/taxonomy/asvs-4.0.3/02-authentication/10-service-authentication#V2.10.3) *Passwords are stored with sufficient protection to ...* 
 
-#### 2.10.4](/taxonomy/asvs-4.0.3/02-authentication/10-service-authentication#V2.10.4) *Verify passwords, integrations with databases and  ...* 
+- [V2.10.4](/taxonomy/asvs-4.0.3/02-authentication/10-service-authentication#V2.10.4) *Verify passwords, integrations with databases and  ...* 
 
-### 03-session-management
+## 03-session-management
 
-#### 01-fundamental-session-management-security
+### 01-fundamental-session-management-security
 
 - [V3.1.1](/taxonomy/asvs-4.0.3/03-session-management/01-fundamental-session-management-security#V3.1.1) *Verify the application never reveals session token ...* 
 
@@ -244,25 +244,25 @@ Level 2 contains 259 controls listed below:
 
 - [V3.2.2](/taxonomy/asvs-4.0.3/03-session-management/02-session-binding#V3.2.2) *Session tokens possess at least 64 bits of entropy ...* 
 
-#### 3.2.3](/taxonomy/asvs-4.0.3/03-session-management/02-session-binding#V3.2.3) *Verify the application only stores session tokens  ...* 
+- [V3.2.3](/taxonomy/asvs-4.0.3/03-session-management/02-session-binding#V3.2.3) *Verify the application only stores session tokens  ...* 
 
 - [V3.2.4](/taxonomy/asvs-4.0.3/03-session-management/02-session-binding#V3.2.4) *Session tokens are generated using approved crypto ...* 
 
-#### 03-session-termination
+### 03-session-termination
 
 - [V3.3.1](/taxonomy/asvs-4.0.3/03-session-management/03-session-termination#V3.3.1) *Logout and expiration invalidate the session token ...* 
 
 - [V3.3.2](/taxonomy/asvs-4.0.3/03-session-management/03-session-termination#V3.3.2) *If authenticators permit users to remain logged in ...* 
 
-#### 3.3.3](/taxonomy/asvs-4.0.3/03-session-management/03-session-termination#V3.3.3) *The application gives the option to terminate all  ...* 
+- [V3.3.3](/taxonomy/asvs-4.0.3/03-session-management/03-session-termination#V3.3.3) *The application gives the option to terminate all  ...* 
 
 - [V3.3.4](/taxonomy/asvs-4.0.3/03-session-management/03-session-termination#V3.3.4) *Users are able to view and (having re-entered logi ...* 
-#### 
+
 ### 04-cookie-based-session-management
 
 - [V3.4.1](/taxonomy/asvs-4.0.3/03-session-management/04-cookie-based-session-management#V3.4.1) *Cookie-based session tokens have the 'secure' attr ...* 
 
-#### 3.4.2](/taxonomy/asvs-4.0.3/03-session-management/04-cookie-based-session-management#V3.4.2) *Cookie-based session tokens have the 'httponly' at ...* 
+- [V3.4.2](/taxonomy/asvs-4.0.3/03-session-management/04-cookie-based-session-management#V3.4.2) *Cookie-based session tokens have the 'httponly' at ...* 
 
 - [V3.4.3](/taxonomy/asvs-4.0.3/03-session-management/04-cookie-based-session-management#V3.4.3) *Cookie-based session tokens utilize the 'samesite' ...* 
 
@@ -272,62 +272,62 @@ Level 2 contains 259 controls listed below:
 
 ### 05-token-based-session-management
 
-#### 3.5.1](/taxonomy/asvs-4.0.3/03-session-management/05-token-based-session-management#V3.5.1) *Verify the application allows users to revoke oaut ...* 
+- [V3.5.1](/taxonomy/asvs-4.0.3/03-session-management/05-token-based-session-management#V3.5.1) *Verify the application allows users to revoke oaut ...* 
 
 - [V3.5.2](/taxonomy/asvs-4.0.3/03-session-management/05-token-based-session-management#V3.5.2) *Verify the application uses session tokens rather  ...* 
 
-#### 3.5.3](/taxonomy/asvs-4.0.3/03-session-management/05-token-based-session-management#V3.5.3) *Stateless session tokens use digital signatures, e ...* 
+- [V3.5.3](/taxonomy/asvs-4.0.3/03-session-management/05-token-based-session-management#V3.5.3) *Stateless session tokens use digital signatures, e ...* 
 
-#### 07-defenses-against-session-management-exploits
+### 07-defenses-against-session-management-exploits
 
 - [V3.7.1](/taxonomy/asvs-4.0.3/03-session-management/07-defenses-against-session-management-exploits#V3.7.1) *Verify the application ensures a full, valid login ...* 
 
-### 04-access-control
+## 04-access-control
 
 ### 01-general-access-control-design
-#### 
+
 - [V4.1.1](/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design#V4.1.1) *The application enforces access control rules on a ...* 
 
-#### 4.1.2](/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design#V4.1.2) *All user and data attributes and policy informatio ...* 
+- [V4.1.2](/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design#V4.1.2) *All user and data attributes and policy informatio ...* 
 
 - [V4.1.3](/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design#V4.1.3) *The principle of least privilege exists - users sh ...* 
-#### 
+
 - [V4.1.5](/taxonomy/asvs-4.0.3/04-access-control/01-general-access-control-design#V4.1.5) *Access controls fail securely including when an ex ...* 
 
-#### 02-operation-level-access-control
+### 02-operation-level-access-control
 
 - [V4.2.1](/taxonomy/asvs-4.0.3/04-access-control/02-operation-level-access-control#V4.2.1) *Sensitive data and apis are protected against inse ...* 
 
 - [V4.2.2](/taxonomy/asvs-4.0.3/04-access-control/02-operation-level-access-control#V4.2.2) *The application or framework enforces a strong ant ...* 
-#### 
+
 ### 03-other-access-control-considerations
 
 - [V4.3.1](/taxonomy/asvs-4.0.3/04-access-control/03-other-access-control-considerations#V4.3.1) *Verify administrative interfaces use appropriate m ...* 
 
 - [V4.3.2](/taxonomy/asvs-4.0.3/04-access-control/03-other-access-control-considerations#V4.3.2) *Directory browsing is disabled unless deliberately ...* 
-#### 
+
 - [V4.3.3](/taxonomy/asvs-4.0.3/04-access-control/03-other-access-control-considerations#V4.3.3) *Verify the application has additional authorizatio ...* 
 
-#### 5-validation-sanitization-and-encoding
+## 5-validation-sanitization-and-encoding
 
 ### 01-input-validation
 
-#### 5.1.1](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/01-input-validation#V5.1.1) *The application has defenses against http paramete ...* 
+- [V5.1.1](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/01-input-validation#V5.1.1) *The application has defenses against http paramete ...* 
 
 - [V5.1.2](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/01-input-validation#V5.1.2) *Frameworks protect against mass parameter assignme ...* 
 
 - [V5.1.3](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/01-input-validation#V5.1.3) *All input (html form fields, rest requests, url pa ...* 
-#### 
+
 - [V5.1.4](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/01-input-validation#V5.1.4) *Structured data is strongly typed and validated ag ...* 
 
 - [V5.1.5](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/01-input-validation#V5.1.5) *Url redirects and forwards only allow destinations ...* 
 
 ### 02-sanitization-and-sandboxing
 
-#### 5.2.1](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.1) *All untrusted html input from wysiwyg editors or s ...* 
+- [V5.2.1](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.1) *All untrusted html input from wysiwyg editors or s ...* 
 
 - [V5.2.2](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.2) *Unstructured data is sanitized to enforce safety m ...* 
-#### 
+
 - [V5.2.3](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.3) *The application sanitizes user input before passin ...* 
 
 - [V5.2.4](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.4) *The application avoids the use of eval() or other  ...* 
@@ -335,7 +335,7 @@ Level 2 contains 259 controls listed below:
 - [V5.2.5](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.5) *The application protects against template injectio ...* 
 
 - [V5.2.6](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.6) *The application protects against ssrf attacks, by  ...* 
-#### 
+
 - [V5.2.7](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.7) *The application sanitizes, disables, or sandboxes  ...* 
 
 - [V5.2.8](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/02-sanitization-and-sandboxing#V5.2.8) *The application sanitizes, disables, or sandboxes  ...* 
@@ -380,7 +380,7 @@ Level 2 contains 259 controls listed below:
 
 - [V5.5.4](/taxonomy/asvs-4.0.3/05-validation-sanitization-and-encoding/05-deserialization-prevention#V5.5.4) *When parsing json in browsers or javascript-based  ...* 
 
-### 06-stored-cryptography
+## 06-stored-cryptography
 
 ### 01-data-classification
 
@@ -416,7 +416,7 @@ Level 2 contains 259 controls listed below:
 
 - [V6.4.2](/taxonomy/asvs-4.0.3/06-stored-cryptography/04-secret-management#V6.4.2) *Key material is not exposed to the application but ...* 
 
-### 07-error-handling-and-logging
+## 07-error-handling-and-logging
 
 ### 01-log-content
 
@@ -450,7 +450,7 @@ Level 2 contains 259 controls listed below:
 
 - [V7.4.3](/taxonomy/asvs-4.0.3/07-error-handling-and-logging/04-error-handling#V7.4.3) *A "last resort" error handler is defined which wil ...* 
 
-### 08-data-protection
+## 08-data-protection
 
 ### 01-general-data-protection
 
@@ -488,7 +488,7 @@ Level 2 contains 259 controls listed below:
 
 - [V8.3.8](/taxonomy/asvs-4.0.3/08-data-protection/03-sensitive-private-data#V8.3.8) *Sensitive personal information is subject to data  ...* 
 
-### 09-communication
+## 09-communication
 
 ### 01-client-communication-security
 
@@ -508,7 +508,7 @@ Level 2 contains 259 controls listed below:
 
 - [V9.2.4](/taxonomy/asvs-4.0.3/09-communication/02-server-communication-security#V9.2.4) *Proper certification revocation, such as online ce ...* 
 
-### 10-malicious-code
+## 10-malicious-code
 
 ### 02-malicious-code-search
 
@@ -524,7 +524,7 @@ Level 2 contains 259 controls listed below:
 
 - [V10.3.3](/taxonomy/asvs-4.0.3/10-malicious-code/03-application-integrity#V10.3.3) *The application has protection from subdomain take ...* 
 
-### 11-business-logic
+## 11-business-logic
 
 ### 01-business-logic-security
 
@@ -544,7 +544,7 @@ Level 2 contains 259 controls listed below:
 
 - [V11.1.8](/taxonomy/asvs-4.0.3/11-business-logic/01-business-logic-security#V11.1.8) *The application has configurable alerting when aut ...* 
 
-### 12-files-and-resources
+## 12-files-and-resources
 
 ### 01-file-upload
 
@@ -588,7 +588,7 @@ Level 2 contains 259 controls listed below:
 
 - [V12.6.1](/taxonomy/asvs-4.0.3/12-files-and-resources/06-ssrf-protection#V12.6.1) *The web or application server is configured with a ...* 
 
-### 13-api-and-web-service
+## 13-api-and-web-service
 
 ### 01-generic-web-service-security
 
@@ -624,7 +624,7 @@ Level 2 contains 259 controls listed below:
 
 - [V13.4.2](/taxonomy/asvs-4.0.3/13-api-and-web-service/04-graphql#V13.4.2) *Graphql or other data layer authorization logic sh ...* 
 
-### 14-configuration
+## 14-configuration
 
 ### 01-build-and-deploy
 

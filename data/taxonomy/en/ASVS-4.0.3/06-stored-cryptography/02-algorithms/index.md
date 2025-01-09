@@ -1,4 +1,4 @@
-##  Algorithms
+# Algorithms
 
 ## V6.2.1
 

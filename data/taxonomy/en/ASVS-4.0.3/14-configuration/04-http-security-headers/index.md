@@ -1,4 +1,4 @@
-##  HTTP Security Headers
+# HTTP Security Headers
 
 ## V14.4.1
 

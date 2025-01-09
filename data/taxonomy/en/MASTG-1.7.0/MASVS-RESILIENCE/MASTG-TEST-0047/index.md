@@ -1,4 +1,4 @@
-##  MASTG-TEST-0047
+#  MASTG-TEST-0047
 
 ## Testing File Integrity Checks
 

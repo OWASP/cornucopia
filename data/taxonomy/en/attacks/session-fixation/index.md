@@ -1,4 +1,4 @@
-## Session Fixation
+# Session Fixation
 Session fixation is a security attack where an attacker sets a user's session identifier, aiming to hijack their session and gain unauthorized access.
 
 ## Example

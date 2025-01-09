@@ -1,4 +1,4 @@
-##  MASTG-TEST-0016
+# MASTG-TEST-0016
 
 ## Testing Random Number Generation
 

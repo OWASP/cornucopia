@@ -1,4 +1,4 @@
-##  Out of Band Verifier
+# Out of Band Verifier
 
 ## V2.7.1
 

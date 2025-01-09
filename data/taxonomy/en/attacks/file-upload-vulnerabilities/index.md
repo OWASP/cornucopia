@@ -1,4 +1,4 @@
-## File Upload Vulnerabilities
+# File Upload Vulnerabilities
 File upload vulnerabilities occur when websites or applications allow users to upload files without adequate security measures. Attackers exploit these weaknesses to upload malicious files, potentially leading to issues like remote code execution, bypassing file type restrictions, content-type manipulation, file overwriting, or denial of service attacks.
 
 ## Example

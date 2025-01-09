@@ -1,4 +1,4 @@
-##  Input Validation
+# Input Validation
 
 ## V5.1.1
 

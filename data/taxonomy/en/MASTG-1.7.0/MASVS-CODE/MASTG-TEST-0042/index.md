@@ -1,4 +1,4 @@
-##  MASTG-TEST-0042
+# MASTG-TEST-0042
 
 ## Checking for Weaknesses in Third Party Libraries
 

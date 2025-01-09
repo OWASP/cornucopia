@@ -1,4 +1,4 @@
-##  Sanitization and Sandboxing
+# Sanitization and Sandboxing
 
 ## V5.2.1
 

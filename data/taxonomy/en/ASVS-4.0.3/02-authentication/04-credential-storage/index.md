@@ -1,4 +1,4 @@
-##  Credential Storage
+# Credential Storage
 
 ## V2.4.1
 

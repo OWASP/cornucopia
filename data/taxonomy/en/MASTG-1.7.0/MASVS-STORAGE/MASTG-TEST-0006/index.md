@@ -1,4 +1,4 @@
-##  MASTG-TEST-0006
+#  MASTG-TEST-0006
 
 ## Determining Whether the Keyboard Cache Is Disabled for Text Input Fields
 

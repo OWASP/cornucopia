@@ -1,4 +1,4 @@
-##  General Authenticator Security
+# General Authenticator Security
 
 ## V2.2.1
 

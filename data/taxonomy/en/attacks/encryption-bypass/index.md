@@ -1,4 +1,4 @@
-## Encryption Bypass
+# Encryption Bypass
 Encryption bypass refers to attempting to circumvent or break through the security measures of encrypted data.
 
 ## Example

@@ -1,4 +1,4 @@
-##  Secure File Upload Architecture
+# Secure File Upload Architecture
 
 ## V1.12.1
 

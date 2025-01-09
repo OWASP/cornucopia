@@ -1,4 +1,4 @@
-##  MASTG-TEST-0002
+# MASTG-TEST-0002
 
 ## Testing Local Storage for Input Validation
 

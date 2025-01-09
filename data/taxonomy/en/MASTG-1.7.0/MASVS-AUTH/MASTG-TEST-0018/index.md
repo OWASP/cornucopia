@@ -1,4 +1,4 @@
-##  MASTG-TEST-0018
+# MASTG-TEST-0018
 
 ## Testing Biometric Authentication
 

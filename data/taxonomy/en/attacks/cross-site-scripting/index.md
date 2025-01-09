@@ -1,4 +1,4 @@
-## Cross-Site Scripting (XSS)
+# Cross-Site Scripting (XSS)
 Cross-Site Scripting (XSS) is a web security vulnerability where attackers inject malicious scripts into web pages. This could happen when the user input isn't properly validated, allowing scripts, often in JavaScript, to execute in other users' browsers. This can lead to unauthorized access, data theft, or other malicious activities.
 
 ## Example

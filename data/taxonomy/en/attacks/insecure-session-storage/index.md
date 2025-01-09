@@ -1,4 +1,4 @@
-## Insecure Session Storage
+# Insecure Session Storage
 Insecure Session Storage refers to the unsafe use of session storage in web development, where sensitive data is stored without proper security measures. This can lead to vulnerabilities such as cross-site scripting and unauthorized access to confidential information.
 
 ## Example

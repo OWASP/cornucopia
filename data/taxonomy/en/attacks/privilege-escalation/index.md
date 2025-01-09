@@ -1,4 +1,4 @@
-## Privilege escalation
+# Privilege escalation
 Privilege escalation refers to the process by which an attacker or an unauthorized user gains higher-level access or permissions than they are initially granted. This can occur in various systems, such as operating systems, databases, or applications.
 
 ## Example

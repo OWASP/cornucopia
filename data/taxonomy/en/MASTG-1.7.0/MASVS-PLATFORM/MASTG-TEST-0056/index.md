@@ -1,4 +1,4 @@
-##  MASTG-TEST-0056
+#  MASTG-TEST-0056
 
 ## Determining Whether Sensitive Data Is Exposed via IPC Mechanisms
 

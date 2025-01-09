@@ -1,6 +1,4 @@
-##  Session Management Architecture
-
-
+#  Session Management Architecture
 
 ## Disclaimer:
 

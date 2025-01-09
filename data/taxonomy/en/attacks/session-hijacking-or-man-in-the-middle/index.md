@@ -1,4 +1,4 @@
-## Session Hijacking (Man-in-the-Middle)
+# Session Hijacking (Man-in-the-Middle)
 Session hijacking, or man-in-the-middle (MitM) attack, is a security breach where an unauthorized party intercepts and possibly alters communication between a user and a server. This allows the attacker to gain unauthorized access to sensitive information, such as login credentials or session tokens, potentially leading to impersonation and unauthorized account access.
 
 ## Example

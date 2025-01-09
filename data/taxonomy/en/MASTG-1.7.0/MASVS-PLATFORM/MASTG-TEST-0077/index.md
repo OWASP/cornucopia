@@ -1,4 +1,4 @@
-##  MASTG-TEST-0077
+#  MASTG-TEST-0077
 
 ## Testing WebView Protocol Handlers
 

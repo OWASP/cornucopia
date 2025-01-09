@@ -1,4 +1,4 @@
-##  MASTG-TEST-0057
+#  MASTG-TEST-0057
 
 ## Checking for Sensitive Data Disclosed Through the User Interface
 

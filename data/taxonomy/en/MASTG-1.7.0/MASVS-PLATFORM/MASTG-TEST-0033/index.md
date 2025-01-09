@@ -1,4 +1,4 @@
-##  MASTG-TEST-0033
+#  MASTG-TEST-0033
 
 ## Testing for Java Objects Exposed Through WebViews
 

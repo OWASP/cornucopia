@@ -1,4 +1,4 @@
-##  MASTG-TEST-0059
+#  MASTG-TEST-0059
 
 ## Testing Auto-Generated Screenshots for Sensitive Information
 

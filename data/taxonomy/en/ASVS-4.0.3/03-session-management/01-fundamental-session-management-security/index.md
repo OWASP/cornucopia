@@ -1,4 +1,4 @@
-##  Fundamental Session Management Security
+# Fundamental Session Management Security
 
 ## V3.1.1
 

@@ -1,4 +1,4 @@
-##  MASTG-TEST-0026
+#  MASTG-TEST-0026
 
 ## Testing Implicit Intents
 

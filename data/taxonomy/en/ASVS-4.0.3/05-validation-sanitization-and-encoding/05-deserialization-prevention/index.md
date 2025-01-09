@@ -1,4 +1,4 @@
-##  Deserialization Prevention
+# Deserialization Prevention
 
 ## V5.5.1
 

@@ -1,4 +1,4 @@
-##  Credential Recovery
+# Credential Recovery
 
 ## V2.5.1
 

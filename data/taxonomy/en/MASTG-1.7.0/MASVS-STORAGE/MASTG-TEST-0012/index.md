@@ -1,4 +1,4 @@
-##  MASTG-TEST-0012
+#  MASTG-TEST-0012
 
 ## Testing the Device-Access-Security Policy
 

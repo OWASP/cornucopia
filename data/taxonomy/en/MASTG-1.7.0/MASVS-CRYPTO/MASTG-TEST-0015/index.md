@@ -1,4 +1,4 @@
-##  MASTG-TEST-0015
+# MASTG-TEST-0015
 
 ## Testing the Purposes of Keys
 

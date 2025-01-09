@@ -1,4 +1,4 @@
-## Software and Data Integrity Failures 
+# Software and Data Integrity Failures 
 ## Description
 Software and data integrity failures relate to code and infrastructure that does not protect against integrity violations. An example of this is where an application relies upon plugins, libraries, or modules from untrusted sources, repositories, and content delivery networks (CDNs). An insecure CI/CD pipeline can introduce the potential for unauthorized access, malicious code, or system compromise. Lastly, many applications now include auto-update functionality, where updates are downloaded without sufficient integrity verification and applied to the previously trusted application. Attackers could potentially upload their own updates to be distributed and run on all installations. Another example is where objects or data are encoded or serialized into a structure that an attacker can see and modify is vulnerable to insecure deserialization.
 
@@ -16,7 +16,7 @@ Software and data integrity failures relate to code and infrastructure that does
 [Software and Data Integrity Failures Cheatcheats](https://cheatsheetseries.owasp.org/IndexTopTen.html#a082021-software-and-data-integrity-failures)
 
 ## Cards
-#### Data-validation-&-encoding
+### Data-validation-&-encoding
 - [Data-validation-&-encoding 2](/cards/VE2)
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 5](/cards/VE5)
@@ -29,7 +29,7 @@ Software and data integrity failures relate to code and infrastructure that does
 - [Data-validation-&-encoding Q](/cards/VEQ)
 - [Data-validation-&-encoding K](/cards/VEK)
 
-#### Authentication
+### Authentication
 - [Authentication 2](/cards/AT2)
 - [Authentication 3](/cards/AT3)
 - [Authentication 4](/cards/AT4)
@@ -42,7 +42,7 @@ Software and data integrity failures relate to code and infrastructure that does
 - [Authentication Q](/cards/ATQ)
 - [Authentication K](/cards/ATK)
 
-#### Session-management
+### Session-management
 - [Session-management 2](/cards/SM2)
 - [Session-management 4](/cards/SM4)
 - [Session-management 5](/cards/SM5)
@@ -55,17 +55,17 @@ Software and data integrity failures relate to code and infrastructure that does
 - [Session-management Q](/cards/SMQ)
 - [Session-management K](/cards/SMK)
 
-#### Authorization
+### Authorization
 - [Authorization 3](/cards/AZ3)
 - [Authorization 5](/cards/AZ5)
 - [Authorization 8](/cards/AZ8)
 - [Authorization 9](/cards/AZ9)
 
-#### Cryptography
+### Cryptography
 - [Cryptography 3](/cards/CR3)
 - [Cryptography J](/cards/CRJ)
 
-#### Cornucopia
+### Cornucopia
 - [Cornucopia 2](/cards/C2)
 - [Cornucopia 3](/cards/C3)
 - [Cornucopia 6](/cards/C6)

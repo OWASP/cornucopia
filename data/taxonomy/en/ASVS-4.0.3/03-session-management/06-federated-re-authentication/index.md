@@ -1,4 +1,4 @@
-##  Federated Re-authentication
+# Federated Re-authentication
 
 ## V3.6.1
 

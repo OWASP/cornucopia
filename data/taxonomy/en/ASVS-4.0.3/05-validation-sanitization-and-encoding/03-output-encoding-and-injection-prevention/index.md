@@ -1,4 +1,4 @@
-##  Output Encoding and Injection Prevention
+# Output Encoding and Injection Prevention
 
 ## V5.3.1
 

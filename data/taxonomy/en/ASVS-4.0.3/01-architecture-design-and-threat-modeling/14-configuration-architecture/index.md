@@ -1,4 +1,4 @@
-##  Configuration Architecture
+# Configuration Architecture
 
 ## V1.14.1
 
