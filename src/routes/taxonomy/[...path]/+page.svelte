@@ -11,12 +11,12 @@
 <div>
 <!--The location is a file -->
 {#each data.files as file}
-    <p>├──<a href="/taxonomy/{data.path}/{file}">{Text.FormatPlain(file)}</a></p>
+    <p>├──<a href="/taxonomy/{data.path.toLowerCase()}/{file.toLowerCase()}">{Text.Format(file)}</a></p>
 {/each}
 
 <!--The location is a folder -->
 {#each data.folders as folder}
-    <p>├──<a href="/taxonomy/{data.path}/{folder}">{Text.FormatPlain(folder)}</a></p>
+    <p>├──<a href="/taxonomy/{data.path.toLowerCase()}/{folder.toLowerCase()}">{Text.Format(folder)}</a></p>
 {/each}
 
 <!--The location is filecontent -->

@@ -49,7 +49,7 @@ Cornucopia and its inherent prioritization-system (by the value of the card) can
 
 OWASP ASVS can be of great help to define your security bar. ASVS is divided into 3 levels, going for level 1 regarding security is an obvious choice.
 
-On our website, we have provided a full overview of ASVS. Here is the overview of Level 1: [ASVS Level 1 Controls](/taxonomy/ASVS-4.0.3/level-1-controls)
+On our website, we have provided a full overview of ASVS. Here is the overview of Level 1: [ASVS Level 1 Controls](/taxonomy/asvs-4.0.3/level-1-controls)
 
 ### Strategically plan your implementation and go for shortcuts
 

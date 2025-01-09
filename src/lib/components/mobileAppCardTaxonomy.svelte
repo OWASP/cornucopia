@@ -7,7 +7,7 @@
     import MappingsList from "$lib/components/mappingsList.svelte";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
-    import { MASTG_TESTS_MAPPING } from "../../domain/mapping/mastg";
+    import {MASTG_TESTS_MAPPING} from "../../domain/mapping/mastg";
     import { MappingController, type MobileAppMapping} from "../../domain/mapping/mappingController";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import Attacks from "./attacks.svelte";
@@ -25,13 +25,13 @@
     function linkMASVS(requirement: string) {
       let parts = String(requirement).split("-");
       let category = 'MASVS-' + parts[0];
-      let base = '/taxonomy/MASVS-2.1.0/';
-      return category ? base + category + '/MASVS-' + requirement + '#MASVS-' + requirement : '';
+      let base = '/taxonomy/masvs-2.1.0/';
+      return category ? (base + category.toLowerCase() + '/masvs-' + requirement.toLowerCase() + '#MASVS-' + requirement) : '';
     }
 
     function linkMASTG(test: string) {
-      let base = '/taxonomy/MASTG-1.7.0/MASVS-';
-      return MASTG_TESTS_MAPPING[test] ? base + MASTG_TESTS_MAPPING[test] + '/MASTG-' + test + '#MASTG-' + test : '';
+      let base = '/taxonomy/mastg-1.7.0/masvs-';
+      return test in MASTG_TESTS_MAPPING ? (base + MASTG_TESTS_MAPPING[test].toLowerCase() + '/mastg-' + test.toLowerCase() + '#MASTG-' + test) : '';
     }
   
     function FormatToDoubleDigitSearchstring(input: string) {

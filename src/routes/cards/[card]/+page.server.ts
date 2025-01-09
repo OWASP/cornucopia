@@ -9,9 +9,7 @@ export const load = (({ params }) => {
     card: legacyCardCodeFix(params.card.toUpperCase()),
     decks: new DeckService(request).getCardsForAllLanguages(),
     routes: new Map<string, Route[]>([
-      ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()],
-      ['MASVSRoutes', FileSystemHelper.MASVSRouteMap()],
-      ['MASTGRoutes', FileSystemHelper.MASTGRouteMap()]
+      ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]
     ]),
     mappingData: (new DeckService(request)).getCardMapping()
   };
