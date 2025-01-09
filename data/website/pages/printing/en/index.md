@@ -43,7 +43,7 @@ The fonts can also be downloaded from the web.
 - Fivo Sans: [https://www.fontsc.com/font/fivo-sans](https://www.fontsc.com/font/fivo-sans)
 - Atkinson Hyperlegible: [https://brailleinstitute.org/freefont](https://brailleinstitute.org/freefont)
 
-#### The following fonts are used:
+### The following fonts are used:
 
 - Deck: Fivo Sans and Atkinson Hyperlegible
 - Leaflet: Fivo Sans
@@ -59,15 +59,15 @@ The fonts can also be downloaded from the web.
     - Noto Sans Extra Condensed Extra Bold
         
 
-#### Dimensions
+### Dimensions
 
-###### Card decks:
+#### Card decks:
 
 The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
 
 The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 
-###### Cases:
+#### Cases:
 
 the boxes has standard dimensions used by Agile Stationary to print their OWASP Cornucopia decks.
 
@@ -75,7 +75,7 @@ The "bridge" is 60 x 89.25 mm x 27.15 mm
 
 The "tarot" is 122.2 x 73.1 x 29.1 mm
 
-###### Leaflets:
+#### Leaflets:
 
 The "bridge" and "tarot" version is a 16-20 page spread depending on which language you print it in.
 
@@ -91,11 +91,11 @@ You may need to adjust the font size to fit either a 16 or a 20 page leaflet spr
 
 DO NOT PRINT an 18 Page leaflet! It won't look good.
 
-###### Blead:
+#### Blead:
 
 A standard blead set to 3mm for all 4 sides.
 
-###### Paper:
+#### Paper:
 
 Use 300gsm for both the bridge cards and the tarot cards.
 
