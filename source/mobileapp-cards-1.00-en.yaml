@@ -718,7 +718,7 @@ paragraphs:
     text: "Likewise, the Mobile App Edition names reflect the OWASP community aspect."
   -
     value: "T02710"
-    text: "Therefore, apart from 'Bob and Mallory', the attacker names are drawn from the 2025 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
+    text: "Therefore, apart from 'Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
   -
     value: "T02720"
     text: "The cultural and gender mix simply reflects these sources of names"
