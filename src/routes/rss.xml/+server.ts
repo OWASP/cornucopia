@@ -2,7 +2,7 @@ import type { Blogpost } from "../../domain/blogpost/blogpost.js";
 import { LocalCache } from "$lib/utils/cache.js";
 import { getBlogposts } from "../../domain/blogpost/blogpostController.js";
 import { Text } from "$lib/utils/text.js";
-export const prerender = true;
+export const prerender = false;
 // Header options
 const responseInit: ResponseInit = {
   headers: {

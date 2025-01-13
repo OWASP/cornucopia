@@ -77,13 +77,13 @@
 </noscript>
 <div class="card-panel script" id="card">
     <div class="left">
-        <a href={getUrl(card)} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
+        <a href={getUrl(card)} data-sveltekit-reload onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
-        <a href={getUrl(card)} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
+        <a href={getUrl(card)} data-sveltekit-reload onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
     </div>
 </div>
 <style>
@@ -138,11 +138,3 @@
         }
     }
 </style>
-<noscript>
-    <style>
-        .card-panel.script
-        {
-            display: none;
-        }
-    </style>
-</noscript>

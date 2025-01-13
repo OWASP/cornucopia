@@ -50,7 +50,7 @@
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
     {#key card}
-        <ViewSourceOnGithub path="{card.githubUrl}"></ViewSourceOnGithub>
+        <ViewSourceOnGithub></ViewSourceOnGithub>
     {/key}
 </div>
 

@@ -19,18 +19,23 @@
 
     function getSuitColor(suit : string)
     {
-        return cardColor?.get(suit) ?? "black";
+        return cardColor?.get(suit) ?? "";
+    }
+
+    function getTextColor(suit : string)
+    {
+        return cardColor?.get(suit) ?? "default";
     }
 </script>
 
 <div class="card-render">
-    <div class="left" style="background-color:{getSuitColor(card.suit)}">
+    <div class="left {getSuitColor(card.suit)}">
         <span class="property-card-suit{previewStyle}">{card?.suitName}</span>
     </div>
     <div class="right">
         
         {#if mapping}
-        <span style="color:{getSuitColor(card.suit)}" class="property-card-number{previewStyle}">{card?.card ?? card?.value}</span>
+        <span class="property-card-number{previewStyle} {getTextColor(card.suit)}-text">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
             {#if card.edition == 'webapp' && card.value != 'A' && card.value != 'B'}
                 <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
@@ -39,10 +44,10 @@
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
         {:else if card.suitName == 'WILD CARD'}
-        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">Joker</h1>
+        <h1 class="property-card-number {getSuitColor(card.suit)}">Joker</h1>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
         {:else}
-        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.value}</h1>
+        <h1 class="property-card-number {getSuitColor(card.suit)}">{card?.value}</h1>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
         {/if}
     </div>
@@ -148,6 +153,80 @@
         width: 85%;
     }
 
+    .authentication {
+        background-color: #8FC4E8;
+    }
+    .authorization {
+        background-color: #ECCE3E;
+    }
+    .data-validation-and-encoding {
+        background-color: #B5B1AF;
+    }
+    .cornucopia {
+        background-color: #526994;
+    }
+    .session-management {
+        background-color: #B1D579;
+    }
+    .cryptography {
+        background-color: #C3B2E3;
+    }
+    .wild-card {
+        background-color: #FBB67C;
+    }
+    .platform-and-code {
+        background-color: #00FFBF;
+    }
+    .authentication-and-authorization {
+        background-color: #FFD500;
+    }
+    .network-and-storage {
+        background-color: #FF6600;
+    }
+    .resilience {
+        background-color: #006EFF;
+    }
+    .cryptography-mobile {
+        background-color: #006EFF;
+    }
+
+    .authentication-text {
+        color: #8FC4E8;
+    }
+    .authorization-text {
+        color: #ECCE3E;
+    }
+    .data-validation-and-encoding-text {
+        color: #B5B1AF;
+    }
+    .cornucopia-text {
+        color: #526994;
+    }
+    .session-management-text {
+        color: #B1D579;
+    }
+    .cryptography-text {
+        color: #C3B2E3;
+    }
+    .wild-card-text {
+        color: #FBB67C;
+    }
+    .platform-and-code-text {
+        color: #00FFBF;
+    }
+    .authentication-and-authorization-text {
+        color: #FFD500;
+    }
+    .network-and-storage-text {
+        color: #FF6600;
+    }
+    .resilience-text {
+        color: #006EFF;
+    }
+    .cryptography-mobile-text {
+        color: #006EFF;
+    }
+
     @media (max-aspect-ratio: 1.5/1)
     {
         .card-render
@@ -173,6 +252,4 @@
             font-size: 10vw;
         }
     }
-
-
 </style>

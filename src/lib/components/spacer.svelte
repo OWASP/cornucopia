@@ -6,10 +6,11 @@
 	let { height = '5rem' }: Props = $props();
 </script>
 
-<div style="height:{height}"></div>
+<div class="spacer" ></div>
 
 <style>
-	div {
+	.spacer {
 		width: 100%;
+		height: 5rem;
 	}
 </style>

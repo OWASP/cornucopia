@@ -8,8 +8,11 @@
 		<link rel="icon" href="%sveltekit.assets%/images/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
+		<noscript>
+			<link rel="stylesheet" href="/css/noscript.css" />
+		</noscript>
 	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
+	<body data-sveltekit-preload-data="off">
+		<div class="display-s">%sveltekit.body%</div>
 	</body>
 </html>

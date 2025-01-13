@@ -32,7 +32,7 @@
 		let scriptTag = document.createElement('script');
 		scriptTag.classList.add("utterances-script")
 		scriptTag.setAttribute('id','comment-section')
-		scriptTag.setAttribute('repo', 'OWASP/www-project-cornucopia');
+		scriptTag.setAttribute('repo', 'OWASP/cornucopia');
 		scriptTag.setAttribute('issue-term', name);
 		scriptTag.setAttribute('theme', 'github-light');
         scriptTag.setAttribute('label', '🔮 Utterances');

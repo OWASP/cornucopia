@@ -23,9 +23,9 @@
 		if (isMobile) return '';
 
 		if (align == 'left') {
-			return 'flex-direction:row ';
+			return ' desktop-left';
 		} else {
-			return 'flex-direction:row-reverse ';
+			return ' desktop-right';
 		}
 	}
 </script>
@@ -35,11 +35,11 @@
 {#if id != ""}
 	<div class="anchor" id={id}></div>
 {/if}
-<div class="container" style={getFlexStyle(mobile)}>
+<div class="container{getFlexStyle(mobile)}">
 	<div class="image">
         <img alt={id} {src} />
     </div>
-	<div style="{align == 'left' && !mobile ? 'padding-left:2rem;' : 'padding-right:2rem;'}" class="text">
+	<div class="text{getFlexStyle(mobile)}">
 		{@render children?.()}
 	</div>
 </div>
@@ -72,8 +72,16 @@
 		opacity: 80%;
 		border-radius: 1rem;
 		background-color: rgb(255, 255, 255);
-		padding: 1rem;
+		padding: 1rem 2rem 1rem 1rem;
 		box-shadow: var(--box-shadow);
+	}
+
+	.text.desktop-left {
+		padding: 1rem 1rem 1rem 2rem;
+	}
+
+	.text.desktop-right {
+		padding: 1rem 2rem 1rem 1rem;
 	}
 
 	.image {
@@ -85,6 +93,14 @@
 		width: 80%;
 		object-fit: cover;
 		border-radius: .3rem;
+	}
+
+	.container.desktop-right {
+		flex-direction: row-reverse;
+	}
+
+	.container.desktop-left {
+		flex-direction: row;
 	}
 
 	@media (max-aspect-ratio: 1/1) {

@@ -7,7 +7,9 @@ const config =
 	preprocess: vitePreprocess(),
 	kit: 
 	{
-		adapter: adapter(),
+		adapter: adapter({
+			fallback: '200.html' // may differ from host to host
+		}),
 		alias: {
 			$data: "data",
 		},
@@ -23,13 +25,14 @@ const config =
 		csp: {
 			mode: "auto",
 			directives: {
-				'script-src': ['self'],
-				'script-src-elem': ['self']
-			},
-			reportOnly: {
+				'default-src': ['none'],
+				'connect-src': ['self'],
 				'script-src': ['self'],
 				'script-src-elem': ['self'],
-				'report-uri': ['/']
+				'style-src': ['self'],
+				'style-src-elem': ['self'],
+				'img-src': ['self', 'https://i.ytimg.com/vi/XXTPXozIHow/mqdefault.jpg'],
+				'frame-src': ['self', 'https://www.youtube.com/']
 			}
 		},
 		csrf: {

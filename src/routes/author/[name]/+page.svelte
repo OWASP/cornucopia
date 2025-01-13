@@ -11,6 +11,7 @@
     </div>
     <div class="right">
         <table>
+            <tbody>
             {#if data.author.linkedin}
             <tr>
                 <td>
@@ -42,7 +43,8 @@
                     <a target="_blank" rel="noopener" href="{data.author.website}">{Text.DisplayLink(data.author.website)}</a>
                 </td>
             </tr>
-            {/if}   
+            {/if}
+            </tbody>
         </table>
 
     </div>

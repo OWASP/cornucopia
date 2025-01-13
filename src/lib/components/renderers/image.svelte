@@ -37,17 +37,17 @@
     function getStyle()
     {
         if(small)
-            return "width:25%;";
+            return "small";
 
         if(medium)
-            return "width:50%;";
+            return "medium";
 
         return "";
     }
 
   </script>
   
-  <img loading="lazy" style="{getStyle()}" src={url} {title} alt={text}>
+  <img loading="lazy" class="{getStyle()}" src={url} {title} alt={text}>
   <p class="alt-text"><i>Image: {text}</i></p>
 
   <style>
@@ -67,6 +67,16 @@
             margin-top: 2rem;
             margin-bottom: 1rem;;
             display: block;
+        }
+
+        img.small 
+        {
+            width:25%;
+        }
+
+        img.medium
+        {
+            width:50%;
         }
 
         @media (max-aspect-ratio: 1/1) 

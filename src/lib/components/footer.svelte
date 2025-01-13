@@ -62,7 +62,7 @@
     <p class="footer">
         <a class="link-with-external-indicator" rel="noopener" href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>
-        <a class="link-with-external-indicator" href="/rss.xml"><img style="position:relative;top:3px;" height="15px" src="/images/rss.svg" alt="rss" /></a>
+        <a class="link-with-external-indicator" href="/rss.xml"><img class="rss" height="15px" src="/images/rss.svg" alt="rss" /></a>
         <span> | </span>
         <a class="link-with-external-indicator" href="https://cornucopia.dotnetlab.eu/sitemap.xml">Sitemap</a>
     </p>
@@ -123,6 +123,12 @@
         background-color: var(--background);
         padding: 1rem;
     }
+    img.rss
+    {
+        position: relative;
+        top: 3px;
+    }
+
 
     @media (max-aspect-ratio: 1/1) 
     {

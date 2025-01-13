@@ -66,3 +66,14 @@ a:visited
     background-position: center;
     background-color: currentColor; 
 }
+
+.display-s {
+    display: contents
+}
+
+.how-to-play 
+{
+    width:59vw;
+    height:auto;
+    aspect-ratio:16/9;
+}

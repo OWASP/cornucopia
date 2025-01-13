@@ -28,7 +28,7 @@
 
 <div class="deck">
     {#each selectedCards as card,index}
-    <div style="transform: translate(150%,35%) rotate({-45 + index*10}deg) " class="card-container">
+    <div class="card-container card-{index}">
         <CardPreview card={cards.get(card)} mapping={mappingData[index]} style='hero-card-container'></CardPreview>
     </div>
     {/each}
@@ -41,6 +41,35 @@
         position: absolute;
         transform-origin: bottom left;
 
+    }
+
+    .card-container.card-0
+    {
+        transform: translate(150%,35%) rotate(-35deg)
+    }
+    .card-container.card-1
+    {
+        transform: translate(150%,35%) rotate(-25deg)
+    }
+    .card-container.card-2
+    {
+        transform: translate(150%,35%) rotate(-15deg)
+    }
+    .card-container.card-3
+    {
+        transform: translate(150%,35%) rotate(-5deg)
+    }
+    .card-container.card-4
+    {
+        transform: translate(150%,35%) rotate(5deg)
+    }
+    .card-container.card-5
+    {
+        transform: translate(150%,35%) rotate(15deg)
+    }
+    .card-container.card-6
+    {
+        transform: translate(150%,35%) rotate(25deg)
     }
 
     .deck

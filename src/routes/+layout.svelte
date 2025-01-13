@@ -1,5 +1,6 @@
 <script lang="ts">
     import 'normalize.css';
+    import { browser } from "$app/environment";
     import { page } from "$app/stores";
     import Breadcrumbs from "$lib/components/breadcrumbs.svelte";
     import Footer from "$lib/components/footer.svelte";
@@ -24,6 +25,52 @@
             return true;
         return false;
     }
+
+    // intercept innerHTML invocation and remove style before div is added to dom
+    $effect(() => {
+    if (browser) {
+        const originalInnerHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+        
+        Object.defineProperty(Element.prototype, 'innerHTML', {
+        set(value: string) {
+            if (value.includes('id="svelte-announcer"')) {
+            const safeValue = value.replace(/style=".*?"/i, '');
+            originalInnerHTML?.set?.call(this, safeValue);
+            } else {
+            originalInnerHTML?.set?.call(this, value);
+            }
+        }
+        });
+    }
+    });
+
+    // add styles back in non-CSP violating way
+    $effect(() => {
+    if (document) {
+        const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+            if (node instanceof HTMLDivElement && node.id === 'svelte-announcer') {
+                node.style.position = 'absolute';
+                node.style.left = '0';
+                node.style.top = '0';
+                node.style.clip = 'rect(0 0 0 0)';
+                node.style.clipPath = 'inset(50%)';
+                node.style.overflow = 'hidden';
+                node.style.whiteSpace = 'nowrap';
+                node.style.width = '1px';
+                node.style.height = '1px';
+            }
+            }
+        }
+        });
+
+        observer.observe(document, {
+        childList: true,
+        subtree: true
+        });
+    }
+    });
 </script>
 
 <Metadata></Metadata>

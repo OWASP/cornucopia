@@ -1,13 +1,12 @@
 <script lang="ts">
     interface Props {
         href: string;
-        style?: string;
     }
 
-    let { href, style = "" }: Props = $props();
+    let { href }: Props = $props();
 </script>
 <div id="chevron">
-    <a href="{href}"><img {style} alt="go-down" src="icons/chevron.png"/></a>
+    <a href="{href}"><img alt="go-down" src="icons/chevron.png"/></a>
 </div>
 <style>   
 

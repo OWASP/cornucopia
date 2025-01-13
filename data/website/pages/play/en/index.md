@@ -5,7 +5,7 @@ It is possible to play Cornucopia in many different ways. Here is one way explai
 <noscript>
     <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/watch?v=XXTPXozIHow" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
 </noscript>
-<iframe frameborder="0" title="Youtube: How to play OWASP Cornucopia" style="width:59vw;height:auto;aspect-ratio:16/9;" 
+<iframe class="how-to-play" frameborder="0" title="Youtube: How to play OWASP Cornucopia" 
 src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpolicy="no-referrer" allowfullscreen>
 </iframe>
 
@@ -30,7 +30,7 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
     - B6. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit
     - B7. Repeat until all the cards are played
 - C - Scoring
-    The objective is to identify applicable threats, and win hands (rounds):
+    The objective is to identify applicable threats, and win hands (rounds)
     - C1. Score +1 for each card you can identify as a valid threat to the application under consideration
     - C2. Score +1 if you win a round
     - C3. Once all cards have been played, whoever has the most points, wins

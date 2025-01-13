@@ -9,21 +9,6 @@
     let { index, reset, image }: Props = $props();
 
     let hover : boolean = $state(false);
-    
-    // TODO: clean up this mess
-    function generateStyle(hover : boolean) : string
-    {
-        let rotation : number = (index*10-45);
-
-        return "transform:translate("  
-        + "0,0" 
-        + ")"
-        + " rotate(" 
-        + rotation
-        + "deg);background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2)),url(" 
-        + image 
-        + ")";
-    }
 
     function mouseenter()
     {
@@ -44,8 +29,7 @@ onclick={reset}
 onmouseenter={mouseenter}
 onmouseleave={mouseleave}
 in:fly="{{ y: 100, duration: 1000 , delay: index * 100}}" 
-class="card" 
-style={generateStyle(hover)}></div>
+class="card card-{index}"></div>
 
 
 <style>
@@ -64,6 +48,42 @@ style={generateStyle(hover)}></div>
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
         filter:saturate(1.5);
         cursor:pointer;
+    }
+
+    .card-0
+    {
+        transform: translate(0,0) rotate(-35deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    }
+    .card-1
+    {
+        transform: translate(0,0) rotate(-25deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    }
+    .card-2
+    {
+        transform: translate(0,0) rotate(-15deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    }
+    .card-3
+    {
+        transform: translate(0,0) rotate(-5deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    }
+    .card-4
+    {
+        transform: translate(0,0) rotate(5deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    }
+    .card-5
+    {
+        transform: translate(0,0) rotate(15deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    }
+    .card-6
+    {
+        transform: translate(0,0) rotate(25deg);
+        background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
     }
 
     .card:hover

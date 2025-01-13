@@ -27,7 +27,7 @@
                     {Text.FormatDate(post.date)}
                      • 
                     {Text.Format(post.author)}
-                    <a class= "link" href="/news/{post.path}">>> {$t('news.a')}</a>
+                    <a href="/news/{post.path}">>> {$t('news.a')}</a>
                 </p>
             </button>
         {/each}
@@ -37,7 +37,7 @@
 
 <p>{$t('news.p2')} <a href="/author">{$t('news.slug.p1')}</a></p>
 {#each data.authors as author}
-    <p style="display:none;">
+    <p>
         <a href="/author/{author.name}">{author.name}</a>
     </p>
 {/each}
@@ -54,11 +54,6 @@
     a:hover
     {
         opacity: 50%;
-    }
-
-    .link
-    {
-        display: none;
     }
     .info
     {
