@@ -26,9 +26,9 @@ const config =
 				'default-src': ['none'],
 				'connect-src': ['self'],
 				'script-src': ['self'],
-				'script-src-elem': ['self'],
+				'script-src-elem': ['self', 'https://vercel.live/'],
 				'style-src': ['self'],
-				'style-src-elem': ['self', 'https://vercel.live/'],
+				'style-src-elem': ['self'],
 				'img-src': ['self', 'https://i.ytimg.com/vi/XXTPXozIHow/mqdefault.jpg'],
 				'frame-src': ['self', 'https://www.youtube.com/']
 			}
