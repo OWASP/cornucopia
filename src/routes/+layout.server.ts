@@ -1,7 +1,7 @@
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { Text } from '$lib/utils/text.js';
 
-export const prerender = false;
+export const prerender = true;
 
 export async function load(event) 
 {
