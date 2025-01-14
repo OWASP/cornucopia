@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import process from 'process';
 
 const __dirname = path.resolve();
 let buildDir = '';
@@ -10,7 +11,7 @@ if (fs.existsSync(path.join(__dirname, '.vercel/output'))) {
 } else if (fs.existsSync(path.join(__dirname, 'output'))) {
   buildDir = path.join(__dirname, 'output');
 } else {
-  return;
+  process.exit(0);
 }
 
 
