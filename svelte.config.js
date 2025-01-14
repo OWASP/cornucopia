@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { VERCEL_ENV } from '$env/static/private';
-
+import { config } from 'dotenv';
+config();
 let csp = {
 	mode: "auto",
 	directives: {
@@ -16,7 +16,7 @@ let csp = {
 	}
 };
 
-if (VERCEL_ENV == 'preview') {
+if (JSON.stringify(process.env.VERCEL_ENV) == 'preview') {
 	csp = {
 		mode: "auto",
 		directives: {
@@ -32,10 +32,7 @@ if (VERCEL_ENV == 'preview') {
 	};
 }
 
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = 
-{
+export default {
 	preprocess: vitePreprocess(),
 	kit: 
 	{
@@ -58,5 +55,3 @@ const config =
 		}
 	}
 };
-
-export default config;
