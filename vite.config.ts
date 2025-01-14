@@ -14,5 +14,5 @@ export default defineConfig({
 		sveltekit(),
 		VitePluginRestart(vitePluginRestartOptions),
 		viteStaticCopy(viteStaticCopyOptions)
-	],
+	]
 });
