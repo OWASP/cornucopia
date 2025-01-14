@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "vite dev",
 		"prebuild": "echo I run before the build script",
-		"productionbuild": "vite build && npx svelte-sitemap --out-dir .vercel/output/static --domain https://cornucopia.owasp.org",
-		"build": "vite build && npx svelte-sitemap --domain https://cornucopia.owasp.org",
+		"productionbuild": "vite build && node ./script/headers.js && npx svelte-sitemap --out-dir .vercel/output/static --domain https://cornucopia.owasp.org",
+		"build": "vite build && node ./script/headers.js && npx svelte-sitemap --domain https://cornucopia.owasp.org",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

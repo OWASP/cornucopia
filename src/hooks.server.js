@@ -18,7 +18,24 @@ export const handle = async ({ event, resolve }) => {
   
 
   // Add html `lang` attribute
-  return resolve({ ...event, locals: { lang: userLocale, translation: translations.get()[userLocale], fallbackTranslation: translations.get()[defaultLocale] } }, {
+  const response = await resolve({ ...event, locals: { lang: userLocale, translation: translations.get()[userLocale], fallbackTranslation: translations.get()[defaultLocale] } }, {
     transformPageChunk: ({ html }) => html.replace(/<html.*>/, `<html lang="${userLocale}">`),
   });
+
+  const securityHeaders = {
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+    'Cross-Origin-Embedder-Policy': 'require-corp',
+    'Cross-Origin-Opener-Policy': 'same-origin',
+    'X-XSS-Protection': '1; mode=block',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'same-origin',
+    'Permissions-Policy': 'accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()'
+  }
+
+  Object.entries(securityHeaders).forEach(
+    ([header, value]) => response.headers.set(header, value)
+  );
+
+  return response;
 };
