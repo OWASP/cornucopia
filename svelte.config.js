@@ -47,8 +47,13 @@ export default {
 				console.log(path);
 				// otherwise fail the build
 				throw new Error(message);
-			}
+			},
+			handleMissingId: ({ path, id, referrers, message }) => {
+			 if (id == 'card') return;
+			 throw new Error(message);
+			},
 		},
+		
 		csp: csp,
 		csrf: {
 			checkOrigin: true
