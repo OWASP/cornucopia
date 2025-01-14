@@ -2,7 +2,17 @@ import fs from 'fs';
 import path from 'path';
 
 const __dirname = path.resolve();
-const buildDir = path.join(__dirname, 'build');
+let buildDir = '';
+if (fs.existsSync(path.join(__dirname, '.vercel/output'))) {
+  buildDir = path.join(__dirname, '.vercel/output');
+} else if (fs.existsSync(path.join(__dirname, 'build'))) {
+  buildDir = path.join(__dirname, 'build');
+} else if (fs.existsSync(path.join(__dirname, 'output'))) {
+  buildDir = path.join(__dirname, 'output');
+} else {
+  return;
+}
+
 
 function main() {
   const headers = `/*
