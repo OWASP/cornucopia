@@ -2,363 +2,363 @@
 meta:
   edition: "eop"
   component: "cards"
-  language: "EN"
+  language: "RU"
   version: "1.0"
 suits:
 - 
   id: "SP"
-  name: "Spoofing"
+  name: "Спуфинг"
   cards:
     - 
       id: "SP2"
       value: "2"
-      desc: "An attacker could take over the port or socket that the server normally uses"
+      desc: "Злоумышленник может захватить порт или сокет, который обычно используется сервером"
     - 
       id: "SP3"
       value: "3"
-      desc: "An attacker could try one credential after another and there's nothing to slow them down (online or offline)"
+      desc: "Злоумышленник может пробовать пароли один за одним и ничто его не замедляет (онлайн или офлайн)"
     - 
       id: "SP4"
       value: "4"
-      desc: "An attacker can anonymously connect, because we expect authentication to be done at a higher level"
+      desc: "Злоумышленник может подключиться анонимно, потому что мы предполагаем, что аутентификация выполнена уровнем выше"
     - 
       id: "SP5"
       value: "5"
-      desc: "An attacker can confuse a client because there are too many ways to identify a server"
+      desc: "Злоумышленник может запутать клиента, потому что существует множество способов идентификации сервера"
     - 
       id: "SP6"
       value: "6"
-      desc: "An attacker can spoof a server because identifiers aren't stored on the client and checked for consistency on re-connection (that is, there's no key persistence)"
+      desc: "Злоумышленник может притвориться сервером, потому что идентификаторы не хранятся на клиенте и не перепроверяются при подключении (постоянные ключи не используются)"
     - 
       id: "SP7"
       value: "7"
-      desc: "An attacker can connect to a server or peer over a link that isn't authenticated (and encrypted)"
+      desc: "Злоумышленник может подключиться к серверу по каналу без аутентификации (и шифрования)"
     - 
       id: "SP8"      
       value: "8"
-      desc: "An attacker could steal credentials stored on the server and reuse them (for example, a key is stored in a world readable file)"
+      desc: "Злоумышленник может украсть реквизиты для входа с сервера и использовать их (напрмер, ключ хранится в файле, доступном всем на чтение)"
     - 
       id: "SP9"
       value: "9"
-      desc: "An attacker who gets a password can reuse it (Use stronger authenticators)"
+      desc: "Злоумышленник узнавший пароль получает доступ (используйте многофакторную аутентификацию)"
     - 
       id: "SPX"
-      value: "X"
-      desc: "An attacker can choose to use weaker or no authentication"
+      value: "10"
+      desc: "Злоумышленник может выбрать слабую аутентификацию или не использовать ее вовсе"
     - 
       id: "SPJ"
-      value: "J"
-      desc: "An attacker could steal credentials stored on the client and reuse them"
+      value: "В"
+      desc: "Злоумышленник может украсть реквизиты для входа с клиента и использовать их"
     - 
       id: "SPQ"
-      value: "Q"
-      desc: "An attacker could go after the way credentials are updated or recovered (account recovery doesn't require disclosing the old password)"
+      value: "Д"
+      desc: "Злоумышленник может обновить или восстановить пароль (процедура восстановления пароля не требует старый пароль для подтверждения)"
     - 
       id: "SPK"
-      value: "K"
-      desc: "Your system ships with a default admin password, and doesn't force a change"
+      value: "К"
+      desc: "Ваша система использует стандартный пароль админа и не требует его смены"
     - 
       id: "SPA"
       value: "A"
-      desc: "You've invented a new Spoofing attack"
-      misc: "Read more about this topic ..."
+      desc: "Вы придумали новую Спуфинг атаку"
+      misc: "Узнать больше по этой теме ..."
 -
   id: "TA"
-  name: "Tampering"
+  name: "Подделка"
   cards:
     - 
       id: "TA2"
       value: "2"
-      desc: "An attacker can take advantage of your custom key exchange or integrity control which you built instead of using standard crypto"
+      desc: "Злоумышленник может воспользоваться механизмом обмена ключами или контроля целостности, который вы создали самостоятельно вместо использования стандартного криптографического алгоритма"
     - 
       id: "TA3"
       value: "3"
-      desc: "An attacker can modify your build system and produce signed builds of your software"
+      desc: "Злоумышленник может изменить вашу систему сборки и создать подписанные сборки вашего программного обеспечения"
     - 
       id: "TA4"
       value: "4"
-      desc: "Your code makes access control decisions all over the place, rather than with a security kernel"
+      desc: "Код принятия решений по контролю доступа размазан по всему приложению, а не сосредоточен в ядре ​​безопасности"
     - 
       id: "TA5"
       value: "5"
-      desc: "An attacker can replay data without detection because your code doesn't provide timestamps or sequence numbers"
+      desc: "Злоумышленник может переотправить данные, и это не будет обнаружено, потому что ваш код не предоставляет временные метки или порядковые номера"
     - 
       id: "TA6"
       value: "6"
-      desc: "An attacker can write to a data store your code relies on"
+      desc: "Злоумышленник может писать в хранилище данных, на которое полагается ваш код"
     - 
       id: "TA7"
       value: "7"
-      desc: "An attacker can bypass permissions because you don't make names canonical before checking access permissions"
+      desc: "Злоумышленник может обойти ограничения, потому что вы не приводите имена к каноническому виду перед проверкой разрешений"
     - 
       id: "TA8"
       value: "8"
-      desc: "An attacker can manipulate data because there's no integrity protection for data on the network"
+      desc: "Злоумышленник может манипулировать данными, потому что нет никакой защиты целостности данных при передаче по сети"
     - 
       id: "TA9"
       value: "9"
-      desc: "An attacker can provide or control state information"
+      desc: "Злоумышленник может предоставить или контролировать информацию о состоянии"
     - 
       id: "TAX"
-      value: "X"
-      desc: "An attacker can alter information in a data store because it has weak/open permissions or includes a group which is equivalent to everyone (\"anyone with a Facebook account\")"
+      value: "10"
+      desc: "Злоумышленник может изменить информацию в хранилище данных, потому что оно имеет слабые/открытые разрешения или включает в себя группу, которая эквивалентна всем («любой с учетной записью Facebook»)"
     - 
       id: "TAJ"
-      value: "J"
-      desc: "An attacker can write to some resource because permissions are granted to the world or there are no ACLs"
+      value: "В"
+      desc: "Злоумышленник может написать в некий ресурс, потому что разрешения предоставляются всем или отсутствуют ACL."
     - 
       id: "TAQ"
-      value: "Q"
-      desc: "An attacker can change parameters over a trust boundary and after validation (for example, important parameters in a hidden field in HTML, or passing a pointer to critical memory)"
+      value: "Д"
+      desc: "Злоумышленник может изменить параметры за границей доверия и после проверки (например, важные параметры в скрытом поле в HTML или передача указателя на критическую память)"
     - 
       id: "TAK"
-      value: "K"
-      desc: "An attacker can load code inside your process via an extension point"
+      value: "К"
+      desc: "Злоумышленник может загрузить код внутрь вашего процесса через точку расширения"
     - 
       id: "TAA"
       value: "A"
-      desc: "You've invented a new Tampering attack"
-      misc: "Read more about this topic ..."
+      desc: "Вы придумали новую атаку вида Подделка"
+      misc: "Узнать больше по этой теме ..."
 -
   id: "RE"
-  name: "Repudiation"
+  name: "Отказ"
   cards:
     - 
       id: "RE2"
       value: "2"
-      desc: "An attacker can pass data through the log to attack a log reader, and there's no documentation of what sorts of validation are done"
+      desc: "Злоумышленник может передавать данные в журнал, чтобы атаковать читыющего этот журнал, и нет документации о том, какие проверки выполняются"
     - 
       id: "RE3"
       value: "3"
-      desc: "A low privilege attacker can read interesting security information in the logs"
+      desc: "Злоумышленник с низкими привилегиями может прочитать интересную информацию о безопасности в журналах"
     - 
       id: "RE4"
       value: "4"
-      desc: "An attacker can alter digital signatures because the digital signature system you're implementing is weak, or uses MACs where it should use a signature"
+      desc: "Злоумышленник может изменить цифровые подписи, потому что система цифровой подписи, которую вы реализуете, слабая, или использует MAC там, где необходима подпись"
     - 
       id: "RE5"
       value: "5"
-      desc: "An attacker can alter log messages on a network because they lack strong integrity controls"
+      desc: "Злоумышленник может изменить сообщения журнала, передаваемые по сети, потому что для них не задан механизм контроля целостности"
     - 
       id: "RE6"
       value: "6"
-      desc: "An attacker can create a log entry without a timestamp (or no log entry is timestamped)"
+      desc: "Злоумышленник может создать запись журнала без временной метки (или все записи журнала без меток)"
     - 
       id: "RE7"
       value: "7"
-      desc: "An attacker can make the logs wrap around and lose data"
+      desc: "Злоумышленник может заставить журналы заротироваться, что приведет к потере данных"
     - 
       id: "RE8"
       value: "8"
-      desc: "An attacker can make a log lose or confuse security information"
+      desc: "Злоумышленник может затереть записи в журнале или повредить информацию о безопасности"
     - 
       id: "RE9"
       value: "9"
-      desc: "An attacker can use a shared key to authenticate as different principals, confusing the information in the logs"
+      desc: "Злоумышленник может использовать общий ключ, чтобы представляться разными участниками, запутывая информацию в журналах"
     - 
       id: "REX"
-      value: "X"
-      desc: "An attacker can get arbitrary data into logs from unauthenticated (or weakly authenticated) outsiders without validation"
+      value: "10"
+      desc: "Злоумышленник может внедрить произвольные данные в журналы от неаутентифицированных (или слабо аутентифицированных) посторонних без проверки"
     - 
       id: "REJ"
-      value: "J"
-      desc: "An attacker can edit logs and there's no way to tell (perhaps because there's no heartbeat option for the logging system)"
+      value: "В"
+      desc: "Злоумышленник может редактировать журналы не оставляя следов (возможно, потому что нет опции проверки работоспособности системы ведения журналаов)"
     - 
       id: "REQ"
-      value: "Q"
-      desc: "An attacker can say \"I didn't do that,\" and you'd have no way to prove them wrong"
+      value: "Д"
+      desc: "Злоумышленник может сказать «я этого не делал», и у вас не будет возможности доказать, что он не прав"
     - 
       id: "REK"
-      value: "K"
-      desc: "The system has no logs"
+      value: "К"
+      desc: "Система не имеет журналов"
     - 
       id: "REA"
       value: "A"
-      desc: "You've invented a new Repudiation attack"
-      misc: "Read more about this topic ..."
+      desc: "Вы придумали новую атаку Отказа"
+      misc: "Узнать больше по этой теме ..."
 -
   id: "ID"
-  name: "Information Disclosure"
+  name: "Раскрытие Информации"
   cards:
     - 
       id: "ID2"
       value: "2"
-      desc: "An attacker can brute-force file encryption because there's no defense in place (example defense, password stretching)"
+      desc: "Злоумышленник может взломать шифрование файла перебором, потому что от этой атки нет защиты (пример защиты -  растягивание пароля)"
     - 
       id: "ID3"
       value: "3"
-      desc: "An attacker can see error messages with security sensitive content"
+      desc: "Злоумышленник может увидеть чувствительную информацию о безопасности в сообщениях об ошибках"
     - 
       id: "ID4"
       value: "4"
-      desc: "An attacker can read content because messages (say, an email or HTTP cookie) aren't encrypted even if the channel is encrypted"
+      desc: "Злоумышленник может читать контент, потому что сообщения (скажем, электронные письма или HTTP cookie) не зашифрованы, хоть канал передачи и зашифрован"
     - 
       id: "ID5"
       value: "5"
-      desc: "An attacker may be able to read a document or data because it's encrypted with a non-standard algorithm"
+      desc: "Злоумышленник может прочитать документ или данные, потому что они зашифрованы с помощью нестандартного алгоритма"
     - 
       id: "ID6"
       value: "6"
-      desc: "An attacker can read data because it's hidden or occluded (for undo or change tracking) and the user might forget that it's there"
+      desc: "Злоумышленник может читать данные, потому что они скрыты или спрятаны (для отмены или отслеживания изменений), и пользователь может забыть о них"
     - 
       id: "ID7"
       value: "7"
-      desc: "An attacker can act as a 'man in the middle' because you don't authenticate endpoints of a network connection"
+      desc: "Злоумышленник может действовать как «человек по середине», потому что вы не аутентифицируете конечные точки сетевого соединения"
     - 
       id: "ID8"
       value: "8"
-      desc: "An attacker can access information through a search indexer, logger, or other such mechanism"
+      desc: "Злоумышленник может получить доступ к информации с помощью индексера поиска, журна событий или другого подобного механизма"
     - 
       id: "ID9"
       value: "9"
-      desc: "An attacker can read sensitive information in a file with permissive permissions"
+      desc: "Злоумышленник может читать конфиденциальную информацию из файла с нестрогими разрешениями"
     - 
       id: "IDX"
-      value: "X"
-      desc: "An attacker can read information in files or databases with no access controls"
+      value: "10"
+      desc: "Злоумышленник может прочитать информацию в файлах или базах данных, для которых нет управления доступом"
     - 
       id: "IDJ"
-      value: "J"
-      desc: "An attacker can discover the fixed key being used to encrypt"
+      value: "В"
+      desc: "Злоумышленник может обнаружить фиксированный ключ, используемый для шифрования"
     - 
       id: "IDQ"
-      value: "Q"
-      desc: "An attacker can read the entire channel because the channel (say, HTTP or SMTP) isn't encrypted"
+      value: "Д"
+      desc: "Злоумышленник может читать данные в канале, потому что канал (скажем, HTTP или SMTP) не шифруется"
     - 
       id: "IDK"
-      value: "K"
-      desc: "An attacker can read network information because there's no cryptography used"
+      value: "К"
+      desc: "Злоумышленник может читать информацию в сети, потому что не используется криптография"
     - 
       id: "IDA"
       value: "A"
-      desc: "You've invented a new Information Disclosure attack"
-      misc: "Read more about this topic ..."
+      desc: "Вы изобрели новую атаку Раскрытия Информации"
+      misc: "Узнать больше по этой теме ..."
 -
   id: "DS"
-  name: "Denial of Service"
+  name: "Отказ в Обслуживании"
   cards:
     - 
       id: "DS2"
       value: "2"
-      desc: "An attacker can make your authentication system unusable or unavailable"
+      desc: "Злоумышленник может сделать вашу систему аутентификации неработоспособной или недоступной"
     - 
       id: "DS3"
       value: "3"
-      desc: "An attacker can drain our easily replacable battery "
-      misc: "(battery, temporary)"
+      desc: "Злоумышленник может израсходовать заряд легко заменяемой батареи "
+      misc: "(батарея, временная)"
     - 
       id: "DS4"
       value: "4"
-      desc: "An attacker can drain a battery that's hard to replace (sealed in a phone, an implanted medical device, or in a hard to reach location) "
-      misc: "(battery, persist)"
+      desc: "Злоумышленник может израсходовать заряд батареи, которую трудно заменить (в телефоне, имплантированную медицинское устройство или в другом труднодоступном месте) "
+      misc: "(батарея, постоянная)"
     - 
       id: "DS5"
       value: "5"
-      desc: "An attacker can spend our cloud budget "
-      misc: "(budget, persist)"
+      desc: "Злоумышленник может потратить наш облачный бюджет "
+      misc: "(бюджет, постоянный)"
     - 
       id: "DS6"
       value: "6"
-      desc: "An attacker can make a server unavailable or unusable without ever authenticating but the problem goes away when the attacker stops "
-      misc: "(server, anonymous, temporary)"
+      desc: "Злоумышленник может сделать сервер недоступным или непригодным для использования без необходимости аутентификации, но проблема исчезает, когда злоумышленник останавливает атаку "
+      misc: "(сервер, анонимный, временный)"
     - 
       id: "DS7"
       value: "7"
-      desc: "An attacker can make a client unavailable or unusable and the problem persists after the attacker goes away "
-      misc: "(client, auth, persist)"
+      desc: "Злоумышленник может сделать клиента недоступным или непригодным для использования, и проблема сохраняется после того, как злоумышленник уходит "
+      misc: "(клиент, аутентификация, постоянный)"
     - 
       id: "DS8"
       value: "8"
-      desc: "An attacker can make a server unavailable or unusable and the problem persists after the attacker goes away "
-      misc: "(server, auth, persist)"
+      desc: "Злоумышленник может сделать сервер недоступным или непригодным для использования, и проблема сохраняется после того, как злоумышленник уходит "
+      misc: "(сервер, аутентификация, постоянный)"
     - 
       id: "DS9"
       value: "9"
-      desc: "An attacker can make a client unavailable or unusable without ever authenticating and the problem persists after the attacker goes away "
-      misc: "(client, anon, persist)"
+      desc: "Злоумышленник может сделать клиента недоступным или непригодным для использования без необходимости аутентификации, и проблема исчезает, когда злоумышленник останавливает атаку "
+      misc: "(клиент, анонимный, временный)"
     - 
       id: "DSX"
-      value: "X"
-      desc: "An attacker can make a server unavailable or unusable without ever authenticating and the problem persists after the attacker goes away "
-      misc: "(server, anonymous, persistent)"
+      value: "10"
+      desc: "Злоумышленник может сделать сервер недоступным или непригодным для использования без необходимости аутентификации, и проблема исчезает, когда злоумышленник останавливает атаку "
+      misc: "(сервер, анонимный, постоянный)"
     - 
       id: "DSJ"
-      value: "J"
-      desc: "An attacker can cause the logging subsystem to stop working"
+      value: "В"
+      desc: "Злоумышленник может вывести из строя подсистему журналирования"
     - 
       id: "DSQ"
-      value: "Q"
-      desc: "An attacker can amplify a Denial of Service attack through this component with amplification on the order of 10 to 1"
+      value: "Д"
+      desc: "Злоумышленник может усилить атаку в отказе в обслуживании через этот компонент в отношении 10 к 1"
     - 
       id: "DSK"
-      value: "K"
-      desc: "An attacker can amplify a Denial of Service attack through this component with amplification on the order of 100 to 1"
+      value: "К"
+      desc: "Злоумышленник может усилить атаку в отказе в обслуживании через этот компонент в отношении 100 к 1"
     - 
       id: "DSA"
       value: "A"
-      desc: "You've invented a new Denial of Service attack"
-      misc: "Read more about this topic ..."
+      desc: "Вы изобрели новую атаку Отказ в Обслуживании"
+      misc: "Узнать больше по этой теме ..."
 -
   id: "EP"
-  name: "Elevation of Privilege"
+  name: "Поднятие Привилегий"
   cards:
     - 
       id: "EP2"
       value: "2"
-      desc: "An attacker has compromised a key technology supplier"
+      desc: "Злоумышленник скомпрометировал ключевого поставщика технологии"
     - 
       id: "EP3"
       value: "3"
-      desc: "An attacker can access the cloud service which manages your devices"
+      desc: "Злоумышленник может получить доступ к облачной службе, которая управляет вашими устройствами"
     - 
       id: "EP4"
       value: "4"
-      desc: "An attacker can escape from a container or other sandbox"
+      desc: "Злоумышленник может сбежать из контейнера или другой песочницы"
     - 
       id: "EP5"
       value: "5"
-      desc: "An attacker can force data through different validation paths which give different results"
+      desc: "Злоумышленник может протащить данные через разные пути проверки, которые дают разные результаты"
     - 
       id: "EP6"
       value: "6"
-      desc: "An attacker could take advantage of permissions you set, but don't use"
+      desc: "Злоумышленник может воспользоваться разрешениями, которые вы устанавливаете, но не используете"
     - 
       id: "EP7"
       value: "7"
-      desc: "An attacker can provide a pointer across a trust boundary, rather than data which can be validated"
+      desc: "Злоумышленник может предоставить за границу доверия указатель, а не сами данные, которые могут быть проверены"
     - 
       id: "EP8"
       value: "8"
-      desc: "An attacker can enter data that is checked while still under their control and used later on the other side of a trust boundary"
+      desc: "Злоумышленник может ввести данные, которые проверяются, нонаходятся под его контролем и используются позже на другой стороне границы доверия"
     - 
       id: "EP9"
       value: "9"
-      desc: "There's no reasonable way for a caller to figure out what validation of tainted data you perform before passing it to them"
+      desc: "Для вызывающего абонента нет разумного способа выяснить, какие проверки испорченных данных вы выполняете, прежде чем передавать их"
     - 
       id: "EPX"
-      value: "X"
-      desc: "There's no reasonable way for a caller to figure out what security assumptions you make"
+      value: "10"
+      desc: "Для звонящего нет разумного способа выяснить, какие предположения о безопасности вы используете"
     - 
       id: "EPJ"
-      value: "J"
-      desc: "An attacker can reflect input back to a user, like cross site scripting"
+      value: "В"
+      desc: "Злоумышленник может вернуть входные данные обратно для пользователю, по аналогии с Cross Site Scripting"
     - 
       id: "EPQ"
-      value: "Q"
-      desc: "You include user-generated content within your page, possibly including the content of random URLs"
+      value: "Д"
+      desc: "Вы включаете сгенерированный пользователем контент в вашу страницу, возможно, с содержимым случайных URL-адресов"
     - 
       id: "EPK"
-      value: "K"
-      desc: "An attacker can inject a command that the system will run at a higher privilege level"
+      value: "К"
+      desc: "Злоумышленник может ввести команду, которую система выполнит с высоким уровнем привилегий"
     - 
       id: "EPA"
       value: "A"
-      desc: "You've invented a new Elevation of Privilege attack"
-      misc: "Read more about this topic ..."
+      desc: "Вы изобрели новую высоту атаки Поднятие Привилегий"
+      misc: "Узнать больше по этой теме ..."
 paragraphs:
 -
   id: "Common"
-  name: "Common"
+  name: "Общее"
   sentences:
   -
     id: "Title"
@@ -368,7 +368,7 @@ paragraphs:
     text: "About"
   -
     id: "T00002"
-    text: "Threat Modeling"
+    text: "Моделирование Угроз"
   -
     id: "T00003"
     text: "Security Development"
@@ -377,28 +377,28 @@ paragraphs:
     text: "Lifecycle"
   -
     id: "T00010"
-    text: "The Elevation of Privilege game is designed to be the easiest way to start looking at your design from a security perspective. It’s one way to threat model, intended to be picked up and used by any development group. Because the game uses STRIDE threats, it gives you a framework for thinking, and specific actionable examples of those threats."
+    text: "Игра Elevation of Privilege спроектирована, чтобы стать простым способом начать рассмотривать архитектуру с точки зрения безопасности. Это один из способов моделирования угроз, который может использовать любая группа разработчиков. Поскольку игра использует STRIDE, она дает вам основу для пазмышлений и конкретные примеры угроз."
   -
     id: "T00020"
-    text: "STRIDE stands for:"
+    text: "STRIDE означает"
   -
     id: "T00030"
-    text: "Impersonating something or someone else."
+    text: "Выдавать себя за что-то или кого-то."
   -
     id: "T00040"
-    text: "Modifying data or code."
+    text: "Изменять данные или код."
   -
     id: "T00050"
-    text: "Claiming not to have performed an action."
+    text: "Утверждать, что не выполнял действие."
   -
     id: "T00060"
-    text: "Exposing information to someone not authorized to see it."
+    text: "Раскрывать информации кому-то, кто не уполномочен ее видеть."
   -
     id: "T00070"
-    text: "Denying or degrading service to users."
+    text: "Вызвать блокировку или ухудшение услуг пользователям."
   -
     id: "T00080"
-    text: "Gain capabilities without proper authorization."
+    text: "Получить возможности без надлежащего разрешения."
   -
     id: "T00090"
     text: "At"
@@ -410,34 +410,34 @@ paragraphs:
     text: "SDL."
   -
     id: "T00110"
-    text: "The Elevation of Privilege game is a fun and easy way to get started understanding the security of your systems by threat modeling. As you discover and correct design-level security problems, it’s worth thinking about the other ways security issues can creep into your code. Microsoft has a large collection of free resources available to help you get started with the Security Development Lifecycle (SDL)."
+    text: "Игра Elevation of Privilege - это веселый и простой способ начать понимать безопасности ваших систем путем моделирования угроз. Когда вы обнаружите и исправите проблемы безопасности на уровне дизайна, стоит подумать о других сценариях возникновения проблем безопасности в вашем коде. У Microsoft есть большая коллекция бесплатных ресурсов, которые помогут вам начать работу с жизненным циклом развития безопасности (Security Development Lifecycle, SDL)."
   -
     id: "T00120"
-    text: "To learn more about threat modeling and the Microsoft Security Development Lifecycle, visit our website at"
+    text: "Чтобы узнать больше о моделировании угроз и Microsoft Security Development Lifecycle, посетите наш веб -сайт по адресу"
   -
     id: "T00130"
-    text: "continued on back"
+    text: "продолжение на обратной стороне"
   -
     id: "T00140"
-    text: "cont."
+    text: "прод."
   -
     id: "T00150"
-    text: "Instructions"
+    text: "Инструкции"
   -
     id: "T00160"
-    text: "Draw a diagram of the system you want to threat model before you deal the cards."
+    text: "Нарисуйте диаграмму системы, которую вы хотите анализировать, прежде чем раздавать карты."
   -
     id: "T00170"
-    text: "Deal the deck to 3-6 players. Play starts with the 3of Tampering. Play clockwise, and each player in turn continues using the suit if they have a card in that suit. If the player doesn't have a card from that suit, the player can use another suit.  Each round is won by the highest card played in the suit that was led, unless an Elevation of Privilege (EoP) card is played. In that case the high value EoP card wins."
+    text: "Раздайте карты 3-6 игрокам. Игра начинается с 3 Подделки. Играйте по часовой стрелке, каждый игрок, в свою очередь, продолжает использовать масть, если у него есть таковая. Если у игрока нет карты этой масти, он может использовать любую другую.  Каждый раунд выигрывается самой высокой картой изначальной масти, если только не была разыграна карта Elevation of Privilege (EOP). В этом случае карта EoP самой высокой стоимости побеждает."
   -
     id: "T00180"
-    text: "To play a card, read the card, announce your threat and record it. If the player can't link the threat to the system, play proceeds."
+    text: "Чтобы сыграть карту, прочтите ее, объявите о своей угрозе и запишите ее. Если игрок не может связать угрозу с системой, игра продолжается."
   -
     id: "T00190"
-    text: "The winner of a hand selects the card (and suit) to lead the next hand. Take a few minutes between hands to think about threats."
+    text: "Победитель руки выбирает карту (и масть), чтобы начать следующую руку. Потратьте несколько минут между руками, чтобы подумать об угрозах."
   -
     id: "T00200"
-    text: "Points:"
+    text: "Очки:"
   -
     id: "T00210"
     text: "1 for a threat on your card, +1 for taking the trick"
@@ -524,19 +524,19 @@ paragraphs:
     text: "About Threat Modeling and SDL card"
   -
     id: "T00490"
-    text: "Information\n"
+    text: "Информация\n"
   -
     id: "T00495"
-    text: "Disclosure"
+    text: "Раскрытие"
   -
     id: "T00500"
-    text: "Elevation of"
+    text: "Поднятие"
   -
     id: "T00505"
-    text: "Privilege"
+    text: "Привилегий"
   -
     id: "T00510"
-    text: "Denial of"
+    text: "Отказ в"
   -
     id: "T00515"
-    text: "Service"
+    text: "Сервис"

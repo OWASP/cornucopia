@@ -2,7 +2,7 @@
 meta:
   edition: "against-appsec"
   component: "cards"
-  language: "EN"
+  language: "RU"
   version: "1.00"
 suits:
 -
@@ -620,7 +620,7 @@ paragraphs:
   sentences:
   -
     id: "NoCard"
-    text: "No Card"
+    text: "Нет Карты"
   -
     id: "Title"
     text: "Cards Against AppSec EN 1.00"
