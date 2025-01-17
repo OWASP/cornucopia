@@ -2,35 +2,35 @@
 meta:
   edition: "against-security"
   component: "cards"
-  language: "EN"
+  language: "RU"
   version: "1.00"
 suits:
 -
-  name: "Cards Against Security"
+  name: "Карты Против Безопасности"
   id: "CAS"
   cards:
   -
     id: "CAS2"
     value: "2"
-    desc: "You favorite card"
+    desc: "Ваша любимая карта"
   -
     id: "CAS3"
     value: "3"
-    desc: "Another card you like"
+    desc: "Другая любимая карта"
 -
   id: "WC"
-  name: "WILD CARD"
+  name: "ШАЛЬНАЯ КАРТА"
   cards:
   -
     id: "JOA"
     value: "A"
-    card: "Joker"
+    card: "Джокер"
     desc: "This is a wild card"
     misc: "Make something up!"
   -
     id: "JOB"
     value: "B"
-    card: "Joker"
+    card: "Джокер"
     desc: "This is a wild card"
     misc: "Make something up!"
 paragraphs:
@@ -41,7 +41,7 @@ paragraphs:
   -
     id: "NoCard"
     value: "NoCard"
-    text: "No Card"
+    text: "Нет Карты"
   -
     id: "Title"
     value: "Title"

@@ -2,7 +2,7 @@
 meta:
   edition: "mobileapp"
   component: "cards"
-  language: "EN"
+  language: "RU"
   version: "1.00"
 suits:
 -
@@ -47,15 +47,15 @@ suits:
     desc: "Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
   -
     id: "PCJ"
-    value: "J"
+    value: "В"
     desc: "Johan can modify or expose sensitive data by exploiting weaknesses in the SDK or third party libraries because updates to the app and platform are not enforced or do not patch known software vulnerabilities"
   -
     id: "PCQ"
-    value: "Q"
+    value: "Д"
     desc: "Xavier can inject scripts into the web view because it allows embedding content using deep linking without proper authorization and validation of the host, schema and path of the target as these can be changed by the user or because safe browsing is disabled"
   -
     id: "PCK"
-    value: "K"
+    value: "К"
     desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
   -
     id: "PCA"
@@ -104,15 +104,15 @@ suits:
     desc: "Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions"
   -
     id: "AAJ"
-    value: "J"
+    value: "В"
     desc: "Ade can bypass authentication because it is not enforced using a remote endpoint, or it is not based on a cryptographic primitive protected by keystore/keychain access control flags"
   -
     id: "AAQ"
-    value: "Q"
+    value: "Д"
     desc: "Riotaro can inject and run a command that the application will run at a higher privilege level without being authenticated or authorized to do so"
   -
     id: "AAK"
-    value: "K"
+    value: "К"
     desc: "Aatif can influence or alter authentication controls and can therefore bypass them"
   -
     id: "AAA"
@@ -161,15 +161,15 @@ suits:
     desc: "Maarten can compromise the communication between the app and the external services because the app does not verify TLS certificates and -chains, trust insecure sources, lack hostname verification or ignore TLS verification issues"
   -
     id: "NSJ"
-    value: "J"
+    value: "В"
     desc: "Nihel can compromise the communication as it may fall back to an insecure or unencrypted channel,  because encryption is optional, or because of client-server protocol or security provider weaknesses"
   -
     id: "NSQ"
-    value: "Q"
+    value: "Д"
     desc: "Ahmed can read and modify data in transit because the communication is transmitted over an unencrypted channel"
   -
     id: "NSK"
-    value: "K"
+    value: "К"
     desc: "Taher can intercept, extract or modify sensitive data at rest or in transit by influencing or altering methods for transferring or storing data at rest or in transit"
   -
     id: "NSA"
@@ -218,15 +218,15 @@ suits:
     desc: "Juan can bypass jailbreak and root detection and execute administrative functions to bypass integrity checks and access controls and trigger app functionality"
   -
     id: "RSJ"
-    value: "J"
+    value: "В"
     desc: "Pekka can compromise the integrity of the storage because the file integrity checks aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "RSQ"
-    value: "Q"
+    value: "Д"
     desc: "Titus can patch out critical functionality because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "RSK"
-    value: "K"
+    value: "К"
     desc: "Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them"
   -
     id: "RSA"
@@ -275,15 +275,15 @@ suits:
     desc: "Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "CRMJ"
-    value: "J"
+    value: "В"
     desc: "Hassan can extract or modify sensitive data because functions for storage and/or encryption are weak, deprecated or used incorrectly"
   -
     id: "CRMQ"
-    value: "Q"
+    value: "Д"
     desc: "Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented"
   -
     id: "CRMK"
-    value: "K"
+    value: "К"
     desc: "Tarik can influence or alter cryptographic operations and can therefore bypass them"
   -
     id: "CRMA"
@@ -332,20 +332,20 @@ suits:
     desc: "Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices"
   -
     id: "COMJ"
-    value: "J"
+    value: "В"
     desc: "Luis can influence or alter cryptographic methods to corrupt other users' data because the integrity of the encrypted data is not verified before being shared with external services"
   -
     id: "COMQ"
-    value: "Q"
+    value: "Д"
     desc: "Victor can patch the app and use it to distribute malicious code because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
   -
     id: "COMK"
-    value: "K"
+    value: "К"
     desc: "Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation"
   -
     id: "COMA"
     value: "A"
-    desc: "You have invented a new attack of any type"
+    desc: "Вы изобрели новую атаку любого типа"
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App User Privacy Protection” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
   id: "WC"
@@ -354,13 +354,13 @@ suits:
   -
     id: "JOAM"
     value: "A"
-    card: "Joker"
+    card: "Джокер"
     desc: "Starr can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates"
-    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+    misc: "Вы размышляли над тем, чтобы стать индивидуальным членом OWASP? Все инструменты, руководство и встречи бесплатны для всех, но индивидуальное членство помогает поддержать работу OWASP"
   -
     id: "JOBM"
     value: "B"
-    card: "Joker"
+    card: "Джокер"
     desc: "Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification"
     misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
 paragraphs:
@@ -370,7 +370,7 @@ paragraphs:
   sentences:
   -
     value: "NoCard"
-    text: "No Card"
+    text: "Нет Карты"
   -
     value: "Title"
     text: "Mobile App Edition v1.00-EN"
@@ -379,16 +379,16 @@ paragraphs:
     text: "OWASP® Cornucopia Mobile App Edition v1.00-EN"
   -
     value: "T00010"
-    text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+    text: "OWASP® Cornucopia - это способ, помогающий командам разработки программного обеспечения идентифицировать требования безопасности в Agile, обычных и формальных процессах разработки."
   -
     value: "T00020"
     text: "Authors"
   -
     value: "T00100"
-    text: "Acknowledgements"
+    text: "Благодарности"
   -
     value: "T00110"
-    text: "Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
+    text: "Адам Шостак и команда Microsoft SDL за «Elevation of Privilege Threat Modelling Game», опубликованной под лицензией Creative Commons Attribution, как вдохновения для Cornucopia и из которой были скопированы многие идеи, особенно механика игры."
   -
     value: "T00120"
     text: "Colin Watson for coming up with Cornucopia which OWASP Cornucopia Mobile App Edition is based on."
@@ -397,22 +397,22 @@ paragraphs:
     text: "Contributors, supporters, sponsors and volunteers to the OWASP MASVS/MASTG, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
     value: "T00145"
-    text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
+    text: "Текущие и прошлые участники и лидеры проекта OWASP® Cornucopia, особенно те, которые в последнее время обновляли перекрестные ссылки, создавали онлайн-версий и писали скрипты для динамической генерации выходных файлов Cornucopia."
   -
     value: "T00150"
-    text: "Blackfoot (UK) Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet, and Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online."
+    text: "ТBlackfoot (UK) Limited за создания и пожертвование готовых для печати файлов дизайна, Том Бреннан и OWASP® Foundation за подстрекательство к созданию коробки и листовки под брендом OWASP, а также Secure Deliver Ltd за разработку и пожертвование Copi, платформы для игры в Cornucopia и EOP онлайн."
   -
     value: "T00161"
-    text: "(continued on page 20)"
+    text: "(продолжение на стр. 20)"
   -
     value: "T00162"
-    text: "(continued from page 10)"
+    text: "(продолжение со стр. 10)"
   -
     value: "T00200"
-    text: "Introduction"
+    text: "Введение"
   -
     value: "T00210"
-    text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories."
+    text: "Идея, лежащая в основе Cornucopia, состоит в том, чтобы помочь командам разработчиков, особенно тем, кто использует Agile методологии, выявить требования безопасности приложений и разрабатывать пользовательские истории, основанные на безопасности."
   -
     value: "T00220"
     text: "Cornucopia Mobile App Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for developement team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
@@ -469,7 +469,7 @@ paragraphs:
     text: "Each card is also mapped to the 36 primary security stories in the SAFECode document to help teams create their own security-related stories for use in Agile processes."
   -
     value: "T00600"
-    text: "Game strategy"
+    text: "Стратегия игры"
   -
     value: "T00610"
     text: "Apart from the content differences, the game rules are virtually identical to those for the Corncuopia Website App Edition."
@@ -499,7 +499,7 @@ paragraphs:
     text: "OWASP® Mobile Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
   -
     value: "T01100"
-    text: "Instructions"
+    text: "Инструкции"
   -
     value: "T01110"
     text: "The text on each card describes an attack, but the attacker is given a name, which are unique across all the cards."
