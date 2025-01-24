@@ -1,0 +1,46 @@
+---
+    name: Build and Test
+    on:
+        # Triggers the workflow on push or pull request events but only for the main branch
+        pull_request:
+          branches:
+            - website
+    permissions:
+      contents: read
+    jobs:
+      hardening:
+        name: Hardening
+        runs-on: ubuntu-latest
+        steps:
+          # Make sure we have some code to test
+          - name: Harden runner
+            uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
+            with:
+              egress-policy: block
+              allowed-endpoints: >
+                api.github.com:443
+                github-cloud.githubusercontent.com:443
+                github.com:443
+                motd.ubuntu.com:443
+                keys.openpgp.org:443
+      build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+          - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
+            name: Install pnpm
+            with:
+              version: 10.0.0
+              run_install: false
+    
+          - name: Install Node.js
+            uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+            with:
+              node-version: 20.18.2
+              cache: 'pnpm'
+          - name: Build
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm install          # Install dependencies
+              npm run build        # Build production version
