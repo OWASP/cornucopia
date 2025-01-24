@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" nonce="DhcnhD3khTMePgXw">
     import Hero from "$lib/components/hero/hero.svelte";
     import Spacer from "$lib/components/spacer.svelte";
     import TextImage from "$lib/components/textImage.svelte";

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" nonce="DhcnhD3khTMePgXw">
   import type { PageData } from "./$types";
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" nonce="DhcnhD3khTMePgXw">
     import 'normalize.css';
     import { browser } from "$app/environment";
     import { page } from "$app/stores";
