@@ -25,9 +25,6 @@
                 keys.openpgp.org:443
       build:
         runs-on: ubuntu-latest
-        defaults:
-          run:
-            working-directory: cornucopia.owasp.org
         steps:
           - name: Checkout repository
             uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -42,7 +39,9 @@
             with:
               node-version: 20.18.2
               cache: 'pnpm'
+              cache-dependency-path: 'cornucopia.owasp.org/package-lock.json'
           - name: Build
+            working-directory: cornucopia.owasp.org
             run: |
               pnpm install          # Install dependencies
               npm run build        # Build production version
