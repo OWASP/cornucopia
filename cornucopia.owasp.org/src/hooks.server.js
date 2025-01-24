@@ -19,7 +19,7 @@ export const handle = async ({ event, resolve }) => {
 
   // Add html `lang` attribute
   const response = await resolve({ ...event, locals: { lang: userLocale, translation: translations.get()[userLocale], fallbackTranslation: translations.get()[defaultLocale] } }, {
-    transformPageChunk: ({ html }) => html.replace(/<html.*>/, `<html lang="${userLocale}">`),
+    transformPageChunk: ({ html }) => html.replace(/<html.*>/, `<html lang="${userLocale}">`).replaceAll(/<script.*>/, `<script nonce="DhcnhD3khTMePgXw">`),
   });
 
   const securityHeaders = {
