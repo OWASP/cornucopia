@@ -17,6 +17,7 @@ if (fs.existsSync(path.join(__dirname, '.vercel/output'))) {
 
 function main() {
   const headers = `/*
+  Access-Control-Allow-Origin: https://owaspcornucopia.org
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
   X-Robots-Tag: noindex
