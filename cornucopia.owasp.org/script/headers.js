@@ -31,6 +31,7 @@ function main() {
 
 /how-to-play
   Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()
+  ! Content-Security-Policy
   content-security-policy: base-uri 'self'; default-src 'none'; frame-src 'self' https://www.youtube.com/; connect-src 'self'; img-src 'self' https://i.ytimg.com/vi/XXTPXozIHow/mqdefault.jpg; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; script-src-elem 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'
 `;
 
