@@ -2,7 +2,7 @@
     name: Build and Test
     on:
         # Triggers the workflow on push or pull request events but only for the main branch
-        pull_request:
+        push:
           branches:
             - website
     permissions:
