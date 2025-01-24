@@ -18,7 +18,7 @@ let csp = {
 
 if (JSON.stringify(process.env.VERCEL_ENV) == 'preview') {
 	csp = {
-		mode: "auto",
+		mode: "hash",
 		directives: {
 			'default-src': ['none'],
 			'connect-src': ['self', 'https://vercel.live/', 'https://vercel.com', '*.pusher.com', '*.pusherapp.com'],
