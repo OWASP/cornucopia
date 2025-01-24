@@ -1,0 +1,14 @@
+{
+  "news": {
+    "title": "News",
+    "p1": "No blogposts have been published yet, come back soon!",
+    "a": "Read more",
+    "p2": "View",
+    "slug": {
+      "p1": "All authors"
+    },
+    "author": {
+      "h1": "Authors"
+    }
+  }
+}
