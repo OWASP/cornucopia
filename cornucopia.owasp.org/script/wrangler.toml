@@ -1,0 +1,40 @@
+# Top-level configuration
+name = "nonce-workerjs"
+main = "script/nonce-worker.js"
+compatibility_date = "2022-07-12"
+workers_dev = false
+
+[env.staging]
+routes = [
+    { pattern = "https://owaspcornucopia.org/webshop*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/swags*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/printing*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/about*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/source*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/cards*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/news*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/taxonomy*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/how-to-play*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/questionsandanswers*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/roadmap*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/#*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org/", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org", zone_name = "owaspcornucopia.org" }
+]
+[env.prod]
+routes = [
+    { pattern = "https://cornucopia.owasp.org/webshop*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/swags*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/printing*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/about*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/source*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/cards*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/news*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/taxonomy*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/how-to-play*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/questionsandanswers*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/roadmap*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/#*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org/", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://cornucopia.owasp.org", zone_name = "owaspcornucopia.org" }
+]
