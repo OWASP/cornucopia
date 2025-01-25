@@ -53,8 +53,7 @@ export default {
 			 throw new Error(message);
 			},
 		},
-		
-		csp: csp,
+		//csp: csp,
 		csrf: {
 			checkOrigin: true
 		}
