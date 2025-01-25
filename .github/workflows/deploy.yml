@@ -47,5 +47,5 @@
               workingDirectory: "cornucopia.owasp.org"
               apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
               accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-              wranglerVersion: "3.72.1"
+              wranglerVersion: "3.105.1"
               command: pages deploy build --config script/wrangler.toml --env staging --project-name=cornucopia
