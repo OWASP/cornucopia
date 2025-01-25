@@ -5,7 +5,7 @@ It is possible to play Cornucopia in many different ways. Here is one way explai
 <noscript>
     <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/watch?v=XXTPXozIHow" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
 </noscript>
-<iframe class="how-to-play" frameborder="0" title="Youtube: How to play OWASP Cornucopia" 
+<iframe credentialless anonymous class="how-to-play" frameborder="0" title="Youtube: How to play OWASP Cornucopia" 
 src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpolicy="no-referrer" allowfullscreen>
 </iframe>
 
