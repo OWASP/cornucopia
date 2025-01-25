@@ -27,12 +27,12 @@ function main() {
   Referrer-Policy: same-origin
   Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  content-security-policy: base-uri 'self'; default-src 'none'; connect-src 'self'; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'; img-src 'self'
+  content-security-policy: base-uri 'self'; default-src 'none'; connect-src 'self'; script-src 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'; img-src 'self'
 
 /how-to-play
   Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()
   ! Content-Security-Policy
-  content-security-policy: base-uri 'self'; default-src 'none'; frame-src 'self' https://www.youtube.com/; connect-src 'self'; img-src 'self' https://i.ytimg.com/vi/XXTPXozIHow/mqdefault.jpg; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'
+  content-security-policy: base-uri 'self'; default-src 'none'; frame-src 'self' https://www.youtube.com/; connect-src 'self'; img-src 'self' https://i.ytimg.com/vi/XXTPXozIHow/mqdefault.jpg; script-src 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'
 `;
 
   const headersFile = path.join(buildDir, '_headers');
