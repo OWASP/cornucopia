@@ -3,6 +3,8 @@ name: Run tests status check.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
+    paths-ignore:
+      - 'cornucopia.owasp.org/**'
     branches:
       - master
   # Allows you to run this workflow manually from the Actions tab
