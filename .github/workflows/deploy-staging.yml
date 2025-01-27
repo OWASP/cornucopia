@@ -1,10 +1,9 @@
 ---
-    name: Build and Test
-    on:
-        # Triggers the workflow on push or pull request events but only for the main branch
-        push:
-          paths:
-          - 'cornucopia.owasp.org/**'
+    name: Build and Deploy The Cornucopia Website on Staging
+    on: 
+      pull_request:
+        paths:
+        - 'cornucopia.owasp.org/**'
     permissions:
       contents: read
     jobs:
@@ -23,7 +22,7 @@
                 github.com:443
                 motd.ubuntu.com:443
                 keys.openpgp.org:443
-      build:
+      build-and-deploy-staging:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout repository
@@ -44,3 +43,19 @@
               pnpm install          # Install dependencies
               npm run build        # Build production version
               pnpm audit --prod
+          - name: Deploy the website
+            uses: cloudflare/wrangler-action@7a5f8bbdfeedcde38e6777a50fe685f89259d4ca
+            with:
+              workingDirectory: "cornucopia.owasp.org"
+              apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+              accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+              wranglerVersion: "3.105.1"
+              command: pages deploy build --project-name=cornucopia
+          - name: Deploy the worker routes
+            uses: cloudflare/wrangler-action@7a5f8bbdfeedcde38e6777a50fe685f89259d4ca
+            with:
+                workingDirectory: "cornucopia.owasp.org"
+                apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                wranglerVersion: "3.105.1"
+                command: deploy script/nonce-worker.js --config script/wrangler.toml --env staging
