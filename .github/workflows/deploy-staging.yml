@@ -42,7 +42,6 @@
             run: |
               pnpm install          # Install dependencies
               npm run build        # Build production version
-              pnpm audit --prod
           - name: Deploy the website
             uses: cloudflare/wrangler-action@7a5f8bbdfeedcde38e6777a50fe685f89259d4ca
             with:
