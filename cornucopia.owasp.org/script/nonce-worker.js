@@ -26,6 +26,8 @@ async function handleRequest(request) {
     redirect: "manual",
   });
 
+  if (originresponse.url.match(/[^\\]*\.(\w+)$/i)) return originresponse;
+
   const html = (await originresponse.text())
     .replace(/DhcnhD3khTMePgXw/gi, nonce)
     .replace(
