@@ -11,6 +11,6 @@ routes = [
 ]
 [env.production]
 routes = [
-    { pattern = "https://cornucopia.owasp.org/*", zone_name = "owaspcornucopia.org" },
-    { pattern = "https://cornucopia.owasp.org", zone_name = "owaspcornucopia.org" }
+    { pattern = "https://cornucopia.owasp.org/*", zone_name = "owasp.org" },
+    { pattern = "https://cornucopia.owasp.org", zone_name = "owasp.org" }
 ]
