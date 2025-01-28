@@ -681,7 +681,7 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
         suit_tags = ["VE", "AT", "SM", "AZ", "CR", "C", "WC"]
         suit_key = "cards"
     if key == "suits" and edition == "mobileapp":
-        suit_tags = ["PC", "AA", "NS", "RS", "CRM", "COM", "WC"]
+        suit_tags = ["PC", "AA", "NS", "RS", "CRM", "CM", "WC"]
         suit_key = "cards"
     elif key == "paragraphs":
         suit_tags = ["Common"]

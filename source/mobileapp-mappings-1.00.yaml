@@ -449,88 +449,88 @@ suits:
     capec: [ 54, 97, 116, 117, 220 ]
     safecode: [ 14, 21, 29 ]
 -
-  id: "COM"
+  id: "CM"
   name: "Cornucopia"
   cards:
   -
-    id: "COM2"
+    id: "CM2"
     value: "2"
     owasp_masvs: [ PRIVACY-3 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
     safecode: [ "-" ]
   -
-    id: "COM3"
+    id: "CM3"
     value: "3"
     owasp_masvs: [ PRIVACY-4 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
     safecode: [ "-" ]
   -
-    id: "COM4"
+    id: "CM4"
     value: "4"
     owasp_masvs: [ PRIVACY-1 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
     safecode: [ "-" ]
   -
-    id: "COM5"
+    id: "CM5"
     value: "5"
     owasp_masvs: [ PRIVACY-4 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
     safecode: [ "-" ]
   -
-    id: "COM6"
+    id: "CM6"
     value: "6"
     owasp_masvs: [ PRIVACY-2 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
     safecode: [ "-" ]
   -
-    id: "COM7"
+    id: "CM7"
     value: "7"
     owasp_masvs: [ CODE-4, PLATFORM-1 ]
     owasp_mastg: [ TEST-0025, TEST-0030, TEST-0072 ]
     capec: [ 499, 502 ]
     safecode: [ "-" ]
   -
-    id: "COM8"
+    id: "CM8"
     value: "8"
     owasp_masvs: [ STORAGE-2 ]
     owasp_mastg: [ "-" ]
     capec: [ 126 ]
     safecode: [ 16 ]
   -
-    id: "COM9"
+    id: "CM9"
     value: "9"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0043, TEST-0086 ]
     capec: [ 92, 100 ]
     safecode: [ 3, 6, 36 ]
   -
-    id: "COMX"
+    id: "CMX"
     value: "10"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0025, TEST-0072 ]
     capec: [ 137, 499, 502, 586 ]
     safecode: [ "-" ]
   -
-    id: "COMJ"
+    id: "CMJ"
     value: "J"
     owasp_masvs: [ CRYPTO-1, CODE-4 ]
     owasp_mastg: [ TEST-0002 ]
     capec: [ 23, 165, 442 ]
     safecode: [ "-" ]
   -
-    id: "COMQ"
+    id: "CMQ"
     value: "Q"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0050 ]
     capec: [ 167, 202, 554 ]
     safecode: [ "-" ]
   -
-    id: "COMK"
+    id: "CMK"
     value: "K"
     owasp_masvs: [ RESILIENCE-2 ]
     owasp_mastg: [ TEST-0047, TEST-0090 ]
