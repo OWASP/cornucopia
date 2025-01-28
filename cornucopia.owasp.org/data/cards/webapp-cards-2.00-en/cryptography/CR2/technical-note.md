@@ -1,0 +1,1 @@
+There is no substitute for a proper, approved, cryptographic function where data needs to be protected at rest or in transit. Obfuscation is rarely the correct choice. Use standard-approved functions and consider all cryptographic management requirements (e.g. key creation, distribution, protection, replacement, retirement).

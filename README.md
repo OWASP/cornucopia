@@ -51,6 +51,13 @@ For font licensing, please read font [README.md](./resources/templates/Fonts/REA
 
  Copyright (C) 2017, Oleksandr Kucherenko under [MIT](https://opensource.org/license/mit)
 
+
+### Cloudflare Worker Content Security Policy Nonce Generator (nonce-worker.js)
+
+MIT License Copyright (c) 2020 Move Your Digital, Inc.
+
+please read [README.md](./cornucopia.owasp.org/script/README.md)
+
 ## Building the Deck
 
 Merges to the main branch will generate new DOCX and IDML files to use to print off new version of the deck but if you wish to produce these locally yourself then use the ./scripts/convert.py scipt to do this:
