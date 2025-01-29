@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-black = "==24.10.0"
+black = "==25.1.0"
 coverage = "==7.6.10"
 flake8 = "==7.1.1"
 httpretty = "==1.1.4"
