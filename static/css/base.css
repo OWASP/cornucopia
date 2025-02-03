@@ -1,0 +1,39 @@
+/* This file contains all base styling and CSS variables */
+:root
+{
+    --accent: #61b6e6;
+    --background: #1f2937;
+    --background-color: rgb(246, 249, 252);
+    --white : #ededed;
+    --green: rgb(0, 209, 0);
+    --font-body : ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --transition: all ease .2s;
+}
+
+body
+{	
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color:#1f2937;
+    margin:0;
+    padding: 0;
+}
+
+html
+{
+    scroll-behavior:smooth;
+}
+
+a
+{
+    text-decoration: underline;	
+}
+
+a:hover
+{
+    text-decoration: none;
+}
+
+h1,h2,h3,h4
+{
+    font-weight: 400;
+}

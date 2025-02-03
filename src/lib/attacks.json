@@ -1,0 +1,554 @@
+{
+    "meta" : 
+    {
+        "version" : "0.1"
+    },
+    "list" : 
+    [
+        {
+        "name" : "SQL Injection",
+        "url" : "sql-injection",
+        "description" : "Ashley Madison data breach involved a website specializing in extramarital affairs. Hackers claimed to have used SQL injection to access the site's user database, revealing sensitive information about millions of users. ",
+        "links" : [
+            {
+                "name" : "Medium: Ashley Madison suffers from 30GB data breach",
+                "url" : "https://medium.com/five-guys-facts/sql-injection-98199af86c9"
+            },
+            {
+                "name" : "Wikipedia: Ashley Madison data breach",
+                "url" : "https://en.wikipedia.org/wiki/Ashley_Madison_data_breach"
+            },
+            {
+                "name" : "SQL Injection | OWASP",
+                "url" : "https://owasp.org/www-community/attacks/SQL_Injection"
+            }
+        ],
+        "cards" : ["DV2","DV3","DV4","DV5","DV6","DV7","DV8","DV9","DV10","DVJ","DVQ","DVK",
+                   "AC8","ACJ","ACQ",
+                   "AZ6","AZ7","AZ8","AZ10","AZQ"
+                ]
+        },
+        {
+            "name" : "Cross-Site Scripting (XSS)",
+            "url" : "cross-site-scripting",
+            "description" : "Yahoo suffered from an XSS attack that affected its advertising network. Attackers were able to inject malicious code into Yahoo ads, leading to the distribution of malware to users who viewed the compromised ads.",
+            "links" : [
+                {
+                    "name" : "Yahoo Mail Allegedly Hacked via XSS Exploit",
+                    "url" : "https://thenextweb.com/news/yahoo-mail-users-hit-by-widespread-hacking-xss-exploit-seemingly-to-blame"
+                },
+                {
+                    "name" : "Cross Site Scripting (XSS) | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/attacks/xss/"
+                },
+                {
+                    "name" : "What is cross-site scripting (XSS) and how to prevent it?",
+                    "url" : "https://portswigger.net/web-security/cross-site-scripting"
+                }
+           ],
+            "cards" : ["DV2","DV4","DV5","DV6","DV7","DV8","DV9","DV10","DVJ","DVQ","DVK",
+                       "AC8","ACJ",
+                       "AZ5","AZ6","AZ7","AZ8","AZ10","AZQ",
+                       "SM2","SM3","SM4","SM6","SM7","SM9","SMQ",
+                       "CR8",
+                       "CO9","CO10","COQ"
+                    ]
+        },
+        {
+            "name" : "Command Injection",
+            "url" : "command-injection",
+            "description" : "Shellshock was a series of security vulnerabilities discovered in the Bash shell, a widely used command-line interface in Unix-based operating systems. The vulnerability allowed attackers to execute arbitrary commands by injecting malicious code into environment variables. This had widespread implications, as many web servers, CGI scripts, and other systems were affected.",
+            "links" : [
+                {
+                    "name" : "Wikipedia: Shellshock (software bug)",
+                    "url" : "https://en.wikipedia.org/wiki/Shellshock_(software_bug)"
+                },
+                {
+                    "name" : "Command Injection | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/attacks/Command_Injection#:~:text=Command%20injection%20is%20an%20attack,.)%20to%20a%20system%20shell."
+                }        
+            ],
+            "cards" : ["DV3","DV4","DV7","DV9","DVJ","DVQ","DVK",
+                       "AZQ", 
+                       "CR7", 
+                       "CO2","CO6","CO10","COJ","COQ"
+                    ]
+        },
+        {
+            "name" : "Buffer Overflow",
+            "url" : "buffer-overflow",
+            "description" : "Equifax data breach in 2017 was caused by a vulnerability in the Apache Struts web application framework. The specific issue was a remote code execution vulnerability resulting from improper validation of user-supplied input. Attackers were able to exploit this vulnerability through a crafted request, triggering a buffer overflow and allowing them to execute arbitrary code on the affected servers.",
+            "links" : [
+                {
+                    "name" : "Equifax data breach",
+                    "url" : "https://www.csoonline.com/article/567833/equifax-data-breach-faq-what-happened-who-was-affected-what-was-the-impact.html"
+                },
+                {
+                    "name" : "Buffer Overflow | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/vulnerabilities/Buffer_Overflow#:~:text=A%20buffer%20overflow%20condition%20exists,to%20an%20array%20of%20integers."
+                }  
+            ],
+            "cards" : ["DV7",
+                       "CO2"
+                    ]
+        },
+        {
+            "name" : "Directory Traversal Attack",
+            "url" : "directory-traversal-attack",
+            "description" : "Directory Traversal Attack, also known as path traversal or ../ (dot dot slash) attack, is a security exploit where an attacker can access directories and files that are stored outside the web root folder. This type of attack occurs when a web application does not properly validate or sanitize user input, allowing an attacker to navigate the file system.",
+            "links" : [
+                {
+                    "name" : "Cisco Directory Traversal Attacks",
+                    "url" : "https://cybersecuritynews.com/cisco-duo-device-health-app-flaw/"
+                },
+                {
+                    "name" : "Path Traversal | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/attacks/Path_Traversal"
+                }  
+            ],
+            "cards" : ["DV2"]
+        },
+        {
+            "name" : "(Session) Data tampering",
+            "url" : "session-or-data-tampering",
+            "description" : "In 2017, Equifax, one of the largest credit reporting agencies, suffered a massive data breach that exposed sensitive personal information of 147 million people. The attackers exploited a vulnerability in the Apache Struts framework, which Equifax failed to patch in a timely manner. The unauthorized access was a result of the company's failure to adequately authorize and secure its systems.",
+            "links" : [
+                {
+                    "name" : "Equifax to pay up to $700m to settle data breach",
+                    "url" : "https://www.bbc.com/news/technology-49070596"
+                },
+                {
+                    "name" : "Wikipedia: 2017 Equifax data breach",
+                    "url" : "https://en.wikipedia.org/wiki/2017_Equifax_data_breach"
+                } ,
+                {
+                    "name" : "Data tampering",
+                    "url" : "https://www.tributech.io/blog/cybersecurity-threat-data-tampering"
+                } 
+            ],
+            "cards" : ["DV3","DV6","DV8","DV9","DV10","DVJ","DVQ",
+                       "AC8","ACJ",
+                       "AZ2","AZ3","AZ5","AZ8","AZK",
+                       "SM10","SMJ","SMK",
+                       "CR2","CR3","CR6",
+                       "CO5","CO7"
+                    ]
+        },
+        {
+            "name" : "File Upload Vulnerabilities",
+            "url" : "file-upload-vulnerabilities",
+            "description" : "A critical vulnerability in the Forminator WordPress Contact Form plugin, affecting over 400,000 websites, allows unauthenticated attackers to upload malicious files, potentially leading to remote code execution. The issue has been patched in version 1.25.0, and users are urged to update immediately for security. The vulnerability highlights the need to secure contact forms, and the Forminator changelog should provide information on the patch.",
+            "links" : [
+                {
+                    "name" : "WordPress Plugin Vulnerability Affects Up To 400,000+ Websites",
+                    "url" : "https://www.searchenginejournal.com/forminator-contact-form-vulnerability/495140/"
+                },
+                {
+                    "name" : "Unrestricted File Upload | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload"
+                } ,
+                {
+                    "name" : "File uploads | Web Security Academy",
+                    "url" : "https://portswigger.net/web-security/file-upload#:~:text=File%20upload%20vulnerabilities%20are%20when,type%2C%20contents%2C%20or%20size."
+                }  
+            ],
+            "cards" : ["DV4","DVJ",                        
+                       "AZQ"
+                    ]
+        },
+        {
+            "name" : "Privilege escalation",
+            "url" : "privilege-escalation",
+            "description" : "Privilege escalation refers to the process by which an attacker or an unauthorized user gains higher-level access or permissions than they are initially granted. This can occur in various systems, such as operating systems, databases, or applications.",
+            "links" : [
+                {
+                    "name" : "MikroTik RouterOS Flaw",
+                    "url" : "https://gbhackers.com/privilege-escalation-mikrotik-routeros/"
+                },
+                {
+                    "name" : "Privilege Escalation Attacks",
+                    "url" : "https://purplesec.us/privilege-escalation-attacks/#Examples"
+                }  
+            ],
+            "cards" : ["DV5","DV6","DV8","DV9",
+                       "AC8","ACJ",
+                       "AZ4","AZ5","AZ8","AZJ","AZQ","AZK",
+                       "SM8", 
+                       "CRJ",
+                       "CO4","CO10", "COQ"
+                    ]
+        },
+        {
+            "name" : "Password Guessing/Brute Force Attacks",
+            "url" : "password-guessing-or-brute-force-attacks",
+            "description" : "In 2014, a cyber attack on Sony Pictures involved brute force attacks on employee passwords. The attackers successfully gained access to sensitive data by repeatedly attempting to guess passwords.",
+            "links" : [
+                {
+                    "name" : "The 2014 Sony hacks, explained",
+                    "url" : "https://www.vox.com/2015/1/20/18089084/sony-hack-north-korea"
+                },
+                {
+                    "name" : "Wikipedia: 2014 Sony Pictures hack",
+                    "url" : "https://en.wikipedia.org/wiki/2014_Sony_Pictures_hack#cite_note-17"
+                },
+                {
+                    "name" : "Brute Force Attacks",
+                    "url" : "https://www.kaspersky.com/resource-center/definitions/brute-force-attack"
+                }
+            ],
+            "cards" : ["AC2","AC4","AC5","AC6","AC7","AC8","AC10","ACQ",
+                       "AZ3","AZ4","AZ6","AZ7","AZ10",
+                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SMQ","SMK",
+                       "CR2","CR5","CR7","CR10","CRJ","CRQ",
+                       "CO6","CO9","COK"
+                    ]
+        },
+        {
+            "name" : "Credential Stuffing",
+            "url" : "credential-stuffing",
+            "description" : "In 2018, credential stuffing attacks on popular platforms like Reddit and Spotify were reported. Attackers used usernames and passwords obtained from previous data breaches on other sites to gain unauthorized access to user accounts on these platforms.",
+            "links" : [
+                {
+                    "name" : "",
+                    "url" : "https://techmonitor.ai/technology/cybersecurity/reddit-account-locked"
+                },
+                {
+                    "name" : "",
+                    "url" : "https://www.hackread.com/spotify-accounts-leaked-credential-stuffing-attack/#:~:text=In%20November%202020%2C%20over%20380%20million%20Spotify%20user,prompt%20all%20the%20users%20to%20change%20their%20passwords."
+                },
+                {
+                    "name" : "Credential stuffing | OWASP Foundation ",
+                    "url" : "https://owasp.org/www-community/attacks/Credential_stuffing"
+                }
+                ],
+            "cards" : ["AC2","AC5","AC9","AC10","ACQ",
+                       "AZ10"
+                    ]
+        },
+        {
+            "name" : "Weak Authentication Protocols",
+            "url" : "weak-authentication-protocols",
+            "description" : "Heartbleed, a serious vulnerability discovered in the OpenSSL cryptographic software library in 2014, allowed attackers to access sensitive information, including usernames and passwords, from websites using the affected versions of OpenSSL.",
+            "links" : [
+                {
+                    "name" : "The Heartbleed Bug, explained",
+                    "url" : "https://www.vox.com/2014/6/19/18076318/heartbleed"
+                },
+                {
+                    "name" : "What is Weak Authentication?",
+                    "url" : "https://affinity-it-security.com/what-is-weak-authentication/"
+                }
+            ],
+            "cards" : ["AC7","AC9","ACK",
+                       "AZ6",
+                       "CR4","CR7",
+                       "CO3","CO4"
+                    ]
+        },
+        {
+            "name" : "Account Takeover (ATO) Attacks",
+            "url" : "account-takeover-attacks",
+            "description" : "LinkedIn experienced a security breach in 2012 where attackers used compromised passwords to gain unauthorized access to user accounts. This incident highlighted the importance of strong, unique passwords for online accounts.",
+            "links" : [
+                {
+                    "name" : "LinkedIn: 2012 data breach - CBS News",
+                    "url" : "https://www.cbsnews.com/news/linkedin-2012-data-breach-hack-much-worse-than-we-thought-passwords-emails/"
+                },
+                {
+                    "name" : "Wikipedia: 2012 LinkedIn hack",
+                    "url" : "https://en.wikipedia.org/wiki/2012_LinkedIn_hack"
+                },
+                {
+                    "name" : "Account Takeover (ATO) Attacks",
+                    "url" : "https://www.vectra.ai/topics/account-takeover#:~:text=What%20is%20an%20Account%20Takeover,delivery%20or%20generate%20fraudulent%20transactions."
+                } 
+            ],
+            "cards" : ["AC6","AC7","AC8"]
+        },
+        {
+            "name" : "Insider Threats",
+            "url" : "insider-threats",
+            "description" : "In 2019 Microsoft employees made misconfiguration errors on a new version of Azure security rules. They were lax about monitoring user records and activity with sensitive assets. In addition, they didn’t limit access to a customer support database with a strong password or two-factor authentication. ",
+            "links" : [
+                {
+                    "name" : "Microsoft confirms it was breached by hacker group Lapsus$",
+                    "url" : "https://edition.cnn.com/2022/03/23/tech/microsoft-lapsus/index.html"
+                },
+                {
+                    "name" : "Microsoft discloses security breach of customer support database",
+                    "url" : "https://www.zdnet.com/article/microsoft-discloses-security-breach-of-customer-support-database/"
+                },
+                {
+                    "name" : "What is an Insider Threat?",
+                    "url" : "https://www.fortinet.com/resources/cyberglossary/insider-threats"
+                }
+            ],
+            "cards" : ["AC6","AC9","AC10","ACQ","ACK",
+                       "AZ2","AZ4","AZ7","AZ10","AZJ","AZK",
+                       "CR4","CR5","CR8","CRJ","CRQ",
+                       "CO3","CO5","CO8","CO10","COQ","COK"
+                    ]
+        },
+        {
+            "name" : "Social engineering attack",
+            "url" : "social-engineering-attack",
+            "description" : "Caesar's Entertainment and MGM, two major casino operators, fell victim to cyber attacks, with Caesar's experiencing a social engineering attack on an IT vendor and MGM facing a ransomware attack. The group Scattered Spider is linked to both incidents. A spokesperson for Scattered Spider claimed responsibility for the MGM attack, citing LinkedIn information to manipulate an IT vendor employee. The rise in sophisticated social engineering attacks emphasizes the need for increased cybersecurity training and protocols for both businesses and individuals to mitigate risks.",
+            "links" : [
+                {
+                    "name" : "Social Engineering Eyed in High-Profile Casino Attacks",
+                    "url" : "https://www.finextra.com/blogposting/24927/social-engineering-eyed-in-high-profile-casino-attacks"
+                },
+                {
+                    "name" : "Social Engineering",
+                    "url" : "https://www.tripwire.com/state-of-security/5-social-engineering-attacks-to-watch-out-for#:~:text=Commonly%2C%20social%20engineering%20involves%20email,or%20open%20a%20malicious%20file.%22"
+                },
+                {
+                    "name" : "What is Social Engineering?",
+                    "url" : "https://www.imperva.com/learn/application-security/social-engineering-attack/"
+                }
+            ],
+            "cards" : ["AC2","AC4","AC5","AC10","ACJ",
+                       "AZ2","AZ3","AZ4",
+                       "CR6","CR10","CRQ",
+                       "CO4","CO5","CO7","CO8","CO9","COJ","COQ"
+                    ]
+        },
+        {
+            "name" : "Local Cache exploitation",
+            "url" : "local-cache-exploitation",
+            "description" : "Meltdown is a security vulnerability in processors that use speculative execution. Exploiting it enables attackers to force the processor to load sensitive kernel memory into the cache, potentially exposing confidential data like passwords. Primarily affecting Intel processors, the flaw was disclosed in 2018, prompting rapid deployment of patches for operating systems and microcode updates from processor manufacturers to mitigate the risk.",
+            "links" : [
+                {
+                    "name" : "Meltdown and Spectre Intel Processor Vulnerabilities",
+                    "url" : "https://www.trendmicro.com/vinfo/fr/security/news/vulnerabilities-and-exploits/meltdown-and-spectre-intel-processor-vulnerabilities-what-you-need-to-know"
+                },
+                {
+                    "name" : "What is Meltdown/Spectre?",
+                    "url" : "https://www.cloudflare.com/learning/security/threats/meltdown-spectre/"
+                }
+            ],
+            "cards" : ["AC3"]
+        },
+        {
+            "name" : "Replay attacks",
+            "url" : "replay-attacks",
+            "description" : "Honda vehicles are reportedly vulnerable to the Rolling PWN attack, allowing remote access to open doors or start the engine. All ten tested Honda models were found to be affected. The attack involves replaying valid codes, exploiting a flaw in the rolling code implementation. Despite informing Honda weeks ago, there has been no response, as the company lacks a dedicated security department. This is the second such vulnerability found in Honda cars this year, emphasizing the need for improved security measures.",
+            "links" : [
+                {
+                    "name" : "Replay Attack",
+                    "url" : "https://hackaday.com/tag/replay-attack/"
+                },
+                {
+                    "name" : "What is a Replay Attack and How to Prevent it?",
+                    "url" : "https://www.kaspersky.com/resource-center/definitions/replay-attack"
+                }
+            ],
+            "cards" : ["AC6","ACJ",
+                       "SM5","SMJ"
+                    ]
+        },
+        {
+            "name" : "Password Policy Exploitation",
+            "url" : "password-policy-exploitation",
+            "description" : "LinkedIn experienced a security breach in 2012 where attackers used compromised passwords to gain unauthorized access to user accounts. This incident highlighted the importance of strong, unique passwords for online accounts.",
+            "links" : [
+                {
+                    "name" : "LinkedIn: 2012 data breach much worse than we thought",
+                    "url" : "https://www.cbsnews.com/news/linkedin-2012-data-breach-hack-much-worse-than-we-thought-passwords-emails/"
+                },
+                {
+                    "name" : "Wikipedia: 2012 LinkedIn hack",
+                    "url" : "https://en.wikipedia.org/wiki/2012_LinkedIn_hack"
+                },
+                {
+                    "name" : "IT admins Set Admin Portal Passwords to ‘admin’",
+                    "url" : "https://cybersecuritynews.com/almost-40000-entries-found/"
+                }
+            ],
+            "cards" : ["AC7"]
+        },
+        {
+            "name" : "Session Fixation",
+            "url" : "session-fixation",
+            "description" : "In 2011, security researcher Rishi Narang discovered a session fixation vulnerability on LinkedIn. The vulnerability allowed an attacker to set a user's session ID to a known value, potentially leading to session hijacking. The issue stemmed from LinkedIn's handling of session identifiers during the login process. The vulnerability was patched.",
+            "links" : [
+                {
+                    "name" : "Security expert finds vulnerability in LinkedIn",
+                    "url" : "https://techmonitor.ai/technology/software/security-expert-finds-vulnerability-in-linkedin-230511"
+                },
+                {
+                    "name" : "Session fixation | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/attacks/Session_fixation"
+                }
+            ],
+            "cards" : ["AZ7",
+                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SM10","SMQ","SMK"
+                    ]
+        },
+        {
+            "name" : "Session Hijacking (Man-in-the-Middle)",
+            "url" : "session-hijacking-or-man-in-the-middle",
+            "description" : "Lenovo faced backlash in 2015 when it was revealed that some of its laptops were pre-installed with adware called Superfish. Superfish used a self-signed root certificate to intercept and inspect encrypted connections, potentially leaving users vulnerable to man-in-the-middle attacks. The presence of this adware not only raised serious security concerns but also led to a loss of trust in Lenovo's products.",
+            "links" : [
+                {
+                    "name" : "How Lenovo's Superfish 'Malware' Works",
+                    "url" : "https://www.forbes.com/sites/thomasbrewster/2015/02/19/superfish-need-to-know/"
+                },
+                {
+                    "name" : "Session Hijacking",
+                    "url" : "https://usa.kaspersky.com/resource-center/definitions/what-is-session-hijacking"
+                }
+            ],
+            "cards" : ["DV10",
+                       "AC2","AC4","AC9","AC10","ACJ","ACQ",
+                       "AZ3","AZ4","AZ5","AZ6","AZ7","AZ8","AZ10","AZJ","AZQ","AZK",
+                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SM10","SMJ","SMQ","SMK",
+                       "CR3","CR4","CR5","CR6","CR7","CR8","CR10","CRJ",
+                       "CO5","CO9","CO10","COJ"
+                    ]
+        },
+        {
+            "name" : "Session Timeout Issues",
+            "url" : "session-timeout-issues",
+            "description" : "In a session timeout exploit, an attacker manipulates a captured session token, extending its expiration to maintain access beyond the intended timeout period. This unethical act involves altering the token's properties to bypass automatic logouts due to user inactivity. Note that this example is for educational purposes, and secure web applications implement measures to prevent such exploits.",
+            "links" : [
+                {
+                    "name" : "Insufficient Session Timeout",
+                    "url" : "https://cqr.company/web-vulnerabilities/insufficient-session-timeout/"
+                },
+                {
+                    "name" : "security theater - What attacks are prevented using Session Timeout or Expiry?",
+                    "url" : "https://security.stackexchange.com/questions/224199/what-attacks-are-prevented-using-session-timeout-or-expiry"
+                }
+            ],
+            "cards" : ["SM2","SM3"]
+        },
+        {
+            "name" : "Insecure Session Storage",
+            "url" : "insecure-session-storage",
+            "description" : "In a fictional scenario, an attacker named Eve exploits an online banking application's insecure use of ‘sessionStorage’ to conduct a session hijacking attack. Discovering the vulnerability, Eve injects a script that captures users' session tokens and sends them to her server. When a user like Alice logs in, Eve intercepts the session token, allowing her unauthorized access to the victim's account. In this case, Eve impersonates Alice, initiates unauthorized transactions, and causes financial harm.",
+            "links" : [
+                {
+                    "name" : "Insecure Data Storage | OWASP Foundation",
+                    "url" : "https://owasp.org/www-project-mobile-top-10/2023-risks/m9-insecure-data-storage"
+                },
+                {
+                    "name" : "IDOR - Inside the Session Storage",
+                    "url" : "https://shahjerry33.medium.com/idor-inside-the-session-storage-88af485fc899"
+                }
+            ],
+            "cards" : ["AC3"]
+        },
+        {
+            "name" : "Error message exploitation",
+            "url" : "error-message-exploitation",
+            "description" : "Microsoft disclosed a cyberattack by Chinese hackers on US government emails, attributing it to a compromised engineer's account and a key leaked in a crash dump. The company admitted flaws in its systems, including a race condition issue and failure to detect sensitive information leaks. The compromised key led to unauthorized access and email theft from approximately 25 organizations.",
+            "links" : [
+                {
+                    "name" : "How a Chinese Espionage Group Exploited Microsoft's Mistakes",
+                    "url" : "https://www.securityweek.com/crash-dump-error-how-a-chinese-espionage-group-exploited-microsofts-errors/"
+                },
+                {
+                    "name" : "Improper Error Handling | OWASP Foundation",
+                    "url" : "https://owasp.org/www-community/Improper_Error_Handling"
+                },
+                {
+                    "name" : "How to Exploit “improper error handling” in Web Applications",
+                    "url" : "https://www.blackhatethicalhacking.com/articles/how-to-exploit-improper-error-handling-in-web-applications/"
+                }
+            ],
+            "cards" : ["SM9","SMQ",
+                       "CO3","CO6"
+                    ]   
+        },
+        {
+            "name" : "DOS attack",
+            "url" : "dos-attack",
+            "description" : "'a website focused on the Royal Family was briefly taken down in a cyber attack claimed by the Killnet threat group. Known for targeting government sites, the group cited no specific motive but previously expressed dissatisfaction with UK support for Ukraine. The Royal Family has affirmed its backing for Ukraine, with King Charles III emphasizing solidarity. The outage lasted an hour, and the group posted proof on Telegram with the caption \"attack on pedophiles,\" though the connection to the Royal Family's support for Ukraine remains unclear.",
+            "links" : [
+                {
+                    "name" : "DoS attack on royal family",
+                    "url" : "https://www.cyberdaily.au/industry/9630-dos-attack-on-royal-family-claimed-by-pro-russian-hackers"
+                },
+                {
+                    "name" : "What is a denial-of-service (DoS) attack?",
+                    "url" : "https://www.cloudflare.com/learning/ddos/glossary/denial-of-service/"
+                }
+            ],
+            "cards" : ["AZ9"]
+        },
+        {
+            "name" : "Cryptographic Algorithm Attacks",
+            "url" : "cryptographic-algorithm-attacks",
+            "description" : "Cryptographic algorithms are designed to secure information and protect against various types of attacks. However, no algorithm is completely immune to attacks, and vulnerabilities can be exploited under certain conditions.",
+            "links" : [
+                {
+                    "name" : "Cryptography Attacks",
+                    "url" : "https://www.ccn.com/education/cryptography-attacks-6-types-and-prevention-measures/#:~:text=Cryptography%20attacks%20come%20in%20various,to%20fortify%20defenses%20against%20attacks."
+                }
+            ],
+            "cards" : ["CR9"]
+        },
+        {
+            "name" : "Hash Collision Attacks",
+            "url" : "hash-collision-attacks",
+            "description" : "A hash collision occurs when two different inputs produce the same hash value. Hash collision attacks aim to find such inputs, and they can have security implications in various applications that rely on hash functions. One common example involves cryptographic hash functions.",
+            "links" : [
+                {
+                    "name" : "Wikipedia: Collision attack",
+                    "url" : "https://en.wikipedia.org/wiki/Collision_attack"
+                },
+                {
+                    "name" : "What is a Collision Attack?",
+                    "url" : "https://www.ccn.com/education/cryptography-attacks-6-types-and-prevention-measures/#:~:text=Cryptography%20attacks%20come%20in%20various,to%20fortify%20defenses%20against%20attacks."
+                }
+            ],
+            "cards" : ["CR9"]
+        },
+        {
+            "name" : "Encryption Bypass",
+            "url" : "encryption-bypass",
+            "description" : "security specialist Zara confronts a challenge in bypassing a company's robust encryption system. Recognizing a weakness in the encryption protocol, she exploits a flaw in the implementation's key exchange mechanism. Through careful analysis and reverse engineering, Zara identifies a subtle vulnerability that allows her to intercept and manipulate the encryption keys, ultimately gaining unauthorized access to the protected data.",
+            "links" : [
+                {
+                    "name" : "Can encryption prevent you from getting hacked?",
+                    "url" : "https://tresorit.com/blog/can-encryption-prevent-you-from-getting-hacked/#:~:text=While%20it's%20still%20crucial%20to,and%20technical%20knowledge%20to%20achieve."
+                },
+                {
+                    "name" : "Can hackers decrypt encrypted data?",
+                    "url" : "https://www.vintageisthenewold.com/game-pedia/can-hackers-decrypt-encrypted-data#:~:text=Hackers%20can%20break%20encryption%20to,been%20decrypted%20by%20the%20recipient."
+                }
+            ],
+            "cards" : ["CR9"]
+        },
+        {
+            "name" : "Weakening Encryption",
+            "url" : "weakening-encryption",
+            "description" : "infiltrates a popular messaging platform's development environment. Through social engineering and exploiting zero-day vulnerabilities, they introduce subtle flaws into the encryption protocols. This compromise allows them to covertly intercept sensitive communications without detection. The breach remains undetected for an extended period, posing a significant challenge to the security community as they scramble to identify and patch the concealed weaknesses, aiming to restore the platform's integrity and protect against further unauthorized access.",
+            "links" : [
+                {
+                    "name" : "What is the Drown Attack?",
+                    "url" : "https://www.globalscape.com/blog/what-drown-attack"
+                },
+                {
+                    "name" : "Wikipedia: DROWN attack",
+                    "url" : "https://en.wikipedia.org/wiki/DROWN_attack"
+                }
+            ],
+            "cards" : ["CRK"]
+        },
+        {
+            "name" : "Manipulation of Hash Functions",
+            "url" : "manipulation-of-hash-functions",
+            "description" : "Over years, a significant number of cryptographic hash functions have been broken and proven to be vulnerable to security attacks. The main target of these attacks is the collision resistance of hash functions. For instance, in August 2004 collisions were found in several then-popular hash functions, including MD5",
+            "links" : [
+                {
+                    "name" : "Cryptographic Hash Functions",
+                    "url" : "https://kwahome.medium.com/cryptographic-hash-functions-2cc49723ea06"
+                }
+            ],
+            "cards" : ["CRK"]
+        }
+    ]
+
+}
