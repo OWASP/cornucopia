@@ -4,6 +4,7 @@
     import { CardController } from "../../domain/card/cardController";
     export let cardData;
     export let card : Card = {} as Card;
+    export let mapping : any;
 
     function getSuitColor(suit : string)
     {
@@ -13,21 +14,36 @@
 
 <div class="card-render">
     <div class="left" style="background-color:{getSuitColor(card.suit)}">
-        <h1 class="property-card-suit">{card?.suitName}</h1>
+        <h1 class="property-card-suit">{card?.suitName || 'EXPLANATION'}</h1>
     </div>
     <div class="right">
-        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.cardName ?? "?"}</h1>
+        
+        {#if mapping}
+        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{mapping?.value ?? ""}</h1>
         <p class="property-card-description">{(new CardController(cardData)).getCardDescription(card.suit,card.card) ?? "?"}</p>
         <p class="mapping-title">OWASP SCP</p>
-        <p class="mapping-value">47, 52</p>
+        <p class="mapping-value">{mapping.owasp_scp || '-'}</p>
         <p class="mapping-title">OWASP ASVS</p>
-        <p class="mapping-value">2.5.2, 7.1.2, 7.1.4, 7.2.1, 8.2.1, 8.2.2, 8.2.3, 8.3.6</p>
+        <p class="mapping-value">{mapping.owasp_asvs || '-'}</p>
         <p class="mapping-title">OWASP AppSensor</p>
-        <p class="mapping-value">UT1</p>
+        <p class="mapping-value">{mapping.owasp_appsensor || '-'}</p>
         <p class="mapping-title">CAPEC</p>
-        <p class="mapping-value">-</p>        
+        <p class="mapping-value">{mapping.owasp_capec || '-'}</p>        
         <p class="mapping-title">SAFECODE</p>
-        <p class="mapping-value">28</p>
+        <p class="mapping-value">{mapping.safecode || '-'}</p>
+        {:else if card.card == 'CORNUCOPIA' }
+        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card.cardName}</h1>
+        <p class="property-card-description">{card.summary}</p>
+        {:else if card.suitName == 'WILD CARD' }
+        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">Joker</h1>
+        <p class="property-card-description">{(new CardController(cardData)).getCardDescription(card.suit,card.card)}</p>
+        {:else if mapping?.value == 'A' }
+        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">A</h1>
+        <p class="property-card-description">{(new CardController(cardData)).getCardDescription(card.suit,card.card)}</p>
+        {:else}
+        <h1 style="color:{getSuitColor(card.suit)}" class="property-card-number">{card?.cardName ?? "?"}</h1>
+        <p class="property-card-description">{(new CardController(cardData)).getCardDescription(card.suit,card.card) ?? "?"}</p>
+        {/if}
     </div>
 </div>
 

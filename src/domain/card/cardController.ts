@@ -16,7 +16,7 @@ export class CardController {
 
     public getCardBySuitAndName(suit : string, card : string) : Card
     {
-        let base : string = './data/cards/webapp-cards-1.22/';
+        let base : string = './data/cards/webapp-cards-2.00/';
         let path : string = base + suit + '/' + (card.length == 1 ? card : card) + '/technical-note.md'// '/explanation.md';
         let file = fs.readFileSync(path, 'utf8');
         let parsed = fm(file);
@@ -28,7 +28,7 @@ export class CardController {
         cardObject.card = card;
         cardObject.cardName = CardController.getCardNameById(card);
         cardObject.url = '/' + suit + '/' + card;
-        cardObject.githubUrl = 'data/cards/webapp-cards-1.22/' + suit + '/' + card;
+        cardObject.githubUrl = 'data/cards/webapp-cards-2.00/' + suit + '/' + card;
 
         return cardObject;
     }
@@ -103,7 +103,7 @@ export class CardController {
 
     public getCardsBySuit(suit : string) : Card[]
     {
-        let base : string = './data/cards/webapp-cards-1.22/';
+        let base : string = './data/cards/webapp-cards-2.00/';
         let path : string = base + suit;
         let directories = FileSystemHelper.getDirectories(path);
         let cards = new Array<Card>();
@@ -136,7 +136,7 @@ export class CardController {
         }
         cardObject.suitName = (new SuitController(this.data)).getSuitNameByCardId(cardObject.card);
         cardObject.url = '/' + suit + '/' + cardObject.card;
-        cardObject.githubUrl = 'data/cards/webapp-cards-1.22/' + suit + '/' + cardObject.card;
+        cardObject.githubUrl = 'data/cards/webapp-cards-2.00/' + suit + '/' + cardObject.card;
 
         return cardObject;
     }

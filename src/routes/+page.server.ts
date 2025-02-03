@@ -7,5 +7,6 @@ export function load()
     return {
         suits : (new SuitController((new DeckService(request)).getCards('webapp', 'en'))).getSuits(),
         cardData: (new DeckService(request)).getCards('webapp', 'en'),
+        mappingData: (new DeckService(request)).getCardMapping('webapp')
     }
 }

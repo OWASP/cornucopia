@@ -23,20 +23,15 @@ export class MappingController {
 
     }
 
-    public getCardMappings(suit : string, card : string, addition : number = 0) : Mapping | undefined
+    public getCardMappings(card : string, addition : number = 0) : Mapping | undefined
     {
-        suit = MappingController.parseSuit(suit);
-
         for(let i = 0 ; i < this.mapping.suits.length ; i++)
         {
-            if(this.mapping.suits[i].name.toLowerCase() == suit.toLowerCase())
+            for(let j = 0 ; j < this.mapping.suits[i].cards.length ; j++)
             {
-                for(let j = 0 ; j < this.mapping.suits[i].cards.length ; j++)
+                if(this.mapping.suits[i].cards[j].id == card)
                 {
-                    if(this.mapping.suits[i].cards[j].id == card)
-                    {
-                        return this.mapping.suits[i].cards[j] as Mapping;
-                    }
+                    return this.mapping.suits[i].cards[j] as Mapping;
                 }
             }
         }

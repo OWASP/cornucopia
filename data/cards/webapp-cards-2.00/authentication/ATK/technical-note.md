@@ -1,0 +1,3 @@
+In general, all authentication routines should be on the server-side using robust, tested and protected routines.
+
+NB: Unlike other cards in this suit, this AT K relates to an attacker being able to change the executing code. This may be due to inadequate source code control, deployment controls or server protection, or compromise of delegated authentication, but could also be modification of client-side code. See AT J for missing authentication, AT Q for inconsistent authentication, and other cards in this suit for individual authentication issues (e.g. missing notification, inadequate password protection, enumeration, weak account management, weak use of temporary passwords, bypass, missing re-authetication, etc).

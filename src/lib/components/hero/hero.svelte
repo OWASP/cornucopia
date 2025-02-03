@@ -6,6 +6,7 @@
 
     export let suits : Suit[];
     export let cardData : any;
+    export let mapping : any;
 </script>
 
 <div class="hero">
@@ -13,7 +14,7 @@
         <HeroText></HeroText>
     </div>
     <div class="card-container">
-        <Deck {cardData} {suits}></Deck>
+        <Deck {cardData} {suits} {mapping}></Deck>
     </div>
     <Chevron href="/#top"></Chevron>
 </div>

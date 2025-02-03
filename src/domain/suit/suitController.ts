@@ -12,7 +12,7 @@ export class SuitController {
 
     public getSuits() : Suit[]
     {
-        let path : string = './data/cards/webapp-cards-1.22/';
+        let path : string = './data/cards/webapp-cards-2.00/';
         let directories = FileSystemHelper.getDirectories(path);
 
         let suits = new Array<Suit>();

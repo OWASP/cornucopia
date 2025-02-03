@@ -17,7 +17,6 @@
   export let cards: Card[];
   export let ASVSRoutes: Route[];
   const controller: MappingController = new MappingController(mappingData);
-
   function linkASVS(input: string) {
     input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
     let routes: Route[] = ASVSRoutes;
@@ -43,16 +42,16 @@
     return "https://capec.mitre.org/data/definitions/" + input + ".html";
   }
   let title: string = "";
-  let mappings: Mapping | undefined = controller.getCardMappings(card.suit, card.card);
+  let mappings: Mapping | undefined = controller.getCardMappings(card.card);
   let attacks: Attack[] = GetCardAttacks(card.card);
 
   $: {
     title =
-      card.suitName +
+      card.suitName || 'Explanation' +
       " (" +
       card.card +
       ") ";
-    mappings = controller.getCardMappings(card.suit, card.card);
+    mappings = controller.getCardMappings(card.card);
     attacks = GetCardAttacks(card.card);
   }
 </script>
@@ -60,7 +59,7 @@
 <div class="container">
   <h1 class="title">{title}</h1>
   <Summary {card}></Summary>
-  <CardBrowser {card} {cards} cardData={cardData}></CardBrowser>
+  <CardBrowser {card} {cards} cardData={cardData} mappingData={mappings}></CardBrowser>
   <a class="link" href="/how-to-play">How to play?</a>
   <p>{(new CardController(cardData)).getCardDescription(card.suit, String(card.card).toUpperCase())}</p>
   {#if mappings}

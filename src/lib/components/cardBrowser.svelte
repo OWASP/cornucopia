@@ -7,6 +7,7 @@
     export let cardData;
     export let card : Card;
     export let cards : Card[];
+    export let mappingData : any;
   
     function checkKey(event : any) 
     {
@@ -62,7 +63,7 @@
         <a href={getPrevious(card)} class="arrow" title="View previous card">{"<"}</a>
     </div>
     <div class="center">
-        <CardPreview card={card} cardData={cardData}></CardPreview>
+        <CardPreview card={card} cardData={cardData} mapping={mappingData}></CardPreview>
     </div>
     <div class="right" data-umami-event="card-browser-right-button">
         <a href={getNext(card)} class="arrow" title="View next card">{">"}</a>

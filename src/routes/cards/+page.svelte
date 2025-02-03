@@ -2,11 +2,13 @@
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
     import type { Card } from "../../domain/card/card.js";
-    //import data from "./data";
+    import { MappingController } from "../../domain/mapping/mappingController.js";
+
     export let data;
     let card : string;
     let suit : string;
     let currentCard : Card = data.cards[0];
+    let mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.card);
 
     let map : Map<string,boolean> = new Map();
     for(let i = 0 ; i < data.suits.length ; i++)
@@ -26,6 +28,7 @@
         suit = suitParam;
         card = cardParam;
         currentCard = data.cards.find(card => card.suit == suitParam && card.card == cardParam) ?? {} as Card
+        mapping = (new MappingController(data.mappingData)).getCardMappings(currentCard.card);
     }
 </script>
 
@@ -65,7 +68,7 @@
         {/each}
     </div>
     <div class="preview-container">
-            <CardPreview card={currentCard} cardData={data.cardData}></CardPreview>
+            <CardPreview card={currentCard} cardData={data.cardData} {mapping}></CardPreview>
     </div>
 </div>
 
