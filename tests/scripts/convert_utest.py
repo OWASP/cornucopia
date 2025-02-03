@@ -339,7 +339,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
         edition = "webapp"
         want_template_doc = "None"
         want_error_log_messages = [
-            (f"ERROR:root:Source file not found: {template_docx_filename}. " "Please ensure file exists and try again.")
+            f"ERROR:root:Source file not found: {template_docx_filename}. " "Please ensure file exists and try again."
         ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
@@ -487,10 +487,7 @@ class TestGetMetaData(unittest.TestCase):
         del input_data["meta"]
         want_data: Dict[str, str] = {}
         want_logging_error_message = [
-            (
-                "ERROR:root:Could not find meta tag in the language data. "
-                "Please ensure the language file is available."
-            )
+            "ERROR:root:Could not find meta tag in the language data. " "Please ensure the language file is available."
         ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
@@ -847,7 +844,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         ext = "ext"
         want_files: typing.List[str] = []
         want_logging_error_message = [
-            ("ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"])))
+            "ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"]))
         ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
