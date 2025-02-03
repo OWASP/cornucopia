@@ -1,7 +1,7 @@
 # Top-level configuration
 name = "nonce-workerjs"
 main = "script/nonce-worker.js"
-compatibility_date = "2022-07-12"
+compatibility_date = "2025-01-24"
 workers_dev = false
 
 [env.staging]
@@ -21,7 +21,7 @@ routes = [
     { pattern = "https://owaspcornucopia.org/", zone_name = "owaspcornucopia.org" },
     { pattern = "https://owaspcornucopia.org", zone_name = "owaspcornucopia.org" }
 ]
-[env.prod]
+[env.production]
 routes = [
     { pattern = "https://cornucopia.owasp.org/webshop*", zone_name = "owaspcornucopia.org" },
     { pattern = "https://cornucopia.owasp.org/swags*", zone_name = "owaspcornucopia.org" },

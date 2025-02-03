@@ -43,5 +43,16 @@
 		"sync-request": "^6.1.0",
 		"vite-plugin-restart": "^0.4.2",
 		"vite-plugin-static-copy": "^1.0.6"
+	},
+	"pnpm": {
+		"auditConfig": {
+			"ignoreCves": [],
+			"ignoreGhsas": [
+				"GHSA-vg6x-rcgg-rjx6"
+			]
+		},
+		"overrides": {
+			"cookie@<0.7.0": ">=0.7.0"
+		}
 	}
 }

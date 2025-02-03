@@ -1,11 +1,14 @@
 ---
-    name: Build and Deploy
-    on:
+    name: Build and Deploy The Cornucopia Website on Production
+    on: 
       push:
-        branches: [website]
+        branches: [master]
+        paths:
+        - 'cornucopia.owasp.org/**'
     permissions:
       contents: read
     jobs:
+      if: false
       hardening:
         name: Hardening
         runs-on: ubuntu-latest
@@ -21,7 +24,7 @@
                 github.com:443
                 motd.ubuntu.com:443
                 keys.openpgp.org:443
-      build-and-deploy:
+      build-and-deploy-production:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout repository
@@ -41,11 +44,19 @@
             run: |
               pnpm install          # Install dependencies
               npm run build        # Build production version
-          - name: Deploy
+          - name: Deploy the website
             uses: cloudflare/wrangler-action@7a5f8bbdfeedcde38e6777a50fe685f89259d4ca
             with:
               workingDirectory: "cornucopia.owasp.org"
               apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
               accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
               wranglerVersion: "3.105.1"
-              command: pages deploy build --config script/wrangler.toml --env staging --project-name=cornucopia
+              command: pages deploy build --project-name=cornucopia
+          - name: Deploy the worker routes
+            uses: cloudflare/wrangler-action@7a5f8bbdfeedcde38e6777a50fe685f89259d4ca
+            with:
+                workingDirectory: "cornucopia.owasp.org"
+                apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                wranglerVersion: "3.105.1"
+                command: deploy script/nonce-worker.js --config script/wrangler.toml --env production
