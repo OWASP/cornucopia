@@ -12,8 +12,6 @@
         mappingStyle = ' ' + style;
     }
 
-    
-
 </script>
         <p class="mapping-title{mappingStyle}">OWASP ASVS</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_masvs || '-'}</p>
