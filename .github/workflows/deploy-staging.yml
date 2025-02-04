@@ -43,7 +43,7 @@
             working-directory: cornucopia.owasp.org
             run: |
               pnpm install          # Install dependencies
-              npm run build        # Build production version
+              npm run build-stage   # Build staging version
           - name: Deploy the website
             uses: cloudflare/wrangler-action@7a5f8bbdfeedcde38e6777a50fe685f89259d4ca
             with:
