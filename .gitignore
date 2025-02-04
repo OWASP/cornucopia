@@ -14,3 +14,15 @@ version.properties
 .hypothesis/**
 output/**
 tests/test_files/output/**
+node_modules
+cornucopia.owasp.org/build
+cornucopia.owasp.org/.svelte-kit
+cornucopia.owasp.org/package
+cornucopia.owasp.org/vite.config.js.timestamp-*
+cornucopia.owasp.org/vite.config.ts.timestamp-*
+cornucopia.owasp.org/.vscode/settings.json
+cornucopia.owasp.org/cache/*.cache
+cornucopia.owasp.org/.vs
+cornucopia.owasp.org/.vs
+cornucopia.owasp.org/package-lock.json
+cornucopia.owasp.org/coverage/**

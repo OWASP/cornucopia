@@ -1,0 +1,16 @@
+# Top-level configuration
+name = "nonce-workerjs"
+main = "script/nonce-worker.js"
+compatibility_date = "2025-01-24"
+workers_dev = false
+
+[env.staging]
+routes = [
+    { pattern = "https://owaspcornucopia.org/*", zone_name = "owaspcornucopia.org" },
+    { pattern = "https://owaspcornucopia.org", zone_name = "owaspcornucopia.org" }
+]
+[env.production]
+routes = [
+    { pattern = "https://cornucopia.owasp.org/*", zone_name = "owasp.org" },
+    { pattern = "https://cornucopia.owasp.org", zone_name = "owasp.org" }
+]

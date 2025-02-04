@@ -1,0 +1,58 @@
+{
+	"name": "cornucopia-website",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"prebuild": "echo I run before the build script",
+		"productionbuild": "vite build && node ./script/headers.js && npx svelte-sitemap --out-dir .vercel/output/static --domain https://cornucopia.owasp.org",
+		"build": "svelte-kit sync && vite build && node ./script/headers.js && npx svelte-sitemap --domain https://cornucopia.owasp.org",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test": "vitest",
+		"coverage": "vitest --coverage"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^3.3.1",
+		"@sveltejs/adapter-cloudflare": "^5.0.1",
+		"@sveltejs/kit": "^2.15.2",
+		"@sveltejs/vite-plugin-svelte": "^4.0.4",
+		"@types/node": "^20.17.12",
+		"@vitest/coverage-v8": "^2.1.8",
+		"dotenv": "^16.4.7",
+		"svelte": "^5.16.5",
+		"svelte-check": "^4.1.1",
+		"svelte-sitemap": "^2.7.0",
+		"then-request": "^6.0.2",
+		"tslib": "^2.8.1",
+		"typescript": "^5.7.2",
+		"vite": "^5.4.11",
+		"vitest": "^2.1.8"
+	},
+	"type": "module",
+	"dependencies": {
+		"@sveltejs/adapter-static": "^3.0.8",
+		"@types/js-yaml": "^4.0.9",
+		"front-matter": "^4.0.2",
+		"js-yaml": "^4.1.0",
+		"normalize.css": "^8.0.1",
+		"svelte-i18n": "^4.0.1",
+		"svelte-markdown": "^0.4.1",
+		"sveltekit-i18n": "^2.4.2",
+		"sync-request": "^6.1.0",
+		"vite-plugin-restart": "^0.4.2",
+		"vite-plugin-static-copy": "^1.0.6"
+	},
+	"pnpm": {
+		"auditConfig": {
+			"ignoreCves": [],
+			"ignoreGhsas": [
+				"GHSA-vg6x-rcgg-rjx6"
+			]
+		},
+		"overrides": {
+			"cookie@<0.7.0": ">=0.7.0"
+		}
+	}
+}

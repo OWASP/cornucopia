@@ -1,0 +1,1 @@
+Use only trusted system objects, e.g. server side session objects, for making access authorization decisions. Restrict access to user and data attributes and policy information used by access controls. Server side implementation and presentation layer representations of access control rules must match.
