@@ -35,12 +35,7 @@
 {/if}
 
 
-<p>{$t('news.p2')} <a href="/author">{$t('news.slug.p1')}</a></p>
-{#each data.authors as author}
-    <p>
-        <a href="/author/{author.name}">{author.name}</a>
-    </p>
-{/each}
+<p>{$t('news.p2')}: <a href="/author">{$t('news.slug.p1')}</a></p>
 </div>
 <style>
     a
