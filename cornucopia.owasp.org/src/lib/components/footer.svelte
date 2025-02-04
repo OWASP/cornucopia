@@ -64,7 +64,7 @@
         <span> {new Date().getFullYear()} </span>
         <a class="link-with-external-indicator" href="/rss.xml"><img class="rss" height="15px" src="/images/rss.svg" alt="rss" /></a>
         <span> | </span>
-        <a class="link-with-external-indicator" href="https://cornucopia.dotnetlab.eu/sitemap.xml">Sitemap</a>
+        <a class="link-with-external-indicator" href="https://owaspcornucopia/sitemap.xml">Sitemap</a>
     </p>
 </footer>
 
