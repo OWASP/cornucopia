@@ -1,7 +1,7 @@
 ---
     name: Build and Deploy The Cornucopia Website on Staging
     on: 
-      pull_request:
+      pull_request_target:
         paths:
         - 'cornucopia.owasp.org/**'
     permissions:
@@ -27,6 +27,8 @@
         steps:
           - name: Checkout repository
             uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+            with:
+              ref: ${{ github.event.pull_request.head.sha }}
           - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
             name: Install pnpm
             with:
