@@ -8,8 +8,7 @@ If you have other questions, suggestions or ideas please feel free to discuss th
 
 ## Introduction
 
-The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories.
-Although the idea had been waiting for enough time to progress it, the final motivation came when [SAFECode](http://www.safecode.org/) published its [Practical Security Stories and Security Tasks for Agile Development Environments](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf '[inline] SAFE Code publication as pdf') in July 2012.
+The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories. Although the concept had been waiting for enough time to progress it, the final motivation came when [SAFECode](http://www.safecode.org/) published its [Practical Security Stories and Security Tasks for Agile Development Environments](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf '[inline] SAFE Code publication as pdf') in July 2012.
 
 Cornucopia was created and first used for developer training in August 2012.
 
@@ -67,6 +66,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Johanna Curiel 
 - Todd Dahl
 - Ruggero DallAglio
+- Andrey Danin
 - Luis Enriquez
 - André Ferreira
 - Ken Ferris 
@@ -74,8 +74,8 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Norbert Gaspar 
 - Spyros Gasteratos 
 - Sebastien Gioria 
-- Xavier Godard 
-- Tobias Gondrom 
+- Xavier Godard
+- Tobias Gondrom
 - Timo Goosen
 - Anthony Harrison 
 - Martin Haslinger 
@@ -85,7 +85,9 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Marios Kourtesis
 - Franck Lacosta
 - Mathias Lemaire
-- Jim Manico 
+- Antonis Manaras
+- Jim Manico
+- Jef Meijvis
 - Mark Miller 
 - Cam Morris 
 - Grant Ongers 
@@ -93,7 +95,8 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Ravishankar Sahadevan 
 - Tao Sauvage 
 - Max Alejandro Gómez Sánchez Vergaray 
-- Johan Sydseter 
+- Johan Sydseter
+- Ive Verstappen
 - Wagner Voltz 
 - Stephen de Vries 
 - Colin Watson
@@ -104,32 +107,32 @@ Please let us know if we have missed anyone from this list.
 
 Adam Shostack and the Microsoft SDL Team for the Elevation of Privilege (EoP) Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied.
 
-Keith Turpin and contributors to the “OWASP Secure Coding Practices 
-
-Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards.
+Keith Turpin and contributors to the “OWASP Secure Coding Practices Quick Reference Guide”, originally donated to OWASP by Boeing Inc, which is used as the primary source of security requirements information to formulate the content of the Website App Edition cards.
 
 Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor, Web Framework Security Matrix and MASVS/MASTG projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided.
 
 Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the original card back pattern.
 
-Blackfoot UK Limited for creating and donating print-ready design files, the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online.
+Travelex UK Limited for donating printable files.
 
-OWASP's hard-working employees.
+Blackfoot UK Limited for creating and donating print-ready design files, and for distributing printed card decks free of charge.
 
-Current and past OWASP Cornucopia project contributors.
+OWASP Foundation for instigating the creation of an OWASP-branded case and foldable leaflet, and for distributing printed card decks free of charge.
+
+OWASP's past and current employees.
+
+Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online.
+
+dotNET Lab for creating and donating website code and content, and for donating printed card decks.
 
 Colin Watson as author of OWASP Cornucopia Ecommerce Edition, the original card deck.
 
 ## License
 
-Created by Colin Watson.
+OWASP Cornucopia Website App Edition (formerly caccled Ecommerce Edition) was created by Colin Watson. OWASP Cornucopia Mobile App Edition was based on this and created by Johan Sydseter and Xavier Godard. 
 
-OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]').
+OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
 
-OWASP Cornucopia is free to use.
-
-It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
-
-OWASP and the OWASP logo are trademarks of the OWASP Foundation
+OWASP and the OWASP logo are trademarks of the OWASP Foundation.
 
 <img alt="Logo of the OWASP foundation" src="/images/owasp-logo.png" width="500vw"/>
