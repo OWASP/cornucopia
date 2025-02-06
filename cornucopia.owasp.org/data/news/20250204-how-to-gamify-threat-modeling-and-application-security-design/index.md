@@ -24,7 +24,7 @@ And if you want to know more about this, you should check out the Threat Modelin
 
 ![The Threat Modeling Manifesto](agile-app-sec.png)
 
-## Adam Shostack’s 4 Question Framework for Threat Modeling
+## Adam Shostack’s 4 Question Frame for Threat Modeling
 
 And to make is as simple and agile as possible so that everyone can partake and understand the process, we narrow it down to finding the answers to 4 simple questions:
 
