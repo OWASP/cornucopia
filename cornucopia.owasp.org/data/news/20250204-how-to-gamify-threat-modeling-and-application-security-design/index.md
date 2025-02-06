@@ -57,35 +57,35 @@ It can be a new mobile app, a new mobile api or something much smaller. Doesn’
 ## Get Everyone to Commit
 
 What matters is that you make everyone commit to what you will be doing.
-Don’t just do an online session. Buy your plane ticket, book your hotel and spend 2 days with the mobile development team. 
-Not all development teams like to draw models but ask the team to create a simple model so remember to point out that the model doesn’t need to be perfect it just needs to show the basic processes, storage and data flows that they will be implementing.
+Don’t just do an online session. Buy your plane ticket, book your hotel, and spend 2 days with the mobile development team. 
+Not all development teams like to draw models, but ask the team to create a simple model. So remember to point out that the model doesn’t need to be perfect. It just needs to show the basic processes, storage, and data flows that they will be implementing.
 It shouldn’t take more than 1 hour to complete it, but make sure they understand that it needs to be there before the threat modeling session.
 
-Also buy some funny prices. If you go to the [OWASP Cornucopia website](/swags), you will find a lot of suggestions for prices, but it’s better if you use your imagination, come up with some ideas yourself and make some fun out of it. 
+Also, buy some funny prices. If you go to the [OWASP Cornucopia website](/swags), you will find a lot of suggestions for prices, but it’s better if you use your imagination, come up with some ideas yourself, and make some fun out of it. 
 
 ![Cornucopia beer glass [medium]](cornucopia_beer_glass.png)
 
-But before all of that, get the cards, either go to [copi.owasp.org](https://copi.owasp.org "[external]") to play the online version, or download the high-res design files from [cornucopia.owasp.org](/printing) and get them printed. You can also buy the physical decks at [one of the webshops](/webshop) where you can buy the decks as well. And the profits from the sales, goes to the OWASP® Foundation.
+But before all of that, get the cards, either go to [copi.owasp.org](https://copi.owasp.org "[external]") to play the online version, or download the high-res design files from [cornucopia.owasp.org](/printing) and get them printed. You can also buy the physical decks at [one of our webshops](/webshop) where you can buy the decks as well. A small part of the profits from the sales goes to the OWASP® Foundation.
 
 ![Go to copi.owasp.org or cornucopia.owasp.org](get-cards.png)
 
 ## Let the Cards Speak and the Team Decide.
 
-You don’t need to be a specialist on mobile application security to lead a OWASP Cornucopia mobile threat modeling session. Letting the team take control over the session themselves is what works the best. Once a card is played the player needs to explain how this threat may be applicable to their mobile application. If the rest of the team agrees that it is the case, then the player gets a point. Then later when adding the specific threat to the threat model, the team can use the references on the card to figure out what they need to do in order to mitigate the threat. It allows the team to immediately create a security focused user story in Jira and connect that to the MASVS and MASTG requirements and tests which should give guidance both in regard to implementing a secure design and create automated tests that can be used in MAS testing.
+You don’t need to be a specialist on mobile application security to lead a OWASP Cornucopia mobile threat modeling session. Letting the team take control over the session themselves is what works best. Once a card is played the player needs to explain how the threat may be applicable to their mobile application. If the rest of the team agrees that it is the case, then the player gets a point. Then later, when adding the specific threat to the threat model, the team can use the references on the card to figure out what they need to do in order to mitigate the threat. It allows the team to immediately create a security focused user story in Jira and connect that to the MASVS and MASTG requirements and tests which should give guidance both in regard to implementing a secure design and create automated tests that can be used in MAS testing.
 
 ![Let the cards speak for themselves](card-speak.png)
 
 ## The Role of the Application Security Engineer
 
-The application security engineer's role, during the game, is to support the team by recording the cards that score points on [a score sheet](https://owasp.org/www-project-cornucopia/assets/files/cornucopia-scoresheet-mobileapp.pdf) so that you keep track of what cards are played and what the team discuss during the game so that later, when the development team create security focused user stories, you can help them to remember what it is they were saying during the game and which threats they identified as relevant and important for creating a secure design for their application. 
+The application security engineer's role, during the game, is to support the team by recording the cards that score points on [a score sheet](https://owasp.org/www-project-cornucopia/assets/files/cornucopia-scoresheet-mobileapp.pdf) so that you can keep track of what cards are played, and what the team discuss during the game. Later, when the development team create security focused user stories, you can help them to remember what it was they were discussing during the game and which threats they identified as relevant and important for creating a secure design for their application. 
 
 ![Take notes during the meeting using a score sheet](notes.png)
 
-As application security engineers no longer are bottlenecks in the agile development processes, scaling application security efforts has become much easier. Cornucopia is empowering and teaching the development teams how to do threat modeling, what to test and implement, what to plan and how to execute security work. It is helping to deliver faster, make the teams more independent, and shifting security efforts left. Application security engineers are needed, but the focus is turned towards facilitation, cheerleading and training.
+When application security engineers no longer are bottlenecks in the agile development processes, scaling application security efforts becomes much easier. Cornucopia is empowering and teaching the development teams how to do threat modeling, what to test and implement, what to plan and how to execute security work. It is helping to deliver faster, make the teams more independent, and shifting security efforts left. Application security engineers are needed, but the focus is turned towards facilitation, cheerleading and training.
 
 ## Story board mapping – Create user stories
 
-After you have finished the game, don’t stop there, have a second session with the team where you look at the cards that scored and create security focused user stories. If the scope of what you are building is large, do a storyboard mapping where you group the cards together that share the same MASVS and MASTG references and get the team to decide what it is they are going to implement and test. If you’re not located at the same location, you can do this by using a Digital solution for agile online collaboration like Figma of if you’re co-located, just create a large cardboard like I have here and either print out the description for each cards with their requirements or just stick the cards themselves to it and let the team create user stories on post-it notes based on MASVS/MASTG and the notes that was taken during the game. 
+After you have finished the game, don’t stop there, have a second session with the team where you look at the cards that scored and create security focused user stories. If the scope of what you are building is large, do a storyboard mapping where you group the cards together that share the same MASVS and MASTG references then get the team to decide what it is they are going to implement and test. If you’re not located at the same location, you can do this by using a Digital solution for agile online collaboration like Figma, or if you’re co-located, just create a large cardboard and either print out the description for each cards with their requirements, or stick the cards themselves to it and let the team create user stories on post-it notes based on MASVS/MASTG and the notes that was taken during the game. 
 
 ![Question 3: What can we do about i?](what-can-we-do-about-it.png)
 
