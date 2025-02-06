@@ -1,9 +1,9 @@
 {
   "layout": {
-    "description": "Check out dotNETlab's physical version of the OWASP Cornucopia card game! It's designed to teach developers how to tackle common security risks in software development. Scan the QR code for more information on this card and others in the deck",
+    "description": "OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It is language, platform and technology-agnostic.",
     "title": "Cornucopia - DotNETlab",
     "twitter": {
-      "description": "Check out dotNETlab's physical version of the OWASP Cornucopia card game! It's designed to teach developers how to tackle common security risks in software development. Scan the QR code for more information on this card and others in the deck."
+      "description": "OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It is language, platform and technology-agnostic."
     }
   }
 }
