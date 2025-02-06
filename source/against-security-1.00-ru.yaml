@@ -1,0 +1,52 @@
+---
+meta:
+  edition: "against-security"
+  component: "cards"
+  language: "RU"
+  version: "1.00"
+suits:
+-
+  name: "Карты Против Безопасности"
+  id: "CAS"
+  cards:
+  -
+    id: "CAS2"
+    value: "2"
+    desc: "Ваша любимая карта"
+  -
+    id: "CAS3"
+    value: "3"
+    desc: "Другая любимая карта"
+-
+  id: "WC"
+  name: "ШАЛЬНАЯ КАРТА"
+  cards:
+  -
+    id: "JOA"
+    value: "A"
+    card: "Джокер"
+    desc: "This is a wild card"
+    misc: "Make something up!"
+  -
+    id: "JOB"
+    value: "B"
+    card: "Джокер"
+    desc: "This is a wild card"
+    misc: "Make something up!"
+paragraphs:
+-
+  name: "Common"
+  id: "Common"
+  sentences:
+  -
+    id: "NoCard"
+    value: "NoCard"
+    text: "Нет Карты"
+  -
+    id: "Title"
+    value: "Title"
+    text: "Cards Against Security Edition v1.00-EN"
+  -
+    id: "Title_full"
+    value: "Title_full"
+    text: "Cards Against Security Edition v1.00-EN"

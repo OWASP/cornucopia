@@ -26,7 +26,7 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it"]
+    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
@@ -356,7 +356,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 def is_valid_string_argument(argument: str) -> str:
     if len(argument) > 255:
         raise argparse.ArgumentTypeError("The option can not have more the 255 char.")
-    if not re.match(r"^[A-Za-z0-9._-]+$", argument):
+    if not re.match(r"^[A-Za-zА-Яа-я0-9._-]+$", argument):
         raise argparse.ArgumentTypeError(
             "The option can only contain a-z letters, numbers, periods, dash or underscore"
         )
@@ -418,13 +418,13 @@ def get_find_replace_list(meta: Dict[str, str], template: str, layout: str) -> L
     return ll
 
 
-def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
+def get_full_tag(suit_tag: str, card: str, tag: str, card_id: str) -> str:
     if suit_tag == "WC":
         full_tag = "${{{}}}".format("_".join([suit_tag, card, tag]))
     elif suit_tag == "Common":
         full_tag = "${{{}}}".format("_".join([suit_tag, card]))
     else:
-        full_tag = "${{{}}}".format("_".join([suit_tag, suit_tag + card, tag]))
+        full_tag = "${{{}}}".format("_".join([suit_tag, card_id, tag]))
     return full_tag
 
 
@@ -506,8 +506,13 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
                 for tag, text_output in paragraph.items():
                     if tag == "value":
                         continue
+                    card_id = is_valid_string_argument(paragraph["id"]) if "id" in paragraph else None
+
                     full_tag = get_full_tag(
-                        is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["value"]), tag
+                        is_valid_string_argument(paragraphs["id"]),
+                        is_valid_string_argument(paragraph["value"]),
+                        tag,
+                        card_id,
                     )
                     logging.debug(f" --- tag = {full_tag}")
                     # Add a translation for "Joker"
