@@ -38,9 +38,17 @@ Add testing.
 ## Changes & Updates
 ### 2024-10-25
 
- - Adding the italian translation
+ - Adding the italian translation by Ruggero DallAglio
  - Fixing the card codes ensuring they are in line with the documentation.
 
 ## Changes & Updates
 ### 2024-10-30
- - Adding the portuguese pt-pt translation
+ - Adding the portuguese pt-pt translation by André Ferreira
+
+## Changes & Updates
+### 2025-02-03
+ - Adding the OWASP Cornucopia website
+
+## Changes & Updates
+### 2025-02-07
+ - Design changes to accomodate for the QR codes

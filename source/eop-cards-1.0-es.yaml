@@ -361,182 +361,182 @@ paragraphs:
   name: "Common"
   sentences:
   -
-    value: "Title"
+    id: "Title"
     text: "Elevation of Privilege"
   -
-    value: "T00001"
+    id: "T00001"
     text: "Acerca de"
   -
-    value: "T00002"
+    id: "T00002"
     text: "Modelado de amenazas"
   -
-    value: "T00003"
+    id: "T00003"
     text: "el ciclo de vida de"
   -
-    value: "T00004"
+    id: "T00004"
     text: "desarrollo de seguridad"
   -
-    value: "T00010"
+    id: "T00010"
     text: "El juego “Elevation of Privilege” está diseñado para ser la forma más sencilla de empezar a analizar su diseño desde una perspectiva de seguridad. Es una forma de modelar amenazas, destinada a ser recogida y utilizada por cualquier grupo de desarrollo. Debido a que el juego utiliza amenazas STRIDE, te brinda un marco para pensar y ejemplos prácticos específicos de esas amenazas."
   -
-    value: "T00020"
+    id: "T00020"
     text: "STRIDE significa:"
   -
-    value: "T00030"
+    id: "T00030"
     text: "Hacerse pasar por algo o alguien más."
   -
-    value: "T00040"
+    id: "T00040"
     text: "Modificar datos o código."
   -
-    value: "T00050"
+    id: "T00050"
     text: "Afirmar no haber realizado una acción."
   -
-    value: "T00060"
+    id: "T00060"
     text: "Exponer información a alguien no autorizado para verla."
   -
-    value: "T00070"
+    id: "T00070"
     text: "Denegar o degradar el servicio a las usuarias."
   -
-    value: "T00080"
+    id: "T00080"
     text: "Obtener capacidades sin la autorización adecuada."
   -
-    value: "T00090"
+    id: "T00090"
     text: "En"
   -
-    value: "T00100"
+    id: "T00100"
     text: "tenemos vídeos, hojas de puntuación y consejos y trucos para jugar."
   -
-    value: "T00105"
+    id: "T00105"
     text: "SDL."
   -
-    value: "T00110"
+    id: "T00110"
     text: "El juego “Elevation of Privilege” es una manera fácil y divertida de comenzar a comprender la seguridad de sus sistemas mediante el modelado de amenazas. A medida que descubre y corrige problemas de seguridad a nivel de diseño, vale la pena pensar en otras formas en que los problemas de seguridad pueden infiltrarse en su código. Microsoft tiene una gran colección de recursos gratuitos disponibles para ayudarle a comenzar con el ciclo de vida de desarrollo de seguridad (SDL)."
   -
-    value: "T00120"
+    id: "T00120"
     text: "Para obtener más información sobre el modelado de amenazas y el ciclo de vida de desarrollo de seguridad de Microsoft, visite nuestro sitio web en"
   -
-    value: "T00130"
+    id: "T00130"
     text: "continuó en la parte de atrás"
   -
-    value: "T00140"
+    id: "T00140"
     text: "cont."
   -
-    value: "T00150"
+    id: "T00150"
     text: "Instrucciones"
   -
-    value: "T00160"
+    id: "T00160"
     text: "Dibuje un diagrama del modelo de sistema para el que desea modelar amenazas antes de repartir las cartas."
   -
-    value: "T00170"
+    id: "T00170"
     text: "Reparte el mazo a 3-6 jugadores. El juego comienza con el 3 de manipulación. Juega en el sentido de las agujas del reloj y cada jugador, por turno, continúa usando el palo si tiene una carta de ese palo. Si el jugador no tiene una carta de ese palo, puede usar otro palo.  Cada ronda se gana con la carta más alta jugada del palo que salió, a menos que se juegue una carta de Elevación de Privilegio (EoP). En ese caso, gana la tarjeta EoP de alto valor."
   -
-    value: "T00180"
+    id: "T00180"
     text: "Para jugar una carta, léala, anuncie su amenaza y regístrela. Si el jugador no puede vincular la amenaza al sistema, el juego continúa."
   -
-    value: "T00190"
+    id: "T00190"
     text: "El ganador de una mano selecciona la carta (y el palo) para liderar la siguiente mano. Tómate unos minutos entre manos para pensar en las amenazas."
   -
-    value: "T00200"
+    id: "T00200"
     text: "Puntos:"
   -
-    value: "T00210"
+    id: "T00210"
     text: "1 por una amenaza en tu carta, +1 por hacer el truco"
   -
-    value: "T00220"
+    id: "T00220"
     text: "Las amenazas deben expresarse de forma clara, comprobable y "
   -
-    value: "T00230"
+    id: "T00230"
     text: "abordables. En el caso de que una amenaza lleva a una "
   -
-    value: "T00240"
+    id: "T00240"
     text: "discusión, puede resolverlo haciendo la pregunta: “¿Aceptaríamos un error procesable, una solicitud de función o un cambio de diseño para eso?” Si la respuesta es sí, se trata de una amenaza real. (Esto no significa que las amenazas fuera de eso no sean reales, es simplemente una forma de centrar la discusión en amenazas procesables). Las preguntas que comienzan con “Hay una manera” eben leerse como “Hay una manera…y así es como…” mientras que las preguntas que comienzan con “Tu código” deben leerse “El código que estamos creando colectivamente…y así es como se hace”."
   -
-    value: "T00250"
+    id: "T00250"
     text: "La baraja contiene una serie de cartas especiales: triunfos y amenazas abiertas. Las cartas EoP son triunfos: ganan la baza incluso si tienen un valor menor que el palo que se jugó. El as de cada palo es una carta de amenaza abierta. Cuando se juega, el jugador debe identificar una amenaza que no figura en otra carta."
   -
-    value: "T00260"
+    id: "T00260"
     text: "Cuando se hayan jugado todas las cartas, gana el que tenga más puntos."
   -
-    value: "T00270"
+    id: "T00270"
     text: "¡Recuerda divertirte!"
   -
-    value: "T00280"
+    id: "T00280"
     text: "Variantes"
   -
-    value: "T00290"
+    id: "T00290"
     text: "Variantes opcionales:"
   -
-    value: "T00300"
+    id: "T00300"
     text: "Puedes pasar cartas después del tercer truco. Esto es útil si tiene tarjetas que no puede vincular al sistema. Es posible que alguien más pueda hacerlo."
   -
-    value: "T00310"
+    id: "T00310"
     text: "Duplica la cantidad de puntos y otorga un punto por las amenazas en las cartas de otras personas."
   -
-    value: "T00320"
+    id: "T00320"
     text: "Otros jugadores pueden “reflexionar” sobre la amenaza y, si lo hacen, obtienen un punto por cada amenaza adicional."
   -
-    value: "T00330"
+    id: "T00330"
     text: "Limite los riffs a no más de 60 segundos."
   -
-    value: "T00340"
+    id: "T00340"
     text: "Marque el diagrama donde ocurre la amenaza."
   -
-    value: "T00350"
+    id: "T00350"
     text: "Las preguntas se enumeran en las cartas de amenaza para ayudar con los ases."
   -
-    value: "T00360"
+    id: "T00360"
     text: "Gracias a Laurie Williams por la inspiración."
   -
-    value: "T00370"
+    id: "T00370"
     text: "Contenido:"
   -
-    value: "T00380"
+    id: "T00380"
     text: "Cartas de instrucciones"
   -
-    value: "T00390"
+    id: "T00390"
     text: "Carta de diagrama de estrategia"
   -
-    value: "T00400"
+    id: "T00400"
     text: "STRIDE Cartas de amenaza 'palos':"
   -
-    value: "T00410"
+    id: "T00410"
     text: "Spoofing:  2-K, As"
   -
-    value: "T00420"
+    id: "T00420"
     text: "Manipulación:  2-K, As"
   -
-    value: "T00430"
+    id: "T00430"
     text: "Repudio: 2-K, As"
   -
-    value: "T00440"
+    id: "T00440"
     text: "Divulgación de Información: 2-K, As"
   -
-    value: "T00450"
+    id: "T00450"
     text: "Denegación de Servicio: 2-K, As"
   -
-    value: "T00460"
+    id: "T00460"
     text: "Elevación de Privilegios:  2-K, As (Cartas de Triunfo)"
   -
-    value: "T00470"
+    id: "T00470"
     text: "STRIDE Cartas de Referencia de Amenazas"
   -
-    value: "T00480"
+    id: "T00480"
     text: "La Carta de Acerca del Modelado de Amenazas y SDL"
   -
-    value: "T00490"
+    id: "T00490"
     text: "Divulgación\nde"
   -
-    value: "T00495"
+    id: "T00495"
     text: "Información"
   -
-    value: "T00500"
+    id: "T00500"
     text: "Elevación\nde"
   -
-    value: "T00505"
+    id: "T00505"
     text: "Privilegios"
   -
-    value: "T00510"
+    id: "T00510"
     text: "Denegación\nde"
   -
-    value: "T00515"
+    id: "T00515"
     text: "Servicio"

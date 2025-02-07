@@ -10,16 +10,16 @@ suits:
   name: "Validación de datos & Codificación"
   cards:
   -
-    id: "DVA"
+    id: "VEA"
     value: "A"
     desc: "Has creado un nuevo ataque contra validación de datos y codificación"
     misc: "Lea más sobre este tema en Cheat Sheets de OWASP libre, XSS Prevención, basada en DOM Prevención XSS, SQL Prevención de inyecciones, y Parametrización de consultas"
   -
-    id: "DV2"
+    id: "VE2"
     value: "2"
     desc: "Brian puede reunir información sobre las principales configuraciones: esquemas, lógicas, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, o a la presencia de archivos de instalación predeterminados o antiguos, de prueba, de copia de seguridad o copias de los recursos, o exposición de código fuente"
   -
-    id: "DV3"
+    id: "VE3"
     value: "3"
     desc: "Robert puede ingresar datos maliciosos porque el formato de protocolo permitido no está siendo revisado, los duplicados son aceptados, la estructura no está siendo validada, los elementos de datos individuales no están siendo validados por: formato, tipo, rango, longitud y una lista blanca de formatos o caracteres permitidos"
 -
@@ -37,26 +37,26 @@ paragraphs:
   name: "Common"
   sentences:
   -
-    value: "NoCard"
+    id: "NoCard"
     text: "No Tarjeta"
   -
-    value: "Title"
+    id: "Title"
     text: "Website App Edition v1.20-ES"
   -
-    value: "Title_full"
+    id: "Title_full"
     text: "OWASP Cornucopia Website App Edition v1.20-ES"
   -
-    value: "T00010"
+    id: "T00010"
     text: "OWASP Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requerimientos de seguridad en procesos de desarrollo de software ágiles, convencionales y formales."
   -
-    value: "T00020"
+    id: "T00020"
     text: "Author"
   -
-    value: "T00030"
+    id: "T00030"
     text: "Project Leaders"
   -
-    value: "T00040"
+    id: "T00040"
     text: "Reviewers"
   -
-    value: "T00100"
+    id: "T00100"
     text: "Reconocimientos del proyecto"

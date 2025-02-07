@@ -15,6 +15,7 @@ suits:
   -
     id: "PC2"
     value: "2"
+    url: "https://cornucopia.owasp.org/cards/PC2"
     owasp_masvs: [ PLATFORM-3 ]
     owasp_mastg: [ TEST-0010, TEST-0059 ]
     capec: [ 37, 155, 498, 648 ]
@@ -22,6 +23,7 @@ suits:
   -
     id: "PC3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/PC3"
     owasp_masvs: [ PLATFORM-3 ]
     owasp_mastg: [ TEST-0008, TEST-0037, TEST-0057 ]
     capec: [ 508 ]
@@ -29,6 +31,7 @@ suits:
   -
     id: "PC4"
     value: "4"
+    url: "https://cornucopia.owasp.org/cards/PC4"
     owasp_masvs: [ PLATFORM-1 ]
     owasp_mastg: [ TEST-0024, TEST-0069 ]
     capec: [ 634, 651 ]
@@ -36,6 +39,7 @@ suits:
   -
     id: "PC5"
     value: "5"
+    url: "https://cornucopia.owasp.org/cards/PC5"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0043, TEST-0044, TEST-0086 ]
     capec: [ 14, 24, 44, 45, 46, 47, 92, 100, 124, 128, 129, 131, 679 ]
@@ -43,6 +47,7 @@ suits:
   -
     id: "PC6"
     value: "6"
+    url: "https://cornucopia.owasp.org/cards/PC6"
     owasp_masvs: [ PLATFORM-1 ]
     owasp_mastg: [ TEST-0029, TEST-0030,  TEST-0071 ]
     capec: [ 94,117, 499, 502, 504 ]
@@ -50,6 +55,7 @@ suits:
   -
     id: "PC7"
     value: "7"
+    url: "https://cornucopia.owasp.org/cards/PC7"
     owasp_masvs: [ PLATFORM-1 ]
     owasp_mastg: [ TEST-0007, TEST-0056 ]
     capec: [ 126, 127, 139, 597, 643 ]
@@ -57,6 +63,7 @@ suits:
   -
     id: "PC8"
     value: "8"
+    url: "https://cornucopia.owasp.org/cards/PC8"
     owasp_masvs: [ PLATFORM-1 ]
     owasp_mastg: [ TEST-0007, TEST-0056 ]
     capec: [ 137, 499, 502, 586 ]
@@ -64,6 +71,7 @@ suits:
   -
     id: "PC9"
     value: "9"
+    url: "https://cornucopia.owasp.org/cards/PC9"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0026 ]
     capec: [ 497, 499, 502 ]
@@ -71,6 +79,7 @@ suits:
   -
     id: "PCX"
     value: "10"
+    url: "https://cornucopia.owasp.org/cards/PCX"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0025, TEST-0072 ]
     capec: [ 137, 499, 502, 586 ]
@@ -78,6 +87,7 @@ suits:
   -
     id: "PCJ"
     value: "J"
+    url: "https://cornucopia.owasp.org/cards/PCJ"
     owasp_masvs: [ CODE-1, CODE-2, CODE-3 ]
     owasp_mastg: [ TEST-0036, TEST-0042, TEST-0080, TEST-0085 ]
     capec: [ 310, 538, 691 ]
@@ -85,6 +95,7 @@ suits:
   -
     id: "PCQ"
     value: "Q"
+    url: "https://cornucopia.owasp.org/cards/PCQ"
     owasp_masvs: [ PLATFORM-1, PLATFORM-2 ]
     owasp_mastg: [ TEST-0027, TEST-0028, TEST-0031, TEST-0070, TEST-0076, TEST-0077 ]
     capec: [ 175, 240, 242, 500, 591, 592 ]
@@ -92,9 +103,18 @@ suits:
   -
     id: "PCK"
     value: "K"
+    url: "https://cornucopia.owasp.org/cards/PCK"
     owasp_masvs: [ PLATFORM-1, PLATFORM-2 ]
     owasp_mastg: [ TEST-0007, TEST-0030, TEST-0033, TEST-0056, TEST-0072, TEST-0078 ]
     capec: [ 137, 138, 499, 502, 586 ]
+    safecode: [ "-" ]
+  -
+    id: "PCA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/PCA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
     safecode: [ "-" ]
 -
   id: "AA"
@@ -103,6 +123,7 @@ suits:
   -
     id: "AA2"
     value: "2"
+    url: "https://cornucopia.owasp.org/cards/AA2"
     owasp_masvs: [ AUTH-2,  AUTH-3 ]
     owasp_mastg: [ TEST-0017, TEST-0064 ]
     capec: [ 115 ]
@@ -110,6 +131,7 @@ suits:
   -
     id: "AA3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/AA3"
     owasp_masvs: [ AUTH-1, AUTH-3 ]
     owasp_mastg: [ TEST-0024, TEST-0032, TEST-0069, TEST-0077 ]
     capec: [ 122 ]
@@ -117,6 +139,7 @@ suits:
   -
     id: "AA4"
     value: "4"
+    url: "https://cornucopia.owasp.org/cards/AA4"
     owasp_masvs: [ AUTH-2 ]
     owasp_mastg: [ TEST-0018 ]
     capec: [ 114, 115, 554 ]
@@ -124,6 +147,7 @@ suits:
   -
     id: "AA5"
     value: "5"
+    url: "https://cornucopia.owasp.org/cards/AA5"
     owasp_masvs: [ AUTH-2 ]
     owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
     capec: [ 114, 115, 207, 554 ]
@@ -131,6 +155,7 @@ suits:
   -
     id: "AA6"
     value: "6"
+    url: "https://cornucopia.owasp.org/cards/AA6"
     owasp_masvs: [  AUTH-2, AUTH-3 ]
     owasp_mastg: [ TEST-0064 ]
     capec: [ 20, 49, 50, 55, 115 ]
@@ -138,6 +163,7 @@ suits:
   -
     id: "AA7"
     value: "7"
+    url: "https://cornucopia.owasp.org/cards/AA7"
     owasp_masvs: [ AUTH-1 ]
     owasp_mastg: [ TEST-0034, TEST-0079 ]
     capec: [ 39, 74, 162, 166, 207 ]
@@ -145,6 +171,7 @@ suits:
   -
     id: "AA8"
     value: "8"
+    url: "https://cornucopia.owasp.org/cards/AA8"
     owasp_masvs: [ AUTH-1, CODE-4, PLATFORM-1, PLATFORM-3 ]
     owasp_mastg: [ TEST-0025, TEST-0030, TEST-0035, TEST-0072, TEST-0075 ]
     capec: [ 153, 505, 506 ]
@@ -152,6 +179,7 @@ suits:
   -
     id: "AA9"
     value: "9"
+    url: "https://cornucopia.owasp.org/cards/AA9"
     owasp_masvs: [ AUTH-2 ]
     owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
     capec: [ 114, 115, 554 ]
@@ -159,6 +187,7 @@ suits:
   -
     id: "AAX"
     value: "10"
+    url: "https://cornucopia.owasp.org/cards/AAX"
     owasp_masvs: [ AUTH-1 ]
     owasp_mastg: [ TEST-0017, TEST-0064 ]
     capec: [ 36, 121 ]
@@ -166,6 +195,7 @@ suits:
   -
     id: "AAJ"
     value: "J"
+    url: "https://cornucopia.owasp.org/cards/AAJ"
     owasp_masvs: [ AUTH-2 ]
     owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
     capec: [ 114, 115, 554 ]
@@ -173,6 +203,7 @@ suits:
   -
     id: "AAQ"
     value: "Q"
+    url: "https://cornucopia.owasp.org/cards/AAQ"
     owasp_masvs: [ AUTH-1 ]
     owasp_mastg: [ TEST-0033, TEST-0025,  TEST-0078 ]
     capec: [ 17, 30, 69, 234 ]
@@ -180,10 +211,19 @@ suits:
   -
     id: "AAK"
     value: "K"
+    url: "https://cornucopia.owasp.org/cards/AAK"
     owasp_masvs: [ AUTH-2 ]
     owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
     capec: [ 114, 115, 207, 554 ]
     safecode: [ 8, 10, 11 ]
+  -
+    id: "AAA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/AAA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
 -
   id: "NS"
   name: "Network & Storage"
@@ -191,6 +231,7 @@ suits:
   -
     id: "NS2"
     value: "2"
+    url: "https://cornucopia.owasp.org/cards/NS2"
     owasp_masvs: [ STORAGE-2 ]
     owasp_mastg: [ TEST-0003, TEST-0053 ]
     capec: [ 155 ]
@@ -198,6 +239,7 @@ suits:
   -
     id: "NS3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/NS3"
     owasp_masvs: [ STORAGE-2 ]
     owasp_mastg: [ TEST-0006, TEST-0055, TEST-0073 ]
     capec: [ 204, 637, 679 ]
@@ -205,6 +247,7 @@ suits:
   -
     id: "NS4"
     value: "4"
+    url: "https://cornucopia.owasp.org/cards/NS4"
     owasp_masvs: [ STORAGE-1 ]
     owasp_mastg: [ TEST-0012 ]
     capec: [ 406, 675 ]
@@ -212,6 +255,7 @@ suits:
   -
     id: "NS5"
     value: "5"
+    url: "https://cornucopia.owasp.org/cards/NS5"
     owasp_masvs: [ STORAGE-2 ]
     owasp_mastg: [ TEST-0004, TEST-0005, TEST-0054 ]
     capec: [ 155, 161,  204, 220,  639, 643 ]
@@ -219,6 +263,7 @@ suits:
   -
     id: "NS6"
     value: "6"
+    url: "https://cornucopia.owasp.org/cards/NS6"
     owasp_masvs: [ STORAGE-2 ]
     owasp_mastg: [ TEST-0011, TEST-0060 ]
     capec: [ 679 ]
@@ -226,6 +271,7 @@ suits:
   -
     id: "NS7"
     value: "7"
+    url: "https://cornucopia.owasp.org/cards/NS7"
     owasp_masvs: [ STORAGE-1, STORAGE-2 ]
     owasp_mastg: [ TEST-0001, TEST-0003, TEST-0009,  TEST-0052, TEST-0053, TEST-0058 ]
     capec: [ 37, 155, 204, 639, 643 ]
@@ -233,6 +279,7 @@ suits:
   -
     id: "NS8"
     value: "8"
+    url: "https://cornucopia.owasp.org/cards/NS8"
     owasp_masvs: [ STORAGE-1, CODE-4 ]
     owasp_mastg: [ TEST-0002 ]
     capec: [ 176 ]
@@ -240,6 +287,7 @@ suits:
   -
     id: "NS9"
     value: "9"
+    url: "https://cornucopia.owasp.org/cards/NS9"
     owasp_masvs: [ NETWORK-2 ]
     owasp_mastg: [ TEST-0022, TEST-0068 ]
     capec: [ 57, 94, 156, 465, 466, 479, 701 ]
@@ -247,6 +295,7 @@ suits:
   -
     id: "NSX"
     value: "10"
+    url: "https://cornucopia.owasp.org/cards/NSX"
     owasp_masvs: [ NETWORK-1 ]
     owasp_mastg: [ TEST-0019, TEST-0021, TEST-0065, TEST-0067 ]
     capec: [ 57, 94, 156, 465, 466, 479, 701 ]
@@ -254,6 +303,7 @@ suits:
   -
     id: "NSJ"
     value: "J"
+    url: "https://cornucopia.owasp.org/cards/NSJ"
     owasp_masvs: [ NETWORK-1 ]
     owasp_mastg: [ TEST-0020, TEST-0023, TEST-0066 ]
     capec: [ 57, 94, 156, 220, 459, 465, 466 ]
@@ -261,6 +311,7 @@ suits:
   -
     id: "NSQ"
     value: "Q"
+    url: "https://cornucopia.owasp.org/cards/NSQ"
     owasp_masvs: [ NETWORK-1 ]
     owasp_mastg: [ TEST-0019, TEST-0065 ]
     capec: [ 31, 36, 57, 102, 157, 158, 384, 466 ]
@@ -268,10 +319,19 @@ suits:
   -
     id: "NSK"
     value: "K"
+    url: "https://cornucopia.owasp.org/cards/NSK"
     owasp_masvs: [ STORAGE-1 ]
     owasp_mastg: [ TEST-0001, TEST-0052 ]
     capec: [ 75, 76, 113, 153, 161, 165, 176, 190, 207, 210, 554, 562 ]
     safecode: [ 12, 19 ]
+  -
+    id: "NSA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/NSA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
 -
   id: "RS"
   name: "Resilience"
@@ -279,6 +339,7 @@ suits:
   -
     id: "RS2"
     value: "2"
+    url: "https://cornucopia.owasp.org/cards/RS2"
     owasp_masvs: [ RESILIENCE-3 ]
     owasp_mastg: [ TEST-0041, TEST-0084 ]
     capec: [ 37, 167, 191 ]
@@ -286,6 +347,7 @@ suits:
   -
     id: "RS3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/RS3"
     owasp_masvs: [ RESILIENCE-3 ]
     owasp_mastg: [ TEST-0040, TEST-0083 ]
     capec: [ 37, 167, 191 ]
@@ -293,6 +355,7 @@ suits:
   -
     id: "RS4"
     value: "4"
+    url: "https://cornucopia.owasp.org/cards/RS4"
     owasp_masvs: [ RESILIENCE-2 ]
     owasp_mastg: [ TEST-0038, TEST-0081 ]
     capec: [ 68, 167, 206, 476 ]
@@ -300,6 +363,7 @@ suits:
   -
     id: "RS5"
     value: "5"
+    url: "https://cornucopia.owasp.org/cards/RS5"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0039, TEST-0082 ]
     capec: [ 115, 167, 554 ]
@@ -307,6 +371,7 @@ suits:
   -
     id: "RS6"
     value: "6"
+    url: "https://cornucopia.owasp.org/cards/RS6"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0046, TEST-0089 ]
     capec: [ 115, 167, 554 ]
@@ -314,6 +379,7 @@ suits:
   -
     id: "RS7"
     value: "7"
+    url: "https://cornucopia.owasp.org/cards/RS7"
     owasp_masvs: [ RESILIENCE-1 ]
     owasp_mastg: [ TEST-0049, TEST-0092 ]
     capec: [ 189, 554 ]
@@ -321,6 +387,7 @@ suits:
   -
     id: "RS8"
     value: "8"
+    url: "https://cornucopia.owasp.org/cards/RS8"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0048, TEST-0091 ]
     capec: [ 167, 554 ]
@@ -328,6 +395,7 @@ suits:
   -
     id: "RS9"
     value: "9"
+    url: "https://cornucopia.owasp.org/cards/RS9"
     owasp_masvs: [ RESILIENCE-3 ]
     owasp_mastg: [ TEST-0051, TEST-0093 ]
     capec: [ 167, 554 ]
@@ -335,6 +403,7 @@ suits:
   -
     id: "RSX"
     value: "10"
+    url: "https://cornucopia.owasp.org/cards/RSX"
     owasp_masvs: [ RESILIENCE-1 ]
     owasp_mastg: [ TEST-0045, TEST-0088 ]
     capec: [ 167, 660, 661 ]
@@ -342,6 +411,7 @@ suits:
   -
     id: "RSJ"
     value: "J"
+    url: "https://cornucopia.owasp.org/cards/RSJ"
     owasp_masvs: [ RESILIENCE-2 ]
     owasp_mastg: [ TEST-0047, TEST-0090 ]
     capec: [ 23, 165, 167 ]
@@ -349,6 +419,7 @@ suits:
   -
     id: "RSQ"
     value: "Q"
+    url: "https://cornucopia.owasp.org/cards/RSQ"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0050 ]
     capec: [ 167, 554 ]
@@ -356,9 +427,18 @@ suits:
   -
     id: "RSK"
     value: "K"
+    url: "https://cornucopia.owasp.org/cards/RSK"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0046, TEST-0089 ]
     capec: [ 167, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RSA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/RSA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
     safecode: [ "-" ]
 -
   id: "CRM"
@@ -367,6 +447,7 @@ suits:
   -
     id: "CRM2"
     value: "2"
+    url: "https://cornucopia.owasp.org/cards/CRM2"
     owasp_masvs: [ CRYPTO-2 ]
     owasp_mastg: [  TEST-0015, TEST-0062 ]
     capec: [ 97, 116, 117 ]
@@ -374,6 +455,7 @@ suits:
   -
     id: "CRM3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/CRM3"
     owasp_masvs: [ CRYPTO-1 ]
     owasp_mastg: [ TEST-0014, TEST-0061 ]
     capec: [ 37, 204 ]
@@ -381,6 +463,7 @@ suits:
   -
     id: "CRM4"
     value: "4"
+    url: "https://cornucopia.owasp.org/cards/CRM4"
     owasp_masvs: [ CRYPTO-1, CODE-4 ]
     owasp_mastg: [ TEST-0002 ]
     capec: [ 68, 75, 145, 438, 439, 442 ]
@@ -388,6 +471,7 @@ suits:
   -
     id: "CRM5"
     value: "5"
+    url: "https://cornucopia.owasp.org/cards/CRM5"
     owasp_masvs: [ CRYPTO-1 ]
     owasp_mastg: [ TEST-0016, TEST-0063 ]
     capec: [ 20, 112, 485 ]
@@ -395,6 +479,7 @@ suits:
   -
     id: "CRM6"
     value: "6"
+    url: "https://cornucopia.owasp.org/cards/CRM6"
     owasp_masvs: [ STORAGE-1,  CRYPTO-1, CRYPTO-2 ]
     owasp_mastg: [ TEST-0001, TEST-0013, TEST-0052, TEST-0062 ]
     capec: [ 37, 117, 155, 191, 204 ]
@@ -402,6 +487,7 @@ suits:
   -
     id: "CRM7"
     value: "7"
+    url: "https://cornucopia.owasp.org/cards/CRM7"
     owasp_masvs: [ STORAGE-1, CRYPTO-2 ]
     owasp_mastg: [ TEST-0001, TEST-0013,  TEST-0052, TEST-0062 ]
     capec: [ 37, 117, 155, 191, 204 ]
@@ -409,6 +495,7 @@ suits:
   -
     id: "CRM8"
     value: "8"
+    url: "https://cornucopia.owasp.org/cards/CRM8"
     owasp_masvs: [ CRYPTO-1 ]
     owasp_mastg: [ TEST-0013, TEST-0016,  TEST-0063 ]
     capec: [ 20, 55, 112, 485 ]
@@ -416,6 +503,7 @@ suits:
   -
     id: "CRM9"
     value: "9"
+    url: "https://cornucopia.owasp.org/cards/CRM9"
     owasp_masvs: [ CRYPTO-1 ]
     owasp_mastg: [ TEST-0014 ]
     capec: [ 97, 620 ]
@@ -423,6 +511,7 @@ suits:
   -
     id: "CRMX"
     value: "10"
+    url: "https://cornucopia.owasp.org/cards/CRMX"
     owasp_masvs: [ CRYPTO-1 ]
     owasp_mastg: [ TEST-0014, TEST-0061 ]
     capec: [ 20, 116, 117, 97, 112, 485 ]
@@ -430,6 +519,7 @@ suits:
   -
     id: "CRMJ"
     value: "J"
+    url: "https://cornucopia.owasp.org/cards/CRMJ"
     owasp_masvs: [ CRYPTO-1, STORAGE-1 ]
     owasp_mastg: [ TEST-0001, TEST-0014, TEST-0052, TEST-0061 ]
     capec: [ 210, 212 ]
@@ -437,6 +527,7 @@ suits:
   -
     id: "CRMQ"
     value: "Q"
+    url: "https://cornucopia.owasp.org/cards/CRMQ"
     owasp_masvs: [ CRYPTO-1 ]
     owasp_mastg: [ TEST-0014, TEST-0061 ]
     capec: [ 20, 116, 117,  97, 112, 485 ]
@@ -444,10 +535,19 @@ suits:
   -
     id: "CRMK"
     value: "K"
+    url: "https://cornucopia.owasp.org/cards/CRMK"
     owasp_masvs: [ CRYPTO-1, CRYPTO-2 ]
     owasp_mastg: [ TEST-0014, TEST-0061, TEST-0062 ]
     capec: [ 54, 97, 116, 117, 220 ]
     safecode: [ 14, 21, 29 ]
+  -
+    id: "CRMA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/CRMA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
 -
   id: "CM"
   name: "Cornucopia"
@@ -455,6 +555,7 @@ suits:
   -
     id: "CM2"
     value: "2"
+    url: "https://cornucopia.owasp.org/cards/CM2"
     owasp_masvs: [ PRIVACY-3 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
@@ -462,6 +563,7 @@ suits:
   -
     id: "CM3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/CM3"
     owasp_masvs: [ PRIVACY-4 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
@@ -469,6 +571,7 @@ suits:
   -
     id: "CM4"
     value: "4"
+    url: "https://cornucopia.owasp.org/cards/CM4"
     owasp_masvs: [ PRIVACY-1 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
@@ -476,6 +579,7 @@ suits:
   -
     id: "CM5"
     value: "5"
+    url: "https://cornucopia.owasp.org/cards/CM5"
     owasp_masvs: [ PRIVACY-4 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
@@ -483,6 +587,7 @@ suits:
   -
     id: "CM6"
     value: "6"
+    url: "https://cornucopia.owasp.org/cards/CM6"
     owasp_masvs: [ PRIVACY-2 ]
     owasp_mastg: [ "-" ]
     capec: [ 410 ]
@@ -490,6 +595,7 @@ suits:
   -
     id: "CM7"
     value: "7"
+    url: "https://cornucopia.owasp.org/cards/CM7"
     owasp_masvs: [ CODE-4, PLATFORM-1 ]
     owasp_mastg: [ TEST-0025, TEST-0030, TEST-0072 ]
     capec: [ 499, 502 ]
@@ -497,6 +603,7 @@ suits:
   -
     id: "CM8"
     value: "8"
+    url: "https://cornucopia.owasp.org/cards/CM8"
     owasp_masvs: [ STORAGE-2 ]
     owasp_mastg: [ "-" ]
     capec: [ 126 ]
@@ -504,6 +611,7 @@ suits:
   -
     id: "CM9"
     value: "9"
+    url: "https://cornucopia.owasp.org/cards/CM9"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0043, TEST-0086 ]
     capec: [ 92, 100 ]
@@ -511,6 +619,7 @@ suits:
   -
     id: "CMX"
     value: "10"
+    url: "https://cornucopia.owasp.org/cards/CMX"
     owasp_masvs: [ CODE-4 ]
     owasp_mastg: [ TEST-0025, TEST-0072 ]
     capec: [ 137, 499, 502, 586 ]
@@ -518,6 +627,7 @@ suits:
   -
     id: "CMJ"
     value: "J"
+    url: "https://cornucopia.owasp.org/cards/CMJ"
     owasp_masvs: [ CRYPTO-1, CODE-4 ]
     owasp_mastg: [ TEST-0002 ]
     capec: [ 23, 165, 442 ]
@@ -525,6 +635,7 @@ suits:
   -
     id: "CMQ"
     value: "Q"
+    url: "https://cornucopia.owasp.org/cards/CMQ"
     owasp_masvs: [ RESILIENCE-4 ]
     owasp_mastg: [ TEST-0050 ]
     capec: [ 167, 202, 554 ]
@@ -532,7 +643,16 @@ suits:
   -
     id: "CMK"
     value: "K"
+    url: "https://cornucopia.owasp.org/cards/CMK"
     owasp_masvs: [ RESILIENCE-2 ]
     owasp_mastg: [ TEST-0047, TEST-0090 ]
     capec: [ 17, 23, 165, 167, 636 ]
+    safecode: [ "-" ]
+  -
+    id: "CMA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/CMA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
     safecode: [ "-" ]
