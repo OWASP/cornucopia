@@ -42,13 +42,10 @@ paragraphs:
   sentences:
   -
     id: "NoCard"
-    id: "NoCard"
     text: "No Card"
   -
     id: "Title"
-    id: "Title"
     text: "Cards Against Security Edition v1.00-EN"
   -
-    id: "Title_full"
     id: "Title_full"
     text: "Cards Against Security Edition v1.00-EN"
