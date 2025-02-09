@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "EN"
-  version: "1.22"
+  version: "2.1"
 suits:
 -
   id: "VE"
@@ -41,10 +41,10 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Website App Edition v1.21-EN"
+    text: "Website App Edition v2.1-EN"
   -
     id: "Title_full"
-    text: "OWASP Cornucopia Website App Edition v1.21-EN"
+    text: "OWASP Cornucopia Website App Edition v2.1-EN"
   -
     id: "T00010"
     text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."

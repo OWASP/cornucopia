@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "PT-BR"
-  version: "1.22"
+  version: "2.1"
 suits:
 -
   id: "VE"
@@ -433,12 +433,14 @@ suits:
     id: "JOA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/JOA"
+    card: "Joker"
     desc: "Alice consegue utilizar a aplicação para realizar ataques a dados e usuários do sistema"
     misc: "Você pensou em se tornar membro individual da OWASP? Todas as ferramentas, guias e reuniões locais são gratuitas para todos, mas ser um membro individual apoia o trabalho da OWASP"
   -
     id: "JOB"
     value: "B"
     url: "https://cornucopia.owasp.org/cards/JOB"
+    card: "Joker"
     desc: "Bob pode influenciar, alterar ou mudar a aplicação para que ela não cumpra os propósitos legais, regulamentadores, contratuais ou outras diretrizes organizacionais"
     misc: "Examine as vulnerabilidades e descubra como elas podem ser solucionadas através do OWASP® Juice Shop, Security Shepherd, ou usando o desafio online OWASP® Hacking-lab. Ambos são gratuitos"
 paragraphs:
@@ -451,10 +453,10 @@ paragraphs:
     text: "Nenhum Cartão"
   -
     id: "Title"
-    text: "Edição de Website App v1.22-PT_BR"
+    text: "Edição de Website App v2.1-PT-BR"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Edição de Website App v1.22-PT_BR"
+    text: "OWASP® Cornucopia Edição de Website App v2.1-PT-BR"
   -
     id: "T00005"
     text: "Índice"
@@ -544,7 +546,7 @@ paragraphs:
     text: "Controle de Acessos (AZ)"
   -
     id: "T00370"
-    text: "Criptografia (C)"
+    text: "Criptografia (CR)"
   -
     id: "T00380"
     text: "Cornucopia (C)"

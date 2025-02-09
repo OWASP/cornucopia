@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "mappings"
   language: "ALL"
-  version: "1.22"
+  version: "2.1"
   layouts: ["cards", "leaflet", "guide"]
   templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
   languages: ["en", "es"]
@@ -16,7 +16,7 @@ suits:
     id: "VE2"
     value: "2"
     owasp_scp: [ 69, 107, 108, 109, 136, 137, 153, 156, 158, 162 ]
-    owasp_asvs: [ "1.10", 4.5, 8.1, 11.5, 19.1, 19.5 ]
+    owasp_asvs: [ 1.6.4, 2.10.4, 4.3.2, 7.1.1, 10.2.3, 14.1.1, 14.2.2, 14.3.3 ]
     owasp_appsensor: [ HT1, HT2, HT3 ]
     capec: [ 54, 541 ]
     safecode: [ 4, 23 ]
@@ -24,7 +24,7 @@ suits:
     id: "VE3"
     value: "3"
     owasp_scp: [ ]
-    owasp_asvs: [ 5.1, 5.16, 5.17, 5.18, 5.19, '5.20', 11.1, 11.2 ]
-    owasp_appsensor: [ RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3 ]
+    owasp_asvs: [ 1.5.3, 5.1.1-5.1.4, 13.2.1, 14.1.2, 14.4.1 ]
+    owasp_appsensor: [ RE7-8, AE4-7, IE2-3, CIE1, CIE3-4, HT1-3 ]
     capec: [ 28, 48, 126, 165, 213, 220, 221, 261, 262, 271, 272 ]
     safecode: [ 3, 16, 24, 35 ]
