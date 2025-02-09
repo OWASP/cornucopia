@@ -361,182 +361,182 @@ paragraphs:
   name: "Common"
   sentences:
   -
-    value: "Title"
+    id: "Title"
     text: "Elevation of Privilege"
   -
-    value: "T00001"
+    id: "T00001"
     text: "About"
   -
-    value: "T00002"
+    id: "T00002"
     text: "Threat Modeling"
   -
-    value: "T00003"
+    id: "T00003"
     text: "Security Development"
   -
-    value: "T00004"
+    id: "T00004"
     text: "Lifecycle"
   -
-    value: "T00010"
+    id: "T00010"
     text: "The Elevation of Privilege game is designed to be the easiest way to start looking at your design from a security perspective. It’s one way to threat model, intended to be picked up and used by any development group. Because the game uses STRIDE threats, it gives you a framework for thinking, and specific actionable examples of those threats."
   -
-    value: "T00020"
+    id: "T00020"
     text: "STRIDE stands for:"
   -
-    value: "T00030"
+    id: "T00030"
     text: "Impersonating something or someone else."
   -
-    value: "T00040"
+    id: "T00040"
     text: "Modifying data or code."
   -
-    value: "T00050"
+    id: "T00050"
     text: "Claiming not to have performed an action."
   -
-    value: "T00060"
+    id: "T00060"
     text: "Exposing information to someone not authorized to see it."
   -
-    value: "T00070"
+    id: "T00070"
     text: "Denying or degrading service to users."
   -
-    value: "T00080"
+    id: "T00080"
     text: "Gain capabilities without proper authorization."
   -
-    value: "T00090"
+    id: "T00090"
     text: "At"
   -
-    value: "T00100"
+    id: "T00100"
     text: "we have videos, score sheets and tips and tricks for playing."
   -
-    value: "T00105"
+    id: "T00105"
     text: "SDL."
   -
-    value: "T00110"
+    id: "T00110"
     text: "The Elevation of Privilege game is a fun and easy way to get started understanding the security of your systems by threat modeling. As you discover and correct design-level security problems, it’s worth thinking about the other ways security issues can creep into your code. Microsoft has a large collection of free resources available to help you get started with the Security Development Lifecycle (SDL)."
   -
-    value: "T00120"
+    id: "T00120"
     text: "To learn more about threat modeling and the Microsoft Security Development Lifecycle, visit our website at"
   -
-    value: "T00130"
+    id: "T00130"
     text: "continued on back"
   -
-    value: "T00140"
+    id: "T00140"
     text: "cont."
   -
-    value: "T00150"
+    id: "T00150"
     text: "Instructions"
   -
-    value: "T00160"
+    id: "T00160"
     text: "Draw a diagram of the system you want to threat model before you deal the cards."
   -
-    value: "T00170"
+    id: "T00170"
     text: "Deal the deck to 3-6 players. Play starts with the 3of Tampering. Play clockwise, and each player in turn continues using the suit if they have a card in that suit. If the player doesn't have a card from that suit, the player can use another suit.  Each round is won by the highest card played in the suit that was led, unless an Elevation of Privilege (EoP) card is played. In that case the high value EoP card wins."
   -
-    value: "T00180"
+    id: "T00180"
     text: "To play a card, read the card, announce your threat and record it. If the player can't link the threat to the system, play proceeds."
   -
-    value: "T00190"
+    id: "T00190"
     text: "The winner of a hand selects the card (and suit) to lead the next hand. Take a few minutes between hands to think about threats."
   -
-    value: "T00200"
+    id: "T00200"
     text: "Points:"
   -
-    value: "T00210"
+    id: "T00210"
     text: "1 for a threat on your card, +1 for taking the trick"
   -
-    value: "T00220"
+    id: "T00220"
     text: "Threats should be articulated clearly, testable, and "
   -
-    value: "T00230"
+    id: "T00230"
     text: "addressable. In the event that a threat leads to an "
   -
-    value: "T00240"
+    id: "T00240"
     text: "argument, you can resolve it by asking the question: “Would we take an actionable bug, feature request or design change for that?” If the answer is yes, it is a real threat. (This doesn't mean that threats outside of that aren't real, it's simply a way to focus discussion on actionable threats.)  Questions that start with “There's a way” should be read as “There's a way…and here's how…”while questions that start with “Your code” should be read “The code we're collectively creating…and here's how.”"
   -
-    value: "T00250"
+    id: "T00250"
     text: "The deck contains a number of special cards: trumps and open threats. EoP cards are trumps: They take the trick even if they have a lower value than the suit that was led. The ace of each suit is an open threat card. When played, the player must identify a threat not listed on another card."
   -
-    value: "T00260"
+    id: "T00260"
     text: "When all the cards have been played, whoever has the most points wins."
   -
-    value: "T00270"
+    id: "T00270"
     text: "Remember to have fun!"
   -
-    value: "T00280"
+    id: "T00280"
     text: "Variants"
   -
-    value: "T00290"
+    id: "T00290"
     text: "Optional variants:"
   -
-    value: "T00300"
+    id: "T00300"
     text: "You may pass cards after the third trick. This is helpful if you have cards that you can't tie to the system. Someone else may be able to."
   -
-    value: "T00310"
+    id: "T00310"
     text: "Double the number of points, and give one point for threats on other people's cards."
   -
-    value: "T00320"
+    id: "T00320"
     text: "Other players may “riff” on the threat and if they do, they get one point per additional threat."
   -
-    value: "T00330"
+    id: "T00330"
     text: "Limit riffing to no more than 60 seconds."
   -
-    value: "T00340"
+    id: "T00340"
     text: "Mark up the diagram where the threat occurs."
   -
-    value: "T00350"
+    id: "T00350"
     text: "Questions are listed on the threat cards to help with the aces."
   -
-    value: "T00360"
+    id: "T00360"
     text: "Thanks to Laurie Williams for inspiration."
   -
-    value: "T00370"
+    id: "T00370"
     text: "Contents:"
   -
-    value: "T00380"
+    id: "T00380"
     text: "Instruction cards"
   -
-    value: "T00390"
+    id: "T00390"
     text: "Strategy Diagram card"
   -
-    value: "T00400"
+    id: "T00400"
     text: "STRIDE Threat cards 'suits':"
   -
-    value: "T00410"
+    id: "T00410"
     text: "poofing:  2-K, Ace"
   -
-    value: "T00420"
+    id: "T00420"
     text: "Tampering:  2-K, Ace"
   -
-    value: "T00430"
+    id: "T00430"
     text: "Repudiation: 2-K, Ace"
   -
-    value: "T00440"
+    id: "T00440"
     text: "Information Disclosure: 2-K, Ace"
   -
-    value: "T00450"
+    id: "T00450"
     text: "Denial of Service: 2-K, Ace"
   -
-    value: "T00460"
+    id: "T00460"
     text: "Elevation of Privilege:  2-K, Ace (Trump cards)"
   -
-    value: "T00470"
+    id: "T00470"
     text: "STRIDE Threat Reference cards"
   -
-    value: "T00480"
+    id: "T00480"
     text: "About Threat Modeling and SDL card"
   -
-    value: "T00490"
+    id: "T00490"
     text: "Information\n"
   -
-    value: "T00495"
+    id: "T00495"
     text: "Disclosure"
   -
-    value: "T00500"
+    id: "T00500"
     text: "Elevation of"
   -
-    value: "T00505"
+    id: "T00505"
     text: "Privilege"
   -
-    value: "T00510"
+    id: "T00510"
     text: "Denial of"
   -
-    value: "T00515"
+    id: "T00515"
     text: "Service"

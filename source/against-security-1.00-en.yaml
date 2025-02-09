@@ -24,12 +24,14 @@ suits:
   -
     id: "JOA"
     value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOA"
     card: "Joker"
     desc: "This is a wild card"
     misc: "Make something up!"
   -
     id: "JOB"
     value: "B"
+    url: "https://cornucopia.owasp.org/cards/JOB"
     card: "Joker"
     desc: "This is a wild card"
     misc: "Make something up!"
@@ -40,13 +42,10 @@ paragraphs:
   sentences:
   -
     id: "NoCard"
-    value: "NoCard"
     text: "No Card"
   -
     id: "Title"
-    value: "Title"
     text: "Cards Against Security Edition v1.00-EN"
   -
     id: "Title_full"
-    value: "Title_full"
     text: "Cards Against Security Edition v1.00-EN"

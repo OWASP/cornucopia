@@ -137,7 +137,7 @@ def test_main_with_target(self, mock_safe_dump, mock_open):
       - name: "Test Suit"
         cards:
           - cre: ["cre1"]
-            value: "Test Value"
+            id: "Test Value"
     """
 
     with patch.object(argparse, "ArgumentParser") as mock_parser:
@@ -164,7 +164,7 @@ def test_main_with_qr_images(self, mock_safe_load, mock_open, mock_generate_qr_i
       - name: "Test Suit"
         cards:
           - cre: ["cre1"]
-            value: "Test Value"
+            id: "Test Value"
     """
     mock_safe_load.return_value = {
         "suits": [{"name": "Test Suit", "cards": [{"cre": ["cre1"], "value": "Test Value"}]}]
@@ -191,7 +191,7 @@ def test_main_without_target_or_qr_images(self, mock_print, mock_open):
       - name: "Test Suit"
         cards:
           - cre: ["cre1"]
-            value: "Test Value"
+            id: "Test Value"
     """
 
     with patch.object(argparse, "ArgumentParser") as mock_parser:

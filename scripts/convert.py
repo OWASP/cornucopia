@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ElTree
 from typing import Any, Dict, List, Tuple
 from operator import itemgetter
 from itertools import groupby
+from pathlib import Path
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
 
@@ -26,7 +27,7 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it"]
+    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
@@ -356,7 +357,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 def is_valid_string_argument(argument: str) -> str:
     if len(argument) > 255:
         raise argparse.ArgumentTypeError("The option can not have more the 255 char.")
-    if not re.match(r"^[A-Za-z0-9._-]+$", argument):
+    if not re.match(r"^[A-Za-zА-Яа-я0-9._-]+$", argument):
         raise argparse.ArgumentTypeError(
             "The option can only contain a-z letters, numbers, periods, dash or underscore"
         )
@@ -418,13 +419,11 @@ def get_find_replace_list(meta: Dict[str, str], template: str, layout: str) -> L
     return ll
 
 
-def get_full_tag(suit_tag: str, card: str, tag: str) -> str:
-    if suit_tag == "WC":
-        full_tag = "${{{}}}".format("_".join([suit_tag, card, tag]))
-    elif suit_tag == "Common":
-        full_tag = "${{{}}}".format("_".join([suit_tag, card]))
+def get_full_tag(cat_id: str, id: str, tag: str) -> str:
+    if cat_id == "Common":
+        full_tag = "${{{}}}".format("_".join([cat_id, id]))
     else:
-        full_tag = "${{{}}}".format("_".join([suit_tag, suit_tag + card, tag]))
+        full_tag = "${{{}}}".format("_".join([cat_id, id, tag]))
     return full_tag
 
 
@@ -504,19 +503,13 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
                 data[full_tag] = paragraphs["name"]
             for paragraph in paragraphs[text_type]:
                 for tag, text_output in paragraph.items():
-                    if tag == "value":
-                        continue
-                    full_tag = get_full_tag(
-                        is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["value"]), tag
-                    )
-                    logging.debug(f" --- tag = {full_tag}")
-                    # Add a translation for "Joker"
-                    if paragraphs["id"] == "WC" and tag == "value":
-                        full_tag = "${{{}}}".format(
-                            "_".join([is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(tag)])
-                        )
-                    logging.debug(f" --- tag = {full_tag}")
+                    logging.debug(f" --- tag = {tag}")
                     logging.debug(f" --- text = {text_output}")
+                    logging.debug(f" --- paragraph = {paragraph}")
+                    full_tag = get_full_tag(
+                        is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["id"]), tag
+                    )
+                    logging.debug(f" --- full tag = {full_tag}")
                     data[full_tag] = check_make_list_into_text(text_output)
     return data
 
@@ -729,7 +722,7 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
         )
 
     template_doc = template_doc.replace("\\ ", " ")
-    template_doc = sanitize_filepath(template_doc)
+    template_doc = str(Path(sanitize_filepath(template_doc)))
     if os.path.isfile(template_doc):
         template_doc = check_fix_file_extension(template_doc, sfile_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
@@ -905,12 +898,12 @@ def rename_output_file(file_extension: str, template: str, layout: str, meta: Di
         if os.path.isabs(args_output_file):
             output_filename = args_output_file
         else:
-            output_filename = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_output_file)
+            output_filename = str(Path(convert_vars.BASE_PATH + os.sep + args_output_file))
     else:
 
         # No output file specified - using default
-        output_filename = os.path.normpath(
-            convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_OUTPUT_FILENAME + file_extension
+        output_filename = str(
+            Path(convert_vars.BASE_PATH + os.sep + convert_vars.DEFAULT_OUTPUT_FILENAME + file_extension)
         )
 
     logging.debug(f" --- output_filename before fix extension = {output_filename}")
@@ -923,7 +916,7 @@ def rename_output_file(file_extension: str, template: str, layout: str, meta: Di
     for r in find_replace:
         f = f.replace(*r)
     output_filename = os.path.dirname(output_filename) + os.sep + f
-    output_filename = sanitize_filepath(output_filename)
+    output_filename = str(Path(sanitize_filepath(output_filename)))
 
     logging.debug(f" --- output_filename = {output_filename}")
     return output_filename
@@ -977,9 +970,9 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
 def zip_dir(path: str, zip_filename: str) -> None:
     """Zip all the files recursively from path into zip_filename (excluding root path)"""
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        for root, dirs, files in os.walk(path):
+        for root, dirs, files in os.walk(os.path.normpath(path)):
             for file in files:
-                f = os.path.join(root, file)
+                f = str(Path(os.path.join(root, file)))
                 zip_file.write(f, f[len(path) :])
 
 

@@ -265,13 +265,11 @@ class TestGetTemplateForEdition(unittest.TestCase):
         layout = "guide"
         template = "bridge"
         edition = "webapp"
-        want_template_doc = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+
+        want_template_doc = os.path.normpath(
+            os.path.join(
+                c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
+            )
         )
 
         got_template_doc = c.get_template_for_edition(layout, template, edition)
@@ -281,13 +279,10 @@ class TestGetTemplateForEdition(unittest.TestCase):
         layout = "cards"
         template = "bridge"
         edition = "webapp"
-        want_template_doc = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml",
-            ]
+        want_template_doc = os.path.normpath(
+            os.path.join(
+                c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml"
+            )
         )
 
         got_template_doc = c.get_template_for_edition(layout, template, edition)
@@ -297,16 +292,11 @@ class TestGetTemplateForEdition(unittest.TestCase):
         layout = "guide"
         template = "bridge"
         edition = "webapp"
-        c.convert_vars.args.inputfile = os.sep.join(
-            ["..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
+        c.convert_vars.args.inputfile = os.path.normpath(
+            os.path.join("..", "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx")
         )
-        want_template_doc = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        want_template_doc = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
 
         got_template_doc = c.get_template_for_edition(layout, template, edition)
@@ -316,23 +306,20 @@ class TestGetTemplateForEdition(unittest.TestCase):
         layout = "guide"
         template = "bridge"
         edition = "webapp"
-        c.convert_vars.args.inputfile = os.sep.join(
-            ["resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
+        c.convert_vars.args.inputfile = os.path.normpath(
+            os.path.join("resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx")
         )
-        want_template_doc = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        want_template_doc = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
 
         got_template_doc = c.get_template_for_edition(layout, template, edition)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_for_edition_file_not_exist(self) -> None:
-        template_docx_filename = os.sep.join(["resources", "templates", "owasp_cornucopia_template_template.docx"])
+        template_docx_filename = os.path.normpath(
+            os.path.join("resources", "templates", "owasp_cornucopia_template_template.docx")
+        )
         c.convert_vars.args.inputfile = template_docx_filename
         layout = "guide"
         template = "bridge"
@@ -357,11 +344,11 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args.outputfile = ""
 
     def test_rename_output_file_short(self) -> None:
-        c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_edition_ver_layout_lang.docx"])
+        c.convert_vars.args.outputfile = os.path.join("output", "cornucopia_edition_ver_layout_lang.docx")
         file_extension = ".docx"
         template = "bridge"
         layout = "guide"
-        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.docx"])
+        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.docx")
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -371,7 +358,7 @@ class TestRenameOutputFile(unittest.TestCase):
         file_extension = ".idml"
         template = "bridge"
         layout = "guide"
-        want_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.idml"])
+        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_1.22_guide_en.idml")
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -381,8 +368,8 @@ class TestRenameOutputFile(unittest.TestCase):
         file_extension = ".docx"
         template = "bridge"
         layout = "guide"
-        want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"]
+        want_filename = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -393,8 +380,8 @@ class TestRenameOutputFile(unittest.TestCase):
         file_extension = ".docx"
         template = "bridge"
         layout = "guide"
-        want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"]
+        want_filename = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -405,8 +392,8 @@ class TestRenameOutputFile(unittest.TestCase):
         file_extension = ".docx"
         template = "bridge"
         layout = "guide"
-        want_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"]
+        want_filename = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_en.docx"
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -452,7 +439,7 @@ class TestValidMeta(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
             valid: bool = c.valid_meta(self.meta, "fr", "webapp", "1.22", "bridge", "cards")
         self.assertFalse(valid)
-        self.assertIn(want_logging_error_message, ll.output[0])
+        self.assertIn(want_logging_error_message, " ".join(ll.output))
 
 
 class TestGetMetaData(unittest.TestCase):
@@ -465,11 +452,16 @@ class TestGetMetaData(unittest.TestCase):
                     "name": "Data validation & encoding",
                     "cards": [
                         {
+                            "id": "VEA",
                             "value": "A",
                             "desc": "You have invented a new attack against Data Validation",
                             "misc": "Read more about this topic in OWASP's free Cheat Sheets",
                         },
-                        {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                        {
+                            "id": "VE2",
+                            "value": "2",
+                            "desc": "Brian can gather information about the underlying configurations",
+                        },
                     ],
                 },
             ],
@@ -498,7 +490,7 @@ class TestGetMetaData(unittest.TestCase):
 
 class TestGetLanguageData(unittest.TestCase):
     def setUp(self) -> None:
-        test_source_yaml = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"])
+        test_source_yaml = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml")
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
         self.test_data: Dict[str, Any] = {
@@ -509,14 +501,18 @@ class TestGetLanguageData(unittest.TestCase):
                     "name": "Data validation & encoding",
                     "cards": [
                         {
-                            "id": "DVA",
+                            "id": "VEA",
                             "value": "A",
                             "desc": "You have invented a new attack against Data Validation and Encoding",
                             "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
                             "XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, "
                             "and Query Parameterization",
                         },
-                        {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                        {
+                            "id": "VE2",
+                            "value": "2",
+                            "desc": "Brian can gather information about the underlying configurations",
+                        },
                     ],
                 },
             ],
@@ -592,6 +588,7 @@ class TestGetLanguageData(unittest.TestCase):
     def test_get_mapping_data_for_edition_first_suit_first_card(self) -> None:
         want_first_suit_keys = {"id": "", "name": "", "cards": ""}.keys()
         want_first_suit_first_card = {
+            "id": "VE2",
             "value": "2",
             "owasp_scp": [69, 107, 108, 109, 136, 137, 153, 156, 158, 162],
             "owasp_asvs": ["1.10", 4.5, 8.1, 11.5, 19.1, 19.5],
@@ -609,7 +606,7 @@ class TestGetLanguageData(unittest.TestCase):
 
 class TestGetLanguageDataFor1dot30(unittest.TestCase):
     def setUp(self) -> None:
-        test_source_yaml = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"])
+        test_source_yaml = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml")
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
         self.input_version = "2.00"
@@ -621,14 +618,18 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
                     "name": "Data validation & encoding",
                     "cards": [
                         {
-                            "id": "DVA",
+                            "id": "VEA",
                             "value": "A",
                             "desc": "You have invented a new attack against Data Validation and Encoding",
                             "misc": "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, "
                             "XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, "
                             "and Query Parameterization",
                         },
-                        {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                        {
+                            "id": "VE2",
+                            "value": "2",
+                            "desc": "Brian can gather information about the underlying configurations",
+                        },
                     ],
                 },
             ],
@@ -699,6 +700,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
     def test_get_mapping_data_for_edition_first_suit_first_card_asvs4(self) -> None:
         want_first_suit_keys = {"id": "", "name": "", "cards": ""}.keys()
         want_first_suit_first_card = {
+            "id": "VE2",
             "value": "2",
             "owasp_scp": [69, 107, 108, 109, 136, 137, 153, 156, 158, 162],
             "owasp_asvs": ["1.6.4", "2.10.4", "4.3.2", "7.1.1", "10.2.3", "14.1.1", "14.2.2", "14.3.3"],
@@ -809,7 +811,7 @@ class TestParseArguments(unittest.TestCase):
 class TestGetFilesFromOfType(unittest.TestCase):
     def test_get_files_from_of_type_source_yaml_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source"])
+        path = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source")
         ext = "yaml"
         want_files = list(
             path + os.sep + f
@@ -829,7 +831,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"])
+        path = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates")
         ext = "docx"
         want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
 
@@ -840,11 +842,11 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_empty_list(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "source"])
+        path = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source")
         ext = "ext"
         want_files: typing.List[str] = []
         want_logging_error_message = [
-            "ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"]))
+            "ERROR:root:No language files found in folder: " + str(os.path.join(c.convert_vars.BASE_PATH, "source"))
         ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
@@ -855,15 +857,13 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:
-        file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "tests",
-                "test_files",
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        file = os.path.join(
+            c.convert_vars.BASE_PATH,
+            "tests",
+            "test_files",
+            "resources",
+            "templates",
+            "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 33
@@ -875,8 +875,8 @@ class TestGetDocxDocument(unittest.TestCase):
         self.assertEqual(want_len_paragraphs, got_len_paragraphs)
 
     def test_get_docx_document_failure(self) -> None:
-        file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.d"]
+        file = os.path.join(
+            c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.d"
         )
         want_type = type(docx.Document())
         want_len_paragraphs = 0
@@ -901,11 +901,16 @@ class TestGetReplacementDict(unittest.TestCase):
                     "name": "Data validation & encoding",
                     "cards": [
                         {
+                            "id": "VEA",
                             "value": "A",
                             "desc": "You have invented a new attack against Data Validation",
                             "misc": "Read more about this topic in OWASP's free Cheat Sheets",
                         },
-                        {"value": "2", "desc": "Brian can gather information about the underlying configurations"},
+                        {
+                            "id": "VE2",
+                            "value": "2",
+                            "desc": "Brian can gather information about the underlying configurations",
+                        },
                     ],
                 },
                 {
@@ -913,11 +918,12 @@ class TestGetReplacementDict(unittest.TestCase):
                     "name": "Authentication",
                     "cards": [
                         {
+                            "id": "ATA",
                             "value": "A",
                             "desc": "You have invented a new attack against Authentication",
                             "misc": "Read more about this topic in OWASP's free Cheat Sheet",
                         },
-                        {"value": "2", "desc": "James can undertake authentication functions without"},
+                        {"id": "AT2", "value": "2", "desc": "James can undertake authentication functions without"},
                     ],
                 },
             ],
@@ -927,12 +933,20 @@ class TestGetReplacementDict(unittest.TestCase):
         want_data = {
             "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "1.22"},
             "${VE_suit}": "Data validation & encoding",
+            "${VE_VEA_id}": "VEA",
+            "${VE_VEA_value}": "A",
             "${VE_VEA_desc}": "You have invented a new attack against Data Validation",
             "${VE_VEA_misc}": "Read more about this topic in OWASP's free Cheat Sheets",
+            "${VE_VE2_id}": "VE2",
+            "${VE_VE2_value}": "2",
             "${VE_VE2_desc}": "Brian can gather information about the underlying configurations",
             "${AT_suit}": "Authentication",
+            "${AT_ATA_id}": "ATA",
+            "${AT_ATA_value}": "A",
             "${AT_ATA_desc}": "You have invented a new attack against Authentication",
             "${AT_ATA_misc}": "Read more about this topic in OWASP's free Cheat Sheet",
+            "${AT_AT2_id}": "AT2",
+            "${AT_AT2_value}": "2",
             "${AT_AT2_desc}": "James can undertake authentication functions without",
         }
 
@@ -1000,10 +1014,10 @@ class TestConvertDocxToPdf(unittest.TestCase):
 
     def test_convert_docx_to_pdf_false(self) -> None:
         c.convert_vars.can_convert_to_pdf = False
-        input_docx_filename = os.sep.join(
-            [c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
+        input_docx_filename = os.path.join(
+            c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
-        want_pdf_filename = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"])
+        want_pdf_filename = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf")
         want_logging_warn_message = [
             f"WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
             f"to pdf (yet) on operating system: {platform.system()}\n"
@@ -1018,13 +1032,13 @@ class TestConvertDocxToPdf(unittest.TestCase):
 class TestGetMappingForEdition(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        self.BASE_PATH = os.sep.join([c.convert_vars.BASE_PATH, "tests", "test_files"])
+        self.BASE_PATH = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files")
 
     def tearDown(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
 
     def test_get_mapping_dict_true(self) -> None:
-        input_yaml_files = glob.glob(os.sep.join([self.BASE_PATH, "source", "*.yaml"]))
+        input_yaml_files = glob.glob(os.path.join(self.BASE_PATH, "source", "*.yaml"))
         want_mapping_dict = {
             "meta": {
                 "edition": "webapp",
@@ -1035,11 +1049,15 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
                 "languages": ["en", "es"],
             },
+            "${VE_VE2_id}": "VE2",
+            "${VE_VE2_value}": "2",
             "${VE_VE2_owasp_scp}": "69, 107-109, 136-137, 153, 156, 158, 162",
             "${VE_VE2_owasp_asvs}": "1.10, 4.5, 8.1, 11.5, 19.1, 19.5",
             "${VE_VE2_owasp_appsensor}": "HT1, HT2, HT3",
             "${VE_VE2_capec}": "54, 541",
             "${VE_VE2_safecode}": "4, 23",
+            "${VE_VE3_id}": "VE3",
+            "${VE_VE3_value}": "3",
             "${VE_VE3_owasp_scp}": " - ",
             "${VE_VE3_owasp_asvs}": "5.1, 5.16, 5.17, 5.18, 5.19, 5.20, 11.1, 11.2",
             "${VE_VE3_owasp_appsensor}": "RE7, RE8, AE4, AE5, AE6, AE7, IE2, IE3, CIE1, CIE3, CIE4, HT1, HT2, HT3",
@@ -1051,21 +1069,21 @@ class TestGetMappingForEdition(unittest.TestCase):
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_empty(self) -> None:
-        input_yaml_files = [os.sep.join([self.BASE_PATH, "source", "webapp-cards-1.22-en.yaml"])]
+        input_yaml_files = [os.path.join(self.BASE_PATH, "source", "webapp-cards-1.22-en.yaml")]
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
             got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "bridge", "cards")
-        self.assertIn("WARNING:root:Could not retrieve valid mapping information", ll.output)
+        self.assertIn("WARNING:root:Could not retrieve valid mapping information", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_wrong_file_type(self) -> None:
-        input_yaml_files = [os.sep.join([self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"])]
+        input_yaml_files = [os.path.join(self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx")]
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
             got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "1.22", "en", "webapp", "bridge", "cards")
-        self.assertIn("WARNING:root:Could not retrieve valid mapping information", ll.output)
+        self.assertIn("WARNING:root:Could not retrieve valid mapping information", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
 
@@ -1076,10 +1094,10 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         )
         self.b = c.convert_vars.BASE_PATH
         self.default_template_filename = c.convert_vars.DEFAULT_TEMPLATE_FILENAME
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
         c.convert_vars.can_convert_to_pdf = True
         logging.getLogger().setLevel(logging.INFO)
-        self.temp_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp.docx"])
+        self.temp_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp.docx")
         self.want_file = ""
 
     def tearDown(self) -> None:
@@ -1092,7 +1110,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             os.remove(self.temp_file)
 
     def test_create_edition_from_template_none_valid_input(self) -> None:
-        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_invalid.docx"])
+        self.want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_invalid.docx")
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -1101,7 +1119,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn(
             "WARNING:root:No mapping file found for version: invalid, lang: invalid, edition: webapp, "
             "template: invalid, layout: invalid",
-            l2.output,
+            " ".join(l2.output),
         )
 
     def test_create_edition_from_template_wrong_base_path(self) -> None:
@@ -1112,8 +1130,8 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.ERROR) as l2:
             c.create_edition_from_template("invalid", "invalid", "invalid", "invalid")
         self.assertIn(
-            "ERROR:root:No language files found in folder: " + str(os.sep.join([c.convert_vars.BASE_PATH, "source"])),
-            l2.output,
+            "ERROR:root:No language files found in folder: " + str(os.path.join(c.convert_vars.BASE_PATH, "source")),
+            " ".join(l2.output),
         )
 
     def test_create_edition_from_template_with_wrong_default_template_file_name(self) -> None:
@@ -1124,10 +1142,10 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn(
             "ERROR:root:Source file not found: "
             + str(
-                os.sep.join([c.convert_vars.BASE_PATH, "does_not_exists.docx"])
+                os.path.join(c.convert_vars.BASE_PATH, "does_not_exists.docx")
                 + ". Please ensure file exists and try again."
             ),
-            l2.output,
+            " ".join(l2.output),
         )
 
     def test_create_edition_from_template_with_pdf_option_on(self) -> None:
@@ -1150,7 +1168,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             f"WARNING:root:Error. A temporary docx file was created in the output folder but cannot be converted "
             f"to pdf (yet) on operating system: {platform.system()}\n"
             f"This does work on Windows and Mac with MS Word installed.",
-            l2.output,
+            " ".join(l2.output),
         )
 
     def test_create_edition_from_template_with_pdf_option_on_system_that_can_not_convert(self) -> None:
@@ -1169,7 +1187,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
         with self.assertLogs(logging.getLogger(), logging.WARNING) as l2:
             c.create_edition_from_template("guide", "es")
-        self.assertIn("WARNING:root:\nConvert error: ", l2.output)
+        self.assertIn("WARNING:root:\nConvert error: ", " ".join(l2.output))
 
     def test_create_edition_from_template_with_wrong_layout(self) -> None:
 
@@ -1179,7 +1197,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn(
             "WARNING:root:The layout: invalid does not exist for edition: webapp, version: 1.22 "
             "or the layout choices are missing from the meta -> layouts section in the mappings file",
-            ll.output,
+            " ".join(ll.output),
         )
 
     def test_create_edition_from_template_with_wrong_template(self) -> None:
@@ -1189,46 +1207,47 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn(
             "WARNING:root:The template: invalid does not exist for edition: webapp, version: 1.22 or "
             "the template choices are missing from the meta templates section in the mappings file",
-            ll.output,
+            " ".join(ll.output),
         )
 
     def test_create_edition_from_template_spanish(self) -> None:
-        want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_es.docx"]
+        want_file = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_guide_bridge_es.docx"
         )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
-        want_info_log_messages = ["INFO:root:New file saved: " + want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("guide", "es")
-        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
+        self.assertIn("owasp_cornucopia_webapp_1.22_guide_bridge_es.docx", " ".join(ll.output))
+
         self.assertTrue(os.path.isfile(want_file))
 
     def test_create_edition_from_template_en_idml(self) -> None:
-        self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_bridge_en.idml"]
+        self.want_file = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_bridge_en.idml"
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
-        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("cards", "en")
-        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
+        self.assertIn("owasp_cornucopia_webapp_1.22_cards_bridge_en.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
 
     def test_create_edition_from_template_es_specify_output(self) -> None:
-        c.convert_vars.args.outputfile = os.sep.join(["output", "cornucopia_cards_es.idml"])
-        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile])
+        c.convert_vars.args.outputfile = os.path.join("output", "cornucopia_cards_es.idml")
+        self.want_file = os.path.join(c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile)
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
-        want_info_log_messages = ["INFO:root:New file saved: " + self.want_file]
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("cards", "es")
-        self.assertEqual(ll.output, want_info_log_messages)
+        self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
+        self.assertIn("cornucopia_cards_es.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
 
 
@@ -1241,7 +1260,7 @@ class TestSaveIdmlFile(unittest.TestCase):
             debug=False,
         )
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
         c.convert_vars.can_convert_to_pdf = False
         self.default_output_file = c.convert_vars.DEFAULT_OUTPUT_FILENAME
         logging.getLogger().setLevel(logging.INFO)
@@ -1263,16 +1282,14 @@ class TestSaveIdmlFile(unittest.TestCase):
         c.convert_vars.BASE_PATH = self.b
 
     def test_save_idml_file_test_location(self) -> None:
-        input_template_doc = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml",
-            ]
+        input_template_doc = os.path.join(
+            c.convert_vars.BASE_PATH,
+            "resources",
+            "templates",
+            "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml",
         )
-        self.want_file = os.sep.join(
-            [c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_bridge_en.idml"]
+        self.want_file = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_1.22_cards_bridge_en.idml"
         )
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
@@ -1289,7 +1306,7 @@ class TestSaveDocxFile(unittest.TestCase):
         )
         self.want_file = ""
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
         c.convert_vars.can_convert_to_pdf = False
         logging.getLogger().setLevel(logging.INFO)
 
@@ -1299,9 +1316,9 @@ class TestSaveDocxFile(unittest.TestCase):
             os.remove(self.want_file)
 
     def test_save_docx_file_defaults(self) -> None:
-        filename = os.sep.join([c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en_static.docx"])
+        filename = os.path.join(c.convert_vars.BASE_PATH, "resources", "originals", "owasp_cornucopia_en_static.docx")
         input_doc = docx.Document(filename)
-        self.want_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_en_static.docx"])
+        self.want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_en_static.docx")
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -1326,8 +1343,8 @@ motivation came when SAFECode published its Practical Security Stories and Secur
 Development Environments in July 2012.",
         }
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
-        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -1376,8 +1393,8 @@ motivation came when SAFECode published its Practical Security Stories and Secur
 Development Environments in July 2012.",
         }
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
-        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -1415,11 +1432,11 @@ class TestReplaceTextInXmlFile(unittest.TestCase):
             "${VE_VEA_desc}": "You have invented a new attack against Data Validation and Encoding",
             "${VE_VE2_desc}": "Read more about this topic in OWASP's free Cheat Sheets",
             "${WC_suit}": "Wild Card",
-            "${WC_WCA_desc}": "Alice can utilize the application to attack users' systems and data",
+            "${WC_JOA_desc}": "Alice can utilize the application to attack users' systems and data",
         }
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
-        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -1454,8 +1471,8 @@ class TestReplaceTextInXmlFileFail(unittest.TestCase):
 </ParagraphStyleRange>"""
         self.input_dict = {}
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
-        self.input_xml_file = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -1492,7 +1509,7 @@ class Test1(unittest.TestCase):
             ("${VE_suit}", "Validation & Encoding"),
             ("${VE_VE2_desc}", "You have invented a new attack against Data Validation and Encoding"),
             ("${WC_suit}", "Wild Card"),
-            ("${WC_A_desc}", "Alice can utilize the application to attack users' systems and data"),
+            ("${WC_JOA_desc}", "Alice can utilize the application to attack users' systems and data"),
         ]
 
     def test_get_replacement_value_from_dict_exact(self) -> None:
@@ -1581,18 +1598,18 @@ class TestGetSuitTagsAndKey(unittest.TestCase):
 class TestGetFullTag(unittest.TestCase):
     def test_get_full_tag_ve(self) -> None:
         input_suit_tag = "VE"
-        input_card = "2"
+        input_id = "VE2"
         input_tag = "desc"
         want_full_tag = "${VE_VE2_desc}"
 
-        got_full_tag = c.get_full_tag(input_suit_tag, input_card, input_tag)
+        got_full_tag = c.get_full_tag(input_suit_tag, input_id, input_tag)
         self.assertEqual(want_full_tag, got_full_tag)
 
     def test_get_full_tag_wc(self) -> None:
         input_suit_tag = "WC"
-        input_card = "A"
+        input_card = "JOA"
         input_tag = "desc"
-        want_full_tag = "${WC_A_desc}"
+        want_full_tag = "${WC_JOA_desc}"
 
         got_full_tag = c.get_full_tag(input_suit_tag, input_card, input_tag)
         self.assertEqual(want_full_tag, got_full_tag)
@@ -1610,8 +1627,8 @@ class TestGetFullTag(unittest.TestCase):
 class TestZipDir(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
-        self.input_filename = os.sep.join([c.convert_vars.BASE_PATH, "output", "test.zip"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
+        self.input_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "test.zip")
 
     def tearDown(self) -> None:
         if os.path.isfile(self.input_filename):
@@ -1619,7 +1636,7 @@ class TestZipDir(unittest.TestCase):
         c.convert_vars.BASE_PATH = self.b
 
     def test_zip_dir_success(self) -> None:
-        input_path = os.sep.join([c.convert_vars.BASE_PATH, "source"])
+        input_path = os.path.join(c.convert_vars.BASE_PATH, "source")
         if os.path.isfile(self.input_filename):
             os.remove(self.input_filename)
         want_min_file_size = 2600
@@ -1633,22 +1650,22 @@ class TestZipDir(unittest.TestCase):
 class TestEnsureFolderExists(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
 
     def tearDown(self) -> None:
-        temp_path = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp"])
+        temp_path = os.path.join(c.convert_vars.BASE_PATH, "output", "temp")
         c.convert_vars.BASE_PATH = self.b
         if os.path.exists(temp_path):
             shutil.rmtree(temp_path, ignore_errors=True)
 
     def test_ensure_folder_exists_new(self) -> None:
-        input_path = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "path"])
+        input_path = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "path")
 
         c.ensure_folder_exists(input_path)
         self.assertTrue(os.path.exists(input_path))
 
     def test_ensure_folder_exists_old(self) -> None:
-        input_path = os.sep.join([c.convert_vars.BASE_PATH, "output", "temp", "path"])
+        input_path = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "path")
 
         c.ensure_folder_exists(input_path)
         self.assertTrue(os.path.exists(input_path))
@@ -1659,7 +1676,7 @@ class TestEnsureFolderExists(unittest.TestCase):
 class TestReplaceDocxInlineText(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
@@ -1677,13 +1694,8 @@ class TestReplaceDocxInlineText(unittest.TestCase):
         return text_list
 
     def test_replace_docx_inline_text_expected_keys_present(self) -> None:
-        template_docx_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        template_docx_file = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
@@ -1696,13 +1708,8 @@ class TestReplaceDocxInlineText(unittest.TestCase):
             self.assertIn(t, text_list)
 
     def test_replace_docx_inline_text_new_text_present(self) -> None:
-        template_docx_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        template_docx_file = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
@@ -1716,13 +1723,8 @@ class TestReplaceDocxInlineText(unittest.TestCase):
             self.assertIn(t, text_list)
 
     def test_replace_docx_inline_text_keys_replaced(self) -> None:
-        template_docx_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        template_docx_file = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
         doc = docx.Document(template_docx_file)
         input_replacement_data = {
@@ -1739,19 +1741,14 @@ class TestReplaceDocxInlineText(unittest.TestCase):
 class TestGetDocumentParagraphs(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
 
     def test_get_document_paragraphs_len_paragraphs(self) -> None:
-        template_docx_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        template_docx_file = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
         doc = docx.Document(template_docx_file)
         want_len_paragraphs = 2010
@@ -1760,13 +1757,8 @@ class TestGetDocumentParagraphs(unittest.TestCase):
         self.assertEqual(want_len_paragraphs, len(paragraphs))
 
     def test_get_document_paragraphs_find_text(self) -> None:
-        template_docx_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        template_docx_file = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
         doc = docx.Document(template_docx_file)
         want_text_list = [
@@ -1788,19 +1780,14 @@ class TestGetDocumentParagraphs(unittest.TestCase):
 class TestGetParagraphsFromTableInDoc(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
-        c.convert_vars.BASE_PATH = os.sep.join([self.b, "tests", "test_files"])
+        c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
 
     def tearDown(self) -> None:
         c.convert_vars.BASE_PATH = self.b
 
     def test_get_paragraphs_from_table_in_doc(self) -> None:
-        template_docx_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "resources",
-                "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
-            ]
+        template_docx_file = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
         )
         doc = docx.Document(template_docx_file)
         doc_tables = doc.tables
