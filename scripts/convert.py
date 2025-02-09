@@ -28,14 +28,14 @@ class ConvertVars:
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
     LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.22", "2.00", "2.1"]
+    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.00", "2.1"]
     LATEST_VERSION_CHOICES: List[str] = ["1.1", "2.1"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
         "webapp": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1"},
         "against-security": {"1.00": "1.00"},
-        "mobileapp": {"1.00": "1.00", "1.1": "1.1"},
-        "all": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1", "1.00": "1.00", "1.1": "1.1"},
+        "mobileapp": {"1.0": "1.0", "1.1": "1.1"},
+        "all": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1", "1.0": "1.0", "1.1": "1.1"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
@@ -451,7 +451,7 @@ def get_mapping_for_edition(
 def get_mapping_data_for_edition(
     yaml_files: List[str],
     language: str,
-    version: str = "1.22",
+    version: str = "2.1",
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
@@ -552,7 +552,7 @@ def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Docu
 def get_language_data(
     yaml_files: List[str],
     language: str,
-    version: str = "1.22",
+    version: str = "2.1",
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""

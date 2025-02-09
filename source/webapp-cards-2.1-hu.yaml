@@ -453,10 +453,10 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Ecommerce Website Edition v1.21-EN"
+    text: "Website App Edition v2.1-EN"
   -
     id: "Title_full"
-    text: "OWASP Cornucopia Ecommerce Website Edition v1.21-EN"
+    text: "OWASP Cornucopia Website App Edition v2.1-EN"
   -
     id: "T00010"
     text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
