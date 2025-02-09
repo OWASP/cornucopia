@@ -27,7 +27,7 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it"]
+    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.00", "1.22", "2.00"]
     LATEST_VERSION_CHOICES: List[str] = ["1.00", "2.00"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
@@ -357,7 +357,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 def is_valid_string_argument(argument: str) -> str:
     if len(argument) > 255:
         raise argparse.ArgumentTypeError("The option can not have more the 255 char.")
-    if not re.match(r"^[A-Za-z0-9._-]+$", argument):
+    if not re.match(r"^[A-Za-zА-Яа-я0-9._-]+$", argument):
         raise argparse.ArgumentTypeError(
             "The option can only contain a-z letters, numbers, periods, dash or underscore"
         )
