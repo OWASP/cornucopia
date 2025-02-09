@@ -1,6 +1,6 @@
 <script lang="ts">
 
-    let base : string = "https://github.com/OWASP/cornucopia/cornucopia.owasp.org/tree/master/data/cards/";
+    let base : string = "https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/cards/";
     //@TODO Would it be possible to link directly to the card?
     let href : string = base; //+ path;
 </script>
@@ -30,7 +30,7 @@
         width:max-content;
         text-decoration: none;
         transition: var(--transition);
-        
+
     }
 
     a:hover
@@ -47,7 +47,7 @@
     {
         padding: .5rem;
     }
-   
+
     img
     {
         width : 2rem;
