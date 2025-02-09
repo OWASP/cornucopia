@@ -5,8 +5,8 @@ meta:
   language: "ALL"
   version: "1.22"
   layouts: ["cards", "leaflet", "guide"]
-  templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
-  languages: ["en", "es", "fr", "nl", "nl", "no-nb", "pt-br"]
+  templates: ["bridge", "tarot"]
+  languages: ["en", "es", "fr", "nl", "nl", "no-nb", "pt-br", "pt-pt", "it"]
 suits:
 -
   id: "VE"
