@@ -6,7 +6,7 @@ import type { PageServerLoad } from "./$types";
 
 export const load = (({ params }) => {
   return {
-    card: legacyCardCodeFix(params.card.toUpperCase()),
+    card: legacyCardCodeFix(params.card?.toUpperCase()),
     decks: new DeckService(request).getCardsForAllLanguages(),
     routes: new Map<string, Route[]>([
       ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]

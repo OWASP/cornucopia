@@ -35,7 +35,7 @@ a
 
 h1,h2,h3,h4
 {
-    font-weight: 400;
+    font-weight: bold;
 }
 
 h1
@@ -76,4 +76,64 @@ a:visited
     width:59vw;
     height:auto;
     aspect-ratio:16/9;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 0rem;
+    display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: 4rem;
+}
+
+.text {
+    outline: 1px rgb(231, 231, 231) solid;
+    height: 100%;
+    min-height: 22vw;
+    width: calc(50% - 4rem);
+    opacity: 80%;
+    border-radius: 1rem;
+    background-color: rgb(255, 255, 255);
+    padding: 1rem 2rem 1rem 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+.text.desktop-left {
+    padding: 1rem 1rem 1rem 2rem;
+}
+
+.image {
+    width: 50%;
+    text-align: center;
+}
+
+img {
+    width: 80%;
+    object-fit: cover;
+    border-radius: .3rem;
+}
+
+.container.desktop-left {
+    flex-direction: row;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .container {
+        flex-direction: column;
+    }
+
+    .image {
+        width: 90%;
+        padding: 0;
+        margin: auto;
+    }
+
+    .text {
+        padding: 1rem;
+        height: 100%;
+        width: calc(100% - 2rem);
+    }
 }

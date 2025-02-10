@@ -20,16 +20,12 @@
     function getSuitColor(suit : string, id: string)
     {
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
-        console.log(suit);
-        console.log(id);
         return cardColor?.get(suit) ?? "";
     }
 
     function getTextColor(suit : string, id: string)
     {
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
-        console.log(suit);
-        console.log(id);
         return cardColor?.get(suit) ?? "default";
     }
 </script>
