@@ -28,7 +28,7 @@
       "CRMA","CRM2","CRM3","CRM4","CRM5","CRM6","CRM7","CRM8","CRM9","CRMX","CRMJ","CRMQ","CRMK",
       "NSA","NS2","NS3","NS4","NS5","NS6","NS7","NS8","NS9","NSX","NSJ","NSQ","NSK",
       "PCA","PC2","PC3","PC4","PC5","PC6","PC7","PC8","PC9","PCX","PCJ","PCQ","PCK",
-      "REA","RE2","RE3","RE4","RE5","RE6","RE7","RE8","RE9","REX","REJ","REQ","REK",
+      "RSA","RS2","RS3","RS4","RS5","RS6","RS7","RS8","RS9","RSX","RSJ","RSQ","RSK",
       "SMA","SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMJ","SMQ","SMK",
       "VEA","VE2","VE3","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
       "JOA","JOB","JOAM","JOBM","CORNUCOPIA"]
