@@ -5,7 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 black = "==25.1.0"
-coverage = "==7.6.10"
+coverage = "==7.6.11"
 flake8 = "==7.1.1"
 httpretty = "==1.1.4"
 mypy = "==1.15.0"
