@@ -1,63 +1,19 @@
 <script lang="ts">
-    import { browser } from "$app/environment";
-    import { goto } from "$app/navigation";
-    import { onDestroy } from "svelte";
-
-    // Automatic return to homepage delay in milliseconds
-    let timer : number = $state(10000);
-
-    let timeoutId : number = -1;
-
-    start();
-
-    function start()
-    {
-        timeoutId = +setTimeout(decrementTimer,33);
-    }
-    
-    function decrementTimer()
-    {
-        if(isLocalDev())
-            return;
-        
-        clearTimeout(timeoutId);
-        timer -= 33;
-        timeoutId = +setTimeout(decrementTimer,33);
-        if(timer < 33)
-            goto('/');
-    }
-
-    function isLocalDev() : boolean
-    {
-        if(browser)
-            return window.location.host.toLowerCase().includes('localhost');
-        else
-            return true;
-    }
-
-    onDestroy(()=>clearTimeout(timeoutId));
+    import { page } from '$app/state';
+    import TextImage from '$lib/components/textImage.svelte';
 </script>
 
 <div class="error-message">
-    <p>Oops, something went wrong!</p>
-    {#if !isLocalDev()}
-        <p>Returning to <a href="/">landing page</a> in {Math.floor(timer/1000.0)} seconds.</p>
-    {/if}
+    <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="left">
+        <h2>Request failed. Even Cornucopia can't cope with infinity ∞</h2>
+        <p>Status: {page.status}</p>
+        <p>Message: {page.error?.message}</p>
+    </TextImage>
 </div>
 
 <style>
     .error-message
     {
         min-height: 80vh;
-    }
-    p,a
-    {
-        color: var(--background);
-        width : 100%;
-        margin:auto;
-        text-align: center;
-        font-family: var(--font-title);
-        font-weight: 400;
-        margin-top: 10rem;
     }
 </style>

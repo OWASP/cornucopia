@@ -23,7 +23,6 @@
       "AZA","AZ2","AZ3","AZ4","AZ5","AZ6","AZ7","AZ8","AZ9","AZX","AZJ","AZQ","AZK",
       "CA","C2","C3","C4","C5","C6","C7","C8","C9","CX","CJ","CQ","CK",
       "CMA","CM2","CM3","CM4","CM5","CM6","CM7","CM8","CM9","CMX","CMJ","CMQ","CMK",
-      "COMA","COM2","COM3","COM4","COM5","COM6","COM7","COM8","COM9","COMX","COMJ","COMQ","COMK",
       "CRA","CR2","CR3","CR4","CR5","CR6","CR7","CR8","CR9","CRX","CRJ","CRQ","CRK",
       "CRMA","CRM2","CRM3","CRM4","CRM5","CRM6","CRM7","CRM8","CRM9","CRMX","CRMJ","CRMQ","CRMK",
       "NSA","NS2","NS3","NS4","NS5","NS6","NS7","NS8","NS9","NSX","NSJ","NSQ","NSK",
@@ -46,14 +45,14 @@
       "network-&-storage",
       "resilience",
     ]
-    return (cards_options.includes(String(card.id).toUpperCase()) && suits_options.includes(card.suitName.toLowerCase().replaceAll(' ', '-')))
+    return (cards_options.includes(String(card?.id).toUpperCase()) && suits_options.includes(card?.suitName?.toLowerCase().replaceAll(' ', '-')))
   }
 </script>
 <div>
 {#if cardFound()}
-  <CardFound routes={data.routes} {cards} {card}  mappingData={data.mappingData.get(card.edition)} />
+  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} />
 {:else}
-  <CardNotFound {card} />
+  <CardNotFound card={data.card} />
 {/if}
 </div>
 <style>
