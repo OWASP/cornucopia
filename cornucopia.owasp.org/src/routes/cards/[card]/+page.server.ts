@@ -3,6 +3,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { DeckService } from "$lib/services/deckService";
 import request from "sync-request";
 import type { PageServerLoad } from "./$types";
+import type { Route } from "../../../domain/routes/route";
 
 export const load = (({ params }) => {
   return {
@@ -21,4 +22,5 @@ export const load = (({ params }) => {
       .replace('DVE', 'VE')
       .replace('AC', 'AT');
   }
+  
 }) satisfies PageServerLoad;

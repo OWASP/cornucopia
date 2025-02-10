@@ -31,21 +31,7 @@
       "SMA","SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMJ","SMQ","SMK",
       "VEA","VE2","VE3","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
       "JOA","JOB","JOAM","JOBM","CORNUCOPIA"]
-    let suits_options = [
-      "data-validation-&-encoding",
-      "authentication",
-      "session-management",
-      "authorization",
-      "cryptography",
-      "cornucopia",
-      "wild-card",
-      "about",
-      "platform-&-code",
-      "authentication-&-authorization",
-      "network-&-storage",
-      "resilience",
-    ]
-    return (cards_options.includes(String(card?.id).toUpperCase()) && suits_options.includes(card?.suitName?.toLowerCase().replaceAll(' ', '-')))
+    return (cards_options.includes(String(card?.id).toUpperCase()))
   }
 </script>
 <div>
