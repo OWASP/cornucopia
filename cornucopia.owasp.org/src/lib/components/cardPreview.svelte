@@ -17,25 +17,31 @@
         previewStyle = ' ' + style;
     }
 
-    function getSuitColor(suit : string)
+    function getSuitColor(suit : string, id: string)
     {
+        if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
+        console.log(suit);
+        console.log(id);
         return cardColor?.get(suit) ?? "";
     }
 
-    function getTextColor(suit : string)
+    function getTextColor(suit : string, id: string)
     {
+        if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
+        console.log(suit);
+        console.log(id);
         return cardColor?.get(suit) ?? "default";
     }
 </script>
 
 <div class="card-render">
-    <div class="left {getSuitColor(card.suit)}">
+    <div class="left {getSuitColor(card.suit, card?.suitId)}">
         <span class="property-card-suit{previewStyle}">{card?.suitName}</span>
     </div>
     <div class="right">
         
         {#if mapping}
-        <span class="property-card-number{previewStyle} {getTextColor(card.suit)}-text">{card?.card ?? card?.value}</span>
+        <span class="property-card-number{previewStyle} {getTextColor(card.suit, card?.suitId)}-text">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
             {#if card.edition == 'webapp' && card.value != 'A' && card.value != 'B'}
                 <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
@@ -44,10 +50,10 @@
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
         {:else if card.suitName == 'WILD CARD'}
-        <h1 class="property-card-number {getSuitColor(card.suit)}">Joker</h1>
+        <h1 class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</h1>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
         {:else}
-        <h1 class="property-card-number {getSuitColor(card.suit)}">{card?.value}</h1>
+        <h1 class="property-card-number {getSuitColor(card.suit, card?.suitId)}">{card?.value}</h1>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
         {/if}
     </div>
@@ -174,20 +180,33 @@
     .wild-card {
         background-color: #FBB67C;
     }
+    .wild-card-mobile {
+        background: rgb(251,182,124);
+        background: linear-gradient(180deg, rgba(251,182,124,1) 22%, rgba(255,230,209,1) 100%);
+    }
     .platform-and-code {
-        background-color: #00FFBF;
+        background: rgb(79,185,145);
+        background: linear-gradient(180deg, rgba(79,185,145,1) 30%, rgba(95,172,211,1) 85%);
     }
     .authentication-and-authorization {
-        background-color: #FFD500;
+        background: rgb(240,156,44);
+        background: linear-gradient(180deg, rgba(240,156,44,1) 20%, rgba(240,179,98,1) 77%);
     }
     .network-and-storage {
-        background-color: #FF6600;
+        background: rgb(223,92,141);
+        background: linear-gradient(180deg, rgba(241,194,25,1) 0%, rgba(223,92,141,1) 85%);
     }
     .resilience {
-        background-color: #006EFF;
+        background: rgb(49,124,192);
+        background: linear-gradient(180deg, rgba(49,124,192,1) 20%, rgba(79,138,192,1) 63%);
     }
     .cryptography-mobile {
-        background-color: #006EFF;
+        background: rgb(246,89,40);
+        background: linear-gradient(180deg, rgba(246,89,40,1) 0%, rgba(246,135,101,1) 100%);
+    }
+    .cornucopia-mobile {
+        background: rgb(10,58,94);
+        background: linear-gradient(180deg, rgba(10,58,94,1) 22%, rgba(39,70,94,1) 74%);
     }
 
     .authentication-text {
@@ -211,20 +230,26 @@
     .wild-card-text {
         color: #FBB67C;
     }
+    .wild-card-mobile-text {
+        color: rgb(251,182,124);
+    }
     .platform-and-code-text {
-        color: #00FFBF;
+        color: rgb(79,185,145);
     }
     .authentication-and-authorization-text {
-        color: #FFD500;
+        color: rgb(240,156,44);
     }
     .network-and-storage-text {
-        color: #FF6600;
+        color: rgba(241,194,25)
     }
     .resilience-text {
-        color: #006EFF;
+        color: rgb(49,124,192);
     }
     .cryptography-mobile-text {
-        color: #006EFF;
+        color: rgb(246,89,40);
+    }
+    .cornucopia-mobile-text {
+        color: rgb(10,58,94);
     }
 
     @media (max-aspect-ratio: 1.5/1)
