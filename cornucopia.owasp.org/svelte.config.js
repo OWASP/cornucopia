@@ -42,10 +42,7 @@ export default {
 				include: ['/*'],
 				exclude: ["/build/*"]
 			},
-			fallback: '404.html',
-			prerender: {
-				default: true
-			}
+			fallback: '404.html'
 		}),
 		alias: {
 			$data: "data",
