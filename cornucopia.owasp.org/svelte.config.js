@@ -28,7 +28,8 @@ if (JSON.stringify(process.env.VERCEL_ENV) == 'preview') {
 			'style-src-elem': ['self'],
 			'img-src': ['self', 'https://i.ytimg.com/vi/XXTPXozIHow/mqdefault.jpg', 'https://vercel.live/', 'https://vercel.com', '*.pusher.com/', 'data: blob'],
 			'frame-src': ['self', 'https://www.youtube.com/', 'https://vercel.live/', 'https://vercel.com']
-		}
+		},
+		
 	};
 }
 
@@ -36,7 +37,13 @@ export default {
 	preprocess: vitePreprocess(),
 	kit: 
 	{
-		adapter: adapter(),
+		adapter: adapter({
+			routes: {
+				include: ['/*'],
+				exclude: ["/build/*"]
+			},
+			fallback: '404.html'
+		}),
 		alias: {
 			$data: "data",
 		},
