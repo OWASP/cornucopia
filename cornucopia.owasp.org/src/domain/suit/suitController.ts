@@ -5,7 +5,7 @@ import lang from "$lib/translations/lang";
 
 export class SuitController {
 
-    private static decks = [{edition: 'mobileapp', version: '1.00'}, {edition: 'webapp', version: '2.00'}];
+    private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.1'}];
     private static languages : Map<string, any> = new Map<string, any>([
         ['mobileapp', {lang: ['en']}], 
         ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br']}]

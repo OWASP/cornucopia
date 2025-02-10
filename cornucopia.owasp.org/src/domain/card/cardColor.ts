@@ -13,5 +13,7 @@ export const cardColor = new Map<string,string>([
     ["authentication-&-authorization", "authentication-and-authorization"],
     ["network-&-storage", "network-and-storage"],
     ["resilience", "resilience"],
-    ["cryptography", "cryptography-mobile"]
+    ["cryptography-mobile", "cryptography-mobile"],
+    ["cornucopia-mobile", "cornucopia-mobile"],
+    ["wild-card-mobile", "wild-card-mobile"]
 ])
