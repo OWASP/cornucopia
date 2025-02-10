@@ -112,10 +112,10 @@ export class DeckService {
                 let suitName: string = mapping['suits'][suit] != undefined ? mapping['suits'][suit]['name'] : 'WILD CARD';
                 for(let card in suitObject['cards']) {
                     let cardObject = suitObject['cards'][card];
-                    cardObject.id = cardObject['id'].replace("COM", "CM");
+                    cardObject.id = cardObject['id'];
                     cardObject.edition = deck.edition;
-                    cardObject.suitName = suitName.replace("COM", "CM");
-                    cardObject.suitId = suitObject['id'].replace("COM", "CM");
+                    cardObject.suitName = suitName;
+                    cardObject.suitId = suitObject['id'];
                     cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                     cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
                     cardObject.url = `/cards/${cardObject.id}`;
@@ -140,8 +140,8 @@ export class DeckService {
                     } else {
                         cardObject.next = suitObject['cards'][+card+1]['id'];
                     }
-                    cardObject.prevous = cardObject.prevous.replace("COM", "CM");
-                    cardObject.next = cardObject.next.replace("COM", "CM");
+                    cardObject.prevous = cardObject.prevous;
+                    cardObject.next = cardObject.next;
                     
                     cards.set(cardObject.id, cardObject);
                 }
