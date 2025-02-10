@@ -13,13 +13,12 @@
     }
 
 </script>
-        <p class="mapping-title{mappingStyle}">OWASP ASVS</p>
+        <p class="mapping-title{mappingStyle}">OWASP MASVS</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_masvs || '-'}</p>
-        <p class="mapping-title{mappingStyle}">OWASP AppSensor</p>
+        <p class="mapping-title{mappingStyle}">OWASP MASTG</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_mastg || '-'}</p>
         <p class="mapping-title{mappingStyle}">CAPEC</p>
-        <p class="mapping-value{mappingStyle}">{mapping.owasp_capec || '-'}</p>        
-        <p class="mapping-title{mappingStyle}">SAFECODE</p>
+        <p class="mapping-value{mappingStyle}">{mapping.owasp_capec || '-'}</p>
 <style>
     .mapping-title, .mapping-value
     {

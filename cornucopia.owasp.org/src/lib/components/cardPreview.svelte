@@ -23,6 +23,15 @@
         return cardColor?.get(suit) ?? "";
     }
 
+    function getRoyalSuitColor(suit : string, id: string, value: string)
+    {
+        if (!cardColor?.get(suit)) return 'white';
+        if (!['J', 'Q', 'K', 'A', 'B'].includes(value)) return 'white';
+        suit = cardColor?.get(suit) + '-royal';
+        if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
+        return suit;
+    }
+
     function getTextColor(suit : string, id: string)
     {
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
@@ -31,26 +40,26 @@
 </script>
 
 <div class="card-render">
-    <div class="left {getSuitColor(card.suit, card?.suitId)}">
+    <div class="left {getSuitColor(card?.suit, card?.suitId)}">
         <span class="property-card-suit{previewStyle}">{card?.suitName}</span>
     </div>
-    <div class="right">
+    <div class="right {getRoyalSuitColor(card?.suit, card?.suitId, card?.value)}">
         
         {#if mapping}
-        <span class="property-card-number{previewStyle} {getTextColor(card.suit, card?.suitId)}-text">{card?.card ?? card?.value}</span>
-        <p class="property-card-description{previewStyle}">{card.desc}</p>
-            {#if card.edition == 'webapp' && card.value != 'A' && card.value != 'B'}
+        <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text">{card?.card ?? card?.value}</span>
+        <p class="property-card-description{previewStyle}">{card?.desc}</p>
+            {#if card?.edition == 'webapp' && card?.value != 'A' && card?.value != 'B'}
                 <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
             {/if}
-            {#if card.edition == 'mobileapp' && card.value != 'A' && card.value != 'B'}
+            {#if card?.edition == 'mobileapp' && card?.value != 'A' && card?.value != 'B'}
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
-        {:else if card.suitName == 'WILD CARD'}
+        {:else if card?.suitName == 'WILD CARD'}
         <h1 class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</h1>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
         {:else}
-        <h1 class="property-card-number {getSuitColor(card.suit, card?.suitId)}">{card?.value}</h1>
-        <p class="property-card-description{previewStyle}">{card.desc}</p>
+        <h1 class="property-card-number {getSuitColor(card?.suit, card?.suitId)}">{card?.value}</h1>
+        <p class="property-card-description{previewStyle}">{card?.desc}</p>
         {/if}
     </div>
 </div>
@@ -246,6 +255,60 @@
     }
     .cornucopia-mobile-text {
         color: rgb(10,58,94);
+    }
+
+    .white {
+        background-color: white;
+    }
+
+    .authentication-royal {
+        background-color: #d3e4ed;
+    }
+    .authorization-royal {
+        background-color: #eee6c6;
+    }
+    .data-validation-and-encoding-royal {
+        background-color: #dfdfe0;
+    }
+    .cornucopia-royal {
+        background-color: #ced8df;
+    }
+    .session-management-royal {
+        background-color: #ddedd9;
+    }
+    .cryptography-royal {
+        background-color: #dbd8eb;
+    }
+    .wild-card-royal {
+        background-color: #fee9d8;
+    }
+    .wild-card-royal-mobile {
+        background: rgb(255,230,209);
+        background: linear-gradient(90deg, rgba(255,230,209,0.7) 0%, rgba(251,182,124,0.7) 100%);
+    }
+    .platform-and-code-royal {
+        background: rgb(95,172,211);
+        background: linear-gradient(90deg, rgba(95,172,211,0.5) 0%, rgba(79,185,145,0.5) 100%);
+    }
+    .authentication-and-authorization-royal {
+        background: rgb(240,179,98);
+        background: linear-gradient(90deg, rgba(240,179,98,0.5) 0%, rgba(240,156,44,0.5) 100%);
+    }
+    .network-and-storage-royal {
+        background: rgb(223,92,141);
+        background: linear-gradient(90deg, rgba(223,92,141,0.5) 0%, rgba(242,194,0,0.5) 100%);
+    }
+    .resilience-royal {
+        background: rgb(79,138,192);
+        background: linear-gradient(90deg, rgba(79,138,192,0.5) 0%, rgba(49,124,192,0.5) 100%);
+    }
+    .cryptography-royal-mobile {
+        background: rgb(246,135,101);
+        background: linear-gradient(90deg, rgba(246,135,101,0.5) 0%, rgba(246,89,40,0.5) 100%);
+    }
+    .cornucopia-royal-mobile {
+        background: rgb(39,70,94);
+        background: linear-gradient(90deg, rgba(39,70,94,0.2) 0%, rgba(10,58,94,0.2) 100%);
     }
 
     @media (max-aspect-ratio: 1.5/1)
