@@ -78,7 +78,7 @@ a:visited
     aspect-ratio:16/9;
 }
 
-.container {
+.error-container {
     width: 90%;
     margin: auto;
     padding: 0rem;
@@ -89,7 +89,7 @@ a:visited
     margin-top: 4rem;
 }
 
-.text {
+.error-text {
     outline: 1px rgb(231, 231, 231) solid;
     height: 100%;
     min-height: 22vw;
@@ -101,37 +101,31 @@ a:visited
     box-shadow: var(--box-shadow);
 }
 
-.text.desktop-left {
+.error-text.desktop-left {
     padding: 1rem 1rem 1rem 2rem;
 }
 
-.image {
+.error-image {
     width: 50%;
     text-align: center;
 }
 
-img {
-    width: 80%;
-    object-fit: cover;
-    border-radius: .3rem;
-}
-
-.container.desktop-left {
+.error.desktop-left {
     flex-direction: row;
 }
 
 @media (max-aspect-ratio: 1/1) {
-    .container {
+    .error-container {
         flex-direction: column;
     }
 
-    .image {
+    .error-image {
         width: 90%;
         padding: 0;
         margin: auto;
     }
 
-    .text {
+    .error-text {
         padding: 1rem;
         height: 100%;
         width: calc(100% - 2rem);

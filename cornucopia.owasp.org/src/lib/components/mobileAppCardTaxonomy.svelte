@@ -51,7 +51,7 @@
     let mappings: MobileAppMapping = $state({} as MobileAppCardMapping);
     let attacks: Attack[] = $state([] as Attack[]);
     run(() => {
-      mappings = controller.getMobileAppCardMappings(card.id.replace('CM', 'COM'));
+      mappings = controller.getMobileAppCardMappings(card?.id);
       attacks = GetCardAttacks(card.id) as Attack[] | Attack[];
     });
       
