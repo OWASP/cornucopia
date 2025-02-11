@@ -42,7 +42,7 @@ export default {
 				include: ['/*'],
 				exclude: ["/build/*"]
 			},
-			fallback: '404.html'
+			fallback: '/error'
 		}),
 		alias: {
 			$data: "data",

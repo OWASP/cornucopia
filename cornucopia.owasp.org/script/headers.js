@@ -30,6 +30,8 @@ function main() {
 /how-to-play
   ! Permissions-Policy
   Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self "https://www.youtube.com/"), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()
+/error
+  X-Robots-Tag: noindex
 `;
 
   const headersFile = path.join(buildDir, '_headers');
