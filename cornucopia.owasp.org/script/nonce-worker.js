@@ -57,10 +57,10 @@ async function handleRequest(request) {
     return fetchAndStreamNotFoundPage(originresponse);
   }
 
-  return generateNonce(originresponse);
+  return generateNonceForResponse(originresponse);
 }
 
-async function generateNonce(originresponse) {
+async function generateNonceForResponse(originresponse) {
   const nonce = generateNonce();
   
   const html = (await originresponse.text())
