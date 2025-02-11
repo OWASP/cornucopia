@@ -453,10 +453,10 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Mobile App Edition v1.00-EN"
+    text: "Mobile App Edition v1.1-EN"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Mobile App Edition v1.00-EN"
+    text: "OWASP® Cornucopia Mobile App Edition v1.1-EN"
   -
     id: "T00010"
     text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
