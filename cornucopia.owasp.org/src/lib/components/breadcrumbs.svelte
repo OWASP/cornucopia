@@ -30,7 +30,7 @@
     
 </script>
 
-{#if $page.url.pathname != '/'}
+{#if $page.url.pathname != '/' && $page.status < 400 }
     <p id="breadcrumbs">
         {#each parts as part,index}
             {#if index != 0}
