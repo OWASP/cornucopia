@@ -22,7 +22,7 @@ async function fetchAndStreamNotFoundPage(resp) {
   const pathArray = resp.url.split( '/' );
   const protocol = pathArray[0];
   const host = pathArray[2];
-  const url = protocol + '//' + host + '/error';
+  const url = protocol + '//' + host + '/404';
   const { headers } = resp;
 
   const response = await fetch(url);
