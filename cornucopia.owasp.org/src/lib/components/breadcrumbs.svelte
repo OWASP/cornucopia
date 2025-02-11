@@ -30,7 +30,7 @@
     
 </script>
 
-{#if $page.url.pathname != '/' && $page.status < 400 }
+{#if !['/', '/404', '/error'].includes($page.url.pathname) && $page.status < 400 }
     <p id="breadcrumbs">
         {#each parts as part,index}
             {#if index != 0}
