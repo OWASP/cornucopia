@@ -51,7 +51,7 @@
               apiToken: ${{ secrets.CLOUDFLARE_STAGING_API_TOKEN }}
               accountId: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
               wranglerVersion: "3.105.1"
-              command: pages deploy build --project-name=cornucopia
+              command: pages deploy build --project-name=cornucopia --branch head
           - name: Deploy the worker routes
             uses: cloudflare/wrangler-action@392082e81ffbcb9ebdde27400634aa004b35ea37
             with:

@@ -16,32 +16,67 @@ function generateNonce() {
   ].join("/");
 }
 
+
+async function fetchAndStreamNotFoundPage(resp) {
+  const { status, statusText } = resp;
+  const pathArray = resp.url.split( '/' );
+  const protocol = pathArray[0];
+  const host = pathArray[2];
+  const url = protocol + '//' + host + '/error';
+  const { headers } = resp;
+
+  const response = await fetch(url);
+
+  const html = (await response.text()).replace(/\.\//gi, '/');
+  return new Response(html, {
+    status: status,
+    statusText: statusText,
+    headers
+  });
+}
+
+function isHTMLContentTypeAccepted(request) {
+  const acceptHeader = request.headers.get("Accept");
+  return (
+    typeof acceptHeader === "string" && acceptHeader.indexOf("text/html") >= 0
+  );
+}
+
 /**
  * Respond to the request
  * @param {Request} request
  */
 async function handleRequest(request) {
-  const nonce = generateNonce();
   const originresponse = await fetch(request, {
     redirect: "manual",
   });
 
   if (originresponse.url.match(/[^\\]*\.(\w+)$/i)) return originresponse;
 
+  if (originresponse.status === 404 && isHTMLContentTypeAccepted(request)) {
+    return fetchAndStreamNotFoundPage(originresponse);
+  }
+
+  return generateNonce(originresponse);
+}
+
+async function generateNonce(originresponse) {
+  const nonce = generateNonce();
+  
   const html = (await originresponse.text())
-    .replace(/DhcnhD3khTMePgXw/gi, nonce)
-    .replace(
-      'src="https://ajax.cloudflare.com',
-      `nonce="${nonce}" src="https://ajax.cloudflare.com`
-    )
-    .replace(
-      'src="https://static.cloudflareinsights.com',
-      `nonce="${nonce}" src="https://static.cloudflareinsights.com`
-    )
-    .replace(
-      'cloudflare-static/email-decode.min.js"',
-      `cloudflare-static/email-decode.min.js" nonce="${nonce}"`
-    );
+  .replace(/DhcnhD3khTMePgXw/gi, nonce)
+  .replace(
+    'src="https://ajax.cloudflare.com',
+    `nonce="${nonce}" src="https://ajax.cloudflare.com`
+  )
+  .replace(
+    'src="https://static.cloudflareinsights.com',
+    `nonce="${nonce}" src="https://static.cloudflareinsights.com`
+  )
+  .replace(
+    'cloudflare-static/email-decode.min.js"',
+    `cloudflare-static/email-decode.min.js" nonce="${nonce}"`
+  );
 
   const clientresponse = new Response(html, {
     status: originresponse.status,
