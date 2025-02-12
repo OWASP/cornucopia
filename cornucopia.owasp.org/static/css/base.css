@@ -114,6 +114,10 @@ a:visited
     flex-direction: row;
 }
 
+.hide {
+    display: none;
+}
+
 @media (max-aspect-ratio: 1/1) {
     .error-container {
         flex-direction: column;
