@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json ./
-RUN npm install -g pnpm
+RUN npm install -g pnpm@v10.3.0 --save-exact
 RUN pnpm install
 
 # Copy source code
