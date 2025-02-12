@@ -590,7 +590,7 @@ let data = {
           },
           {
             "value": "T00390",
-            "text": "Smilar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
+            "text": "Similar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
           },
           {
             "value": "T00400",

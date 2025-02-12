@@ -500,7 +500,7 @@ paragraphs:
     text: "Colin Watson as author and co-project leader with Grant Ongers along with other OWASP volunteers who have helped in many ways."
   -
     id: "T00180"
-    text: "OWASP® does not endorse or recommend commercial products or services © 2012-2024 OWASP® Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
+    text: "OWASP® does not endorse or recommend commercial products or services © 2012-2025 OWASP® Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
   -
     id: "T00200"
     text: "Introduction"
@@ -554,7 +554,7 @@ paragraphs:
     text: "Cornucopia (C)"
   -
     id: "T00390"
-    text: "Smilar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
+    text: "Similar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
   -
     id: "T00400"
     text: "The content was mainly drawn from the SCP."
