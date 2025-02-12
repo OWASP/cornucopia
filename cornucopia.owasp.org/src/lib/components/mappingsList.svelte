@@ -12,10 +12,11 @@
   {title}
   {#each mappings as m, index}
     {#if linkFunction == undefined}
-      <span>{m}</span>{#if index != mappings.length - 1}<span>,</span>{/if}
+      <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+    {:else if String(m).trim() != '-'}
+      <a href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else}
-      <a href={linkFunction(m)}>{m}</a>
-      {#if index != mappings.length - 1}<span>,</span>{/if}
+      <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {/if}
   {/each}
 </p>
@@ -33,5 +34,9 @@
     width: 100%;
     word-break: break-all;
     white-space: normal;
+  }
+
+  .spacer {
+    padding-right: 0.2rem;
   }
 </style>

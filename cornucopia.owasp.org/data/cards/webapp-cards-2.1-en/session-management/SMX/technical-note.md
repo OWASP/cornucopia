@@ -1,4 +1,4 @@
-echnical Note:
+Technical Note:
 Consider supplementing standard session management with:
 
 Per-session strong random tokens or parameters.

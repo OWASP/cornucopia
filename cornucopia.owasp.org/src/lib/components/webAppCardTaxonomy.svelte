@@ -59,19 +59,19 @@
         linkFunction={linkASVS}
       />
       <MappingsList
-        title="Capec:"
+        title="CAPEC:"
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
       <MappingsList title="OWASP SCP:" mappings={mappings.owasp_scp} />
       <MappingsList
-        title="OWASP Appsensor:"
+        title="OWASP AppSensor:"
         mappings={mappings.owasp_appsensor}
       />
-      <MappingsList title="Safecode:" mappings={mappings.safecode} />
+      <MappingsList title="SAFECode:" mappings={mappings.safecode} />
     {/if}
   
-    <h1 class="title">ASVS (4.0) Cheatsheetseries Index</h1>
+    <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
     {#if card.value != 'A' && card.value != 'B'}
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
     {/if}

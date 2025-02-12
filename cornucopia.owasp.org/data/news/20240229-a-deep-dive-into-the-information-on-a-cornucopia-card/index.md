@@ -64,14 +64,14 @@ Confirm that there are no means to retrieve a user's current password under any 
 ### CWE-640: "Weak Password Recovery Mechanism for Forgotten Password"
 By clicking on each ASVS description link, you can explore the Common Weakness Enumeration, which aids in understanding the nuances of these weaknesses, related with password recovery.
 
-## Capec
+## CAPEC
 CAPEC provides strategic defenses against each attack technique.  Over time, it allows you as a developer to start mastering defensive counter-moves for specific attack-patterns.
 
-A detailed discussion on Capec will be featured in an upcoming post. We recommend that players of Cornucopia temporarily set Capec aside.  While it is useful, I believe it is a bit overkill if you're starting with Cornucopia. 
+A detailed discussion on CAPEC will be featured in an upcoming post. We recommend that players of Cornucopia temporarily set CAPEC aside.  While it is useful, I believe it is a bit overkill if you're starting with Cornucopia. 
 
 ## Non-Interactive Mappings
 
-Currently, certain mappings such as those for OWASP SCP, Appsensor, and Safecode are static due to the lack of a method for linking directly to a functioning website-page.
+Currently, certain mappings such as those for OWASP SCP, Appsensor, and SAFECode are static due to the lack of a method for linking directly to a functioning website-page.
 
 ## ASVS (4.0) Cheatsheet Series Index
 

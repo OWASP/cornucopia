@@ -70,11 +70,11 @@
         linkFunction={linkMASTG}
       />
       <MappingsList
-        title="Capec:"
+        title="CAPEC:"
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
-      <MappingsList title="Safecode:" mappings={mappings.safecode} />
+      <MappingsList title="SAFECode:" mappings={mappings.safecode} />
       {/if}
       <!--<h1 class="title">Cheatsheetseries Index</h1>-->
       {#if card.value != 'A' && card.value != 'B'}

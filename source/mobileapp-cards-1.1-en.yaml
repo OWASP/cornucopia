@@ -223,7 +223,7 @@ suits:
     id: "RS2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/RS2"
-    desc: " Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
+    desc: "Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
   -
     id: "RS3"
     value: "3"
@@ -368,7 +368,7 @@ suits:
     id: "CM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/CM3"
-    desc: " Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
+    desc: "Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
   -
     id: "CM4"
     value: "4"
