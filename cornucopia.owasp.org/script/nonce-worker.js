@@ -27,7 +27,7 @@ async function fetchAndStreamNotFoundPage(resp) {
 
   const response = await fetch(url);
 
-  const html = (await response.text()).replace(/\.\//gi, '/');
+  const html = (await response.text()).replace(/\.\//gi, '/').replace(/id="breadcrumbs" class="/gi, "id=\"breadcrumbs\" class=\"hide ");
   return new Response(html, {
     status: status,
     statusText: statusText,
