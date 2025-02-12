@@ -26,7 +26,7 @@
     function getRoyalSuitColor(suit : string, id: string, value: string)
     {
         if (!cardColor?.get(suit)) return 'white';
-        if (!['J', 'Q', 'K', 'A', 'B'].includes(value)) return 'white';
+        if (!['J', 'Q', 'K', 'B'].includes(value) && (suit != 'WC' && value != 'A')) return 'white';
         suit = cardColor?.get(suit) + '-royal';
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
         return suit;
