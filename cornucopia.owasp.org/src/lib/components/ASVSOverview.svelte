@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { json } from '@sveltejs/kit';
     import {data} from '$lib/parsed';
     import { readTranslation } from "$lib/stores/stores";
     interface Props {
@@ -56,7 +55,7 @@
     {/each}
 {/if}
 
-{#if mappings && (mappings.length > 0)}
+{#if mappings?.length == 0 }
     <p>{$t('cards.ASVSOverview.p1')}</p>
 {/if}
 

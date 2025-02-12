@@ -223,7 +223,7 @@ suits:
     id: "RS2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/RS2"
-    desc: " Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
+    desc: "Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
   -
     id: "RS3"
     value: "3"
@@ -368,7 +368,7 @@ suits:
     id: "CM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/CM3"
-    desc: " Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
+    desc: "Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
   -
     id: "CM4"
     value: "4"
@@ -495,7 +495,7 @@ paragraphs:
     text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories."
   -
     id: "T00220"
-    text: "Cornucopia Mobile App Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for developement team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
+    text: "Cornucopia Mobile App Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for development team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
   -
     id: "T00240"
     text: "Cornucopia attempts to introduce threat-modelling ideas into mobile development teams that use Agile methodologies, or are more focused on mobile application weaknesses than other types of software vulnerabilities."
@@ -531,7 +531,7 @@ paragraphs:
     text: "Cornucopia (CM)"
   -
     id: "T00390"
-    text: "Smilar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King)."
+    text: "Similar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King)."
   -
     id: "T00400"
     text: "There are also two Joker cards similar to the Cornucopia Website App Edition."
@@ -552,7 +552,7 @@ paragraphs:
     text: "Game strategy"
   -
     id: "T00610"
-    text: "Apart from the content differences, the game rules are virtually identical to those for the Corncuopia Website App Edition."
+    text: "Apart from the content differences, the game rules are virtually identical to those for the Cornucopia Website App Edition."
   -
     id: "T01000"
     text: "Provide feedback"
@@ -801,10 +801,10 @@ paragraphs:
     text: "Therefore, apart from 'Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
   -
     id: "T02720"
-    text: "The cultural and gender mix simply reflects these sources of names"
+    text: "The cultural and gender mix simply reflects these sources of names, and"
   -
     id: "T02730"
-    text: ", and is not meant to be world-representative."
+    text: "is not meant to be world-representative."
   -
     id: "T02750"
     text: "4. Why aren't there any images on the card faces?"
