@@ -18,7 +18,9 @@
         <p class="mapping-title{mappingStyle}">OWASP MASTG</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_mastg || '-'}</p>
         <p class="mapping-title{mappingStyle}">CAPEC</p>
-        <p class="mapping-value{mappingStyle}">{mapping.owasp_capec || '-'}</p>
+        <p class="mapping-value{mappingStyle}">{mapping.capec || '-'}</p>
+        <p class="mapping-title{mappingStyle}">SAFECODE</p>
+        <p class="mapping-value{mappingStyle}">{mapping.safecode || '-'}</p>
 <style>
     .mapping-title, .mapping-value
     {
@@ -26,6 +28,13 @@
         margin:0;
         margin-left: .25rem;
         margin-right: .25rem;
+        word-wrap: break-word;
+        white-space: initial;
+    }
+
+    .hero-card-container
+    {
+        font-size: max(0.3vh, 0.6vw);
     }
 
     .mapping-title
