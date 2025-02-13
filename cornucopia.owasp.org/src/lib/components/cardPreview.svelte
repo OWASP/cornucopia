@@ -32,6 +32,11 @@
         return suit;
     }
 
+    function getRoyalTextColor (suit: string, id: string, value: string) {
+        if (!cardColor?.get(suit)) return '';
+        if (id == 'WC' || ['J', 'Q', 'K'].includes(value)) return 'royal-white-text';
+    }
+
     function getTextColor(suit : string, id: string)
     {
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
@@ -46,7 +51,7 @@
     <div class="right {getRoyalSuitColor(card?.suit, card?.suitId, card?.value)}">
         
         {#if mapping}
-        <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text">{card?.card ?? card?.value}</span>
+        <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text {getRoyalTextColor(card?.suit, card?.suitId, card?.value)}">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card?.desc}</p>
             {#if card?.edition == 'webapp' && card?.value != 'A' && card?.value != 'B'}
                 <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
@@ -309,6 +314,13 @@
     .cornucopia-royal-mobile {
         background: rgb(39,70,94);
         background: linear-gradient(90deg, rgba(39,70,94,0.2) 0%, rgba(10,58,94,0.2) 100%);
+
+    }
+    .royal-black-text {
+        color: black;
+    }
+    .royal-white-text {
+        color: white;
     }
 
     @media (max-aspect-ratio: 1.5/1)
