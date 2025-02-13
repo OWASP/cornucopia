@@ -19,6 +19,8 @@
         <p class="mapping-value{mappingStyle}">{mapping.owasp_mastg || '-'}</p>
         <p class="mapping-title{mappingStyle}">CAPEC</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_capec || '-'}</p>
+        <p class="mapping-title{mappingStyle}">SAFECODE</p>
+        <p class="mapping-value{mappingStyle}">{mapping.safecode || '-'}</p>
 <style>
     .mapping-title, .mapping-value
     {
