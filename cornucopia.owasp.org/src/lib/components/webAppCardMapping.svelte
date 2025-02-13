@@ -20,7 +20,7 @@
         <p class="mapping-title{mappingStyle}">OWASP AppSensor</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_appsensor || '-'}</p>
         <p class="mapping-title{mappingStyle}">CAPEC</p>
-        <p class="mapping-value{mappingStyle}">{mapping.owasp_capec || '-'}</p>        
+        <p class="mapping-value{mappingStyle}">{mapping.capec || '-'}</p>        
         <p class="mapping-title{mappingStyle}">SAFECODE</p>
         <p class="mapping-value{mappingStyle}">{mapping.safecode || '-'}</p>
 <style>
@@ -46,6 +46,13 @@
     .mapping-value
     {
         border-bottom: 1px rgb(192, 192, 192) solid;
+    }
+
+    .mapping-title.browser-card-container, .mapping-value.browser-card-container
+    {
+        font-size: 0.7vw;
+        margin-left: 1vw;
+        margin-right: 1vw;
     }
 
 
