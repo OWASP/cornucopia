@@ -1,6 +1,7 @@
 import type { Suit } from "./suit";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { order } from "./order";
+import { cardOrder } from "../card/order";
 import lang from "$lib/translations/lang";
 
 export class SuitController {
@@ -54,8 +55,8 @@ export class SuitController {
 
     public static orderCards(a: string, b: string) : number
     {
-        let orderA = order.get(a) || -1;
-        let orderB = order.get(b) || -1;
+        let orderA = cardOrder.get(a) || -1;
+        let orderB = cardOrder.get(b) || -1;
         return orderA < orderB ? -1 : 1
     }
 
