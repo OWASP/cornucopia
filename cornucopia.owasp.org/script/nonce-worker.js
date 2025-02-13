@@ -24,10 +24,15 @@ async function fetchAndStreamNotFoundPage(resp) {
   const host = pathArray[2];
   const url = protocol + '//' + host + '/404';
   const { headers } = resp;
-
-  const response = await fetch(url);
-
-  const html = (await response.text()).replace(/\.\//gi, '/').replace(/id="breadcrumbs" class="/gi, "id=\"breadcrumbs\" class=\"hide ");
+  let response;
+  let html;
+  if (resp.url.includes('/cards/') && (/[a-z]/.test(path))) {
+    response = await fetch(protocol + "//" + host + "/cards/" + path.toUpperCase());
+    html = (await response.text()).replace(/\.\.\//gi, "/")
+  } else {
+    response = await fetch(url);
+    html = (await response.text()).replace(/\.\//gi, "/").replace(/id="breadcrumbs" class="/gi, 'id="breadcrumbs" class="hide ');
+  }
   return new Response(html, {
     status: status,
     statusText: statusText,
