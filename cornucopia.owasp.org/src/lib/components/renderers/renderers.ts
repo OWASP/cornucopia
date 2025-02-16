@@ -9,9 +9,11 @@ import Paragraph from '$lib/components/renderers/paragraph.svelte';
 import Strong from '$lib/components/renderers/strong.svelte';
 import Table from '$lib/components/renderers/table.svelte';
 import TableCell from '$lib/components/renderers/tableCell.svelte';
+import Em from '$lib/components/renderers/Em.svelte';
 
 let renderers =
 {
+    em: Em,
     code : Code,
     heading : Heading,
     paragraph : Paragraph,
