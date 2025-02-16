@@ -6,9 +6,12 @@ hidden: false
 description: OWASP® Cornucopia Website App 2.1 & Mobile App 1.1!
 ---
 ![OWASP® Cornucopia Mobile App Edition](new-release.jpeg)
+
 # OWASP® Cornucopia Website App 2.1 & Mobile App 1.1!
 
+
 _OWASP® Cornucopia is launching brand-new versions of the OWASP Cornucopia decks with QR codes and a new website that will make threat modeling, security requirement gathering and security design much easier._
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Each of the QR codes will take you to a brand new OWASP Cornucopia website where you can further explore each card and the security requirements and -controls connected to them  (see: https://cornucopia.owap.org/ ).
