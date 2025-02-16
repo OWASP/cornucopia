@@ -9,3 +9,5 @@
 
 # Source files (new games) should be reviewed by @cw-owasp
 /source/ @cw-owasp @rewtd
+
+/cornucopia.owasp.org @cw-owasp @rewtd @sydseter
