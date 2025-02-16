@@ -8,7 +8,9 @@ description: How to pass the OWASP MASVS verification by design?
 ![](bnowo8weds3w40gx89of.jpg)
 # How to pass the OWASP MASVS verification by design
 
+
 _In Admincontrol, both our Android app and our IOS app just passed the MASVS 2.0 verification. And we did so by deciding on the security requirements and -controls using a game. Here is how..._
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 In April 2023, OWASP released version [v2.0.0 of their “Mobile Application Security Verification Standard.”](https://mas.owasp.org/MASVS/) The new version removes the three verification levels called L1, L2, and R. Security control group verification requirements was reworked as “security testing profiles” and moved to the OWASP Mobile Application Security Testing Guide or “MASTG.” These profiles are now aligned with the NIST (National Institute of Standards and Technology) OSCAL (Open Security Controls Assessment Language) standard. The standard is to be used together with the OWASP Mobile Application Security Testing Guide ([MASTG v1.7](https://mas.owasp.org/MASTG/)) that comes with at least 82 tests that a mobile penetration tester should conduct in order to verify that the mobile application follows the MASVS standard.
