@@ -14,7 +14,7 @@ _OWASP® Cornucopia is launching brand-new versions of the OWASP Cornucopia deck
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Each of the QR codes will take you to a brand new OWASP Cornucopia website where you can further explore each card and the security requirements and -controls connected to them  (see: https://cornucopia.owap.org/ ).
+Each of the QR codes will take you to a brand new OWASP Cornucopia website where you can further explore each card and the security requirements and -controls connected to them  (see: https://cornucopia.owasp.org/ ).
 This will help scale secure design and requirement gathering activities for your development teams and empower them to do application security in a more agile way. 
 
 ## A new OWASP Cornucopia website
