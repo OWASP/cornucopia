@@ -174,6 +174,10 @@ A standard blead set to 3mm for all 4 sides.
 Use 300gsm for both the bridge cards and the tarot cards.
 For the case, we would recommend folding box board with anti-scuff lamination and 100gsm uncoated stock for the leaflet. The leaflets could also be laminated, but it might make them springy.
 
+## The cornucopia.owasp.org website
+
+please see: [README](cornucopia.owasp.org/README.md)
+
 ## Contributing to Development
 
 ### Large binary files
