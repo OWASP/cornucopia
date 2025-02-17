@@ -39,6 +39,10 @@ https://cornucopia.owasp.org/taxonomy
 
 The card URLs will be the unique end points linked from QR codes on printed cards, and which include guidance, tips and all the taxonomy lookups, making it easier to alter and extend these whenever we want. Recent new additional volunteer names have now been added in the acknowledgements.
 
+## New translations
+
+In addition to the new versions of the editions and the OWASP Cornucopia website, the new release also comes with two new translations "PT-PT" (Portuguese-Portugal) and "IT" (Italian) thanks to André Ferreira ( @AndreFerreiraMsc ) and Ruggero DallAglio ( @rdallaglio ), respectively. As with previous translations, these are also delivered in 2 sizes, bridge and tarot, both with and without QR codes in addition to also being delivered as legacy guide documents. The new translations will be available in digital formats for download and print-on-demand.
+
 ## Printing of the new decks
 
 Additionally, [dotNET lab](https://dotnetlab.eu/) is going to sell the OWASP Cornucopia decks on their web shop (see: https://cornucopia.owap.org/webshop). Both the Website App & Mobile App editions will come with QR codes printed on them.
