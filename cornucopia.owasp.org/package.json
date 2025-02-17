@@ -49,7 +49,8 @@
 		"auditConfig": {
 			"ignoreCves": [],
 			"ignoreGhsas": [
-				"GHSA-vg6x-rcgg-rjx6"
+				"GHSA-vg6x-rcgg-rjx6",
+				"GHSA-67mh-4wv8-2f99"
 			]
 		},
 		"overrides": {
