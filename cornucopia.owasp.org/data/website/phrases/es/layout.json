@@ -1,7 +1,7 @@
 {
   "layout": {
     "description": "OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It is language, platform and technology-agnostic.",
-    "title": "Cornucopia - DotNETlab",
+    "title": "OWASP Cornucopia - Threat modeling for everyone everywhere",
     "twitter": {
       "description": "OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It is language, platform and technology-agnostic."
     }

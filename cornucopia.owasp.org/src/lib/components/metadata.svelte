@@ -7,7 +7,7 @@
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://cornucopia.owasp.org/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="OWASP Cornucopia">
+    <meta property="og:title" content="OWASP Cornucopia - Threat modeling for everyone everywhere">
     <meta property="og:description" content="{$t('layout.description')}">
     <meta property="og:image" content="/images/opengraph.png">
 
