@@ -29,12 +29,9 @@ async function fetchAndStreamNotFoundPage(resp, request) {
   let html;
   if (resp.url.includes('/cards/') && (/[a-z]/.test(path))) {
     return Response.redirect(protocol + "//" + host + "/cards/" + path.toUpperCase(), 301);
-    //html = (await response.text()).replace(/\.\.\//gi, "/")
-  } else {
-    response = await fetch(url);
-    html = (await response.text()).replace(/\.\//gi, "/").replace(/id="breadcrumbs" class="/gi, 'id="breadcrumbs" class="hide ');
-  }
-
+  } 
+  response = await fetch(url);
+  html = (await response.text()).replace(/\.\//gi, "/").replace(/id="breadcrumbs" class="/gi, 'id="breadcrumbs" class="hide ');
   return new Response(html, {
     status: status,
     statusText: statusText,
