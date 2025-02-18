@@ -8,7 +8,7 @@
 # OWASP Cornucopia project
 OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams 
 identify security requirements in Agile, conventional and formal development processes. 
-It is language, platform and technology agnostic.
+It is language, platform and technology agnostic. Visit: https://cornucopia.owasp.org/
 
 ## The cross-references on the Web App Edition deck relate to the following versions of other OWASP and external resources:
 * OWASP SCP OWASP_Secure_Coding_Practices_Checklist v2
