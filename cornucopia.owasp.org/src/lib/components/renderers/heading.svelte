@@ -69,44 +69,40 @@
     }
     h1
     {
-      background: var(--background);
+      font-size: 2.2rem;
       padding: .5rem;
-      color:white;
       font-weight: bolder;
     }
     h2
     {
-      background: var(--background);
+      font-size: 1.8rem;
       padding: .5rem;
-      color:white;
       font-weight: bold;
      }
 
     h3
     {
+      font-size: 1.6rem;
       padding-top: .5rem;
       padding-bottom: .5rem;
       font-size: 1.2rem;
       font-weight: bolder;
-      color: black;
       opacity: 90%;
     }
     h4
     {
       padding-top: .3rem;
       padding-bottom: .3rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: bold;
-      color: black;
       opacity: 90%;
     }
     h5
     {
       padding-top: .2rem;
       padding-bottom: .2rem;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: bolder;
-      color: black;
       opacity: 90%;
     }
     h6
@@ -115,7 +111,6 @@
       padding-bottom: .2rem;
       font-size: 1rem;
       font-weight: bold;
-      color: black;
       opacity: 90%;
     }
  
