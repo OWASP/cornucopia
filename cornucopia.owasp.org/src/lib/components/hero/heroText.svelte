@@ -19,8 +19,11 @@
     }
 
     h1 {
+        color:white;
+        opacity: 90%;
         padding: 0;
         padding-top: 4rem;
+        text-shadow: 0 .2rem rgb(0, 0, 0);
         font-size: max(3.5vw, 1vh);
         font-weight: bolder;
         background: none;
