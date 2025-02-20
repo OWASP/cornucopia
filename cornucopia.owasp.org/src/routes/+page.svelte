@@ -40,7 +40,7 @@
     <ol>
         <li>{@html $t('home.ol.li1')}</li>
         <li>{@html $t('home.ol.li2')}<a title="Print your OWASP Cornucopia deck" href="/printing">{$t('home.ol.li2a')}</a>);</li>
-        <li>{@html $t('home.ol.li3')}<a title="Play OWASP Cornucopia online on copi" rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
+        <li>{@html $t('home.ol.li3')}<a title="Play OWASP Cornucopia online on Copi" rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
         <li>{$t('home.ol.li4')}</li>
         <li>{$t('home.ol.li5')}</li>
         <li>{$t('home.ol.li6')}</li>
