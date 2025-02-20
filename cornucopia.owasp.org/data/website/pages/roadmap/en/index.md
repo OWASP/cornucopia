@@ -52,4 +52,4 @@ As the source referenced documents change, we have to update the decks. You may 
 
 The first deck, Cornucopia Ecommerce Website Edition, has been renamed Cornucopia Website App Edition and is currently available in six languages. There is also a mobile app specific deck called Cornucopia Mobile App Edition available in English only. Do you have an idea for your own application security requirements card deck?
 
-<img alt="Logo of the OWASP foundation" src="/images/owasp-logo.png" width="500vw"/>
+<img title="OWASP Foundation logo" alt="OWASP foundation logo" src="/images/owasp-logo.png" width="500vw"/>

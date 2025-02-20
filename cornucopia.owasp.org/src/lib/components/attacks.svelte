@@ -8,7 +8,7 @@
     let t = readTranslation();
   </script>
     {#each attacks as attack}
-      <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
+      <p><a title="{attack.name}" href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
     {:else}
       <p>{$t('cards.attacks.p1')}</p>
     {/each}

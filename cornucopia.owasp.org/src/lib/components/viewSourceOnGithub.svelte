@@ -7,7 +7,7 @@
 
 <div>
     <a target="_blank" {href}>
-        <img alt="Github logo" src="/icons/github.png"/>
+        <img alt="Github logo" title="Github logo" src="/icons/github.png"/>
         <span>View source on GitHub</span>
     </a>
 </div>

@@ -12,7 +12,7 @@
 <BlogpostMetadata {blogpost}></BlogpostMetadata>
 <SvelteMarkdown {renderers} source={blogpost.markdown}></SvelteMarkdown>
 <p>
-    <a rel="noopener" href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md">{$t('news.slug.p1')}</a>
+    <a title="OWASP Cornucopia's repository" rel="noopener" href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md">{$t('news.slug.p1')}</a>
 </p>
 </div>
 <style>

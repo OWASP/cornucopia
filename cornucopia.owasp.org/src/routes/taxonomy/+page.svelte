@@ -14,7 +14,7 @@
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 {#each data.categories as category}
-    <p>├──<a href="/taxonomy/{category.toLowerCase()}">{Text.Format(category)}</a></p>
+    <p>├──<a title="{Text.Format(category)}" href="/taxonomy/{category.toLowerCase()}">{Text.Format(category)}</a></p>
 {/each}
 </div>
 <style>

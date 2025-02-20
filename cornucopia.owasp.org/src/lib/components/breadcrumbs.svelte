@@ -38,9 +38,9 @@
             {/if}
 
             {#if parts[index-1] && parts[index-1] == 'cards'}
-                <a class="card-code" href="{generateHref(index,part)}">{generateName(index,part)}</a>
+                <a title="OWASP Cornucopia: {generateName(index,part)}" class="card-code" href="{generateHref(index,part)}">{generateName(index,part)}</a>
             {:else}
-                <a href="{generateHref(index,part)}">{generateName(index,part)}</a>
+                <a title="OWASP Cornucopia: {generateName(index,part)}" href="{generateHref(index,part)}">{generateName(index,part)}</a>
             {/if}
             <span> </span>
         {/each}

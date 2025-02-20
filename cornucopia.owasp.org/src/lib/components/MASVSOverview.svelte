@@ -51,7 +51,7 @@
     {#each mappings as mapping}
         {#if hasValidLink(mapping)}
             <p>
-                <a target="_blank" href="{getUrl(mapping)}">{getDisplayText(mapping)}</a>
+                <a title="OWASP MASVS {getDisplayText(mapping)}" target="_blank" href="{getUrl(mapping)}">{getDisplayText(mapping)}</a>
             </p>
         {/if}
     {/each}

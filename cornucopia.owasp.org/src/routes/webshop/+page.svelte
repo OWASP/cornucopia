@@ -13,13 +13,15 @@
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 <div class="vendor-container">
-    <CardVendor 
+    <CardVendor
+    vendorName="Agile Stationary"
     logoSource="/images/logo-agile-stationary.png"
     productImageSource="/images/owasp-cornucopia-preview.png"
     webshopLink="https://agilestationery.com/search?q=cornucopia">
     </CardVendor>
 
-    <CardVendor 
+    <CardVendor
+    vendorName="dotNET lab"
     logoSource="/images/logo-dotNET-lab.png"
     productImageSource="/images/dotNET-lab-preview.png"
     webshopLink="https://webshop.dotnetlab.eu/product/cornucopia-card-deck/">

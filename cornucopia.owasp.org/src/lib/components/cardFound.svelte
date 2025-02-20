@@ -38,10 +38,10 @@
 </script>
 
 <div>
-  <h1 class="title">{card.name}</h1>
+  <h1 title="OWASP Cornucopia card {card.name}" class="title">{card.name}</h1>
   <p>{card.desc}</p>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
-  <a class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
+  <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Summary card={card}></Summary>
   {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B'}
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>

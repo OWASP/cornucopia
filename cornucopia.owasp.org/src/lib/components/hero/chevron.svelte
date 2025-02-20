@@ -6,7 +6,7 @@
     let { href }: Props = $props();
 </script>
 <div id="chevron">
-    <a href="{href}"><img alt="go-down" src="icons/chevron.png"/></a>
+    <a href="{href}"><img title="Scroll down" alt="Scroll down" src="icons/chevron.png"/></a>
 </div>
 <style>   
 

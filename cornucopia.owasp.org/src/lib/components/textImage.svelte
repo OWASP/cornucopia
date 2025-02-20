@@ -2,6 +2,7 @@
 	interface Props {
 		align?: 'left' | 'right';
 		id?: string;
+		title?: string;
 		src: string;
 		children?: import('svelte').Snippet;
 	}
@@ -10,6 +11,7 @@
 		align = 'left',
 		id = "",
 		src,
+		title,
 		children
 	}: Props = $props();
 
@@ -37,7 +39,7 @@
 {/if}
 <div class="container{getFlexStyle(mobile)}">
 	<div class="image">
-        <img alt={id} {src} />
+        <img {src} {title} alt={title} />
     </div>
 	<div class="text{getFlexStyle(mobile)}">
 		{@render children?.()}
