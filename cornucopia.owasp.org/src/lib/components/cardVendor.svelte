@@ -1,19 +1,20 @@
 <script lang="ts">
     interface Props {
+        vendorName: string,
         logoSource: string;
         productImageSource: string;
         webshopLink: string;
     }
 
-    let { logoSource, productImageSource, webshopLink }: Props = $props();
+    let { logoSource, productImageSource, webshopLink, vendorName }: Props = $props();
 </script>
 
 <div class="vendor">
     <div class="image-container">
-        <img class="logo-image" alt="Vendor logo" src={logoSource}/>
+        <img class="logo-image" alt="{vendorName}'s vendor logo" src={logoSource}/>
     </div>
-    <a rel="noopener nofollow" target="_blank" href={webshopLink}><img alt="Box of cards" class="product-image" src={productImageSource}/></a>
-    <a rel="noopener nofollow" class="shop-link" target="_blank" href={webshopLink}>Visit external webshop
+    <a rel="noopener nofollow" title="Go to {vendorName}'s OWASP Cornucopia vendor webshop" target="_blank" href={webshopLink}><img alt="{vendorName}'s OWASP Cornucopia box of cards" title="{vendorName}'s OWASP Cornucopia box of cards" class="product-image" src={productImageSource}/></a>
+    <a rel="noopener nofollow" title="Go to {vendorName}'s OWASP Cornucopia vendor webshop" class="shop-link" target="_blank" href={webshopLink}>Visit external webshop
 </div>
 
 <style>

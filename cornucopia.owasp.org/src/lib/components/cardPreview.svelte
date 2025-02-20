@@ -60,10 +60,10 @@
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
-        <h1 class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</h1>
+        <span class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</span>
         <p class="property-card-description{previewStyle}">{card.desc}</p>
         {:else}
-        <h1 class="property-card-number {getSuitColor(card?.suit, card?.suitId)}">{card?.value}</h1>
+        <span class="property-card-number {getSuitColor(card?.suit, card?.suitId)}">{card?.value}</span>
         <p class="property-card-description{previewStyle}">{card?.desc}</p>
         {/if}
     </div>

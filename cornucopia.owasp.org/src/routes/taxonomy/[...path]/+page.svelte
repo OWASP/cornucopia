@@ -7,17 +7,17 @@
     let { data } = $props();
 </script>
 {#if data.folders.length != 0 }
-<h1 class="clickable" id="{data.title}">{Text.Format(data.title)}</h1>
+<h1 class="clickable" title="{Text.Format(data.title)}" id="{data.title}">{Text.Format(data.title)}</h1>
 {/if}
 <div>
 <!--The location is a file -->
 {#each data.files as file}
-    <p>├──<a href="/taxonomy/{data.path.toLowerCase()}/{file.toLowerCase()}">{Text.Format(file)}</a></p>
+    <p>├──<a title="{Text.Format(file)}" href="/taxonomy/{data.path.toLowerCase()}/{file.toLowerCase()}">{Text.Format(file)}</a></p>
 {/each}
 
 <!--The location is a folder -->
 {#each data.folders as folder}
-    <p>├──<a href="/taxonomy/{data.path.toLowerCase()}/{folder.toLowerCase()}">{Text.Format(folder)}</a></p>
+    <p>├──<a title="{Text.Format(folder)}" href="/taxonomy/{data.path.toLowerCase()}/{folder.toLowerCase()}">{Text.Format(folder)}</a></p>
 {/each}
 
 <!--The location is filecontent -->

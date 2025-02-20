@@ -27,7 +27,7 @@
                     {Text.FormatDate(post.date)}
                      • 
                     {Text.Format(post.author)}
-                    <a href="/news/{post.path}">>> {$t('news.a')}</a>
+                    <a title="OWASP Cornucopia news article: {$t('news.a')}" href="/news/{post.path}">>> {$t('news.a')}</a>
                 </p>
             </button>
         {/each}
@@ -35,7 +35,7 @@
 {/if}
 
 
-<p>{$t('news.p2')}: <a href="/author">{$t('news.slug.p1')}</a></p>
+<p>{$t('news.p2')}: <a title="OWASP Cornucopia news author: {$t('news.slug.p1')}" href="/author">{$t('news.slug.p1')}</a></p>
 </div>
 <style>
     a

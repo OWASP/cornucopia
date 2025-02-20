@@ -65,25 +65,25 @@
 <noscript>
     <div class="card-panel" id="card-face">
         <div class="left">
-            <a href={card.prevous + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
+            <a href={card.prevous + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
         </div>
         <div class="center">
             <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
         </div>
         <div class="right">
-            <a href={card.next + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
+            <a href={card.next + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
         </div>
     </div>
 </noscript>
 <div class="card-panel script" id="card">
     <div class="left">
-        <a href={getUrl(card)} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}">{"<"}</a>
+        <a href={getUrl(card)} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
-        <a href={getUrl(card)} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}">{">"}</a>
+        <a href={getUrl(card)} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
     </div>
 </div>
 <style>

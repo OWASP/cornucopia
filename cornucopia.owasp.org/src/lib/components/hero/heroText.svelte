@@ -1,7 +1,7 @@
 <div class="hero-text">
     <h1>Threat modeling for everyone everywhere</h1>
-    <h3>Uncover the security flaws in your software's design before the bad guys do it for you! Get your team together on a call or in a room and use OWASP Cornucopia Web & Mobile card decks to guide your threat modelling.</h3>
-    <img alt="OWASP Cornucopia" src="/images/cornucopia_logo_white.svg"/>
+    <h3>Uncover the security flaws in your software's before the bad guys do it for you by playing the game! Get your team together on a call or in a room and use OWASP Cornucopia Web & Mobile card decks to guide your threat modelling.</h3>
+    <img alt="OWASP Cornucopia - Threat modeling for everyone everywhere - Don't gamble with your security play games with it" title="OWASP Cornucopia - Threat modeling for everyone everywhere - Don't gamble with your security play games with it" src="/images/cornucopia_logo_white.svg"/>
 </div>
 
 <style>

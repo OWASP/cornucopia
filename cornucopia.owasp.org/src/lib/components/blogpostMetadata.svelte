@@ -18,13 +18,13 @@
         <p>Author: <a href="{authorLink}">{Text.Format(blogpost.author)}</a></p>
         <p>Tags: 
             {#each blogpost.tags || [] as tag}
-            <a class="tag" href="/news">{Text.Format(tag)}</a><span></span>
+            <a title="OWASP Cornucopia new post titled: {Text.Format(tag)}" class="tag" href="/news">{Text.Format(tag)}</a><span></span>
             {/each}
         </p>
     </div>
     <div class="right">
         <button onclick={()=>goto(authorLink)}>
-        <img title="{Text.Format(blogpost.author)}" alt="{blogpost.author} profile picture" src="/data/author/{blogpost.author}/profile-picture.jpg"/>
+        <img title="OWASP Cornucopia news author {Text.Format(blogpost.author)}" alt="{blogpost.author} profile picture" src="/data/author/{blogpost.author}/profile-picture.jpg"/>
         </button>
     </div>
 </div>

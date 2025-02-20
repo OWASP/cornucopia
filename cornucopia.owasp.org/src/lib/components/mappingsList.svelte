@@ -14,7 +14,7 @@
     {#if linkFunction == undefined}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else if String(m).trim() != '-'}
-      <a href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+      <a title="{title} {m}" href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {/if}

@@ -47,4 +47,4 @@ The player can make up any attack they think is valid but must match the suit of
 
 Yes, please look up the card in our [card browser](/cards) on this website. This site is specifically created to help players understand each attack.
 
-<img alt="Logo of the OWASP foundation" src="/images/owasp-logo.png" width="500vw"/>
+<img alt="OWASP foundation logo" title="OWASP Foundation logo" src="/images/owasp-logo.png" width="500vw"/>

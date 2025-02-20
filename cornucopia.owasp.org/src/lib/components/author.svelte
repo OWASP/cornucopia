@@ -11,7 +11,7 @@
 
 <button
 onclick={()=>goto("/author/" + author.name)}>
-    <img alt={author.name} src="./data/author/{author.name}/profile-picture.jpg"/>
+    <img title="OWASP Cornucopia - {author.name}" alt="OWASP Cornucopia - {author.name}" src="./data/author/{author.name}/profile-picture.jpg"/>
     <p>{Text.Format(author.name)}</p>
 </button>
 
