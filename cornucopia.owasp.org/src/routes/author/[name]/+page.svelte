@@ -7,7 +7,7 @@
 <div>
 <div class="container">
     <div class="left">
-        <img class="profile-picture" alt="OWASP Cornucopia - {data.author.name}" title="OWASP Cornucopia - {data.author.name}" alt="{data.author.name}" src="/data/author/{data.author.name}/profile-picture.jpg"/>
+        <img class="profile-picture" alt="OWASP Cornucopia - {data.author.name}" title="OWASP Cornucopia new author: {data.author.name}" src="/data/author/{data.author.name}/profile-picture.jpg"/>
     </div>
     <div class="right">
         <table>
