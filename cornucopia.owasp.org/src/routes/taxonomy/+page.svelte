@@ -9,6 +9,9 @@
     const lang = readLang();
     let content = data.content.get($lang) || data.content.get('en');
 </script>
+<svelte:head>
+    <link rel="canonical" href="/" />
+</svelte:head>
 <div>
 {#if content != ''}
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>

@@ -6,6 +6,9 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
+<svelte:head>
+    <link rel="canonical" href="/" />
+</svelte:head>
 {#if data.folders.length != 0 }
 <h1 class="clickable" title="{Text.Format(data.title)}" id="{data.title}">{Text.Format(data.title)}</h1>
 {/if}
