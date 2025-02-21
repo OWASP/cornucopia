@@ -34,6 +34,9 @@
     return (cards_options.includes(String(card?.id).toUpperCase()))
   }
 </script>
+<svelte:head>
+    <link rel="canonical" href="/cards" />
+</svelte:head>
 <div>
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} />

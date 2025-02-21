@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { page } from '$app/state';
     import TextImage from '$lib/components/textImage.svelte';
 </script>
-
+<svelte:head>
+    <link rel="canonical" href="/" />
+</svelte:head>
 <div class="error-message">
 
     <TextImage src="/images/cornucopia_logo_in_devs_we_trust.svg" align="left">

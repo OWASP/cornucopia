@@ -4,6 +4,9 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
+<svelte:head>
+    <link rel="canonical" href="/author" />
+</svelte:head>
 <div>
 <div class="container">
     <div class="left">

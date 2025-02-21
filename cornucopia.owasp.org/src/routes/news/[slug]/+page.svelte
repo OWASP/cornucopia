@@ -8,6 +8,9 @@
     let { data } = $props();
     let blogpost = data.blogpost;
 </script>
+<svelte:head>
+    <link rel="canonical" href="/news" />
+</svelte:head>
 <div>
 <BlogpostMetadata {blogpost}></BlogpostMetadata>
 <SvelteMarkdown {renderers} source={blogpost.markdown}></SvelteMarkdown>
