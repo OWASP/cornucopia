@@ -20,6 +20,50 @@ if "unittest.util" in __import__("sys").modules:
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
 
 
+class MultiLingualSupportIsValidStringArgument(unittest.TestCase):
+    def test_is_valid_string_argument(self) -> None:
+        # Devanagari
+        self.assertTrue(
+            c.is_valid_string_argument("अआइईउऊऋॠऌॡएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहक्षत्रज्ञश्रािीुूृॄॢॣेैोौँंःऽॐ।॥०१२३४५६७८९")  # noqa: E501
+        )
+        # Common Chinese characters
+        self.assertTrue(
+            c.is_valid_string_argument(
+                "的一是不了人我在有他这中大来上国个到说们时用生地为子就出也得可下对生会能而年好小工不天你都和那要她看去很学只多家以新长从自实过发成当动经如事方作成者部里用行道然种面因进此"  # noqa: E501
+            )
+        )
+        # Hiragana, Katakana, Kanji
+        self.assertTrue(
+            c.is_valid_string_argument(
+                "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽゃゅょっアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポャュョッ一二三四五六七八九十日月火水木金土山川田人名本学生校先生私年時今行来見書話聞食飲車駅国外大中小新古高安円白赤青黒"  # noqa: E501
+            )
+        )
+        # Cyrilic
+        self.assertTrue(
+            c.is_valid_string_argument(
+                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяӘәӨөҮүҰұҚқҒғҢңҺһІіЇїЄєҐґЁёЂђЃѓЄєЅѕІіЇїЈјЉљЊњЋћЌќЎўЏџА́а́Е́е́И́и́О́о́У́у́Ы́ы́Э́э́Ю́ю́Я́я́"  # noqa: E501
+            )
+        )
+        # Thai
+        self.assertTrue(
+            c.is_valid_string_argument("กขคฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮะัาำิีึืุูเะแโใไๆ็่้๊๋์๐๑๒๓๔๕๖๗๘๙«»฿ๆฯ๏๚๛")  # noqa: E501
+        )
+        # Greek
+        self.assertTrue(
+            c.is_valid_string_argument(
+                "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρστυφχψωΆΈΉΊΌΎΏΐΪΫάέήίόύώϋΰϐϑϒϓϔϕϖϚϛϜϝϞϟϠϡ"  # noqa: E501
+            )
+        )
+        # Arabic
+        self.assertTrue(c.is_valid_string_argument("ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي ًٌٍَُِّْٰﷲﷴﷺﷻ ٠١٢٣٤٥٦٧٨٩ "))
+        # European
+        self.assertTrue(
+            c.is_valid_string_argument(
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĴĵĶķĹĺĻļĽľŁłŃńŅņŇňŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž"  # noqa: E501
+            )
+        )
+
+
 class TextGetValidEditionChoices(unittest.TestCase):
     def test_get_valid_edition_choices(self) -> None:
         c.convert_vars.args = argparse.Namespace(edition="all")
