@@ -40,9 +40,8 @@ The docx/pdf files can be easily printed by any desktop printer, but for the bes
 In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/templates/Fonts` in [owasp/cornucopia](https://github.com/owasp/cornucopia) repository. They are both open source and free for commercial use.
 
 ### The following fonts are used:
-
-- Deck: Noto Sans (Light/Italic/Medium/Extra Bold)
-- Leaflet: Noto Sans (Light/Italic/Medium/Extra Bold)
+- Leaflet: Noto Sans (Light/Regular/Italic/Medium (Italic)/SemiBoldItalic/Extra Bold)
+- Leaflet: Noto Sans (Thin/Light (Italic)/Italic/Medium//Extra Bold)
 - Cases:
     - Noto Sans Condensed Bold
     - Noto Sans Condensed Extra Bold
