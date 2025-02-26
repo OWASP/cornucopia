@@ -24,7 +24,9 @@ class MultiLingualSupportIsValidStringArgument(unittest.TestCase):
     def test_is_valid_string_argument(self) -> None:
         # Devanagari
         self.assertTrue(
-            c.is_valid_string_argument("अआइईउऊऋॠऌॡएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहक्षत्रज्ञश्रािीुूृॄॢॣेैोौँंःऽॐ।॥०१२३४५६७८९")  # noqa: E501
+            c.is_valid_string_argument(
+                "अआइईउऊऋॠऌॡएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसहक्षत्रज्ञश्रािीुूृॄॢॣेैोौँंःऽॐ।॥०१२३४५६७८९"
+            )  # noqa: E501
         )
         # Common Chinese characters
         self.assertTrue(
@@ -46,7 +48,9 @@ class MultiLingualSupportIsValidStringArgument(unittest.TestCase):
         )
         # Thai
         self.assertTrue(
-            c.is_valid_string_argument("กขคฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮะัาำิีึืุูเะแโใไๆ็่้๊๋์๐๑๒๓๔๕๖๗๘๙«»฿ๆฯ๏๚๛")  # noqa: E501
+            c.is_valid_string_argument(
+                "กขคฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮะัาำิีึืุูเะแโใไๆ็่้๊๋์๐๑๒๓๔๕๖๗๘๙«»฿ๆฯ๏๚๛"
+            )  # noqa: E501
         )
         # Greek
         self.assertTrue(
