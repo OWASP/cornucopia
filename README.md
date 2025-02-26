@@ -92,7 +92,7 @@ options:
   -p, --pdf             Whether to generate a pdf in addition to the printable document. Does not generate a pdf by default. Only docx can be converted to pdf for the moment.
   -d, --debug           Output additional information to debug script
   -l LANGUAGE, --language LANGUAGE
-                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `it`] you can also specify your own language file. If so, there needs to be a yaml file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `pt-pt`, `it`, `ru`] you can also specify your own language file. If so, there needs to be a yaml file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml
   -t TEMPLATE, --template TEMPLATE
                         From which template to produce the document. [`bridge`, `bridge_qr`, `tarot` or  `tarot_qr`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
@@ -125,8 +125,8 @@ Atkinson Hyperlegible: https://brailleinstitute.org/freefont
 
 The following fonts are used:
 
-- Deck: Fivo Sans and Atkinson Hyperlegible
-- Leaflet: Fivo Sans
+- Deck: Noto Sans (Light/Italic/Medium/Extra Bold)
+- Leaflet: Noto Sans (Light/Italic/Medium/Extra Bold)
 - case
   - Noto Sans Condensed Bold
   - Noto Sans Condensed Extra Bold

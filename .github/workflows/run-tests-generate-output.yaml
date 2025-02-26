@@ -113,8 +113,6 @@ jobs:
           mkdir -p output/cornucopia_webapp/Fonts || echo "Ignore error"
           cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_webapp/Links/
           cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_webapp/Fonts/
-          cp -rf ./resources/templates/Fonts/FivoSans/* output/cornucopia_webapp/Fonts/
-          cp -rf ./resources/templates/Fonts/Atkinson-Hyperlegible/* output/cornucopia_webapp/Fonts/
           #
           # Building Cornucopia MobileApp Edition
           mkdir -p output/cornucopia_mobileapp || echo "Ignore error"
@@ -122,8 +120,6 @@ jobs:
           mkdir -p output/cornucopia_mobileapp/Fonts || echo "Ignore error"
           cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
           cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
-          cp -rf ./resources/templates/Fonts/FivoSans/* output/cornucopia_mobileapp/Fonts/
-          cp -rf ./resources/templates/Fonts/Atkinson-Hyperlegible/* output/cornucopia_mobileapp/Fonts/
           #
           pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 2.1 -e webapp
           pipenv run python scripts/convert.py -l en -lt cards -t all -v 2.1 -e webapp
@@ -154,4 +150,5 @@ jobs:
             output/owasp_cornucopia_webapp_2.1_guide_bridge_no-nb.docx
             output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-br.docx
             output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-pt.docx
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx
             output/owasp_cornucopia_webapp_2.1_guide_bridge_it.docx

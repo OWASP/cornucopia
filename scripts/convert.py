@@ -295,7 +295,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-pt`, `pt-br`, `it`] "
+            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-pt`, `pt-br`, `it`, `ru`] "
             "you can also specify your own language file. If so, there needs to be a yaml "
             "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
         ),

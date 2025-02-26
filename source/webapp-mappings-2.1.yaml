@@ -6,7 +6,7 @@ meta:
   version: "2.1"
   layouts: ["cards", "leaflet", "guide"]
   templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
-  languages: ["en", "es", "fr", "nl", "nl", "no-nb", "pt-br", "pt-pt", "it"]
+  languages: ["en", "es", "fr", "nl", "nl", "no-nb", "pt-br", "pt-pt", "it", "ru"]
 suits:
 -
   id: "VE"

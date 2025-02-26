@@ -38,12 +38,12 @@ Add testing.
 ## Changes & Updates
 ### 2024-10-25
 
- - Adding the italian translation by Ruggero DallAglio
+ - Adding the Italian translation by Ruggero DallAglio
  - Fixing the card codes ensuring they are in line with the documentation.
 
 ## Changes & Updates
 ### 2024-10-30
- - Adding the portuguese pt-pt translation by André Ferreira
+ - Adding the Portuguese pt-pt translation by André Ferreira
 
 ## Changes & Updates
 ### 2025-02-03
@@ -52,3 +52,9 @@ Add testing.
 ## Changes & Updates
 ### 2025-02-07
  - Design changes to accomodate for the QR codes
+
+## Changes & Updates
+### 2025-02-26
+ - Adding the Russian translation by Andrey Danin
+ - Changing all the fonts to Noto Sans for better language support
+ - Adding CRE to the Website App Edition
