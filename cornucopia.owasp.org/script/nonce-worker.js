@@ -26,7 +26,7 @@ async function fetchAndStreamNotFoundPage(resp, request) {
   const url = protocol + '//' + host + '/404';
   const { headers } = resp;
   let html;
-  if (resp.url.includes('/cards/') && (/[a-z]/.test(path))) {
+  if (/\/cards\/[a-z]/i.test(resp.url)) {
     return Response.redirect(protocol + "//" + host + "/cards/" + path.toUpperCase(), 301);
   } 
   const response = await fetch(url);
