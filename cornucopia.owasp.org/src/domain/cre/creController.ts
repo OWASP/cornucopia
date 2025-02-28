@@ -46,7 +46,7 @@ export class CreController {
         if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
         let standards: Cre[] = [];
         (this.deck || []).forEach(
-                async (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
+                (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
             );
         return {
             "meta": {
@@ -85,16 +85,5 @@ export class CreController {
             "tags": [],
             "tooltype": "Defensive"
         };
-    }
-
-    private static hash(id: string): Promise<string> {
-        const utf8 = new TextEncoder().encode(id);
-        return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) => {
-          const hashArray = Array.from(new Uint8Array(hashBuffer));
-          const hashHex = hashArray
-            .map((bytes) => bytes.toString(16).padStart(2, '0'))
-            .join('');
-          return hashHex;
-        });
     }
 }
