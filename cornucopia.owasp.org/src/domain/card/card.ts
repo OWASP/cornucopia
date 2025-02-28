@@ -10,6 +10,7 @@ export type Card =
     suit : string,
     suitId : string, 
     suitName : string, 
+    suitNameLocal: string,
     summary : string,
     url : string,
     value : string,

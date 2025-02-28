@@ -116,6 +116,7 @@ export class DeckService {
                     cardObject.id = cardObject['id'];
                     cardObject.edition = deck.edition;
                     cardObject.suitName = suitName;
+                    cardObject.suitNameLocal = suitObject['name'];
                     cardObject.suitId = suitObject['id'];
                     cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                     cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();

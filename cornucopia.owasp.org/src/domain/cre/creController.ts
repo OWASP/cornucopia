@@ -76,7 +76,7 @@ export class CreController {
         return {
             "doctype": "Tool",
             "name": CreController.editions[card.edition],
-            "section": card.suitName,
+            "section": card.suitNameLocal,
             "description": card.desc,
             "sectionID": card.id,
             "hyperlink": 'https://cornucopia.owasp.org' + card.url,
