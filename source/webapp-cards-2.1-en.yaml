@@ -525,7 +525,7 @@ paragraphs:
     text: "Cornucopia Website App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
   -
     id: "T00260"
-    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities, or are not familiar with STRIDE and DREAD."
   -
     id: "T00270"
     text: "Cornucopia Website App Edition is referenced as an information resource in the PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
@@ -843,7 +843,7 @@ paragraphs:
     text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
   -
     id: "T01990"
-    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+    text: "Another suggestion is that if a player fails to identify the card as relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
   -
     id: "T02000"
     text: "Consider allowing extra points for especially good contributions."
