@@ -75,7 +75,7 @@ export class CreController {
         }));
         return {
             "doctype": "Tool",
-            "name": CreController.editions[card.edition],
+            "name": CreController.editions.get(card.edition),
             "section": card.suitNameLocal,
             "description": card.desc,
             "sectionID": card.id,
