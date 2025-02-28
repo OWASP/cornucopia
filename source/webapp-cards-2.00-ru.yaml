@@ -147,7 +147,7 @@ suits:
     misc: "Узнайте больше об этой теме в Authentication Cheat Sheet от OWASP"
 -
   id: "SM"
-  name: "АПРАВЛЕНИЕ СЕССИЯМИ"
+  name: "УПРАВЛЕНИЕ СЕССИЯМИ"
   cards:
   -
     id: "SM2"
