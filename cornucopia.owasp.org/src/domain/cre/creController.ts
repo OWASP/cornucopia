@@ -75,6 +75,7 @@ export class CreController {
         }));
         return {
             "doctype": "Tool",
+            "id": 'https://cornucopia.owasp.org' + card.url,
             "name": CreController.editions.get(card.edition),
             "section": card.suitNameLocal,
             "description": card.desc,
