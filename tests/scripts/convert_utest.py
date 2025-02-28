@@ -1842,5 +1842,37 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         self.assertGreater(len(paragraphs), want_min_len_paragraphs)
 
 
+class TestTranslationAccuracy(unittest.TestCase):
+    def test_translation_accuracy(self) -> None:
+        # Load the English and Spanish translation files
+        english_file = os.path.join(c.convert_vars.BASE_PATH, "source", "webapp-cards-1.22-en.yaml")
+        spanish_file = os.path.join(c.convert_vars.BASE_PATH, "source", "webapp-cards-1.22-es.yaml")
+
+        with open(english_file, "r", encoding="utf-8") as f:
+            english_data = yaml.safe_load(f)
+
+        with open(spanish_file, "r", encoding="utf-8") as f:
+            spanish_data = yaml.safe_load(f)
+
+        # Compare the translations
+        for suit in english_data["suits"]:
+            for card in suit["cards"]:
+                english_desc = card["desc"]
+                spanish_desc = next(
+                    (c["desc"] for c in spanish_data["suits"] if c["id"] == suit["id"] and c["value"] == card["value"]),
+                    None,
+                )
+                self.assertIsNotNone(spanish_desc, f"Missing translation for card {card['id']} in Spanish")
+                self.assertNotEqual(english_desc, spanish_desc, f"Translation for card {card['id']} is identical")
+
+        for paragraph in english_data["paragraphs"]:
+            english_text = paragraph["text"]
+            spanish_text = next(
+                (p["text"] for p in spanish_data["paragraphs"] if p["id"] == paragraph["id"]), None
+            )
+            self.assertIsNotNone(spanish_text, f"Missing translation for paragraph {paragraph['id']} in Spanish")
+            self.assertNotEqual(english_text, spanish_text, f"Translation for paragraph {paragraph['id']} is identical")
+
+
 if __name__ == "__main__":
     unittest.main()

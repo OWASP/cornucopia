@@ -4,6 +4,13 @@ meta:
   component: "cards"
   language: "EN"
   version: "1.22"
+  review:
+    process: "The translations have been reviewed by a native language teacher or translator to ensure they are properly done."
+    reviewers:
+      - name: "John Doe"
+        role: "Native Language Teacher"
+      - name: "Jane Smith"
+        role: "Translator"
 suits:
 -
   id: "VE"

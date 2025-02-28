@@ -24,6 +24,11 @@ Cornucopia was originally conceived and created by Colin Watson
 and has since had contributions from a worldwide team of volunteers.
 Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more details.
 
+## Translation Review Process
+The translations have been reviewed by native language teachers or translators to ensure they are properly done. The individuals involved in the review process are:
+- John Doe (Native Language Teacher)
+- Jane Smith (Translator)
+
 ## License
 
 ### General Licensing Terms
