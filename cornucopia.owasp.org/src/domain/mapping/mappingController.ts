@@ -66,4 +66,9 @@ export class MappingController {
         return {} as Mapping;
     }
 
+    public getMeta() : any
+    {
+        return this.mapping?.meta;
+    }
+
 }

@@ -42,7 +42,7 @@ export class CreController {
         this.controller = controller;
     }
 
-    public getCreMapping(edition: string) : any {
+    public getCreMapping(edition: string, lang: string) : any {
         if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
         let standards: Cre[] = [];
         (this.deck || []).forEach(
@@ -50,10 +50,10 @@ export class CreController {
             );
         return {
             "meta": {
-                "edition": this.deck?.meta?.edition,
-                "component": this.deck?.meta?.component,
-                "language": this.deck?.meta?.language,
-                "version": this.deck?.meta?.version
+                "edition": CreController.editions.get(edition),
+                "component": 'cards',
+                "language": lang,
+                "version": this.controller.getMeta()?.version
             },
             "standards": standards
         };
