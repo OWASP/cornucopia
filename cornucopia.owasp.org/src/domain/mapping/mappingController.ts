@@ -1,5 +1,6 @@
 export type Mapping  = 
 {
+    owasp_cre: any;
     id : string
 
 }
@@ -63,6 +64,11 @@ export class MappingController {
             }
         }
         return {} as Mapping;
+    }
+
+    public getMeta() : any
+    {
+        return this.mapping?.meta;
     }
 
 }

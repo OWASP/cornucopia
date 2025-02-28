@@ -9,7 +9,7 @@ export class SuitController {
     private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.1'}];
     private static languages : Map<string, any> = new Map<string, any>([
         ['mobileapp', {lang: ['en']}], 
-        ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br']}]
+        ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']}]
     ]);
 
     public static getSuits() : Map<string,Suit[]>
