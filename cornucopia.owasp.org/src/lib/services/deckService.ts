@@ -15,7 +15,7 @@ export class DeckService {
 
     private static languages = [
         {lang: ['en'], edition: 'mobileapp'}, 
-        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt-pt', 'ru', 'it'], edition: 'webapp'}
+        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp'}
     ];
     private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.1'}];
 
