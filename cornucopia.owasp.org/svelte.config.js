@@ -16,6 +16,7 @@ export default {
 		}),
 		alias: {
 			$data: "data",
+			$domain: "src/domain",
 		},
 		prerender: {
 			handleHttpError: ({ path, referrer, message }) => {
@@ -82,7 +83,17 @@ export default {
 				'/cards/DVEJ',
 				'/cards/DVEQ',
 				'/cards/DVEK',
-				'/404'
+				'/404',
+				'/api/cre/webapp/en',
+				'/api/cre/webapp/it',
+				'/api/cre/webapp/nl',
+				'/api/cre/webapp/es',
+				'/api/cre/webapp/fr',
+				'/api/cre/webapp/ru',
+				'/api/cre/webapp/pt_pt',
+				'/api/cre/webapp/pt_br',
+				'/api/cre/webapp/no_nb',
+				'/api/cre/mobileapp/en'
 			]
 		},
 		csrf: {

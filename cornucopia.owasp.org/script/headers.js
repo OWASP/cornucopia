@@ -32,6 +32,56 @@ function main() {
   Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self "https://www.youtube.com/"), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()
 /404
   X-Robots-Tag: noindex
+/api/cre/mobileapp/en
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/en
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/es
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/fr
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/nl
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/no_nb
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/it
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/pt_pt
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/pt_br
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/cre/webapp/ru
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 `;
 
   const headersFile = path.join(buildDir, '_headers');

@@ -21,17 +21,17 @@ describe('DeckService tests', () => {
             
             return { request };
           });
-        expect((new DeckService(request)).getCardMapping('doesntexist')).toBeDefined();
+        expect((new DeckService(request)).getCardMapping()).toBeDefined();
         expect(request).toHaveBeenCalled();
         expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-mappings-2.1.yaml');
         request.mockClear();
         DeckService.clear();
-        expect((new DeckService(request)).getCardMapping('webapp')).toBeDefined();
+        expect((new DeckService(request)).getCardMapping()).toBeDefined();
         expect(request).toHaveBeenCalled();
         expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/webapp-mappings-2.1.yaml');
         request.mockClear();
         DeckService.clear();
-        expect((new DeckService(request)).getCardMapping('mobileapp')).toBeDefined();
+        expect((new DeckService(request)).getCardMapping()).toBeDefined();
         expect(request).toHaveBeenCalled();
         expect(request).toBeCalledWith('GET', 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/mobileapp-mappings-1.1.yaml');
         DeckService.clear();

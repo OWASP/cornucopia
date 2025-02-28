@@ -15,18 +15,18 @@ export class DeckService {
 
     private static languages = [
         {lang: ['en'], edition: 'mobileapp'}, 
-        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br'], edition: 'webapp'}
+        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt-pt', 'ru', 'it'], edition: 'webapp'}
     ];
     private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.1'}];
 
     private static getVersion(edition: string): string
     {
-        return DeckService.decks.find((deck) => deck.edition == edition)?.version || '2.1';
+        return DeckService.decks.find((deck: { edition: string; }) => deck.edition == edition)?.version || '2.1';
     }
 
     private static getEdition(edition: string): string
     {
-        return DeckService.decks.find((deck) => deck.edition == edition)?.edition || 'webapp';
+        return DeckService.decks.find((deck: { edition: string; }) => deck.edition == edition)?.edition || 'webapp';
     }
 
     private static getLanguage(edition: string, lang: string) : string
@@ -89,8 +89,9 @@ export class DeckService {
     private getCardData(lang: string)
     {
         const cards = new Map<string, Card>;
-        for (let i in DeckService.decks) {
-            let deck = DeckService.decks[i];
+        const decks = DeckService.decks;
+        for (let i in decks) {
+            let deck = decks[i];
             const requestOptions = {
                 method: "GET",
                 keepalive: true,

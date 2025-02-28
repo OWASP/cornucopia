@@ -1,5 +1,6 @@
 export type Mapping  = 
 {
+    owasp_cre: any;
     id : string
 
 }

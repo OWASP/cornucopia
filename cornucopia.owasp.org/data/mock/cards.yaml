@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "EN"
-  version: "2.00"
+  version: "2.1"
 suits:
 -
   id: "VE"
@@ -87,6 +87,7 @@ suits:
   -
     id: "AT3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/AT3"
     desc: "Muhammad can obtain a user's password or other secrets such as security questions, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, or because it never expires, or because the user cannot change her own password"
   -
     id: "AT4"
@@ -226,6 +227,7 @@ suits:
   -
     id: "AZ3"
     value: "3"
+    url: "https://cornucopia.owasp.org/cards/AZ3"
     desc: "Christian can access information, which he should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or through other information leakage"
   -
     id: "AZ4"
@@ -429,13 +431,15 @@ suits:
   cards:
   -
     id: "JOA"
-    value: "JokerA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOA"
     card: "Joker"
     desc: "Alice can utilize the application to attack users' systems and data"
     misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
   -
     id: "JOB"
-    value: "JokerB"
+    value: "B"
+    url: "https://cornucopia.owasp.org/cards/JOB"
     card: "Joker"
     desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
     misc: "Examine vulnerabilities and discover how they can be fixed using the free OWASP® Juice Shop, Security Shepherd, or using the online challenges in the free OWASP® Hacking-lab"
@@ -449,10 +453,10 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Website App Edition v2.00-EN"
+    text: "Website App Edition v2.1-EN"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v2.00-EN"
+    text: "OWASP® Cornucopia Website App Edition v2.1-EN"
   -
     id: "T00005"
     text: "Index"
@@ -515,13 +519,13 @@ paragraphs:
     text: "The Microsoft SDL team had already published its super Elevation of Privilege: The Threat Modeling Game (EoP) but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address."
   -
     id: "T00240"
-    text: "EoP is a great concept and game strategy and was published under a Creative Commons Attribution License."
+    text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
   -
     id: "T00250"
     text: "Cornucopia Website App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
   -
     id: "T00260"
-    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
   -
     id: "T00270"
     text: "Cornucopia Website App Edition is referenced as an information resource in the PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
@@ -839,7 +843,7 @@ paragraphs:
     text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
   -
     id: "T01990"
-    text: "Another suggestion is that if a player fails to identify the card as relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
   -
     id: "T02000"
     text: "Consider allowing extra points for especially good contributions."
@@ -989,7 +993,7 @@ paragraphs:
     text: "EoP begins every description with words like 'An attacker can...'. "
   -
     id: "T02690"
-    text: "These have to be phrased as an attack, but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
+    text: "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
   -
     id: "T02700"
     text: "These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. "
@@ -1281,6 +1285,18 @@ paragraphs:
   -
     id: "T03720"
     text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
+  -
+    id: "T03730"
+    text: "2.1"
+  -
+    id: "T03740"
+    text: "Adding italian translation done by Ruggero DallAglio"
+  -
+    id: "T03750"
+    text: "2.1"
+  -
+    id: "T03760"
+    text: "Adding portugeese translation done by André Ferreira"
   -
     id: "T03800"
     text: "Project contributors"
