@@ -506,7 +506,7 @@ paragraphs:
     text: "Колин Уотсон в качестве автора и лидера со-проекта с Грантом Онгером вместе с другими добровольцами OWASP, которые помогли во многих отношениях."
   -
     id: "T00180"
-    text: "OWASP® does not endorse or recommend commercial products or services © 2012-2025 OWASP® Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
+    text: "OWASP® не поддерживает и не рекомендует коммерческие продукты или услуги © 2012-2025 OWASP® Foundation Этот документ лицензирован в соответствии с лицензией Creative Commons Attribution-ShareAlike 3.0"
   -
     id: "T00200"
     text: "Введение"
@@ -515,31 +515,31 @@ paragraphs:
     text: "Идея, лежащая в основе Cornucopia, состоит в том, чтобы помочь командам разработчиков, особенно тем, кто использует Agile методологии, выявить требования безопасности приложений и разрабатывать пользовательские истории, основанные на безопасности."
   -
     id: "T00220"
-    text: "Although the idea had been waiting for enough time to progress it, the final motivation came when SAFECode published its Practical Security Stories and Security Tasks for Agile Development Environments in July 2012."
+    text: "Идея достаточно долго ждала реализации, окончательная мотивация появилась, когда SafeCode опубликовала Practical Security Stories and Security Tasks for Agile Development Environments в июле 2012 года."
   -
     id: "T00230"
-    text: "The Microsoft SDL team had already published its super Elevation of Privilege: The Threat Modeling Game (EoP) but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address."
+    text: "Команда Microsoft SDL уже опубликовала отличную игру Elevation of Privilege: The Threat Modeling Game (EoP), но она, похоже, не учитывает наиболее актуальные проблемы, которые в основном должны решать разработчики веб -приложений."
   -
     id: "T00240"
-    text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
+    text: "EoP - отличная концепция и игровая стратегия, которая, к тому же, опубликована под лицензией Creative Commons Attribution License."
   -
     id: "T00250"
-    text: "Cornucopia Website App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
+    text: "Cornucopia Website App Edition основана на концепциях и идеях игры EoP, которые были изменены, чтобы больше соответствовать проблемам, с которыми сталкиваются разработчики веб-сайтов."
   -
     id: "T00260"
-    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+    text: "Игра пытается внедрить идеи моделирования угроз в команды разработчиков, которые используют методологию Agile, больше сосредоточены на недостатках веб-приложений, чем на других типах уязвимостей, или которые не знакомы с STRIDE и DREAD."
   -
     id: "T00270"
-    text: "Cornucopia Website App Edition is referenced as an information resource in the PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
+    text: "Cornucopia Website App Edition упоминается в качестве информационного ресурса в PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, январь 2013 года."
   -
     id: "T00300"
-    text: "The card deck (pack)"
+    text: "Колода карт (упаковка)"
   -
     id: "T00310"
-    text: "Instead of EoP's STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP® Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP® Application Security Verification Standard, the Web Security Testing Guide (WSTG) and David Rook's Principles of Secure Development. "
+    text: "В отличие от STRIDE мастей EoP (наборы карт со схожим дизайном), масти в  Cornucopia основаны на структуре OWASP® Secure Coding Practices - Quick Reference Guide (SCP), и в дополнение учитывает OWASP® Application Security Verification Standard, Web Security Testing Guide (WSTG) и Principles of Secure Development Дэвида Рука. "
   -
     id: "T00320"
-    text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
+    text: "Это дает пять мастей, и дополнительную с названием “Cornucopia” для всего остального:  "
   -
     id: "T00330"
     text: "ВАЛИДАЦИЯ И КОДИРОВАНИЕ ДАННЫХ (ВК)"
@@ -548,10 +548,10 @@ paragraphs:
     text: "АУТЕНТИФИКАЦИЯ (АУ)"
   -
     id: "T00350"
-    text: "АПРАВЛЕНИЕ СЕССИЯМИ (УС)"
+    text: "УПРАВЛЕНИЕ СЕССИЯМИ (УС)"
   -
     id: "T00360"
-    text: "АВТОРИЗАЦИЯ (АВ)"
+    text: "Контроль Доступа (КД)"
   -
     id: "T00370"
     text: "КРИПТОГРАФИЯ (КР)"
@@ -560,787 +560,787 @@ paragraphs:
     text: "Cornucopia (C)"
   -
     id: "T00390"
-    text: "Similar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
+    text: "Аналогично покерной колоде, каждая масть содержит 13 карт (2-10, Валет, Дама, Король и Туз), но, в отличие от EoP есть еще две карты Джокер."
   -
     id: "T00400"
-    text: "The content was mainly drawn from the SCP."
+    text: "Содержимое в основном нарисовано из SCP"
   -
     id: "T00500"
-    text: "Mappings"
+    text: "Соотношения"
   -
     id: "T00510"
-    text: "The other driver for Cornucopia is to link the attacks with requirements and verification techniques."
+    text: "Другая цель Cornucopia - связать атаки с требованиями и техниками проверок."
   -
     id: "T00520"
-    text: "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
+    text: "Первоначальной целью была отссылка к идентификаторам слабостей CWE, но они оказались слишком многочисленными, и вместо этого было решено соотнести каждую карту с идентификаторами паттернов атак CAPEC, которые в свою очередь сопоставляются с CWE, что позволяет достичь желаемого результата."
   -
     id: "T00530"
-    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP® SCP v2, ASVS v4.0 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
+    text: "Каждая карта также сопоставлена ​​с 36 историями о безопасности в документе SafeCode, а также с OWASP® SCP V2, ASVS V4.0 и AppSensor (обнаружение и реагирование на атаки приложений), чтобы помочь командам создать свои собственные истории, связанные с безопасностью, для использования в Agile."
   -
     id: "T00600"
     text: "Стратегия игры"
   -
     id: "T00610"
-    text: "Apart from the content differences, the game rules are virtually identical to those for EoP."
+    text: "Помимо различий в содержании, правила игры практически идентичны правилам EoP."
   -
     id: "T00700"
     text: "Печать карт"
   -
     id: "T00710"
-    text: "Check the Cornucopia project page for how to obtain pre-printed decks on glossy card."
+    text: "Готовые к печати карты можно найти на странице проекта Cornucopia."
   -
     id: "T00720"
-    text: "The cards can be printed from this document in black & white but are more effective in color."
+    text: "Карты можно распечатать из этого документа в черно-белом, или лучше, цветном виде."
   -
     id: "T00730"
-    text: "The cards in the later pages of this document have been laid out to fit on one type of pre-scored business A4 card sheets. "
+    text: "Карты на последующих страницах расположены так, чтобы совпадать с одним из типов заготовок А4 для визитных карточек.  "
   -
     id: "T00740"
-    text: "This appeared to be the quickest way to initially provide to create playing cards quickly. "
+    text: "Похоже, что это самый быстрый способ изготовления игровых карт. "
   -
     id: "T00750"
-    text: "Avery product codes C32015 and C32030 have been tested successfully, but any 10 up 85mm x 54 mm cards on A4 paper should work with a little adjustment."
+    text: "Успешно протестировны продукты Avery с кодами C32015 и C32030, но любые 10 карт 85 мм х 54 мм на листе А4 должны подойти с, возможно, небольшими изменениями."
   -
     id: "T00760"
-    text: "Other stationery suppliers like Ryman and Sigel produce similar sheets"
+    text: "Другие поставщики канцелярских товаров, такие как Ryman и Sigel, производят похожие листы"
   -
     id: "T00770"
-    text: "These card sheets are not inexpensive, so care should be taken in deciding what to print and using what media and printer type."
+    text: "Такие листы для карточек недешевые, поэтому внимательно выбирайте, что печатать, на каком материале и каким принтером."
   -
     id: "T00780"
-    text: "The cards can of course just be printed on any size of paper or card and then cut-up manually, or a commercial printer would be able to print larger volumes and cut the cards to size. "
+    text: "Конечно, карты могут быть распечатаны на любой бумаге и разрезаны вручную, или можно использовать промышленное оборудование для печати большого объема и разрезания карт. "
   -
     id: "T00790"
-    text: "The cut lines are shown on the penultimate page of this document, but Avery also produce a landscape A4 template (A-0017-01_L.doc) that can be used as a guide."
+    text: "Линии разреза показаны на предпоследней странице этого документа, но Avery также производит горизонтальные шаблоны (A-0017-01_L.doc), которые также можно использовать как шаблон."
   -
     id: "T00800"
-    text: "Printing and cutting up can take an hour or so, and using a faster printer helps."
+    text: "Печать и разрезание может занять час другой, потому лучше использовать быстрый принтер. "
   -
     id: "T00810"
-    text: "Try to print add higher quality to increase legibility."
+    text: "Попробуйте печатать в высоком качестве для большей разборчивости."
   -
     id: "T00820"
-    text: "An optional card back design (in OWASP® tartan) has been provided as the last page of this document."
+    text: "Необязательный дизайн рубашки карт (в шотландке OWASP®) представлен на последней странице."
   -
     id: "T00830"
-    text: "There is no special alignment needed. "
+    text: "Выравнивать нет необходимости. "
   -
     id: "T00840"
-    text: "Dual-sided printing needs special care taken. "
+    text: "Двойную печать нужно выполнять аккуратно. "
   -
     id: "T00850"
-    text: "You could customize the card faces or the backs for your own organization's preferences."
+    text: "Вы можете адаптировать лицевую сторону карты или ее рубашку согласно предпочтениям Вашей организации."
   -
     id: "T00900"
-    text: "Customization"
+    text: "Кастомизация"
   -
     id: "T00910"
-    text: "After you have used Cornucopia a few times, you may feel that some cards are less relevant to your applications, or the threats are different for your organization."
+    text: "После нескольких игр в Cornucopia, вы можете понять, что некоторые карты не очень подходят Вашему приложению, или для организации важны другие угрозы. "
   -
     id: "T00920"
-    text: "Edit this document yourself to make the cards more suitable for your teams, or create new decks completely."
+    text: "Отредактируйте документ, чтобы адаптировать карты под свои команды, или создайте полность новую колоду."
   -
     id: "T01000"
-    text: "Provide feedback"
+    text: "Оставьте отзыв"
   -
     id: "T01010"
-    text: "If you have ideas or feedback on the use of OWASP® Cornucopia, please share them."
+    text: "Если у Вас есть идеи или предложения о OWASP® Cornucopia, поделитесь ими."
   -
     id: "T01020"
-    text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
+    text: "Если вы создали альтернативную версию карт или производите профессиональную версию для печати, пожалуйста, поделитесь ими с добровольцами, создавшими данную версию или сообществом разработки и безопасности приложений."
   -
     id: "T01030"
-    text: "The best place to use to discuss or contribute is the list/group for the OWASP project:"
+    text: "Лучшее место для обсуждения или сотрудничества - это список/группа проекта OWASP:"
   -
     id: "T01040"
-    text: "List/Group"
+    text: "Список/Группа"
   -
     id: "T01050"
-    text: "Project home page"
+    text: "Страница проекта"
   -
     id: "T01060"
-    text: "All OWASP documents and tools are free to download and use."
+    text: "Все документы и инструменты OWASP бесплатны для загрузки и использования."
   -
     id: "T01070"
-    text: "OWASP® Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
+    text: "OWASP® Cornucopia доступна по лицензии Creative Commons Attribution-Sharealike 3.0."
   -
     id: "T01100"
     text: "Инструкции"
   -
     id: "T01110"
-    text: "The text on each card describes an attack, but the attacker is given a name, which are unique across all the cards."
+    text: "Текст на каждой карте описывает атаку, у атакующего есть имя, уникальное для всех колоды."
   -
     id: "T01120"
-    text: "The name can represent a computer system (e.g. the database, the file system, another application, a related service, a botnet), an individual person (e.g. a citizen, a customer, a client, an employee, a criminal, a spy), or even a group of people (e.g. a competitive organization, activists with a common cause)."
+    text: "Имя может представлять компьютерную систему (например, базу данных, файловую систему, другое приложение, связанную службу, ботнет), отдельного человека (например, гражданина, клиента, сотрудника, преступника, шпиона) или даже группу людей (например, конкурирующую организацию, активистов-единомышленников)."
   -
     id: "T01130"
-    text: "The attacker might be remote in some other device/location, or local/internal with access to the same device, host or network as the application is running on."
+    text: "Злоумышленник может быть удаленным и действовать с другого устройства/места или локальным/внутренним с доступом к тому же устройству, хосту или сети, где запущего приложение."
   -
     id: "T01140"
-    text: "The attacker is always named at the start of each description"
+    text: "Злоумышленник всегда назван в начале каждого описания"
   -
     id: "T01150"
-    text: "An example is:"
+    text: "Пример:"
   -
     id: "T01160"
-    text: "William has control over the generation of session identifiers."
+    text: "Уильям контролирует генерацию идентификаторов сессий."
   -
     id: "T01170"
-    text: "This means the attacker (William) can create new session identifiers that the application accepts."
+    text: "Это значит, что атакующий (Уильям) может создать новые идентификаторы сессий, которые приложение примет."
   -
     id: "T01180"
-    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP® “Application Security Verification Standard”, the security focused stories in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
+    text: "Атаки в основном взяты из требований безопасности, перечисленных в SCP, v2, но затем дополнены целями проверки из OWASP® “Application Security Verification Standard”, историй о безопасности в “Practical Security Stories and Security Tasks for Agile Development Environments” SAFECode и, наконец, карт EoP."
   -
     id: "T01190"
-    text: "Further guidance about each card is available in the online Wiki Deck at "
+    text: "Подробная информация по каждой карте доступна в онлайн Wiki Колоде по адресу "
   -
     id: "T01200"
-    text: "Lookups between the attacks and five resources are provided on most cards:"
+    text: "Обычно на каждой карте есть отсылка на справку по атаке на пяти ресурсах:"
   -
     id: "T01210"
-    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, November 2010 "
+    text: "Требования “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, Ноябрь 2010 "
   -
     id: "T01220"
-    text: "Verification IDs in OWASP® “Application Security Verification Standard”"
+    text: "Идентификаторы проверок “Application Security Verification Standard”"
   -
     id: "T01230"
-    text: "Attack detection points IDs in “AppSensor”, OWASP®, August 2010-2015"
+    text: "Идентификаторы детекторов атак “AppSensor”, OWASP®, Август 2010-2015"
   -
     id: "T01240"
-    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
+    text: "Идентификаторы “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, Ноябрь 2015"
   -
     id: "T01250"
-    text: "Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, July 2012"
+    text: "Истории о безопасности 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, Июль 2012"
   -
     id: "T01260"
-    text: "A look-up means the attack is included within the referenced item, but does not necessarily encompass the whole of its intent. "
+    text: "Отсылка означает, что атака описывается в справочном материале, но не обязательно во всех возможных деталях. "
   -
     id: "T01270"
-    text: "For structured data like CAPEC, the most specific reference is provided but sometimes a cross-reference is provided that also has more specific (child) examples."
+    text: "Для структурированных данных, таких как CAPEC, представлена ​​наиболее конкретная ссылка, но иногда предоставляется перекрестная ссылка, которая также имеет более конкретные (дочерние) примеры."
   -
     id: "T01280"
-    text: "There are no lookups on the six Aces and two Jokers. "
+    text: "Отсылок нет на шести Тузах и двух Джокерах. "
   -
     id: "T01290"
-    text: "Instead these cards have some general tips in italicized text."
+    text: "Вместо них на картах есть общее описание, выполненное наклонным шрифтом."
   -
     id: "T01300"
-    text: "It is possible to play Cornucopia in many different ways. "
+    text: "Играть в Cornucopia можно разными способами. "
   -
     id: "T01301"
-    text: "For how to play, read pages: 11-19."
+    text: "Правила игры на страницых: 11-19"
   -
     id: "T01310"
-    text: "Here is one way, demonstrated online in a video at "
+    text: "Один из способов продемонстрирован онлайн илив видео "
   -
     id: "T01311"
-    text: " which uses the new (May 2015) score/record sheet at "
+    text: " в которм используется новая (Май 2015) таблица очков/бланк "
   -
     id: "T01400"
-    text: "Preparations"
+    text: "Подготовка"
   -
     id: "T01410"
-    text: "Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+    text: "Добудьте или рспечатайте и вырежьте/разделите свою колоду карт (смотри страницу 2 этого документа)"
   -
     id: "T01411"
     text: "Use the cards in this pack"
   -
     id: "T01420"
-    text: "Identify an application or application process to review; this might be a concept, design or an actual implementation"
+    text: "Определить приложение или часть приложения для обсуждения; это может быть концепцт, архитектура или готовое приложение"
   -
     id: "T01430"
-    text: "Create a data flow diagram, user stories, or other artefacts to help the review"
+    text: "Создайте диаграмму потоков данных, пользовательские сценарии или другие вспомогательные артефакты"
   -
     id: "T01440"
-    text: "Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
+    text: "Выбирете и пригласите группу из 3-6 архитекторов, разработчиков, тестировщиков или бизнес аналитиков и сядьте за стол (постарайтесь включить кого-то хорошо знакомого с безопасностью приложений)"
   -
     id: "T01450"
-    text: "Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
+    text: "Подготовьте какие-нибудь призы (золотые звезды, шоколадки,  пиццу, пиво или цветы, что принятов у Вас в офисной культуре)"
   -
     id: "T01500"
-    text: "Play"
+    text: "Игра"
   -
     id: "T01510"
-    text: "One suit - Cornucopia - acts as trumps."
+    text: "Одна масть, Cornucopia, является козырем."
   -
     id: "T01520"
-    text: "Aces are high (i.e. they beat Kings)."
+    text: "Тузы старшие (т.е. бьют Королей)."
   -
     id: "T01530"
-    text: "It helps if there is a non-player to document the issues and scores."
+    text: "Лучше, если кто-то будет документировать и вести счет, не участвуя в игре."
   -
     id: "T01540"
-    text: "Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
+    text: "Уберите Джокеры и несколько слабых карт (2, 3, 4), чтобы разделить карты между игроками поровну."
   -
     id: "T01550"
-    text: "Shuffle the deck and deal all the cards"
+    text: "Перемешайте колоду и раздайте все карты"
   -
     id: "T01560"
-    text: "To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
+    text: "Выбериту случайным образом игрока, который начнет игру - он может начать с любой карты, кроме козырей (Cornucopia)"
   -
     id: "T01570"
-    text: "To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
+    text: "Чтобы сыграть карту, игрок должен ее прочитать вслух и объяснить (смотри онлайн Wiki Колоду для подсказки) как угроза может быть применена (игрок получает очки, если атака по мнению группы может сработать) - не пытайтесь думать о методах исправления на этом этапе и не исключайте угрозу потому что думаете, что от нее уже реализована защита - кто-нибудь записывает карту и озвученные проблемы"
   -
     id: "T01580"
-    text: "Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
+    text: "Играйте по часовой стрелке, каждый должен сыграть карту таким же способом; если игрока есть карты той же масти, что и первая карта, нужно использовать одну из них, иначе можно использовать любую другую масть. "
   -
     id: "T01590"
-    text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand."
+    text: "Только старшая карта масти или старшая козырная карта Cornucopia выигрывает раунд. "
   -
     id: "T01600"
-    text: "The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
+    text: "Тот, кто выиграл текущий раунд, начинает следующий (т.е. начинает первым) и тем самым определяет следующую масть"
   -
     id: "T01610"
-    text: "Repeat until all the cards are played"
+    text: "Повторяйте, пока не закончатся карты"
   -
     id: "T01700"
-    text: "Scoring"
+    text: "Начисление очков"
   -
     id: "T01710"
-    text: "The objective is to identify applicable threats, and win hands (rounds):"
+    text: "Нужно определить угрозы и выигранные руки (раунды)"
   -
     id: "T01720"
-    text: "Score +1 for each card you can identify as a valid threat to the application under consideration"
+    text: "Добавьте +1 за каждую карту, которую можно считать актуальной угрозой для обсуждаемого приложения"
   -
     id: "T01730"
-    text: "Score +1 if you win a round"
+    text: "Добавьте +1 за каждый выигранный раунд"
   -
     id: "T01740"
-    text: "Once all cards have been played, whoever has the most points wins"
+    text: "Выигрывате тот, кто набрал больше всего очков после розыгрыша всех карт"
   -
     id: "T01800"
-    text: "Closure"
+    text: "Завершение игры"
   -
     id: "T01810"
-    text: "Review all the applicable threats and the matching security requirements"
+    text: "Рассмотрите все применимые угрозы и соответсвующие требования безопасности"
   -
     id: "T01820"
-    text: "Create user stories, specifications and test cases as required for your development methodology."
+    text: "Составьте пользовательские сценарии, спецификации и сценарии тестирования в соответствии с Вашей методологией разработки."
   -
     id: "T01900"
-    text: "Alternative game rules"
+    text: "Альтернативные правила игры"
   -
     id: "T01910"
-    text: "If you are new to the game, remove the Aces and two Joker cards to begin with."
+    text: "Если Вы ранее не играли, уберите Тузы и двух Джокеров."
   -
     id: "T01920"
-    text: "Add the Joker cards back in once people become more familiar with the process."
+    text: "Верните Джокеров, когда лучше познакомитесь с процессом игры."
   -
     id: "T01930"
-    text: "Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round."
+    text: "Помимо правил «игры с козырями», описанных выше, которые очень похожи на EoP, можно использовать правила игры в «двадцать одно» (также известной как «Потон» или «Блэкджек»), которые обычно уменьшают количество карт, участвующих в каждом раунде."
   -
     id: "T01940"
-    text: "Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game."
+    text: "Практикуйстесь на выдуманном, или лучше планируемом, приложении, вместо того, чтобы пытаться найти ошибки в существующем приложении до тех пор, пока участники не останутся довольны результатами игры."
   -
     id: "T01950"
-    text: "Consider just playing with one suit to make a shorter session - but try to cover all the suits for every project. "
+    text: "Подумайте над игрой только одной мастью, чтобы сделать сессии короче, но попробуйте сыграть все масти для каждого проекта. "
   -
     id: "T01960"
-    text: "Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. "
+    text: "Или лучше играйте одну раздачу с заранее отобранными картами и добавляйте очки за успешную идентификацию требований безопасности. "
   -
     id: "T01970"
-    text: "Perhaps have one game of each suit each day for a week or so, if the participants cannot spare long enough for a full deck."
+    text: "Можно играть по одной масти каждый день недели, если у участников не получается выделить время сразу на всю колоду."
   -
     id: "T01980"
-    text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
+    text: "Некоторые команды предпочитают обсуждать карты по завершении раунда (вместо того, чтобы обсуждать каждую карту сразу после хода)"
   -
     id: "T01990"
-    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+    text: "Еще предложение, разрешите другим игрокам предлагать идеи, и возможно, получать за это очки, если игрок не может придумать как использовать свою карту. "
   -
     id: "T02000"
-    text: "Consider allowing extra points for especially good contributions."
+    text: "Подумайте над добавлением очков за особенно хороший вклад."
   -
     id: "T02010"
-    text: "You can even play by yourself. "
+    text: "Вы даже можете играть самостоятельно. "
   -
     id: "T02020"
-    text: "Just use the cards to act as thought-provokers. "
+    text: "Просто используйте карты для помощи в генерации идей. "
   -
     id: "T02030"
-    text: "Involving more people will be beneficial though."
+    text: "Продуктивнее будет привлекать побольше людей."
   -
     id: "T02040"
-    text: "In Microsoft's EoP guidance, they recommend cheating as a good game strategy."
+    text: "В руководстве к Microsoft EoP жульничество рекомендуется как хорошая стратегия игры. "
   -
     id: "T02100"
-    text: "Development framework-specific modified card decks"
+    text: "Создание модифицированных код фреймворки колод"
   -
     id: "T02110"
-    text: "There can be built in security controls in some commonly used languages and frameworks for web and mobile application development."
+    text: "В некоторых часто используемых языках и фреймворках для разработки мобильных и веб приложений могут быть встроенные механизмы защиты."
   -
     id: "T02120"
-    text: "With certain provisos it is useful to consider how using these controls can simplify the identification of additional requirements – provided of course the controls are included, enabled and configured correctly."
+    text: "При определенных условиях полезно рассмотреть, как использование этих механизмов может упростить идентификацию дополнительных требований - при условии, что эти механизмы присутствуют, включены и настроены правильно."
   -
     id: "T02130"
-    text: "Consider removing cards from the decks if you are confident they are addressed by the way you are using the language/framework."
+    text: "Подумайте об удалении карт из колоды, если вы уверены, что они покрываются тем, как вы используете язык/фреймворк."
   -
     id: "T02140"
-    text: "Items in parentheses are “maybes”."
+    text: "Элементы в скобках трактуются как \"возможно\"."
   -
     id: "T02200"
-    text: "Internal coding standards and libraries"
+    text: "Внутренние стандарты кодирования и библиотеки"
   -
     id: "T02210"
-    text: "Add your own list of excluded cards based on your organisation's coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
+    text: "Добавьте свой собственный список исключенных карт на основе стандартов кодирования вашей организации (при условии, что они подтверждены соответствующими этапами проверки в жизненном цикле разработки)."
   -
     id: "T02220"
-    text: "Your coding standards and libraries"
+    text: "Ваши стандарты кодирования и библиотеки"
   -
     id: "T02230"
-    text: "Data Validation and Encoding"
+    text: "Проверка и Кодирование Данных"
   -
     id: "T02240"
-    text: "[your list]"
+    text: "[ваш список]"
   -
     id: "T02250"
-    text: "Authentication"
+    text: "Аутентификация"
   -
     id: "T02260"
-    text: "[your list]"
+    text: "[ваш список]"
   -
     id: "T02270"
-    text: "Session Management"
+    text: "Управление сессиями"
   -
     id: "T02280"
-    text: "[your list]"
+    text: "[ваш список]"
   -
     id: "T02290"
-    text: "Authorization"
+    text: "Контроль доступа"
   -
     id: "T02300"
-    text: "[your list]"
+    text: "[ваш список]"
   -
     id: "T02310"
-    text: "Cryptography"
+    text: "Криптография"
   -
     id: "T02320"
-    text: "[your list]"
+    text: "[ваш список]"
   -
     id: "T02330"
     text: "Cornucopia"
   -
     id: "T02340"
-    text: "[your list]"
+    text: "[ваш список]"
   -
     id: "T02400"
-    text: "Compliance requirement decks"
+    text: "Колоды соответствия требованиями"
   -
     id: "T02410"
-    text: "Create a smaller deck by only including cards for a particular compliance requirement."
+    text: "Создайте меньшую колоду, оставив карты для конкретного соответствия требованиям."
   -
     id: "T02420"
-    text: "Compliance requirement"
+    text: "Соответствие требованиям"
   -
     id: "T02430"
-    text: "Data validation and Encoding"
+    text: "Проверка и Кодирование Данных"
   -
     id: "T02440"
-    text: "[compliance list]"
+    text: "[список соответствий]"
   -
     id: "T02450"
-    text: "Authentication"
+    text: "Аутентификация"
   -
     id: "T02460"
-    text: "[compliance list]"
+    text: "[список соответствий]"
   -
     id: "T02470"
-    text: "Session Management"
+    text: "Управление сессиями"
   -
     id: "T02480"
-    text: "[compliance list]"
+    text: "[список соответствий]"
   -
     id: "T02490"
-    text: "Authorization"
+    text: "Контроль доступа"
   -
     id: "T02500"
-    text: "[compliance list]"
+    text: "[список соответствий]"
   -
     id: "T02510"
-    text: "Cryptography"
+    text: "Криптография"
   -
     id: "T02520"
-    text: "[compliance list]"
+    text: "[список соответствий]"
   -
     id: "T02530"
     text: "Cornucopia"
   -
     id: "T02540"
-    text: "[compliance list]"
+    text: "[список соответствий]"
   -
     id: "T02600"
-    text: "Frequently asked questions"
+    text: "Часто задаваемые вопросы"
   -
     id: "T02610"
-    text: "1. Can I copy or edit the game?"
+    text: "1. Могули я копироваить или редактировать игру?"
   -
     id: "T02620"
-    text: "Yes of course."
+    text: "Да, конечно."
   -
     id: "T02630"
-    text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
+    text: "Все материалы OWASP можно использовать бесплатно, при условии, что вы выполняете условия лицензии Creative Commons Attribution-ShareAlike 3.0. "
   -
     id: "T02640"
-    text: "Perhaps if you create a new version, you might donate it to the OWASP® Cornucopia Project?"
+    text: "Возможно, если вы создадите новую версию, вы можете пожертвовать ее в проект OWASP® Cornucopia?"
   -
     id: "T02650"
-    text: "2. How can I get involved?"
+    text: "2. Как я могу принять участие?"
   -
     id: "T02660"
-    text: "Please send ideas or offers of help to the project's mailing list."
+    text: "Пожалуйста, отправляйте идеи или предложения помощи в список рассылки проекта."
   -
     id: "T02670"
-    text: "3. How were the attackers' names chosen?"
+    text: "3. Как были выбраны имена атакующих?"
   -
     id: "T02680"
-    text: "EoP begins every description with words like 'An attacker can...'. "
+    text: "EOP начинает каждое описание с таких слов, как «Атакующий может ...». "
   -
     id: "T02690"
-    text: "These have to be phrased as an attack but I was not keen on the anonymous terminology, wanting something more engaging, and therefore used personal names. "
+    text: "Это обязывает формулировать описание как атаку, но мне была неитнересна анонимная терминология, хотелось чего-то более привлекательного, потому стал использовать имена собственные. "
   -
     id: "T02700"
-    text: "These can be thought of as external or internal people or aliases for computer systems. But instead of just random names, I thought how they might reflect the OWASP community aspect. "
+    text: "Они могут рассматриваться как внешние или внутренние люди или названия компьютерных систем. Но вместо использования просто случайных имен я подумал, как они могут отражать сообщество OWASP. "
   -
     id: "T02710"
-    text: "Therefore, apart from 'Alice and Bob' I use the given (first) names of current and recent OWASP employees and Board members (assigned in no order), and then randomly selected the remaining 50 or so names from the current list of paying individual OWASP members. "
+    text: "Поэтому, вместо «Алисы и Боба», я использую личные (собственные) имена текущих и недавних сотрудников OWASP и членов совета директоров (в случайном порядке), а затем случайным образом выбрал оставшиеся 50 или около того имен из текущего списка оплачивающих индивидуальных членов OWASP. "
   -
     id: "T02720"
-    text: "No name was used more than once, and where people had provided two personal names, I dropped one part to try to ensure no-one can be easily identified. "
+    text: "Все имена использовались только один раз, и если у человека  двойное имя, одну часть я отбрасывал, чтобы его нельзя было идентифицировать. "
   -
     id: "T02730"
-    text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
+    text: "Имена не были намеренно выделены на какую-либо конкретную атаку, защиту или требование. Культурное и гендерное сочетание просто отражает источники имен и не задумывался как отображение всего мира."
   -
     id: "T02740"
-    text: "In v1.20, the name on VE-10 changed to reflect the project's new co-leader - this card is also the only one with two names in the attack."
+    text: "В версии 1.20 имя в карты VE-10 изменено, чтобы упомянуть нового соруководителя проекта - также это единственная карта с двумя именами в описании атаки."
   -
     id: "T02750"
-    text: "4. Why aren't there any images on the card faces?"
+    text: "4. Почему на картах нет никаких изображений?"
   -
     id: "T02760"
-    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too."
+    text: "На них довольно много текста, и перекрестные ссылки тоже занимают место."
   -
     id: "T02770"
-    text: "But it would be great to have additional design elements included."
+    text: "Но было бы здорово добавить дополнительные элементы дизайна."
   -
     id: "T02790"
-    text: "5. Are the attacks ranked by the number on the card?"
+    text: "5. Атаки ранжированы по номеру на карте?"
   -
     id: "T02800"
-    text: "Only approximately."
+    text: "Только приблизительно."
   -
     id: "T02810"
-    text: "The risk will be application and organisation dependent, due to varying security and compliance requirements, so your own severity rating may place the cards in some other order than the numbers on the cards."
+    text: "Риск будет зависеть от приложения и организации, из-за различия в требованиях безопасности и соответствиях, поэтому ваш рейтинг может поместить карты в каком-то другом порядке, отличном от значения на картах."
   -
     id: "T02820"
-    text: "6. How long does it take to play a round of cards using the full deck?"
+    text: "6. Как долго длится розыгрыш полной колодой?"
   -
     id: "T02830"
-    text: "This depends upon the scope of the application, amount of discussion and how familiar the players are with application security concepts."
+    text: "Это зависит от размера приложения, количества обсуждений и насколько знакомы игроки с концепциями безопасности приложений."
   -
     id: "T02840"
-    text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
+    text: "Но стоит запланировать от 1.5 до 2 часов для игры 4-6 человек."
   -
     id: "T02850"
-    text: "7. What sort of people should play the game?"
+    text: "7. Кто должен принимать участие в игре?"
   -
     id: "T02860"
-    text: "Always try to have a mix of roles who can contribute alternative perspectives."
+    text: "Чем больше людей разных ролей, тем более резнообразный вклад можно ожидать."
   -
     id: "T02870"
-    text: "But include someone who has a reasonable knowledge of application vulnerability terminology. "
+    text: "Но включите кого -то, кто обладает знаниями о терминологии уязвимости приложений. "
   -
     id: "T02880"
-    text: "Otherwise try to include a mix of architects, developers, testers and a relevant project manager or business owner."
+    text: "В противном случае постарайтесь включить архитекторов, разработчиков, тестеров и соответствующего менеджера проекта или владельца бизнеса."
   -
     id: "T02890"
-    text: "8. Who should take notes and record scores?"
+    text: "8. Кто должен делать заметки и записывать счет?"
   -
     id: "T02900"
-    text: "It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed."
+    text: "Лучше, если кто-то не принимающий участие в игре, будет делать заметки о выявленных требованиях и обсужденных вопросах."
   -
     id: "T02910"
-    text: "This could be used as training for a more junior developer, or performed by the project manager."
+    text: "Можно использовать это как обучение джуниор разработчика или привлечь менеджера проекта."
   -
     id: "T02920"
-    text: "Some organisations have made a recording to review afterwards when the requirements are written up more formally."
+    text: "Некоторые организации снимают игру, чтобы пересмотреть впоследствии, когда требования написаны более формально."
   -
     id: "T02930"
-    text: "9. Should we always use the full deck of cards?"
+    text: "9. Должны ли мы всегда использовать полную колоду карт?"
   -
     id: "T02940"
-    text: "No. "
+    text: "Нет. "
   -
     id: "T02950"
-    text: "A smaller deck is quicker to play. "
+    text: "Меньшую колоду быстрее играть. "
   -
     id: "T02960"
-    text: "Start your first game with only enough cards for two or three rounds. "
+    text: "Начните свою первую игру с картами, достаточными для двух-трех раундов. "
   -
     id: "T02970"
-    text: "Always consider removing cards that are not appropriate at all of the target application or function being reviewed. "
+    text: "Всегда учитывайте возможность убрать карты, которые вообще не подходят для приложения или функции, которые рассматриваются. "
   -
     id: "T02980"
-    text: "For the first few times people play the game it is also usually better to remove the Aces and the two Jokers."
+    text: "В течение первых нескольких раз, обычно имеет смысл удалить Тузы и двух Джокеров."
   -
     id: "T02990"
-    text: "It is also usual to play the game without any trumps suit until people are more familiar with the idea."
+    text: "Также обычно стоит играть без козырей, пока люди не будут ближе знакомы с идеей игры."
   -
     id: "T03000"
-    text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
+    text: "10. Что должны делать игроки, когда у них есть карта Туз, на которой говорится «изобрел новую атаку X»?"
   -
     id: "T03010"
-    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Data Validation and Encoding)."
+    text: "Игрок может составить любую атаку, которая, по его мнению подходит, но должен соответствовать масти карты (например, Проверка и Кодирование Данных)."
   -
     id: "T03020"
-    text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
+    text: "Можно убрать Тузы, если есть иргоки, участвующие впервые (см. также ответ на вопрос 9)."
   -
     id: "T03060"
-    text: "11. My company wants to print its own version of OWASP® Cornucopia - what license do we need to refer to?"
+    text: "11. Моя компания хочет распечатать свою собственную версию Owasp® Cornucopia - на какую лицензию нам нужно ссылаться?"
   -
     id: "T03070"
-    text: "Please refer to the full answer to this question on the project's web pages at"
+    text: "Пожалуйста, обратитесь к полному ответу на этот вопрос на веб-сайте проекта по адресу"
   -
     id: "T03100"
-    text: "Change Log"
+    text: "Список изменений"
   -
     id: "T03110"
-    text: "Version / Date"
+    text: "Версия / Дата"
   -
     id: "T03120"
-    text: "Comments"
+    text: "Комментарии"
   -
     id: "T03130"
     text: "0.1"
   -
     id: "T03140"
-    text: "Original Draft"
+    text: "Первоначальный проект"
   -
     id: "T03150"
     text: "0.2"
   -
     id: "T03160"
-    text: "Draft reviewed and updated"
+    text: "Проект просмотрен и обновлен"
   -
     id: "T03170"
     text: "0.3"
   -
     id: "T03180"
-    text: "Draft announced OWASP® SCP mailing list for comment."
+    text: "Проект объявил список рассылки OWASP® SCP для комментариев."
   -
     id: "T03190"
     text: "0.4"
   -
     id: "T03200"
-    text: "Play rules updated based on feedback during workshops. "
+    text: "Правила обновленны в соответствии с обратной связью на семинарах. "
   -
     id: "T03210"
-    text: "Added reference to PCI SSC Information Supplement: PCI DSS E-commerce Guidelines. "
+    text: "Добавлена ссылка на PCI SSC Information Supplement: PCI DSS E-commerce Guidelines. "
   -
     id: "T03220"
-    text: "Descriptive text extended and updated."
+    text: "Описание расширено и обновлено."
   -
     id: "T03230"
-    text: "Added contributors section, page numbering, FAQs and change log."
+    text: "Добавлены раздел участников, нумерация страниц, часто задаваемые вопросы и список изменений."
   -
     id: "T03240"
     text: "1"
   -
     id: "T03250"
-    text: "Release."
+    text: "Выпуск."
   -
     id: "T03260"
     text: "1.01"
   -
     id: "T03270"
-    text: "Framework-specific card deck discussion added"
+    text: "Добавлено обсуждение колоды, специфичной для фреймворков"
   -
     id: "T03280"
-    text: "Additional FAQs created. "
+    text: "Добавлены часто задаваемые вопросы. "
   -
     id: "T03290"
-    text: "Descriptive text updated. "
+    text: "Описание обновлено. "
   -
     id: "T03300"
-    text: "New cover image, and previous cover image moved to back. "
+    text: "Новая обложка, старая смещена назад. "
   -
     id: "T03310"
-    text: "Cut lines added."
+    text: "Добавлены линии разреза."
   -
     id: "T03320"
-    text: "FAQs 5 and 6 added."
+    text: "Добавлены часто задаваемые вопросы 5 и 6."
   -
     id: "T03330"
-    text: "Attack descriptions on cards with tinted backgrounds changed to black (from dark grey). "
+    text: "Описания атак на картах с затонированным фоном изменились на черный (с темно-серого). "
   -
     id: "T03340"
-    text: "Project contributors added."
+    text: "Добавлены участники проекта."
   -
     id: "T03350"
     text: "1.02"
   -
     id: "T03360"
-    text: "Warning about time to print added. "
+    text: "Добавлено предупреждение о времени для печати. "
   -
     id: "T03370"
-    text: "Additional alternative game rules added (twenty-one, play a deck over a week, play full hand and then discuss). "
+    text: "Добавлены альтернативные правила игры (двадцать один, игра в течение течение недели, играйте целую раздачу, а затем обсудите). "
   -
     id: "T03380"
-    text: "Compliance deck concept added. "
+    text: "Добавлена концепция колоды соответствий требованиям. "
   -
     id: "T03390"
-    text: "FAQs 5 and 6 added."
+    text: "Добавлены часто задаваемые вопросы 5 и 6."
   -
     id: "T03400"
-    text: "Attack descriptions on cards with tinted backgrounds changed to black (from dark grey). "
+    text: "Описания атак на картах с затонированным фоном изменились на черный (с темно-серого). "
   -
     id: "T03410"
-    text: "Project contributors added."
+    text: "Добавлены участники проекта."
   -
     id: "T03420"
     text: "1.03"
   -
     id: "T03430"
-    text: "Minor attack wording changes on two cards. "
+    text: "Незначительно изменен текст атаки на двух картах. "
   -
     id: "T03440"
-    text: "OWASP® SCP and ASVS cross-references checked and updated. "
+    text: "Проверены и обновлены перекрестные ссылки на OWASP® SCP и ASVS. "
   -
     id: "T03450"
-    text: "Code letters added for suits. "
+    text: "Добавлены буквенные коды мастей. "
   -
     id: "T03460"
-    text: "All remaining attack descriptions on cards changed to black (from dark grey) and background colours amended to provide more contrast and increase readability."
+    text: "Все оставшиеся описания атак на картах изменяются на черный (с темно-серого) и фоновые цвета изменены, чтобы обеспечить большую контрастность и читаемость."
   -
     id: "T03470"
     text: "1.04"
   -
     id: "T03480"
-    text: "Text “password change, password change,” corrected to “password change, password recovery,” on Queen of Authentication card. "
+    text: "Текст «Изменение пароля, изменение пароля», исправленн на «Изменение пароля, восстановление пароля», на карте Дама Аутентификации. "
   -
     id: "T03490"
     text: "1.05"
   -
     id: "T03500"
-    text: "Updates to alternative game rules. "
+    text: "Изменения в альтернативных правилах. "
   -
     id: "T03510"
-    text: "Additional FAQs created. "
+    text: "Добавлены часто задаваемые вопросы. "
   -
     id: "T03520"
-    text: "Contributors updated. "
+    text: "Обновлены участники. "
   -
     id: "T03530"
-    text: "Podcast and video links added."
+    text: "Добавленыы ссылки на видео и подкаст."
   -
     id: "T03540"
     text: "1.1"
   -
     id: "T03550"
-    text: "Change log date corrected for v1.05. Cross-references updated for 2014 version of ASVS. "
+    text: "Изменена дата для изменения версии 1.05. Перекрестные ссылки обновлены для версии ASVS 2014 года. "
   -
     id: "T03560"
-    text: "Contributors updated."
+    text: "Обновлены участники."
   -
     id: "T03570"
-    text: "Minor text changes to cards to improve readability."
+    text: "Незначительно изменен текст карт для улучшения читаемости."
   -
     id: "T03580"
     text: "1.2"
   -
     id: "T03590"
-    text: "Video mentioned/linked"
+    text: "Упомянуто/добавлена ссылка на видео"
   -
     id: "T03600"
-    text: "Separate score sheet mentioned/linked. "
+    text: "Упомянут/ добавлена ссылка на отдельную таблицу очков. "
   -
     id: "T03610"
-    text: "Previous embedded score sheet pages deleted"
+    text: "Предыдущие страницы с таблицами счета удалены"
   -
     id: "T03620"
-    text: "Correction (identified by Tom Brennan) and addition to "
+    text: "Изменения (найдены Томом Бреннаном) и дополнения к "
   -
     id: "T03630"
-    text: "text on card 8 Authentication. "
+    text: "тексту на карте 8 Аутентификации. "
   -
     id: "T03640"
-    text: "Oana Cornea and other participants at the AppSec EU 2015 project summit added to list of contributors. "
+    text: "Оана Корнеа и другие участники саммита AppSec EU 2015 добавлены в список участников. "
   -
     id: "T03650"
-    text: "Darío De Filippis added as project co-leader. "
+    text: "Дарио де Филиппис добавлен в качестве соруководителя проекта. "
   -
     id: "T03660"
-    text: "Wiki Deck link added"
+    text: "Добавлена ссылка на Wiki Колоды"
   -
     id: "T03670"
-    text: "Cross-references updated for ASVS v3.0.1 and CAPEC v2.8. Minor text changes to a small number of cards. "
+    text: "Перекрестные ссылки обновлены для ASVS v3.0.1 и CAPEC v2.8. Незначительные изменения текста на небольшом количестве карт. "
   -
     id: "T03680"
-    text: "Added “-EN” to version number in preparation for “-ES” version."
+    text: "Добавлено «-EN» к номеру версии в подготовке к версии «-ES»."
   -
     id: "T03690"
-    text: "Susana Romaniz added as a contributor to the Spanish translation."
+    text: "Сусана Руманиз добавила в качестве участника испанского перевода."
   -
     id: "T03700"
-    text: "Minor text changes to instructions and FAQs."
+    text: "Незначительные изменяется в инструкциях и часто задаваемых вопросах."
   -
     id: "T03710"
     text: "2.0"
   -
     id: "T03720"
-    text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
+    text: "Йохан Сидсетер обновли перекрестные ссылки с ASVS v3.0.1 на ASVS V4.0. "
   -
     id: "T03730"
     text: "2.1"
   -
     id: "T03740"
-    text: "Adding italian translation done by Ruggero DallAglio"
+    text: "Добавлен итальянский перевод, сделанный Ruggero Dallaglio"
   -
     id: "T03750"
     text: "2.1"
   -
     id: "T03760"
-    text: "Adding portugeese translation done by André Ferreira"
+    text: "Добавлен португальский перевод от Андрэ Феррейра"
   -
     id: "T03800"
-    text: "Project contributors"
+    text: "Участники проекта"
   -
     id: "T03810"
-    text: "All OWASP projects rely on the voluntary efforts of people in the software development and information security sectors. "
+    text: "Все проекты OWASP основаны на добровольных усилиях людей связанных с разработкой программного обеспечения и информационной безопасностью. "
   -
     id: "T03820"
-    text: "They have contributed their time and energy to make suggestions, provide feedback, write, review and edit documentation, give encouragement, trial the game, and promote the concept. "
+    text: "Они потратили свое время и энергию, чтобы сделать предложения, предоставить обратную связь, написать, рассмотреть и редактировать документацию, поддержать, испытать игру и продвигать концепцию. "
   -
     id: "T03830"
-    text: "Without all their efforts, the project would not have progressed to this point. "
+    text: "Без всех их усилий проект не эволюционировал бы до этого состояния. "
   -
     id: "T03840"
-    text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
+    text: "Пожалуйста, напишите в список рассылки или лидерами проектов напрямую, если кого-то не хватает в приведенных ниже списках."
   -
     id: "T03850"
-    text: "OWASP's hard-working employees."
+    text: "Трудолюбивые сотрудники OWASP."
   -
     id: "T03860"
-    text: "Attendees at OWASP® London, OWASP® Manchester, OWASP® Netherlands and OWASP® Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
+    text: "Участники OWASP® London, OWASP® Manchester, OWASP® Netherlands и OWASP® Scotland Maters, а также встречи London Gamification, которые внесли полезные предложения и задавали сложные вопросы"
   -
     id: "T03870"
-    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited за готовые к печати файлы дизайна и сотни профессионально печатных карточных колод для распространения по почте и на встречах OWASP"
   -
     id: "T03880"
-    text: 'OWASP® NYC for creating an OWASP box design and distributing packs at AppSec USA 2014.'
+    text: 'OWASP® NYC за создание дизайна коробки OWASP и распространение пакетов на AppSec USA 2014.'
   -
     id: "T03900"
     text: "Подкасты и видео"
   -
     id: "T03910"
-    text: 'The following supporting OWASP® Cornucopia resources are available online:'
+    text: 'Следующие вспомогательные ресурсы OWASP® Cornucopia доступны онлайн:'
   -
     id: "T03920"
-    text: "Video - Using the cards, created during AppSec EU 2015 project summit, 20th May 2015"
+    text: "Видео - Использование карт, созданных во время AppSec EU 2015, 20 мая 2015."
   -
     id: "T03930"
-    text: "Podcast interview, OWASP® 24/7 Podcast channel, 21st March 2014"
+    text: "Интервью, канал OWASP® 24/7 Podcast, 21 марта 2014"
   -
     id: "T03940"
-    text: "Video of presentation, OWASP® EU Tour 2013 London, 3rd June 2013"
+    text: "Видео с презентации, OWASP® EU Tour 2013 London, 3 июня 2013"
   -
     id: "T03950"
-    text: "See the project website for further information and presentation materials."
+    text: "Смотри веб-сайт проекта для получения дополнительной информации и материалов презентаций."
