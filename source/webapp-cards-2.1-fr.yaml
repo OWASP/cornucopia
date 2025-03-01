@@ -483,6 +483,9 @@ paragraphs:
     id: "T00140"
     text: "Playgen pour avoir réalisé un séminaire d'après-midi d'éclaircissement sur la ludification des tâches, et tartanmaker.com pour l'outil en ligne permettant de créer le graphisme du verso."
   -
+    id: "T00145"
+    text: "Contributeurs et dirigeants actuels et passés du projet OWASP® Cornucopia, en particulier ceux impliqués le plus récemment dans la mise à jour des références croisées, la création de versions en ligne et l'écriture de scripts pour générer dynamiquement les fichiers de sortie de Cornucopia."
+  -
     id: "T00150"
     text: "Blackfoot (UK) Limited pour la création et le don de fichiers de conception prêts à imprimer, Tom Brennan et la Fondation OWASP® pour avoir lancé la création d'une boîte et d'un dépliant de marque OWASP, et Secure Delivery Ltd pour le développement et le don de Copi, la plateforme pour jouer à Cornucopia. et EoP en ligne."
   -
