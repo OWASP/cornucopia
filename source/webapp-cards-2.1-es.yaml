@@ -485,6 +485,9 @@ paragraphs:
     id: "T00140"
     text: "Playgen por brindar un seminario esclarecedor por la tarde sobre gamificación de tareas, y tartanmaker.com por la herramienta en línea para ayudar a crear el patrón del dorso de la tarjeta."
   -
+    id: "T00145"
+    text: "Contribuyentes y líderes actuales y anteriores del proyecto OWASP® Cornucopia, especialmente aquellos involucrados más recientemente en la actualización de las referencias cruzadas, la creación de versiones en línea y la escritura de scripts para generar dinámicamente los archivos de salida de Cornucopia."
+  -
     id: "T00150"
     text: "Blackfoot (UK) Limited por crear y donar archivos de diseño listos para imprimir, Tom Brennan y la Fundación OWASP® por instigar la creación de una caja y un folleto con la marca OWASP, y Secure Delivery Ltd por desarrollar y donar Copi, la plataforma para jugar Cornucopia y EoP en línea."
   -
