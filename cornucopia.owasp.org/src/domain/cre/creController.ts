@@ -38,8 +38,8 @@ export class CreController {
     ]);
 
     private static category: Map<string, string>  = new Map<string, string>( [
-        ['webapp', "Website"],
-        ['mobileapp', "Mobile"]
+        ['webapp', "Website Application"],
+        ['mobileapp', "Mobile Application"]
 
     ]);
 
