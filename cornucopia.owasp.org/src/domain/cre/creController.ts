@@ -37,6 +37,12 @@ export class CreController {
 
     ]);
 
+    private static category: Map<string, string>  = new Map<string, string>( [
+        ['webapp', "Website"],
+        ['mobileapp', "Mobile"]
+
+    ]);
+
     constructor(deck: Map<string, Card>, controller: MappingController) {
         this.deck = deck;
         this.controller = controller;
@@ -82,7 +88,7 @@ export class CreController {
             "sectionID": card.id,
             "hyperlink": 'https://cornucopia.owasp.org' + card.url,
             "links": links,
-            "tags": ["Threat modeling"],
+            "tags": ["Threat modeling", CreController.category.get(card.edition)],
             "tooltype": "Defensive"
         };
     }
