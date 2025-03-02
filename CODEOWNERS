@@ -2,10 +2,10 @@
 # the repo. Unless a later match takes precedence,
 # @rewtd, and @sydseter  will be requested for
 # review when someone opens a pull request.
-*       @rewtd @sydseter
+*       @rewtd @sydseter @cw-owasp
 
 # Resources added or modified need to be checked by @sydseter
-/resources/ @sydseter @rewtd
+/resources/ @sydseter @rewtd @cw-owasp
 
 # Source files (new games) should be reviewed by @cw-owasp
 /source/ @cw-owasp @rewtd
