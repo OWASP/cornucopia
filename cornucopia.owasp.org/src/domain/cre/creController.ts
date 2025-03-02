@@ -82,7 +82,7 @@ export class CreController {
             "sectionID": card.id,
             "hyperlink": 'https://cornucopia.owasp.org' + card.url,
             "links": links,
-            "tags": [],
+            "tags": ["Threat modeling"],
             "tooltype": "Defensive"
         };
     }
