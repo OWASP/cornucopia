@@ -7,3 +7,5 @@ Apps should only request access to the data they absolutely need for their funct
 Furthermore, apps should share data with third parties only when necessary, and this should include enforcing that third-party SDKs operate based on user consent, not by default or without it. Apps should prevent third-party SDKs from ignoring consent signals or from collecting data before consent is confirmed.
 
 Additionally, apps should be aware of the 'supply chain' of SDKs they incorporate, ensuring that no data is unnecessarily passed down their chain of dependencies. This end-to-end responsibility for data aligns with recent SBOM regulatory requirements, making apps more accountable for their data practices.
+
+> Please see: (https://mas.owasp.org/MASVS/controls/MASVS-PRIVACY-1/)
