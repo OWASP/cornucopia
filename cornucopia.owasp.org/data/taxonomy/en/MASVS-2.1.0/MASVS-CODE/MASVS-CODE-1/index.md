@@ -3,3 +3,5 @@
 ## The app requires an up-to-date platform version.
 
 Every release of the mobile OS includes security patches and new security features. By supporting older versions, apps stay vulnerable to well-known threats. This control ensures that the app is running on an up-to-date platform version so that users have the latest security protections.
+
+> Please see: (https://mas.owasp.org/MASVS/controls/MASVS-CODE-1/)
