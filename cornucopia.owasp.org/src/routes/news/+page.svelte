@@ -21,21 +21,21 @@
 {:else}
     <div class="list">
         {#each data.posts as post}
-            <button title="View {Text.Format(post.path)}" onclick={()=>goto('/news/' + post.path)}>
-                <p class="title">{Text.Format(post.title)}</p>
-                <p class="info">
+            <a class="button" title="View {Text.Format(post.path)}" href="/news/{post.path}">
+                <span class="title">{Text.Format(post.title)}</span>
+                <span class="info">
                     {Text.FormatDate(post.date)}
                      • 
                     {Text.Format(post.author)}
-                    <a title="OWASP Cornucopia news article: {$t('news.a')}" href="/news/{post.path}">>> {$t('news.a')}</a>
-                </p>
-            </button>
+                    <span>>> {$t('news.a')}</span>
+                </span>
+            </a>
         {/each}
     </div>
 {/if}
 
 
-<p>{$t('news.p2')}: <a title="OWASP Cornucopia news author: {$t('news.slug.p1')}" href="/author">{$t('news.slug.p1')}</a></p>
+<p>{$t('news.p2')}: <a title="OWASP Cornucopia news author: {$t('news.author.h1')}" href="/author">{$t('news.author.h1')}</a></p>
 </div>
 <style>
     a
@@ -64,7 +64,7 @@
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem;
     }
-    button
+    .button
     {
         padding: 1rem;
         width : calc(50% - 4rem);
@@ -84,7 +84,7 @@
         box-shadow: var(--box-shadow);
     }
 
-    button:hover
+    .button:hover
     {
         opacity: 70%;
     }
@@ -100,7 +100,7 @@
 
     @media (max-aspect-ratio: 1/1) 
     {
-        button
+        .button
         {
             width: calc(100% - 2rem);
         }

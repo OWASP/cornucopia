@@ -34,8 +34,7 @@
     <a title="OWASP Cornucopia homepage" href="/about" class="internal-links">➔ {$t('home.a1')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia Mobile Edition - In devs we trust" src="/images/cornucopia_logo_mobile_edition.svg" align="left">
-
-    <span id="top">{$t('home.h1.2')}</span>
+    <span>{$t('home.h1.2')}</span>
     <p>{$t('home.p3')}</p>
     <ol>
         <li>{@html $t('home.ol.li1')}</li>
