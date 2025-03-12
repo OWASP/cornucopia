@@ -168,7 +168,7 @@
             {#each webappSuits as suit}
                 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                 <!-- svelte-ignore a11y_label_has_associated_control -->
-                <label for="{suit.name + '-web'}" class="suit-button"><h3>└── {Text.Format(suit.name).toUpperCase()}</h3></label>
+                <label for="{suit.name + '-web'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
                 <div class="card-buttons">
                 {#each suit.cards as card}
@@ -189,7 +189,7 @@
             {#each mobileappSuits as suit}
                 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                 <!-- svelte-ignore a11y_label_has_associated_control -->
-                <label for="{suit.name + '-mobile'}" class="suit-button"><h3>└── {Text.Format(suit.name).toUpperCase()}</h3></label>
+                <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
                 <div class="card-buttons">
                 {#each suit.cards as card}
@@ -290,13 +290,13 @@
         font-weight: normal;
     }
 
-    h2,h3
+    h2,h3,.label
     {
         margin:0;
         cursor:pointer;
     }
 
-    h3:hover
+    h3:hover,.label
     {
         opacity: 50%;
     }
@@ -306,7 +306,7 @@
         width : 50%;
     }
 
-    p,a,h2,h3 {
+    p,a,h2,h3,.label {
         font-weight: bold;
     }
 

@@ -62,7 +62,7 @@
     <p class="footer">
         <a title="OWASP Foundation" class="link-with-external-indicator" rel="noopener" href="https://owasp.org/">© OWASP Foundation</a> 
         <span> {new Date().getFullYear()} </span>
-        <a title="OWASP Cornucopia - RSS" class="link-with-external-indicator" href="/rss.xml"><img class="rss" height="15px" src="/images/rss.svg" alt="rss" /></a>
+        <a title="OWASP Cornucopia - RSS" class="link-with-external-indicator" href="/rss.xml"><img class="rss" src="/images/rss.svg" alt="rss" /></a>
         <span> | </span>
         <a title="OWASP Cornucopia - Sitemap" class="link-with-external-indicator" href="https://cornucopia.owasp.org/sitemap.xml">Sitemap</a>
     </p>
@@ -127,6 +127,7 @@
     {
         position: relative;
         top: 3px;
+        height: 15px;
     }
 
 
