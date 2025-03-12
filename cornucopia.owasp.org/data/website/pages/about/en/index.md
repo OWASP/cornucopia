@@ -135,4 +135,6 @@ OWASP Cornucopia is open-source and can be downloaded free of charge from the [O
 
 OWASP and the OWASP logo are trademarks of the OWASP Foundation.
 
-<img alt="OWASP foundation logo" src="/images/owasp-logo.png" width="500vw"/>
+
+
+<img alt="OWASP foundation logo" src="/images/owasp-logo.png" width="500"/>

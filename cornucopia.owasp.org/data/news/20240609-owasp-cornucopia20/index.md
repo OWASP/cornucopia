@@ -11,6 +11,7 @@ description: OWASP® Cornucopia 2.0
 
 _I started out as a web designer 16 years ago and my first website got brutally hacked, not once, but three times. I learned the hard way about the importance of threat modeling and having backups._
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 [OWASP® Cornucopia 2.0](https://github.com/OWASP/cornucopia/releases/tag/v2.0.0)
 
 Today, as one of the co-leaders for OWASP® Cornucopia together with Colin Watson and and Grant Ongers, I am very proud to share that we finally, with lots of help from contributors, supporters and backers and OWASPs hardworking employees are releasing OWASP® Cornucopia 2.0.
@@ -77,6 +78,6 @@ For more information about OWASP® Cornucopia, please visit: [https://cornucopia
 
 Later this month OWASP® Cornucopia is taking part in the project showcase track at [OWASP Global AppSec Lisbon 2024](https://owaspglobalappseclisbon2024.sched.com/event/1dmvE/owasp-cornucopia).
 
----
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 [OWASP](https://owasp.org) is a non-profit foundation that envisions a world with no more insecure software. Our mission is to be the global open community that powers secure software through education, tools, and collaboration. We maintain hundreds of open source projects, run industry-leading educational and training conferences, and meet through over 250 chapters worldwide.
