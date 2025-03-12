@@ -63,7 +63,7 @@ Don’t just do an online session. Buy your plane ticket, book your hotel, and s
 Not all development teams like to draw models, but ask the team to create a simple model. So remember to point out that the model doesn’t need to be perfect. It just needs to show the basic processes, storage, and data flows that they will be implementing.
 It shouldn’t take more than 1 hour to complete it, but make sure they understand that it needs to be there before the threat modeling session.
 
-Also buy some funny prices. If you go to the [OWASP Cornucopia website](/swags), you will find a lot of suggestions for prices, but it’s better if you use your imagination, come up with some ideas yourself, and make some fun out of it.
+Also buy some funny prizes. If you go to the [OWASP Cornucopia website](/swags), you will find a lot of suggestions for prices, but it’s better if you use your imagination, come up with some ideas yourself, and make some fun out of it.
 
 ![Cornucopia beer glass [medium]](cornucopia_beer_glass.png)
 
