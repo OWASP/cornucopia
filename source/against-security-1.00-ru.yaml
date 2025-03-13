@@ -25,14 +25,14 @@ suits:
     id: "JOA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/JOA"
-    card: "Джокер"
+    card: "Joker"
     desc: "This is a wild card"
     misc: "Make something up!"
   -
     id: "JOB"
     value: "B"
     url: "https://cornucopia.owasp.org/cards/JOB"
-    card: "Джокер"
+    card: "Joker"
     desc: "This is a wild card"
     misc: "Make something up!"
 paragraphs:
