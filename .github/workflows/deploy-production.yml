@@ -44,7 +44,7 @@
               pnpm install          # Install dependencies
               npm run build        # Build production version
           - name: Deploy the website
-            uses: cloudflare/wrangler-action@392082e81ffbcb9ebdde27400634aa004b35ea37
+            uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
             with:
               workingDirectory: "cornucopia.owasp.org"
               apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -52,7 +52,7 @@
               wranglerVersion: "3.105.1"
               command: pages deploy build --project-name=cornucopia
           - name: Deploy the worker routes
-            uses: cloudflare/wrangler-action@392082e81ffbcb9ebdde27400634aa004b35ea37
+            uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
             with:
                 workingDirectory: "cornucopia.owasp.org"
                 apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
