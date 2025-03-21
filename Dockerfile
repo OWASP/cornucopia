@@ -34,5 +34,5 @@ COPY --chown=builder:union Pipfile Pipfile.lock ./
 RUN pipenv --python `which python` install --ignore-pipfile --dev
 ENTRYPOINT [ "/usr/local/bin/pipenv" ]
 
-FROM mvdan/shfmt@sha256:564129877d08a397977656a7266623c662c25fe405a5b000b2dae61a26f410fb AS shfmt
+FROM mvdan/shfmt@sha256:1f25cac0dafbdc2da345594773418dfaf1d4fea5ce27a05abe0795fb68840b6c AS shfmt
 ENTRYPOINT [ "/bin/shfmt" ]
