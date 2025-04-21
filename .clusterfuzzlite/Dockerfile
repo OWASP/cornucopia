@@ -1,4 +1,4 @@
-FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:2ee7bb1a51674b712b1d7c0827b1798e5cd449fcc4c002ae025bad05149ab819
+FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:47db26dc6fb4bab717e2b9a8c6f8990f5e8ea3e2b2cb900deed1df5d2549a0be
 RUN apt-get update && apt-get install -y make autoconf automake libtool curl gcc libc-dev software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 # Atheris only supports python 3.11 https://github.com/google/atheris/blob/master/README.md#installation-instructions
