@@ -1,0 +1,532 @@
+---
+meta:
+  edition: "mobileapp"
+  component: "mappings"
+  language: "ALL"
+  version: "1.0"
+  layouts: ["cards", "leaflet"]
+  templates: ["bridge_qr", "bridge", "tarot"]
+  languages: ["en"]
+suits:
+-
+  name: "Platform & Code"
+  cards:
+  -
+    id: "PC2"
+    value: "2"
+    owasp_masvs: [ PLATFORM-3 ]
+    owasp_mastg: [ TEST-0010, TEST-0059 ]
+    capec: [ 37, 155, 498, 648 ]
+    safecode: [ "-" ]
+  -
+    id: "PC3"
+    value: "3"
+    owasp_masvs: [ PLATFORM-3 ]
+    owasp_mastg: [ TEST-0008, TEST-0037, TEST-0057 ]
+    capec: [ 508 ]
+    safecode: [ "-" ]
+  -
+    id: "PC4"
+    value: "4"
+    owasp_masvs: [ PLATFORM-1 ]
+    owasp_mastg: [ TEST-0024, TEST-0069 ]
+    capec: [ 634, 651 ]
+    safecode: [ 11 ]
+  -
+    id: "PC5"
+    value: "5"
+    owasp_masvs: [ CODE-4 ]
+    owasp_mastg: [ TEST-0043, TEST-0044, TEST-0086 ]
+    capec: [ 14, 24, 44, 45, 46, 47, 92, 100, 124, 128, 129, 131, 679 ]
+    safecode: [ 7, 9, 34, 36 ]
+  -
+    id: "PC6"
+    value: "6"
+    owasp_masvs: [ PLATFORM-1 ]
+    owasp_mastg: [ TEST-0029, TEST-0030,  TEST-0071 ]
+    capec: [ 94,117, 499, 502, 504 ]
+    safecode: [ 8, 10, 11 ]
+  -
+    id: "PC7"
+    value: "7"
+    owasp_masvs: [ PLATFORM-1 ]
+    owasp_mastg: [ TEST-0007, TEST-0056 ]
+    capec: [ 126, 127, 139, 597, 643 ]
+    safecode: [ 16, 33 ]
+  -
+    id: "PC8"
+    value: "8"
+    owasp_masvs: [ PLATFORM-1 ]
+    owasp_mastg: [ TEST-0007, TEST-0056 ]
+    capec: [ 137, 499, 502, 586 ]
+    safecode: [ "-" ]
+  -
+    id: "PC9"
+    value: "9"
+    owasp_masvs: [ CODE-4 ]
+    owasp_mastg: [ TEST-0026 ]
+    capec: [ 497, 499, 502 ]
+    safecode: [ 17 ]
+  -
+    id: "PCX"
+    value: "10"
+    owasp_masvs: [ CODE-4 ]
+    owasp_mastg: [ TEST-0025, TEST-0072 ]
+    capec: [ 137, 499, 502, 586 ]
+    safecode: [ "-" ]
+  -
+    id: "PCJ"
+    value: "J"
+    owasp_masvs: [ CODE-1, CODE-2, CODE-3 ]
+    owasp_mastg: [ TEST-0036, TEST-0042, TEST-0080, TEST-0085 ]
+    capec: [ 310, 538, 691 ]
+    safecode: [ "-" ]
+  -
+    id: "PCQ"
+    value: "Q"
+    owasp_masvs: [ PLATFORM-1, PLATFORM-2 ]
+    owasp_mastg: [ TEST-0027, TEST-0028, TEST-0031, TEST-0070, TEST-0076, TEST-0077 ]
+    capec: [ 175, 240, 242, 500, 591, 592 ]
+    safecode: [ 17 ]
+  -
+    id: "PCK"
+    value: "K"
+    owasp_masvs: [ PLATFORM-1, PLATFORM-2 ]
+    owasp_mastg: [ TEST-0007, TEST-0030, TEST-0033, TEST-0056, TEST-0072, TEST-0078 ]
+    capec: [ 137, 138, 499, 502, 586 ]
+    safecode: [ "-" ]
+-
+  name: "Authentication & Authorization"
+  cards:
+  -
+    id: "AA2"
+    value: "2"
+    owasp_masvs: [ AUTH-2,  AUTH-3 ]
+    owasp_mastg: [ TEST-0017, TEST-0064 ]
+    capec: [ 115 ]
+    safecode: [ 28 ]
+  -
+    id: "AA3"
+    value: "3"
+    owasp_masvs: [ AUTH-1, AUTH-3 ]
+    owasp_mastg: [ TEST-0024, TEST-0032, TEST-0069, TEST-0077 ]
+    capec: [ 122 ]
+    safecode: [ 8, 10, 11 ]
+  -
+    id: "AA4"
+    value: "4"
+    owasp_masvs: [ AUTH-2 ]
+    owasp_mastg: [ TEST-0018 ]
+    capec: [ 114, 115, 554 ]
+    safecode: [ 28 ]
+  -
+    id: "AA5"
+    value: "5"
+    owasp_masvs: [ AUTH-2 ]
+    owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
+    capec: [ 114, 115, 207, 554 ]
+    safecode: [ 28 ]
+  -
+    id: "AA6"
+    value: "6"
+    owasp_masvs: [  AUTH-2, AUTH-3 ]
+    owasp_mastg: [ TEST-0064 ]
+    capec: [ 20, 49, 50, 55, 115 ]
+    safecode: [ 28 ]
+  -
+    id: "AA7"
+    value: "7"
+    owasp_masvs: [ AUTH-1 ]
+    owasp_mastg: [ TEST-0034, TEST-0079 ]
+    capec: [ 39, 74, 162, 166, 207 ]
+    safecode: [ 8, 10, 11, 12 ]
+  -
+    id: "AA8"
+    value: "8"
+    owasp_masvs: [ AUTH-1, CODE-4, PLATFORM-1, PLATFORM-3 ]
+    owasp_mastg: [ TEST-0025, TEST-0030, TEST-0035, TEST-0072, TEST-0075 ]
+    capec: [ 153, 505, 506 ]
+    safecode: [  ]
+  -
+    id: "AA9"
+    value: "9"
+    owasp_masvs: [ AUTH-2 ]
+    owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
+    capec: [ 114, 115, 554 ]
+    safecode: [ 28 ]
+  -
+    id: "AAX"
+    value: "10"
+    owasp_masvs: [ AUTH-1 ]
+    owasp_mastg: [ TEST-0017, TEST-0064 ]
+    capec: [ 36, 121 ]
+    safecode: [ 8, 10, 11 ]
+  -
+    id: "AAJ"
+    value: "J"
+    owasp_masvs: [ AUTH-2 ]
+    owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
+    capec: [ 114, 115, 554 ]
+    safecode: [ 28 ]
+  -
+    id: "AAQ"
+    value: "Q"
+    owasp_masvs: [ AUTH-1 ]
+    owasp_mastg: [ TEST-0033, TEST-0025,  TEST-0078 ]
+    capec: [ 17, 30, 69, 234 ]
+    safecode: [ 8, 10,11 ]
+  -
+    id: "AAK"
+    value: "K"
+    owasp_masvs: [ AUTH-2 ]
+    owasp_mastg: [ TEST-0017, TEST-0018,  TEST-0064 ]
+    capec: [ 114, 115, 207, 554 ]
+    safecode: [ 8, 10, 11 ]
+-
+  name: "Network & Storage"
+  cards:
+  -
+    id: "NS2"
+    value: "2"
+    owasp_masvs: [ STORAGE-2 ]
+    owasp_mastg: [ TEST-0003, TEST-0053 ]
+    capec: [ 155 ]
+    safecode: [ 11, 23, 29 ]
+  -
+    id: "NS3"
+    value: "3"
+    owasp_masvs: [ STORAGE-2 ]
+    owasp_mastg: [ TEST-0006, TEST-0055, TEST-0073 ]
+    capec: [ 204, 637, 679 ]
+    safecode: [ "-" ]
+  -
+    id: "NS4"
+    value: "4"
+    owasp_masvs: [ STORAGE-1 ]
+    owasp_mastg: [ TEST-0012 ]
+    capec: [ 406, 675 ]
+    safecode: [ "-" ]
+  -
+    id: "NS5"
+    value: "5"
+    owasp_masvs: [ STORAGE-2 ]
+    owasp_mastg: [ TEST-0004, TEST-0005, TEST-0054 ]
+    capec: [ 155, 161,  204, 220,  639, 643 ]
+    safecode: [ 11, 23, 29 ]
+  -
+    id: "NS6"
+    value: "6"
+    owasp_masvs: [ STORAGE-2 ]
+    owasp_mastg: [ TEST-0011, TEST-0060 ]
+    capec: [ 679 ]
+    safecode: [ "-" ]
+  -
+    id: "NS7"
+    value: "7"
+    owasp_masvs: [ STORAGE-1, STORAGE-2 ]
+    owasp_mastg: [ TEST-0001, TEST-0003, TEST-0009,  TEST-0052, TEST-0053, TEST-0058 ]
+    capec: [ 37, 155, 204, 639, 643 ]
+    safecode: [ 11, 23, 29 ]
+  -
+    id: "NS8"
+    value: "8"
+    owasp_masvs: [ STORAGE-1, CODE-4 ]
+    owasp_mastg: [ TEST-0002 ]
+    capec: [ 176 ]
+    safecode: [ "-" ]
+  -
+    id: "NS9"
+    value: "9"
+    owasp_masvs: [ NETWORK-2 ]
+    owasp_mastg: [ TEST-0022, TEST-0068 ]
+    capec: [ 57, 94, 156, 465, 466, 479, 701 ]
+    safecode: [ 14, 30 ]
+  -
+    id: "NSX"
+    value: "10"
+    owasp_masvs: [ NETWORK-1 ]
+    owasp_mastg: [ TEST-0019, TEST-0021, TEST-0065, TEST-0067 ]
+    capec: [ 57, 94, 156, 465, 466, 479, 701 ]
+    safecode: [ 14, 29, 30 ]
+  -
+    id: "NSJ"
+    value: "J"
+    owasp_masvs: [ NETWORK-1 ]
+    owasp_mastg: [ TEST-0020, TEST-0023, TEST-0066 ]
+    capec: [ 57, 94, 156, 220, 459, 465, 466 ]
+    safecode: [ 12, 14, 29, 30 ]
+  -
+    id: "NSQ"
+    value: "Q"
+    owasp_masvs: [ NETWORK-1 ]
+    owasp_mastg: [ TEST-0019, TEST-0065 ]
+    capec: [ 31, 36, 57, 102, 157, 158, 384, 466 ]
+    safecode: [ 29, 30 ]
+  -
+    id: "NSK"
+    value: "K"
+    owasp_masvs: [ STORAGE-1 ]
+    owasp_mastg: [ TEST-0001, TEST-0052 ]
+    capec: [ 75, 76, 113, 153, 161, 165, 176, 190, 207, 210, 554, 562 ]
+    safecode: [ 12, 19 ]
+-
+  name: "Resilience"
+  cards:
+  -
+    id: "RS2"
+    value: "2"
+    owasp_masvs: [ RESILIENCE-3 ]
+    owasp_mastg: [ TEST-0041, TEST-0084 ]
+    capec: [ 37, 167, 191 ]
+    safecode: [ "-" ]
+  -
+    id: "RS3"
+    value: "3"
+    owasp_masvs: [ RESILIENCE-3 ]
+    owasp_mastg: [ TEST-0040, TEST-0083 ]
+    capec: [ 37, 167, 191 ]
+    safecode: [ "-" ]
+  -
+    id: "RS4"
+    value: "4"
+    owasp_masvs: [ RESILIENCE-2 ]
+    owasp_mastg: [ TEST-0038, TEST-0081 ]
+    capec: [ 68, 167, 206, 476 ]
+    safecode: [ 14 ]
+  -
+    id: "RS5"
+    value: "5"
+    owasp_masvs: [ RESILIENCE-4 ]
+    owasp_mastg: [ TEST-0039, TEST-0082 ]
+    capec: [ 115, 167, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RS6"
+    value: "6"
+    owasp_masvs: [ RESILIENCE-4 ]
+    owasp_mastg: [ TEST-0046, TEST-0089 ]
+    capec: [ 115, 167, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RS7"
+    value: "7"
+    owasp_masvs: [ RESILIENCE-1 ]
+    owasp_mastg: [ TEST-0049, TEST-0092 ]
+    capec: [ 189, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RS8"
+    value: "8"
+    owasp_masvs: [ RESILIENCE-4 ]
+    owasp_mastg: [ TEST-0048, TEST-0091 ]
+    capec: [ 167, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RS9"
+    value: "9"
+    owasp_masvs: [ RESILIENCE-3 ]
+    owasp_mastg: [ TEST-0051, TEST-0093 ]
+    capec: [ 167, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RSX"
+    value: "10"
+    owasp_masvs: [ RESILIENCE-1 ]
+    owasp_mastg: [ TEST-0045, TEST-0088 ]
+    capec: [ 167, 660, 661 ]
+    safecode: [ "-" ]
+  -
+    id: "RSJ"
+    value: "J"
+    owasp_masvs: [ RESILIENCE-2 ]
+    owasp_mastg: [ TEST-0047, TEST-0090 ]
+    capec: [ 23, 165, 167 ]
+    safecode: [ "-" ]
+  -
+    id: "RSQ"
+    value: "Q"
+    owasp_masvs: [ RESILIENCE-4 ]
+    owasp_mastg: [ TEST-0050 ]
+    capec: [ 167, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "RSK"
+    value: "K"
+    owasp_masvs: [ RESILIENCE-4 ]
+    owasp_mastg: [ TEST-0046, TEST-0089 ]
+    capec: [ 167, 554 ]
+    safecode: [ "-" ]
+-
+  name: "Cryptography"
+  cards:
+  -
+    id: "CRM2"
+    value: "2"
+    owasp_masvs: [ CRYPTO-2 ]
+    owasp_mastg: [  TEST-0015, TEST-0062 ]
+    capec: [ 97, 116, 117 ]
+    safecode: [ 14, 29 ]
+  -
+    id: "CRM3"
+    value: "3"
+    owasp_masvs: [ CRYPTO-1 ]
+    owasp_mastg: [ TEST-0014, TEST-0061 ]
+    capec: [ 37, 204 ]
+    safecode: [ 21, 29 ]
+  -
+    id: "CRM4"
+    value: "4"
+    owasp_masvs: [ CRYPTO-1, CODE-4 ]
+    owasp_mastg: [ TEST-0002 ]
+    capec: [ 68, 75, 145, 438, 439, 442 ]
+    safecode: [ 12, 14 ]
+  -
+    id: "CRM5"
+    value: "5"
+    owasp_masvs: [ CRYPTO-1 ]
+    owasp_mastg: [ TEST-0016, TEST-0063 ]
+    capec: [ 20, 112, 485 ]
+    safecode: [ 29, 33 ]
+  -
+    id: "CRM6"
+    value: "6"
+    owasp_masvs: [ STORAGE-1,  CRYPTO-1, CRYPTO-2 ]
+    owasp_mastg: [ TEST-0001, TEST-0013, TEST-0052, TEST-0062 ]
+    capec: [ 37, 117, 155, 191, 204 ]
+    safecode: [ 21, 29 ]
+  -
+    id: "CRM7"
+    value: "7"
+    owasp_masvs: [ STORAGE-1, CRYPTO-2 ]
+    owasp_mastg: [ TEST-0001, TEST-0013,  TEST-0052, TEST-0062 ]
+    capec: [ 37, 117, 155, 191, 204 ]
+    safecode: [ 21, 29, 31 ]
+  -
+    id: "CRM8"
+    value: "8"
+    owasp_masvs: [ CRYPTO-1 ]
+    owasp_mastg: [ TEST-0013, TEST-0016,  TEST-0063 ]
+    capec: [ 20, 55, 112, 485 ]
+    safecode: [ 21, 29, 32, 33 ]
+  -
+    id: "CRM9"
+    value: "9"
+    owasp_masvs: [ CRYPTO-1 ]
+    owasp_mastg: [ TEST-0014 ]
+    capec: [ 97, 620 ]
+    safecode: [ 21, 29 ]
+  -
+    id: "CRMX"
+    value: "10"
+    owasp_masvs: [ CRYPTO-1 ]
+    owasp_mastg: [ TEST-0014, TEST-0061 ]
+    capec: [ 20, 116, 117, 97, 112, 485 ]
+    safecode: [ 14, 23, 29, 31, 32, 33 ]
+  -
+    id: "CRMJ"
+    value: "J"
+    owasp_masvs: [ CRYPTO-1, STORAGE-1 ]
+    owasp_mastg: [ TEST-0001, TEST-0014, TEST-0052, TEST-0061 ]
+    capec: [ 210, 212 ]
+    safecode: [ 15 ]
+  -
+    id: "CRMQ"
+    value: "Q"
+    owasp_masvs: [ CRYPTO-1 ]
+    owasp_mastg: [ TEST-0014, TEST-0061 ]
+    capec: [ 20, 116, 117,  97, 112, 485 ]
+    safecode: [ 14, 21, 29, 32, 33 ]
+  -
+    id: "CRMK"
+    value: "K"
+    owasp_masvs: [ CRYPTO-1, CRYPTO-2 ]
+    owasp_mastg: [ TEST-0014, TEST-0061, TEST-0062 ]
+    capec: [ 54, 97, 116, 117, 220 ]
+    safecode: [ 14, 21, 29 ]
+-
+  name: "Cornucopia"
+  cards:
+  -
+    id: "COM2"
+    value: "2"
+    owasp_masvs: [ PRIVACY-3 ]
+    owasp_mastg: [ "-" ]
+    capec: [ 410 ]
+    safecode: [ "-" ]
+  -
+    id: "COM3"
+    value: "3"
+    owasp_masvs: [ PRIVACY-4 ]
+    owasp_mastg: [ "-" ]
+    capec: [ 410 ]
+    safecode: [ "-" ]
+  -
+    id: "COM4"
+    value: "4"
+    owasp_masvs: [ PRIVACY-1 ]
+    owasp_mastg: [ "-" ]
+    capec: [ 410 ]
+    safecode: [ "-" ]
+  -
+    id: "COM5"
+    value: "5"
+    owasp_masvs: [ PRIVACY-4 ]
+    owasp_mastg: [ "-" ]
+    capec: [ 410 ]
+    safecode: [ "-" ]
+  -
+    id: "COM6"
+    value: "6"
+    owasp_masvs: [ PRIVACY-2 ]
+    owasp_mastg: [ "-" ]
+    capec: [ 410 ]
+    safecode: [ "-" ]
+  -
+    id: "COM7"
+    value: "7"
+    owasp_masvs: [ CODE-4, PLATFORM-1 ]
+    owasp_mastg: [ TEST-0025, TEST-0030, TEST-0072 ]
+    capec: [ 499, 502 ]
+    safecode: [ "-" ]
+  -
+    id: "COM8"
+    value: "8"
+    owasp_masvs: [ STORAGE-2 ]
+    owasp_mastg: [ "-" ]
+    capec: [ 126 ]
+    safecode: [ 16 ]
+  -
+    id: "COM9"
+    value: "9"
+    owasp_masvs: [ CODE-4 ]
+    owasp_mastg: [ TEST-0043, TEST-0086 ]
+    capec: [ 92, 100 ]
+    safecode: [ 3, 6, 36 ]
+  -
+    id: "COMX"
+    value: "10"
+    owasp_masvs: [ CODE-4 ]
+    owasp_mastg: [ TEST-0025, TEST-0072 ]
+    capec: [ 137, 499, 502, 586 ]
+    safecode: [ "-" ]
+  -
+    id: "COMJ"
+    value: "J"
+    owasp_masvs: [ CRYPTO-1, CODE-4 ]
+    owasp_mastg: [ TEST-0002 ]
+    capec: [ 23, 165, 442 ]
+    safecode: [ "-" ]
+  -
+    id: "COMQ"
+    value: "Q"
+    owasp_masvs: [ RESILIENCE-4 ]
+    owasp_mastg: [ TEST-0050 ]
+    capec: [ 167, 202, 554 ]
+    safecode: [ "-" ]
+  -
+    id: "COMK"
+    value: "K"
+    owasp_masvs: [ RESILIENCE-2 ]
+    owasp_mastg: [ TEST-0047, TEST-0090 ]
+    capec: [ 17, 23, 165, 167, 636 ]
+    safecode: [ "-" ]

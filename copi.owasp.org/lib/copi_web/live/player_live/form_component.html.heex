@@ -1,0 +1,17 @@
+<div>
+  <.header1><%= @title %></.header1>
+
+  <.form :let={f} for={@changeset} id="player-form" phx-target={@myself} phx-change="validate" phx-submit="save">
+
+    <.input field={f[:name]} type="text" label="{gettext 'Player Name'}" />
+
+    <.input field={f[:game_id]} type="hideen" />
+
+    <.button
+      type="submit"
+      phx-disable-with="Joining..."
+      class="py-2 px-3"
+    />
+  </.form>
+</div>
+

@@ -1,0 +1,127 @@
+<.header1>
+  <%= display_game_session(@game.edition) %> <%= @game.name %>
+</.header1>
+
+<%= if @game.started_at do %>
+
+  <% first_card_played = Copi.Cornucopia.ordered_cards_played_in_round(@game, @requested_round) |> List.first %>
+  <% highest_scoring_card = Copi.Cornucopia.highest_scoring_card_in_round(@game, @requested_round) %>
+
+  <p class="">You're watching this game! You'll see all the cards as they're played and votes as they're cast.</p>
+
+  <%= if @game.finished_at do %>
+  <h3>Thanks for playing! This game finished at <%= @game.finished_at %></h3>
+  <% end %>
+
+  <%= if @requested_round == @game.rounds_played + 1 do %>
+  <p class="my-8">Round <strong><%= @game.rounds_played + 1 %></strong>:
+    <%= if first_card_played do %>
+      <em><%= first_card_played.card.category %></em>
+    <% else %>
+      <em>No lead suit yet</em>
+    <% end %>
+  </p>
+  <% else %>
+  <p class="my-8">Viewing round <strong><%= @requested_round %></strong>:
+    <%= if first_card_played do %>
+      <em><%= first_card_played.card.category %></em>
+    <% else %>
+      <em>No lead suit yet</em>
+    <% end %>
+  </p>
+  <% end %>
+
+  <div class="flex flex-row justify-between gap-x-4 px-1" id="table">
+    <%= for player <- @game.players do %>
+      <% player_card = card_played_in_round(player.dealt_cards, @requested_round) %>
+
+        <div class="card-player flex-col justify-start">
+          <div class="name mb-4">
+            <%= if player_card != nil && (Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2) do %>
+              <p class="font-bold"> <%= player.name %> Scored
+                <%= if highest_scoring_card && highest_scoring_card.id == player_card.id do %>
+                  +2!
+                <% else %>
+                  +1!
+                <% end %>
+              </p> 
+            <% else %>
+              <p> <%= player.name %></p> 
+            <% end %>
+          </div>
+          <.card_drop_zone player={player} player_card={player_card} highest_scoring_card={highest_scoring_card}> 
+            <CopiWeb.CardHTML.show card={player_card.card} />
+          </.card_drop_zone>
+          
+          <.vote_card player_card={player_card}  game={@game} />
+        </div>
+
+  <% end %>
+  </div>
+
+  <%!-- <p class="round-nav"> --%>
+  <div class=" flex flex-row justify-evenly round-nav">
+
+  <%= if @requested_round > 1 do %>
+    <span class="previous"><a href={"?round=#{@requested_round - 1}"}> <.icon name="hero-arrow-left-solid" 
+  class="h-10 w-10" /></a></span>
+  <% else %>
+  <span class="previous"><a class="pointer-events-none" href={"?round=#{@requested_round - 1}"}> <.icon name="hero-arrow-left-solid" class="opacity-15 h-10 w-10" /></a></span>
+  <% end %>
+
+  <%= if @requested_round < @game.rounds_played + 1 do %>
+    <%= if @requested_round == @game.rounds_played do %>
+      <%!-- <span class="next"><a href="?round=current">&gt;</a></span> --%>
+          <span class="previous"><a href={"?round=current"}> <.icon name="hero-arrow-right-solid" 
+  class="h-10 w-10" /></a></span>
+    <% else %>
+      <%!-- <span class="next"><a href={"?round=#{@requested_round + 1}"}>&gt;</a></span> --%>
+                <span class="previous"><a href={"?round=#{@requested_round + 1}"}> <.icon name="hero-arrow-right-solid" 
+  class="h-10 w-10" /></a></span>
+    <% end %>
+  <% else %>
+      <span class="previous"><a class="pointer-events-none" href={"?round=#{@requested_round - 1}"}> <.icon name="hero-arrow-right-solid" class="opacity-15 h-10 w-10" /></a></span>
+  <% end %>
+  </div>
+
+<% else %>
+<p>Share the link to this page with everyone who wants to join or watch.</p>
+<p class="mt-4">You'll be able to start the game once at least 3 players have joined.</p>
+
+<div class="my-8 flex flex-col items-center place-content-center"> 
+
+  <.link target="_blank" patch={~p"/games/#{@game.id}/players/new"}>
+    <.primary_button><%= gettext("Join this game as a player") %></.primary_button>
+  </.link>
+
+  <%= if Enum.count(@game.players) > 2 do %>
+    <.primary_button class="mt-8" phx-click="start_game" disabled={Enum.count(@game.players) < 3}>Start Game</.primary_button>
+  <% end %>
+ </div>
+
+
+
+
+<% end %>
+
+<%= if @game.started_at == nil do %>
+<div class="flex flex-col items-center place-content-center">
+<.header2 class="">Waiting for players to join the game...</.header2>
+
+<svg class="w-10 h-10 text-gray-300 animate-spin" viewBox="0 0 64 64" fill="none"
+  xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+  <path
+    d="M32 3C35.8083 3 39.5794 3.75011 43.0978 5.20749C46.6163 6.66488 49.8132 8.80101 52.5061 11.4939C55.199 14.1868 57.3351 17.3837 58.7925 20.9022C60.2499 24.4206 61 28.1917 61 32C61 35.8083 60.2499 39.5794 58.7925 43.0978C57.3351 46.6163 55.199 49.8132 52.5061 52.5061C49.8132 55.199 46.6163 57.3351 43.0978 58.7925C39.5794 60.2499 35.8083 61 32 61C28.1917 61 24.4206 60.2499 20.9022 58.7925C17.3837 57.3351 14.1868 55.199 11.4939 52.5061C8.801 49.8132 6.66487 46.6163 5.20749 43.0978C3.7501 39.5794 3 35.8083 3 32C3 28.1917 3.75011 24.4206 5.2075 20.9022C6.66489 17.3837 8.80101 14.1868 11.4939 11.4939C14.1868 8.80099 17.3838 6.66487 20.9022 5.20749C24.4206 3.7501 28.1917 3 32 3L32 3Z"
+    stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path
+    d="M32 3C36.5778 3 41.0906 4.08374 45.1692 6.16256C49.2477 8.24138 52.7762 11.2562 55.466 14.9605C58.1558 18.6647 59.9304 22.9531 60.6448 27.4748C61.3591 31.9965 60.9928 36.6232 59.5759 40.9762"
+    stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-900">
+  </path>
+</svg>
+</div>
+
+<% end %>
+
+<.game_scores id="game_scores" game={@game} />
+
+
