@@ -3,10 +3,6 @@
 
   on:
       # Triggers the workflow on push or pull request events but only for the main branch
-    push:
-      paths:
-      - 'copi.owasp.org/**'
-      - '.github/workflows/copi.yml'
     pull_request_target:
       paths:
       - 'copi.owasp.org/**'
@@ -57,7 +53,7 @@
               ${{ runner.os }}-mix-${{ env.cache-name }}-
               ${{ runner.os }}-mix-
 
-        - name: Use Elixir 1.7
+        - name: Install Elixir and Erlang
           uses: erlef/setup-beam@5304e04ea2b355f03681464e683d92e3b2f18451 # v1.18.2
           with:
             elixir-version: 1.18.2
