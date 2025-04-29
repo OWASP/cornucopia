@@ -6,8 +6,6 @@
       paths:
       - 'copi.owasp.org/**'
       - '.github/workflows/copi.yml'
-      branches:
-        - master
     pull_request_target:
       paths:
       - 'copi.owasp.org/**'
