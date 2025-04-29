@@ -1,4 +1,4 @@
-/*  
+/*
   This file is just for cleanly defining the nested css for presenting card decks.
   All application styling is done with tailwind css classes directly in the templates.
 */
@@ -188,7 +188,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     padding: 16px 8px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-  
+
     color: #fff;
     writing-mode: vertical-rl;
     text-transform: uppercase;
@@ -350,7 +350,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
 
 
-  // 
+  //
 
   &.authentication {
     background-color: scale-color($authentication-color, $lightness: 75%, $saturation:  -20%);
@@ -425,7 +425,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   dd {
-    
+
     margin: 0 0 1px 0;
     border-bottom: solid 1px rgb(128, 127, 127);
   }
@@ -448,7 +448,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     padding: 23px 0;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-  
+
     color: #fff;
     text-transform: uppercase;
     font-family: 'Segoe Condensed';
@@ -489,7 +489,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
   }
 
- 
+
   &.spoofing {
 
     .left-value {
@@ -506,7 +506,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       .main-content {
         color: #fff;
       }
-      
+
     }
 
     &.n2 {
@@ -554,7 +554,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     .left-value {
       background: rgb(2, 113, 55)
     }
-    
+
     .value {
       color: rgb(185, 217, 165);
     }
@@ -567,6 +567,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       }
     }
 
+    &.n2 {
+      background: no-repeat top/100% url("/images/eop-cards/tampering-2.png") #fff;
+    }
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/tampering-3.png") #fff;
     }
@@ -660,7 +663,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/repudiation-a.png") #fff;
-    }    
+    }
   }
 
   &.information-disclosure {
@@ -796,6 +799,15 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       }
     }
 
+    &.n2 {
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-2.png") #fff;
+    }
+    &.n3 {
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-3.png") #fff;
+    }
+    &.n4 {
+      background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-4.png") #fff;
+    }
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-5.png") #fff;
     }
@@ -833,7 +845,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 @keyframes ants { to { background-position: 100% 100% } }
 
 .card-player {
-  
+
   display: flex;
 
   .name {
@@ -1002,7 +1014,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
   -webkit-overflow-scrolling: touch;
 
-  
+
 }
 
 /* Dragula Styles */@at-root.gu-mirror {
@@ -1030,5 +1042,5 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .gu-mirror {
-  
+
 }

@@ -5,6 +5,7 @@
         branches: [master]
         paths:
         - 'cornucopia.owasp.org/**'
+        - '.github/workflows/deploy-production.yml'
     permissions:
       contents: read
     jobs:

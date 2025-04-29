@@ -1,0 +1,74 @@
+---
+  name: Copi Build and Test
+
+  on:
+      # Triggers the workflow on push or pull request events but only for the main branch
+    pull_request_target:
+      paths:
+      - 'copi.owasp.org/**'
+      - '.github/workflows/copi.yml'
+    workflow_dispatch:
+  env:
+    MIX_ENV: test
+    POSTGRES_TEST_PWD: ${{ secrets.POSTGRES_TEST_PWD }}
+  permissions:
+    contents: read
+  jobs:
+    build-test:
+      runs-on: ubuntu-latest # Or another supported runner
+      services:
+        postgres:
+          image: postgres:14
+          env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_TEST_PWD }}
+            POSTGRES_DB: copi_test
+          ports:
+            - 5432:5432
+          options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      steps:
+        - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+        - name: Cache deps
+          id: cache-deps
+          uses: actions/cache@2f8e54208210a422b2efd51efaa6bd6d7ca8920f # v3.4.3
+          env:
+            cache-name: cache-elixir-deps
+          with:
+            path: copi.owasp.org/deps
+            key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-mix-${{ env.cache-name }}-
+
+        - name: Cache compiled build
+          id: cache-build
+          uses: actions/cache@2f8e54208210a422b2efd51efaa6bd6d7ca8920f # v3.4.3
+          env:
+            cache-name: cache-compiled-build
+          with:
+            path: copi.owasp-org/_build
+            key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-mix-${{ env.cache-name }}-
+              ${{ runner.os }}-mix-
+
+        - name: Install Elixir and Erlang
+          uses: erlef/setup-beam@5304e04ea2b355f03681464e683d92e3b2f18451 # v1.18.2
+          with:
+            elixir-version: 1.18.2
+            otp-version: 27.3.3
+          env:
+            ImageOS: ubuntu24
+
+        - name: Install dependencies
+          working-directory: copi.owasp.org
+          run: mix deps.get
+
+        - name: Build the project
+          working-directory: copi.owasp.org
+          run: mix compile
+          
+        - name: Run tests
+          working-directory: copi.owasp.org
+          run: mix test

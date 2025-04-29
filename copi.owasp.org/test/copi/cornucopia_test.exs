@@ -70,10 +70,12 @@ defmodule Copi.CornucopiaTest do
 
   describe "players" do
     alias Copi.Cornucopia.Player
+    alias Copi.Cornucopia.Game
 
     @valid_attrs %{name: "some name"}
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
+    @game_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
 
     def player_fixture(attrs \\ %{}) do
       {:ok, player} =
@@ -85,8 +87,14 @@ defmodule Copi.CornucopiaTest do
     end
 
     test "list_players/1 returns all players" do
-      player = player_fixture()
-      assert Cornucopia.list_players() == [player]
+      #Enum.into(@valid_attrs)
+
+      {:ok, game} =
+        %{}
+        |> Enum.into(@game_attrs)
+        |> Cornucopia.create_game()
+      player = player_fixture(%{name: "some name", game_id: game.id})
+      assert Cornucopia.list_players(game.id) == [player]
     end
 
     test "get_player!/1 returns the player with given id" do
@@ -141,6 +149,11 @@ defmodule Copi.CornucopiaTest do
         |> Cornucopia.create_card()
 
       card
+    end
+
+    setup do
+      Repo.delete_all(Card)
+      :ok
     end
 
     test "list_cards/0 returns all cards" do

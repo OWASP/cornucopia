@@ -1,4 +1,4 @@
-defmodule HelloWeb.ErrorHTML do
+defmodule CopiWeb.ErrorHTML do
   use CopiWeb, :html
 
   # If you want to customize your error pages,
@@ -8,12 +8,15 @@ defmodule HelloWeb.ErrorHTML do
   #   * lib/hello_web/controllers/error/404.html.heex
   #   * lib/hello_web/controllers/error/500.html.heex
   #
-  # embed_templates "error/*"
+  embed_templates "error_html/*"
 
   # The default is to render a plain text page based on
   # the template name. For example, "404.html" becomes
   # "Not Found".
-  def render(template, _assigns) do
-    Phoenix.Controller.status_message_from_template(template)
+  def render(template, assigns) do
+
+    #Phoenix.Controller.status_message_from_template(template)
+    apply(__MODULE__, :"500", [assigns])
   end
+
 end

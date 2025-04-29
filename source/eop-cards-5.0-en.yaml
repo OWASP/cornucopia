@@ -3,7 +3,7 @@ meta:
   edition: "eop"
   component: "cards"
   language: "EN"
-  version: "1.0"
+  version: "5.0"
 suits:
 - 
   id: "SP"
