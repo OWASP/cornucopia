@@ -65,13 +65,13 @@
             ImageOS: ubuntu24
 
         - name: Install dependencies
-          working-directory: cornucopia.owasp.org
+          working-directory: copi.owasp.org
           run: mix deps.get
 
         - name: Build the project
-          working-directory: cornucopia.owasp.org
+          working-directory: copi.owasp.org
           run: mix compile
           
         - name: Run tests
-          working-directory: cornucopia.owasp.org
+          working-directory: copi.owasp.org
           run: mix test
