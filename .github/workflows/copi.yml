@@ -7,6 +7,8 @@
       paths:
       - 'copi.owasp.org/**'
       - '.github/workflows/copi.yml'
+      branches:
+      - 'master'
     pull_request_target:
       paths:
       - 'copi.owasp.org/**'
@@ -14,6 +16,7 @@
     workflow_dispatch:
   env:
     MIX_ENV: test
+    POSTGRES_TEST_PWD: ${{ secrets.POSTGRES_TEST_PWD }}
   permissions:
     contents: read
   jobs:
@@ -24,7 +27,7 @@
           image: postgres:14
           env:
             POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: "$POSTGRES_TEST_PWD"
+            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_TEST_PWD }}
             POSTGRES_DB: copi_test
           ports:
             - 5432:5432
