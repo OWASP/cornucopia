@@ -13,11 +13,13 @@ config :copi,
 
 # Configures the endpoint
 config :copi, CopiWeb.Endpoint,
+  debug_errors: false,
   url: [host: "localhost"],
   secret_key_base: "LgvNRXYWe539tFQXsMkDuRniXGaiEzTMWUj2GIanun0dlbtV6vPlTGZ/l8qR1V7f",
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: CopiWeb.ErrorHTML, json: CopiWeb.ErrorJSON],
+    root_layout: {CopiWeb.ErrorHTML, :root},
     layout: false
   ],
   pubsub_server: Copi.PubSub,

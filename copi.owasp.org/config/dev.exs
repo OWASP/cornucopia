@@ -18,7 +18,7 @@ config :copi, Copi.Repo,
 # with webpack to recompile .js and .css sources.
 config :copi, CopiWeb.Endpoint,
   http: [port: 4000],
-  debug_errors: true,
+  debug_errors: false,
   code_reloader: true,
   check_origin: false,
   watchers: [

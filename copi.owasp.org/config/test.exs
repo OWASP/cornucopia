@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :copi, Copi.Repo,
   username: "postgres",
-  password: System.get_env("POSTGRES_TEST_PWD"),
+  password: "y9EAY7xeVucjM2yM",
   database: "copi_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
@@ -19,4 +19,4 @@ config :copi, CopiWeb.Endpoint,
   server: false
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :warning

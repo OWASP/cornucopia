@@ -5,6 +5,7 @@
         push:
           paths:
           - 'cornucopia.owasp.org/**'
+          - '.github/workflows/build-website.yml'
     permissions:
       contents: read
     jobs:

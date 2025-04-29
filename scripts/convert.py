@@ -28,14 +28,14 @@ class ConvertVars:
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
     LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.00", "2.1"]
+    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.00", "2.1", "5.0"]
     LATEST_VERSION_CHOICES: List[str] = ["1.1", "2.1"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
         "webapp": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1"},
         "against-security": {"1.00": "1.00"},
         "mobileapp": {"1.0": "1.0", "1.1": "1.1"},
-        "all": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1", "1.0": "1.0", "1.1": "1.1"},
+        "all": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1", "1.0": "1.0", "1.1": "1.1", "5.0": "5.0"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
@@ -224,8 +224,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
     description += "\nExample usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.1"
-    description += "\nExample usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 1.0 -e eop -i "
-    description += "./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-1.0-cards-en.idml"
+    description += "\nExample usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 5.0 -e eop  -i "
+    description += "./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-5.0-cards-en.idml"
     description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.1 -o"
     description += " my_output_folder\\owasp_cornucopia_edition_version_layout_language_template.idml"
     parser = argparse.ArgumentParser(

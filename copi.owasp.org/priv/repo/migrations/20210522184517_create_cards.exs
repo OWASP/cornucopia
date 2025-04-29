@@ -15,6 +15,7 @@ defmodule Copi.Repo.Migrations.CreateCards do
       add :owasp_appsensor, {:array, :string}
       add :capec, {:array, :string}
       add :safecode, {:array, :string}
+      add :url, :string, default: ""
       timestamps()
     end
 

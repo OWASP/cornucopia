@@ -97,7 +97,7 @@ class TextGetValidVersionChoices(unittest.TestCase):
 
         c.convert_vars.args = argparse.Namespace(version="all", edition="all")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.0", "1.1", "2.00", "2.1"]
+        want_list = ["1.0", "1.1", "2.00", "2.1", "5.0"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(version="latest", edition="all")
         got_list = c.get_valid_version_choices()

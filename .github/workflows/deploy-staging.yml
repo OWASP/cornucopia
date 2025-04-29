@@ -4,6 +4,7 @@
       pull_request_target:
         paths:
         - 'cornucopia.owasp.org/**'
+        - '.github/workflows/deploy-staging.yml'
     permissions:
       contents: read
     jobs:

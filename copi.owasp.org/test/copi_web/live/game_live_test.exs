@@ -5,9 +5,9 @@ defmodule CopiWeb.GameLiveTest do
 
   alias Copi.Cornucopia
 
-  @create_attrs %{created_at: "2010-04-17T14:00:00Z", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
-  @update_attrs %{created_at: "2011-05-18T15:01:01Z", finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
-  @invalid_attrs %{created_at: nil, finished_at: nil, name: nil, started_at: nil}
+  @create_attrs %{ name: "some name", edition: "webapp"}
+  @update_attrs %{ name: "some updated name", edition: "webapp"}
+  @invalid_attrs %{name: nil, edition: "webapp"}
 
   defp fixture(:game) do
     {:ok, game} = Cornucopia.create_game(@create_attrs)
@@ -22,62 +22,34 @@ defmodule CopiWeb.GameLiveTest do
   describe "Index" do
     setup [:create_game]
 
-    test "lists all games", %{conn: conn, game: game} do
-      {:ok, _index_live, html} = live(conn, Routes.game_index_path(conn, :index))
+    test "List the new game", %{conn: conn, game: game} do
+      {:ok, _index_game, html} = live(conn, "/games/#{game.id}")
 
-      assert html =~ "Listing Games"
-      assert html =~ game.name
-    end
-
-    test "saves new game", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, Routes.game_index_path(conn, :index))
-
-      assert index_live |> element("a", "New Game") |> render_click() =~
-               "New Game"
-
-      assert_patch(index_live, Routes.game_index_path(conn, :new))
-
-      assert index_live
-             |> form("#game-form", game: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      {:ok, _, html} =
-        index_live
-        |> form("#game-form", game: @create_attrs)
-        |> render_submit()
-        |> follow_redirect(conn, Routes.game_index_path(conn, :index))
-
-      assert html =~ "Game created successfully"
       assert html =~ "some name"
     end
 
-    test "updates game in listing", %{conn: conn, game: game} do
-      {:ok, index_live, _html} = live(conn, Routes.game_index_path(conn, :index))
+    test "saves new game", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, "/games")
+      {:ok, new_conn} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
+      assert_redirect(index_live, Routes.game_index_path(conn, :new))
 
-      assert index_live |> element("#game-#{game.id} a", "Edit") |> render_click() =~
-               "Edit Game"
 
-      assert_patch(index_live, Routes.game_index_path(conn, :edit, game))
+      {:ok, games_new, _html_games_new} = live(new_conn, "/games/new")
 
-      assert index_live
+      assert _html_games_new =~ "Start A Game"
+
+      assert games_new
              |> form("#game-form", game: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "No really, give your game session a name"
 
       {:ok, _, html} =
-        index_live
-        |> form("#game-form", game: @update_attrs)
+        games_new
+        |> form("#game-form", game: @create_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.game_index_path(conn, :index))
+        |> follow_redirect(conn)
 
-      assert html =~ "Game updated successfully"
-      assert html =~ "some updated name"
-    end
-
-    test "deletes game in listing", %{conn: conn, game: game} do
-      {:ok, index_live, _html} = live(conn, Routes.game_index_path(conn, :index))
-
-      assert index_live |> element("#game-#{game.id} a", "Delete") |> render_click()
-      refute has_element?(index_live, "#game-#{game.id}")
+      assert html =~ "Game created successfully"
+      assert html =~ "some name"
     end
   end
 
@@ -87,30 +59,8 @@ defmodule CopiWeb.GameLiveTest do
     test "displays game", %{conn: conn, game: game} do
       {:ok, _show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
 
-      assert html =~ "Show Game"
+      assert html =~ "Waiting for players to join the game..."
       assert html =~ game.name
-    end
-
-    test "updates game within modal", %{conn: conn, game: game} do
-      {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, game))
-
-      assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Game"
-
-      assert_patch(show_live, Routes.game_show_path(conn, :edit, game))
-
-      assert show_live
-             |> form("#game-form", game: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      {:ok, _, html} =
-        show_live
-        |> form("#game-form", game: @update_attrs)
-        |> render_submit()
-        |> follow_redirect(conn, Routes.game_show_path(conn, :show, game))
-
-      assert html =~ "Game updated successfully"
-      assert html =~ "some updated name"
     end
   end
 end

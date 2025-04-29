@@ -3,9 +3,7 @@ defmodule CopiWeb.PageLiveTest do
 
   import Phoenix.LiveViewTest
 
-  test "disconnected and connected render", %{conn: conn} do
-    {:ok, page_live, disconnected_html} = live(conn, "/")
-    assert disconnected_html =~ "Welcome to Phoenix!"
-    assert render(page_live) =~ "Welcome to Phoenix!"
+  test "Front page", %{conn: conn} do
+    assert html_response(get(conn, "/"), 200) =~ "Threat modelling for everyone everywhere"
   end
 end

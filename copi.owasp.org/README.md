@@ -2,7 +2,7 @@
 
 ## What is Copi?
 
-Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia  (website and mobile) as well as the Elevation of Privileges game. 
+Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia  (website and mobile) as well as the Elevation of Privileges game.
 
 
 ## Dev Environment Setup
@@ -28,7 +28,7 @@ brew install elixir
 ```
 
 #### Linux and Windows
-Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows). 
+Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows).
 
 ### Install the Elixir package manager, Hex
 ```bash
@@ -65,6 +65,13 @@ To start your Phoenix server:
   * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `npm install` inside the `assets` directory
   * Start Phoenix endpoint with `mix phx.server`
+
+### Run tests
+
+    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
+    export POSTGRES_TEST_PWD=y9EAY7xeVucjM2yM
+    mix test
+  *
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 

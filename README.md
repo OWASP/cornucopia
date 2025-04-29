@@ -69,7 +69,7 @@ usage: convert.py [-h] [-i INPUTFILE] [-v VERSION] [-o OUTPUTFILE] [-p] [-d] [-l
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
 Example usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.00
-Example usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 1.0 -e eop -i ./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-1.0-cards-en.idml
+Example usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 5.0 -e eop -i ./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-5.0-cards-en.idml
 Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00 -o 'my_output_folder\owasp_cornucopia_edition_version_layout_language_template.idml'
 
 options:
@@ -178,6 +178,11 @@ For the case, we would recommend folding box board with anti-scuff lamination an
 
 please see: [README](cornucopia.owasp.org/README.md)
 
+
+## The copi.owasp.org game engine
+
+please see: [README](copi.owasp.org/README.md)
+
 ## Contributing to Development
 
 ### Large binary files
@@ -193,14 +198,39 @@ git lfs pull
 
 ```
 
-### Coding style 
+### Dev setup for the Cornucopia Converter
 
+For copi.owasp.org and cornucopia.owasp.org see separate README.md
+On Mac OSX and Ubuntu you may not need to go through all of these steps, but this should at least be a bulletproof way of getting started.
+
+    pip install pipenv --user
+    # To get path to your python executable, you can
+    # python -c "import os, sys; print(os.path.dirname(sys.executable))" 
+    python -m pipenv shell --python "{path to python}"
+    pip install pipenv
+    pipenv install
+
+
+### Coding style 
 
 Before you push your changes please format files with
 
 ```bash
 make fmt
 ```
+
+#### Coding Style Check on Windows
+
+Install shfmt
+
+    winget install --id=mvdan.shfmt  -e
+
+Run Coding Style Check
+
+    shfmt -l -w .
+    pipenv run black --line-length=120 .
+    pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503 --exclude ./.venv/
+    pipenv run mypy --namespace-packages --strict ./scripts/
 
 ### Static analysis
 
@@ -218,6 +248,16 @@ run all available smoke, unit and integration tests
 make test
 ```
 
+#### Testing on windows
+
+Unit tests:
+
+    pipenv run coverage run --append --branch --omit "*_?test.py,*/.local/*" --module unittest discover --verbose --start-directory "tests/scripts" --pattern "*_utest.py"
+
+Integration tests:
+
+    pipenv run coverage run --append --branch --omit "*_?test.py,*/.local/*" --module unittest discover --verbose --start-directory "tests/scripts" --pattern "*_itest.py"
+
 ###  Code coverage
 
 check that your code have sufficient test coverage
@@ -225,6 +265,11 @@ check that your code have sufficient test coverage
 ```bash
 make coverage-check
 ```
+
+#### Code coverage check on windows
+
+    pipenv run coverage xml
+    pipenv run coverage report --fail-under 85
 
 ### Developing fuzzers
 
