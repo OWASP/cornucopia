@@ -1,5 +1,6 @@
 ---
   name: Copi Build and Test
+
   on:
       # Triggers the workflow on push or pull request events but only for the main branch
     push:
@@ -56,10 +57,12 @@
               ${{ runner.os }}-mix-
 
         - name: Use Elixir 1.7
-          uses: erlef/setup-beam@v1.15
+          uses: erlef/setup-beam@5304e04ea2b355f03681464e683d92e3b2f18451 # v1.18.2
           with:
-            elixir-version: 1.13.3 # Only accept exact Elixir 1.7.x version
-            otp-version: 24.3.4
+            elixir-version: 1.18.2
+            otp-version: 27.3.3
+          env:
+            ImageOS: ubuntu24
 
         - name: Install dependencies
           working-directory: cornucopia.owasp.org
