@@ -43,6 +43,10 @@ Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under 
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
 
+### Copi - The Cornucopia Game Engine
+
+Copi - The Cornucopia Game Engine is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE](copi.owasp.org/LICENSE)
+
 ### Font licensing
 
 For font licensing, please read font [README.md](./resources/templates/Fonts/README.md)
