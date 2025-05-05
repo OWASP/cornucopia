@@ -17,7 +17,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.3.1",
 		"@sveltejs/adapter-cloudflare": "^5.0.1",
-		"@sveltejs/kit": "^2.15.2",
+		"@sveltejs/kit": "^2.20.8",
 		"@sveltejs/vite-plugin-svelte": "^4.0.4",
 		"@types/node": "^20.17.12",
 		"@vitest/coverage-v8": "^2.1.8",
@@ -50,8 +50,7 @@
 			"ignoreCves": [],
 			"ignoreGhsas": [
 				"GHSA-vg6x-rcgg-rjx6",
-				"GHSA-67mh-4wv8-2f99", 
-				"GHSA-6q87-84jw-cjhp"
+				"GHSA-67mh-4wv8-2f99"
 			]
 		},
 		"overrides": {
