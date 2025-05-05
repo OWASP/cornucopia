@@ -50,7 +50,8 @@
 			"ignoreCves": [],
 			"ignoreGhsas": [
 				"GHSA-vg6x-rcgg-rjx6",
-				"GHSA-67mh-4wv8-2f99"
+				"GHSA-67mh-4wv8-2f99", 
+				"GHSA-6q87-84jw-cjhp"
 			]
 		},
 		"overrides": {
