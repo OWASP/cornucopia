@@ -17,7 +17,7 @@
     vendorName="Agile Stationary"
     logoSource="/images/logo-agile-stationary.png"
     productImageSource="/images/owasp-cornucopia-preview.png"
-    webshopLink="https://agilestationery.com/search?q=cornucopia">
+    webshopLink="https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards">
     </CardVendor>
 
     <CardVendor
