@@ -1,0 +1,37 @@
+
+  <.live_component
+    module={CopiWeb.PlayerLive.FormComponent}
+    id={:new}
+    title={@page_title}
+    action={@live_action}
+    player={@player}
+    patch={~p"/games/#{@game.id}"}
+  />
+
+
+<!--
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="players">
+    <%= for player <- @players do %>
+      <tr id={player.id}>
+        <td><%= player.name %></td>
+
+        <td>
+          <span><.link patch={~p"/games/#{player.game_id}/players/#{player.id}"}>
+  <.button><%= gettext("Join game as this player") %></.button>
+</.link></span>
+
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+-->
