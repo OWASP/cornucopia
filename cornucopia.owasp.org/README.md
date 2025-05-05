@@ -6,4 +6,6 @@
 
 # Development server
 
+    # npm install will raise a conflict
+    pnpm install # https://pnpm.io/installation
     npm run dev
