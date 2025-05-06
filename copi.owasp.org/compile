@@ -1,6 +1,8 @@
-mix deps.get
-mix ecto.create
-ecto.migrate prod
-assets.setup
-assets.build
-assets.deploy
+mix deps.get --only prod
+MIX_ENV=prod
+mix compile
+mix assets.deploy
+mix phx.gen.release
+mix release
+mix ecto.setup
+_build/prod/rel/copi/bin/copi start

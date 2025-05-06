@@ -8,7 +8,7 @@ config :copi, Copi.Repo,
   hostname: System.get_env("POSTGRES_HOST"),
   port: System.get_env("POSTGRES_PORT"),
   show_sensitive_data_on_connection_error: true,
-  log: false,
+  log: false
   ssl: [
     verify: :verify_none
   ]
@@ -20,7 +20,8 @@ config :copi, Copi.Repo,
 config :copi, CopiWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
   url: [host: "copiweb-048e38bc6ebf.herokuapp.com", port: 443, scheme: "https"],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]]
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  server: true
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: Copi.Finch
