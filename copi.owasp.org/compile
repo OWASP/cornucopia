@@ -1,8 +1,8 @@
 mix deps.get --only prod
 MIX_ENV=prod
 mix compile
-mix assets.deploy
-mix phx.gen.release
-mix release
-mix ecto.setup
-_build/prod/rel/copi/bin/copi start
+#mix assets.deploy
+#mix phx.gen.release
+#mix release
+#mix ecto.setup
+#_build/prod/rel/copi/bin/copi start
