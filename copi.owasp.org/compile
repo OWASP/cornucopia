@@ -1,1 +1,6 @@
-mix setup
+mix deps.get
+mix ecto.create
+ecto.migrate prod
+assets.setup
+assets.build
+assets.deploy
