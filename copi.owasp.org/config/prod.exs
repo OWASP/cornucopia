@@ -17,7 +17,7 @@ config :copi, Copi.Repo,
 # before starting your production server.
 config :copi, CopiWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
-  url: [host: host, port: 443, scheme: "https"],
+  url: [host: "copiweb-048e38bc6ebf.herokuapp.com", port: 443, scheme: "https"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Configures Swoosh API Client
