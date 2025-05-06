@@ -8,7 +8,7 @@ config :copi, Copi.Repo,
   hostname: System.get_env("POSTGRES_HOST"),
   port: System.get_env("POSTGRES_PORT"),
   show_sensitive_data_on_connection_error: true,
-  log: false
+  log: false,
   ssl: [
     verify: :verify_none
   ]
