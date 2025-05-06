@@ -84,3 +84,24 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## Heroku deployment
+
+Implemented using this https://github.com/phoenixframework/phoenix/blob/v1.7.21/guides/deployment/heroku.md#L1  
+
+Install: https://github.com/negativetwelve/heroku-buildpack-subdir
+
+    heroku buildpacks:set https://github.com/negativetwelve/heroku-buildpack-subdir
+    heroku config:set POOL_SIZE=18
+    mix phx.gen.secret
+    xvafzY4y01jYuzLm3ecJqo008dVnU3CN4f+MamNd1Zue4pXvfvUjbiXT8akaIF53
+    heroku config:set SECRET_KEY_BASE="xvafzY4y01jYuzLm3ecJqo008dVnU3CN4f+MamNd1Zue4pXvfvUjbiXT8akaIF53"
+    DATABASE_URL=postgres://*
+    PHX_HOST=copiweb-*.herokuapp.com
+    POSTGRES_DB=***
+    POSTGRES_HOST=*.us-east-1.rds.amazonaws.com
+    POSTGRES_PORT=5432
+    POSTGRES_PWD=*
+    POSTGRES_USER=*
+    PROJECT_PATH=copi.owasp.org
+    
