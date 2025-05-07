@@ -1,7 +1,7 @@
 mix deps.get --only prod
 MIX_ENV=prod
 mix assets.deploy
-mix compile
+#mix compile
 #mix phx.gen.release
 #mix release
 #mix ecto.setup
