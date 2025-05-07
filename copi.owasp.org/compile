@@ -1,8 +1,16 @@
+echo "phoenix_dir $phoenix_dir"
+echo "Running mix deps.get --only prod"
+echo $(pwd)
 mix deps.get --only prod
 MIX_ENV=prod
+echo "Running assets.deploy"
 mix assets.deploy
+echo "Running compile"
 mix compile
+echo "Running phx.gen.release"
 mix phx.gen.release
+echo "Running release"
 mix release
+echo "Running ecto.setup"
 mix ecto.setup
 #_build/prod/rel/copi/bin/copi start
