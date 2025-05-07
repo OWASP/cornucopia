@@ -1,5 +1,5 @@
-echo "phoenix_dir $phoenix_dir"
-echo "Running mix deps.get --only prod"
+cd $phoenix_dir
+echo "Running mix deps.get"
 echo $(pwd)
 mix deps.get --only prod
 MIX_ENV=prod
