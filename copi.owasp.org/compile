@@ -11,6 +11,6 @@ echo "Running phx.gen.release"
 mix phx.gen.release
 echo "Running release"
 mix release
-echo "Running ecto.setup"
-MIX_ENV=prod mix ecto.setup
+echo "Running ecto.migrate"
+MIX_ENV=prod mix ecto.migrate
 #_build/prod/rel/copi/bin/copi start
