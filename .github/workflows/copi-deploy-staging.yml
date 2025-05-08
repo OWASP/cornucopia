@@ -87,7 +87,7 @@
             EOF
         - name: Add Heroku remote
           run: |
-            heroku login credential --interactive false
+            heroku login -i false
             [ -z "$(heroku config:get SECRET_KEY_BASE)" ] && heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
             [ -z "$(heroku config:get POOL_SIZE)" ] && heroku config:set POOL_SIZE=18
             heroku config:set PROJECT_PATH=copi.owasp.org
