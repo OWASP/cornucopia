@@ -72,26 +72,11 @@
         - name: Install Heroku CLI
           run: |
             curl https://cli-assets.heroku.com/install.sh | sh
-        - name: Login to Heroku and setup config vars
+        - name: Add Heroku config vars
           env: 
             HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
             HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL_STAGING }}
           run: |
-            cat > ~/.netrc <<EOF
-              machine api.heroku.com
-                login $HEROKU_EMAIL
-                password $HEROKU_API_KEY
-              machine git.heroku.com
-                login $HEROKU_EMAIL
-                password $HEROKU_API_KEY
-            EOF
-            
-        - name: Add Heroku remote
-          env: 
-            HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-            HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL_STAGING }}
-          run: |
-            heroku login -i
             [ -z "$(heroku config:get SECRET_KEY_BASE)" ] && heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
             [ -z "$(heroku config:get POOL_SIZE)" ] && heroku config:set POOL_SIZE=18
             heroku config:set PROJECT_PATH=copi.owasp.org
