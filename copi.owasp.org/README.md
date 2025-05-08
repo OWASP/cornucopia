@@ -87,21 +87,27 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Heroku deployment
 
-Implemented using this https://github.com/phoenixframework/phoenix/blob/v1.7.21/guides/deployment/heroku.md#L1  
+### Heroku Infra Setup
 
-Install: https://github.com/negativetwelve/heroku-buildpack-subdir
+Set your prefered app name instead of `<name>`
 
-    heroku buildpacks:set https://github.com/negativetwelve/heroku-buildpack-subdir
+    heroku login
+    heroku apps:create --addons heroku-postgresql:essential-0 --region eu -b https://github.com/negativetwelve/heroku-buildpack-subdir -s heroku-22
+    heroku apps:rename <name> --app <old name>
+    git remote set-url heroku https://git.heroku.com/<name>.git
+    heroku config:set PHX_HOST=<name>-*.herokuapp.com
+
+
+### Heroku App Setup
+
+    heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
     heroku config:set POOL_SIZE=18
-    mix phx.gen.secret
-    xvafzY4y01jYuzLm3ecJqo008dVnU3CN4f+MamNd1Zue4pXvfvUjbiXT8akaIF53
-    heroku config:set SECRET_KEY_BASE="xvafzY4y01jYuzLm3ecJqo008dVnU3CN4f+MamNd1Zue4pXvfvUjbiXT8akaIF53"
-    DATABASE_URL=postgres://*
-    PHX_HOST=copiweb-*.herokuapp.com
-    POSTGRES_DB=***
-    POSTGRES_HOST=*.us-east-1.rds.amazonaws.com
-    POSTGRES_PORT=5432
-    POSTGRES_PWD=*
-    POSTGRES_USER=*
-    PROJECT_PATH=copi.owasp.org
+    heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in the root of this repo.
+
+### Heroku deploy
+
+Set your local branch name instead of `<name>`
+
+    git push -f heroku <name>:main
+    
     
