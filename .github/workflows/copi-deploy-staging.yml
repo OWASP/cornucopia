@@ -11,7 +11,7 @@
   permissions:
     contents: read
   jobs:
-    build-test:
+    build-test-and-deploy:
       runs-on: ubuntu-latest # Or another supported runner
       services:
         postgres:
@@ -69,7 +69,10 @@
         - name: Run tests
           working-directory: copi.owasp.org
           run: mix test
-        - name: Login to Heroku Container registry
+        - name: Install Heroku CLI
+          run: |
+            curl https://cli-assets.heroku.com/install.sh | sh
+        - name: Login to Heroku and setup config vars
           env: 
             HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
             HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL_STAGING }}
