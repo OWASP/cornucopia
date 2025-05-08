@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :copi, Copi.Repo,
-  username: System.get_env("POSTGRES_USR"),
-  password: System.get_env("POSTGRES_PWD"),
-  database: System.get_env("POSTGRES_DB"),
-  hostname: System.get_env("POSTGRES_HOST"),
+  #username: System.get_env("POSTGRES_USR"),
+  #password: System.get_env("POSTGRES_PWD"),
+  #database: System.get_env("POSTGRES_DB"),
+  #hostname: System.get_env("POSTGRES_HOST"),
   port: System.get_env("POSTGRES_PORT"),
   show_sensitive_data_on_connection_error: true,
   log: false,
@@ -19,7 +19,7 @@ config :copi, Copi.Repo,
 # before starting your production server.
 config :copi, CopiWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
-  url: [host: "copiweb-048e38bc6ebf.herokuapp.com", port: 443, scheme: "https"],
+  url: [host: System.get_env("PHX_HOST"), port: 443, scheme: "https"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   server: true
 
