@@ -1,0 +1,1 @@
+web: cd copi.owasp.org && MIX_ENV=prod mix phx.server
