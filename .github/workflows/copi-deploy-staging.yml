@@ -2,7 +2,10 @@
   name: Copi Deploy Staging
 
   on:
-    push:
+    pull_request_target:
+      paths:
+        - 'copi.owasp.org/**'
+        - '.github/workflows/copi-deploy-staging.yml'
       branches: ['*']
     workflow_dispatch:
   env:
