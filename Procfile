@@ -1,0 +1,1 @@
+web: cd copi.owasp.org && MIX_ENV=prod _build/prod/rel/copi/bin/copi start
