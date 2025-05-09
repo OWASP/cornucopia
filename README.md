@@ -19,49 +19,6 @@ It is language, platform and technology agnostic. Visit: https://cornucopia.owas
 * MASTG OWASP Mobile Application Security Testing Guide 1.7
 * MASVS OWASP Mobile Application Security Verification Standard 2.0
 
-## Credits
-Cornucopia was originally conceived and created by Colin Watson 
-and has since had contributions from a worldwide team of volunteers.
-Please see [Project Page](https://owasp.org/www-project-cornucopia/) for more details.
-
-## License
-
-### General Licensing Terms
-
-© 2025 OWASP Foundation
-Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-3.0](./LICENSE.md)
-
-### Elevation of Privilege (EoP)
-
-© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
-
-### OWASP Cornucopia Mobile App Edition
-
-Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
-
-### OWASP Cornucopia Website App Edition
-
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
-
-### Copi - The Cornucopia Game Engine
-
-Copi - The Cornucopia Game Engine is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE](copi.owasp.org/LICENSE)
-
-### Font licensing
-
-For font licensing, please read font [README.md](./resources/templates/Fonts/README.md)
-
-### version-up.sh
-
- Copyright (C) 2017, Oleksandr Kucherenko under [MIT](https://opensource.org/license/mit)
-
-
-### Cloudflare Worker Content Security Policy Nonce Generator (nonce-worker.js)
-
-MIT License Copyright (c) 2020 Move Your Digital, Inc.
-
-please read [README.md](./cornucopia.owasp.org/script/README.md)
-
 ## Building and Deploying the Cornucopia website
 
 please read [README.md](cornucopia.owasp.org/README.md)
@@ -186,15 +143,6 @@ A standard blead set to 3mm for all 4 sides.
 Use 300gsm for both the bridge cards and the tarot cards.
 For the case, we would recommend folding box board with anti-scuff lamination and 100gsm uncoated stock for the leaflet. The leaflets could also be laminated, but it might make them springy.
 
-## The cornucopia.owasp.org website
-
-please see: [README](cornucopia.owasp.org/README.md)
-
-
-## The copi.owasp.org game engine
-
-please see: [README](copi.owasp.org/README.md)
-
 ## Contributing to Development
 
 ### Large binary files
@@ -206,6 +154,7 @@ Install from https://git-lfs.com/
 Then pull the binaries from git lfs.
 
 ```bash
+
 git lfs pull
 
 ```
@@ -345,7 +294,6 @@ twice.
 To avoid common mistakes there is a script which will guide you through process
 and push correct tag from your machine.
 
-
 To release a new patch:
 
 ```bash
@@ -377,3 +325,46 @@ keeping 3 tags:
 - `previous` mirrors state of the previous Git tag.
 
 Images are also pushed with `git describe` version.
+
+## Credits
+Cornucopia was originally conceived and created by Colin Watson 
+and has since had contributions from a worldwide team of volunteers.
+Please see [About Cornucopia](https://cornucopia.owasp.org/about#Acknowledgements) for more details.
+
+## License
+
+### General Licensing Terms
+
+© 2025 OWASP Foundation
+Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-3.0](./LICENSE.md)
+
+### Elevation of Privilege (EoP)
+
+© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
+
+### OWASP Cornucopia Mobile App Edition
+
+Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+
+### OWASP Cornucopia Website App Edition
+
+Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+
+### Copi - The Cornucopia Game Engine
+
+Copi - The Cornucopia Game Engine is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE](copi.owasp.org/LICENSE)
+
+### Font licensing
+
+For font licensing, please read font [README.md](./resources/templates/Fonts/README.md)
+
+### version-up.sh
+
+ Copyright (C) 2017, Oleksandr Kucherenko under [MIT](https://opensource.org/license/mit)
+
+
+### Cloudflare Worker Content Security Policy Nonce Generator (nonce-worker.js)
+
+MIT License Copyright (c) 2020 Move Your Digital, Inc.
+
+please read [README.md](./cornucopia.owasp.org/script/README.md)
