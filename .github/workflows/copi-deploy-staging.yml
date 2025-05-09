@@ -80,11 +80,11 @@
             [ -z "$(heroku config:get SECRET_KEY_BASE) --app copiweb-stage" ] && heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret) --app copiweb-stage
             [ -z "$(heroku config:get POOL_SIZE) --app copiweb-stage" ] && heroku config:set POOL_SIZE=18 --app copiweb-stage
             heroku config:set PROJECT_PATH=copi.owasp.org --app copiweb-stage
+            #git push heroku HEAD:refs/heads/main --force
         - uses: akhileshns/heroku-deploy@e3eb99d45a8e2ec5dca08735e089607befa4bf28 # v.3.14.15
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
             heroku_app_name: "copiweb-stage" #Must be unique in Heroku
             heroku_email: "johan.sydseter@owasp.org"
             buildpack: "https://github.com/negativetwelve/heroku-buildpack-subdir.git"
-            appdir: "copi.owasp.org"
             procfile: "web: cd copi.owasp.org && MIX_ENV=prod _build/prod/rel/copi/bin/copi start"
