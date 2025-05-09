@@ -87,5 +87,4 @@
             heroku_app_name: "copiweb-stage" #Must be unique in Heroku
             heroku_email: "johan.sydseter@owasp.org"
             buildpack: "https://github.com/negativetwelve/heroku-buildpack-subdir.git"
-            procfile: "web: cd copi.owasp.org && MIX_ENV=prod _build/prod/rel/copi/bin/copi start"
             dontautocreate: true
