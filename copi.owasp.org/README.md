@@ -35,7 +35,7 @@ Follow the installation process for your [Linux distribution](https://elixir-lan
 mix local.hex
 ```
 
-#### Check you've got Elixir 1.16 and Erlang 26, or higher
+#### Check you've got Elixir 1.18 and Erlang 27, or higher
 ```bash
 elixir -v
 ```
@@ -110,4 +110,22 @@ Set your local branch name instead of `<name>`
 
     git push -f heroku <name>:main
     
-    
+### Setup custom domain
+
+    heroku domains:add copi.owaspcornucopia.org -a copiweb-stage
+
+Then continue setting up the dns at your dns proivder: https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains
+
+You'll find the dns target under
+
+https://dashboard.heroku.com/apps/<name>/settings
+
+Reconfigure the apps host address
+
+    heroku config:set PHX_HOST=copi.owaspcornucopia.org
+
+
+Setup SSL on for your dns provider e.g: https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/
+
+    # PEM format
+    heroku certs:add cloudflare.crt cloudflare.key
