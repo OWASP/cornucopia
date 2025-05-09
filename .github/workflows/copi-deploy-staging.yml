@@ -73,6 +73,7 @@
           run: |
             curl https://cli-assets.heroku.com/install.sh | sh
         - name: Add Heroku config vars
+          working-directory: copi.owasp.org
           env: 
             HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
             HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL_STAGING }}
