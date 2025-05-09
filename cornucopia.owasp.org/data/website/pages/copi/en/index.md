@@ -8,6 +8,11 @@ Copi is an online place where you can play Cornucopia and Elevation of Privilege
 
 If you want to contribute to Copi, follow the guide below to set up your development environment.
 
+But first...
+
+    git clone https://github.com/owasp/cornucopia
+    cd cornucopia/copi.owasp.org
+
 ### Installation by Operating System
 #### Mac
 
