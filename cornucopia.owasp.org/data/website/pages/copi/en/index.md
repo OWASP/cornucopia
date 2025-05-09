@@ -1,6 +1,6 @@
 # The Cornucopia Game Engine - Copi
 
-Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia (website and mobile) as well as the Elevation of Privileges game.
+Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia (website and mobile) as well as the Elevation of Privileges game. To just play, visit: https://copi.owasp.org
 
 ![The Cornucopia Game Engine - Copi](copi.png)
 
