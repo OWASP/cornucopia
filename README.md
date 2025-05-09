@@ -62,7 +62,15 @@ MIT License Copyright (c) 2020 Move Your Digital, Inc.
 
 please read [README.md](./cornucopia.owasp.org/script/README.md)
 
-## Building the Deck
+## Building and Deploying the Cornucopia website
+
+please read [README.md](cornucopia.owasp.org/README.md)
+
+## Building and Deploying the Cornucopia Game Engine: Copi
+
+please read [README.md](copi.owasp.org/README.md)
+
+## Building the Cornucopia Card Decks
 
 Merges to the main branch will generate new DOCX and IDML files to use to print off new version of the deck but if you wish to produce these locally yourself then use the ./scripts/convert.py scipt to do this:
 
