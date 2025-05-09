@@ -18,6 +18,7 @@
     let subMenu : Link[] = [];
     AddLink(subMenu,$t('source.title'),"/source");
     AddLink(subMenu,$t('printing.title'),"/printing");
+    AddLink(subMenu,$t('copi.title'),"/copi");
     AddLink(subMenu,$t('swags.title'),"/swags");
     AddLink(subMenu,$t('webshop.title'),"/webshop");
 
@@ -124,7 +125,7 @@
     header > nav > ul > li a + div > ul {
         display: flex;
         list-style-type: none;
-        height: 17.5vw;
+        height: 20vw;
         border-radius: 0 0 2px 2px;
         background-color: rgb(31, 41, 55);
         border: 2px white solid;

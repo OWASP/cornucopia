@@ -9,6 +9,7 @@ import swagsPage from '$data/website/phrases/en/swags.json';
 import taxonomyPage from '$data/website/phrases/en/taxonomy.json';
 import webshopPage from '$data/website/phrases/en/webshop.json';
 import getTheGamePage from '$data/website/phrases/en/getthegame.json';
+import copiPage from '$data/website/phrases/en/copi.json';
 import layoutPage from '$data/website/phrases/en/layout.json';
 
 export default {
@@ -20,6 +21,7 @@ export default {
   play: playPage.play,
   source: sourcePage.source,
   printing: printingPage.printing,
+  copi: copiPage.copi,
   swags: swagsPage.swags,
   taxonomy: taxonomyPage.taxonomy,
   webshop: webshopPage.webshop,
