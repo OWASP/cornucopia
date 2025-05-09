@@ -87,3 +87,5 @@
             heroku_email: "johan.sydseter@owasp.org"
             buildpack: "https://github.com/negativetwelve/heroku-buildpack-subdir.git"
             dontautocreate: true
+            rollbackonhealthcheckfailed: false
+            usedocker: false
