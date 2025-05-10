@@ -1,4 +1,4 @@
-# production setup
+# Heroku Infra setup
 
     heroku login
     heroku apps:create --addons heroku-postgresql:essential-0 --region eu -b https://github.com/negativetwelve/heroku-buildpack-subdir -s heroku-22
