@@ -10,7 +10,7 @@ Then setup access to the api key  by creating an org secret in github with the f
 
     OWASP_HEROKU_API_KEY
 
-Afterwards, the domain needs to be setup like this:
+Deploy the code, the. afterwards, the domain needs to be setup like this:
 
     heroku domains:add copi.owasp.org -a copiweb
 
