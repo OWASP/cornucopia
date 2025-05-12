@@ -101,6 +101,8 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Fly deployment
 
+Fly.io support clustering Elixir apps which means that you can scale horizontally. https://fly.io/docs/elixir/the-basics/clustering/
+
     cd copi.owasp.org
     fly launch --no-deploy
 
@@ -116,6 +118,8 @@ Then deploy the app from copi.owas.org
     fly scale count 2
 
 ## Heroku deployment
+
+No support for clustering. The app won't work properly if you configure more then one dyno.
 
 ### Heroku Infra Setup
 

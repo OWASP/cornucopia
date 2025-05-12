@@ -1,5 +1,7 @@
 # Fly deployment
 
+Fly.io support clustering Elixir apps which means that you can scale horizontally. https://fly.io/docs/elixir/the-basics/clustering/
+
     cd copi.owasp.org
     fly launch --no-deploy
 
