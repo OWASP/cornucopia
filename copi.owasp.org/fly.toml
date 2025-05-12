@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'copi'
+app = 'copi-cold-dream-9981'
 primary_region = 'lhr'
 kill_signal = 'SIGTERM'
 
@@ -13,9 +13,9 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'copi.securedelivery.io'
+  PHX_HOST = 'copi-cold-dream-9981.fly.dev'
   PORT = '8080'
-  DNS_CLUSTER_QUERY = "copi.internal"
+  DNS_CLUSTER_QUERY = "copi-cold-dream-9981.internal"
   ECTO_IPV6 = '1'
 
 [http_service]

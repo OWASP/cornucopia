@@ -5,8 +5,8 @@ defmodule Copi.Repo.Migrations.PopulateNewCards do
   import Copi.CardMigration
 
   def change do
-    add_cards_to_database(Path.join(File.cwd!, "/../source/eop-cards-5.0-en.yaml"), nil)
-    add_cards_to_database(Path.join(File.cwd!, "/../source/webapp-cards-2.1-en.yaml"), Path.join(File.cwd!, "/../source/webapp-mappings-2.1.yaml"))
-    add_cards_to_database(Path.join(File.cwd!, "/../source/mobileapp-cards-1.1-en.yaml"), Path.join(File.cwd!, "/../source/mobileapp-mappings-1.1.yaml"))
+    add_cards_to_database(Path.join(:code.priv_dir(:copi), "/repo/cornucopia/eop-cards-5.0-en.yaml"), nil)
+    add_cards_to_database(Path.join(:code.priv_dir(:copi), "/repo/cornucopia/webapp-cards-2.1-en.yaml"), Path.join(:code.priv_dir(:copi), "/repo/cornucopia/webapp-mappings-2.1.yaml"))
+    add_cards_to_database(Path.join(:code.priv_dir(:copi), "/repo/cornucopia/mobileapp-cards-1.1-en.yaml"), Path.join(:code.priv_dir(:copi), "/repo/cornucopia/mobileapp-mappings-1.1.yaml"))
   end
 end
