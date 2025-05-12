@@ -118,8 +118,7 @@ Set your prefered app name instead of `<name>`
 
     heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
     heroku config:set POOL_SIZE=18
-    heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in the root of this repo.
-    heroku config:set ECTO_IPV6=0
+    heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory
 
 ### Heroku deploy
 

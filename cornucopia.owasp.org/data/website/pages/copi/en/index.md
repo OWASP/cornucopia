@@ -105,7 +105,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
     fly launch --no-deploy
 
 Login and go to your new app
-Change the following environment variables under  `[env]` in [fly.toml](fly.toml) 
+Change the following environment variables under  `[env]` in [fly.toml](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/fly.toml) 
 
     PHX_HOST = <hostname for the app without 'https://'>
     DNS_CLUSTER_QUERY = "<name of the app>.internal"
@@ -134,8 +134,7 @@ heroku config:set PHX_HOST=<name>-*.herokuapp.com
 ```bash
 heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
 heroku config:set POOL_SIZE=18
-heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in the root of this repo.
-heroku config:set ECTO_IPV6=0
+heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in
 ```
 
 ### Heroku deploy
