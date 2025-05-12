@@ -16,6 +16,7 @@ kill_signal = 'SIGTERM'
   PHX_HOST = 'copi.securedelivery.io'
   PORT = '8080'
   DNS_CLUSTER_QUERY = "copi.internal"
+  ECTO_IPV6 = '1'
 
 [http_service]
   internal_port = 8080

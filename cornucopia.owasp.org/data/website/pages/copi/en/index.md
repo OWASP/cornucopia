@@ -99,6 +99,22 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
 
+## Fly deployment
+
+    cd copi.owasp.org
+    fly launch --no-deploy
+
+Login and go to your new app
+Change the following environment variables under  `[env]` in [fly.toml](fly.toml) 
+
+    PHX_HOST = <hostname for the app without 'https://'>
+    DNS_CLUSTER_QUERY = "<name of the app>.internal"
+
+Then deploy the app from copi.owas.org
+
+    fly deploy
+    fly scale count 2
+
 ## Heroku deployment
 
 ### Heroku Infra Setup
@@ -119,6 +135,7 @@ heroku config:set PHX_HOST=<name>-*.herokuapp.com
 heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
 heroku config:set POOL_SIZE=18
 heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in the root of this repo.
+heroku config:set ECTO_IPV6=0
 ```
 
 ### Heroku deploy
