@@ -87,21 +87,22 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Fly deployment
 
+Fly.io support clustering Elixir apps which means that you can scale horizontally. https://fly.io/docs/elixir/the-basics/clustering/
+
     cd copi.owasp.org
+    fly auth login
     fly launch --no-deploy
 
-Login and go to your new app
-Change the following environment variables under  `[env]` in [fly.toml](fly.toml) 
-
-    PHX_HOST = <hostname for the app without 'https://'>
-    DNS_CLUSTER_QUERY = "<name of the app>.internal"
+Make a not of the host and name of the app.
 
 Then deploy the app from copi.owas.org
 
-    fly deploy
-    fly scale count 2
+    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
+    fly scale count 2 --app <app name>
 
 ## Heroku deployment
+
+No support for clustering. The app won't work properly if you configure more then one dyno.
 
 ### Heroku Infra Setup
 
