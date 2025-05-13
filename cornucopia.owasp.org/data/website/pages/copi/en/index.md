@@ -109,7 +109,7 @@ Fly.io support clustering Elixir apps which means that you can scale horizontall
 
 Make a note of the host and name of the app.
 
-Then deploy the app from copi.owas.org
+Then deploy the app from copi.owasp.org
 
 ```bash
     fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
