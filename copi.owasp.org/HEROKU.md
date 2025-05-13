@@ -1,5 +1,7 @@
 # Heroku Infra setup
 
+No support for clustering. The app won't work properly if you configure more then one dyno.
+
     heroku login
     heroku apps:create --addons heroku-postgresql:essential-0 --region eu -b https://github.com/negativetwelve/heroku-buildpack-subdir -s heroku-22
     heroku apps:rename copiweb --app <old name>

@@ -18,10 +18,10 @@ config :copi, Copi.Repo,
 # which you should run after static files are built and
 # before starting your production server.
 config :copi, CopiWeb.Endpoint,
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  url: [host: System.get_env("PHX_HOST"), port: 443, scheme: "https"],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  server: true
+  cache_static_manifest: "priv/static/cache_manifest.json"
+  #url: [host: System.get_env("PHX_HOST"), port: 443, scheme: "https"],
+  #force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  #server: true
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: Copi.Finch
