@@ -58,3 +58,8 @@ Add testing.
  - Adding the Russian translation by Andrey Danin
  - Changing all the fonts to Noto Sans for better language support
  - Adding CRE to the Website App Edition
+
+## Changes $ Updates
+### 2025-05-23
+
+ - Adding Copi - The Cornucopia Game Engine
