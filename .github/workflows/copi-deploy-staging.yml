@@ -4,9 +4,8 @@
   on:
     pull_request_target:
       paths:
-        - 'copi.owasp.org/**'
-        - '.github/workflows/copi-deploy-staging.yml'
-      branches: ['*']
+      - 'copi.owasp.org/**'
+      - '.github/workflows/copi-deploy-staging.yml'
     workflow_dispatch:
   env:
     MIX_ENV: test
@@ -72,24 +71,10 @@
         - name: Run tests
           working-directory: copi.owasp.org
           run: mix test
-        - name: Install Heroku CLI
-          run: |
-            curl https://cli-assets.heroku.com/install.sh | sh
-        - name: Add Heroku config vars
-          working-directory: copi.owasp.org
-          env: 
-            HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-            HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL_STAGING }}
-          run: |
-            [ -z "$(heroku config:get SECRET_KEY_BASE --app copiweb-stage)" ] && heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret) --app copiweb-stage
-            [ -z "$(heroku config:get POOL_SIZE --app copiweb-stage)" ] && heroku config:set POOL_SIZE=18 --app copiweb-stage
-            heroku config:set PROJECT_PATH=copi.owasp.org --app copiweb-stage
-        - uses: akhileshns/heroku-deploy@e3eb99d45a8e2ec5dca08735e089607befa4bf28 # v.3.14.15
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "copiweb-stage" #Must be unique in Heroku
-            heroku_email: "johan.sydseter@owasp.org"
-            buildpack: "https://github.com/negativetwelve/heroku-buildpack-subdir.git"
-            dontautocreate: true
-            rollbackonhealthcheckfailed: false
-            usedocker: false
+        - name: Setup Flyctl
+          uses: superfly/flyctl-actions/setup-flyctl@63da3ecc5e2793b98a3f2519b3d75d4f4c11cec2
+        - name: Deploy to Fly.io staging
+          run: flyctl deploy --remote-only --app copi-cold-dream-9981 --env PHX_HOST=copi-cold-dream-9981.fly.dev --env DNS_CLUSTER_QUERY="copi-cold-dream-9981.internal"
+          env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_STAGE }}
+          working-directory: ./copi.owasp.org

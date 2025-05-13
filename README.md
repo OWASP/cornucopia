@@ -21,9 +21,13 @@ It is language, platform and technology agnostic. Visit: https://cornucopia.owas
 
 ## Building and Deploying the Cornucopia website
 
+https://cornucopia.owasp.org contains the card browser for each of the cards in the cornucopia suits together with the taxonomy and in depth explaination for each of the cards in the suits.
+
 please read [README.md](cornucopia.owasp.org/README.md)
 
 ## Building and Deploying the Cornucopia Game Engine: Copi
+
+Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia (website and mobile) as well as the Elevation of Privileges game.
 
 please read [README.md](copi.owasp.org/README.md)
 
