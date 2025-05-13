@@ -111,12 +111,16 @@ Make a note of the host and name of the app.
 
 Then deploy the app from copi.owas.org
 
+```bash
     fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
     fly scale count 2 --app <app name>
+```
 
 ### Fly setup custom domain name
 
+```bash
     fly certs add copi.owasp.org
+```
 
 Setup A and AAAA record in Cloudflare
 
