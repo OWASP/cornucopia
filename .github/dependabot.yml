@@ -10,19 +10,36 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "cornucopia.owasp.org"
+    schedule:
+      interval: "daily"
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "copi.owasp.org"
+    schedule:
+      interval: "daily"
+  # Enable version updates for npm
+  - package-ecosystem: "mix"
+    directory: "copi.owasp.org"
+    schedule:
+      interval: "daily"
+  # Enable version updates for npm
+  - package-ecosystem: "docker"
+    directory: "copi.owasp.org"
+    schedule:
+      interval: "daily"
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-
   # Maintain dependencies for Docker
   - package-ecosystem: "docker"
     directory: /
     schedule:
       interval: "daily"
-
   - package-ecosystem: docker
     directory: /.clusterfuzzlite
     schedule:
