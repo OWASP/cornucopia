@@ -1,15 +1,18 @@
 # Fly deployment
 
 Fly.io support clustering Elixir apps which means that you can scale horizontally. https://fly.io/docs/elixir/the-basics/clustering/
+You'll need to install elixir in order to launch the app. see: https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir
+Login to fly and create a PostgreSQL cluster. See: https://fly.io/dashboard/owasp-foundation/managed_postgres
+1 GB memory and 10GB storage for the db is enough.
 
     cd copi.owasp.org
     fly auth login
     fly launch --no-deploy
 
-Make a note of the host and name of the app.
+Make a note of the host and name of the app and the name of the postgresql cluster.
+Then deploy the app from `./copi.owasp.org`
 
-Then deploy the app from copi.owasp.org
-
+    fly mpg attach <cluster name> --app <app name>
     fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
     fly scale count 2 --app <app name>
 
