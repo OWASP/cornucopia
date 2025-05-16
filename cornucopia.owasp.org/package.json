@@ -27,7 +27,7 @@
 		"svelte-sitemap": "^2.7.0",
 		"then-request": "^6.0.2",
 		"tslib": "^2.8.1",
-		"typescript": "^5.7.2",
+		"typescript": "^5.8.3",
 		"vite": "^5.4.19",
 		"vitest": "^2.1.9"
 	},
