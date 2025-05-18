@@ -74,7 +74,7 @@
         - name: Setup Flyctl
           uses: superfly/flyctl-actions/setup-flyctl@63da3ecc5e2793b98a3f2519b3d75d4f4c11cec2
         - name: Deploy to Fly.io staging
-          run: flyctl deploy --remote-only --app copi-cold-dream-9981 --env PHX_HOST=copi-cold-dream-9981.fly.dev
+          run: flyctl deploy --remote-only --app copi-cold-dream-9981 --env PHX_HOST=copi.owaspcornucopia.org
           env:
             FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_STAGE }}
           working-directory: ./copi.owasp.org
