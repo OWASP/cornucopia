@@ -8,6 +8,13 @@ No support for clustering. The app won't work properly if you configure more the
     git remote set-url heroku https://git.heroku.com/copiweb.git
     heroku config:set PHX_HOST=<rest of host name>-*.herokuapp.com
 
+### Heroku App Setup
+
+    heroku config:set ECTO_SSL_VERIFY=false 
+    heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
+    heroku config:set POOL_SIZE=18
+    heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory
+
 Then setup access to the api key  by creating an org secret in github with the following name:
 
     OWASP_HEROKU_API_KEY

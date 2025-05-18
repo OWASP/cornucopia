@@ -13,11 +13,8 @@ kill_signal = 'SIGTERM'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'copi-cold-dream-9981.fly.dev'
+  PHX_HOST = 'copi.fly.dev'
   PORT = '8080'
-  DNS_CLUSTER_QUERY = "copi-cold-dream-9981.internal"
-  ECTO_IPV6 = '1'
-
 [http_service]
   internal_port = 8080
   force_https = true

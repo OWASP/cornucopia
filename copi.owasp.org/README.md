@@ -100,7 +100,7 @@ Make a note of the host and name of the app and the name of the postgresql clust
 Then deploy the app from `./copi.owasp.org`
 
     fly mpg attach <cluster name> --app <app name>
-    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
+    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'>
     fly scale count 2 --app <app name>
 
 ### Fly setup custom domain name
@@ -135,6 +135,7 @@ Set your prefered app name instead of `<name>`
 
 ### Heroku App Setup
 
+    heroku config:set ECTO_SSL_VERIFY=false
     heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
     heroku config:set POOL_SIZE=18
     heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory
