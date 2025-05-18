@@ -5,6 +5,7 @@
     push:
       branches:
         - master
+        - copi
       paths:
        - 'copi.owasp.org/**'
        - '.github/workflows/copi-deploy-production.yml'
