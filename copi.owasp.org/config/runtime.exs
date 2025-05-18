@@ -19,18 +19,20 @@ import Config
 if System.get_env("PHX_SERVER") do
   config :copi, CopiWeb.Endpoint, server: true
 end
+ssl_verify = if System.get_env("ECTO_SSL_VERIFY") in ~w(false 0), do: [ verify: :verify_none], else: false
 
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
       environment variable DATABASE_URL is missing.
-      For example: ecto://postgres:y9EAY7xeVucjM2yM@localhost/copi_dev
+      For example: ecto://USER:PASS@HOST/DATABASE
       """
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: [:inet, :inet6]
 
   config :copi, Copi.Repo,
+    ssl: ssl_verify,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6

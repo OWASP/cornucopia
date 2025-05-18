@@ -13,7 +13,7 @@ Make a note of the host and name of the app and the name of the postgresql clust
 Then deploy the app from `./copi.owasp.org`
 
     fly mpg attach <cluster name> --app <app name>
-    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
+    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'>
     fly scale count 2 --app <app name>
 
 ## Fly setup custom domain name

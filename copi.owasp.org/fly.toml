@@ -15,8 +15,6 @@ kill_signal = 'SIGTERM'
 [env]
   PHX_HOST = 'copi.fly.dev'
   PORT = '8080'
-  DNS_CLUSTER_QUERY = "copi.internal"
-  ECTO_IPV6 = '1'
 
 [http_service]
   internal_port = 8080

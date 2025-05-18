@@ -115,7 +115,7 @@ Then deploy the app from `./copi.owasp.org`
 
 ```bash
     fly mpg attach <cluster name> --app <app name>
-    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'> --env DNS_CLUSTER_QUERY="<app name>.internal"
+    fly deploy --app <app name> --env PHX_HOST=<app hostname without 'https://'>
     fly scale count 2 --app <app name>
 ```
 
@@ -155,6 +155,7 @@ heroku config:set PHX_HOST=<name>-*.herokuapp.com
 ### Heroku App Setup
 
 ```bash
+heroku config:set ECTO_SSL_VERIFY=false
 heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
 heroku config:set POOL_SIZE=18
 heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in
