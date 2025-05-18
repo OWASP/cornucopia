@@ -19,6 +19,7 @@ import Config
 if System.get_env("PHX_SERVER") do
   config :copi, CopiWeb.Endpoint, server: true
 end
+ssl_verify = if System.get_env("ECTO_SSL_VERIFY") in ~w(false 0), do: [ verify: :verify_none], else: false
 
 if config_env() == :prod do
   database_url =
@@ -31,7 +32,7 @@ if config_env() == :prod do
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: [:inet, :inet6]
 
   config :copi, Copi.Repo,
-    # ssl: true,
+    ssl: ssl_verify,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
