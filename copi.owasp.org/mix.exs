@@ -64,7 +64,7 @@ defmodule Copi.MixProject do
       {:want, "~> 1.10.1"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
       {:hackney, "~> 1.9"},
-      {:mox, "~> 1.1.0", only: :test}
+      {:mox, "~> 1.2.0", only: :test}
     ]
   end
 
