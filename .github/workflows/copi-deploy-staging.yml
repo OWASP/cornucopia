@@ -2,6 +2,8 @@
   name: Copi Deploy Staging
 
   on:
+    push:
+      branches: [copi]
     pull_request_target:
       paths:
       - 'copi.owasp.org/**'
