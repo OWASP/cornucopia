@@ -15,8 +15,9 @@ _The pandemic drove a considerable increase in fully remote teams, which made ca
 A weekend later, Copi was born, and Grant lost the bet. 
 Built with [Elixir ](https://elixir-lang.org/)and [Phoenix](https://phoenixframework.org/), 3 years later, Copi is nearing almost 10.000 monthly users. You can read more about Toby's story on the [Secure Delivery Blog](https://securedelivery.io/articles/play-owasp-cornucopia-mobile-online/).
 
-## copi.owasp.org hosted on Fly.io
+## OWASP Cornucopia v2.2 and copi.owasp.org hosted on Fly.io
 
+There is now a new release of [OWASP Cornucopia 2.2](https://github.com/OWASP/cornucopia/releases/tag/v2.2.0) to celebrate a new milestone in the project's history.
 We have been able to push the application onto OWASP® Foundation’s Fly.io account so that you can enjoy the game. We have also updated the Elevation of Privilege game to include the cards that were missing from the original release of EoP, thanks to Adam Shostack, who made sure his game was open-sourced: https://github.com/adamshostack/eop 
 
 Finally, if you have stringent security policies that don't allow you to use public online services, no worries, you can run [copi.owasp.org](https://copi.owasp.org "[internal]") yourself in your own account and make sure nobody can access the service. We encourage you to install '[Copi - The Cornucopia Game engine](/copi "[internal]")' and contribute to the project. Doing this is pretty straightforward. You can choose from installing it on [Heroku.com](https://Heroku.com "[external]") or [Fly.io](https://fly.io "[external]"). We Recommend [Fly.io](https://fly.io "[external]") as they support [BEAM Clustering](https://fly.io/phoenix-files/beam-clustering-made-easy/ "[external]").
