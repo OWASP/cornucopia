@@ -29,6 +29,8 @@ This is how you do it…
 You'll need to [install Elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir "[external]") in order to launch the app. . Log in to [fly.io](https://fly.io/dashboard/ "[external]") and create a PostgreSQL cluster. (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
 
 ```bash
+    git clone https://github.com/OWASP/cornucopia.git
+    cd cornucopia/copi.owasp.org
     cd copi.owasp.org
     fly auth login
     fly launch --no-deploy
