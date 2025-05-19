@@ -5,7 +5,7 @@ tags: owasp,cornucopia,copi,gamification,threat-modeling
 hidden: false
 description: Copi - A Game Engine for OWASP® Cornucopia Threat Modeling
 ---
-![Copi - A Game Engine for OWASP® Cornucopia Threat Modeling](copi.png)
+![](copi.png)
 
 # OWASP® Cornucopia Website App 2.1 & Mobile App 1.1
 
@@ -19,13 +19,13 @@ Built with [Elixir ](https://elixir-lang.org/)and [Phoenix](https://phoenixframe
 
 We have been able to push the application onto OWASP® Foundation’s Fly.io account so that you can enjoy the game. We have also updated the Elevation of Privilege game to include the cards that were missing from the original release of EoP, thanks to Adam Shostack, who made sure his game was open-sourced: https://github.com/adamshostack/eop 
 
-Finally, if you have stringent security policies that don't allow you to use public online services, no worries, you can run [copi.owasp.org](https://copi.owasp.org) yourself in your own account and make sure nobody can access the service. We encourage you to install "[Copi - The Cornucopia Game engine](https://cornucopia.owasp.org/copi)" and contribute to the project. Doing this is pretty straightforward. You can choose from installing it on [Heroku.com](Heroku.com) or [Fly.io](Fly.io). We Recommend [Fly.io](Fly.io) as they support [BEAM Clustering](https://fly.io/phoenix-files/beam-clustering-made-easy/).
+Finally, if you have stringent security policies that don't allow you to use public online services, no worries, you can run [copi.owasp.org](https://copi.owasp.org "[internal]") yourself in your own account and make sure nobody can access the service. We encourage you to install '[Copi - The Cornucopia Game engine](/copi "[internal]")' and contribute to the project. Doing this is pretty straightforward. You can choose from installing it on [Heroku.com](Heroku.com "[external]") or [Fly.io](https://fly.io "[external]"). We Recommend [Fly.io](https://fly.io "[external]") as they support [BEAM Clustering](https://fly.io/phoenix-files/beam-clustering-made-easy/ "[external]").
 
 ![Copi - The OWASP Cornucopia Game Engine - Is free! [medium]](copi-is-free.png)
 
 This is how you do it… 
 
-You'll need to install Elixir in order to launch the app. See: https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir. Log in to fly and create a PostgreSQL cluster. See: https://fly.io/dashboard/ (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
+You'll need to [install Elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir "[external]") in order to launch the app. . Log in to [fly.io](https://fly.io/dashboard/ "[external]") and create a PostgreSQL cluster. (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
 
 ```bash
     cd copi.owasp.org
@@ -43,11 +43,11 @@ Make a note of the host, the app's name, and the PostgreSQL cluster's name. Then
 
 The app will be deployed with a PostgreSQL database and two instances. The monthly cost is no more than 14$. 
 
-Adding new card games with the same game rules as EoP or OWASP® Cornucopia is also easy. If you have any ideas and suggestions for security related card games then submit a request on https://github.com/OWASP/cornucopia and please don't forget to give us a star.
+Adding new card games with the same game rules as EoP or OWASP® Cornucopia is also easy. If you have any ideas and suggestions for security related card games then submit a request on [https://github.com/OWASP/cornucopia](https://github.com/OWASP/cornucopia "[external]") and please don't forget to give us a star.
 
 ## dotNET lab OWASP Cornucopia decks
 
-Thanks to dotNET lab and Jef Meijvis, all prior decks sold on [their website](https://webshop.dotnetlab.eu/product/cornucopia-card-deck/) now have QR codes that are redirected towards our new website. This means that if you have an old dotNET lab OWASP Cornucopia deck, then you don’t need to be afraid that your deck will become outdated when there is a new release of OWASP Cornucopia Website Edition. The QR code on the card will take you to the latest version on [cornucopia.owasp.org](https://cornucopia.owasp.org) with the newest requirement mapping.
+Thanks to dotNET lab and Jef Meijvis, all prior decks sold on [their website](https://webshop.dotnetlab.eu/product/cornucopia-card-deck/ "[external]") now have QR codes that are redirected towards our new website. This means that if you have an old dotNET lab OWASP Cornucopia deck, then you don’t need to be afraid that your deck will become outdated when there is a new release of OWASP Cornucopia Website Edition. The QR code on the card will take you to the latest version on [cornucopia.owasp.org](https://cornucopia.owasp.org) with the newest requirement mapping.
 
 ![dotNET lab OWAS Cornucopia card [small]](card.png)
 
@@ -59,4 +59,4 @@ We will also be showcasing OWASP Cornucopia at [the project showcase track](http
 ![The OWASP Cornucopia Global AppSec 2025 Demo Lab [medium]](demo-lab.jpg)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-[OWASP](https://owasp.org) is a non-profit foundation that envisions a world with no more insecure software. Our mission is to be the global open community that powers secure software through education, tools, and collaboration. We maintain hundreds of open source projects, run industry-leading educational and training conferences, and meet through over 250 chapters worldwide.
+[OWASP Foundation](https://owasp.org "[external]") is a non-profit foundation that envisions a world with no more insecure software. Our mission is to be the global open community that powers secure software through education, tools, and collaboration. We maintain hundreds of open source projects, run industry-leading educational and training conferences, and meet through over 250 chapters worldwide.
