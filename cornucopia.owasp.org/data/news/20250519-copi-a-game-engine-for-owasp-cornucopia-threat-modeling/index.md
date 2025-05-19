@@ -7,7 +7,7 @@ description: Copi - A Game Engine for OWASP® Cornucopia Threat Modeling
 ---
 ![](copi.png)
 
-# OWASP® Cornucopia Website App 2.1 & Mobile App 1.1
+# OWASP® Cornucopia 2.2 & Copi - A Game Engine for OWASP® Cornucopia Threat Modeling
 
 _The pandemic drove a considerable increase in fully remote teams, which made card games quite difficult to organize. Therefore, in 2022, Grant Ongers was willing to bet a dinner at a fancy vegan restaurant that his former colleague Toby Irvine wouldn't be able to build a fully fledged and online game engine based on the game Cornucopia (from the OWASP® Foundation) over the weekend._
 
