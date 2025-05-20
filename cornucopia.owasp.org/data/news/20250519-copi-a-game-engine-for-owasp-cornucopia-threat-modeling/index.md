@@ -26,7 +26,7 @@ Finally, if you have stringent security policies that don't allow you to use pub
 
 This is how you do it… 
 
-You'll need to [install Elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir "[external]") in order to launch the app. . Log in to [fly.io](https://fly.io/dashboard/ "[external]") and create a PostgreSQL cluster. (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
+You'll need to [install Elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir "[external]") and [flyctl](https://fly.io/docs/flyctl/install/) in order to launch the app. . Log in to [fly.io](https://fly.io/dashboard/ "[external]") and create a PostgreSQL cluster. (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
 
 ```bash
     git clone https://github.com/OWASP/cornucopia.git
