@@ -7,7 +7,7 @@ description: Copi - A Game Engine for OWASP® Cornucopia Threat Modeling
 ---
 ![](copi.png)
 
-# OWASP® Cornucopia Website App 2.1 & Mobile App 1.1
+# OWASP® Cornucopia 2.2 & Copi - A Game Engine for OWASP® Cornucopia Threat Modeling
 
 _The pandemic drove a considerable increase in fully remote teams, which made card games quite difficult to organize. Therefore, in 2022, Grant Ongers was willing to bet a dinner at a fancy vegan restaurant that his former colleague Toby Irvine wouldn't be able to build a fully fledged and online game engine based on the game Cornucopia (from the OWASP® Foundation) over the weekend._
 
@@ -15,10 +15,10 @@ _The pandemic drove a considerable increase in fully remote teams, which made ca
 A weekend later, Copi was born, and Grant lost the bet. 
 Built with [Elixir ](https://elixir-lang.org/)and [Phoenix](https://phoenixframework.org/), 3 years later, Copi is nearing almost 10.000 monthly users. You can read more about Toby's story on the [Secure Delivery Blog](https://securedelivery.io/articles/play-owasp-cornucopia-mobile-online/).
 
-## OWASP Cornucopia v2.2 and copi.owasp.org hosted on Fly.io
+## A new release and new server
 
 There is now a new release of [OWASP Cornucopia 2.2](https://github.com/OWASP/cornucopia/releases/tag/v2.2.0) to celebrate a new milestone in the project's history.
-We have been able to push the application onto OWASP® Foundation’s Fly.io account so that you can enjoy the game. We have also updated the Elevation of Privilege game to include the cards that were missing from the original release of EoP, thanks to Adam Shostack, who made sure his game was open-sourced: https://github.com/adamshostack/eop 
+We have been able to push the application onto OWASP® Foundation’s Fly.io account so that you can enjoy the game. We have also updated the Elevation of Privilege game, which we also host, to include the cards that were missing from the original release of EoP, thanks to Adam Shostack, who made sure his game was open-sourced: https://github.com/adamshostack/eop 
 
 Finally, if you have stringent security policies that don't allow you to use public online services, no worries, you can run [copi.owasp.org](https://copi.owasp.org "[internal]") yourself in your own account and make sure nobody can access the service. We encourage you to install '[Copi - The Cornucopia Game engine](/copi "[internal]")' and contribute to the project. Doing this is pretty straightforward. You can choose from installing it on [Heroku.com](https://Heroku.com "[external]") or [Fly.io](https://fly.io "[external]"). We Recommend [Fly.io](https://fly.io "[external]") as they support [BEAM Clustering](https://fly.io/phoenix-files/beam-clustering-made-easy/ "[external]").
 
@@ -26,9 +26,11 @@ Finally, if you have stringent security policies that don't allow you to use pub
 
 This is how you do it… 
 
-You'll need to [install Elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir "[external]") in order to launch the app. . Log in to [fly.io](https://fly.io/dashboard/ "[external]") and create a PostgreSQL cluster. (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
+You'll need to [install Elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir "[external]") and [flyctl](https://fly.io/docs/flyctl/install/) in order to launch the app. . Log in to [fly.io](https://fly.io/dashboard/ "[external]") and create a PostgreSQL cluster. (Click managed postgres in the menu). 1 GB of memory and 10GB of storage for the database are enough.
 
 ```bash
+    git clone https://github.com/OWASP/cornucopia.git
+    cd cornucopia/copi.owasp.org
     cd copi.owasp.org
     fly auth login
     fly launch --no-deploy
