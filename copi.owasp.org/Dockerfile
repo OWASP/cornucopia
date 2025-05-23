@@ -12,7 +12,7 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.14.2-erlang-25.1.1-debian-bullseye-20220801-slim
 #
-FROM hexpm/elixir:1.18.3-erlang-27.3.3-debian-bullseye-20250428-slim@sha256:1515dafaff67afb3d3ef3ce210fed524937c549feecf4737a114f640bbc6544c as builder
+FROM hexpm/elixir:1.18.4-erlang-27.3.4-debian-bullseye-20250520-slim@sha256:d93975b5e78b29fd62d6e7f74f4eaa7e1df165cc95d3525eaa2e333e1449bc2c as builder
 
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git nodejs npm \
