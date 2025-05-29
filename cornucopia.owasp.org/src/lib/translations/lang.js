@@ -1,5 +1,5 @@
 export default {
-en: 'English',
-es: 'Ingles',
-    de: 'German',
+  en: "English",
+  es: "Ingles",
+  de: "German",
 };
