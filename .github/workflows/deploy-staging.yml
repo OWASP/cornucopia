@@ -23,6 +23,7 @@
                 github.com:443
                 motd.ubuntu.com:443
                 keys.openpgp.org:443
+                registry.npmjs.org:443
       build-and-deploy-staging:
         runs-on: ubuntu-latest
         steps:
@@ -33,13 +34,18 @@
           - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
             name: Install pnpm
             with:
-              version: 10.0.0
+              version: 8.6.0
               run_install: false
+            
     
           - name: Install Node.js
             uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
             with:
               node-version: 20.18.2
+          - name: Install dependencies
+            working-directory: cornucopia.owasp.org
+            run: |
+                pnpm install --loglevel=debug
           - name: Build
             working-directory: cornucopia.owasp.org
             run: |
