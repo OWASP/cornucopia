@@ -1,0 +1,14 @@
+{
+  "news": {
+    "title": "Nachrichten",
+    "p1": "Es wurden noch keine Blogposts veröffentlicht, komm bald zurück!",
+    "a": "Lesen Sie mehr",
+    "p2": "Aussicht",
+    "slug": {
+      "p1": "Quelle"
+    },
+    "author": {
+      "h1": "Autoren"
+    }
+  }
+}

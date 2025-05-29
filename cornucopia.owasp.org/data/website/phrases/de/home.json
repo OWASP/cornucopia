@@ -1,0 +1,34 @@
+{
+  "home": {
+    "title": "Startseite",
+    "h1": {
+      "1": "Einführung",
+      "2": "Wie man beginnt",
+      "3": "Open Source"
+    },
+    "p1": "Die Idee hinter Cornucopia ist es, Entwicklungsteams – insbesondere solche, die agile Methoden verwenden – dabei zu unterstützen, Anforderungen an die Anwendungssicherheit zu identifizieren und sicherheitsbasierte User Stories zu entwickeln.",
+    "p2": "OWASP Cornucopia ist eine einfache Möglichkeit, das Konzept des Threat Modeling in ein Softwareentwicklungsteam einzuführen. Das Spielen des Kartenspiels ermutigt das Entwicklungsteam, aktiv über mögliche Bedrohungen beim Erstellen von Software nachzudenken. Dies befähigt Teams, ihre Anwendungen während der Entwicklung eigenständig abzusichern. Damit wird die Shift-Left-Strategie unterstützt, bei der Sicherheit ein integrierter Bestandteil des Entwicklungszyklus wird.",
+    "a1": "Mehr erfahren",
+    "p3": "So beginnst du mit Cornucopia:",
+    "ol": {
+      "li1": "<b>Entweder:</b> Ein vorgedrucktes Kartenset erhalten oder kaufen;",
+      "li2": "<b>Oder:</b> Die kostenlosen Adobe Illustrator-Dateien herunterladen und professionell drucken lassen (siehe: ",
+      "li2a": "Druckanleitung",
+      "li3": "<b>Oder:</b> Das Spiel online spielen unter ",
+      "li4": "Wähle eine Anwendung, ein Modul oder eine Komponente zur Bewertung aus.",
+      "li5": "Lade Geschäftsverantwortliche, Architekten, Entwickler und Tester zu einem Kartenspiel ein.",
+      "li6": "Bitte das InfoSec-Team, Schokolade, Pizza, Bier, Blumen oder alle vier als Preise mitzubringen.",
+      "li7": "Wähle einen Teil des Kartensatzes zum Starten aus.",
+      "li8a": "Spiele das Spiel",
+      "li8": ", um Sicherheitsanforderungen zu diskutieren und zu dokumentieren (und Runden zu gewinnen).",
+      "li9": "Und denk daran: Hab Spaß dabei!"
+    },
+    "a2": "Wie man spielt",
+    "p4": {
+      "1": "Es gibt eine Vielzahl von Quelldateien für das Kartendesign in verschiedenen Sprachen und Formaten. Diese Design-Dateien sowie der Quellcode zur Erstellung von Word-Dokumenten, PDFs und InDesign-Dateien für den Druck werden in unserem ",
+      "2": "Github-Repository gepflegt"
+    },
+    "p5": "Einer der Hauptvorteile des OWASP Cornucopia-Kartenspiels als Open Source ist, dass jeder auf das Spiel zugreifen und es nutzen kann, ohne Lizenzgebühren oder Einschränkungen. Dies fördert eine breite Nutzung und erleichtert es Teams, das Spiel in ihre Sicherheitspraktiken zu integrieren. Außerdem bedeutet Open Source, dass das Spiel transparent und anpassbar ist. Teams können das Spiel an ihre spezifischen Bedürfnisse anpassen und die Sicherheitsbedrohungen adressieren, die für ihre Anwendungen am relevantesten sind. Sie können auch zur Weiterentwicklung des Spiels beitragen, indem sie neue Karten oder Verbesserungen einreichen. Darüber hinaus haben Open-Source-Projekte in der Regel eine große und aktive Entwicklergemeinschaft, die zum Code beiträgt und Unterstützung bietet. Dies kann zu schnelleren Fehlerbehebungen und Updates führen, sodass das Spiel relevant und effektiv bei der Erkennung von Sicherheitsbedrohungen bleibt.",
+    "a3": "Quellcode auf Github anzeigen"
+  }
+}

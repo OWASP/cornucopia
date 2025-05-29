@@ -1,0 +1,9 @@
+{
+  "layout": {
+    "description": "OWASP Cornucopia ist ein Mechanismus in Form eines Kartenspiels, mit dem Softwareentwicklungsteams Sicherheitsanforderungen in agilen, konventionellen und formalen Entwicklungsprozessen identifizieren können. Es ist sprach-, plattform- und technologieagnostisch.",
+    "title": "OWASP Cornucopia - Bedrohungsmodellierung für alle überall - Spielen Sie nicht mit Ihren Sicherheitsspielen damit",
+    "twitter": {
+      "description": "OWASP Cornucopia ist ein Mechanismus in Form eines Kartenspiels, mit dem Softwareentwicklungsteams Sicherheitsanforderungen in agilen, konventionellen und formalen Entwicklungsprozessen identifizieren können. Es ist sprach-, plattform- und technologieagnostisch."
+    }
+  }
+}

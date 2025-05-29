@@ -1,0 +1,25 @@
+{
+  "swags": {
+    "title": "Beute",
+    "h3": {
+      "1": "Aufkleber",
+      "2": "Tassen und Tassen",
+      "3": "Wo finde ich die Entwurfsdatei?"
+    },
+    "alt": {
+      "1": "Aufkleber - schwarz für Handy",
+      "2": "Aufkleber - schwarz für Web",
+      "3": "Aufkleber - weiß für Web",
+      "4": "Aufkleber - weiß für Handy",
+      "5": "T-Shirt - auf Dev vertrauen wir - zurück",
+      "6": "T-Shirt - auf dev vertrauen wir - vorne",
+      "7": "T-Shirt - auf dev vertrauen wir - mobil - linke Seite",
+      "8": "T-Shirt - auf dev vertrauen wir - mobil - rechte Seite",
+      "9": "Bierglas",
+      "10": "Bierkrug",
+      "11": "Kaffeetasse",
+      "12": "Cornucopia Tassen",
+      "13": "Cornucopia Oktober Fest Bierkrug"
+    }
+  }
+}
