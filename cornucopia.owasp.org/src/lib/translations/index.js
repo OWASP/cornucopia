@@ -2,6 +2,7 @@
 import i18n from 'sveltekit-i18n';
 import en from './en';
 import es from './es';
+import de from './de';
 import lang from './lang';
 
 /** @type {import('sveltekit-i18n').Config} */
