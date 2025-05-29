@@ -1,0 +1,51 @@
+{
+  "cards": {
+    "title": "Karten anzeigen",
+    "p1": "Beide aktuellen Kartensätze haben sechs Farben und es gibt auch zwei Jokerkarten. Jede Farbe enthält 13 Karten (Ass, 2–10, Bube, Dame und König). Diese Seite enthält den Karten-Browser, mit dem du durch jede der Karten in den OWASP Cornucopia-Kartensätzen blättern kannst.",
+    "button": {
+      "1": "Webanwendungsversion",
+      "2": "Mobile App-Version"
+    },
+    "h2": {
+      "1": "Webanwendungsversion",
+      "2": "Mobile App-Version"
+    },
+    "p2": "Früher als Ecommerce Website Edition bezeichnet. Anstelle der STRIDE-Farben von EoP wurden die Farben basierend auf der Struktur der OWASP Secure Coding Practices – Quick Reference Guide (SCP) ausgewählt. Der Inhalt stammt hauptsächlich aus dem SCP, berücksichtigt aber auch Abschnitte aus dem <a rel=\"noopener\" href=\"https://owasp.org/www-project-application-security-verification-standard/\">OWASP Application Security Verification Standard</a>, dem <a rel=\"noopener\" href=\"https://owasp.org/www-project-web-security-testing-guide\">OWASP Web Security Testing Guide</a> und David Rooks <a rel=\"noopener\" href=\"https://owasp.org/www-pdf-archive//OWASP-SecureDevPrinciples-David-Rook.pdf\">Prinzipien der sicheren Entwicklung</a>. Diese lieferten fünf Farben, und eine sechste namens „Cornucopia“ wurde für alles andere erstellt:",
+    "p3": "Das zweite Cornucopia-Kartenset, die „Mobile App Edition“, folgt denselben Prinzipien und Spielregeln wie das ursprüngliche OWASP Cornucopia, hat jedoch unterschiedliche Farben, die auf den <a rel=\"noopener\" href=\"https://mas.owasp.org/MASVS/\">MASVS-Kategorien</a> basieren, zusätzlich zur Cornucopia-Farbe, die Bedrohungen im Zusammenhang mit mobiler Malware und Datenschutzproblemen enthält:",
+    "card": {
+      "p1": "Zurück zur Übersicht"
+    },
+    "cardFound": {
+      "a": "Wie wird gespielt?"
+    },
+    "cardBrowser": {
+      "a1": {
+        "title": "Vorherige Karte anzeigen"
+      },
+      "a2": {
+        "title": "Nächste Karte anzeigen"
+      }
+    },
+    "webAppCardTaxonomy": {
+      "h1": {
+        "1": "Zuordnungen",
+        "2": "Angriffe"
+      }
+    },
+    "ASVSOverview": {
+      "p1": "Keine passenden Zuordnungen gefunden."
+    },
+    "mobileAppCardTaxonomy": {
+      "h1": {
+        "1": "Zuordnungen",
+        "2": "Angriffe"
+      }
+    },
+    "MASVSOverview": {
+      "p1": "Keine passenden Zuordnungen gefunden."
+    },
+    "attacks": {
+      "p1": "Keine Angriffe registriert!"
+    }
+  }
+}
