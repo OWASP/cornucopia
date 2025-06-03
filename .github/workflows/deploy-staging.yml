@@ -51,7 +51,7 @@
               workingDirectory: "cornucopia.owasp.org"
               apiToken: ${{ secrets.CLOUDFLARE_STAGING_API_TOKEN }}
               accountId: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
-              wranglerVersion: "3.105.1"
+              wranglerVersion: "4.18.0"
               command: pages deploy build --project-name=cornucopia --branch head
           - name: Deploy the worker routes
             uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
