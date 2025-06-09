@@ -63,3 +63,8 @@ Add testing.
 ### 2025-05-23
 
  - Adding Copi - The Cornucopia Game Engine
+
+## Changes $ Updates
+### 2025-06-09
+
+ - Adding Elevation of MLSec through Copi
