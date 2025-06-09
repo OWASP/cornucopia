@@ -80,6 +80,31 @@
       </div>
     </div>
 
+  <% @card.edition == "mlsec" -> %>
+
+    <div class={["card", "mlsec", Slug.slugify(@card.category), "n" <> @card.value]}>
+      <div class="left-value"><%= @card.value %></div>
+      <div class="main-content">
+        <p class="category"><%= @card.category %></p>
+        <%= if @card.value in ["A"] do %>
+          <p class="risk mlsec">&nbsp;</p>
+          <p class="biml mlsec">&nbsp;</p>
+          <p class="description mlsec"><%= @card.description %></p>
+        <% else %>
+          <p class="risk mlsec"><%= @card.misc %></p>
+          <p class="biml mlsec">
+          <%= if @card.biml != nil do %>
+              [ <%= @card.biml %> ]
+          <% else %>
+              &nbsp;
+          <% end %>
+          </p>
+          <p class="description mlsec"><%= @card.description %></p>
+        <% end %>
+
+      </div>
+    </div>
+
   <% @card.edition in ["mobileapp", "masvs"] -> %>
 
       <div class={["card", @card.value, "#{Slug.slugify @card.category}-mobile"]}>
