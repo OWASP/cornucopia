@@ -1,6 +1,5 @@
 ---
   name: Copi Build and Test
-
   on:
     pull_request_target:
       paths:
