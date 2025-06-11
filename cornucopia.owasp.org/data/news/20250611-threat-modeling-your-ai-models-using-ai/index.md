@@ -1,15 +1,15 @@
 ---
-date: 20250519
+date: 20250611
 author: johan-sydseter
 tags: owasp,cornucopia,copi,gamification,threat-modeling
 hidden: false
 description: Threat modeling your AI models using AI?
 ---
-![](survival_banner.png)
+![Marvin The paranoid Android. see: https://en.wikipedia.org/wiki/File:Marvin_(HHGG).jpg](survival_banner.png)
 
 # Threat modeling your AI models using AI?
 
-_Are you letting the AI do the threat modeling for you? There is no need to let the machines take over the world! Threat model using Elevation of MLSec on copi.owasp.org instead. Our survival depends on it! At [copi.owasp.org](copi.owasp.org) you can now play Elevation of MLSec to threat model your AI models._
+_Are you letting the AI do the threat modeling for you? There is no need to let the machines take over the world! Threat model using Elevation of MLSec on copi.owasp.org instead. Our survival depends on it! At [copi.owasp.org](https://copi.owasp.org) you can now play Elevation of MLSec to threat model your AI models._
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
