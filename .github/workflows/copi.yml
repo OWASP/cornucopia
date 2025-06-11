@@ -54,7 +54,7 @@
 
         - name: Build the project
           working-directory: copi.owasp.org
-          run: mix compile
+          run: mix clean && mix compile
           
         - name: Run tests
           working-directory: copi.owasp.org
