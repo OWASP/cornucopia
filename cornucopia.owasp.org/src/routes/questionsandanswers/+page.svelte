@@ -1,7 +1,7 @@
 <script>
     import SvelteMarkdown from 'svelte-markdown';
     import renderers from '$lib/components/renderers/renderers';
-    import {readLang} from "$lib/stores/stores";
+    import {readLang, readTranslation} from "$lib/stores/stores";
 
     /** @type {{data: any}} */
     let { data } = $props();
