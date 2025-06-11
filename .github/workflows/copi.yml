@@ -2,13 +2,10 @@
   name: Copi Build and Test
 
   on:
-      # Triggers the workflow on push or pull request events but only for the main branch
-    push:
-      branches: ["**"]
-    #pull_request_target:
-    #  paths:
-    #  - 'copi.owasp.org/**'
-    #  - '.github/workflows/copi.yml'
+    pull_request_target:
+      paths:
+      - 'copi.owasp.org/**'
+      - '.github/workflows/copi.yml'
     workflow_dispatch:
   env:
     MIX_ENV: test
