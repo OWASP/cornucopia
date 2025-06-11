@@ -4,7 +4,7 @@ defmodule CopiWeb.CardControllerTest do
 
   alias Copi.Cornucopia
 
-  @create_attrs %{capec: [], category: "some category", description: "some description", edition: "eop", external_id: "TEST2", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_masvs: [], owasp_mastg: [] ,owasp_scp: [], safecode: [], value: "2", version: "1.0"}
+  @create_attrs %{capec: [], category: "some category", description: "some description", edition: "eop", external_id: "TEST2", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_masvs: [], biml: "", owasp_mastg: [] ,owasp_scp: [], safecode: [], value: "2", version: "1.0"}
 
   def fixture(:card) do
     Repo.delete_all(Cornucopia.Card)

@@ -48,6 +48,7 @@ defmodule Copi.CardMigration do
         edition = cards["meta"]["edition"]
         for suit <- cards["suits"] do
           for card <- suit["cards"] do
+            biml = if Map.has_key?(card, "biml"), do: card["biml"], else: ""
             this_card = Repo.get_by!(Card, category: suit["name"], value: card["value"], edition: edition)
 
             this_card =  case edition do
@@ -79,7 +80,7 @@ defmodule Copi.CardMigration do
                   safecode: set_mappings_for_card(card["safecode"])
               )
               "mlsec" -> Ecto.Changeset.change(this_card,
-                  biml: card["biml"],
+                  biml: biml,
                   owasp_scp: [],
                   owasp_asvs: [],
                   owasp_masvs: [],

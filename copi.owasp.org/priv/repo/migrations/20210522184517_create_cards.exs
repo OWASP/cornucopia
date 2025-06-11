@@ -12,6 +12,8 @@ defmodule Copi.Repo.Migrations.CreateCards do
       add :version, :string
       add :owasp_scp, {:array, :string}
       add :owasp_asvs, {:array, :string}
+      add :owasp_masvs, {:array, :string}
+      add :owasp_mastg, {:array, :string}
       add :owasp_appsensor, {:array, :string}
       add :capec, {:array, :string}
       add :safecode, {:array, :string}

@@ -60,10 +60,6 @@ suits:
     id: "EMRK"
     value: "K"
     biml: "model:1:improper re-use"
-  - 
-    id: "EMRA"
-    value: "A"
-    biml: "-"
 -
   id: "EIR"
   name: "Input Risk"
@@ -116,10 +112,6 @@ suits:
     id: "EIRK"
     value: "K"
     biml: "input:1:adversarial examples"
-  - 
-    id: "EIRA"
-    value: "A"
-    biml: "-"
 -
   id: "EOR"
   name: "Output Risk"
@@ -172,10 +164,6 @@ suits:
     id: "EORK"
     value: "K"
     biml: "output:1:d i rect"
-  -
-    id: "EORA"
-    value: "A"
-    biml: "-"
 - 
   id: "EDR"
   name: "Dataset Risk"
@@ -228,7 +216,3 @@ suits:
     id: "EDRK"
     value: "K"
     biml: "data:1:poisoning"
-  -
-    id: "EDRA"
-    value: "A"
-    biml: "-"

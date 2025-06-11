@@ -3,7 +3,8 @@ defmodule Copi.Repo.Migrations.CreateMobileDeckFields do
 
   def change do
     alter table(:cards) do
-      add :biml, :string, default: ""
+      Ecto.Migration.remove_if_exists :biml, :string
+      add :biml, :string
     end
   end
 end
