@@ -1,0 +1,284 @@
+---
+meta:
+  edition: "mlsec"
+  component: "cards"
+  language: "EN"
+  version: "1.0"
+suits:
+- 
+  id: "EMR"
+  name: "Model Risk"
+  cards:
+  - 
+    id: "EMR2"
+    value: "2"
+    desc: "When a model is filled with too much overlapping information, collisions in the representation space may lead to the model “forgetting” information."
+    misc: "Catastrophic forgetting"
+  -
+    id: "EMR3"
+    value: "3"
+    desc: "An ML system may end up oscillating and not properly converging if using gradient descent in a space with a misleading gradient."
+    misc: "Oscillation"
+  -
+    id: "EMR4"
+    value: "4"
+    desc: "Setting weights and thresholds with a bad RNG can damage system behavior and lead to subtle security issues."
+    misc: "Randomness"
+  -
+    id: "EMR5"
+    value: "5"
+    desc: "When an ML system system online keeps learning during operations, clever attackers can nudge the model so that it drifts from its intended operational profile."
+    misc: "Online system manipulation"
+  -
+    id: "EMR6"
+    value: "6"
+    desc: "The model learns its training dataset so well that it's no longer able to generalize outside of the training set and will perform poorly."
+    misc: "Overfitting"
+  -
+    id: "EMR7"
+    value: "7"
+    desc: "An attacker that can control the hyperparameters can manipulate the future training of the machine learning model"
+    misc: "Hyperparameters"
+  -
+    id: "EMR8"
+    value: "8"
+    desc: "The server where the model is hosted is insufficiently protected against unauthorized parties."
+    misc: "Hosting"
+  -
+    id: "EMR9"
+    value: "9"
+    desc: "Sensitive hyperparameters that have been set experimentally may not be sufficient for the intended problem space, and can lead to overfitting."
+    misc: "Hyperparameter sensitivity"
+  -
+    id: "EMRX"
+    value: "10"
+    desc: "Stealing ML system knowledge is possible through direct input/output observation, enabling attackers to reverse engineer the model."
+    misc: "Model theft"
+  -
+    id: "EMRJ"
+    value: "J"
+    desc: "Most ML algorithms learn a great deal about its data and store a representation internally. This data may be sensitive, and can potentially be extracted from the model."
+    misc: "Training set reveal"
+  - 
+    id: "EMRQ"
+    value: "Q"
+    desc: "Model transfer leads to the possibility that what is being reused may be a Trojaned (or otherwise damaged) version of the model."
+    misc: "Trojanized model"
+  -
+    id: "EMRK"
+    value: "K"
+    desc: "ML models are re-used in transfer situations, where a pre-trained model is specialized toward a new use case. The model may be transferred into a problem space it's not designed for."
+    misc: "Improper re-use of model"
+  - 
+    id: "EMRA"
+    value: "A"
+    desc: "You have invented your own risk associated with machine learning models."
+    misc: ""
+-
+  id: "EIR"
+  name: "Input Risk"
+  cards:
+  - 
+    id: "EIR2"
+    value: "2"
+    desc: "Some LLM chat systems allow user feedback as a parameter for tuning their system. This can be abused by attackers that give feedback in a coordinated fashion to nudge the ML system."
+    misc: "LLM feedback scores"
+  -
+    id: "EIR3"
+    value: "3"
+    desc: "An LLM model is often open to the public, which makes it susceptible to attacks from users."
+    misc: "Open to the public"
+  - 
+    id: "EIR4"
+    value: "4"
+    desc: "A sponge attack provides an LLM system with input that is more costly to process than “normal”. Like a Dos attack, as it seeks to exhaust processing budget."
+    misc: "Sponge input"
+  - 
+    id: "EIR5"
+    value: "5"
+    desc: "English, the main interface language for LLMs, is an ambiguous interface. Natural language can be misleading, making LLMs susceptible to misinformation."
+    misc: "Input ambiguity"
+  -
+    id: "EIR6"
+    value: "6"
+    desc: "An ML system engineered with one text encoding scheme in mind might yield surprising results if presented with a differently encoded text."
+    misc: "Text encoding"
+  - 
+    id: "EIR7"
+    value: "7"
+    desc: "Denial of Service attacks can have a massive impact on a critical ML system. When an ML system breaks down, recovery may not be possible."
+    misc: "Denial of service"
+  -
+    id: "EIR8"
+    value: "8"
+    desc: "A user may expose their personal data and their interests to the owners of an ML system when they interact with the system."
+    misc: "User risk"
+  - 
+    id: "EIR9"
+    value: "9"
+    desc: "Dirty inputs can be hard to process, and may be leveraged by an attacker adding noise in their prompts or in data sources for future training."
+    misc: "Dirty input"
+  -
+    id: "EIR10"
+    value: "10"
+    desc: "Outside sources of input may be manipulated by an attacker."
+    misc: "Controlled input stream"
+  - 
+    id: "EIRJ"
+    value: "J"
+    desc: "ML system output to the real world may feed back into training data or input, leading to a feedback loop, termed recursive pollution."
+    misc: "Looped input"
+  -
+    id: "EIRQ"
+    value: "Q"
+    desc: "Input manipulation for LLMs. An attacker manipulates a large language model (LLM} through malicious inputs to override initial instructions given in system prompts."
+    misc: "Prompt injection"
+  - 
+    id: "EIRK"
+    value: "K"
+    desc: "Fool a machine learning system by providing malicious input that causes the ML system to make a false prediction or categorization."
+    misc: "Malicious input"
+  - 
+    id: "EIRA"
+    value: "A"
+    desc: "You have invented your own risk associated with machine learning input."
+    misc: ""
+-
+  id: "EOR"
+  name: "Output Risk"
+  cards:
+  - 
+    id: "EOR2"
+    value: "2"
+    desc: "If an ML model is integrated into a security decision and raises too many alarms, its output may be ignored ."
+    misc: "Cry wolf"
+  -
+    id: "EOR3"
+    value: "3"
+    desc: "ML systems that operate with high impact decisions based on personal data carry the risk of illegal discrimination based on bias ."
+    misc: "Black box discrimination"
+  - 
+    id: "EOR4"
+    value: "4"
+    desc: "Dependence on an LLM without oversight may lead to misinformation and legal concerns. It will also be hard to detect an attack against the LLM system ."
+    misc: "LLM overreliance"
+  - 
+    id: "EOR5"
+    value: "5"
+    desc: "In far too many cases with ML, nobody is really sure how the trained systems do what they do. This negatively affects trustworthiness ."
+    misc: "Inscrutability"
+  -
+    id: "EOR6"
+    value: "6"
+    desc: "Bad output due to internal bias, malicious input or other attacks may escape into the world ."
+    misc: "Miscategorization"
+  -
+    id: "EOR7"
+    value: "7"
+    desc: "It is easier to perform attacks undetected on a black-box system which is not transparent about how it works ."
+    misc: "Transparency"
+  -
+    id: "EOR8"
+    value: "8"
+    desc: "An ML model's confidence scores can help an attacker tweak inputs to make the system misbehave ."
+    misc: "Confidence scores"
+  - 
+    id: "EOR9"
+    value: "9"
+    desc: "LLMs are stochastic in their nature, and can generate highly convincing misinformation in their attempt to satisfy the prediction of the next tokens from a prompt."
+    misc: "Wrongness"
+  -
+    id: "EOR10"
+    value: "10"
+    desc: "An LLM-based system may undertake actions leading to unintended consequences if granted excessive functionality, permissions, or autonomy ."
+    misc: "Excessive LLM agency"
+  -
+    id: "EORJ"
+    value: "J"
+    desc: "An ML model integrated into a system with its output treated as high confidence data may cause a range of unexpected issues ."
+    misc: "Overconfidence"
+  -
+    id: "EORQ"
+    value: "Q"
+    desc: "When ML output is input to a larger decision process, errors in the ML subsystem may propagate in unforeseen ways ."
+    misc: "Error propagation"
+  - 
+    id: "EORK"
+    value: "K"
+    desc: "An attacker directly manipulates the output stream getting between the ML system and its receiver. This may be hard to detect because models are sometimes opaque ."
+    misc: "Output manipulation"
+  -
+    id: "EORA"
+    value: "A"
+    desc: "You have invented your own risk associated with machine learning output ."
+    misc: ""
+- 
+  id: "EDR"
+  name: "Dataset Risk"
+  cards:
+  - 
+    id: "EDR2"
+    value: "2"
+    desc: "Metadata may accidentally degrade generalization since a model learns a feature of the meta data instead of the content itself."
+    misc: "Metadata"
+  - 
+    id: "EDR3"
+    value: "3"
+    desc: "Copyrighted, privacy protected or otherwise legally encumbered data are scraped from the internet to train ML models. This can lead to expensive legal entanglements."
+    misc: "Data rights"
+  -
+    id: "EDR4"
+    value: "4"
+    desc: "Bad data partitions for training, validation and testing datasets may lead to a misbehaving ML system."
+    misc: "Partitioning"
+  - 
+    id: "EDR5"
+    value: "5"
+    desc: "Normalization changes the nature of raw data, and may destroy the feature of interest by introducing too much bias."
+    misc: "Normalization"
+  - 
+    id: "EDR6"
+    value: "6"
+    desc: "The way data is annotated into features can be directly attacked, introducing attacker bias into a system."
+    misc: "Annotation"
+  -
+    id: "EDR7"
+    value: "7"
+    desc: "Pre-processing and encoding of the data can lead to encoding integrity issues if the data has bias or discrimination in its nature."
+    misc: "Encoding integrity"
+  -
+    id: "EDR8"
+    value: "8"
+    desc: "A bad evaluation dataset can give unrealistic projections to how the model will perform when it is shipped to production."
+    misc: "Bad evaluation data"
+  -
+    id: "EDR9"
+    value: "9"
+    desc: "Data may be stored and managed insecurely. Who has access to the data, and why?"
+    misc: "Storage"
+  -
+    id: "EDR10"
+    value: "10"
+    desc: "An ML model (LLM or other) generates incorrect content that content finds its way into future training data, which can damage the accuracy and reliability of the model."
+    misc: "Recursive pollution"
+  -
+    id: "EDRJ"
+    value: "J"
+    desc: "If distributed datasets do not have proper integrity checks in place, data can be tampered with undetected as it passes between components."
+    misc: "Data integrity"
+  -
+    id: "EDRQ"
+    value: "Q"
+    desc: "Sensitive and confidential data that is used for ML training can be disclosed with extraction attacks."
+    misc: "Data confidentiality"
+  -
+    id: "EDRK"
+    value: "K"
+    desc: "An attacker intentionally manipulates data to disrupt, introduce bias, control or otherwise influence ML training. On the internet, lots of data are already poisoned “by default”."
+    misc: "Data poisoning"
+  -
+    id: "EDRA"
+    value: "A"
+    desc: "You have invented your own risk associated with machine learning datasets."
+    misc: ""
+paragraphs: []

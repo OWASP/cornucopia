@@ -346,6 +346,11 @@ Except, where otherwise noted, content in this repository is licensed under a [C
 
 © 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md) 
 
+### Elevation of MLSec (MLSec)
+
+© 2024 Kantega AS. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-4.0](./LICENSE.md) 
+
+
 ### OWASP Cornucopia Mobile App Edition
 
 Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)

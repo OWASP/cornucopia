@@ -78,6 +78,16 @@ defmodule Copi.CardMigration do
                   capec: set_mappings_for_card(card["capec"]),
                   safecode: set_mappings_for_card(card["safecode"])
               )
+              "mlsec" -> Ecto.Changeset.change(this_card,
+                  biml: card["biml"],
+                  owasp_scp: [],
+                  owasp_asvs: [],
+                  owasp_masvs: [],
+                  owasp_mastg: [],
+                  owasp_appsensor: [],
+                  capec: [],
+                  safecode: []
+              )
               "mobileapp" -> Ecto.Changeset.change(this_card,
                   owasp_scp: [],
                   owasp_asvs: [],
