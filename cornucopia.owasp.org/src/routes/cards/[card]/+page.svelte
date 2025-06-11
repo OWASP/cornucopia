@@ -35,7 +35,16 @@
   }
 </script>
 <svelte:head>
+  {#if cardFound()}
     <link rel="canonical" href="/cards" />
+    <title>OWASP Cornucopia - {card.edition} - {card.name}</title>
+    <meta name="description" content="{card.desc}" />
+	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {card.suitName}, {card.id}" />
+    <meta property="og:title" content="OWASP Cornucopia - {card.edition} - {card.name}">
+    <meta property="og:description" content="{card.desc}">
+    <meta name="twitter:title" content="OWASP Cornucopia - {card.edition} - {card.name}">
+    <meta name="twitter:description" content="{card.desc}">
+  {/if}
 </svelte:head>
 <div>
 {#if cardFound()}

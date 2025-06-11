@@ -1,5 +1,10 @@
 {
   "webshop": {
-    "title": "Webshop"
+    "title": "Webshop",
+    "head": {
+      "title": "OWASP Cornucopia - Webshop",
+      "description": "Explore the OWASP Cornucopia webshops for bying the cards decks",
+      "keywords": "OWASP, Cornucopia, webshop, merchandise, card decks"
+    }
   }
 }

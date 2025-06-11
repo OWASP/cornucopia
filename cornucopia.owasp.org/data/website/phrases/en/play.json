@@ -1,5 +1,10 @@
 {
   "play": {
-    "title": "How to play"
+    "title": "How to play",
+    "head": {
+      "title": "OWASP Cornucopia - How to play",
+      "description": "Learn how to play the OWASP Cornucopia card game, including rules, strategies, and tips for effective threat modeling.",
+      "keywords": "OWASP, Cornucopia, play, card game, rules, strategies, threat modeling, security"
+    }
   }
 }

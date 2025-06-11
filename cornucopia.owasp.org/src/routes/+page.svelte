@@ -20,7 +20,15 @@
         suits = data.suits.get('webapp-en') as Suit[];
     }
 </script>
-
+<svelte:head>
+    	<title>{$t('layout.title')}</title>
+		<meta name="description" content="{$t('layout.description')}" />
+		<meta name="keywords" content="{$t('layout.keywords')}" />
+        <meta property="og:title" content="{$t('layout.title')}">
+        <meta property="og:description" content="{$t('layout.description')}">
+        <meta name="twitter:title" content="{$t('layout.title')}">
+        <meta name="twitter:description" content="{$t('layout.description')}">
+</svelte:head>
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
