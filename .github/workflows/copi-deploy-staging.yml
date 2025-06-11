@@ -51,9 +51,15 @@
           working-directory: copi.owasp.org
           run: mix deps.get
 
-        - name: Build the project
+        - name: Clean the project
+          working-directory: copi.owasp.org
+          run: mix clean && rm -rf _build
+        - name: Compile the project
           working-directory: copi.owasp.org
           run: mix compile
+        - name: Reset the DB
+          working-directory: copi.owasp.org
+          run: mix ecto.reset
           
         - name: Run tests
           working-directory: copi.owasp.org
