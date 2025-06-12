@@ -52,11 +52,17 @@
               accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
               wranglerVersion: "4.18.0"
               command: pages deploy build --project-name=cornucopia
+            env: 
+              CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+              CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           - name: Deploy the worker routes
             uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
             with:
-                workingDirectory: "cornucopia.owasp.org"
-                apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-                accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                wranglerVersion: "4.18.0"
-                command: deploy script/nonce-worker.js --config script/wrangler.toml --env production
+              workingDirectory: "cornucopia.owasp.org"
+              apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+              accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+              wranglerVersion: "4.18.0"
+              command: deploy script/nonce-worker.js --config script/wrangler.toml --env production
+            env: 
+              CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+              CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
