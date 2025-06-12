@@ -1,0 +1,10 @@
+{
+    "questionsandanswers": {
+        "title": "Q & A",
+        "head": {
+            "title": "OWASP Cornucopia - Questions & Answers",
+            "description": "Explore the OWASP Cornucopia Questions & Answers section, where you can find answers to common questions about the OWASP Cornucopia project.",
+            "keywords": "OWASP, Cornucopia, Questions, Answers, FAQ, Security, Card Decks"
+        }
+    }
+}

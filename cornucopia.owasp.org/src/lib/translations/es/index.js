@@ -9,9 +9,10 @@ import swagsPage from '$data/website/phrases/es/swags.json';
 import taxonomyPage from '$data/website/phrases/es/taxonomy.json';
 import webshopPage from '$data/website/phrases/es/webshop.json';
 import getTheGamePage from '$data/website/phrases/es/getthegame.json';
-import copiPage from '$data/website/phrases/en/copi.json';
+import copiPage from '$data/website/phrases/es/copi.json';
 import layoutPage from '$data/website/phrases/es/layout.json';
-
+import roadmapPage from '$data/website/phrases/es/roadmap.json';
+import authorPage from '$data/website/phrases/es/author.json';
 export default {
   layout: layoutPage.layout,
   about: aboutPage.about,
@@ -26,5 +27,7 @@ export default {
   taxonomy: taxonomyPage.taxonomy,
   webshop: webshopPage.webshop,
   getthegame: getTheGamePage.getthegame,
+  roadmap: roadmapPage.roadmap,
+  author: authorPage.author
 
 }

@@ -11,7 +11,8 @@ import webshopPage from '$data/website/phrases/en/webshop.json';
 import getTheGamePage from '$data/website/phrases/en/getthegame.json';
 import copiPage from '$data/website/phrases/en/copi.json';
 import layoutPage from '$data/website/phrases/en/layout.json';
-
+import roadmapPage from '$data/website/phrases/en/roadmap.json';
+import authorPage from '$data/website/phrases/en/author.json';
 export default {
   layout: layoutPage.layout,
   about: aboutPage.about,
@@ -25,5 +26,7 @@ export default {
   swags: swagsPage.swags,
   taxonomy: taxonomyPage.taxonomy,
   webshop: webshopPage.webshop,
-  getthegame: getTheGamePage.getthegame
+  getthegame: getTheGamePage.getthegame,
+  roadmap: roadmapPage.roadmap,
+  author: authorPage.author
 };

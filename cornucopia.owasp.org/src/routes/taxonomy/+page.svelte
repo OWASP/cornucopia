@@ -11,6 +11,13 @@
 </script>
 <svelte:head>
     <link rel="canonical" href="/" />
+    <title>{$t('taxonomy.head.title')}</title>
+	<meta name="description" content="{$t('taxonomy.head.description')}" />
+	<meta name="keywords" content="{$t('taxonomy.head.keywords')}" />
+    <meta property="og:title" content="{$t('taxonomy.head.title')}">
+    <meta property="og:description" content="{$t('taxonomy.head.description')}">
+    <meta name="twitter:title" content="{$t('taxonomy.head.title')}">
+    <meta name="twitter:description" content="{$t('taxonomy.head.description')}">
 </svelte:head>
 <div>
 {#if content != ''}

@@ -6,6 +6,13 @@
 </script>
 <svelte:head>
     <link rel="canonical" href="/author" />
+        <title>OWASP Cornucopia - {data.author.name}</title>
+        <meta name="description" content="OWASP Cornucopia - {data.author.name}" />
+        <meta name="keywords" content="OWASP, Cornucopia, {data.author.name}" />
+        <meta property="og:title" content="OWASP Cornucopia - {data.author.name}">
+        <meta property="og:description" content="OWASP Cornucopia - {data.author.name}">
+        <meta name="twitter:title" content="OWASP Cornucopia - {data.author.name}">
+        <meta name="twitter:description" content="OWASP Cornucopia - {data.author.name}">
 </svelte:head>
 <div>
 <div class="container">

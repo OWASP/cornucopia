@@ -11,6 +11,15 @@
     const lang = readLang();
     let content = data.content.get($lang) || data.content.get('en');
 </script>
+<svelte:head>
+    <title>{$t('printing.head.title')}</title>
+    <meta name="description" content="{$t('news.head.description')}" />
+	<meta name="keywords" content="{$t('news.head.keywords')}" />
+    <meta property="og:title" content="{$t('news.head.title')}">
+    <meta property="og:description" content="{$t('news.head.description')}">
+    <meta name="twitter:title" content="{$t('news.head.title')}">
+    <meta name="twitter:description" content="{$t('news.head.description')}">
+</svelte:head>
 <div>
 {#if content != ''}
 <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>

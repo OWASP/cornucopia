@@ -7,11 +7,13 @@ If you feel like and have the opportunity to help with any of the issues below, 
 
 Ordered alphabetically and not according to priority.
 
+- Create the companion deck for OWASP Cornucopia [cornucopia #1259](https://github.com/OWASP/cornucopia/issues/1259 'OWASP Cornucopia Github issue [external]')
+- Ensure the WebsiteApp edition uses ASVS 5.0 [cornucopia #1320](https://github.com/OWASP/cornucopia/issues/1320 'OWASP Cornucopia Github issue [external]')
 - Build the requirement map on the card using OpenCRE for easier maintenance and collaboration. [cornucopia #595](https://github.com/OWASP/cornucopia/issues/595 'OWASP Cornucopia Github issue [external]')
-- Endpoint per card with more information available. [copi #6](https://github.com/secure-delivery/copi/issues/6 'OWASP copi issue [external]')
 - Ensure the converter can create print-ready proofs for print-on-demand jobs. [cornucopia #583](https://github.com/OWASP/cornucopia/issues/583 'OWASP Cornucopia Github issue [external]')
 - Language review of the existing translations. [cornucopia #596](https://github.com/OWASP/cornucopia/issues/596 'OWASP Cornucopia Github issue [external]') and [cornucopia #1102](https://github.com/OWASP/cornucopia/issues/1102)
-- Seek worldwide translators and incorporate additional translations for other languages.
+- Seek worldwide translators and incorporate additional translations for other languages for the decks and, especially, the website.
+- For a full list of issues, please have a look at our [Github issue list](https://github.com/OWASP/cornucopia/issues).
 
 ## Getting Involved
 
