@@ -9,6 +9,8 @@
       hardening:
         name: Hardening
         runs-on: ubuntu-latest
+        permissions:
+          pull-requests: write
         steps:
           # Make sure we have some code to test
           - name: Harden runner
