@@ -4,7 +4,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
     paths:
-      - '.github/**'
       - 'source/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
@@ -142,11 +141,11 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
           PR_NOTES: |
+              [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
             Build artifacts:
             | Name | Link |
             |------|------|
             | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
-            [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
         with:
           script: |
             github.rest.issues.createComment({
