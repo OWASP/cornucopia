@@ -125,5 +125,8 @@ jobs:
             output/cornucopia-build-files.zip
           if-no-files-found: error
   call-deploy-staging:
+    permissions:
+      contents: read
+      pull-requests: write
     needs: uploadoutputfiles
     uses: ./.github/workflows/comment-on-pr-with-artifacts.yml

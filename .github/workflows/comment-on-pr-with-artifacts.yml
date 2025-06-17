@@ -7,6 +7,8 @@
       contents: read
     jobs:
       hardening:
+        permissions:
+          pull-requests: none
         uses: ./.github/workflows/hardening.yaml
       comment-on-pr-with-artifacts:
         permissions:
