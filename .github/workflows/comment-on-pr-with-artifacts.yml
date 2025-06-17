@@ -4,6 +4,7 @@
       workflow_call:
       workflow_dispatch:
     permissions:
+      pull-requests: write
       contents: read
     jobs:
       hardening:
@@ -11,9 +12,6 @@
           pull-requests: none
         uses: ./.github/workflows/hardening.yaml
       comment-on-pr-with-artifacts:
-        permissions:
-          pull-requests: write
-          contents: read
         name: Hardening
         runs-on: ubuntu-latest
         steps:

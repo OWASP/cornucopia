@@ -12,6 +12,7 @@ on:
       - 'resources/templates/**'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 permissions:
+  pull-requests: write
   contents: read
 jobs:
   hardening:
