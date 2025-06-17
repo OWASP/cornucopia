@@ -3,6 +3,8 @@
     on:
       workflow_call:
       workflow_dispatch:
+    permissions:
+      contents: read
     jobs:
       hardening:
         uses: ./.github/workflows/hardening.yaml
@@ -13,17 +15,6 @@
         name: Hardening
         runs-on: ubuntu-latest
         steps:
-          # Make sure we have some code to test
-          - name: Harden runner
-            uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
-            with:
-              egress-policy: block
-              allowed-endpoints: >
-                api.github.com:443
-                github-cloud.githubusercontent.com:443
-                github.com:443
-                motd.ubuntu.com:443
-                keys.openpgp.org:443
           - name: Get Artifact URL & PR Info
             env:
               GITHUB_TOKEN: ${{ github.token }}
