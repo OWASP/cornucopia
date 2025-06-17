@@ -3,17 +3,12 @@ name: Run Tests and generate output files
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
-    branches:
-      - master
     paths:
       - '.github/**'
       - 'source/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-permissions:
-  pull-requests: write
-  contents: read
 jobs:
   hardening:
     uses: ./.github/workflows/hardening.yaml
@@ -128,8 +123,5 @@ jobs:
             output/cornucopia-build-files.zip
           if-no-files-found: error
   call-deploy-staging:
-    permissions:
-      pull-requests: write
-      contents: read
     needs: uploadoutputfiles
     uses: ./.github/workflows/comment-on-pr-with-artifacts.yml
