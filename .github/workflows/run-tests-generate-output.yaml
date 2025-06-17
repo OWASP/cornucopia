@@ -129,5 +129,6 @@ jobs:
   call-deploy-staging:
     permissions:
       pull-requests: write
+      contents: read
     needs: uploadoutputfiles
     uses: ./.github/workflows/comment-on-pr-with-artifacts.yml
