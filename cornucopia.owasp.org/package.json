@@ -43,7 +43,7 @@
 		"sveltekit-i18n": "^2.4.2",
 		"sync-request": "^6.1.0",
 		"vite-plugin-restart": "^0.4.2",
-		"vite-plugin-static-copy": "^3.0.0"
+		"vite-plugin-static-copy": "^3.0.2"
 	},
 	"pnpm": {
 		"auditConfig": {
