@@ -141,11 +141,14 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
           PR_NOTES: |
-              [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
-            Build artifacts:
+            [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
+
+            ## Build artifacts:
+            
             | Name | Link |
             |------|------|
             | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
+            
         with:
           script: |
             github.rest.issues.createComment({
