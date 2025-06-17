@@ -25,9 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     needs: runtests
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -132,23 +129,27 @@ jobs:
           cp output/owasp_cornucopia_webapp_2.1_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.1_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.1_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_2.1_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_2.1_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.1_leaflet_tarot_en.idml output/cornucopia_webapp/
           zip output/owasp_cornucopia_mobileapp_1.1_en.zip -r output/cornucopia_mobileapp/Links/* output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_mobileapp_scoresheet.pdf
           zip output/owasp_cornucopia_webapp_2.1_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
-      - name: Create pull request artifacts
-        uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
-        with:
-          commit: ${{ github.event.pull_request.head.sha }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          comment-message: "The generated Cornucopia cards in this pull request."
-          artifacts-branch: tmp-${{ github.event.pull_request.head.ref }}-artifacts
-          artifacts: |
-            output/eop-5.0.zip
-            output/owasp_cornucopia_mobileapp_1.1_en.zip
-            output/owasp_cornucopia_webapp_2.1_en.zip
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_en.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_es.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_fr.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_nl.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_no-nb.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-br.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-pt.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx
+          zip output/cornucopia-build-files.zip -r \
+            output/eop-5.0.zip \
+            output/owasp_cornucopia_mobileapp_1.1_en.zip \
+            output/owasp_cornucopia_webapp_2.1_en.zip \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_en.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_es.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_fr.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_nl.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_no-nb.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-br.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-pt.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx \
             output/owasp_cornucopia_webapp_2.1_guide_bridge_it.docx
+      - name: Upload output files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          retention-days: 1
+          name: cornucopia-build-files.${{ github.sha }}.zip
+          path: |
+            output/cornucopia-build-files.zip
+          if-no-files-found: error
+  call-deploy-staging:
+    needs: uploadoutputfiles
+    uses: ./.github/workflows/comment-on-pr-with-artifacts.yml
