@@ -1,0 +1,56 @@
+---
+    name: Build The Cornucopia Website for Staging
+    on: 
+      pull_request:
+        paths:
+        - 'cornucopia.owasp.org/**'
+        - '.github/workflows/deploy-staging.yml'
+    permissions:
+      contents: read
+    jobs:
+      hardening:
+        name: Hardening
+        runs-on: ubuntu-latest
+        steps:
+          # Make sure we have some code to test
+          - name: Harden runner
+            uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+            with:
+              egress-policy: block
+              allowed-endpoints: >
+                api.github.com:443
+                github-cloud.githubusercontent.com:443
+                github.com:443
+                motd.ubuntu.com:443
+                keys.openpgp.org:443
+      build-website-staging:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+            with:
+              ref: ${{ github.event.pull_request.head.sha }}
+          - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+            name: Install pnpm
+            with:
+              version: 10.0.0
+              run_install: false
+          - name: Install Node.js
+            uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+            with:
+              node-version: 20.18.2
+          - name: Build
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm install          # Install dependencies
+              npm run build-stage   # Build staging version
+          - name: Archive production artifacts
+            uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+            with:
+              retention-days: 1
+              name: cornucopia-staging-build-artifact-${{ github.sha }}
+              path: |
+                cornucopia.owasp.org/build
+      call-deploy-staging:
+        needs: build-website-staging
+        uses: ./.github/workflows/deploy-website-staging.yml
