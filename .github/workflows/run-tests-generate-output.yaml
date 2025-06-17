@@ -13,8 +13,12 @@ permissions:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   hardening:
+    permissions:
+      contents: read
     uses: ./.github/workflows/hardening.yaml
   runtests:
+    permissions:
+      contents: read
     needs: hardening
     uses: ./.github/workflows/run-tests.yaml
   # If Tests pass, generate new output files
