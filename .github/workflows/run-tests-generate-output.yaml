@@ -6,6 +6,7 @@ on:
     branches:
       - master
     paths:
+      - '.github/**'
       - 'source/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
@@ -38,38 +39,17 @@ jobs:
           echo "parent=`git rev-parse HEAD`" >> "$GITHUB_ENV"
           echo "object_tree=`git write-tree`" >> "$GITHUB_ENV"
           git switch --orphan "tmp-$BRANCH_NAME-artifacts"
-      - name: Commit empty commit to the tmp artifact branch
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
-        env:
-          TARGET_BRANCH: ${{ github.event.pull_request.head.ref }}
-        with:
-          script: |
-            const { TARGET_BRANCH } = process.env
-            const commit_msg = "Upload artifacts"
-            const parent = "${{ env.parent}}";
-            const object_tree = "${{ env.object_tree}}";
-            const { data: commit } = await github.rest.git.createCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              message: commit_msg,
-              tree: object_tree,
-              parents: [parent]
-            });
-            try {
-              const { data: ref } = await github.rest.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: `refs/heads/tmp-${TARGET_BRANCH}-artifacts`,
-                sha: commit.sha
-              })
-            } catch (e) {
-              //The branch already exists
-            }
       - name: Checkout branch for pull request
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       # Set the pip environment up
+      - name: Update Comment
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |-
+              ## Test creating a comment.
       - name: Get Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
