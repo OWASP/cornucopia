@@ -1,5 +1,5 @@
 name: Run Tests and generate output files
-# Controls when the workflow will run
+# Controls when the workflow will run 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
@@ -127,5 +127,7 @@ jobs:
             output/cornucopia-build-files.zip
           if-no-files-found: error
   call-deploy-staging:
+    permissions:
+      pull-requests: write
     needs: uploadoutputfiles
     uses: ./.github/workflows/comment-on-pr-with-artifacts.yml

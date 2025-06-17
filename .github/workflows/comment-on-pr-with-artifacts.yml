@@ -7,10 +7,14 @@
       contents: read
     jobs:
       hardening:
-        name: Hardening
-        runs-on: ubuntu-latest
+        permissions:
+          pull-requests: none
+        uses: ./.github/workflows/hardening.yaml
+      comment-on-pr-with-artifacts:
         permissions:
           pull-requests: write
+        name: Hardening
+        runs-on: ubuntu-latest
         steps:
           # Make sure we have some code to test
           - name: Harden runner
