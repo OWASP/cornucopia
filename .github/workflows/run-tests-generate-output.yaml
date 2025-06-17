@@ -121,16 +121,27 @@ jobs:
             output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx \
             output/owasp_cornucopia_webapp_2.1_guide_bridge_it.docx
       - name: Upload output files
+        id: upload_artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           retention-days: 5
           name: cornucopia-build-files.${{ github.sha }}.zip
           path: |
             output/cornucopia-build-files.zip
-          if-no-files-found: error
-  call-deploy-staging:
-    permissions:
-      contents: read
-      pull-requests: write
-    needs: uploadoutputfiles
-    uses: ./.github/workflows/comment-on-pr-with-artifacts.yml
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_NOTES: |
+            Build artifacts:
+            | Name | Link |
+            |------|------|
+            | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${{ steps.upload_artifact.outputs.artifact-url }}) |
+            [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: process.env.PR_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.PR_NOTES
+            })
