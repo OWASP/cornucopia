@@ -1,11 +1,10 @@
 ---
-    name: Build and Test
+    name: Build and Test the Cornucopia Website
     on:
-        # Triggers the workflow on push or pull request events but only for the main branch
-        push:
-          paths:
-          - 'cornucopia.owasp.org/**'
-          - '.github/workflows/build-website.yml'
+      pull_request_target:
+        paths:
+        - 'cornucopia.owasp.org/**'
+        - '.github/workflows/build-website.yml'
     permissions:
       contents: read
     jobs:
@@ -24,7 +23,7 @@
                 github.com:443
                 motd.ubuntu.com:443
                 keys.openpgp.org:443
-      build:
+      build-website:
         runs-on: ubuntu-latest
         steps:
           - name: Checkout repository

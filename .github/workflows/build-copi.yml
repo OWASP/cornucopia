@@ -1,5 +1,5 @@
 ---
-  name: Copi Build and Test
+  name: Build and Test Copi
   on:
     pull_request_target:
       paths:
@@ -12,7 +12,7 @@
   permissions:
     contents: read
   jobs:
-    build-test:
+    build-test-copi:
       runs-on: ubuntu-latest # Or another supported runner
       services:
         postgres:

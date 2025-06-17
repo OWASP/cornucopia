@@ -1,7 +1,8 @@
 ---
-    name: Build The Cornucopia Website for Staging
+    name: Build and Deploy The Cornucopia Website for Staging
     on: 
-      pull_request:
+      push:
+        branches: [master]
         paths:
         - 'cornucopia.owasp.org/**'
         - '.github/workflows/deploy-staging.yml'

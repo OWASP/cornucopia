@@ -13,6 +13,7 @@
       comment-on-pr-with-artifacts:
         permissions:
           pull-requests: write
+          contents: read
         name: Hardening
         runs-on: ubuntu-latest
         steps:
