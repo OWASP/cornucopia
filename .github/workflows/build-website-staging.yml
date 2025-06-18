@@ -53,3 +53,4 @@
       call-deploy-staging:
         needs: build-website-staging
         uses: ./.github/workflows/deploy-website-staging.yml
+        secrets: inherit

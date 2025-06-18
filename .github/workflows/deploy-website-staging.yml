@@ -2,6 +2,13 @@
     name: Deploy The Cornucopia Website on Staging
     on:
       workflow_call:
+        secrets:
+          CLOUDFLARE_STAGING_API_TOKEN:
+            description: "Cloudflare API token for staging"
+            required: true
+          CLOUDFLARE_STAGING_ACCOUNT_ID:
+            description: "Cloudflare account ID for staging"
+            required: true
       workflow_dispatch:
     permissions:
       contents: read
@@ -57,6 +64,3 @@
                 accountId: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
                 wranglerVersion: "4.18.0"
                 command: deploy script/nonce-worker.js --config script/wrangler.toml --env staging
-            env: 
-              CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_STAGING_API_TOKEN }}
-              CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
