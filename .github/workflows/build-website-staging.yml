@@ -5,7 +5,8 @@
         branches: [master]
         paths:
         - 'cornucopia.owasp.org/**'
-        - '.github/workflows/deploy-staging.yml'
+        - '.github/workflows/deploy-website-staging.yml'
+        - '.github/workflows/build-website-staging.yml'
     permissions:
       contents: read
     jobs:
@@ -53,3 +54,4 @@
       call-deploy-staging:
         needs: build-website-staging
         uses: ./.github/workflows/deploy-website-staging.yml
+        secrets: inherit
