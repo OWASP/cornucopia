@@ -1,10 +1,10 @@
 ---
-  name: Copi Build and Test
+  name: Build and Test Copi
   on:
-    pull_request_target:
+    pull_request:
       paths:
       - 'copi.owasp.org/**'
-      - '.github/workflows/copi.yml'
+      - '.github/workflows/copi-build.yml'
     workflow_dispatch:
   env:
     MIX_ENV: test
@@ -12,7 +12,7 @@
   permissions:
     contents: read
   jobs:
-    build-test:
+    build-test-copi:
       runs-on: ubuntu-latest # Or another supported runner
       services:
         postgres:
@@ -27,7 +27,8 @@
 
       steps:
         - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
+          with:
+            ref: ${{ github.event.pull_request.head.sha }}
         - name: Cache deps
           id: cache-deps
           uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3

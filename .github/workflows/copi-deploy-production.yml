@@ -1,14 +1,9 @@
 ---
   name: Copi Deploy Production
-
   on:
     push:
-      branches:
-        - master
-      paths:
-       - 'copi.owasp.org/**'
-       - '.github/workflows/copi-deploy-production.yml'
-    workflow_dispatch:
+      tags:
+        - "v*"
   permissions:
     contents: read
   jobs:

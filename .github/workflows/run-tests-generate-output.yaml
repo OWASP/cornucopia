@@ -1,21 +1,23 @@
 name: Run Tests and generate output files
-# Controls when the workflow will run
+# Controls when the workflow will run 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
-    branches:
-      - master
     paths:
       - 'source/**'
       - 'scripts/convert**'
       - 'resources/templates/**'
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 permissions:
   contents: read
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   hardening:
+    permissions:
+      contents: read
     uses: ./.github/workflows/hardening.yaml
   runtests:
+    permissions:
+      contents: read
     needs: hardening
     uses: ./.github/workflows/run-tests.yaml
   # If Tests pass, generate new output files
@@ -25,12 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     needs: runtests
-    permissions:
-      contents: write
-      pull-requests: write
+    outputs:
+      artifact-url: ${{ steps.upload_artifact.outputs.artifact-url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Create tmp branch for artifacts and get parent and object ref
         id: find-target
         env:
@@ -41,33 +44,6 @@ jobs:
           echo "parent=`git rev-parse HEAD`" >> "$GITHUB_ENV"
           echo "object_tree=`git write-tree`" >> "$GITHUB_ENV"
           git switch --orphan "tmp-$BRANCH_NAME-artifacts"
-      - name: Commit empty commit to the tmp artifact branch
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
-        env:
-          TARGET_BRANCH: ${{ github.event.pull_request.head.ref }}
-        with:
-          script: |
-            const { TARGET_BRANCH } = process.env
-            const commit_msg = "Upload artifacts"
-            const parent = "${{ env.parent}}";
-            const object_tree = "${{ env.object_tree}}";
-            const { data: commit } = await github.rest.git.createCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              message: commit_msg,
-              tree: object_tree,
-              parents: [parent]
-            });
-            try {
-              const { data: ref } = await github.rest.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: `refs/heads/tmp-${TARGET_BRANCH}-artifacts`,
-                sha: commit.sha
-              })
-            } catch (e) {
-              //The branch already exists
-            }
       - name: Checkout branch for pull request
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -132,23 +108,52 @@ jobs:
           cp output/owasp_cornucopia_webapp_2.1_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.1_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.1_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_2.1_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_2.1_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.1_leaflet_tarot_en.idml output/cornucopia_webapp/
           zip output/owasp_cornucopia_mobileapp_1.1_en.zip -r output/cornucopia_mobileapp/Links/* output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_mobileapp_scoresheet.pdf
           zip output/owasp_cornucopia_webapp_2.1_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
-      - name: Create pull request artifacts
-        uses: gavv/pull-request-artifacts@93f32f061d1fabdb41104db2493f2260c7db774f # v2.1
-        with:
-          commit: ${{ github.event.pull_request.head.sha }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          comment-message: "The generated Cornucopia cards in this pull request."
-          artifacts-branch: tmp-${{ github.event.pull_request.head.ref }}-artifacts
-          artifacts: |
-            output/eop-5.0.zip
-            output/owasp_cornucopia_mobileapp_1.1_en.zip
-            output/owasp_cornucopia_webapp_2.1_en.zip
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_en.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_es.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_fr.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_nl.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_no-nb.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-br.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-pt.docx
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx
+          zip output/cornucopia-build-files.zip -r \
+            output/eop-5.0.zip \
+            output/owasp_cornucopia_mobileapp_1.1_en.zip \
+            output/owasp_cornucopia_webapp_2.1_en.zip \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_en.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_es.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_fr.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_nl.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_no-nb.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-br.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-pt.docx \
+            output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx \
             output/owasp_cornucopia_webapp_2.1_guide_bridge_it.docx
+      - name: Upload output files
+        id: upload_artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          retention-days: 5
+          name: cornucopia-build-files.${{ github.sha }}.zip
+          path: |
+            output/cornucopia-build-files.zip
+  commentpr:
+    name: Comment on PR with build artifacts
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    needs: uploadoutputfiles
+    steps:
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          PR_NOTES: |
+            [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
+
+            ## Build artifacts:
+            
+            | Name | Link |
+            |------|------|
+            | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
+            
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: process.env.PR_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.PR_NOTES
+            })

@@ -1,11 +1,9 @@
 ---
     name: Build and Deploy The Cornucopia Website on Production
-    on: 
+    on:
       push:
-        branches: [master]
-        paths:
-        - 'cornucopia.owasp.org/**'
-        - '.github/workflows/deploy-production.yml'
+        tags:
+          - "v*"
     permissions:
       contents: read
     jobs:
