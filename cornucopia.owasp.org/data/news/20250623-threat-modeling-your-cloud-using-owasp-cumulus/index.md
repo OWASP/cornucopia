@@ -21,7 +21,7 @@ The idea of threat modeling via serious games goes back to the card game [Elevat
 
 While we at [OWASP Cornucopia](https://cornucopia.owasp.org/) have been focusing on creating games focused on web- and mobile application security, we have felt that the specific needs of devOps team working in cloud environments have been missing. [OWASP Cumulus](https://owasp.org/www-project-cumulus/ "[external]") seeks to fill this gap and provides a custom card deck with threats to cloud systems.
 
-## Continuous Assessing your Security 
+## Continuously Assessing your Security 
 
 The point here is not do just do your initial security risk assessment and be done with it, but to continuously look for new threats on a regular basis as you expand your infrastructure according to the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/ "[external]").
 
