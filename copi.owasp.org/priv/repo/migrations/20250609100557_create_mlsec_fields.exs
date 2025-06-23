@@ -1,4 +1,4 @@
-defmodule Copi.Repo.Migrations.CreateMobileDeckFields do
+defmodule Copi.Repo.Migrations.CreateMlSecFields do
   use Ecto.Migration
 
   def change do

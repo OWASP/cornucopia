@@ -32,6 +32,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
               {"Cornucopia Mobile (for mobile apps)", "mobileapp"},
               {"Elevation of Privilege (for cloud platforms, infrastructure, apps, anything!)", "eop"},
               {"Elevation of MLSec (for machine learning)", "mlsec"},
+              {"OWASP Cumulus (for DevOps and Cloud projects)", "cumulus"},
           ]}
           >
         </.input>

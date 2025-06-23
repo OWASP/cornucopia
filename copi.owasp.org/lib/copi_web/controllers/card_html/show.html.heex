@@ -105,6 +105,17 @@
       </div>
     </div>
 
+  <% @card.edition == "cumulus" -> %>
+
+    <div class={["card", "cumulus", Slug.slugify(@card.category), "n" <> @card.value]}>
+        <div class="left-value"><%= @card.value %></div>
+        <div class="category"><p><%= @card.category %></p></div>
+        <div class="left-bar"><p class="left-content"><%= @card.misc %></p></div>
+        <div class="main-content">
+          <p class="description"><%= @card.description %></p>
+        </div>
+    </div>
+
   <% @card.edition in ["mobileapp", "masvs"] -> %>
 
       <div class={["card", @card.value, "#{Slug.slugify @card.category}-mobile"]}>
