@@ -1,0 +1,332 @@
+---
+meta:
+  edition: "cumulus"
+  component: "cards"
+  language: "EN"
+  version: "1.1"
+suits:
+-
+  id: "AS"
+  name: "access & secrets"
+  cards:
+  -
+    id: "AS2"
+    value: "2"
+    desc: "We grant permissions to 3rd parties (e.g. CI/CD systems), but do not review them regularly."
+    misc: "Missing access review"
+  -
+    id: "AS3"
+    value: "3"
+    desc: "Our secrets are long-lived and can be reused when they get leaked."
+    misc: "Long-living secrets"
+  -
+    id: "AS4"
+    value: "4"
+    desc: "We don't enforce strong passwords for cloud access, so brute-forcing is possible."
+    misc: "No password policy"
+  -
+    id: "AS5"
+    value: "5"
+    desc: "We (as developers) have access to technical credentials."
+    misc: "Access to credentials"
+  -
+    id: "AS6"
+    value: "6"
+    desc: "We don't propagate changes in permissions quickly enough throughout the whole system."
+    misc: "Slow credential rotation"
+  -
+    id: "AS7"
+    value: "7"
+    desc: "We can't trace back whether authenticated users/developers granted themselves additional permissions."
+    misc: "Repudiation"
+  -
+    id: "AS8"
+    value: "8"
+    desc: "We don't restrict permissions (developers, technical users) to the minimum, allowing for a privilege escalation."
+    misc: "No least privilege"
+  -
+    id: "AS9"
+    value: "9"
+    desc: "Our Identity and Access Management lets authenticated users/developers grant themselves additional permissions."
+    misc: "Privilege escalation"
+  -
+    id: "ASX"
+    value: "10"
+    desc: "We don't enforce MFA for developer access."
+    misc: "No MFA"
+  -
+    id: "ASJ"
+    value: "J"
+    desc: "Our deployment artifacts contain secrets that can be extracted."
+    misc: "Secrets in artifacts"
+  -
+    id: "ASQ"
+    value: "Q"
+    desc: "Our Identity and Access Management is too complex."
+    misc: "Complex IAM"
+  -
+    id: "ASK"
+    value: "K"
+    desc: "We don't use an established solution for credential management."
+    misc: "Poor secrets management"
+  -
+    id: "ASA"
+    value: "A"
+    desc: "Our source code contains secrets."
+    misc: "Secrets in source code"
+- 
+  id: "DEL"
+  name: "delivery"
+  cards:
+  -
+    id: "DEL2"
+    value: "2"
+    desc: "We don't know the versions of our dependencies or whether they are up to date."
+    misc: "No SBOM"
+  -
+    id: "DEL3"
+    value: "3"
+    desc: "We include unneeded dependencies when deploying our system (test, build, compile-time dependencies)."
+    misc: "Bundled devDependencies"
+  -
+    id: "DEL4"
+    value: "4"
+    desc: "We don't know the source repository of our dependencies."
+    misc: "Dependency confusion"
+  -
+    id: "DEL5"
+    value: "5"
+    desc: "We don't know how a new version of a dependency changes our system."
+    misc: "Rogue dependencies"
+  -
+    id: "DEL6"
+    value: "6"
+    desc: "Our system can be re-deployed by a change in an external dependency."
+    misc: "Unattended updates"
+  -
+    id: "DEL7"
+    value: "7"
+    desc: "We don't know whether our dependencies introduce security issues."
+    misc: "Missing vulnerability scans"
+  -
+    id: "DEL8"
+    value: "8"
+    desc: "We use outdated dependencies of our runtime platform (OS, container image, serverless runtime)."
+    misc: "Outdated dependencies"
+  -
+    id: "DEL9"
+    value: "9"
+    desc: "We use untrustworthy dependencies (unmaintained, used by too few people, developed by single developers, ...)."
+    misc: "Dubious dependencies"
+  -
+    id: "DELX"
+    value: "10"
+    desc: "We don't limit ingress or egress when running CI pipelines."
+    misc: "Missing network control"
+  -
+    id: "DELJ"
+    value: "J"
+    desc: "We don't know when someone injects code into our codebase."
+    misc: "Insufficient SCM"
+  -
+    id: "DELQ"
+    value: "Q"
+    desc: "We are not certain which code/artifacts we are deploying."
+    misc: "No source code integrity"
+  -
+    id: "DELK"
+    value: "K"
+    desc: "We won't notice when a deployment is started from a developer account."
+    misc: "Silent pipeline runs"
+  -
+    id: "DELA"
+    value: "A"
+    desc: "We won't notice when someone alters the deploy pipeline."
+    misc: "Silent pipeline changes"
+- 
+  id: "REC"
+  name: "recovery"
+  cards:
+  -
+    id: "REC2"
+    value: "2"
+    desc: "We do not have (printed) documentation how to restore from backups."
+    misc: "No documentation"
+  -
+    id: "REC3"
+    value: "3"
+    desc: "We have backups but do not check regularly whether we can restore them or not."
+    misc: "No restore"
+  -
+    id: "REC4"
+    value: "4"
+    desc: "We have no backups for our infrastructure (IaC and its state)."
+    misc: "No infrastructure backups"
+  -
+    id: "REC5"
+    value: "5"
+    desc: "We have no backups of our application data."
+    misc: "No backups of data"
+  -
+    id: "REC6"
+    value: "6"
+    desc: "We have no backups for our secrets."
+    misc: "No backups of secrets"
+  -
+    id: "REC7"
+    value: "7"
+    desc: "We cannot restore our infrastructure to a previous state."
+    misc: "No infrastructure rollback"
+  -
+    id: "REC8"
+    value: "8"
+    desc: "We cannot restore our application to a previous state."
+    misc: "No application rollback"
+  -
+    id: "REC9"
+    value: "9"
+    desc: "We cannot restore our complete environment to a previous state."
+    misc: "No system rollback"
+  -
+    id: "RECX"
+    value: "10"
+    desc: "We don't create backups before deleting important data."
+    misc: "Unsafe data deletions"
+  -
+    id: "RECJ"
+    value: "J"
+    desc: "All our backups can be destroyed at once, due to lack of redundancy."
+    misc: "No backup redundancy"
+  -
+    id: "RECQ"
+    value: "Q"
+    desc: "We can't tell whether our backup has been modified."
+    misc: "Missing backup integrity"
+  -
+    id: "RECK"
+    value: "K"
+    desc: "We can have the same person deleting resources and their backups."
+    misc: "Broad delete permissions"
+  -
+    id: "RECA"
+    value: "A"
+    desc: "We have no disaster recovery plan."
+    misc: "No disaster recovery plan"
+- 
+  id: "MON"
+  name: "monitoring"
+  cards:
+  -
+    id: "MON4"
+    value: "4"
+    desc: "We receive too many alerts, leading to desensitization and the risk of missing critical alerts."
+    misc: "Alert fatigue"
+  -
+    id: "MON5"
+    value: "5"
+    desc: "We don't restrict access to the sensitive parts of our logs."
+    misc: "Information disclosure"
+  -
+    id: "MON6"
+    value: "6"
+    desc: "We can't easily identify useful information in logs."
+    misc: "Insufficient traceability"
+  -
+    id: "MON7"
+    value: "7"
+    desc: "We won't get an alert if an end user generates huge cloud bills for us."
+    misc: "Missing cost alerting"
+  -
+    id: "MON8"
+    value: "8"
+    desc: "We don't notice if an authenticated attacker/developer deactivates or manipulates our tools for traceability."
+    misc: "No log integrity"
+  -
+    id: "MON9"
+    value: "9"
+    desc: "We don't know if an authenticated attacker/developer accessed the production environment."
+    misc: "No audits for prod access"
+  -
+    id: "MONX"
+    value: "10"
+    desc: "We cannot react to problems in time because our monitoring has blind spots."
+    misc: "Insufficient monitoring"
+  -
+    id: "MONJ"
+    value: "J"
+    desc: "We need too long to figure out what an alert means."
+    misc: "Unclear alerts"
+  -
+    id: "MONQ"
+    value: "Q"
+    desc: "We do not know how to react when our monitoring sends alerts."
+    misc: "No incident response plan"
+  -
+    id: "MONK"
+    value: "K"
+    desc: "We can't access our logs if the production environment goes down."
+    misc: "Inaccessible logs"
+  -
+    id: "MONA"
+    value: "A"
+    desc: "We write secrets/personal data to our logs."
+    misc: "Secrets in logs"
+- 
+  id: "RES"
+  name: "resources"
+  cards:
+  -
+    id: "RES4"
+    value: "4"
+    desc: "We can't get contacted by our cloud provider in case of emergency."
+    misc: "Unreachable contacts"
+  -
+    id: "RES5"
+    value: "5"
+    desc: "We don't regularly check compliance with our internal policy for using/configuring cloud resources."
+    misc: "Non-compliance"
+  -
+    id: "RES6"
+    value: "6"
+    desc: "We have not configured any rate limits for our services."
+    misc: "Missing rate limits"
+  -
+    id: "RES7"
+    value: "7"
+    desc: "We have no configured resource limits."
+    misc: "Missing resource limits"
+  -
+    id: "RES8"
+    value: "8"
+    desc: "We can deploy applications with excessive capabilities."
+    misc: "Excessive capabilities"
+  -
+    id: "RES9"
+    value: "9"
+    desc: "Our whole system can be affected by a single rogue service."
+    misc: "Single point of failure"
+  -
+    id: "RESX"
+    value: "10"
+    desc: "We don't control ingress traffic."
+    misc: "Missing ingress control"
+  -
+    id: "RESJ"
+    value: "J"
+    desc: "We don't control egress traffic."
+    misc: "Missing egress control"
+  -
+    id: "RESQ"
+    value: "Q"
+    desc: "Our production and staging environments are connected, either directly or indirectly (e.g. via CI/CD)."
+    misc: "Missing env separation"
+  -
+    id: "RESK"
+    value: "K"
+    desc: "Our cloud resources are publicly exposed without any need."
+    misc: "Public resources"
+  -
+    id: "RESA"
+    value: "A"
+    desc: "We have no clear policy for using/configuring cloud resources."
+    misc: "No cloud policy"

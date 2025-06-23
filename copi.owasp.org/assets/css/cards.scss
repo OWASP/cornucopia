@@ -67,6 +67,19 @@
   font-weight: 700;
   src: local('Open Sans ExtraBold'), url('/fonts/OpenSans-ExtraBold.woff') format('woff');
 }
+@font-face {
+  font-family: 'Josefin Sans Regular';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Josefin Sans Regular'), url('/fonts/JosefinSans-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Josefin Sans Bold'), url('/fonts/JosefinSans-Bold.woff') format('woff');
+}
+
 
 
 /* LiveView specific classes for your customizations */
@@ -1229,6 +1242,140 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       background: no-repeat -16px -3px url("/images/mlsec/dataset-J-A.png") #fff;
     }
   }
+}
+
+/* OWASP Cumulus Card Styles */
+
+.card.cumulus {
+  padding-top: 20px;
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: [left-start] 24px [left-end category-start] 120px [category-end];
+  grid-template-rows: [header-start] 26px [header-end content-start] 213px [content-end];
+  grid-template-areas: 
+    "header header"
+    "content content";
+  column-gap: 9px;
+  row-gap: 5px;
+
+  .left-value {
+    display: grid;
+    position: unset;
+    padding: unset;
+    margin: unset;
+    justify-items: start;
+    grid-area: header;
+    
+    color: rgb(35, 31, 32);
+    font-family: "Josefin Sans Bold";
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 14px;
+    
+  }
+
+  .category {
+    position: unset;
+    padding: unset;
+    margin: unset;
+    justify-items: end;
+    grid-area: header;
+    font-family: "Josefin Sans Bold";
+    font-size: 10px;
+    font-weight: 300;
+    white-space: nowrap;
+    grid-column-start: 2;
+    
+  }
+
+  .left-bar {
+    position: unset;
+    padding: unset;
+    margin: unset;
+    grid-area: content;
+    border-top-left-radius: unset;
+    border-bottom-left-radius: unset;
+    align-content: center;
+
+
+    .left-content {
+      position: unset;
+      padding: unset;
+      margin: unset;
+      text-align: center;
+      font-family: "Josefin Sans Bold";
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 14px;
+      writing-mode: sideways-lr;
+      text-align: left;
+      text-transform: none;
+    }
+  }
+
+
+  .main-content {
+    grid-area: content;
+    color: rgb(35, 31, 32);
+    position: unset;
+    padding: unset;
+    margin: unset;
+    grid-column-start: 2;
+
+    .description {
+      font-family: "Josefin Sans Regular";
+      font-size: 17px;
+      line-height: 1.3em;
+      text-align: center;
+      position: unset;
+      padding: unset;
+      margin: unset;
+    }
+  }
+
+
+  &.access-secrets {
+    background: no-repeat -2px 3px url("/images/cumulus/secrets-and-access.png") rgb(239, 134, 101);
+    background-size: 203px 287px;
+
+    .left-bar {
+      color: rgb(244, 206, 200);
+    }
+  }
+
+  &.delivery {
+    background: no-repeat -2px 3px url("/images/cumulus/delivery.png") rgb(87, 193, 235);
+    background-size: 203px 287px;
+    .left-bar {
+      color: rgb(293, 228, 241);
+    }
+  }
+
+  &.recovery {
+    background: no-repeat -2px 3px url("/images/cumulus/recovery.png") rgb(69, 176, 147);
+    background-size: 203px 287px;
+    .left-bar {
+      color: rgb(188, 224, 214);
+    }
+  }
+
+  &.monitoring {
+    background: no-repeat -2px 3px url("/images/cumulus/monitoring.png") rgb(243, 179, 93);
+    background-size: 203px 287px;
+    .left-bar {
+      color: rgb(248, 227, 193);
+    }
+  }
+
+  &.resources {
+    background: no-repeat -2px 3px url("/images/cumulus/resources.png") rgb(153, 115, 179);
+    background-size: 203px 287px;
+    .left-bar {
+      color: rgb(217, 199, 224);
+    }
+  }
+
 }
 
 @keyframes ants { to { background-position: 100% 100% } }

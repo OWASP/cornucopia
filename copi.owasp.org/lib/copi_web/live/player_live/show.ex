@@ -140,6 +140,7 @@ defmodule CopiWeb.PlayerLive.Show do
       "ecommerce" -> "Cornucopia Web Session:"
       "mobileapp" -> "Cornucopia Mobile Session:"
       "masvs" -> "Cornucopia Mobile Session:"
+      "cumulus" -> "OWASP Cumulus Session:"
       "mlsec" -> "Elevation of MLSec Session:"
       _ -> "EoP Session:"
     end

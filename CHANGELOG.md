@@ -68,3 +68,8 @@ Add testing.
 ### 2025-06-09
 
  - Adding Elevation of MLSec through Copi
+
+## Changes $ Updates
+### 2025-06-23
+
+ - Adding OWASP Cumulus through Copi

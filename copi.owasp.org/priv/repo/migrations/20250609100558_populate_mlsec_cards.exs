@@ -1,4 +1,4 @@
-defmodule Copi.Repo.Migrations.PopulateNewCards do
+defmodule Copi.Repo.Migrations.PopulateNewMlSecCards do
   use Ecto.Migration
   alias Copi.Repo
   alias Copi.Cornucopia

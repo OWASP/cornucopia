@@ -138,7 +138,7 @@ defmodule Copi.CornucopiaTest do
   describe "cards" do
     alias Copi.Cornucopia.Card
 
-    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "mobileapp", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: ["sadf"], owasp_masvs: [], biml: "", owasp_scp: [], safecode: [], value: "some value", version: "some version"}
+    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "mobileapp", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", owasp_scp: [], safecode: [], value: "some value", version: "some version"}
     @update_attrs %{external_id: "R2", capec: [], category: "some updated category", description: "some updated description", edition: "some updated edition", language: "some updated language", misc: "some updated misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", owasp_scp: [], safecode: [],  value: "some updated value", version: "some updated version"}
     @invalid_attrs %{external_id: nil, capec: nil, category: nil, description: nil, edition: nil, language: nil, misc: nil, owasp_appsensor: nil, owasp_asvs: nil, owasp_mastg: nil, owasp_masvs: nil, biml: "", owasp_scp: nil, safecode: nil,  value: nil, version: nil}
 
