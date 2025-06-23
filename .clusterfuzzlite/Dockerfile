@@ -5,7 +5,7 @@ RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt upgrade -y && apt-get install -y python3.10 python3.10-dev python3.10-distutils libxml2-dev  libxslt-dev
 RUN apt-get install -y python3-pip
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
-RUN python3.10 -m pip install --upgrade setuptools setuptools_scm PyInstaller==6.11.0
+RUN python3.10 -m pip install --upgrade wheel setuptools setuptools_scm PyInstaller==6.13.0
 COPY . $SRC/cornucopia
 WORKDIR $SRC/cornucopia
 COPY .clusterfuzzlite/build.sh $SRC/
