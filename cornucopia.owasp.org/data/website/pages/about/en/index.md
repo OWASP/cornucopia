@@ -90,7 +90,8 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Jim Manico
 - Jef Meijvis
 - Mark Miller 
-- Cam Morris 
+- Cam Morris
+- Christoph Niehoff
 - Grant Ongers 
 - Susana Romaniz 
 - Ravishankar Sahadevan 
