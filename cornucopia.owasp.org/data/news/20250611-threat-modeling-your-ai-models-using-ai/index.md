@@ -7,7 +7,7 @@ description: Threat modeling your AI models using AI?
 ---
 ![Marvin The paranoid Android. see: https://en.wikipedia.org/wiki/File:Marvin_(HHGG).jpg](survival_banner.png)
 
-# Threat modeling your AI models using AI?
+# Does the AI do the threat modeling of your software?
 
 _Are you letting the AI do the threat modeling for you? There is no need to let the machines take over the world! Threat model using Elevation of MLSec on copi.owasp.org instead. Our survival depends on it! At [copi.owasp.org](https://copi.owasp.org) you can now play Elevation of MLSec to threat model your AI models._
 
