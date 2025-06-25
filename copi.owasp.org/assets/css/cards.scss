@@ -1251,28 +1251,27 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   padding-left: 20px;
   display: grid;
   grid-template-columns: [left-start] 24px [left-end category-start] 120px [category-end];
-  grid-template-rows: [header-start] 26px [header-end content-start] 213px [content-end];
+  grid-template-rows: [header-start] 26px [header-end content-start] 225px [content-end];
   grid-template-areas: 
     "header header"
     "content content";
-  column-gap: 9px;
-  row-gap: 5px;
+  background-position: 10px 10px;
+  background-size: 200px 293px;
 
   .left-value {
+    
     display: grid;
     position: unset;
     padding: unset;
-    margin: unset;
     justify-items: start;
     grid-area: header;
-    
     color: rgb(35, 31, 32);
     font-family: "Josefin Sans Bold";
     font-size: 40px;
     font-weight: 600;
     text-align: center;
     line-height: 14px;
-    
+    margin-top: 5px;
   }
 
   .category {
@@ -1325,7 +1324,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     .description {
       font-family: "Josefin Sans Regular";
-      font-size: 17px;
+      font-size: 18px;
       line-height: 1.3em;
       text-align: center;
       position: unset;
@@ -1336,43 +1335,228 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
 
   &.access-secrets {
-    background: no-repeat -2px 3px url("/images/cumulus/secrets-and-access.png") rgb(239, 134, 101);
-    background-size: 203px 287px;
 
     .left-bar {
       color: rgb(244, 206, 200);
     }
+    &.n2 {
+      background: url("/images/cumulus/secrets-and-access-2.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n3 {
+      background: url("/images/cumulus/secrets-and-access-3.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n4 {
+      background: url("/images/cumulus/secrets-and-access-4.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n5 {
+      background: url("/images/cumulus/secrets-and-access-5.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n6 {
+      background: url("/images/cumulus/secrets-and-access-6.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n7 {
+      background: url("/images/cumulus/secrets-and-access-7.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n8 {
+      background: url("/images/cumulus/secrets-and-access-8.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n9 {
+      background: url("/images/cumulus/secrets-and-access-9.png") no-repeat rgb(239, 134, 101);
+    }
+    &.n10 {
+      background: url("/images/cumulus/secrets-and-access-x.png") no-repeat rgb(239, 134, 101);
+    }
+    &.nJ {
+      background: url("/images/cumulus/secrets-and-access-j.png") no-repeat rgb(239, 134, 101);
+    }
+    &.nQ {
+      background: url("/images/cumulus/secrets-and-access-q.png") no-repeat rgb(239, 134, 101);
+    }
+    &.nK {
+      background: url("/images/cumulus/secrets-and-access-k.png") no-repeat rgb(239, 134, 101);
+    }
+    &.nA {
+      background: url("/images/cumulus/secrets-and-access-a.png") no-repeat rgb(239, 134, 101);
+    }
   }
 
   &.delivery {
-    background: no-repeat -2px 3px url("/images/cumulus/delivery.png") rgb(87, 193, 235);
-    background-size: 203px 287px;
     .left-bar {
       color: rgb(293, 228, 241);
+    }
+    &.n2 {
+      background: url("/images/cumulus/delivery-2.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n3 {
+      background: url("/images/cumulus/delivery-3.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n4 {
+      background: url("/images/cumulus/delivery-4.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n5 {
+      background: url("/images/cumulus/delivery-5.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n6 {
+      background: url("/images/cumulus/delivery-6.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n7 {
+      background: url("/images/cumulus/delivery-7.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n8 {
+      background: url("/images/cumulus/delivery-8.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n9 {
+      background: url("/images/cumulus/delivery-9.png") no-repeat rgb(87, 193, 235);
+    }
+    &.n10 {
+      background: url("/images/cumulus/delivery-x.png") no-repeat rgb(87, 193, 235);
+    }
+    &.nJ {
+      background: url("/images/cumulus/delivery-j.png") no-repeat rgb(87, 193, 235);
+    }
+    &.nQ {
+      background: url("/images/cumulus/delivery-q.png") no-repeat rgb(87, 193, 235);
+    }
+    &.nK {
+      background: url("/images/cumulus/delivery-k.png") no-repeat rgb(87, 193, 235);
+    }
+    &.nA {
+      background: url("/images/cumulus/delivery-a.png") no-repeat rgb(87, 193, 235);
     }
   }
 
   &.recovery {
-    background: no-repeat -2px 3px url("/images/cumulus/recovery.png") rgb(69, 176, 147);
-    background-size: 203px 287px;
     .left-bar {
       color: rgb(188, 224, 214);
+    }
+    &.n2 {
+      background: url("/images/cumulus/recovery-2.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n3 {
+      background: url("/images/cumulus/recovery-3.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n4 {
+      background: url("/images/cumulus/recovery-4.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n5 {
+      background: url("/images/cumulus/recovery-5.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n6 {
+      background: url("/images/cumulus/recovery-6.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n7 {
+      background: url("/images/cumulus/recovery-7.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n8 {
+      background: url("/images/cumulus/recovery-8.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n9 {
+      background: url("/images/cumulus/recovery-9.png") no-repeat rgb(69, 176, 147);
+    }
+    &.n10 {
+      background: url("/images/cumulus/recovery-x.png") no-repeat rgb(69, 176, 147);
+    }
+    &.nJ {
+      background: url("/images/cumulus/recovery-j.png") no-repeat rgb(69, 176, 147);
+    }
+    &.nQ {
+      background: url("/images/cumulus/recovery-q.png") no-repeat rgb(69, 176, 147);
+    }
+    &.nK {
+      background: url("/images/cumulus/recovery-k.png") no-repeat rgb(69, 176, 147);
+    }
+    &.nA {
+      background: url("/images/cumulus/recovery-a.png") no-repeat rgb(69, 176, 147);
     }
   }
 
   &.monitoring {
-    background: no-repeat -2px 3px url("/images/cumulus/monitoring.png") rgb(243, 179, 93);
-    background-size: 203px 287px;
     .left-bar {
       color: rgb(248, 227, 193);
+    }
+    &.n2 {
+      background: url("/images/cumulus/monitoring-2.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n3 {
+      background: url("/images/cumulus/monitoring-3.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n4 {
+      background: url("/images/cumulus/monitoring-4.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n5 {
+      background: url("/images/cumulus/monitoring-5.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n6 {
+      background: url("/images/cumulus/monitoring-6.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n7 {
+      background: url("/images/cumulus/monitoring-7.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n8 {
+      background: url("/images/cumulus/monitoring-8.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n9 {
+      background: url("/images/cumulus/monitoring-9.png") no-repeat rgb(243, 179, 93);
+    }
+    &.n10 {
+      background: url("/images/cumulus/monitoring-x.png") no-repeat rgb(243, 179, 93);
+    }
+    &.nJ {
+      background: url("/images/cumulus/monitoring-j.png") no-repeat rgb(243, 179, 93);
+    }
+    &.nQ {
+      background: url("/images/cumulus/monitoring-q.png") no-repeat rgb(243, 179, 93);
+    }
+    &.nK {
+      background: url("/images/cumulus/monitoring-k.png") no-repeat rgb(243, 179, 93);
+    }
+    &.nA {
+      background: url("/images/cumulus/monitoring-a.png") no-repeat rgb(243, 179, 93);
     }
   }
 
   &.resources {
-    background: no-repeat -2px 3px url("/images/cumulus/resources.png") rgb(153, 115, 179);
-    background-size: 203px 287px;
     .left-bar {
       color: rgb(217, 199, 224);
+    }
+    &.n2 {
+      background: url("/images/cumulus/resources-2.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n3 {
+      background: url("/images/cumulus/resources-3.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n4 {
+      background: url("/images/cumulus/resources-4.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n5 {
+      background: url("/images/cumulus/resources-5.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n6 {
+      background: url("/images/cumulus/resources-6.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n7 {
+      background: url("/images/cumulus/resources-7.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n8 {
+      background: url("/images/cumulus/resources-8.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n9 {
+      background: url("/images/cumulus/resources-9.png") no-repeat rgb(153, 115, 179);
+    }
+    &.n10 {
+      background: url("/images/cumulus/resources-x.png") no-repeat rgb(153, 115, 179);
+    }
+    &.nJ {
+      background: url("/images/cumulus/resources-j.png") no-repeat rgb(153, 115, 179);
+    }
+    &.nQ {
+      background: url("/images/cumulus/resources-q.png") no-repeat rgb(153, 115, 179);
+    }
+    &.nK {
+      background: url("/images/cumulus/resources-k.png") no-repeat rgb(153, 115, 179);
+    }
+    &.nA {
+      background: url("/images/cumulus/resources-a.png") no-repeat rgb(153, 115, 179);
     }
   }
 
