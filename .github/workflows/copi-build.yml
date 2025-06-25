@@ -30,6 +30,7 @@
           with:
             ref: ${{ github.event.pull_request.head.sha }}
         - name: build project
+          working-directory: copi.owasp.org
           run: docker build -f ./Dockerfile .
         - name: Cache deps
           id: cache-deps
