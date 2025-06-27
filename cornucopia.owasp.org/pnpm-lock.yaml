@@ -64,8 +64,8 @@ importers:
         specifier: ^3.1.4
         version: 3.1.4(vitest@3.1.4(@types/node@24.0.4))
       dotenv:
-        specifier: ^16.5.0
-        version: 16.5.0
+        specifier: ^16.6.0
+        version: 16.6.0
       svelte:
         specifier: ^5.34.8
         version: 5.34.8
@@ -1231,8 +1231,8 @@ packages:
   devalue@5.1.1:
     resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
 
-  dotenv@16.5.0:
-    resolution: {integrity: sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==}
+  dotenv@16.6.0:
+    resolution: {integrity: sha512-Omf1L8paOy2VJhILjyhrhqwLIdstqm1BvcDPKg4NGAlkwEu9ODyrFbvk8UymUOMCT+HXo31jg1lArIrVAAhuGA==}
     engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
@@ -2932,7 +2932,7 @@ snapshots:
 
   devalue@5.1.1: {}
 
-  dotenv@16.5.0: {}
+  dotenv@16.6.0: {}
 
   dunder-proto@1.0.1:
     dependencies:
