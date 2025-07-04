@@ -40,7 +40,7 @@
             restore-keys: |
               ${{ runner.os }}-mix-${{ env.cache-name }}-
         - name: Install Elixir and Erlang
-          uses: erlef/setup-beam@6389fe58dcb1ee91fd829c7c65bf8771b06dacc4 # v1.20.2
+          uses: erlef/setup-beam@8e7fdef09ffa3ea54328b5000c170a3b9b20ca96 # v1.20.3
           with:
             elixir-version: 1.18.2
             otp-version: 27.3.3
