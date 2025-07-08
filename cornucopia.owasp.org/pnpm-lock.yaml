@@ -64,8 +64,8 @@ importers:
         specifier: ^3.1.4
         version: 3.1.4(vitest@3.1.4(@types/node@24.0.10))
       dotenv:
-        specifier: ^17.0.1
-        version: 17.0.1
+        specifier: ^17.1.0
+        version: 17.1.0
       svelte:
         specifier: ^5.35.2
         version: 5.35.2
@@ -1229,8 +1229,8 @@ packages:
   devalue@5.1.1:
     resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
 
-  dotenv@17.0.1:
-    resolution: {integrity: sha512-GLjkduuAL7IMJg/ZnOPm9AnWKJ82mSE2tzXLaJ/6hD6DhwGfZaXG77oB8qbReyiczNxnbxQKyh0OE5mXq0bAHA==}
+  dotenv@17.1.0:
+    resolution: {integrity: sha512-tG9VUTJTuju6GcXgbdsOuRhupE8cb4mRgY5JLRCh4MtGoVo3/gfGUtOMwmProM6d0ba2mCFvv+WrpYJV6qgJXQ==}
     engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
@@ -2111,8 +2111,8 @@ packages:
   zimmerframe@1.1.2:
     resolution: {integrity: sha512-rAbqEGa8ovJy4pyBxZM70hg4pE6gDgaQ0Sl9M3enG3I0d6H4XSAM3GeNGLKnsBpuijUow064sf7ww1nutC5/3w==}
 
-  zod@3.25.72:
-    resolution: {integrity: sha512-Cl+fe4dNL4XumOBNBsr0lHfA80PQiZXHI4xEMTEr8gt6aGz92t3lBA32e71j9+JeF/VAYvdfBnuwJs+BMx/BrA==}
+  zod@3.25.75:
+    resolution: {integrity: sha512-OhpzAmVzabPOL6C3A3gpAifqr9MqihV/Msx3gor2b2kviCgcb+HM9SEOpMWwwNp9MRunWnhtAKUoo0AHhjyPPg==}
 
 snapshots:
 
@@ -2932,7 +2932,7 @@ snapshots:
 
   devalue@5.1.1: {}
 
-  dotenv@17.0.1: {}
+  dotenv@17.1.0: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -3388,7 +3388,7 @@ snapshots:
       workerd: 1.20241230.0
       ws: 8.18.3
       youch: 3.3.4
-      zod: 3.25.72
+      zod: 3.25.75
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -3958,4 +3958,4 @@ snapshots:
 
   zimmerframe@1.1.2: {}
 
-  zod@3.25.72: {}
+  zod@3.25.75: {}
