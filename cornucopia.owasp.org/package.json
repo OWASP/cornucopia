@@ -19,7 +19,7 @@
 		"@sveltejs/adapter-cloudflare": "^5.0.1",
 		"@sveltejs/kit": "^2.22.2",
 		"@sveltejs/vite-plugin-svelte": "^4.0.4",
-		"@types/node": "^24.0.10",
+		"@types/node": "^24.0.12",
 		"@vitest/coverage-v8": "^3.1.4",
 		"dotenv": "^17.1.0",
 		"svelte": "^5.35.2",
