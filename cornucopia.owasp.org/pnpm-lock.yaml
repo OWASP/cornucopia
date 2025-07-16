@@ -39,8 +39,8 @@ importers:
         specifier: ^6.1.0
         version: 6.1.0
       vite-plugin-restart:
-        specifier: ^0.4.2
-        version: 0.4.2(vite@5.4.19(@types/node@24.0.14))
+        specifier: ^1.0.0
+        version: 1.0.0(vite@5.4.19(@types/node@24.0.14))
       vite-plugin-static-copy:
         specifier: ^3.1.1
         version: 3.1.1(vite@5.4.19(@types/node@24.0.14))
@@ -1966,10 +1966,10 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
-  vite-plugin-restart@0.4.2:
-    resolution: {integrity: sha512-9aWN2ScJ8hbT7aC8SDeZnsbWapnslz1vhNq6Vgf2GU9WdN4NExlrWhtnu7pmtOUG3Guj8y6lPcUZ+ls7SVP33w==}
+  vite-plugin-restart@1.0.0:
+    resolution: {integrity: sha512-t2ktkTOa+DQX05TEZm/3FE0DyrYEyFXdhG5gLcta5p71zOpg9yG3DeRcHWJVLJgWNoaVtOr4fUlr1kKu+WfXyQ==}
     peerDependencies:
-      vite: ^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+      vite: ^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
   vite-plugin-static-copy@3.1.1:
     resolution: {integrity: sha512-oR53SkL5cX4KT1t18E/xU50vJDo0N8oaHza4EMk0Fm+2/u6nQivxavOfrDk3udWj+dizRizB/QnBvJOOQrTTAQ==}
@@ -3812,7 +3812,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-restart@0.4.2(vite@5.4.19(@types/node@24.0.14)):
+  vite-plugin-restart@1.0.0(vite@5.4.19(@types/node@24.0.14)):
     dependencies:
       micromatch: 4.0.8
       vite: 5.4.19(@types/node@24.0.14)
