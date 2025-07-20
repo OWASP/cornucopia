@@ -437,7 +437,7 @@ suits:
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/SMQ"
     owasp_scp: [ 58 ]
-    owasp_asvs: [ 1.1.6, 3.7.1 ]
+    owasp_asvs5: [ 7.5.1, 7.5.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
     safecode: [ 14, 28 ]
@@ -448,7 +448,7 @@ suits:
     value: "K"
     url: "https://cornucopia.owasp.org/cards/SMK"
     owasp_scp: [ 58, 60 ]
-    owasp_asvs: [ 1.1.6 ]
+    owasp_asvs5: [ ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
     safecode: [ 14, 28 ]
