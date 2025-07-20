@@ -381,7 +381,7 @@ suits:
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
     owasp_scp: [ 62, 63 ]
-    owasp_asvs: [ 3.3.1, 3.3.4 ]
+    owasp_asvs5: [ 7.4.1, 7.5.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
     safecode: [ 28 ]
@@ -392,7 +392,7 @@ suits:
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
     owasp_scp: [ 96 ]
-    owasp_asvs: [ 3.3.2, 3.6.1 ]
+    owasp_asvs5: [ 7.3.1, 7.3.2, 7.6.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
     safecode: [ 28 ]
@@ -403,7 +403,7 @@ suits:
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
     owasp_scp: [ 69, 75, 76, 119, 138 ]
-    owasp_asvs: [ 1.9.1, 3.1.1, 7.1.1, 7.1.2, 7.2.1, 9.1.3, 9.2.2 ]
+    owasp_asvs5: [ 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1, 16.2.5, 16.3.1 ]
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 60 ]
@@ -415,7 +415,7 @@ suits:
     value: "10"
     url: "https://cornucopia.owasp.org/cards/SMX"
     owasp_scp: [ 73, 74 ]
-    owasp_asvs: [ 4.2.2 ]
+    owasp_asvs5: [ 3.5.1 ]
     owasp_appsensor: [ IE4 ]
     capec: [ 62, 111 ]
     safecode: [ 18 ]
@@ -426,7 +426,7 @@ suits:
     value: "J"
     url: "https://cornucopia.owasp.org/cards/SMJ"
     owasp_scp: [ "-" ]
-    owasp_asvs: [ 11.1.1, 11.1.2, 11.1.3 ]
+    owasp_asvs5: [ 2.3.1, 2.3.2, 2.4.2 ]
     owasp_appsensor: [ IE5 ]
     capec: [ 60 ]
     safecode: [ 12, 14 ]
