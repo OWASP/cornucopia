@@ -370,7 +370,7 @@ suits:
     value: "6"
     url: "https://cornucopia.owasp.org/cards/SM6"
     owasp_scp: [ 64, 65 ]
-    owasp_asvs: [ 3.3.2, 3.3.3, 3.3.4 ]
+    owasp_asvs5: [ 7.3.1, 7.3.2, 7.4.3, 7.5.2 ]
     owasp_appsensor: [ SE5, SE6 ]
     capec: [ 21 ]
     safecode: [ 28 ]
