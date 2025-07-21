@@ -544,7 +544,7 @@ suits:
     value: "8"
     url: "https://cornucopia.owasp.org/cards/AZ8"
     owasp_scp: [ 10, 32, 93, 94, 189 ]
-    owasp_asvs: [ 4.1.2, 4.2.1, 4.3.3, 7.3.4, 11.1.1,    
+    owasp_asvs: [ 4.1.2, 4.2.1, 4.3.3, 7.3.4, 11.1.1, 11.1.2 ] 
     owasp_asvs5: [ 8.2.1, 8.2.2 ]
     owasp_appsensor: [ ACE3 ]
     capec: [ 25, 39, 74, 162, 166, 207 ]
