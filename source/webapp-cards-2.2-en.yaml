@@ -43,7 +43,7 @@ suits:
     id: "VE8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/VE8"
-    desc: "Oana can bypass the centralized sanitization routines since they are not being used comprehensively"
+    desc: "Oana can bypass the centralized sanitization routines since they are not being used comprehensively or left out for certain types of input"
   -
     id: "VE9"
     value: "9"
