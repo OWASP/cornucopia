@@ -63,7 +63,7 @@ suits:
     id: "VEQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/VEQ"
-    desc: "Xavier can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes"
+    desc: "Xavier can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded or escaped correctly for the context, or there is no restrictive policy on code or data includes"
   -
     id: "VEK"
     value: "K"
