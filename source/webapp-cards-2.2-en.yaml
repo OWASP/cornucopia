@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad can obtain a user's password or other secrets such as MFA codes, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, because it previously has been compromised, or because the user cannot change her own password"
+    desc: "Muhammad can obtain a user's password or other secrets such as MFA codes, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known, because it previously has been leaked, or because the user cannot change her own password"
   -
     id: "AT4"
     value: "4"
