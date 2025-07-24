@@ -18,7 +18,7 @@ suits:
     id: "VE3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/VE3"
-    desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being sanitized, or preferably validated for format, type, range, length and a whitelist of allowed characters or formats"
+    desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being sanitized, or preferably validated for format, type, range, size, length and a whitelist of allowed characters or formats"
   -
     id: "VE4"
     value: "4"
