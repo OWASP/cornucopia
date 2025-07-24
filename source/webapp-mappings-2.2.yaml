@@ -176,7 +176,7 @@ suits:
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AT2"
     owasp_scp: [ 47, 52 ]
-    owasp_asvs5: [ 6.4.2, 14.3.1, 14.3.2, 14.3.3, 16.2.1, 16.2.5, 16.3.1 ]
+    owasp_asvs5: [ 6.3.1, 6.3.3, 6.3.5, 6.3.7, 6.3.8, 6.4.3, 6.4.4, 6.4.6, 7.2.1, 7.5.1, 7.5.2, 7.6.2, 14.3.1, 16.2.1, 16.3.1 ]
     owasp_appsensor: [ UT1 ]
     capec: [ "-" ]
     safecode: [ 28 ]
