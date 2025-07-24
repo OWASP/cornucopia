@@ -68,7 +68,7 @@ suits:
     id: "VEK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/VEK"
-    desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly"
+    desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used, not implemented correctly, or properly configured"
   -
     id: "VEA"
     value: "A"
