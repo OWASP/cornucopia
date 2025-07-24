@@ -198,7 +198,7 @@ suits:
     value: "4"
     url: "https://cornucopia.owasp.org/cards/AT4"
     owasp_scp: [ 33, 53 ]
-    owasp_asvs5: [ 6.1.1, 6.3.1, 16.5.3 ]
+    owasp_asvs5: [ 6.1.1, 6.3.1, 6.3.2, 6.3.8, 16.5.3 ]
     owasp_appsensor: [ AE1 ]
     capec: [ 383 ]
     safecode: [ 28 ]
