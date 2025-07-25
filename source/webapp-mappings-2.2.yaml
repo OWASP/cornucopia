@@ -324,7 +324,7 @@ suits:
     value: "2"
     url: "https://cornucopia.owasp.org/cards/SM2"
     owasp_scp: [ 58, 59 ]
-    owasp_asvs5: [ 7.6.2, 10.1.1, 10.1.2, 10.2.1, 10.3.5, 14.2.1, 16.5.3 ]
+    owasp_asvs5: [ 10.1.1, 10.1.2, 10.2.1, 10.3.5, 14.2.1, 16.5.3 ]
     owasp_appsensor: [ SE2 ]
     capec: [ 31, 60, 61 ]
     safecode: [ 28 ]
