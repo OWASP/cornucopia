@@ -103,12 +103,12 @@ suits:
     id: "AT6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
-    desc: "Sven can reuse a temporary password, a MFA- or activation code because the user does not have to change it on first use, or because it does not expire after a sufficently short period of time or after its been used, or it does not use a secure out-of-band delivery method (e.g. post, mobile app, SMS)"
+    desc: "Sven can reuse a temporary password, a recovery-, activation-, or MFA code because the user does not have to change it on first use, or because it does not expire after a sufficently short period of time or after its been used, or it does not use a secure out-of-band delivery method (e.g. post, mobile app, SMS)"
   -
     id: "AT7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AT7"
-    desc: "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords"
+    desc: "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords, recovery-, activation-, or MFA codes"
   -
     id: "AT8"
     value: "8"
@@ -118,7 +118,7 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    desc: "Claudia can undertake more critical functions because authentication requirements are too weak (e.g. do not use strong authentication such as two factor), or there is no requirement to re-authenticate for these"
+    desc: "Claudia can undertake more critical functions because authentication requirements are too weak (e.g. do not use strong authentication such as multi factor), or there is no requirement to re-authenticate for these"
   -
     id: "ATX"
     value: "10"
