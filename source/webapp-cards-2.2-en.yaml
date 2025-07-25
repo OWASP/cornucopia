@@ -103,7 +103,7 @@ suits:
     id: "AT6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
-    desc: "Sven can reuse a temporary password or MFA code because the user does not have to change it on first use, or it has too long or no expiry, or it does not use a secure out-of-band delivery method (e.g. post, mobile app, SMS)"
+    desc: "Sven can reuse a temporary password or MFA code because the user does not have to change it on first use, or because it's not invalidated after it has been used, or it has too long or no expiry, or it does not use a secure out-of-band delivery method (e.g. post, mobile app, SMS)"
   -
     id: "AT7"
     value: "7"
