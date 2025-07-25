@@ -123,7 +123,7 @@ suits:
     id: "ATX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/ATX"
-    desc: "Pravin can bypass authentication controls because a centralized standard, tested, proven, recommended and approved authentication module/framework/service, separate to the resource being requested, is not being used"
+    desc: "Pravin can bypass authentication controls because a centralized standard, tested, proven, recommended and approved authentication module/framework/service, separate to the resource being requested, is not being used, has been misconfigured, or has been improperly implemented"
   -
     id: "ATJ"
     value: "J"
