@@ -158,7 +158,7 @@ suits:
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    desc: "Ryan can use a single account in parallel since concurrent sessions are allowed"
+    desc: "Ryan jeopardize users' privacy because the creation of a session does not require the user's consent or an explicit action"
   -
     id: "SM4"
     value: "4"
