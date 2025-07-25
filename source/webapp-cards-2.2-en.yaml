@@ -128,7 +128,7 @@ suits:
     id: "ATJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/ATJ"
-    desc: "Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
+    desc: "Mark can access resources or services because there is no authentication requirement, or because authentication is missing due to misconfiguration, improper design or -implementation, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
   -
     id: "ATQ"
     value: "Q"
