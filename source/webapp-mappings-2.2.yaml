@@ -220,7 +220,7 @@ suits:
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
     owasp_scp: [ 37, 45, 46, 178 ]
-    owasp_asvs5: [ 6.4.1, 6.5.1, 6.5.5, 6.6.1 ]
+    owasp_asvs5: [ 6.4.1, 6.5.1, 6.5.5, 6.5.6, 6.6.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 50 ]
     safecode: [ 28 ]
