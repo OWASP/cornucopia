@@ -334,13 +334,13 @@ suits:
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    owasp_scp: [ 68 ]
-    owasp_asvs5: [ 7.4.3, 7.5.2 ]
+    owasp_scp: [ "-" ]
+    owasp_asvs5: [ 7.6.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    safecode: [ 28 ]
+    safecode: [ "-" ]
     owasp_cre:
-      owasp_asvs: [ 238-346, 673-736 ]
+      owasp_asvs: [ ]
   -
     id: "SM4"
     value: "4"
