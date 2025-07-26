@@ -178,7 +178,7 @@ suits:
     id: "SM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
-    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or changes to authentication factors does not give the option to terminate other sessions, or log out does not properly terminate the session"
+    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or log out-, changes to authentication factors-, account termination does not properly make it possible for the user to terminate the session or sessions"
   -
     id: "SM8"
     value: "8"
