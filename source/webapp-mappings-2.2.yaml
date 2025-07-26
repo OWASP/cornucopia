@@ -426,7 +426,7 @@ suits:
     value: "J"
     url: "https://cornucopia.owasp.org/cards/SMJ"
     owasp_scp: [ "-" ]
-    owasp_asvs5: [ 2.3.1, 2.3.2, 2.4.2 ]
+    owasp_asvs5: [ 2.3.1, 2.3.2, 2.3.4, 2.4.2 ]
     owasp_appsensor: [ IE5 ]
     capec: [ 60 ]
     safecode: [ 12, 14 ]
