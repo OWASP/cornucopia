@@ -381,7 +381,7 @@ suits:
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
     owasp_scp: [ 62, 63 ]
-    owasp_asvs5: [ 7.4.1, 7.4.2, 7.4.3, 7.4.4, 7.4.5, 7.5.2 ]
+    owasp_asvs5: [ 7.4.1, 7.4.3, 7.4.4, 7.4.5, 7.5.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
     safecode: [ 28 ]
@@ -392,7 +392,7 @@ suits:
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
     owasp_scp: [ 96 ]
-    owasp_asvs5: [ 7.3.1, 7.3.2, 7.6.1 ]
+    owasp_asvs5: [ 7.3.1, 7.3.2, 7.4.1, 7.4.2, 7.6.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
     safecode: [ 28 ]
