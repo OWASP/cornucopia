@@ -403,7 +403,7 @@ suits:
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
     owasp_scp: [ 69, 75, 76, 119, 138 ]
-    owasp_asvs5: [ 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1, 16.2.5, 16.3.1 ]
+    owasp_asvs5: [ 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1, 14.2.2, 16.2.5, 16.5.1 ]
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 60 ]
