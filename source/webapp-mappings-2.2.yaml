@@ -358,7 +358,7 @@ suits:
     value: "5"
     url: "https://cornucopia.owasp.org/cards/SM5"
     owasp_scp: [ 60, 62, 66, 67, 71, 72 ]
-    owasp_asvs5: [ 7.2.3, 7.2.4, 7.4.1 ]
+    owasp_asvs5: [ 7.2.1, 7.2.2, 7.2.3, 7.2.4, 7.4.1 ]
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31 ]
