@@ -485,7 +485,7 @@ suits:
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AZ3"
     owasp_scp: [ 51, 100, 135, 139, 140, 141, 150 ]
-    owasp_asvs5: [ 5.3.1, 8.2.1, 14.1.1, 14.2.1, 14.2.2, 14.2.7, 14.3.2, 16.5.3 ]
+    owasp_asvs5: [ 14.2.2, 14.2.5, 14.2.7, 14.3.1, 14.3.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 69, 213 ]
     safecode: [ 8, 10, 11 ]
