@@ -368,7 +368,7 @@ suits:
     id: "C3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/C3"
-    desc: "Andrew can access source code, or decompile, or otherwise access business logic to understand how the application works and any secrets contained"
+    desc: "Andrew can access source code, or decompile, or debug, or otherwise access business logic to understand how the application works and any secrets contained"
   -
     id: "C4"
     value: "4"
