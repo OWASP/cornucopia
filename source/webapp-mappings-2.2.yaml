@@ -602,7 +602,7 @@ suits:
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
     owasp_scp: [ 77, 89, 91 ]
-    owasp_asvs5: [ 8.2.1, 8.3.1 ]
+    owasp_asvs5: [ 7.2.1, 8.2.1, 8.3.1, 8.4.2, 13.2.3 ]
     owasp_asvs_print: [ 4.1.1, 4.1.2, 10.2.3-6 ]
     owasp_appsensor: [ "-" ]
     capec: [ 207, 554 ]
