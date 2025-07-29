@@ -629,7 +629,7 @@ suits:
     value: "2"
     url: "https://cornucopia.owasp.org/cards/CR2"
     owasp_scp: [ 105, 133, 135 ]
-    owasp_asvs5: [ 11.2.1, 11.3.1, 11.3.2, 11.3.3, 11.4.1, 11.6.1 ]
+    owasp_asvs5: [ 11.2.1, 11.3.2, 11.3.3, 11.4.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
     safecode: [ 21, 29 ]
@@ -640,7 +640,7 @@ suits:
     value: "3"
     url: "https://cornucopia.owasp.org/cards/CR3"
     owasp_scp: [ 92, 205, 212 ]
-    owasp_asvs5: [ 15.2.4 ]
+    owasp_asvs5: [ 11.4.3 ]
     owasp_asvs_print: [ 10.2.3-6, 10.3.1, 10.3.2, 14.1.1, 14.1.4, 14.1.5 ]
     owasp_appsensor: [ SE1, IE4 ]
     capec: [ 31, 39, 68, 75, 133, 145, 162, 203, 438, 439, 442 ]
