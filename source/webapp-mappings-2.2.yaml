@@ -567,7 +567,7 @@ suits:
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AZX"
     owasp_scp: [ 78, 91 ]
-    owasp_asvs5: [ 8.3.1 ]
+    owasp_asvs5: [ 8.3.1, 8.3.2, 8.4.1, 13.2.1, 16.3.3 ]
     owasp_appsensor: [ ACE1, ACE2, ACE3, ACE4 ]
     owasp_appsensor_print: [ ACE1-4 ]
     capec: [ 36, 95, 121, 179 ]
