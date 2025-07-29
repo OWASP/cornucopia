@@ -579,7 +579,7 @@ suits:
     value: "J"
     url: "https://cornucopia.owasp.org/cards/AZJ"
     owasp_scp: [ 89, 90 ]
-    owasp_asvs5: [ 8.2.1 ]
+    owasp_asvs5: [ 8.2.1, 8.3.1, 8.4.2 ]
     owasp_asvs_print: [ 4.1.2, 10.2.3-6 ]
     owasp_appsensor: [ "-" ]
     capec: [ 75, 133, 203 ]
