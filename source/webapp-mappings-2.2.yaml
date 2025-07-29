@@ -663,7 +663,7 @@ suits:
     value: "5"
     url: "https://cornucopia.owasp.org/cards/CR5"
     owasp_scp: [ 103, 145 ]
-    owasp_asvs5: [ 11.2.5, 12.1.1, 12.2.1, 12.3.1, 12.3.3 ]
+    owasp_asvs5: [ 11.2.5, 12.2.1, 12.3.1, 12.3.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
     safecode: [ 21, 29 ]
