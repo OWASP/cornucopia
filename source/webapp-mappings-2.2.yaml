@@ -652,7 +652,7 @@ suits:
     value: "4"
     url: "https://cornucopia.owasp.org/cards/CR4"
     owasp_scp: [ 37, 88, 143, 214 ]
-    owasp_asvs5: [ 12.2.1, 14.2.1 ]
+    owasp_asvs5: [ 12.2.1, 14.2.1, 14.2.6 ]
     owasp_appsensor: [ "-" ]
     capec: [ 185, 186, 187 ]
     safecode: [ 14, 29, 30 ]
