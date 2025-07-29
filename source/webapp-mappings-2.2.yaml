@@ -718,7 +718,7 @@ suits:
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CRX"
     owasp_scp: [ 104, 105 ]
-    owasp_asvs5: [ 11.5.2 ]
+    owasp_asvs5: [ 11.2.3, 11.4.2, 11.4.3, 11.4.4, 11.5.1, 11.5.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 97, 463 ]
     safecode: [ 14, 21, 29, 31, 32, 33 ]
@@ -729,7 +729,7 @@ suits:
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CRJ"
     owasp_scp: [ 35, 90, 171, 172 ]
-    owasp_asvs5: [ 11.1.1, 11.1.2, 13.3.1, 13.3.3 ]
+    owasp_asvs5: [ 13.3.1, 13.3.3, 14.2.2, 16.2.5 ]
     owasp_appsensor: [ "-" ]
     capec: [ 116 ]
     safecode: [ 21, 29 ]
