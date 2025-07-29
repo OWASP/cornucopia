@@ -752,7 +752,7 @@ suits:
     value: "K"
     url: "https://cornucopia.owasp.org/cards/CRK"
     owasp_scp: [ 31, 101 ]
-    owasp_asvs5: [ 11.2.4, 11.2.5, 11.3.1, 11.3.2, 11.3.3, 11.3.4, 11.3.5, 11.4.1, 13.3.1 ]
+    owasp_asvs5: [ 11.2.4, 11.2.5, 11.3.1, 11.3.2, 11.3.3, 11.3.4, 11.3.5, 11.4.1, 11.5.1, 11.6.1, 11.6.2 ]
     owasp_asvs_print: [ 1.6.2, 6.2.5-8 ]
     owasp_appsensor: [ "-" ]
     capec: [ 207, 554 ]
