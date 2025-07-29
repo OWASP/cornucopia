@@ -813,7 +813,7 @@ suits:
     value: "5"
     url: "https://cornucopia.owasp.org/cards/C5"
     owasp_scp: [ "-" ]
-    owasp_asvs5: [ 3.7.2, 3.7.3, 12.1.4, 12.2.1, 12.2.2, 12.3.1, 12.3.4 ]
+    owasp_asvs5: [ 3.4.3, 3.4.6, 3.4.7, 3.4.8, 3.7.2, 3.7.3, 12.1.4, 12.2.1, 12.2.2, 12.3.1, 12.3.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 89, 103, 181, 459 ]
     safecode: [ "-" ]
