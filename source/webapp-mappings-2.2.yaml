@@ -885,7 +885,7 @@ suits:
     url: "https://cornucopia.owasp.org/cards/CJ"
     owasp_scp: [ 90, 137, 148, 151, 152, 153, 154, 175, 176, 177, 178, 179, 186, 192 ]
     owasp_scp_print: [ 90, 137, 148, 151-154, 175-179, 186, 192 ]
-    owasp_asvs5: [ 15.1.1, 15.2.1 ]
+    owasp_asvs5: [ 15.1.1, 15.1.2, 15.2.1, 15.2.2, 15.2.3, 15.2.4, 15.2.5 ]
     owasp_asvs_print: [ 1.14.3, 14.1.1-5, 14.2.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
@@ -897,8 +897,8 @@ suits:
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/CQ"
     owasp_scp: [ "-" ]
-    owasp_asvs5: [ 2.3.1, 2.3.2, 2.4.1, 2.4.2 ]
-    owasp_asvs_print: [ 8.1.4, 11.1.1-4 ]
+    owasp_asvs5: [ 2.3.2, 2.4.1, 2.4.2, 6.3.1, 6.3.5, 6.3.7, 7.4.5, 7.5.1, 7.5.2, 7.5.3, 8.1.4, 8.3.2, 8.4.2, 16.3.1, 16.3.2, 16.3.3, 16.3.4 ]
+    owasp_asvs_print: [ 11.1.1-4 ]
     owasp_appsensor: [ (All) ]
     capec: [ "-" ]
     safecode: [ 1, 27 ]
@@ -909,7 +909,7 @@ suits:
     value: "K"
     url: "https://cornucopia.owasp.org/cards/CK"
     owasp_scp: [ 41, 55 ]
-    owasp_asvs5: [ 2.3.2, 2.4.1, 6.1.1, 6.3.1 ]
+    owasp_asvs5: [ 2.3.2, 2.4.1, 2.4.2, 4.2.5, 4.3.1, 6.1.1, 6.3.1, 10.5.5, 10.6.2 ]
     owasp_appsensor: [ UT1, UT2, UT3, UT4, STE3 ]
     owasp_appsensor_print: [ UT1-4, STE3 ]
     capec: [ 2, 25, 119, 125 ]
