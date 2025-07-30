@@ -58,7 +58,7 @@ suits:
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    desc: "Toby has control over input validation, output validation sanitization or output encoding code or routines so they can be bypassed"
+    desc: "Toby has control over input validation, output validation, sanitization or output encoding code or routines so they can be bypassed"
   -
     id: "VEQ"
     value: "Q"
