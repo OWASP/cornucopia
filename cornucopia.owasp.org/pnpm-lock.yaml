@@ -71,7 +71,7 @@ importers:
         version: 5.37.1
       svelte-check:
         specifier: ^4.3.0
-        version: 4.3.0(picomatch@4.0.2)(svelte@5.37.1)(typescript@5.8.3)
+        version: 4.3.0(picomatch@4.0.2)(svelte@5.37.1)(typescript@5.9.2)
       svelte-sitemap:
         specifier: ^2.7.1
         version: 2.7.1
@@ -82,8 +82,8 @@ importers:
         specifier: ^2.8.1
         version: 2.8.1
       typescript:
-        specifier: ^5.8.3
-        version: 5.8.3
+        specifier: ^5.9.2
+        version: 5.9.2
       vite:
         specifier: ^5.4.19
         version: 5.4.19(@types/node@24.1.0)
@@ -1944,8 +1944,8 @@ packages:
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -3661,7 +3661,7 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  svelte-check@4.3.0(picomatch@4.0.2)(svelte@5.37.1)(typescript@5.8.3):
+  svelte-check@4.3.0(picomatch@4.0.2)(svelte@5.37.1)(typescript@5.9.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.29
       chokidar: 4.0.3
@@ -3669,7 +3669,7 @@ snapshots:
       picocolors: 1.1.1
       sade: 1.8.1
       svelte: 5.37.1
-      typescript: 5.8.3
+      typescript: 5.9.2
     transitivePeerDependencies:
       - picomatch
 
@@ -3791,7 +3791,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typescript@5.8.3: {}
+  typescript@5.9.2: {}
 
   ufo@1.6.1: {}
 
