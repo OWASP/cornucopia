@@ -22,13 +22,13 @@ Each of the attacks on the cards belonging to the various suits will showcase Ap
 
 Join us to take gamified threat modeling to the next level and celebrate the OWASP Foundation's achievements within application security worldwide. We welcome suggestions on what the focus areas of the extension suits in the companion deck should be, which OWASP projects are most relevant for these, and contributors to write the attacks for each card. We are thinking of up to six companion deck suits. Get in touch….
 
+GitHub: https://github.com/OWASP/cornucopia/discussions/1548
+
 Linkedin: https://www.linkedin.com/in/sydseter/
 
 Bluesky: https://bsky.app/profile/sydseter.com
 
 Mastadon: https://mastodon.social/@sydseter
-
-GitHub: https://github.com/OWASP/cornucopia/discussions/1548
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [OWASP Foundation](https://owasp.org "[external]") is a non-profit foundation that envisions a world with no more insecure software. Our mission is to be the global open community that powers secure software through education, tools, and collaboration. We maintain hundreds of open source projects, run industry-leading educational and training conferences, and meet through over 250 chapters worldwide.
