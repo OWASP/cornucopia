@@ -1,7 +1,7 @@
 ---
 date: 20250623
 author: johan-sydseter
-tags: owasp,cornucopia,copi,gamification,threat-modeling
+tags: owasp,cornucopia,gamification,threat-modeling
 hidden: false
 description: OWASP Cornucopia Companion Edition
 ---
