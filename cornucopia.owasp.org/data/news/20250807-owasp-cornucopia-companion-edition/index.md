@@ -28,5 +28,7 @@ Bluesky: https://bsky.app/profile/sydseter.com
 
 Mastadon: https://mastodon.social/@sydseter
 
+GitHub: https://github.com/OWASP/cornucopia/discussions/1548
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [OWASP Foundation](https://owasp.org "[external]") is a non-profit foundation that envisions a world with no more insecure software. Our mission is to be the global open community that powers secure software through education, tools, and collaboration. We maintain hundreds of open source projects, run industry-leading educational and training conferences, and meet through over 250 chapters worldwide.
