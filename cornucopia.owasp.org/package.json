@@ -15,7 +15,7 @@
 		"coverage": "vitest --coverage"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^6.0.1",
+		"@sveltejs/adapter-auto": "^6.0.2",
 		"@sveltejs/adapter-cloudflare": "^5.0.1",
 		"@sveltejs/kit": "^2.27.1",
 		"@sveltejs/vite-plugin-svelte": "^4.0.4",
