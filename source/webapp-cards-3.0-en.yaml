@@ -43,7 +43,7 @@ suits:
     id: "VE8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/VE8"
-    desc: "Oana can bypass the centralized sanitization routines since they are not being used comprehensively or akipped for certain types of input"
+    desc: "Oana can bypass the centralized sanitization routines since they are not being used comprehensively"
   -
     id: "VE9"
     value: "9"
@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad can obtain a user's password or other secrets such as MFA codes, or by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known or leaked, or because it never expires, or because the user cannot change the password"
+    desc: "Muhammad can obtain a user's password or other secrets such as MFA codes, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known or leaked, or because it never expires, or because the user cannot change the password"
   -
     id: "AT4"
     value: "4"
