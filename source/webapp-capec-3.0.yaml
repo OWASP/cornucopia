@@ -1,0 +1,13 @@
+---
+meta:
+  edition: "webapp"
+  component: "capec"
+  language: "EN"
+  version: "3.0"
+capec:
+  20: 
+    owasp_asvs: [ ]
+    owasp_dev_guide: [ ]
+  21:
+    owasp_asvs: [ ]
+    owasp_dev_guide: [ ]
