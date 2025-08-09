@@ -25,7 +25,8 @@ suits:
     capec: [ 54, 150, 215, 497, 541 ]
     capec_map:
       54:
-        owasp_asvs:
+        owasp_asvs: [ 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.5.1 ]
+        owasp_dev_guide: [ SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
       150:
       215:
       497:
