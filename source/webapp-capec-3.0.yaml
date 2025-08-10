@@ -25,23 +25,29 @@ suits:
     capec: [ 54, 150, 215, 143, 144, 497, 541 ]
     capec_map:
       54:
-        owasp_asvs: [ 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.5.1 ]
+        owasp_asvs: [ 13.2.2, 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.5.1 ]
         owasp_dev_guide: [ SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
       143:
-        owasp_asvs: [ 15.2.3 ]
+        owasp_asvs: [ 13.2.2, 15.2.3 ]
         owasp_dev_guide: [ SC3, SC4 ]
       144:
-        owasp_asvs: [ 15.2.3 ]
+        owasp_asvs: [ 13.2.2, 15.2.3 ]
         owasp_dev_guide: [ SC3, SC4 ]
+      149:
+        owasp_asvs: [ 13.2.2, 13.4.1, 13.4.3, 13.4.7, 15.2.3 ]
+        owasp_dev_guide: [ SC1, SC2, SC3, SC4, SC9, SC11, FM1, FM2, FM5 ]
       150:
-        owasp_asvs: [ 13.3.1, 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.2.5, 16.4.2, 16.5.1 ]
-        owasp_dev_guide: [ SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
+        owasp_asvs: [ 13.2.2, 13.3.1, 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.2.5, 16.4.2, 16.5.1 ]
+        owasp_dev_guide: [ SC1, SC2, SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
+      155:
+        owasp_asvs: [ 13.2.2, 13.4.1, 13.4.3, 13.4.7, 15.2.3 ]
+        owasp_dev_guide: [ SC1, SC2, SC3, SC4, SC9, SC11, FM1, FM2, FM5 ]
       215:
-        owasp_asvs: [ 13.4.2, 13.4.6, 16.2.5, 16.4.2, 16.5.1 ]
+        owasp_asvs: [ 13.2.2, 13.4.2, 13.4.6, 16.2.5, 16.4.2, 16.5.1 ]
         owasp_dev_guide: [ SC10, EE6, EE7, EE8 ]
       497:
-        owasp_asvs: [ 13.4.1, 13.4.3, 15.2.3 ]
-        owasp_dev_guide: [ SC3, SC4, SC9, SC11, FM1, FM2, FM5 ]
+        owasp_asvs: [ 13.2.2, 13.4.1, 13.4.3, 13.4.7, 15.2.3 ]
+        owasp_dev_guide: [ SC1, SC2, SC3, SC4, SC9, SC11, FM1, FM2, FM5 ]
       541:
     safecode: [ 4, 23 ]
     owasp_cre:
