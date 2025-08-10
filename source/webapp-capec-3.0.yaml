@@ -40,6 +40,8 @@ suits:
         owasp_asvs: [ 13.4.2, 13.4.6, 16.2.5, 16.4.2, 16.5.1 ]
         owasp_dev_guide: [ SC10, EE6, EE7, EE8 ]
       497:
+        owasp_asvs: [ 13.4.1, 13.4.3, 15.2.3 ]
+        owasp_dev_guide: [ SC3, SC4, SC9, SC11, FM1, FM2, FM5 ]
       541:
     safecode: [ 4, 23 ]
     owasp_cre:
