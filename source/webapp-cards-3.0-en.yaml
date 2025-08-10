@@ -118,7 +118,7 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    desc: "Claudia can undertake more critical functions because authentication requirements are inconsistent, too weak (e.g. do not use strong authentication such as a recomended MFA method), or there is no requirement to re-authenticate for these, or beacuse of an insecure or risky authentication method has been implemented"
+    desc: "Claudia can undertake more critical functions because authentication requirements are inconsistent, too weak (e.g. do not use passkeys or other strong authentication such as a recomended MFA method), or there is no requirement to re-authenticate for these"
   -
     id: "ATX"
     value: "10"
@@ -128,7 +128,7 @@ suits:
     id: "ATJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/ATJ"
-    desc: "Mark can access resources or services because there is no authentication requirement, or because authentication is missing due to misconfiguration, improper design or -implementation, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
+    desc: "Mark can access resources or services because there is no authentication requirement, or because authentication is missing due to misconfiguration, improper design or implementation, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action"
   -
     id: "ATQ"
     value: "Q"
@@ -158,7 +158,7 @@ suits:
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    desc: "Ryan can continue to use a stolen session for its maximum duration because the user can not check whether the session might be stolen, or can not terminate it or ask the administrator to do so"
+    desc: "Ryan can continue to use a stolen session for its maximum duration because the user can not check whether the session might be stolen, or terminate the session or ask the administrator to do so"
   -
     id: "SM4"
     value: "4"
@@ -178,7 +178,7 @@ suits:
     id: "SM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
-    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or the log out- or changes to authentication factors does not properly make it possible for the user to terminate the session or sessions"
+    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or because the log out and other mechanisms for authentication settings do not permit the user to terminate the session or sessions"
   -
     id: "SM8"
     value: "8"
