@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "83ef16684d3cb794577763aa435e1ae1de560c38403742cc7f8f05f37102e574"
+            "sha256": "022333703011d3d340772242c96596b7a44fa05c4fab88637238ef499929b7da"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -770,12 +770,12 @@
         },
         "freezegun": {
             "hashes": [
-                "sha256:798b9372fdd4d907f33e8b6a58bc64e682d9ffa8d494ce60f780197ee81faed1",
-                "sha256:8bdd75c9d790f53d5a173d273064ccd7900984b36635be552befeedb0cd47b20"
+                "sha256:ac7742a6cc6c25a2c35e9292dfd554b897b517d2dec26891a2e8debf205cb94a",
+                "sha256:cd557f4a75cf074e84bc374249b9dd491eaeacd61376b9eb3c423282211619d2"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==1.5.4"
+            "version": "==1.5.5"
         },
         "httpretty": {
             "hashes": [
