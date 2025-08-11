@@ -158,7 +158,7 @@ suits:
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    desc: "Ryan can continue to use a stolen session for its maximum duration because the user can not check whether the session might be stolen, or can not terminate it or ask the administrator to do so"
+    desc: "Ryan can continue to use a stolen session for its maximum duration because the user can not check whether the session might be stolen, or terminate the session or ask the administrator to do so"
   -
     id: "SM4"
     value: "4"
