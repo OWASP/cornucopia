@@ -118,7 +118,7 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    desc: "Claudia can undertake more critical functions because authentication requirements are inconsistent, too weak (e.g. do not use strong authentication such as a recomended MFA method), or there is no requirement to re-authenticate for these"
+    desc: "Claudia can undertake more critical functions because authentication requirements are inconsistent, too weak (e.g. do not use passkeys or other strong authentication such as a recomended MFA method), or there is no requirement to re-authenticate for these"
   -
     id: "ATX"
     value: "10"
