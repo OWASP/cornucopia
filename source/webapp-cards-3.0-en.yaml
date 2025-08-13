@@ -453,10 +453,10 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Website App Edition v2.1-EN"
+    text: "Website App Edition v3.0-EN"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v2.1-EN"
+    text: "OWASP® Cornucopia Website App Edition v3.0-EN"
   -
     id: "T00005"
     text: "Index"
