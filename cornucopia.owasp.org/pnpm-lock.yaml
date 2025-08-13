@@ -46,8 +46,8 @@ importers:
         version: 3.1.1(vite@5.4.19(@types/node@24.2.1))
     devDependencies:
       '@sveltejs/adapter-auto':
-        specifier: ^6.0.2
-        version: 6.0.2(@sveltejs/kit@2.27.3(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))
+        specifier: ^6.1.0
+        version: 6.1.0(@sveltejs/kit@2.27.3(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))
       '@sveltejs/adapter-cloudflare':
         specifier: ^5.0.1
         version: 5.0.1(@sveltejs/kit@2.27.3(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(wrangler@3.105.0(@cloudflare/workers-types@4.20250121.0))
@@ -767,6 +767,9 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.4':
     resolution: {integrity: sha512-VT2+G1VQs/9oz078bLrYbecdZKs912zQlkelYpuf+SXF+QvZDYJlbx/LSx+meSAwdDFnF8FVXW92AVjjkVmgFw==}
 
+  '@jridgewell/sourcemap-codec@1.5.5':
+    resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
   '@jridgewell/trace-mapping@0.3.29':
     resolution: {integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==}
 
@@ -916,8 +919,8 @@ packages:
     peerDependencies:
       acorn: ^8.9.0
 
-  '@sveltejs/adapter-auto@6.0.2':
-    resolution: {integrity: sha512-SEyhlW5dMcsAZBONGCKUlK3+Ywr+8I2OupJh7OJR0URqsGzvkcWKRkBXqWifWVJnehjCGVLaqD/94aZ3xpj1jQ==}
+  '@sveltejs/adapter-auto@6.1.0':
+    resolution: {integrity: sha512-shOuLI5D2s+0zTv2ab5M5PqfknXqWbKi+0UwB9yLTRIdzsK1R93JOO8jNhIYSHdW+IYXIYnLniu+JZqXs7h9Wg==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
@@ -2506,6 +2509,8 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.4': {}
 
+  '@jridgewell/sourcemap-codec@1.5.5': {}
+
   '@jridgewell/trace-mapping@0.3.29':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
@@ -2514,7 +2519,7 @@ snapshots:
   '@jridgewell/trace-mapping@0.3.9':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.5.4
+      '@jridgewell/sourcemap-codec': 1.5.5
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -2616,7 +2621,7 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  '@sveltejs/adapter-auto@6.0.2(@sveltejs/kit@2.27.3(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))':
+  '@sveltejs/adapter-auto@6.1.0(@sveltejs/kit@2.27.3(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))':
     dependencies:
       '@sveltejs/kit': 2.27.3(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1)))(svelte@5.38.1)(vite@5.4.19(@types/node@24.2.1))
 
