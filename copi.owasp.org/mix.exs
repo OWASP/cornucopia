@@ -32,7 +32,7 @@ defmodule Copi.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.14"},
+      {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.6.4"},
       {:ecto_sql, "~> 3.13.0"},
       {:postgrex, ">= 0.0.0"},
