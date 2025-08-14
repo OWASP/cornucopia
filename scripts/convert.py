@@ -93,7 +93,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
 
 
 def create_edition_from_template(
-    layout: str, language: str = "en", template: str = "bridge", version: str = "2.1", edition: str = "webapp"
+    layout: str, language: str = "en", template: str = "bridge", version: str = "3.0", edition: str = "webapp"
 ) -> None:
 
     # Get the list of available translation files
@@ -970,7 +970,7 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
             continue
         el.text = get_replacement_value_from_dict(el.text, replacement_values)
         with open(filename, "bw") as f:
-            f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
+            f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))  # type: ignore
 
 
 def zip_dir(path: str, zip_filename: str) -> None:
