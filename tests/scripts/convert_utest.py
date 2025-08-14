@@ -90,22 +90,22 @@ class TextGetValidVersionChoices(unittest.TestCase):
         self.assertTrue(c.get_valid_mapping_for_version("1.1", edition="all"))
         self.assertTrue(c.get_valid_mapping_for_version("1.1", edition="mobileapp"))
         self.assertTrue(c.get_valid_mapping_for_version("2.1", edition="webapp"))
-        self.assertTrue(c.get_valid_mapping_for_version("2.1", edition="webapp"))
+        self.assertTrue(c.get_valid_mapping_for_version("3.0", edition="webapp"))
         self.assertFalse(c.get_valid_mapping_for_version("1.1", edition="webapp"))
         self.assertFalse(c.get_valid_mapping_for_version("2.1", edition="mobileapp"))
         self.assertFalse(c.get_valid_mapping_for_version("2.00", edition="mobileapp"))
 
         c.convert_vars.args = argparse.Namespace(version="all", edition="all")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.0", "1.1", "2.00", "2.1", "5.0"]
+        want_list = ["1.0", "1.1", "2.00", "2.1", "3.0", "5.0"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(version="latest", edition="all")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.1", "2.1"]
+        want_list = ["1.1", "3.0"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(version="", edition="all")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.1", "2.1"]
+        want_list = ["1.1", "3.0"]
         self.assertListEqual(want_list, got_list)
 
 
@@ -386,7 +386,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
 class TestRenameOutputFile(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
-        self.input_meta_data = {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"}
+        self.input_meta_data = {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"}
 
     def tearDown(self) -> None:
         c.convert_vars.args.outputfile = ""
@@ -396,7 +396,7 @@ class TestRenameOutputFile(unittest.TestCase):
         file_extension = ".docx"
         template = "bridge"
         layout = "guide"
-        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_2.1_guide_en.docx")
+        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_3.0_guide_en.docx")
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -406,7 +406,7 @@ class TestRenameOutputFile(unittest.TestCase):
         file_extension = ".idml"
         template = "bridge"
         layout = "guide"
-        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_2.1_guide_en.idml")
+        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_3.0_guide_en.idml")
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
@@ -417,7 +417,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "bridge"
         layout = "guide"
         want_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_2.1_guide_bridge_en.docx"
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx"
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -429,7 +429,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "bridge"
         layout = "guide"
         want_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_2.1_guide_bridge_en.docx"
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx"
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -441,7 +441,7 @@ class TestRenameOutputFile(unittest.TestCase):
         template = "bridge"
         layout = "guide"
         want_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_2.1_guide_bridge_en.docx"
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx"
         )
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
@@ -455,9 +455,9 @@ class TestGetFindReplaceList(unittest.TestCase):
             ("_layout", "_bridge"),
             ("_document_template", "_guide"),
             ("_lang", "_en"),
-            ("_ver", "_2.1"),
+            ("_ver", "_3.0"),
         ]
-        self.input_meta_data = {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"}
+        self.input_meta_data = {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"}
 
     def test_get_find_replace_list_default(self) -> None:
         want_list = self.want_list_default
@@ -472,7 +472,7 @@ class TestValidMeta(unittest.TestCase):
             "edition": "webapp",
             "component": "mappings",
             "language": "ALL",
-            "version": "2.1",
+            "version": "3.0",
             "languages": ["en"],
             "layouts": ["cards", "leaflet", "guide"],
             "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
@@ -481,11 +481,11 @@ class TestValidMeta(unittest.TestCase):
     def test_valid_meta(self) -> None:
         want_logging_error_message = (
             "WARNING:root:Translation in fr does not exist for edition: webapp, "
-            "version: 2.1 or the translation choices are missing from the meta "
+            "version: 3.0 or the translation choices are missing from the meta "
             "-> languages section in the mappings file"
         )
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
-            valid: bool = c.valid_meta(self.meta, "fr", "webapp", "2.1", "bridge", "cards")
+            valid: bool = c.valid_meta(self.meta, "fr", "webapp", "3.0", "bridge", "cards")
         self.assertFalse(valid)
         self.assertIn(want_logging_error_message, " ".join(ll.output))
 
@@ -493,7 +493,7 @@ class TestValidMeta(unittest.TestCase):
 class TestGetMetaData(unittest.TestCase):
     def setUp(self) -> None:
         self.test_data: Dict[str, Any] = {
-            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"},
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"},
             "suits": [
                 {
                     "id": "VE",
@@ -517,7 +517,7 @@ class TestGetMetaData(unittest.TestCase):
 
     def test_get_meta_data_defaults(self) -> None:
         input_data = self.test_data.copy()
-        want_data = {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"}
+        want_data = {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"}
 
         got_data = c.get_meta_data(input_data)
         self.assertDictEqual(want_data, got_data)
@@ -542,7 +542,7 @@ class TestGetLanguageData(unittest.TestCase):
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
         self.test_data: Dict[str, Any] = {
-            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"},
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"},
             "suits": [
                 {
                     "id": "VE",
@@ -575,7 +575,7 @@ class TestGetLanguageData(unittest.TestCase):
                         },
                         {
                             "value": "Title",
-                            "text": "OWASP Cornucopia Website App Edition v2.1-EN",
+                            "text": "OWASP Cornucopia Website App Edition v3.0-EN",
                         },
                     ],
                 },
@@ -589,7 +589,7 @@ class TestGetLanguageData(unittest.TestCase):
         self.assertTrue(c.has_translation_for_edition({"languages": ["en"]}, "en"))
 
     def test_get_language_data_translation_meta(self) -> None:
-        want_meta = {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"}
+        want_meta = {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"}
 
         got_data = c.get_language_data(self.input_yaml_files, self.input_language)
         self.assertEqual(want_meta, got_data["meta"])
@@ -625,12 +625,12 @@ class TestGetLanguageData(unittest.TestCase):
             "edition": "webapp",
             "component": "mappings",
             "language": "ALL",
-            "version": "2.1",
+            "version": "3.0",
             "languages": ["en", "es"],
             "layouts": ["cards", "leaflet", "guide"],
             "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
         }
-        got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "2.1", "webapp")
+        got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "3.0", "webapp")
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_mapping_data_for_edition_first_suit_first_card(self) -> None:
@@ -657,9 +657,9 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
         test_source_yaml = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml")
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
-        self.input_version = "2.1"
+        self.input_version = "3.0"
         self.test_data: Dict[str, Any] = {
-            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"},
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"},
             "suits": [
                 {
                     "id": "VE",
@@ -692,7 +692,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
                         },
                         {
                             "value": "Title",
-                            "text": "OWASP Cornucopia Website App Edition v2.1-EN",
+                            "text": "OWASP Cornucopia Website App Edition v3.0-EN",
                         },
                     ],
                 },
@@ -700,7 +700,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
         }
 
     def test_get_language_data_translation_meta(self) -> None:
-        want_meta = {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"}
+        want_meta = {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"}
 
         got_data = c.get_language_data(self.input_yaml_files, self.input_language, self.input_version)
         self.assertEqual(want_meta, got_data["meta"])
@@ -737,7 +737,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "edition": "webapp",
             "component": "mappings",
             "language": "ALL",
-            "version": "2.1",
+            "version": "3.0",
             "layouts": ["cards", "leaflet", "guide"],
             "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
             "languages": ["en", "es"],
@@ -768,7 +768,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
 
 class TestParseArguments(unittest.TestCase):
     def test_parse_arguments_short_form_basic_success(self) -> None:
-        input_args = ["-lt", "cards", "-v", "2.1"]
+        input_args = ["-lt", "cards", "-v", "3.0"]
         want_args = argparse.Namespace(
             inputfile="",
             outputfile="",
@@ -776,7 +776,7 @@ class TestParseArguments(unittest.TestCase):
             language="en",
             debug=False,
             template="bridge",
-            version="2.1",
+            version="3.0",
             edition="all",
             layout="cards",
         )
@@ -864,9 +864,9 @@ class TestGetFilesFromOfType(unittest.TestCase):
         want_files = list(
             path + os.sep + f
             for f in [
-                "webapp-cards-2.1-en.yaml",
-                "webapp-cards-2.1-es.yaml",
-                "webapp-mappings-2.1.yaml",
+                "webapp-cards-3.0-en.yaml",
+                "webapp-cards-3.0-es.yaml",
+                "webapp-mappings-3.0.yaml",
             ]
         )
 
@@ -939,7 +939,7 @@ class TestGetReplacementDict(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
         self.input_data = {
-            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"},
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"},
             "suits": [
                 {
                     "id": "VE",
@@ -976,7 +976,7 @@ class TestGetReplacementDict(unittest.TestCase):
 
     def test_build_template_dict_success(self) -> None:
         want_data = {
-            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "2.1"},
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"},
             "${VE_suit}": "Data validation & encoding",
             "${VE_VEA_id}": "VEA",
             "${VE_VEA_value}": "A",
@@ -1009,9 +1009,9 @@ class TestCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
     def test_check_fix_file_extension_no_extension_with_version(self) -> None:
-        input_filename = "hello_v2.1"
+        input_filename = "hello_v3.0"
         input_extension = "docx"
-        want_filename = "hello_v2.1.docx"
+        want_filename = "hello_v3.0.docx"
 
         got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
@@ -1041,9 +1041,9 @@ class TestCheckFixFileExtension(unittest.TestCase):
         self.assertEqual(want_filename, got_filename)
 
     def test_check_fix_file_extension_with_folders(self) -> None:
-        input_filename = "output" + os.sep + "folder" + os.sep + "hello_v2.1"
+        input_filename = "output" + os.sep + "folder" + os.sep + "hello_v3.0"
         input_extension = "docx"
-        want_filename = "output" + os.sep + "folder" + os.sep + "hello_v2.1.docx"
+        want_filename = "output" + os.sep + "folder" + os.sep + "hello_v3.0.docx"
 
         got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
@@ -1089,7 +1089,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "edition": "webapp",
                 "component": "mappings",
                 "language": "ALL",
-                "version": "2.1",
+                "version": "3.0",
                 "layouts": ["cards", "leaflet", "guide"],
                 "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
                 "languages": ["en", "es"],
@@ -1110,15 +1110,15 @@ class TestGetMappingForEdition(unittest.TestCase):
             "${VE_VE3_safecode}": "3, 16, 24, 35",
         }
 
-        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "2.1", "en", "webapp", "bridge", "cards")
+        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_empty(self) -> None:
-        input_yaml_files = [os.path.join(self.BASE_PATH, "source", "webapp-cards-2.1-en.yaml")]
+        input_yaml_files = [os.path.join(self.BASE_PATH, "source", "webapp-cards-3.0-en.yaml")]
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "2.1", "en", "webapp", "bridge", "cards")
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:Could not retrieve valid mapping information", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
@@ -1127,7 +1127,7 @@ class TestGetMappingForEdition(unittest.TestCase):
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "2.1", "en", "webapp", "bridge", "cards")
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:Could not retrieve valid mapping information", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
@@ -1201,7 +1201,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             language="es",
             debug=False,
             template="bridge",
-            version="2.1",
+            version="3.0",
             layout="guide",
             pdf=True,
             edition="webapp",
@@ -1224,7 +1224,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             language="es",
             debug=False,
             template="bridge",
-            version="2.1",
+            version="3.0",
             layout="guide",
             pdf=True,
             edition="webapp",
@@ -1240,7 +1240,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             c.create_edition_from_template("invalid", "es")
 
         self.assertIn(
-            "WARNING:root:The layout: invalid does not exist for edition: webapp, version: 2.1 "
+            "WARNING:root:The layout: invalid does not exist for edition: webapp, version: 3.0 "
             "or the layout choices are missing from the meta -> layouts section in the mappings file",
             " ".join(ll.output),
         )
@@ -1250,26 +1250,26 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
             c.create_edition_from_template("guide", "es", "invalid")
         self.assertIn(
-            "WARNING:root:The template: invalid does not exist for edition: webapp, version: 2.1 or "
+            "WARNING:root:The template: invalid does not exist for edition: webapp, version: 3.0 or "
             "the template choices are missing from the meta templates section in the mappings file",
             " ".join(ll.output),
         )
 
     def test_create_edition_from_template_spanish(self) -> None:
-        want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_2.1_guide_bridge_es.docx")
+        want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_es.docx")
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("guide", "es")
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
-        self.assertIn("owasp_cornucopia_webapp_2.1_guide_bridge_es.docx", " ".join(ll.output))
+        self.assertIn("owasp_cornucopia_webapp_3.0_guide_bridge_es.docx", " ".join(ll.output))
 
         self.assertTrue(os.path.isfile(want_file))
 
     def test_create_edition_from_template_en_idml(self) -> None:
         self.want_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_2.1_cards_bridge_en.idml"
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_cards_bridge_en.idml"
         )
         c.convert_vars.args.outputfile = self.want_file
         if os.path.isfile(self.want_file):
@@ -1278,7 +1278,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("cards", "en")
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
-        self.assertIn("owasp_cornucopia_webapp_2.1_cards_bridge_en.idml", " ".join(ll.output))
+        self.assertIn("owasp_cornucopia_webapp_3.0_cards_bridge_en.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
 
     def test_create_edition_from_template_es_specify_output(self) -> None:
@@ -1332,7 +1332,7 @@ class TestSaveIdmlFile(unittest.TestCase):
             "owasp_cornucopia_webapp_ver_cards_bridge_lang.idml",
         )
         self.want_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_2.1_cards_bridge_en.idml"
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_cards_bridge_en.idml"
         )
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
