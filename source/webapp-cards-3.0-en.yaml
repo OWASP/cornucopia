@@ -483,7 +483,7 @@ paragraphs:
     text: "Keith Turpin and contributors to the OWASP® “Secure Coding Practices - Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards."
   -
     id: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP® ASVS, AppSensor and Web Framework Security Matrix projects, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Contributors, supporters, sponsors and volunteers to the OWASP® ASVS, AppSensor, DevGuide and Web Framework Security Matrix projects, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
     id: "T00140"
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
@@ -534,7 +534,7 @@ paragraphs:
     text: "The card deck (pack)"
   -
     id: "T00310"
-    text: "Instead of EoP's STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP® Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP® Application Security Verification Standard, the Web Security Testing Guide (WSTG) and David Rook's Principles of Secure Development. "
+    text: "Instead of EoP's STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP® Secure Coding Practices - Quick Reference Guide (SCP), but has recently been migrated to use the OWASP DevGuide Web Checklist with additional consideration of sections from the OWASP® Application Security Verification Standard, the Web Security Testing Guide (WSTG) and David Rook's Principles of Secure Development. "
   -
     id: "T00320"
     text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
@@ -561,7 +561,7 @@ paragraphs:
     text: "Similar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King) but, unlike EoP, there are also two Joker cards."
   -
     id: "T00400"
-    text: "The content was mainly drawn from the SCP."
+    text: "The content was mainly drawn from the SCP, but has recently been migrated to use the OWASP® DevGuide Web Checklist."
   -
     id: "T00500"
     text: "Mappings"
@@ -573,7 +573,7 @@ paragraphs:
     text: "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
   -
     id: "T00530"
-    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP® SCP v2, ASVS v4.0 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
+    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP® DevGuide Web Checklist v4.1.9, ASVS v5.0 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
   -
     id: "T00600"
     text: "Game strategy"
@@ -687,16 +687,16 @@ paragraphs:
     text: "This means the attacker (William) can create new session identifiers that the application accepts."
   -
     id: "T01180"
-    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP® “Application Security Verification Standard”, the security focused stories in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
+    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP® “Application Security Verification Standard”, the security focused stories in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP. in OWASP Cornucopia Website Edition v3.0 the SCP mapping was migrated to use the OWASP DevGuide Web Checklist"
   -
     id: "T01190"
-    text: "Further guidance about each card is available in the online Wiki Deck at "
+    text: "Further guidance about each card is available on the OWASP Website at "
   -
     id: "T01200"
     text: "Lookups between the attacks and five resources are provided on most cards:"
   -
     id: "T01210"
-    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, November 2010 "
+    text: "Requirements in “OWASP DevGuide - Web Checklist”, v4.1.9, OWASP®, July 2025 "
   -
     id: "T01220"
     text: "Verification IDs in OWASP® “Application Security Verification Standard”"
@@ -1297,6 +1297,12 @@ paragraphs:
   -
     id: "T03760"
     text: "Adding portugeese translation done by André Ferreira"
+  -
+    id: "T03770"
+    text: "3.0"
+  -
+    id: "T03780"
+    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9 and ASVS from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices."
   -
     id: "T03800"
     text: "Project contributors"
