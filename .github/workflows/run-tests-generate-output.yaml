@@ -101,6 +101,10 @@ jobs:
           pipenv run python scripts/convert.py -l en -lt cards -t all -v 2.1 -e webapp
           pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 2.1 -e webapp
           pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 2.1 -e webapp
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt cards -t all -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 3.0 -e webapp
           pipenv run python scripts/convert.py -l en -lt cards -t all -v 1.1 -e mobileapp
           pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 1.1 -e mobileapp
           pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 1.1 -e mobileapp

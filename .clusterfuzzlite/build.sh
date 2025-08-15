@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 # build project
-python3.10 -m pip install -r requirements.txt --require-hashes
+python3.10 -m pip install -r requirements.txt
 python3.10 -m pip install -r install_cornucopia_deps.txt
 
 # Build fuzzers into $OUT. These could be detected in other ways.

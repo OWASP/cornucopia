@@ -87,6 +87,7 @@
               cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
               #
               pipenv run python scripts/convert.py -l all -lt all -t all -v 2.1 -e webapp
+              pipenv run python scripts/convert.py -l en -lt all -t all -v 3.0 -e webapp
               pipenv run python scripts/convert.py -l en -lt all -t all -v 1.1 -e mobileapp
               #
               cp output/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml output/cornucopia_mobileapp/
