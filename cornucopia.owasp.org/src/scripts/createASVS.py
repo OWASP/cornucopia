@@ -79,15 +79,16 @@ def main():
                     "link": link,
                     "description": description,
                 }
+                
                 #if subitem["L1"]["Required"]:
                 #    L1.append(obj)
-
+                
                 #if subitem["L2"]["Required"]:
                 #    L2.append(obj)
-
+                
                 #if subitem["L3"]["Required"]:
                 #    L3.append(obj)
-
+                
                 #cwe = str(subitem["CWE"]).replace("[", "").replace("]", "")
                 #f.write("CWE: [" + cwe + "](https://cwe.mitre.org/data/definitions/" + cwe + ")\r\n")
                 print("🟪")
@@ -104,7 +105,6 @@ def main():
             )
             f.write("\r\n")
             f.close()
-
     #createLevelSummary(1, L1)
     #createLevelSummary(2, L2)
     #createLevelSummary(3, L3)
