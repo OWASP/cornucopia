@@ -22,7 +22,7 @@ suits:
     owasp_asvs_print: [ 13.2.2, 13.3.1-2, 13.4.1-7, 15.2.3, 16.2.5, 16.4.2, 16.5.1 ]
     owasp_appsensor: [ HT1, HT2, HT3 ]
     owasp_appsensor_print: [ HT1-3 ]
-    capec: [ 54, 143, 144, 149, 150, 155, 215, 497, 541 ]
+    capec: [ 54, 113, 143, 144, 149, 150, 155, 215, 497, 541 ]
     safecode: [ 4, 23 ]
     owasp_cre:
       owasp_asvs: [ 232-325, 774-888, 615-744, '067-050', 838-636,  253-452, 462-245, 743-110 ]
@@ -50,7 +50,7 @@ suits:
     owasp_asvs_print: [ 2.2.1, 2.3.1, 15.3.3-7 ]
     owasp_appsensor: [ RE3, RE4, RE5, RE6, AE8, AE9, AE10, AE11, SE1, SE3, SE4, SE5, SE6, IE2, IE3, IE4, HT1, HT1, HT2, HT3 ]
     owasp_appsensor_print: [ RE3-6, AE8-11, SE1, SE3-6, IE2-4, HT1-3 ]
-    capec: [ 28, 31, 36, 48, 126, 137, 140, 162, 165, 212, 220, 221, 261 ]
+    capec: [ 28, 31, 36, 48, 113, 126, 137, 140, 162, 165, 212, 220, 221, 261 ]
     safecode: [ 24, 35 ]
     owasp_cre:
       owasp_asvs: [ 304-667, 743-237, '042-550', 534-605, 456-535 ]
