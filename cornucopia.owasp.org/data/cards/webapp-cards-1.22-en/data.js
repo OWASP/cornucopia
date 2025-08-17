@@ -498,7 +498,7 @@ let data = {
           },
           {
             "value": "T00130",
-            "text": "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+            "text": "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, Developer Guide, AppSensor and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
           },
           {
             "value": "T00140",
@@ -762,7 +762,7 @@ let data = {
           },
           {
             "value": "T01180",
-            "text": "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
+            "text": "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP. in OWASP Cornucopia Website Edition v3.0 the SCP mapping was replaced by the OWASP Developer Guide Web Application Checklist"
           },
           {
             "value": "T01190",
