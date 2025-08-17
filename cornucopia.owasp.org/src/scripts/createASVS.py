@@ -1,5 +1,4 @@
-# This script converts the JSON from
-# //github.com/OWASP/ASVS/blob/master/4.0/docs_en/OWASP%20Application%20Security%20Verification%20Standard%204.0.3-en.json
+# This script converts the ASVS JSON data
 # to the file structure that our cornucopia website can understand.
 import shutil
 import json
