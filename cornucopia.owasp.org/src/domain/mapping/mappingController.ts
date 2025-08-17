@@ -9,7 +9,7 @@ export type Mapping  =
 export type WebAppMapping  = 
 {
     id : string,
-    owasp_scp : number[],
+    owasp_dev_guide : number[],
     owasp_asvs : string[],
     owasp_appsensor : string[],
     capec : number[],
