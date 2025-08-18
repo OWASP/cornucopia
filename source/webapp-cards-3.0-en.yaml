@@ -153,7 +153,7 @@ suits:
     id: "SM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/SM2"
-    desc: "William has control over the generation of session identifiers"
+    desc: "William has control over the generation of session identifiers or tokens"
   -
     id: "SM3"
     value: "3"
@@ -188,7 +188,7 @@ suits:
     id: "SM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
-    desc: "Ivan can steal session identifiers because they are sent over insecure channels, or are logged, or are revealed in error messages, or are included in URLs, or are accessible un-necessarily by code, cache or load balancers which the attacker can influence or alter"
+    desc: "Ivan can steal session identifiers or tokens because they are sent over insecure channels, or are logged, or are revealed in error messages, or are included in URLs, or are accessible un-necessarily by code, cache or load balancers which the attacker can influence or alter"
   -
     id: "SMX"
     value: "10"
