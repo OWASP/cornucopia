@@ -363,7 +363,7 @@ suits:
     id: "C2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/C2"
-    desc: "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization or allocation issues, or overflows can occur"
+    desc: "Lee can bypass application controls because dangerous/risky programming language functions have been used instead of safer alternatives, or there are type conversion errors, or because the application is unreliable when an external resource is unavailable, or there are race conditions, or there are resource initialization, leak or allocation issues, or overflows can occur"
   -
     id: "C3"
     value: "3"
