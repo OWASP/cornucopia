@@ -404,8 +404,8 @@ suits:
     url: "https://cornucopia.owasp.org/cards/SM5"
     owasp_dev_guide: [ SM2, SM3, SM5, SM8, SM9, SM10, SM11, SM12, SM13, SM14, SM15 ]
     owasp_dev_guide_print: [ SM2-3, SM5, SM8-15 ]
-    owasp_asvs: [ 7.2.1, 7.2.2, 7.2.3, 7.2.4, 10.1.1 ]
-    owasp_asvs_print: [ 7.2.1-4, 10.1.1 ]
+    owasp_asvs: [ 7.2.1, 7.2.2, 7.2.3, 7.2.4 ]
+    owasp_asvs_print: [ 7.2.1-4 ]
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 59, 226 ]
@@ -457,8 +457,8 @@ suits:
     url: "https://cornucopia.owasp.org/cards/SM9"
     owasp_dev_guide: [ SM11, SM12, SM15, SM16, DP5, SL5, EE6 ]
     owasp_dev_guide_print: [ SM11-12, SM15-16, DP5, SL5, EE6 ]
-    owasp_asvs: [ 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1, 14.2.2, 16.2.5, 16.5.1 ]
-    owasp_asvs_print: [ 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1-2, 16.2.5, 16.5.1 ]
+    owasp_asvs: [ 10.1.1, 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1, 14.2.2, 16.2.5, 16.5.1 ]
+    owasp_asvs_print: [ 10.1.1, 12.1.1, 12.2.1, 12.3.1, 12.3.3, 14.2.1-2, 16.2.5, 16.5.1 ]
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 60, 116 ]
