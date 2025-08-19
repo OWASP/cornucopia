@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad can obtain a user's password or other secrets such as MFA codes, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known or leaked, or because it never expires, or because the user cannot change the password"
+    desc: "Muhammad can obtain a user's password or other secrets such as MFA codes or biometrics, by observation during entry, or from a local cache, or from memory, or in transit, or by reading it from some unprotected location, or because it is widely known or leaked"
   -
     id: "AT4"
     value: "4"
@@ -98,17 +98,17 @@ suits:
     id: "AT5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AT5"
-    desc: "Javier can use default, test or easily guessable credentials to authenticate, or can use an old account or an account not necessary for the application"
+    desc: "Javier can use default, test or easily guessable credentials to authenticate, or can use an old account, or an account not necessary for the application"
   -
     id: "AT6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
-    desc: "Sven can reuse a temporary password, a recovery-, activation-, auth-, or MFA code because the user does not have to change it on first use, or it has too long or no expiry, or is still valid after being used, reset or revoked, or it does not use a secure out-of-band delivery method (e.g. post, mobile app, SMS)"
+    desc: "Sven can reuse a temporary password, a recovery-, activation-, auth-, or MFA code because it's not changed after use, or it can not be reset by the user or admin, or it has an insufficiently implemented, too long or no expiry, or is still valid after being used, reset or revoked, or it does not use a secure out-of-band delivery method (e.g. post, mobile app, SMS)"
   -
     id: "AT7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AT7"
-    desc: "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and re-use requirements for passwords, recovery-, activation-, or MFA codes"
+    desc: "Cecilia can use brute force and dictionary attacks against one or many accounts without limit, or these attacks are simplified due to insufficient complexity, length, expiration and requirements for the use of passwords, recovery-, activation-, or MFA codes"
   -
     id: "AT8"
     value: "8"
@@ -153,12 +153,12 @@ suits:
     id: "SM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/SM2"
-    desc: "William has control over the generation of session identifiers or tokens"
+    desc: "William has control over the generation of session identifiers or authorization tokens"
   -
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    desc: "Ryan can continue to use a stolen session for its maximum duration because the user can not check whether the session might be stolen, or terminate the session or ask the administrator to do so"
+    desc: "Ryan can continue to use a stolen session for its maximum duration because the user can not check whether the session might be stolen, or terminate the session or ask the administrator to do so, or because the application does not mitigate against authorization code interception"
   -
     id: "SM4"
     value: "4"
@@ -183,12 +183,12 @@ suits:
     id: "SM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
-    desc: "Matt can abuse sessions because the application does not require re-authentication after the session lifetime limit has been reached, account terminated, or when privileges have changed"
+    desc: "Matt can abuse sessions because the application does not require re-authentication after the session lifetime limit has been reached, account terminated, or when privileges have changed, or after and abrupt and risky change to the user's environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
   -
     id: "SM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
-    desc: "Ivan can steal session identifiers or tokens because they are sent over insecure channels, or are logged, or are revealed in error messages, or are included in URLs, or are accessible un-necessarily by code, cache or load balancers which the attacker can influence or alter"
+    desc: "Ivan can steal session identifiers or authorization tokens because they are sent over insecure channels, or are logged, or are revealed in error messages, or are included in URLs, or are accessible un-necessarily by code, cache or load balancers which the attacker can influence or alter"
   -
     id: "SMX"
     value: "10"
@@ -263,7 +263,7 @@ suits:
     id: "AZX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AZX"
-    desc: "Richard can bypass the centralized authorization controls since they are not being used comprehensively on all interactions"
+    desc: "Richard can bypass the centralized authorization controls since they are not being used comprehensively on all interactions or because they have been misconfigured, or because the application does not use a centralized standard, tested, proven, recommended and approved authorization module/framework/service"
   -
     id: "AZJ"
     value: "J"
