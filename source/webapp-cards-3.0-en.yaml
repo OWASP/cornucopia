@@ -183,7 +183,7 @@ suits:
     id: "SM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
-    desc: "Matt can abuse sessions because the application does not require re-authentication after the session lifetime limit has been reached, account terminated, or when privileges have changed, or after and abrupt and risky change to the user's environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
+    desc: "Matt can abuse sessions because the application does not require re-authentication after the session lifetime limit has been reached, account terminated, or when privileges have changed, or after any abrupt and risky change to the user's environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
   -
     id: "SM9"
     value: "9"
@@ -263,7 +263,7 @@ suits:
     id: "AZX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AZX"
-    desc: "Richard can bypass the centralized authorization controls since they are not being used comprehensively on all interactions or because they have been misconfigured, or because the application does not use a centralized standard, tested, proven, recommended and approved authorization module/framework/service"
+    desc: "Richard can bypass the centralized authorization controls since they are not being used comprehensively on all interactions, or because they have been misconfigured, or because the application does not use a centralized standard, tested, proven, recommended and approved authorization module/framework/service"
   -
     id: "AZJ"
     value: "J"
