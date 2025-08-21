@@ -115,7 +115,7 @@ suits:
     owasp_asvs: [ 16.5.1, 16.5.2, 16.5.3, 16.5.4 ]
     owasp_asvs_print: [ 16.5.1-4 ]
     owasp_appsensor: [ IE2, IE3 ]
-    capec: [ 28, 152, 153 ]
+    capec: [ 24, 28, 152, 198, 267 ]
     safecode: [ 3, 16, 24 ]
     owasp_cre:
       owasp_asvs: [ 184-284 ]
