@@ -21,7 +21,7 @@ Dive into the nitty-gritty of Cornucopia and broader security practices through 
 ### Interactive mapping
 The cards provide interactive links to several standards.  When possible, we make the links interactive.  We have implemented ASVS and CAPEC.  
 
-We've also included the complete ASVS 4.0 standard on our website here: https://owasp.cornucopia.org/taxonomy/asvs-5.0
+We've also included the complete ASVS 5.0 standard on our website here: https://owasp.cornucopia.org/taxonomy/asvs-5.0
 
 ### Get your Cornucopia Deck Now!
 Fast-track your journey to becoming a security-savvy developer with Cornucopia. It's more than a game—it's a new lens through which to view secure application development.
