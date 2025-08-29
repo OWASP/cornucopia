@@ -26,7 +26,7 @@ class TestMain(unittest.TestCase):
                 "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
             ]
         )
-        self.args = ["-t", "bridge", "-lt", "guide", "-l", "en", "-v", "2.1", "-i", self.template_docx_file]
+        self.args = ["-t", "bridge", "-lt", "guide", "-l", "en", "-v", "3.0", "-i", self.template_docx_file]
         self.argp = {
             "debug": False,
             "pdf": False,
@@ -34,7 +34,7 @@ class TestMain(unittest.TestCase):
             "template": "bridge",
             "layout": "guide",
             "language": "en",
-            "version": "2.1",
+            "version": "3.0",
             "inputfile": self.template_docx_file,
             "outputfile": "",
         }
@@ -42,7 +42,7 @@ class TestMain(unittest.TestCase):
             [
                 c.convert_vars.BASE_PATH,
                 "source",
-                "webapp-mappings-2.1.yaml",
+                "webapp-mappings-3.0.yaml",
             ]
         )
 
@@ -50,7 +50,7 @@ class TestMain(unittest.TestCase):
             [
                 c.convert_vars.BASE_PATH,
                 "output",
-                "owasp_cornucopia_webapp_2.1_guide_bridge_en.docx",
+                "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx",
             ]
         )
 

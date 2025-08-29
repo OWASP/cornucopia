@@ -8,6 +8,7 @@ on:
       - 'tests/scripts/*_fuzzer.py'
       - '.clusterfuzzlite/**'
       - 'install_cornucopia_deps.txt'
+      - 'requirements.txt'
 permissions: read-all
 jobs:
   hardening:
