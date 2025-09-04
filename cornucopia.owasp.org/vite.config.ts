@@ -10,6 +10,15 @@ let viteStaticCopyTargets = [{src: './data/*',dest: './data/'}]
 let viteStaticCopyOptions = { targets: viteStaticCopyTargets}
 
 export default defineConfig({
+	test: {
+		coverage: {
+			enabled: true, 
+			provider: 'v8', 
+			reporter: ['text', 'json', 'lcov'],
+			reportsDirectory: './coverage',
+		},
+		include: ['**/*.test.ts', '**/*.test.tsx']
+	},
 	plugins: [
 		sveltekit(),
 		VitePluginRestart(vitePluginRestartOptions),

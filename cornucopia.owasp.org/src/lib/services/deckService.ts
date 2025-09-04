@@ -3,13 +3,13 @@ import fs from 'fs'
 import yaml from "js-yaml";
 import type { Card } from "../../domain/card/card";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
-
+import path from "path";
+const __dirname = path.resolve(path.dirname(''));
 export class DeckService {
-    private request: any;
-    constructor(request: any) {
-        this.request = request;
+
+    constructor() {
     }
-    private static repoUrl: string = 'https://raw.githubusercontent.com/OWASP/cornucopia/master/source/';
+    private static path: string = '/../source/';
     private static cache: object[] = [];
     private static mappings: object[] = [];
 
@@ -36,15 +36,8 @@ export class DeckService {
 
     private getCardMappingData(edition: string)
     {
-        const requestOptions = {
-            method: "GET",
-            keepalive: true,
-        };
-        let response = this.request('GET', `${DeckService.repoUrl}${DeckService.getEdition(edition)}-mappings-${DeckService.getVersion(edition)}.yaml`);
-        if (response.statusCode !== 200) {
-            console.error('Request error in deckService. status: ' + response.statusCode + ' , message: ' + response.getBody())
-        }
-        let data = yaml.load(response.getBody().toString());
+        const yamlData = fs.readFileSync(`${__dirname}${DeckService.path}${DeckService.getEdition(edition)}-mappings-${DeckService.getVersion(edition)}.yaml`, 'utf8');
+        let data = yaml.load(yamlData);
         DeckService.mappings.push({edition: DeckService.getEdition(edition), data: data});
         return data;
     }
@@ -92,15 +85,8 @@ export class DeckService {
         const decks = DeckService.decks;
         for (let i in decks) {
             let deck = decks[i];
-            const requestOptions = {
-                method: "GET",
-                keepalive: true,
-            };
-            let response = this.request('GET', `${DeckService.repoUrl}${DeckService.getEdition(deck.edition)}-cards-${deck.version}-${DeckService.getLanguage(deck.edition, lang)}.yaml`);
-            if (response.statusCode !== 200) {
-                console.error('Request error in deckService. status: ' + response.statusCode + ' , message: ' + response.getBody())
-            }
-            let data : any = yaml.load(response.getBody().toString());
+            let yamlData = fs.readFileSync(`${__dirname}${DeckService.path}${DeckService.getEdition(deck.edition)}-cards-${deck.version}-${DeckService.getLanguage(deck.edition, lang)}.yaml`, 'utf8');
+            let data = yaml.load(yamlData);
             let mapping = this.getCardMapping().get(deck.edition);
             let base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}-${lang}/`;
 

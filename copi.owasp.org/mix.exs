@@ -9,7 +9,9 @@ defmodule Copi.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      # Test coverage
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -23,10 +25,11 @@ defmodule Copi.MixProject do
     ]
   end
 
+
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
-
+  defp test_coverage(_), do: []
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
@@ -64,7 +67,8 @@ defmodule Copi.MixProject do
       {:want, "~> 1.18.0"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
       {:hackney, "~> 1.9"},
-      {:mox, "~> 1.2.0", only: :test}
+      {:mox, "~> 1.2.0", only: :test},
+      {:excoveralls, "~> 0.18.5", only: [:dev, :test]}
     ]
   end
 
