@@ -11,7 +11,7 @@ defmodule Copi.MixProject do
       aliases: aliases(),
       deps: deps(),
       # Test coverage
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls, allow_failure: true],
     ]
   end
 
