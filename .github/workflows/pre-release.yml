@@ -43,10 +43,10 @@
           - name: Check test coverage - Report
             run: pipenv run coverage report --fail-under 85 scripts/convert*
           # Upload Code COverage for Codeclimate
-          - name: Test & publish code coverage
-            uses: paambaati/codeclimate-action@f429536ee076d758a24705203199548125a28ca7 # v9.0.0
-            env:
-              CC_TEST_REPORTER_ID: 7482a81acb1b6de49fa6fd2769a014bb9ae8bee408161c23d400b2ac9e95b7cf
+          - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+            with:
+              token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+              files: coverage.xml
           - name: Generate new output files
             run: |
               #
