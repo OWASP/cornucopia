@@ -38,6 +38,17 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
 
 See Márk Vinkovits leading a threat modelling ["talk and group session"](https://www.youtube.com/watch?v=9dVDqeO6y3A&ab_channel=OWASPHU "How to do threat modeling via playing cards* by Márk Vinkovits @ OWASP track @hacktivityconf 1510") playing Cornucopia in the OWASP track @hacktivityconf 1510.
 
+## Gameplay using abuse case modelling approach
+
+Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created a video to explain how he has trained hundreds of teams to use OWASP Cornucopia in abuse case modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date.
+
+<noscript>
+    <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/watch?v=XXTPXozIHow" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
+</noscript>
+<iframe credentialless anonymous class="how-to-play" frameborder="0" title="Youtube: How to play OWASP Cornucopia"
+src="https://www.youtube.com/embed/vLYzId7-ijI?si=yh4vHK7VfO9a5l6s" referrerpolicy="no-referrer" allowfullscreen >
+<p>You cannot view this video directly because iframes are disabled. Click <a href="https://www.youtube.com/watch?v=vLYzId7-ijI" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p></iframe>
+
 ## Alternative game rules
 
 If you are new to the game, remove the two Joker cards to begin with. Add the Joker cards back in once people become more familiar with the process. Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round.
