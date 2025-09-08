@@ -45,17 +45,17 @@ def createASVSPages(data):
             os.mkdir(thispath)
             print("🟩")
             f = open(thispath + "/index.md", "w")
-            f.write("#  " + item["Name"].replace(",", ""))
+            f.write("# " + item["Name"].replace(",", ""))
             f.write("\r\n")
             for subitem in item["Items"]:
-                f.write("## " + subitem["Shortcode"] + "\r\n\r\n")
-                f.write(subitem["Description"].encode("ascii", "ignore").decode("utf8", "ignore") + "\r\n\r\n")
+                f.write("## " + subitem["Shortcode"] + "\r\n")
+                f.write(subitem["Description"].encode("ascii", "ignore").decode("utf8", "ignore") + "\r\n")
                 if int(subitem["L"]) == 1:
-                    f.write("Required for Level 1, 2 and 3\r\n\r\n")
+                    f.write("Required for Level 1, 2 and 3\r\n")
                 if int(subitem["L"]) == 2:
-                    f.write("Required for Level 2 and 3\r\n\r\n")
+                    f.write("Required for Level 2 and 3\r\n")
                 if int(subitem["L"]) == 3:
-                    f.write("Required for Level 3\r\n\r\n")
+                    f.write("Required for Level 3\r\n")
                 shortcode = subitem["Shortcode"]
                 description = subitem["Description"]
                 link = f"/taxonomy/asvs-5.0/{name}/{itemname}#{shortcode}"
@@ -82,7 +82,7 @@ def createASVSPages(data):
                 print("🟪")
 
                 print(subitem)
-            f.write("## Disclaimer:\r\n\r\n")
+            f.write("## Disclaimer\r\n")
             f.write(
                 "Credit via [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)."
                 "For more information visit: "
@@ -91,7 +91,7 @@ def createASVSPages(data):
                 "[Creative Commons Attribution-Share Alike v4.0](https://github.com/OWASP/ASVS/blob/v5.0.0/LICENSE.md)"
                 " license."
             )
-            f.write("\r\n\r\n")
+            f.write("\n")
             f.close()
 
     createLevelSummary(1, L1)
