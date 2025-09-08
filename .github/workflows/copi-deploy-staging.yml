@@ -63,7 +63,15 @@
           
         - name: Run tests
           working-directory: copi.owasp.org
-          run: mix test
+          run: mix test --cover --export-coverage default
+        - name: Generate coverage report
+          working-directory: copi.owasp.org
+          run: mix coveralls.cobertura --exclude test --import-cover cover
+        # Upload Code Coverage for Codeclimate
+        - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+          with:
+            token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+            files: copi.owasp.org/cover/cobertura.xml
         - name: Setup Flyctl
           uses: superfly/flyctl-actions/setup-flyctl@63da3ecc5e2793b98a3f2519b3d75d4f4c11cec2
         - name: Deploy to Fly.io staging
