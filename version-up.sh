@@ -69,7 +69,7 @@ function get_relative_path() {
 
     while [ "$currentFolder" != "$targetFolder" ]; do
         if [[ "$targetFolder" =~ "$currentFolder"* ]]; then
-            local pointSegment=${targetFolder#${currentFolder}}
+            local pointSegment=${targetFolder#"${currentFolder}"}
             result=$result/${pointSegment#/}
             break
         fi

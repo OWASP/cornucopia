@@ -21,8 +21,8 @@ RUN apt-get update -y && apt-get install -y build-essential git nodejs npm \
 WORKDIR /app
 
 # install hex + rebar
-RUN mix local.hex --force && \
-    mix local.rebar --force
+RUN mix local.hex --force \
+    && mix local.rebar --force
 
 # set build ENV
 ENV MIX_ENV="prod"
@@ -61,14 +61,14 @@ RUN mix release
 FROM --platform=linux/amd64 hexpm/elixir:1.18.4-erlang-27.3.4-debian-bullseye-20250610@sha256:d93975b5e78b29fd62d6e7f74f4eaa7e1df165cc95d3525eaa2e333e1449bc2c
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
-  && apt-get clean && rm -f /var/lib/apt/lists/*_*
+    && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 WORKDIR "/app"
 RUN chown nobody /app
