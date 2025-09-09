@@ -1,0 +1,423 @@
+---
+meta:
+  edition: "companion"
+  component: "cards"
+  language: "EN"
+  version: "1.0"
+suits:
+-
+  id: "LLM"
+  name: "Large Language Models"
+  cards:
+  -
+    id: "LLM2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/LLM2"
+    desc: ""
+  -
+    id: "LLM3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/LLM3"
+    desc: ""
+  -
+    id: "LLM4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/LLM4"
+    desc: ""
+  -
+    id: "LLM5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/LLM5"
+    desc: ""
+  -
+    id: "LLM6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/LLM6"
+    desc: ""
+  -
+    id: "LLM7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/LLM7"
+    desc: ""
+  -
+    id: "LLM8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/LLM8"
+    desc: ""
+  -
+    id: "LLM9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/LLM9"
+    desc: ""
+  -
+    id: "LLMX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/LLMX"
+    desc: ""
+  -
+    id: "LLMJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/LLMJ"
+    desc: ""
+  -
+    id: "LLMQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/LLMQ"
+    desc: ""
+  -
+    id: "LLMK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/LLMK"
+    desc: ""
+  -
+    id: "LLMA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/LLMA"
+    desc: "You have invented a new attack against LLM"
+-
+  id: "API"
+  name: "Web API"
+  cards:
+  -
+    id: "API2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/API2"
+    desc: ""
+  -
+    id: "API3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/API3"
+    desc: ""
+  -
+    id: "API4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/API4"
+    desc: ""
+  -
+    id: "API5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/API5"
+    desc: ""
+  -
+    id: "API6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/API6"
+    desc: ""
+  -
+    id: "API7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/API7"
+    desc: ""
+  -
+    id: "API8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/API8"
+    desc: ""
+  -
+    id: "API9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/API9"
+    desc: ""
+  -
+    id: "APIX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/APIX"
+    desc: ""
+  -
+    id: "APIJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/APIJ"
+    desc: ""
+  -
+    id: "APIQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/APIQ"
+    desc: ""
+  -
+    id: "APIK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/APIK"
+    desc: ""
+  -
+    id: "APIA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/APIA"
+    desc: "You have invented a new attack against Web API"
+-
+  id: "CLD"
+  name: "Cloud"
+  cards:
+  -
+    id: "CLD2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/CLD2"
+    desc: ""
+  -
+    id: "CLD3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/CLD3"
+    desc: ""
+  -
+    id: "CLD4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/CLD4"
+    desc: ""
+  -
+    id: "CLD5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/CLD5"
+    desc: ""
+  -
+    id: "CLD6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/CLD6"
+    desc: ""
+  -
+    id: "CLD7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/CLD7"
+    desc: ""
+  -
+    id: "CLD8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/CLD8"
+    desc: ""
+  -
+    id: "CLD9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/CLD9"
+    desc: ""
+  -
+    id: "CLDX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/CLDX"
+    desc: ""
+  -
+    id: "CLDJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/CLDJ"
+    desc: ""
+  -
+    id: "CLDQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/CLDQ"
+    desc: ""
+  -
+    id: "CLDK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/CLDK"
+    desc: ""
+  -
+    id: "CLDA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/CLDA"
+    desc: "You have invented a new attack against Cloud"
+-
+  id: "SDL"
+  name: "SSDLC"
+  cards:
+  -
+    id: "SDL2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL2"
+    desc: ""
+  -
+    id: "SDL3"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL3"
+    desc: ""
+  -
+    id: "SDL4"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL4"
+    desc: ""
+  -
+    id: "SDL5"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL5"
+    desc: ""
+  -
+    id: "SDL6"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL6"
+    desc: ""
+  -
+    id: "SDL7"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL7"
+    desc: ""
+  -
+    id: "SDL8"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL8"
+    desc: ""
+  -
+    id: "SDL9"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL9"
+    desc: ""
+  -
+    id: "SDLX"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDLX"
+    desc: ""
+  -
+    id: "SDLJ"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDLJ"
+    desc: ""
+  -
+    id: "SDLQ"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDLQ"
+    desc: ""
+  -
+    id: "SDLK"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDLK"
+    desc: ""
+  -
+    id: "SDLA"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDLA"
+    desc: "You have invented a new attack against SSDLC"
+-
+  id: "IDM"
+  name: "Identity Management"
+  cards:
+  -
+    id: "IDM2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM2"
+    desc: ""
+  -
+    id: "IDM3"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM3"
+    desc: ""
+  -
+    id: "IDM4"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM4"
+    desc: ""
+  -
+    id: "IDM5"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM5"
+    desc: ""
+  -
+    id: "IDM6"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM6"
+    desc: ""
+  -
+    id: "IDM7"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM7"
+    desc: ""
+  -
+    id: "IDM8"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM8"
+    desc: ""
+  -
+    id: "IDM9"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM9"
+    desc: ""
+  -
+    id: "IDMX"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDMX"
+    desc: ""
+  -
+    id: "IDMJ"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDMJ"
+    desc: ""
+  -
+    id: "IDMQ"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDMQ"
+    desc: ""
+  -
+    id: "IDMK"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDMK"
+    desc: ""
+  -
+    id: "IDMA"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDMA"
+    desc: "You have invented a new attack against Identity Management"
+    misc: ""
+-
+  id: "SE"
+  name: "Social Engineering"
+  cards:
+  -
+    id: "SE2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SE2"
+    desc: ""
+  -
+    id: "SE3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/SE3"
+    desc: ""
+  -
+    id: "SE4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/SE4"
+    desc: ""
+  -
+    id: "SE5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/SE5"
+    desc: ""
+  -
+    id: "SE6"
+    value: "6"
+    url: ""
+    desc: "https://cornucopia.owasp.org/cards/SE6"
+  -
+    id: "SE7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/SE7"
+    desc: ""
+  -
+    id: "SE8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/SE8"
+    desc: ""
+  -
+    id: "SE9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/SE9"
+    desc: ""
+  -
+    id: "SEX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/SEX"
+    desc: ""
+  -
+    id: "SEJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/SEJ"
+    desc: ""
+  -
+    id: "SEQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/SEQ"
+    desc: ""
+  -
+    id: "SEK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/SEK"
+    desc: ""
+  -
+    id: "SEA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/SEA"
+    desc: "You have invented a new attack against Social Engineering"
+    misc: ""
