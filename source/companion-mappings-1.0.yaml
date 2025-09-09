@@ -1,0 +1,322 @@
+---
+meta:
+  edition: "companion"
+  component: "mappings"
+  language: "ALL"
+  version: "1.0"
+  layouts: ["cards"]
+  templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
+  languages: ["en"]
+suits:
+-
+  id: "LLM"
+  name: "Large Language Models"
+  cards:
+  -
+    id: "LLM2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/LLM2"
+  -
+    id: "LLM3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/LLM3"
+  -
+    id: "LLM4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/LLM4"
+  -
+    id: "LLM5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/LLM5"
+  -
+    id: "LLM6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/LLM6"
+  -
+    id: "LLM7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/LLM7"
+  -
+    id: "LLM8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/LLM8"
+  -
+    id: "LLM9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/LLM9"
+  -
+    id: "LLMX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/LLMX"
+  -
+    id: "LLMJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/LLMJ"
+  -
+    id: "LLMQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/LLMQ"
+  -
+    id: "LLMK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/LLMK"
+-
+  id: "API"
+  name: "Web API"
+  cards:
+  -
+    id: "API2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/API2"
+  -
+    id: "API3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/API3"
+  -
+    id: "API4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/API4"
+  -
+    id: "API5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/API5"
+  -
+    id: "API6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/API6"
+  -
+    id: "API7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/API7"
+  -
+    id: "API8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/API8"
+  -
+    id: "API9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/API9"
+  -
+    id: "APIX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/APIX"
+  -
+    id: "APIJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/APIJ"
+  -
+    id: "APIQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/APIQ"
+  -
+    id: "APIK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/APIK"
+-
+  id: "CLD"
+  name: "Cloud"
+  cards:
+  -
+    id: "CLD2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/CLD2"
+  -
+    id: "CLD3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/CLD3"
+  -
+    id: "CLD4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/CLD4"
+  -
+    id: "CLD5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/CLD5"
+  -
+    id: "CLD6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/CLD6"
+  -
+    id: "CLD7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/CLD7"
+  -
+    id: "CLD8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/CLD8"
+  -
+    id: "CLD9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/CLD9"
+  -
+    id: "CLDX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/CLDX"
+  -
+    id: "CLDJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/CLDJ"
+  -
+    id: "CLDQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/CLDQ"
+  -
+    id: "CLDK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/CLDK"
+-
+  id: "SDL"
+  name: "SSDLC"
+  cards:
+  -
+    id: "SDL2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SDL2"
+  -
+    id: "SDL3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/SDL3"
+  -
+    id: "SDL4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/SDL4"
+  -
+    id: "SDL5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/SDL5"
+  -
+    id: "SDL6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/SDL6"
+  -
+    id: "SDL7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/SDL7"
+  -
+    id: "SDL8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/SDL8"
+  -
+    id: "SDL9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/SDL9"
+  -
+    id: "SDLX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/SDLX"
+  -
+    id: "SDLJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/SDLJ"
+  -
+    id: "SDLQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/SDLQ"
+  -
+    id: "SDLK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/SDLK"
+-
+  id: "IDM"
+  name: "Identity Management"
+  cards:
+  -
+    id: "IDM2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/IDM2"
+  -
+    id: "IDM3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/IDM3"
+  -
+    id: "IDM4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/IDM4"
+  -
+    id: "IDM5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/IDM5"
+  -
+    id: "IDM6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/IDM6"
+  -
+    id: "IDM7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/IDM7"
+  -
+    id: "IDM8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/IDM8"
+  -
+    id: "IDM9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/IDM9"
+  -
+    id: "IDMX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/IDMX"
+  -
+    id: "IDMJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/IDMJ"
+  -
+    id: "IDMQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/IDMQ"
+  -
+    id: "IDMK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/IDMK"
+-
+  id: "SE"
+  name: "Social Engineering"
+  cards:
+  -
+    id: "SE2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SE2"
+  -
+    id: "SE3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/SE3"
+  -
+    id: "SE4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/SE4"
+  -
+    id: "SE5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/SE5"
+  -
+    id: "SE6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/SE6"
+  -
+    id: "SE7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/SE7"
+  -
+    id: "SE8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/SE8"
+  -
+    id: "SE9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/SE9"
+  -
+    id: "SEX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/SEX"
+  -
+    id: "SEJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/SEJ"
+  -
+    id: "SEQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/SEQ"
+  -
+    id: "SEK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/SEK"
