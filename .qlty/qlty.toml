@@ -40,6 +40,8 @@ exclude_patterns = [
   "**/templates/**",
   "**/testdata/**",
   "**/vendor/**",
+  "LICENSE.md",
+  "LICENSE-CC-BY-SA-3.0.md"
 ]
 
 test_patterns = [

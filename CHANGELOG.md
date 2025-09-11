@@ -75,4 +75,8 @@ Add testing.
 
 ### 2025-08-12
 
-- Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9 and ASVS from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices.
+- Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9
+and ASVS from v4.0.3 to v5.0. The text on the cards has been updated to include
+MFA and passkeys as an option for authentication. Cards within the session
+management suit have been updated toe align with modern session management
+practices.
