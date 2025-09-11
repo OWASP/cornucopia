@@ -483,7 +483,7 @@ paragraphs:
     text: "Кейт Турпин и участники OWASP® «Secure Coding Practices - Quick Reference Guide», изначально пожертвованного OWASP компанией Boeing, который используется в качестве основного источника информации о требованиях безопасности для формулирования содержания карт."
   -
     id: "T00130"
-    text: "Участники, сторонники, спонсоры и волонтеры в проектах OWASP® ASVS, AppSensor и Web Framework Security Matrix, Mitre Common Attack Pattern Enumeration and Classification (CAPEC), и SAFECode “Practical Security Stories and Security Tasks for Agile Development Environments”, которые использовались в перекрестных ссылках."
+    text: "Участники, сторонники, спонсоры и волонтеры в проектах OWASP® ASVS, AppSensor и Web Framework Security Matrix, Mitre Common Attack Pattern Enumeration and Classification (CAPEC™), и SAFECode “Practical Security Stories and Security Tasks for Agile Development Environments”, которые использовались в перекрестных ссылках."
   -
     id: "T00140"
     text: "Playgen за предоставления зажигательного семинара по геймификации задач и tartanmaker.com за онлайн инструмент, для помощи в создании паттерна на обратной стороне карт."
@@ -705,7 +705,7 @@ paragraphs:
     text: "Идентификаторы детекторов атак “AppSensor”, OWASP®, Август 2010-2015"
   -
     id: "T01240"
-    text: "Идентификаторы “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, Ноябрь 2015"
+    text: "Идентификаторы “Common Attack Pattern Enumeration and Classification (CAPEC™)”, v2.8, Mitre Corporation, Ноябрь 2015"
   -
     id: "T01250"
     text: "Истории о безопасности 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, Июль 2012"
@@ -1269,7 +1269,7 @@ paragraphs:
     text: "Добавлена ссылка на Wiki Колоды"
   -
     id: "T03670"
-    text: "Перекрестные ссылки обновлены для ASVS v3.0.1 и CAPEC v2.8. Незначительные изменения текста на небольшом количестве карт. "
+    text: "Перекрестные ссылки обновлены для ASVS v3.0.1 и CAPEC™ v2.8. Незначительные изменения текста на небольшом количестве карт. "
   -
     id: "T03680"
     text: "Добавлено «-EN» к номеру версии в подготовке к версии «-ES»."

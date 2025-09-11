@@ -483,7 +483,7 @@ paragraphs:
     text: "Keith Turpin e i collaboratori della guida OWASP® \"Secure Coding Practices - Quick Reference Guide\", originariamente donata a OWASP da Boeing, utilizzata come fonte primaria di informazioni sui requisiti di sicurezza per formulare il contenuto delle carte."
   -
     id: "T00130"
-    text: "Collaboratori, sostenitori, sponsor e volontari dei progetti OWASP® ASVS, AppSensor e Web Framework Security Matrix, Common Attack Pattern Enumeration and Classification (CAPEC) di Mitre e “Practical Security Stories and Security Tasks for Agile Development Environments” di SAFECode, tutti utilizzati nei riferimenti incrociati forniti."
+    text: "Collaboratori, sostenitori, sponsor e volontari dei progetti OWASP® ASVS, AppSensor e Web Framework Security Matrix, Common Attack Pattern Enumeration and Classification (CAPEC™) di Mitre e “Practical Security Stories and Security Tasks for Agile Development Environments” di SAFECode, tutti utilizzati nei riferimenti incrociati forniti."
   -
     id: "T00140"
     text: "Playgen per aver fornito un seminario pomeridiano illuminante sulla traduzione in gioco delle attività, e tartanmaker.com per lo strumento online che ha aiutato a creare il motivo del dorso delle carte."
@@ -705,7 +705,7 @@ paragraphs:
     text: "ID dei punti di rilevamento degli attacchi in “AppSensor”, OWASP®, Agosto 2010-2015"
   -
     id: "T01240"
-    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, Novembre 2015"
+    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC™)”, v3.9, Mitre Corporation, Novembre 2015"
   -
     id: "T01250"
     text: "Storie incentrate sulla sicurezza in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, Luglio 2012"
@@ -1269,7 +1269,7 @@ paragraphs:
     text: "Aggiunto il link al Wiki Deck"
   -
     id: "T03670"
-    text: "Riferimenti incrociati aggiornati per ASVS v3.0.1 e CAPEC v2.8. Modifiche minori al testo di un piccolo numero di carte. "
+    text: "Riferimenti incrociati aggiornati per ASVS v3.0.1 e CAPEC™ v3.9. Modifiche minori al testo di un piccolo numero di carte. "
   -
     id: "T03680"
     text: "Aggiunto “-EN” al numero di versione in vista della versione “-ES”."

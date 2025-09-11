@@ -480,7 +480,7 @@ paragraphs:
     text: "Keith Turpin e os colaboradores do guia OWASP® “Práticas de Codificação Segura - Guia de Referência Rápida”, originalmente doado à OWASP pela Boeing, que é usado como a fonte principal de informação sobre requisitos de segurança para formular o conteúdo das cartas."
   -
     id: "T00130"
-    text: "Colaboradores, apoiantes, patrocinadores e voluntários dos projetos OWASP® ASVS, AppSensor e Web Framework Security Matrix, da enumeração e classificação de padrões de ataque comuns da Mitre (CAPEC), e das \"Histórias de Segurança Práticas e Tarefas de Segurança para Ambientes de Desenvolvimento Ágil\" da SAFECode, todos utilizados nas referências cruzadas fornecidas."
+    text: "Colaboradores, apoiantes, patrocinadores e voluntários dos projetos OWASP® ASVS, AppSensor e Web Framework Security Matrix, da enumeração e classificação de padrões de ataque comuns da Mitre (CAPEC™), e das \"Histórias de Segurança Práticas e Tarefas de Segurança para Ambientes de Desenvolvimento Ágil\" da SAFECode, todos utilizados nas referências cruzadas fornecidas."
   -
     id: "T00140"
     text: "Playgen por proporcionar um seminário esclarecedor sobre a gamificação de tarefas, e tartanmaker.com pela ferramenta online para ajudar a criar o padrão do verso das cartas."
@@ -702,7 +702,7 @@ paragraphs:
     text: "IDs de pontos de detecção de ataques em 'AppSensor', OWASP®, Agosto de 2010-2015."
   -
     id: "T01240"
-    text: "IDs em 'Common Attack Pattern Enumeration and Classification (CAPEC)', v2.8, Mitre Corporation, novembro de 2015."
+    text: "IDs em 'Common Attack Pattern Enumeration and Classification (CAPEC™)', v3.9, Mitre Corporation, novembro de 2015."
   -
     id: "T01250"
     text: "Histórias focadas em segurança em 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, julho de 2012."
@@ -1266,7 +1266,7 @@ paragraphs:
     text: "Link para Wiki Deck adicionado."
   -
     id: "T03670"
-    text: "Referências cruzadas atualizadas para ASVS v3.0.1 e CAPEC v2.8. Pequenas alterações de texto em algumas cartas. "
+    text: "Referências cruzadas atualizadas para ASVS v3.0.1 e CAPEC™ v3.9. Pequenas alterações de texto em algumas cartas. "
   -
     id: "T03680"
     text: "Adicionado '-EN' ao número da versão em preparação para a versão '-ES'."

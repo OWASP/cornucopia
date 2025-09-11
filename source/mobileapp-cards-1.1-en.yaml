@@ -474,7 +474,7 @@ paragraphs:
     text: "Colin Watson for coming up with Cornucopia which OWASP Cornucopia Mobile App Edition is based on."
   -
     id: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP MASVS/MASTG, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Contributors, supporters, sponsors and volunteers to the OWASP MASVS/MASTG, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
     id: "T00145"
     text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
@@ -543,7 +543,7 @@ paragraphs:
     text: "The other driver for Mobile Cornucopia is to link the attacks with requirements and verification techniques."
   -
     id: "T00520"
-    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC software attack pattern IDs which themselves are mapped to CWEs."
+    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs."
   -
     id: "T00530"
     text: "Each card is also mapped to the 36 primary security stories in the SAFECode document to help teams create their own security-related stories for use in Agile processes."
@@ -615,7 +615,7 @@ paragraphs:
     text: "Verification IDs in “Mobile Application Security Verification Standard (MASVS) 2.0 for Mobile Applications”"
   -
     id: "T01240"
-    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
+    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC™)”, v3.9, Mitre Corporation, November 2015"
   -
     id: "T01250"
     text: "Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, July 2012"
