@@ -390,3 +390,7 @@ For font licensing, please read font [README.md](./resources/templates/Fonts/REA
 MIT License Copyright (c) 2020 Move Your Digital, Inc.
 
 please read [README.md](./cornucopia.owasp.org/script/README.md)
+
+### Common Attack Pattern Enumeration and Classification (CAPEC™)
+
+Use of the Common Attack Pattern Enumeration and Classification (CAPEC), and the associated references from capec.mitre.org are subject to the [Terms of Use](CAPEC.md). Copyright © 2007–2025, The MITRE Corporation. CAPEC and the CAPEC logo are trademarks of The MITRE Corporation.
