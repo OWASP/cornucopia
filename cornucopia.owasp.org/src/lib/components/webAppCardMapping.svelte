@@ -13,8 +13,8 @@
     }
 
 </script>
-        <p class="mapping-title{mappingStyle}">OWASP SCP</p>
-        <p class="mapping-value{mappingStyle}">{mapping.owasp_scp || '-'}</p>
+        <p class="mapping-title{mappingStyle}">OWASP DevGuide</p>
+        <p class="mapping-value{mappingStyle}">{mapping.owasp_dev_guide || '-'}</p>
         <p class="mapping-title{mappingStyle}">OWASP ASVS</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_asvs || '-'}</p>
         <p class="mapping-title{mappingStyle}">OWASP AppSensor</p>

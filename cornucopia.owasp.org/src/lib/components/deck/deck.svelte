@@ -20,7 +20,7 @@
         capec: [],
         owasp_appsensor: [],
         owasp_asvs: [],
-        owasp_scp: [],
+        owasp_dev_guide: [],
         safecode: []
     });
     

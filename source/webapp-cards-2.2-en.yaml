@@ -1,74 +1,74 @@
 ---
 meta:
-  edition: "ecommerce"
+  edition: "webapp"
   component: "cards"
-  language: "HU"
-  version: "2.1"
+  language: "EN"
+  version: "2.2"
 suits:
 -
   id: "VE"
-  name: "Adat ellenőrzés & kódolás"
+  name: "DATA VALIDATION & ENCODING"
   cards:
   -
     id: "VE2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/VE2"
-    desc: "Brian információt szerzett a belső konfigurációról, sémákról, logikáról, kódról, szoftverekről, szolgáltatásokról, vagy infrastruktúráról egy hibaüzenet, hibás konfiguráció, vagy alapértelmezett telepítőfájl, esetleg régi, teszt, biztonsági mentés, vagy másolt erőforrás, netán forráskód kiszivárgása révén"
+    desc: "Brian can gather information about the underlying configurations, schemas, logic, code, software, services and infrastructure due to the content of error messages, or poor configuration, or the presence of default installation files or old, test, backup or copies of resources, or exposure of source code"
   -
     id: "VE3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/VE3"
-    desc: "Robert kártékony bemenetet tud megadni, mert az engedélyezett protokoll formátum nincs ellenőrizve, vagy több bemenetet is elfogad a rendszer, vagy a struktúra nincs ellenőrizve, esetleg az egyedi adat elemek nincsenek ellenőrizve formátum, típus, tartomány, hossz, és egy elfogadott karaktereket vagy formátumokat engedélyező lista alapján"
+    desc: "Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being validated for format, type, range, length and a whitelist of allowed characters or formats"
   -
     id: "VE4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/VE4"
-    desc: "Dave kártékony mezőnevet, vagy adatot tud megadni, mert ez nincs ellenőrizve az aktuális felhasználó és folyamat kontextusában"
+    desc: "Dave can input malicious field names or data because it is not being checked within the context of the current user and process"
   -
     id: "VE5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/VE5"
-    desc: "Jee meg tudja kerülni a központi kódoló rutinokat, mert ezek nincsenek használva mindenhol, vagy a rossz kódolás van használatban"
+    desc: "Jee can bypass the centralized encoding routines since they are not being used everywhere, or the wrong encodings are being used"
   -
     id: "VE6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/VE6"
-    desc: "Jason meg tudja kerülni a központi ellenőrző rutinokat, mert azokat nem minden bemeneten használják"
+    desc: "Jason can bypass the centralized validation routines since they are not being used on all inputs"
   -
     id: "VE7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/VE7"
-    desc: "Jan különleges adatokat tud készíteni, hogy kikerülje a bemenet ellenőrzését, ugyanis a karakterkészlet nincs specifikálva/érvényesítve, vagy az adat többször van kódolva, vagy az adat nem teljesen van átalakítva ugyanarra a formátumra, mint amit az alkalmazás használ mielőtt ellenőriznék, vagy a változók nem erősen típusosak"
+    desc: "Jan can craft special payloads to foil input validation because the character set is not specified/enforced, or the data is encoded multiple times, or the data is not fully converted into the same format the application uses (e.g. canonicalization) before being validated, or variables are not strongly typed"
   -
     id: "VE8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/VE8"
-    desc: "Oana meg tudja kerülni a központi ellenőrző rutinokat, mert azok nem mindenhol vannak használatban"
+    desc: "Oana can bypass the centralized sanitization routines since they are not being used comprehensively"
   -
     id: "VE9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/VE9"
-    desc: "Shamun meg tudja kerülni a bemeneti, vagy a kimeneti adatok ellenőrzését, mert a sikertelen ellenőrzéseket nem utasítják el, vagy tisztítják meg"
+    desc: "Shamun can bypass input validation or output validation checks because validation failures are not rejected and/or sanitized"
   -
     id: "VEX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/VEX"
-    desc: "Dario vissza tud élni az alkamazás bizalmával egy adatforrás felé (például felhasználó által definiált adat, helyben tárolt adat manipulálása, állapotadattá konvertálás egy kliens eszközön, személyazonosság ellenőrzésének hiánya adatellenőrzés közben, például Dario Colinnak tudja kiadni magát)"
+    desc: "Darío can exploit the trust the application places in a source of data (e.g. user-definable data, manipulation of locally stored data, alteration to state data on a client device, lack of verification of identity during data validation such as Darío can pretend to be Colin)"
   -
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    desc: "Toby át tudja venni az irányítást a bemenet ellenőrzés fölött, vagy a kimenet kódolást végző kód, bemeneti vagy kimeneti adat ellenőrzés, vagy a kimeneti kódolás vagy rutinok fölött, hogy kijátssza azokat."
+    desc: "Toby has control over input validation, output validation or output encoding code or routines so they can be bypassed"
   -
     id: "VEQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/VEQ"
-    desc: "Xavier adatot tud beszúrni egy kliens vagy eszköz oldali fordítóba, mert a paraméterezett interfész nincs használatban, vagy nem megfelelően implementálták, vagy az adatot nem megfelelően kódolták a környezet függvényében, vagy nincs korlátozás a kódon, vagy a kezelt adaton"
+    desc: "Xavier can inject data into a client or device side interpreter because a parameterised interface is not being used, or has not been implemented correctly, or the data has not been encoded correctly for the context, or there is no restrictive policy on code or data includes"
   -
     id: "VEK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/VEK"
-    desc: "Gabe adatot tud beszúrni egy szerver oldali kiértékelésbe (pl. SQL, operációs rendszer parancsok, Xpath, szerver oldali JavaScript, SMTP), mert egyerősen típusos paraméteres interfész nincs használatban, vagy nem implementálták megfelelően"
+    desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used or has not been implemented correctly"
   -
     id: "VEA"
     value: "A"
@@ -77,7 +77,7 @@ suits:
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
 -
   id: "AT"
-  name: "Authentication"
+  name: "AUTHENTICATION"
   cards:
   -
     id: "AT2"
@@ -147,7 +147,7 @@ suits:
     misc: "Read more about this topic in OWASP's free Authentication Cheat Sheet"
 -
   id: "SM"
-  name: "Session management"
+  name: "SESSION MANAGEMENT"
   cards:
   -
     id: "SM2"
@@ -217,7 +217,7 @@ suits:
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Session Management, and Cross Site Request Forgery (CSRF) Prevention"
 -
   id: "AZ"
-  name: "Authorization"
+  name: "AUTHORIZATION"
   cards:
   -
     id: "AZ2"
@@ -228,7 +228,7 @@ suits:
     id: "AZ3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AZ3"
-    desc: "Christian can access information, which they should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or other information leakage"
+    desc: "Christian can access information, which he should not have permission to, through another mechanism that does have permission (e.g. search indexer, logger, reporting), or because it is cached, or kept for longer than necessary, or through other information leakage"
   -
     id: "AZ4"
     value: "4"
@@ -287,7 +287,7 @@ suits:
     misc: "Read more about this topic in OWASP's Development and Testing Guides"
 -
   id: "CR"
-  name: "Cryptography"
+  name: "CRYPTOGRAPHY"
   cards:
   -
     id: "CR2"
@@ -357,7 +357,7 @@ suits:
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Cryptographic Storage, and Transport Layer Protection"
 -
   id: "C"
-  name: "Cornucopia"
+  name: "CORNUCOPIA"
   cards:
   -
     id: "C2"
@@ -442,7 +442,7 @@ suits:
     url: "https://cornucopia.owasp.org/cards/JOB"
     card: "Joker"
     desc: "Bob can influence, alter or affect the application so that it no longer complies with legal, regulatory, contractual or other organizational mandates"
-    misc: "Examine vulnerabilities and discover how they can be fixed using training applications in the free OWASP Broken Web Applications VM, or using the online challenges in the free Hacking Lab"
+    misc: "Examine vulnerabilities and discover how they can be fixed using the free OWASP® Juice Shop, Security Shepherd, or using the online challenges in the free OWASP® Hacking-lab"
 paragraphs:
 -
   id: "Common"
@@ -453,13 +453,19 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Website App Edition v2.1-EN"
+    text: "Website App Edition v2.2-EN"
   -
     id: "Title_full"
-    text: "OWASP Cornucopia Website App Edition v2.1-EN"
+    text: "OWASP® Cornucopia Website App Edition v2.2-EN"
+  -
+    id: "T00005"
+    text: "Index"
+  -
+    id: "T00005"
+    text: "Index"
   -
     id: "T00010"
-    text: "OWASP Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+    text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
   -
     id: "T00020"
     text: "Author"
@@ -467,20 +473,17 @@ paragraphs:
     id: "T00030"
     text: "Project Leaders"
   -
-    id: "T00040"
-    text: "Reviewers"
-  -
     id: "T00100"
-    text: "Acknowledgments"
+    text: "Acknowledgements"
   -
     id: "T00110"
-    text: "Microsoft SDL Team for the Elevation of Privilege Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
+    text: "Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
   -
     id: "T00120"
-    text: "Keith Turpin and contributors to the “OWASP Secure Coding Practices - Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards."
+    text: "Keith Turpin and contributors to the OWASP® “Secure Coding Practices - Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards."
   -
     id: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Contributors, supporters, sponsors and volunteers to the OWASP® ASVS, AppSensor and Web Framework Security Matrix projects, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
     id: "T00140"
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
@@ -489,16 +492,19 @@ paragraphs:
     text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
   -
     id: "T00150"
-    text: "Blackfoot UK Limited for creating and donating print-ready design files, Tom Brennan and the OWASP Foundation for instigating the creation of an OWASP-branded box and leaflet, and OWASP employees, especially Kate Hartmann, for managing the ordering, stocking and despatch of printed card decks."
+    text: "Blackfoot (UK) Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet, and Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online."
   -
-    id: "T00160"
-    text: "Oana Cornea and other participants at the AppSec EU 2015 project summit for their help in creating the demonstration video."
+    id: "T00161"
+    text: "(continued on page 20)"
+  -
+    id: "T00162"
+    text: "(continued from page 10)"
   -
     id: "T00170"
-    text: "Colin Watson as author and co-project leader with Grant Ongers, along with other OWASP volunteers who have helped in many ways."
+    text: "Colin Watson as author and co-project leader with Grant Ongers along with other OWASP volunteers who have helped in many ways."
   -
     id: "T00180"
-    text: "OWASP does not endorse or recommend commercial products or services © 2012-2016 OWASP Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
+    text: "OWASP® does not endorse or recommend commercial products or services © 2012-2025 OWASP® Foundation This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 license"
   -
     id: "T00200"
     text: "Introduction"
@@ -516,25 +522,25 @@ paragraphs:
     text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
   -
     id: "T00250"
-    text: "Cornucopia Ecommerce Website Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues ecommerce website developers encounter."
+    text: "Cornucopia Website App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
   -
     id: "T00260"
-    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD."
+    text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities, or are not familiar with STRIDE and DREAD."
   -
     id: "T00270"
-    text: "Cornucopia Ecommerce Website Edition is referenced as an information resource in the PCI Security Standard Council’s Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
+    text: "Cornucopia Website App Edition is referenced as an information resource in the PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, January 2013."
   -
     id: "T00300"
     text: "The card deck (pack)"
   -
     id: "T00310"
-    text: "Instead of EoP’s STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP Application Security Verification Standard, the OWASP Testing Guide and David Rook’s Principles of Secure Development. "
+    text: "Instead of EoP's STRIDE suits (sets of cards with matching designs), Cornucopia suits are based on the structure of the OWASP® Secure Coding Practices - Quick Reference Guide (SCP), but with additional consideration of sections in the OWASP® Application Security Verification Standard, the Web Security Testing Guide (WSTG) and David Rook's Principles of Secure Development. "
   -
     id: "T00320"
     text: "These provided five suits, and a sixth called “Cornucopia” was created for everything else: "
   -
     id: "T00330"
-    text: "Data validation and encoding (VE)"
+    text: "Data Validation and Encoding (VE)"
   -
     id: "T00340"
     text: "Authentication (AT)"
@@ -567,7 +573,7 @@ paragraphs:
     text: "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
   -
     id: "T00530"
-    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP SCP v2, ASVS v3.0.1 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
+    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP® SCP v2, ASVS v4.0 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
   -
     id: "T00600"
     text: "Game strategy"
@@ -612,7 +618,7 @@ paragraphs:
     text: "Try to print add higher quality to increase legibility."
   -
     id: "T00820"
-    text: "An optional card back design (in OWASP tartan) has been provided as the last page of this document."
+    text: "An optional card back design (in OWASP® tartan) has been provided as the last page of this document."
   -
     id: "T00830"
     text: "There is no special alignment needed. "
@@ -621,7 +627,7 @@ paragraphs:
     text: "Dual-sided printing needs special care taken. "
   -
     id: "T00850"
-    text: "You could customize the card faces or the backs for your own organization’s preferences."
+    text: "You could customize the card faces or the backs for your own organization's preferences."
   -
     id: "T00900"
     text: "Customization"
@@ -636,25 +642,25 @@ paragraphs:
     text: "Provide feedback"
   -
     id: "T01010"
-    text: "If you have ideas or feedback on the use of OWASP Cornucopia, please share them."
+    text: "If you have ideas or feedback on the use of OWASP® Cornucopia, please share them."
   -
     id: "T01020"
     text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
   -
     id: "T01030"
-    text: "The best place to use to discuss or contribute is the mailing list for the OWASP project:"
+    text: "The best place to use to discuss or contribute is the list/group for the OWASP project:"
   -
     id: "T01040"
-    text: "•Mailing list"
+    text: "List/Group"
   -
     id: "T01050"
-    text: "•Project home page"
+    text: "Project home page"
   -
     id: "T01060"
     text: "All OWASP documents and tools are free to download and use."
   -
     id: "T01070"
-    text: "OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
+    text: "OWASP® Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
   -
     id: "T01100"
     text: "Instructions"
@@ -681,7 +687,7 @@ paragraphs:
     text: "This means the attacker (William) can create new session identifiers that the application accepts."
   -
     id: "T01180"
-    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
+    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP® “Application Security Verification Standard”, the security focused stories in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
   -
     id: "T01190"
     text: "Further guidance about each card is available in the online Wiki Deck at "
@@ -690,13 +696,13 @@ paragraphs:
     text: "Lookups between the attacks and five resources are provided on most cards:"
   -
     id: "T01210"
-    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, November 2010 "
+    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, November 2010 "
   -
     id: "T01220"
-    text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (excluding sections 18 and 19)"
+    text: "Verification IDs in OWASP® “Application Security Verification Standard”"
   -
     id: "T01230"
-    text: "Attack detection points IDs in “AppSensor”, OWASP, August 2010-2015"
+    text: "Attack detection points IDs in “AppSensor”, OWASP®, August 2010-2015"
   -
     id: "T01240"
     text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC)”, v2.8, Mitre Corporation, November 2015"
@@ -719,29 +725,38 @@ paragraphs:
     id: "T01300"
     text: "It is possible to play Cornucopia in many different ways. "
   -
+    id: "T01301"
+    text: "For how to play, read pages: 11-19."
+  -
     id: "T01310"
-    text: "Here is one way, demonstrated online in a video at https://youtu.be/i5Y0akWj31k , which uses the new (May 2015) score/record sheet at https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf"
+    text: "Here is one way, demonstrated online in a video at "
+  -
+    id: "T01311"
+    text: " which uses the new (May 2015) score/record sheet at "
   -
     id: "T01400"
-    text: "A - Preparations"
+    text: "Preparations"
   -
     id: "T01410"
-    text: "A1. Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+    text: "Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+  -
+    id: "T01411"
+    text: "Use the cards in this pack"
   -
     id: "T01420"
-    text: "A2. Identify an application or application process to review; this might be a concept, design or an actual implementation"
+    text: "Identify an application or application process to review; this might be a concept, design or an actual implementation"
   -
     id: "T01430"
-    text: "A3. Create a data flow diagram, user stories, or other artefacts to help the review"
+    text: "Create a data flow diagram, user stories, or other artefacts to help the review"
   -
     id: "T01440"
-    text: "A4. Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
+    text: "Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
   -
     id: "T01450"
-    text: "A5. Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
+    text: "Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
   -
     id: "T01500"
-    text: "B - Play"
+    text: "Play"
   -
     id: "T01510"
     text: "One suit - Cornucopia - acts as trumps."
@@ -753,52 +768,52 @@ paragraphs:
     text: "It helps if there is a non-player to document the issues and scores."
   -
     id: "T01540"
-    text: "B1. Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
+    text: "Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
   -
     id: "T01550"
-    text: "B2. Shuffle the deck and deal all the cards"
+    text: "Shuffle the deck and deal all the cards"
   -
     id: "T01560"
-    text: "B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
+    text: "To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
   -
     id: "T01570"
-    text: "B4. To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
+    text: "To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
   -
     id: "T01580"
-    text: "B5. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
+    text: "Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
   -
     id: "T01590"
     text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand."
   -
     id: "T01600"
-    text: "B6. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
+    text: "The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
   -
     id: "T01610"
-    text: "B7. Repeat until all the cards are played"
+    text: "Repeat until all the cards are played"
   -
     id: "T01700"
-    text: "C - Scoring"
+    text: "Scoring"
   -
     id: "T01710"
     text: "The objective is to identify applicable threats, and win hands (rounds):"
   -
     id: "T01720"
-    text: "C1. Score +1 for each card you can identify as a valid threat to the application under consideration"
+    text: "Score +1 for each card you can identify as a valid threat to the application under consideration"
   -
     id: "T01730"
-    text: "C2. Score +1 if you win a round"
+    text: "Score +1 if you win a round"
   -
     id: "T01740"
-    text: "C3. Once all cards have been played, whoever has the most points wins"
+    text: "Once all cards have been played, whoever has the most points wins"
   -
     id: "T01800"
-    text: "D - Closure"
+    text: "Closure"
   -
     id: "T01810"
-    text: "D1. Review all the applicable threats and the matching security requirements"
+    text: "Review all the applicable threats and the matching security requirements"
   -
     id: "T01820"
-    text: "D2. Create user stories, specifications and test cases as required for your development methodology."
+    text: "Create user stories, specifications and test cases as required for your development methodology."
   -
     id: "T01900"
     text: "Alternative game rules"
@@ -816,7 +831,7 @@ paragraphs:
     text: "Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game."
   -
     id: "T01950"
-    text: "Consider just playing with one suit to make a shorter session – but try to cover all the suits for every project. "
+    text: "Consider just playing with one suit to make a shorter session - but try to cover all the suits for every project. "
   -
     id: "T01960"
     text: "Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. "
@@ -828,7 +843,7 @@ paragraphs:
     text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
   -
     id: "T01990"
-    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+    text: "Another suggestion is that if a player fails to identify the card as relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
   -
     id: "T02000"
     text: "Consider allowing extra points for especially good contributions."
@@ -849,13 +864,13 @@ paragraphs:
     text: "Development framework-specific modified card decks"
   -
     id: "T02110"
-    text: "At the end of 2012, the OWASP Framework Security Matrix was published which documents built in security controls in some commonly used languages and frameworks for web and mobile application development."
+    text: "There can be built in security controls in some commonly used languages and frameworks for web and mobile application development."
   -
     id: "T02120"
     text: "With certain provisos it is useful to consider how using these controls can simplify the identification of additional requirements – provided of course the controls are included, enabled and configured correctly."
   -
     id: "T02130"
-    text: "Consider removing the following cards from the decks if you are confidence they are addressed by the way you are using the language/framework. "
+    text: "Consider removing cards from the decks if you are confident they are addressed by the way you are using the language/framework."
   -
     id: "T02140"
     text: "Items in parentheses are “maybes”."
@@ -864,13 +879,13 @@ paragraphs:
     text: "Internal coding standards and libraries"
   -
     id: "T02210"
-    text: "Add your own list of excluded cards based on your organisation’s coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
+    text: "Add your own list of excluded cards based on your organisation's coding standards (provided they are confirmed by appropriate verification steps in the development lifecycle)."
   -
     id: "T02220"
     text: "Your coding standards and libraries"
   -
     id: "T02230"
-    text: "Data validation and encoding"
+    text: "Data Validation and Encoding"
   -
     id: "T02240"
     text: "[your list]"
@@ -882,7 +897,7 @@ paragraphs:
     text: "[your list]"
   -
     id: "T02270"
-    text: "Session management"
+    text: "Session Management"
   -
     id: "T02280"
     text: "[your list]"
@@ -915,7 +930,7 @@ paragraphs:
     text: "Compliance requirement"
   -
     id: "T02430"
-    text: "Data validation and encoding"
+    text: "Data validation and Encoding"
   -
     id: "T02440"
     text: "[compliance list]"
@@ -927,7 +942,7 @@ paragraphs:
     text: "[compliance list]"
   -
     id: "T02470"
-    text: "Session management"
+    text: "Session Management"
   -
     id: "T02480"
     text: "[compliance list]"
@@ -963,16 +978,16 @@ paragraphs:
     text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
   -
     id: "T02640"
-    text: "Perhaps if you create a new version, you might donate it to the OWASP Cornucopia Project?"
+    text: "Perhaps if you create a new version, you might donate it to the OWASP® Cornucopia Project?"
   -
     id: "T02650"
     text: "2. How can I get involved?"
   -
     id: "T02660"
-    text: "Please send ideas or offers of help to the project’s mailing list."
+    text: "Please send ideas or offers of help to the project's mailing list."
   -
     id: "T02670"
-    text: "3. How were the attackers’ names chosen?"
+    text: "3. How were the attackers' names chosen?"
   -
     id: "T02680"
     text: "EoP begins every description with words like 'An attacker can...'. "
@@ -993,19 +1008,16 @@ paragraphs:
     text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
   -
     id: "T02740"
-    text: "In v1.20, the name on VE-10 changed to reflect the project’s new co-leader - this card is also the only one with two names in the attack."
+    text: "In v1.20, the name on VE-10 changed to reflect the project's new co-leader - this card is also the only one with two names in the attack."
   -
     id: "T02750"
-    text: "4. Why aren’t there any images on the card faces?"
+    text: "4. Why aren't there any images on the card faces?"
   -
     id: "T02760"
-    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too. "
+    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too."
   -
     id: "T02770"
-    text: "But it would be great to have additional design elements included. "
-  -
-    id: "T02780"
-    text: "Any volunteer"
+    text: "But it would be great to have additional design elements included."
   -
     id: "T02790"
     text: "5. Are the attacks ranked by the number on the card?"
@@ -1020,7 +1032,7 @@ paragraphs:
     text: "6. How long does it take to play a round of cards using the full deck?"
   -
     id: "T02830"
-    text: "This depends upon the amount of discussion and how familiar the players are with application security concepts."
+    text: "This depends upon the scope of the application, amount of discussion and how familiar the players are with application security concepts."
   -
     id: "T02840"
     text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
@@ -1074,25 +1086,16 @@ paragraphs:
     text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
   -
     id: "T03010"
-    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. data validation and encoding)."
+    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Data Validation and Encoding)."
   -
     id: "T03020"
     text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
   -
-    id: "T03030"
-    text: "11. I don’t understand what the attack means on each card - is there more detailed information?"
-  -
-    id: "T03040"
-    text: "Yes, the online Wiki Deck at was created to help players understand the attacks. "
-  -
-    id: "T03050"
-    text: "See"
-  -
     id: "T03060"
-    text: "12. My company wants to print its own version of OWASP Cornucopia - what license do we need to refer to?"
+    text: "11. My company wants to print its own version of OWASP® Cornucopia - what license do we need to refer to?"
   -
     id: "T03070"
-    text: "Please refer to the full answer to this question on the project’s web pages at"
+    text: "Please refer to the full answer to this question on the project's web pages at"
   -
     id: "T03100"
     text: "Change Log"
@@ -1119,7 +1122,7 @@ paragraphs:
     text: "0.3"
   -
     id: "T03180"
-    text: "Draft announced OWASP SCP mailing list for comment."
+    text: "Draft announced OWASP® SCP mailing list for comment."
   -
     id: "T03190"
     text: "0.4"
@@ -1197,7 +1200,7 @@ paragraphs:
     text: "Minor attack wording changes on two cards. "
   -
     id: "T03440"
-    text: "OWASP SCP and ASVS cross-references checked and updated. "
+    text: "OWASP® SCP and ASVS cross-references checked and updated. "
   -
     id: "T03450"
     text: "Code letters added for suits. "
@@ -1277,6 +1280,24 @@ paragraphs:
     id: "T03700"
     text: "Minor text changes to instructions and FAQs."
   -
+    id: "T03710"
+    text: "2.0"
+  -
+    id: "T03720"
+    text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
+  -
+    id: "T03730"
+    text: "2.1"
+  -
+    id: "T03740"
+    text: "Adding italian translation done by Ruggero DallAglio"
+  -
+    id: "T03750"
+    text: "2.1"
+  -
+    id: "T03760"
+    text: "Adding portugeese translation done by André Ferreira"
+  -
     id: "T03800"
     text: "Project contributors"
   -
@@ -1293,31 +1314,31 @@ paragraphs:
     text: "Please contact the mailing list or project leaders directly, if anyone is missing from the below lists."
   -
     id: "T03850"
-    text: "•OWASP’s hard-working employees, especially Kate Hartmann"
+    text: "OWASP's hard-working employees."
   -
     id: "T03860"
-    text: "•Attendees at OWASP London, OWASP Manchester, OWASP Netherlands and OWASP Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
+    text: "Attendees at OWASP® London, OWASP® Manchester, OWASP® Netherlands and OWASP® Scotland chapter meetings, and the London Gamification meetup, who made helpful suggestions and asked challenging questions"
   -
     id: "T03870"
-    text: "•Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
+    text: "Blackfoot UK Limited for gifting print-ready design files and hundreds of professionally printed card decks for distribution by post and at OWASP chapter meetings"
   -
     id: "T03880"
-    text: '•OWASP NYC for creating an OWASP box design and distributing packs at AppSec USA 2014.'
+    text: 'OWASP® NYC for creating an OWASP box design and distributing packs at AppSec USA 2014.'
   -
     id: "T03900"
     text: "Podcasts and videos"
   -
     id: "T03910"
-    text: 'The following supporting OWASP Cornucopia resources are available online:'
+    text: 'The following supporting OWASP® Cornucopia resources are available online:'
   -
     id: "T03920"
     text: "Video - Using the cards, created during AppSec EU 2015 project summit, 20th May 2015"
   -
     id: "T03930"
-    text: "Podcast interview, OWASP 24/7 Podcast channel, 21st March 2014"
+    text: "Podcast interview, OWASP® 24/7 Podcast channel, 21st March 2014"
   -
     id: "T03940"
-    text: "	Video of presentation, OWASP EU Tour 2013 London, 3rd June 2013"
+    text: "	Video of presentation, OWASP® EU Tour 2013 London, 3rd June 2013"
   -
     id: "T03950"
     text: "See the project website for further information and presentation materials."

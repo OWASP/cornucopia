@@ -16,8 +16,8 @@ suits:
     id: "VE2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/VE2"
-    owasp_dev_guide: [ SC1, SC2, SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
-    owasp_dev_guide_print: [ SC1-4, SC8-13, FM1-2, FM5, EE6-8 ]
+    owasp_dev_guide: [ SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
+    owasp_dev_guide_print: [ SC3-4, SC8-13, FM1-2, FM5, EE6-8 ]
     owasp_asvs: [ 2.4.1, 4.3.2, 13.2.2, 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.2.5, 16.4.2, 16.5.1, 17.1.1 ]
     owasp_asvs_print: [ 2.4.1, 4.3.2, 13.2.2, 13.4.1-7, 15.2.3, 16.2.5, 16.4.2, 16.5.1, 17.1.1 ]
     owasp_appsensor: [ HT1, HT2, HT3 ]
@@ -134,7 +134,7 @@ suits:
     owasp_dev_guide: [ SQ3, SQ4, CEC3, CEC4, CEC5, CEC6, COE1, COE2 ]
     owasp_dev_guide_print: [ SQ3-4, CEC3-6, COE1-2 ]
     owasp_asvs: [ 1.1.1, 1.1.2, 1.2.1, 1.2.2, 1.2.3, 1.3.3, 1.3.7, 3.2.2, 5.4.2, 16.4.1, 16.5.1 ]
-    owasp_asvs_print: [ 1.1.1-2, 1.2.1-3, 1.3.1, 1.3.3, 1.3.7, 3.2.2, 5.4.2, 16.4.1, 16.5.1 ]
+    owasp_asvs_print: [ 1.1.1-2, 1.2.1-3, 1.3.1, 1.3.3, 1.3.7, 3.2.2, 16.5.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 28, 43, 64, 72, 120, 152, 267 ]
     capec_map:
@@ -229,7 +229,7 @@ suits:
     url: "https://cornucopia.owasp.org/cards/VE8"
     owasp_dev_guide: [ LF4, VSD2 ]
     owasp_dev_guide_print: [ LF4, VSD2 ]
-    owasp_asvs: [ 1.1.1, 1.1.2, 1.2.3, 1.2.3, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.3.9, '1.3.10', 1.3.11, 1.3.12, 16.5.1 ]
+    owasp_asvs: [ 1.1.1, 1.1.2, 1.2.3, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.3.9, '1.3.10', 1.3.11, 1.3.12, 16.5.1 ]
     owasp_asvs_print: [ 1.1.1-2, 1.2.3, 1.3.1-12, 16.5.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 28, 36, 66, 88, 135, 136, 141, 152, 160, 183, 250, 267, 664, 676 ]
@@ -277,7 +277,7 @@ suits:
     capec: [ 24, 28, 152, 153, 198 ]
     capec_map:
       24:
-        owasp_asvs: [16.5.1, 16.5.2, 16.5.3, 16.5.4 ]
+        owasp_asvs: [16.5.1, 16.5.2, 16.5.3, 16.5.4	]
       28:
         owasp_asvs: [ 16.5.1 ]
       152:
@@ -433,7 +433,6 @@ suits:
     owasp_asvs_print: [ "-" ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ ]
@@ -451,7 +450,6 @@ suits:
     owasp_asvs_print: [ 6.3.1, 6.3.3, 6.3.5, 6.3.7-8, 6.4.3-4, 6.4.6, 7.2.1, 7.5.1-2, 7.6.2, 14.3.1, 16.2.1, 16.3.1 ]
     owasp_appsensor: [ UT1 ]
     capec: [ 151, 268 ]
-    capec_map: {}
     safecode: [ 28, 50 ]
     owasp_cre:
       owasp_asvs: [ 772-358, 240-274, 555-048, 841-710, 473-758, 617-524, '046-257', 715-304 ]
@@ -465,7 +463,6 @@ suits:
     owasp_asvs_print: [ 6.2.6, 6.2.10-12, 6.3.2, 6.4.2, 6.5.7, 11.4.2, 12.2.1, 12.3.1, 12.3.3, 13.3.1, 14.2.1-2, 14.3.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 16, 37, 55, 70, 116, 151, 543, 546, 560, 565, 568, 600, 654 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 772-358, 543-621 ]
@@ -479,7 +476,6 @@ suits:
     owasp_asvs_print: [ 6.1.1, 6.3.1-2, 6.3.8, 16.5.3 ]
     owasp_appsensor: [ AE1 ]
     capec: [ 70, 116, 383, 568, 569 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 802-056, 166-151 ]
@@ -493,7 +489,6 @@ suits:
     owasp_asvs_print: [ 6.2.2, 6.2.4, 6.2.11-12, 6.3.2, 6.4.2, 7.2.2, 13.2.3 ]
     owasp_appsensor: [ AE12, HT3 ]
     capec: [ 16, 70, 116, 151, 560, 565, 600 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 166-151 ]
@@ -507,7 +502,6 @@ suits:
     owasp_asvs_print: [ 6.3.6, 6.4.1, 6.4.6, 6.5.1, 6.5.5-6, 6.5.8, 6.6.1-2, 6.8.3, 9.2.1, 10.4.2-3, 10.4.5, 10.4.9, 13.3.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 50, 116, 151, 194, 633 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 581-525 ]
@@ -521,7 +515,6 @@ suits:
     owasp_asvs_print: [ 6.1.1, 6.2.1-5, 6.2.8-12, 6.1.1, 6.3.1-3, 6.3.5, 6.3.8, 6.4.1-3, 6.5.1-5, 6.6.3-4 ]
     owasp_appsensor: [ AE2, AE3 ]
     capec: [ 2, 16, 49, 55, 70, 112, 151, 565, 600 ]
-    capec_map: {}
     safecode: [ 27 ]
     owasp_cre:
       owasp_asvs: [ 158-874, 576-651, 338-370, 802-056 ]
@@ -535,7 +528,6 @@ suits:
     owasp_asvs_print: [ 16.5.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 87, 114, 115, 461 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 166-151 ]
@@ -549,7 +541,6 @@ suits:
     owasp_asvs_print: [ 6.1.1-3, 6.2.3, 6.3.3-4, 6.3.6, 6.4.1-4, 6.5.3-4, 6.6.1-2, 6.6.3, 6.7.2, 7.5.1, 7.5.3, 8.1.3-4, 8.4.2, 10.4.4, 13.2.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21, 58, 89, 90, 98, 114, 195, 543 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 801-310, 327-505, 333-858, 368-633, 284-521 ]
@@ -563,7 +554,6 @@ suits:
     owasp_asvs_print: [ 6.1.1-3, 6.3.1-4, 6.3.6, 6.4.2, 6.6.1, 6.7.1, 6.8.1-4, 10.1.1-2, 10.3.1-5, 10.5.1-5 ]
     owasp_appsensor: [ "-" ]
     capec: [ 114, 115 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 344-611, 117-371 ]
@@ -577,7 +567,6 @@ suits:
     owasp_asvs_print: [ 4.4.4, 6.1.3, 6.3.3-4, 6.4.3-4, 7.5.1, 7.5.3, 8.4.2, 12.3.5, 13.2.1, 13.2.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 115 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 801-310, 201-246 ]
@@ -591,7 +580,6 @@ suits:
     owasp_asvs_print: [ 6.1.3, 6.4.3-4, 6.8.4, 7.5.1, 7.5.3, 13.2.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 36, 50, 114, 115, 121, 179, 212, 554 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 801-310, 581-525, 358-860, 201-246 ]
@@ -605,7 +593,6 @@ suits:
     owasp_asvs_print: [ 7.2.1, 10.1.1-2, 10.2.1, 13.2.1, 13.2.3, 16.5.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 115, 207, 443, 445, 446, 511, 523, 554 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 650-560, 838-636, 418-525, 265-800, 154-031 ]
@@ -619,7 +606,6 @@ suits:
     owasp_asvs_print: [ "-" ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    capec_map: {}
     safecode: [ "-" ]
 -
   id: "SM"
@@ -635,7 +621,6 @@ suits:
     owasp_asvs_print: [ 10.1.1-2, 10.2.1-2, 10.3.5, 14.2.1, 16.5.3 ]
     owasp_appsensor: [ SE2 ]
     capec: [ 31, 60, 61 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 582-541 ]
@@ -649,7 +634,6 @@ suits:
     owasp_asvs_print: [ 7.1.2, 7.4.5, 7.5.2, 10.4.6 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21, 89, 98, 195, 543 ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ ]
@@ -663,7 +647,6 @@ suits:
     owasp_asvs_print: [ 3.3.1-4, 3.5.4 ]
     owasp_appsensor: [ SE2 ]
     capec: [ 31, 61 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 688-081, 804-220, 342-055, 232-034, 705-182 ]
@@ -678,7 +661,6 @@ suits:
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 59, 226 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ '002-630', 704-530, 727-043, 457-165 ]
@@ -692,7 +674,6 @@ suits:
     owasp_asvs_print: [  7.1.1, 7.1.3, 7.3.1-2, 7.4.1, 7.6.1, 10.4.8 ]
     owasp_appsensor: [ SE5, SE6 ]
     capec: [ 21 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ '065-782', 238-346, 673-736 ]
@@ -706,7 +687,6 @@ suits:
     owasp_asvs_print: [ 7.4.1, 7.4.3-5, 7.5.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 457-165, 673-736 ]
@@ -720,7 +700,6 @@ suits:
     owasp_asvs_print: [ 7.3.1-2, 7.4.1-2, 7.6.1, 8.2.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ '065-782', 618-403 ]
@@ -735,7 +714,6 @@ suits:
     owasp_appsensor: [ SE4, SE5, SE6 ]
     owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 60, 116 ]
-    capec_map: {}
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 527-034, 402-133, '067-050', 240-274, 841-710, 248-646, 636-854 ]
@@ -749,7 +727,6 @@ suits:
     owasp_asvs_print: [ 3.5.1-4, 4.4.2, 10.2.1 ]
     owasp_appsensor: [ IE4 ]
     capec: [ 62, 111 ]
-    capec_map: {}
     safecode: [ 18 ]
     owasp_cre:
       owasp_asvs: [ '060-472' ]
@@ -763,7 +740,6 @@ suits:
     owasp_asvs_print: [ 2.3.1-2, 2.3.4, 2.4.2 ]
     owasp_appsensor: [ IE5 ]
     capec: [ 33, 60 ]
-    capec_map: {}
     safecode: [ 12, 14 ]
     owasp_cre:
       owasp_asvs: [ 534-605, 456-535, 746-705 ]
@@ -777,7 +753,6 @@ suits:
     owasp_asvs_print: [ 4.4.3, 7.2.1, 7.5.1, 7.5.3, 10.1.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21, 36 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 344-611, 582-541 ]
@@ -791,7 +766,6 @@ suits:
     owasp_asvs_print: [ 7.2.1-2, 10.1.1, 13.2.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21 ]
-    capec_map: {}
     safecode: [ 14, 28 ]
     owasp_cre:
       owasp_asvs: [ 344-611 ]
@@ -805,7 +779,6 @@ suits:
     owasp_asvs_print: [ "-" ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    capec_map: {}
     safecode: [ "-" ]
 -
   id: "AZ"
@@ -821,7 +794,6 @@ suits:
     owasp_asvs_print: [ 3.4.5, 3.4.8, 3.7.2-3, 8.3.1, 8.4.1, 13.1.1, 13.2.4-5, 15.3.2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 154, 161, 173, 240 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 368-633, 304-667, 232-217 ]
@@ -835,7 +807,6 @@ suits:
     owasp_asvs_print: [ 8.3.3, 8.4.2, 13.4.5, 14.2.2, 14.2.5, 14.2.7, 14.3.1-3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 33, 69, 126, 213, 233 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 368-633, 166-151, 157-430, 473-758, 186-540, 227-045, 715-304, 268-272, 307-111 ]
@@ -849,7 +820,6 @@ suits:
     owasp_asvs_print: [ 8.3.1, 16.5.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 122 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 166-151 ]
@@ -864,7 +834,6 @@ suits:
     owasp_appsensor: [ ACE1, ACE2, ACE3, ACE4, HT2 ]
     owasp_appsensor_print: [ ACE1-4, HT2 ]
     capec: [ 13, 54, 75, 87, 95, 122, 126, 143, 144, 149, 155, 203, 265 ]
-    capec_map: {}
     safecode: [ 8, 10, 11, 13 ]
     owasp_cre:
       owasp_asvs: [ 278-413, 650-560, 368-633, 304-667 ]
@@ -879,7 +848,6 @@ suits:
     owasp_appsensor: [ ACE1, ACE2, ACE3, ACE4 ]
     owasp_appsensor_print: [ ACE1-4 ]
     capec: [ 122 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 368-633, 304-667 ]
@@ -894,7 +862,6 @@ suits:
     owasp_appsensor: [ ACE1, ACE2, ACE3, ACE4 ]
     owasp_appsensor_print: [ ACE1-4 ]
     capec: [ 122, 212 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 368-633, 304-667 ]
@@ -908,7 +875,6 @@ suits:
     owasp_asvs_print: [ 2.1.3, 2.3.1-5, 3.5.7, 16.3.3 ]
     owasp_appsensor: [ ACE3 ]
     capec: [ 25, 31, 39, 74, 162, 166, 172, 207, 212, 240 ]
-    capec_map: {}
     safecode: [ 8, 10, 11, 12 ]
     owasp_cre:
       owasp_asvs: [ 368-633, 304-667, 284-521, 770-361, 534-605, 456-535 ]
@@ -923,7 +889,6 @@ suits:
     owasp_appsensor: [ AE3, FIO1, FIO2, UT2, UT3, UT4, STE1, STE2, STE3 ]
     owasp_appsensor_print: [ AE3, FIO1-2, UT2-4, STE1-3 ]
     capec: [ 26, 29, 125, 212, 261, 469, 488 ]
-    capec_map: {}
     safecode: [ 1, 35 ]
     owasp_cre:
       owasp_asvs: [ 746-705, 630-573 ]
@@ -938,7 +903,6 @@ suits:
     owasp_appsensor: [ ACE1, ACE2, ACE3, ACE4 ]
     owasp_appsensor_print: [ ACE1-4 ]
     capec: [ 36, 95, 121, 179, 554 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 344-611, 650-560 ]
@@ -952,7 +916,6 @@ suits:
     owasp_asvs_print: [ 8.1.4, 8.2.1, 8.3.1, 8.4.2, 14.2.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 75, 116, 122, 133, 176, 180, 203 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 368-633, 838-636, 418-525, 265-800, 154-031 ]
@@ -966,7 +929,6 @@ suits:
     owasp_asvs_print: [ '1.2.3-10', 5.4.2-3, 16.4.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 17, 23, 30, 35, 66, 69, 88, 122, 136, 233, 234, 242, 248, 250, 676 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 857-718 ]
@@ -980,7 +942,6 @@ suits:
     owasp_asvs_print: [ 7.2.1, 8.2.1, 8.3.1, 8.4.2, 13.2.3, 14.2.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 176, 207, 554 ]
-    capec_map: {}
     safecode: [ 8, 10, 11 ]
     owasp_cre:
       owasp_asvs: [ 650-560, 368-633, 838-636, 418-525, 265-800, 154-031 ]
@@ -994,7 +955,6 @@ suits:
     owasp_asvs_print: [ "-" ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    capec_map: {}
     safecode: [ "-" ]
 -
   id: "CR"
@@ -1010,7 +970,6 @@ suits:
     owasp_asvs_print: [ 11.2.1, 11.3.2-3, 11.4.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 39, 162 ]
-    capec_map: {}
     safecode: [ 21, 29 ]
     owasp_cre:
       owasp_asvs: [ 742-431 ]
@@ -1024,7 +983,6 @@ suits:
     owasp_asvs_print: [ 4.1.5, 6.7.1, 9.1.1-3, 11.3.3, 11.4.3, 14.2.4 ]
     owasp_appsensor: [ SE1, IE4 ]
     capec: [ 31, 39, 68, 75, 94, 133, 145, 162, 184, 203, 233, 268, 438, 439, 442, 444, 447, 594, 690 ]
-    capec_map: {}
     safecode: [ 12, 14 ]
     owasp_cre:
       owasp_asvs: [ 838-636, 838-636, 418-525, 265-800, 154-031, '028-254', 307-507, 253-452, 208-355, 347-352 ]
@@ -1038,7 +996,6 @@ suits:
     owasp_asvs_print: [ 12.2.1, 14.2.1, 14.2.6 ]
     owasp_appsensor: [ "-" ]
     capec: [ 117, 153, 185, 186, 187 ]
-    capec_map: {}
     safecode: [ 14, 29, 30 ]
     owasp_cre:
       owasp_asvs: [ 227-045, 745-045 ]
@@ -1052,7 +1009,6 @@ suits:
     owasp_asvs_print: [ 11.2.5, 12.2.1, 12.3.1, 12.3.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 212, 620 ]
-    capec_map: {}
     safecode: [ 21, 29 ]
     owasp_cre:
       owasp_asvs: [ 527-034, '036-810', 248-646, 636-854 ]
@@ -1065,8 +1021,7 @@ suits:
     owasp_asvs: [ 4.4.1, 11.7.1, 11.7.2, 12.1.1, 12.1.2, 12.1.3, 12.1.4, 12.1.5, 12.2.1, 12.2.2, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.3.5, 13.4.2, 14.2.1, 14.2.2, 14.2.3, 14.2.4, 14.2.5, 14.2.6, 14.3.1, 14.3.2, 14.3.3 ]
     owasp_asvs_print: [ 4.4.1, 11.7.1-2, 12.1.1-5, 12.2.1-2, 12.3.1-5, 13.4.2, 14.2.1-6, 14.3.l-3 ]
     owasp_appsensor: [ "-" ]
-    capec: [ 31, 57, 94, 102, 157, 158, 384, 466, 546 ]
-    capec_map: {}
+    capec: [ 31, 57, 94, 102, 145, 157, 158, 384, 466, 546 ]
     safecode: [ 29 ]
     owasp_cre:
       owasp_asvs: [ 527-034, 558-807, 270-634, 227-045, 715-304 , 248-646, 636-854 ]
@@ -1080,7 +1035,6 @@ suits:
     owasp_asvs_print: [ 3.4.1, 3.7.4, 4.1.2, 11.3.3-5, 12.1.1-4, 12.2.1-2, 12.3.1-5 ]
     owasp_appsensor: [ IE4 ]
     capec: [ 31, 90, 94, 114, 117, 212, 216, 220, 272, 594, 620 ]
-    capec_map: {}
     safecode: [ 14, 29, 30 ]
     owasp_cre:
       owasp_asvs: [ 530-671, 786-224, 745-045, 430-636, 537-367, '036-147' ]
@@ -1094,7 +1048,6 @@ suits:
     owasp_asvs_print: [ 11.2.1, 11.3.1-5, 11.4.1-2, 11.6.1-2, 13.3.1, 14.1.1-2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 20, 31, 37, 55 ]
-    capec_map: {}
     safecode: [ 21, 29, 31 ]
     owasp_cre:
       owasp_asvs: [ 622-203, 742-431, 674-425, 227-045 ]
@@ -1108,7 +1061,6 @@ suits:
     owasp_asvs_print: [ 11.2.1-5, 11.3.1-5, 11.4.1-4, 11.5.1-2, 11.6.1-2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 97 ]
-    capec_map: {}
     safecode: [ 14, 20, 21, 29, 32, 33 ]
     owasp_cre:
       owasp_asvs: [ 742-431, 674-425, 542-488, 664-571 ]
@@ -1122,7 +1074,6 @@ suits:
     owasp_asvs_print: [ 11.2.3, 11.4.2-4, 11.5.1-2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 97, 463 ]
-    capec_map: {}
     safecode: [ 14, 20, 21, 29, 31, 32, 33 ]
     owasp_cre:
       owasp_asvs: [ 664-571 ]
@@ -1136,7 +1087,6 @@ suits:
     owasp_asvs_print: [ 11.1.1-2, 11.1.4, 13.1.4, 13.3.1, 13.3.3, 14.2.2, 16.2.5, 17.2.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 116 ]
-    capec_map: {}
     safecode: [ 21, 29 ]
     owasp_cre:
       owasp_asvs: [ 287-305, 508-702, 232-325, 774-888, 340-375, '032-213' ]
@@ -1150,7 +1100,6 @@ suits:
     owasp_asvs_print: [ 11.2.3-5, 11.3.1-2, 11.3.4, 11.4.1-4, 11.5.1-2, 11.6.1-2, 13.3.1 ]
     owasp_appsensor: [ "-" ]
     capec: [ 116, 117 ]
-    capec_map: {}
     safecode: [ 21, 29 ]
     owasp_cre:
       owasp_asvs: [ 287-305, 508-702, 821-832, 674-425, 715-304 ]
@@ -1164,7 +1113,6 @@ suits:
     owasp_asvs_print: [ 11.2.4-5, 11.3.1-5, 11.4.1, 11.5.1, 11.6.1-2 ]
     owasp_appsensor: [ "-" ]
     capec: [ 94, 184, 207, 554 ]
-    capec_map: {}
     safecode: [ 14, 21, 29 ]
     owasp_cre:
       owasp_asvs: [ 508-702, 441-132, 433-122, 786-224, 878-880 ]
@@ -1178,7 +1126,6 @@ suits:
     owasp_asvs_print: [ "-" ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    capec_map: {}
     safecode: [ "-" ]
 -
   id: "C"
@@ -1194,7 +1141,6 @@ suits:
     owasp_asvs_print: [ 1.4.1-3, 3.7.1, 11.2.5, 15.1.1-2, 15.1.4-5, 15.2.1-2, 15.2.5, 15.4.1-4, 16.5.2-3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 25, 26, 77, 29, 96, 100, 123, 124, 125, 128, 129, 130, 131, 264, 446 ]
-    capec_map: {}
     safecode: [ 3, 5, 6, 7, 9, 22, 25, 26, 34 ]
     owasp_cre:
       owasp_asvs: [ 314-131 ]
@@ -1208,7 +1154,6 @@ suits:
     owasp_asvs_print: [ 13.4.1-2, 13.4.5-7, 15.2.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 116, 189, 167, 207 ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ 253-452 ]
@@ -1222,7 +1167,6 @@ suits:
     owasp_asvs_print: [ 6.3.2, 6.7.1, 6.8.2, 16.3.1-4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 268 ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ 841-710, 443-447 ]
@@ -1236,7 +1180,6 @@ suits:
     owasp_asvs_print: [ 3.4.3, 3.4.6-8, 3.7.2-3, 12.1.4, 12.2.1-2, 12.3.1, 12.3.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 21, 22, 57, 89, 103, 181, 459 ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ 530-671, 232-217, 745-045, 430-636, 537-367 ]
@@ -1250,7 +1193,6 @@ suits:
     owasp_asvs_print: [ 11.2.5, 12.2.1, 12.3.1, 12.3.3, 16.5.3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 54, 98, 164, 172, 554 ]
-    capec_map: {}
     safecode: [ 4, 11, 23 ]
     owasp_cre:
       owasp_asvs: [ 166-15, 555-048 ]
@@ -1264,7 +1206,6 @@ suits:
     owasp_asvs_print: [ 16.1.1, 16.2.1-4, 16.3.1-4, 16.4.1-3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 81, 93, 268 ]
-    capec_map: {}
     safecode: [ 4 ]
     owasp_cre:
       owasp_asvs: [ 240-274, 555-048, 841-710, 443-447, '048-612', 713-683, '015-063', 668-364 ]
@@ -1278,7 +1219,6 @@ suits:
     owasp_asvs_print: [ 13.2.1-3, 15.1.1-2, 15.2.1, 15.2.4 ]
     owasp_appsensor: [ RE1, RE2 ]
     capec: [ 37, 161, 169, 176, 220, 310, 536 ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ 801-310, 154-031, 418-525, 208-355, 347-352, 715-334, 462-245 ]
@@ -1292,7 +1232,6 @@ suits:
     owasp_asvs_print: [ 7.5.3, 8.4.2, 13.2.1-3 ]
     owasp_appsensor: [ "-" ]
     capec: [ 122, 169, 233 ]
-    capec_map: {}
     safecode: [ "-" ]
     owasp_cre:
       owasp_asvs: [ 801-310, 201-246 ]
@@ -1306,7 +1245,6 @@ suits:
     owasp_asvs_print: [ 15.1.1-2, 15.2.1-5 ]
     owasp_appsensor: [ "-" ]
     capec: [ 68, 310, 438, 439, 442, 443, 523, 524, 446, 538 ]
-    capec_map: {}
     safecode: [ 15 ]
     owasp_cre:
       owasp_asvs: [ 053-751, 611-158, 838-636, 838-636, 418-525, 265-800, 715-334 ]
@@ -1320,7 +1258,6 @@ suits:
     owasp_asvs_print: [ 3.7.5, 15.1.1-2, 15.2.1-5 ]
     owasp_appsensor: [ "-" ]
     capec: [ 445, 447 ]
-    capec_map: {}
     safecode: [ 4 ]
     owasp_cre:
       owasp_asvs: [ 053-751, 253-452, 314-131, 180-488, 208-355, 347-352, 715-334 ]
@@ -1334,7 +1271,6 @@ suits:
     owasp_asvs_print: [ 2.3.2, 2.4.1-2, 6.3.1, 6.3.5, 6.3.7, 7.4.5, 7.5.1-3, 8.1.3-4, 8.3.2, 8.4.2, 16.3.1-4 ]
     owasp_appsensor: [ (All) ]
     capec: [ 212 ]
-    capec_map: {}
     safecode: [ 1, 27 ]
     owasp_cre:
       owasp_asvs: [ 176-154, 534-605, 456-535, 746-705, 630-573 ]
@@ -1344,12 +1280,11 @@ suits:
     url: "https://cornucopia.owasp.org/cards/CK"
     owasp_dev_guide: [ A12, ACM1 ]
     owasp_dev_guide_print: [ A12, ACM1 ]
-    owasp_asvs: [ 1.3.12, 2.3.2, 2.4.1, 2.4.2, 4.2.5, 4.3.1, 5.2.1, 5.2.6, 6.1.1, 6.3.1, 10.5.5, 10.6.2, 13.1.2, 13.1.3, 13.2.6, 15.1.3, 17.1.2, 17.3.1, 17.3.2 ]
-    owasp_asvs_print: [ 1.3.12, 2.3.2, 2.4.1-2, 4.2.5, 4.3.1, 5.2.1, 5.2.6, 6.1.1, 6.3.1, 10.5.5, 10.6.2, 13.1.2-3, 13.2.6, 15.1.3, 17.1.2, 17.3.1-2 ]
+    owasp_asvs5: [ 1.3.12, 2.3.2, 2.4.1, 2.4.2, 4.2.5, 4.3.1, 6.1.1, 6.3.1, 10.5.5, 10.6.2, 13.1.2, 13.1.3, 13.2.6, 15.1.3, 17.1.2, 17.3.1, 17.3.2 ]
+    owasp_asvs_print: [ 1.3.12, 2.3.2, 2.4.1-2, 4.2.5, 4.3.1, 6.1.1, 6.3.1, 10.5.5, 10.6.2, 13.1.2-3, 13.2.6, 15.1.3, 17.1.2, 17.3.1-2 ]
     owasp_appsensor: [ UT1, UT2, UT3, UT4, STE3 ]
     owasp_appsensor_print: [ UT1-4, STE3 ]
     capec: [ 2, 25, 119, 125, 130, 212, 227, 469, 607 ]
-    capec_map: {}
     safecode: [ 1 ]
     owasp_cre:
       owasp_asvs: [ 802-056, 746-705, 630-573 ]
@@ -1363,7 +1298,6 @@ suits:
     owasp_asvs_print: [ "-" ]
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
-    capec_map: {}
     safecode: [ "-" ]
 -
   id: "WC"
@@ -1379,7 +1313,6 @@ suits:
     owasp_asvs_print: [ 3.1.1, 5.1.1, 5.4.3, 10.4.7 ]
     owasp_appsensor: [ "-" ]
     capec: [ 23, 165, 184, 186, 242, 441, 444, 523, 533, 549, 657 ]
-    capec_map: {}
     safecode: [ "-" ]
   -
     id: "JOB"
@@ -1391,5 +1324,4 @@ suits:
     owasp_asvs_print: [ 3.1.1, 5.1.1, 6.4.5-6, 10.7.1-3, 11.1.1-4, 13.1.4 ]
     owasp_appsensor: [ "-" ]
     capec: [ 9, 184, 416, 438, 439, 444, 447, 524, 669, 691 ]
-    capec_map: {}
     safecode: [ "-" ]

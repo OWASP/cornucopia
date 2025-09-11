@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "ES"
-  version: "2.1"
+  version: "2.2"
 suits:
 -
   id: "VE"
@@ -453,10 +453,10 @@ paragraphs:
     text: "No Tarjeta"
   -
     id: "Title"
-    text: "Website App Edition v2.1-ES"
+    text: "Website App Edition v2.2-ES"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v2.1-ES"
+    text: "OWASP® Cornucopia Website App Edition v2.2-ES"
   -
     id: "T00005"
     text: "Índice"

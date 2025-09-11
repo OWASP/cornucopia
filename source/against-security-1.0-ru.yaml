@@ -2,24 +2,24 @@
 meta:
   edition: "against-security"
   component: "cards"
-  language: "EN"
-  version: "1.00"
+  language: "RU"
+  version: "1.0"
 suits:
 -
-  name: "Cards Against Security"
+  name: "Карты Против Безопасности"
   id: "CAS"
   cards:
   -
     id: "CAS2"
     value: "2"
-    desc: "You favorite card"
+    desc: "Ваша любимая карта"
   -
     id: "CAS3"
     value: "3"
-    desc: "Another card you like"
+    desc: "Другая любимая карта"
 -
   id: "WC"
-  name: "WILD CARD"
+  name: "ШАЛЬНАЯ КАРТА"
   cards:
   -
     id: "JOA"
@@ -42,10 +42,10 @@ paragraphs:
   sentences:
   -
     id: "NoCard"
-    text: "No Card"
+    text: "Нет Карты"
   -
     id: "Title"
-    text: "Cards Against Security Edition v1.00-EN"
+    text: "Карты Против Безопасности Редакция v1.00-RU"
   -
     id: "Title_full"
-    text: "Cards Against Security Edition v1.00-EN"
+    text: "Карты Против Безопасности Редакция v1.00-RU"

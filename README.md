@@ -11,10 +11,10 @@ identify security requirements in Agile, conventional and formal development pro
 It is language, platform and technology agnostic. Visit: https://cornucopia.owasp.org/
 
 ## The cross-references on the Web App Edition deck relate to the following versions of other OWASP and external resources:
-* OWASP SCP OWASP_Secure_Coding_Practices_Checklist v2
+* OWASP Dev Guide Web Application Checklist: https://devguide.owasp.org/en/04-design/02-web-app-checklist/
 * OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
 * OWASP AppSensor AppSensor_DetectionPoints
-* CAPEC Mitre Common Attack Pattern Enumeration and Classification v1.7.1
+* CAPEC Mitre Common Attack Pattern Enumeration and Classification v3.9
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
 * MASTG OWASP Mobile Application Security Testing Guide 1.7
 * MASVS OWASP Mobile Application Security Verification Standard 2.0
@@ -41,9 +41,9 @@ usage: convert.py [-h] [-i INPUTFILE] [-v VERSION] [-o OUTPUTFILE] [-p] [-d] [-l
                   [-lt LAYOUT]
 
 Tool to output OWASP Cornucopia playing cards into different file types and languages.
-Example usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.00
+Example usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.2
 Example usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 5.0 -e eop -i ./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-5.0-cards-en.idml
-Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.00 -o 'my_output_folder\owasp_cornucopia_edition_version_layout_language_template.idml'
+Example usage: c:\cornucopia\scripts\convert.py -t bridge -lt cards -l fr -v 2.2 -o 'my_output_folder\owasp_cornucopia_edition_version_layout_language_template.idml'
 
 options:
   -h, --help            show this help message and exit
@@ -52,10 +52,12 @@ options:
                         Default=resources\templates\owasp_cornucopia_edition_ver_layout_document_template_lang.(docx|idml)
                         Template type is dependent on the file (-o) specified.
   -v VERSION, --version VERSION
-                        Output version to produce. [`all`, `latest`, `1.00`, `1.22`, `2.00`]
-                        Version 1.22 and 1.2x will deliver cards mapped to ASVS 3.0
-                        Version 2.00 and 2.0x will deliver cards mapped to ASVS 4.0
-                        Version 1.00 and 1.0x will deliver cards mapped to MASVS 2.0
+                        Output version to produce. [`all`, `latest`, `1.0`, `1.1`, `2.2`, `3.0`]
+                        For the Website edition:
+                        Version 3.0 will deliver cards mapped to ASVS 5.0
+                        Version 2.2 and 2.0x will deliver cards mapped to ASVS 4.0
+                        For the Mobile edition:
+                        Version 1.1 and 1.0x will deliver cards mapped to MASVS 2.0
                         Version all will deliver all versions of cornucopia
                         Version latest will deliver the latest deck versions of cornucopia
                         You can also specify another version explicitly if needed. If so, there needs to be a yaml file in the source folder where the name contains the version code. Eg. edition-template-ver-lang.yaml
@@ -340,11 +342,11 @@ Please see [About Cornucopia](https://cornucopia.owasp.org/about#Acknowledgement
 ### General Licensing Terms
 
 © 2025 OWASP Foundation
-Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-3.0](./LICENSE.md)
+Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-4.0](./LICENSE.md)
 
 ### Elevation of Privilege (EoP)
 
-© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
 ### Elevation of MLSec (MLSec)
 
@@ -356,11 +358,19 @@ Except, where otherwise noted, content in this repository is licensed under a [C
 
 ### OWASP Cornucopia Mobile App Edition
 
-Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### OWASP Cornucopia Website App Edition
+### OWASP Cornucopia Website App Edition (version smaller than 3.0)
 
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE.md)
+Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
+
+### OWASP Cornucopia Website App Edition (version greater than or equal to 3.0)
+
+Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
+
+### OWASP Cornucopia Mobile App Edition (version greater than or equal to 2.0)
+
+Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
 
 ### Copi - The Cornucopia Game Engine
 

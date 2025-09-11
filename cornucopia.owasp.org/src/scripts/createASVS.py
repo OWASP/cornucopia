@@ -5,7 +5,7 @@ import shutil
 import json
 import os
 
-mypath = "../../data/taxonomy/en/ASVS-5.0"
+mypath = "../../data/taxonomy/en/ASVS-4.0.3"
 
 
 def createLevelSummary(level, arr):
@@ -58,7 +58,7 @@ def createASVSPages(data):
                     f.write("Required for Level 3\r\n")
                 shortcode = subitem["Shortcode"]
                 description = subitem["Description"]
-                link = f"/taxonomy/asvs-5.0/{name}/{itemname}#{shortcode}"
+                link = f"/taxonomy/asvs-4.0.3/{name}/{itemname}#{shortcode}"
                 obj = {
                     "topic": name,
                     "cat": itemname,

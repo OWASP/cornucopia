@@ -89,15 +89,15 @@ class TextGetValidVersionChoices(unittest.TestCase):
 
         self.assertTrue(c.get_valid_mapping_for_version("1.1", edition="all"))
         self.assertTrue(c.get_valid_mapping_for_version("1.1", edition="mobileapp"))
-        self.assertTrue(c.get_valid_mapping_for_version("2.1", edition="webapp"))
+        self.assertTrue(c.get_valid_mapping_for_version("2.2", edition="webapp"))
         self.assertTrue(c.get_valid_mapping_for_version("3.0", edition="webapp"))
         self.assertFalse(c.get_valid_mapping_for_version("1.1", edition="webapp"))
-        self.assertFalse(c.get_valid_mapping_for_version("2.1", edition="mobileapp"))
+        self.assertFalse(c.get_valid_mapping_for_version("2.2", edition="mobileapp"))
         self.assertFalse(c.get_valid_mapping_for_version("2.00", edition="mobileapp"))
 
         c.convert_vars.args = argparse.Namespace(version="all", edition="all")
         got_list = c.get_valid_version_choices()
-        want_list = ["1.0", "1.1", "2.00", "2.1", "3.0", "5.0"]
+        want_list = ["1.0", "1.1", "2.2", "3.0", "5.0"]
         self.assertListEqual(want_list, got_list)
         c.convert_vars.args = argparse.Namespace(version="latest", edition="all")
         got_list = c.get_valid_version_choices()

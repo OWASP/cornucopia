@@ -3,7 +3,7 @@ meta:
   edition: "against-appsec"
   component: "cards"
   language: "RU"
-  version: "1.00"
+  version: "1.0"
 suits:
 -
   name: "Cards Against AppSec - Black"
