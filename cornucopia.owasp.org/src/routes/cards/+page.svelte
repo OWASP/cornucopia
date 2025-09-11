@@ -57,7 +57,7 @@
             if (webappSuits !== undefined && typeof webappSuits[i] !== 'undefined') map.set(webappSuits[i]?.name,expand);
         }
 
-        for(let i = 0 ; i < mobileappSuits.length ; i++)
+        for(let i = 0 ; i < mobileappSuits?.length ; i++)
         {
             if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name,expand);
         }
@@ -107,7 +107,7 @@
 <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
 {/if}
 <p class="button-container script">
-    <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={(version == VERSION_WEBAPP)} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
+    <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
     <button title="OWASP Cornucopia {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
 </p>
 </section>
