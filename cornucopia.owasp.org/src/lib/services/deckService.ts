@@ -17,11 +17,11 @@ export class DeckService {
         {lang: ['en'], edition: 'mobileapp'}, 
         {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp'}
     ];
-    private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.1'}];
+    private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.2'}];
 
     private static getVersion(edition: string): string
     {
-        return DeckService.decks.find((deck: { edition: string; }) => deck.edition == edition)?.version || '2.1';
+        return DeckService.decks.find((deck: { edition: string; }) => deck.edition == edition)?.version || '2.2';
     }
 
     private static getEdition(edition: string): string

@@ -2,12 +2,13 @@ name: ClusterFuzzLite PR fuzzing
 on:
   pull_request:
     paths:
-      - 'scripts/convert**'
-      - 'tests/scripts/convert**'
-      - '.github/workflows/cflite_pr.yml'
-      - 'tests/scripts/*_fuzzer.py'
-      - '.clusterfuzzlite/**'
-      - 'install_cornucopia_deps.txt'
+      - scripts/convert**
+      - tests/scripts/convert**
+      - .github/workflows/cflite_pr.yml
+      - tests/scripts/*_fuzzer.py
+      - .clusterfuzzlite/**
+      - install_cornucopia_deps.txt
+      - requirements.txt
 permissions: read-all
 jobs:
   hardening:

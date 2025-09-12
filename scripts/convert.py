@@ -28,14 +28,14 @@ class ConvertVars:
     FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
     LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.00", "2.1", "5.0"]
-    LATEST_VERSION_CHOICES: List[str] = ["1.1", "2.1"]
+    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.2", "3.0", "5.0"]
+    LATEST_VERSION_CHOICES: List[str] = ["1.1", "3.0"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
     EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
-        "webapp": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1"},
-        "against-security": {"1.00": "1.00"},
+        "webapp": {"2.2": "2.2", "3.0": "3.0"},
+        "against-security": {"1.0": "1.0"},
         "mobileapp": {"1.0": "1.0", "1.1": "1.1"},
-        "all": {"1.22": "1.22", "2.00": "2.00", "2.1": "2.1", "1.0": "1.0", "1.1": "1.1", "5.0": "5.0"},
+        "all": {"2.2": "2.2", "1.0": "1.0", "1.1": "1.1", "3.0": "3.0", "5.0": "5.0"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
@@ -93,7 +93,7 @@ def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
 
 
 def create_edition_from_template(
-    layout: str, language: str = "en", template: str = "bridge", version: str = "2.1", edition: str = "webapp"
+    layout: str, language: str = "en", template: str = "bridge", version: str = "3.0", edition: str = "webapp"
 ) -> None:
 
     # Get the list of available translation files
@@ -223,10 +223,10 @@ def main() -> None:
 def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     """Parse and validate the input arguments. Return object containing argument values."""
     description = "Tool to output OWASP Cornucopia playing cards into different file types and languages. "
-    description += "\nExample usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.1"
+    description += "\nExample usage: $ scripts/convert.py --pdf -lt guide -l es -v 2.2"
     description += "\nExample usage: $ scripts/convert.py -t tarot -l en -lt cards  -v 5.0 -e eop  -i "
     description += "./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop-5.0-cards-en.idml"
-    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.1 -o"
+    description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.2 -o"
     description += " my_output_folder\\owasp_cornucopia_edition_version_layout_language_template.idml"
     parser = argparse.ArgumentParser(
         description=description, formatter_class=argparse.RawTextHelpFormatter, exit_on_error=False
@@ -249,10 +249,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="latest",
         help=(
-            "Output version to produce. [`all`, `latest`, `1.00`, `1.22`, `2.00`] "
-            "\nVersion 1.22 and 1.2x will deliver cards mapped to ASVS 3.0"
-            "\nVersion 2.00 and 2.0x will deliver cards mapped to ASVS 4.0"
-            "\nVersion 2.1 will deliver cards mapped to ASVS 4.0"
+            "Output version to produce. [`all`, `latest`, `1.0`, `1.1`, `2.2`, `3.0`] "
+            "\nFor the Website edition:"
+            "\nVersion 3.0 will deliver cards mapped to ASVS 5.0"
+            "\nVersion 2.2 will deliver cards mapped to ASVS 4.0"
+            "\nFor the Mobile edition:"
             "\nVersion 1.0 will deliver cards mapped to MASVS 2.0"
             "\nVersion 1.1 will deliver cards mapped to MASVS 2.0"
             "\nVersion all will deliver all versions of cornucopia"
@@ -454,7 +455,7 @@ def get_mapping_for_edition(
 def get_mapping_data_for_edition(
     yaml_files: List[str],
     language: str,
-    version: str = "2.1",
+    version: str = "3.0",
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""
@@ -555,7 +556,7 @@ def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Docu
 def get_language_data(
     yaml_files: List[str],
     language: str,
-    version: str = "2.1",
+    version: str = "3.0",
     edition: str = "webapp",
 ) -> Dict[Any, Dict[Any, Any]]:
     """Get the raw data of the replacement text from correct yaml file"""

@@ -21,7 +21,7 @@ Let's examine one card - [Authentication-3](/cards/AT3) - as a representative ex
   - OWASP ASVS
   - CAPEC
 - Non-interactive mappings (for now)
-  - OWASP SCP
+  - OWASP Developer Guide Web Application Checklist
   - OWASP AppSensor
   - Savecode
 - ASVS (4.0) Cheat Sheet Series index
@@ -71,7 +71,7 @@ A detailed discussion on CAPEC will be featured in an upcoming post. We recommen
 
 ## Non-Interactive Mappings
 
-Currently, certain mappings such as those for OWASP SCP, Appsensor, and SAFECode are static due to the lack of a method for linking directly to a functioning website-page.
+Currently, certain mappings such as those for OWASP Developer Guide, Appsensor, and SAFECode are static due to the lack of a method for linking directly to a functioning website-page.
 
 ## ASVS (4.0) Cheatsheet Series Index
 

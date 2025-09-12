@@ -97,30 +97,39 @@ jobs:
           cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
           cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
           #
-          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 2.1 -e webapp
-          pipenv run python scripts/convert.py -l en -lt cards -t all -v 2.1 -e webapp
-          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 2.1 -e webapp
-          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 2.1 -e webapp
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 2.2 -e webapp
+          pipenv run python scripts/convert.py -l en -lt cards -t all -v 2.2 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 2.2 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 2.2 -e webapp
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt cards -t all -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 3.0 -e webapp
           pipenv run python scripts/convert.py -l en -lt cards -t all -v 1.1 -e mobileapp
           pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 1.1 -e mobileapp
           pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 1.1 -e mobileapp
           cp output/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml output/cornucopia_mobileapp/
-          cp output/owasp_cornucopia_webapp_2.1_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.1_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.1_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_2.1_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_2.1_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.1_leaflet_tarot_en.idml output/cornucopia_webapp/
+          cp output/owasp_cornucopia_webapp_2.2_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.2_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_2.2_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.2_leaflet_tarot_en.idml output/cornucopia_webapp/
           zip output/owasp_cornucopia_mobileapp_1.1_en.zip -r output/cornucopia_mobileapp/Links/* output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_mobileapp_scoresheet.pdf
-          zip output/owasp_cornucopia_webapp_2.1_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          zip output/owasp_cornucopia_webapp_2.2_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          cp output/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml output/cornucopia_webapp/
+          zip -r output/owasp_cornucopia_webapp_3.0_en.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
           zip output/cornucopia-build-files.zip -r \
             output/eop-5.0.zip \
             output/owasp_cornucopia_mobileapp_1.1_en.zip \
-            output/owasp_cornucopia_webapp_2.1_en.zip \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_en.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_es.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_fr.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_nl.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_no-nb.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-br.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_pt-pt.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_ru.docx \
-            output/owasp_cornucopia_webapp_2.1_guide_bridge_it.docx
+            output/owasp_cornucopia_webapp_2.2_en.zip \
+            output/owasp_cornucopia_webapp_3.0_en.zip \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_en.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_es.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_it.docx
+
+          
       - name: Upload output files
         id: upload_artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

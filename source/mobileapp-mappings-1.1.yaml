@@ -174,7 +174,7 @@ suits:
     url: "https://cornucopia.owasp.org/cards/AA8"
     owasp_masvs: [ AUTH-1, CODE-4, PLATFORM-1, PLATFORM-3 ]
     owasp_mastg: [ TEST-0025, TEST-0030, TEST-0035, TEST-0072, TEST-0075 ]
-    capec: [ 153, 505, 506 ]
+    capec: [ 153, 173, 505, 506 ]
     safecode: [ "-" ]
   -
     id: "AA9"

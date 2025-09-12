@@ -1,6 +1,6 @@
 # Level 1 controls
 
-Level 1 contains 128 controls listed below: 
+Level 1 contains 128 controls listed below:
 
 ## 02-authentication
 

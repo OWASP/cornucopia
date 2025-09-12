@@ -63,7 +63,7 @@
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
-      <MappingsList title="OWASP SCP:" mappings={mappings.owasp_scp} />
+      <MappingsList title="OWASP DevGuide:" mappings={mappings.owasp_dev_guide} />
       <MappingsList
         title="OWASP AppSensor:"
         mappings={mappings.owasp_appsensor}
