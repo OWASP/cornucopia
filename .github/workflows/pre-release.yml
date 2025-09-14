@@ -3,7 +3,7 @@
     on:
       push:
         branches:
-          - "pre-release"
+          - "pre-release-tes"
     permissions:
       contents: read
 
