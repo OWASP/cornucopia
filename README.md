@@ -347,24 +347,31 @@ Except, where otherwise noted, content in this repository is licensed under a [C
 ### Elevation of Privilege (EoP)
 
 © 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
+EoP is created by Affiliate Prof. Adam Shostack (see: [adamshostack/eop](https://github.com/adamshostack/eop))
 
 ### Elevation of MLSec (MLSec)
 
-© 2024 Kantega AS. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-4.0](./LICENSE.md)
+© 2024 Kantega AS. Text for Elevation of MLSec (MLSec) is licensed under [CC-BY-SA-4.0](./LICENSE.md).
+Elevation of MLSec is created by Elias Brattli Sørensen (design: Jorun Kristin Bremseth) when working at Kantega AS (see: [kantega/elevation-of-mlsec](https://github.com/kantega/elevation-of-mlsec)).
 
 ### OWASP Cumulus
 
-© 2025 OWASP Foundation. Text for OWASP Cumulus is licensed under [CC-BY-SA-4.0](./LICENSE.md)
+© 2025 OWASP Foundation. Text for OWASP Cumulus is licensed under [CC-BY-SA-4.0](./LICENSE.md).
+OWASP Cumulus is created by Christoph Niehoff. More information can be found on their site (see: [owasp.org/www-project-cumulus](https://owasp.org/www-project-cumulus/)).
 
-### OWASP Cornucopia Mobile App Edition
+### OWASP Cornucopia Mobile App Edition (version smaller than 2.0)
 
 Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### OWASP Cornucopia Website App Edition (version smaller than 3.0)
+### OWASP Cornucopia Mobile App Edition (version greater than or equal to 2.0)
+
+Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
+
+### OWASP Cornucopia Website App Edition, OWASP Cornucopia converter, OWASP Cornucopia Website (version smaller than 3.0)
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### OWASP Cornucopia Website App Edition (version greater than or equal to 3.0)
+### OWASP Cornucopia Website App Edition, OWASP Cornucopia converter, OWASP Cornucopia Website (version greater than or equal to 3.0)
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
 
