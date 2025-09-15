@@ -367,21 +367,9 @@ OWASP Cumulus is created by Christoph Niehoff. More information can be found on 
 
 Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### OWASP Cornucopia Mobile App Edition (version greater than or equal to 2.0)
-
-Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
-
 ### OWASP Cornucopia Website App Edition (version smaller than 3.0)
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
-
-### OWASP Cornucopia Website App Edition (version greater than or equal to 3.0)
-
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
-
-### OWASP Cornucopia Mobile App Edition (version greater than or equal to 2.0)
-
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
 
 ### Copi - The Cornucopia Game Engine
 
