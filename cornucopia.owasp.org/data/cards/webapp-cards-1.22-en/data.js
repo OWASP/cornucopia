@@ -606,7 +606,7 @@ let data = {
           },
           {
             "value": "T00520",
-            "text": "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
+            "text": "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
           },
           {
             "value": "T00530",
@@ -1542,7 +1542,7 @@ let data = {
           },
           {
             "value": "T03670",
-            "text": "Cross-references updated for ASVS v3.0.1 and CAPEC v2.8. Minor text changes to a small number of cards. "
+            "text": "Cross-references updated for ASVS v3.0.1 and CAPEC™ v2.8. Minor text changes to a small number of cards. "
           },
           {
             "value": "T03680",

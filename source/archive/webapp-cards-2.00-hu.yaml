@@ -561,7 +561,7 @@ paragraphs:
     text: "The other driver for Cornucopia is to link the attacks with requirements and verification techniques."
   -
     id: "T00520"
-    text: "An initial aim had been to reference CWE weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
+    text: "An initial aim had been to reference CWE™ weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
   -
     id: "T00530"
     text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP SCP v2, ASVS v3.0.1 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."

@@ -22,7 +22,7 @@ Why is this important and why should you care about this? First of all, as Adam 
 
 OWASP® Cornucopia is a threat modeling tool in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It strives to be language, platform and technology-agnostic.
 
-It’s one of the few tools that connects threat modeling with OWASP ASVS, MASVS, MASTG, SAFECode, OWASP Developer Guide and CAPEC and helps to identify security requirements, come up with a security design and a threat model without any prior knowledge of any of this.
+It’s one of the few tools that connects threat modeling with OWASP ASVS, MASVS, MASTG, SAFECode, OWASP Developer Guide and CAPEC™ and helps to identify security requirements, come up with a security design and a threat model without any prior knowledge of any of this.
 
 _How? OWASP® Cornucopia is open, democratic and agile, and that’s why it works._
 

@@ -65,9 +65,9 @@ Confirm that there are no means to retrieve a user's current password under any 
 By clicking on each ASVS description link, you can explore the Common Weakness Enumeration, which aids in understanding the nuances of these weaknesses, related with password recovery.
 
 ## CAPEC
-CAPEC provides strategic defenses against each attack technique.  Over time, it allows you as a developer to start mastering defensive counter-moves for specific attack-patterns.
+CAPEC™ provides strategic defenses against each attack technique.  Over time, it allows you as a developer to start mastering defensive counter-moves for specific attack-patterns.
 
-A detailed discussion on CAPEC will be featured in an upcoming post. We recommend that players of Cornucopia temporarily set CAPEC aside.  While it is useful, I believe it is a bit overkill if you're starting with Cornucopia. 
+A detailed discussion on CAPEC™ will be featured in an upcoming post. We recommend that players of Cornucopia temporarily set CAPEC™ aside.  While it is useful, I believe it is a bit overkill if you're starting with Cornucopia. 
 
 ## Non-Interactive Mappings
 

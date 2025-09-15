@@ -14,7 +14,7 @@ It is language, platform and technology agnostic. Visit: https://cornucopia.owas
 * [OWASP Dev Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/)
 * OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
 * OWASP AppSensor AppSensor_DetectionPoints
-* CAPEC Mitre Common Attack Pattern Enumeration and Classification v3.9
+* CAPEC™ Mitre Common Attack Pattern Enumeration and Classification v3.9
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
 * MASTG OWASP Mobile Application Security Testing Guide 1.7
 * MASVS OWASP Mobile Application Security Verification Standard 2.1
