@@ -301,7 +301,7 @@ class TestProducewebappMappings(unittest.TestCase):
             "meta": {"component": "mappings", "edition": "webapp", "language": "ALL", "version": "1.20"},
             "suits": [
                 {"cards": [{"cre": ["308-515"], "value": "2"}], "name": "Data validation & encoding"},
-                {"cards": [{"ASVS": "V2.3.3", "cre": ["138-448"], "value": "2"}], "name": "Session management"},
+                {"cards": [{"cre": ["138-448"], "value": "2"}], "name": "Session management"},
             ],
         }
 
