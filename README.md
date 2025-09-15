@@ -343,6 +343,8 @@ Please see [About Cornucopia](https://cornucopia.owasp.org/about#Acknowledgement
 
 © 2025 OWASP Foundation
 Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-4.0](./LICENSE.md)
+The OWASP Cornucopia converter and Website are examples of this. When using the work, please link back to our website and give credit to OWASP Cornucopia.
+Individuals that have contributed to part of the projects are credited through the OWASP Cornucopia project.
 
 ### Elevation of Privilege (EoP)
 
@@ -367,11 +369,11 @@ Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under 
 
 Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### OWASP Cornucopia Website App Edition, OWASP Cornucopia converter, OWASP Cornucopia Website (version smaller than 3.0)
+### OWASP Cornucopia Website App Edition (version smaller than 3.0)
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### OWASP Cornucopia Website App Edition, OWASP Cornucopia converter, OWASP Cornucopia Website (version greater than or equal to 3.0)
+### OWASP Cornucopia Website App Edition (version greater than or equal to 3.0)
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
 
