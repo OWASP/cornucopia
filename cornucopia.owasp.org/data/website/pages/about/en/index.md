@@ -36,13 +36,13 @@ To start using Cornucopia:
 
 ## Mappings
 
-The other driver for Cornucopia was to link the attacks with requirements and verification techniques. An initial aim had been to reference [CWE](http://cwe.mitre.org/ 'CWE - 
-Common Weakness Enumeration [external]') weakness IDs, but these proved too numerous, and instead it was decided to map each card to [CAPEC](http://capec.mitre.org/ 'CAPEC - 
-Common Attack Pattern Enumeration and Classification (CAPEC™) [external]') software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved.
+The other driver for Cornucopia was to link the attacks with requirements and verification techniques. An initial aim had been to reference [CWE™](http://cwe.mitre.org/ 'CWE - 
+Common Weakness Enumeration [external]') weakness IDs, but these proved too numerous, and instead it was decided to map each card to [CAPEC™](http://capec.mitre.org/ 'CAPEC - 
+Common Attack Pattern Enumeration and Classification (CAPEC) [external]') software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved.
 
 Each Website App Edition card is also mapped to the 36 primary security stories in the [SAFECode document](https://safecode.org/resource-secure-development-practices/fundamental-practices-secure-software-development-2/ 'Fundamental Practices for Secure Software Development, Third Edition - SAFECode [external]'), as well as to the OWASP [SCP](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/ 'OWASP Secure Coding Practices-Quick Reference Guide [internal]') v2, [ASVS v4.0.3](https://owasp.org/www-project-application-security-verification-standard/ 'OWASP Application Security Verification Standard (ASVS) [internal]') and [AppSensor](https://owasp.org/www-project-appsensor/ 'OWASP AppSensor [internal]') (application attack detection and response) to help teams create their own security-related stories for use in Agile processes.
 
-Likewise, each Mobile App Edition is mapped to CAPEC and the SAFECode stories, but instead of SCP, ASVS and AppSensor, each card is mapped to OWASP's [Mobile Application Security Verification Standard (MASVS) v2.0](https://mas.owasp.org/MASVS/ 'OWASP MASVS (Mobile Application Security Verification Standard [internal]') and [Mobile Application Security Testing Guide (MASTG) v2.0](https://mas.owasp.org/MASTG/ 'OWASP Mobile Application Security Testing Guide [internal]').
+Likewise, each Mobile App Edition is mapped to CAPEC™ and the SAFECode stories, but instead of SCP, ASVS and AppSensor, each card is mapped to OWASP's [Mobile Application Security Verification Standard (MASVS) v2.0](https://mas.owasp.org/MASVS/ 'OWASP MASVS (Mobile Application Security Verification Standard [internal]') and [Mobile Application Security Testing Guide (MASTG) v2.0](https://mas.owasp.org/MASTG/ 'OWASP Mobile Application Security Testing Guide [internal]').
 
 ## Other Security Gamification
 
@@ -112,7 +112,7 @@ Adam Shostack and the Microsoft SDL Team for the Elevation of Privilege (EoP) Th
 
 Keith Turpin and contributors to the “OWASP Secure Coding Practices Quick Reference Guide”, originally donated to OWASP by Boeing Inc, which is used as the primary source of security requirements information to formulate the content of the Website App Edition cards.
 
-Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor, Web Framework Security Matrix and MASVS/MASTG projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided.
+Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor, Web Framework Security Matrix and MASVS/MASTG projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided.
 
 Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the original card back pattern.
 
