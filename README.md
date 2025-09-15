@@ -343,8 +343,10 @@ Please see [About Cornucopia](https://cornucopia.owasp.org/about#Acknowledgement
 
 © 2025 OWASP Foundation
 Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-4.0](./LICENSE.md)
-The OWASP Cornucopia converter and Website are examples of this. When using the work, please link back to our website and give credit to OWASP Cornucopia.
+The OWASP Cornucopia converter and Website are examples of this.
+If you want to use any of the work in your own project please link back to our website and give credit to OWASP Cornucopia.
 Individuals that have contributed to part of the projects are credited through the OWASP Cornucopia project.
+You may refer to the [CC-BY-SA-4.0](./LICENSE.md) license for guidance as long as you are using our latest work.
 
 ### Elevation of Privilege (EoP)
 
