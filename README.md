@@ -14,7 +14,7 @@ It is language, platform and technology agnostic. Visit: https://cornucopia.owas
 * [OWASP Dev Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/)
 * OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
 * OWASP AppSensor AppSensor_DetectionPoints
-* CAPEC Mitre Common Attack Pattern Enumeration and Classification v3.9
+* CAPEC™ Mitre Common Attack Pattern Enumeration and Classification v3.9
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
 * MASTG OWASP Mobile Application Security Testing Guide 1.7
 * MASVS OWASP Mobile Application Security Verification Standard 2.1
@@ -343,34 +343,34 @@ Please see [About Cornucopia](https://cornucopia.owasp.org/about#Acknowledgement
 
 © 2025 OWASP Foundation
 Except, where otherwise noted, content in this repository is licensed under a [CC-BY-SA-4.0](./LICENSE.md)
+The OWASP Cornucopia converter and Website are examples of this.
+If you want to use any of the work in your own project please link back to our [website](https://cornucopia.owasp.org/about)
+and give credit to OWASP Cornucopia.
+Individuals that have contributed to part of the projects are credited through the OWASP Cornucopia project.
+You may refer to the [CC-BY-SA-4.0](./LICENSE.md) license for guidance as long as you are using our latest work.
 
 ### Elevation of Privilege (EoP)
 
 © 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
+EoP is created by Affiliate Prof. Adam Shostack (see: [adamshostack/eop](https://github.com/adamshostack/eop))
 
 ### Elevation of MLSec (MLSec)
 
-© 2024 Kantega AS. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-4.0](./LICENSE.md)
+© 2024 Kantega AS. Text for Elevation of MLSec (MLSec) is licensed under [CC-BY-SA-4.0](./LICENSE.md).
+Elevation of MLSec is created by Elias Brattli Sørensen (design: Jorun Kristin Bremseth) when working at Kantega AS (see: [kantega/elevation-of-mlsec](https://github.com/kantega/elevation-of-mlsec)).
 
 ### OWASP Cumulus
 
-© 2025 OWASP Foundation. Text for OWASP Cumulus is licensed under [CC-BY-SA-4.0](./LICENSE.md)
+© 2025 OWASP Foundation. Text for OWASP Cumulus is licensed under [CC-BY-SA-4.0](./LICENSE.md).
+OWASP Cumulus is created by Christoph Niehoff. More information can be found on their site (see: [owasp.org/www-project-cumulus](https://owasp.org/www-project-cumulus/)).
 
-### OWASP Cornucopia Mobile App Edition
+### OWASP Cornucopia Mobile App Edition (version smaller than 2.0)
 
 Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
 ### OWASP Cornucopia Website App Edition (version smaller than 3.0)
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
-
-### OWASP Cornucopia Website App Edition (version greater than or equal to 3.0)
-
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
-
-### OWASP Cornucopia Mobile App Edition (version greater than or equal to 2.0)
-
-Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-4.0](./LICENSE.md)
 
 ### Copi - The Cornucopia Game Engine
 

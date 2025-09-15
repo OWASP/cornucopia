@@ -543,7 +543,7 @@ paragraphs:
     text: "The other driver for Mobile Cornucopia is to link the attacks with requirements and verification techniques."
   -
     id: "T00520"
-    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC software attack pattern IDs which themselves are mapped to CWEs."
+    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs."
   -
     id: "T00530"
     text: "Each card is also mapped to the 36 primary security stories in the SAFECode document to help teams create their own security-related stories for use in Agile processes."
