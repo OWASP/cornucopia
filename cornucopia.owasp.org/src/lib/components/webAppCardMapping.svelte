@@ -19,7 +19,7 @@
         <p class="mapping-value{mappingStyle}">{mapping.owasp_asvs || '-'}</p>
         <p class="mapping-title{mappingStyle}">OWASP AppSensor</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_appsensor || '-'}</p>
-        <p class="mapping-title{mappingStyle}">CAPEC</p>
+        <p class="mapping-title{mappingStyle}">CAPEC™</p>
         <p class="mapping-value{mappingStyle}">{mapping.capec || '-'}</p>        
         <p class="mapping-title{mappingStyle}">SAFECODE</p>
         <p class="mapping-value{mappingStyle}">{mapping.safecode || '-'}</p>
