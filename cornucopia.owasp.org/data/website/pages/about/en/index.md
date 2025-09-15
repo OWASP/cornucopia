@@ -134,7 +134,7 @@ Colin Watson as author of OWASP Cornucopia Ecommerce Edition, the original card 
 
 OWASP Cornucopia Website App Edition (formerly called Ecommerce Edition) was created by Colin Watson. OWASP Cornucopia Mobile App Edition was based on this and created by Johan Sydseter and Xavier Godard. 
 
-OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. It is licensed under the Creative Commons Attribution-ShareAlike 3.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
+OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. Except, where otherwise noted, OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
 
 OWASP and the OWASP logo are trademarks of the OWASP Foundation.
 
