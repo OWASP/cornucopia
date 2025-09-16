@@ -123,6 +123,7 @@
               files: |
                 CHANGELOG.md
                 LICENSE.md
+                LICENSE-CC-BY-SA-3.0.md
                 README.md
                 creative-commons-attribution-3.0.txt
                 output/eop-5.0.zip
