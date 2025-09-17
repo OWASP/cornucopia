@@ -16,3 +16,7 @@ In a fictional scenario, an attacker named Eve exploits an online banking applic
 ### Authentication
 
 - [Authentication 3](/cards/AT3)
+
+### Session-management
+
+- [Session-management 9](/cards/SM9)
