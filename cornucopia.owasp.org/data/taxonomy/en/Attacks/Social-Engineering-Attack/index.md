@@ -19,7 +19,7 @@ Caesar's Entertainment and MGM, two major casino operators, fell victim to cyber
 - [Authentication 2](/cards/AT2)
 - [Authentication 4](/cards/AT4)
 - [Authentication 5](/cards/AT5)
-- [Authentication X](/cards/ATX)
+- [Authentication 10](/cards/ATX)
 - [Authentication J](/cards/ATJ)
 - [Authentication A](/cards/ATA)
 
@@ -31,7 +31,7 @@ Caesar's Entertainment and MGM, two major casino operators, fell victim to cyber
 ### Cryptography
 
 - [Cryptography 6](/cards/CR6)
-- [Cryptography X](/cards/CRX)
+- [Cryptography 10](/cards/CRX)
 - [Cryptography Q](/cards/CRQ)
 - [Cryptography A](/cards/CRA)
 
