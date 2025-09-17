@@ -41,5 +41,5 @@ In June 2022, a privilege escalation vulnerability in MikroTik RouterOS was disc
 
 ### Cornucopia
 
-- [Cornucopia X](/cards/CX)
+- [Cornucopia 10](/cards/CX)
 - [Cornucopia A](/cards/CA)
