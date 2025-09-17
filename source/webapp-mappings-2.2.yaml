@@ -1125,7 +1125,7 @@ suits:
     owasp_asvs_print: [ 2.2.1, 11.1.3-4 ]
     owasp_appsensor: [ UT1, UT2, UT3, UT4, STE3 ]
     owasp_appsensor_print: [ UT1-4, STE3 ]
-    capec: [ 2, 25, 119, 125, 130, 212, 227, 469, 607 ]
+    capec: [ 2, 25, 125, 130, 212, 227, 469, 607 ]
     safecode: [ 1 ]
     owasp_cre:
       owasp_asvs: [ 802-056, 746-705, 630-573 ]

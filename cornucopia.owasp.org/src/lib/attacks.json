@@ -23,10 +23,7 @@
                 "url" : "https://owasp.org/www-community/attacks/SQL_Injection"
             }
         ],
-        "cards" : ["VE2","VE3","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
-                   "AT8","ATJ","ATQ",
-                   "AZ6","AZ7","AZ8","AZX","AZQ"
-                ]
+        "cards" : ["VE3","VE4","VEJ","VEK"]
         },
         {
             "name" : "Cross-Site Scripting (XSS)",
@@ -46,13 +43,7 @@
                     "url" : "https://portswigger.net/web-security/cross-site-scripting"
                 }
            ],
-            "cards" : ["VE2","VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","VEK",
-                       "AT8","ATJ",
-                       "AZ5","AZ6","AZ7","AZ8","AZX","AZQ",
-                       "SM2","SM3","SM4","SM6","SM7","SM9","SMQ",
-                       "CR8",
-                       "C9","CX","CQ"
-                    ]
+            "cards" : ["VE3", "VE4","VE5","VE6","VE7","VE8","VE9","VEX","VEJ","VEQ","CX"]
         },
         {
             "name" : "Command Injection",
@@ -68,9 +59,7 @@
                     "url" : "https://owasp.org/www-community/attacks/Command_Injection#:~:text=Command%20injection%20is%20an%20attack,.)%20to%20a%20system%20shell."
                 }        
             ],
-            "cards" : ["VE3","VE4","VE7","VE9","VEJ","VEQ","VEK",
-                       "AZQ", 
-                       "CR7", 
+            "cards" : ["VE3","VE4","VE5","VEJ","VEK","AZQ","CR7", 
                        "C2","C6","CX","CJ","CQ"
                     ]
         },
@@ -88,9 +77,7 @@
                     "url" : "https://owasp.org/www-community/vulnerabilities/Buffer_Overflow#:~:text=A%20buffer%20overflow%20condition%20exists,to%20an%20array%20of%20integers."
                 }  
             ],
-            "cards" : ["VE7",
-                       "C2"
-                    ]
+            "cards" : ["VE9", "C2"]
         },
         {
             "name" : "Directory Traversal Attack",
@@ -106,11 +93,11 @@
                     "url" : "https://owasp.org/www-community/attacks/Path_Traversal"
                 }  
             ],
-            "cards" : ["VE2"]
+            "cards" : ["VE3", "VE7"]
         },
         {
-            "name" : "(Session) Data tampering",
-            "url" : "session-or-data-tampering",
+            "name" : "Data tampering",
+            "url" : "data-tampering",
             "description" : "In 2017, Equifax, one of the largest credit reporting agencies, suffered a massive data breach that exposed sensitive personal information of 147 million people. The attackers exploited a vulnerability in the Apache Struts framework, which Equifax failed to patch in a timely manner. The unauthorized access was a result of the company's failure to adequately authorize and secure its systems.",
             "links" : [
                 {
@@ -126,13 +113,7 @@
                     "url" : "https://www.tributech.io/blog/cybersecurity-threat-data-tampering"
                 } 
             ],
-            "cards" : ["VE3","VE6","VE8","VE9","VEX","VEJ","VEQ",
-                       "AT8","ATJ",
-                       "AZ2","AZ3","AZ5","AZ8","AZK",
-                       "SMX","SMJ","SMK",
-                       "CR2","CR3","CR6",
-                       "C5","C7"
-                    ]
+            "cards" : ["VEX","AT8","ATJ","AZ2","SMX","SMJ","SMK","CR3","CR6","C5","C7"]
         },
         {
             "name" : "File Upload Vulnerabilities",
@@ -152,9 +133,7 @@
                     "url" : "https://portswigger.net/web-security/file-upload#:~:text=File%20upload%20vulnerabilities%20are%20when,type%2C%20contents%2C%20or%20size."
                 }  
             ],
-            "cards" : ["VE4","VEJ",                        
-                       "AZQ"
-                    ]
+            "cards" : ["VE3", "VEJ","AZQ"]
         },
         {
             "name" : "Privilege escalation",
@@ -170,13 +149,7 @@
                     "url" : "https://purplesec.us/privilege-escalation-attacks/#Examples"
                 }  
             ],
-            "cards" : ["VE5","VE6","VE8","VE9",
-                       "AT8","ATJ",
-                       "AZ4","AZ5","AZ8","AZJ","AZQ","AZK",
-                       "SM8", 
-                       "CRJ",
-                       "C4","CX", "CQ"
-                    ]
+            "cards" : ["VE9", "AT8","ATJ","AZ4","AZ5","AZ8","AZJ","AZQ","AZK","SM8","CRJ","CX"]
         },
         {
             "name" : "Password Guessing/Brute Force Attacks",
@@ -196,12 +169,7 @@
                     "url" : "https://www.kaspersky.com/resource-center/definitions/brute-force-attack"
                 }
             ],
-            "cards" : ["AT2","AT4","AT5","AT6","AT7","AT8","ATX","ATQ",
-                       "AZ3","AZ4","AZ6","AZ7","AZX",
-                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SMQ","SMK",
-                       "CR2","CR5","CR7","CRX","CRJ","CRQ",
-                       "C6","C9","CK"
-                    ]
+            "cards" : ["AT2","AT4","AT5","AT6","AT7","AT8","ATX","ATQ","AZ3","SMK","CR2","CR5","CR7","CRX","CRJ","CRQ","C6","C9","CK"]
         },
         {
             "name" : "Credential Stuffing",
@@ -221,9 +189,7 @@
                     "url" : "https://owasp.org/www-community/attacks/Credential_stuffing"
                 }
                 ],
-            "cards" : ["AT2","AT5","AT9","ATX","ATQ",
-                       "AZX"
-                    ]
+            "cards" : ["AT2","AT5","AT9","ATX","ATQ"]
         },
         {
             "name" : "Weak Authentication Protocols",
@@ -239,11 +205,7 @@
                     "url" : "https://affinity-it-security.com/what-is-weak-authentication/"
                 }
             ],
-            "cards" : ["AT7","AT9","ATK",
-                       "AZ6",
-                       "CR4","CR7",
-                       "C3","C4"
-                    ]
+            "cards" : ["AT7","AT9","ATK","CR4","CR7"]
         },
         {
             "name" : "Account Takeover (ATO) Attacks",
@@ -285,7 +247,7 @@
             ],
             "cards" : ["AT6","AT9","ATX","ATQ","ATK",
                        "AZ2","AZ4","AZ7","AZX","AZJ","AZK",
-                       "CR4","CR5","CR8","CRJ","CRQ",
+                       "CR4","CR8","CRJ","CRQ",
                        "C3","C5","C8","CX","CQ","CK"
                     ]
         },
@@ -308,7 +270,7 @@
                 }
             ],
             "cards" : ["AT2","AT4","AT5","ATX","ATJ",
-                       "AZ2","AZ3","AZ4",
+                       "AZ2","AZ3",
                        "CR6","CRX","CRQ",
                        "C4","C5","C7","C8","C9","CJ","CQ"
                     ]
@@ -343,9 +305,7 @@
                     "url" : "https://www.kaspersky.com/resource-center/definitions/replay-attack"
                 }
             ],
-            "cards" : ["AT6","ATJ",
-                       "SM5","SMJ"
-                    ]
+            "cards" : ["AT6","SMJ"]
         },
         {
             "name" : "Password Policy Exploitation",
@@ -381,9 +341,7 @@
                     "url" : "https://owasp.org/www-community/attacks/Session_fixation"
                 }
             ],
-            "cards" : ["AZ7",
-                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMQ","SMK"
-                    ]
+            "cards" : ["SM3","SM4","SM5","SM7","SM8","SM9"]
         },
         {
             "name" : "Session Hijacking (Man-in-the-Middle)",
@@ -399,13 +357,7 @@
                     "url" : "https://usa.kaspersky.com/resource-center/definitions/what-is-session-hijacking"
                 }
             ],
-            "cards" : ["VEX",
-                       "AT2","AT4","AT9","ATX","ATJ","ATQ",
-                       "AZ3","AZ4","AZ5","AZ6","AZ7","AZ8","AZX","AZJ","AZQ","AZK",
-                       "SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SMX","SMJ","SMQ","SMK",
-                       "CR3","CR4","CR5","CR6","CR7","CR8","CRX","CRJ",
-                       "C5","C9","CX","CJ"
-                    ]
+            "cards" : ["SM4","SM5","SM6","SM7","SM8","SM9","SMX","CR6","CR8","CRJ","C5","C9","CX"]
         },
         {
             "name" : "Session Timeout Issues",
@@ -421,7 +373,7 @@
                     "url" : "https://security.stackexchange.com/questions/224199/what-attacks-are-prevented-using-session-timeout-or-expiry"
                 }
             ],
-            "cards" : ["SM2","SM3"]
+            "cards" : ["SM6","SM8"]
         },
         {
             "name" : "Insecure Session Storage",
@@ -437,7 +389,7 @@
                     "url" : "https://shahjerry33.medium.com/idor-inside-the-session-storage-88af485fc899"
                 }
             ],
-            "cards" : ["AT3"]
+            "cards" : ["AT3", "SM9"]
         },
         {
             "name" : "Error message exploitation",
@@ -457,9 +409,7 @@
                     "url" : "https://www.blackhatethicalhacking.com/articles/how-to-exploit-improper-error-handling-in-web-applications/"
                 }
             ],
-            "cards" : ["SM9","SMQ",
-                       "C3","C6"
-                    ]   
+            "cards" : ["VE2","SM9"]   
         },
         {
             "name" : "DOS attack",
@@ -475,7 +425,7 @@
                     "url" : "https://www.cloudflare.com/learning/ddos/glossary/denial-of-service/"
                 }
             ],
-            "cards" : ["AZ9"]
+            "cards" : ["AZ9", "CK"]
         },
         {
             "name" : "Cryptographic Algorithm Attacks",
@@ -547,7 +497,7 @@
                     "url" : "https://kwahome.medium.com/cryptographic-hash-functions-2cc49723ea06"
                 }
             ],
-            "cards" : ["CRK"]
+            "cards" : ["CRX","CRK"]
         }
     ]
 
