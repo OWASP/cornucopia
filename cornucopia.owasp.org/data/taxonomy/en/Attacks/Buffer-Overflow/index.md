@@ -11,7 +11,7 @@ Equifax data breach in 2017 was caused by a vulnerability in the Apache Struts w
 ## Cards
 
 #### Data-validation-&-encoding
-- [Data-validation-&-encoding 7](/cards/VE7)
+- [Data-validation-&-encoding 9](/cards/VE9)
 
 #### Cornucopia
 - [Cornucopia 2](/cards/C2)
