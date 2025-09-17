@@ -19,6 +19,6 @@ In 2018, credential stuffing attacks on popular platforms like Reddit and Spotif
 - [Authentication 2](/cards/AT2)
 - [Authentication 5](/cards/AT5)
 - [Authentication 9](/cards/AT9)
-- [Authentication X](/cards/ATX)
+- [Authentication 10](/cards/ATX)
 - [Authentication Q](/cards/ATQ)
 - [Authentication A](/cards/ATA)
