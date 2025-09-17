@@ -10,26 +10,10 @@ Ashley Madison data breach involved a website specializing in extramarital affai
 - [SQL Injection | OWASP](https://owasp.org/www-community/attacks/SQL_Injection)
 
 ## Cards
+
 #### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/cards/VE2)
 - [Data-validation-&-encoding 3](/cards/VE3)
-- [Data-validation-&-encoding 4](/cards/VE5)
-- [Data-validation-&-encoding 6](/cards/VE6)
-- [Data-validation-&-encoding 7](/cards/VE8)
-- [Data-validation-&-encoding 9](/cards/VE9)
+- [Data-validation-&-encoding 4](/cards/VE4)
 - [Data-validation-&-encoding J](/cards/VEJ)
-- [Data-validation-&-encoding Q](/cards/VEQ)
 - [Data-validation-&-encoding K](/cards/VEK)
 - [Data-validation-&-encoding A](/cards/VEA)
-
-#### Authentication
-- [Authentication 8](/cards/AT8)
-- [Authentication J](/cards/ATJ)
-- [Authentication Q](/cards/ATQ)
-
-#### Authorization
-- [Authorization 6](/cards/AZ6)
-- [Authorization 7](/cards/AZ7)
-- [Authorization 8](/cards/AZ8)
-- [Authorization Q](/cards/AZQ)
-- [Authorization A](/cards/AZA)
