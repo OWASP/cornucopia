@@ -22,7 +22,7 @@ Lenovo faced backlash in 2015 when it was revealed that some of its laptops were
 - [Session-management 7](/cards/SM7)
 - [Session-management 8](/cards/SM8)
 - [Session-management 9](/cards/SM9)
-- [Session-management X](/cards/SMX)
+- [Session-management 10](/cards/SMX)
 - [Session-management A](/cards/SMA)
 
 ### Cryptography
@@ -35,4 +35,4 @@ Lenovo faced backlash in 2015 when it was revealed that some of its laptops were
 
 - [Cornucopia 5](/cards/C5)
 - [Cornucopia 9](/cards/C9)
-- [Cornucopia X](/cards/CX)
+- [Cornucopia 10](/cards/CX)
