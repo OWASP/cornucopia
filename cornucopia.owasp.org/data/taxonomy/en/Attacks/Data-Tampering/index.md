@@ -14,7 +14,7 @@ In 2017, Equifax, one of the largest credit reporting agencies, suffered a massi
 
 ## Cards
 
-#### Data-validation-&-encoding
+### Data-validation-&-encoding
 
 - [Data-validation-&-encoding 10](/cards/VEX)
 - [Data-validation-&-encoding A](/cards/VEA)
