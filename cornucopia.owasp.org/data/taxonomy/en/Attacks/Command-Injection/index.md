@@ -13,11 +13,10 @@ Shellshock was a series of security vulnerabilities discovered in the Bash shell
 #### Data-validation-&-encoding
 - [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 4](/cards/VE4)
-- [Data-validation-&-encoding 7](/cards/VE7)
-- [Data-validation-&-encoding 9](/cards/VE9)
+- [Data-validation-&-encoding 5](/cards/VE5)
 - [Data-validation-&-encoding J](/cards/VEJ)
-- [Data-validation-&-encoding Q](/cards/VEQ)
 - [Data-validation-&-encoding K](/cards/VEK)
+- [Data-validation-&-encoding A](/cards/VEA)
 
 #### Authorization
 - [Authorization Q](/cards/AZQ)
