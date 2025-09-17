@@ -12,7 +12,7 @@ Yahoo suffered from an XSS attack that affected its advertising network. Attacke
 ## Cards
 
 #### Data-validation-&-encoding
-- [Data-validation-&-encoding 2](/cards/VE2)
+- [Data-validation-&-encoding 3](/cards/VE3)
 - [Data-validation-&-encoding 4](/cards/VE4)
 - [Data-validation-&-encoding 5](/cards/VE5)
 - [Data-validation-&-encoding 6](/cards/VE6)
@@ -21,34 +21,9 @@ Yahoo suffered from an XSS attack that affected its advertising network. Attacke
 - [Data-validation-&-encoding 9](/cards/VE9)
 - [Data-validation-&-encoding J](/cards/VEJ)
 - [Data-validation-&-encoding Q](/cards/VEQ)
-- [Data-validation-&-encoding K](/cards/VEK)
 - [Data-validation-&-encoding A](/cards/VEA)
 
-#### Authentication
-- [Authentication 8](/cards/AT8)
-- [Authentication J](/cards/ATJ)
+### Cornucopia
 
-#### Authorization
-- [Authorization 5](/cards/AZ5)
-- [Authorization 6](/cards/AZ6)
-- [Authorization 7](/cards/AZ7)
-- [Authorization 8](/cards/AZ8)
-- [Authorization Q](/cards/AZQ)
-- [Authorization A](/cards/AZA)
-
-#### Session-management
-- [Session-management 2](/cards/SM2)
-- [Session-management 3](/cards/SM3)
-- [Session-management 4](/cards/SM4)
-- [Session-management 6](/cards/SM6)
-- [Session-management 7](/cards/SM7)
-- [Session-management 9](/cards/SM9)
-- [Session-management Q](/cards/SMQ)
-
-#### Cryptography
-- [Cryptography 8](/cards/CR8)
-
-#### Cornucopia
-- [Cornucopia 9](/cards/C9)
-- [Cornucopia Q](/cards/CQ)
+- [Cornucopia 10](/cards/CX)
 - [Cornucopia A](/cards/CA)
