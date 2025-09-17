@@ -39,7 +39,7 @@ In 2014, a cyber attack on Sony Pictures involved brute force attacks on employe
 - [Cryptography 2](/cards/CR2)
 - [Cryptography 5](/cards/CR5)
 - [Cryptography 7](/cards/CR7)
-- [Cryptography X](/cards/CRX)
+- [Cryptography 10](/cards/CRX)
 - [Cryptography J](/cards/CRJ)
 - [Cryptography Q](/cards/CRQ)
 - [Cryptography A](/cards/CRA)
