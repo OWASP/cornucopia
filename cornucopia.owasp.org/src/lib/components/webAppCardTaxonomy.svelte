@@ -53,6 +53,7 @@
 
     {#if card.value != 'A' && card.value != 'B'}
       <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.1')}</h1>
+      <MappingsList title="STRIDE:" mappings={mappings.stride} />
       <MappingsList
         title="OWASP ASVS (4.0):"
         mappings={mappings.owasp_asvs}
