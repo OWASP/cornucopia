@@ -643,7 +643,6 @@ suits:
     owasp_dev_guide_print: [ SM2-3, SM5, SM8-15 ]
     owasp_asvs: [ 7.2.1, 7.2.2, 7.2.3, 7.2.4 ]
     owasp_asvs_print: [ 7.2.1-4 ]
-    owasp_appsensor_print: [ SE4-6 ]
     capec: [ 31, 59, 226 ]
     capec_map: {}
     safecode: [ 28 ]
