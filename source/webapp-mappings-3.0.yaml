@@ -442,6 +442,7 @@ suits:
     id: "AT2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AT2"
+    stride: [R]
     owasp_dev_guide: [ A3, A11, A12, A17, A18, A19, A20, A21, P10, P11, P12, SL6, SL8, SLD9, M1, M2 ]
     owasp_dev_guide_print: [ A3, A17-21, P10-12, SL6, SL8, SLD9, M1-2 ]
     owasp_asvs: [ 6.3.1, 6.3.3, 6.3.5, 6.3.7, 6.3.8, 6.4.3, 6.4.4, 6.4.6, 7.2.1, 7.5.1, 7.5.2, 7.6.2, 14.3.1, 16.2.1, 16.3.1 ]
@@ -455,6 +456,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
+    stride: [I]
     owasp_dev_guide: [ A14, P14, P15, DP6, PDR3, SL6 ]
     owasp_dev_guide_print: [ A14, P14-15, DP6, PDR3, SL6 ]
     owasp_asvs: [ 6.2.6, 6.2.10, 6.2.11, 6.2.12, 6.3.2, 6.4.2, 6.5.7, 11.4.2, 12.2.1, 12.3.1, 12.3.3, 13.3.1, 14.2.1, 14.2.2, 14.3.1 ]
@@ -468,6 +470,7 @@ suits:
     id: "AT4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/AT4"
+    stride: [I]
     owasp_dev_guide: [ A4, A18, A19, A20, A21 ]
     owasp_dev_guide_print: [ A4, A18-21 ]
     owasp_asvs: [ 6.1.1, 6.3.1, 6.3.2, 6.3.8, 16.5.3 ]
@@ -481,6 +484,7 @@ suits:
     id: "AT5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AT5"
+    stride: [ S, E ]
     owasp_dev_guide: [ SDC6, SDA1, P13 ]
     owasp_dev_guide_print: [ SDC6, SDA1, P13 ]
     owasp_asvs: [ 6.2.2, 6.2.4, 6.2.11, 6.2.12, 6.3.2, 6.4.2, 7.2.2, 13.2.3 ]
@@ -494,6 +498,7 @@ suits:
     id: "AT6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
+    stride: [ S ]
     owasp_dev_guide: [ A14, A15, P8, P9 ]
     owasp_dev_guide_print: [ A14-15, P8-9 ]
     owasp_asvs: [ 6.3.6, 6.4.1, 6.4.6, 6.5.1, 6.5.5, 6.5.6, 6.5.8, 6.6.1, 6.6.2, 6.8.3, 9.2.1, 10.4.2, 10.4.3, 10.4.5, 10.4.9, 13.3.4 ]
@@ -507,6 +512,7 @@ suits:
     id: "AT7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AT7"
+    stride: [ S, E ]
     owasp_dev_guide: [ A4, A12, A18, A19, A20, A21, P4, ACM1 ]
     owasp_dev_guide_print: [ A4, A12, A18-21, P4, ACM1 ]
     owasp_asvs: [ 6.1.1, 6.2.1, 6.2.2, 6.2.3, 6.2.4, 6.2.5, 6.2.8, 6.2.9, '6.2.10', 6.2.11, 6.2.12, 6.1.1, 6.3.1, 6.3.2, 6.3.3, 6.3.5, 6.3.8, 6.4.1, 6.4.2, 6.4.3, 6.5.1, 6.5.2, 6.5.3, 6.5.4, 6.5.5, 6.6.3, 6.6.4 ]
