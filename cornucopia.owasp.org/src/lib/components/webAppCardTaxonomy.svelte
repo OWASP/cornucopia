@@ -1,5 +1,6 @@
 <script lang="ts">
   import { run } from 'svelte/legacy';
+  import { DevGuideMapping } from '$lib/devguideMapping';
 
     import {
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
@@ -63,7 +64,10 @@
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
-      <MappingsList title="OWASP DevGuide:" mappings={mappings.owasp_dev_guide} />
+      <MappingsList title="OWASP DevGuide:"
+        mappings={mappings.owasp_dev_guide} 
+        linkFunction={DevGuideMapping.getUrl}  
+      />
       <MappingsList
         title="OWASP AppSensor:"
         mappings={mappings.owasp_appsensor}
