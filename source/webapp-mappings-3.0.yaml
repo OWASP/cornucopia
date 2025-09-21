@@ -290,7 +290,7 @@ suits:
     id: "VEX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/VEX"
-    stride: [S]
+    stride: [ S ]
     owasp_dev_guide: [ COE1, SSV1, VSD1, FV1, SM22 ]
     owasp_dev_guide_print: [ COE1, SSV1, VSD1, FV1, SM22 ]
     owasp_asvs: [ 1.3.6, 2.2.2, 3.2.1, 3.3.1, 3.3.2, 3.3.3, 3.3.4, 3.3.5, 3.4.1, 3.4.2, 3.4.3, 3.4.4, 3.4.5, 3.4.6, 3.4.7, 3.4.8, 3.5.1, 3.5.2, 3.5.3, 3.5.4, 3.5.5, 4.1.3, 9.1.3, 9.2.2, 9.2.3, 9.2.4, 10.4.1, 15.3.4 ]
@@ -318,7 +318,7 @@ suits:
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    stride: [E]
+    stride: [ E ]
     owasp_dev_guide: [ CEC2, LF1 ]
     owasp_dev_guide_print: [ CEC2, LF1 ]
     owasp_asvs: [ 2.2.2, 3.1.1, 3.4.3, 3.4.6, 3.4.7, 3.5.3, 3.5.4, 3.5.5, 3.5.6, 3.5.7, 3.6.1, 3.7.5 ]
@@ -345,7 +345,7 @@ suits:
   -
     id: "VEQ"
     value: "Q"
-    stride: [ E, T ]
+    stride: [ T ]
     url: "https://cornucopia.owasp.org/cards/VEQ"
     owasp_dev_guide: [ CEC5, CEC6, COE1, SSV7, LF3, LF4 ]
     owasp_dev_guide_print: [ CEC5-6, COE1, SSV7, LF3-4 ]
@@ -374,7 +374,7 @@ suits:
     id: "VEK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/VEK"
-    stride: [ E, T ]
+    stride: [ T ]
     owasp_dev_guide: [ SFL4, SFL9, SFL10, SFL11, SQ2, CEC6, CEC7, COE1, COE2, LF4, LF5, LF6, FV1 ]
     owasp_dev_guide_print: [ SFL4, SFL9-11, SQ2, CEC6-7, COE1-2, LF4-6, FV1 ]
     owasp_asvs: [ 1.1.1, 1.1.2, 1.2.2, 1.2.4, 1.2.5, 1.2.6, 1.2.7, 1.2.8, 1.2.9, '1.2.10', 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.3.8, 1.3.9, '1.3.10', 1.3.11, 1.5.1, 1.5.2, 1.5.3, 2.1.1, 2.1.2, 2.1.3, 2.2.1, 2.2.2, 2.2.3, 5.1.1, 5.2.1, 5.2.2, 5.2.3, 5.2.4, 5.2.5, 5.2.6, 5.3.1, 5.3.2, 5.3.3, 5.4.1, 5.4.2, 5.4.3, 15.3.1, 15.3.2, 15.3.3, 15.3.5, 15.3.6, 15.3.7, 16.4.1, 16.5.1 ]
