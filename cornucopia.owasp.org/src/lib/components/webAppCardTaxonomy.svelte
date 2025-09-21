@@ -72,7 +72,11 @@
         title="OWASP AppSensor:"
         mappings={mappings.owasp_appsensor}
       />
-      <MappingsList title="SAFECode:" mappings={mappings.safecode} />
+      <MappingsList 
+        title="SAFECode:"
+        mappings={mappings.safecode} 
+        linkFunction={(input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
+      />
     {/if}
   
     <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>

@@ -13,8 +13,10 @@
   {#each mappings as m, index}
     {#if linkFunction == undefined}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
-    {:else if String(m).trim() != '-'}
+    {:else if String(m).trim() != '-' && linkFunction(m).includes('cornucopia')}
       <a title="{title} {m}" href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+    {:else if String(m).trim() != '-'}
+      <a title="{title} {m}" target="_blank" rel="noopener nofollow" class="link-with-external-indicator" href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {/if}
