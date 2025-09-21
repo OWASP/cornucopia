@@ -424,7 +424,7 @@ suits:
     id: "VEA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/VEA"
-    stride: [ "-" ]
+    stride: [ ]
     owasp_dev_guide: [ ]
     owasp_dev_guide_print: [ "-" ]
     owasp_asvs: [ "-" ]
