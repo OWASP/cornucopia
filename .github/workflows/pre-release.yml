@@ -116,9 +116,9 @@
           - uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836 # v2.3.3
             name: "Create pre-release"
             with:
-              tag_name: "pre-release"
+              tag_name: pre-release
               prerelease: true
-              name: "Latest pre-release"
+              name: Latest pre-release
               files: |
                 CHANGELOG.md
                 LICENSE.md
