@@ -18,6 +18,7 @@
   let { mappingData, card = $bindable(), routes }: Props = $props();
     const controller: MappingController = new MappingController(mappingData);
     let t = readTranslation();
+
     function linkASVS(input: string) {
       input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
       let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
@@ -26,6 +27,10 @@
         (route) => route.Section === searchString
       );
       return result ? result.Path.toLowerCase() + "#V" + input : "";
+    }
+
+    function linkSTRIDE(input: string) {
+      return  "/taxonomy/stride/" + input.toLowerCase();
     }
   
     function FormatToDoubleDigitSearchstring(input: string) {
@@ -53,6 +58,11 @@
 
     {#if card.value != 'A' && card.value != 'B'}
       <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.1')}</h1>
+      <MappingsList 
+        title="STRIDE:" 
+        mappings={mappings.stride}
+        linkFunction={linkSTRIDE}
+      />
       <MappingsList
         title="OWASP ASVS (4.0):"
         mappings={mappings.owasp_asvs}

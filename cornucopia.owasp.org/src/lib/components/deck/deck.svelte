@@ -21,7 +21,8 @@
         owasp_appsensor: [],
         owasp_asvs: [],
         owasp_dev_guide: [],
-        safecode: []
+        safecode: [],
+        stride: []
     });
     
 </script>
