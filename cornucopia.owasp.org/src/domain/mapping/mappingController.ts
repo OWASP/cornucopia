@@ -10,6 +10,7 @@ export type WebAppMapping  =
 {
     id : string,
     owasp_dev_guide : number[],
+    stride : string[],
     owasp_asvs : string[],
     owasp_appsensor : string[],
     capec : number[],
@@ -25,7 +26,6 @@ export type MobileAppMapping =
     capec : number[],
     safecode : number[],
 }
-
 
 export class MappingController {
     private mapping: any;
