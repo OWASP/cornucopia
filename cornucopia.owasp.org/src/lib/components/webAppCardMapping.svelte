@@ -1,5 +1,4 @@
 <script lang="ts">
-
     interface Props {
         mapping: any;
         style?: string;
