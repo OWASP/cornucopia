@@ -1,5 +1,4 @@
 <script lang="ts">
-
     interface Props {
         mapping: any;
         style?: string;
@@ -13,12 +12,12 @@
     }
 
 </script>
+        <p class="mapping-title{mappingStyle}">STRIDE</p>
+        <p class="mapping-value{mappingStyle}">{mapping.stride || '-'}</p>
         <p class="mapping-title{mappingStyle}">OWASP DevGuide</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_dev_guide || '-'}</p>
         <p class="mapping-title{mappingStyle}">OWASP ASVS</p>
         <p class="mapping-value{mappingStyle}">{mapping.owasp_asvs || '-'}</p>
-        <p class="mapping-title{mappingStyle}">OWASP AppSensor</p>
-        <p class="mapping-value{mappingStyle}">{mapping.owasp_appsensor || '-'}</p>
         <p class="mapping-title{mappingStyle}">CAPEC™</p>
         <p class="mapping-value{mappingStyle}">{mapping.capec || '-'}</p>        
         <p class="mapping-title{mappingStyle}">SAFECODE</p>

@@ -10,6 +10,7 @@ export type Mapping =
 {
     id : string,
     owasp_dev_guide : number[],
+    stride : string[],
     owasp_asvs : string[],
     owasp_appsensor : string[],
     capec : number[],

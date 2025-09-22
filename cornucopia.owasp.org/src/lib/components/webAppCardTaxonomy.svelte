@@ -1,5 +1,6 @@
 <script lang="ts">
   import { run } from 'svelte/legacy';
+  import { DevGuideMapping } from '$lib/devguideMapping';
 
     import {
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
@@ -18,6 +19,7 @@
   let { mappingData, card = $bindable(), routes }: Props = $props();
     const controller: MappingController = new MappingController(mappingData);
     let t = readTranslation();
+
     function linkASVS(input: string) {
       input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
       let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
@@ -26,6 +28,10 @@
         (route) => route.Section === searchString
       );
       return result ? result.Path.toLowerCase() + "#V" + input : "";
+    }
+
+    function linkSTRIDE(input: string) {
+      return  "/taxonomy/stride/" + input.toLowerCase();
     }
   
     function FormatToDoubleDigitSearchstring(input: string) {
@@ -53,6 +59,11 @@
 
     {#if card.value != 'A' && card.value != 'B'}
       <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.1')}</h1>
+      <MappingsList 
+        title="STRIDE:" 
+        mappings={mappings.stride}
+        linkFunction={linkSTRIDE}
+      />
       <MappingsList
         title="OWASP ASVS (4.0):"
         mappings={mappings.owasp_asvs}
@@ -63,12 +74,19 @@
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
-      <MappingsList title="OWASP DevGuide:" mappings={mappings.owasp_dev_guide} />
+      <MappingsList title="OWASP DevGuide:"
+        mappings={mappings.owasp_dev_guide} 
+        linkFunction={DevGuideMapping.getUrl}  
+      />
       <MappingsList
         title="OWASP AppSensor:"
         mappings={mappings.owasp_appsensor}
       />
-      <MappingsList title="SAFECode:" mappings={mappings.safecode} />
+      <MappingsList 
+        title="SAFECode:"
+        mappings={mappings.safecode} 
+        linkFunction={(input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
+      />
     {/if}
   
     <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
