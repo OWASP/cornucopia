@@ -1,4 +1,4 @@
-export let data = 
+export const data = 
 {
     "SC": "https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#1-system-configuration-sc",
     "FM": "https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#2-file-management-fm",
