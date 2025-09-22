@@ -131,5 +131,5 @@
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx
                 resources/case/*\2.2_case_*
                 resources/case/*\1.1_case_*
-                source/*\1.1-*.yaml
-                source/*\2.2-*.yaml
+                source/*1\.1-*.yaml
+                source/*2\.2-*.yaml
