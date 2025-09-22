@@ -1,4 +1,4 @@
-import {expect, vi, describe, it} from 'vitest';
+import {expect, describe, it} from 'vitest';
 import { DeckService } from './deckService';
 
 describe('DeckService tests', () => {
