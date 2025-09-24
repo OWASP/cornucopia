@@ -41,7 +41,6 @@
 
 <div>
   <h1 title="OWASP Cornucopia card {card.name}" class="title">{card.name}</h1>
-  <p>{card.desc}</p>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Summary card={card}></Summary>

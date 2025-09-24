@@ -125,7 +125,7 @@
 
     .property-card-description.browser-card-container
     {
-        font-size: 1vw;
+        font-size: 1.2vw;
     }
 
     .property-card-number.browser-card-container
@@ -327,7 +327,7 @@
     {
         .card-render
         {
-           
+           border-radius: 2.62vw;
         }
 
         .property-card-description.browser-card-container
