@@ -8,12 +8,6 @@ There are links to the source design files for the cards themselves on this page
 
 You can also choose to play the OWASP Cornucopia Website App Edition and Mobile App Edition online at [copi.owasp.org](https://copi.owasp.org 'The online version of OWASP Cornucopia [internal]').
 
-OWASP no longer has a stock of printed decks.
-
-OWASP does not endorse or recommend commercial products or services. However, [Agile Stationary](https://agilestationery.co.uk/ 'Agile Stationary [external]') offer [large print (v2.0) web app decks](https://agilestationery.com/products/owasp-cornucopia-2-0-website-app-edition-threat-modeling-cards?_pos=2&amp;_psq=cornucipia&amp;_ss=e&amp;_v=1.0 'Agile stationary - OWASP Cornucopia web app edition [external]') and [large print (v1.0) mobile app decks](https://agilestationery.com/products/owasp-cornucopia-mobile-app-edition-threat-modeling-cards?_pos=3&amp;_psq=cornucip&amp;_ss=e&amp;_v=1.0 'Agile stationary - OWASP Cornucopia mobile app edition [external]'). They also offer a [croupier](https://croupier.agilestationery.co.uk/ 'Agile stationary - OWASP Cornucopia coupier [external]') to help you distribute cards to team members. Also, [dotNET lab](https://www.dotnetlab.eu/ 'dotNET lab [external]') sell a [printed deck](https://webshop.dotnetlab.eu/product/cornucopia-card-deck/ 'dotNET lab webshop [external]') which complements their [online references](https://cornucopia.dotnetlab.eu/cards 'dotNET lab - OWASP Cornucopia online references [external]').
-
-For each deck bought, a small donation is made to the OWASP Foundation.
-
 ## Current printable version
 
 Here is the current version of Cornucopia Website App and Mobile App Edition guides, decks and leaflets (v2.1 with updated mapping to ASVS v4.0.3):
@@ -23,13 +17,6 @@ Here is the current version of Cornucopia Website App and Mobile App Edition gui
 - Print-ready design files (IDML)
     - Website App Edition 2.0 card decks and leaflets: [[EN]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_en.zip '[external]'), [[ES]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_es.zip '[external]'), [[FR]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_fr.zip '[external]'), [[IT]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_it.zip '[external]'), [[PT-BR]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_pt-br.zip '[external]'), [[PT-PT]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_pt-pt.zip '[external]'), [[NL]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_nl.zip '[external]'), [[NO-NB]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_webapp_2.1_no-nb.zip '[external]')
     - Mobile App Edition 1.1 card decks and leaflets: [[EN]](https://github.com/OWASP/cornucopia/releases/download/v2.1.0/owasp_cornucopia_mobileapp_1.1_en.zip '[external]')
-- Print ready files printed in time for OWASP Global AppSec 2024 Lisbon (EN)  
-    - [Mobile App Edition 1.0 tarot case](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_mobileapp_1.00_case_tarot_en.pdf '[external]')
-    - [Mobile App Edition 1.0 tarot leaflet](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_mobileapp_1.00_leaflet_tarot_en.pdf '[external]')
-    - [Mobile App Edition 1.0 tarot card deck](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_mobileapp_1.00_cards_tarot_en.pdf '[external]')
-    - [Website App Edition 2.0 tarot case](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_webapp_2.00_case_tarot_en.pdf '[external]')
-    - [Website App Edition 2.0 tarot leaflet](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_webapp_2.00_leaflet_tarot_en.pdf '[external]')
-    - [Website App Edition 2.0 tarot card deck](https://github.com/OWASP/cornucopia/releases/download/v2.0.0/owasp_cornucopia_global_appsec_lisbon_webapp_2.00_cards_tarot_en.pdf '[external]')
 
 ## Printing instructions
 
