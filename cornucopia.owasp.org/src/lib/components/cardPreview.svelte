@@ -332,7 +332,7 @@
 
         .property-card-description.browser-card-container
         {
-            font-size: 3.5vw;
+            font-size: 3.2vw;
             padding: .25rem;
         }
 
