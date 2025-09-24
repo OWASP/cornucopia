@@ -30,3 +30,5 @@ Such gaps in authorization controls can lead to unauthorized data access, potent
 - Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points. 
 - Regularly audit and update access control mechanisms to ensure they align with user roles and data sensitivity levels.
 - Conduct thorough security testing to identify and address any potential authorization bypass scenarios.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

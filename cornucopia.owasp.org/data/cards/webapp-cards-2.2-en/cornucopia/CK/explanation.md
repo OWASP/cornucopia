@@ -32,3 +32,5 @@ Such vulnerabilities can lead to the application becoming unavailable or unrespo
 - Monitor and optimize the application’s performance to handle high volumes of traffic and processing.
 - Regularly conduct stress tests to identify and address potential denial of service vulnerabilities.
 - Develop and maintain an incident response plan to quickly mitigate and recover from denial of service attacks.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -31,3 +31,5 @@ This flaw can lead to unauthorized session access and potential data breaches, a
 - Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.
 - Design the log out process to completely terminate the session on the server side, not just on the client device.
 - Conduct user experience testing to ensure the log out process is intuitive and effective.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

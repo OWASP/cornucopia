@@ -30,3 +30,5 @@ Such vulnerabilities can lead to targeted attacks, including phishing, social en
 - Avoid using predictable username formats. Encourage or enforce more complex and less guessable usernames.
 - Design error messages to be non-revealing, providing the same response regardless of whether the username exists or not.
 - Implement measures to prevent enumeration through account-related features, ensuring they do not disclose information about the existence of usernames.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

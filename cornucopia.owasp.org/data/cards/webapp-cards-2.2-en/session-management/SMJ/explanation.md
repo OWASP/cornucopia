@@ -27,3 +27,5 @@ Such vulnerabilities can lead to replay attacks, resulting in unauthorized trans
 - Implement measures to detect and reject duplicate requests, such as tracking and validating unique tokens for each interaction.
 - Ensure that critical actions like transactions, state changes, or command submissions are safeguarded against repeat submissions.
 - Regularly audit and update security protocols to address and prevent replay attacks.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

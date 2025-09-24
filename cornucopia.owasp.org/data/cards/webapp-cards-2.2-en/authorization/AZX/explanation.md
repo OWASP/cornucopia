@@ -29,3 +29,5 @@ Such inconsistencies in authorization control application can lead to unauthoriz
 - Ensure that centralized authorization controls are consistently and comprehensively applied across all user interactions within the application, including all modules and features.
 - Conduct thorough security reviews, especially when integrating new features or updates, to ensure they adhere to established authorization standards. 
 - Regularly audit and update authorization protocols to maintain a high level of security throughout the application.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

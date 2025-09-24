@@ -29,3 +29,5 @@ This form of attack can lead to unauthorized system access, data breaches, and p
 - Implement strict access controls and security measures in the code development and deployment process to prevent unauthorized modifications.
 - Regularly review and audit authentication modules to detect any unauthorized changes or vulnerabilities.
 - Employ continuous monitoring tools to track and alert any unusual behavior within authentication routines.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

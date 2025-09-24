@@ -34,3 +34,5 @@ Such vulnerabilities can lead to unauthorized data access, data breaches, and po
 - Establish a routine for regular security audits, rechecks, and timely application of patches and updates.
 - Secure locally stored data with strong encryption and access controls, and ensure physical security measures for data storage areas. 
 - Continuously monitor and update security configurations to address emerging threats and vulnerabilities.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

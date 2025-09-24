@@ -28,3 +28,5 @@ This vulnerability can lead to data exposure and breaches, especially if endpoin
 - Ensure that sensitive data is encrypted independently before it is sent over the communication channel.
 - Maintain robust endpoint security to protect data when it is encrypted or decrypted.
 - Regularly review and strengthen both data and channel encryption practices to cover potential vulnerabilities.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -30,3 +30,5 @@ Unsecured administrative tools and interfaces can lead to major data breaches, u
 - Enforce robust password policies and regular credential updates for system administrators.
 - Restrict access to administrative interfaces to a limited set of authorized IP addresses or networks.
 - Regularly audit and monitor activities performed through administrative tools to detect and respond to unauthorized access.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

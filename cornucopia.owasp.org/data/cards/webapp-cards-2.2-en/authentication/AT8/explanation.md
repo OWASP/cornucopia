@@ -27,3 +27,5 @@ This vulnerability can lead to unauthorized access to sensitive data and systems
 - Design and configure authentication mechanisms to default to a 'deny access' state in case of any failure.
 - Regularly test and validate the authentication process to ensure it behaves as expected during system errors or downtime.
 - Implement robust monitoring and alerting mechanisms to quickly detect and respond to authentication system failures.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

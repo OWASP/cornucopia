@@ -32,3 +32,5 @@ These vulnerabilities can lead to significant security breaches, unauthorized ac
 - Configure the application with secure settings by default and regularly review these settings to align with evolving security standards. 
 - Create comprehensive security documentation and ensure it is effectively communicated and accessible to all operational teams. 
 - Conduct regular security audits and provide ongoing training to operational teams to keep them informed about security best practices and application-specific requirements.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

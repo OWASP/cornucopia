@@ -32,3 +32,5 @@ Such vulnerabilities can lead to data interception, unauthorized access, and inf
 - Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks.
 - Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states.
 - Regularly review and update the cryptographic setup to address new vulnerabilities and maintain strong security.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

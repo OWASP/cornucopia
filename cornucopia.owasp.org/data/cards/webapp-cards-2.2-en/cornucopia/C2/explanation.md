@@ -35,3 +35,5 @@ Such vulnerabilities can lead to a range of issues, from unauthorized access and
 - Address potential race conditions through proper synchronization and concurrency controls.
 - Ensure robust initialization and allocation of resources, and rigorously check for potential overflows.
 - Regularly audit and test the application for these vulnerabilities, and update practices as needed.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

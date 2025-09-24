@@ -42,3 +42,5 @@ Such vulnerabilities can lead to widespread unauthorized access, data breaches, 
 - Use encryption for data in transit and secure storage methods for sensitive information.
 - Educate users about secure practices, like avoiding password reuse and being cautious of their surroundings when entering passwords.
 - Ensure systems are designed to allow users to change their passwords and keep security questions confidential.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

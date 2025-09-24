@@ -36,3 +36,5 @@ The use of vulnerable or compromised software components can lead to significant
 - Conduct thorough security reviews and vulnerability assessments of all in-house, outsourced, and open-source code used within the application.
 - Monitor security advisories for any components used within the application and respond swiftly to vulnerability disclosures.
 - Establish a robust security protocol for integrating and maintaining external software components.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

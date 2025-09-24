@@ -29,3 +29,5 @@ This decentralized approach to authentication can lead to uneven security standa
 - Implement a centralized, standard authentication module or service that is rigorously tested and approved for security.
 - Ensure this centralized system is consistently used across the entire application or network for all authentication processes.
 - Regularly review and update the centralized authentication system to keep it secure against evolving threats.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

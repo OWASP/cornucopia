@@ -29,3 +29,5 @@ Such an absence of authentication exposes the system to unauthorized access, pot
 - Implement authentication requirements for all resources and services, regardless of their perceived security level.
 - Clearly define and document authentication responsibilities to ensure no system component is left unprotected due to assumptions about other systems’ security measures.
 - Regularly audit the entire system to identify and rectify any areas lacking proper authentication controls.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

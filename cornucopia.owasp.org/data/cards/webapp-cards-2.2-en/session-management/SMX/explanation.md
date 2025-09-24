@@ -29,3 +29,5 @@ Such vulnerabilities expose users to CSRF attacks, where attackers can manipulat
 - Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
 - Ensure that every state-changing action requires a valid anti-CSRF token to proceed.
 - Regularly review and update security measures to protect against CSRF and other request forgery methods.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

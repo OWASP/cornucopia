@@ -29,3 +29,5 @@ Inconsistencies in session management across an application can lead to unauthor
 - Ensure uniform implementation of session management controls across all areas and functionalities of the application.
 - Conduct thorough security reviews and testing, especially when integrating new features or modules, to ensure they meet established session management standards.
 - Regularly update and harmonize session management practices to maintain comprehensive and consistent security coverage.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

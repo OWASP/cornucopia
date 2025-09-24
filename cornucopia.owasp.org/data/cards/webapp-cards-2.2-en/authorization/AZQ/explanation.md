@@ -29,3 +29,5 @@ Such vulnerabilities can lead to unauthorized system access, data breaches, and 
 - Implement strict input validation and sanitization to prevent command injection attacks.
 - Ensure that all commands are executed only at the appropriate privilege level, preventing users from executing commands with elevated privileges.
 - Regularly review and update security protocols to safeguard against command injections and unauthorized privilege escalation.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

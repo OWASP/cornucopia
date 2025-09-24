@@ -31,3 +31,5 @@ This vulnerability can lead to unauthorized actions going unnoticed, hinder inci
 - Implement comprehensive logging of all user activities within the application, capturing details such as timestamps, user IDs, and the nature of the actions.
 - Ensure that all actions are attributable to individual users by maintaining secure and unique user identification mechanisms.
 - Develop robust audit trails that provide a clear and detailed history of user actions for accountability and forensic analysis.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

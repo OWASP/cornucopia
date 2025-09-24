@@ -27,3 +27,5 @@ This vulnerability can lead to unauthorized access to sensitive data or function
 - Configure all authorization mechanisms to default to a 'deny access' state in the event of any failure or error.
 - Regularly test and validate the authorization process to ensure it behaves securely during system errors or downtimes.
 - Implement robust monitoring and alerting mechanisms to quickly detect and respond to failures in the authorization system.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

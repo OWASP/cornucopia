@@ -36,3 +36,5 @@ Such vulnerabilities allow for unauthorized access and control, leading to poten
 - Regularly audit accounts to identify and remove or secure test and unnecessary accounts.
 - Implement and enforce strong password policies, discouraging easily guessable passwords.
 - Routinely deactivate old accounts and monitor for any unauthorized access attempts
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

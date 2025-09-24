@@ -30,3 +30,5 @@ This vulnerability can lead to unauthorized session takeovers, leading to potent
 - Implement and enforce strict inactivity timeouts to automatically log users out after a period of inactivity.
 - Set an overall time limit for sessions, after which users must re-authenticate.
 - Restrict sessions to a single device or location at a time, or require additional verification for access from new locations or devices.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

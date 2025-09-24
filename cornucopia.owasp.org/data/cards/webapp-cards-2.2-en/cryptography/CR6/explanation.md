@@ -28,3 +28,5 @@ This vulnerability can lead to unauthorized access to sensitive data, data breac
 - Implement encryption for sensitive data while it is in memory and during processing within the application.
 - Ensure that all data communications, both internal and external, are secured with robust encryption methods.
 - Regularly review and update encryption practices to cover data in use, in transit, and during communications with external systems.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

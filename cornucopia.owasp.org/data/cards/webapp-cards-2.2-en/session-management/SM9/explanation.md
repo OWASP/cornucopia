@@ -36,3 +36,5 @@ Such practices expose users to session hijacking and potential data breaches, as
 - Avoid logging session IDs or exposing them in error messages.
 - Refrain from including session identifiers in URLs, opting for more secure methods of transmission.
 - Limit the accessibility of session identifiers in the application’s code, especially to scripts or areas that could be compromised.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

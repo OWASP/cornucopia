@@ -31,3 +31,5 @@ This type of vulnerability exposes users to account takeover, data breaches, and
 - Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks.
 - Enforce strong password policies, including minimum length, complexity, and expiration requirements.
 - Prohibit the reuse of previous passwords to enhance security against repeated attack attempts.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

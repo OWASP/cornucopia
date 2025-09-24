@@ -49,7 +49,4 @@ Failing to validate and encode properly doesnâ€™t just hit one STRIDE category â
 ### What are you going to do about it?
 
 Validate input = stop bad data from entering.
-
 Encode output = stop injected data from executing.
-
-For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

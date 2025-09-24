@@ -28,3 +28,5 @@ Such practices can lead to unauthorized data access and breaches, as obfuscation
 - Replace obfuscation techniques with approved cryptographic functions for data protection.
 - Ensure the implementation of industry-standard encryption algorithms to secure sensitive data.
 - Regularly review and update cryptographic practices to align with current security standards and best practices.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

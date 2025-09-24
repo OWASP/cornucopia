@@ -29,3 +29,5 @@ This vulnerability can lead to unauthorized access to sensitive functions and da
 - Implement strong authentication methods like 2FA for an added layer of security, particularly for critical functions.
 - Introduce re-authentication processes for accessing sensitive areas or performing high-risk operations.
 - Regularly review and update authentication protocols to ensure they align with the best practices and emerging security threats.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -28,3 +28,5 @@ Using cryptography that is not sufficiently strong for the required level of pro
 - Assess the sensitivity and value of the data being protected and ensure the strength of the cryptographic measures is adequate to provide the necessary level of security.
 - Regularly update and upgrade cryptographic algorithms and practices to align with current security standards and to counteract evolving threats.
 - Monitor developments in cryptography and cybersecurity to anticipate and prepare for potential efforts by attackers.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -28,3 +28,5 @@ Storing credentials in an unencrypted format or embedding them in source code ca
 - Avoid storing credentials in the source code. Instead, use secure vaults or environment variables for credential storage.
 - Ensure all sensitive credentials are encrypted and securely managed, accessible only to authorized systems or personnel.
 - Regularly audit and update credential management practices to prevent unauthorized access and exposure.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

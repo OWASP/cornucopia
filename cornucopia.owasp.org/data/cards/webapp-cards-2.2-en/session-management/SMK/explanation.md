@@ -29,3 +29,5 @@ Custom-built session management systems that lack the rigor of standard framewor
 - Where possible, replace self-built session management systems with standard, well-tested frameworks or modules known for robust security.
 - If a custom solution is necessary, ensure it is developed according to industry best practices and undergoes rigorous security testing.
 - Regularly review and update the session management system to incorporate the latest security advancements and patches.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

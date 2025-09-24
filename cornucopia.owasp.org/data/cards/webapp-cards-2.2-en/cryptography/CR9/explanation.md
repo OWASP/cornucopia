@@ -28,3 +28,5 @@ Reliance on weak, custom-built cryptographic functions can lead to compromised d
 - Replace custom cryptographic functions with well-established, industry-standard algorithms and libraries that have been rigorously tested and proven secure.
 - Conduct regular security audits and reviews of cryptographic implementations to ensure they are strong and effective.
 - Avoid developing in-house cryptographic solutions unless absolutely necessary and ensure they are developed by experts in cryptography.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
