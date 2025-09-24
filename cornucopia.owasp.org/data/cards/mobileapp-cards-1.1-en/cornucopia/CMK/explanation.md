@@ -1,7 +1,11 @@
-### Scenario: Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation
+## Scenario: Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

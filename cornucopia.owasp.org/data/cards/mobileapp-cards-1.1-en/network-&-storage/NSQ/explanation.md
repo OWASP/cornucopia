@@ -1,7 +1,11 @@
-### Scenario: Ahmed can read and modify data in transit because the communication is transmitted over an unencrypted channel
+## Scenario: Ahmed can read and modify data in transit because the communication is transmitted over an unencrypted channel
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

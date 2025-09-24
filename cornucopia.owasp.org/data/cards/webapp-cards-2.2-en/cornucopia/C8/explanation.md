@@ -1,25 +1,36 @@
-### Scenario: David’s Bypass of Application via Infrastructure Vulnerabilities 
-Envision a scenario where David bypasses the application to access data by exploiting vulnerabilities in the network and host infrastructure, supporting services/applications, or physical data storage. This occurs due to: 
+## Scenario: David’s Bypass of Application via Infrastructure Vulnerabilities
 
-1. **Insecure Configuration of Infrastructure and Services:** The network, hosts, and supporting services or applications are not securely configured. 
+Envision a scenario where David bypasses the application to access data by exploiting vulnerabilities in the network and host infrastructure, supporting services/applications, or physical data storage. This occurs due to:
 
-2. **Lack of Regular Security Rechecks and Patching:** Security configurations are not periodically rechecked, and patches are not consistently applied. 
+1. **Insecure Configuration of Infrastructure and Services:** The network, hosts, and supporting services or applications are not securely configured.
 
-3. **Local Data Storage Vulnerabilities:** Sensitive data stored locally on devices is not adequately protected. 
+2. **Lack of Regular Security Rechecks and Patching:** Security configurations are not periodically rechecked, and patches are not consistently applied.
 
-4. **Inadequate Physical Protection of Data:** Physical measures to protect data storage areas are insufficient or lacking. 
+3. **Local Data Storage Vulnerabilities:** Sensitive data stored locally on devices is not adequately protected.
 
-### Example: 
+4. **Inadequate Physical Protection of Data:** Physical measures to protect data storage areas are insufficient or lacking.
 
-David targets a company whose network infrastructure and host systems are configured with default settings, leaving several security gaps. He exploits these weaknesses to bypass the application layer and directly access the data. Additionally, the company does not regularly recheck its security configurations or apply necessary patches, allowing David to use known vulnerabilities to his advantage. He also discovers that sensitive data stored on local devices is easily accessible due to inadequate physical and digital protection measures. 
+### Example
 
-### Risks: 
+David targets a company whose network infrastructure and host systems are configured with default settings, leaving several security gaps. He exploits these weaknesses to bypass the application layer and directly access the data. Additionally, the company does not regularly recheck its security configurations or apply necessary patches, allowing David to use known vulnerabilities to his advantage. He also discovers that sensitive data stored on local devices is easily accessible due to inadequate physical and digital protection measures.
 
-Such vulnerabilities can lead to unauthorized data access, data breaches, and potentially compromise the entire network and associated systems. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Ensure secure initial configuration of all network and host infrastructure, as well as supporting services and applications, adhering to best security practices. 
-- Establish a routine for regular security audits, rechecks, and timely application of patches and updates. 
+The STRIDE category applicable here is **Information Disclosure**.
+
+David is accessing data he should not be able to see because of weaknesses in the underlying infrastructure, host configuration, patching, and physical/digital storage.
+The primary impact is that confidential information is revealed to an unauthorized party.
+Even though the application layer is bypassed, the core effect is exposure of sensitive data, which aligns with **Information Disclosure**.
+
+### What can go Wrong?
+
+Such vulnerabilities can lead to unauthorized data access, data breaches, and potentially compromise the entire network and associated systems.
+
+### What are you going to do about it?
+
+- Ensure secure initial configuration of all network and host infrastructure, as well as supporting services and applications, adhering to best security practices.
+- Establish a routine for regular security audits, rechecks, and timely application of patches and updates.
 - Secure locally stored data with strong encryption and access controls, and ensure physical security measures for data storage areas. 
-- Continuously monitor and update security configurations to address emerging threats and vulnerabilities. 
+- Continuously monitor and update security configurations to address emerging threats and vulnerabilities.

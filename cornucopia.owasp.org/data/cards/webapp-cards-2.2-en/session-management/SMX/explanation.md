@@ -1,20 +1,31 @@
-### Scenario: Marce's Ability to Forge Requests 
-Imagine a situation where Marce forges requests in a system that lacks adequate protections against Cross-Site Request Forgery (CSRF). This happens because: 
+## Scenario: Marce's Ability to Forge Requests
 
-1. **Absence of Anti-CSRF Tokens:** The application does not use strong, random tokens for each session or critical per-request actions. 
+Imagine a situation where Marce forges requests in a system that lacks adequate protections against Cross-Site Request Forgery (CSRF). This happens because:
 
-2. **State-Changing Actions Unprotected:** Actions that change state (like form submissions or settings changes) are not secured with unique tokens. 
+1. **Absence of Anti-CSRF Tokens:** The application does not use strong, random tokens for each session or critical per-request actions.
 
-### Example: 
+2. **State-Changing Actions Unprotected:** Actions that change state (like form submissions or settings changes) are not secured with unique tokens.
 
-Marce targets an online banking platform that does not implement anti-CSRF tokens for transactions. She crafts a malicious email with a hidden request embedded in an image source attribute. When an authenticated user unknowingly opens this email, the request is sent to the bank’s server. Since the server cannot distinguish this forged request from a legitimate one, it processes the transaction as if it were a request made by the user, leading to unauthorized financial transfers. 
+### Example
 
-### Risks: 
+Marce targets an online banking platform that does not implement anti-CSRF tokens for transactions. She crafts a malicious email with a hidden request embedded in an image source attribute. When an authenticated user unknowingly opens this email, the request is sent to the bank’s server. Since the server cannot distinguish this forged request from a legitimate one, it processes the transaction as if it were a request made by the user, leading to unauthorized financial transfers.
 
-Such vulnerabilities expose users to CSRF attacks, where attackers can manipulate users' actions without their knowledge, potentially leading to unauthorized state changes and data breaches. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state. 
-- Ensure that every state-changing action requires a valid anti-CSRF token to proceed. 
-- Regularly review and update security measures to protect against CSRF and other request forgery methods. 
+This scenario maps primarily to STRIDE: **Spoofing**.
+
+**Spoofing** involves pretending to be a legitimate user.
+Marce forges requests that appear to originate from an authenticated user because the server cannot distinguish legitimate requests from maliciously crafted ones.
+The attack allows her to perform actions on behalf of the user, which is impersonation—classic **Spoofing**.
+
+### What can go Wrong?
+
+Such vulnerabilities expose users to CSRF attacks, where attackers can manipulate users' actions without their knowledge, potentially leading to unauthorized state changes and data breaches.
+
+### What are you going to do about it?
+
+- Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
+- Ensure that every state-changing action requires a valid anti-CSRF token to proceed.
+- Regularly review and update security measures to protect against CSRF and other request forgery methods.

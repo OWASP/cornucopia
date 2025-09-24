@@ -1,7 +1,11 @@
-### Scenario: Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use
+## Scenario: Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

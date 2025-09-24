@@ -1,7 +1,11 @@
-### Scenario: Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions
+## Scenario: Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

@@ -1,7 +1,11 @@
-### Scenario: Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them
+## Scenario: Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

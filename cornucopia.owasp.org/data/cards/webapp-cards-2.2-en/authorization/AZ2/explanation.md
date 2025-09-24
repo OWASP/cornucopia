@@ -1,20 +1,31 @@
-### Scenario: Tim’s Manipulation of Data Routing 
-Envision a scenario where Tim, exploiting weaknesses in authorization controls, influences the direction or forwarding of data within a system. This issue arises from: 
+## Scenario: Tim’s Manipulation of Data Routing
 
-1. **Inadequate Authorization Checks:** The system lacks robust authorization mechanisms to verify and control where data is sent or who can redirect it. 
+Envision a scenario where Tim, exploiting weaknesses in authorization controls, influences the direction or forwarding of data within a system. This issue arises from:
 
-2. **Manipulable Data Routing Mechanisms:** Data forwarding or routing functionalities are vulnerable to manipulation. 
+1. **Inadequate Authorization Checks:** The system lacks robust authorization mechanisms to verify and control where data is sent or who can redirect it.
 
-### Example: 
+2. **Manipulable Data Routing Mechanisms:** Data forwarding or routing functionalities are vulnerable to manipulation.
 
-Tim discovers that an application’s data export feature does not properly authenticate users’ permissions for forwarding data. He gains access to this feature and begins redirecting sensitive data, originally intended for internal use, to external locations under his control. This redirection occurs without triggering any security alerts, as the system fails to validate whether Tim has the authorization to specify data destinations. 
+### Example
 
-### Risks: 
+Tim discovers that an application’s data export feature does not properly authenticate users’ permissions for forwarding data. He gains access to this feature and begins redirecting sensitive data, originally intended for internal use, to external locations under his control. This redirection occurs without triggering any security alerts, as the system fails to validate whether Tim has the authorization to specify data destinations.
 
-Such vulnerabilities can lead to unauthorized data disclosure, data breaches, and the potential compromise of sensitive information. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Implement stringent authorization checks for any function that involves sending, forwarding, or routing data. 
-- Ensure that the system verifies user permissions before allowing data to be redirected or exported. 
-- Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding. 
+This scenario maps primarily to STRIDE: **Tampering**.
+
+**Tampering** involves unauthorized modification of data or its flow.
+Tim is able to redirect or forward data to locations under his control, altering the intended path or destination of sensitive information.
+The core issue is manipulating the system’s handling of data, which fits the definition of **Tampering**.
+
+### What can go Wrong?
+
+Such vulnerabilities can lead to unauthorized data disclosure, data breaches, and the potential compromise of sensitive information.
+
+### What are you going to do about it?
+
+- Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
+- Ensure that the system verifies user permissions before allowing data to be redirected or exported.
+- Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.

@@ -1,24 +1,32 @@
-### Scenario: Robert’s Clever Exploits 
-Imagine a scenario where Robert, an astute attacker, manipulates your system by inputting malicious data. He takes advantage of the system's failure in several critical areas: 
+## Scenario: Robert’s Clever Exploits
 
-1. **Unchecked Protocol Formats:** The system doesn't verify if the data conforms to the expected protocol format. 
+Imagine a scenario where Robert, an astute attacker, manipulates your system by inputting malicious data. He takes advantage of the system's failure in several critical areas:
 
-2. **Acceptance of Duplicates:** The system allows duplicate data entries, which it should normally reject. 
+1. **Unchecked Protocol Formats:** The system doesn't verify if the data conforms to the expected protocol format.
 
-3. **Unverified Structure:** There's no check to ensure the overall structure of the data is consistent. 
+2. **Acceptance of Duplicates:** The system allows duplicate data entries, which it should normally reject.
 
-4. **Inadequate Data Element Validation:** The system fails to validate individual data elements for format, type, range, length, or against a whitelist of allowed characters or formats. 
+3. **Unverified Structure:** There's no check to ensure the overall structure of the data is consistent.
 
-### Example: 
+4. **Inadequate Data Element Validation:** The system fails to validate individual data elements for format, type, range, length, or against a whitelist of allowed characters or formats.
 
-Robert attacks by submitting a form on your website. He intentionally uses an unexpected data format, like entering alphabetic characters where only numbers are expected. The system, not checking the format or range, accepts this input, leading to potential processing errors or more severe security vulnerabilities, such as injection attacks. 
+### Example
 
-### Risks: 
+Robert attacks by submitting a form on your website. He intentionally uses an unexpected data format, like entering alphabetic characters where only numbers are expected. The system, not checking the format or range, accepts this input, leading to potential processing errors or more severe security vulnerabilities, such as injection attacks.
 
-These oversights can result in significant security breaches, data corruption, and may compromise the integrity and reliability of the entire system. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Rigorously validate all data inputs for their format, type, range, length, and against a comprehensive whitelist. 
-- Regularly update and refine these validation rules to stay ahead of sophisticated attack techniques. 
-- Want more information?  The links to Owasp ASVS and the Cheatseries Index provide further in-depth information. 
+The primary STRIDE category for “being able to input malicious data due to missing protocol/structure/element validation” is **Tampering** with possible secondary impacts into **Information Disclosure**, **DoS**, or **Elevation of Privilege** depending on how the malformed data is exploited.
+
+### What can go Wrong?
+
+These oversights can result in significant security breaches, data corruption, and may compromise the integrity and reliability of the entire system.
+
+### What are you going to do about it?
+
+- Rigorously validate all data inputs for their format, type, range, length, and against a comprehensive whitelist.
+- Regularly update and refine these validation rules to stay ahead of sophisticated attack techniques.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -1,22 +1,32 @@
-### Scenario: Gary’s Session Takeover Tactics 
-Picture a scenario where Gary exploits session management weaknesses to take over a user's session. He takes advantage of: 
+## Scenario: Gary’s Session Takeover Tactics
 
-1. **Long or No Inactivity Timeout:** Sessions remain active despite prolonged user inactivity. 
+Picture a scenario where Gary exploits session management weaknesses to take over a user's session. He takes advantage of:
 
-2. **Extended or No Overall Session Time Limit:** Sessions do not have a defined expiration time. 
+1. **Long or No Inactivity Timeout:** Sessions remain active despite prolonged user inactivity.
 
-3. **Multi-Location Session Usage:** The system allows the same session to be used simultaneously from different devices or locations. 
+2. **Extended or No Overall Session Time Limit:** Sessions do not have a defined expiration time.
 
-### Example: 
+3. **Multi-Location Session Usage:** The system allows the same session to be used simultaneously from different devices or locations.
 
-Gary identifies that an online banking platform does not enforce inactivity timeouts. A user logs into their account but forgets to log out. The session remains active indefinitely, giving Gary an opportunity to access this session if the user’s device is left unattended or compromised. Additionally, the system’s allowance of the same session being used from multiple locations enables Gary to maintain access even when the legitimate user is active elsewhere. 
+### Example
 
-### Risks: 
+Gary identifies that an online banking platform does not enforce inactivity timeouts. A user logs into their account but forgets to log out. The session remains active indefinitely, giving Gary an opportunity to access this session if the user’s device is left unattended or compromised. Additionally, the system’s allowance of the same session being used from multiple locations enables Gary to maintain access even when the legitimate user is active elsewhere.
 
-This vulnerability can lead to unauthorized session takeovers, leading to potential data theft, financial loss, and privacy breaches. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Implement and enforce strict inactivity timeouts to automatically log users out after a period of inactivity. 
-- Set an overall time limit for sessions, after which users must re-authenticate. 
-- Restrict sessions to a single device or location at a time, or require additional verification for access from new locations or devices. 
+This scenario falls under STRIDE: **Spoofing**.
+**Spoofing** is about impersonating a legitimate user or system.
+Gary exploits long or missing inactivity/overall session timeouts and the ability to use the same session from multiple locations.
+By taking over an active session, he effectively assumes the identity of the legitimate user, which is classic Spoofing.
+
+### What can go Wrong?
+
+This vulnerability can lead to unauthorized session takeovers, leading to potential data theft, financial loss, and privacy breaches.
+
+### What are you going to do about it?
+
+- Implement and enforce strict inactivity timeouts to automatically log users out after a period of inactivity.
+- Set an overall time limit for sessions, after which users must re-authenticate.
+- Restrict sessions to a single device or location at a time, or require additional verification for access from new locations or devices.

@@ -1,7 +1,11 @@
-### Scenario: Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable
+## Scenario: Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

@@ -1,7 +1,11 @@
-### Scenario: Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly
+## Scenario: Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

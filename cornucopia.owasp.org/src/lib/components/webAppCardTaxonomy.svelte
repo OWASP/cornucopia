@@ -58,7 +58,7 @@
   </script>
 
     {#if card.value != 'A' && card.value != 'B'}
-      <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.1')}</h1>
+      <h2 class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
       <MappingsList 
         title="STRIDE:" 
         mappings={mappings.stride}
