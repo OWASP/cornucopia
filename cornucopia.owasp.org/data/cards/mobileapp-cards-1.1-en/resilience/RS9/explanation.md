@@ -1,7 +1,11 @@
-### Scenario: Sean can reverse engineer the app because the code obfuscation isn't strong enough according to what is recommended or the perceived effort of a potential attacker
+## Scenario: Sean can reverse engineer the app because the code obfuscation isn't strong enough according to what is recommended or the perceived effort of a potential attacker
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

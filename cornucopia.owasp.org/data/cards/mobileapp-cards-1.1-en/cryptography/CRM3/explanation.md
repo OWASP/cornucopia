@@ -1,7 +1,11 @@
-### Scenario: Emery can access data because it has been obfuscated rather than using an approved cryptographic function
+## Scenario: Emery can access data because it has been obfuscated rather than using an approved cryptographic function
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

@@ -1,7 +1,11 @@
-### Scenario: Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices
+## Scenario: Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

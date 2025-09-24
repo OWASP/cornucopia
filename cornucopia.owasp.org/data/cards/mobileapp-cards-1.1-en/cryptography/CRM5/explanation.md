@@ -1,7 +1,11 @@
-### Scenario: Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key
+## Scenario: Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

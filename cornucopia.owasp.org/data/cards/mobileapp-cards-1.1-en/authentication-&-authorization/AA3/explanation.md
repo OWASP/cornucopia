@@ -1,15 +1,19 @@
-### Scenario: Choi and Vandana's online romantic permission entanglement. 
+## Scenario: Choi and Vandana's online romantic permission entanglement. 
  
 Consider a scenario where Vandana installs an app recommended by Choi, an online flirt that she trusts intimately. Given that the app is malicious, it can exploit other apps components if these apps share components with entitlements or permissions set to loosely. It is not up to us to lecture Vandana on the dangers of online honeytrap scams, but we should do our best to minimise the damage in case it happens.
  
-### Example: 
+### Example
  
 Choi and Vandana have been chatting online on Facebook for quite some time, Choi suggests that Vandana should install a very secure messaging app where they can share more intimate details without worrying that Facebook might use that information for training their new AI. After all, who wants their love life to be food for a hungry AI that might end up copying your intimate phrases and sentences. 
 Vandana hasn't seen or met Choi physically but decides to install the app that Choi shares with a link. 
  
 Little does she know that this app, in particular, will look for capabilities, objects, resources, or services exposed by other apps and use them to get access to her phone and share everything with Choi. After some days Verdana notices that her phone bill has grown exponentially, her bank account is empty, and Choi is nowhere to be found. 
  
-### Risks:  
+## Threat Modeling
+
+### STRIDE
+
+### What can go Wrong? 
  
 - Custom Permission Typos: A custom permission may be declared in the Manifest of one of the apps installed on Vandana's phone, but a different custom permission is used to protect exported Android components, due to a typo, Choi's malicious application can capitalize on the misspelling by either: 
   - Registering that permission first 
@@ -22,7 +26,7 @@ Little does she know that this app, in particular, will look for capabilities, o
 The same happens if `B` gets installed before `A`. 
 This is due to a privilege escalation vulnerability (CVE-2019-2200) which was fixed in Android 10. 
  
-### Mitigation: 
+### What are you going to do about it?
  
 - Verify that platform permissions are appropriately set, narrow enough and enforced by the app manifest. 
 - Ensure that all custom permissions that the app uses to protect components are also defined in its Manifest. 

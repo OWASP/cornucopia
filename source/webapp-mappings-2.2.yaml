@@ -66,7 +66,7 @@ suits:
     id: "VE5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/VE5"
-    stride: [ T ]
+    stride: [ T, I ]
     owasp_scp: [ 3, 15, 18, 19, 20, 21, 22, 168 ]
     owasp_scp_print: [ 3, 15, 18-22, 168 ]
     owasp_dev_guide: [ SQ3, SQ4, CEC3, CEC4, CEC5, CEC6, COE1, COE2 ]
@@ -82,7 +82,7 @@ suits:
     id: "VE6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/VE6"
-    stride: [ T, E ]
+    stride: [ T ]
     owasp_scp: [ 3, 168 ]
     owasp_dev_guide: [ SQ3, SQ4, SSV1, SSV2, SSV9, SSV10, LF2 ]
     owasp_dev_guide_print: [ SQ3-4, SSV1-2, SSV9-10, LF2 ]
@@ -157,7 +157,7 @@ suits:
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    stride: [ E ]
+    stride: [ T ]
     owasp_scp: [ 1, 17 ]
     owasp_dev_guide: [ CEC2, LF1 ]
     owasp_dev_guide_print: [ CEC2, LF1 ]
@@ -223,7 +223,7 @@ suits:
     id: "AT2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AT2"
-    stride: [ S, R ]
+    stride: [ R ]
     owasp_scp: [ 47, 52 ]
     owasp_dev_guide: [ A3, A11, A12, A17, A18, A19, A20, A21, P10, P11, P12, SL6, SL8, SLD9, M1, M2 ]
     owasp_dev_guide_print: [ A3, A17-21, P10-12, SL6, SL8, SLD9, M1-2 ]
@@ -268,7 +268,7 @@ suits:
     id: "AT5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AT5"
-    stride: [ S, E ]
+    stride: [ S ]
     owasp_scp: [ 54, 175, 178 ]
     owasp_dev_guide: [ SDC6, SDA1, P13 ]
     owasp_dev_guide_print: [ SDC6, SDA1, P13 ]
@@ -298,7 +298,7 @@ suits:
     id: "AT7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AT7"
-    stride: [ S, E ]
+    stride: [ S ]
     owasp_scp: [ 33, 38, 39, 41, 50, 53 ]
     owasp_dev_guide: [ A4, A12, A18, A19, A20, A21, P4, ACM1 ]
     owasp_dev_guide_print: [ A4, A12, A18-21, P4, ACM1 ]
@@ -328,7 +328,7 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    stride: [ E ]
+    stride: [ S ]
     owasp_scp: [ 55, 56 ]
     owasp_dev_guide: [ A10, A11, A13 ]
     owasp_dev_guide_print: [ A10-11, A13 ]
@@ -388,7 +388,7 @@ suits:
     id: "ATK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/ATK"
-    stride: [ S ]
+    stride: [ T ]
     owasp_scp: [ 24 ]
     owasp_dev_guide: [ A3 ]
     owasp_dev_guide_print: [ A3 ]
@@ -421,7 +421,7 @@ suits:
     id: "SM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/SM2"
-    stride: [ T ]
+    stride: [ S ]
     owasp_scp: [ 58, 59 ]
     owasp_dev_guide: [ SM1, SM2 ]
     owasp_dev_guide_print: [ SM1-2 ]
@@ -527,7 +527,7 @@ suits:
     id: "SM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
-    stride: [ I ]
+    stride: [ S ]
     owasp_scp: [ 69, 75, 76, 119, 138 ]
     owasp_dev_guide: [ SM11, SM12, SM15, SM16, DP5, SL5, EE6 ]
     owasp_dev_guide_print: [ SM11-12, SM15-16, DP5, SL5, EE6 ]
@@ -543,7 +543,7 @@ suits:
     id: "SMX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/SMX"
-    stride: [ T ]
+    stride: [ S ]
     owasp_scp: [ 73, 74 ]
     owasp_dev_guide: [ SM22 ]
     owasp_dev_guide_print: [ SM22 ]
@@ -666,7 +666,7 @@ suits:
     id: "AZ5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AZ5"
-    stride: [ E, I ]
+    stride: [ E ]
     owasp_scp: [ 70, 81, 83, 84, 87, 88, 89, 99, 117, 131, 132, 142, 154, 170, 179 ]
     owasp_scp_print: [ 70, 81, 83, 84, 87-9, 99, 117, 131, 132, 142, 154, 170, 179 ]
     owasp_dev_guide: [ SC1, SC2, SDC1, SDA2, SM2, SM12, AC2, AC3, AC4, ACM4, ACM5, ACM6, ACM7, ACM8, ACM9, SCM2, SCM4, PDR3, PDR4, SLD3 ]
@@ -683,7 +683,7 @@ suits:
     id: "AZ6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AZ6"
-    stride: [ I ]
+    stride: [ E ]
     owasp_scp: [ 81, 88, 131 ]
     owasp_dev_guide: [ AC2, AC4, ACM6, ACM7, ACM8, DP4 ]
     owasp_dev_guide_print: [ AC2, AC4, ACM6-8, DP4  ]
@@ -699,7 +699,7 @@ suits:
     id: "AZ7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AZ7"
-    stride: [ I, E ]
+    stride: [ E ]
     owasp_scp: [ 81, 85, 86, 131 ]
     owasp_dev_guide: [ AC2, AC4, ACM5, ACM6, ACM7, ACM8, DP4 ]
     owasp_dev_guide_print: [ AC2, AC4, ACM5-8, DP4 ]
@@ -762,7 +762,7 @@ suits:
     id: "AZJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/AZJ"
-    stride: [ I ]
+    stride: [ I, E ]
     owasp_scp: [ 89, 90 ]
     owasp_dev_guide: [ ACM8 ]
     owasp_dev_guide_print: [ ACM8 ]
@@ -792,7 +792,7 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    stride: [ T, E ]
+    stride: [ E ]
     owasp_scp: [ 77, 89, 91 ]
     owasp_dev_guide: [ AC8, AC15, ACM8 ]
     owasp_dev_guide_print: [ AC8, AC15, ACM8 ]

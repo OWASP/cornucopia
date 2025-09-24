@@ -1,3 +1,5 @@
+## Of Note
+
 Trust management is a popular technique for implementing information security, and specifically for access control policies. All data sources of an application are be classified into groups with varying degrees of trust. When doing this, it is imperative to ensure that trusted sources cannot be spoofed. This spoofing can be done in many ways:
 
 Reflection attack.

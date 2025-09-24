@@ -1,20 +1,30 @@
-### Scenario: Ryan’s Manipulation of Authorization Controls 
-Consider a scenario where Ryan, exploiting weaknesses in an application's security framework, manages to influence or alter authorization controls and permissions. This allows him to bypass them. The vulnerability arises from: 
+## Scenario: Ryan’s Manipulation of Authorization Controls
 
-1. **Alterable Authorization Controls:** The system's authorization controls are not adequately protected, allowing for their modification. 
+Consider a scenario where Ryan, exploiting weaknesses in an application's security framework, manages to influence or alter authorization controls and permissions. This allows him to bypass them. The vulnerability arises from:
 
-2. **Insufficient Monitoring and Restrictions:** Lack of robust monitoring and strict restrictions enables unauthorized changes to permissions and access controls. 
+1. **Alterable Authorization Controls:** The system's authorization controls are not adequately protected, allowing for their modification.
 
-### Example: 
+2. **Insufficient Monitoring and Restrictions:** Lack of robust monitoring and strict restrictions enables unauthorized changes to permissions and access controls.
 
-Ryan targets an enterprise application that has loosely managed authorization configurations. He gains access to the system’s administrative tools, which lack sufficient security checks. Once there, he modifies the authorization settings, granting himself higher-level permissions. This manipulation allows him to access confidential data and functionalities, which are typically restricted to higher-privileged users, such as system administrators. 
+### Example
 
-### Risks: 
+Ryan targets an enterprise application that has loosely managed authorization configurations. He gains access to the system’s administrative tools, which lack sufficient security checks. Once there, he modifies the authorization settings, granting himself higher-level permissions. This manipulation allows him to access confidential data and functionalities, which are typically restricted to higher-privileged users, such as system administrators.
 
-Such vulnerabilities can lead to unauthorized access, data breaches, and potentially full system compromise. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Ensure that all mechanisms for altering authorization controls and permissions are strictly secured and accessible only by highly trusted roles. 
-- Implement robust monitoring systems to detect and alert any unauthorized changes to authorization configurations. 
-- Regularly audit authorization controls and permissions to ensure they have not been tampered with and remain appropriate for user roles. 
+This scenario maps primarily to STRIDE: **Elevation of Privilege** (EoP).
+Ryan modifies authorization settings. That means that he is **Tampering** with the settings, but as a direct result, he grants himself higher privileges, which is **Elevation of Privilege**.
+
+### What can go Wrong?
+
+Such vulnerabilities can lead to unauthorized access, data breaches, and potentially full system compromise.
+
+### What are you going to do about it?
+
+- Ensure that all mechanisms for altering authorization controls and permissions are strictly secured and accessible only by highly trusted roles.
+- Implement robust monitoring systems to detect and alert any unauthorized changes to authorization configurations.
+- Regularly audit authorization controls and permissions to ensure they have not been tampered with and remain appropriate for user roles.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

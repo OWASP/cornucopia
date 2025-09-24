@@ -1,25 +1,36 @@
-### Scenario: Gunter's Exploitation of Flaws in Encryption Protocols 
-Imagine a scenario where Gunter intercepts or modifies encrypted data in transit, taking advantage of weak deployment or configuration of encryption protocols. This occurs due to: 
+## Scenario: Gunter's Exploitation of Flaws in Encryption Protocols
 
-1. **Poor Deployment of Encryption Protocols:** The application’s encrypted communication protocols are implemented improperly. 
+Imagine a scenario where Gunter intercepts or modifies encrypted data in transit, taking advantage of weak deployment or configuration of encryption protocols. This occurs due to:
 
-2. **Weak Configuration:** The settings for encrypted communications are not optimized, leaving vulnerabilities. 
+1. **Poor Deployment of Encryption Protocols:** The application’s encrypted communication protocols are implemented improperly.
 
-3. **Invalid or Untrusted Certificates:** The application uses certificates that are either invalid or not trusted by client systems. 
+2. **Weak Configuration:** The settings for encrypted communications are not optimized, leaving vulnerabilities.
 
-4. **Degradation of Communication Security:** The system allows the encryption level to be downgraded to weaker or unencrypted states. 
+3. **Invalid or Untrusted Certificates:** The application uses certificates that are either invalid or not trusted by client systems.
 
-### Example: 
+4. **Degradation of Communication Security:** The system allows the encryption level to be downgraded to weaker or unencrypted states.
 
-Gunter targets an online service that uses encryption for data transmission. However, he discovers that the service’s SSL/TLS configuration is outdated, allowing him to exploit known vulnerabilities. Additionally, the service uses self-signed certificates, which are not properly validated, increasing the risk of man-in-the-middle attacks. Gunter leverages these weaknesses to intercept and decrypt the data being transmitted, modifying it before re-encryption and forwarding. 
+### Example
 
-### Risks: 
+Gunter targets an online service that uses encryption for data transmission. However, he discovers that the service’s SSL/TLS configuration is outdated, allowing him to exploit known vulnerabilities. Additionally, the service uses self-signed certificates, which are not properly validated, increasing the risk of man-in-the-middle attacks. Gunter leverages these weaknesses to intercept and decrypt the data being transmitted, modifying it before re-encryption and forwarding.
 
-Such vulnerabilities can lead to data interception, unauthorized access, and information tampering, potentially compromising user privacy and data integrity. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Ensure proper deployment and configuration of encryption protocols, adhering to current best practices and standards. 
-- Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks. 
-- Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states. 
-- Regularly review and update the cryptographic setup to address new vulnerabilities and maintain strong security. 
+The primary applicable STRIDE categories for this scenario is **Information Disclosure** and **Tampering**.
+
+Because Gunter can intercept and decrypt the data in transit due to weak protocol deployment, misconfigured SSL/TLS, or untrusted/invalid certificates. This is a confidentiality failure, but as he can also modify the encrypted data (MITM style, degrade the connection, or re-encrypt altered content), it also falls into **Tampering**.
+
+### What can go Wrong?
+
+Such vulnerabilities can lead to data interception, unauthorized access, and information tampering, potentially compromising user privacy and data integrity.
+
+### What are you going to do about it?
+
+- Ensure proper deployment and configuration of encryption protocols, adhering to current best practices and standards.
+- Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks.
+- Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states.
+- Regularly review and update the cryptographic setup to address new vulnerabilities and maintain strong security.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

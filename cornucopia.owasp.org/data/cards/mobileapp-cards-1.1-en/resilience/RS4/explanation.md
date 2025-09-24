@@ -1,7 +1,11 @@
-### Scenario: Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate
+## Scenario: Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

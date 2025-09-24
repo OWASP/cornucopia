@@ -1,4 +1,4 @@
-### Scenario: Jie sign into Choi's mobile app undetected. 
+## Scenario: Jie sign into Choi's mobile app undetected. 
  
 Consider a scenario where Jie and Choi live together. Jie and Choi, like all couples, keep secrets from each other, like what they spend their money on. It is not our job to help Jie and Choi with their relationship issues, but it is our job to keep the secrets they store on their mobile phone confidential. We therefore need to help them by ensuring that they authenticate before accessing these secrets. 
  
@@ -10,15 +10,19 @@ There are various ways that Jie may get access to Choi's secrets.
  
 3. If Choi has left his phone unlocked then Jie could steal back the money that he paid Choi for the "Bob Dylan concert" if he isn't required to re-authenticate before transferring the money back to him. 
  
-### Example: 
+### Example
  
 Choi really wanted to pay his student loan, but he also really needed to go to the bathroom. Sadly, he forgot to lock his phone, leaving the screen bright and tempting on the table for Jie. Jie really would like to know whether it is true that Choi didn't have any money and therefore had to borrow them from him. As Jie opens Chois banking app, he is able to do so without using pin or biometrics, effectively bypassing authentication. There, clear as day, Jie finds all of Chois bank transactions and reads that Choi did have enough money, it's just that he really wanted to attend this really expensive Bob Dylan concert as well. Oh boy, is Choi going to hear it. 
  
-### Risks:  
+## Threat Modeling
+
+### STRIDE
+
+### What can go Wrong? 
  
 If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 
  
-### Mitigation: 
+### What are you going to do about it?
  
  - Make sure the unlocked key is used during sensitive operations by configuring the app with the required flags needed for enforcing authentication before using the keychain or key storage. 
  - Limit the amount of time for which the user has been authorized to use a certain key after the user has successfully authenticated. 
