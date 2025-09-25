@@ -1,3 +1,5 @@
+## Of Note
+
 Passwords and secrets need protection. Common attacks include:
 
 Stealing a password/secret in transit (e.g. in an email message, over an unencrypted HTTP connection)

@@ -1,7 +1,11 @@
-### Scenario: Tarik can influence or alter cryptographic operations and can therefore bypass them
+## Scenario: Tarik can influence or alter cryptographic operations and can therefore bypass them
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:s
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?s

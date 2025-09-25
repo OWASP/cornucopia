@@ -18,7 +18,7 @@
     let clazz : string = $state("");
     let style : string = $state("");
 
-    if(href.startsWith('/'))
+    if(href.startsWith('/') || href.startsWith('#'))
       target = '_self';
 
     if (raw.includes('[internal]')) {

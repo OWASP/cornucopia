@@ -1,20 +1,34 @@
-### Scenario: Chad’s Unauthorized Access Due to Insufficient Authorization 
-Imagine a scenario where Chad gains access to various resources that he should not be able to access. This occurs due to: 
+## Scenario: Chad’s Unauthorized Access Due to Insufficient Authorization
 
-1. **Missing Authorization Checks:** Certain resources lack proper authorization controls. 
+Imagine a scenario where Chad gains access to various resources that he should not be able to access. This occurs due to:
 
-2. **Excessive Privileges:** The system grants more privileges than necessary, failing to adhere to the principle of least privilege. 
+1. **Missing Authorization Checks:** Certain resources lack proper authorization controls.
 
-### Example: 
+2. **Excessive Privileges:** The system grants more privileges than necessary, failing to adhere to the principle of least privilege.
 
-Chad discovers that a corporate application does not enforce strict authorization checks on certain resources, such as temporary files, system properties, and logs. He exploits this oversight to access sensitive documents and configuration data meant for higher-privileged users. Additionally, due to the system granting excessive privileges to regular users, Chad can access and interact with services and processes usually reserved for administrators. 
+### Example
 
-### Risks: 
+Chad discovers that a corporate application does not enforce strict authorization checks on certain resources, such as temporary files, system properties, and logs. He exploits this oversight to access sensitive documents and configuration data meant for higher-privileged users. Additionally, due to the system granting excessive privileges to regular users, Chad can access and interact with services and processes usually reserved for administrators.
 
-Such vulnerabilities can lead to unauthorized access to critical resources, potentially resulting in data breaches, system manipulation, and other security compromises. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Implement comprehensive authorization checks for all resources, ensuring only appropriately privileged users can access them. 
-- Adhere to the principle of least privilege, granting users only the permissions they need to perform their duties. 
-- Regularly audit and review user privileges and resource access controls to identify and rectify any excesses or lapses in authorization. 
+This scenario maps primarily to STRIDE: **Elevation of Privilege**.
+
+**Elevation of Privilege** (EoP) occurs when an attacker gains access to resources or actions they are not authorized to use.
+In this case, the attacker can access resources—files, processes, session data, configuration settings, logs, etc.—that should be protected by authorization controls.
+The root cause is missing authorization or excessive privileges, violating the principle of least privilege.
+The consequence of such an action leads to **Information Disclosure** in most cases.
+
+### What can go Wrong?
+
+Such vulnerabilities can lead to unauthorized access to critical resources, potentially resulting in data breaches, system manipulation, and other security compromises.
+
+### What are you going to do about it?
+
+- Implement comprehensive authorization checks for all resources, ensuring only appropriately privileged users can access them.
+- Adhere to the principle of least privilege, granting users only the permissions they need to perform their duties.
+- Regularly audit and review user privileges and resource access controls to identify and rectify any excesses or lapses in authorization.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

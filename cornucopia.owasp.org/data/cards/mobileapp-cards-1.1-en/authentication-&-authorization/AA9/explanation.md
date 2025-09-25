@@ -1,7 +1,11 @@
-### Scenario: Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)
+## Scenario: Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

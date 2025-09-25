@@ -1,22 +1,35 @@
-### Scenario: Cecilia’s Brute Force and Dictionary Attacks 
-Imagine a situation where Cecilia, employing brute force and dictionary attack techniques, targets the authentication system of an application. She takes advantage of: 
+## Scenario: Cecilia’s Brute Force and Dictionary Attacks
 
-1. **No Limit on Login Attempts:** The system does not restrict the number of login attempts, allowing repeated guessing. 
+Imagine a situation where Cecilia, employing brute force and dictionary attack techniques, targets the authentication system of an application. She takes advantage of:
 
-2. **Simplified Attacks Due to Weak Password Policies:** Insufficient complexity, length, and expiration requirements make passwords easier to guess. 
+1. **No Limit on Login Attempts:** The system does not restrict the number of login attempts, allowing repeated guessing.
 
-3. **Lack of Re-use Limitations:** The system allows the reuse of old passwords, making it easier for attackers to regain access. 
+2. **Simplified Attacks Due to Weak Password Policies:** Insufficient complexity, length, and expiration requirements make passwords easier to guess.
 
-### Example: 
+3. **Lack of Re-use Limitations:** The system allows the reuse of old passwords, making it easier for attackers to regain access.
 
-Cecilia targets an online platform that lacks account lockout policies and has weak password requirements. She uses automated tools to repeatedly attempt logins on various accounts, trying combinations from commonly used passwords and dictionary words. Due to the absence of complexity and length requirements for passwords, and no system to detect or block repeated failed attempts, she eventually succeeds in guessing the correct credentials for several accounts. 
+### Example
 
-### Risks: 
+Cecilia targets an online platform that lacks account lockout policies and has weak password requirements. She uses automated tools to repeatedly attempt logins on various accounts, trying combinations from commonly used passwords and dictionary words. Due to the absence of complexity and length requirements for passwords, and no system to detect or block repeated failed attempts, she eventually succeeds in guessing the correct credentials for several accounts.
 
-This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system. 
+## Threat Modeling
 
-### Mitigation: 
+### STRIDE
 
-- Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks. 
-- Enforce strong password policies, including minimum length, complexity, and expiration requirements. 
-- Prohibit the reuse of previous passwords to enhance security against repeated attack attempts. 
+The scenario falls under STRIDE: **Spoofing**.
+
+**Spoofing** is about pretending to be another user or system.
+In brute force, dictionary, or credential stuffing attacks, the attacker’s entire goal is to gain access by impersonating a valid user with guessed or stolen credentials.
+The root weakness here is inadequate authentication protections (no lockouts, weak password policy), which makes spoofing identities feasible.
+
+### What can go Wrong?
+
+This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system.
+
+### What are you going to do about it?
+
+- Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks.
+- Enforce strong password policies, including minimum length, complexity, and expiration requirements.
+- Prohibit the reuse of previous passwords to enhance security against repeated attack attempts.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

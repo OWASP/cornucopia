@@ -1,7 +1,11 @@
-### Scenario: Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)
+## Scenario: Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

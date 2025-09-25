@@ -1,3 +1,5 @@
+## Of Note
+
 Ensure all forms of error are handled robustly and consistently (e.g. web server, application server, database server, JavaScript, other interpreters). This encompasses:
 
 Implement generic error messages and use custom error pages.

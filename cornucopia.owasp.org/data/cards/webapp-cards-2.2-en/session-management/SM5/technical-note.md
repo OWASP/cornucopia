@@ -1,3 +1,5 @@
+## Of Note
+
 Ensure the following occur:
 
 Ensure sufficiently long and random session identifiers are used

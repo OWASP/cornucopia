@@ -1,7 +1,11 @@
-### Scenario: Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented
+## Scenario: Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

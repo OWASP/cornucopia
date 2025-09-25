@@ -1,7 +1,11 @@
-### Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking
+## Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

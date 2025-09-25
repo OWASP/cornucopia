@@ -1,3 +1,5 @@
+## Of Note
+
 Protect against automated threats to web applications such as:
 
 Account aggregation.

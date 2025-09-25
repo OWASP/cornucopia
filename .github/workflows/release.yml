@@ -6,7 +6,7 @@
         tags:
           - "v*"
     permissions:
-      contents: read
+      contents: write
 
     jobs:
       hardening:
@@ -98,10 +98,10 @@
               zip -r output/owasp_cornucopia_webapp_2.2_pt-br.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_pt-br.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_qr_pt-br.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_pt-br.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_qr_pt-br.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_bridge_pt-br.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_tarot_pt-br.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
               zip -r output/owasp_cornucopia_webapp_2.2_pt-pt.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_qr_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_qr_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_bridge_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_tarot_pt-pt.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
               zip -r output/owasp_cornucopia_webapp_2.2_ru.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_qr_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_qr_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_bridge_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_tarot_ru.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
-          - uses: marvinpinto/action-automatic-releases@919008cf3f741b179569b7a6fb4d8860689ab7f0 # v1.2.1
-            name: "Create release"
+          - name: Create release
+            uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836 # v2.3.3
             with:
-              repo_token: "${{ secrets.GITHUB_TOKEN }}"
+              draft: true
               prerelease: false
               files: |
                 CHANGELOG.md
@@ -129,5 +129,7 @@
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.docx
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.docx
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx
-                resources/case/*\.1_case_*
-                source/*\.1-*.yaml
+                resources/case/*\2.2_case_*
+                resources/case/*\1.1_case_*
+                source/*1\.1-*.yaml
+                source/*2\.2-*.yaml

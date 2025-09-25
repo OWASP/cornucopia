@@ -12,6 +12,8 @@
   import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
+  import Technical from './technical.svelte';
+
   interface Props {
     mappingData: any;
     card: Card;
@@ -39,10 +41,10 @@
 
 <div>
   <h1 title="OWASP Cornucopia card {card.name}" class="title">{card.name}</h1>
-  <p>{card.desc}</p>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Summary card={card}></Summary>
+  <Technical card={card}></Technical>
   {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B'}
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
   {/if}
@@ -78,5 +80,9 @@
     background: var(--background);
     color: white;
     padding: 0.5rem;
+  }
+
+  .clicable {
+    cursor: pointer;
   }
 </style>

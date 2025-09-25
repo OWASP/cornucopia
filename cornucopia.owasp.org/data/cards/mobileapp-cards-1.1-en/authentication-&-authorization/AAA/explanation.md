@@ -1,7 +1,11 @@
-### Scenario: You have invented a new attack against “Authentication & Authorization
+## Scenario: You have invented a new attack against “Authentication & Authorization
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

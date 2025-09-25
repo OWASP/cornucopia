@@ -111,7 +111,8 @@ export class DeckService {
                     let path : string = `./${base}${cardObject.githubUrl}/technical-note.md`;  // '/explanation.md';
                     let file = fs.readFileSync(path, 'utf8');
                     let parsed = fm(file);
-                    cardObject.summary = parsed.body;
+                    cardObject.technical = parsed.body;
+                    cardObject.summary = fm(fs.readFileSync(`./${base}${cardObject.githubUrl}/explanation.md`, 'utf8')).body;
 
                     if (+card == 0 && +suit == 0) {
                         cardObject.prevous = data['suits'][(+data['suits'].length-1)]['cards'][+data['suits'][(+data['suits'].length-1)]['cards'].length-1]['id'];

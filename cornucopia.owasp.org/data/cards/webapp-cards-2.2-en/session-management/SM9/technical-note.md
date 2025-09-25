@@ -1,3 +1,5 @@
+## Of Note
+
 Protect session identifiers as if they are account credentials. For HTTP cookies:
 
 Set cookies with the HttpOnly attribute, unless you specifically require client-side scripts within your application to read or set a cookie's value.

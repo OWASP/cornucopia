@@ -1,1 +1,3 @@
+## Of Note
+
 Data may be use encryption in transit like Transport Layer Security (TLS). However, an attacker may have legitimate access to this (e.g. viewing SSL content in a web browser). Consider whether the data transmitted also needs to be encrypted itself, not just sent using an encrypted protocol.
