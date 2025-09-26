@@ -27,8 +27,8 @@ This kind of vulnerability can lead to identity theft, unauthorized access, and 
 
 ### What are you going to do about it?
 
-- Implement strict validation of user-defined and client-side data.
-- Ensure strong verification of user identity and the integrity of state data stored on client devices.
-- Regularly review and strengthen security measures to guard against data manipulation.
+1. Implement strict validation of user-defined and client-side data.
+2. Ensure strong verification of user identity and the integrity of state data stored on client devices.
+3. Regularly review and strengthen security measures to guard against data manipulation.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

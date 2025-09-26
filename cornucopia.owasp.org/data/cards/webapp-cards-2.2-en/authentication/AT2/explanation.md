@@ -28,8 +28,8 @@ This kind of vulnerability can lead to unnoticed account takeovers, prolonged un
 
 ### What are you going to do about it?
 
-- Implement immediate alert systems for any authentication-related activities, especially password resets or changes.
-- Enforce multi-factor authentication, which adds a layer of security and verification before allowing password changes or resets.
-- Regularly review authentication processes to ensure they are secure and notify users of all significant activities.
+1. Implement immediate alert systems for any authentication-related activities, especially password resets or changes.
+2. Enforce multi-factor authentication, which adds a layer of security and verification before allowing password changes or resets.
+3. Regularly review authentication processes to ensure they are secure and notify users of all significant activities.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

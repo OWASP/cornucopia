@@ -27,8 +27,8 @@ Such vulnerabilities can lead to unauthorized access to critical resources, pote
 
 ### What are you going to do about it?
 
-- Implement comprehensive authorization checks for all resources, ensuring only appropriately privileged users can access them.
-- Adhere to the principle of least privilege, granting users only the permissions they need to perform their duties.
-- Regularly audit and review user privileges and resource access controls to identify and rectify any excesses or lapses in authorization.
+1. Implement comprehensive authorization checks for all resources, ensuring only appropriately privileged users can access them.
+2. Adhere to the principle of least privilege, granting users only the permissions they need to perform their duties.
+3. Regularly audit and review user privileges and resource access controls to identify and rectify any excesses or lapses in authorization.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

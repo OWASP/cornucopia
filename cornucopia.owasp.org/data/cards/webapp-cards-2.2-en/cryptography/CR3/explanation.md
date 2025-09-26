@@ -27,8 +27,8 @@ Such vulnerabilities can lead to unauthorized data manipulation, introduction of
 
 ### What are you going to do about it?
 
-- Implement cryptographic hash functions and digital signatures to ensure data integrity for stored and in-transit data.
-- Apply integrity checks to source code, updates, patches, and configuration data, verifying their authenticity before acceptance and execution.
-- Regularly audit and update security protocols to maintain effective protection against data and code tampering.
+1. Implement cryptographic hash functions and digital signatures to ensure data integrity for stored and in-transit data.
+2. Apply integrity checks to source code, updates, patches, and configuration data, verifying their authenticity before acceptance and execution.
+3. Regularly audit and update security protocols to maintain effective protection against data and code tampering.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -26,8 +26,8 @@ This vulnerability can lead to unauthorized access and misuse of privileges, esp
 
 ### What are you going to do about it?
 
-- Implement a system for periodic re-authentication, especially for sessions that last beyond a certain time threshold.
-- Regularly check and update user privileges within active sessions to ensure they reflect current permissions.
-- Consider introducing shorter session timeouts for highly sensitive applications, requiring users to re-authenticate more frequently.
+1. Implement a system for periodic re-authentication, especially for sessions that last beyond a certain time threshold.
+2. Regularly check and update user privileges within active sessions to ensure they reflect current permissions.
+3. Consider introducing shorter session timeouts for highly sensitive applications, requiring users to re-authenticate more frequently.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

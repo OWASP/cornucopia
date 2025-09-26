@@ -21,7 +21,7 @@ Such lapses in validation can lead to severe security breaches, including data c
 
 ### What are you going to do about it?
 
-- Ensure that centralized validation routines are uniformly applied to all input sources, including web forms, APIs, and any other data entry points.
-- Regularly audit and update validation protocols to cover all potential avenues of data input.
+1. Ensure that centralized validation routines are uniformly applied to all input sources, including web forms, APIs, and any other data entry points.
+2. Regularly audit and update validation protocols to cover all potential avenues of data input.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

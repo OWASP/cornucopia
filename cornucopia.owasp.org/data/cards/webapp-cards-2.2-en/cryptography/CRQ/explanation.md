@@ -25,8 +25,8 @@ Access to master cryptographic secrets can lead to widespread system compromise,
 
 ### What are you going to do about it?
 
-- Secure master cryptographic secrets with the highest level of protection, including physical and logical security measures.
-- Utilize strong, non-predictable algorithms for generating master secrets and ensure they are stored in highly secure, access-controlled environments.
-- Regularly rotate and update master secrets while keeping backups and recovery processes secure and confidential.
+1. Secure master cryptographic secrets with the highest level of protection, including physical and logical security measures.
+2. Utilize strong, non-predictable algorithms for generating master secrets and ensure they are stored in highly secure, access-controlled environments.
+3. Regularly rotate and update master secrets while keeping backups and recovery processes secure and confidential.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

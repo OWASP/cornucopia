@@ -38,9 +38,9 @@ Such vulnerabilities can lead to widespread unauthorized access, data breaches, 
 
 ### What are you going to do about it?
 
-- Implement and enforce secure password policies, including regular changes and strong, unique passwords.
-- Use encryption for data in transit and secure storage methods for sensitive information.
-- Educate users about secure practices, like avoiding password reuse and being cautious of their surroundings when entering passwords.
-- Ensure systems are designed to allow users to change their passwords and keep security questions confidential.
+1. Implement and enforce secure password policies, including regular changes and strong, unique passwords.
+2. Use encryption for data in transit and secure storage methods for sensitive information.
+3. Educate users about secure practices, like avoiding password reuse and being cautious of their surroundings when entering passwords.
+4. Ensure systems are designed to allow users to change their passwords and keep security questions confidential.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

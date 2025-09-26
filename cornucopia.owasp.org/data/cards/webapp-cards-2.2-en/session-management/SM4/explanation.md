@@ -24,8 +24,8 @@ Such vulnerabilities can lead to cross-domain attacks, unauthorized session trac
 
 ### What are you going to do about it?
 
-- Strictly define and enforce domain and path attributes for all cookies, especially those used for session management, to ensure they are only sent to the appropriate domains and paths.
-- Implement additional security measures like Secure and HttpOnly flags to protect cookies from being accessed by client-side scripts.
-- Regularly review and update cookie policies to align with best practices in web security.
+1. Strictly define and enforce domain and path attributes for all cookies, especially those used for session management, to ensure they are only sent to the appropriate domains and paths.
+2. Implement additional security measures like Secure and HttpOnly flags to protect cookies from being accessed by client-side scripts.
+3. Regularly review and update cookie policies to align with best practices in web security.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

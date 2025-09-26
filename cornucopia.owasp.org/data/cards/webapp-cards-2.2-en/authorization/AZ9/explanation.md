@@ -30,8 +30,8 @@ Such misuse can lead to system overloads, degraded performance, unintended appli
 
 ### What are you going to do about it?
 
-- Implement rate limiting and usage throttling to prevent excessive use of features.
-- Design features with resource consumption and potential misuse in mind, ensuring they can handle unexpected or intensive usage without impacting overall system performance.
-- Regularly monitor application usage patterns to identify and address potential abuses or misuses of features.
+1. Implement rate limiting and usage throttling to prevent excessive use of features.
+2. Design features with resource consumption and potential misuse in mind, ensuring they can handle unexpected or intensive usage without impacting overall system performance.
+3. Regularly monitor application usage patterns to identify and address potential abuses or misuses of features.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

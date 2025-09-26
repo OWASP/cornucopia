@@ -28,9 +28,9 @@ Such vulnerabilities can lead to data interception, unauthorized access, and inf
 
 ### What are you going to do about it?
 
-- Ensure proper deployment and configuration of encryption protocols, adhering to current best practices and standards.
-- Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks.
-- Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states.
-- Regularly review and update the cryptographic setup to address new vulnerabilities and maintain strong security.
+1. Ensure proper deployment and configuration of encryption protocols, adhering to current best practices and standards.
+2. Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks.
+3. Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states.
+4. Regularly review and update the cryptographic setup to address new vulnerabilities and maintain strong security.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

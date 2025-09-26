@@ -30,9 +30,9 @@ Such vulnerabilities can lead to process integrity breaches, unauthorized access
 
 ### What are you going to do about it?
 
-- Design the system to strictly enforce the intended sequence and flow of processes.
-- Validate all control data, including date and time parameters, to ensure they have not been tampered with.
-- Limit the ability to manipulate URLs and direct requests that can alter the normal application flow.
-- Regularly review and test the application for potential misuse of features and control data manipulations.
+1. Design the system to strictly enforce the intended sequence and flow of processes.
+2. Validate all control data, including date and time parameters, to ensure they have not been tampered with.
+3. Limit the ability to manipulate URLs and direct requests that can alter the normal application flow.
+4. Regularly review and test the application for potential misuse of features and control data manipulations.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

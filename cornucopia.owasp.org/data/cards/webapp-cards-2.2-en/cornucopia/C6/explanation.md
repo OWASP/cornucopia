@@ -28,9 +28,9 @@ Such vulnerabilities in error handling can lead to unauthorized access, exposure
 
 ### What are you going to do about it?
 
-- Develop and implement a comprehensive error and exception handling strategy that is consistently applied across the entire application.
-- Ensure that errors result in safe outcomes, such as terminating access or execution, to prevent exploitation.
-- Avoid relying solely on external systems for error handling; ensure that the application has robust internal mechanisms to deal with errors securely.
-- Regularly review and test error handling routines to identify and address any weaknesses or inconsistencies.
+1. Develop and implement a comprehensive error and exception handling strategy that is consistently applied across the entire application.
+2. Ensure that errors result in safe outcomes, such as terminating access or execution, to prevent exploitation.
+3. Avoid relying solely on external systems for error handling; ensure that the application has robust internal mechanisms to deal with errors securely.
+4. Regularly review and test error handling routines to identify and address any weaknesses or inconsistencies.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

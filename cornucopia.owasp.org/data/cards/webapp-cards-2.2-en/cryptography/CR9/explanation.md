@@ -16,8 +16,8 @@ Andy targets a system that uses a custom-built encryption algorithm and a self-d
 
 The primary applicable STRIDE categories for this scenario is **Information Disclosure** or **Tampering** depending on the context.
 
-- Andy may be able to undermine the integrity of the system’s protections (random numbers, GUIDs, hashing, encryption). By bypassing or breaking them, he can alter outcomes (predictable GUIDs, weakened encryption, manipulated “random” values). This is a failure of integrity which makes the primary impact: **Tampering**.
-- Andy’s bypass of weak/random crypto may give him a "backdoor" in encrypted communication that allow him to see what information is being sent. In that case the main harm is loss of confidentiality, primary impact: **Information Disclosure**.
+1. Andy may be able to undermine the integrity of the system’s protections (random numbers, GUIDs, hashing, encryption). By bypassing or breaking them, he can alter outcomes (predictable GUIDs, weakened encryption, manipulated “random” values). This is a failure of integrity which makes the primary impact: **Tampering**.
+2. Andy’s bypass of weak/random crypto may give him a "backdoor" in encrypted communication that allow him to see what information is being sent. In that case the main harm is loss of confidentiality, primary impact: **Information Disclosure**.
 
 ### What can go Wrong?
 
@@ -25,8 +25,8 @@ Reliance on weak, custom-built cryptographic functions can lead to compromised d
 
 ### What are you going to do about it?
 
-- Replace custom cryptographic functions with well-established, industry-standard algorithms and libraries that have been rigorously tested and proven secure.
-- Conduct regular security audits and reviews of cryptographic implementations to ensure they are strong and effective.
-- Avoid developing in-house cryptographic solutions unless absolutely necessary and ensure they are developed by experts in cryptography.
+1. Replace custom cryptographic functions with well-established, industry-standard algorithms and libraries that have been rigorously tested and proven secure.
+2. Conduct regular security audits and reviews of cryptographic implementations to ensure they are strong and effective.
+3. Avoid developing in-house cryptographic solutions unless absolutely necessary and ensure they are developed by experts in cryptography.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
