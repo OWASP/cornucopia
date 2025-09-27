@@ -1,7 +1,11 @@
-### Scenario: Toby can modify or expose data by injection because the response from implicit intents is not properly validated
+## Scenario: Toby can modify or expose data by injection because the response from implicit intents is not properly validated
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

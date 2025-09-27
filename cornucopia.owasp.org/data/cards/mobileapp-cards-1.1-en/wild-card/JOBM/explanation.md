@@ -1,7 +1,11 @@
-### Scenario: Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification
+## Scenario: Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

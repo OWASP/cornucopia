@@ -1,7 +1,11 @@
-### Scenario: Sebastien can disclose sensitive data because the application is set up to log debug information at runtime
+## Scenario: Sebastien can disclose sensitive data because the application is set up to log debug information at runtime
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

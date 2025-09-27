@@ -1,7 +1,11 @@
-### Scenario: Starr can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates
+## Scenario: Starr can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

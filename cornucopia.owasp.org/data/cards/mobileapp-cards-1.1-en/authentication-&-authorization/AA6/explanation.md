@@ -1,10 +1,14 @@
-### Scenario: Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing
+## Scenario: Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?
 
 
 https://mas.owasp.org/MASWE/MASVS-AUTH/MASWE-0029/

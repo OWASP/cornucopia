@@ -1,7 +1,11 @@
-### Scenario: Ramsey can access stored sensitive data because it is not securely encrypted
+## Scenario: Ramsey can access stored sensitive data because it is not securely encrypted
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

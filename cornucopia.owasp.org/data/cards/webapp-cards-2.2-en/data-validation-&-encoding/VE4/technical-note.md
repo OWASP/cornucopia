@@ -1,3 +1,5 @@
+## Of Note
+
 Malicious data can be introduced voluntarily (as part of an attack) or involuntarily (e.g. XSS). Some input checks should be dependent upon the function or user's context (e.g. the data is valid for one user but not another). There are many alternatives to this kind of attack:
 
 Tampering request types, URLs, cookies, session identifiers, fields or values that are not validated.

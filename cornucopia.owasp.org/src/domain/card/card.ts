@@ -12,6 +12,7 @@ export type Card =
     suitName : string, 
     suitNameLocal: string,
     summary : string,
+    technical : string,
     url : string,
     value : string,
 }

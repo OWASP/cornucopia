@@ -1,7 +1,11 @@
-### Scenario: Kim can reduce app users' privacy because the app repurpose biometric information (e.g. fingerprints, facial recognition data, etc.) collected for security concerns in order to cater for commercial interests
+## Scenario: Kim can reduce app users' privacy because the app repurpose biometric information (e.g. fingerprints, facial recognition data, etc.) collected for security concerns in order to cater for commercial interests
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

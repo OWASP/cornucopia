@@ -1,3 +1,5 @@
+## Of Note
+
 Application-layer denial of service and other activities that adversely affect the application's users. Includes:
 
 Account lockout.

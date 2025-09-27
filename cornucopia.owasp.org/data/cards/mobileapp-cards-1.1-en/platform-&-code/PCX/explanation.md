@@ -1,7 +1,11 @@
-### Scenario: Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted
+## Scenario: Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?

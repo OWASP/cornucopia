@@ -1,7 +1,11 @@
-### Scenario: Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background
+## Scenario: Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background
 
-### Example:
+### Example
 
-### Risks: 
+## Threat Modeling
 
-### Mitigation:
+### STRIDE
+
+### What can go Wrong?
+
+### What are you going to do about it?
