@@ -480,7 +480,7 @@ paragraphs:
     text: "Keith Turpin and contributors to the “OWASP Secure Coding Practices - Quick Reference Guide”, originally donated to OWASP by Boeing, which is used as the primary source of security requirements information to formulate the content of the cards."
   -
     id: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Contributors, supporters, sponsors and volunteers to the OWASP ASVS, -AppSensor, -Developer Guide and Web Framework Security Matrix projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
   -
     id: "T00140"
     text: "Playgen for providing an illuminating afternoon seminar on task gamification, and tartanmaker.com for the online tool to help create the card back pattern."
@@ -567,7 +567,7 @@ paragraphs:
     text: "An initial aim had been to reference CWE™ weakness IDs, but these proved too numerous, and instead it was decided to map each card to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved."
   -
     id: "T00530"
-    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP SCP v2, ASVS v3.0.1 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
+    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document, as well as to the OWASP® Developer Guide Web Application Checklist v4.1.9, ASVS v3.0.1 and AppSensor (application attack detection and response) to help teams create their own security-related stories for use in Agile processes."
   -
     id: "T00600"
     text: "Game strategy"
@@ -681,7 +681,7 @@ paragraphs:
     text: "This means the attacker (William) can create new session identifiers that the application accepts."
   -
     id: "T01180"
-    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP."
+    text: "The attacks were primarily drawn from the security requirements listed in the SCP, v2 but then supplemented with verification objectives from the OWASP “Application Security Verification Standard for Web Applications”, the security focused stories in SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments”, and finally a review of the cards in EOP. In OWASP Cornucopia Website Edition v2.2 the SCP mapping was replaced by the OWASP Developer Guide Web Application Checklist. "
   -
     id: "T01190"
     text: "Further guidance about each card is available in the online Wiki Deck at "
@@ -690,7 +690,7 @@ paragraphs:
     text: "Lookups between the attacks and five resources are provided on most cards:"
   -
     id: "T01210"
-    text: "Requirements in “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP, November 2010 "
+    text: "Requirements in “OWASP DevGuide - Web Application Checklist”, v4.1.9, OWASP, November 2010 "
   -
     id: "T01220"
     text: "Verification IDs in “Application Security Verification Standard (ASVS) for Web Applications”, OWASP, v3.0.1, 2016 (excluding sections 18 and 19)"
@@ -1276,6 +1276,42 @@ paragraphs:
   -
     id: "T03700"
     text: "Minor text changes to instructions and FAQs."
+  -
+    id: "T03710"
+    text: "2.0"
+  -
+    id: "T03720"
+    text: "Cross-references updated from ASVS v3.0.1 to ASVS v4.0 by Johan Sydseter. "
+  -
+    id: "T03730"
+    text: "2.1"
+  -
+    id: "T03740"
+    text: "Adding italian translation done by Ruggero DallAglio"
+  -
+    id: "T03750"
+    text: "2.1"
+  -
+    id: "T03760"
+    text: "Adding portugeese translation done by André Ferreira"
+  -
+    id: "T03770"
+    text: "2.2"
+  -
+    id: "T03771"
+    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9."
+  -
+    id: "T03772"
+    text: "3.0"
+  -
+    id: "T03773"
+    text: "ASVS has been migrated from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices."
+  -
+    id: "T03774"
+    text: "3.0"
+  -
+    id: "T03775"
+    text: "STRIDE categories have been added to each cards"
   -
     id: "T03800"
     text: "Project contributors"

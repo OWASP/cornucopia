@@ -33,6 +33,17 @@
     function linkSTRIDE(input: string) {
       return  "/taxonomy/stride/" + input.toLowerCase();
     }
+
+    function textSTRIDE(input: string) {
+      return {
+        "S": 'Spoofing',
+        "T": 'Tampering',
+        "R": 'Repudiation',
+        "I": 'Information Disclosure',
+        "D": 'Denial of Service',
+        "E": 'Elevation of Privilege',
+      }[input] || input;
+    }
   
     function FormatToDoubleDigitSearchstring(input: string) {
       input = String(input)
@@ -63,6 +74,7 @@
         title="STRIDE:" 
         mappings={mappings.stride}
         linkFunction={linkSTRIDE}
+        textFunction={textSTRIDE}
       />
       <MappingsList
         title="OWASP ASVS (4.0):"

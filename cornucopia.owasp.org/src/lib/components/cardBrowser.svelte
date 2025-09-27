@@ -89,6 +89,7 @@
 <style>
     .arrow
     {
+        font-size: 5vw;
         text-decoration: none;
         font-weight: bold;
         color: var(--background);
@@ -111,7 +112,7 @@
 
     .center
     {
-        width : max(20vw, 15vh);
+        width : max(24vw, 15vh);
     }
 
     .card-panel
@@ -128,13 +129,16 @@
     {
         .center
         {
-            width : 70vw;
+            width : 60vw;
         }
 
         .left,.right
         {
-            padding-top: 60%;
+            padding-top: 0%;
             width : 15vw;
+        }
+        .arrow {
+            font-size: 5vw;
         }
     }
 </style>

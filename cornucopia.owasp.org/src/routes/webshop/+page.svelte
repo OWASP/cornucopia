@@ -24,8 +24,8 @@
 {/if}
 <div class="vendor-container">
     <CardVendor
-    vendorName="Agile Stationary"
-    logoSource="/images/logo-agile-stationary.png"
+    vendorName="CyberSec Games"
+    logoSource="/images/cybersecgames.svg"
     productImageSource="/images/owasp-cornucopia-preview.png"
     webshopLink="https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards">
     </CardVendor>
