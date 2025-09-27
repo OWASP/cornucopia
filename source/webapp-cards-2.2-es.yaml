@@ -480,7 +480,7 @@ paragraphs:
     text: "Keith Turpin y colaboradores de las “Prácticas de codificación segura de OWASP® - Guía de referencia rápida”, originalmente donada a OWASP por Boeing, que se utiliza como fuente principal de información sobre requisitos de seguridad para formular el contenido de las tarjetas."
   -
     id: "T00130"
-    text: "Colaboradores, patrocinadores y voluntarios de los proyectos OWASP® ASVS, AppSensor y Web Framework Security Matrix, la enumeración y clasificación de patrones de ataque común de Mitre (CAPEC™) y las \"historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágiles\" de SAFECode, que se utilizan en las referencias cruzadas proporcionadas."
+    text: "Colaboradores, patrocinadores y voluntarios de los proyectos OWASP® ASVS, -AppSensor, -Developer Guide y Web Framework Security Matrix, la enumeración y clasificación de patrones de ataque común de Mitre (CAPEC™) y las \"historias prácticas de seguridad y tareas de seguridad para entornos de desarrollo ágiles\" de SAFECode, que se utilizan en las referencias cruzadas proporcionadas."
   -
     id: "T00140"
     text: "Playgen por brindar un seminario esclarecedor por la tarde sobre gamificación de tareas, y tartanmaker.com por la herramienta en línea para ayudar a crear el patrón del dorso de la tarjeta."
@@ -570,7 +570,7 @@ paragraphs:
     text: "Un objetivo inicial había sido hacer referencia a los ID de debilidad de CWE, pero estos resultaron ser demasiados, y en su lugar se decidió asignar cada tarjeta a los ID de patrón de ataque de software CAPEC, que a su vez se relacionan a CWE, por lo que se logra el resultado deseado."
   -
     id: "T00530"
-    text: "Cada tarjeta también se asocia a las 36 historias de seguridad principales en el documento SAFECode, así como a OWASP® SCP v2, ASVS v4.0 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad para su uso en procesos ágiles."
+    text: "Cada tarjeta también se asocia a las 36 historias de seguridad principales en el documento SAFECode, así como a OWASP® Developer Guide Web Application Checklist v4.1.9, ASVS v4.0 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad para su uso en procesos ágiles."
   -
     id: "T00600"
     text: "Estrategia de Juego"
@@ -687,7 +687,7 @@ paragraphs:
     text: "Esto significa que el atacante (William) puede crear nuevos identificadores de sesión que la aplicación acepta."
   -
     id: "T01180"
-    text: "Los ataques se basaron principalmente en los requisitos de seguridad enumerados en SCP, v2, pero luego se complementaron con los objetivos de verificación del \"Estándar de verificación de seguridad de aplicaciones para aplicaciones web\" de OWASP, las historias centradas en la seguridad en \"Historias Prácticas de seguridad y tareas de seguridad de SAFECode para el desarrollo ágil\", y finalmente una revisión de las tarjetas en EoP."
+    text: "Los ataques se basaron principalmente en los requisitos de seguridad enumerados en SCP, v2, pero luego se complementaron con los objetivos de verificación del \"Estándar de verificación de seguridad de aplicaciones para aplicaciones web\" de OWASP, las historias centradas en la seguridad en \"Historias Prácticas de seguridad y tareas de seguridad de SAFECode para el desarrollo ágil\", y finalmente una revisión de las tarjetas en EoP. En OWASP Cornucopia Website Edition v2.2, el mapeo SCP fue reemplazado por la Lista de verificación de aplicaciones web de la OWASP® Developer Guide."
   -
     id: "T01190"
     text: "Las relaciones entre los ataques y cinco recursos se ofrecen en la mayoría de las tarjetas"
@@ -696,7 +696,7 @@ paragraphs:
     text: "Las relaciones entre los ataques y cinco recursos se ofrecen en la mayoría de las tarjetas"
   -
     id: "T01210"
-    text: "Requisitos en “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, Noviembre de 2010 "
+    text: "Requisitos en “OWASP DevGuide - Web Application Checklist”, v4.1.9, OWASP®, Noviembre de 2010 "
   -
     id: "T01220"
     text: "ID de verificación en OWASP® “Application Security Verification Standard for Web Applications”"
@@ -1294,6 +1294,24 @@ paragraphs:
   -
     id: "T03760"
     text: "Añadiendo traducción al portugués realizada por André Ferreira"
+  -
+    id: "T03770"
+    text: "2.2"
+  -
+    id: "T03771"
+    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9."
+  -
+    id: "T03772"
+    text: "3.0"
+  -
+    id: "T03773"
+    text: "ASVS has been migrated from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices."
+  -
+    id: "T03774"
+    text: "3.0"
+  -
+    id: "T03775"
+    text: "STRIDE categories have been added to each cards"
   -
     id: "T03800"
     text: "Project contributors"

@@ -483,7 +483,7 @@ paragraphs:
     text: "Кейт Турпин и участники OWASP® «Secure Coding Practices - Quick Reference Guide», изначально пожертвованного OWASP компанией Boeing, который используется в качестве основного источника информации о требованиях безопасности для формулирования содержания карт."
   -
     id: "T00130"
-    text: "Участники, сторонники, спонсоры и волонтеры в проектах OWASP® ASVS, AppSensor и Web Framework Security Matrix, Mitre Common Attack Pattern Enumeration and Classification (CAPEC™), и SAFECode “Practical Security Stories and Security Tasks for Agile Development Environments”, которые использовались в перекрестных ссылках."
+    text: "Участники, сторонники, спонсоры и волонтеры в проектах OWASP® ASVS, AppSensor, “OWASP Developer Guide” и Web Framework Security Matrix, Mitre Common Attack Pattern Enumeration and Classification (CAPEC™), и SAFECode “Practical Security Stories and Security Tasks for Agile Development Environments”, которые использовались в перекрестных ссылках."
   -
     id: "T00140"
     text: "Playgen за предоставления зажигательного семинара по геймификации задач и tartanmaker.com за онлайн инструмент, для помощи в создании паттерна на обратной стороне карт."
@@ -573,7 +573,7 @@ paragraphs:
     text: "Первоначальной целью была отссылка к идентификаторам слабостей CWE, но они оказались слишком многочисленными, и вместо этого было решено соотнести каждую карту с идентификаторами паттернов атак CAPEC, которые в свою очередь сопоставляются с CWE, что позволяет достичь желаемого результата."
   -
     id: "T00530"
-    text: "Каждая карта также сопоставлена ​​с 36 историями о безопасности в документе SafeCode, а также с OWASP® SCP V2, ASVS V4.0 и AppSensor (обнаружение и реагирование на атаки приложений), чтобы помочь командам создать свои собственные истории, связанные с безопасностью, для использования в Agile."
+    text: "Каждая карточка также сопоставлена ​​с 36 основными историями безопасности в документе SAFECode, а также с контрольным списком веб-приложений руководства разработчика OWASP® v4.1.9, ASVS v5.0 и AppSensor (обнаружение атак на приложения и реагирование на них), чтобы помочь командам создавать собственные истории, связанные с безопасностью, для использования в гибких процессах."
   -
     id: "T00600"
     text: "Стратегия игры"
@@ -687,7 +687,7 @@ paragraphs:
     text: "Это значит, что атакующий (Уильям) может создать новые идентификаторы сессий, которые приложение примет."
   -
     id: "T01180"
-    text: "Атаки в основном взяты из требований безопасности, перечисленных в SCP, v2, но затем дополнены целями проверки из OWASP® “Application Security Verification Standard”, историй о безопасности в “Practical Security Stories and Security Tasks for Agile Development Environments” SAFECode и, наконец, карт EoP."
+    text: "Атаки были в первую очередь основаны на требованиях безопасности, перечисленных в SCP v2, но затем дополнены целями проверки из «Стандарта проверки безопасности приложений» OWASP®, историями, посвященными безопасности, из «Практических историй безопасности и задач безопасности для сред гибкой разработки» SAFECode, и, наконец, обзором карт в EOP. В OWASP Cornucopia Website Edition v3.0 сопоставление SCP было заменено контрольным списком веб-приложений из Руководства разработчика OWASP."
   -
     id: "T01190"
     text: "Подробная информация по каждой карте доступна в онлайн Wiki Колоде по адресу "
@@ -696,7 +696,7 @@ paragraphs:
     text: "Обычно на каждой карте есть отсылка на справку по атаке на пяти ресурсах:"
   -
     id: "T01210"
-    text: "Требования “Secure Coding Practices (SCP) - Quick Reference Guide”, v2, OWASP®, Ноябрь 2010 "
+    text: "Требования “OWASP DevGuide - Web Checklist”, v4.1.9, OWASP®, Июль 2025 "
   -
     id: "T01220"
     text: "Идентификаторы проверок “Application Security Verification Standard”"
@@ -1297,6 +1297,24 @@ paragraphs:
   -
     id: "T03760"
     text: "Добавлен португальский перевод от Андрэ Феррейра"
+  -
+    id: "T03770"
+    text: "2.2"
+  -
+    id: "T03771"
+    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9."
+  -
+    id: "T03772"
+    text: "3.0"
+  -
+    id: "T03773"
+    text: "ASVS has been migrated from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices."
+  -
+    id: "T03774"
+    text: "3.0"
+  -
+    id: "T03775"
+    text: "STRIDE categories have been added to each cards"
   -
     id: "T03800"
     text: "Участники проекта"
