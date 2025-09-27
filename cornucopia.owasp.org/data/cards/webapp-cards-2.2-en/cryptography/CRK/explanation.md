@@ -26,8 +26,8 @@ Such manipulation can lead to the compromise of entire cryptographic systems, re
 
 ### What are you going to do about it?
 
-- Implement strict access controls and monitoring systems to protect cryptographic code and routines from unauthorized modifications.
-- Regularly audit and test cryptographic implementations to detect any tampering or weaknesses.
-- Employ continuous monitoring and anomaly detection mechanisms to quickly identify and address any unauthorized changes in cryptographic operations.
+1. Implement strict access controls and monitoring systems to protect cryptographic code and routines from unauthorized modifications.
+2. Regularly audit and test cryptographic implementations to detect any tampering or weaknesses.
+3. Employ continuous monitoring and anomaly detection mechanisms to quickly identify and address any unauthorized changes in cryptographic operations.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

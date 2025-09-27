@@ -26,8 +26,8 @@ Such vulnerabilities can lead to unauthorized data disclosure, data breaches, an
 
 ### What are you going to do about it?
 
-- Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
-- Ensure that the system verifies user permissions before allowing data to be redirected or exported.
-- Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.
+1. Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
+2. Ensure that the system verifies user permissions before allowing data to be redirected or exported.
+3. Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

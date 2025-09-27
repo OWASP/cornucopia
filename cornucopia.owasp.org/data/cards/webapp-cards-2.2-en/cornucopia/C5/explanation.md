@@ -24,9 +24,9 @@ Such manipulation can lead to significant breaches of user trust, unauthorized a
 
 ### What are you going to do about it?
 
-- Implement robust verification and authentication measures to prevent misuse of the application’s trusted status.
-- Educate users about the risks of phishing and other trust exploitation tactics. 
-- Monitor and control how the application’s APIs and services interact with other systems, ensuring secure and verified connections.
-- Establish strict guidelines and security protocols for third-party applications or services that integrate with the application.
+1. Implement robust verification and authentication measures to prevent misuse of the application’s trusted status.
+2. Educate users about the risks of phishing and other trust exploitation tactics. 
+3. Monitor and control how the application’s APIs and services interact with other systems, ensuring secure and verified connections.
+4. Establish strict guidelines and security protocols for third-party applications or services that integrate with the application.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

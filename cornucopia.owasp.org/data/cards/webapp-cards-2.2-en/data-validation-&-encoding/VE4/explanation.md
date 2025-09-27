@@ -22,7 +22,7 @@ This form of attack can lead to unauthorized access, data breaches, and potentia
 
 ### What are you going to do about it?
 
-- Implement strict contextual validation for all data inputs, particularly focusing on user roles and process stages.
-- Continually update and refine validation mechanisms to address new and evolving security threats.
+1. Implement strict contextual validation for all data inputs, particularly focusing on user roles and process stages.
+2. Continually update and refine validation mechanisms to address new and evolving security threats.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

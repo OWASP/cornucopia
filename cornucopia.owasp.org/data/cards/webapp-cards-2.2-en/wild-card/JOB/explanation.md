@@ -15,13 +15,13 @@ Primary impact depends on the impact of attack:
 
 ### What can go Wrong?
 
-- Non-compliance with regulations such as GDPR, HIPAA, or PCI DSS.
-- Violations of contractual obligations or internal policies.
-- Financial penalties, legal actions, or regulatory fines.
-- Reputational damage or loss of customer trust.
-- Data integrity or confidentiality violations.
-- Inaccurate compliance reporting (e.g., SAQ misreporting for PCI DSS).
-- Operational disruptions due to disabled or insecure processes.
+1. Non-compliance with regulations such as GDPR, HIPAA, or PCI DSS.
+2. Violations of contractual obligations or internal policies.
+3. Financial penalties, legal actions, or regulatory fines.
+4. Reputational damage or loss of customer trust.
+5. Data integrity or confidentiality violations.
+6. Inaccurate compliance reporting (e.g., SAQ misreporting for PCI DSS).
+7. Operational disruptions due to disabled or insecure processes.
 
 ### What are you going to do about it?
 

@@ -29,11 +29,11 @@ Such vulnerabilities can lead to a range of issues, from unauthorized access and
 
 ### What are you going to do about it?
 
-- Replace risky functions with safer alternatives and follow secure coding practices.
-- Implement thorough error handling and validation for type conversions.
-- Design the application to handle unavailability or failures of external resources gracefully.
-- Address potential race conditions through proper synchronization and concurrency controls.
-- Ensure robust initialization and allocation of resources, and rigorously check for potential overflows.
-- Regularly audit and test the application for these vulnerabilities, and update practices as needed.
+1. Replace risky functions with safer alternatives and follow secure coding practices.
+2. Implement thorough error handling and validation for type conversions.
+3. Design the application to handle unavailability or failures of external resources gracefully.
+4. Address potential race conditions through proper synchronization and concurrency controls.
+5. Ensure robust initialization and allocation of resources, and rigorously check for potential overflows.
+6. Regularly audit and test the application for these vulnerabilities, and update practices as needed.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

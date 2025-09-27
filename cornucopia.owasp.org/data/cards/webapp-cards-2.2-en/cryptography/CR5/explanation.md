@@ -24,8 +24,8 @@ Such a vulnerability can lead to data exposure and breaches, as it allows sensit
 
 ### What are you going to do about it?
 
-- Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.
-- Implement robust error handling that maintains security standards even when cryptographic processes encounter issues.
-- Regularly test and audit cryptographic systems to ensure they respond securely to failures and do not expose sensitive data.
+1. Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.
+2. Implement robust error handling that maintains security standards even when cryptographic processes encounter issues.
+3. Regularly test and audit cryptographic systems to ensure they respond securely to failures and do not expose sensitive data.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

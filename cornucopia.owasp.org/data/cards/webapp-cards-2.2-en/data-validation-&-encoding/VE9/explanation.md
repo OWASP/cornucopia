@@ -23,8 +23,8 @@ This vulnerability can lead to various security threats, including data leakage,
 
 ### What are you going to do about it?
 
-- Implement a strict policy to reject any data that fails validation checks. 
-- In cases where rejection is not possible, thoroughly sanitize all data post-validation failure. 
-- Regularly update validation and sanitization procedures to address emerging security threats and ensure comprehensive coverage
+1. Implement a strict policy to reject any data that fails validation checks. 
+2. In cases where rejection is not possible, thoroughly sanitize all data post-validation failure. 
+3. Regularly update validation and sanitization procedures to address emerging security threats and ensure comprehensive coverage
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

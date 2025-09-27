@@ -30,9 +30,9 @@ Such practices expose users to session hijacking and potential privacy breaches,
 
 ### What are you going to do about it?
 
-- Implement a system to regenerate session IDs upon any change in user state, especially during authentication processes.
-- Ensure session IDs are sufficiently long, complex, and randomly generated.
-- Regularly refresh session identifiers to prevent them from being guessed or reused over time.
-- Employ strict security measures for session management across both encrypted and non-encrypted communications.
+1. Implement a system to regenerate session IDs upon any change in user state, especially during authentication processes.
+2. Ensure session IDs are sufficiently long, complex, and randomly generated.
+3. Regularly refresh session identifiers to prevent them from being guessed or reused over time.
+4. Employ strict security measures for session management across both encrypted and non-encrypted communications.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

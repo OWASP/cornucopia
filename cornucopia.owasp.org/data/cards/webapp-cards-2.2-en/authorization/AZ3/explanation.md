@@ -30,9 +30,9 @@ Such vulnerabilities can lead to unauthorized information access, breaches of co
 
 ### What are you going to do about it?
 
-- Ensure all systems with broader access, like indexers or loggers, enforce the same access controls as primary data sources.
-- Implement secure caching practices and regular cache clearance to prevent unauthorized data access.
-- Establish and enforce strict data retention policies to minimize the risk of accessing outdated sensitive information.
-- Conduct regular audits to identify and address any potential information leakage.
+1. Ensure all systems with broader access, like indexers or loggers, enforce the same access controls as primary data sources.
+2. Implement secure caching practices and regular cache clearance to prevent unauthorized data access.
+3. Establish and enforce strict data retention policies to minimize the risk of accessing outdated sensitive information.
+4. Conduct regular audits to identify and address any potential information leakage.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

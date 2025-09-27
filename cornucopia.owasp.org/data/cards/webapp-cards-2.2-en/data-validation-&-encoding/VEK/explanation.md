@@ -21,7 +21,7 @@ Such vulnerabilities can lead to severe consequences, including unauthorized dat
 
 ### What are you going to do about it?
 
-- Implement and rigorously enforce the use of strongly typed parameterized interfaces for all server-side data processing.
-- Regularly review and test these implementations to ensure they handle data inputs securely and prevent injection attacks.
+1. Implement and rigorously enforce the use of strongly typed parameterized interfaces for all server-side data processing.
+2. Regularly review and test these implementations to ensure they handle data inputs securely and prevent injection attacks.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

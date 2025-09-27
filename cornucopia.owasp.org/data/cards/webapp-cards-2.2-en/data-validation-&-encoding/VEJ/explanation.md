@@ -24,8 +24,8 @@ Such control over validation and encoding routines can lead to a wide array of s
 
 ### What are you going to do about it?
 
-- Implement strict access controls and monitoring to prevent unauthorized changes to validation and encoding routines.
-- Regularly review and audit these processes to ensure they haven't been tampered with.
-- Establish robust checks and balances within the development and deployment processes to detect any unauthorized modifications.
+1. Implement strict access controls and monitoring to prevent unauthorized changes to validation and encoding routines.
+2. Regularly review and audit these processes to ensure they haven't been tampered with.
+3. Establish robust checks and balances within the development and deployment processes to detect any unauthorized modifications.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
