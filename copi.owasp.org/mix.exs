@@ -62,7 +62,7 @@ defmodule Copi.MixProject do
       {:bandit, "~> 1.2"},
       {:plug_cowboy, "~> 2.7.1"},
       {:ecto_ulid, "~> 0.3.0"},
-      {:yaml_elixir, "~> 2.11.0"},
+      {:yaml_elixir, "~> 2.12.0"},
       {:slugify, "~> 1.3.1"},
       {:want, "~> 1.18.0"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
