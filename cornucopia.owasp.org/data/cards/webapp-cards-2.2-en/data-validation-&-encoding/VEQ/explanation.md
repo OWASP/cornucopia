@@ -22,10 +22,12 @@ Xavier is modifying the content/behavior of the application delivered to or exec
 
 This type of vulnerability can lead to client-side attacks like XSS, compromising user data and browser security.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure the use of parameterized interfaces for all data inputs and correctly implement them.
-- Apply proper data encoding techniques based on the specific context of use.
-- Establish and enforce restrictive policies for code and data inclusion to prevent malicious content injection.
+1. Ensure the use of parameterized interfaces for all data inputs and correctly implement them.
+2. Apply proper data encoding techniques based on the specific context of use.
+3. Establish and enforce restrictive policies for code and data inclusion to prevent malicious content injection.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

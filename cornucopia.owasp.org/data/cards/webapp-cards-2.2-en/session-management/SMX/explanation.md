@@ -24,10 +24,12 @@ The attack allows her to perform actions on behalf of the user, which is imperso
 
 Such vulnerabilities expose users to CSRF attacks, where attackers can manipulate users' actions without their knowledge, potentially leading to unauthorized state changes and data breaches.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
-- Ensure that every state-changing action requires a valid anti-CSRF token to proceed.
-- Regularly review and update security measures to protect against CSRF and other request forgery methods.
+1. Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
+2. Ensure that every state-changing action requires a valid anti-CSRF token to proceed.
+3. Regularly review and update security measures to protect against CSRF and other request forgery methods.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -24,10 +24,12 @@ STRIDE defines **Tampering** as the unauthorized modification of data or code, w
 
 Such manipulation can lead to the compromise of entire cryptographic systems, rendering them ineffective and exposing sensitive data to unauthorized access or manipulation.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement strict access controls and monitoring systems to protect cryptographic code and routines from unauthorized modifications.
-- Regularly audit and test cryptographic implementations to detect any tampering or weaknesses.
-- Employ continuous monitoring and anomaly detection mechanisms to quickly identify and address any unauthorized changes in cryptographic operations.
+1. Implement strict access controls and monitoring systems to protect cryptographic code and routines from unauthorized modifications.
+2. Regularly audit and test cryptographic implementations to detect any tampering or weaknesses.
+3. Employ continuous monitoring and anomaly detection mechanisms to quickly identify and address any unauthorized changes in cryptographic operations.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

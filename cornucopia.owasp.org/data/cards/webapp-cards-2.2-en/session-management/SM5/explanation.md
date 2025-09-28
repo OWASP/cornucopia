@@ -28,11 +28,13 @@ By hijacking a valid session ID, he assumes the identity of the authenticated us
 
 Such practices expose users to session hijacking and potential privacy breaches, as attackers can easily predict or guess session IDs.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement a system to regenerate session IDs upon any change in user state, especially during authentication processes.
-- Ensure session IDs are sufficiently long, complex, and randomly generated.
-- Regularly refresh session identifiers to prevent them from being guessed or reused over time.
-- Employ strict security measures for session management across both encrypted and non-encrypted communications.
+1. Implement a system to regenerate session IDs upon any change in user state, especially during authentication processes.
+2. Ensure session IDs are sufficiently long, complex, and randomly generated.
+3. Regularly refresh session identifiers to prevent them from being guessed or reused over time.
+4. Employ strict security measures for session management across both encrypted and non-encrypted communications.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

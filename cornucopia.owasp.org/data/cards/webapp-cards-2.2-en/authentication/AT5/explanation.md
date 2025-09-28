@@ -30,11 +30,13 @@ if the default/test account has higher-than-normal rights (e.g., admin), Javier 
 
 Such vulnerabilities allow for unauthorized access and control, leading to potential data breaches, system manipulations, and other security risks.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure all default credentials are changed upon system setup or application installation.
-- Regularly audit accounts to identify and remove or secure test and unnecessary accounts.
-- Implement and enforce strong password policies, discouraging easily guessable passwords.
-- Routinely deactivate old accounts and monitor for any unauthorized access attempts
+1. Ensure all default credentials are changed upon system setup or application installation.
+2. Regularly audit accounts to identify and remove or secure test and unnecessary accounts.
+3. Implement and enforce strong password policies, discouraging easily guessable passwords.
+4. Routinely deactivate old accounts and monitor for any unauthorized access attempts
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

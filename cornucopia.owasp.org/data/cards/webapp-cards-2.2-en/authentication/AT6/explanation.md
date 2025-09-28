@@ -26,10 +26,12 @@ The system fails to enforce proper lifecycle rules (expiry, one-time use, out-of
 
 This oversight can lead to unauthorized account access, data breaches, and potential exploitation of system vulnerabilities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement policies that require users to change their temporary passwords upon first login.
-- Set short expiration times for temporary passwords to minimize the risk window.
-- Use secure, out-of-band methods for delivering temporary passwords to ensure their confidentiality and integrity.
+1. Implement policies that require users to change their temporary passwords upon first login.
+2. Set short expiration times for temporary passwords to minimize the risk window.
+3. Use secure, out-of-band methods for delivering temporary passwords to ensure their confidentiality and integrity.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

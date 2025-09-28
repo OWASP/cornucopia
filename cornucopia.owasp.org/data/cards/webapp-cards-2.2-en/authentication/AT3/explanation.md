@@ -36,11 +36,13 @@ The example (plaintext password interception) is a textbook case of information 
 
 Such vulnerabilities can lead to widespread unauthorized access, data breaches, identity theft, and compromise of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement and enforce secure password policies, including regular changes and strong, unique passwords.
-- Use encryption for data in transit and secure storage methods for sensitive information.
-- Educate users about secure practices, like avoiding password reuse and being cautious of their surroundings when entering passwords.
-- Ensure systems are designed to allow users to change their passwords and keep security questions confidential.
+1. Implement and enforce secure password policies, including regular changes and strong, unique passwords.
+2. Use encryption for data in transit and secure storage methods for sensitive information.
+3. Educate users about secure practices, like avoiding password reuse and being cautious of their surroundings when entering passwords.
+4. Ensure systems are designed to allow users to change their passwords and keep security questions confidential.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

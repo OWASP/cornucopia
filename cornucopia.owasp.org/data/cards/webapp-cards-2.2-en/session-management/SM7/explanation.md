@@ -26,10 +26,12 @@ The root issue is unauthorized impersonation via an active session, making **Spo
 
 This flaw can lead to unauthorized session access and potential data breaches, as attackers exploit sessions that users believe to be safely closed.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.
-- Design the log out process to completely terminate the session on the server side, not just on the client device.
-- Conduct user experience testing to ensure the log out process is intuitive and effective.
+1. Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.
+2. Design the log out process to completely terminate the session on the server side, not just on the client device.
+3. Conduct user experience testing to ensure the log out process is intuitive and effective.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

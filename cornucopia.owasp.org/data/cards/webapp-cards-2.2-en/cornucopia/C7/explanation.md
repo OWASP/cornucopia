@@ -26,11 +26,13 @@ The STRIDE category applicable here is **Repudiation**.
 
 Inadequate logging and auditing can lead to significant gaps in security oversight, hindering the ability to detect, investigate, and respond to unauthorized activities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement comprehensive logging of all security-relevant events with accurate time-stamping.
-- Ensure that audit trails are complete, immutable, and protected from unauthorized access and modification.
-- Establish a centralized logging system to consolidate logs from various sources for easier monitoring and analysis.
-- Regularly review and update logging and auditing mechanisms to ensure they capture all necessary information and are secure against tampering.
+1. Implement comprehensive logging of all security-relevant events with accurate time-stamping.
+2. Ensure that audit trails are complete, immutable, and protected from unauthorized access and modification.
+3. Establish a centralized logging system to consolidate logs from various sources for easier monitoring and analysis.
+4. Regularly review and update logging and auditing mechanisms to ensure they capture all necessary information and are secure against tampering.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

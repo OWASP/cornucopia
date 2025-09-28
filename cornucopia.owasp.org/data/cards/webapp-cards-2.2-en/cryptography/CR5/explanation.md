@@ -22,10 +22,12 @@ The main impact than is that confidential information is exposed, rather than mo
 
 Such a vulnerability can lead to data exposure and breaches, as it allows sensitive information to be processed or transmitted without the intended cryptographic protection.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.
-- Implement robust error handling that maintains security standards even when cryptographic processes encounter issues.
-- Regularly test and audit cryptographic systems to ensure they respond securely to failures and do not expose sensitive data.
+1. Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.
+2. Implement robust error handling that maintains security standards even when cryptographic processes encounter issues.
+3. Regularly test and audit cryptographic systems to ensure they respond securely to failures and do not expose sensitive data.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

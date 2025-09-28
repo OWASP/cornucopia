@@ -24,10 +24,12 @@ The attack is centered on unauthorized impersonation via inadequate session enfo
 
 Custom-built session management systems that lack the rigor of standard frameworks can lead to serious security breaches, including unauthorized access and data theft.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Where possible, replace self-built session management systems with standard, well-tested frameworks or modules known for robust security.
-- If a custom solution is necessary, ensure it is developed according to industry best practices and undergoes rigorous security testing.
-- Regularly review and update the session management system to incorporate the latest security advancements and patches.
+1. Where possible, replace self-built session management systems with standard, well-tested frameworks or modules known for robust security.
+2. If a custom solution is necessary, ensure it is developed according to industry best practices and undergoes rigorous security testing.
+3. Regularly review and update the session management system to incorporate the latest security advancements and patches.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

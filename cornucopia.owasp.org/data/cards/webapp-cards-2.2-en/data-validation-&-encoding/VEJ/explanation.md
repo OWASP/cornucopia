@@ -22,10 +22,12 @@ Toby is modifying or disabling the code/routines that enforce validation/encodin
 
 Such control over validation and encoding routines can lead to a wide array of security issues, including data corruption, unauthorized access, and execution of harmful scripts.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement strict access controls and monitoring to prevent unauthorized changes to validation and encoding routines.
-- Regularly review and audit these processes to ensure they haven't been tampered with.
-- Establish robust checks and balances within the development and deployment processes to detect any unauthorized modifications.
+1. Implement strict access controls and monitoring to prevent unauthorized changes to validation and encoding routines.
+2. Regularly review and audit these processes to ensure they haven't been tampered with.
+3. Establish robust checks and balances within the development and deployment processes to detect any unauthorized modifications.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

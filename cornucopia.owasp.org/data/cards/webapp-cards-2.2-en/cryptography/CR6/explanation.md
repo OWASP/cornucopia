@@ -16,17 +16,19 @@ Romain targets an application that handles sensitive user data but fails to encr
 
 Romain can both read and modify sensitive unencrypted data. That means two STRIDE categories are in play, depending on which impact you emphasize:
 
-- **Information Disclosure**: because he can read cryptographic secrets, credentials, and personal/commercially-sensitive data in memory or in transit.
-- **Tampering** because he can modify unencrypted data (e.g., session identifiers, payment details) in memory or on the wire.
+1. **Information Disclosure**: because he can read cryptographic secrets, credentials, and personal/commercially-sensitive data in memory or in transit.
+2. **Tampering** because he can modify unencrypted data (e.g., session identifiers, payment details) in memory or on the wire.
 
 ### What can go Wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data, data breaches, and potential manipulation of critical information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement encryption for sensitive data while it is in memory and during processing within the application.
-- Ensure that all data communications, both internal and external, are secured with robust encryption methods.
-- Regularly review and update encryption practices to cover data in use, in transit, and during communications with external systems.
+1. Implement encryption for sensitive data while it is in memory and during processing within the application.
+2. Ensure that all data communications, both internal and external, are secured with robust encryption methods.
+3. Regularly review and update encryption practices to cover data in use, in transit, and during communications with external systems.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

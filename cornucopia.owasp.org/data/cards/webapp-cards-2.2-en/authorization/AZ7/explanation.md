@@ -25,10 +25,12 @@ The consequence of such an action leads to **Information Disclosure** in most ca
 
 This type of security lapse can lead to unauthorized access to critical application functionalities, potential data breaches, and misuse of sensitive system properties.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement robust, role-based authorization checks that rigorously define and enforce access levels for different user roles.
-- Ensure that each application function, object, and property is protected by appropriate authorization verifications.
-- Regularly review and update the authorization system to address new functionalities and changing user roles
+1. Implement robust, role-based authorization checks that rigorously define and enforce access levels for different user roles.
+2. Ensure that each application function, object, and property is protected by appropriate authorization verifications.
+3. Regularly review and update the authorization system to address new functionalities and changing user roles
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

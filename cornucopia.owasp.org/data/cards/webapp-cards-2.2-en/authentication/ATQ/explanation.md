@@ -24,10 +24,12 @@ Even though the main website is secure, weaker checks in the mobile app allow hi
 
 Such inconsistencies can lead to unauthorized access and exploitation of authentication weaknesses, posing a significant risk to user data and system integrity.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure uniform implementation of robust authentication measures across all functionalities and channels, including mobile and web platforms, APIs, and customer service points.
-- Regularly review and update authentication protocols to maintain consistent security standards across all access points.
-- Conduct thorough testing and audits to identify and rectify any disparities in authentication enforcement.
+1. Ensure uniform implementation of robust authentication measures across all functionalities and channels, including mobile and web platforms, APIs, and customer service points.
+2. Regularly review and update authentication protocols to maintain consistent security standards across all access points.
+3. Conduct thorough testing and audits to identify and rectify any disparities in authentication enforcement.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -24,10 +24,12 @@ Lack of monitoring and automated response means there’s no immediate accountab
 
 The inability to detect and respond to malicious activities in real-time can lead to extended unauthorized access, data breaches, and significant exploitation of system vulnerabilities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement real-time monitoring tools to detect abnormal or malicious activities as they occur.
-- Develop responsive measures that can automatically react to potential threats, such as account locks, alerts, and triggering additional authentication processes.
-- Regularly update and test the system’s monitoring and response capabilities to ensure they effectively identify and counteract emerging threats.
+1. Implement real-time monitoring tools to detect abnormal or malicious activities as they occur.
+2. Develop responsive measures that can automatically react to potential threats, such as account locks, alerts, and triggering additional authentication processes.
+3. Regularly update and test the system’s monitoring and response capabilities to ensure they effectively identify and counteract emerging threats.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

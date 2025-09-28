@@ -23,10 +23,12 @@ The core threat is exposure of confidential information — he is reading data h
 
 This vulnerability can lead to data exposure and breaches, especially if endpoint security is compromised or if there are gaps in the transmission channel’s encryption.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure that sensitive data is encrypted independently before it is sent over the communication channel.
-- Maintain robust endpoint security to protect data when it is encrypted or decrypted.
-- Regularly review and strengthen both data and channel encryption practices to cover potential vulnerabilities.
+1. Ensure that sensitive data is encrypted independently before it is sent over the communication channel.
+2. Maintain robust endpoint security to protect data when it is encrypted or decrypted.
+3. Regularly review and strengthen both data and channel encryption practices to cover potential vulnerabilities.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

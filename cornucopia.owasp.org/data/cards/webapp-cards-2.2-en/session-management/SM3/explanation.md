@@ -22,10 +22,12 @@ The system’s failure to restrict or monitor concurrent sessions enables him to
 
 Allowing concurrent sessions without proper controls can lead to unauthorized access and exploitation of user accounts, potentially compromising data security and privacy.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement a policy to restrict or carefully monitor concurrent sessions. Options include limiting the number of simultaneous sessions per user or requiring additional verification for new sessions.
-- Set up alerts for unusual patterns of concurrent access, such as logins from geographically distant locations within a short timeframe.
-- Regularly audit session management policies to ensure they effectively protect against unauthorized concurrent access. 
+1. Implement a policy to restrict or carefully monitor concurrent sessions. Options include limiting the number of simultaneous sessions per user or requiring additional verification for new sessions.
+2. Set up alerts for unusual patterns of concurrent access, such as logins from geographically distant locations within a short timeframe.
+3. Regularly audit session management policies to ensure they effectively protect against unauthorized concurrent access. 
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

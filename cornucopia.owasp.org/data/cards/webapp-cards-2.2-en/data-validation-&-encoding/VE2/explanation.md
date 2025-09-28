@@ -23,11 +23,13 @@ Verbose error messages, default files, backup/test copies, exposed source code a
 
 This kind of information leakage can lead to targeted attacks, exploitation of system vulnerabilities, and significant security breaches.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement generic, non-revealing error messages.
-- Ensure system configurations are secure and default installation files are removed or updated.
-- Regularly audit and clean up any old, test, or backup files.
-- Keep source code strictly protected from public exposure.
+1. Implement generic, non-revealing error messages.
+2. Ensure system configurations are secure and default installation files are removed or updated.
+3. Regularly audit and clean up any old, test, or backup files.
+4. Keep source code strictly protected from public exposure.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

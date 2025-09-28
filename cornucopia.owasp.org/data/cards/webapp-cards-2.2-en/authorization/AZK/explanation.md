@@ -21,10 +21,12 @@ Ryan modifies authorization settings. That means that he is **Tampering** with t
 
 Such vulnerabilities can lead to unauthorized access, data breaches, and potentially full system compromise.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure that all mechanisms for altering authorization controls and permissions are strictly secured and accessible only by highly trusted roles.
-- Implement robust monitoring systems to detect and alert any unauthorized changes to authorization configurations.
-- Regularly audit authorization controls and permissions to ensure they have not been tampered with and remain appropriate for user roles.
+1. Ensure that all mechanisms for altering authorization controls and permissions are strictly secured and accessible only by highly trusted roles.
+2. Implement robust monitoring systems to detect and alert any unauthorized changes to authorization configurations.
+3. Regularly audit authorization controls and permissions to ensure they have not been tampered with and remain appropriate for user roles.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
