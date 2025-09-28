@@ -26,11 +26,13 @@ Although this could also enable unauthorized access, the root cause is the appli
 
 These vulnerabilities can lead to significant security breaches, unauthorized access, and potential exploitation of sensitive data and system functionalities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure that all tools used for compiling the application are up-to-date and free from known vulnerabilities.
-- Configure the application with secure settings by default and regularly review these settings to align with evolving security standards. 
-- Create comprehensive security documentation and ensure it is effectively communicated and accessible to all operational teams. 
-- Conduct regular security audits and provide ongoing training to operational teams to keep them informed about security best practices and application-specific requirements.
+1. Ensure that all tools used for compiling the application are up-to-date and free from known vulnerabilities.
+2. Configure the application with secure settings by default and regularly review these settings to align with evolving security standards. 
+3. Create comprehensive security documentation and ensure it is effectively communicated and accessible to all operational teams. 
+4. Conduct regular security audits and provide ongoing training to operational teams to keep them informed about security best practices and application-specific requirements.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

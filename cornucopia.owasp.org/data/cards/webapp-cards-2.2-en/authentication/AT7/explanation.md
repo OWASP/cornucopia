@@ -26,10 +26,12 @@ The root weakness here is inadequate authentication protections (no lockouts, we
 
 This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks.
-- Enforce strong password policies, including minimum length, complexity, and expiration requirements.
-- Prohibit the reuse of previous passwords to enhance security against repeated attack attempts.
+1. Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks.
+2. Enforce strong password policies, including minimum length, complexity, and expiration requirements.
+3. Prohibit the reuse of previous passwords to enhance security against repeated attack attempts.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -24,11 +24,13 @@ Accessing or decompiling source code, and uncovering embedded credentials or bus
 
 Such exposure of source code and business logic can lead to unauthorized access, intellectual property theft, and exploitation of hidden vulnerabilities or secrets within the application.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Securely store source code in access-controlled repositories and limit distribution of compiled code.
-- Implement code obfuscation techniques to prevent easy decompilation and understanding of business logic in distributed binaries. 
-- Avoid embedding secrets in the source code. Instead, use secure methods for managing and accessing credentials and keys.
-- Conduct regular security reviews and audits of source code management practices
+1. Securely store source code in access-controlled repositories and limit distribution of compiled code.
+2. Implement code obfuscation techniques to prevent easy decompilation and understanding of business logic in distributed binaries. 
+3. Avoid embedding secrets in the source code. Instead, use secure methods for managing and accessing credentials and keys.
+4. Conduct regular security reviews and audits of source code management practices
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

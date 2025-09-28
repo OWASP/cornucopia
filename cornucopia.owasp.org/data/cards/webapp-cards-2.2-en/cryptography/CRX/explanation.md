@@ -16,17 +16,19 @@ Susanna targets an application storing highly sensitive user data, protected by 
 
 The primary applicable STRIDE categories for this scenario is **Information Disclosure** or **Tampering** depending on the context.
 
-- STRIDE’s **Information Disclosure** covers unauthorized exposure of sensitive information — which is what occurs when encryption is insufficient and an attacker can decrypt data. Breaking weak or outdated cryptography lets an attacker read confidential data that was supposed to be protected (passwords, PII, cardholder data, secrets).
-- If the cryptographic primitive is providing integrity (signatures or MACs) and an attacker is able to break or bypass that protection so they can alter data without detection, then the primary STRIDE impact is **Tampering**.
+1. STRIDE’s **Information Disclosure** covers unauthorized exposure of sensitive information — which is what occurs when encryption is insufficient and an attacker can decrypt data. Breaking weak or outdated cryptography lets an attacker read confidential data that was supposed to be protected (passwords, PII, cardholder data, secrets).
+2. If the cryptographic primitive is providing integrity (signatures or MACs) and an attacker is able to break or bypass that protection so they can alter data without detection, then the primary STRIDE impact is **Tampering**.
 
 ### What can go Wrong?
 
 Using cryptography that is not sufficiently strong for the required level of protection can lead to data breaches, unauthorized access, and exposure of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Assess the sensitivity and value of the data being protected and ensure the strength of the cryptographic measures is adequate to provide the necessary level of security.
-- Regularly update and upgrade cryptographic algorithms and practices to align with current security standards and to counteract evolving threats.
-- Monitor developments in cryptography and cybersecurity to anticipate and prepare for potential efforts by attackers.
+1. Assess the sensitivity and value of the data being protected and ensure the strength of the cryptographic measures is adequate to provide the necessary level of security.
+2. Regularly update and upgrade cryptographic algorithms and practices to align with current security standards and to counteract evolving threats.
+3. Monitor developments in cryptography and cybersecurity to anticipate and prepare for potential efforts by attackers.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

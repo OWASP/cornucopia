@@ -14,13 +14,13 @@ Primary impact depends on the impact of attack:
 
 ### What can go Wrong?
 
-- Users’ devices get infected with malware, ransomware, or spyware.
-- Sensitive personal or financial data is stolen.
-- Users are tricked into revealing credentials or performing harmful actions.
-- Reputational damage for the application provider.
-- Legal and regulatory consequences if user harm is significant.
-- Reputational damage for the application provider.
-- Legal and regulatory consequences if user harm is significant.
+1. Users’ devices get infected with malware, ransomware, or spyware.
+2. Sensitive personal or financial data is stolen.
+3. Users are tricked into revealing credentials or performing harmful actions.
+4. Reputational damage for the application provider.
+5. Legal and regulatory consequences if user harm is significant.
+6. Reputational damage for the application provider.
+7. Legal and regulatory consequences if user harm is significant.
 
 ### What are you going to do about it?
 

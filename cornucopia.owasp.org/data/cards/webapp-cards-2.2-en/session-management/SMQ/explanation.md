@@ -24,10 +24,12 @@ The attack’s core is unauthorized impersonation via gaps in session enforcemen
 
 Inconsistencies in session management across an application can lead to unauthorized access and potential exploitation of the less secure areas, compromising overall system security.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure uniform implementation of session management controls across all areas and functionalities of the application.
-- Conduct thorough security reviews and testing, especially when integrating new features or modules, to ensure they meet established session management standards.
-- Regularly update and harmonize session management practices to maintain comprehensive and consistent security coverage.
+1. Ensure uniform implementation of session management controls across all areas and functionalities of the application.
+2. Conduct thorough security reviews and testing, especially when integrating new features or modules, to ensure they meet established session management standards.
+3. Regularly update and harmonize session management practices to maintain comprehensive and consistent security coverage.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

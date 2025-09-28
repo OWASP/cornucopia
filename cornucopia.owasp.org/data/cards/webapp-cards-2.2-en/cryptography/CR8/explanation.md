@@ -23,10 +23,12 @@ If what’s exposed are passwords or session identifiers, Eoin may go beyond jus
 
 Storing sensitive business data without secure encryption or hashing can lead to severe data breaches, compromising user privacy and leading to potential financial and reputational damage.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement robust encryption for sensitive data storage, ensuring that even if data is accessed, it remains unintelligible and secure.
-- Use secure hashing algorithms, particularly for storing passwords, to prevent them from being reverted to their original form.
-- Regularly review and update encryption and hashing methods to adhere to current best practices and standards.
+1. Implement robust encryption for sensitive data storage, ensuring that even if data is accessed, it remains unintelligible and secure.
+2. Use secure hashing algorithms, particularly for storing passwords, to prevent them from being reverted to their original form.
+3. Regularly review and update encryption and hashing methods to adhere to current best practices and standards.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

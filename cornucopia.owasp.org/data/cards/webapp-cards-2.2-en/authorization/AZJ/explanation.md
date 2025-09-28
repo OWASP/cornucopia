@@ -24,10 +24,12 @@ The core issue is unauthorized access to sensitive security controls, potentiall
 
 Such vulnerabilities can lead to unauthorized alterations in security settings, potential system breaches, and the compromise of network integrity.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement stringent authorization controls to restrict access to security configurations and ACLs, ensuring only authorized personnel can view or modify them.
-- Regularly audit and monitor access to these settings to detect and respond to any unauthorized attempts.
-- Employ role-based access control (RBAC) to clearly define and enforce access permissions based on user roles
+1. Implement stringent authorization controls to restrict access to security configurations and ACLs, ensuring only authorized personnel can view or modify them.
+2. Regularly audit and monitor access to these settings to detect and respond to any unauthorized attempts.
+3. Employ role-based access control (RBAC) to clearly define and enforce access permissions based on user roles
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

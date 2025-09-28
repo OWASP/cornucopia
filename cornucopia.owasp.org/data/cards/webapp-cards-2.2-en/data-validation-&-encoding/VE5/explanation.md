@@ -21,10 +21,12 @@ Bypassing or mis-using output encoding lets attacker-controlled data be sent to 
 
 These gaps in encoding practices can lead to serious security vulnerabilities, such as XSS attacks, compromising both the system and its users.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure consistent application of centralized encoding routines across all parts of the system.
-- Use the correct encoding methods appropriate for each specific data context.
-- Regularly review and update encoding practices to cover all potential data handling scenarios.
+1. Ensure consistent application of centralized encoding routines across all parts of the system.
+2. Use the correct encoding methods appropriate for each specific data context.
+3. Regularly review and update encoding practices to cover all potential data handling scenarios.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

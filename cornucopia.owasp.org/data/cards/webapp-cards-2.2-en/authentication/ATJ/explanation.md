@@ -24,10 +24,12 @@ The system’s failure is that it assumes authentication is done elsewhere or no
 
 Such an absence of authentication exposes the system to unauthorized access, potentially leading to data breaches and exploitation of sensitive resources.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement authentication requirements for all resources and services, regardless of their perceived security level.
-- Clearly define and document authentication responsibilities to ensure no system component is left unprotected due to assumptions about other systems’ security measures.
-- Regularly audit the entire system to identify and rectify any areas lacking proper authentication controls.
+1. Implement authentication requirements for all resources and services, regardless of their perceived security level.
+2. Clearly define and document authentication responsibilities to ensure no system component is left unprotected due to assumptions about other systems’ security measures.
+3. Regularly audit the entire system to identify and rectify any areas lacking proper authentication controls.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

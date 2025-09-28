@@ -19,9 +19,11 @@ By bypassing centralized validation routines, Jason is able to inject malicious 
 
 Such lapses in validation can lead to severe security breaches, including data corruption, unauthorized access, and other forms of system compromise.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Ensure that centralized validation routines are uniformly applied to all input sources, including web forms, APIs, and any other data entry points.
-- Regularly audit and update validation protocols to cover all potential avenues of data input.
+1. Ensure that centralized validation routines are uniformly applied to all input sources, including web forms, APIs, and any other data entry points.
+2. Regularly audit and update validation protocols to cover all potential avenues of data input.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

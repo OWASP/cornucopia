@@ -22,10 +22,12 @@ Even though no valid credentials were provided, the system treats her as authent
 
 This vulnerability can lead to unauthorized access to sensitive data and systems, potentially compromising the entire network or application.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Design and configure authentication mechanisms to default to a 'deny access' state in case of any failure.
-- Regularly test and validate the authentication process to ensure it behaves as expected during system errors or downtime.
-- Implement robust monitoring and alerting mechanisms to quickly detect and respond to authentication system failures.
+1. Design and configure authentication mechanisms to default to a 'deny access' state in case of any failure.
+2. Regularly test and validate the authentication process to ensure it behaves as expected during system errors or downtime.
+3. Implement robust monitoring and alerting mechanisms to quickly detect and respond to authentication system failures.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

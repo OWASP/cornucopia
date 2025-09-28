@@ -24,10 +24,12 @@ The issue isn’t that the data is leaked by accident (Information Disclosure) o
 
 This vulnerability can lead to unauthorized access to sensitive functions and data, posing a significant risk to the organization’s security and integrity.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement strong authentication methods like 2FA for an added layer of security, particularly for critical functions.
-- Introduce re-authentication processes for accessing sensitive areas or performing high-risk operations.
-- Regularly review and update authentication protocols to ensure they align with the best practices and emerging security threats.
+1. Implement strong authentication methods like 2FA for an added layer of security, particularly for critical functions.
+2. Introduce re-authentication processes for accessing sensitive areas or performing high-risk operations.
+3. Regularly review and update authentication protocols to ensure they align with the best practices and emerging security threats.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

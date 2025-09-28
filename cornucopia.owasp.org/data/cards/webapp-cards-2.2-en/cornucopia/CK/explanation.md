@@ -26,11 +26,13 @@ STRIDE explicitly associates attacks that reduce or eliminate system availabilit
 
 Such vulnerabilities can lead to the application becoming unavailable or unresponsive, impacting user experience, and potentially causing financial and reputational damage to the service provider.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement robust rate limiting on user requests, particularly for resource-intensive functionalities.
-- Monitor and optimize the application’s performance to handle high volumes of traffic and processing.
-- Regularly conduct stress tests to identify and address potential denial of service vulnerabilities.
-- Develop and maintain an incident response plan to quickly mitigate and recover from denial of service attacks.
+1. Implement robust rate limiting on user requests, particularly for resource-intensive functionalities.
+2. Monitor and optimize the application’s performance to handle high volumes of traffic and processing.
+3. Regularly conduct stress tests to identify and address potential denial of service vulnerabilities.
+4. Develop and maintain an incident response plan to quickly mitigate and recover from denial of service attacks.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

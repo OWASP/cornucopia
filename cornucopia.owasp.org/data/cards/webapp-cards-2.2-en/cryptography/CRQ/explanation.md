@@ -23,10 +23,12 @@ Once Justin can read those secrets, he can then leverage them for further attack
 
 Access to master cryptographic secrets can lead to widespread system compromise, unauthorized data access, and the potential decryption of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Secure master cryptographic secrets with the highest level of protection, including physical and logical security measures.
-- Utilize strong, non-predictable algorithms for generating master secrets and ensure they are stored in highly secure, access-controlled environments.
-- Regularly rotate and update master secrets while keeping backups and recovery processes secure and confidential.
+1. Secure master cryptographic secrets with the highest level of protection, including physical and logical security measures.
+2. Utilize strong, non-predictable algorithms for generating master secrets and ensure they are stored in highly secure, access-controlled environments.
+3. Regularly rotate and update master secrets while keeping backups and recovery processes secure and confidential.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -27,11 +27,12 @@ STRIDE’s **Tampering** covers unauthorized modification or manipulation of dat
 
 These vulnerabilities can result in severe security issues, such as injection attacks, data corruption, and unauthorized system access.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Define and enforce a standard character set for all data inputs.
-- Prevent complications from multiple encodings by standardizing the encoding process.
-- Ensure complete data conversion into the application’s format (canonicalization) before validation.
-- Use strong typing for variables to prevent type-related security loopholes.
+1. Prevent complications from multiple encodings by standardizing the encoding process.
+2. Ensure complete data conversion into the application’s format (canonicalization) before validation.
+3. Use strong typing for variables to prevent type-related security loopholes.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

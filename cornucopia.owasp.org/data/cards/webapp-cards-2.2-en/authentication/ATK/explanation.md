@@ -24,10 +24,12 @@ The attack is not just exploiting weak authentication, it’s modifying the code
 
 This form of attack can lead to unauthorized system access, data breaches, and potentially allow for widespread manipulation of system functions.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
-- Implement strict access controls and security measures in the code development and deployment process to prevent unauthorized modifications.
-- Regularly review and audit authentication modules to detect any unauthorized changes or vulnerabilities.
-- Employ continuous monitoring tools to track and alert any unusual behavior within authentication routines.
+1. Implement strict access controls and security measures in the code development and deployment process to prevent unauthorized modifications.
+2. Regularly review and audit authentication modules to detect any unauthorized changes or vulnerabilities.
+3. Employ continuous monitoring tools to track and alert any unusual behavior within authentication routines.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
