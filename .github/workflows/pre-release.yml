@@ -144,6 +144,8 @@
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.docx
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_it.docx
-                resources/case/*\.1_case_*
-                source/*\.1-*.yaml
+                resources/case/*\2.2_case_*
+                resources/case/*\1.1_case_*
+                source/*1\.1-*.yaml
+                source/*2\.2-*.yaml
                 output/owasp_cornucopia_webapp_3.0_en.zip
