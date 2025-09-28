@@ -21,6 +21,8 @@ Because the application does not properly reject it, Shamun’s crafted input is
 
 This vulnerability can lead to various security threats, including data leakage, unauthorized actions within the system, and the execution of malicious code.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement a strict policy to reject any data that fails validation checks. 

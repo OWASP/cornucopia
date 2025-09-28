@@ -25,6 +25,8 @@ The consequence of such an action leads to **Information Disclosure** in most ca
 
 This type of security lapse can lead to unauthorized access to critical application functionalities, potential data breaches, and misuse of sensitive system properties.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement robust, role-based authorization checks that rigorously define and enforce access levels for different user roles.

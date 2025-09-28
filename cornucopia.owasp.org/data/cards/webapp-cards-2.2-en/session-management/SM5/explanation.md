@@ -28,6 +28,8 @@ By hijacking a valid session ID, he assumes the identity of the authenticated us
 
 Such practices expose users to session hijacking and potential privacy breaches, as attackers can easily predict or guess session IDs.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement a system to regenerate session IDs upon any change in user state, especially during authentication processes.

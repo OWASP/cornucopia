@@ -30,6 +30,8 @@ By using these stolen session IDs, he hijacks active sessions and impersonates t
 
 Such practices expose users to session hijacking and potential data breaches, as their session identifiers can be easily intercepted and misused.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure all communication involving session identifiers is encrypted, preferably using HTTPS.

@@ -20,6 +20,8 @@ The primary STRIDE category for being able to “inputs malicious field names or
 
 This form of attack can lead to unauthorized access, data breaches, and potentially full system compromise.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement strict contextual validation for all data inputs, particularly focusing on user roles and process stages.

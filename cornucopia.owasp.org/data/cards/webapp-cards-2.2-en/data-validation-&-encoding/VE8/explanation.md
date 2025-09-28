@@ -20,6 +20,8 @@ If Oana can push malicious payloads through un-sanitized channels (e.g., overloo
 
 This loophole can lead to significant security breaches, including Cross-Site Scripting (XSS) attacks, unauthorized access, and data compromise.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure that sanitization routines are uniformly applied to all forms of data input, including both primary and secondary sources.

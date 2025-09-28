@@ -24,6 +24,8 @@ The attack is not just exploiting weak authentication, it’s modifying the code
 
 This form of attack can lead to unauthorized system access, data breaches, and potentially allow for widespread manipulation of system functions.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement strict access controls and security measures in the code development and deployment process to prevent unauthorized modifications.

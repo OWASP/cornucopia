@@ -23,6 +23,8 @@ The core threat is exposure of confidential information — he is reading data h
 
 This vulnerability can lead to data exposure and breaches, especially if endpoint security is compromised or if there are gaps in the transmission channel’s encryption.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure that sensitive data is encrypted independently before it is sent over the communication channel.

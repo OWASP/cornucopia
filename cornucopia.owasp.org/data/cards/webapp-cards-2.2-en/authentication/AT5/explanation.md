@@ -30,6 +30,8 @@ if the default/test account has higher-than-normal rights (e.g., admin), Javier 
 
 Such vulnerabilities allow for unauthorized access and control, leading to potential data breaches, system manipulations, and other security risks.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure all default credentials are changed upon system setup or application installation.

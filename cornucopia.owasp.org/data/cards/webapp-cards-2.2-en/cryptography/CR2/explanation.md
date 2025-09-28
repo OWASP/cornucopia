@@ -23,6 +23,8 @@ The data was only obfuscated, not securely encrypted, so confidential informatio
 
 Such practices can lead to unauthorized data access and breaches, as obfuscation alone is insufficient to protect against determined attackers.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Replace obfuscation techniques with approved cryptographic functions for data protection.

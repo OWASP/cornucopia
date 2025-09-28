@@ -26,6 +26,8 @@ STRIDE explicitly associates attacks that reduce or eliminate system availabilit
 
 Such vulnerabilities can lead to the application becoming unavailable or unresponsive, impacting user experience, and potentially causing financial and reputational damage to the service provider.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement robust rate limiting on user requests, particularly for resource-intensive functionalities.

@@ -27,6 +27,8 @@ Exploiting buffer overflows or unsafe functions to inject malicious code directl
 
 Such vulnerabilities can lead to a range of issues, from unauthorized access and data breaches to complete system compromise.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Replace risky functions with safer alternatives and follow secure coding practices.

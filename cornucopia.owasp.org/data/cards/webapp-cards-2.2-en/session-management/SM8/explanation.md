@@ -24,6 +24,8 @@ The attack is not about impersonating someone new (Spoofing), but about continui
 
 This vulnerability can lead to unauthorized access and misuse of privileges, especially in cases where user privileges have been altered or revoked.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement a system for periodic re-authentication, especially for sessions that last beyond a certain time threshold.

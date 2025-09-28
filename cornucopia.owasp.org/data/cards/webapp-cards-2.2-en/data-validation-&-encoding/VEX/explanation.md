@@ -25,6 +25,8 @@ STRIDE’s **Spoofing** covers threats where an attacker assumes another identit
 
 This kind of vulnerability can lead to identity theft, unauthorized access, and potentially severe data breaches.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement strict validation of user-defined and client-side data.

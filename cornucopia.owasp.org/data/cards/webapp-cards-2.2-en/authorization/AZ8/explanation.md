@@ -28,6 +28,8 @@ The attack is focused on modifying the intended process or control data, which i
 
 Such vulnerabilities can lead to process integrity breaches, unauthorized access to restricted functionalities, and potential financial losses or data inconsistencies.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Design the system to strictly enforce the intended sequence and flow of processes.

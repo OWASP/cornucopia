@@ -23,6 +23,8 @@ Verbose error messages, default files, backup/test copies, exposed source code a
 
 This kind of information leakage can lead to targeted attacks, exploitation of system vulnerabilities, and significant security breaches.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement generic, non-revealing error messages.

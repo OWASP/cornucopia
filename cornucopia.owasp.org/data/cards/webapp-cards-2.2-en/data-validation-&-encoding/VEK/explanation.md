@@ -19,6 +19,8 @@ The injection itself modifies the server-side processing pipeline (SQL engine, O
 
 Such vulnerabilities can lead to severe consequences, including unauthorized data access, manipulation of server-side operations, and potentially full system compromise.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement and rigorously enforce the use of strongly typed parameterized interfaces for all server-side data processing.

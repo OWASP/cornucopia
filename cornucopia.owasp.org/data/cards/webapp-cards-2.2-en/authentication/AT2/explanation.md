@@ -26,6 +26,8 @@ The absence of alerts/notifications means the legitimate user cannot detect or c
 
 This kind of vulnerability can lead to unnoticed account takeovers, prolonged unauthorized access, and potentially significant data breaches or identity theft.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement immediate alert systems for any authentication-related activities, especially password resets or changes.

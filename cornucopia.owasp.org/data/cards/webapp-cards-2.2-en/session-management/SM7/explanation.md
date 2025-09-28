@@ -26,6 +26,8 @@ The root issue is unauthorized impersonation via an active session, making **Spo
 
 This flaw can lead to unauthorized session access and potential data breaches, as attackers exploit sessions that users believe to be safely closed.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.

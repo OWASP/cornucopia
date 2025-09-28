@@ -23,6 +23,8 @@ Romain can both read and modify sensitive unencrypted data. That means two STRID
 
 This vulnerability can lead to unauthorized access to sensitive data, data breaches, and potential manipulation of critical information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement encryption for sensitive data while it is in memory and during processing within the application.

@@ -21,6 +21,8 @@ Bypassing or mis-using output encoding lets attacker-controlled data be sent to 
 
 These gaps in encoding practices can lead to serious security vulnerabilities, such as XSS attacks, compromising both the system and its users.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure consistent application of centralized encoding routines across all parts of the system.

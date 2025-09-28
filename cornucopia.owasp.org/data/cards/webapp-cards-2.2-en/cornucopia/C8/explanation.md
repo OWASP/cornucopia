@@ -28,6 +28,8 @@ Even though the application layer is bypassed, the core effect is exposure of se
 
 Such vulnerabilities can lead to unauthorized data access, data breaches, and potentially compromise the entire network and associated systems.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure secure initial configuration of all network and host infrastructure, as well as supporting services and applications, adhering to best security practices.

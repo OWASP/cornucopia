@@ -36,6 +36,8 @@ The example (plaintext password interception) is a textbook case of information 
 
 Such vulnerabilities can lead to widespread unauthorized access, data breaches, identity theft, and compromise of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement and enforce secure password policies, including regular changes and strong, unique passwords.

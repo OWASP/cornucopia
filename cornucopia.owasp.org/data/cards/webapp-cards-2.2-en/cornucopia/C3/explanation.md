@@ -24,6 +24,8 @@ Accessing or decompiling source code, and uncovering embedded credentials or bus
 
 Such exposure of source code and business logic can lead to unauthorized access, intellectual property theft, and exploitation of hidden vulnerabilities or secrets within the application.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Securely store source code in access-controlled repositories and limit distribution of compiled code.

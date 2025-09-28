@@ -25,6 +25,8 @@ In STRIDE, **Information Disclosure** is about exposing data to unauthorized par
 
 Such vulnerabilities can lead to targeted attacks, including phishing, social engineering, and brute-force attacks, as attackers gain knowledge about valid user accounts.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Avoid using predictable username formats. Encourage or enforce more complex and less guessable usernames.

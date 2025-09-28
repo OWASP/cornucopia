@@ -24,6 +24,8 @@ Lack of monitoring and automated response means there’s no immediate accountab
 
 The inability to detect and respond to malicious activities in real-time can lead to extended unauthorized access, data breaches, and significant exploitation of system vulnerabilities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement real-time monitoring tools to detect abnormal or malicious activities as they occur.

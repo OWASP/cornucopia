@@ -26,6 +26,8 @@ Reliance on other systems for error handling introduces exploitable gaps.
 
 Such vulnerabilities in error handling can lead to unauthorized access, exposure of sensitive information, and potentially allow attackers to manipulate application behavior.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Develop and implement a comprehensive error and exception handling strategy that is consistently applied across the entire application.

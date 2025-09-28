@@ -28,6 +28,8 @@ The attack is focused on resource exhaustion and misuse of intended functionalit
 
 Such misuse can lead to system overloads, degraded performance, unintended application behaviors, and negative impacts on other users.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement rate limiting and usage throttling to prevent excessive use of features.

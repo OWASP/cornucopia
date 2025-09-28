@@ -23,6 +23,8 @@ Once Justin can read those secrets, he can then leverage them for further attack
 
 Storing credentials in an unencrypted format or embedding them in source code can lead to unauthorized system access, data breaches, and potentially severe security incidents.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Avoid storing credentials in the source code. Instead, use secure vaults or environment variables for credential storage.

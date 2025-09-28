@@ -24,6 +24,8 @@ Even though he can view and modify data, the underlying issue is that privilege 
 
 Unsecured administrative tools and interfaces can lead to major data breaches, unauthorized access to sensitive information, and potential system-wide compromises.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement strong authentication measures, such as multi-factor authentication, for all administrative interfaces and tools.

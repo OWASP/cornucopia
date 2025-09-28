@@ -25,6 +25,8 @@ The core threat is unauthorized impersonation, which is **Spoofing**.
 
 Control over session ID generation can lead to session hijacking, unauthorized access, and potential breaches of user privacy and data security.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure that session identifiers are generated using strong, cryptographically secure algorithms that produce random and complex IDs.

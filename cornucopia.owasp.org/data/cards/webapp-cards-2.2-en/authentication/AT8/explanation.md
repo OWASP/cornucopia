@@ -22,6 +22,8 @@ Even though no valid credentials were provided, the system treats her as authent
 
 This vulnerability can lead to unauthorized access to sensitive data and systems, potentially compromising the entire network or application.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Design and configure authentication mechanisms to default to a 'deny access' state in case of any failure.

@@ -23,6 +23,8 @@ The primary applicable STRIDE categories for this scenario is **Information Disc
 
 Using cryptography that is not sufficiently strong for the required level of protection can lead to data breaches, unauthorized access, and exposure of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Assess the sensitivity and value of the data being protected and ensure the strength of the cryptographic measures is adequate to provide the necessary level of security.

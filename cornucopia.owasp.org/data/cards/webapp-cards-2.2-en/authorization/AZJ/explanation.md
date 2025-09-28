@@ -24,6 +24,8 @@ The core issue is unauthorized access to sensitive security controls, potentiall
 
 Such vulnerabilities can lead to unauthorized alterations in security settings, potential system breaches, and the compromise of network integrity.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement stringent authorization controls to restrict access to security configurations and ACLs, ensuring only authorized personnel can view or modify them.

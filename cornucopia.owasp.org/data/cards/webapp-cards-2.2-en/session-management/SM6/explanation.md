@@ -25,6 +25,8 @@ By taking over an active session, he effectively assumes the identity of the leg
 
 This vulnerability can lead to unauthorized session takeovers, leading to potential data theft, financial loss, and privacy breaches.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement and enforce strict inactivity timeouts to automatically log users out after a period of inactivity.

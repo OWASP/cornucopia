@@ -22,6 +22,8 @@ The system’s failure to restrict or monitor concurrent sessions enables him to
 
 Allowing concurrent sessions without proper controls can lead to unauthorized access and exploitation of user accounts, potentially compromising data security and privacy.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement a policy to restrict or carefully monitor concurrent sessions. Options include limiting the number of simultaneous sessions per user or requiring additional verification for new sessions.

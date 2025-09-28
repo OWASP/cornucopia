@@ -27,6 +27,8 @@ STRIDE’s **Tampering** covers unauthorized modification or manipulation of dat
 
 These vulnerabilities can result in severe security issues, such as injection attacks, data corruption, and unauthorized system access.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Prevent complications from multiple encodings by standardizing the encoding process.

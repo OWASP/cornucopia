@@ -24,6 +24,8 @@ The attack is centered on unauthorized impersonation via inadequate session enfo
 
 Custom-built session management systems that lack the rigor of standard frameworks can lead to serious security breaches, including unauthorized access and data theft.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Where possible, replace self-built session management systems with standard, well-tested frameworks or modules known for robust security.

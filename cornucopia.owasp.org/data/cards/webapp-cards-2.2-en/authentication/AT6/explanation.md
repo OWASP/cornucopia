@@ -26,6 +26,8 @@ The system fails to enforce proper lifecycle rules (expiry, one-time use, out-of
 
 This oversight can lead to unauthorized account access, data breaches, and potential exploitation of system vulnerabilities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement policies that require users to change their temporary passwords upon first login.

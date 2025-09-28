@@ -23,6 +23,8 @@ The primary applicable STRIDE categories for this scenario is **Information Disc
 
 Reliance on weak, custom-built cryptographic functions can lead to compromised data security, unauthorized access, and potential breaches of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Replace custom cryptographic functions with well-established, industry-standard algorithms and libraries that have been rigorously tested and proven secure.

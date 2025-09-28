@@ -30,6 +30,8 @@ The core issue in the context of vulnerable/malicious components is that the att
 
 The use of vulnerable or compromised software components can lead to significant security breaches, unauthorized data access, and potential system compromises.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Regularly update all frameworks, libraries, and components to their latest, secure versions.

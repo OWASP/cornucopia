@@ -24,6 +24,8 @@ The system’s failure is that it assumes authentication is done elsewhere or no
 
 Such an absence of authentication exposes the system to unauthorized access, potentially leading to data breaches and exploitation of sensitive resources.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement authentication requirements for all resources and services, regardless of their perceived security level.

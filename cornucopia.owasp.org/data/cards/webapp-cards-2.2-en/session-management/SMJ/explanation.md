@@ -22,6 +22,8 @@ The attack is not about impersonation (Spoofing) per se, but about unauthorized 
 
 Such vulnerabilities can lead to replay attacks, resulting in unauthorized transactions, data breaches, and exploitation of system functionalities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement measures to detect and reject duplicate requests, such as tracking and validating unique tokens for each interaction.

@@ -22,6 +22,8 @@ This scenario is about exploiting trust for malicious gain, typically referred t
 
 Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement robust verification and authentication measures to prevent misuse of the application’s trusted status.

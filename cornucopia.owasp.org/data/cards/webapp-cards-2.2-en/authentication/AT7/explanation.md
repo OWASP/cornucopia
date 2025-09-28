@@ -26,6 +26,8 @@ The root weakness here is inadequate authentication protections (no lockouts, we
 
 This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks.

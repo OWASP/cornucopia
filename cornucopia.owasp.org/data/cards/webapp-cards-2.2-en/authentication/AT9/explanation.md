@@ -24,6 +24,8 @@ The issue isn’t that the data is leaked by accident (Information Disclosure) o
 
 This vulnerability can lead to unauthorized access to sensitive functions and data, posing a significant risk to the organization’s security and integrity.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement strong authentication methods like 2FA for an added layer of security, particularly for critical functions.

@@ -25,6 +25,8 @@ The consequence of such an action leads to **Information Disclosure** in most ca
 
 Such gaps in authorization controls can lead to unauthorized data access, potentially resulting in information leakage, privacy breaches, and compliance violations.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points. 

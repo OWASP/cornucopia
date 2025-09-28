@@ -24,6 +24,8 @@ The core issue is manipulating the system’s handling of data, which fits the d
 
 Such vulnerabilities can lead to unauthorized data disclosure, data breaches, and the potential compromise of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.

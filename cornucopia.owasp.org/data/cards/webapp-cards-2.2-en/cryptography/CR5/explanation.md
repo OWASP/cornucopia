@@ -22,6 +22,8 @@ The main impact than is that confidential information is exposed, rather than mo
 
 Such a vulnerability can lead to data exposure and breaches, as it allows sensitive information to be processed or transmitted without the intended cryptographic protection.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.

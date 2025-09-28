@@ -24,6 +24,8 @@ The primary STRIDE category for “being able to input malicious data due to mis
 
 These oversights can result in significant security breaches, data corruption, and may compromise the integrity and reliability of the entire system.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Rigorously validate all data inputs for their format, type, range, length, and against a comprehensive whitelist.

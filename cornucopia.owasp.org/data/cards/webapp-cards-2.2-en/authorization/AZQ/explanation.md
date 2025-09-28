@@ -24,6 +24,8 @@ The attack exploits lack of privilege checks combined with command injection, al
 
 Such vulnerabilities can lead to unauthorized system access, data breaches, and potential control over critical system functionalities.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement strict input validation and sanitization to prevent command injection attacks.

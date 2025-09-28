@@ -22,6 +22,8 @@ The root issue is unauthorized impersonation via session manipulation, making Sp
 
 Such vulnerabilities can lead to cross-domain attacks, unauthorized session tracking, and potentially session hijacking, compromising user security on multiple applications.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Strictly define and enforce domain and path attributes for all cookies, especially those used for session management, to ensure they are only sent to the appropriate domains and paths.

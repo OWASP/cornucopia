@@ -22,6 +22,8 @@ Xavier is modifying the content/behavior of the application delivered to or exec
 
 This type of vulnerability can lead to client-side attacks like XSS, compromising user data and browser security.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure the use of parameterized interfaces for all data inputs and correctly implement them.

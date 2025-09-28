@@ -25,6 +25,8 @@ The core threat is unauthorized alteration of information or code, which could l
 
 Such vulnerabilities can lead to unauthorized data manipulation, introduction of malware, corrupted system updates, and compromised system functionality.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Implement cryptographic hash functions and digital signatures to ensure data integrity for stored and in-transit data.

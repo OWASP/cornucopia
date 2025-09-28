@@ -23,6 +23,8 @@ Once Justin can read those secrets, he can then leverage them for further attack
 
 Access to master cryptographic secrets can lead to widespread system compromise, unauthorized data access, and the potential decryption of sensitive information.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Secure master cryptographic secrets with the highest level of protection, including physical and logical security measures.

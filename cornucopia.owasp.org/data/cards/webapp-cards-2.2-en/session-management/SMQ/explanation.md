@@ -24,6 +24,8 @@ The attack’s core is unauthorized impersonation via gaps in session enforcemen
 
 Inconsistencies in session management across an application can lead to unauthorized access and potential exploitation of the less secure areas, compromising overall system security.
 
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
 ### What are you going to do about it?
 
 1. Ensure uniform implementation of session management controls across all areas and functionalities of the application.
