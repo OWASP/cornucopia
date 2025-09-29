@@ -19,7 +19,7 @@ The applicable STRIDE category for this scenario is **Information Disclosure**.
 Kyun is able to access sensitive data (passwords, user details) that was not properly protected.
 The data was only obfuscated, not securely encrypted, so confidential information is exposed to an attacker.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such practices can lead to unauthorized data access and breaches, as obfuscation alone is insufficient to protect against determined attackers.
 

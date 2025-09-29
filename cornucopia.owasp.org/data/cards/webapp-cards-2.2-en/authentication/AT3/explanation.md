@@ -32,7 +32,7 @@ Muhammad gains access to confidential information (passwords, secrets) that shou
 STRIDE’s **Information Disclosure** category is specifically about unauthorized exposure of sensitive data.
 The example (plaintext password interception) is a textbook case of information disclosure due to lack of encryption in transit.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to widespread unauthorized access, data breaches, identity theft, and compromise of sensitive information.
 

@@ -24,7 +24,7 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 John predicts or guesses session identifiers because the system does not rotate or randomize them appropriately.
 By hijacking a valid session ID, he assumes the identity of the authenticated user, which is classic **Spoofing**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such practices expose users to session hijacking and potential privacy breaches, as attackers can easily predict or guess session IDs.
 

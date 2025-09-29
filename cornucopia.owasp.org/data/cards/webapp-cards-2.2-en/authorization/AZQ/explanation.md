@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Elevation of Privilege** (EoP).
 Christopher injects a command that the system executes at a higher privilege level than his own user role, gaining unauthorized administrative access.
 The attack exploits lack of privilege checks combined with command injection, allowing him to perform higher-privilege operations.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized system access, data breaches, and potential control over critical system functionalities.
 

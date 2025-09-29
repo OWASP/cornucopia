@@ -22,7 +22,7 @@ Grant’s actions prevent legitimate users from accessing the application.
 The impact is on availability, which is exactly what **Denial of Service** attacks target.
 STRIDE explicitly associates attacks that reduce or eliminate system availability with **Denial of Service**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to the application becoming unavailable or unresponsive, impacting user experience, and potentially causing financial and reputational damage to the service provider.
 

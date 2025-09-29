@@ -19,7 +19,7 @@ The primary applicable STRIDE categories for this scenario is **Information Disc
 1. STRIDE’s **Information Disclosure** covers unauthorized exposure of sensitive information — which is what occurs when encryption is insufficient and an attacker can decrypt data. Breaking weak or outdated cryptography lets an attacker read confidential data that was supposed to be protected (passwords, PII, cardholder data, secrets).
 2. If the cryptographic primitive is providing integrity (signatures or MACs) and an attacker is able to break or bypass that protection so they can alter data without detection, then the primary STRIDE impact is **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Using cryptography that is not sufficiently strong for the required level of protection can lead to data breaches, unauthorized access, and exposure of sensitive information.
 

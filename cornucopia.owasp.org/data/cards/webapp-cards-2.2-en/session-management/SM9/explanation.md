@@ -26,7 +26,7 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Ivan steals session identifiers through insecure transmission, logging, URL parameters, or code exposure.
 By using these stolen session IDs, he hijacks active sessions and impersonates the legitimate user, which is classic **Spoofing**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such practices expose users to session hijacking and potential data breaches, as their session identifiers can be easily intercepted and misused.
 

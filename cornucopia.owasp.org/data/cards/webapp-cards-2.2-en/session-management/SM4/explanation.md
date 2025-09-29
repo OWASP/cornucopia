@@ -18,7 +18,7 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Alison sets cookies for another web application due to insufficient domain/path restrictions, which lets her impersonate users or hijack their sessions on that application.
 The root issue is unauthorized impersonation via session manipulation, making Spoofing the correct primary category.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to cross-domain attacks, unauthorized session tracking, and potentially session hijacking, compromising user security on multiple applications.
 

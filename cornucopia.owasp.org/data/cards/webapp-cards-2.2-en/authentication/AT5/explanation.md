@@ -26,7 +26,7 @@ Spoofing is about pretending to be someone or something you’re not.
 By logging in with default, test, old, or unnecessary accounts, Javier spoofs a legitimate user (or admin), but
 if the default/test account has higher-than-normal rights (e.g., admin), Javier also escalates privileges making **Elevation of Privilege** a secondary impact.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities allow for unauthorized access and control, leading to potential data breaches, system manipulations, and other security risks.
 

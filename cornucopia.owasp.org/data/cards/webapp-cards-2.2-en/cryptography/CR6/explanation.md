@@ -19,7 +19,7 @@ Romain can both read and modify sensitive unencrypted data. That means two STRID
 1. **Information Disclosure**: because he can read cryptographic secrets, credentials, and personal/commercially-sensitive data in memory or in transit.
 2. **Tampering** because he can modify unencrypted data (e.g., session identifiers, payment details) in memory or on the wire.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data, data breaches, and potential manipulation of critical information.
 

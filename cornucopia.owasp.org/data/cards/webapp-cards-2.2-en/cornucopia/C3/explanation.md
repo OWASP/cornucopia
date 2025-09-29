@@ -20,7 +20,7 @@ Andrew is gaining access to sensitive information (source code, embedded secrets
 STRIDE’s **Information Disclosure** covers scenarios where an attacker learns secrets or confidential information without proper authorization.
 Accessing or decompiling source code, and uncovering embedded credentials or business logic, constitutes unauthorized exposure of sensitive data, which is exactly what I**nformation Disclosure** describes.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such exposure of source code and business logic can lead to unauthorized access, intellectual property theft, and exploitation of hidden vulnerabilities or secrets within the application.
 

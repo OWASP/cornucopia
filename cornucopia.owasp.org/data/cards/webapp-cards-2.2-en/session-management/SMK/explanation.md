@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Peter exploits weaknesses in a self-built or weak session management system, allowing him to bypass session controls and assume the identity of legitimate users.
 The attack is centered on unauthorized impersonation via inadequate session enforcement, making **Spoofing** the correct primary category.
 
-### What can go Wrong?
+### What can go wrong?
 
 Custom-built session management systems that lack the rigor of standard frameworks can lead to serious security breaches, including unauthorized access and data theft.
 

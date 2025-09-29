@@ -22,7 +22,7 @@ The scenario falls under STRIDE: **Spoofing**.
 In brute force, dictionary, or credential stuffing attacks, the attacker’s entire goal is to gain access by impersonating a valid user with guessed or stolen credentials.
 The root weakness here is inadequate authentication protections (no lockouts, weak password policy), which makes spoofing identities feasible.
 
-### What can go Wrong?
+### What can go wrong?
 
 This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system.
 

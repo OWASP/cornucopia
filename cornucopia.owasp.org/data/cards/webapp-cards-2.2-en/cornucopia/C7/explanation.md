@@ -22,7 +22,7 @@ The STRIDE category applicable here is **Repudiation**.
 
 **Repudiation** occurs when actions cannot be traced back to the responsible party, typically due to missing or inadequate logging, auditing, or accountability mechanisms.
 
-### What can go Wrong?
+### What can go wrong?
 
 Inadequate logging and auditing can lead to significant gaps in security oversight, hindering the ability to detect, investigate, and respond to unauthorized activities.
 

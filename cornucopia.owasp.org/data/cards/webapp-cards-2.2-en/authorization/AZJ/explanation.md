@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Information Disclosure** and potential
 Dinis, a regular user, can access security configurations and ACLs, which are normally restricted and sensitive, meaning that there is a **Information Disclosure**. In the case that he can modify them, he can grant himself higher privileges, escalating his access.
 The core issue is unauthorized access to sensitive security controls, potentially, enabling privilege escalation.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized alterations in security settings, potential system breaches, and the compromise of network integrity.
 

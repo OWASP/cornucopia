@@ -22,7 +22,7 @@ The scenario involves exploiting weaknesses introduced during development, compi
 The primary impact is that an attacker can manipulate, exploit, or modify the behavior of the application due to these weaknesses.
 Although this could also enable unauthorized access, the root cause is the application's susceptibility to manipulation or misuse, which is characteristic of **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 These vulnerabilities can lead to significant security breaches, unauthorized access, and potential exploitation of sensitive data and system functionalities.
 

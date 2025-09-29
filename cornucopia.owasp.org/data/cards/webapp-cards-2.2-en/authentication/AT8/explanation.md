@@ -18,7 +18,7 @@ That scenario maps directly to STRIDE: **Spoofing**
 Here, Kate bypasses authentication entirely because the system fails insecure (defaults to granting access).
 Even though no valid credentials were provided, the system treats her as authenticated → she is spoofing identity. There might be secondary impacts that maps to the other STRIDE categories depending on the context.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data and systems, potentially compromising the entire network or application.
 

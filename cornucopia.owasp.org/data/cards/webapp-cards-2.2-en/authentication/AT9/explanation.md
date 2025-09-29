@@ -20,7 +20,7 @@ This scenario falls under STRIDE: **Spoofing**.
 Claudia uses weak authentication (password-only, no 2FA, no re-auth for critical functions) to impersonate legitimate users and gain access to high-value resources.
 The issue isn’t that the data is leaked by accident (Information Disclosure) or modified directly (Tampering), but that the system cannot strongly verify identity, making spoofing trivial.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive functions and data, posing a significant risk to the organization’s security and integrity.
 

@@ -17,7 +17,7 @@ Depending on which type of attack you invent, you may be able to:
 
 To address truly unknown or novel threats that don't fit the STRIDE categories, use techniques like adversarial thinking, red teaming, and keeping up with emerging vulnerabilities to anticipate and prepare for these unforeseen risks in a comprehensive threat model.
 
-### What can go Wrong?
+### What can go wrong?
 
 Almost anything, You name it!
 

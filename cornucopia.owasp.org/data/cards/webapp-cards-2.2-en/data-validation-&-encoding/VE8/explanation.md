@@ -16,7 +16,7 @@ Bypassing centralized sanitization routines because they are not applied everywh
 Sanitization routines are meant to enforce integrity by ensuring data isn’t maliciously altered.
 If Oana can push malicious payloads through un-sanitized channels (e.g., overlooked URL parameters, hidden forms), she is modifying input data in a way the system was supposed to prevent.
 
-### What can go Wrong?
+### What can go wrong?
 
 This loophole can lead to significant security breaches, including Cross-Site Scripting (XSS) attacks, unauthorized access, and data compromise.
 

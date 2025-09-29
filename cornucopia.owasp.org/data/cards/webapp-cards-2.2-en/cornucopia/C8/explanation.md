@@ -24,7 +24,7 @@ David is accessing data he should not be able to see because of weaknesses in th
 The primary impact is that confidential information is revealed to an unauthorized party.
 Even though the application layer is bypassed, the core effect is exposure of sensitive data, which aligns with **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized data access, data breaches, and potentially compromise the entire network and associated systems.
 

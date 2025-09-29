@@ -22,7 +22,7 @@ The primary applicable STRIDE categories for this scenario is **Information Disc
 
 Because Gunter can intercept and decrypt the data in transit due to weak protocol deployment, misconfigured SSL/TLS, or untrusted/invalid certificates. This is a confidentiality failure, but as he can also modify the encrypted data (MITM style, degrade the connection, or re-encrypt altered content), it also falls into **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to data interception, unauthorized access, and information tampering, potentially compromising user privacy and data integrity.
 

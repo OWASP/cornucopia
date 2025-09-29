@@ -12,7 +12,7 @@ Primary impact depends on the impact of attack:
 2. **Phishing / impersonation**: Could be **Spoofing** or **Information Disclosure**.
 3. **Data exfiltration** could be **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 1. Users’ devices get infected with malware, ransomware, or spyware.
 2. Sensitive personal or financial data is stolen.

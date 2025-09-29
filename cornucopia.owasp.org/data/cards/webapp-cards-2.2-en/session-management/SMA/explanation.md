@@ -16,7 +16,7 @@ Inventing a new session management attack could lead to:
 
 STRIDE categories affected, depends on the context. Potentially, all six may be affected (**Spoofing**, **Tampering**, **Repudiation**, **Information Disclosure**, **Elevation of Privilege**, **Denial of Service**).
 
-### What can go Wrong?
+### What can go wrong?
 
 Hijacking, escalation, data leaks, denial of service, loss of auditability.
 

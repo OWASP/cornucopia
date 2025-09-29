@@ -17,7 +17,7 @@ Shamun discovers that when certain inputs fail validation checks on your website
 Shamun is deliberately submitting malformed or invalid data.
 Because the application does not properly reject it, Shamun’s crafted input is accepted and modifies the system’s behavior or state in unintended ways. Hence **Tampering** is the most applicable category.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to various security threats, including data leakage, unauthorized actions within the system, and the execution of malicious code.
 

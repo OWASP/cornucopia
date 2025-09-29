@@ -23,7 +23,7 @@ Lee is altering or influencing the application’s behavior through exploitation
 **Tampering** in STRIDE covers unauthorized modification of data or code or causing the application to behave differently than intended, which is what occurs here.
 Exploiting buffer overflows or unsafe functions to inject malicious code directly falls under **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to a range of issues, from unauthorized access and data breaches to complete system compromise.
 

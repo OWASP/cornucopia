@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Elevation of Privilege**.
 Richard exploits the fact that centralized authorization is not applied consistently across all modules. By targeting modules that bypass the central controls, he accesses sensitive files and actions beyond his permissions.
 The core issue is inadequate enforcement of authorization, allowing a user to perform higher-privilege operations than intended.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such inconsistencies in authorization control application can lead to unauthorized access to sensitive functionalities and data, posing a significant risk to the application’s security.
 

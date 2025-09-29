@@ -20,7 +20,7 @@ This scenario maps directly to STRIDE: **Spoofing**.
 Even though no credentials are provided, Mark gains access to the system without authentication, effectively being treated as a valid user.
 The system’s failure is that it assumes authentication is done elsewhere or not needed — this lets an attacker bypass identity verification entirely.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such an absence of authentication exposes the system to unauthorized access, potentially leading to data breaches and exploitation of sensitive resources.
 

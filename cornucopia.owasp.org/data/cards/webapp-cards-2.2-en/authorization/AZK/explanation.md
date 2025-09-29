@@ -17,7 +17,7 @@ Ryan targets an enterprise application that has loosely managed authorization co
 This scenario maps primarily to STRIDE: **Elevation of Privilege** (EoP).
 Ryan modifies authorization settings. That means that he is **Tampering** with the settings, but as a direct result, he grants himself higher privileges, which is **Elevation of Privilege**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized access, data breaches, and potentially full system compromise.
 

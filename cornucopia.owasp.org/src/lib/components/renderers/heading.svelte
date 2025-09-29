@@ -76,7 +76,7 @@
     h2
     {
       font-size: 1.8rem;
-      padding: .5rem;
+      padding: .5rem .5rem .5rem 0;
       font-weight: bold;
      }
 

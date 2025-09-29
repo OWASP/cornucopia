@@ -18,7 +18,7 @@ This scenario maps primarily to STRIDE: **Elevation of Privilege**.
 Kelly exploits a non-secure fallback in the authorization mechanism. When the system encounters an error, it defaults to granting access, allowing her to access areas she normally shouldn’t.
 The attack is not about impersonating someone else (Spoofing), but about accessing resources without proper authorization, which is classic **Elevation of Privilege**.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data or functionalities, potentially compromising the entire system’s security.
 

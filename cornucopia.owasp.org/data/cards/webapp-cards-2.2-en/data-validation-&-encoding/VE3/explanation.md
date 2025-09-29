@@ -20,7 +20,7 @@ Robert attacks by submitting a form on your website. He intentionally uses an un
 
 The primary STRIDE category for “being able to input malicious data due to missing protocol/structure/element validation” is **Tampering** with possible secondary impacts into **Information Disclosure**, **DoS**, or **Elevation of Privilege** depending on how the malformed data is exploited.
 
-### What can go Wrong?
+### What can go wrong?
 
 These oversights can result in significant security breaches, data corruption, and may compromise the integrity and reliability of the entire system.
 

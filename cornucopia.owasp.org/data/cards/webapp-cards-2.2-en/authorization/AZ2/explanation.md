@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Tampering**.
 Tim is able to redirect or forward data to locations under his control, altering the intended path or destination of sensitive information.
 The core issue is manipulating the system’s handling of data, which fits the definition of **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized data disclosure, data breaches, and the potential compromise of sensitive information.
 

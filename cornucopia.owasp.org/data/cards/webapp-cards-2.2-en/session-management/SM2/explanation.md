@@ -21,7 +21,7 @@ William manipulates session ID generation so he can predict valid session identi
 By doing this, he can assume the identity of another user without knowing their credentials.
 The core threat is unauthorized impersonation, which is **Spoofing**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Control over session ID generation can lead to session hijacking, unauthorized access, and potential breaches of user privacy and data security.
 

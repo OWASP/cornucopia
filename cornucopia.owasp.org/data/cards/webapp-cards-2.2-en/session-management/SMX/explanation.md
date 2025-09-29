@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Marce forges requests that appear to originate from an authenticated user because the server cannot distinguish legitimate requests from maliciously crafted ones.
 The attack allows her to perform actions on behalf of the user, which is impersonation—classic **Spoofing**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities expose users to CSRF attacks, where attackers can manipulate users' actions without their knowledge, potentially leading to unauthorized state changes and data breaches.
 

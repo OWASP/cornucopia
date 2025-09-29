@@ -20,7 +20,7 @@ Dan is modifying the cryptographic routines themselves — the code that enforce
 By altering this code, he changes the behavior of the system, allowing him to bypass security protections (e.g., decrypt data, predict random values).
 STRIDE defines **Tampering** as the unauthorized modification of data or code, which is what is happening here.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such manipulation can lead to the compromise of entire cryptographic systems, rendering them ineffective and exposing sensitive data to unauthorized access or manipulation.
 

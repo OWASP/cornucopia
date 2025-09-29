@@ -19,7 +19,7 @@ Brian attacks by accessing a server error page that is poorly configured. Instea
 The situation falls under the **Information Disclosure** category in the STRIDE threat modeling framework.
 Verbose error messages, default files, backup/test copies, exposed source code all give attackers extra visibility into the system’s inner workings, the risk is therefor **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 This kind of information leakage can lead to targeted attacks, exploitation of system vulnerabilities, and significant security breaches.
 

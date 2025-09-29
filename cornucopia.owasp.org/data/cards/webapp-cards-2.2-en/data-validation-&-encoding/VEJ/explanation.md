@@ -18,7 +18,7 @@ Toby exploits his control by disabling certain input validation checks on a form
 
 Toby is modifying or disabling the code/routines that enforce validation/encoding — that’s an integrity attack which alters the system processes or data so that malicious input is accepted. In STRIDE, that maps directly to **Tampering**, but the consequences of that tampering (XSS, RCE, auth bypass) may map to other STRIDE categories such as Elevation of Privilege or Information Disclosure, so treat those as secondary impacts.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such control over validation and encoding routines can lead to a wide array of security issues, including data corruption, unauthorized access, and execution of harmful scripts.
 

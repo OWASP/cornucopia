@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Elevation of Privilege**.
 In this case, Matt exploits long sessions without periodic re-authentication. Even though the legitimate user’s privileges are reduced during the day, the session retains the previous access rights.
 The attack is not about impersonating someone new (Spoofing), but about continuing to have unauthorized privileges, which is classic **Elevation of Privilege**.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access and misuse of privileges, especially in cases where user privileges have been altered or revoked.
 

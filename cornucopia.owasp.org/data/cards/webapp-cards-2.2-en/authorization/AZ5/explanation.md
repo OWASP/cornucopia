@@ -21,7 +21,7 @@ In this case, the attacker can access resources—files, processes, session data
 The root cause is missing authorization or excessive privileges, violating the principle of least privilege.
 The consequence of such an action leads to **Information Disclosure** in most cases.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized access to critical resources, potentially resulting in data breaches, system manipulation, and other security compromises.
 

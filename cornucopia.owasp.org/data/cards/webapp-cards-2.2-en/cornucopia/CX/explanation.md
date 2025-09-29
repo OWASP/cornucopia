@@ -26,7 +26,7 @@ The scenario describes circumventing application controls via vulnerable or mali
 The primary impact is that an attacker can modify, manipulate, or exploit the application’s behavior through weaknesses in these components.
 The core issue in the context of vulnerable/malicious components is that the attacker can alter execution or manipulate application operations, which aligns with **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 The use of vulnerable or compromised software components can lead to significant security breaches, unauthorized data access, and potential system compromises.
 

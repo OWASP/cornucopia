@@ -16,7 +16,7 @@ Dave attacks by altering a web form field. He changes a hidden field named 'user
 
 The primary STRIDE category for being able to “inputs malicious field names or data” is **Tampering**, but if Dave can change the `user_role` from user to admin, than that lets him obtain higher rights than he should — that is the textbook definition of **elevation of privilege**. The root cause would be missing contextual validation/authorization, so manipulated input is treated as authoritative and results in increased privileges.
 
-### What can go Wrong?
+### What can go wrong?
 
 This form of attack can lead to unauthorized access, data breaches, and potentially full system compromise.
 

@@ -17,7 +17,7 @@ Jee finds that while your website correctly encodes data for HTML context, it fa
 This scenario is clearly STRIDE: **Information Disclosure** and **Tampering**.
 Bypassing or mis-using output encoding lets attacker-controlled data be sent to and executed in another party’s context. This lets the attacker can alter the rendered page or responses (injecting or changing content seen by users) which is **Tampering**, but the most immediate consequence is exposure and theft of sensitive information (session cookies, DOM data, or secrets accessible in-page) — which maps best to **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 These gaps in encoding practices can lead to serious security vulnerabilities, such as XSS attacks, compromising both the system and its users.
 

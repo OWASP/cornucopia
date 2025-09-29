@@ -23,7 +23,7 @@ Crafting special/ambiguously encoded payloads to foil validation is an attack on
 Jan is modifying the data semantics (by using alternate encodings, double-encoding, differing charset interpretations, etc.) so that filters/validators no longer recognize the malicious content.
 STRIDE’s **Tampering** covers unauthorized modification or manipulation of data or how data is interpreted, which is exactly what character-set/canonicalization tricks do.
 
-### What can go Wrong?
+### What can go wrong?
 
 These vulnerabilities can result in severe security issues, such as injection attacks, data corruption, and unauthorized system access.
 

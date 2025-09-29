@@ -23,7 +23,7 @@ Failing to validate and encode properly doesn’t just hit one STRIDE category �
 4. Spoofing → Auth bypass.
 5. Denial of Service → Crashes, resource exhaustion.
 
-### What can go Wrong?
+### What can go wrong?
 
 #### Input Validation Failures
 

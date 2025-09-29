@@ -24,7 +24,7 @@ This scenario maps primarily to STRIDE: **Denial of Service** (DoS).
 Mike exploits a valid feature too quickly or too frequently, consuming server resources and creating race conditions, which affects availability and correctness.
 The attack is focused on resource exhaustion and misuse of intended functionality, which aligns with the DoS category.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such misuse can lead to system overloads, degraded performance, unintended application behaviors, and negative impacts on other users.
 

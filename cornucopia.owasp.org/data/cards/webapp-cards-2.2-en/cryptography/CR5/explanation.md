@@ -18,7 +18,7 @@ Kyle may be able to access sensitive data because the cryptographic controls fai
 The main impact than is that confidential information is exposed, rather than modified (Tampering) or misused to gain higher privileges (Elevation of Privilege), but if the scenario involves cryptographic integrity mechanisms, like digital signatures or message authentication codes (MACs), then a failure could allow Kyle to modify data undetected. In that case, the primary impact would be **Tampering** rather than **Information Disclosure**.
 
 
-### What can go Wrong?
+### What can go wrong?
 
 Such a vulnerability can lead to data exposure and breaches, as it allows sensitive information to be processed or transmitted without the intended cryptographic protection.
 

@@ -21,7 +21,7 @@ Darío attacks by altering a session token stored in his browser's local storage
 Darío is pretending to be Colin by taking advantage of the application's trust in its data sources. 
 STRIDE’s **Spoofing** covers threats where an attacker assumes another identity or credentials to gain access. This is a textbook spoofing/impersonation attack: the system trusted the presented identity without adequate verification, but the consequences or secondary impacts can include any of the other categories depending on the context.
 
-### What can go Wrong?
+### What can go wrong?
 
 This kind of vulnerability can lead to identity theft, unauthorized access, and potentially severe data breaches.
 

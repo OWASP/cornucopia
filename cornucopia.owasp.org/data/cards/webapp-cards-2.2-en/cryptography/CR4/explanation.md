@@ -19,7 +19,7 @@ The applicable STRIDE category for this scenario is **Information Disclosure**.
 Paulo is able to access sensitive data (credentials, financial information) because it is not properly protected, even though the transport channel is encrypted.
 The core threat is exposure of confidential information — he is reading data he should not be able to see.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to data exposure and breaches, especially if endpoint security is compromised or if there are gaps in the transmission channel’s encryption.
 

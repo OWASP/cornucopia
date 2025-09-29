@@ -21,7 +21,7 @@ Eduardo has legitimate access to the page (entry point), but the backend does no
 The core issue is improper enforcement of authorization at the data level, enabling privilege escalation within the context of an allowed page.
 The consequence of such an action leads to **Information Disclosure** in most cases.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such gaps in authorization controls can lead to unauthorized data access, potentially resulting in information leakage, privacy breaches, and compliance violations.
 

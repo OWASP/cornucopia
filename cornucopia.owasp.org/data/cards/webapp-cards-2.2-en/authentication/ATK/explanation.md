@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Tampering**.
 Olga alters the authentication module itself, changing how it behaves so she can bypass normal checks.
 The attack is not just exploiting weak authentication, it’s modifying the code that enforces authentication, which is classic integrity compromise, i.e., **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 This form of attack can lead to unauthorized system access, data breaches, and potentially allow for widespread manipulation of system functions.
 

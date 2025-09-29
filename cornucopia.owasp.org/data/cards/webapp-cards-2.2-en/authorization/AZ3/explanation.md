@@ -24,7 +24,7 @@ This scenario maps primarily to STRIDE: **Information Disclosure**.
 Christian leverages secondary mechanisms—such as a search indexer, logs, reports, caches, or residual data—to access sensitive information.
 The core issue is unauthorized access to confidential information, which fits squarely under **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized information access, breaches of confidentiality, and potential compliance issues.
 

@@ -19,7 +19,7 @@ Any of the STRIDE categories may be applicable, but the primary concern is usual
 
 Authentication’s main purpose is to verify identity. If you can invent a new way to bypass or manipulate authentication, the attacker can impersonate legitimate users. That’s the essence of a **Spoofing** threat.
 
-### What can go Wrong?
+### What can go wrong?
 
 User impersonation, privilege escalation, credential theft, MFA bypass, session hijacking, account enumeration, denial of service, audit gaps.
 

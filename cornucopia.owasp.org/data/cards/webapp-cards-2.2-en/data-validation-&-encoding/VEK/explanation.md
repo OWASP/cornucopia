@@ -15,7 +15,7 @@ Gabe targets a web application's database interaction. He enters a specially cra
 Gabe is injecting data that changes how the server processes queries/commands — turning data into action. That is an integrity attack: unauthorized modification of application behavior or data, which maps to **Tampering** in STRIDE.
 The injection itself modifies the server-side processing pipeline (SQL engine, OS shell, XPath processor, etc.), so the root threat is tampering with inputs/processing, but all of the other STRIDE categories can be used for the secondary impact depending on the context.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to severe consequences, including unauthorized data access, manipulation of server-side operations, and potentially full system compromise.
 

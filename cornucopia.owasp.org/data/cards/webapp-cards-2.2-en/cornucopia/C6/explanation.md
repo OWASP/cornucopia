@@ -22,7 +22,7 @@ Aaron is bypassing controls by exploiting weaknesses in error/exception handling
 Errors are not handled consistently, allowing Aaron to access sensitive functions and do not default to denying access, so application logic can be bypassed.
 Reliance on other systems for error handling introduces exploitable gaps.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities in error handling can lead to unauthorized access, exposure of sensitive information, and potentially allow attackers to manipulate application behavior.
 

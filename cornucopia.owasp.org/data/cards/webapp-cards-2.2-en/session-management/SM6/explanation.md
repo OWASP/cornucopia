@@ -21,7 +21,7 @@ This scenario falls under STRIDE: **Spoofing**.
 Gary exploits long or missing inactivity/overall session timeouts and the ability to use the same session from multiple locations.
 By taking over an active session, he effectively assumes the identity of the legitimate user, which is classic Spoofing.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized session takeovers, leading to potential data theft, financial loss, and privacy breaches.
 

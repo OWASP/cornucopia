@@ -16,7 +16,7 @@ Inventing a new cryptography threat could lead to:
 
 Any of the STRIDE categories may be applicable, but the primary concern is usually **Information Disclosure** or **Tampering** as breaking cryptography, in most cases, mean you can either disclose or modify data, depending on the context.
 
-### What can go Wrong?
+### What can go wrong?
 
 Data leaks, impersonation, tampering, privilege escalation, replay/forgery, DoS, loss of trust in audits.
 

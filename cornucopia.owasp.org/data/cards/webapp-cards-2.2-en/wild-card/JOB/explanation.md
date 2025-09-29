@@ -13,7 +13,7 @@ Primary impact depends on the impact of attack:
 3. **Information Disclosure**: Exposing regulated or sensitive data inappropriately may violate privacy regulations.
 4. **Repudiation**: If logs or audit trails can be altered, proving compliance or tracking violations becomes impossible.
 
-### What can go Wrong?
+### What can go wrong?
 
 1. Non-compliance with regulations such as GDPR, HIPAA, or PCI DSS.
 2. Violations of contractual obligations or internal policies.

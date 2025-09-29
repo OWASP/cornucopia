@@ -15,7 +15,7 @@ Jason discovers that while most input fields on your web application are properl
 This scenario falls squarely into the **Tampering** category of STRIDE.
 By bypassing centralized validation routines, Jason is able to inject malicious or malformed input (e.g., code injection, buffer overflow payloads) that alters how the system processes the data. The core issue is that unchecked input lets him tamper with the system’s expected data flows and behavior. **Elevation of Privilege** could be a consequence (e.g., RCE via injection), but the root threat is tampering with input.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such lapses in validation can lead to severe security breaches, including data corruption, unauthorized access, and other forms of system compromise.
 

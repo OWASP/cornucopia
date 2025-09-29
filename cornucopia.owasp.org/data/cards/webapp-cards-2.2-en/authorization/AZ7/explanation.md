@@ -21,7 +21,7 @@ Yuanjing, a regular user, can access administrative functions and confidential o
 The attack’s core issue is unauthorized access to higher-privilege operations, which is classic **Elevation of Privilege**.
 The consequence of such an action leads to **Information Disclosure** in most cases.
 
-### What can go Wrong?
+### What can go wrong?
 
 This type of security lapse can lead to unauthorized access to critical application functionalities, potential data breaches, and misuse of sensitive system properties.
 

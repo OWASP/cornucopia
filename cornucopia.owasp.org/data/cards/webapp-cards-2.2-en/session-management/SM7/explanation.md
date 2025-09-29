@@ -22,7 +22,7 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Graham exploits the fact that Adam’s session remains active after he “logs out” or fails to log out, allowing him to assume Adam’s identity without needing credentials.
 The root issue is unauthorized impersonation via an active session, making **Spoofing** the correct primary category.
 
-### What can go Wrong?
+### What can go wrong?
 
 This flaw can lead to unauthorized session access and potential data breaches, as attackers exploit sessions that users believe to be safely closed.
 

@@ -21,7 +21,7 @@ The scenario maps directly to STRIDE: **Information Disclosure**.
 Sebastien is learning something the system should treat as sensitive: the set of valid usernames.
 In STRIDE, **Information Disclosure** is about exposing data to unauthorized parties. Usernames are part of authentication secrets, and leaking or allowing enumeration discloses information attackers can weaponize.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to targeted attacks, including phishing, social engineering, and brute-force attacks, as attackers gain knowledge about valid user accounts.
 

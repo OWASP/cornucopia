@@ -18,7 +18,7 @@ This scenario falls under STRIDE: **Spoofing**.
 Ryan uses valid credentials to simultaneously access the account while the legitimate user is active, effectively impersonating the user in parallel.
 The system’s failure to restrict or monitor concurrent sessions enables him to bypass control over who is acting as that user.
 
-### What can go Wrong?
+### What can go wrong?
 
 Allowing concurrent sessions without proper controls can lead to unauthorized access and exploitation of user accounts, potentially compromising data security and privacy.
 

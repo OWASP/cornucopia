@@ -22,7 +22,7 @@ This scenario is a clear case of STRIDE: **Spoofing**.
 Sven takes advantage of weakly managed temporary credentials to log in as a legitimate user.
 The system fails to enforce proper lifecycle rules (expiry, one-time use, out-of-band delivery), which makes impersonation possible.
 
-### What can go Wrong?
+### What can go wrong?
 
 This oversight can lead to unauthorized account access, data breaches, and potential exploitation of system vulnerabilities.
 

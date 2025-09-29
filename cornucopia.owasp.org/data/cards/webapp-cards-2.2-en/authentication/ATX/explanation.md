@@ -20,7 +20,7 @@ This case is a STRIDE: **Spoofing** issue.
 Here, Pravin bypasses authentication by exploiting fragmented, weak, or inconsistent authentication routines.
 The system’s failure is that it doesn’t enforce authentication uniformly through a centralized, proven mechanism. That lets him log in (spoof identity) without legitimate credentials.
 
-### What can go Wrong?
+### What can go wrong?
 
 This decentralized approach to authentication can lead to uneven security standards, making it easier for attackers to find and exploit the weakest link in the system.
 

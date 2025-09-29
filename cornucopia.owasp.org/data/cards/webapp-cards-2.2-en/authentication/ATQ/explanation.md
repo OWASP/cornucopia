@@ -20,7 +20,7 @@ This scenario is clearly STRIDE: **Spoofing**.
 Johan exploits inconsistent authentication enforcement across channels/functions to gain unauthorized access.
 Even though the main website is secure, weaker checks in the mobile app allow him to bypass identity verification, effectively impersonating a user.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such inconsistencies can lead to unauthorized access and exploitation of authentication weaknesses, posing a significant risk to user data and system integrity.
 
