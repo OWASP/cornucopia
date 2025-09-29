@@ -35,15 +35,6 @@
     return (cards_options.includes(String(card?.id).toUpperCase()))
   }
 
-  function convertToTitleCase( str: string ) : string{
-    if (!str) {
-      return "";
-    }
-    return str.toLowerCase().replace(/\b\w/g, function(char) {
-      return char.toUpperCase();
-    });
-  }
-
   function getEdition(str: string) : string {
     if (str == "webapp") return "Website App Edition";
     if (str == "mobileapp") return "Mobile App Edition";
@@ -55,7 +46,7 @@
     <link rel="canonical" href="/cards/{card.id}" />
     <title>OWASP Cornucopia - {getEdition(card.edition)} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
     <meta name="description" content="{card.desc}" />
-	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {convertToTitleCase(card.suitName)}, {card.id}" />
+	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {Text.convertToTitleCase(card.suitName)}, {card.id}" />
     <meta property="og:title" content="OWASP Cornucopia - {getEdition(card.edition)} - {card.name}">
     <meta property="og:description" content="{card.desc}">
     <meta name="twitter:title" content="OWASP Cornucopia - {getEdition(card.edition)} - {card.name}">
