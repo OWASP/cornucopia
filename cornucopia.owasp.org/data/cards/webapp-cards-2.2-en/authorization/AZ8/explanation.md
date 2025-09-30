@@ -32,6 +32,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Do not make assumptions about the order or previous actions of a user. Re-perform authorization checks at each and every step.
+
 1. Design the system to strictly enforce the intended sequence and flow of processes.
 2. Validate all control data, including date and time parameters, to ensure they have not been tampered with.
 3. Limit the ability to manipulate URLs and direct requests that can alter the normal application flow.

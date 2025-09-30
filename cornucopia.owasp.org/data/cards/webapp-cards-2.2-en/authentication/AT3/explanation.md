@@ -35,6 +35,18 @@ The example (plaintext password interception) is a textbook case of information 
 ### What can go wrong?
 
 Such vulnerabilities can lead to widespread unauthorized access, data breaches, identity theft, and compromise of sensitive information.
+Common attacks include:
+
+1. Stealing a password/secret in transit (e.g. in an email message, over an unencrypted HTTP connection)
+2. Observing a password/secret being entered on screen
+3. Weak password recovery (e.g. reliance only on 'security' questions)
+4. Use of weak 'remember me' functionality
+5. Re-use of passwords making them guessable
+6. Passwords/secrets recorded in logs
+7. Passwords/secrets exposed in form data/URLs
+8. Client-side caching or storage of passwords/secrets
+9. Hard-coding of passwords/secrets into code
+10. Passwords never changed by user
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

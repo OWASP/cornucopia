@@ -8,7 +8,7 @@ Imagine a scenario where Peter exploits vulnerabilities in an application that r
 
 ### Example
 
-Peter discovers that a bespoke e-commerce platform uses a custom session management system developed in-house. This system, while functional, does not incorporate the latest security practices and is vulnerable to session hijacking and fixation attacks. Capitalizing on these weaknesses, Peter manipulates session tokens to gain unauthorized access to user accounts, bypassing the inadequate session control mechanisms.
+Peter discovers that a bespoke website uses a custom session management system developed in-house. This system, while functional, does not incorporate the latest security practices and is vulnerable to session hijacking and fixation attacks. Capitalizing on these weaknesses, Peter manipulates session tokens to gain unauthorized access to user accounts, bypassing the inadequate session control mechanisms.
 
 ## Threat Modeling
 
@@ -27,6 +27,8 @@ Custom-built session management systems that lack the rigor of standard framewor
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Centralized session management routines are a good programming practice, but like other routines, developers need to understand how they work, how to use them and any limitations. These should preferably be the framework's in-built session management support. If third party session management libraries are used, it is important to test each routine before its implementation.
 
 1. Where possible, replace self-built session management systems with standard, well-tested frameworks or modules known for robust security.
 2. If a custom solution is necessary, ensure it is developed according to industry best practices and undergoes rigorous security testing.

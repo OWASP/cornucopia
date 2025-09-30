@@ -26,6 +26,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+In some ecommerce applications it may be desirable to allow customers to be logged in using multiple browsers/devices. However that would be unusual for administrative users, or users of more sensitive data. Even if concurrent sessions are allowed. consider what should occur in other sessions when a user changes their password, or changes their delivery address, or logs out, or times out, or authentication failure occurs.
+
 1. Implement a policy to restrict or carefully monitor concurrent sessions. Options include limiting the number of simultaneous sessions per user or requiring additional verification for new sessions.
 2. Set up alerts for unusual patterns of concurrent access, such as logins from geographically distant locations within a short timeframe.
 3. Regularly audit session management policies to ensure they effectively protect against unauthorized concurrent access. 

@@ -26,6 +26,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Once an authentication failure is detected, access needs to be blocked. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.¨
+
 1. Design and configure authentication mechanisms to default to a 'deny access' state in case of any failure.
 2. Regularly test and validate the authentication process to ensure it behaves as expected during system errors or downtime.
 3. Implement robust monitoring and alerting mechanisms to quickly detect and respond to authentication system failures.

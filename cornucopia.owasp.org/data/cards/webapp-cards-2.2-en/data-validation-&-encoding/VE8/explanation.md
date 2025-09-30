@@ -24,6 +24,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Sanitization may be used to strip some inputs or outputs of certain unwanted characters. It is not a substitute for data validation and encoding, but may be used in combination (e.g. to remove leading/trailing whitespace from keyboard input). If sanitization is part of the validation and encoding processes, ensure that no relevant input/output is excluded, or can be bypassed by submitting data through a different input stream (e.g. GET instead of POST) or using a different app (e.g. mobile vs. desktop).
+
 1. Ensure that sanitization routines are uniformly applied to all forms of data input, including both primary and secondary sources.
 2. Regularly review and enhance sanitization protocols to cover all potential data entry points, ensuring no part of the system is left vulnerable.
 

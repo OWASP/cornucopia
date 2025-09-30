@@ -1,6 +1,6 @@
 ## Scenario: Christian's Indirect Access to Restricted Information
 
-Imagine a scenario where Christian accesses sensitive information, which he should not have direct permission to access, by exploiting other mechanisms or system oversights. He does this by:
+Imagine a scenario where Christian accesses sensitive information, which he should not have direct permission to access, by exploiting other mechanisms or system oversights. Christian is not permitted direct access, but has access to something, that had or has access to sensitive information. He does this by:
 
 1. **Access Through Permitted Mechanisms:** Utilizing systems like search indexers, loggers, or reporting tools, which have broader access privileges. 
 
@@ -31,6 +31,8 @@ Such vulnerabilities can lead to unauthorized information access, breaches of co
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Consider all accounts/roles and what access privileges they have, and whether a user in one role can utilize another role. Create an Access Control Policy to document an application's business rules, data types and access authorization criteria and/or processes so that access can be properly provisioned and controlled. This includes identifying access requirements for both the data and system resources.
 
 1. Ensure all systems with broader access, like indexers or loggers, enforce the same access controls as primary data sources.
 2. Implement secure caching practices and regular cache clearance to prevent unauthorized data access.

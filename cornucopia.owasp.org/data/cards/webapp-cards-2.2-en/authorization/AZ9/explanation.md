@@ -21,12 +21,13 @@ Mike discovers that an online booking system allows rapid repeated bookings and 
 This scenario maps primarily to STRIDE: **Denial of Service** (DoS).
 
 **Denial of Service** occurs when an attacker causes a system to become unavailable, degrade performance, or otherwise disrupt normal operation.
-Mike exploits a valid feature too quickly or too frequently, consuming server resources and creating race conditions, which affects availability and correctness.
+Mike exploits a valid feature too quickly or too frequently, consuming server resources and creating race conditions, which affects availability and correctness. This may, as well, give him certain benefits at the expanse of others or the system.
 The attack is focused on resource exhaustion and misuse of intended functionality, which aligns with the DoS category.
 
 ### What can go wrong?
 
 Such misuse can lead to system overloads, degraded performance, unintended application behaviors, and negative impacts on other users.
+Common attacks includes automated threats such as: Account aggregation, Account creation, Ad fraud, CAPTCHA bypass, Carding, Card cracking, Cashing out, Credential cracking, Credential stuffing, Denial of service, Expediting, Fingerprinting, Footprinting, Scalping, Scraping, Skewing, Sniping, Spamming, Token cracking and Vulnerability scanning.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

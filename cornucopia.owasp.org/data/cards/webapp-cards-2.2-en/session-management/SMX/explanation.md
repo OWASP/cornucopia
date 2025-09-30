@@ -28,6 +28,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Consider supplementing standard session management with anti-CSRF tokens.
+
 1. Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
 2. Ensure that every state-changing action requires a valid anti-CSRF token to proceed.
 3. Regularly review and update security measures to protect against CSRF and other request forgery methods.

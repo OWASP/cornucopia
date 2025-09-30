@@ -35,4 +35,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 3. Establish a centralized logging system to consolidate logs from various sources for easier monitoring and analysis.
 4. Regularly review and update logging and auditing mechanisms to ensure they capture all necessary information and are secure against tampering.
 
+Consider all application logging best practices according to the [OWAS Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
+
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

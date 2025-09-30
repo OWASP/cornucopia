@@ -24,11 +24,13 @@ The root weakness here is inadequate authentication protections (no lockouts, we
 
 ### What can go wrong?
 
-This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system.
+This type of vulnerability exposes users to account takeover, data breaches, and potentially, the compromise of the entire system. Threats includes credential cracking (identifying valid login credentials by trying different values for usernames and/or passwords) and credential stuffing (mass log in attempts used to verify the validity of stolen username/password pairs).
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Attacks should be prevented from being able to obtain valid account credentials by using the application in an unintended manner.
 
 1. Implement a strict account lockout policy after a certain number of failed login attempts to prevent brute force attacks.
 2. Enforce strong password policies, including minimum length, complexity, and expiration requirements.

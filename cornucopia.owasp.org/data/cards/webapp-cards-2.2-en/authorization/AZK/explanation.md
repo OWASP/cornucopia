@@ -28,5 +28,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Ensure that all mechanisms for altering authorization controls and permissions are strictly secured and accessible only by highly trusted roles.
 2. Implement robust monitoring systems to detect and alert any unauthorized changes to authorization configurations.
 3. Regularly audit authorization controls and permissions to ensure they have not been tampered with and remain appropriate for user roles.
+4. Use only trusted system objects, e.g. server side session objects, for making access authorization decisions. 
+5. Restrict access to user and data attributes and policy information used by access controls.
+6.  Server side implementation and presentation layer representations of access control rules must match.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

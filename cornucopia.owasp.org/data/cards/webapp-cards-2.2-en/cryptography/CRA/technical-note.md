@@ -1,3 +1,1 @@
-## Key Concept
-
 Players can discuss any type of Cryptography (CR) attack they think might be possible against the assessment target. It does not matter if the attack relates to another CR card, but if possible try to identify an attack that is fairly unique to the application/functionality/users.

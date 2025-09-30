@@ -26,6 +26,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Cryptographic function errors always need to result in rejection. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
+
 1. Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.
 2. Implement robust error handling that maintains security standards even when cryptographic processes encounter issues.
 3. Regularly test and audit cryptographic systems to ensure they respond securely to failures and do not expose sensitive data.

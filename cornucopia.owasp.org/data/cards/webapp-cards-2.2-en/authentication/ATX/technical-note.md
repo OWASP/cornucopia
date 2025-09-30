@@ -1,3 +1,2 @@
-## Key Concept
-
-Centralized authentication routines are a good programming practice, but like other routines, developers need to understand how they work, how to use them and any limitations. These should preferably be the framework's in-built authentication support. I If third party authentication libraries are used, it is important to test each routine before its implementation.
+The key concept for this card is missing centralized authentication or using centralized authentication that hasn't been properly vetted.
+ 

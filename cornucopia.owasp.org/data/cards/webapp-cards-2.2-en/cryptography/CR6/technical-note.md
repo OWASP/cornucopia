@@ -1,3 +1,1 @@
-## Key Concept
-
-NB: The key concept for this card is lack of encryption of data in transit and/or in memory.
+The card is related to lack of encryption of data in transit and/or in memory.

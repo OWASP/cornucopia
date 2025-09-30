@@ -34,9 +34,14 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Protect session identifiers as if they are account credentials. For HTTP cookies:
+
 1. Ensure all communication involving session identifiers is encrypted, preferably using HTTPS.
 2. Avoid logging session IDs or exposing them in error messages.
 3. Refrain from including session identifiers in URLs, opting for more secure methods of transmission.
 4. Limit the accessibility of session identifiers in the application’s code, especially to scripts or areas that could be compromised.
+5. Set the 'secure' attribute for cookies transmitted over an TLS connection.
+6. Set cookies with the HttpOnly attribute, unless you specifically require client-side scripts within your application to read or set a cookie's value.
+7. Set HTTP Strict Transport Security (HSTS) header and add your domain to web browser pre-load lists.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

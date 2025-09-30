@@ -27,6 +27,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+There is no substitute for a proper, approved, cryptographic function where data needs to be protected at rest or in transit. Obfuscation is rarely the correct choice. Use standard-approved functions and consider all cryptographic management requirements (e.g. key creation, distribution, protection, replacement, retirement).
+
 1. Replace obfuscation techniques with approved cryptographic functions for data protection.
 2. Ensure the implementation of industry-standard encryption algorithms to secure sensitive data.
 3. Regularly review and update cryptographic practices to align with current security standards and best practices.

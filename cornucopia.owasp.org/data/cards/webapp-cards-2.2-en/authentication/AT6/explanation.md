@@ -30,6 +30,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Temporary passwords must expire within a suitably short time period. Enforce the changing of temporary passwords on the next use - no user should be utilising a temporary password on a regular or ongoing basis.
+
 1. Implement policies that require users to change their temporary passwords upon first login.
 2. Set short expiration times for temporary passwords to minimize the risk window.
 3. Use secure, out-of-band methods for delivering temporary passwords to ensure their confidentiality and integrity.

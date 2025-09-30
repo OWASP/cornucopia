@@ -1,11 +1,1 @@
-## Key Concept
-
-Ensure the following occur:
-
-Ensure sufficiently long and random session identifiers are used
-Generate a new session identifier:
-If a session was established before login, and successful login has occurred
-When changing from HTTP to HTTPS
-When re-authenticating
-Periodically otherwise.
-See SM 7 for session termination on logging out.
+Static, predictable, and insufficiently random session identifiers that aren’t rotated during role or communication changes enable attackers to hijack user sessions and spoof identities. See [Session Management 7 (SM7)](/cards/SM7#card 'Session Management 7 (SM7) [internal]') for session termination on logging out.

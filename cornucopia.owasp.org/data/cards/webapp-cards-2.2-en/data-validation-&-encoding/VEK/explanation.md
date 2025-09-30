@@ -19,6 +19,8 @@ The injection itself modifies the server-side processing pipeline (SQL engine, O
 
 Such vulnerabilities can lead to severe consequences, including unauthorized data access, manipulation of server-side operations, and potentially full system compromise.
 
+Due a failure of server-side input or output validation, encoding or sanitization, malicious code can be injected and treated as code rather than data, leading to code execution in the server application.
+
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?

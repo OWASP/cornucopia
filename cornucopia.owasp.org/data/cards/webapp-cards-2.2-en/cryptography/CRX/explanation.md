@@ -27,6 +27,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+The choice of cryptographic algorithm, its configuration, and key length will not be the same for all deployments. Appropriate selection needs to be based on risk.
+
 1. Assess the sensitivity and value of the data being protected and ensure the strength of the cryptographic measures is adequate to provide the necessary level of security.
 2. Regularly update and upgrade cryptographic algorithms and practices to align with current security standards and to counteract evolving threats.
 3. Monitor developments in cryptography and cybersecurity to anticipate and prepare for potential efforts by attackers.

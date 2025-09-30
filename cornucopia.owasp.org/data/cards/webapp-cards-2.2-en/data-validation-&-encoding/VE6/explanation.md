@@ -17,11 +17,17 @@ By bypassing centralized validation routines, Jason is able to inject malicious 
 
 ### What can go wrong?
 
-Such lapses in validation can lead to severe security breaches, including data corruption, unauthorized access, and other forms of system compromise.
+Such lapses in validation can lead to severe security breaches, including data corruption, unauthorized access, and other forms of system compromise. Common attacks to bad implementation (or lack) of validation routines are:
+
+1. Buffer overflows.
+2. Code injection.
+3. Fuzzing.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Centralized input validation routines are a good programming practice, but like other routines, developers need to understand how they work, how to use them and any limitations. Such routines can be tested independently of other code and not only provide assurance on the quality of the input validation, but it make refactorization an easy task and eliminate code duplicates and bad interpretations. Use of white list validation is recommended where possible. Black lists are usually good as a double-check complement, as they can trigger alerts for fake positives. If third-party input validation libraries are used, it is important to test each routine before its implementation.
 
 1. Ensure that centralized validation routines are uniformly applied to all input sources, including web forms, APIs, and any other data entry points.
 2. Regularly audit and update validation protocols to cover all potential avenues of data input.

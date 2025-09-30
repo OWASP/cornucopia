@@ -26,6 +26,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Once an authorization failure is detected, access needs to be blocked. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
+
 1. Configure all authorization mechanisms to default to a 'deny access' state in the event of any failure or error.
 2. Regularly test and validate the authorization process to ensure it behaves securely during system errors or downtimes.
 3. Implement robust monitoring and alerting mechanisms to quickly detect and respond to failures in the authorization system.

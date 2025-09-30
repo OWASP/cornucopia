@@ -34,9 +34,12 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+No default (e.g. vendor), old, or test accounts should exist. Each user should have their own individual account, and accounts should only be issued and active for those people/systems that have been permitted access for the required need of their job/role.
+
 1. Ensure all default credentials are changed upon system setup or application installation.
 2. Regularly audit accounts to identify and remove or secure test and unnecessary accounts.
-3. Implement and enforce strong password policies, discouraging easily guessable passwords.
-4. Routinely deactivate old accounts and monitor for any unauthorized access attempts
+3. Implement and enforce strong password policies, discouraging easily guessable passwords, and implement multi-factor authentication.
+4. Routinely deactivate old accounts and monitor for any unauthorized access attempts.
+5. Put automatic time limits on temporary accounts.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

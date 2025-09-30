@@ -29,6 +29,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+In general use the server or framework’s own session management controls, rather than creating custom code. The application should only recognize these session identifiers as valid, and the session identifier creation must always be done on a trusted system (e.g. server-side).
+
 1. Ensure that session identifiers are generated using strong, cryptographically secure algorithms that produce random and complex IDs.
 2. Regularly review and test the session ID generation process to ensure it remains robust against prediction and manipulation.
 3. Implement additional security checks to detect and mitigate session hijacking attempts.

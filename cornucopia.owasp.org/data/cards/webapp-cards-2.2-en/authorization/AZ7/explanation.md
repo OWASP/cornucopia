@@ -29,8 +29,9 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Implement robust, role-based authorization checks that rigorously define and enforce access levels for different user roles.
-2. Ensure that each application function, object, and property is protected by appropriate authorization verifications.
-3. Regularly review and update the authorization system to address new functionalities and changing user roles
+1. Implement least privilege, and restrict users to only the functionality, objects and properties that are required to perform their tasks.
+2. Implement robust, role-based authorization checks that rigorously define and enforce access levels for different user roles.
+3. Ensure that each application function, object, and property is protected by appropriate authorization verifications.
+4. Regularly review and update the authorization system to address new functionalities and changing user roles
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

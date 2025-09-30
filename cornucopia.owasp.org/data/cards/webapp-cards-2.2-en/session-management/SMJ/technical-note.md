@@ -1,3 +1,1 @@
-## Key Concept
-
-The key concept for this card is replay of a previous event.
+The absence of replay attack defenses allows identical repeated interactions to be accepted as new, enabling attackers to tamper with system state and trigger unauthorized actions.

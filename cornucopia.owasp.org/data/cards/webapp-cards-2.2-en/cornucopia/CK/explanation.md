@@ -24,7 +24,9 @@ STRIDE explicitly associates attacks that reduce or eliminate system availabilit
 
 ### What can go wrong?
 
-Such vulnerabilities can lead to the application becoming unavailable or unresponsive, impacting user experience, and potentially causing financial and reputational damage to the service provider.
+Such vulnerabilities can lead to the application becoming unavailable or unresponsive, impacting user experience, and potentially causing financial and reputational damage to the service provider. Application-layer denial of service and other activities that adversely affect the application's users includes: Account lockout, Spamming, Excessive resource consumption, Scalping, Sniping.
+
+These type of threats abuse the application layer in the attack and is therefor not related to common HTTP/TCP DoS like HTTP flooding, -slow attacks which in most cases are a networking concern.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

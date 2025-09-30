@@ -30,6 +30,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Users should be able to log out from any pages protected by access control (authentication and authorisation checks). The logout functionality should fully terminate the associated session or connection such that the session identifier is no longer usable.
+
 1. Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.
 2. Design the log out process to completely terminate the session on the server side, not just on the client device.
 3. Conduct user experience testing to ensure the log out process is intuitive and effective.

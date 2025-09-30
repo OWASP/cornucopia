@@ -1,3 +1,7 @@
+## Key Concept
+
+This card is related to notification of events to users.
+
 ## Scenario: James’s Unnoticed Authentication Interference
 
 Consider a scenario where James, a cunning hacker, carries out authentication-related activities, such as password changes, without alerting the real user. He exploits security gaps in the notification and monitoring processes:

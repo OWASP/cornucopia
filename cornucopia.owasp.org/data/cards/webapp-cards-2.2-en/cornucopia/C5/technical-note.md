@@ -1,8 +1,1 @@
-## Key Concept
-
-Abuse of trust attacks include:
-
-Clickjacking.
-Phishing.
-Pharming.
-SSL downgrade/misconfiguration.
+The key concept is that attackers can exploit or impersonate trusted applications to deceive users and interconnected systems, leading to spoofing and unauthorized access.

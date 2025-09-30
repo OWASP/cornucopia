@@ -1,5 +1,1 @@
-## Key Concept
-
-A user's privileges may change during a session. If this information is also stored in session data, it will not reflect the changes. Consider forcing re-authentication.
-
-See Authentication AT 9 for other re-authentication requirements.
+A user's privileges may change during a session. If this information is also stored in session data, it will not reflect the changes. Consider forcing re-authentication. See Authentication [Authentication 9 (AT9)](cards/AT9#card 'Authentication 9 (AT9) [internal]') for re-authentication requirements.

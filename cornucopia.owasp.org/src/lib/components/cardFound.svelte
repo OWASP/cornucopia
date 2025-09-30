@@ -3,7 +3,7 @@
   import { Text } from "$lib/utils/text";
   import {
     GetCardAttacks, type Attack } from "$lib/cardAttacks";
-  import Summary from "./summary.svelte";
+  import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "../../domain/card/card";
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
@@ -12,7 +12,7 @@
   import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
-  import Technical from './technical.svelte';
+  import Concept from './concept.svelte';
 
   interface Props {
     mappingData: any;
@@ -43,8 +43,8 @@
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
-  <Summary card={card}></Summary>
-  <Technical card={card}></Technical>
+  <Concept card={card}></Concept>
+  <Explanation card={card}></Explanation>
   {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B'}
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
   {/if}
@@ -73,6 +73,7 @@
     width: 100%;
     display: block;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
   }
 

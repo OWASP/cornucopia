@@ -22,7 +22,7 @@ Even though the main website is secure, weaker checks in the mobile app allow hi
 
 ### What can go wrong?
 
-Such inconsistencies can lead to unauthorized access and exploitation of authentication weaknesses, posing a significant risk to user data and system integrity.
+The degree of identity assurance may not be the same for all web application functions. Or the authentication function may be available in a weaker manner in some other mode or channel, thus compromising the web application. Such inconsistencies can lead to unauthorized access and exploitation of authentication weaknesses, posing a significant risk to user data and system integrity.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

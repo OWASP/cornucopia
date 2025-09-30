@@ -1,3 +1,1 @@
-## Key Concept
-
-There may be reasons to share sessions across multiple applications, but if one of those applications is less secure it might be used to compromise another.
+Insufficient domain and path restrictions on cookies allow attackers to set session cookies for other applications, enabling cross-domain session hijacking.

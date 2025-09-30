@@ -31,11 +31,13 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Replace risky functions with safer alternatives and follow secure coding practices.
-2. Implement thorough error handling and validation for type conversions.
-3. Design the application to handle unavailability or failures of external resources gracefully.
-4. Address potential race conditions through proper synchronization and concurrency controls.
-5. Ensure robust initialization and allocation of resources, and rigorously check for potential overflows.
-6. Regularly audit and test the application for these vulnerabilities, and update practices as needed.
+1. Replace risky and vulnerable functions with safer alternatives and follow secure coding practices. Use non-executable stacks when available.
+2. Use checksums or hashes to verify the integrity of interpreted code, libraries, executables, and configuration files.
+3. Implement thorough error handling and validation for type conversions. Make no assumptions about availability of other resources, and handle all exceptions.
+4. Design the application to handle unavailability or failures of external resources gracefully.
+5. Address potential race conditions through proper synchronization and concurrency controls.
+6. Ensure robust initialization and allocation of resources, variables and other data stores, do not rely on garbage collection for performance sensitive operations, free allocated memory and resources when possible, rigorously check for potential overflows and verify that buffer sizes are large enough.
+7. Regularly audit and test the application for these vulnerabilities, and update practices as needed.
+8. Utilize locking to prevent multiple simultaneous requests and synchronization mechanism to prevent race conditions and protect shared variables and resources from inappropriate concurrent access.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

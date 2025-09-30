@@ -24,11 +24,17 @@ The primary STRIDE category for “being able to input malicious data due to mis
 
 These oversights can result in significant security breaches, data corruption, and may compromise the integrity and reliability of the entire system.
 
+A lack of input validation is often the root cause of many security issues. Since the validation needs to be context specific, generic sanitisation routines will not suffice.
+
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
 
-1. Rigorously validate all data inputs for their format, type, range, length, and against a comprehensive whitelist.
+The developer needs to understand how data are formatted/composed, why the data is being sent, what it is used for and the meaning of the values.
+
+1. Rigorously validate all data inputs, fields and parameters for their format, type, range, length, and against a comprehensive whitelist.
 2. Regularly update and refine these validation rules to stay ahead of sophisticated attack techniques.
+3. Only the permitted inputs (field/parameter names) must be allowed.
+4. All the mandatory inputs must be enforced.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

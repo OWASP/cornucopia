@@ -30,6 +30,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Configuration best practice guidance needs to be reviewed periodically, vulnerability announcements monitored, and configuration standards updated.
+
 1. Ensure proper deployment and configuration of encryption protocols, adhering to current best practices and standards.
 2. Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks.
 3. Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states.

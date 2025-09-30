@@ -28,6 +28,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Every part of the application and type of request should verify that the user has a valid current session (if required) and thus their privileges, before undertaking any other data validation and processing.
+
 1. Ensure uniform implementation of session management controls across all areas and functionalities of the application.
 2. Conduct thorough security reviews and testing, especially when integrating new features or modules, to ensure they meet established session management standards.
 3. Regularly update and harmonize session management practices to maintain comprehensive and consistent security coverage.

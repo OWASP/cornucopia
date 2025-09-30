@@ -1,3 +1,1 @@
-## Key Concept
-
-Consider all application logging best practices (https://wiki.owasp.org/index.php/Logging_Cheat_Sheet).
+The key concept is that inadequate, tamperable, or missing logging and audit trails can prevent accountability by making malicious actions untraceable.

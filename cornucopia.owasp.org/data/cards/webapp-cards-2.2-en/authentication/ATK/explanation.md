@@ -28,6 +28,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+In general, all authentication routines should be on the server-side using robust, tested and protected routines.
+
 1. Implement strict access controls and security measures in the code development and deployment process to prevent unauthorized modifications.
 2. Regularly review and audit authentication modules to detect any unauthorized changes or vulnerabilities.
 3. Employ continuous monitoring tools to track and alert any unusual behavior within authentication routines.

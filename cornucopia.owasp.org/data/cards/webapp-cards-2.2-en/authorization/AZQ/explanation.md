@@ -28,6 +28,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
+Firstly apply appropriate input validation and encoding. In cases where the application must run with elevated privileges, raise privileges as late as possible, and drop them as soon as possible.
+
 1. Implement strict input validation and sanitization to prevent command injection attacks.
 2. Ensure that all commands are executed only at the appropriate privilege level, preventing users from executing commands with elevated privileges.
 3. Regularly review and update security protocols to safeguard against command injections and unauthorized privilege escalation.

@@ -20,6 +20,21 @@ The primary STRIDE category for being able to “inputs malicious field names or
 
 This form of attack can lead to unauthorized access, data breaches, and potentially full system compromise.
 
+Malicious data can be introduced voluntarily (as part of an attack) or involuntarily (e.g. XSS). Some input checks should be dependent upon the function or user's context (e.g. the data is valid for one user but not another). There are many alternatives to this kind of attack:
+
+1. Tampering request types, URLs, cookies, session identifiers, fields or values that are not validated.
+2. Adding, removing or duplicating request fields or values to exploit code behaviour (e.g. mass parameter assignment, parameter pollution, passing partial authentication data).
+3. Sending requests that are processed independently of the user activities (stage, amount of requests, privileges).
+4. Fuzzing a file input.
+
+Depending of the target of the attack, the impact of these type of threats varies widely:
+
+1. Information disclosure (error logs, system responses, etc.).
+2. Operations tampering (SQLi, eShoplifting).
+3. Denial of Service.
+4. Privilege escalations
+5. Code execution.
+
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
