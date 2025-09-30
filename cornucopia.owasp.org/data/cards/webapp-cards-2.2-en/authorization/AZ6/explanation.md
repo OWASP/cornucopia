@@ -32,7 +32,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 Even though a user may be permitted access to a particular page, the contents of that page should also verify access control privileges. For example, a user should be able to edit their own profile text, but not that for another user.
 
 1. Implement least privilege, and restrict users to only the data and system information that are required to perform their tasks.
-2. Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points. 
+2. Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points.
 3. Regularly audit and update access control mechanisms to ensure they align with user roles and data sensitivity levels.
 4. Conduct thorough security testing to identify and address any potential authorization bypass scenarios.
 
