@@ -1,1 +1,1 @@
-The key concept for this card is applying authorization controls to all resource types. See AZ 6 for data controls, and AZ 7 for function/object/property controls.
+The key concept for this card is applying authorization controls to all resource types. See [Authorization 6 (AZ6)](/cards/AZ6#card 'Authorization 6 (AZ6) [internal]') for data controls, and [Authorization 7 (AZ7)](/cards/AZ7#card 'Authorization 7 (AZ7) [internal]') for function/object/property controls.

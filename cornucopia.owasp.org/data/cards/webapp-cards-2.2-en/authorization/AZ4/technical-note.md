@@ -1,1 +1,1 @@
-The key concept for this card is allowing access, even though authorization checks were undertaken and detected a failure. See AT 8 for the similar authentication failure.
+The key concept for this card is allowing access, even though authorization checks were undertaken and detected a failure. See [Authentication 8 (AT8)](/cards/AT8#card 'Authentication 8 (AT8) [internal]') for the similar authentication failure.

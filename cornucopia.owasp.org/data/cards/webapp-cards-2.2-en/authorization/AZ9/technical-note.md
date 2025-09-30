@@ -1,1 +1,1 @@
-The key concept is functional application abuse made possible through the lack ot anti-automation controls. See also related automation attacks in Authentication AT 4 and AT 7.
+The key concept is functional application abuse made possible through the lack ot anti-automation controls. See also related automation attacks in Authentication [Authentication 4 (AT4)](/cards/AT4#card 'Authentication 4 (AT4) [internal]') and [Authentication 7 (AT7)](/cards/AT7#card 'Authentication 7 (AT7) [internal]').

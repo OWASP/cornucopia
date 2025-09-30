@@ -1,1 +1,1 @@
-The key concept for this card is applying authorization controls at the data level. See AZ 5 for resource types controls, and AZ 7 for function/object/property controls.
+The key concept for this card is applying authorization controls at the data level. See [Authorization 5 (AZ5)](/cards/AZ5#card 'Authorization 5 (AZ5) [internal]') for resource types controls, and [Authorization 7 (AZ7)](/cards/AZ7#card 'Authorization 7 (AZ7) [internal]') for function/object/property controls.
