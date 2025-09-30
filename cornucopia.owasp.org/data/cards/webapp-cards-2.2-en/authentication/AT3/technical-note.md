@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Passwords and secrets need protection. Common attacks include:
 

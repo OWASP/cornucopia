@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Validation and encoding are sometimes undertaken in client applications or external sources that interact with the system. This is a bad practice, as external sources are usually more vulnerable to attacks, can be spoofed and are generally less accountable for malicious behaviour. An attacker can try to bypass these routines using non-controlled unexpected behaviour:
 

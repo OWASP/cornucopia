@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 This attack is often associated with insufficient authentication and/or lack of audit trails.
 

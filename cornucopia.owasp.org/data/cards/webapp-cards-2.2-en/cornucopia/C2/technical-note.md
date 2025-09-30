@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 This card is framework/language-specific. Examples include:
 

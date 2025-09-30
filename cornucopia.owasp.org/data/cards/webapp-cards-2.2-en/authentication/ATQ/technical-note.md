@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 The degree of identity assurance may not be the same for all web application functions. Or the authentication function may be available in a weaker manner in some other mode or channel, thus compromising the web application.
 

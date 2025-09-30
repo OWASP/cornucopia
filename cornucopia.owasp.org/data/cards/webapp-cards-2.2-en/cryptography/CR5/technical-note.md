@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Cryptographic function errors always need to result in rejection. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
 

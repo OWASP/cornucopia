@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 For each entry point, check and test that the correct degree of authentication is required and occurs. Ensure this includes:
 

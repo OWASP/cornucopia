@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Users must not be able to define unauthorised virtual locations/addresses such as:
 

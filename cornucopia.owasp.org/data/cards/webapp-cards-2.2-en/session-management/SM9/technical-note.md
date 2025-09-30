@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Protect session identifiers as if they are account credentials. For HTTP cookies:
 

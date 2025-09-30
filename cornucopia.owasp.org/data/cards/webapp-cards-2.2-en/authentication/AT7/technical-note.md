@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Attacks should be prevented from being able to obtain valid account credentials by using the application in an unintended manner. This includes credential cracking (identifying valid login credentials by trying different values for usernames and/or passwords) and credential stuffing (mass log in attempts used to verify the validity of stolen username/password pairs).
 

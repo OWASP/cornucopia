@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 In general, all authentication routines should be on the server-side using robust, tested and protected routines.
 

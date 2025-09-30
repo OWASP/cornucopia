@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Abuse of trust attacks include:
 

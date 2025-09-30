@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Implement least privilege, and restrict users to only the functionality, objects and properties that are required to perform their tasks.
 

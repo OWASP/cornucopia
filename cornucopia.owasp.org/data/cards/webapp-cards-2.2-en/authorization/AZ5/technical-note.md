@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Define access controls for each and every resource and system component. Enforce authorization controls on every request, regardless of resource type.
 

@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Every part of the application and type of request should verify that the user has a valid current session (if required) and thus their privileges, before undertaking any other data validation and processing.
 

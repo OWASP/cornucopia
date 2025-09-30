@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Due a failure of client-side input or output validation, encoding or sanitization, malicious code can be injected and treated as code rather than data, leading to code execution in the client application.
 

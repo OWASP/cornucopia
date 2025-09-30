@@ -1,3 +1,3 @@
-## Of Note
+## Key Concept
 
 Tampering with state, source code, interpreted code, libraries, executables, updates, patches, configuration data, logs, etc undermines any trust in the application. Consider the file system, database content, information in memory, in page code, and data in transit.

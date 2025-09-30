@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Ensure the following occur:
 

@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Consider how the application's normal functionality might be used to the disbenefit of another application, of some or all users, of another party, or even of society. This may include:
 

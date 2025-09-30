@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 This attack is often the result of one or more of the following:
 

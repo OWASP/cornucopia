@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Without knowing the character encoding accurately, data validation routines could be inadequate. A web application firewall, a web server, an application server, a database server, and other interpreters could each be susceptible, and susceptible in different ways, to malicious character encoding issues.
 

@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Even though a user may be permitted access to a particular page, the contents of that page should also verify access control privileges. For example, a user should be able to edit their own profile text, but not that for another user. Implement least privilege, and restrict users to only the data and system information that are required to perform their tasks.
 

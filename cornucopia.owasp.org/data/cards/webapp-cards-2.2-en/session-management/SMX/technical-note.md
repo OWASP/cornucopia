@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Consider supplementing standard session management with:
 

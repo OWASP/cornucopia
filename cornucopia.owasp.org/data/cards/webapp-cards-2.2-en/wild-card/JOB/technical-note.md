@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Most ecommerce applications will be subject to various legal, regulatory, contractual or other organizational mandates. These are likely to include requirements for data protection/privacy and payment card security. Some examples are:
 

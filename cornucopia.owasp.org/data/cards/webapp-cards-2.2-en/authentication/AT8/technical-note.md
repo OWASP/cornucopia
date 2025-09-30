@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Once an authentication failure is detected, access needs to be blocked. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
 

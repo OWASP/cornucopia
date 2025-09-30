@@ -1,3 +1,3 @@
-## Of Note
+## Key Concept
 
 Temporary passwords must expire within a suitably short time period. Enforce the changing of temporary passwords on the next use - no user should be utilising a temporary password on a regular or ongoing basis.

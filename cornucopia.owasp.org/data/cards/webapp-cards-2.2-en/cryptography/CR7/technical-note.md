@@ -1,4 +1,4 @@
-## Of Note
+## Key Concept
 
 Configuration best practice guidance needs to be reviewed periodically, vulnerability announcements monitored, and configuration standards updated.
 

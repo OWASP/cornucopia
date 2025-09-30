@@ -1,3 +1,3 @@
-## Of Note
+## Key Concept
 
 Players can discuss any type of Data Validation and Encoding (VE) attack they think might be possible against the assessment target. It does not matter if the attack relates to another VE card, but if possible try to identify an attack that is fairly unique to the application/functionality/users.
