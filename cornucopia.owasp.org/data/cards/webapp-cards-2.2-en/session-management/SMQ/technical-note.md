@@ -1,5 +1,1 @@
-## Of Note
-
-Every part of the application and type of request should verify that the user has a valid current session (if required) and thus their privileges, before undertaking any other data validation and processing.
-
-NB: This relates to application-wide session management control. See SM K for what session management routines to use.
+Incomplete and inconsistent session management across different parts of an application enables attackers to exploit gaps, bypass session controls, and hijack or spoof user sessions. See [Session Management (SMK)](/cards/SMK#card 'Session Management (SMK) [internal]') for what session management routines to use.

@@ -20,13 +20,15 @@ This scenario maps primarily to STRIDE: **Elevation of Privilege** (EoP).
 Christopher injects a command that the system executes at a higher privilege level than his own user role, gaining unauthorized administrative access.
 The attack exploits lack of privilege checks combined with command injection, allowing him to perform higher-privilege operations.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized system access, data breaches, and potential control over critical system functionalities.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Firstly apply appropriate input validation and encoding. In cases where the application must run with elevated privileges, raise privileges as late as possible, and drop them as soon as possible.
 
 1. Implement strict input validation and sanitization to prevent command injection attacks.
 2. Ensure that all commands are executed only at the appropriate privilege level, preventing users from executing commands with elevated privileges.

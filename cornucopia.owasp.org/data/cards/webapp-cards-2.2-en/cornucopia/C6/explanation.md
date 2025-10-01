@@ -22,7 +22,7 @@ Aaron is bypassing controls by exploiting weaknesses in error/exception handling
 Errors are not handled consistently, allowing Aaron to access sensitive functions and do not default to denying access, so application logic can be bypassed.
 Reliance on other systems for error handling introduces exploitable gaps.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities in error handling can lead to unauthorized access, exposure of sensitive information, and potentially allow attackers to manipulate application behavior.
 
@@ -30,9 +30,13 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Develop and implement a comprehensive error and exception handling strategy that is consistently applied across the entire application.
-2. Ensure that errors result in safe outcomes, such as terminating access or execution, to prevent exploitation.
-3. Avoid relying solely on external systems for error handling; ensure that the application has robust internal mechanisms to deal with errors securely.
-4. Regularly review and test error handling routines to identify and address any weaknesses or inconsistencies.
+Ensure all forms of error are handled robustly and consistently (e.g. web server, application server, database server, JavaScript, other interpreters). This encompasses:
+
+1. Implement generic error messages and use custom error pages.
+2. Develop and implement a comprehensive error and exception handling strategy that is consistently applied across the entire application.
+3. Ensure that errors result in safe outcomes, such as terminating access or execution, to prevent exploitation. When exceptions occur, fail securely. Error handling logic associated with security controls should deny access by default.
+4. Avoid relying solely on external systems for error handling; ensure that the application has robust internal mechanisms to deal with errors securely. The application should handle application errors and not rely on the server configuration.
+5. Regularly review and test error handling routines to identify and address any weaknesses or inconsistencies.
+6. Properly free allocated memory when error conditions occur.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

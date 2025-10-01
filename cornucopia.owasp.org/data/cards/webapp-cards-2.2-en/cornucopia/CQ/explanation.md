@@ -20,7 +20,7 @@ Jim can perform malicious actions without the system detecting or responding in 
 The key issue is that the system cannot reliably track or attribute actions as they happen, which aligns with **Repudiation** — the inability to prove who performed a given action.
 Lack of monitoring and automated response means there’s no immediate accountability or enforcement, which is central to repudiation concerns.
 
-### What can go Wrong?
+### What can go wrong?
 
 The inability to detect and respond to malicious activities in real-time can lead to extended unauthorized access, data breaches, and significant exploitation of system vulnerabilities.
 

@@ -21,7 +21,7 @@ Eduardo has legitimate access to the page (entry point), but the backend does no
 The core issue is improper enforcement of authorization at the data level, enabling privilege escalation within the context of an allowed page.
 The consequence of such an action leads to **Information Disclosure** in most cases.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such gaps in authorization controls can lead to unauthorized data access, potentially resulting in information leakage, privacy breaches, and compliance violations.
 
@@ -29,8 +29,11 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points. 
-2. Regularly audit and update access control mechanisms to ensure they align with user roles and data sensitivity levels.
-3. Conduct thorough security testing to identify and address any potential authorization bypass scenarios.
+Even though a user may be permitted access to a particular page, the contents of that page should also verify access control privileges. For example, a user should be able to edit their own profile text, but not that for another user.
+
+1. Implement least privilege, and restrict users to only the data and system information that are required to perform their tasks.
+2. Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points.
+3. Regularly audit and update access control mechanisms to ensure they align with user roles and data sensitivity levels.
+4. Conduct thorough security testing to identify and address any potential authorization bypass scenarios.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -18,13 +18,15 @@ That scenario maps directly to STRIDE: **Spoofing**
 Here, Kate bypasses authentication entirely because the system fails insecure (defaults to granting access).
 Even though no valid credentials were provided, the system treats her as authenticated → she is spoofing identity. There might be secondary impacts that maps to the other STRIDE categories depending on the context.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data and systems, potentially compromising the entire network or application.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Once an authentication failure is detected, access needs to be blocked. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.¨
 
 1. Design and configure authentication mechanisms to default to a 'deny access' state in case of any failure.
 2. Regularly test and validate the authentication process to ensure it behaves as expected during system errors or downtime.

@@ -20,13 +20,15 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Marce forges requests that appear to originate from an authenticated user because the server cannot distinguish legitimate requests from maliciously crafted ones.
 The attack allows her to perform actions on behalf of the user, which is impersonation—classic **Spoofing**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities expose users to CSRF attacks, where attackers can manipulate users' actions without their knowledge, potentially leading to unauthorized state changes and data breaches.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Consider supplementing standard session management with anti-CSRF tokens.
 
 1. Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
 2. Ensure that every state-changing action requires a valid anti-CSRF token to proceed.

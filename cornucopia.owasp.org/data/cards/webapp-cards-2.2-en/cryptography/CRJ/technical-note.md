@@ -1,3 +1,1 @@
-## Of Note
-
-NB: The key concept for this card is unencrypted storage of account credentials.
+The card is related to unencrypted storage of account credentials.

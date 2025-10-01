@@ -12,7 +12,18 @@ Primary impact depends on the impact of attack:
 2. **Phishing / impersonation**: Could be **Spoofing** or **Information Disclosure**.
 3. **Data exfiltration** could be **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
+
+Consider how the application's normal functionality might be used to the disbenefit of an another application, of some or all users, of another party, or even of society. This may include:
+
+1. Performing denial of service.
+2. Hosting/distribution of unapproved content (e.g. videos, photos, malware).
+3. Generating of spam messages.
+4. Hosting unapproved application code (e.g. as a command and control server, or as a bot).
+5. Reflecting an attack against another system.
+6. Attacking another internal system (e.g. databases, internal network).
+
+Considering these threats, the impact could be that:
 
 1. Users’ devices get infected with malware, ransomware, or spyware.
 2. Sensitive personal or financial data is stolen.

@@ -22,7 +22,7 @@ The STRIDE category applicable here is **Repudiation**.
 
 **Repudiation** occurs when actions cannot be traced back to the responsible party, typically due to missing or inadequate logging, auditing, or accountability mechanisms.
 
-### What can go Wrong?
+### What can go wrong?
 
 Inadequate logging and auditing can lead to significant gaps in security oversight, hindering the ability to detect, investigate, and respond to unauthorized activities.
 
@@ -34,5 +34,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 2. Ensure that audit trails are complete, immutable, and protected from unauthorized access and modification.
 3. Establish a centralized logging system to consolidate logs from various sources for easier monitoring and analysis.
 4. Regularly review and update logging and auditing mechanisms to ensure they capture all necessary information and are secure against tampering.
+
+Consider all application logging best practices according to the [OWAS Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -22,7 +22,7 @@ The applicable STRIDE category here is **Repudiation**.
 In this scenario, Keith conducts unauthorized transactions, and the lack of proper logging prevents attribution, so he can deny responsibility.
 STRIDE’s **Repudiation** threat focuses on the inability to trace or hold users accountable for their actions.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized actions going unnoticed, hinder incident response efforts, and impede accountability, potentially resulting in financial losses and security breaches.
 

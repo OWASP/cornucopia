@@ -21,9 +21,25 @@ Darío attacks by altering a session token stored in his browser's local storage
 Darío is pretending to be Colin by taking advantage of the application's trust in its data sources. 
 STRIDE’s **Spoofing** covers threats where an attacker assumes another identity or credentials to gain access. This is a textbook spoofing/impersonation attack: the system trusted the presented identity without adequate verification, but the consequences or secondary impacts can include any of the other categories depending on the context.
 
-### What can go Wrong?
+### What can go wrong?
 
 This kind of vulnerability can lead to identity theft, unauthorized access, and potentially severe data breaches.
+
+Trust management is a popular technique for implementing information security, and specifically for access control policies. All data sources of an application are be classified into groups with varying degrees of trust. When doing this, it is imperative to ensure that trusted sources cannot be spoofed. This spoofing can be done in many ways:
+
+1. Reflection attack
+2. Principal Spoof
+3. JSON Hijacking
+4. Registry Poisoning
+5. MITM
+6. XSS
+
+Attackers that are identified as trusted users or that are in a trusted zone with bad authentication techniques can do all sorts of things, depending on the services, such as:
+
+1. Sniffing
+2. Data tampering
+3. Code Injection
+4. DoS
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

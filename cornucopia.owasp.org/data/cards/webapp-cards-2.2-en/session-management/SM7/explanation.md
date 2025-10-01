@@ -22,13 +22,15 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Graham exploits the fact that Adam’s session remains active after he “logs out” or fails to log out, allowing him to assume Adam’s identity without needing credentials.
 The root issue is unauthorized impersonation via an active session, making **Spoofing** the correct primary category.
 
-### What can go Wrong?
+### What can go wrong?
 
 This flaw can lead to unauthorized session access and potential data breaches, as attackers exploit sessions that users believe to be safely closed.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Users should be able to log out from any pages protected by access control (authentication and authorisation checks). The logout functionality should fully terminate the associated session or connection such that the session identifier is no longer usable.
 
 1. Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.
 2. Design the log out process to completely terminate the session on the server side, not just on the client device.

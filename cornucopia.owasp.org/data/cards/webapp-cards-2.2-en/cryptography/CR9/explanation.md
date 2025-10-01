@@ -19,7 +19,7 @@ The primary applicable STRIDE categories for this scenario is **Information Disc
 1. Andy may be able to undermine the integrity of the system’s protections (random numbers, GUIDs, hashing, encryption). By bypassing or breaking them, he can alter outcomes (predictable GUIDs, weakened encryption, manipulated “random” values). This is a failure of integrity which makes the primary impact: **Tampering**.
 2. Andy’s bypass of weak/random crypto may give him a "backdoor" in encrypted communication that allow him to see what information is being sent. In that case the main harm is loss of confidentiality, primary impact: **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Reliance on weak, custom-built cryptographic functions can lead to compromised data security, unauthorized access, and potential breaches of sensitive information.
 

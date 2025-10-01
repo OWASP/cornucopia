@@ -21,7 +21,9 @@ The applicable STRIDE category for this scenario is **Tampering**.
 Axel is modifying data, source code, updates, or configuration in a way that the system cannot detect because integrity checks are missing.
 The core threat is unauthorized alteration of information or code, which could lead to malicious execution or corruption.
 
-### What can go Wrong?
+### What can go wrong?
+
+The possibility for tampering with state, source code, interpreted code, libraries, executables, updates, patches, configuration data, logs, etc undermines any trust in the application. Consider the file system, database content, information in memory, in page code, and data in transit.
 
 Such vulnerabilities can lead to unauthorized data manipulation, introduction of malware, corrupted system updates, and compromised system functionality.
 

@@ -18,7 +18,7 @@ Choi really wanted to pay his student loan, but he also really needed to go to t
 
 ### STRIDE
 
-### What can go Wrong? 
+### What can go wrong? 
  
 If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 
  

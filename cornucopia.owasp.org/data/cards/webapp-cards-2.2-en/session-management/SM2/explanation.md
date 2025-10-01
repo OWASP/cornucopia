@@ -21,13 +21,15 @@ William manipulates session ID generation so he can predict valid session identi
 By doing this, he can assume the identity of another user without knowing their credentials.
 The core threat is unauthorized impersonation, which is **Spoofing**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Control over session ID generation can lead to session hijacking, unauthorized access, and potential breaches of user privacy and data security.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+In general use the server or framework’s own session management controls, rather than creating custom code. The application should only recognize these session identifiers as valid, and the session identifier creation must always be done on a trusted system (e.g. server-side).
 
 1. Ensure that session identifiers are generated using strong, cryptographically secure algorithms that produce random and complex IDs.
 2. Regularly review and test the session ID generation process to ensure it remains robust against prediction and manipulation.

@@ -1,3 +1,1 @@
-## Of Note
-
-The choice of cryptographic algorithm, its configuration, and key length will not be the same for all deployments. Appropriate selection needs to be based on risk.
+The key concept is that cryptographic protections that are too weak for the sensitivity of the data or the effort an attacker will invest may lead to unauthorized disclosure or tampering.

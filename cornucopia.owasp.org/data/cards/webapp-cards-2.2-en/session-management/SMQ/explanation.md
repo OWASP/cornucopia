@@ -20,13 +20,15 @@ This scenario maps primarily to STRIDE: **Spoofing**.
 Salim exploits areas of the application where session management is not applied consistently, allowing him to bypass session checks and act as an authenticated user without proper authorization.
 The attack’s core is unauthorized impersonation via gaps in session enforcement, making **Spoofing** the correct primary category.
 
-### What can go Wrong?
+### What can go wrong?
 
 Inconsistencies in session management across an application can lead to unauthorized access and potential exploitation of the less secure areas, compromising overall system security.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Every part of the application and type of request should verify that the user has a valid current session (if required) and thus their privileges, before undertaking any other data validation and processing.
 
 1. Ensure uniform implementation of session management controls across all areas and functionalities of the application.
 2. Conduct thorough security reviews and testing, especially when integrating new features or modules, to ensure they meet established session management standards.

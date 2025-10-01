@@ -1,3 +1,1 @@
-## Of Note
-
-NB: The key concept for this card is host/network hardening, configuration and patching. See C 10 instead for software hardening, configuration and patching.
+The key concept for this card is host/network hardening, configuration and patching. See [Cornucopia 10 (CX)](/cards/CX#card 'Cornucopia 10 (CX)[internal]') for software hardening, configuration and patching.

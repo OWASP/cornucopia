@@ -19,13 +19,15 @@ The applicable STRIDE category for this scenario is **Information Disclosure**.
 Kyun is able to access sensitive data (passwords, user details) that was not properly protected.
 The data was only obfuscated, not securely encrypted, so confidential information is exposed to an attacker.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such practices can lead to unauthorized data access and breaches, as obfuscation alone is insufficient to protect against determined attackers.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+There is no substitute for a proper, approved, cryptographic function where data needs to be protected at rest or in transit. Obfuscation is rarely the correct choice. Use standard-approved functions and consider all cryptographic management requirements (e.g. key creation, distribution, protection, replacement, retirement).
 
 1. Replace obfuscation techniques with approved cryptographic functions for data protection.
 2. Ensure the implementation of industry-standard encryption algorithms to secure sensitive data.

@@ -21,7 +21,7 @@ In this case, the attacker can access resources—files, processes, session data
 The root cause is missing authorization or excessive privileges, violating the principle of least privilege.
 The consequence of such an action leads to **Information Disclosure** in most cases.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized access to critical resources, potentially resulting in data breaches, system manipulation, and other security compromises.
 
@@ -29,7 +29,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Implement comprehensive authorization checks for all resources, ensuring only appropriately privileged users can access them.
+1. Implement comprehensive authorization checks for all resources, system component and requests, regardless of resource type. Ensure only appropriately privileged users can access them.
 2. Adhere to the principle of least privilege, granting users only the permissions they need to perform their duties.
 3. Regularly audit and review user privileges and resource access controls to identify and rectify any excesses or lapses in authorization.
 

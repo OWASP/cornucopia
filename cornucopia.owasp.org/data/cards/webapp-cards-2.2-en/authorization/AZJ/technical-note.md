@@ -1,3 +1,1 @@
-## Of Note
-
-Restrict access security-relevant configuration information to only appropriate authorized users.
+The key concept is weak authorization controls which may allow unauthorized users to access and manipulate sensitive security configurations, leading to information disclosure and privilege escalation.

@@ -20,7 +20,7 @@ This scenario falls under STRIDE: **Spoofing**.
 Claudia uses weak authentication (password-only, no 2FA, no re-auth for critical functions) to impersonate legitimate users and gain access to high-value resources.
 The issue isn’t that the data is leaked by accident (Information Disclosure) or modified directly (Tampering), but that the system cannot strongly verify identity, making spoofing trivial.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive functions and data, posing a significant risk to the organization’s security and integrity.
 
@@ -28,7 +28,9 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Implement strong authentication methods like 2FA for an added layer of security, particularly for critical functions.
+The level of assurance required for confirmation of identity should be assessed. In some cases different levels of authentication may be needed (e.g. two-factor authentication for some users, but not others), and re-authentication should be considered for some important functionality (e.g. changing password, making a payment, deleting an account), especially where weaknesses have been accepted to reduce application friction for users (e.g. having longer session timeouts, allowing guest check-out, having remember-me functionality).
+
+1. Implement strong authentication methods like MFA for an added layer of security, particularly for critical functions.
 2. Introduce re-authentication processes for accessing sensitive areas or performing high-risk operations.
 3. Regularly review and update authentication protocols to ensure they align with the best practices and emerging security threats.
 

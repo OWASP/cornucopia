@@ -24,7 +24,7 @@ David is accessing data he should not be able to see because of weaknesses in th
 The primary impact is that confidential information is revealed to an unauthorized party.
 Even though the application layer is bypassed, the core effect is exposure of sensitive data, which aligns with **Information Disclosure**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized data access, data breaches, and potentially compromise the entire network and associated systems.
 
@@ -34,7 +34,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 1. Ensure secure initial configuration of all network and host infrastructure, as well as supporting services and applications, adhering to best security practices.
 2. Establish a routine for regular security audits, rechecks, and timely application of patches and updates.
-3. Secure locally stored data with strong encryption and access controls, and ensure physical security measures for data storage areas. 
+3. Secure locally stored data with strong encryption and access controls, and ensure physical security measures for data storage areas.
 4. Continuously monitor and update security configurations to address emerging threats and vulnerabilities.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

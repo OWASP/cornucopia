@@ -18,13 +18,15 @@ Kyle may be able to access sensitive data because the cryptographic controls fai
 The main impact than is that confidential information is exposed, rather than modified (Tampering) or misused to gain higher privileges (Elevation of Privilege), but if the scenario involves cryptographic integrity mechanisms, like digital signatures or message authentication codes (MACs), then a failure could allow Kyle to modify data undetected. In that case, the primary impact would be **Tampering** rather than **Information Disclosure**.
 
 
-### What can go Wrong?
+### What can go wrong?
 
 Such a vulnerability can lead to data exposure and breaches, as it allows sensitive information to be processed or transmitted without the intended cryptographic protection.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Cryptographic function errors always need to result in rejection. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
 
 1. Design cryptographic systems to fail securely, ensuring that in the event of a failure, data remains protected or access is restricted.
 2. Implement robust error handling that maintains security standards even when cryptographic processes encounter issues.

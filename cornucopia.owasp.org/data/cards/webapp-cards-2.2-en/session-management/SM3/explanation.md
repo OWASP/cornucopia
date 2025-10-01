@@ -18,13 +18,15 @@ This scenario falls under STRIDE: **Spoofing**.
 Ryan uses valid credentials to simultaneously access the account while the legitimate user is active, effectively impersonating the user in parallel.
 The system’s failure to restrict or monitor concurrent sessions enables him to bypass control over who is acting as that user.
 
-### What can go Wrong?
+### What can go wrong?
 
 Allowing concurrent sessions without proper controls can lead to unauthorized access and exploitation of user accounts, potentially compromising data security and privacy.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+In some ecommerce applications it may be desirable to allow customers to be logged in using multiple browsers/devices. However that would be unusual for administrative users, or users of more sensitive data. Even if concurrent sessions are allowed. consider what should occur in other sessions when a user changes their password, or changes their delivery address, or logs out, or times out, or authentication failure occurs.
 
 1. Implement a policy to restrict or carefully monitor concurrent sessions. Options include limiting the number of simultaneous sessions per user or requiring additional verification for new sessions.
 2. Set up alerts for unusual patterns of concurrent access, such as logins from geographically distant locations within a short timeframe.

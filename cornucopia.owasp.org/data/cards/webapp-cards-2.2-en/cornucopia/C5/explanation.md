@@ -18,9 +18,9 @@ The primary STRIDE category is **Spoofing**.
 
 This scenario is about exploiting trust for malicious gain, typically referred to in STRIDE as **Spoofing**, because Larry pretends to be the trusted application or uses its trusted identity to deceive others.
 
-### What can go Wrong?
+### What can go wrong?
 
-Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems.
+Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

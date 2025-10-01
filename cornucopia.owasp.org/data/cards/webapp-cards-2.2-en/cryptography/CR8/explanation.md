@@ -19,7 +19,7 @@ The applicable STRIDE category for this scenario is **Information Disclosure**.
 The weakness is that sensitive stored data (passwords, session IDs, PII, cardholder data) is not encrypted or hashed securely, so when Eoin gains access, he can directly read it. That’s a confidentiality failure.
 If what’s exposed are passwords or session identifiers, Eoin may go beyond just seeing them and actually log in or hijack accounts. That would then lead to **Elevation of Privilege**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Storing sensitive business data without secure encryption or hashing can lead to severe data breaches, compromising user privacy and leading to potential financial and reputational damage.
 

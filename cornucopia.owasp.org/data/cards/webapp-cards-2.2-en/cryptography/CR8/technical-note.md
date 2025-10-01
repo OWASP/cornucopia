@@ -1,3 +1,1 @@
-## Of Note
-
-NB: The key concept for this card is protection of stored data.
+The card is related to protection of stored data.

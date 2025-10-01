@@ -19,7 +19,9 @@ The applicable STRIDE category for this scenario is **Information Disclosure**.
 Paulo is able to access sensitive data (credentials, financial information) because it is not properly protected, even though the transport channel is encrypted.
 The core threat is exposure of confidential information — he is reading data he should not be able to see.
 
-### What can go Wrong?
+### What can go wrong?
+
+Data may use encryption in transit like Transport Layer Security (TLS). However, an attacker may have legitimate access to this (e.g. viewing SSL content in a web browser).
 
 This vulnerability can lead to data exposure and breaches, especially if endpoint security is compromised or if there are gaps in the transmission channel’s encryption.
 
@@ -27,7 +29,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Ensure that sensitive data is encrypted independently before it is sent over the communication channel.
+1. Consider whether the data transmitted also needs to be encrypted itself, not just sent using an encrypted protocol. Ensure that sensitive data is encrypted independently before it is sent over the communication channel.
 2. Maintain robust endpoint security to protect data when it is encrypted or decrypted.
 3. Regularly review and strengthen both data and channel encryption practices to cover potential vulnerabilities.
 
