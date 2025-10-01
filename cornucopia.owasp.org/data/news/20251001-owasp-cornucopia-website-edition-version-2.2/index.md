@@ -30,7 +30,7 @@ If you happen to be ISO 27001 certified and are writing code, you should know th
 But, how can you possible do that in an agile and fun way?
 
 Visit [copi.owasp.org](https://copi.owasp.org) and play OWASP Cornucopia, Elevation of MLSec, Elevation of Privilege or OWASP Cumulus with your team.
-Games aren't just for fun, they can be serious tools too and that is what we are doing with [OWASP Cornucopia](https://cornucopia.owasp.org/). We are making threat modeling for everyone, everywhere, and we have a special love for agile teams that want to do continuous threat modeling as part of their development sprints. Don't believe us? See how long-time project contributor Max Alejandro Gómez Sánchez Vergaray has [created a video](https://cornucopia.owasp.org/how-to-play#Gameplay-using-abuse-case-modelling-approach) to explain how he has trained hundreds of teams to use OWASP Cornucopia in abuse case modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date.
+Games aren't just for fun, they can be serious tools too, and that is what we are doing with [OWASP Cornucopia](https://cornucopia.owasp.org/). We are making threat modeling for everyone, everywhere, and we have a special love for agile teams that want to do continuous threat modeling as part of their development sprints. Don't believe us? See how long-time project contributor Max Alejandro Gómez Sánchez Vergaray has [created a video](https://cornucopia.owasp.org/how-to-play#Gameplay-using-abuse-case-modelling-approach) to explain how he has trained hundreds of teams to use OWASP Cornucopia in abuse case modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date.
 
 ---
 
