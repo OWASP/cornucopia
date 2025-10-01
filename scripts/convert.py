@@ -649,7 +649,7 @@ def map_language_data_to_template(input_data: Dict[str, Any]) -> Dict[str, str]:
 
 def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
     reg_str: str = (
-        "^(OWASP MASTG|OWASP MASVS|OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC|SAFECODE)\u2028"
+        "^(OWASP MASTG|OWASP MASVS|OWASP SCP|OWASP ASVS|OWASP AppSensor|CAPEC™|SAFECODE)\u2028"
         + k.replace("$", "\\$").strip()
         + "$"
     )
