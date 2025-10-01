@@ -11,7 +11,7 @@ description: OWASP Cornucopia Website Edition v2.2
 
 _Shift-left doesn't start with scanning the code for security vulnerabilities; it begins with designing it. Play yourself secure with OWASP Cornucopia Website Edition v2.2_
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 To often the shift-left mantra consists of implementing AI code scanning and AI-generated patches for remediation. Also, don't forget to implement the [AI-powered benchmark for AI-Powered Security Fixes](https://engineering.fb.com/2025/04/29/ai-research/autopatchbench-benchmark-ai-powered-security-fixes/). We're not telling you to stop using these tools, we want you to ask yourself (to paraphrase [Adam Shostack's 4 question frame for threat modeling](https://github.com/adamshostack/4QuestionFrame)):
 
@@ -87,5 +87,6 @@ Uncover the security flaws in your software's design before the bad guys do it f
 src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpolicy="no-referrer" allowfullscreen >
 <p>You cannot view this video directly because iframes are disabled. Click <a href="https://www.youtube.com/watch?v=XXTPXozIHow" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p></iframe>
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
+
 [OWASP Foundation](https://owasp.org "[external]") is a non-profit foundation that envisions a world with no more insecure software. Our mission is to be the global open community that powers secure software through education, tools, and collaboration. We maintain hundreds of open source projects, run industry-leading educational and training conferences, and meet through over 250 chapters worldwide.
