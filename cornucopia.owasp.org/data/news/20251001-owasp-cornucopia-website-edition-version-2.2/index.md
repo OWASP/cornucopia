@@ -55,7 +55,7 @@ We are just getting started, in fact, this is just the 1. step. We will continue
 ### Preparations
 
 1. Identify an application or application process to review; this might be a concept, design or an actual implementation
-2. Have a data flow diagram, or make one!
+2. Ask: "What are we working on?" By bringing a data flow diagram, or making one!
 3. Invite a group of 3-6 people on your team who know what's been built, or what's going to be built, inside out
 4. Have some prizes to hand (gold stars, chocolate, pizza, beer, flowers, whatever you need)
 
