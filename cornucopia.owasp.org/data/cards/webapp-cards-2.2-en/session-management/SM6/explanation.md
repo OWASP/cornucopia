@@ -27,7 +27,7 @@ This vulnerability can lead to unauthorized session takeovers, leading to potent
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 There should be a session inactivity timeout that is as short as possible, based on balancing risk and business functional requirements. This could be role-dependent. Additionally disallow persistent logins and enforce periodic session terminations (e.g. after 8 or 12 hours), even when the session is active, especially for applications supporting rich network connections or connecting to critical systems. Termination times should support business requirements and the user should receive sufficient notification to mitigate negative impacts.
 

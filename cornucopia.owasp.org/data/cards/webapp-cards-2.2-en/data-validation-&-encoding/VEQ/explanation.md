@@ -26,7 +26,7 @@ Due a failure of client-side input or output validation, encoding or sanitizatio
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Ensure the use of parameterized interfaces for all data inputs and correctly implement them.
 2. Apply proper data encoding techniques based on the specific context of use.

@@ -26,7 +26,7 @@ The degree of identity assurance may not be the same for all web application fun
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Ensure uniform implementation of robust authentication measures across all functionalities and channels, including mobile and web platforms, APIs, and customer service points.
 2. Regularly review and update authentication protocols to maintain consistent security standards across all access points.

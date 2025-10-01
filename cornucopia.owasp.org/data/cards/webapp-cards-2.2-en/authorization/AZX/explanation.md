@@ -26,7 +26,7 @@ Such inconsistencies in authorization control application can lead to unauthoriz
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Centralized authorization routines are a good programming practice, but like other routines, developers need to understand how they work, how to use them and any limitations. Such routines can be tested independently of other code and not only provide assurance on the quality, but also make refactorization an easy task and eliminate code duplicates and bad interpretations.
 

@@ -25,7 +25,7 @@ Storing sensitive business data without secure encryption or hashing can lead to
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement robust encryption for sensitive data storage, ensuring that even if data is accessed, it remains unintelligible and secure.
 2. Use secure hashing algorithms, particularly for storing passwords, to prevent them from being reverted to their original form.

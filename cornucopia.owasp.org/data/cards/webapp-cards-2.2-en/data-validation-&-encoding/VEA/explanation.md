@@ -46,7 +46,7 @@ Failing to validate and encode properly doesn’t just hit one STRIDE category �
 2. Security Misconfigurations – Unvalidated input might toggle debug features or hidden APIs.
 3. Malware Distribution – Attackers upload unvalidated files and trick users into downloading them later.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Validate input = stop bad data from entering.
 Encode output = stop injected data from executing.

@@ -26,7 +26,7 @@ Such an absence of authentication exposes the system to unauthorized access, pot
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement authentication requirements for all resources and services, regardless of their perceived security level.
 2. Clearly define and document authentication responsibilities to ensure no system component is left unprotected due to assumptions about other systems’ security measures.

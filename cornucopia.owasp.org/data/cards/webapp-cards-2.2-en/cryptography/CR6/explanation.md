@@ -25,7 +25,7 @@ This vulnerability can lead to unauthorized access to sensitive data, data breac
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement encryption for sensitive data while it is in memory and during processing within the application.
 2. Ensure that all data communications, both internal and external, are secured with robust encryption methods.

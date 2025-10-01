@@ -31,7 +31,7 @@ Without knowing the character encoding accurately, data validation routines coul
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Use system components that support UTF-8 extended character sets. Specify proper character sets, such as UTF-8, for all sources of input.
 2. Prevent complications from multiple encodings by standardizing the encoding process.

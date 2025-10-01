@@ -44,7 +44,7 @@ A compromise related to legal, regulatory, contractual or other organizational m
 6. Inaccurate compliance reporting (e.g., SAQ misreporting for PCI DSS).
 7. Operational disruptions due to disabled or insecure processes.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. **Access Controls & Privilege Management**: Restrict who can modify configuration, components, or application logic.
 2. **Change Management**: Enforce approval workflows and documented change procedures for all updates.

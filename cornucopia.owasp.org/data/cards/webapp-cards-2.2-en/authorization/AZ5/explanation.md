@@ -27,7 +27,7 @@ Such vulnerabilities can lead to unauthorized access to critical resources, pote
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement comprehensive authorization checks for all resources, system component and requests, regardless of resource type. Ensure only appropriately privileged users can access them.
 2. Adhere to the principle of least privilege, granting users only the permissions they need to perform their duties.

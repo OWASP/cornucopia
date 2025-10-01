@@ -30,7 +30,7 @@ Such vulnerabilities can lead to unauthorized information access, breaches of co
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Consider all accounts/roles and what access privileges they have, and whether a user in one role can utilize another role. Create an Access Control Policy to document an application's business rules, data types and access authorization criteria and/or processes so that access can be properly provisioned and controlled. This includes identifying access requirements for both the data and system resources.
 

@@ -24,7 +24,7 @@ Such a vulnerability can lead to data exposure and breaches, as it allows sensit
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Cryptographic function errors always need to result in rejection. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
 

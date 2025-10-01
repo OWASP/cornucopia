@@ -26,7 +26,7 @@ Such exposure of source code and business logic can lead to unauthorized access,
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Securely store source code in access-controlled repositories.
 2. Enforce the use of signature verification for the distribution of executable code and packages.

@@ -26,7 +26,7 @@ Such manipulation can lead to the compromise of entire cryptographic systems, re
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 In general, all cryptographic routines should be on the server-side using robust, tested and protected routines.
 

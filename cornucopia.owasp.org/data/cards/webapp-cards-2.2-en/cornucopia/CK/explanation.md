@@ -30,7 +30,7 @@ These type of threats abuse the application layer in the attack and is therefor 
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement robust rate limiting on user requests, particularly for resource-intensive functionalities.
 2. Monitor and optimize the application’s performance to handle high volumes of traffic and processing.

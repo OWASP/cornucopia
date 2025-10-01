@@ -26,7 +26,7 @@ Such vulnerabilities expose users to CSRF attacks, where attackers can manipulat
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Consider supplementing standard session management with anti-CSRF tokens.
 

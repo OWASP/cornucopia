@@ -26,7 +26,7 @@ Unsecured administrative tools and interfaces can lead to major data breaches, u
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement strong authentication measures, such as multi-factor authentication, for all administrative interfaces and tools.
 2. Enforce robust password policies and regular credential updates for system administrators.

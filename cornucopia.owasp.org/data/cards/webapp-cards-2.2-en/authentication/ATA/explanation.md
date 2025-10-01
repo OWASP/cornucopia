@@ -23,7 +23,7 @@ Authentication’s main purpose is to verify identity. If you can invent a new w
 
 User impersonation, privilege escalation, credential theft, MFA bypass, session hijacking, account enumeration, denial of service, audit gaps.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Strong centralized auth, MFA, secure credential storage, rate limiting, fail-secure defaults, session security, re-authentication, logging, testing, protection of auth routines.
 

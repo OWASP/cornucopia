@@ -27,7 +27,7 @@ Control over session ID generation can lead to session hijacking, unauthorized a
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 In general use the server or framework’s own session management controls, rather than creating custom code. The application should only recognize these session identifiers as valid, and the session identifier creation must always be done on a trusted system (e.g. server-side).
 

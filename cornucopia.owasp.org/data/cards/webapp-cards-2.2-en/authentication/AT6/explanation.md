@@ -28,7 +28,7 @@ This oversight can lead to unauthorized account access, data breaches, and poten
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Temporary passwords must expire within a suitably short time period. Enforce the changing of temporary passwords on the next use - no user should be utilising a temporary password on a regular or ongoing basis.
 

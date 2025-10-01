@@ -28,7 +28,7 @@ This type of vulnerability exposes users to account takeover, data breaches, and
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Attacks should be prevented from being able to obtain valid account credentials by using the application in an unintended manner.
 

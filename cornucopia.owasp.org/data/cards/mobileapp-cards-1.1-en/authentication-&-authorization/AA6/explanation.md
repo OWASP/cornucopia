@@ -8,7 +8,7 @@
 
 ### What can go wrong?
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 
 https://mas.owasp.org/MASWE/MASVS-AUTH/MASWE-0029/

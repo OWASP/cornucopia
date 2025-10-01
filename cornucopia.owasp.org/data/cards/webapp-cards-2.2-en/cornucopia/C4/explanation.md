@@ -28,7 +28,7 @@ This vulnerability can lead to unauthorized actions going unnoticed, hinder inci
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement comprehensive logging of all user activities within the application, capturing details such as timestamps, user IDs, and the nature of the actions.
 2. Ensure that all actions are attributable to individual users by maintaining secure and unique user identification mechanisms.

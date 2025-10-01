@@ -28,7 +28,7 @@ A lack of input validation is often the root cause of many security issues. Sinc
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 The developer needs to understand how data are formatted/composed, why the data is being sent, what it is used for and the meaning of the values.
 

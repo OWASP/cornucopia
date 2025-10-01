@@ -29,7 +29,7 @@ Such vulnerabilities can lead to a range of issues, from unauthorized access and
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Replace risky and vulnerable functions with safer alternatives and follow secure coding practices. Use non-executable stacks when available.
 2. Use checksums or hashes to verify the integrity of interpreted code, libraries, executables, and configuration files.

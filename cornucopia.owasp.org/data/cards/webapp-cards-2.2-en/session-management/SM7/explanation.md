@@ -28,7 +28,7 @@ This flaw can lead to unauthorized session access and potential data breaches, a
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Users should be able to log out from any pages protected by access control (authentication and authorisation checks). The logout functionality should fully terminate the associated session or connection such that the session identifier is no longer usable.
 

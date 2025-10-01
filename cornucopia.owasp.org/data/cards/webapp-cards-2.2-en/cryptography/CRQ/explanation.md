@@ -25,7 +25,7 @@ Access to master cryptographic secrets can lead to widespread system compromise,
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Secure master cryptographic secrets with the highest level of protection, including physical and logical security measures.
 2. Utilize strong, non-predictable algorithms for generating master secrets and ensure they are stored in highly secure, access-controlled environments.

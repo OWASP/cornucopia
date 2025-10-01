@@ -26,7 +26,7 @@ Such vulnerabilities can lead to unauthorized alterations in security settings, 
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement stringent authorization controls to restrict access to security configurations and ACLs, ensuring only authorized personnel can view or modify them.
 2. Regularly audit and monitor access to these settings to detect and respond to any unauthorized attempts.

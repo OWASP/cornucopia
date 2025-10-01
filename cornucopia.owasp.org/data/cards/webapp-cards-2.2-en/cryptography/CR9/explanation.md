@@ -25,7 +25,7 @@ Reliance on weak, custom-built cryptographic functions can lead to compromised d
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Replace custom cryptographic functions with well-established, industry-standard algorithms and libraries that have been rigorously tested and proven secure.
 2. Conduct regular security audits and reviews of cryptographic implementations to ensure they are strong and effective.

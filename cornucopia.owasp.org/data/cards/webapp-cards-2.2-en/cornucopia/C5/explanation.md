@@ -24,7 +24,7 @@ Such manipulation can lead to significant breaches of user trust, unauthorized a
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement robust verification and authentication measures to prevent misuse of the application’s trusted status.
 2. Educate users about the risks of phishing and other trust exploitation tactics. 

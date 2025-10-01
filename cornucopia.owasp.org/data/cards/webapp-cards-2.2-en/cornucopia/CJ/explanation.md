@@ -28,7 +28,7 @@ These vulnerabilities can lead to significant security breaches, unauthorized ac
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Ensure that all tools used for compiling the application are up-to-date and free from known vulnerabilities.
 2. Configure the application with secure settings by default and regularly review these settings to align with evolving security standards. 

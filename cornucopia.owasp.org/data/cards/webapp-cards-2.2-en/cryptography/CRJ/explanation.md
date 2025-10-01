@@ -25,7 +25,7 @@ Storing credentials in an unencrypted format or embedding them in source code ca
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Avoid storing credentials in the source code. Instead, use secure vaults or environment variables for credential storage.
 2. Ensure all sensitive credentials are encrypted and securely managed, accessible only to authorized systems or personnel.

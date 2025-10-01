@@ -43,7 +43,7 @@ Attackers that are identified as trusted users or that are in a trusted zone wit
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement strict validation of user-defined and client-side data.
 2. Ensure strong verification of user identity and the integrity of state data stored on client devices.

@@ -31,7 +31,7 @@ Common attacks includes automated threats such as: Account aggregation, Account 
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement rate limiting and usage throttling to prevent excessive use of features.
 2. Design features with resource consumption and potential misuse in mind, ensuring they can handle unexpected or intensive usage without impacting overall system performance.

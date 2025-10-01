@@ -28,7 +28,7 @@ Such vulnerabilities can lead to data interception, unauthorized access, and inf
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Configuration best practice guidance needs to be reviewed periodically, vulnerability announcements monitored, and configuration standards updated.
 

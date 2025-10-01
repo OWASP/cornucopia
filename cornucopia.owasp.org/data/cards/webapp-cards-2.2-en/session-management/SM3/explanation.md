@@ -24,7 +24,7 @@ Allowing concurrent sessions without proper controls can lead to unauthorized ac
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 In some ecommerce applications it may be desirable to allow customers to be logged in using multiple browsers/devices. However that would be unusual for administrative users, or users of more sensitive data. Even if concurrent sessions are allowed. consider what should occur in other sessions when a user changes their password, or changes their delivery address, or logs out, or times out, or authentication failure occurs.
 
