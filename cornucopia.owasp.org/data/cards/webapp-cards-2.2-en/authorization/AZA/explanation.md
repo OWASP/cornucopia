@@ -16,7 +16,7 @@ Inventing an authorization threat could lead to:
 
 Any of the STRIDE categories may be applicable, but primary impact is usually **Elevation of Privilege**, since bypassing authorization typically means doing more than you should.
 
-### What can go Wrong?
+### What can go wrong?
 
 Privilege escalation, data leaks, unauthorized actions, bypassed business rules, audit failures, chained attacks, potential DoS.
 

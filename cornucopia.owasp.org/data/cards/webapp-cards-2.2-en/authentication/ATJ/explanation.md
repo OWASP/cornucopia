@@ -20,7 +20,7 @@ This scenario maps directly to STRIDE: **Spoofing**.
 Even though no credentials are provided, Mark gains access to the system without authentication, effectively being treated as a valid user.
 The system’s failure is that it assumes authentication is done elsewhere or not needed — this lets an attacker bypass identity verification entirely.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such an absence of authentication exposes the system to unauthorized access, potentially leading to data breaches and exploitation of sensitive resources.
 
@@ -31,5 +31,11 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Implement authentication requirements for all resources and services, regardless of their perceived security level.
 2. Clearly define and document authentication responsibilities to ensure no system component is left unprotected due to assumptions about other systems’ security measures.
 3. Regularly audit the entire system to identify and rectify any areas lacking proper authentication controls.
+4. For each entry point, verify that the correct degree of authentication is required and occurs. Ensure this includes:
+    1. Access to remote systems.
+    2. APIs.
+    3. Non HTML content (e.g. files, images).
+    4. Reporting.
+    5. Any other 'internal' functionality.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

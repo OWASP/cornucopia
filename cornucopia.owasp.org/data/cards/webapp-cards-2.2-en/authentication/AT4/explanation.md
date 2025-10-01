@@ -21,9 +21,17 @@ The scenario maps directly to STRIDE: **Information Disclosure**.
 Sebastien is learning something the system should treat as sensitive: the set of valid usernames.
 In STRIDE, **Information Disclosure** is about exposing data to unauthorized parties. Usernames are part of authentication secrets, and leaking or allowing enumeration discloses information attackers can weaponize.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to targeted attacks, including phishing, social engineering, and brute-force attacks, as attackers gain knowledge about valid user accounts.
+
+The threat is often the result of one or more of the following:
+
+1. User names (IDs, account names) may be guessable, published elsewhere, or are simply email addresses
+2. Authentication and related mechanisms may indicate whether a username is valid or not (registration, password reset/recovery, username recovery, change password, change email address)
+3. Missing authentication failure detection
+4. Missing monitoring to identify attacks against multiple user accounts, utilizing the same password
+5. Additionally another web or non-web application (e.g. mobile app, telephone service) that utilizes the same credentials has one or more of the above problems.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

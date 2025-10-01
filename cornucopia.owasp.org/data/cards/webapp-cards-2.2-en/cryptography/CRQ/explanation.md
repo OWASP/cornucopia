@@ -19,7 +19,7 @@ That scenario clearly maps to **Information Disclosure** in STRIDE.
 The primary violation is exposure of sensitive credentials (database passwords, API keys, service credentials).
 Once Justin can read those secrets, he can then leverage them for further attacks (like **Tampering**, **Elevation of Privilege**, etc.), but the root threat is that information that should have been protected is disclosed in plaintext or source code.
 
-### What can go Wrong?
+### What can go wrong?
 
 Access to master cryptographic secrets can lead to widespread system compromise, unauthorized data access, and the potential decryption of sensitive information.
 

@@ -13,7 +13,7 @@ Little does she know that this app, in particular, will look for capabilities, o
 
 ### STRIDE
 
-### What can go Wrong? 
+### What can go wrong? 
  
 - Custom Permission Typos: A custom permission may be declared in the Manifest of one of the apps installed on Vandana's phone, but a different custom permission is used to protect exported Android components, due to a typo, Choi's malicious application can capitalize on the misspelling by either: 
   - Registering that permission first 

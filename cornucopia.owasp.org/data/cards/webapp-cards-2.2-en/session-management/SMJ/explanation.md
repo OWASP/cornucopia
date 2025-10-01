@@ -18,7 +18,7 @@ This scenario maps primarily to STRIDE: **Tampering**.
 Jeff resends an identical request (a replay attack) and the system accepts it as new, effectively modifying the state of the system (e.g., triggering multiple transactions).
 The attack is not about impersonation (Spoofing) per se, but about unauthorized manipulation of data/state, which is classic **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to replay attacks, resulting in unauthorized transactions, data breaches, and exploitation of system functionalities.
 

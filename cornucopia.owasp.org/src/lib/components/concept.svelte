@@ -10,5 +10,5 @@
 </script>
 
 <div>
-    <SvelteMarkdown {renderers} source={card.technical}></SvelteMarkdown>
+    <SvelteMarkdown {renderers} source={card.concept}></SvelteMarkdown>
 </div>

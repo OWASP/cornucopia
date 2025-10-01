@@ -1,3 +1,1 @@
-## Of Note
-
-Consider guidance provided by OWASP AppSensor real-time application level intrusion detection and response.(https://wiki.owasp.org/index.php/OWASP_AppSensor_Project)
+The key concept is that without real-time monitoring and automated response, malicious actions can go undetected and untraceable, enabling attackers to evade accountability.

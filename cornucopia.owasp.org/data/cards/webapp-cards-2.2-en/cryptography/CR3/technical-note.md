@@ -1,3 +1,1 @@
-## Of Note
-
-Tampering with state, source code, interpreted code, libraries, executables, updates, patches, configuration data, logs, etc undermines any trust in the application. Consider the file system, database content, information in memory, in page code, and data in transit.
+The key concept is that the absence of integrity checks allows attackers to tamper with data, code, and configurations without detection, compromising system trust and security.

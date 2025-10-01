@@ -1,3 +1,1 @@
-## Of Note
-
-Protect source code repositories and server-side source-code. Consider anti reverse-engineering techniques. Do not include or minimise logic/secrets within code accessible by users.
+The key concept is that insecure source code management and lack of obfuscation can expose business logic and embedded secrets, leading to unauthorized information disclosure.

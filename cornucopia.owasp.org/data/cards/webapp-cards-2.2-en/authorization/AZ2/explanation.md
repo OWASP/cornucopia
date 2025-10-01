@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Tampering**.
 Tim is able to redirect or forward data to locations under his control, altering the intended path or destination of sensitive information.
 The core issue is manipulating the system’s handling of data, which fits the definition of **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized data disclosure, data breaches, and the potential compromise of sensitive information.
 
@@ -31,5 +31,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
 2. Ensure that the system verifies user permissions before allowing data to be redirected or exported.
 3. Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.
+4. Verify that users not are able to define unauthorized virtual locations/addresses (E.g: db table names, file system paths, sms, email, domains and url paths ).
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

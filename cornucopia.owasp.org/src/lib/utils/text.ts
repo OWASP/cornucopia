@@ -26,6 +26,15 @@ export class Text
         return input;
     }
 
+    public static convertToTitleCase( str: string ) : string{
+        if (!str) {
+        return "";
+        }
+        return str.toLowerCase().replace(/\b\w/g, function(char) {
+        return char.toUpperCase();
+        });
+    }
+
     public static FormatDate(input : string) : string
     {
         // This method expects 19 december 2020 as 20201219 (YYYMMDD)

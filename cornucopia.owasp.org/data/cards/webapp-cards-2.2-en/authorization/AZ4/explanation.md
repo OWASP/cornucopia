@@ -18,13 +18,15 @@ This scenario maps primarily to STRIDE: **Elevation of Privilege**.
 Kelly exploits a non-secure fallback in the authorization mechanism. When the system encounters an error, it defaults to granting access, allowing her to access areas she normally shouldn’t.
 The attack is not about impersonating someone else (Spoofing), but about accessing resources without proper authorization, which is classic **Elevation of Privilege**.
 
-### What can go Wrong?
+### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data or functionalities, potentially compromising the entire system’s security.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+Once an authorization failure is detected, access needs to be blocked. It is also useful to log (associated with the user's identity if possible) and flag these as possibly malicious activity for further analysis, or as input for application intrusion detection systems.
 
 1. Configure all authorization mechanisms to default to a 'deny access' state in the event of any failure or error.
 2. Regularly test and validate the authorization process to ensure it behaves securely during system errors or downtimes.

@@ -1,5 +1,1 @@
-## Of Note
-
-Implement least privilege, and restrict users to only the functionality, objects and properties that are required to perform their tasks.
-
-NB: the key concept for this card is applying function/object/property authorization controls. See AZ 5 for resource type controls, and AZ 6 for data controls.
+The key concept for this card is applying function/object/property authorization controls. See [Authorization 5 (AZ5)](/cards/AZ5#card 'Authorization 5 (AZ5) [internal]') for resource type controls, and [Authorization 6 (AZ6)](/cards/AZ6#card 'Authorization 6 (AZ6) [internal]') for data controls.

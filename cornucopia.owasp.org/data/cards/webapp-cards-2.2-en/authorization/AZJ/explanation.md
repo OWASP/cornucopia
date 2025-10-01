@@ -20,7 +20,7 @@ This scenario maps primarily to STRIDE: **Information Disclosure** and potential
 Dinis, a regular user, can access security configurations and ACLs, which are normally restricted and sensitive, meaning that there is a **Information Disclosure**. In the case that he can modify them, he can grant himself higher privileges, escalating his access.
 The core issue is unauthorized access to sensitive security controls, potentially, enabling privilege escalation.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized alterations in security settings, potential system breaches, and the compromise of network integrity.
 
@@ -31,5 +31,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Implement stringent authorization controls to restrict access to security configurations and ACLs, ensuring only authorized personnel can view or modify them.
 2. Regularly audit and monitor access to these settings to detect and respond to any unauthorized attempts.
 3. Employ role-based access control (RBAC) to clearly define and enforce access permissions based on user roles
+4. Restrict access to security-relevant configuration to only appropriate authorized users.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

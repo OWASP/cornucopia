@@ -20,7 +20,7 @@ Michael is gaining access to administrative functions and sensitive data that he
 The core impact is that he is escalating his access from a normal user (or unauthenticated user) to an administrative level.
 Even though he can view and modify data, the underlying issue is that privilege boundaries are bypassed, which aligns with **Elevation of Privilege** rather than **Information Disclosure** (which focuses only on unauthorized reading) or **Tampering** (which focuses on modifying data within authorized access).
 
-### What can go Wrong?
+### What can go wrong?
 
 Unsecured administrative tools and interfaces can lead to major data breaches, unauthorized access to sensitive information, and potential system-wide compromises.
 

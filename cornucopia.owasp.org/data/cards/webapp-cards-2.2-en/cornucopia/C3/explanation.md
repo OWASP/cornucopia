@@ -20,7 +20,7 @@ Andrew is gaining access to sensitive information (source code, embedded secrets
 STRIDE’s **Information Disclosure** covers scenarios where an attacker learns secrets or confidential information without proper authorization.
 Accessing or decompiling source code, and uncovering embedded credentials or business logic, constitutes unauthorized exposure of sensitive data, which is exactly what I**nformation Disclosure** describes.
 
-### What can go Wrong?
+### What can go wrong?
 
 Such exposure of source code and business logic can lead to unauthorized access, intellectual property theft, and exploitation of hidden vulnerabilities or secrets within the application.
 
@@ -28,9 +28,10 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are you going to do about it?
 
-1. Securely store source code in access-controlled repositories and limit distribution of compiled code.
-2. Implement code obfuscation techniques to prevent easy decompilation and understanding of business logic in distributed binaries. 
-3. Avoid embedding secrets in the source code. Instead, use secure methods for managing and accessing credentials and keys.
-4. Conduct regular security reviews and audits of source code management practices
+1. Securely store source code in access-controlled repositories.
+2. Enforce the use of signature verification for the distribution of executable code and packages.
+3. Consider using anti reverse-engineering techniques. Implement code obfuscation techniques to prevent easy decompilation and understanding of business logic in distributed binaries.
+4. Avoid embedding secrets in the source code. Instead, use secure methods for managing and accessing credentials and keys.
+5. Conduct regular security reviews and audits of source code management practices
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

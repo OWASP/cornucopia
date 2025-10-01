@@ -1,3 +1,7 @@
+## Key Concept
+
+This card is related to notification of events to users.
+
 ## Scenario: James’s Unnoticed Authentication Interference
 
 Consider a scenario where James, a cunning hacker, carries out authentication-related activities, such as password changes, without alerting the real user. He exploits security gaps in the notification and monitoring processes:
@@ -22,7 +26,7 @@ James is able to perform authentication-related actions without the legitimate u
 STRIDE’s **Repudiation** threat category is about the ability to perform actions that cannot be traced or denied — essentially a lack of sufficient logging, auditing, or notification.
 The absence of alerts/notifications means the legitimate user cannot detect or contest the malicious activity. That is classic repudiation risk. Depending on the context, any of the other categories could be a secondary or related impact.
 
-### What can go Wrong?
+### What can go wrong?
 
 This kind of vulnerability can lead to unnoticed account takeovers, prolonged unauthorized access, and potentially significant data breaches or identity theft.
 

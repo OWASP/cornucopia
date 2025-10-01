@@ -6,7 +6,7 @@
 
 ### STRIDE
 
-### What can go Wrong?
+### What can go wrong?
 
 ### What are you going to do about it?
 

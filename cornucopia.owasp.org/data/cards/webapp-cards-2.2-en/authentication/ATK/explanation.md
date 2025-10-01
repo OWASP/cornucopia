@@ -20,13 +20,15 @@ This scenario maps primarily to STRIDE: **Tampering**.
 Olga alters the authentication module itself, changing how it behaves so she can bypass normal checks.
 The attack is not just exploiting weak authentication, it’s modifying the code that enforces authentication, which is classic integrity compromise, i.e., **Tampering**.
 
-### What can go Wrong?
+### What can go wrong?
 
 This form of attack can lead to unauthorized system access, data breaches, and potentially allow for widespread manipulation of system functions.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are you going to do about it?
+
+In general, all authentication routines should be on the server-side using robust, tested and protected routines.
 
 1. Implement strict access controls and security measures in the code development and deployment process to prevent unauthorized modifications.
 2. Regularly review and audit authentication modules to detect any unauthorized changes or vulnerabilities.

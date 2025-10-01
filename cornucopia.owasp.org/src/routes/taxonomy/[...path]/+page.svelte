@@ -7,7 +7,14 @@
     let { data } = $props();
 </script>
 <svelte:head>
-    <link rel="canonical" href="/" />
+    <link rel="canonical" href="/taxonomy" />
+    <title>{data.title}</title>
+	<meta name="description" content="{Text.Format(data.title)}" />
+	<meta name="keywords" content="cornucopia, threat modeling, taxonomy, requirements" />
+    <meta property="og:title" content="{Text.Format(data.title)}">
+    <meta property="og:description" content="{Text.Format(data.title)}">
+    <meta name="twitter:title" content="{Text.Format(data.title)}">
+    <meta name="twitter:description" content="{Text.Format(data.title)}">
 </svelte:head>
 {#if data.folders.length != 0 }
 <h1 class="clickable" title="{Text.Format(data.title)}" id="{data.title}">{Text.Format(data.title)}</h1>
