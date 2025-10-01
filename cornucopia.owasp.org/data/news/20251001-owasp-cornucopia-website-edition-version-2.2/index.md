@@ -61,7 +61,7 @@ We are just getting started, in fact, this is just the 1. step. We will continue
 
 ### Play
 
-1. Create a game in [Copi](https://copi.owasp.org/games/new) or use a [OWASP Cornucopia deck with QR codes from cybersecgames.com](https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards?variant=55622568903043) 
+1. Create a game in [Copi](https://copi.owasp.org/games/new) or use a [OWASP Cornucopia deck with QR codes from cybersecgames.com](https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards?variant=55622568903043)
 2. If you are using Copi, Share the link to the game page with everyone playing or watching
 3. Players can click the button to join as a player
 4. Once at least 3 players have joined you can start the game (make sure all your players have joined!)
