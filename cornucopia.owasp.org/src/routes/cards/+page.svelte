@@ -1,6 +1,6 @@
 <script lang="ts">
     import SvelteMarkdown from 'svelte-markdown';
-    import renderers from '$lib/components/renderers/renderers';
+    import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
@@ -104,7 +104,7 @@
 <div>
 <section title="OWASP Cornucopia decks" id="decks">
 {#if content != ''}
-<SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
+<SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
 {/if}
 <p class="button-container script">
     <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
