@@ -5,7 +5,7 @@ tags: owasp,cornucopia,gamification,threat-modeling
 hidden: false
 description: OWASP Cornucopia Website Edition v2.2
 ---
-![OWASP Cornucopia Website Edtion v2.2](threat modeling for security people.png)
+![OWASP Cornucopia Website Edtion v2.2](threat-modeling-for-security-people.png)
 
 # OWASP Cornucopia Website Edition v2.2
 
@@ -46,7 +46,7 @@ src="https://www.youtube.com/embed/vLYzId7-ijI?si=yh4vHK7VfO9a5l6s" referrerpoli
 In our next version of OWASP Cornucopia Website App Edition version 2.2 we have a special threat for you. We have gathered together all our threat modeling expertise, created threat modeling scenarios for each card and analyzed which STRIDE categories each of these scenarios belong to. If you have bought a [OWASP Cornucopia deck with QR codes from cybersecgames.com](https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards?variant=55622568903043) you can now give your team advice on threat scenarios, threat vectors, attack patterns, mitigation strategies and STRIDE when playing the game by letting them scan the QR codes on each card. Each scenario follows "[Shostack's Four Question Frame for Threat Modeling](https://github.com/adamshostack/4QuestionFrame?tab=readme-ov-file#shostacks-four-question-frame-for-threat-modeling)" making it easy for your security champions to come up with the threats and mitigations themselves.
 In addition, we have added additional CAPEC's that corresponds to each card and added references to the [OWASP Developer Guide's Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/) that will link your threat modeling to OWASP secure coding practices and the [OWASP Top 10 Proactive controls](https://top10proactive.owasp.org/).
 
-![Both the Mobile App Edition v1.1 and the Website App Edition v2.2 have QR codes that takes you to the OWASP Cornucopia Website for further analysis of threats and mitigations](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jpj4qumpmfd2xt306hfb.jpg)
+![Both the Mobile App Edition v1.1 and the Website App Edition v2.2 have QR codes that takes you to the OWASP Cornucopia Website for further analysis of threats and mitigations](cornucopia-qr-codes.jpg)
 
 We are just getting started, in fact, this is just the 1. step. We will continue to bring threat modeling to everyone, everywhere, and will continue to do so in the time to come, tüdelü, see you around!
 
