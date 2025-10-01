@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import renderers from '$lib/components/renderers/renderers';
+    import { renderers } from '$lib/components/renderers/renderers';
     import SvelteMarkdown from "svelte-markdown";
 
 

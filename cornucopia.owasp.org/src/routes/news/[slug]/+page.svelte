@@ -1,6 +1,6 @@
 <script>
     import SvelteMarkdown from 'svelte-markdown'
-    import renderers from '$lib/components/renderers/renderers';
+    import { renderers }  from '$lib/components/renderers/renderers';
     import BlogpostMetadata from '$lib/components/blogpostMetadata.svelte';
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
