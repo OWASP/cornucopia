@@ -24,4 +24,9 @@
     margin-top: 0;
     opacity: 90%;
   }
+
+  ul
+  {
+    list-style-type: disc;
+  }
 </style>

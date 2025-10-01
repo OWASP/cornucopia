@@ -1,6 +1,6 @@
 <script lang="ts">
     import SvelteMarkdown from 'svelte-markdown';
-    import renderers from '$lib/components/renderers/renderersForTaxonomyAndCardPages';
+    import renderers from '$lib/components/renderers/renderersForGeneralUse
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
