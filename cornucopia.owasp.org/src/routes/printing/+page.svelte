@@ -1,6 +1,6 @@
 <script>
     import SvelteMarkdown from 'svelte-markdown';
-    import renderers from '$lib/components/renderers/renderers';
+    import { renderers }  from '$lib/components/renderers/renderers';
     import {readLang, readTranslation} from "$lib/stores/stores";
 
     /** @type {{data: any}} */

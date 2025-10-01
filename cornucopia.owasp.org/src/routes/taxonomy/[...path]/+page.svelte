@@ -1,7 +1,7 @@
 <script>
     import { Text } from '$lib/utils/text';
     import SvelteMarkdown from 'svelte-markdown'
-    import renderers from '$lib/components/renderers/renderers';
+    import { renderers }  from '$lib/components/renderers/renderers';
     import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte"
     /** @type {{data: any}} */
     let { data } = $props();

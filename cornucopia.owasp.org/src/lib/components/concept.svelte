@@ -1,6 +1,6 @@
 <script lang="ts">
     import SvelteMarkdown from "svelte-markdown";
-    import renderers from "$lib/components/renderers/renderersForGeneralUse"
+    import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import type { Card } from "../../domain/card/card";
     interface Props {
         card: Card;
@@ -10,5 +10,5 @@
 </script>
 
 <div>
-    <SvelteMarkdown {renderers} source={card.concept}></SvelteMarkdown>
+    <SvelteMarkdown renderers={renderersForGeneralUse} source={card.concept}></SvelteMarkdown>
 </div>
