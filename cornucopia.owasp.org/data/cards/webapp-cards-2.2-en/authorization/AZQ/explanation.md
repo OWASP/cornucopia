@@ -26,7 +26,7 @@ Such vulnerabilities can lead to unauthorized system access, data breaches, and 
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Firstly apply appropriate input validation and encoding. In cases where the application must run with elevated privileges, raise privileges as late as possible, and drop them as soon as possible.
 

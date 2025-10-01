@@ -33,7 +33,7 @@ Considering these threats, the impact could be that:
 6. Reputational damage for the application provider.
 7. Legal and regulatory consequences if user harm is significant.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. **Input and Output Validation**: Sanitize all data sent to users to prevent injection attacks (e.g., XSS, malicious file downloads).
 2. **Content Security Policies (CSP)**: Restrict what can run or be loaded in users’ browsers.

@@ -22,7 +22,7 @@ Choi really wanted to pay his student loan, but he also really needed to go to t
  
 If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 
  
-### What are you going to do about it?
+### What are we going to do about it?
  
  - Make sure the unlocked key is used during sensitive operations by configuring the app with the required flags needed for enforcing authentication before using the keychain or key storage. 
  - Limit the amount of time for which the user has been authorized to use a certain key after the user has successfully authenticated. 

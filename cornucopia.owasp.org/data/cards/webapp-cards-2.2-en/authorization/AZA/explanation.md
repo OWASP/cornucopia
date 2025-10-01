@@ -20,7 +20,7 @@ Any of the STRIDE categories may be applicable, but primary impact is usually **
 
 Privilege escalation, data leaks, unauthorized actions, bypassed business rules, audit failures, chained attacks, potential DoS.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Centralized controls, least privilege, rechecking per request, logging, segregation of duties, secure storage, fail-secure, periodic review/testing.
 

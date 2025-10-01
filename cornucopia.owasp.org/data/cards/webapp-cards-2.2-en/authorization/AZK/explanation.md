@@ -23,7 +23,7 @@ Such vulnerabilities can lead to unauthorized access, data breaches, and potenti
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Ensure that all mechanisms for altering authorization controls and permissions are strictly secured and accessible only by highly trusted roles.
 2. Implement robust monitoring systems to detect and alert any unauthorized changes to authorization configurations.

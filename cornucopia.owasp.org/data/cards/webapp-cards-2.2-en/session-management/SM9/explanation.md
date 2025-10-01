@@ -32,7 +32,7 @@ Such practices expose users to session hijacking and potential data breaches, as
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Protect session identifiers as if they are account credentials. For HTTP cookies:
 

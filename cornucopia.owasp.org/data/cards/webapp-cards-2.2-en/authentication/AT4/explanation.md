@@ -35,7 +35,7 @@ The threat is often the result of one or more of the following:
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Avoid using predictable username formats. Encourage or enforce more complex and less guessable usernames.
 2. Design error messages to be non-revealing, providing the same response regardless of whether the username exists or not.

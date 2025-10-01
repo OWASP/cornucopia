@@ -26,7 +26,7 @@ Custom-built session management systems that lack the rigor of standard framewor
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Centralized session management routines are a good programming practice, but like other routines, developers need to understand how they work, how to use them and any limitations. These should preferably be the framework's in-built session management support. If third party session management libraries are used, it is important to test each routine before its implementation.
 

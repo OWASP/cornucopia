@@ -26,7 +26,7 @@ This vulnerability can lead to unauthorized access and misuse of privileges, esp
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement a system for periodic re-authentication, especially for sessions that last beyond a certain time threshold.
 2. Regularly check and update user privileges within active sessions to ensure they reflect current permissions.

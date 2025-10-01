@@ -27,7 +27,7 @@ Such gaps in authorization controls can lead to unauthorized data access, potent
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Even though a user may be permitted access to a particular page, the contents of that page should also verify access control privileges. For example, a user should be able to edit their own profile text, but not that for another user.
 

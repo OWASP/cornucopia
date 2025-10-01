@@ -26,7 +26,7 @@ This form of attack can lead to unauthorized system access, data breaches, and p
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 In general, all authentication routines should be on the server-side using robust, tested and protected routines.
 

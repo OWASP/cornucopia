@@ -28,7 +28,7 @@ Such vulnerabilities in error handling can lead to unauthorized access, exposure
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Ensure all forms of error are handled robustly and consistently (e.g. web server, application server, database server, JavaScript, other interpreters). This encompasses:
 

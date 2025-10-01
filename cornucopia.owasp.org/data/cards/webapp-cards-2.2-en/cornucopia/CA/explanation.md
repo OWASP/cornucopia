@@ -21,6 +21,6 @@ To address truly unknown or novel threats that don't fit the STRIDE categories, 
 
 Almost anything, You name it!
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 To address unknown threats, focus on a strong security mindset, continuous threat modeling and security testing, implement robust controls like "Defense in Depth", "Fail Safe", "Least Privilege", "Zero Trust" and other security principles and foster a culture of ongoing risk assessment and training. For further guidance see the [OWASP Developer Guide](https://devguide.owasp.org/en/02-foundations/03-security-principles/).

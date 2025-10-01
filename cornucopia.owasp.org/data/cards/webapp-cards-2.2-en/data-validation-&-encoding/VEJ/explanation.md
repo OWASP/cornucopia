@@ -33,7 +33,7 @@ Validation and encoding are sometimes undertaken in client applications or exter
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 In general, all validation and encoding routines should be on the server-side using robust, tested and protected routines.
 

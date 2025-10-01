@@ -26,7 +26,7 @@ The inability to detect and respond to malicious activities in real-time can lea
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement real-time monitoring tools to detect abnormal or malicious activities as they occur.
 2. Develop responsive measures that can automatically react to potential threats, such as account locks, alerts, and triggering additional authentication processes.

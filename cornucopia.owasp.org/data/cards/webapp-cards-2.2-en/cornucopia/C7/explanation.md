@@ -28,7 +28,7 @@ Inadequate logging and auditing can lead to significant gaps in security oversig
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement comprehensive logging of all security-relevant events with accurate time-stamping.
 2. Ensure that audit trails are complete, immutable, and protected from unauthorized access and modification.

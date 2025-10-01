@@ -20,7 +20,7 @@ Any of the STRIDE categories may be applicable, but the primary concern is usual
 
 Data leaks, impersonation, tampering, privilege escalation, replay/forgery, DoS, loss of trust in audits.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Use strong cryptography, proper key management, proven libraries, integrity checks, secure storage, monitoring, and regular updates.
 

@@ -30,7 +30,7 @@ Such vulnerabilities can lead to process integrity breaches, unauthorized access
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Do not make assumptions about the order or previous actions of a user. Re-perform authorization checks at each and every step.
 

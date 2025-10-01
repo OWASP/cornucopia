@@ -22,7 +22,7 @@ This loophole can lead to significant security breaches, including Cross-Site Sc
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Sanitization may be used to strip some inputs or outputs of certain unwanted characters. It is not a substitute for data validation and encoding, but may be used in combination (e.g. to remove leading/trailing whitespace from keyboard input). If sanitization is part of the validation and encoding processes, ensure that no relevant input/output is excluded, or can be bypassed by submitting data through a different input stream (e.g. GET instead of POST) or using a different app (e.g. mobile vs. desktop).
 

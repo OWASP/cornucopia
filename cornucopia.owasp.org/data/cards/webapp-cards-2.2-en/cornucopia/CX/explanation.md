@@ -32,7 +32,7 @@ The use of vulnerable or compromised software components can lead to significant
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Regularly update all frameworks, libraries, and components to their latest, secure versions.
 2. Conduct thorough security reviews and vulnerability assessments of all in-house, outsourced, and open-source code used within the application.

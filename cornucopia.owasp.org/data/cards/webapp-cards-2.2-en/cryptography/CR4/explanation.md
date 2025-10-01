@@ -27,7 +27,7 @@ This vulnerability can lead to data exposure and breaches, especially if endpoin
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Consider whether the data transmitted also needs to be encrypted itself, not just sent using an encrypted protocol. Ensure that sensitive data is encrypted independently before it is sent over the communication channel.
 2. Maintain robust endpoint security to protect data when it is encrypted or decrypted.

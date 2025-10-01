@@ -30,7 +30,7 @@ Such vulnerabilities can lead to unauthorized data access, data breaches, and po
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Ensure secure initial configuration of all network and host infrastructure, as well as supporting services and applications, adhering to best security practices.
 2. Establish a routine for regular security audits, rechecks, and timely application of patches and updates.

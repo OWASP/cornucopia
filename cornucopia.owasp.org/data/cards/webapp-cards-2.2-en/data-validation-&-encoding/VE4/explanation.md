@@ -37,7 +37,7 @@ Depending of the target of the attack, the impact of these type of threats varie
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement strict contextual validation for all data inputs, particularly focusing on user roles and process stages.
 2. Continually update and refine validation mechanisms to address new and evolving security threats.

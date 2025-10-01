@@ -1,7 +1,3 @@
-## Key Concept
-
-This card is related to notification of events to users.
-
 ## Scenario: James’s Unnoticed Authentication Interference
 
 Consider a scenario where James, a cunning hacker, carries out authentication-related activities, such as password changes, without alerting the real user. He exploits security gaps in the notification and monitoring processes:
@@ -32,7 +28,9 @@ This kind of vulnerability can lead to unnoticed account takeovers, prolonged un
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
+
+Security event logs should record key actions and the results of important security checks (in some cases successes as well as failures). If users have access to this information, they may well be able to help detect attempted or actual account/data breaches as they know more of the usage context. This information might be sent as alert messages (e.g. SMS, email, post), by making event data available as an API, or might appear in the web application as a short summarised activity log available once authenticated such as on the logged-in welcome page, or during the process of logging-off, and also within a user's account details to be accessed on demand. It maybe useful to include non web application events (e.g. mobile app password reset, a major event initiated by letter or the telephone call to the contact centre).
 
 1. Implement immediate alert systems for any authentication-related activities, especially password resets or changes.
 2. Enforce multi-factor authentication, which adds a layer of security and verification before allowing password changes or resets.

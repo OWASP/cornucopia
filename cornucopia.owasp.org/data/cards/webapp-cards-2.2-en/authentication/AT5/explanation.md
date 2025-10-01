@@ -32,7 +32,7 @@ Such vulnerabilities allow for unauthorized access and control, leading to poten
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 No default (e.g. vendor), old, or test accounts should exist. Each user should have their own individual account, and accounts should only be issued and active for those people/systems that have been permitted access for the required need of their job/role.
 

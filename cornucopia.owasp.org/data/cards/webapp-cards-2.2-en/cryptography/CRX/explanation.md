@@ -25,7 +25,7 @@ Using cryptography that is not sufficiently strong for the required level of pro
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 The choice of cryptographic algorithm, its configuration, and key length will not be the same for all deployments. Appropriate selection needs to be based on risk.
 

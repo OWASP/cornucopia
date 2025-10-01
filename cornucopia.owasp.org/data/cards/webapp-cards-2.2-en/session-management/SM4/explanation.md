@@ -26,7 +26,7 @@ There may be reasons to share sessions across multiple applications, but if one 
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Ensure that session cookies are restricted to their intended domains to prevent cross-domain leakage.
 2. Enforce HTTPS encryption for all website communication to prevent packet sniffing, and implement additional security measures like Secure and HttpOnly flags to protect cookies from being accessed by client-side scripts.

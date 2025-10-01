@@ -26,7 +26,7 @@ Little does she know that this app, in particular, will look for capabilities, o
 The same happens if `B` gets installed before `A`. 
 This is due to a privilege escalation vulnerability (CVE-2019-2200) which was fixed in Android 10. 
  
-### What are you going to do about it?
+### What are we going to do about it?
  
 - Verify that platform permissions are appropriately set, narrow enough and enforced by the app manifest. 
 - Ensure that all custom permissions that the app uses to protect components are also defined in its Manifest. 

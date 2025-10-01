@@ -23,7 +23,7 @@ Due a failure of server-side input or output validation, encoding or sanitizatio
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement and rigorously enforce the use of strongly typed parameterized interfaces for all server-side data processing.
 2. Regularly review and test these implementations to ensure they handle data inputs securely and prevent injection attacks.

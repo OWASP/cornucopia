@@ -26,7 +26,7 @@ Such vulnerabilities can lead to unauthorized data disclosure, data breaches, an
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
 2. Ensure that the system verifies user permissions before allowing data to be redirected or exported.

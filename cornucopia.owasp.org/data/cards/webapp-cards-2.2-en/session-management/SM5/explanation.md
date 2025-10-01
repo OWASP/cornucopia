@@ -30,7 +30,7 @@ Such practices expose users to session hijacking and potential privacy breaches,
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 1. Implement a system to regenerate session IDs upon any change in user state, especially during authentication processes and periodically otherwise.
 2. Ensure session IDs are sufficiently long, complex, and randomly generated.

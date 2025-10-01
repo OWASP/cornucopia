@@ -8,4 +8,4 @@
 
 ### What can go wrong?
 
-### What are you going to do about it?
+### What are we going to do about it?

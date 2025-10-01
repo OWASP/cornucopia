@@ -26,7 +26,7 @@ Inconsistencies in session management across an application can lead to unauthor
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
-### What are you going to do about it?
+### What are we going to do about it?
 
 Every part of the application and type of request should verify that the user has a valid current session (if required) and thus their privileges, before undertaking any other data validation and processing.
 
