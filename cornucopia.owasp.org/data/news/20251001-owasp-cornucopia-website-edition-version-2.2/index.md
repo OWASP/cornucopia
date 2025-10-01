@@ -74,7 +74,7 @@ We are just getting started, in fact, this is just the 1. step. We will continue
 11. The player who wins the round, leads the next round (i.e., they play first), and thus define the next lead suit
 12. Before moving to the next round, ask the players "what are we going to do about" the threats they have found. If they don't know, asked them to use the QR codes on the cards, in case you use physical cards, or the buttons on the cards, in case you use Copi. Tell them to read the ["What are we going to do about it?"](https://cornucopia.owasp.org/cards/VE2#What-are-we-going-to-do-about-it?) section of the cards that have scored points. Discuss what the section says, click further on the links to the [ASVS- and OWASP DevGuide cross-references](https://cornucopia.owasp.org/cards/VE2#mapping) for further advice and note which OWASP Cheat sheet pages may bee helpful. ![](what-are-we-going-to-do-about-it.png)
 13. Create tasks in you Issue Tracker Software and/or threat model!
-Repeat until all the cards are played 
+Repeat until all the cards are played
 
 ---
 
