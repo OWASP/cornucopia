@@ -13,12 +13,14 @@ _Shift-left doesn't start with scanning the code for security vulnerabilities; i
 
 ---
 
-To often the shift-left mantra consists of implementing AI code scanning and AI-generated patches for remediation. Also, don't forget to implement the [AI-powered benchmark for AI-Powered Security Fixes](https://engineering.fb.com/2025/04/29/ai-research/autopatchbench-benchmark-ai-powered-security-fixes/). We're not telling you to stop using these tools, we want you to ask yourself (to paraphrase [Adam Shostack's 4 question frame for threat modeling](https://github.com/adamshostack/4QuestionFrame)):
+To often the shift-left mantra consists of implementing AI code scanning and AI-generated patches for remediation. Also, don't forget to implement the [AI-powered benchmark for AI-Powered Security Fixes](https://engineering.fb.com/2025/04/29/ai-research/autopatchbench-benchmark-ai-powered-security-fixes/). We're not telling you to stop using these tools, we want to ask ourselves:
 
-- What are you working on?
+- What are we working on?
 - What can go wrong?
-- What are you going to do about it?
-- And whether you have done a good job?
+- What are we going to do about it?
+- Did we do a good job?
+
+Source: [Shostack's Four Question Frame for Threat Modeling](https://github.com/adamshostack/4QuestionFrame)
 
 Secure design starts with understanding what you are doing, asking what can go wrong and what to do about it. I'll leave that to the AI-assistants you say?
 Before you do, know that the "[2025 GenAI Code Security Report](https://www.veracode.com/blog/ai-generated-code-security-risks/)" from Veracode shows that after a comprehensive analysis of over 100 large language models across 80 coding tasks spanning four programming languages and four critical vulnerability types, only 55% of AI-generated code was secure (AI-Generated Code: A Double-Edged Sword for Developers, 09.09.2025). We don't doubt that, eventually, the machines will take over the world, but in the mean time, don't forget to ask yourself what can go wrong.
