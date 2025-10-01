@@ -48,7 +48,7 @@ In addition, we have added additional CAPEC's that corresponds to each card and 
 
 ![Both the Mobile App Edition v1.1 and the Website App Edition v2.2 have QR codes that takes you to the OWASP Cornucopia Website for further analysis of threats and mitigations](cornucopia-qr-codes.jpg)
 
-We are just getting started, in fact, this is just the 1. step. We will continue to bring threat modeling to everyone, everywhere, and will continue to do so in the time to come, tüdelü, see you around!
+We are just getting started, in fact, this is just the 1. step. We will continue to bring threat modeling to everyone, everywhere, and will continue to do so in the time to come.
 
 ## How to use OWASP Cornucopia cards together with the OWASP Cornucopia website
 
