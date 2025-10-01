@@ -1,7 +1,7 @@
 <script>
     import { Text } from "$lib/utils/text";
     import {readLang, readTranslation} from "$lib/stores/stores";
-    import renderers from '$lib/components/renderers/renderers';
+    import renderers from '$lib/components/renderers/renderersForTaxonomyAndCardPages';
     import SvelteMarkdown from "svelte-markdown";
     /** @type {{data: any}} */
     let { data } = $props();
