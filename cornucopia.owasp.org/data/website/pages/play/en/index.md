@@ -15,7 +15,7 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
 
   - A1. Obtain a deck, or print your own Cornucopia deck and separate/cut out the cards
   - A2. Identify an application or application process to review; this might be a concept, design or an actual implementation
-  - A3. Create a data flow diagram
+  - A3. Answer the question: **"What are we working on"**, by creating a data flow diagram.
   - A4. Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)
   - A5. Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture). See our "Prizes and Swags" section for ideas.
 - B - Play
@@ -23,8 +23,8 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
   - B1. Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards
   - B2. Shuffle the pack and deal all the cards
   - B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia
-  - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated - someone record the card on the score sheet
-  - B5. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the trump suit Cornucopia, wins the hand.
+  - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated. If you get stuck, use scan the QR codes on the cards or click the "goto" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version) and read the **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** section on the card page - someone record the card on the score sheet
+  - B5. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the trump suit Cornucopia, wins the hand
   - B6. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit
   - B7. Repeat until all the cards are played
 - C - Scoring
@@ -33,8 +33,9 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
   - C2. Score +1 if you win a round
   - C3. Once all cards have been played, whoever has the most points, wins
 - D - Closure
-  - D1. Review all the applicable threats and the matching security requirements
-  - D2. Create user stories, specifications and test cases as required for your development methodology
+  - D1. Review all the applicable threats and the matching security requirements.
+  - D2. Ask the group: "What are we going to do about it?". Use the QR codes on the physical cards or "goto" links if playing [Copi](https://copi.owasp.org/) and read the **["What are we going to do about it?"](https://cornucopia.owasp.org/cards/VE2#What-are-we-going-to-do-about-it?)** section
+  - D3. Create user stories, specifications and test cases as required for your development methodology and add them directly into your issue tracking software under the what you are working on
 
 See Márk Vinkovits leading a threat modelling ["talk and group session"](https://www.youtube.com/watch?v=9dVDqeO6y3A&ab_channel=OWASPHU "How to do threat modeling via playing cards* by Márk Vinkovits @ OWASP track @hacktivityconf 1510") playing Cornucopia in the OWASP track @hacktivityconf 1510.
 

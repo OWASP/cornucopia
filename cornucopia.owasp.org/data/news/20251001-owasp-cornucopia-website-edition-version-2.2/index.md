@@ -57,29 +57,31 @@ Stay tuned.
 
 ## How to use OWASP Cornucopia cards together with the OWASP Cornucopia website
 
-### Preparations
+- A - Preparations
 
-1. Identify an application or application process to review; this might be a concept, design or an actual implementation
-2. Ask: **"What are we working on?"** By bringing a data flow diagram, or making one!
-3. Invite a group of 3-6 people on your team who know what's been built, or what's going to be built, inside out
-4. Have some prizes to hand (gold stars, chocolate, pizza, beer, flowers, whatever you need)
-
-### Play
-
-1. Create a game in [Copi](https://copi.owasp.org/games/new) or use a [OWASP Cornucopia deck with QR codes from cybersecgames.com](https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards?variant=55622568903043)
-2. If you are using Copi, Share the link to the game page with everyone playing or watching
-3. Players can click the button to join as a player
-4. Once at least 3 players have joined you can start the game (make sure all your players have joined!)
-5. Click the Start Game button and Copi will shuffle and deal out the cards
-6. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia
-7. Once a card is played, the player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated - someone record the card on the score sheet
-8. If someone gets stuck, asked them to use the QR codes on the cards, in case you use physical cards, or the buttons on the cards, in case you use Copi. Tell them to read the [STRIDE](https://cornucopia.owasp.org/cards/VE2#STRIDE)- and **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** section of the card they think is more likely to be a threat. Discuss what the section says, click further on the links to the [CAPEC™ cross-references](https://cornucopia.owasp.org/cards/VE2#mapping)  for further advice on possible attack patterns. ![](what-can-go-wrong.png)
-9. Each player must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the round
-10. To win the round the players have to vote. The highest card that is voted on by 2 or more players takes the trick and wins the round, but every card that gets 2 or more votes get a point.
-11. The player who wins the round, leads the next round (i.e., they play first), and thus define the next lead suit
-12. Before moving to the next round, ask the players **"what are we going to do about"** the threats they have found. If they don't know, asked them to use the QR codes on the cards, in case you use physical cards, or the buttons on the cards, in case you use Copi. Tell them to read the **["What are we going to do about it?"](https://cornucopia.owasp.org/cards/VE2#What-are-we-going-to-do-about-it?)** section of the cards that have scored points. Discuss what the section says, click further on the links to the [ASVS- and OWASP DevGuide cross-references](https://cornucopia.owasp.org/cards/VE2#mapping) for further advice and note which OWASP Cheat sheet pages may bee helpful. ![](what-are-we-going-to-do-about-it.png)
-13. Create tasks in you Issue Tracker Software and/or threat model!
-Repeat until all the cards are played
+  - A1. Obtain a deck, or print your own Cornucopia deck and separate/cut out the cards
+  - A2. Identify an application or application process to review; this might be a concept, design or an actual implementation
+  - A3. Answer the question: **"What are we working on"**, by creating a data flow diagram.
+  - A4. Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)
+  - A5. Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture). See our "Prizes and Swags" section for ideas.
+- B - Play
+    One suit - Cornucopia - acts as trumps. Aces are high (i.e. they beat Kings). It helps if there is someone dedicated to documenting the results who is not playing.
+  - B1. Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards
+  - B2. Shuffle the pack and deal all the cards
+  - B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia
+  - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated. If you get stuck, use scan the QR codes on the cards or click the "goto" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version) and read the **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** section on the card page - someone record the card on the score sheet
+  - B5. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the trump suit Cornucopia, wins the hand
+  - B6. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit
+  - B7. Repeat until all the cards are played
+- C - Scoring
+    The objective is to identify applicable threats, and win hands (rounds)
+  - C1. Score +1 for each card you can identify as a valid threat to the application under consideration
+  - C2. Score +1 if you win a round
+  - C3. Once all cards have been played, whoever has the most points, wins
+- D - Closure
+  - D1. Review all the applicable threats and the matching security requirements.
+  - D2. Ask the group: "What are we going to do about it?". Use the QR codes on the physical cards or "goto" links if playing [Copi](https://copi.owasp.org/) and read the **["What are we going to do about it?"](https://cornucopia.owasp.org/cards/VE2#What-are-we-going-to-do-about-it?)** section
+  - D3. Create user stories, specifications and test cases as required for your development methodology and add them directly into your issue tracking software under what you are working on
 
 ---
 
