@@ -37,7 +37,7 @@ Games aren't just for fun, they can be serious tools too, and that is what we ar
 ---
 
 <noscript>
-    <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/watch?v=XXTPXozIHow" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
+    <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/embed/vLYzId7-ijI" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
 </noscript>
 <iframe credentialless anonymous class="how-to-play" frameborder="0" title="Youtube: How to play OWASP Cornucopia"
 src="https://www.youtube.com/embed/vLYzId7-ijI?si=yh4vHK7VfO9a5l6s" referrerpolicy="no-referrer" allowfullscreen >
@@ -45,12 +45,12 @@ src="https://www.youtube.com/embed/vLYzId7-ijI?si=yh4vHK7VfO9a5l6s" referrerpoli
 
 ---
 
-In our next version of OWASP Cornucopia Website App Edition version 2.2 we have a special threat for you. We have gathered together all our threat modeling expertise, created threat modeling scenarios for each card and analyzed which STRIDE categories each of these scenarios belong to. If you have bought a [OWASP Cornucopia deck with QR codes from cybersecgames.com](https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards?variant=55622568903043) you can now give your team advice on threat scenarios, threat vectors, attack patterns, mitigation strategies and STRIDE when playing the game by letting them scan the QR codes on each card. Each scenario follows "[Shostack's Four Question Frame for Threat Modeling](https://github.com/adamshostack/4QuestionFrame?tab=readme-ov-file#shostacks-four-question-frame-for-threat-modeling)" making it easy for your security champions to come up with the threats and mitigations themselves.
-In addition, we have added additional CAPEC's that corresponds to each card and added references to the [OWASP Developer Guide's Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/) that will link your threat modeling to OWASP secure coding practices and the [OWASP Top 10 Proactive controls](https://top10proactive.owasp.org/), this, thanks to Jon Gadson from the OWASP Developer Guide project.
+In our next version of OWASP Cornucopia Website App Edition version 2.2 we have a special treat for you. We have gathered together all our threat modeling expertise, created threat modeling scenarios for each card and analyzed which STRIDE categories each of these scenarios belong to. If you have bought or printed OWASP Cornucopia deck with QR codes, you can now give your team advice on threat scenarios, threat vectors, attack patterns, mitigation strategies and STRIDE when playing the game by letting them scan the QR codes on each card. Each scenario follows "[Shostack's Four Question Frame for Threat Modeling](https://github.com/adamshostack/4QuestionFrame?tab=readme-ov-file#shostacks-four-question-frame-for-threat-modeling)" making it easy for your security champions to come up with the threats and mitigations themselves.
+In addition, we have added additional CAPECs that corresponds to each card and added references to the [OWASP Developer Guide's Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/) that will link your threat modeling to OWASP secure coding practices and the [OWASP Top 10 Proactive controls](https://top10proactive.owasp.org/), this, thanks to Jon Gadson from the OWASP Developer Guide project.
 
 ![Both the Mobile App Edition v1.1 and the Website App Edition v2.2 have QR codes that takes you to the OWASP Cornucopia Website for further analysis of threats and mitigations](cornucopia-qr-codes.jpg)
 
-We are just getting started, in fact, this is just the 1. step. We will continue to bring threat modeling to everyone, everywhere, and will continue to do so in the time to come.
+We are just getting started, in fact, this is just the first step. We will continue to bring threat modeling to everyone, everywhere, and will continue to do so in the time to come.
 Next time we will also talk about the last question: "Did we do a good job?"
 Why? Because we want the game to be used in iterative security processes that involves continually adapting security measures in cycles to identify, address, and reassess threats and vulnerabilities, fostering ongoing improvement rather than a one-time fix.
 Stay tuned.
@@ -70,8 +70,8 @@ Stay tuned.
   - B1. Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards
   - B2. Shuffle the pack and deal all the cards
   - B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia
-  - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated. If you get stuck, use scan the QR codes on the cards or click the "more info" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version) and read the **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** section on the card page - someone record the card on the score sheet
-  - B5. If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** or click the "more info" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version)
+  - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated - someone record the card on the score sheet
+  - B5. If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** or click the "more info" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version) or just browse the card from the deck at [cornucopia.owasp.org](https://cornucopia.owasp.org/cards) while playing
   - B6. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the trump suit Cornucopia, wins the hand
   - B7. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit
   - B8. Repeat until all the cards are played

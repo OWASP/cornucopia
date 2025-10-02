@@ -25,7 +25,7 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
   - B2. Shuffle the pack and deal all the cards
   - B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia
   - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated - someone record the card on the score sheet
-  - B5. If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** or click the "more info" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version)
+  - B5. If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** or click the "more info" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version) or just browse the card from the deck at [cornucopia.owasp.org](https://cornucopia.owasp.org/cards) while playing
   - B6. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the trump suit Cornucopia, wins the hand
   - B7. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit
   - B8. Repeat until all the cards are played
@@ -46,7 +46,7 @@ See Márk Vinkovits leading a threat modelling ["talk and group session"](https:
 Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created a video to explain how he has trained hundreds of teams to use OWASP Cornucopia in abuse case modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date.
 
 <noscript>
-    <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/watch?v=XXTPXozIHow" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
+    <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/embed/vLYzId7-ijI" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
 </noscript>
 <iframe credentialless anonymous class="how-to-play" frameborder="0" title="Youtube: How to play OWASP Cornucopia"
 src="https://www.youtube.com/embed/vLYzId7-ijI?si=yh4vHK7VfO9a5l6s" referrerpolicy="no-referrer" allowfullscreen >
