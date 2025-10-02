@@ -51,6 +51,9 @@ In addition, we have added additional CAPEC's that corresponds to each card and 
 ![Both the Mobile App Edition v1.1 and the Website App Edition v2.2 have QR codes that takes you to the OWASP Cornucopia Website for further analysis of threats and mitigations](cornucopia-qr-codes.jpg)
 
 We are just getting started, in fact, this is just the 1. step. We will continue to bring threat modeling to everyone, everywhere, and will continue to do so in the time to come.
+Next time we will also talk about the last question: "Did we do a good job?"
+Why? Because we want the game to be used in iterative security processes that involves continually adapting security measures in cycles to identify, address, and reassess threats and vulnerabilities, fostering ongoing improvement rather than a one-time fix.
+Stay tuned.
 
 ## How to use OWASP Cornucopia cards together with the OWASP Cornucopia website
 
