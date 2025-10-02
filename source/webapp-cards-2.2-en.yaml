@@ -819,7 +819,7 @@ paragraphs:
     text: "Review all the applicable threats and the matching security requirements"
   -
     id: "T01811"
-    text: "Use the QR codes on the cards to access the online card page and read the section called: “WWhat are we going to do about it?”"
+    text: "Use the QR codes on the cards to access the online card page and read the section called: “What are we going to do about it?”"
   -
     id: "T01820"
     text: "Create user stories, specifications and test cases as required for your development methodology."

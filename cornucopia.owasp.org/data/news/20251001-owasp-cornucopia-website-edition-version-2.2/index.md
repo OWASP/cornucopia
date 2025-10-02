@@ -13,7 +13,7 @@ _Shift-left doesn't start with scanning the code for security vulnerabilities; i
 
 ---
 
-To often the shift-left mantra consists of implementing AI code scanning and AI-generated patches for remediation. Also, don't forget to implement the [AI-powered benchmark for AI-Powered Security Fixes](https://engineering.fb.com/2025/04/29/ai-research/autopatchbench-benchmark-ai-powered-security-fixes/). We're not telling you to stop using these tools, instead, we want to ask ourselves:
+Too often the shift-left mantra consists of implementing AI code scanning and AI-generated patches for remediation. Also, don't forget to implement the [AI-powered benchmark for AI-Powered Security Fixes](https://engineering.fb.com/2025/04/29/ai-research/autopatchbench-benchmark-ai-powered-security-fixes/). We're not telling you to stop using these tools, instead, we want to ask ourselves:
 
 - What are we working on?
 - What can go wrong?

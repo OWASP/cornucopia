@@ -746,6 +746,9 @@ paragraphs:
     id: "T01430"
     text: "Maak een gegevensstroomdiagram, gebruikersverhalen of andere artefacten om de beoordeling te vergemakkelijken"
   -
+    id: "T01431"
+    text: "Dit zal helpen de vraag te beantwoorden: “Waar werken we aan?”"
+  -
     id: "T01440"
     text: "Identificeer en nodig een groep van 3-6 architecten, ontwikkelaars, testers en andere zakelijke belanghebbenden samen uit en ga rond een tafel zitten (probeer iemand die redelijk bekend is met applicatiebeveiliging erbij te betrekken)"
   -
@@ -775,6 +778,9 @@ paragraphs:
   -
     id: "T01570"
     text: "Om een ​​kaart te spelen, moet elke speler deze hardop voorlezen en uitleggen (zie het online Wiki Deck voor tips) hoe de dreiging van toepassing kan zijn (de speler krijgt een punt voor aanvallen die mogelijk werken waarvan de groep denkt dat een bruikbare bug) - probeer in dit stadium geen oplossingen te bedenken en sluit een bedreiging niet uit alleen omdat u denkt dat deze al is verholpen - iemand noteert de kaart en noteert de problemen die aan de orde zijn gesteld"
+  -
+    id: "T01571"
+    text: "Als een speler vastloopt, vraag hem dan om de QR-code op de kaart te scannen om toegang te krijgen tot de online kaartpagina en het gedeelte te lezen met de titel: “Wat kan er misgaan?”"
   -
     id: "T01580"
     text: "Speel met de klok mee, elke persoon moet een kaart op dezelfde manier spelen; als je een kaart van de overeenkomende eerste reeks hebt, moet je een van die kaarten spelen, anders kunnen ze een kaart uit een andere reeks spelen. "
@@ -808,6 +814,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Bekijk alle van toepassing zijnde dreigingen en de bijbehorende beveiligingseisen"
+  -
+    id: "T01811"
+    text: "Gebruik de QR-codes op de kaarten om naar de online kaartpagina te gaan en lees het gedeelte met de titel: “Wat gaan we hieraan doen?”"
   -
     id: "T01820"
     text: "Maak gebruiker stories, specificaties en testcases zoals vereist voor uw ontwikkelingsmethodologie."

@@ -746,6 +746,9 @@ paragraphs:
     id: "T01430"
     text: "Cree un diagrama de flujo de datos, historias de usuarios u otros artefactos para ayudar en la revisión. "
   -
+    id: "T01431"
+    text: "Esto ayudará a responder la pregunta: “¿En qué estamos trabajando?”"
+  -
     id: "T01440"
     text: "Identifique e invite a un grupo de 3 a 6 personas, Se recomienda que los roles a considerar sean arquitectos, desarrolladores, evaluadores y otras partes interesadas del negocio, Siéntelos juntos alrededor de una mesa (intente incluir a alguien bastante familiarizado con la seguridad de las aplicaciones) "
   -
@@ -775,6 +778,9 @@ paragraphs:
   -
     id: "T01570"
     text: "Para jugar una carta, cada jugador debe leerla en voz alta y explicar (consulte el Wiki Deck en línea para obtener consejos) cómo podría aplicarse la amenaza (el jugador obtiene un punto por los ataques que podrían funcionar y que el grupo cree que es un error procesable). No intente pensar en mitigaciones en esta etapa, y no excluya una amenaza solo por creer que ya está mitigada; alguien anote la tarjeta y registre los problemas planteados. "
+  -
+    id: "T01571"
+    text: "Si un jugador se queda atascado, pídale que escanee el código QR de la tarjeta para acceder a la página de la tarjeta en línea y lea la sección llamada: “¿Qué puede salir mal?”"
   -
     id: "T01580"
     text: "Juegue en el sentido de las agujas del reloj, cada persona debe jugar una carta de la misma manera; si tienes una carta del mismo palo, debes jugar una de esas; de lo contrario, pueden jugar una carta de cualquier otro palo, sólo una carta más alta del mismo palo, o la carta más alta del palo de triunfo Cornucopia, gana la mano. "
@@ -808,6 +814,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Revise todas las amenazas aplicables y los requisitos de seguridad correspondientes. "
+  -
+    id: "T01811"
+    text: "Utilice los códigos QR de las tarjetas para acceder a la página de tarjetas en línea y leer la sección llamada: “¿Qué vamos a hacer al respecto?”"
   -
     id: "T01820"
     text: "Cree historias de usuario, especificaciones y casos de prueba según sea necesario para su metodología de desarrollo. "
