@@ -22,7 +22,7 @@ To often the shift-left mantra consists of implementing AI code scanning and AI-
 
 Source: [Shostack's Four Question Frame for Threat Modeling](https://github.com/adamshostack/4QuestionFrame)
 
-Secure design starts with understanding **what we are working on**, asking **what can go wrong** and **what are we going to do about it**. I'll leave that to the AI-assistants you say?
+Secure design starts with understanding **what we are working on**, asking **what can go wrong** and **what we are going to do about it**. I'll leave that to the AI-assistants you say?
 Before you do, know that the "[2025 GenAI Code Security Report](https://www.veracode.com/blog/ai-generated-code-security-risks/)" from Veracode shows that after a comprehensive analysis of over 100 large language models across 80 coding tasks spanning four programming languages and four critical vulnerability types, only 55% of AI-generated code was secure (AI-Generated Code: A Double-Edged Sword for Developers, 09.09.2025). We don't doubt that, eventually, the machines will take over the world, but in the mean time, don't forget to ask yourself **what can go wrong**.
 
 And what does the industry standard for infosec management say about writing secure code?
