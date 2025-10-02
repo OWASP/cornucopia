@@ -749,6 +749,9 @@ paragraphs:
     id: "T01430"
     text: "Create a data flow diagram, user stories, or other artefacts to help the review"
   -
+    id: "T01431"
+    text: "This will help answer the question: “What are we working on?”"
+  -
     id: "T01440"
     text: "Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
   -
@@ -778,6 +781,9 @@ paragraphs:
   -
     id: "T01570"
     text: "To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
+  -
+    id: "T01571"
+    text: "If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: “What can go wrong?”"
   -
     id: "T01580"
     text: "Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
@@ -811,6 +817,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Review all the applicable threats and the matching security requirements"
+  -
+    id: "T01811"
+    text: "Use the QR codes on the cards to access the online card page and read the section called: “WWhat are we going to do about it?”"
   -
     id: "T01820"
     text: "Create user stories, specifications and test cases as required for your development methodology."
