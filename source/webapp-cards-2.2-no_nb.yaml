@@ -746,6 +746,9 @@ paragraphs:
     id: "T01430"
     text: "Lag et dataflytdiagram, brukerhistorier eller andre artefakter for å hjelpe til med utforskningen"
   -
+    id: "T01431"
+    text: "Dette vil bidra til å svare på spørsmålet: «Hva jobber vi med?»"
+  -
     id: "T01440"
     text: "Identifiser og inviter en gruppe på 3-6; arkitekter, utviklere, testere og andre forretningsinteressenter og sett deg rundt et bord (forsøk å inkluder noen som er ganske kjent med applikasjonssikkerhet)"
   -
@@ -775,6 +778,9 @@ paragraphs:
   -
     id: "T01570"
     text: "For å spille et kort, må hver spiller lese det opp, og forklare (se online Wiki Deck for tips) hvordan trusselen kan fungere (spilleren får et poeng for angrep som kan fungere som gruppen mener er en håndterbar feil) - ikke prøv å tenke på avbøtende tiltak på dette stadiet, og ikke utelukk en trussel bare på grunn av en tro på at den allerede er mitigert - noen noterer kortet og noterer problemene som tas opp"
+  -
+    id: "T01571"
+    text: "Hvis en spiller står fast, be dem om å skanne QR-koden på kortet for å få tilgang til kortsiden på nett og lese avsnittet som heter: «Hva kan gå galt?»"
   -
     id: "T01580"
     text: "Spill med klokken, hver person må spille et kort på samme måte; hvis du har et kort i den matchende hovedfargen, må du spille ett av disse, ellers kan det spilles et kort fra en hvilken som helst annen farge. "
@@ -808,6 +814,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Gå gjennom alle gjeldende trusler og samsvarende sikkerhetskrav"
+  -
+    id: "T01811"
+    text: "Bruk QR-kodene på kortene for å få tilgang til kortsiden på nett, og les avsnittet «Hva skal vi gjøre med det?»"
   -
     id: "T01820"
     text: "Lag brukerhistorier, spesifikasjoner og testtilfeller iht. utviklingsmetodikken din."

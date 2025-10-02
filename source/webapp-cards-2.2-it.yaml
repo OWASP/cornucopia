@@ -749,6 +749,9 @@ paragraphs:
     id: "T01430"
     text: "Create un diagramma di flusso dei dati, storie utente o altri artefatti a supporto della revisione"
   -
+    id: "T01431"
+    text: "Ciò aiuterà a rispondere alla domanda: “A cosa stiamo lavorando?”"
+  -
     id: "T01440"
     text: "Identificate e invitate un gruppo di 3-6 architetti, sviluppatori, tester e altri stakeholder aziendali e sedetevi attorno a un tavolo (cercando di includere qualcuno che abbia una certa familiarità con la sicurezza delle applicazioni)"
   -
@@ -778,6 +781,9 @@ paragraphs:
   -
     id: "T01570"
     text: "Per giocare una carta, ogni giocatore deve leggerla ad alta voce e spiegare (si veda il Wiki Deck online per i suggerimenti) come la minaccia potrebbe essere applicata (il giocatore ottiene un punto per gli attacchi che potrebbero funzionare e che il gruppo considera un bug utilizzabile) - non cercate di pensare alle mitigazioni in questa fase e non escludete una minaccia solo perché si ritiene che sia già mitigata - qualcuno prenda nota della carta e registri gli argomenti emersi"
+  -
+    id: "T01571"
+    text: "Se un giocatore rimane bloccato, chiedigli di scansionare il codice QR sulla carta per accedere alla pagina online della carta e leggere la sezione intitolata: “Cosa può andare storto?”"
   -
     id: "T01580"
     text: "Si gioca in senso orario e ogni persona, allo stesso modo, deve giocare una carta; si deve sempre giocare una carta dello stesso seme di quello di partenza, altrimenti si può giocare una carta di qualsiasi altro seme. "
@@ -811,6 +817,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Esaminate tutte le minacce applicabili e i relativi requisiti di sicurezza"
+  -
+    id: "T01811"
+    text: "Utilizza i codici QR presenti sulle carte per accedere alla pagina online delle carte e leggere la sezione intitolata: “Cosa faremo al riguardo?”"
   -
     id: "T01820"
     text: "Create storie utente, specifiche e casi di test come richiesto dalla vostra metodologia di sviluppo."

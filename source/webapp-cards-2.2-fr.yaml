@@ -744,6 +744,9 @@ paragraphs:
     id: "T01430"
     text: "Créez un diagramme de flux de données, des cas d'utilisation, ou d'autres supports pour aider à l'évaluation. "
   -
+    id: "T01431"
+    text: "Cela aidera à répondre à la question: “Sur quoi travaillons-nous?”"
+  -
     id: "T01440"
     text: "Identifiez et invitez un groupe de 3-6 architectes, développeurs, testeurs et autres participants métier ensemble et asseyez-vous autour d'une table (essayez d'inclure un profil sensibilisé à la sécurité applicative). "
   -
@@ -773,6 +776,9 @@ paragraphs:
   -
     id: "T01570"
     text: "Pour jouer une carte, chaque joueur doit la lire à voix haute, et expliquer (voir la description en ligne du jeu) comment la menace s'appliquerait (le joueur reçoit un point pour les attaques qui pourraient fonctionner, pour lesquelles le groupe s'accorde à dire qu'il s'agit d'un bug exploitable) – ne réfléchissez pas à des contre-mesures à ce stade, et n'écartez pas une menace au motif que celle-ci fait déjà l'objet d'une contre-mesure – quelqu'un note la carte et relève les questions rencontrés. "
+  -
+    id: "T01571"
+    text: "Si un joueur est bloqué, demandez-lui de scanner le code QR sur la carte pour accéder à la page de la carte en ligne et lire la section intitulée: “Qu'est-ce qui peut mal se passer?”"
   -
     id: "T01580"
     text: "Jouez ainsi dans le sens des aiguilles d'une montre, si vous possédez une carte de la même couleur, vous devez la jouer, sinon vous pouvez jouer n'importe quelle couleur. "
@@ -806,6 +812,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Parcourez toutes les menaces applicables et les exigences de sécurité correspondantes. "
+  -
+    id: "T01811"
+    text: "Utilisez les codes QR sur les cartes pour accéder à la page de la carte en ligne et lisez la section intitulée: “Qu'allons-nous faire à ce sujet?”"
   -
     id: "T01820"
     text: "Créez des cas d'utilisation, des spécifications, et des jeux de tests en fonction de votre méthodologie de développement. "
