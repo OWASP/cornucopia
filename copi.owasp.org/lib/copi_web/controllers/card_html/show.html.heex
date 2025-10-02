@@ -3,12 +3,14 @@
   <%= cond do %>
       <% @card.edition in ["webapp", "ecommerce"] -> %>
 
-    <div class={["card", @card.value, Slug.slugify @card.category]}>
+    <div class={["card", @card.value, @card.edition, Slug.slugify @card.category]}>
       <div class="left-bar"><%= @card.category %></div>
       <div class="main-content">
         <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
         <p class="description"><%= @card.description %></p>
-
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
+        <% end %>
         <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
 
         <p class="misc"><%= @card.misc %></p>
@@ -16,10 +18,10 @@
         <% else %>
 
         <dl class="mappings">
-          <dt>OWASP SCP</dt>
+          <dt>OWASP DevGuide</dt>
           <dd>
-            <%= if @card.owasp_scp != nil and Enum.count(@card.owasp_scp) > 0 do %>
-              <%= Enum.join @card.owasp_scp, ", " %>
+            <%= if @card.owasp_devguide != nil and Enum.count(@card.owasp_devguide) > 0 do %>
+              <%= Enum.join @card.owasp_devguide, ", " %>
             <% else %>
               &ndash;
             <% end %>
@@ -123,7 +125,9 @@
       <div class="main-content">
         <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
         <p class="description"><%= @card.description %></p>
-
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
+        <% end %>
         <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
 
         <p class="misc"><%= @card.misc %></p>
