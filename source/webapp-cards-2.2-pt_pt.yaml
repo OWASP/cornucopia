@@ -746,6 +746,9 @@ paragraphs:
     id: "T01430"
     text: "Criar um diagrama de fluxo de dados, histórias de utilizador ou outros artefactos para ajudar na revisão"
   -
+    id: "T01431"
+    text: "Isto ajudará a responder à pergunta: “Em que estamos a trabalhar?”"
+  -
     id: "T01440"
     text: "Identifique e convide um grupo de 3-6 arquitectos, programadores, testers e outras partes interessadas do negócio para se sentarem à volta de uma mesa (tente incluir alguém bastante familiarizado com a segurança da aplicação)"
   -
@@ -775,6 +778,9 @@ paragraphs:
   -
     id: "T01570"
     text: "Para jogar uma carta, cada jogador deve lê-la em voz alta e explicar (consulte o Wiki Deck online para dicas) como a ameaça pode aplicar-se (o jogador ganha um ponto por ataques que possam funcionar que o grupo considera um bug acionável) - não tente pensar em mitigações nesta fase e não exclua uma ameaça apenas porque acredita que já está mitigada - alguém deve anotar a carta e registar os problemas levantados"
+  -
+    id: "T01571"
+    text: "Se um jogador ficar preso, peça-lhe para digitalizar o código QR no cartão para aceder à página do cartão online e ler a secção chamada: “O que pode correr mal?”"
   -
     id: "T01580"
     text: "Jogar no sentido horário, cada pessoa deve jogar uma carta da mesma forma; se tiver alguma carta do naipe de liderança correspondente, deve jogar uma dessas, caso contrário, pode jogar uma carta de qualquer outro naipe. "
@@ -808,6 +814,9 @@ paragraphs:
   -
     id: "T01810"
     text: "Rever todas as ameaças aplicáveis e os requisitos de segurança correspondentes"
+  -
+    id: "T01811"
+    text: "Utilize os códigos QR nos cartões para aceder à página do cartão online e leia a secção denominada: “O que vamos fazer sobre isso?”"
   -
     id: "T01820"
     text: "Criar histórias de utilizador, especificações e casos de teste conforme necessário para a sua metodologia de desenvolvimento."
