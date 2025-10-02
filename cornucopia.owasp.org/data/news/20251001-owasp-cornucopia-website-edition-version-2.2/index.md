@@ -71,7 +71,7 @@ Stay tuned.
   - B2. Shuffle the pack and deal all the cards
   - B3. To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia
   - B4. To play a card, each player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated. If you get stuck, use scan the QR codes on the cards or click the "goto" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version) and read the **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** section on the card page - someone record the card on the score sheet
-  - B5. If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** or click the "goto" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version)
+  - B5. If a player get stuck, ask them to scan the QR code on the card to access the online card page and read the section called: **"[What can go wrong?](https://cornucopia.owasp.org/cards/VE2#What-can-go-wrong?)"** or click the "more info" links if playing [Copi](https://copi.owasp.org/) (the online Cornucopia version)
   - B6. Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the trump suit Cornucopia, wins the hand
   - B7. The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit
   - B8. Repeat until all the cards are played
@@ -82,7 +82,7 @@ Stay tuned.
   - C3. Once all cards have been played, whoever has the most points, wins
 - D - Closure
   - D1. Review all the applicable threats and the matching security requirements.
-  - D2. Use the QR codes on the cards to access the online card page and read the section called: **["What are we going to do about it?"](https://cornucopia.owasp.org/cards/VE2#What-are-we-going-to-do-about-it?)** or use the "goto" links if playing [Copi](https://copi.owasp.org/)
+  - D2. Use the QR codes on the cards to access the online card page and read the section called: **["What are we going to do about it?"](https://cornucopia.owasp.org/cards/VE2#What-are-we-going-to-do-about-it?)** or use the "more info" links if playing [Copi](https://copi.owasp.org/)
   - D3. Create user stories, specifications and test cases as required for your development methodology and add them directly into your issue tracking software under what you are working on
 
 ---
