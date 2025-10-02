@@ -50,7 +50,7 @@ defmodule CopiWeb.GameLive.Show do
     if game.started_at do
       # Do nothing, game's already started
     else
-      all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits)
+      all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
       players = game.players
 
       all_cards
@@ -89,6 +89,19 @@ defmodule CopiWeb.GameLive.Show do
       "cumulus" -> "OWASP Cumulus Session:"
       "masvs" -> "Cornucopia Mobile Session:"
       _ -> "EoP Session:"
+    end
+  end
+
+  def latest_version(edition) do
+    case edition do
+      "webapp" -> "2.2"
+      "ecommerce" -> "1.22"
+      "mobileapp" -> "1.1"
+      "mlsec" -> "1.0"
+      "cumulus" -> "1.1"
+      "masvs" -> "1.1"
+      "eop" -> "5.0"
+      _ -> "1.0"
     end
   end
 end

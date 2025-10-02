@@ -138,9 +138,9 @@ defmodule Copi.CornucopiaTest do
   describe "cards" do
     alias Copi.Cornucopia.Card
 
-    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "mobileapp", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", owasp_scp: [], safecode: [], value: "some value", version: "some version"}
-    @update_attrs %{external_id: "R2", capec: [], category: "some updated category", description: "some updated description", edition: "some updated edition", language: "some updated language", misc: "some updated misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", owasp_scp: [], safecode: [],  value: "some updated value", version: "some updated version"}
-    @invalid_attrs %{external_id: nil, capec: nil, category: nil, description: nil, edition: nil, language: nil, misc: nil, owasp_appsensor: nil, owasp_asvs: nil, owasp_mastg: nil, owasp_masvs: nil, biml: "", owasp_scp: nil, safecode: nil,  value: nil, version: nil}
+    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "mobileapp", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", url: "", owasp_scp: [], owasp_devguide: [], safecode: [], value: "some value", version: "some version"}
+    @update_attrs %{external_id: "R2", capec: [], category: "some updated category", description: "some updated description", edition: "some updated edition", language: "some updated language", misc: "some updated misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", url: "", owasp_scp: [], owasp_devguide: [], safecode: [],  value: "some updated value", version: "some updated version"}
+    @invalid_attrs %{external_id: nil, capec: nil, category: nil, description: nil, edition: nil, language: nil, misc: nil, owasp_appsensor: nil, owasp_asvs: nil, owasp_mastg: nil, owasp_masvs: nil, biml: "", url: "", owasp_scp: nil, owasp_devguide: nil, safecode: nil,  value: nil, version: nil}
 
     def card_fixture(attrs \\ %{}) do
       {:ok, card} =
@@ -177,6 +177,7 @@ defmodule Copi.CornucopiaTest do
       assert card.owasp_appsensor == []
       assert card.owasp_asvs == []
       assert card.owasp_scp == []
+      assert card.owasp_devguide == []
       assert card.safecode == []
       assert card.value == "some value"
       assert card.version == "some version"
@@ -198,6 +199,7 @@ defmodule Copi.CornucopiaTest do
       assert card.owasp_appsensor == []
       assert card.owasp_asvs == []
       assert card.owasp_scp == []
+      assert card.owasp_devguide == []
       assert card.safecode == []
       assert card.value == "some updated value"
       assert card.version == "some updated version"

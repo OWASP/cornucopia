@@ -225,8 +225,8 @@ defmodule Copi.Cornucopia do
     Card |> order_by(:id) |> Repo.all()
   end
 
-  def list_cards_shuffled(edition, suits) do
-    all_cards = Card |> where(edition: ^edition) |> order_by(fragment("RANDOM()")) |> Repo.all()
+  def list_cards_shuffled(edition, suits, version) do
+    all_cards = Card |> where(edition: ^edition, version: ^version) |> order_by(fragment("RANDOM()")) |> Repo.all()
 
     Enum.filter(all_cards, fn card ->
       card.category in suits

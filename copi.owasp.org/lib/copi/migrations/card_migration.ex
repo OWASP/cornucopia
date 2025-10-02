@@ -18,12 +18,13 @@ defmodule Copi.CardMigration do
         version = cards["meta"]["version"]
         for suit <- cards["suits"] do
           for card <- suit["cards"] do
-            card_exists = Repo.get_by(Card, category: suit["name"], value: card["value"], edition: edition, language: language)
+            card_exists = Repo.get_by(Card, category: suit["name"], value: card["value"], edition: edition, language: language, version: version)
 
             if card_exists  do
                 # nothing
             else
               misc = if Map.has_key?(card, "misc"), do: card["misc"], else: ""
+              url = if Map.has_key?(card, "url"), do: card["url"], else: ""
 
               Repo.insert!(%Card{
                 edition: edition,
@@ -33,7 +34,8 @@ defmodule Copi.CardMigration do
                 value: card["value"],
                 description: card["desc"],
                 misc: misc,
-                external_id: card["id"]
+                external_id: card["id"],
+                url: url
               })
             end
           end
@@ -46,14 +48,18 @@ defmodule Copi.CardMigration do
     case YamlElixir.read_from_file(path) do
       {:ok, cards} ->
         edition = cards["meta"]["edition"]
+        language = cards["meta"]["language"]
+        version = cards["meta"]["version"]
         for suit <- cards["suits"] do
           for card <- suit["cards"] do
             biml = if Map.has_key?(card, "biml"), do: card["biml"], else: ""
-            this_card = Repo.get_by!(Card, category: suit["name"], value: card["value"], edition: edition)
+            devguide = if Map.has_key?(card, "owasp_dev_guide"), do: card["owasp_dev_guide"], else: []
+            this_card = Repo.get_by!(Card, category: suit["name"], value: card["value"], edition: edition, version: version)
 
             this_card =  case edition do
              "ecommerce" -> Ecto.Changeset.change(this_card,
                   owasp_scp: set_mappings_for_card(card["owasp_scp"]),
+                  owasp_devguide: [],
                   owasp_asvs: set_mappings_for_card(card["owasp_asvs"]),
                   owasp_masvs: [],
                   owasp_mastg: [],
@@ -63,6 +69,7 @@ defmodule Copi.CardMigration do
               )
               "webapp" -> Ecto.Changeset.change(this_card,
                   owasp_scp: set_mappings_for_card(card["owasp_scp"]),
+                  owasp_devguide: set_mappings_for_card(devguide),
                   owasp_asvs: set_mappings_for_card(card["owasp_asvs"]),
                   owasp_masvs: [],
                   owasp_mastg: [],
@@ -72,6 +79,7 @@ defmodule Copi.CardMigration do
               )
               "masvs" -> Ecto.Changeset.change(this_card,
                   owasp_scp: [],
+                  owasp_devguide: [],
                   owasp_asvs: [],
                   owasp_masvs: set_mappings_for_card(card["owasp_masvs"]),
                   owasp_mastg: set_mappings_for_card(card["owasp_mastg"]),
@@ -82,6 +90,7 @@ defmodule Copi.CardMigration do
               "mlsec" -> Ecto.Changeset.change(this_card,
                   biml: biml,
                   owasp_scp: [],
+                  owasp_devguide: [],
                   owasp_asvs: [],
                   owasp_masvs: [],
                   owasp_mastg: [],
@@ -91,6 +100,7 @@ defmodule Copi.CardMigration do
               )
               "mobileapp" -> Ecto.Changeset.change(this_card,
                   owasp_scp: [],
+                  owasp_devguide: [],
                   owasp_asvs: [],
                   owasp_masvs: set_mappings_for_card(card["owasp_masvs"]),
                   owasp_mastg: set_mappings_for_card(card["owasp_mastg"]),
