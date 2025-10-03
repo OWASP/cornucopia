@@ -34,7 +34,7 @@
         <li>In preparation for a game of OWASP Cumulus an architectural overview is generated. Ideally, this is in the form of a data flow diagram, but in the end every overview which is understood by the players is fine.</li>
       <% true -> %>
         <li>Identify an application or application process to review; this might be a concept, design or an actual implementation</li>
-        <li>Have a data flow diagram, or make one!</li>
+        <li>Have a data flow diagram, or make one! This will help answer the question: "What are we working on"</li>
       <% end %>
     <% end %>
     <li>Invite a group of 3-6 people on your team who know what's been built, or what's going to be built, inside out</li>
@@ -99,11 +99,14 @@
         <li>Click the Start Game button and Copi will shuffle and deal out the cards</li>
         <li>To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia</li>
         <li>Once a card is played, the player must read it out aloud, and explain how (or not) the threat could apply (the player gets a point for attacks that work, and the group thinks it is an actionable bug) - don’t try to think of mitigations at this stage, and don’t exclude a threat just because it is believed it is already mitigated - someone record the card on the score sheet</li>
+        <li>If a player get stuck, ask them to click the "Need more info" links to access the card's help page and read the section called: "What can go wrong?"</li>
         <li>Each player must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the round</li>
         <li>To win the round the players have to vote. The highest card that is voted on by 2 or more players takes the trick and wins the round, but every card that gets 2 or more votes get a point.</li>
         <li>The player who wins the round, leads the next round (i.e., they play first), and thus define the next lead suit</li>
         <li>Make sure people take notes on the threats and that you discuss what can be done to mitigate against these threats. Create tasks in you Issue Tracker Software and/or threat model!</li>
         <li>Repeat until all the cards are played</li>
+        <li>Review all the applicable threats that scored points.</li>
+        <li>If you are in doubt about how to mitigate a threat, use the "Need more info" links to access the card help page and read the section called: "What are we going to do about it?"</li>
       </ol>
   <% end %>
 <% end %>
