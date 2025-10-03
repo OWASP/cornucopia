@@ -33,7 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-static": "^3.0.9",
+		"@sveltejs/adapter-static": "^3.0.10",
 		"@types/js-yaml": "^4.0.9",
 		"front-matter": "^4.0.2",
 		"js-yaml": "^4.1.0",
