@@ -2,8 +2,8 @@
   "source": {
     "title": "Source",
     "head": {
-      "title": "OWASP Cornucopia - The source code for OWASP Cornucopia",
-      "description": "The source code for OWASP Cornucopia is available on GitHub, allowing you to contribute to the project and help improve it.",
+      "title": "OWASP Cornucopia - The source code",
+      "description": "The source code for OWASP Cornucopia allowing you to contribute to the project.",
       "keywords": "OWASP, Cornucopia, Source Code, GitHub, Project, Contribution"
     }
   }
