@@ -11,6 +11,7 @@
 </script>
 <svelte:head>
     <title>{$t('about.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/about" />
     <meta name="description" content="{$t('about.head.description')}" />
 	<meta name="keywords" content="{$t('about.head.keywords')}" />
     <meta property="og:title" content="{$t('about.head.title')}">
