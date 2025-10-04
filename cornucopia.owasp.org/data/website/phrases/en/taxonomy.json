@@ -2,7 +2,7 @@
   "taxonomy": {
     "title": "Taxonomy",
     "head": {
-        "title": "OWASP Cornucopia - requirements & Cross-references",
+        "title": "OWASP Cornucopia - Requirements & Cross-references",
         "description": "OWASP Cornucopia taxonomy - an overview of the requirements and cross-references to security requierments & attack patterns",
         "keywords": "OWASP, Cornucopia, taxonomy, requirements, cross-references, overview, security, attack patterns"
     }
