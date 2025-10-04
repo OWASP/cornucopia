@@ -43,7 +43,7 @@
 </script>
 <svelte:head>
   {#if cardFound()}
-    <link rel="canonical" href="/cards/{card.id}" />
+    <link rel="canonical" href="https://cornucopia.owasp.org/cards/{card.id}" />
     <title>OWASP Cornucopia - {getEdition(card.edition)} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
     <meta name="description" content="{card.desc}" />
 	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {Text.convertToTitleCase(card.suitName)}, {card.id}" />
