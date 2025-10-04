@@ -10,7 +10,7 @@
     let content = data.content.get($lang) || data.content.get('en');
 </script>
 <svelte:head>
-    <link rel="canonical" href="/" />
+    <link rel="canonical" href="https://cornucopia.owasp.org/roadmap" />
     <title>{$t('source.head.title')}</title>
 	<meta name="description" content="{$t('source.head.description')}" />
 	<meta name="keywords" content="{$t('source.head.keywords')}" />
