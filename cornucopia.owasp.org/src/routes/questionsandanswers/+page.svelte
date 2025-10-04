@@ -11,7 +11,8 @@
 </script>
 <svelte:head>
     <title>{$t('questionsandanswers.head.title')}</title>
-	<meta name="description" content="{$t('questionsandanswers.head.description')}" />
+	<link rel="canonical" href="https://cornucopia.owasp.org/questionsandanswers" />
+    <meta name="description" content="{$t('questionsandanswers.head.description')}" />
 	<meta name="keywords" content="{$t('questionsandanswers.head.keywords')}" />
     <meta property="og:title" content="{$t('questionsandanswers.head.title')}">
     <meta property="og:description" content="{$t('questionsandanswers.head.description')}">
