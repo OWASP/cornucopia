@@ -10,7 +10,8 @@
 </script>
 <svelte:head>
     <title>{$t('source.head.title')}</title>
-	<meta name="description" content="{$t('source.head.description')}" />
+	<link rel="canonical" href="https://cornucopia.owasp.org/source" />
+    <meta name="description" content="{$t('source.head.description')}" />
 	<meta name="keywords" content="{$t('source.head.keywords')}" />
     <meta property="og:title" content="{$t('source.head.title')}">
     <meta property="og:description" content="{$t('source.head.description')}">
