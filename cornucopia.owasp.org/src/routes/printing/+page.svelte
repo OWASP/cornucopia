@@ -11,6 +11,7 @@
 </script>
 <svelte:head>
     <title>{$t('printing.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/printing" />
     <meta name="description" content="{$t('printing.head.description')}" />
 	<meta name="keywords" content="{$t('printing.head.keywords')}" />
     <meta property="og:title" content="{$t('printing.head.title')}">

@@ -2,9 +2,9 @@
   "taxonomy": {
     "title": "Taxonomy",
     "head": {
-        "title": "OWASP Cornucopia - An overview over the requirements mapped on the cards",
-        "description": "Explore the OWASP Cornucopia taxonomy, which provides an overview of the requirements mapped to the decks, helping you understand the requirements connected to the OWASP Cornucopia threat modeling cards",
-        "keywords": "OWASP, Cornucopia, Taxonomy, Requirements, Cards, Overview"
+        "title": "OWASP Cornucopia - Requirements & Cross-references",
+        "description": "OWASP Cornucopia taxonomy - an overview of the requirements and cross-references to security requierments & attack patterns",
+        "keywords": "OWASP, Cornucopia, taxonomy, requirements, cross-references, overview, security, attack patterns"
     }
   }
 }

@@ -13,6 +13,7 @@
 </script>
 <svelte:head>
     <title>{$t('printing.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/news" />
     <meta name="description" content="{$t('news.head.description')}" />
 	<meta name="keywords" content="{$t('news.head.keywords')}" />
     <meta property="og:title" content="{$t('news.head.title')}">

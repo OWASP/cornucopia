@@ -94,6 +94,7 @@
 </script>
 <svelte:head>
     <title>{$t('cards.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/cards" />
     <meta name="description" content="{$t('cards.head.description')}" />
 	<meta name="keywords" content="{$t('cards.head.keywords')}" />
     <meta property="og:title" content="{$t('cards.head.title')}">
