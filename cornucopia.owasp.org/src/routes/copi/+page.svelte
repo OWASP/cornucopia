@@ -11,6 +11,7 @@
 </script>
 <svelte:head>
     <title>{$t('printing.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/copi" />
     <meta name="description" content="{$t('copi.head.description')}" />
 	<meta name="keywords" content="{$t('copi.head.keywords')}" />
     <meta property="og:title" content="{$t('copi.head.title')}">
