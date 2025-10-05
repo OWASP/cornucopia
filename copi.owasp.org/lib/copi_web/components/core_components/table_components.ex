@@ -12,12 +12,12 @@ defmodule CopiWeb.CoreComponents.TableComponents do
 
   def card_drop_zone(assigns) do
     ~H"""
-    <div class="h-80 w-56 border-2 border-zinc-100 rounded-lg flex justify-center items-center">
+    <div class="drop-zone border-2 border-zinc-100 rounded-lg flex justify-center items-center">
       <%= if @player_card == nil do %>
         <%= if @is_current_player do %>
           <div class="h-5/6 w-5/6 shadow-md bg-zinc-100 border-2 border-zinc-200 rounded-lg animate-pulse flex justify-center items-center">
           <%= if @first_card_played do %>
-            <p class="text-center text-zinc-600">You <em>should</em> play a <br /><%= @first_card_played.card.category %> <br /> card</p>
+            <p class="play-instruction text-center text-zinc-600">You <em>should</em> play a <br /><%= @first_card_played.card.category %> <br /> card</p>
           <% else %>
             <p class="text-center text-zinc-600">You can play<br />any <br /> card</p>
           <% end %>

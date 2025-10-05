@@ -116,15 +116,15 @@
 .phx-modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
+  padding: clamp(20px, 2vw, 32px);
+  border: clamp(1px, 0.1vw, 2px) solid #888;
   width: 80%;
 }
 
 .phx-modal-close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: clamp(28px, 2.8vw, 45px);
   font-weight: bold;
 }
 
@@ -167,7 +167,7 @@
 .invalid-feedback {
   color: #a94442;
   display: block;
-  margin: -1rem 0 2rem;
+  margin: -1vw 0 2vw;
 }
 
 .phx-logo img {
@@ -196,20 +196,20 @@ th.numeric, td.numeric {
 .card {
   float: left;
   display: flex;
-  margin: 10px;
-  width: 200px;
-  height: 293px;
-  border-radius: 10px;
+  margin: clamp(10px, 1vw, 16px);
+  width: clamp(200px, 20vw, 320px);
+  height: clamp(293px, 29.3vw, 469px);
+  border-radius: clamp(10px, 1vw, 16px);
   background-color: #fff;
-  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0.3vw 0.3vw 0.7vw rgba(0,0,0,0.3);
+  box-shadow: 0.3vw 0.3vw 0.7vw rgba(0,0,0,0.3);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
  Helvetica, Arial, sans-serif,
  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .webapp {
-  height: 313px;
+  height: clamp(313px, 31.3vw, 501px);
 }
 
 $authentication-color: #70a6be;
@@ -233,18 +233,18 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   .left-bar {
     float: left;
     height: 100%;
-    width: 32px;
-    padding: 16px 8px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    width: clamp(32px, 3.2vw, 51px);
+    padding: clamp(16px, 1.6vw, 26px) clamp(8px, 0.8vw, 13px);
+    border-top-left-radius: clamp(10px, 1vw, 16px);
+    border-bottom-left-radius: clamp(10px, 1vw, 16px);
 
     color: #fff;
     writing-mode: vertical-rl;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: clamp(13px, 1.3vw, 21px);
     font-weight: 600;
     text-align: left;
-    line-height: 14px;
+    line-height: 1.4;
   }
 }
 
@@ -365,22 +365,27 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   color:$wildcard-color;
 }
 
-.card .main-content {
-  position: relative;
-  height: 100%;
-  padding: 2px 8px;
-  color:#333;
-  .description a.info {
-    padding-top: 2px;
-    display: inline-block;
-    color: #333;
-    font-weight: 600;
-    font-size: 10px;
-    text-decoration: underline;
+.card {
+  p, dl {
+    letter-spacing: clamp(-0.05em, -0.02vw, -0.1em);
   }
-  .description a.info:hover {
-    color: #666;
-    text-decoration: none;
+  .main-content {
+    position: relative;
+    height: 100%;
+    padding: clamp(2px, 0.2vw, 3px) clamp(8px, 0.8vw, 13px);
+    color:#333;
+    .description a.info {
+      padding-top: clamp(2px, 0.2vw, 3px);
+      display: inline-block;
+      color: #333;
+      font-weight: 600;
+      font-size: clamp(10px, 1vw, 16px);
+      text-decoration: underline;
+    }
+    .description a.info:hover {
+      color: #666;
+      text-decoration: none;
+    }
   }
 }
 
@@ -445,41 +450,39 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .card p.value {
-  margin: 0 0 8px 0;
+  margin: 0 0 clamp(4px, 0.2vw, 6px) 0;
   text-align: right;
   vertical-align: top;
-  font-size: 46px;
-  line-height: 40px;
+  font-size: clamp(46px, 4.6vw, 74px);
+  letter-spacing: normal; 
+  line-height: 1;
   font-weight:bold
 }
 
 .card p.description {
   flex-grow: 1;
   margin: 0;
-  font-size: 9px;
+  font-size: clamp(9px, 0.9vw, 14px);
   font-weight: 400;
-  letter-spacing: -0.05em;
-  line-height: 1.4em;
+  line-height: 1.2;
 }
 
 .card p.misc {
-  margin-top: 60px;
-  font-size: 11px;
+  margin-top: 6vw;
+  font-size: clamp(10px, 1vw, 16px);
   font-weight: 400;
   font-style: italic;
-  letter-spacing: -0.05em;
-  line-height: 1.4em;
+  line-height: 1.2;
 }
 
 .card .mappings {
   position: absolute;
   bottom: 0;
   width: 85%;
-  margin: 0 0 6px 0;
-  font-size: 7px;
+  margin: 0 0 clamp(6px, 0.6vw, 10px) 0;
+  font-size: clamp(7px, 0.7vw, 11px);
   font-weight: 500;
-  letter-spacing: -0.05em;
-  line-height: 1.2em;
+  line-height: 1.4;
 
   dt {
     margin: 0;
@@ -487,8 +490,8 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
   dd {
 
-    margin: 0 0 1px 0;
-    border-bottom: solid 1px rgb(128, 127, 127);
+    margin: 0 0 clamp(1px, 0.02vw, 2px) 0;
+    border-bottom: solid 0.1vw rgb(128, 127, 127);
   }
 }
 
@@ -1585,13 +1588,13 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   display: flex;
 
   .name {
-    margin-right: 5px;
-    margin-top: 5px;
-    line-height: 16px;
+    margin-right: clamp(5px, 0.5vw, 8px);
+    margin-top: clamp(5px, 0.5vw, 8px);
+    line-height: 1.2;
   }
 
   .vote {
-    font-size: 24px;
+    font-size: clamp(24px, 2.4vw, 38px);
     opacity: 20%;
 
     &.none {
@@ -1600,13 +1603,13 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     img {
       cursor: pointer;
-      padding-top: 20px;
+      padding-top: clamp(20px, 2vw, 32px);
     }
 
     .badge {
-      font-size: 14px;
-      line-height: 14px;
-      margin-bottom: 20px;
+      font-size: clamp(14px, 1.4vw, 22px);
+      line-height: clamp(14px, 1.4vw, 22px);
+      margin-bottom: clamp(20px, 2vw, 32px);
      }
   }
 
@@ -1615,9 +1618,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   .scored {
-    font-size: 14px;
+    font-size: clamp(14px, 1.4vw, 22px);
     position: relative;
-    top: 20px;
+    top: clamp(20px, 2vw, 32px);
   }
 
   .mine {
@@ -1627,11 +1630,16 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   .drop-zone {
-    height: 317px;
-    width: 224px;
+    height: clamp(317px, 31.7vw, 507px);
+    width: clamp(224px, 22.4vw, 358px);
+
+    p.play-instruction {
+      font-size: clamp(14px, 1.4vw, 22px);
+      margin-top: clamp(10px, 1vw, 16px);
+    }
 
     &.empty {
-      width: 248px;
+      width: clamp(248px, 24.8vw, 397px);
       color: #BBB;
     }
 
@@ -1641,10 +1649,16 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     .placeholder {
       text-align: center;
-      margin-top: 60px;
-      padding: 10px;
+      margin-top: clamp(60px, 6vw, 96px);
+      padding: clamp(10px, 1vw, 16px);
     }
   }
+}
+
+.playing-board {
+  margin-top: clamp(20px, 2vw, 32px);
+  margin-bottom: clamp(20px, 2vw, 32px);
+  padding: 0.8vw;
 }
 
 .next-round {
@@ -1654,7 +1668,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 /* Spinner CSS */
 
 .loader {
-  font-size: 10px;
+  font-size: clamp(10px, 1vw, 20px);
   margin: 0;
   text-indent: -9999em;
   width: 8em;
@@ -1721,14 +1735,16 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   text-align: center;
 
   span {
-    font-size: 24px;
-    margin-left: 20px;
-    margin-right: 20px;
+    font-size: clamp(24px, 2.4vw, 38px);
+    margin-left: clamp(20px, 2vw, 32px);
+    margin-right: clamp(20px, 2vw, 32px);
   }
 }
 
 #table {
+  /*padding-top: 1vw;*/
   display: flex;
+  height: clamp(400px, 40vw, 600px);
   flex-wrap: nowrap;
   overflow-x: auto;
 
@@ -1775,8 +1791,4 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
-}
-
-.gu-mirror {
-
 }
