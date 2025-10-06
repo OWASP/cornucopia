@@ -197,9 +197,9 @@ th.numeric, td.numeric {
   float: left;
   display: flex;
   margin: clamp(10px, 1vw, 16px);
-  width: clamp(200px, 20vw, 320px);
-  height: clamp(293px, 29.3vw, 469px);
-  border-radius: clamp(10px, 1vw, 16px);
+  width: clamp(240px, 24vw, 320px);
+  height: clamp(351px, 35.1vw, 469px);
+  border-radius: clamp(12px, 1.5vw, 16px);
   background-color: #fff;
   -webkit-box-shadow: 0.3vw 0.3vw 0.7vw rgba(0,0,0,0.3);
   box-shadow: 0.3vw 0.3vw 0.7vw rgba(0,0,0,0.3);
@@ -209,7 +209,7 @@ th.numeric, td.numeric {
 }
 
 .webapp {
-  height: clamp(313px, 31.3vw, 501px);
+  height: clamp(375px, 37.5vw, 501px);
 }
 
 $authentication-color: #70a6be;
@@ -233,15 +233,15 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   .left-bar {
     float: left;
     height: 100%;
-    width: clamp(32px, 3.2vw, 51px);
-    padding: clamp(16px, 1.6vw, 26px) clamp(8px, 0.8vw, 13px);
+    width: clamp(38px, 3.8vw, 51px);
+    padding: clamp(19px, 1.9vw, 26px) clamp(10px, 1vw, 13px);
     border-top-left-radius: clamp(10px, 1vw, 16px);
     border-bottom-left-radius: clamp(10px, 1vw, 16px);
 
     color: #fff;
     writing-mode: vertical-rl;
     text-transform: uppercase;
-    font-size: clamp(13px, 1.3vw, 21px);
+    font-size: clamp(16px, 1.6vw, 21px);
     font-weight: 600;
     text-align: left;
     line-height: 1.4;
@@ -379,7 +379,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       display: inline-block;
       color: #333;
       font-weight: 600;
-      font-size: clamp(10px, 1vw, 16px);
+      font-size: clamp(12px, 1.2vw, 16px);
       text-decoration: underline;
     }
     .description a.info:hover {
@@ -453,7 +453,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   margin: 0 0 clamp(4px, 0.2vw, 6px) 0;
   text-align: right;
   vertical-align: top;
-  font-size: clamp(46px, 4.6vw, 74px);
+  font-size: clamp(55px, 5.5vw, 74px);
   letter-spacing: normal; 
   line-height: 1;
   font-weight:bold
@@ -462,14 +462,14 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 .card p.description {
   flex-grow: 1;
   margin: 0;
-  font-size: clamp(9px, 0.9vw, 14px);
+  font-size: clamp(11px, 1.1vw, 14px);
   font-weight: 400;
   line-height: 1.2;
 }
 
 .card p.misc {
   margin-top: 6vw;
-  font-size: clamp(10px, 1vw, 16px);
+  font-size: clamp(12px, 1.2vw, 16px);
   font-weight: 400;
   font-style: italic;
   line-height: 1.2;
@@ -479,8 +479,8 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   position: absolute;
   bottom: 0;
   width: 85%;
-  margin: 0 0 clamp(6px, 0.6vw, 10px) 0;
-  font-size: clamp(7px, 0.7vw, 11px);
+  margin: 0 0 clamp(7px, 0.7vw, 10px) 0;
+  font-size: clamp(8px, 0.8vw, 11px);
   font-weight: 500;
   line-height: 1.4;
 
@@ -502,21 +502,21 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   .left-value {
     flex: none;
     position: relative;
-    top: clamp(30px, 3vw, 48px);
+    top: clamp(36px, 3.6vw, 48px);
 
-    height: clamp(60px, 6vw, 96px);
-    width: clamp(46px, 4.6vw, 74px);
+    height: clamp(72px, 7.2vw, 96px);
+    width: clamp(55px, 5.5vw, 74px);
 
     background: grey;
 
-    padding: clamp(23px, 2.3vw, 37px) 0;
-    border-top-right-radius: clamp(10px, 1vw, 16px);
-    border-bottom-right-radius: clamp(10px, 1vw, 16px);
+    padding: clamp(28px, 2.8vw, 37px) 0;
+    border-top-right-radius: clamp(12px, 1.2vw, 16px);
+    border-bottom-right-radius: clamp(12px, 1.2vw, 16px);
 
     color: #fff;
     text-transform: uppercase;
     font-family: 'Segoe Condensed';
-    font-size: clamp(34px, 3.4vw, 55px);
+    font-size: clamp(41px, 4.1vw, 55px);
     font-weight: 600;
     text-align: center;
     line-height: clamp(14px, 1.4vw, 22px);
@@ -525,29 +525,29 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   .main-content {
     overflow: hidden;
     flex: auto;
-    padding: clamp(11px, 1.1vw, 18px) clamp(10px, 1vw, 16px);
+    padding: clamp(13px, 1.3vw, 18px) clamp(12px, 1.2vw, 16px);
 
     .value {
       position: absolute;
-      bottom: clamp(40px, 4vw, 64px);
-      right: clamp(-24px, -2.4vw, -38px);
+      bottom: clamp(48px, 4.8vw, 64px);
+      right: clamp(-29px, -2.9vw, -38px);
       color: rgb(180, 180, 180);
       font-family: 'Segoe UI';
-      font-size: clamp(168px, 16.8vw, 269px);
+      font-size: clamp(202px, 20.2vw, 269px);
       font-weight: 400;
       z-index: -1;
     }
 
     .category {
-      margin: clamp(32px, 3.2vw, 51px) 0 0 0;
+      margin: clamp(38px, 3.8vw, 51px) 0 0 0;
       font-family: 'Segoe Light';
-      font-size: clamp(18px, 1.8vw, 29px);
+      font-size: clamp(22px, 2.2vw, 29px);
       font-weight: 300;
     }
 
     .description {
       font-family: 'Segoe';
-      font-size: clamp(10px, 1vw, 16px);
+      font-size: clamp(12px, 1.2vw, 16px);
       padding-right: 0px;
       line-height: 1.3;
     }
@@ -938,20 +938,20 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     flex: none;
     position: relative;
     top: 0px;
-    left: clamp(148px, 16vw, 250px);
+    left: clamp(178px, 17.8vw, 250px);
 
-    height: clamp(60px, 6vw, 69px);
-    width: clamp(66px, 4.6vw, 74px);
+    height: clamp(72px, 7.2vw, 69px);
+    width: clamp(79px, 5.5vw, 74px);
 
     padding: 0 clamp(1px, 3vw, 37px) 0 0;
-    border-top-right-radius: clamp(10px, 1vw, 16px);
-    border-bottom-right-radius: clamp(10px, 1vw, 16px);
+    border-top-right-radius: clamp(12px, 1.2vw, 16px);
+    border-bottom-right-radius: clamp(12px, 1.2vw, 16px);
 
     color: #fff;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
     font-family: 'Open Sans ExtraBold';
-    font-size: clamp(48px, 4.8vw, 77px);
+    font-size: clamp(58px, 5.8vw, 77px);
     font-weight: 600;
     text-align: center;
     line-height: 1.3;
@@ -965,45 +965,45 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     .value {
       position: absolute;
-      bottom: clmap(40px, 4vw, 64px);
-      right: clamp(-24px, -2.4vw, -38px);
+      bottom: clmap(48px, 4.8vw, 64px);
+      right: clamp(-29px, -2.9vw, -38px);
       color: rgb(42, 10, 60);
       font-family: 'Open Sans Regular';
-      font-size: clamp(168px, 16.8vw, 269px);
+      font-size: clamp(202px, 20.2vw, 269px);
       font-weight: 400;
       z-index: -1;
     }
 
     .category {
-      margin: clamp(9px, 0.9vw, 14px) 0 0 0;
+      margin: clamp(11px, 1.1vw, 14px) 0 0 0;
       font-family: 'Open Sans ExtraBold';
       text-shadow: 2px 2px 2px rgba(42, 10, 60, 0.2);
       color: rgb(42, 10, 60);
-      font-size: clamp(18px, 1.8vw, 29px);
+      font-size: clamp(22px, 2.2vw, 29px);
       font-weight: 300;
     }
 
     .risk {
-      margin: clamp(35px, 3.5vw, 56px) 0 0 0;
+      margin: clamp(42px, 4.2vw, 56px) 0 0 0;
       font-family: 'Open Sans ExtraBold';
       text-shadow: 2px 2px 2px rgba(42, 10, 60, 0.2);
       color: rgb(42, 10, 60);
-      font-size: clamp(12px, 1.2vw, 19px);
+      font-size: clamp(14px, 1.4vw, 19px);
       font-weight: 300;
     }
 
     .description {
       font-family: 'Open Sans Regular';
-      font-size: clamp(10px, 1vw, 16px);
+      font-size: clamp(12px, 1.2vw, 16px);
       padding-right: 0px;
       line-height: 1.3;
     }
 
     .biml {
       font-family: 'Open Sans Regular';
-      font-size: clamp(10px, 1vw, 16px);
+      font-size: clamp(12px, 1.2vw, 16px);
       padding-right: 0px;
-      padding-bottom: clamp(10px, 1vw, 16px);
+      padding-bottom: clamp(12px, 1.2vw, 16px);
       line-height: 1.3;
     }
   }
@@ -1034,7 +1034,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: clamp(138px, 13.8vw, 201px);
+        left: clamp(166px, 16.6vw, 201px);
       }
     }
 
@@ -1110,7 +1110,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: clamp(138px, 13.8vw, 201px);
+        left: clamp(166px, 16.6vw, 201px);
       }
     }
 
@@ -1241,16 +1241,8 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   &.dataset-risk {
-    .left-value {
-      //background: rgb(255, 240, 39)
-    }
-
-    .value {
-      //color: rgb(0, 159, 156);
-    }
 
     &.nJ, &.nQ, &.nK, &.nA {
-      //background: rgb(0, 159, 156);
 
       .main-content {
         color: rgb(42, 10, 60);
@@ -1264,7 +1256,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: clamp(138px, 13.8vw, 201px);
+        left: clamp(166px, 16.6vw, 201px);
       }
     }
 
@@ -1321,16 +1313,16 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 /* OWASP Cumulus Card Styles */
 
 .card.cumulus {
-  padding-top: clamp(20px, 2vw, 32px);
-  padding-left: clamp(20px, 2vw, 32px);
+  padding-top: clamp(24px, 2.4vw, 32px);
+  padding-left: clamp(24px, 2.4vw, 32px);
   display: grid;
-  grid-template-columns: [left-start] clamp(24px, 2.4vw, 38px) [left-end category-start] clamp(120px, 12vw, 192px) [category-end];
-  grid-template-rows: [header-start] clamp(26px, 2.6vw, 42px) [header-end content-start] clamp(225px, 22.5vw, 360px) [content-end];
+  grid-template-columns: [left-start] clamp(29px, 2.9vw, 38px) [left-end category-start] clamp(144px, 14.4vw, 192px) [category-end];
+  grid-template-rows: [header-start] clamp(31px, 3.1vw, 42px) [header-end content-start] clamp(270px, 27vw, 360px) [content-end];
   grid-template-areas: 
     "header header"
     "content content";
-  background-position: clamp(10px, 1vw, 16px) clamp(10px, 1vw, 16px);
-  background-size: clamp(200px, 20vw, 320px) clamp(293px, 29.3vw, 469px);
+  background-position: clamp(12px, 1.2vw, 16px) clamp(10px, 1vw, 16px);
+  background-size: clamp(240px, 24vw, 320px) clamp(293px, 29.3vw, 469px);
   
 
   .left-value {
@@ -1342,7 +1334,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     grid-area: header;
     color: rgb(35, 31, 32);
     font-family: "Josefin Sans Bold";
-    font-size: clamp(40px, 4vw, 64px);
+    font-size: clamp(48px, 4.8vw, 64px);
     font-weight: 600;
     text-align: center;
     line-height: 1;
@@ -1355,7 +1347,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     justify-items: end;
     grid-area: header;
     font-family: "Josefin Sans Bold";
-    font-size: clamp(10px, 1vw, 16px);
+    font-size: clamp(12px, 1.2vw, 16px);
     font-weight: 300;
     white-space: nowrap;
     grid-column-start: 2;
@@ -1376,10 +1368,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       position: unset;
       padding: unset;
       margin: unset;
-      margin-right: clamp(14px, 1.3vw, 20px);
+      margin-right: clamp(17px, 1.7vw, 20px);
       text-align: center;
       font-family: "Josefin Sans Bold";
-      font-size: clamp(16px, 1.6vw, 26px);
+      font-size: clamp(19px, 1.9vw, 26px);
       font-weight: 600;
       line-height: 1;
       writing-mode: sideways-lr;
@@ -1399,7 +1391,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     .description {
       font-family: "Josefin Sans Regular";
-      font-size: clamp(18px, 1.8vw, 29px);
+      font-size: clamp(22px, 2.2vw, 29px);
       line-height: 1.3;
       text-align: center;
       position: unset;
@@ -1664,13 +1656,13 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   display: flex;
 
   .name {
-    margin-right: clamp(5px, 0.5vw, 8px);
-    margin-top: clamp(5px, 0.5vw, 8px);
+    margin-right: clamp(6px, 0.6vw, 8px);
+    margin-top: clamp(6px, 0.6vw, 8px);
     line-height: 1.2;
   }
 
   .vote {
-    font-size: clamp(24px, 2.4vw, 38px);
+    font-size: clamp(17px, 2.4vw, 38px);
     opacity: 20%;
 
     &.none {
@@ -1679,13 +1671,13 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     img {
       cursor: pointer;
-      padding-top: clamp(20px, 2vw, 32px);
+      padding-top: clamp(24px, 2.4vw, 32px);
     }
 
     .badge {
-      font-size: clamp(14px, 1.4vw, 22px);
-      line-height: clamp(14px, 1.4vw, 22px);
-      margin-bottom: clamp(20px, 2vw, 32px);
+      font-size: clamp(17px, 1.7vw, 22px);
+      line-height: clamp(17px, 1.7vw, 22px);
+      margin-bottom: clamp(24px, 2.4vw, 32px);
      }
   }
 
@@ -1694,9 +1686,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   .scored {
-    font-size: clamp(14px, 1.4vw, 22px);
+    font-size: clamp(17px, 1.7vw, 22px);
     position: relative;
-    top: clamp(20px, 2vw, 32px);
+    top: clamp(24px, 2.4vw, 32px);
   }
 
   .mine {
@@ -1706,16 +1698,16 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   .drop-zone {
-    height: clamp(317px, 31.7vw, 507px);
-    width: clamp(224px, 22.4vw, 358px);
+    height: clamp(381px, 38.1vw, 507px);
+    width: clamp(269px, 26.9vw, 358px);
 
     p.play-instruction {
-      font-size: clamp(14px, 1.4vw, 22px);
-      margin-top: clamp(10px, 1vw, 16px);
+      font-size: clamp(17px, 1.7vw, 22px);
+      margin-top: clamp(12px, 1.2vw, 16px);
     }
 
     &.empty {
-      width: clamp(248px, 24.8vw, 397px);
+      width: clamp(298px, 29.8vw, 397px);
       color: #BBB;
     }
 
@@ -1725,15 +1717,15 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     .placeholder {
       text-align: center;
-      margin-top: clamp(60px, 6vw, 96px);
-      padding: clamp(10px, 1vw, 16px);
+      margin-top: clamp(72px, 7.2vw, 96px);
+      padding: clamp(12px, 1.2vw, 16px);
     }
   }
 }
 
 .playing-board {
-  margin-top: clamp(20px, 2vw, 32px);
-  margin-bottom: clamp(20px, 2vw, 32px);
+  margin-top: clamp(24px, 2.4vw, 32px);
+  margin-bottom: clamp(24px, 2.4vw, 32px);
   padding: 0.8vw;
 }
 
@@ -1744,11 +1736,11 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 /* Spinner CSS */
 
 .loader {
-  font-size: clamp(10px, 1vw, 20px);
+  font-size: clamp(12px, 1.2vw, 20px);
   margin: 0;
   text-indent: -9999em;
-  width: 8em;
-  height: 8em;
+  width: clamp(12px, 1.2vw, 20px);
+  height: clamp(12px, 1.2vw, 20px);
   border-radius: 50%;
   background: #7a7a7a;
   background: -moz-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
@@ -1811,16 +1803,16 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   text-align: center;
 
   span {
-    font-size: clamp(24px, 2.4vw, 38px);
-    margin-left: clamp(20px, 2vw, 32px);
-    margin-right: clamp(20px, 2vw, 32px);
+    font-size: clamp(29px, 2.9vw, 38px);
+    margin-left: clamp(29px, 2.9vw, 32px);
+    margin-right: clamp(29px, 2.9vw, 32px);
   }
 }
 
 #table {
   /*padding-top: 1vw;*/
   display: flex;
-  height: clamp(420px, 40vw, 620px);
+  height: clamp(504px, 50.4vw, 620px);
   flex-wrap: nowrap;
   overflow-x: auto;
 
@@ -1847,8 +1839,8 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 #hand::-webkit-scrollbar, #table::-webkit-scrollbar {
-  width: clamp(20px, 2vw, 32px);
-  height: clamp(20px, 2vw, 32px);
+  width: clamp(24px, 2.4vw, 32px);
+  height: clamp(24px, 2.4vw, 32px);
 }
 
 /* Track */
