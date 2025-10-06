@@ -2,3 +2,30 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+#copied-url {
+    field-sizing: content;
+    display: inline-block;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+#copy-url-container {
+    white-space: nowrap;
+}
+
+#copy-url-btn {
+    padding-top: 0.8rem;
+    padding-bottom: 1.1rem;
+}
+
+#url-copied {
+    svg {
+        height: 1.25rem;
+        width: 1.25rem;
+        color: #34d399; /* Tailwind's green-400 */
+        display: inline-block;
+    }
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
