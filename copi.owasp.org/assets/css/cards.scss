@@ -502,54 +502,54 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   .left-value {
     flex: none;
     position: relative;
-    top: 30px;
+    top: clamp(30px, 3vw, 48px);
 
-    height: 60px;
-    width: 46px;
+    height: clamp(60px, 6vw, 96px);
+    width: clamp(46px, 4.6vw, 74px);
 
     background: grey;
 
-    padding: 23px 0;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    padding: clamp(23px, 2.3vw, 37px) 0;
+    border-top-right-radius: clamp(10px, 1vw, 16px);
+    border-bottom-right-radius: clamp(10px, 1vw, 16px);
 
     color: #fff;
     text-transform: uppercase;
     font-family: 'Segoe Condensed';
-    font-size: 34px;
+    font-size: clamp(34px, 3.4vw, 55px);
     font-weight: 600;
     text-align: center;
-    line-height: 14px;
+    line-height: clamp(14px, 1.4vw, 22px);
   }
 
   .main-content {
     overflow: hidden;
     flex: auto;
-    padding: 11px 10px;
+    padding: clamp(11px, 1.1vw, 18px) clamp(10px, 1vw, 16px);
 
     .value {
       position: absolute;
-      bottom: 40px;
-      right: -24px;
+      bottom: clamp(40px, 4vw, 64px);
+      right: clamp(-24px, -2.4vw, -38px);
       color: rgb(180, 180, 180);
       font-family: 'Segoe UI';
-      font-size: 168px;
+      font-size: clamp(168px, 16.8vw, 269px);
       font-weight: 400;
       z-index: -1;
     }
 
     .category {
-      margin: 32px 0 0 0;
+      margin: clamp(32px, 3.2vw, 51px) 0 0 0;
       font-family: 'Segoe Light';
-      font-size: 18px;
+      font-size: clamp(18px, 1.8vw, 29px);
       font-weight: 300;
     }
 
     .description {
       font-family: 'Segoe';
-      font-size: 10px;
+      font-size: clamp(10px, 1vw, 16px);
       padding-right: 0px;
-      line-height: 1.3em;
+      line-height: 1.3;
     }
   }
 
@@ -612,6 +612,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/spoofing-a.png") #fff;
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
   &.tampering {
@@ -669,6 +673,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/tampering-a.png") #fff;
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
     }
   }
 
@@ -728,6 +736,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/repudiation-a.png") #fff;
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
   &.information-disclosure {
@@ -778,13 +790,17 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       background: no-repeat center/100% url("/images/eop-cards/information-disclosure-j.png") #fff;
     }
     &.nQ {
-      background: no-repeat top 18px left/100% url("/images/eop-cards/information-disclosure-q.png") #fff;
+      background: no-repeat top left/100% url("/images/eop-cards/information-disclosure-q.png") #fff;
     }
     &.nK {
       background: no-repeat top 9px left/100% url("/images/eop-cards/information-disclosure-k.png") #fff;
     }
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-a.png") #fff;
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
     }
   }
 
@@ -844,6 +860,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-a.png") #fff;
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
   &.elevation-of-privilege {
@@ -902,6 +922,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-a.png") #fff;
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
 }
@@ -914,78 +938,79 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     flex: none;
     position: relative;
     top: 0px;
-    left: 148px;
+    left: clamp(148px, 16vw, 250px);
 
-    height: 60px;
-    width: 46px;
+    height: clamp(60px, 6vw, 69px);
+    width: clamp(66px, 4.6vw, 74px);
 
-    padding: 23px 0;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    padding: 0 clamp(1px, 3vw, 37px) 0 0;
+    border-top-right-radius: clamp(10px, 1vw, 16px);
+    border-bottom-right-radius: clamp(10px, 1vw, 16px);
 
     color: #fff;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
     font-family: 'Open Sans ExtraBold';
-    font-size: 48px;
+    font-size: clamp(48px, 4.8vw, 77px);
     font-weight: 600;
     text-align: center;
-    line-height: 14px;
+    line-height: 1.3;
   }
 
   .main-content {
     overflow: hidden;
     flex: auto;
-    margin: 0px 0 0 -38px;
+    /*margin: 0 0 0 clamp(-38px, -3.8vw, 61px);*/
+    margin: 0 0 0 -58px;
 
     .value {
       position: absolute;
-      bottom: 40px;
-      right: -24px;
+      bottom: clmap(40px, 4vw, 64px);
+      right: clamp(-24px, -2.4vw, -38px);
       color: rgb(42, 10, 60);
       font-family: 'Open Sans Regular';
-      font-size: 168px;
+      font-size: clamp(168px, 16.8vw, 269px);
       font-weight: 400;
       z-index: -1;
     }
 
     .category {
-      margin: 9px 0 0 0;
+      margin: clamp(9px, 0.9vw, 14px) 0 0 0;
       font-family: 'Open Sans ExtraBold';
       text-shadow: 2px 2px 2px rgba(42, 10, 60, 0.2);
       color: rgb(42, 10, 60);
-      font-size: 18px;
+      font-size: clamp(18px, 1.8vw, 29px);
       font-weight: 300;
     }
 
     .risk {
-      margin: 35px 0 0 0;
+      margin: clamp(35px, 3.5vw, 56px) 0 0 0;
       font-family: 'Open Sans ExtraBold';
       text-shadow: 2px 2px 2px rgba(42, 10, 60, 0.2);
       color: rgb(42, 10, 60);
-      font-size: 12px;
+      font-size: clamp(12px, 1.2vw, 19px);
       font-weight: 300;
     }
 
     .description {
       font-family: 'Open Sans Regular';
-      font-size: 10px;
+      font-size: clamp(10px, 1vw, 16px);
       padding-right: 0px;
-      line-height: 1.3em;
+      line-height: 1.3;
     }
 
     .biml {
       font-family: 'Open Sans Regular';
-      font-size: 10px;
+      font-size: clamp(10px, 1vw, 16px);
       padding-right: 0px;
-      padding-bottom: 10px;
-      line-height: 1.3em;
+      padding-bottom: clamp(10px, 1vw, 16px);
+      line-height: 1.3;
     }
   }
 
 
   &.model-risk {
-
+    
     .left-value {
       //background: rgb(117, 35, 26)
     }
@@ -995,7 +1020,6 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.nJ, &.nQ, &.nK, &.nA {
-      //background: rgb(178, 25, 74);
 
       .main-content {
         color: rgb(42, 10, 60);
@@ -1010,48 +1034,55 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: 138px;
+        left: clamp(138px, 13.8vw, 201px);
       }
     }
 
     &.n2 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n3 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n4 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n5 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n6 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n7 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n8 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n9 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.n10 {
-      background: no-repeat -16px -3px url("/images/mlsec/model-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat -16px -3px url("/images/mlsec/model-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
     &.nQ {
-      background: no-repeat -16px -3px url("/images/mlsec/model-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
     &.nK {
-      background: no-repeat -16px -3px url("/images/mlsec/model-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
     &.nA {
-      background: no-repeat -16px -3px url("/images/mlsec/model-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
+    }
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
+
+    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-position: 4px -4px;
     }
   }
 
@@ -1079,48 +1110,56 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: 138px;
+        left: clamp(138px, 13.8vw, 201px);
       }
     }
 
     &.n2 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n3 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n4 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n5 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n6 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n7 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n8 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n9 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.n10 {
-      background: no-repeat -16px -3px url("/images/mlsec/input-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat -16px -3px url("/images/mlsec/input-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
     &.nQ {
-      background: no-repeat -16px -3px url("/images/mlsec/input-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
     &.nK {
-      background: no-repeat -16px -3px url("/images/mlsec/input-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
     &.nA {
-      background: no-repeat -16px -3px url("/images/mlsec/input-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
+
+    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-position: 4px -4px;
     }
   }
 
@@ -1148,48 +1187,56 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: 138px;
+        left: clamp(138px, 13.8vw, 201px);
       }
     }
 
     &.n2 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n3 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n4 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n5 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n6 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n7 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n8 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n9 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.n10 {
-      background: no-repeat -16px -3px url("/images/mlsec/output-2-10.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat -16px -3px url("/images/mlsec/output-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
     &.nQ {
-      background: no-repeat -16px -3px url("/images/mlsec/output-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
     &.nK {
-      background: no-repeat -16px -3px url("/images/mlsec/output-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
     &.nA {
-      background: no-repeat -16px -3px url("/images/mlsec/output-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
+
+    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-position: 4px -4px;
     }
   }
 
@@ -1217,7 +1264,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     &.n10 {
       .left-value {
-        left: 138px;
+        left: clamp(138px, 13.8vw, 201px);
       }
     }
 
@@ -1249,16 +1296,24 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
     &.nJ {
-      background: no-repeat -16px -3px url("/images/mlsec/dataset-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
     &.nQ {
-      background: no-repeat -16px -3px url("/images/mlsec/dataset-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
     &.nK {
-      background: no-repeat -16px -3px url("/images/mlsec/dataset-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
     &.nA {
-      background: no-repeat -16px -3px url("/images/mlsec/dataset-J-A.png") #fff;
+      background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
+
+    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-position: 4px -4px;
     }
   }
 }
@@ -1266,16 +1321,17 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 /* OWASP Cumulus Card Styles */
 
 .card.cumulus {
-  padding-top: 20px;
-  padding-left: 20px;
+  padding-top: clamp(20px, 2vw, 32px);
+  padding-left: clamp(20px, 2vw, 32px);
   display: grid;
-  grid-template-columns: [left-start] 24px [left-end category-start] 120px [category-end];
-  grid-template-rows: [header-start] 26px [header-end content-start] 225px [content-end];
+  grid-template-columns: [left-start] clamp(24px, 2.4vw, 38px) [left-end category-start] clamp(120px, 12vw, 192px) [category-end];
+  grid-template-rows: [header-start] clamp(26px, 2.6vw, 42px) [header-end content-start] clamp(225px, 22.5vw, 360px) [content-end];
   grid-template-areas: 
     "header header"
     "content content";
-  background-position: 10px 10px;
-  background-size: 200px 293px;
+  background-position: clamp(10px, 1vw, 16px) clamp(10px, 1vw, 16px);
+  background-size: clamp(200px, 20vw, 320px) clamp(293px, 29.3vw, 469px);
+  
 
   .left-value {
     
@@ -1286,11 +1342,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     grid-area: header;
     color: rgb(35, 31, 32);
     font-family: "Josefin Sans Bold";
-    font-size: 40px;
+    font-size: clamp(40px, 4vw, 64px);
     font-weight: 600;
     text-align: center;
-    line-height: 14px;
-    margin-top: 5px;
+    line-height: 1;
   }
 
   .category {
@@ -1300,7 +1355,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     justify-items: end;
     grid-area: header;
     font-family: "Josefin Sans Bold";
-    font-size: 10px;
+    font-size: clamp(10px, 1vw, 16px);
     font-weight: 300;
     white-space: nowrap;
     grid-column-start: 2;
@@ -1321,11 +1376,12 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       position: unset;
       padding: unset;
       margin: unset;
+      margin-right: clamp(14px, 1.3vw, 20px);
       text-align: center;
       font-family: "Josefin Sans Bold";
-      font-size: 16px;
+      font-size: clamp(16px, 1.6vw, 26px);
       font-weight: 600;
-      line-height: 14px;
+      line-height: 1;
       writing-mode: sideways-lr;
       text-align: left;
       text-transform: none;
@@ -1343,8 +1399,8 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     .description {
       font-family: "Josefin Sans Regular";
-      font-size: 18px;
-      line-height: 1.3em;
+      font-size: clamp(18px, 1.8vw, 29px);
+      line-height: 1.3;
       text-align: center;
       position: unset;
       padding: unset;
@@ -1397,6 +1453,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: url("/images/cumulus/secrets-and-access-a.png") no-repeat rgb(239, 134, 101);
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
   &.delivery {
@@ -1441,6 +1501,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
     &.nA {
       background: url("/images/cumulus/delivery-a.png") no-repeat rgb(87, 193, 235);
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
     }
   }
 
@@ -1487,6 +1551,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: url("/images/cumulus/recovery-a.png") no-repeat rgb(69, 176, 147);
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
   &.monitoring {
@@ -1532,6 +1600,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.nA {
       background: url("/images/cumulus/monitoring-a.png") no-repeat rgb(243, 179, 93);
     }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
+    }
   }
 
   &.resources {
@@ -1576,6 +1648,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
     &.nA {
       background: url("/images/cumulus/resources-a.png") no-repeat rgb(153, 115, 179);
+    }
+
+    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+      background-size: cover;
     }
   }
 
@@ -1744,12 +1820,14 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 #table {
   /*padding-top: 1vw;*/
   display: flex;
-  height: clamp(400px, 40vw, 600px);
+  height: clamp(420px, 40vw, 620px);
   flex-wrap: nowrap;
   overflow-x: auto;
 
   .card {
     flex: 0 0 auto;
+    touch-action: none;
+    scroll-behavior: smooth;
   }
 
   -webkit-overflow-scrolling: touch;
@@ -1762,12 +1840,32 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
   .card {
     flex: 0 0 auto;
+    touch-action: none;
+    scroll-behavior: smooth;
   }
 
-  -webkit-overflow-scrolling: touch;
-
-
 }
+
+#hand::-webkit-scrollbar, #table::-webkit-scrollbar {
+  width: clamp(20px, 2vw, 32px);
+  height: clamp(20px, 2vw, 32px);
+}
+
+/* Track */
+#hand::-webkit-scrollbar-track, #table::-webkit-scrollbar-track {
+  background: rgb(243, 244, 246);
+  
+}
+
+/* Handle */
+#hand::-webkit-scrollbar-thumb, #table::-webkit-scrollbar-thumb {
+  background: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+/* Handle on hover */
+#hand::-webkit-scrollbar-thumb:hover, #table::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} 
 
 /* Dragula Styles */@at-root.gu-mirror {
   position: fixed !important;
