@@ -2,7 +2,7 @@
     import TextImage from '$lib/components/textImage.svelte';
 </script>
 <svelte:head>
-    <link rel="canonical" href="/" />
+    <link rel="canonical" href="https://cornucopia.owasp.org" />
 </svelte:head>
 <div class="error-message">
 

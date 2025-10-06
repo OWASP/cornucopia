@@ -8,6 +8,7 @@
 </script>
 <svelte:head>
     <title>{$t('author.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/author" />
     <meta name="description" content="{$t('author.head.description')}" />
 	<meta name="keywords" content="{$t('author.head.keywords')}" />
     <meta property="og:title" content="{$t('author.head.title')}">

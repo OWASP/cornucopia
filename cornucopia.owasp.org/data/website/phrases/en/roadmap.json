@@ -3,8 +3,8 @@
     "title": "Roadmap",
     "head": {
         "title": "OWASP Cornucopia - The OWASP Cornucopia Roadmap",
-        "description": "The OWASP Cornucopia Roadmap is a guide to the future of the OWASP Cornucopia project, detailing upcoming features and improvements.",
-        "keywords": "OWASP, Cornucopia, Roadmap, Project, Future, Features, Improvements"
+        "description": "The OWASP Cornucopia Roadmap is a guide to the future of the OWASP Cornucopia project.",
+        "keywords": "OWASP, Cornucopia, Roadmap, Project"
     }
   }
 }

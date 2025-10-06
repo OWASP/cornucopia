@@ -11,7 +11,8 @@
 </script>
 <svelte:head>
     <title>{$t('webshop.head.title')}</title>
-	<meta name="description" content="{$t('webshop.head.description')}" />
+	<link rel="canonical" href="https://cornucopia.owasp.org/webshop" />
+    <meta name="description" content="{$t('webshop.head.description')}" />
 	<meta name="keywords" content="{$t('webshop.head.keywords')}" />
     <meta property="og:title" content="{$t('webshop.head.title')}">
     <meta property="og:description" content="{$t('webshop.head.description')}">

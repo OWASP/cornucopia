@@ -22,7 +22,8 @@
 </script>
 <svelte:head>
     	<title>{$t('layout.title')}</title>
-		<meta name="description" content="{$t('layout.description')}" />
+		<link rel="canonical" href="https://cornucopia.owasp.org" />
+        <meta name="description" content="{$t('layout.description')}" />
 		<meta name="keywords" content="{$t('layout.keywords')}" />
         <meta property="og:title" content="{$t('layout.title')}">
         <meta property="og:description" content="{$t('layout.description')}">
