@@ -57,6 +57,23 @@ Hooks.DragDrop = {
   }
 }
 
+Hooks.CopyUrl = {
+  mounted() {
+    console.log("Mounted CopyUrl hook");
+    const btn = this.el.querySelector("#copy-url-btn");
+    const urlSpan = this.el.querySelector("#copied-url");
+    const checkMark = this.el.querySelector("#url-copied");
+    
+    /*urlSpan.textContent = window.location.href;*/
+    btn.addEventListener("click", () => {
+      const url = urlSpan.value;
+      navigator.clipboard.writeText(url).then(() => {
+        checkMark.classList.remove("hidden");
+      });
+    });
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: location.host.startsWith("localhost") ? undefined : 2500, // Clients can switch to longpoll and get stuck during development when the server goes up and down

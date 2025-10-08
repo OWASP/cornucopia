@@ -10,6 +10,14 @@ defmodule CopiWeb.GameLive.Show do
   end
 
   @impl true
+  def on_mount(:default, _params, session, socket) do
+    socket = attach_hook(socket, :current_path_hook, :handle_params, &put_uri_hook/3)
+    {:cont, socket}
+  end
+
+  def put_uri_hook(_params, uri, socket), do: {:cont, assign(socket, uri: uri)}
+
+  @impl true
   def handle_params(params, _, socket) do
     with {:ok, game} <- Game.find(params["game_id"]) do
       CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
