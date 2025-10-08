@@ -1814,7 +1814,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   display: flex;
   height: clamp(504px, 50.4vw, 620px);
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
 
   .card {
     flex: 0 0 auto;
@@ -1828,7 +1828,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 #hand {
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 30px;
 
   .card {
     flex: 0 0 auto;
@@ -1846,12 +1848,13 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 /* Track */
 #hand::-webkit-scrollbar-track, #table::-webkit-scrollbar-track {
   background: rgb(243, 244, 246);
-  
 }
 
 /* Handle */
 #hand::-webkit-scrollbar-thumb, #table::-webkit-scrollbar-thumb {
   background: rgb(31 41 55 / var(--tw-bg-opacity));
+  min-height: clamp(24px, 2.4vw, 32px);
+  min-width: clamp(24px, 2.4vw, 32px);
 }
 
 /* Handle on hover */
