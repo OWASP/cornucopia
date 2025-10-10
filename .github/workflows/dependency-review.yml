@@ -2,7 +2,7 @@
 #
 # This Action will scan dependency manifest files that change as part of a Pull Request,
 # surfacing known-vulnerable versions of the packages declared or updated in the PR.
-# Once installed, if the workflow run is marked as required, 
+# Once installed, if the workflow run is marked as required,
 # PRs introducing known-vulnerable packages will be blocked from merging.
 #
 # Source repository: https://github.com/actions/dependency-review-action
@@ -25,5 +25,14 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@56339e523c0409420f6c2c9a2f4292bbb3c07dd3 # v4.8.0
         with:
-          # Ignore GHSA-vg6x-rcgg-rjx6 as the dev server is not used for static projects other then for debugging locally
-          allow-ghsas: GHSA-vg6x-rcgg-rjx6,	
+          # Ignore GHSA-vg6x-rcgg-rjx6 as the dev server is not used for static projects other than for debugging locally
+          allow-ghsas: GHSA-vg6x-rcgg-rjx6,
+      - name: 'Create SBOM'
+        uses: CycloneDX/cdxgen-action@5668048b6479c5ee557eec3e1766132a4661681f # v1.0.0
+        with:
+          output: "./reports/bom.xml"
+      - name: 'Upload SBOM'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: reports
+          path: reports
