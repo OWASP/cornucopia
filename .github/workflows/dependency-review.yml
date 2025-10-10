@@ -28,14 +28,11 @@ jobs:
           # Ignore GHSA-vg6x-rcgg-rjx6 as the dev server is not used for static projects other than for debugging locally
           allow-ghsas: GHSA-vg6x-rcgg-rjx6,
       - name: 'Create SBOM'
-        uses: CycloneDX/cyclonedx-github-action@v1.8.0
+        uses: CycloneDX/cdxgen-action@5668048b6479c5ee557eec3e1766132a4661681f
         with:
-          output-format: 'all'
-          output-directory: './'
-          include-development-dependencies: true
-          project-name: 'Cornucopia Website'
-          project-version: '${{ github.sha }}'
-          create-github-artifact: true
-          github-artifact-name: 'sbom'
-          github-artifact-retention-days: 7
-          fail-on-error: true'
+          output: "./reports/bom.xml"
+      - name: 'Upload SBOM'
+        uses: actions/upload-artifact@v1
+        with:
+          name: reports
+          path: reports
