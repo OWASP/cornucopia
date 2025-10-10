@@ -28,11 +28,11 @@ jobs:
           # Ignore GHSA-vg6x-rcgg-rjx6 as the dev server is not used for static projects other than for debugging locally
           allow-ghsas: GHSA-vg6x-rcgg-rjx6,
       - name: 'Create SBOM'
-        uses: CycloneDX/cdxgen-action@5668048b6479c5ee557eec3e1766132a4661681f
+        uses: CycloneDX/cdxgen-action@5668048b6479c5ee557eec3e1766132a4661681f # v1.0.0
         with:
           output: "./reports/bom.xml"
       - name: 'Upload SBOM'
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: reports
           path: reports
