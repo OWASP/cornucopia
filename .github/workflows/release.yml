@@ -98,7 +98,7 @@
               zip -r output/owasp_cornucopia_webapp_2.2_pt-pt.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_qr_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_qr_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_bridge_pt-pt.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_tarot_pt-pt.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
               zip -r output/owasp_cornucopia_webapp_2.2_ru.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_bridge_qr_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_cards_tarot_qr_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_bridge_ru.idml output/cornucopia_webapp/owasp_cornucopia_webapp_2.2_leaflet_tarot_ru.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
           - name: Create release
-            uses: softprops/action-gh-release@aec2ec56f94eb8180ceec724245f64ef008b89f5 # v2.4.0
+            uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2.4.1
             with:
               draft: true
               prerelease: false
