@@ -4,7 +4,7 @@ OWASP Cornucopia is a mechanism in the form of a card game to assist software de
 
 If you have questions concerning OWASP Cornucopia, please search for it first in our [Q & A section](/questionsandanswers).
 
-If you have other questions, suggestions or ideas please feel free to discuss them on our [email list](https://groups.google.com/a/owasp.org/g/cornucopia-project 'Cornucopia google group [external]') or submit them to our [list of issues](https://github.com/OWASP/cornucopia/issue 'Cornucopia Github repository [external]')  in our repository. If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
+If you have other questions, suggestions or ideas please feel free to discuss them on our [email list](https://groups.google.com/a/owasp.org/g/cornucopia-project 'Cornucopia google group [external]') or submit them to our [list of issues](https://github.com/OWASP/cornucopia/issues 'Cornucopia Github repository [external]')  in our repository. If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
 
 ## Introduction
 
