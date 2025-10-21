@@ -260,7 +260,7 @@ suits:
     owasp_asvs: [ 2.5.2, 2.5.3 ]
     owasp_asvs_print: [ 2.5.2-3 ]
     owasp_appsensor: [ "-" ]
-    capec: [ 16, 37, 55, 70, 116, 151, 543, 546, 560, 565, 568, 600, 654 ]
+    capec: [ 37, 49, 116, 151, 543, 546, 560, 568, 600, 654 ]
     safecode: [ 28 ]
     owasp_cre:
       owasp_asvs: [ 772-358, 543-621 ]
