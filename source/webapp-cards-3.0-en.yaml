@@ -163,7 +163,7 @@ suits:
     id: "SM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/SM4"
-    desc: "Alison can set session identification cookies on another web application because the domain and path are not restricted sufficiently"
+    desc: "Alison can set session identification cookies or use tokens for another web application because the domain, path, (or in the case of tokens) audience are not restricted sufficiently"
   -
     id: "SM5"
     value: "5"
@@ -183,7 +183,7 @@ suits:
     id: "SM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
-    desc: "Matt can abuse sessions because the application does not require re-authentication after the session lifetime limit has been reached, account terminated, or when privileges have changed, or after any abrupt and risky change to the user's environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
+    desc: "Matt can abuse sessions because the application does not require re-authentication after maximum session lifetime or inactivity limits has been reached, account terminated, or when privileges have changed, or after any abrupt and risky change to the user's auth settings or environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
   -
     id: "SM9"
     value: "9"
@@ -198,7 +198,7 @@ suits:
     id: "SMJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/SMJ"
-    desc: "Jeff can resend an identical repeat interaction (e.g. HTTP request, signal, button press) and it is accepted, not rejected"
+    desc: "Jeff can reuse stolen session identifiers and/or tokens because they are not handled confidentially or because there is no strong proof of possession (e.g. binding to certificate, device, IP address, user-agent, etc.)"
   -
     id: "SMQ"
     value: "Q"
