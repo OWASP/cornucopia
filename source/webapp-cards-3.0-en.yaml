@@ -183,7 +183,7 @@ suits:
     id: "SM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
-    desc: "Matt can abuse sessions because the application does not require re-authentication after maximum session lifetime or inactivity limits has been reached, account terminated, or when privileges have changed, or after any abrupt and risky change to the user's auth settings or environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
+    desc: "Matt can abuse sessions because the application does not require re-authentication after a session time limit has been reached, account terminated, or when privileges have changed, or after any abrupt and risky change to the user's authentication settings or environmental and contextual attributes (e.g. IP address, device, location, time of day, browser, etc.)"
   -
     id: "SM9"
     value: "9"
