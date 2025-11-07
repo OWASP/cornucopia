@@ -20,7 +20,7 @@ Gunter targets an online service that uses encryption for data transmission. How
 
 The primary applicable STRIDE categories for this scenario is **Information Disclosure** and **Tampering**.
 
-Because Gunter can intercept and decrypt the data in transit due to weak protocol deployment, misconfigured SSL/TLS, or untrusted/invalid certificates. This is a confidentiality failure, but as he can also modify the encrypted data (MITM style, degrade the connection, or re-encrypt altered content), it also falls into **Tampering**.
+Because Gunter can intercept and decrypt the data in transit due to weak protocol deployment, misconfigured SSL/TLS, or untrusted/invalid certificates. This is a confidentiality failure, but as he can also modify the encrypted data (MITM style, degrade the connection, or re-encrypt altered content), it also falls into **Tampering**, finally, if cryptographic signatures is used and can be faked, the **Tampering** can also lead to **Spoofing**.
 
 ### What can go wrong?
 
