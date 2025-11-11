@@ -36,7 +36,7 @@ defmodule Copi.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.8.0"},
-      {:phoenix_ecto, "~> 4.6.4"},
+      {:phoenix_ecto, "~> 4.7.0"},
       {:ecto_sql, "~> 3.13.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
