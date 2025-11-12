@@ -23,7 +23,7 @@
 		"@vitest/coverage-v8": "^3.1.4",
 		"dotenv": "^17.2.3",
 		"svelte": "^5.43.4",
-		"svelte-check": "^4.3.3",
+		"svelte-check": "^4.3.4",
 		"svelte-sitemap": "^2.7.1",
 		"then-request": "^6.0.2",
 		"tslib": "^2.8.1",
