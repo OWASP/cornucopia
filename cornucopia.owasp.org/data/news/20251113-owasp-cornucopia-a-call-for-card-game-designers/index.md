@@ -19,7 +19,7 @@ Are there some brilliant designers out there who would like to volunteer to crea
 
 OWASP® Cornucopia is a threat modeling tool in the form of a card game to assist software development teams in identifying security requirements in Agile, conventional, and formal development processes. It strives to be language, platform, and technology-agnostic.
 
-It’s one of the few tools that connects threat modeling with OWASP ASVS, SAFECode, STRIDE, OWASP DevGuide, and CAPEC, helping to identify security requirements, develop a secure design, and create a threat model without prior knowledge of these frameworks. 
+It’s one of the few tools that connects threat modeling with OWASP ASVS, SAFECode, STRIDE, OWASP DevGuide, and CAPEC, helping to identify security requirements, develop a secure design, and create a threat model without prior knowledge of these frameworks.
 
 We are now creating the next version of the website app game. The new version will feature new cards and text that cover all of the requirements in OWASP ASVS 5.0 and connect these to more than 210 unique common attack patterns (CAPEC).
 
