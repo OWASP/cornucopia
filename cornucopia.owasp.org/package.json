@@ -36,7 +36,7 @@
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@types/js-yaml": "^4.0.9",
 		"front-matter": "^4.0.2",
-		"js-yaml": "^4.1.0",
+		"js-yaml": "^4.1.1",
 		"normalize.css": "^8.0.1",
 		"svelte-i18n": "^4.0.1",
 		"svelte-markdown": "^0.4.1",
