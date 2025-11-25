@@ -12,7 +12,7 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.14.2-erlang-25.1.1-debian-bullseye-20220801-slim
 #
-FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.1-debian-bullseye-20251117@sha256:2101b9f5689e5e5acf43dae0c685874f0c0da40c82ccacccd9c30e709ac0ea6b as builder
+FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.2-debian-bullseye-20251117@sha256:63067931e21db6d893bef21f54dda18df09b6e65a793616d7b07246eb11e4904 as builder
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git nodejs npm \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
@@ -58,7 +58,7 @@ RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
-FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.1-debian-bullseye-20251117@sha256:2101b9f5689e5e5acf43dae0c685874f0c0da40c82ccacccd9c30e709ac0ea6b
+FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.2-debian-bullseye-20251117@sha256:63067931e21db6d893bef21f54dda18df09b6e65a793616d7b07246eb11e4904
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
