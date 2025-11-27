@@ -64,7 +64,7 @@ defmodule Copi.MixProject do
       {:ecto_ulid, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.12.0"},
       {:slugify, "~> 1.3.1"},
-      {:want, "~> 1.21.1"},
+      {:want, "~> 1.22.0"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
       {:hackney, "~> 1.9"},
       {:mox, "~> 1.2.0", only: :test},
