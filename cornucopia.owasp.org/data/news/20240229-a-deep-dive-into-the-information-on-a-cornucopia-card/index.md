@@ -41,9 +41,9 @@ We have incorporated interactive links to the mappings listed on the Cornucopia 
 
 We've transitioned from ASVS Version 3 to ASVS Version 4. The physical cards display the mappings to ASVS v3.0, but the website has been updated to reflect the mappings to ASVS 4.0. I believe that the OWASP ASVS is one of the most practical projects for enhancing the cybersecurity of your application.
 
-The OWASP Application Security Verification Standard (ASVS) is a framework established by the Open Web Application Security Project (OWASP) for securing web applications. 
+The OWASP Application Security Verification Standard (ASVS) is a framework established by the Open Worldwide Application Security Project (OWASP) for securing web applications. 
 Learning about OWASP ASVS and incorporating its requirements into your application development process is highly recommended.
-The OWASP Application Security Verification Standard (ASVS) is a framework for securing web applications developed by the Open Web Application Security Project (OWASP). It establishes a foundation for testing web application security controls and provides developers with a comprehensive set of requirements for secure development.
+The OWASP Application Security Verification Standard (ASVS) is a framework for securing web applications developed by the Open Worldwide Application Security Project (OWASP). It establishes a foundation for testing web application security controls and provides developers with a comprehensive set of requirements for secure development.
 
 OWASP ASVS offers a definitive suite of functionalities that should be integrated into your application to ensure its security.
 
