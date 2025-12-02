@@ -1,13 +1,13 @@
 <script lang="ts">
     import { error } from '@sveltejs/kit';
+    import { onMount } from 'svelte';
     import {type Card} from "../../domain/card/card"
-    interface Props {
-        card: string;
-    }
 
-    let { card }: Props = $props();
-    error(404, {
-			message: `Unknown card: ${String(card).toUpperCase()}`
+	export let card: string;
+	onMount(() => {
+        error(404, {
+            message: `Unknown card: ${String(card).toUpperCase()}`
+        });
     });
 </script>
 
