@@ -75,6 +75,52 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+## Security Features
+
+### Rate Limiting
+
+Copi implements IP-based rate limiting to protect against abuse and ensure availability for all users. This addresses CAPEC 212 (Functionality Misuse) attacks.
+
+**Features:**
+- **Game Creation Limiting**: Limits the number of games that can be created from a single IP address
+- **Connection Limiting**: Limits the number of WebSocket connections from a single IP address
+- **Configurable Limits**: All limits and time windows are configurable via environment variables
+
+**Configuration:**
+
+Set the following environment variables to customize rate limits:
+
+```bash
+# Maximum games per IP (default: 10)
+export MAX_GAMES_PER_IP=10
+
+# Time window for game creation in seconds (default: 3600 = 1 hour)
+export GAME_CREATION_WINDOW_SECONDS=3600
+
+# Maximum connections per IP (default: 50)
+export MAX_CONNECTIONS_PER_IP=50
+
+# Time window for connections in seconds (default: 300 = 5 minutes)
+export CONNECTION_WINDOW_SECONDS=300
+```
+
+**How it works:**
+- The rate limiter tracks requests by IP address
+- When a limit is exceeded, users receive a clear error message with a retry time
+- Expired entries are automatically cleaned up every 5 minutes
+- Rate limits are independent for game creation vs. connections
+- The system handles both IPv4 and IPv6 addresses
+- X-Forwarded-For headers are respected for reverse proxy deployments
+
+**For Reverse Proxy Deployments:**
+
+If deploying behind a reverse proxy (nginx, Apache, Cloudflare, etc.), ensure the proxy passes the real client IP:
+
+```nginx
+# Nginx example
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+```
+
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## More about Phoenix
@@ -97,6 +143,14 @@ Login to fly and create a PostgreSQL cluster. See: see: https://fly.io/dashboard
     fly launch --no-deploy
 
 Make a note of the host and name of the app and the name of the postgresql cluster.
+
+Configure rate limiting (optional, uses defaults if not set):
+
+    fly secrets set MAX_GAMES_PER_IP=10 --app <app name>
+    fly secrets set GAME_CREATION_WINDOW_SECONDS=3600 --app <app name>
+    fly secrets set MAX_CONNECTIONS_PER_IP=50 --app <app name>
+    fly secrets set CONNECTION_WINDOW_SECONDS=300 --app <app name>
+
 Then deploy the app from `./copi.owasp.org`
 
     fly mpg attach <cluster name> --app <app name>
@@ -139,6 +193,12 @@ Set your prefered app name instead of `<name>`
     heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
     heroku config:set POOL_SIZE=18
     heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory
+    
+    # Optional: Configure rate limiting (uses defaults if not set)
+    heroku config:set MAX_GAMES_PER_IP=10
+    heroku config:set GAME_CREATION_WINDOW_SECONDS=3600
+    heroku config:set MAX_CONNECTIONS_PER_IP=50
+    heroku config:set CONNECTION_WINDOW_SECONDS=300
 
 ### Heroku deploy
 

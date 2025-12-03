@@ -27,6 +27,17 @@ config :copi, CopiWeb.Endpoint,
 
 config :copi, env: Mix.env()
 
+# Configure rate limiting to prevent abuse (CAPEC 212 - Functionality Misuse)
+config :copi, Copi.RateLimiter,
+  # Maximum number of games that can be created from a single IP in the time window
+  max_games_per_ip: System.get_env("MAX_GAMES_PER_IP", "10") |> String.to_integer(),
+  # Time window in seconds for game creation rate limiting (default: 1 hour)
+  game_creation_window_seconds: System.get_env("GAME_CREATION_WINDOW_SECONDS", "3600") |> String.to_integer(),
+  # Maximum number of WebSocket connections from a single IP in the time window
+  max_connections_per_ip: System.get_env("MAX_CONNECTIONS_PER_IP", "50") |> String.to_integer(),
+  # Time window in seconds for connection rate limiting (default: 5 minutes)
+  connection_window_seconds: System.get_env("CONNECTION_WINDOW_SECONDS", "300") |> String.to_integer()
+
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.0",

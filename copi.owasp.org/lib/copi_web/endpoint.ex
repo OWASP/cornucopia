@@ -12,8 +12,11 @@ defmodule CopiWeb.Endpoint do
   ]
 
   socket "/live", Phoenix.LiveView.Socket,
-    websocket: [timeout: 45_000, connect_info: [session: @session_options]],
-    longpoll: [connect_info: [session: @session_options]]
+    websocket: [
+      timeout: 45_000, 
+      connect_info: [session: @session_options, peer_data: true, x_headers: ["x-forwarded-for"]]
+    ],
+    longpoll: [connect_info: [session: @session_options, peer_data: true, x_headers: ["x-forwarded-for"]]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
