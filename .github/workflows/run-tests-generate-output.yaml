@@ -31,7 +31,7 @@ jobs:
       artifact-url: ${{ steps.upload_artifact.outputs.artifact-url }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Create tmp branch for artifacts and get parent and object ref
@@ -45,7 +45,7 @@ jobs:
           echo "object_tree=`git write-tree`" >> "$GITHUB_ENV"
           git switch --orphan "tmp-$BRANCH_NAME-artifacts"
       - name: Checkout branch for pull request
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       # Set the pip environment up
