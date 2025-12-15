@@ -180,7 +180,7 @@ SELECT EXTRACT(YEAR FROM inserted_at) AS year, EXTRACT(MONTH FROM inserted_at) A
 
 The Copi threat model can be found at [../ThreatDragonModels/copi.json](../ThreatDragonModels/copi.json). You may review it by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard).
 
-Here are a short summary of what you need to be aware of:
+Here is a short summary of what you need to be aware of:
 
 ### Be aware of data exposure risk! Copi does not support authentication
 
