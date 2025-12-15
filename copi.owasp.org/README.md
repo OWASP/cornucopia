@@ -45,7 +45,7 @@ mix archive.install hex phx_new
 ```
 
 ### PostgreSQL with Docker
-https://docs.docker.com/desktop/install/mac-install/
+[docs.docker.com/desktop/install/mac-install/](https://docs.docker.com/desktop/install/mac-install/)
 
 After installing docker, You can create an instance of the Postgres image:
 ```bash
@@ -55,7 +55,7 @@ Note: the password must be the same as the one in the config file of your dev en
 
 You've now got Elixir, Hex, Phoenix and Postgres. You are ready to run Copi locally and contribute.
 
-Bonus: set up vscode for elixir dev https://fly.io/phoenix-files/setup-vscode-for-elixir-development/
+Bonus: set up vscode for elixir dev [fly.io/phoenix-files/setup-vscode-for-elixir-development/](https://fly.io/phoenix-files/setup-vscode-for-elixir-development/)
 
 ### Clone the copi code, then
 To start your Phoenix server:
@@ -78,17 +78,17 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## More about Phoenix
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+  * Official website: (https://www.phoenixframework.org/)[https://www.phoenixframework.org/]
+  * Guides: [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
+  * Docs: [https://hexdocs.pm/phoenix](https://hexdocs.pm/phoenix)
+  * Forum: [https://elixirforum.com/c/phoenix-forum](https://elixirforum.com/c/phoenix-forum)
+  * Source: [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix)
 
 ## Fly deployment
 
-Fly.io support clustering Elixir apps which means that you can scale horizontally. https://fly.io/docs/elixir/the-basics/clustering/
-You'll need to install elixir in order to launch the app. see: https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir
-Login to fly and create a PostgreSQL cluster. See: see: https://fly.io/dashboard/ (Click managed postgres in the menu)
+Fly.io support clustering Elixir apps which means that you can scale horizontally. [https://fly.io/docs/elixir/the-basics/clustering/](https://fly.io/docs/elixir/the-basics/clustering/)
+You'll need to install elixir in order to launch the app. see: [https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir)
+Login to fly and create a PostgreSQL cluster. See: see: [https://fly.io/dashboard/](https://fly.io/dashboard/) (Click managed postgres in the menu)
 1 GB memory and 10GB storage for the db is enough.
 
     cd copi.owasp.org
@@ -108,14 +108,14 @@ Then deploy the app from `./copi.owasp.org`
 
 Setup A and AAAA record in Cloudflare
 
-Go to https://fly.io/apps/<app name>/certificates/copi.owasp.org
+Go to [https://fly.io/apps/<app name>/certificates/copi.owasp.org](https://fly.io/apps/<app name>/certificates/copi.owasp.org)
 
 You'll need to add both the A and AAAA records together with the CNAME challenge to cloudflare.
 NB: The challenge should not be proxied through cloudflare!
 Please allow for 30 min for the change to take effect, but check that the "Domain ownership verification" went ok. 
 
 Follow the instructions given.
-If you use get issues. See the troubleshooting section: https://fly.io/docs/networking/custom-domain/#troubleshoot-certificate-creation
+If you use get issues. See the troubleshooting section: [https://fly.io/docs/networking/custom-domain/#troubleshoot-certificate-creation](https://fly.io/docs/networking/custom-domain/#troubleshoot-certificate-creation)
 
 ## Heroku deployment
 
@@ -149,18 +149,18 @@ Set your local branch name instead of `<name>`
 
     heroku domains:add copi.owaspcornucopia.org -a copiweb-stage
 
-Then continue setting up the dns at your dns proivder: https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains
+Then continue setting up the dns at your dns proivder: [https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains](https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains)
 
 You'll find the dns target under
 
-https://dashboard.heroku.com/apps/<name>/settings
+[https://dashboard.heroku.com/apps/<name>/settings](https://dashboard.heroku.com/apps/<name>/settings)
 
 Reconfigure the apps host address
 
     heroku config:set PHX_HOST=copi.owaspcornucopia.org
 
 
-Setup SSL on for your dns provider e.g: https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/
+Setup SSL on for your dns provider e.g: [https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/)
 
     # PEM format
     heroku certs:add cloudflare.crt cloudflare.key
@@ -186,9 +186,9 @@ Here is a short summary of what you need to be aware of:
 
 #### What can go wrong?
 
-We have not implemented Authentication when using Copi, instead we use a secure randomized string to prevent accidental data exposure. Still, an attacker may get hold of such a url by spoofing Copi or other Colleagues in your organization by leveraging various social engineering techniques like establishing a rogue location: https://capec.mitre.org/data/definitions/616.html.
+We have not implemented Authentication when using Copi, instead we use a secure randomized string to prevent accidental data exposure. Still, an attacker may get hold of such a url by spoofing Copi or other Colleagues in your organization by leveraging various social engineering techniques like establishing a rogue location: [https://capec.mitre.org/data/definitions/616.html](https://capec.mitre.org/data/definitions/616.html).
 
-An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: https://capec.mitre.org/data/definitions/569.html.
+An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
 
 #### What can you do about it?
 
