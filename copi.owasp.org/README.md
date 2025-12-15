@@ -173,7 +173,6 @@ Get the number of games and users per month. We do not track users. We only look
 
 SELECT EXTRACT(YEAR FROM created_at) AS year, EXTRACT(MONTH FROM created_at) AS month, count(*) AS games_count FROM games WHERE created_at is not null group by year, month ORDER by year ASC, month ASC;
 
-
 SELECT EXTRACT(YEAR FROM inserted_at) AS year, EXTRACT(MONTH FROM inserted_at) AS month, count(*) AS players_count FROM players WHERE inserted_at is not null group by year, month ORDER by year ASC, month ASC;
 
 ## Our Threat Model
@@ -205,7 +204,6 @@ When hosting Copi yourself, be aware that the data at REST might not be encrypte
 
 Ensure that your service provider ensures that the data is encrypted at REST.
 OWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.
-
 
 ### If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster
 
