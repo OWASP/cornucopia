@@ -19,20 +19,25 @@
         "cells": [
           {
             "position": {
-              "x": 520,
-              "y": 189.99999999999898
+              "x": 463.75,
+              "y": 210
             },
             "size": {
-              "width": 560,
-              "height": 220
+              "width": 290,
+              "height": 370
+            },
+            "attrs": {
+              "label": {
+                "text": "Fly.io"
+              }
             },
             "visible": true,
             "shape": "trust-boundary-box",
+            "zIndex": -1,
             "id": "bce3c04e-ec35-456f-ad56-ccfd1b5d14b9",
-            "zIndex": -1,
             "data": {
               "type": "tm.BoundaryBox",
-              "name": "Trust Boundary",
+              "name": "Fly.io",
               "description": "",
               "isTrustBoundary": true,
               "hasOpenThreats": false
@@ -40,17 +45,17 @@
           },
           {
             "position": {
-              "x": 920,
-              "y": 189.99999999999898
+              "x": 463.75,
+              "y": 470
             },
             "size": {
-              "width": 160,
-              "height": 220
+              "width": 290,
+              "height": 110
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "55e1221c-10c3-4cff-8fae-68b38ac0dac1",
             "zIndex": -1,
+            "id": "55e1221c-10c3-4cff-8fae-68b38ac0dac1",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Trust Boundary",
@@ -61,8 +66,8 @@
           },
           {
             "position": {
-              "x": 940,
-              "y": 280
+              "x": 545,
+              "y": 500
             },
             "size": {
               "width": 120,
@@ -176,10 +181,10 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "isALog": false,
-              "isEncrypted": false,
+              "isEncrypted": true,
               "isSigned": false,
               "storesCredentials": false,
-              "storesInventory": false,
+              "storesInventory": true,
               "threats": [
                 {
                   "id": "f0efaf1a-c42b-4468-b75f-bf4880a30e13",
@@ -214,7 +219,7 @@
             },
             "attrs": {
               "text": {
-                "text": "copi"
+                "text": "Copi"
               },
               "body": {
                 "stroke": "red",
@@ -310,7 +315,7 @@
             "id": "752aa80e-b6a9-4807-8e68-2c55994ea970",
             "data": {
               "type": "tm.Process",
-              "name": "copi",
+              "name": "Copi",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -373,8 +378,8 @@
           },
           {
             "position": {
-              "x": 50,
-              "y": 280
+              "x": 552.5,
+              "y": 50
             },
             "size": {
               "width": 112.5,
@@ -497,6 +502,61 @@
                   "name": "block"
                 },
                 "sourceMarker": {
+                  "name": "block"
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Create games and players, get game updates",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": true,
+              "isEncrypted": false,
+              "isPublicNetwork": true,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Create games and players, get game updates"
+            ],
+            "id": "3c15675a-1ef1-42f5-84e0-be12c0ad67ad",
+            "source": {
+              "cell": "14644f72-d5ee-433c-a052-45effb93f830",
+              "port": "1fd33fbd-7b3f-4b16-b3e5-5f76a23b8a74"
+            },
+            "target": {
+              "cell": "752aa80e-b6a9-4807-8e68-2c55994ea970",
+              "port": "7dbc8618-4e2d-4092-9703-804eee429c3b"
+            },
+            "vertices": [
+              {
+                "x": 608.5,
+                "y": 190
+              },
+              {
+                "x": 605,
+                "y": 190
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
                   "name": ""
                 },
                 "strokeDasharray": null
@@ -515,7 +575,7 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "isBidirectional": false,
-              "isEncrypted": false,
+              "isEncrypted": true,
               "isPublicNetwork": false,
               "protocol": "",
               "threats": [
@@ -558,57 +618,11 @@
             "id": "8aa49016-4594-49c7-afe9-e742b79abb78",
             "source": {
               "cell": "752aa80e-b6a9-4807-8e68-2c55994ea970",
-              "port": "c6194413-077c-4494-be02-bec80b287064"
+              "port": "70230815-3f02-4f14-9a92-1fef08524e8f"
             },
             "target": {
               "cell": "4dffb9a1-71b7-4784-b7e9-5f8a1af292d3",
-              "port": "f6f46b7d-8c9a-4d87-bacd-b0eb85dd4bb7"
-            },
-            "vertices": []
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": "block"
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Create games and players, get game updates",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": true,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Create games and players, get game updates"
-            ],
-            "id": "3c15675a-1ef1-42f5-84e0-be12c0ad67ad",
-            "source": {
-              "cell": "14644f72-d5ee-433c-a052-45effb93f830",
-              "port": "61ad1623-0367-43de-88e2-9fc9833dcb55"
-            },
-            "target": {
-              "cell": "752aa80e-b6a9-4807-8e68-2c55994ea970",
-              "port": "2be1b133-897c-4c68-a4bc-1040c7b4a97b"
+              "port": "fcac6903-86c3-479d-b47d-73e9129bd1a5"
             },
             "vertices": []
           }
