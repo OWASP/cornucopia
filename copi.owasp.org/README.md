@@ -9,6 +9,7 @@ Copi is an online place where you can play Cornucopia and Elevation of Privilege
 If you want to contribute to Copi, follow the guide below to set up your development environment.
 
 ### Installation by Operating System
+
 #### Mac
 
 ##### Get Homebrew
@@ -22,29 +23,35 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
 ##### Get Elixir
+
 ```bash
 brew install elixir
 ```
 
 #### Linux and Windows
+
 Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows).
 
 ### Install the Elixir package manager, Hex
+
 ```bash
 mix local.hex
 ```
 
 #### Check you've got Elixir 1.18 and Erlang 27, or higher
+
 ```bash
 elixir -v
 ```
 
 ### Install the web application framework, Phoenix (this line will change when 1.7 goes GA)
+
 ```bash
 mix archive.install hex phx_new
 ```
 
 ### PostgreSQL with Docker
+
 [docs.docker.com/desktop/install/mac-install/](https://docs.docker.com/desktop/install/mac-install/)
 
 After installing docker, You can create an instance of the Postgres image:
@@ -58,6 +65,7 @@ You've now got Elixir, Hex, Phoenix and Postgres. You are ready to run Copi loca
 Bonus: set up vscode for elixir dev [fly.io/phoenix-files/setup-vscode-for-elixir-development/](https://fly.io/phoenix-files/setup-vscode-for-elixir-development/)
 
 ### Clone the copi code, then
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -70,7 +78,6 @@ To start your Phoenix server:
     docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
     export POSTGRES_TEST_PWD=y9EAY7xeVucjM2yM
     mix test
-  *
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
