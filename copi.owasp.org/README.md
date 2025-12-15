@@ -226,4 +226,4 @@ An attacker can continue to create an unlimited amount of games and players unti
 
 #### What can you do about it?
 
-We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: https://github.com/OWASP/cornucopia/issues/1877). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself.
+We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself.
