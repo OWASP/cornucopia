@@ -85,7 +85,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## More about Phoenix
 
-  * Official website: (https://www.phoenixframework.org/)[https://www.phoenixframework.org/]
+  * Official website: [https://www.phoenixframework.org/](https://www.phoenixframework.org/)
   * Guides: [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
   * Docs: [https://hexdocs.pm/phoenix](https://hexdocs.pm/phoenix)
   * Forum: [https://elixirforum.com/c/phoenix-forum](https://elixirforum.com/c/phoenix-forum)
@@ -115,7 +115,7 @@ Then deploy the app from `./copi.owasp.org`
 
 Setup A and AAAA record in Cloudflare
 
-Go to [https://fly.io/apps/<app name>/certificates/copi.owasp.org](https://fly.io/apps/<app name>/certificates/copi.owasp.org)
+Go to https://fly.io/apps/<app name>/certificates/copi.owasp.org
 
 You'll need to add both the A and AAAA records together with the CNAME challenge to cloudflare.
 NB: The challenge should not be proxied through cloudflare!
