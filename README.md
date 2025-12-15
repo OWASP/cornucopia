@@ -398,3 +398,5 @@ Use of the Common Attack Pattern Enumeration and Classification (CAPEC), and the
 ## Our Threat Models
 
 You may review the threat model for Cornucopia and Copi by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard) and opening copi.json or cornucopia.json at [ThreatDragonModels](ThreatDragonModels).
+
+Note: If you are looking into using Copi, it may be worth looking at some of [Copi's known threats](copi.owasp.org/README.md#our-threat-model) before doing so to make sure you have prepared yourself accordingly and taken our known threats into account.
