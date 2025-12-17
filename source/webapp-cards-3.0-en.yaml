@@ -318,7 +318,7 @@ suits:
     id: "CR7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CR7"
-    desc: "Gunter can intercept or modify encrypted data in transit because the protocol is poorly deployed, or weakly configured, or certificates are invalid, or certificates are not trusted, or the connection can be degraded to a weaker or un-encrypted communication"
+    desc: "Gunter can intercept or modify encrypted and/or hashed data in transit because the protocol is poorly deployed, or weakly configured, or certificates are invalid, or certificates are not trusted, or the connection can be degraded to a weaker or un-encrypted communication"
   -
     id: "CR8"
     value: "8"
