@@ -17,12 +17,12 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/adapter-cloudflare": "^5.0.1",
-		"@sveltejs/kit": "^2.48.4",
+		"@sveltejs/kit": "^2.49.2",
 		"@sveltejs/vite-plugin-svelte": "^4.0.4",
-		"@types/node": "^24.10.1",
+		"@types/node": "^25.0.2",
 		"@vitest/coverage-v8": "^3.1.4",
 		"dotenv": "^17.2.3",
-		"svelte": "^5.43.6",
+		"svelte": "^5.46.0",
 		"svelte-check": "^4.3.4",
 		"svelte-sitemap": "^2.7.1",
 		"then-request": "^6.0.2",
@@ -36,7 +36,7 @@
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@types/js-yaml": "^4.0.9",
 		"front-matter": "^4.0.2",
-		"js-yaml": "^4.1.0",
+		"js-yaml": "^4.1.1",
 		"normalize.css": "^8.0.1",
 		"svelte-i18n": "^4.0.1",
 		"svelte-markdown": "^0.4.1",
@@ -50,7 +50,8 @@
 			"ignoreCves": [],
 			"ignoreGhsas": [
 				"GHSA-vg6x-rcgg-rjx6",
-				"GHSA-67mh-4wv8-2f99"
+				"GHSA-67mh-4wv8-2f99",
+				"GHSA-mh29-5h37-fv8m"
 			]
 		},
 		"overrides": {
