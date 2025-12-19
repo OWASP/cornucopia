@@ -328,7 +328,7 @@ suits:
     id: "CR9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/CR9"
-    desc: "Andy can bypass signature or encryption controls because random-number, GUID, or hashing functions are self-built, risky or cryptographically weak"
+    desc: "Andy can bypass cryptographic controls because random-number, GUID, or hashing functions are self-built, risky or weak"
   -
     id: "CRX"
     value: "10"
