@@ -92,7 +92,7 @@ Users who exceed rate limits receive clear, informative error messages:
 
 ```
 Rate limit exceeded. Too many games created from your IP address.
-Please try again in 3456 seconds.
+Please try again in 3600 seconds.
 This limit helps ensure service availability for all users.
 ```
 
