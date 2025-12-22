@@ -16,6 +16,7 @@ defmodule CopiWeb.Plugs.RateLimiter do
 
     case RateLimiter.check_rate(ip_address, action) do
       {:ok, remaining} ->
+        RateLimiter.record_action(ip_address, action)
         conn
         |> put_resp_header("x-ratelimit-remaining", to_string(remaining))
         
