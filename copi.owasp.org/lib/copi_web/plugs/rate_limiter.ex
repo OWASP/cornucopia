@@ -43,8 +43,8 @@ defmodule CopiWeb.Plugs.RateLimiter do
       [] ->
         case conn.remote_ip do
           {a, b, c, d} -> "#{a}.#{b}.#{c}.#{d}"
-          {a, b, c, d, e, f, g, h} -> 
-            "#{Integer.to_string(a, 16)}:#{Integer.to_string(b, 16)}:#{Integer.to_string(c, 16)}:#{Integer.to_string(d, 16)}:#{Integer.to_string(e, 16)}:#{Integer.to_string(f, 16)}:#{Integer.to_string(g, 16)}:#{Integer.to_string(h, 16)}"
+          {a, b, c, d, e, f, g, h} ->
+            :inet.ntoa({a, b, c, d, e, f, g, h}) |> to_string()
           _ -> "unknown"
         end
     end
