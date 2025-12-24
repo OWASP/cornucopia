@@ -32,21 +32,13 @@ defmodule CopiWeb.Plugs.RateLimiter do
   end
 
   defp get_ip_address(conn) do
-    # Try to get real IP from common headers (for reverse proxies)
-    case get_req_header(conn, "x-forwarded-for") do
-      [forwarded | _] ->
-        forwarded
-        |> String.split(",")
-        |> List.first()
-        |> String.trim()
-
-      [] ->
-        case conn.remote_ip do
-          {a, b, c, d} -> "#{a}.#{b}.#{c}.#{d}"
-          {a, b, c, d, e, f, g, h} ->
-            :inet.ntoa({a, b, c, d, e, f, g, h}) |> to_string()
-          _ -> "unknown"
-        end
+    # Always use conn.remote_ip, which is set by Plug.RemoteIp if present in the plug pipeline.
+    # Ensure Plug.RemoteIp is used with a properly configured :proxies list for safe client IP extraction.
+    case conn.remote_ip do
+      {a, b, c, d} -> "#{a}.#{b}.#{c}.#{d}"
+      {a, b, c, d, e, f, g, h} -> 
+        "#{Integer.to_string(a, 16)}:#{Integer.to_string(b, 16)}:#{Integer.to_string(c, 16)}:#{Integer.to_string(d, 16)}:#{Integer.to_string(e, 16)}:#{Integer.to_string(f, 16)}:#{Integer.to_string(g, 16)}:#{Integer.to_string(h, 16)}"
+      _ -> "unknown"
     end
   end
 
