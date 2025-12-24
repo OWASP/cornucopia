@@ -124,10 +124,11 @@ defmodule Copi.RateLimiter do
     ip_requests = get_ip_requests(state, ip_address, action)
     updated_requests = [now | ip_requests]
     
-    new_requests = put_in(
+    new_requests = Map.update(
       state.requests,
-      [ip_address, action],
-      updated_requests
+      ip_address,
+      %{action => updated_requests},
+      fn actions -> Map.put(actions, action, updated_requests) end
     )
 
     {:noreply, %{state | requests: new_requests}}
