@@ -225,3 +225,14 @@ Setup SSL on for your dns provider e.g: https://developers.cloudflare.com/ssl/or
 
     # PEM format
     heroku certs:add cloudflare.crt cloudflare.key
+
+## Other useful things
+
+### Statistics
+
+Get the number of games and users per month. We do not track users. We only look at totals per month.
+
+SELECT EXTRACT(YEAR FROM created_at) AS year, EXTRACT(MONTH FROM created_at) AS month, count(*) AS games_count FROM games WHERE created_at is not null group by year, month ORDER by year ASC, month ASC;
+
+
+SELECT EXTRACT(YEAR FROM inserted_at) AS year, EXTRACT(MONTH FROM inserted_at) AS month, count(*) AS players_count FROM players WHERE inserted_at is not null group by year, month ORDER by year ASC, month ASC;

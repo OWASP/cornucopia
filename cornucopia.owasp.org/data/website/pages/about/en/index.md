@@ -59,6 +59,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Artim Banyte    
 - Simon Bennetts    
 - Thomas Berson
+- Rishii Bharadhwaj
 - Jorun Kristin Bremseth 
 - Tom Brennan    
 - Graham Bryant    

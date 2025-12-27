@@ -144,7 +144,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     case get_connect_info(socket, :peer_data) do
       %{address: {a, b, c, d}} -> "#{a}.#{b}.#{c}.#{d}"
       %{address: {a, b, c, d, e, f, g, h}} -> 
-        "#{Integer.to_string(a, 16)}:#{Integer.to_string(b, 16)}:#{Integer.to_string(c, 16)}:#{Integer.to_string(d, 16)}:#{Integer.to_string(e, 16)}:#{Integer.to_string(f, 16)}:#{Integer.to_string(g, 16)}:#{Integer.to_string(h, 16)}"
+        :inet.ntoa({a, b, c, d, e, f, g, h}) |> to_string()
       _ -> "unknown"
     end
   end

@@ -3,20 +3,6 @@ defmodule Copi.RateLimiterTest do
 
   alias Copi.RateLimiter
 
-  setup do
-    # Start the RateLimiter for testing
-    {:ok, pid} = RateLimiter.start_link([])
-    
-    # Clear any existing state
-    RateLimiter.clear_ip("127.0.0.1")
-    
-    on_exit(fn ->
-      if Process.alive?(pid), do: GenServer.stop(pid)
-    end)
-    
-    :ok
-  end
-
   describe "game creation rate limiting" do
     test "allows requests under the limit" do
       ip = "127.0.0.1"
