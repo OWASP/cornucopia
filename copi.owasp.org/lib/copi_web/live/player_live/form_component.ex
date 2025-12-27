@@ -74,23 +74,52 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :new, player_params) do
-    case Cornucopia.create_player(player_params) do
-      {:ok, player} ->
+    # Get the IP address for rate limiting
+    ip_address = get_connect_ip(socket)
+    
+    # Check rate limit before creating player
+    case Copi.RateLimiter.check_rate(ip_address, :player_creation) do
+      {:ok, _remaining} ->
+        case Cornucopia.create_player(player_params) do
+          {:ok, player} ->
+            # Record the action after successful creation
+            Copi.RateLimiter.record_action(ip_address, :player_creation)
 
-        {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
+            {:noreply,
+             socket
+             |> assign(:game, updated_game)
+             |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:noreply, assign_form(socket, changeset)}
+        end
+        
+      {:error, :rate_limited, retry_after} ->
         {:noreply,
          socket
-         |> assign(:game, updated_game)
-         |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+         |> put_flash(
+           :error,
+           "Rate limit exceeded. Too many players created from your IP address. " <>
+           "Please try again in #{retry_after} seconds. " <>
+           "This limit helps ensure service availability for all users."
+         )
+         |> assign_form(socket.assigns.form.source)}
     end
   end
 
   def topic(game_id) do
     "game:#{game_id}"
+  end
+
+  defp get_connect_ip(socket) do
+    case get_connect_info(socket, :peer_data) do
+      %{address: {a, b, c, d}} -> "#{a}.#{b}.#{c}.#{d}"
+      %{address: {a, b, c, d, e, f, g, h}} -> 
+        "#{Integer.to_string(a, 16)}:#{Integer.to_string(b, 16)}:#{Integer.to_string(c, 16)}:#{Integer.to_string(d, 16)}:#{Integer.to_string(e, 16)}:#{Integer.to_string(f, 16)}:#{Integer.to_string(g, 16)}:#{Integer.to_string(h, 16)}"
+      _ -> "unknown"
+    end
   end
 end
