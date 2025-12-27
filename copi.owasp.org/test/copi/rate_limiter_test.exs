@@ -96,6 +96,53 @@ defmodule Copi.RateLimiterTest do
     end
   end
 
+  describe "player creation rate limiting" do
+    test "allows player creation under the limit" do
+      ip = "192.168.2.1"
+      
+      assert {:ok, remaining} = RateLimiter.check_rate(ip, :player_creation)
+      assert remaining >= 0
+      
+      RateLimiter.record_action(ip, :player_creation)
+      
+      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
+    end
+
+    test "blocks player creation over the limit" do
+      ip = "192.168.2.2"
+      config = RateLimiter.get_config()
+      max_players = config.player_creation.max_requests
+      
+      # Make max_requests number of player creations
+      for _i <- 1..max_players do
+        assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
+        RateLimiter.record_action(ip, :player_creation)
+      end
+      
+      # Next request should be blocked
+      assert {:error, :rate_limited, retry_after} = RateLimiter.check_rate(ip, :player_creation)
+      assert retry_after > 0
+    end
+
+    test "player creation limit is separate from game creation limit" do
+      ip = "192.168.2.3"
+      config = RateLimiter.get_config()
+      max_games = config.game_creation.max_requests
+      
+      # Exhaust game creation limit
+      for _i <- 1..max_games do
+        RateLimiter.check_rate(ip, :game_creation)
+        RateLimiter.record_action(ip, :game_creation)
+      end
+      
+      # Game creation should be blocked
+      assert {:error, :rate_limited, _} = RateLimiter.check_rate(ip, :game_creation)
+      
+      # Player creation should still be allowed (separate limit)
+      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
+    end
+  end
+
   describe "rate limit window expiration" do
     test "allows requests after window expires" do
       ip = "192.168.100.1"
@@ -118,10 +165,14 @@ defmodule Copi.RateLimiterTest do
       
       assert is_map(config)
       assert Map.has_key?(config, :game_creation)
+      assert Map.has_key?(config, :player_creation)
       assert Map.has_key?(config, :connection)
       
       assert config.game_creation.max_requests > 0
       assert config.game_creation.window_seconds > 0
+      
+      assert config.player_creation.max_requests > 0
+      assert config.player_creation.window_seconds > 0
       
       assert config.connection.max_requests > 0
       assert config.connection.window_seconds > 0

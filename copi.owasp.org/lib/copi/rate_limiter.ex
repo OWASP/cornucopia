@@ -2,7 +2,7 @@ defmodule Copi.RateLimiter do
   @moduledoc """
   Rate limiter to prevent abuse by limiting requests per IP address.
   
-  This module implements rate limiting for game creation and user connections
+  This module implements rate limiting for game creation, player creation, and user connections
   to protect against CAPEC 212 (Functionality Misuse) attacks.
   """
 
@@ -25,14 +25,14 @@ defmodule Copi.RateLimiter do
   
   Returns `{:ok, remaining}` if allowed, `{:error, :rate_limited, retry_after}` if blocked.
   """
-  def check_rate(ip_address, action) when action in [:game_creation, :connection] do
+  def check_rate(ip_address, action) when action in [:game_creation, :player_creation, :connection] do
     GenServer.call(__MODULE__, {:check_rate, ip_address, action})
   end
 
   @doc """
   Records a successful action for rate limiting tracking.
   """
-  def record_action(ip_address, action) when action in [:game_creation, :connection] do
+  def record_action(ip_address, action) when action in [:game_creation, :player_creation, :connection] do
     GenServer.cast(__MODULE__, {:record_action, ip_address, action})
   end
 
@@ -61,6 +61,10 @@ defmodule Copi.RateLimiter do
       game_creation: %{
         max_requests: get_env(:max_games_per_ip, 10),
         window_seconds: get_env(:game_creation_window_seconds, 3600)
+      },
+      player_creation: %{
+        max_requests: get_env(:max_players_per_ip, 20),
+        window_seconds: get_env(:player_creation_window_seconds, 3600)
       },
       connection: %{
         max_requests: get_env(:max_connections_per_ip, 50),
