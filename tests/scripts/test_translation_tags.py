@@ -72,7 +72,6 @@ class TestTranslationTags(unittest.TestCase):
         english_files = list(self.source_dir.glob('*-cards-*-en.yaml'))
         
         for eng_file in english_files:
-            tags = self.checker.extract_tags(eng_file)
             # Extract_tags returns a dict, so duplicates would be overwritten
             # We need to check the raw file for duplicates
             import yaml
