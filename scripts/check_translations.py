@@ -152,9 +152,9 @@ class TranslationChecker:
             'hu': 'Hungarian',
             'it': 'Italian',
             'nl': 'Dutch',
-            'no-nb': 'Norwegian',
-            'pt-br': 'Portuguese (Brazil)',
-            'pt-pt': 'Portuguese (Portugal)',
+            'no_nb': 'Norwegian',
+            'pt_br': 'Portuguese (Brazil)',
+            'pt_pt': 'Portuguese (Portugal)',
             'ru': 'Russian'
         }
         
