@@ -51,10 +51,6 @@
             id: translation_check
             run: |
               pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
-              # Read the report content and save it as an output
-              echo "TRANSLATION_REPORT<<EOF" >> $GITHUB_ENV
-              cat translation_check_report.md >> $GITHUB_ENV
-              echo "EOF" >> $GITHUB_ENV
           - name: Generate new output files
             run: |
               #
