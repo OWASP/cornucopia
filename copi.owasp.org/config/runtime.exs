@@ -119,3 +119,20 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end
+
+# Rate Limiter Configuration (runtime - can be changed via environment variables)
+if config_env() != :test do
+  config :copi, Copi.RateLimiter,
+    # Maximum number of games that can be created from a single IP in the time window
+    max_games_per_ip: System.get_env("MAX_GAMES_PER_IP", "10") |> String.to_integer(),
+    # Time window in seconds for game creation rate limiting (default: 1 hour)
+    game_creation_window_seconds: System.get_env("GAME_CREATION_WINDOW_SECONDS", "3600") |> String.to_integer(),
+    # Maximum number of players that can be created from a single IP in the time window
+    max_players_per_ip: System.get_env("MAX_PLAYERS_PER_IP", "20") |> String.to_integer(),
+    # Time window in seconds for player creation rate limiting (default: 1 hour)
+    player_creation_window_seconds: System.get_env("PLAYER_CREATION_WINDOW_SECONDS", "3600") |> String.to_integer(),
+    # Maximum number of WebSocket connections from a single IP in the time window
+    max_connections_per_ip: System.get_env("MAX_CONNECTIONS_PER_IP", "50") |> String.to_integer(),
+    # Time window in seconds for connection rate limiting (default: 5 minutes)
+    connection_window_seconds: System.get_env("CONNECTION_WINDOW_SECONDS", "300") |> String.to_integer()
+end
