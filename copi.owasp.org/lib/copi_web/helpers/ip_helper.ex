@@ -20,18 +20,15 @@ defmodule CopiWeb.Helpers.IPHelper do
   """
   def get_connect_ip(socket) do
     case Phoenix.LiveView.get_connect_info(socket, :peer_data) do
-      %{address: {a, b, c, d}} ->
-        # IPv4 address
-        "#{a}.#{b}.#{c}.#{d}"
-        
-      %{address: {a, b, c, d, e, f, g, h}} ->
-        # IPv6 address - format as colon-separated hex
-        [a, b, c, d, e, f, g, h]
-        |> Enum.map(&Integer.to_string(&1, 16))
-        |> Enum.join(":")
+      %{address: address} when is_tuple(address) ->
+        # Use Erlang's :inet.ntoa for proper IPv4/IPv6 formatting
+        address
+        |> :inet.ntoa()
+        |> to_string()
         
       nil ->
-        raise "Unable to determine IP address from socket connection. peer_data is nil."
+        raise "Unable to determine IP address from socket connection. peer_data is nil. " <>
+              "Ensure endpoint.ex has :peer_data in connect_info list."
         
       other ->
         raise "Unexpected peer_data format: #{inspect(other)}"

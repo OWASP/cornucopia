@@ -78,14 +78,11 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     # Get the IP address for rate limiting
     ip_address = IPHelper.get_connect_ip(socket)
     
-    # Check rate limit before creating player
-    case Copi.RateLimiter.check_rate(ip_address, :player_creation) do
+    # Atomically check and record rate limit
+    case Copi.RateLimiter.check_and_record(ip_address, :player_creation) do
       {:ok, _remaining} ->
         case Cornucopia.create_player(player_params) do
           {:ok, player} ->
-            # Record the action after successful creation
-            Copi.RateLimiter.record_action(ip_address, :player_creation)
-
             {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
             CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 

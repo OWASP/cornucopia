@@ -1,5 +1,5 @@
 defmodule Copi.RateLimiterTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   alias Copi.RateLimiter
 
@@ -140,22 +140,6 @@ defmodule Copi.RateLimiterTest do
       
       # Player creation should still be allowed (separate limit)
       assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
-    end
-  end
-
-  describe "rate limit window expiration" do
-    test "allows requests after window expires" do
-      ip = "192.168.100.1"
-      
-      # This test would require waiting for the window to expire
-      # In a real scenario, you might want to use a mock timer or 
-      # make the window configurable for testing
-      
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :game_creation)
-      RateLimiter.record_action(ip, :game_creation)
-      
-      # Verify request was recorded
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :game_creation)
     end
   end
 

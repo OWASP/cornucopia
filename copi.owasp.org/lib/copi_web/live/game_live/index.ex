@@ -11,7 +11,7 @@ defmodule CopiWeb.GameLive.Index do
     # Rate limit WebSocket connections
     ip_address = IPHelper.get_connect_ip(socket)
     
-    case Copi.RateLimiter.check_rate(ip_address, :connection) do
+    case Copi.RateLimiter.check_and_record(ip_address, :connection) do
       {:ok, _remaining} ->
         if connected?(socket) do
           Phoenix.PubSub.subscribe(Copi.PubSub, "games")

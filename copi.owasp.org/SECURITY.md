@@ -4,7 +4,7 @@
 
 Copi implements IP-based rate limiting to protect against CAPEC-212 (Functionality Misuse) attacks and ensure service availability.
 
-# Protected Actions
+## Protected Actions
 
 1. **Game Creation**: Limited to prevent abuse
    - Default: 10 games per IP per hour
@@ -18,7 +18,7 @@ Copi implements IP-based rate limiting to protect against CAPEC-212 (Functionali
    - Default: 50 connections per IP per 5 minutes
    - Configurable via `MAX_CONNECTIONS_PER_IP` and `CONNECTION_WINDOW_SECONDS`
 
-# Configuration
+## Configuration
 
 All limits can be adjusted via environment variables in production:
 

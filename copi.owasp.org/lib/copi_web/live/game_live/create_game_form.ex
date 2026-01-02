@@ -111,14 +111,11 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     # Get the IP address for rate limiting
     ip_address = IPHelper.get_connect_ip(socket)
     
-    # Check rate limit before creating game
-    case Copi.RateLimiter.check_rate(ip_address, :game_creation) do
+    # Atomically check and record rate limit
+    case Copi.RateLimiter.check_and_record(ip_address, :game_creation) do
       {:ok, _remaining} ->
         case Cornucopia.create_game(game_params) do
           {:ok, game} ->
-            # Record the action after successful creation
-            Copi.RateLimiter.record_action(ip_address, :game_creation)
-            
             {:noreply,
              socket
              |> put_flash(:info, "Game created successfully")
