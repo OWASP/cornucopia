@@ -5,7 +5,6 @@ Tests that all translations have the same T0xxx tags as the English version.
 """
 
 import unittest
-import os
 from pathlib import Path
 import sys
 

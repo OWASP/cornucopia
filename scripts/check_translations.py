@@ -8,11 +8,10 @@ It detects:
 - Empty tag values
 """
 
-import os
 import sys
 import yaml
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List
 from collections import defaultdict
 
 
@@ -153,9 +152,9 @@ class TranslationChecker:
             'hu': 'Hungarian',
             'it': 'Italian',
             'nl': 'Dutch',
-            'no_nb': 'Norwegian',
-            'pt_br': 'Portuguese (Brazil)',
-            'pt_pt': 'Portuguese (Portugal)',
+            'no-nb': 'Norwegian',
+            'pt-br': 'Portuguese (Brazil)',
+            'pt-pt': 'Portuguese (Portugal)',
             'ru': 'Russian'
         }
         
