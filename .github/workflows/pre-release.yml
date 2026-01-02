@@ -46,6 +46,15 @@
             with:
               token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
               files: coverage.xml
+          # Check translation tags
+          - name: Check translation tags
+            id: translation_check
+            run: |
+              pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
+              # Read the report content and save it as an output
+              echo "TRANSLATION_REPORT<<EOF" >> $GITHUB_ENV
+              cat translation_check_report.md >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
           - name: Generate new output files
             run: |
               #
@@ -112,12 +121,28 @@
 
               cp output/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml output/cornucopia_webapp/
               zip -r output/owasp_cornucopia_webapp_3.0_en.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          - name: Prepare release body with translation report
+            id: prepare_release
+            run: |
+              # Read the translation report
+              TRANSLATION_REPORT=$(cat translation_check_report.md)
+              # Create a combined release body
+              cat > release_body.md << 'EOF'
+              ## OWASP Cornucopia Pre-Release
+              
+              This is an automated pre-release build from the latest master branch.
+              
+              ---
+              
+              EOF
+              cat translation_check_report.md >> release_body.md
           - uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
             name: "Create pre-release"
             with:
               tag_name: pre-release
               prerelease: true
               name: Latest pre-release
+              body_path: release_body.md
               files: |
                 CHANGELOG.md
                 LICENSE.md
