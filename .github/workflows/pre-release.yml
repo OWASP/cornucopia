@@ -120,9 +120,7 @@
           - name: Prepare release body with translation report
             id: prepare_release
             run: |
-              # Read the translation report
-              TRANSLATION_REPORT=$(cat translation_check_report.md)
-              # Create a combined release body
+              # Read the translation report and create a combined release body
               cat > release_body.md << 'EOF'
               ## OWASP Cornucopia Pre-Release
               
