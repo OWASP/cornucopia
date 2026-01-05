@@ -1,0 +1,114 @@
+---
+meta:
+  edition: "cloud"
+  component: "cards"
+  language: "EN"
+  version: "1.0"
+suits:
+-
+  id: "VE"
+  name: "CLOUD"
+  cards:
+  -
+    id: "CL2"
+    value: "2"
+    desc: "The attacker abused overly permissive roles assigned to an application to gain full access to cloud services beyond its intended scope"
+    stride: [ E ]
+    ccm: [ IAM-05, IAM-09 ]
+    mitre_attack: [ T1098.003, T1078.004 ]
+    cwe: [ CWE-732 ]
+    capec: [ CAPEC-122 ]
+  -
+    id: "CL3"
+    value: "3"
+    desc: "The attacker discovered a publicly accessible cloud storage bucket and downloaded sensitive customer data directly from the internet"
+    stride: [ I ]
+    ccm: [ DSP-17, IVS-03, LOG-04 ]
+    mitre_attack: [ T1530 ]
+    cwe: [ CWE-200 ]
+    capec: [ CAPEC-545 ]
+  -
+    id: "CL4"
+    value: "4"
+    desc: "The attacker operated within critical cloud services without triggering alerts by exploiting the absence of audit logs and security monitoring"
+    stride: [ R ]
+    ccm: [ LOG-01, LOG-05, LOG-07 ]
+    mitre_attack: [ T1562.008 ]
+    capec: [ CAPEC-268 ]
+  -
+    id: "CL5"
+    value: "5"
+    desc: "An attacker injected malicious code into the cloud Continous Integration/Continous Delivery pipeline by abusing unprotected build variables"
+    stride: [ T ]
+    ccm: [ AIS-05, CCC-02, CCC-04 ]
+    mitre_attack: [ T1195.002 ]
+    capec: [ CAPEC-242 ]
+  -
+    id: "CL6"
+    value: "6"
+    desc: "The attacker exploited a poorly protected cloud API to enumerate resources and manipulate backend cloud services"
+    stride: [ T, I ]
+    ccm: [ AIS-01, AIS-02, AIS-04, LOG-03 ]
+    mitre_attack: [ T1528, T1530 ]
+    capec: [ CAPEC-54 ]
+  -
+    id: "CL7"
+    value: "7"
+    desc: "The attacker escaped from a compromised container and gained access to the underlying cloud host"
+    stride: [ E ]
+    ccm: [ IVS-04, IVS-06 ]
+    mitre_attack: [ T1611, TA0008 ]
+    capec: [ CAPEC-480 ]
+  -
+    id: "CL8"
+    value: "8"
+    desc: "The attacker exploited a shared cloud account without access isolation, using metadata and tags to identify and access resources belonging to multiple products"
+    stride: [ E ]
+    ccm: [ DSP-04, DSP-17 ]
+    mitre_attack: [ T1552.005 ]
+    capec: [ CAPEC-545 ]
+  -
+    id: "CL9"
+    value: "9"
+    desc: "The attacker pivoted from one compromised cloud account into multiple connected environments using existing trust relationships"
+    stride: [ E ]
+    ccm: [ IAM-04, IVS-06 ]
+    mitre_attack: [ T1021.007, TA0008 ]
+    capec: [ CAPEC-161 ]
+  -
+    id: "CLX"
+    value: "10"
+    desc: "The attacker introduced backdoored Infrastructure-as-Code templates into version control, causing vulnerable cloud environments to be deployed at scale"
+    stride: [ T ]
+    ccm: [ AIS-04, AIS-06, CCC-06 ]
+    mitre_attack: [ T1195.001, T1584.004 ]
+    capec: [ CAPEC-248 ]
+  -
+    id: "CLJ"
+    value: "J"
+    desc: "The attacker compromised a CI runner and injected malicious code into container images that were automatically promoted to production across all cloud clusters"
+    stride: [ T ]
+    ccm: [ IVS-01, IVS-05, CCC-04 ]
+    mitre_attack: [ T1554, T1195 ]
+    capec: [ CAPEC-439 ]
+  -
+    id: "CLQ"
+    value: "Q"
+    desc: "The attacker leveraged a breach in one cloud service to pivot into another by abusing shared identities, pipelines, and secrets"
+    stride: [ I, E ]
+    ccm: [ IAM-05, IAM-116 ]
+    mitre_attack: [ T1195 ]
+    capec: [ CAPEC-161 ]
+  -
+    id: "CLK"
+    value: "K"
+    desc: "The attacker compromised the cloud root or break-glass account, gaining irreversible control over billing, identities, and recovery mechanisms"
+    stride: [ S ]
+    ccm: [ IAM-01, IAM-02, IAM-09 ]
+    mitre_attack: [ T1098 ]
+    capec: [ CAPEC-233 ]
+  -
+    id: "CLA"
+    value: "A"
+    desc: "You have invented a new attack against Data Validation and Encoding"
+    misc: "Read more about this topic in OWASP's free Cheat Sheets on Input Validation, XSS Prevention, DOM-based XSS Prevention, SQL Injection Prevention, and Query Parameterization"
