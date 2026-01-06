@@ -153,62 +153,62 @@ suits:
     id: CLD2
     value: 2
     url: https://cornucopia.owasp.org/cards/CLD2
-    desc: 
+    desc: "Dan can abuse overly permissive roles assigned to an application to gain full access to cloud services beyond its intended scope"
   -
     id: CLD3
     value: 3
     url: https://cornucopia.owasp.org/cards/CLD3
-    desc: 
+    desc: "Roupe can discover a publicly accessible cloud storage bucket and downloaded sensitive customer data directly from the internet"
   -
     id: CLD4
     value: 4
     url: https://cornucopia.owasp.org/cards/CLD4
-    desc: 
+    desc: "Ryan can operate within critical cloud services without triggering alerts by exploiting the absence of audit logs and security monitoring"
   -
     id: CLD5
     value: 5
     url: https://cornucopia.owasp.org/cards/CLD5
-    desc: 
+    desc: "Josh can inject malicious code into the cloud Continous Integration/Continous Delivery pipeline by abusing unprotected build variables"
   -
     id: CLD6
     value: 6
     url: https://cornucopia.owasp.org/cards/CLD6
-    desc: 
+    desc: "Monica can exploit a poorly protected cloud API to enumerate resources and manipulate backend cloud services"
   -
     id: CLD7
     value: 7
     url: https://cornucopia.owasp.org/cards/CLD7
-    desc: 
+    desc: "Jon can escape from a compromised container and gained access to the underlying cloud host"
   -
     id: CLD8
     value: 8
     url: https://cornucopia.owasp.org/cards/CLD8
-    desc: 
+    desc: "Siddharth can exploit a shared cloud account without access isolation, using metadata and tags to identify and access resources belonging to multiple products"
   -
     id: CLD9
     value: 9
     url: https://cornucopia.owasp.org/cards/CLD9
-    desc: 
+    desc: "Akash can pivot from one compromised cloud account into multiple connected environments using existing trust relationships"
   -
     id: CLDX
     value: X
     url: https://cornucopia.owasp.org/cards/CLDX
-    desc: 
+    desc: "Adrian can introduce backdoored Infrastructure-as-Code templates into version control, causing vulnerable cloud environments to be deployed at scale"
   -
     id: CLDJ
     value: J
     url: https://cornucopia.owasp.org/cards/CLDJ
-    desc: 
+    desc: "Michael can compromise a CI runner and injected malicious code into container images that were automatically promoted to production across all cloud clusters"
   -
     id: CLDQ
     value: Q
     url: https://cornucopia.owasp.org/cards/CLDQ
-    desc: 
+    desc: "Eleftherios can leverage a breach in one cloud service to pivot into another by abusing shared identities, pipelines, and secrets"
   -
     id: CLDK
     value: K
     url: https://cornucopia.owasp.org/cards/CLDK
-    desc: 
+    desc: "Daniele can compromise the cloud root or break-glass account, gaining irreversible control over billing, identities, and recovery mechanisms"
   -
     id: CLDA
     value: A
