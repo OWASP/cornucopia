@@ -34,4 +34,4 @@ CONNECTION_WINDOW_SECONDS=300
 ### Reporting Security Issues
 
 If you discover a security vulnerability, please email security@owasp.org with details.
-Do not create public GitHub issues for security problems. '-'
+Do not create public GitHub issues for security problems.
