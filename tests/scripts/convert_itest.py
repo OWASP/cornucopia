@@ -38,13 +38,6 @@ class TestMain(unittest.TestCase):
             "inputfile": self.template_docx_file,
             "outputfile": "",
         }
-        self.mapping_file = os.sep.join(
-            [
-                c.convert_vars.BASE_PATH,
-                "source",
-                "webapp-mappings-3.0.yaml",
-            ]
-        )
 
         self.outputfile = os.sep.join(
             [
