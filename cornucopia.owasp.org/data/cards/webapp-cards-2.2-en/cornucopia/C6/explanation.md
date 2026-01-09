@@ -14,7 +14,7 @@ Imagine a situation where Aaron exploits weaknesses in an application’s error 
 
 ### Example
 
-Aaron targets a web application that has incomplete error handling routines. He induces errors in the application which, due to inadequate or inconsistent handling, expose sensitive information or system functionalities. Additionally, since errors do not default to denying access or terminating execution, Aaron uses these error states to bypass normal application controls. In some cases, the application relies on external systems to handle errors, and Aaron exploits the delay or miscommunication between these systems to gain unauthorized access or to revert the application to a less secure state. 
+Aaron targets a web application that has incomplete error handling routines. He induces errors in the application which, due to inadequate or inconsistent handling, expose sensitive information or system functionalities. Additionally, since errors do not default to denying access or terminating execution, Aaron uses these error states to bypass normal application controls. In some cases, the application relies on external systems to handle errors, and Aaron exploits the delay or miscommunication between these systems to gain unauthorized access or to revert the application to a less secure state.
 
 ## Threat Modeling
 
