@@ -1,3 +1,5 @@
+Roman can exploit the application because dangourous or risky compononents haven't been securely compiled or deployed, or its configuration is not secure by default, or security information was not documented, or passed on to operational teams, or the user is not warned or access blocked when the expected security features are not supported or enabled
+
 ## Scenario: Roman’s Exploitation of Outdated Compilation and Configuration Lapses
 
 Envision a scenario where Roman takes advantage of vulnerabilities in an application caused by using outdated compilation tools, insecure default configurations, or a lack of documented security information for operational teams. These issues arise from:
@@ -5,6 +7,8 @@ Envision a scenario where Roman takes advantage of vulnerabilities in an applica
 1. **Use of Outdated Compilation Tools:** The application is compiled with tools that are not up-to-date, potentially including known vulnerabilities.
 
 2. **Insecure Default Configuration:** The application’s default configuration settings are not aligned with best security practices.
+
+3. **Use of Dangerous or Risky Components:** The application includes components that are considered dangerous or risky, which have not been securely deployed and configured.
 
 3. **Lack of Security Documentation:** Essential security information and configurations are not properly documented or communicated to the operational teams responsible for maintaining the application.
 
@@ -34,5 +38,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 2. Configure the application with secure settings by default and regularly review these settings to align with evolving security standards. 
 3. Create comprehensive security documentation and ensure it is effectively communicated and accessible to all operational teams. 
 4. Conduct regular security audits and provide ongoing training to operational teams to keep them informed about security best practices and application-specific requirements.
+5. Avoid using dangerous or risky components, and if their use is necessary, ensure they are securely deployed and configured.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
