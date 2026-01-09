@@ -168,7 +168,7 @@ suits:
     id: CLD5
     value: 5
     url: https://cornucopia.owasp.org/cards/CLD5
-    desc: "Josh can inject malicious code into the cloud Continous Integration/Continous Delivery pipeline by abusing unprotected build variables"
+    desc: "Josh can inject malicious code into the cloud build or deployment pipeline by abusing unprotected build variables"
   -
     id: CLD6
     value: 6
@@ -198,7 +198,7 @@ suits:
     id: CLDJ
     value: J
     url: https://cornucopia.owasp.org/cards/CLDJ
-    desc: "Michael can compromise a CI runner and injected malicious code into container images that were automatically promoted to production across all cloud clusters"
+    desc: "Michael can compromise a build runner and injected malicious code into container images that were automatically promoted to production across all cloud clusters"
   -
     id: CLDQ
     value: Q
