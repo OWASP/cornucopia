@@ -120,50 +120,100 @@ suits:
     id: CLD2
     value: 2
     url: https://cornucopia.owasp.org/cards/CLD2
+    stride: [ E ]
+    ccm: [ IAM-05, IAM-09 ]
+    mitre_attack: [ T1098.003, T1078.004 ]
+    cwe: [ CWE-732 ]
+    capec: [ CAPEC-122 ]
   -
     id: CLD3
     value: 3
     url: https://cornucopia.owasp.org/cards/CLD3
+    stride: [ I ]
+    ccm: [ DSP-17, IVS-03, LOG-04 ]
+    mitre_attack: [ T1530 ]
+    cwe: [ CWE-200 ]
+    capec: [ CAPEC-545 ]
   -
     id: CLD4
     value: 4
     url: https://cornucopia.owasp.org/cards/CLD4
+    stride: [ R ]
+    ccm: [ LOG-01, LOG-05, LOG-07 ]
+    mitre_attack: [ T1562.008 ]
+    capec: [ CAPEC-268 ]
   -
     id: CLD5
     value: 5
     url: https://cornucopia.owasp.org/cards/CLD5
+    stride: [ T ]
+    ccm: [ AIS-05, CCC-02, CCC-04 ]
+    mitre_attack: [ T1195.002 ]
+    capec: [ CAPEC-242 ]
   -
     id: CLD6
     value: 6
     url: https://cornucopia.owasp.org/cards/CLD6
+    stride: [ T, I ]
+    ccm: [ AIS-01, AIS-02, AIS-04, LOG-03 ]
+    mitre_attack: [ T1528, T1530 ]
+    capec: [ CAPEC-54 ]
   -
     id: CLD7
     value: 7
     url: https://cornucopia.owasp.org/cards/CLD7
+    stride: [ E ]
+    ccm: [ IVS-04, IVS-06 ]
+    mitre_attack: [ T1611, TA0008 ]
+    capec: [ CAPEC-480 ]
   -
     id: CLD8
     value: 8
     url: https://cornucopia.owasp.org/cards/CLD8
+    stride: [ E ]
+    ccm: [ DSP-04, DSP-17 ]
+    mitre_attack: [ T1552.005 ]
+    capec: [ CAPEC-545 ]
   -
     id: CLD9
     value: 9
     url: https://cornucopia.owasp.org/cards/CLD9
+    stride: [ E ]
+    ccm: [ IAM-04, IVS-06 ]
+    mitre_attack: [ T1021.007, TA0008 ]
+    capec: [ CAPEC-161 ]
   -
     id: CLDX
     value: X
     url: https://cornucopia.owasp.org/cards/CLDX
+    stride: [ T ]
+    ccm: [ AIS-04, AIS-06, CCC-06 ]
+    mitre_attack: [ T1195.001, T1584.004 ]
+    capec: [ CAPEC-248 ]
   -
     id: CLDJ
     value: J
     url: https://cornucopia.owasp.org/cards/CLDJ
+    stride: [ T ]
+    ccm: [ IVS-01, IVS-05, CCC-04 ]
+    mitre_attack: [ T1554, T1195 ]
+    capec: [ CAPEC-439 ]
   -
     id: CLDQ
     value: Q
     url: https://cornucopia.owasp.org/cards/CLDQ
+    stride: [ I, E ]
+    ccm: [ IAM-05, IAM-116 ]
+    mitre_attack: [ T1195 ]
+    capec: [ CAPEC-161 ]
   -
     id: CLDK
     value: K
     url: https://cornucopia.owasp.org/cards/CLDK
+    stride: [ S ]
+    ccm: [ IAM-01, IAM-02, IAM-09 ]
+    mitre_attack: [ T1098 ]
+    capec: [ CAPEC-233 ]
 -
   id: SDL
   name: SSDLC
