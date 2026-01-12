@@ -215,6 +215,119 @@ suits:
     mitre_attack: [ T1098 ]
     capec: [ CAPEC-233 ]
 -
+  id: FRE
+  name: Cloud
+  cards:
+  -
+    id: FRE2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/FRE2
+    owasp_top-10_client_side: [ 7 ]
+    owasp_top-10: [ A07:2025 ]
+    asvs: [ 8.2 ]
+    capec: [ CAPEC-180 ]
+    cwe: [ CWE-284 ]
+    mitre_attack: [ T1552.001 ]
+  -
+    id: FRE3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/FRE3 
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A06:2025 ]
+    asvs: [ 5.1 ]
+    capec: [ CAPEC-153 ]
+    cwe: [ CWE-20 ]
+    mitre_attack: [ T1565 ]
+  -
+    id: FRE4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/FRE4
+    owasp_top-10_client_side: [ 2 ]
+    owasp_top-10: [ A05:2025 ]
+    asvs: [ 5.3 ]
+    capec: [ CAPEC-63 ]
+    mitre_attack: [ T1059.007 ]
+  -
+    id: FRE5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/FRE5
+    owasp_top-10_client_side: [ 4 ]
+    owasp_top-10: [ A03:2025 ]
+    asvs: [ 14.2 ]
+    capec: [ CAPEC-683 ]
+    mitre_attack: [ T1195.002 ]
+  -
+    id: FRE6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/FRE6
+    owasp_top-10_client_side: [ 7 ]
+    owasp_top-10: [ A04:2025 ]
+    asvs: [ 8.2 ]
+    capec: [ CAPEC-37 ]
+    mitre_attack: [ T1552 ]
+  -
+    id: FRE7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/FRE7
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A08:2025 ]
+    asvs: [ 14.5 ]
+    mitre_attack: [ T1048 ]
+  -
+    id: FRE8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/FRE8
+    owasp_top-10_client_side: [ 1 ]
+    owasp_top-10: [ A01:2025 ]
+    asvs: [ 4.1 ]
+    capec: [ CAPEC-122 ]
+    mitre_attack: [ T1068 ]
+  -
+    id: FRE9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/FRE9
+    owasp_top-10_client_side: [ 1 ]
+    owasp_top-10: [ A01:2025 ]
+    asvs: [ 3.5 ]
+    capec: [ CAPEC-593 ]
+    mitre_attack: [ T1134 ]
+  -
+    id: FREX
+    value: X
+    url: https://cornucopia.owasp.org/cards/FREX
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A08:2025 ]
+    asvs: [ 14.4 ]
+    capec: [ CAPEC-103 ]
+    mitre_attack: [ T1417 ]
+  -
+    id: FREJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/FREJ
+    owasp_top-10_client_side: [ 5 ]
+    owasp_top-10: [ A03:2025 ]
+    asvs: [ 14.2 ]
+    capec: [ CAPEC-683 ]
+    mitre_attack: [ T1176.001 ]
+  -
+    id: FREQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/FREQ
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A05:2025 ]
+    asvs: [ 14.2 ]
+    capec: [ CAPEC-438 ]
+    mitre_attack: [ T1059.007 ]
+  -
+    id: FREK
+    value: K
+    url: https://cornucopia.owasp.org/cards/FREK
+    owasp_top-10_client_side: [ 10 ]
+    owasp_top-10: [ A02:2025 ]
+    asvs: [ 14.1 ]
+    capec: [ CAPEC-180 ]
+    mitre_attack: [ T1190 ]
+-
   id: SDL
   name: SSDLC
   cards:
