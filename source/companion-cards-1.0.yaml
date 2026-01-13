@@ -248,7 +248,7 @@ suits:
     id: FRE7
     value: 7
     url: https://cornucopia.owasp.org/cards/FRE7
-    desc: The attacker exploits misconfigured CORS or unsafe postMessage handling to read or manipulate sensitive frontend data from a malicious origin.
+    desc: The attacker exploits misconfigured CORS, unsafe postMessage handling, or other client-side security vulnerabilities to read or manipulate sensitive frontend data from a malicious origin.
   -
     id: FRE8
     value: 8
