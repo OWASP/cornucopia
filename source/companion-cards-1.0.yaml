@@ -223,12 +223,12 @@ suits:
     id: FRE2
     value: 2
     url: https://cornucopia.owasp.org/cards/FRE2
-    desc: The attacker extracts authentication tokens from localStorage that remain after logout and uses them to hijack user sessions and access accounts without credentials.
+    desc: The attacker bypasses client-side validation and sends malformed or malicious input directly to backend APIs, triggering logic flaws, human errors, and usability issues.
   -
     id: FRE3
     value: 3
     url: https://cornucopia.owasp.org/cards/FRE3
-    desc: The attacker bypasses client-side validation and sends malformed or malicious input directly to backend APIs to trigger logic flaws, injections, or unauthorized actions.
+    desc: The attacker can access sensitive or confidential information because it's not removed after logout or when the client session ends, or should have ended.
   -
     id: FRE4
     value: 4
@@ -243,7 +243,7 @@ suits:
     id: FRE6
     value: 6
     url: https://cornucopia.owasp.org/cards/FRE6
-    desc: The attacker steals authentication tokens or PII from localStorage or sessionStorage using XSS or a malicious browser extension.
+    desc: The attacker exploits malicious JavaScript to steal authentication tokens and hijack user sessions, gaining access to accounts without credentials.
   -
     id: FRE7
     value: 7
