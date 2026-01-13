@@ -278,7 +278,7 @@ suits:
     id: FREK
     value: K
     url: https://cornucopia.owasp.org/cards/FREK
-    desc: The attacker discovers an unauthenticated internal admin frontend exposed to the internet and uses it to manage tenants, modify configurations, and control critical cloud resources.
+    desc: The attacker utilizes a JavaScript application to manage and control users' systems, tenants, and data.
   -
     id: FREA
     value: A
