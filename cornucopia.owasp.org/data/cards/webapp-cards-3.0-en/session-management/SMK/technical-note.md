@@ -1,0 +1,1 @@
+Relying on self-built, inadequately tested session management instead of a standard, vetted framework lets attackers bypass controls and hijack user sessions. See [Session Management (SMQ)](/cards/SMQ#card 'Session Management (SMQ) [internal]') for application-wide coverage.

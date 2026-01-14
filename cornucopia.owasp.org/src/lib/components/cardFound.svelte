@@ -5,11 +5,12 @@
     GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
-  import type { Card } from "../../domain/card/card";
+  import type { Card } from "$domain/card/card";
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
-  import type { Route } from "../../domain/routes/route";
-  import { MappingController } from "../../domain/mapping/mappingController";
+  import type { Route } from "$domain/routes/route";
+  import { MappingController } from "$domain/mapping/mappingController";
   import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
+  import LanguagePicker from "$lib/components/languagePicker.svelte";
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
@@ -19,13 +20,17 @@
     card: Card;
     cards: Map<string, Card>;
     routes: Map<string, Route[]>;
+    languages: string[];
+    language: string;
   }
 
   let {
     mappingData,
     card = $bindable(),
     cards,
-    routes
+    routes,
+    languages,
+    language
   }: Props = $props();
     
   const controller: MappingController = new MappingController(mappingData);
@@ -38,7 +43,13 @@
     attacks = GetCardAttacks(card.id);
   });
 </script>
-
+<LanguagePicker 
+  edition={card.edition}
+  cardId={card.id}
+  version={card.version}
+  currentLanguage={language}
+  {languages}
+/>
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>

@@ -1,0 +1,1 @@
+The key concept behind this card is that insecure coding practices and implementation flaws—such as risky functions, race conditions, and overflows—can allow attackers to bypass application controls and tamper with system behavior.
