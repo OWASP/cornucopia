@@ -1,6 +1,5 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { DeckService } from "$lib/services/deckService";
-import { error, type RequestHandler } from '@sveltejs/kit';
 import type { Route } from "$domain/routes/route";
 
 const editions = ["webapp", "mobileapp"];
