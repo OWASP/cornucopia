@@ -83,15 +83,11 @@
       {#if mappings.safecode}
       <MappingsList title="SAFECode:" mappings={mappings.safecode} />
       {/if}
-      {/if}
-      <!--<h1 class="title">Cheatsheetseries Index</h1>-->
-      {#if card.value != 'A' && card.value != 'B'}
-      <!--<MASVSOverview mappings={[...new Set (mappings.owasp_masvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></MASVSOverview>-->
-      {/if}
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h1>
-      {#if card.value != 'A' && card.value != 'B'}
+      {#if attacks }
       <Attacks {mappings} {attacks}></Attacks>
       {/if}
+    {/if}
     
     
   

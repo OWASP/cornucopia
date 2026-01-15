@@ -116,7 +116,7 @@
     {/if}
   
     <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
-    {#if card.value != 'A' && card.value != 'B' && mappings.owasp_asvs}
+    {#if hasMappings && mappings.owasp_asvs}
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
     {/if}
     <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>

@@ -56,7 +56,7 @@
             {#if card?.edition == 'webapp' && card?.value != 'A' && card?.value != 'B'}
                 <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
             {/if}
-            {#if card?.edition == 'mobileapp' && card?.value != 'A' && card?.value != 'B'}
+            {#if card?.edition == 'mobileapp'}
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
