@@ -61,6 +61,8 @@
     }
     let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
     let attacks: Attack[] = $state(GetCardAttacks(card.id));
+    
+    let hasMappings = $derived(mappings && Object.keys(mappings).length > 1); 
   
     run(() => {
       mappings = controller.getWebAppCardMappings(card.id);
@@ -68,41 +70,53 @@
     });
   </script>
 
-    {#if card.value != 'A' && card.value != 'B'}
+    {#if hasMappings }
       <h2 class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
+      {#if mappings.stride}
       <MappingsList 
         title="STRIDE:" 
         mappings={mappings.stride}
         linkFunction={linkSTRIDE}
         textFunction={textSTRIDE}
       />
+      {/if}
+      {#if mappings.owasp_asvs}
       <MappingsList
-        title="OWASP ASVS (4.0):"
+        title="OWASP ASVS:"
         mappings={mappings.owasp_asvs}
         linkFunction={linkASVS}
       />
+      {/if}
+      {#if mappings.capec}
       <MappingsList
         title="CAPEC:"
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
+      {/if}
+      {#if mappings.owasp_dev_guide}
       <MappingsList title="OWASP DevGuide:"
         mappings={mappings.owasp_dev_guide} 
         linkFunction={DevGuideMapping.getUrl}  
       />
+      {/if}
+      {#if mappings.owasp_appsensor}
       <MappingsList
         title="OWASP AppSensor:"
         mappings={mappings.owasp_appsensor}
       />
+      {/if}
+      {#if mappings.safecode}
       <MappingsList 
         title="SAFECode:"
         mappings={mappings.safecode} 
         linkFunction={(input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
       />
+      {/if}
     {/if}
   
     <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
-    {#if card.value != 'A' && card.value != 'B'}
+    {#if card.value != 'A' && card.value != 'B' && mappings.owasp_asvs}
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
     {/if}
     <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>

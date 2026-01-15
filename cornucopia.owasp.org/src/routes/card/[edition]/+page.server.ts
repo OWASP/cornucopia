@@ -3,7 +3,6 @@ import { error } from '@sveltejs/kit';
 import { SuitController } from '$domain/suit/suitController';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 
-const editions = ["webapp", "mobileapp"];
 export const load = (({ params }) => {
   const edition = params?.edition;
   if (!DeckService.hasEdition(edition)) error(

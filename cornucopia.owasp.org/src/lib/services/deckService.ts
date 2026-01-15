@@ -115,11 +115,29 @@ export class DeckService {
     {
         const decks = new Map<string, any>();
         const editions = DeckService.decks;
+        
+        // Load all mappings if not already loaded
+        if (DeckService.mappings.length === 0) {
+            this.getCardMappingDataAllVersions();
+        }
+        
         editions.forEach((deck) => {
-            decks.set(
-                `${deck.edition}-${deck.version}`, DeckService.mappings.find((mapping) => mapping?.version == deck.version && mapping?.edition == deck.edition)?.data || this.getCardMappingDataAllVersions()
-            );
+            let mappingData = DeckService.mappings.find((mapping) => mapping?.version == deck.version && mapping?.edition == deck.edition)?.data;
             
+            // If not found in cache, try to load it
+            if (!mappingData) {
+                try {
+                    const yamlData = fs.readFileSync(`${__dirname}${DeckService.path}${DeckService.getEdition(deck.edition)}-mappings-${deck.version}.yaml`, 'utf8');
+                    mappingData = yaml.load(yamlData);
+                    DeckService.mappings.push({edition: deck.edition, version: deck.version, data: mappingData});
+                } catch (e) {
+                    console.error(`Failed to load mapping for ${deck.edition}-${deck.version}:`, e);
+                }
+            }
+            
+            if (mappingData) {
+                decks.set(`${deck.edition}-${deck.version}`, mappingData);
+            }
         });
         return decks;
     }
