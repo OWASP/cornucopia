@@ -7,6 +7,10 @@ export class FileSystemHelper {
     return fs.existsSync(path);
   }
 
+  public static hasFile(path: string): boolean {
+    return FileSystemHelper.hasDir(path) && fs.lstatSync(path).isFile();
+  }
+
   public static getDirectories(path: string): string[] {
     return fs
       .readdirSync(path, { withFileTypes: true })
@@ -21,8 +25,8 @@ export class FileSystemHelper {
       .map((dirent) => dirent.name);
   }
 
-  public static ASVSRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy/en/ASVS-4.0.3";
+  public static ASVSRouteMap(version: string = "4.0.3"): Route[] {
+    const basePath: string = `data/taxonomy/en/ASVS-${version}`;
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
