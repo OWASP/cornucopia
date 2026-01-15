@@ -1,5 +1,3 @@
-Roman can exploit the application because dangourous or risky compononents haven't been securely compiled or deployed, or its configuration is not secure by default, or security information was not documented, or passed on to operational teams, or the user is not warned or access blocked when the expected security features are not supported or enabled
-
 ## Scenario: Roman’s Exploitation of Outdated Compilation and Configuration Lapses
 
 Envision a scenario where Roman takes advantage of vulnerabilities in an application caused by using outdated compilation tools, insecure default configurations, or a lack of documented security information for operational teams. These issues arise from:
