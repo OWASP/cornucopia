@@ -1,0 +1,37 @@
+## Scenario: Marce's Ability to Forge Requests
+
+Imagine a situation where Marce forges requests in a system that lacks adequate protections against Cross-Site Request Forgery (CSRF). This happens because:
+
+1. **Absence of Anti-CSRF Tokens:** The application does not use strong, random tokens for each session or critical per-request actions.
+
+2. **State-Changing Actions Unprotected:** Actions that change state (like form submissions or settings changes) are not secured with unique tokens.
+
+### Example
+
+Marce targets an online banking platform that does not implement anti-CSRF tokens for transactions. She crafts a malicious email with a hidden request embedded in an image source attribute. When an authenticated user unknowingly opens this email, the request is sent to the bank’s server. Since the server cannot distinguish this forged request from a legitimate one, it processes the transaction as if it were a request made by the user, leading to unauthorized financial transfers.
+
+## Threat Modeling
+
+### STRIDE
+
+This scenario maps primarily to STRIDE: **Spoofing**.
+
+**Spoofing** involves pretending to be a legitimate user.
+Marce forges requests that appear to originate from an authenticated user because the server cannot distinguish legitimate requests from maliciously crafted ones.
+The attack allows her to perform actions on behalf of the user, which is impersonation—classic **Spoofing**.
+
+### What can go wrong?
+
+Such vulnerabilities expose users to CSRF attacks, where attackers can manipulate users' actions without their knowledge, potentially leading to unauthorized state changes and data breaches.
+
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
+### What are we going to do about it?
+
+Consider supplementing standard session management with anti-CSRF tokens.
+
+1. Implement strong, random anti-CSRF tokens for each session and for critical actions that change the system's state.
+2. Ensure that every state-changing action requires a valid anti-CSRF token to proceed.
+3. Regularly review and update security measures to protect against CSRF and other request forgery methods.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

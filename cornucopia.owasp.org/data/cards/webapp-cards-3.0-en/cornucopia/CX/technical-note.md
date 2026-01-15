@@ -1,0 +1,1 @@
+The key concept for this card is software hardening, configuration and patching. See [Cornucopia 8 (C8)](/cards/C8#card 'Cornucopia 8 (C8)[internal]') instead for host/network environment hardening, configuration and patching.

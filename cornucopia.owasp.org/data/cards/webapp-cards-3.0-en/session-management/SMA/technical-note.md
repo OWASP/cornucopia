@@ -1,0 +1,1 @@
+Players can discuss any type of Session Management (SM) attack they think might be possible against the assessment target. It does not matter if the attack relates to another SM card, but if possible try to identify an attack that is fairly unique to the application/functionality/users.

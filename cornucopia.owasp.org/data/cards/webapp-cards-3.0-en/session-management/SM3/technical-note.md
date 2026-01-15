@@ -1,0 +1,1 @@
+This card relates to concurrent sessions created by authenticating more than once in different browsers/devices. See [Session Management (SM6)](/cards/SM6#card 'Session Management (SM6) [internal]') for using the same session identifier in concurrent sessions.

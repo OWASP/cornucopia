@@ -15,4 +15,6 @@ export type Card =
     technical : string,
     url : string,
     value : string,
+    version : string,
+    language : string
 }
