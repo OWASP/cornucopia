@@ -12,10 +12,10 @@
 
   let { data }: Props = $props();
   let t = readTranslation();
-  const lang = readLang();
+  const lang = $state(readLang());
   const cards = data.decks.get($lang);
   let card : Card = $state(cards.get(data.card)) as Card;
-  const language = $state(card.language);
+  let language = $lang ? $lang : data.lang;
   const languages = data.languages;
 
   function cardFound() 

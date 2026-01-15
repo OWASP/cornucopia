@@ -7,9 +7,10 @@
 
   let { data }: Props = $props();
   let t = readTranslation();
+  const lang = $state(readLang());
   let cards = data.cards;
   let card : Card = cards.get(data.card) as Card;
-  const language =  $state(card.language);
+  let language = $lang ? $lang : data.lang;
   const languages = data.languages;
 
   function cardFound() 

@@ -183,7 +183,7 @@
                 <div class="card-buttons">
                 {#each suit.cards as card}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
@@ -204,7 +204,7 @@
                 <div class="card-buttons">
                 {#each suit.cards as card}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>

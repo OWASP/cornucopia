@@ -1,5 +1,6 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { DeckService } from "$lib/services/deckService";
+import { error } from '@sveltejs/kit';
 import type { Route } from "$domain/routes/route";
 
 const editions = ["webapp", "mobileapp"];
@@ -7,9 +8,9 @@ const languages = ["en", "no_nb", "nl", "es", "pt_pt", "pt_br", "ru", "fr", "it"
 const versions = ["3.0", "2.2", "1.0"];
 
 export const load = (({ params }) => {
-    const edition =  params.edition || 'webapp';
-    const version =  params.version || '3.0';
-    const lang =  params.lang || 'en';
+    const edition =  params?.edition;
+    const version =  params?.version;
+    const lang =  params?.lang;
     let asvsVersion: string = "4.0.3";
     if (params.version === '3.0') asvsVersion = '5.0';
     if (!DeckService.hasEdition(edition)) error(
