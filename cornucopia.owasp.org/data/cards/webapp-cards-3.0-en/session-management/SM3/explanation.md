@@ -1,0 +1,35 @@
+## Scenario: Ryan’s Exploitation of Concurrent Sessions
+
+Imagine a scenario where Ryan takes advantage of a system's leniency in allowing multiple concurrent sessions for a single account. This occurs because:
+
+1. **Allowance of Multiple Active Sessions:** The system permits one user account to be logged in from multiple devices or locations at the same time.
+
+### Example
+
+Ryan discovers that a corporate network does not restrict the number of active sessions per user account. He obtains the login credentials of an employee and logs into the account while the legitimate user is also active. The system fails to detect or alert the concurrent usage, allowing Ryan to access sensitive information and perform unauthorized actions unnoticed.
+
+## Threat Modeling
+
+### STRIDE
+
+This scenario falls under STRIDE: **Spoofing**.
+
+**Spoofing** is about impersonating a legitimate user or system.
+Ryan uses valid credentials to simultaneously access the account while the legitimate user is active, effectively impersonating the user in parallel.
+The system’s failure to restrict or monitor concurrent sessions enables him to bypass control over who is acting as that user.
+
+### What can go wrong?
+
+Allowing concurrent sessions without proper controls can lead to unauthorized access and exploitation of user accounts, potentially compromising data security and privacy.
+
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
+### What are we going to do about it?
+
+In some ecommerce applications it may be desirable to allow customers to be logged in using multiple browsers/devices. However that would be unusual for administrative users, or users of more sensitive data. Even if concurrent sessions are allowed. consider what should occur in other sessions when a user changes their password, or changes their delivery address, or logs out, or times out, or authentication failure occurs.
+
+1. Implement a policy to restrict or carefully monitor concurrent sessions. Options include limiting the number of simultaneous sessions per user or requiring additional verification for new sessions.
+2. Set up alerts for unusual patterns of concurrent access, such as logins from geographically distant locations within a short timeframe.
+3. Regularly audit session management policies to ensure they effectively protect against unauthorized concurrent access. 
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

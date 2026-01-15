@@ -11,10 +11,12 @@
   }
 
   let { data }: Props = $props();
-  const lang = readLang();
   let t = readTranslation();
+  const lang = $state(readLang());
   const cards = data.decks.get($lang);
-  let card : Card = cards.get(data.card) as Card;
+  let card : Card = $state(cards.get(data.card)) as Card;
+  let language = $lang ? $lang : data.lang;
+  const languages = data.languages;
 
   function cardFound() 
     {
@@ -43,7 +45,7 @@
 </script>
 <svelte:head>
   {#if cardFound()}
-    <link rel="canonical" href="https://cornucopia.owasp.org/cards/{card.id}" />
+    <link rel="canonical" href="https://cornucopia.owasp.org/card/{card.edition}/{card.id}" />
     <title>OWASP Cornucopia - {getEdition(card.edition)} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
     <meta name="description" content="{card.desc}" />
 	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {Text.convertToTitleCase(card.suitName)}, {card.id}" />
@@ -55,7 +57,7 @@
 </svelte:head>
 <div>
 {#if cardFound()}
-  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} />
+  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} {languages} {language} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}

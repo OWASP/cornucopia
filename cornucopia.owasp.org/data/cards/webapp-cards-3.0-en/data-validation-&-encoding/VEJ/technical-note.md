@@ -1,0 +1,1 @@
+Unlike other cards in this suit, this Data Validation & Encoding J (VEJ) relates to an attacker being able to change the executing code. This may be due to inadequate source code control, deployment controls or server protection, but is more often a standard feature of client-side code.
