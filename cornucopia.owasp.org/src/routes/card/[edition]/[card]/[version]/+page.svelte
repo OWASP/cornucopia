@@ -7,11 +7,11 @@
   
 
   let { data }: Props = $props();
-  const language = $state(card.language);
-  let languages = data.languages;
   let t = readTranslation();
   let cards = data.cards;
   let card : Card = cards.get(data.card) as Card;
+  let languages = data.languages;
+  let language = data.language;
 
   function cardFound() 
     {

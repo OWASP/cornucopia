@@ -14,7 +14,7 @@
   let t = readTranslation();
   const lang = readLang();
   const cards = data.decks.get($lang);
-  let card : Card = cards.get(data.card) as Card;
+  let card : Card = $state(cards.get(data.card)) as Card;
   const language = $state(card.language);
   const languages = data.languages;
 
