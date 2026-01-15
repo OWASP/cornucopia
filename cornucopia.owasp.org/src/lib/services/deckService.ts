@@ -13,11 +13,11 @@ export class DeckService {
     private static cache: object[] = [];
     private static mappings: object[] = [];
 
-    private static latests = [
+    private static readonly latests = [
         {lang: ['en'], edition: 'mobileapp', version: '1.1'}, 
         {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'}
     ];
-    private static decks = [
+    private static readonly decks = [
         {edition: 'mobileapp', version: '1.1', lang: ['en']},
         {edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']},
         {edition: 'webapp', version: '3.0', lang: ['en']}];
@@ -87,7 +87,6 @@ export class DeckService {
 
     private getCardMappingDataAllVersions()
     {
-        const decks = new Map<string, any>(); 
         const decksList = DeckService.decks;
         decksList.forEach((deck) => {
             const yamlData = fs.readFileSync(`${__dirname}${DeckService.path}${DeckService.getEdition(deck.edition)}-mappings-${deck.version}.yaml`, 'utf8');
@@ -248,7 +247,6 @@ export class DeckService {
     public getCardDataForEditionVersionLang(edition:string, version: string, lang: string)
     {
         const cards = new Map<string, Card>;
-        const decks = DeckService.decks;
 
         let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
 
