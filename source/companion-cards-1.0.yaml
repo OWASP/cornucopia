@@ -216,6 +216,76 @@ suits:
     desc: You have invented a new attack against Cloud
     misc: 
 -
+  id: FRE
+  name: Frontend
+  cards:
+  -
+    id: FRE2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/FRE2
+    desc: The attacker bypasses client-side validation and sends malformed or malicious input directly to backend APIs, triggering logic flaws, human errors, and usability issues.
+  -
+    id: FRE3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/FRE3
+    desc: The attacker can access sensitive or confidential information because it's not removed after logout or when the client session ends, or should have ended.
+  -
+    id: FRE4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/FRE4
+    desc: The attacker injects JavaScript through user-controlled data that is written into the DOM, executing arbitrary code in the victim’s browser.
+  -
+    id: FRE5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/FRE5
+    desc: The attacker compromises or replaces a third-party script loaded from a CDN and runs malicious code in every user’s browser.
+  -
+    id: FRE6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/FRE6
+    desc: The attacker exploits malicious JavaScript to steal authentication tokens and hijack user sessions, gaining access to accounts without credentials.
+  -
+    id: FRE7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/FRE7
+    desc: The attacker exploits misconfigured CORS, unsafe postMessage handling, or other client-side security vulnerabilities to read or manipulate sensitive frontend data from a malicious origin.
+  -
+    id: FRE8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/FRE8
+    desc: The attacker tampers with frontend JavaScript to unlock restricted features or access data that should require server-side authorization.
+  -
+    id: FRE9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/FRE9
+    desc: The attacker reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions.
+  -
+    id: FREX
+    value: X
+    url: https://cornucopia.owasp.org/cards/FREX
+    desc: The attacker embeds the application in a hidden or disguised frame to trick users into clicking UI elements that perform sensitive actions.
+  -
+    id: FREJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/FREJ
+    desc: The attacker uses a malicious or over-privileged browser extension to read the DOM, steal tokens, and invoke internal frontend APIs.
+  -
+    id: FREQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/FREQ
+    desc: The attacker injects persistent malicious code into frontend assets, allowing long-term control over all users’ browsers until the application is redeployed.
+  -
+    id: FREK
+    value: K
+    url: https://cornucopia.owasp.org/cards/FREK
+    desc: The attacker utilizes a JavaScript application to manage and control users' systems, tenants, and data.
+  -
+    id: FREA
+    value: A
+    url: https://cornucopia.owasp.org/cards/FREA
+    desc: You have invented a new attack against Frontend
+    misc: 
+-
   id: SDL
   name: SSDLC
   cards:
