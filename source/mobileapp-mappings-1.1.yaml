@@ -6,7 +6,7 @@ meta:
   version: "1.1"
   layouts: ["cards", "leaflet"]
   templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
-  languages: ["en"]
+  languages: ["en", "ru"]
 suits:
 -
   id: "PC"
@@ -652,6 +652,26 @@ suits:
     id: "CMA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/CMA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
+-
+  id: "WC"
+  name: "WILD CARD"
+  cards:
+  -
+    id: "JOAM"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOAM"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
+  -
+    id: "JOBM"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOBM"
     owasp_masvs: [ "-" ]
     owasp_mastg: [ "-" ]
     capec: [ "-" ]

@@ -57,33 +57,37 @@
       
   </script>
 
-    {#if card.value != 'A' && card.value != 'B'}
+    {#if mappings }
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h1>
+      {#if mappings.owasp_masvs}
       <MappingsList
-        title="OWASP MASVS (2.1):"
+        title="OWASP MASVS:"
         mappings={mappings.owasp_masvs}
         linkFunction={linkMASVS}
       />
+      {/if}
+      {#if mappings.owasp_mastg}
       <MappingsList 
-        title="OWASP MASTG (1.7):" 
+        title="OWASP MASTG:" 
         mappings={mappings.owasp_mastg}
         linkFunction={linkMASTG}
       />
+      {/if}
+      {#if mappings.capec}
       <MappingsList
         title="CAPEC:"
         mappings={mappings.capec}
         linkFunction={linkCapec}
       />
+      {/if}
+      {#if mappings.safecode}
       <MappingsList title="SAFECode:" mappings={mappings.safecode} />
       {/if}
-      <!--<h1 class="title">Cheatsheetseries Index</h1>-->
-      {#if card.value != 'A' && card.value != 'B'}
-      <!--<MASVSOverview mappings={[...new Set (mappings.owasp_masvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></MASVSOverview>-->
-      {/if}
       <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h1>
-      {#if card.value != 'A' && card.value != 'B'}
+      {#if attacks }
       <Attacks {mappings} {attacks}></Attacks>
       {/if}
+    {/if}
     
     
   

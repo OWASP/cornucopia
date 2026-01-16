@@ -53,6 +53,10 @@ export class MappingController {
 
     public getCardMappings(card : string, addition : number = 0) : Mapping
     {
+        if (!this.mapping || !this.mapping.suits) {
+            return {} as Mapping;
+        }
+        
         for(let i = 0 ; i < this.mapping.suits.length ; i++)
         {
             for(let j = 0 ; j < this.mapping.suits[i].cards.length ; j++)

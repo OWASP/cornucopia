@@ -56,10 +56,10 @@
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
-  {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B'}
+  {#if card.edition == 'webapp'}
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
   {/if}
-  {#if card.edition == 'mobileapp' &&  card.value != 'A' && card.value != 'B'}
+  {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
     {#key card}
