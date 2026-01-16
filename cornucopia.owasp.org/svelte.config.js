@@ -95,7 +95,6 @@ export default {
 				'/api/cre/webapp/no_nb',
 				'/api/cre/mobileapp/en',
 				'/card/mobileapp/PC2/1.1/en',
-				'/card/mobileapp/PC2/1.1/ru',
 				'/card/webapp/VE2/2.2/es',
 				'/card/webapp/VE2/2.2/it',
 				'/card/webapp/VE2/2.2/nl',
