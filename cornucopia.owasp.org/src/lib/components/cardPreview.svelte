@@ -53,10 +53,10 @@
         {#if mapping}
         <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text {getRoyalTextColor(card?.suit, card?.suitId, card?.value)}">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card?.desc}</p>
-            {#if card?.edition == 'webapp' && card?.value != 'A' && card?.value != 'B'}
+            {#if card?.edition == 'webapp'}
                 <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
             {/if}
-            {#if card?.edition == 'mobileapp' && card?.value != 'A' && card?.value != 'B'}
+            {#if card?.edition == 'mobileapp'}
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
         {:else if card?.suitName == 'WILD CARD'}

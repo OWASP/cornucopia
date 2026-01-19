@@ -1298,3 +1298,31 @@ suits:
     owasp_appsensor: [ "-" ]
     capec: [ "-" ]
     safecode: [ "-" ]
+-
+  id: "WC"
+  name: "WILD CARD"
+  cards:
+  -
+    id: "JOA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOA"
+    stride: []
+    stride_print: [ ]
+    owasp_dev_guide: [ "-" ]
+    owasp_dev_guide_print: [ "-" ]
+    owasp_asvs: [ "-" ]
+    owasp_asvs_print: [ "-" ]
+    capec: [ 184, 242, 248, 441, 444, 523, 549, 636, 691 ]
+    safecode: [ "-" ]
+  -
+    id: "JOB"
+    value: "B"
+    url: "https://cornucopia.owasp.org/cards/JOB"
+    stride: []
+    stride_print: [ ]
+    owasp_dev_guide: [ "-" ]
+    owasp_dev_guide_print: [ "-" ]
+    owasp_asvs: [ "-" ]
+    owasp_asvs_print: [ "-" ]
+    capec: [ 184, 242, 416, 438, 441, 444, 523, 518, 519, 548, 636, 691 ]
+    safecode: [ "-" ]

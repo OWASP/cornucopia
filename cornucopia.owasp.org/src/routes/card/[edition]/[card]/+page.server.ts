@@ -3,8 +3,6 @@ import { error } from '@sveltejs/kit';
 import { DeckService } from "$lib/services/deckService";
 import type { Route } from "$domain/routes/route";
 
-const editions = ["webapp", "mobileapp"];
-
 export const load = (({ params }) => {
     const edition =  params?.edition;
     const version =  edition == 'webapp' ? '2.2' : '1.1';
