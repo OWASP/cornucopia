@@ -7,9 +7,6 @@ export class MappingService {
     private static mappings: object[] = [];
     private static path: string = '/../source/';
 
-    constructor() {
-    }
-
     public getLatestsCardMappingData(edition: string)
     {
         const yamlData = fs.readFileSync(`${__dirname}${MappingService.path}${edition}-mappings-${DeckService.getLatestVersion(edition)}.yaml`, 'utf8');

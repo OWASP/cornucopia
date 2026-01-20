@@ -27,24 +27,23 @@
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
 
-
-
-    let mobileappSuits = $state(suits?.get(`${VERSION_MOBILEAPP}-${$lang}`));
-    let webappSuits = $state(suits?.get(`${VERSION_WEBAPP}-${$lang}`));
-
-    if (!(() => mobileappSuits)()) {
-        mobileappSuits = suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
-    }
-
-    if (!(() => webappSuits)()) {
-        webappSuits = suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
-    }
+    let mobileappSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
+    });
+    
+    let webappSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_WEBAPP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
+    });
 
     let version : string = $state(VERSION_WEBAPP);
     let suit : string;
-    let card : Card = $state(cards?.get('VE2') as Card);
+    let card : Card = $derived(cards?.get('VE2') as Card);
     
-    let mapping = $state((() => card)() ? (new MappingController(mappingData?.get((() => version)()))).getCardMappings((() => card)().id) : []);
+    let mapping = $derived.by(() => 
+        card ? (new MappingController(mappingData?.get(version))).getCardMappings(card.id) : []
+    );
 
     let map : Map<string,boolean> = $state(new SvelteMap());
     setTree(false);

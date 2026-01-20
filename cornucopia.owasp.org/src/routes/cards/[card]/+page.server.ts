@@ -4,7 +4,6 @@ import type { PageServerLoad } from "./$types";
 import type { Route } from "../../../domain/routes/route";
 import type { Card } from "$domain/card/card";
 import { MappingService } from "$lib/services/mappingService";
-import lang from "$lib/translations/lang";
 
 export const load = (({ params }) => {
   const lang = 'en';
