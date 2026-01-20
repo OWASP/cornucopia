@@ -41,6 +41,34 @@ export class FileSystemHelper {
       .map((dirent) => dirent.name);
   }
 
+  /**
+   * Resolves a path in a case-insensitive manner by checking actual directory names.
+   * This ensures cross-platform compatibility between case-sensitive and case-insensitive filesystems.
+   */
+  private static resolveCaseInsensitivePath(basePath: string, relativePath: string): string {
+    const parts = relativePath.split('/').filter(p => p.length > 0);
+    let currentPath = path.normalize(basePath);
+    
+    for (const part of parts) {
+      if (!fs.existsSync(currentPath)) {
+        return path.join(basePath, relativePath); // Path doesn't exist, return as-is
+      }
+      
+      const entries = fs.readdirSync(currentPath, { withFileTypes: true });
+      const matchingEntry = entries.find(entry => 
+        entry.name.toLowerCase() === part.toLowerCase()
+      );
+      
+      if (matchingEntry) {
+        currentPath = path.join(currentPath, matchingEntry.name);
+      } else {
+        currentPath = path.join(currentPath, part);
+      }
+    }
+    
+    return currentPath;
+  }
+
   public static ASVSRouteMap(version: string = "4.0.3"): Route[] {
     const basePath: string = `data/taxonomy/en/ASVS-${version}`;
     const sectionRegex = /^(\d{2})-/;
@@ -80,41 +108,53 @@ export class FileSystemHelper {
 
   public static getDataByRoute(route: string, lang: string = 'en'): [string[], string] {
     let categories: string[] = [];
-    let filePath : string = FileSystemHelper.root + "data";
+    const baseDataPath = FileSystemHelper.root + "data";
+    
     if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
     
-    let defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en', );
+    let defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en');
+    
+    // Get content using original route structure for Map keys
     let content = FileSystemHelper.getDataFromPath('data' + route).get('data' + route) || "";
     if (content === "") {
       content = FileSystemHelper.getDataFromPath('data' + defaultLangRoute).get('data' + defaultLangRoute) || "";
     }
-    FileSystemHelper.getDirectories(path.normalize(filePath + defaultLangRoute)).forEach(
-      (folder) => categories.push(folder));
+    
+    // Resolve the actual filesystem path for directory operations (case-insensitive)
+    const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(baseDataPath, defaultLangRoute);
+    
+    if (fs.existsSync(resolvedPath)) {
+      FileSystemHelper.getDirectories(resolvedPath).forEach(
+        (folder) => categories.push(folder));
+    }
     
     return [categories, content];
   }
 
   public static getDataFromPath(filePath: string) : Map<string, string>
   {
-    const base = FileSystemHelper.root + "/";
+    const base = FileSystemHelper.root;
     let content = new Map<string, string>();
   
-    let indexFile: string = path.normalize(base + filePath + "/index.md");
+    // Resolve the actual filesystem path (case-insensitive)
+    const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(base, filePath);
+    
+    let indexFile: string = path.join(resolvedPath, "index.md");
     if (fs.existsSync(indexFile)) {
       content.set(filePath, fs.readFileSync(indexFile, "utf8"));
     }
   
     let folders: string[];
     try {
-      folders = FileSystemHelper.getDirectories(path.normalize(base + filePath));
+      folders = FileSystemHelper.getDirectories(resolvedPath);
     } catch (e) {
       folders = [];
     }
-    if (folders.length == 0) console.log("No folders found for path: " + path.normalize(base + filePath));
   
     folders.forEach((folder) => {
-      if (fs.existsSync(path.normalize(base + filePath + "/" + folder + "/index.md"))) {
-        content.set(folder, fs.readFileSync(path.normalize(base + filePath + "/" + folder + "/index.md"), "utf8"));
+      const folderIndexFile = path.join(resolvedPath, folder, "index.md");
+      if (fs.existsSync(folderIndexFile)) {
+        content.set(folder, fs.readFileSync(folderIndexFile, "utf8"));
       }
     });
   
