@@ -3,18 +3,27 @@ import { DeckService } from "$lib/services/deckService";
 import type { PageServerLoad } from "./$types";
 import type { Route } from "../../../domain/routes/route";
 import type { Card } from "$domain/card/card";
+import { MappingService } from "$lib/services/mappingService";
+import lang from "$lib/translations/lang";
 
 export const load = (({ params }) => {
-      const decks = new DeckService().getCardsForAllLanguages();
-      const cards = decks.get('en') as Map<string, Card>;
+  const lang = 'en';
+      const mobileCards = (new DeckService()).getCardDataForEditionVersionLang(
+        'mobileapp', DeckService.getLatestVersion('mobileapp'), lang);
+      const webappCards = (new DeckService()).getCardDataForEditionVersionLang(
+        'webapp', DeckService.getLatestVersion('webapp'), lang);
+      
+      const cards = new Map([...mobileCards, ...webappCards]);
+      const decks = new Map([['en', cards]]);
+      
       let card : Card = cards.get(legacyCardCodeFix(params.card?.toUpperCase())) as Card;
   return {
     card: legacyCardCodeFix(params.card?.toUpperCase()),
-    decks: new DeckService().getCardsForAllLanguages(),
+    decks: decks,
     routes: new Map<string, Route[]>([
       ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]
     ]),
-    mappingData: (new DeckService()).getCardMapping(),
+    mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
     languages: DeckService.getLanguages(card.edition),
   };
 

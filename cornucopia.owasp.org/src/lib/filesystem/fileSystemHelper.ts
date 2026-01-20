@@ -1,7 +1,23 @@
 import fs from "fs";
 import type { Route } from "../../domain/routes/route";
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 export class FileSystemHelper {
+
+  //private static root = path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../');
+
+
+  private static root = (() => {
+    // During development and build, calculate root from import.meta.url
+
+    if (import.meta.url.includes('.svelte-kit')) {
+      return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../../');
+    }
+
+    return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../');
+
+  })();
 
   public static hasDir(path: string): boolean {
     return fs.existsSync(path);
@@ -30,7 +46,7 @@ export class FileSystemHelper {
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
-    const firstLevelDirs = this.getDirectories(basePath).filter((dir) =>
+    const firstLevelDirs = this.getDirectories(FileSystemHelper.root + basePath).filter((dir) =>
       sectionRegex.test(dir)
     );
 
@@ -38,7 +54,7 @@ export class FileSystemHelper {
       const firstLevelPath = basePath + '/' + firstLevelDir;
       const firstPart = firstLevelDir.match(sectionRegex)?.[1];
 
-      const secondLevelDirs = this.getDirectories(firstLevelPath).filter(
+      const secondLevelDirs = this.getDirectories(FileSystemHelper.root + firstLevelPath).filter(
         (dir) => sectionRegex.test(dir)
       );
 
@@ -58,75 +74,47 @@ export class FileSystemHelper {
     return routes;
   }
 
-  public static getFolderNameByRoute(route: string) {
-    let base: string = "data/taxonomy/en";
-    let path: string = base;
-    let routes: string[] = route.split('/');
-
-    routes.forEach((dir) => {
-      let dirs = this.getDirectories(path);
-      dirs.forEach((folder) => {
-        if (dir != folder.toLowerCase()) return;
-        path = path + '/' + folder;
-      });
-    });
-
-    if (path == base) return 'Requirements Mapping';
-
-    return path.split('/').slice(-1);
+  public static getCurrentPageNameByRoute(route: string) {
+    return route ? route.split('/').slice(-1)[0] : 'Requirements Mapping';
   }
 
-  public static getDataByRoute(route: string) {
-    let resultFolders: string[] = [];
-    let resultFiles: string[] = [];
-    let routePath: string = '';
-    let path : string = "data/taxonomy/en";
-    let routes: string[] = route.split('/');
-
-    routes.forEach((dir) => {
-      let dirs = this.getDirectories(path);
-      dirs.forEach((folder) => {
-        if (dir != folder.toLowerCase()) return;
-        path = path + '/' + folder;
-      });
-    });
-    routePath = path.toLowerCase().replace('data/taxonomy/en/', '');
-
-    let content: string = "";
-    let indexFile: string = path + "/index.md";
-    if (fs.existsSync(indexFile)) content = fs.readFileSync(indexFile, "utf8");
-    let folders = FileSystemHelper.getDirectories(path);
-
-    folders.forEach((folder) => {
-      let files = FileSystemHelper.getFiles(path + "/" + folder);
-      files.includes("index.md")
-        ? resultFolders.push(folder)
-        : resultFiles.push(folder);
-    });
-  
-    return [resultFiles, resultFolders, content, routePath];
+  public static getDataByRoute(route: string, lang: string = 'en'): [string[], string] {
+    let categories: string[] = [];
+    let filePath : string = FileSystemHelper.root + "data";
+    if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
+    
+    let defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en', );
+    let content = FileSystemHelper.getDataFromPath('data' + route).get('data' + route) || "";
+    if (content === "") {
+      content = FileSystemHelper.getDataFromPath('data' + defaultLangRoute).get('data' + defaultLangRoute) || "";
+    }
+    FileSystemHelper.getDirectories(path.normalize(filePath + defaultLangRoute)).forEach(
+      (folder) => categories.push(folder.toLowerCase()));
+    
+    return [categories, content];
   }
 
-  public static getDataFromPath(path: string) : Map<string, string>
+  public static getDataFromPath(filePath: string) : Map<string, string>
   {
-    let content = new Map<string, string>;
+    const base = FileSystemHelper.root + "/";
+    let content = new Map<string, string>();
   
-    let indexFile: string = path + "/index.md";
+    let indexFile: string = path.normalize(base + filePath + "/index.md");
     if (fs.existsSync(indexFile)) {
-      content.set(path, fs.readFileSync(indexFile, "utf8"));
+      content.set(filePath, fs.readFileSync(indexFile, "utf8"));
     }
   
     let folders: string[];
     try {
-      folders = FileSystemHelper.getDirectories(path);
+      folders = FileSystemHelper.getDirectories(path.normalize(base + filePath));
     } catch (e) {
       folders = [];
     }
-    if (folders.length == 0) console.log("No folders found for path: " + path);
+    if (folders.length == 0) console.log("No folders found for path: " + path.normalize(base + filePath));
   
     folders.forEach((folder) => {
-      if (fs.existsSync(path + "/" + folder + "/index.md")) {
-        content.set(folder, fs.readFileSync(path + "/" + folder + "/index.md", "utf8"));
+      if (fs.existsSync(path.normalize(base + filePath + "/" + folder + "/index.md"))) {
+        content.set(folder, fs.readFileSync(path.normalize(base + filePath + "/" + folder + "/index.md"), "utf8"));
       }
     });
   

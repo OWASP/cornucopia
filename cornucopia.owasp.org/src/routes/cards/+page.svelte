@@ -17,11 +17,11 @@
     let { data }: Props = $props();
     const lang = readLang();
     let t = readTranslation();
-    let content = data.content.get($lang) || data.content.get('en');
-    let decks = data?.decks;
-    let cards = decks?.get($lang);
-    let suits = data.suits;
-    let mappingData = data.mappingData;
+    let content = $derived(data.content.get($lang) || data.content.get('en'));
+    let decks = $derived(data?.decks);
+    let cards = $derived(decks?.get($lang));
+    let suits = $derived(data.suits);
+    let mappingData = $derived(data.mappingData);
 
     //TODO move these constants to a more sensible location
     const VERSION_WEBAPP = "webapp"
@@ -44,7 +44,7 @@
     let suit : string;
     let card : Card = $state(cards?.get('VE2') as Card);
     
-    let mapping = $state((new MappingController(mappingData?.get((() => version)()))).getCardMappings((() => card)().id));
+    let mapping = $state((() => card)() ? (new MappingController(mappingData?.get((() => version)()))).getCardMappings((() => card)().id) : []);
 
     let map : Map<string,boolean> = $state(new SvelteMap());
     setTree(false);

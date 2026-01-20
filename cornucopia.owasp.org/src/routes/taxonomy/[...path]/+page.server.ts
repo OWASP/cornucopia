@@ -1,14 +1,13 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 
 
-export async function load({ params }) {
-  let [files, folders, content, routePath] = FileSystemHelper.getDataByRoute(params.path);
+export async function load({ params, url }) {
+  let [categories, content] = FileSystemHelper.getDataByRoute(url.pathname, 'en');
   return {
-    files: files,
-    folders: folders,
+    categories: categories,
     content: content,
-    path: routePath,
-    title: FileSystemHelper.getFolderNameByRoute(routePath as string),
+    path: url.pathname,
+    title: FileSystemHelper.getCurrentPageNameByRoute(url.pathname as string),
     timestamp: new Date().toUTCString(),
   };
 }
