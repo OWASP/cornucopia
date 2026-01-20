@@ -89,7 +89,7 @@ export class FileSystemHelper {
       content = FileSystemHelper.getDataFromPath('data' + defaultLangRoute).get('data' + defaultLangRoute) || "";
     }
     FileSystemHelper.getDirectories(path.normalize(filePath + defaultLangRoute)).forEach(
-      (folder) => categories.push(folder.toLowerCase()));
+      (folder) => categories.push(folder));
     
     return [categories, content];
   }

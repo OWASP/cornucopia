@@ -100,16 +100,16 @@ describe('FileSystemHelper tests', () => {
         expect(contentRoot.length).toBe(0);
         expect(categoriesRoot.length).toBeGreaterThan(0);
         const expectedRootCategories = [
-            'asvs-5.0',
-            'stride',
-            'attacks'
+            'ASVS-5.0',
+            'STRIDE',
+            'Attacks'
         ];
         expectedRootCategories.forEach((category) => {
             expect(categoriesRoot).toContain(category);
         });
 
         //Test with the root taxonomy route
-        let [asvsCategories, asvsRoot] = FileSystemHelper.getDataByRoute('/taxonomy/asvs-4.0.3', 'en');
+        let [asvsCategories, asvsRoot] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3', 'en');
         expect(asvsCategories).toBeDefined();
         expect(asvsRoot).toBeDefined();
         expect(asvsRoot.length).toBe(0);
