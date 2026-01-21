@@ -111,6 +111,7 @@ options:
 ```
 
 **Example usage:**
+
 ```bash
 # Convert CAPEC data using default paths
 python scripts/convertCAPEC.py
@@ -123,6 +124,7 @@ python scripts/convertCAPEC.py -d
 ```
 
 **Default paths:**
+
 - Input: `cornucopia.owasp.org/data/capec-3.9/3000.json`
 - Output: `cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9/`
 
@@ -148,6 +150,7 @@ options:
 ```
 
 **Example usage:**
+
 ```bash
 # Convert mappings using default paths
 python scripts/convertCAPECMapToASVSMap.py
@@ -160,6 +163,7 @@ python scripts/convertCAPECMapToASVSMap.py -d
 ```
 
 **Default paths:**
+
 - Input: `source/webapp-mappings-3.0.yaml`
 - Output: `source/webapp-capec-3.0.yaml`
 
