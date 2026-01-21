@@ -89,6 +89,93 @@ options:
                         You can also speficy your own layout. If so, there needs to be a yaml file in the source folder where the name contains the layout code. Eg. edition-layout-ver-lang.yaml
 ```
 
+## Additional Utility Scripts
+
+### Converting CAPEC Data
+
+The `scripts/convertCAPEC.py` script converts CAPEC (Common Attack Pattern Enumeration and Classification) JSON data into Markdown format for the Cornucopia website taxonomy.
+
+```bash
+python ./scripts/convertCAPEC.py --help
+usage: convertCAPEC.py [-h] [-o OUTPUT_PATH] [-i INPUT_PATH] [-d]
+
+Convert CAPEC JSON to Cornucopia format
+
+options:
+  -h, --help            show this help message and exit
+  -o OUTPUT_PATH, --output-path OUTPUT_PATH
+                        Path to store converted CAPEC files
+  -i INPUT_PATH, --input-path INPUT_PATH
+                        Path to read CAPEC JSON files from
+  -d, --debug           Output additional information to debug script
+```
+
+**Example usage:**
+```bash
+# Convert CAPEC data using default paths
+python scripts/convertCAPEC.py
+
+# Convert with custom input and output paths
+python scripts/convertCAPEC.py -i data/capec-3.9/3000.json -o cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9
+
+# Enable debug logging
+python scripts/convertCAPEC.py -d
+```
+
+**Default paths:**
+- Input: `cornucopia.owasp.org/data/capec-3.9/3000.json`
+- Output: `cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9/`
+
+The script creates individual Markdown files for each CAPEC attack pattern with descriptions and links to the official CAPEC database.
+
+### Converting CAPEC Mappings to ASVS Format
+
+The `scripts/convertCAPECMapToASVSMap.py` script processes webapp-mappings YAML files and generates a consolidated CAPEC-to-ASVS (Application Security Verification Standard) mapping file.
+
+```bash
+python ./scripts/convertCAPECMapToASVSMap.py --help
+usage: convertCAPECMapToASVSMap.py [-h] [-i INPUT_PATH] [-o OUTPUT_PATH] [-d]
+
+Convert webapp-mappings YAML to CAPEC-to-ASVS mapping format
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT_PATH, --input-path INPUT_PATH
+                        Path to input webapp-mappings YAML file
+  -o OUTPUT_PATH, --output-path OUTPUT_PATH
+                        Path to save converted CAPEC-to-ASVS mapping YAML file
+  -d, --debug           Output additional information to debug script
+```
+
+**Example usage:**
+```bash
+# Convert mappings using default paths
+python scripts/convertCAPECMapToASVSMap.py
+
+# Convert with custom input and output paths
+python scripts/convertCAPECMapToASVSMap.py -i source/webapp-mappings-3.0.yaml -o source/webapp-capec-3.0.yaml
+
+# Enable debug logging
+python scripts/convertCAPECMapToASVSMap.py -d
+```
+
+**Default paths:**
+- Input: `source/webapp-mappings-3.0.yaml`
+- Output: `source/webapp-capec-3.0.yaml`
+
+The script:
+1. Reads CAPEC mappings from the `suits -> cards -> capec_map` structure
+2. Merges all OWASP ASVS requirements for each unique CAPEC code
+3. Outputs a unified YAML file mapping CAPEC codes to their associated ASVS requirements
+
+**Output format:**
+```yaml
+54:
+  owasp_asvs: [4.3.2, 13.2.2, 13.4.1, ...]
+116:
+  owasp_asvs: [13.2.2, 15.2.3, ...]
+```
+
 ## Printing
 
 The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there.
@@ -175,7 +262,7 @@ On Mac OSX and Ubuntu you may not need to go through all of these steps, but thi
     # python -c "import os, sys; print(os.path.dirname(sys.executable))" 
     python -m pipenv shell --python "{path to python}"
     pip install pipenv
-    pipenv install
+    pipenv install --dev
 
 
 ### Coding style 
@@ -198,6 +285,40 @@ Run Coding Style Check
     pipenv run black --line-length=120 .
     pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503 --exclude ./.venv/
     pipenv run mypy --namespace-packages --strict ./scripts/
+
+### Docker container
+
+You can also run the converter inside a docker container. To build the container run:
+
+```powershell
+docker build --target pipenv `
+  --build-arg user_id=1000 `
+  --build-arg group_id=1000 `
+  --build-arg home=/home/builder `
+  --build-arg workdir=/workspace `
+  -t cornucopia-converter .
+```
+
+To login to the container and mount the current working directory inside the container run:
+
+```powershell
+    docker run --rm -it --entrypoint "/bin/bash" -v ${PWD}:/workspace cornucopia-converter
+```
+
+Run the converter tests inside the container:
+
+```powershell
+
+    #unit tests
+    docker run --rm -v ${PWD}:/workspace cornucopia-converter run coverage run --append --branch --omit "*_?test.py,*/.local/*" --module unittest discover --verbose --start-directory "tests/scripts" --pattern "*_utest.py"
+
+    #integration tests
+    docker run --rm -v ${PWD}:/workspace cornucopia-converter run coverage run --append --branch --omit "*_?test.py,*/.local/*" --module unittest discover --verbose --start-directory "tests/scripts" --pattern "*_utest.py"
+
+    #See code coverage
+    docker run --rm -v ${PWD}:/workspace cornucopia-converter run coverage report scripts/convert.py
+
+```
 
 ### Static analysis
 
