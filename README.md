@@ -168,6 +168,7 @@ python scripts/convertCAPECMapToASVSMap.py -d
 - Output: `source/webapp-capec-3.0.yaml`
 
 The script:
+
 1. Reads CAPEC mappings from the `suits -> cards -> capec_map` structure
 2. Merges all OWASP ASVS requirements for each unique CAPEC code
 3. Outputs a unified YAML file mapping CAPEC codes to their associated ASVS requirements
