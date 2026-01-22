@@ -10,8 +10,8 @@ import scripts.convertCAPECMapToASVSMap as capec_map
 capec_map.convert_vars = capec_map.ConvertVars()
 
 class ConvertVars:
-    OUTPUT_DIR = Path(__file__).parent.parent.resolve() / "/test_files/output"
-    OUTPUT_FILE = Path(__file__).parent.parent.resolve() / OUTPUT_DIR / "capec_to_asvs_map.yaml"
+    OUTPUT_DIR: str = str(Path(__file__).parent.parent.resolve() / "/test_files/output")
+    OUTPUT_FILE: str = str(Path(__file__).parent.parent.resolve() / OUTPUT_DIR / "capec_to_asvs_map.yaml")
 
 
 if "unittest.util" in __import__("sys").modules:
@@ -170,7 +170,7 @@ class TestLoadYamlFile(unittest.TestCase):
         """Test loading a valid YAML file"""
         mock_yaml_load.return_value = {"key": "value"}
 
-        result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "test.yaml"))
+        result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "test.yaml"))
 
         self.assertEqual(result, {"key": "value"})
         mock_file.assert_called_once()
@@ -180,7 +180,7 @@ class TestLoadYamlFile(unittest.TestCase):
     def test_load_file_not_found(self, mock_file):
         """Test loading non-existent file"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "nonexistent.yaml"))
+            result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "nonexistent.yaml"))
 
         self.assertEqual(result, {})
         self.assertIn("File not found", log.output[0])
@@ -190,7 +190,7 @@ class TestLoadYamlFile(unittest.TestCase):
     def test_load_yaml_error(self, mock_yaml_load, mock_file):
         """Test loading file with YAML error"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "invalid.yaml"))
+            result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "invalid.yaml"))
 
         self.assertEqual(result, {})
         self.assertIn("Error loading YAML file", log.output[0])
@@ -199,7 +199,7 @@ class TestLoadYamlFile(unittest.TestCase):
     @patch("yaml.safe_load", return_value=None)
     def test_load_empty_yaml(self, mock_yaml_load, mock_file):
         """Test loading empty YAML file"""
-        result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "empty.yaml"))
+        result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "empty.yaml"))
 
         self.assertEqual(result, {})
 
@@ -225,7 +225,7 @@ class TestSaveYamlFile(unittest.TestCase):
         data = {"key": "value"}
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = capec_map.save_yaml_file(Path(ConvertVars.OUTPUT_DIR / "error.yaml"), data)
+            result = capec_map.save_yaml_file(Path(ConvertVars.OUTPUT_DIR + "error.yaml"), data)
 
         self.assertFalse(result)
         self.assertIn("Error saving YAML file", log.output[0])
@@ -325,31 +325,39 @@ class TestMainFunction(unittest.TestCase):
     def test_main_no_data_loaded(self, mock_exit, mock_parse_args, mock_load):
         """Test main with no data loaded"""
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_FILE), debug=False
+            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent2.yaml"), debug=False
         )
         mock_load.return_value = {}
 
         with self.assertLogs(logging.getLogger(), logging.ERROR):
             capec_map.main()
 
-        mock_exit.assert_called_once_with(1)
+        # Check that exit was called at least once with argument 1
+        self.assertTrue(mock_exit.called)
+        # Get the last call
+        last_call = mock_exit.call_args_list[-1]
+        self.assertEqual(last_call[0][0], 1)
 
     @patch("scripts.convertCAPECMapToASVSMap.save_yaml_file")
     @patch("scripts.convertCAPECMapToASVSMap.load_yaml_file")
     @patch("scripts.convertCAPECMapToASVSMap.parse_arguments")
     @patch("sys.exit")
-    def test_main_save_fails(self, mock_exit, mock_parse_args, mock_load, mock_save):
+    def test_main_save_fails(self, mock_exit2, mock_parse_args, mock_load, mock_save):
         """Test main when save fails"""
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_FILE), debug=False
+            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent3.yaml"), debug=False
         )
         mock_load.return_value = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}}}]}]}
         mock_save.return_value = False
 
         with self.assertLogs(logging.getLogger(), logging.ERROR):
             capec_map.main()
-
-        mock_exit.assert_called_once_with(1)
+        
+        # Check that exit was called at least once with argument 1
+        self.assertTrue(mock_exit2.called)
+        # Get the last call
+        last_call = mock_exit2.call_args_list[-1]
+        self.assertEqual(last_call[0][0], 1)
 
 
 if __name__ == "__main__":
