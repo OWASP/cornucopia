@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 # Atheris only supports python 3.11 https://github.com/google/atheris/blob/master/README.md#installation-instructions
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
-RUN python3 -m pip install --upgrade wheel setuptools setuptools_scm PyInstaller==6.18.0
+RUN python3 -m pip install --no-cache-dir --upgrade wheel setuptools setuptools_scm PyInstaller==6.18.0
 COPY . $SRC/cornucopia
 WORKDIR $SRC/cornucopia
 COPY .clusterfuzzlite/build.sh $SRC/

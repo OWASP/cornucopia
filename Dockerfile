@@ -25,14 +25,13 @@ RUN apk add --no-cache \
     libc-dev \
     make
 COPY --chown=builder:union requirements.txt ./
-RUN pip install -r requirements.txt --require-hashes
-RUN pip install pipenv
+RUN pip install --no-cache-dir -r requirements.txt --require-hashes
 USER builder
 # Install Python dependencies so they are cached
 ARG workdir
 WORKDIR ${workdir}
 COPY --chown=builder:union Pipfile Pipfile.lock ./
-RUN pipenv --python "$(which python)" install --ignore-pipfile --dev
+RUN pipenv --python "$(which python)" install --no-cache-dir --ignore-pipfile --dev
 ENTRYPOINT ["/usr/local/bin/pipenv"]
 
 FROM mvdan/shfmt@sha256:9e915e1d22ad71a19a869cfe922127944783dd54406d9ebfb1c3115a26122279 AS shfmt

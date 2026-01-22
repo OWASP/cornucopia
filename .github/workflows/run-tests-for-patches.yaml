@@ -20,8 +20,8 @@ jobs:
   call-run-website-tests:
     name: Build and run Website Tests
     needs: hardening
-    uses: ./.github/workflows/build-website.yaml
+    uses: ./.github/workflows/build-website.yml
   call-run-build-copi-tests:
     name: Build and run COPI Tests
     needs: hardening
-    uses: ./.github/workflows/copi-build.yaml
+    uses: ./.github/workflows/copi-build.yml

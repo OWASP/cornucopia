@@ -58,7 +58,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt --require-hashes
-          pip install pipenv
           pipenv install -d
       - name: Generate new output files
         run: |
