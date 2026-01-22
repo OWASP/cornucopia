@@ -64,7 +64,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
             output_path=self.test_output_path, input_path=self.test_input_file, debug=False
         )
 
-        capec.createCAPECPages(data)
+        capec.create_capec_pages(data)
 
         attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
 
@@ -97,7 +97,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         )
 
         # Create pages
-        capec.createCAPECPages(data)
+        capec.create_capec_pages(data)
 
         for pattern in attack_patterns:
             pattern_id = str(pattern["_ID"])
@@ -115,7 +115,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         )
 
         # Create pages
-        capec.createCAPECPages(data)
+        capec.create_capec_pages(data)
 
         attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
         pattern = attack_patterns[0]
@@ -177,7 +177,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         self.assertTrue(is_valid)
 
         with self.assertLogs(logging.getLogger(), logging.INFO):
-            capec.createCAPECPages(data)
+            capec.create_capec_pages(data)
 
         attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
 
@@ -234,7 +234,7 @@ class TestConvertCAPECWithOutputDirectory(unittest.TestCase):
         data = capec.load_json_file(self.test_input_file)
         self.assertTrue(capec.validate_json_data(data))
 
-        capec.createCAPECPages(data)
+        capec.create_capec_pages(data)
 
         attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
         first_pattern_id = str(attack_patterns[0]["_ID"])

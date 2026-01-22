@@ -9,6 +9,10 @@ import scripts.convertCAPECMapToASVSMap as capec_map
 
 capec_map.convert_vars = capec_map.ConvertVars()
 
+class ConvertVars:
+    OUTPUT_DIR = Path(__file__).parent.parent.resolve() / "/test_files/output"
+    OUTPUT_FILE = Path(__file__).parent.parent.resolve() / OUTPUT_DIR / "capec_to_asvs_map.yaml"
+
 
 if "unittest.util" in __import__("sys").modules:
     # Show full diff in self.assertEqual.
@@ -166,7 +170,7 @@ class TestLoadYamlFile(unittest.TestCase):
         """Test loading a valid YAML file"""
         mock_yaml_load.return_value = {"key": "value"}
 
-        result = capec_map.load_yaml_file(Path("test.yaml"))
+        result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "test.yaml"))
 
         self.assertEqual(result, {"key": "value"})
         mock_file.assert_called_once()
@@ -176,7 +180,7 @@ class TestLoadYamlFile(unittest.TestCase):
     def test_load_file_not_found(self, mock_file):
         """Test loading non-existent file"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = capec_map.load_yaml_file(Path("nonexistent.yaml"))
+            result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "nonexistent.yaml"))
 
         self.assertEqual(result, {})
         self.assertIn("File not found", log.output[0])
@@ -186,7 +190,7 @@ class TestLoadYamlFile(unittest.TestCase):
     def test_load_yaml_error(self, mock_yaml_load, mock_file):
         """Test loading file with YAML error"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = capec_map.load_yaml_file(Path("invalid.yaml"))
+            result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "invalid.yaml"))
 
         self.assertEqual(result, {})
         self.assertIn("Error loading YAML file", log.output[0])
@@ -195,7 +199,7 @@ class TestLoadYamlFile(unittest.TestCase):
     @patch("yaml.safe_load", return_value=None)
     def test_load_empty_yaml(self, mock_yaml_load, mock_file):
         """Test loading empty YAML file"""
-        result = capec_map.load_yaml_file(Path("empty.yaml"))
+        result = capec_map.load_yaml_file(Path(ConvertVars.OUTPUT_DIR / "empty.yaml"))
 
         self.assertEqual(result, {})
 
@@ -209,7 +213,7 @@ class TestSaveYamlFile(unittest.TestCase):
         """Test saving a valid YAML file"""
         data = {"key": "value"}
 
-        result = capec_map.save_yaml_file(Path("output.yaml"), data)
+        result = capec_map.save_yaml_file(Path(ConvertVars.OUTPUT_FILE), data)
 
         self.assertTrue(result)
         mock_file.assert_called_once()
@@ -221,7 +225,7 @@ class TestSaveYamlFile(unittest.TestCase):
         data = {"key": "value"}
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = capec_map.save_yaml_file(Path("error.yaml"), data)
+            result = capec_map.save_yaml_file(Path(ConvertVars.OUTPUT_DIR / "error.yaml"), data)
 
         self.assertFalse(result)
         self.assertIn("Error saving YAML file", log.output[0])
@@ -246,9 +250,9 @@ class TestParseArguments(unittest.TestCase):
 
     def test_parse_custom_output_path(self):
         """Test parsing with custom output path"""
-        args = capec_map.parse_arguments(["-o", "custom/output.yaml"])
+        args = capec_map.parse_arguments(["-o", ConvertVars.OUTPUT_FILE])
 
-        self.assertEqual(args.output_path, "custom/output.yaml")
+        self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
 
     def test_parse_debug_flag(self):
         """Test parsing with debug flag"""
@@ -258,18 +262,18 @@ class TestParseArguments(unittest.TestCase):
 
     def test_parse_all_arguments(self):
         """Test parsing with all arguments"""
-        args = capec_map.parse_arguments(["-i", "input.yaml", "-o", "output.yaml", "-d"])
+        args = capec_map.parse_arguments(["-i", "input.yaml", "-o", ConvertVars.OUTPUT_FILE, "-d"])
 
         self.assertEqual(args.input_path, "input.yaml")
-        self.assertEqual(args.output_path, "output.yaml")
+        self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
         self.assertTrue(args.debug)
 
     def test_parse_long_form_arguments(self):
         """Test parsing with long form arguments"""
-        args = capec_map.parse_arguments(["--input-path", "input.yaml", "--output-path", "output.yaml", "--debug"])
+        args = capec_map.parse_arguments(["--input-path", "input.yaml", "--output-path", ConvertVars.OUTPUT_FILE, "--debug"])
 
         self.assertEqual(args.input_path, "input.yaml")
-        self.assertEqual(args.output_path, "output.yaml")
+        self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
         self.assertTrue(args.debug)
 
 
@@ -304,7 +308,7 @@ class TestMainFunction(unittest.TestCase):
         """Test successful main execution"""
         # Setup mocks
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path("output.yaml"), debug=False
+            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_FILE), debug=False
         )
         mock_load.return_value = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}}}]}]}
         mock_save.return_value = True
@@ -321,7 +325,7 @@ class TestMainFunction(unittest.TestCase):
     def test_main_no_data_loaded(self, mock_exit, mock_parse_args, mock_load):
         """Test main with no data loaded"""
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path("output.yaml"), debug=False
+            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_FILE), debug=False
         )
         mock_load.return_value = {}
 
@@ -337,7 +341,7 @@ class TestMainFunction(unittest.TestCase):
     def test_main_save_fails(self, mock_exit, mock_parse_args, mock_load, mock_save):
         """Test main when save fails"""
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path("output.yaml"), debug=False
+            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_FILE), debug=False
         )
         mock_load.return_value = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}}}]}]}
         mock_save.return_value = False

@@ -51,31 +51,30 @@ def parse_description(description_field: Any) -> str:
 
 
 def validate_json_data(data: dict[str, Any]) -> bool:
-    valid = True
     if not data:
         logging.error("No data provided")
-        valid = False
+        return False
     if "Attack_Pattern_Catalog" not in data:
         logging.error("Missing 'Attack_Pattern_Catalog' key in data")
-        valid = False
+        return False
     catalog = data["Attack_Pattern_Catalog"]
     if not isinstance(catalog, dict):
         logging.error("'Attack_Pattern_Catalog' is not a dictionary")
-        valid = False
+        return False
     if "Attack_Patterns" not in catalog:
         logging.error("Missing 'Attack_Patterns' key in 'Attack_Pattern_Catalog'")
-        valid = False
+        return False
     patterns = catalog["Attack_Patterns"]
     if not isinstance(patterns, dict):
         logging.error("'Attack_Patterns' is not a dictionary")
-        valid = False
+        return False
     if "Attack_Pattern" not in patterns:
         logging.error("Missing 'Attack_Pattern' key in 'Attack_Patterns'")
-        valid = False
-    if not isinstance(patterns.get("Attack_Pattern"), list):
+        return False
+    if not isinstance(patterns["Attack_Pattern"], list):
         logging.error("'Attack_Pattern' is not a list")
-        valid = False
-    return valid
+        return False
+    return True
 
 
 def set_logging() -> None:

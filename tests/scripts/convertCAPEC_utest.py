@@ -262,7 +262,7 @@ class TestEmptyFolder(unittest.TestCase):
         self.assertIn("Error while emptying folder", log.output[0])
 
 
-class TestCreateCAPECPages(unittest.TestCase):
+class TestCreate_capec_pages(unittest.TestCase):
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convertCAPEC.create_folder")
     def test_create_capec_pages_single_pattern(self, mock_create_folder, mock_file):
@@ -285,7 +285,7 @@ class TestCreateCAPECPages(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.createCAPECPages(test_data)
+            capec.create_capec_pages(test_data)
 
         # Verify create_folder was called
         mock_create_folder.assert_called()
@@ -326,7 +326,7 @@ class TestCreateCAPECPages(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.createCAPECPages(test_data)
+            capec.create_capec_pages(test_data)
 
         # Verify create_folder was called twice (once for each pattern)
         self.assertEqual(mock_create_folder.call_count, 2)
@@ -360,7 +360,7 @@ class TestCreateCAPECPages(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.createCAPECPages(test_data)
+            capec.create_capec_pages(test_data)
 
         # Get the written content
         handle = mock_file()
