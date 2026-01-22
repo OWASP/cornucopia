@@ -24,15 +24,6 @@ export default defineConfig({
 			$domain: path.resolve(__dirname, './src/domain')
 		}
 	},
-	test: {
-		coverage: {
-			enabled: true, 
-			provider: 'v8', 
-			reporter: ['text', 'json', 'lcov'],
-			reportsDirectory: './coverage',
-		},
-		include: ['**/*.test.ts', '**/*.test.tsx']
-	},
 	plugins: [
 		sveltekit(),
 		VitePluginRestart(vitePluginRestartOptions),
