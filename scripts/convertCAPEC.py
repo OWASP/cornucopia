@@ -58,14 +58,14 @@ def validate_json_data(data: dict[str, Any]) -> bool:
     if "Attack_Pattern_Catalog" not in data:
         logging.error("Missing 'Attack_Pattern_Catalog' key in data")
         valid = False
-    catalog = data.get("Attack_Pattern_Catalog")
+    catalog = data["Attack_Pattern_Catalog"]
     if not isinstance(catalog, dict):
         logging.error("'Attack_Pattern_Catalog' is not a dictionary")
         valid = False
     if "Attack_Patterns" not in catalog:
         logging.error("Missing 'Attack_Patterns' key in 'Attack_Pattern_Catalog'")
         valid = False
-    patterns = catalog.get("Attack_Patterns")
+    patterns = catalog["Attack_Patterns"]
     if not isinstance(patterns, dict):
         logging.error("'Attack_Patterns' is not a dictionary")
         valid = False
