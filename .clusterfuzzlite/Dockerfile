@@ -1,11 +1,20 @@
-FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:c0021e88f13312e7706c49e6348fe442b641ff46d032d9846131a60b68dea50d
-RUN apt-get update && apt-get install -y make autoconf automake libtool curl gcc libc-dev software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa -y
+FROM gcr.io/oss-fuzz-base/base-builder-python:ubuntu-24-04@sha256:79f6e0ac4506a75757099bfea8cfd52d1bb0e2f92ca21c64755151b655ce23e1
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    autoconf \
+    automake \
+    curl \
+    gcc \
+    libc-dev \
+    libtool \
+    make \
+    libxml2-dev \
+    libxslt-dev \
+    python3-dev \
+    python3-venv \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 # Atheris only supports python 3.11 https://github.com/google/atheris/blob/master/README.md#installation-instructions
-RUN apt upgrade -y && apt-get install -y python3.10 python3.10-dev python3.10-distutils libxml2-dev libxslt-dev
-RUN apt-get install -y python3-pip
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
-RUN python3.10 -m pip install --upgrade wheel setuptools setuptools_scm PyInstaller==6.13.0
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
+RUN python3 -m pip install --upgrade wheel setuptools setuptools_scm PyInstaller==6.18.0
 COPY . $SRC/cornucopia
 WORKDIR $SRC/cornucopia
 COPY .clusterfuzzlite/build.sh $SRC/

@@ -1,4 +1,4 @@
-FROM python:alpine3.20@sha256:40a4559d3d6b2117b1fbe426f17d55b9100fa40609733a1d0c3f39e2151d4b33 AS pipenv
+FROM python:3.12.12-alpine3.22@sha256:d82291d418d5c47f267708393e40599ae836f2260b0519dd38670e9d281657f5 AS pipenv
 RUN apk add --no-cache shadow
 # UID of current user who runs the build
 ARG user_id
@@ -26,6 +26,7 @@ RUN apk add --no-cache \
     make
 COPY --chown=builder:union requirements.txt ./
 RUN pip install -r requirements.txt --require-hashes
+RUN pip install pipenv
 USER builder
 # Install Python dependencies so they are cached
 ARG workdir
