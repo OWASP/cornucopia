@@ -28,6 +28,7 @@
           - name: Install dependencies
             run: |
               pip install -r requirements.txt --require-hashes
+              pip install pipenv
               pipenv install --ignore-pipfile --dev
           # Run the tests
           - name: Run unit tests
