@@ -15,6 +15,8 @@ defmodule Copi.Application do
       {Phoenix.PubSub, name: Copi.PubSub},
       # Start the DNS clustering
       {DNSCluster, query: Application.get_env(:copi, :dns_cluster_query) || :ignore},
+      # Start the Rate Limiter for security (CAPEC-212 protection)
+      Copi.RateLimiter,
       # Start the Endpoint (http/https)
       CopiWeb.Endpoint
       # Start a worker by calling: Copi.Worker.start_link(arg)
