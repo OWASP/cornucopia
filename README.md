@@ -294,6 +294,7 @@ Run Coding Style Check
 
 ### Docker container
 
+You may run the converter inside a docker container. This is useful if you do not want to install all dependencies on your local machine and not worry about permission issues.
 You can also run the converter inside a docker container. To build the container run:
 
 ```powershell
@@ -303,6 +304,12 @@ docker build --target pipenv `
   --build-arg home=/home/builder `
   --build-arg workdir=/workspace `
   -t cornucopia-converter .
+```
+
+To install dependencies inside the container run:
+
+```powershell
+    docker run --rm -v ${PWD}:/workspace cornucopia-converter install --dev
 ```
 
 To login to the container and mount the current working directory inside the container run:
