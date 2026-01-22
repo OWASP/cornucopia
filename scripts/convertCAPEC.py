@@ -30,13 +30,14 @@ def create_capec_pages(data: dict[str, Any]) -> None:
         f = open(capec_path / "index.md", "w", encoding="utf-8")
         f.write(f"# CAPEC-{i['_ID']}: {i['_Name']}\r\n")
         f.write("## Description\r\n")
-        f.write(f"{parse_description(i['Description'])}\r\n")
+        f.write(f"{parse_description(i.get('Description', ''))}\r\n")
         f.write(f"Source: [CAPEC-{i['_ID']}](https://capec.mitre.org/data/definitions/{i['_ID']}.html)\r\n")
         f.close()
     logging.info("Created %d CAPEC pages", len(data["Attack_Pattern"]))
 
 
-def parse_description(description_field: dict[str, Any]) -> str:
+def parse_description(description_field: Any) -> str:
+    """Parse CAPEC description field which can be dict, list, or string."""
     if isinstance(description_field, dict):
         if "Description" in description_field and "p" in description_field["Description"]:
             p_content = description_field["Description"]["p"]
@@ -57,19 +58,21 @@ def validate_json_data(data: dict[str, Any]) -> bool:
     if "Attack_Pattern_Catalog" not in data:
         logging.error("Missing 'Attack_Pattern_Catalog' key in data")
         valid = False
-    if not isinstance(data["Attack_Pattern_Catalog"], dict):
+    catalog = data.get("Attack_Pattern_Catalog")
+    if not isinstance(catalog, dict):
         logging.error("'Attack_Pattern_Catalog' is not a dictionary")
         valid = False
-    if "Attack_Patterns" not in data["Attack_Pattern_Catalog"]:
+    if "Attack_Patterns" not in catalog:
         logging.error("Missing 'Attack_Patterns' key in 'Attack_Pattern_Catalog'")
         valid = False
-    if not isinstance(data["Attack_Pattern_Catalog"]["Attack_Patterns"], dict):
+    patterns = catalog.get("Attack_Patterns")
+    if not isinstance(patterns, dict):
         logging.error("'Attack_Patterns' is not a dictionary")
         valid = False
-    if "Attack_Pattern" not in data["Attack_Pattern_Catalog"]["Attack_Patterns"]:
+    if "Attack_Pattern" not in patterns:
         logging.error("Missing 'Attack_Pattern' key in 'Attack_Patterns'")
         valid = False
-    if not isinstance(data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"], list):
+    if not isinstance(patterns.get("Attack_Pattern"), list):
         logging.error("'Attack_Pattern' is not a list")
         valid = False
     return valid
@@ -151,7 +154,7 @@ def main() -> None:
     create_folder(directory / ConvertVars.DEFAULT_OUTPUT_PATH)
 
     data = load_json_file(directory / ConvertVars.DEFAULT_INPUT_PATH)
-    if not validate_json_data(data):
+    if not data or not validate_json_data(data):
         logging.error("Invalid CAPEC data structure")
         return
     create_capec_pages(data)
