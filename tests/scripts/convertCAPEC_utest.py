@@ -262,7 +262,7 @@ class TestEmptyFolder(unittest.TestCase):
         self.assertIn("Error while emptying folder", log.output[0])
 
 
-class TestCreate_capec_pages(unittest.TestCase):
+class TestCreateCapecPages(unittest.TestCase):
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convertCAPEC.create_folder")
     def test_create_capec_pages_single_pattern(self, mock_create_folder, mock_file):
