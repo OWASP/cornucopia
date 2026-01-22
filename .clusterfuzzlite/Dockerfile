@@ -2,8 +2,12 @@ FROM gcr.io/oss-fuzz-base/base-builder-python:v1@sha256:c0021e88f13312e7706c49e6
 RUN apt-get update && apt-get install -y --no-install-recommends autoconf automake curl gcc libc-dev libtool make software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 # Atheris only supports python 3.11 https://github.com/google/atheris/blob/master/README.md#installation-instructions
-RUN apt-get update && apt upgrade -y
-RUN apt-get install -y --no-install-recommends libxml2-dev libxslt-dev python3.10 python3.10-dev python3.10-distutils
+RUN apt-get update && apt upgrade -y && apt-get install -y --no-install-recommends \
+    libxml2-dev \
+    libxslt-dev \
+    python3.10 \
+    python3.10-dev \
+    python3.10-distutils
 RUN apt-get install -y --no-install-recommends python3-pip
 RUN apt-get clean
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
