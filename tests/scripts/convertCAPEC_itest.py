@@ -4,6 +4,7 @@ import os
 import logging
 import tempfile
 import shutil
+import argparse
 from pathlib import Path
 
 import scripts.convertCAPEC as capec
@@ -242,10 +243,6 @@ class TestConvertCAPECWithOutputDirectory(unittest.TestCase):
         self.assertTrue(output_file.exists())
 
         self.assertTrue(str(output_file).startswith(str(self.test_output_base)))
-
-
-# Import argparse for the integration tests
-import argparse
 
 
 if __name__ == "__main__":

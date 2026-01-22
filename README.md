@@ -173,6 +173,7 @@ The script:
 3. Outputs a unified YAML file mapping CAPEC codes to their associated ASVS requirements
 
 **Output format:**
+
 ```yaml
 54:
   owasp_asvs: [4.3.2, 13.2.2, 13.4.1, ...]
