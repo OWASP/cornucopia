@@ -263,12 +263,12 @@ git lfs pull
 For copi.owasp.org and cornucopia.owasp.org see separate README.md
 On Mac OSX and Ubuntu you may not need to go through all of these steps, but this should at least be a bulletproof way of getting started.
 
-    pip install pipenv --user
+    pip install -r requirements.txt --user
     # To get path to your python executable, you can
     # python -c "import os, sys; print(os.path.dirname(sys.executable))" 
     python -m pipenv shell --python "{path to python}"
-    pip install pipenv
-    pipenv install --dev
+    python -m pip install -r requirements.txt
+    python -m pipenv install --dev
 
 
 ### Coding style 
@@ -309,6 +309,7 @@ docker build --target pipenv `
 To install dependencies inside the container run:
 
 ```powershell
+    docker run --rm -v ${PWD}:/workspace cornucopia-converter run pip install -r requirements.txt
     docker run --rm -v ${PWD}:/workspace cornucopia-converter install --dev
 ```
 

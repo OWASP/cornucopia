@@ -7,6 +7,7 @@ resources/fonts/fivo_sans.zip filter=lfs diff=lfs merge=lfs -text
 *.ts text eol=lf
 *.json text eol=lf
 *.yaml text eol=lf
+*.yml text eol=lf
 *.lock text eol=lf
 *.txt text eol=lf
 *.md text eol=lf
@@ -21,4 +22,7 @@ resources/fonts/fivo_sans.zip filter=lfs diff=lfs merge=lfs -text
 *.scss text eol=lf
 *.toml text eol=lf
 *.gitignore text eol=lf
+.gitattributes text eol=lf
+.editorconfig text eol=lf
 Dockerfile text eol=lf
+Pipfile text eol=lf
