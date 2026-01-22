@@ -28,28 +28,44 @@ def extract_capec_mappings(data: dict[str, Any]) -> dict[int, set[str]]:
     if "suits" not in data:
         logging.warning("No 'suits' key found in data")
         return capec_to_asvs_map
-
+    
     for suit in data["suits"]:
-        if "cards" not in suit:
-            continue
-
-        for card in suit["cards"]:
-            if "capec_map" not in card:
-                continue
-
-            capec_map = card["capec_map"]
-            if not isinstance(capec_map, dict):
-                continue
-
-            for capec_code, asvs_reqs in capec_map.items():
-                if capec_code not in capec_to_asvs_map:
-                    capec_to_asvs_map[capec_code] = set()
-
-                for req in asvs_reqs.get("owasp_asvs", []):
-                    capec_to_asvs_map[capec_code].add(req)
+        _extract_capec_mapping_from_suit(suit, capec_to_asvs_map)
 
     logging.info("Extracted mappings for %d unique CAPEC codes", len(capec_to_asvs_map))
     return capec_to_asvs_map
+
+
+def _extract_capec_mapping_from_suit(suit: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]) -> None:
+    """Process a single suit and extract CAPEC mappings from its cards."""
+    if "cards" not in suit:
+        return
+
+    for card in suit["cards"]:
+        _extract_capec_mapping_from_card(card, capec_to_asvs_map)
+
+def _extract_capec_mapping_from_card(card: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]) -> None:
+    """Process a single card and extract its CAPEC mappings."""
+    if "capec_map" not in card:
+        return
+
+    capec_map = card["capec_map"]
+    if not isinstance(capec_map, dict):
+        return
+
+    for capec_code, asvs_reqs in capec_map.items():
+        _extract_and_add_asvs_requirements(capec_code, asvs_reqs, capec_to_asvs_map)
+
+
+def _extract_and_add_asvs_requirements(
+    capec_code: int, asvs_reqs: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]
+) -> None:
+    """Add ASVS requirements for a CAPEC code to the mapping."""
+    if capec_code not in capec_to_asvs_map:
+        capec_to_asvs_map[capec_code] = set()
+
+    for req in asvs_reqs.get("owasp_asvs", []):
+        capec_to_asvs_map[capec_code].add(req)
 
 
 def convert_to_output_format(capec_map: dict[int, set[str]]) -> Dict[int, dict[str, list[str]]]:

@@ -19,15 +19,15 @@ class ConvertVars:
     args: argparse.Namespace
 
 
-def createCAPECPages(data: dict[str, Any]) -> None:
+def create_capec_pages(data: dict[str, Any]) -> None:
     data = data["Attack_Pattern_Catalog"]["Attack_Patterns"]
     directory = Path(__file__).parent.resolve()
     for i in data["Attack_Pattern"]:
         name = str(i["_ID"])
-        capecPath = directory / convert_vars.args.output_path / name
-        create_folder(capecPath)
+        capec_path = directory / convert_vars.args.output_path / name
+        create_folder(capec_path)
 
-        f = open(capecPath / "index.md", "w", encoding="utf-8")
+        f = open(capec_path / "index.md", "w", encoding="utf-8")
         f.write(f"# CAPEC-{i['_ID']}: {i['_Name']}\r\n")
         f.write("## Description\r\n")
         f.write(f"{parse_description(i['Description'])}\r\n")
@@ -50,28 +50,29 @@ def parse_description(description_field: dict[str, Any]) -> str:
 
 
 def validate_json_data(data: dict[str, Any]) -> bool:
+    valid = True
     if not data:
         logging.error("No data provided")
-        return False
+        valid = False
     if "Attack_Pattern_Catalog" not in data:
         logging.error("Missing 'Attack_Pattern_Catalog' key in data")
-        return False
+        valid = False
     if not isinstance(data["Attack_Pattern_Catalog"], dict):
         logging.error("'Attack_Pattern_Catalog' is not a dictionary")
-        return False
+        valid = False
     if "Attack_Patterns" not in data["Attack_Pattern_Catalog"]:
         logging.error("Missing 'Attack_Patterns' key in 'Attack_Pattern_Catalog'")
-        return False
+        valid = False
     if not isinstance(data["Attack_Pattern_Catalog"]["Attack_Patterns"], dict):
         logging.error("'Attack_Patterns' is not a dictionary")
-        return False
+        valid = False
     if "Attack_Pattern" not in data["Attack_Pattern_Catalog"]["Attack_Patterns"]:
         logging.error("Missing 'Attack_Pattern' key in 'Attack_Patterns'")
-        return False
+        valid = False
     if not isinstance(data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"], list):
         logging.error("'Attack_Pattern' is not a list")
-        return False
-    return True
+        valid = False
+    return valid
 
 
 def set_logging() -> None:
@@ -134,7 +135,6 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     try:
         args = parser.parse_args(input_args)
     except argparse.ArgumentError as exc:
-        # sys.tracebacklimit = 0
         logging.error(exc.message)
         sys.exit()
     return args
@@ -154,7 +154,7 @@ def main() -> None:
     if not validate_json_data(data):
         logging.error("Invalid CAPEC data structure")
         return
-    createCAPECPages(data)
+    create_capec_pages(data)
 
     logging.info("CAPEC conversion process completed")
 
