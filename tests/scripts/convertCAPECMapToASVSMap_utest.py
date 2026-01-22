@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import unittest
-from unittest.mock import patch, mock_open, MagicMock, call
+from unittest.mock import patch, mock_open
 import argparse
 import logging
 from pathlib import Path
