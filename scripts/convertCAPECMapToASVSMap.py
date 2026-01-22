@@ -28,7 +28,7 @@ def extract_capec_mappings(data: dict[str, Any]) -> dict[int, set[str]]:
     if "suits" not in data:
         logging.warning("No 'suits' key found in data")
         return capec_to_asvs_map
-    
+
     for suit in data["suits"]:
         _extract_capec_mapping_from_suit(suit, capec_to_asvs_map)
 
@@ -43,6 +43,7 @@ def _extract_capec_mapping_from_suit(suit: dict[str, Any], capec_to_asvs_map: di
 
     for card in suit["cards"]:
         _extract_capec_mapping_from_card(card, capec_to_asvs_map)
+
 
 def _extract_capec_mapping_from_card(card: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]) -> None:
     """Process a single card and extract its CAPEC mappings."""

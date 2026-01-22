@@ -9,6 +9,7 @@ import scripts.convertCAPECMapToASVSMap as capec_map
 
 capec_map.convert_vars = capec_map.ConvertVars()
 
+
 class ConvertVars:
     OUTPUT_DIR: str = str(Path(__file__).parent.parent.resolve() / "/test_files/output")
     OUTPUT_FILE: str = str(Path(__file__).parent.parent.resolve() / OUTPUT_DIR / "capec_to_asvs_map.yaml")
@@ -270,7 +271,9 @@ class TestParseArguments(unittest.TestCase):
 
     def test_parse_long_form_arguments(self):
         """Test parsing with long form arguments"""
-        args = capec_map.parse_arguments(["--input-path", "input.yaml", "--output-path", ConvertVars.OUTPUT_FILE, "--debug"])
+        args = capec_map.parse_arguments(
+            ["--input-path", "input.yaml", "--output-path", ConvertVars.OUTPUT_FILE, "--debug"]
+        )
 
         self.assertEqual(args.input_path, "input.yaml")
         self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
@@ -352,7 +355,7 @@ class TestMainFunction(unittest.TestCase):
 
         with self.assertLogs(logging.getLogger(), logging.ERROR):
             capec_map.main()
-        
+
         # Check that exit was called at least once with argument 1
         self.assertTrue(mock_exit2.called)
         # Get the last call
