@@ -1,10 +1,7 @@
 ---
   name: Build and Test Copi
   on:
-    pull_request:
-      paths:
-      - 'copi.owasp.org/**'
-      - '.github/workflows/copi-build.yml'
+    workflow_call:
     workflow_dispatch:
   env:
     MIX_ENV: test
