@@ -37,4 +37,4 @@ mypy = "*"
 types-pyyaml = "==6.0.12.20250915"
 
 [requires]
-python_version = "3.11"
+python_version = "3.12"
