@@ -96,8 +96,15 @@ class CornucopiaSmokeTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         # Check for typical SvelteKit hydration markers or app structure
         content = response.text
-        # Look for either SvelteKit app div or script tags that would execute JS
-        has_app_structure = 'id=' in content and 'script' in content.lower()
+        # Look for SvelteKit-specific hydration markers or module scripts that would execute JS
+        sveltekit_markers = (
+            "data-sveltekit-preload-data",
+            "data-sveltekit-hydrate",
+            "__sveltekit",
+        )
+        has_sveltekit_markers = any(marker in content for marker in sveltekit_markers)
+        has_module_script = '<script type="module"' in content
+        has_app_structure = has_sveltekit_markers or has_module_script
         self.assertTrue(has_app_structure, "Page should have structure for JavaScript execution")
 
 
