@@ -12,7 +12,6 @@ Issue: #1265
 import unittest
 import requests
 import time
-from typing import Dict, Any
 from urllib.parse import urljoin
 import os
 
