@@ -31,8 +31,8 @@ class TestExtractAsvsToCapecMappings(unittest.TestCase):
         self.assertIn("4.3.2", result)
         self.assertIn("13.2.2", result)
         self.assertIn("13.4.1", result)
-        self.assertEqual(result["4.3.2"], {54})
-        self.assertEqual(result["13.2.2"], {54})
+        self.assertEqual(result["4.3.2"], {'54'})
+        self.assertEqual(result["13.2.2"], {'54'})
 
     def test_extract_multiple_capec_same_asvs(self):
         """Test merging CAPEC codes from multiple cards with same ASVS requirement"""
@@ -50,7 +50,7 @@ class TestExtractAsvsToCapecMappings(unittest.TestCase):
 
         self.assertIn("13.2.2", result)
         # Should merge CAPEC codes for same ASVS requirement
-        self.assertEqual(result["13.2.2"], {54, 116})
+        self.assertEqual(result["13.2.2"], {'54', '116'})
 
     def test_extract_multiple_asvs_requirements(self):
         """Test extracting multiple ASVS requirements"""
