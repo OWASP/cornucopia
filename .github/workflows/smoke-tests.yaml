@@ -16,13 +16,8 @@ permissions:
   contents: read
 
 jobs:
-  hardening:
-    name: Harden runner
-    uses: ./.github/workflows/hardening.yaml
-
   smoke-tests:
     name: Run Smoke Tests
-    needs: hardening
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -32,20 +27,23 @@ jobs:
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: '3.11'
+          cache: 'pipenv'
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt --require-hashes
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install --ignore-pipfile --dev
 
       - name: Run smoke tests for copi.owasp.org
-        run: python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
+        run: pipenv run python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
         continue-on-error: false
 
       - name: Run smoke tests for cornucopia.owasp.org
-        run: python -m unittest tests.scripts.smoke_tests.CornucopiaSmokeTests -v
+        run: pipenv run python -m unittest tests.scripts.smoke_tests.CornucopiaSmokeTests -v
         continue-on-error: false
 
       - name: Run integration smoke tests
-        run: python -m unittest tests.scripts.smoke_tests.IntegrationSmokeTests -v
+        run: pipenv run python -m unittest tests.scripts.smoke_tests.IntegrationSmokeTests -v
         continue-on-error: false
 
       - name: Summary

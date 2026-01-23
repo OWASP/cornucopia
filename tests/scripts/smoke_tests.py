@@ -21,53 +21,42 @@ class CopiSmokeTests(unittest.TestCase):
 
     BASE_URL = os.environ.get("COPI_BASE_URL", "https://copi.owasp.org")
 
-    def test_01_homepage_loads(self) -> None:
-        """Test that the Copi homepage loads successfully"""
+    def _make_request(self, url: str, timeout: int = 30) -> requests.Response:
+        """Helper method to make HTTP requests with error handling"""
         try:
-            response = requests.get(self.BASE_URL, timeout=30)
-            self.assertEqual(response.status_code, 200, f"Homepage returned status {response.status_code}")
-            self.assertIn("copi", response.text.lower(), "Homepage should contain 'copi' text")
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {self.BASE_URL} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {self.BASE_URL} timed out after 30 seconds")
-
-    def test_02_game_route_accessible(self) -> None:
-        """Test that a game-related route is accessible"""
-        url = urljoin(self.BASE_URL, "/")
-        try:
-            response = requests.get(url, timeout=30)
-            self.assertEqual(response.status_code, 200, f"Game route returned status {response.status_code}")
+            return requests.get(url, timeout=timeout)
         except requests.exceptions.ConnectionError:
             self.fail(f"Failed to connect to {url} - service may be down")
         except requests.exceptions.Timeout:
-            self.fail(f"Request to {url} timed out after 30 seconds")
+            self.fail(f"Request to {url} timed out after {timeout} seconds")
+
+    def test_01_homepage_loads(self) -> None:
+        """Test that the Copi homepage loads successfully"""
+        response = self._make_request(self.BASE_URL)
+        self.assertEqual(response.status_code, 200, f"Homepage returned status {response.status_code}")
+        self.assertIn("copi", response.text.lower(), "Homepage should contain 'copi' text")
+
+    def test_02_cards_route_accessible(self) -> None:
+        """Test that the cards route is accessible"""
+        url = urljoin(self.BASE_URL, "/cards")
+        response = self._make_request(url)
+        self.assertEqual(response.status_code, 200, f"Cards route returned status {response.status_code}")
 
     def test_03_javascript_loads(self) -> None:
         """Test that JavaScript assets are being served"""
-        try:
-            response = requests.get(self.BASE_URL, timeout=30)
-            self.assertEqual(response.status_code, 200)
-            self.assertTrue(
-                '<script' in response.text or 'app.js' in response.text or 'phoenix' in response.text.lower(),
-                "JavaScript should be loaded on the page"
-            )
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {self.BASE_URL} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {self.BASE_URL} timed out after 30 seconds")
+        response = self._make_request(self.BASE_URL)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            '<script' in response.text or 'app.js' in response.text or 'phoenix' in response.text.lower(),
+            "JavaScript should be loaded on the page"
+        )
 
     def test_04_health_check(self) -> None:
         """Test that the application server is healthy and responding"""
-        try:
-            response = requests.get(self.BASE_URL, timeout=30)
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('content-type', [h.lower() for h in response.headers.keys()],
-                         "Response should include content-type header")
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {self.BASE_URL} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {self.BASE_URL} timed out after 30 seconds")
+        response = self._make_request(self.BASE_URL)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('content-type', [h.lower() for h in response.headers.keys()],
+                     "Response should include content-type header")
 
 
 class CornucopiaSmokeTests(unittest.TestCase):
@@ -75,72 +64,56 @@ class CornucopiaSmokeTests(unittest.TestCase):
 
     BASE_URL = os.environ.get("CORNUCOPIA_BASE_URL", "https://cornucopia.owasp.org")
 
+    def _make_request(self, url: str, timeout: int = 30) -> requests.Response:
+        """Helper method to make HTTP requests with error handling"""
+        try:
+            return requests.get(url, timeout=timeout)
+        except requests.exceptions.ConnectionError:
+            self.fail(f"Failed to connect to {url} - service may be down")
+        except requests.exceptions.Timeout:
+            self.fail(f"Request to {url} timed out after {timeout} seconds")
+
     def test_01_homepage_loads(self) -> None:
         """Test that the Cornucopia homepage loads successfully"""
-        try:
-            response = requests.get(self.BASE_URL, timeout=30)
-            self.assertEqual(response.status_code, 200, f"Homepage returned status {response.status_code}")
-            self.assertIn("cornucopia", response.text.lower(), "Homepage should contain 'cornucopia' text")
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {self.BASE_URL} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {self.BASE_URL} timed out after 30 seconds")
+        response = self._make_request(self.BASE_URL)
+        self.assertEqual(response.status_code, 200, f"Homepage returned status {response.status_code}")
+        self.assertIn("cornucopia", response.text.lower(), "Homepage should contain 'cornucopia' text")
 
     def test_02_cards_route_accessible(self) -> None:
         """Test that the cards browser route is accessible"""
         url = urljoin(self.BASE_URL, "/cards")
-        try:
-            response = requests.get(url, timeout=30)
-            self.assertEqual(response.status_code, 200, f"Cards route returned status {response.status_code}")
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {url} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {url} timed out after 30 seconds")
+        response = self._make_request(url)
+        self.assertEqual(response.status_code, 200, f"Cards route returned status {response.status_code}")
 
     def test_03_javascript_loads(self) -> None:
         """Test that JavaScript/Svelte bundles are being served"""
-        try:
-            response = requests.get(self.BASE_URL, timeout=30)
-            self.assertEqual(response.status_code, 200)
-            self.assertTrue(
-                '<script' in response.text or '_app' in response.text or 'svelte' in response.text.lower(),
-                "JavaScript/Svelte should be loaded on the page"
-            )
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {self.BASE_URL} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {self.BASE_URL} timed out after 30 seconds")
+        response = self._make_request(self.BASE_URL)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            '<script' in response.text or '_app' in response.text or 'svelte' in response.text.lower(),
+            "JavaScript/Svelte should be loaded on the page"
+        )
 
     def test_04_card_detail_route_accessible(self) -> None:
         """Test that individual card routes are accessible"""
         url = urljoin(self.BASE_URL, "/cards/VE2")
-        try:
-            response = requests.get(url, timeout=30)
-            self.assertEqual(response.status_code, 200, f"Card detail route returned status {response.status_code}")
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {url} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {url} timed out after 30 seconds")
+        response = self._make_request(url)
+        self.assertEqual(response.status_code, 200, f"Card detail route returned status {response.status_code}")
 
     def test_05_javascript_execution_check(self) -> None:
         """Test that the page structure indicates JavaScript is functional"""
-        try:
-            response = requests.get(self.BASE_URL, timeout=30)
-            self.assertEqual(response.status_code, 200)
-            content = response.text
-            sveltekit_markers = (
-                "data-sveltekit-preload-data",
-                "data-sveltekit-hydrate",
-                "__sveltekit",
-            )
-            has_sveltekit_markers = any(marker in content for marker in sveltekit_markers)
-            has_module_script = '<script type="module"' in content
-            has_app_structure = has_sveltekit_markers or has_module_script
-            self.assertTrue(has_app_structure, "Page should have structure for JavaScript execution")
-        except requests.exceptions.ConnectionError:
-            self.fail(f"Failed to connect to {self.BASE_URL} - service may be down")
-        except requests.exceptions.Timeout:
-            self.fail(f"Request to {self.BASE_URL} timed out after 30 seconds")
+        response = self._make_request(self.BASE_URL)
+        self.assertEqual(response.status_code, 200)
+        content = response.text
+        sveltekit_markers = (
+            "data-sveltekit-preload-data",
+            "data-sveltekit-hydrate",
+            "__sveltekit",
+        )
+        has_sveltekit_markers = any(marker in content for marker in sveltekit_markers)
+        has_module_script = '<script type="module"' in content
+        has_app_structure = has_sveltekit_markers or has_module_script
+        self.assertTrue(has_app_structure, "Page should have structure for JavaScript execution")
 
 
 class IntegrationSmokeTests(unittest.TestCase):
@@ -149,26 +122,30 @@ class IntegrationSmokeTests(unittest.TestCase):
     COPI_URL = os.environ.get("COPI_BASE_URL", "https://copi.owasp.org")
     CORNUCOPIA_URL = os.environ.get("CORNUCOPIA_BASE_URL", "https://cornucopia.owasp.org")
 
+    def _make_request(self, url: str, timeout: int = 30) -> requests.Response:
+        """Helper method to make HTTP requests with error handling"""
+        try:
+            return requests.get(url, timeout=timeout)
+        except requests.exceptions.ConnectionError as e:
+            self.fail(f"Failed to connect to {url} - {str(e)}")
+        except requests.exceptions.Timeout:
+            self.fail(f"Request to {url} timed out after {timeout} seconds")
+
     def test_both_applications_responsive(self) -> None:
         """Test that both applications respond within acceptable time"""
-        try:
-            start_time = time.time()
-            copi_response = requests.get(self.COPI_URL, timeout=30)
-            copi_time = time.time() - start_time
+        start_time = time.time()
+        copi_response = self._make_request(self.COPI_URL)
+        copi_time = time.time() - start_time
 
-            start_time = time.time()
-            cornucopia_response = requests.get(self.CORNUCOPIA_URL, timeout=30)
-            cornucopia_time = time.time() - start_time
+        start_time = time.time()
+        cornucopia_response = self._make_request(self.CORNUCOPIA_URL)
+        cornucopia_time = time.time() - start_time
 
-            self.assertEqual(copi_response.status_code, 200, "Copi should be accessible")
-            self.assertEqual(cornucopia_response.status_code, 200, "Cornucopia should be accessible")
+        self.assertEqual(copi_response.status_code, 200, "Copi should be accessible")
+        self.assertEqual(cornucopia_response.status_code, 200, "Cornucopia should be accessible")
 
-            self.assertLess(copi_time, 30, f"Copi took {copi_time:.2f}s to respond")
-            self.assertLess(cornucopia_time, 30, f"Cornucopia took {cornucopia_time:.2f}s to respond")
-        except requests.exceptions.ConnectionError as e:
-            self.fail(f"Failed to connect to one or both services - {str(e)}")
-        except requests.exceptions.Timeout:
-            self.fail("Request to one or both services timed out after 30 seconds")
+        self.assertLess(copi_time, 30, f"Copi took {copi_time:.2f}s to respond")
+        self.assertLess(cornucopia_time, 30, f"Cornucopia took {cornucopia_time:.2f}s to respond")
 
 
 if __name__ == "__main__":
