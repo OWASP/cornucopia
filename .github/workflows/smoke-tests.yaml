@@ -41,15 +41,12 @@ jobs:
 
       - name: Run smoke tests for copi.owasp.org
         run: python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
-        continue-on-error: false
 
       - name: Run smoke tests for cornucopia.owasp.org
         run: python -m unittest tests.scripts.smoke_tests.CornucopiaSmokeTests -v
-        continue-on-error: false
 
       - name: Run integration smoke tests
         run: python -m unittest tests.scripts.smoke_tests.IntegrationSmokeTests -v
-        continue-on-error: false
 
       - name: Summary
         if: always()
