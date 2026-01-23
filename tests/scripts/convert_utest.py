@@ -1151,6 +1151,8 @@ class TestGetFilesFromOfType(unittest.TestCase):
         want_files = list(
             path + os.sep + f
             for f in [
+                "edition-capec-version.yaml",
+                "webapp-capec-3.0.yaml",
                 "webapp-cards-3.0-en.yaml",
                 "webapp-cards-3.0-es.yaml",
                 "webapp-mappings-3.0.yaml",
