@@ -12,7 +12,7 @@ The smoke tests verify basic functionality of both deployed applications:
 
 ### For copi.owasp.org (Elixir/Phoenix)
 1. ✅ Homepage loads successfully (HTTP 200)
-2. ✅ Game routes are accessible
+2. ✅ Game route is accessible
 3. ✅ JavaScript assets are being served
 4. ✅ Server responds with proper HTTP headers
 
