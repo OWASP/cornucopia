@@ -387,6 +387,7 @@ When suggesting code:
 ## Example Patterns
 
 ### Secure: XSS Prevention
+
 ```javascript
 // V3.2.2: Use textContent for safe rendering
 element.textContent = userInput;  // Safe
