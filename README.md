@@ -104,7 +104,7 @@ Convert CAPEC JSON to Cornucopia format
 options:
   -h, --help            show this help message and exit
   -o OUTPUT_PATH, --output-path OUTPUT_PATH
-                        Path to store converted CAPEC files
+                        Directory to store converted CAPEC files
   -i INPUT_PATH, --input-path INPUT_PATH
                         Path to read CAPEC JSON files from
   -d, --debug           Output additional information to debug script
@@ -145,7 +145,9 @@ options:
   -i INPUT_PATH, --input-path INPUT_PATH
                         Path to input webapp-mappings YAML file
   -o OUTPUT_PATH, --output-path OUTPUT_PATH
-                        Path to save converted CAPEC-to-ASVS mapping YAML file
+                        Directory to save converted CAPEC-to-ASVS mapping and ASVS-to-CAPEC mapping YAML files
+  -v, --version         Version of the output file (e.g., 3 for 3.0)
+  -e, --edition.        edition of the output file (e.g., webapp or mobileapp)
   -d, --debug           Output additional information to debug script
 ```
 
