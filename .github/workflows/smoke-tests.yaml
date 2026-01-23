@@ -20,6 +20,8 @@ jobs:
   hardening:
     name: Harden runner
     uses: ./.github/workflows/hardening.yaml
+    with:
+      egress-policy: audit
 
   smoke-tests:
     name: Run Smoke Tests
