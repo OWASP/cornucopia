@@ -164,6 +164,7 @@ When reviewing code:
 For each finding, structure your response as:
 
 **[Severity] Vulnerability Name**
+
 - **Location**: File and line number
 - **ASVS Reference**: Specific ASVS 5.0 requirement(s)
 - **Issue**: Clear description of the vulnerability
