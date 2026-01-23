@@ -14,13 +14,13 @@ import requests
 import time
 from typing import Dict, Any
 from urllib.parse import urljoin
-
+import os
 
 class CopiSmokeTests(unittest.TestCase):
     """Smoke tests for copi.owasp.org (Elixir/Phoenix application)"""
 
     # Use environment variable for URL, default to production
-    BASE_URL = "https://copi.owasp.org"
+    BASE_URL = os.environ.get("COPI_BASE_URL", "https://copi.owasp.org")
 
     def test_01_homepage_loads(self) -> None:
         """Test that the Copi homepage loads successfully"""
