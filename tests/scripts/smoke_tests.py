@@ -30,7 +30,7 @@ class CopiSmokeTests(unittest.TestCase):
     def test_02_game_route_accessible(self) -> None:
         """Test that a game-related route is accessible"""
         # Test the game creation or lobby page
-        url = urljoin(self.BASE_URL, "/")
+        url = urljoin(self.BASE_URL, "/game")
         response = requests.get(url, timeout=30)
         self.assertEqual(response.status_code, 200, f"Game route returned status {response.status_code}")
 
