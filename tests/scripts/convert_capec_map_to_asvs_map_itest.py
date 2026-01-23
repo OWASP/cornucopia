@@ -17,7 +17,7 @@ if "unittest.util" in __import__("sys").modules:
 
 
 class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
-    """Integration tests for convertCAPECMapToASVSMap.py using real test data"""
+    """Integration tests for convert_capec_map_to_asvs_map.py using real test data"""
 
     def setUp(self) -> None:
         """Set up test environment with test data paths"""

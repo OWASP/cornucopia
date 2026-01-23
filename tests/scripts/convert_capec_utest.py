@@ -6,7 +6,7 @@ import json
 import logging
 from pathlib import Path
 
-import scripts.convertCAPEC as capec
+import scripts.convert_capec as capec
 
 capec.convert_vars = capec.ConvertVars()
 
@@ -264,7 +264,7 @@ class TestEmptyFolder(unittest.TestCase):
 
 class TestCreateCapecPages(unittest.TestCase):
     @patch("builtins.open", new_callable=mock_open)
-    @patch("scripts.convertCAPEC.create_folder")
+    @patch("scripts.convert_capec.create_folder")
     def test_create_capec_pages_single_pattern(self, mock_create_folder, mock_file):
         """Test creating CAPEC pages for a single attack pattern"""
         # Setup
@@ -304,7 +304,7 @@ class TestCreateCapecPages(unittest.TestCase):
         self.assertIn("Source: [CAPEC-123](https://capec.mitre.org/data/definitions/123.html)", written_content)
 
     @patch("builtins.open", new_callable=mock_open)
-    @patch("scripts.convertCAPEC.create_folder")
+    @patch("scripts.convert_capec.create_folder")
     def test_create_capec_pages_multiple_patterns(self, mock_create_folder, mock_file):
         """Test creating CAPEC pages for multiple attack patterns"""
         # Setup
@@ -335,7 +335,7 @@ class TestCreateCapecPages(unittest.TestCase):
         self.assertEqual(mock_file.call_count, 2)
 
     @patch("builtins.open", new_callable=mock_open)
-    @patch("scripts.convertCAPEC.create_folder")
+    @patch("scripts.convert_capec.create_folder")
     def test_create_capec_pages_complex_description(self, mock_create_folder, mock_file):
         """Test creating CAPEC pages with complex description format"""
         # Setup

@@ -7,7 +7,7 @@ import shutil
 import argparse
 from pathlib import Path
 
-import scripts.convertCAPEC as capec
+import scripts.convert_capec as capec
 
 capec.convert_vars = capec.ConvertVars()
 
@@ -18,7 +18,7 @@ if "unittest.util" in __import__("sys").modules:
 
 
 class TestConvertCAPECIntegration(unittest.TestCase):
-    """Integration tests for convertCAPEC.py using real test data"""
+    """Integration tests for convert_capec.py using real test data"""
 
     def setUp(self) -> None:
         """Set up test environment with test data paths"""

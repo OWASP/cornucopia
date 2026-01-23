@@ -5,7 +5,7 @@ import argparse
 import logging
 from pathlib import Path
 
-import scripts.convertCAPECMapToASVSMap as capec_map
+import scripts.convert_capec_map_to_asvs_map as capec_map
 
 capec_map.convert_vars = capec_map.ConvertVars()
 
@@ -400,9 +400,9 @@ class TestSetLogging(unittest.TestCase):
 class TestMainFunction(unittest.TestCase):
     """Test main function with mocked dependencies"""
 
-    @patch("scripts.convertCAPECMapToASVSMap.save_yaml_file")
-    @patch("scripts.convertCAPECMapToASVSMap.load_yaml_file")
-    @patch("scripts.convertCAPECMapToASVSMap.parse_arguments")
+    @patch("scripts.convert_capec_map_to_asvs_map.save_yaml_file")
+    @patch("scripts.convert_capec_map_to_asvs_map.load_yaml_file")
+    @patch("scripts.convert_capec_map_to_asvs_map.parse_arguments")
     @patch("sys.exit")
     def test_main_successful_execution(self, mock_exit, mock_parse_args, mock_load, mock_save):
         """Test successful main execution"""
@@ -424,8 +424,8 @@ class TestMainFunction(unittest.TestCase):
         self.assertEqual(mock_save.call_count, 2)
         mock_exit.assert_not_called()
 
-    @patch("scripts.convertCAPECMapToASVSMap.load_yaml_file")
-    @patch("scripts.convertCAPECMapToASVSMap.parse_arguments")
+    @patch("scripts.convert_capec_map_to_asvs_map.load_yaml_file")
+    @patch("scripts.convert_capec_map_to_asvs_map.parse_arguments")
     @patch("sys.exit")
     def test_main_no_data_loaded(self, mock_exit, mock_parse_args, mock_load):
         """Test main with no data loaded"""
@@ -447,9 +447,9 @@ class TestMainFunction(unittest.TestCase):
         last_call = mock_exit.call_args_list[-1]
         self.assertEqual(last_call[0][0], 1)
 
-    @patch("scripts.convertCAPECMapToASVSMap.save_yaml_file")
-    @patch("scripts.convertCAPECMapToASVSMap.load_yaml_file")
-    @patch("scripts.convertCAPECMapToASVSMap.parse_arguments")
+    @patch("scripts.convert_capec_map_to_asvs_map.save_yaml_file")
+    @patch("scripts.convert_capec_map_to_asvs_map.load_yaml_file")
+    @patch("scripts.convert_capec_map_to_asvs_map.parse_arguments")
     @patch("sys.exit")
     def test_main_save_fails(self, mock_exit2, mock_parse_args, mock_load, mock_save):
         """Test main when save fails"""
