@@ -17,7 +17,7 @@ class ConvertVars:
     args: argparse.Namespace
 
 
-def extract_asvs_to_capec_mappings(data: dict[str, Any]) -> dict[int, set[str]]:
+def extract_asvs_to_capec_mappings(data: dict[str, Any]) -> dict[str, set[str]]:
     """
     Extract ASVS to CAPEC mappings from the suits->cards->asvs_map structure
     and merge them into a unified map.
@@ -66,7 +66,7 @@ def _extract_and_add_capec_codes(
     for req in asvs_reqs.get("owasp_asvs", []):
         if req not in asvs_to_capec_map:
             asvs_to_capec_map[req] = set()
-        asvs_to_capec_map[req].add(capec_code)
+        asvs_to_capec_map[req].add(str(capec_code))
 
 
 def extract_capec_mappings(data: dict[str, Any]) -> dict[int, set[str]]:
