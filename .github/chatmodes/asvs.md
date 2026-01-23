@@ -1,11 +1,13 @@
 # OWASP ASVS - version 5.0
 
 ## Standard
+
 | # | ref | description | name | owner | version|
 | --- | --- | --- | --- | --- | --- |
 | 1 | ASVS-5.0.0 | The Application Security Verification Standard is a list of application security requirements that architects, developers, testers, security professionals, tool vendors, and consumers can use to define, build, test, and verify secure applications. | Application Security Verification Standard (ASVS) | Application Security Verification Standard Project | 5.0.0 |
 
 ## Standard's levels
+
 | # | ref | description | identifier | requirements |
 | --- | --- | --- | --- | --- |
 | 1 | level-1 | This level contains the minimum requirements to consider when securing an application and represents a critical starting point. | Level 1 | [V1.2.1, V1.2.2, V1.2.3, V1.2.4, V1.2.5, V1.3.1, V1.3.2, V1.5.1, V2.1.1, V2.2.1, V2.2.2, V2.3.1, V3.2.1, V3.2.2, V3.3.1, V3.4.1, V3.4.2, V3.5.1, V3.5.2, V3.5.3, V4.1.1, V4.4.1, V5.2.1, V5.2.2, V5.3.1, V5.3.2, V6.1.1, V6.2.1, V6.2.2, V6.2.3, V6.2.4, V6.2.5, V6.2.6, V6.2.7, V6.2.8, V6.3.1, V6.3.2, V6.4.1, V6.4.2, V7.2.1, V7.2.2, V7.2.3, V7.2.4, V7.4.1, V7.4.2, V8.1.1, V8.2.1, V8.2.2, V8.3.1, V9.1.1, V9.1.2, V9.1.3, V9.2.1, V10.4.1, V10.4.2, V10.4.3, V10.4.4, V10.4.5, V11.3.1, V11.3.2, V11.4.1, V12.1.1, V12.2.1, V12.2.2, V13.4.1, V14.2.1, V14.3.1, V15.1.1, V15.2.1, V15.3.1] |
@@ -13,6 +15,7 @@
 | 3 | level-3 | ASVS Level 3 should be the goal for applications looking to demonstrate the highest levels of security and requirements in this section are generally either defense-in-depth mechanisms or other useful but hard-to-implement controls. | Level 3 | [V1.2.10, V1.3.12, V1.5.3, V2.3.5, V2.4.2, V3.1.1, V3.2.3, V3.3.5, V3.4.7, V3.4.8, V3.5.6, V3.5.7, V3.5.8, V3.6.1, V3.7.3, V3.7.4, V3.7.5, V4.1.4, V4.1.5, V4.2.2, V4.2.3, V4.2.4, V4.2.5, V5.2.4, V5.2.5, V5.2.6, V5.3.3, V6.3.5, V6.3.6, V6.3.7, V6.3.8, V6.4.5, V6.4.6, V6.5.6, V6.5.7, V6.5.8, V6.6.4, V6.7.1, V6.7.2, V7.5.3, V8.1.3, V8.1.4, V8.2.4, V8.3.2, V8.3.3, V8.4.2, V10.2.3, V10.3.5, V10.4.12, V10.4.13, V10.4.14, V10.4.15, V10.4.16, V11.1.3, V11.1.4, V11.2.4, V11.2.5, V11.3.4, V11.3.5, V11.5.2, V11.6.2, V11.7.1, V11.7.2, V12.1.4, V12.1.5, V12.3.5, V13.1.2, V13.1.3, V13.1.4, V13.2.6, V13.3.3, V13.3.4, V13.4.6, V13.4.7, V14.2.5, V14.2.6, V14.2.7, V14.2.8, V15.1.4, V15.1.5, V15.2.4, V15.2.5, V15.4.1, V15.4.2, V15.4.3, V15.4.4, V16.5.4, V17.1.2, V17.2.5, V17.2.6, V17.2.7, V17.2.8] |
 
 ## Standard's requirements
+
 | # | ref | identifier | parent | text | title |
 | --- | --- | --- | --- | --- | --- |
 | 1 | V1 | V1 |  |  | Encoding and Sanitization |
@@ -459,12 +462,14 @@
 | 442 | V17.3.2 | V17.3.2 | V17.3 | Verify that the signaling server is able to continue processing legitimate signaling messages when encountering malformed signaling message that could cause a denial of service condition. This could include implementing input validation, safely handling integer overflows, preventing buffer overflows, and employing other robust error-handling techniques. |  |
 
 ## Licenses
+
 | Property | Value |
 | --- | --- |
 | id | CC-BY-SA-4.0 |
 | url | https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt |
 
 ## Supplier
+
 | Property | Value |
 | --- | --- |
 | name | OWASP Foundation |
