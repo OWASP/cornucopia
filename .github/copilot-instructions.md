@@ -389,9 +389,11 @@ When suggesting code:
 ### Secure: XSS Prevention
 
 ```javascript
+
 // V3.2.2: Use textContent for safe rendering
 element.textContent = userInput;  // Safe
 // Never: element.innerHTML = userInput;  // Unsafe
+
 ```
 
 ## When in Doubt
