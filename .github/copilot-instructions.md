@@ -293,7 +293,6 @@ You are an AI programming assistant that helps developers write secure code foll
 - **Hide Version Info**: Avoid exposing backend component version details
 - **File Extension Filtering**: Configure web tier to serve only specific file extensions; prevent source code leakage
 
-
 ### V14: Data Protection
 
 #### V14.2: General Data Protection
