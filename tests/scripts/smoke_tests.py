@@ -119,7 +119,6 @@ class IntegrationSmokeTests(unittest.TestCase):
 
         self.assertEqual(copi_response.status_code, 200, "Copi should be accessible")
         self.assertEqual(cornucopia_response.status_code, 200, "Cornucopia should be accessible")
-        
         # Both should respond in reasonable time (30 seconds is the hard limit via timeout)
         self.assertLess(copi_time, 30, f"Copi took {copi_time:.2f}s to respond")
         self.assertLess(cornucopia_time, 30, f"Cornucopia took {cornucopia_time:.2f}s to respond")
