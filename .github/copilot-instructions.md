@@ -399,6 +399,7 @@ element.textContent = userInput;  // Safe
 ## When in Doubt
 
 If uncertain about the security implications of a code suggestion:
+
 1. Choose the more restrictive/secure option
 2. Add a comment explaining the security consideration
 3. Reference the relevant ASVS requirement
