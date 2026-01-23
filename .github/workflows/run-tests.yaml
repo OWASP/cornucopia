@@ -34,6 +34,8 @@ jobs:
         run: pipenv run python -m unittest discover -s "tests/scripts" -p "*_utest.py"
       - name: Run integration
         run: pipenv run python -m unittest discover -s "tests/scripts" -p "*_itest.py"
+      - name: Run smoke tests
+        run: pipenv run python -m unittest tests.scripts.smoke_tests -v
       # Test coverage reports
       - name: Check test coverage - run tests
         run: pipenv run coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"

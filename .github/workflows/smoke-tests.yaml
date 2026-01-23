@@ -1,0 +1,62 @@
+name: Smoke Tests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+  push:
+    branches:
+      - master
+    paths:
+      - 'copi.owasp.org/**'
+      - 'cornucopia.owasp.org/**'
+      - 'tests/scripts/smoke_tests.py'
+      - '.github/workflows/smoke-tests.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  hardening:
+    name: Harden runner
+    uses: ./.github/workflows/hardening.yaml
+
+  smoke-tests:
+    name: Run Smoke Tests
+    needs: hardening
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Get Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt --require-hashes
+
+      - name: Run smoke tests for copi.owasp.org
+        run: python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
+        continue-on-error: false
+
+      - name: Run smoke tests for cornucopia.owasp.org
+        run: python -m unittest tests.scripts.smoke_tests.CornucopiaSmokeTests -v
+        continue-on-error: false
+
+      - name: Run integration smoke tests
+        run: python -m unittest tests.scripts.smoke_tests.IntegrationSmokeTests -v
+        continue-on-error: false
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Smoke Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "Smoke tests completed for:" >> $GITHUB_STEP_SUMMARY
+          echo "- copi.owasp.org (Elixir/Phoenix application)" >> $GITHUB_STEP_SUMMARY
+          echo "- cornucopia.owasp.org (SvelteKit application)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Tests verify:" >> $GITHUB_STEP_SUMMARY
+          echo "- At least 2 routes working on each application" >> $GITHUB_STEP_SUMMARY
+          echo "- JavaScript is loading and functional" >> $GITHUB_STEP_SUMMARY
+          echo "- Applications respond within acceptable time" >> $GITHUB_STEP_SUMMARY
