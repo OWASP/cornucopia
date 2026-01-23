@@ -34,8 +34,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install requests library
-        run: pip install requests
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt --require-hashes
 
       - name: Run smoke tests for copi.owasp.org
         run: python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
@@ -53,7 +53,7 @@ jobs:
         if: always()
         run: |
           echo "## Smoke Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Smoke tests completed for:" >> $GITHUB_STEP_SUMMARY
+          echo "Smoke tests completed for:" >> $GITHUB_STEP_SUMMARY
           echo "- copi.owasp.org (Elixir/Phoenix application)" >> $GITHUB_STEP_SUMMARY
           echo "- cornucopia.owasp.org (SvelteKit application)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY

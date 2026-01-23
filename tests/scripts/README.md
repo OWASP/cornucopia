@@ -11,21 +11,21 @@ The smoke tests verify basic functionality of both deployed applications:
 ## What Do Smoke Tests Check?
 
 ### For copi.owasp.org (Elixir/Phoenix)
-1. ✅ Homepage loads successfully (HTTP 200)
-2. ✅ Game routes are accessible
-3. ✅ JavaScript assets are being served
-4. ✅ Server responds with proper HTTP headers
+1. Homepage loads successfully (HTTP 200)
+2. Game route is accessible
+3. JavaScript assets are being served
+4. Server responds with proper HTTP headers
 
 ### For cornucopia.owasp.org (SvelteKit)
-1. ✅ Homepage loads successfully (HTTP 200)
-2. ✅ Cards browser route (`/cards`) is accessible
-3. ✅ JavaScript/Svelte bundles are being served
-4. ✅ Individual card detail pages are accessible (e.g., `/cards/VE2`)
-5. ✅ Page structure indicates JavaScript execution capability
+1. Homepage loads successfully (HTTP 200)
+2. Cards browser route (`/cards`) is accessible
+3. JavaScript/Svelte bundles are being served
+4. Individual card detail pages are accessible (e.g., `/cards/VE2`)
+5. Page structure indicates JavaScript execution capability
 
 ### Integration Tests
-1. ✅ Both applications respond within acceptable time limits
-2. ✅ Both applications are simultaneously accessible
+1. Both applications respond within acceptable time limits
+2. Both applications are simultaneously accessible
 
 ## Running the Tests
 
@@ -52,10 +52,10 @@ pipenv run python -m unittest tests.scripts.smoke_tests -v
 ### In CI/CD
 
 Smoke tests run automatically:
-- ✅ On every push to `master` that affects the applications
-- ✅ Daily at 6 AM UTC (scheduled)
-- ✅ Manually via workflow dispatch
-- ✅ As part of the regular test suite
+- On every push to `master` that affects the applications
+- Daily at 6 AM UTC (scheduled)
+- Manually via workflow dispatch
+- As part of the regular test suite
 
 ## Test Structure
 
