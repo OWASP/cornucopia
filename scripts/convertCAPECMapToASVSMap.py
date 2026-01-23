@@ -206,7 +206,7 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         "--output-path",
         type=validate_filepath_arg,
         default=ConvertVars.DEFAULT_OUTPUT_PATH,
-        help="Path to save converted CAPEC-to-ASVS mapping YAML files",
+        help="Directory to save converted CAPEC-to-ASVS mapping YAML files",
     )
     parser.add_argument(
         "-d",
