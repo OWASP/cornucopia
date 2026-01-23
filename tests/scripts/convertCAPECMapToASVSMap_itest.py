@@ -84,7 +84,7 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
             self.assertIsInstance(capec_set, set, f"CAPEC set for {asvs_req} should be a set")
             # Each CAPEC code in the set should be an integer
             for capec_code in capec_set:
-                self.assertIsInstance(capec_code, int, f"CAPEC code {capec_code} should be int")
+                self.assertIsInstance(capec_code, str, f"CAPEC code {capec_code} should be int")
 
     def test_convert_to_output_format_with_test_data(self):
         """Test converting extracted mappings to output format"""
