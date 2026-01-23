@@ -20,16 +20,80 @@ if "unittest.util" in __import__("sys").modules:
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
 
 
+class TestExtractAsvsToCapecMappings(unittest.TestCase):
+    """Test extract_asvs_to_capec_mappings function with various data structures"""
+
+    def test_extract_simple_asvs_mapping(self):
+        """Test extracting a simple ASVS to CAPEC mapping"""
+        data = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]}}}]}]}
+        result = capec_map.extract_asvs_to_capec_mappings(data)
+
+        self.assertIn("4.3.2", result)
+        self.assertIn("13.2.2", result)
+        self.assertIn("13.4.1", result)
+        self.assertEqual(result["4.3.2"], {54})
+        self.assertEqual(result["13.2.2"], {54})
+
+    def test_extract_multiple_capec_same_asvs(self):
+        """Test merging CAPEC codes from multiple cards with same ASVS requirement"""
+        data = {
+            "suits": [
+                {
+                    "cards": [
+                        {"capec_map": {54: {"owasp_asvs": ["4.3.2", "13.2.2"]}}},
+                        {"capec_map": {116: {"owasp_asvs": ["13.2.2", "15.2.3"]}}},
+                    ]
+                }
+            ]
+        }
+        result = capec_map.extract_asvs_to_capec_mappings(data)
+
+        self.assertIn("13.2.2", result)
+        # Should merge CAPEC codes for same ASVS requirement
+        self.assertEqual(result["13.2.2"], {54, 116})
+
+    def test_extract_multiple_asvs_requirements(self):
+        """Test extracting multiple ASVS requirements"""
+        data = {
+            "suits": [
+                {"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}, 116: {"owasp_asvs": ["13.2.2", "15.2.3"]}}}]}
+            ]
+        }
+        result = capec_map.extract_asvs_to_capec_mappings(data)
+
+        self.assertGreaterEqual(len(result), 3)
+        self.assertIn("4.3.2", result)
+        self.assertIn("13.2.2", result)
+        self.assertIn("15.2.3", result)
+
+    def test_extract_asvs_no_suits(self):
+        """Test with data that has no suits key"""
+        data = {"other_key": "value"}
+
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = capec_map.extract_asvs_to_capec_mappings(data)
+
+        self.assertEqual(result, {})
+        self.assertIn("No 'suits' key found", log.output[0])
+
+    def test_extract_asvs_empty_owasp_asvs(self):
+        """Test with empty owasp_asvs list"""
+        data = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": []}}}]}]}
+        result = capec_map.extract_asvs_to_capec_mappings(data)
+
+        self.assertEqual(result, {})
+
+
 class TestExtractCapecMappings(unittest.TestCase):
     """Test extract_capec_mappings function with various data structures"""
 
     def test_extract_simple_capec_mapping(self):
         """Test extracting a simple CAPEC mapping"""
-        data = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]}}}]}]}
+        data = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]}}}]}]}
         result = capec_map.extract_capec_mappings(data)
 
-        self.assertIn("54", result)
-        self.assertEqual(result["54"], {"4.3.2", "13.2.2", "13.4.1"})
+        self.assertIn(54, result)
+        self.assertEqual(result[54], {"4.3.2", "13.2.2", "13.4.1"})
 
     def test_extract_multiple_cards_same_capec(self):
         """Test merging ASVS requirements from multiple cards with same CAPEC code"""
@@ -37,36 +101,32 @@ class TestExtractCapecMappings(unittest.TestCase):
             "suits": [
                 {
                     "cards": [
-                        {"capec_map": {"54": {"owasp_asvs": ["4.3.2", "13.2.2"]}}},
-                        {"capec_map": {"54": {"owasp_asvs": ["13.2.2", "15.2.3"]}}},
+                        {"capec_map": {54: {"owasp_asvs": ["4.3.2", "13.2.2"]}}},
+                        {"capec_map": {54: {"owasp_asvs": ["13.2.2", "15.2.3"]}}},
                     ]
                 }
             ]
         }
         result = capec_map.extract_capec_mappings(data)
 
-        self.assertIn("54", result)
+        self.assertIn(54, result)
         # Should merge and deduplicate
-        self.assertEqual(result["54"], {"4.3.2", "13.2.2", "15.2.3"})
+        self.assertEqual(result[54], {"4.3.2", "13.2.2", "15.2.3"})
 
     def test_extract_multiple_capec_codes(self):
         """Test extracting multiple CAPEC codes"""
         data = {
             "suits": [
-                {
-                    "cards": [
-                        {"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}, "116": {"owasp_asvs": ["13.2.2", "15.2.3"]}}}
-                    ]
-                }
+                {"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}, 116: {"owasp_asvs": ["13.2.2", "15.2.3"]}}}]}
             ]
         }
         result = capec_map.extract_capec_mappings(data)
 
         self.assertEqual(len(result), 2)
-        self.assertIn("54", result)
-        self.assertIn("116", result)
-        self.assertEqual(result["54"], {"4.3.2"})
-        self.assertEqual(result["116"], {"13.2.2", "15.2.3"})
+        self.assertIn(54, result)
+        self.assertIn(116, result)
+        self.assertEqual(result[54], {"4.3.2"})
+        self.assertEqual(result[116], {"13.2.2", "15.2.3"})
 
     def test_extract_no_suits(self):
         """Test with data that has no suits key"""
@@ -101,25 +161,25 @@ class TestExtractCapecMappings(unittest.TestCase):
 
     def test_extract_empty_owasp_asvs(self):
         """Test with empty owasp_asvs list"""
-        data = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": []}}}]}]}
+        data = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": []}}}]}]}
         result = capec_map.extract_capec_mappings(data)
 
-        self.assertIn("54", result)
-        self.assertEqual(result["54"], set())
+        self.assertIn(54, result)
+        self.assertEqual(result[54], set())
 
     def test_extract_multiple_suits(self):
         """Test extracting from multiple suits"""
         data = {
             "suits": [
-                {"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}}}]},
-                {"cards": [{"capec_map": {"116": {"owasp_asvs": ["13.2.2"]}}}]},
+                {"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}}}]},
+                {"cards": [{"capec_map": {116: {"owasp_asvs": ["13.2.2"]}}}]},
             ]
         }
         result = capec_map.extract_capec_mappings(data)
 
         self.assertEqual(len(result), 2)
-        self.assertIn("54", result)
-        self.assertIn("116", result)
+        self.assertIn(54, result)
+        self.assertIn(116, result)
 
 
 class TestConvertToOutputFormat(unittest.TestCase):
@@ -127,24 +187,24 @@ class TestConvertToOutputFormat(unittest.TestCase):
 
     def test_convert_simple_mapping(self):
         """Test converting a simple mapping"""
-        capec_mapping = {"54": {"4.3.2", "13.2.2", "13.4.1"}}
+        capec_mapping = {54: {"4.3.2", "13.2.2", "13.4.1"}}
         result = capec_map.convert_to_output_format(capec_mapping)
 
-        self.assertIn("54", result)
-        self.assertIn("owasp_asvs", result["54"])
+        self.assertIn(54, result)
+        self.assertIn("owasp_asvs", result[54])
         # Should be sorted
-        self.assertEqual(result["54"]["owasp_asvs"], ["13.2.2", "13.4.1", "4.3.2"])
+        self.assertEqual(result[54]["owasp_asvs"], ["13.2.2", "13.4.1", "4.3.2"])
 
     def test_convert_multiple_mappings(self):
         """Test converting multiple mappings"""
-        capec_mapping = {"54": {"4.3.2", "13.2.2"}, "116": {"15.2.3", "16.2.5"}}
+        capec_mapping = {54: {"4.3.2", "13.2.2"}, 116: {"15.2.3", "16.2.5"}}
         result = capec_map.convert_to_output_format(capec_mapping)
 
         self.assertEqual(len(result), 2)
-        self.assertIn("54", result)
-        self.assertIn("116", result)
-        self.assertEqual(result["54"]["owasp_asvs"], ["13.2.2", "4.3.2"])
-        self.assertEqual(result["116"]["owasp_asvs"], ["15.2.3", "16.2.5"])
+        self.assertIn(54, result)
+        self.assertIn(116, result)
+        self.assertEqual(result[54]["owasp_asvs"], ["13.2.2", "4.3.2"])
+        self.assertEqual(result[116]["owasp_asvs"], ["15.2.3", "16.2.5"])
 
     def test_convert_empty_mapping(self):
         """Test converting empty mapping"""
@@ -155,11 +215,20 @@ class TestConvertToOutputFormat(unittest.TestCase):
 
     def test_convert_sorted_keys(self):
         """Test that keys are sorted in output"""
-        capec_mapping = {"116": {"15.2.3"}, "54": {"4.3.2"}, "28": {"1.2.2"}}
+        capec_mapping = {116: {"15.2.3"}, 54: {"4.3.2"}, 28: {"1.2.2"}}
         result = capec_map.convert_to_output_format(capec_mapping)
 
         keys = list(result.keys())
-        self.assertEqual(keys, ["116", "28", "54"])  # Sorted as strings
+        self.assertEqual(keys, [28, 54, 116])  # Sorted as integers
+
+    def test_convert_with_capec_codes_parameter(self):
+        """Test converting ASVS to CAPEC mapping with capec_codes parameter"""
+        asvs_mapping = {"4.3.2": {54, 116}, "13.2.2": {54}}
+        result = capec_map.convert_to_output_format(asvs_mapping, parameter="capec_codes")
+
+        self.assertIn("4.3.2", result)
+        self.assertIn("capec_codes", result["4.3.2"])
+        self.assertEqual(sorted(result["4.3.2"]["capec_codes"]), [54, 116])
 
 
 class TestLoadYamlFile(unittest.TestCase):
@@ -241,6 +310,8 @@ class TestParseArguments(unittest.TestCase):
 
         self.assertEqual(args.input_path, capec_map.ConvertVars.DEFAULT_INPUT_PATH)
         self.assertEqual(args.output_path, capec_map.ConvertVars.DEFAULT_OUTPUT_PATH)
+        self.assertEqual(args.version, "latest")
+        self.assertEqual(args.edition, "edition")
         self.assertFalse(args.debug)
 
     def test_parse_custom_input_path(self):
@@ -261,22 +332,48 @@ class TestParseArguments(unittest.TestCase):
 
         self.assertTrue(args.debug)
 
+    def test_parse_version_parameter(self):
+        """Test parsing with version parameter"""
+        args = capec_map.parse_arguments(["-v", "3.0"])
+        self.assertEqual(args.version, "3.0")
+
+    def test_parse_edition_parameter(self):
+        """Test parsing with edition parameter"""
+        args = capec_map.parse_arguments(["-e", "webapp"])
+        self.assertEqual(args.edition, "webapp")
+
     def test_parse_all_arguments(self):
         """Test parsing with all arguments"""
-        args = capec_map.parse_arguments(["-i", "input.yaml", "-o", ConvertVars.OUTPUT_FILE, "-d"])
+        args = capec_map.parse_arguments(
+            ["-i", "input.yaml", "-o", ConvertVars.OUTPUT_FILE, "-v", "3.0", "-e", "webapp", "-d"]
+        )
 
         self.assertEqual(args.input_path, "input.yaml")
         self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
+        self.assertEqual(args.version, "3.0")
+        self.assertEqual(args.edition, "webapp")
         self.assertTrue(args.debug)
 
     def test_parse_long_form_arguments(self):
         """Test parsing with long form arguments"""
         args = capec_map.parse_arguments(
-            ["--input-path", "input.yaml", "--output-path", ConvertVars.OUTPUT_FILE, "--debug"]
+            [
+                "--input-path",
+                "input.yaml",
+                "--output-path",
+                ConvertVars.OUTPUT_FILE,
+                "--version",
+                "3.0",
+                "--edition",
+                "webapp",
+                "--debug",
+            ]
         )
 
         self.assertEqual(args.input_path, "input.yaml")
         self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
+        self.assertEqual(args.version, "3.0")
+        self.assertEqual(args.edition, "webapp")
         self.assertTrue(args.debug)
 
 
@@ -311,15 +408,20 @@ class TestMainFunction(unittest.TestCase):
         """Test successful main execution"""
         # Setup mocks
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_FILE), debug=False
+            input_path=Path("input.yaml"),
+            output_path=Path(ConvertVars.OUTPUT_FILE),
+            version="3.0",
+            edition="webapp",
+            debug=False,
         )
-        mock_load.return_value = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}}}]}]}
+        mock_load.return_value = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}}}]}]}
         mock_save.return_value = True
 
         capec_map.main()
 
         mock_load.assert_called_once()
-        mock_save.assert_called_once()
+        # Should be called twice - once for capec file, once for asvs file
+        self.assertEqual(mock_save.call_count, 2)
         mock_exit.assert_not_called()
 
     @patch("scripts.convertCAPECMapToASVSMap.load_yaml_file")
@@ -328,7 +430,11 @@ class TestMainFunction(unittest.TestCase):
     def test_main_no_data_loaded(self, mock_exit, mock_parse_args, mock_load):
         """Test main with no data loaded"""
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent2.yaml"), debug=False
+            input_path=Path("input.yaml"),
+            output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent2.yaml"),
+            version="3.0",
+            edition="webapp",
+            debug=False,
         )
         mock_load.return_value = {}
 
@@ -348,9 +454,13 @@ class TestMainFunction(unittest.TestCase):
     def test_main_save_fails(self, mock_exit2, mock_parse_args, mock_load, mock_save):
         """Test main when save fails"""
         mock_parse_args.return_value = argparse.Namespace(
-            input_path=Path("input.yaml"), output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent3.yaml"), debug=False
+            input_path=Path("input.yaml"),
+            output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent3.yaml"),
+            version="3.0",
+            edition="webapp",
+            debug=False,
         )
-        mock_load.return_value = {"suits": [{"cards": [{"capec_map": {"54": {"owasp_asvs": ["4.3.2"]}}}]}]}
+        mock_load.return_value = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}}}]}]}
         mock_save.return_value = False
 
         with self.assertLogs(logging.getLogger(), logging.ERROR):

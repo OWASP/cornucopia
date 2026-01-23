@@ -33,20 +33,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Create tmp branch for artifacts and get parent and object ref
-        id: find-target
-        env:
-          PR_NUMBER: ${{ github.event.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
-        run: |
-          echo "parent=`git rev-parse HEAD`" >> "$GITHUB_ENV"
-          echo "object_tree=`git write-tree`" >> "$GITHUB_ENV"
-          git switch --orphan "tmp-$BRANCH_NAME-artifacts"
-      - name: Checkout branch for pull request
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       # Set the pip environment up
