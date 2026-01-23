@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 import yaml
 
-import scripts.convertCAPECMapToASVSMap as capec_map
+import scripts.convert_capec_map_to_asvs_map as capec_map
 
 capec_map.convert_vars = capec_map.ConvertVars()
 

@@ -93,12 +93,11 @@ options:
 
 ### Converting CAPEC Data
 
-The `scripts/convertCAPEC.py` script converts CAPEC (Common Attack Pattern Enumeration and Classification) JSON data into Markdown format for the Cornucopia website taxonomy.
+The `scripts/convert_capec.py` script converts CAPEC (Common Attack Pattern Enumeration and Classification) JSON data into Markdown format for the Cornucopia website taxonomy.
 
 ```bash
-python ./scripts/convertCAPEC.py --help
-usage: convertCAPEC.py [-h] [-o OUTPUT_PATH] [-i INPUT_PATH] [-d]
-
+python ./scripts/convert_capec.py --help
+usage: convert_capec.py [-h] [-o OUTPUT_PATH] [-i INPUT_PATH] [-d]
 Convert CAPEC JSON to Cornucopia format
 
 options:
@@ -114,13 +113,13 @@ options:
 
 ```bash
 # Convert CAPEC data using default paths
-python scripts/convertCAPEC.py
+python scripts/convert_capec.py
 
 # Convert with custom input and output paths
-python scripts/convertCAPEC.py -i data/capec-3.9/3000.json -o cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9
+python scripts/convert_capec.py -i data/capec-3.9/3000.json -o cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9
 
 # Enable debug logging
-python scripts/convertCAPEC.py -d
+python scripts/convert_capec.py -d
 ```
 
 **Default paths:**
@@ -132,11 +131,11 @@ The script creates individual Markdown files for each CAPEC attack pattern with 
 
 ### Converting CAPEC Mappings to ASVS Format
 
-The `scripts/convertCAPECMapToASVSMap.py` script processes webapp-mappings YAML files and generates a consolidated CAPEC-to-ASVS (Application Security Verification Standard) mapping file.
+The `scripts/convert_capec_map_to_asvs_map.py` script processes webapp-mappings YAML files and generates a consolidated CAPEC-to-ASVS (Application Security Verification Standard) mapping file.
 
 ```bash
-python ./scripts/convertCAPECMapToASVSMap.py --help
-usage: convertCAPECMapToASVSMap.py [-h] [-i INPUT_PATH] [-o OUTPUT_PATH] [-d]
+python ./scripts/convert_capec_map_to_asvs_map.py --help
+usage: convert_capec_map_to_asvs_map.py [-h] [-i INPUT_PATH] [-o OUTPUT_PATH] [-d]
 
 Convert webapp-mappings YAML to CAPEC-to-ASVS mapping format
 
@@ -155,13 +154,13 @@ options:
 
 ```bash
 # Convert mappings using default paths
-python scripts/convertCAPECMapToASVSMap.py
+python scripts/convert_capec_map_to_asvs_map.py
 
 # Convert with custom input and output paths
-python scripts/convertCAPECMapToASVSMap.py -i source/webapp-mappings-3.0.yaml -o source/webapp-capec-3.0.yaml
+python scripts/convert_capec_map_to_asvs_map.py -i source/webapp-mappings-3.0.yaml -o source/webapp-capec-3.0.yaml
 
 # Enable debug logging
-python scripts/convertCAPECMapToASVSMap.py -d
+python scripts/convert_capec_map_to_asvs_map.py -d
 ```
 
 **Default paths:**

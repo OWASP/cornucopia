@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # This script converts the CAPEC mappings from webapp-mappings YAML files
-# to a consolidated CAPEC-to-ASVS mapping file in source dir.
+# to a consolidated CAPEC-to-ASVS mapping file and a ASVS-to-CAPEC mapping file in source dir.
 import argparse
 import logging
 import sys
@@ -130,8 +130,8 @@ def convert_to_output_format(
     """
     output = {}
 
-    for capec_code, asvs_set in sorted(capec_map.items()):
-        output[capec_code] = {parameter: sorted(list(asvs_set))}
+    for code, asvs_set in sorted(capec_map.items()):
+        output[code] = {parameter: sorted(list(asvs_set))}
 
     return output
 
