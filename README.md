@@ -141,22 +141,12 @@ To release a new minor version:
 ```bash
 make release-minor
 ```
+
 To release a new major version:
 
 ```bash
 make release-major
 ```
-
-Once the 
-
-Docker images are build in [Jenkins][4] and published to [Artifactory][5]
-keeping 3 tags:
-
-- `latest` mirrors state of `master` branch.
-- `current` mirrors state of the most recent Git tag.
-- `previous` mirrors state of the previous Git tag.
-
-Images are also pushed with `git describe` version.
 
 ## Credits
 Cornucopia was originally conceived and created by Colin Watson 
