@@ -426,7 +426,7 @@ suits:
     desc: You have invented a new attack against Social Engineering
     misc: 
 -
- id: BOT
+  id: BOT
   name: Automated Threats
   cards:
   -
