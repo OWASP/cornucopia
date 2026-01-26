@@ -2,8 +2,8 @@
 
 [![OWASP Production Project](https://img.shields.io/badge/owasp-production%20project-brightgreen)](https://owasp.org/other_projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7125/badge)](https://bestpractices.coreinfrastructure.org/projects/7125)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4a7cda6ef1c2932a34f9/maintainability)](https://codeclimate.com/github/OWASP/cornucopia/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/4a7cda6ef1c2932a34f9/test_coverage)](https://codeclimate.com/github/OWASP/cornucopia/test_coverage)
+[![Maintainability](https://qlty.sh/gh/OWASP/projects/cornucopia/maintainability.svg)](https://qlty.sh/gh/OWASP/projects/cornucopia)
+[![Code Coverage](https://qlty.sh/gh/OWASP/projects/cornucopia/coverage.svg)](https://qlty.sh/gh/OWASP/projects/cornucopia)
 
 # OWASP Cornucopia project
 OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams 
@@ -141,22 +141,12 @@ To release a new minor version:
 ```bash
 make release-minor
 ```
+
 To release a new major version:
 
 ```bash
 make release-major
 ```
-
-Once the 
-
-Docker images are build in [Jenkins][4] and published to [Artifactory][5]
-keeping 3 tags:
-
-- `latest` mirrors state of `master` branch.
-- `current` mirrors state of the most recent Git tag.
-- `previous` mirrors state of the previous Git tag.
-
-Images are also pushed with `git describe` version.
 
 ## Credits
 Cornucopia was originally conceived and created by Colin Watson 
