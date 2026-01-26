@@ -22,7 +22,7 @@
 		"@types/node": "^25.0.10",
 		"@vitest/coverage-v8": "^3.1.4",
 		"dotenv": "^17.2.3",
-		"svelte": "^5.48.0",
+		"svelte": "^5.48.2",
 		"svelte-check": "^4.3.5",
 		"svelte-sitemap": "^2.7.1",
 		"then-request": "^6.0.2",
