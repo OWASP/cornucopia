@@ -71,7 +71,6 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Ruggero DallAglio
 - Andrey Danin
 - Darío De Filippis
-- Stephen de Vries
 - Luis Enriquez
 - André Ferreira
 - Ken Ferris
@@ -106,6 +105,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Max Alejandro Gómez Sánchez Vergaray
 - Ive Verstappen
 - Wagner Voltz
+- Stephen de Vries
 - Colin Watson
 
 Please let us know if we have missed anyone from this list.
