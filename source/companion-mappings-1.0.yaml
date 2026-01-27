@@ -495,7 +495,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ 022 ]
+    owasp_oat: [ OAT-022 ]
     cwe: [ 841 ]
     capec: [ 210 ]
   -
@@ -506,7 +506,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [ 2.3.1, 2.3.2 ]
     owasp_asvs_print: [ 2.3.1-2 ]
-    owasp_oat: [ 006 ]
+    owasp_oat: [ OAT-006 ]
     cwe: [ 841 ]
     capec: [ 210 ]
   -
@@ -517,7 +517,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ 013 ]
+    owasp_oat: [ OAT-013 ]
     capec: [ 210 ]
   -
     id: BOT5
@@ -527,7 +527,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [ 2.3.2, 2.3.4 ]
     owasp_asvs_print: [ 2.3.2, 2.3.4 ]
-    owasp_oat: [ 021 ]
+    owasp_oat: [ OAT-021 ]
     cwe: [ 799, 841 ]
     capec: [ 210 ]
   -
@@ -538,7 +538,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [ 2.3.2, 2.3.4 ]
     owasp_asvs_print: [ 2.3.2, 2.3.4 ]
-    owasp_oat: [ 005 ]
+    owasp_oat: [ OAT-005 ]
     cwe: [ 799, 837 ]
     capec: [ 210 ]
   -
@@ -549,7 +549,7 @@ suits:
     stride_print: [ Spoofing ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ 012 ]
+    owasp_oat: [ OAT-012 ]
     cwe: [ 799, 837 ]
     capec: [ 210 ]
   -
@@ -560,7 +560,7 @@ suits:
     stride_print: [ 'Elevation of Privilege' ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ 019 ]
+    owasp_oat: [ OAT-019 ]
     cwe: [ 799, 837, 841 ]
     capec: [ 210 ]
   -
@@ -571,7 +571,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [  2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ 016 ]
+    owasp_oat: [ OAT-016 ]
     cwe: [ 799, 837 ]
     capec: [ 210 ]
   -
@@ -582,7 +582,7 @@ suits:
     stride_print: [ 'Information Disclosure' ]
     owasp_asvs: [ 2.3.2, 6.1.1, 6.3.1 ]
     owasp_asvs_print: [ 2.3.2, 6.1.1, 6.3.1 ]
-    owasp_oat: [ 002, 007, 010 ]
+    owasp_oat: [ OAT-002, OAT-007, OAT-010 ]
     cwe: [ 307, 799, 837 ]
     capec: [ 16, 49, 70, 110, 112, 210 ]
   -
@@ -593,7 +593,7 @@ suits:
     stride_print: [ 'Information Disclosure' ]
     owasp_asvs: [ 2.3.2, 2.4.1, 2.4.2, 6.1.1 ]
     owasp_asvs_print: [  2.3.2, 2.4.1-2, 6.1.1 ]
-    owasp_oat: [ 001, 008 ]
+    owasp_oat: [ OAT-001, OAT-008 ]
     cwe: [ 799, 837 ]
     capec: [ 210 ]
   -
@@ -604,7 +604,7 @@ suits:
     stride_print: [ Tampering ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ 017 ]
+    owasp_oat: [ OAT-017 ]
     cwe: [ 799, 837 ]
     capec: [ 210 ]
   -
@@ -615,7 +615,7 @@ suits:
     stride_print: [ 'Information Disclosure' ]
     owasp_asvs: [ 2.3.2, 14.2.6 ]
     owasp_asvs_print: [ 2.3.2, 14.2.6 ]
-    owasp_oat: [ 011 ]
+    owasp_oat: [ OAT-011 ]
     cwe: [ 799 ]
     capec: [ 210 ]
   -
