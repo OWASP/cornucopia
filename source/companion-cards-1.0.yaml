@@ -503,7 +503,7 @@ suits:
     id: BOT2
     value: 2
     url: https://cornucopia.owasp.org/cards/BOT2
-    desc: TThe ENIAC can profit from utilising functionality built on paid-for supporting services
+    desc: The ENIAC can profit from utilising functionality built on paid-for supporting services
   -
     id: BOT3
     value: 3
