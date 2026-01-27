@@ -483,3 +483,149 @@ suits:
     id: SEK
     value: K
     url: https://cornucopia.owasp.org/cards/SEK
+-
+  id: BOT
+  name: Automated Threats
+  cards:
+  -
+    id: BOT2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/BOT2
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ 022 ]
+    cwe: [ 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/BOT3
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [ 2.3.1, 2.3.2 ]
+    owasp_asvs_print: [ 2.3.1-2 ]
+    owasp_oat: [ 006 ]
+    cwe: [ 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/BOT4
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ 013 ]
+    capec: [ 210 ]
+  -
+    id: BOT5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/BOT5
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [ 2.3.2, 2.3.4 ]
+    owasp_asvs_print: [ 2.3.2, 2.3.4 ]
+    owasp_oat: [ 021 ]
+    cwe: [ 799, 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/BOT6
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [ 2.3.2, 2.3.4 ]
+    owasp_asvs_print: [ 2.3.2, 2.3.4 ]
+    owasp_oat: [ 005 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOT7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/BOT7
+    stride: [ S ]
+    stride_print: [ Spoofing ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ 012 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOT8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/BOT8
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ 019 ]
+    cwe: [ 799, 837, 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/BOT9
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [  2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ 016 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOTX
+    value: X
+    url: https://cornucopia.owasp.org/cards/BOTX
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+    owasp_asvs: [ 2.3.2, 6.1.1, 6.3.1 ]
+    owasp_asvs_print: [ 2.3.2, 6.1.1, 6.3.1 ]
+    owasp_oat: [ 002, 007, 010 ]
+    cwe: [ 307, 799, 837 ]
+    capec: [ 16, 49, 70, 110, 112, 210 ]
+  -
+    id: BOTJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/BOTJ
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+    owasp_asvs: [ 2.3.2, 2.4.1, 2.4.2, 6.1.1 ]
+    owasp_asvs_print: [  2.3.2, 2.4.1-2, 6.1.1 ]
+    owasp_oat: [ 001, 008 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOTQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/BOTQ
+    stride: [ T ]
+    stride_print: [ Tampering ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ 017 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOTK
+    value: K
+    url: https://cornucopia.owasp.org/cards/BOTK
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+    owasp_asvs: [ 2.3.2, 14.2.6 ]
+    owasp_asvs_print: [ 2.3.2, 14.2.6 ]
+    owasp_oat: [ 011 ]
+    cwe: [ 799 ]
+    capec: [ 210 ]
+  -
+    id: BOTA
+    value: A
+    url: https://cornucopia.owasp.org/cards/BOTA
+    stride: [  ]
+    stride_print: [ ]
+    owasp_asvs: [  ]
+    owasp_asvs_print: [ "-" ]
+    owasp_oat: [ ]
+    cwe: [  ]
+    capec: [ "-" ]
