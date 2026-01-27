@@ -503,12 +503,12 @@ suits:
     id: BOT2
     value: 2
     url: https://cornucopia.owasp.org/cards/BOT2
-    desc: The ENIAC can inflate charges for a supporting service
+    desc: TThe ENIAC can profit from utilising functionality built on paid-for supporting services
   -
     id: BOT3
     value: 3
     url: https://cornucopia.owasp.org/cards/BOT3
-    desc: The Colossus can hasten the progress of usually slow, tedious or time-consuming actions
+    desc: The Mark 1 Colossus can hasten the progress of usually slow, tedious or time-consuming actions
   -
     id: BOT4
     value: 4
@@ -528,7 +528,7 @@ suits:
     id: BOT7
     value: 7
     url: https://cornucopia.owasp.org/cards/BOT7
-    desc: The Manchester Mark 1 can utilise stolen payment card, or other user account data, to buy goods or obtain cash
+    desc: The Manchester Mark 1 can utilise stolen payment card data, or other user account data, to buy goods or obtain cash
   -
     id: BOT8
     value: 8
@@ -548,7 +548,7 @@ suits:
     id: BOTJ
     value: J
     url: https://cornucopia.owasp.org/cards/BOTJ
-    desc: The Z3 can validate stolen bulk authentication credentials, or payment cardholder data (e.g. PAN, security code, expiry date)
+    desc: The Zuse Z3 can validate stolen bulk authentication credentials, or payment cardholder data (e.g. PAN, security code, expiry date)
   -
     id: BOTQ
     value: Q
@@ -563,5 +563,5 @@ suits:
     id: BOTA
     value: A
     url: https://cornucopia.owasp.org/cards/BOTA
-    desc: You have identified a relevant Automated Threats attack of any sort
+    desc: You have identified an automated attack that misuses inherent web application functionality or a related design flaw
     misc: Read more about Automated Threats to web applications in the OWASP Automated Threat Handbook
