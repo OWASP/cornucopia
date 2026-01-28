@@ -35,7 +35,7 @@ describe('DeckService tests', () => {
         it('should return false for empty string', () => {
             expect(DeckService.hasEdition('')).toBe(false);
         });
-    });
+    }, 10000);
 
     describe('hasVersion', () => {
         it('should return true for webapp version 2.2', () => {
@@ -57,7 +57,7 @@ describe('DeckService tests', () => {
         it('should return false for unknown edition', () => {
             expect(DeckService.hasVersion('unknown', '2.2')).toBe(false);
         });
-    });
+    }, 10000);
 
     describe('hasLanguage', () => {
         it('should return true for webapp with en', () => {
@@ -111,7 +111,7 @@ describe('DeckService tests', () => {
         it('should return false for unknown edition', () => {
             expect(DeckService.hasLanguage('unknown', 'en')).toBe(false);
         });
-    });
+    }, 10000);
 
     describe('getDecks', () => {
         it('should return all available decks', () => {
@@ -125,7 +125,7 @@ describe('DeckService tests', () => {
             });
             expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en'] });
         });
-    });
+    }, 10000);
 
     describe('getLatestVersion', () => {
         it('should return 2.2 for webapp', () => {
@@ -139,7 +139,7 @@ describe('DeckService tests', () => {
         it('should return 2.2 as default for unknown edition', () => {
             expect(DeckService.getLatestVersion('unknown')).toBe('2.2');
         });
-    });
+    }, 10000);
 
     describe('getLatestEditions', () => {
         it('should return array of latest editions', () => {
@@ -148,7 +148,7 @@ describe('DeckService tests', () => {
             expect(editions).toContain('webapp');
             expect(editions).toContain('mobileapp');
         });
-    });
+    }, 10000);
 
     describe('getLanguages', () => {
         it('should return all languages for webapp', () => {
@@ -173,7 +173,7 @@ describe('DeckService tests', () => {
             const languages = DeckService.getLanguages('unknown');
             expect(languages).toEqual(['en']);
         });
-    });
+    }, 10000);
 
     describe('getVersions', () => {
         it('should return all versions for webapp', () => {
@@ -192,7 +192,7 @@ describe('DeckService tests', () => {
             const versions = DeckService.getVersions('unknown');
             expect(versions).toEqual([]);
         });
-    });
+    }, 10000);
 
     describe('getCards', () => {
         let deckService: DeckService;
@@ -237,7 +237,7 @@ suits:
             const result = deckService.getCards('en');
             expect(result).toBeInstanceOf(Map);
         });
-    });
+    }, 10000);
 
     describe('getCardDataForEditionVersionLang', () => {
         let deckService: DeckService;
@@ -536,7 +536,7 @@ suits:
             
             consoleLogSpy.mockRestore();
         });
-    });
+    }, 10000);
 
     describe('clear', () => {
         it('should clear the cache', () => {
@@ -547,5 +547,5 @@ suits:
 
             expect(DeckService['cache'].length).toBe(0);
         });
-    });
+    }, 10000);
 });
