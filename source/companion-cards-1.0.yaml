@@ -74,7 +74,77 @@ suits:
     value: A
     url: https://cornucopia.owasp.org/cards/LLMA
     desc: You have invented a new attack against LLM
-    misc: 
+    misc:
+-
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+    desc: 
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+    desc: 
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+    desc: 
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+    desc: 
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+    desc: 
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+    desc: 
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+    desc: 
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+    desc: 
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+    desc: 
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+    desc: 
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+    desc: 
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+    desc: 
+  -
+    id: AAIA
+    value: A
+    url: https://cornucopia.owasp.org/cards/AAIA
+    desc: You have identified an attack that misuses inherent Agentic AI functionality or a related design flaw
+    misc: Read More about threats and mitigations at the OWASP Gen AI Security projects 
 -
   id: API
   name: Web API
