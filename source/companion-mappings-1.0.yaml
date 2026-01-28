@@ -61,6 +61,62 @@ suits:
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
 -
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+  -
+    id: AAIA
+    value: A
+    url: https://cornucopia.owasp.org/cards/AAIA
+-
   id: API
   name: Web API
   cards:
