@@ -33,7 +33,7 @@
     language
   }: Props = $props();
     
-  const controller: MappingController = new MappingController(mappingData);
+  const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
   let mappings = $state(controller.getCardMappings(card.id));
   let attacks: Attack[] = $state(GetCardAttacks(card.id));

@@ -12,7 +12,7 @@
 
     // Manual selection of cards to display on the frontpage 
     let selectedCards : string[] =  ["JOA","C7","CR6","AZ5","SM4","VE3","AT2",]  
-    let mappingData : any[] = mapping.suits.map((suit: { cards: any[]; }) => suit.cards[0]).reverse();
+    let mappingData : any[] = $derived(mapping.suits.map((suit: { cards: any[]; }) => suit.cards[0]).reverse());
     
     mappingData.unshift({
         id: "JOA",

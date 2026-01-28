@@ -13,10 +13,10 @@
   let { data }: Props = $props();
   let t = readTranslation();
   const lang = $state(readLang());
-  const cards = data.decks.get($lang);
-  let card : Card = $state(cards.get(data.card)) as Card;
-  let language = $lang ? $lang : data.lang;
-  const languages = data.languages;
+  const cards = $derived(data.decks.get($lang));
+  let card : Card = $derived(cards.get(data.card) as Card);
+  let language = $derived($lang ? $lang : data.lang);
+  const languages = $derived(data.languages);
 
   function cardFound() 
     {

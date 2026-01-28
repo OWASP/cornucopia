@@ -667,7 +667,7 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
         if el_new:
             return el_new
         if k.strip() in el_text:
-            reg = r"(?<!\S)" + re.escape(k.strip()) + "(?!\S)"  # noqa: W605
+            reg = r"(?<!\S){0}(?!\S)".format(re.escape(k.strip()))
             el_text = re.sub(reg, v, el_text)
     return el_text
 
@@ -963,6 +963,11 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
         logging.error(f" --- parsing xml file: {filename}. error = {e}")
         return
 
+    root = tree.getroot()
+    if root is None:
+        logging.error(f" --- The XML file has no root element: {filename}")
+        return
+
     all_content_elements = tree.findall(".//Content")
 
     for el in [el for el in all_content_elements]:
@@ -970,7 +975,7 @@ def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) ->
             continue
         el.text = get_replacement_value_from_dict(el.text, replacement_values)
         with open(filename, "bw") as f:
-            f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
+            f.write(ElTree.tostring(root, encoding="utf-8"))
 
 
 def zip_dir(path: str, zip_filename: str) -> None:

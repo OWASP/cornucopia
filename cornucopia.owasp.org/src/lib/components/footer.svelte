@@ -10,7 +10,6 @@
     }
 
     let { timestamp, content }: Props = $props();
-    let source = content;
     let timeAgo : string = $state('');
 
     function doOnMount()
@@ -51,8 +50,8 @@
     <div class="flex-container">
         <div class="box">
             <p class="title">OWASP Cornucopia</p>
-            {#if source != ''}
-                <SvelteMarkdown {renderers} {source}></SvelteMarkdown>
+            {#if content != ''}
+                <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
             {/if}
         </div>
     </div>

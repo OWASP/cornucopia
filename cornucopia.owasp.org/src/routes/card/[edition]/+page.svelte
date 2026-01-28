@@ -19,35 +19,37 @@
     let { data }: Props = $props();
     const lang = readLang();
     let t = readTranslation();
-    let content = data.content.get($lang) || data.content.get('en');
-    let decks = data?.decks;
-    let cards = decks?.get($lang);
-    let suits = data.suits;
-    let mappingData = data.mappingData;
-
+    
     //TODO move these constants to a more sensible location
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
 
-
-
-    let cardSuits = $state(suits?.get(`${data?.edition}-${$lang}`));
-    let card : Card = $state(cards?.get('VE2') as Card);
-    let version : string = $state(data?.edition);
-    if (!(() => cardSuits)()) {
-        cardSuits = suits?.get(`${data?.edition}-en`) as Suit[];
-    }
-    if (version === VERSION_MOBILEAPP) card = cards?.get('PC2') as Card;
-    if (version === VERSION_WEBAPP) card = cards?.get('VE2') as Card;
-
-    if (!(() => cards)()) {
-        if (version === VERSION_MOBILEAPP) card = cards?.get('PC2') as Card;
-        if (version === VERSION_WEBAPP) card = cards?.get('VE2') as Card;
-    }
+    // Derived values that update when data changes
+    let content = $derived(data.content.get($lang) || data.content.get('en'));
+    let decks = $derived(data?.decks);
+    let cards = $derived(decks?.get($lang));
+    let suits = $derived(data.suits);
+    let mappingData = $derived(data.mappingData);
+    let version = $derived(data?.edition);
+    
+    let cardSuits = $derived.by(() => {
+        const key = `${data?.edition}-${$lang}`;
+        return suits?.get(key) || suits?.get(`${data?.edition}-en`) as Suit[];
+    });
+    
+    let card = $derived.by(() => {
+        if (!cards) return null;
+        if (version === VERSION_MOBILEAPP) return cards.get('PC2') as Card;
+        if (version === VERSION_WEBAPP) return cards.get('VE2') as Card;
+        return cards.get('VE2') as Card;
+    });
 
     let suit : string;
+    let selectedCard = $state<Card | null>(null);
     
-    let mapping = $state((new MappingController(mappingData?.get((() => version)()))).getCardMappings((() => card)().id));
+    // Use selectedCard if hovering, otherwise use default card
+    let displayCard = $derived(selectedCard || card);
+    let displayMapping = $derived(displayCard ? (new MappingController(mappingData?.get(version))).getCardMappings(displayCard.id) : []);
 
     let map : Map<string,boolean> = $state(new SvelteMap());
     setTree(false);
@@ -71,21 +73,16 @@
     function enter(suitParam : string, cardParam : string)
     {
         suit = suitParam;
-        card = cards?.get(cardParam) as Card;
-        mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
+        selectedCard = cards?.get(cardParam) as Card;
     }
     
     function changeVersion(versionParam : string)
     {
-        version = versionParam;
+        // Reset selected card when changing version
+        selectedCard = null;
         // Collapse the entire tree down when switching between versions
         setTree(false);
-        // Show the following selected cards
-        if(version == VERSION_WEBAPP) card = cards?.get('VE2') as Card;
-        if(version == VERSION_MOBILEAPP) card = cards?.get('PC2') as Card;
-        goto(`/card/${version}`);
-    
-
+        goto(`/card/${versionParam}`);
     }
 </script>
 <svelte:head>
@@ -142,7 +139,7 @@
             {/each}
         </div>
         <div class="preview-container">
-                <CardPreview {card} {mapping} style="preview-card-container"></CardPreview>
+                <CardPreview card={displayCard} mapping={displayMapping} style="preview-card-container"></CardPreview>
         </div>
     </div>
 </div>

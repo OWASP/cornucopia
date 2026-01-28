@@ -5,11 +5,7 @@
     }
 
     let { mapping, style = '' }: Props = $props();
-    let mappingStyle = $state('');
-
-    if (style) {
-        mappingStyle = ' ' + style;
-    }
+    let mappingStyle = $derived(style ? ' ' + style : '');
 
 </script>
         <p class="mapping-title{mappingStyle}">STRIDE</p>

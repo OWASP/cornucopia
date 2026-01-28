@@ -15,6 +15,13 @@ export type WebAppMapping  =
     owasp_appsensor : string[],
     capec : number[],
     safecode : number[],
+    capec_map : {
+    [key: number]: {
+        owasp_asvs: (string)[],
+        name: string,
+        id: number
+        }
+    };
 
 }
 
@@ -32,13 +39,6 @@ export class MappingController {
 
     constructor(mapping: any) {
         this.mapping = mapping;
-    }
-
-    private static parseSuit(suit : string) : string
-    {
-        suit = suit.replaceAll("-" , " ");
-        return suit;
-
     }
 
     public getWebAppCardMappings(card : string) : WebAppMapping
