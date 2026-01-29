@@ -14,5 +14,14 @@ jobs:
     name: Harden runner
     uses: ./.github/workflows/hardening.yaml
   call-run-tests:
+    name: Build and run Converter Tests
     needs: hardening
     uses: ./.github/workflows/run-tests.yaml
+  call-run-website-tests:
+    name: Build and run Website Tests
+    needs: hardening
+    uses: ./.github/workflows/build-website.yml
+  call-run-build-copi-tests:
+    name: Build and run COPI Tests
+    needs: hardening
+    uses: ./.github/workflows/copi-build.yml

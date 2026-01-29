@@ -6,7 +6,7 @@
     let t = readTranslation();
     /** @type {{data: any}} */
     let { data } = $props();
-    let blogpost = data.blogpost;
+    let blogpost = $derived(data.blogpost);
 </script>
 <svelte:head>
     <link rel="canonical" href="/news" />

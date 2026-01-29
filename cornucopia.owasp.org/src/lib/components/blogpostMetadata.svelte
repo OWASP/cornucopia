@@ -9,7 +9,7 @@
 
     let { blogpost }: Props = $props();
 
-    let authorLink : string = '/author/' + blogpost.author;
+    let authorLink = $derived('/author/' + blogpost.author);
 </script>
 
 <div class="metadata">

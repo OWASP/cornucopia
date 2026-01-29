@@ -2,6 +2,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { error } from '@sveltejs/kit';
 import { DeckService } from "$lib/services/deckService";
 import type { Route } from "$domain/routes/route";
+import { MappingService } from "$lib/services/mappingService";
 
 export const load = (({ params }) => {
     const edition =  params?.edition;
@@ -9,7 +10,7 @@ export const load = (({ params }) => {
     let asvsVersion:string = "4.0.3";
     if (params.version === '3.0') asvsVersion = '5.0';
     if (!DeckService.hasEdition(edition)) error(
-      404, 'Edition not found. Only: ' + DeckService.getEditions().join(', ') + ' are supported.');
+      404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
     if (!DeckService.hasVersion(edition, version)) error(
       404, "Version not found for " + edition + ". Only: " + DeckService.getVersions(edition).join(', ') + " are supported.");
     return {
@@ -22,7 +23,7 @@ export const load = (({ params }) => {
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
       mappingData: new Map<string, any>([
-        [`${edition}`, (new DeckService()).getCardMappingForAllVersions().get(`${edition}-${version}`)]
+        [`${edition}`, (new MappingService()).getCardMappingForAllVersions().get(`${edition}-${version}`)]
       ]),
       languages: DeckService.getLanguages(edition)
     };

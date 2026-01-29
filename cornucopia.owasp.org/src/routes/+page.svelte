@@ -14,11 +14,10 @@
 
     let t = readTranslation();
     const lang = readLang();
-    let suits = $state(data.suits.get(`webapp-${$lang}`));
-
-    if ((() => suits)() == undefined) {
-        suits = data.suits.get('webapp-en') as Suit[];
-    }
+    let suits = $derived.by(() => {
+        const langSuits = data.suits.get(`webapp-${$lang}`);
+        return langSuits || data.suits.get('webapp-en') as Suit[];
+    });
 </script>
 <svelte:head>
     	<title>{$t('layout.title')}</title>

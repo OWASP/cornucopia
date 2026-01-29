@@ -1,4 +1,4 @@
-FROM python:alpine3.20@sha256:40a4559d3d6b2117b1fbe426f17d55b9100fa40609733a1d0c3f39e2151d4b33 AS pipenv
+FROM python:3.12.12-alpine3.22@sha256:d82291d418d5c47f267708393e40599ae836f2260b0519dd38670e9d281657f5 AS pipenv
 RUN apk add --no-cache shadow
 # UID of current user who runs the build
 ARG user_id
@@ -25,13 +25,13 @@ RUN apk add --no-cache \
     libc-dev \
     make
 COPY --chown=builder:union requirements.txt ./
-RUN pip install -r requirements.txt --require-hashes
+RUN pip install --no-cache-dir -r requirements.txt --require-hashes
 USER builder
 # Install Python dependencies so they are cached
 ARG workdir
 WORKDIR ${workdir}
 COPY --chown=builder:union Pipfile Pipfile.lock ./
-RUN pipenv --python "$(which python)" install --ignore-pipfile --dev
+RUN pipenv --python "$(which python)" install --no-cache-dir --ignore-pipfile --dev
 ENTRYPOINT ["/usr/local/bin/pipenv"]
 
 FROM mvdan/shfmt@sha256:caa0324bdba08f42452a19e6a8462dda9852a1e43ad16185ec3d1ad66524a504 AS shfmt
