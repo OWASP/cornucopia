@@ -26,13 +26,44 @@ import dragula from "../vendor/dragula"
 let Hooks = {}
 Hooks.DragDrop = {
   mounted() {
-    dragula([document.querySelector('#hand'), document.querySelector('#table')], {
+    const drake = dragula([document.querySelector('#hand'), document.querySelector('#table')], {
       invalid: function (el, handle) {
         // Don't allow dragging cards off the table
         return el.className === 'card-player' || document.querySelector('#round-played');
+      },
+      accepts: function (el, target, source, sibling) {
+        console.log('accepts called', {target: target?.id, source: source?.id});
+        
+        // Only allow dropping on table
+        if (target && target.id === 'table') {
+          // Check if "Your Card" section already has a card (not placeholder)
+          const yourCardSection = Array.from(document.querySelectorAll('#table .card-player')).find(zone => {
+            const nameDiv = zone.querySelector('.name');
+            return nameDiv && (nameDiv.textContent.includes('Your Card') || nameDiv.textContent.includes('Drop a card'));
+          });
+          
+          if (yourCardSection) {
+            // Check if there's a card already (not the placeholder)
+            const isPlaceholder = yourCardSection.textContent.includes('Drop a card');
+            
+            console.log('Your card section check:', {isPlaceholder});
+            
+            if (!isPlaceholder) {
+              console.log('Blocked: card already on table');
+              return false;
+            }
+          }
+        }
+        
+        console.log('Accepting drop');
+        return true;
       }
-  }).on('drop', (element, target, source, sibling) => {
-      if (target.id === 'table') {
+    });
+    
+    drake.on('drop', (element, target, source, sibling) => {
+      console.log('Drop event', {target: target?.id});
+      
+      if (target && target.id === 'table') {
         fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
           method: 'PUT',
           headers: {
@@ -42,16 +73,11 @@ Hooks.DragDrop = {
             dealt_card_id: element.dataset.dealtcard
           })
         }).then(response => {
-          console.log(response)
-    
-          if (response.ok) {
-            return true;
-          }
-          else {
-            // Need to cancel the drop here
-            return false;
-          }
-        })
+          console.log('API response:', response.ok);
+          return response.ok;
+        }).catch(err => {
+          console.error('API error:', err);
+        });
       }
     });
   }
