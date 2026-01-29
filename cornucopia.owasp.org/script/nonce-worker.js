@@ -29,7 +29,7 @@ async function fetchAndStreamNotFoundPage(resp, request) {
   if (/\/card\/?$/i.test(resp.url)) {
     return Response.redirect(protocol + "//" + host + "/cards", 308);
   } 
-  /example\/?$
+
   if (/\/cards\/[a-z]/i.test(resp.url) && (/[a-z]/.test(path) || /[A-Z]/.test(pathArray[pathArray.length - 2]))) {
     return Response.redirect(protocol + "//" + host + "/cards/" + path.toUpperCase(), 301);
   } 
