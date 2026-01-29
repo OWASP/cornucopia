@@ -61,6 +61,62 @@ suits:
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
 -
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+  -
+    id: AAIA
+    value: A
+    url: https://cornucopia.owasp.org/cards/AAIA
+-
   id: API
   name: Web API
   cards:
@@ -214,6 +270,119 @@ suits:
     ccm: [ IAM-01, IAM-02, IAM-09 ]
     mitre_attack: [ T1098 ]
     capec: [ CAPEC-233 ]
+-
+  id: FRE
+  name: Frontend
+  cards:
+  -
+    id: FRE2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/FRE2
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A06:2025 ]
+    asvs: [ 5.1 ]
+    capec: [ CAPEC-153 ]
+    cwe: [ CWE-20 ]
+    mitre_attack: [ T1565 ]
+ -
+    id: FRE3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/FRE3
+    owasp_top-10_client_side: [ 7 ]
+    owasp_top-10: [ A04:2025 ]
+    asvs: [ 8.2 ]
+    capec: [ CAPEC-37 ]
+    mitre_attack: [ T1552 ]
+  -
+    id: FRE4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/FRE4
+    owasp_top-10_client_side: [ 2 ]
+    owasp_top-10: [ A05:2025 ]
+    asvs: [ 5.3 ]
+    capec: [ CAPEC-63 ]
+    mitre_attack: [ T1059.007 ]
+  -
+    id: FRE5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/FRE5
+    owasp_top-10_client_side: [ 4 ]
+    owasp_top-10: [ A03:2025 ]
+    asvs: [ 14.2 ]
+    capec: [ CAPEC-683 ]
+    mitre_attack: [ T1195.002 ]
+  -
+    id: FRE6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/FRE6
+    owasp_top-10_client_side: [ 7 ]
+    owasp_top-10: [ A07:2025 ]
+    asvs: [ 8.2 ]
+    capec: [ CAPEC-180 ]
+    cwe: [ CWE-284 ]
+    mitre_attack: [ T1552.001 ]
+  -
+    id: FRE7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/FRE7
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A08:2025 ]
+    asvs: [ 14.5 ]
+    mitre_attack: [ T1048 ]
+  -
+    id: FRE8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/FRE8
+    owasp_top-10_client_side: [ 1 ]
+    owasp_top-10: [ A01:2025 ]
+    asvs: [ 4.1 ]
+    capec: [ CAPEC-122 ]
+    mitre_attack: [ T1068 ]
+  -
+    id: FRE9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/FRE9
+    owasp_top-10_client_side: [ 1 ]
+    owasp_top-10: [ A01:2025 ]
+    asvs: [ 3.5 ]
+    capec: [ CAPEC-593 ]
+    mitre_attack: [ T1134 ]
+  -
+    id: FREX
+    value: X
+    url: https://cornucopia.owasp.org/cards/FREX
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A08:2025 ]
+    asvs: [ 14.4 ]
+    capec: [ CAPEC-103 ]
+    mitre_attack: [ T1417 ]
+  -
+    id: FREJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/FREJ
+    owasp_top-10_client_side: [ 5 ]
+    owasp_top-10: [ A03:2025 ]
+    asvs: [ 14.2 ]
+    capec: [ CAPEC-683 ]
+    mitre_attack: [ T1176.001 ]
+  -
+    id: FREQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/FREQ
+    owasp_top-10_client_side: [ 9 ]
+    owasp_top-10: [ A05:2025 ]
+    asvs: [ 14.2 ]
+    capec: [ CAPEC-438 ]
+    mitre_attack: [ T1059.007 ]
+  -
+    id: FREK
+    value: K
+    url: https://cornucopia.owasp.org/cards/FREK
+    owasp_top-10_client_side: [ 10 ]
+    owasp_top-10: [ A02:2025 ]
+    asvs: [ 14.1 ]
+    capec: [ CAPEC-180 ]
+    mitre_attack: [ T1190 ]
 -
   id: SDL
   name: SSDLC
@@ -370,3 +539,136 @@ suits:
     id: SEK
     value: K
     url: https://cornucopia.owasp.org/cards/SEK
+-
+  id: BOT
+  name: Automated Threats
+  cards:
+  -
+    id: BOT2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/BOT2
+    stride: [ T ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ OAT-022 ]
+    cwe: [ 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/BOT3
+    stride: [ T ]
+    owasp_asvs: [ 2.3.1, 2.3.2 ]
+    owasp_asvs_print: [ 2.3.1-2 ]
+    owasp_oat: [ OAT-006 ]
+    cwe: [ 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/BOT4
+    stride: [ T ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ OAT-013 ]
+    capec: [ 210 ]
+  -
+    id: BOT5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/BOT5
+    stride: [ T ]
+    owasp_asvs: [ 2.3.2, 2.3.4 ]
+    owasp_asvs_print: [ 2.3.2, 2.3.4 ]
+    owasp_oat: [ OAT-021 ]
+    cwe: [ 799, 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/BOT6
+    stride: [ T ]
+    owasp_asvs: [ 2.3.2, 2.3.4 ]
+    owasp_asvs_print: [ 2.3.2, 2.3.4 ]
+    owasp_oat: [ OAT-005 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOT7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/BOT7
+    stride: [ S ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ OAT-012 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOT8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/BOT8
+    stride: [ E ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ OAT-019 ]
+    cwe: [ 799, 837, 841 ]
+    capec: [ 210 ]
+  -
+    id: BOT9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/BOT9
+    stride: [ T ]
+    owasp_asvs: [  2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ OAT-016 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOTX
+    value: X
+    url: https://cornucopia.owasp.org/cards/BOTX
+    stride: [ I ]
+    owasp_asvs: [ 2.3.2, 6.1.1, 6.3.1 ]
+    owasp_asvs_print: [ 2.3.2, 6.1.1, 6.3.1 ]
+    owasp_oat: [ OAT-002, OAT-007, OAT-010 ]
+    cwe: [ 307, 799, 837 ]
+    capec: [ 16, 49, 70, 110, 112, 210 ]
+  -
+    id: BOTJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/BOTJ
+    stride: [ I ]
+    owasp_asvs: [ 2.3.2, 2.4.1, 2.4.2, 6.1.1 ]
+    owasp_asvs_print: [  2.3.2, 2.4.1-2, 6.1.1 ]
+    owasp_oat: [ OAT-001, OAT-008 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOTQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/BOTQ
+    stride: [ T ]
+    owasp_asvs: [ 2.3.2 ]
+    owasp_asvs_print: [ 2.3.2 ]
+    owasp_oat: [ OAT-017 ]
+    cwe: [ 799, 837 ]
+    capec: [ 210 ]
+  -
+    id: BOTK
+    value: K
+    url: https://cornucopia.owasp.org/cards/BOTK
+    stride: [ I ]
+    owasp_asvs: [ 2.3.2, 14.2.6 ]
+    owasp_asvs_print: [ 2.3.2, 14.2.6 ]
+    owasp_oat: [ OAT-011 ]
+    cwe: [ 799 ]
+    capec: [ 210 ]
+  -
+    id: BOTA
+    value: A
+    url: https://cornucopia.owasp.org/cards/BOTA
+    stride: [  ]
+    owasp_asvs: [  ]
+    owasp_asvs_print: [ "-" ]
+    owasp_oat: [ ]
+    cwe: [  ]
+    capec: [ "-" ]

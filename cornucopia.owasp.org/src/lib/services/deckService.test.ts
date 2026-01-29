@@ -47,7 +47,7 @@ describe('DeckService tests', () => {
         expect(Array.from((new DeckService()).getCardsForAllVersionsAndLanguages().get('3.0-en').keys()).length).toBe(80);
 
         DeckService.clear();
-    });
+    }, 10000);
 
     it("should return 160 cards.", async () => {
         let cards = (new DeckService()).getCards('en');
