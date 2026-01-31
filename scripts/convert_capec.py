@@ -38,7 +38,6 @@ def create_capec_pages(
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
-
         f = open(capec_path / "index.md", "w", encoding="utf-8")
         f.write(f"# CAPEC-{i['_ID']}: {i['_Name']}\r\n")
         f.write("## Description\r\n\r\n")
@@ -49,10 +48,8 @@ def create_capec_pages(
             logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
         else:
             f.write("## Related ASVS Requirements\r\n")
-            f.write(
-                f"ASVS ({asvs_version}): \
-{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\r\n\r\n"
-            )
+            f.write(f"ASVS ({asvs_version}): \
+{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\r\n\r\n")
 
         f.close()
     logging.info("Created %d CAPEC pages", len(data["Attack_Pattern"]))
