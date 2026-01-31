@@ -5,11 +5,12 @@
     GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
-  import type { Card } from "../../domain/card/card";
+  import type { Card } from "$domain/card/card";
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
-  import type { Route } from "../../domain/routes/route";
-  import { MappingController } from "../../domain/mapping/mappingController";
+  import type { Route } from "$domain/routes/route";
+  import { MappingController } from "$domain/mapping/mappingController";
   import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
+  import LanguagePicker from "$lib/components/languagePicker.svelte";
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
@@ -19,16 +20,20 @@
     card: Card;
     cards: Map<string, Card>;
     routes: Map<string, Route[]>;
+    languages: string[];
+    language: string;
   }
 
   let {
     mappingData,
     card = $bindable(),
     cards,
-    routes
+    routes,
+    languages,
+    language
   }: Props = $props();
     
-  const controller: MappingController = new MappingController(mappingData);
+  const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
   let mappings = $state(controller.getCardMappings(card.id));
   let attacks: Attack[] = $state(GetCardAttacks(card.id));
@@ -38,17 +43,23 @@
     attacks = GetCardAttacks(card.id);
   });
 </script>
-
+<LanguagePicker 
+  edition={card.edition}
+  cardId={card.id}
+  version={card.version}
+  currentLanguage={language}
+  {languages}
+/>
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
-  {#if card.edition == 'webapp' &&  card.value != 'A' && card.value != 'B'}
+  {#if card.edition == 'webapp'}
   <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
   {/if}
-  {#if card.edition == 'mobileapp' &&  card.value != 'A' && card.value != 'B'}
+  {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
     {#key card}

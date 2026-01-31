@@ -20,15 +20,22 @@ This scenario is about exploiting trust for malicious gain, typically referred t
 
 ### What can go wrong?
 
-Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration.
+Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration, Session Hijacking, Cross-Site Request Forgery (CSRF) and Session Credential Falsification through Forging.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are we going to do about it?
 
 1. Implement robust verification and authentication measures to prevent misuse of the application’s trusted status.
-2. Educate users about the risks of phishing and other trust exploitation tactics. 
+2. Educate users about the risks of phishing and other trust exploitation tactics.
 3. Monitor and control how the application’s APIs and services interact with other systems, ensuring secure and verified connections.
 4. Establish strict guidelines and security protocols for third-party applications or services that integrate with the application.
+5. Implement Content Security Policy (CSP) to mitigate clickjacking and other injection attacks.
+6. Use secure cookies and implement anti-CSRF tokens to protect against session hijacking and CSRF attacks.
+7. Implement session management best practices, including secure session identifiers and proper session expiration.
+8. Enforce digital signatures and integrity checks for tokens and limit the scope and audience of their use.
+9. Harden token exchange flows, limit the lifetime of tokens and enforce cryptographic proof of possession.
+10. Regularly audit and update SSL/TLS configurations to prevent downgrade attacks.
+11. Employ multi-factor authentication (MFA) to enhance user account security.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

@@ -8,6 +8,6 @@
 /resources/ @sydseter @rewtd @cw-owasp
 
 # Source files (new games) should be reviewed by @cw-owasp
-/source/ @cw-owasp @rewtd
+/source/ @cw-owasp @rewtd @sydseter
 
 /cornucopia.owasp.org @cw-owasp @rewtd @sydseter

@@ -1,8 +1,7 @@
 import type { Suit } from "./suit";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { order } from "./order";
-import { cardOrder } from "../card/order";
-import lang from "$lib/translations/lang";
+import { cardOrder } from "$domain/card/order";
 
 export class SuitController {
 

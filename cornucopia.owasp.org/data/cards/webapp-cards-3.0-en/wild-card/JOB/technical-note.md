@@ -1,0 +1,1 @@
+Insufficient change management, access controls, and auditing allow an attacker to tamper with application configuration or data flows and cause the system to violate legal, regulatory, contractual, or organizational mandates.

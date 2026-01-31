@@ -13,8 +13,8 @@
 
     let { card = $bindable(), cards, mappingData }: Props = $props();
     let t = readTranslation();
-    let nextCard = cards.get(card.next);
-    let previousCard = cards.get(card.prevous);
+    let nextCard = $derived(cards.get(card.next));
+    let previousCard = $derived(cards.get(card.prevous));
     function checkKey(event : any) 
     {
         const KEYCODE_RIGHT = 39;
@@ -65,13 +65,13 @@
 <noscript>
     <div class="card-panel" id="card-face">
         <div class="left">
-            <a href={card.prevous + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+            <a href={cards.get(card.prevous)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
         </div>
         <div class="center">
             <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
         </div>
         <div class="right">
-            <a href={card.next + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+            <a href={cards.get(card.next)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
         </div>
     </div>
 </noscript>

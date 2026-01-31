@@ -1,9 +1,11 @@
 import fm from "front-matter"
 import fs from 'fs'
 import yaml from "js-yaml";
-import type { Card } from "../../domain/card/card";
+import type { Card } from "$domain/card/card";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import path from "path";
+import type { Deck } from "$domain/deck/deck";
+import { MappingService } from "$lib/services/mappingService";
 const __dirname = path.resolve(path.dirname(''));
 export class DeckService {
 
@@ -11,138 +13,157 @@ export class DeckService {
     }
     private static path: string = '/../source/';
     private static cache: object[] = [];
-    private static mappings: object[] = [];
 
-    private static languages = [
-        {lang: ['en'], edition: 'mobileapp'}, 
-        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp'}
+    private static readonly latests: Deck[] = [
+        {lang: ['en'], edition: 'mobileapp', version: '1.1'}, 
+        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'}
     ];
-    private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.2'}];
+    private static readonly decks: Deck[] = [
+        {edition: 'mobileapp', version: '1.1', lang: ['en']},
+        {edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']},
+        {edition: 'webapp', version: '3.0', lang: ['en']}];
 
-    private static getVersion(edition: string): string
+    public static hasEdition(edition: string): boolean
     {
-        return DeckService.decks.find((deck: { edition: string; }) => deck.edition == edition)?.version || '2.2';
+        return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
     }
 
-    private static getEdition(edition: string): string
+    public static hasVersion(edition: string, version: string): boolean
     {
-        return DeckService.decks.find((deck: { edition: string; }) => deck.edition == edition)?.edition || 'webapp';
+        return DeckService.decks.find((deck) => (deck.edition == edition && deck.version == version)) != undefined;
     }
 
-    private static getLanguage(edition: string, lang: string) : string
+    public static hasLanguage(edition: string, lang: string): boolean
     {
-        return DeckService.languages.find((deck) => (deck.edition == edition && deck.lang.includes(lang))) ? lang : 'en';
+        return DeckService.decks.find((deck) => (deck.edition == edition && deck.lang.includes(lang))) != undefined;
     }
 
-    private getCardMappingData(edition: string)
+    public static getDecks(): Deck[]
     {
-        const yamlData = fs.readFileSync(`${__dirname}${DeckService.path}${DeckService.getEdition(edition)}-mappings-${DeckService.getVersion(edition)}.yaml`, 'utf8');
-        let data = yaml.load(yamlData);
-        DeckService.mappings.push({edition: DeckService.getEdition(edition), data: data});
-        return data;
+        return DeckService.decks;
     }
 
-    public getCardMapping() : Map<string, any>
+    public static getLatestVersion(edition: string): string
     {
-        const decks = new Map<string, any>();
-        const editions = DeckService.languages;
-        editions.forEach((deck) => {
-            decks.set(
-                deck.edition, DeckService.mappings.find((mapping) => mapping?.edition == DeckService.getEdition(deck.edition))?.data || this.getCardMappingData(deck.edition)
-            );
-            
-        });
-        return decks;
+        return DeckService.latests.find((deck) => deck.edition == edition)?.version || '2.2';
+    }
+
+    public static getLatestEditions(): string[]
+    {
+        return DeckService.latests.map((deck) => deck.edition);
+    }
+    
+    public static getLanguages(edition: string) : string[]
+    {
+        let languages : string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
+        return languages.length !== 0 ? languages : ['en'];
+    }
+    public static getVersions(edition: string) : string[]
+    {
+        return DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.version);
     }
 
     public getCards(lang: string): Map<string, Card>
     {
-        return DeckService.cache.find((mapping) => mapping?.lang == lang)?.data || this.getCardData(lang);
-    }
-
-    public getCardsForAllLanguages() : Map<string, any>
-    {
-        const languages: string[] = DeckService.languages[1].lang;
-        let decks = new Map<string, any>();
-
-        const editions = DeckService.languages;
-        editions.forEach((edition, index) => {
-            languages.forEach((language, lang) => {
-                if (!editions[index].lang.includes(language)) language = 'en';
-                decks.set(
-                    language, this.getCards(language)
-                );
-
-            });
-            
-        });
-        return decks;
+        return DeckService.cache.find((deck) => deck?.lang == lang && deck?.version == 'latest')?.data || this.getCardData(lang);
     }
 
     private getCardData(lang: string)
     {
-        const cards = new Map<string, Card>;
-        const decks = DeckService.decks;
+        let cards = new Map<string, Card>;
+        const decks = DeckService.latests;
         for (let i in decks) {
-            let deck = decks[i];
-            let yamlData = fs.readFileSync(`${__dirname}${DeckService.path}${DeckService.getEdition(deck.edition)}-cards-${deck.version}-${DeckService.getLanguage(deck.edition, lang)}.yaml`, 'utf8');
-            let data = yaml.load(yamlData);
-            let mapping = this.getCardMapping().get(deck.edition);
-            let base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}-${lang}/`;
+            cards = new Map([...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang), ...cards]);
+            DeckService.cache.push({lang: lang, data: cards, version: 'latest'});
+        }
+        return cards;
+    }
 
-            if(!FileSystemHelper.hasDir(base)) {
-                base = `data/cards/${deck.edition}-cards-${DeckService.getVersion(deck.edition)}-en/`;
-            }
-            
-            for (let suit in data['suits']) {
-                let suitObject: any = data['suits'][suit];
-                let suitName: string = mapping['suits'][suit] != undefined ? mapping['suits'][suit]['name'] : 'WILD CARD';
-                for(let card in suitObject['cards']) {
-                    let cardObject = suitObject['cards'][card];
-                    cardObject.id = cardObject['id'];
-                    cardObject.edition = deck.edition;
-                    cardObject.suitName = suitName;
-                    cardObject.suitNameLocal = suitObject['name'];
-                    cardObject.suitId = suitObject['id'];
-                    cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
-                    cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
-                    cardObject.url = `/cards/${cardObject.id}`;
-                    cardObject.githubUrl = `` + cardObject.suit + '/' + cardObject.id;
-                    let path : string = `./${base}${cardObject.githubUrl}/technical-note.md`;  // '/explanation.md';
-                    let file = fs.readFileSync(path, 'utf8');
-                    let parsed = fm(file);
-                    cardObject.concept = parsed.body;
-                    cardObject.summary = fm(fs.readFileSync(`./${base}${cardObject.githubUrl}/explanation.md`, 'utf8')).body;
+    public getCardDataForEditionVersionLang(edition:string, version: string, lang: string)
+    {
+        const cards = new Map<string, Card>;
 
-                    if (+card == 0 && +suit == 0) {
-                        cardObject.prevous = data['suits'][(+data['suits'].length-1)]['cards'][+data['suits'][(+data['suits'].length-1)]['cards'].length-1]['id'];
-                    } else if (Number(card) == 0) {
-                        cardObject.prevous = data['suits'][+suit-1]['cards'][+data['suits'][+suit-1]['cards'].length-1]['id'];
-                    } else {
-                        cardObject.prevous = suitObject['cards'][+card-1]['id'];
-                    }
+        let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
 
-                    if (suitObject['cards'].length == +card+1 && data['suits'].length == +suit+1) {
-                        cardObject.next = data['suits'][0]['cards'][0]['id'];
-                    } else if (suitObject['cards'].length == +card+1) {
-                        cardObject.next = data['suits'][+suit+1]['cards'][0]['id'];
-                    } else {
-                        cardObject.next = suitObject['cards'][+card+1]['id'];
-                    }
-                    cardObject.prevous = cardObject.prevous;
-                    cardObject.next = cardObject.next;
-                    
-                    cards.set(cardObject.id, cardObject);
+        if(!FileSystemHelper.hasFile(cardFile)) {
+            return cards;
+        }
+
+        let yamlData = fs.readFileSync(cardFile, 'utf8');
+        let data = yaml.load(yamlData);
+        let base = `data/cards/${edition}-cards-${version}-${lang}/`;
+
+        if(!FileSystemHelper.hasDir(base)) {
+            base = `data/cards/${edition}-cards-${version}-en/`;
+        }
+
+        let mapping = (new MappingService()).getCardMapping(edition, version);
+
+        for (let suit in data['suits']) {
+            let suitObject: any = data['suits'][suit];
+            let suitName: string = mapping['suits'][suit]['name'];
+            for(let card in suitObject['cards']) {
+                let cardObject = suitObject['cards'][card];
+                cardObject.id = cardObject['id'];
+                cardObject.edition = edition;
+                cardObject.version = version;
+                cardObject.language = lang;
+                cardObject.suitName = suitName;
+                cardObject.suitNameLocal = suitObject['name'];
+                cardObject.suitId = suitObject['id'];
+                cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
+                cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
+                cardObject.url = `/card/${edition}/${cardObject.id}/${version}/${lang}`;
+                cardObject.githubUrl = `` + cardObject.suit + '/' + cardObject.id;
+                
+                let path : string = `./${base}${cardObject.githubUrl}/technical-note.md`;  // '/explanation.md';
+                let file: string;
+                try {
+                    file = fs.readFileSync(path, 'utf8');
+                } catch (e) {
+                    console.error(`Error reading file at path: ${path}`, e);
+                    continue;
                 }
+                let parsed = fm(file);
+                cardObject.concept = parsed.body;
+                try {
+                    cardObject.summary = fm(fs.readFileSync(`./${base}${cardObject.githubUrl}/explanation.md`, 'utf8')).body;
+                } catch (e) {
+                    console.error(`Error reading file at path: ./${base}${cardObject.githubUrl}/explanation.md`, e);
+                    continue;
+                }
+
+
+                if (+card == 0 && +suit == 0) {
+                    cardObject.prevous = data['suits'][(+data['suits'].length-1)]['cards'][+data['suits'][(+data['suits'].length-1)]['cards'].length-1]['id'];
+                } else if (Number(card) == 0) {
+                    cardObject.prevous = data['suits'][+suit-1]['cards'][+data['suits'][+suit-1]['cards'].length-1]['id'];
+                } else {
+                    cardObject.prevous = suitObject['cards'][+card-1]['id'];
+                }
+
+                if (suitObject['cards'].length == +card+1 && data['suits'].length == +suit+1) {
+                    cardObject.next = data['suits'][0]['cards'][0]['id'];
+                } else if (suitObject['cards'].length == +card+1) {
+                    cardObject.next = data['suits'][+suit+1]['cards'][0]['id'];
+                } else {
+                    cardObject.next = suitObject['cards'][+card+1]['id'];
+                }
+                cardObject.prevous = cardObject.prevous;
+                cardObject.next = cardObject.next;
+                
+                cards.set(cardObject.id, cardObject);
             }
         }
-        DeckService.cache.push({lang: lang, data: cards});
+
+        console.log(`Caching cards for ${edition} ${version} ${lang} - total cards: ${cards.size}`);
+
+        DeckService.cache.push({edition: edition, version: version, lang: lang, data: cards});
         return cards;
     }
 
     public static clear(): void
     {
         DeckService.cache = [];
-        DeckService.mappings = [];
     }
 }

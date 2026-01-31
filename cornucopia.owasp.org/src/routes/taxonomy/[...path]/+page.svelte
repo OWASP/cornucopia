@@ -16,18 +16,14 @@
     <meta name="twitter:title" content="{Text.Format(data.title)}">
     <meta name="twitter:description" content="{Text.Format(data.title)}">
 </svelte:head>
-{#if data.folders.length != 0 }
+{#if data.categories.length != 0 }
 <h1 class="clickable" title="{Text.Format(data.title)}" id="{data.title}">{Text.Format(data.title)}</h1>
 {/if}
 <div>
-<!--The location is a file -->
-{#each data.files as file}
-    <p>├──<a title="{Text.Format(file)}" href="/taxonomy/{data.path.toLowerCase()}/{file.toLowerCase()}">{Text.Format(file)}</a></p>
-{/each}
 
 <!--The location is a folder -->
-{#each data.folders as folder}
-    <p>├──<a title="{Text.Format(folder)}" href="/taxonomy/{data.path.toLowerCase()}/{folder.toLowerCase()}">{Text.Format(folder)}</a></p>
+{#each data.categories as category}
+    <p>├──<a title="{Text.Format(category)}" href="{data.path}/{category.toLowerCase()}">{Text.Format(category)}</a></p>
 {/each}
 
 <!--The location is filecontent -->

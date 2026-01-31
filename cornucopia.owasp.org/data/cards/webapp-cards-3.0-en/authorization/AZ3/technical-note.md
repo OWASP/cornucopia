@@ -1,0 +1,1 @@
+This card is related to indirect unauthorized access to sensitive information. This could also be residual information such as cached data, data stored temporarily, and the inadequate deletion of information that is no longer required (and has passed its required retention period).

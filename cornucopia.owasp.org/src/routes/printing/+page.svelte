@@ -7,7 +7,7 @@
     let { data } = $props();
     let t = readTranslation();
     const lang = readLang();
-    let content = data.content.get($lang) || data.content.get('en');
+    let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
 <svelte:head>
     <title>{$t('printing.head.title')}</title>

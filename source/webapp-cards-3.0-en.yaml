@@ -408,7 +408,7 @@ suits:
     id: "CJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CJ"
-    desc: "Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented, or passed on to operational teams, or the user is not warned or access blocked when the expected security features are not supported or enabled"
+    desc: "Roman can exploit the application because it was insecurely compiled or deployed, or its configuration is not secure by default, or because security information was not documented, or passed on to operational teams, or the user is not warned and access blocked when the expected security features are unsupported or disabled"
   -
     id: "CQ"
     value: "Q"

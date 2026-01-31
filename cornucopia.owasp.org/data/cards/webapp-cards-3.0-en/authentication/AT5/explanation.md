@@ -1,0 +1,45 @@
+## Scenario: Javier’s Exploitation of Weak Credentials
+
+Picture a scenario where Javier gains unauthorized access by exploiting weak or overlooked aspects of credential management. He capitalizes on:
+
+1. **Default Credentials:** Using default usernames and passwords that haven’t been changed.
+
+2. **Test Accounts:** Accessing accounts created for testing, which are often less secure.
+
+3. **Guessable Credentials:** Exploiting simple or commonly used passwords.
+
+4. **Old Accounts:** Utilizing accounts that are no longer active but haven’t been properly deactivated.
+
+5. **Unnecessary Accounts:** Gaining access through accounts that exist but are not essential for the application's operation.
+
+### Example
+
+Javier targets a company’s web application that still has accounts with default credentials, such as "admin/admin." These accounts, often overlooked or forgotten, provide an easy entry point. He uses these credentials to log in, gaining the same level of access as a legitimate administrator, which he then uses to access sensitive data and system controls.
+
+## Threat Modeling
+
+### STRIDE
+
+This scenario falls under STRIDE: **Spoofing**.
+
+Spoofing is about pretending to be someone or something you’re not.
+By logging in with default, test, old, or unnecessary accounts, Javier spoofs a legitimate user (or admin), but
+if the default/test account has higher-than-normal rights (e.g., admin), Javier also escalates privileges making **Elevation of Privilege** a secondary impact.
+
+### What can go wrong?
+
+Such vulnerabilities allow for unauthorized access and control, leading to potential data breaches, system manipulations, and other security risks.
+
+For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
+
+### What are we going to do about it?
+
+No default (e.g. vendor), old, or test accounts should exist. Each user should have their own individual account, and accounts should only be issued and active for those people/systems that have been permitted access for the required need of their job/role.
+
+1. Ensure all default credentials are changed upon system setup or application installation.
+2. Regularly audit accounts to identify and remove or secure test and unnecessary accounts.
+3. Implement and enforce strong password policies, discouraging easily guessable passwords, and implement multi-factor authentication.
+4. Routinely deactivate old accounts and monitor for any unauthorized access attempts.
+5. Put automatic time limits on temporary accounts.
+
+For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

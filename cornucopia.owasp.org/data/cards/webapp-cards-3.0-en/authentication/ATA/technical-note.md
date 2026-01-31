@@ -1,0 +1,1 @@
+Players can discuss any type of Authentication (AT) attack they think might be possible against the assessment target. It does not matter if the attack relates to another AT card, but if possible try to identify an attack that is fairly unique to the application/functionality/users.
