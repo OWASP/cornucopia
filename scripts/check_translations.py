@@ -29,12 +29,14 @@ class TranslationChecker:
             with open(yaml_file, 'r', encoding='utf-8') as f:
                 data = yaml.safe_load(f)
                 
-            # Check if data has common_ids section
-            if data and 'common_ids' in data:
-                for item in data['common_ids']:
-                    tag_id = item.get('id', '')
-                    if tag_id.startswith('T0'):
-                        tags[tag_id] = item.get('text', '')
+            # Extract tags from paragraphs.sentences
+            if data and 'paragraphs' in data:
+                for paragraph in data['paragraphs']:
+                    if 'sentences' in paragraph:
+                        for sentence in paragraph['sentences']:
+                            tag_id = sentence.get('id', '')
+                            if tag_id.startswith('T0'):
+                                tags[tag_id] = sentence.get('text', '')
                         
         except Exception as e:
             print(f"Error reading {yaml_file}: {e}", file=sys.stderr)
@@ -139,7 +141,7 @@ class TranslationChecker:
         
         if not self.results:
             report_lines.append("# Translation Check Report\n")
-            report_lines.append("✅ All translations have the same tags as the English version.\n")
+            report_lines.append("✅ All existing translations have been completed.\n")
             return '\n'.join(report_lines)
             
         report_lines.append("# Translation Check Report\n")
@@ -162,7 +164,7 @@ class TranslationChecker:
             languages = self.results[base_name]
             
             for lang in sorted(languages.keys()):
-                lang_name = lang_names.get(lang, lang.upper())
+                lang_name = lang_names.get(lang, lang)
                 issues = languages[lang]
                 filename = issues.get('file', '')
                 

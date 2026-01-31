@@ -1,10 +1,12 @@
 """
 Integration tests for translation tag checking.
 
-Tests that all translations have the same T0xxx tags as the English version.
+Tests that all translations in the actual source directory have the same T0xxx tags as the English version.
 """
 
 import unittest
+import yaml
+import re
 from pathlib import Path
 import sys
 
@@ -15,12 +17,12 @@ sys.path.insert(0, str(scripts_path))
 from check_translations import TranslationChecker
 
 
-class TestTranslationTags(unittest.TestCase):
-    """Test that translations have the same tags as English versions."""
+class TestTranslationTagsIntegration(unittest.TestCase):
+    """Integration tests that check actual translation files."""
 
     def setUp(self):
         """Set up test fixtures."""
-        # Navigate up from tests/scripts to cornucopia root
+        # Navigate up from scripts to cornucopia root
         self.base_path = Path(__file__).parent.parent.parent
         self.source_dir = self.base_path / 'source'
         self.checker = TranslationChecker(self.source_dir)
@@ -40,7 +42,7 @@ class TestTranslationTags(unittest.TestCase):
             "No English card files found in source directory"
         )
 
-    def test_translations_have_all_tags(self):
+    def test_translations_completeness(self):
         """
         Test that all translations have the same T0xxx tags as English.
         
@@ -64,7 +66,7 @@ class TestTranslationTags(unittest.TestCase):
                     total_issues += len(issues.get('empty', []))
                     
             self.fail(
-                f"\n\nTranslation issues found ({total_issues} total):\n\n{report}\n"
+                f"\\n\\nTranslation issues found ({total_issues} total):\\n\\n{report}\\n"
             )
 
     def test_no_duplicate_tags_in_english(self):
@@ -72,23 +74,21 @@ class TestTranslationTags(unittest.TestCase):
         english_files = list(self.source_dir.glob('*-cards-*-en.yaml'))
         
         for eng_file in english_files:
-            tags = self.checker.extract_tags(eng_file)
-            # Extract_tags returns a dict, so duplicates would be overwritten
-            # We need to check the raw file for duplicates
-            import yaml
             with open(eng_file, 'r', encoding='utf-8') as f:
                 data = yaml.safe_load(f)
                 
-            if data and 'common_ids' in data:
+            if data and 'paragraphs' in data:
                 seen_ids = set()
                 duplicates = []
                 
-                for item in data['common_ids']:
-                    tag_id = item.get('id', '')
-                    if tag_id.startswith('T0'):
-                        if tag_id in seen_ids:
-                            duplicates.append(tag_id)
-                        seen_ids.add(tag_id)
+                for paragraph in data['paragraphs']:
+                    if 'sentences' in paragraph:
+                        for sentence in paragraph['sentences']:
+                            tag_id = sentence.get('id', '')
+                            if tag_id.startswith('T0'):
+                                if tag_id in seen_ids:
+                                    duplicates.append(tag_id)
+                                seen_ids.add(tag_id)
                         
                 self.assertEqual(
                     len(duplicates), 0,
@@ -97,7 +97,6 @@ class TestTranslationTags(unittest.TestCase):
 
     def test_tag_format(self):
         """Test that tags follow the T0xxxx format."""
-        import re
         tag_pattern = re.compile(r'^T0\d{4,5}$')
         
         english_files = list(self.source_dir.glob('*-cards-*-en.yaml'))
