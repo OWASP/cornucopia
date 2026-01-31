@@ -18,7 +18,9 @@ Choi really wanted to pay his student loan, but he also really needed to go to t
 
 ### STRIDE
 
-This scenario falls under the *Spoofing* category of the STRIDE because Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
+This scenario falls under the *Spoofing* category of the STRIDE.
+
+Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
 
 ### What can go wrong? 
  
