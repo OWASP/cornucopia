@@ -1,12 +1,12 @@
-# Smoke Tests for OWASP Cornucopia Applications
+# Smoke Tests for copi.owasp.org
 
-This directory contains smoke tests for the OWASP Cornucopia project applications.
+This directory contains smoke tests for the copi.owasp.org application.
 
 ## Overview
 
-The smoke tests verify basic functionality of both deployed applications:
-- **copi.owasp.org** - The Elixir/Phoenix game engine
-- **cornucopia.owasp.org** - The SvelteKit card browser website
+The smoke tests verify basic functionality of the copi.owasp.org Elixir/Phoenix game engine by running against a Dockerized application and database in the CI pipeline (localhost).
+
+**Note:** We do not need smoke tests for cornucopia.owasp.org because Vite comes with built-in smoke tests that fire up the server and check that all internal links on the website go to live pages.
 
 ## What Do Smoke Tests Check?
 
@@ -16,31 +16,18 @@ The smoke tests verify basic functionality of both deployed applications:
 3. JavaScript assets are being served
 4. Server responds with proper HTTP headers
 
-### For cornucopia.owasp.org (SvelteKit)
-1. Homepage loads successfully (HTTP 200)
-2. Cards browser route (`/cards`) is accessible
-3. JavaScript/Svelte bundles are being served
-4. Individual card detail pages are accessible (e.g., `/cards/VE2`)
-5. Page structure indicates JavaScript execution capability
-
-### Integration Tests
-1. Both applications respond within acceptable time limits
-2. Both applications are simultaneously accessible
-
 ## Running the Tests
 
 ### Locally
+
+To run the smoke tests locally, you need to have the copi.owasp.org application running on `http://127.0.0.1:4000` (or set the `COPI_BASE_URL` environment variable to a different URL).
 
 ```bash
 # Run all smoke tests
 python -m unittest tests.scripts.smoke_tests -v
 
-# Run tests for specific application
+# Run tests for copi.owasp.org
 python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
-python -m unittest tests.scripts.smoke_tests.CornucopiaSmokeTests -v
-
-# Run integration tests
-python -m unittest tests.scripts.smoke_tests.IntegrationSmokeTests -v
 ```
 
 ### With pipenv
@@ -51,11 +38,13 @@ pipenv run python -m unittest tests.scripts.smoke_tests -v
 
 ### In CI/CD
 
-Smoke tests run automatically:
-- On every push to `master` that affects the applications
+The smoke tests run automatically in the CI pipeline:
+- On every push to `master` that affects the copi.owasp.org application
 - Daily at 6 AM UTC (scheduled)
 - Manually via workflow dispatch
-- As part of the regular test suite
+- As part of the regular test suite on pull requests
+
+**Important:** In the CI pipeline, the smoke tests run against a Dockerized copi.owasp.org application and PostgreSQL database provisioned specifically for the test job on localhost (port 4000).
 
 ## Test Structure
 
@@ -85,15 +74,19 @@ Two workflows handle smoke tests:
    - Runs on schedule (daily)
    - Runs on manual trigger
    - Runs when application code changes
+   - Provisions Docker containers (PostgreSQL database + copi.owasp.org application) on localhost
+   - Runs smoke tests against the Dockerized application on localhost:4000
 
 2. **run-tests.yaml** - Main test workflow
-   - Includes smoke tests alongside unit and integration tests
+   - Includes smoke tests along with other tests (unit/integration)
    - Runs on pull requests
+   - Note: Currently runs smoke tests without Docker provisioning - may need to be updated
 
 ## Expected Results
 
-All tests should pass when both applications are properly deployed and functioning. If smoke tests fail, it indicates:
-- One or both applications are not accessible
+All tests should pass when the copi.owasp.org application is properly running. If smoke tests fail, it indicates:
+- The application is not accessible on the expected URL
 - Routes have changed or been removed
 - JavaScript is not loading properly
 - Server configuration issues
+- Database connectivity issues
