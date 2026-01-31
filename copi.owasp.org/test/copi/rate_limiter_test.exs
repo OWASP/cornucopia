@@ -1,147 +1,140 @@
 defmodule Copi.RateLimiterTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
   alias Copi.RateLimiter
 
+  setup do
+    # Tests run sequentially and use unique IPs to avoid conflicts
+    :ok
+  end
+
   describe "game creation rate limiting" do
     test "allows requests under the limit" do
-      ip = "127.0.0.1"
+      ip = "127.0.0.#{:rand.uniform(255)}"
       
       # First request should be allowed
-      assert {:ok, remaining} = RateLimiter.check_rate(ip, :game_creation)
+      assert {:ok, remaining} = RateLimiter.check_and_record(ip, :game_creation)
       assert remaining >= 0
       
-      RateLimiter.record_action(ip, :game_creation)
-      
       # Second request should still be allowed
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :game_creation)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
     end
 
     test "blocks requests over the limit" do
-      ip = "192.168.1.100"
+      ip = "192.168.1.#{:rand.uniform(255)}"
       config = RateLimiter.get_config()
       max_games = config.game_creation.max_requests
       
       # Make max_requests number of game creations
       for _i <- 1..max_games do
-        assert {:ok, _remaining} = RateLimiter.check_rate(ip, :game_creation)
-        RateLimiter.record_action(ip, :game_creation)
+        assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
       end
       
       # Next request should be blocked
-      assert {:error, :rate_limited, retry_after} = RateLimiter.check_rate(ip, :game_creation)
+      assert {:error, :rate_limited, retry_after} = RateLimiter.check_and_record(ip, :game_creation)
       assert retry_after > 0
     end
 
     test "different IPs have independent limits" do
-      ip1 = "10.0.0.1"
-      ip2 = "10.0.0.2"
+      ip1 = "10.0.0.#{:rand.uniform(255)}"
+      ip2 = "10.0.1.#{:rand.uniform(255)}"
       config = RateLimiter.get_config()
       max_games = config.game_creation.max_requests
       
       # Exhaust limit for ip1
       for _i <- 1..max_games do
-        RateLimiter.check_rate(ip1, :game_creation)
-        RateLimiter.record_action(ip1, :game_creation)
+        RateLimiter.check_and_record(ip1, :game_creation)
       end
       
       # ip1 should be blocked
-      assert {:error, :rate_limited, _} = RateLimiter.check_rate(ip1, :game_creation)
+      assert {:error, :rate_limited, _} = RateLimiter.check_and_record(ip1, :game_creation)
       
       # ip2 should still be allowed
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip2, :game_creation)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip2, :game_creation)
     end
   end
 
   describe "connection rate limiting" do
     test "allows connections under the limit" do
-      ip = "172.16.0.1"
+      ip = "172.16.0.#{:rand.uniform(255)}"
       
-      assert {:ok, remaining} = RateLimiter.check_rate(ip, :connection)
+      assert {:ok, remaining} = RateLimiter.check_and_record(ip, :connection)
       assert remaining >= 0
       
-      RateLimiter.record_action(ip, :connection)
-      
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :connection)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :connection)
     end
 
     test "blocks connections over the limit" do
-      ip = "172.16.0.2"
+      ip = "172.16.1.#{:rand.uniform(255)}"
       config = RateLimiter.get_config()
       max_connections = config.connection.max_requests
       
       # Make max_requests number of connections
       for _i <- 1..max_connections do
-        assert {:ok, _remaining} = RateLimiter.check_rate(ip, :connection)
-        RateLimiter.record_action(ip, :connection)
+        assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :connection)
       end
       
       # Next connection should be blocked
-      assert {:error, :rate_limited, retry_after} = RateLimiter.check_rate(ip, :connection)
+      assert {:error, :rate_limited, retry_after} = RateLimiter.check_and_record(ip, :connection)
       assert retry_after > 0
     end
   end
 
   describe "player creation rate limiting" do
     test "allows player creation under the limit" do
-      ip = "192.168.2.1"
+      ip = "192.168.2.#{:rand.uniform(255)}"
       
-      assert {:ok, remaining} = RateLimiter.check_rate(ip, :player_creation)
+      assert {:ok, remaining} = RateLimiter.check_and_record(ip, :player_creation)
       assert remaining >= 0
       
-      RateLimiter.record_action(ip, :player_creation)
-      
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :player_creation)
     end
 
     test "blocks player creation over the limit" do
-      ip = "192.168.2.2"
+      ip = "192.168.3.#{:rand.uniform(255)}"
       config = RateLimiter.get_config()
       max_players = config.player_creation.max_requests
       
       # Make max_requests number of player creations
       for _i <- 1..max_players do
-        assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
-        RateLimiter.record_action(ip, :player_creation)
+        assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :player_creation)
       end
       
       # Next request should be blocked
-      assert {:error, :rate_limited, retry_after} = RateLimiter.check_rate(ip, :player_creation)
+      assert {:error, :rate_limited, retry_after} = RateLimiter.check_and_record(ip, :player_creation)
       assert retry_after > 0
     end
 
     test "player creation limit is separate from game creation limit" do
-      ip = "192.168.2.3"
+      ip = "192.168.4.#{:rand.uniform(255)}"
       config = RateLimiter.get_config()
       max_games = config.game_creation.max_requests
       
       # Exhaust game creation limit
       for _i <- 1..max_games do
-        RateLimiter.check_rate(ip, :game_creation)
-        RateLimiter.record_action(ip, :game_creation)
+        RateLimiter.check_and_record(ip, :game_creation)
       end
       
       # Game creation should be blocked
-      assert {:error, :rate_limited, _} = RateLimiter.check_rate(ip, :game_creation)
+      assert {:error, :rate_limited, _} = RateLimiter.check_and_record(ip, :game_creation)
       
       # Player creation should still be allowed (separate limit)
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :player_creation)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :player_creation)
     end
   end
 
   describe "rate limit window expiration" do
     test "allows requests after window expires" do
-      ip = "192.168.100.1"
+      ip = "192.168.100.#{:rand.uniform(255)}"
       
       # This test would require waiting for the window to expire
       # In a real scenario, you might want to use a mock timer or 
       # make the window configurable for testing
       
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :game_creation)
-      RateLimiter.record_action(ip, :game_creation)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
       
       # Verify request was recorded
-      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :game_creation)
+      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
     end
   end
 

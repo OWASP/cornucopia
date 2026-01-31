@@ -37,6 +37,16 @@ defmodule Copi.RateLimiter do
   end
 
   @doc """
+  Atomically checks and records an action if allowed.
+  This prevents race conditions where multiple requests could bypass the rate limit.
+  
+  Returns `{:ok, remaining}` if allowed and recorded, `{:error, :rate_limited, retry_after}` if blocked.
+  """
+  def check_and_record(ip_address, action) when action in [:game_creation, :player_creation, :connection] do
+    GenServer.call(__MODULE__, {:check_and_record, ip_address, action})
+  end
+
+  @doc """
   Clears all rate limit data for an IP address (useful for testing).
   """
   def clear_ip(ip_address) do
@@ -99,6 +109,45 @@ defmodule Copi.RateLimiter do
 
     if count < config.max_requests do
       {:reply, {:ok, remaining}, state}
+    else
+      oldest_request = List.first(valid_requests)
+      retry_after = oldest_request + config.window_seconds - now
+      
+      Logger.warning(
+        "Rate limit exceeded for IP #{inspect(ip_address)}, action: #{action}, " <>
+        "count: #{count}/#{config.max_requests}, retry_after: #{retry_after}s"
+      )
+      
+      {:reply, {:error, :rate_limited, retry_after}, state}
+    end
+  end
+
+  @impl true
+  def handle_call({:check_and_record, ip_address, action}, _from, state) do
+    now = System.system_time(:second)
+    config = state.config[action]
+    
+    ip_requests = get_ip_requests(state, ip_address, action)
+    
+    # Filter out expired requests
+    valid_requests = Enum.filter(ip_requests, fn timestamp ->
+      now - timestamp < config.window_seconds
+    end)
+
+    count = length(valid_requests)
+    remaining = max(0, config.max_requests - count - 1)  # -1 because we're about to record
+
+    if count < config.max_requests do
+      # Atomically record the action before returning success
+      updated_requests = [now | valid_requests]
+      new_requests = Map.update(
+        state.requests,
+        ip_address,
+        %{action => updated_requests},
+        fn actions -> Map.put(actions, action, updated_requests) end
+      )
+      
+      {:reply, {:ok, remaining}, %{state | requests: new_requests}}
     else
       oldest_request = List.first(valid_requests)
       retry_after = oldest_request + config.window_seconds - now

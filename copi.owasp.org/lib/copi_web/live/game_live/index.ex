@@ -8,12 +8,15 @@ defmodule CopiWeb.GameLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     # Rate limit WebSocket connections
-    ip_address = get_connect_ip(socket)
+    ip_address = CopiWeb.Helpers.IPHelper.get_connect_ip(socket)
     
-    case Copi.RateLimiter.check_rate(ip_address, :connection) do
+    case Copi.RateLimiter.check_and_record(ip_address, :connection) do
       {:ok, _remaining} ->
-        Copi.RateLimiter.record_action(ip_address, :connection)
-        {:ok, assign(socket, :games, nil)}
+        if connected?(socket) do
+          Phoenix.PubSub.subscribe(Copi.PubSub, "games")
+        end
+
+        {:ok, assign(socket, games: list_games(), ip_address: ip_address)}
         
       {:error, :rate_limited, retry_after} ->
         {:ok,
@@ -59,15 +62,6 @@ defmodule CopiWeb.GameLive.Index do
   @impl true
   def handle_info({:update_parent, new_state}, socket) do
     {:noreply, assign(socket, :games, new_state)}
-  end
-
-  defp get_connect_ip(socket) do
-    case get_connect_info(socket, :peer_data) do
-      %{address: {a, b, c, d}} -> "#{a}.#{b}.#{c}.#{d}"
-      %{address: {a, b, c, d, e, f, g, h}} -> 
-        :inet.ntoa({a, b, c, d, e, f, g, h}) |> to_string()
-      _ -> "unknown"
-    end
   end
 
 end

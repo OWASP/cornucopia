@@ -108,15 +108,13 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   defp save_game(socket, :new, game_params) do
     # Get the IP address for rate limiting
-    ip_address = get_connect_ip(socket)
+    ip_address = socket.assigns.ip_address
     
-    # Check rate limit before creating game
-    case Copi.RateLimiter.check_rate(ip_address, :game_creation) do
+    # Check and record rate limit atomically
+    case Copi.RateLimiter.check_and_record(ip_address, :game_creation) do
       {:ok, _remaining} ->
         case Cornucopia.create_game(game_params) do
           {:ok, game} ->
-            # Record the action after successful creation
-            Copi.RateLimiter.record_action(ip_address, :game_creation)
             
             {:noreply,
              socket
@@ -140,12 +138,4 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     end
   end
 
-  defp get_connect_ip(socket) do
-    case get_connect_info(socket, :peer_data) do
-      %{address: {a, b, c, d}} -> "#{a}.#{b}.#{c}.#{d}"
-      %{address: {a, b, c, d, e, f, g, h}} -> 
-        :inet.ntoa({a, b, c, d, e, f, g, h}) |> to_string()
-      _ -> "unknown"
-    end
-  end
 end

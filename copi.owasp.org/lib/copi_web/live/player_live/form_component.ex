@@ -75,15 +75,13 @@ defmodule CopiWeb.PlayerLive.FormComponent do
 
   defp save_player(socket, :new, player_params) do
     # Get the IP address for rate limiting
-    ip_address = get_connect_ip(socket)
+    ip_address = socket.assigns.ip_address
     
-    # Check rate limit before creating player
-    case Copi.RateLimiter.check_rate(ip_address, :player_creation) do
+    # Check and record rate limit atomically
+    case Copi.RateLimiter.check_and_record(ip_address, :player_creation) do
       {:ok, _remaining} ->
         case Cornucopia.create_player(player_params) do
           {:ok, player} ->
-            # Record the action after successful creation
-            Copi.RateLimiter.record_action(ip_address, :player_creation)
 
             {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
             CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
@@ -114,12 +112,4 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     "game:#{game_id}"
   end
 
-  defp get_connect_ip(socket) do
-    case get_connect_info(socket, :peer_data) do
-      %{address: {a, b, c, d}} -> "#{a}.#{b}.#{c}.#{d}"
-      %{address: {a, b, c, d, e, f, g, h}} -> 
-        "#{Integer.to_string(a, 16)}:#{Integer.to_string(b, 16)}:#{Integer.to_string(c, 16)}:#{Integer.to_string(d, 16)}:#{Integer.to_string(e, 16)}:#{Integer.to_string(f, 16)}:#{Integer.to_string(g, 16)}:#{Integer.to_string(h, 16)}"
-      _ -> "unknown"
-    end
-  end
 end
