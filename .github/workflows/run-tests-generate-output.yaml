@@ -63,7 +63,7 @@ jobs:
 =======
       - name: Check translation tags
         run: |
-          pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
+          pipenv run python scripts/check_translations.py || echo "Translation issues found, continuing..."
       - name: Upload translation check report
         if: always()
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
