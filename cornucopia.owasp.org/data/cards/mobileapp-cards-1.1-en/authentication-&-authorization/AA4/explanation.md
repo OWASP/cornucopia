@@ -1,17 +1,19 @@
+## Scenario: Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly
+
 ## STRIDE: Tampering
 
-The situation falls under the Tampering category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on client-controlled data or incorrectly implemented client-side controls for security-relevant decisions.
+The situation falls under the Tampering category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
 
-An attacker can install the mobile app and observe how it communicates with backend services or platform security components. By intercepting and modifying requests, or by abusing weaknesses in local security mechanisms, the attacker can alter values such as identifiers, roles, or feature-related parameters. If these values or results are trusted without proper validation, unauthorized actions or data manipulation can occur.
+An attacker can install the mobile app and observe how it interacts with platform security components such as the keystore or keychain. By abusing weaknesses in local authentication logic, misuse of CryptoObject, improper exception handling, or misconfiguration of hardware-backed keystores or keychains, the attacker can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
 
-This issue commonly arises when security-relevant decisions rely on client-side controls that are implemented incorrectly or can be bypassed, for example due to misuse of platform security APIs, improper exception handling, or misconfiguration of hardware-backed keystores or keychains.
+This issue commonly arises when security-relevant decisions are enforced on the device using client-side controls that are implemented incorrectly or can be bypassed.
 
 ### What could go wrong?
 
-If request data or authentication results can be modified or influenced without proper validation, attackers can tamper with application logic, bypass access controls, and manipulate sensitive data in ways not intended by the application design.
+If biometric authentication or local validation logic can be bypassed or manipulated, attackers can tamper with application logic, bypass access controls, and perform actions that should only be allowed after successful user authentication.
 
 ### What are we going to do about it?
 
-Ensure that security-relevant decisions are enforced within the correct trust boundary. When authorization is handled by a backend service, every request must be validated based on the authenticated user and intended action. When authentication or validation is performed on the device, platform security mechanisms such as hardware-backed keystores or keychains must be implemented correctly and must not be relied upon incorrectly.
+Ensure that client-side authentication mechanisms such as biometric authentication are implemented correctly and securely. Platform security features like hardware-backed keystores or keychains must be used as intended, including correct use of CryptoObject and proper exception handling.
 
-Avoid trusting client-controlled values such as roles, identifiers, or feature flags. Design APIs and authentication flows so that request tampering or misuse of platform security APIs does not grant unauthorized functionality. Use the OWASP Mobile Application Security Testing Guide (MASTG) to verify that authentication, authorization, and request-integrity controls are correctly implemented and tested.
+Biometric authentication should not be relied upon incorrectly as the sole source of authorization for sensitive operations. Use the OWASP Mobile Application Security Testing Guide (MASTG) to verify that biometric authentication, keystore usage, and related security controls are correctly implemented and tested.
