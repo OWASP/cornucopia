@@ -5,6 +5,7 @@ import argparse
 import json
 import logging
 from pathlib import Path
+import yaml
 
 import scripts.convert_capec as capec
 
@@ -184,9 +185,26 @@ class TestParseArguments(unittest.TestCase):
 
     def test_parse_arguments_all_options(self):
         """Test parsing arguments with all options"""
-        args = capec.parse_arguments(["-o", "custom/output", "-i", "custom/input.json", "-d"])
+        args = capec.parse_arguments(
+            [
+                "-o",
+                "custom/output",
+                "-i",
+                "custom/input.json",
+                "-am",
+                "custom/asvs.json",
+                "-ca",
+                "custom/capec.yaml",
+                "-av",
+                "5.0",
+                "-d",
+            ]
+        )
         self.assertEqual(args.output_path, "custom/output")
         self.assertEqual(args.input_path, "custom/input.json")
+        self.assertEqual(args.asvs_mapping, "custom/asvs.json")
+        self.assertEqual(args.capec_to_asvs, "custom/capec.yaml")
+        self.assertEqual(args.asvs_version, "5.0")
         self.assertTrue(args.debug)
 
 
@@ -283,9 +301,12 @@ class TestCreateCapecPages(unittest.TestCase):
             }
         }
 
+        test_asvs_map = {"Requirements": []}
+        test_capec_to_asvs_map = {}
+
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(test_data)
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Verify create_folder was called
         mock_create_folder.assert_called()
@@ -324,9 +345,12 @@ class TestCreateCapecPages(unittest.TestCase):
             }
         }
 
+        test_asvs_map = {"Requirements": []}
+        test_capec_to_asvs_map = {}
+
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(test_data)
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Verify create_folder was called twice (once for each pattern)
         self.assertEqual(mock_create_folder.call_count, 2)
@@ -358,9 +382,12 @@ class TestCreateCapecPages(unittest.TestCase):
             }
         }
 
+        test_asvs_map = {"Requirements": []}
+        test_capec_to_asvs_map = {}
+
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(test_data)
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Get the written content
         handle = mock_file()
@@ -396,6 +423,221 @@ class TestSetLogging(unittest.TestCase):
 
         mock_basic_config.assert_called_once()
         mock_logger.setLevel.assert_called_with(logging.INFO)
+
+
+class TestGetValidVersion(unittest.TestCase):
+    def test_get_valid_version_valid(self):
+        """Test get_valid_version with valid version"""
+        result = capec.get_valid_version("5.0")
+        self.assertEqual(result, "5.0")
+
+    def test_get_valid_version_invalid(self):
+        """Test get_valid_version with invalid version returns latest"""
+        latest = capec.ConvertVars.LATEST_ASVS_VERSION_CHOICES[-1]
+        result = capec.get_valid_version("invalid")
+        self.assertEqual(result, latest)
+
+    def test_get_valid_version_old_version(self):
+        """Test get_valid_version with old version returns latest"""
+        latest = capec.ConvertVars.LATEST_ASVS_VERSION_CHOICES[-1]
+        result = capec.get_valid_version("4.0")
+        self.assertEqual(result, latest)
+
+
+class TestLoadCapecToAsvsMapping(unittest.TestCase):
+    @patch("yaml.safe_load")
+    @patch("builtins.open", new_callable=mock_open)
+    def test_load_capec_to_asvs_mapping_valid(self, mock_file, mock_yaml_load):
+        """Test loading valid CAPEC to ASVS mapping"""
+        test_data = {1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]}, 5: {"owasp_asvs": ["V1.2.9"]}}
+        mock_yaml_load.return_value = test_data
+
+        result = capec.load_capec_to_asvs_mapping(Path("test.yaml"))
+
+        self.assertIsInstance(result, dict)
+        self.assertIn(1, result)
+        self.assertIn(5, result)
+        self.assertEqual(result[1]["owasp_asvs"], ["V8.1.1", "V8.2.1"])
+        self.assertEqual(result[5]["owasp_asvs"], ["V1.2.9"])
+
+    def test_load_capec_to_asvs_mapping_file_not_found(self):
+        """Test loading non-existent CAPEC to ASVS mapping"""
+        with patch("builtins.open", side_effect=FileNotFoundError("File not found")):
+            with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
+                result = capec.load_capec_to_asvs_mapping(Path("nonexistent.yaml"))
+
+        self.assertEqual(result, {})
+        self.assertIn("Error loading YAML file", log.output[0])
+
+    @patch("yaml.safe_load")
+    @patch("builtins.open", new_callable=mock_open)
+    def test_load_capec_to_asvs_mapping_invalid_yaml(self, mock_file, mock_yaml_load):
+        """Test loading invalid YAML file"""
+        mock_yaml_load.side_effect = yaml.YAMLError("Invalid YAML")
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
+            result = capec.load_capec_to_asvs_mapping(Path("invalid.yaml"))
+
+        self.assertEqual(result, {})
+        self.assertIn("Error loading YAML file", log.output[0])
+
+
+class TestCreateLinkList(unittest.TestCase):
+    def test_create_link_list_with_requirements(self):
+        """Test creating link list with ASVS requirements"""
+        requirements = {"owasp_asvs": ["V8.1.1", "V8.2.1"]}
+        asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 8,
+                    "Name": "Authorization",
+                    "Items": [
+                        {
+                            "Ordinal": 1,
+                            "Name": "General Authorization Design",
+                            "Items": [{"Shortcode": "V8.1.1", "Text": "Test"}],
+                        },
+                        {"Ordinal": 2, "Name": "Operation Level", "Items": [{"Shortcode": "V8.2.1", "Text": "Test"}]},
+                    ],
+                }
+            ]
+        }
+
+        result = capec.create_link_list(requirements, asvs_map, "5.0")
+
+        self.assertIsInstance(result, str)
+        self.assertGreater(len(result), 0)
+        self.assertIn("[", result)
+        self.assertIn("]", result)
+        self.assertIn("/taxonomy/asvs-5.0/", result)
+        self.assertIn("V8.1.1", result)
+        self.assertIn(", ", result)  # Should have comma separator
+
+    def test_create_link_list_empty(self):
+        """Test creating link list with no requirements"""
+        requirements = {}
+        asvs_map = {"Requirements": []}
+
+        result = capec.create_link_list(requirements, asvs_map, "5.0")
+
+        self.assertEqual(result, "")
+
+    def test_create_link_list_empty_owasp_asvs(self):
+        """Test creating link list with empty owasp_asvs list"""
+        requirements = {"owasp_asvs": []}
+        asvs_map = {"Requirements": []}
+
+        result = capec.create_link_list(requirements, asvs_map, "5.0")
+
+        self.assertEqual(result, "")
+
+
+class TestCreatelink(unittest.TestCase):
+    def test_createlink_found(self):
+        """Test creating link for found shortcode"""
+        asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 8,
+                    "Name": "Authorization",
+                    "Items": [
+                        {
+                            "Ordinal": 1,
+                            "Name": "General Authorization Design",
+                            "Items": [{"Shortcode": "V8.1.1", "Text": "Test requirement"}],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        result = capec.createlink(asvs_map, "V8.1.1", "5.0")
+
+        self.assertIn("V8.1.1", result)
+        self.assertIn("/taxonomy/asvs-5.0/", result)
+        self.assertIn("08-authorization", result)
+        self.assertIn("01-general-authorization-design", result)
+
+    def test_createlink_not_found(self):
+        """Test creating link for not found shortcode"""
+        asvs_map = {"Requirements": []}
+
+        result = capec.createlink(asvs_map, "V99.99.99", "5.0")
+
+        # Should return the shortcode itself
+        self.assertEqual(result, "V99.99.99")
+
+
+class TestHasNoAsvsMapping(unittest.TestCase):
+    def test_has_no_asvs_mapping_exists(self):
+        """Test checking ASVS mapping when it exists"""
+        capec_to_asvs_map = {1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]}}
+
+        result = capec.has_no_asvs_mapping(1, capec_to_asvs_map)
+
+        self.assertFalse(result)
+
+    def test_has_no_asvs_mapping_not_exists(self):
+        """Test checking ASVS mapping when it doesn't exist"""
+        capec_to_asvs_map = {}
+
+        result = capec.has_no_asvs_mapping(999, capec_to_asvs_map)
+
+        self.assertTrue(result)
+
+    def test_has_no_asvs_mapping_empty_list(self):
+        """Test checking ASVS mapping when list is empty"""
+        capec_to_asvs_map = {1: {"owasp_asvs": []}}
+
+        result = capec.has_no_asvs_mapping(1, capec_to_asvs_map)
+
+        self.assertTrue(result)
+
+
+class TestCapecPagesWithAsvsMapping(unittest.TestCase):
+    @patch("builtins.open", new_callable=mock_open)
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_with_asvs_mapping(self, mock_create_folder, mock_file):
+        """Test creating CAPEC pages with ASVS mappings"""
+        test_output_path = Path("/test/output")
+        capec.convert_vars.args = argparse.Namespace(
+            output_path=test_output_path, input_path=Path("dummy.json"), debug=False
+        )
+
+        test_data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern", "Description": "Test description"}]
+                }
+            }
+        }
+
+        test_capec_to_asvs_map = {1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]}}
+
+        test_asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 8,
+                    "Name": "Authorization",
+                    "Items": [
+                        {"Ordinal": 1, "Name": "General Design", "Items": [{"Shortcode": "V8.1.1"}]},
+                        {"Ordinal": 2, "Name": "Operation Level", "Items": [{"Shortcode": "V8.2.1"}]},
+                    ],
+                }
+            ]
+        }
+
+        with patch.object(Path, "parent") as mock_parent:
+            mock_parent.resolve.return_value = Path("/mock/directory")
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
+
+        handle = mock_file()
+        written_content = "".join(call.args[0] for call in handle.write.call_args_list)
+
+        # Verify ASVS section is included
+        self.assertIn("## Related ASVS Requirements", written_content)
+        self.assertIn("ASVS (5.0):", written_content)
+        self.assertIn("V8.1.1", written_content)
 
 
 if __name__ == "__main__":
