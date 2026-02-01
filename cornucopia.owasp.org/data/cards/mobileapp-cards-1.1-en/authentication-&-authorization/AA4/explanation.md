@@ -1,17 +1,11 @@
 ## STRIDE: Tampering
 
-Your mobile app is feeling unusually trusting today.
+An attacker installs the mobile app and observes how it communicates with the backend service. By intercepting and modifying requests, the attacker changes values such as identifiers, roles, or feature-related parameters sent by the app.
 
-An attacker installs the app, opens a proxy, and starts gently adjusting things — a flag here, a price there, maybe a role that looks interesting. The app nods politely and says, “Sure, that seems reasonable.”
+If the backend assumes that these values are trustworthy because they originate from the client, the attacker may be able to access restricted functionality, perform unauthorized actions, or modify data belonging to other users.
 
-Suddenly premium features are free, restricted actions are unlocked, and sensitive data is rewritten — all without breaking a sweat.
-
-Turns out the app believed whatever the client told it.
-
-Who knew?
+This issue commonly arises when security decisions are enforced on the device rather than being validated and authorized on the server.
 
 ### What could go wrong?
 
-When important security decisions are made on the device, attackers can tamper with requests, replay traffic, or manipulate app state to perform actions they were never authorized to do.
-
-If the backend doesn’t validate and authorize every request, it becomes impossible to tell honest users from creative ones.
+If requests can be modified without proper server-side validation and authorization, attackers can tamper with application logic, bypass access controls, and manipulate sensitive data in ways not intended by the application design.
