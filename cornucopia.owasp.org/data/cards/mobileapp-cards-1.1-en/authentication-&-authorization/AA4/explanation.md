@@ -6,7 +6,7 @@ An attacker can install the mobile app and observe how it communicates with back
 
 This issue commonly arises when security-relevant decisions rely on client-side controls that are implemented incorrectly or can be bypassed, for example due to misuse of platform security APIs, improper exception handling, or misconfiguration of hardware-backed keystores or keychains.
 
-### What can go wrong?
+### What could go wrong?
 
 If request data or authentication results can be modified or influenced without proper validation, attackers can tamper with application logic, bypass access controls, and manipulate sensitive data in ways not intended by the application design.
 
