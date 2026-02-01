@@ -1,8 +1,8 @@
 ## STRIDE: Tampering
 
-An attacker installs the mobile app and observes how it communicates with the backend service. By intercepting and modifying requests, the attacker changes values such as identifiers, roles, or feature-related parameters sent by the app.
+The situation falls under the Tampering category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on client-controlled data for security-relevant decisions.
 
-If the backend assumes that these values are trustworthy because they originate from the client, the attacker may be able to access restricted functionality, perform unauthorized actions, or modify data belonging to other users.
+An attacker can install the mobile app and observe how it communicates with the backend service. By intercepting and modifying requests, the attacker may alter values such as identifiers, roles, or feature-related parameters sent by the app. If the backend assumes these values are trustworthy because they originate from the client, unauthorized actions or data manipulation may occur.
 
 This issue commonly arises when security decisions are enforced on the device rather than being validated and authorized on the server.
 
