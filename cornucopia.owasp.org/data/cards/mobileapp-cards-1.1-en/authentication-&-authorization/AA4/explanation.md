@@ -9,3 +9,9 @@ This issue commonly arises when security decisions are enforced on the device ra
 ### What could go wrong?
 
 If requests can be modified without proper server-side validation and authorization, attackers can tamper with application logic, bypass access controls, and manipulate sensitive data in ways not intended by the application design.
+
+### What are we going to do about it?
+
+Ensure that all security-relevant decisions are enforced on the server and not delegated to the client. Every request must be validated and authorized based on the authenticated user and the action being performed, regardless of what parameters the mobile app sends.
+
+Avoid trusting client-controlled values such as roles, identifiers, or feature flags. Design APIs so that request tampering does not allow access to unauthorized functionality. Use the OWASP Mobile Application Security Testing Guide (MASTG) to verify that authorization and request integrity controls are correctly implemented and tested.
