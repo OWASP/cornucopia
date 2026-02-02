@@ -6,6 +6,12 @@ https://cornucopia.owasp.org contains the card browser for each of the cards in 
 
     npm run productionbuild
 
+## Release to Cloudflare
+
+To deploy the pages on a Cloudflare account, use the account id and the cloudflare api token with the following rights:
+
+Cloudflare Pages:Edit, Workers Scripts:EditWorkers Routes:Edit
+
 ## Development server
 
     # npm install will raise a conflict
