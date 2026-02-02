@@ -1,4 +1,4 @@
-FROM gcr.io/oss-fuzz-base/base-builder-python:ubuntu-25-04
+FROM gcr.io/oss-fuzz-base/base-builder-python:ubuntu-24-04@sha256:79f6e0ac4506a75757099bfea8cfd52d1bb0e2f92ca21c64755151b655ce23e1
 RUN apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     automake \
