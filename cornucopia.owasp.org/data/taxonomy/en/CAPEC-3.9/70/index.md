@@ -1,0 +1,11 @@
+# CAPEC™ 70: Try Common or Default Usernames and Passwords
+
+## Description
+
+An adversary may try certain common or default usernames and passwords to gain access into the system and perform unauthorized actions. An adversary may try an intelligent brute force using empty passwords, known vendor default credentials, as well as a dictionary of common usernames and passwords. Many vendor products come preconfigured with default (and thus well-known) usernames and passwords that should be deleted prior to usage in a production environment. It is a common mistake to forget to remove these default login credentials. Another problem is that users would pick very simple (common) passwords (e.g. "secret" or "password") that make it easier for the attacker to gain access to the system compared to using a brute force attack or even a dictionary attack using a full dictionary.
+
+Source: [CAPEC™ 70](https://capec.mitre.org/data/definitions/70.html)
+
+## Related ASVS Requirements
+
+ASVS (5.0): [13.2.3](/taxonomy/asvs-5.0/13-configuration/02-backend-communication-configuration#V13.2.3), [16.3.1](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/03-security-events#V16.3.1), [16.3.3](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/03-security-events#V16.3.3), [16.5.1](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/05-error-handling#V16.5.1), [16.5.3](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/05-error-handling#V16.5.3), [6.1.1](/taxonomy/asvs-5.0/06-authentication/01-authentication-documentation#V6.1.1), [6.2.11](/taxonomy/asvs-5.0/06-authentication/02-password-security#V6.2.11), [6.2.12](/taxonomy/asvs-5.0/06-authentication/02-password-security#V6.2.12), [6.2.2](/taxonomy/asvs-5.0/06-authentication/02-password-security#V6.2.2), [6.2.4](/taxonomy/asvs-5.0/06-authentication/02-password-security#V6.2.4), [6.3.1](/taxonomy/asvs-5.0/06-authentication/03-general-authentication-security#V6.3.1), [6.3.2](/taxonomy/asvs-5.0/06-authentication/03-general-authentication-security#V6.3.2), [6.3.8](/taxonomy/asvs-5.0/06-authentication/03-general-authentication-security#V6.3.8), [6.4.2](/taxonomy/asvs-5.0/06-authentication/04-authentication-factor-lifecycle-and-recovery#V6.4.2)
