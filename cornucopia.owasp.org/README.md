@@ -10,10 +10,9 @@ https://cornucopia.owasp.org contains the card browser for each of the cards in 
 
 To deploy the pages on a Cloudflare account, use the account id and the cloudflare api token with the following rights:
 
-- Cloudflare:
-  - Pages:Edit
-- Workers:
-  - Scripts:EditWorkers Routes:Edit
+- Cloudflare Pages:Edit
+- Workers Scripts:Edit
+- Workers Routes:Edit
 
 Github action is used for the deployment: https://github.com/OWASP/cornucopia/blob/b07827c4b7cf5fbd965d50144b51216cfdc6e214/.github/workflows/deploy-website-production.yml#L57 
 
