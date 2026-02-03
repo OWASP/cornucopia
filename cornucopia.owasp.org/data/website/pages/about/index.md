@@ -99,6 +99,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Grant Ongers
 - Susana Romaniz
 - Ravishankar Sahadevan
+- Rohan Sharma
 - Tao Sauvage
 - Aditya Srivastava
 - Adrian Sroka
