@@ -10,20 +10,20 @@ ARG home
 # create group and user to match permmisions of current who runs the build
 ARG workdir
 WORKDIR ${workdir}
-RUN groupmod -g 64 dialout \
-    && addgroup -S -g "${group_id}" union \
-    && groupmod -g 2999 ping \
-    && mkdir -p "${home}" \
-    && adduser -S -u "${user_id}" -h "${home}" -s "/bin/bash" -G union builder
+RUN groupmod -g 64 dialout &&
+	addgroup -S -g "${group_id}" union &&
+	groupmod -g 2999 ping &&
+	mkdir -p "${home}" &&
+	adduser -S -u "${user_id}" -h "${home}" -s "/bin/bash" -G union builder
 # Add pip and build requirements
 RUN apk add --no-cache \
-    bash \
-    curl \
-    docker \
-    gcc \
-    git \
-    libc-dev \
-    make
+	bash \
+	curl \
+	docker \
+	gcc \
+	git \
+	libc-dev \
+	make
 COPY --chown=builder:union requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt --require-hashes
 USER builder
