@@ -1,1 +1,1 @@
-The key concept for this card is protection of administrative web interfaces such as Content Management System (CMS), database and server web control panels.
+The key concept is functional application abuse made possible through the lack ot anti-automation controls. See also related automation attacks in Authentication [Authentication 4 (AT4)](/cards/AT4#card 'Authentication 4 (AT4) [internal]') and [Authentication 7 (AT7)](/cards/AT7#card 'Authentication 7 (AT7) [internal]').
