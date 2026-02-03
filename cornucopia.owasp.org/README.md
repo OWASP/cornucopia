@@ -13,8 +13,11 @@ To deploy the pages on a Cloudflare account, use the account id and the cloudfla
 - Cloudflare Pages:Edit
 - Workers Scripts:Edit
 - Workers Routes:Edit
+- User Details: Read
 
-Github action is used for the deployment: https://github.com/OWASP/cornucopia/blob/b07827c4b7cf5fbd965d50144b51216cfdc6e214/.github/workflows/deploy-website-production.yml#L57 
+Github action is used for the deployment: https://github.com/OWASP/cornucopia/blob/b07827c4b7cf5fbd965d50144b51216cfdc6e214/.github/workflows/deploy-website-production.yml#L57
+
+NB: The CLOUDFLARE_API_TOKEN needs to be renewed once a year.
 
 ## Development server
 
