@@ -1,14 +1,11 @@
 ---
   name: Build and Test Copi
   on:
-    pull_request:
-      paths:
-      - 'copi.owasp.org/**'
-      - '.github/workflows/copi-build.yml'
+    workflow_call:
     workflow_dispatch:
   env:
     MIX_ENV: test
-    POSTGRES_TEST_PWD: ${{ secrets.POSTGRES_TEST_PWD }}
+    POSTGRES_TEST_PWD: POSTGRES_TEST_PWD
   permissions:
     contents: read
   jobs:
@@ -19,7 +16,7 @@
           image: postgres:14
           env:
             POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_TEST_PWD }}
+            POSTGRES_PASSWORD: POSTGRES_TEST_PWD
             POSTGRES_DB: copi_test
           ports:
             - 5432:5432
@@ -34,7 +31,7 @@
           run: docker build -f ./Dockerfile .
         - name: Cache deps
           id: cache-deps
-          uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+          uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
           env:
             cache-name: cache-elixir-deps
           with:

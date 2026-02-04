@@ -1,7 +1,4 @@
-#!/usr/bin/env python3
 import argparse
-import docx2pdf  # type: ignore
-import docx  # type: ignore
 import fnmatch
 import logging
 import os
@@ -9,23 +6,22 @@ import platform
 import re
 import shutil
 import sys
+import subprocess
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
 
-import defusedxml.ElementTree
-
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-    EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp"]
-    FILETYPE_CHOICES: List[str] = ["all", "docx", "pdf", "idml"]
+    EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp", "against-security"]
+    FILETYPE_CHOICES: List[str] = ["all", "docx", "odt", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
     LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.2", "3.0", "5.0"]
@@ -67,29 +63,104 @@ def check_make_list_into_text(var: List[str]) -> str:
     return text_output
 
 
-def convert_docx_to_pdf(docx_filename: str, output_pdf_filename: str) -> None:
+def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
+    libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
+    if not libreoffice_bin and platform.system() == "Windows":
+        potential_soffice = Path("C:/Program Files/LibreOffice/program/soffice.exe")
+        if potential_soffice.exists():
+            libreoffice_bin = str(potential_soffice)
+
+    if not libreoffice_bin:
+        return False
+
+    try:
+        logging.info(f"Using LibreOffice for conversion: {libreoffice_bin}")
+        user_profile_dir = os.path.abspath(os.path.join(convert_vars.BASE_PATH, "output", "lo_profile"))
+        user_profile_url = "file:///" + user_profile_dir.replace("\\", "/")
+        subprocess.run(
+            [
+                libreoffice_bin,
+                "--headless",
+                f"-env:UserInstallation={user_profile_url}",
+                "--convert-to",
+                "pdf",
+                "--outdir",
+                os.path.abspath(os.path.dirname(output_pdf_filename)),
+                os.path.abspath(source_filename),
+            ],
+            check=True,
+            capture_output=True,
+        )
+        return True
+    except Exception as e:
+        logging.warning(f"LibreOffice conversion failed: {e}")
+        return False
+
+
+def _convert_with_docx2pdf(source_filename: str, output_pdf_filename: str) -> bool:
+    if source_filename.endswith(".docx") and convert_vars.can_convert_to_pdf:
+        try:
+            import docx2pdf  # type: ignore
+
+            docx2pdf.convert(source_filename, output_pdf_filename)
+            logging.info(f"New file saved: {output_pdf_filename}")
+            return True
+        except Exception as e:
+            logging.warning(f"\nConvert error: {e}")
+    return False
+
+
+def _handle_conversion_failure(source_filename: str) -> None:
+    error_msg = (
+        f"Error. A temporary file {source_filename} was created in the output folder but cannot be converted "
+        f"to pdf on operating system: {platform.system()}.\n"
+        "Please install LibreOffice for cross-platform PDF support."
+    )
+    # Check if we should suggest MS Word
+    is_win_or_mac = platform.system().lower() in ["windows", "darwin"]
+    libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
+    if not libreoffice_bin and is_win_or_mac:
+        error_msg += " This does work with MS Word installed for .docx files."
+    logging.warning(error_msg)
+
+
+def _cleanup_temp_file(filename: str) -> None:
+    if not convert_vars.args.debug:
+        try:
+            os.remove(filename)
+        except OSError:
+            pass
+
+
+def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -> None:
+    # LibreOffice outputs to the same name as source but with .pdf
+    default_out = str(Path(source_filename).with_suffix(".pdf"))
+    if os.path.normpath(default_out) != os.path.normpath(output_pdf_filename):
+        if os.path.exists(output_pdf_filename):
+            os.remove(output_pdf_filename)
+        os.rename(default_out, output_pdf_filename)
+    logging.info(f"New file saved: {output_pdf_filename}")
+
+
+def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
     logging.debug(
-        f" --- docx_file = {docx_filename} convert to {output_pdf_filename}\n--- starting pdf conversion now."
+        f" --- source_file = {source_filename} convert to {output_pdf_filename}\n--- starting pdf conversion now."
     )
 
-    if convert_vars.can_convert_to_pdf:
-        try:
-            docx2pdf.convert(docx_filename, output_pdf_filename)
-            logging.info(f"New file saved: {output_pdf_filename}")
-        except Exception as e:
-            error_msg = f"\nConvert error: {e}"
-            logging.warning(error_msg)
-    else:
-        error_msg = (
-            "Error. A temporary docx file was created in the output folder but cannot be converted "
-            f"to pdf (yet) on operating system: {platform.system()}\n"
-            "This does work on Windows and Mac with MS Word installed."
-        )
-        logging.warning(error_msg)
+    # 1. Attempt using LibreOffice
+    if _convert_with_libreoffice(source_filename, output_pdf_filename):
+        _rename_libreoffice_output(source_filename, output_pdf_filename)
+        _cleanup_temp_file(source_filename)
+        return
 
-    # If not debugging then delete the temp file
-    if not convert_vars.args.debug:
-        os.remove(docx_filename)
+    # 2. Fallback to docx2pdf
+    if _convert_with_docx2pdf(source_filename, output_pdf_filename):
+        _cleanup_temp_file(source_filename)
+        return
+
+    # 3. Everything failed
+    _handle_conversion_failure(source_filename)
+    _cleanup_temp_file(source_filename)
 
 
 def create_edition_from_template(
@@ -120,6 +191,7 @@ def create_edition_from_template(
     meta: Dict[str, str] = get_meta_data(language_data)
 
     if not meta:
+        logging.error("No metadata found. Cannot proceed.")
         return
 
     template_doc: str = get_template_for_edition(layout, template, edition)
@@ -131,18 +203,22 @@ def create_edition_from_template(
     output_file: str = rename_output_file(file_extension, template, layout, meta)
     ensure_folder_exists(os.path.dirname(output_file))
 
-    # Work with docx file (and maybe convert to pdf afterwards)
-    if file_extension in ".docx":
-        # Get the input (template) document
-        doc: docx.Document = get_docx_document(template_doc)
+    # Work with docx/odt file (and maybe convert to pdf afterwards)
+    if file_extension in (".docx", ".odt"):
         language_dict.update(mapping)
-        doc = replace_docx_inline_text(doc, language_dict)
-        doc.save(output_file)
+        if file_extension == ".docx":
+            # Get the input (template) document
+            doc = get_docx_document(template_doc)
+            if doc:
+                doc = replace_docx_inline_text(doc, language_dict)
+                doc.save(output_file)
+        else:
+            save_odt_file(template_doc, language_dict, output_file)
+
         if convert_vars.args.pdf:
-            # If file type is pdf, then save a temp docx file, convert the docx to pdf
-            temp_docx_file = os.sep.join([convert_vars.BASE_PATH, "output", "temp.docx"])
-            save_docx_file(doc, temp_docx_file)
-            convert_docx_to_pdf(temp_docx_file, output_file)
+            # If file type is pdf, then convert the generated file to pdf
+            pdf_output_file = str(Path(output_file).with_suffix(".pdf"))
+            convert_to_pdf(output_file, pdf_output_file)
     elif file_extension == ".idml":
         language_dict.update(mapping)
         save_idml_file(template_doc, language_dict, output_file)
@@ -378,7 +454,7 @@ def is_valid_argument_list(arguments: List[str]) -> Any:
     return arguments
 
 
-def get_document_paragraphs(doc: docx) -> List[docx.Document]:
+def get_document_paragraphs(doc: Any) -> List[Any]:
     paragraphs = list(doc.paragraphs)
     l1 = len(paragraphs)
     for table in doc.tables:
@@ -390,12 +466,15 @@ def get_document_paragraphs(doc: docx) -> List[docx.Document]:
     return paragraphs
 
 
-def get_docx_document(docx_file: str) -> docx.Document:
+def get_docx_document(docx_file: str) -> Any:
     """Open the file and return the docx document."""
+    import docx  # type: ignore[import-untyped]
+
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
     else:
         logging.error("Could not find file at: %s", str(docx_file))
+        # Create a blank document if it fails
         return docx.Document()
 
 
@@ -436,19 +515,17 @@ def get_full_tag(cat_id: str, id: str, tag: str) -> str:
 def get_mapping_for_edition(
     yaml_files: List[str], version: str, language: str, edition: str, template: str, layout: str
 ) -> Dict[str, Any]:
-    mapping_data: Dict[str, Dict[str, str]] = get_mapping_data_for_edition(yaml_files, language, version, edition)
+    mapping_data: Dict[str, Any] = get_mapping_data_for_edition(yaml_files, language, version, edition)
     if not mapping_data:
-        logging.warning("Could not retrieve valid mapping information")
+        logging.warning("No mapping file found")
         return {}
-    if "meta" not in mapping_data.keys() or not valid_meta(
-        mapping_data["meta"], language, edition, version, template, layout
-    ):
-        logging.warning("Could not retrieve valid meta information from the mapping file")
+    if "meta" not in mapping_data or not valid_meta(mapping_data["meta"], language, edition, version, template, layout):
+        logging.warning("Metadata is missing or invalid in mapping file")
         return {}
     try:
         mapping_data = build_template_dict(mapping_data)
     except Exception as e:
-        logging.warning(f"Could not build valid template mapping. The Yaml file is not valid. Got exception: {e}")
+        logging.warning(f"Failed to build template mapping: {e}")
     return mapping_data
 
 
@@ -520,29 +597,33 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
     return data
 
 
-def get_meta_data(data: Dict[str, Dict[str, str]]) -> Dict[str, Any]:
-    meta = {}
-    try:
-        if "meta" in list(data.keys()):
-            for key, value in data["meta"].items():
-                if key in ("edition", "component", "language", "version", "languages", "layouts", "templates"):
-                    meta[key] = (isinstance(value, str) and is_valid_string_argument(value)) or (
-                        isinstance(value, List) and is_valid_argument_list(value)
-                    )
-            return meta
-        else:
-            logging.error(
-                "Could not find meta tag in the language data. " "Please ensure the language file is available."
-            )
-        logging.debug(f" --- meta data = {meta}")
-    except argparse.ArgumentError as exc:
-        logging.error(f"Could not get meta because of invalid data. error: {exc.message}")
-        return {}
+def get_meta_data(data: Dict[str, Any]) -> Dict[str, Any]:
+    meta: Dict[str, Any] = {}
+    if not data or "meta" not in data:
+        logging.error("Could not find meta tag in the language data.")
+        return meta
+
+    raw_meta = data["meta"]
+    if not isinstance(raw_meta, dict):
+        logging.error("Meta tag is not a dictionary.")
+        return meta
+
+    valid_keys = ("edition", "component", "language", "version", "languages", "layouts", "templates")
+    for key in valid_keys:
+        if key in raw_meta:
+            value = raw_meta[key]
+            # Simple validation: must be string or list of strings
+            if isinstance(value, str) and value.strip():
+                meta[key] = value
+            elif isinstance(value, list) and all(isinstance(v, str) for v in value):
+                meta[key] = value
+
+    logging.info(f" --- extracted meta data = {meta}")
     return meta
 
 
-def get_paragraphs_from_table_in_doc(doc_table: docx.Document) -> List[docx.Document]:
-    paragraphs: List[docx.Document] = []
+def get_paragraphs_from_table_in_doc(doc_table: Any) -> List[Any]:
+    paragraphs: List[Any] = []
     for row in doc_table.rows:
         for cell in row.cells:
             for paragraph in cell.paragraphs:
@@ -558,52 +639,29 @@ def get_language_data(
     language: str,
     version: str = "3.0",
     edition: str = "webapp",
-) -> Dict[Any, Dict[Any, Any]]:
+) -> Dict[Any, Any]:
     """Get the raw data of the replacement text from correct yaml file"""
-    logging.debug(
-        f" --- Starting get_language_data() for edition: {edition} "
-        f"requesting language: {language} for version: {version} "
-    )
     language_file: str = ""
     for file in yaml_files:
         if is_yaml_file(file) and is_lang_file_for_version(file, version, language, edition):
             language_file = file
     if not language_file:
-        logging.debug(
-            "Did not find translation for version: " + version + ", lang: " + language + ", edition: " + edition
-        )
+        logging.error(f"Did not find translation for version: {version}, lang: {language}, edition: {edition}")
         return {}
 
+    logging.debug(f" --- Loading language file: {language_file}")
     with open(language_file, "r", encoding="utf-8") as f:
         try:
-            data: dict[Any, Any] = yaml.safe_load(f)
+            data = yaml.safe_load(f)
         except yaml.YAMLError as e:
-            logging.info(f"Error loading yaml file: {language_file}. Error = {e}")
+            logging.error(f"Error loading yaml file: {language_file}. Error = {e}")
             data = {}
 
-    if data and (data["meta"]["language"].lower() == language):
-        logging.debug(" --- found source language file: " + os.path.split(language_file)[1])
-    else:
-        logging.debug(" --- found source file: " + os.path.split(language_file)[1])
-        if "meta" in list(data.keys()):
-            meta_keys = data["meta"].keys()
-            logging.debug(f" --- data.keys() = {data.keys()}, data[meta].keys() = {meta_keys}")
+    if not data or "meta" not in data:
+        logging.error(f"Invalid or empty language file: {language_file}")
+        return {}
 
-    if not data or "suits" not in list(data.keys()):
-        logging.error(
-            "Could not get "
-            + language
-            + " data from yaml "
-            + os.path.split(language_file)[1]
-            + " for edition: "
-            + edition
-            + " under version:"
-            + version
-        )
-        data = {}
-
-    logging.debug(f" --- Len = {len(data)}.")
-    return data
+    return cast(Dict[Any, Any], data)
 
 
 def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
@@ -615,14 +673,16 @@ def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
 
 
 def is_lang_file_for_version(path: str, version: str, lang: str, edition: str) -> bool:
+    filename = os.path.basename(path).lower()
+    # Support both -en. and -en_US. style
+    lang_patterns = ["-" + lang.lower() + ".", "-" + lang.lower().replace("-", "_") + "."]
+    has_lang = any(filename.find(p) != -1 for p in lang_patterns)
+
     return (
-        os.path.basename(path).find("-" + lang + ".") >= 0
-        and os.path.basename(path).find(version) >= 0
-        and os.path.basename(path).find(edition) >= 0
-    ) or (
-        os.path.basename(path).find("-" + lang.replace("-", "_") + ".") >= 0
-        and os.path.basename(path).find(version) >= 0
-        and os.path.basename(path).find(edition) >= 0
+        filename.find(edition.lower()) != -1
+        and filename.find(version.lower()) != -1
+        and has_lang
+        and filename.find("mappings") == -1
     )
 
 
@@ -662,13 +722,21 @@ def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
 
 
 def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
+    # Fast path: if no $ and no OWASP, likely no tags
+    if "$" not in el_text and "OWASP" not in el_text:
+        return el_text
+
     for k, v in replacement_values:
+        # Avoid expensive regex if key is not even in text
+        if k.strip() not in el_text:
+            continue
+
         el_new = get_replacement_mapping_value(k, v, el_text)
         if el_new:
             return el_new
-        if k.strip() in el_text:
-            reg = r"(?<!\S)" + re.escape(k.strip()) + "(?!\S)"  # noqa: W605
-            el_text = re.sub(reg, v, el_text)
+
+        reg = r"(?<!\S)" + re.escape(k.strip()) + r"(?!\S)"
+        el_text = re.sub(reg, v, el_text)
     return el_text
 
 
@@ -693,7 +761,7 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
     args_input_file: str = convert_vars.args.inputfile
     sfile_ext = "idml"
     if layout == "guide":
-        sfile_ext = "docx"
+        sfile_ext = "odt"
     if args_input_file:
         # Input file was specified
         if os.path.isabs(args_input_file):
@@ -826,9 +894,39 @@ def group_number_ranges(data: List[str]) -> List[str]:
     return list_ranges
 
 
-def save_docx_file(doc: docx.Document, output_file: str) -> None:
+def save_docx_file(doc: Any, output_file: str) -> None:
     ensure_folder_exists(os.path.dirname(output_file))
     doc.save(output_file)
+
+
+def save_odt_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
+    # Get the output path and temp output path to put the temp xml files
+    output_path = os.path.join(convert_vars.BASE_PATH, "output")
+    temp_output_path = os.path.join(output_path, "temp_odt")
+    # Ensure the output folder and temp output folder exist
+    ensure_folder_exists(temp_output_path)
+    logging.debug(" --- temp_folder for extraction of xml files = %s", str(temp_output_path))
+
+    # Unzip source xml files and place in temp output folder
+    with zipfile.ZipFile(template_doc) as odt_archive:
+        odt_archive.extractall(temp_output_path)
+
+    # ODT text is usually in content.xml and sometimes styles.xml
+    targets = ["content.xml", "styles.xml"]
+    replacement_values = sort_keys_longest_to_shortest(language_dict)
+
+    for target in targets:
+        xml_file = os.path.join(temp_output_path, target)
+        if os.path.exists(xml_file):
+            replace_text_in_xml_file(xml_file, replacement_values)
+
+    # Zip the files as an odt file in output folder
+    logging.debug(" --- finished replacing text in xml files. Now zipping into odt file")
+    zip_dir(temp_output_path, output_file)
+
+    # If not debugging, delete temp folder and files
+    if not convert_vars.args.debug and os.path.exists(temp_output_path):
+        shutil.rmtree(temp_output_path, ignore_errors=True)
 
 
 def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file: str) -> None:
@@ -845,11 +943,12 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
         logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
+    replacement_values = sort_keys_longest_to_shortest(language_dict)
     # Only Stories files have content to update
     for file in fnmatch.filter(xml_files, "*Stories*Story*"):
         if os.path.getsize(file) == 0:
             continue
-        replace_text_in_xml_file(file, language_dict)
+        replace_text_in_xml_file(file, replacement_values)
 
     # Zip the files as an idml file in output folder
     logging.debug(" --- finished replacing text in xml files. Now zipping into idml file")
@@ -928,7 +1027,7 @@ def rename_output_file(file_extension: str, template: str, layout: str, meta: Di
     return output_filename
 
 
-def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.Document:
+def replace_docx_inline_text(doc: Any, data: Dict[str, str]) -> Any:
     """Replace the text in the docx document."""
     logging.debug(" --- starting docx_replace")
     replacement_values = list(data.items())
@@ -955,31 +1054,61 @@ def replace_docx_inline_text(doc: docx.Document, data: Dict[str, str]) -> docx.D
     return doc
 
 
-def replace_text_in_xml_file(filename: str, replacement_dict: Dict[str, str]) -> None:
-    replacement_values = list(replacement_dict.items())
+def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
+    logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        tree = defusedxml.ElementTree.parse(filename)
-    except ElTree.ParseError as e:
-        logging.error(f" --- parsing xml file: {filename}. error = {e}")
+        tree = ElTree.parse(filename)
+    except Exception as e:
+        logging.error(f"Failed to parse XML file {filename}: {e}")
         return
 
-    all_content_elements = tree.findall(".//Content")
+    root = tree.getroot()
+    namespaces = {
+        "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
+        "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
+    }
 
-    for el in [el for el in all_content_elements]:
+    # Identify elements likely to contain text to replace
+    # IDML: <Content>
+    # ODT: <text:p>, <text:span>
+    elements_to_check = []
+
+    # Check for IDML Content elements
+    elements_to_check.extend(tree.findall(".//Content"))
+
+    # Check for ODT text elements
+    elements_to_check.extend(tree.findall(".//text:p", namespaces))
+    elements_to_check.extend(tree.findall(".//text:span", namespaces))
+
+    # If none of the specific ones are found, fallback to all elements (for other XMLs)
+    if not elements_to_check:
+        elements_to_check = tree.findall(".//*")
+
+    modified = False
+    for el in elements_to_check:
         if el.text == "" or el.text is None:
             continue
-        el.text = get_replacement_value_from_dict(el.text, replacement_values)
-        with open(filename, "bw") as f:
-            f.write(ElTree.tostring(tree.getroot(), encoding="utf-8"))
+
+        new_text = get_replacement_value_from_dict(el.text, replacement_values)
+        if new_text != el.text:
+            el.text = new_text
+            modified = True
+
+    if modified:
+        try:
+            with open(filename, "bw") as f:
+                f.write(ElTree.tostring(root, encoding="utf-8"))
+        except Exception as e:
+            logging.error(f"Failed to save modified XML file {filename}: {e}")
 
 
 def zip_dir(path: str, zip_filename: str) -> None:
     """Zip all the files recursively from path into zip_filename (excluding root path)"""
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        for root, dirs, files in os.walk(os.path.normpath(path)):
+        for root, _, files in os.walk(os.path.normpath(path)):
             for file in files:
                 f = str(Path(os.path.join(root, file)))
-                zip_file.write(f, f[len(path) :])
+                zip_file.write(f, f[len(path) :])  # noqa: E203
 
 
 if __name__ == "__main__":

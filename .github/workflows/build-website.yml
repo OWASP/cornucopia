@@ -1,10 +1,8 @@
 ---
     name: Build and Test the Cornucopia Website
     on:
-      pull_request:
-        paths:
-        - 'cornucopia.owasp.org/**'
-        - '.github/workflows/build-website.yml'
+      workflow_call:
+      workflow_dispatch:
     permissions:
       contents: read
     jobs:
@@ -46,3 +44,4 @@
               pnpm install          # Install dependencies
               npm run build        # Build production version
               pnpm audit --prod
+              pnpm run coverage

@@ -1,8 +1,10 @@
 name: Run Tests and generate output files
 # Controls when the workflow will run 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  pull_request:
+  # Triggers the workflow on pull request events
+  # Using pull_request_target allows the build artifacts link to be posted as a comment
+  # even for PRs from forked repositories.
+  pull_request_target:
     paths:
       - 'source/**'
       - 'scripts/convert**'
@@ -34,26 +36,13 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Create tmp branch for artifacts and get parent and object ref
-        id: find-target
-        env:
-          PR_NUMBER: ${{ github.event.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
-        run: |
-          echo "parent=`git rev-parse HEAD`" >> "$GITHUB_ENV"
-          echo "object_tree=`git write-tree`" >> "$GITHUB_ENV"
-          git switch --orphan "tmp-$BRANCH_NAME-artifacts"
-      - name: Checkout branch for pull request
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          persist-credentials: false
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.11'
+          python-version: '3.12'
           cache: 'pipenv' # caching pip dependencies
       - name: Install dependencies
         run: |
@@ -136,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           retention-days: 5
-          name: cornucopia-build-files.${{ github.sha }}.zip
+          name: cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip
           path: |
             output/cornucopia-build-files.zip
   commentpr:
@@ -158,7 +147,7 @@ jobs:
             
             | Name | Link |
             |------|------|
-            | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
+            | Output files | [cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
             
         with:
           script: |
