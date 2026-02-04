@@ -31,6 +31,7 @@ export default {
 			 throw new Error(message);
 			},
 			entries: [
+				'/cards/AA2',
 				'/cards/ACA',
 				'/cards/AC2',
 				'/cards/AC3',
