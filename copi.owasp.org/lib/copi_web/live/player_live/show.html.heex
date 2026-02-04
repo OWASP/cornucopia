@@ -34,7 +34,7 @@
             <% else %>
               <p class="text-zinc-400">You can move to the next round once everyone's played a card</p>
             <% end %>
-            <.primary_button class={if round_open?(@game) do "bg-zinc-900/15 pointer-events-none" end} disabled={round_open?(@game)} phx-click="next_round" phx-value-game_id={@game.id}>
+            <.primary_button phx-click="next_round" phx-value-game_id={@game.id}>
               <%= if last_round?(@game) do %>
               Finish game
               <% else %>
