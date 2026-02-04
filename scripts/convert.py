@@ -1053,7 +1053,7 @@ def replace_docx_inline_text(doc: Any, data: Dict[str, str]) -> Any:
     return doc
 
 
-def _find_xml_elements(tree: ElTree.ElementTree) -> List[ElTree.Element]:
+def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     """Identify elements likely to contain text to replace for IDML and ODT."""
     namespaces = {
         "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
