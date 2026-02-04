@@ -14,12 +14,29 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: copi_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Prepare coverage directory
         run: mkdir -p coverage/website coverage/copi coverage/converter
+
+      # Website
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -31,7 +48,8 @@ jobs:
           npm ci
           npm run coverage
           cp coverage/cobertura-coverage.xml ../coverage/website/cobertura.xml
-
+        
+      # Copi
       - name: Setup Elixir
         uses: erlef/setup-beam@v1
         with:
@@ -46,6 +64,7 @@ jobs:
           mix coveralls.cobertura
           cp cover/cobertura.xml ../coverage/copi/cobertura.xml
 
+      # Converter
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -54,9 +73,11 @@ jobs:
       - name: Converter coverage
         run: |
           pip install -r requirements.txt
+          pip install coverage
           coverage run -m unittest discover -s tests/scripts
           coverage xml -o coverage/converter/cobertura.xml
 
+      # Upload ONCE 
       - name: Upload combined coverage to qlty
         uses: qltysh/qlty-action/coverage@v2
         with:
