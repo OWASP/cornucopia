@@ -38,14 +38,16 @@
           - name: Check test coverage - run tests
             run: pipenv run coverage run -m unittest discover -s "tests/scripts" -p "*_*test.py"
           - name: Check test coverage - generate xml
-            run: pipenv run coverage xml
+            run: |
+              mkdir -p converter/coverage
+              pipenv run coverage xml -o converter/coverage/cobertura.xml
           - name: Check test coverage - Report
             run: pipenv run coverage report --fail-under 85 scripts/convert*
           # Upload Code COverage for Codeclimate
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:
               token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-              files: coverage.xml
+              files: converter/coverage/cobertura.xml
           - name: Generate new output files
             run: |
               #
