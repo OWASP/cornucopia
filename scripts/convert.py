@@ -1063,8 +1063,8 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     elements.extend(tree.findall(".//text:p", namespaces))
     elements.extend(tree.findall(".//text:span", namespaces))
     if not elements:
-        return tree.findall(".//*")
-    return elements
+        return cast(List[ElTree.Element], tree.findall(".//*"))
+    return cast(List[ElTree.Element], elements)
 
 
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
