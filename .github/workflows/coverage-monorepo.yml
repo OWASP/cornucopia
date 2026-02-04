@@ -1,0 +1,66 @@
+# Runs coverage for all projects and uploads once to qlty (monorepo workaround)
+
+name: Monorepo Coverage (Website + Copi + Converter)
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare coverage directory
+        run: mkdir -p coverage/website coverage/copi coverage/converter
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Website coverage
+        working-directory: cornucopia.owasp.org
+        run: |
+          npm ci
+          npm run coverage
+          cp coverage/cobertura-coverage.xml ../coverage/website/cobertura.xml
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: 1.18.2
+          otp-version: 27.3.3
+
+      - name: Copi coverage
+        working-directory: copi.owasp.org
+        run: |
+          mix deps.get
+          mix test --cover
+          mix coveralls.cobertura
+          cp cover/cobertura.xml ../coverage/copi/cobertura.xml
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Converter coverage
+        run: |
+          pip install -r requirements.txt
+          coverage run -m unittest discover -s tests/scripts
+          coverage xml -o coverage/converter/cobertura.xml
+
+      - name: Upload combined coverage to qlty
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/**
+
+
