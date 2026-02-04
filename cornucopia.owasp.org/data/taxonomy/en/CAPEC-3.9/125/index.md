@@ -1,0 +1,11 @@
+# CAPEC™ 125: Flooding
+
+## Description
+
+An adversary consumes the resources of a target by rapidly engaging in a large number of interactions with the target. This type of attack generally exposes a weakness in rate limiting or flow. When successful this attack prevents legitimate users from accessing the service and can cause the target to crash. This attack differs from resource depletion through leaks or allocations in that the latter attacks do not rely on the volume of requests made to the target but instead focus on manipulation of the target's operations. The key factor in a flooding attack is the number of requests the adversary can make in a given period of time. The greater this number, the more likely an attack is to succeed against a given target.
+
+Source: [CAPEC™ 125](https://capec.mitre.org/data/definitions/125.html)
+
+## Related ASVS Requirements
+
+ASVS (5.0): [13.1.2](/taxonomy/asvs-5.0/13-configuration/01-configuration-documentation#V13.1.2), [13.1.3](/taxonomy/asvs-5.0/13-configuration/01-configuration-documentation#V13.1.3), [13.2.6](/taxonomy/asvs-5.0/13-configuration/02-backend-communication-configuration#V13.2.6), [15.1.3](/taxonomy/asvs-5.0/15-secure-coding-and-architecture/01-secure-coding-and-architecture-documentation#V15.1.3), [15.2.2](/taxonomy/asvs-5.0/15-secure-coding-and-architecture/02-security-architecture-and-dependencies#V15.2.2), [15.4.3](/taxonomy/asvs-5.0/15-secure-coding-and-architecture/04-safe-concurrency#V15.4.3), [15.4.4](/taxonomy/asvs-5.0/15-secure-coding-and-architecture/04-safe-concurrency#V15.4.4), [16.3.3](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/03-security-events#V16.3.3), [16.5.2](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/05-error-handling#V16.5.2), [16.5.3](/taxonomy/asvs-5.0/16-security-logging-and-error-handling/05-error-handling#V16.5.3), [17.1.2](/taxonomy/asvs-5.0/17-webrtc/01-turn-server#V17.1.2), [17.3.1](/taxonomy/asvs-5.0/17-webrtc/03-signaling#V17.3.1), [17.3.2](/taxonomy/asvs-5.0/17-webrtc/03-signaling#V17.3.2), [2.3.2](/taxonomy/asvs-5.0/02-validation-and-business-logic/03-business-logic-security#V2.3.2), [2.4.1](/taxonomy/asvs-5.0/02-validation-and-business-logic/04-anti-automation#V2.4.1), [2.4.2](/taxonomy/asvs-5.0/02-validation-and-business-logic/04-anti-automation#V2.4.2)

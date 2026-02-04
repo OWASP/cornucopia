@@ -18,6 +18,10 @@ Choi really wanted to pay his student loan, but he also really needed to go to t
 
 ### STRIDE
 
+This scenario falls under the **Spoofing** category of the STRIDE.
+
+Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
+
 ### What can go wrong? 
  
 If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 

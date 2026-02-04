@@ -63,6 +63,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Rishii Bharadhwaj
 - Jorun Kristin Bremseth
 - Tom Brennan
+- Starr Brown
 - Graham Bryant
 - Gerardo Mathías Canedo Prendez
 - Fabio Cerullo
@@ -85,6 +86,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Martin Haslinger
 - John Herrlin
 - Jerry Hoff
+- Mateusz Hubala
 - Toby Irvine
 - Marios Kourtesis
 - Franck Lacosta
@@ -100,6 +102,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Ravishankar Sahadevan
 - Tao Sauvage
 - Aditya Srivastava
+- Adrian Sroka
 - Johan Sydseter
 - Elias Brattli Sørensen
 - Mradul Tiwari
@@ -108,6 +111,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Wagner Voltz
 - Stephen de Vries
 - Colin Watson
+- Muhammad Awais Mohsin
 
 Please let us know if we have missed anyone from this list.
 

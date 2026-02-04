@@ -734,7 +734,6 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
         el_new = get_replacement_mapping_value(k, v, el_text)
         if el_new:
             return el_new
-
         reg = r"(?<!\S)" + re.escape(k.strip()) + r"(?!\S)"
         el_text = re.sub(reg, v, el_text)
     return el_text
@@ -1063,10 +1062,18 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
         return
 
     root = tree.getroot()
+<<<<<<< HEAD
     namespaces = {
         "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
         "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
     }
+=======
+    if root is None:
+        logging.error(f" --- The XML file has no root element: {filename}")
+        return
+
+    all_content_elements = tree.findall(".//Content")
+>>>>>>> upstream/master
 
     # Identify elements likely to contain text to replace
     # IDML: <Content>
@@ -1088,7 +1095,6 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
     for el in elements_to_check:
         if el.text == "" or el.text is None:
             continue
-
         new_text = get_replacement_value_from_dict(el.text, replacement_values)
         if new_text != el.text:
             el.text = new_text
