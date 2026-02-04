@@ -1053,6 +1053,20 @@ def replace_docx_inline_text(doc: Any, data: Dict[str, str]) -> Any:
     return doc
 
 
+def _find_xml_elements(tree: ElTree.ElementTree) -> List[ElTree.Element]:
+    """Identify elements likely to contain text to replace for IDML and ODT."""
+    namespaces = {
+        "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
+        "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
+    }
+    elements = tree.findall(".//Content")
+    elements.extend(tree.findall(".//text:p", namespaces))
+    elements.extend(tree.findall(".//text:span", namespaces))
+    if not elements:
+        return tree.findall(".//*")
+    return elements
+
+
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
@@ -1066,35 +1080,15 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
         logging.error(f" --- The XML file has no root element: {filename}")
         return
 
-    namespaces = {
-        "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
-        "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
-    }
-
-    # Identify elements likely to contain text to replace
-    # IDML: <Content>
-    # ODT: <text:p>, <text:span>
-    elements_to_check = []
-
-    # Check for IDML Content elements
-    elements_to_check.extend(tree.findall(".//Content"))
-
-    # Check for ODT text elements
-    elements_to_check.extend(tree.findall(".//text:p", namespaces))
-    elements_to_check.extend(tree.findall(".//text:span", namespaces))
-
-    # If none of the specific ones are found, fallback to all elements (for other XMLs)
-    if not elements_to_check:
-        elements_to_check = tree.findall(".//*")
+    elements_to_check = _find_xml_elements(tree)
 
     modified = False
     for el in elements_to_check:
-        if el.text == "" or el.text is None:
-            continue
-        new_text = get_replacement_value_from_dict(el.text, replacement_values)
-        if new_text != el.text:
-            el.text = new_text
-            modified = True
+        if el.text:
+            new_text = get_replacement_value_from_dict(el.text, replacement_values)
+            if new_text != el.text:
+                el.text = new_text
+                modified = True
 
     if modified:
         try:
