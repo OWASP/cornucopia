@@ -61,4 +61,12 @@
           run: mix ecto.reset
         - name: Run tests
           working-directory: copi.owasp.org
-          run: mix test
+          run: |
+            mix test --cover
+            mix coveralls.cobertura
+        - name: Upload Copi coverage to qlty
+          uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899
+          with:
+
+            token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+            files: copi.owasp.org/cover/cobertura.xml
