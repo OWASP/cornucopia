@@ -24,3 +24,4 @@ RUN python3 -m pip install --no-cache-dir --upgrade PyInstaller==6.18.0 setuptoo
 COPY . $SRC/cornucopia
 WORKDIR $SRC/cornucopia
 COPY .clusterfuzzlite/build.sh $SRC/
+
