@@ -49,7 +49,7 @@
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:
               token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-              files: cornucopia.owasp.org/coverage/lcov.info
+              files: cornucopia.owasp.org/coverage/cobertura-coverage.xml
           - name: Archive production artifacts
             uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
             with:
