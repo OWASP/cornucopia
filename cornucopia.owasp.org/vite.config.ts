@@ -1,5 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import VitePluginRestart from 'vite-plugin-restart';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import path from 'path';
@@ -24,9 +24,19 @@ export default defineConfig({
 			$domain: path.resolve(__dirname, './src/domain')
 		}
 	},
+
 	plugins: [
 		sveltekit(),
 		VitePluginRestart(vitePluginRestartOptions),
 		viteStaticCopy(viteStaticCopyOptions)
-	]
+	],
+	test: {
+		   environment: 'jsdom',
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['cobertura'],
+      reportsDirectory: 'coverage',
+      exclude: ['node_modules/', '.svelte-kit/']
+	}
+}
 });
