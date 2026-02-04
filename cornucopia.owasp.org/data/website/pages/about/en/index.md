@@ -88,6 +88,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Mateusz Hubala
 - Toby Irvine
 - Marios Kourtesis
+- Suresh Krishna
 - Franck Lacosta
 - Mathias Lemaire
 - Jim Manico
