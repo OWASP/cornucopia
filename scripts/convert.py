@@ -1062,18 +1062,14 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
         return
 
     root = tree.getroot()
-<<<<<<< HEAD
-    namespaces = {
-        "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
-        "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
-    }
-=======
     if root is None:
         logging.error(f" --- The XML file has no root element: {filename}")
         return
 
-    all_content_elements = tree.findall(".//Content")
->>>>>>> upstream/master
+    namespaces = {
+        "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
+        "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
+    }
 
     # Identify elements likely to contain text to replace
     # IDML: <Content>
