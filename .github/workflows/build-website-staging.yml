@@ -45,6 +45,14 @@
               pnpm install          # Install dependencies
               npm run build-stage   # Build staging version
               npm run coverage
+          - name: Smoke test
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm exec serve build &
+              pnpm exec wait-on http://localhost:3000
+              npm run smoke-test
+              kill $(jobs -p) || true
+
           # Upload Code Coverage for Codeclimate
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:

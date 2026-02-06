@@ -45,3 +45,10 @@
               npm run build        # Build production version
               pnpm audit --prod
               pnpm run coverage
+          - name: Smoke test
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm exec serve build &
+              pnpm exec wait-on http://localhost:3000
+              npm run smoke-test
+              kill $(jobs -p) || true
