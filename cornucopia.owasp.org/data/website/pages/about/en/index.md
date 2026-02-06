@@ -108,6 +108,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Mradul Tiwari
 - Max Alejandro Gómez Sánchez Vergaray
 - Ive Verstappen
+- Sachin Vishwakarma
 - Wagner Voltz
 - Stephen de Vries
 - Colin Watson
