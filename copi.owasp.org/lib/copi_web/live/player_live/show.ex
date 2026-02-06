@@ -42,14 +42,72 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
 
     if round_open?(game) do
-      # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
-
+      # Check if we can continue due to majority continue votes
+      if Copi.Cornucopia.Game.can_continue_round?(game) do
+        # Close the round and proceed
+        Copi.Cornucopia.update_game(game, %{round_open: false})
+        
+        # Wait a moment then proceed to next round
+        Process.send_after(self(), :proceed_to_next_round, 100)
+        
+        {:noreply, assign(socket, :game, game)}
+      else
+        # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
+        {:noreply, socket}
+      end
     else
-      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1})
+      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
 
       if last_round?(game) do
         Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
       end
+    end
+
+    {:ok, updated_game} = Game.find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
+
+  @impl true
+  def handle_event("toggle_continue_vote", _, socket) do
+    game = socket.assigns.game
+    player = socket.assigns.player
+
+    # Check if player already voted
+    if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
+      # Remove their vote
+      continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
+      if continue_vote do
+        Copi.Repo.delete!(continue_vote)
+      end
+    else
+      # Add their vote
+      case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
+        {:ok, _vote} ->
+          IO.puts("Continue vote added successfully")
+        {:error, _changeset} ->
+          IO.puts("Continue voting failed")
+      end
+    end
+
+    {:ok, updated_game} = Game.find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
+
+  @impl true
+  def handle_info(:proceed_to_next_round, socket) do
+    game = socket.assigns.game
+    
+    # Now proceed to next round
+    Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+
+    if last_round?(game) do
+      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
     end
 
     {:ok, updated_game} = Game.find(game.id)
