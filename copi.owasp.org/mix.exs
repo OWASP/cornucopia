@@ -60,7 +60,7 @@ defmodule Copi.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.2"},
-      {:plug_cowboy, "~> 2.7.1"},
+      {:plug_cowboy, "~> 2.8.0"},
       {:ecto_ulid, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.12.0"},
       {:slugify, "~> 1.3.1"},
