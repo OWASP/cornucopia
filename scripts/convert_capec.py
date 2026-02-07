@@ -15,7 +15,7 @@ from pathvalidate.argparse import validate_filepath_arg
 
 
 class ConvertVars:
-    DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9"
+    DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/capec-3.9"
     DEFAULT_INPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
     DEFAULT_CAPEC_TO_ASVS_INPUT_PATH = Path(__file__).parent / "../source/webapp-capec-3.0.yaml"
     DEFAULT_ASVS_MAPPING_PATH = (
