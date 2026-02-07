@@ -31,7 +31,8 @@ defmodule CopiWeb.Helpers.IPHelper do
         |> Enum.join(":")
         
       nil ->
-        raise "Unable to determine IP address from socket connection. peer_data is nil."
+        # peer_data not available (e.g., during disconnected mount or test environment)
+        "127.0.0.1"
         
       other ->
         raise "Unexpected peer_data format: #{inspect(other)}"

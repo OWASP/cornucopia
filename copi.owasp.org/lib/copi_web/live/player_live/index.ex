@@ -6,7 +6,13 @@ defmodule CopiWeb.PlayerLive.Index do
 
   @impl true
   def mount(%{"game_id" => game_id}, _session, socket) do
-    ip_address = CopiWeb.Helpers.IPHelper.get_connect_ip(socket)
+    ip_address =
+      if connected?(socket) do
+        CopiWeb.Helpers.IPHelper.get_connect_ip(socket)
+      else
+        "127.0.0.1"
+      end
+
     {:ok, assign(socket, players: list_players(game_id), game: Cornucopia.get_game!(game_id), ip_address: ip_address)}
   end
 

@@ -107,8 +107,8 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   end
 
   defp save_game(socket, :new, game_params) do
-    # Get the IP address for rate limiting
-    ip_address = socket.assigns.ip_address
+    # Get the IP address for rate limiting (passed from parent via assigns)
+    ip_address = Map.get(socket.assigns, :ip_address, "127.0.0.1")
     
     # Check and record rate limit atomically
     case Copi.RateLimiter.check_and_record(ip_address, :game_creation) do

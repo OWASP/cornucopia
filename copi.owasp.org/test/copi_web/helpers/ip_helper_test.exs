@@ -59,5 +59,15 @@ defmodule CopiWeb.Helpers.IPHelperTest do
         assert CopiWeb.Helpers.IPHelper.get_connect_ip(socket) == expected
       end
     end
+
+    test "returns fallback IP when peer_data is nil" do
+      socket = %Socket{
+        private: %{
+          connect_info: %{peer_data: nil}
+        }
+      }
+      
+      assert CopiWeb.Helpers.IPHelper.get_connect_ip(socket) == "127.0.0.1"
+    end
   end
 end

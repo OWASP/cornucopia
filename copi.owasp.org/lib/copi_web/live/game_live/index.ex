@@ -7,26 +7,29 @@ defmodule CopiWeb.GameLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    # Rate limit WebSocket connections
-    ip_address = CopiWeb.Helpers.IPHelper.get_connect_ip(socket)
-    
-    case Copi.RateLimiter.check_and_record(ip_address, :connection) do
-      {:ok, _remaining} ->
-        if connected?(socket) do
-          Phoenix.PubSub.subscribe(Copi.PubSub, "games")
-        end
+    if connected?(socket) do
+      # Rate limit WebSocket connections (only on connected mount)
+      ip_address = CopiWeb.Helpers.IPHelper.get_connect_ip(socket)
+      Phoenix.PubSub.subscribe(Copi.PubSub, "games")
 
-        {:ok, assign(socket, games: list_games(), ip_address: ip_address)}
-        
-      {:error, :rate_limited, retry_after} ->
-        {:ok,
-         socket
-         |> put_flash(
-           :error,
-           "Connection rate limit exceeded. Too many connections from your IP address. " <>
-           "Please try again in #{retry_after} seconds."
-         )
-         |> assign(:games, nil)}
+      case Copi.RateLimiter.check_and_record(ip_address, :connection) do
+        {:ok, _remaining} ->
+          {:ok, assign(socket, games: list_games(), ip_address: ip_address)}
+
+        {:error, :rate_limited, retry_after} ->
+          {:ok,
+           socket
+           |> put_flash(
+             :error,
+             "Connection rate limit exceeded. Too many connections from your IP address. " <>
+             "Please try again in #{retry_after} seconds."
+           )
+           |> assign(games: nil, ip_address: ip_address)}
+      end
+    else
+      # Disconnected mount (initial static render) - no WebSocket yet
+      # Assign games: nil to match original behavior expected by templates
+      {:ok, assign(socket, games: nil, ip_address: "127.0.0.1")}
     end
   end
 
