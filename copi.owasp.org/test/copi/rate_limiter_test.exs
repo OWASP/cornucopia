@@ -124,17 +124,41 @@ defmodule Copi.RateLimiterTest do
   end
 
   describe "rate limit window expiration" do
-    test "allows requests after window expires" do
+    test "allows requests after clearing IP data" do
       ip = "192.168.100.#{:rand.uniform(255)}"
+      config = RateLimiter.get_config()
+      max_games = config.game_creation.max_requests
       
-      # This test would require waiting for the window to expire
-      # In a real scenario, you might want to use a mock timer or 
-      # make the window configurable for testing
+      # Exhaust the rate limit
+      for _i <- 1..max_games do
+        assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
+      end
       
+      # Next request should be blocked
+      assert {:error, :rate_limited, _retry_after} = RateLimiter.check_and_record(ip, :game_creation)
+      
+      # Clear the IP data (simulates window expiration)
+      RateLimiter.clear_ip(ip)
+      
+      # Give the GenServer a moment to process the clear
+      Process.sleep(10)
+      
+      # Request should now be allowed again
       assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
+    end
+
+    test "requests are tracked with timestamps" do
+      ip = "192.168.101.#{:rand.uniform(255)}"
       
-      # Verify request was recorded
-      assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
+      # First request
+      assert {:ok, remaining1} = RateLimiter.check_and_record(ip, :game_creation)
+      
+      # Small delay
+      Process.sleep(100)
+      
+      # Second request - remaining should decrease
+      assert {:ok, remaining2} = RateLimiter.check_and_record(ip, :game_creation)
+      assert remaining2 < remaining1
     end
   end
 
