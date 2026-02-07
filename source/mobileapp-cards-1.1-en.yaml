@@ -2,7 +2,7 @@
 meta:
   edition: "mobileapp"
   component: "cards"
-  language: "EN"
+  language: "HI"
   version: "1.1"
 suits:
 -
@@ -77,75 +77,75 @@ suits:
     misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Code Quality” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
 -
   id: "AA"
-  name: "Authentication & Authorization"
+  name: "प्रमाणीकरण और प्राधिकरण"
   cards:
   -
     id: "AA2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AA2"
-    desc: "Jie can use the app to do sensitive operations because the “unlocked key” is not used during the application flow"
+    desc: "जी (Jie) संवेदनशील कार्यों को करने के लिए ऐप का उपयोग कर सकता है क्योंकि एप्लिकेशन फ्लो के दौरान “अनलॉक्ड की” का उपयोग नहीं किया जाता है।"
   -
     id: "AA3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AA3"
-    desc: "Choi can access capabilities, objects, resources, or properties they should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
+    desc: "चोई (Choi) उन क्षमताओं, ऑब्जेक्ट्स, संसाधनों या गुणों तक पहुँच प्राप्त कर सकता है जिनकी उसे अनुमति नहीं होनी चाहिए, क्योंकि एंटाइटलमेंट्स या परमिशन बहुत व्यापक हैं, सही तरीके से सेट नहीं किए गए हैं या लागू नहीं किए गए हैं।"
   -
     id: "AA4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/AA4"
-    desc: "Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly"
+    desc: "वंदना बायोमेट्रिक प्रमाणीकरण को बायपास कर सकती है क्योंकि प्रमाणीकरण गलत तरीके से कॉन्फ़िगर किया गया है या सही तरीके से लागू नहीं किया गया है।"
   -
     id: "AA5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AA5"
-    desc: "Eiman can bypass the local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded"
+    desc: "ईमान (Eiman) पैचिंग और/या इंस्ट्रूमेंटेशन के माध्यम से लोकल प्रमाणीकरण को बायपास कर सकता है क्योंकि प्रमाणीकरण को हटाया या ओवरलोड किया जा सकता है।"
   -
     id: "AA6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AA6"
-    desc: "Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing"
+    desc: "अनंत (Anant) अतिरिक्त प्रमाणीकरण के बिना संवेदनशील कार्य कर सकता है क्योंकि प्रमाणीकरण आवश्यकताएँ बहुत कमजोर हैं या मौजूद नहीं हैं।"
   -
     id: "AA7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AA7"
-    desc: "Abdullah can bypass authentication by altering the usual process sequence or flow, or by undertaking the process in incorrect order, or by manipulating date and time values used by the app, or by using valid features for unintended purposes"
+    desc: "अब्दुल्लाह (Abdullah) सामान्य प्रक्रिया क्रम या फ्लो को बदलकर, प्रक्रिया को गलत क्रम में निष्पादित करके, ऐप द्वारा उपयोग किए जाने वाले दिनांक और समय मानों में हेरफेर करके, या वैध सुविधाओं का अनपेक्षित उद्देश्यों के लिए उपयोग करके प्रमाणीकरण को बायपास कर सकता है।"
   -
     id: "AA8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/AA8"
-    desc: "Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking"
+    desc: "प्रमोद (Pramod) गलत दिशा में भेजने (misdirection) के माध्यम से क्रेडेंशियल्स को इंटरसेप्ट कर सकता है क्योंकि ऐप Tapjacking, StrandHogg और/या URL स्कीम हाईजैकिंग जैसे हमलों के प्रति संवेदनशील है।"
   -
     id: "AA9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AA9"
-    desc: "Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)"
+    desc: "वोंग (Wong) प्रमाणीकरण को बायपास कर सकता है क्योंकि यह सुरक्षित रूप से विफल नहीं होता (अर्थात यह डिफ़ॉल्ट रूप से बिना प्रमाणीकरण के एक्सेस की अनुमति देता है)।"
   -
     id: "AAX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AAX"
-    desc: "Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions"
+    desc: "प्रसाद (Prasad) केंद्रीकृत प्रमाणीकरण और प्राधिकरण नियंत्रणों को बायपास कर सकता है क्योंकि उनका सभी इंटरैक्शनों में व्यापक रूप से उपयोग नहीं किया जा रहा है।"
   -
     id: "AAJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/AAJ"
-    desc: "Ade can bypass authentication because it is not enforced using a remote endpoint, or it is not based on a cryptographic primitive protected by keystore/keychain access control flags"
+    desc: "एडे (Ade) प्रमाणीकरण को बायपास कर सकता है क्योंकि इसे रिमोट एंडपॉइंट के माध्यम से लागू नहीं किया गया है, या यह कीस्टोर/कीचेन एक्सेस कंट्रोल फ़्लैग्स द्वारा सुरक्षित किसी क्रिप्टोग्राफ़िक प्रिमिटिव पर आधारित नहीं है।"
   -
     id: "AAQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/AAQ"
-    desc: "Riotaro can inject and run a command that the application will run at a higher privilege level without being authenticated or authorized to do so"
+    desc: "रिओतारो (Riotaro) बिना प्रमाणीकरण या प्राधिकरण के ऐसे कमांड को इंजेक्ट और निष्पादित कर सकता है जिसे एप्लिकेशन उच्च विशेषाधिकार स्तर पर चलाएगा।"
   -
     id: "AAK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AAK"
-    desc: "Aatif can influence or alter authentication controls and can therefore bypass them"
+    desc: "आतिफ़ (Aatif) प्रमाणीकरण नियंत्रणों को प्रभावित या परिवर्तित कर सकता है और इस प्रकार उन्हें बायपास कर सकता है।"
   -
     id: "AAA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/AAA"
-    desc: "You have invented a new attack against “Authentication & Authorization”"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Authentication Architectures” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
--
+    desc: "आपने “प्रमाणीकरण और प्राधिकरण” के विरुद्ध एक नया हमला ईजाद किया है।"
+    misc: "इस विषय पर अधिक जानकारी OWASP की निःशुल्क Mobile Application Security Cheat Sheets में तथा OWASP MAS वेबसाइट पर उपलब्ध “Mobile Application Security Testing Guide” के “Mobile App Authentication Architectures” अनुभाग में प्राप्त की जा सकती है।"
+  -
   id: "NS"
   name: "Network & Storage"
   cards:
@@ -450,16 +450,16 @@ paragraphs:
   sentences:
   -
     id: "NoCard"
-    text: "No Card"
+    text: "कोई कार्ड नहीं"
   -
     id: "Title"
-    text: "Mobile App Edition v1.1-EN"
+    text: "मोबाइल ऐप संस्करण v1.1-HI"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Mobile App Edition v1.1-EN"
+    text: "OWASP® Cornucopia मोबाइल ऐप संस्करण v1.1-HI"
   -
     id: "T00010"
-    text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+    text: "OWASP® Cornucopia एक ऐसा तंत्र है जो सॉफ़्टवेयर विकास टीमों को एजाइल, पारंपरिक और औपचारिक विकास प्रक्रियाओं में सुरक्षा आवश्यकताओं की पहचान करने में सहायता करता है।"
   -
     id: "T00020"
     text: "Authors"
