@@ -2813,6 +2813,7 @@
 416:
   owasp_asvs:
   - 6.4.6
+  - 7.6.2
   name: Manipulate Human Behavior
 438:
   owasp_asvs:
@@ -3092,6 +3093,8 @@
   - 14.3.1
   - 14.3.2
   - 14.3.3
+  - 6.2.6
+  - 6.2.7
   name: Shoulder Surfing
 510:
   owasp_asvs:

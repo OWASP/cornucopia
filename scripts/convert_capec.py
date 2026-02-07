@@ -19,7 +19,7 @@ class ConvertVars:
     DEFAULT_INPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
     DEFAULT_CAPEC_TO_ASVS_INPUT_PATH = Path(__file__).parent / "../source/webapp-capec-3.0.yaml"
     DEFAULT_ASVS_MAPPING_PATH = (
-        Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/ASVS-5.0/"
+        Path(__file__).parent / "../cornucopia.owasp.org/data/asvs-5.0/en/"
         "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
     )
     LATEST_ASVS_VERSION_CHOICES: List[str] = ["5.0"]
@@ -40,19 +40,17 @@ def create_capec_pages(
         create_folder(capec_path)
 
         f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC-{i['_ID']}: {i['_Name']}\r\n")
-        f.write("## Description\r\n\r\n")
+        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\r\n")
+        f.write("## Description\r\n")
         f.write(f"{parse_description(i.get('Description', ''))}\r\n")
         capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC-{capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\r\n")
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\r\n")
         if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
             logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
         else:
             f.write("## Related ASVS Requirements\r\n")
-            f.write(
-                f"ASVS ({asvs_version}): \
-{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\r\n\r\n"
-            )
+            f.write(f"ASVS ({asvs_version}): \
+{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
 
         f.close()
     logging.info("Created %d CAPEC pages", len(data["Attack_Pattern"]))
