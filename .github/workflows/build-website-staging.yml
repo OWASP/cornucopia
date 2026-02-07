@@ -46,6 +46,7 @@
               npm run build-stage   # Build staging version
               npm run coverage
 
+
           - name: Install smoke test tools
             working-directory: cornucopia.owasp.org
             run: |

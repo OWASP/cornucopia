@@ -56,6 +56,7 @@ Additionally, Adam Shostack maintains a list of tabletop security games and rela
 
 Cornucopia is developed, maintained, updated and promoted by a worldwide team of volunteers. The contributors to date have been:
 
+- Abhijit Sahoo
 - Artim Banyte
 - Simon Bennetts
 - Thomas Berson
@@ -104,6 +105,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Mradul Tiwari
 - Max Alejandro Gómez Sánchez Vergaray
 - Ive Verstappen
+- Sachin Vishwakarma
 - Wagner Voltz
 - Stephen de Vries
 - Colin Watson

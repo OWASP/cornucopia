@@ -52,6 +52,7 @@
               pnpm exec serve build &
               pnpm exec wait-on http://localhost:3000
               npm run smoke-test
+
               kill $(jobs -p) || true
 
           - name: Upload website coverage to Qlty
@@ -61,3 +62,5 @@
              total-parts-count: 3
              add-prefix: cornucopia.owasp.org
              files: cornucopia.owasp.org/coverage/lcov.info
+              kill $(jobs -p) || true
+
