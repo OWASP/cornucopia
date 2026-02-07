@@ -8,4 +8,4 @@ Source: [CAPEC™ 508](https://capec.mitre.org/data/definitions/508.html)
 
 ## Related ASVS Requirements
 
-ASVS (5.0): [14.2.6](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.6), [14.3.1](/taxonomy/asvs-5.0/14-data-protection/03-client-side-data-protection#V14.3.1), [14.3.2](/taxonomy/asvs-5.0/14-data-protection/03-client-side-data-protection#V14.3.2), [14.3.3](/taxonomy/asvs-5.0/14-data-protection/03-client-side-data-protection#V14.3.3)
+ASVS (5.0): [14.2.6](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.6), [14.3.1](/taxonomy/asvs-5.0/14-data-protection/03-client-side-data-protection#V14.3.1), [14.3.2](/taxonomy/asvs-5.0/14-data-protection/03-client-side-data-protection#V14.3.2), [14.3.3](/taxonomy/asvs-5.0/14-data-protection/03-client-side-data-protection#V14.3.3), [6.2.6](/taxonomy/asvs-5.0/06-authentication/02-password-security#V6.2.6), [6.2.7](/taxonomy/asvs-5.0/06-authentication/02-password-security#V6.2.7)
