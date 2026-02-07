@@ -127,13 +127,16 @@ defmodule Copi.RateLimiterTest do
     test "allows requests after window expires" do
       ip = "192.168.100.#{:rand.uniform(255)}"
       
-      # This test would require waiting for the window to expire
-      # In a real scenario, you might want to use a mock timer or 
-      # make the window configurable for testing
-      
+      # Fill up to the limit
       assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
       
-      # Verify request was recorded
+      # Clear the IP data (simulates window expiration)
+      RateLimiter.clear_ip(ip)
+      
+      # Give the GenServer a moment to process the clear
+      Process.sleep(10)
+      
+      # Request should now be allowed again
       assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
     end
   end

@@ -38,6 +38,21 @@ defmodule CopiWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(Copi.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+    
+    # Set peer data for LiveView tests using @tag peer_ip
+    conn = if tags[:peer_ip] do
+      Plug.Conn.put_private(conn, :plug_connect_info, %{
+        peer_data: %{
+          address: tags[:peer_ip],
+          port: 12345,
+          ssl_cert: nil
+        }
+      })
+    else
+      conn
+    end
+
+    {:ok, conn: conn}
   end
 end
