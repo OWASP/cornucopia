@@ -4,12 +4,12 @@
 
 Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia  (website and mobile) as well as the Elevation of Privileges game.
 
-
 ## Dev Environment Setup
 
 If you want to contribute to Copi, follow the guide below to set up your development environment.
 
 ### Installation by Operating System
+
 #### Mac
 
 ##### Get Homebrew
@@ -23,42 +23,49 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
 ##### Get Elixir
+
 ```bash
 brew install elixir
 ```
 
 #### Linux and Windows
+
 Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows).
 
 ### Install the Elixir package manager, Hex
+
 ```bash
 mix local.hex
 ```
 
 #### Check you've got Elixir 1.18 and Erlang 27, or higher
+
 ```bash
 elixir -v
 ```
 
 ### Install the web application framework, Phoenix (this line will change when 1.7 goes GA)
+
 ```bash
 mix archive.install hex phx_new
 ```
 
 ### PostgreSQL with Docker
-https://docs.docker.com/desktop/install/mac-install/
+
+[docs.docker.com/desktop/install/mac-install/](https://docs.docker.com/desktop/install/mac-install/)
 
 After installing docker, You can create an instance of the Postgres image:
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_TEST_PWD -d postgres
 ```
 Note: the password must be the same as the one in the config file of your dev environment.
 
 You've now got Elixir, Hex, Phoenix and Postgres. You are ready to run Copi locally and contribute.
 
-Bonus: set up vscode for elixir dev https://fly.io/phoenix-files/setup-vscode-for-elixir-development/
+Bonus: set up vscode for elixir dev [fly.io/phoenix-files/setup-vscode-for-elixir-development/](https://fly.io/phoenix-files/setup-vscode-for-elixir-development/)
 
 ### Clone the copi code, then
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -68,74 +75,27 @@ To start your Phoenix server:
 
 ### Run tests
 
-    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
-    export POSTGRES_TEST_PWD=y9EAY7xeVucjM2yM
+    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_TEST_PWD -d postgres
+    export POSTGRES_TEST_PWD=POSTGRES_TEST_PWD
     mix test
-  *
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-## Security Features
-
-### Rate Limiting
-
-Copi implements IP-based rate limiting to protect against abuse and ensure availability for all users. This addresses CAPEC 212 (Functionality Misuse) attacks.
-
-**Features:**
-- **Game Creation Limiting**: Limits the number of games that can be created from a single IP address
-- **Connection Limiting**: Limits the number of WebSocket connections from a single IP address
-- **Configurable Limits**: All limits and time windows are configurable via environment variables
-
-**Configuration:**
-
-Set the following environment variables to customize rate limits:
-
-```bash
-# Maximum games per IP (default: 10)
-export MAX_GAMES_PER_IP=10
-
-# Time window for game creation in seconds (default: 3600 = 1 hour)
-export GAME_CREATION_WINDOW_SECONDS=3600
-
-# Maximum connections per IP (default: 50)
-export MAX_CONNECTIONS_PER_IP=50
-
-# Time window for connections in seconds (default: 300 = 5 minutes)
-export CONNECTION_WINDOW_SECONDS=300
-```
-
-**How it works:**
-- The rate limiter tracks requests by IP address
-- When a limit is exceeded, users receive a clear error message with a retry time
-- Expired entries are automatically cleaned up every 5 minutes
-- Rate limits are independent for game creation vs. connections
-- The system handles both IPv4 and IPv6 addresses
-- X-Forwarded-For headers are respected for reverse proxy deployments
-
-**For Reverse Proxy Deployments:**
-
-If deploying behind a reverse proxy (nginx, Apache, Cloudflare, etc.), ensure the proxy passes the real client IP:
-
-```nginx
-# Nginx example
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-```
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## More about Phoenix
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+  * Official website: [https://www.phoenixframework.org/](https://www.phoenixframework.org/)
+  * Guides: [https://hexdocs.pm/phoenix/overview.html](https://hexdocs.pm/phoenix/overview.html)
+  * Docs: [https://hexdocs.pm/phoenix](https://hexdocs.pm/phoenix)
+  * Forum: [https://elixirforum.com/c/phoenix-forum](https://elixirforum.com/c/phoenix-forum)
+  * Source: [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix)
 
 ## Fly deployment
 
-Fly.io support clustering Elixir apps which means that you can scale horizontally. https://fly.io/docs/elixir/the-basics/clustering/
-You'll need to install elixir in order to launch the app. see: https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir
-Login to fly and create a PostgreSQL cluster. See: see: https://fly.io/dashboard/ (Click managed postgres in the menu)
+Fly.io support clustering Elixir apps which means that you can scale horizontally. [https://fly.io/docs/elixir/the-basics/clustering/](https://fly.io/docs/elixir/the-basics/clustering/)
+You'll need to install elixir in order to launch the app. see: [https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir](https://github.com/OWASP/cornucopia/tree/master/copi.owasp.org#get-elixir)
+Login to fly and create a PostgreSQL cluster. See: see: [https://fly.io/dashboard/](https://fly.io/dashboard/) (Click managed postgres in the menu)
 1 GB memory and 10GB storage for the db is enough.
 
     cd copi.owasp.org
@@ -143,14 +103,6 @@ Login to fly and create a PostgreSQL cluster. See: see: https://fly.io/dashboard
     fly launch --no-deploy
 
 Make a note of the host and name of the app and the name of the postgresql cluster.
-
-Configure rate limiting (optional, uses defaults if not set):
-
-    fly secrets set MAX_GAMES_PER_IP=10 --app <app name>
-    fly secrets set GAME_CREATION_WINDOW_SECONDS=3600 --app <app name>
-    fly secrets set MAX_CONNECTIONS_PER_IP=50 --app <app name>
-    fly secrets set CONNECTION_WINDOW_SECONDS=300 --app <app name>
-
 Then deploy the app from `./copi.owasp.org`
 
     fly mpg attach <cluster name> --app <app name>
@@ -170,7 +122,7 @@ NB: The challenge should not be proxied through cloudflare!
 Please allow for 30 min for the change to take effect, but check that the "Domain ownership verification" went ok. 
 
 Follow the instructions given.
-If you use get issues. See the troubleshooting section: https://fly.io/docs/networking/custom-domain/#troubleshoot-certificate-creation
+If you use get issues. See the troubleshooting section: [https://fly.io/docs/networking/custom-domain/#troubleshoot-certificate-creation](https://fly.io/docs/networking/custom-domain/#troubleshoot-certificate-creation)
 
 ## Heroku deployment
 
@@ -193,12 +145,6 @@ Set your prefered app name instead of `<name>`
     heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
     heroku config:set POOL_SIZE=18
     heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory
-    
-    # Optional: Configure rate limiting (uses defaults if not set)
-    heroku config:set MAX_GAMES_PER_IP=10
-    heroku config:set GAME_CREATION_WINDOW_SECONDS=3600
-    heroku config:set MAX_CONNECTIONS_PER_IP=50
-    heroku config:set CONNECTION_WINDOW_SECONDS=300
 
 ### Heroku deploy
 
@@ -210,18 +156,18 @@ Set your local branch name instead of `<name>`
 
     heroku domains:add copi.owaspcornucopia.org -a copiweb-stage
 
-Then continue setting up the dns at your dns proivder: https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains
+Then continue setting up the dns at your dns proivder: [https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains](https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-subdomains)
 
 You'll find the dns target under
 
-https://dashboard.heroku.com/apps/<name>/settings
+[https://dashboard.heroku.com/apps/<name>/settings](https://dashboard.heroku.com/apps/<name>/settings)
 
 Reconfigure the apps host address
 
     heroku config:set PHX_HOST=copi.owaspcornucopia.org
 
 
-Setup SSL on for your dns provider e.g: https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/
+Setup SSL on for your dns provider e.g: [https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/)
 
     # PEM format
     heroku certs:add cloudflare.crt cloudflare.key
@@ -234,5 +180,60 @@ Get the number of games and users per month. We do not track users. We only look
 
 SELECT EXTRACT(YEAR FROM created_at) AS year, EXTRACT(MONTH FROM created_at) AS month, count(*) AS games_count FROM games WHERE created_at is not null group by year, month ORDER by year ASC, month ASC;
 
-
 SELECT EXTRACT(YEAR FROM inserted_at) AS year, EXTRACT(MONTH FROM inserted_at) AS month, count(*) AS players_count FROM players WHERE inserted_at is not null group by year, month ORDER by year ASC, month ASC;
+
+## Our Threat Model
+
+The Copi threat model can be found at [../ThreatDragonModels/copi.json](../ThreatDragonModels/copi.json). You may review it by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard).
+
+Here is a short summary of what you need to be aware of:
+
+### Be aware of data exposure risk! Copi does not support authentication
+
+#### What can go wrong?
+
+We have not implemented Authentication when using Copi, instead we use a secure randomized string to prevent accidental data exposure. Still, an attacker may get hold of such a url by spoofing Copi or other Colleagues in your organization by leveraging various social engineering techniques like establishing a rogue location: [https://capec.mitre.org/data/definitions/616.html](https://capec.mitre.org/data/definitions/616.html).
+
+An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
+
+#### What can you do about it?
+
+As a security measure, you can choose to run copi on a private cluster
+You should avoid using your own name or the name of a company or project when creating players and games at copi.owasp.org. And remind others not to do so as well. Instead use a pseudonyme and a fake threat model name.
+
+### Data is not encrypted at rest by default
+
+#### What can go wrong?
+
+When hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory.
+
+#### What can you do about it?
+
+Ensure that your service provider ensures that the data is encrypted at REST.
+OWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.
+
+### If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster
+
+#### What can go wrong?
+
+Erlang clustering does not happen over TLS by default. This may allow an attacker to launch a MTM attack and do RCE against your cluster. It may also allow an attacker to take over your database connection and both disclose sensitive information and compromise the integrity of the data sent between your database and Copi.
+
+#### What can you do about it?
+
+if you deploy Copi yourself, make sure you configure TLS appropriatly according to your needs.
+OWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Private Networking) mesh to automatically connect all your app instances, providing zero-config, secure, private communication with internal DNS (e.g., app-name.internal), allowing services to talk as if they're on the same network, even across regions, for simple and secure microservices communication. This mesh handles complex routing, making it easy to build distributed apps securely without manual VPN setup.
+
+### An attacker can deny access to user's by CAPEC 212, functionality misuse
+
+#### What can go wrong?
+
+An attacker can continue to create an unlimited amount of games and players until the application stops responding.
+
+#### What can you do about it?
+
+We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself.
+
+### Did we do a good job?
+
+We welcome any input or improvments you might be willing to share with us regarding our current threat model.
+Arguably, we created the system before the threat modeling, and several improvements need to be made to properly balance the inherrant risks of compromise against the current security controls. For anyone choosing to host the game engine, please take this into account.

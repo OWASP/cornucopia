@@ -1,14 +1,11 @@
 ---
   name: Build and Test Copi
   on:
-    pull_request:
-      paths:
-      - 'copi.owasp.org/**'
-      - '.github/workflows/copi-build.yml'
+    workflow_call:
     workflow_dispatch:
   env:
     MIX_ENV: test
-    POSTGRES_TEST_PWD: ${{ secrets.POSTGRES_TEST_PWD }}
+    POSTGRES_TEST_PWD: POSTGRES_TEST_PWD
   permissions:
     contents: read
   jobs:
@@ -19,14 +16,14 @@
           image: postgres:14
           env:
             POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: ${{ secrets.POSTGRES_TEST_PWD }}
+            POSTGRES_PASSWORD: POSTGRES_TEST_PWD
             POSTGRES_DB: copi_test
           ports:
             - 5432:5432
           options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
       steps:
-        - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
           with:
             ref: ${{ github.event.pull_request.head.sha }}
         - name: build project
@@ -34,7 +31,7 @@
           run: docker build -f ./Dockerfile .
         - name: Cache deps
           id: cache-deps
-          uses: actions/cache@a7833574556fa59680c1b7cb190c1735db73ebf0 # v5.0.0
+          uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
           env:
             cache-name: cache-elixir-deps
           with:
@@ -64,4 +61,13 @@
           run: mix ecto.reset
         - name: Run tests
           working-directory: copi.owasp.org
-          run: mix test
+          run: |
+            mix test --cover
+            mix coveralls.cobertura
+        - name: Upload Copi coverage to qlty
+          uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899
+          with:
+            token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+            add-prefix: copi.owasp.org
+            total-parts-count: 3
+            files: copi.owasp.org/cover/cobertura.xml
