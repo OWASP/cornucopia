@@ -74,8 +74,8 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :new, player_params) do
-    # Get the IP address for rate limiting from assigns (passed by parent)
-    ip_address = Map.get(socket.assigns, :ip_address, "127.0.0.1")
+    # Get the IP address for rate limiting
+    ip_address = socket.assigns.ip_address
     
     # Check and record rate limit atomically
     case Copi.RateLimiter.check_and_record(ip_address, :player_creation) do

@@ -12,14 +12,13 @@
 
 <div class="prose max-w-none mt-10">
 
-      <%= if @games != nil && length(@games) > 0 do %>
-        <% game = hd(@games) %>
+      <%= if @games != nil && @games do %>
         <%= cond do %>
-        <% game.edition == "eop" -> %>
+        <% @games.changes.edition == "eop" -> %>
           <.header1 id="howtoplay">How to play Elevation of privilege</.header1>
-        <% game.edition == "mlsec" -> %>
+        <% @games.changes.edition == "mlsec" -> %>
           <.header1 id="howtoplay">How to play Elevation of MLSec</.header1>
-        <% game.edition == "cumulus" -> %>
+        <% @games.changes.edition == "cumulus" -> %>
           <.header1 id="howtoplay">How to play OWASP Cumulus</.header1>
         <% true -> %>
           <.header1 id="howtoplay">How to play Cornucopia</.header1>
@@ -29,10 +28,9 @@
     <.header2>Preparations</.header2>
 
   <ol>
-    <%= if @games != nil && length(@games) > 0 do %>
-      <% game = hd(@games) %>
+    <%= if @games != nil && @games do %>
       <%= cond do %>
-      <% game.edition == "cumulus" -> %>
+      <% @games.changes.edition == "cumulus" -> %>
         <li>In preparation for a game of OWASP Cumulus an architectural overview is generated. Ideally, this is in the form of a data flow diagram, but in the end every overview which is understood by the players is fine.</li>
       <% true -> %>
         <li>Identify an application or application process to review; this might be a concept, design or an actual implementation</li>
@@ -43,10 +41,9 @@
     <li>Have some prizes to hand (gold stars, chocolate, pizza, beer, flowers, whatever you need)</li>
   </ol>
 
-<%= if @games != nil && length(@games) > 0 do %>
-  <% game = hd(@games) %>
+<%= if @games != nil && @games do %>
   <%= cond do %>
-  <% game.edition == "eop" -> %>
+  <% @games.changes.edition == "eop" -> %>
     <.header2>Play</.header2>
     <ol>
       <li>Create a game in Copi using the button below</li>
@@ -60,7 +57,7 @@
       <li>To win the round the players have to vote. The highest card that is voted on by 2 or more players takes the trick and wins the round, but every card that gets 2 or more votes get a point.</li>
       <li>Make sure people take notes on the threats and that you discuss what can be done to mitigate against these threats. Create tasks in you Issue Tracker Software and/or threat model!</li>
     </ol>
-  <% game.edition == "cumulus" -> %>
+  <% @games.changes.edition == "cumulus" -> %>
     <.header2>Play</.header2>
     <ol>
       <li>Create a game in Copi using the button below</li>
@@ -77,7 +74,7 @@
       <li>The player who wins the round, leads the next round (i.e., they play first), and thus define the next lead suit</li>
       <li>Make sure people take notes on the risks and that you discuss what can be done to mitigate against these risks. Create tasks in you Issue Tracker Software and/or threat model!</li>
     </ol>
-  <% game.edition == "mlsec" -> %>
+  <% @games.changes.edition == "mlsec" -> %>
     <.header2>Play</.header2>
     <ol>
       <li>Create a game in Copi using the button below</li>
