@@ -45,3 +45,22 @@
               npm run build        # Build production version
               pnpm audit --prod
               pnpm run coverage
+
+          - name: Smoke test
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm exec serve build &
+              pnpm exec wait-on http://localhost:3000
+              npm run smoke-test
+
+              kill $(jobs -p) || true
+
+          - name: Upload website coverage to Qlty
+            uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+            with:
+             token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+             total-parts-count: 3
+             add-prefix: cornucopia.owasp.org
+             files: cornucopia.owasp.org/coverage/lcov.info
+              kill $(jobs -p) || true
+

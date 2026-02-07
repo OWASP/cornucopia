@@ -1,40 +1,36 @@
-## Scenario: Mike’s Misuse of Application Features
+## Scenario: Michael's Access Through Unsecured Administrative Tools
 
-Envision a situation where Mike misuses an application by exploiting valid features in unintended ways. He leverages these features by:
+Consider a situation where Michael bypasses standard application protocols to gain access to data by exploiting inadequately secured administrative tools or interfaces. This vulnerability arises due to:
 
-1. **Excessive Speed or Frequency:** Using a feature too quickly or too frequently, beyond its normal operational capacity.
+1. **Lack of Robust Security in Administrative Tools:** The tools designed for system management and maintenance do not have sufficient protective measures.
 
-2. **Resource Consumption:** Utilizing features in a way that consumes excessive application resources.
-
-3. **Inducing Race Conditions:** Performing actions in a manner that causes race conditions, where the application's behavior becomes unpredictable due to timing issues.
-
-4. **Over-utilization of Features:** Exploiting a feature to an extent that it negatively impacts the application’s functionality or other users' experiences.
+2. **Inadequate Access Controls for Administrative Interfaces:** The interfaces used for administrative purposes are easily accessible and lack stringent access restrictions.
 
 ### Example
 
-Mike discovers that an online booking system allows rapid repeated bookings and cancellations without any rate limits. He writes a script that continuously books and cancels appointments, exploiting the system’s lack of controls on the frequency of use. This not only consumes significant server resources, leading to performance degradation, but also creates race conditions that result in double bookings and data inconsistencies.
+Michael discovers that a web application’s administrative interface is accessible through a common URL and is only protected by a weak password. Leveraging this, he gains access to the administrative panel where he can view, modify, and delete sensitive data. This unauthorized access is facilitated by the lack of multi-factor authentication, inadequate password policies, and the absence of monitoring mechanisms on the administrative interface.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario maps primarily to STRIDE: **Denial of Service** (DoS).
+The STRIDE category applicable here is **Elevation of Privilege** (EoP).
 
-**Denial of Service** occurs when an attacker causes a system to become unavailable, degrade performance, or otherwise disrupt normal operation.
-Mike exploits a valid feature too quickly or too frequently, consuming server resources and creating race conditions, which affects availability and correctness. This may, as well, give him certain benefits at the expanse of others or the system.
-The attack is focused on resource exhaustion and misuse of intended functionality, which aligns with the DoS category.
+Michael is gaining access to administrative functions and sensitive data that he should not be able to access with his current privileges.
+The core impact is that he is escalating his access from a normal user (or unauthenticated user) to an administrative level.
+Even though he can view and modify data, the underlying issue is that privilege boundaries are bypassed, which aligns with **Elevation of Privilege** rather than **Information Disclosure** (which focuses only on unauthorized reading) or **Tampering** (which focuses on modifying data within authorized access).
 
 ### What can go wrong?
 
-Such misuse can lead to system overloads, degraded performance, unintended application behaviors, and negative impacts on other users.
-Common attacks includes automated threats such as: Account aggregation, Account creation, Ad fraud, CAPTCHA bypass, Carding, Card cracking, Cashing out, Credential cracking, Credential stuffing, Denial of service, Expediting, Fingerprinting, Footprinting, Scalping, Scraping, Skewing, Sniping, Spamming, Token cracking and Vulnerability scanning.
+Unsecured administrative tools and interfaces can lead to major data breaches, unauthorized access to sensitive information, and potential system-wide compromises.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are we going to do about it?
 
-1. Implement rate limiting and usage throttling to prevent excessive use of features.
-2. Design features with resource consumption and potential misuse in mind, ensuring they can handle unexpected or intensive usage without impacting overall system performance.
-3. Regularly monitor application usage patterns to identify and address potential abuses or misuses of features.
+1. Implement strong authentication measures, such as multi-factor authentication, for all administrative interfaces and tools.
+2. Enforce robust password policies and regular credential updates for system administrators.
+3. Restrict access to administrative interfaces to a limited set of authorized IP addresses or networks.
+4. Regularly audit and monitor activities performed through administrative tools to detect and respond to unauthorized access.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

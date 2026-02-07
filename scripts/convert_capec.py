@@ -38,7 +38,6 @@ def create_capec_pages(
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
-
         f = open(capec_path / "index.md", "w", encoding="utf-8")
         f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\r\n")
         f.write("## Description\r\n")

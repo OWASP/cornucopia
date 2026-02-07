@@ -231,6 +231,14 @@ The script:
 
 ## Contributing to Development
 
+### LibreOffice Installation
+
+LibreOffice is required to convert `.docx` files to `.pdf` format.
+
+- **Windows**: `winget install -e --id TheDocumentFoundation.LibreOffice`
+- **Mac OS X**: `brew install --cask libreoffice`
+- **Ubuntu**: `sudo apt update && sudo apt install libreoffice`
+
 ### Dev setup for the Cornucopia Converter
 
 For copi.owasp.org and cornucopia.owasp.org see separate README.md
