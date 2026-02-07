@@ -10,7 +10,7 @@
   <%= if @player.game.started_at do %>
 
   <% first_card_played = Copi.Cornucopia.ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>
-  <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
+
   <% highest_scoring_card = Copi.Cornucopia.highest_scoring_card_in_round(@game, @game.rounds_played + 1) %>
 
   <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">

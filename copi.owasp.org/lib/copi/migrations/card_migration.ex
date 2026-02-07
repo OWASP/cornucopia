@@ -48,7 +48,7 @@ defmodule Copi.CardMigration do
     case YamlElixir.read_from_file(path) do
       {:ok, cards} ->
         edition = cards["meta"]["edition"]
-        language = cards["meta"]["language"]
+
         version = cards["meta"]["version"]
         for suit <- cards["suits"] do
           for card <- suit["cards"] do

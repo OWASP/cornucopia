@@ -29,7 +29,7 @@ defmodule Copi.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
-  defp test_coverage(_), do: []
+
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
@@ -38,7 +38,7 @@ defmodule Copi.MixProject do
       {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.7.0"},
       {:ecto_sql, "~> 3.13.0"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, ">= 0.19.0 and < 0.22.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.0.11"},
@@ -60,7 +60,7 @@ defmodule Copi.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.2"},
-      {:plug_cowboy, "~> 2.7.1"},
+      {:plug_cowboy, "~> 2.8.0"},
       {:ecto_ulid, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.12.0"},
       {:slugify, "~> 1.3.1"},

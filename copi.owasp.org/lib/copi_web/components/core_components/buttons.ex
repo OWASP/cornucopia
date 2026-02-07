@@ -2,9 +2,7 @@ defmodule CopiWeb.CoreComponents.Buttons do
 
   use Phoenix.Component
 
-  import CopiWeb.CoreComponents
-  alias Phoenix.LiveView.JS
-  import CopiWeb.Gettext
+
 
   @doc """
   Renders a button.
