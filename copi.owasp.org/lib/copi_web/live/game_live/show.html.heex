@@ -20,6 +20,12 @@
     <% else %>
       <em>No lead suit yet</em>
     <% end %>
+    
+    <%= if Copi.Cornucopia.Game.round_open?(@game) do %>
+      <span class="ml-4 text-sm text-gray-600">
+        <%= Copi.Cornucopia.Game.continue_vote_count(@game) %> / <%= div(Enum.count(@game.players), 2) + 1 %> votes to continue
+      </span>
+    <% end %>
   </p>
   <% else %>
   <p class="my-8">Viewing round <strong><%= @requested_round %></strong>:
