@@ -42,6 +42,20 @@
               pnpm install          # Install dependencies
               npm run build-stage   # Build staging version
               npm run coverage
+
+
+          - name: Install smoke test tools
+            working-directory: cornucopia.owasp.org
+            run: |
+             pnpm add -D serve wait-on
+
+          - name: Smoke test
+            working-directory: cornucopia.owasp.org
+            run: |
+             pnpm exec serve build -l 3000 &
+             sleep 2
+             pnpm exec wait-on http://localhost:3000
+             
           - name: Smoke test
             working-directory: cornucopia.owasp.org
             run: |
@@ -54,6 +68,8 @@
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:
               token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+              total-parts-count: 3
+              add-prefix: cornucopia.owasp.org
               files: cornucopia.owasp.org/coverage/lcov.info
           - name: Archive production artifacts
             uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
