@@ -22,7 +22,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
       >
         <.input field={@form[:name]} type="text" label={gettext "Player Name"} />
 
-        <.input field={@form[:game_id]} type="hidden" />
+        <input type="hidden" name={@form[:game_id].name} value={@form[:game_id].value} />
 
         <:actions>
           <.primary_button phx-disable-with="Joining..." class="m-auto block py-2 px-3"><%= gettext "Join the game" %></.primary_button>
@@ -66,7 +66,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Player updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}

@@ -24,7 +24,7 @@ defmodule CopiWeb do
             layouts: [html: CopiWeb.Layouts]
 
         import Plug.Conn
-        import CopiWeb.Gettext
+        use Gettext, backend: CopiWeb.Gettext
 
         unquote(verified_routes())
     end
@@ -54,7 +54,7 @@ defmodule CopiWeb do
         import CopiWeb.CoreComponents.Headers
         import CopiWeb.CoreComponents.Buttons
         import CopiWeb.CoreComponents.TableComponents
-        import CopiWeb.Gettext
+        use Gettext, backend: CopiWeb.Gettext
 
         # Shortcut for generating JS commands
         alias Phoenix.LiveView.JS

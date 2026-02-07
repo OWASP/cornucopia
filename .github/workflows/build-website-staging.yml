@@ -3,10 +3,7 @@
     on:
       push:
         branches: [master]
-        paths:
-        - 'cornucopia.owasp.org/**'
-        - '.github/workflows/deploy-website-staging.yml'
-        - '.github/workflows/build-website-staging.yml'
+
     permissions:
       contents: read
     jobs:

@@ -6,7 +6,7 @@ defmodule CopiWeb.GameLiveTest do
   alias Copi.Cornucopia
 
   @create_attrs %{ name: "some name", edition: "webapp"}
-  @update_attrs %{ name: "some updated name", edition: "webapp"}
+  # @update_attrs %{ name: "some updated name", edition: "webapp"}
   @invalid_attrs %{name: nil, edition: "webapp"}
 
   defp fixture(:game) do
@@ -34,9 +34,9 @@ defmodule CopiWeb.GameLiveTest do
       assert_redirect(index_live, Routes.game_index_path(conn, :new))
 
 
-      {:ok, games_new, _html_games_new} = live(new_conn, "/games/new")
+      {:ok, games_new, html_games_new} = live(new_conn, "/games/new")
 
-      assert _html_games_new =~ "Start A Game"
+      assert html_games_new =~ "Start A Game"
 
       assert games_new
              |> form("#game-form", game: @invalid_attrs)
@@ -61,6 +61,45 @@ defmodule CopiWeb.GameLiveTest do
 
       assert html =~ "Waiting for players to join the game..."
       assert html =~ game.name
+      refute html =~ "Start Game"
     end
+
+    test "starts game when enough players", %{conn: conn, game: game} do
+      # Create 3 players
+      {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P3", game_id: game.id})
+
+
+
+      {:ok, show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
+      assert html =~ "Start Game"
+
+      html = show_live |> element("button", "Start Game") |> render_click()
+      assert html =~ "Round <strong>1</strong>"
+    end
+
+    test "redirects to error when game not found", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+    end
+
+    test "displays past round", %{conn: conn, game: game} do
+       # Create players and play a round to make it valid
+       {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+       {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "2.2", external_id: "EXT", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, _} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: p1.id, card_id: card.id, played_in_round: 1})
+      
+       # Advance game to round 2 and set started_at
+       {:ok, game} = Cornucopia.update_game(game, %{rounds_played: 1, started_at: DateTime.from_naive!(~N[2023-01-01 10:00:00], "Etc/UTC")})
+       
+       {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=1")
+       assert html =~ "Viewing round <strong>1</strong>"
+    end
+    
   end
 end

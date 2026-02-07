@@ -9,8 +9,7 @@ defmodule CopiWeb.GameLive.Show do
     {:ok, socket}
   end
 
-  @impl true
-  def on_mount(:default, _params, session, socket) do
+  def on_mount(:default, _params, _session, socket) do
     socket = attach_hook(socket, :current_path_hook, :handle_params, &put_uri_hook/3)
     {:cont, socket}
   end
@@ -32,12 +31,12 @@ defmodule CopiWeb.GameLive.Show do
         {:ok, requested_round} ->
           {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
         {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
+          {:noreply, redirect(socket, to: "/error")}
       end
 
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
