@@ -8,10 +8,10 @@
   let { data }: Props = $props();
   let t = readTranslation();
   const lang = $state(readLang());
-  let cards = data.cards;
-  let card : Card = cards.get(data.card) as Card;
-  let language = $lang ? $lang : data.lang;
-  const languages = data.languages;
+  let cards = $derived(data.cards);
+  let card : Card = $derived(cards.get(data.card) as Card);
+  let language = $derived($lang ? $lang : data.lang);
+  const languages = $derived(data.languages);
 
   function cardFound() 
     {

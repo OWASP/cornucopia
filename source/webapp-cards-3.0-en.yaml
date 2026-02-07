@@ -258,7 +258,7 @@ suits:
     id: "AZ9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AZ9"
-    desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature"
+    desc: "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
   -
     id: "AZX"
     value: "10"
@@ -398,7 +398,7 @@ suits:
     id: "C9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/C9"
-    desc: "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
+    desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature"
   -
     id: "CX"
     value: "10"

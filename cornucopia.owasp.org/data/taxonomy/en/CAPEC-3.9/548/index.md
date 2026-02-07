@@ -1,0 +1,11 @@
+# CAPEC™ 548: Contaminate Resource
+
+## Description
+
+An adversary contaminates organizational information systems (including devices and networks) by causing them to handle information of a classification/sensitivity for which they have not been authorized. When this happens, the contaminated information system, device, or network must be brought offline to investigate and mitigate the data spill, which denies availability of the system until the investigation is complete.
+
+Source: [CAPEC™ 548](https://capec.mitre.org/data/definitions/548.html)
+
+## Related ASVS Requirements
+
+ASVS (5.0): [10.7.1](/taxonomy/asvs-5.0/10-oauth-and-oidc/07-consent-management#V10.7.1), [10.7.2](/taxonomy/asvs-5.0/10-oauth-and-oidc/07-consent-management#V10.7.2), [10.7.3](/taxonomy/asvs-5.0/10-oauth-and-oidc/07-consent-management#V10.7.3), [11.1.1](/taxonomy/asvs-5.0/11-cryptography/01-cryptographic-inventory-and-documentation#V11.1.1), [11.1.2](/taxonomy/asvs-5.0/11-cryptography/01-cryptographic-inventory-and-documentation#V11.1.2), [11.1.3](/taxonomy/asvs-5.0/11-cryptography/01-cryptographic-inventory-and-documentation#V11.1.3), [11.1.4](/taxonomy/asvs-5.0/11-cryptography/01-cryptographic-inventory-and-documentation#V11.1.4), [13.1.4](/taxonomy/asvs-5.0/13-configuration/01-configuration-documentation#V13.1.4), [13.3.1](/taxonomy/asvs-5.0/13-configuration/03-secret-management#V13.3.1), [13.3.2](/taxonomy/asvs-5.0/13-configuration/03-secret-management#V13.3.2), [13.3.3](/taxonomy/asvs-5.0/13-configuration/03-secret-management#V13.3.3), [14.2.4](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.4), [14.2.5](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.5), [14.2.6](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.6), [14.2.7](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.7), [14.2.8](/taxonomy/asvs-5.0/14-data-protection/02-general-data-protection#V14.2.8), [5.1.1](/taxonomy/asvs-5.0/05-file-handling/01-file-handling-documentation#V5.1.1), [6.3.3](/taxonomy/asvs-5.0/06-authentication/03-general-authentication-security#V6.3.3), [6.4.6](/taxonomy/asvs-5.0/06-authentication/04-authentication-factor-lifecycle-and-recovery#V6.4.6), [6.7.1](/taxonomy/asvs-5.0/06-authentication/07-cryptographic-authentication-mechanism#V6.7.1)

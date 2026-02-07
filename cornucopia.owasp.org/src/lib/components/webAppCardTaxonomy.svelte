@@ -17,7 +17,7 @@
   }
 
   let { mappingData, card = $bindable(), routes }: Props = $props();
-    const controller: MappingController = new MappingController(mappingData);
+    const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
     function linkASVS(input: string) {

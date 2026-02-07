@@ -13,6 +13,10 @@ Little does she know that this app, in particular, will look for capabilities, o
 
 ### STRIDE
 
+This scenario belongs to the **Elevation of Privilege** category because Choi's app exploits vulnerabilities in permission management to gain unauthorized access to resources and data. 
+
+By bypassing intended security boundaries through exploiting loose entitlements or permissions, Choi can use the app to elevate his own permissions to reach protected components, ultimately allowing him to drain her bank account and monitor her phone.
+
 ### What can go wrong? 
  
 - Custom Permission Typos: A custom permission may be declared in the Manifest of one of the apps installed on Vandana's phone, but a different custom permission is used to protect exported Android components, due to a typo, Choi's malicious application can capitalize on the misspelling by either: 

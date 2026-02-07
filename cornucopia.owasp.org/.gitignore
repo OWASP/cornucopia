@@ -14,3 +14,8 @@ vite.config.ts.timestamp-*
 /.vs
 package-lock.json
 coverage/**
+
+# SvelteKit files
+/.svelte
+**/.svelte-kit
+**/coverage

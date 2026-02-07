@@ -13,29 +13,14 @@
     children
   }: Props = $props();
 
-    let target : string = $state("_blank");
-    let rel : string = $state('');
-    let clazz : string = $state("");
-    let style : string = $state("");
-
-    if(href.startsWith('/') || href.startsWith('#'))
-      target = '_self';
-
-    if (raw.includes('[internal]')) {
-      rel = 'noopener';
-    }
-
-    if (raw.includes('[external]')) {
-      rel = 'noopener nofollow';
-    }
-
-    if (raw.includes('[inline]')) {
-      clazz = 'inline';
-    }
-
-    if (raw.includes('[white]')) {
-      style = ' white';
-    }
+    let target = $derived(href.startsWith('/') || href.startsWith('#') ? '_self' : '_blank');
+    let rel = $derived.by(() => {
+      if (raw.includes('[internal]')) return 'noopener';
+      if (raw.includes('[external]')) return 'noopener nofollow';
+      return '';
+    });
+    let clazz = $derived(raw.includes('[inline]') ? 'inline' : '');
+    let style = $derived(raw.includes('[white]') ? ' white' : '');
   </script>
   
   <a {rel} {target} {href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>

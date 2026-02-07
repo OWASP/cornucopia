@@ -11,11 +11,7 @@
     }
 
     let { card = $bindable(), mapping, style = '' }: Props = $props();
-    let previewStyle = $state('');
-
-    if (style) {
-        previewStyle = ' ' + style;
-    }
+    let previewStyle = $derived(style ? ' ' + style : '');
 
     function getSuitColor(suit : string, id: string)
     {

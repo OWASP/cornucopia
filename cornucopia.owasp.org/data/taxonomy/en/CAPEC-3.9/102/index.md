@@ -1,0 +1,11 @@
+# CAPEC™ 102: Session Sidejacking
+
+## Description
+
+Session sidejacking takes advantage of an unencrypted communication channel between a victim and target system. The attacker sniffs traffic on a network looking for session tokens in unencrypted traffic. Once a session token is captured, the attacker performs malicious actions by using the stolen token with the targeted application to impersonate the victim. This attack is a specific method of session hijacking, which is exploiting a valid session token to gain unauthorized access to a target system or information. Other methods to perform a session hijacking are session fixation, cross-site scripting, or compromising a user or server machine and stealing the session token.
+
+Source: [CAPEC™ 102](https://capec.mitre.org/data/definitions/102.html)
+
+## Related ASVS Requirements
+
+ASVS (5.0): [12.1.1](/taxonomy/asvs-5.0/12-secure-communication/01-general-tls-security-guidance#V12.1.1), [12.1.2](/taxonomy/asvs-5.0/12-secure-communication/01-general-tls-security-guidance#V12.1.2), [12.1.3](/taxonomy/asvs-5.0/12-secure-communication/01-general-tls-security-guidance#V12.1.3), [12.1.4](/taxonomy/asvs-5.0/12-secure-communication/01-general-tls-security-guidance#V12.1.4), [12.1.5](/taxonomy/asvs-5.0/12-secure-communication/01-general-tls-security-guidance#V12.1.5), [12.2.1](/taxonomy/asvs-5.0/12-secure-communication/02-https-communication-with-external-facing-services#V12.2.1), [12.2.2](/taxonomy/asvs-5.0/12-secure-communication/02-https-communication-with-external-facing-services#V12.2.2), [12.3.1](/taxonomy/asvs-5.0/12-secure-communication/03-general-service-to-service-communication-security#V12.3.1), [12.3.2](/taxonomy/asvs-5.0/12-secure-communication/03-general-service-to-service-communication-security#V12.3.2), [12.3.3](/taxonomy/asvs-5.0/12-secure-communication/03-general-service-to-service-communication-security#V12.3.3), [12.3.4](/taxonomy/asvs-5.0/12-secure-communication/03-general-service-to-service-communication-security#V12.3.4), [12.3.5](/taxonomy/asvs-5.0/12-secure-communication/03-general-service-to-service-communication-security#V12.3.5), [4.4.1](/taxonomy/asvs-5.0/04-api-and-web-service/04-websocket#V4.4.1)

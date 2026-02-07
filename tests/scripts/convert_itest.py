@@ -23,7 +23,7 @@ class TestMain(unittest.TestCase):
                 c.convert_vars.BASE_PATH,
                 "resources",
                 "templates",
-                "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
+                "owasp_cornucopia_webapp_ver_guide_bridge_lang.odt",
             ]
         )
         self.args = ["-t", "bridge", "-lt", "guide", "-l", "en", "-v", "3.0", "-i", self.template_docx_file]
@@ -50,7 +50,7 @@ class TestMain(unittest.TestCase):
             [
                 c.convert_vars.BASE_PATH,
                 "output",
-                "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx",
+                "owasp_cornucopia_webapp_3.0_guide_bridge_en.odt",
             ]
         )
 

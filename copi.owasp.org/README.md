@@ -56,7 +56,7 @@ mix archive.install hex phx_new
 
 After installing docker, You can create an instance of the Postgres image:
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_TEST_PWD -d postgres
 ```
 Note: the password must be the same as the one in the config file of your dev environment.
 
@@ -75,8 +75,8 @@ To start your Phoenix server:
 
 ### Run tests
 
-    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
-    export POSTGRES_TEST_PWD=y9EAY7xeVucjM2yM
+    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_TEST_PWD -d postgres
+    export POSTGRES_TEST_PWD=POSTGRES_TEST_PWD
     mix test
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.

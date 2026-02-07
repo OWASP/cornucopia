@@ -14,7 +14,8 @@
 #
 FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0 as builder
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git nodejs npm \
+RUN (apt-get update -y && apt-get install -y build-essential git nodejs npm) || \
+    (sleep 10 && apt-get update -y && apt-get install -y build-essential git nodejs npm) \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -60,7 +61,8 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
+RUN (apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales) || \
+    (sleep 10 && apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales) \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale

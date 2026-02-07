@@ -13,8 +13,8 @@
 
     let { card = $bindable(), cards, mappingData }: Props = $props();
     let t = readTranslation();
-    let nextCard = cards.get(card.next);
-    let previousCard = cards.get(card.prevous);
+    let nextCard = $derived(cards.get(card.next));
+    let previousCard = $derived(cards.get(card.prevous));
     function checkKey(event : any) 
     {
         const KEYCODE_RIGHT = 39;
