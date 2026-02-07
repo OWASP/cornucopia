@@ -50,6 +50,17 @@ jobs:
           sudo apt-get install -y libreoffice
           pip install -r requirements.txt --require-hashes
           pipenv install -d
+      - name: Generate test coverage
+        run: |
+          pipenv run coverage run -m unittest discover -s tests/scripts -p "*_*test.py"
+          mkdir -p converter/coverage
+          pipenv run coverage xml -o converter/coverage/cobertura.xml
+      - name: Upload test coverage to Qlty
+        uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          total-parts-count: 3
+          files: converter/coverage/cobertura.xml
       - name: Generate new output files
         run: |
           #
