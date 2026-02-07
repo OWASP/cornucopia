@@ -1,8 +1,10 @@
 name: Run Tests and generate output files
 # Controls when the workflow will run 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  pull_request:
+  # Triggers the workflow on pull request events
+  # Using pull_request_target allows the build artifacts link to be posted as a comment
+  # even for PRs from forked repositories.
+  pull_request_target:
     paths:
       - 'source/**'
       - 'scripts/convert**'
@@ -33,8 +35,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          persist-credentials: false
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
@@ -45,6 +48,17 @@ jobs:
         run: |
           pip install -r requirements.txt --require-hashes
           pipenv install -d
+      - name: Generate test coverage
+        run: |
+          pipenv run coverage run -m unittest discover -s tests/scripts -p "*_*test.py"
+          mkdir -p converter/coverage
+          pipenv run coverage xml -o converter/coverage/cobertura.xml
+      - name: Upload test coverage to Qlty
+        uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          total-parts-count: 3
+          files: converter/coverage/cobertura.xml
       - name: Generate new output files
         run: |
           #
@@ -122,7 +136,7 @@ jobs:
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           retention-days: 5
-          name: cornucopia-build-files.${{ github.sha }}.zip
+          name: cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip
           path: |
             output/cornucopia-build-files.zip
   commentpr:
@@ -144,7 +158,7 @@ jobs:
             
             | Name | Link |
             |------|------|
-            | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
+            | Output files | [cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
             
         with:
           script: |
