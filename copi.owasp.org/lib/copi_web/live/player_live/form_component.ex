@@ -74,23 +74,42 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :new, player_params) do
-    case Cornucopia.create_player(player_params) do
-      {:ok, player} ->
+    # Get the IP address for rate limiting
+    ip_address = socket.assigns.ip_address
+    
+    # Check and record rate limit atomically
+    case Copi.RateLimiter.check_and_record(ip_address, :player_creation) do
+      {:ok, _remaining} ->
+        case Cornucopia.create_player(player_params) do
+          {:ok, player} ->
 
-        {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
+            {:noreply,
+             socket
+             |> assign(:game, updated_game)
+             |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:noreply, assign_form(socket, changeset)}
+        end
+        
+      {:error, :rate_limited, retry_after} ->
         {:noreply,
          socket
-         |> assign(:game, updated_game)
-         |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+         |> put_flash(
+           :error,
+           "Rate limit exceeded. Too many players created from your IP address. " <>
+           "Please try again in #{retry_after} seconds. " <>
+           "This limit helps ensure service availability for all users."
+         )
+         |> assign_form(socket.assigns.form.source)}
     end
   end
 
   def topic(game_id) do
     "game:#{game_id}"
   end
+
 end

@@ -107,15 +107,35 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   end
 
   defp save_game(socket, :new, game_params) do
-    case Cornucopia.create_game(game_params) do
-      {:ok, game} ->
+    # Get the IP address for rate limiting
+    ip_address = socket.assigns.ip_address
+    
+    # Check and record rate limit atomically
+    case Copi.RateLimiter.check_and_record(ip_address, :game_creation) do
+      {:ok, _remaining} ->
+        case Cornucopia.create_game(game_params) do
+          {:ok, game} ->
+            
+            {:noreply,
+             socket
+             |> put_flash(:info, "Game created successfully")
+             |> push_navigate(to: ~p"/games/#{game.id}")}
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:noreply, assign_form(socket, changeset)}
+        end
+        
+      {:error, :rate_limited, retry_after} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Game created successfully")
-         |> push_navigate(to: ~p"/games/#{game.id}")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+         |> put_flash(
+           :error,
+           "Rate limit exceeded. Too many games created from your IP address. " <>
+           "Please try again in #{retry_after} seconds. " <>
+           "This limit helps ensure service availability for all users."
+         )
+         |> assign_form(socket.assigns.form.source)}
     end
   end
+
 end

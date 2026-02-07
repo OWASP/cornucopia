@@ -7,7 +7,27 @@ defmodule CopiWeb.GameLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :games, nil)}
+    # Rate limit WebSocket connections
+    ip_address = CopiWeb.Helpers.IPHelper.get_connect_ip(socket)
+    
+    case Copi.RateLimiter.check_and_record(ip_address, :connection) do
+      {:ok, _remaining} ->
+        if connected?(socket) do
+          Phoenix.PubSub.subscribe(Copi.PubSub, "games")
+        end
+
+        {:ok, assign(socket, games: list_games(), ip_address: ip_address)}
+        
+      {:error, :rate_limited, retry_after} ->
+        {:ok,
+         socket
+         |> put_flash(
+           :error,
+           "Connection rate limit exceeded. Too many connections from your IP address. " <>
+           "Please try again in #{retry_after} seconds."
+         )
+         |> assign(:games, nil)}
+    end
   end
 
   @impl true
