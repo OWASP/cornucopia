@@ -100,7 +100,7 @@ def createlink(data: dict[str, Any], shortcode: str, asvs_version: str) -> str:
             )
             for subitem in item["Items"]:
                 if shortcode in subitem["Shortcode"]:
-                    return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem["Shortcode"]})"
+                    return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem['Shortcode']})"
     return shortcode if shortcode else ""
 
 
