@@ -30,17 +30,17 @@ def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
     category = ""
     os.mkdir(Path(convert_vars.args.output_path, f"level-{level}-controls"))
     f = open(Path(convert_vars.args.output_path, f"level-{level}-controls/index.md"), "w", encoding="utf-8")
-    f.write(f"# Level {level} controls\r\n\r\n")
-    f.write(f"Level {level} contains {len(arr)} controls listed below: \r\n\r\n")
+    f.write(f"# Level {level} controls\n\n")
+    f.write(f"Level {level} contains {len(arr)} controls listed below: \n\n")
     for link in arr:
         if link["topic"] != topic:
             topic = link["topic"]
-            f.write(f"## {topic}\r\n\r\n")
+            f.write(f"## {topic}\n\n")
         if link["cat"] != category:
             category = link["cat"]
-            f.write(f"### {category}\r\n\r\n")
+            f.write(f"### {category}\n\n")
         shortdesc = link["description"].replace("Verify that", "").strip().capitalize()[0:50] + " ..."
-        f.write(f"- [{link['name']}]({link['link']}) *{shortdesc}* \r\n\r\n")
+        f.write(f"- [{link['name']}]({link['link']}) *{shortdesc}* \n\n")
     f.close()
 
 
@@ -52,16 +52,16 @@ def _format_directory_name(ordinal: int, name: str) -> str:
 def _get_level_requirement_text(level: int) -> str:
     """Get the requirement text for a given level."""
     level_texts = {
-        1: "Required for Level 1, 2 and 3\r\n",
-        2: "Required for Level 2 and 3\r\n",
-        3: "Required for Level 3\r\n",
+        1: "Required for Level 1, 2 and 3\n\n",
+        2: "Required for Level 2 and 3\n\n",
+        3: "Required for Level 3\n\n",
     }
     return level_texts.get(level, "")
 
 
 def _write_disclaimer(file_handle: TextIO) -> None:
     """Write the OWASP ASVS disclaimer to the file."""
-    file_handle.write("## Disclaimer\r\n")
+    file_handle.write("## Disclaimer\n\n")
     file_handle.write(
         "Credit via [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)."
         "For more information visit: "
@@ -111,8 +111,8 @@ def _write_subitem_content(
     file_handle: TextIO, subitem: dict[str, Any], asvs_map: dict[str, dict[str, List[str]]], capec_version: str
 ) -> None:
     """Write a single subitem's content to the file."""
-    file_handle.write("## " + subitem["Shortcode"] + "\r\n")
-    file_handle.write(subitem["Description"].encode("ascii", "ignore").decode("utf8", "ignore") + "\r\n")
+    file_handle.write("## " + subitem["Shortcode"] + "\n\n")
+    file_handle.write(subitem["Description"].encode("ascii", "ignore").decode("utf8", "ignore") + "\n\n")
 
     level = int(subitem["L"])
     level_text = _get_level_requirement_text(level)
@@ -123,8 +123,8 @@ def _write_subitem_content(
     if has_no_capec_mapping(asvs_id, asvs_map):
         logging.info("ASVS ID %s has no CAPEC mapping", asvs_id)
     else:
-        file_handle.write("### Related CAPEC™ Requirements\r\n")
-        file_handle.write(f"CAPEC™ ({capec_version}): {create_link_list(asvs_map.get(asvs_id, {}), capec_version)}\r\n")
+        file_handle.write("### Related CAPEC™ Requirements\n\n")
+        file_handle.write(f"CAPEC™ ({capec_version}): {create_link_list(asvs_map.get(asvs_id, {}), capec_version)}\n\n")
 
     logging.debug("object: %s", subitem)
     logging.debug("🟪")
@@ -148,7 +148,7 @@ def _process_requirement_item(
     logging.debug("🟩")
 
     with open(item_path / "index.md", "w", encoding="utf-8") as f:
-        f.write("# " + item["Name"].replace(",", "") + "\r\n")
+        f.write("# " + item["Name"].replace(",", "") + "\n\n")
 
         for subitem in item["Items"]:
             _write_subitem_content(f, subitem, asvs_map, capec_version)

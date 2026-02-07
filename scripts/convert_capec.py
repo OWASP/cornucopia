@@ -39,15 +39,15 @@ def create_capec_pages(
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
         f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\r\n")
-        f.write("## Description\r\n")
-        f.write(f"{parse_description(i.get('Description', ''))}\r\n")
+        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+        f.write("## Description\n\n")
+        f.write(f"{parse_description(i.get('Description', ''))}\n\n")
         capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\r\n")
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
         if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
             logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
         else:
-            f.write("## Related ASVS Requirements\r\n")
+            f.write("## Related ASVS Requirements\n\n")
             f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
 
