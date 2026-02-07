@@ -125,8 +125,8 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["120", "126", "152"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = "[120](/taxonomy/capec-3.9/120/index.md), "
-        "[126](/taxonomy/capec-3.9/126/index.md), "
+        expected = "[120](/taxonomy/capec-3.9/120/index.md), "\
+        "[126](/taxonomy/capec-3.9/126/index.md), "\
         "[152](/taxonomy/capec-3.9/152/index.md)"
         self.assertEqual(result, expected)
 
@@ -157,7 +157,7 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["152", "120", "126"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = "[120](/taxonomy/capec-3.9/120/index.md), "
+        expected = "[120](/taxonomy/capec-3.9/120/index.md), "\
         "[126](/taxonomy/capec-3.9/126/index.md), [152](/taxonomy/capec-3.9/152/index.md)"
         self.assertEqual(result, expected)
 
@@ -406,17 +406,17 @@ class TestGetLevelRequirementText(unittest.TestCase):
     def test_get_level_requirement_text_level_1(self):
         """Test getting text for level 1"""
         result = asvs._get_level_requirement_text(1)
-        self.assertEqual(result, "Required for Level 1, 2 and 3\r\n")
+        self.assertEqual(result, "Required for Level 1, 2 and 3\n\n")
 
     def test_get_level_requirement_text_level_2(self):
         """Test getting text for level 2"""
         result = asvs._get_level_requirement_text(2)
-        self.assertEqual(result, "Required for Level 2 and 3\r\n")
+        self.assertEqual(result, "Required for Level 2 and 3\n\n")
 
     def test_get_level_requirement_text_level_3(self):
         """Test getting text for level 3"""
         result = asvs._get_level_requirement_text(3)
-        self.assertEqual(result, "Required for Level 3\r\n")
+        self.assertEqual(result, "Required for Level 3\n\n")
 
     def test_get_level_requirement_text_invalid_level(self):
         """Test getting text for invalid level"""
