@@ -21,7 +21,8 @@ class ConvertVars:
         "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
     )
     DEFAULT_ASVS_TO_CAPEC_INPUT_PATH = Path(__file__).parent / "../source/webapp-asvs-3.0.yaml"
-    LATEST_ASVS_VERSION_CHOICES: List[str] = ["3.9"]
+    LATEST_CAPEC_VERSION_CHOICES: List[str] = ["3.9"]
+    LATEST_ASVS_VERSION_CHOICES: List[str] = ["5.0"]
     args: argparse.Namespace
 
 
@@ -73,11 +74,13 @@ def _write_disclaimer(file_handle: TextIO) -> None:
     file_handle.write("\n")
 
 
-def _create_level_obj(subitem: dict[str, Any], requirement_name: str, item_name: str) -> dict[str, Any]:
+def _create_level_obj(
+    subitem: dict[str, Any], requirement_name: str, item_name: str, asvs_version: str
+) -> dict[str, Any]:
     """Create a level object for categorization."""
     shortcode = subitem["Shortcode"]
     description = subitem["Description"]
-    link = f"/taxonomy/asvs-4.0.3/{requirement_name}/{item_name}#{shortcode}"
+    link = f"/taxonomy/asvs-{asvs_version}/{requirement_name}/{item_name}#{shortcode}"
     return {
         "topic": requirement_name,
         "cat": item_name,
@@ -94,10 +97,11 @@ def _categorize_by_level(
     L1: List[dict[str, Any]],
     L2: List[dict[str, Any]],
     L3: List[dict[str, Any]],
+    asvs_version: str,
 ) -> None:
     """Categorize requirement by its level and add to appropriate list."""
     level = int(subitem["L"])
-    obj = _create_level_obj(subitem, requirement_name, item_name)
+    obj = _create_level_obj(subitem, requirement_name, item_name, asvs_version)
 
     if level == 1:
         L1.append(obj)
@@ -138,6 +142,7 @@ def _process_requirement_item(
     L1: List[dict[str, Any]],
     L2: List[dict[str, Any]],
     L3: List[dict[str, Any]],
+    asvs_version: str,
 ) -> None:
     """Process a single requirement item and create its documentation."""
     item_name = _format_directory_name(item["Ordinal"], item["Name"])
@@ -152,12 +157,14 @@ def _process_requirement_item(
 
         for subitem in item["Items"]:
             _write_subitem_content(f, subitem, asvs_map, capec_version)
-            _categorize_by_level(subitem, requirement_name, item_name, L1, L2, L3)
+            _categorize_by_level(subitem, requirement_name, item_name, L1, L2, L3, asvs_version)
 
         _write_disclaimer(f)
 
 
-def create_asvs_pages(data: dict[str, Any], asvs_map: dict[str, dict[str, List[str]]], capec_version: str) -> None:
+def create_asvs_pages(
+    data: dict[str, Any], asvs_map: dict[str, dict[str, List[str]]], capec_version: str, asvs_version: str
+) -> None:
     """Create ASVS documentation pages from JSON data."""
     L1: List[dict[str, Any]] = []
     L2: List[dict[str, Any]] = []
@@ -169,7 +176,7 @@ def create_asvs_pages(data: dict[str, Any], asvs_map: dict[str, dict[str, List[s
         os.mkdir(Path(convert_vars.args.output_path, requirement_name))
 
         for item in requirement["Items"]:
-            _process_requirement_item(item, requirement_name, asvs_map, capec_version, L1, L2, L3)
+            _process_requirement_item(item, requirement_name, asvs_map, capec_version, L1, L2, L3, asvs_version)
 
     create_level_summary(1, L1)
     create_level_summary(2, L2)
@@ -228,6 +235,13 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         help="CAPEC™ version to map to, defaults to 3.9",
     )
     parser.add_argument(
+        "-av",
+        "--asvs-version",
+        type=str,
+        default="5.0",
+        help="ASVS version to map to, defaults to 5.0",
+    )
+    parser.add_argument(
         "-d",
         "--debug",
         action="store_true",
@@ -241,7 +255,14 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     return args
 
 
-def get_valid_version(version: str) -> str:
+def get_valid_capec_version(version: str) -> str:
+    for v in ConvertVars.LATEST_CAPEC_VERSION_CHOICES:
+        if version == v:
+            return version
+    return ConvertVars.LATEST_CAPEC_VERSION_CHOICES[-1]
+
+
+def get_valid_asvs_version(version: str) -> str:
     for v in ConvertVars.LATEST_ASVS_VERSION_CHOICES:
         if version == v:
             return version
@@ -297,8 +318,9 @@ def load_asvs_to_capec_mapping(filepath: Path) -> dict[str, dict[str, List[str]]
 
 def main() -> None:
     convert_vars.args = parse_arguments(sys.argv[1:])
-    asvs_version = get_valid_version(convert_vars.args.capec_version)
-    logging.debug("Using ASVS version: %s", asvs_version)
+    asvs_version = get_valid_asvs_version(convert_vars.args.asvs_version)
+    capec_version = get_valid_capec_version(convert_vars.args.capec_version)
+    logging.debug("Using CAPEC version: %s", capec_version)
     set_logging()
     logging.info("Starting ASVS conversion process")
     logging.debug(" --- args = %s", str(convert_vars.args))
@@ -307,7 +329,7 @@ def main() -> None:
     data = load_json_file(Path(convert_vars.args.input_path))
     asvs_map: dict[str, dict[str, List[str]]] = load_asvs_to_capec_mapping(Path(convert_vars.args.asvs_to_capec))
 
-    create_asvs_pages(data, asvs_map, asvs_version)
+    create_asvs_pages(data, asvs_map, capec_version, asvs_version)
     logging.info("ASVS conversion process completed")
 
 

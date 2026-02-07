@@ -225,22 +225,38 @@ class TestParseArguments(unittest.TestCase):
 
 
 class TestGetValidVersion(unittest.TestCase):
-    """Test get_valid_version function"""
+    """Test get_valid_capec_version and get_valid_asvs_version functions"""
 
-    def test_get_valid_version_with_valid_version(self):
-        """Test getting valid version when version is in choices"""
-        result = asvs.get_valid_version("3.9")
+    def test_get_valid_capec_version_with_valid_version(self):
+        """Test getting valid CAPEC version when version is in choices"""
+        result = asvs.get_valid_capec_version("3.9")
         self.assertEqual(result, "3.9")
 
-    def test_get_valid_version_with_invalid_version(self):
-        """Test getting valid version when version is not in choices"""
-        result = asvs.get_valid_version("invalid")
+    def test_get_valid_capec_version_with_invalid_version(self):
+        """Test getting valid CAPEC version when version is not in choices"""
+        result = asvs.get_valid_capec_version("invalid")
+        # Should return the last choice
+        self.assertEqual(result, asvs.ConvertVars.LATEST_CAPEC_VERSION_CHOICES[-1])
+
+    def test_get_valid_capec_version_with_empty_string(self):
+        """Test getting valid CAPEC version with empty string"""
+        result = asvs.get_valid_capec_version("")
+        self.assertEqual(result, asvs.ConvertVars.LATEST_CAPEC_VERSION_CHOICES[-1])
+
+    def test_get_valid_asvs_version_with_valid_version(self):
+        """Test getting valid ASVS version when version is in choices"""
+        result = asvs.get_valid_asvs_version("5.0")
+        self.assertEqual(result, "5.0")
+
+    def test_get_valid_asvs_version_with_invalid_version(self):
+        """Test getting valid ASVS version when version is not in choices"""
+        result = asvs.get_valid_asvs_version("invalid")
         # Should return the last choice
         self.assertEqual(result, asvs.ConvertVars.LATEST_ASVS_VERSION_CHOICES[-1])
 
-    def test_get_valid_version_with_empty_string(self):
-        """Test getting valid version with empty string"""
-        result = asvs.get_valid_version("")
+    def test_get_valid_asvs_version_with_empty_string(self):
+        """Test getting valid ASVS version with empty string"""
+        result = asvs.get_valid_asvs_version("")
         self.assertEqual(result, asvs.ConvertVars.LATEST_ASVS_VERSION_CHOICES[-1])
 
 
@@ -456,12 +472,12 @@ class TestCreateLevelObj(unittest.TestCase):
             "L": "1",
         }
 
-        result = asvs._create_level_obj(subitem, "01-encoding", "01-architecture")
+        result = asvs._create_level_obj(subitem, "01-encoding", "01-architecture", "5.0")
 
         self.assertEqual(result["topic"], "01-encoding")
         self.assertEqual(result["cat"], "01-architecture")
         self.assertEqual(result["name"], "V1.1.1")
-        self.assertEqual(result["link"], "/taxonomy/asvs-4.0.3/01-encoding/01-architecture#V1.1.1")
+        self.assertEqual(result["link"], "/taxonomy/asvs-5.0/01-encoding/01-architecture#V1.1.1")
         self.assertEqual(result["description"], "Verify that input is decoded")
 
 
@@ -473,7 +489,7 @@ class TestCategorizeByLevel(unittest.TestCase):
         L1, L2, L3 = [], [], []
         subitem = {"Shortcode": "V1.1.1", "Description": "Test", "L": "1"}
 
-        asvs._categorize_by_level(subitem, "01-encoding", "01-arch", L1, L2, L3)
+        asvs._categorize_by_level(subitem, "01-encoding", "01-arch", L1, L2, L3, "5.0")
 
         self.assertEqual(len(L1), 1)
         self.assertEqual(len(L2), 0)
@@ -484,7 +500,7 @@ class TestCategorizeByLevel(unittest.TestCase):
         L1, L2, L3 = [], [], []
         subitem = {"Shortcode": "V1.1.2", "Description": "Test", "L": "2"}
 
-        asvs._categorize_by_level(subitem, "01-encoding", "01-arch", L1, L2, L3)
+        asvs._categorize_by_level(subitem, "01-encoding", "01-arch", L1, L2, L3, "5.0")
 
         self.assertEqual(len(L1), 0)
         self.assertEqual(len(L2), 1)
@@ -495,7 +511,7 @@ class TestCategorizeByLevel(unittest.TestCase):
         L1, L2, L3 = [], [], []
         subitem = {"Shortcode": "V1.1.3", "Description": "Test", "L": "3"}
 
-        asvs._categorize_by_level(subitem, "01-encoding", "01-arch", L1, L2, L3)
+        asvs._categorize_by_level(subitem, "01-encoding", "01-arch", L1, L2, L3, "5.0")
 
         self.assertEqual(len(L1), 0)
         self.assertEqual(len(L2), 0)
@@ -567,7 +583,7 @@ class TestProcessRequirementItem(unittest.TestCase):
         }
         L1, L2, L3 = [], [], []
 
-        asvs._process_requirement_item(item, "01-encoding", {}, "3.9", L1, L2, L3)
+        asvs._process_requirement_item(item, "01-encoding", {}, "3.9", L1, L2, L3, "5.0")
 
         # Verify directory was created
         mock_mkdir.assert_called_once()
@@ -615,7 +631,7 @@ class TestCreateAsvsPages(unittest.TestCase):
     @patch("os.mkdir")
     def test_create_asvs_pages_basic(self, mock_mkdir, mock_file):
         """Test creating ASVS pages with basic data"""
-        asvs.create_asvs_pages(self.test_data, self.test_asvs_map, "3.9")
+        asvs.create_asvs_pages(self.test_data, self.test_asvs_map, "3.9", "5.0")
 
         # Verify directories were created
         self.assertGreater(mock_mkdir.call_count, 0)
@@ -659,7 +675,7 @@ class TestCreateAsvsPages(unittest.TestCase):
             ]
         }
 
-        asvs.create_asvs_pages(multi_level_data, {}, "3.9")
+        asvs.create_asvs_pages(multi_level_data, {}, "3.9", "5.0")
 
         # Verify that level summary files were created for all levels
         # Check that level-1-controls, level-2-controls, level-3-controls directories were created
@@ -673,7 +689,7 @@ class TestCreateAsvsPages(unittest.TestCase):
     @patch("os.mkdir")
     def test_create_asvs_pages_with_capec_mapping(self, mock_mkdir, mock_file):
         """Test creating ASVS pages with CAPEC mapping"""
-        asvs.create_asvs_pages(self.test_data, self.test_asvs_map, "3.9")
+        asvs.create_asvs_pages(self.test_data, self.test_asvs_map, "3.9", "5.0")
 
         handle = mock_file()
         write_calls = [call_args[0][0] for call_args in handle.write.call_args_list]
@@ -688,7 +704,7 @@ class TestCreateAsvsPages(unittest.TestCase):
     def test_create_asvs_pages_without_capec_mapping(self, mock_mkdir, mock_file):
         """Test creating ASVS pages without CAPEC mapping"""
         with self.assertLogs(logging.getLogger(), logging.INFO) as log:
-            asvs.create_asvs_pages(self.test_data, {}, "3.9")
+            asvs.create_asvs_pages(self.test_data, {}, "3.9", "5.0")
 
         # Verify log message about missing mapping
         log_messages = "\n".join(log.output)
@@ -722,6 +738,7 @@ class TestMain(unittest.TestCase):
             input_path=Path("/test/input.json"),
             asvs_to_capec=Path("/test/mapping.yaml"),
             capec_version="3.9",
+            asvs_version="5.0",
             debug=False,
         )
         mock_parse_args.return_value = mock_args

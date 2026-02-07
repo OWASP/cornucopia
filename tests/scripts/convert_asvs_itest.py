@@ -132,7 +132,7 @@ class TestConvertASVSIntegration(unittest.TestCase):
         )
 
         # Create ASVS pages
-        asvs.create_asvs_pages(data, asvs_map, "3.9")
+        asvs.create_asvs_pages(data, asvs_map, "3.9", "5.0")
 
         # Verify that output was created
         self.assertTrue(self.test_output_path.exists())
@@ -171,7 +171,7 @@ class TestConvertASVSIntegration(unittest.TestCase):
         )
 
         # Create ASVS pages
-        asvs.create_asvs_pages(data, asvs_map, "3.9")
+        asvs.create_asvs_pages(data, asvs_map, "3.9", "5.0")
 
         # Find a requirement directory (e.g., 01-encoding-and-sanitization)
         requirement_dirs = [
@@ -214,7 +214,7 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
         # Create ASVS pages
         with self.assertLogs(logging.getLogger(), logging.INFO):
-            asvs.create_asvs_pages(data, asvs_map, "3.9")
+            asvs.create_asvs_pages(data, asvs_map, "3.9", "5.0")
 
         # Look for pages with CAPEC mappings
         # Check the first requirement
@@ -265,7 +265,8 @@ class TestConvertASVSIntegration(unittest.TestCase):
         asvs.convert_vars.args = asvs.parse_arguments(test_args)
 
         # Run main workflow (without calling main() to avoid sys.argv issues)
-        asvs_version = asvs.get_valid_version(asvs.convert_vars.args.capec_version)
+        capec_version = asvs.get_valid_capec_version(asvs.convert_vars.args.capec_version)
+        asvs_version = asvs.get_valid_asvs_version(asvs.convert_vars.args.asvs_version)
         asvs.set_logging()
 
         with self.assertLogs(logging.getLogger(), logging.INFO) as log:
@@ -273,7 +274,7 @@ class TestConvertASVSIntegration(unittest.TestCase):
             asvs.create_folder(Path(asvs.convert_vars.args.output_path))
             data = asvs.load_json_file(Path(asvs.convert_vars.args.input_path))
             asvs_map = asvs.load_asvs_to_capec_mapping(Path(asvs.convert_vars.args.asvs_to_capec))
-            asvs.create_asvs_pages(data, asvs_map, asvs_version)
+            asvs.create_asvs_pages(data, asvs_map, capec_version, asvs_version)
 
         # Verify logging
         log_messages = "\n".join(log.output)
@@ -306,7 +307,7 @@ class TestConvertASVSIntegration(unittest.TestCase):
         )
 
         # Create ASVS pages
-        asvs.create_asvs_pages(data, asvs_map, "3.9")
+        asvs.create_asvs_pages(data, asvs_map, "3.9", "5.0")
 
         # Check Level 1 summary
         level1_index = self.test_output_path / "level-1-controls" / "index.md"
@@ -324,12 +325,20 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
     def test_get_valid_version(self):
         """Test version validation with real version numbers"""
-        # Test with valid version
-        result = asvs.get_valid_version("3.9")
+        # Test with valid CAPEC version
+        result = asvs.get_valid_capec_version("3.9")
         self.assertEqual(result, "3.9")
 
-        # Test with invalid version
-        result = asvs.get_valid_version("99.99")
+        # Test with invalid CAPEC version
+        result = asvs.get_valid_capec_version("99.99")
+        self.assertEqual(result, asvs.ConvertVars.LATEST_CAPEC_VERSION_CHOICES[-1])
+
+        # Test with valid ASVS version
+        result = asvs.get_valid_asvs_version("5.0")
+        self.assertEqual(result, "5.0")
+
+        # Test with invalid ASVS version
+        result = asvs.get_valid_asvs_version("99.99")
         self.assertEqual(result, asvs.ConvertVars.LATEST_ASVS_VERSION_CHOICES[-1])
 
 
