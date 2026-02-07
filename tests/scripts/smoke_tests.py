@@ -38,22 +38,28 @@ class CopiSmokeTests(unittest.TestCase):
     def test_01_homepage_loads(self) -> None:
         """Test that the Copi homepage loads successfully"""
         response = self._make_request(self.BASE_URL)
-        self.assertEqual(response.status_code, 200, f"Homepage returned status {response.status_code}")
+        self.assertEqual(
+            response.status_code, 200, f"Homepage returned status {response.status_code}"
+        )
         self.assertIn("copi", response.text.lower(), "Homepage should contain 'copi' text")
 
     def test_02_cards_route_accessible(self) -> None:
         """Test that the cards route is accessible"""
         url = urljoin(self.BASE_URL, "/cards")
         response = self._make_request(url)
-        self.assertEqual(response.status_code, 200, f"Cards route returned status {response.status_code}")
+        self.assertEqual(
+            response.status_code, 200, f"Cards route returned status {response.status_code}"
+        )
 
     def test_03_javascript_loads(self) -> None:
         """Test that JavaScript assets are being served"""
         response = self._make_request(self.BASE_URL)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            '<script' in response.text or 'app.js' in response.text or 'phoenix' in response.text.lower(),
-            "JavaScript should be loaded on the page"
+            "<script" in response.text
+            or "app.js" in response.text
+            or "phoenix" in response.text.lower(),
+            "JavaScript should be loaded on the page",
         )
 
     def test_04_health_check(self) -> None:
