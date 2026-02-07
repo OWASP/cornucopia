@@ -60,8 +60,11 @@ class CopiSmokeTests(unittest.TestCase):
         """Test that the application server is healthy and responding"""
         response = self._make_request(self.BASE_URL)
         self.assertEqual(response.status_code, 200)
-        self.assertIn('content-type', [h.lower() for h in response.headers.keys()],
-                     "Response should include content-type header")
+        self.assertIn(
+            "content-type",
+            [h.lower() for h in response.headers.keys()],
+            "Response should include content-type header",
+        )
 
 
 if __name__ == "__main__":
