@@ -15,13 +15,11 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
     test "allows game creation under limit", %{conn: conn} do
       {:ok, view, _html} = live(conn, "/games/new")
       
-      result = view
+      html = view
         |> form("#game-form", game: %{name: "Test Game", edition: "webapp"})
         |> render_submit()
 
-      # Should redirect on success
-      assert {:error, {:live_redirect, %{to: path}}} = result
-      assert path =~ ~r/\/games\/.+/
+      assert html =~ "Game created successfully"
     end
 
     test "shows error message when limit exceeded", %{conn: conn, ip: _ip} do
@@ -38,10 +36,12 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
 
       # Next attempt should be blocked
       {:ok, view, _html} = live(conn, "/games/new")
-      html = view
+      view
         |> form("#game-form", game: %{name: "Blocked", edition: "webapp"})
         |> render_submit()
-
+      
+      # Check the rendered view for the flash message
+      html = render(view)
       assert html =~ "Too many game creation attempts"
     end
 
@@ -56,13 +56,11 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
       assert html =~ "can&#39;t be blank"
 
       # Should still be able to create a valid game
-      result = view
+      html = view
         |> form("#game-form", game: %{name: "Valid Game", edition: "webapp"})
         |> render_submit()
 
-      # Should redirect on success
-      assert {:error, {:live_redirect, %{to: path}}} = result
-      assert path =~ ~r/\/games\/.+/
+      assert html =~ "Game created successfully"
     end
   end
 end

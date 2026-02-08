@@ -1,5 +1,5 @@
 defmodule CopiWeb.GameLive.GameFormHelpersTest do
-  use ExUnit.Case, async: true
+  use Copi.DataCase, async: false
   alias CopiWeb.GameLive.GameFormHelpers
 
   describe "generate_suit_list_formatted_for_checkbox/1" do

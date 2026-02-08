@@ -81,11 +81,12 @@ defmodule CopiWeb.PlayerLiveTest do
       # Next player creation should be blocked
       {:ok, index_live_blocked, _html} = live(conn, "/games/#{player.game_id}/players/new")
       
-      html =
-        index_live_blocked
+      index_live_blocked
         |> form("#player-form", player: %{name: "Blocked Player", game_id: player.game_id})
         |> render_submit()
-
+      
+      # The flash error should be present in the rendered HTML
+      html = render(index_live_blocked)
       assert html =~ "Too many player creation attempts"
     end
   end
