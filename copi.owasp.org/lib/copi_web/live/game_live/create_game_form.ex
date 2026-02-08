@@ -3,6 +3,8 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
+  alias Copi.RateLimiter
+  alias Copi.IPHelper
   alias CopiWeb.GameLive.GameFormHelpers, as: GameFormHelpers
 
   @impl true
@@ -108,15 +110,26 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   end
 
   defp save_game(socket, :new, game_params) do
-    case Cornucopia.create_game(game_params) do
-      {:ok, game} ->
+    ip = IPHelper.get_ip_from_socket(socket)
+
+    case RateLimiter.check_rate(ip, :game_creation) do
+      {:ok, _remaining} ->
+        case Cornucopia.create_game(game_params) do
+          {:ok, game} ->
+            {:noreply,
+             socket
+             |> put_flash(:info, "Game created successfully")
+             |> push_navigate(to: ~p"/games/#{game.id}")}
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:noreply, assign_form(socket, changeset)}
+        end
+
+      {:error, :rate_limit_exceeded} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Game created successfully")
-         |> push_navigate(to: ~p"/games/#{game.id}")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+         |> put_flash(:error, "Too many game creation attempts. Please try again later.")
+         |> assign_form(Cornucopia.change_game(%Game{}))}
     end
   end
 end
