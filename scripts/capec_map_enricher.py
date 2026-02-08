@@ -182,14 +182,14 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         "--version",
         type=str,
         default="latest",
-        help="Version of the CAPEC mapping file (e.g., 3.0)",
+        help="Version of the Cornucopia (e.g., 3.0)",
     )
     parser.add_argument(
         "-e",
         "--edition",
         type=str,
         default="edition",
-        help="Edition of the CAPEC mapping file (e.g., webapp or mobileapp)",
+        help="Edition of the Cornucopia (e.g., webapp or mobileapp)",
     )
     parser.add_argument(
         "-s",

@@ -184,7 +184,6 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         "-i",
         "--input-path",
         type=validate_filepath_arg,
-        default=ConvertVars.DEFAULT_INPUT_PATH,
         help="Path to input webapp-mappings YAML file",
     )
     parser.add_argument(
@@ -192,14 +191,14 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         "--version",
         type=str,
         default="latest",
-        help="Version of the output file (e.g., 3 for 3.0)",
+        help="Version of Cornucopia (e.g., 3 for 3.0)",
     )
     parser.add_argument(
         "-e",
         "--edition",
         type=str,
         default="edition",
-        help="edition of the output file (e.g., webapp or mobileapp)",
+        help="edition of Cornucopia (e.g., webapp or mobileapp)",
     )
     parser.add_argument(
         "-o",
@@ -236,7 +235,13 @@ def main() -> None:
     else:
         directory = Path(convert_vars.args.output_path).resolve()
 
-    input_path = directory / convert_vars.args.input_path
+    if convert_vars.args.input_path:
+        input_path = Path(convert_vars.args.input_path).resolve()
+    else:
+        input_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "mappings").replace(
+            "VERSION", str(convert_vars.args.version)
+        ).replace("EDITION", str(convert_vars.args.edition))
+
     capec_output_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "capec").replace(
         "VERSION", str(convert_vars.args.version)
     ).replace("EDITION", str(convert_vars.args.edition))

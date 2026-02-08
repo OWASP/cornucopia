@@ -319,10 +319,10 @@ class TestCreateCapecPages(unittest.TestCase):
         written_content = "".join(call.args[0] for call in handle.write.call_args_list)
 
         # Verify content
-        self.assertIn("CAPEC-123: Test Attack Pattern", written_content)
+        self.assertIn("CAPEC™ 123: Test Attack Pattern", written_content)
         self.assertIn("## Description", written_content)
         self.assertIn("This is a test description", written_content)
-        self.assertIn("Source: [CAPEC-123](https://capec.mitre.org/data/definitions/123.html)", written_content)
+        self.assertIn("Source: [CAPEC™ 123](https://capec.mitre.org/data/definitions/123.html)", written_content)
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convert_capec.create_folder")
