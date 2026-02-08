@@ -82,15 +82,20 @@ defmodule Copi.RateLimiter do
 
   @impl true
   def handle_call({:check_rate, ip, action}, _from, state) do
-    now = System.system_time(:second)
+    # Use monotonic time for interval calculations to avoid issues when the system clock changes.
+    # V15.4: Safe concurrency and time-of-check correctness.
+    now = System.monotonic_time(:millisecond)
     window = state.windows[action]
     limit = state.limits[action]
 
     key = {ip, action}
     timestamps = Map.get(state.requests, key, [])
 
+    # Convert window (seconds) to the same unit as `now` (milliseconds) for safe comparison.
+    window_ms = window * 1_000
+
     # Remove expired timestamps
-    valid_timestamps = Enum.filter(timestamps, fn ts -> now - ts < window end)
+    valid_timestamps = Enum.filter(timestamps, fn ts -> now - ts < window_ms end)
 
     if length(valid_timestamps) >= limit do
       {:reply, {:error, :rate_limit_exceeded}, state}
