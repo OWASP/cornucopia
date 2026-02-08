@@ -1,0 +1,1 @@
+Application vulnerabilities can turn the app itself into an attack vector, enabling attackers to compromise users’ systems and data through malware delivery, code injection, or unauthorized data exfiltration.

@@ -13,10 +13,12 @@
     }
 
     let { data, children }: Props = $props();
+    
+    // Initialize stores - these run on both server and client
     updateTranslation(data.translation, data.fallbackTranslation);
     updateLang(data.lang);
     
-    let content = data.content.get(data.lang) || data.content.get('en');
+    let content = $derived(data.content.get(data.lang) || data.content.get('en'));
 
     function getFullWidthPages(path : string)
     {

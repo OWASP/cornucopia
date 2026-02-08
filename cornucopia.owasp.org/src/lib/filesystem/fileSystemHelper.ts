@@ -1,10 +1,30 @@
 import fs from "fs";
 import type { Route } from "../../domain/routes/route";
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 export class FileSystemHelper {
 
+  //private static root = path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../');
+
+
+  private static root = (() => {
+    // During development and build, calculate root from import.meta.url
+
+    if (import.meta.url.includes('.svelte-kit')) {
+      return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../../');
+    }
+
+    return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../');
+
+  })();
+
   public static hasDir(path: string): boolean {
     return fs.existsSync(path);
+  }
+
+  public static hasFile(path: string): boolean {
+    return FileSystemHelper.hasDir(path) && fs.lstatSync(path).isFile();
   }
 
   public static getDirectories(path: string): string[] {
@@ -21,12 +41,40 @@ export class FileSystemHelper {
       .map((dirent) => dirent.name);
   }
 
-  public static ASVSRouteMap(): Route[] {
-    const basePath: string = "data/taxonomy/en/ASVS-4.0.3";
+  /**
+   * Resolves a path in a case-insensitive manner by checking actual directory names.
+   * This ensures cross-platform compatibility between case-sensitive and case-insensitive filesystems.
+   */
+  private static resolveCaseInsensitivePath(basePath: string, relativePath: string): string {
+    const parts = relativePath.split('/').filter(p => p.length > 0);
+    let currentPath = path.normalize(basePath);
+    
+    for (const part of parts) {
+      if (!fs.existsSync(currentPath)) {
+        return path.join(basePath, relativePath); // Path doesn't exist, return as-is
+      }
+      
+      const entries = fs.readdirSync(currentPath, { withFileTypes: true });
+      const matchingEntry = entries.find(entry => 
+        entry.name.toLowerCase() === part.toLowerCase()
+      );
+      
+      if (matchingEntry) {
+        currentPath = path.join(currentPath, matchingEntry.name);
+      } else {
+        currentPath = path.join(currentPath, part);
+      }
+    }
+    
+    return currentPath;
+  }
+
+  public static ASVSRouteMap(version: string = "4.0.3"): Route[] {
+    const basePath: string = `data/taxonomy/en/ASVS-${version}`;
     const sectionRegex = /^(\d{2})-/;
     let routes: Route[] = [];
 
-    const firstLevelDirs = this.getDirectories(basePath).filter((dir) =>
+    const firstLevelDirs = this.getDirectories(FileSystemHelper.root + basePath).filter((dir) =>
       sectionRegex.test(dir)
     );
 
@@ -34,7 +82,7 @@ export class FileSystemHelper {
       const firstLevelPath = basePath + '/' + firstLevelDir;
       const firstPart = firstLevelDir.match(sectionRegex)?.[1];
 
-      const secondLevelDirs = this.getDirectories(firstLevelPath).filter(
+      const secondLevelDirs = this.getDirectories(FileSystemHelper.root + firstLevelPath).filter(
         (dir) => sectionRegex.test(dir)
       );
 
@@ -54,75 +102,59 @@ export class FileSystemHelper {
     return routes;
   }
 
-  public static getFolderNameByRoute(route: string) {
-    let base: string = "data/taxonomy/en";
-    let path: string = base;
-    let routes: string[] = route.split('/');
-
-    routes.forEach((dir) => {
-      let dirs = this.getDirectories(path);
-      dirs.forEach((folder) => {
-        if (dir != folder.toLowerCase()) return;
-        path = path + '/' + folder;
-      });
-    });
-
-    if (path == base) return 'Requirements Mapping';
-
-    return path.split('/').slice(-1);
+  public static getCurrentPageNameByRoute(route: string) {
+    return route ? route.split('/').slice(-1)[0] : 'Requirements Mapping';
   }
 
-  public static getDataByRoute(route: string) {
-    let resultFolders: string[] = [];
-    let resultFiles: string[] = [];
-    let routePath: string = '';
-    let path : string = "data/taxonomy/en";
-    let routes: string[] = route.split('/');
-
-    routes.forEach((dir) => {
-      let dirs = this.getDirectories(path);
-      dirs.forEach((folder) => {
-        if (dir != folder.toLowerCase()) return;
-        path = path + '/' + folder;
-      });
-    });
-    routePath = path.toLowerCase().replace('data/taxonomy/en/', '');
-
-    let content: string = "";
-    let indexFile: string = path + "/index.md";
-    if (fs.existsSync(indexFile)) content = fs.readFileSync(indexFile, "utf8");
-    let folders = FileSystemHelper.getDirectories(path);
-
-    folders.forEach((folder) => {
-      let files = FileSystemHelper.getFiles(path + "/" + folder);
-      files.includes("index.md")
-        ? resultFolders.push(folder)
-        : resultFiles.push(folder);
-    });
-  
-    return [resultFiles, resultFolders, content, routePath];
+  public static getDataByRoute(route: string, lang: string = 'en'): [string[], string] {
+    let categories: string[] = [];
+    const baseDataPath = FileSystemHelper.root + "data";
+    
+    if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
+    
+    let defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en');
+    
+    // Get content using original route structure for Map keys
+    let content = FileSystemHelper.getDataFromPath('data' + route).get('data' + route) || "";
+    if (content === "") {
+      content = FileSystemHelper.getDataFromPath('data' + defaultLangRoute).get('data' + defaultLangRoute) || "";
+    }
+    
+    // Resolve the actual filesystem path for directory operations (case-insensitive)
+    const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(baseDataPath, defaultLangRoute);
+    
+    if (fs.existsSync(resolvedPath)) {
+      FileSystemHelper.getDirectories(resolvedPath).forEach(
+        (folder) => categories.push(folder));
+    }
+    
+    return [categories, content];
   }
 
-  public static getDataFromPath(path: string) : Map<string, string>
+  public static getDataFromPath(filePath: string) : Map<string, string>
   {
-    let content = new Map<string, string>;
+    const base = FileSystemHelper.root;
+    let content = new Map<string, string>();
   
-    let indexFile: string = path + "/index.md";
+    // Resolve the actual filesystem path (case-insensitive)
+    const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(base, filePath);
+    
+    let indexFile: string = path.join(resolvedPath, "index.md");
     if (fs.existsSync(indexFile)) {
-      content.set(path, fs.readFileSync(indexFile, "utf8"));
+      content.set(filePath, fs.readFileSync(indexFile, "utf8"));
     }
   
     let folders: string[];
     try {
-      folders = FileSystemHelper.getDirectories(path);
+      folders = FileSystemHelper.getDirectories(resolvedPath);
     } catch (e) {
       folders = [];
     }
-    if (folders.length == 0) console.log("No folders found for path: " + path);
   
     folders.forEach((folder) => {
-      if (fs.existsSync(path + "/" + folder + "/index.md")) {
-        content.set(folder, fs.readFileSync(path + "/" + folder + "/index.md", "utf8"));
+      const folderIndexFile = path.join(resolvedPath, folder, "index.md");
+      if (fs.existsSync(folderIndexFile)) {
+        content.set(folder, fs.readFileSync(folderIndexFile, "utf8"));
       }
     });
   

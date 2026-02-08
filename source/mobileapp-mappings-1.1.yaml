@@ -6,7 +6,7 @@ meta:
   version: "1.1"
   layouts: ["cards", "leaflet"]
   templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
-  languages: ["en"]
+  languages: ["en", "ru"]
 suits:
 -
   id: "PC"
@@ -141,7 +141,7 @@ suits:
     value: "4"
     url: "https://cornucopia.owasp.org/cards/AA4"
     owasp_masvs: [ AUTH-2 ]
-    owasp_mastg: [ TEST-0018 ]
+    owasp_mastg: [ TEST-0018, TEST-0064 ]
     capec: [ 114, 115, 554 ]
     safecode: [ 28 ]
   -
@@ -652,6 +652,26 @@ suits:
     id: "CMA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/CMA"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
+-
+  id: "WC"
+  name: "WILD CARD"
+  cards:
+  -
+    id: "JOAM"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOAM"
+    owasp_masvs: [ "-" ]
+    owasp_mastg: [ "-" ]
+    capec: [ "-" ]
+    safecode: [ "-" ]
+  -
+    id: "JOBM"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOBM"
     owasp_masvs: [ "-" ]
     owasp_mastg: [ "-" ]
     capec: [ "-" ]

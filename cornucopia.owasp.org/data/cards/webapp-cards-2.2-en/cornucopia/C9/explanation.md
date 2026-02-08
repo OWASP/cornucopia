@@ -6,6 +6,8 @@ Consider a situation where Michael bypasses standard application protocols to ga
 
 2. **Inadequate Access Controls for Administrative Interfaces:** The interfaces used for administrative purposes are easily accessible and lack stringent access restrictions.
 
+3. **Weak Authentication Mechanisms:** The authentication processes for accessing administrative tools are missing or not strong enough, allowing unauthorized users to gain entry.
+
 ### Example
 
 Michael discovers that a web application’s administrative interface is accessible through a common URL and is only protected by a weak password. Leveraging this, he gains access to the administrative panel where he can view, modify, and delete sensitive data. This unauthorized access is facilitated by the lack of multi-factor authentication, inadequate password policies, and the absence of monitoring mechanisms on the administrative interface.
@@ -32,5 +34,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 2. Enforce robust password policies and regular credential updates for system administrators.
 3. Restrict access to administrative interfaces to a limited set of authorized IP addresses or networks.
 4. Regularly audit and monitor activities performed through administrative tools to detect and respond to unauthorized access.
+5. Ensure that administrative tools are not exposed to the public internet unless absolutely necessary, and if they are, implement additional security layers such as VPNs or bastion hosts.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

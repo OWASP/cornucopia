@@ -17,34 +17,33 @@
     let { data }: Props = $props();
     const lang = readLang();
     let t = readTranslation();
-    let content = data.content.get($lang) || data.content.get('en');
-    let decks = data?.decks;
-    let cards = decks?.get($lang);
-    let suits = data.suits;
-    let mappingData = data.mappingData;
+    let content = $derived(data.content.get($lang) || data.content.get('en'));
+    let decks = $derived(data?.decks);
+    let cards = $derived(decks?.get($lang));
+    let suits = $derived(data.suits);
+    let mappingData = $derived(data.mappingData);
 
     //TODO move these constants to a more sensible location
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
 
-
-
-    let mobileappSuits = $state(suits?.get(`${VERSION_MOBILEAPP}-${$lang}`));
-    let webappSuits = $state(suits?.get(`${VERSION_WEBAPP}-${$lang}`));
-
-    if (!(() => mobileappSuits)()) {
-        mobileappSuits = suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
-    }
-
-    if (!(() => webappSuits)()) {
-        webappSuits = suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
-    }
+    let mobileappSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
+    });
+    
+    let webappSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_WEBAPP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
+    });
 
     let version : string = $state(VERSION_WEBAPP);
     let suit : string;
-    let card : Card = $state(cards?.get('VE2') as Card);
+    let card : Card = $derived(cards?.get('VE2') as Card);
     
-    let mapping = $state((new MappingController(mappingData?.get((() => version)()))).getCardMappings((() => card)().id));
+    let mapping = $derived.by(() => 
+        card ? (new MappingController(mappingData?.get(version))).getCardMappings(card.id) : []
+    );
 
     let map : Map<string,boolean> = $state(new SvelteMap());
     setTree(false);
@@ -183,7 +182,7 @@
                 <div class="card-buttons">
                 {#each suit.cards as card}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
@@ -204,7 +203,7 @@
                 <div class="card-buttons">
                 {#each suit.cards as card}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="cards/{cards?.get(card)?.id}">├── {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>

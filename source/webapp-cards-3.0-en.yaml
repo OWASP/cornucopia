@@ -258,7 +258,7 @@ suits:
     id: "AZ9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AZ9"
-    desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature"
+    desc: "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
   -
     id: "AZX"
     value: "10"
@@ -318,7 +318,7 @@ suits:
     id: "CR7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CR7"
-    desc: "Gunter can intercept or modify encrypted data in transit because the protocol is poorly deployed, or weakly configured, or certificates are invalid, or certificates are not trusted, or the connection can be degraded to a weaker or un-encrypted communication"
+    desc: "Gunter can intercept or modify encrypted and/or hashed data in transit because the protocol is poorly deployed, or weakly configured, or certificates are invalid, or certificates are not trusted, or the connection can be degraded to a weaker or un-encrypted communication"
   -
     id: "CR8"
     value: "8"
@@ -328,7 +328,7 @@ suits:
     id: "CR9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/CR9"
-    desc: "Andy can bypass random number generation, random GUID generation, hashing and encryption functions because they have been self-built and/or are weak"
+    desc: "Andy can bypass cryptographic controls because random-number, GUID, or hashing functions are self-built, risky or weak"
   -
     id: "CRX"
     value: "10"
@@ -398,7 +398,7 @@ suits:
     id: "C9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/C9"
-    desc: "Michael can bypass the application to gain access to data because administrative tools or administrative interfaces are not secured adequately"
+    desc: "Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature"
   -
     id: "CX"
     value: "10"
@@ -408,7 +408,7 @@ suits:
     id: "CJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CJ"
-    desc: "Roman can exploit the application because it was compiled using out-of-date tools, or its configuration is not secure by default, or security information was not documented, or passed on to operational teams, or the user is not warned or access blocked when the expected security features are not supported or enabled"
+    desc: "Roman can exploit the application because it was insecurely compiled or deployed, or its configuration is not secure by default, or because security information was not documented, or passed on to operational teams, or the user is not warned and access blocked when the expected security features are unsupported or disabled"
   -
     id: "CQ"
     value: "Q"
