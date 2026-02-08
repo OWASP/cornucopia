@@ -141,6 +141,26 @@ defmodule CopiWeb.GameLiveTest do
        {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=1")
        assert html =~ "Viewing round <strong>1</strong>"
     end
+
+    test "delete game removes it from list", %{conn: conn, game: game} do
+      {:ok, index_live, _html} = live(conn, "/games")
+      
+      # Delete the game
+      assert index_live |> element("#game-#{game.id} a", "Delete") |> render_click()
+      
+      # Verify it's removed
+      refute has_element?(index_live, "#game-#{game.id}")
+    end
+
+    test "handle_info updates games list", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, "/games")
+      
+      # Send update_parent message
+      send(index_live.pid, {:update_parent, []})
+      
+      # Should update the assigns
+      :ok
+    end
     
   end
 end

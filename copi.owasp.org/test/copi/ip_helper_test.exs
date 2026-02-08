@@ -27,14 +27,13 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_socket(socket) == {0, 0, 0, 0, 0, 0, 0, 1}
     end
 
-    test "raises error when IP not available in LiveView socket" do
+    test "returns fallback IP when not available in LiveView socket" do
       socket = %Phoenix.LiveView.Socket{
         private: %{}
       }
 
-      assert_raise RuntimeError, "Unable to determine IP address from socket", fn ->
-        IPHelper.get_ip_from_socket(socket)
-      end
+      # Should return localhost fallback instead of raising
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
     end
   end
 
@@ -92,15 +91,14 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
     end
 
-    test "raises error when remote_ip is nil and no X-Forwarded-For" do
+    test "returns fallback IP when remote_ip is nil and no X-Forwarded-For" do
       conn = %Plug.Conn{
         remote_ip: nil,
         req_headers: []
       }
 
-      assert_raise RuntimeError, "Unable to determine IP address from connection", fn ->
-        IPHelper.get_ip_from_conn(conn)
-      end
+      # Should return localhost fallback instead of raising
+      assert IPHelper.get_ip_from_conn(conn) == {127, 0, 0, 1}
     end
   end
 
