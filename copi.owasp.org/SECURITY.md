@@ -71,7 +71,7 @@ When rate limits are exceeded:
 - Supports both IPv4 and IPv6
 - Accepts IP addresses as tuples or strings
 - Normalizes IP formats for consistent tracking
-- Falls back gracefully when IP is unavailable
+- Defines explicit handling when IP is unavailable (for example, UserSocket falls back to `{0,0,0,0}` for WebSocket rate limiting, while other flows may deny the action if no IP can be determined)
 
 ## Testing
 
