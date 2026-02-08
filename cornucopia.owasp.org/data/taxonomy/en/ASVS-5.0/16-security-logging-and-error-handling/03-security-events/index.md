@@ -1,15 +1,45 @@
-# Security Events
-## V16.3.1
-Verify that all authentication operations are logged, including successful and unsuccessful attempts. Additional metadata, such as the type of authentication or factors used, should also be collected.
-Required for Level 2 and 3
-## V16.3.2
-Verify that failed authorization attempts are logged. For L3, this must include logging all authorization decisions, including logging when sensitive data is accessed (without logging the sensitive data itself).
-Required for Level 2 and 3
-## V16.3.3
-Verify that the application logs the security events that are defined in the documentation and also logs attempts to bypass the security controls, such as input validation, business logic, and anti-automation.
-Required for Level 2 and 3
-## V16.3.4
-Verify that the application logs unexpected errors and security control failures such as backend TLS failures.
-Required for Level 2 and 3
-## Disclaimer
+# Security Events
+
+## V16.3.1
+
+Verify that all authentication operations are logged, including successful and unsuccessful attempts. Additional metadata, such as the type of authentication or factors used, should also be collected.
+
+Required for Level 2 and 3
+
+### Related CAPEC™ Requirements
+
+CAPEC™ (3.9): [114](/taxonomy/capec-3.9/114/index.md), [151](/taxonomy/capec-3.9/151/index.md), [156](/taxonomy/capec-3.9/156/index.md), [2](/taxonomy/capec-3.9/2/index.md), [206](/taxonomy/capec-3.9/206/index.md), [21](/taxonomy/capec-3.9/21/index.md), [268](/taxonomy/capec-3.9/268/index.md), [39](/taxonomy/capec-3.9/39/index.md), [49](/taxonomy/capec-3.9/49/index.md), [50](/taxonomy/capec-3.9/50/index.md), [600](/taxonomy/capec-3.9/600/index.md), [68](/taxonomy/capec-3.9/68/index.md), [70](/taxonomy/capec-3.9/70/index.md), [75](/taxonomy/capec-3.9/75/index.md)
+
+## V16.3.2
+
+Verify that failed authorization attempts are logged. For L3, this must include logging all authorization decisions, including logging when sensitive data is accessed (without logging the sensitive data itself).
+
+Required for Level 2 and 3
+
+### Related CAPEC™ Requirements
+
+CAPEC™ (3.9): [1](/taxonomy/capec-3.9/1/index.md), [11](/taxonomy/capec-3.9/11/index.md), [114](/taxonomy/capec-3.9/114/index.md), [116](/taxonomy/capec-3.9/116/index.md), [121](/taxonomy/capec-3.9/121/index.md), [122](/taxonomy/capec-3.9/122/index.md), [126](/taxonomy/capec-3.9/126/index.md), [133](/taxonomy/capec-3.9/133/index.md), [143](/taxonomy/capec-3.9/143/index.md), [144](/taxonomy/capec-3.9/144/index.md), [149](/taxonomy/capec-3.9/149/index.md), [151](/taxonomy/capec-3.9/151/index.md), [155](/taxonomy/capec-3.9/155/index.md), [156](/taxonomy/capec-3.9/156/index.md), [162](/taxonomy/capec-3.9/162/index.md), [166](/taxonomy/capec-3.9/166/index.md), [172](/taxonomy/capec-3.9/172/index.md), [176](/taxonomy/capec-3.9/176/index.md), [179](/taxonomy/capec-3.9/179/index.md), [180](/taxonomy/capec-3.9/180/index.md), [203](/taxonomy/capec-3.9/203/index.md), [206](/taxonomy/capec-3.9/206/index.md), [207](/taxonomy/capec-3.9/207/index.md), [21](/taxonomy/capec-3.9/21/index.md), [212](/taxonomy/capec-3.9/212/index.md), [22](/taxonomy/capec-3.9/22/index.md), [240](/taxonomy/capec-3.9/240/index.md), [268](/taxonomy/capec-3.9/268/index.md), [36](/taxonomy/capec-3.9/36/index.md), [39](/taxonomy/capec-3.9/39/index.md), [49](/taxonomy/capec-3.9/49/index.md), [50](/taxonomy/capec-3.9/50/index.md), [54](/taxonomy/capec-3.9/54/index.md), [58](/taxonomy/capec-3.9/58/index.md), [600](/taxonomy/capec-3.9/600/index.md), [68](/taxonomy/capec-3.9/68/index.md), [74](/taxonomy/capec-3.9/74/index.md), [75](/taxonomy/capec-3.9/75/index.md), [87](/taxonomy/capec-3.9/87/index.md), [95](/taxonomy/capec-3.9/95/index.md)
+
+## V16.3.3
+
+Verify that the application logs the security events that are defined in the documentation and also logs attempts to bypass the security controls, such as input validation, business logic, and anti-automation.
+
+Required for Level 2 and 3
+
+### Related CAPEC™ Requirements
+
+CAPEC™ (3.9): [1](/taxonomy/capec-3.9/1/index.md), [100](/taxonomy/capec-3.9/100/index.md), [105](/taxonomy/capec-3.9/105/index.md), [11](/taxonomy/capec-3.9/11/index.md), [112](/taxonomy/capec-3.9/112/index.md), [113](/taxonomy/capec-3.9/113/index.md), [114](/taxonomy/capec-3.9/114/index.md), [115](/taxonomy/capec-3.9/115/index.md), [116](/taxonomy/capec-3.9/116/index.md), [121](/taxonomy/capec-3.9/121/index.md), [122](/taxonomy/capec-3.9/122/index.md), [125](/taxonomy/capec-3.9/125/index.md), [126](/taxonomy/capec-3.9/126/index.md), [127](/taxonomy/capec-3.9/127/index.md), [130](/taxonomy/capec-3.9/130/index.md), [133](/taxonomy/capec-3.9/133/index.md), [136](/taxonomy/capec-3.9/136/index.md), [137](/taxonomy/capec-3.9/137/index.md), [140](/taxonomy/capec-3.9/140/index.md), [145](/taxonomy/capec-3.9/145/index.md), [151](/taxonomy/capec-3.9/151/index.md), [152](/taxonomy/capec-3.9/152/index.md), [153](/taxonomy/capec-3.9/153/index.md), [155](/taxonomy/capec-3.9/155/index.md), [156](/taxonomy/capec-3.9/156/index.md), [157](/taxonomy/capec-3.9/157/index.md), [160](/taxonomy/capec-3.9/160/index.md), [162](/taxonomy/capec-3.9/162/index.md), [165](/taxonomy/capec-3.9/165/index.md), [166](/taxonomy/capec-3.9/166/index.md), [172](/taxonomy/capec-3.9/172/index.md), [175](/taxonomy/capec-3.9/175/index.md), [176](/taxonomy/capec-3.9/176/index.md), [179](/taxonomy/capec-3.9/179/index.md), [180](/taxonomy/capec-3.9/180/index.md), [183](/taxonomy/capec-3.9/183/index.md), [184](/taxonomy/capec-3.9/184/index.md), [188](/taxonomy/capec-3.9/188/index.md), [19](/taxonomy/capec-3.9/19/index.md), [198](/taxonomy/capec-3.9/198/index.md), [2](/taxonomy/capec-3.9/2/index.md), [20](/taxonomy/capec-3.9/20/index.md), [201](/taxonomy/capec-3.9/201/index.md), [204](/taxonomy/capec-3.9/204/index.md), [206](/taxonomy/capec-3.9/206/index.md), [207](/taxonomy/capec-3.9/207/index.md), [21](/taxonomy/capec-3.9/21/index.md), [212](/taxonomy/capec-3.9/212/index.md), [216](/taxonomy/capec-3.9/216/index.md), [217](/taxonomy/capec-3.9/217/index.md), [218](/taxonomy/capec-3.9/218/index.md), [22](/taxonomy/capec-3.9/22/index.md), [220](/taxonomy/capec-3.9/220/index.md), [227](/taxonomy/capec-3.9/227/index.md), [23](/taxonomy/capec-3.9/23/index.md), [231](/taxonomy/capec-3.9/231/index.md), [233](/taxonomy/capec-3.9/233/index.md), [234](/taxonomy/capec-3.9/234/index.md), [24](/taxonomy/capec-3.9/24/index.md), [240](/taxonomy/capec-3.9/240/index.md), [242](/taxonomy/capec-3.9/242/index.md), [248](/taxonomy/capec-3.9/248/index.md), [25](/taxonomy/capec-3.9/25/index.md), [250](/taxonomy/capec-3.9/250/index.md), [253](/taxonomy/capec-3.9/253/index.md), [26](/taxonomy/capec-3.9/26/index.md), [261](/taxonomy/capec-3.9/261/index.md), [267](/taxonomy/capec-3.9/267/index.md), [268](/taxonomy/capec-3.9/268/index.md), [272](/taxonomy/capec-3.9/272/index.md), [28](/taxonomy/capec-3.9/28/index.md), [30](/taxonomy/capec-3.9/30/index.md), [33](/taxonomy/capec-3.9/33/index.md), [36](/taxonomy/capec-3.9/36/index.md), [37](/taxonomy/capec-3.9/37/index.md), [383](/taxonomy/capec-3.9/383/index.md), [39](/taxonomy/capec-3.9/39/index.md), [43](/taxonomy/capec-3.9/43/index.md), [441](/taxonomy/capec-3.9/441/index.md), [444](/taxonomy/capec-3.9/444/index.md), [461](/taxonomy/capec-3.9/461/index.md), [463](/taxonomy/capec-3.9/463/index.md), [469](/taxonomy/capec-3.9/469/index.md), [473](/taxonomy/capec-3.9/473/index.md), [474](/taxonomy/capec-3.9/474/index.md), [475](/taxonomy/capec-3.9/475/index.md), [48](/taxonomy/capec-3.9/48/index.md), [49](/taxonomy/capec-3.9/49/index.md), [50](/taxonomy/capec-3.9/50/index.md), [523](/taxonomy/capec-3.9/523/index.md), [54](/taxonomy/capec-3.9/54/index.md), [549](/taxonomy/capec-3.9/549/index.md), [554](/taxonomy/capec-3.9/554/index.md), [57](/taxonomy/capec-3.9/57/index.md), [572](/taxonomy/capec-3.9/572/index.md), [586](/taxonomy/capec-3.9/586/index.md), [594](/taxonomy/capec-3.9/594/index.md), [600](/taxonomy/capec-3.9/600/index.md), [603](/taxonomy/capec-3.9/603/index.md), [607](/taxonomy/capec-3.9/607/index.md), [620](/taxonomy/capec-3.9/620/index.md), [633](/taxonomy/capec-3.9/633/index.md), [636](/taxonomy/capec-3.9/636/index.md), [639](/taxonomy/capec-3.9/639/index.md), [64](/taxonomy/capec-3.9/64/index.md), [66](/taxonomy/capec-3.9/66/index.md), [664](/taxonomy/capec-3.9/664/index.md), [676](/taxonomy/capec-3.9/676/index.md), [68](/taxonomy/capec-3.9/68/index.md), [69](/taxonomy/capec-3.9/69/index.md), [70](/taxonomy/capec-3.9/70/index.md), [74](/taxonomy/capec-3.9/74/index.md), [75](/taxonomy/capec-3.9/75/index.md), [77](/taxonomy/capec-3.9/77/index.md), [83](/taxonomy/capec-3.9/83/index.md), [88](/taxonomy/capec-3.9/88/index.md), [93](/taxonomy/capec-3.9/93/index.md), [94](/taxonomy/capec-3.9/94/index.md), [95](/taxonomy/capec-3.9/95/index.md), [97](/taxonomy/capec-3.9/97/index.md)
+
+## V16.3.4
+
+Verify that the application logs unexpected errors and security control failures such as backend TLS failures.
+
+Required for Level 2 and 3
+
+### Related CAPEC™ Requirements
+
+CAPEC™ (3.9): [105](/taxonomy/capec-3.9/105/index.md), [114](/taxonomy/capec-3.9/114/index.md), [136](/taxonomy/capec-3.9/136/index.md), [145](/taxonomy/capec-3.9/145/index.md), [151](/taxonomy/capec-3.9/151/index.md), [156](/taxonomy/capec-3.9/156/index.md), [157](/taxonomy/capec-3.9/157/index.md), [159](/taxonomy/capec-3.9/159/index.md), [160](/taxonomy/capec-3.9/160/index.md), [169](/taxonomy/capec-3.9/169/index.md), [175](/taxonomy/capec-3.9/175/index.md), [176](/taxonomy/capec-3.9/176/index.md), [183](/taxonomy/capec-3.9/183/index.md), [184](/taxonomy/capec-3.9/184/index.md), [19](/taxonomy/capec-3.9/19/index.md), [201](/taxonomy/capec-3.9/201/index.md), [206](/taxonomy/capec-3.9/206/index.md), [21](/taxonomy/capec-3.9/21/index.md), [216](/taxonomy/capec-3.9/216/index.md), [217](/taxonomy/capec-3.9/217/index.md), [218](/taxonomy/capec-3.9/218/index.md), [220](/taxonomy/capec-3.9/220/index.md), [23](/taxonomy/capec-3.9/23/index.md), [24](/taxonomy/capec-3.9/24/index.md), [250](/taxonomy/capec-3.9/250/index.md), [253](/taxonomy/capec-3.9/253/index.md), [268](/taxonomy/capec-3.9/268/index.md), [272](/taxonomy/capec-3.9/272/index.md), [310](/taxonomy/capec-3.9/310/index.md), [33](/taxonomy/capec-3.9/33/index.md), [39](/taxonomy/capec-3.9/39/index.md), [438](/taxonomy/capec-3.9/438/index.md), [442](/taxonomy/capec-3.9/442/index.md), [445](/taxonomy/capec-3.9/445/index.md), [446](/taxonomy/capec-3.9/446/index.md), [461](/taxonomy/capec-3.9/461/index.md), [475](/taxonomy/capec-3.9/475/index.md), [49](/taxonomy/capec-3.9/49/index.md), [50](/taxonomy/capec-3.9/50/index.md), [511](/taxonomy/capec-3.9/511/index.md), [523](/taxonomy/capec-3.9/523/index.md), [538](/taxonomy/capec-3.9/538/index.md), [594](/taxonomy/capec-3.9/594/index.md), [600](/taxonomy/capec-3.9/600/index.md), [620](/taxonomy/capec-3.9/620/index.md), [633](/taxonomy/capec-3.9/633/index.md), [636](/taxonomy/capec-3.9/636/index.md), [66](/taxonomy/capec-3.9/66/index.md), [664](/taxonomy/capec-3.9/664/index.md), [673](/taxonomy/capec-3.9/673/index.md), [68](/taxonomy/capec-3.9/68/index.md), [690](/taxonomy/capec-3.9/690/index.md), [691](/taxonomy/capec-3.9/691/index.md), [83](/taxonomy/capec-3.9/83/index.md), [94](/taxonomy/capec-3.9/94/index.md)
+
+## Disclaimer
+
 Credit via [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/).For more information visit: [The OWASP ASVS Project](https://owasp.org/www-project-application-security-verification-standard/) or [Github respository.](https://github.com/OWASP/ASVS). OWASP ASVS is under the [Creative Commons Attribution-Share Alike v4.0](https://github.com/OWASP/ASVS/blob/v5.0.0/LICENSE.md) license.
