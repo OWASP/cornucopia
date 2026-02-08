@@ -382,7 +382,7 @@
                 {
                   "id": "74115038-e386-442a-8220-7de792548fb6",
                   "title": "Given that the url to the game gets accidently exposed, a hostile actor may disrupt the game to move backward and forward to the next and previous rounds",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "TBD",
                   "type": "Tampering",
                   "description": "What can go wrong?\n\nSometimes players fall out of the game. When that happens, it is impossible to continue the game. We want to provide for a possibility to move to the next round if a player falls out of the game, but there is a risk that the url to the game gets accidently exposed, a hostile actor may disrupt the game to move backward and forward to the next and previous rounds.\nhttps://github.com/OWASP/cornucopia/issues/2129",
@@ -395,12 +395,19 @@
               ],
               "threatFrequency": {
                 "spoofing": 4,
-                "tampering": 1,
+                "tampering": 2,
                 "repudiation": 0,
                 "informationDisclosure": 2,
                 "denialOfService": 2,
                 "elevationOfPrivilege": 0
               }
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
