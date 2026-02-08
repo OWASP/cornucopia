@@ -41,7 +41,9 @@ class CopiSmokeTests(unittest.TestCase):
         self.assertEqual(
             response.status_code, 200, f"Homepage returned status {response.status_code}"
         )
-        self.assertIn("copi", response.text.lower(), "Homepage should contain 'copi' text")
+        self.assertIn(
+            "copi", response.text.lower(), "Homepage should contain 'copi' text"
+        )
 
     def test_02_cards_route_accessible(self) -> None:
         """Test that the cards route is accessible"""
