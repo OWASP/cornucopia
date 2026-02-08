@@ -1,4 +1,4 @@
-defmodule Copi.RateLimiterTest do
+﻿defmodule Copi.RateLimiterTest do
   use ExUnit.Case, async: false
 
   alias Copi.RateLimiter
