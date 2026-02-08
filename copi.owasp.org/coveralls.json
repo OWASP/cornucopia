@@ -1,0 +1,19 @@
+{
+    "skip_files": [
+        "lib/copi/migrations/",
+        "lib/copi.ex",
+        "lib/copi/release.ex",
+        "lib/copi_web/channels/user_socket.ex",
+        "lib/copi_web/controllers/page_html.ex",
+        "lib/copi_web/controllers/error_html.ex",
+        "lib/copi_web/components/layouts.ex",
+        "lib/copi_web/controllers/error_json.ex",
+        "test/support/",
+        "lib/copi_web.ex"
+    ],
+    "coverage_options": {
+        "treat_no_relevant_lines_as_covered": true,
+        "output_dir": "cover/",
+        "minimum_coverage": 80
+    }
+}

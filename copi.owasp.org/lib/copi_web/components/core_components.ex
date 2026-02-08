@@ -17,7 +17,7 @@ defmodule CopiWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import CopiWeb.Gettext
+  use Gettext, backend: CopiWeb.Gettext
 
   @doc """
   Renders a modal.

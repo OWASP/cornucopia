@@ -47,6 +47,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     """
   end
 
+  @impl true
   def update(%{game: _} = assigns, socket) do
     changeset =
       Cornucopia.change_game(%Game{
@@ -99,7 +100,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
         {:noreply,
          socket
          |> put_flash(:info, "Game updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_navigate(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
