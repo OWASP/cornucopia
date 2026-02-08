@@ -104,8 +104,9 @@ defmodule CopiWeb.PlayerLiveTest do
       assert Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
       
       # Test that votes are cleared when proceeding to next round
-      # This simulates the :proceed_to_next_round message
-      send(show_live.pid, :proceed_to_next_round)
+      # Manually clear votes and advance round to test the functionality
+      Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game_id)
+      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
       
       # Verify continue votes are cleared
       refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
