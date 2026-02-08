@@ -86,12 +86,11 @@ defmodule CopiWeb.GameLiveTest do
       # Next game creation should be blocked
       {:ok, games_new_blocked, _html} = live(conn, "/games/new")
       
-      games_new_blocked
+      html = games_new_blocked
         |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
         |> render_submit()
       
-      # The flash error should be present in the rendered HTML
-      html = render(games_new_blocked)
+      # Flash message should be in the render_submit result
       assert html =~ "Too many game creation attempts"
     end
   end
@@ -144,8 +143,8 @@ defmodule CopiWeb.GameLiveTest do
        assert html =~ "Viewing round <strong>1</strong>"
     end
 
-    test "delete game removes it from list", %{conn: conn, game: game} do
-      {:ok, index_live, html} = live(conn, "/games")
+    test "delete game removes it from list", %{conn: conn, game: _game} do
+      {:ok, _index_live, html} = live(conn, "/games")
       
       # The game might not be shown if it's in the current view -skip complex delete test
       # Just verify the page loads
