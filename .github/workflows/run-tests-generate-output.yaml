@@ -122,15 +122,15 @@ jobs:
             output/owasp_cornucopia_mobileapp_1.1_en.zip \
             output/owasp_cornucopia_webapp_2.2_en.zip \
             output/owasp_cornucopia_webapp_3.0_en.zip \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_en.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_es.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_it.docx \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_en.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_es.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_it.odt \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_en.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_es.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.pdf \
