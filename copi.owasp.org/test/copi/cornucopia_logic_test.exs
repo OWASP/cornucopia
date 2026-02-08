@@ -24,10 +24,10 @@ defmodule Copi.CornucopiaLogicTest do
 
   defp play_card(player, card, round) do
     {:ok, dealt} = Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
-    {:ok, _} = Repo.update(Ecto.Changeset.change(dealt, played_in_round: round, updated_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)))
+    {:ok, updated_dealt} = Repo.update(Ecto.Changeset.change(dealt, played_in_round: round, updated_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)))
     # Sleep to ensure ordering by updated_at works if logic depends on it (it does for lead suit)
     :timer.sleep(10) 
-    dealt
+    updated_dealt
   end
 
   test "highest_scoring_card_in_round simple case", %{game: game, p1: p1, p2: p2} do

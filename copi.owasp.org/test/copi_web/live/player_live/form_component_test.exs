@@ -70,12 +70,12 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
       
-      html = view
+      _result = view
         |> form("#player-form", player: %{name: "Updated Name"})
         |> render_submit()
 
-      # Update should work without rate limiting
-      assert html =~ "Player updated successfully" || html != ""
+      # Update should redirect successfully
+      assert_redirect(view, ~r"/games/.*/players/.*")
     end
   end
 end
