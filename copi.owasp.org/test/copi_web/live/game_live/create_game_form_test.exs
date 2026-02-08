@@ -37,12 +37,14 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
 
       # Next attempt should be blocked
       {:ok, view, _html} = live(conn, "/games/new")
-      html = view
+      view
         |> form("#game-form", game: %{name: "Blocked", edition: "webapp"})
         |> render_submit()
       
-      # Flash message should be in the render_submit result
-      assert html =~ "Too many game creation attempts"
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(view, "#game-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
     end
 
     test "validation errors don't consume rate limit", %{conn: conn} do

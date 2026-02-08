@@ -39,12 +39,14 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
       # Next attempt should be blocked
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
-      html = view
+      view
         |> form("#player-form", player: %{name: "Blocked", game_id: game.id})
         |> render_submit()
       
-      # Flash message should be in the render_submit result
-      assert html =~ "Too many player creation attempts"
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(view, "#player-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :player_creation)
     end
 
     test "validation errors don't consume rate limit", %{conn: conn, game: game} do

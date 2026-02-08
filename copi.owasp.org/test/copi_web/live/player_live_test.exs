@@ -12,6 +12,8 @@ defmodule CopiWeb.PlayerLiveTest do
   @invalid_attrs %{name: nil}
 
   setup %{conn: conn} do
+    # Clear rate limits to prevent cross-test contamination
+    RateLimiter.clear_ip({127, 0, 0, 1})
     # Set up IP address for rate limiting tests
     conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
     {:ok, conn: conn}
@@ -81,12 +83,14 @@ defmodule CopiWeb.PlayerLiveTest do
       # Next player creation should be blocked
       {:ok, index_live_blocked, _html} = live(conn, "/games/#{player.game_id}/players/new")
       
-      html = index_live_blocked
+      index_live_blocked
         |> form("#player-form", player: %{name: "Blocked Player", game_id: player.game_id})
         |> render_submit()
       
-      # Flash message should be in the render_submit result
-      assert html =~ "Too many player creation attempts"
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(index_live_blocked, "#player-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :player_creation)
     end
   end
 

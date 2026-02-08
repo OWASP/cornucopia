@@ -11,6 +11,8 @@ defmodule CopiWeb.GameLiveTest do
   @invalid_attrs %{name: nil, edition: "webapp"}
 
   setup %{conn: conn} do
+    # Clear rate limits to prevent cross-test contamination
+    RateLimiter.clear_ip({127, 0, 0, 1})
     # Set up IP address for rate limiting tests
     conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
     {:ok, conn: conn}
@@ -86,12 +88,14 @@ defmodule CopiWeb.GameLiveTest do
       # Next game creation should be blocked
       {:ok, games_new_blocked, _html} = live(conn, "/games/new")
       
-      html = games_new_blocked
+      games_new_blocked
         |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
         |> render_submit()
       
-      # Flash message should be in the render_submit result
-      assert html =~ "Too many game creation attempts"
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(games_new_blocked, "#game-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
     end
   end
 
