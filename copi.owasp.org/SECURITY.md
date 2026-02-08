@@ -17,7 +17,7 @@ The application uses a GenServer-based rate limiter that tracks requests per IP 
 ## Default Rate Limits
 
 | Action | Limit | Time Window |
-|--------|-------|-------------|
+| --- | --- | --- |
 | Game Creation | 10 requests | per hour per IP |
 | Player Creation | 20 requests | per hour per IP |
 | WebSocket Connections | 50 connections | per 5 minutes per IP |
@@ -39,6 +39,8 @@ RATE_LIMIT_PLAYER_CREATION_WINDOW=3600  # seconds
 RATE_LIMIT_CONNECTION_LIMIT=50
 RATE_LIMIT_CONNECTION_WINDOW=300  # seconds
 ```
+
+**Note**: Environment variables must be positive integers. Invalid values will log a warning and fall back to defaults.
 
 ## Implementation Details
 
@@ -71,7 +73,10 @@ When rate limits are exceeded:
 - Supports both IPv4 and IPv6
 - Accepts IP addresses as tuples or strings
 - Normalizes IP formats for consistent tracking
-- Defines explicit handling when IP is unavailable (for example, UserSocket falls back to `{0,0,0,0}` for WebSocket rate limiting, while other flows may deny the action if no IP can be determined)
+- **Proxy Support**: Automatically reads `X-Forwarded-For` header to get real client IP when behind reverse proxies
+  - Uses leftmost IP from X-Forwarded-For (original client IP)
+  - Falls back to `remote_ip` if header is missing or invalid
+- Falls back gracefully when IP is unavailable
 
 ## Testing
 

@@ -55,9 +55,47 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_conn(conn) == {0, 0, 0, 0, 0, 0, 0, 1}
     end
 
-    test "raises error when remote_ip is nil" do
+    test "extracts IP from X-Forwarded-For header when behind proxy" do
       conn = %Plug.Conn{
-        remote_ip: nil
+        remote_ip: {127, 0, 0, 1},
+        req_headers: [{"x-forwarded-for", "203.0.113.5, 198.51.100.17"}]
+      }
+
+      # Should use the leftmost (original client) IP
+      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+    end
+
+    test "handles single IP in X-Forwarded-For header" do
+      conn = %Plug.Conn{
+        remote_ip: {127, 0, 0, 1},
+        req_headers: [{"x-forwarded-for", "203.0.113.5"}]
+      }
+
+      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+    end
+
+    test "falls back to remote_ip when X-Forwarded-For is invalid" do
+      conn = %Plug.Conn{
+        remote_ip: {192, 168, 1, 1},
+        req_headers: [{"x-forwarded-for", "invalid-ip"}]
+      }
+
+      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
+    end
+
+    test "falls back to remote_ip when no X-Forwarded-For header" do
+      conn = %Plug.Conn{
+        remote_ip: {192, 168, 1, 1},
+        req_headers: []
+      }
+
+      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
+    end
+
+    test "raises error when remote_ip is nil and no X-Forwarded-For" do
+      conn = %Plug.Conn{
+        remote_ip: nil,
+        req_headers: []
       }
 
       assert_raise RuntimeError, "Unable to determine IP address from connection", fn ->

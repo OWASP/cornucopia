@@ -98,6 +98,7 @@ defmodule Copi.RateLimiter do
     valid_timestamps = Enum.filter(timestamps, fn ts -> now - ts < window_ms end)
 
     if length(valid_timestamps) >= limit do
+      Logger.warning("Rate limit exceeded for IP #{inspect(ip)} on action #{action} (limit: #{limit}/#{window}s)")
       {:reply, {:error, :rate_limit_exceeded}, state}
     else
       new_timestamps = [now | valid_timestamps]
@@ -165,8 +166,19 @@ defmodule Copi.RateLimiter do
     env_var = key |> Atom.to_string() |> String.upcase()
 
     case System.get_env("RATE_LIMIT_#{env_var}") do
-      nil -> default
-      value -> String.to_integer(value)
+      nil ->
+        default
+      value ->
+        case Integer.parse(value) do
+          {parsed_value, ""} when parsed_value > 0 ->
+            parsed_value
+          _ ->
+            Logger.warning(
+              "Invalid environment variable RATE_LIMIT_#{env_var}=#{value}, " <>
+              "expected positive integer, using default: #{default}"
+            )
+            default
+        end
     end
   end
 end

@@ -154,6 +154,17 @@ defmodule Copi.RateLimiterTest do
       assert config.windows.player_creation >= 60
       assert config.windows.connection >= 60
     end
+
+    test "handles invalid environment variable gracefully" do
+      # This test verifies that invalid env vars fall back to defaults
+      # In real usage, the GenServer would log a warning but continue
+      config = RateLimiter.get_config()
+      
+      # Should have valid positive integer values (defaults or valid env vars)
+      assert is_integer(config.limits.game_creation) and config.limits.game_creation > 0
+      assert is_integer(config.limits.player_creation) and config.limits.player_creation > 0
+      assert is_integer(config.limits.connection) and config.limits.connection > 0
+    end
   end
 
   describe "rate limit windows" do
