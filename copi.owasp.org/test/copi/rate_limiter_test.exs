@@ -222,4 +222,45 @@ defmodule Copi.RateLimiterTest do
       assert Enum.all?(results, fn result -> match?({:ok, _}, result) end)
     end
   end
+
+  describe "IP normalization" do
+    test "normalizes IPv4 string to tuple", %{ip: _ip} do
+      # Test with string IP
+      assert {:ok, _} = RateLimiter.check_rate("192.168.1.1", :game_creation)
+      assert {:ok, _} = RateLimiter.check_rate("10.0.0.1", :player_creation)
+    end
+
+    test "handles IPv6 addresses", %{ip: _ip} do
+      ipv6 = {0, 0, 0, 0, 0, 0, 0, 1}
+      RateLimiter.clear_ip(ipv6)
+      assert {:ok, _} = RateLimiter.check_rate(ipv6, :connection)
+    end
+
+    test "handles malformed IP strings gracefully", %{ip: _ip} do
+      # Should still work even with weird input
+      assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
+    end
+  end
+
+  describe "cleanup process" do
+    test "rate limiter process is alive" do
+      assert Process.whereis(Copi.RateLimiter) != nil
+    end
+
+    test "can make requests after clearing IP", %{ip: ip} do
+      config = RateLimiter.get_config()
+      limit = config.limits.connection
+
+      # Exhaust limit
+      for _ <- 1..limit do
+        RateLimiter.check_rate(ip, :connection)
+      end
+
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :connection)
+
+      # Clear and try again
+      RateLimiter.clear_ip(ip)
+      assert {:ok, _} = RateLimiter.check_rate(ip, :connection)
+    end
+  end
 end

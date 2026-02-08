@@ -11,6 +11,12 @@ defmodule CopiWeb.PlayerLiveTest do
   # @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
+  setup %{conn: conn} do
+    # Set up IP address for rate limiting tests
+    conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
+    {:ok, conn: conn}
+  end
+
   defp fixture(:player) do
     {:ok, game} = Cornucopia.create_game(@game_attrs)
     {:ok, player} = Cornucopia.create_player(%{name: "some name", game_id: game.id})

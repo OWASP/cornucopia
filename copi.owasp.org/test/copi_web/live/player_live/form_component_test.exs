@@ -4,11 +4,13 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
   alias Copi.Cornucopia
   alias Copi.RateLimiter
 
-  setup do
+  setup %{conn: conn} do
     {:ok, game} = Cornucopia.create_game(%{name: "Test Game", edition: "webapp"})
     test_ip = {127, 0, 0, 1}
     RateLimiter.clear_ip(test_ip)
-    {:ok, game: game, ip: test_ip}
+    # Set up IP address for rate limiting tests
+    conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: test_ip}})
+    {:ok, conn: conn, game: game, ip: test_ip}
   end
 
   describe "rate limiting in player creation" do

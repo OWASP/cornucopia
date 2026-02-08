@@ -3,10 +3,12 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
   import Phoenix.LiveViewTest
   alias Copi.RateLimiter
 
-  setup do
+  setup %{conn: conn} do
     test_ip = {127, 0, 0, 1}
     RateLimiter.clear_ip(test_ip)
-    {:ok, ip: test_ip}
+    # Set up IP address for rate limiting tests
+    conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: test_ip}})
+    {:ok, conn: conn, ip: test_ip}
   end
 
   describe "rate limiting in game creation" do

@@ -127,5 +127,53 @@ defmodule Copi.IPHelperTest do
       result = IPHelper.ip_to_string(:invalid)
       assert is_binary(result)
     end
+
+    test "converts various IPv4 addresses" do
+      assert IPHelper.ip_to_string({10, 0, 0, 1}) == "10.0.0.1"
+      assert IPHelper.ip_to_string({172, 16, 0, 1}) == "172.16.0.1"
+      assert IPHelper.ip_to_string({203, 0, 113, 5}) == "203.0.113.5"
+    end
+  end
+
+  describe "X-Forwarded-For header handling" do
+    test "extracts IP from X-Forwarded-For with multiple proxies" do
+      conn = %Plug.Conn{
+        remote_ip: {127, 0, 0, 1},
+        req_headers: [{"x-forwarded-for", "203.0.113.5, 198.51.100.17, 192.0.2.1"}]
+      }
+
+      # Should use the leftmost (original client) IP
+      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+    end
+
+    test "trims whitespace in X-Forwarded-For" do
+      conn = %Plug.Conn{
+        remote_ip: {127, 0, 0, 1},
+        req_headers: [{"x-forwarded-for", "  203.0.113.5  , 198.51.100.17"}]
+      }
+
+      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+    end
+
+    test "handles IPv6 in X-Forwarded-For" do
+      conn = %Plug.Conn{
+        remote_ip: {127, 0, 0, 1},
+        req_headers: [{"x-forwarded-for", "2001:db8::1"}]
+      }
+
+      result = IPHelper.get_ip_from_conn(conn)
+      assert is_tuple(result)
+      assert tuple_size(result) == 8
+    end
+
+    test "handles empty X-Forwarded-For header" do
+      conn = %Plug.Conn{
+        remote_ip: {192, 168, 1, 1},
+        req_headers: [{"x-forwarded-for", ""}]
+      }
+
+      # Should fall back to remote_ip
+      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
+    end
   end
 end
