@@ -18,7 +18,7 @@ defmodule CopiWeb.ErrorJSONTest do
   end
 
   test "renders 422" do
-    assert CopiWeb.ErrorJSON.render("422.json", %{}) == %{errors: %{detail: "Unprocessable Entity"}}
+    assert CopiWeb.ErrorJSON.render("422.json", %{}) == %{errors: %{detail: "Unprocessable Content"}}
   end
 
   test "renders any other status" do

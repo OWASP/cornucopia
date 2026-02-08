@@ -17,7 +17,7 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
     test "allows player creation under limit", %{conn: conn, game: game} do
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
       
-      html = view
+      _html = view
         |> form("#player-form", player: %{name: "Test Player", game_id: game.id})
         |> render_submit()
 
