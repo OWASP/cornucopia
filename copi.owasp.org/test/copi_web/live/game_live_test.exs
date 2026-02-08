@@ -1,9 +1,10 @@
 defmodule CopiWeb.GameLiveTest do
-  use CopiWeb.ConnCase
+  use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
 
   alias Copi.Cornucopia
+  alias Copi.RateLimiter
 
   @create_attrs %{ name: "some name", edition: "webapp"}
   # @update_attrs %{ name: "some updated name", edition: "webapp"}
@@ -50,6 +51,40 @@ defmodule CopiWeb.GameLiveTest do
 
       assert html =~ "Game created successfully"
       assert html =~ "some name"
+    end
+
+    test "blocks game creation when rate limit exceeded", %{conn: conn} do
+      # Clear any existing rate limits for the test IP
+      test_ip = {127, 0, 0, 1}
+      RateLimiter.clear_ip(test_ip)
+
+      # Get the rate limit config
+      config = RateLimiter.get_config()
+      limit = config.limits.game_creation
+
+      {:ok, index_live, _html} = live(conn, "/games")
+      {:ok, new_conn} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
+
+      # Create games up to the limit
+      for i <- 1..limit do
+        {:ok, games_new, _html} = live(new_conn, "/games/new")
+        
+        {:ok, _, _html} =
+          games_new
+          |> form("#game-form", game: %{name: "Game #{i}", edition: "webapp"})
+          |> render_submit()
+          |> follow_redirect(conn)
+      end
+
+      # Next game creation should be blocked
+      {:ok, games_new_blocked, _html} = live(new_conn, "/games/new")
+      
+      html =
+        games_new_blocked
+        |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
+        |> render_submit()
+
+      assert html =~ "Too many game creation attempts"
     end
   end
 

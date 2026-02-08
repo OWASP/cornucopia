@@ -1,9 +1,10 @@
 defmodule CopiWeb.PlayerLiveTest do
-  use CopiWeb.ConnCase
+  use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
 
   alias Copi.Cornucopia
+  alias Copi.RateLimiter
 
   @game_attrs %{name: "some name"}
   # @create_attrs %{name: "some name", game_id: ""}
@@ -49,6 +50,37 @@ defmodule CopiWeb.PlayerLiveTest do
 
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
+    end
+
+    test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
+      # Clear any existing rate limits for the test IP
+      test_ip = {127, 0, 0, 1}
+      RateLimiter.clear_ip(test_ip)
+
+      # Get the rate limit config
+      config = RateLimiter.get_config()
+      limit = config.limits.player_creation
+
+      # Create players up to the limit
+      for i <- 1..limit do
+        {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
+        
+        {:ok, _, _html} =
+          index_live
+          |> form("#player-form", player: %{name: "Player #{i}", game_id: player.game_id})
+          |> render_submit()
+          |> follow_redirect(conn)
+      end
+
+      # Next player creation should be blocked
+      {:ok, index_live_blocked, _html} = live(conn, "/games/#{player.game_id}/players/new")
+      
+      html =
+        index_live_blocked
+        |> form("#player-form", player: %{name: "Blocked Player", game_id: player.game_id})
+        |> render_submit()
+
+      assert html =~ "Too many player creation attempts"
     end
   end
 
