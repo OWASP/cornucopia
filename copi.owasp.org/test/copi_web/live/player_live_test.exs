@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLiveTest do
   use CopiWeb.ConnCase
 
   import Phoenix.LiveViewTest
+  import Ecto.Query
 
   alias Copi.Cornucopia
 
