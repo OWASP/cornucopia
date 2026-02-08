@@ -123,7 +123,7 @@ export class FileSystemHelper {
     // Resolve the actual filesystem path for directory operations (case-insensitive)
     const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(baseDataPath, defaultLangRoute);
     
-    if (fs.existsSync(resolvedPath)) {
+    if (fs.existsSync(resolvedPath) && fs.lstatSync(resolvedPath).isDirectory()) {
       FileSystemHelper.getDirectories(resolvedPath).forEach(
         (folder) => categories.push(folder));
     }

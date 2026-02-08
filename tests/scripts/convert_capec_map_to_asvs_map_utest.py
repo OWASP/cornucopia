@@ -308,7 +308,7 @@ class TestParseArguments(unittest.TestCase):
         """Test parsing with no arguments (uses defaults)"""
         args = capec_map.parse_arguments([])
 
-        self.assertEqual(args.input_path, capec_map.ConvertVars.DEFAULT_INPUT_PATH)
+        self.assertIsNone(args.input_path)
         self.assertEqual(args.output_path, capec_map.ConvertVars.DEFAULT_OUTPUT_PATH)
         self.assertEqual(args.version, "latest")
         self.assertEqual(args.edition, "edition")
