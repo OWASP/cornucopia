@@ -185,11 +185,12 @@ defmodule Copi.CornucopiaLogicTest do
     game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: :card])
     
     all_cards = Cornucopia.all_dealt_cards(game)
+    all_card_ids = Enum.map(all_cards, & &1.id)
     
     assert Enum.count(all_cards) == 3
-    assert d1 in all_cards
-    assert d2 in all_cards
-    assert d3 in all_cards
+    assert d1.id in all_card_ids
+    assert d2.id in all_card_ids
+    assert d3.id in all_card_ids
   end
 
   test "jokers trump all other cards", %{game: game, p1: p1, p2: p2} do

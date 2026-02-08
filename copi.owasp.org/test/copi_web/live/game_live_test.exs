@@ -68,12 +68,13 @@ defmodule CopiWeb.GameLiveTest do
       config = RateLimiter.get_config()
       limit = config.limits.game_creation
 
+      # Navigate to new game page once and reuse the LiveView
       {:ok, index_live, _html} = live(conn, "/games")
-      {:ok, new_conn} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
-
+      {:ok, _} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
+      
       # Create games up to the limit
       for i <- 1..limit do
-        {:ok, games_new, _html} = live(new_conn, "/games/new")
+        {:ok, games_new, _html} = live(conn, "/games/new")
         
         {:ok, _, _html} =
           games_new
@@ -83,13 +84,14 @@ defmodule CopiWeb.GameLiveTest do
       end
 
       # Next game creation should be blocked
-      {:ok, games_new_blocked, _html} = live(new_conn, "/games/new")
+      {:ok, games_new_blocked, _html} = live(conn, "/games/new")
       
       html =
         games_new_blocked
         |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
         |> render_submit()
 
+      # The flash error should be present in the rendered HTML
       assert html =~ "Too many game creation attempts"
     end
   end
