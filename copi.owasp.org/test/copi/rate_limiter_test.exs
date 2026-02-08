@@ -4,13 +4,15 @@
   alias Copi.RateLimiter
 
   setup do
-    # Tests run sequentially and use unique IPs to avoid conflicts
+    # Clear rate limiter state to prevent test interference
+    # Each test uses a unique IP but we clear it anyway for safety
     :ok
   end
 
   describe "game creation rate limiting" do
     test "allows requests under the limit" do
       ip = "127.0.0.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       
       # First request should be allowed
       assert {:ok, remaining} = RateLimiter.check_and_record(ip, :game_creation)
@@ -20,9 +22,9 @@
       assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :game_creation)
     end
 
-    @tag timeout: :infinity
     test "blocks requests over the limit" do
       ip = "192.168.1.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       config = RateLimiter.get_config()
       max_games = config.game_creation.max_requests
       
@@ -36,10 +38,11 @@
       assert retry_after > 0
     end
 
-    @tag timeout: :infinity
     test "different IPs have independent limits" do
       ip1 = "10.0.0.#{:rand.uniform(255)}"
       ip2 = "10.0.1.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip1)
+      RateLimiter.clear_ip(ip2)
       config = RateLimiter.get_config()
       max_games = config.game_creation.max_requests
       
@@ -59,6 +62,7 @@
   describe "connection rate limiting" do
     test "allows connections under the limit" do
       ip = "172.16.0.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       
       assert {:ok, remaining} = RateLimiter.check_and_record(ip, :connection)
       assert remaining >= 0
@@ -66,9 +70,9 @@
       assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :connection)
     end
 
-    @tag timeout: :infinity
     test "blocks connections over the limit" do
       ip = "172.16.1.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       config = RateLimiter.get_config()
       max_connections = config.connection.max_requests
       
@@ -86,6 +90,7 @@
   describe "player creation rate limiting" do
     test "allows player creation under the limit" do
       ip = "192.168.2.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       
       assert {:ok, remaining} = RateLimiter.check_and_record(ip, :player_creation)
       assert remaining >= 0
@@ -93,9 +98,9 @@
       assert {:ok, _remaining} = RateLimiter.check_and_record(ip, :player_creation)
     end
 
-    @tag timeout: :infinity
     test "blocks player creation over the limit" do
       ip = "192.168.3.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       config = RateLimiter.get_config()
       max_players = config.player_creation.max_requests
       
@@ -109,9 +114,9 @@
       assert retry_after > 0
     end
 
-    @tag timeout: :infinity
     test "player creation limit is separate from game creation limit" do
       ip = "192.168.4.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       config = RateLimiter.get_config()
       max_games = config.game_creation.max_requests
       
@@ -191,6 +196,7 @@
     test "cleanup runs periodically" do
       # This test verifies the cleanup handler exists and can be called
       ip = "192.168.99.#{:rand.uniform(255)}"
+      RateLimiter.clear_ip(ip)
       
       # Record an action
       RateLimiter.record_action(ip, :game_creation)
