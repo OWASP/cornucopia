@@ -18,5 +18,11 @@ config :copi, CopiWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+# Configure rate limiter with very high limits for testing to prevent blocking test execution
+config :copi, Copi.RateLimiter,
+  max_games_per_ip: 100_000,
+  max_players_per_ip: 100_000,
+  max_connections_per_ip: 100_000
+
 # Print only warnings and errors during test
 config :logger, level: :warning
