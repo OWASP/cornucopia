@@ -20,5 +20,5 @@ defmodule CopiWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :copi
+  use Gettext.Backend, otp_app: :copi
 end
