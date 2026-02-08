@@ -40,6 +40,27 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   @impl true
+  def handle_info(:proceed_to_next_round, socket) do
+    game = socket.assigns.game
+    
+    # Clear all continue votes for this game before proceeding to next round
+    Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game.id)
+    
+    # Now proceed to next round
+    Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+
+    if last_round?(game) do
+      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+    end
+
+    {:ok, updated_game} = Game.find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
+
+  @impl true
   def handle_event("next_round", _, socket) do
     game = socket.assigns.game
 
@@ -121,27 +142,6 @@ defmodule CopiWeb.PlayerLive.Show do
         {:error, _changeset} ->
           IO.puts("voting failed")
       end
-    end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
-  end
-
-  @impl true
-  def handle_info(:proceed_to_next_round, socket) do
-    game = socket.assigns.game
-    
-    # Clear all continue votes for this game before proceeding to next round
-    Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game.id)
-    
-    # Now proceed to next round
-    Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
-
-    if last_round?(game) do
-      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
     end
 
     {:ok, updated_game} = Game.find(game.id)
