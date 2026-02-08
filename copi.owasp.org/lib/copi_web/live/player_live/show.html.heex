@@ -11,6 +11,7 @@
 
   <% first_card_played = Copi.Cornucopia.ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>
   <% card_played = card_played_in_round(@player.dealt_cards, @game.rounds_played + 1) %>
+
   <% highest_scoring_card = Copi.Cornucopia.highest_scoring_card_in_round(@game, @game.rounds_played + 1) %>
 
   <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
@@ -86,7 +87,7 @@
                   <%= if player_card == nil do %>
                     <p>Drop a card here to play it!</p>
                   <% else %>
-                    <%= if player_card != nil && Enum.count(player_card.votes) > (Enum.count(@game.players) - 1) / 2 do %>
+                    <%= if card_played != nil && Enum.count(card_played.votes) > (Enum.count(@game.players) - 1) / 2 do %>
                     <p class="font-bold">Your Card Scored
                       <%= if highest_scoring_card && highest_scoring_card.id == player_card.id do %>
                         +2!

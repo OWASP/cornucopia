@@ -6,8 +6,8 @@ defmodule CopiWeb.PlayerLiveTest do
   alias Copi.Cornucopia
 
   @game_attrs %{name: "some name"}
-  @create_attrs %{name: "some name", game_id: ""}
-  @update_attrs %{name: "some updated name"}
+  # @create_attrs %{name: "some name", game_id: ""}
+  # @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
   defp fixture(:player) do
@@ -48,6 +48,42 @@ defmodule CopiWeb.PlayerLiveTest do
         |> follow_redirect(conn)
 
       assert html =~ "Hi some updated name, waiting for the game to start..."
+      assert html =~ "Hi some updated name, waiting for the game to start..."
+    end
+  end
+
+  describe "Show" do
+    setup [:create_player]
+
+    test "allows voting on other player's card", %{conn: conn, player: player} do
+      # Setup another player and play a card
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      
+      # Start game (hacky: just set started_at)
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      # Deal/play card for Other
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp", 
+        version: "2.2", external_id: "EXT", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+      
+      {:ok, show_live, html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      
+      assert html =~ "Other"
+      # Assuming 1 round played (default rounds_played=0, current=1)
+      
+      # Find vote button for the dealt card
+      # The template uses phx-value-dealt_card_id
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      
+      # Verify vote created
+      assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
   end
 end

@@ -70,3 +70,13 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Enable LiveView debug annotations
+config :phoenix_live_view,
+  debug_heex_annotations: true,
+  debug_attributes: true,
+  enable_expensive_runtime_checks: true
+
+# Disable colocated JS symlink warning on Windows
+config :phoenix_live_view, :colocated_js,
+  disable_symlink_warning: true
