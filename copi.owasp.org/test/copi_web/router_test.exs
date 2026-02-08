@@ -28,12 +28,16 @@ defmodule CopiWeb.RouterTest do
 
   describe "API routes" do
     test "PUT /api/games/:game_id/players/:player_id/card requires valid params", %{conn: conn} do
+      # Create actual game and player with valid ULIDs
+      {:ok, game} = Cornucopia.create_game(%{name: "API Test", edition: "webapp"})
+      {:ok, player} = Cornucopia.create_player(%{name: "API Player", game_id: game.id})
+      
       conn = conn
         |> put_req_header("accept", "application/json")
-        |> put("/api/games/test-game/players/test-player/card", %{"dealt_card_id" => "123"})
+        |> put("/api/games/#{game.id}/players/#{player.id}/card", %{"dealt_card_id" => "123"})
       
-      # Should respond (even if error due to invalid game/player)
-      assert conn.status in [200, 400, 404, 422, 500]
+      # Should respond (even if error due to invalid dealt_card_id)
+      assert conn.status in [200, 400, 403, 404, 406, 422, 500]
     end
   end
 

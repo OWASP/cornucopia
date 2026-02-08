@@ -108,23 +108,27 @@ defmodule Copi.CornucopiaLogicTest do
     {:ok, c2} = create_card("S", "2")
     
     {:ok, d1} = Repo.insert(%DealtCard{player_id: p1.id, card_id: c1.id})
-    d2 = play_card(p1, c2, 1)
+    _d2 = play_card(p1, c2, 1)
     
-    cards = [d1, d2]
+    # Reload both cards from database to get updated played_in_round value
+    d1_reloaded = Repo.get!(DealtCard, d1.id)
+    cards = Repo.all(from d in DealtCard, where: d.player_id == ^p1.id)
+    
     unplayed = Cornucopia.unplayed_cards(cards)
     
     assert Enum.count(unplayed) == 1
-    assert List.first(unplayed).id == d1.id
+    assert List.first(unplayed).id == d1_reloaded.id
   end
 
   test "played_cards filters correctly", %{game: _game, p1: p1} do
     {:ok, c1} = create_card("S", "1")
     {:ok, c2} = create_card("S", "2")
     
-    {:ok, d1} = Repo.insert(%DealtCard{player_id: p1.id, card_id: c1.id})
+    {:ok, _d1} = Repo.insert(%DealtCard{player_id: p1.id, card_id: c1.id})
     d2 = play_card(p1, c2, 1)
     
-    cards = [d1, d2]
+    # Reload all cards from database to get updated played_in_round values
+    cards = Repo.all(from d in DealtCard, where: d.player_id == ^p1.id)
     played = Cornucopia.played_cards(cards)
     
     assert Enum.count(played) == 1

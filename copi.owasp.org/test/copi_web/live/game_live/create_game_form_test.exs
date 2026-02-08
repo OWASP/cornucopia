@@ -15,11 +15,12 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
     test "allows game creation under limit", %{conn: conn} do
       {:ok, view, _html} = live(conn, "/games/new")
       
-      html = view
+      result = view
         |> form("#game-form", game: %{name: "Test Game", edition: "webapp"})
         |> render_submit()
 
-      assert html =~ "Game created successfully"
+      # Should redirect on success
+      assert {:ok, _conn} = follow_redirect(result, conn)
     end
 
     test "shows error message when limit exceeded", %{conn: conn, ip: _ip} do
