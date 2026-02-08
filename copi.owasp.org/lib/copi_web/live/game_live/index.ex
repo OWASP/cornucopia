@@ -14,7 +14,7 @@ defmodule CopiWeb.GameLive.Index do
 
       case Copi.RateLimiter.check_and_record(ip_address, :connection) do
         {:ok, _remaining} ->
-          {:ok, assign(socket, games: list_games(), ip_address: ip_address)}
+          {:ok, assign(socket, games: nil, ip_address: ip_address)}
 
         {:error, :rate_limited, retry_after} ->
           {:ok,
