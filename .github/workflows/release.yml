@@ -130,15 +130,6 @@
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.odt
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.odt
                 output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.odt
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_en.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_es.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.pdf
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_it.pdf
                 resources/case/*\2.2_case_*
                 resources/case/*\1.1_case_*
                 source/*1\.1-*.yaml
