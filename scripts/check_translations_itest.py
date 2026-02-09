@@ -10,7 +10,7 @@ import re
 import sys
 from pathlib import Path
 
-# Add scripts directory to path  
+# Add scripts directory to path
 scripts_path = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_path))
 
