@@ -7,13 +7,14 @@ Tests the TranslationChecker class with mock data.
 import unittest
 import yaml
 import re
-from pathlib import Path
 import sys
+from pathlib import Path
 
 # Add scripts directory to path
 scripts_path = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_path))
 
+# noqa: E402 - Import after path manipulation
 from check_translations import TranslationChecker
 
 

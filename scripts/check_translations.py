@@ -66,6 +66,40 @@ class TranslationChecker:
 
         return file_groups
 
+    def _separate_english_and_translations(self, files: List[Path]) -> tuple:
+        """Separate English reference file from translation files."""
+        english_file = None
+        translation_files = []
+
+        for f in files:
+            lang = f.stem.split("-")[-1]
+            if lang == "en":
+                english_file = f
+            else:
+                translation_files.append(f)
+
+        return english_file, translation_files
+
+    def _check_translation_tags(self, english_tags: Dict[str, str], trans_tags: Dict[str, str]) -> Dict[str, List[str]]:
+        """Check translation tags against English reference."""
+        missing = []
+        untranslated = []
+        empty = []
+
+        for tag_id, eng_text in english_tags.items():
+            if tag_id not in trans_tags:
+                missing.append(tag_id)
+            elif not trans_tags[tag_id]:
+                empty.append(tag_id)
+            elif trans_tags[tag_id] == eng_text:
+                untranslated.append(tag_id)
+
+        return {
+            "missing": sorted(missing),
+            "untranslated": sorted(untranslated),
+            "empty": sorted(empty),
+        }
+
     def check_translations(self) -> Dict[str, Dict[str, Dict[str, List[str]]]]:
         """
         Check all translation files against English versions.
@@ -85,53 +119,24 @@ class TranslationChecker:
         file_groups = self.get_file_groups()
 
         for base_name, files in file_groups.items():
-            # Find English reference file
-            english_file = None
-            translation_files = []
-
-            for f in files:
-                lang = f.stem.split("-")[-1]
-                if lang == "en":
-                    english_file = f
-                else:
-                    translation_files.append(f)
+            english_file, translation_files = self._separate_english_and_translations(files)
 
             if not english_file:
                 print(f"Warning: No English file found for {base_name}", file=sys.stderr)
                 continue
 
-            # Extract English tags
             english_tags = self.extract_tags(english_file)
-
             if not english_tags:
                 continue
 
-            # Check each translation
             for trans_file in translation_files:
                 lang = trans_file.stem.split("-")[-1]
                 trans_tags = self.extract_tags(trans_file)
+                issues = self._check_translation_tags(english_tags, trans_tags)
 
-                # Find missing tags
-                missing = []
-                untranslated = []
-                empty = []
-
-                for tag_id, eng_text in english_tags.items():
-                    if tag_id not in trans_tags:
-                        missing.append(tag_id)
-                    elif not trans_tags[tag_id]:
-                        empty.append(tag_id)
-                    elif trans_tags[tag_id] == eng_text:
-                        untranslated.append(tag_id)
-
-                # Store results
-                if missing or untranslated or empty:
-                    self.results[base_name][lang] = {
-                        "missing": sorted(missing),
-                        "untranslated": sorted(untranslated),
-                        "empty": sorted(empty),
-                        "file": str(trans_file.name),
-                    }
+                if any(issues.values()):
+                    issues["file"] = str(trans_file.name)
+                    self.results[base_name][lang] = issues
 
         return dict(self.results)
 
