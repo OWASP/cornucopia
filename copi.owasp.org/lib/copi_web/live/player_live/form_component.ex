@@ -3,6 +3,8 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   use Phoenix.Component
 
   alias Copi.Cornucopia
+  alias Copi.RateLimiter
+  alias Copi.IPHelper
 
   @impl true
 
@@ -74,19 +76,29 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :new, player_params) do
-    case Cornucopia.create_player(player_params) do
-      {:ok, player} ->
+    ip = IPHelper.get_ip_from_socket(socket)
 
-        {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+    case RateLimiter.check_rate(ip, :player_creation) do
+      {:ok, _remaining} ->
+        case Cornucopia.create_player(player_params) do
+          {:ok, player} ->
+            {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
+            {:noreply,
+             socket
+             |> assign(:game, updated_game)
+             |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:noreply, assign_form(socket, changeset)}
+        end
+
+      {:error, :rate_limit_exceeded} ->
         {:noreply,
          socket
-         |> assign(:game, updated_game)
-         |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+         |> put_flash(:error, "Too many player creation attempts. Please try again later.")
+         |> assign_form(Cornucopia.change_player(socket.assigns.player))}
     end
   end
 

@@ -1,5 +1,8 @@
 defmodule CopiWeb.UserSocket do
   use Phoenix.Socket
+  require Logger
+
+  alias Copi.RateLimiter
 
   ## Channels
   # channel "room:*", CopiWeb.RoomChannel
@@ -16,8 +19,18 @@ defmodule CopiWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(_params, socket, _connect_info) do
-    {:ok, socket}
+  def connect(_params, socket, connect_info) do
+    # Extract IP address for rate limiting
+    ip = get_ip_from_connect_info(connect_info)
+
+    case RateLimiter.check_rate(ip, :connection) do
+      {:ok, _remaining} ->
+        {:ok, socket}
+
+      {:error, :rate_limit_exceeded} ->
+        Logger.warning("WebSocket connection rate limit exceeded for IP: #{inspect(ip)}")
+        :error
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
@@ -32,4 +45,12 @@ defmodule CopiWeb.UserSocket do
   # Returning `nil` makes this socket anonymous.
   @impl true
   def id(_socket), do: nil
+
+  # Private helper to extract IP from connect_info
+  defp get_ip_from_connect_info(connect_info) do
+    case connect_info[:peer_data] do
+      %{address: ip} when is_tuple(ip) -> ip
+      _ -> {0, 0, 0, 0}  # Fallback IP if not available
+    end
+  end
 end

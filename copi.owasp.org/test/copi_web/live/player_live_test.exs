@@ -1,14 +1,23 @@
 defmodule CopiWeb.PlayerLiveTest do
-  use CopiWeb.ConnCase
+  use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
 
   alias Copi.Cornucopia
+  alias Copi.RateLimiter
 
   @game_attrs %{name: "some name"}
   # @create_attrs %{name: "some name", game_id: ""}
   # @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
+
+  setup %{conn: conn} do
+    # Clear rate limits to prevent cross-test contamination
+    RateLimiter.clear_ip({127, 0, 0, 1})
+    # Set up IP address for rate limiting tests
+    conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
+    {:ok, conn: conn}
+  end
 
   defp fixture(:player) do
     {:ok, game} = Cornucopia.create_game(@game_attrs)
@@ -50,6 +59,39 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
     end
+
+    test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
+      # Clear any existing rate limits for the test IP
+      test_ip = {127, 0, 0, 1}
+      RateLimiter.clear_ip(test_ip)
+
+      # Get the rate limit config
+      config = RateLimiter.get_config()
+      limit = config.limits.player_creation
+
+      # Create players up to the limit
+      for i <- 1..limit do
+        {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
+        
+        {:ok, _, _html} =
+          index_live
+          |> form("#player-form", player: %{name: "Player #{i}", game_id: player.game_id})
+          |> render_submit()
+          |> follow_redirect(conn)
+      end
+
+      # Next player creation should be blocked
+      {:ok, index_live_blocked, _html} = live(conn, "/games/#{player.game_id}/players/new")
+      
+      index_live_blocked
+        |> form("#player-form", player: %{name: "Blocked Player", game_id: player.game_id})
+        |> render_submit()
+      
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(index_live_blocked, "#player-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :player_creation)
+    end
   end
 
   describe "Show" do
@@ -84,6 +126,26 @@ defmodule CopiWeb.PlayerLiveTest do
       
       # Verify vote created
       assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+
+    test "displays player information", %{conn: conn, player: player} do
+      {:ok, _show_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      
+      assert html =~ player.name
+      assert html =~ "Cornucopia Web Session"
+    end
+
+    test "handles game updates via broadcast", %{conn: conn, player: player} do
+      {:ok, show_live, _html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      
+      # Get updated game
+      {:ok, updated_game} = Cornucopia.Game.find(player.game_id)
+      
+      # Broadcast game update
+      send(show_live.pid, {:game_updated, updated_game})
+      
+      # Should update without crashing
+      :ok
     end
   end
 end
