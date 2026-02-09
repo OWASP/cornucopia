@@ -14,8 +14,7 @@ from pathlib import Path
 scripts_path = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_path))
 
-# noqa: E402 - Import after path manipulation
-from check_translations import TranslationChecker
+from check_translations import TranslationChecker  # noqa: E402
 
 
 class TestTranslationTagsIntegration(unittest.TestCase):
