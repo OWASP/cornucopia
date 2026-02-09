@@ -11,7 +11,7 @@ It detects:
 import sys
 import yaml
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple, Any
 from collections import defaultdict
 
 
@@ -20,7 +20,7 @@ class TranslationChecker:
 
     def __init__(self, source_dir: Path):
         self.source_dir = source_dir
-        self.results = defaultdict(lambda: defaultdict(dict))
+        self.results: Dict[str, Dict[str, Any]] = defaultdict(lambda: defaultdict(dict))
 
     def extract_tags(self, yaml_file: Path) -> Dict[str, str]:
         """Extract T0xxx tags and their text from a YAML file."""
@@ -66,7 +66,7 @@ class TranslationChecker:
 
         return file_groups
 
-    def _separate_english_and_translations(self, files: List[Path]) -> tuple:
+    def _separate_english_and_translations(self, files: List[Path]) -> Tuple[Path | None, List[Path]]:
         """Separate English reference file from translation files."""
         english_file = None
         translation_files = []
@@ -80,7 +80,7 @@ class TranslationChecker:
 
         return english_file, translation_files
 
-    def _check_translation_tags(self, english_tags: Dict[str, str], trans_tags: Dict[str, str]) -> Dict[str, List[str]]:
+    def _check_translation_tags(self, english_tags: Dict[str, str], trans_tags: Dict[str, str]) -> Dict[str, Any]:
         """Check translation tags against English reference."""
         missing = []
         untranslated = []
@@ -100,7 +100,7 @@ class TranslationChecker:
             "empty": sorted(empty),
         }
 
-    def check_translations(self) -> Dict[str, Dict[str, Dict[str, List[str]]]]:
+    def check_translations(self) -> Dict[str, Dict[str, Any]]:
         """
         Check all translation files against English versions.
 
@@ -199,7 +199,7 @@ class TranslationChecker:
         return "\n".join(report_lines)
 
 
-def main():
+def main() -> None:
     """Main entry point for the translation checker."""
     # Determine source directory
     script_dir = Path(__file__).parent

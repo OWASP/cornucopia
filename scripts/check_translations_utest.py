@@ -14,13 +14,13 @@ from pathlib import Path
 scripts_path = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_path))
 
-from check_translations import TranslationChecker  # noqa: E402
+from check_translations import TranslationChecker  # type: ignore[import-not-found]  # noqa: E402
 
 
 class TestTranslationCheckerUnit(unittest.TestCase):
     """Unit tests for TranslationChecker using mock files."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up test fixtures."""
         # Use test_files directory for mock data
         # Navigate from cornucopia/scripts -> cornucopia -> oswap -> tests
@@ -30,7 +30,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         self.test_source_dir = oswap_dir / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.test_source_dir)
 
-    def test_extract_tags_from_english(self):
+    def test_extract_tags_from_english(self) -> None:
         """Test extracting tags from an English YAML file."""
         english_file = self.test_source_dir / "test-cards-1.0-en.yaml"
         tags = self.checker.extract_tags(english_file)
@@ -41,7 +41,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         self.assertIn("T00004", tags)
         self.assertEqual(tags["T00001"], "This is the first test tag")
 
-    def test_detect_missing_tags(self):
+    def test_detect_missing_tags(self) -> None:
         """Test detection of missing tags in translation."""
         results = self.checker.check_translations()
 
@@ -50,7 +50,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         self.assertIn("es", results["test-cards-1.0"])
         self.assertIn("T00004", results["test-cards-1.0"]["es"]["missing"])
 
-    def test_detect_untranslated_tags(self):
+    def test_detect_untranslated_tags(self) -> None:
         """Test detection of untranslated tags (identical to English)."""
         results = self.checker.check_translations()
 
@@ -59,7 +59,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         self.assertIn("es", results["test-cards-1.0"])
         self.assertIn("T00002", results["test-cards-1.0"]["es"]["untranslated"])
 
-    def test_detect_empty_tags(self):
+    def test_detect_empty_tags(self) -> None:
         """Test detection of empty tag values."""
         results = self.checker.check_translations()
 
@@ -68,7 +68,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         self.assertIn("es", results["test-cards-1.0"])
         self.assertIn("T00003", results["test-cards-1.0"]["es"]["empty"])
 
-    def test_generate_report_with_issues(self):
+    def test_generate_report_with_issues(self) -> None:
         """Test markdown report generation when issues exist."""
         self.checker.check_translations()
         report = self.checker.generate_markdown_report()
@@ -79,7 +79,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         self.assertIn("Untranslated Tags", report)
         self.assertIn("Empty Tags", report)
 
-    def test_tag_format_validation(self):
+    def test_tag_format_validation(self) -> None:
         """Test that tags follow the T0xxxx format."""
         tag_pattern = re.compile(r"^T0\d{4,5}$")
 
@@ -89,7 +89,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         for tag_id in tags.keys():
             self.assertIsNotNone(tag_pattern.match(tag_id), f"Tag {tag_id} doesn't match format T0xxxx")
 
-    def test_no_duplicate_tags(self):
+    def test_no_duplicate_tags(self) -> None:
         """Test that files don't have duplicate T0xxx tags."""
         english_file = self.test_source_dir / "test-cards-1.0-en.yaml"
 
@@ -111,7 +111,7 @@ class TestTranslationCheckerUnit(unittest.TestCase):
 
             self.assertEqual(len(duplicates), 0, f"Duplicate tags found: {duplicates}")
 
-    def test_file_groups(self):
+    def test_file_groups(self) -> None:
         """Test that files are correctly grouped by base name."""
         file_groups = self.checker.get_file_groups()
 
