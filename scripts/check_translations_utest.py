@@ -11,7 +11,7 @@ from pathlib import Path
 import sys
 
 # Add scripts directory to path
-scripts_path = Path(__file__).parent.parent.parent / 'scripts'
+scripts_path = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_path))
 
 from check_translations import TranslationChecker
@@ -27,105 +27,99 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         script_dir = Path(__file__).parent
         cornucopia_dir = script_dir.parent
         oswap_dir = cornucopia_dir.parent
-        self.test_source_dir = oswap_dir / 'tests' / 'test_files' / 'source'
+        self.test_source_dir = oswap_dir / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.test_source_dir)
 
     def test_extract_tags_from_english(self):
         """Test extracting tags from an English YAML file."""
-        english_file = self.test_source_dir / 'test-cards-1.0-en.yaml'
+        english_file = self.test_source_dir / "test-cards-1.0-en.yaml"
         tags = self.checker.extract_tags(english_file)
-        
-        self.assertIn('T00001', tags)
-        self.assertIn('T00002', tags)
-        self.assertIn('T00003', tags)
-        self.assertIn('T00004', tags)
-        self.assertEqual(tags['T00001'], 'This is the first test tag')
+
+        self.assertIn("T00001", tags)
+        self.assertIn("T00002", tags)
+        self.assertIn("T00003", tags)
+        self.assertIn("T00004", tags)
+        self.assertEqual(tags["T00001"], "This is the first test tag")
 
     def test_detect_missing_tags(self):
         """Test detection of missing tags in translation."""
         results = self.checker.check_translations()
-        
+
         # Spanish file is missing T00004
-        self.assertIn('test-cards-1.0', results)
-        self.assertIn('es', results['test-cards-1.0'])
-        self.assertIn('T00004', results['test-cards-1.0']['es']['missing'])
+        self.assertIn("test-cards-1.0", results)
+        self.assertIn("es", results["test-cards-1.0"])
+        self.assertIn("T00004", results["test-cards-1.0"]["es"]["missing"])
 
     def test_detect_untranslated_tags(self):
         """Test detection of untranslated tags (identical to English)."""
         results = self.checker.check_translations()
-        
+
         # Spanish file has T00002 identical to English
-        self.assertIn('test-cards-1.0', results)
-        self.assertIn('es', results['test-cards-1.0'])
-        self.assertIn('T00002', results['test-cards-1.0']['es']['untranslated'])
+        self.assertIn("test-cards-1.0", results)
+        self.assertIn("es", results["test-cards-1.0"])
+        self.assertIn("T00002", results["test-cards-1.0"]["es"]["untranslated"])
 
     def test_detect_empty_tags(self):
         """Test detection of empty tag values."""
         results = self.checker.check_translations()
-        
+
         # Spanish file has T00003 empty
-        self.assertIn('test-cards-1.0', results)
-        self.assertIn('es', results['test-cards-1.0'])
-        self.assertIn('T00003', results['test-cards-1.0']['es']['empty'])
+        self.assertIn("test-cards-1.0", results)
+        self.assertIn("es", results["test-cards-1.0"])
+        self.assertIn("T00003", results["test-cards-1.0"]["es"]["empty"])
 
     def test_generate_report_with_issues(self):
         """Test markdown report generation when issues exist."""
         self.checker.check_translations()
         report = self.checker.generate_markdown_report()
-        
-        self.assertIn('Translation Check Report', report)
-        self.assertIn('Spanish', report)
-        self.assertIn('Missing Tags', report)
-        self.assertIn('Untranslated Tags', report)
-        self.assertIn('Empty Tags', report)
+
+        self.assertIn("Translation Check Report", report)
+        self.assertIn("Spanish", report)
+        self.assertIn("Missing Tags", report)
+        self.assertIn("Untranslated Tags", report)
+        self.assertIn("Empty Tags", report)
 
     def test_tag_format_validation(self):
         """Test that tags follow the T0xxxx format."""
-        tag_pattern = re.compile(r'^T0\d{4,5}$')
-        
-        english_file = self.test_source_dir / 'test-cards-1.0-en.yaml'
+        tag_pattern = re.compile(r"^T0\d{4,5}$")
+
+        english_file = self.test_source_dir / "test-cards-1.0-en.yaml"
         tags = self.checker.extract_tags(english_file)
-        
+
         for tag_id in tags.keys():
-            self.assertIsNotNone(
-                tag_pattern.match(tag_id),
-                f"Tag {tag_id} doesn't match format T0xxxx"
-            )
+            self.assertIsNotNone(tag_pattern.match(tag_id), f"Tag {tag_id} doesn't match format T0xxxx")
 
     def test_no_duplicate_tags(self):
         """Test that files don't have duplicate T0xxx tags."""
-        english_file = self.test_source_dir / 'test-cards-1.0-en.yaml'
-        
-        with open(english_file, 'r', encoding='utf-8') as f:
+        english_file = self.test_source_dir / "test-cards-1.0-en.yaml"
+
+        with open(english_file, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
-            
-        if data and 'paragraphs' in data:
+
+        if data and "paragraphs" in data:
             seen_ids = set()
             duplicates = []
-            
-            for paragraph in data['paragraphs']:
-                if 'sentences' in paragraph:
-                    for sentence in paragraph['sentences']:
-                        tag_id = sentence.get('id', '')
-                        if tag_id.startswith('T0'):
+
+            for paragraph in data["paragraphs"]:
+                if "sentences" in paragraph:
+                    for sentence in paragraph["sentences"]:
+                        tag_id = sentence.get("id", "")
+                        if tag_id.startswith("T0"):
                             if tag_id in seen_ids:
                                 duplicates.append(tag_id)
                             seen_ids.add(tag_id)
-                    
-            self.assertEqual(
-                len(duplicates), 0,
-                f"Duplicate tags found: {duplicates}"
-            )
+
+            self.assertEqual(len(duplicates), 0, f"Duplicate tags found: {duplicates}")
 
     def test_file_groups(self):
         """Test that files are correctly grouped by base name."""
         file_groups = self.checker.get_file_groups()
-        
-        self.assertIn('test-cards-1.0', file_groups)
-        files = [f.name for f in file_groups['test-cards-1.0']]
-        self.assertIn('test-cards-1.0-en.yaml', files)
-        self.assertIn('test-cards-1.0-es.yaml', files)
+
+        self.assertIn("test-cards-1.0", file_groups)
+        files = [f.name for f in file_groups["test-cards-1.0"]]
+        self.assertIn("test-cards-1.0-en.yaml", files)
+        self.assertIn("test-cards-1.0-es.yaml", files)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
