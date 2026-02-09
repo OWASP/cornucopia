@@ -1146,18 +1146,9 @@ class TestParseArguments(unittest.TestCase):
 class TestGetFilesFromOfType(unittest.TestCase):
     def test_get_files_from_of_type_source_yaml_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source")
+        path = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "convert_get_files_test")
         ext = "yaml"
-        want_files = list(
-            path + os.sep + f
-            for f in [
-                "edition-capec-version.yaml",
-                "webapp-capec-3.0.yaml",
-                "webapp-cards-3.0-en.yaml",
-                "webapp-cards-3.0-es.yaml",
-                "webapp-mappings-3.0.yaml",
-            ]
-        )
+        want_files = list(path + os.sep + f for f in ["webapp-mappings-3.0.yaml"])
 
         got_files = c.get_files_from_of_type(path, ext)
         got_files.sort()

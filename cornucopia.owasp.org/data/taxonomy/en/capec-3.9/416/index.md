@@ -8,4 +8,4 @@ Source: [CAPEC™ 416](https://capec.mitre.org/data/definitions/416.html)
 
 ## Related ASVS Requirements
 
-ASVS (5.0): [6.4.6](/taxonomy/asvs-5.0/06-authentication/04-authentication-factor-lifecycle-and-recovery#V6.4.6)
+ASVS (5.0): [6.4.6](/taxonomy/asvs-5.0/06-authentication/04-authentication-factor-lifecycle-and-recovery#V6.4.6), [7.6.2](/taxonomy/asvs-5.0/07-session-management/06-federated-re-authentication#V7.6.2)

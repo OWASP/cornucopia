@@ -94,6 +94,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Antonis Manaras
 - Jef Meijvis
 - Mark Miller
+- Muhammad Awais Mohsin
 - Cam Morris
 - Christoph Niehoff
 - Grant Ongers
