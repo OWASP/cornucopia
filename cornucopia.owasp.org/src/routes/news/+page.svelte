@@ -21,6 +21,18 @@
     <meta name="twitter:title" content="{$t('news.head.title')}">
     <meta name="twitter:description" content="{$t('news.head.description')}">
 </svelte:head>
+function getExcerpt(text, maxLength = 160) {
+    if (!text) return '';
+    const cleaned = text
+        .replace(/[#_*`>]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    return cleaned.length > maxLength
+        ? cleaned.slice(0, maxLength) + '…'
+        : cleaned;
+}
+
 <div>
 {#if content != ''}
 <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
@@ -32,14 +44,20 @@
     <div class="list">
         {#each data.posts as post}
             <a class="button" title="View {Text.Format(post.path)}" href="/news/{post.path}">
-                <span class="title">{Text.Format(post.title)}</span>
-                <span class="info">
-                    {Text.FormatDate(post.date)}
-                     • 
-                    {Text.Format(post.author)}
-                    <span>>> {$t('news.a')}</span>
-                </span>
-            </a>
+    <span class="title">{Text.Format(post.title)}</span>
+
+    <p class="excerpt">
+        {getExcerpt(post.content)}
+    </p>
+
+    <span class="info">
+        {Text.FormatDate(post.date)}
+         • 
+        {Text.Format(post.author)}
+        <span>>> {$t('news.a')}</span>
+    </span>
+</a>
+
         {/each}
     </div>
 {/if}
@@ -119,4 +137,11 @@
             margin: 0rem 1rem;
         }
     }
+    .excerpt {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0.75rem 0 0.5rem 0;
+    color: #333;
+}
+
 </style>
