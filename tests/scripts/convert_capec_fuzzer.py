@@ -2,64 +2,60 @@ import sys
 import os
 import json
 import tempfile
-import unittest
-import argparse
-import logging
-from unittest.mock import patch
 from pathlib import Path
-
-logging.disable(logging.CRITICAL)
 
 import atheris
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+atheris.instrument_all()
+atheris.write_test_error = atheris.write_error
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]        # ← most likely correct now
 sys.path.insert(0, str(PROJECT_ROOT))
 
-
 def TestOneInput(data):
-    from scripts import convert_capec as c
+    import scripts.convert_capec                   # ← only this import
 
-    test = unittest.TestCase()
     fdp = atheris.FuzzedDataProvider(data)
-
-    asvs_version = fdp.ConsumeUnicodeNoSurrogates(8)
+    asvs_version = fdp.ConsumeUnicodeNoSurrogates(50)
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        input_json = os.path.join(tmpdir, "capec.json")
-        asvs_json = os.path.join(tmpdir, "asvs.json")
-        capec_map = os.path.join(tmpdir, "capec_map.yaml")
-        output_dir = os.path.join(tmpdir, "out")
+        tmp = Path(tmpdir)
 
-        with open(input_json, "w", encoding="utf-8") as f:
-            json.dump(
-                {"Attack_Pattern_Catalog": {"Attack_Patterns": {"Attack_Pattern": []}}},
-                f,
-            )
+        input_json  = tmp / "capec.json"
+        asvs_json   = tmp / "asvs.json"
+        capec_map   = tmp / "capec_map.yaml"
+        output_dir  = tmp / "out"
 
-        with open(asvs_json, "w", encoding="utf-8") as f:
-            json.dump({"Requirements": []}, f)
+        output_dir.mkdir(exist_ok=True)
 
-        with open(capec_map, "w", encoding="utf-8") as f:
-            f.write("1:\n  owasp_asvs: []\n")
+        input_json.write_text('{"dummy": true}', encoding="utf-8")
+        asvs_json.write_text('{"dummy": true}', encoding="utf-8")
+        capec_map.write_text("dummy: true", encoding="utf-8")
 
-        args = argparse.Namespace(
-            output_path=output_dir,
-            input_path=input_json,
-            capec_to_asvs=capec_map,
-            asvs_mapping=asvs_json,
-            asvs_version=asvs_version,
-            debug=False,
-        )
+        sys.argv = [
+            "convert_capec.py",
+            "--output-path",     str(output_dir),
+            "--input-path",      str(input_json),
+            "--capec-to-asvs",   str(capec_map),
+            "--asvs-mapping",    str(asvs_json),
+            "--asvs-version",    asvs_version,
+        ]
 
         try:
-            with patch.object(argparse.ArgumentParser, "parse_args", return_value=args):
-                c.main()
-        except SystemExit:
-            pass
- 
+            scripts.convert_capec.main()
+        except SystemExit as e:
+            if e.code not in (0, None):
+                atheris.write_test_error(f"Exited with code: {e.code}")
+        except Exception as exc:
+            atheris.write_test_error(f"{type(exc).__name__}: {exc}")
+
+
 def main():
-    atheris.instrument_all()
-    atheris.Setup(sys.argv, TestOneInput)
+    atheris.Setup(
+        sys.argv,
+        TestOneInput,
+        enable_python_coverage=True,
+    )
     atheris.Fuzz()
 
 
