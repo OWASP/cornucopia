@@ -7,13 +7,12 @@ from pathlib import Path
 import atheris
 
 atheris.instrument_all()
-atheris.write_test_error = atheris.write_error
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]        # ← most likely correct now
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 def TestOneInput(data):
-    import scripts.convert_capec                   # ← only this import
+    import scripts.convert_capec
 
     fdp = atheris.FuzzedDataProvider(data)
     asvs_version = fdp.ConsumeUnicodeNoSurrogates(50)
