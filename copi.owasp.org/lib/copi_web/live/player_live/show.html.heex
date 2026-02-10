@@ -35,7 +35,36 @@
             <% else %>
               <p class="text-zinc-400">You can move to the next round once everyone's played a card</p>
             <% end %>
-            <.primary_button class={if round_open?(@game) do "bg-zinc-900/15 pointer-events-none" end} disabled={round_open?(@game)} phx-click="next_round" phx-value-game_id={@game.id}>
+            
+            <!-- Vote to Continue Button -->
+            <%= if round_open?(@game) do %>
+              <div class="flex gap-2 place-items-center">
+                <.primary_button 
+                  class={if Copi.Cornucopia.Game.has_continue_vote?(@game, @player) do "bg-amber-500 hover:bg-amber-600" else "bg-zinc-500 hover:bg-zinc-600" end}
+                  phx-click="toggle_continue_vote"
+                  disabled={Copi.Cornucopia.Game.has_continue_vote?(@game, @player) and not Copi.Cornucopia.Game.can_continue_round?(@game)}
+                >
+                  <%= if Copi.Cornucopia.Game.has_continue_vote?(@game, @player) do %>
+                    <.icon name="hero-hand-thumb-up" class="h-5 w-5 mr-2" />
+                    Voted to Continue
+                  <% else %>
+                    <.icon name="hero-hand-thumb-up" class="h-5 w-5 mr-2" />
+                    Vote to Continue
+                  <% end %>
+                </.primary_button>
+                
+                <span class="text-sm text-gray-600">
+                  <%= Copi.Cornucopia.Game.continue_vote_count(@game) %> / <%= div(Enum.count(@game.players), 2) + 1 %> votes needed
+                </span>
+              </div>
+            <% end %>
+            
+            <.primary_button 
+              class={if round_open?(@game) and not Copi.Cornucopia.Game.can_continue_round?(@game) do "bg-zinc-900/15 pointer-events-none" end} 
+              disabled={round_open?(@game) and not Copi.Cornucopia.Game.can_continue_round?(@game)} 
+              phx-click="next_round" 
+              phx-value-game_id={@game.id}
+            >
               <%= if last_round?(@game) do %>
               Finish game
               <% else %>
