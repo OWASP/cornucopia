@@ -53,7 +53,7 @@
 </svelte:head>
 <div>
 {#if cardFound()}
-  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} {languages} {language} />
+  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}
