@@ -61,7 +61,7 @@ https://docs.docker.com/desktop/install/mac-install/
 After installing docker, You can create an instance of the Postgres image:
 
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
 ```
 
 Note: the password must be the same as the one in the config file of your dev environment.
@@ -81,8 +81,8 @@ To start your Phoenix server:
 ### Run tests
 
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
-export POSTGRES_TEST_PWD=y9EAY7xeVucjM2yM
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
+export POSTGRES_TEST_PWD=POSTGRES_LOCAL_PWD
 mix test
   *
 ```
