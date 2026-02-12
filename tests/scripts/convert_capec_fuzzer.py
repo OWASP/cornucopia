@@ -18,11 +18,16 @@ def TestOneInput(data):
 
     sys.argv = [
         "convert_capec.py",
-        "--output-path", "out",
-        "--input-path", "in.json",
-        "--capec-to-asvs", "map.yaml",
-        "--asvs-mapping", "asvs.json",
-        "--asvs-version", asvs_version,
+        "--output-path",
+        "out",
+        "--input-path",
+        "in.json",
+        "--capec-to-asvs",
+        "map.yaml",
+        "--asvs-mapping",
+        "asvs.json",
+        "--asvs-version",
+        asvs_version,
     ]
 
     try:
