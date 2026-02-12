@@ -56,7 +56,6 @@ Additionally, Adam Shostack maintains a list of tabletop security games and rela
 
 Cornucopia is developed, maintained, updated and promoted by a worldwide team of volunteers. The contributors to date have been:
 
-- Abhijit Sahoo
 - Artim Banyte
 - Simon Bennetts
 - Thomas Berson
@@ -71,8 +70,8 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Todd Dahl
 - Ruggero DallAglio
 - Andrey Danin
-- Darío De Filippis
 - Luis Enriquez
+- Darío De Filippis
 - André Ferreira
 - Ken Ferris
 - Norbert Gaspar
@@ -90,8 +89,8 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Suresh Krishna
 - Franck Lacosta
 - Mathias Lemaire
-- Jim Manico
 - Antonis Manaras
+- Jim Manico
 - Jef Meijvis
 - Mark Miller
 - Muhammad Awais Mohsin
@@ -100,18 +99,21 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Grant Ongers
 - Susana Romaniz
 - Ravishankar Sahadevan
+- Abhijit Sahoo
+- Max Alejandro Gómez Sánchez Vergaray
 - Tao Sauvage
+- Prasun Srivastav
 - Aditya Srivastava
 - Johan Sydseter
 - Elias Brattli Sørensen
 - Mradul Tiwari
-- Max Alejandro Gómez Sánchez Vergaray
 - Ive Verstappen
 - Sachin Vishwakarma
-- Wagner Voltz
+- Wagner Voltzcontributors 
 - Stephen de Vries
 - Colin Watson
-- Prasun Srivastav
+
+Additionally, Gerardo Canedo and student volunteers to [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/ 'OWASP Threat Dragon [internal]') from the Universidad Católica del Uruguay ([UCU](https://www.ucu.edu.uy/ 'UCU [external]')) who took part in a Coding Challenge to provide integration between Cornucopia and Threat Dragon.
 
 Please let us know if we have missed anyone from this list.
 
@@ -119,7 +121,7 @@ Please let us know if we have missed anyone from this list.
 
 Adam Shostack and the Microsoft SDL Team for the Elevation of Privilege (EoP) Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied.
 
-Keith Turpin and contributors to the “OWASP Secure Coding Practices Quick Reference Guide”, originally donated to OWASP by Boeing Inc, which is used as the primary source of security requirements information to formulate the content of the Website App Edition cards.
+Keith Turpin and contributors to the “OWASP Secure Coding Practices Quick Reference Guide”, originally donated to OWASP by Boeing Inc, which is used as the primary source of security requirements information to formulate the content of the Website App Edition cards. David Rook for his "Principles of Secure Development", a proponent for following a small repeateable set of proncipals during development rather than focusing on vulnerabilities - an approach which inspired Cornucopia's suit names.
 
 Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor, Web Framework Security Matrix and MASVS/MASTG projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided.
 
