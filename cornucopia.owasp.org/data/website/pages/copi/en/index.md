@@ -61,7 +61,7 @@ https://docs.docker.com/desktop/install/mac-install/
 After installing docker, You can create an instance of the Postgres image:
 
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
 ```
 
 Note: the password must be the same as the one in the config file of your dev environment.
@@ -81,8 +81,8 @@ To start your Phoenix server:
 ### Run tests
 
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=y9EAY7xeVucjM2yM -d postgres
-export POSTGRES_TEST_PWD=y9EAY7xeVucjM2yM
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
+export POSTGRES_TEST_PWD=POSTGRES_LOCAL_PWD
 mix test
   *
 ```
@@ -193,3 +193,59 @@ Setup SSL on for your dns provider e.g: https://developers.cloudflare.com/ssl/or
 # PEM format
 heroku certs:add cloudflare.crt cloudflare.key
 ```
+
+## Our Threat Model
+
+The Copi threat model can be found at [ThreatDragonModels/copi.json](https://github.com/OWASP/cornucopia/blob/master/ThreatDragonModels/copi.json). You may review it by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard).
+
+Here is a short summary of what you need to be aware of:
+
+### Be aware of data exposure risk! Copi does not support authentication
+
+#### What can go wrong?
+
+We have not implemented Authentication when using Copi, instead we use a secure randomized string to prevent accidental data exposure. Still, an attacker may get hold of such a url by spoofing Copi or other Colleagues in your organization by leveraging various social engineering techniques like establishing a rogue location: [https://capec.mitre.org/data/definitions/616.html](https://capec.mitre.org/data/definitions/616.html).
+
+An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
+
+#### What can you do about it?
+
+As a security measure, you can choose to run copi on a private cluster
+You should avoid using your own name or the name of a company or project when creating players and games at copi.owasp.org. And remind others not to do so as well. Instead use a pseudonyme and a fake threat model name.
+
+### Data is not encrypted at rest by default
+
+#### What can go wrong?
+
+When hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory.
+
+#### What can you do about it?
+
+Ensure that your service provider ensures that the data is encrypted at REST.
+OWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.
+
+### If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster
+
+#### What can go wrong?
+
+Erlang clustering does not happen over TLS by default. This may allow an attacker to launch a MTM attack and do RCE against your cluster. It may also allow an attacker to take over your database connection and both disclose sensitive information and compromise the integrity of the data sent between your database and Copi.
+
+#### What can you do about it?
+
+if you deploy Copi yourself, make sure you configure TLS appropriatly according to your needs.
+OWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Private Networking) mesh to automatically connect all your app instances, providing zero-config, secure, private communication with internal DNS (e.g., app-name.internal), allowing services to talk as if they're on the same network, even across regions, for simple and secure microservices communication. This mesh handles complex routing, making it easy to build distributed apps securely without manual VPN setup.
+
+### An attacker can deny access to user's by CAPEC 212, functionality misuse
+
+#### What can go wrong?
+
+An attacker can continue to create an unlimited amount of games and players until the application stops responding.
+
+#### What can you do about it?
+
+We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself. It's vital that you limit the number of sockets the application accept concurrently. On fly.io that is done in the following way: [fly.toml](https://github.com/OWASP/cornucopia/blob/fb9aae62531dde8db154729d0df4aa28a3400063/copi.owasp.org/fly.toml#L27) A 30 socket limit for Copi should allow you to handle 20.000 requests per min if you have 2 single cpu nodes.
+
+### Did we do a good job?
+
+We welcome any input or improvments you might be willing to share with us regarding our current threat model.
+Arguably, we created the system before the threat modeling, and several improvements need to be made to properly balance the inherrant risks of compromise against the current security controls. For anyone choosing to host the game engine, please take this into account.

@@ -56,7 +56,7 @@ mix archive.install hex phx_new
 
 After installing docker, You can create an instance of the Postgres image:
 ```bash
-docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_TEST_PWD -d postgres
+docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
 ```
 Note: the password must be the same as the one in the config file of your dev environment.
 
@@ -75,8 +75,8 @@ To start your Phoenix server:
 
 ### Run tests
 
-    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_TEST_PWD -d postgres
-    export POSTGRES_TEST_PWD=POSTGRES_TEST_PWD
+    docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
+    export POSTGRES_TEST_PWD=POSTGRES_LOCAL_PWD
     mix test
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
@@ -231,7 +231,7 @@ An attacker can continue to create an unlimited amount of games and players unti
 
 #### What can you do about it?
 
-We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself.
+We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself. It's vital that you limit the number of sockets the application accept concurrently. On fly.io that is done in the following way: [fly.toml](/fly.toml#L27). A 30 socket limit for Copi should allow you to handle 20.000 requests per min if you have 2 single cpu nodes.
 
 ### Did we do a good job?
 
