@@ -10,11 +10,11 @@
     "contributors": [],
     "diagrams": [
       {
-        "id": 0,
-        "title": "general",
-        "diagramType": "STRIDE",
-        "placeholder": "New STRIDE diagram description",
-        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "id": 1,
+        "title": "Cornucopia",
+        "diagramType": "EOP",
+        "placeholder": "New EoP games diagram description",
+        "thumbnail": "./public/content/images/thumbnail.eop.jpg",
         "version": "2.5.0",
         "cells": [
           {
@@ -391,12 +391,28 @@
                   "new": false,
                   "number": 7,
                   "score": ""
+                },
+                {
+                  "id": "69e0ea6c-e8c4-4a53-8325-836ead16a410",
+                  "title": "Grant can utilize the application to deny service to some or all of its users",
+                  "status": "NotApplicable",
+                  "severity": "Low",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "Given that  a threat actor can  execute a distributed denial of service attack against the application, he could deny access to some or all of copi.owasp.org users.",
+                  "mitigation": "Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 8,
+                  "score": "",
+                  "cardSuit": "CORNUCOPIA",
+                  "cardNumber": "CK"
                 }
               ],
               "threatFrequency": {
                 "spoofing": 4,
                 "tampering": 2,
-                "repudiation": 0,
+                "repudiation": 1,
                 "informationDisclosure": 2,
                 "denialOfService": 2,
                 "elevationOfPrivilege": 0
@@ -404,6 +420,10 @@
             },
             "tools": {
               "items": [
+                "boundary",
+                "button-remove",
+                "boundary",
+                "button-remove",
                 "boundary",
                 "button-remove"
               ],
@@ -669,8 +689,8 @@
         ]
       }
     ],
-    "diagramTop": 1,
+    "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 7
+    "threatTop": 8
   }
 }
