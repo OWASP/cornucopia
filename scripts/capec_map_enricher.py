@@ -67,8 +67,8 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
 
 
 def enrich_capec_mappings(
-    capec_mappings: dict[int, dict[str, Any]], capec_names: dict[int, str]
-) -> dict[int, dict[str, Any]]:
+    capec_mappings: dict[str, Any], capec_names: dict[int, str]
+) -> dict[str, Any]:
     """
     Enrich CAPEC mappings with names from the CAPEC catalog.
 
@@ -79,10 +79,20 @@ def enrich_capec_mappings(
     Returns:
         Enriched mappings with 'name' field added to each CAPEC entry
     """
-    enriched: dict[int, dict[str, Any]] = {}
+    enriched: dict[str, Any] = {}
 
-    for capec_id, mapping_data in capec_mappings.items():
+    for capec_id_key, mapping_data in capec_mappings.items():
+        if capec_id_key == "meta":
+            enriched["meta"] = mapping_data
+            continue
+
         enriched_entry = mapping_data.copy()
+        try:
+            capec_id = int(capec_id_key)
+        except (ValueError, TypeError):
+            logging.warning("Skipping non-integer CAPEC ID key: %s", capec_id_key)
+            enriched[capec_id_key] = enriched_entry
+            continue
 
         if capec_id in capec_names:
             enriched_entry["name"] = capec_names[capec_id]
@@ -90,9 +100,9 @@ def enrich_capec_mappings(
             logging.warning("No name found for CAPEC-%d", capec_id)
             enriched_entry["name"] = f"CAPEC-{capec_id}"
 
-        enriched[capec_id] = enriched_entry
+        enriched[capec_id_key] = enriched_entry
 
-    logging.info("Enriched %d CAPEC mappings", len(enriched))
+    logging.info("Enriched %d CAPEC mappings", len(enriched) - (1 if "meta" in enriched else 0))
     return enriched
 
 
@@ -114,17 +124,16 @@ def load_json_file(filepath: Path) -> dict[str, Any]:
         return {}
 
 
-def load_yaml_file(filepath: Path) -> dict[int, dict[str, Any]]:
-    """Load and parse a YAML file with integer keys."""
+def load_yaml_file(filepath: Path) -> dict[str, Any]:
+    """Load and parse a YAML file."""
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
         logging.info("Successfully loaded YAML file: %s", filepath)
 
-        # Convert string keys to integers
         if data:
-            converted = {int(k): v for k, v in data.items()}
-            return converted
+            # Keep original key types
+            return {k: v for k, v in data.items()}
         return {}
     except FileNotFoundError:
         logging.error("File not found: %s", filepath)
@@ -137,7 +146,7 @@ def load_yaml_file(filepath: Path) -> dict[int, dict[str, Any]]:
         return {}
 
 
-def save_yaml_file(filepath: Path, data: dict[int, dict[str, Any]]) -> bool:
+def save_yaml_file(filepath: Path, data: dict[str, Any]) -> bool:
     """Save data as YAML file."""
     try:
         with open(filepath, "w", encoding="utf-8") as f:

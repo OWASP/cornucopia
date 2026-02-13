@@ -123,12 +123,14 @@ def _extract_and_add_asvs_requirements(
 
 
 def convert_to_output_format(
-    capec_map: dict[Any, set[str]], parameter: str = "owasp_asvs"
-) -> Dict[Any, dict[str, list[str]]]:
+    capec_map: dict[Any, set[str]], parameter: str = "owasp_asvs", meta: dict[str, Any] = None
+) -> Dict[str, Any]:
     """
     Convert the internal mapping format to the output YAML format.
     """
     output = {}
+    if meta:
+        output["meta"] = meta
 
     for code, asvs_set in sorted(capec_map.items()):
         output[code] = {parameter: sorted(list(asvs_set))}
@@ -154,7 +156,7 @@ def load_yaml_file(filepath: Path) -> dict[str, Any]:
         return {}
 
 
-def save_yaml_file(filepath: Path, data: Dict[int, dict[str, list[str]]]) -> bool:
+def save_yaml_file(filepath: Path, data: Dict[str, Any]) -> bool:
     """Save data as YAML file."""
     try:
         with open(filepath, "w", encoding="utf-8") as f:
@@ -258,13 +260,18 @@ def main() -> None:
         logging.error("Failed to load input data or file is empty")
         sys.exit(1)
 
+    # Extract meta information
+    meta = data.get("meta", {}).copy()
+    if meta:
+        meta["component"] = "asvs"
+
     # Extract and merge CAPEC mappings
     capec_map = extract_capec_mappings(data)
     if not capec_map:
         logging.warning("No CAPEC mappings found in input file")
 
     # Convert to output format
-    output_data = convert_to_output_format(capec_map)
+    output_data = convert_to_output_format(capec_map, meta=meta)
 
     # Save output YAML
     if not save_yaml_file(capec_output_path, output_data):
@@ -272,16 +279,16 @@ def main() -> None:
         sys.exit(1)
 
     logging.info("CAPEC-to-ASVS mapping conversion completed successfully")
-    logging.info("Total CAPEC codes processed: %d", len(output_data))
+    logging.info("Total CAPEC codes processed: %d", len(output_data) - (1 if meta else 0))
 
     asvs_to_capec_map = extract_asvs_to_capec_mappings(data)
-    output_data_asvs = convert_to_output_format(asvs_to_capec_map, parameter="capec_codes")
+    output_data_asvs = convert_to_output_format(asvs_to_capec_map, parameter="capec_codes", meta=meta)
     # Save output YAML
     if not save_yaml_file(asvs_output_path, output_data_asvs):
         logging.error("Failed to save asvs output file")
         sys.exit(1)
     logging.info("ASVS-to-CAPEC mapping conversion completed successfully")
-    logging.info("Total ASVS requirements processed: %d", len(asvs_to_capec_map))
+    logging.info("Total ASVS requirements processed: %d", len(output_data_asvs) - (1 if meta else 0))
 
 
 if __name__ == "__main__":

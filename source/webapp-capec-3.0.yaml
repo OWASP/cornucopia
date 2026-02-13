@@ -1,3 +1,28 @@
+meta:
+  edition: webapp
+  component: asvs
+  language: ALL
+  version: '3.0'
+  layouts:
+  - cards
+  - leaflet
+  - guide
+  templates:
+  - bridge_qr
+  - bridge
+  - tarot
+  - tarot_qr
+  languages:
+  - en
+  - es
+  - fr
+  - nl
+  - no-nb
+  - pt-br
+  - pt-pt
+  - it
+  - ru
+  - hu
 1:
   owasp_asvs:
   - 13.2.2
