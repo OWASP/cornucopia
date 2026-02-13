@@ -62,5 +62,5 @@
                 workingDirectory: "cornucopia.owasp.org"
                 apiToken: ${{ secrets.CLOUDFLARE_STAGING_API_TOKEN }}
                 accountId: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
-                wranglerVersion: "4.18.0"
+                wranglerVersion: "4.65.0"
                 command: deploy script/nonce-worker.js --config script/wrangler.toml --env staging
