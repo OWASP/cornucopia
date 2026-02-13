@@ -1,34 +1,32 @@
-Scenario: Abdullah prefers shortcuts.
+Scenario: Abdullah edits reality.
 
 
 
-Abdullah isn’t particularly fond of waiting in line — even digital ones. When the app politely asks him to follow a carefully designed login flow, he wonders why he can’t simply skip ahead.
+Abdullah recently discovered that rooting his Android phone opens up a whole new world of possibilities. While exploring the app’s internal storage, he notices that user information is stored locally in a serialized object. Conveniently, it contains a flag called “isPremiumUser”.
 
 
 
-After inspecting the mobile app traffic with a proxy tool, Abdullah discovers that protected API endpoints can still be reached if he manually crafts the right requests. Instead of completing each authentication step in order, he jumps straight to the interesting parts.
+Abdullah is not a premium user.
 
 
 
-He experiments further:
+Yet.
 
 
 
-\- Replaying previously captured responses  
-
-\- Adjusting his device clock to trick time-based validations  
-
-\- Triggering premium features before authentication fully completes  
-
-\- Using perfectly valid features in creatively unintended ways  
+Using a runtime instrumentation tool, Abdullah hooks into the deserialization process and inspects the stored object. He modifies the value of “isPremiumUser” from false to true before the app finishes loading it.
 
 
 
-To his delight, the app trusts the sequence of events rather than verifying the actual authentication state.
+The app happily trusts the modified object.
 
 
 
-Abdullah never properly logged in — yet here he is, browsing privileged content.
+Suddenly, Abdullah has access to premium features, administrative controls, and content he never paid for.
+
+
+
+All because the app assumed local data had not been altered.
 
 
 
@@ -36,11 +34,11 @@ Example
 
 
 
-Abdullah discovers that the app first checks whether a user has completed email verification before allowing access to premium features. By intercepting traffic and manually calling the “premium-content” endpoint, he bypasses the verification process entirely. The server assumes that because the endpoint was called, the previous steps must have been completed.
+Abdullah extracts a locally stored JSON file containing his profile data. He edits the file to change his role from “standard” to “admin” and reinjects it into the application sandbox. When the app starts, it deserializes the object and grants him elevated privileges without verifying its integrity.
 
 
 
-Unfortunately, assumptions are not security controls.
+The app believed the data. The data believed Abdullah. Security believed in hope.
 
 
 
@@ -52,11 +50,11 @@ STRIDE
 
 
 
-The situation falls under the Elevation of Privilege category in the STRIDE threat modeling framework.
+The situation falls under the Tampering category in the STRIDE threat modeling framework.
 
 
 
-Abdullah gains access to functionality that requires authentication by manipulating application logic and workflow, effectively increasing his privileges without proper authorization.
+Abdullah modifies locally stored serialized data before it is processed by the application. Because the application does not verify integrity or authenticity, the manipulated data alters application behavior and grants unauthorized privileges.
 
 
 
@@ -64,21 +62,21 @@ What can go wrong?
 
 
 
-If authentication state is inferred from sequence rather than explicitly validated on the server, attackers may bypass access controls by:
+If sensitive information or authorization state is stored locally without proper protection:
 
 
 
-\- Skipping required steps in a workflow  
+\- Serialized objects may be modified before deserialization  
 
-\- Replaying stale or captured tokens  
+\- JSON or ORM-backed data may be edited directly on rooted or jailbroken devices  
 
-\- Manipulating timestamps or device state  
+\- Reflection-based persistence mechanisms may be manipulated  
 
-\- Directly calling internal APIs  
+\- Runtime instrumentation (e.g., Frida) may hook deserialization methods  
 
 
 
-This may result in unauthorized access to sensitive data, financial transactions, or administrative functionality.
+This can result in privilege escalation, data manipulation, bypass of business logic, or unauthorized access to sensitive functionality.
 
 
 
@@ -86,15 +84,17 @@ What are we going to do about it?
 
 
 
-\- Enforce authentication and authorization checks server-side for every protected endpoint.  
+\- Encrypt sensitive data before storing it on the device.  
 
-\- Validate session state explicitly rather than relying on assumed workflow order.  
+\- Protect stored objects with HMAC or digital signatures and verify integrity before use.  
 
-\- Use short-lived tokens and verify their integrity and freshness.  
+\- Store cryptographic keys securely (e.g., hardware-backed keystore or keychain).  
 
-\- Reject requests that depend solely on client-side logic or sequence validation.  
+\- Avoid trusting locally stored authorization flags without server-side validation.  
 
-\- Implement proper replay protection and time validation mechanisms.
+\- Validate all deserialized data before processing it.  
+
+\- Avoid reflection-based persistence in high-risk applications.  
 
 
 
