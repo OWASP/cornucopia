@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :copi, Copi.Repo,
   username: "postgres",
-  password: "LOCAL_PASSWORD",
+  password: "POSTGRES_LOCAL_PWD",
   database: "copi_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
