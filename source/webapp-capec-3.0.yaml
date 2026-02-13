@@ -1782,7 +1782,7 @@
   - 4.1.1
   - 5.4.1
   - 5.4.2
-  name: CAPEC-152
+  name: Inject Unexpected Items
 153:
   owasp_asvs:
   - 1.1.1
@@ -1862,7 +1862,7 @@
   - 8.3.2
   - 8.3.3
   - 8.4.2
-  name: CAPEC-156
+  name: Engage in Deceptive Interactions
 157:
   owasp_asvs:
   - 11.2.1
@@ -2017,7 +2017,7 @@
   - 2.3.4
   - 2.3.5
   - 8.3.1
-  name: CAPEC-172
+  name: Manipulate Timing and State
 173:
   owasp_asvs:
   - 3.4.2
