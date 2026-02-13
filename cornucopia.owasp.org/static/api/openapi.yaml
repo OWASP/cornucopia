@@ -39,7 +39,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [en, es, fr, nl, no-nb, pt-br, pt-pt, it, ru, hu]
+            enum: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
       responses:
         '200':
           description: Webapp cards data
@@ -47,12 +47,6 @@ paths:
             application/json:
               schema:
                 type: object   # keep generic unless backend schema is known
-        '404':
-          description: Language not available
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
 
   /cre/mobileapp/{lang}:
     get:
@@ -71,12 +65,6 @@ paths:
             application/json:
               schema:
                 type: object
-        '404':
-          description: Language not available
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
 
 components:
   schemas:
@@ -106,7 +94,7 @@ components:
               type: array
               items:
                 type: string
-              example: ["en","es","fr","nl","no-nb","pt-br","pt-pt","it","ru","hu"]
+              example: ["en", "es", "fr", "nl", "no_nb", "pt_br", "pt_pt", "it", "ru"]
             version:
               type: string
               example: "2.2"
