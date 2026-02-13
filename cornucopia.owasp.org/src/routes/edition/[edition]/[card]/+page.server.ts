@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import { DeckService } from "$lib/services/deckService";
 import type { Route } from "$domain/routes/route";
 import { MappingService } from "$lib/services/mappingService";
+import { CapecService } from "$lib/services/capecService";
 
 export const load = (({ params }) => {
     const edition =  params?.edition;
@@ -11,6 +12,13 @@ export const load = (({ params }) => {
     if (params.version === '3.0') asvsVersion = '5.0';
     if (!DeckService.hasEdition(edition)) error(
       404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
+    
+    // Load CAPEC data for webapp v3.0+
+    let capecData = undefined;
+    if (edition === 'webapp' && parseFloat(version) >= 3.0) {
+      capecData = CapecService.getCapecData(edition, version);
+    }
+    
     return {
       edition: edition,
       version: version,
@@ -21,7 +29,8 @@ export const load = (({ params }) => {
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
       mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
-      languages: DeckService.getLanguages(edition)
+      languages: DeckService.getLanguages(edition),
+      capecData
     };
 
     // Some QR code errors where done on the first printed decks. This will compensate for that.
