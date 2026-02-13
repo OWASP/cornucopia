@@ -126,18 +126,18 @@ jobs:
             output/owasp_cornucopia_webapp_2.2_guide_bridge_es.odt \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.odt \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.odt \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.odt \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.odt \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_no_nb.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt_br.odt \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt_pt.odt \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.odt \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_it.odt \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_en.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_es.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.pdf \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.pdf \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.pdf \
-            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.pdf \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_no_nb.pdf \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt_br.pdf \
+            output/owasp_cornucopia_webapp_2.2_guide_bridge_pt_pt.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.pdf \
             output/owasp_cornucopia_webapp_2.2_guide_bridge_it.pdf \
             output/owasp_cornucopia_webapp_3.0_guide_bridge_en.pdf
