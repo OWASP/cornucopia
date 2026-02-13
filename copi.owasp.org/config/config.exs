@@ -15,7 +15,7 @@ config :copi,
 config :copi, CopiWeb.Endpoint,
   debug_errors: false,
   url: [host: "localhost"],
-  secret_key_base: "LgvNRXYWe539tFQXsMkDuRniXGaiEzTMWUj2GIanun0dlbtV6vPlTGZ/l8qR1V7f",
+  secret_key_base: "DUMMY_SECRET_KEY_BASE_FOR_DEVELOPMENT",
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: CopiWeb.ErrorHTML, json: CopiWeb.ErrorJSON],
