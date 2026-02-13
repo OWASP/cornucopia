@@ -6,6 +6,7 @@
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import ASVSOverview from "$lib/components/ASVSOverview.svelte";
     import MappingsList from "$lib/components/mappingsList.svelte";
+    import CapecMapTable from "$lib/components/capecMapTable.svelte";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
     import { MappingController, type WebAppMapping } from "../../domain/mapping/mappingController";
@@ -14,9 +15,10 @@
     mappingData: any;
     card: Card;
     routes: Map<string, Route[]>;
+    capecData?: any;
   }
 
-  let { mappingData, card = $bindable(), routes }: Props = $props();
+  let { mappingData, card = $bindable(), routes, capecData = undefined }: Props = $props();
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
@@ -62,7 +64,13 @@
     let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
     let attacks: Attack[] = $state(GetCardAttacks(card.id));
     
-    let hasMappings = $derived(mappings && Object.keys(mappings).length > 1); 
+    let hasMappings = $derived(mappings && Object.keys(mappings).length > 1);
+    let hasCapecMap = $derived(
+      card.edition === 'webapp' && 
+      parseFloat(card.version) >= 3.0 && 
+      mappings?.capec_map && 
+      Object.keys(mappings.capec_map).length > 0
+    );
   
     run(() => {
       mappings = controller.getWebAppCardMappings(card.id);
@@ -113,6 +121,15 @@
         linkFunction={(input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
       />
       {/if}
+    {/if}
+  
+    {#if hasCapecMap && capecData}
+      <h1 class="title">CAPEC™ Map</h1>
+      <CapecMapTable 
+        capecMap={mappings.capec_map}
+        {capecData}
+        {linkASVS}
+      />
     {/if}
   
     <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
