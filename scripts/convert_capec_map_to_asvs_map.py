@@ -123,7 +123,7 @@ def _extract_and_add_asvs_requirements(
 
 
 def convert_to_output_format(
-    capec_map: dict[Any, set[str]], parameter: str = "owasp_asvs", meta: dict[str, Any] = None
+    capec_map: dict[Any, set[str]], parameter: str = "owasp_asvs", meta: dict[str, Any] | None = None
 ) -> Dict[str, Any]:
     """
     Convert the internal mapping format to the output YAML format.
