@@ -66,9 +66,7 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
     return capec_names
 
 
-def enrich_capec_mappings(
-    capec_mappings: dict[str, Any], capec_names: dict[int, str]
-) -> dict[str, Any]:
+def enrich_capec_mappings(capec_mappings: dict[str, Any], capec_names: dict[int, str]) -> dict[str, Any]:
     """
     Enrich CAPEC mappings with names from the CAPEC catalog.
 
