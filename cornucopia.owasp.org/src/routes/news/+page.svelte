@@ -8,8 +8,10 @@
     /** @type {{data: any}} */
     let { data } = $props();
     let t = readTranslation();
-    const lang = readLang();
-    let content = $derived(data.content.get($lang) || data.content.get("en"));
+    const langStore = readLang();
+    let content = $derived(
+        data?.content?.get($langStore) || data?.content?.get("en") || "",
+    );
 
     function getExcerpt(text, maxLength = 160) {
         if (!text) return "";
@@ -22,6 +24,15 @@
             ? cleaned.slice(0, maxLength) + "…"
             : cleaned;
     }
+    let sortedPosts = $derived(
+        Array.isArray(data?.posts)
+            ? [...data.posts].sort((a, b) => {
+                  const dateA = new Date(a?.date || 0);
+                  const dateB = new Date(b?.date || 0);
+                  return dateB - dateA;
+              })
+            : [],
+    );
 </script>
 
 <svelte:head>
@@ -29,7 +40,7 @@
     <link rel="canonical" href="https://cornucopia.owasp.org/news" />
     <meta name="description" content={$t("news.head.description")} />
     <meta name="keywords" content={$t("news.head.keywords")} />
-    <meta property="og:title" content={$t("news.head.title")} />``
+    <meta property="og:title" content={$t("news.head.title")} />
     <meta property="og:description" content={$t("news.head.description")} />
     <meta name="twitter:title" content={$t("news.head.title")} />
     <meta name="twitter:description" content={$t("news.head.description")} />
@@ -40,11 +51,11 @@
         <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>
     {/if}
 
-    {#if data.posts.length == 0}
+    {#if !data?.posts || data.posts.length === 0}
         <p>{$t("news.p1")}</p>
     {:else}
         <div class="list">
-            {#each data.posts as post}
+            {#each sortedPosts as post}
                 <a
                     class="button"
                     title="View {Text.Format(post.path)}"
@@ -56,12 +67,14 @@
                         {getExcerpt(post.content)}
                     </p>
 
-                    <span class="info">
-                        {Text.FormatDate(post.date)}
-                        •
-                        {Text.Format(post.author)}
-                        <span>>> {$t("news.a")}</span>
-                    </span>
+                    <div class="meta">
+                        <span class="meta-left">
+                            {Text.FormatDate(post.date)} • {Text.Format(
+                                post.author,
+                            )}
+                        </span>
+                        <span class="readmore">{$t("news.a")} →</span>
+                    </div>
                 </a>
             {/each}
         </div>
@@ -85,23 +98,36 @@
     }
 
     a:hover {
-        opacity: 50%;
+        opacity: 70%;
     }
-    .info {
-        font-size: 1rem;
-        margin: 1rem;
+    .meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.75rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
     }
 
-    .title {
-        background-color: rgba(255, 255, 255, 0.237);
-        margin: 0;
-        padding: 0.5rem;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
+    .meta-left {
+        white-space: nowrap;
     }
+
+    .readmore {
+        font-weight: 500;
+    }
+    .title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 0.75rem 0;
+        padding: 0;
+        background: none;
+    }
+
     .button {
         padding: 1rem;
-        width: calc(50% - 4rem);
         margin: 1rem;
         text-align: left;
         font-weight: 400;
@@ -109,39 +135,41 @@
         border: none;
         cursor: pointer;
         color: var(--background);
-        outline: 1px white solid;
-        margin-bottom: 4rem;
         background: white;
         border-radius: 0.5rem;
         transition: var(--transition);
         outline: 1px rgb(231, 231, 231) solid;
         box-shadow: var(--box-shadow);
     }
-
     .button:hover {
-        opacity: 70%;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
     }
 
     .list {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
     }
 
-    @media (max-aspect-ratio: 1/1) {
-        .button {
-            width: calc(100% - 2rem);
-        }
-        div {
-            margin: 0rem 1rem;
-        }
-    }
     .excerpt {
         font-size: 0.95rem;
-        line-height: 1.5;
-        margin: 0.75rem 0 0.5rem 0;
-        color: #333;
+        line-height: 1.6;
+        color: #444;
+        margin: 0 0 0.75rem 0;
+    }
+    .card {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: var(--box-shadow);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
     }
 </style>
