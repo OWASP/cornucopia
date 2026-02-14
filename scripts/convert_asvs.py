@@ -197,7 +197,7 @@ def create_link_list(requirements: dict[str, Any], capec_version: str) -> str:
         return ""
     sorted_requirements = sorted(asvs_requirements)
     for idx, capec_code in enumerate(sorted_requirements):
-        link = f"[{capec_code}](/taxonomy/capec-{capec_version}/{capec_code}/index.md)"
+        link = f"[{capec_code}](/taxonomy/capec-{capec_version}/{capec_code})"
         if idx > 0:
             link_list += ", "
         link_list += link

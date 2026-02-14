@@ -126,9 +126,7 @@ class TestCreateLinkList(unittest.TestCase):
         result = asvs.create_link_list(requirements, "3.9")
 
         expected = (
-            "[120](/taxonomy/capec-3.9/120/index.md), "
-            "[126](/taxonomy/capec-3.9/126/index.md), "
-            "[152](/taxonomy/capec-3.9/152/index.md)"
+            "[120](/taxonomy/capec-3.9/120), " "[126](/taxonomy/capec-3.9/126), " "[152](/taxonomy/capec-3.9/152)"
         )
         self.assertEqual(result, expected)
 
@@ -137,7 +135,7 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["120"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = "[120](/taxonomy/capec-3.9/120/index.md)"
+        expected = "[120](/taxonomy/capec-3.9/120)"
         self.assertEqual(result, expected)
 
     def test_create_link_list_empty_codes(self):
@@ -159,10 +157,7 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["152", "120", "126"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = (
-            "[120](/taxonomy/capec-3.9/120/index.md), "
-            "[126](/taxonomy/capec-3.9/126/index.md), [152](/taxonomy/capec-3.9/152/index.md)"
-        )
+        expected = "[120](/taxonomy/capec-3.9/120), " "[126](/taxonomy/capec-3.9/126), [152](/taxonomy/capec-3.9/152)"
         self.assertEqual(result, expected)
 
 
