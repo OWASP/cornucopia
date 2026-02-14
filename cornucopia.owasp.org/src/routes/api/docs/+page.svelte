@@ -1,4 +1,6 @@
 <script>
+	export const prerender = false;
+
 	import { onMount } from 'svelte';
 
 	onMount(async () => {
@@ -11,8 +13,6 @@
 		});
 	});
 </script>
-
-export const prerender = false;
 
 <div id="swagger-ui"></div>
 
