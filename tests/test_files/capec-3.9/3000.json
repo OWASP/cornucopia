@@ -573,6 +573,84 @@
 				}
 			]
 		},
+		"Categories": {
+			"Category": [
+				{
+				"Summary": "Attack patterns within this category focus on the ability to control or disrupt the behavior of a target either through crafted data submitted via an interface for data input, or the installation and execution of malicious code on the target system. The former happens when an adversary adds material to their input that is interpreted by the application causing the targeted application to perform steps unintended by the application manager or causing the application to enter an unstable state. Attacks of this type differ from Data Structure Attacks in that the latter attacks subvert the underlying structures that hold user-provided data, either pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting in values that the targeted application is unable to handle correctly (in the case of Integer Overflows). In Injection attacks, the input is interpreted by the application, but the attacker has included instructions to the interpreting functions that the target application then follows.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "137"
+						},
+						{
+							"_CAPEC_ID": "175"
+						},
+						{
+							"_CAPEC_ID": "240"
+						},
+						{
+							"_CAPEC_ID": "242"
+						},
+						{
+							"_CAPEC_ID": "248"
+						},
+						{
+							"_CAPEC_ID": "549"
+						},
+						{
+							"_CAPEC_ID": "624"
+						},
+						{
+							"_CAPEC_ID": "594"
+						},
+						{
+							"_CAPEC_ID": "586"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-11-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Description, Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-05-01",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2018-07-31",
+							"Modification_Comment": "Updated Description"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Injection"
+					}
+				},
+				"_ID": "152",
+				"_Name": "Inject Unexpected Items",
+				"_Status": "Stable"
+			}
+			]
+		},
 		"_xmlns": "http://capec.mitre.org/capec-3",
 		"_xmlns:xhtml": "http://www.w3.org/1999/xhtml",
 		"_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",

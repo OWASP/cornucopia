@@ -65,7 +65,30 @@ class TestValidateJsonData(unittest.TestCase):
     def test_validate_json_data_valid(self):
         """Test validation with valid data structure"""
         data = {
-            "Attack_Pattern_Catalog": {"Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern"}]}}
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern"}]},
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
+            }
         }
         result = capec.validate_json_data(data)
         self.assertTrue(result)
@@ -297,7 +320,28 @@ class TestCreateCapecPages(unittest.TestCase):
                     "Attack_Pattern": [
                         {"_ID": "123", "_Name": "Test Attack Pattern", "Description": "This is a test description"}
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
 
@@ -341,7 +385,28 @@ class TestCreateCapecPages(unittest.TestCase):
                         {"_ID": "1", "_Name": "First Pattern", "Description": "First description"},
                         {"_ID": "2", "_Name": "Second Pattern", "Description": "Second description"},
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
 
@@ -353,10 +418,10 @@ class TestCreateCapecPages(unittest.TestCase):
             capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Verify create_folder was called twice (once for each pattern)
-        self.assertEqual(mock_create_folder.call_count, 2)
+        self.assertEqual(mock_create_folder.call_count, 3)
 
         # Verify file was opened twice
-        self.assertEqual(mock_file.call_count, 2)
+        self.assertEqual(mock_file.call_count, 3)
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convert_capec.create_folder")
@@ -378,7 +443,28 @@ class TestCreateCapecPages(unittest.TestCase):
                             "Description": {"Description": {"p": {"__text": "Complex description text"}}},
                         }
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
 
@@ -608,7 +694,28 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
             "Attack_Pattern_Catalog": {
                 "Attack_Patterns": {
                     "Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern", "Description": "Test description"}]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
 
