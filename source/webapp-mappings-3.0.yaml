@@ -1909,8 +1909,8 @@ suits:
     id: "C9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/C9"
-    stride: [ D ]
-    stride_print: [ 'Denial of Service' ]
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
     owasp_dev_guide: [ ACM1 ]
     owasp_dev_guide_print: [ ACM1 ]
     owasp_asvs: [ 2.2.1, 2.2.2, 2.3.2, 2.3.4, 2.4.1, 2.4.2, 15.3.3, 15.4.1, 15.4.2, 15.4.3, 15.4.4, 16.3.3 ]
