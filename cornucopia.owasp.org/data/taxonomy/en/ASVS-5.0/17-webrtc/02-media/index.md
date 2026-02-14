@@ -8,7 +8,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [474](/taxonomy/capec-3.9/474/index.md)
+CAPEC™ (3.9): [474](/taxonomy/capec-3.9/474)
 
 ## V17.2.2
 

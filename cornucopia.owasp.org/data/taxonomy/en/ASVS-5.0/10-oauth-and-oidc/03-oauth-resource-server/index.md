@@ -8,7 +8,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180/index.md), [21](/taxonomy/capec-3.9/21/index.md), [22](/taxonomy/capec-3.9/22/index.md), [39](/taxonomy/capec-3.9/39/index.md), [57](/taxonomy/capec-3.9/57/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180), [21](/taxonomy/capec-3.9/21), [22](/taxonomy/capec-3.9/22), [39](/taxonomy/capec-3.9/39), [57](/taxonomy/capec-3.9/57), [633](/taxonomy/capec-3.9/633)
 
 ## V10.3.2
 
@@ -18,7 +18,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180/index.md), [21](/taxonomy/capec-3.9/21/index.md), [57](/taxonomy/capec-3.9/57/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180), [21](/taxonomy/capec-3.9/21), [57](/taxonomy/capec-3.9/57), [633](/taxonomy/capec-3.9/633)
 
 ## V10.3.3
 
@@ -28,7 +28,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180/index.md), [21](/taxonomy/capec-3.9/21/index.md), [57](/taxonomy/capec-3.9/57/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180), [21](/taxonomy/capec-3.9/21), [57](/taxonomy/capec-3.9/57), [633](/taxonomy/capec-3.9/633)
 
 ## V10.3.4
 
@@ -38,7 +38,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180/index.md), [21](/taxonomy/capec-3.9/21/index.md), [57](/taxonomy/capec-3.9/57/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180), [21](/taxonomy/capec-3.9/21), [57](/taxonomy/capec-3.9/57), [633](/taxonomy/capec-3.9/633)
 
 ## V10.3.5
 
@@ -48,7 +48,7 @@ Required for Level 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180/index.md), [21](/taxonomy/capec-3.9/21/index.md), [22](/taxonomy/capec-3.9/22/index.md), [57](/taxonomy/capec-3.9/57/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [180](/taxonomy/capec-3.9/180), [21](/taxonomy/capec-3.9/21), [22](/taxonomy/capec-3.9/22), [57](/taxonomy/capec-3.9/57), [633](/taxonomy/capec-3.9/633)
 
 ## Disclaimer
 

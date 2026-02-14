@@ -8,7 +8,7 @@ Required for Level 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [116](/taxonomy/capec-3.9/116/index.md), [204](/taxonomy/capec-3.9/204/index.md)
+CAPEC™ (3.9): [116](/taxonomy/capec-3.9/116), [204](/taxonomy/capec-3.9/204)
 
 ## V11.7.2
 
@@ -18,7 +18,7 @@ Required for Level 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [116](/taxonomy/capec-3.9/116/index.md), [204](/taxonomy/capec-3.9/204/index.md)
+CAPEC™ (3.9): [116](/taxonomy/capec-3.9/116), [204](/taxonomy/capec-3.9/204)
 
 ## Disclaimer
 

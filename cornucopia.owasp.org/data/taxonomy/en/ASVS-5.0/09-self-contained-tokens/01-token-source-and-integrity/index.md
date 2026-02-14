@@ -8,7 +8,7 @@ Required for Level 1, 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [145](/taxonomy/capec-3.9/145/index.md), [21](/taxonomy/capec-3.9/21/index.md), [473](/taxonomy/capec-3.9/473/index.md), [475](/taxonomy/capec-3.9/475/index.md), [57](/taxonomy/capec-3.9/57/index.md), [94](/taxonomy/capec-3.9/94/index.md)
+CAPEC™ (3.9): [145](/taxonomy/capec-3.9/145), [21](/taxonomy/capec-3.9/21), [473](/taxonomy/capec-3.9/473), [475](/taxonomy/capec-3.9/475), [57](/taxonomy/capec-3.9/57), [94](/taxonomy/capec-3.9/94)
 
 ## V9.1.2
 
@@ -18,7 +18,7 @@ Required for Level 1, 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [145](/taxonomy/capec-3.9/145/index.md), [21](/taxonomy/capec-3.9/21/index.md), [473](/taxonomy/capec-3.9/473/index.md), [475](/taxonomy/capec-3.9/475/index.md), [57](/taxonomy/capec-3.9/57/index.md), [94](/taxonomy/capec-3.9/94/index.md)
+CAPEC™ (3.9): [145](/taxonomy/capec-3.9/145), [21](/taxonomy/capec-3.9/21), [473](/taxonomy/capec-3.9/473), [475](/taxonomy/capec-3.9/475), [57](/taxonomy/capec-3.9/57), [94](/taxonomy/capec-3.9/94)
 
 ## V9.1.3
 
@@ -28,7 +28,7 @@ Required for Level 1, 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [145](/taxonomy/capec-3.9/145/index.md), [21](/taxonomy/capec-3.9/21/index.md), [39](/taxonomy/capec-3.9/39/index.md), [473](/taxonomy/capec-3.9/473/index.md), [475](/taxonomy/capec-3.9/475/index.md), [57](/taxonomy/capec-3.9/57/index.md), [94](/taxonomy/capec-3.9/94/index.md)
+CAPEC™ (3.9): [145](/taxonomy/capec-3.9/145), [21](/taxonomy/capec-3.9/21), [39](/taxonomy/capec-3.9/39), [473](/taxonomy/capec-3.9/473), [475](/taxonomy/capec-3.9/475), [57](/taxonomy/capec-3.9/57), [94](/taxonomy/capec-3.9/94)
 
 ## Disclaimer
 
