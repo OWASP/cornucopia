@@ -178,11 +178,11 @@ class TestParseArguments(unittest.TestCase):
         """Test parsing arguments with custom values"""
         test_args = [
             "-o",
-            "/custom/output",
+            "custom/output",
             "-i",
-            "/custom/input.json",
+            "custom/input.json",
             "-ac",
-            "/custom/mapping.yaml",
+            "custom/mapping.yaml",
             "-cv",
             "4.0",
             "-d",
@@ -190,9 +190,9 @@ class TestParseArguments(unittest.TestCase):
 
         args = asvs.parse_arguments(test_args)
 
-        self.assertEqual(Path(args.output_path), Path("/custom/output"))
-        self.assertEqual(Path(args.input_path), Path("/custom/input.json"))
-        self.assertEqual(Path(args.asvs_to_capec), Path("/custom/mapping.yaml"))
+        self.assertEqual(Path(args.output_path), Path("custom/output"))
+        self.assertEqual(Path(args.input_path), Path("custom/input.json"))
+        self.assertEqual(Path(args.asvs_to_capec), Path("custom/mapping.yaml"))
         self.assertEqual(args.capec_version, "4.0")
         self.assertTrue(args.debug)
 
@@ -200,11 +200,11 @@ class TestParseArguments(unittest.TestCase):
         """Test parsing arguments with long form flags"""
         test_args = [
             "--output-path",
-            "/custom/output",
+            "custom/output",
             "--input-path",
-            "/custom/input.json",
+            "custom/input.json",
             "--asvs-to-capec",
-            "/custom/mapping.yaml",
+            "custom/mapping.yaml",
             "--capec-version",
             "4.0",
             "--debug",
@@ -212,9 +212,9 @@ class TestParseArguments(unittest.TestCase):
 
         args = asvs.parse_arguments(test_args)
 
-        self.assertEqual(Path(args.output_path), Path("/custom/output"))
-        self.assertEqual(Path(args.input_path), Path("/custom/input.json"))
-        self.assertEqual(Path(args.asvs_to_capec), Path("/custom/mapping.yaml"))
+        self.assertEqual(Path(args.output_path), Path("custom/output"))
+        self.assertEqual(Path(args.input_path), Path("custom/input.json"))
+        self.assertEqual(Path(args.asvs_to_capec), Path("custom/mapping.yaml"))
         self.assertEqual(args.capec_version, "4.0")
         self.assertTrue(args.debug)
 
