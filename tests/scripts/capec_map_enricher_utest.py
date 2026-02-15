@@ -196,11 +196,11 @@ class TestLoadYamlFile(unittest.TestCase):
     @patch("yaml.safe_load")
     def test_load_valid_yaml(self, mock_yaml_load, mock_file):
         """Test loading a valid YAML file"""
-        mock_yaml_load.return_value = {"1": {"owasp_asvs": ["1.2.3"]}}
+        mock_yaml_load.return_value = {1: {"owasp_asvs": ["1.2.3"]}}
 
         result = enricher.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "/test.yaml"))
 
-        # Should convert string keys to integers
+        # Should preserve integer keys
         self.assertIn(1, result)
         self.assertEqual(result[1]["owasp_asvs"], ["1.2.3"])
         mock_file.assert_called_once()

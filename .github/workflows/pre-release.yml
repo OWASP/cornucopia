@@ -121,6 +121,11 @@
 
               cp output/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml output/cornucopia_webapp/
               zip -r output/owasp_cornucopia_webapp_3.0_en.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          - name: Delete existing release and tag
+            run: gh release delete "pre-release" --cleanup-tag -y
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            continue-on-error: true
           - uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
             name: "Create pre-release"
             with:
