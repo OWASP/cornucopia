@@ -7,7 +7,7 @@ Consider a scenario where Vandana installs an app recommended by Choi, an online
 Choi and Vandana have been chatting online on Facebook for quite some time, Choi suggests that Vandana should install a very secure messaging app where they can share more intimate details without worrying that Facebook might use that information for training their new AI. After all, who wants their love life to be food for a hungry AI that might end up copying your intimate phrases and sentences. 
 Vandana hasn't seen or met Choi physically but decides to install the app that Choi shares with a link. 
  
-Little does she know that this app, in particular, will look for capabilities, objects, resources, or services exposed by other apps and use them to get access to her phone and share everything with Choi. After some days Verdana notices that her phone bill has grown exponentially, her bank account is empty, and Choi is nowhere to be found. 
+Little does she know that this app, in particular, will look for capabilities, objects, resources, or services exposed by other apps and use them to get access to her phone and share everything with Choi. After some days Vandana notices that her phone bill has grown exponentially, her bank account is empty, and Choi is nowhere to be found. 
  
 ## Threat Modeling
 
@@ -39,4 +39,4 @@ This is due to a privilege escalation vulnerability (CVE-2019-2200) which was fi
  
 ### References: 
  
-- [Android: Custom Permissions](https://developer.android.com/privacy-and-security/risks/custom-permissions) 
+- [Android: Custom Permissions](https://developer.android.com/privacy-and-security/risks/custom-permissions)
