@@ -6,6 +6,10 @@ hidden: false
 description: OWASP Cornucopia is publishing it's darkest fears and secrets!
 ---
 
+# OWASP Cornucopia is publishing it's darkest fears and secrets!
+
+---
+
 __Why do we keep our darkest fears secret? Publish them, and bring light to the darkest corners of your web application.__
 
 When Adam Schostack + associates last year urged everyone to [publish their threat model](https://shostack.org/blog/publish-your-threat-model/), we thought, «What a wonderful idea!»
