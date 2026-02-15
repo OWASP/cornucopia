@@ -20,7 +20,7 @@ Mike discovers that an online booking system allows rapid repeated bookings and 
 
 This scenario maps primarily to STRIDE: **Tampering**.
 
-The core exploit involves manipulating the application's intended logic and data integrity through exploiting race conditions and misusing functionality. This makes him able to compromise the integrity of the system to produce a state that the system was never designed to allow. By doing so, he may be able to impersonate users through brute-force, transcend security boundaries, access sensitive data, elevate his own privileges, or deny service to others (DoS). Depending on the exploit, he might even be able to do so without anyone noticing. While the main STRIDE category is **Tampering**, the impact could span all the other STRIDE categories.
+The core exploit involves manipulating the application's intended logic and data integrity through exploiting race conditions and misusing functionality. This makes Mike able to compromise the integrity of the system to produce a state that the system was never designed to allow. By doing so, Mike may be able to impersonate users through brute-force, transcend security boundaries, access sensitive data, elevate his own privileges, or deny service to others (DoS). Depending on the exploit, he might even be able to do so without anyone noticing. While the main STRIDE category is **Tampering**, the impact could span all the other STRIDE categories.
 
 ### What can go wrong?
 
