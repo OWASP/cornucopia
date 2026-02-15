@@ -23,7 +23,7 @@ Once you have created an EoP Games diagram, you can add OWASP Cornucopia threats
 
 ![OWASP Corncupia Website](IMG_0160.webp)
 
-I want to express my sincere appreciation to Gerardo Canedo, Sebastian Feirre, and their students at Universidad Católica del Uruguay for making this possible. With their dedication and effort, OWASP Cornucopia wouldn’t have had this possibility.
+I want to express my sincere appreciation to Gerardo Canedo, Sebastian Feirres, and their students at Universidad Católica del Uruguay for making this possible. With their dedication and effort, OWASP Cornucopia wouldn’t have had this possibility.
 
 ![Gerardo Canedo and his students at Universidad Católica del Uruguay](IMG_0161.webp)
 
