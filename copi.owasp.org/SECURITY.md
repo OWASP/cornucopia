@@ -18,9 +18,9 @@ The application uses a GenServer-based rate limiter that tracks requests per IP 
 
 | Action | Limit | Time Window |
 | --- | --- | --- |
-| Game Creation | 10 requests | per hour per IP |
-| Player Creation | 20 requests | per hour per IP |
-| WebSocket Connections | 50 connections | per 5 minutes per IP |
+| Game Creation | 20 requests | per hour per IP |
+| Player Creation | 60 requests | per hour per IP |
+| WebSocket Connections | 333 connections | per second per IP |
 
 ## Configuration
 
@@ -28,16 +28,16 @@ Rate limits are configurable via environment variables:
 
 ```bash
 # Game creation limits
-RATE_LIMIT_GAME_CREATION_LIMIT=10
+RATE_LIMIT_GAME_CREATION_LIMIT=20
 RATE_LIMIT_GAME_CREATION_WINDOW=3600  # seconds
 
 # Player creation limits
-RATE_LIMIT_PLAYER_CREATION_LIMIT=20
+RATE_LIMIT_PLAYER_CREATION_LIMIT=60
 RATE_LIMIT_PLAYER_CREATION_WINDOW=3600  # seconds
 
 # Connection limits
-RATE_LIMIT_CONNECTION_LIMIT=50
-RATE_LIMIT_CONNECTION_WINDOW=300  # seconds
+RATE_LIMIT_CONNECTION_LIMIT=333
+RATE_LIMIT_CONNECTION_WINDOW=1  # seconds
 ```
 
 **Note**: Environment variables must be positive integers. Invalid values will log a warning and fall back to defaults.

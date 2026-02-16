@@ -26,6 +26,8 @@ defmodule Copi.RateLimiter do
 
   Returns {:ok, remaining} if under limit, {:error, :rate_limit_exceeded} if over.
 
+  In production, requests from 127.0.0.1 are not rate limited to prevent DoS'ing ourselves.
+
   ## Parameters
     - ip: IP address as a tuple (e.g., {127, 0, 0, 1}) or string
     - action: atom representing the action (:game_creation, :player_creation, :connection)
@@ -38,7 +40,14 @@ defmodule Copi.RateLimiter do
       {:error, :rate_limit_exceeded}
   """
   def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection] do
-    GenServer.call(__MODULE__, {:check_rate, normalize_ip(ip), action})
+    normalized_ip = normalize_ip(ip)
+    
+    # In production, don't rate limit localhost to prevent DoS'ing ourselves
+    if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} do
+      {:ok, :unlimited}
+    else
+      GenServer.call(__MODULE__, {:check_rate, normalized_ip, action})
+    end
   end
 
   @doc """
@@ -64,14 +73,14 @@ defmodule Copi.RateLimiter do
 
     state = %{
       limits: %{
-        game_creation: get_env_config(:game_creation_limit, 10),
-        player_creation: get_env_config(:player_creation_limit, 20),
-        connection: get_env_config(:connection_limit, 50)
+        game_creation: get_env_config(:game_creation_limit, 20),
+        player_creation: get_env_config(:player_creation_limit, 60),
+        connection: get_env_config(:connection_limit, 333)
       },
       windows: %{
         game_creation: get_env_config(:game_creation_window, 3600),
         player_creation: get_env_config(:player_creation_window, 3600),
-        connection: get_env_config(:connection_window, 300)
+        connection: get_env_config(:connection_window, 1)
       },
       requests: %{}
     }
