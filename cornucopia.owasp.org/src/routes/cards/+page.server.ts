@@ -2,6 +2,8 @@ import { DeckService } from '$lib/services/deckService';
 import { SuitController } from '../../domain/suit/suitController';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { MappingService } from '$lib/services/mappingService';
+
+export const prerender = false;
  
 export const load = (({ params }) => {
   const deckService = new DeckService();

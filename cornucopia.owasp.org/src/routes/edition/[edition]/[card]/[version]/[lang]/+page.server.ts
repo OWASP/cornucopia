@@ -7,6 +7,8 @@ import type { PageServerLoad } from "./$types";
 import type { Route } from "$domain/routes/route";
 import type { Card } from "$domain/card/card";
 
+export const prerender = false;
+
 export const load: PageServerLoad = ({ params }) => {
   // Extract route params
   let edition = params.edition || "webapp"; // fallback for old URLs

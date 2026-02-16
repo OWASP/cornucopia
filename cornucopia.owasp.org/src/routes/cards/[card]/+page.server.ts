@@ -7,6 +7,8 @@ import type { Card } from "$domain/card/card";
 import { error } from "@sveltejs/kit";
 import { redirect } from "@sveltejs/kit";
 
+export const prerender = false;
+
 export const load: PageServerLoad = ({ params }) => {
   const edition = "webapp";
   const version = "2.2";

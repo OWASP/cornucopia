@@ -5,6 +5,8 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { error } from '@sveltejs/kit';
 import type { Route } from "$domain/routes/route";
 
+export const prerender = false;
+
 export const load: PageServerLoad = ({ params }) => {
   const edition = params?.edition;
   const cardId = params?.card.toUpperCase();
