@@ -1,8 +1,7 @@
 <script lang="ts">
   import { run } from 'svelte/legacy';
   import { Text } from "$lib/utils/text";
-  import {
-    GetCardAttacks, type Attack } from "$lib/cardAttacks";
+  import { GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
@@ -45,13 +44,13 @@
     attacks = GetCardAttacks(card.id);
   });
 </script>
-<LanguagePicker 
+<!--<LanguagePicker 
   edition={card.edition}
   cardId={card.id}
   version={card.version}
   currentLanguage={language}
   {languages}
-/>
+/>-->
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
   <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>

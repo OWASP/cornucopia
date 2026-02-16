@@ -55,6 +55,7 @@
         font-weight: bold;
         text-decoration: none;
         margin:0;
+        margin-bottom: 1.5rem;
     }
 
     a:hover
