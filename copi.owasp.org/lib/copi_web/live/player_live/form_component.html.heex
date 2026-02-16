@@ -5,7 +5,13 @@
 
     <.input field={f[:name]} type="text" label="{gettext 'Player Name'}" />
 
-    <.input field={f[:game_id]} type="hideen" />
+    <div class="border border-yellow-400 bg-yellow-50 text-yellow-900 text-sm rounded-md p-3 mt-3">
+      <p>
+        Please note: Avoid submitting sensitive and/or personal information to minimize the risk of data exfiltration due to accidental data exposure.
+      </p>
+    </div>
+
+    <.input field={f[:game_id]} type="hidden" />
 
     <.button
       type="submit"
