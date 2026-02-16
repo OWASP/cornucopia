@@ -25,6 +25,8 @@ There we have listed all our darkest fears and secrets. Darkness is not a force 
 
 When choosing a tool for publishing our threat model, we chose [OWASP Threat Dragon](https://www.threatdragon.com/#/). OWASP Threat Dragon is a free, open-source, cross-platform threat modeling application. It is used to create threat modeling diagrams and list threats for elements within the diagrams. Mike Goodwin created Threat Dragon as an open-source community project that provides an intuitive, accessible way to model threats.
 
+OWASP Threat Dragon will release this possibility in v2.6 which is due to be released in week 9, but already now, you can try it out on their [demo site](https://www.threatdragon.com/#/). V2.6 will come iut with all sort of exciting features, for a full list have a look at their current [v2.6 roadmap](https://github.com/OWASP/threat-dragon/issues?q=label%3Aversion-2.6).
+
 ![How to choose to create a OWASP Cornucopia threat model](IMG_0158.webp)
 
 Thanks to Gerardo Canedo and his students at Universidad Católica del Uruguay, it's now possible to create your OWASP Cornucopia Threat Model directly in OWASP Threat Dragon. When creating a new diagram for your threat model, simply choose to create an EoP Games diagram. We chose to call the diagram EoP Games for two reasons. One, OWASP Cornucopia is derived from the [Elevation of Privilege game](https://shostack.org/games/elevation-of-privilege) created by Adam Shostack. Two, we don't want to stop with OWASP Cornucopia. We also want to add other EoP games, such as the original EoP Game.
