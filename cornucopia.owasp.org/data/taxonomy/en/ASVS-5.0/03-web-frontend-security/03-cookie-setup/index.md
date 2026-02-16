@@ -8,7 +8,7 @@ Required for Level 1, 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [22](/taxonomy/capec-3.9/22/index.md), [31](/taxonomy/capec-3.9/31/index.md), [39](/taxonomy/capec-3.9/39/index.md), [593](/taxonomy/capec-3.9/593/index.md)
+CAPEC™ (3.9): [22](/taxonomy/capec-3.9/22), [31](/taxonomy/capec-3.9/31), [39](/taxonomy/capec-3.9/39), [593](/taxonomy/capec-3.9/593)
 
 ## V3.3.2
 
@@ -18,7 +18,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [103](/taxonomy/capec-3.9/103/index.md), [21](/taxonomy/capec-3.9/21/index.md), [22](/taxonomy/capec-3.9/22/index.md), [31](/taxonomy/capec-3.9/31/index.md), [39](/taxonomy/capec-3.9/39/index.md), [593](/taxonomy/capec-3.9/593/index.md), [62](/taxonomy/capec-3.9/62/index.md)
+CAPEC™ (3.9): [103](/taxonomy/capec-3.9/103), [21](/taxonomy/capec-3.9/21), [22](/taxonomy/capec-3.9/22), [31](/taxonomy/capec-3.9/31), [39](/taxonomy/capec-3.9/39), [593](/taxonomy/capec-3.9/593), [62](/taxonomy/capec-3.9/62)
 
 ## V3.3.3
 
@@ -28,7 +28,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [22](/taxonomy/capec-3.9/22/index.md), [31](/taxonomy/capec-3.9/31/index.md), [39](/taxonomy/capec-3.9/39/index.md), [593](/taxonomy/capec-3.9/593/index.md), [61](/taxonomy/capec-3.9/61/index.md)
+CAPEC™ (3.9): [22](/taxonomy/capec-3.9/22), [31](/taxonomy/capec-3.9/31), [39](/taxonomy/capec-3.9/39), [593](/taxonomy/capec-3.9/593), [61](/taxonomy/capec-3.9/61)
 
 ## V3.3.4
 
@@ -38,7 +38,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [21](/taxonomy/capec-3.9/21/index.md), [22](/taxonomy/capec-3.9/22/index.md), [31](/taxonomy/capec-3.9/31/index.md), [39](/taxonomy/capec-3.9/39/index.md), [593](/taxonomy/capec-3.9/593/index.md), [61](/taxonomy/capec-3.9/61/index.md)
+CAPEC™ (3.9): [21](/taxonomy/capec-3.9/21), [22](/taxonomy/capec-3.9/22), [31](/taxonomy/capec-3.9/31), [39](/taxonomy/capec-3.9/39), [593](/taxonomy/capec-3.9/593), [61](/taxonomy/capec-3.9/61)
 
 ## V3.3.5
 
@@ -48,7 +48,7 @@ Required for Level 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [39](/taxonomy/capec-3.9/39/index.md)
+CAPEC™ (3.9): [39](/taxonomy/capec-3.9/39)
 
 ## Disclaimer
 
