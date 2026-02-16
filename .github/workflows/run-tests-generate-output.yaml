@@ -48,7 +48,6 @@ jobs:
         run: |
           pip install -r requirements.txt --require-hashes
           pipenv install -d
-<<<<<<< HEAD
       - name: Generate test coverage
         run: |
           pipenv run coverage run -m unittest discover -s tests/scripts -p "*_*test.py"
@@ -60,10 +59,9 @@ jobs:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           total-parts-count: 3
           files: converter/coverage/cobertura.xml
-=======
       - name: Check translation tags
         run: |
-          pipenv run python scripts/check_translations.py || echo "Translation issues found, continuing..."
+          pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
       - name: Upload translation check report
         if: always()
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
@@ -71,7 +69,6 @@ jobs:
           retention-days: 5
           name: translation-check-report.${{ github.sha }}.md
           path: translation_check_report.md
->>>>>>> 725972fb (feat: Added translation tag checker for issue #1102)
       - name: Generate new output files
         run: |
           #
@@ -190,15 +187,11 @@ jobs:
             
             | Name | Link |
             |------|------|
-<<<<<<< HEAD
             | Output files | [cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
-=======
-            | Output files | [cornucopia-build-files.${{ github.sha }}.zip](${process.env.ARTIFACT_URL}) |
             
             ---
             
             ${translationReport}`;
->>>>>>> 725972fb (feat: Added translation tag checker for issue #1102)
             
             github.rest.issues.createComment({
               issue_number: process.env.PR_NUMBER,
