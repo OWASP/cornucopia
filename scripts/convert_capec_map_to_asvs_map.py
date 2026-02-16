@@ -141,7 +141,7 @@ def convert_to_output_format(
         output["meta"] = meta
 
     for code, asvs_set in sorted(capec_map.items()):
-        entry = {parameter: sorted(list(asvs_set))}
+        entry: dict[str, Any] = {parameter: sorted(list(asvs_set))}
 
         # Enrich with extra data if available (e.g., Description, L)
         if enrichment_data and code in enrichment_data:
@@ -270,7 +270,7 @@ def extract_asvs_details(asvs_data: dict[str, Any]) -> dict[str, dict[str, str]]
     """
     details = {}
 
-    def _walk(node):
+    def _walk(node: Any) -> None:
         if isinstance(node, dict):
             # Check if this node is a requirement item
             if "Shortcode" in node and "Description" in node and "L" in node:
