@@ -126,9 +126,7 @@ class TestCreateLinkList(unittest.TestCase):
         result = asvs.create_link_list(requirements, "3.9")
 
         expected = (
-            "[120](/taxonomy/capec-3.9/120/index.md), "
-            "[126](/taxonomy/capec-3.9/126/index.md), "
-            "[152](/taxonomy/capec-3.9/152/index.md)"
+            "[120](/taxonomy/capec-3.9/120), " "[126](/taxonomy/capec-3.9/126), " "[152](/taxonomy/capec-3.9/152)"
         )
         self.assertEqual(result, expected)
 
@@ -137,7 +135,7 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["120"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = "[120](/taxonomy/capec-3.9/120/index.md)"
+        expected = "[120](/taxonomy/capec-3.9/120)"
         self.assertEqual(result, expected)
 
     def test_create_link_list_empty_codes(self):
@@ -159,10 +157,7 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["152", "120", "126"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = (
-            "[120](/taxonomy/capec-3.9/120/index.md), "
-            "[126](/taxonomy/capec-3.9/126/index.md), [152](/taxonomy/capec-3.9/152/index.md)"
-        )
+        expected = "[120](/taxonomy/capec-3.9/120), " "[126](/taxonomy/capec-3.9/126), [152](/taxonomy/capec-3.9/152)"
         self.assertEqual(result, expected)
 
 
@@ -183,11 +178,11 @@ class TestParseArguments(unittest.TestCase):
         """Test parsing arguments with custom values"""
         test_args = [
             "-o",
-            "/custom/output",
+            "custom/output",
             "-i",
-            "/custom/input.json",
+            "custom/input.json",
             "-ac",
-            "/custom/mapping.yaml",
+            "custom/mapping.yaml",
             "-cv",
             "4.0",
             "-d",
@@ -195,9 +190,9 @@ class TestParseArguments(unittest.TestCase):
 
         args = asvs.parse_arguments(test_args)
 
-        self.assertEqual(Path(args.output_path), Path("/custom/output"))
-        self.assertEqual(Path(args.input_path), Path("/custom/input.json"))
-        self.assertEqual(Path(args.asvs_to_capec), Path("/custom/mapping.yaml"))
+        self.assertEqual(Path(args.output_path), Path("custom/output"))
+        self.assertEqual(Path(args.input_path), Path("custom/input.json"))
+        self.assertEqual(Path(args.asvs_to_capec), Path("custom/mapping.yaml"))
         self.assertEqual(args.capec_version, "4.0")
         self.assertTrue(args.debug)
 
@@ -205,11 +200,11 @@ class TestParseArguments(unittest.TestCase):
         """Test parsing arguments with long form flags"""
         test_args = [
             "--output-path",
-            "/custom/output",
+            "custom/output",
             "--input-path",
-            "/custom/input.json",
+            "custom/input.json",
             "--asvs-to-capec",
-            "/custom/mapping.yaml",
+            "custom/mapping.yaml",
             "--capec-version",
             "4.0",
             "--debug",
@@ -217,9 +212,9 @@ class TestParseArguments(unittest.TestCase):
 
         args = asvs.parse_arguments(test_args)
 
-        self.assertEqual(Path(args.output_path), Path("/custom/output"))
-        self.assertEqual(Path(args.input_path), Path("/custom/input.json"))
-        self.assertEqual(Path(args.asvs_to_capec), Path("/custom/mapping.yaml"))
+        self.assertEqual(Path(args.output_path), Path("custom/output"))
+        self.assertEqual(Path(args.input_path), Path("custom/input.json"))
+        self.assertEqual(Path(args.asvs_to_capec), Path("custom/mapping.yaml"))
         self.assertEqual(args.capec_version, "4.0")
         self.assertTrue(args.debug)
 

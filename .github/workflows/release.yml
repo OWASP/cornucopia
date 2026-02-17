@@ -28,6 +28,8 @@
               cache: 'pipenv' # caching pip dependencies
           - name: Install dependencies
             run: |
+              sudo apt-get update
+              sudo apt-get install -y libreoffice
               pip install -r requirements.txt --require-hashes
               pipenv install --ignore-pipfile --dev
           # Run the tests
@@ -100,7 +102,7 @@
           - name: Create release
             uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
             with:
-              draft: true
+              draft: false
               prerelease: false
               files: |
                 CHANGELOG.md
@@ -119,15 +121,15 @@
                 output/owasp_cornucopia_webapp_2.2_pt-br.zip
                 output/owasp_cornucopia_webapp_2.2_pt-pt.zip
                 output/owasp_cornucopia_webapp_2.2_ru.zip
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_en.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_es.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_it.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_en.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_es.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_it.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.odt
                 resources/case/*\2.2_case_*
                 resources/case/*\1.1_case_*
                 source/*1\.1-*.yaml

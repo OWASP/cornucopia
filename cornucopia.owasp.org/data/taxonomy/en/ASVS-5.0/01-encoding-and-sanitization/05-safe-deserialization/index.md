@@ -8,7 +8,7 @@ Required for Level 1, 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [19](/taxonomy/capec-3.9/19/index.md), [201](/taxonomy/capec-3.9/201/index.md), [23](/taxonomy/capec-3.9/23/index.md), [242](/taxonomy/capec-3.9/242/index.md), [250](/taxonomy/capec-3.9/250/index.md), [271](/taxonomy/capec-3.9/271/index.md), [66](/taxonomy/capec-3.9/66/index.md)
+CAPEC™ (3.9): [19](/taxonomy/capec-3.9/19), [201](/taxonomy/capec-3.9/201), [23](/taxonomy/capec-3.9/23), [242](/taxonomy/capec-3.9/242), [250](/taxonomy/capec-3.9/250), [271](/taxonomy/capec-3.9/271), [66](/taxonomy/capec-3.9/66)
 
 ## V1.5.2
 
@@ -18,7 +18,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [19](/taxonomy/capec-3.9/19/index.md), [231](/taxonomy/capec-3.9/231/index.md), [242](/taxonomy/capec-3.9/242/index.md), [250](/taxonomy/capec-3.9/250/index.md)
+CAPEC™ (3.9): [19](/taxonomy/capec-3.9/19), [231](/taxonomy/capec-3.9/231), [242](/taxonomy/capec-3.9/242), [250](/taxonomy/capec-3.9/250)
 
 ## V1.5.3
 
@@ -28,7 +28,7 @@ Required for Level 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [126](/taxonomy/capec-3.9/126/index.md), [152](/taxonomy/capec-3.9/152/index.md), [153](/taxonomy/capec-3.9/153/index.md), [165](/taxonomy/capec-3.9/165/index.md), [175](/taxonomy/capec-3.9/175/index.md), [19](/taxonomy/capec-3.9/19/index.md), [201](/taxonomy/capec-3.9/201/index.md), [23](/taxonomy/capec-3.9/23/index.md), [242](/taxonomy/capec-3.9/242/index.md), [250](/taxonomy/capec-3.9/250/index.md), [253](/taxonomy/capec-3.9/253/index.md), [272](/taxonomy/capec-3.9/272/index.md), [48](/taxonomy/capec-3.9/48/index.md), [64](/taxonomy/capec-3.9/64/index.md), [66](/taxonomy/capec-3.9/66/index.md), [664](/taxonomy/capec-3.9/664/index.md)
+CAPEC™ (3.9): [126](/taxonomy/capec-3.9/126), [152](/taxonomy/capec-3.9/152), [153](/taxonomy/capec-3.9/153), [165](/taxonomy/capec-3.9/165), [175](/taxonomy/capec-3.9/175), [19](/taxonomy/capec-3.9/19), [201](/taxonomy/capec-3.9/201), [23](/taxonomy/capec-3.9/23), [242](/taxonomy/capec-3.9/242), [250](/taxonomy/capec-3.9/250), [253](/taxonomy/capec-3.9/253), [272](/taxonomy/capec-3.9/272), [48](/taxonomy/capec-3.9/48), [64](/taxonomy/capec-3.9/64), [66](/taxonomy/capec-3.9/66), [664](/taxonomy/capec-3.9/664)
 
 ## Disclaimer
 

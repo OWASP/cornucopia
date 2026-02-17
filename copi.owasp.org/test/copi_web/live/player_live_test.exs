@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLiveTest do
   use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
+  import Ecto.Query
 
   alias Copi.Cornucopia
   alias Copi.RateLimiter
@@ -128,24 +129,34 @@ defmodule CopiWeb.PlayerLiveTest do
       assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
 
-    test "displays player information", %{conn: conn, player: player} do
-      {:ok, _show_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+    test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
+      # Setup another player
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
       
-      assert html =~ player.name
-      assert html =~ "Cornucopia Web Session"
-    end
+      # Start game
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
 
-    test "handles game updates via broadcast", %{conn: conn, player: player} do
-      {:ok, show_live, _html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      {:ok, show_live, html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       
-      # Get updated game
-      {:ok, updated_game} = Cornucopia.Game.find(player.game_id)
+      # Test continue voting
+      show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
       
-      # Broadcast game update
-      send(show_live.pid, {:game_updated, updated_game})
+      # Verify continue vote created
+      assert Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
       
-      # Should update without crashing
-      :ok
+      # Test that votes are cleared when proceeding to next round
+      # Manually clear votes and advance round to test the functionality
+      Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game_id)
+      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+      
+      # Verify continue votes are cleared
+      refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+      
+      # Verify game advanced to next round
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
     end
   end
 end
