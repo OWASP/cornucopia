@@ -170,11 +170,18 @@ defmodule CopiWeb.PlayerLiveTest do
       # Get updated game
       {:ok, updated_game} = Cornucopia.Game.find(player.game_id)
 
-      # Broadcast game update
-      send(show_live.pid, {:game_updated, updated_game})
+      # Broadcast game update - Phoenix.PubSub is the proper way
+      Phoenix.PubSub.broadcast(
+        Copi.PubSub,
+        "game:#{player.game_id}",
+        {:game_updated, updated_game}
+      )
 
-      # Should update without crashing
-      :ok
+      # Give LiveView time to process
+      :timer.sleep(50)
+      
+      # Verify it doesn't crash and stays connected
+      assert render(show_live) =~ player.name
     end
   end
 end
