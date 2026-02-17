@@ -262,14 +262,6 @@ const config = {
 				'/edition/webapp/VE2/2.2/ru',
 				'/edition/webapp/VE2/3.0',
 				'/edition/webapp/VE2/3.0/en',
-				'/edition/webapp/VE2/3.0/es',
-				'/edition/webapp/VE2/3.0/it',
-				'/edition/webapp/VE2/3.0/nl',
-				'/edition/webapp/VE2/3.0/fr',
-				'/edition/webapp/VE2/3.0/pt_pt',
-				'/edition/webapp/VE2/3.0/pt_br',
-				'/edition/webapp/VE2/3.0/no_nb',
-				'/edition/webapp/VE2/3.0/ru',
 			]
     },
     csrf: {

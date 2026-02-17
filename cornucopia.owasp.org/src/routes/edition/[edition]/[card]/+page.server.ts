@@ -26,7 +26,7 @@ export const load: PageServerLoad = ({ params }) => {
     lang,
     cards,
     versions: DeckService.getVersions(edition),
-    languages: DeckService.getLanguages(edition),
+    languages: DeckService.getLanguagesForEditionVersion(edition, version),
     routes: new Map<string, Route[]>([
       ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]
     ]),

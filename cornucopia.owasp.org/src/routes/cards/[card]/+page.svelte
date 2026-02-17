@@ -15,7 +15,6 @@
   let t = readTranslation();
   const lang = $state(readLang());
 
-  // ✅ FIX: use data.cards instead of data.decks
   const cards = $derived(data.cards);
   let card: Card = $derived(cards?.get(data.card) as Card);
 

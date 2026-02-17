@@ -31,9 +31,10 @@
     return card ? cards_options.includes(card.id) : false;
   }
 
-  function changeVersion(v: string) {
-    goto(`/edition/${data.edition}/${data.card}/${v}/${data.lang}`);
-  }
+function changeVersion(v: string) {
+  goto(`/edition/${data.edition}/${data.card}/${v}/en`);
+}
+
 
   function getEdition(str: string): string {
     if (str === "webapp") return "Website App Edition";

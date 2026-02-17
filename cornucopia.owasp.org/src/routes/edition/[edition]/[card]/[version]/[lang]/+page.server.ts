@@ -73,7 +73,7 @@ if (!cards.has(cardId) && resolvedLang !== "en") {
     lang: resolvedLang,
     cards,
     versions: DeckService.getVersions(edition),
-    languages: DeckService.getLanguages(edition),
+    languages: DeckService.getLanguagesForEditionVersion(edition, version),
     routes,
     mappingData,
     capecData
