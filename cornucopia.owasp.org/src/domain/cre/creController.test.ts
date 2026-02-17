@@ -321,3 +321,18 @@ describe('CreController tests', () => {
         });
     });
 });
+
+describe('Additional coverage boosters', () => {
+
+    it('should return empty standards when deck is empty', () => {
+        const controller = new CreController(new Map(), {
+            getMeta: () => ({ version: '1.0' }),
+            getCardMappings: () => ({ owasp_cre: { owasp_asvs: [] } })
+        } as any);
+
+        const result = controller.getCreMapping('webapp', 'en');
+        expect(result.standards).toHaveLength(0);
+    });
+
+});
+

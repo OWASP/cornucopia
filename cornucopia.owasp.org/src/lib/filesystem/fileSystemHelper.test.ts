@@ -123,3 +123,14 @@ describe('FileSystemHelper tests', () => {
         });
     });
 });
+
+describe('Additional coverage boosters', () => {
+
+    it('should handle nonexistent route gracefully', () => {
+        const [categories, content] = FileSystemHelper.getDataByRoute('/taxonomy/nonexistent', 'en');
+        expect(categories).toBeDefined();
+        expect(content).toBeDefined();
+    });
+
+});
+
