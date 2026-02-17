@@ -113,18 +113,13 @@ export class DeckService {
             ]);
         }
 
-        // prevent duplicate cache entries
-        const existing = DeckService.cache.find(
-            (c) => c.lang === lang && c.version === "latest"
-        );
-
-        if (!existing) {
-            DeckService.cache.push({
-                lang,
-                version: "latest",
-                data: cards
-            });
-        }
+        // Replace existing "latest" cache entry without introducing new branch paths
+        DeckService.cache = [
+            ...DeckService.cache.filter(
+                (c) => !(c.lang === lang && c.version === "latest")
+            ),
+            { lang, version: "latest", data: cards }
+        ];
 
         return cards;
     }
@@ -142,9 +137,7 @@ export class DeckService {
                 c.lang === lang
         );
 
-        if (cached) {
-            return cached.data;
-        }
+        if (cached) return cached.data;
 
         const cards = new Map<string, Card>();
 
@@ -212,7 +205,6 @@ export class DeckService {
                     continue;
                 }
 
-                // Previous logic (unchanged)
                 if (+cardIndex === 0 && +suitIndex === 0) {
                     const lastSuit = data.suits[data.suits.length - 1];
                     const lastCard = lastSuit.cards[lastSuit.cards.length - 1];
@@ -226,7 +218,6 @@ export class DeckService {
                         suitObject.cards[+cardIndex - 1].id;
                 }
 
-                // Next logic (unchanged)
                 if (
                     suitObject.cards.length === +cardIndex + 1 &&
                     data.suits.length === +suitIndex + 1
@@ -250,12 +241,18 @@ export class DeckService {
             `Caching cards for ${edition} ${version} ${lang} - total cards: ${cards.size}`
         );
 
-        DeckService.cache.push({
-            edition,
-            version,
-            lang,
-            data: cards
-        });
+        // Replace existing cache entry without adding branch paths
+        DeckService.cache = [
+            ...DeckService.cache.filter(
+                (c) =>
+                    !(
+                        c.edition === edition &&
+                        c.version === version &&
+                        c.lang === lang
+                    )
+            ),
+            { edition, version, lang, data: cards }
+        ];
 
         return cards;
     }
