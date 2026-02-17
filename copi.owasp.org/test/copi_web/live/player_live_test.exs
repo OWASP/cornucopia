@@ -158,5 +158,23 @@ defmodule CopiWeb.PlayerLiveTest do
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
     end
+
+    test "displays player information", %{conn: conn, player: player} do
+      {:ok, _show_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      assert html =~ player.name
+      assert html =~ "Cornucopia Web Session"
+    end
+
+    test "handles game updates via broadcast", %{conn: conn, player: player} do
+      {:ok, show_live, _html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      # Get updated game
+      {:ok, updated_game} = Cornucopia.Game.find(player.game_id)
+
+      # Broadcast game update
+      send(show_live.pid, {:game_updated, updated_game})
+
+      # Should update without crashing
+      :ok
+    end
   end
 end
