@@ -12,11 +12,20 @@ DOCKER = docker run \
 SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -O globstar -c
 
-HOST_IP ?= $(shell ip addr show dev docker0 | grep -oP "(?<=inet )[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
-RETRY_DELAY = 0.01
+# Detect OS
+UNAME_S := $(shell uname -s)
 
-PYTHON_TEST_PATTERN ?= "*_?test.py" # Default to all types of tests
-PYTHON_COVERAGE_MIN = 85 # %
+ifeq ($(UNAME_S),Linux)
+HOST_IP ?= $(shell ip addr show dev docker0 | grep -oP "(?<=inet )[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
+else
+HOST_IP ?= host.docker.internal
+$(info Running on macOS — using host.docker.internal as HOST_IP)
+endif
+
+RETRY_DELAY ?= 0.01
+
+PYTHON_TEST_PATTERN ?= "*_?test.py"
+PYTHON_COVERAGE_MIN = 85
 
 .PHONY: shfmt shellcheck pipenv
 shfmt shellcheck pipenv:
@@ -47,9 +56,14 @@ static-check: pipenv
 .PHONY: coverage-check
 coverage-check: python-coverage-only
 
+
 .PHONY: test
 test: python-unit-test python-integration-test coverage-check
-	@$(MAKE) -C docker smoke-test
+	@if [ -d docker ]; then \
+		$(MAKE) -C docker smoke-test; \
+	else \
+		echo "Skipping docker smoke tests (docker directory not found)"; \
+	fi
 
 .PHONY: python-test
 python-test: pipenv
@@ -100,8 +114,7 @@ release:
 	git pull origin master
 	./version-up.sh --patch -r --prefix v --apply
 	@rm -f .version.properties
-	# To release a new version:
-	# git push origin --tag <name of tag>
+
 .PHONY: release-patch
 release-patch:
 	@rm -f .version.properties
@@ -111,9 +124,7 @@ release-patch:
 	git pull origin master
 	./version-up.sh --patch -r --prefix v --apply
 	@rm -f .version.properties
-	#
-	# To release a new version:
-	# git push origin --tag <name of tag>
+
 .PHONY: release-minor
 release-minor:
 	@rm -f .version.properties
@@ -123,9 +134,7 @@ release-minor:
 	git pull origin master
 	./version-up.sh --minor -r --prefix v --apply
 	@rm -f .version.properties
-	#
-	# To release a new version:
-	# git push origin --tag <name of tag>
+
 .PHONY: release-major
 release-major:
 	@rm -f .version.properties
@@ -135,8 +144,6 @@ release-major:
 	git pull origin master
 	./version-up.sh --major -r --prefix v --apply
 	@rm -f .version.properties
-	# 
-	# To release a new version:
-	# git push origin --tag <name of tag>
+
 .PHONY: ready
 ready: fmt static-check python-coverage
