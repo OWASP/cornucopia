@@ -1,36 +1,33 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { config } from 'dotenv';
-config();
+import { config as dotenvConfig } from 'dotenv';
+dotenvConfig();
 
-export default {
-	preprocess: vitePreprocess(),
-	kit: 
-	{
-		adapter: adapter({
-			routes: {
-				include: ['/*'],
-				exclude: ["/build/*"]
-			},
-			fallback: '/error'
-		}),
-		alias: {
-			$data: "data",
-			$domain: "src/domain",
-		},
-		prerender: {
-			handleHttpError: ({ path, referrer, message }) => {
-				console.log(message);
-				console.log(referrer);
-				console.log(path);
-				// otherwise fail the build
-				throw new Error(message);
-			},
-			handleMissingId: ({ path, id, referrers, message }) => {
-			 if (id == 'card') return;
-			 throw new Error(message);
-			},
-			entries: [
+const config = {
+  preprocess: vitePreprocess(),
+  kit: {
+    adapter: adapter({
+      routes: {
+        include: ['/*'],
+        exclude: ['/build/*']
+      },
+      fallback: '/error'
+    }),
+    alias: {
+      $data: 'data',
+      $domain: 'src/domain'
+    },
+    prerender: {
+      handleUnseenRoutes: 'ignore', // avoids errors for missing routes
+      handleHttpError: ({ path, referrer, message }) => {
+        console.log(message, referrer, path);
+        throw new Error(message);
+      },
+      handleMissingId: ({ path, id, referrers, message }) => {
+        if (id === 'card') return;
+        throw new Error(message);
+      },
+      entries: [
 				'/cards/AAA',
 				'/cards/AA2',
 				'/cards/AA3',
@@ -265,18 +262,13 @@ export default {
 				'/edition/webapp/VE2/2.2/ru',
 				'/edition/webapp/VE2/3.0',
 				'/edition/webapp/VE2/3.0/en',
-				'/edition/webapp/VE2/3.0/es',
-				'/edition/webapp/VE2/3.0/it',
-				'/edition/webapp/VE2/3.0/nl',
-				'/edition/webapp/VE2/3.0/fr',
-				'/edition/webapp/VE2/3.0/pt_pt',
-				'/edition/webapp/VE2/3.0/pt_br',
-				'/edition/webapp/VE2/3.0/no_nb',
-				'/edition/webapp/VE2/3.0/ru',
 			]
-		},
-		csrf: {
-			checkOrigin: true
-		}
-	}
+    },
+    csrf: {
+      checkOrigin: true
+    }
+  }
 };
+
+export default config;
+

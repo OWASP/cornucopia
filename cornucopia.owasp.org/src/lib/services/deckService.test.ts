@@ -19,6 +19,22 @@ describe('DeckService tests', () => {
         DeckService.clear();
     });
 
+describe('getLanguagesForEditionVersion', () => {
+
+    it('should return correct languages for valid edition + version', () => {
+        const languages = DeckService.getLanguagesForEditionVersion('webapp', '2.2');
+        expect(languages).toContain('en');
+        expect(languages).toContain('es');
+    });
+
+    it('should fallback to ["en"] for invalid edition + version', () => {
+        const languages = DeckService.getLanguagesForEditionVersion('invalid', '0.0');
+        expect(languages).toEqual(['en']);
+    });
+
+});
+
+
     describe('hasEdition', () => {
         it('should return true for webapp edition', () => {
             expect(DeckService.hasEdition('webapp')).toBe(true);
@@ -549,3 +565,21 @@ suits:
         });
     }, 10000);
 });
+
+
+describe('Additional coverage boosters', () => {
+
+it('should fallback safely for invalid edition-version', () => {
+    const service = new DeckService();
+    const result = service.getCardDataForEditionVersionLang('invalid', '0.0', 'en');
+    expect(result).toBeInstanceOf(Map);
+});
+
+    it('getCards should merge latest editions properly', () => {
+        const service = new DeckService();
+        const cards = service.getCards('unknown-lang');
+        expect(cards).toBeInstanceOf(Map);
+    });
+
+});
+

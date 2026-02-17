@@ -1,37 +1,49 @@
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { DeckService } from "$lib/services/deckService";
-import type { PageServerLoad } from "./$types";
-import type { Route } from "../../../domain/routes/route";
-import type { Card } from "$domain/card/card";
+import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { MappingService } from "$lib/services/mappingService";
+import type { PageServerLoad } from "./$types";
+import type { Route } from "$domain/routes/route";
+import type { Card } from "$domain/card/card";
+import { error } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
 
-export const load = (({ params }) => {
-  const lang = 'en';
-      const mobileCards = (new DeckService()).getCardDataForEditionVersionLang(
-        'mobileapp', DeckService.getLatestVersion('mobileapp'), lang);
-      const webappCards = (new DeckService()).getCardDataForEditionVersionLang(
-        'webapp', DeckService.getLatestVersion('webapp'), lang);
-      
-      const cards = new Map([...mobileCards, ...webappCards]);
-      const decks = new Map([['en', cards]]);
-      
-      let card : Card = cards.get(legacyCardCodeFix(params.card?.toUpperCase())) as Card;
+export const prerender = false;
+
+export const load: PageServerLoad = ({ params }) => {
+  const edition = "webapp";
+  const version = "2.2";
+  const lang = "en";
+
+  throw redirect(
+    302,
+    `/edition/${edition}/${params.card?.toUpperCase()}/${version}/${lang}`
+  );
+
+  const card = cards.get(cardId) as Card;
+
+  if (!card) {
+    throw error(404, "Card not found");
+  }
+
   return {
-    card: legacyCardCodeFix(params.card?.toUpperCase()),
-    decks: decks,
+    edition,
+    card: cardId,
+    version,
+    lang,
+    cards,
+    versions: DeckService.getVersions(edition),
+    languages: DeckService.getLanguages(edition),
     routes: new Map<string, Route[]>([
-      ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]
+      ["ASVSRoutes", FileSystemHelper.ASVSRouteMap()]
     ]),
-    mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
-    languages: DeckService.getLanguages(card.edition),
+    mappingData: new MappingService().getCardMappingForLatestEdtions()
   };
 
-  // Some QR code errors where done on the first printed decks. This will compensate for that.
   function legacyCardCodeFix(card: string) {
-    return card.replace('COM', 'CM')
-      .replace('CO', 'C')
-      .replace('DVE', 'VE')
-      .replace('AC', 'AT');
+    return card.replace("COM", "CM")
+               .replace("CO", "C")
+               .replace("DVE", "VE")
+               .replace("AC", "AT");
   }
-  
-}) satisfies PageServerLoad;
+};
+

@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  title: OWASP Cornucopia API
+  description: Public API for accessing Cornucopia card data and metadata.
+  version: 1.0.0
+
+servers:
+  - url: /api
+
+paths:
+  /cre/webapp:
+    get:
+      summary: Get supported languages for Webapp edition
+      responses:
+        '200':
+          description: Language metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaWeb'
+
+  /cre/mobileapp:
+    get:
+      summary: Get supported languages for Mobile edition
+      responses:
+        '200':
+          description: Language metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaMobile'
+
+  /cre/webapp/{lang}:
+    get:
+      summary: Get Webapp cards by language
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
+      responses:
+        '200':
+          description: Webapp cards data
+          content:
+            application/json:
+              schema:
+                type: object   # keep generic unless backend schema is known
+
+  /cre/mobileapp/{lang}:
+    get:
+      summary: Get Mobile cards by language
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [en]
+      responses:
+        '200':
+          description: Mobile cards data
+          content:
+            application/json:
+              schema:
+                type: object
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Language not available
+
+    LanguageMetaWeb:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            edition:
+              type: string
+              example: OWASP Cornucopia Website App Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: ["en", "es", "fr", "nl", "no_nb", "pt_br", "pt_pt", "it", "ru"]
+            version:
+              type: string
+              example: "2.2"
+
+    LanguageMetaMobile:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            edition:
+              type: string
+              example: OWASP Cornucopia Mobile App Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: ["en"]
+            version:
+              type: string
+              example: "1.1"
+
