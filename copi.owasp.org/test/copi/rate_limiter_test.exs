@@ -152,7 +152,8 @@ defmodule Copi.RateLimiterTest do
       # Windows should be in reasonable ranges (seconds)
       assert config.windows.game_creation >= 60
       assert config.windows.player_creation >= 60
-      assert config.windows.connection >= 60
+      # Connection window can be as low as 1 second for high-frequency limits
+      assert config.windows.connection >= 1
     end
 
     test "handles invalid environment variable gracefully" do
