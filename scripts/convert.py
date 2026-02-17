@@ -75,23 +75,65 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
 
     try:
         logging.info(f"Using LibreOffice for conversion: {libreoffice_bin}")
+        
+        # Security: Validate and sanitize file paths to prevent command injection
+        source_path = os.path.abspath(source_filename)
+        output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
+        output_path = os.path.abspath(output_pdf_filename)
+        
+        # Additional security checks
+        if not os.path.isfile(source_path):
+            logging.warning(f"Source file does not exist: {source_path}")
+            return False
+            
+        if not os.path.isdir(output_dir):
+            logging.warning(f"Output directory does not exist: {output_dir}")
+            return False
+            
+        # Ensure paths are within expected directories to prevent path traversal
+        base_path = os.path.abspath(convert_vars.BASE_PATH)
+        if not source_path.startswith(base_path):
+            logging.warning(f"Source path outside base directory: {source_path}")
+            return False
+        if not output_dir.startswith(base_path):
+            logging.warning(f"Output directory outside base directory: {output_dir}")
+            return False
+            
+        # Create user profile directory safely
         user_profile_dir = os.path.abspath(os.path.join(convert_vars.BASE_PATH, "output", "lo_profile"))
+        os.makedirs(user_profile_dir, exist_ok=True)
         user_profile_url = "file:///" + user_profile_dir.replace("\\", "/")
+        
+        # Use subprocess with shell=False and proper argument list to prevent command injection
+        # All arguments are properly quoted and validated
+        cmd_args = [
+            libreoffice_bin,
+            "--headless",
+            f"-env:UserInstallation={user_profile_url}",
+            "--convert-to",
+            "pdf",
+            "--outdir",
+            output_dir,
+            source_path,
+        ]
+        
+        # Additional security: Validate each argument doesn't contain dangerous characters
+        for arg in cmd_args:
+            if any(char in arg for char in ['&', '|', ';', '$', '`', '(', ')', '<', '>', '*', '?', '[', ']', '{', '}', '\\']):
+                logging.warning(f"Potentially dangerous character found in argument: {arg}")
+                return False
+        
         subprocess.run(
-            [
-                libreoffice_bin,
-                "--headless",
-                f"-env:UserInstallation={user_profile_url}",
-                "--convert-to",
-                "pdf",
-                "--outdir",
-                os.path.abspath(os.path.dirname(output_pdf_filename)),
-                os.path.abspath(source_filename),
-            ],
+            cmd_args,
             check=True,
             capture_output=True,
+            text=True,
+            timeout=300  # 5 minute timeout to prevent hanging
         )
         return True
+    except subprocess.TimeoutExpired:
+        logging.warning("LibreOffice conversion timed out after 5 minutes")
+        return False
     except Exception as e:
         logging.warning(f"LibreOffice conversion failed: {e}")
         return False
