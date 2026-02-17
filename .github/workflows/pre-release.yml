@@ -236,6 +236,10 @@
               pipenv run python scripts/convert.py -l en -lt guide -t bridge -v 3.0 -e webapp --pdf
               pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 3.0 -e webapp --pdf
               #
+              # Debug: List generated files to verify PDF and ODT files exist
+              echo "Listing generated guide files:"
+              ls -lh output/*guide*.odt output/*guide*.pdf 2>/dev/null || echo "Some guide files may be missing"
+              #
               cp output/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml output/cornucopia_mobileapp/
               cp output/owasp_cornucopia_webapp_2.2_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.2_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_2.2_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.2_leaflet_tarot_en.idml output/cornucopia_webapp/
               cp output/owasp_cornucopia_webapp_2.2_cards_bridge_es.idml output/owasp_cornucopia_webapp_2.2_cards_bridge_qr_es.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_es.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_qr_es.idml output/owasp_cornucopia_webapp_2.2_leaflet_bridge_es.idml output/owasp_cornucopia_webapp_2.2_leaflet_tarot_es.idml output/cornucopia_webapp/

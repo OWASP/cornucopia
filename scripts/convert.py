@@ -143,6 +143,11 @@ def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -
 
 
 def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
+    """Convert a document file (ODF, DOCX) to PDF using LibreOffice or docx2pdf.
+
+    Note: The source file is preserved after conversion, as it's typically an output
+    file that should be kept alongside the PDF, not a temporary file.
+    """
     logging.debug(
         f" --- source_file = {source_filename} convert to {output_pdf_filename}\n--- starting pdf conversion now."
     )
@@ -150,7 +155,7 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
     # 1. Attempt using LibreOffice
     if _convert_with_libreoffice(source_filename, output_pdf_filename):
         _rename_libreoffice_output(source_filename, output_pdf_filename)
-        _cleanup_temp_file(source_filename)
+        # Don't delete the source file - we want to keep both ODF and PDF
         return
 
     # 2. Fallback to docx2pdf
@@ -160,7 +165,7 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
 
     # 3. Everything failed
     _handle_conversion_failure(source_filename)
-    _cleanup_temp_file(source_filename)
+    # Don't delete the source file even on failure - it may still be useful
 
 
 def create_edition_from_template(
