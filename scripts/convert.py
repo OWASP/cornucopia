@@ -63,6 +63,38 @@ def check_make_list_into_text(var: List[str]) -> str:
     return text_output
 
 
+def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tuple[bool, str, str]:
+    """Validate and sanitize file paths to prevent command injection."""
+    source_path = os.path.abspath(source_filename)
+    output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
+    
+    # Additional security checks
+    if not os.path.isfile(source_path):
+        return False, f"Source file does not exist: {source_path}", ""
+        
+    if not os.path.isdir(output_dir):
+        return False, f"Output directory does not exist: {output_dir}", ""
+        
+    # Ensure paths are within expected directories to prevent path traversal
+    base_path = os.path.abspath(convert_vars.BASE_PATH)
+    if not source_path.startswith(base_path):
+        return False, f"Source path outside base directory: {source_path}", ""
+    if not output_dir.startswith(base_path):
+        return False, f"Output directory outside base directory: {output_dir}", ""
+        
+    return True, source_path, output_dir
+
+
+def _validate_command_args(cmd_args: List[str]) -> bool:
+    """Validate command arguments for dangerous characters."""
+    dangerous_chars = ['&', '|', ';', '$', '`', '(', ')', '<', '>', '*', '?', '[', ']', '{', '}', '\\']
+    for arg in cmd_args:
+        if any(char in arg for char in dangerous_chars):
+            logging.warning(f"Potentially dangerous character found in argument: {arg}")
+            return False
+    return True
+
+
 def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
     libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
     if not libreoffice_bin and platform.system() == "Windows":
@@ -75,37 +107,19 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
 
     try:
         logging.info(f"Using LibreOffice for conversion: {libreoffice_bin}")
-
-        # Security: Validate and sanitize file paths to prevent command injection
-        source_path = os.path.abspath(source_filename)
-        output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
-        output_path = os.path.abspath(output_pdf_filename)
-
-        # Additional security checks
-        if not os.path.isfile(source_path):
-            logging.warning(f"Source file does not exist: {source_path}")
+        
+        # Validate file paths
+        is_valid, source_path, output_dir = _validate_file_paths(source_filename, output_pdf_filename)
+        if not is_valid:
+            logging.warning(source_path)  # source_path contains the error message
             return False
-
-        if not os.path.isdir(output_dir):
-            logging.warning(f"Output directory does not exist: {output_dir}")
-            return False
-
-        # Ensure paths are within expected directories to prevent path traversal
-        base_path = os.path.abspath(convert_vars.BASE_PATH)
-        if not source_path.startswith(base_path):
-            logging.warning(f"Source path outside base directory: {source_path}")
-            return False
-        if not output_dir.startswith(base_path):
-            logging.warning(f"Output directory outside base directory: {output_dir}")
-            return False
-
+            
         # Create user profile directory safely
         user_profile_dir = os.path.abspath(os.path.join(convert_vars.BASE_PATH, "output", "lo_profile"))
         os.makedirs(user_profile_dir, exist_ok=True)
         user_profile_url = "file:///" + user_profile_dir.replace("\\", "/")
-
-        # Use subprocess with shell=False and proper argument list to prevent command injection
-        # All arguments are properly quoted and validated
+        
+        # Build command arguments
         cmd_args = [
             libreoffice_bin,
             "--headless",
@@ -116,18 +130,18 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
             output_dir,
             source_path,
         ]
-
-        # Additional security: Validate each argument doesn't contain dangerous characters
-        for arg in cmd_args:
-            if any(
-                char in arg
-                for char in ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
-            ):
-                logging.warning(f"Potentially dangerous character found in argument: {arg}")
-                return False
-
+        
+        # Validate command arguments
+        if not _validate_command_args(cmd_args):
+            return False
+        
+        # Execute conversion
         subprocess.run(
-            cmd_args, check=True, capture_output=True, text=True, timeout=300  # 5 minute timeout to prevent hanging
+            cmd_args,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=300  # 5 minute timeout to prevent hanging
         )
         return True
     except subprocess.TimeoutExpired:
