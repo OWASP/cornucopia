@@ -6,7 +6,6 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   alias Copi.RateLimiter
 
   @impl true
-
   def render(assigns) do
     ~H"""
     <div>
@@ -21,12 +20,20 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label={gettext "Player Name"} />
+        <.input field={@form[:name]} type="text" label={gettext("Player Name")} />
 
         <input type="hidden" name={@form[:game_id].name} value={@form[:game_id].value} />
 
+        <div class="border border-yellow-400 bg-yellow-50 text-yellow-800 rounded-md p-3 mt-2">
+          <p class="text-sm">
+            Please note: Avoid submitting sensitive and/or personal information to minimize the risk of data exfiltration due to accidental data exposure.
+          </p>
+        </div>
+
         <:actions>
-          <.primary_button phx-disable-with="Joining..." class="m-auto block py-2 px-3"><%= gettext "Join the game" %></.primary_button>
+          <.primary_button phx-disable-with="Joining..." class="m-auto block py-2 px-4">
+            <%= gettext("Join game") %>
+          </.primary_button>
         </:actions>
       </.simple_form>
     </div>
@@ -50,9 +57,10 @@ defmodule CopiWeb.PlayerLive.FormComponent do
       |> Cornucopia.change_player(player_params)
       |> Map.put(:action, :validate)
 
-      {:noreply, assign_form(socket, changeset)}
+    {:noreply, assign_form(socket, changeset)}
   end
 
+  @impl true
   def handle_event("save", %{"player" => player_params}, socket) do
     save_player(socket, socket.assigns.action, player_params)
   end
