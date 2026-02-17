@@ -139,13 +139,14 @@ defmodule Copi.RateLimiter do
 
   @impl true
   def handle_info(:cleanup, state) do
-    now = System.system_time(:second)
+    now = System.monotonic_time(:millisecond)
 
     new_requests =
       state.requests
       |> Enum.map(fn {{ip, action}, timestamps} ->
         window = state.windows[action]
-        valid_timestamps = Enum.filter(timestamps, fn ts -> now - ts < window end)
+        window_ms = window * 1_000
+        valid_timestamps = Enum.filter(timestamps, fn ts -> now - ts < window_ms end)
         {{ip, action}, valid_timestamps}
       end)
       |> Enum.reject(fn {_key, timestamps} -> Enum.empty?(timestamps) end)
