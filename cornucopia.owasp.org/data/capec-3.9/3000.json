@@ -67515,7 +67515,531 @@
 					"_ID": "515",
 					"_Name": "Hardware",
 					"_Status": "Draft"
-				}
+				},
+				{
+				"Summary": "Attack patterns within this category focus on the gathering, collection, and theft of information by an adversary. The adversary may collect this information through a variety of methods including active querying as well as passive observation. By exploiting weaknesses in the design or configuration of the target and its communications, an adversary is able to get the target to reveal more information than intended. Information retrieved may aid the adversary in making inferences about potential weaknesses, vulnerabilities, or techniques that assist the adversary's objectives. This information may include details regarding the configuration or capabilities of the target, clues as to the timing or nature of activities, or otherwise sensitive information. Often this sort of attack is undertaken in preparation for some other type of attack, although the collection of information by itself may in some cases be the end goal of the adversary.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "116"
+						},
+						{
+							"_CAPEC_ID": "117"
+						},
+						{
+							"_CAPEC_ID": "169"
+						},
+						{
+							"_CAPEC_ID": "224"
+						},
+						{
+							"_CAPEC_ID": "188"
+						},
+						{
+							"_CAPEC_ID": "192"
+						},
+						{
+							"_CAPEC_ID": "410"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-08-04",
+							"Modification_Comment": "Updated Relationships"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Gather Information"
+					}
+				},
+				"_ID": "118",
+				"_Name": "Collect and Analyze Information",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "Attack patterns within this category focus on the ability to control or disrupt the behavior of a target either through crafted data submitted via an interface for data input, or the installation and execution of malicious code on the target system. The former happens when an adversary adds material to their input that is interpreted by the application causing the targeted application to perform steps unintended by the application manager or causing the application to enter an unstable state. Attacks of this type differ from Data Structure Attacks in that the latter attacks subvert the underlying structures that hold user-provided data, either pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting in values that the targeted application is unable to handle correctly (in the case of Integer Overflows). In Injection attacks, the input is interpreted by the application, but the attacker has included instructions to the interpreting functions that the target application then follows.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "137"
+						},
+						{
+							"_CAPEC_ID": "175"
+						},
+						{
+							"_CAPEC_ID": "240"
+						},
+						{
+							"_CAPEC_ID": "242"
+						},
+						{
+							"_CAPEC_ID": "248"
+						},
+						{
+							"_CAPEC_ID": "549"
+						},
+						{
+							"_CAPEC_ID": "624"
+						},
+						{
+							"_CAPEC_ID": "594"
+						},
+						{
+							"_CAPEC_ID": "586"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-11-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Description, Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-05-01",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2018-07-31",
+							"Modification_Comment": "Updated Description"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Injection"
+					}
+				},
+				"_ID": "152",
+				"_Name": "Inject Unexpected Items",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "Attack patterns within this category focus on malicious interactions with a target in an attempt to deceive the target and convince the target that it is interacting with some other principal and as such take actions based on the level of trust that exists between the target and the other principal. These types of attacks assume that some piece of content or functionality is associated with an identity and that the content / functionality is trusted by the target because of this association. Often identified by the term \"spoofing\", these types of attacks rely on the falsification of the content and/or identity in such a way that the target will incorrectly trust the legitimacy of the content. For example, an attacker may modify a financial transaction between two parties so that the participants remain unchanged but the amount of the transaction is increased. If the recipient cannot detect the change, they may incorrectly assume the modified message originated with the original sender. Attacks of these type may involve an adversary crafting the content from scratch or capturing and modifying legitimate content.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "148"
+						},
+						{
+							"_CAPEC_ID": "151"
+						},
+						{
+							"_CAPEC_ID": "154"
+						},
+						{
+							"_CAPEC_ID": "173"
+						},
+						{
+							"_CAPEC_ID": "416"
+						},
+						{
+							"_CAPEC_ID": "690"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-11-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2023-01-24",
+							"Modification_Comment": "Updated Relationships"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Deceptive Interactions"
+					}
+				},
+				"_ID": "156",
+				"_Name": "Engage in Deceptive Interactions",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "An attacker exploits weaknesses in timing or state maintaining functions to perform actions that would otherwise be prevented by the execution flow of the target code and processes. An example of a state attack might include manipulation of an application's information to change the apparent credentials or similar information, possibly allowing the application to access material it would not normally be allowed to access. A common example of a timing attack is a test-action race condition where some state information is tested and, if it passes, an action is performed. If the attacker can change the state between the time that the application performs the test and the time the action is performed, then they might be able to manipulate the outcome of the action to malicious ends.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "25"
+						},
+						{
+							"_CAPEC_ID": "26"
+						},
+						{
+							"_CAPEC_ID": "74"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": {
+						"Modification_Name": "CAPEC Content Team",
+						"Modification_Organization": "The MITRE Corporation",
+						"Modification_Date": "2017-01-09",
+						"Modification_Comment": "Updated Relationships"
+					}
+				},
+				"_ID": "172",
+				"_Name": "Manipulate Timing and State",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "An adversary uses or manipulates one or more functions of an application in order to achieve a malicious objective not originally intended by the application, or to deplete a resource to the point that the target's functionality is affected. This is a broad class of attacks wherein the adversary is able to alter the intended result or purpose of the functionality and thereby affect application behavior or information integrity. Outcomes can range from information exposure, vandalism, degrading or denial of service, as well as execution of arbitrary code on the target machine.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "113"
+						},
+						{
+							"_CAPEC_ID": "125"
+						},
+						{
+							"_CAPEC_ID": "130"
+						},
+						{
+							"_CAPEC_ID": "131"
+						},
+						{
+							"_CAPEC_ID": "212"
+						},
+						{
+							"_CAPEC_ID": "216"
+						},
+						{
+							"_CAPEC_ID": "227"
+						},
+						{
+							"_CAPEC_ID": "272"
+						},
+						{
+							"_CAPEC_ID": "554"
+						}
+					]
+				},
+				"Taxonomy_Mappings": {
+					"Taxonomy_Mapping": {
+						"Entry_ID": "42",
+						"Entry_Name": "Abuse of Functionality",
+						"_Taxonomy_Name": "WASC"
+					}
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-11-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-12-07",
+							"Modification_Comment": "Updated Attack_Prerequisites, Description, Relationships, Resources_Required"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Description, Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-08-04",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2020-12-17",
+							"Modification_Comment": "Updated Taxonomy_Mappings"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Abuse of Functionality"
+					}
+				},
+				"_ID": "210",
+				"_Name": "Abuse Existing Functionality",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "An attacker utilizes probabilistic techniques to explore and overcome security properties of the target that are based on an assumption of strength due to the extremely low mathematical probability that an attacker would be able to identify and exploit the very rare specific conditions under which those security properties do not hold.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "112"
+						},
+						{
+							"_CAPEC_ID": "28"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": {
+						"Modification_Name": "CAPEC Content Team",
+						"Modification_Organization": "The MITRE Corporation",
+						"Modification_Date": "2017-01-09",
+						"Modification_Comment": "Updated Relationships"
+					},
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Probabilistic Techniques"
+					}
+				},
+				"_ID": "223",
+				"_Name": "Employ Probabilistic Techniques",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "An attacker actively targets exploitation of weaknesses, limitations and assumptions in the mechanisms a target utilizes to manage identity and authentication as well as manage access to its resources or authorize functionality. Such exploitation can lead to the complete subversion of any trust the target system may have in the identity of any entity with which it interacts, or the complete subversion of any control the target has over its data or functionality. Weaknesses targeted by subversion of authorization controls are often due to three primary factors: 1) a fundamental dependence on authentication mechanisms being effective; 2) a lack of effective control over the separation of privilege between various entities; and 3) assumptions and over confidence in the strength or rigor of the implemented authorization mechanisms.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "21"
+						},
+						{
+							"_CAPEC_ID": "114"
+						},
+						{
+							"_CAPEC_ID": "115"
+						},
+						{
+							"_CAPEC_ID": "22"
+						},
+						{
+							"_CAPEC_ID": "94"
+						},
+						{
+							"_CAPEC_ID": "122"
+						},
+						{
+							"_CAPEC_ID": "233"
+						},
+						{
+							"_CAPEC_ID": "390"
+						},
+						{
+							"_CAPEC_ID": "507"
+						},
+						{
+							"_CAPEC_ID": "560"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-11-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Description, Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2018-07-31",
+							"Modification_Comment": "Updated Description"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2019-09-30",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2020-07-30",
+							"Modification_Comment": "Updated Relationships"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Exploitation of Authentication"
+					}
+				},
+				"_ID": "225",
+				"_Name": "Subvert Access Control",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "Attack patterns in this category manipulate and exploit characteristics of system data structures in order to violate the intended usage and protections of these structures. This is done in such a way that yields either improper access to the associated system data or violations of the security properties of the system itself due to vulnerabilities in how the system processes and manages the data structures. Often, vulnerabilities and therefore exploitability of these data structures exist due to ambiguity and assumption in their design and prescribed handling.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "123"
+						},
+						{
+							"_CAPEC_ID": "124"
+						},
+						{
+							"_CAPEC_ID": "129"
+						},
+						{
+							"_CAPEC_ID": "153"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": {
+						"Modification_Name": "CAPEC Content Team",
+						"Modification_Organization": "The MITRE Corporation",
+						"Modification_Date": "2017-01-09",
+						"Modification_Comment": "Updated Description, Relationships"
+					}
+				},
+				"_ID": "255",
+				"_Name": "Manipulate Data Structures",
+				"_Status": "Stable"
+			},
+			{
+				"Summary": "Attack patterns within this category focus on the adversary's ability to manipulate one or more resources in order to achieve a desired outcome. This is a broad class of attacks wherein the attacker is able to change some aspect of a resource's state or availability and thereby affect system behavior or information integrity. Examples of resources include files, applications, libraries, infrastructure, and configuration information. Outcomes can range from vandalism and reduction in service to the execution of arbitrary code on the target machine.",
+				"Relationships": {
+					"Has_Member": [
+						{
+							"_CAPEC_ID": "184"
+						},
+						{
+							"_CAPEC_ID": "440"
+						},
+						{
+							"_CAPEC_ID": "161"
+						},
+						{
+							"_CAPEC_ID": "165"
+						},
+						{
+							"_CAPEC_ID": "176"
+						},
+						{
+							"_CAPEC_ID": "607"
+						},
+						{
+							"_CAPEC_ID": "438"
+						},
+						{
+							"_CAPEC_ID": "439"
+						},
+						{
+							"_CAPEC_ID": "441"
+						},
+						{
+							"_CAPEC_ID": "548"
+						}
+					]
+				},
+				"Content_History": {
+					"Submission": {
+						"Submission_Name": "CAPEC Content Team",
+						"Submission_Organization": "The MITRE Corporation",
+						"Submission_Date": "2014-06-23"
+					},
+					"Modification": [
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2015-11-09",
+							"Modification_Comment": "Updated Relationships"
+						},
+						{
+							"Modification_Name": "CAPEC Content Team",
+							"Modification_Organization": "The MITRE Corporation",
+							"Modification_Date": "2017-01-09",
+							"Modification_Comment": "Updated Description, Relationships"
+						}
+					],
+					"Previous_Entry_Name": {
+						"_Date": "2017-01-09",
+						"__text": "Manipulate Resources"
+					}
+				},
+				"_ID": "262",
+				"_Name": "Manipulate System Resources",
+				"_Status": "Stable"
+			}
 			]
 		},
 		"Views": {

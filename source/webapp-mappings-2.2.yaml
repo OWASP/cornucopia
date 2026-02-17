@@ -776,9 +776,9 @@ suits:
     id: "AZ9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AZ9"
-    stride: [ D ]
+    stride: [ T ]
     owasp_scp: [ 94 ]
-    stride_print: [ 'Denial of Service' ]
+    stride_print: [ 'Tampering' ]
     owasp_dev_guide: [ ACM1 ]
     owasp_dev_guide_print: [ ACM1 ]
     owasp_asvs: [ 11.1.3, 11.1.4 ]

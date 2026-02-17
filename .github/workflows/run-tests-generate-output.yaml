@@ -61,6 +61,16 @@ jobs:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           total-parts-count: 3
           files: converter/coverage/cobertura.xml
+      - name: Check translation tags
+        run: |
+          pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
+      - name: Upload translation check report
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          retention-days: 5
+          name: translation-check-report.${{ github.sha }}.md
+          path: translation_check_report.md
       - name: Generate new output files
         run: |
           #
@@ -160,11 +170,30 @@ jobs:
       issues: write
     needs: uploadoutputfiles
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Download translation check report
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: translation-check-report.${{ github.sha }}.md
+          path: .
       - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           PR_NUMBER: ${{ github.event.number }}
-          PR_NOTES: |
-            [badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
+          ARTIFACT_URL: ${{needs.uploadoutputfiles.outputs.artifact-url}}
+        with:
+          script: |
+            const fs = require('fs');
+            let translationReport = '';
+            try {
+              translationReport = fs.readFileSync('translation_check_report.md', 'utf8');
+            } catch (error) {
+              translationReport = 'Translation check report not found.';
+            }
+            
+            const prNotes = `[badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
 
             ## Build artifacts:
             
@@ -172,11 +201,13 @@ jobs:
             |------|------|
             | Output files | [cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
             
-        with:
-          script: |
+            ---
+            
+            ${translationReport}`;
+            
             github.rest.issues.createComment({
               issue_number: process.env.PR_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: process.env.PR_NOTES
+              body: prNotes
             })

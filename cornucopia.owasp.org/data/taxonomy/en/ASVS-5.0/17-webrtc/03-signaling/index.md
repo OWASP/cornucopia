@@ -8,7 +8,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [125](/taxonomy/capec-3.9/125/index.md)
+CAPEC™ (3.9): [125](/taxonomy/capec-3.9/125)
 
 ## V17.3.2
 
@@ -18,7 +18,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [125](/taxonomy/capec-3.9/125/index.md), [603](/taxonomy/capec-3.9/603/index.md), [607](/taxonomy/capec-3.9/607/index.md)
+CAPEC™ (3.9): [125](/taxonomy/capec-3.9/125), [603](/taxonomy/capec-3.9/603), [607](/taxonomy/capec-3.9/607)
 
 ## Disclaimer
 
