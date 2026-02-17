@@ -8,7 +8,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [22](/taxonomy/capec-3.9/22/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [22](/taxonomy/capec-3.9/22), [633](/taxonomy/capec-3.9/633)
 
 ## V10.6.2
 
@@ -18,7 +18,7 @@ Required for Level 2 and 3
 
 ### Related CAPEC™ Requirements
 
-CAPEC™ (3.9): [2](/taxonomy/capec-3.9/2/index.md), [633](/taxonomy/capec-3.9/633/index.md)
+CAPEC™ (3.9): [2](/taxonomy/capec-3.9/2), [633](/taxonomy/capec-3.9/633)
 
 ## Disclaimer
 

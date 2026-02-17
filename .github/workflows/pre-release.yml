@@ -153,6 +153,7 @@
           - uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
             name: "Create pre-release"
             with:
+              draft: false
               tag_name: pre-release
               prerelease: true
               name: Latest pre-release
@@ -174,15 +175,46 @@
                 output/owasp_cornucopia_webapp_2.2_pt-br.zip
                 output/owasp_cornucopia_webapp_2.2_pt-pt.zip
                 output/owasp_cornucopia_webapp_2.2_ru.zip
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_en.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_es.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.docx
-                output/owasp_cornucopia_webapp_2.2_guide_bridge_it.docx
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_en.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_es.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_it.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_en.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_es.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_fr.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_it.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_nl.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_no-nb.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_pt-br.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_pt-pt.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_ru.odt
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_en.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_es.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_fr.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_it.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_nl.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_no-nb.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-br.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_pt-pt.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_ru.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_en.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_es.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_fr.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_it.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_nl.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_no-nb.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_pt-br.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_pt-pt.pdf
+                output/owasp_cornucopia_webapp_2.2_guide_bridge_qr_ru.pdf
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_en.odt
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_en.pdf
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_en.odt
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_en.pdf
                 resources/case/*\2.2_case_*
                 resources/case/*\1.1_case_*
                 source/*1\.1-*.yaml

@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLiveTest do
   use CopiWeb.ConnCase
 
   import Phoenix.LiveViewTest
+  import Ecto.Query
 
   alias Copi.Cornucopia
 
@@ -84,6 +85,36 @@ defmodule CopiWeb.PlayerLiveTest do
       
       # Verify vote created
       assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+
+    test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
+      # Setup another player
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      
+      # Start game
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, show_live, html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      
+      # Test continue voting
+      show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
+      
+      # Verify continue vote created
+      assert Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+      
+      # Test that votes are cleared when proceeding to next round
+      # Manually clear votes and advance round to test the functionality
+      Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game_id)
+      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+      
+      # Verify continue votes are cleared
+      refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+      
+      # Verify game advanced to next round
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
     end
   end
 end

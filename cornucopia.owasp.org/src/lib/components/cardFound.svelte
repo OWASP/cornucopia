@@ -22,6 +22,7 @@
     routes: Map<string, Route[]>;
     languages: string[];
     language: string;
+    capecData?: any;
   }
 
   let {
@@ -30,7 +31,8 @@
     cards,
     routes,
     languages,
-    language
+    language,
+    capecData = undefined
   }: Props = $props();
     
   const controller = $derived(new MappingController(mappingData));
@@ -57,7 +59,7 @@
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   {#if card.edition == 'webapp'}
-  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
+  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes} {capecData}></WebAppCardTaxonomy>
   {/if}
   {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>

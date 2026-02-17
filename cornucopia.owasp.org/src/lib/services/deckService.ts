@@ -113,7 +113,7 @@ export class DeckService {
                 cardObject.suitId = suitObject['id'];
                 cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                 cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
-                cardObject.url = `/card/${edition}/${cardObject.id}/${version}/${lang}`;
+                cardObject.url = `/edition/${edition}/${cardObject.id}/${version}/${lang}`;
                 cardObject.githubUrl = `` + cardObject.suit + '/' + cardObject.id;
                 
                 let path : string = `./${base}${cardObject.githubUrl}/technical-note.md`;  // '/explanation.md';

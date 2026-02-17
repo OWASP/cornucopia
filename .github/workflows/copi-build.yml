@@ -5,7 +5,7 @@
     workflow_dispatch:
   env:
     MIX_ENV: test
-    POSTGRES_TEST_PWD: POSTGRES_TEST_PWD
+    POSTGRES_TEST_PWD: POSTGRES_LOCAL_PWD
   permissions:
     contents: read
   jobs:
@@ -16,7 +16,7 @@
           image: postgres:14
           env:
             POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: POSTGRES_TEST_PWD
+            POSTGRES_PASSWORD: POSTGRES_LOCAL_PWD
             POSTGRES_DB: copi_test
           ports:
             - 5432:5432

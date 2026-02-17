@@ -3,6 +3,7 @@ import { DeckService } from "$lib/services/deckService";
 import { error } from '@sveltejs/kit';
 import type { Route } from "$domain/routes/route";
 import { MappingService } from "$lib/services/mappingService";
+import { CapecService } from "$lib/services/capecService";
 
 export const load = (({ params }) => {
     const edition =  params?.edition;
@@ -16,6 +17,13 @@ export const load = (({ params }) => {
       404, "Language not found for " + edition + ". Only: " + DeckService.getLanguages(edition).join(', ') + " are supported.");
     if (!DeckService.hasVersion(edition, version)) error(
       404, "Version not found for " + edition + ". Only: " + DeckService.getVersions(edition).join(', ') + " are supported.");
+    
+    // Load CAPEC data for webapp v3.0+
+    let capecData = undefined;
+    if (edition === 'webapp' && parseFloat(version) >= 3.0) {
+      capecData = CapecService.getCapecData(edition, version);
+    }
+    
     return {
       edition: edition,
       version: version,
@@ -28,7 +36,8 @@ export const load = (({ params }) => {
       mappingData: new Map<string, any>([
         [`${edition}`, (new MappingService()).getCardMappingForAllVersions().get(`${edition}-${version}`)]
       ]),
-      languages: DeckService.getLanguages(edition)
+      languages: DeckService.getLanguages(edition),
+      capecData: capecData
     };
 
     // Some QR code errors where done on the first printed decks. This will compensate for that.

@@ -1,0 +1,102 @@
+name: Smoke Tests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+  push:
+    branches:
+      - master
+    paths:
+      - 'copi.owasp.org/**'
+      - 'tests/scripts/smoke_tests.py'
+      - '.github/workflows/smoke-tests.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-tests:
+    name: Run Smoke Tests
+    runs-on: ubuntu-latest
+    env:
+      COPI_BASE_URL: "http://127.0.0.1:4000"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Get Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+          cache: 'pipenv'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install --ignore-pipfile --dev
+
+      - name: Start DB and Copi application containers
+        run: |
+          set -e
+          echo "Creating docker network for smoke tests"
+          docker network create copi-net || true
+
+          echo "Starting Postgres container"
+          docker run -d --name copi-postgres --network copi-net \
+            -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=copi \
+            postgres:15
+
+          echo "Building Copi Docker image"
+          docker build -t copi-test-image copi.owasp.org
+
+          echo "Generating SECRET_KEY_BASE"
+          SECRET_KEY_BASE=$(python - <<'PY'
+import secrets
+print(secrets.token_hex(64))
+PY
+)
+
+          echo "Starting Copi application container"
+          docker run -d --name copi-app --network copi-net -p 4000:4000 \
+            -e DATABASE_URL=ecto://postgres:postgres@copi-postgres:5432/copi \
+            -e SECRET_KEY_BASE="$SECRET_KEY_BASE" \
+            copi-test-image
+
+          echo "Waiting for Copi to become healthy on ${COPI_BASE_URL}"
+          for i in {1..30}; do
+            if curl -sSfL ${COPI_BASE_URL} >/dev/null; then
+              echo "Copi is up"
+              exit 0
+            fi
+            echo "Waiting for Copi... ($i)"
+            sleep 2
+          done
+          echo "Copi did not start in time"
+          docker logs copi-app || true
+          exit 1
+
+      - name: Run smoke tests for copi.owasp.org
+        run: pipenv run python -m unittest tests.scripts.smoke_tests.CopiSmokeTests -v
+        continue-on-error: false
+
+      - name: Cleanup containers
+        if: always()
+        run: |
+          docker stop copi-app copi-postgres || true
+          docker rm copi-app copi-postgres || true
+          docker network rm copi-net || true
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Smoke Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "Smoke tests completed for copi.owasp.org (Elixir/Phoenix application)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Tests ran against Dockerized application on localhost:4000" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Tests verify:" >> $GITHUB_STEP_SUMMARY
+          echo "- Homepage and cards route are accessible" >> $GITHUB_STEP_SUMMARY
+          echo "- JavaScript is loading and functional" >> $GITHUB_STEP_SUMMARY
+          echo "- Server is healthy and responding with proper headers" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Note: cornucopia.owasp.org has built-in Vite smoke tests" >> $GITHUB_STEP_SUMMARY

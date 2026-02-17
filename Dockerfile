@@ -31,8 +31,8 @@ USER builder
 ARG workdir
 WORKDIR ${workdir}
 COPY --chown=builder:union Pipfile Pipfile.lock ./
-RUN pipenv --python "$(which python)" install --no-cache-dir --ignore-pipfile --dev
+RUN pipenv --python "$(which python)" install --ignore-pipfile --dev
 ENTRYPOINT ["/usr/local/bin/pipenv"]
 
-FROM mvdan/shfmt@sha256:caa0324bdba08f42452a19e6a8462dda9852a1e43ad16185ec3d1ad66524a504 AS shfmt
+FROM mvdan/shfmt@sha256:5b795c0a5f4187fb03755151474cea7c37c9b03ca727bc25273c120a206cbd7c AS shfmt
 ENTRYPOINT ["/bin/shfmt"]
