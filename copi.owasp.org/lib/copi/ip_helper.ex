@@ -100,8 +100,9 @@ defmodule Copi.IPHelper do
   end
 
   defp get_connect_info_ip(socket) do
-    # Use the public API instead of accessing socket.private directly
-    case Phoenix.LiveView.get_connect_info(socket, :peer_data) do
+    # Access peer_data from connect_info
+    # This is safe in both production and test environments
+    case socket.private[:connect_info][:peer_data] do
       %{address: address} -> address
       _ -> nil
     end
