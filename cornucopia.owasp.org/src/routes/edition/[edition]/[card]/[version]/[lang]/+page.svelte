@@ -4,15 +4,14 @@
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "$domain/card/card";
   import { readLang, readTranslation } from "$lib/stores/stores";
-  
+  import type { PageData } from './$types';
 
-  let { data }: Props = $props();
+  let { data }: { data: PageData } = $props();
+  const language = $derived(data?.lang);
   let t = readTranslation();
-  const lang = $state(readLang());
   let cards = $derived(data.cards);
   let card : Card = $derived(cards.get(data.card) as Card);
   let languages = $derived(data.languages);
-  let language = $derived($lang ? $lang : data.lang);
 
   function cardFound() 
     {
@@ -53,7 +52,7 @@
 </svelte:head>
 <div>
 {#if cardFound()}
-  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} {languages} {language} />
+  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}

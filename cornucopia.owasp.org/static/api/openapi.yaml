@@ -1,0 +1,197 @@
+openapi: 3.0.3
+
+info:
+  title: OWASP Cornucopia API
+  description: |
+    Public API for accessing OWASP Cornucopia card data and metadata.
+    This API exposes language metadata and Open CRE mappings
+    for both Website App and Mobile App editions.
+  version: 1.0.0
+
+servers:
+  - url: /api
+
+paths:
+
+  /cre/webapp:
+    get:
+      summary: Get supported languages for Webapp edition
+      description: |
+        Returns metadata about supported languages for the
+        OWASP Cornucopia Website App Edition.
+      responses:
+        '200':
+          description: Language metadata for Website App edition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaWeb'
+              examples:
+                example:
+                  summary: Example language metadata response
+                  value:
+                    meta:
+                      edition: OWASP Cornucopia Website App Edition
+                      component: cards
+                      language: all
+                      languages: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
+                      version: "2.2"
+
+  /cre/mobileapp:
+    get:
+      summary: Get supported languages for Mobile edition
+      description: |
+        Returns metadata about supported languages for the
+        OWASP Cornucopia Mobile App Edition.
+      responses:
+        '200':
+          description: Language metadata for Mobile App edition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaMobile'
+              examples:
+                example:
+                  summary: Example language metadata response
+                  value:
+                    meta:
+                      edition: OWASP Cornucopia Mobile App Edition
+                      component: cards
+                      language: all
+                      languages: [en]
+                      version: "1.1"
+
+  /cre/webapp/{lang}:
+    get:
+      summary: Get Webapp cards by language
+      description: |
+        Get the OWASP Cornucopia Website App Edition cards and
+        their corresponding Open CRE codes by language.
+
+        See Open CRE: https://www.opencre.org/
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
+      responses:
+        '200':
+          description: Website App cards and Open CRE mappings
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Website App response
+                  value:
+                    meta:
+                      edition: OWASP Cornucopia Website App Edition
+                      component: cards
+                      language: en
+                      version: "2.2"
+                    data:
+                      - id: AAA
+                        title: Authentication Architecture
+                        cre:
+                          - CRE-1
+                          - CRE-2
+
+  /cre/mobileapp/{lang}:
+    get:
+      summary: Get Mobile cards by language
+      description: |
+        Get the OWASP Cornucopia Mobile App Edition cards and
+        their corresponding Open CRE codes by language.
+
+        See Open CRE: https://www.opencre.org/
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [en]
+      responses:
+        '200':
+          description: Mobile App cards and Open CRE mappings
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Mobile App response
+                  value:
+                    meta:
+                      edition: OWASP Cornucopia Mobile App Edition
+                      component: cards
+                      language: en
+                      version: "1.1"
+                    data:
+                      - id: M01
+                        title: Secure Storage
+                        cre:
+                          - CRE-5
+
+components:
+
+  schemas:
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Language not available
+
+    LanguageMetaWeb:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            edition:
+              type: string
+              example: OWASP Cornucopia Website App Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
+            version:
+              type: string
+              example: "2.2"
+
+    LanguageMetaMobile:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            edition:
+              type: string
+              example: OWASP Cornucopia Mobile App Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en]
+            version:
+              type: string
+              example: "1.1"
+
