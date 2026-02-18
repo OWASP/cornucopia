@@ -66,11 +66,7 @@ async function handleRequest(request) {
     redirect: "manual",
   });
 
-  // Skip processing for non-HTML responses (JS, CSS, images, etc.)
-  const contentType = originresponse.headers.get("content-type") || "";
-  if (!contentType.includes("text/html")) {
-    return originresponse;
-  }
+  if (originresponse.url.match(/[^\\]*\.(\w+)$/i)) return originresponse;
 
   if (originresponse.status === 404 && isHTMLContentTypeAccepted(request)) {
     return fetchAndStreamNotFoundPage(originresponse, request);
@@ -84,8 +80,6 @@ async function generateNonceForResponse(originresponse) {
   
   const html = (await originresponse.text())
   .replace(/DhcnhD3khTMePgXw/gi, nonce)
-  // Add nonce to all script tags that don't already have one
-  .replace(/<script(?![^>]*\bnonce=)([^>]*)>/gi, `<script nonce="${nonce}"$1>`)
   .replace(
     'src="https://ajax.cloudflare.com',
     `nonce="${nonce}" src="https://ajax.cloudflare.com`

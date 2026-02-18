@@ -8,8 +8,11 @@ export default {
 	kit: 
 	{
 		adapter: adapter({
-			fallback: '/error',
-			strict: false
+			routes: {
+				include: ['/*'],
+				exclude: ["/build/*"]
+			},
+			fallback: '/error'
 		}),
 		alias: {
 			$data: "data",
