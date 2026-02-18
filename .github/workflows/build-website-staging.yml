@@ -2,7 +2,7 @@
     name: Build and Deploy The Cornucopia Website for Staging
     on:
       push:
-        branches: [master]
+        branches: [master, staging]
 
     permissions:
       contents: read
