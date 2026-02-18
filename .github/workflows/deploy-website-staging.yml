@@ -56,7 +56,6 @@
                 accountId: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
                 wranglerVersion: "4.18.0"
                 command: deploy script/nonce-worker.js --config script/wrangler.toml --env staging
-
           - name: Deploy the website
             uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
             with:
@@ -65,3 +64,6 @@
               accountId: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
               wranglerVersion: "4.18.0"
               command: pages deploy build --project-name=cornucopia --branch head
+            env: 
+              CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_STAGING_API_TOKEN }}
+              CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_STAGING_ACCOUNT_ID }}
