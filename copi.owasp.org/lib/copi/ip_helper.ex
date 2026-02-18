@@ -100,10 +100,10 @@ defmodule Copi.IPHelper do
   end
 
   defp get_connect_info_ip(socket) do
-    if Map.has_key?(socket.private, :connect_info) do
-      socket.private.connect_info[:peer_data][:address]
-    else
-      nil
+    # Use the public API instead of accessing socket.private directly
+    case Phoenix.LiveView.get_connect_info(socket, :peer_data) do
+      %{address: address} -> address
+      _ -> nil
     end
   end
 
