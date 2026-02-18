@@ -80,6 +80,8 @@ async function generateNonceForResponse(originresponse) {
   
   const html = (await originresponse.text())
   .replace(/DhcnhD3khTMePgXw/gi, nonce)
+  // Add nonce to all script tags (SvelteKit and others)
+  .replace(/<script((?!nonce=)[^>]*)>/gi, `<script$1 nonce="${nonce}">`)
   .replace(
     'src="https://ajax.cloudflare.com',
     `nonce="${nonce}" src="https://ajax.cloudflare.com`
