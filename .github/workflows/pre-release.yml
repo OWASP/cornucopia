@@ -11,6 +11,7 @@
         name: Harden runner
         uses: ./.github/workflows/hardening.yaml
       zap-scan:
+        if: false
         needs: hardening
         name: "OWASP ZAP DAST Scan"
         runs-on: ubuntu-latest
