@@ -1,0 +1,29 @@
+---
+meta:
+  edition: "test"
+  component: "cards"
+  language: "ES"
+  version: "1.0"
+suits:
+-
+  id: "TS"
+  name: "Test Suit Spanish"
+  cards:
+  -
+    id: "TSA"
+    value: "A"
+    desc: "Tarjeta de prueba A"
+paragraphs:
+-
+  id: "Common"
+  name: "Common"
+  sentences:
+  -
+    id: "T00001"
+    text: "Esta es la primera etiqueta de prueba"
+  -
+    id: "T00002"
+    text: "This is the second test tag"
+  -
+    id: "T00003"
+    text: ""
