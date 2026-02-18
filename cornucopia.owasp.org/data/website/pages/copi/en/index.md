@@ -262,4 +262,15 @@ We are not working towards implementing any specific controls to prevent DoS att
 ### Did we do a good job?
 
 We welcome any input or improvments you might be willing to share with us regarding our current threat model.
-Arguably, we created the system before we were able to identify all these threats, and several improvements need to be made to properly balance the inherrant risks of compromise against the current security controls. For anyone choosing to host the game engine, please take this into account.
+Arguably, we created the system before the threat modeling, and several improvements need to be made to properly balance the inherrant risks of compromise against the current security controls. For anyone choosing to host the game engine, please take this into account.
+
+### Grant can utilize the application to deny service to some or all of its users
+
+#### What can go wrong?
+
+Given that  a threat actor can  execute a distributed denial of service attack against the application, he could deny access to some or all of copi.owasp.org users.
+
+
+#### What can you do about it?
+
+Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.

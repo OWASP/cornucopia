@@ -103,10 +103,9 @@ export class DeckService {
                 cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                 cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
                 cardObject.url = `/edition/${edition}/${cardObject.id}/${version}/${lang}`;
-                let cardFolderPath = cardObject.suit + '/' + cardObject.id;
-                cardObject.githubUrl = base + cardFolderPath + '/explanation.md';
-
-                let path: string = `./${base}${cardFolderPath}/technical-note.md`;  // '/explanation.md';
+                cardObject.githubUrl = `` + cardObject.suit + '/' + cardObject.id;
+                
+                let path : string = `./${base}${cardObject.githubUrl}/technical-note.md`;  // '/explanation.md';
                 let file: string;
                 try {
                     file = fs.readFileSync(path, 'utf8');

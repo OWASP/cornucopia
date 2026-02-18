@@ -415,36 +415,45 @@
                   "mitigation": "What are we going to do about it?\n\nWe will add a voting mechanism so that players can continue to the next round by a majority vote even if some players have dropped out. This will ensure that it's not possible to accidently or maliciously move to the next round.",
                   "modelType": "EOP",
                   "new": false,
-                  "number": 12,
-                  "score": "",
-                  "cardSuit": "AUTHENTICATION",
-                  "cardNumber": "ATA"
+                  "number": 7,
+                  "score": ""
                 },
                 {
-                  "id": "c0c26de6-2cf8-479e-845e-971229c1e0f1",
-                  "title": "CRA: Data is not encrypted at rest by default",
-                  "status": "Open",
+                  "id": "69e0ea6c-e8c4-4a53-8325-836ead16a410",
+                  "title": "Grant can utilize the application to deny service to some or all of its users",
+                  "status": "NotApplicable",
                   "severity": "Low",
                   "type": null,
                   "eopGameId": "cornucopia",
-                  "description": "What can go wrong?\n\nWhen hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory.",
-                  "mitigation": "What can you do about it?\n\nThe data at REST on copi.owasp.org is encrypted by default, but we are not using client side encryption. This means that I have the possibility to access the database and see what you entered in your name fields, but I will rather quite my job then be caught snooping on your data. It would be the end of my career if I got caught doing so and the end of Copi if someone else did. When all that is said, we will implement client side encryption on Copi since I wouldn't want anyone to have the possibility to even suspect me of doing such a foolish thing (see: https://github.com/OWASP/cornucopia/issues/2232).\nEnsure that your service provider ensures that the data is encrypted at REST.\nOWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.",
+                  "description": "Given that  a threat actor can  execute a distributed denial of service attack against the application, he could deny access to some or all of copi.owasp.org users.",
+                  "mitigation": "Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.",
                   "modelType": "EOP",
                   "new": false,
-                  "number": 13,
+                  "number": 8,
                   "score": "",
-                  "cardSuit": "CRYPTOGRAPHY",
-                  "cardNumber": "CRA"
+                  "cardSuit": "CORNUCOPIA",
+                  "cardNumber": "CK"
                 }
               ],
               "threatFrequency": {
                 "spoofing": 3,
                 "tampering": 2,
-                "repudiation": 2,
+                "repudiation": 1,
                 "informationDisclosure": 2,
                 "denialOfService": 1,
                 "elevationOfPrivilege": 2
               }
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "boundary",
+                "button-remove",
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -708,6 +717,6 @@
     ],
     "diagramTop": 2,
     "reviewer": "",
-    "threatTop": 13
+    "threatTop": 8
   }
 }
