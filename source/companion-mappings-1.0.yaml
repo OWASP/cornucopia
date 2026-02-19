@@ -384,57 +384,92 @@ suits:
     capec: [ CAPEC-180 ]
     mitre_attack: [ T1190 ]
 -
-  id: SDL
-  name: SSDLC
+  id: DVO
+  name: DevOps
   cards:
   -
-    id: SDL2
+    id: DVO2
     value: 2
-    url: https://cornucopia.owasp.org/cards/SDL2
+    url: https://cornucopia.owasp.org/cards/DVO2
+    capec: [ CAPEC-571, CAPEC-268 ]
+    owasp_samm: [ O-IM-A ] 
+    owasp_dsomm: [ IG-L ]
   -
-    id: SDL3
+    id: DVO3
     value: 3
-    url: https://cornucopia.owasp.org/cards/SDL3
+    url: https://cornucopia.owasp.org/cards/DVO3
+    capec: [ CAPEC-554, CAPEC-17 ]
+    owasp_samm: [ O-EM-A ]
+    owasp_dsomm: [ I-IH, I-AH ]
   -
-    id: SDL4
+    id: DVO4
     value: 4
-    url: https://cornucopia.owasp.org/cards/SDL4
+    url: https://cornucopia.owasp.org/cards/DVO4
+    capec: [ CAPEC-180 ]
+    owasp_samm: [ O-OM-A ]
+    owasp_dsomm: [ I-IH ]
   -
-    id: SDL5
+    id: DVO5
     value: 5
-    url: https://cornucopia.owasp.org/cards/SDL5
+    url: https://cornucopia.owasp.org/cards/DVO5
+    capec: [ CAPEC-480, CAPEC-233 ]
+    owasp_samm: [ V-AA, O-EM-A ]
+    owasp_dsomm: [ I-IH, TV-DDI ]
   -
-    id: SDL6
+    id: DVO6
     value: 6
-    url: https://cornucopia.owasp.org/cards/SDL6
+    url: https://cornucopia.owasp.org/cards/DVO6
+    owasp_samm: [ O-OM-A, O-IM-B-2 ]
+    owasp_dsomm: [ CO-P, I-IH ]
   -
-    id: SDL7
+    id: DVO7
     value: 7
-    url: https://cornucopia.owasp.org/cards/SDL7
+    url: https://cornucopia.owasp.org/cards/DVO7
+    capec: [ CAPEC-444, CAPEC-669, CAPEC-536 ]
+    owasp_samm: [ I-SD-A ]
+    owasp_dsomm: [ BD-D ]
   -
-    id: SDL8
+    id: DVO8
     value: 8
-    url: https://cornucopia.owasp.org/cards/SDL8
+    url: https://cornucopia.owasp.org/cards/DVO8
+    capec: [ CAPEC-444, CAPEC-669, CAPEC-536, CAPEC-473 ]
+    owasp_samm: [ I-SB-A, I-SD-A ]
+    owasp_dsomm: [ BD-B ]
   -
-    id: SDL9
+    id: DVO9
     value: 9
-    url: https://cornucopia.owasp.org/cards/SDL9
+    url: https://cornucopia.owasp.org/cards/DVO9
+    capec: [ CAPEC-670 ]
+    owasp_samm: [ I-SB-A, I-SD-A, O-EM-A ]
+    owasp_dsomm: [ I-DSC, I-IH, BD-B, BD-D ]
   -
-    id: SDLX
+    id: DVOX
     value: X
-    url: https://cornucopia.owasp.org/cards/SDLX
+    url: https://cornucopia.owasp.org/cards/DVOX
+    capec: [ CAPEC-560, CAPEC-234, CAPEC-21 ]
+    owasp_samm: [ O-OM-B ]
+    owasp_dsomm: [ BD-D ]
   -
-    id: SDLJ
+    id: DVOJ
     value: J
-    url: https://cornucopia.owasp.org/cards/SDLJ
+    url: https://cornucopia.owasp.org/cards/DVOJ
+    capec: [ CAPEC-310 ]
+    owasp_samm: [ O-EM-B, I-SB, I-DM-A, D-SA-B ]
+    owasp_dsomm: [ BD-PM, BD-D, TV-SDA ]
   -
-    id: SDLQ
+    id: DVOQ
     value: Q
-    url: https://cornucopia.owasp.org/cards/SDLQ
+    url: https://cornucopia.owasp.org/cards/DVOQ
+    capec: [ CAPEC-560, CAPEC-21, CAPEC-150 ]
+    owasp_samm: [ I-SD-B, O-OM-A ]
+    owasp_dsomm: [ I-DSC, TV-SDI ]
   -
-    id: SDLK
+    id: DVOK
     value: K
-    url: https://cornucopia.owasp.org/cards/SDLK
+    url: https://cornucopia.owasp.org/cards/DVOK
+    capec: [ CAPEC-444, CAPEC-184, CAPEC-439 ]
+    owasp_samm: [ O-EM-B, I-SB, D-SA-B ]
+    owasp_dsomm: [ BD-D, TV-SDI, I-DSC, CO-P ]
 -
   id: IDM
   name: Identity Management
