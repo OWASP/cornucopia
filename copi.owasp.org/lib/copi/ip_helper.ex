@@ -100,9 +100,9 @@ defmodule Copi.IPHelper do
   end
 
   defp get_connect_info_ip(socket) do
-    # Access peer_data from connect_info
-    # This is safe in both production and test environments
-    case socket.private[:connect_info][:peer_data] do
+    # Access peer_data from connect_info using nil-safe get_in
+    # This prevents crashes when connect_info is nil (e.g., in tests)
+    case get_in(socket.private, [:connect_info, :peer_data]) do
       %{address: address} -> address
       _ -> nil
     end

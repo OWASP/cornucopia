@@ -137,7 +137,15 @@ defmodule CopiWeb.PlayerLive.Show do
   def handle_event("toggle_vote", %{"dealt_card_id" => dealt_card_id}, socket) do
     game = socket.assigns.game
     player = socket.assigns.player
-    dealt_card_id_int = String.to_integer(dealt_card_id)
+
+    # Safely parse dealt_card_id to prevent crashes from invalid input
+    dealt_card_id_int = case Integer.parse(dealt_card_id) do
+      {int, _} -> int
+      :error ->
+        Logger.warning("Invalid dealt_card_id: #{inspect(dealt_card_id)}")
+        # Return early without crashing
+        return {:noreply, socket}
+    end
 
     # Use database query to avoid race condition
     case Copi.Repo.get_by(Vote, player_id: player.id, dealt_card_id: dealt_card_id_int) do
