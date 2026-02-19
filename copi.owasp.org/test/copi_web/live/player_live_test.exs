@@ -85,6 +85,12 @@ defmodule CopiWeb.PlayerLiveTest do
       
       # Verify vote created
       assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+      
+      # Toggle again to remove vote
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      
+      # Verify vote deleted
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
 
     test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
@@ -103,6 +109,12 @@ defmodule CopiWeb.PlayerLiveTest do
       
       # Verify continue vote created
       assert Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+      
+      # Toggle again to remove continue vote
+      show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
+      
+      # Verify continue vote deleted
+      refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
       
       # Test that votes are cleared when proceeding to next round
       # Manually clear votes and advance round to test the functionality
