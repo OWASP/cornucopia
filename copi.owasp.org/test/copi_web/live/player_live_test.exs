@@ -96,13 +96,13 @@ defmodule CopiWeb.PlayerLiveTest do
     test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
       # Setup another player
       game_id = player.game_id
-      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      {:ok, _other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
       
       # Start game
       {:ok, game} = Cornucopia.Game.find(game_id)
       Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
 
-      {:ok, show_live, html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       
       # Test continue voting
       show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
