@@ -112,8 +112,8 @@ defmodule CopiWeb.PlayerLive.Show do
       case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
         {:ok, _vote} ->
           Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
-        {:error, _changeset} ->
-          Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
       end
     end
 
@@ -141,8 +141,8 @@ defmodule CopiWeb.PlayerLive.Show do
       case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
         {:ok, _vote} ->
           Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        {:error, _changeset} ->
-          Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
       end
     end
 
