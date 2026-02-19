@@ -139,44 +139,40 @@ defmodule CopiWeb.PlayerLive.Show do
     player = socket.assigns.player
 
     # Safely parse dealt_card_id to prevent crashes from invalid input
-    dealt_card_id_int = case Integer.parse(dealt_card_id) do
-      {int, _} -> int
+    with {dealt_card_id_int, _} <- Integer.parse(dealt_card_id) do
+      # Use database query to avoid race condition
+      case Copi.Repo.get_by(Vote, player_id: player.id, dealt_card_id: dealt_card_id_int) do
+        nil ->
+          # Insert with on_conflict handling for race condition safety
+          case Copi.Repo.insert(
+            %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
+            on_conflict: :nothing,
+            conflict_target: [:player_id, :dealt_card_id]
+          ) do
+            {:ok, _vote} ->
+              Logger.debug("Vote added for player #{player.id} on card #{dealt_card_id_int}")
+            {:error, changeset} ->
+              Logger.warning("Voting failed: #{inspect(changeset.errors)}")
+          end
+        
+        vote ->
+          # Remove their vote
+          case Copi.Repo.delete(vote) do
+            {:ok, _} ->
+              Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
+            {:error, changeset} ->
+              Logger.warning("Vote deletion failed: #{inspect(changeset.errors)}")
+          end
+      end
+
+      {:ok, updated_game} = Game.find(game.id)
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+      {:noreply, assign(socket, :game, updated_game)}
+    else
       :error ->
         Logger.warning("Invalid dealt_card_id: #{inspect(dealt_card_id)}")
-        # Return early without crashing
-        return {:noreply, socket}
+        {:noreply, socket}
     end
-
-    # Use database query to avoid race condition
-    case Copi.Repo.get_by(Vote, player_id: player.id, dealt_card_id: dealt_card_id_int) do
-      nil ->
-        # Insert with on_conflict handling for race condition safety
-        case Copi.Repo.insert(
-          %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
-          on_conflict: :nothing,
-          conflict_target: [:player_id, :dealt_card_id]
-        ) do
-          {:ok, _vote} ->
-            Logger.debug("Vote added for player #{player.id} on card #{dealt_card_id_int}")
-          {:error, changeset} ->
-            Logger.warning("Voting failed: #{inspect(changeset.errors)}")
-        end
-      
-      vote ->
-        # Remove their vote
-        case Copi.Repo.delete(vote) do
-          {:ok, _} ->
-            Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
-          {:error, changeset} ->
-            Logger.warning("Vote deletion failed: #{inspect(changeset.errors)}")
-        end
-    end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
   end
 
   def topic(game_id) do
