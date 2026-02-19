@@ -9,8 +9,9 @@ defmodule CopiWeb.PlayerLive.Show do
   alias Copi.Cornucopia.DealtCard
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok, assign(socket, :client_ip, ip)}
   end
 
   @impl true
@@ -42,10 +43,10 @@ defmodule CopiWeb.PlayerLive.Show do
   @impl true
   def handle_info(:proceed_to_next_round, socket) do
     game = socket.assigns.game
-    
+
     # Clear all continue votes for this game before proceeding to next round
     Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game.id)
-    
+
     # Now proceed to next round
     Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
 
@@ -69,10 +70,10 @@ defmodule CopiWeb.PlayerLive.Show do
       if Copi.Cornucopia.Game.can_continue_round?(game) do
         # Close the round and proceed
         Copi.Cornucopia.update_game(game, %{round_open: false})
-        
+
         # Wait a moment then proceed to next round
         Process.send_after(self(), :proceed_to_next_round, 100)
-        
+
         {:noreply, assign(socket, :game, game)}
       else
         # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore

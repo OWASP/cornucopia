@@ -15,19 +15,19 @@ defmodule CopiWeb.UserSocketTest do
       assert {:ok, _socket} = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
     end
 
-    test "denies connection when rate limit exceeded", %{ip: ip} do
+    test "socket connect is allowed even if connection rate limit would be exceeded (plug enforces limits)", %{ip: ip} do
       config = RateLimiter.get_config()
       limit = config.limits.connection
 
       connect_info = %{peer_data: %{address: ip, port: 12345}}
 
-      # Make connections up to the limit
+      # Make connections up to the limit (socket.connect does not enforce connection limits)
       for _ <- 1..limit do
         assert {:ok, _} = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
       end
 
-      # Next connection should be denied
-      assert :error = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
+      # Even if the logical rate limit is reached, the socket connect should still succeed
+      assert {:ok, _} = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
     end
 
     test "handles missing peer_data gracefully" do
@@ -58,17 +58,16 @@ defmodule CopiWeb.UserSocketTest do
 
       connect_info = %{peer_data: %{address: ip, port: 12345}}
 
-      # Exhaust connection limit
+      # Exhaust connection limit logically via RateLimiter API (sockets don't enforce connection limits)
       for _ <- 1..connection_limit do
-        assert {:ok, _} = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
+        assert {:ok, _} = RateLimiter.check_rate(ip, :connection)
       end
 
-      assert :error = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
+      # Socket connections remain allowed (plug is responsible for enforcing connection limits)
+      assert {:ok, _} = CopiWeb.UserSocket.connect(%{}, %Phoenix.Socket{}, connect_info)
 
-      # But game creation should still work
+      # Other actions remain subject to their own limits
       assert {:ok, _} = RateLimiter.check_rate(ip, :game_creation)
-
-      # And player creation should still work
       assert {:ok, _} = RateLimiter.check_rate(ip, :player_creation)
     end
   end

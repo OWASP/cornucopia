@@ -110,7 +110,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   end
 
   defp save_game(socket, :new, game_params) do
-    ip = IPHelper.get_ip_from_socket(socket)
+    ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
 
     case RateLimiter.check_rate(ip, :game_creation) do
       {:ok, _remaining} ->

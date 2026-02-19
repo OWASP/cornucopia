@@ -41,8 +41,9 @@ defmodule Copi.RateLimiter do
   """
   def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection] do
     normalized_ip = normalize_ip(ip)
-    
+
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
+    Logger.debug("check_rate: Checking rate limit for IP #{inspect(normalized_ip)} on action #{action}")
     if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} do
       {:ok, :unlimited}
     else
@@ -75,7 +76,7 @@ defmodule Copi.RateLimiter do
       limits: %{
         game_creation: get_env_config(:game_creation_limit, 20),
         player_creation: get_env_config(:player_creation_limit, 60),
-        connection: get_env_config(:connection_limit, 333)
+        connection: get_env_config(:connection_limit, 133)
       },
       windows: %{
         game_creation: get_env_config(:game_creation_window, 3600),
@@ -105,9 +106,8 @@ defmodule Copi.RateLimiter do
 
     # Remove expired timestamps
     valid_timestamps = Enum.filter(timestamps, fn ts -> now - ts < window_ms end)
-
     if length(valid_timestamps) >= limit do
-      Logger.warning("Rate limit exceeded for IP #{inspect(ip)} on action #{action} (limit: #{limit}/#{window}s)")
+      Logger.warning("Rate limit exceeded for IP on action #{action} (limit: #{limit}/#{window}s)")
       {:reply, {:error, :rate_limit_exceeded}, state}
     else
       new_timestamps = [now | valid_timestamps]

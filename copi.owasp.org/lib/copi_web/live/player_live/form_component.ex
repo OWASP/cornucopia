@@ -76,7 +76,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :new, player_params) do
-    ip = IPHelper.get_ip_from_socket(socket)
+    ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
 
     case RateLimiter.check_rate(ip, :player_creation) do
       {:ok, _remaining} ->
