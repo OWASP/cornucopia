@@ -52,9 +52,12 @@ defmodule Copi.RateLimiter do
 
   @doc """
   Clears all rate limit data for a specific IP address (useful for testing).
+
+  This is implemented as a synchronous GenServer.call/2 so callers (especially tests)
+  can deterministically rely on the rate limits being cleared before proceeding.
   """
   def clear_ip(ip) do
-    GenServer.cast(__MODULE__, {:clear_ip, normalize_ip(ip)})
+    GenServer.call(__MODULE__, {:clear_ip, normalize_ip(ip)})
   end
 
   @doc """
