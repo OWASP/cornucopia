@@ -7,7 +7,6 @@ defmodule CopiWeb.PlayerLive.Show do
 
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
-  alias Copi.Cornucopia.DealtCard
   alias Copi.Cornucopia.Vote
   alias Copi.Cornucopia.ContinueVote
 

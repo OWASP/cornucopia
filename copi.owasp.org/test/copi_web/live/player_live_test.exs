@@ -160,5 +160,23 @@ defmodule CopiWeb.PlayerLiveTest do
       continue_votes = Copi.Repo.all(from cv in Copi.Cornucopia.ContinueVote, where: cv.player_id == ^player.id and cv.game_id == ^game_id)
       assert length(continue_votes) == 1
     end
+
+    test "handles invalid dealt_card_id gracefully", %{conn: conn, player: player} do
+      # Setup game
+      game_id = player.game_id
+      
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      
+      # Try to vote with invalid (non-integer) dealt_card_id
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"invalid\"]") |> render_click()
+      
+      # Should not crash, just ignore the invalid input
+      # Verify no vote was created
+      votes = Copi.Repo.all(from v in Copi.Cornucopia.Vote, where: v.player_id == ^player.id)
+      assert length(votes) == 0
+    end
   end
 end
