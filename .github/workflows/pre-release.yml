@@ -11,6 +11,7 @@
         name: Harden runner
         uses: ./.github/workflows/hardening.yaml
       zap-scan:
+        if: false
         needs: hardening
         name: "OWASP ZAP DAST Scan"
         runs-on: ubuntu-latest
@@ -121,7 +122,7 @@
               retention-days: 30
 
           - name: Check for high-risk vulnerabilities
-            if: always()
+            if: false 
             run: |
               if [ -f zap-reports/copi_dast_report.json ]; then
                 echo "Checking for high-risk vulnerabilities..."

@@ -356,74 +356,74 @@ suits:
     desc: You have invented a new attack against Frontend
     misc: 
 -
-  id: SDL
-  name: SSDLC
+  id: DVO
+  name: DevOps
   cards:
   -
-    id: SDL2
+    id: DVO2
     value: 2
-    url: https://cornucopia.owasp.org/cards/SDL2
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO2
+    desc: "Aram's malicious actions against build, delivery, and deployment processes cannot be investigated, because there is no sufficient, complete, and accurately timestamped record of security events, or it has been tampered with"
   -
-    id: SDL3
+    id: DVO3
     value: 3
-    url: https://cornucopia.owasp.org/cards/SDL3
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO3
+    desc: "Aryan can exploit an internal system or service, because it, its infrastructure, or other components were not properly hardened, or the configuration was not maintained over time"
   -
-    id: SDL4
+    id: DVO4
     value: 4
-    url: https://cornucopia.owasp.org/cards/SDL4
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO4
+    desc: "Bart is able to delete, overwrite, or download backups"
   -
-    id: SDL5
+    id: DVO5
     value: 5
-    url: https://cornucopia.owasp.org/cards/SDL5
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO5
+    desc: "Brian can escape the runtime isolation of workloads to access host resources, execute privileged operations, or use the workloads to attack other internal systems"
   -
-    id: SDL6
+    id: DVO6
     value: 6
-    url: https://cornucopia.owasp.org/cards/SDL6
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO6
+    desc: "Daniel can cause a permanent loss of applications, source code, and data due to missing, incomplete or failed backups, or insufficient recovery documentation, training or testing"
   -
-    id: SDL7
+    id: DVO7
     value: 7
-    url: https://cornucopia.owasp.org/cards/SDL7
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO7
+    desc: "John can deploy unauthorized or malicious changes to production because deployment approval gates, validation checks, or change control processes are missing or can be bypassed"
   -
-    id: SDL8
+    id: DVO8
     value: 8
-    url: https://cornucopia.owasp.org/cards/SDL8
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO8
+    desc: "Maxim can deploy a malicious or otherwise modified artifact, because its integrity is not guaranteed or validated"
   -
-    id: SDL9
+    id: DVO9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/DVO9
+    desc: "Nariman can control or affect pipeline execution by injecting malicious commands through poisoned or typosquatted workflow dependencies, or by manipulating CI configuration files, or in other ways"
+  -
+    id: DVOX
     value: X
-    url: https://cornucopia.owasp.org/cards/SDL9
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOX
+    desc: "Patricia can exploit obsolete DevOps credentials, identities, services, or APIs, as well as excessive privileges, to bypass access controls and gain unauthorized access to read and modify sensitive data or functionality"
   -
-    id: SDLX
-    value: X
-    url: https://cornucopia.owasp.org/cards/SDLX
-    desc: 
-  -
-    id: SDLJ
+    id: DVOJ
     value: J
-    url: https://cornucopia.owasp.org/cards/SDLJ
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOJ
+    desc: "Pravir can exploit vulnerabilities in the application or development ecosystem, including repositories and DevOps infrastructure, because of outdated or poorly maintained dependencies"
   -
-    id: SDLQ
+    id: DVOQ
     value: Q
-    url: https://cornucopia.owasp.org/cards/SDLQ
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOQ
+    desc: "Seba can access the code repository, log files, command line history, pipelines, or other places, to gain access to secrets or other sensitive information"
   -
-    id: SDLK
+    id: DVOK
     value: K
-    url: https://cornucopia.owasp.org/cards/SDLK
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOK
+    desc: "Timo can compromise software, development environments, or DevOps tooling by injecting malicious code via external dependencies or exploited developer credentials"
   -
-    id: SDLA
+    id: DVOA
     value: A
-    url: https://cornucopia.owasp.org/cards/SDLA
-    desc: You have invented a new attack against SSDLC
+    url: https://cornucopia.owasp.org/cards/DVOA
+    desc: You have invented a new attack against DevOps
     misc: 
 -
   id: IDM
