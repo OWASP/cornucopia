@@ -32,9 +32,11 @@ def create_capec_pages(
     asvs_map: dict[str, Any],
     asvs_version: str,
 ) -> None:
-    data = data["Attack_Pattern_Catalog"]["Attack_Patterns"]
+    patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]
     directory = Path(__file__).parent.resolve()
-    for i in data["Attack_Pattern"]:
+    pages = 0
+    for i in patterns["Attack_Pattern"]:
+        pages += 1
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
@@ -52,7 +54,30 @@ def create_capec_pages(
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
 
         f.close()
-    logging.info("Created %d CAPEC pages", len(data["Attack_Pattern"]))
+
+    categories = data["Attack_Pattern_Catalog"]["Categories"]
+    for i in categories["Category"]:
+        pages += 1
+        logging.info("Processing CAPEC category with ID %s", str(i["_ID"]))
+        name = str(i["_ID"])
+        capec_path = directory / convert_vars.args.output_path / name
+        create_folder(capec_path)
+        f = open(capec_path / "index.md", "w", encoding="utf-8")
+        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+        f.write("## Description\n\n")
+        f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
+        capec_id = int(i["_ID"])
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
+        if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
+            logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
+        else:
+            f.write("## Related ASVS Requirements\n\n")
+            f.write(f"ASVS ({asvs_version}): \
+{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
+
+        f.close()
+
+    logging.info("Created %d CAPEC pages", pages)
 
 
 def has_no_asvs_mapping(capec_id: int, capec_to_asvs_map: dict[int, dict[str, List[str]]]) -> bool:
