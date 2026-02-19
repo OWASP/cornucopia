@@ -85,24 +85,36 @@ defmodule CopiWeb.PlayerLiveTest do
       
       # Verify vote created
       assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+      
+      # Toggle again to remove vote
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      
+      # Verify vote deleted
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
 
     test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
       # Setup another player
       game_id = player.game_id
-      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      {:ok, _other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
       
       # Start game
       {:ok, game} = Cornucopia.Game.find(game_id)
       Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
 
-      {:ok, show_live, html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       
       # Test continue voting
       show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
       
       # Verify continue vote created
       assert Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+      
+      # Toggle again to remove continue vote
+      show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
+      
+      # Verify continue vote deleted
+      refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
       
       # Test that votes are cleared when proceeding to next round
       # Manually clear votes and advance round to test the functionality
@@ -115,6 +127,68 @@ defmodule CopiWeb.PlayerLiveTest do
       # Verify game advanced to next round
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
+    end
+
+    test "prevents duplicate votes through database constraint", %{conn: _conn, player: player} do
+      # Setup game and dealt card
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp", 
+        version: "2.2", external_id: "EXT2", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+      
+      # Simulate true concurrent race condition using Task.async
+      insert_vote = fn ->
+        Copi.Repo.insert(
+          %Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id},
+          on_conflict: :nothing
+        )
+      end
+      
+      task1 = Task.async(insert_vote)
+      task2 = Task.async(insert_vote)
+      
+      # Wait for both concurrent attempts to complete
+      _result1 = Task.await(task1)
+      _result2 = Task.await(task2)
+      
+      # Verify only one vote exists despite concurrent attempts
+      votes = Copi.Repo.all(from v in Copi.Cornucopia.Vote, where: v.player_id == ^player.id and v.dealt_card_id == ^dealt.id)
+      assert length(votes) == 1
+    end
+
+    test "prevents duplicate continue votes through database constraint", %{conn: _conn, player: player} do
+      game_id = player.game_id
+      
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      # Simulate true concurrent race condition using Task.async
+      insert_continue_vote = fn ->
+        Copi.Repo.insert(
+          %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id},
+          on_conflict: :nothing
+        )
+      end
+      
+      task1 = Task.async(insert_continue_vote)
+      task2 = Task.async(insert_continue_vote)
+      
+      # Wait for both concurrent attempts to complete
+      _result1 = Task.await(task1)
+      _result2 = Task.await(task2)
+      
+      # Verify only one continue vote exists despite concurrent attempts
+      continue_votes = Copi.Repo.all(from cv in Copi.Cornucopia.ContinueVote, where: cv.player_id == ^player.id and cv.game_id == ^game_id)
+      assert length(continue_votes) == 1
     end
   end
 end
