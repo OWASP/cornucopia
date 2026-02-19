@@ -101,9 +101,17 @@ defmodule CopiWeb.PlayerLive.Show do
     player = socket.assigns.player
 
     # Use database query to avoid race condition
-    case Copi.Repo.get_by(ContinueVote, player_id: player.id, game_id: game.id) do
-      nil ->
-        # Insert with on_conflict handling for race condition safety
+# Use atomic delete to avoid TOCTOU race condition
+    # Try to delete first - if none exists, this is a no-op
+    case Copi.Repo.delete_all(
+      from cv in ContinueVote,
+      where: cv.player_id == ^player.id and cv.game_id == ^game.id
+    ) do
+      {1, _} ->
+        Logger.debug("Continue vote removed for player #{player.id}")
+      
+      {0, _} ->
+        # No vote existed, so insert one
         case Copi.Repo.insert(
           %ContinueVote{player_id: player.id, game_id: game.id},
           on_conflict: :nothing,
@@ -113,15 +121,6 @@ defmodule CopiWeb.PlayerLive.Show do
             Logger.debug("Continue vote added for player #{player.id}")
           {:error, changeset} ->
             Logger.warning("Continue voting failed: #{inspect(changeset.errors)}")
-        end
-      
-      continue_vote ->
-        # Remove their vote
-        case Copi.Repo.delete(continue_vote) do
-          {:ok, _} ->
-            Logger.debug("Continue vote removed for player #{player.id}")
-          {:error, changeset} ->
-            Logger.warning("Continue vote deletion failed: #{inspect(changeset.errors)}")
         end
     end
 
@@ -141,9 +140,17 @@ defmodule CopiWeb.PlayerLive.Show do
     case Integer.parse(dealt_card_id) do
       {dealt_card_id_int, _} ->
         # Use database query to avoid race condition
-        case Copi.Repo.get_by(Vote, player_id: player.id, dealt_card_id: dealt_card_id_int) do
-          nil ->
-            # Insert with on_conflict handling for race condition safety
+# Use atomic delete to avoid TOCTOU race condition
+        # Try to delete first - if none exists, this is a no-op
+        case Copi.Repo.delete_all(
+          from v in Vote,
+          where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card_id_int
+        ) do
+          {1, _} ->
+            Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
+          
+          {0, _} ->
+            # No vote existed, so insert one
             case Copi.Repo.insert(
               %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
               on_conflict: :nothing,
@@ -153,15 +160,6 @@ defmodule CopiWeb.PlayerLive.Show do
                 Logger.debug("Vote added for player #{player.id} on card #{dealt_card_id_int}")
               {:error, changeset} ->
                 Logger.warning("Voting failed: #{inspect(changeset.errors)}")
-            end
-          
-          vote ->
-            # Remove their vote
-            case Copi.Repo.delete(vote) do
-              {:ok, _} ->
-                Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
-              {:error, changeset} ->
-                Logger.warning("Vote deletion failed: #{inspect(changeset.errors)}")
             end
         end
 

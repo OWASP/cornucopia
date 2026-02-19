@@ -145,13 +145,22 @@ defmodule CopiWeb.PlayerLiveTest do
       })
       {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
       
-      # Attempt to create duplicate votes directly (simulating race condition)
-      {:ok, _vote1} = Copi.Repo.insert(%Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id})
+      # Simulate true concurrent race condition using Task.async
+      insert_vote = fn ->
+        Copi.Repo.insert(
+          %Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id},
+          on_conflict: :nothing
+        )
+      end
       
-      # Second insert should be ignored due to unique constraint with on_conflict: :nothing
-      {:ok, _vote2} = Copi.Repo.insert(%Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id}, on_conflict: :nothing)
+      task1 = Task.async(insert_vote)
+      task2 = Task.async(insert_vote)
       
-      # Verify only one vote exists
+      # Wait for both concurrent attempts to complete
+      _result1 = Task.await(task1)
+      _result2 = Task.await(task2)
+      
+      # Verify only one vote exists despite concurrent attempts
       votes = Copi.Repo.all(from v in Copi.Cornucopia.Vote, where: v.player_id == ^player.id and v.dealt_card_id == ^dealt.id)
       assert length(votes) == 1
     end
@@ -162,13 +171,22 @@ defmodule CopiWeb.PlayerLiveTest do
       {:ok, game} = Cornucopia.Game.find(game_id)
       Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
 
-      # Attempt to create duplicate continue votes directly (simulating race condition)
-      {:ok, _cv1} = Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
+      # Simulate true concurrent race condition using Task.async
+      insert_continue_vote = fn ->
+        Copi.Repo.insert(
+          %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id},
+          on_conflict: :nothing
+        )
+      end
       
-      # Second insert should be ignored due to unique constraint with on_conflict: :nothing
-      {:ok, _cv2} = Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id}, on_conflict: :nothing)
+      task1 = Task.async(insert_continue_vote)
+      task2 = Task.async(insert_continue_vote)
       
-      # Verify only one continue vote exists
+      # Wait for both concurrent attempts to complete
+      _result1 = Task.await(task1)
+      _result2 = Task.await(task2)
+      
+      # Verify only one continue vote exists despite concurrent attempts
       continue_votes = Copi.Repo.all(from cv in Copi.Cornucopia.ContinueVote, where: cv.player_id == ^player.id and cv.game_id == ^game_id)
       assert length(continue_votes) == 1
     end
