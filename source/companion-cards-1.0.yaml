@@ -396,7 +396,7 @@ suits:
     desc: "Maxim can deploy a malicious or otherwise modified artifact, because its integrity is not guaranteed or validated"
   -
     id: DVO9
-    value: X
+    value: 9
     url: https://cornucopia.owasp.org/cards/DVO9
     desc: "Nariman can control or affect pipeline execution by injecting malicious commands through poisoned or typosquatted workflow dependencies, or by manipulating CI configuration files, or in other ways"
   -
