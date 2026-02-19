@@ -11,10 +11,13 @@ defmodule CopiWeb.Endpoint do
     same_site: "Lax"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket,
-    websocket: [timeout: 45_000, connect_info: [session: @session_options]],
-    longpoll: [connect_info: [session: @session_options]]
+  socket "/socket", CopiWeb.UserSocket,
+    websocket: [timeout: 45_000, connect_info: [:peer_data, session: @session_options, x_headers: ["x-forwarded-for"]]],
+    longpoll: [connect_info: [:peer_data, session: @session_options, x_headers: ["x-forwarded-for"]]]
 
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [timeout: 45_000, connect_info: [:peer_data, session: @session_options, x_headers: ["x-forwarded-for"]]],
+    longpoll: [connect_info: [:peer_data, session: @session_options, x_headers: ["x-forwarded-for"]]]
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
