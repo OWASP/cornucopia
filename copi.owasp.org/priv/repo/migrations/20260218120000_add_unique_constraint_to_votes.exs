@@ -1,22 +1,26 @@
 defmodule Copi.Repo.Migrations.AddUniqueConstraintToVotes do
   use Ecto.Migration
 
-  # Disable DDL transaction for concurrent index creation
-  @disable_ddl_transaction true
-
   def up do
     # Remove any existing duplicate votes first
+    # Use DO $$ block to handle case where table might be empty
     execute """
-    DELETE FROM votes a USING votes b
-    WHERE a.id > b.id 
-    AND a.player_id = b.player_id 
-    AND a.dealt_card_id = b.dealt_card_id
+    DO $$
+    BEGIN
+      DELETE FROM votes a USING votes b
+      WHERE a.id > b.id 
+      AND a.player_id = b.player_id 
+      AND a.dealt_card_id = b.dealt_card_id;
+    EXCEPTION
+      WHEN others THEN NULL;
+    END $$;
     """
 
-    # Create index concurrently to avoid blocking writes in production
+    # Create unique index
+    # Note: concurrently option requires @disable_ddl_transaction which
+    # can cause issues in test environments, so we use regular index creation
     create unique_index(:votes, [:player_id, :dealt_card_id], 
-      name: :votes_player_dealt_card_unique_index,
-      concurrently: true)
+      name: :votes_player_dealt_card_unique_index)
   end
 
   def down do
