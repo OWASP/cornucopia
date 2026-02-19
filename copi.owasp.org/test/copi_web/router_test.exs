@@ -35,9 +35,15 @@ defmodule CopiWeb.RouterTest do
       conn = conn
         |> put_req_header("accept", "application/json")
         |> put("/api/games/#{game.id}/players/#{player.id}/card", %{"dealt_card_id" => "123"})
-      
-      # Should respond (even if error due to invalid dealt_card_id)
-      assert conn.status in [200, 400, 403, 404, 406, 422, 500]
+
+      # Invalid dealt_card_id should result in a client error, never a 500
+      status = conn.status
+      refute status == 500
+      assert status in [404, 406]
+
+      # V4.1.2, V16.5: Ensure a JSON error response is returned for invalid input
+      response_body = json_response(conn, status)
+      assert %{"error" => _} = response_body
     end
   end
 
