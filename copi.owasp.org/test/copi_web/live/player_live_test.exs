@@ -175,6 +175,97 @@ defmodule CopiWeb.PlayerLiveTest do
       refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
     end
 
+    test "prevents duplicate votes on same card (race condition)", %{conn: conn, player: player} do
+      # Setup game and card
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp", 
+        version: "2.2", external_id: "EXT-DUP", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+
+      # Simulate concurrent vote attempts by directly calling insert multiple times
+      # The unique constraint should prevent duplicates
+      vote1 = Copi.Repo.insert(
+        %Copi.Cornucopia.Vote{dealt_card_id: dealt.id, player_id: player.id},
+        on_conflict: :nothing,
+        conflict_target: [:player_id, :dealt_card_id]
+      )
+      
+      vote2 = Copi.Repo.insert(
+        %Copi.Cornucopia.Vote{dealt_card_id: dealt.id, player_id: player.id},
+        on_conflict: :nothing,
+        conflict_target: [:player_id, :dealt_card_id]
+      )
+
+      # First insert succeeds
+      assert {:ok, _} = vote1
+      # Second insert is ignored due to constraint
+      assert {:ok, _} = vote2
+
+      # Verify only one vote exists
+      votes = Copi.Repo.all(from v in Copi.Cornucopia.Vote, where: v.dealt_card_id == ^dealt.id and v.player_id == ^player.id)
+      assert length(votes) == 1
+    end
+
+    test "prevents duplicate continue votes (race condition)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      # Simulate concurrent continue vote attempts
+      vote1 = Copi.Repo.insert(
+        %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id},
+        on_conflict: :nothing,
+        conflict_target: [:player_id, :game_id]
+      )
+      
+      vote2 = Copi.Repo.insert(
+        %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id},
+        on_conflict: :nothing,
+        conflict_target: [:player_id, :game_id]
+      )
+
+      assert {:ok, _} = vote1
+      assert {:ok, _} = vote2
+
+      # Verify only one continue vote exists
+      votes = Copi.Repo.all(from v in Copi.Cornucopia.ContinueVote, where: v.player_id == ^player.id and v.game_id == ^game_id)
+      assert length(votes) == 1
+    end
+
+    test "allows toggling card vote off", %{conn: conn, player: player} do
+      # Setup game and card
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp", 
+        version: "2.2", external_id: "EXT-TOG", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+      
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      
+      # Add vote
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+      
+      # Remove vote by toggling again
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+
     test "displays player information", %{conn: conn, player: player} do
       {:ok, _show_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
       assert html =~ player.name
