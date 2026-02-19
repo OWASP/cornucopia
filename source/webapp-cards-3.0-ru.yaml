@@ -98,7 +98,7 @@ suits:
     id: "AT5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AT5"
-    desc: "Хавьер может использовать для аутентификации стандартные, тестовые или легко угадывемые учетные данные или использовать старую учетную запись или учетную запись не от приложения"
+    desc: "Хавьер может использовать для аутентификации стандартные, тестовые или легко угадывемые учетные данные или использовать старую учетную запись или учетную запись, не обязательную (избыточную) для работы приложения"
   -
     id: "AT6"
     value: "6"
@@ -413,7 +413,7 @@ suits:
     id: "CQ"
     value: "Д"
     url: "https://cornucopia.owasp.org/cards/CQ"
-    desc: "Джим может предпринять вредоносные, ненормальные действия, которые не обнаруживаются и не обрабатываются в реальном времени"
+    desc: "Джим может предпринять вредоносные, аномальные действия, которые не обнаруживаются приложением и не вызывают его реакции в режиме реального времени"
   -
     id: "CK"
     value: "К"
@@ -453,10 +453,10 @@ paragraphs:
     text: "Нет Карты"
   -
     id: "Title"
-    text: "Website App Edition v3.0-EN"
+    text: "Website App Edition v3.0-RU"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v3.0-EN"
+    text: "OWASP® Cornucopia Website App Edition v3.0-RU"
   -
     id: "T00005"
     text: "Индекс"
@@ -741,7 +741,7 @@ paragraphs:
     text: "Добудьте или рспечатайте и вырежьте/разделите свою колоду карт (смотри страницу 2 этого документа)"
   -
     id: "T01411"
-    text: "Use the cards in this pack"
+    text: "Используйте карты из этого набора"
   -
     id: "T01420"
     text: "Определить приложение или часть приложения для обсуждения; это может быть концепцт, архитектура или готовое приложение"
@@ -1311,19 +1311,19 @@ paragraphs:
     text: "2.2"
   -
     id: "T03771"
-    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9."
+    text: "Выполнена миграция перекрестных ссылок из SCP в DevGuide Web Checklist версии 4.1.9."
   -
     id: "T03772"
     text: "3.0"
   -
     id: "T03773"
-    text: "ASVS has been migrated from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices."
+    text: "Стандарт ASVS был обновлён с версии 4.0.3 до версии 5.0. Текст на карточках был обновлён, чтобы включить многофакторную аутентификацию (MFA) и ключи доступа (passkeys) в качестве вариантов аутентификации. Карточки в наборе «Управление сессиями» были обновлены для соответствия современным практикам управления сессиями."
   -
     id: "T03774"
     text: "3.0"
   -
     id: "T03775"
-    text: "STRIDE categories have been added to each cards"
+    text: "К каждой карточке были добавлены категории STRIDE"
   -
     id: "T03800"
     text: "Участники проекта"
