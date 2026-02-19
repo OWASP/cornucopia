@@ -116,5 +116,49 @@ defmodule CopiWeb.PlayerLiveTest do
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
     end
+
+    test "prevents duplicate votes through database constraint", %{conn: conn, player: player} do
+      # Setup game and dealt card
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp", 
+        version: "2.2", external_id: "EXT2", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+      
+      # Attempt to create duplicate votes directly (simulating race condition)
+      {:ok, _vote1} = Copi.Repo.insert(%Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id})
+      
+      # Second insert should be ignored due to unique constraint with on_conflict: :nothing
+      {:ok, _vote2} = Copi.Repo.insert(%Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id}, on_conflict: :nothing)
+      
+      # Verify only one vote exists
+      votes = Copi.Repo.all(from v in Copi.Cornucopia.Vote, where: v.player_id == ^player.id and v.dealt_card_id == ^dealt.id)
+      assert length(votes) == 1
+    end
+
+    test "prevents duplicate continue votes through database constraint", %{conn: conn, player: player} do
+      game_id = player.game_id
+      
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      # Attempt to create duplicate continue votes directly (simulating race condition)
+      {:ok, _cv1} = Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
+      
+      # Second insert should be ignored due to unique constraint with on_conflict: :nothing
+      {:ok, _cv2} = Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id}, on_conflict: :nothing)
+      
+      # Verify only one continue vote exists
+      continue_votes = Copi.Repo.all(from cv in Copi.Cornucopia.ContinueVote, where: cv.player_id == ^player.id and cv.game_id == ^game_id)
+      assert length(continue_votes) == 1
+    end
   end
 end
