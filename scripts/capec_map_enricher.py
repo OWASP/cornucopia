@@ -68,7 +68,6 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
             capec_id = int(category["_ID"])
             capec_name = category["_Name"]
             capec_names[capec_id] = capec_name
-    
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
@@ -169,6 +168,7 @@ def set_logging() -> None:
     logging.basicConfig(
         format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s",
     )
+
     if enricher_vars.args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
     else:
