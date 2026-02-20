@@ -51,7 +51,6 @@ jobs:
             echo "--- Uploading $bom as ${NAMES[$bom]} ---"
             curl --location "$DT_URL/api/v1/bom" \
               --header "X-Api-Key: $DT_API_KEY" \
-              --header "ngrok-skip-browser-warning: true" \
               --form "autoCreate=true" \
               --form "projectName=${NAMES[$bom]}" \
               --form "projectVersion=${{ github.ref_name }}" \
