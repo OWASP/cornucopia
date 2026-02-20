@@ -21,6 +21,11 @@ defmodule CopiWeb.RouterTest do
     assert html_response(conn, 200)
   end
 
+  test "GET /privacy", %{conn: conn} do
+    conn = get(conn, "/privacy")
+    assert html_response(conn, 200)
+  end
+
   test "GET /cards", %{conn: conn} do
     conn = get(conn, "/cards")
     assert html_response(conn, 200)

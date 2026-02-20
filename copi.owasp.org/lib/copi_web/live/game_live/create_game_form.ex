@@ -4,7 +4,6 @@ defmodule CopiWeb.GameLive.CreateGameForm do
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
   alias Copi.RateLimiter
-  alias Copi.IPHelper
   alias CopiWeb.GameLive.GameFormHelpers, as: GameFormHelpers
 
   @impl true
