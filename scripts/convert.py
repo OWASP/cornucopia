@@ -85,6 +85,31 @@ def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tupl
     return True, source_path, output_dir
 
 
+def _safe_extractall(archive: zipfile.ZipFile, target_dir: str) -> None:
+    """Extract zip members only if their resolved paths stay within target_dir.
+
+    Prevents Zip Slip / path traversal (CWE-22) by resolving symlinks and all
+    '..' components before comparing each member path against the target root.
+    Degenerate root entries ('.', '', './') are skipped rather than extracted,
+    because they carry no file content and resolve to the target directory itself.
+    """
+    abs_target = os.path.realpath(target_dir)
+    for member in archive.infolist():
+        member_path = os.path.realpath(os.path.join(abs_target, member.filename))
+
+        # Root/degenerate entries ('.', '', './') resolve to abs_target itself.
+        # They are directory metadata with no content; skip them safely.
+        if member_path == abs_target:
+            continue
+
+        # Block any member whose resolved path escapes the target directory.
+        # The os.sep suffix prevents prefix collisions (e.g. /tmp/d vs /tmp/d_evil).
+        if not member_path.startswith(abs_target + os.sep):
+            raise ValueError(f"Zip Slip blocked: member '{member.filename}' would extract outside target directory")
+
+        archive.extract(member, target_dir)
+
+
 def _validate_command_args(cmd_args: List[str]) -> bool:
     """Validate command arguments for dangerous characters."""
     dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
@@ -964,7 +989,7 @@ def save_odt_file(template_doc: str, language_dict: Dict[str, str], output_file:
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as odt_archive:
-        odt_archive.extractall(temp_output_path)
+        _safe_extractall(odt_archive, temp_output_path)
 
     # ODT text is usually in content.xml and sometimes styles.xml
     targets = ["content.xml", "styles.xml"]
@@ -994,7 +1019,7 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
-        idml_archive.extractall(temp_output_path)
+        _safe_extractall(idml_archive, temp_output_path)
         logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
