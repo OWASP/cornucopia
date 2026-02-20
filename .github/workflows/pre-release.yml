@@ -231,3 +231,5 @@
         secrets: inherit
         permissions:
           contents: write
+        with:
+          tag_name: pre-release

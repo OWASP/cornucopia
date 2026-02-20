@@ -141,3 +141,5 @@
         secrets: inherit
         permissions:
           contents: write
+        with:
+          tag_name: ${{ github.ref_name }}

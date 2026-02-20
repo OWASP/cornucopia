@@ -1,6 +1,10 @@
 name: SBOM
 on:
   workflow_call:
+    inputs:
+      tag_name:
+        required: true
+        type: string
 jobs:
   generate-sboms:
     runs-on: ubuntu-latest
@@ -55,9 +59,7 @@ jobs:
             echo ""
           done
 
-      - name: Create release
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
-        with:
-          draft: false
-          prerelease: true
-          files: reports/*.json
+      - name: Upload SBOMs to release
+        run: gh release upload "${{ inputs.tag_name }}" reports/*.json --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
