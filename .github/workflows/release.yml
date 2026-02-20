@@ -135,7 +135,7 @@
                 source/*1\.1-*.yaml
                 source/*2\.2-*.yaml
       sbom:
-        needs: hardening
+        needs: [hardening, tagged-release]
         name: SBOM
         uses: ./.github/workflows/sbom-generate.yml
         secrets: inherit
