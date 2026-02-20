@@ -137,7 +137,7 @@
       sbom:
         needs: hardening
         name: SBOM
-        uses: ./.github/workflows/sbom.yml
+        uses: ./.github/workflows/sbom-generate.yml
         secrets: inherit
         permissions:
           contents: write
