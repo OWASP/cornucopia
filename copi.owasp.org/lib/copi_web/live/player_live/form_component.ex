@@ -4,7 +4,6 @@ defmodule CopiWeb.PlayerLive.FormComponent do
 
   alias Copi.Cornucopia
   alias Copi.RateLimiter
-  alias Copi.IPHelper
 
   @impl true
 
