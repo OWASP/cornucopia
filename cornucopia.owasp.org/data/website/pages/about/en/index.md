@@ -86,6 +86,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Jerry Hoff
 - Toby Irvine
 - Marios Kourtesis
+- Aleksey Krasnov
 - Suresh Krishna
 - Franck Lacosta
 - Mathias Lemaire
