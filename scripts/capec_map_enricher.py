@@ -20,7 +20,9 @@ import yaml
 
 class EnricherVars:
     TEMPLATE_FILE_NAME: str = "EDITION-capec-VERSION.yaml"
-    DEFAULT_CAPEC_JSON_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
+    DEFAULT_CAPEC_JSON_PATH = (
+        Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
+    )
     DEFAULT_SOURCE_DIR = Path(__file__).parent / "../source"
     args: argparse.Namespace
 
@@ -68,13 +70,14 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
             capec_id = int(category["_ID"])
             capec_name = category["_Name"]
             capec_names[capec_id] = capec_name
-    
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
 
 
-def enrich_capec_mappings(capec_mappings: dict[str, Any], capec_names: dict[int, str]) -> dict[str, Any]:
+def enrich_capec_mappings(
+    capec_mappings: dict[str, Any], capec_names: dict[int, str]
+) -> dict[str, Any]:
     """
     Enrich CAPEC mappings with names from the CAPEC catalog.
 
@@ -108,7 +111,9 @@ def enrich_capec_mappings(capec_mappings: dict[str, Any], capec_names: dict[int,
 
         enriched[capec_id_key] = enriched_entry
 
-    logging.info("Enriched %d CAPEC mappings", len(enriched) - (1 if "meta" in enriched else 0))
+    logging.info(
+        "Enriched %d CAPEC mappings", len(enriched) - (1 if "meta" in enriched else 0)
+    )
     return enriched
 
 
@@ -156,7 +161,9 @@ def save_yaml_file(filepath: Path, data: dict[str, Any]) -> bool:
     """Save data as YAML file."""
     try:
         with open(filepath, "w", encoding="utf-8") as f:
-            yaml.dump(data, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
+            yaml.dump(
+                data, f, default_flow_style=False, sort_keys=False, allow_unicode=True
+            )
         logging.info("Successfully saved YAML file: %s", filepath)
         return True
     except Exception as e:
@@ -177,7 +184,9 @@ def set_logging() -> None:
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Enrich CAPEC mappings with names from CAPEC JSON catalog")
+    parser = argparse.ArgumentParser(
+        description="Enrich CAPEC mappings with names from CAPEC JSON catalog"
+    )
     parser.add_argument(
         "-c",
         "--capec-json",
@@ -249,9 +258,9 @@ def main() -> None:
     if enricher_vars.args.input_path:
         input_path = Path(enricher_vars.args.input_path).resolve()
     else:
-        filename = EnricherVars.TEMPLATE_FILE_NAME.replace("EDITION", enricher_vars.args.edition).replace(
-            "VERSION", enricher_vars.args.version
-        )
+        filename = EnricherVars.TEMPLATE_FILE_NAME.replace(
+            "EDITION", enricher_vars.args.edition
+        ).replace("VERSION", enricher_vars.args.version)
         input_path = directory / filename
 
     # Determine output file path
