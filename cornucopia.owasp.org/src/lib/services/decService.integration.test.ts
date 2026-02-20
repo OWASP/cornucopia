@@ -40,6 +40,7 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en')).toBeDefined();
 
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en').size).toBe(80);
+        expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'it').size).toBe(80);
