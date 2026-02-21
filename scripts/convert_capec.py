@@ -183,7 +183,7 @@ def create_folder(path: Path) -> None:
 
 def load_json_file(filepath: Path) -> dict[str, Any]:
     try:
-        with open(filepath, encoding="utf8") as f:
+        with open(filepath, encoding="utf-8") as f:
             data: dict[str, Any] = json.load(f)
         return data
     except Exception as e:
