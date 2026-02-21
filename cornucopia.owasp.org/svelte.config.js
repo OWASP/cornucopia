@@ -244,6 +244,7 @@ export default {
 				'/cards/DVEQ',
 				'/cards/DVEK',
 				'/404',
+				'/api/docs',
 				'/api/cre/webapp/en',
 				'/api/cre/webapp/it',
 				'/api/cre/webapp/nl',

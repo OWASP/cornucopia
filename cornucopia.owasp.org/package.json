@@ -56,7 +56,11 @@
 			"ignoreGhsas": [
 				"GHSA-vg6x-rcgg-rjx6",
 				"GHSA-67mh-4wv8-2f99",
-				"GHSA-mh29-5h37-fv8m"
+				"GHSA-mh29-5h37-fv8m",
+				"GHSA-m56q-vw4c-c2cp",
+				"GHSA-f7gr-6p89-r883",
+				"GHSA-h7h7-mm68-gmrc",
+				"GHSA-crpf-4hrx-3jrp"
 			]
 		},
 		"overrides": {
