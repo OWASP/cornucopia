@@ -361,10 +361,12 @@ def main() -> None:
     logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
-    if convert_vars.args.pdf and not convert_vars.can_convert_to_pdf and not convert_vars.args.debug:
+    libreoffice_available = bool(shutil.which("libreoffice") or shutil.which("soffice"))
+    can_make_pdf = convert_vars.can_convert_to_pdf or libreoffice_available
+    if convert_vars.args.pdf and not can_make_pdf and not convert_vars.args.debug:
         logging.error(
             "Cannot convert to pdf on this system. "
-            "Pdf conversion is available on Windows and Mac, if MS Word is installed"
+            "Pdf conversion is available on Windows and Mac (with MS Word), or on any system with LibreOffice."
         )
         return
 
