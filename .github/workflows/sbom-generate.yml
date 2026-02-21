@@ -1,0 +1,64 @@
+name: SBOM
+on:
+  workflow_call:
+    inputs:
+      tag_name:
+        required: true
+        type: string
+jobs:
+  generate-sboms:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install cdxgen
+        run: npm install -g @cyclonedx/cdxgen
+
+      - name: Install cyclonedx-py
+        run: pip install cyclonedx-bom
+
+      - name: Create reports directory
+        run: mkdir -p reports
+
+      - name: Generate SBOM for scripts
+        run: cyclonedx-py requirements requirements.txt -o reports/bom-card.json
+
+      - name: Generate SBOM for website
+        run: cdxgen -r ./cornucopia.owasp.org -o reports/bom-website.json
+
+      - name: Generate SBOM for engine
+        run: cdxgen -r ./copi.owasp.org -o reports/bom-engine.json
+
+      - name: Upload SBOMs to Dependency-Track
+        continue-on-error: true
+        env:
+          DT_URL: ${{ secrets.DEPENDENCYTRACK_URL }}
+          DT_API_KEY: ${{ secrets.DEPENDENCYTRACK_API_KEY }}
+        run: |
+          declare -A NAMES=(
+            ["reports/bom-card.json"]="owasp-cornucopia-card"
+            ["reports/bom-engine.json"]="owasp-cornucopia-engine"
+            ["reports/bom-website.json"]="owasp-cornucopia-website"
+          )
+          for bom in reports/*.json; do
+            echo "--- Uploading $bom as ${NAMES[$bom]} ---"
+            curl --location "$DT_URL/api/v1/bom" \
+              --header "X-Api-Key: $DT_API_KEY" \
+              --form "autoCreate=true" \
+              --form "projectName=${NAMES[$bom]}" \
+              --form "projectVersion=${{ github.ref_name }}" \
+              --form "bom=@$bom"
+            echo ""
+          done
+
+      - name: Upload SBOMs to release
+        run: gh release upload "${{ inputs.tag_name }}" reports/*.json --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

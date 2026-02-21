@@ -224,3 +224,12 @@
                 source/*1\.1-*.yaml
                 source/*2\.2-*.yaml
                 output/owasp_cornucopia_webapp_3.0_en.zip
+      sbom:
+        needs: [hardening, pre-release]
+        name: SBOM
+        uses: ./.github/workflows/sbom-generate.yml
+        secrets: inherit
+        permissions:
+          contents: write
+        with:
+          tag_name: pre-release
