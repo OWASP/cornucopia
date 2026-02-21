@@ -342,16 +342,34 @@ class TestParseArguments(unittest.TestCase):
         args = capec_map.parse_arguments(["-e", "webapp"])
         self.assertEqual(args.edition, "webapp")
 
+    def test_parse_asvs_json_argument(self):
+        """Test parsing with asvs-json argument"""
+        args = capec_map.parse_arguments(["--asvs-json", "asvs.json"])
+        self.assertEqual(args.asvs_json, "asvs.json")
+
     def test_parse_all_arguments(self):
         """Test parsing with all arguments"""
         args = capec_map.parse_arguments(
-            ["-i", "input.yaml", "-o", ConvertVars.OUTPUT_FILE, "-v", "3.0", "-e", "webapp", "-d"]
+            [
+                "-i",
+                "input.yaml",
+                "-o",
+                ConvertVars.OUTPUT_FILE,
+                "-v",
+                "3.0",
+                "-e",
+                "webapp",
+                "-d",
+                "--asvs-json",
+                "asvs.json",
+            ]
         )
 
         self.assertEqual(args.input_path, "input.yaml")
         self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
         self.assertEqual(args.version, "3.0")
         self.assertEqual(args.edition, "webapp")
+        self.assertEqual(args.asvs_json, "asvs.json")
         self.assertTrue(args.debug)
 
     def test_parse_long_form_arguments(self):
@@ -366,6 +384,8 @@ class TestParseArguments(unittest.TestCase):
                 "3.0",
                 "--edition",
                 "webapp",
+                "--asvs-json",
+                "asvs.json",
                 "--debug",
             ]
         )
@@ -374,6 +394,7 @@ class TestParseArguments(unittest.TestCase):
         self.assertEqual(args.output_path, ConvertVars.OUTPUT_FILE)
         self.assertEqual(args.version, "3.0")
         self.assertEqual(args.edition, "webapp")
+        self.assertEqual(args.asvs_json, "asvs.json")
         self.assertTrue(args.debug)
 
 
@@ -412,6 +433,7 @@ class TestMainFunction(unittest.TestCase):
             output_path=Path(ConvertVars.OUTPUT_FILE),
             version="3.0",
             edition="webapp",
+            asvs_json=None,
             debug=False,
         )
         mock_load.return_value = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}}}]}]}
@@ -434,6 +456,7 @@ class TestMainFunction(unittest.TestCase):
             output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent2.yaml"),
             version="3.0",
             edition="webapp",
+            asvs_json=None,
             debug=False,
         )
         mock_load.return_value = {}
@@ -458,6 +481,7 @@ class TestMainFunction(unittest.TestCase):
             output_path=Path(ConvertVars.OUTPUT_DIR + "nonexistent3.yaml"),
             version="3.0",
             edition="webapp",
+            asvs_json=None,
             debug=False,
         )
         mock_load.return_value = {"suits": [{"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}}}]}]}
