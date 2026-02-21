@@ -8,7 +8,7 @@ Instead of enforcing a strict “deny by default” principle, the system allows
 
 Wong attempts to access a restricted section of the app while offline. The app tries to validate his session token against a remote endpoint. Due to a timeout or exception in the authentication handler, the validation process fails.
 
-Rather than blocking access, the app assumes the session is valid and allows Wong into a privileged area. Wong can now view sensitive information or perform actions without proper authentication.
+Rather than blocking access, the app assumes the session is valid and allows Wong into the application.
 
 In another case, an internal error in role validation causes the authorization logic to skip verification steps. Because the system does not explicitly deny access on failure, Wong gains unintended access to administrative functionality.
 
@@ -16,9 +16,9 @@ In another case, an internal error in role validation causes the authorization l
 
 ### STRIDE
 
-This scenario falls under the Elevation of Privilege category of the STRIDE threat modeling framework.
+This scenario falls under the Spoofing category of the STRIDE threat modeling framework.
 
-By failing to enforce secure authentication checks and defaulting to permissive behavior during errors, the system enables Wong to gain privileges beyond what he is authorized to access.
+By failing to enforce secure authentication checks and defaulting to permissive behavior during errors, the system enables Wong to gain unauthorized access.
 
 ### What can go wrong?
 
@@ -29,7 +29,7 @@ If authentication or authorization logic fails open instead of failing closed:
 - Sensitive data may be exposed.
 - Attackers may intentionally trigger error conditions to bypass security checks.
 
-Fail-open logic significantly weakens the security boundary of the application and can lead to data breaches or privilege escalation.
+Fail-open logic significantly weakens the security boundary of the application and can lead to data breaches.
 
 ### What are we going to do about it?
 
