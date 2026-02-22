@@ -2,7 +2,6 @@ defmodule CopiWeb.GameLive.Show do
   use CopiWeb, :live_view
 
   alias Copi.Cornucopia.Game
-  alias Copi.Cornucopia.DealtCard
 
   @impl true
   def mount(_params, _session, socket) do
@@ -55,26 +54,26 @@ defmodule CopiWeb.GameLive.Show do
     game = socket.assigns.game
 
     if game.started_at do
-      # Do nothing, game's already started
+      # Game already started – idempotent noop; always return a valid LiveView reply.
+      # ASVS V2.3.3 – never allow skipping steps or re-triggering a completed flow.
+      {:noreply, socket}
     else
       all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
       players = game.players
 
-      all_cards
-      |> Enum.with_index
-      |> Enum.each(fn({card, i}) ->
-        Copi.Repo.insert! %DealtCard{
-          card_id: card.id,
-          player_id: Enum.fetch!(players, rem(i, Enum.count(players))).id
-        }
-      end)
+      # ASVS V2.3.3 – wrap dealing + game start in one atomic transaction so either
+      # all cards are dealt and the game is marked started, or nothing is persisted.
+      case Copi.Cornucopia.deal_cards_for_game(game, players, all_cards) do
+        {:ok, _result} ->
+          {:ok, updated_game} = Game.find(game.id)
+          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+          {:noreply, assign(socket, :game, updated_game)}
 
-      Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)} )
-
-      {:ok, updated_game} = Game.find(game.id)
-      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-      {:noreply, assign(socket, :game, updated_game)}
+        {:error, _step, _reason} ->
+          # ASVS V16.5 – fail gracefully with a generic message; never crash the
+          # LiveView process or expose internal error details to the client.
+          {:noreply, put_flash(socket, :error, "Failed to deal cards. Please try again.")}
+      end
     end
   end
 

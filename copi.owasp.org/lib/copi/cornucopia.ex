@@ -9,6 +9,7 @@ defmodule Copi.Cornucopia do
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.Card
   alias Copi.Cornucopia.Player
+  alias Copi.Cornucopia.DealtCard
 
   @doc """
   Returns the list of games.
@@ -102,6 +103,62 @@ defmodule Copi.Cornucopia do
   """
   def change_game(%Game{} = game, attrs \\ %{}) do
     Game.changeset(game, attrs)
+  end
+
+  @doc """
+  Atomically deals cards to all players using round-robin logic and marks the
+  game as started in a single database transaction.
+
+  All `DealtCard` rows are inserted together with the `started_at` timestamp
+  update via `Ecto.Multi`. If any insert fails the entire transaction is rolled
+  back, preventing partial game-state corruption.
+
+  Returns `{:ok, %{game: game, dealt_cards: [%DealtCard{}, ...]}}` on success,
+  or `{:error, failed_step, reason}` on failure.
+
+  ## ASVS V2.3.3 – use transactions so operations succeed entirely or roll back.
+  """
+  def deal_cards_for_game(%Game{} = _game, [], _cards) do
+    # Guard against ArithmeticError from rem(i, 0) and misuse of the API.
+    {:error, :no_players, :player_list_empty}
+  end
+
+  def deal_cards_for_game(%Game{} = game, players, cards) do
+    player_count = Enum.count(players)
+
+    multi =
+      cards
+      |> Enum.with_index()
+      # V15.4 – build the Multi without side-effects; no DB calls inside the loop.
+      |> Enum.reduce(Ecto.Multi.new(), fn {card, i}, multi ->
+        player = Enum.fetch!(players, rem(i, player_count))
+
+        changeset =
+          %DealtCard{}
+          |> DealtCard.changeset(%{card_id: card.id, player_id: player.id})
+
+        # Unique atom key derived from index keeps Multi step names collision-free.
+        Ecto.Multi.insert(multi, {:dealt_card, i}, changeset)
+      end)
+      |> Ecto.Multi.update(
+        :game,
+        Game.changeset(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+      )
+
+    case Repo.transaction(multi) do
+      {:ok, changes} ->
+        # Collect only the DealtCard results, ignoring the :game key.
+        dealt_cards =
+          changes
+          |> Enum.filter(fn {k, _} -> match?({:dealt_card, _}, k) end)
+          |> Enum.map(fn {_, v} -> v end)
+
+        {:ok, %{game: changes.game, dealt_cards: dealt_cards}}
+
+      # V16.5 – return structured error; never raise so callers can handle gracefully.
+      {:error, failed_step, reason, _changes_so_far} ->
+        {:error, failed_step, reason}
+    end
   end
 
   def get_suits_from_selected_deck(selected_edition) do
