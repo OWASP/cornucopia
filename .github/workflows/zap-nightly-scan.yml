@@ -100,7 +100,6 @@ jobs:
             -x copi_dast_report.xml \
             -a \
             -d \
-            -m 5 \
             -z "-config scanner.maxScanDurationInMins=180" \
             || true
 
