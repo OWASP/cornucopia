@@ -100,7 +100,7 @@ jobs:
             -x copi_dast_report.xml \
             -a \
             -d \
-            -z 180 \
+            -z "-config scanner.maxScanDurationInMins=180" \
             || true
 
       - name: Stop Phoenix server
