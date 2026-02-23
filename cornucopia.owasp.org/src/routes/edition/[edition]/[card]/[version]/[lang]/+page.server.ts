@@ -26,7 +26,7 @@ export const load = (({ params }) => {
     
     return {
       edition: edition,
-      version: version,
+      versions: DeckService.getVersions(edition),
       lang: lang,
       card: legacyCardCodeFix(params.card.toUpperCase()),
       cards: new DeckService().getCardDataForEditionVersionLang(edition, version, lang),

@@ -141,13 +141,15 @@ jobs:
 
       - name: Upload reports to pre-release
         if: always()
-        uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
-        with:
-          tag_name: pre-release
-          prerelease: true
-          name: Latest pre-release
-          files: |
-            zap-reports/copi_dast_report.html
-            zap-reports/copi_dast_report.json
-            zap-reports/copi_dast_report.xml
-            zap-reports/copi_dast_report.md
+        run: |
+          for f in \
+            zap-reports/copi_dast_report.html \
+            zap-reports/copi_dast_report.json \
+            zap-reports/copi_dast_report.xml \
+            zap-reports/copi_dast_report.md; do
+            if [ -f "$f" ]; then
+              gh release upload "pre-release" "$f" --clobber
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
