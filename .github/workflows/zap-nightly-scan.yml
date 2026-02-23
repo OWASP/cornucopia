@@ -87,22 +87,62 @@ jobs:
           timeout 60 bash -c 'until curl -f http://localhost:4000 > /dev/null 2>&1; do sleep 2; done'
           echo "Phoenix server is ready!"
 
-      - name: Run ZAP Full Scan with AJAX Spider
+      - name: Create ZAP automation plan
         run: |
-          docker run --network="host" -v $(pwd)/zap-reports:/zap/wrk/:rw \
-            -t ghcr.io/zaproxy/zaproxy:stable \
-            zap-full-scan.py \
-            -t http://localhost:4000/games/new \
-            -j \
-            -m 1 \
-            -T 2 \
-            -r copi_dast_report.html \
-            -w copi_dast_report.md \
-            -J copi_dast_report.json \
-            -x copi_dast_report.xml \
-            -a \
-            -d \
-            -z "-config ajaxSpider.maxDuration=1" || true
+          mkdir -p zap-reports
+          cat > zap-plan.yaml << 'EOF'
+          env:
+            contexts:
+              - name: "copi"
+                urls:
+                  - "http://localhost:4000"
+
+          jobs:
+            - type: spider
+              parameters:
+                context: "copi"
+                maxDuration: 3
+
+            - type: spiderAjax
+              parameters:
+                context: "copi"
+                url: "http://localhost:4000/games/new"
+                maxDuration: 3
+
+            - type: activeScan
+              parameters:
+                context: "copi"
+                maxScanDurationInMins: 10
+
+            - type: report
+              parameters:
+                template: "traditional-html"
+                reportFile: "/zap/wrk/copi_dast_report.html"
+
+            - type: report
+              parameters:
+                template: "traditional-json"
+                reportFile: "/zap/wrk/copi_dast_report.json"
+
+            - type: report
+              parameters:
+                template: "traditional-xml"
+                reportFile: "/zap/wrk/copi_dast_report.xml"
+
+            - type: report
+              parameters:
+                template: "traditional-md"
+                reportFile: "/zap/wrk/copi_dast_report.md"
+          EOF
+
+      - name: Run ZAP Scan
+        run: |
+          docker run --network="host" \
+            -v $(pwd)/zap-reports:/zap/wrk/:rw \
+            -v $(pwd)/zap-plan.yaml:/zap/plan.yaml:ro \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap.sh -cmd -autorun /zap/plan.yaml -d 2>&1 | tee zap-reports/zap-debug.log
+          echo "ZAP exit code: ${PIPESTATUS[0]}"
 
       - name: Stop Phoenix server
         if: always()
