@@ -693,7 +693,7 @@ suits:
     id: AAIQ
     value: Q
     url: https://cornucopia.owasp.org/cards/AAIQ
-    desc: Tay can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
+    desc: Jane can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
   -
     id: AAIK
     value: K
