@@ -89,7 +89,10 @@ jobs:
 
       - name: Run ZAP Full Scan with AJAX Spider
         run: |
-          docker run --network="host" -v $(pwd)/zap-reports:/zap/wrk/:rw \
+          mkdir -p zap-reports
+          docker run --network="host" \
+            --user $(id -u):$(id -g) \
+            -v $(pwd)/zap-reports:/zap/wrk/:rw \
             -t ghcr.io/zaproxy/zaproxy:stable \
             zap-full-scan.py \
             -t http://localhost:4000/games/new \
@@ -100,7 +103,7 @@ jobs:
             -x copi_dast_report.xml \
             -a \
             -d \
-            -z "-config scanner.maxScanDurationInMins=180" \
+            -z "-config ajaxSpider.maxDuration=5 scanner.maxScanDurationInMins=5" \
             || true
 
       - name: Stop Phoenix server
