@@ -22,6 +22,24 @@ end
 ssl_verify = if System.get_env("ECTO_SSL_VERIFY") in ~w(false 0), do: [ verify: :verify_none], else: false
 
 if config_env() == :prod do
+  # V13.3.1, V11.2.1, V11.5.1 — AES-256-GCM key loaded from environment.
+  # Generate with: mix phx.gen.secret 32 | base64
+  encryption_key =
+    System.get_env("COPI_ENCRYPTION_KEY") ||
+      raise """
+      environment variable COPI_ENCRYPTION_KEY is missing.
+      Generate one with: mix phx.gen.secret 32 | base64
+      """
+
+  config :copi, Copi.Vault,
+    ciphers: [
+      default:
+        {Cloak.Ciphers.AES.GCM,
+         tag: "AES.GCM.V1",
+         # Base64-decode the ENV value to obtain the raw 32-byte AES key.
+         key: Base.decode64!(encryption_key)}
+    ]
+
   database_url =
     System.get_env("DATABASE_URL") ||
       raise """
