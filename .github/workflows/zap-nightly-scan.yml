@@ -90,8 +90,9 @@ jobs:
       - name: Run ZAP Full Scan with AJAX Spider
         run: |
           mkdir -p zap-reports
+          chown 1000:1000 zap-reports
           docker run --network="host" \
-            --user $(id -u):$(id -g) \
+            --user 1000:1000 \
             -v $(pwd)/zap-reports:/zap/wrk/:rw \
             -t ghcr.io/zaproxy/zaproxy:stable \
             zap-full-scan.py \
