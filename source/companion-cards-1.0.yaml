@@ -643,7 +643,7 @@ suits:
     id: AAI2
     value: 2
     url: https://cornucopia.owasp.org/cards/AAI2
-    desc: HAL 9000 can misinterpret user intent due to insufficient context isolation or prompt enforcement and execute actions outside the expected task scope.
+    desc: Tay can misinterpret user intent due to insufficient context isolation or prompt enforcement and execute actions outside the expected task scope.
   -
     id: AAI3
     value: 3
@@ -658,7 +658,7 @@ suits:
     id: AAI5
     value: 5
     url: https://cornucopia.owasp.org/cards/AAI5
-    desc: GLaDOS can reveal sensitive internal instructions, policies, or reasoning artifacts when exposed to adversarial prompting patterns.
+    desc: Watson can reveal sensitive internal instructions, policies, or reasoning artifacts when exposed to adversarial prompting patterns.
   -
     id: AAI6
     value: 6
@@ -668,7 +668,7 @@ suits:
     id: AAI7
     value: 7
     url: https://cornucopia.owasp.org/cards/AAI7
-    desc: AM can treat external tool outputs as authoritative and execute embedded malicious instructions without validation.
+    desc: Auto-GPT can treat external tool outputs as authoritative and execute embedded malicious instructions without validation.
   -
     id: AAI8
     value: 8
@@ -678,7 +678,7 @@ suits:
     id: AAI9
     value: 9
     url: https://cornucopia.owasp.org/cards/AAI9
-    desc: The Architect can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
+    desc: Scout can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
   -
     id: AAIX
     value: X
@@ -688,12 +688,12 @@ suits:
     id: AAIJ
     value: J
     url: https://cornucopia.owasp.org/cards/AAIJ
-    desc: VIKI can trust instructions from peer agents without verification, policy validation, or identity assurance.
+    desc: BabyAGI can trust instructions from peer agents without verification, policy validation, or identity assurance.
   -
     id: AAIQ
     value: Q
     url: https://cornucopia.owasp.org/cards/AAIQ
-    desc: Auto can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
+    desc: Tay can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
   -
     id: AAIK
     value: K
