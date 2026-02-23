@@ -141,7 +141,7 @@ jobs:
             -v $(pwd)/zap-reports:/zap/wrk/:rw \
             -v $(pwd)/zap-plan.yaml:/zap/plan.yaml:ro \
             ghcr.io/zaproxy/zaproxy:stable \
-            zap.sh -cmd -autorun /zap/plan.yaml -d 2>&1 | tee zap-reports/zap-debug.log
+            zap.sh -cmd -autorun /zap/plan.yaml -loglevel DEBUG 2>&1 | tee zap-reports/zap-debug.log
           echo "ZAP exit code: ${PIPESTATUS[0]}"
 
       - name: Stop Phoenix server
