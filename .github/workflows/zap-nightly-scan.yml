@@ -102,7 +102,7 @@ jobs:
             -a \
             -d \
             -m 5 \
-            -z "-config ajaxSpider.maxDuration=5 -config scanner.maxScanDurationInMins=10" \
+            -z "-config scanner.maxScanDurationInMins=180" \
             || true
 
       - name: Stop Phoenix server
