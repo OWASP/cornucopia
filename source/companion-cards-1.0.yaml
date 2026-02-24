@@ -635,3 +635,73 @@ suits:
     url: https://cornucopia.owasp.org/cards/BOTA
     desc: You have identified an automated attack that misuses inherent web application functionality or a related design flaw
     misc: Read more about Automated Threats to web applications in the OWASP Automated Threat Handbook
+-
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+    desc: Tay can misinterpret user intent due to insufficient context isolation or prompt enforcement and execute actions outside the expected task scope.
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+    desc: Boo-Code can rely on unverified or attacker-influenced conversation history, propagating incorrect assumptions across reasoning chains.
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+    desc: MissTrial can autonomously loop or chain external tool calls without enforcing rate limits or budget controls.
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+    desc: Watson can reveal sensitive internal instructions, policies, or reasoning artifacts when exposed to adversarial prompting patterns.
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+    desc: Gremlini can access and process sensitive data sources beyond user authorization due to insufficient access validation.
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+    desc: Auto-GPT can treat external tool outputs as authoritative and execute embedded malicious instructions without validation.
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+    desc: PreCursor can execute unintended code or system actions when tool input validation and sandboxing controls are weak.
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+    desc: CoPirate can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+    desc: DeepGeek can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives.
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+    desc: BabyAGI can trust instructions from peer agents without verification, policy validation, or identity assurance.
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+    desc: Jane can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+    desc: GPI-3.1415 can execute high-impact operations across integrated systems due to excessive agency and lack of transactional safeguards.
+  -
+    id: AAIA
+    value: A
+    url: https://cornucopia.owasp.org/cards/AAIA
+    desc: You have invented a new attack against Agentic AI
+    misc: 

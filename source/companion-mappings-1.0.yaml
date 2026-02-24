@@ -707,3 +707,175 @@ suits:
     owasp_oat: [ ]
     cwe: [  ]
     capec: [ "-" ]
+-
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0051 ]
+    mitre_atlas_print: [ "AML.T0051: Prompt Injection" ]
+    owasp_llm_top10: [ LLM01:2025 ]
+    owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
+    owasp_agentic_top10: [ AAI01:2026 ]
+    owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0080 ]
+    mitre_atlas_print: [ "AML.T0080 - AI Agent Context Poisoning" ]
+    owasp_llm_top10: [ LLM04:2025 ]
+    owasp_llm_top10_print: [ "LLM04:2025: Data & Model Poisoning" ]
+    owasp_agentic_top10: [ ASI06:2026 ]
+    owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+    stride: [ D ]
+    stride_print: [ "Denial of Service" ]
+    cia: [ A ]
+    cia_print: [ "Availability" ]
+    mitre_atlas: [ AML.T0034, AML.T0029 ]
+    mitre_atlas_print: [ "AML.T0034: Cost Harvesting", "AML.T0029: Denial of AI Service" ]
+    owasp_llm_top10: [ LLM10:2025 ]
+    owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
+    owasp_agentic_top10: [ ASI02:2026 ]
+    owasp_agentic_top10_print: [ "ASI02: Tool Misuse & Exploitation" ]
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+    stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
+    cia: [ C ]
+    cia_print: [ "Confidentiality" ]
+    mitre_atlas: [ AML.T0015 ]
+    mitre_atlas_print: [ "AML.T0015: Evade AI Model" ]
+    owasp_llm_top10: [ LLM02:2025 ]
+    owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
+    owasp_agentic_top10: [ ASI06:2026 ]
+    owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+    stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
+    cia: [ C ]
+    cia_print: [ "Confidentiality" ]
+    mitre_atlas: [ AML.T0086 ]
+    mitre_atlas_print: [ "AML.T0086: Exfiltration via AI Agent Tool Invocation" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI03:2026 ]
+    owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0051.001 ]
+    mitre_atlas_print: [ "AML.T0051.001: LLM Prompt Injection: Indirect" ]
+    owasp_llm_top10: [ LLM01:2025 ]
+    owasp_llm_top10_print: [ "LLM01:2025: Tool Misuse & Exploitation" ]
+    owasp_agentic_top10: [ ASI02:2026 ]
+    owasp_agentic_top10_print: [ "ASI02: Tool Misuse & Exploitation" ]
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0011 ]
+    mitre_atlas_print: [ "AML.T0011: User Execution" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI05:2026 ]
+    owasp_agentic_top10_print: [ "ASI05: Unexpected Code Execution (RCE)" ]
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0081 ]
+    mitre_atlas_print: [ "AML.T0081: Modify AI Agent Configuration" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI03:2026 ]
+    owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+    stride: [ E, I ]
+    stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
+    cia: [ C, I ]
+    cia_print: [ "Confidentiality", "Integrity" ]
+    mitre_atlas: [ AML.T0102 ]
+    mitre_atlas_print: [ "AML.T0102: Generate Malicious Commands" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI01:2026 ]
+    owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+    stride: [ T, R ]
+    stride_print: [ "Tampering", "Repudiation" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0067 ]
+    mitre_atlas_print: [ "AML.T0067: LLM Trusted Output Components Manipulation" ]
+    owasp_llm_top10: [ LLM06:2025]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI07:2026 ]
+    owasp_agentic_top10_print: [ "ASI07: Insecure Inter-Agent Communication" ]
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0081 ]
+    mitre_atlas_print: [ "AML.T0081: Modify AI Agent Configuration" ]
+    owasp_llm_top10: [ LLM03:2025 ]
+    owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
+    owasp_agentic_top10: [ ASI04:2026 ]
+    owasp_agentic_top10_print: [ "ASI04: Agentic Supply Chain Vulnerabilities" ]
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+    stride: [ E, D ]
+    stride_print: [ "Elevation of Privilege", "Denial of Service" ]
+    cia: [ I, A ]
+    cia_print: [ "Integrity", "Availability" ]
+    mitre_atlas: [ AML.T0053 ]
+    mitre_atlas_print: [ "AML.T0053: AI Agent Tool Invocation" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI03:2026 ]
+    owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
