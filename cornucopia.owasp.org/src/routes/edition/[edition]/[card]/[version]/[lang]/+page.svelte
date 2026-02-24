@@ -12,6 +12,7 @@
   let cards = $derived(data.cards);
   let card : Card = $derived(cards.get(data.card) as Card);
   let languages = $derived(data.languages);
+  let versions = $derived(data.versions);
 
   function cardFound() 
     {
@@ -52,7 +53,7 @@
 </svelte:head>
 <div>
 {#if cardFound()}
-  <CardFound routes={data.routes} {cards} {card} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} />
+  <CardFound routes={data.routes} {cards} {card} {versions} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}

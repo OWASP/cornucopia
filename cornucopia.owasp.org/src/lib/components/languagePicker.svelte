@@ -5,9 +5,15 @@
     version: string;
     currentLanguage: string;
     languages: string[];
+    versions: string[];
   }
 
-  let { edition, cardId, version, currentLanguage, languages }: Props = $props();
+  let { edition, cardId, version, currentLanguage, languages, versions }: Props = $props();
+
+  let filteredLanguages =
+  version === "3.0"
+    ? ["en"]
+    : Array.from(new Set(languages));
 
   // Map language codes to display names
   const languageNames: Record<string, string> = {
@@ -28,64 +34,79 @@
   }
 </script>
 
-<div class="language-picker">
-  <label for="language-select">Language:</label>
-  <select 
-    id="language-select" 
-    value={currentLanguage}
-    onchange={(e) => {
-      const selectedLanguage = (e.target as HTMLSelectElement).value;
-      window.location.href = `/card/${edition}/${cardId}/${version}/${selectedLanguage}`;
-    }}
-  >
-    {#each languages as lang}
-      <option value={lang} selected={lang === currentLanguage}>
-        {getLanguageName(lang)}
-      </option>
-    {/each}
-  </select>
+<div class="pickers">
+
+  <div>
+    <label for="version-select">Version:</label>
+    <select
+      id="version-select"
+      value={version}
+onchange={(e) => {
+  const selectedVersion = (e.target as HTMLSelectElement).value;
+
+  const targetLanguage =
+    selectedVersion === "3.0" ? "en" : currentLanguage;
+
+  window.location.href =
+    `/edition/${edition}/${cardId}/${selectedVersion}/${targetLanguage}`;
+}}
+    >
+      {#each versions as v}
+        <option value={v} selected={v === version}>
+          v{v}
+        </option>
+      {/each}
+    </select>
+  </div>
+
+  <div>
+    <label for="language-select">Language:</label>
+    <select
+      id="language-select"
+      value={currentLanguage}
+onchange={(e) => {
+  const selectedLanguage = (e.target as HTMLSelectElement).value;
+
+  window.location.href =
+    `/edition/${edition}/${cardId}/${version}/${selectedLanguage}`;
+}}
+    >
+      {#each filteredLanguages as lang}
+        <option value={lang} selected={lang === currentLanguage}>
+          {getLanguageName(lang)}
+        </option>
+      {/each}
+    </select>
+  </div>
+
 </div>
 
-<style>
-  .language-picker {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
 
-  label {
-    font-weight: bold;
-    font-size: 1rem;
+<style>
+
+.pickers {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pickers > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .pickers {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   select {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid var(--background, #333);
-    background-color: white;
-    color: var(--background, #333);
-    cursor: pointer;
-    border-radius: 4px;
+    width: 100%;
   }
+}
 
-  select:hover {
-    opacity: 0.8;
-  }
-
-  select:focus {
-    outline: 2px solid var(--background, #333);
-    outline-offset: 2px;
-  }
-
-  @media (max-aspect-ratio: 1/1) {
-    .language-picker {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    select {
-      width: 100%;
-    }
-  }
 </style>

@@ -20,7 +20,7 @@
 		"@sveltejs/adapter-cloudflare": "^7.2.6",
 		"@sveltejs/kit": "^2.50.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
-		"@types/node": "^25.2.3",
+		"@types/node": "^25.3.0",
 		"@vitest/coverage-v8": "^4.0.17",
 		"dotenv": "^17.3.1",
 		"serve": "^14.2.4",
@@ -45,6 +45,7 @@
 		"svelte-i18n": "^4.0.1",
 		"svelte-markdown": "^0.4.1",
 		"sveltekit-i18n": "^2.4.2",
+		"swagger-ui-dist": "^5.31.1",
 		"sync-request": "^6.1.0",
 		"vite-plugin-restart": "^2.0.0",
 		"vite-plugin-static-copy": "^3.2.0"
@@ -55,7 +56,13 @@
 			"ignoreGhsas": [
 				"GHSA-vg6x-rcgg-rjx6",
 				"GHSA-67mh-4wv8-2f99",
-				"GHSA-mh29-5h37-fv8m"
+				"GHSA-mh29-5h37-fv8m",
+				"GHSA-m56q-vw4c-c2cp",
+				"GHSA-f7gr-6p89-r883",
+				"GHSA-h7h7-mm68-gmrc",
+				"GHSA-crpf-4hrx-3jrp",
+				"GHSA-33hq-fvwr-56pm",
+				"GHSA-8qm3-746x-r74r"
 			]
 		},
 		"overrides": {
