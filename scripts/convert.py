@@ -20,25 +20,79 @@ from pathvalidate import sanitize_filepath
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-    EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp", "against-security"]
+    EDITION_CHOICES: List[str] = ["all"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "odt", "pdf", "idml"]
-    LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.2", "3.0", "5.0"]
-    LATEST_VERSION_CHOICES: List[str] = ["1.1", "3.0"]
-    TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
-    EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
-        "webapp": {"2.2": "2.2", "3.0": "3.0"},
-        "against-security": {"1.0": "1.0"},
-        "mobileapp": {"1.0": "1.0", "1.1": "1.1"},
-        "all": {"2.2": "2.2", "1.0": "1.0", "1.1": "1.1", "3.0": "3.0", "5.0": "5.0"},
-    }
+    LAYOUT_CHOICES: List[str] = ["all"]
+    LANGUAGE_CHOICES: List[str] = ["all"]
+    VERSION_CHOICES: List[str] = ["all", "latest"]
+    LATEST_VERSION_CHOICES: List[str] = []
+    TEMPLATE_CHOICES: List[str] = ["all"]
+    EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {}
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
     )
     DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_document_template_lang"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
+
+    def __init__(self):
+        self._detect_choices()
+
+    def _detect_choices(self):
+        source_dir = os.path.join(self.BASE_PATH, "source")
+        editions = set()
+        languages = set(["en"])
+        versions = set()
+        layouts = set(["cards", "leaflet", "guide"])
+        templates = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
+        edition_version_map: Dict[str, Dict[str, str]] = {}
+
+        if os.path.isdir(source_dir):
+            for filename in os.listdir(source_dir):
+                if filename.endswith(".yaml") and "mappings" in filename:
+                    filepath = os.path.join(source_dir, filename)
+                    try:
+                        with open(filepath, "r", encoding="utf-8") as f:
+                            data = yaml.safe_load(f)
+                            if data and "meta" in data:
+                                meta = data["meta"]
+                                edition = meta.get("edition")
+                                version = str(meta.get("version"))
+                                file_langs = meta.get("languages", [])
+                                file_layouts = meta.get("layouts", [])
+                                file_templates = meta.get("templates", [])
+
+                                if edition:
+                                    editions.add(edition)
+                                    if version:
+                                        versions.add(version)
+                                        if edition not in edition_version_map:
+                                            edition_version_map[edition] = {}
+                                        edition_version_map[edition][version] = version
+
+                                for lang in file_langs:
+                                    languages.add(lang)
+                                for layout in file_layouts:
+                                    layouts.add(layout)
+                                for template in file_templates:
+                                    templates.add(template)
+                    except Exception as e:
+                        logging.warning(f"Failed to parse {filename} for dynamic choice detection: {e}")
+
+        self.EDITION_CHOICES = ["all"] + sorted(list(editions))
+        self.LANGUAGE_CHOICES = ["all"] + sorted(list(languages))
+        self.VERSION_CHOICES = ["all", "latest"] + sorted(list(versions))
+        self.LAYOUT_CHOICES = ["all"] + sorted(list(layouts))
+        self.TEMPLATE_CHOICES = ["all"] + sorted(list(templates))
+        self.EDITION_VERSION_MAP = edition_version_map
+        self.EDITION_VERSION_MAP["all"] = {v: v for v in versions}
+
+        # Determine latest version for each edition
+        latest_versions = []
+        for v_map in edition_version_map.values():
+            if v_map:
+                latest_versions.append(max(v_map.keys()))
+        self.LATEST_VERSION_CHOICES = sorted(list(set(latest_versions)))
 
 
 def check_fix_file_extension(filename: str, file_type: str) -> str:
