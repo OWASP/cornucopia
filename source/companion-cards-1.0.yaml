@@ -648,12 +648,12 @@ suits:
     id: AAI3
     value: 3
     url: https://cornucopia.owasp.org/cards/AAI3
-    desc: Skynet can rely on unverified or attacker-influenced conversation history, propagating incorrect assumptions across reasoning chains.
+    desc: Boo-Code can rely on unverified or attacker-influenced conversation history, propagating incorrect assumptions across reasoning chains.
   -
     id: AAI4
     value: 4
     url: https://cornucopia.owasp.org/cards/AAI4
-    desc: Ultron can autonomously loop or chain external tool calls without enforcing rate limits or budget controls.
+    desc: MissTrial can autonomously loop or chain external tool calls without enforcing rate limits or budget controls.
   -
     id: AAI5
     value: 5
@@ -663,7 +663,7 @@ suits:
     id: AAI6
     value: 6
     url: https://cornucopia.owasp.org/cards/AAI6
-    desc: SHODAN can access and process sensitive data sources beyond user authorization due to insufficient access validation.
+    desc: Gremlini can access and process sensitive data sources beyond user authorization due to insufficient access validation.
   -
     id: AAI7
     value: 7
@@ -673,17 +673,17 @@ suits:
     id: AAI8
     value: 8
     url: https://cornucopia.owasp.org/cards/AAI8
-    desc: Agent Smith can execute unintended code or system actions when tool input validation and sandboxing controls are weak.
+    desc: PreCursor can execute unintended code or system actions when tool input validation and sandboxing controls are weak.
   -
     id: AAI9
     value: 9
     url: https://cornucopia.owasp.org/cards/AAI9
-    desc: Scout can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
+    desc: CoPirate can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
   -
     id: AAIX
     value: X
     url: https://cornucopia.owasp.org/cards/AAIX
-    desc: Wintermute can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives.
+    desc: DeepGeek can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives.
   -
     id: AAIJ
     value: J
@@ -698,7 +698,7 @@ suits:
     id: AAIK
     value: K
     url: https://cornucopia.owasp.org/cards/AAIK
-    desc: Colossus can execute high-impact operations across integrated systems due to excessive agency and lack of transactional safeguards.
+    desc: GPI-3.1415 can execute high-impact operations across integrated systems due to excessive agency and lack of transactional safeguards.
   -
     id: AAIA
     value: A
