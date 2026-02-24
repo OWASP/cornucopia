@@ -435,7 +435,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="latest",
         help=(
-            "Output version to produce. [`all`, `latest`, `1.0`, `1.1`, `2.2`, `3.0`] "
+            f"Output version to produce. {convert_vars.VERSION_CHOICES} "
             "\nFor the Website edition:"
             "\nVersion 3.0 will deliver cards mapped to ASVS 5.0"
             "\nVersion 2.2 will deliver cards mapped to ASVS 4.0"
@@ -482,7 +482,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-pt`, `pt-br`, `it`, `ru`] "
+            f"Output language to produce. {convert_vars.LANGUAGE_CHOICES} "
             "you can also specify your own language file. If so, there needs to be a yaml "
             "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
         ),
@@ -494,7 +494,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="bridge",
         help=(
-            "From which template to produce the document. [`bridge`, `tarot` or `tarot_qr`]\n"
+            f"From which template to produce the document. {convert_vars.TEMPLATE_CHOICES}\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
@@ -510,7 +510,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="all",
         help=(
-            "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
+            f"Output decks to produce. {convert_vars.EDITION_CHOICES}\n"
             "The various Cornucopia decks. `web` will give you the Website App edition.\n"
             "`mobileapp` will give you the Mobile App edition.\n"
             "You can also speficy your own edition. If so, there needs to be a yaml "
@@ -525,7 +525,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="all",
         help=(
-            "Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]\n"
+            f"Document layouts to produce. {convert_vars.LAYOUT_CHOICES}\n"
             "The various Cornucopia document layouts.\n"
             "`cards` will output the high quality print card deck.\n"
             "`guide` will generate the docx guide with the low quality print deck.\n"

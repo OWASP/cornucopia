@@ -284,7 +284,7 @@ suits:
     capec: [ CAPEC-153 ]
     cwe: [ CWE-20 ]
     mitre_attack: [ T1565 ]
- -
+  -
     id: FRE3
     value: 3
     url: https://cornucopia.owasp.org/cards/FRE3
