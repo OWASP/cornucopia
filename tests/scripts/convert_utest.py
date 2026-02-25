@@ -96,19 +96,22 @@ class TextGetValidEditionChoices(unittest.TestCase):
 class TextGetValidVersionChoices(unittest.TestCase):
     def test_get_valid_version_choices(self) -> None:
         # These versions are currently present in the repository
-        self.assertTrue(c.get_valid_mapping_for_version("1.1", edition="all") or c.get_valid_mapping_for_version("1.1", edition="mobileapp"))
+        self.assertTrue(
+            c.get_valid_mapping_for_version("1.1", edition="all")
+            or c.get_valid_mapping_for_version("1.1", edition="mobileapp")
+        )
         self.assertTrue(c.get_valid_mapping_for_version("3.0", edition="webapp"))
-        
+
         c.convert_vars.args = argparse.Namespace(version="all", edition="all")
         got_list = c.get_valid_version_choices()
         # Check that expected versions are present
         for v in ["1.1", "3.0"]:
             self.assertIn(v, got_list)
-            
+
         c.convert_vars.args = argparse.Namespace(version="latest", edition="all")
         got_list = c.get_valid_version_choices()
         self.assertTrue(len(got_list) > 0)
-        
+
         c.convert_vars.args = argparse.Namespace(version="", edition="all")
         got_list = c.get_valid_version_choices()
         self.assertTrue(len(got_list) > 0)
@@ -209,8 +212,8 @@ class TestGetValidLanguagesChoices(unittest.TestCase):
 
     def test_get_valid_language_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(language="all")
-        want_language_count = len(c.convert_vars.LANGUAGE_CHOICES) - 1 # excluding 'all'
-        
+        want_language_count = len(c.convert_vars.LANGUAGE_CHOICES) - 1  # excluding 'all'
+
         got_language = c.get_valid_language_choices()
         self.assertEqual(want_language_count, len(got_language))
         for lang in c.convert_vars.LANGUAGE_CHOICES:
