@@ -23,11 +23,10 @@ class TestTranslationCheckerUnit(unittest.TestCase):
     def setUp(self) -> None:
         """Set up test fixtures."""
         # Use test_files directory for mock data
-        # Navigate from cornucopia/scripts -> cornucopia -> oswap -> tests
+        # Navigate from cornucopia/scripts -> cornucopia -> tests/test_files/source
         script_dir = Path(__file__).parent
         cornucopia_dir = script_dir.parent
-        oswap_dir = cornucopia_dir.parent
-        self.test_source_dir = oswap_dir / "tests" / "test_files" / "source"
+        self.test_source_dir = cornucopia_dir / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.test_source_dir)
 
     def test_extract_tags_from_english(self) -> None:
