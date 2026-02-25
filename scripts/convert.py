@@ -38,46 +38,61 @@ class ConvertVars:
     def __init__(self):
         self._detect_choices()
 
-    def _detect_choices(self):
+    def _parse_mapping_file(self, filepath: str) -> Dict:
+        """Parse a single YAML mapping file and return its meta block, or empty dict on failure."""
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+                if data and "meta" in data:
+                    return data["meta"]
+        except Exception as e:
+            logging.warning(f"Failed to parse {filepath} for dynamic choice detection: {e}")
+        return {}
+
+    def _update_from_meta(
+        self,
+        meta: Dict,
+        editions: set,
+        versions: set,
+        languages: set,
+        layouts: set,
+        templates: set,
+        edition_version_map: Dict,
+    ) -> None:
+        """Update the choice sets with values extracted from a mapping file's meta block."""
+        edition = meta.get("edition")
+        version = str(meta.get("version"))
+        if edition:
+            editions.add(edition)
+            if version:
+                versions.add(version)
+                edition_version_map.setdefault(edition, {})[version] = version
+        for lang in meta.get("languages", []):
+            languages.add(lang)
+        for layout in meta.get("layouts", []):
+            layouts.add(layout)
+        for template in meta.get("templates", []):
+            templates.add(template)
+
+    def _detect_choices(self) -> None:
+        """Scan the source/ directory to dynamically populate all choice attributes."""
         source_dir = os.path.join(self.BASE_PATH, "source")
-        editions = set()
-        languages = set(["en"])
-        versions = set()
-        layouts = set(["cards", "leaflet", "guide"])
-        templates = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
+        editions: set = set()
+        languages: set = set(["en"])
+        versions: set = set()
+        layouts: set = set(["cards", "leaflet", "guide"])
+        templates: set = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
         edition_version_map: Dict[str, Dict[str, str]] = {}
 
         if os.path.isdir(source_dir):
             for filename in os.listdir(source_dir):
                 if filename.endswith(".yaml") and "mappings" in filename:
                     filepath = os.path.join(source_dir, filename)
-                    try:
-                        with open(filepath, "r", encoding="utf-8") as f:
-                            data = yaml.safe_load(f)
-                            if data and "meta" in data:
-                                meta = data["meta"]
-                                edition = meta.get("edition")
-                                version = str(meta.get("version"))
-                                file_langs = meta.get("languages", [])
-                                file_layouts = meta.get("layouts", [])
-                                file_templates = meta.get("templates", [])
-
-                                if edition:
-                                    editions.add(edition)
-                                    if version:
-                                        versions.add(version)
-                                        if edition not in edition_version_map:
-                                            edition_version_map[edition] = {}
-                                        edition_version_map[edition][version] = version
-
-                                for lang in file_langs:
-                                    languages.add(lang)
-                                for layout in file_layouts:
-                                    layouts.add(layout)
-                                for template in file_templates:
-                                    templates.add(template)
-                    except Exception as e:
-                        logging.warning(f"Failed to parse {filename} for dynamic choice detection: {e}")
+                    meta = self._parse_mapping_file(filepath)
+                    if meta:
+                        self._update_from_meta(
+                            meta, editions, versions, languages, layouts, templates, edition_version_map
+                        )
 
         self.EDITION_CHOICES = ["all"] + sorted(list(editions))
         self.LANGUAGE_CHOICES = ["all"] + sorted(list(languages))
@@ -87,11 +102,7 @@ class ConvertVars:
         self.EDITION_VERSION_MAP = edition_version_map
         self.EDITION_VERSION_MAP["all"] = {v: v for v in versions}
 
-        # Determine latest version for each edition
-        latest_versions = []
-        for v_map in edition_version_map.values():
-            if v_map:
-                latest_versions.append(max(v_map.keys()))
+        latest_versions = [max(v_map.keys()) for v_map in edition_version_map.values() if v_map]
         self.LATEST_VERSION_CHOICES = sorted(list(set(latest_versions)))
 
 
