@@ -1654,6 +1654,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 .card-player {
 
   display: flex;
+  /* Prevent flex items from shrinking below their card width when the
+     parent #table container activates its overflow-x scroll context. */
+  flex-shrink: 0;
 
   .name {
     margin-right: clamp(6px, 0.6vw, 8px);
