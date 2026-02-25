@@ -585,7 +585,7 @@ suits:
     stride: [ T ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ OAT-022 ]
+    owasp_oat: [ OAT-003 ]
     cwe: [ 841 ]
     capec: [ 210 ]
   -
