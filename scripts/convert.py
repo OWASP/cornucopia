@@ -961,7 +961,7 @@ def get_valid_version_choices() -> List[str]:
 
 
 def get_valid_mapping_for_version(version: str, edition: str) -> str:
-    return ConvertVars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
+    return convert_vars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
 
 
 def get_valid_templates() -> List[str]:
