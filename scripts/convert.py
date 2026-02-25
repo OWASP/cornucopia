@@ -591,7 +591,7 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
 
 def get_docx_document(docx_file: str) -> Any:
     """Open the file and return the docx document."""
-    import docx
+    import docx  # type: ignore
 
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
@@ -932,9 +932,9 @@ def get_valid_layout_choices() -> List[str]:
     layouts = []
     if convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
         for layout in convert_vars.LAYOUT_CHOICES:
-            if layout not in ("all", "guide"):
+            if layout != "all" and layout != "guide":
                 layouts.append(layout)
-            if layout == "guide" and convert_vars.args.edition.lower() in "webapp":
+            if layout == "guide" and convert_vars.args.edition.lower() == "webapp":
                 layouts.append(layout)
     else:
         layouts.append(convert_vars.args.layout)
@@ -980,7 +980,7 @@ def get_valid_mapping_for_version(version: str, edition: str) -> str:
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in "all"]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t != "all"]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
@@ -994,9 +994,9 @@ def get_valid_edition_choices() -> List[str]:
     editions = []
     if convert_vars.args.edition.lower() == "all" or not convert_vars.args.edition.lower():
         for edition in convert_vars.EDITION_CHOICES:
-            if edition not in "all":
+            if edition != "all":
                 editions.append(edition)
-    if convert_vars.args.edition and convert_vars.args.edition not in "all":
+    if convert_vars.args.edition and convert_vars.args.edition.lower() != "all":
         editions.append(convert_vars.args.edition)
     return editions
 
