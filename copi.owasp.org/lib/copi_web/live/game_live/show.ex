@@ -73,29 +73,33 @@ defmodule CopiWeb.GameLive.Show do
         players = game.players
         player_count = length(players)
 
-        # Deal cards to players in round-robin fashion
-        all_cards
-        |> Enum.with_index()
-        |> Enum.each(fn {card, i} ->
-          Copi.Repo.insert!(%DealtCard{
-            card_id: card.id,
-            player_id: Enum.at(players, rem(i, player_count)).id
-          })
-        end)
+        # Build transaction with all card dealing operations and game update
+        # Using Ecto.Multi ensures atomicity: either all operations succeed or all are rolled back
+        multi =
+          all_cards
+          |> Enum.with_index()
+          |> Enum.reduce(Ecto.Multi.new(), fn {card, i}, multi ->
+            Ecto.Multi.insert(multi, {:deal_card, i}, %DealtCard{
+              card_id: card.id,
+              player_id: Enum.at(players, rem(i, player_count)).id
+            })
+          end)
+          |> Ecto.Multi.run(:start_game, fn _repo, _changes ->
+            Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+          end)
 
-        # Update game with start time and handle potential errors
-        case Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
-          {:ok, updated_game} ->
+        # Execute transaction: all cards dealt and game started, or nothing happens
+        case Copi.Repo.transaction(multi) do
+          {:ok, %{start_game: updated_game}} ->
             CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
             {:noreply, assign(socket, :game, updated_game)}
 
-          {:error, _changeset} ->
-            # If update fails, reload game and show error
-            {:ok, reloaded_game} = Game.find(game.id)
+          {:error, _failed_operation, _failed_value, _changes_so_far} ->
+            # Transaction rolled back, game state unchanged
             {:noreply,
              socket
-             |> put_flash(:error, "Failed to start game. Please try again.")
-             |> assign(:game, reloaded_game)}
+             |> put_flash(:error, "Failed to start game due to a system error. Please try again.")
+             |> assign(:game, game)}
         end
     end
   end
