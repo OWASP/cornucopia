@@ -35,29 +35,31 @@ class ConvertVars:
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._detect_choices()
 
-    def _parse_mapping_file(self, filepath: str) -> Dict:
+    def _parse_mapping_file(self, filepath: str) -> Dict[str, Any]:
         """Parse a single YAML mapping file and return its meta block, or empty dict on failure."""
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 data = yaml.safe_load(f)
                 if data and "meta" in data:
-                    return data["meta"]
+                    meta = data["meta"]
+                    if isinstance(meta, dict):
+                        return meta
         except Exception as e:
             logging.warning(f"Failed to parse {filepath} for dynamic choice detection: {e}")
         return {}
 
     def _update_from_meta(
         self,
-        meta: Dict,
-        editions: set,
-        versions: set,
-        languages: set,
-        layouts: set,
-        templates: set,
-        edition_version_map: Dict,
+        meta: Dict[str, Any],
+        editions: set[str],
+        versions: set[str],
+        languages: set[str],
+        layouts: set[str],
+        templates: set[str],
+        edition_version_map: Dict[str, Dict[str, str]],
     ) -> None:
         """Update the choice sets with values extracted from a mapping file's meta block."""
         edition = meta.get("edition")
@@ -77,11 +79,11 @@ class ConvertVars:
     def _detect_choices(self) -> None:
         """Scan the source/ directory to dynamically populate all choice attributes."""
         source_dir = os.path.join(self.BASE_PATH, "source")
-        editions: set = set()
-        languages: set = set(["en"])
-        versions: set = set()
-        layouts: set = set(["cards", "leaflet", "guide"])
-        templates: set = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
+        editions: set[str] = set()
+        languages: set[str] = set(["en"])
+        versions: set[str] = set()
+        layouts: set[str] = set(["cards", "leaflet", "guide"])
+        templates: set[str] = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
         edition_version_map: Dict[str, Dict[str, str]] = {}
 
         if os.path.isdir(source_dir):
@@ -589,7 +591,7 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
 
 def get_docx_document(docx_file: str) -> Any:
     """Open the file and return the docx document."""
-    import docx  # type: ignore[import-untyped]
+    import docx
 
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
