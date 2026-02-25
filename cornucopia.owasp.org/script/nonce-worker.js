@@ -32,6 +32,12 @@ async function fetchAndStreamNotFoundPage(resp, request) {
   if (/\/api\/?$/i.test(resp.url)) {
     return Response.redirect(protocol + "//" + host + "/api/docs", 308);
   }
+  if (/\/api\/cre\/webapp\/?$/i.test(resp.url)) {
+    return Response.redirect(protocol + "//" + host + "/api/cre/webapp/en", 308);
+  }
+  if (/\/api\/cre\/mobileapp\/?$/i.test(resp.url)) {
+    return Response.redirect(protocol + "//" + host + "/api/cre/mobileapp/en", 308);
+  }
   if (/\/card\/[a-z]*.*/i.test(resp.url)) {
     return Response.redirect(resp.url.replace(/\/card\//i, "/edition/"), 308);
   }
