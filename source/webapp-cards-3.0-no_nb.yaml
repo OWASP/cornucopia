@@ -3,7 +3,7 @@ meta:
   edition: "webapp"
   component: "cards"
   language: "NO-NB"
-  version: "2.2"
+  version: "3.0"
 suits:
 -
   id: "VE"
@@ -18,7 +18,7 @@ suits:
     id: "VE3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/VE3"
-    desc: "Robert kan legge inn ondsinnede data fordi det tillatte protokollformatet ikke blir sjekket, duplikater akseptert, strukturen blir ikke verifisert, eller de individuelle dataelementene blir ikke validert iht. format, type, rekkevidde, lengde og en hviteliste over tillatte data. tegn eller formater"
+    desc: "Robert kan legge inn skadelige data fordi det tillatte protokollformatet ikke blir kontrollert, eller duplikater blir akseptert, eller strukturen ikke blir verifisert, eller de individuelle dataelementene ikke blir sanert, eller helst validert for format, type, rekkevidde, størrelse, lengde og en hviteliste over tillatte tegn eller formater"
   -
     id: "VE4"
     value: "4"
@@ -53,22 +53,22 @@ suits:
     id: "VEX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/VEX"
-    desc: "Darío kan utnytte tilliten applikasjonen har til en datakilde (f.eks. brukerdefinerbare data, manipulering av lokalt lagrede data, endring av tilstandsdata på en klientenhet, mangel på verifisering av identitet under datavalidering slik at Darío kan utgi seg for å være Colin)"
+    desc: "Darío kan utnytte tilliten applikasjonen har til en datakilde (f.eks. brukerdefinerbare data, manipulering av lokalt lagrede data, endring av tilstandsdata på en klientenhet, manglende og/eller feil håndheving av kontroller på klientsiden, manglende verifisering av identitet under datavalidering slik at Darío kan utgi seg for å være Colin)"
   -
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    desc: "Toby har kontroll over inputvalidering, utdatavalidering, elller koding av utdata eller rutiner, slik at de kan omgås"
+    desc: "Toby har kontroll over inputvalidering, utdatavalidering, sanering elller koding av utdata eller rutiner, slik at de kan omgås"
   -
     id: "VEQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/VEQ"
-    desc: "Xavier kan injisere data inn i en datatolk på klient- eller enhetssiden fordi et parameterisert grensesnitt ikke blir brukt, eller ikke har blitt implementert riktig, eller fordi dataene ikke er kodet riktig innenfor konteksten, eller det er ingen restriktive retningslinjer for kode eller datainkludering"
+    desc: "Xavier kan injisere data inn i en datatolk på klient- eller enhetssiden fordi et parameterisert grensesnitt ikke blir brukt, eller ikke har blitt implementert riktig, eller fordi dataene ikke er kodet, sanert eller maskert riktig innenfor konteksten, eller det er ingen restriktive retningslinjer for kode eller datainkludering"
   -
     id: "VEK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/VEK"
-    desc: "Gabe kan injisere data inn i en tolk på serversiden (f.eks. SQL, OS-kommandoer, Xpath, Server JavaScript, SMTP) fordi et parameterisert grensesnitt med sterke typer ikke brukes eller ikke er implementert riktig"
+    desc: "Gabe kan injisere data inn i en tolk på serversiden (f.eks. SQL, OS-kommandoer, Xpath, Server JavaScript, SMTP) fordi et parameterisert grensesnitt med sterke typer ikke har blitt brukt eller implementert og konfigurert riktig"
   -
     id: "VEA"
     value: "A"
@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad kan få tak i en brukers passord eller andre hemmeligheter som sikkerhetsspørsmål, ved hjelp av skuldersurfing, eller fra en lokal cache, eller fra minnet, eller under transport, eller ved å lese det fra et ubeskyttet sted, eller fordi det er allment kjent, eller fordi det aldri utløper, eller fordi brukeren ikke kan endre sitt eget passord"
+    desc: "Muhammad kan få tak i en brukers passord eller andre hemmeligheter som MFA-koder eller biometriske data, ved hjelp av skuldersurfing, eller fra en lokal cache, eller fra minnet, eller under transport, eller ved å lese det fra et ubeskyttet sted, eller fordi det er allment kjent eller lekket"
   -
     id: "AT4"
     value: "4"
@@ -98,17 +98,18 @@ suits:
     id: "AT5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AT5"
-    desc: "Javier kan bruke forhåndsvalgte-, testrelaterte- eller lett-gjettelige autentiseringsfaktorer for å autentisere, eller bruke en gammel konto eller en konto som ikke nødvendig er nødvendig for applikasjonen"
+    desc: "Javier kan bruke forhåndsvalgte-, testrelaterte- eller lett-gjettelige autentiseringsfaktorer for å autentisere, eller bruke en gammel konto eller en konto som ikke nødvendig er tiltenkt applikasjonen"
   -
     id: "AT6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
-    desc: "Sven kan gjenbruke et midlertidig passord fordi brukeren ikke trenger å endre det ved første gangs bruk, eller det har for lang- eller ingen utløpstid, eller det ikke bruker en sikker leveringsmetode via en separat kanal (f.eks. post, mobilapp, SMS)"
+    desc: "Sven kan bruke et midlertidig passord, en gjenopprettings-, aktiverings-, autorisasjons- eller MFA-kode på nytt fordi den ikke endres etter bruk, eller fordi den ikke kan tilbakestilles av brukeren eller administratoren, eller fordi den har en utilstrekkelig implementert, for lang eller ingen utløpsdato, eller fortsatt er gyldig etter bruk, tilbakestilling eller annullering, eller fordi den ikke bruker en sikker leveringsmetode via en separat kanal (f.eks. post, mobilapp, SMS)"
   -
     id: "AT7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AT7"
-    desc: "Cecilia kan bruke brute-force og ordbokangrep mot en eller flere kontoer uten å møte en øvre grense, eller fordi disse angrepene er forenklet på grunn av utilstrekkelig kompleksitet, lengde-, utløps- og gjenbrukskrav for passord"
+    desc: "Cecilia kan bruke brute force- og ordbokangrep mot én eller flere kontoer uten begrensninger, eller fordi angrepene er forenklet på grunn av utilstrekkelig kompleksitet, lengde, utløpsdato, eller krav til bruk av passord, gjenopprettings-, aktiverings- eller MFA-koder"
+           
   -
     id: "AT8"
     value: "8"
@@ -118,17 +119,17 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    desc: "Claudia kan utføre mer kritiske funksjoner fordi autentiseringskravene er for svake (f.eks. mangler tofaktorautentisering), eller fordi krav om re-autentisering for disse ikke er tilstede"
-  -
+    desc: "Claudia kan utføre mer kritiske funksjoner fordi autentiseringskravene er inkonsekvente, for svake (f.eks. ikke bruk passnøkler eller annen sterk autentisering, for eksempel en anbefalt MFA-metode), eller fordi krav om re-autentisering for disse ikke er tilstede"
+  -        
     id: "ATX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/ATX"
-    desc: "Pravin kan omgå autentiseringskontroll fordi en sentralisert standard-, testet-, utprøvd- og godkjent autentiseringsmodul/rammeverk/tjeneste, separat fra ressursen som forespørres, ikke benyttes"
+    desc: "Pravin kan omgå autentiseringskontroll fordi en sentralisert standard-, testet-, utprøvd-, anbefalt- og godkjent autentiseringsmodul/rammeverk/tjeneste, separat fra ressursen som forespørres, ikke benyttes eller har blitt konfigurert- eller implementert feil"
   -
     id: "ATJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/ATJ"
-    desc: "Mark kan få tilgang til ressurser eller tjenester fordi det ikke finnes noe autentiseringskrav, eller fordi det ble feilaktig antatt at autentisering skulle bli utført av et annet system eller utført av en tidligere handling"
+    desc: "Mark kan få tilgang til ressurser eller tjenester fordi det ikke finnes noe autentiseringskrav, eller fordi autentisering mangler på grunn av feilkonfigurasjon, uregelmentert design eller implementering, eller fordi det ble feilaktig antatt at autentisering skulle bli utført av et annet system eller utført av en tidligere handling"
   -
     id: "ATQ"
     value: "Q"
@@ -153,17 +154,17 @@ suits:
     id: "SM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/SM2"
-    desc: "William har kontroll over genereringen av sesjonsidentifikatorer"
+    desc: "William har kontroll over genereringen av sesjonsidentifikatorer eller authorisasjonstoken"
   -
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    desc: "Ryan kan bruke en enkelt konto parallelt siden parallelle økter er tillatt"
+    desc: "Ryan kan fortsette å bruke en stjålet brukersesjon så lenge den varer, fordi brukeren ikke kan sjekke om økten er stjålet, avslutte økten eller be administrator om å gjøre det, eller fordi applikasjonen ikke håndterer avkjæring av autorisasjonskoder"
   -
     id: "SM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/SM4"
-    desc: "Alison kan tilordne informasjonskapsler en annen nettapplikasjon fordi domenet og tilleggsstien ikke tilstrekkelig er begrenset"
+    desc: "Alison kan tilordne informasjonskapsler eller benytte seg av autorisasjonstokener i en annen nettapplikasjon fordi domenet, tilleggsstien (eller i tilfelle tokener) publikummet ikke tilstrekkelig er begrenset"
   -
     id: "SM5"
     value: "5"
@@ -178,7 +179,7 @@ suits:
     id: "SM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
-    desc: "Graham kan benytte Adams økt etter at han er ferdig, fordi det ikke er noen utloggingsfunksjon, fordi han ikke enkelt kan logge ut, eller fordi utlogging ikke avslutter økten på riktig måte"
+    desc: "Graham kan benytte Adams økt etter at han er ferdig, fordi det ikke er noen utloggingsfunksjon, fordi han ikke enkelt kan logge ut, eller fordi utlogging og andre mekanismer for endring av autentiseringsinnstillinger ikke tillater brukeren å avslutte økten eller øktene"
   -
     id: "SM8"
     value: "8"
@@ -188,7 +189,7 @@ suits:
     id: "SM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
-    desc: "Ivan kan stjele sesjonsidentifikatorer fordi de sendes over usikre kanaler, blir avslørt i logger/feilmeldinger/URL-er, eller er unødvendig tilgjengelig i kode som angriperen kan påvirke eller endre"
+    desc: "Ivan kan stjele sesjonsidentifikatorer eller autorisasjonstokener fordi de sendes over usikre kanaler, blir avslørt i logger/feilmeldinger/URL-er, eller er unødvendig tilgjengelig i kode, mellomlager, eller lastbalansere som angriperen kan påvirke eller endre"
   -
     id: "SMX"
     value: "10"
@@ -198,7 +199,7 @@ suits:
     id: "SMJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/SMJ"
-    desc: "Jeff kan sende en identisk gjentatt interaksjon på nytt (f.eks. HTTP-forespørsel, signal, knappetrykk) som blir akseptert, ikke avvist"
+    desc: "Jeff kan gjenbruke stjålne sesjonsidentifikatorer og/eller tokens fordi de ikke håndteres konfidensielt, eller fordi det ikke finnes sterke bevis på besittelse (f.eks. binding til sertifikat, enhet, IP-adresse, brukeragent osv.)"
   -
     id: "SMQ"
     value: "Q"
@@ -238,7 +239,7 @@ suits:
     id: "AZ5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AZ5"
-    desc: "Chad kan få tilgang til ressurser (inkludert tjenester, prosesser, AJAX, Flash, video, bilder, dokumenter, midlertidige filer, sesjonsdata, systemegenskaper, konfigurasjonsdata, registerinnstillinger, logger) han ikke skal kunne på grunn av manglende autorisasjon, eller pga. overdrevne privilegier (f.eks. ufullstendig bruk av prinsippet om minste privilegium)"
+    desc: "Chad kan få tilgang til ressurser (inkludert tjenester, prosesser, AJAX, video, bilder, dokumenter, midlertidige filer, sesjonsdata, systemegenskaper, konfigurasjonsdata, registerinnstillinger, logger) han ikke skal kunne på grunn av manglende autorisasjon, eller pga. overdrevne privilegier (f.eks. ufullstendig bruk av prinsippet om minste privilegium)"
   -
     id: "AZ6"
     value: "6"
@@ -258,7 +259,7 @@ suits:
     id: "AZ9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AZ9"
-    desc: "Mike kan misbruke en applikasjon ved å bruke en gyldig funksjon for raskt, eller for ofte, eller på en måte som ikke er tiltenkt, eller som forbruker applikasjonens ressurser, forårsaker en kappløpssituasjon, eller overutnyttelse av en funksjon"
+    desc: "Michael kan omgå applikasjonen for å få tilgang til data fordi administrative verktøy eller administrative grensesnitt ikke er tilstrekkelig sikret"
   -
     id: "AZX"
     value: "10"
@@ -318,7 +319,7 @@ suits:
     id: "CR7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CR7"
-    desc: "Gunter kan avskjære eller endre krypterte data under overføring fordi protokollen er dårlig distribuert, svakt konfigurert, sertifikater ugyldige, sertifikater uklarert, eller fordi tilkobling kan bli degradert til en svakere eller ukryptert kommunikasjonskanal"
+    desc: "Gunter kan avskjære eller endre krypterte og/eller hashede data under overføring fordi protokollen er dårlig distribuert, svakt konfigurert, sertifikater ugyldige, sertifikater uklarert, eller fordi tilkobling kan bli degradert til en svakere eller ukryptert kommunikasjonskanal"
   -
     id: "CR8"
     value: "8"
@@ -363,12 +364,12 @@ suits:
     id: "C2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/C2"
-    desc: "Lee kan omgå applikasjonskontroller fordi farlige/risikofylte programmeringsfunksjoner har blitt brukt istf. sikrere alternativer, fordi typekonverteringsfeil finnes, applikasjonen er upålitelig når ekstern ressurs er utilgjengelig, eller pga. kappløpssituasjons-, ressursinitialiserings- ,allokerings- eller overflytproblemer"
+    desc: "Lee kan omgå applikasjonskontroller fordi farlige/risikofylte programmeringsfunksjoner har blitt brukt istf. sikrere alternativer, fordi typekonverteringsfeil finnes, applikasjonen er upålitelig når ekstern ressurs er utilgjengelig, eller pga. kappløpssituasjons-, ressursinitialiserings-, minnelekasje-, allokerings- eller overflytproblemer"
   -
     id: "C3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/C3"
-    desc: "Andrew kan få tilgang til kildekode, dekompilere, eller på annen måte få tilgang til forretningslogikk for å forstå hvordan applikasjonen fungerer og avdekke eventuelle hemmeligheter den inneholder"
+    desc: "Andrew kan få tilgang til kildekode, dekompilere, feilsøke, eller på annen måte få tilgang til forretningslogikk for å forstå hvordan applikasjonen fungerer og avdekke eventuelle hemmeligheter den inneholder"
   -
     id: "C4"
     value: "4"
@@ -398,7 +399,7 @@ suits:
     id: "C9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/C9"
-    desc: "Michael kan omgå applikasjonen for å få tilgang til data fordi administrative verktøy eller administrative grensesnitt ikke er tilstrekkelig sikret"
+    desc: "Mike kan misbruke et program ved å bruke en gyldig funksjon for raskt, for ofte, eller på en annen måte som ikke er tiltenkt, eller ved å bruke programmets ressurser, eller forårsake kappløpsforhold, eller overutnytte en funksjon"
   -
     id: "CX"
     value: "10"
@@ -408,7 +409,7 @@ suits:
     id: "CJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CJ"
-    desc: "Roman kan utnytte applikasjonen fordi den ble kompilert ved hjelp av utdaterte verktøy, eller fordi konfigurasjonen ikke er sikker som standard, eller fordi sikkerhetsinformasjon ikke ble dokumentert og gitt videre til operative team"
+    desc: "Roman kan utnytte applikasjonen fordi den ble kompilert eller distribuert på en usikker måte, eller pågrunn av usikre grunninstillinger, eller fordi sikkerhetsinformasjon ikke ble dokumentert eller gitt videre til operative team, eller fordi brukeren ikke blir advart og tilgang blokkert når de forventede sikkerhetsfunksjonene ikke støttes eller er deaktivert"
   -
     id: "CQ"
     value: "Q"
@@ -453,10 +454,10 @@ paragraphs:
     text: "Ikke et kort"
   -
     id: "Title"
-    text: "Website App Edition v2.2-NO_NB"
+    text: "Website App Edition v3.0-NO_NB"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v2.2-NO_NB"
+    text: "OWASP® Cornucopia Website App Edition v3.0-NO_NB"
   -
     id: "T00005"
     text: "Indeks"
@@ -690,7 +691,7 @@ paragraphs:
     text: "Angrepene ble primært hentet fra sikkerhetskravene oppført i SCP, v2, men deretter supplert med verifiseringskrav fra OWASP® “Application Security Verification Standard for Web Applications”, de sikkerhetsfokuserte historiene i SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments”, og til slutt en gjennomgang av kortene i EOP. I OWASP Cornucopia Website Edition v2.2 ble SCP-kartleggingen erstattet av OWASP Developer Guide Web Application Checklist."
   -
     id: "T01190"
-    text: "Ytterligere veiledning til hvert kort er tilgjengelig på online Wiki kortstokken på "
+    text: "Ytterligere veiledning til hvert kort er tilgjengelig på OWASP Website på "
   -
     id: "T01200"
     text: "Referanseoversikt til angrepene og de fem ressurser finnes på de fleste kort:"
@@ -1308,19 +1309,19 @@ paragraphs:
     text: "2.2"
   -
     id: "T03771"
-    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9."
+    text: "Migrerte kryssreferansene fra SCP til DevGuide Web Checklist v4.1.9."
   -
     id: "T03772"
     text: "3.0"
   -
     id: "T03773"
-    text: "ASVS has been migrated from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated toe align with modern session management Practices."
+    text: "ASVS har blitt migrert fra v4.0.3 til v5.0. Teksten på kortene er oppdatert for å inkludere MFA og passord som et alternativ for autentisering. Kortene i øktadministrasjonspakken er oppdatert for å samsvare med moderne praksis for sesjonsadministrasjon."
   -
     id: "T03774"
     text: "3.0"
   -
     id: "T03775"
-    text: "STRIDE categories have been added to each cards"
+    text: "STRIDE-kategorier har blitt lagt til på hvert kort"
   -
     id: "T03800"
     text: "Prosjektbidragsytere"
