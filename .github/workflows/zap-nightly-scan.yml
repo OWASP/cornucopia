@@ -104,7 +104,7 @@ jobs:
             -x copi_dast_report.xml \
             -a \
             -d \
-            -z "-config ajaxSpider.maxDuration=20 -config scanner.maxScanDurationInMins=180" \
+            -z "-config ajaxSpider.maxDuration=20 -config scanner.maxScanDurationInMins=120" \
             || true
 
       - name: Stop Phoenix server
