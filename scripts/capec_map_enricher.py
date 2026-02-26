@@ -168,6 +168,7 @@ def set_logging() -> None:
     logging.basicConfig(
         format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s",
     )
+
     if enricher_vars.args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
     else:

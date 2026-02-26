@@ -4,6 +4,8 @@
     import {type Card} from "../../domain/card/card"
 
 	export let card: string;
+        export let versions;
+
 	onMount(() => {
         error(404, {
             message: `Unknown card: ${String(card).toUpperCase()}`

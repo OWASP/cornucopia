@@ -2,6 +2,29 @@ defmodule Copi.IPHelperTest do
   use ExUnit.Case, async: true
   alias Copi.IPHelper
 
+describe "additional safe coverage" do
+  test "get_ip_from_conn with multiple unrelated headers" do
+    conn = %Plug.Conn{
+      remote_ip: {10, 0, 0, 1},
+      req_headers: [
+        {"content-type", "application/json"},
+        {"accept", "*/*"}
+      ]
+    }
+
+    assert IPHelper.get_ip_from_conn(conn) == {10, 0, 0, 1}
+  end
+
+  test "get_ip_from_conn prefers x-forwarded-for over remote_ip" do
+    conn = %Plug.Conn{
+      remote_ip: {10, 0, 0, 1},
+      req_headers: [{"x-forwarded-for", "8.8.8.8"}]
+    }
+
+    assert IPHelper.get_ip_from_conn(conn) == {8, 8, 8, 8}
+  end
+end
+
   describe "get_ip_from_socket/1 with LiveView socket" do
     test "extracts IP from LiveView socket with peer_data" do
       socket = %Phoenix.LiveView.Socket{

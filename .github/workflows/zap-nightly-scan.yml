@@ -89,7 +89,11 @@ jobs:
 
       - name: Run ZAP Full Scan with AJAX Spider
         run: |
-          docker run --network="host" -v $(pwd)/zap-reports:/zap/wrk/:rw \
+          mkdir -p zap-reports
+          sudo chown 1000:1000 zap-reports
+          docker run --network="host" \
+            --user 1000:1000 \
+            -v $(pwd)/zap-reports:/zap/wrk/:rw \
             -t ghcr.io/zaproxy/zaproxy:stable \
             zap-full-scan.py \
             -t http://localhost:4000/games/new \
@@ -100,7 +104,7 @@ jobs:
             -x copi_dast_report.xml \
             -a \
             -d \
-            -z 180 \
+            -z "-config scanner.maxScanDurationInMins=180" \
             || true
 
       - name: Stop Phoenix server
@@ -141,13 +145,15 @@ jobs:
 
       - name: Upload reports to pre-release
         if: always()
-        uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
-        with:
-          tag_name: pre-release
-          prerelease: true
-          name: Latest pre-release
-          files: |
-            zap-reports/copi_dast_report.html
-            zap-reports/copi_dast_report.json
-            zap-reports/copi_dast_report.xml
-            zap-reports/copi_dast_report.md
+        run: |
+          for f in \
+            zap-reports/copi_dast_report.html \
+            zap-reports/copi_dast_report.json \
+            zap-reports/copi_dast_report.xml \
+            zap-reports/copi_dast_report.md; do
+            if [ -f "$f" ]; then
+              gh release upload "pre-release" "$f" --clobber
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
