@@ -185,7 +185,7 @@ suits:
     value: Q
     url: https://cornucopia.owasp.org/cards/CLDQ
     stride: [ I, E ]
-    stride_print [ "Information Disclosure", "Elevation of Privilege" ]
+    stride_print: [ "Information Disclosure", "Elevation of Privilege" ]
     ccm: [ IAM-05, IAM-116 ]
     mitre_attack: [ T1195 ]
     capec: [ CAPEC-161 ]
