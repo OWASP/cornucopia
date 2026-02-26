@@ -22,10 +22,14 @@
     AddLink(subMenu,$t('swags.title'),"/swags");
     AddLink(subMenu,$t('webshop.title'),"/webshop");
 
-    function toggleMenu()
-    {
-        let menuButton = document.getElementsByClassName('mobile-nav-button');
-        for (const item of menuButton) item.checked = false;
+    let menuOpen: boolean = $state(false);
+
+    function toggleMenu() {
+        menuOpen = false;
+    }
+
+    function handleHamburgerClick() {
+        menuOpen = !menuOpen;
     }
 
 </script>
@@ -34,8 +38,19 @@
 <header id="menu">
     <nav>
         <div id="mobile-menu">
-            <input class="mobile-nav-button" in:fade type="checkbox" />
-            <ul class="mobile-menu">
+            <button
+                class="hamburger-btn"
+                class:is-open={menuOpen}
+                onclick={handleHamburgerClick}
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+            >
+                <span class="bar bar-top" style="background: white !important; background-color: white !important; color: white !important;"></span>
+                <span class="bar bar-mid" style="background: white !important; background-color: white !important; color: white !important;"></span>
+                <span class="bar bar-bot" style="background: white !important; background-color: white !important; color: white !important;"></span>
+            </button>
+            {#if menuOpen}
+            <ul class="mobile-menu" in:fade={{ duration: 250 }}>
                 <li>
                     <ul>
                         {#each [...mainMenu].reverse() as link}
@@ -51,6 +66,7 @@
                     </ul>
                 </li>
             </ul>
+            {/if}
         </div>
         <ul class="desktop-menu">
             {#each mainMenu as link}
@@ -77,14 +93,17 @@
 <style>
     * {margin: 0;outline: none;padding-inline-start: 0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
     *:after, *:before { -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
-    nav {  display: block;}
+    nav { display: block; }
+
 
     header {
-        
-		position: sticky;
-		width: 100%;
-		z-index: 100;
-	}
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        /* positioning context for the absolutely-placed .mobile-menu */
+        position: sticky;
+    }
 
     header > nav {
         display: flex;
@@ -170,52 +189,96 @@
         opacity: 50%;
     }
 
-    .mobile-nav-button {
-        content: url('/icons/menu.png');
-        appearance: none;
+    /* ── Hamburger button shell ── */
+    .hamburger-btn {
+        /* fully reset the generic button rule */
+        float: none !important;
+        padding: 0 !important;
+
+        /* pin to exactly 2px from the right edge of the nav, vertically centred */
+        position: absolute;
+        right: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        /* size just enough to wrap the 65px bars */
         display: inline-flex;
-        width: 4.1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 70px;
         height: 4.1rem;
-        align-self: flex-end;
 
+        /* appearance */
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: opacity 0.2s ease;
     }
 
-    .mobile-nav-button:checked {
-        content: url('/icons/close.png');
-
+    .hamburger-btn:hover {
+        opacity: 0.55;
     }
 
-    .mobile-nav-button:hover {
-        opacity: 50%;
+    /* ── Individual bars (using span selector — Svelte always scopes this) ── */
+    .hamburger-btn span,
+    .hamburger-btn span.bar,
+    .hamburger-btn span.bar-top,
+    .hamburger-btn span.bar-mid,
+    .hamburger-btn span.bar-bot {
+        display: block;
+        width: 65px;
+        height: 5px;
+        min-height: 5px;
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 99px;
+        transform-origin: center;
+        flex-shrink: 0;
+        transition:
+            transform  0.38s cubic-bezier(0.23, 1, 0.32, 1),
+            opacity    0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* ── Open state: bars morph into ✕ ── */
+    /* Math: bar-height(5)/2 + gap(10) + bar-height(5)/2 = 15px */
+    .hamburger-btn.is-open span:nth-child(1) {
+        transform: translateY(15px) rotate(45deg);
+    }
+
+    .hamburger-btn.is-open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .hamburger-btn.is-open span:nth-child(3) {
+        transform: translateY(-15px) rotate(-45deg);
     }
 
     #mobile-menu
     {
+        /* hidden on desktop */
         display: none;
-        flex-direction: column;
-        justify-content: flex-start;
-        
+        /* row so it only ever wraps the button — never expands when menu opens */
+        flex-direction: row;
+        align-items: center;
     }
-    .mobile-menu {
-        width : 100%;
-        margin-top: 0.9rem;
-        height : 30rem;
-        background-color: var(--background);
-        z-index: 100;
-        border-radius: 0 0 10px 10px;
-        padding-bottom: 1rem;
-        padding: 0 1rem 1rem;
-        
-    }
-    
 
-    input + ul.mobile-menu
-    {
-        display: none;
-        -webkit-animation: fadeOutFromNone 0.5s ease-out;
-        -moz-animation: fadeOutFromNone 0.5s ease-out;
-        -o-animation: fadeOutFromNone 0.5s ease-out;
-        animation: fadeOutFromNone 0.5s ease-out;
+    .mobile-menu {
+        /* lifted completely out of flow so it CANNOT shift the button */
+        position: absolute;
+        top: 5rem;          /* nav height */
+        right: 0;
+        width: 50%;
+        height: 30rem;
+        background-color: var(--background);
+        z-index: 99;
+        border-radius: 0 0 10px 10px;
+        padding: 0 1rem 1rem;
     }
 
     button
@@ -324,6 +387,7 @@
     
     nav
     {
+        position: relative;   /* anchor point for absolutely-positioned hamburger */
         width : 100%;
         height : 5rem;
         background-color: rgb(31, 41, 55);
@@ -341,15 +405,7 @@
             display: flex;
         }
 
-        input:checked + ul.mobile-menu
-        {
-            display: flex;
-
-            -webkit-animation: fadeInFromNone 0.5s ease-out;
-            -moz-animation: fadeInFromNone 0.5s ease-out;
-            -o-animation: fadeInFromNone 0.5s ease-out;
-            animation: fadeInFromNone 0.5s ease-out;
-        }
+        /* .mobile-menu is already flex when rendered via {#if menuOpen} */
 
         .desktop
         {
@@ -365,69 +421,6 @@
             overflow: visible;
         }
 
-        @-webkit-keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-            100% {
-                display: flex;
-                opacity: 1;
-            }
-        }
-
-        @-moz-keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-            100% {
-                display: flex;
-                opacity: 1;
-            }
-        }
-
-        @-o-keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-            100% {
-                display: flex;
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-        }
     }
 
 
