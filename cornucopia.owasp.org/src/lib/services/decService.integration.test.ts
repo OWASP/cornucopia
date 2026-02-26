@@ -27,6 +27,7 @@ describe('DeckService integration tests', () => {
 
     it("should get Card data for edition, version and lang.", async () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en')).toBeDefined();
+        expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'it')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'es')).toBeDefined();
@@ -39,6 +40,7 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en')).toBeDefined();
 
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en').size).toBe(80);
+        expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'it').size).toBe(80);
