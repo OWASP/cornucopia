@@ -10,12 +10,70 @@ import subprocess
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
-from typing import Any, Dict, List, Tuple, cast
+from typing import Any, Dict, List, Set, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
+
+
+def _scan_source_choices(source_dir: Path) -> Tuple[List[str], List[str]]:
+    """Scan *source_dir* once and return ``(language_choices, version_choices)``.
+
+    Only ``*-cards-{version}-{language}.yaml`` files are considered, because
+    those are the card-content files that carry a language component.  Mapping
+    and ASVS YAML files that have no language suffix are intentionally ignored.
+
+    Language codes are normalised from the underscore form used in filenames
+    (e.g. ``no_nb``) to the hyphen form expected by the CLI (``no-nb``).
+    Version strings are sorted numerically.
+
+    The sentinel values ``"all"`` / ``"latest"`` are always prepended so that
+    the CLI special-case handling in :func:`get_valid_language_choices` and
+    :func:`get_valid_version_choices` continues to work regardless of what
+    files are present on disk.
+
+    Malformed filenames that do not match the expected pattern are silently
+    skipped.  An :class:`OSError` while reading the directory is logged as a
+    warning and the caller falls back to the class-level defaults.
+    """
+    # Matches: {edition}-cards-{version}-{language}.yaml
+    # The edition may itself contain hyphens (e.g. "against-security"), so
+    # we use a non-greedy prefix before the literal "-cards-" separator.
+    _CARD_FILE_RE = re.compile(
+        r"^.+?-cards-"                          # edition (non-greedy) + separator
+        r"(\d+(?:\.\d+)+)"                       # group 1: version e.g. "2.2", "5.0"
+        r"-([a-z]{2}(?:[_-][a-z]{2,4})?)"       # group 2: language e.g. "en", "no_nb"
+        r"\.yaml$",
+        re.IGNORECASE,
+    )
+
+    languages: Set[str] = set()
+    versions: Set[str] = set()
+    try:
+        for entry in source_dir.iterdir():
+            if entry.suffix.lower() != ".yaml":
+                continue
+            match = _CARD_FILE_RE.match(entry.name)
+            if match:
+                versions.add(match.group(1))
+                # Normalise underscore separators to hyphens (no_nb -> no-nb)
+                languages.add(match.group(2).replace("_", "-").lower())
+    except OSError as exc:
+        logging.warning("Could not scan source directory %s: %s", source_dir, exc)
+
+    def _version_sort_key(ver: str) -> Tuple[int, ...]:
+        """Sort version strings numerically component-by-component."""
+        try:
+            return tuple(int(part) for part in ver.split("."))
+        except ValueError:
+            return (0,)
+
+    return (
+        ["all"] + sorted(languages),
+        ["all", "latest"] + sorted(versions, key=_version_sort_key),
+    )
 
 
 class ConvertVars:
@@ -39,6 +97,26 @@ class ConvertVars:
     DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_document_template_lang"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
+
+    def __init__(self) -> None:
+        """Populate dynamic choices by scanning the source directory.
+
+        LANGUAGE_CHOICES and VERSION_CHOICES are derived at runtime from the
+        ``source/`` directory so that adding a new translation or version YAML
+        file is immediately reflected without touching this class.
+
+        The class-level lists remain as documented fallback defaults and are
+        used automatically if the instance attributes are not set (e.g. in
+        tests that patch ConvertVars at the class level).
+        """
+        source_dir = Path(self.BASE_PATH) / "source"
+        lang_choices, ver_choices = _scan_source_choices(source_dir)
+        # Only override if the scan actually found files; otherwise the
+        # class-level hardcoded defaults remain in effect.
+        if len(lang_choices) > 1:   # more than just ["all"]
+            self.LANGUAGE_CHOICES = lang_choices
+        if len(ver_choices) > 2:    # more than just ["all", "latest"]
+            self.VERSION_CHOICES = ver_choices
 
 
 def check_fix_file_extension(filename: str, file_type: str) -> str:
