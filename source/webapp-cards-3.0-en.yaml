@@ -278,7 +278,7 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "Ryan can influence or alter authorization controls and permissions, and can therefore bypass them"
+    desc: "Adrian can influence or alter authorization controls and permissions, and can therefore bypass them"
   -
     id: "AZA"
     value: "A"
