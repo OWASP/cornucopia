@@ -279,7 +279,7 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "Ryan kan påvirke eller endre autorisasjonskontroller og tillatelser, og kan derfor omgå dem"
+    desc: "Adrian kan påvirke eller endre autorisasjonskontroller og tillatelser, og kan derfor omgå dem"
   -
     id: "AZA"
     value: "A"
