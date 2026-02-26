@@ -79,7 +79,7 @@ export class DeckService {
         }
 
         let yamlData = fs.readFileSync(cardFile, 'utf8');
-        let data = yaml.load(yamlData);
+        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
         let base = `data/cards/${edition}-cards-${version}-${lang}/`;
 
         if (!FileSystemHelper.hasDir(base)) {

@@ -10,7 +10,7 @@ export class MappingService {
     public getLatestsCardMappingData(edition: string)
     {
         const yamlData = fs.readFileSync(`${__dirname}${MappingService.path}${edition}-mappings-${DeckService.getLatestVersion(edition)}.yaml`, 'utf8');
-        let data = yaml.load(yamlData);
+        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
         MappingService.mappings.push({edition: edition, version: 'latests', data: data});
         return data;
     }
@@ -24,7 +24,7 @@ export class MappingService {
     {
         DeckService.getDecks().forEach((deck) => {
             const yamlData = fs.readFileSync(`${__dirname}${MappingService.path}${deck.edition}-mappings-${deck.version}.yaml`, 'utf8');
-            let data = yaml.load(yamlData);
+            let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
             MappingService.mappings.push({edition: deck.edition, version: deck.version, data: data});
         });
         
@@ -60,7 +60,7 @@ export class MappingService {
             if (!mappingData) {
                 try {
                     const yamlData = fs.readFileSync(`${__dirname}${MappingService.path}${deck.edition}-mappings-${deck.version}.yaml`, 'utf8');
-                    mappingData = yaml.load(yamlData);
+                    mappingData = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
                     MappingService.mappings.push({edition: deck.edition, version: deck.version, data: mappingData});
                 } catch (e) {
                     console.error(`Failed to load mapping for ${deck.edition}-${deck.version}:`, e);
