@@ -10,6 +10,7 @@ kill_signal = 'SIGTERM'
 [build]
 
 [deploy]
+  wait_timeout = "10m"
   release_command = '/app/bin/migrate'
 
 [env]
