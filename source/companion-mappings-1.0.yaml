@@ -21,7 +21,6 @@ suits:
   -
     id: LLM3
     value: 3
-    stride: [ ]
     url: https://cornucopia.owasp.org/cards/LLM3
     stride: [ ]
     stride_print: [ ]
