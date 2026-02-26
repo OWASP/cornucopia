@@ -91,6 +91,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Suresh Krishna
 - Franck Lacosta
 - Mathias Lemaire
+- Khushal Malhotra
 - Antonis Manaras
 - Jim Manico
 - Jef Meijvis
