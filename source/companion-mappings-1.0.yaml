@@ -117,58 +117,6 @@ suits:
     value: A
     url: https://cornucopia.owasp.org/cards/AAIA
 -
-  id: API
-  name: Web API
-  cards:
-  -
-    id: API2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/API2
-  -
-    id: API3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/API3
-  -
-    id: API4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/API4
-  -
-    id: API5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/API5
-  -
-    id: API6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/API6
-  -
-    id: API7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/API7
-  -
-    id: API8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/API8
-  -
-    id: API9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/API9
-  -
-    id: APIX
-    value: X
-    url: https://cornucopia.owasp.org/cards/APIX
-  -
-    id: APIJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/APIJ
-  -
-    id: APIQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/APIQ
-  -
-    id: APIK
-    value: K
-    url: https://cornucopia.owasp.org/cards/APIK
--
   id: CLD
   name: Cloud
   cards:
