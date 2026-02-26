@@ -178,7 +178,7 @@ suits:
     id: "SM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
-    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or because the log out and other mechanisms for authentication settings do not permit the user to terminate the session or sessions"
+    desc: "Graham can utilize Adam's session after he has finished, because there is no log out function, or he cannot easily log out, or because the log out and other mechanisms for changing authentication settings do not permit the user to terminate the session or sessions"
   -
     id: "SM8"
     value: "8"
@@ -278,7 +278,7 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "Ryan can influence or alter authorization controls and permissions, and can therefore bypass them"
+    desc: "Adrian can influence or alter authorization controls and permissions, and can therefore bypass them"
   -
     id: "AZA"
     value: "A"

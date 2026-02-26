@@ -313,10 +313,10 @@ defmodule Copi.Cornucopia do
 
   ## Examples
 
-      iex> get_card_by_external_id!(DV2)
+      iex> get_card_by_external_id!("1.0", "DV2")
       %Card{}
 
-      iex>get_card_by_external_id!(XXX)
+      iex> get_card_by_external_id!("1.0", "XXX")
       ** (Ecto.NoResultsError)
 
   """

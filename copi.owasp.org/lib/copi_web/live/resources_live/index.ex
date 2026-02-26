@@ -4,7 +4,8 @@ defmodule CopiWeb.ResourcesLive.Index do
   use Phoenix.Component
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok, assign(socket, :client_ip, ip)}
   end
 end

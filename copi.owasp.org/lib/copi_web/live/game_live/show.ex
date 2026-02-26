@@ -4,8 +4,9 @@ defmodule CopiWeb.GameLive.Show do
   alias Copi.Cornucopia.Game
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok, assign(socket, :client_ip, ip)}
   end
 
   def on_mount(:default, _params, _session, socket) do
@@ -53,27 +54,37 @@ defmodule CopiWeb.GameLive.Show do
   def handle_event("start_game", _, socket) do
     game = socket.assigns.game
 
-    if game.started_at do
-      # Game already started – idempotent noop; always return a valid LiveView reply.
-      # ASVS V2.3.3 – never allow skipping steps or re-triggering a completed flow.
-      {:noreply, socket}
-    else
-      all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
-      players = game.players
+    cond do
+      game.started_at ->
+        # Game already started – idempotent noop; always return a valid LiveView reply.
+        # ASVS V2.3.3 – never allow skipping steps or re-triggering a completed flow.
+        {:noreply, socket}
 
-      # ASVS V2.3.3 – wrap dealing + game start in one atomic transaction so either
-      # all cards are dealt and the game is marked started, or nothing is persisted.
-      case Copi.Cornucopia.deal_cards_for_game(game, players, all_cards) do
-        {:ok, _result} ->
-          {:ok, updated_game} = Game.find(game.id)
-          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-          {:noreply, assign(socket, :game, updated_game)}
+      length(game.players) < 3 ->
+        # Minimum 3 players required (aligned with UI requirement)
+        {:noreply,
+         socket
+         |> put_flash(:error, "Cannot start game: At least 3 players are required to start.")
+         |> assign(:game, game)}
 
-        {:error, _step, _reason} ->
-          # ASVS V16.5 – fail gracefully with a generic message; never crash the
-          # LiveView process or expose internal error details to the client.
-          {:noreply, put_flash(socket, :error, "Failed to deal cards. Please try again.")}
-      end
+      true ->
+        # Valid player count (3+), proceed with game start
+        all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
+        players = game.players
+
+        # ASVS V2.3.3 – wrap dealing + game start in one atomic transaction so either
+        # all cards are dealt and the game is marked started, or nothing is persisted.
+        case Copi.Cornucopia.deal_cards_for_game(game, players, all_cards) do
+          {:ok, _result} ->
+            {:ok, updated_game} = Game.find(game.id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
+
+          {:error, _step, _reason} ->
+            # ASVS V16.5 – fail gracefully with a generic message; never crash the
+            # LiveView process or expose internal error details to the client.
+            {:noreply, put_flash(socket, :error, "Failed to deal cards. Please try again.")}
+        end
     end
   end
 

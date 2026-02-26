@@ -13,6 +13,8 @@ defmodule Copi.Application do
       CopiWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Copi.PubSub},
+      # Start the RateLimiter for IP-based rate limiting (CAPEC-212 protection)
+      Copi.RateLimiter,
       # Start the DNS clustering
       {DNSCluster, query: Application.get_env(:copi, :dns_cluster_query) || :ignore},
       # Start the Endpoint (http/https)

@@ -58,7 +58,7 @@ suits:
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    desc: "Toby has control over input validation, output validation or output encoding code or routines so they can be bypassed"
+    desc: "Toby har kontroll over inputvalidering, utdatavalidering, elller koding av utdata eller rutiner, slik at de kan omgås"
   -
     id: "VEQ"
     value: "Q"
@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad kan få tak i en brukers passord eller andre hemmeligheter som sikkerhetsspørsmål, ved observasjon under innreise, eller fra en lokal cache, eller fra minnet, eller under transport, eller ved å lese det fra et ubeskyttet sted, eller fordi det er allment kjent, eller fordi det aldri utløper, eller fordi brukeren ikke kan endre sitt eget passord"
+    desc: "Muhammad kan få tak i en brukers passord eller andre hemmeligheter som sikkerhetsspørsmål, ved hjelp av skuldersurfing, eller fra en lokal cache, eller fra minnet, eller under transport, eller ved å lese det fra et ubeskyttet sted, eller fordi det er allment kjent, eller fordi det aldri utløper, eller fordi brukeren ikke kan endre sitt eget passord"
   -
     id: "AT4"
     value: "4"
@@ -98,12 +98,12 @@ suits:
     id: "AT5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AT5"
-    desc: "Javier kan bruke forhåndsvalgte-, testrelaterte- eller lett-gjettelige autentiseringsfaktorer for å autentisere, eller bruke en gammel konto eller en konto som ikke nødvendig er tiltenkt applikasjonen"
+    desc: "Javier kan bruke forhåndsvalgte-, testrelaterte- eller lett-gjettelige autentiseringsfaktorer for å autentisere, eller bruke en gammel konto eller en konto som ikke nødvendig er nødvendig for applikasjonen"
   -
     id: "AT6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AT6"
-    desc: "Sven kan gjenbruke et midlertidig passord fordi brukeren ikke trenger å endre det ved første gangs bruk, eller det har for lang- eller ingen utløpstid, eller det ikke bruker en leveringsmetode utenfor det spesifike telekommunikasjonsfrekvensbåndet (f.eks. post, mobilapp, SMS)"
+    desc: "Sven kan gjenbruke et midlertidig passord fordi brukeren ikke trenger å endre det ved første gangs bruk, eller det har for lang- eller ingen utløpstid, eller det ikke bruker en sikker leveringsmetode via en separat kanal (f.eks. post, mobilapp, SMS)"
   -
     id: "AT7"
     value: "7"
@@ -163,7 +163,7 @@ suits:
     id: "SM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/SM4"
-    desc: "Alison kan tilordne sesjonsidentifikasjons-cookies en annen nettapplikasjon fordi domenet og tilleggsstien ikke tilstrekkelig er begrenset"
+    desc: "Alison kan tilordne informasjonskapsler en annen nettapplikasjon fordi domenet og tilleggsstien ikke tilstrekkelig er begrenset"
   -
     id: "SM5"
     value: "5"

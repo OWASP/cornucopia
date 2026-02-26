@@ -8,6 +8,7 @@ defmodule CopiWeb.Router do
     plug :put_root_layout, html: {CopiWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug CopiWeb.Plugs.RateLimiterPlug
   end
 
   pipeline :api do
@@ -29,6 +30,7 @@ defmodule CopiWeb.Router do
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
 
     live "/resources", ResourcesLive.Index, :index
+    live "/privacy", PrivacyLive.Index, :index
 
     get "/cards", CardController, :index
     get "/cards/:version/:id", CardController, :show

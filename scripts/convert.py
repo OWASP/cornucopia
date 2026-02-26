@@ -65,8 +65,8 @@ def check_make_list_into_text(var: List[str]) -> str:
 
 def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tuple[bool, str, str]:
     """Validate and sanitize file paths to prevent command injection."""
-    source_path = os.path.abspath(source_filename)
-    output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
+    source_path = os.path.realpath(source_filename)
+    output_dir = os.path.realpath(os.path.dirname(output_pdf_filename))
 
     # Additional security checks
     if not os.path.isfile(source_path):
@@ -75,11 +75,13 @@ def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tupl
     if not os.path.isdir(output_dir):
         return False, f"Output directory does not exist: {output_dir}", ""
 
-    # Ensure paths are within expected directories to prevent path traversal
-    base_path = os.path.abspath(convert_vars.BASE_PATH)
-    if not source_path.startswith(base_path):
+    # Ensure paths are within expected directories to prevent path traversal.
+    # Use realpath (not just abspath) to resolve symlinks, and append os.sep to
+    # prevent prefix-collision attacks (e.g. /base_evil passing a check for /base).
+    base_path = os.path.realpath(convert_vars.BASE_PATH)
+    if not source_path.startswith(base_path + os.sep):
         return False, f"Source path outside base directory: {source_path}", ""
-    if not output_dir.startswith(base_path):
+    if not output_dir.startswith(base_path + os.sep):
         return False, f"Output directory outside base directory: {output_dir}", ""
 
     return True, source_path, output_dir

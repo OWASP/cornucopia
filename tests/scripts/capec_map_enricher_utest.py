@@ -32,12 +32,33 @@ class TestExtractCapecNames(unittest.TestCase):
                         {"_ID": "1", "_Name": "Test Attack 1"},
                         {"_ID": "5", "_Name": "Test Attack 5"},
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
         result = enricher.extract_capec_names(data)
 
-        self.assertEqual(len(result), 2)
+        self.assertEqual(len(result), 3)
         self.assertIn(1, result)
         self.assertIn(5, result)
         self.assertEqual(result[1], "Test Attack 1")
@@ -93,13 +114,34 @@ class TestExtractCapecNames(unittest.TestCase):
                         {"_ID": "2"},  # Missing _Name
                         {"_Name": "Missing ID"},  # Missing _ID
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
         result = enricher.extract_capec_names(data)
 
         # Should only extract the complete entry
-        self.assertEqual(len(result), 1)
+        self.assertEqual(len(result), 2)
         self.assertIn(1, result)
 
 

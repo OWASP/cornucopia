@@ -6,8 +6,9 @@ defmodule CopiWeb.GameLive.Index do
   alias Copi.Cornucopia.Game
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :games, nil)}
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok, assign(assign(socket, :client_ip, ip), :games, nil)}
   end
 
   @impl true
