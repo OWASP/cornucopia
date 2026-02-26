@@ -61,7 +61,7 @@ class TranslationChecker:
                 base_name = "-".join(parts[:-1])
 
                 # Only process card files with language codes
-                if "cards" in base_name and len(lang) == 2:
+                if "cards" in base_name and len(lang) in (2, 5):
                     file_groups[base_name].append(yaml_file)
 
         return file_groups
