@@ -1,9 +1,12 @@
 import unittest
 import unittest.mock as mock
 import argparse
+import io
 import os
 import platform
 import sys
+import tempfile
+import zipfile
 import docx  # type: ignore
 import logging
 import glob
@@ -2154,6 +2157,58 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         for table in doc_tables:
             paragraphs += c.get_paragraphs_from_table_in_doc(table)
         self.assertGreater(len(paragraphs), want_min_len_paragraphs)
+
+
+class TestSafeExtractAll(unittest.TestCase):
+    """Unit tests for _safe_extractall covering CWE-22 path traversal prevention."""
+
+    def _build_zip(self, members: typing.Dict[str, str]) -> io.BytesIO:
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as zf:
+            for name, content in members.items():
+                zf.writestr(zipfile.ZipInfo(name), content)
+        buf.seek(0)
+        return buf
+
+    def test_blocks_parent_directory_traversal(self) -> None:
+        """Zip Slip via '../' in member filename must raise ValueError."""
+        buf = self._build_zip({"../evil.txt": "pwned"})
+        with tempfile.TemporaryDirectory() as td:
+            with zipfile.ZipFile(buf) as zf:
+                with self.assertRaises(ValueError) as ctx:
+                    c._safe_extractall(zf, td)
+        self.assertIn("Zip Slip blocked", str(ctx.exception))
+
+    def test_blocks_absolute_path_member(self) -> None:
+        """/etc/passwd as a member filename must be blocked."""
+        buf = self._build_zip({"/etc/passwd": "pwned"})
+        with tempfile.TemporaryDirectory() as td:
+            with zipfile.ZipFile(buf) as zf:
+                with self.assertRaises(ValueError):
+                    c._safe_extractall(zf, td)
+
+    def test_allows_legitimate_nested_members(self) -> None:
+        """Normal nested paths must extract correctly."""
+        buf = self._build_zip({"content.xml": "<r/>", "subdir/file.xml": "<s/>"})
+        with tempfile.TemporaryDirectory() as td:
+            with zipfile.ZipFile(buf) as zf:
+                c._safe_extractall(zf, td)
+            self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
+            self.assertTrue(os.path.isfile(os.path.join(td, "subdir", "file.xml")))
+
+    def test_skips_root_dot_entry(self) -> None:
+        """A '.' root directory entry must be skipped without error."""
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as zf:
+            dot = zipfile.ZipInfo(".")
+            dot.external_attr = 0o40755 << 16
+            zf.writestr(dot, "")
+            zf.writestr("content.xml", "<r/>")
+        buf.seek(0)
+        with tempfile.TemporaryDirectory() as td:
+            with zipfile.ZipFile(buf) as zf:
+                c._safe_extractall(zf, td)
+            self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
 
 
 if __name__ == "__main__":
