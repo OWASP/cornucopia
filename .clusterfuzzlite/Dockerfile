@@ -11,11 +11,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxslt-dev \
     python3-dev \
     python3-venv \
+    software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt-get update \
+    && apt-get install -y python3.13 python3.13-dev python3.13-venv \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-# Atheris only supports python 3.11 https://github.com/google/atheris/blob/master/README.md#installation-instructions
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
-RUN python3 -m pip install --no-cache-dir --upgrade PyInstaller==6.18.0 setuptools setuptools_scm wheel 
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.13
+RUN python3.13 -m pip install --no-cache-dir --upgrade PyInstaller==6.18.0 setuptools setuptools_scm wheel
 COPY . $SRC/cornucopia
 WORKDIR $SRC/cornucopia
 COPY .clusterfuzzlite/build.sh $SRC/
