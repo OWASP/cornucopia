@@ -23,11 +23,10 @@ class TestTranslationCheckerUnit(unittest.TestCase):
     def setUp(self) -> None:
         """Set up test fixtures."""
         # Use test_files directory for mock data
-        # Navigate from cornucopia/scripts -> cornucopia -> oswap -> tests
+        # Navigate from cornucopia/scripts -> cornucopia -> tests/test_files/source
         script_dir = Path(__file__).parent
         cornucopia_dir = script_dir.parent
-        oswap_dir = cornucopia_dir.parent
-        self.test_source_dir = oswap_dir / "tests" / "test_files" / "source"
+        self.test_source_dir = cornucopia_dir / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.test_source_dir)
 
     def test_extract_tags_from_english(self) -> None:
@@ -119,6 +118,46 @@ class TestTranslationCheckerUnit(unittest.TestCase):
         files = [f.name for f in file_groups["test-cards-1.0"]]
         self.assertIn("test-cards-1.0-en.yaml", files)
         self.assertIn("test-cards-1.0-es.yaml", files)
+
+
+class TestWhitespaceHandling(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.checker = TranslationChecker(Path("."))
+
+    def test_whitespace_only_detected_as_empty(self) -> None:
+        english_tags = {"T00001": "Login", "T00002": "Password"}
+        trans_tags = {"T00001": "Login", "T00002": "   "}  # Whitespace only
+
+        result = self.checker._check_translation_tags(english_tags, trans_tags)
+
+        self.assertIn("T00002", result["empty"], "Whitespace-only translation should be detected as empty")
+
+    def test_tabs_and_newlines_detected_as_empty(self) -> None:
+        english_tags = {"T00001": "Submit", "T00002": "Cancel"}
+        trans_tags = {"T00001": "Submit", "T00002": "\t \n"}  # Tabs and newlines
+
+        result = self.checker._check_translation_tags(english_tags, trans_tags)
+
+        self.assertIn("T00002", result["empty"], "Tabs and newlines should be detected as empty")
+
+    def test_extra_spaces_detected_as_untranslated(self) -> None:
+        english_tags = {"T00001": "Login", "T00002": "Register"}
+        trans_tags = {"T00001": "  Login  ", "T00002": "Registrar"}  # Extra spaces
+
+        result = self.checker._check_translation_tags(english_tags, trans_tags)
+
+        self.assertIn("T00001", result["untranslated"], "Extra spaces should be detected as untranslated")
+
+    def test_properly_translated_no_issues(self) -> None:
+        english_tags = {"T00001": "Login", "T00002": "Register"}
+        trans_tags = {"T00001": "Iniciar Sesión", "T00002": "Registrar"}  # Proper translations
+
+        result = self.checker._check_translation_tags(english_tags, trans_tags)
+
+        self.assertEqual(len(result["missing"]), 0, "No missing tags expected")
+        self.assertEqual(len(result["untranslated"]), 0, "No untranslated tags expected")
+        self.assertEqual(len(result["empty"]), 0, "No empty tags expected")
 
 
 if __name__ == "__main__":
