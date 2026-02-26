@@ -1,6 +1,6 @@
-## Scenario: Ryan’s Manipulation of Authorization Controls
+## Scenario: Adrian’s Manipulation of Authorization Controls
 
-Consider a scenario where Ryan, exploiting weaknesses in an application's security framework, manages to influence or alter authorization controls and permissions. This allows him to bypass them. The vulnerability arises from:
+Consider a scenario where Adrian, exploiting weaknesses in an application's security framework, manages to influence or alter authorization controls and permissions. This allows him to bypass them. The vulnerability arises from:
 
 1. **Alterable Authorization Controls:** The system's authorization controls are not adequately protected, allowing for their modification.
 
@@ -8,14 +8,14 @@ Consider a scenario where Ryan, exploiting weaknesses in an application's securi
 
 ### Example
 
-Ryan targets an enterprise application that has loosely managed authorization configurations. He gains access to the system’s administrative tools, which lack sufficient security checks. Once there, he modifies the authorization settings, granting himself higher-level permissions. This manipulation allows him to access confidential data and functionalities, which are typically restricted to higher-privileged users, such as system administrators.
+Adrian targets an enterprise application that has loosely managed authorization configurations. He gains access to the system’s administrative tools, which lack sufficient security checks. Once there, he modifies the authorization settings, granting himself higher-level permissions. This manipulation allows him to access confidential data and functionalities, which are typically restricted to higher-privileged users, such as system administrators.
 
 ## Threat Modeling
 
 ### STRIDE
 
 This scenario maps primarily to STRIDE: **Elevation of Privilege** (EoP).
-Ryan modifies authorization settings. That means that he is **Tampering** with the settings, but as a direct result, he grants himself higher privileges, which is **Elevation of Privilege**.
+Adrian modifies authorization settings. That means that he is **Tampering** with the settings, but as a direct result, he grants himself higher privileges, which is **Elevation of Privilege**.
 
 ### What can go wrong?
 
