@@ -419,58 +419,6 @@ suits:
     owasp_samm: [ O-EM-B, I-SB, D-SA-B ]
     owasp_dsomm: [ BD-D, TV-SDI, I-DSC, CO-P ]
 -
-  id: IDM
-  name: Identity Management
-  cards:
-  -
-    id: IDM2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/IDM2
-  -
-    id: IDM3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/IDM3
-  -
-    id: IDM4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/IDM4
-  -
-    id: IDM5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/IDM5
-  -
-    id: IDM6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/IDM6
-  -
-    id: IDM7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/IDM7
-  -
-    id: IDM8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/IDM8
-  -
-    id: IDM9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/IDM9
-  -
-    id: IDMX
-    value: X
-    url: https://cornucopia.owasp.org/cards/IDMX
-  -
-    id: IDMJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/IDMJ
-  -
-    id: IDMQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/IDMQ
-  -
-    id: IDMK
-    value: K
-    url: https://cornucopia.owasp.org/cards/IDMK
--
   id: SE
   name: Social Engineering
   cards:
