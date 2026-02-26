@@ -15,7 +15,7 @@ Adrian targets an enterprise application that has loosely managed authorization 
 ### STRIDE
 
 This scenario maps primarily to STRIDE: **Elevation of Privilege** (EoP).
-Ryan modifies authorization settings. That means that he is **Tampering** with the settings, but as a direct result, he grants himself higher privileges, which is **Elevation of Privilege**.
+Adrian modifies authorization settings. That means that he is **Tampering** with the settings, but as a direct result, he grants himself higher privileges, which is **Elevation of Privilege**.
 
 ### What can go wrong?
 
