@@ -8,6 +8,7 @@ It detects:
 - Empty tag values
 """
 
+import re
 import sys
 import yaml
 from pathlib import Path
@@ -61,7 +62,9 @@ class TranslationChecker:
                 base_name = "-".join(parts[:-1])
 
                 # Only process card files with language codes
-                if "cards" in base_name and len(lang) in (2, 5):
+                # Matches 2-letter codes (e.g. en, es) and regional codes (e.g. pt_pt, no_nb)
+                lang_pattern = re.compile(r"^[a-z]{2}([_-][a-z]{2})?$")
+                if "cards" in base_name and lang_pattern.match(lang):
                     file_groups[base_name].append(yaml_file)
 
         return file_groups
