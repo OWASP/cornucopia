@@ -163,4 +163,102 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert length(player5_cards) >= 10
     end
   end
+
+  describe "Show - Helper Functions" do
+    setup [:create_game]
+
+    test "card_played_in_round finds the correct card", %{game: _game} do
+      # Test with cards having different played_in_round values
+      cards = [
+        %{card_id: 1, played_in_round: 1},
+        %{card_id: 2, played_in_round: 2},
+        %{card_id: 3, played_in_round: 3}
+      ]
+
+      assert CopiWeb.GameLive.Show.card_played_in_round(cards, 2).card_id == 2
+      assert CopiWeb.GameLive.Show.card_played_in_round(cards, 1).card_id == 1
+      assert CopiWeb.GameLive.Show.card_played_in_round(cards, 3).card_id == 3
+      assert CopiWeb.GameLive.Show.card_played_in_round(cards, 4) == nil
+    end
+
+    test "display_game_session returns correct session names", %{game: _game} do
+      assert CopiWeb.GameLive.Show.display_game_session("webapp") == "Cornucopia Web Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("mlsec") == "Elevation of MLSec Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("cumulus") == "OWASP Cumulus Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("masvs") == "Cornucopia Mobile Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("eop") == "EoP Session:"
+      assert CopiWeb.GameLive.Show.display_game_session("unknown") == "EoP Session:"
+    end
+
+    test "latest_version returns correct version numbers", %{game: _game} do
+      assert CopiWeb.GameLive.Show.latest_version("webapp") == "2.2"
+      assert CopiWeb.GameLive.Show.latest_version("ecommerce") == "1.22"
+      assert CopiWeb.GameLive.Show.latest_version("mobileapp") == "1.1"
+      assert CopiWeb.GameLive.Show.latest_version("mlsec") == "1.0"
+      assert CopiWeb.GameLive.Show.latest_version("cumulus") == "1.1"
+      assert CopiWeb.GameLive.Show.latest_version("masvs") == "1.1"
+      assert CopiWeb.GameLive.Show.latest_version("eop") == "5.1"
+      assert CopiWeb.GameLive.Show.latest_version("unknown") == "1.0"
+    end
+  end
+
+  describe "Show - LiveView Lifecycle" do
+    setup [:create_game]
+
+    test "handle_info updates game on broadcast", %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}")
+
+      # Update game
+      {:ok, updated_game} = Cornucopia.update_game(game, %{name: "Updated Name"})
+
+      # Simulate broadcast
+      send(view.pid, %{
+        topic: "game:#{game.id}",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      # Give it a moment to process
+      :timer.sleep(10)
+
+      # Verify view was updated
+      assert render(view) =~ "Updated Name"
+    end
+
+    test "handle_params with invalid game redirects to error", %{conn: conn} do
+      # Try to visit non-existent game
+      assert {:error, {:live_redirect, %{to: "/error"}}} = live(conn, "/games/99999")
+    end
+
+    test "handle_params with invalid round number redirects to error", %{conn: conn, game: game} do
+      # Try to visit with invalid round parameter
+      assert {:error, {:live_redirect, %{to: "/error"}}} = 
+        live(conn, "/games/#{game.id}?round=invalid")
+    end
+
+    test "handle_params sets correct round for finished game", %{conn: conn, game: game} do
+      # Finish the game
+      {:ok, finished_game} = Cornucopia.update_game(game, %{
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 5
+      })
+
+      {:ok, view, _html} = live(conn, "/games/#{finished_game.id}")
+
+      # Verify round is set to rounds_played (not rounds_played + 1)
+      assert view.assigns.requested_round == 5
+    end
+
+    test "handle_params sets correct round for active game", %{conn: conn, game: game} do
+      # Update rounds_played but don't finish
+      {:ok, active_game} = Cornucopia.update_game(game, %{rounds_played: 3})
+
+      {:ok, view, _html} = live(conn, "/games/#{active_game.id}")
+
+      # Verify round is set to rounds_played + 1
+      assert view.assigns.requested_round == 4
+    end
+  end
 end
