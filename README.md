@@ -45,6 +45,22 @@ Please read [README.md](./scripts/README.md)
 
 Please read [README.md](./scripts/README.md)
 
+### Security Scanning
+
+First time setup:
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+A Bandit pre-commit hook scans Python scripts for security issues on commit.
+It runs automatically via pre-commit (medium severity, high confidence).
+
+To run manually:
+```bash
+pre-commit run bandit --all-files
+```
+
 ### Building and Deploying the Cornucopia website
 
 https://cornucopia.owasp.org contains the card browser for each of the cards in the cornucopia suits together with the taxonomy and in depth explaination for each of the cards in the suits.
