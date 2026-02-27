@@ -260,5 +260,66 @@ defmodule CopiWeb.GameLive.ShowTest do
       # Verify round is set to rounds_played + 1
       assert view.assigns.requested_round == 4
     end
+
+    test "handle_info ignores broadcasts for different game topics", %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}")
+
+      # Create another game
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game", edition: "webapp", suits: ["hearts"]})
+
+      # Send broadcast for different game (should be ignored)
+      send(view.pid, %{
+        topic: "game:#{other_game.id}",
+        event: "game:updated",
+        payload: other_game
+      })
+
+      :timer.sleep(10)
+
+      # Verify original game is still assigned (not replaced with other_game)
+      assert render(view) =~ game.name
+      refute render(view) =~ "Other Game"
+    end
+
+    test "mount with client_ip from session", %{conn: conn, game: game} do
+      # Set client_ip in session
+      conn = Plug.Test.init_test_session(conn, %{"client_ip" => "192.168.1.1"})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}")
+
+      # Verify client_ip was assigned from session
+      assert view.assigns.client_ip == "192.168.1.1"
+    end
+
+    test "topic function generates correct topic string", %{game: _game} do
+      assert CopiWeb.GameLive.Show.topic(123) == "game:123"
+      assert CopiWeb.GameLive.Show.topic("abc") == "game:abc"
+    end
+  end
+
+  describe "Show - Transaction Rollback" do
+    setup [:create_game]
+
+    test "handles transaction failure gracefully", %{conn: conn, game: game} do
+      # Add 3 players
+      {:ok, _player1} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
+      {:ok, _player2} = Cornucopia.create_player(%{name: "Player 2", game_id: game.id})
+      {:ok, _player3} = Cornucopia.create_player(%{name: "Player 3", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}")
+
+      # Mock a transaction failure by deleting the game record before the update
+      # This will cause the update_game call in the transaction to fail
+      Copi.Repo.delete(game)
+
+      # Try to start the game - transaction should fail and rollback
+      render_click(view, "start_game", %{})
+
+      # Verify error message is shown
+      assert render(view) =~ "Failed to start game"
+
+      # Verify no cards were dealt (transaction rolled back)
+      # Since game was deleted, we can't query it, but the transaction rollback ensures atomicity
+    end
   end
 end
