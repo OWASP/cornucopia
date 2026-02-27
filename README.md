@@ -47,6 +47,12 @@ Please read [README.md](./scripts/README.md)
 
 ### Security Scanning
 
+First time setup:
+```bash
+pip install pre-commit
+pre-commit install
+```
+
 A Bandit pre-commit hook scans Python scripts for security issues on commit.
 It runs automatically via pre-commit (medium severity, high confidence).
 
