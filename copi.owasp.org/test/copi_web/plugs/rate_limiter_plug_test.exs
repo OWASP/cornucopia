@@ -25,8 +25,11 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   end
 
   test "allows request with X-Forwarded-For header within rate limit" do
+    # The plug calls put_session/2 for forwarded IPs within the limit,
+    # so we must initialise a test session on the conn first.
     conn =
       build_conn()
+      |> Plug.Test.init_test_session(%{})
       |> put_req_header("x-forwarded-for", "1.2.3.4")
 
     conn = RateLimiterPlug.call(conn, [])
