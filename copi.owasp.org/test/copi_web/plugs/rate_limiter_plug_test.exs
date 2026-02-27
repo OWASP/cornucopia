@@ -36,39 +36,32 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   end
 
   test "returns 429 when X-Forwarded-For IP exceeds rate limit" do
-    # Use a unique IP and hammer it to exceed the rate limit
-    ip = "222.222.222.222"
+    # The connection rate limit is 133/window. Exhaust it programmatically.
+    unique_ip = {33, 44, 55, 66}
+    ip_string = "33.44.55.66"
 
-    # Exhaust the rate limit (limit is 20/3600s for game_creation-type actions;
-    # connection limit is separate - find the connection limit)
-    results =
-      Enum.map(1..25, fn _ ->
-        conn =
-          build_conn()
-          |> put_req_header("x-forwarded-for", ip)
+    # Directly exhaust the rate limit. 133 is the default limit, so after
+    # 134 calls the next one will be rejected.
+    Enum.each(1..134, fn _ ->
+      Copi.RateLimiter.check_rate(unique_ip, :connection)
+    end)
 
-        RateLimiterPlug.call(conn, [])
-      end)
-
-    # At least one response should be rate limited (429)
-    assert Enum.any?(results, fn conn -> conn.halted end)
-  end
-
-  test "skips rate limiting when no IP info (nil remote_ip, no forwarded header)" do
-    # Build conn with nil remote_ip so get_ip_source returns {:none, nil}
-    conn = %Plug.Conn{
-      remote_ip: nil,
-      req_headers: [],
-      resp_headers: [],
-      private: %{},
-      halted: false,
-      status: nil,
-      resp_body: nil
-    }
+    # Now the next request should be rate limited
+    conn =
+      build_conn()
+      |> put_req_header("x-forwarded-for", ip_string)
 
     result = RateLimiterPlug.call(conn, [])
 
-    # Should not be halted - no IP to rate limit
+    # Should be halted with 429
+    assert result.halted
+  end
+
+  test "skips rate limiting for remote-only IP (no forwarded header)" do
+    # build_conn() has a remote_ip but no X-Forwarded-For
+    # so get_ip_source returns {:remote, ip} which skips rate limiting
+    conn = build_conn()
+    result = RateLimiterPlug.call(conn, [])
     refute result.halted
   end
 end
