@@ -1,5 +1,6 @@
 defmodule CopiWeb.UserSocket do
   use Phoenix.Socket
+  require Logger
 
   ## Channels
   # channel "room:*", CopiWeb.RoomChannel
@@ -16,8 +17,11 @@ defmodule CopiWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(_params, socket, _connect_info) do
-    {:ok, socket}
+  def connect(_params, socket, connect_info) do
+    # Extract IP address for rate limiting
+    Logger.debug("WebSocket connection attempt")
+
+    {:ok, put_in(socket.private[:connect_info], connect_info)}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

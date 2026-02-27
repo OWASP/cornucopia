@@ -453,10 +453,10 @@ paragraphs:
     text: "Нет Карты"
   -
     id: "Title"
-    text: "Website App Edition v2.2-EN"
+    text: "Website App Edition v2.2-RU"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Website App Edition v2.2-EN"
+    text: "OWASP® Cornucopia Website App Edition v2.2-RU"
   -
     id: "T00005"
     text: "Индекс"

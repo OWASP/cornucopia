@@ -10,11 +10,18 @@ kill_signal = 'SIGTERM'
 [build]
 
 [deploy]
+  wait_timeout = "10m"
   release_command = '/app/bin/migrate'
 
 [env]
   PHX_HOST = 'copi.fly.dev'
   PORT = '8080'
+  RATE_LIMIT_GAME_CREATION_LIMIT = '30'
+  RATE_LIMIT_GAME_CREATION_WINDOW = '3600'
+  RATE_LIMIT_PLAYER_CREATION_LIMIT = '60'
+  RATE_LIMIT_PLAYER_CREATION_WINDOW = '3600'
+  RATE_LIMIT_CONNECTION_LIMIT = '133'
+  RATE_LIMIT_CONNECTION_WINDOW = '1'
 
 [http_service]
   internal_port = 8080
