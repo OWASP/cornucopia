@@ -1230,14 +1230,12 @@ paragraphs:
     text: "Updates van alternatieve spelregels."
   -
     id: "T03510"
-    text: "Additional FAQs created. "
     text: "Aanvullende FAQ's gemaakt."
   -
     id: "T03520"
     text: "Contributors geüpdatet."
   -
     id: "T03530"
-    text: "Podcast and video links added."
     text: "Podcast- en videolinks toegevoegd."
   -
     id: "T03540"
@@ -1280,7 +1278,6 @@ paragraphs:
     text: "Wiki Deck link toegevoegd"
   -
     id: "T03670"
-    text: "Cross-references updated for ASVS v3.0.1 and CAPEC™ v3.9. Minor text changes to a small number of cards. "
     text: "De cross-references zijn geupdate voor ASVS v3.0.1 en CAPEC™ v3.9. Kleine tekstwijzigingen in een klein aantal kaarten. "
   -
     id: "T03680"
