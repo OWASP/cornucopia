@@ -297,6 +297,72 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert view.assigns.requested_round == 4
     end
 
+    test "handle_params with explicit valid round parameter", %{conn: conn, game: game} do
+      # Start and play some rounds
+      {:ok, started_game} = Cornucopia.update_game(game, %{
+        started_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 5
+      })
+
+      # Request a specific round (e.g., round 3)
+      {:ok, view, _html} = live(conn, "/games/#{started_game.id}?round=3")
+
+      # Verify requested_round is set to the explicit value
+      assert view.assigns.requested_round == 3
+    end
+
+    test "handle_params with round parameter at max boundary", %{conn: conn, game: game} do
+      # Finish game with 10 rounds
+      {:ok, finished_game} = Cornucopia.update_game(game, %{
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 10
+      })
+
+      # Request the last round (max = 10)
+      {:ok, view, _html} = live(conn, "/games/#{finished_game.id}?round=10")
+
+      # Verify requested_round is set correctly
+      assert view.assigns.requested_round == 10
+    end
+
+    test "handle_params with round parameter at min boundary", %{conn: conn, game: game} do
+      # Start game with some rounds
+      {:ok, started_game} = Cornucopia.update_game(game, %{
+        started_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 5
+      })
+
+      # Request round 1 (min = 1)
+      {:ok, view, _html} = live(conn, "/games/#{started_game.id}?round=1")
+
+      # Verify requested_round is set correctly
+      assert view.assigns.requested_round == 1
+    end
+
+    test "handle_params with round parameter exceeding max redirects to error", %{conn: conn, game: game} do
+      # Finish game with only 3 rounds
+      {:ok, finished_game} = Cornucopia.update_game(game, %{
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 3
+      })
+
+      # Try to request round 10 (exceeds max of 3)
+      assert {:error, {:live_redirect, %{to: "/error"}}} = 
+        live(conn, "/games/#{finished_game.id}?round=10")
+    end
+
+    test "handle_params with round below min redirects to error", %{conn: conn, game: game} do
+      # Start game
+      {:ok, started_game} = Cornucopia.update_game(game, %{
+        started_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 5
+      })
+
+      # Try to request round 0 (below min of 1)
+      assert {:error, {:live_redirect, %{to: "/error"}}} = 
+        live(conn, "/games/#{started_game.id}?round=0")
+    end
+
     test "handle_info ignores broadcasts for different game topics", %{conn: conn, game: game} do
       {:ok, view, _html} = live(conn, "/games/#{game.id}")
 
