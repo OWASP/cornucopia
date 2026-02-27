@@ -2,14 +2,14 @@ name: Smoke Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: "0 6 * * *"
   push:
     branches:
       - master
     paths:
-      - 'copi.owasp.org/**'
-      - 'tests/scripts/smoke_tests.py'
-      - '.github/workflows/smoke-tests.yaml'
+      - "copi.owasp.org/**"
+      - "tests/scripts/smoke_tests.py"
+      - ".github/workflows/smoke-tests.yaml"
 
 permissions:
   contents: read
@@ -27,8 +27,8 @@ jobs:
       - name: Get Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.12'
-          cache: 'pipenv'
+          python-version: "3.12"
+          cache: "pipenv"
 
       - name: Install dependencies
         run: |
@@ -50,11 +50,7 @@ jobs:
           docker build -t copi-test-image copi.owasp.org
 
           echo "Generating SECRET_KEY_BASE"
-          SECRET_KEY_BASE=$(python - <<'PY'
-import secrets
-print(secrets.token_hex(64))
-PY
-)
+          SECRET_KEY_BASE=$(python -c 'import secrets; print(secrets.token_hex(64))')
 
           echo "Starting Copi application container"
           docker run -d --name copi-app --network copi-net -p 4000:4000 \
