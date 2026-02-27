@@ -17,6 +17,7 @@ from itertools import groupby
 from pathlib import Path
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
+from scripts.card_models import CornucopiaData, ValidationError
 
 
 class ConvertVars:
@@ -737,6 +738,18 @@ def get_language_data(
     with open(language_file, "r", encoding="utf-8") as f:
         try:
             data = yaml.safe_load(f)
+            # Validate with Pydantic for card files
+            if data and "meta" in data and data.get("meta", {}).get("component") == "cards":
+                try:
+                    validated_data = CornucopiaData(**data)
+                    logging.debug(f" --- YAML validation successful for {language_file}")
+                    # Return the original data structure to maintain compatibility
+                    # but now we know it's valid
+                    data = validated_data.model_dump()
+                except ValidationError as e:
+                    logging.error(f"Invalid card YAML structure in {language_file}: {e.errors()}")
+                    # Return empty dict to prevent processing invalid data
+                    return {}
         except yaml.YAMLError as e:
             logging.error(f"Error loading yaml file: {language_file}. Error = {e}")
             data = {}
