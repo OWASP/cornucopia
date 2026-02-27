@@ -1,6 +1,8 @@
 name: ClusterFuzzLite PR fuzzing
 on:
   pull_request:
+    branches:
+      - master
     paths:
       - scripts/convert**
       - tests/scripts/convert**
@@ -24,21 +26,21 @@ jobs:
       fail-fast: false
       matrix:
         sanitizer:
-        - address
-        - undefined
+          - address
+          - undefined
     steps:
-    - name: Build Fuzzers (${{ matrix.sanitizer }})
-      id: build
-      uses: google/clusterfuzzlite/actions/build_fuzzers@52ecc61cb587ee99c26825a112a21abf19c7448c # main
-      with:
-        language: python
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        sanitizer: ${{ matrix.sanitizer }}
-    - name: Run Fuzzers (${{ matrix.sanitizer }})
-      id: run
-      uses: google/clusterfuzzlite/actions/run_fuzzers@52ecc61cb587ee99c26825a112a21abf19c7448c # main
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        fuzz-seconds: 600
-        mode: 'code-change'
-        sanitizer: ${{ matrix.sanitizer }}
+      - name: Build Fuzzers (${{ matrix.sanitizer }})
+        id: build
+        uses: google/clusterfuzzlite/actions/build_fuzzers@52ecc61cb587ee99c26825a112a21abf19c7448c # main
+        with:
+          language: python
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          sanitizer: ${{ matrix.sanitizer }}
+      - name: Run Fuzzers (${{ matrix.sanitizer }})
+        id: run
+        uses: google/clusterfuzzlite/actions/run_fuzzers@52ecc61cb587ee99c26825a112a21abf19c7448c # main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fuzz-seconds: 600
+          mode: "code-change"
+          sanitizer: ${{ matrix.sanitizer }}
