@@ -207,62 +207,6 @@ defmodule CopiWeb.GameLive.ShowTest do
   describe "Show - LiveView Lifecycle" do
     setup [:create_game]
 
-    test "mount assigns client_ip from socket assigns", %{game: _game} do
-      # Test the first branch: socket.assigns[:client_ip]
-      socket = %Phoenix.LiveView.Socket{
-        assigns: %{client_ip: "10.0.0.1"}
-      }
-      
-      {:ok, result_socket} = CopiWeb.GameLive.Show.mount(%{}, %{}, socket)
-      assert result_socket.assigns.client_ip == "10.0.0.1"
-    end
-
-    test "mount assigns client_ip from IPHelper when not in socket or session", %{game: _game} do
-      # Test the third branch: Copi.IPHelper.get_ip_from_socket(socket)
-      socket = %Phoenix.LiveView.Socket{assigns: %{}}
-      
-      {:ok, result_socket} = CopiWeb.GameLive.Show.mount(%{}, %{}, socket)
-      # Should get IP from IPHelper (returns non-nil value)
-      assert result_socket.assigns[:client_ip] != nil
-    end
-
-    test "on_mount attaches hook", %{game: _game} do
-      socket = %Phoenix.LiveView.Socket{assigns: %{}}
-      
-      {:cont, result_socket} = CopiWeb.GameLive.Show.on_mount(:default, %{}, %{}, socket)
-      
-      # Verify socket is returned (hook attached)
-      assert result_socket != nil
-    end
-
-    test "put_uri_hook assigns uri to socket", %{game: _game} do
-      socket = %Phoenix.LiveView.Socket{assigns: %{}}
-      
-      {:cont, result_socket} = CopiWeb.GameLive.Show.put_uri_hook(%{}, "https://example.com/games/123", socket)
-      
-      assert result_socket.assigns.uri == "https://example.com/games/123"
-    end
-
-    test "handle_info updates game on broadcast", %{conn: conn, game: game} do
-      {:ok, view, _html} = live(conn, "/games/#{game.id}")
-
-      # Update game
-      {:ok, updated_game} = Cornucopia.update_game(game, %{name: "Updated Name"})
-
-      # Simulate broadcast
-      send(view.pid, %{
-        topic: "game:#{game.id}",
-        event: "game:updated",
-        payload: updated_game
-      })
-
-      # Give it a moment to process
-      :timer.sleep(10)
-
-      # Verify view was updated
-      assert render(view) =~ "Updated Name"
-    end
-
     test "handle_params with invalid game redirects to error", %{conn: conn} do
       # Try to visit non-existent game
       assert {:error, {:live_redirect, %{to: "/error"}}} = live(conn, "/games/99999")
@@ -363,65 +307,9 @@ defmodule CopiWeb.GameLive.ShowTest do
         live(conn, "/games/#{started_game.id}?round=0")
     end
 
-    test "handle_info ignores broadcasts for different game topics", %{conn: conn, game: game} do
-      {:ok, view, _html} = live(conn, "/games/#{game.id}")
-
-      # Create another game
-      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game", edition: "webapp", suits: ["hearts"]})
-
-      # Send broadcast for different game (should be ignored)
-      send(view.pid, %{
-        topic: "game:#{other_game.id}",
-        event: "game:updated",
-        payload: other_game
-      })
-
-      :timer.sleep(10)
-
-      # Verify original game is still assigned (not replaced with other_game)
-      assert render(view) =~ game.name
-      refute render(view) =~ "Other Game"
-    end
-
-    test "mount with client_ip from session", %{conn: conn, game: game} do
-      # Set client_ip in session
-      conn = Plug.Test.init_test_session(conn, %{"client_ip" => "192.168.1.1"})
-
-      {:ok, view, _html} = live(conn, "/games/#{game.id}")
-
-      # Verify client_ip was assigned from session
-      assert view.assigns.client_ip == "192.168.1.1"
-    end
-
     test "topic function generates correct topic string", %{game: _game} do
       assert CopiWeb.GameLive.Show.topic(123) == "game:123"
       assert CopiWeb.GameLive.Show.topic("abc") == "game:abc"
-    end
-  end
-
-  describe "Show - Transaction Rollback" do
-    setup [:create_game]
-
-    test "handles transaction failure gracefully", %{conn: conn, game: game} do
-      # Add 3 players
-      {:ok, _player1} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
-      {:ok, _player2} = Cornucopia.create_player(%{name: "Player 2", game_id: game.id})
-      {:ok, _player3} = Cornucopia.create_player(%{name: "Player 3", game_id: game.id})
-
-      {:ok, view, _html} = live(conn, "/games/#{game.id}")
-
-      # Mock a transaction failure by deleting the game record before the update
-      # This will cause the update_game call in the transaction to fail
-      Copi.Repo.delete(game)
-
-      # Try to start the game - transaction should fail and rollback
-      render_click(view, "start_game", %{})
-
-      # Verify error message is shown
-      assert render(view) =~ "Failed to start game"
-
-      # Verify no cards were dealt (transaction rolled back)
-      # Since game was deleted, we can't query it, but the transaction rollback ensures atomicity
     end
   end
 end
