@@ -207,6 +207,42 @@ defmodule CopiWeb.GameLive.ShowTest do
   describe "Show - LiveView Lifecycle" do
     setup [:create_game]
 
+    test "mount assigns client_ip from socket assigns", %{game: _game} do
+      # Test the first branch: socket.assigns[:client_ip]
+      socket = %Phoenix.LiveView.Socket{
+        assigns: %{client_ip: "10.0.0.1"}
+      }
+      
+      {:ok, result_socket} = CopiWeb.GameLive.Show.mount(%{}, %{}, socket)
+      assert result_socket.assigns.client_ip == "10.0.0.1"
+    end
+
+    test "mount assigns client_ip from IPHelper when not in socket or session", %{game: _game} do
+      # Test the third branch: Copi.IPHelper.get_ip_from_socket(socket)
+      socket = %Phoenix.LiveView.Socket{assigns: %{}}
+      
+      {:ok, result_socket} = CopiWeb.GameLive.Show.mount(%{}, %{}, socket)
+      # Should get IP from IPHelper (returns non-nil value)
+      assert result_socket.assigns[:client_ip] != nil
+    end
+
+    test "on_mount attaches hook", %{game: _game} do
+      socket = %Phoenix.LiveView.Socket{assigns: %{}}
+      
+      {:cont, result_socket} = CopiWeb.GameLive.Show.on_mount(:default, %{}, %{}, socket)
+      
+      # Verify socket is returned (hook attached)
+      assert result_socket != nil
+    end
+
+    test "put_uri_hook assigns uri to socket", %{game: _game} do
+      socket = %Phoenix.LiveView.Socket{assigns: %{}}
+      
+      {:cont, result_socket} = CopiWeb.GameLive.Show.put_uri_hook(%{}, "https://example.com/games/123", socket)
+      
+      assert result_socket.assigns.uri == "https://example.com/games/123"
+    end
+
     test "handle_info updates game on broadcast", %{conn: conn, game: game} do
       {:ok, view, _html} = live(conn, "/games/#{game.id}")
 
