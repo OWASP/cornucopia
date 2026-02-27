@@ -10,6 +10,7 @@ import subprocess
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
+from defusedxml import ElementTree as DefusedElTree
 from typing import Any, Dict, List, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
@@ -1126,7 +1127,7 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        tree = ElTree.parse(filename)
+        tree = DefusedElTree.parse(filename)
     except Exception as e:
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return
