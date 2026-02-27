@@ -1,15 +1,24 @@
 defmodule CopiWeb.PlayerLiveTest do
-  use CopiWeb.ConnCase
+  use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
   import Ecto.Query
 
   alias Copi.Cornucopia
+  alias Copi.RateLimiter
 
   @game_attrs %{name: "some name"}
   # @create_attrs %{name: "some name", game_id: ""}
   # @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
+
+  setup %{conn: conn} do
+    # Clear rate limits to prevent cross-test contamination
+    RateLimiter.clear_ip({127, 0, 0, 1})
+    # Set up IP address for rate limiting tests
+    conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
+    {:ok, conn: conn}
+  end
 
   defp fixture(:player) do
     {:ok, game} = Cornucopia.create_game(@game_attrs)
@@ -50,6 +59,39 @@ defmodule CopiWeb.PlayerLiveTest do
 
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
+    end
+
+    test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
+      # Clear any existing rate limits for the test IP
+      test_ip = {127, 0, 0, 1}
+      RateLimiter.clear_ip(test_ip)
+
+      # Get the rate limit config
+      config = RateLimiter.get_config()
+      limit = config.limits.player_creation
+
+      # Create players up to the limit
+      for i <- 1..limit do
+        {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
+        
+        {:ok, _, _html} =
+          index_live
+          |> form("#player-form", player: %{name: "Player #{i}", game_id: player.game_id})
+          |> render_submit()
+          |> follow_redirect(conn)
+      end
+
+      # Next player creation should be blocked
+      {:ok, index_live_blocked, _html} = live(conn, "/games/#{player.game_id}/players/new")
+      
+      index_live_blocked
+        |> form("#player-form", player: %{name: "Blocked Player", game_id: player.game_id})
+        |> render_submit()
+      
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(index_live_blocked, "#player-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :player_creation)
     end
   end
 
@@ -115,6 +157,47 @@ defmodule CopiWeb.PlayerLiveTest do
       # Verify game advanced to next round
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
+    end
+
+    test "allows toggling continue vote off", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      
+      # Add vote
+      show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
+      assert Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+      
+      # Remove vote by toggling again
+      show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()
+      refute Copi.Repo.get_by(Copi.Cornucopia.ContinueVote, player_id: player.id, game_id: game_id)
+    end
+
+    test "displays player information", %{conn: conn, player: player} do
+      {:ok, _show_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      assert html =~ player.name
+      assert html =~ "Cornucopia Web Session"
+    end
+
+    test "handles game updates via broadcast", %{conn: conn, player: player} do
+      {:ok, show_live, _html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+      # Get updated game
+      {:ok, updated_game} = Cornucopia.Game.find(player.game_id)
+
+      # Send message in the format handle_info expects
+      send(show_live.pid, %{
+        topic: "game:#{player.game_id}",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      # Give LiveView time to process
+      :timer.sleep(50)
+      
+      # Verify it doesn't crash and stays connected
+      assert render(show_live) =~ player.name
     end
   end
 end

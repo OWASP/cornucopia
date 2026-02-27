@@ -51,6 +51,15 @@
               token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
               total-parts-count: 3
               files: converter/coverage/cobertura.xml
+          # Check translation tags
+          - name: Check translation tags
+            id: translation_check
+            run: |
+              pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
+              # Read the report content and save it as an output
+              echo "TRANSLATION_REPORT<<EOF" >> $GITHUB_ENV
+              cat translation_check_report.md >> $GITHUB_ENV
+              echo "EOF" >> $GITHUB_ENV
           - name: Generate new output files
             run: |
               #
@@ -98,6 +107,10 @@
               pipenv run python scripts/convert.py -l en -lt guide -t bridge -v 3.0 -e webapp --pdf
               pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 3.0 -e webapp --pdf
               #
+              # Debug: List generated files to verify PDF and ODT files exist
+              echo "Listing generated guide files:"
+              ls -lh output/*guide*.odt output/*guide*.pdf 2>/dev/null || echo "Some guide files may be missing"
+              #
               cp output/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml output/cornucopia_mobileapp/
               cp output/owasp_cornucopia_webapp_2.2_cards_bridge_en.idml output/owasp_cornucopia_webapp_2.2_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_en.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_2.2_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_2.2_leaflet_tarot_en.idml output/cornucopia_webapp/
               cp output/owasp_cornucopia_webapp_2.2_cards_bridge_es.idml output/owasp_cornucopia_webapp_2.2_cards_bridge_qr_es.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_es.idml output/owasp_cornucopia_webapp_2.2_cards_tarot_qr_es.idml output/owasp_cornucopia_webapp_2.2_leaflet_bridge_es.idml output/owasp_cornucopia_webapp_2.2_leaflet_tarot_es.idml output/cornucopia_webapp/
@@ -121,18 +134,34 @@
 
               cp output/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml output/cornucopia_webapp/
               zip -r output/owasp_cornucopia_webapp_3.0_en.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          - name: Prepare release body with translation report
+            id: prepare_release
+            run: |
+              # Read the translation report
+              TRANSLATION_REPORT=$(cat translation_check_report.md)
+              # Create a combined release body
+              cat > release_body.md << 'EOF'
+              ## OWASP Cornucopia Pre-Release
+              
+              This is an automated pre-release build from the latest master branch.
+              
+              ---
+              
+              EOF
+              cat translation_check_report.md >> release_body.md
           - name: Delete existing release and tag
             run: gh release delete "pre-release" --cleanup-tag -y
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             continue-on-error: true
-          - uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
+          - uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
             name: "Create pre-release"
             with:
               draft: false
               tag_name: pre-release
               prerelease: true
               name: Latest pre-release
+              body_path: release_body.md
               files: |
                 CHANGELOG.md
                 LICENSE.md
@@ -195,3 +224,12 @@
                 source/*1\.1-*.yaml
                 source/*2\.2-*.yaml
                 output/owasp_cornucopia_webapp_3.0_en.zip
+      sbom:
+        needs: [hardening, pre-release]
+        name: SBOM
+        uses: ./.github/workflows/sbom-generate.yml
+        secrets: inherit
+        permissions:
+          contents: write
+        with:
+          tag_name: pre-release

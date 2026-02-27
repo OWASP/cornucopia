@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLive.Show do
   use CopiWeb, :live_view
   use Phoenix.Component
 
+  require Logger
   import Ecto.Query
 
   alias Copi.Cornucopia.Player
@@ -9,8 +10,9 @@ defmodule CopiWeb.PlayerLive.Show do
   alias Copi.Cornucopia.DealtCard
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok, assign(socket, :client_ip, ip)}
   end
 
   @impl true
@@ -42,10 +44,10 @@ defmodule CopiWeb.PlayerLive.Show do
   @impl true
   def handle_info(:proceed_to_next_round, socket) do
     game = socket.assigns.game
-    
+
     # Clear all continue votes for this game before proceeding to next round
     Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game.id)
-    
+
     # Now proceed to next round
     Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
 
@@ -69,10 +71,10 @@ defmodule CopiWeb.PlayerLive.Show do
       if Copi.Cornucopia.Game.can_continue_round?(game) do
         # Close the round and proceed
         Copi.Cornucopia.update_game(game, %{round_open: false})
-        
+
         # Wait a moment then proceed to next round
         Process.send_after(self(), :proceed_to_next_round, 100)
-        
+
         {:noreply, assign(socket, :game, game)}
       else
         # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
@@ -109,9 +111,9 @@ defmodule CopiWeb.PlayerLive.Show do
       # Add their vote
       case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
         {:ok, _vote} ->
-          IO.puts("Continue vote added successfully")
-        {:error, _changeset} ->
-          IO.puts("Continue voting failed")
+          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
       end
     end
 
@@ -132,15 +134,15 @@ defmodule CopiWeb.PlayerLive.Show do
     vote = get_vote(dealt_card, player)
 
     if vote do
-      IO.puts("player has voted")
+      Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
       Copi.Repo.delete!(vote)
     else
-      IO.puts("player hasn't voted")
+      Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
       case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
         {:ok, _vote} ->
-          IO.puts("voted successfully")
-        {:error, _changeset} ->
-          IO.puts("voting failed")
+          Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
       end
     end
 

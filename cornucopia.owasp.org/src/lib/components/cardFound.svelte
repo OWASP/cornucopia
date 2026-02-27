@@ -1,8 +1,7 @@
 <script lang="ts">
   import { run } from 'svelte/legacy';
   import { Text } from "$lib/utils/text";
-  import {
-    GetCardAttacks, type Attack } from "$lib/cardAttacks";
+  import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
@@ -23,6 +22,7 @@
     languages: string[];
     language: string;
     capecData?: any;
+    versions: string[];
   }
 
   let {
@@ -31,6 +31,7 @@
     cards,
     routes,
     languages,
+    versions,
     language,
     capecData = undefined
   }: Props = $props();
@@ -51,6 +52,7 @@
   version={card.version}
   currentLanguage={language}
   {languages}
+  {versions}
 />
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
@@ -65,7 +67,7 @@
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
     {#key card}
-        <ViewSourceOnGithub></ViewSourceOnGithub>
+        <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>
     {/key}
 </div>
 

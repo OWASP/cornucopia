@@ -59,7 +59,7 @@
     }
   
     function linkCapec(input: string) {
-      return "https://capec.mitre.org/data/definitions/" + input + ".html";
+      return "/taxonomy/capec-3.9/" + input;
     }
     let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
     let attacks: Attack[] = $state(GetCardAttacks(card.id));

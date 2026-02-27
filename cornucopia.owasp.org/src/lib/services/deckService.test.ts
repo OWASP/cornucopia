@@ -123,7 +123,7 @@ describe('DeckService tests', () => {
                 version: '2.2', 
                 lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] 
             });
-            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'ru'] });
         });
     }, 10000);
 

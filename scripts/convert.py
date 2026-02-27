@@ -10,6 +10,7 @@ import subprocess
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
+from defusedxml import ElementTree as DefusedElTree
 from typing import Any, Dict, List, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
@@ -63,6 +64,63 @@ def check_make_list_into_text(var: List[str]) -> str:
     return text_output
 
 
+def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tuple[bool, str, str]:
+    """Validate and sanitize file paths to prevent command injection."""
+    source_path = os.path.abspath(source_filename)
+    output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
+
+    # Additional security checks
+    if not os.path.isfile(source_path):
+        return False, f"Source file does not exist: {source_path}", ""
+
+    if not os.path.isdir(output_dir):
+        return False, f"Output directory does not exist: {output_dir}", ""
+
+    # Ensure paths are within expected directories to prevent path traversal
+    base_path = os.path.abspath(convert_vars.BASE_PATH)
+    if not source_path.startswith(base_path):
+        return False, f"Source path outside base directory: {source_path}", ""
+    if not output_dir.startswith(base_path):
+        return False, f"Output directory outside base directory: {output_dir}", ""
+
+    return True, source_path, output_dir
+
+
+def _safe_extractall(archive: zipfile.ZipFile, target_dir: str) -> None:
+    """Extract zip members only if their resolved paths stay within target_dir.
+
+    Prevents Zip Slip / path traversal (CWE-22) by resolving symlinks and all
+    '..' components before comparing each member path against the target root.
+    Degenerate root entries ('.', '', './') are skipped rather than extracted,
+    because they carry no file content and resolve to the target directory itself.
+    """
+    abs_target = os.path.realpath(target_dir)
+    for member in archive.infolist():
+        member_path = os.path.realpath(os.path.join(abs_target, member.filename))
+
+        # Root/degenerate entries ('.', '', './') resolve to abs_target itself.
+        # They are directory metadata with no content; skip them safely.
+        if member_path == abs_target:
+            continue
+
+        # Block any member whose resolved path escapes the target directory.
+        # The os.sep suffix prevents prefix collisions (e.g. /tmp/d vs /tmp/d_evil).
+        if not member_path.startswith(abs_target + os.sep):
+            raise ValueError(f"Zip Slip blocked: member '{member.filename}' would extract outside target directory")
+
+        archive.extract(member, target_dir)
+
+
+def _validate_command_args(cmd_args: List[str]) -> bool:
+    """Validate command arguments for dangerous characters."""
+    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
+    for arg in cmd_args:
+        if any(char in arg for char in dangerous_chars):
+            logging.warning(f"Potentially dangerous character found in argument: {arg}")
+            return False
+    return True
+
+
 def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
     libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
     if not libreoffice_bin and platform.system() == "Windows":
@@ -75,23 +133,42 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
 
     try:
         logging.info(f"Using LibreOffice for conversion: {libreoffice_bin}")
+
+        # Validate file paths
+        is_valid, source_path, output_dir = _validate_file_paths(source_filename, output_pdf_filename)
+        if not is_valid:
+            logging.warning(source_path)  # source_path contains the error message
+            return False
+
+        # Create user profile directory safely
         user_profile_dir = os.path.abspath(os.path.join(convert_vars.BASE_PATH, "output", "lo_profile"))
+        os.makedirs(user_profile_dir, exist_ok=True)
         user_profile_url = "file:///" + user_profile_dir.replace("\\", "/")
+
+        # Build command arguments
+        cmd_args = [
+            libreoffice_bin,
+            "--headless",
+            f"-env:UserInstallation={user_profile_url}",
+            "--convert-to",
+            "pdf",
+            "--outdir",
+            output_dir,
+            source_path,
+        ]
+
+        # Validate command arguments
+        if not _validate_command_args(cmd_args):
+            return False
+
+        # Execute conversion
         subprocess.run(
-            [
-                libreoffice_bin,
-                "--headless",
-                f"-env:UserInstallation={user_profile_url}",
-                "--convert-to",
-                "pdf",
-                "--outdir",
-                os.path.abspath(os.path.dirname(output_pdf_filename)),
-                os.path.abspath(source_filename),
-            ],
-            check=True,
-            capture_output=True,
+            cmd_args, check=True, capture_output=True, text=True, timeout=300  # 5 minute timeout to prevent hanging
         )
         return True
+    except subprocess.TimeoutExpired:
+        logging.warning("LibreOffice conversion timed out after 5 minutes")
+        return False
     except Exception as e:
         logging.warning(f"LibreOffice conversion failed: {e}")
         return False
@@ -143,6 +220,11 @@ def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -
 
 
 def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
+    """Convert a document file (ODF, DOCX) to PDF using LibreOffice or docx2pdf.
+
+    Note: The source file is preserved after conversion, as it's typically an output
+    file that should be kept alongside the PDF, not a temporary file.
+    """
     logging.debug(
         f" --- source_file = {source_filename} convert to {output_pdf_filename}\n--- starting pdf conversion now."
     )
@@ -150,7 +232,7 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
     # 1. Attempt using LibreOffice
     if _convert_with_libreoffice(source_filename, output_pdf_filename):
         _rename_libreoffice_output(source_filename, output_pdf_filename)
-        _cleanup_temp_file(source_filename)
+        # Don't delete the source file - we want to keep both ODF and PDF
         return
 
     # 2. Fallback to docx2pdf
@@ -160,7 +242,7 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
 
     # 3. Everything failed
     _handle_conversion_failure(source_filename)
-    _cleanup_temp_file(source_filename)
+    # Don't delete the source file even on failure - it may still be useful
 
 
 def create_edition_from_template(
@@ -280,10 +362,12 @@ def main() -> None:
     logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
-    if convert_vars.args.pdf and not convert_vars.can_convert_to_pdf and not convert_vars.args.debug:
+    libreoffice_available = bool(shutil.which("libreoffice") or shutil.which("soffice"))
+    can_make_pdf = convert_vars.can_convert_to_pdf or libreoffice_available
+    if convert_vars.args.pdf and not can_make_pdf and not convert_vars.args.debug:
         logging.error(
             "Cannot convert to pdf on this system. "
-            "Pdf conversion is available on Windows and Mac, if MS Word is installed"
+            "Pdf conversion is available on Windows and Mac (with MS Word), or on any system with LibreOffice."
         )
         return
 
@@ -908,7 +992,7 @@ def save_odt_file(template_doc: str, language_dict: Dict[str, str], output_file:
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as odt_archive:
-        odt_archive.extractall(temp_output_path)
+        _safe_extractall(odt_archive, temp_output_path)
 
     # ODT text is usually in content.xml and sometimes styles.xml
     targets = ["content.xml", "styles.xml"]
@@ -938,7 +1022,7 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
-        idml_archive.extractall(temp_output_path)
+        _safe_extractall(idml_archive, temp_output_path)
         logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
@@ -1070,7 +1154,7 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        tree = ElTree.parse(filename)
+        tree = DefusedElTree.parse(filename)
     except Exception as e:
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return
