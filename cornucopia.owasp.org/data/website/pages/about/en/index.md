@@ -111,6 +111,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Aditya Srivastava
 - Johan Sydseter
 - Elias Brattli Sørensen
+- Izar Tarandach
 - Mradul Tiwari
 - Ive Verstappen
 - Sachin Vishwakarma
