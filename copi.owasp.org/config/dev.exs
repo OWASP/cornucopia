@@ -80,3 +80,18 @@ config :phoenix_live_view,
 # Disable colocated JS symlink warning on Windows
 config :phoenix_live_view, :colocated_js,
   disable_symlink_warning: true
+
+# Development-only encryption key (32 zero bytes).
+# NEVER use this key in production — set COPI_ENCRYPTION_KEY in the environment.
+# V11.5.1: Key is not hardcoded in source as a real secret; clearly dev-only.
+config :copi, Copi.Vault,
+  ciphers: [
+    default:
+      {Cloak.Ciphers.AES.GCM,
+       tag: "AES.GCM.V1",
+       key:
+         case System.get_env("COPI_ENCRYPTION_KEY") do
+           nil -> :binary.copy(<<0>>, 32)
+           b64 -> Base.decode64!(b64)
+         end}
+  ]

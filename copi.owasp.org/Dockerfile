@@ -12,7 +12,7 @@
 #   - https://pkgs.org/ - resource for finding needed packages
 #   - Ex: hexpm/elixir:1.14.2-erlang-25.1.1-debian-bullseye-20220801-slim
 #
-FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0 as builder
+FROM --platform=${BUILDPLATFORM} hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0 as builder
 # install build dependencies
 RUN (apt-get update -y && apt-get install -y build-essential git nodejs npm) || \
     (sleep 10 && apt-get update -y && apt-get install -y build-essential git nodejs npm) \
@@ -48,7 +48,8 @@ COPY assets assets
 # Install npm dependencies first
 RUN cd assets && npm install
 
-# compile assets
+# Install Tailwind and esbuild binaries, then compile assets
+RUN mix assets.setup
 RUN mix assets.deploy
 
 # Compile the release
@@ -62,7 +63,7 @@ RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
-FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0
+FROM --platform=${TARGETPLATFORM} hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0
 
 RUN (apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales) || \
     (sleep 10 && apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales) \

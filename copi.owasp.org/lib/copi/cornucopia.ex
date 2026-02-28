@@ -20,7 +20,7 @@ defmodule Copi.Cornucopia do
 
   """
   def list_games do
-    Repo.all(Game)
+    Repo.all(Game) |> Enum.map(&Game.resolve_legacy_name/1)
   end
 
   @doc """
@@ -37,7 +37,7 @@ defmodule Copi.Cornucopia do
       ** (Ecto.NoResultsError)
 
   """
-  def get_game!(id), do: Repo.get!(Game, id)
+  def get_game!(id), do: Repo.get!(Game, id) |> Game.resolve_legacy_name()
 
   @doc """
   Creates a game.
@@ -127,6 +127,7 @@ defmodule Copi.Cornucopia do
 
   def list_players(game_id) do
     Repo.all(from p in Player, where: p.game_id == ^game_id)
+    |> Enum.map(&Player.resolve_legacy_name/1)
   end
 
   @doc """
@@ -143,7 +144,7 @@ defmodule Copi.Cornucopia do
       ** (Ecto.NoResultsError)
 
   """
-  def get_player!(id), do: Repo.get!(Player, id)
+  def get_player!(id), do: Repo.get!(Player, id) |> Player.resolve_legacy_name()
 
   @doc """
   Creates a player.
