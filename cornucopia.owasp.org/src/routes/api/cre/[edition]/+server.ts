@@ -2,7 +2,7 @@ import { DeckService } from '$lib/services/deckService';
 import { json, error, type RequestHandler } from '@sveltejs/kit';
 import { CreController } from '$domain/cre/creController';
 
-export const prerender = true;
+export const prerender = false;
 
 export const GET: RequestHandler = ({ params }) => {
   const edition = params.edition;
