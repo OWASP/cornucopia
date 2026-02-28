@@ -16,158 +16,74 @@ suits:
     id: LLM2
     value: 2
     url: https://cornucopia.owasp.org/cards/LLM2
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM5
     value: 5
     url: https://cornucopia.owasp.org/cards/LLM5
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM6
     value: 6
     url: https://cornucopia.owasp.org/cards/LLM6
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM7
     value: 7
     url: https://cornucopia.owasp.org/cards/LLM7
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM8
     value: 8
     url: https://cornucopia.owasp.org/cards/LLM8
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLMX
     value: X
     url: https://cornucopia.owasp.org/cards/LLMX
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLMJ
     value: J
     url: https://cornucopia.owasp.org/cards/LLMJ
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLMQ
     value: Q
     url: https://cornucopia.owasp.org/cards/LLMQ
+    stride: [ ]
+    stride_print: [ ]
   -
     id: LLMK
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
--
-  id: AAI
-  name: Agentic AI
-  cards:
-  -
-    id: AAI2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/AAI2
-  -
-    id: AAI3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/AAI3
-  -
-    id: AAI4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/AAI4
-  -
-    id: AAI5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/AAI5
-  -
-    id: AAI6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/AAI6
-  -
-    id: AAI7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/AAI7
-  -
-    id: AAI8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/AAI8
-  -
-    id: AAI9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/AAI9
-  -
-    id: AAIX
-    value: X
-    url: https://cornucopia.owasp.org/cards/AAIX
-  -
-    id: AAIJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/AAIJ
-  -
-    id: AAIQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/AAIQ
-  -
-    id: AAIK
-    value: K
-    url: https://cornucopia.owasp.org/cards/AAIK
-  -
-    id: AAIA
-    value: A
-    url: https://cornucopia.owasp.org/cards/AAIA
--
-  id: API
-  name: Web API
-  cards:
-  -
-    id: API2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/API2
-  -
-    id: API3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/API3
-  -
-    id: API4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/API4
-  -
-    id: API5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/API5
-  -
-    id: API6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/API6
-  -
-    id: API7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/API7
-  -
-    id: API8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/API8
-  -
-    id: API9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/API9
-  -
-    id: APIX
-    value: X
-    url: https://cornucopia.owasp.org/cards/APIX
-  -
-    id: APIJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/APIJ
-  -
-    id: APIQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/APIQ
-  -
-    id: APIK
-    value: K
-    url: https://cornucopia.owasp.org/cards/APIK
+    stride: [ ]
+    stride_print: [ ]
 -
   id: CLD
   name: Cloud
@@ -177,6 +93,7 @@ suits:
     value: 2
     url: https://cornucopia.owasp.org/cards/CLD2
     stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     ccm: [ IAM-05, IAM-09 ]
     mitre_attack: [ T1098.003, T1078.004 ]
     cwe: [ CWE-732 ]
@@ -186,6 +103,7 @@ suits:
     value: 3
     url: https://cornucopia.owasp.org/cards/CLD3
     stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
     ccm: [ DSP-17, IVS-03, LOG-04 ]
     mitre_attack: [ T1530 ]
     cwe: [ CWE-200 ]
@@ -195,6 +113,7 @@ suits:
     value: 4
     url: https://cornucopia.owasp.org/cards/CLD4
     stride: [ R ]
+    stride_print: [ Repudiation ]
     ccm: [ LOG-01, LOG-05, LOG-07 ]
     mitre_attack: [ T1562.008 ]
     capec: [ CAPEC-268 ]
@@ -203,6 +122,7 @@ suits:
     value: 5
     url: https://cornucopia.owasp.org/cards/CLD5
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     ccm: [ AIS-05, CCC-02, CCC-04 ]
     mitre_attack: [ T1195.002 ]
     capec: [ CAPEC-242 ]
@@ -211,6 +131,7 @@ suits:
     value: 6
     url: https://cornucopia.owasp.org/cards/CLD6
     stride: [ T, I ]
+    stride_print: [ "Tampering", "Information Disclosure" ]
     ccm: [ AIS-01, AIS-02, AIS-04, LOG-03 ]
     mitre_attack: [ T1528, T1530 ]
     capec: [ CAPEC-54 ]
@@ -219,6 +140,7 @@ suits:
     value: 7
     url: https://cornucopia.owasp.org/cards/CLD7
     stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     ccm: [ IVS-04, IVS-06 ]
     mitre_attack: [ T1611, TA0008 ]
     capec: [ CAPEC-480 ]
@@ -227,6 +149,7 @@ suits:
     value: 8
     url: https://cornucopia.owasp.org/cards/CLD8
     stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     ccm: [ DSP-04, DSP-17 ]
     mitre_attack: [ T1552.005 ]
     capec: [ CAPEC-545 ]
@@ -235,6 +158,7 @@ suits:
     value: 9
     url: https://cornucopia.owasp.org/cards/CLD9
     stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     ccm: [ IAM-04, IVS-06 ]
     mitre_attack: [ T1021.007, TA0008 ]
     capec: [ CAPEC-161 ]
@@ -243,6 +167,7 @@ suits:
     value: X
     url: https://cornucopia.owasp.org/cards/CLDX
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     ccm: [ AIS-04, AIS-06, CCC-06 ]
     mitre_attack: [ T1195.001, T1584.004 ]
     capec: [ CAPEC-248 ]
@@ -251,6 +176,7 @@ suits:
     value: J
     url: https://cornucopia.owasp.org/cards/CLDJ
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     ccm: [ IVS-01, IVS-05, CCC-04 ]
     mitre_attack: [ T1554, T1195 ]
     capec: [ CAPEC-439 ]
@@ -259,6 +185,7 @@ suits:
     value: Q
     url: https://cornucopia.owasp.org/cards/CLDQ
     stride: [ I, E ]
+    stride_print: [ "Information Disclosure", "Elevation of Privilege" ]
     ccm: [ IAM-05, IAM-116 ]
     mitre_attack: [ T1195 ]
     capec: [ CAPEC-161 ]
@@ -267,6 +194,7 @@ suits:
     value: K
     url: https://cornucopia.owasp.org/cards/CLDK
     stride: [ S ]
+    stride_print: [ Spoofing ]
     ccm: [ IAM-01, IAM-02, IAM-09 ]
     mitre_attack: [ T1098 ]
     capec: [ CAPEC-233 ]
@@ -278,6 +206,8 @@ suits:
     id: FRE2
     value: 2
     url: https://cornucopia.owasp.org/cards/FRE2
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A06:2025 ]
     asvs: [ 5.1 ]
@@ -288,6 +218,8 @@ suits:
     id: FRE3
     value: 3
     url: https://cornucopia.owasp.org/cards/FRE3
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 7 ]
     owasp_top-10: [ A04:2025 ]
     asvs: [ 8.2 ]
@@ -297,6 +229,8 @@ suits:
     id: FRE4
     value: 4
     url: https://cornucopia.owasp.org/cards/FRE4
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 2 ]
     owasp_top-10: [ A05:2025 ]
     asvs: [ 5.3 ]
@@ -306,6 +240,8 @@ suits:
     id: FRE5
     value: 5
     url: https://cornucopia.owasp.org/cards/FRE5
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 4 ]
     owasp_top-10: [ A03:2025 ]
     asvs: [ 14.2 ]
@@ -315,6 +251,8 @@ suits:
     id: FRE6
     value: 6
     url: https://cornucopia.owasp.org/cards/FRE6
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 7 ]
     owasp_top-10: [ A07:2025 ]
     asvs: [ 8.2 ]
@@ -325,6 +263,8 @@ suits:
     id: FRE7
     value: 7
     url: https://cornucopia.owasp.org/cards/FRE7
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A08:2025 ]
     asvs: [ 14.5 ]
@@ -333,6 +273,8 @@ suits:
     id: FRE8
     value: 8
     url: https://cornucopia.owasp.org/cards/FRE8
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 1 ]
     owasp_top-10: [ A01:2025 ]
     asvs: [ 4.1 ]
@@ -342,6 +284,8 @@ suits:
     id: FRE9
     value: 9
     url: https://cornucopia.owasp.org/cards/FRE9
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 1 ]
     owasp_top-10: [ A01:2025 ]
     asvs: [ 3.5 ]
@@ -351,6 +295,8 @@ suits:
     id: FREX
     value: X
     url: https://cornucopia.owasp.org/cards/FREX
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A08:2025 ]
     asvs: [ 14.4 ]
@@ -360,6 +306,8 @@ suits:
     id: FREJ
     value: J
     url: https://cornucopia.owasp.org/cards/FREJ
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 5 ]
     owasp_top-10: [ A03:2025 ]
     asvs: [ 14.2 ]
@@ -369,6 +317,8 @@ suits:
     id: FREQ
     value: Q
     url: https://cornucopia.owasp.org/cards/FREQ
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A05:2025 ]
     asvs: [ 14.2 ]
@@ -378,6 +328,8 @@ suits:
     id: FREK
     value: K
     url: https://cornucopia.owasp.org/cards/FREK
+    stride: [ ]
+    stride_print: [ ]
     owasp_top-10_client_side: [ 10 ]
     owasp_top-10: [ A02:2025 ]
     asvs: [ 14.1 ]
@@ -391,6 +343,8 @@ suits:
     id: DVO2
     value: 2
     url: https://cornucopia.owasp.org/cards/DVO2
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-571, CAPEC-268 ]
     owasp_samm: [ O-IM-A ] 
     owasp_dsomm: [ IG-L ]
@@ -398,6 +352,8 @@ suits:
     id: DVO3
     value: 3
     url: https://cornucopia.owasp.org/cards/DVO3
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-554, CAPEC-17 ]
     owasp_samm: [ O-EM-A ]
     owasp_dsomm: [ I-IH, I-AH ]
@@ -405,6 +361,8 @@ suits:
     id: DVO4
     value: 4
     url: https://cornucopia.owasp.org/cards/DVO4
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-180 ]
     owasp_samm: [ O-OM-A ]
     owasp_dsomm: [ I-IH ]
@@ -412,6 +370,8 @@ suits:
     id: DVO5
     value: 5
     url: https://cornucopia.owasp.org/cards/DVO5
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-480, CAPEC-233 ]
     owasp_samm: [ V-AA, O-EM-A ]
     owasp_dsomm: [ I-IH, TV-DDI ]
@@ -419,12 +379,17 @@ suits:
     id: DVO6
     value: 6
     url: https://cornucopia.owasp.org/cards/DVO6
+    stride: [ ]
+    stride_print: [ ]
+    capec: []
     owasp_samm: [ O-OM-A, O-IM-B-2 ]
     owasp_dsomm: [ CO-P, I-IH ]
   -
     id: DVO7
     value: 7
     url: https://cornucopia.owasp.org/cards/DVO7
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-444, CAPEC-669, CAPEC-536 ]
     owasp_samm: [ I-SD-A ]
     owasp_dsomm: [ BD-D ]
@@ -432,6 +397,8 @@ suits:
     id: DVO8
     value: 8
     url: https://cornucopia.owasp.org/cards/DVO8
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-444, CAPEC-669, CAPEC-536, CAPEC-473 ]
     owasp_samm: [ I-SB-A, I-SD-A ]
     owasp_dsomm: [ BD-B ]
@@ -439,6 +406,8 @@ suits:
     id: DVO9
     value: 9
     url: https://cornucopia.owasp.org/cards/DVO9
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-670 ]
     owasp_samm: [ I-SB-A, I-SD-A, O-EM-A ]
     owasp_dsomm: [ I-DSC, I-IH, BD-B, BD-D ]
@@ -446,6 +415,8 @@ suits:
     id: DVOX
     value: X
     url: https://cornucopia.owasp.org/cards/DVOX
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-560, CAPEC-234, CAPEC-21 ]
     owasp_samm: [ O-OM-B ]
     owasp_dsomm: [ BD-D ]
@@ -453,6 +424,8 @@ suits:
     id: DVOJ
     value: J
     url: https://cornucopia.owasp.org/cards/DVOJ
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-310 ]
     owasp_samm: [ O-EM-B, I-SB, I-DM-A, D-SA-B ]
     owasp_dsomm: [ BD-PM, BD-D, TV-SDA ]
@@ -460,6 +433,8 @@ suits:
     id: DVOQ
     value: Q
     url: https://cornucopia.owasp.org/cards/DVOQ
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-560, CAPEC-21, CAPEC-150 ]
     owasp_samm: [ I-SD-B, O-OM-A ]
     owasp_dsomm: [ I-DSC, TV-SDI ]
@@ -467,61 +442,11 @@ suits:
     id: DVOK
     value: K
     url: https://cornucopia.owasp.org/cards/DVOK
+    stride: [ ]
+    stride_print: [ ]
     capec: [ CAPEC-444, CAPEC-184, CAPEC-439 ]
     owasp_samm: [ O-EM-B, I-SB, D-SA-B ]
     owasp_dsomm: [ BD-D, TV-SDI, I-DSC, CO-P ]
--
-  id: IDM
-  name: Identity Management
-  cards:
-  -
-    id: IDM2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/IDM2
-  -
-    id: IDM3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/IDM3
-  -
-    id: IDM4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/IDM4
-  -
-    id: IDM5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/IDM5
-  -
-    id: IDM6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/IDM6
-  -
-    id: IDM7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/IDM7
-  -
-    id: IDM8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/IDM8
-  -
-    id: IDM9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/IDM9
-  -
-    id: IDMX
-    value: X
-    url: https://cornucopia.owasp.org/cards/IDMX
-  -
-    id: IDMJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/IDMJ
-  -
-    id: IDMQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/IDMQ
-  -
-    id: IDMK
-    value: K
-    url: https://cornucopia.owasp.org/cards/IDMK
 -
   id: SE
   name: Social Engineering
@@ -530,50 +455,74 @@ suits:
     id: SE2
     value: 2
     url: https://cornucopia.owasp.org/cards/SE2
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE3
     value: 3
     url: https://cornucopia.owasp.org/cards/SE3
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE4
     value: 4
     url: https://cornucopia.owasp.org/cards/SE4
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE5
     value: 5
     url: https://cornucopia.owasp.org/cards/SE5
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE6
     value: 6
     url: https://cornucopia.owasp.org/cards/SE6
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE7
     value: 7
     url: https://cornucopia.owasp.org/cards/SE7
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE8
     value: 8
     url: https://cornucopia.owasp.org/cards/SE8
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SE9
     value: 9
     url: https://cornucopia.owasp.org/cards/SE9
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SEX
     value: X
     url: https://cornucopia.owasp.org/cards/SEX
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SEJ
     value: J
     url: https://cornucopia.owasp.org/cards/SEJ
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SEQ
     value: Q
     url: https://cornucopia.owasp.org/cards/SEQ
+    stride: [ ]
+    stride_print: [ ]
   -
     id: SEK
     value: K
     url: https://cornucopia.owasp.org/cards/SEK
+    stride: [ ]
+    stride_print: [ ]
 -
   id: BOT
   name: Automated Threats
@@ -583,9 +532,10 @@ suits:
     value: 2
     url: https://cornucopia.owasp.org/cards/BOT2
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
-    owasp_oat: [ OAT-022 ]
+    owasp_oat: [ OAT-003 ]
     cwe: [ 841 ]
     capec: [ 210 ]
   -
@@ -593,6 +543,7 @@ suits:
     value: 3
     url: https://cornucopia.owasp.org/cards/BOT3
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [ 2.3.1, 2.3.2 ]
     owasp_asvs_print: [ 2.3.1-2 ]
     owasp_oat: [ OAT-006 ]
@@ -603,6 +554,7 @@ suits:
     value: 4
     url: https://cornucopia.owasp.org/cards/BOT4
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
     owasp_oat: [ OAT-013 ]
@@ -612,6 +564,7 @@ suits:
     value: 5
     url: https://cornucopia.owasp.org/cards/BOT5
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [ 2.3.2, 2.3.4 ]
     owasp_asvs_print: [ 2.3.2, 2.3.4 ]
     owasp_oat: [ OAT-021 ]
@@ -622,6 +575,7 @@ suits:
     value: 6
     url: https://cornucopia.owasp.org/cards/BOT6
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [ 2.3.2, 2.3.4 ]
     owasp_asvs_print: [ 2.3.2, 2.3.4 ]
     owasp_oat: [ OAT-005 ]
@@ -632,6 +586,7 @@ suits:
     value: 7
     url: https://cornucopia.owasp.org/cards/BOT7
     stride: [ S ]
+    stride_print: [ Spoofing ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
     owasp_oat: [ OAT-012 ]
@@ -642,6 +597,7 @@ suits:
     value: 8
     url: https://cornucopia.owasp.org/cards/BOT8
     stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
     owasp_oat: [ OAT-019 ]
@@ -652,6 +608,7 @@ suits:
     value: 9
     url: https://cornucopia.owasp.org/cards/BOT9
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [  2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
     owasp_oat: [ OAT-016 ]
@@ -662,6 +619,7 @@ suits:
     value: X
     url: https://cornucopia.owasp.org/cards/BOTX
     stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
     owasp_asvs: [ 2.3.2, 6.1.1, 6.3.1 ]
     owasp_asvs_print: [ 2.3.2, 6.1.1, 6.3.1 ]
     owasp_oat: [ OAT-002, OAT-007, OAT-010 ]
@@ -672,6 +630,7 @@ suits:
     value: J
     url: https://cornucopia.owasp.org/cards/BOTJ
     stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
     owasp_asvs: [ 2.3.2, 2.4.1, 2.4.2, 6.1.1 ]
     owasp_asvs_print: [  2.3.2, 2.4.1-2, 6.1.1 ]
     owasp_oat: [ OAT-001, OAT-008 ]
@@ -682,6 +641,7 @@ suits:
     value: Q
     url: https://cornucopia.owasp.org/cards/BOTQ
     stride: [ T ]
+    stride_print: [ "Tampering" ]
     owasp_asvs: [ 2.3.2 ]
     owasp_asvs_print: [ 2.3.2 ]
     owasp_oat: [ OAT-017 ]
@@ -692,6 +652,7 @@ suits:
     value: K
     url: https://cornucopia.owasp.org/cards/BOTK
     stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
     owasp_asvs: [ 2.3.2, 14.2.6 ]
     owasp_asvs_print: [ 2.3.2, 14.2.6 ]
     owasp_oat: [ OAT-011 ]
@@ -701,9 +662,182 @@ suits:
     id: BOTA
     value: A
     url: https://cornucopia.owasp.org/cards/BOTA
-    stride: [  ]
+    stride: [ ]
+    stride_print: [ ]
     owasp_asvs: [  ]
     owasp_asvs_print: [ "-" ]
     owasp_oat: [ ]
     cwe: [  ]
     capec: [ "-" ]
+-
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0051 ]
+    mitre_atlas_print: [ "AML.T0051: Prompt Injection" ]
+    owasp_llm_top10: [ LLM01:2025 ]
+    owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
+    owasp_agentic_top10: [ AAI01:2026 ]
+    owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0080 ]
+    mitre_atlas_print: [ "AML.T0080 - AI Agent Context Poisoning" ]
+    owasp_llm_top10: [ LLM04:2025 ]
+    owasp_llm_top10_print: [ "LLM04:2025: Data & Model Poisoning" ]
+    owasp_agentic_top10: [ ASI06:2026 ]
+    owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+    stride: [ D ]
+    stride_print: [ "Denial of Service" ]
+    cia: [ A ]
+    cia_print: [ "Availability" ]
+    mitre_atlas: [ AML.T0034, AML.T0029 ]
+    mitre_atlas_print: [ "AML.T0034: Cost Harvesting", "AML.T0029: Denial of AI Service" ]
+    owasp_llm_top10: [ LLM10:2025 ]
+    owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
+    owasp_agentic_top10: [ ASI02:2026 ]
+    owasp_agentic_top10_print: [ "ASI02: Tool Misuse & Exploitation" ]
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+    stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
+    cia: [ C ]
+    cia_print: [ "Confidentiality" ]
+    mitre_atlas: [ AML.T0015 ]
+    mitre_atlas_print: [ "AML.T0015: Evade AI Model" ]
+    owasp_llm_top10: [ LLM02:2025 ]
+    owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
+    owasp_agentic_top10: [ ASI06:2026 ]
+    owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+    stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
+    cia: [ C ]
+    cia_print: [ "Confidentiality" ]
+    mitre_atlas: [ AML.T0086 ]
+    mitre_atlas_print: [ "AML.T0086: Exfiltration via AI Agent Tool Invocation" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI03:2026 ]
+    owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0051.001 ]
+    mitre_atlas_print: [ "AML.T0051.001: LLM Prompt Injection: Indirect" ]
+    owasp_llm_top10: [ LLM01:2025 ]
+    owasp_llm_top10_print: [ "LLM01:2025: Tool Misuse & Exploitation" ]
+    owasp_agentic_top10: [ ASI02:2026 ]
+    owasp_agentic_top10_print: [ "ASI02: Tool Misuse & Exploitation" ]
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0011 ]
+    mitre_atlas_print: [ "AML.T0011: User Execution" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI05:2026 ]
+    owasp_agentic_top10_print: [ "ASI05: Unexpected Code Execution (RCE)" ]
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0081 ]
+    mitre_atlas_print: [ "AML.T0081: Modify AI Agent Configuration" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI03:2026 ]
+    owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+    stride: [ E, I ]
+    stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
+    cia: [ C, I ]
+    cia_print: [ "Confidentiality", "Integrity" ]
+    mitre_atlas: [ AML.T0102 ]
+    mitre_atlas_print: [ "AML.T0102: Generate Malicious Commands" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI01:2026 ]
+    owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+    stride: [ T, R ]
+    stride_print: [ "Tampering", "Repudiation" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0067 ]
+    mitre_atlas_print: [ "AML.T0067: LLM Trusted Output Components Manipulation" ]
+    owasp_llm_top10: [ LLM06:2025]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI07:2026 ]
+    owasp_agentic_top10_print: [ "ASI07: Insecure Inter-Agent Communication" ]
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0081 ]
+    mitre_atlas_print: [ "AML.T0081: Modify AI Agent Configuration" ]
+    owasp_llm_top10: [ LLM03:2025 ]
+    owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
+    owasp_agentic_top10: [ ASI04:2026 ]
+    owasp_agentic_top10_print: [ "ASI04: Agentic Supply Chain Vulnerabilities" ]
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+    stride: [ E, D ]
+    stride_print: [ "Elevation of Privilege", "Denial of Service" ]
+    cia: [ I, A ]
+    cia_print: [ "Integrity", "Availability" ]
+    mitre_atlas: [ AML.T0053 ]
+    mitre_atlas_print: [ "AML.T0053: AI Agent Tool Invocation" ]
+    owasp_llm_top10: [ LLM06:2025 ]
+    owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
+    owasp_agentic_top10: [ ASI03:2026 ]
+    owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]

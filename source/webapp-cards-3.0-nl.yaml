@@ -1,0 +1,1371 @@
+---
+meta:
+  edition: "webapp"
+  component: "cards"
+  language: "NL"
+  version: "3.0"
+suits:
+-
+  id: "VE"
+  name: "Data Validatie & Codering"
+  cards:
+  -
+    id: "VE2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/VE2"
+    desc: "Brian kan informatie verzamelen over de onderliggende configuraties, schema's, logica, code, software, services en infrastructuur vanwege de inhoud van foutmeldingen, of een slechte configuratie, of de aanwezigheid van standaard installatiebestanden of oude, test, back-up of kopieën van bronnen, of blootstelling van broncode"
+  -
+    id: "VE3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/VE3"
+    desc: "Robert kan kwaadwillende gegevens invoeren omdat het toegestane protocolformaat niet wordt gecontroleerd, of duplicaten worden geaccepteerd, of de structuur niet wordt geverifieerd, of de individuele gegevenselementen niet worden gezuiverd, of preferentieel worden gevalideerd voor formaat, type, bereik, grootte, lengte en een witte lijst met toegestane tekens of formaten"
+  -
+    id: "VE4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/VE4"
+    desc: "Dave kan kwaadwillend veldnamen of gegevens invoeren omdat het niet wordt gecontroleerd binnen de context van de huidige gebruiker en het huidige proces"
+  -
+    id: "VE5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/VE5"
+    desc: "Jee kan de gecentraliseerde codering routines omzeilen omdat ze niet overal worden gebruikt, of de verkeerde coderingen worden gebruikt"
+  -
+    id: "VE6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/VE6"
+    desc: "Jason kan de gecentraliseerde validatie routines omzeilen omdat ze niet op alle inputs worden gebruikt"
+  -
+    id: "VE7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/VE7"
+    desc: "Jan kan speciale payloads maken om invoervalidatie te dwarsbomen omdat de tekenset niet is gespecificeerd/afgedwongen, of de gegevens meerdere keren worden gecodeerd, of de gegevens niet volledig worden geconverteerd naar hetzelfde formaat dat de toepassing gebruikt (bijv. gevalideerd, of variabelen zijn niet sterk getypt"
+  -
+    id: "VE8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/VE8"
+    desc: "Oana kan de gecentraliseerde sanitation routines omzeilen omdat ze niet volledig worden gebruikt"
+  -
+    id: "VE9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/VE9"
+    desc: "Shamun kan input validatie of output validatiecontroles omzeilen omdat validatiefouten niet worden afgewezen en/of opgeschoond"
+  -
+    id: "VEX"
+    value: "10"
+    url: "https://cornucopia.owasp.org/cards/VEX"
+    desc: "Darío kan het vertrouwen van de applicatie in een gegevensbron misbruiken (bijv. door de gebruiker te definiëren gegevens, manipulatie van lokaal opgeslagen gegevens, wijziging van statusgegevens op een clientapparaat, gebrek aan en/of onjuiste uitvoering van client-side controls, gebrek aan verificatie van identiteit tijdens gegevensvalidatie zoals Darío kan alsof hij Colin is)"
+  -
+    id: "VEJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/VEJ"
+    desc: "Toby heeft controle over input validatie, output validatie, reiniging of uitvoercoderingscode of routines zodat deze kunnen worden omzeild"
+  -
+    id: "VEQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/VEQ"
+    desc: "Xavier kan gegevens injecteren in een client- of device-side interpreter omdat een geparametriseerde interface niet wordt gebruikt, niet correct is geïmplementeerd, of de gegevens niet correct zijn versleuteld, gezuiverd of ontsnapt voor de context, of er is geen restrictieve beleid op code of gegevens inclusies"
+  -
+    id: "VEK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/VEK"
+    desc: "Gabe kan gegevens injecteren in een server-side interpreter (bijv. SQL, OS-commando's, Xpath, Server JavaScript, SMTP) omdat een sterk getypeerde geparametriseerde interface niet wordt gebruikt, niet correct is geïmplementeerd, of correct is geconfigureerd"
+  -
+    id: "VEA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/VEA"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Datavalidatie en -codering"
+    misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets over Invoervalidatie, XSS-preventie, DOM-based XSS-preventie, SQL-injectiepreventie en Query Parameterization"
+-
+  id: "AT"
+  name: "Authenticatie"
+  cards:
+  -
+    id: "AT2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/AT2"
+    desc: "James kan authenticatiefuncties uitvoeren zonder dat de echte gebruiker er ooit van op de hoogte is dat dit is gebeurd (bijv. poging om in te loggen, inloggen met gestolen inloggegevens, het wachtwoord opnieuw instellen) "
+  -
+    id: "AT3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/AT3"
+    desc: "Muhammad kan het wachtwoord van een gebruiker of andere geheimen, zoals MFA-codes of biometrie, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het is gelekt"
+  -
+    id: "AT4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/AT4"
+    desc: "Sebastien kan gebruikersnamen gemakkelijk identificeren of opsommen"
+  -
+    id: "AT5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/AT5"
+    desc: "Javier kan standaard, test of gemakkelijk te raden inloggegevens gebruiken om te authenticeren, of een oude account gebruiken, of een account die niet nodig is voor de applicatie"
+  -
+    id: "AT6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/AT6"
+    desc: "Sven kan een tijdelijk wachtwoord opnieuw gebruiken, een recovery-, activation-, auth-, of MFA-code omdat het niet wordt gewijzigd na gebruik, of niet kan worden teruggezet door de gebruiker of beheerder, of het heeft een onvoldoende geïmplementeerd, te lang of geen vervaldatum, of is nog geldig na gebruik, teruggezet of ingetrokken, of het gebruikt geen veilige out-of-band bezorgingsmethode (bijv. post, mobiele app, SMS)"
+  -
+    id: "AT7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/AT7"
+    desc: "Cecilia kan brute kracht en dictionaryaanvallen gebruiken tegen een of meerdere accounts zonder limiet, of deze aanvallen worden vereenvoudigd vanwege onvoldoende complexiteit, lengte, vervaldatum en vereisten voor het gebruik van wachtwoorden, recovery-, activation-, of MFA-codes"
+  -
+    id: "AT8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/AT8"
+    desc: "Kate kan authenticatie omzeilen omdat het niet veilig falen (d.w.z. het staat standaard niet-geverifieerde toegang toe)"
+  -
+    id: "AT9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/AT9"
+    desc: "Claudia kan meer kritieke functies uitvoeren omdat de authenticatievereisten inconsistent zijn, te zwak (bijvoorbeeld geen passkeys of andere sterke authenticatie zoals een aanbevolen MFA-methode gebruiken), of er is geen vereiste om opnieuw te authenticeren voor deze"
+  -
+    id: "ATX"
+    value: "10"
+    url: "https://cornucopia.owasp.org/cards/ATX"
+    desc: "Pravin kan de authenticatiecontroles omzeilen omdat een gecentraliseerd standaard, getest, bewezen, aanbevolen en goedgekeurde authenticatiemodule/framework/service, los van de resource die wordt aangevraagd, niet wordt gebruikt, is misgeconfigureerd, of is onjuist geïmplementeerd"
+  -
+    id: "ATJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/ATJ"
+    desc: "Mark kan toegang krijgen tot bronnen of services omdat er geen authenticatievereiste is, of omdat authenticatie ontbrekend is vanwege misconfiguratie, onjuiste ontwerp of implementatie, of omdat er verkeerd is aangenomen dat authenticatie zou worden uitgevoerd door een ander systeem of in een vorige actie"
+  -
+    id: "ATQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/ATQ"
+    desc: "Johan kan authenticatie omzeilen omdat het niet even strikt wordt afgedwongen voor alle soorten authenticatiefunctionaliteit (bijv. registreren, wachtwoordwijziging, wachtwoordherstel, uitloggen, beheer) of voor alle versies/kanalen (bijv. mobiele website, mobiele app, volledige website, API, callcenter)"
+  -
+    id: "ATK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/ATK"
+    desc: "Olga kan de authenticatiecode/routines beïnvloeden of wijzigen zodat deze kunnen worden omzeild"
+  -
+    id: "ATA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/ATA"
+    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    misc: "Lees meer over dit onderwerp in OWASP's gratis Authentication Cheat Sheet"
+-
+  id: "SM"
+  name: "SESSIEBEHEER"
+  cards:
+  -
+    id: "SM2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SM2"
+    desc: "William heeft controle over het genereren van sessie-ID's of autorisatietokens"
+  -
+    id: "SM3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/SM3"
+    desc: "Ryan kan de gestolen sessie voor de maximale duur blijven gebruiken omdat de gebruiker niet kan controleren of de sessie gestolen is, of de sessie kan beëindigen of de beheerder om dat te vragen, of omdat de applicatie niet tegen autorisatiecode-interception helpt"
+  -
+    id: "SM4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/SM4"
+    desc: "Alison kan sessie-identificatiecookies instellen of tokens gebruiken voor een andere webtoepassing omdat het domein, pad, (of in het geval van tokens) publiek niet voldoende is beperkt"
+  -
+    id: "SM5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/SM5"
+    desc: "John kan sessie-ID's voorspellen of raden omdat ze niet worden gewijzigd wanneer de rol van de gebruiker verandert (bijv. pre en post authenticatie), of niet worden geverifieerd met een vertrouwde backendservice, of niet lang genoeg en willekeurig zijn, of niet worden gewijzigd periodiek"
+  -
+    id: "SM6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/SM6"
+    desc: "Gary kan de sessie van een gebruiker overnemen omdat er een lange of geen time-out voor inactiviteit is, of een lange of geen algemene sessietijdslimiet, of dezelfde sessie kan worden gebruikt vanaf meer dan één apparaat/locatie"
+  -
+    id: "SM7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/SM7"
+    desc: "Graham kan Adam's sessie gebruiken nadat hij klaar is, omdat er geen uitlogfunctie is, of hij kan niet gemakkelijk uitloggen, of omdat de uitlogfunctie en andere mechanismen voor verificatie-instellingen de gebruiker niet toestaan de sessie of sessies te beëindigen"
+  -
+    id: "SM8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/SM8"
+    desc: "Matt kan sessies misbruiken omdat de applicatie na een sessietijdlimiet niet opnieuw verifieert of autorisatie heeft verloren, of wanneer privileges zijn gewijzigd, of na elke plotselinge en risicovolle wijziging in de gebruikersverificatie-instellingen of omgevings- en contextuele attributen (bijv. IP-adres, apparaat, locatie, tijd van de dag, browser, etc.)"
+  -
+    id: "SM9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/SM9"
+    desc: "Ivan kan sessie-ID's of autorisatietokens stelen omdat ze via onveilige kanalen worden verzonden, of worden vastgelegd, of worden onthuld in foutmeldingen, of zijn opgenomen in URL's, of onnodig toegankelijk zijn via code, cache of load balancers waar de aanvaller invloed op kan uitoefenen of wijzigen"
+  -
+    id: "SMX"
+    value: "10"
+    url: "https://cornucopia.owasp.org/cards/SMX"
+    desc: "Marce kan verzoeken vervalsen omdat per sessie, of per verzoek voor meer kritieke acties, sterke willekeurige tokens (d.w.z. anti-CSRF-tokens) of iets dergelijks niet worden gebruikt voor acties die van status veranderen"
+  -
+    id: "SMJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/SMJ"
+    desc: "Jeff kan gestolen sessie-ID's en/of tokens hergebruiken omdat ze niet vertrouwelijk worden behandeld, of omdat er geen sterk bewijs van bezit is (bijv. binding aan certificaat, apparaat, IP-adres, gebruikersagent, etc.)"
+  -
+    id: "SMQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/SMQ"
+    desc: "Salim kan sessiebeheer omzeilen omdat het niet volledig en consistent wordt toegepast in de hele applicatie"
+  -
+    id: "SMK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/SMK"
+    desc: "Peter kan de sessiebeheer controles omzeilen omdat ze zelf gebouwd zijn en/of zwak zijn, in plaats van een standaard framework of goedgekeurde geteste module te gebruiken"
+  -
+    id: "SMA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/SMA"
+    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets on Session Management, en Cross Site Request Forgery (CSRF) Prevention"
+-
+  id: "AZ"
+  name: "AUTORISATIE"
+  cards:
+  -
+    id: "AZ2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/AZ2"
+    desc: "Tim kan beïnvloeden waar gegevens naartoe worden gestuurd of doorgestuurd"
+  -
+    id: "AZ3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/AZ3"
+    desc: "Christian kan toegang krijgen tot informatie die hij geen toestemming voor heeft, via een ander mechanisme dat wel toestemming heeft (bijv. zoekindexer, logger, rapportage), of omdat het in de cache is opgeslagen, of langer dan nodig wordt bewaard, of andere informatielekkage"
+  -
+    id: "AZ4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/AZ4"
+    desc: "Kelly kan de autorisatiecontroles omzeilen omdat ze niet veilig falen (d.w.z. ze geven standaard toegang)"
+  -
+    id: "AZ5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/AZ5"
+    desc: "Chad kan toegang krijgen tot bronnen (inclusief services, processen, AJAX, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie, of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
+  -
+    id: "AZ6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/AZ6"
+    desc: "Eduardo kan toegang krijgen tot gegevens die hij geen toestemming voor heeft, ook al heeft hij toestemming voor het formulier/pagina/URL/toegangspunt"
+  -
+    id: "AZ7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/AZ7"
+    desc: "Yuanjing kan toegang krijgen tot applicatiefuncties, objecten of eigenschappen die hij niet is gemachtigd te benaderen"
+  -
+    id: "AZ8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/AZ8"
+    desc: "Tom kan bedrijfsregels omzeilen door de gebruikelijke procesvolgorde of -stroom te wijzigen, of door het proces in de verkeerde volgorde uit te voeren, of door datum- en tijdwaarden te manipuleren die door de applicatie worden gebruikt, of door geldige functies te gebruiken voor onbedoelde doeleinden, of door anderszins manipuleren van besturingsgegevens"
+  -
+    id: "AZ9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/AZ9"
+    desc: "Michael kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat administratieve hulpmiddelen of administratieve interfaces niet voldoende zijn beschermd"
+  -
+    id: "AZX"
+    value: "10"
+    url: "https://cornucopia.owasp.org/cards/AZX"
+    desc: "Richard kan de gecentraliseerde autorisatiecontroles omzeilen omdat ze niet volledig worden gebruikt voor alle interacties, of omdat ze zijn misgeconfigureerd, of omdat de applicatie niet een gecentraliseerd standaard gebruikt, getest, bewezen, aanbevolen en goedgekeurd autorisatiemodule/framework/service"
+  -
+    id: "AZJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/AZJ"
+    desc: "Dinis kan toegang krijgen tot beveiligingsconfiguratieinformatie, of toegangskontrollijsten"
+  -
+    id: "AZQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/AZQ"
+    desc: "Christopher kan een opdracht injecteren die de applicatie op een hoger privilegeniveau zal draaien"
+  -
+    id: "AZK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/AZK"
+    desc: "Ryan kan de autorisatiecontroles en permissies beïnvloeden of wijzigen en kan daarom deze omzeilen"
+  -
+    id: "AZA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/AZA"
+    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    misc: "Lees meer over dit onderwerp in OWASP's Development and Testing Guides"
+-
+  id: "CR"
+  name: "CRYPTOGRAFIE"
+  cards:
+  -
+    id: "CR2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/CR2"
+    desc: "Kyun kan toegang krijgen tot gegevens omdat deze zijn verdoezeld in plaats van een goedgekeurde cryptografische functie te gebruiken"
+  -
+    id: "CR3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/CR3"
+    desc: "Axel kan tijdelijke of permanente gegevens (opgeslagen of in transit), of broncode, of updates/patches, of configuratiegegevens wijzigen, omdat deze niet onderworpen zijn aan integriteitscontrole"
+  -
+    id: "CR4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/CR4"
+    desc: "Paulo kan toegang krijgen tot gegevens in transit die niet versleuteld zijn, ook al is het kanaal zelf versleuteld"
+  -
+    id: "CR5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/CR5"
+    desc: "Kyle kan de cryptografiecontroles omzeilen omdat ze niet veilig falen (d.w.z. ze zijn standaard onbeschermd)"
+  -
+    id: "CR6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/CR6"
+    desc: "Romain kan niet-versleutelde gegevens in het geheugen of onderweg lezen en wijzigen (bijv. cryptografische geheimen, inloggegevens, sessie-ID's, persoonlijke en commercieel gevoelige gegevens), in gebruik of in communicatie binnen de applicatie, of tussen de applicatie en gebruikers, of tussen de applicatie en externe systemen"
+  -
+    id: "CR7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/CR7"
+    desc: "Gunter kan versleutelde en/of gehashte gegevens onderscheppen of wijzigen omdat het protocol slecht is geïmplementeerd, of zwak is geconfigureerd, of certificaten ongeldig zijn, of certificaten niet worden vertrouwd, of de verbinding kan worden verslechterd tot een zwakkere of niet-versleutelde communicatie"
+  -
+    id: "CR8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/CR8"
+    desc: "Eoin kan toegang krijgen tot opgeslagen bedrijfsgegevens (bijv. wachtwoorden, sessie-ID's, PII, kaarthoudergegevens) omdat deze niet veilig versleuteld of gehasht zijn"
+  -
+    id: "CR9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/CR9"
+    desc: "Andy kan de cryptografiecontroles omzeilen omdat willekeurige nummers, GUID's of hashingfuncties zelf zijn gemaakt, risicovol of zwak"
+  -
+    id: "CRX"
+    value: "10"
+    url: "https://cornucopia.owasp.org/cards/CRX"
+    desc: "Susanna kan de cryptografie breken omdat deze niet sterk genoeg is voor de vereiste mate van bescherming, of niet sterk genoeg is voor de hoeveelheid inspanning die de aanvaller bereid is te leveren"
+  -
+    id: "CRJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/CRJ"
+    desc: "Justin kan inloggegevens lezen voor toegang tot interne of externe bronnen, services en andere systemen omdat ze zijn opgeslagen in een niet-versleuteld formaat of opgeslagen in de broncode"
+  -
+    id: "CRQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/CRQ"
+    desc: "Artim kan toegang krijgen tot of voorspellen van de hoofdcryptografische geheimen"
+  -
+    id: "CRK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/CRK"
+    desc: "Dan kan de cryptografiecode/routines beïnvloeden of wijzigen (encryptie, hashing, digitale handtekeningen, willekeurige nummers en GUID-generatie) en kan daarom deze omzeilen"
+  -
+    id: "CRA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/CRA"
+    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets on Cryptographic Storage, en Transport Layer Protection"
+-
+  id: "C"
+  name: "CORNUCOPIA"
+  cards:
+  -
+    id: "C2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/C2"
+    desc: "Lee kan de applicatiecontroles omzeilen omdat gevaarlijke/risicovolle programmeertaalfuncties zijn gebruikt in plaats van veiligere alternatieven, of er zijn typeconversiefouten, of omdat de applicatie onbetrouwbaar is wanneer een externe bron niet beschikbaar is, of er race-omstandigheden zijn, of er zijn resource-initialisatie-, lek- of toewijzingsproblemen, of er kunnen overflows optreden"
+  -
+    id: "C3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/C3"
+    desc: "Andrew kan toegang krijgen tot broncode, of decompileren, of debuggen, of anderszins toegang krijgen tot bedrijfslogica om te begrijpen hoe de applicatie werkt en eventuele geheimen die erin zitten"
+  -
+    id: "C4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/C4"
+    desc: "Keith kan een actie uitvoeren en het is niet mogelijk om deze aan hem toe te schrijven"
+  -
+    id: "C5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/C5"
+    desc: "Larry kan het vertrouwen van andere partijen, inclusief gebruikers, in de applicatie beïnvloeden, of dat vertrouwen misbruiken elders (bijv. in een andere applicatie)"
+  -
+    id: "C6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/C6"
+    desc: "Aaron kan de controles omzeilen omdat fout/uitzonderingsafhandeling ontbrekend is, of onregelmatig of gedeeltelijk is geïmplementeerd, of toegang niet standaard weigert (d.w.z. fouten moeten toegang/uitvoering beëindigen), of afhankelijk is van afhandeling door een ander service of systeem"
+  -
+    id: "C7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/C7"
+    desc: "Mwengu's acties kunnen niet worden onderzocht omdat er geen adequaat nauwkeurig time-stamp is van beveiligingsgebeurtenissen, of er is geen volledige audittrail, of deze kunnen worden gewijzigd of verwijderd door Mwengu, of er is geen gecentraliseerde logservice"
+  -
+    id: "C8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/C8"
+    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie periodiek opnieuw is gecontroleerd en beveiligingspatches zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
+  -
+    id: "C9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/C9"
+    desc: "Mike kan de applicatie misbruiken door een geldige functie te gebruiken te snel, te vaak, of op een andere manier die niet bedoeld is, of de applicatiebronnen verbruikt, of racevoorwaarden veroorzaakt, of een functie overmatig gebruikt"
+  -
+    id: "CX"
+    value: "10"
+    url: "https://cornucopia.owasp.org/cards/CX"
+    desc: "Spyros kan de controles van de applicatie omzeilen omdat codeframeworks, bibliotheken en componenten kwaadaardige code of kwetsbaarheden bevatten (bijv. intern, commercieel kant-en-klaar, uitbesteed, open source, extern gelokaliseerd)"
+  -
+    id: "CJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/CJ"
+    desc: "Roman kan de applicatie misbruiken omdat deze onveilig is gecompileerd of geïmplementeerd, of de configuratie is niet standaard veilig, of beveiligingsinformatie is niet gedocumenteerd, of aan operationele teams is doorgegeven, of de gebruiker is niet gewaarschuwd en toegang is geblokkeerd wanneer de verwachte beveiligingsfuncties niet worden ondersteund of zijn uitgeschakeld"
+  -
+    id: "CQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/CQ"
+    desc: "Jim kan kwaadwillende, niet-normale acties uitvoeren zonder realtime detectie en reactie door de applicatie"
+  -
+    id: "CK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/CK"
+    desc: "Grant kan de applicatie gebruiken om service aan sommige of alle gebruikers te weigeren"
+  -
+    id: "CA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/CA"
+    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    misc: "Lees meer over applicatiebeveiliging in OWASP's gratis Guides on Requirements, Development, Code Review and Testing, de Cheat Sheet-serie en het Open Software Assurance Maturity Model"
+-
+  id: "WC"
+  name: "WILD CARD"
+  cards:
+  -
+    id: "JOA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOA"
+    card: "Joker"
+    desc: "Alice kan de applicatie gebruiken om systemen en gegevens van gebruikers aan te vallen"
+    misc: "Heb je erover nagedacht om individueel OWASP-lid te worden? Alle tools, begeleiding en lokale bijeenkomsten zijn gratis voor iedereen, maar individueel lidmaatschap helpt het werk van OWASP te ondersteunen"
+  -
+    id: "JOB"
+    value: "B"
+    url: "https://cornucopia.owasp.org/cards/JOB"
+    card: "Joker"
+    desc: "Bob kan de applicatie beïnvloeden of wijzigen zodat deze niet langer voldoet aan wettelijke, reglementaire, contractuele of andere organisatorische mandaten"
+    misc: "Bestudeer kwetsbaarheden en ontdek hoe ze kunnen worden opgelost met behulp van de gratis OWASP® Juice Shop, Security Shepherd, of met behulp van de online uitdagingen in het gratis OWASP® Hacking-lab"
+paragraphs:
+-
+  id: "Common"
+  name: "Algemeen"
+  sentences:
+  -
+    id: "NoCard"
+    text: "Geen kaart"
+  -
+    id: "Title"
+    text: "Website App Edition v3.0-NL"
+  -
+    id: "Title_full"
+    text: "OWASP® Cornucopia Website App Edition v3.0-NL"
+  -
+    id: "T00005"
+    text: "Inhoudsopgave"
+  -
+    id: "T00005"
+    text: "Inhoudsopgave"
+  -
+    id: "T00010"
+    text: "OWASP® Cornucopia is een mechanisme om softwareontwikkelingsteams te helpen bij het identificeren van beveiligingsvereisten in Agile, conventionele en formele ontwikkelingsprocessen."
+  -
+    id: "T00020"
+    text: "Auteur"
+  -
+    id: "T00030"
+    text: "Projectleiders"
+  -
+    id: "T00100"
+    text: "Dankbetuigingen"
+  -
+    id: "T00110"
+    text: "Adam Shostack en het Microsoft SDL-team voor het “Elevation of Privilege Threat Modelling Game”, gepubliceerd onder een Creative Commons Attribution-licentie, als de inspiratie voor Cornucopia en waarvan veel ideeën, vooral de speltheorie, zijn gekopieerd."
+  -
+    id: "T00120"
+    text: "Keith Turpin en contributors van OWASP® “Secure Coding Practices - Quick Reference Guide”, origineel gedoneerd aan OWASP door Boeing, die wordt gebruikt als primaire bron van beveiligingsvereisten informatie om de inhoud van de kaarten te vormen."
+  -
+    id: "T00130"
+    text: "Contributors, supporters, sponsors en vrijwilligers aan de OWASP® ASVS, AppSensor, Developer Guide en Web Framework Security Matrix projects, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC™), en SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” die allemaal worden gebruikt in de cross-referenties die worden verstrekt."
+  -
+    id: "T00140"
+    text: "Playgen voor het geven van een middagseminar over task gamification, en tartanmaker.com voor het online hulpmiddel om het kaartachterpatroon te helpen creëren."
+  -
+    id: "T00145"
+    text: "Huidige en voormalige contributors en leiders aan het OWASP® Cornucopia-project, vooral degenen die het meest recent betrokken waren bij het bijwerken van de cross-referenties, het maken van online versies en het schrijven van scripts om de uitvoerbestanden van Cornucopia dynamisch te genereren."
+  -
+    id: "T00150"
+    text: "Blackfoot (UK) Limited voor het maken en doneren van drukklare ontwerpbestanden, Tom Brennan en de OWASP® Foundation voor het aanzetten tot het creëren van een OWASP-doos en folder en Secure Delivery Ltd voor het ontwikkelen en doneren van Copi, het platform om Cornucopia en EoP online te spelen."
+  -
+    id: "T00161"
+    text: "(vervolg op pagina 20)"
+  -
+    id: "T00162"
+    text: "(vervolg van pagina 10)"
+  -
+    id: "T00170"
+    text: "Colin Watson als auteur en co-projectleider met Grant Ongers, samen met andere OWASP-vrijwilligers die op veel manieren hebben geholpen."
+  -
+    id: "T00180"
+    text: "OWASP® onderschrijft of beveelt geen commerciële producten of diensten aan © 2012-2025 OWASP® Foundation. Dit document is gelicentieerd onder de Creative Commons Attribution-ShareAlike 3.0-licentie"
+  -
+    id: "T00200"
+    text: "Introductie"
+  -
+    id: "T00210"
+    text: "Het idee achter Cornucopia is om ontwikkelingsteams te helpen, met name degenen die Agile-methodologieën gebruiken, om beveiligingsvereisten voor applicaties te identificeren en op beveiliging gebaseerde gebruikersverhalen te ontwikkelen."
+  -
+    id: "T00220"
+    text: "Het idee had al genoeg tijd gehad om te ontwikkelen, maar de motivatie kwam toen SAFECode zijn Practical Security Stories and Security Tasks for Agile Development Environments in juli 2012 publiceerde."
+  -
+    id: "T00230"
+    text: "Het Microsoft SDL-team had al zijn super Elevation of Privilege: The Threat Modeling Game (EoP) gepubliceerd, maar dat leek niet op het soort problemen die ontwikkelingsteams voor webapplicaties meestal moeten aanpakken."
+  -
+    id: "T00240"
+    text: "EoP is een goed concept en een goede spelstrategie, dat is gepubliceerd onder een Creative Commons Attribution-licentie."
+  -
+    id: "T00250"
+    text: "Cornucopia Website App Edition is gebaseerd op de concepten en spelideeën in EoP, maar deze zijn aangepast om relevanter te zijn voor de soorten problemen die ontwikkelaars van e-commercewebsites tegenkomen."
+  -
+    id: "T00260"
+    text: "Het probeert ideeën voor het modelleren van bedreigingen te introduceren in ontwikkelingsteams die Agile-methodologieën gebruiken, of die meer gericht zijn op zwakheden in webapplicaties dan andere soorten softwarekwetsbaarheden of die niet bekend zijn met STRIDE en DREAD."
+  -
+    id: "T00270"
+    text: "Cornucopia Website App Edition is vermeld als een informatiebron in de PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, januari 2013."
+  -
+    id: "T00300"
+    text: "Het kaartspel"
+  -
+    id: "T00310"
+    text: "In plaats van EoP's STRIDE-kleuren (sets van kaarten met bijpassende ontwerpen), zijn Cornucopia-kleuren gebaseerd op de structuur van de OWASP® Secure Coding Practices - Quick Reference Guide (SCP), maar met extra aandacht voor secties in de OWASP® Application Security Verification Standard, de OWASP® Web Application Testing Guide en David Rook's Principles of Secure Development. "
+  -
+    id: "T00320"
+    text: "Deze leverden vijf kleuren op, en een zesde genaamd “Cornucopia“ werd gemaakt voor al het andere: "
+  -
+    id: "T00330"
+    text: "Data validatie & codering (VE)"
+  -
+    id: "T00340"
+    text: "Authenticatie (AT)"
+  -
+    id: "T00350"
+    text: "Sessiebeheer (SM)"
+  -
+    id: "T00360"
+    text: "Autorisatie (AZ)"
+  -
+    id: "T00370"
+    text: "Cryptografie (CR)"
+  -
+    id: "T00380"
+    text: "Cornucopia (C)"
+  -
+    id: "T00390"
+    text: "Net als bij pokerkaarten, bevat elke reeks 13 kaarten (Aas, 2-10, Boer, Vrouw en Koning), maar in tegenstelling tot EoP zijn er ook twee Joker-kaarten."
+  -
+    id: "T00400"
+    text: "De inhoud is voornamelijk afkomstig uit de SCP."
+  -
+    id: "T00500"
+    text: "Mappingen"
+  -
+    id: "T00510"
+    text: "De andere driver voor Cornucopia is om de aanvallen te koppelen aan vereisten en verificatietechnieken."
+  -
+    id: "T00520"
+    text: "Een eerste doel was om te verwijzen naar CWE™ zwakte-ID's, maar deze bleken te talrijk, en in plaats daarvan werd besloten om elke kaart toe te wijzen aan CAPEC™ software-aanvalspatroon-ID's die zelf zijn toegewezen aan CWE's, zodat het gewenste resultaat wordt bereikt."
+  -
+    id: "T00530"
+    text: "Elke kaart is ook toegewezen aan de 36 primaire beveiligingsverhalen in het SAFECode-document, evenals aan de OWASP® Developer Guide Web Application Checklist v4.1.9, ASVS v5.0 en AppSensor (detectie en reactie van toepassingsaanvallen) om teams te helpen hun eigen beveiligingsgerelateerde verhalen voor gebruik in Agile-processen."
+  -
+    id: "T00600"
+    text: "Spelstrategie"
+  -
+    id: "T00610"
+    text: "Afgezien van de inhoudelijke verschillen, zijn de spelregels vrijwel identiek aan die voor EoP."
+  -
+    id: "T00700"
+    text: "De kaarten afdrukken"
+  -
+    id: "T00710"
+    text: "Kijk op de Cornucopia-projectpagina voor het verkrijgen van voorgedrukte kaartspellen op glanzend karton."
+  -
+    id: "T00720"
+    text: "De kaarten kunnen vanuit dit document in zwart-wit worden afgedrukt, maar zijn effectiever in kleur."
+  -
+    id: "T00730"
+    text: "De kaarten op de latere pagina's van dit document zijn zo opgemaakt dat ze op één type voorgescoorde zakelijke A4-kaarten passen."
+  -
+    id: "T00740"
+    text: "Dit bleek de snelste manier om in eerste instantie snel speelkaarten te kunnen maken."
+  -
+    id: "T00750"
+    text: "Avery-productcodes C32015 en C32030 zijn met succes getest, maar alle 10 tot 85 mm x 54 mm kaarten op A4-papier zouden met een kleine aanpassing moeten werken."
+  -
+    id: "T00760"
+    text: "Andere leveranciers van kantoorbenodigdheden zoals Ryman en Sigel produceren soortgelijke vellen"
+  -
+    id: "T00770"
+    text: "Deze kaartvellen zijn niet goedkoop, dus wees voorzichtig bij het beslissen wat te printen en welk medium en printertype te gebruiken."
+  -
+    id: "T00780"
+    text: "De kaarten kunnen natuurlijk gewoon op elk formaat papier of karton worden afgedrukt en vervolgens handmatig worden versneden, of een commerciële drukker zou grotere volumes kunnen printen en de kaarten op maat kunnen snijden."
+  -
+    id: "T00790"
+    text: "De snijlijnen worden weergegeven op de voorlaatste pagina van dit document, maar Avery maakt ook een liggend A4-sjabloon (A-0017-01_L.doc) dat als richtlijn kan worden gebruikt."
+  -
+    id: "T00800"
+    text: "Afdrukken en versnijden kan ongeveer een uur duren, en het gebruik van een snellere printer helpt."
+  -
+    id: "T00810"
+    text: "Probeer af te drukken, voeg een hogere kwaliteit toe om de leesbaarheid te vergroten."
+  -
+    id: "T00820"
+    text: "Een optioneel kaartontwerp (in OWASP® tartan) is verstrekt als de laatste pagina van dit document."
+  -
+    id: "T00830"
+    text: "Er is geen speciale uitlijning nodig."
+  -
+    id: "T00840"
+    text: "Dubbelzijdig afdrukken vereist speciale zorg."
+  -
+    id: "T00850"
+    text: "Je kunt de kaartvlakken of de achterkant aanpassen aan de voorkeuren van je eigen organisatie."
+  -
+    id: "T00900"
+    text: "Maatwerk"
+  -
+    id: "T00910"
+    text: "Nadat je Cornucopia een paar keer hebt gebruikt, heb je misschien het gevoel dat sommige kaarten minder relevant zijn voor je applicaties, of dat de bedreigingen anders zijn voor je organisatie."
+  -
+    id: "T00920"
+    text: "Bewerk dit document zelf om de kaarten geschikter te maken voor je teams, of maak volledig nieuwe kaartspellen."
+  -
+    id: "T01000"
+    text: "Geef feedback"
+  -
+    id: "T01010"
+    text: "Als je ideeën of feedback hebt over het gebruik van OWASP® Cornucopia, deel deze dan alstublieft."
+  -
+    id: "T01020"
+    text: "Nog beter als je alternatieve versies van de kaarten maakt, of professionele drukklare versies maakt, deel dat dan met de vrijwilligers die deze editie hebben gemaakt en met de bredere gemeenschap voor applicatieontwikkeling en applicatiebeveiliging."
+  -
+    id: "T01030"
+    text: "De beste plaats om te bespreken of bij te dragen is in de lijst of groep voor het OWASP-project:"
+  -
+    id: "T01040"
+    text: "Lijst/Groep"
+  -
+    id: "T01050"
+    text: "Project startpagina"
+  -
+    id: "T01060"
+    text: "Alle OWASP documenten en hulpmiddelen zijn gratis te downloaden en te gebruiken."
+  -
+    id: "T01070"
+    text: "OWASP® Cornucopia is een open source project en is gratis te downloaden en te gebruiken."
+  -
+    id: "T01100"
+    text: "Instructies"
+  -
+    id: "T01110"
+    text: "De tekst op elke kaart beschrijft een aanval, maar de aanvaller krijgt een naam die uniek is voor alle kaarten."
+  -
+    id: "T01120"
+    text: "De naam kan een computer systeem (bijv. de database, het bestandssysteem, een andere applicatie, een gerelateerde service, een botnet), een individu (bijv. een burger, een klant, een cliënt, een werknemer, een crimineel, een spion), of zelfs een groep mensen (bijv. een concurrentie organisatie, activisten met een gemeenschappelijke doelstelling) voorstellen."
+  -
+    id: "T01130"
+    text: "De aanvaller bevindt zich mogelijk op afstand op een ander apparaat/locatie, of lokaal/intern met toegang tot hetzelfde apparaat, dezelfde host of hetzelfde netwerk als waarop de applicatie wordt uitgevoerd."
+  -
+    id: "T01140"
+    text: "De aanvaller wordt altijd genoemd aan het begin van elke beschrijving"
+  -
+    id: "T01150"
+    text: "Een voorbeeld is:"
+  -
+    id: "T01160"
+    text: "William heeft controle over het genereren van sessie-ID's."
+  -
+    id: "T01170"
+    text: "Dit betekent dat de aanvaller (William) nieuwe sessie-ID's kan maken die de toepassing accepteert."
+  -
+    id: "T01180"
+    text: "De aanvallen zijn voornamelijk afgeleid van de beveiligingsvereisten die zijn vermeld in het SCP, v2, maar vervolgens aangevuld met verificatiedoelstellingen uit de OWASP® “Application Security Verification Standard”, de op beveiliging gerichte verhalen in SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments”, en tot slot een overzicht van de kaarten in EOP. in OWASP Cornucopia Website Edition v3.0 de SCP-toewijzing was vervangen door de OWASP Developer Guide Web Application Checklist"
+  -
+    id: "T01190"
+    text: "Meer informatie over elke kaart is beschikbaar op de OWASP Website op "
+  -
+    id: "T01200"
+    text: "Hulpmiddelen voor het opzoeken van aanvallen en vijf bronnen worden op de meeste kaarten geleverd:"
+  -
+    id: "T01210"
+    text: "Vereisten in “OWASP DevGuide - Web Checklist”, v4.1.9, OWASP®, juli 2025 "
+  -
+    id: "T01220"
+    text: "Verificatie-ID's in OWASP® “Application Security Verification Standard”"
+  -
+    id: "T01230"
+    text: "Aanvalsdetectiepunt-ID's in “AppSensor”, OWASP®, augustus 2010-2015"
+  -
+    id: "T01240"
+    text: "ID's in “Common Attack Pattern Enumeration and Classification (CAPEC™)”, v3.9, Mitre Corporation, november 2015"
+  -
+    id: "T01250"
+    text: "Op veiligheid gerichte verhalen in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, juli 2012"
+  -
+    id: "T01260"
+    text: "Een look-up betekent dat de aanval is opgenomen in het item waarnaar wordt verwezen, maar niet noodzakelijkerwijs de volledige bedoeling ervan omvat."
+  -
+    id: "T01270"
+    text: "Voor gestructureerde gegevens zoals CAPEC, wordt de meest specifieke verwijzing gegeven, maar soms wordt een cross-references gegeven die ook meer specifieke (kinder)voorbeelden bevat."
+  -
+    id: "T01280"
+    text: "Er zijn geen zoekopdrachten voor de zes azen en twee jokers."
+  -
+    id: "T01290"
+    text: "In plaats daarvan hebben deze kaarten enkele algemene tips in cursieve tekst."
+  -
+    id: "T01300"
+    text: "Het is mogelijk om Cornucopia op veel verschillende manieren te spelen."
+  -
+    id: "T01301"
+    text: "Lees pagina's 11-19 voor meer informatie over het spelen."
+  -
+    id: "T01310"
+    text: "Hier is een manier, online gedemonstreerd in een video op "
+  -
+    id: "T01311"
+    text: " wat het nieuwe (mei 2015) score/recordblad gebruikt op "
+  -
+    id: "T01400"
+    text: "Voorbereidingen"
+  -
+    id: "T01410"
+    text: "Verkrijg een kaartspel of print uw eigen kaartspel Cornucopia-kaarten (zie pagina 2 van dit document) en scheid/knip de kaarten uit"
+  -
+    id: "T01411"
+    text: "Gebruik de kaarten in dit kaartspel"
+  -
+    id: "T01420"
+    text: "Identificeer een applicatie of applicatieproces om te beoordelen; dit kan een concept, ontwerp of een daadwerkelijke implementatie zijn"
+  -
+    id: "T01430"
+    text: "Creëer een data flow diagram, user stories of andere artefacten om de beoordeling te vergemakkelijken"
+  -
+    id: "T01431"
+    text: "Dit zal helpen de vraag te beantwoorden: “Waar werken we aan?”"
+  -
+    id: "T01440"
+    text: "Identificeer en nodig een groep van 3-6 architecten, ontwikkelaars, testers en andere zakelijke belanghebbenden samen uit en ga rond een tafel zitten (probeer iemand die redelijk bekend is met applicatiebeveiliging erbij te betrekken)"
+  -
+    id: "T01450"
+    text: "Houd wat prijzen bij de hand (gouden sterren, chocolade, pizza, bier of bloemen, afhankelijk van je kantoorcultuur)"
+  -
+    id: "T01500"
+    text: "Speel"
+  -
+    id: "T01510"
+    text: "Eén kleur - Cornucopia - fungeert als troef."
+  -
+    id: "T01520"
+    text: "Azen zijn hoog (d.w.z. ze verslaan koningen)."
+  -
+    id: "T01530"
+    text: "Het helpt als er een niet-speler is om de problemen en scores bij te houden."
+  -
+    id: "T01540"
+    text: "Verwijder de jokers en een paar kaarten met een lage score (2, 3, 4) uit de Cornucopia-reeks om ervoor te zorgen dat elke speler hetzelfde aantal kaarten heeft"
+  -
+    id: "T01550"
+    text: "Schud de stapel en deel alle kaarten"
+  -
+    id: "T01560"
+    text: "Om te beginnen, kies willekeurig een speler die de eerste kaart zal spelen - ze kunnen elke kaart uit hun hand spelen behalve die van de troefkleur - Cornucopia"
+  -
+    id: "T01570"
+    text: "Om een kaart te spelen, moet elke speler deze hardop voorlezen en uitleggen (zie het online Wiki Deck voor tips) hoe de dreiging van toepassing kan zijn (de speler krijgt een punt voor aanvallen die mogelijk werken waarvan de groep denkt dat een bruikbare bug) - probeer in dit stadium geen oplossingen te bedenken en sluit een bedreiging niet uit alleen omdat je denkt dat deze al is verholpen - iemand noteert de kaart en noteert de problemen die aan de orde zijn gesteld"
+  -
+    id: "T01571"
+    text: "Als een speler vastloopt, vraag hem of haar dan om de QR-code op de kaart te scannen om toegang te krijgen tot de online kaartpagina en het gedeelte te lezen met de titel: “Wat kan er misgaan?”"
+  -
+    id: "T01580"
+    text: "Speel met de klok mee. Elke persoon moet een kaart op dezelfde manier spelen; als je een kaart van de overeenkomende eerste reeks hebt, moet je een van die kaarten spelen, anders kunnen ze een kaart uit een andere reeks spelen. "
+  -
+    id: "T01590"
+    text: "Alleen een hogere kaart van dezelfde kleur, of de hoogste kaart in de troefkleur Cornucopia, wint de hand."
+  -
+    id: "T01600"
+    text: "Degene die de ronde wint, leidt de volgende ronde (d.w.z. zij spelen eerst), en bepaalt zo de volgende leidende kleur"
+  -
+    id: "T01610"
+    text: "Herhaal totdat alle kaarten zijn gespeeld"
+  -
+    id: "T01700"
+    text: "Puntentelling"
+  -
+    id: "T01710"
+    text: "Het doel is om toepasbare bedreigingen te identificeren en handen te winnen (rondes):"
+  -
+    id: "T01720"
+    text: "Score +1 voor elke kaart die je kan identificeren als een geldige bedreiging voor de betreffende toepassing"
+  -
+    id: "T01730"
+    text: "Scoor +1 als je een ronde wint"
+  -
+    id: "T01740"
+    text: "Als alle kaarten zijn gespeeld, wint degene die de meeste punten heeft"
+  -
+    id: "T01800"
+    text: "Sluiting"
+  -
+    id: "T01810"
+    text: "Beoordeel alle van toepassing zijnde dreigingen en de bijbehorende beveiligingseisen"
+  -
+    id: "T01811"
+    text: "Gebruik de QR-codes op de kaarten om naar de online kaartpagina te gaan en lees het gedeelte met de titel: “Wat gaan we hieraan doen?”"
+  -
+    id: "T01820"
+    text: "Creëer user stories, specificaties en testcases zoals vereist voor uw ontwikkelingsmethodologie."
+  -
+    id: "T01900"
+    text: "Alternatieve spelregels"
+  -
+    id: "T01910"
+    text: "Als je nieuw bent in het spel, verwijder dan eerst de azen en twee jokerkaarten."
+  -
+    id: "T01920"
+    text: "Nadat de deelnemers meer vertrouwd zijn met het proces, kunnen de Joker-kaarten weer worden toegevoegd."
+  -
+    id: "T01930"
+    text: "Naast de hierboven beschreven regels van het “troefkaartspel” die erg lijken op de EoP, kan het kaartspel ook worden gespeeld als het “eenentwintig kaartspel” (ook bekend als “ponton” of “blackjack”), aangezien dat normaliter het aantal kaarten vermindert dat in elke ronde wordt gespeeld."
+  -
+    id: "T01940"
+    text: "Tot de deelnemers tevreden zijn met het nut van het spel kunnen zij oefenen op een denkbeeldige applicatie, of zelfs een toekomstige geplande applicatie, in plaats van te proberen fouten te vinden in bestaande applicaties."
+  -
+    id: "T01950"
+    text: "Overweeg gewoon met één kleur te spelen om een kortere sessie te maken - maar probeer alle kleuren voor elk project te gebruiken."
+  -
+    id: "T01960"
+    text: "Of nog beter, speel gewoon één hand met een aantal vooraf geselecteerde kaarten en scoor alleen op het vermogen om beveiligingsvereisten te identificeren."
+  -
+    id: "T01970"
+    text: "Speel wellicht één spel van elke kleur elke dag van de week, als de deelnemers niet lang genoeg de tijd kunenn nemen voor een volledig kaartspel."
+  -
+    id: "T01980"
+    text: "Sommige teams hebben de voorkeur om een volledige hand kaarten te spelen en dan na elke ronde te bespreken wat er op de kaarten staat (in plaats van nadat elke persoon een kaart heeft gespeeld)."
+  -
+    id: "T01990"
+    text: "Een andere suggestie is dat als een speler de kaart die relevant is niet identificeert, andere spelers ideeën kunnen voorstellen en hen mogelijk het punt voor de kaart laat verdienen."
+  -
+    id: "T02000"
+    text: "Overweeg om extra punten toe te kennen voor bijzonder goede bijdragen."
+  -
+    id: "T02010"
+    text: "Je kunt zelfs alleen spelen."
+  -
+    id: "T02020"
+    text: "Gebruik de kaarten om als thought-provokers te fungeren."
+  -
+    id: "T02030"
+    text: "Meer mensen erbij betrekken zal voordelig zijn."
+  -
+    id: "T02040"
+    text: "In de EoP-richtlijnen van Microsoft raden ze valsspelen aan als een goede spelstrategie."
+  -
+    id: "T02100"
+    text: "Ontwikkelingsframework-specifieke aangepaste kaartdecks"
+  -
+    id: "T02110"
+    text: "Er kunnen ingebouwde beveiligingscontroles zijn in sommige veelgebruikte talen en frameworks voor web- en mobiele applicatieontwikkeling."
+  -
+    id: "T02120"
+    text: "Bij bepaalde voorwaarden is het handig om na te gaan hoe het gebruik van deze controles de identificatie van aanvullende vereisten kan vereenvoudigen - op voorwaarde natuurlijk dat de controles correct zijn opgenomen, ingeschakeld en geconfigureerd."
+  -
+    id: "T02130"
+    text: "Overweeg om kaarten uit de decks te verwijderen als je er zeker van bent dat ze worden behandeld door de manier waarop je de taal/het framework gebruikt."
+  -
+    id: "T02140"
+    text: "Elementen tussen haakjes zijn “misschien”."
+  -
+    id: "T02200"
+    text: "Interne coding standards en bibliotheken"
+  -
+    id: "T02210"
+    text: "Voeg je eigen lijst met uitgesloten kaarten toe op basis van de coding standards van je organisatie (op voorwaarde dat ze worden bevestigd door de juiste verificatiestappen in de ontwikkelingslevenscyclus)."
+  -
+    id: "T02220"
+    text: "Jouw coding standards en bibliotheken"
+  -
+    id: "T02230"
+    text: "Data validatie en codering"
+  -
+    id: "T02240"
+    text: "[jouw lijst]"
+  -
+    id: "T02250"
+    text: "Authenticatie"
+  -
+    id: "T02260"
+    text: "[jouw lijst]"
+  -
+    id: "T02270"
+    text: "Session Management"
+  -
+    id: "T02280"
+    text: "[jouw lijst]"
+  -
+    id: "T02290"
+    text: "Authorization"
+  -
+    id: "T02300"
+    text: "[jouw lijst]"
+  -
+    id: "T02310"
+    text: "Cryptografie"
+  -
+    id: "T02320"
+    text: "[jouw lijst]"
+  -
+    id: "T02330"
+    text: "Cornucopia"
+  -
+    id: "T02340"
+    text: "[jouw lijst]"
+  -
+    id: "T02400"
+    text: "Compliance eis decks"
+  -
+    id: "T02410"
+    text: "Maak een kleiner kaartspel door alleen kaarten op te nemen voor een bepaalde compliance eis."
+  -
+    id: "T02420"
+    text: "Compliance eis"
+  -
+    id: "T02430"
+    text: "Data validatie en codering"
+  -
+    id: "T02440"
+    text: "[compliance lijst]"
+  -
+    id: "T02450"
+    text: "Authenticatie"
+  -
+    id: "T02460"
+    text: "[compliance lijst]"
+  -
+    id: "T02470"
+    text: "Sessie Management"
+  -
+    id: "T02480"
+    text: "[compliance lijst]"
+  -
+    id: "T02490"
+    text: "Authorisatie"
+  -
+    id: "T02500"
+    text: "[compliance lijst]"
+  -
+    id: "T02510"
+    text: "Cryptografie"
+  -
+    id: "T02520"
+    text: "[compliance lijst]"
+  -
+    id: "T02530"
+    text: "Cornucopia"
+  -
+    id: "T02540"
+    text: "[compliance lijst]"
+  -
+    id: "T02600"
+    text: "Veelgestelde vragen"
+  -
+    id: "T02610"
+    text: "1. Mag ik het spel bewerken, bijvoorbeeld door te kopiëren of iets te wijzigen?"
+  -
+    id: "T02620"
+    text: "Ja natuurlijk."
+  -
+    id: "T02630"
+    text: "Alle OWASP-materialen zijn vrij om mee te doen wat je wilt, op voorwaarde dat je voldoet aan de Creative Commons Attribution-ShareAlike 3.0-licentie. "
+  -
+    id: "T02640"
+    text: "Als je een nieuwe versie maakt, zou je deze misschien kunnen doneren aan het OWASP® Cornucopia-project?"
+  -
+    id: "T02650"
+    text: "2. Hoe kan ik mee helpen?"
+  -
+    id: "T02660"
+    text: "Stuur ideeën, suggesties of aanbod om te helpen naar de mailinglijst van het project."
+  -
+    id: "T02670"
+    text: "3. Hoe zijn de namen van de aanvallers gekozen?"
+  -
+    id: "T02680"
+    text: "EoP begint elke beschrijving met woorden als 'Een aanvaller kan...'."
+  -
+    id: "T02690"
+    text: "Deze moeten als een aanval worden geformuleerd, maar ik was niet enthousiast over de anonieme terminologie. Ik wilde iets boeienders en gebruikte daarom echte namen."
+  -
+    id: "T02700"
+    text: "Deze kunnen worden gezien als externe of interne mensen of aliassen voor computersystemen. Maar in plaats van alleen willekeurige namen, bedacht ik hoe ze het OWASP-gemeenschapsaspect zouden kunnen weerspiegelen. "
+  -
+    id: "T02710"
+    text: "Daarom gebruik ik, afgezien van 'Alice en Bob', de opgegeven (voor)namen van huidige en recente OWASP-medewerkers en bestuursleden (in willekeurige volgorde), en selecteerde vervolgens willekeurig de resterende 50 of zo namen uit de huidige lijst van het betalen van individuele OWASP-leden."
+  -
+    id: "T02720"
+    text: "Er is geen enkele naam meer dan één keer gebruikt, en waar mensen twee persoonlijke namen hadden opgegeven, liet ik een deel vallen om te proberen ervoor te zorgen dat niemand gemakkelijk kan worden geïdentificeerd."
+  -
+    id: "T02730"
+    text: "Namen zijn niet opzettelijk toegewezen aan een bepaalde aanval, verdediging of vereiste. De culturele en gendermix weerspiegelt eenvoudig deze bronnen van namen en is niet bedoeld om wereldrepresentatief te zijn."
+  -
+    id: "T02740"
+    text: "In v1.20 is de naam op VE-10 veranderd om de nieuwe co-leider van het project weer te geven - deze kaart is ook de enige met twee namen in de aanval."
+  -
+    id: "T02750"
+    text: "4. Waarom staan er geen afbeeldingen op de kaartvlakken?"
+  -
+    id: "T02760"
+    text: "Er staat best veel tekst op de kaartjes en de cross-references nemen ook ruimte in beslag."
+  -
+    id: "T02770"
+    text: "Maar het zou goed zijn om extra ontwerpelementen toe te voegen."
+  -
+    id: "T02790"
+    text: "5. Staan de aanvallen gerangschikt op het nummer op de kaart?"
+  -
+    id: "T02800"
+    text: "Slechts bij benadering."
+  -
+    id: "T02810"
+    text: "Het risico is afhankelijk van de toepassing en de organisatie, vanwege verschillende beveiligings- en nalevingsvereisten, dus uw eigen severity rating kan de kaarten in een andere volgorde plaatsen dan de nummers op de kaarten."
+  -
+    id: "T02820"
+    text: "6. Hoe lang duurt het om een ronde kaarten te spelen met het volledige kaartspel?"
+  -
+    id: "T02830"
+    text: "Dit hangt af van de omvang van de applicatie, de hoeveelheid discussie en hoe vertrouwd de spelers zijn met application vulnerability terminologie."
+  -
+    id: "T02840"
+    text: "Maar neem wellicht 1,5 tot 2,0 uur voor 4-6 personen."
+  -
+    id: "T02850"
+    text: "7. Wat voor soort mensen zouden het spel moeten spelen?"
+  -
+    id: "T02860"
+    text: "Probeer altijd een mix van rollen te hebben die alternatieve perspectieven kunnen bijdragen."
+  -
+    id: "T02870"
+    text: "Neem iemand mee die een redelijke kennis heeft van application vulnerability terminologie."
+  -
+    id: "T02880"
+    text: "Probeer anders een mix van architecten, ontwikkelaars, testers en een relevante projectmanager of bedrijfseigenaar."
+  -
+    id: "T02890"
+    text: "8. Wie moet aantekeningen maken en scores opschrijven?"
+  -
+    id: "T02900"
+    text: "Het is beter als iemand anders, die het spel niet speelt, aantekeningen maakt over de geïdentificeerde vereisten en besproken problemen."
+  -
+    id: "T02910"
+    text: "Dit kan gebruikt worden als training voor een meer junior ontwikkelaar, of uitgevoerd worden door de projectmanager."
+  -
+    id: "T02920"
+    text: "Sommige organisaties hebben een opname gemaakt om achteraf te bekijken voor wanneer de requirements formeel zijn opgeschreven."
+  -
+    id: "T02930"
+    text: "9. Moeten we altijd het volledige spel kaarten gebruiken?"
+  -
+    id: "T02940"
+    text: "Nee."
+  -
+    id: "T02950"
+    text: "Een kleiner kaartspel is sneller te spelen."
+  -
+    id: "T02960"
+    text: "Begin je eerste spel met slechts genoeg kaarten voor twee of drie rondes."
+  -
+    id: "T02970"
+    text: "Overweeg altijd om kaarten te verwijderen die helemaal niet geschikt zijn voor de doeltoepassing of functie die wordt beoordeeld."
+  -
+    id: "T02980"
+    text: "Voor de eerste paar keer dat mensen het spel spelen, is het meestal ook beter om de azen en de twee jokers te verwijderen."
+  -
+    id: "T02990"
+    text: "Het is ook gebruikelijk om het spel zonder troefkleur te spelen totdat mensen meer bekend zijn met het idee."
+  -
+    id: "T03000"
+    text: "10. Wat moeten spelers doen als ze een aaskaart hebben met de tekst “een nieuwe X aanval”?"
+  -
+    id: "T03010"
+    text: "De speler kan elke aanval verzinnen waarvan hij of zij denkt dat deze geldig is, maar moet overeenkomen met de kleur van de kaart (bijvoorbeeld Gegevensvalidatie en -codering)."
+  -
+    id: "T03020"
+    text: "Nieuwe spelers kunnen beter deze kaarten verwijderen om mee te beginnen (zie ook FAQ 9)."
+  -
+    id: "T03060"
+    text: "11. Mijn bedrijf wil een eigen versie van OWASP® Cornucopia afdrukken: welke licentie moeten we naar verwijzen?"
+  -
+    id: "T03070"
+    text: "Zie het volledige antwoord op deze vraag op de projectwebsite op"
+  -
+    id: "T03100"
+    text: "Wijzig change log"
+  -
+    id: "T03110"
+    text: "Versie / Datum"
+  -
+    id: "T03120"
+    text: "Opmerkingen"
+  -
+    id: "T03130"
+    text: "0.1"
+  -
+    id: "T03140"
+    text: "Origineel concept"
+  -
+    id: "T03150"
+    text: "0.2"
+  -
+    id: "T03160"
+    text: "Concept versie herzien en bijgewerkt"
+  -
+    id: "T03170"
+    text: "0.3"
+  -
+    id: "T03180"
+    text: "Concept heeft OWASP® SCP-mailinglijst aangekondigd voor commentaar."
+  -
+    id: "T03190"
+    text: "0.4"
+  -
+    id: "T03200"
+    text: "Speelregels bijgewerkt op basis van feedback tijdens workshops."
+  -
+    id: "T03210"
+    text: "Toegevoegde verwijzing naar PCI SSC-informatiesupplement: PCI DSS-richtlijnen voor e-commerce."
+  -
+    id: "T03220"
+    text: "Beschrijvende tekst uitgebreid en bijgewerkt."
+  -
+    id: "T03230"
+    text: "Sectie met bijdragers, paginanummering, veelgestelde vragen en wijzigingslogboek toegevoegd."
+  -
+    id: "T03240"
+    text: "1"
+  -
+    id: "T03250"
+    text: "Release."
+  -
+    id: "T03260"
+    text: "1.01"
+  -
+    id: "T03270"
+    text: "Framework-specifieke kaartspel discussie toegevoegd"
+  -
+    id: "T03280"
+    text: "Aanvullende FAQ's gemaakt."
+  -
+    id: "T03290"
+    text: "Beschrijvende tekst bijgewerkt."
+  -
+    id: "T03300"
+    text: "Nieuwe cover image en vorige cover image naar achteren verplaatst."
+  -
+    id: "T03310"
+    text: "Snijlijnen toegevoegd."
+  -
+    id: "T03320"
+    text: "FAQ's 5 en 6 toegevoegd."
+  -
+    id: "T03330"
+    text: "Aanvalbeschrijvingen op kaarten met getinte achtergrond veranderd in zwart (van donkergrijs)."
+  -
+    id: "T03340"
+    text: "Project contributors toegevoegd."
+  -
+    id: "T03350"
+    text: "1.02"
+  -
+    id: "T03360"
+    text: "Waarschuwing over tijd om af te drukken toegevoegd."
+  -
+    id: "T03370"
+    text: "Aanvullende alternatieve spelregels toegevoegd (eenentwintig, speel een kaartspel over een week, speel de volledige hand en bespreek dan)."
+  -
+    id: "T03380"
+    text: "Compliance deck concept toegevoegd."
+  -
+    id: "T03390"
+    text: "FAQ's 5 en 6 toegevoegd."
+  -
+    id: "T03400"
+    text: "Aanvalbeschrijvingen op kaarten met getinte achtergrond veranderd in zwart (van donkergrijs)."
+  -
+    id: "T03410"
+    text: "Project contributors toegevoegd."
+  -
+    id: "T03420"
+    text: "1.03"
+  -
+    id: "T03430"
+    text: "Kleine tekstwijzigingen op twee kaarten."
+  -
+    id: "T03440"
+    text: "OWASP® SCP en ASVS cross-references gecontroleerd en bijgewerkt."
+  -
+    id: "T03450"
+    text: "Codeletters toegevoegd voor kaartkleuren."
+  -
+    id: "T03460"
+    text: "Alle resterende aanvalsbeschrijvingen op kaarten zijn gewijzigd in zwart (van donkergrijs) en de achtergrondkleuren zijn gewijzigd om meer contrast te bieden en de leesbaarheid te vergroten."
+  -
+    id: "T03470"
+    text: "1.04"
+  -
+    id: "T03480"
+    text: "Tekst “password change, password change,”, gecorrigeerd in “password change, password recovery,”, op Queen of Authentication-kaart. "
+  -
+    id: "T03490"
+    text: "1.05"
+  -
+    id: "T03500"
+    text: "Updates van alternatieve spelregels."
+  -
+    id: "T03510"
+    text: "Aanvullende FAQ's gemaakt."
+  -
+    id: "T03520"
+    text: "Contributors geüpdatet."
+  -
+    id: "T03530"
+    text: "Podcast- en videolinks toegevoegd."
+  -
+    id: "T03540"
+    text: "1.1"
+  -
+    id: "T03550"
+    text: "Change log datum gecorrigeerd voor v1.05. Cross-references geüpdatet voor 2014 versie van ASVS. "
+  -
+    id: "T03560"
+    text: "Contributors geüpdatet."
+  -
+    id: "T03570"
+    text: "Kleine tekstwijzigingen op kaarten om de leesbaarheid te verbeteren."
+  -
+    id: "T03580"
+    text: "1.2"
+  -
+    id: "T03590"
+    text: "Video vermeld/gelinkt"
+  -
+    id: "T03600"
+    text: "Apart scoreblad vermeld/gekoppeld."
+  -
+    id: "T03610"
+    text: "Vorige ingesloten scorebladpagina's verwijderd"
+  -
+    id: "T03620"
+    text: "Correctie (geïdentificeerd door Tom Brennan) en toevoeging aan "
+  -
+    id: "T03630"
+    text: "tekst op kaart 8 Authenticatie."
+  -
+    id: "T03640"
+    text: "Oana Cornea en andere deelnemers aan de AppSec EU 2015-projecttop toegevoegd aan de lijst van contributors. "
+  -
+    id: "T03650"
+    text: "Darío De Filippis toegevoegd als project co-leider. "
+  -
+    id: "T03660"
+    text: "Wiki Deck link toegevoegd"
+  -
+    id: "T03670"
+    text: "De cross-references zijn geupdate voor ASVS v3.0.1 en CAPEC™ v3.9. Kleine tekstwijzigingen in een klein aantal kaarten. "
+  -
+    id: "T03680"
+    text: "“-EN” toegevoegd aan versienummer ter voorbereiding op “-ES”-versie."
+  -
+    id: "T03690"
+    text: "Susana Romaniz toegevoegd als contributor aan de Spaanse vertaling."
+  -
+    id: "T03700"
+    text: "Kleine tekstwijzigingen in instructies en veelgestelde vragen."
+  -
+    id: "T03710"
+    text: "2.0"
+  -
+    id: "T03720"
+    text: "De cross-references zijn gemigreerd van ASVS v3.0.1 naar ASVS v4.0 door Johan Sydseter. "
+  -
+    id: "T03730"
+    text: "2.1"
+  -
+    id: "T03740"
+    text: "Italiaanse vertaling toegevoegd door Ruggero DallAglio"
+  -
+    id: "T03750"
+    text: "2.1"
+  -
+    id: "T03760"
+    text: "Portugese vertaling toegevoegd door André Ferreira"
+  -
+    id: "T03770"
+    text: "2.2"
+  -
+    id: "T03771"
+    text: "De cross-references zijn gemigreerd van SCP naar de DevGuide Web Checklist v4.1.9."
+  -
+    id: "T03772"
+    text: "3.0"
+  -
+    id: "T03773"
+    text: ASVS is gemigreerd van v4.0.3 naar v5.0. De tekst op de kaarten is bijgewerkt om MFA en passkeys als optie voor authenticatie toe te voegen. Kaarten binnen de session management suite zijn bijgewerkt om af te stemmen op moderne sessiebeheerpraktijken"
+  -
+    id: "T03774"
+    text: "3.0"
+  -
+    id: "T03775"
+    text: "STRIDE categorieën zijn toegevoegd aan elke kaart"
+  -
+    id: "T03800"
+    text: "Project medewerkers"
+  -
+    id: "T03810"
+    text: "Alle OWASP projecten zijn afhankelijk van de vrijwillige inspanningen van mensen in de softwareontwikkeling en informatiebeveiligingssector."
+  -
+    id: "T03820"
+    text: "Zij hebben hun tijd en energie gegeven om suggesties te maken, feedback te geven, documentatie te schrijven, het spel te proberen en het concept te promoten."
+  -
+    id: "T03830"
+    text: "Zonder al hun inspanningen zou het project niet zover zijn gevorderd."
+  -
+    id: "T03840"
+    text: "Neem rechtstreeks contact op met de mailinglijst of met de projectleiders als er iemand ontbreekt op de onderstaande lijsten."
+  -
+    id: "T03850"
+    text: "OWASP's hardwerkende medewerkers."
+  -
+    id: "T03860"
+    text: "Aanwezigen bij OWASP® Londen, OWASP® Manchester, OWASP® Nederland en OWASP® Schotland Chapter meetings en de London Gamification meetup, die nuttige suggesties deden en uitdagende vragen stelden"
+  -
+    id: "T03870"
+    text: "Blackfoot UK Limited voor het cadeau geven van print-ready design files en honderden professioneel geprinte kaartdozen voor distributie per post en bij OWASP chapter meetings"
+  -
+    id: "T03880"
+    text: 'OWASP® NYC voor het creëren van een OWASP box design en het distributing packs tijdens AppSec USA 2014.'
+  -
+    id: "T03900"
+    text: "Podcasts en video's"
+  -
+    id: "T03910"
+    text: "De volgende ondersteunende OWASP® Cornucopia bronnen zijn beschikbaar online:"
+  -
+    id: "T03920"
+    text: "Video - Het gebruik van de kaarten, gemaakt tijdens het OWASP EU Tour 2015 project summit, 20 mei 2015"
+  -
+    id: "T03930"
+    text: "Podcast interview, OWASP® 24/7 Podcast kanaal, 21 maart 2014"
+  -
+    id: "T03940"
+    text: " Video van presentatie, OWASP® EU Tour 2013 Londen, 3 juni 2013"
+  -
+    id: "T03950"
+    text: "Zie de project website voor verdere informatie en presentatie materialen."

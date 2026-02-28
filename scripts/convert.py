@@ -10,6 +10,7 @@ import subprocess
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
+from defusedxml import ElementTree as DefusedElTree
 from typing import Any, Dict, List, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
@@ -150,6 +151,31 @@ def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tupl
         return False, f"Output directory outside base directory: {output_dir}", ""
 
     return True, source_path, output_dir
+
+
+def _safe_extractall(archive: zipfile.ZipFile, target_dir: str) -> None:
+    """Extract zip members only if their resolved paths stay within target_dir.
+
+    Prevents Zip Slip / path traversal (CWE-22) by resolving symlinks and all
+    '..' components before comparing each member path against the target root.
+    Degenerate root entries ('.', '', './') are skipped rather than extracted,
+    because they carry no file content and resolve to the target directory itself.
+    """
+    abs_target = os.path.realpath(target_dir)
+    for member in archive.infolist():
+        member_path = os.path.realpath(os.path.join(abs_target, member.filename))
+
+        # Root/degenerate entries ('.', '', './') resolve to abs_target itself.
+        # They are directory metadata with no content; skip them safely.
+        if member_path == abs_target:
+            continue
+
+        # Block any member whose resolved path escapes the target directory.
+        # The os.sep suffix prevents prefix collisions (e.g. /tmp/d vs /tmp/d_evil).
+        if not member_path.startswith(abs_target + os.sep):
+            raise ValueError(f"Zip Slip blocked: member '{member.filename}' would extract outside target directory")
+
+        archive.extract(member, target_dir)
 
 
 def _validate_command_args(cmd_args: List[str]) -> bool:
@@ -403,10 +429,12 @@ def main() -> None:
     logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
-    if convert_vars.args.pdf and not convert_vars.can_convert_to_pdf and not convert_vars.args.debug:
+    libreoffice_available = bool(shutil.which("libreoffice") or shutil.which("soffice"))
+    can_make_pdf = convert_vars.can_convert_to_pdf or libreoffice_available
+    if convert_vars.args.pdf and not can_make_pdf and not convert_vars.args.debug:
         logging.error(
             "Cannot convert to pdf on this system. "
-            "Pdf conversion is available on Windows and Mac, if MS Word is installed"
+            "Pdf conversion is available on Windows and Mac (with MS Word), or on any system with LibreOffice."
         )
         return
 
@@ -1031,7 +1059,7 @@ def save_odt_file(template_doc: str, language_dict: Dict[str, str], output_file:
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as odt_archive:
-        odt_archive.extractall(temp_output_path)
+        _safe_extractall(odt_archive, temp_output_path)
 
     # ODT text is usually in content.xml and sometimes styles.xml
     targets = ["content.xml", "styles.xml"]
@@ -1061,7 +1089,7 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
-        idml_archive.extractall(temp_output_path)
+        _safe_extractall(idml_archive, temp_output_path)
         logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
@@ -1193,7 +1221,7 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        tree = ElTree.parse(filename)
+        tree = DefusedElTree.parse(filename)
     except Exception as e:
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return

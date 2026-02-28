@@ -92,9 +92,9 @@ class TranslationChecker:
         for tag_id, eng_text in english_tags.items():
             if tag_id not in trans_tags:
                 missing.append(tag_id)
-            elif not trans_tags[tag_id]:
+            elif not trans_tags[tag_id] or not trans_tags[tag_id].strip():
                 empty.append(tag_id)
-            elif trans_tags[tag_id] == eng_text:
+            elif trans_tags[tag_id].strip() == eng_text.strip():
                 untranslated.append(tag_id)
 
         return {
