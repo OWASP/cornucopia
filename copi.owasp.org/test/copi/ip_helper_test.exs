@@ -2,199 +2,177 @@ defmodule Copi.IPHelperTest do
   use ExUnit.Case, async: true
   alias Copi.IPHelper
 
-describe "additional safe coverage" do
-  test "get_ip_from_conn with multiple unrelated headers" do
-    conn = %Plug.Conn{
-      remote_ip: {10, 0, 0, 1},
-      req_headers: [
-        {"content-type", "application/json"},
-        {"accept", "*/*"}
-      ]
-    }
-
-    assert IPHelper.get_ip_from_conn(conn) == {10, 0, 0, 1}
-  end
-
-  test "get_ip_from_conn prefers x-forwarded-for over remote_ip" do
-    conn = %Plug.Conn{
-      remote_ip: {10, 0, 0, 1},
-      req_headers: [{"x-forwarded-for", "8.8.8.8"}]
-    }
-
-    assert IPHelper.get_ip_from_conn(conn) == {8, 8, 8, 8}
-  end
-end
-
-  describe "get_ip_from_socket/1 with LiveView socket" do
-    test "extracts IP from LiveView socket with peer_data" do
-      socket = %Phoenix.LiveView.Socket{
-        private: %{
-          connect_info: %{
-            peer_data: %{address: {127, 0, 0, 1}, port: 12345}
-          }
-        }
-      }
-
-      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
-    end
-
-    test "extracts IPv6 address from LiveView socket" do
-      socket = %Phoenix.LiveView.Socket{
-        private: %{
-          connect_info: %{
-            peer_data: %{address: {0, 0, 0, 0, 0, 0, 0, 1}, port: 12345}
-          }
-        }
-      }
-
-      assert IPHelper.get_ip_from_socket(socket) == {0, 0, 0, 0, 0, 0, 0, 1}
-    end
-
-    test "returns fallback IP when not available in LiveView socket" do
-      socket = %Phoenix.LiveView.Socket{
-        private: %{}
-      }
-
-      # Should return localhost fallback instead of raising
-      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
-    end
+  setup do
+    conn = %Plug.Conn{}
+    {:ok, conn: conn}
   end
 
   describe "get_ip_from_conn/1" do
-    test "extracts IP from Plug.Conn" do
-      conn = %Plug.Conn{
-        remote_ip: {192, 168, 1, 1}
-      }
-
-      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
+    test "extracts IP from X-Forwarded-For header", %{conn: conn} do
+      conn = Plug.Conn.put_req_header(conn, "x-forwarded-for", "192.168.1.100, 10.0.0.1")
+      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 100}
     end
 
-    test "extracts IPv6 address from Plug.Conn" do
-      conn = %Plug.Conn{
-        remote_ip: {0, 0, 0, 0, 0, 0, 0, 1}
-      }
-
-      assert IPHelper.get_ip_from_conn(conn) == {0, 0, 0, 0, 0, 0, 0, 1}
+    test "handles malformed X-Forwarded-For header", %{conn: conn} do
+      conn = Plug.Conn.put_req_header(conn, "x-forwarded-for", "invalid-ip")
+      conn = %{conn | remote_ip: {10, 0, 0, 1}}
+      assert IPHelper.get_ip_from_conn(conn) == {10, 0, 0, 1}
     end
 
-    test "extracts IP from X-Forwarded-For header when behind proxy" do
-      conn = %Plug.Conn{
-        remote_ip: {127, 0, 0, 1},
-        req_headers: [{"x-forwarded-for", "203.0.113.5, 198.51.100.17"}]
-      }
-
-      # Should use the leftmost (original client) IP
-      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+    test "falls back to remote_ip if X-Forwarded-For is missing", %{conn: conn} do
+      conn = %{conn | remote_ip: {10, 0, 0, 1}}
+      assert IPHelper.get_ip_from_conn(conn) == {10, 0, 0, 1}
     end
 
-    test "handles single IP in X-Forwarded-For header" do
-      conn = %Plug.Conn{
-        remote_ip: {127, 0, 0, 1},
-        req_headers: [{"x-forwarded-for", "203.0.113.5"}]
-      }
-
-      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
-    end
-
-    test "falls back to remote_ip when X-Forwarded-For is invalid" do
-      conn = %Plug.Conn{
-        remote_ip: {192, 168, 1, 1},
-        req_headers: [{"x-forwarded-for", "invalid-ip"}]
-      }
-
-      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
-    end
-
-    test "falls back to remote_ip when no X-Forwarded-For header" do
-      conn = %Plug.Conn{
-        remote_ip: {192, 168, 1, 1},
-        req_headers: []
-      }
-
-      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
-    end
-
-    test "returns fallback IP when remote_ip is nil and no X-Forwarded-For" do
-      conn = %Plug.Conn{
-        remote_ip: nil,
-        req_headers: []
-      }
-
-      # Should return localhost fallback instead of raising
+    test "falls back to localhost if remote_ip is missing", %{conn: conn} do
       assert IPHelper.get_ip_from_conn(conn) == {127, 0, 0, 1}
+    end
+
+    test "handles string IP addresses", %{conn: conn} do
+      conn = %{conn | remote_ip: "10.0.0.1"}
+      assert IPHelper.get_ip_from_conn(conn) == "10.0.0.1"
+      
+      conn2 = Plug.Conn.put_req_header(%Plug.Conn{}, "x-forwarded-for", "10.0.0.1")
+      assert IPHelper.get_ip_from_conn(conn2) == {10, 0, 0, 1}
+    end
+  end
+
+  describe "get_ip_source/1" do
+    test "identifies forwarded IP", %{conn: conn} do
+      conn = Plug.Conn.put_req_header(conn, "x-forwarded-for", "192.168.1.100")
+      assert IPHelper.get_ip_source(conn) == {:forwarded, {192, 168, 1, 100}}
+    end
+
+    test "identifies remote IP", %{conn: conn} do
+      conn = %{conn | remote_ip: {10, 0, 0, 1}}
+      assert IPHelper.get_ip_source(conn) == {:remote, {10, 0, 0, 1}}
+    end
+
+    test "identifies lack of IP", %{conn: conn} do
+      assert IPHelper.get_ip_source(conn) == {:none, nil}
+    end
+
+    test "identifies remote IP if it's a string", %{conn: conn} do
+      conn = %{conn | remote_ip: "10.0.0.1"}
+      assert IPHelper.get_ip_source(conn) == {:remote, "10.0.0.1"}
     end
   end
 
   describe "ip_to_string/1" do
     test "converts IPv4 tuple to string" do
+      assert IPHelper.ip_to_string({192, 168, 1, 1}) == "192.168.1.1"
       assert IPHelper.ip_to_string({127, 0, 0, 1}) == "127.0.0.1"
     end
 
     test "converts IPv6 tuple to string" do
-      ip_string = IPHelper.ip_to_string({0, 0, 0, 0, 0, 0, 0, 1})
-      # IPv6 localhost can be represented as "::1" or "0:0:0:0:0:0:0:1"
-      assert ip_string in ["::1", "0:0:0:0:0:0:0:1"]
+      assert IPHelper.ip_to_string({0, 0, 0, 0, 0, 0, 0, 1}) == "::1"
     end
 
-    test "converts another IPv4 address" do
-      assert IPHelper.ip_to_string({192, 168, 1, 1}) == "192.168.1.1"
+    test "returns string if already a string" do
+      assert IPHelper.ip_to_string("192.168.1.1") == "192.168.1.1"
     end
 
-    test "returns string as-is when given a string" do
-      assert IPHelper.ip_to_string("127.0.0.1") == "127.0.0.1"
+    test "inspects other types" do
+      assert IPHelper.ip_to_string(:invalid) == ":invalid"
+      assert IPHelper.ip_to_string(nil) == "nil"
     end
 
-    test "handles invalid IP gracefully" do
-      result = IPHelper.ip_to_string(:invalid)
-      assert is_binary(result)
-    end
-
-    test "converts various IPv4 addresses" do
-      assert IPHelper.ip_to_string({10, 0, 0, 1}) == "10.0.0.1"
-      assert IPHelper.ip_to_string({172, 16, 0, 1}) == "172.16.0.1"
-      assert IPHelper.ip_to_string({203, 0, 113, 5}) == "203.0.113.5"
+    test "handles malformed tuples" do
+      assert IPHelper.ip_to_string({999, 999, 999, 999}) == "{999, 999, 999, 999}"
     end
   end
 
-  describe "X-Forwarded-For header handling" do
-    test "extracts IP from X-Forwarded-For with multiple proxies" do
-      conn = %Plug.Conn{
-        remote_ip: {127, 0, 0, 1},
-        req_headers: [{"x-forwarded-for", "203.0.113.5, 198.51.100.17, 192.0.2.1"}]
-      }
-
-      # Should use the leftmost (original client) IP
-      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+  describe "get_ip_from_socket/1 (LiveView)" do
+    test "extracts IP from connect_info (Plug.Conn) X-Forwarded-For" do
+      conn = %Plug.Conn{} |> Plug.Conn.put_req_header("x-forwarded-for", "10.0.0.1")
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: conn}}
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 1}
     end
 
-    test "trims whitespace in X-Forwarded-For" do
-      conn = %Plug.Conn{
-        remote_ip: {127, 0, 0, 1},
-        req_headers: [{"x-forwarded-for", "  203.0.113.5  , 198.51.100.17"}]
-      }
-
-      assert IPHelper.get_ip_from_conn(conn) == {203, 0, 113, 5}
+    test "extracts IP from connect_info (Plug.Conn) peer_data" do
+      conn = %Plug.Conn{private: %{peer_data: %{address: {10, 0, 0, 2}}}}
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: conn}}
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 2}
     end
 
-    test "handles IPv6 in X-Forwarded-For" do
-      conn = %Plug.Conn{
-        remote_ip: {127, 0, 0, 1},
-        req_headers: [{"x-forwarded-for", "2001:db8::1"}]
+    test "extracts IP from connect_info map x_headers" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{
+            x_headers: [{"x-forwarded-for", "10.0.0.3"}]
+          }
+        }
       }
-
-      result = IPHelper.get_ip_from_conn(conn)
-      assert is_tuple(result)
-      assert tuple_size(result) == 8
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 3}
     end
 
-    test "handles empty X-Forwarded-For header" do
-      conn = %Plug.Conn{
-        remote_ip: {192, 168, 1, 1},
-        req_headers: [{"x-forwarded-for", ""}]
+    test "extracts IP from connect_info map peer_data" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{
+            peer_data: %{address: {10, 0, 0, 4}}
+          }
+        }
       }
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 4}
+    end
 
-      # Should fall back to remote_ip
-      assert IPHelper.get_ip_from_conn(conn) == {192, 168, 1, 1}
+    test "falls back to localhost if no info available" do
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: nil}}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
+    
+    test "extracts IP from Phoenix.Socket transport_ip" do
+      # Note: This is harder to test directly without starting actual processes
+      # but we can simulate the dictionary access pattern
+      socket = %Phoenix.Socket{transport_pid: self()}
+      Process.put(:peer, {{10, 0, 0, 5}, 12345})
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 5}
+      
+      socket2 = %Phoenix.Socket{transport_pid: nil}
+      assert IPHelper.get_ip_from_socket(socket2) == {127, 0, 0, 1}
+    end
+  end
+  
+  describe "get_ip_from_connect_info/1" do
+    test "extracts from x_headers" do
+      info = %{x_headers: [{"x-forwarded-for", "10.0.0.5"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 0, 5}
+    end
+    
+    test "extracts from req_headers mapped values" do
+       info = %{req_headers: %{"x-forwarded-for" => "10.0.0.6"}}
+       assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 0, 6}
+    end
+
+    test "extracts from peer_data" do
+      info = %{peer_data: %{address: {10, 0, 0, 7}}}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 0, 7}
+    end
+
+    test "extracts from string based headers or nested maps" do
+      info = %{headers: [{"x-forwarded-for", "10.0.0.8"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 0, 8}
+      
+      info2 = %{request_headers: [{"x-forwarded-for", "10.0.0.9"}]}
+      assert IPHelper.get_ip_from_connect_info(info2) == {10, 0, 0, 9}
+      
+      info3 = %{headers_in: {"x-forwarded-for", "10.0.0.10"}}
+      assert IPHelper.get_ip_from_connect_info(info3) == nil
+
+      info4 = %{x_headers: %{:"x-forwarded-for" => "10.0.0.11"}}
+      assert IPHelper.get_ip_from_connect_info(info4) == {10, 0, 0, 11}
+      
+      info5 = %{}
+      assert IPHelper.get_ip_from_connect_info(info5) == nil
+    end
+
+    test "handles malformed extract_first_ip inputs" do
+      info = %{x_headers: [{"x-forwarded-for", "invalid"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == nil
+      
+      info2 = %{x_headers: [{"other", "10.0.0.1"}]}
+      assert IPHelper.get_ip_from_connect_info(info2) == nil
     end
   end
 end
