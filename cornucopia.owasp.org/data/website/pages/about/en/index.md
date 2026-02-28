@@ -4,7 +4,7 @@ OWASP Cornucopia is a mechanism in the form of a card game to assist software de
 
 If you have questions concerning OWASP Cornucopia, please search for it first in our [Q & A section](/questionsandanswers).
 
-If you have other questions, suggestions or ideas please feel free to discuss them on our [email list](https://groups.google.com/a/owasp.org/g/cornucopia-project 'Cornucopia google group [external]') or submit them to our [list of issues](https://github.com/OWASP/cornucopia/issues 'Cornucopia Github repository [external]')  in our repository. If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
+If you have other questions, suggestions or ideas please feel free to discuss them on our [email list](https://groups.google.com/a/owasp.org/g/cornucopia-project 'Cornucopia google group [external]') or submit them to our [list of issues](https://github.com/OWASP/cornucopia/issues 'Cornucopia Github repository [external]') in our repository. If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
 
 ## Introduction
 
@@ -16,7 +16,7 @@ The Microsoft SDL team had already published its super [Elevation of Privilege: 
 
 EoP is a great concept and game strategy and was [published](https://www.microsoft.com/security/blog/2010/03/02/announcing-elevation-of-privilege-the-threat-modeling-game/ 'Microsoft announcing EoP on their blog. [external]') under a [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/ 'Link to the CC BY 3.0 Attribution Unported License [external]').
 
-Cornucopia is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues website app and mobile app developers encounter. 
+Cornucopia is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues website app and mobile app developers encounter.
 
 It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD.
 
@@ -31,7 +31,7 @@ To start using Cornucopia:
 5. Invite business owners, architects, developers, testers along for a card game.
 6. Get those infosec folk to provide chocolate, pizza, beer, flowers or all four as prizes.
 7. Select a portion of the deck to start with.
-8. [Play the game](/how-to-play)  to discuss & document security requirements (and to win rounds).
+8. [Play the game](/how-to-play) to discuss & document security requirements (and to win rounds).
 9. Remember, to have fun!
 
 ## Mappings
@@ -115,11 +115,10 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Mradul Tiwari
 - Ive Verstappen
 - Sachin Vishwakarma
-- Wagner Voltzcontributors 
+- Wagner Voltzcontributors
 - Stephen de Vries
 - Colin Watson
--  
-Additionally, Gerardo Canedo and student volunteers to [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/ 'OWASP Threat Dragon [internal]') from the Universidad Católica del Uruguay ([UCU](https://www.ucu.edu.uy/ 'UCU [external]')) who took part in a Coding Challenge to provide integration between Cornucopia and Threat Dragon.
+- Additionally, Gerardo Canedo and student volunteers to [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/ 'OWASP Threat Dragon [internal]') from the Universidad Católica del Uruguay ([UCU](https://www.ucu.edu.uy/ 'UCU [external]')) who took part in a Coding Challenge to provide integration between Cornucopia and Threat Dragon.
 
 Please let us know if we have missed anyone from this list.
 
@@ -149,10 +148,10 @@ Colin Watson as author of OWASP Cornucopia Ecommerce Edition, the original card 
 
 ## License
 
-OWASP Cornucopia Website App Edition (formerly called Ecommerce Edition) was created by Colin Watson. OWASP Cornucopia Mobile App Edition was based on this and created by Johan Sydseter and Xavier Godard. 
+OWASP Cornucopia Website App Edition (formerly called Ecommerce Edition) was created by Colin Watson. OWASP Cornucopia Mobile App Edition was based on this and created by Johan Sydseter and Xavier Godard.
 
-OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. Except, where otherwise [noted](https://github.com/OWASP/cornucopia/blob/master/README.md#license  'OWASP Cornucopia license [external]'), OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
+OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. Except, where otherwise [noted](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'), OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
 
 OWASP and the OWASP logo are trademarks of the OWASP Foundation.
 
-<img alt="OWASP foundation logo" src="/images/owasp-logo.png" width="500"/>
+<img alt="OWASP foundation logo" src="/images/owasp-logo.png" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
