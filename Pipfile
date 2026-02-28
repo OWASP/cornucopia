@@ -21,7 +21,7 @@ pypng = "==0.20220715.0"
 qrcode = "==8.2"
 requests = "==2.32.5"
 types-requests = "==2.32.4.20260107"
-typing_extensions = "==4.8.0"
+typing_extensions = ">=4.14.1"
 urllib3 = "==2.6.3"
 charset-normalizer = "==3.4.4"
 python-docx = "==1.1.0"
@@ -35,7 +35,8 @@ pathvalidate = "==3.3.1"
 security = "==1.3.1"
 colorama = "*"
 mypy = "*"
-pydantic = "==2.12.5"
+pydantic = {version = "==2.12.5", hash = "sha256:e561593fccf61e8a20fc46dfc2dfe075b8be7d0188df33f221ad1f0139180f9d"}
+pydantic-core = {version = "==2.41.5", hash = "sha256:8e7c86f27c585ef37c35e56a96363ab8de4e549a95512445b85c96d3e2f7c1bf"}
 
 [requires]
-python_version = "3.12"
+python_version = "3.14"
