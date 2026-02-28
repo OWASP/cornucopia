@@ -18,6 +18,14 @@ from pathlib import Path
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
 
+# Add parent directory to path for card_models import
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(script_dir)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+from scripts.card_models import CardYAML, MappingYAML, ValidationError as PydanticValidationError
+
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
@@ -636,6 +644,13 @@ def get_mapping_data_for_edition(
     with open(mappingfile, "r", encoding="utf-8") as f:
         try:
             data = yaml.safe_load(f)
+            # Validate structure with Pydantic
+            try:
+                validated = MappingYAML(**data)
+                data = validated.model_dump(exclude_none=True)  # Convert back to dict, exclude None values
+            except PydanticValidationError as ve:
+                logging.warning(f"Mapping file validation warning for {mappingfile}: {ve}")
+                # Continue with unvalidated data for backward compatibility
         except yaml.YAMLError as e:
             logging.info(f"Error loading yaml file: {mappingfile}. Error = {e}")
             data = {}
@@ -737,6 +752,14 @@ def get_language_data(
     with open(language_file, "r", encoding="utf-8") as f:
         try:
             data = yaml.safe_load(f)
+            # Validate structure with Pydantic
+            try:
+                validated = CardYAML(**data)
+                data = validated.model_dump(exclude_none=True)  # Convert back to dict, exclude None values
+            except PydanticValidationError as ve:
+                logging.error(f"Card file validation failed for {language_file}: {ve}")
+                # For card files, validation failure is more critical
+                data = {}
         except yaml.YAMLError as e:
             logging.error(f"Error loading yaml file: {language_file}. Error = {e}")
             data = {}
