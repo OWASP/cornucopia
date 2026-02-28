@@ -278,6 +278,28 @@ describe('CreController tests', () => {
         });
     });
 
+    describe('getEditionName', () => {
+        it('should return correct name for webapp edition', () => {
+            const result = CreController.getEditionName('webapp');
+            expect(result).toBe('OWASP Cornucopia Website App Edition');
+        });
+
+        it('should return correct name for mobileapp edition', () => {
+            const result = CreController.getEditionName('mobileapp');
+            expect(result).toBe('OWASP Cornucopia Mobile App Edition');
+        });
+
+        it('should return the edition string itself for unknown edition', () => {
+            const result = CreController.getEditionName('unknown-edition');
+            expect(result).toBe('unknown-edition');
+        });
+
+        it('should handle empty string', () => {
+            const result = CreController.getEditionName('');
+            expect(result).toBe('');
+        });
+    });
+
     describe('Edge cases', () => {
         it('should handle getMeta returning undefined', () => {
             mockMappingController.getMeta = vi.fn().mockReturnValue(undefined);
