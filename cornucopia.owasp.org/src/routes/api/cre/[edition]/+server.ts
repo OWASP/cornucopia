@@ -12,13 +12,20 @@ export const GET: RequestHandler = ({ params }) => {
     throw error(404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
   }
 
-  return json({
-    meta: {
-      edition: CreController.getEditionName(edition),
-      component: "cards",
-      language: "en",
-      languages: DeckService.getLanguages(edition),
-      version: DeckService.getLatestVersion(edition),
+  return json(
+    {
+      meta: {
+        edition: CreController.getEditionName(edition),
+        component: "cards",
+        language: "en",
+        languages: DeckService.getLanguages(edition),
+        version: DeckService.getLatestVersion(edition),
+      }
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
-  });
+  );
 };
