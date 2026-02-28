@@ -20,7 +20,7 @@ export const GET: RequestHandler = ({ params }) => {
     meta: {
       edition: CreController.getEditionName(edition),
       component: "cards",
-      language: "all",
+      language: "en",
       languages: DeckService.getLanguages(edition),
       version: DeckService.getLatestVersion(edition),
     }
