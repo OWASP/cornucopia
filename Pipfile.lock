@@ -538,6 +538,37 @@
             "markers": "python_version >= '3.6'",
             "version": "==6.0.1"
         },
+        "annotated-types": {
+            "hashes": [
+                "sha256:1f02e8b43a8fbbc3f3e0d4f0f4bfc8131bcb4eebe8849b8e5c773f3a1c582a53"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==0.7.0"
+        },
+        "pydantic": {
+            "hashes": [
+                "sha256:e561593fccf61e8a20fc46dfc2dfe075b8be7d0188df33f221ad1f0139180f9d"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==2.12.5"
+        },
+        "pydantic-core": {
+            "hashes": [
+                "sha256:09c88a7c5a5084d0ac43d40f0a36f3c85c4fb9d6070e58aa4224ec8a1a9fa9cd",
+                "sha256:f7e60bbea82b33f2f97c8c7fd9d33a3b0e77be84ff3e7a3caa75e17c57f3f0e0"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==2.41.5"
+        },
+        "typing-inspection": {
+            "hashes": [
+                "sha256:8fb3a0da2e3d6b03cfe6d645846e9f37a0e042a8c6a28f14e5fecbaa5a8e1a9b",
+                "sha256:8e9c58a2dc1ab6fba7ae66d7ba86e31e43f13dd4e6dcd6fde2a2ae60c34c86c1"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==0.4.2"
+        },
         "qrcode": {
             "hashes": [
                 "sha256:16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f",
