@@ -27,7 +27,7 @@ export class CapecService {
                 `${__dirname}${this.path}${edition}-capec-${version}.yaml`, 
                 'utf8'
             );
-            const data = yaml.load(yamlData) as CapecData;
+            const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as CapecData;
             this.capecData.set(key, data);
             return data;
         } catch (e) {
