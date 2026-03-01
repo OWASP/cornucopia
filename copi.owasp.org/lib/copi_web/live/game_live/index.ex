@@ -33,7 +33,7 @@ defmodule CopiWeb.GameLive.Index do
     game = Cornucopia.get_game!(id)
     {:ok, _} = Cornucopia.delete_game(game)
 
-    {:noreply, assign(socket, :games, list_games())}
+    {:noreply, assign(socket, :games, nil)}
   end
 
   defp list_games do

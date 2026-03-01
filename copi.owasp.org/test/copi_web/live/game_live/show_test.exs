@@ -88,6 +88,22 @@ defmodule CopiWeb.GameLive.ShowTest do
       {:ok, updated_game} = Cornucopia.Game.find(started_game.id)
       assert DateTime.compare(updated_game.started_at, original_time) == :eq
     end
+
+    test "handle_info ignores game:updated events for a different game", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game", edition: "webapp"})
+
+      # Send a broadcast whose topic doesn't match what show.ex subscribed to,
+      # so the `true ->` branch in the cond fires and socket is returned unchanged
+      send(show_live.pid, %{
+        topic: "game:mismatch-id",
+        event: "game:updated",
+        payload: other_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
   end
 
   describe "Show helper functions" do
@@ -134,20 +150,5 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert updated_socket.assigns.uri == "/games/round/1"
     end
 
-    test "handle_info ignores game:updated events for a different game", %{conn: conn, game: game} do
-      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
-      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game", edition: "webapp"})
-
-      # topic(other_game.id) = "game:#{other_game.id}" which != "game:mismatch-id"
-      # so the `true ->` branch fires and socket is returned unchanged
-      send(show_live.pid, %{
-        topic: "game:mismatch-id",
-        event: "game:updated",
-        payload: other_game
-      })
-
-      :timer.sleep(50)
-      assert render(show_live) =~ game.name
-    end
   end
 end
