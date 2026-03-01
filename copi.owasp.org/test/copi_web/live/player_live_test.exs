@@ -366,6 +366,75 @@ defmodule CopiWeb.PlayerLiveTest do
       # Verify it doesn't crash and stays connected
       assert render(show_live) =~ player.name
     end
+
+    test "redirects to error when player not found", %{conn: conn, player: player} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/#{player.game_id}/players/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+    end
+
+    test "handles invalid dealt_card_id in toggle_vote gracefully", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Non-numeric ID hits the :error branch of Integer.parse
+      html = render_click(show_live, "toggle_vote", %{"dealt_card_id" => "not-a-number"})
+      assert is_binary(html)
+    end
+
+    test "next_round advances game when round is already closed", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "V", description: "D", edition: "webapp",
+          version: "2.2", external_id: "NR1", language: "en", misc: "misc",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      # played_in_round: 1 means player has played in current round → round is closed
+      # No nil-round cards remain → last_round? is also true → finished_at gets set
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+      assert updated_game.finished_at != nil
+    end
+
+    test "next_round is a no-op when round is open but cannot continue", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      # No dealt cards → round_open? = true. No continue votes → can_continue_round? = false.
+      # The else branch ({:noreply, socket}) is evaluated, then game is reloaded and broadcast.
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      html = render_click(show_live, "next_round", %{})
+      assert is_binary(html)
+
+      # Game rounds_played must remain 0 — no real advancement happened
+      {:ok, unchanged_game} = Cornucopia.Game.find(game_id)
+      assert unchanged_game.rounds_played == 0
+    end
   end
 
   describe "Show helper functions" do
@@ -459,7 +528,10 @@ defmodule CopiWeb.PlayerLiveTest do
       assert Show.get_vote(dealt_card, %{id: "missing"}) == nil
 
       assert Show.display_game_session("webapp") == "Cornucopia Web Session:"
+      assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
       assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("masvs") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("cumulus") == "OWASP Cumulus Session:"
       assert Show.display_game_session("mlsec") == "Elevation of MLSec Session:"
       assert Show.display_game_session("unknown") == "EoP Session:"
     end

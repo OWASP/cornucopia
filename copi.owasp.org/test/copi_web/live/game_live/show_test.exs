@@ -107,8 +107,12 @@ defmodule CopiWeb.GameLive.ShowTest do
 
     test "display_game_session returns labels for known and unknown editions" do
       assert Show.display_game_session("webapp") == "Cornucopia Web Session:"
+      assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
       assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("masvs") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("cumulus") == "OWASP Cumulus Session:"
       assert Show.display_game_session("mlsec") == "Elevation of MLSec Session:"
+      assert Show.display_game_session("eop") == "EoP Session:"
       assert Show.display_game_session("unknown") == "EoP Session:"
     end
 
@@ -128,6 +132,22 @@ defmodule CopiWeb.GameLive.ShowTest do
 
       assert {:cont, updated_socket} = Show.put_uri_hook(%{}, "/games/round/1", socket)
       assert updated_socket.assigns.uri == "/games/round/1"
+    end
+
+    test "handle_info ignores game:updated events for a different game", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game", edition: "webapp"})
+
+      # topic(other_game.id) = "game:#{other_game.id}" which != "game:mismatch-id"
+      # so the `true ->` branch fires and socket is returned unchanged
+      send(show_live.pid, %{
+        topic: "game:mismatch-id",
+        event: "game:updated",
+        payload: other_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
     end
   end
 end
