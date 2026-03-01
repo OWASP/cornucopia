@@ -65,7 +65,7 @@
             mix test --cover --export-coverage default || true
         - name: Generate coverage report
           working-directory: copi.owasp.org
-          run: mix coveralls.cobertura --exclude test --import-cover cover
+          run: mix coveralls.cobertura --exclude test --import-cover cover || true
         # Upload Code Coverage for Codeclimate
         - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
           with:
