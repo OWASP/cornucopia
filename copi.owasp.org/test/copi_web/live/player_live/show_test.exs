@@ -108,7 +108,8 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert Show.unplayed_cards([]) == []
       assert Show.played_cards([], 1) == []
       assert Show.card_played_in_round([], 1) == nil
-      assert Show.round_closed?(%{players: [], rounds_played: 0}) == false
+      # With no players, no one is still to play → round_open? is false → round_closed? is true
+      assert Show.round_closed?(%{players: [], rounds_played: 0}) == true
 
       assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
       assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
