@@ -23,7 +23,9 @@ defmodule Copi.Cornucopia.DealtCard do
   @doc false
   def changeset(dealt_card, attrs) do
     dealt_card
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:card_id, :player_id])
+    |> validate_required([:card_id, :player_id])
+    |> assoc_constraint(:card)
+    |> assoc_constraint(:player)
   end
 end
