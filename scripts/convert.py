@@ -533,12 +533,12 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
 def is_valid_string_argument(argument: str) -> str:
     """Validate string argument length and character set."""
     if len(argument) > 255:
-        raise argparse.ArgumentError("The option can not have more the 255 char.")
+        raise argparse.ArgumentError(None, "The option can not have more the 255 char.")
     if not re.match(
         r"^[\u0600-\u06FF\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\uFDF2\uFDF3\uFDF4\uFDFD\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uFF66-\uFF9Fー々〆〤\u3400-\u4DBF\uF900-\uFAFF\u0900-\u097F\u0621-\u064A\u0660-\u0669\u4E00-\u9FFF\u0E00-\u0E7F«»฿ฯ๏๚๛\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF\uA640-\uA69FЮ́ю́Я́я́\u0370-\u03FF\u1F00-\u1FFFA-Za-zÀ-ÖØ-öø-ÿĀ-ž0-9._\--ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي ًٌٍَُِّْٰﷲﷴﷺﷻ ٠١٢٣٤٥٦٧٨٩ \s]+$",  # noqa: E501
         argument,
     ):
-        raise argparse.ArgumentError("The option can only contain a-z letters, numbers, periods, dash or underscore")
+        raise argparse.ArgumentError(None, "The option can only contain a-z letters, numbers, periods, dash or underscore")
     return argument
 
 
