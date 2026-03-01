@@ -2,6 +2,9 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   use ExUnit.Case, async: false
   use Plug.Test
 
+  import Plug.Conn
+
+  alias Copi.RateLimiter
   alias CopiWeb.Plugs.RateLimiterPlug
   alias Copi.RateLimiter
 
@@ -42,6 +45,8 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     assert conn.status == 429
     assert conn.resp_body == "Too many connections, try again later."
     assert conn.halted
+    assert conn.status == 429
+    assert conn.resp_body =~ "Too many connections"
   end
 
   test "skips rate limiting when only remote IP is available" do

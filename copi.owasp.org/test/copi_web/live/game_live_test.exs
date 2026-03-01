@@ -5,8 +5,9 @@ defmodule CopiWeb.GameLiveTest do
 
   alias Copi.Cornucopia
   alias Copi.RateLimiter
+  alias CopiWeb.GameLive.Index
 
-  @create_attrs %{ name: "some name", edition: "webapp"}
+  @create_attrs %{name: "some name", edition: "webapp"}
   # @update_attrs %{ name: "some updated name", edition: "webapp"}
   @invalid_attrs %{name: nil, edition: "webapp"}
 
@@ -39,9 +40,11 @@ defmodule CopiWeb.GameLiveTest do
 
     test "saves new game", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, "/games")
-      {:ok, new_conn} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
-      assert_redirect(index_live, Routes.game_index_path(conn, :new))
 
+      {:ok, new_conn} =
+        index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
+
+      assert_redirect(index_live, Routes.game_index_path(conn, :new))
 
       {:ok, games_new, html_games_new} = live(new_conn, "/games/new")
 
@@ -72,12 +75,14 @@ defmodule CopiWeb.GameLiveTest do
 
       # Navigate to new game page once and reuse the LiveView
       {:ok, index_live, _html} = live(conn, "/games")
-      {:ok, _} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
-      
+
+      {:ok, _} =
+        index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
+
       # Create games up to the limit
       for i <- 1..limit do
         {:ok, games_new, _html} = live(conn, "/games/new")
-        
+
         {:ok, _, _html} =
           games_new
           |> form("#game-form", game: %{name: "Game #{i}", edition: "webapp"})
@@ -87,15 +92,16 @@ defmodule CopiWeb.GameLiveTest do
 
       # Next game creation should be blocked
       {:ok, games_new_blocked, _html} = live(conn, "/games/new")
-      
+
       games_new_blocked
-        |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
-        |> render_submit()
-      
+      |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
+      |> render_submit()
+
       # Verify rate limit is exceeded (form stays, no redirect)
       assert has_element?(games_new_blocked, "#game-form")
       # Verify the rate limiter actually blocked the request
-      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
+      assert {:error, :rate_limit_exceeded} =
+               RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
     end
   end
 
@@ -116,8 +122,6 @@ defmodule CopiWeb.GameLiveTest do
       {:ok, _} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
       {:ok, _} = Cornucopia.create_player(%{name: "P3", game_id: game.id})
 
-
-
       {:ok, show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
       assert html =~ "Start Game"
 
@@ -134,44 +138,100 @@ defmodule CopiWeb.GameLiveTest do
     end
 
     test "redirects to error when game not found", %{conn: conn} do
-      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
     end
 
     test "displays past round", %{conn: conn, game: game} do
-       # Create players and play a round to make it valid
-       {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
-       {:ok, card} = Cornucopia.create_card(%{
-        category: "C", value: "V", description: "D", edition: "webapp",
-        version: "2.2", external_id: "EXT", language: "en",
-        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
-        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-      })
-      {:ok, _} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: p1.id, card_id: card.id, played_in_round: 1})
-      
-       # Advance game to round 2 and set started_at
-       {:ok, game} = Cornucopia.update_game(game, %{rounds_played: 1, started_at: DateTime.from_naive!(~N[2023-01-01 10:00:00], "Etc/UTC")})
-       
-       {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=1")
-       assert html =~ "Viewing round <strong>1</strong>"
+      # Create players and play a round to make it valid
+      {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C",
+          value: "V",
+          description: "D",
+          edition: "webapp",
+          version: "2.2",
+          external_id: "EXT",
+          language: "en",
+          misc: "misc",
+          owasp_scp: [],
+          owasp_devguide: [],
+          owasp_asvs: [],
+          owasp_appsensor: [],
+          capec: [],
+          safecode: [],
+          owasp_mastg: [],
+          owasp_masvs: []
+        })
+
+      {:ok, _} =
+        Copi.Repo.insert(%Copi.Cornucopia.DealtCard{
+          player_id: p1.id,
+          card_id: card.id,
+          played_in_round: 1
+        })
+
+      # Advance game to round 2 and set started_at
+      {:ok, game} =
+        Cornucopia.update_game(game, %{
+          rounds_played: 1,
+          started_at: DateTime.from_naive!(~N[2023-01-01 10:00:00], "Etc/UTC")
+        })
+
+      {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=1")
+      assert html =~ "Viewing round <strong>1</strong>"
     end
 
-    test "delete game removes it from list", %{conn: conn, game: _game} do
-      {:ok, _index_live, html} = live(conn, "/games")
-      
-      # The game might not be shown if it's in the current view -skip complex delete test
-      # Just verify the page loads
-      assert html =~ "Listing Games"
+    test "deletes game via delete event", %{conn: conn, game: game} do
+      {:ok, index_live, _html} = live(conn, "/games")
+      render_click(index_live, "delete", %{"id" => game.id})
+      refute Copi.Repo.get(Copi.Cornucopia.Game, game.id)
     end
 
     test "handle_info updates games list", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, "/games")
-      
+
       # Send update_parent message
       send(index_live.pid, {:update_parent, []})
-      
+
       # Should update the assigns
       :ok
     end
-    
+  end
+
+  describe "Index callbacks" do
+    test "mount assigns client_ip from session" do
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}}}
+
+      assert {:ok, mounted} = Index.mount(%{}, %{"client_ip" => "10.0.0.1"}, socket)
+      assert mounted.assigns.client_ip == "10.0.0.1"
+      assert mounted.assigns.games == nil
+    end
+
+    test "handle_params applies :index action" do
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :index}}
+
+      assert {:noreply, updated} = Index.handle_params(%{}, "/games", socket)
+      assert updated.assigns.page_title == "Listing Games"
+      assert updated.assigns.game == nil
+    end
+
+    test "handle_params applies :new action" do
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :new}}
+
+      assert {:noreply, updated} = Index.handle_params(%{}, "/games/new", socket)
+      assert updated.assigns.page_title == "Create a new game"
+      assert %Copi.Cornucopia.Game{} = updated.assigns.game
+    end
+
+    test "handle_info update_parent replaces games list" do
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, games: []}}
+      state = [%{id: "g1"}, %{id: "g2"}]
+
+      assert {:noreply, updated} = Index.handle_info({:update_parent, state}, socket)
+      assert updated.assigns.games == state
+    end
   end
 end
