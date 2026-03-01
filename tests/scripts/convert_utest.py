@@ -2176,7 +2176,7 @@ class TestSafeExtractAll(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             with zipfile.ZipFile(buf) as zf:
                 with self.assertRaises(ValueError) as ctx:
-                    c._safe_extractall(zf, td)
+                    c._safe_extract_all(zf, td)
         self.assertIn("Zip Slip blocked", str(ctx.exception))
 
     def test_blocks_absolute_path_member(self) -> None:
@@ -2185,14 +2185,14 @@ class TestSafeExtractAll(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             with zipfile.ZipFile(buf) as zf:
                 with self.assertRaises(ValueError):
-                    c._safe_extractall(zf, td)
+                    c._safe_extract_all(zf, td)
 
     def test_allows_legitimate_nested_members(self) -> None:
         """Normal nested paths must extract correctly."""
         buf = self._build_zip({"content.xml": "<r/>", "subdir/file.xml": "<s/>"})
         with tempfile.TemporaryDirectory() as td:
             with zipfile.ZipFile(buf) as zf:
-                c._safe_extractall(zf, td)
+                c._safe_extract_all(zf, td)
             self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
             self.assertTrue(os.path.isfile(os.path.join(td, "subdir", "file.xml")))
 
@@ -2207,7 +2207,7 @@ class TestSafeExtractAll(unittest.TestCase):
         buf.seek(0)
         with tempfile.TemporaryDirectory() as td:
             with zipfile.ZipFile(buf) as zf:
-                c._safe_extractall(zf, td)
+                c._safe_extract_all(zf, td)
             self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
 
 

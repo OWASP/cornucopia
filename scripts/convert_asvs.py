@@ -27,6 +27,7 @@ class ConvertVars:
 
 
 def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
+    """Create summary page for a specific ASVS level."""
     topic = ""
     category = ""
     os.mkdir(Path(convert_vars.args.output_path, f"level-{level}-controls"))
@@ -205,6 +206,7 @@ def create_link_list(requirements: dict[str, Any], capec_version: str) -> str:
 
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
+    """Parse command line arguments for ASVS conversion."""
     parser = argparse.ArgumentParser(description="Convert CAPEC™ JSON to Cornucopia format")
     parser.add_argument(
         "-o",
@@ -256,6 +258,7 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
 
 
 def get_valid_capec_version(version: str) -> str:
+    """Get valid CAPEC version from choices."""
     for v in ConvertVars.LATEST_CAPEC_VERSION_CHOICES:
         if version == v:
             return version
@@ -263,6 +266,7 @@ def get_valid_capec_version(version: str) -> str:
 
 
 def get_valid_asvs_version(version: str) -> str:
+    """Get valid ASVS version from choices."""
     for v in ConvertVars.LATEST_ASVS_VERSION_CHOICES:
         if version == v:
             return version
@@ -270,6 +274,7 @@ def get_valid_asvs_version(version: str) -> str:
 
 
 def set_logging() -> None:
+    """Set up logging configuration."""
     logging.basicConfig(
         format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s",
     )
@@ -280,6 +285,7 @@ def set_logging() -> None:
 
 
 def empty_folder(path: Path) -> None:
+    """Empty the specified folder."""
     try:
         # Empty the folder
         shutil.rmtree(path)
@@ -288,6 +294,7 @@ def empty_folder(path: Path) -> None:
 
 
 def create_folder(path: Path) -> None:
+    """Create folder if it doesn't exist."""
     try:
         os.makedirs(path, exist_ok=True)
     except Exception as e:
@@ -295,6 +302,7 @@ def create_folder(path: Path) -> None:
 
 
 def load_json_file(filepath: Path) -> dict[str, Any]:
+    """Load JSON file and return data."""
     try:
         with open(filepath, encoding="utf8") as f:
             data: dict[str, Any] = json.load(f)
@@ -305,6 +313,7 @@ def load_json_file(filepath: Path) -> dict[str, Any]:
 
 
 def load_asvs_to_capec_mapping(filepath: Path) -> dict[str, dict[str, List[str]]]:
+    """Load ASVS to CAPEC mapping from YAML file."""
     data: dict[str, dict[str, List[str]]] = {}
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -317,6 +326,7 @@ def load_asvs_to_capec_mapping(filepath: Path) -> dict[str, dict[str, List[str]]
 
 
 def main() -> None:
+    """Main entry point for ASVS conversion."""
     convert_vars.args = parse_arguments(sys.argv[1:])
     asvs_version = get_valid_asvs_version(convert_vars.args.asvs_version)
     capec_version = get_valid_capec_version(convert_vars.args.capec_version)
