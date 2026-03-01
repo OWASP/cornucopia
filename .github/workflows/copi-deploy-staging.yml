@@ -71,7 +71,7 @@
           with:
             token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
             total-parts-count: 3
-            add-prefix: copi.owasp.org
+            add-prefix: copi.owasp.org/lib
             files: copi.owasp.org/cover/cobertura.xml
         - name: Setup Flyctl
           uses: superfly/flyctl-actions/setup-flyctl@63da3ecc5e2793b98a3f2519b3d75d4f4c11cec2
