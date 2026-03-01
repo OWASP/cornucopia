@@ -62,7 +62,6 @@ defmodule CopiWeb.PlayerLiveTest do
     end
 
     test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
-      # Clear any existing rate limits for the test IP
       test_ip = {127, 0, 0, 1}
       RateLimiter.clear_ip(test_ip)
 
@@ -70,18 +69,13 @@ defmodule CopiWeb.PlayerLiveTest do
       config = RateLimiter.get_config()
       limit = config.limits.player_creation
 
-      # Create players up to the limit
-      for i <- 1..limit do
-        {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
-        
-        {:ok, _, _html} =
-          index_live
-          |> form("#player-form", player: %{name: "Player #{i}", game_id: player.game_id})
-          |> render_submit()
-          |> follow_redirect(conn)
+      # Simulate hitting the limit directly via the RateLimiter module
+      # This avoids opening 60 concurrent database connections in the test Sandbox
+      for _i <- 1..limit do
+        {:ok, _} = RateLimiter.check_rate(test_ip, :player_creation)
       end
 
-      # Next player creation should be blocked
+      # Next player creation should be blocked by the rate limiter logic in LiveView
       {:ok, index_live_blocked, _html} = live(conn, "/games/#{player.game_id}/players/new")
       
       index_live_blocked
@@ -91,7 +85,7 @@ defmodule CopiWeb.PlayerLiveTest do
       # Verify rate limit is exceeded (form stays, no redirect)
       assert has_element?(index_live_blocked, "#player-form")
       # Verify the rate limiter actually blocked the request
-      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :player_creation)
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(test_ip, :player_creation)
     end
   end
 
