@@ -2,7 +2,6 @@ defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
 
-  alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
 
   @impl true
@@ -26,18 +25,6 @@ defmodule CopiWeb.GameLive.Index do
     socket
     |> assign(:page_title, "Listing Games")
     |> assign(:game, nil)
-  end
-
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    game = Cornucopia.get_game!(id)
-    {:ok, _} = Cornucopia.delete_game(game)
-
-    {:noreply, assign(socket, :games, list_games())}
-  end
-
-  defp list_games do
-    Cornucopia.list_games()
   end
 
   @impl true
