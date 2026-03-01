@@ -203,6 +203,7 @@ def load_capec_to_asvs_mapping(filepath: Path) -> dict[int, dict[str, List[str]]
 
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
+    """Parse command line arguments for CAPEC conversion."""
     parser = argparse.ArgumentParser(description="Convert CAPEC JSON to Cornucopia format")
     parser.add_argument(
         "-o",
@@ -255,6 +256,7 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
 
 
 def get_valid_version(version: str) -> str:
+    """Get valid version from choices."""
     for v in ConvertVars.LATEST_ASVS_VERSION_CHOICES:
         if version == v:
             return version
@@ -262,7 +264,7 @@ def get_valid_version(version: str) -> str:
 
 
 def main() -> None:
-
+    """Main entry point for CAPEC conversion."""
     convert_vars.args = parse_arguments(sys.argv[1:])
     asvs_version = get_valid_version(convert_vars.args.asvs_version)
     logging.debug("Using ASVS version: %s", asvs_version)
