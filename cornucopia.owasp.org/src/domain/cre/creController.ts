@@ -48,6 +48,10 @@ export class CreController {
         this.controller = controller;
     }
 
+    public static getEditionName(edition: string): string {
+        return CreController.editions.get(edition) || edition;
+    }
+
     public getCreMapping(edition: string, lang: string) : any {
         if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
         let standards: Cre[] = [];

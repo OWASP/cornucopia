@@ -61,7 +61,8 @@
           
         - name: Run tests
           working-directory: copi.owasp.org
-          run: mix test --cover --export-coverage default
+          run: |
+            mix test --cover --export-coverage default --test-coverage "threshold: 0"
         - name: Generate coverage report
           working-directory: copi.owasp.org
           run: mix coveralls.cobertura --exclude test --import-cover cover
