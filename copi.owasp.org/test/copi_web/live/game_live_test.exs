@@ -197,7 +197,7 @@ defmodule CopiWeb.GameLiveTest do
 
   describe "Index callbacks" do
     test "mount assigns client_ip from session" do
-      socket = %Phoenix.LiveView.Socket{assigns: %{}}
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}}}
 
       assert {:ok, mounted} = Index.mount(%{}, %{"client_ip" => "10.0.0.1"}, socket)
       assert mounted.assigns.client_ip == "10.0.0.1"
@@ -205,7 +205,7 @@ defmodule CopiWeb.GameLiveTest do
     end
 
     test "handle_params applies :index action" do
-      socket = %Phoenix.LiveView.Socket{assigns: %{live_action: :index}}
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :index}}
 
       assert {:noreply, updated} = Index.handle_params(%{}, "/games", socket)
       assert updated.assigns.page_title == "Listing Games"
@@ -213,7 +213,7 @@ defmodule CopiWeb.GameLiveTest do
     end
 
     test "handle_params applies :new action" do
-      socket = %Phoenix.LiveView.Socket{assigns: %{live_action: :new}}
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :new}}
 
       assert {:noreply, updated} = Index.handle_params(%{}, "/games/new", socket)
       assert updated.assigns.page_title == "Create a new game"
@@ -221,7 +221,7 @@ defmodule CopiWeb.GameLiveTest do
     end
 
     test "handle_info update_parent replaces games list" do
-      socket = %Phoenix.LiveView.Socket{assigns: %{games: []}}
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, games: []}}
       state = [%{id: "g1"}, %{id: "g2"}]
 
       assert {:noreply, updated} = Index.handle_info({:update_parent, state}, socket)
