@@ -2,7 +2,7 @@
 meta:
   edition: "webapp"
   component: "cards"
-  language: "PT-BR"
+  language: "pt_br"
   version: "2.2"
 suits:
 -
