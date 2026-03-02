@@ -85,5 +85,48 @@ defmodule CopiWeb.GameLive.ShowTest do
       {:ok, updated_game} = Cornucopia.Game.find(started_game.id)
       assert DateTime.compare(updated_game.started_at, original_time) == :eq
     end
+
+    test "handle_info updates game when matching topic received", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      {:ok, updated_game} = Cornucopia.Game.find(game.id)
+
+      send(show_live.pid, %{
+        topic: "game:#{game.id}",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
+
+    test "display_game_session/1 returns correct label for each edition", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
+      assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
+      assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("masvs")     == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
+      assert Show.display_game_session("cumulus")   == "OWASP Cumulus Session:"
+      assert Show.display_game_session("eop")       == "EoP Session:"
+    end
+
+    test "latest_version/1 returns correct version string for each edition", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.latest_version("webapp")    == "2.2"
+      assert Show.latest_version("ecommerce") == "1.22"
+      assert Show.latest_version("mobileapp") == "1.1"
+      assert Show.latest_version("mlsec")     == "1.0"
+      assert Show.latest_version("cumulus")   == "1.1"
+      assert Show.latest_version("masvs")     == "1.1"
+      assert Show.latest_version("eop")       == "5.1"
+      assert Show.latest_version("unknown")   == "1.0"
+    end
+
+    test "card_played_in_round/2 returns nil when no card matches", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.card_played_in_round([], 1) == nil
+    end
   end
 end
