@@ -1,0 +1,10 @@
+{
+  "author": {
+    "title": "Author",
+    "head": {
+      "title": "OWASP Cornucopia - News Authors",
+      "description": "Meet the authors behind the OWASP Cornucopia news articles, sharing insights and updates on the project.",
+      "keywords": "OWASP, Cornucopia, News, Authors, Project, Contributors"
+    }
+  }
+}
