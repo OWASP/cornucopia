@@ -2,6 +2,7 @@ defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
 
+  alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
 
   @impl true

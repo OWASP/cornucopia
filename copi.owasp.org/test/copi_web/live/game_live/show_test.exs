@@ -119,6 +119,16 @@ defmodule CopiWeb.GameLive.ShowTest do
       :timer.sleep(50)
       assert render(show_live) =~ game.name
     end
+    test "redirects to error when round param is out of range", %{conn: conn, game: game} do
+      # round=0 is below min: 1, Want.integer returns {:error, _} → redirect to /error
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/#{game.id}?round=0")
+    end
+
+    test "redirects to error when game not found in handle_params", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+    end
   end
 
   describe "Show helper functions" do
