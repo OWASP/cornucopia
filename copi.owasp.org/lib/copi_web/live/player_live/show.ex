@@ -34,12 +34,8 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
-    with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
-    else
-      {:error, _reason} ->
-        {:noreply, redirect(socket, to: "/error")}
-    end
+    {:ok, updated_player} = Player.find(socket.assigns.player.id)
+    {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
   end
 
   @impl true
@@ -112,16 +108,12 @@ defmodule CopiWeb.PlayerLive.Show do
       
       {0, _} ->
         # No vote existed, so insert one
-        case Copi.Repo.insert(
+        Copi.Repo.insert(
           %ContinueVote{player_id: player.id, game_id: game.id},
           on_conflict: :nothing,
           conflict_target: [:player_id, :game_id]
-        ) do
-          {:ok, _vote} ->
-            Logger.debug("Continue vote added for player #{player.id}")
-          {:error, changeset} ->
-            Logger.warning("Continue voting failed: #{inspect(changeset.errors)}")
-        end
+        )
+        Logger.debug("Continue vote insert attempted for player #{player.id}")
     end
 
     {:ok, updated_game} = Game.find(game.id)
@@ -150,16 +142,12 @@ defmodule CopiWeb.PlayerLive.Show do
           
           {0, _} ->
             # No vote existed, so insert one
-            case Copi.Repo.insert(
+            Copi.Repo.insert(
               %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
               on_conflict: :nothing,
               conflict_target: [:player_id, :dealt_card_id]
-            ) do
-              {:ok, _vote} ->
-                Logger.debug("Vote added for player #{player.id} on card #{dealt_card_id_int}")
-              {:error, changeset} ->
-                Logger.warning("Voting failed: #{inspect(changeset.errors)}")
-            end
+            )
+            Logger.debug("Vote insert attempted for player #{player.id} on card #{dealt_card_id_int}")
         end
         {:ok, updated_game} = Game.find(game.id)
         CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)

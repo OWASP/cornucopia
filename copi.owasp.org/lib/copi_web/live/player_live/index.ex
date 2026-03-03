@@ -23,9 +23,10 @@ defmodule CopiWeb.PlayerLive.Index do
   end
 
   defp apply_action(socket, :index, _params) do
+    game = socket.assigns.game
     socket
     |> assign(:page_title, "Listing Players")
-    |> assign(:player, nil)
+    |> assign(:player, %Player{game_id: game.id})
   end
 
 end

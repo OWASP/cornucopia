@@ -67,10 +67,8 @@ defmodule CopiWeb.PlayerLiveTest do
     end
 
     test "shows player listing on index route", %{conn: conn, player: player} do
-      # Navigate to the /new route because /players index always renders the join form  
-      # (the listing table is commented out in the template)
-      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players/new")
-      assert html =~ player.game_id
+      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
+      assert html =~ "Listing Players"
     end
 
     test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
@@ -540,11 +538,12 @@ defmodule CopiWeb.PlayerLiveTest do
 
   describe "Index callbacks" do
     test "handle_params applies :index action" do
-      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :index}}
+      game = %Copi.Cornucopia.Game{id: "test-game-id", name: "Test Game", edition: "webapp"}
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :index, game: game}}
 
       assert {:noreply, updated} = Index.handle_params(%{}, "/games/test-id/players", socket)
       assert updated.assigns.page_title == "Listing Players"
-      assert updated.assigns.player == nil
+      assert %Copi.Cornucopia.Player{game_id: "test-game-id"} = updated.assigns.player
     end
 
     test "handle_params applies :new action" do
