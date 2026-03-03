@@ -104,6 +104,21 @@ defmodule CopiWeb.GameLive.ShowTest do
       :timer.sleep(50)
       assert render(show_live) =~ game.name
     end
+
+    test "handle_info updates game when matching topic received", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      {:ok, updated_game} = Cornucopia.Game.find(game.id)
+
+      send(show_live.pid, %{
+        topic: "game:#{game.id}",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
   end
 
   describe "Show helper functions" do
@@ -149,6 +164,5 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert {:cont, updated_socket} = Show.put_uri_hook(%{}, "/games/round/1", socket)
       assert updated_socket.assigns.uri == "/games/round/1"
     end
-
   end
 end

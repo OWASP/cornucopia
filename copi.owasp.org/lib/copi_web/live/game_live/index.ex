@@ -2,12 +2,12 @@ defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
 
-  alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
 
   @impl true
   def mount(_params, session, socket) do
-    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    # V15.3.5: Use only existing, trusted IP values from assigns or session
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip")
     {:ok, assign(assign(socket, :client_ip, ip), :games, nil)}
   end
 
