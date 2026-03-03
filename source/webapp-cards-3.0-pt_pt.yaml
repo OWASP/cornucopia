@@ -278,7 +278,7 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "O Ryan pode influenciar ou alterar os controlos e permissões de autorização, podendo, assim, contorná-los"
+    desc: "O Adrian pode influenciar ou alterar os controlos e permissões de autorização, podendo, assim, contorná-los"
   -
     id: "AZA"
     value: "A"
@@ -333,7 +333,7 @@ suits:
     id: "CRX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CRX"
-    desc: "SA Susanna pode quebrar a criptografia em uso porque não é suficientemente forte para o nível de proteção exigido, ou não é forte o suficiente para o esforço que o atacante está disposto a empregar"
+    desc: "A Susanna pode quebrar a criptografia em uso porque não é suficientemente forte para o nível de proteção exigido, ou não é forte o suficiente para o esforço que o atacante está disposto a empregar"
   -
     id: "CRJ"
     value: "J"
