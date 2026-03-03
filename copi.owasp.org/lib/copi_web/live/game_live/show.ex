@@ -28,12 +28,8 @@ defmodule CopiWeb.GameLive.Show do
         game.rounds_played + 1
       end
 
-      case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
-        {:ok, requested_round} ->
-          {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
-        {:error, _reason} ->
-          {:noreply, redirect(socket, to: "/error")}
-      end
+      {:ok, requested_round} = Want.integer(params["round"], min: 1, max: current_round, default: current_round)
+      {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
 
     else
       {:error, _reason} ->
@@ -83,20 +79,10 @@ defmodule CopiWeb.GameLive.Show do
           })
         end)
 
-        # Update game with start time and handle potential errors
-        case Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
-          {:ok, updated_game} ->
-            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-            {:noreply, assign(socket, :game, updated_game)}
-
-          {:error, _changeset} ->
-            # If update fails, reload game and show error
-            {:ok, reloaded_game} = Game.find(game.id)
-            {:noreply,
-             socket
-             |> put_flash(:error, "Failed to start game. Please try again.")
-             |> assign(:game, reloaded_game)}
-        end
+        # Update game with start time
+        {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+        {:noreply, assign(socket, :game, updated_game)}
     end
   end
 

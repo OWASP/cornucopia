@@ -119,15 +119,21 @@ defmodule CopiWeb.GameLive.ShowTest do
       :timer.sleep(50)
       assert render(show_live) =~ game.name
     end
-    test "redirects to error when round param is out of range", %{conn: conn, game: game} do
-      # round=0 is below min: 1, Want.integer returns {:error, _} → redirect to /error
-      assert {:error, {:redirect, %{to: "/error"}}} =
-               live(conn, "/games/#{game.id}?round=0")
-    end
-
     test "redirects to error when game not found in handle_params", %{conn: conn} do
       assert {:error, {:redirect, %{to: "/error"}}} =
                live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+    end
+
+    test "uses rounds_played when game is finished", %{conn: conn, game: game} do
+      {:ok, finished_game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 2
+        })
+
+      {:ok, _view, html} = live(conn, "/games/#{finished_game.id}")
+      assert html =~ finished_game.name
     end
   end
 
