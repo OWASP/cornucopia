@@ -197,7 +197,7 @@ We have not implemented Authentication when using Copi, instead we use a secure 
 
 An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
 
-Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open up to more threats. We could indeed mitigate against those threats, but we would rather continue to be privacy friendly and process as little personal information as possible.
+Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open us up to more threats. We could indeed mitigate those threats, but we would rather remain privacy-friendly and process as little personal information as possible.
 
 #### What are we going to do about it?
 
