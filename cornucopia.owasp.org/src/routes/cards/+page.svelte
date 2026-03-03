@@ -26,6 +26,7 @@
     //TODO move these constants to a more sensible location
     const VERSION_WEBAPP = "webapp"
     const VERSION_MOBILEAPP = "mobileapp"
+    const VERSION_COMPANION = "companion";
 
     let mobileappSuits = $derived.by(() => {
         const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
@@ -35,6 +36,11 @@
     let webappSuits = $derived.by(() => {
         const langSuits = suits?.get(`${VERSION_WEBAPP}-${$lang}`);
         return langSuits || suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
+    });
+
+    let companionSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_COMPANION}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_COMPANION}-en`) as Suit[];
     });
 
     let version : string = $state(VERSION_WEBAPP);
@@ -59,6 +65,11 @@
         for(let i = 0 ; i < mobileappSuits?.length ; i++)
         {
             if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name,expand);
+        }
+
+        for(let i = 0 ; i < companionSuits?.length ; i++)
+        {
+            if (companionSuits !== undefined && typeof companionSuits[i] !== 'undefined') map.set(companionSuits[i]?.name,expand);
         }
     }
 
@@ -109,6 +120,7 @@
 <p class="button-container script">
     <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
     <button title="OWASP Cornucopia {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
+    <button title="OWASP Cornucopia {$t('cards.button.3')}" class:button-selected={version == VERSION_COMPANION} onclick={()=>changeVersion(VERSION_COMPANION)}>{$t('cards.button.3')}</button>
 </p>
 </section>
 <div class="script">
@@ -128,6 +140,12 @@
     <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
     <p class="text">
         {@html $t('cards.p3')}
+    </p>
+    {/if}
+    {#if version == VERSION_COMPANION}
+    <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+    <p class="text">
+        {@html $t('cards.p4')}
     </p>
     {/if}
     <div class="container">
@@ -150,6 +168,20 @@
 
             {#if version == VERSION_MOBILEAPP}
                 {#each mobileappSuits as suit}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card}
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                                <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_COMPANION}
+                {#each companionSuits as suit}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                     <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
@@ -210,6 +242,26 @@
             {/each}
         </div>
     </div>
+    <div class="">
+        <div>
+            <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+            <p class="text">
+                {@html $t('cards.p4')}
+            </p>
+            {#each companionSuits as suit}
+                <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                <!-- svelte-ignore a11y_label_has_associated_control -->
+                <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card}
+                    <p>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>-
 </noscript>
 </div>
 <style>
