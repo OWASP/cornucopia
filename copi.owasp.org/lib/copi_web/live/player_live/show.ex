@@ -18,14 +18,10 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    with {:ok, player} <- Player.find(player_id) do
-      with {:ok, game} <- Game.find(player.game_id) do
-        CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
-      else
-        {:error, _reason} ->
-          {:noreply, redirect(socket, to: "/error")}
-      end
+    with {:ok, player} <- Player.find(player_id),
+         {:ok, game} <- Game.find(player.game_id) do
+      CopiWeb.Endpoint.subscribe(topic(player.game_id))
+      {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
     else
       {:error, _reason} ->
         {:noreply, redirect(socket, to: "/error")}
