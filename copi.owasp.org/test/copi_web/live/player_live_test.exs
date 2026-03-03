@@ -7,6 +7,7 @@ defmodule CopiWeb.PlayerLiveTest do
   alias Copi.Cornucopia
   alias Copi.RateLimiter
   alias CopiWeb.PlayerLive.Show
+  alias CopiWeb.PlayerLive.Index
 
   @game_attrs %{name: "some name"}
   # @create_attrs %{name: "some name", game_id: ""}
@@ -63,6 +64,12 @@ defmodule CopiWeb.PlayerLiveTest do
 
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
+    end
+
+    test "shows player listing on index route", %{conn: conn, player: player} do
+      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
+      assert html =~ "Listing Players"
+      assert html =~ player.name
     end
 
     test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
@@ -527,6 +534,32 @@ defmodule CopiWeb.PlayerLiveTest do
       assert Show.display_game_session("cumulus") == "OWASP Cumulus Session:"
       assert Show.display_game_session("mlsec") == "Elevation of MLSec Session:"
       assert Show.display_game_session("unknown") == "EoP Session:"
+    end
+  end
+
+  describe "Index callbacks" do
+    test "handle_params applies :index action" do
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :index}}
+
+      assert {:noreply, updated} = Index.handle_params(%{}, "/games/test-id/players", socket)
+      assert updated.assigns.page_title == "Listing Players"
+      assert updated.assigns.player == nil
+    end
+
+    test "handle_params applies :new action" do
+      game = %Copi.Cornucopia.Game{id: "test-game-id", name: "Test Game", edition: "webapp"}
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :new, game: game}}
+
+      assert {:noreply, updated} =
+               Index.handle_params(
+                 %{"game_id" => "test-game-id"},
+                 "/games/test-game-id/players/new",
+                 socket
+               )
+
+      assert updated.assigns.page_title =~ "Test Game"
+      assert %Copi.Cornucopia.Player{} = updated.assigns.player
+      assert updated.assigns.player.game_id == "test-game-id"
     end
   end
 end
