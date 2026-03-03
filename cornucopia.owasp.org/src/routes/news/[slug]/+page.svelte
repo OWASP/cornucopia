@@ -7,13 +7,14 @@
     /** @type {{data: any}} */
     let { data } = $props();
     let blogpost = $derived(data.blogpost);
+    let markdownRenderers = /** @type {any} */ (newsRenderers);
 </script>
 <svelte:head>
     <link rel="canonical" href="/news" />
 </svelte:head>
 <div>
 <BlogpostMetadata {blogpost}></BlogpostMetadata>
-<SvelteMarkdown {newsRenderers} source={blogpost.markdown}></SvelteMarkdown>
+<SvelteMarkdown renderers={markdownRenderers} source={blogpost.markdown}></SvelteMarkdown>
 <p>
     <a title="OWASP Cornucopia's repository" rel="noopener" href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md">{$t('news.slug.p1')}</a>
 </p>
