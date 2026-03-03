@@ -1,10 +1,10 @@
 {
   "source": {
-    "title": "Source",
+    "title": "Джерело",
     "head": {
-      "title": "OWASP Cornucopia - Source Code",
-      "description": "The source code for OWASP Cornucopia allowing you to contribute to the project.",
-      "keywords": "OWASP, Cornucopia, Source Code, GitHub, Project, Contribution"
+      "title": "OWASP Cornucopia - Вихідний код",
+      "description": "Вихідний код OWASP Cornucopia, що дозволяє вам зробити свій внесок у проект.",
+      "keywords": "OWASP, Cornucopia, Вихідний код, GitHub, Проект, Внесок"
     }
   }
 }

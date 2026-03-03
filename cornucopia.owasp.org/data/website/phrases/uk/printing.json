@@ -1,10 +1,10 @@
 {
   "printing": {
-    "title": "Printing",
+    "title": "Друк",
     "head": {
-      "title": "OWASP Cornucopia - Printing Guidelines",
-      "description": "Learn how to print the OWASP Cornucopia card decks, including guidelines for printing.",
-      "keywords": "OWASP, Cornucopia, printing, card decks, PDF, download, guidelines"
+      "title": "OWASP Cornucopia - Інструкції щодо друку",
+      "description": "Дізнайтесь, як роздрукувати колоди карт OWASP Cornucopia, включаючи інструкції щодо друку.",
+      "keywords": "OWASP, Cornucopia, друк, колоди карт, PDF, завантаження, інструкції"
     }
   }
 }

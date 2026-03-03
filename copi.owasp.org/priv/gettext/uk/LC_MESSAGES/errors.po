@@ -9,89 +9,96 @@
 msgid ""
 msgstr ""
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 ## From Ecto.Changeset.cast/4
 msgid "can't be blank"
-msgstr ""
+msgstr "не може бути порожнім"
 
 ## From Ecto.Changeset.unique_constraint/3
 msgid "has already been taken"
-msgstr ""
+msgstr "вже використовується"
 
 ## From Ecto.Changeset.put_change/3
 msgid "is invalid"
-msgstr ""
+msgstr "є недійсним"
 
 ## From Ecto.Changeset.validate_acceptance/3
 msgid "must be accepted"
-msgstr ""
+msgstr "має бути прийнятим"
 
 ## From Ecto.Changeset.validate_format/3
 msgid "has invalid format"
-msgstr ""
+msgstr "має неправильний формат"
 
 ## From Ecto.Changeset.validate_subset/3
 msgid "has an invalid entry"
-msgstr ""
+msgstr "має недійсний запис"
 
 ## From Ecto.Changeset.validate_exclusion/3
 msgid "is reserved"
-msgstr ""
+msgstr "є зарезервованим"
 
 ## From Ecto.Changeset.validate_confirmation/3
 msgid "does not match confirmation"
-msgstr ""
+msgstr "не збігається з підтвердженням"
 
 ## From Ecto.Changeset.no_assoc_constraint/3
 msgid "is still associated with this entry"
-msgstr ""
+msgstr "все ще пов'язаний з цим записом"
 
 msgid "are still associated with this entry"
-msgstr ""
+msgstr "все ще пов'язані з цим записом"
 
 ## From Ecto.Changeset.validate_length/3
 msgid "should be %{count} character(s)"
 msgid_plural "should be %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "має бути %{count} символ"
+msgstr[1] "має бути %{count} символи"
+msgstr[2] "має бути %{count} символів"
 
 msgid "should have %{count} item(s)"
 msgid_plural "should have %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "має містити %{count} елемент"
+msgstr[1] "має містити %{count} елементи"
+msgstr[2] "має містити %{count} елементів"
 
 msgid "should be at least %{count} character(s)"
 msgid_plural "should be at least %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "має містити щонайменше %{count} символ"
+msgstr[1] "має містити щонайменше %{count} символи"
+msgstr[2] "має містити щонайменше %{count} символів"
 
 msgid "should have at least %{count} item(s)"
 msgid_plural "should have at least %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "має містити щонайменше %{count} елемент"
+msgstr[1] "має містити щонайменше %{count} елементи"
+msgstr[2] "має містити щонайменше %{count} елементів"
 
 msgid "should be at most %{count} character(s)"
 msgid_plural "should be at most %{count} character(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "має містити щонайбільше %{count} символ"
+msgstr[1] "має містити щонайбільше %{count} символи"
+msgstr[2] "має містити щонайбільше %{count} символів"
 
 msgid "should have at most %{count} item(s)"
 msgid_plural "should have at most %{count} item(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "має містити щонайбільше %{count} елемент"
+msgstr[1] "має містити щонайбільше %{count} елементи"
+msgstr[2] "має містити щонайбільше %{count} елементів"
 
 ## From Ecto.Changeset.validate_number/3
 msgid "must be less than %{number}"
-msgstr ""
+msgstr "має бути менше %{number}"
 
 msgid "must be greater than %{number}"
-msgstr ""
+msgstr "має бути більше %{number}"
 
 msgid "must be less than or equal to %{number}"
-msgstr ""
+msgstr "має бути менше або рівне %{number}"
 
 msgid "must be greater than or equal to %{number}"
-msgstr ""
+msgstr "має бути більше або рівне %{number}"
 
 msgid "must be equal to %{number}"
-msgstr ""
+msgstr "має дорівнювати %{number}"

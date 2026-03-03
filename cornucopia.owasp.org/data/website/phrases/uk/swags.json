@@ -1,31 +1,31 @@
 {
   "swags": {
-    "title": "Swags",
+    "title": "Сувеніри",
     "head": {
-        "title": "OWASP Cornucopia - Swags and logos",
-        "description": "Explore the official OWASP Cornucopia swag and logos, including stickers, t-shirts, and more.",
-        "keywords": "OWASP, Cornucopia, Swag, Logos, Stickers, T-shirts"
+        "title": "OWASP Cornucopia - Сувеніри та логотипи",
+        "description": "Перегляньте офіційні сувеніри та логотипи OWASP Cornucopia, включаючи наклейки, футболки тощо.",
+        "keywords": "OWASP, Cornucopia, Сувеніри, Логотипи, Наклейки, Футболки"
     },
 
     "h3": {
-      "1": "Stickers",
-      "2": "Cups and mugs",
-      "3": "Where to find the design file"
+      "1": "Наклейки",
+      "2": "Чашки та кухлі",
+      "3": "Де знайти файл дизайну"
     },
     "alt": {
-      "1": "sticker - black for mobile",
-      "2": "sticker - black for web",
-      "3": "sticker - white for web",
-      "4": "sticker - white for mobile",
-      "5": "T-shirt - in dev we trust - back",
-      "6": "T-shirt - in dev we trust - front",
-      "7": "T-shirt - in dev we trust - mobile - left side",
-      "8": "T-shirt - in dev we trust - mobile - right side",
-      "9": "Beer glass",
-      "10": "Beer mug",
-      "11": "Coffee cup",
-      "12": "Cornucopia mugs",
-      "13": "Cornucopia october fest beer mug"
+      "1": "наклейка - чорна для мобільного",
+      "2": "наклейка - чорна для веб",
+      "3": "наклейка - біла для веб",
+      "4": "наклейка - біла для мобільного",
+      "5": "Футболка - in dev we trust - задня сторона",
+      "6": "Футболка - in dev we trust - передня сторона",
+      "7": "Футболка - in dev we trust - мобільна - ліва сторона",
+      "8": "Футболка - in dev we trust - мобільна - права сторона",
+      "9": "Пивний бокал",
+      "10": "Пивна кружка",
+      "11": "Кавова чашка",
+      "12": "Кухлі Cornucopia",
+      "13": "Пивна кружка Cornucopia Octoberfest"
     }
   }
 }

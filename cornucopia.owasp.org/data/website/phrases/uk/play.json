@@ -1,10 +1,10 @@
 {
   "play": {
-    "title": "How to play",
+    "title": "Як грати",
     "head": {
-      "title": "OWASP Cornucopia - How to play",
-      "description": "Learn how to play the OWASP Cornucopia card game, including rules, strategies, and tips for effective threat modeling.",
-      "keywords": "OWASP, Cornucopia, play, card game, rules, strategies, threat modeling, security"
+      "title": "OWASP Cornucopia - Як грати",
+      "description": "Дізнайтесь, як грати у карткову гру OWASP Cornucopia, включаючи правила, стратегії та поради щодо ефективного моделювання загроз.",
+      "keywords": "OWASP, Cornucopia, гра, карткова гра, правила, стратегії, моделювання загроз, безпека"
     }
   }
 }

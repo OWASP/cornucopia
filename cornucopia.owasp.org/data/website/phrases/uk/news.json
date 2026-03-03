@@ -1,19 +1,19 @@
 {
   "news": {
-    "title": "News",
+    "title": "Новини",
     "head": {
-      "title": "OWASP Cornucopia - News",
-      "description": "Stay updated with the latest news and updates from OWASP Cornucopia.",
-      "keywords": "OWASP, Cornucopia, news, updates, releases, community"
+      "title": "OWASP Cornucopia - Новини",
+      "description": "Будьте в курсі останніх новин та оновлень від OWASP Cornucopia.",
+      "keywords": "OWASP, Cornucopia, новини, оновлення, випуски, спільнота"
     },
-    "p1": "No blogposts have been published yet, come back soon!",
-    "a": "Read more",
-    "p2": "View",
+    "p1": "Публікацій у блозі ще немає, заходьте пізніше!",
+    "a": "Читати далі",
+    "p2": "Переглянути",
     "slug": {
-      "p1": "Source"
+      "p1": "Джерело"
     },
     "author": {
-      "h1": "Authors"
+      "h1": "Автори"
     }
   }
 }

@@ -1,10 +1,10 @@
 {
   "about": {
-    "title": "About",
+    "title": "Про проект",
     "head": {
-      "title": "OWASP Cornucopia - About the Project",
-      "description": "Learn about the OWASP Cornucopia project, its goals, and how it helps improve threat modeling and application security.",
-      "keywords": "OWASP, Cornucopia, Project, Application Security, Goals, Threat Modeling"
+      "title": "OWASP Cornucopia - Про проект",
+      "description": "Дізнайтесь про проект OWASP Cornucopia, його цілі та як він допомагає покращити моделювання загроз і безпеку застосунків.",
+      "keywords": "OWASP, Cornucopia, Проект, Безпека застосунків, Цілі, Моделювання загроз"
     }
   }
 }

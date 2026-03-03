@@ -1,10 +1,10 @@
 {
   "author": {
-    "title": "Author",
+    "title": "Автор",
     "head": {
-      "title": "OWASP Cornucopia - News Authors",
-      "description": "Meet the authors behind the OWASP Cornucopia news articles, sharing insights and updates on the project.",
-      "keywords": "OWASP, Cornucopia, News, Authors, Project, Contributors"
+      "title": "OWASP Cornucopia - Автори новин",
+      "description": "Познайомтесь з авторами новинних статей OWASP Cornucopia, які діляться думками та оновленнями проекту.",
+      "keywords": "OWASP, Cornucopia, Новини, Автори, Проект, Дописувачі"
     }
   }
 }

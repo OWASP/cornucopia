@@ -1,10 +1,10 @@
 {
     "questionsandanswers": {
-        "title": "Q & A",
+        "title": "Питання та відповіді",
         "head": {
-            "title": "OWASP Cornucopia - Questions & Answers",
-            "description": "Explore the OWASP Cornucopia Questions & Answers section, where you can find answers to common questions.",
-            "keywords": "OWASP, Cornucopia, Questions, Answers, FAQ, Security, Card Decks"
+            "title": "OWASP Cornucopia - Питання та відповіді",
+            "description": "Перегляньте розділ питань та відповідей OWASP Cornucopia, де можна знайти відповіді на поширені запитання.",
+            "keywords": "OWASP, Cornucopia, Питання, Відповіді, FAQ, Безпека, Колоди карт"
         }
     }
 }

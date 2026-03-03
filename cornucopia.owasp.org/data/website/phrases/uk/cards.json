@@ -1,56 +1,56 @@
 {
   "cards": {
-    "title": "View Cards",
+    "title": "Переглянути картки",
     "head": {
-      "title": "OWASP Cornucopia - The card decks",
-      "description": "The OWASP Cornucopia card decks provide a comprehensive set of cards for threat modeling, available in both web and mobile app versions.",
-      "keywords": "OWASP, Cornucopia, Card Decks, Threat Modeling, Web App, Mobile App"
+      "title": "OWASP Cornucopia - Колоди карт",
+      "description": "Колоди карт OWASP Cornucopia надають комплексний набір карток для моделювання загроз, доступний у версіях для веб-застосунків і мобільних додатків.",
+      "keywords": "OWASP, Cornucopia, Колоди карт, Моделювання загроз, Веб-застосунок, Мобільний додаток"
     },
-    "p1": "Both current decks have six suits and there are also two Joker cards. Each suit contains 13 cards      (Ace, 2-10, Jack, Queen and King). This page contains the card browser where you can browse through each of the     cards in the OWASP Cornucopia decks.",
+    "p1": "Обидві поточні колоди мають шість мастей, а також дві карти Джокера. Кожна масть містить 13 карток (Туз, 2-10, Валет, Дама та Король). Ця сторінка містить браузер карток, де можна переглянути кожну картку в колодах OWASP Cornucopia.",
     "button": {
-      "1": "Website App version",
-      "2": "Mobile App version"
+      "1": "Версія для веб-застосунку",
+      "2": "Версія для мобільного додатку"
     },
     "h2": {
-      "1": "Website App version",
-      "2": "Mobile App version"
+      "1": "Версія для веб-застосунку",
+      "2": "Версія для мобільного додатку"
     },
-    "p2": "For the previously called Ecommerce Website Edition. Instead of EoP's STRIDE suits, the suits were selected based on the structure of the OWASP Secure Coding Practices - Quick Reference Guide (SCP) which have been migrated to the OWASP Developer Guide Web Application Checklist. The content was mainly drawn from the SCP but with additional consideration of sections in the <a rel=\"noopener\" href=\"https://owasp.org/www-project-application-security-verification-standard/\">OWASP Application Security Verification Standard</a>, the <a rel=\"noopener\" href=\"https://owasp.org/www-project-web-security-testing-guide\">OWASP Web Security Testing Guide</a> and David Rook's <a rel=\"noopener\" href=\"/share/OWASP-SecureDevPrinciples-David-Rook.pdf\">Principles of Secure Development</a>. These provided five suits, and a sixth called \"Cornucopia\" was created for everything else:",
-    "p3": "The second Cornucopia deck, the “Mobile App Edition”, follows the same principles and game rules as the original OWASP Cornucopia, but has different suits based on the <a rel=\"noopener\" href=\"https://mas.owasp.org/MASVS/\">MASVS categories</a>, in addition to the Cornucopia suit that contains threats related to mobile malware and privacy issues:",
+    "p2": "Для раніше відомого видання Ecommerce Website Edition. Замість мастей STRIDE від EoP, масті були обрані на основі структури OWASP Secure Coding Practices - Quick Reference Guide (SCP), які перейшли до OWASP Developer Guide Web Application Checklist. Зміст в основному взятий з SCP, але з додатковим урахуванням розділів зі <a rel=\"noopener\" href=\"https://owasp.org/www-project-application-security-verification-standard/\">OWASP Application Security Verification Standard</a>, <a rel=\"noopener\" href=\"https://owasp.org/www-project-web-security-testing-guide\">OWASP Web Security Testing Guide</a> та <a rel=\"noopener\" href=\"/share/OWASP-SecureDevPrinciples-David-Rook.pdf\">Принципів безпечної розробки</a> Девіда Рука. Вони дали п'ять мастей, і шоста під назвою «Cornucopia» була створена для всього іншого:",
+    "p3": "Друга колода Cornucopia, «Mobile App Edition», дотримується тих самих принципів і правил гри, що й оригінальний OWASP Cornucopia, але має різні масті на основі <a rel=\"noopener\" href=\"https://mas.owasp.org/MASVS/\">категорій MASVS</a>, а також масті Cornucopia, що містять загрози, пов'язані з мобільним шкідливим програмним забезпеченням та проблемами конфіденційності:",
     "card": {
-      "p1": "Back to overview"
+      "p1": "Повернутись до огляду"
     },
     "cardFound": {
-      "a": "How to play?"
+      "a": "Як грати?"
     },
     "cardBrowser": {
       "a1": {
-        "title": "View previous card"
+        "title": "Переглянути попередню картку"
       },
       "a2": {
-        "title": "View next card"
+        "title": "Переглянути наступну картку"
       }
     },
     "webAppCardTaxonomy": {
       "h1": {
-        "1": "Mappings",
-        "2": "Attacks"
+        "1": "Відображення",
+        "2": "Атаки"
       }
     },
     "ASVSOverview": {
-      "p1": "No suitable mappings were found."
+      "p1": "Відповідних відображень не знайдено."
     },
     "mobileAppCardTaxonomy": {
       "h1": {
-        "1": "Mappings",
-        "2": "Attacks"
+        "1": "Відображення",
+        "2": "Атаки"
       }
     },
     "MASVSOverview": {
-      "p1": "No suitable mappings were found."
+      "p1": "Відповідних відображень не знайдено."
     },
     "attacks": {
-      "p1": "No attacks registered!"
+      "p1": "Атак не зареєстровано!"
     }
   }
 }

@@ -1,10 +1,10 @@
 {
   "copi": {
-    "title": "Game Engine",
+    "title": "Ігровий рушій",
     "head": {
-      "title": "OWASP Cornucopia - Game Engine",
-      "description": "The OWASP Cornucopia game engine is a powerful tool that allows you to play the Cornucopia card game online, facilitating collaborative threat modeling and security requirements gathering.",
-      "keywords": "OWASP, Cornucopia, game engine, online play, card game, threat modeling, security requirements"
+      "title": "OWASP Cornucopia - Ігровий рушій",
+      "description": "Ігровий рушій OWASP Cornucopia — це потужний інструмент, який дозволяє грати в карткову гру Cornucopia онлайн, сприяючи спільному моделюванню загроз і збору вимог безпеки.",
+      "keywords": "OWASP, Cornucopia, ігровий рушій, онлайн-гра, карткова гра, моделювання загроз, вимоги безпеки"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "layout": {
-    "description": "OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes.",
-    "title": "OWASP Cornucopia - Threat modeling for everyone",
-    "keywords": "OWASP, Cornucopia, threat modeling, security, card game, application security, agile, development, requirements"
+    "description": "OWASP Cornucopia — це механізм у формі карткової гри для допомоги командам розробки програмного забезпечення у визначенні вимог безпеки в гнучких, традиційних та формальних процесах розробки.",
+    "title": "OWASP Cornucopia - Моделювання загроз для всіх",
+    "keywords": "OWASP, Cornucopia, моделювання загроз, безпека, карткова гра, безпека застосунків, agile, розробка, вимоги"
   }
 }

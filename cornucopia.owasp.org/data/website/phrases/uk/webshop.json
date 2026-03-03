@@ -1,10 +1,10 @@
 {
   "webshop": {
-    "title": "Webshop",
+    "title": "Веб-магазин",
     "head": {
-      "title": "OWASP Cornucopia - Webshop",
-      "description": "OWASP Cornucopia webshops for bying the cards decks",
-      "keywords": "OWASP, Cornucopia, webshop, card decks"
+      "title": "OWASP Cornucopia - Веб-магазин",
+      "description": "Веб-магазини OWASP Cornucopia для купівлі колод карт.",
+      "keywords": "OWASP, Cornucopia, веб-магазин, колоди карт"
     }
   }
 }
