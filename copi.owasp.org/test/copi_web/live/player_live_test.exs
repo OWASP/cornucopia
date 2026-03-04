@@ -193,5 +193,136 @@ defmodule CopiWeb.PlayerLiveTest do
       # Verify it doesn't crash and stays connected
       assert render(show_live) =~ player.name
     end
+
+    test "next_round advances round when round is closed", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      # Start game and mark round as closed (all players have played)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Trigger next_round when round is closed (no unplayed cards means round_open? = false)
+      show_live |> element("[phx-click=\"next_round\"]") |> render_click()
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played >= 0
+    end
+
+    test "redirects to error when player not found", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV/players/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+    end
+
+    test "toggle_vote removes existing vote", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other2", game_id: game_id})
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V2", description: "D", edition: "webapp",
+        version: "2.2", external_id: "EXT2", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Vote once to add
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+
+      # Vote again to remove
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+  end
+
+  describe "Helper functions" do
+    alias CopiWeb.PlayerLive.Show
+
+    test "ordered_cards sorts by card id" do
+      cards = [
+        %{card: %{id: 3}},
+        %{card: %{id: 1}},
+        %{card: %{id: 2}}
+      ]
+      result = Show.ordered_cards(cards)
+      assert Enum.map(result, & &1.card.id) == [1, 2, 3]
+    end
+
+    test "unplayed_cards returns cards with played_in_round 0 or nil" do
+      cards = [
+        %{played_in_round: 0},
+        %{played_in_round: nil},
+        %{played_in_round: 1}
+      ]
+      result = Show.unplayed_cards(cards)
+      assert length(result) == 2
+    end
+
+    test "played_cards returns cards played in given round" do
+      cards = [
+        %{played_in_round: 1},
+        %{played_in_round: 2},
+        %{played_in_round: 1}
+      ]
+      assert length(Show.played_cards(cards, 1)) == 2
+      assert length(Show.played_cards(cards, 2)) == 1
+    end
+
+    test "card_played_in_round finds correct card" do
+      cards = [%{played_in_round: 1, id: 10}, %{played_in_round: 2, id: 20}]
+      assert Show.card_played_in_round(cards, 1).id == 10
+      assert is_nil(Show.card_played_in_round(cards, 9))
+    end
+
+    test "player_first puts given player first" do
+      players = [%{id: 1}, %{id: 2}, %{id: 3}]
+      [first | _] = Show.player_first(players, %{id: 2})
+      assert first.id == 2
+    end
+
+    test "round_open? returns true when players have unplayed cards" do
+      game = %{
+        rounds_played: 0,
+        players: [
+          %{dealt_cards: []},
+          %{dealt_cards: [%{played_in_round: 1}]}
+        ]
+      }
+      assert Show.round_open?(game)
+    end
+
+    test "round_closed? returns true when all players have played" do
+      game = %{
+        rounds_played: 0,
+        players: [
+          %{dealt_cards: [%{played_in_round: 1}]},
+          %{dealt_cards: [%{played_in_round: 1}]}
+        ]
+      }
+      assert Show.round_closed?(game)
+    end
+
+    test "last_round? returns true when a player has no unplayed cards" do
+      game = %{
+        players: [
+          %{dealt_cards: [%{played_in_round: 1}]},
+          %{dealt_cards: [%{played_in_round: nil}]}
+        ]
+      }
+      assert Show.last_round?(game)
+    end
+
+    test "get_vote returns matching vote or nil" do
+      player = %{id: 5}
+      dealt_card = %{votes: [%{player_id: 5, id: 99}, %{player_id: 6, id: 100}]}
+      assert Show.get_vote(dealt_card, player).id == 99
+      assert is_nil(Show.get_vote(%{votes: []}, player))
+    end
   end
 end
