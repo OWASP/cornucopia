@@ -105,12 +105,8 @@ defmodule CopiWeb.PlayerLive.Show do
       end
     else
       # Add their vote
-      case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
-        {:ok, _vote} ->
-          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
-        {:error, _} ->
-          Logger.debug("Continue vote already exists for player_id: #{player.id}, game_id: #{game.id}")
-      end
+      Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
+      Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id})
     end
 
     {:ok, updated_game} = Game.find(game.id)
@@ -134,12 +130,7 @@ defmodule CopiWeb.PlayerLive.Show do
       Copi.Repo.delete!(vote)
     else
       Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-        {:ok, _vote} ->
-          Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        {:error, _} ->
-          Logger.debug("Vote already exists for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      end
+      Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id})
     end
 
     {:ok, updated_game} = Game.find(game.id)
