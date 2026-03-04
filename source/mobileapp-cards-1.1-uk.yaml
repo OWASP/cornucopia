@@ -2,447 +2,447 @@
 meta:
   edition: "mobileapp"
   component: "cards"
-  language: "EN"
+  language: "UK"
   version: "1.1"
 suits:
 -
   id: "PC"
-  name: "Platform & Code"
+  name: "Платформа та код"
   cards:
   -
     id: "PC2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/PC2"
-    desc: "Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background"
+    desc: "Ендрю може розкрити конфіденційні дані через автоматично створені знімки екрана застосунку, коли застосунок переходить у фоновий режим"
   -
     id: "PC3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/PC3"
-    desc: "Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use"
+    desc: "Гарольд може підглядати конфіденційні дані, що вводяться через інтерфейс користувача, оскільки дані є надлишковими, не замасковані належним чином або не очищені після використання"
   -
     id: "PC4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/PC4"
-    desc: "Kelly can expose sensitive data by taking advantage of the app's excessive permissions connected to the app's use of location, camera, microphone, storage, etc"
+    desc: "Келлі може розкрити конфіденційні дані, скориставшись надмірними дозволами застосунку, пов'язаними з використанням геолокації, камери, мікрофона, сховища тощо"
   -
     id: "PC5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/PC5"
-    desc: "Jason can provoke memory leak or corruption because the app has cyclic dependencies, manages pointers inadequately, keeps an incorrect reference count, does not release shared resources or apply stack protection"
+    desc: "Джейсон може спровокувати витік або пошкодження пам'яті, оскільки застосунок має циклічні залежності, неналежно керує покажчиками, підтримує неправильний лічильник посилань, не звільняє спільні ресурси або не застосовує захист стека"
   -
     id: "PC6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/PC6"
-    desc: "Dawn can expose and intercept sensitive functionality through interprocess communication because permissions for broadcast and sharing are not set, not narrow enough or because sensitive functionality isn't appropriately excluded when sharing"
+    desc: "Дон може розкрити та перехопити конфіденційні функції через міжпроцесну комунікацію, оскільки дозволи на трансляцію та спільний доступ не встановлені, недостатньо обмежені, або тому що конфіденційні функції не виключені належним чином під час спільного використання"
   -
     id: "PC7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/PC7"
-    desc: "Lauren can traverse or modify otherwise protected files through access to the underlying file system by exploiting weaknesses in file system-based content providers, resolvers or its configuration"
+    desc: "Лорен може переміщатися або модифікувати захищені файли через доступ до базової файлової системи, використовуючи слабкі місця у постачальниках контенту на базі файлової системи, резолверах або їхній конфігурації"
   -
     id: "PC8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/PC8"
-    desc: "Colin can expose sensitive data through the app's interprocess communication because the content provider's query methods are not properly parameterized and arguments sanitized"
+    desc: "Колін може розкрити конфіденційні дані через міжпроцесну комунікацію застосунку, оскільки методи запитів постачальника контенту не параметризовані належним чином, а аргументи не валідуються або не очищаються належним чином"
   -
     id: "PC9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/PC9"
-    desc: "Toby can modify or expose data by injection because the response from implicit intents is not properly validated"
+    desc: "Тобі може змінити або розкрити дані шляхом ін'єкції, оскільки відповідь на неявні інтенти не перевіряється належним чином"
   -
     id: "PCX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/PCX"
-    desc: "Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
+    desc: "Макс може змінити або розкрити дані, оскільки перевірка та очищення вхідних даних не застосовуються належним чином до міжпроцесної комунікації, або розширення не обмежені належним чином"
   -
     id: "PCJ"
-    value: "J"
+    value: "В"
     url: "https://cornucopia.owasp.org/cards/PCJ"
-    desc: "Johan can modify or expose sensitive data by exploiting weaknesses in the SDK or third party libraries because updates to the app and platform are not enforced or do not patch known software vulnerabilities"
+    desc: "Юхан може змінити або розкрити конфіденційні дані, використовуючи слабкі місця в SDK або сторонніх бібліотеках, оскільки оновлення застосунку та платформи не є обов'язковими або не виправляють відомі вразливості програмного забезпечення"
   -
     id: "PCQ"
-    value: "Q"
+    value: "Д"
     url: "https://cornucopia.owasp.org/cards/PCQ"
-    desc: "Xavier can inject scripts into the web view because it allows embedding content using deep linking without proper authorization and validation of the host, schema and path of the target as these can be changed by the user or because safe browsing is disabled"
+    desc: "Ксав'є може впровадити скрипти у веб-перегляд, оскільки він дозволяє вбудовування контенту через глибокі посилання без належної авторизації та перевірки хоста, схеми та шляху цільового ресурсу, оскільки вони можуть бути змінені користувачем, або тому що безпечний перегляд вимкнено"
   -
     id: "PCK"
-    value: "K"
+    value: "К"
     url: "https://cornucopia.owasp.org/cards/PCK"
-    desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
+    desc: "Грант може змінити або розкрити дані, впливаючи на JavaScript-містки, розширення або міжпроцесну комунікацію (наприклад, спільна пам'ять, передача повідомлень, пайпи, сокети) або маніпулюючи нею"
   -
     id: "PCA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/PCA"
-    desc: "You have invented a new attack against “Platform and Code”"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Code Quality” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+    desc: "Ви вигадали нову атаку проти «Платформи та коду»"
+    misc: "Дізнайтеся більше про цю тему у безкоштовних шпаргалках OWASP з безпеки мобільних застосунків, а також у розділі «Якість коду мобільного застосунку» у «Посібнику з тестування безпеки мобільних застосунків» на сайті OWASP MAS"
 -
   id: "AA"
-  name: "Authentication & Authorization"
+  name: "Автентифікація та авторизація"
   cards:
   -
     id: "AA2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AA2"
-    desc: "Jie can use the app to do sensitive operations because the “unlocked key” is not used during the application flow"
+    desc: "Цзе може використовувати застосунок для виконання конфіденційних операцій, оскільки «розблокований ключ» не використовується під час робочого процесу застосунку"
   -
     id: "AA3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AA3"
-    desc: "Choi can access capabilities, objects, resources, or properties they should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
+    desc: "Чой може отримати доступ до можливостей, об'єктів, ресурсів або властивостей, до яких він не повинен мати авторизованого доступу, оскільки права або дозволи є надто широкими, не встановлені належним чином або не застосовуються"
   -
     id: "AA4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/AA4"
-    desc: "Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly"
+    desc: "Вандана може обійти біометричну автентифікацію, оскільки вона налаштована неправильно або реалізована некоректно"
   -
     id: "AA5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AA5"
-    desc: "Eiman can bypass the local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded"
+    desc: "Ейман може обійти локальну автентифікацію шляхом патчингу та/або інструментування, оскільки автентифікацію можна усунути патчем або перевантажити"
   -
     id: "AA6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AA6"
-    desc: "Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing"
+    desc: "Ананта може виконувати конфіденційні операції без додаткової автентифікації, оскільки вимоги до автентифікації є надто слабкими або відсутніми"
   -
     id: "AA7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AA7"
-    desc: "Abdullah can bypass authentication by altering the usual process sequence or flow, or by undertaking the process in incorrect order, or by manipulating date and time values used by the app, or by using valid features for unintended purposes"
+    desc: "Абдулла може обійти автентифікацію, змінивши звичайну послідовність або порядок процесу, виконавши процес у неправильному порядку, маніпулюючи значеннями дати та часу, що використовуються застосунком, або використовуючи дійсні функції в непередбачених цілях"
   -
     id: "AA8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/AA8"
-    desc: "Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking"
+    desc: "Прамод може перехопити облікові дані шляхом введення в оману, оскільки застосунок є вразливим до атак, таких як Tapjacking, StrandHogg та/або перехоплення схеми URL"
   -
     id: "AA9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AA9"
-    desc: "Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)"
+    desc: "Вонг може обійти автентифікацію, оскільки вона не завершується безпечно (тобто за замовчуванням дозволяє неавтентифікований доступ)"
   -
     id: "AAX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AAX"
-    desc: "Prasad can bypass the centralized authentication and authorization controls since they are not being used comprehensively on all interactions"
+    desc: "Прасад може обійти централізовані засоби контролю автентифікації та авторизації, оскільки вони не застосовуються комплексно до всіх взаємодій"
   -
     id: "AAJ"
-    value: "J"
+    value: "В"
     url: "https://cornucopia.owasp.org/cards/AAJ"
-    desc: "Ade can bypass authentication because it is not enforced using a remote endpoint, or it is not based on a cryptographic primitive protected by keystore/keychain access control flags"
+    desc: "Аде може обійти автентифікацію, оскільки вона не забезпечується за допомогою віддаленої кінцевої точки, або не базується на криптографічному примітиві, захищеному прапорцями контролю доступу до сховища ключів"
   -
     id: "AAQ"
-    value: "Q"
+    value: "Д"
     url: "https://cornucopia.owasp.org/cards/AAQ"
-    desc: "Riotaro can inject and run a command that the application will run at a higher privilege level without being authenticated or authorized to do so"
+    desc: "Ріотаро може впровадити та виконати команду, яку застосунок виконає з вищим рівнем привілеїв, без автентифікації або авторизації"
   -
     id: "AAK"
-    value: "K"
+    value: "К"
     url: "https://cornucopia.owasp.org/cards/AAK"
-    desc: "Aatif can influence or alter authentication controls and can therefore bypass them"
+    desc: "Аатіф може впливати на засоби контролю автентифікації або змінювати їх і тому може обходити їх"
   -
     id: "AAA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/AAA"
-    desc: "You have invented a new attack against “Authentication & Authorization”"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Authentication Architectures” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+    desc: "Ви вигадали нову атаку проти «Автентифікації та авторизації»"
+    misc: "Дізнайтеся більше про цю тему у безкоштовних шпаргалках OWASP з безпеки мобільних застосунків, а також у розділі «Архітектури автентифікації мобільних застосунків» у «Посібнику з тестування безпеки мобільних застосунків» на сайті OWASP MAS"
 -
   id: "NS"
-  name: "Network & Storage"
+  name: "Мережа та сховище"
   cards:
   -
     id: "NS2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/NS2"
-    desc: "Matt can inspect sensitive application log data because logging statements have not been removed or reviewed as safe before the production release"
+    desc: "Метт може переглядати конфіденційні дані журналів застосунку, оскільки оператори журналювання не були видалені або перевірені на безпечність перед випуском у виробниче середовище"
   -
     id: "NS3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/NS3"
-    desc: "Bil can access sensitive data for sensitive fields from the pasteboard/clipboard or keyboard cache because the pasteboard/clipboard is not timely cleared, disabled or restricted for sensitive fields, or the keyboard cache is not disabled"
+    desc: "Біл може отримати доступ до конфіденційних даних конфіденційних полів із буфера обміну або кешу клавіатури, оскільки буфер обміну не очищується своєчасно, не вимкнено або не обмежено для конфіденційних полів, або кеш клавіатури не вимкнено"
   -
     id: "NS4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/NS4"
-    desc: "Ricardo can extract data stored by the app on a stolen or decommissioned device  because it does not enforce device access security policies (e.g. PIN protected locking, app-/os-version, USB debug deactivation, device encryption and rooting)"
+    desc: "Рікардо може витягти дані, збережені застосунком на вкраденому або виведеному з експлуатації пристрої, оскільки він не забезпечує дотримання політик безпеки доступу до пристрою (наприклад, блокування з PIN-кодом, версія застосунку/ОС, деактивація USB-налагодження, шифрування пристрою та рутинг)"
   -
     id: "NS5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/NS5"
-    desc: "Kevin can read sensitive data mapped to user accounts or sessions by extracting data sent through third-party libraries and/or notifications sent between the app and embedded services (e.g. logs, notifications, backups, cache, local db)"
+    desc: "Кевін може читати конфіденційні дані, прив'язані до облікових записів користувачів або сесій, шляхом витягування даних, переданих через сторонні бібліотеки та/або сповіщення між застосунком і вбудованими сервісами (наприклад, журнали, сповіщення, резервні копії, кеш, локальна база даних)"
   -
     id: "NS6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/NS6"
-    desc: "Sam can dump sensitive data from memory because the data is not stored as primitive data types and overwritten with random data after use or because the app's input fields use insecure SDKs to store the data in RAM"
+    desc: "Сем може дампити конфіденційні дані з пам'яті, оскільки дані не зберігаються як примітивні типи даних і не перезаписуються випадковими даними після використання, або тому що поля введення застосунку використовують небезпечні SDK для зберігання даних у RAM"
   -
     id: "NS7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/NS7"
-    desc: "Steve can access sensitive data by reading backups and/or local, internal/external storage"
+    desc: "Стів може отримати доступ до конфіденційних даних, читаючи резервні копії та/або локальне, внутрішнє/зовнішнє сховище"
   -
     id: "NS8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/NS8"
-    desc: "Martin can modify or expose sensitive data through unsafe reflection when reading data from public data storage (e.g. shared preferences) because the data is not validated before being read by the app"
+    desc: "Мартін може змінити або розкрити конфіденційні дані через небезпечну рефлексію під час читання даних із публічного сховища даних (наприклад, спільних налаштувань), оскільки дані не перевіряються перед читанням застосунком"
   -
     id: "NS9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/NS9"
-    desc: "Adrian can compromise the app communication through a proxy because the app does not make use of certificate pinning or implements it incorrectly"
+    desc: "Адріан може скомпрометувати комунікацію застосунку через проксі, оскільки застосунок не використовує закріплення сертифікатів або реалізує його некоректно"
   -
     id: "NSX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/NSX"
-    desc: "Maarten can compromise the communication between the app and the external services because the app does not verify TLS certificates and -chains, trust insecure sources, lack hostname verification or ignore TLS verification issues"
+    desc: "Маартен може скомпрометувати комунікацію між застосунком та зовнішніми сервісами, оскільки застосунок не перевіряє сертифікати та ланцюжки TLS, довіряє небезпечним джерелам, не виконує перевірку імені хоста або ігнорує проблеми верифікації TLS"
   -
     id: "NSJ"
-    value: "J"
+    value: "В"
     url: "https://cornucopia.owasp.org/cards/NSJ"
-    desc: "Nihel can compromise the communication as it may fall back to an insecure or unencrypted channel,  because encryption is optional, or because of client-server protocol or security provider weaknesses"
+    desc: "Ніель може скомпрометувати комунікацію, оскільки вона може перейти на незахищений або незашифрований канал, тому що шифрування є необов'язковим, або через слабкі місця у протоколі клієнт-сервер або постачальнику засобів безпеки"
   -
     id: "NSQ"
-    value: "Q"
+    value: "Д"
     url: "https://cornucopia.owasp.org/cards/NSQ"
-    desc: "Ahmed can read and modify data in transit because the communication is transmitted over an unencrypted channel"
+    desc: "Ахмед може читати та змінювати дані в транзиті, оскільки комунікація передається незашифрованим каналом"
   -
     id: "NSK"
-    value: "K"
+    value: "К"
     url: "https://cornucopia.owasp.org/cards/NSK"
-    desc: "Taher can intercept, extract or modify sensitive data at rest or in transit by influencing or altering methods for transferring or storing data at rest or in transit"
+    desc: "Тахер може перехоплювати, витягувати або змінювати конфіденційні дані в стані спокою або в транзиті, впливаючи на методи передачі або зберігання даних або маніпулюючи ними"
   -
     id: "NSA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/NSA"
-    desc: "You have invented a new attack against “Network & Storage”"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Network Communication” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+    desc: "Ви вигадали нову атаку проти «Мереж та сховищ»"
+    misc: "Дізнайтеся більше про цю тему у безкоштовних шпаргалках OWASP з безпеки мобільних застосунків, а також у розділі «Мережева комунікація мобільних застосунків» у «Посібнику з тестування безпеки мобільних застосунків» на сайті OWASP MAS"
 -
   id: "RS"
-  name: "Resilience"
+  name: "Стійкість"
   cards:
   -
     id: "RS2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/RS2"
-    desc: "Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
+    desc: "Себастьєн може розкрити конфіденційні дані, оскільки застосунок налаштований на журналювання відладочної інформації під час виконання"
   -
     id: "RS3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/RS3"
-    desc: "Tobias can disclose sensitive data by dumping debug symbols while the application is running"
+    desc: "Тобіас може розкрити конфіденційні дані шляхом дампингу відладочних символів під час виконання застосунку"
   -
     id: "RS4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/RS4"
-    desc: "Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate"
+    desc: "Тімур може змінити код виробничого випуску, оскільки код застосунку не підписаний належним чином дійсним виробничим сертифікатом"
   -
     id: "RS5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/RS5"
-    desc: "Matteo can bypass access controls and trigger functionality because debugging is left enabled in the production build"
+    desc: "Маттео може обійти засоби контролю доступу та викликати функціональність, оскільки відладка залишається увімкненою у виробничій збірці"
   -
     id: "RS6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/RS6"
-    desc: "Joren can bypass access controls because the anti-debugging controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Йорен може обійти засоби контролю доступу, оскільки засоби захисту від відладки недостатньо надійні відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "RS7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/RS7"
-    desc: "Erlend can compromise the app by running it in an emulator because the prevention against emulators are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Ерленд може скомпрометувати застосунок, запускаючи його в емуляторі, оскільки захист від емуляторів недостатньо надійний відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "RS8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/RS8"
-    desc: "Carlos can reverse engineer the app because the anti-reverse engineering controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Карлос може виконати зворотний інжиніринг застосунку, оскільки засоби захисту від зворотного інжинірингу недостатньо надійні відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "RS9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/RS9"
-    desc: "Sean can reverse engineer the app because the code obfuscation isn't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Шон може виконати зворотний інжиніринг застосунку, оскільки обфускація коду недостатньо надійна відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "RSX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/RSX"
-    desc: "Juan can bypass jailbreak and root detection and execute administrative functions to bypass integrity checks and access controls and trigger app functionality"
+    desc: "Хуан може обійти виявлення джейлбрейку та рут-прав і виконати адміністративні функції для обходу перевірок цілісності та засобів контролю доступу й активації функціональності застосунку"
   -
     id: "RSJ"
-    value: "J"
+    value: "В"
     url: "https://cornucopia.owasp.org/cards/RSJ"
-    desc: "Pekka can compromise the integrity of the storage because the file integrity checks aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Пекка може скомпрометувати цілісність сховища, оскільки перевірки цілісності файлів недостатньо надійні відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "RSQ"
-    value: "Q"
+    value: "Д"
     url: "https://cornucopia.owasp.org/cards/RSQ"
-    desc: "Titus can patch out critical functionality because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Тітус може усунути патчем критичну функціональність, оскільки перевірки цілісності під час виконання недостатньо надійні відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "RSK"
-    value: "K"
+    value: "К"
     url: "https://cornucopia.owasp.org/cards/RSK"
-    desc: "Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them"
+    desc: "Шеріф може впливати на засоби захисту від зворотного інжинірингу та захист під час виконання або змінювати їх і тому може обходити їх"
   -
     id: "RSA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/RSA"
-    desc: "You have invented a new attack against “Resilience”"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Tampering and Reverse Engineering” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+    desc: "Ви вигадали нову атаку проти «Стійкості»"
+    misc: "Дізнайтеся більше про цю тему у безкоштовних шпаргалках OWASP з безпеки мобільних застосунків, а також у розділі «Модифікація мобільних застосунків та зворотний інжиніринг» у «Посібнику з тестування безпеки мобільних застосунків» на сайті OWASP MAS"
 -
   id: "CRM"
-  name: "Cryptography"
+  name: "Криптографія"
   cards:
   -
     id: "CRM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/CRM2"
-    desc: "Lesego can compromise cryptographic operations and resources because keys are reused for multiple purposes, or not used according to the purpose for which they were created"
+    desc: "Лесего може скомпрометувати криптографічні операції та ресурси, оскільки ключі використовуються повторно для кількох цілей або не використовуються відповідно до цілі, для якої вони були створені"
   -
     id: "CRM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/CRM3"
-    desc: "Emery can access data because it has been obfuscated rather than using an approved cryptographic function"
+    desc: "Емері може отримати доступ до даних, оскільки вони були обфусковані, а не зашифровані за допомогою затвердженої криптографічної функції"
   -
     id: "CRM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/CRM4"
-    desc: "Enselme can modify sensitive data (stored or in transit) because it is not subject to integrity checking"
+    desc: "Енселм може змінити конфіденційні дані (збережені або в транзиті), оскільки вони не підлягають перевірці цілісності"
   -
     id: "CRM5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/CRM5"
-    desc: "Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key"
+    desc: "Ораче може передбачити значення початкового числа, що використовується для генерації криптографічних ключів, і тим самим скомпрометувати криптографічний ключ"
   -
     id: "CRM6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/CRM6"
-    desc: "Kouti can extract sensitive data because the cryptographic key, used, is hard-coded or stored insecurely such as in local, internal/external storage"
+    desc: "Коуті може витягти конфіденційні дані, оскільки використовуваний криптографічний ключ є жорстко закодованим або зберігається небезпечно, наприклад у локальному, внутрішньому/зовнішньому сховищі"
   -
     id: "CRM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CRM7"
-    desc: "Ramsey can access stored sensitive data because it is not securely encrypted"
+    desc: "Рамзі може отримати доступ до збережених конфіденційних даних, оскільки вони не зашифровані належним чином"
   -
     id: "CRM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/CRM8"
-    desc: "Adel can predict and use the app's cryptographic keys because they are insufficiently long and random, can be enumerated, or derived from known values"
+    desc: "Адель може передбачити та використати криптографічні ключі застосунку, оскільки вони є недостатньо довгими та випадковими, можуть бути перебрані або отримані з відомих значень"
   -
     id: "CRM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/CRM9"
-    desc: "Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)"
+    desc: "Фаді може обійти криптографічні засоби контролю, оскільки вони не завершуються безпечно (тобто за замовчуванням залишаються незахищеними)"
   -
     id: "CRMX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CRMX"
-    desc: "Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Еш може зламати криптографію, оскільки вона недостатньо надійна відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "CRMJ"
-    value: "J"
+    value: "В"
     url: "https://cornucopia.owasp.org/cards/CRMJ"
-    desc: "Hassan can extract or modify sensitive data because functions for storage and/or encryption are weak, deprecated or used incorrectly"
+    desc: "Гасан може витягти або змінити конфіденційні дані, оскільки функції зберігання та/або шифрування є слабкими, застарілими або використовуються некоректно"
   -
     id: "CRMQ"
-    value: "Q"
+    value: "Д"
     url: "https://cornucopia.owasp.org/cards/CRMQ"
-    desc: "Simon can bypass hashing and encryption functions because they are custom and/or inadequately implemented"
+    desc: "Саймон може обійти функції хешування та шифрування, оскільки вони є власними та/або реалізовані неналежним чином"
   -
     id: "CRMK"
-    value: "K"
+    value: "К"
     url: "https://cornucopia.owasp.org/cards/CRMK"
-    desc: "Tarik can influence or alter cryptographic operations and can therefore bypass them"
+    desc: "Тарік може впливати на криптографічні операції або змінювати їх і тому може обходити їх"
   -
     id: "CRMA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/CRMA"
-    desc: "You have invented a new attack against “Cryptography”"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App Cryptography” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+    desc: "Ви вигадали нову атаку проти «Криптографії»"
+    misc: "Дізнайтеся більше про цю тему у безкоштовних шпаргалках OWASP з безпеки мобільних застосунків, а також у розділі «Криптографія мобільних застосунків» у «Посібнику з тестування безпеки мобільних застосунків» на сайті OWASP MAS"
 -
   id: "CM"
-  name: "Cornucopia"
+  name: "Корнукопія"
   cards:
   -
     id: "CM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/CM2"
-    desc: "Garth can reduce app users' privacy because the app is not transparent about the app's data collection and usage in a concise, easily accessible and understandable way"
+    desc: "Гарт може зменшити конфіденційність користувачів застосунку, оскільки застосунок не є прозорим щодо збору та використання даних застосунку в стислому, легкодоступному та зрозумілому вигляді"
   -
     id: "CM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/CM3"
-    desc: "Elsa can reduce app users' privacy because the app does not allow for the user to easily manage, delete and modify their data, change privacy settings and re-prompt for consent when more data is required"
+    desc: "Ельза може зменшити конфіденційність користувачів застосунку, оскільки застосунок не дозволяє користувачу легко керувати, видаляти та змінювати свої дані, змінювати налаштування конфіденційності та повторно запитувати згоду, коли потрібно більше даних"
   -
     id: "CM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/CM4"
-    desc: "Elizabeth can reduce app users' privacy because the app sends too much personal data without the user's consent to downstream services that are outside the user's control"
+    desc: "Єлизавета може зменшити конфіденційність користувачів застосунку, оскільки застосунок надсилає надто багато персональних даних без згоди користувача до нижчестоящих сервісів, що перебувають поза контролем користувача"
   -
     id: "CM5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/CM5"
-    desc: "Debarghaya can reduce app users' privacy because the app repurpose personal information (e.g. device IDs, IP addresses, behavioral patterns) collected for security concerns in order to cater for commercial interests without consent"
+    desc: "Дебаргхайя може зменшити конфіденційність користувачів застосунку, оскільки застосунок перевикористовує персональну інформацію (наприклад, ідентифікатори пристроїв, IP-адреси, поведінкові шаблони), зібрану з міркувань безпеки, для обслуговування комерційних інтересів без згоди"
   -
     id: "CM6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/CM6"
-    desc: "Kim can reduce app users' privacy because the app repurpose biometric information (e.g. fingerprints, facial recognition data, etc.) collected for security concerns in order to cater for commercial interests"
+    desc: "Кім може зменшити конфіденційність користувачів застосунку, оскільки застосунок перевикористовує біометричну інформацію (наприклад, відбитки пальців, дані розпізнавання обличчя тощо), зібрану з міркувань безпеки, для обслуговування комерційних інтересів"
   -
     id: "CM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CM7"
-    desc: "Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable"
+    desc: "Гастон може виконувати зловмисні дії через перенаправлення інтентів, оскільки інтент не є належним чином очищеним та незмінним"
   -
     id: "CM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/CM8"
-    desc: "Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated"
+    desc: "Роксана може виконати довільне перезаписування файлів і потенційно запустити зловмисний код через обхід шляху, оскільки цільовий шлях і директорія не перевіряються належним чином"
   -
     id: "CM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/CM9"
-    desc: "Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space"
+    desc: "Алессандро може використати застосунок, скориставшись переповненням буфера та витоком пам'яті для запису стороннього коду в адресний простір мобільного коду"
   -
     id: "CMX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CMX"
-    desc: "Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices"
+    desc: "Карлос може використовувати сервіси сповіщень застосунку для запуску фішингових кампаній, оскільки сповіщення не очищуються та не перевіряються відповідно до найкращих практик"
   -
     id: "CMJ"
-    value: "J"
+    value: "В"
     url: "https://cornucopia.owasp.org/cards/CMJ"
-    desc: "Luis can influence or alter cryptographic methods to corrupt other users' data because the integrity of the encrypted data is not verified before being shared with external services"
+    desc: "Луїс може впливати на криптографічні методи або змінювати їх, щоб пошкодити дані інших користувачів, оскільки цілісність зашифрованих даних не перевіряється перед тим, як вони передаються зовнішнім сервісам"
   -
     id: "CMQ"
-    value: "Q"
+    value: "Д"
     url: "https://cornucopia.owasp.org/cards/CMQ"
-    desc: "Victor can patch the app and use it to distribute malicious code because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Віктор може модифікувати застосунок і використовувати його для розповсюдження зловмисного коду, оскільки перевірки цілісності під час виконання недостатньо надійні відповідно до рекомендацій або передбачуваних зусиль потенційного зловмисника"
   -
     id: "CMK"
-    value: "K"
+    value: "К"
     url: "https://cornucopia.owasp.org/cards/CMK"
-    desc: "Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation"
+    desc: "Рубен може використовувати застосунок без модифікацій для розповсюдження зловмисного коду, оскільки методи передачі та зберігання не виконують належного очищення та перевірки даних"
   -
     id: "CMA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/CMA"
-    desc: "You have invented a new attack of any type"
-    misc: "Read more about this topic in OWASP's free Cheat Sheets on Mobile Application Security, and “Mobile App User Privacy Protection” in the “Mobile Application Security Testing Guide” on the OWASP MAS website"
+    desc: "Ви вигадали нову атаку будь-якого типу"
+    misc: "Дізнайтеся більше про цю тему у безкоштовних шпаргалках OWASP з безпеки мобільних застосунків, а також у розділі «Захист конфіденційності користувачів мобільних застосунків» у «Посібнику з тестування безпеки мобільних застосунків» на сайті OWASP MAS"
 -
   id: "WC"
-  name: "Wild Card"
+  name: "Джокер"
   cards:
   -
     id: "JOAM"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/JOAM"
     card: "Joker"
-    desc: "Starr can influence, alter or affect the app so that it no longer complies with legal, regulatory, contractual or other mandates"
-    misc: "Have you thought about becoming an individual OWASP member? All tools, guidance and local meetings are free for everyone, but individual membership helps support OWASP's work"
+    desc: "Старр може вплинути, змінити або вплинути на застосунок таким чином, що він більше не відповідає правовим, регуляторним, договірним або іншим вимогам"
+    misc: "Чи думали ви про те, щоб стати індивідуальним членом OWASP? Всі інструменти, посібники та місцеві зустрічі є безкоштовними для всіх, але індивідуальне членство допомагає підтримувати роботу OWASP"
   -
     id: "JOBM"
     value: "B"
     url: "https://cornucopia.owasp.org/cards/JOBM"
     card: "Joker"
-    desc: "Mallory can use the app installed on Bob's device maliciously to surveil, spy on, eavesdrop, control remotely, track or otherwise monitor Bob, without consent and/or notification"
-    misc: "Examine vulnerabilities and discover how they can be fixed using free MASTG reference applications on the OWASP MAS website"
+    desc: "Меллорі може зловмисно використовувати застосунок, встановлений на пристрої Боба, для стеження, шпигунства, підслуховування, дистанційного керування, відстеження або іншого моніторингу Боба без його згоди та/або повідомлення"
+    misc: "Досліджуйте вразливості та дізнайтеся, як їх можна виправити, використовуючи безкоштовні еталонні застосунки MASTG на сайті OWASP MAS"
 paragraphs:
 -
   id: "Common"
@@ -450,445 +450,445 @@ paragraphs:
   sentences:
   -
     id: "NoCard"
-    text: "No Card"
+    text: "Немає карти"
   -
     id: "Title"
-    text: "Mobile App Edition v1.1-EN"
+    text: "Mobile App Edition v1.1-UK"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Mobile App Edition v1.1-EN"
+    text: "OWASP® Cornucopia Mobile App Edition v1.1-UK"
   -
     id: "T00010"
-    text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
+    text: "OWASP® Cornucopia є механізмом, який допомагає командам розробки програмного забезпечення ідентифікувати вимоги безпеки в Agile, традиційних та формальних процесах розробки."
   -
     id: "T00020"
-    text: "Authors"
+    text: "Автори"
   -
     id: "T00100"
-    text: "Acknowledgements"
+    text: "Подяки"
   -
     id: "T00110"
-    text: "Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied."
+    text: "Адаму Шостаку та команді SDL Microsoft  Team за \"Гра з моделювання загрози підвищення привілеїв\", опубліковану під ліцензією Creative Commons Attribution, як натхнення для Корнукопії із з якої багато ідей, особливо із теорії ігор, було скопійовано."
   -
     id: "T00120"
-    text: "Colin Watson for coming up with Cornucopia which OWASP Cornucopia Mobile App Edition is based on."
+    text: "Коліну Ватсон за те, що він придумав Корнукопію, на основі якої створено OWASP Cornucopia Mobile App Edition."
   -
     id: "T00130"
-    text: "Contributors, supporters, sponsors and volunteers to the OWASP MASVS/MASTG, Mitre's Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode's “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided."
+    text: "Контрібьюторам, прихильникам, спонсорам та волонтерам за OWASP MASVS/MASTG, Перелік та класіфікація загальних шаблонів атак Mitre (CAPEC™), та SAFECode \"Практичні історії безпеки та завдання безпеки для оточень із гнучкою розробкою\" які були використовані у наданих перехрестних посиланнях."
   -
     id: "T00145"
-    text: "Current and past OWASP® Cornucopia project contributors and leaders, especially those involved most recently updating the cross-references, creating online versions, and writing scripts to dynamically generate Cornucopia's output files."
+    text: "Поточним та попереднім контрібьюторам та лідерам OWASP® Корнукопії, особливо тим задіяним у найостаннішому оновленню перехрестних посилань, створенню онлайн версій, і написанні сценаріїв для динамічного генеруємих вихідних файлів Корнукопії."
   -
     id: "T00150"
-    text: "Blackfoot (UK) Limited for creating and donating print-ready design files, Tom Brennan and the OWASP® Foundation for instigating the creation of an OWASP-branded box and leaflet, and Secure Delivery Ltd for developing and donating Copi, the platform to play Cornucopia and EoP online."
+    text: "Blackfoot (UK) Limited за створення та надання файлів дизайну, підготовлених до друку, Тому Бреннану та фонду OWASP® за ініціювання створення коробки та листівки з брендом OWASP, а також Secure Delivery Ltd за розробку та надання Copi, платформи для гри в Cornucopia та EoP онлайн.."
   -
     id: "T00161"
-    text: "(continued on page 20)"
+    text: "(продовження на стор. 20)"
   -
     id: "T00162"
-    text: "(continued from page 10)"
+    text: "(продовження зі стор. 10)"
   -
     id: "T00200"
-    text: "Introduction"
+    text: "Вступ"
   -
     id: "T00210"
-    text: "The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories."
+    text: "Ідея Cornucopia полягає в тому, щоб допомогти командам розробки, особливо тим, які використовують методології Agile, визначати вимоги до безпеки застосунків та розробляти користувацькі сценарії на основі безпеки."
   -
     id: "T00220"
-    text: "Cornucopia Mobile App Edition uses the same concepts and game strategy as the Cornucopia Website App Edition, but are made for development team doing mobile development. Cornucopia is inspired by “Elevation of Privilege: The Threat Modeling Game (EoP)”."
+    text: "OWASP Cornucopia Mobile App Edition використовує ті самі концепції та стратегію гри, що й OWASP Cornucopia Website App Edition, але створено для команд розробки мобільних додатків. OWASP Cornucopia вдохновлена грою \"Підвищення привілеїв: Гра з моделювання загроз (EoP)\"."
   -
     id: "T00240"
-    text: "Cornucopia attempts to introduce threat-modelling ideas into mobile development teams that use Agile methodologies, or are more focused on mobile application weaknesses than other types of software vulnerabilities."
+    text: "OWASP Cornucopia намагається ввести ідеї моделювання загроз у команди розробки мобільних додатків, які використовують методології Agile або зосереджуються на слабких мобільних додатках, ніж інші типи програмних вразливостей."
   -
     id: "T00300"
-    text: "The card deck (pack)"
+    text: "Колода карт (набір)"
   -
     id: "T00310"
-    text: "The card scenarios are meant to cover all the MASVS 2.0 requirements, all the tests from the MASTG and any additional guidelines from the Android and IOS secure coding guides. This was done in order to allow the game to be as aligned as possible with the latest guidelines for secure mobile development. Still, it's important to keep in mind that security guidelines and requirements are always in motion and that the game first of all should be used as a support when doing mobile application threat modeling and not as a complete guide into security requirements and guidelines."
+    text: "Сценарії карток мають охоплювати всі вимоги MASVS 2.0, всі тести MASTG та будь-які додаткові рекомендації з посібників з безпечного кодування для Android та IOS. Це було зроблено для того, щоб гра максимально відповідала останнім рекомендаціям щодо безпечної розробки мобільних пристроїв. Однак важливо пам'ятати, що рекомендації та вимоги безпеки завжди змінюються, і що гру, перш за все, слід використовувати як допоміжний засіб під час моделювання загроз для мобільних додатків, а не як повний посібник з вимог та рекомендацій безпеки."
   -
     id: "T00311"
-    text: "Cornucopia Mobile App Edition suits are based on the sections in the Mobile Application Security Verification Standard."
+    text: "Масті Cornucopia Mobile App Edition базуються на розділах Стандарту перевірки безпеки мобільних додатків."
   -
     id: "T00320"
-    text: "These provided five suits, and a sixth called “Cornucopia” was created as a trump suite: "
+    text: "Вони забезпечили п'ять мастей, а шоста під назвою «Корнукопія» була створена як козирна масть:"
   -
     id: "T00330"
-    text: "Platform & Code (PC)"
+    text: "Платформа та код (ПК)"
   -
     id: "T00340"
-    text: "Authentication & Authorization (AA)"
+    text: "Автентифікація та авторизація (АА)"
   -
     id: "T00350"
-    text: "Network & Storage (NS)"
+    text: "Мережа та сховище (МС)"
   -
     id: "T00360"
-    text: "Resilience (RS)"
+    text: "Стійкість (СТ)"
   -
     id: "T00370"
-    text: "Cryptography (CRM)"
+    text: "Криптографія (КР)"
   -
     id: "T00380"
-    text: "Cornucopia (CM)"
+    text: "Корнукопія (C)"
   -
     id: "T00390"
-    text: "Similar to poker-playing cards, each suit contains 13 cards (Ace, 2-10, Jack, Queen and King)."
+    text: "Подібно до покерних карт, кожна масть містить 13 карт (Туз, 2-10, Валет, Дама та Король)."
   -
     id: "T00400"
-    text: "There are also two Joker cards similar to the Cornucopia Website App Edition."
+    text: "Також є дві карти Джокера, як і у виданні Cornucopia Website App Edition."
   -
     id: "T00500"
-    text: "Mappings"
+    text: "Відповідності"
   -
     id: "T00510"
-    text: "The other driver for Mobile Cornucopia is to link the attacks with requirements and verification techniques."
+    text: "Іншою метою Mobile Cornucopia є зв'язок атак із вимогами та методами верифікації."
   -
     id: "T00520"
-    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs."
+    text: "Крім кодів вимог MASVS 2.0 та кодів тестів MASTG, карти також містять посилання на ідентифікатори шаблонів атак CAPEC™, які своєю чергою відповідають CWE."
   -
     id: "T00530"
-    text: "Each card is also mapped to the 36 primary security stories in the SAFECode document to help teams create their own security-related stories for use in Agile processes."
+    text: "Кожна карта також відповідає 36 основним захисним сценаріям у документі SAFECode, що допомагає командам створювати власні сценарії безпеки для використання в Agile-процесах."
   -
     id: "T00600"
-    text: "Game strategy"
+    text: "Стратегія гри"
   -
     id: "T00610"
-    text: "Apart from the content differences, the game rules are virtually identical to those for the Cornucopia Website App Edition."
+    text: "Окрім відмінностей у змісті, правила гри практично ідентичні правилам видання Cornucopia Website App Edition."
   -
     id: "T01000"
-    text: "Provide feedback"
+    text: "Залишити відгук"
   -
     id: "T01010"
-    text: "If you have ideas or feedback on the use of OWASP® Mobile Cornucopia, please share them."
+    text: "Якщо у вас є ідеї або відгуки щодо використання OWASP® Mobile Cornucopia, будь ласка, поділіться ними."
   -
     id: "T01020"
-    text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
+    text: "Ще краще, якщо ви створите альтернативні версії карт або виготовите професійні версії, готові до друку, — поділіться ними з волонтерами, які створили це видання, та з широкою спільнотою розробників і фахівців з безпеки застосунків."
   -
     id: "T01030"
-    text: "The best place to use to discuss or contribute is the list/group for the OWASP project:"
+    text: "Найкраще місце для обговорення або участі — це список/група проєкту OWASP:"
   -
     id: "T01040"
-    text: "List/Group"
+    text: "Список/Група"
   -
     id: "T01050"
-    text: "Project home page"
+    text: "Домашня сторінка проєкту"
   -
     id: "T01060"
-    text: "All OWASP documents and tools are free to download and use."
+    text: "Усі документи та інструменти OWASP безкоштовні для завантаження та використання."
   -
     id: "T01070"
-    text: "OWASP® Mobile Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 3.0 license."
+    text: "OWASP® Mobile Cornucopia ліцензовано за ліцензією Creative Commons Attribution-ShareAlike 3.0."
   -
     id: "T01100"
-    text: "Instructions"
+    text: "Інструкції"
   -
     id: "T01110"
-    text: "The text on each card describes an attack, but the attacker is given a name, which are unique across all the cards."
+    text: "Текст на кожній карті описує атаку, а зловмиснику присвоюється ім'я, унікальне для всіх карт."
   -
     id: "T01120"
-    text: "The name can represent a computer system (e.g. the database, the file system, another application, a related service, a botnet), an individual person (e.g. a citizen, a customer, a client, an employee, a criminal, a spy), or even a group of people (e.g. a competitive organization, activists with a common cause)."
+    text: "Ім'я може представляти комп'ютерну систему (наприклад, базу даних, файлову систему, інший застосунок, пов'язаний сервіс, ботнет), окрему особу (наприклад, громадянина, клієнта, покупця, працівника, злочинця, шпигуна) або навіть групу людей (наприклад, конкуруючу організацію, активістів зі спільною метою)."
   -
     id: "T01130"
-    text: "The attacker might be remote in some other device/location, or local/internal with access to the same device, host or network as the application is running on."
+    text: "Зловмисник може бути віддаленим на іншому пристрої/місці або локальним/внутрішнім з доступом до того самого пристрою, хоста або мережі, на якій працює застосунок."
   -
     id: "T01140"
-    text: "The attacker is always named at the start of each description"
+    text: "Зловмисник завжди названий на початку кожного опису"
   -
     id: "T01150"
-    text: "An example is:"
+    text: "Наприклад:"
   -
     id: "T01160"
-    text: "Wong can bypass the authentication because it does not fail securely."
+    text: "Вонг може обійти автентифікацію, оскільки вона не відмовляє безпечно."
   -
     id: "T01170"
-    text: "This means the attacker, Wong, can log into the app without providing credentials because the login mechanism allows access when it fails."
+    text: "Це означає, що зловмисник Вонг може увійти до застосунку без надання облікових даних, оскільки механізм входу дозволяє доступ у разі збою."
   -
     id: "T01180"
-    text: "The attacks were primarily drawn from the MASVS 2.0 Mobile Application Testing guide and the Android and IOS secure coding guides"
+    text: "Атаки були переважно взяті з посібника тестування мобільних застосунків MASVS 2.0 та посібників із безпечного кодування для Android та iOS"
   -
     id: "T01200"
-    text: "Lookups between the attacks and the guides are provided on most cards:"
+    text: "Відповідності між атаками та посібниками наведені на більшості карт:"
   -
     id: "T01210"
-    text: "Test codes from the MASVS Mobile application Test Guide:"
+    text: "Тестові коди з Посібника тестування мобільних застосунків MASVS:"
   -
     id: "T01220"
-    text: "Verification IDs in “Mobile Application Security Verification Standard (MASVS) 2.0 for Mobile Applications”"
+    text: “Ідентифікатори верифікації у «Стандарті перевірки безпеки мобільних застосунків (MASVS) 2.0 для мобільних застосунків»”
   -
     id: "T01240"
-    text: "IDs in “Common Attack Pattern Enumeration and Classification (CAPEC™)”, v3.9, Mitre Corporation, November 2015"
+    text: “Ідентифікатори у «Переліку та класифікації загальних шаблонів атак (CAPEC™)», v3.9, Mitre Corporation, листопад 2015”
   -
     id: "T01250"
-    text: "Security-focused stories in 'Practical Security Stories and Security Tasks for Agile Development Environments', SAFECode, July 2012"
+    text: "Сценарії, орієнтовані на безпеку, у «Практичних захисних сценаріях та завданнях з безпеки для Agile-середовищ розробки», SAFECode, липень 2012"
   -
     id: "T01260"
-    text: "A look-up means the attack is included within the referenced item, but does not necessarily encompass the whole of its intent. "
+    text: "Відповідність означає, що атака включена до зазначеного елемента, але не обов'язково охоплює весь його зміст. "
   -
     id: "T01270"
-    text: "For structured data like CAPEC, the most specific reference is provided but sometimes a cross-reference is provided that also has more specific (child) examples."
+    text: "Для структурованих даних, як-от CAPEC, надається найбільш конкретне посилання, але іноді наводиться перехресне посилання з більш конкретними (дочірніми) прикладами."
   -
     id: "T01280"
-    text: "There are no lookups on the six Aces and two Jokers. "
+    text: "На шести Тузах та двох Джокерах відповідностей немає. "
   -
     id: "T01290"
-    text: "Instead these cards have some general tips in italicized text."
+    text: "Натомість ці карти містять загальні поради, виділені курсивом."
   -
     id: "T01300"
-    text: "It is possible to play Cornucopia in many different ways. "
+    text: "У Cornucopia можна грати різними способами. "
   -
     id: "T01301"
-    text: "For how to play, continue on pages: 11-19."
+    text: "Щодо правил гри, продовжте читання на сторінках: 11-19."
   -
     id: "T01400"
-    text: "Preparations"
+    text: "Підготовка"
   -
     id: "T01410"
-    text: "Obtain a deck, or print your own deck of Cornucopia cards (see page 2 of this document) and separate/cut out the cards"
+    text: "Отримайте колоду або роздрукуйте власну колоду карток Cornucopia (див. сторінку 2 цього документа) та розділіть/виріжте картки"
   -
     id: "T01411"
-    text: "Use the cards in this pack"
+    text: "Використовуйте картки з цього набору"
   -
     id: "T01420"
-    text: "Identify an application or application process to review; this might be a concept, design or an actual implementation"
+    text: "Визначте застосунок або процес застосунку для перевірки; це може бути концепція, дизайн або фактична реалізація"
   -
     id: "T01430"
-    text: "Create a data flow diagram, user stories, or other artefacts to help the review"
+    text: "Створіть діаграму потоків даних, користувацькі сценарії або інші артефакти для допомоги у перевірці"
   -
     id: "T01440"
-    text: "Identify and invite a group of 3-6 architects, developers, testers and other business stakeholders together and sit around a table (try to include someone fairly familiar with application security)"
+    text: "Визначте та запросіть групу з 3-6 архітекторів, розробників, тестувальників та інших зацікавлених сторін бізнесу та сядьте навколо столу (спробуйте включити когось, хто достатньо знайомий з безпекою застосунків)"
   -
     id: "T01450"
-    text: "Have some prizes to hand (gold stars, chocolate, pizza, beer or flowers depending upon your office culture)"
+    text: "Підготуйте призи (золоті зірки, шоколад, піцу, пиво або квіти залежно від культури вашого офісу)"
   -
     id: "T01500"
-    text: "Play"
+    text: "Гра"
   -
     id: "T01510"
-    text: "One suit - Cornucopia - acts as trumps."
+    text: "Одна масть — Корнукопія — є козирною."
   -
     id: "T01520"
-    text: "Aces are high (i.e. they beat Kings)."
+    text: "Туз старший (тобто він перемагає Королів)."
   -
     id: "T01530"
-    text: "It helps if there is a non-player to document the issues and scores."
+    text: "Буде корисно, якщо є спостерігач без ходу, який документує питання та рахунки."
   -
     id: "T01540"
-    text: "Remove the Jokers and a few low-score (2, 3, 4) cards from Cornucopia suit to ensure each player will have the same number of cards"
+    text: "Вилучіть Джокерів та кілька карток з низьким балом (2, 3, 4) з масті Корнукопія, щоб у кожного гравця було однакова кількість карток"
   -
     id: "T01550"
-    text: "Shuffle the deck and deal all the cards"
+    text: "Перемішайте колоду та роздайте всі картки"
   -
     id: "T01560"
-    text: "To begin, choose a player randomly who will play the first card - they can play any card from their hand except from the trump suit - Cornucopia"
+    text: "Для початку випадковим чином оберіть гравця, який зіграє першу картку — він може зіграти будь-яку картку зі своїх рук, крім козирної масті — Корнукопія"
   -
     id: "T01570"
-    text: "To play a card, each player must read it out aloud, and explain (see the online Wiki Deck for tips) how the threat could apply (the player gets a point for attacks that might work which the group thinks is an actionable bug) - do not try to think of mitigations at this stage, and do not exclude a threat just because of a belief that it is already mitigated - someone note the card and record the issues raised"
+    text: "Щоб зіграти картку, кожен гравець повинен зачитати її вголос та пояснити (дивіться онлайн Wiki Deck для підказок), як загроза може застосовуватися (гравець отримує очко за атаки, які можуть спрацювати і які група вважає реальними помилками) — не намагайтеся думати про засоби захисту на цьому етапі, і не виключайте загрозу лише через переконання, що вона вже зменшена — хтось нотує картку та записує виявлені проблеми"
   -
     id: "T01580"
-    text: "Play clockwise, each person must play a card in the same way; if you have any card of the matching lead suit you must play one of those, otherwise they can play a card from any other suit. "
+    text: "Грайте за годинниковою стрілкою, кожна особа повинна зіграти картку таким самим чином; якщо у вас є будь-яка картка відповідної провідної масті, ви повинні зіграти одну з них, інакше можна зіграти картку будь-якої іншої масті. "
   -
     id: "T01590"
-    text: "Only a higher card of the same suit, or the highest card in the trump suit Cornucopia, wins the hand."
+    text: "Лише вища картка тієї самої масті або найвища картка козирної масті Корнукопія виграє раунд."
   -
     id: "T01600"
-    text: "The person who wins the round, leads the next round (i.e. they play first), and thus defines the next lead suit"
+    text: "Особа, яка виграє раунд, веде наступний раунд (тобто вона грає першою), і таким чином визначає наступну провідну масть"
   -
     id: "T01610"
-    text: "Repeat until all the cards are played"
+    text: "Повторюйте, доки всі картки не будуть зіграні"
   -
     id: "T01700"
-    text: "Scoring"
+    text: "Підрахунок очок"
   -
     id: "T01710"
-    text: "The objective is to identify applicable threats, and win hands (rounds):"
+    text: "Мета — виявляти застосовні загрози та виграти раунди:"
   -
     id: "T01720"
-    text: "Score +1 for each card you can identify as a valid threat to the application under consideration"
+    text: "Нарахуйте +1 за кожну картку, яку ви можете визначити як реальну загрозу для розглянутого застосунку"
   -
     id: "T01730"
-    text: "Score +1 if you win a round"
+    text: "Нарахуйте +1, якщо ви виграли раунд"
   -
     id: "T01740"
-    text: "Once all cards have been played, whoever has the most points wins"
+    text: "Після того, як усі картки зіграні, перемагає той, хто набрав найбільше очок"
   -
     id: "T01800"
-    text: "Closure"
+    text: "Завершення"
   -
     id: "T01810"
-    text: "Review all the applicable threats and the matching security requirements"
+    text: "Перегляньте всі застосовні загрози та відповідні вимоги безпеки"
   -
     id: "T01820"
-    text: "Create user stories, specifications and test cases as required for your development methodology."
+    text: "Створіть користувацькі сценарії, специфікації та тестові кейси відповідно до вашої методології розробки."
   -
     id: "T01900"
-    text: "Alternative game rules"
+    text: "Альтернативні правила гри"
   -
     id: "T01910"
-    text: "If you are new to the game, remove the Aces and two Joker cards to begin with."
+    text: "Якщо ви новачок у цій грі, спочатку вилучіть Тузів та дві картки Джокера."
   -
     id: "T01920"
-    text: "Add the Joker cards back in once people become more familiar with the process."
+    text: "Поверніть картки Джокера, коли люди більше ознайомляться з процесом."
   -
     id: "T01930"
-    text: "Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round."
+    text: “Крім правил гри «козирні карти», описаних вище, які дуже схожі на EoP, колода також може використовуватися як гра «двадцять одне» (також відома як «понтон» або «блекджек»), яка зазвичай зменшує кількість карток у кожному раунді.”
   -
     id: "T01940"
-    text: "Practice on an imaginary application, or even a future planned application, rather than trying to find fault with existing applications until the participants are happy with the usefulness of the game."
+    text: "Потренуйтеся на уявному застосунку або навіть майбутньому запланованому застосунку, а не намагайтеся знайти вади існуючих застосунків, поки учасники не будуть задоволені корисністю гри."
   -
     id: "T01950"
-    text: "Consider just playing with one suit to make a shorter session - but try to cover all the suits for every project. "
+    text: "Розгляньте можливість грати лише з однією мастю для коротшої сесії — але спробуйте охопити всі масті для кожного проєкту. "
   -
     id: "T01960"
-    text: "Or even better just play one hand with some pre-selected cards, and score only on the ability to identify security requirements. "
+    text: "Або ще краще зіграйте лише один раунд з деякими заздалегідь відібраними картками та рахуйте лише за здатність визначати вимоги безпеки. "
   -
     id: "T01970"
-    text: "Perhaps have one game of each suit each day for a week or so, if the participants cannot spare long enough for a full deck."
+    text: "Можливо, проводьте по одній грі кожної масті щодня протягом тижня або близько того, якщо учасники не можуть виділити достатньо часу для повної колоди."
   -
     id: "T01980"
-    text: "Some teams have preferred to play a full hand of cards, and then discuss what is on the cards after each round (instead of after each person plays a card)."
+    text: "Деякі команди надали перевагу зіграти повний раунд карток, а потім обговорити написане на картках після кожного раунду (замість після кожного ходу гравця)."
   -
     id: "T01990"
-    text: "Another suggestion is that if a player fails to identify the card is relevant, allow other players to suggest ideas, and potentially let them gain the point for the card. "
+    text: "Ще одна пропозиція: якщо гравець не може визначити актуальність картки, дозвольте іншим гравцям пропонувати ідеї, і потенційно дозвольте їм отримати очко за картку. "
   -
     id: "T02000"
-    text: "Consider allowing extra points for especially good contributions."
+    text: "Розгляньте можливість нарахування додаткових очок за особливо гарні внески."
   -
     id: "T02010"
-    text: "You can even play by yourself. "
+    text: "Ви навіть можете грати самостійно. "
   -
     id: "T02020"
-    text: "Just use the cards to act as thought-provokers. "
+    text: "Просто використовуйте картки як генератори ідей. "
   -
     id: "T02030"
-    text: "Involving more people will be beneficial though."
+    text: "Однак залучення більшої кількості людей буде корисним."
   -
     id: "T02040"
-    text: "In Microsoft's EoP guidance, they recommend cheating as a good game strategy."
+    text: "У керівництві Microsoft з EoP рекомендується шахрайство як хороша ігрова стратегія."
   -
     id: "T02600"
-    text: "Frequently asked questions"
+    text: "Поширені запитання"
   -
     id: "T02610"
-    text: "1. Can I copy or edit the game?"
+    text: "1. Чи можу я скопіювати або відредагувати гру?"
   -
     id: "T02620"
-    text: "Yes of course."
+    text: "Так, звичайно."
   -
     id: "T02630"
-    text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 3.0 license. "
+    text: "Усі матеріали OWASP безкоштовні для використання за умови дотримання ліцензії Creative Commons Attribution-ShareAlike 3.0. "
   -
     id: "T02640"
-    text: "Perhaps if you create a new version, you might donate it to the OWASP® Cornucopia Project?"
+    text: "Можливо, якщо ви створите нову версію, ви могли б подарувати її проєкту OWASP® Cornucopia?"
   -
     id: "T02650"
-    text: "2. How can I get involved?"
+    text: "2. Як я можу долучитися?"
   -
     id: "T02660"
-    text: "Please send ideas or offers of help to the project's mailing list."
+    text: "Будь ласка, надсилайте ідеї або пропозиції допомоги на поштовий список проєкту."
   -
     id: "T02670"
-    text: "3. How were the attackers' names chosen?"
+    text: "3. Як були обрані імена зловмисників?"
   -
     id: "T02680"
-    text: "EoP begins every description with words like 'An attacker can...',"
+    text: "EoP починає кожен опис зі слів на кшталт «Зловмисник може...»,"
   -
     id: "T02690"
-    text: "but Colin Watson used personal names in Cornucopia which can be thought of as external or internal people or aliases for computer systems."
+    text: "але Колін Вотсон використав особисті імена в Cornucopia, які можна розглядати як зовнішніх або внутрішніх людей або псевдоніми комп'ютерних систем."
   -
     id: "T02700"
-    text: "Likewise, the Mobile App Edition names reflect the OWASP community aspect."
+    text: "Аналогічно, імена у виданні Mobile App Edition відображають аспект спільноти OWASP."
   -
     id: "T02710"
-    text: "Therefore, apart from 'Bob and Mallory', the attacker names are drawn from the 2024 OWASP Global and EU board members, OWASP Staff, OWASP Cornucopia Mobile App Edition authors and contributors, and OWASP Chapter leaders around the world."
+    text: "Тому, крім «Боба та Меллорі», імена зловмисників взяті з членів глобальної ради та ради ЄС OWASP 2024 року, співробітників OWASP, авторів та учасників OWASP Cornucopia Mobile App Edition та лідерів розділів OWASP по всьому світу."
   -
     id: "T02720"
-    text: "The cultural and gender mix simply reflects these sources of names, and"
+    text: "Культурне та гендерне різноманіття просто відображає ці джерела імен, та"
   -
     id: "T02730"
-    text: "is not meant to be world-representative."
+    text: "не є репрезентативним для всього світу."
   -
     id: "T02750"
-    text: "4. Why aren't there any images on the card faces?"
+    text: "4. Чому на лицьовому боці карток немає зображень?"
   -
     id: "T02760"
-    text: "There is quite a lot of text on the cards, and the cross-referencing takes up space too."
+    text: "На картках є досить багато тексту, і перехресні посилання також займають місце."
   -
     id: "T02770"
-    text: "But it would be great to have additional design elements included."
+    text: "Але було б чудово мати додаткові елементи дизайну."
   -
     id: "T02780"
-    text: "Any volunteers"
+    text: "Є добровольці?"
   -
     id: "T02790"
-    text: "5. Are the attacks ranked by the number on the card?"
+    text: "5. Чи ранжуються атаки за номером на картці?"
   -
     id: "T02800"
-    text: "Only approximately."
+    text: "Лише приблизно."
   -
     id: "T02810"
-    text: "The risk will be application and organisation dependent, due to varying security and compliance requirements, so your own severity rating may place the cards in some other order than the numbers on the cards."
+    text: "Ризик залежить від застосунку та організації через різні вимоги до безпеки та відповідності, тому ваша власна оцінка серйозності може розмістити картки в іншому порядку, ніж номери на них."
   -
     id: "T02820"
-    text: "6. How long does it take to play a round of cards using the full deck?"
+    text: "6. Скільки часу потрібно для проведення раунду з повною колодою?"
   -
     id: "T02830"
-    text: "This depends upon the scope of the application, amount of discussion and how familiar the players are with application security concepts."
+    text: "Це залежить від обсягу застосунку, обсягу обговорення та наскільки гравці знайомі з концепціями безпеки застосунків."
   -
     id: "T02840"
-    text: "But perhaps allow 1.5 to 2.0 hours for 4-6 people."
+    text: "Але, можливо, відведіть 1,5–2,0 години для 4–6 осіб."
   -
     id: "T02850"
-    text: "7. What sort of people should play the game?"
+    text: "7. Які люди повинні грати в гру?"
   -
     id: "T02860"
-    text: "Always try to have a mix of roles who can contribute alternative perspectives."
+    text: "Завжди намагайтеся мати суміш ролей, які можуть вносити альтернативні точки зору."
   -
     id: "T02870"
-    text: "But include someone who has a reasonable knowledge of application vulnerability terminology. "
+    text: "Але включіть когось, хто має достатні знання термінології вразливостей застосунків. "
   -
     id: "T02880"
-    text: "Otherwise try to include a mix of architects, developers, testers and a relevant project manager or business owner."
+    text: "Інакше намагайтеся включити суміш архітекторів, розробників, тестувальників та відповідного менеджера проєкту або власника бізнесу."
   -
     id: "T02890"
-    text: "8. Who should take notes and record scores?"
+    text: "8. Хто повинен робити нотатки та записувати рахунки?"
   -
     id: "T02900"
-    text: "It is better if that someone else, not playing the game, takes notes about the requirements identified and issues discussed."
+    text: "Краще, якщо хтось інший, хто не грає в гру, робить нотатки про визначені вимоги та обговорювані питання."
   -
     id: "T02910"
-    text: "This could be used as training for a more junior developer, or performed by the project manager."
+    text: "Це може бути використано як навчання для молодшого розробника або виконано менеджером проєкту."
   -
     id: "T02920"
-    text: "Some organisations have made a recording to review afterwards when the requirements are written up more formally."
+    text: "Деякі організації зробили запис для подальшого перегляду, коли вимоги записуються більш формально."
   -
     id: "T02930"
-    text: "9. Should we always use the full deck of cards?"
+    text: "9. Чи завжди потрібно використовувати повну колоду карток?"
   -
     id: "T02940"
-    text: "No. "
+    text: "Ні. "
   -
     id: "T02950"
-    text: "A smaller deck is quicker to play. "
+    text: "Менша колода грається швидше. "
   -
     id: "T02960"
-    text: "Start your first game with only enough cards for two or three rounds. "
+    text: "Почніть свою першу гру лише з достатньою кількістю карток для двох або трьох раундів. "
   -
     id: "T02970"
-    text: "Always consider removing cards that are not appropriate at all of the target application or function being reviewed. "
+    text: "Завжди розглядайте можливість видалення карток, які зовсім не підходять для цільового застосунку або функції, що перевіряється. "
   -
     id: "T02980"
-    text: "For the first few times people play the game it is also usually better to remove the Aces and the two Jokers."
+    text: "Під час перших кількох ігор зазвичай краще видалити Тузів та два Джокери."
   -
     id: "T02990"
-    text: "It is also usual to play the game without any trumps suit until people are more familiar with the idea."
+    text: "Також зазвичай грають без козирної масті, поки люди більше не ознайомляться з ідеєю."
   -
     id: "T03000"
-    text: "10. What should players do when they have an Ace card that says “invented a new X attack”?"
+    text: “10. Що мають робити гравці, коли у них є картка Туза з написом «вигадав нову атаку X»?”
   -
     id: "T03010"
-    text: "The player can make up any attack they think is valid, but must match the suit of the card (e.g. Platform & Code)."
+    text: "Гравець може вигадати будь-яку атаку, яку вважає дійсною, але вона має відповідати масті картки (наприклад, Платформа та код)."
   -
     id: "T03020"
-    text: "With players new to the game, it can be better to remove these to begin with (see also FAQ 9)."
+    text: "Для гравців, які вперше грають у цю гру, краще спочатку видалити їх (дивіться також FAQ 9)."
   -
     id: "T03850"
-    text: "OWASP's hard-working employees."
+    text: "Наполегливі співробітники OWASP."
