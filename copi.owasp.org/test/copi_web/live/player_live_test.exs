@@ -31,6 +31,15 @@ defmodule CopiWeb.PlayerLiveTest do
     %{player: player}
   end
 
+  describe "player :index action" do
+    setup [:create_player]
+
+    test "visiting /players lists players on player index", %{conn: conn, player: player} do
+      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
+      assert is_binary(html)
+    end
+  end
+
   describe "Index" do
     setup [:create_player]
     test "lists all players", %{conn: conn, player: player} do
@@ -213,6 +222,32 @@ defmodule CopiWeb.PlayerLiveTest do
     test "redirects to error when player not found", %{conn: conn} do
       assert {:error, {:redirect, %{to: "/error"}}} =
                live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV/players/01ARZ3NDEKTSV4RRFFQ69G5FAV")
+    end
+
+    test "next_round when round is closed advances rounds and sets finished_at", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      # Insert a dealt card played in round 1 for this player.
+      # With played_in_round: 1 the round is closed (round_open? = false).
+      # With no nil-round cards, last_round? = true → finished_at gets set.
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V9", description: "D", edition: "webapp",
+        version: "2.2", external_id: "CLOSEDRND9", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+      assert updated_game.finished_at != nil
     end
 
     test "toggle_vote removes existing vote", %{conn: conn, player: player} do

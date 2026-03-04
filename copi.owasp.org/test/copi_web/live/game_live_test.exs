@@ -137,6 +137,17 @@ defmodule CopiWeb.GameLiveTest do
       assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
     end
 
+    test "displays finished game using rounds_played for current_round", %{conn: conn, game: game} do
+      # Set finished_at so handle_params uses game.rounds_played (not +1) for current_round
+      {:ok, game} = Cornucopia.update_game(game, %{
+        started_at: DateTime.truncate(DateTime.utc_now(), :second),
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 1
+      })
+      {:ok, _show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
+      assert html =~ game.name
+    end
+
     test "displays past round", %{conn: conn, game: game} do
        # Create players and play a round to make it valid
        {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
