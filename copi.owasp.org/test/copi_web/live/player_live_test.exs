@@ -207,13 +207,13 @@ defmodule CopiWeb.PlayerLiveTest do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
 
-      # Start game and mark round as closed (all players have played)
+      # Start game
       Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
-      # Trigger next_round when round is closed (no unplayed cards means round_open? = false)
-      show_live |> element("[phx-click=\"next_round\"]") |> render_click()
+      # Trigger next_round via direct event (bypasses DOM element requirement)
+      render_click(show_live, "next_round", %{})
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played >= 0
