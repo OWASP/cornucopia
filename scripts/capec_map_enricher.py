@@ -62,12 +62,18 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
             capec_name = pattern["_Name"]
             capec_names[capec_id] = capec_name
 
-    categories = catalog["Categories"]["Category"]
-    for category in categories:
-        if "_ID" in category and "_Name" in category:
-            capec_id = int(category["_ID"])
-            capec_name = category["_Name"]
-            capec_names[capec_id] = capec_name
+    if "Categories" not in catalog:
+        logging.warning("No 'Categories' key found in catalog")
+    elif "Category" not in catalog["Categories"]:
+        logging.warning("No 'Category' key found in categories section")
+    elif not isinstance(catalog["Categories"]["Category"], list):
+        logging.warning("'Category' is not a list")
+    else:
+        for category in catalog["Categories"]["Category"]:
+            if "_ID" in category and "_Name" in category:
+                capec_id = int(category["_ID"])
+                capec_name = category["_Name"]
+                capec_names[capec_id] = capec_name
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
