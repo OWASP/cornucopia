@@ -10,7 +10,7 @@ description: How OWASP Cornucopia helps software teams develop a security mindse
 
 We all know how important security is for our work in software engineering, but we rarely ever put focus on doing it. The causes are many, e.g., lack of resources, lack of knowledge, or simply it just feels tedious. And since the consequences are only seen when it really goes wrong, it's just one of those things that can be put off.
 
-What I have noticed in my own team, is the lack of a security mindset from start to finish, but also a lack of knowledge. From the design phase, we stay stuck on what we are building, without asking what can go wrong - or what are we going to do about it. In the development phase, we often rely on tools like CodeQL, to tell us if something could make our application vulnerable. And the testing phase, just relies on normal integration or unit testing.
+What I have noticed in my own team, is that we want to better at incorporating security from start to finish, but had difficulty doing that, especially in the design phase. From the design phase, we stay stuck on what we are building, without asking what can go wrong - or what are we going to do about it. In the development phase, we often rely on tools like CodeQL, to tell us if something could make our application vulnerable. And the testing phase, just relies on normal integration or unit testing.
 
 ## Discovering OWASP Cornucopia
 
@@ -22,7 +22,7 @@ Coming back with this new knowledge, I've started an end-of-month gaming day, wh
 
 ## Early Results
 
-We are still in the learning phase, but we are beginning to see a small improvement in the security mindset. For example in code reviews, where a focus on potential vulnerabilities is already starting to show.
+We are still in the learning phase, but we are beginning to see a small improvement in how we incorporate security. For example in code reviews, where a focus on potential vulnerabilities is already starting to show, or doing threat modeling as part of the design phase.
 
 ## Get Started
 

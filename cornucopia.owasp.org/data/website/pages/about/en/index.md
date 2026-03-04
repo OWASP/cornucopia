@@ -74,6 +74,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Luis Enriquez
 - Darío De Filippis
 - André Ferreira
+- Pedro Fortuna
 - Ken Ferris
 - Norbert Gaspar
 - Spyros Gasteratos
@@ -108,6 +109,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Abhijit Sahoo
 - Max Alejandro Gómez Sánchez Vergaray
 - Tao Sauvage
+- Riccardo Sirigu
 - Prasun Srivastav
 - Aditya Srivastava
 - Johan Sydseter
