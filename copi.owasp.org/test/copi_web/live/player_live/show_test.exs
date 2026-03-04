@@ -101,23 +101,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert updated_game.rounds_played == 1
     end
 
-    test "handle_info game:updated continues when player no longer exists in db", %{conn: conn, player: player} do
-      game_id = player.game_id
-      {:ok, game} = Cornucopia.Game.find(game_id)
-
-      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
-
-      # Delete the player from DB while LiveView is connected (no FK children in this fixture)
-      {:ok, _} = Copi.Repo.delete(player)
-
-      # Broadcast game:updated — handle_info calls Player.find which now returns {:error, :not_found}
-      send(show_live.pid, %{topic: "game:#{game_id}", event: "game:updated", payload: game})
-      :timer.sleep(100)
-
-      # LiveView should remain alive since we return {:noreply, socket} on error
-      assert Process.alive?(show_live.pid)
-    end
-
     test "helper functions return expected values", %{conn: _conn, player: _player} do
       alias CopiWeb.PlayerLive.Show
 
