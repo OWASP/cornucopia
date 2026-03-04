@@ -22,15 +22,14 @@ defmodule CopiWeb.Router do
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
-    live "/games/:game_id", GameLive.Show, :show
-
-    live "/games/:game_id/players", PlayerLive.Index, :index
-    live "/games/:game_id/players/new", PlayerLive.Index, :new
-    live "/games/:game_id/players/:id/edit", PlayerLive.Index, :edit
 
     live_session :game_show, on_mount: [{CopiWeb.GameLive.Show, :default}] do
       live "/games/:game_id", GameLive.Show, :show
     end
+
+    live "/games/:game_id/players", PlayerLive.Index, :index
+    live "/games/:game_id/players/new", PlayerLive.Index, :new
+    live "/games/:game_id/players/:id/edit", PlayerLive.Index, :edit
 
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
 

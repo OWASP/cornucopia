@@ -109,5 +109,19 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
       assert html =~ "can&#39;t be blank" or html =~ "blank"
     end
+
+    test "save_player :edit returns error changeset on invalid submit", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Original Name", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
+
+      # Submit a blank name — triggers save_player(:edit) error branch
+      html =
+        view
+        |> form("#player-form", player: %{name: "", game_id: game.id})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
   end
 end

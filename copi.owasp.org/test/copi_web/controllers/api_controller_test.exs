@@ -50,6 +50,39 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 406)["error"] == "Card already played"
   end
 
+  test "play_card fails when player or dealt card not found in game", %{conn: conn, game: game} do
+    # Create a dealt_card belonging to a different game/player not in this game
+    {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
+    {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})
+    {:ok, card2} = Cornucopia.create_card(%{
+      category: "C", value: "Q", description: "d", misc: "m",
+      edition: "webapp", external_id: "99", language: "en", version: "1",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+    })
+    {:ok, other_dealt} = Repo.insert(%DealtCard{player_id: other_player.id, card_id: card2.id})
+
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> put("/api/games/#{game.id}/players/#{other_player.id}/card", %{
+        "dealt_card_id" => to_string(other_dealt.id)
+      })
+
+    assert json_response(conn, 404)["error"] == "Could not find player and dealt card"
+  end
+
+  test "play_card fails when game not found", %{conn: conn} do
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> put("/api/games/01ARZ3NDEKTSV4RRFFQ69G5FAZ/players/01ARZ3NDEKTSV4RRFFQ69G5FAZ/card", %{
+        "dealt_card_id" => "1"
+      })
+
+    assert json_response(conn, 404)["error"] == "Could not find game"
+  end
+
   test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
     # Create another card and mark it as played in this round (0 + 1 => 1)
     {:ok, card2} = Cornucopia.create_card(%{
