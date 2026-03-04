@@ -60,7 +60,12 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
         logging.warning("No 'Attack_Pattern' key found in patterns")
         return capec_names
 
-    _extract_names_from_items(patterns["Attack_Pattern"], capec_names)
+    attack_patterns = patterns["Attack_Pattern"]
+    if not isinstance(attack_patterns, list):
+        logging.warning("'Attack_Pattern' is not a list")
+        return capec_names
+
+    _extract_names_from_items(attack_patterns, capec_names)
 
     if "Categories" not in catalog:
         logging.warning("No 'Categories' key found in catalog")
