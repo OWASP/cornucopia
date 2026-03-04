@@ -13,12 +13,19 @@ servers:
 
 paths:
 
-  /cre/webapp:
+  /lang/webapp/{version}:
     get:
       summary: Get supported languages for Webapp edition
       description: |
         Returns metadata about supported languages for the
         OWASP Cornucopia Website App Edition.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["2.2", "3.0"]
       responses:
         '200':
           description: Language metadata for Website App edition
@@ -37,12 +44,19 @@ paths:
                       languages: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
                       version: "2.2"
 
-  /cre/mobileapp:
+  /lang/mobileapp/{version}:
     get:
       summary: Get supported languages for Mobile edition
       description: |
         Returns metadata about supported languages for the
         OWASP Cornucopia Mobile App Edition.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["1.1"]
       responses:
         '200':
           description: Language metadata for Mobile App edition

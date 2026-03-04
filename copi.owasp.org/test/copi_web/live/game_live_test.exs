@@ -155,13 +155,6 @@ defmodule CopiWeb.GameLiveTest do
        assert html =~ "Viewing round <strong>1</strong>"
     end
 
-    test "delete game removes it from list", %{conn: conn, game: _game} do
-      {:ok, _index_live, html} = live(conn, "/games")
-      
-      # The game might not be shown if it's in the current view -skip complex delete test
-      # Just verify the page loads
-      assert html =~ "Listing Games"
-    end
 
     test "handle_info updates games list", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, "/games")
