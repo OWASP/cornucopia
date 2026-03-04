@@ -81,4 +81,33 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       :ok
     end
   end
+
+  describe "edit player (save_player :edit path)" do
+    test "successfully updates player name", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Original Name", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
+
+      result =
+        view
+        |> form("#player-form", player: %{name: "Updated Name", game_id: game.id})
+        |> render_submit()
+
+      assert {:ok, _view, html} = follow_redirect(result, conn)
+      assert html =~ "Player updated successfully" or html =~ "Updated Name"
+    end
+
+    test "shows validation error on blank name during edit", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Original Name", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
+
+      html =
+        view
+        |> form("#player-form", player: %{name: "", game_id: game.id})
+        |> render_change()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
+  end
 end
