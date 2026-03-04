@@ -43,7 +43,7 @@ See Márk Vinkovits leading a threat modelling ["talk and group session"](https:
 
 ## Gameplay using abuse case modelling approach
 
-Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created a video to explain how he has trained hundreds of teams to use OWASP Cornucopia in abuse case modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date. You can read more about this approach in CyberSec Games blog post on LinkedIn: ["Identifying abuse before designing architecture: Embedding Game-Based Threat Modelling into Agile Delivery at a Major Latin American Bank"](https://www.linkedin.com/pulse/identifying-abuse-before-designing-architecture-embedding-zmnhe/?trackingId=yG%2Fkt5faRJCwW8eMo%2BwkqA%3D%3D).
+Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created a video to explain how he has trained hundreds of teams to use OWASP Cornucopia in abuse case modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date. You can read more about this approach in CyberSec Games blog post on LinkedIn: ["Identifying abuse before designing architecture: Embedding Game-Based Threat Modelling into Agile Delivery at a Major Latin American Bank"](https://www.linkedin.com/pulse/identifying-abuse-before-designing-architecture-embedding-zmnhe/).
 
 <noscript>
     <p>You cannot view this video directly because JavaScript is disabled. Click <a href="https://www.youtube.com/embed/vLYzId7-ijI" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p>
