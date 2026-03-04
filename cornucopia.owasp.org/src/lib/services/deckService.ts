@@ -51,6 +51,10 @@ export class DeckService {
         let languages: string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
         return languages.length !== 0 ? languages : ['en'];
     }
+    public static getLanguagesForEditionVersion(edition: string, version: string): string[] {
+        const deck = DeckService.decks.find((d) => d.edition === edition && d.version === version);
+        return deck?.lang ?? [];
+    }
     public static getVersions(edition: string): string[] {
         return DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.version);
     }
