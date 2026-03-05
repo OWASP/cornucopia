@@ -260,6 +260,14 @@ defmodule Copi.RateLimiterTest do
       assert Process.whereis(Copi.RateLimiter) != nil
     end
 
+    test "cleanup message is handled without crashing" do
+      pid = Process.whereis(Copi.RateLimiter)
+      assert pid != nil
+      send(pid, :cleanup)
+      :timer.sleep(50)
+      assert Process.alive?(pid)
+    end
+
     test "can make requests after clearing IP", %{ip: ip} do
       config = RateLimiter.get_config()
       limit = config.limits.connection
