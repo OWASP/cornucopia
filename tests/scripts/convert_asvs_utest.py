@@ -102,22 +102,25 @@ class TestFileHandleClosure(unittest.TestCase):
         handle.write.side_effect = [None, ValueError("boom")]
 
         with self.assertRaises(ValueError):
-            asvs.create_level_summary(1, [
-                {
-                    "topic": "t",
-                    "cat": "c",
-                    "name": "n",
-                    "link": "l",
-                    "description": "desc",
-                },
-                {
-                    "topic": "t",
-                    "cat": "c",
-                    "name": "n2",
-                    "link": "l2",
-                    "description": "desc2",
-                },
-            ])
+            asvs.create_level_summary(
+                1,
+                [
+                    {
+                        "topic": "t",
+                        "cat": "c",
+                        "name": "n",
+                        "link": "l",
+                        "description": "desc",
+                    },
+                    {
+                        "topic": "t",
+                        "cat": "c",
+                        "name": "n2",
+                        "link": "l2",
+                        "description": "desc2",
+                    },
+                ],
+            )
 
         # even though error happened, close should have been called by context manager
         self.assertTrue(handle.close.called)
