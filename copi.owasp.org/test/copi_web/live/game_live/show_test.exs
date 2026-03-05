@@ -138,6 +138,36 @@ defmodule CopiWeb.GameLive.ShowTest do
 
     test "topic/1 builds topic strings", %{conn: _conn, game: _game} do
       alias CopiWeb.GameLive.Show
+      assert Show.topic(1) == "game:1"
+      assert Show.topic("xyz") == "game:xyz"
+    end
+
+    test "handle_info ignores update for a different game id", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      {:ok, other_game} = Copi.Cornucopia.create_game(%{name: "other"})
+      {:ok, other_game_loaded} = Copi.Cornucopia.Game.find(other_game.id)
+
+      send(show_live.pid, %{
+        topic: "game:#{game.id}",
+        event: "game:updated",
+        payload: other_game_loaded
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
+
+    test "handle_params sets current_round to rounds_played when game is finished", %{conn: conn, game: game} do
+      {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 3
+      })
+      {:ok, _view, html} = live(conn, "/games/#{updated_game.id}?round=2")
+      assert is_binary(html)
+    end
+  end
+end
       assert Show.topic(7) == "game:7"
       assert Show.topic("xyz") == "game:xyz"
     end

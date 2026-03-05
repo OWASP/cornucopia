@@ -119,5 +119,34 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
       assert Show.display_game_session("eop")       == "EoP Session:"
     end
+
+    test "next_round advances round when round is already closed (all players played)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Copi.Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      # Give the player a dealt card that has already been played (played_in_round = 1, not nil)
+      # so round_open? is false for the first round
+      {:ok, card} = Copi.Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "2.2", external_id: "CLO1", language: "en", misc: "misc",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Copi.Cornucopia.Game.find(game_id)
+      # Rounds played should have advanced via the closed-round else branch
+      assert updated_game.rounds_played >= 1
+    end
   end
 end
