@@ -43,7 +43,7 @@
   function getEdition(str: string) : string {
     if (str == "webapp") return "Website App Edition";
     if (str == "mobileapp") return "Mobile App Edition";
-    if (str == "companionapp") return "Companion Edition";
+    if (str == "companion") return "Companion Edition";
     return str;
   }
 </script>
