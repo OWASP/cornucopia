@@ -16,17 +16,25 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => player_id}, _, socket) do
+  def handle_params(%{"id" => player_id, "game_id" => url_game_id}, _, socket) do
     with {:ok, player} <- Player.find(player_id) do
-      with {:ok, game} <- Game.find(player.game_id) do
-        CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
+      # CRITICAL SECURITY VALIDATION: Ensure player belongs to URL game context
+      if player.game_id != url_game_id do
+        Logger.warning("Security: Player #{player_id} access attempted from wrong game context. URL game_id: #{url_game_id} vs actual game_id: #{player.game_id}, IP: #{socket.assigns[:client_ip]}")
+        {:ok, redirect(socket, to: "/error")}
       else
-        {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
+        with {:ok, game} <- Game.find(player.game_id) do
+          CopiWeb.Endpoint.subscribe(topic(player.game_id))
+          {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
+        else
+          {:error, _reason} ->
+            Logger.warning("Security: Game lookup failed for player #{player_id}, game_id: #{player.game_id}, IP: #{socket.assigns[:client_ip]}")
+            {:ok, redirect(socket, to: "/error")}
+        end
       end
     else
       {:error, _reason} ->
+        Logger.warning("Security: Player lookup failed for player_id: #{player_id}, IP: #{socket.assigns[:client_ip]}")
         {:ok, redirect(socket, to: "/error")}
     end
   end
