@@ -51,29 +51,37 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
         logging.warning("No 'Attack_Pattern' key found in patterns")
         return capec_names
 
-    attack_patterns = patterns["Attack_Pattern"]
-    if not isinstance(attack_patterns, list):
-        logging.warning("'Attack_Pattern' is not a list")
-        return capec_names
+    def _extract_names_from_items(items: Any, target: dict[int, str], *, warn_if_not_list: bool = False) -> None:
+        """Add ID->Name mappings from a list-like `items` into target dict.
 
-    for pattern in attack_patterns:
-        if "_ID" in pattern and "_Name" in pattern:
-            capec_id = int(pattern["_ID"])
-            capec_name = pattern["_Name"]
-            capec_names[capec_id] = capec_name
+        When `warn_if_not_list` is True, log a warning if `items` is not a
+        list; otherwise silently skip non-list values. This keeps the
+        behaviour for `Attack_Pattern` (which must be a list) while allowing
+        `Category` to be optional and harmlessly ignored when malformed.
+        """
+        if not isinstance(items, list):
+            if warn_if_not_list:
+                logging.warning("'%s' is not a list", "Attack_Pattern" if warn_if_not_list else "items")
+            return
+        for item in items:
+            if "_ID" in item and "_Name" in item:
+                try:
+                    target[int(item["_ID"])] = item["_Name"]
+                except (ValueError, TypeError):
+                    # Ignore malformed IDs
+                    continue
+
+    attack_patterns = patterns["Attack_Pattern"]
+    _extract_names_from_items(attack_patterns, capec_names, warn_if_not_list=True)
 
     if "Categories" not in catalog:
         logging.warning("No 'Categories' key found in catalog")
-    elif "Category" not in catalog["Categories"]:
-        logging.warning("No 'Category' key found in categories section")
-    elif not isinstance(catalog["Categories"]["Category"], list):
-        logging.warning("'Category' is not a list")
     else:
-        for category in catalog["Categories"]["Category"]:
-            if "_ID" in category and "_Name" in category:
-                capec_id = int(category["_ID"])
-                capec_name = category["_Name"]
-                capec_names[capec_id] = capec_name
+        categories_section = catalog["Categories"]
+        if "Category" not in categories_section:
+            logging.warning("No 'Category' key found in categories section")
+        else:
+            _extract_names_from_items(categories_section["Category"], capec_names)
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
