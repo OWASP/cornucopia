@@ -14,7 +14,8 @@ Are you wondering about how OWASP Cornucopia is connected with the OWAP Juice Sh
 
 ## The threat model
 
-First of, here is the [hi-res threat model](/images/threatmodel.png "[blank]") you should show to your peers. You can also find the [latest drawing](https://github.com/juice-shop/juice-shop/blob/master/threat-model.json) at the OWASP Juice Shop repository. The drawing can be opened up in [OWASP Threat Dragon](https://www.threatdragon.com/) and exported from there.
+First of, here is the [hi-res threat model](/images/threatmodel.png "[blank]") you should show to your peers. You can also use the [empty threat model template](/threat-model-juice-shop-empty.json). The template can be opened up in [OWASP Threat Dragon](https://www.threatdragon.com/). you should allow your peers to explore the threat model and understand the different components and how they are connected. During the OWASP Cornucopia session the players can add threats and cards to the model as they are playing. 
+There is also a [cheat sheet model](/threat-model-juice-shop-cheat-sheet.json) that you can use to quickly find the vulnerable components and the related cards and guide the participants if they get stuck. 
 
 ## The solution
 
