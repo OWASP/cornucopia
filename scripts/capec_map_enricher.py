@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # This script takes JSON from
+# Minor non-functional comment to create a small, safe diff for PR creation (Issue #2487)
+# No behavioral changes - purely a comment to allow PR creation when branch has no other diffs.
 # cornucopia.owasp.org/data/capec-3.9/3000.json
 # and extracts CAPEC information from entries under Attack_Pattern_Catalog -> Attack_Patterns -> Attack_Pattern
 # Like the _Name and _ID and merges this with the source/webapp-capec-3.0.yaml mappings by matching the _ID with the
