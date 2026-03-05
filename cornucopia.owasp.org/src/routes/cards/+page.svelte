@@ -91,7 +91,9 @@
 
         if(version == VERSION_MOBILEAPP)
         card = cards?.get('PC2') as Card;
-
+        
+        if(version == VERSION_COMPANION)
+        card = cards?.get('AAI2') as Card;
     }
 
 
