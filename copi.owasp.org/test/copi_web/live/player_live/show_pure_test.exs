@@ -2,10 +2,16 @@ defmodule CopiWeb.PlayerLive.ShowPureTest do
   use ExUnit.Case, async: true
 
   alias CopiWeb.PlayerLive.Show
+  alias CopiWeb.PlayerLive.FormComponent
 
   test "topic/1 builds topic strings" do
     assert Show.topic(1) == "game:1"
     assert Show.topic("abc") == "game:abc"
+  end
+
+  test "FormComponent.topic/1 builds topic strings" do
+    assert FormComponent.topic(99) == "game:99"
+    assert FormComponent.topic("xyz") == "game:xyz"
   end
 
   test "ordered_cards/1 sorts by card.id" do
