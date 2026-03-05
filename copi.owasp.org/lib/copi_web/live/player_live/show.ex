@@ -20,7 +20,7 @@ defmodule CopiWeb.PlayerLive.Show do
     with {:ok, player} <- Player.find(player_id) do
       # CRITICAL SECURITY VALIDATION: Ensure player belongs to URL game context
       if player.game_id != url_game_id do
-        Logger.warning("Security: Player #{player_id} access attempted from wrong game context. URL game_id: #{url_game_id} vs actual game_id: #{player.game_id}, IP: #{socket.assigns[:client_ip]}")
+        Logger.warning("Security: Player #{player.id} access attempted from wrong game context. URL game_id: #{player.game_id} vs actual game_id: #{player.game_id}, IP: #{socket.assigns[:client_ip]}")
         {:ok, redirect(socket, to: "/error")}
       else
         with {:ok, game} <- Game.find(player.game_id) do
@@ -28,7 +28,7 @@ defmodule CopiWeb.PlayerLive.Show do
           {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
         else
           {:error, _reason} ->
-            Logger.warning("Security: Game lookup failed for player #{player_id}, game_id: #{player.game_id}, IP: #{socket.assigns[:client_ip]}")
+            Logger.warning("Security: Game lookup failed for player #{player.id}, game_id: #{player.game_id}, IP: #{socket.assigns[:client_ip]}")
             {:ok, redirect(socket, to: "/error")}
         end
       end
