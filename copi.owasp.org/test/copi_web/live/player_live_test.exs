@@ -61,6 +61,11 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Hi some updated name, waiting for the game to start..."
     end
 
+    test "lists players on index route", %{conn: conn, player: player} do
+      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
+      assert html =~ "Listing Players"
+    end
+
     test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
       test_ip = {127, 0, 0, 1}
       RateLimiter.clear_ip(test_ip)

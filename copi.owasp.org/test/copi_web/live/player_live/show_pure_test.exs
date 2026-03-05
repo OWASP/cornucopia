@@ -65,4 +65,15 @@ defmodule CopiWeb.PlayerLive.ShowPureTest do
     player = %{id: 2}
     assert Show.get_vote(dealt_card, player) == %{player_id: 2, id: 11}
   end
+
+  test "display_game_session/1 returns correct label for every edition" do
+    assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
+    assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
+    assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+    assert Show.display_game_session("masvs")     == "Cornucopia Mobile Session:"
+    assert Show.display_game_session("cumulus")   == "OWASP Cumulus Session:"
+    assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
+    assert Show.display_game_session("eop")       == "EoP Session:"
+    assert Show.display_game_session("unknown")   == "EoP Session:"
+  end
 end
