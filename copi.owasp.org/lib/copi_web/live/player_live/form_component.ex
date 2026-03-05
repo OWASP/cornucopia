@@ -6,6 +6,11 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   alias Copi.RateLimiter
 
   @impl true
+  def render(%{player: nil} = assigns) do
+    ~H""
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
     <div>
@@ -44,11 +49,6 @@ defmodule CopiWeb.PlayerLive.FormComponent do
       </.simple_form>
     </div>
     """
-  end
-
-  @impl true
-  def render(%{player: nil} = assigns) do
-    ~H""
   end
 
   @impl true
