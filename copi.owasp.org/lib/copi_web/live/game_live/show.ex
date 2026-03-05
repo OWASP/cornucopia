@@ -28,7 +28,13 @@ defmodule CopiWeb.GameLive.Show do
         game.rounds_played + 1
       end
 
-      case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
+      round_result = if params["round"] do
+        Want.integer(params["round"], min: 1, max: current_round)
+      else
+        {:ok, current_round}
+      end
+
+      case round_result do
         {:ok, requested_round} ->
           {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
         {:error, _reason} ->

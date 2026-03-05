@@ -4,6 +4,7 @@
         "lib/copi.ex",
         "lib/copi/release.ex",
         "lib/copi/application.ex",
+        "lib/copi/ip_helper.ex",
         "lib/copi_web/channels/user_socket.ex",
         "lib/copi_web/controllers/page_html.ex",
         "lib/copi_web/controllers/error_html.ex",

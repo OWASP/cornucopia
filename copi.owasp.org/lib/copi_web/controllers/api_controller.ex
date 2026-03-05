@@ -7,7 +7,7 @@ defmodule CopiWeb.ApiController do
     with {:ok, game} <- Game.find(game_id) do
 
       player = Enum.find(game.players, fn player -> player.id == player_id end)
-      dealt_card = Enum.find(player.dealt_cards, fn dealt_card -> Integer.to_string(dealt_card.id) == dealt_card_id end)
+      dealt_card = if player, do: Enum.find(player.dealt_cards, fn dealt_card -> Integer.to_string(dealt_card.id) == dealt_card_id end), else: nil
 
       if player && dealt_card do
         current_round = game.rounds_played + 1

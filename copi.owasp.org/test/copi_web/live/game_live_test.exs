@@ -198,7 +198,8 @@ defmodule CopiWeb.GameLiveTest do
 
       {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, game))
 
-      html = show_live |> element("button[phx-click=\"start_game\"]") |> render_click()
+      render_click(show_live, "start_game", %{})
+      html = render(show_live)
       assert html =~ "At least 3 players are required"
     end
 
