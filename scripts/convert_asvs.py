@@ -31,8 +31,9 @@ def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
     category = ""
     os.mkdir(Path(convert_vars.args.output_path, f"level-{level}-controls"))
     filepath = Path(convert_vars.args.output_path, f"level-{level}-controls/index.md")
-    # use context manager to ensure file is always closed even on errors
-    with open(filepath, "w", encoding="utf-8") as f:
+    # open explicitly and close in finally so mocks see close() called
+    f = open(filepath, "w", encoding="utf-8")
+    try:
         f.write(f"# Level {level} controls\n\n")
         f.write(f"Level {level} contains {len(arr)} controls listed below: \n\n")
         for link in arr:
@@ -44,6 +45,8 @@ def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
                 f.write(f"### {category}\n\n")
             shortdesc = link["description"].replace("Verify that", "").strip().capitalize()[0:50] + " ..."
             f.write(f"- [{link['name']}]({link['link']}) *{shortdesc}* \n\n")
+    finally:
+        f.close()
 
 
 def _format_directory_name(ordinal: int, name: str) -> str:

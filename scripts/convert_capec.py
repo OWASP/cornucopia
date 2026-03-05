@@ -41,7 +41,8 @@ def create_capec_pages(
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
         filepath = capec_path / "index.md"
-        with open(filepath, "w", encoding="utf-8") as f:
+        f = open(filepath, "w", encoding="utf-8")
+        try:
             f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
             f.write("## Description\n\n")
             f.write(f"{parse_description(i.get('Description', ''))}\n\n")
@@ -53,6 +54,8 @@ def create_capec_pages(
                 f.write("## Related ASVS Requirements\n\n")
                 f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
+        finally:
+            f.close()
 
     categories = data["Attack_Pattern_Catalog"]["Categories"]
     for i in categories["Category"]:
@@ -62,7 +65,8 @@ def create_capec_pages(
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
         filepath = capec_path / "index.md"
-        with open(filepath, "w", encoding="utf-8") as f:
+        f = open(filepath, "w", encoding="utf-8")
+        try:
             f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
             f.write("## Description\n\n")
             f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
@@ -74,6 +78,8 @@ def create_capec_pages(
                 f.write("## Related ASVS Requirements\n\n")
                 f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
+        finally:
+            f.close()
 
     logging.info("Created %d CAPEC pages", pages)
 
