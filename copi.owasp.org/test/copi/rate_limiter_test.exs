@@ -241,6 +241,11 @@ defmodule Copi.RateLimiterTest do
       # Should still work even with weird input
       assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
     end
+
+    test "normalize_ip fallback: passes non-tuple non-binary values through", %{ip: _ip} do
+      # nil is neither binary nor tuple, hits normalize_ip(ip), do: ip
+      assert {:ok, _} = RateLimiter.check_rate(nil, :game_creation)
+    end
   end
 
   describe "prod env bypass" do

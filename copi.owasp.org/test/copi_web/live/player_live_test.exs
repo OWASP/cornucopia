@@ -66,6 +66,19 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Listing Players"
     end
 
+    test "shows validation error when submitting empty player name", %{conn: conn, player: player} do
+      RateLimiter.clear_ip({127, 0, 0, 1})
+      {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
+
+      # Submit with empty name → triggers {:error, changeset} in save_player(:new, ...)
+      html =
+        index_live
+        |> form("#player-form", player: %{name: "", game_id: player.game_id})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank"
+    end
+
     test "blocks player creation when rate limit exceeded", %{conn: conn, player: player} do
       test_ip = {127, 0, 0, 1}
       RateLimiter.clear_ip(test_ip)
