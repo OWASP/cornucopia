@@ -44,6 +44,19 @@ Hooks.DragDrop = {
 
     const drake = dragula([document.querySelector('#hand'), document.querySelector('#table')], {
       invalid: function (el, handle) {
+        // Prevent dragging from empty placeholder areas
+        if (el.textContent.includes('Waiting for') ||
+          el.textContent.includes('Drop a card here') ||
+          el.textContent.includes('You can play')) {
+          return true; // Prevent dragging these elements
+        }
+
+        // Check if element is a placeholder (no actual card inside)
+        const cardElement = el.querySelector('.card');
+        if (!cardElement && el.querySelector('p')) {
+          return true; // Prevent dragging text-only placeholders
+        }
+
         // Check if card has elastic class and handle elastic behavior
         if (el.classList.contains('card-elastic')) {
           return false; // Allow dragging elastic cards
@@ -165,10 +178,11 @@ Hooks.DragDrop = {
       card.addEventListener('mouseleave', onPointerUp);
     };
 
-    // Set up elastic behavior for existing cards
+    // Set up elastic behavior for existing cards in hand and on table
     document.querySelectorAll('#hand .card-elastic').forEach(setupElasticCard);
+    document.querySelectorAll('#table .card-elastic').forEach(setupElasticCard);
 
-    // Watch for new cards being added
+    // Watch for new cards being added to hand and table
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
@@ -179,7 +193,13 @@ Hooks.DragDrop = {
       });
     });
 
+    // Observe both hand and table for new elastic cards
     observer.observe(document.querySelector('#hand'), {
+      childList: true,
+      subtree: true
+    });
+
+    observer.observe(document.querySelector('#table'), {
       childList: true,
       subtree: true
     });

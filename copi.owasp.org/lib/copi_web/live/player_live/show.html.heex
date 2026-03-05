@@ -115,7 +115,7 @@
                 <% end %>
               </div>
               
-              <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card} first_card_played={first_card_played} highest_scoring_card={highest_scoring_card}> 
+              <.card_drop_zone is_current_player={player.id == @player.id} player={player} player_card={player_card} first_card_played={first_card_played} highest_scoring_card={highest_scoring_card} has_played_card={@has_played_card}> 
                 <CopiWeb.CardHTML.show card={player_card.card} />
               </.card_drop_zone>
 

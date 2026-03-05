@@ -8,6 +8,7 @@ defmodule CopiWeb.CoreComponents.TableComponents do
   attr :is_current_player, :boolean, default: false
   attr :first_card_played, :map
   attr :highest_scoring_card, :map
+  attr :has_played_card, :boolean, default: false
   slot :inner_block, required: true
 
   def card_drop_zone(assigns) do
@@ -29,7 +30,8 @@ defmodule CopiWeb.CoreComponents.TableComponents do
           <div
           class={[
           "",
-          @player_card && @highest_scoring_card && @player_card.id == @highest_scoring_card.id && "ring-offset-2 ring-4 ring-amber-300"
+          @player_card && @highest_scoring_card && @player_card.id == @highest_scoring_card.id && "ring-offset-2 ring-4 ring-amber-300",
+          @has_played_card && @player_card && "card-elastic z-100"
         ]}
           >
             <%= render_slot(@inner_block) %>
