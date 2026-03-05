@@ -35,8 +35,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          # fetch specific commit to avoid any wildcard/glob expansion bugs
-          ref: ${{ github.event.pull_request.head.sha }}
+          # use the commit that triggered this workflow to avoid any wildcard fetch
+          ref: ${{ github.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           persist-credentials: false
       # Set the pip environment up
@@ -174,8 +174,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          # use SHA instead of branch name to prevent fetch pattern issues
-          ref: ${{ github.event.pull_request.head.sha }}
+          # use the run's SHA rather than branch to avoid wildcard refspec
+          ref: ${{ github.sha }}
       - name: Download translation check report
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
