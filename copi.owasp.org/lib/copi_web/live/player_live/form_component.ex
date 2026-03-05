@@ -14,6 +14,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
       </.header1>
 
       <.simple_form
+        :if={@form}
         for={@form}
         id="player-form"
         phx-target={@myself}
@@ -48,7 +49,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
 
   @impl true
   def update(%{player: nil} = assigns, socket) do
-    {:ok, assign(socket, assigns)}
+    {:ok, socket |> assign(assigns) |> assign(:form, nil)}
   end
 
   def update(%{player: player} = assigns, socket) do
