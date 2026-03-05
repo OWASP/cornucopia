@@ -20,7 +20,15 @@ defmodule CopiWeb.PlayerLive.Show do
     with {:ok, player} <- Player.find(player_id) do
       with {:ok, game} <- Game.find(player.game_id) do
         CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
+        current_round = game.rounds_played + 1
+        has_played_card = player_has_played_card?(player, current_round)
+        
+        socket = socket 
+          |> assign(:game, game) 
+          |> assign(:player, player)
+          |> assign(:has_played_card, has_played_card)
+        
+        {:noreply, socket}
       else
         {:error, _reason} ->
           {:ok, redirect(socket, to: "/error")}
@@ -34,7 +42,15 @@ defmodule CopiWeb.PlayerLive.Show do
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
     with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+      current_round = updated_game.rounds_played + 1
+      has_played_card = player_has_played_card?(updated_player, current_round)
+      
+      socket = socket 
+        |> assign(:game, updated_game) 
+        |> assign(:player, updated_player)
+        |> assign(:has_played_card, has_played_card)
+      
+      {:noreply, socket}
     else
       {:error, _reason} ->
         {:ok, redirect(socket, to: "/error")}
@@ -147,10 +163,16 @@ defmodule CopiWeb.PlayerLive.Show do
     end
 
     {:ok, updated_game} = Game.find(game.id)
+    current_round = updated_game.rounds_played + 1
+    has_played_card = player_has_played_card?(socket.assigns.player, current_round)
 
     CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
-    {:noreply, assign(socket, :game, updated_game)}
+    socket = socket 
+      |> assign(:game, updated_game)
+      |> assign(:has_played_card, has_played_card)
+
+    {:noreply, socket}
   end
 
   def topic(game_id) do
@@ -209,6 +231,10 @@ defmodule CopiWeb.PlayerLive.Show do
       "mlsec" -> "Elevation of MLSec Session:"
       _ -> "EoP Session:"
     end
+  end
+
+  def player_has_played_card?(player, round) do
+    card_played_in_round(player.dealt_cards, round) != nil
   end
 
 end
