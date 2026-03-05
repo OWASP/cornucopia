@@ -8,14 +8,25 @@ description: The OWASP Juice Shop and OWASP Cornucopia cheat shee
 
 # The OWASP Juice Shop and OWASP Cornucopia cheat sheet
 
-Welcome Junior threat modelers! 
+Welcome new-bee OWASP Cornucopia game masters! 
 
-Are you wondering about how OWASP Cornucopia is connected with the OWAP Juice Shop challenges? Here is a list of all the Website App Edition v2.2 cards and how they are connected to the OWASP Juice Shop vulnerabilities. You will also find the threat model that showes you which component is vulnerable and help you to lead a Fun game of OWASP Cornucopia even if you don't have a threat model to use!
+This is how you can connect OWASP Cornucopia with the OWAP Juice Shop challenges. Here is a list of all the Website App Edition cards and how they are connected to the OWASP Juice Shop vulnerabilities. You will also find the threat model that showes you which component is vulnerable which will help you to lead a fun game of OWASP Cornucopia even if you don't have a threat model to use!
 
 ## The threat model
 
 First of, here is the [hi-res threat model](/images/threatmodel.png "[blank]") you should show to your peers. You can also use the [empty threat model template](/threat-model-juice-shop-empty.json). The template can be opened up in [OWASP Threat Dragon](https://www.threatdragon.com/). you should allow your peers to explore the threat model and understand the different components and how they are connected. During the OWASP Cornucopia session the players can add threats and cards to the model as they are playing. 
 There is also a [cheat sheet model](/threat-model-juice-shop-cheat-sheet.json) that you can use to quickly find the vulnerable components and the related cards and guide the participants if they get stuck. 
+
+## Instructions to the game master
+
+Keep the cheat sheet to yourself, but use it to guide the players if they get stuck. You can also use the cheat sheet to prepare for the game and understand which cards are related to which vulnerabilities and components. If you do not have a computer, use the written solution below instead.
+
+You should have the model printed out infront of you.
+Notice the components names on the drawing, you will find the main vulnerable components in the table below.
+For each of the vulnerable component there is a table with the related cards and the related Juice Shop challenges. You can use the table to guide the players if they get stuck and to prepare for the game. The card represent the threat that can be exploited in the related Juice Shop challenge. Each challenge represent a vulnerability in the related component.
+The description of the challenge is a dead give away, but if you are in doubt, click on the challenge to read the solution and understand the vulnerability and the related card.
+
+Happy gaming!
 
 ## The solution
 
