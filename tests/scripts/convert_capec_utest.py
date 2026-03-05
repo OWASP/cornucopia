@@ -28,7 +28,7 @@ class TestFileHandleClosure(unittest.TestCase):
     @patch("scripts.convert_capec.create_folder")
     def test_create_capec_pages_close_on_error(self, mock_create_folder, mock_file):
         handle = mock_file()
-        # first write succeds, second write throws
+        # first write succeeds, second write throws
         handle.write.side_effect = [None, ValueError("oops")]
 
         # Minimal data causing one pattern entry
