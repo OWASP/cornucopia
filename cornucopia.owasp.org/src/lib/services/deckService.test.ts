@@ -175,6 +175,33 @@ describe('DeckService tests', () => {
         });
     }, 10000);
 
+    describe('getLanguagesForEditionVersion', () => {
+        it('should return all languages for webapp version 2.2', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('webapp', '2.2');
+            expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']);
+        });
+
+        it('should return only en and ru for webapp version 3.0', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
+            expect(languages).toEqual(['en', 'ru']);
+        });
+
+        it('should return only en for mobileapp version 1.1', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
+            expect(languages).toEqual(['en']);
+        });
+
+        it('should return empty array for unknown version', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('webapp', '1.0');
+            expect(languages).toEqual([]);
+        });
+
+        it('should return empty array for unknown edition', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('unknown', '2.2');
+            expect(languages).toEqual([]);
+        });
+    }, 10000);
+
     describe('getVersions', () => {
         it('should return all versions for webapp', () => {
             const versions = DeckService.getVersions('webapp');

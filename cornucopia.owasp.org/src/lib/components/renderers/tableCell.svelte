@@ -15,9 +15,15 @@
   {/if}
 
   <style>
-    td,th
+    td
     {
       padding: 0.25rem;
       text-align: left;
+    }
+    th
+    {
+      padding: 0.25rem;
+      font-weight: bold;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 90%, rgba(255,255,255,0.3) 100%);
     }
   </style>
