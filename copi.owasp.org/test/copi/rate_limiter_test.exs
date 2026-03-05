@@ -243,6 +243,18 @@ defmodule Copi.RateLimiterTest do
     end
   end
 
+  describe "prod env bypass" do
+    test "bypasses rate limit for localhost in prod env" do
+      Application.put_env(:copi, :env, :prod)
+
+      try do
+        assert {:ok, :unlimited} = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
+      after
+        Application.put_env(:copi, :env, :test)
+      end
+    end
+  end
+
   describe "cleanup process" do
     test "rate limiter process is alive" do
       assert Process.whereis(Copi.RateLimiter) != nil

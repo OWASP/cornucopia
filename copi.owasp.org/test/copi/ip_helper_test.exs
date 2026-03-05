@@ -170,9 +170,39 @@ defmodule Copi.IPHelperTest do
     test "handles malformed extract_first_ip inputs" do
       info = %{x_headers: [{"x-forwarded-for", "invalid"}]}
       assert IPHelper.get_ip_from_connect_info(info) == nil
-      
+
       info2 = %{x_headers: [{"other", "10.0.0.1"}]}
       assert IPHelper.get_ip_from_connect_info(info2) == nil
+    end
+
+    test "extracts IP from x_headers binary string" do
+      info = %{x_headers: "10.0.1.1"}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 1, 1}
+    end
+
+    test "handles x_headers as non-map/non-list/non-binary (true->nil branch)" do
+      info = %{x_headers: 9999}
+      assert IPHelper.get_ip_from_connect_info(info) == nil
+    end
+
+    test "extracts IP from x_headers atom key tuple list" do
+      info = %{x_headers: [{:"x-forwarded-for", "10.0.1.2"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 1, 2}
+    end
+
+    test "returns nil for non-matching atom key in x_headers" do
+      info = %{x_headers: [{:other_header, "10.0.0.1"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == nil
+    end
+
+    test "extracts IP from x_headers list of binary strings" do
+      info = %{x_headers: ["10.0.1.3"]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 1, 3}
+    end
+
+    test "returns nil for non-tuple elements in req_headers list" do
+      info = %{req_headers: [123, 456]}
+      assert IPHelper.get_ip_from_connect_info(info) == nil
     end
   end
 end

@@ -47,6 +47,17 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   @impl true
+  def render(%{player: nil} = assigns) do
+    ~H""
+  end
+
+  @impl true
+  def update(%{player: nil} = _assigns, socket) do
+    # No player assigned (index action): nothing to render
+    {:ok, socket}
+  end
+
+  @impl true
   def update(%{player: player} = assigns, socket) do
     changeset = Cornucopia.change_player(player)
 
