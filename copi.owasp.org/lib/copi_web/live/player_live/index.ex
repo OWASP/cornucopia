@@ -11,7 +11,7 @@ defmodule CopiWeb.PlayerLive.Index do
 
     # V2.2: Block at mount — returning redirect from mount sends a true HTTP 302
     # during the dead (static) render, before any HTML or WebSocket reaches the client.
-    if not is_nil(game.started_at) do
+    if game.started_at do
       {:ok,
        socket
        |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
@@ -27,13 +27,20 @@ defmodule CopiWeb.PlayerLive.Index do
     game = Cornucopia.get_game!(game_id)
 
     # V2.2: Also check in handle_params for LiveView navigation scenarios
-    if not is_nil(game.started_at) do
+    if game.started_at do
       {:noreply,
        socket
        |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
        |> redirect(to: ~p"/games")}
     else
-      {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+      # Assign freshly loaded game and players for LiveView client-side navigations
+      players = list_players(game_id)
+
+      {:noreply,
+       socket
+       |> assign(:game, game)
+       |> assign(:players, players)
+       |> apply_action(socket.assigns.live_action, params)}
     end
   end
 

@@ -95,7 +95,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     # V2.2: Re-fetch authoritative game state from DB at the trusted service layer
     # to prevent bypassing the UI check via direct form submission or race conditions
     case Cornucopia.Game.find(game_id) do
-      {:ok, game} when not is_nil(game.started_at) ->
+      {:ok, game} when game.started_at != nil ->
         {:noreply,
          socket
          |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
@@ -114,6 +114,13 @@ defmodule CopiWeb.PlayerLive.FormComponent do
                  |> assign(:game, updated_game)
                  |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
 
+              {:error, :game_already_started} ->
+                # V15.4: Race condition caught by transaction - game started between check and insert
+                {:noreply,
+                 socket
+                 |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+                 |> push_navigate(to: ~p"/games")}
+
               {:error, %Ecto.Changeset{} = changeset} ->
                 {:noreply, assign_form(socket, changeset)}
             end
@@ -126,7 +133,10 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         end
 
       {:error, _} ->
-        {:noreply, push_navigate(socket, to: ~p"/")}
+        {:noreply,
+         socket
+         |> put_flash(:error, "Game not found")
+         |> push_navigate(to: ~p"/games")}
     end
   end
 

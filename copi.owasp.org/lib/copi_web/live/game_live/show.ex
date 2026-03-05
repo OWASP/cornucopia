@@ -23,7 +23,7 @@ defmodule CopiWeb.GameLive.Show do
       # V2.2: Once a game has started, block public access to the game show page.
       # Players must access their game through /games/:game_id/players/:player_id.
       # This prevents unauthorized spectators from watching games in progress.
-      if not is_nil(game.started_at) do
+      if game.started_at do
         {:noreply,
          socket
          |> put_flash(:error, "This game is in progress. If you are a player, please use your player-specific link.")
