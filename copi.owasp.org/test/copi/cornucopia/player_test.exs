@@ -4,8 +4,9 @@ defmodule Copi.Cornucopia.PlayerTest do
   alias Copi.Cornucopia.Player
 
   describe "changeset/2" do
-    test "valid with name" do
-      changeset = Player.changeset(%Player{}, %{name: "Alice", game_id: "some-id"})
+    test "valid with name only" do
+      # game_id is not in validate_required, so name alone is enough
+      changeset = Player.changeset(%Player{}, %{name: "Alice"})
       assert changeset.valid?
     end
 

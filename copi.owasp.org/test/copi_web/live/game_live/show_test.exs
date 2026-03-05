@@ -168,8 +168,3 @@ defmodule CopiWeb.GameLive.ShowTest do
     end
   end
 end
-      assert Show.topic(7) == "game:7"
-      assert Show.topic("xyz") == "game:xyz"
-    end
-  end
-end
