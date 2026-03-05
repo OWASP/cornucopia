@@ -257,6 +257,72 @@
     .cornucopia-mobile-text {
         color: rgb(10,58,94);
     }
+    
+    .agentic-ai {
+        background-color: #dbdbdb;
+    }
+    .automated-threats {
+        background-color: #dbdbdb;
+    }
+    .cloud {
+        background-color: #dbdbdb;
+    }
+    .devops {
+        background-color: #dbdbdb;
+    }
+    .frontend {
+        background-color: #dbdbdb;
+    }
+    .large-language-models {
+        background-color: #dbdbdb;
+    }
+    .social-engineering {
+        background-color: #dbdbdb;
+    }
+
+    .agentic-ai-text {
+        color: #dbdbdb;
+    }
+    .automated-threats-text {
+        color: #dbdbdb;
+    }
+    .cloud-text {
+        color: #dbdbdb;
+    }
+    .devops-text {
+        color: #dbdbdb;
+    }
+    .frontend-text {
+        color: #dbdbdb;
+    }
+    .large-language-models-text {
+        color: #dbdbdb;
+    }
+    .social-engineering-text {
+        color: #dbdbdb;
+    }
+
+    .agentic-ai-royal {
+        background-color: #e8e8e8;
+    }
+    .automated-threats-royal {
+        background-color: #e8e8e8;
+    }
+    .cloud-royal {
+        background-color: #e8e8e8;
+    }
+    .devops-royal {
+        background-color: #e8e8e8;
+    }
+    .frontend-royal {
+        background-color: #e8e8e8;
+    }
+    .large-language-models-royal {
+        background-color: #e8e8e8;
+    }
+    .social-engineering-royal {
+        background-color: #e8e8e8;
+    }
 
     .white {
         background-color: white;
