@@ -23,11 +23,11 @@ defmodule CopiWeb.PlayerLive.Show do
         {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
       else
         {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
+          {:noreply, redirect(socket, to: "/error")}
       end
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
@@ -37,7 +37,7 @@ defmodule CopiWeb.PlayerLive.Show do
       {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
