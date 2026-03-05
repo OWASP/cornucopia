@@ -25,6 +25,26 @@ class EnricherVars:
     args: argparse.Namespace
 
 
+def _extract_names_from_items(items: Any, target: dict[int, str], *, warn_if_not_list: bool = False, label: str = "items") -> None:
+    """Add ID->Name mappings from a list-like `items` into target dict.
+
+    When `warn_if_not_list` is True, log a warning if `items` is not a
+    list; otherwise silently skip non-list values. `label` is used in the
+    warning message to indicate which field was expected to be a list.
+    """
+    if not isinstance(items, list):
+        if warn_if_not_list:
+            logging.warning("'%s' is not a list", label)
+        return
+    for item in items:
+        if "_ID" in item and "_Name" in item:
+            try:
+                target[int(item["_ID"])] = item["_Name"]
+            except (ValueError, TypeError):
+                # Ignore malformed IDs
+                continue
+
+
 def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
     """
     Extract CAPEC ID to Name mappings from JSON data.
@@ -51,28 +71,10 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
         logging.warning("No 'Attack_Pattern' key found in patterns")
         return capec_names
 
-    def _extract_names_from_items(items: Any, target: dict[int, str], *, warn_if_not_list: bool = False) -> None:
-        """Add ID->Name mappings from a list-like `items` into target dict.
-
-        When `warn_if_not_list` is True, log a warning if `items` is not a
-        list; otherwise silently skip non-list values. This keeps the
-        behaviour for `Attack_Pattern` (which must be a list) while allowing
-        `Category` to be optional and harmlessly ignored when malformed.
-        """
-        if not isinstance(items, list):
-            if warn_if_not_list:
-                logging.warning("'%s' is not a list", "Attack_Pattern" if warn_if_not_list else "items")
-            return
-        for item in items:
-            if "_ID" in item and "_Name" in item:
-                try:
-                    target[int(item["_ID"])] = item["_Name"]
-                except (ValueError, TypeError):
-                    # Ignore malformed IDs
-                    continue
+    # Use module-level helper `_extract_names_from_items` for extraction
 
     attack_patterns = patterns["Attack_Pattern"]
-    _extract_names_from_items(attack_patterns, capec_names, warn_if_not_list=True)
+    _extract_names_from_items(attack_patterns, capec_names, warn_if_not_list=True, label="Attack_Pattern")
 
     if "Categories" not in catalog:
         logging.warning("No 'Categories' key found in catalog")
@@ -81,7 +83,7 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
         if "Category" not in categories_section:
             logging.warning("No 'Category' key found in categories section")
         else:
-            _extract_names_from_items(categories_section["Category"], capec_names)
+            _extract_names_from_items(categories_section["Category"], capec_names, label="Category")
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
