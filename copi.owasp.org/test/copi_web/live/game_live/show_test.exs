@@ -128,5 +128,18 @@ defmodule CopiWeb.GameLive.ShowTest do
       alias CopiWeb.GameLive.Show
       assert Show.card_played_in_round([], 1) == nil
     end
+
+    test "card_played_in_round/2 returns the matching card", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+
+      cards = [%{played_in_round: 1, id: "a"}, %{played_in_round: 2, id: "b"}]
+      assert Show.card_played_in_round(cards, 2) == %{played_in_round: 2, id: "b"}
+    end
+
+    test "topic/1 builds topic strings", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.topic(7) == "game:7"
+      assert Show.topic("xyz") == "game:xyz"
+    end
   end
 end
