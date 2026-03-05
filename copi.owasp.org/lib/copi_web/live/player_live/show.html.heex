@@ -144,7 +144,12 @@
 
   <div id="hand" phx-hook="DragDrop">
     <%= for dealt_card <- (@player.dealt_cards |> unplayed_cards |> ordered_cards) do %>
-      <div data-game={@player.game.id} data-player={@player.id} data-dealtcard={dealt_card.id}>
+      <div 
+        data-game={@player.game.id} 
+        data-player={@player.id} 
+        data-dealtcard={dealt_card.id}
+        class={if @has_played_card, do: "card-elastic z-100"}
+      >
         <CopiWeb.CardHTML.show card={dealt_card.card} />
       </div>
 

@@ -30,6 +30,7 @@
   font-weight: 400;
   src: local('Segoe Condensed'), url('/fonts/segoe-condensed.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Segoe Condensed';
   font-style: normal;
@@ -43,36 +44,42 @@
   font-weight: 400;
   src: local('Open Sans Light'), url('/fonts/OpenSans-Light.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Open Sans Regular';
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans Regular'), url('/fonts/OpenSans-Regular.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Open Sans SemiBold';
   font-style: normal;
   font-weight: 700;
   src: local('Open Sans SemiBold'), url('/fonts/OpenSans-SemiBold.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Open Sans Bold';
   font-style: normal;
   font-weight: 700;
   src: local('Open Sans Bold'), url('/fonts/OpenSans-Bold.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Open Sans ExtraBold';
   font-style: normal;
   font-weight: 700;
   src: local('Open Sans ExtraBold'), url('/fonts/OpenSans-ExtraBold.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Josefin Sans Regular';
   font-style: normal;
   font-weight: 700;
   src: local('Josefin Sans Regular'), url('/fonts/JosefinSans-Regular.woff') format('woff');
 }
+
 @font-face {
   font-family: 'Josefin Sans Bold';
   font-style: normal;
@@ -93,15 +100,16 @@
   transition: opacity 1s ease-out;
 }
 
-.phx-disconnected{
+.phx-disconnected {
   cursor: wait;
 }
-.phx-disconnected *{
+
+.phx-disconnected * {
   pointer-events: none;
 }
 
 .phx-modal {
-  opacity: 1!important;
+  opacity: 1 !important;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -109,8 +117,8 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .phx-modal-content {
@@ -143,27 +151,33 @@
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .alert-info {
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
+
 .alert-warning {
   color: #8a6d3b;
   background-color: #fcf8e3;
   border-color: #faebcc;
 }
+
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+
 .alert p {
   margin-bottom: 0;
 }
+
 .alert:empty {
   display: none;
 }
+
 .invalid-feedback {
   color: #a94442;
   display: block;
@@ -189,7 +203,9 @@
 th {
   font-weight: normal;
 }
-th.numeric, td.numeric {
+
+th.numeric,
+td.numeric {
   text-align: right;
 }
 
@@ -201,11 +217,11 @@ th.numeric, td.numeric {
   height: clamp(351px, 35.1vw, 469px);
   border-radius: clamp(12px, 1.5vw, 16px);
   background-color: #fff;
-  -webkit-box-shadow: 0.3vw 0.3vw 0.7vw rgba(0,0,0,0.3);
-  box-shadow: 0.3vw 0.3vw 0.7vw rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0.3vw 0.3vw 0.7vw rgba(0, 0, 0, 0.3);
+  box-shadow: 0.3vw 0.3vw 0.7vw rgba(0, 0, 0, 0.3);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
- Helvetica, Arial, sans-serif,
- "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .webapp {
@@ -265,7 +281,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .network-storage-mobile .left-bar {
-  background-image: linear-gradient(rgb(242, 194, 0), rgb( 223, 92, 141));
+  background-image: linear-gradient(rgb(242, 194, 0), rgb(223, 92, 141));
 }
 
 .network-storage-mobile .value {
@@ -273,7 +289,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .resilience-mobile .left-bar {
-  background-image: linear-gradient(rgb(49, 124, 192), rgb(79, 138 ,192));
+  background-image: linear-gradient(rgb(49, 124, 192), rgb(79, 138, 192));
 }
 
 .resilience-mobile .value {
@@ -293,7 +309,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .cornucopia-mobile .value {
-  color:$cornucopia-mobile-color;
+  color: $cornucopia-mobile-color;
 }
 
 .wild-card-mobile .left-bar {
@@ -301,11 +317,11 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .wild-card-mobile {
-  background-image: linear-gradient(to left,rgb(251, 182, 124, 0.49), rgb(255, 230, 209, 0.49));
+  background-image: linear-gradient(to left, rgb(251, 182, 124, 0.49), rgb(255, 230, 209, 0.49));
 }
 
 .wild-card-mobile .value {
-  color:$wildcard-mobile-color;
+  color: $wildcard-mobile-color;
 }
 
 .data-validation-encoding .left-bar {
@@ -333,11 +349,11 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .session-management .left-bar {
-  background-color:$session-management-color;
+  background-color: $session-management-color;
 }
 
 .session-management .value {
-  color:$session-management-color;
+  color: $session-management-color;
 }
 
 .cryptography .left-bar {
@@ -349,31 +365,35 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 }
 
 .cornucopia .left-bar {
-  background-color:$cornucopia-color;
+  background-color: $cornucopia-color;
 }
 
 .cornucopia .value {
-  color:$cornucopia-color;
+  color: $cornucopia-color;
 }
 
 .wild-card .left-bar {
-  background-color:$wildcard-color;
+  background-color: $wildcard-color;
 }
 
 
 .wild-card .value {
-  color:$wildcard-color;
+  color: $wildcard-color;
 }
 
 .card {
-  p, dl {
+
+  p,
+  dl {
     letter-spacing: clamp(-0.05em, -0.02vw, -0.1em);
   }
+
   .main-content {
     position: relative;
     height: 100%;
     padding: clamp(2px, 0.2vw, 3px) clamp(8px, 0.8vw, 13px);
-    color:#333;
+    color: #333;
+
     .description a.info {
       padding-top: clamp(2px, 0.2vw, 3px);
       display: inline-block;
@@ -382,6 +402,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       font-size: clamp(12px, 1.2vw, 16px);
       text-decoration: underline;
     }
+
     .description a.info:hover {
       color: #666;
       text-decoration: none;
@@ -389,9 +410,11 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 }
 
-.J, .Q, .K {
+.J,
+.Q,
+.K {
   &.platform-code-mobile {
-    background-image: linear-gradient(to left,rgba(79, 185, 145,  0.49), rgba(95, 172, 211,  0.49));
+    background-image: linear-gradient(to left, rgba(79, 185, 145, 0.49), rgba(95, 172, 211, 0.49));
   }
 
   &.authentication-authorization-mobile {
@@ -399,19 +422,19 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   &.network-storage-mobile {
-    background-image: linear-gradient(to left,rgb( 242, 194, 0, 0.49), rgb( 223, 92, 141, 0.49));
+    background-image: linear-gradient(to left, rgb(242, 194, 0, 0.49), rgb(223, 92, 141, 0.49));
   }
 
   &.resilience-mobile {
-    background-image: linear-gradient(to left,rgb( 49, 124, 192, 0.49), rgb( 79, 138 ,192, 0.49));
+    background-image: linear-gradient(to left, rgb(49, 124, 192, 0.49), rgb(79, 138, 192, 0.49));
   }
 
   &.cryptography-mobile {
-    background-image: linear-gradient(to left,rgb(  246, 89, 40, 0.49), rgb( 246, 135, 101, 0.49));
+    background-image: linear-gradient(to left, rgb(246, 89, 40, 0.49), rgb(246, 135, 101, 0.49));
   }
 
   &.cornucopia-mobile {
-    background-image: linear-gradient(to left,rgb( 10, 58, 94, 0.20), rgb( 39, 70, 94, 0.20));
+    background-image: linear-gradient(to left, rgb(10, 58, 94, 0.20), rgb(39, 70, 94, 0.20));
   }
 
 
@@ -419,34 +442,36 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   //
 
   &.authentication {
-    background-color: scale-color($authentication-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($authentication-color, $lightness: 75%, $saturation: -20%);
   }
 
   &.authorization {
-    background-color: scale-color($authorization-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($authorization-color, $lightness: 75%, $saturation: -20%);
   }
 
   &.data-validation-encoding {
-    background-color: scale-color($data-validation-encoding-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($data-validation-encoding-color, $lightness: 75%, $saturation: -20%);
   }
 
   &.session-management {
-    background-color: scale-color($session-management-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($session-management-color, $lightness: 75%, $saturation: -20%);
   }
 
   &.cryptography {
-    background-color: scale-color($cryptography-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($cryptography-color, $lightness: 75%, $saturation: -20%);
   }
 
   &.cornucopia {
-    background-color: scale-color($cornucopia-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($cornucopia-color, $lightness: 75%, $saturation: -20%);
   }
 
   &.wildcard {
-    background-color: scale-color($wildcard-color, $lightness: 75%, $saturation:  -20%);
+    background-color: scale-color($wildcard-color, $lightness: 75%, $saturation: -20%);
   }
 
-  p.value { color: #fff; }
+  p.value {
+    color: #fff;
+  }
 }
 
 .card p.value {
@@ -454,9 +479,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   text-align: right;
   vertical-align: top;
   font-size: clamp(55px, 5.5vw, 74px);
-  letter-spacing: normal; 
+  letter-spacing: normal;
   line-height: 1;
-  font-weight:bold
+  font-weight: bold
 }
 
 .card p.description {
@@ -564,7 +589,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       color: rgb(180, 180, 180);
     }
 
-    &.nJ, &.nQ, &.nK {
+    &.nJ,
+    &.nQ,
+    &.nK {
       background: rgb(178, 25, 74);
 
       .main-content {
@@ -576,44 +603,68 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat top/100% url("/images/eop-cards/spoofing-2.png") #fff;
     }
+
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/spoofing-3.png") #fff;
     }
+
     &.n4 {
       background: no-repeat bottom/100% url("/images/eop-cards/spoofing-4.png") #fff;
     }
+
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/spoofing-5.png") #fff;
     }
+
     &.n6 {
       background: no-repeat bottom/100% url("/images/eop-cards/spoofing-6.png") #fff;
     }
+
     &.n7 {
       background: no-repeat center/100% url("/images/eop-cards/spoofing-7.png") #fff;
     }
+
     &.n8 {
       background: no-repeat top/100% url("/images/eop-cards/spoofing-8.png") #fff;
     }
+
     &.n9 {
       background: no-repeat center/100% url("/images/eop-cards/spoofing-9.png") #fff;
     }
+
     &.n10 {
       background: no-repeat top/100% url("/images/eop-cards/spoofing-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat center/100% url("/images/eop-cards/spoofing-j.png") #fff;
     }
+
     &.nQ {
       background: no-repeat center/100% url("/images/eop-cards/spoofing-q.png") #fff;
     }
+
     &.nK {
       background: no-repeat center/100% url("/images/eop-cards/spoofing-k.png") #fff;
     }
+
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/spoofing-a.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -627,7 +678,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       color: rgb(185, 217, 165);
     }
 
-    &.nJ, &.nQ, &.nK {
+    &.nJ,
+    &.nQ,
+    &.nK {
       background: rgb(116, 187, 99);
 
       .main-content {
@@ -638,44 +691,68 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat top/100% url("/images/eop-cards/tampering-2.png") #fff;
     }
+
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/tampering-3.png") #fff;
     }
+
     &.n4 {
       background: no-repeat bottom/100% url("/images/eop-cards/tampering-4.png") #fff;
     }
+
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/tampering-5.png") #fff;
     }
+
     &.n6 {
       background: no-repeat bottom/100% url("/images/eop-cards/tampering-6.png") #fff;
     }
+
     &.n7 {
       background: no-repeat center/100% url("/images/eop-cards/tampering-7.png") #fff;
     }
+
     &.n8 {
       background: no-repeat top/100% url("/images/eop-cards/tampering-8.png") #fff;
     }
+
     &.n9 {
       background: no-repeat center/100% url("/images/eop-cards/tampering-9.png") #fff;
     }
+
     &.n10 {
       background: no-repeat top/100% url("/images/eop-cards/tampering-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat top/100% url("/images/eop-cards/tampering-j.png") #fff;
     }
+
     &.nQ {
       background: no-repeat top/100% url("/images/eop-cards/tampering-q.png") #fff;
     }
+
     &.nK {
       background: no-repeat center/100% url("/images/eop-cards/tampering-k.png") #fff;
     }
+
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/tampering-a.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -689,7 +766,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       color: rgb(229, 114, 63);
     }
 
-    &.nJ, &.nQ, &.nK {
+    &.nJ,
+    &.nQ,
+    &.nK {
       background: rgb(229, 114, 63);
 
       .main-content {
@@ -700,44 +779,68 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat top/100% url("/images/eop-cards/repudiation-2.png") #fff;
     }
+
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/repudiation-3.png") #fff;
     }
+
     &.n4 {
       background: no-repeat bottom/100% url("/images/eop-cards/repudiation-4.png") #fff;
     }
+
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/repudiation-5.png") #fff;
     }
+
     &.n6 {
       background: no-repeat bottom/100% url("/images/eop-cards/repudiation-6.png") #fff;
     }
+
     &.n7 {
       background: no-repeat center/100% url("/images/eop-cards/repudiation-7.png") #fff;
     }
+
     &.n8 {
       background: no-repeat top/100% url("/images/eop-cards/repudiation-8.png") #fff;
     }
+
     &.n9 {
       background: no-repeat center/100% url("/images/eop-cards/repudiation-9.png") #fff;
     }
+
     &.n10 {
       background: no-repeat top/100% url("/images/eop-cards/repudiation-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat center/100% url("/images/eop-cards/repudiation-j.png") #fff;
     }
+
     &.nQ {
       background: no-repeat center/100% url("/images/eop-cards/repudiation-q.png") #fff;
     }
+
     &.nK {
       background: no-repeat bottom/100% url("/images/eop-cards/repudiation-k.png") #fff;
     }
+
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/repudiation-a.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -751,7 +854,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       color: rgb(0, 159, 156);
     }
 
-    &.nJ, &.nQ, &.nK {
+    &.nJ,
+    &.nQ,
+    &.nK {
       background: rgb(0, 159, 156);
 
       .main-content {
@@ -762,44 +867,68 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat top/100% url("/images/eop-cards/information-disclosure-2.png") #fff;
     }
+
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/information-disclosure-3.png") #fff;
     }
+
     &.n4 {
       background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-4.png") #fff;
     }
+
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/information-disclosure-5.png") #fff;
     }
+
     &.n6 {
       background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-6.png") #fff;
     }
+
     &.n7 {
       background: no-repeat top/100% url("/images/eop-cards/information-disclosure-7.png") #fff;
     }
+
     &.n8 {
       background: no-repeat top 15px left/100% url("/images/eop-cards/information-disclosure-8.png") #fff;
     }
+
     &.n9 {
       background: no-repeat center/100% url("/images/eop-cards/information-disclosure-9.png") #fff;
     }
+
     &.n10 {
       background: no-repeat top 28px left/100% url("/images/eop-cards/information-disclosure-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat center/100% url("/images/eop-cards/information-disclosure-j.png") #fff;
     }
+
     &.nQ {
       background: no-repeat top left/100% url("/images/eop-cards/information-disclosure-q.png") #fff;
     }
+
     &.nK {
       background: no-repeat top 9px left/100% url("/images/eop-cards/information-disclosure-k.png") #fff;
     }
+
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/information-disclosure-a.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -813,7 +942,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       color: rgb(180, 181, 180);
     }
 
-    &.nJ, &.nQ, &.nK {
+    &.nJ,
+    &.nQ,
+    &.nK {
       background: rgb(102, 102, 101);
 
       .main-content {
@@ -824,44 +955,68 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat top/100% url("/images/eop-cards/denial-of-service-2.png") #fff;
     }
+
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/denial-of-service-3.png") #fff;
     }
+
     &.n4 {
       background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-4.png") #fff;
     }
+
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/denial-of-service-5.png") #fff;
     }
+
     &.n6 {
       background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-6.png") #fff;
     }
+
     &.n7 {
       background: no-repeat center/100% url("/images/eop-cards/denial-of-service-7.png") #fff;
     }
+
     &.n8 {
       background: no-repeat top/100% url("/images/eop-cards/denial-of-service-8.png") #fff;
     }
+
     &.n9 {
       background: no-repeat top -15px left/100% url("/images/eop-cards/denial-of-service-9.png") #fff;
     }
+
     &.n10 {
       background: no-repeat top 2px left/100% url("/images/eop-cards/denial-of-service-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat center/100% url("/images/eop-cards/denial-of-service-j.png") #fff;
     }
+
     &.nQ {
       background: no-repeat top -10px left/100% url("/images/eop-cards/denial-of-service-q.png") #fff;
     }
+
     &.nK {
       background: no-repeat top/100% url("/images/eop-cards/denial-of-service-k.png") #fff;
     }
+
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/denial-of-service-a.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -875,7 +1030,9 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       color: rgb(69, 139, 189);
     }
 
-    &.nJ, &.nQ, &.nK {
+    &.nJ,
+    &.nQ,
+    &.nK {
       background: rgb(69, 139, 189);
 
       .main-content {
@@ -886,44 +1043,68 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-2.png") #fff;
     }
+
     &.n3 {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-3.png") #fff;
     }
+
     &.n4 {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-4.png") #fff;
     }
+
     &.n5 {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-5.png") #fff;
     }
+
     &.n6 {
       background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-6.png") #fff;
     }
+
     &.n7 {
       background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-7.png") #fff;
     }
+
     &.n8 {
       background: no-repeat top 15px left/100% url("/images/eop-cards/elevation-of-privilege-8.png") #fff;
     }
+
     &.n9 {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-9.png") #fff;
     }
+
     &.n10 {
       background: no-repeat top 30px left/100% url("/images/eop-cards/elevation-of-privilege-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat center/100% url("/images/eop-cards/elevation-of-privilege-j.png") #fff;
     }
+
     &.nQ {
       background: no-repeat top -9px left/100% url("/images/eop-cards/elevation-of-privilege-q.png") #fff;
     }
+
     &.nK {
       background: no-repeat top/100% url("/images/eop-cards/elevation-of-privilege-k.png") #fff;
     }
+
     &.nA {
       background: no-repeat bottom/100% url("/images/eop-cards/elevation-of-privilege-a.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -1010,7 +1191,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
 
   &.model-risk {
-    
+
     .left-value {
       //background: rgb(117, 35, 26)
     }
@@ -1019,7 +1200,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       //color: rgb(180, 180, 180);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA {
 
       .main-content {
         color: rgb(42, 10, 60);
@@ -1041,47 +1225,80 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n3 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n4 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n5 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n6 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n7 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n8 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n9 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.n10 {
       background: no-repeat -0px -4px url("/images/mlsec/model-2-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
+
     &.nQ {
       background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
+
     &.nK {
       background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
+
     &.nA {
       background: no-repeat -0px -4px url("/images/mlsec/model-J-A.png") #fff;
     }
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
 
-    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-position: 4px -4px;
     }
   }
@@ -1095,7 +1312,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       //color: rgb(185, 217, 165);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA {
       //background: rgb(116, 187, 99);
 
       .main-content {
@@ -1117,48 +1337,80 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n3 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n4 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n5 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n6 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n7 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n8 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n9 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.n10 {
       background: no-repeat -0px -4px url("/images/mlsec/input-2-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
+
     &.nQ {
       background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
+
     &.nK {
       background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
+
     &.nA {
       background: no-repeat -0px -4px url("/images/mlsec/input-J-A.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
 
-    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-position: 4px -4px;
     }
   }
@@ -1172,7 +1424,10 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       //color: rgb(229, 114, 63);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA {
       //background: rgb(229, 114, 63);
 
       .main-content {
@@ -1194,55 +1449,90 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n3 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n4 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n5 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n6 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n7 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n8 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n9 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.n10 {
       background: no-repeat -0px -4px url("/images/mlsec/output-2-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
+
     &.nQ {
       background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
+
     &.nK {
       background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
+
     &.nA {
       background: no-repeat -0px -4px url("/images/mlsec/output-J-A.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
 
-    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-position: 4px -4px;
     }
   }
 
   &.dataset-risk {
 
-    &.nJ, &.nQ, &.nK, &.nA {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA {
 
       .main-content {
         color: rgb(42, 10, 60);
@@ -1263,48 +1553,80 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     &.n2 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n3 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n4 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n5 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n6 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n7 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n8 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n9 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.n10 {
       background: no-repeat -14px -2px url("/images/mlsec/dataset-2-10.png") #fff;
     }
+
     &.nJ {
       background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
+
     &.nQ {
       background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
+
     &.nK {
       background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
+
     &.nA {
       background: no-repeat -0px -4px url("/images/mlsec/dataset-J-A.png") #fff;
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
 
-    &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-position: 4px -4px;
     }
   }
@@ -1318,15 +1640,15 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   display: grid;
   grid-template-columns: [left-start] clamp(29px, 2.9vw, 38px) [left-end category-start] clamp(144px, 14.4vw, 192px) [category-end];
   grid-template-rows: [header-start] clamp(31px, 3.1vw, 42px) [header-end content-start] clamp(270px, 27vw, 360px) [content-end];
-  grid-template-areas: 
+  grid-template-areas:
     "header header"
     "content content";
   background-position: clamp(12px, 1.2vw, 16px) clamp(10px, 1vw, 16px);
   background-size: clamp(240px, 24vw, 320px) clamp(293px, 29.3vw, 469px);
-  
+
 
   .left-value {
-    
+
     display: grid;
     position: unset;
     padding: unset;
@@ -1351,7 +1673,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     font-weight: 300;
     white-space: nowrap;
     grid-column-start: 2;
-    
+
   }
 
   .left-bar {
@@ -1406,47 +1728,72 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     .left-bar {
       color: rgb(244, 206, 200);
     }
+
     &.n2 {
       background: url("/images/cumulus/secrets-and-access-2.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n3 {
       background: url("/images/cumulus/secrets-and-access-3.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n4 {
       background: url("/images/cumulus/secrets-and-access-4.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n5 {
       background: url("/images/cumulus/secrets-and-access-5.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n6 {
       background: url("/images/cumulus/secrets-and-access-6.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n7 {
       background: url("/images/cumulus/secrets-and-access-7.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n8 {
       background: url("/images/cumulus/secrets-and-access-8.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n9 {
       background: url("/images/cumulus/secrets-and-access-9.png") no-repeat rgb(239, 134, 101);
     }
+
     &.n10 {
       background: url("/images/cumulus/secrets-and-access-x.png") no-repeat rgb(239, 134, 101);
     }
+
     &.nJ {
       background: url("/images/cumulus/secrets-and-access-j.png") no-repeat rgb(239, 134, 101);
     }
+
     &.nQ {
       background: url("/images/cumulus/secrets-and-access-q.png") no-repeat rgb(239, 134, 101);
     }
+
     &.nK {
       background: url("/images/cumulus/secrets-and-access-k.png") no-repeat rgb(239, 134, 101);
     }
+
     &.nA {
       background: url("/images/cumulus/secrets-and-access-a.png") no-repeat rgb(239, 134, 101);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -1455,47 +1802,72 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     .left-bar {
       color: rgb(293, 228, 241);
     }
+
     &.n2 {
       background: url("/images/cumulus/delivery-2.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n3 {
       background: url("/images/cumulus/delivery-3.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n4 {
       background: url("/images/cumulus/delivery-4.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n5 {
       background: url("/images/cumulus/delivery-5.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n6 {
       background: url("/images/cumulus/delivery-6.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n7 {
       background: url("/images/cumulus/delivery-7.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n8 {
       background: url("/images/cumulus/delivery-8.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n9 {
       background: url("/images/cumulus/delivery-9.png") no-repeat rgb(87, 193, 235);
     }
+
     &.n10 {
       background: url("/images/cumulus/delivery-x.png") no-repeat rgb(87, 193, 235);
     }
+
     &.nJ {
       background: url("/images/cumulus/delivery-j.png") no-repeat rgb(87, 193, 235);
     }
+
     &.nQ {
       background: url("/images/cumulus/delivery-q.png") no-repeat rgb(87, 193, 235);
     }
+
     &.nK {
       background: url("/images/cumulus/delivery-k.png") no-repeat rgb(87, 193, 235);
     }
+
     &.nA {
       background: url("/images/cumulus/delivery-a.png") no-repeat rgb(87, 193, 235);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -1504,47 +1876,72 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     .left-bar {
       color: rgb(188, 224, 214);
     }
+
     &.n2 {
       background: url("/images/cumulus/recovery-2.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n3 {
       background: url("/images/cumulus/recovery-3.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n4 {
       background: url("/images/cumulus/recovery-4.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n5 {
       background: url("/images/cumulus/recovery-5.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n6 {
       background: url("/images/cumulus/recovery-6.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n7 {
       background: url("/images/cumulus/recovery-7.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n8 {
       background: url("/images/cumulus/recovery-8.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n9 {
       background: url("/images/cumulus/recovery-9.png") no-repeat rgb(69, 176, 147);
     }
+
     &.n10 {
       background: url("/images/cumulus/recovery-x.png") no-repeat rgb(69, 176, 147);
     }
+
     &.nJ {
       background: url("/images/cumulus/recovery-j.png") no-repeat rgb(69, 176, 147);
     }
+
     &.nQ {
       background: url("/images/cumulus/recovery-q.png") no-repeat rgb(69, 176, 147);
     }
+
     &.nK {
       background: url("/images/cumulus/recovery-k.png") no-repeat rgb(69, 176, 147);
     }
+
     &.nA {
       background: url("/images/cumulus/recovery-a.png") no-repeat rgb(69, 176, 147);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -1553,47 +1950,72 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     .left-bar {
       color: rgb(248, 227, 193);
     }
+
     &.n2 {
       background: url("/images/cumulus/monitoring-2.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n3 {
       background: url("/images/cumulus/monitoring-3.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n4 {
       background: url("/images/cumulus/monitoring-4.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n5 {
       background: url("/images/cumulus/monitoring-5.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n6 {
       background: url("/images/cumulus/monitoring-6.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n7 {
       background: url("/images/cumulus/monitoring-7.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n8 {
       background: url("/images/cumulus/monitoring-8.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n9 {
       background: url("/images/cumulus/monitoring-9.png") no-repeat rgb(243, 179, 93);
     }
+
     &.n10 {
       background: url("/images/cumulus/monitoring-x.png") no-repeat rgb(243, 179, 93);
     }
+
     &.nJ {
       background: url("/images/cumulus/monitoring-j.png") no-repeat rgb(243, 179, 93);
     }
+
     &.nQ {
       background: url("/images/cumulus/monitoring-q.png") no-repeat rgb(243, 179, 93);
     }
+
     &.nK {
       background: url("/images/cumulus/monitoring-k.png") no-repeat rgb(243, 179, 93);
     }
+
     &.nA {
       background: url("/images/cumulus/monitoring-a.png") no-repeat rgb(243, 179, 93);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
@@ -1602,54 +2024,83 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     .left-bar {
       color: rgb(217, 199, 224);
     }
+
     &.n2 {
       background: url("/images/cumulus/resources-2.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n3 {
       background: url("/images/cumulus/resources-3.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n4 {
       background: url("/images/cumulus/resources-4.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n5 {
       background: url("/images/cumulus/resources-5.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n6 {
       background: url("/images/cumulus/resources-6.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n7 {
       background: url("/images/cumulus/resources-7.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n8 {
       background: url("/images/cumulus/resources-8.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n9 {
       background: url("/images/cumulus/resources-9.png") no-repeat rgb(153, 115, 179);
     }
+
     &.n10 {
       background: url("/images/cumulus/resources-x.png") no-repeat rgb(153, 115, 179);
     }
+
     &.nJ {
       background: url("/images/cumulus/resources-j.png") no-repeat rgb(153, 115, 179);
     }
+
     &.nQ {
       background: url("/images/cumulus/resources-q.png") no-repeat rgb(153, 115, 179);
     }
+
     &.nK {
       background: url("/images/cumulus/resources-k.png") no-repeat rgb(153, 115, 179);
     }
+
     &.nA {
       background: url("/images/cumulus/resources-a.png") no-repeat rgb(153, 115, 179);
     }
 
-    &.nJ, &.nQ, &.nK, &.nA, &.n2, &.n3, &.n4, &.n5, &.n6, &.n7, &.n8, &.n9, &.n10 {
+    &.nJ,
+    &.nQ,
+    &.nK,
+    &.nA,
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n5,
+    &.n6,
+    &.n7,
+    &.n8,
+    &.n9,
+    &.n10 {
       background-size: cover;
     }
   }
 
 }
 
-@keyframes ants { to { background-position: 100% 100% } }
+@keyframes ants {
+  to {
+    background-position: 100% 100%
+  }
+}
 
 .card-player {
 
@@ -1678,7 +2129,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       font-size: clamp(17px, 1.7vw, 22px);
       line-height: clamp(17px, 1.7vw, 22px);
       margin-bottom: clamp(24px, 2.4vw, 32px);
-     }
+    }
   }
 
   .voted {
@@ -1712,7 +2163,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     }
 
     &.mine {
-      color:#333;
+      color: #333;
     }
 
     .placeholder {
@@ -1743,11 +2194,11 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   height: clamp(12px, 1.2vw, 20px);
   border-radius: 50%;
   background: #7a7a7a;
-  background: -moz-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
-  background: -webkit-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
-  background: -o-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
-  background: -ms-linear-gradient(left, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
-  background: linear-gradient(to right, #7a7a7a 10%, rgba(122,122,122, 0) 42%);
+  background: -moz-linear-gradient(left, #7a7a7a 10%, rgba(122, 122, 122, 0) 42%);
+  background: -webkit-linear-gradient(left, #7a7a7a 10%, rgba(122, 122, 122, 0) 42%);
+  background: -o-linear-gradient(left, #7a7a7a 10%, rgba(122, 122, 122, 0) 42%);
+  background: -ms-linear-gradient(left, #7a7a7a 10%, rgba(122, 122, 122, 0) 42%);
+  background: linear-gradient(to right, #7a7a7a 10%, rgba(122, 122, 122, 0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
@@ -1755,6 +2206,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
 .loader:before {
   width: 50%;
   height: 50%;
@@ -1765,6 +2217,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   left: 0;
   content: '';
 }
+
 .loader:after {
   background: #fff;
   width: 75%;
@@ -1778,21 +2231,25 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   bottom: 0;
   right: 0;
 }
+
 @-webkit-keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
+
 @keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
@@ -1840,29 +2297,34 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
 }
 
-#hand::-webkit-scrollbar, #table::-webkit-scrollbar {
+#hand::-webkit-scrollbar,
+#table::-webkit-scrollbar {
   width: clamp(24px, 2.4vw, 32px);
   height: clamp(24px, 2.4vw, 32px);
 }
 
 /* Track */
-#hand::-webkit-scrollbar-track, #table::-webkit-scrollbar-track {
+#hand::-webkit-scrollbar-track,
+#table::-webkit-scrollbar-track {
   background: rgb(243, 244, 246);
 }
 
 /* Handle */
-#hand::-webkit-scrollbar-thumb, #table::-webkit-scrollbar-thumb {
+#hand::-webkit-scrollbar-thumb,
+#table::-webkit-scrollbar-thumb {
   background: rgb(31 41 55 / var(--tw-bg-opacity));
   min-height: clamp(24px, 2.4vw, 32px);
   min-width: clamp(24px, 2.4vw, 32px);
 }
 
 /* Handle on hover */
-#hand::-webkit-scrollbar-thumb:hover, #table::-webkit-scrollbar-thumb:hover {
+#hand::-webkit-scrollbar-thumb:hover,
+#table::-webkit-scrollbar-thumb:hover {
   background: #555;
-} 
+}
 
-/* Dragula Styles */@at-root.gu-mirror {
+/* Dragula Styles */
+@at-root.gu-mirror {
   position: fixed !important;
   margin: 0 !important;
   z-index: 9999 !important;
@@ -1870,18 +2332,42 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
 }
+
 .gu-hide {
   display: none !important;
 }
+
 .gu-unselectable {
   -webkit-user-select: none !important;
   -moz-user-select: none !important;
   -ms-user-select: none !important;
   user-select: none !important;
 }
+
 .gu-transit {
   display: none;
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
+}
+
+/* Elastic effect styles for cards after placement */
+.card-elastic {
+  cursor: grab !important;
+  transition: transform 0.1s ease-out !important;
+  position: relative !important;
+  will-change: transform !important;
+}
+
+.card-elastic:active {
+  cursor: grabbing !important;
+}
+
+.card-elastic.dragging {
+  transition: none !important;
+  z-index: 1000 !important;
+}
+
+.card-elastic.bouncing {
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
 }
