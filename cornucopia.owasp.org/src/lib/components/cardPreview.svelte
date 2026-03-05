@@ -3,6 +3,7 @@
     import { cardColor } from "../../domain/card/cardColor";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import WebAppCardMapping from "./webAppCardMapping.svelte";
+    import CompanionCardMapping from "./companionCardMapping.svelte";
     
     interface Props {
         card?: Card;
@@ -54,6 +55,9 @@
             {/if}
             {#if card?.edition == 'mobileapp'}
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
+            {/if}
+            {#if card?.edition == 'companion'}
+                <CompanionCardMapping {mapping} {style}></CompanionCardMapping>
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
         <span class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</span>
