@@ -25,7 +25,13 @@ class EnricherVars:
     args: argparse.Namespace
 
 
-def _extract_names_from_items(items: Any, target: dict[int, str], *, warn_if_not_list: bool = False, label: str = "items") -> None:
+def _extract_names_from_items(
+    items: Any,
+    target: dict[int, str],
+    *,
+    warn_if_not_list: bool = False,
+    label: str = "items",
+) -> None:
     """Add ID->Name mappings from a list-like `items` into target dict.
 
     When `warn_if_not_list` is True, log a warning if `items` is not a
