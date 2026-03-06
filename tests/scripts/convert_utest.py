@@ -1206,16 +1206,12 @@ class TestGetDocxDocument(unittest.TestCase):
         file = os.path.join(
             c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.d"
         )
-        want_type = type(docx.Document())
-        want_len_paragraphs = 0
         want_logging_error_message = [f"ERROR:root:Could not find file at: {file}"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_file = c.get_docx_document(file)
         self.assertEqual(ll.output, want_logging_error_message)
-        self.assertIsInstance(got_file, want_type)
-        got_len_paragraphs = len(got_file.paragraphs)
-        self.assertEqual(want_len_paragraphs, got_len_paragraphs)
+        self.assertIsNone(got_file)
 
 
 class TestGetReplacementDict(unittest.TestCase):
@@ -1603,6 +1599,27 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
         self.assertIn("cornucopia_cards_es.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
+
+    def test_create_edition_from_template_docx_none_doc_returns_early(self) -> None:
+        """When get_docx_document returns None (template missing), logs error and returns without saving."""
+        fake_docx_path = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "nonexistent_template.docx"
+        )
+        not_expected_output = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_es.docx"
+        )
+        if os.path.isfile(not_expected_output):
+            os.remove(not_expected_output)
+
+        with mock.patch("scripts.convert.get_template_for_edition", return_value=fake_docx_path):
+            with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+                c.create_edition_from_template("guide", "es")
+
+        self.assertTrue(
+            any("Cannot create output file" in msg for msg in ll.output),
+            f"Expected 'Cannot create output file' in logs but got: {ll.output}",
+        )
+        self.assertFalse(os.path.isfile(not_expected_output))
 
 
 class TestSaveIdmlFile(unittest.TestCase):
