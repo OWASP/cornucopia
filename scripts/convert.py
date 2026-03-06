@@ -11,7 +11,7 @@ import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
 from defusedxml import ElementTree as DefusedElTree
-from typing import Any, Dict, List, Tuple, cast
+from typing import Any, Dict, List, Optional, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
@@ -553,7 +553,7 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
     return paragraphs
 
 
-def get_docx_document(docx_file: str) -> Any:
+def get_docx_document(docx_file: str) -> Optional[Any]:
     """Open the file and return the docx document, or None if the file is not found."""
     import docx  # type: ignore[import-untyped]
 

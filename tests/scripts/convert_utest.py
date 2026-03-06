@@ -1602,9 +1602,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
 
     def test_create_edition_from_template_docx_none_doc_returns_early(self) -> None:
         """When get_docx_document returns None (template missing), logs error and returns without saving."""
-        fake_docx_path = os.path.join(
-            c.convert_vars.BASE_PATH, "resources", "templates", "nonexistent_template.docx"
-        )
+        fake_docx_path = os.path.join(c.convert_vars.BASE_PATH, "resources", "templates", "nonexistent_template.docx")
         not_expected_output = os.path.join(
             c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_es.docx"
         )
