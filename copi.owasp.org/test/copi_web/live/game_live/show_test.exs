@@ -128,5 +128,48 @@ defmodule CopiWeb.GameLive.ShowTest do
       alias CopiWeb.GameLive.Show
       assert Show.card_played_in_round([], 1) == nil
     end
+
+    test "card_played_in_round/2 returns the matching card", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      card = %{played_in_round: 3}
+      assert Show.card_played_in_round([%{played_in_round: 1}, %{played_in_round: 2}, card], 3) == card
+    end
+
+    test "redirects to /error when game_id is not found", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/00000000000000000000000001")
+    end
+
+    test "redirects to /error when round param is out of range", %{conn: conn, game: game} do
+      # game has rounds_played=0 so max valid round=1; round=99 is out of range
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/#{game.id}?round=99")
+    end
+
+    test "handle_params uses rounds_played directly for finished game", %{conn: conn, game: game} do
+      {:ok, finished_game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 2
+        })
+
+      {:ok, _view, html} = live(conn, "/games/#{finished_game.id}")
+      assert html =~ finished_game.name
+    end
+
+    test "handle_info with non-matching topic is no-op", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      {:ok, updated_game} = Cornucopia.Game.find(game.id)
+
+      send(show_live.pid, %{
+        topic: "game:completely-different-id",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
   end
 end

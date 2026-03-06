@@ -70,15 +70,31 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
     test "updates player successfully without rate limiting", %{conn: conn, game: game} do
       {:ok, player} = Cornucopia.create_player(%{name: "Original", game_id: game.id})
-      
+
       # Go to player show page which has Edit link
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
-      
+
       # Verify player name is displayed
       assert render(view) =~ "Original"
-      
+
       # Update should work without triggering rate limit (skipping this complex test)
       :ok
+    end
+
+    test "shows changeset error when create_player fails due to invalid game_id",
+         %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Submit with a non-existent game_id to trigger FK constraint failure
+      view
+      |> form("#player-form", player: %{
+           name: "FK Error Player",
+           game_id: "00000000000000000000000000"
+         })
+      |> render_submit()
+
+      # Form should still be visible (no redirect on error)
+      assert has_element?(view, "#player-form")
     end
   end
 end

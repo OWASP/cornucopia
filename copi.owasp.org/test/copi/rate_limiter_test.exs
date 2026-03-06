@@ -241,11 +241,39 @@ defmodule Copi.RateLimiterTest do
       # Should still work even with weird input
       assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
     end
+
+    test "bypasses rate limit in production mode for localhost" do
+      Application.put_env(:copi, :env, :prod)
+
+      try do
+        result = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
+        assert result == {:ok, :unlimited}
+      after
+        Application.put_env(:copi, :env, :test)
+      end
+    end
+
+    test "normalize_ip passes through non-tuple non-binary input" do
+      # Passing an integer (not a tuple or binary) hits the catch-all normalize_ip clause
+      assert {:ok, _} = RateLimiter.check_rate(12345, :game_creation)
+    end
   end
 
   describe "cleanup process" do
     test "rate limiter process is alive" do
       assert Process.whereis(Copi.RateLimiter) != nil
+    end
+
+    test "handles :cleanup message gracefully" do
+      pid = Process.whereis(Copi.RateLimiter)
+      # Populate some state first
+      RateLimiter.check_rate({10, 20, 30, 40}, :game_creation)
+      # Directly send the cleanup message to trigger handle_info(:cleanup, state)
+      send(pid, :cleanup)
+      Process.sleep(50)
+      # Should still be healthy
+      assert Process.alive?(pid)
+      assert {:ok, _} = RateLimiter.check_rate({10, 20, 30, 41}, :game_creation)
     end
 
     test "can make requests after clearing IP", %{ip: ip} do
