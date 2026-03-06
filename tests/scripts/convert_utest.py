@@ -2307,7 +2307,7 @@ class TestValidateCommandArgs(unittest.TestCase):
 
     def test_pipe_char_returns_false(self) -> None:
         args = ["/usr/bin/libreoffice", "--convert-to", "pdf", "file|inject"]
-        with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+        with self.assertLogs(logging.getLogger(), logging.WARNING):
             result = c._validate_command_args(args)
         self.assertFalse(result)
 
@@ -2447,7 +2447,7 @@ class TestRenameLibreofficeOutput(unittest.TestCase):
             default_pdf = os.path.join(td, "document.pdf")
             target_pdf = os.path.join(td, "renamed.pdf")
             open(default_pdf, "w").close()
-            with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+            with self.assertLogs(logging.getLogger(), logging.INFO):
                 c._rename_libreoffice_output(src, target_pdf)
             self.assertTrue(os.path.isfile(target_pdf))
             self.assertFalse(os.path.isfile(default_pdf))
@@ -2472,7 +2472,7 @@ class TestConvertToPdfDocx2pdfPath(unittest.TestCase):
             with mock.patch("shutil.which", return_value=None), mock.patch(
                 "scripts.convert.Path.exists", return_value=False
             ), mock.patch("docx2pdf.convert"), mock.patch("scripts.convert._cleanup_temp_file") as mock_cleanup:
-                with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+                with self.assertLogs(logging.getLogger(), logging.INFO):
                     c.convert_to_pdf(src, pdf)
             mock_cleanup.assert_called_once_with(src)
         finally:
@@ -2576,7 +2576,7 @@ class TestGetMappingForEditionException(unittest.TestCase):
         yaml_files = glob.glob(os.path.join(self.BASE_PATH, "source", "*.yaml"))
         with mock.patch("scripts.convert.build_template_dict", side_effect=Exception("parse error")):
             with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
-                result = c.get_mapping_for_edition(yaml_files, "3.0", "en", "webapp", "bridge", "cards")
+                c.get_mapping_for_edition(yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("Failed to build template mapping", " ".join(ll.output))
 
 
