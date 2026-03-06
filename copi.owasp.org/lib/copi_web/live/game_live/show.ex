@@ -20,29 +20,19 @@ defmodule CopiWeb.GameLive.Show do
   @impl true
   def handle_params(params, _, socket) do
     with {:ok, game} <- Game.find(params["game_id"]) do
-      # V2.2: Once a game has started, block public access to the game show page.
-      # Players must access their game through /games/:game_id/players/:player_id.
-      # This prevents unauthorized spectators from watching games in progress.
-      if game.started_at do
-        {:noreply,
-         socket
-         |> put_flash(:error, "This game is in progress. If you are a player, please use your player-specific link.")
-         |> redirect(to: ~p"/games")}
+      CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
+
+      current_round = if game.finished_at do
+        game.rounds_played
       else
-        CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
+        game.rounds_played + 1
+      end
 
-        current_round = if game.finished_at do
-          game.rounds_played
-        else
-          game.rounds_played + 1
-        end
-
-        case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
-          {:ok, requested_round} ->
-            {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
-          {:error, _reason} ->
-            {:noreply, redirect(socket, to: "/error")}
-        end
+      case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
+        {:ok, requested_round} ->
+          {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
+        {:error, _reason} ->
+          {:noreply, redirect(socket, to: "/error")}
       end
     else
       {:error, _reason} ->
