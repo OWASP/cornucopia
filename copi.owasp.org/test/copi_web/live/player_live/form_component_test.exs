@@ -96,5 +96,9 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       # Form should still be visible (no redirect on error)
       assert has_element?(view, "#player-form")
     end
+
+    test "FormComponent.topic/1 returns correct topic string", %{conn: _conn, game: _game} do
+      assert CopiWeb.PlayerLive.FormComponent.topic("abc123") == "game:abc123"
+    end
   end
 end

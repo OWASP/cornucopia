@@ -171,5 +171,15 @@ defmodule CopiWeb.GameLive.ShowTest do
       :timer.sleep(50)
       assert render(show_live) =~ game.name
     end
+
+    test "last_version/1 and display_game_session/1 cover mlsec and fallback", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.latest_version("mlsec") == "1.0"
+      assert Show.latest_version("eop") == "5.1"
+      assert Show.latest_version("cumulus") == "1.1"
+      assert Show.latest_version("masvs") == "1.1"
+      assert Show.latest_version("unknown") == "1.0"
+      assert Show.display_game_session("eop") == "EoP Session:"
+    end
   end
 end

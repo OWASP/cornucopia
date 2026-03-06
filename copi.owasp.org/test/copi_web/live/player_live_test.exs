@@ -40,6 +40,12 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Cornucopia Web Session: some name"
     end
 
+    test "index action lists players without selecting one", %{conn: conn, player: player} do
+      # GET /games/:game_id/players → PlayerLive.Index :index → apply_action :index
+      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
+      assert html =~ player.name
+    end
+
     test "saves new player", %{conn: conn, player: player} do
       {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}")
 

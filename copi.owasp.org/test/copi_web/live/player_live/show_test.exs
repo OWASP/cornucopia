@@ -111,6 +111,14 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       # With no players, no one is still to play → round_open? is false → round_closed? is true
       assert Show.round_closed?(%{players: [], rounds_played: 0}) == true
 
+      # last_round? returns false when a player still has a nil-round card
+      player_with_unplayed = %{dealt_cards: [%{played_in_round: nil}]}
+      refute Show.last_round?(%{players: [player_with_unplayed], rounds_played: 0})
+
+      # last_round? returns true when all cards are played
+      player_all_played = %{dealt_cards: [%{played_in_round: 1}]}
+      assert Show.last_round?(%{players: [player_all_played], rounds_played: 0})
+
       assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
       assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
       assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
