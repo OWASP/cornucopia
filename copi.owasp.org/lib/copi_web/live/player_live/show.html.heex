@@ -1,5 +1,7 @@
 <.header1><%= display_game_session(@game.edition) %> <%= @player.game.name %> </.header1>
 
+<.copy_url_button uri={"#{@socket.endpoint.url()}/games/#{@game.id}"} />
+
 <%= if @player.game.finished_at do %>
 
   <h2>Thanks for playing, <%= @player.name %>! This game finished at <%= @player.game.finished_at %></h2>
