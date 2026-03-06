@@ -20,3 +20,13 @@ config :copi, CopiWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warning
+
+# Deterministic test encryption key (32 bytes, all ones). Dev/test only.
+# V11.5.1: Not a real secret; test environment only.
+config :copi, Copi.Vault,
+  ciphers: [
+    default:
+      {Cloak.Ciphers.AES.GCM,
+       tag: "AES.GCM.V1",
+       key: :binary.copy(<<1>>, 32)}
+  ]

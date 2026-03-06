@@ -7,6 +7,9 @@ defmodule Copi.Application do
 
   def start(_type, _args) do
     children = [
+      # Start the encryption vault before the repo so encrypted fields
+      # can be read during any startup queries. (ASVS V13.3.1)
+      Copi.Vault,
       # Start the Ecto repository
       Copi.Repo,
       # Start the Telemetry supervisor
