@@ -74,4 +74,16 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     assert conn.status != 429
     refute conn.halted
   end
+
+  test "skips rate limiting when remote_ip is explicitly nil" do
+    # Explicitly nil remote_ip + no forwarded header → {:none, nil} branch
+    conn =
+      conn(:get, "/")
+      |> Map.put(:remote_ip, nil)
+      |> init_test_session(%{})
+      |> RateLimiterPlug.call([])
+
+    assert conn.status != 429
+    refute conn.halted
+  end
 end
