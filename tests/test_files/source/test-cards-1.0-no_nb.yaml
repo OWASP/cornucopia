@@ -1,0 +1,29 @@
+---
+meta:
+  edition: "test"
+  component: "cards"
+  language: "NO_NB"
+  version: "1.0"
+suits:
+-
+  id: "TS"
+  name: "Test Suite Norsk"
+  cards:
+  -
+    id: "TSA"
+    value: "A"
+    desc: "Testkort A"
+paragraphs:
+-
+  id: "Common"
+  name: "Common"
+  sentences:
+  -
+    id: "T00001"
+    text: "Dette er den første testmerkelappen"
+  -
+    id: "T00002"
+    text: "Dette er den andre testmerkelappen"
+  -
+    id: "T00003"
+    text: ""
