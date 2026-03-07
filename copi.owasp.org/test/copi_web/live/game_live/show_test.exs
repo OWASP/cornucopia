@@ -128,5 +128,26 @@ defmodule CopiWeb.GameLive.ShowTest do
       alias CopiWeb.GameLive.Show
       assert Show.card_played_in_round([], 1) == nil
     end
+
+    test "handle_info sets requested_round to rounds_played for finished game", %{conn: conn, game: game} do
+      {:ok, finished_game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 3
+        })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{finished_game.id}")
+
+      send(show_live.pid, %{
+        topic: "game:#{finished_game.id}",
+        event: "game:updated",
+        payload: finished_game
+      })
+
+      :timer.sleep(50)
+      # requested_round must be 3 (rounds_played), not 4 (rounds_played + 1)
+      assert :sys.get_state(show_live.pid).socket.assigns.requested_round == 3
+    end
   end
 end
