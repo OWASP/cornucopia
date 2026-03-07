@@ -27,3 +27,9 @@ cornucopia.owasp.org/.vs
 cornucopia.owasp.org/package-lock.json
 cornucopia.owasp.org/coverage/**
 .vscode
+# Debug and temporary files
+tests/debug_*.py
+tests/tmp_*.py
+output.yaml
+copi.owasp.org/gpg_key.json
+*.gpg
