@@ -2,7 +2,6 @@ defmodule CopiWeb.GameLive.Show do
   use CopiWeb, :live_view
 
   alias Copi.Cornucopia.Game
-  alias Copi.Cornucopia.DealtCard
 
   @impl true
   def mount(_params, session, socket) do
@@ -57,7 +56,8 @@ defmodule CopiWeb.GameLive.Show do
 
     cond do
       game.started_at ->
-        # Game already started, do nothing
+        # Game already started – idempotent noop; always return a valid LiveView reply.
+        # ASVS V2.3.3 – never allow skipping steps or re-triggering a completed flow.
         {:noreply, socket}
 
       length(game.players) < 3 ->
@@ -71,31 +71,19 @@ defmodule CopiWeb.GameLive.Show do
         # Valid player count (3+), proceed with game start
         all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
         players = game.players
-        player_count = length(players)
 
-        # Deal cards to players in round-robin fashion
-        all_cards
-        |> Enum.with_index()
-        |> Enum.each(fn {card, i} ->
-          Copi.Repo.insert!(%DealtCard{
-            card_id: card.id,
-            player_id: Enum.at(players, rem(i, player_count)).id
-          })
-        end)
-
-        # Update game with start time and handle potential errors
-        case Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
-          {:ok, updated_game} ->
+        # ASVS V2.3.3 – wrap dealing + game start in one atomic transaction so either
+        # all cards are dealt and the game is marked started, or nothing is persisted.
+        case Copi.Cornucopia.deal_cards_for_game(game, players, all_cards) do
+          {:ok, _result} ->
+            {:ok, updated_game} = Game.find(game.id)
             CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
             {:noreply, assign(socket, :game, updated_game)}
 
-          {:error, _changeset} ->
-            # If update fails, reload game and show error
-            {:ok, reloaded_game} = Game.find(game.id)
-            {:noreply,
-             socket
-             |> put_flash(:error, "Failed to start game. Please try again.")
-             |> assign(:game, reloaded_game)}
+          {:error, _step, _reason} ->
+            # ASVS V16.5 – fail gracefully with a generic message; never crash the
+            # LiveView process or expose internal error details to the client.
+            {:noreply, put_flash(socket, :error, "Failed to deal cards. Please try again.")}
         end
     end
   end

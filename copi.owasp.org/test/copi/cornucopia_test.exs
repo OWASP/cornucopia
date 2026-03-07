@@ -222,4 +222,87 @@ defmodule Copi.CornucopiaTest do
       assert %Ecto.Changeset{} = Cornucopia.change_card(card)
     end
   end
+
+  describe "deal_cards_for_game/3" do
+    alias Copi.Cornucopia.{DealtCard, Game}
+
+    @deal_game_attrs %{name: "deal test game", edition: "webapp"}
+    @deal_card_base %{
+      capec: [], category: "Authentication", description: "desc",
+      edition: "webapp", language: "en", misc: "misc",
+      owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [],
+      owasp_scp: [], owasp_devguide: [], safecode: [], value: "A", version: "2.2"
+    }
+
+    defp deal_game_fixture do
+      {:ok, game} = Cornucopia.create_game(@deal_game_attrs)
+      game
+    end
+
+    defp deal_card_fixture(n) do
+      {:ok, card} = Cornucopia.create_card(Map.put(@deal_card_base, :external_id, "deal-ext-#{n}"))
+      card
+    end
+
+    test "successfully deals cards round-robin and sets started_at" do
+      game = deal_game_fixture()
+      {:ok, p1} = Cornucopia.create_player(%{name: "Alice", game_id: game.id})
+      {:ok, p2} = Cornucopia.create_player(%{name: "Bob", game_id: game.id})
+      cards = Enum.map(1..4, &deal_card_fixture/1)
+
+      # ASVS V2.3.3 – entire dealing must succeed atomically.
+      assert {:ok, %{game: updated_game, dealt_cards: dealt_cards}} =
+               Cornucopia.deal_cards_for_game(game, [p1, p2], cards)
+
+      assert updated_game.started_at != nil
+      assert Enum.count(dealt_cards) == 4
+
+      # Verify all rows exist in the database (not just in memory).
+      {:ok, loaded_game} = Game.find(updated_game.id)
+      all_dealt = Enum.flat_map(loaded_game.players, & &1.dealt_cards)
+      assert Enum.count(all_dealt) == 4
+    end
+
+    test "distributes cards round-robin – each player receives the correct share" do
+      game = deal_game_fixture()
+      {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, p2} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
+      # 3 cards, 2 players → P1: [0,2], P2: [1]
+      cards = Enum.map(1..3, &deal_card_fixture/1)
+
+      {:ok, %{dealt_cards: dealt_cards}} =
+        Cornucopia.deal_cards_for_game(game, [p1, p2], cards)
+
+      counts =
+        dealt_cards
+        |> Enum.group_by(& &1.player_id)
+        |> Map.new(fn {pid, dc} -> {pid, length(dc)} end)
+
+      assert counts[p1.id] == 2
+      assert counts[p2.id] == 1
+    end
+
+    test "zero cards results in no DealtCard rows but game is still started" do
+      game = deal_game_fixture()
+      {:ok, p1} = Cornucopia.create_player(%{name: "Solo", game_id: game.id})
+
+      assert {:ok, %{dealt_cards: [], game: updated_game}} =
+               Cornucopia.deal_cards_for_game(game, [p1], [])
+
+      assert updated_game.started_at != nil
+      assert Copi.Repo.all(DealtCard) == []
+    end
+
+    test "returns {:error, :no_players, :player_list_empty} when player list is empty" do
+      game = deal_game_fixture()
+      cards = [deal_card_fixture(99)]
+
+      # Guard against ArithmeticError from rem(i, 0).
+      assert {:error, :no_players, :player_list_empty} =
+               Cornucopia.deal_cards_for_game(game, [], cards)
+
+      # Transaction must have been fully rolled back – no orphaned rows.
+      assert Copi.Repo.all(DealtCard) == []
+    end
+  end
 end

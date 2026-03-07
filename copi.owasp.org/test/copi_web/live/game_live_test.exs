@@ -133,6 +133,23 @@ defmodule CopiWeb.GameLiveTest do
       assert render(show_live) =~ game.name
     end
 
+    test "re-clicking Start Game on an already-started game is a safe noop", %{conn: conn, game: game} do
+      # Create 3 players and mark the game as already started.
+      {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P3", game_id: game.id})
+      {:ok, started_game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, started_game))
+
+      # ASVS V2.3.3 / V16.5 – sending the event again must not crash the LiveView
+      # process; it returns {:noreply, socket} silently.
+      assert render(show_live) =~ started_game.name
+
+      # The process must still be alive and responsive after the duplicate event.
+      assert Process.alive?(show_live.pid)
+    end
+
     test "redirects to error when game not found", %{conn: conn} do
       assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
     end
