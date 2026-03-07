@@ -170,9 +170,61 @@ defmodule Copi.IPHelperTest do
     test "handles malformed extract_first_ip inputs" do
       info = %{x_headers: [{"x-forwarded-for", "invalid"}]}
       assert IPHelper.get_ip_from_connect_info(info) == nil
-      
+
       info2 = %{x_headers: [{"other", "10.0.0.1"}]}
       assert IPHelper.get_ip_from_connect_info(info2) == nil
+    end
+
+    test "extracts from req_headers with atom key tuples" do
+      info = %{req_headers: [{:"x-forwarded-for", "10.2.3.4"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 2, 3, 4}
+    end
+
+    test "handles x_headers as raw binary string" do
+      info = %{x_headers: "10.8.9.1"}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 8, 9, 1}
+    end
+  end
+
+  describe "get_ip_from_socket/1 (LiveView) - additional coverage" do
+    test "extracts IP from connect_info map req_headers" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{
+            req_headers: [{"x-forwarded-for", "10.0.5.6"}]
+          }
+        }
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 5, 6}
+    end
+
+    test "handles connect_info map with x_headers as binary string" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{x_headers: "10.7.8.9"}
+        }
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {10, 7, 8, 9}
+    end
+
+    test "handles connect_info map with x_headers as string-keyed map" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{x_headers: %{"x-forwarded-for" => "10.1.2.3"}}
+        }
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {10, 1, 2, 3}
+    end
+
+    test "falls back to localhost when connect_info map has no usable IP info" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{no_headers: "foo"}}
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
     end
   end
 end
