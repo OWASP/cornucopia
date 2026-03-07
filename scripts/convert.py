@@ -11,7 +11,7 @@ import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
 from defusedxml import ElementTree as DefusedElTree
-from typing import Any, Dict, List, Tuple, cast
+from typing import Any, Dict, List, Optional, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
@@ -291,9 +291,12 @@ def create_edition_from_template(
         if file_extension == ".docx":
             # Get the input (template) document
             doc = get_docx_document(template_doc)
-            if doc:
+            if doc is not None:
                 doc = replace_docx_inline_text(doc, language_dict)
                 doc.save(output_file)
+            else:
+                logging.error("Cannot create output file: template document not found at %s", template_doc)
+                return
         else:
             save_odt_file(template_doc, language_dict, output_file)
 
@@ -550,16 +553,15 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
     return paragraphs
 
 
-def get_docx_document(docx_file: str) -> Any:
-    """Open the file and return the docx document."""
+def get_docx_document(docx_file: str) -> Optional[Any]:
+    """Open the file and return the docx document, or None if the file is not found."""
     import docx  # type: ignore[import-untyped]
 
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
     else:
         logging.error("Could not find file at: %s", str(docx_file))
-        # Create a blank document if it fails
-        return docx.Document()
+        return None
 
 
 def get_files_from_of_type(path: str, ext: str) -> List[str]:
