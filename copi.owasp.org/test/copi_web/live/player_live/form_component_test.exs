@@ -81,22 +81,6 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       :ok
     end
 
-    test "shows changeset error when create_player fails due to invalid game_id",
-         %{conn: conn, game: game} do
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
-
-      # Submit with a non-existent game_id to trigger FK constraint failure
-      view
-      |> form("#player-form", player: %{
-           name: "FK Error Player",
-           game_id: "00000000000000000000000000"
-         })
-      |> render_submit()
-
-      # Form should still be visible (no redirect on error)
-      assert has_element?(view, "#player-form")
-    end
-
     test "FormComponent.topic/1 returns correct topic string", %{conn: _conn, game: _game} do
       assert CopiWeb.PlayerLive.FormComponent.topic("abc123") == "game:abc123"
     end

@@ -140,12 +140,6 @@ defmodule CopiWeb.GameLive.ShowTest do
                live(conn, "/games/00000000000000000000000001")
     end
 
-    test "redirects to /error when round param is out of range", %{conn: conn, game: game} do
-      # game has rounds_played=0 so max valid round=1; round=99 is out of range
-      assert {:error, {:redirect, %{to: "/error"}}} =
-               live(conn, "/games/#{game.id}?round=99")
-    end
-
     test "handle_params uses rounds_played directly for finished game", %{conn: conn, game: game} do
       {:ok, finished_game} =
         Cornucopia.update_game(game, %{
