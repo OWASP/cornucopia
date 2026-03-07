@@ -1,4 +1,5 @@
 
+<%= if @player do %>
   <.live_component
     module={CopiWeb.PlayerLive.FormComponent}
     id={:new}
@@ -8,6 +9,7 @@
     client_ip={@client_ip}
     patch={~p"/games/#{@game.id}"}
   />
+<% end %>
 
 
 <!--
