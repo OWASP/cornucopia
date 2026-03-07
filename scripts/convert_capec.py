@@ -124,7 +124,7 @@ def createlink(data: dict[str, Any], shortcode: str, asvs_version: str) -> str:
                 str(item["Ordinal"]).rjust(2, "0") + "-" + item["Name"].lower().replace(" ", "-").replace(",", "")
             )
             for subitem in item["Items"]:
-                if shortcode == subitem["Shortcode"]:
+                if shortcode.removeprefix("V") == subitem["Shortcode"].removeprefix("V"):
                     return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem['Shortcode']})"
     return shortcode if shortcode else ""
 
