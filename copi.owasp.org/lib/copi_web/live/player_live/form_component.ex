@@ -13,6 +13,11 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         <%= @title %>
       </.header1>
 
+      <%= if String.starts_with?(@title, "You're joining the game") do %>
+        <p class="mb-4">Share this game link with other players who want to join:</p>
+        <.copy_url_button uri={"#{@socket.endpoint.url()}/games/#{@player.game_id}"} />
+      <% end %>
+
       <.simple_form
         for={@form}
         id="player-form"
