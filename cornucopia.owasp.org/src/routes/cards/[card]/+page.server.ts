@@ -11,8 +11,10 @@ export const load = (({ params }) => {
         'mobileapp', DeckService.getLatestVersion('mobileapp'), lang);
       const webappCards = (new DeckService()).getCardDataForEditionVersionLang(
         'webapp', DeckService.getLatestVersion('webapp'), lang);
+      const campanionCards = (new DeckService()).getCardDataForEditionVersionLang(
+        'companion', DeckService.getLatestVersion('companion'), lang);
       
-      const cards = new Map([...mobileCards, ...webappCards]);
+      const cards = new Map([...mobileCards, ...webappCards, ...campanionCards]);
       const decks = new Map([['en', cards]]);
       
       let card : Card = cards.get(legacyCardCodeFix(params.card?.toUpperCase())) as Card;
