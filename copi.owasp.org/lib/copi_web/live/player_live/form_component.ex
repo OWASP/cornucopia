@@ -75,19 +75,6 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     assign(socket, :form, to_form(changeset))
   end
 
-  defp save_player(socket, :edit, player_params) do
-    case Cornucopia.update_player(socket.assigns.player, player_params) do
-      {:ok, _player} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Player updated successfully")
-         |> push_navigate(to: socket.assigns.return_to)}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
-    end
-  end
-
   defp save_player(socket, :new, player_params) do
     ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
 

@@ -222,4 +222,36 @@ defmodule Copi.CornucopiaTest do
       assert %Ecto.Changeset{} = Cornucopia.change_card(card)
     end
   end
+
+  describe "dealt_cards" do
+    alias Copi.Cornucopia.DealtCard
+
+    test "find/1 returns dealt card with preloaded associations when found" do
+      {:ok, game} = Cornucopia.create_game(%{name: "DC Test", edition: "webapp"})
+      {:ok, player} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "2.2", external_id: "DCT1", language: "en", misc: "m",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
+
+      assert {:ok, found} = DealtCard.find(dealt.id)
+      assert found.id == dealt.id
+      assert found.card.id == card.id
+    end
+
+    test "find/1 returns error when not found" do
+      assert {:error, :not_found} = DealtCard.find(999_999_999)
+    end
+  end
+
+  describe "votes" do
+    alias Copi.Cornucopia.Vote
+
+    test "changeset/2 returns a valid changeset" do
+      assert %Ecto.Changeset{valid?: true} = Vote.changeset(%Vote{}, %{})
+    end
+  end
 end

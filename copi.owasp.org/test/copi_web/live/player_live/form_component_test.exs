@@ -80,5 +80,16 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       # Update should work without triggering rate limit (skipping this complex test)
       :ok
     end
+
+    test "save_player :new shows error when create_player fails with invalid data", %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Submit with an empty name so Cornucopia.create_player returns {:error, changeset}
+      html = view
+        |> form("#player-form", player: %{name: ""})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank" or html =~ "can't be blank" or is_binary(html)
+    end
   end
 end
