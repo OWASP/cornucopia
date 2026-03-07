@@ -16,25 +16,40 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => player_id}, _, socket) do
+  def handle_params(%{"id" => player_id, "game_id" => url_game_id}, _, socket) do
     with {:ok, player} <- Player.find(player_id) do
-      with {:ok, game} <- Game.find(player.game_id) do
-        CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
+      # Validate player belongs to URL game
+      if player.game_id != url_game_id do
+        {:noreply, redirect(socket, to: "/error")}
       else
-        {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
+        with {:ok, game} <- Game.find(player.game_id) do
+          # Check if game is finished and redirect if so
+          if Game.game_finished?(game) do
+            {:noreply, push_navigate(socket, to: "/games/#{game.id}")}
+          else
+            CopiWeb.Endpoint.subscribe(topic(player.game_id))
+            {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
+          end
+        else
+          {:error, _reason} ->
+            {:noreply, redirect(socket, to: "/error")}
+        end
       end
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
     with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+      # Check if game is finished and redirect if so
+      if Game.game_finished?(updated_game) do
+        {:noreply, push_navigate(socket, to: "/games/#{updated_game.id}")}
+      else
+        {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+      end
     else
       {:error, _reason} ->
         {:ok, redirect(socket, to: "/error")}
