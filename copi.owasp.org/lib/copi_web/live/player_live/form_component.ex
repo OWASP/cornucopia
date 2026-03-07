@@ -14,6 +14,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
       </.header1>
 
       <.simple_form
+        :if={@form}
         for={@form}
         id="player-form"
         phx-target={@myself}
@@ -47,6 +48,10 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   @impl true
+  def update(%{player: nil} = assigns, socket) do
+    {:ok, socket |> assign(assigns) |> assign(:form, nil)}
+  end
+
   def update(%{player: player} = assigns, socket) do
     changeset = Cornucopia.change_player(player)
 
@@ -81,7 +86,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Player updated successfully")
-         |> push_navigate(to: socket.assigns.return_to)}
+         |> push_navigate(to: socket.assigns[:return_to] || socket.assigns[:patch])}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}

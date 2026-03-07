@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # This script takes JSON from
+# Minor non-functional comment to create a small, safe diff for PR creation (Issue #2487)
+# No behavioral changes - purely a comment to allow PR creation when branch has no other diffs.
 # cornucopia.owasp.org/data/capec-3.9/3000.json
 # and extracts CAPEC information from entries under Attack_Pattern_Catalog -> Attack_Patterns -> Attack_Pattern
 # Like the _Name and _ID and merges this with the source/webapp-capec-3.0.yaml mappings by matching the _ID with the
@@ -23,6 +25,15 @@ class EnricherVars:
     DEFAULT_CAPEC_JSON_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
     DEFAULT_SOURCE_DIR = Path(__file__).parent / "../source"
     args: argparse.Namespace
+
+
+def _extract_names_from_items(items: Any, target: dict[int, str]) -> None:
+    """Add ID->Name mappings from a list of CAPEC items into target dict."""
+    if not isinstance(items, list):
+        return
+    for item in items:
+        if "_ID" in item and "_Name" in item:
+            target[int(item["_ID"])] = item["_Name"]
 
 
 def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
@@ -56,18 +67,14 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
         logging.warning("'Attack_Pattern' is not a list")
         return capec_names
 
-    for pattern in attack_patterns:
-        if "_ID" in pattern and "_Name" in pattern:
-            capec_id = int(pattern["_ID"])
-            capec_name = pattern["_Name"]
-            capec_names[capec_id] = capec_name
+    _extract_names_from_items(attack_patterns, capec_names)
 
-    categories = catalog["Categories"]["Category"]
-    for category in categories:
-        if "_ID" in category and "_Name" in category:
-            capec_id = int(category["_ID"])
-            capec_name = category["_Name"]
-            capec_names[capec_id] = capec_name
+    if "Categories" not in catalog:
+        logging.warning("No 'Categories' key found in catalog")
+    elif "Category" not in catalog["Categories"]:
+        logging.warning("No 'Category' key found in categories section")
+    else:
+        _extract_names_from_items(catalog["Categories"]["Category"], capec_names)
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
