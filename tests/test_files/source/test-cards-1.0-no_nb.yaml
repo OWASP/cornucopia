@@ -2,7 +2,7 @@
 meta:
   edition: "test"
   component: "cards"
-  language: "NO_NB"
+  language: "NO-NB"
   version: "1.0"
 suits:
 -
