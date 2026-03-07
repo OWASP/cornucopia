@@ -78,9 +78,10 @@ def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tupl
 
     # Ensure paths are within expected directories to prevent path traversal
     base_path = os.path.abspath(convert_vars.BASE_PATH)
-    if not source_path.startswith(base_path):
+    if not source_path.startswith(base_path + os.sep):
         return False, f"Source path outside base directory: {source_path}", ""
-    if not output_dir.startswith(base_path):
+
+    if not output_dir.startswith(base_path + os.sep):
         return False, f"Output directory outside base directory: {output_dir}", ""
 
     return True, source_path, output_dir
