@@ -5,10 +5,16 @@ defmodule Copi.RateLimiterIntegrationTest do
   alias CopiWeb.Plugs.RateLimiterPlug
 
   setup do
-    # Clear all rate limiting data before each test
-    RateLimiter.clear_ip({192, 168, 1, 100})
-    RateLimiter.clear_ip({10, 0, 0, 1})
-    RateLimiter.clear_ip({127, 0, 0, 1})
+    # Start the RateLimiter GenServer for testing if not already started
+    case RateLimiter.start_link([]) do
+      {:ok, pid} -> {:ok, pid}
+      {:error, {:already_started, pid}} -> {:ok, pid}
+    end
+    
+    # Clear all rate limiting data before each test (synchronous)
+    RateLimiter.clear_ip_sync({192, 168, 1, 100})
+    RateLimiter.clear_ip_sync({10, 0, 0, 1})
+    RateLimiter.clear_ip_sync({127, 0, 0, 1})
     :ok
   end
 
@@ -61,12 +67,11 @@ defmodule Copi.RateLimiterIntegrationTest do
       # Should be rate limited now
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :api_action)
       
-      # Wait for window to pass (simulate time passing)
-      # In real tests, you'd need to manipulate time or use a shorter window
-      # For this test, we'll verify the rate limiter is working correctly
+      # Wait for window to pass plus a small buffer
+      :timer.sleep(window + 100)  # window is in milliseconds
       
-      # Try again - should still be rate limited
-      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :api_action)
+      # Should be allowed again after window expires
+      assert {:ok, _remaining} = RateLimiter.check_rate(ip, :api_action)
     end
 
     test "different IPs have independent rate limits" do

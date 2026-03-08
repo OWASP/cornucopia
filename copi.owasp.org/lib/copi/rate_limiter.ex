@@ -60,6 +60,13 @@ defmodule Copi.RateLimiter do
   end
 
   @doc """
+  Synchronously clears all rate limit data for a specific IP address (useful for testing).
+  """
+  def clear_ip_sync(ip) do
+    GenServer.call(__MODULE__, {:clear_ip, normalize_ip(ip)})
+  end
+
+  @doc """
   Gets the current configuration for rate limits.
   """
   def get_config do
@@ -128,6 +135,16 @@ defmodule Copi.RateLimiter do
       windows: state.windows
     }
     {:reply, config, state}
+  end
+
+  @impl true
+  def handle_call({:clear_ip, ip}, _from, state) do
+    new_requests =
+      state.requests
+      |> Enum.reject(fn {{request_ip, _action}, _timestamps} -> request_ip == ip end)
+    
+    new_state = %{state | requests: new_requests}
+    {:reply, :ok, new_state}
   end
 
   @impl true

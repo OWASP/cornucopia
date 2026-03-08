@@ -20,7 +20,12 @@ defmodule CopiWeb.Plugs.RateLimiterPlug do
           {:ok, _remaining} ->
             # Persist the chosen client IP into the session so LiveView
             # receives it on websocket connect (connect_info.session).
-            put_session(conn, "client_ip", IPHelper.ip_to_string(ip))
+            # Only write to session if it's available (stateless API requests won't have sessions)
+            if Map.has_key?(conn.private, :plug_session) do
+              put_session(conn, "client_ip", IPHelper.ip_to_string(ip))
+            else
+              conn
+            end
 
           {:error, :rate_limit_exceeded} ->
             Logger.warning("HTTP #{action} rate limit exceeded for IP: #{inspect(ip)}")

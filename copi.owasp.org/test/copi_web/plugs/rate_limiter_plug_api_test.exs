@@ -6,9 +6,15 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   alias Copi.RateLimiter
 
   setup do
-    RateLimiter.clear_ip({10, 0, 0, 1})
-    RateLimiter.clear_ip({192, 168, 1, 100})
-    RateLimiter.clear_ip({127, 0, 0, 1})
+    # Start the RateLimiter GenServer for testing if not already started
+    case RateLimiter.start_link([]) do
+      {:ok, pid} -> {:ok, pid}
+      {:error, {:already_started, pid}} -> {:ok, pid}
+    end
+    
+    RateLimiter.clear_ip_sync({10, 0, 0, 1})
+    RateLimiter.clear_ip_sync({192, 168, 1, 100})
+    RateLimiter.clear_ip_sync({127, 0, 0, 1})
     :ok
   end
 
@@ -66,38 +72,100 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     end
 
     test "uses api_action for PUT requests containing /card" do
+      ip = "192.168.1.100"
+      
+      # First request should pass
       conn =
         conn(:put, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
         |> RateLimiterPlug.call([])
 
-      # The plug should determine the action correctly
-      # We can't easily test the internal action determination, 
-      # but we can verify it doesn't crash
       refute conn.halted
+      
+      # Exhaust the api_action rate limit (10 requests per minute)
+      for _ <- 1..10 do
+        conn(:put, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
+        |> RateLimiterPlug.call([])
+      end
+      
+      # Next request should be rate limited
+      conn =
+        conn(:put, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
+        |> RateLimiterPlug.call([])
+
+      assert conn.status == 429
+      assert conn.halted
     end
 
     test "uses connection for PUT requests not containing /card" do
+      ip = "192.168.1.100"
+      
+      # Exhaust the connection rate limit (133 requests per second)
+      for _ <- 1..135 do
+        conn(:put, "/api/games/123/players/456/some-other-action")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
+        |> RateLimiterPlug.call([])
+      end
+      
+      # Next request should be rate limited
       conn =
         conn(:put, "/api/games/123/players/456/some-other-action")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
         |> RateLimiterPlug.call([])
 
-      refute conn.halted
+      assert conn.status == 429
+      assert conn.halted
     end
 
     test "uses connection for GET requests" do
+      ip = "192.168.1.100"
+      
+      # Exhaust the connection rate limit (133 requests per second)
+      for _ <- 1..135 do
+        conn(:get, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
+        |> RateLimiterPlug.call([])
+      end
+      
+      # Next request should be rate limited
       conn =
         conn(:get, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
         |> RateLimiterPlug.call([])
 
-      refute conn.halted
+      assert conn.status == 429
+      assert conn.halted
     end
 
     test "uses connection for POST requests" do
+      ip = "192.168.1.100"
+      
+      # Exhaust the connection rate limit (133 requests per second)
+      for _ <- 1..135 do
+        conn(:post, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
+        |> RateLimiterPlug.call([])
+      end
+      
+      # Next request should be rate limited
       conn =
         conn(:post, "/api/games/123/players/456/card")
+        |> put_req_header("x-forwarded-for", ip)
+        |> init_test_session(%{})
         |> RateLimiterPlug.call([])
 
-      refute conn.halted
+      assert conn.status == 429
+      assert conn.halted
     end
   end
 
