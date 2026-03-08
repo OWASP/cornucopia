@@ -123,6 +123,33 @@ defmodule CopiWeb.PlayerLiveTest do
       assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
 
+    test "prevents self-voting authorization bypass", %{conn: conn, player: player} do
+      game_id = player.game_id
+      
+      # Create a card for the current player
+      {:ok, card} = Copi.Repo.insert(%Copi.Cornucopia.Card{word: "Self Card", edition: "webapp"})
+      {:ok, own_dealt_card} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card.id, played_in_round: 1})
+      
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      
+      # Attempt to vote on own card (simulates JavaScript exploit)
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{own_dealt_card.id}\"]") |> render_click()
+      
+      # Verify NO vote was created - self-voting blocked
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: own_dealt_card.id, player_id: player.id)
+      
+      # Verify normal voting still works - create another player's card
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      {:ok, other_card} = Copi.Repo.insert(%Copi.Cornucopia.Card{word: "Other Card", edition: "webapp"})
+      {:ok, other_dealt_card} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: other_card.id, played_in_round: 1})
+      
+      # Vote on other player's card should work
+      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{other_dealt_card.id}\"]") |> render_click()
+      
+      # Verify vote was created for other player's card
+      assert Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: other_dealt_card.id, player_id: player.id)
+    end
+
     test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
       # Setup another player
       game_id = player.game_id
