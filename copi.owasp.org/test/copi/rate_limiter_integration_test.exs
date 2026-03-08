@@ -30,9 +30,10 @@ defmodule Copi.RateLimiterIntegrationTest do
                  |> put_req_header("content-type", "application/json")
                  |> RateLimiterPlug.call([])
                  |> case do
-                   {:ok, modified_conn} ->
+                   %Plug.Conn{} = modified_conn ->
                      # Send through router to get actual response
-                     CopiWeb.Router.call(modified_conn, [])
+                     final_conn = CopiWeb.Router.call(modified_conn, [])
+                     {i, final_conn.status}
                    {:error, _} ->
                      {i, modified_conn.status}
                  end
@@ -43,18 +44,19 @@ defmodule Copi.RateLimiterIntegrationTest do
       
       # Count different response types
       rate_limited = Enum.count(results, fn {_, status} -> status == 429 end)
-      allowed = Enum.count(results, fn {_, status} -> status != 429 end)
+      success_200 = Enum.count(results, fn {_, status} -> status == 200 end)
+      conflict_409 = Enum.count(results, fn {_, status} -> status == 409 end)
       
       # With rate limiting of 10 requests per minute, most should be blocked
       config = RateLimiter.get_config()
       limit = config.limits.api_action
       
       assert rate_limited >= 90  # At least 90 should be rate limited
-      assert allowed <= limit     # Only the limit should be allowed
+      assert success_200 + conflict_409 <= limit     # Only limit should be allowed
       
       IO.puts("\nAttack Simulation Results:")
       IO.puts("Rate limited (429): #{rate_limited}")
-      IO.puts("Allowed: #{allowed}")
+      IO.puts("Allowed: #{success_200 + conflict_409}")
       IO.puts("Total: #{length(results)}")
     end
 
@@ -73,7 +75,8 @@ defmodule Copi.RateLimiterIntegrationTest do
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :api_action)
       
       # Wait for window to pass plus a small buffer
-      :timer.sleep(window + 100)  # window is in milliseconds
+      ms_window = window * 1000  # Convert seconds to milliseconds
+      :timer.sleep(ms_window + 100)
       
       # Should be allowed again after window expires
       assert {:ok, _remaining} = RateLimiter.check_rate(ip, :api_action)

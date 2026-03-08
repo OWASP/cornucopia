@@ -83,8 +83,11 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
 
       refute conn.halted
       
-      # Exhaust the api_action rate limit (10 requests per minute)
-      for _ <- 1..9 do
+      # Exhaust the api_action rate limit dynamically
+      config = RateLimiter.get_config()
+      api_limit = config.limits.api_action
+      
+      for _ <- 1..(api_limit - 1) do
         conn(:put, "/api/games/123/players/456/card")
         |> put_req_header("x-forwarded-for", ip)
         |> init_test_session(%{})
@@ -105,8 +108,11 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     test "uses connection for PUT requests not containing /card" do
       ip = "192.168.1.100"
       
-      # Exhaust the connection rate limit (133 requests per second)
-      for _ <- 1..135 do
+      # Exhaust the connection rate limit dynamically
+      config = RateLimiter.get_config()
+      conn_limit = config.limits.connection
+      
+      for _ <- 1..(conn_limit + 2) do
         conn(:put, "/api/games/123/players/456/some-other-action")
         |> put_req_header("x-forwarded-for", ip)
         |> init_test_session(%{})
@@ -127,8 +133,11 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     test "uses connection for GET requests" do
       ip = "192.168.1.100"
       
-      # Exhaust the connection rate limit (133 requests per second)
-      for _ <- 1..135 do
+      # Exhaust the connection rate limit dynamically
+      config = RateLimiter.get_config()
+      conn_limit = config.limits.connection
+      
+      for _ <- 1..(conn_limit + 2) do
         conn(:get, "/api/games/123/players/456/card")
         |> put_req_header("x-forwarded-for", ip)
         |> init_test_session(%{})
@@ -149,8 +158,11 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     test "uses connection for POST requests" do
       ip = "192.168.1.100"
       
-      # Exhaust the connection rate limit (133 requests per second)
-      for _ <- 1..135 do
+      # Exhaust the connection rate limit dynamically
+      config = RateLimiter.get_config()
+      conn_limit = config.limits.connection
+      
+      for _ <- 1..(conn_limit + 2) do
         conn(:post, "/api/games/123/players/456/card")
         |> put_req_header("x-forwarded-for", ip)
         |> init_test_session(%{})

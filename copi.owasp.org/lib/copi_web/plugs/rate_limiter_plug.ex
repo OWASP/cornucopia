@@ -28,7 +28,9 @@ defmodule CopiWeb.Plugs.RateLimiterPlug do
             end
 
           {:error, :rate_limit_exceeded} ->
-            Logger.warning("HTTP #{action} rate limit exceeded for IP: #{inspect(ip)}")
+            # Anonymize IP for logging to avoid PII in logs
+            anonymized_ip = ip |> IPHelper.ip_to_string() |> :crypto.hash(:sha256) |> Base.encode16()
+            Logger.warning("HTTP #{action} rate limit exceeded for IP: #{anonymized_ip}")
             conn
             |> put_resp_content_type("text/plain")
             |> send_resp(429, "Too many requests, try again later.")

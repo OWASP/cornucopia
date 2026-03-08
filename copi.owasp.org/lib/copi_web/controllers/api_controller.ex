@@ -40,7 +40,7 @@ defmodule CopiWeb.ApiController do
   # Atomic card play operation to prevent race conditions and enforce one-card-per-round invariant
   defp play_card_atomically(dealt_card, player_id, current_round) do
     # Use database transaction to ensure atomicity and prevent race conditions
-    Repo.transaction(fn ->
+    result = Repo.transaction(fn ->
       # First, try to lock player's cards for this round by checking existing plays
       existing_cards = Repo.all(
         from(dc in Copi.Cornucopia.DealtCard, 
@@ -60,6 +60,14 @@ defmodule CopiWeb.ApiController do
         end
       end
     end)
+    
+    # Unwrap transaction result to return flat tuple
+    case result do
+      {:ok, {:ok, val}} -> {:ok, val}
+      {:ok, {:error, reason}} -> {:error, reason}
+      {:error, reason} -> {:error, reason}
+      other -> other
+    end
   end
 
   def topic(game_id) do
