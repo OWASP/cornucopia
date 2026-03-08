@@ -142,6 +142,7 @@ defmodule Copi.RateLimiter do
     new_requests =
       state.requests
       |> Enum.reject(fn {{request_ip, _action}, _timestamps} -> request_ip == ip end)
+      |> Enum.into(%{})
     
     new_state = %{state | requests: new_requests}
     {:reply, :ok, new_state}

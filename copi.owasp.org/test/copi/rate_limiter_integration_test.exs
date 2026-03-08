@@ -22,15 +22,20 @@ defmodule Copi.RateLimiterIntegrationTest do
     test "prevents 100 concurrent requests like in the vulnerability report" do
       ip = "192.168.1.100"
       
-      # Simulate the attack scenario from the vulnerability report
+      # Simulate attack scenario from vulnerability report
       tasks = for i <- 1..100 do
         Task.async(fn ->
           conn = conn(:put, "/api/games/01KK4ANZFV6XMR14VX7R1X6T55/players/01KK4APC64N6Z5B346S960XTQJ/card")
                  |> put_req_header("x-forwarded-for", ip)
                  |> put_req_header("content-type", "application/json")
                  |> RateLimiterPlug.call([])
-          
-          {i, conn.status}
+                 |> case do
+                   {:ok, modified_conn} ->
+                     # Send through router to get actual response
+                     CopiWeb.Router.call(modified_conn, [])
+                   {:error, _} ->
+                     {i, modified_conn.status}
+                 end
         end)
       end
       

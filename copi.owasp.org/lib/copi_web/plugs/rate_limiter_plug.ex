@@ -52,7 +52,7 @@ defmodule CopiWeb.Plugs.RateLimiterPlug do
   defp determine_action(conn) do
     case conn.method do
       "PUT" ->
-        if String.contains?(conn.request_path, "/card") do
+        if String.ends_with?(conn.request_path, "/card") do
           :api_action
         else
           :connection

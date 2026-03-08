@@ -84,7 +84,7 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
       refute conn.halted
       
       # Exhaust the api_action rate limit (10 requests per minute)
-      for _ <- 1..10 do
+      for _ <- 1..9 do
         conn(:put, "/api/games/123/players/456/card")
         |> put_req_header("x-forwarded-for", ip)
         |> init_test_session(%{})

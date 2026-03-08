@@ -39,26 +39,27 @@ defmodule CopiWeb.ApiController do
 
   # Atomic card play operation to prevent race conditions and enforce one-card-per-round invariant
   defp play_card_atomically(dealt_card, player_id, current_round) do
-    # Use Ecto's atomic operations to prevent race conditions and enforce invariants
-    from(dc in Copi.Cornucopia.DealtCard, 
-      where: dc.id == ^dealt_card.id and is_nil(dc.played_in_round))
-    |> Repo.update_all([set: [played_in_round: current_round]], returning: true)
-    |> case do
-      {1, [updated_card]} -> 
-        # Check if this player already played a card in this round
-        case Repo.get_by(Copi.Cornucopia.DealtCard, 
-               [player_id: player_id, played_in_round: current_round], 
-               limit: 2) do
-          nil -> {:ok, updated_card}
-          [%{id: id}] when id == updated_card.id -> {:ok, updated_card}
-          _ -> 
-            # Player already played a different card this round, rollback
-            Repo.delete_all(from(dc in Copi.Cornucopia.DealtCard, 
-                              where: dc.id == ^updated_card.id))
-            {:error, :player_already_played}
+    # Use database transaction to ensure atomicity and prevent race conditions
+    Repo.transaction(fn ->
+      # First, try to lock player's cards for this round by checking existing plays
+      existing_cards = Repo.all(
+        from(dc in Copi.Cornucopia.DealtCard, 
+          where: dc.player_id == ^player_id and dc.played_in_round == ^current_round)
+      )
+      
+      if length(existing_cards) > 0 do
+        {:error, :player_already_played}
+      else
+        # Now atomically update the card with played_in_round
+        from(dc in Copi.Cornucopia.DealtCard, 
+          where: dc.id == ^dealt_card.id and is_nil(dc.played_in_round))
+        |> Repo.update_all([set: [played_in_round: current_round]], returning: true)
+        |> case do
+          {1, [updated_card]} -> {:ok, updated_card}
+          {0, []} -> {:error, :already_played}
         end
-      {0, []} -> {:error, :already_played}
-    end
+      end
+    end)
   end
 
   def topic(game_id) do
