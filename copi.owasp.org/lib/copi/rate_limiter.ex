@@ -6,6 +6,7 @@ defmodule Copi.RateLimiter do
   - Game creation
   - Player creation
   - WebSocket connections
+  - API actions
 
   Rate limits are configured via environment variables and automatically clean up expired entries.
   """
@@ -30,16 +31,16 @@ defmodule Copi.RateLimiter do
 
   ## Parameters
     - ip: IP address as a tuple (e.g., {127, 0, 0, 1}) or string
-    - action: atom representing the action (:game_creation, :player_creation, :connection)
+    - action: atom representing the action (:game_creation, :player_creation, :connection, :api_action)
 
   ## Examples
       iex> Copi.RateLimiter.check_rate("127.0.0.1", :game_creation)
       {:ok, 9}
 
-      iex> Copi.RateLimiter.check_rate({127, 0, 0, 1}, :connection)
-      {:error, :rate_limit_exceeded}
+      iex> Copi.RateLimiter.check_rate({127, 0, 0, 1}, :api_action)
+      {:ok, 9}
   """
-  def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection] do
+  def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection, :api_action] do
     normalized_ip = normalize_ip(ip)
 
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
@@ -76,12 +77,14 @@ defmodule Copi.RateLimiter do
       limits: %{
         game_creation: get_env_config(:game_creation_limit, 20),
         player_creation: get_env_config(:player_creation_limit, 60),
-        connection: get_env_config(:connection_limit, 133)
+        connection: get_env_config(:connection_limit, 133),
+        api_action: get_env_config(:api_action_limit, 10)
       },
       windows: %{
         game_creation: get_env_config(:game_creation_window, 3600),
         player_creation: get_env_config(:player_creation_window, 3600),
-        connection: get_env_config(:connection_window, 1)
+        connection: get_env_config(:connection_window, 1),
+        api_action: get_env_config(:api_action_window, 60)
       },
       requests: %{}
     }

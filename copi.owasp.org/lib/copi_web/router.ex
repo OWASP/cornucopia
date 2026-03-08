@@ -13,6 +13,7 @@ defmodule CopiWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CopiWeb.Plugs.RateLimiterPlug
   end
 
   scope "/", CopiWeb do
