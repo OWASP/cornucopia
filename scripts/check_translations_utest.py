@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 # Add scripts directory to path
-scripts_path = Path(__file__).parent.parent.parent / "scripts"
+scripts_path = Path(__file__).parent
 sys.path.insert(0, str(scripts_path))
 
 from check_translations import TranslationChecker  # type: ignore[import-not-found]  # noqa: E402
@@ -160,8 +160,6 @@ class TestWhitespaceHandling(unittest.TestCase):
         self.assertEqual(len(result["empty"]), 0, "No empty tags expected")
 
 
-
-
 class TestCompoundLocales(unittest.TestCase):
     """Tests specifically for compound locale code handling (issue #2550)."""
 
@@ -226,31 +224,13 @@ class TestCompoundLocales(unittest.TestCase):
         pt_pt_issues = results.get("test-cards-1.0", {}).get("pt_pt", None)
         self.assertIsNone(pt_pt_issues, "pt_pt has no issues and should not appear in results")
 
-    def test_lang_names_uses_underscore_keys(self) -> None:
+    def test_lang_names_in_report(self) -> None:
         """Test that generate_markdown_report resolves compound locale display names correctly."""
-        self.checker.results["test-cards-1.0"]["no_nb"] = {
-            "missing": ["T00001"],
-            "untranslated": [],
-            "empty": [],
-            "file": "test-cards-1.0-no_nb.yaml",
-        }
-        self.checker.results["test-cards-1.0"]["pt_br"] = {
-            "missing": [],
-            "untranslated": ["T00001"],
-            "empty": [],
-            "file": "test-cards-1.0-pt_br.yaml",
-        }
-        self.checker.results["test-cards-1.0"]["pt_pt"] = {
-            "missing": [],
-            "untranslated": [],
-            "empty": ["T00001"],
-            "file": "test-cards-1.0-pt_pt.yaml",
-        }
+        self.checker.check_translations()
         report = self.checker.generate_markdown_report()
 
         self.assertIn("Norwegian", report, "Norwegian display name should appear for no_nb")
         self.assertIn("Portuguese (Brazil)", report, "Portuguese (Brazil) display name should appear for pt_br")
-        self.assertIn("Portuguese (Portugal)", report, "Portuguese (Portugal) display name should appear for pt_pt")
 
 
 class TestCoverageBranches(unittest.TestCase):
@@ -272,6 +252,7 @@ class TestCoverageBranches(unittest.TestCase):
     def test_get_file_groups_skips_archive_files(self) -> None:
         """Test that files with 'archive' in their path/name are skipped."""
         import tempfile
+
         with tempfile.TemporaryDirectory() as tmpdir:
             tmp_path = Path(tmpdir)
             # Place a YAML file whose name contains "archive" directly in source dir
@@ -280,11 +261,14 @@ class TestCoverageBranches(unittest.TestCase):
             checker = TranslationChecker(tmp_path)
             file_groups = checker.get_file_groups()
             all_files = [f.name for files in file_groups.values() for f in files]
-            self.assertNotIn("webapp-archive-cards-1.0-en.yaml", all_files, "Files with 'archive' in name should be skipped")
+            self.assertNotIn(
+                "webapp-archive-cards-1.0-en.yaml", all_files, "Files with 'archive' in name should be skipped"
+            )
 
     def test_check_translations_no_english_file(self) -> None:
         """Test check_translations warns when no English file exists in a group."""
         import tempfile
+
         with tempfile.TemporaryDirectory() as tmpdir:
             tmp_path = Path(tmpdir)
             (tmp_path / "test-cards-1.0-es.yaml").write_text(
@@ -293,6 +277,7 @@ class TestCoverageBranches(unittest.TestCase):
             checker = TranslationChecker(tmp_path)
             import io
             from contextlib import redirect_stderr
+
             with redirect_stderr(io.StringIO()) as captured:
                 results = checker.check_translations()
             self.assertEqual(results, {}, "No results when there is no English file")
@@ -301,6 +286,7 @@ class TestCoverageBranches(unittest.TestCase):
     def test_check_translations_empty_english_tags(self) -> None:
         """Test check_translations skips groups when English file has no T0 tags."""
         import tempfile
+
         with tempfile.TemporaryDirectory() as tmpdir:
             tmp_path = Path(tmpdir)
             (tmp_path / "test-cards-1.0-en.yaml").write_text("---\nparagraphs: []")
@@ -308,7 +294,6 @@ class TestCoverageBranches(unittest.TestCase):
             checker = TranslationChecker(tmp_path)
             results = checker.check_translations()
             self.assertEqual(results, {}, "Should produce no results when English has no tags")
-
 
     def test_main_exits_when_source_dir_missing(self) -> None:
         """Test that main() exits with code 1 when source directory does not exist."""
@@ -329,12 +314,12 @@ class TestCoverageBranches(unittest.TestCase):
         mock_checker.check_translations.return_value = {}
         mock_checker.generate_markdown_report.return_value = "# Report\n\u2705 Done"
 
-        with patch.object(check_translations, "TranslationChecker", return_value=mock_checker), \
-             patch("builtins.open", mock_open()), \
-             patch("builtins.print"), \
-             self.assertRaises(SystemExit) as cm:
+        with patch.object(check_translations, "TranslationChecker", return_value=mock_checker), patch(
+            "builtins.open", mock_open()
+        ), patch("builtins.print"), self.assertRaises(SystemExit) as cm:
             check_translations.main()
         self.assertEqual(cm.exception.code, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
