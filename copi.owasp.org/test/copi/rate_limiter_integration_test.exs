@@ -25,18 +25,15 @@ defmodule Copi.RateLimiterIntegrationTest do
       # Simulate attack scenario from vulnerability report
       tasks = for i <- 1..100 do
         Task.async(fn ->
-          conn = conn(:put, "/api/games/01KK4ANZFV6XMR14VX7R1X6T55/players/01KK4APC64N6Z5B346S960XTQJ/card")
+          # Create a realistic request body
+          body = Jason.encode!(%{"dealt_card_id" => "12345"})
+          
+          conn = conn(:put, "/api/games/01KK4ANZFV6XMR14VX7R1X6T55/players/01KK4APC64N6Z5B346S960XTQJ/card", body)
                  |> put_req_header("x-forwarded-for", ip)
                  |> put_req_header("content-type", "application/json")
-                 |> RateLimiterPlug.call([])
-                 |> case do
-                   %Plug.Conn{} = modified_conn ->
-                     # Send through router to get actual response
-                     final_conn = CopiWeb.Router.call(modified_conn, [])
-                     {i, final_conn.status}
-                   {:error, _} ->
-                     {i, modified_conn.status}
-                 end
+                 |> CopiWeb.Router.call([])
+          
+          {i, conn.status}
         end)
       end
       
@@ -62,9 +59,23 @@ defmodule Copi.RateLimiterIntegrationTest do
 
     test "rate limiting window resets after time passes" do
       ip = "10.0.0.1"
-      config = RateLimiter.get_config()
-      limit = config.limits.api_action
-      window = config.windows.api_action
+      original_config = RateLimiter.get_config()
+      
+      # Use a short test window (1 second instead of 60)
+      test_window = 1
+      test_config = %{
+        original_config | 
+        windows: %{original_config.windows | api_action: test_window}
+      }
+      
+      # Temporarily update config for test
+      Application.put_env(:copi, :rate_limiter, test_config)
+      
+      # Restart rate limiter with new config
+      RateLimiter.stop()
+      RateLimiter.start_link([])
+      
+      limit = test_config.limits.api_action
       
       # Exhaust the rate limit
       for _ <- 1..limit do
@@ -75,11 +86,16 @@ defmodule Copi.RateLimiterIntegrationTest do
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :api_action)
       
       # Wait for window to pass plus a small buffer
-      ms_window = window * 1000  # Convert seconds to milliseconds
+      ms_window = test_window * 1000  # Convert seconds to milliseconds
       :timer.sleep(ms_window + 100)
       
       # Should be allowed again after window expires
       assert {:ok, _remaining} = RateLimiter.check_rate(ip, :api_action)
+      
+      # Restore original config
+      Application.put_env(:copi, :rate_limiter, original_config)
+      RateLimiter.stop()
+      RateLimiter.start_link([])
     end
 
     test "different IPs have independent rate limits" do

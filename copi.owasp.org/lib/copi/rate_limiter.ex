@@ -44,8 +44,9 @@ defmodule Copi.RateLimiter do
     normalized_ip = normalize_ip(ip)
 
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
+    # Only bypass rate limiting if the actual connection IP is loopback, not X-Forwarded-For
     Logger.debug("check_rate: Checking rate limit for IP #{inspect(normalized_ip)} on action #{action}")
-    if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} do
+    if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} and ip == {127, 0, 0, 1} do
       {:ok, :unlimited}
     else
       GenServer.call(__MODULE__, {:check_rate, normalized_ip, action})

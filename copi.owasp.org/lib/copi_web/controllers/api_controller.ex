@@ -7,30 +7,35 @@ defmodule CopiWeb.ApiController do
   def play_card(conn, %{"game_id" => game_id, "player_id" => player_id, "dealt_card_id" => dealt_card_id}) do
     with {:ok, game} <- Game.find(game_id) do
       player = Enum.find(game.players, fn player -> player.id == player_id end)
-      dealt_card = Enum.find(player.dealt_cards, fn dealt_card -> Integer.to_string(dealt_card.id) == dealt_card_id end)
+      
+      if player do
+        dealt_card = Enum.find(player.dealt_cards, fn dealt_card -> Integer.to_string(dealt_card.id) == dealt_card_id end)
 
-      if player && dealt_card do
-        current_round = game.rounds_played + 1
+        if dealt_card do
+          current_round = game.rounds_played + 1
 
-        # Atomic update to prevent race conditions and enforce one-card-per-round invariant
-        case play_card_atomically(dealt_card, player.id, current_round) do
-          {:ok, updated_card} ->
-            with {:ok, updated_game} <- Game.find(game.id) do
-              CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
-              conn |> json(%{"id" => updated_card.id})
-            else
-              {:error, _reason} ->
-                conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not find updated game"})
-            end
-          {:error, :already_played} ->
-            conn |> put_status(:conflict) |> json(%{"error" => "Card was already played by another request"})
-          {:error, :player_already_played} ->
-            conn |> put_status(:forbidden) |> json(%{"error" => "Player already played a card in this round"})
-          {:error, _changeset} ->
-            conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not update dealt card"})
+          # Atomic update to prevent race conditions and enforce one-card-per-round invariant
+          case play_card_atomically(dealt_card, player.id, current_round) do
+            {:ok, updated_card} ->
+              with {:ok, updated_game} <- Game.find(game.id) do
+                CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
+                conn |> json(%{"id" => updated_card.id})
+              else
+                {:error, _reason} ->
+                  conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not find updated game"})
+              end
+            {:error, :already_played} ->
+              conn |> put_status(:conflict) |> json(%{"error" => "Card was already played by another request"})
+            {:error, :player_already_played} ->
+              conn |> put_status(:forbidden) |> json(%{"error" => "Player already played a card in this round"})
+            {:error, _changeset} ->
+              conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not update card"})
+          end
+        else
+          conn |> put_status(:not_found) |> json(%{"error" => "Could not find dealt card"})
         end
       else
-        conn |> put_status(:not_found) |> json(%{"error" => "Could not find player and dealt card"})
+        conn |> put_status(:not_found) |> json(%{"error" => "Could not find player"})
       end
     else
       {:error, _reason} -> conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
