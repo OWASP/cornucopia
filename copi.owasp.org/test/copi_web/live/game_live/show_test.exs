@@ -128,5 +128,67 @@ defmodule CopiWeb.GameLive.ShowTest do
       alias CopiWeb.GameLive.Show
       assert Show.card_played_in_round([], 1) == nil
     end
+
+    test "card_played_in_round/2 returns the matching card", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      card = %{played_in_round: 3}
+      assert Show.card_played_in_round([%{played_in_round: 1}, %{played_in_round: 2}, card], 3) == card
+    end
+
+    test "redirects to /error when game_id is not found", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/00000000000000000000000001")
+    end
+
+    test "handle_params uses rounds_played directly for finished game", %{conn: conn, game: game} do
+      {:ok, finished_game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 2
+        })
+
+      {:ok, _view, html} = live(conn, "/games/#{finished_game.id}")
+      assert html =~ finished_game.name
+    end
+
+    test "handle_info with non-matching topic is no-op", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      {:ok, updated_game} = Cornucopia.Game.find(game.id)
+
+      send(show_live.pid, %{
+        topic: "game:completely-different-id",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
+
+    test "handle_info sets requested_round to rounds_played for finished game", %{conn: conn, game: game} do
+      {:ok, _} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 3
+        })
+
+      # Use Game.find to get fully preloaded struct (same as real broadcasts)
+      {:ok, finished_game} = Cornucopia.Game.find(game.id)
+
+      {:ok, show_live, _html} = live(conn, "/games/#{finished_game.id}")
+
+      send(show_live.pid, %{
+        topic: "game:#{finished_game.id}",
+        event: "game:updated",
+        payload: finished_game
+      })
+
+      :timer.sleep(50)
+      # With the fix, requested_round = rounds_played = 3, template shows "Viewing round"
+      # With the bug, requested_round = rounds_played + 1 = 4, template shows "Round 4:"
+      assert render(show_live) =~ "Viewing round"
+    end
   end
 end
