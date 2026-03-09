@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 
 // Configuration based on actual repository labels
 const CONFIG = {
@@ -369,7 +369,13 @@ class AutoLabeler {
   async applyFallbackLabel() {
     console.log('🏷️  Applying fallback label: needs-triage');
     if (!this.dryRun) {
-      execSync(`gh issue edit ${this.issueNumber} --repo ${this.repo} --add-label "needs-triage"`, { encoding: 'utf8' });
+      const args = [
+        'issue', 'edit', this.issueNumber.toString(),
+        '--repo', this.repo,
+        '--add-label', 'needs-triage'
+      ];
+
+      execFileSync('gh', args, { encoding: 'utf8' });
     }
   }
 }
