@@ -31,14 +31,10 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gh
-          
       - name: Configure GitHub CLI
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-        
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          
       - name: Run Auto Label Analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,4 +42,8 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
+          if [ -z "$ISSUE_NUMBER" ]; then
+            echo "Error: ISSUE_NUMBER is required for issue labeling"
+            exit 1
+          fi
           node .github/scripts/auto-label.js

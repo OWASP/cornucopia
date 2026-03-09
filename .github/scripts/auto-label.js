@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
 
 // Configuration based on actual repository labels
 const CONFIG = {
@@ -242,7 +240,7 @@ class AutoLabeler {
   }
 
   analyzeIssue(issue) {
-    const text = `${issue.title} ${issue.body}`.toLowerCase();
+    const text = `${issue.title} ${issue.body ?? ''}`.toLowerCase();
 
     const analysis = {
       labels: this.classifyLevel(text, CONFIG.labels),
@@ -291,8 +289,12 @@ class AutoLabeler {
       // File path matching with higher weight
       if (config.files) {
         for (const filePattern of config.files) {
-          if (text.includes(filePattern.toLowerCase()) ||
-            text.includes(filePattern.replace('*', '').toLowerCase())) {
+          const normalizedPattern = filePattern.toLowerCase();
+          const normalizedText = text.toLowerCase();
+
+          // Check for pattern matches (handle both *.py and **/*.py patterns)
+          if (normalizedText.includes(normalizedPattern) ||
+            normalizedText.includes(filePattern.replaceAll('*', '').toLowerCase())) {
             score += 0.3;
             matchCount++;
           }
@@ -353,8 +355,15 @@ class AutoLabeler {
   }
 
   async applyLabels(labels) {
-    const labelStr = labels.join(',');
-    execSync(`gh issue edit ${this.issueNumber} --repo ${this.repo} --add-label "${labelStr}"`, { encoding: 'utf8' });
+    if (!this.dryRun) {
+      const args = [
+        'issue', 'edit', this.issueNumber.toString(),
+        '--repo', this.repo,
+        '--add-label', labels.join(',')
+      ];
+
+      execFileSync('gh', args, { encoding: 'utf8' });
+    }
   }
 
   async applyFallbackLabel() {
