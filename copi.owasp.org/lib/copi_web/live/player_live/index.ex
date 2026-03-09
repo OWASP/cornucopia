@@ -7,18 +7,12 @@ defmodule CopiWeb.PlayerLive.Index do
   @impl true
   def mount(%{"game_id" => game_id}, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
-    {:ok, assign(assign(socket, :client_ip, ip), players: list_players(game_id), game: Cornucopia.get_game!(game_id))}
+    {:ok, assign(assign(socket, :client_ip, ip), players: Cornucopia.list_players(game_id), game: Cornucopia.get_game!(game_id))}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Player")
-    |> assign(:player, Cornucopia.get_player!(id))
   end
 
   defp apply_action(socket, :new, %{"game_id" => game_id}) do
@@ -29,12 +23,10 @@ defmodule CopiWeb.PlayerLive.Index do
   end
 
   defp apply_action(socket, :index, _params) do
+    game = socket.assigns.game
     socket
     |> assign(:page_title, "Listing Players")
-    |> assign(:player, nil)
+    |> assign(:player, %Player{game_id: game.id})
   end
 
-  defp list_players(game_id) do
-    Cornucopia.list_players(game_id)
-  end
 end

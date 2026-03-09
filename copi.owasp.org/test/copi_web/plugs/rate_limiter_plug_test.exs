@@ -2,6 +2,9 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   use ExUnit.Case, async: false
   use Plug.Test
 
+  import Plug.Conn
+
+  alias Copi.RateLimiter
   alias CopiWeb.Plugs.RateLimiterPlug
   alias Copi.RateLimiter
 
@@ -42,6 +45,8 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     assert conn.status == 429
     assert conn.resp_body == "Too many connections, try again later."
     assert conn.halted
+    assert conn.status == 429
+    assert conn.resp_body =~ "Too many connections"
   end
 
   test "skips rate limiting when only remote IP is available" do
@@ -65,10 +70,17 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     refute conn.halted
   end
 
+  test "init/1 returns opts unchanged" do
+    opts = [limit: 10, window: 60]
+    assert RateLimiterPlug.init(opts) == opts
+  end
+
   test "skips rate limiting when no IP info is available" do
-    # No headers, no remote_ip
+    # Explicitly set remote_ip to nil so {:none, nil} branch is hit
     conn =
       conn(:get, "/")
+      |> Map.put(:remote_ip, nil)
+      |> init_test_session(%{})
       |> RateLimiterPlug.call([])
 
     assert conn.status != 429

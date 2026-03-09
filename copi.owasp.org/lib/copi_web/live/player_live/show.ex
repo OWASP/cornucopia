@@ -7,7 +7,8 @@ defmodule CopiWeb.PlayerLive.Show do
 
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
-  alias Copi.Cornucopia.DealtCard
+  alias Copi.Cornucopia.Vote
+  alias Copi.Cornucopia.ContinueVote
 
   @impl true
   def mount(_params, session, socket) do
@@ -17,28 +18,20 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    with {:ok, player} <- Player.find(player_id) do
-      with {:ok, game} <- Game.find(player.game_id) do
-        CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
-      else
-        {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
-      end
+    with {:ok, player} <- Player.find(player_id),
+         {:ok, game} <- Game.find(player.game_id) do
+      CopiWeb.Endpoint.subscribe(topic(player.game_id))
+      {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
-    with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
-    else
-      {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
-    end
+    {:ok, updated_player} = Player.find(socket.assigns.player.id)
+    {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
   end
 
   @impl true
@@ -100,21 +93,23 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    # Check if player already voted
-    if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
-      # Remove their vote
-      continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
-      if continue_vote do
-        Copi.Repo.delete!(continue_vote)
-      end
-    else
-      # Add their vote
-      case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
-        {:ok, _vote} ->
-          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
-        {:error, changeset} ->
-          Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
-      end
+    # Use atomic delete to avoid TOCTOU race condition
+    # Try to delete first - if none exists, this is a no-op
+    case Copi.Repo.delete_all(
+      from cv in ContinueVote,
+      where: cv.player_id == ^player.id and cv.game_id == ^game.id
+    ) do
+      {1, _} ->
+        Logger.debug("Continue vote removed for player #{player.id}")
+      
+      {0, _} ->
+        # No vote existed, so insert one
+        Copi.Repo.insert(
+          %ContinueVote{player_id: player.id, game_id: game.id},
+          on_conflict: :nothing,
+          conflict_target: [:player_id, :game_id]
+        )
+        Logger.debug("Continue vote insert attempted for player #{player.id}")
     end
 
     {:ok, updated_game} = Game.find(game.id)
@@ -129,28 +124,35 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    {:ok, dealt_card} = DealtCard.find(dealt_card_id)
-
-    vote = get_vote(dealt_card, player)
-
-    if vote do
-      Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      Copi.Repo.delete!(vote)
-    else
-      Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-        {:ok, _vote} ->
-          Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        {:error, changeset} ->
-          Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
-      end
+    # Safely parse dealt_card_id to prevent crashes from invalid input
+    case Integer.parse(dealt_card_id) do
+      {dealt_card_id_int, _} ->
+        # Use atomic delete to avoid TOCTOU race condition
+        # Try to delete first - if none exists, this is a no-op
+        case Copi.Repo.delete_all(
+          from v in Vote,
+          where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card_id_int
+        ) do
+          {1, _} ->
+            Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
+          
+          {0, _} ->
+            # No vote existed, so insert one
+            Copi.Repo.insert(
+              %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
+              on_conflict: :nothing,
+              conflict_target: [:player_id, :dealt_card_id]
+            )
+            Logger.debug("Vote insert attempted for player #{player.id} on card #{dealt_card_id_int}")
+        end
+        {:ok, updated_game} = Game.find(game.id)
+        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+        {:noreply, assign(socket, :game, updated_game)}
+      
+      :error ->
+        Logger.warning("Invalid dealt_card_id: #{inspect(dealt_card_id)}")
+        {:noreply, socket}
     end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
   end
 
   def topic(game_id) do
