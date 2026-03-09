@@ -194,7 +194,7 @@ class AutoLabeler {
     this.repo = process.env.REPO;
     this.issueNumber = process.env.ISSUE_NUMBER;
     this.dryRun = process.env.DRY_RUN === 'true';
-    this.confidenceThreshold = 0.7;
+    this.confidenceThreshold = CONFIG.confidenceThreshold;
   }
 
   async run() {
@@ -235,7 +235,13 @@ class AutoLabeler {
   }
 
   async getIssueData() {
-    const output = execSync(`gh issue view ${this.issueNumber} --repo ${this.repo} --json title,body,labels`, { encoding: 'utf8' });
+    const args = [
+      'issue', 'view', this.issueNumber,
+      '--repo', this.repo,
+      '--json', 'title,body,labels'
+    ];
+
+    const output = execFileSync('gh', args, { encoding: 'utf8' });
     return JSON.parse(output);
   }
 
@@ -355,15 +361,13 @@ class AutoLabeler {
   }
 
   async applyLabels(labels) {
-    if (!this.dryRun) {
-      const args = [
-        'issue', 'edit', this.issueNumber.toString(),
-        '--repo', this.repo,
-        '--add-label', labels.join(',')
-      ];
+    const args = [
+      'issue', 'edit', this.issueNumber.toString(),
+      '--repo', this.repo,
+      '--add-label', labels.join(',')
+    ];
 
-      execFileSync('gh', args, { encoding: 'utf8' });
-    }
+    execFileSync('gh', args, { encoding: 'utf8' });
   }
 
   async applyFallbackLabel() {
@@ -382,8 +386,15 @@ class AutoLabeler {
 
 // Run the auto-labeler
 if (require.main === module) {
-  const labeler = new AutoLabeler();
-  labeler.run();
+  (async () => {
+    try {
+      const labeler = new AutoLabeler();
+      await labeler.run();
+    } catch (error) {
+      console.error('❌ Auto-labeling failed:', error.message);
+      process.exit(1);
+    }
+  })();
 }
 
 module.exports = AutoLabeler;
