@@ -1,0 +1,18 @@
+{
+  "name": "auto-label-scripts",
+  "version": "1.0.0",
+  "description": "GitHub auto-labeling scripts using CLI and MCP",
+  "main": "auto-label.js",
+  "scripts": {
+    "auto-label": "node auto-label.js",
+    "train": "node train-classifier.js",
+    "monitor": "node monitor-labeling.js",
+    "test": "node test-classifier.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^19.0.13"
+  },
+  "keywords": ["github", "auto-label", "classifier", "mcp"],
+  "author": "Auto-Label System",
+  "license": "MIT"
+}
