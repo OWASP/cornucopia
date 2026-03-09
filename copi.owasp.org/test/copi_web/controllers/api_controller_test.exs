@@ -18,9 +18,6 @@ defmodule CopiWeb.ApiControllerTest do
 
     {:ok, dealt_card} = Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
 
-    # We need to reload game to ensure preloads work if Game.find relies on them being associated
-    # But usually tests run in transaction. Game.find likely does a fresh query.
-
     %{game: game, player: player, dealt_card: dealt_card}
   end
 
@@ -32,13 +29,12 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     assert json_response(conn, 200)["id"] == dealt_card.id
-    
+
     updated = Repo.get(DealtCard, dealt_card.id)
     assert updated.played_in_round == 1
   end
 
   test "play_card fails if card already played", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
-    # Play it first
     {:ok, _} = Repo.update(Ecto.Changeset.change(dealt_card, played_in_round: 1))
 
     conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
@@ -51,7 +47,6 @@ defmodule CopiWeb.ApiControllerTest do
   end
 
   test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
-    # Create another card and mark it as played in this round (0 + 1 => 1)
     {:ok, card2} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "K", description: "desc", misc: "misc",
       edition: "webapp", external_id: "2", language: "en", version: "1",
@@ -68,5 +63,15 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     assert json_response(conn, 403)["error"] == "Player already played a card in this round"
+  end
+
+  test "play_card returns 404 when player_id doesn't belong to game", %{conn: conn, game: game} do
+    conn = put(conn, "/api/games/#{game.id}/players/99999/card", %{
+      "game_id" => game.id,
+      "player_id" => "99999",
+      "dealt_card_id" => "1"
+    })
+
+    assert json_response(conn, 404)["error"] == "Player not found in this game"
   end
 end
