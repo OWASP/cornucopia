@@ -107,6 +107,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Susana Romaniz
 - Ravishankar Sahadevan
 - Abhijit Sahoo
+- Kéren A. Saint-Hilaire
 - Max Alejandro Gómez Sánchez Vergaray
 - Tao Sauvage
 - Riccardo Sirigu
