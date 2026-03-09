@@ -1,25 +1,27 @@
 import { DeckService } from '$lib/services/deckService';
 import { json, error, type RequestHandler } from '@sveltejs/kit';
-import { CreController } from '$domain/cre/creController';
 
-export const prerender = false;
+export const prerender = true;
 
 export const GET: RequestHandler = ({ params }) => {
   const edition = params.edition;
-  
-  // V16.5: Fail securely by terminating handler on invalid edition
+  const version = params.version;
+
   if (!edition || !DeckService.hasEdition(edition)) {
     throw error(404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
+  }
+
+  if (!version || !DeckService.hasVersion(edition, version)) {
+    throw error(404, 'Version not found for edition ' + edition + '. Only: ' + DeckService.getVersions(edition).join(', ') + ' are supported.');
   }
 
   return json(
     {
       meta: {
-        edition: CreController.getEditionName(edition),
         component: "cards",
-        language: "en",
-        languages: DeckService.getLanguages(edition),
-        version: DeckService.getLatestVersion(edition),
+        language: "all",
+        languages: DeckService.getLanguagesForEditionVersion(edition, version),
+        version
       }
     },
     {
