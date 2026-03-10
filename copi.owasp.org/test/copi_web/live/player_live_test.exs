@@ -153,6 +153,34 @@ defmodule CopiWeb.PlayerLiveTest do
       assert updated_game.rounds_played == 1
     end
 
+    test "toggle_vote removes existing vote when already voted", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "OtherToggle", game_id: game_id})
+
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "2.2", external_id: "EXT_TOG", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: dealt.id, player_id: player.id})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Toggling should remove the existing vote
+      show_live |> render_click("toggle_vote", %{"dealt_card_id" => "#{dealt.id}"})
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+
+    test "edit action sets player in socket", %{conn: conn, player: player} do
+      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}/edit")
+      assert html =~ player.name
+    end
+
     test "rejects toggle_vote before game starts (started_at is nil)", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})

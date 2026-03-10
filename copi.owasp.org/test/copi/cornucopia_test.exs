@@ -255,4 +255,24 @@ defmodule Copi.CornucopiaTest do
       assert %Ecto.Changeset{} = Cornucopia.change_card(card)
     end
   end
+
+  describe "dealt_cards" do
+    alias Copi.Cornucopia.DealtCard
+
+    test "find/1 returns error when dealt_card not found" do
+      assert {:error, :not_found} = DealtCard.find(999_999_999)
+    end
+
+    test "changeset/2 returns a dealt_card changeset" do
+      assert %Ecto.Changeset{} = DealtCard.changeset(%DealtCard{}, %{})
+    end
+  end
+
+  describe "votes" do
+    alias Copi.Cornucopia.Vote
+
+    test "changeset/2 returns a vote changeset" do
+      assert %Ecto.Changeset{} = Vote.changeset(%Vote{}, %{})
+    end
+  end
 end
