@@ -104,6 +104,71 @@ class TestExtractCapecNames(unittest.TestCase):
         self.assertEqual(result, {})
         self.assertIn("'Attack_Pattern' is not a list", log.output[0])
 
+    def _make_data_with_attack_patterns(self, categories_value=None, include_categories=False):
+        """Helper that returns a catalog with Attack_Pattern entries and optional Categories."""
+        catalog: dict = {
+            "Attack_Patterns": {
+                "Attack_Pattern": [
+                    {"_ID": "1", "_Name": "Test Attack 1"},
+                ]
+            }
+        }
+        if include_categories:
+            catalog["Categories"] = categories_value
+        return {"Attack_Pattern_Catalog": catalog}
+
+    def test_categories_missing_still_returns_attack_patterns(self):
+        """When 'Categories' key is absent, warn and still return Attack_Pattern names."""
+        data = self._make_data_with_attack_patterns(include_categories=False)
+
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(result, {1: "Test Attack 1"})
+        self.assertIn("Invalid 'Categories' section in catalog; expected an object", log.output[0])
+
+    def test_categories_none_still_returns_attack_patterns(self):
+        """When 'Categories' is None, warn and still return Attack_Pattern names."""
+        data = self._make_data_with_attack_patterns(categories_value=None, include_categories=True)
+
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(result, {1: "Test Attack 1"})
+        self.assertIn("Invalid 'Categories' section in catalog; expected an object", log.output[0])
+
+    def test_categories_non_dict_still_returns_attack_patterns(self):
+        """When 'Categories' is a non-dict (e.g. a list), warn and still return Attack_Pattern names."""
+        data = self._make_data_with_attack_patterns(categories_value=["unexpected"], include_categories=True)
+
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(result, {1: "Test Attack 1"})
+        self.assertIn("Invalid 'Categories' section in catalog; expected an object", log.output[0])
+
+    def test_category_key_missing_still_returns_attack_patterns(self):
+        """When 'Category' key is absent from Categories dict, warn and still return Attack_Pattern names."""
+        data = self._make_data_with_attack_patterns(categories_value={"other_key": []}, include_categories=True)
+
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(result, {1: "Test Attack 1"})
+        self.assertIn("No 'Category' key found in categories section", log.output[0])
+
+    def test_category_not_list_still_returns_attack_patterns(self):
+        """When 'Category' exists but is not a list, warn and still return Attack_Pattern names."""
+        data = self._make_data_with_attack_patterns(
+            categories_value={"Category": "malformed"}, include_categories=True
+        )
+
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(result, {1: "Test Attack 1"})
+        self.assertIn("'Category' is not a list", log.output[0])
+
     def test_extract_capec_names_missing_fields(self):
         """Test with missing _ID or _Name fields"""
         data = {

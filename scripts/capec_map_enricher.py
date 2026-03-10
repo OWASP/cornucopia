@@ -82,14 +82,13 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
     attack_patterns = patterns["Attack_Pattern"]
     _extract_names_from_items(attack_patterns, capec_names, warn_if_not_list=True, label="Attack_Pattern")
 
-    if "Categories" not in catalog:
-        logging.warning("No 'Categories' key found in catalog")
+    categories = catalog.get("Categories")
+    if not isinstance(categories, dict):
+        logging.warning("Invalid 'Categories' section in catalog; expected an object")
+    elif "Category" not in categories:
+        logging.warning("No 'Category' key found in categories section")
     else:
-        categories_section = catalog["Categories"]
-        if "Category" not in categories_section:
-            logging.warning("No 'Category' key found in categories section")
-        else:
-            _extract_names_from_items(categories_section["Category"], capec_names, label="Category")
+        _extract_names_from_items(categories["Category"], capec_names, warn_if_not_list=True, label="Category")
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
