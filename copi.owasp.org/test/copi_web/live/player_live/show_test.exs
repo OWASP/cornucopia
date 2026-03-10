@@ -297,7 +297,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, card} =
         Cornucopia.create_card(%{
           category: "C", value: "TV1", description: "D", edition: "webapp",
-          version: "2.2", external_id: "TV_CARD1", language: "en", misc: "m",
+          version: "2.2", external_id: "TV_CARD_PRE_GAME", language: "en", misc: "m",
           owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
           capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
         })
@@ -328,7 +328,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, card} =
         Cornucopia.create_card(%{
           category: "C", value: "TV1", description: "D", edition: "webapp",
-          version: "2.2", external_id: "TV_CARD1", language: "en", misc: "m",
+          version: "2.2", external_id: "TV_CARD_AFTER_END", language: "en", misc: "m",
           owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
           capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
         })

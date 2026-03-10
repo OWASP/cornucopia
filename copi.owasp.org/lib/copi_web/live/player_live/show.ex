@@ -100,28 +100,34 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    # Check if player already voted
-    if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
-      # Remove their vote
-      continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
-      if continue_vote do
-        Copi.Repo.delete!(continue_vote)
-      end
+    # Validate game lifecycle - continue voting only allowed during active games
+    unless Copi.Cornucopia.Game.game_active?(game) do
+      Logger.warning("Continue vote attempt on inactive game: player_id: #{player.id}, game_id: #{game.id}, started_at: #{game.started_at}, finished_at: #{game.finished_at}")
+      {:noreply, socket}
     else
-      # Add their vote
-      case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
-        {:ok, _vote} ->
-          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
-        {:error, changeset} ->
-          Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+      # Check if player already voted
+      if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
+        # Remove their vote
+        continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
+        if continue_vote do
+          Copi.Repo.delete!(continue_vote)
+        end
+      else
+        # Add their vote
+        case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
+          {:ok, _vote} ->
+            Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
+          {:error, changeset} ->
+            Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+        end
       end
+
+      {:ok, updated_game} = Game.find(game.id)
+
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+      {:noreply, assign(socket, :game, updated_game)}
     end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
   end
 
   @impl true
