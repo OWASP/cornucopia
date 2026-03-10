@@ -122,11 +122,15 @@ defmodule CopiWeb.PlayerLive.Show do
         end
       end
 
-      {:ok, updated_game} = Game.find(game.id)
-
-      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-      {:noreply, assign(socket, :game, updated_game)}
+      # Reload fresh game record after continue vote mutations
+      case Game.find(game.id) do
+        {:ok, updated_game} ->
+          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+          {:noreply, assign(socket, :game, updated_game)}
+        {:error, reason} ->
+          Logger.warning("Failed to reload game after continue vote: game_id: #{game.id}, reason: #{inspect(reason)}")
+          {:noreply, socket}
+      end
     end
   end
 
@@ -140,27 +144,41 @@ defmodule CopiWeb.PlayerLive.Show do
       Logger.warning("Voting attempt on inactive game: player_id: #{player.id}, game_id: #{game.id}, started_at: #{game.started_at}, finished_at: #{game.finished_at}")
       {:noreply, socket}
     else
-      {:ok, dealt_card} = DealtCard.find(dealt_card_id)
-      vote = get_vote(dealt_card, player)
+      case DealtCard.find(dealt_card_id) do
+        {:ok, dealt_card} ->
+          # Validate that dealt card belongs to current game
+          unless dealt_card_belongs_to_game?(dealt_card, game) do
+            Logger.warning("Unauthorized voting attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+            {:noreply, socket}
+          else
+            vote = get_vote(dealt_card, player)
 
-      if vote do
-        Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        Copi.Repo.delete!(vote)
-      else
-        Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-          {:ok, _vote} ->
-            Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-          {:error, changeset} ->
-            Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
-        end
+            if vote do
+              Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+              Copi.Repo.delete!(vote)
+            else
+              Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+              case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
+                {:ok, _vote} ->
+                  Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+                {:error, changeset} ->
+                  Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+              end
+            end
+
+            case Game.find(game.id) do
+              {:ok, updated_game} ->
+                CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+                {:noreply, assign(socket, :game, updated_game)}
+              {:error, reason} ->
+                Logger.warning("Failed to reload game after vote: game_id: #{game.id}, reason: #{inspect(reason)}")
+                {:noreply, socket}
+            end
+          end
+        {:error, reason} ->
+          Logger.warning("Failed to find dealt card: dealt_card_id: #{dealt_card_id}, player_id: #{player.id}, game_id: #{game.id}, reason: #{inspect(reason)}")
+          {:noreply, socket}
       end
-
-      {:ok, updated_game} = Game.find(game.id)
-
-      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-      {:noreply, assign(socket, :game, updated_game)}
     end
   end
 
