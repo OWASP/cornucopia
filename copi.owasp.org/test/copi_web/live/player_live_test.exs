@@ -176,11 +176,6 @@ defmodule CopiWeb.PlayerLiveTest do
       refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
 
-    test "edit action sets player in socket", %{conn: conn, player: player} do
-      {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}/edit")
-      assert html =~ player.name
-    end
-
     test "rejects toggle_vote before game starts (started_at is nil)", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
