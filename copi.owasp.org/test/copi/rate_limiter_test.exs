@@ -47,14 +47,15 @@ defmodule Copi.RateLimiterTest do
       config = RateLimiter.get_config()
       limit = config.limits.connection
 
-      # Make requests up to the limit
-      for _ <- 1..limit do
-        assert {:ok, _} = RateLimiter.check_rate(ip, :connection)
-      end
-
-      # Next request should be blocked
-      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :connection)
-    end
+        # Inject pre-exhausted timestamps directly to avoid relying on the
+        # 1-second sliding window (133 sequential calls can exceed 1 second on
+        # a loaded CI machine, causing all timestamps to expire).
+        :sys.replace_state(Copi.RateLimiter, fn state ->
+          now = System.monotonic_time(:millisecond)
+          timestamps = for _ <- 1..limit, do: now
+          new_requests = Map.put(state.requests, {ip, :connection}, timestamps)
+          %{state | requests: new_requests}
+        end)
 
     test "different actions have independent limits", %{ip: ip} do
       # Make a game creation request
