@@ -2,6 +2,22 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Prevent horizontal page overflow on all viewports */
+:root {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/*
+  Game table: player card slots are rendered in a single flex row.
+  When the total card width exceeds the viewport the table must scroll
+  internally rather than pushing the page layout wider.
+*/
+#table {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
 #copied-url {
     field-sizing: content;
     display: inline-block;
@@ -12,6 +28,9 @@
 
 #copy-url-container {
     white-space: nowrap;
+    /* Prevent the URL bar overflowing the viewport */
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 #copy-url-btn {
