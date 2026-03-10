@@ -153,6 +153,51 @@ defmodule CopiWeb.PlayerLiveTest do
       assert updated_game.rounds_played == 1
     end
 
+    test "rejects toggle_vote before game starts (started_at is nil)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "2.2", external_id: "EXT2", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+
+      # Game has not started (started_at is nil)
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      show_live |> render_click("toggle_vote", %{"dealt_card_id" => "#{dealt.id}"})
+
+      # Vote must NOT be created
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+
+    test "rejects toggle_vote after game ends (finished_at is set)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other2", game_id: game_id})
+
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: now, finished_at: now))
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "2.2", external_id: "EXT3", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: card.id, played_in_round: 1})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      show_live |> render_click("toggle_vote", %{"dealt_card_id" => "#{dealt.id}"})
+
+      # Vote must NOT be created
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
+
     test "allows toggling continue vote off", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
