@@ -228,16 +228,12 @@ defmodule CopiWeb.PlayerLive.Show do
     Enum.find(dealt_card.votes, fn vote -> vote.player_id == player.id end)
   end
 
-  def display_game_session(edition) do
-    case edition do
-      "webapp" -> "Cornucopia Web Session:"
-      "ecommerce" -> "Cornucopia Web Session:"
-      "mobileapp" -> "Cornucopia Mobile Session:"
-      "masvs" -> "Cornucopia Mobile Session:"
-      "cumulus" -> "OWASP Cumulus Session:"
-      "mlsec" -> "Elevation of MLSec Session:"
-      _ -> "EoP Session:"
-    end
+  defp dealt_card_belongs_to_game?(dealt_card, game) do
+    # Check if the dealt card's player belongs to the current game
+    player_ids = Enum.map(game.players, & &1.id)
+    dealt_card.player_id in player_ids
   end
 
-end
+  def topic(game_id) do
+    "game:#{game_id}"
+  end
