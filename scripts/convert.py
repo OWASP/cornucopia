@@ -567,7 +567,7 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
     files = []
     for root, dirnames, filenames in os.walk(path):
         # Exclude archive directory from recursion
-        dirnames[:] = [d for d in dirnames if d != 'archive']
+        dirnames[:] = [d for d in dirnames if d != "archive"]
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
     if not files:
