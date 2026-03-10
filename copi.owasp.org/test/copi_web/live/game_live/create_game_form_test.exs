@@ -49,7 +49,7 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
 
     test "validation errors don't consume rate limit", %{conn: conn} do
       {:ok, view, _html} = live(conn, "/games/new")
-      
+
       # Submit invalid form (empty name triggers validation)
       html = view
         |> form("#game-form", game: %{name: "", edition: "webapp"})
@@ -64,6 +64,18 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
 
       # Successful creation redirects
       assert {:ok, _view, _html} = follow_redirect(result, conn)
+    end
+
+    test "submit with invalid name hits changeset error path in save_game", %{conn: conn} do
+      {:ok, view, _html} = live(conn, "/games/new")
+
+      # Submit with empty name − passes HTML form but fails server-side validate_required
+      view
+        |> form("#game-form", game: %{name: "", edition: "webapp"})
+        |> render_submit()
+
+      # Form should still be present (no redirect on error)
+      assert has_element?(view, "#game-form")
     end
   end
 end

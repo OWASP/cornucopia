@@ -13,6 +13,7 @@
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
+  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
 
   interface Props {
     mappingData: any;
@@ -65,6 +66,9 @@
   {/if}
   {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
+  {/if}
+  {#if card.edition == "companion"}
+  <CompanionCardTaxonomy bind:card={card} {mappingData} {routes}></CompanionCardTaxonomy>
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>

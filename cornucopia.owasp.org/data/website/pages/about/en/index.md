@@ -62,6 +62,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Thomas Berson
 - Rishii Bharadhwaj
 - Jorun Kristin Bremseth
+- Mahaboobunnisa Md
 - Tom Brennan
 - Graham Bryant
 - Gerardo Mathías Canedo Prendez
@@ -74,6 +75,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Luis Enriquez
 - Darío De Filippis
 - André Ferreira
+- Pedro Fortuna
 - Ken Ferris
 - Norbert Gaspar
 - Spyros Gasteratos
@@ -86,11 +88,14 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - John Herrlin
 - Jerry Hoff
 - Toby Irvine
+- Aashish Kharel
 - Marios Kourtesis
 - Aleksey Krasnov
 - Suresh Krishna
+- Adarsh Kumar
 - Franck Lacosta
 - Mathias Lemaire
+- Khushal Malhotra
 - Antonis Manaras
 - Jim Manico
 - Jef Meijvis
@@ -103,19 +108,23 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Susana Romaniz
 - Ravishankar Sahadevan
 - Abhijit Sahoo
+- Kéren A. Saint-Hilaire
 - Max Alejandro Gómez Sánchez Vergaray
 - Tao Sauvage
+- Riccardo Sirigu
 - Prasun Srivastav
 - Aditya Srivastava
 - Johan Sydseter
 - Elias Brattli Sørensen
+- Izar Tarandach
 - Mradul Tiwari
 - Ive Verstappen
 - Sachin Vishwakarma
 - Wagner Voltzcontributors 
 - Stephen de Vries
 - Colin Watson
--  
+- Marysia Winkels
+
 Additionally, Gerardo Canedo and student volunteers to [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/ 'OWASP Threat Dragon [internal]') from the Universidad Católica del Uruguay ([UCU](https://www.ucu.edu.uy/ 'UCU [external]')) who took part in a Coding Challenge to provide integration between Cornucopia and Threat Dragon.
 
 Please let us know if we have missed anyone from this list.

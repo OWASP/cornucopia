@@ -121,8 +121,16 @@ defmodule CopiWeb.GameLiveTest do
       {:ok, show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
       assert html =~ "Start Game"
 
-      html = show_live |> element("button", "Start Game") |> render_click()
+      html = show_live |> element("button[phx-click=\"start_game\"]") |> render_click()
       assert html =~ "Round <strong>1</strong>"
+    end
+    
+    test "Broadcasts game:updated to other LiveViews but ignores non-matching topic", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      
+      # Should be ignored due to topic mismatch, no crash
+      send(show_live.pid, %{topic: "game:other_id", event: "game:updated", payload: game})
+      assert render(show_live) =~ game.name
     end
 
     test "redirects to error when game not found", %{conn: conn} do
@@ -147,13 +155,6 @@ defmodule CopiWeb.GameLiveTest do
        assert html =~ "Viewing round <strong>1</strong>"
     end
 
-    test "delete game removes it from list", %{conn: conn, game: _game} do
-      {:ok, _index_live, html} = live(conn, "/games")
-      
-      # The game might not be shown if it's in the current view -skip complex delete test
-      # Just verify the page loads
-      assert html =~ "Listing Games"
-    end
 
     test "handle_info updates games list", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, "/games")

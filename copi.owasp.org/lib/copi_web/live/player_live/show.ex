@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLive.Show do
   use CopiWeb, :live_view
   use Phoenix.Component
 
+  require Logger
   import Ecto.Query
 
   alias Copi.Cornucopia.Player
@@ -110,9 +111,9 @@ defmodule CopiWeb.PlayerLive.Show do
       # Add their vote
       case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
         {:ok, _vote} ->
-          IO.puts("Continue vote added successfully")
-        {:error, _changeset} ->
-          IO.puts("Continue voting failed")
+          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Continue voting failed for player_id: #{player.id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
       end
     end
 
@@ -133,15 +134,15 @@ defmodule CopiWeb.PlayerLive.Show do
     vote = get_vote(dealt_card, player)
 
     if vote do
-      IO.puts("player has voted")
+      Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
       Copi.Repo.delete!(vote)
     else
-      IO.puts("player hasn't voted")
+      Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
       case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
         {:ok, _vote} ->
-          IO.puts("voted successfully")
-        {:error, _changeset} ->
-          IO.puts("voting failed")
+          Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
       end
     end
 
