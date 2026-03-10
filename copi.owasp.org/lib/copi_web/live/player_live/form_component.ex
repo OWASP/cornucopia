@@ -28,6 +28,12 @@ defmodule CopiWeb.PlayerLive.FormComponent do
           <p class="text-sm">
             Please note: Avoid submitting sensitive and/or personal information to minimize the risk of data exfiltration due to accidental data exposure.
           </p>
+          <p>
+            Please read about:
+          </p>
+          <a href="/privacy" target="_blank" title="Privacy Notice">
+            How we process your data
+          </a>
         </div>
 
         <:actions>
