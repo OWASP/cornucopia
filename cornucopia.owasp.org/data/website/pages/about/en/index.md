@@ -62,6 +62,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Thomas Berson
 - Rishii Bharadhwaj
 - Jorun Kristin Bremseth
+- Mahaboobunnisa Md
 - Tom Brennan
 - Graham Bryant
 - Gerardo Mathías Canedo Prendez
