@@ -42,10 +42,8 @@ defmodule CopiWeb.Router do
     put "/games/:game_id/players/:player_id/card", ApiController, :play_card
   end
 
-  # Health check endpoint for Fly.io
+  # Health check endpoint for Fly.io - no pipeline needed for plain text response
   scope "/", CopiWeb do
-    pipe_through :api
-    
     get "/health", HealthController, :index
   end
 

@@ -1,5 +1,6 @@
 defmodule CopiWeb.HealthController do
   use CopiWeb, :controller
+  require Logger
 
   def index(conn, _params) do
     # Check database connection with timeouts and exception handling
@@ -11,9 +12,13 @@ defmodule CopiWeb.HealthController do
           send_resp(conn, :service_unavailable, "not ready\n")
       end
     rescue
-      _ -> send_resp(conn, :service_unavailable, "not ready\n")
+      e ->
+        Logger.error("Health check exception: #{inspect(e)}")
+        send_resp(conn, :service_unavailable, "not ready\n")
     catch
-      :exit, _ -> send_resp(conn, :service_unavailable, "not ready\n")
+      :exit, reason ->
+        Logger.error("Health check exit: #{inspect(reason)}")
+        send_resp(conn, :service_unavailable, "not ready\n")
     end
   end
 end
