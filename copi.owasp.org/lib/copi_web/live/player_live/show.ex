@@ -129,28 +129,33 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    {:ok, dealt_card} = DealtCard.find(dealt_card_id)
-
-    vote = get_vote(dealt_card, player)
-
-    if vote do
-      Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      Copi.Repo.delete!(vote)
+    # Validate game lifecycle - voting only allowed during active games
+    unless Copi.Cornucopia.Game.game_active?(game) do
+      Logger.warning("Voting attempt on inactive game: player_id: #{player.id}, game_id: #{game.id}, started_at: #{game.started_at}, finished_at: #{game.finished_at}")
+      {:noreply, socket}
     else
-      Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-        {:ok, _vote} ->
-          Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        {:error, changeset} ->
-          Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+      {:ok, dealt_card} = DealtCard.find(dealt_card_id)
+      vote = get_vote(dealt_card, player)
+
+      if vote do
+        Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+        Copi.Repo.delete!(vote)
+      else
+        Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+        case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
+          {:ok, _vote} ->
+            Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+          {:error, changeset} ->
+            Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+        end
       end
+
+      {:ok, updated_game} = Game.find(game.id)
+
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+      {:noreply, assign(socket, :game, updated_game)}
     end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
   end
 
   def topic(game_id) do

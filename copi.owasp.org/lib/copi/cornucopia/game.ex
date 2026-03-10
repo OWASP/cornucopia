@@ -62,4 +62,8 @@ defmodule Copi.Cornucopia.Game do
 
     Enum.count(players_still_to_play) > 0
   end
+
+  def game_active?(game) do
+    game.started_at != nil and game.finished_at == nil
+  end
 end
