@@ -134,3 +134,12 @@
                 resources/case/*\1.1_case_*
                 source/*1\.1-*.yaml
                 source/*2\.2-*.yaml
+      sbom:
+        needs: [hardening, tagged-release]
+        name: SBOM
+        uses: ./.github/workflows/sbom-generate.yml
+        secrets: inherit
+        permissions:
+          contents: write
+        with:
+          tag_name: ${{ github.ref_name }}

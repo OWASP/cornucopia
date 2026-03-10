@@ -76,146 +76,6 @@ suits:
     desc: You have invented a new attack against LLM
     misc:
 -
-  id: AAI
-  name: Agentic AI
-  cards:
-  -
-    id: AAI2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/AAI2
-    desc: 
-  -
-    id: AAI3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/AAI3
-    desc: 
-  -
-    id: AAI4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/AAI4
-    desc: 
-  -
-    id: AAI5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/AAI5
-    desc: 
-  -
-    id: AAI6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/AAI6
-    desc: 
-  -
-    id: AAI7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/AAI7
-    desc: 
-  -
-    id: AAI8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/AAI8
-    desc: 
-  -
-    id: AAI9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/AAI9
-    desc: 
-  -
-    id: AAIX
-    value: X
-    url: https://cornucopia.owasp.org/cards/AAIX
-    desc: 
-  -
-    id: AAIJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/AAIJ
-    desc: 
-  -
-    id: AAIQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/AAIQ
-    desc: 
-  -
-    id: AAIK
-    value: K
-    url: https://cornucopia.owasp.org/cards/AAIK
-    desc: 
-  -
-    id: AAIA
-    value: A
-    url: https://cornucopia.owasp.org/cards/AAIA
-    desc: You have identified an attack that misuses inherent Agentic AI functionality or a related design flaw
-    misc: Read More about threats and mitigations at the OWASP Gen AI Security projects 
--
-  id: API
-  name: Web API
-  cards:
-  -
-    id: API2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/API2
-    desc: 
-  -
-    id: API3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/API3
-    desc: 
-  -
-    id: API4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/API4
-    desc: 
-  -
-    id: API5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/API5
-    desc: 
-  -
-    id: API6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/API6
-    desc: 
-  -
-    id: API7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/API7
-    desc: 
-  -
-    id: API8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/API8
-    desc: 
-  -
-    id: API9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/API9
-    desc: 
-  -
-    id: APIX
-    value: X
-    url: https://cornucopia.owasp.org/cards/APIX
-    desc: 
-  -
-    id: APIJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/APIJ
-    desc: 
-  -
-    id: APIQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/APIQ
-    desc: 
-  -
-    id: APIK
-    value: K
-    url: https://cornucopia.owasp.org/cards/APIK
-    desc: 
-  -
-    id: APIA
-    value: A
-    url: https://cornucopia.owasp.org/cards/APIA
-    desc: You have invented a new attack against Web API
-    misc: 
--
   id: CLD
   name: Cloud
   cards:
@@ -356,144 +216,74 @@ suits:
     desc: You have invented a new attack against Frontend
     misc: 
 -
-  id: SDL
-  name: SSDLC
+  id: DVO
+  name: DevOps
   cards:
   -
-    id: SDL2
+    id: DVO2
     value: 2
-    url: https://cornucopia.owasp.org/cards/SDL2
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO2
+    desc: "Aram's malicious actions against build, delivery, and deployment processes cannot be investigated, because there is no sufficient, complete, and accurately timestamped record of security events, or it has been tampered with"
   -
-    id: SDL3
+    id: DVO3
     value: 3
-    url: https://cornucopia.owasp.org/cards/SDL3
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO3
+    desc: "Aryan can exploit an internal system or service, because it, its infrastructure, or other components were not properly hardened, or the configuration was not maintained over time"
   -
-    id: SDL4
+    id: DVO4
     value: 4
-    url: https://cornucopia.owasp.org/cards/SDL4
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO4
+    desc: "Bart is able to delete, overwrite, or download backups"
   -
-    id: SDL5
+    id: DVO5
     value: 5
-    url: https://cornucopia.owasp.org/cards/SDL5
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO5
+    desc: "Brian can escape the runtime isolation of workloads to access host resources, execute privileged operations, or use the workloads to attack other internal systems"
   -
-    id: SDL6
+    id: DVO6
     value: 6
-    url: https://cornucopia.owasp.org/cards/SDL6
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO6
+    desc: "Daniel can cause a permanent loss of applications, source code, and data due to missing, incomplete or failed backups, or insufficient recovery documentation, training or testing"
   -
-    id: SDL7
+    id: DVO7
     value: 7
-    url: https://cornucopia.owasp.org/cards/SDL7
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO7
+    desc: "John can deploy unauthorized or malicious changes to production because deployment approval gates, validation checks, or change control processes are missing or can be bypassed"
   -
-    id: SDL8
+    id: DVO8
     value: 8
-    url: https://cornucopia.owasp.org/cards/SDL8
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO8
+    desc: "Maxim can deploy a malicious or otherwise modified artifact, because its integrity is not guaranteed or validated"
   -
-    id: SDL9
-    value: X
-    url: https://cornucopia.owasp.org/cards/SDL9
-    desc: 
-  -
-    id: SDLX
-    value: X
-    url: https://cornucopia.owasp.org/cards/SDLX
-    desc: 
-  -
-    id: SDLJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/SDLJ
-    desc: 
-  -
-    id: SDLQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/SDLQ
-    desc: 
-  -
-    id: SDLK
-    value: K
-    url: https://cornucopia.owasp.org/cards/SDLK
-    desc: 
-  -
-    id: SDLA
-    value: A
-    url: https://cornucopia.owasp.org/cards/SDLA
-    desc: You have invented a new attack against SSDLC
-    misc: 
--
-  id: IDM
-  name: Identity Management
-  cards:
-  -
-    id: IDM2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/IDM2
-    desc: 
-  -
-    id: IDM3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/IDM3
-    desc: 
-  -
-    id: IDM4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/IDM4
-    desc: 
-  -
-    id: IDM5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/IDM5
-    desc: 
-  -
-    id: IDM6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/IDM6
-    desc: 
-  -
-    id: IDM7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/IDM7
-    desc: 
-  -
-    id: IDM8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/IDM8
-    desc: 
-  -
-    id: IDM9
+    id: DVO9
     value: 9
-    url: https://cornucopia.owasp.org/cards/IDM9
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVO9
+    desc: "Nariman can control or affect pipeline execution by injecting malicious commands through poisoned or typosquatted workflow dependencies, or by manipulating CI configuration files, or in other ways"
   -
-    id: IDMX
+    id: DVOX
     value: X
-    url: https://cornucopia.owasp.org/cards/IDMX
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOX
+    desc: "Patricia can exploit obsolete DevOps credentials, identities, services, or APIs, as well as excessive privileges, to bypass access controls and gain unauthorized access to read and modify sensitive data or functionality"
   -
-    id: IDMJ
+    id: DVOJ
     value: J
-    url: https://cornucopia.owasp.org/cards/IDMJ
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOJ
+    desc: "Pravir can exploit vulnerabilities in the application or development ecosystem, including repositories and DevOps infrastructure, because of outdated or poorly maintained dependencies"
   -
-    id: IDMQ
+    id: DVOQ
     value: Q
-    url: https://cornucopia.owasp.org/cards/IDMQ
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOQ
+    desc: "Seba can access the code repository, log files, command line history, pipelines, or other places, to gain access to secrets or other sensitive information"
   -
-    id: IDMK
+    id: DVOK
     value: K
-    url: https://cornucopia.owasp.org/cards/IDMK
-    desc: 
+    url: https://cornucopia.owasp.org/cards/DVOK
+    desc: "Timo can compromise software, development environments, or DevOps tooling by injecting malicious code via external dependencies or exploited developer credentials"
   -
-    id: IDMA
+    id: DVOA
     value: A
-    url: https://cornucopia.owasp.org/cards/IDMA
-    desc: You have invented a new attack against Identity Management
+    url: https://cornucopia.owasp.org/cards/DVOA
+    desc: You have invented a new attack against DevOps
     misc: 
 -
   id: SE
@@ -573,65 +363,135 @@ suits:
     id: BOT2
     value: 2
     url: https://cornucopia.owasp.org/cards/BOT2
-    desc: The ENIAC can profit from utilising functionality built on paid-for supporting services
+    desc: ENIAC can profit from utilising functionality built on paid-for supporting services
   -
     id: BOT3
     value: 3
     url: https://cornucopia.owasp.org/cards/BOT3
-    desc: The Mark 1 Colossus can hasten the progress of usually slow, tedious or time-consuming actions
+    desc: Mark 1 Colossus can hasten the progress of usually slow, tedious or time-consuming actions
   -
     id: BOT4
     value: 4
     url: https://cornucopia.owasp.org/cards/BOT4
-    desc: The IBM 701 can make last minute bids or offers for goods/services
+    desc: IBM 701 can make last minute bids or offers for goods/services
   -
     id: BOT5
     value: 5
     url: https://cornucopia.owasp.org/cards/BOT5
-    desc: The Ferranti Mercury can deplete the stock of goods/services, without ever completing the purchase or committing to the transaction
+    desc: Ferranti Mercury can deplete the stock of goods/services, without ever completing the purchase or committing to the transaction
   -
     id: BOT6
     value: 6
     url: https://cornucopia.owasp.org/cards/BOT6
-    desc: The EDSAC can obtain limited-availability and/or preferred goods/services by unfair methods
+    desc: EDSAC can obtain limited-availability and/or preferred goods/services by unfair methods
   -
     id: BOT7
     value: 7
     url: https://cornucopia.owasp.org/cards/BOT7
-    desc: The Manchester Mark 1 can utilise stolen payment card data, or other user account data, to buy goods or obtain cash
+    desc: Manchester Mark 1 can utilise stolen payment card data, or other user account data, to buy goods or obtain cash
   -
     id: BOT8
     value: 8
     url: https://cornucopia.owasp.org/cards/BOT8
-    desc: The UNIVAC 1 can create multiple accounts for subsequent misuse
+    desc: UNIVAC 1 can create multiple accounts for subsequent misuse
   -
     id: BOT9
     value: 9
     url: https://cornucopia.owasp.org/cards/BOT9
-    desc: The CSIRAC can alter a metric by using repeated link clicks, page requests or form submissions
+    desc: CSIRAC can alter a metric by using repeated link clicks, page requests or form submissions
   -
     id: BOTX
     value: X
     url: https://cornucopia.owasp.org/cards/BOTX
-    desc: The Ferranti Pegasus can enumerate individual authentication credentials, or payment card data (e.g. start/expiry dates, security codes), or other tokens (e.g. coupon numbers, voucher codes, discount tokens) by trying different values
+    desc: Ferranti Pegasus can enumerate individual authentication credentials, or payment card data (e.g. start/expiry dates, security codes), or other tokens (e.g. coupon numbers, voucher codes, discount tokens) by trying different values
   -
     id: BOTJ
     value: J
     url: https://cornucopia.owasp.org/cards/BOTJ
-    desc: The Zuse Z3 can validate stolen bulk authentication credentials, or payment cardholder data (e.g. PAN, security code, expiry date)
+    desc: Zuse Z3 can validate stolen bulk authentication credentials, or payment cardholder data (e.g. PAN, security code, expiry date)
   -
     id: BOTQ
     value: Q
     url: https://cornucopia.owasp.org/cards/BOTQ
-    desc: The Manchester Baby can add malicious or questionable information to content, databases or user messages
+    desc: Manchester Baby can add malicious or questionable information to content, databases or user messages
   -
     id: BOTK
     value: K
     url: https://cornucopia.owasp.org/cards/BOTK
-    desc: The EDVAC can collect application content and/or other data for use elsewhere
+    desc: EDVAC can collect application content and/or other data for use elsewhere
   -
     id: BOTA
     value: A
     url: https://cornucopia.owasp.org/cards/BOTA
     desc: You have identified an automated attack that misuses inherent web application functionality or a related design flaw
     misc: Read more about Automated Threats to web applications in the OWASP Automated Threat Handbook
+-
+  id: AAI
+  name: Agentic AI
+  cards:
+  -
+    id: AAI2
+    value: 2
+    url: https://cornucopia.owasp.org/cards/AAI2
+    desc: Tay can misinterpret user intent due to insufficient context isolation or prompt enforcement and execute actions outside the expected task scope.
+  -
+    id: AAI3
+    value: 3
+    url: https://cornucopia.owasp.org/cards/AAI3
+    desc: Boo-Code can rely on unverified or attacker-influenced conversation history, propagating incorrect assumptions across reasoning chains.
+  -
+    id: AAI4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/AAI4
+    desc: MissTrial can autonomously loop or chain external tool calls without enforcing rate limits or budget controls.
+  -
+    id: AAI5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/AAI5
+    desc: Watson can reveal sensitive internal instructions, policies, or reasoning artifacts when exposed to adversarial prompting patterns.
+  -
+    id: AAI6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/AAI6
+    desc: Gremlini can access and process sensitive data sources beyond user authorization due to insufficient access validation.
+  -
+    id: AAI7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/AAI7
+    desc: Auto-GPT can treat external tool outputs as authoritative and execute embedded malicious instructions without validation.
+  -
+    id: AAI8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/AAI8
+    desc: PreCursor can execute unintended code or system actions when tool input validation and sandboxing controls are weak.
+  -
+    id: AAI9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/AAI9
+    desc: CoPirate can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
+  -
+    id: AAIX
+    value: X
+    url: https://cornucopia.owasp.org/cards/AAIX
+    desc: DeepGeek can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives.
+  -
+    id: AAIJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAIJ
+    desc: BabyAGI can trust instructions from peer agents without verification, policy validation, or identity assurance.
+  -
+    id: AAIQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAIQ
+    desc: Jane can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
+  -
+    id: AAIK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAIK
+    desc: GPI-3.1415 can execute high-impact operations across integrated systems due to excessive agency and lack of transactional safeguards.
+  -
+    id: AAIA
+    value: A
+    url: https://cornucopia.owasp.org/cards/AAIA
+    desc: You have identified an attack that misuses inherent Agentic AI functionality or a related design flaw
+    misc: Read more about threats and mitigations at the OWASP Gen AI Security projects

@@ -221,4 +221,24 @@
         align-items: center;
         gap: 1rem;
     }
+
+    @media (max-aspect-ratio: 1/1) {
+        div {
+            margin: 0 1rem;
+        }
+        
+        .year-heading {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        
+        .year-divider {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        
+        .list {
+            margin: 0 1rem;
+        }
+    }
 </style>

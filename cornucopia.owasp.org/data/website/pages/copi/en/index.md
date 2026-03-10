@@ -209,6 +209,8 @@ We have not implemented Authentication when using Copi, instead we use a secure 
 
 An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
 
+Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open us up to more threats. We could indeed mitigate those threats, but we would rather remain privacy-friendly and process as little personal information as possible.
+
 #### What are we going to do about it?
 
 We are not working towards implementing authentication in Copi. Instead we are utilizing magic links. Arguable this is not authentication, but it's worth noting that your threat model is not stored on copi.owasp.org, just your game and the cards you voted on. For a threat actor to be able to piece together this information and use it against you, given that he get hold of the magic link, you would have to use your full name and, add the url to your project in the game name field when creating the game. We are working towards informing users that they should under no circumstances do this kind of thing, but even in the case that you still did. The cards themselves are two generic and doesn't contain the sensitive discussions that you had during your game.
@@ -257,7 +259,8 @@ Given that  a threat actor can  execute a distributed denial of service attack a
 
 #### What are we going to do about it?
 
-We are not working towards implementing any specific controls to prevent DoS attacks against copi.owasp.org, but we are working on implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return HTTP status 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.
+We are not working towards implementing any specific controls to prevent DoS attacks against copi.owasp.org. Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return HTTP status 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.
+If you are hosting Copi yourself please set the rate limiting according to your needs (see: [SECURITY.md](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md)).
 
 ### Did we do a good job?
 

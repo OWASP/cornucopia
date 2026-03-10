@@ -16,12 +16,14 @@ export class DeckService {
 
     private static readonly latests: Deck[] = [
         { lang: ['en'], edition: 'mobileapp', version: '1.1' },
-        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' }
+        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' },
+        { lang: ['en'], edition: 'companion', version: '1.0' }
     ];
     private static readonly decks: Deck[] = [
         { edition: 'mobileapp', version: '1.1', lang: ['en'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-        { edition: 'webapp', version: '3.0', lang: ['en'] }];
+        { edition: 'webapp', version: '3.0', lang: ['en', 'ru'] },
+        { edition: 'companion', version: '1.0', lang: ['en'] }];
 
     public static hasEdition(edition: string): boolean {
         return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
@@ -50,6 +52,10 @@ export class DeckService {
     public static getLanguages(edition: string): string[] {
         let languages: string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
         return languages.length !== 0 ? languages : ['en'];
+    }
+    public static getLanguagesForEditionVersion(edition: string, version: string): string[] {
+        const deck = DeckService.decks.find((d) => d.edition === edition && d.version === version);
+        return deck?.lang ?? [];
     }
     public static getVersions(edition: string): string[] {
         return DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.version);

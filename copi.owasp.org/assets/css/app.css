@@ -48,3 +48,13 @@
     margin-left: 0.5rem;
     vertical-align: middle;
 }
+/* Mobile overflow safety fix */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+main {
+  overflow-x: hidden;
+}

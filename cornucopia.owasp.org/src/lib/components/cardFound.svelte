@@ -1,8 +1,7 @@
 <script lang="ts">
   import { run } from 'svelte/legacy';
   import { Text } from "$lib/utils/text";
-  import {
-    GetCardAttacks, type Attack } from "$lib/cardAttacks";
+  import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
@@ -14,6 +13,7 @@
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
+  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
 
   interface Props {
     mappingData: any;
@@ -23,6 +23,7 @@
     languages: string[];
     language: string;
     capecData?: any;
+    versions: string[];
   }
 
   let {
@@ -31,6 +32,7 @@
     cards,
     routes,
     languages,
+    versions,
     language,
     capecData = undefined
   }: Props = $props();
@@ -51,6 +53,7 @@
   version={card.version}
   currentLanguage={language}
   {languages}
+  {versions}
 />
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
@@ -63,6 +66,9 @@
   {/if}
   {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
+  {/if}
+  {#if card.edition == "companion"}
+  <CompanionCardTaxonomy bind:card={card} {mappingData} {routes}></CompanionCardTaxonomy>
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>

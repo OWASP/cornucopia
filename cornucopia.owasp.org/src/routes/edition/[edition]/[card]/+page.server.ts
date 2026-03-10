@@ -7,7 +7,7 @@ import { CapecService } from "$lib/services/capecService";
 
 export const load = (({ params }) => {
     const edition =  params?.edition;
-    const version =  edition == 'webapp' ? '2.2' : '1.1';
+    const version =  edition == 'webapp' ? '2.2' : edition == 'mobileapp' ? '1.1' : '1.0';
     let asvsVersion: string = "4.0.3";
     if (params.version === '3.0') asvsVersion = '5.0';
     if (!DeckService.hasEdition(edition)) error(
@@ -22,6 +22,7 @@ export const load = (({ params }) => {
     return {
       edition: edition,
       version: version,
+      versions: DeckService.getVersions(edition),
       lang: 'en',
       card: legacyCardCodeFix(params.card.toUpperCase()),
       cards: new DeckService().getCardDataForEditionVersionLang(edition, version, 'en'),

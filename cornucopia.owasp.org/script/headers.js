@@ -28,6 +28,21 @@ function main() {
   Content-Security-Policy: base-uri 'self'; default-src 'none'; frame-src 'self' www.youtube.com youtube.com; connect-src 'self'; img-src 'self' i.ytimg.com; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'; upgrade-insecure-requests
 /404
   X-Robots-Tag: noindex
+/api/lang/mobileapp/1.1
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/lang/webapp/2.2
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/lang/webapp/3.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 /api/cre/mobileapp/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
