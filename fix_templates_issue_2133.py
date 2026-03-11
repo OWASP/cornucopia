@@ -54,18 +54,18 @@ def normalize_first_suit_table_row_heights(content_root, template_name):
 
     # Determine template variant by checking for QR in filename
     is_qr = "qr" in template_name.lower()
-    
+
     if is_qr:
         print("\n[Fix] Normalizing Table11 row heights (QR variant)...")
         # QR variant uses Table11 with a different structure
         fixes_applied = 0
-        
+
         # Fix Table11.4: 3.501cm -> 4.001cm
         table11_4 = auto_styles.find('.//style:style[@style:name="Table11.4"]', NS)
         if table11_4 is not None:
             row_props = table11_4.find("style:table-row-properties", NS)
             if row_props is not None:
-                current = row_props.get(f'{{{NS["style"]}}}row-height', '')
+                current = row_props.get(f'{{{NS["style"]}}}row-height', "")
                 if current == "3.501cm":
                     row_props.set(f'{{{NS["style"]}}}row-height', "4.001cm")
                     print(f"  ✓ Table11.4: row-height {current} → 4.001cm")
@@ -76,7 +76,7 @@ def normalize_first_suit_table_row_heights(content_root, template_name):
                 print("  ⚠ Table11.4 has no row-properties")
         else:
             print("  ⚠ Style Table11.4 not found")
-        
+
         if fixes_applied > 0:
             print(f"  ✓ Table11 row height normalized")
             return True
@@ -87,33 +87,33 @@ def normalize_first_suit_table_row_heights(content_root, template_name):
         print("\n[Fix] Normalizing Table10 row heights (standard variant)...")
         # Standard variant uses Table10
         fixes_applied = 0
-        
+
         # Fix Table10.2: 3.501cm -> 4.001cm
         table10_2 = auto_styles.find('.//style:style[@style:name="Table10.2"]', NS)
         if table10_2 is not None:
             row_props = table10_2.find("style:table-row-properties", NS)
             if row_props is not None:
-                current = row_props.get(f'{{{NS["style"]}}}row-height', '')
+                current = row_props.get(f'{{{NS["style"]}}}row-height', "")
                 if current == "3.501cm":
                     row_props.set(f'{{{NS["style"]}}}row-height', "4.001cm")
                     print(f"  ✓ Table10.2: row-height {current} → 4.001cm")
                     fixes_applied += 1
                 else:
                     print(f"  • Table10.2: already {current}")
-        
+
         # Fix Table10.3: 4.501cm -> 4.001cm
         table10_3 = auto_styles.find('.//style:style[@style:name="Table10.3"]', NS)
         if table10_3 is not None:
             row_props = table10_3.find("style:table-row-properties", NS)
             if row_props is not None:
-                current = row_props.get(f'{{{NS["style"]}}}row-height', '')
+                current = row_props.get(f'{{{NS["style"]}}}row-height', "")
                 if current == "4.501cm":
                     row_props.set(f'{{{NS["style"]}}}row-height', "4.001cm")
                     print(f"  ✓ Table10.3: row-height {current} → 4.001cm")
                     fixes_applied += 1
                 else:
                     print(f"  • Table10.3: already {current}")
-        
+
         if fixes_applied == 2:
             print("  ✓ Both row heights normalized to 4.001cm")
             return True
@@ -123,9 +123,6 @@ def normalize_first_suit_table_row_heights(content_root, template_name):
         else:
             print("  ℹ No changes needed or styles not found")
             return False
-
-
-
 
 
 def fix_template(template_path, output_path):
