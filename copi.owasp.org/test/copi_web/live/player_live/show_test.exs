@@ -250,6 +250,109 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert length(updated_game2.continue_votes) == 0
     end
 
+    test "next_round is rejected when round is closed but not all votes are cast", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      # Add a second player so votes are required
+      {:ok, player2} = Cornucopia.create_player(%{name: "Player 2", game_id: game_id})
+
+      {:ok, card1} =
+        Cornucopia.create_card(%{
+          category: "C", value: "AVC1", description: "D", edition: "webapp",
+          version: "2.2", external_id: "AVC_CARD1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      {:ok, card2} =
+        Cornucopia.create_card(%{
+          category: "C", value: "AVC2", description: "D", edition: "webapp",
+          version: "2.2", external_id: "AVC_CARD2", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      # Both players play cards in round 1 (round is closed), but no votes cast
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card1.id, played_in_round: 1})
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player2.id, card_id: card2.id, played_in_round: 1})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, unchanged_game} = Cornucopia.Game.find(game_id)
+      assert unchanged_game.rounds_played == 0
+    end
+
+    test "next_round advances when round is closed and all votes are cast", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, player2} = Cornucopia.create_player(%{name: "Player 2", game_id: game_id})
+
+      {:ok, card1} =
+        Cornucopia.create_card(%{
+          category: "C", value: "AVC3", description: "D", edition: "webapp",
+          version: "2.2", external_id: "AVC_CARD3", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      {:ok, card2} =
+        Cornucopia.create_card(%{
+          category: "C", value: "AVC4", description: "D", edition: "webapp",
+          version: "2.2", external_id: "AVC_CARD4", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      dealt1 = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card1.id, played_in_round: 1})
+      dealt2 = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player2.id, card_id: card2.id, played_in_round: 1})
+
+      # Both players vote on each other's card (all votes cast)
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: dealt1.id, player_id: player2.id})
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: dealt2.id, player_id: player.id})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+    end
+
+    test "all_votes_cast?/1 returns true when all players have voted on all cards", %{conn: _conn, player: _player} do
+      alias CopiWeb.PlayerLive.Show
+
+      vote = %{player_id: "p2"}
+      card_with_vote = %{played_in_round: 1, votes: [vote]}
+      player1 = %{dealt_cards: [card_with_vote]}
+      player2 = %{dealt_cards: [%{played_in_round: 1, votes: [%{player_id: "p1"}]}]}
+
+      game = %{rounds_played: 0, players: [player1, player2]}
+      assert Show.all_votes_cast?(game)
+    end
+
+    test "all_votes_cast?/1 returns false when votes are missing", %{conn: _conn, player: _player} do
+      alias CopiWeb.PlayerLive.Show
+
+      card_no_votes = %{played_in_round: 1, votes: []}
+      player1 = %{dealt_cards: [card_no_votes]}
+      player2 = %{dealt_cards: [%{played_in_round: 1, votes: []}]}
+
+      game = %{rounds_played: 0, players: [player1, player2]}
+      refute Show.all_votes_cast?(game)
+    end
+
     test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)

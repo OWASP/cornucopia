@@ -81,10 +81,14 @@ defmodule CopiWeb.PlayerLive.Show do
         {:noreply, socket}
       end
     else
-      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+      if all_votes_cast?(game) do
+        Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
 
-      if last_round?(game) do
-        Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+        if last_round?(game) do
+          Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+        end
+      else
+        Logger.warning("next_round rejected: not all votes cast. game_id: #{game.id}")
       end
     end
 
@@ -198,6 +202,21 @@ defmodule CopiWeb.PlayerLive.Show do
     players_with_no_cards = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil end)
 
     Enum.count(players_with_no_cards) > 0
+  end
+
+  def all_votes_cast?(game) do
+    current_round = game.rounds_played + 1
+    num_players = Enum.count(game.players)
+
+    cards_in_round =
+      game.players
+      |> Enum.flat_map(fn player -> player.dealt_cards end)
+      |> Enum.filter(fn card -> card.played_in_round == current_round end)
+
+    Enum.count(cards_in_round) == num_players and
+      Enum.all?(cards_in_round, fn card ->
+        Enum.count(card.votes) == num_players - 1
+      end)
   end
 
   def get_vote(dealt_card, player) do
