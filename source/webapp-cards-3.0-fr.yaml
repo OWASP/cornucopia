@@ -18,7 +18,7 @@ suits:
     id: "VE3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/VE3"
-    desc: "Robert peut entrer des données malveillantes car le format attendu n'est pas vérifié, ou des duplicatas sont acceptées, ou la structure n'est pas vérifiée, ou les éléments individuels de données ne sont pas nettoyés ou, préférablement, validés pour le format, le type, l'intervalle, la longueur et la liste blanche de charactères et formats"
+    desc: "Robert peut entrer des données malveillantes car le format attendu n'est pas vérifié, ou des duplicatas sont acceptées, ou la structure n'est pas vérifiée, ou les éléments individuels de données ne sont pas nettoyés ou, préférablement, validés pour le format, le type, l'intervalle, la longueur et la liste blanche de caractères et formats"
   -
     id: "VE4"
     value: "4"
