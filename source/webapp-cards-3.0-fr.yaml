@@ -523,7 +523,7 @@ paragraphs:
     text: "Elle essaie d'apporter des idées de modélisation de menace au niveau des équipes de développement qui utilisent les méthodologies Agile, ou qui sont plus portées sur les faiblesses des applications web que les autres types de vulnérabilité logicielle, ou ne sont pas familiarisées avec STRIDE et DREAD."
   -
     id: "T00270"
-    text: "L'ÉÉdition d'application web de Cornucopia est référencé comme ressource d'information dans le PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, janvier 2013."
+    text: "L'Édition d'application web de Cornucopia est référencé comme ressource d'information dans le PCI Security Standard Council's Information Supplement PCI DSS E-commerce Guidelines, v2, janvier 2013."
   -
     id: "T00300"
     text: "Le jeu de cartes (paquet)"
