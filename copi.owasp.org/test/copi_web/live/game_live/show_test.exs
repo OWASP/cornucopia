@@ -128,5 +128,21 @@ defmodule CopiWeb.GameLive.ShowTest do
       alias CopiWeb.GameLive.Show
       assert Show.card_played_in_round([], 1) == nil
     end
+
+    test "handle_info with non-matching topic is ignored", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game", edition: "webapp"})
+      {:ok, updated_other} = Cornucopia.Game.find(other_game.id)
+
+      send(show_live.pid, %{
+        topic: "game:#{other_game.id}",
+        event: "game:updated",
+        payload: updated_other
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
   end
 end

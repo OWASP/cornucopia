@@ -111,6 +111,30 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       # With no players, no one is still to play → round_open? is false → round_closed? is true
       assert Show.round_closed?(%{players: [], rounds_played: 0}) == true
 
+      # last_round? returns false when a player still has a nil-round card
+      player_with_unplayed = %{dealt_cards: [%{played_in_round: nil}]}
+      refute Show.last_round?(%{players: [player_with_unplayed], rounds_played: 0})
+
+      # last_round? returns true when all cards are played
+      player_all_played = %{dealt_cards: [%{played_in_round: 1}]}
+      assert Show.last_round?(%{players: [player_all_played], rounds_played: 0})
+
+      # player_first places current player first
+      other = %{id: "other-id"}
+      current = %{id: "current-id"}
+      current_player = %{id: "current-id"}
+      sorted = Show.player_first([other, current], current_player)
+      assert List.first(sorted).id == "current-id"
+
+      # get_vote returns nil when no vote, returns vote when found
+      dealt_no_vote = %{votes: []}
+      fake_player = %{id: "player-id"}
+      assert Show.get_vote(dealt_no_vote, fake_player) == nil
+
+      vote = %{player_id: "player-id"}
+      dealt_with_vote = %{votes: [vote]}
+      assert Show.get_vote(dealt_with_vote, fake_player) == vote
+
       assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
       assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
       assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
@@ -118,6 +142,115 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert Show.display_game_session("cumulus")   == "OWASP Cumulus Session:"
       assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
       assert Show.display_game_session("eop")       == "EoP Session:"
+    end
+
+    test "next_round when round is closed and not last round advances rounds_played",
+         %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card1} =
+        Cornucopia.create_card(%{
+          category: "C", value: "NR1", description: "D", edition: "webapp",
+          version: "2.2", external_id: "NR_CLOSED1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      {:ok, card2} =
+        Cornucopia.create_card(%{
+          category: "C", value: "NR2", description: "D", edition: "webapp",
+          version: "2.2", external_id: "NR_CLOSED2", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      # Card played in round 1 → round_open? = false
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card1.id, played_in_round: 1
+      })
+      # Unplayed card → last_round? = false
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card2.id, played_in_round: nil
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+      assert updated_game.finished_at == nil
+    end
+
+    test "next_round when round is closed and IS last round sets finished_at",
+         %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "NR3", description: "D", edition: "webapp",
+          version: "2.2", external_id: "NR_LAST1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      # Only card is played → no nil-round cards → last_round? = true
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+      assert updated_game.finished_at != nil
+    end
+
+    test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "TV1", description: "D", edition: "webapp",
+          version: "2.2", external_id: "TV_CARD1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 1
+
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt2.votes) == 0
     end
   end
 end

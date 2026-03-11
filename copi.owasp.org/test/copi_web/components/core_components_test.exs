@@ -119,4 +119,51 @@ defmodule CopiWeb.CoreComponentsTest do
     assert html =~ "Title"
     assert html =~ "Item 1"
   end
+  test "renders copy_url_button" do
+    assigns = %{uri: "http://example.com/game/123"}
+    html = rendered_to_string(~H"""
+    <CopiWeb.CoreComponents.Buttons.copy_url_button uri={@uri} />
+    """)
+    assert html =~ "copy-url-btn"
+    assert html =~ "http://example.com/game/123"
+  end
+
+  test "renders header component" do
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <CopiWeb.CoreComponents.Headers.header>
+      Page Title
+      <:subtitle>A subtitle</:subtitle>
+    </CopiWeb.CoreComponents.Headers.header>
+    """)
+    assert html =~ "Page Title"
+    assert html =~ "A subtitle"
+  end
+
+  test "renders header2 component" do
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <CopiWeb.CoreComponents.Headers.header2>Section Title</CopiWeb.CoreComponents.Headers.header2>
+    """)
+    assert html =~ "Section Title"
+    assert html =~ "<h2"
+  end
+
+  test "renders button component" do
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <CopiWeb.CoreComponents.Buttons.button>Click me</CopiWeb.CoreComponents.Buttons.button>
+    """)
+    assert html =~ "Click me"
+    assert html =~ "<button"
+  end
+
+  test "renders primary_button component" do
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <CopiWeb.CoreComponents.Buttons.primary_button>Submit</CopiWeb.CoreComponents.Buttons.primary_button>
+    """)
+    assert html =~ "Submit"
+    assert html =~ "bg-indigo-600"
+  end
 end

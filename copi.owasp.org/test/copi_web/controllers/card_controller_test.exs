@@ -44,4 +44,11 @@ defmodule CopiWeb.CardControllerTest do
   end
 
 
+  describe "format_capec" do
+    test "returns refs unchanged" do
+      alias CopiWeb.CardController
+      assert CardController.format_capec([1, 2, 3]) == [1, 2, 3]
+      assert CardController.format_capec([]) == []
+    end
+  end
 end

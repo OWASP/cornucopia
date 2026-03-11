@@ -69,4 +69,24 @@ defmodule CopiWeb.ApiControllerTest do
 
     assert json_response(conn, 403)["error"] == "Player already played a card in this round"
   end
+
+  test "play_card fails if game not found", %{conn: conn, player: player, dealt_card: dealt_card} do
+    conn = put(conn, "/api/games/nonexistent-game-id/players/#{player.id}/card", %{
+      "game_id" => "nonexistent-game-id",
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 404)["error"] == "Could not find game"
+  end
+
+  test "play_card fails if player not in game", %{conn: conn, game: game, dealt_card: dealt_card} do
+    conn = put(conn, "/api/games/#{game.id}/players/nonexistent-player-id/card", %{
+      "game_id" => game.id,
+      "player_id" => "nonexistent-player-id",
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 404)["error"] == "Could not find player and dealt card"
+  end
 end
