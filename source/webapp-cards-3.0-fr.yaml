@@ -63,7 +63,7 @@ suits:
     id: "VEQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/VEQ"
-    desc: "Xavier peut injecter des données dans un client ou un système interpréteur, car une interface paramétrée n'est pas utilisée, , ou n'a pas été implémentée correctement, ou les données n'ont pas été encodées, nettoyées ou échappées correctement pour le contexte, ou il n'y a pas de politique restrictive sur le code ou les ajouts de données"
+    desc: "Xavier peut injecter des données dans un client ou un système interpréteur, car une interface paramétrée n'est pas utilisée, ou n'a pas été implémentée correctement, ou les données n'ont pas été encodées, nettoyées ou échappées correctement pour le contexte, ou il n'y a pas de politique restrictive sur le code ou les ajouts de données"
   -
     id: "VEK"
     value: "K"
