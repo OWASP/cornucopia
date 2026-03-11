@@ -1309,19 +1309,19 @@ paragraphs:
     text: "2.2"
   -
     id: "T03771"
-    text: "Migrated the cross-references from SCP to the DevGuide Web Checklist v4.1.9."
+    text: "Les références croisées ont été migrées de SCP vers la DevGuide Web Checklist v4.1.9."
   -
     id: "T03772"
     text: "3.0"
   -
     id: "T03773"
-    text: "ASVS has been migrated from v4.0.3 to v5.0. The text on the cards has been updated to include MFA and passkeys as an option for authentication. Cards within the session management suit have been updated to align with modern session management Practices."
+    text: "L'ASVS a été migrée de la version 4.0.3 à la version 5.0. Le texte des cartes a été mis à jour pour inclure la MFA et les passkeys comme option d'authentification. Les cartes de la famille « gestion de session » ont été mises à jour pour être alignées sur les pratiques modernes de gestion de session."
   -
     id: "T03774"
     text: "3.0"
   -
     id: "T03775"
-    text: "STRIDE categories have been added to each cards"
+    text: "Des catégories STRIDE ont été ajoutées à chaque carte"
   -
     id: "T03800"
     text: "Contributeurs du projet"
