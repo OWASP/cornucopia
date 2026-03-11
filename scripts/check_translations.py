@@ -62,9 +62,8 @@ class TranslationChecker:
                 base_name = "-".join(parts[:-1])
 
                 # Only process card files with language codes
-                # Matches 2-letter codes (e.g. en, es) and regional codes (e.g. pt_pt, no_nb)
-                lang_pattern = re.compile(r"^[a-z]{2}([_-][a-z]{2})?$")
-                if "cards" in base_name and lang_pattern.match(lang):
+                # Accept 2-char codes (e.g. "en", "es") and compound codes (e.g. "no_nb", "pt_br")
+                if "cards" in base_name and re.match(r"^[a-z]{2}(_[a-z]{2})?$", lang):
                     file_groups[base_name].append(yaml_file)
 
         return file_groups
@@ -162,9 +161,9 @@ class TranslationChecker:
             "hu": "Hungarian",
             "it": "Italian",
             "nl": "Dutch",
-            "no-nb": "Norwegian",
-            "pt-br": "Portuguese (Brazil)",
-            "pt-pt": "Portuguese (Portugal)",
+            "no_nb": "Norwegian",
+            "pt_br": "Portuguese (Brazil)",
+            "pt_pt": "Portuguese (Portugal)",
             "ru": "Russian",
         }
 
