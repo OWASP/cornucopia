@@ -118,7 +118,7 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    desc: "Claudia peut effectuer davantage de fonctions critiques car l'authentification est trop inconsistent ou faible (ex : ne pas utiliser de clés d'accès ou d'autre méthode d'authentication forte comme une méthode MFA), ou la réauthentification n'est pas requise pour ces fonctions"
+    desc: "Claudia peut effectuer davantage de fonctions critiques car l'authentification est trop incohérente ou faible (ex : ne pas utiliser de clés d'accès ou d'autres méthodes d'authentification forte comme une méthode MFA), ou la réauthentification n'est pas requise pour ces fonctions"
   -
     id: "ATX"
     value: "10"
