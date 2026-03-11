@@ -812,7 +812,7 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
 
     for k, v in replacement_values:
         # Avoid expensive regex if key is not even in text
-        if k.strip() not in el_text:
+        if not isinstance(k, str) or k.strip() not in el_text:
             continue
 
         el_new = get_replacement_mapping_value(k, v, el_text)
@@ -891,7 +891,7 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
 
 def get_valid_layout_choices() -> List[str]:
     layouts = []
-    if convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
+    if not convert_vars.args.layout or convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
         for layout in convert_vars.LAYOUT_CHOICES:
             if layout not in ("all", "guide"):
                 layouts.append(layout)
