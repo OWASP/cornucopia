@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad peut obtenir le mot de passe d'un utilisateur ou d'autres secrets comme des codes MFA ou biometriques, de par l'observation pendant la saisie, ou à partir d'un cache local, de la mémoire, en transit, par lecture d'une ressource non protégée, parce qu'ils sont communément répandus ou fuités"
+    desc: "Muhammad peut obtenir le mot de passe d'un utilisateur ou d'autres secrets comme des codes MFA ou biométriques, de par l'observation pendant la saisie, ou à partir d'un cache local, de la mémoire, en transit, par lecture d'une ressource non protégée, parce qu'ils sont communément répandus ou fuités"
   -
     id: "AT4"
     value: "4"
