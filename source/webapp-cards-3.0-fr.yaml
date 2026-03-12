@@ -398,7 +398,7 @@ suits:
     id: "C9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/C9"
-    desc: "Mike peut mal utilisé une application en utilisant une fonction valide trop rapidement, ou trop fréquemment, or d'une autre façon que ce qui a été prévu, ou consomme les ressources de l'application, ou cause des situations de compétition, ou sur-utitilise une fonctionnalité"
+    desc: "Mike peut mal utilisé une application en utilisant une fonction valide trop rapidement, ou trop fréquemment, or d'une autre façon que ce qui a été prévu, ou consomme les ressources de l'application, ou cause des situations de compétition, ou sur-utilise une fonctionnalité"
   -
     id: "CX"
     value: "10"
