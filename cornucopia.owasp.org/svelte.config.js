@@ -280,7 +280,7 @@ export default {
 			]
 		},
 		csrf: {
-			checkOrigin: true
+			trustedOrigins: ['https://owaspcornucopia.org', 'https://cornucopia.owasp.org']
 		}
 	}
 };
