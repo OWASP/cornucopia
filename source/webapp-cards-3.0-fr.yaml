@@ -1237,13 +1237,10 @@ paragraphs:
     text: "1.1"
   -
     id: "T03550"
-    text: "Date corrigée pour la v1.05 du changelog. "
+    text: "Date corrigée pour la v1.05 du changelog. Références croisées mises à jour en fonction de la version 2014 d'ASVS. "
   -
     id: "T03560"
-    text: "Références croisées mises à jour en fonction de la version 2014 d'ASVS. "
-  -
-    id: "T03570"
-    text: "Mise à jour des contributeurs. "
+    text: "Mise à jour des contributeurs."
   -
     id: "T03570"
     text: "Modifications mineures du texte des cartes pour améliorer la lisibilité."
