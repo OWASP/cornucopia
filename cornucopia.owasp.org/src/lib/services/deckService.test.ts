@@ -297,6 +297,29 @@ suits:
             const result = deckService.getCards('en');
             expect(result).toBeInstanceOf(Map);
         });
+
+        it('should return fully-merged cards on second call (cache must not be poisoned by partial result)', () => {
+            const mobileCard = { id: 'MOBILE-1', edition: 'mobileapp' } as Card;
+            const webCard = { id: 'WEB-1', edition: 'webapp' } as Card;
+
+            vi.spyOn(deckService, 'getCardDataForEditionVersionLang').mockImplementation(
+                (edition: string, _version: string, _lang: string) => {
+                    if (edition === 'mobileapp') return new Map([['MOBILE-1', mobileCard]]);
+                    if (edition === 'webapp') return new Map([['WEB-1', webCard]]);
+                    return new Map();
+                }
+            );
+
+            // First call — populates cache
+            const firstResult = deckService.getCards('en');
+            expect(firstResult.has('MOBILE-1')).toBe(true);
+            expect(firstResult.has('WEB-1')).toBe(true);
+
+            // Second call — must hit cache with fully-merged result, not a partial one
+            const secondResult = deckService.getCards('en');
+            expect(secondResult.has('MOBILE-1')).toBe(true);
+            expect(secondResult.has('WEB-1')).toBe(true);
+        });
     }, 10000);
 
     describe('getCardDataForEditionVersionLang', () => {

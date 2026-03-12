@@ -70,8 +70,8 @@ export class DeckService {
         const decks = DeckService.latests;
         for (let i in decks) {
             cards = new Map([...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang), ...cards]);
-            DeckService.cache.push({ lang: lang, data: cards, version: 'latest' });
         }
+        DeckService.cache.push({ lang: lang, data: cards, version: 'latest' });
         return cards;
     }
 
