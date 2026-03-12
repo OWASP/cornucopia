@@ -33,7 +33,7 @@ suits:
     id: "VE6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/VE6"
-    desc: "ason peut contourner les routines de validation centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
+    desc: "Jason peut contourner les routines de validation centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
   -
     id: "VE7"
     value: "7"
