@@ -33,7 +33,7 @@ suits:
     id: "VE6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/VE6"
-    desc: "Jason peut contourner les routines de validation centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
+    desc: "Jason peut contourner les routines d'encodage centralisées, car celles-ci ne sont pas utilisées à chaque saisie"
   -
     id: "VE7"
     value: "7"
@@ -188,7 +188,7 @@ suits:
     id: "SM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/SM9"
-    desc: "Ivan peut voler des identifiants de session ou jetons d'autorisation car ceux-ci sont transmis via des canaux non sécurisés, ou sont journalisés, ou sont révélés dans les messages d'erreur, ou sont inutilement accessibles par du code, une mémoire tampon ou des équilibreurs de charge que l'attaquant peut influencer ou modifier"
+    desc: "Ivan peut voler des identifiants de session ou des jetons d'autorisation car ceux-ci sont transmis via des canaux non sécurisés, ou sont journalisés, ou sont révélés dans les messages d'erreur, ou sont inclus dans les URLs ou sont inutilement accessibles par du code, une mémoire tampon ou des équilibreurs de charge que l'attaquant peut influencer ou modifier"
   -
     id: "SMX"
     value: "10"
@@ -198,7 +198,7 @@ suits:
     id: "SMJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/SMJ"
-    desc: "Jeff peut réutiliser des identifiants de session volés et/ou jetons car ils sont traités de manière confidentielle ou parce qu'il n'y a pas de preuve de possession forte (ex. engagement par certificat, appareil, adresse IP, agent utilisateur, etc.)"
+    desc: "Jeff peut réutiliser des identifiants de session volés et/ou jetons car ils ne sont pas traités de manière confidentielle ou parce qu'il n'y a pas de preuve de possession forte (ex. engagement par certificat, appareil, adresse IP, agent utilisateur, etc.)"
   -
     id: "SMQ"
     value: "Q"
@@ -408,7 +408,7 @@ suits:
     id: "CJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CJ"
-    desc: "Roman peut exploiter l'application car elle a été compilée ou déployée de manière non sécurisée ou sa configuration n'est pas sécurisée par défaut, ou parce que les informations de sécurité n'ont pas été documentées ou transmises aux équipes opérationnelles"
+    desc: "Roman peut exploiter l'application car elle a été compilée ou déployée de manière non sécurisée ou sa configuration n'est pas sécurisée par défaut, ou parce que les informations de sécurité n'ont pas été documentées ou transmises aux équipes opérationnelles, ou l'utilisateur n'a pas été averti et l'accès bloqué quand les fonctionnalités de sécurité ne sont pas supportées ou sont désactivées"
   -
     id: "CQ"
     value: "Q"
