@@ -286,5 +286,111 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
     end
+
+    test "toggle_vote should not work before game starts", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      # Ensure game has NOT started (started_at is nil)
+      assert game.started_at == nil
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "TV1", description: "D", edition: "webapp",
+          version: "2.2", external_id: "TV_CARD_PRE_GAME", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Attempt to vote before game starts - should be ignored
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 0
+    end
+
+    test "toggle_vote should not work after game ends", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      # Start the game
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "TV1", description: "D", edition: "webapp",
+          version: "2.2", external_id: "TV_CARD_AFTER_END", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      # Now end the game
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, finished_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Attempt to vote after game ends - should be ignored
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 0
+    end
+
+    test "toggle_continue_vote should not work before game starts", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      # Ensure game has NOT started (started_at is nil)
+      assert game.started_at == nil
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Attempt to continue vote before game starts - should be ignored
+      render_click(show_live, "toggle_continue_vote", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert length(updated_game.continue_votes) == 0
+    end
+
+    test "toggle_continue_vote should not work after game ends", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      # Start the game
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      # Now end the game
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, finished_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Attempt to continue vote after game ends - should be ignored
+      render_click(show_live, "toggle_continue_vote", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert length(updated_game.continue_votes) == 0
+    end
   end
 end
