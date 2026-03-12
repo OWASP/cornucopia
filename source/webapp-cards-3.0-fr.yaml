@@ -183,7 +183,7 @@ suits:
     id: "SM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
-    desc: "Matt peut profiter abusivement des sessions car l'application ne nécessite pas la réauthentification périodique après qu'une limite temporaire de session a été atteinte, un compte terminé, ou quand les privilèges ont changé, ou après n'importe quel changement brusque ou risqué dans les paramètres d'authentification d'utilisateur ou d'attributs environementaux et contextuels (ex. adresse IP, appareil, localisation, temps du jour, navigateur, etc.)"
+    desc: "Matt peut profiter abusivement des sessions car l'application ne nécessite pas la réauthentification périodique après qu'une limite temporaire de session a été atteinte, un compte terminé, ou quand les privilèges ont changé, ou après n'importe quel changement brusque ou risqué dans les paramètres d'authentification d'utilisateur ou d'attributs environnementaux et contextuels (ex. adresse IP, appareil, localisation, temps du jour, navigateur, etc.)"
   -
     id: "SM9"
     value: "9"
