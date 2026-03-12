@@ -439,6 +439,7 @@ suits:
     id: "JOB"
     value: "B"
     url: "https://cornucopia.owasp.org/cards/JOB"
+    card: "Joker"
     desc: "Bob peut influencer, altérer ou affecter l'application de façon à ce qu'elle ne soit plus conforme aux exigences légales, réglementaires, contractuelles ou autres exigences de l'organisation"
     misc: "Découvrez comment les vulnérabilités peuvent être corrigées dans la OWASP® Juice Shop, Security Shepherd, ou en utilisant les défis en ligne du OWASP® Hacking-lab gratuit"
 paragraphs:
