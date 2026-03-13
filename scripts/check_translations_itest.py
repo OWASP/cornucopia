@@ -29,12 +29,16 @@ class TestTranslationTagsIntegration(unittest.TestCase):
 
     def test_source_directory_exists(self) -> None:
         """Test that the source directory exists."""
-        self.assertTrue(self.source_dir.exists(), f"Source directory not found: {self.source_dir}")
+        self.assertTrue(
+            self.source_dir.exists(), f"Source directory not found: {self.source_dir}"
+        )
 
     def test_english_files_exist(self) -> None:
         """Test that English card files exist."""
         english_files = list(self.source_dir.glob("*-cards-*-en.yaml"))
-        self.assertGreater(len(english_files), 0, "No English card files found in source directory")
+        self.assertGreater(
+            len(english_files), 0, "No English card files found in source directory"
+        )
 
     def test_translations_completeness(self) -> None:
         """
@@ -59,7 +63,9 @@ class TestTranslationTagsIntegration(unittest.TestCase):
                     total_issues += len(issues.get("untranslated", []))
                     total_issues += len(issues.get("empty", []))
 
-            self.fail(f"\\n\\nTranslation issues found ({total_issues} total):\\n\\n{report}\\n")
+            self.fail(
+                f"\\n\\nTranslation issues found ({total_issues} total):\\n\\n{report}\\n"
+            )
 
     def test_no_duplicate_tags_in_english(self) -> None:
         """Test that English files don't have duplicate T0xxx tags."""
@@ -82,7 +88,11 @@ class TestTranslationTagsIntegration(unittest.TestCase):
                                     duplicates.append(tag_id)
                                 seen_ids.add(tag_id)
 
-                self.assertEqual(len(duplicates), 0, f"Duplicate tags found in {eng_file.name}: {duplicates}")
+                self.assertEqual(
+                    len(duplicates),
+                    0,
+                    f"Duplicate tags found in {eng_file.name}: {duplicates}",
+                )
 
     def test_tag_format(self) -> None:
         """Test that tags follow the T0xxxx format."""
@@ -95,7 +105,8 @@ class TestTranslationTagsIntegration(unittest.TestCase):
 
             for tag_id in tags.keys():
                 self.assertIsNotNone(
-                    tag_pattern.match(tag_id), f"Tag {tag_id} in {eng_file.name} doesn't match format T0xxxx"
+                    tag_pattern.match(tag_id),
+                    f"Tag {tag_id} in {eng_file.name} doesn't match format T0xxxx",
                 )
 
     def test_generate_markdown_report(self) -> None:

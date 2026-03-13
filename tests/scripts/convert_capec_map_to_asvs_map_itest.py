@@ -25,16 +25,26 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
         self.base_path = Path(__file__).parent.parent.parent.resolve()
 
         # Set up test input file path
-        self.test_input_file = self.base_path / "tests" / "test_files" / "source" / "webapp-mappings-3.0.yaml"
+        self.test_input_file = (
+            self.base_path
+            / "tests"
+            / "test_files"
+            / "source"
+            / "webapp-mappings-3.0.yaml"
+        )
 
         # Create temporary output directory
         self.temp_output_dir = tempfile.mkdtemp()
-        self.test_capec_output_file = Path(self.temp_output_dir) / "webapp-capec-3.0.yaml"
+        self.test_capec_output_file = (
+            Path(self.temp_output_dir) / "webapp-capec-3.0.yaml"
+        )
         self.test_asvs_output_file = Path(self.temp_output_dir) / "webapp-asvs-3.0.yaml"
 
         # Verify test input file exists
         if not self.test_input_file.exists():
-            raise FileNotFoundError(f"Test input file not found: {self.test_input_file}")
+            raise FileNotFoundError(
+                f"Test input file not found: {self.test_input_file}"
+            )
 
     def tearDown(self) -> None:
         """Clean up test output directory"""
@@ -60,12 +70,18 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
         # Verify we extracted some mappings
         self.assertIsInstance(capec_mapping, dict)
-        self.assertGreater(len(capec_mapping), 0, "Should extract at least one CAPEC mapping")
+        self.assertGreater(
+            len(capec_mapping), 0, "Should extract at least one CAPEC mapping"
+        )
 
         # Verify the structure of extracted data
         for capec_code, asvs_set in capec_mapping.items():
-            self.assertIsInstance(capec_code, int, f"CAPEC code {capec_code} should be int")
-            self.assertIsInstance(asvs_set, set, f"ASVS set for {capec_code} should be a set")
+            self.assertIsInstance(
+                capec_code, int, f"CAPEC code {capec_code} should be int"
+            )
+            self.assertIsInstance(
+                asvs_set, set, f"ASVS set for {capec_code} should be a set"
+            )
 
     def test_extract_asvs_to_capec_mappings_from_test_data(self):
         """Test extracting ASVS to CAPEC mappings from real test data"""
@@ -76,15 +92,23 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
         # Verify we extracted some mappings
         self.assertIsInstance(asvs_mapping, dict)
-        self.assertGreater(len(asvs_mapping), 0, "Should extract at least one ASVS mapping")
+        self.assertGreater(
+            len(asvs_mapping), 0, "Should extract at least one ASVS mapping"
+        )
 
         # Verify the structure of extracted data
         for asvs_req, capec_set in asvs_mapping.items():
-            self.assertIsInstance(asvs_req, str, f"ASVS requirement {asvs_req} should be string")
-            self.assertIsInstance(capec_set, set, f"CAPEC set for {asvs_req} should be a set")
+            self.assertIsInstance(
+                asvs_req, str, f"ASVS requirement {asvs_req} should be string"
+            )
+            self.assertIsInstance(
+                capec_set, set, f"CAPEC set for {asvs_req} should be a set"
+            )
             # Each CAPEC code in the set should be an integer
             for capec_code in capec_set:
-                self.assertIsInstance(capec_code, str, f"CAPEC code {capec_code} should be int")
+                self.assertIsInstance(
+                    capec_code, str, f"CAPEC code {capec_code} should be int"
+                )
 
     def test_convert_to_output_format_with_test_data(self):
         """Test converting extracted mappings to output format"""
@@ -104,7 +128,10 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
     def test_save_yaml_file_integration(self):
         """Test saving YAML file"""
-        test_data = {54: {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]}, 116: {"owasp_asvs": ["15.2.3", "16.2.5"]}}
+        test_data = {
+            54: {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]},
+            116: {"owasp_asvs": ["15.2.3", "16.2.5"]},
+        }
 
         # Save the file
         success = capec_map.save_yaml_file(self.test_capec_output_file, test_data)
@@ -153,7 +180,9 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
         self.assertGreater(len(asvs_mapping), 0)
 
         # Convert to output format with capec_codes parameter
-        output_data_asvs = capec_map.convert_to_output_format(asvs_mapping, parameter="capec_codes")
+        output_data_asvs = capec_map.convert_to_output_format(
+            asvs_mapping, parameter="capec_codes"
+        )
 
         # Save ASVS output
         success = capec_map.save_yaml_file(self.test_asvs_output_file, output_data_asvs)
@@ -181,7 +210,9 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
         expected_capec_codes = [54, 116, 143, 144]
 
         for code in expected_capec_codes:
-            self.assertIn(code, capec_mapping, f"CAPEC code {code} should be in mappings")
+            self.assertIn(
+                code, capec_mapping, f"CAPEC code {code} should be in mappings"
+            )
 
     def test_specific_asvs_requirements_in_test_data(self):
         """Test that ASVS requirements from test data are extracted correctly"""
@@ -194,7 +225,11 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
         # Each ASVS requirement should map to one or more CAPEC codes
         for asvs_req, capec_codes in asvs_mapping.items():
             self.assertIsInstance(capec_codes, set)
-            self.assertGreater(len(capec_codes), 0, f"ASVS {asvs_req} should map to at least one CAPEC code")
+            self.assertGreater(
+                len(capec_codes),
+                0,
+                f"ASVS {asvs_req} should map to at least one CAPEC code",
+            )
 
     def test_asvs_requirements_merged_correctly(self):
         """Test that ASVS requirements are merged correctly for duplicate CAPEC codes"""
@@ -207,14 +242,20 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
             # Convert to list to check for duplicates
             asvs_list = list(asvs_set)
             self.assertEqual(
-                len(asvs_list), len(set(asvs_list)), f"CAPEC code {capec_code} has duplicate ASVS requirements"
+                len(asvs_list),
+                len(set(asvs_list)),
+                f"CAPEC code {capec_code} has duplicate ASVS requirements",
             )
 
     def test_output_to_expected_location(self):
         """Test saving both output files to the expected test location"""
         # Set up the expected output paths
-        expected_capec_output_path = self.base_path / "tests" / "test_files" / "output" / "webapp-capec-3.0.yaml"
-        expected_asvs_output_path = self.base_path / "tests" / "test_files" / "output" / "webapp-asvs-3.0.yaml"
+        expected_capec_output_path = (
+            self.base_path / "tests" / "test_files" / "output" / "webapp-capec-3.0.yaml"
+        )
+        expected_asvs_output_path = (
+            self.base_path / "tests" / "test_files" / "output" / "webapp-asvs-3.0.yaml"
+        )
 
         # Create output directory if it doesn't exist
         expected_capec_output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -238,7 +279,9 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
         # Process ASVS mappings
         asvs_mapping = capec_map.extract_asvs_to_capec_mappings(data)
-        output_data_asvs = capec_map.convert_to_output_format(asvs_mapping, parameter="capec_codes")
+        output_data_asvs = capec_map.convert_to_output_format(
+            asvs_mapping, parameter="capec_codes"
+        )
 
         # Save ASVS to expected location
         success = capec_map.save_yaml_file(expected_asvs_output_path, output_data_asvs)
@@ -304,7 +347,9 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
         # Extract and convert ASVS mappings
         asvs_mapping = capec_map.extract_asvs_to_capec_mappings(data)
-        output_data_asvs = capec_map.convert_to_output_format(asvs_mapping, parameter="capec_codes")
+        output_data_asvs = capec_map.convert_to_output_format(
+            asvs_mapping, parameter="capec_codes"
+        )
 
         # Save ASVS output
         success = capec_map.save_yaml_file(self.test_asvs_output_file, output_data_asvs)
@@ -325,7 +370,9 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
         # Test ASVS output
         asvs_mapping = capec_map.extract_asvs_to_capec_mappings(data)
-        output_data_asvs = capec_map.convert_to_output_format(asvs_mapping, parameter="capec_codes")
+        output_data_asvs = capec_map.convert_to_output_format(
+            asvs_mapping, parameter="capec_codes"
+        )
         capec_map.save_yaml_file(self.test_asvs_output_file, output_data_asvs)
         reloaded_asvs_data = capec_map.load_yaml_file(self.test_asvs_output_file)
         self.assertEqual(reloaded_asvs_data, output_data_asvs)

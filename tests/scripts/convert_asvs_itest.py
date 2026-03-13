@@ -33,7 +33,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
             / "asvs-5.0"
             / "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
         )
-        self.test_asvs_to_capec = self.base_path / "tests" / "test_files" / "source" / "webapp-asvs-3.0.yaml"
+        self.test_asvs_to_capec = (
+            self.base_path / "tests" / "test_files" / "source" / "webapp-asvs-3.0.yaml"
+        )
 
         # Create temporary output directory
         self.temp_output_dir = tempfile.mkdtemp()
@@ -41,9 +43,13 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
         # Verify test files exist
         if not self.test_input_file.exists():
-            raise FileNotFoundError(f"Test input file not found: {self.test_input_file}")
+            raise FileNotFoundError(
+                f"Test input file not found: {self.test_input_file}"
+            )
         if not self.test_asvs_to_capec.exists():
-            raise FileNotFoundError(f"Test ASVS to CAPEC mapping file not found: {self.test_asvs_to_capec}")
+            raise FileNotFoundError(
+                f"Test ASVS to CAPEC mapping file not found: {self.test_asvs_to_capec}"
+            )
 
     def tearDown(self) -> None:
         """Clean up test output directory"""
@@ -58,7 +64,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
         self.assertIsInstance(data, dict)
         self.assertIn("Requirements", data)
         self.assertIn("Name", data)
-        self.assertEqual(data["Name"], "Application Security Verification Standard Project")
+        self.assertEqual(
+            data["Name"], "Application Security Verification Standard Project"
+        )
 
     def test_load_test_yaml_mapping(self):
         """Test loading the test ASVS to CAPEC YAML mapping file"""
@@ -139,11 +147,21 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
         # Check that some directories were created
         output_dirs = [d for d in self.test_output_path.iterdir() if d.is_dir()]
-        self.assertGreater(len(output_dirs), 0, "Should have created at least one directory")
+        self.assertGreater(
+            len(output_dirs), 0, "Should have created at least one directory"
+        )
 
         # Check for level control directories
-        level_dirs = [d for d in output_dirs if d.name.startswith("level-") and d.name.endswith("-controls")]
-        self.assertEqual(len(level_dirs), 3, "Should have created 3 level control directories (L1, L2, L3)")
+        level_dirs = [
+            d
+            for d in output_dirs
+            if d.name.startswith("level-") and d.name.endswith("-controls")
+        ]
+        self.assertEqual(
+            len(level_dirs),
+            3,
+            "Should have created 3 level control directories (L1, L2, L3)",
+        )
 
         # Verify level control index files exist
         for level in [1, 2, 3]:
@@ -175,16 +193,22 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
         # Find a requirement directory (e.g., 01-encoding-and-sanitization)
         requirement_dirs = [
-            d for d in self.test_output_path.iterdir() if d.is_dir() and not d.name.startswith("level-")
+            d
+            for d in self.test_output_path.iterdir()
+            if d.is_dir() and not d.name.startswith("level-")
         ]
-        self.assertGreater(len(requirement_dirs), 0, "Should have created requirement directories")
+        self.assertGreater(
+            len(requirement_dirs), 0, "Should have created requirement directories"
+        )
 
         # Check first requirement directory
         first_req_dir = sorted(requirement_dirs)[0]
 
         # It should have subdirectories for items
         item_dirs = [d for d in first_req_dir.iterdir() if d.is_dir()]
-        self.assertGreater(len(item_dirs), 0, "Requirement should have item subdirectories")
+        self.assertGreater(
+            len(item_dirs), 0, "Requirement should have item subdirectories"
+        )
 
         # Check first item directory for index.md
         first_item_dir = sorted(item_dirs)[0]
@@ -219,7 +243,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
         # Look for pages with CAPEC mappings
         # Check the first requirement
         requirement_dirs = [
-            d for d in self.test_output_path.iterdir() if d.is_dir() and not d.name.startswith("level-")
+            d
+            for d in self.test_output_path.iterdir()
+            if d.is_dir() and not d.name.startswith("level-")
         ]
 
         found_capec_reference = False
@@ -243,7 +269,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
     def test_main_integration(self):
         """Test the main function with real test files"""
         # Create permanent output directory for this test
-        test_output_dir = self.base_path / "tests" / "test_files" / "output" / "asvs_integration_test"
+        test_output_dir = (
+            self.base_path / "tests" / "test_files" / "output" / "asvs_integration_test"
+        )
 
         # Clean up if exists
         if test_output_dir.exists():
@@ -265,7 +293,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
         asvs.convert_vars.args = asvs.parse_arguments(test_args)
 
         # Run main workflow (without calling main() to avoid sys.argv issues)
-        capec_version = asvs.get_valid_capec_version(asvs.convert_vars.args.capec_version)
+        capec_version = asvs.get_valid_capec_version(
+            asvs.convert_vars.args.capec_version
+        )
         asvs_version = asvs.get_valid_asvs_version(asvs.convert_vars.args.asvs_version)
         asvs.set_logging()
 
@@ -273,7 +303,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
             asvs.empty_folder(Path(asvs.convert_vars.args.output_path))
             asvs.create_folder(Path(asvs.convert_vars.args.output_path))
             data = asvs.load_json_file(Path(asvs.convert_vars.args.input_path))
-            asvs_map = asvs.load_asvs_to_capec_mapping(Path(asvs.convert_vars.args.asvs_to_capec))
+            asvs_map = asvs.load_asvs_to_capec_mapping(
+                Path(asvs.convert_vars.args.asvs_to_capec)
+            )
             asvs.create_asvs_pages(data, asvs_map, capec_version, asvs_version)
 
         # Verify logging
@@ -285,7 +317,9 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
         # Verify some content was created
         output_items = list(test_output_dir.iterdir())
-        self.assertGreater(len(output_items), 0, "Should have created output files/directories")
+        self.assertGreater(
+            len(output_items), 0, "Should have created output files/directories"
+        )
 
         # Clean up
         if test_output_dir.exists():
@@ -371,7 +405,9 @@ class TestRealFileOperations(unittest.TestCase):
         (sub_folder / "file3.txt").write_text("content3")
 
         # Verify content exists
-        self.assertEqual(len(list(test_folder.rglob("*"))), 4)  # 2 files + 1 folder + 1 file in folder
+        self.assertEqual(
+            len(list(test_folder.rglob("*"))), 4
+        )  # 2 files + 1 folder + 1 file in folder
 
         # Empty the folder
         asvs.empty_folder(test_folder)
@@ -383,7 +419,10 @@ class TestRealFileOperations(unittest.TestCase):
         """Test loading JSON from real file"""
         # Create a test JSON file
         test_json_file = self.test_path / "test.json"
-        test_data = {"Requirements": [{"Ordinal": 1, "Name": "Test Requirement"}], "Version": "5.0.0"}
+        test_data = {
+            "Requirements": [{"Ordinal": 1, "Name": "Test Requirement"}],
+            "Version": "5.0.0",
+        }
 
         with open(test_json_file, "w", encoding="utf-8") as f:
             import json

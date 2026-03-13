@@ -22,9 +22,16 @@ def make_cre_link(cre_id: str, frontend: bool = False) -> str:
         return f"{opencre_rest_url}/id/{cre_id}"
 
 
-def produce_webapp_mappings(source_file: Dict[Any, Any], standards_to_add: list[str]) -> Dict[Any, Any]:
+def produce_webapp_mappings(
+    source_file: Dict[Any, Any], standards_to_add: list[str]
+) -> Dict[Any, Any]:
     base = {
-        "meta": {"edition": "webapp", "component": "mappings", "language": "ALL", "version": CORNUCOPIA_VERSION},
+        "meta": {
+            "edition": "webapp",
+            "component": "mappings",
+            "language": "ALL",
+            "version": CORNUCOPIA_VERSION,
+        },
     }
     for indx, suit in enumerate(source_file.copy()["suits"]):
         for card_indx, card in enumerate(suit["cards"]):
@@ -35,8 +42,8 @@ def produce_webapp_mappings(source_file: Dict[Any, Any], standards_to_add: list[
                 for standard in standards_to_add:
                     for link in cre_object.get("links"):
                         if link.get("document").get("name") == standard:
-                            source_file["suits"][indx]["cards"][card_indx][standard] = link.get("document").get(
-                                "sectionID"
+                            source_file["suits"][indx]["cards"][card_indx][standard] = (
+                                link.get("document").get("sectionID")
                             )
             else:
                 print(f"could not find CRE {cre}, status code {response.status_code}")
@@ -59,13 +66,25 @@ def generate_qr_images(existing_mappings: Dict[Any, Any], directory_path: str) -
 def main() -> None:
     global opencre_base_url, opencre_rest_url
     parser = argparse.ArgumentParser(description="generate mappings")
-    parser.add_argument("-c", "--cres", help="Where to find the file mapping cornucopia to CREs", required=True)
-    parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
     parser.add_argument(
-        "-s", "--staging", action="store_true", help="If provided will use staging.opencre.org instead of opencre.org"
+        "-c",
+        "--cres",
+        help="Where to find the file mapping cornucopia to CREs",
+        required=True,
     )
     parser.add_argument(
-        "-q", "--qr_images", help="If provided will populate the target dir with qr image pointing to every cre"
+        "-t", "--target", help="Path where to store the result", required=True
+    )
+    parser.add_argument(
+        "-s",
+        "--staging",
+        action="store_true",
+        help="If provided will use staging.opencre.org instead of opencre.org",
+    )
+    parser.add_argument(
+        "-q",
+        "--qr_images",
+        help="If provided will populate the target dir with qr image pointing to every cre",
     )
     args = vars(parser.parse_args())
     if args["staging"]:

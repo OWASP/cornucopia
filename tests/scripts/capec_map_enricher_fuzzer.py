@@ -8,7 +8,9 @@ from unittest.mock import patch
 
 # Add the root directory to sys.path to import scripts
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "scripts")))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "scripts"))
+)
 
 try:
     import scripts.capec_map_enricher as enricher
@@ -66,7 +68,10 @@ def test_main(data):
     for _ in range(fdp.ConsumeIntInRange(0, 5)):
         key = fdp.ConsumeIntInRange(1, 10000)
         fuzzed_yaml_data[key] = {
-            "owasp_asvs": [fdp.ConsumeUnicodeNoSurrogates(16) for _ in range(fdp.ConsumeIntInRange(0, 3))]
+            "owasp_asvs": [
+                fdp.ConsumeUnicodeNoSurrogates(16)
+                for _ in range(fdp.ConsumeIntInRange(0, 3))
+            ]
         }
         if fdp.ConsumeBool():
             fuzzed_yaml_data[key]["extra_field"] = fdp.ConsumeUnicodeNoSurrogates(32)
@@ -93,9 +98,13 @@ def test_main(data):
     try:
         # Mocking the file I/O to avoid hitting the disk and to feed fuzzed data
         # We also mock parse_arguments to avoid SystemExit from pathvalidate/argparse early on
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
+        with patch.object(
+            enricher, "load_json_file", return_value=fuzzed_json_data
+        ), patch.object(
             enricher, "load_yaml_file", return_value=fuzzed_yaml_data
-        ), patch.object(enricher, "save_yaml_file", return_value=fdp.ConsumeBool()), patch.object(
+        ), patch.object(
+            enricher, "save_yaml_file", return_value=fdp.ConsumeBool()
+        ), patch.object(
             enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
         ), patch(
             "sys.argv", ["capec_map_enricher.py"] + args

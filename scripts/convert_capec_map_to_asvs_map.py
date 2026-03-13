@@ -38,11 +38,15 @@ def extract_asvs_to_capec_mappings(data: dict[str, Any]) -> dict[str, set[str]]:
     for suit in data["suits"]:
         _extract_asvs_mapping_from_suit(suit, asvs_to_capec_map)
 
-    logging.info("Extracted mappings for %d unique ASVS requirements", len(asvs_to_capec_map))
+    logging.info(
+        "Extracted mappings for %d unique ASVS requirements", len(asvs_to_capec_map)
+    )
     return asvs_to_capec_map
 
 
-def _extract_asvs_mapping_from_suit(suit: dict[str, Any], asvs_to_capec_map: dict[str, set[str]]) -> None:
+def _extract_asvs_mapping_from_suit(
+    suit: dict[str, Any], asvs_to_capec_map: dict[str, set[str]]
+) -> None:
     """Process a single suit and extract ASVS mappings from its cards."""
     if "cards" not in suit:
         return
@@ -51,7 +55,9 @@ def _extract_asvs_mapping_from_suit(suit: dict[str, Any], asvs_to_capec_map: dic
         _extract_asvs_mapping_from_card(card, asvs_to_capec_map)
 
 
-def _extract_asvs_mapping_from_card(card: dict[str, Any], asvs_to_capec_map: dict[str, set[str]]) -> None:
+def _extract_asvs_mapping_from_card(
+    card: dict[str, Any], asvs_to_capec_map: dict[str, set[str]]
+) -> None:
     """Process a single card and extract its ASVS mappings."""
     if "capec_map" not in card:
         return
@@ -94,7 +100,9 @@ def extract_capec_mappings(data: dict[str, Any]) -> dict[int, set[str]]:
     return capec_to_asvs_map
 
 
-def _extract_capec_mapping_from_suit(suit: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]) -> None:
+def _extract_capec_mapping_from_suit(
+    suit: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]
+) -> None:
     """Process a single suit and extract CAPEC mappings from its cards."""
     if "cards" not in suit:
         return
@@ -103,7 +111,9 @@ def _extract_capec_mapping_from_suit(suit: dict[str, Any], capec_to_asvs_map: di
         _extract_capec_mapping_from_card(card, capec_to_asvs_map)
 
 
-def _extract_capec_mapping_from_card(card: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]) -> None:
+def _extract_capec_mapping_from_card(
+    card: dict[str, Any], capec_to_asvs_map: dict[int, set[str]]
+) -> None:
     """Process a single card and extract its CAPEC mappings."""
     if "capec_map" not in card:
         return
@@ -192,7 +202,9 @@ def save_yaml_file(filepath: Path, data: Dict[str, Any]) -> bool:
     """Save data as YAML file."""
     try:
         with open(filepath, "w", encoding="utf-8") as f:
-            yaml.dump(data, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
+            yaml.dump(
+                data, f, default_flow_style=False, sort_keys=False, allow_unicode=True
+            )
         logging.info("Successfully saved YAML file: %s", filepath)
         return True
     except Exception as e:
@@ -213,7 +225,9 @@ def set_logging() -> None:
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Convert webapp-mappings YAML to CAPEC-to-ASVS mapping format")
+    parser = argparse.ArgumentParser(
+        description="Convert webapp-mappings YAML to CAPEC-to-ASVS mapping format"
+    )
     parser.add_argument(
         "-i",
         "--input-path",
@@ -310,16 +324,22 @@ def main() -> None:
     if convert_vars.args.input_path:
         input_path = Path(convert_vars.args.input_path).resolve()
     else:
-        input_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "mappings").replace(
-            "VERSION", str(convert_vars.args.version)
-        ).replace("EDITION", str(convert_vars.args.edition))
+        input_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace(
+            "TEMPLATE", "mappings"
+        ).replace("VERSION", str(convert_vars.args.version)).replace(
+            "EDITION", str(convert_vars.args.edition)
+        )
 
-    capec_output_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "capec").replace(
-        "VERSION", str(convert_vars.args.version)
-    ).replace("EDITION", str(convert_vars.args.edition))
-    asvs_output_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "asvs").replace(
-        "VERSION", str(convert_vars.args.version)
-    ).replace("EDITION", str(convert_vars.args.edition))
+    capec_output_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace(
+        "TEMPLATE", "capec"
+    ).replace("VERSION", str(convert_vars.args.version)).replace(
+        "EDITION", str(convert_vars.args.edition)
+    )
+    asvs_output_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace(
+        "TEMPLATE", "asvs"
+    ).replace("VERSION", str(convert_vars.args.version)).replace(
+        "EDITION", str(convert_vars.args.edition)
+    )
 
     logging.info("Input file: %s", input_path)
     logging.info("Output file: %s", capec_output_path)
@@ -359,19 +379,27 @@ def main() -> None:
         sys.exit(1)
 
     logging.info("CAPEC-to-ASVS mapping conversion completed successfully")
-    logging.info("Total CAPEC codes processed: %d", len(output_data) - (1 if meta else 0))
+    logging.info(
+        "Total CAPEC codes processed: %d", len(output_data) - (1 if meta else 0)
+    )
 
     asvs_to_capec_map = extract_asvs_to_capec_mappings(data)
     # Pass enrichment data here
     output_data_asvs = convert_to_output_format(
-        asvs_to_capec_map, parameter="capec_codes", meta=meta, enrichment_data=asvs_details
+        asvs_to_capec_map,
+        parameter="capec_codes",
+        meta=meta,
+        enrichment_data=asvs_details,
     )
     # Save output YAML
     if not save_yaml_file(asvs_output_path, output_data_asvs):
         logging.error("Failed to save asvs output file")
         sys.exit(1)
     logging.info("ASVS-to-CAPEC mapping conversion completed successfully")
-    logging.info("Total ASVS requirements processed: %d", len(output_data_asvs) - (1 if meta else 0))
+    logging.info(
+        "Total ASVS requirements processed: %d",
+        len(output_data_asvs) - (1 if meta else 0),
+    )
 
 
 if __name__ == "__main__":
