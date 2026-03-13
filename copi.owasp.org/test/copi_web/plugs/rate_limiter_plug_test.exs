@@ -25,13 +25,18 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
 
   test "returns 429 when forwarded IP exceeds connection limit" do
     ip = "192.168.1.100"
+    ip_tuple = {192, 168, 1, 100}
     config = RateLimiter.get_config()
     limit = config.limits.connection
 
-    # Exhaust the limit first
-    for _ <- 1..limit do
-      RateLimiter.check_rate(ip, :connection)
-    end
+    # Inject pre-exhausted timestamps directly to avoid relying on the
+    # 1-second sliding window, which can expire under CI load with 133 calls.
+    :sys.replace_state(Copi.RateLimiter, fn state ->
+      now = System.monotonic_time(:millisecond)
+      timestamps = for _ <- 1..limit, do: now
+      new_requests = Map.put(state.requests, {ip_tuple, :connection}, timestamps)
+      %{state | requests: new_requests}
+    end)
 
     conn =
       conn(:get, "/")
