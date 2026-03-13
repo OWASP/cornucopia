@@ -636,8 +636,8 @@ def get_mapping_data_for_edition(
     with open(mappingfile, "r", encoding="utf-8") as f:
         try:
             data = yaml.safe_load(f)
-            # Handle empty/null YAML files
-            if data is None:
+            # Handle empty/null YAML files and validate it's a dict
+            if not isinstance(data, dict):
                 data = {}
         except yaml.YAMLError as e:
             logging.info(f"Error loading yaml file: {mappingfile}. Error = {e}")
@@ -740,8 +740,8 @@ def get_language_data(
     with open(language_file, "r", encoding="utf-8") as f:
         try:
             data = yaml.safe_load(f)
-            # Handle empty/null YAML files
-            if data is None:
+            # Handle empty/null YAML files and validate it's a dict
+            if not isinstance(data, dict):
                 data = {}
         except yaml.YAMLError as e:
             logging.error(f"Error loading yaml file: {language_file}. Error = {e}")
