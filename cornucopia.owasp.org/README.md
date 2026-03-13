@@ -2,9 +2,14 @@
 
 https://cornucopia.owasp.org contains the card browser for each of the cards in the cornucopia suits together with the taxonomy and in depth explaination for each of the cards in the suits.
 
+## Development server
+
+This project uses **pnpm** for dependency management.
+Please do **not use npm or yarn**, as mixing package managers can cause dependency conflicts.
+
 ## Production build
 
-    npm run productionbuild
+    pnpm run productionbuild
 
 ## Release to Cloudflare
 
@@ -21,15 +26,14 @@ NB: The CLOUDFLARE_API_TOKEN needs to be renewed once a year.
 
 ## Development server
 
-    # npm install will raise a conflict
     pnpm install # https://pnpm.io/installation
-    npm run dev
+    pnpm run dev
 
 ## Testing and Code Coverage
 
 Run tests with coverage reporting:
 
-    npm run test
+    pnpm run test
 
 View coverage thresholds and results in the terminal output. Coverage reports are generated in the `./coverage` directory with the following formats:
 

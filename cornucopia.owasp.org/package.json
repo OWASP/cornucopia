@@ -1,9 +1,11 @@
 {
 	"name": "cornucopia-website",
+	"packageManager": "pnpm@10.32.1",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
+		"preinstall": "npx only-allow pnpm",
 		"prebuild": "echo I run before the build script",
 		"productionbuild": "vite build && node ./script/headers.js && npx svelte-sitemap --domain https://cornucopia.owasp.org --ignore 404 --ignore cards/COM* --ignore cards/DVE* --ignore cards/AC* --ignore cards/CO*",
 		"build": "svelte-kit sync && vite build && node ./script/headers.js && npx svelte-sitemap --domain https://cornucopia.owasp.org --ignore 404 --ignore cards/COM* --ignore cards/DVE* --ignore cards/AC* --ignore cards/CO*",
