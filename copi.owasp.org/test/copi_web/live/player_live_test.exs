@@ -127,18 +127,29 @@ defmodule CopiWeb.PlayerLiveTest do
       game_id = player.game_id
       
       # Create a card for the current player
-      {:ok, card} = Copi.Repo.insert(%Copi.Cornucopia.Card{word: "Self Card", edition: "webapp"})
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "Self", description: "Self Card", edition: "webapp",
+        version: "2.2", external_id: "SELF", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
       {:ok, own_dealt_card} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card.id, played_in_round: 1})
       
       # Setup other player's card BEFORE mounting LiveView to ensure DOM contains vote buttons
       {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
-      {:ok, other_card} = Copi.Repo.insert(%Copi.Cornucopia.Card{word: "Other Card", edition: "webapp"})
+      {:ok, other_card} = Cornucopia.create_card(%{
+        category: "C", value: "Other", description: "Other Card", edition: "webapp",
+        version: "2.2", external_id: "OTHER", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
       {:ok, other_dealt_card} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: other_player.id, card_id: other_card.id, played_in_round: 1})
       
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       
-      # Attempt to vote on own card (simulates JavaScript exploit)
-      show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{own_dealt_card.id}\"]") |> render_click()
+      # Attempt to vote on own card (simulates JavaScript exploit by calling event directly)
+      # This should be blocked by the authorization check in handle_event
+      render_hook(show_live, "toggle_vote", %{"dealt_card_id" => "#{own_dealt_card.id}"})
       
       # Verify NO vote was created - self-voting blocked
       refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: own_dealt_card.id, player_id: player.id)
