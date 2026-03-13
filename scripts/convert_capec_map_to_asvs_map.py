@@ -364,14 +364,20 @@ def main() -> None:
     asvs_to_capec_map = extract_asvs_to_capec_mappings(data)
     # Pass enrichment data here
     output_data_asvs = convert_to_output_format(
-        asvs_to_capec_map, parameter="capec_codes", meta=meta, enrichment_data=asvs_details
+        asvs_to_capec_map,
+        parameter="capec_codes",
+        meta=meta,
+        enrichment_data=asvs_details,
     )
     # Save output YAML
     if not save_yaml_file(asvs_output_path, output_data_asvs):
         logging.error("Failed to save asvs output file")
         sys.exit(1)
     logging.info("ASVS-to-CAPEC mapping conversion completed successfully")
-    logging.info("Total ASVS requirements processed: %d", len(output_data_asvs) - (1 if meta else 0))
+    logging.info(
+        "Total ASVS requirements processed: %d",
+        len(output_data_asvs) - (1 if meta else 0),
+    )
 
 
 if __name__ == "__main__":

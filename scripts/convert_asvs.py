@@ -30,7 +30,11 @@ def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
     topic = ""
     category = ""
     os.mkdir(Path(convert_vars.args.output_path, f"level-{level}-controls"))
-    f = open(Path(convert_vars.args.output_path, f"level-{level}-controls/index.md"), "w", encoding="utf-8")
+    f = open(
+        Path(convert_vars.args.output_path, f"level-{level}-controls/index.md"),
+        "w",
+        encoding="utf-8",
+    )
     f.write(f"# Level {level} controls\n\n")
     f.write(f"Level {level} contains {len(arr)} controls listed below: \n\n")
     for link in arr:
@@ -112,7 +116,10 @@ def _categorize_by_level(
 
 
 def _write_subitem_content(
-    file_handle: TextIO, subitem: dict[str, Any], asvs_map: dict[str, dict[str, List[str]]], capec_version: str
+    file_handle: TextIO,
+    subitem: dict[str, Any],
+    asvs_map: dict[str, dict[str, List[str]]],
+    capec_version: str,
 ) -> None:
     """Write a single subitem's content to the file."""
     file_handle.write("## " + subitem["Shortcode"] + "\n\n")
@@ -163,7 +170,10 @@ def _process_requirement_item(
 
 
 def create_asvs_pages(
-    data: dict[str, Any], asvs_map: dict[str, dict[str, List[str]]], capec_version: str, asvs_version: str
+    data: dict[str, Any],
+    asvs_map: dict[str, dict[str, List[str]]],
+    capec_version: str,
+    asvs_version: str,
 ) -> None:
     """Create ASVS documentation pages from JSON data."""
     L1: List[dict[str, Any]] = []
@@ -176,7 +186,16 @@ def create_asvs_pages(
         os.mkdir(Path(convert_vars.args.output_path, requirement_name))
 
         for item in requirement["Items"]:
-            _process_requirement_item(item, requirement_name, asvs_map, capec_version, L1, L2, L3, asvs_version)
+            _process_requirement_item(
+                item,
+                requirement_name,
+                asvs_map,
+                capec_version,
+                L1,
+                L2,
+                L3,
+                asvs_version,
+            )
 
     create_level_summary(1, L1)
     create_level_summary(2, L2)

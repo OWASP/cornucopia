@@ -234,7 +234,11 @@ class TestLoadJsonFile(unittest.TestCase):
 class TestLoadYamlFile(unittest.TestCase):
     """Test load_yaml_file function"""
 
-    @patch("builtins.open", new_callable=mock_open, read_data="1:\n  owasp_asvs:\n  - 1.2.3\n")
+    @patch(
+        "builtins.open",
+        new_callable=mock_open,
+        read_data="1:\n  owasp_asvs:\n  - 1.2.3\n",
+    )
     @patch("yaml.safe_load")
     def test_load_valid_yaml(self, mock_yaml_load, mock_file):
         """Test loading a valid YAML file"""
@@ -379,7 +383,14 @@ class TestMainFunction(unittest.TestCase):
     @patch("scripts.capec_map_enricher.parse_arguments")
     @patch("sys.exit")
     def test_main_successful_execution(
-        self, mock_exit, mock_parse_args, mock_load_json, mock_load_yaml, mock_extract_names, mock_enrich, mock_save
+        self,
+        mock_exit,
+        mock_parse_args,
+        mock_load_json,
+        mock_load_yaml,
+        mock_extract_names,
+        mock_enrich,
+        mock_save,
     ):
         """Test successful main execution"""
         # Setup mocks

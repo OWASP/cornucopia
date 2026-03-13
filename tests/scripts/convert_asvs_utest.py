@@ -369,7 +369,11 @@ class TestLoadJsonFile(unittest.TestCase):
 class TestLoadAsvsToCapecMapping(unittest.TestCase):
     """Test load_asvs_to_capec_mapping function"""
 
-    @patch("builtins.open", new_callable=mock_open, read_data='1.1.1:\n  capec_codes:\n  - "120"\n  - "126"')
+    @patch(
+        "builtins.open",
+        new_callable=mock_open,
+        read_data='1.1.1:\n  capec_codes:\n  - "120"\n  - "126"',
+    )
     @patch("yaml.safe_load")
     def test_load_asvs_to_capec_mapping_success(self, mock_yaml_load, mock_file):
         """Test successfully loading YAML mapping file"""

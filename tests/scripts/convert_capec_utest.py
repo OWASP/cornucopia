@@ -28,7 +28,11 @@ class TestParseDescription(unittest.TestCase):
         """Test parsing description with list of paragraphs"""
         description = {
             "Description": {
-                "p": [{"__text": "First paragraph"}, {"__text": "Second paragraph"}, {"__text": "Third paragraph"}]
+                "p": [
+                    {"__text": "First paragraph"},
+                    {"__text": "Second paragraph"},
+                    {"__text": "Third paragraph"},
+                ]
             }
         }
         result = capec.parse_description(description)
@@ -37,7 +41,13 @@ class TestParseDescription(unittest.TestCase):
     def test_parse_description_with_mixed_list(self):
         """Test parsing description with mixed list content"""
         description = {
-            "Description": {"p": [{"__text": "First paragraph"}, "Plain string", {"__text": "Third paragraph"}]}
+            "Description": {
+                "p": [
+                    {"__text": "First paragraph"},
+                    "Plain string",
+                    {"__text": "Third paragraph"},
+                ]
+            }
         }
         result = capec.parse_description(description)
         self.assertEqual(result, "First paragraph Plain string Third paragraph")
@@ -318,7 +328,11 @@ class TestCreateCapecPages(unittest.TestCase):
             "Attack_Pattern_Catalog": {
                 "Attack_Patterns": {
                     "Attack_Pattern": [
-                        {"_ID": "123", "_Name": "Test Attack Pattern", "Description": "This is a test description"}
+                        {
+                            "_ID": "123",
+                            "_Name": "Test Attack Pattern",
+                            "Description": "This is a test description",
+                        }
                     ]
                 },
                 "Categories": {
@@ -366,7 +380,10 @@ class TestCreateCapecPages(unittest.TestCase):
         self.assertIn("CAPEC™ 123: Test Attack Pattern", written_content)
         self.assertIn("## Description", written_content)
         self.assertIn("This is a test description", written_content)
-        self.assertIn("Source: [CAPEC™ 123](https://capec.mitre.org/data/definitions/123.html)", written_content)
+        self.assertIn(
+            "Source: [CAPEC™ 123](https://capec.mitre.org/data/definitions/123.html)",
+            written_content,
+        )
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convert_capec.create_folder")
@@ -382,8 +399,16 @@ class TestCreateCapecPages(unittest.TestCase):
             "Attack_Pattern_Catalog": {
                 "Attack_Patterns": {
                     "Attack_Pattern": [
-                        {"_ID": "1", "_Name": "First Pattern", "Description": "First description"},
-                        {"_ID": "2", "_Name": "Second Pattern", "Description": "Second description"},
+                        {
+                            "_ID": "1",
+                            "_Name": "First Pattern",
+                            "Description": "First description",
+                        },
+                        {
+                            "_ID": "2",
+                            "_Name": "Second Pattern",
+                            "Description": "Second description",
+                        },
                     ]
                 },
                 "Categories": {
@@ -535,7 +560,10 @@ class TestLoadCapecToAsvsMapping(unittest.TestCase):
     @patch("builtins.open", new_callable=mock_open)
     def test_load_capec_to_asvs_mapping_valid(self, mock_file, mock_yaml_load):
         """Test loading valid CAPEC to ASVS mapping"""
-        test_data = {1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]}, 5: {"owasp_asvs": ["V1.2.9"]}}
+        test_data = {
+            1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]},
+            5: {"owasp_asvs": ["V1.2.9"]},
+        }
         mock_yaml_load.return_value = test_data
 
         result = capec.load_capec_to_asvs_mapping(Path("test.yaml"))
@@ -583,7 +611,11 @@ class TestCreateLinkList(unittest.TestCase):
                             "Name": "General Authorization Design",
                             "Items": [{"Shortcode": "V8.1.1", "Text": "Test"}],
                         },
-                        {"Ordinal": 2, "Name": "Operation Level", "Items": [{"Shortcode": "V8.2.1", "Text": "Test"}]},
+                        {
+                            "Ordinal": 2,
+                            "Name": "Operation Level",
+                            "Items": [{"Shortcode": "V8.2.1", "Text": "Test"}],
+                        },
                     ],
                 }
             ]
@@ -756,7 +788,13 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
         test_data = {
             "Attack_Pattern_Catalog": {
                 "Attack_Patterns": {
-                    "Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern", "Description": "Test description"}]
+                    "Attack_Pattern": [
+                        {
+                            "_ID": "1",
+                            "_Name": "Test Pattern",
+                            "Description": "Test description",
+                        }
+                    ]
                 },
                 "Categories": {
                     "Category": [
@@ -790,8 +828,16 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
                     "Ordinal": 8,
                     "Name": "Authorization",
                     "Items": [
-                        {"Ordinal": 1, "Name": "General Design", "Items": [{"Shortcode": "V8.1.1"}]},
-                        {"Ordinal": 2, "Name": "Operation Level", "Items": [{"Shortcode": "V8.2.1"}]},
+                        {
+                            "Ordinal": 1,
+                            "Name": "General Design",
+                            "Items": [{"Shortcode": "V8.1.1"}],
+                        },
+                        {
+                            "Ordinal": 2,
+                            "Name": "Operation Level",
+                            "Items": [{"Shortcode": "V8.2.1"}],
+                        },
                     ],
                 }
             ]

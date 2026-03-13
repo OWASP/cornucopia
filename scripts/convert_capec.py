@@ -95,7 +95,7 @@ def parse_description(description_field: Any) -> str:
                 return str(p_content["__text"])
             elif isinstance(p_content, list):
                 return " ".join(
-                    [str(p["__text"]) if isinstance(p, dict) and "__text" in p else str(p) for p in p_content]
+                    [(str(p["__text"]) if isinstance(p, dict) and "__text" in p else str(p)) for p in p_content]
                 )
     return str(description_field)
 

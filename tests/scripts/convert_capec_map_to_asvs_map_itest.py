@@ -104,7 +104,10 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
 
     def test_save_yaml_file_integration(self):
         """Test saving YAML file"""
-        test_data = {54: {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]}, 116: {"owasp_asvs": ["15.2.3", "16.2.5"]}}
+        test_data = {
+            54: {"owasp_asvs": ["4.3.2", "13.2.2", "13.4.1"]},
+            116: {"owasp_asvs": ["15.2.3", "16.2.5"]},
+        }
 
         # Save the file
         success = capec_map.save_yaml_file(self.test_capec_output_file, test_data)
@@ -194,7 +197,11 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
         # Each ASVS requirement should map to one or more CAPEC codes
         for asvs_req, capec_codes in asvs_mapping.items():
             self.assertIsInstance(capec_codes, set)
-            self.assertGreater(len(capec_codes), 0, f"ASVS {asvs_req} should map to at least one CAPEC code")
+            self.assertGreater(
+                len(capec_codes),
+                0,
+                f"ASVS {asvs_req} should map to at least one CAPEC code",
+            )
 
     def test_asvs_requirements_merged_correctly(self):
         """Test that ASVS requirements are merged correctly for duplicate CAPEC codes"""
@@ -207,7 +214,9 @@ class TestConvertCAPECMapToASVSMapIntegration(unittest.TestCase):
             # Convert to list to check for duplicates
             asvs_list = list(asvs_set)
             self.assertEqual(
-                len(asvs_list), len(set(asvs_list)), f"CAPEC code {capec_code} has duplicate ASVS requirements"
+                len(asvs_list),
+                len(set(asvs_list)),
+                f"CAPEC code {capec_code} has duplicate ASVS requirements",
             )
 
     def test_output_to_expected_location(self):

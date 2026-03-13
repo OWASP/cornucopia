@@ -24,7 +24,19 @@ class ConvertVars:
     EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp", "against-security"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "odt", "pdf", "idml"]
     LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
+    LANGUAGE_CHOICES: List[str] = [
+        "all",
+        "en",
+        "es",
+        "fr",
+        "nl",
+        "no-nb",
+        "pt-pt",
+        "pt-br",
+        "hu",
+        "it",
+        "ru",
+    ]
     VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.2", "3.0", "5.0"]
     LATEST_VERSION_CHOICES: List[str] = ["1.1", "3.0"]
     TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
@@ -35,7 +47,11 @@ class ConvertVars:
         "all": {"2.2": "2.2", "1.0": "1.0", "1.1": "1.1", "3.0": "3.0", "5.0": "5.0"},
     }
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
-        ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
+        [
+            "resources",
+            "templates",
+            "owasp_cornucopia_edition_ver_layout_document_template_lang",
+        ]
     )
     DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_document_template_lang"])
     args: argparse.Namespace
@@ -113,7 +129,24 @@ def _safe_extractall(archive: zipfile.ZipFile, target_dir: str) -> None:
 
 def _validate_command_args(cmd_args: List[str]) -> bool:
     """Validate command arguments for dangerous characters."""
-    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
+    dangerous_chars = [
+        "&",
+        "|",
+        ";",
+        "$",
+        "`",
+        "(",
+        ")",
+        "<",
+        ">",
+        "*",
+        "?",
+        "[",
+        "]",
+        "{",
+        "}",
+        "\\",
+    ]
     for arg in cmd_args:
         if any(char in arg for char in dangerous_chars):
             logging.warning(f"Potentially dangerous character found in argument: {arg}")
@@ -163,7 +196,11 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
 
         # Execute conversion
         subprocess.run(
-            cmd_args, check=True, capture_output=True, text=True, timeout=300  # 5 minute timeout to prevent hanging
+            cmd_args,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=300,  # 5 minute timeout to prevent hanging
         )
         return True
     except subprocess.TimeoutExpired:
@@ -246,7 +283,11 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
 
 
 def create_edition_from_template(
-    layout: str, language: str = "en", template: str = "bridge", version: str = "3.0", edition: str = "webapp"
+    layout: str,
+    language: str = "en",
+    template: str = "bridge",
+    version: str = "3.0",
+    edition: str = "webapp",
 ) -> None:
 
     # Get the list of available translation files
@@ -308,7 +349,14 @@ def create_edition_from_template(
     logging.info(f"New file saved: {output_file}")
 
 
-def valid_meta(meta: Dict[str, Any], language: str, edition: str, version: str, template: str, layout: str) -> bool:
+def valid_meta(
+    meta: Dict[str, Any],
+    language: str,
+    edition: str,
+    version: str,
+    template: str,
+    layout: str,
+) -> bool:
     if not has_translation_for_edition(meta, language):
         logging.warning(
             f"Translation in {language} does not exist for edition: {edition}, version: {version} "
@@ -389,7 +437,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
     description += "\nExample usage: c:\\cornucopia\\scripts\\convert.py -t bridge -lt cards -l fr -v 2.2 -o"
     description += " my_output_folder\\owasp_cornucopia_edition_version_layout_language_template.idml"
     parser = argparse.ArgumentParser(
-        description=description, formatter_class=argparse.RawTextHelpFormatter, exit_on_error=False
+        description=description,
+        formatter_class=argparse.RawTextHelpFormatter,
+        exit_on_error=False,
     )
     parser.add_argument(
         "-i",
@@ -569,10 +619,15 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
             files.append(os.path.join(root, filename))
     if not files:
-        logging.error("No language files found in folder: %s", str(os.sep.join([convert_vars.BASE_PATH, "source"])))
+        logging.error(
+            "No language files found in folder: %s",
+            str(os.sep.join([convert_vars.BASE_PATH, "source"])),
+        )
         return files
     logging.debug(
-        "%s%s", f" --- found {len(files)} files of type {ext}. Showing first few:\n* ", str("\n* ".join(files[:3]))
+        "%s%s",
+        f" --- found {len(files)} files of type {ext}. Showing first few:\n* ",
+        str("\n* ".join(files[:3])),
     )
     return files
 
@@ -597,7 +652,12 @@ def get_full_tag(cat_id: str, id: str, tag: str) -> str:
 
 
 def get_mapping_for_edition(
-    yaml_files: List[str], version: str, language: str, edition: str, template: str, layout: str
+    yaml_files: List[str],
+    version: str,
+    language: str,
+    edition: str,
+    template: str,
+    layout: str,
 ) -> Dict[str, Any]:
     mapping_data: Dict[str, Any] = get_mapping_data_for_edition(yaml_files, language, version, edition)
     if not mapping_data:
@@ -674,7 +734,9 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
                     logging.debug(f" --- text = {text_output}")
                     logging.debug(f" --- paragraph = {paragraph}")
                     full_tag = get_full_tag(
-                        is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["id"]), tag
+                        is_valid_string_argument(paragraphs["id"]),
+                        is_valid_string_argument(paragraph["id"]),
+                        tag,
                     )
                     logging.debug(f" --- full tag = {full_tag}")
                     data[full_tag] = check_make_list_into_text(text_output)
@@ -692,7 +754,15 @@ def get_meta_data(data: Dict[str, Any]) -> Dict[str, Any]:
         logging.error("Meta tag is not a dictionary.")
         return meta
 
-    valid_keys = ("edition", "component", "language", "version", "languages", "layouts", "templates")
+    valid_keys = (
+        "edition",
+        "component",
+        "language",
+        "version",
+        "languages",
+        "layouts",
+        "templates",
+    )
     for key in valid_keys:
         if key in raw_meta:
             value = raw_meta[key]
@@ -759,7 +829,10 @@ def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
 def is_lang_file_for_version(path: str, version: str, lang: str, edition: str) -> bool:
     filename = os.path.basename(path).lower()
     # Support both -en. and -en_US. style
-    lang_patterns = ["-" + lang.lower() + ".", "-" + lang.lower().replace("-", "_") + "."]
+    lang_patterns = [
+        "-" + lang.lower() + ".",
+        "-" + lang.lower().replace("-", "_") + ".",
+    ]
     has_lang = any(filename.find(p) != -1 for p in lang_patterns)
 
     return (
@@ -1023,7 +1096,10 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
         _safe_extractall(idml_archive, temp_output_path)
-        logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
+        logging.debug(
+            " --- namelist of first few files in archive = %s",
+            str(idml_archive.namelist()[:5]),
+        )
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
     replacement_values = sort_keys_longest_to_shortest(language_dict)
@@ -1060,7 +1136,9 @@ def set_logging() -> None:
         logging.getLogger().setLevel(logging.INFO)
 
 
-def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
+def sort_keys_longest_to_shortest(
+    replacement_dict: Dict[str, str],
+) -> List[Tuple[str, str]]:
     new_list = list((k, v) for k, v in replacement_dict.items())
     return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
 

@@ -30,7 +30,18 @@ def test_main(data):
             "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
         ]
     )
-    args = ["-t", template, "-lt", "guide", "-l", "en", "-v", "1.22", "-i", template_docx_file]
+    args = [
+        "-t",
+        template,
+        "-lt",
+        "guide",
+        "-l",
+        "en",
+        "-v",
+        "1.22",
+        "-i",
+        template_docx_file,
+    ]
     argp = {
         "debug": True,
         "pdf": False,
@@ -58,7 +69,20 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", edition, "-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", template_docx_file]
+            args = [
+                "-e",
+                edition,
+                "-t",
+                "bridge",
+                "-lt",
+                "guide",
+                "-l",
+                "en",
+                "-v",
+                "1.22",
+                "-i",
+                template_docx_file,
+            ]
             argp = {
                 "debug": True,
                 "pdf": False,
@@ -76,7 +100,20 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", "webapp", "-t", "bridge", "-lt", layout, "-l", "en", "-v", "1.22", "-i", template_docx_file]
+            args = [
+                "-e",
+                "webapp",
+                "-t",
+                "bridge",
+                "-lt",
+                layout,
+                "-l",
+                "en",
+                "-v",
+                "1.22",
+                "-i",
+                template_docx_file,
+            ]
             argp = {
                 "debug": True,
                 "pdf": False,
@@ -94,7 +131,20 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", lang, "-v", "1.22", "-i", template_docx_file]
+            args = [
+                "-e",
+                "webapp",
+                "-t",
+                "bridge",
+                "-lt",
+                "guide",
+                "-l",
+                lang,
+                "-v",
+                "1.22",
+                "-i",
+                template_docx_file,
+            ]
             argp = {
                 "debug": True,
                 "pdf": False,
@@ -112,7 +162,20 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", "en", "-v", version, "-i", template_docx_file]
+            args = [
+                "-e",
+                "webapp",
+                "-t",
+                "bridge",
+                "-lt",
+                "guide",
+                "-l",
+                "en",
+                "-v",
+                version,
+                "-i",
+                template_docx_file,
+            ]
             argp = {
                 "debug": True,
                 "pdf": False,
@@ -130,7 +193,20 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", lang, "-v", "1.22", "-i", template_docx_file]
+            args = [
+                "-e",
+                "webapp",
+                "-t",
+                "bridge",
+                "-lt",
+                "guide",
+                "-l",
+                lang,
+                "-v",
+                "1.22",
+                "-i",
+                template_docx_file,
+            ]
             argp = {
                 "debug": True,
                 "pdf": False,
@@ -181,7 +257,20 @@ def test_main(data):
                 with patch("sys.argv", args):
                     c.main()
 
-            args = ["-e", "webapp", "-t", "bridge", "-lt", "guide", "-l", "en", "-v", "1.22", "-i", inputtemplate]
+            args = [
+                "-e",
+                "webapp",
+                "-t",
+                "bridge",
+                "-lt",
+                "guide",
+                "-l",
+                "en",
+                "-v",
+                "1.22",
+                "-i",
+                inputtemplate,
+            ]
             argp = {
                 "debug": True,
                 "pdf": False,

@@ -82,7 +82,11 @@ class TestTranslationTagsIntegration(unittest.TestCase):
                                     duplicates.append(tag_id)
                                 seen_ids.add(tag_id)
 
-                self.assertEqual(len(duplicates), 0, f"Duplicate tags found in {eng_file.name}: {duplicates}")
+                self.assertEqual(
+                    len(duplicates),
+                    0,
+                    f"Duplicate tags found in {eng_file.name}: {duplicates}",
+                )
 
     def test_tag_format(self) -> None:
         """Test that tags follow the T0xxxx format."""
@@ -95,7 +99,8 @@ class TestTranslationTagsIntegration(unittest.TestCase):
 
             for tag_id in tags.keys():
                 self.assertIsNotNone(
-                    tag_pattern.match(tag_id), f"Tag {tag_id} in {eng_file.name} doesn't match format T0xxxx"
+                    tag_pattern.match(tag_id),
+                    f"Tag {tag_id} in {eng_file.name} doesn't match format T0xxxx",
                 )
 
     def test_generate_markdown_report(self) -> None:

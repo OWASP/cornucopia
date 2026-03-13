@@ -26,7 +26,18 @@ class TestMain(unittest.TestCase):
                 "owasp_cornucopia_webapp_ver_guide_bridge_lang.odt",
             ]
         )
-        self.args = ["-t", "bridge", "-lt", "guide", "-l", "en", "-v", "3.0", "-i", self.template_docx_file]
+        self.args = [
+            "-t",
+            "bridge",
+            "-lt",
+            "guide",
+            "-l",
+            "en",
+            "-v",
+            "3.0",
+            "-i",
+            self.template_docx_file,
+        ]
         self.argp = {
             "debug": False,
             "pdf": False,

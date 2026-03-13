@@ -257,7 +257,11 @@ class TestConvertCAPECIntegration(unittest.TestCase):
             parsed = capec.parse_description(description)
 
             self.assertIsInstance(parsed, str)
-            self.assertGreater(len(parsed), 0, f"Description should not be empty for CAPEC-{pattern['_ID']}")
+            self.assertGreater(
+                len(parsed),
+                0,
+                f"Description should not be empty for CAPEC-{pattern['_ID']}",
+            )
 
     def test_load_capec_to_asvs_mapping(self):
         """Test loading CAPEC to ASVS mapping YAML file"""

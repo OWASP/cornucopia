@@ -143,7 +143,11 @@ class TestConvertASVSIntegration(unittest.TestCase):
 
         # Check for level control directories
         level_dirs = [d for d in output_dirs if d.name.startswith("level-") and d.name.endswith("-controls")]
-        self.assertEqual(len(level_dirs), 3, "Should have created 3 level control directories (L1, L2, L3)")
+        self.assertEqual(
+            len(level_dirs),
+            3,
+            "Should have created 3 level control directories (L1, L2, L3)",
+        )
 
         # Verify level control index files exist
         for level in [1, 2, 3]:
@@ -383,7 +387,10 @@ class TestRealFileOperations(unittest.TestCase):
         """Test loading JSON from real file"""
         # Create a test JSON file
         test_json_file = self.test_path / "test.json"
-        test_data = {"Requirements": [{"Ordinal": 1, "Name": "Test Requirement"}], "Version": "5.0.0"}
+        test_data = {
+            "Requirements": [{"Ordinal": 1, "Name": "Test Requirement"}],
+            "Version": "5.0.0",
+        }
 
         with open(test_json_file, "w", encoding="utf-8") as f:
             import json

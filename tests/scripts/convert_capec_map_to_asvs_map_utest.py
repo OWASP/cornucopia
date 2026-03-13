@@ -56,7 +56,16 @@ class TestExtractAsvsToCapecMappings(unittest.TestCase):
         """Test extracting multiple ASVS requirements"""
         data = {
             "suits": [
-                {"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}, 116: {"owasp_asvs": ["13.2.2", "15.2.3"]}}}]}
+                {
+                    "cards": [
+                        {
+                            "capec_map": {
+                                54: {"owasp_asvs": ["4.3.2"]},
+                                116: {"owasp_asvs": ["13.2.2", "15.2.3"]},
+                            }
+                        }
+                    ]
+                }
             ]
         }
         result = capec_map.extract_asvs_to_capec_mappings(data)
@@ -117,7 +126,16 @@ class TestExtractCapecMappings(unittest.TestCase):
         """Test extracting multiple CAPEC codes"""
         data = {
             "suits": [
-                {"cards": [{"capec_map": {54: {"owasp_asvs": ["4.3.2"]}, 116: {"owasp_asvs": ["13.2.2", "15.2.3"]}}}]}
+                {
+                    "cards": [
+                        {
+                            "capec_map": {
+                                54: {"owasp_asvs": ["4.3.2"]},
+                                116: {"owasp_asvs": ["13.2.2", "15.2.3"]},
+                            }
+                        }
+                    ]
+                }
             ]
         }
         result = capec_map.extract_capec_mappings(data)
@@ -734,7 +752,10 @@ class TestConvertToOutputFormatWithEnrichment(unittest.TestCase):
         enrichment = {"1.1.1": {"description": "Desc", "level": "L2"}}
         meta = {"edition": "webapp"}
         result = capec_map.convert_to_output_format(
-            capec_map_data, parameter="capec_codes", meta=meta, enrichment_data=enrichment
+            capec_map_data,
+            parameter="capec_codes",
+            meta=meta,
+            enrichment_data=enrichment,
         )
         self.assertIn("meta", result)
         self.assertEqual(result["meta"]["edition"], "webapp")

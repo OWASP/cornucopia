@@ -131,7 +131,11 @@ class TestWhitespaceHandling(unittest.TestCase):
 
         result = self.checker._check_translation_tags(english_tags, trans_tags)
 
-        self.assertIn("T00002", result["empty"], "Whitespace-only translation should be detected as empty")
+        self.assertIn(
+            "T00002",
+            result["empty"],
+            "Whitespace-only translation should be detected as empty",
+        )
 
     def test_tabs_and_newlines_detected_as_empty(self) -> None:
         english_tags = {"T00001": "Submit", "T00002": "Cancel"}
@@ -147,11 +151,18 @@ class TestWhitespaceHandling(unittest.TestCase):
 
         result = self.checker._check_translation_tags(english_tags, trans_tags)
 
-        self.assertIn("T00001", result["untranslated"], "Extra spaces should be detected as untranslated")
+        self.assertIn(
+            "T00001",
+            result["untranslated"],
+            "Extra spaces should be detected as untranslated",
+        )
 
     def test_properly_translated_no_issues(self) -> None:
         english_tags = {"T00001": "Login", "T00002": "Register"}
-        trans_tags = {"T00001": "Iniciar Sesión", "T00002": "Registrar"}  # Proper translations
+        trans_tags = {
+            "T00001": "Iniciar Sesión",
+            "T00002": "Registrar",
+        }  # Proper translations
 
         result = self.checker._check_translation_tags(english_tags, trans_tags)
 
@@ -176,9 +187,21 @@ class TestCompoundLocales(unittest.TestCase):
 
         self.assertIn("test-cards-1.0", file_groups)
         files = [f.name for f in file_groups["test-cards-1.0"]]
-        self.assertIn("test-cards-1.0-no_nb.yaml", files, "Norwegian (no_nb) file should be included")
-        self.assertIn("test-cards-1.0-pt_br.yaml", files, "Portuguese Brazil (pt_br) file should be included")
-        self.assertIn("test-cards-1.0-pt_pt.yaml", files, "Portuguese Portugal (pt_pt) file should be included")
+        self.assertIn(
+            "test-cards-1.0-no_nb.yaml",
+            files,
+            "Norwegian (no_nb) file should be included",
+        )
+        self.assertIn(
+            "test-cards-1.0-pt_br.yaml",
+            files,
+            "Portuguese Brazil (pt_br) file should be included",
+        )
+        self.assertIn(
+            "test-cards-1.0-pt_pt.yaml",
+            files,
+            "Portuguese Portugal (pt_pt) file should be included",
+        )
 
     def test_compound_locale_not_excluded_by_old_len_filter(self) -> None:
         """Regression test: ensure 5-char locale codes are NOT filtered out."""
@@ -203,7 +226,11 @@ class TestCompoundLocales(unittest.TestCase):
         results = self.checker.check_translations()
 
         self.assertIn("test-cards-1.0", results)
-        self.assertIn("no_nb", results["test-cards-1.0"], "Norwegian (no_nb) results should be present")
+        self.assertIn(
+            "no_nb",
+            results["test-cards-1.0"],
+            "Norwegian (no_nb) results should be present",
+        )
         no_nb_issues = results["test-cards-1.0"]["no_nb"]
         self.assertIn("T00004", no_nb_issues["missing"], "T00004 should be missing in no_nb")
         self.assertIn("T00003", no_nb_issues["empty"], "T00003 should be empty in no_nb")
@@ -213,9 +240,17 @@ class TestCompoundLocales(unittest.TestCase):
         results = self.checker.check_translations()
 
         self.assertIn("test-cards-1.0", results)
-        self.assertIn("pt_br", results["test-cards-1.0"], "Portuguese Brazil (pt_br) results should be present")
+        self.assertIn(
+            "pt_br",
+            results["test-cards-1.0"],
+            "Portuguese Brazil (pt_br) results should be present",
+        )
         pt_br_issues = results["test-cards-1.0"]["pt_br"]
-        self.assertIn("T00002", pt_br_issues["untranslated"], "T00002 should be untranslated in pt_br")
+        self.assertIn(
+            "T00002",
+            pt_br_issues["untranslated"],
+            "T00002 should be untranslated in pt_br",
+        )
 
     def test_portuguese_portugal_fully_translated_no_issues(self) -> None:
         """Test that a fully-translated Portuguese Portugal (pt_pt) file produces no issues."""
@@ -230,7 +265,11 @@ class TestCompoundLocales(unittest.TestCase):
         report = self.checker.generate_markdown_report()
 
         self.assertIn("Norwegian", report, "Norwegian display name should appear for no_nb")
-        self.assertIn("Portuguese (Brazil)", report, "Portuguese (Brazil) display name should appear for pt_br")
+        self.assertIn(
+            "Portuguese (Brazil)",
+            report,
+            "Portuguese (Brazil) display name should appear for pt_br",
+        )
 
 
 class TestCoverageBranches(unittest.TestCase):
@@ -262,7 +301,9 @@ class TestCoverageBranches(unittest.TestCase):
             file_groups = checker.get_file_groups()
             all_files = [f.name for files in file_groups.values() for f in files]
             self.assertNotIn(
-                "webapp-archive-cards-1.0-en.yaml", all_files, "Files with 'archive' in name should be skipped"
+                "webapp-archive-cards-1.0-en.yaml",
+                all_files,
+                "Files with 'archive' in name should be skipped",
             )
 
     def test_check_translations_no_english_file(self) -> None:
