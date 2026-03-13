@@ -811,6 +811,9 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
         return el_text
 
     for k, v in replacement_values:
+        # Skip None keys to prevent AttributeError
+        if k is None:
+            continue
         # Avoid expensive regex if key is not even in text
         if k.strip() not in el_text:
             continue
@@ -891,7 +894,8 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
 
 def get_valid_layout_choices() -> List[str]:
     layouts = []
-    if convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
+    layout = convert_vars.args.layout or ""
+    if layout.lower() == "all" or layout == "":
         for layout in convert_vars.LAYOUT_CHOICES:
             if layout not in ("all", "guide"):
                 layouts.append(layout)
@@ -1061,7 +1065,8 @@ def set_logging() -> None:
 
 
 def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
-    new_list = list((k, v) for k, v in replacement_dict.items())
+    # Filter out None keys to prevent len() errors
+    new_list = list((k, v) for k, v in replacement_dict.items() if k is not None)
     return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
 
 
