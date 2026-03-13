@@ -22,9 +22,7 @@ def make_cre_link(cre_id: str, frontend: bool = False) -> str:
         return f"{opencre_rest_url}/id/{cre_id}"
 
 
-def produce_webapp_mappings(
-    source_file: Dict[Any, Any], standards_to_add: list[str]
-) -> Dict[Any, Any]:
+def produce_webapp_mappings(source_file: Dict[Any, Any], standards_to_add: list[str]) -> Dict[Any, Any]:
     base = {
         "meta": {
             "edition": "webapp",
@@ -42,8 +40,8 @@ def produce_webapp_mappings(
                 for standard in standards_to_add:
                     for link in cre_object.get("links"):
                         if link.get("document").get("name") == standard:
-                            source_file["suits"][indx]["cards"][card_indx][standard] = (
-                                link.get("document").get("sectionID")
+                            source_file["suits"][indx]["cards"][card_indx][standard] = link.get("document").get(
+                                "sectionID"
                             )
             else:
                 print(f"could not find CRE {cre}, status code {response.status_code}")
@@ -72,9 +70,7 @@ def main() -> None:
         help="Where to find the file mapping cornucopia to CREs",
         required=True,
     )
-    parser.add_argument(
-        "-t", "--target", help="Path where to store the result", required=True
-    )
+    parser.add_argument("-t", "--target", help="Path where to store the result", required=True)
     parser.add_argument(
         "-s",
         "--staging",

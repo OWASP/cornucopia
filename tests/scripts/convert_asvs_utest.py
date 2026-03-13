@@ -50,9 +50,7 @@ class TestCreateLevelSummary(unittest.TestCase):
         mock_mkdir.assert_called_once_with(self.mock_output_path / "level-1-controls")
 
         # Verify file was opened for writing
-        mock_file.assert_called_once_with(
-            self.mock_output_path / "level-1-controls/index.md", "w", encoding="utf-8"
-        )
+        mock_file.assert_called_once_with(self.mock_output_path / "level-1-controls/index.md", "w", encoding="utf-8")
 
         # Get the file handle
         handle = mock_file()
@@ -128,9 +126,7 @@ class TestCreateLinkList(unittest.TestCase):
         result = asvs.create_link_list(requirements, "3.9")
 
         expected = (
-            "[120](/taxonomy/capec-3.9/120), "
-            "[126](/taxonomy/capec-3.9/126), "
-            "[152](/taxonomy/capec-3.9/152)"
+            "[120](/taxonomy/capec-3.9/120), " "[126](/taxonomy/capec-3.9/126), " "[152](/taxonomy/capec-3.9/152)"
         )
         self.assertEqual(result, expected)
 
@@ -161,10 +157,7 @@ class TestCreateLinkList(unittest.TestCase):
         requirements = {"capec_codes": ["152", "120", "126"]}
         result = asvs.create_link_list(requirements, "3.9")
 
-        expected = (
-            "[120](/taxonomy/capec-3.9/120), "
-            "[126](/taxonomy/capec-3.9/126), [152](/taxonomy/capec-3.9/152)"
-        )
+        expected = "[120](/taxonomy/capec-3.9/120), " "[126](/taxonomy/capec-3.9/126), [152](/taxonomy/capec-3.9/152)"
         self.assertEqual(result, expected)
 
 
@@ -177,9 +170,7 @@ class TestParseArguments(unittest.TestCase):
 
         self.assertEqual(Path(args.output_path), asvs.ConvertVars.DEFAULT_OUTPUT_PATH)
         self.assertEqual(Path(args.input_path), asvs.ConvertVars.DEFAULT_INPUT_PATH)
-        self.assertEqual(
-            Path(args.asvs_to_capec), asvs.ConvertVars.DEFAULT_ASVS_TO_CAPEC_INPUT_PATH
-        )
+        self.assertEqual(Path(args.asvs_to_capec), asvs.ConvertVars.DEFAULT_ASVS_TO_CAPEC_INPUT_PATH)
         self.assertEqual(args.capec_version, "3.9")
         self.assertFalse(args.debug)
 
@@ -480,16 +471,12 @@ class TestCreateLevelObj(unittest.TestCase):
             "L": "1",
         }
 
-        result = asvs._create_level_obj(
-            subitem, "01-encoding", "01-architecture", "5.0"
-        )
+        result = asvs._create_level_obj(subitem, "01-encoding", "01-architecture", "5.0")
 
         self.assertEqual(result["topic"], "01-encoding")
         self.assertEqual(result["cat"], "01-architecture")
         self.assertEqual(result["name"], "V1.1.1")
-        self.assertEqual(
-            result["link"], "/taxonomy/asvs-5.0/01-encoding/01-architecture#V1.1.1"
-        )
+        self.assertEqual(result["link"], "/taxonomy/asvs-5.0/01-encoding/01-architecture#V1.1.1")
         self.assertEqual(result["description"], "Verify that input is decoded")
 
 
@@ -591,15 +578,11 @@ class TestProcessRequirementItem(unittest.TestCase):
         item = {
             "Ordinal": 1,
             "Name": "Architecture",
-            "Items": [
-                {"Shortcode": "V1.1.1", "Description": "Test requirement", "L": "1"}
-            ],
+            "Items": [{"Shortcode": "V1.1.1", "Description": "Test requirement", "L": "1"}],
         }
         L1, L2, L3 = [], [], []
 
-        asvs._process_requirement_item(
-            item, "01-encoding", {}, "3.9", L1, L2, L3, "5.0"
-        )
+        asvs._process_requirement_item(item, "01-encoding", {}, "3.9", L1, L2, L3, "5.0")
 
         # Verify directory was created
         mock_mkdir.assert_called_once()
@@ -698,11 +681,7 @@ class TestCreateAsvsPages(unittest.TestCase):
         mkdir_calls = [str(call_args[0][0]) for call_args in mock_mkdir.call_args_list]
 
         # Should include level control directories
-        level_dirs = [
-            call
-            for call in mkdir_calls
-            if "level-" in str(call) and "-controls" in str(call)
-        ]
+        level_dirs = [call for call in mkdir_calls if "level-" in str(call) and "-controls" in str(call)]
         self.assertEqual(len(level_dirs), 3)  # L1, L2, L3
 
     @patch("builtins.open", new_callable=mock_open)

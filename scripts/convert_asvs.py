@@ -15,16 +15,12 @@ from typing import Any, List, TextIO
 
 
 class ConvertVars:
-    DEFAULT_OUTPUT_PATH = Path(
-        Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/ASVS-5.0"
-    )
+    DEFAULT_OUTPUT_PATH = Path(Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/ASVS-5.0")
     DEFAULT_INPUT_PATH = (
         Path(__file__).parent / "../cornucopia.owasp.org/data/asvs-5.0/en/"
         "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
     )
-    DEFAULT_ASVS_TO_CAPEC_INPUT_PATH = (
-        Path(__file__).parent / "../source/webapp-asvs-3.0.yaml"
-    )
+    DEFAULT_ASVS_TO_CAPEC_INPUT_PATH = Path(__file__).parent / "../source/webapp-asvs-3.0.yaml"
     LATEST_CAPEC_VERSION_CHOICES: List[str] = ["3.9"]
     LATEST_ASVS_VERSION_CHOICES: List[str] = ["5.0"]
     args: argparse.Namespace
@@ -48,21 +44,14 @@ def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
         if link["cat"] != category:
             category = link["cat"]
             f.write(f"### {category}\n\n")
-        shortdesc = (
-            link["description"].replace("Verify that", "").strip().capitalize()[0:50]
-            + " ..."
-        )
+        shortdesc = link["description"].replace("Verify that", "").strip().capitalize()[0:50] + " ..."
         f.write(f"- [{link['name']}]({link['link']}) *{shortdesc}* \n\n")
     f.close()
 
 
 def _format_directory_name(ordinal: int, name: str) -> str:
     """Format ordinal and name into directory-safe string."""
-    return (
-        str(ordinal).rjust(2, "0")
-        + "-"
-        + name.lower().replace(" ", "-").replace(",", "")
-    )
+    return str(ordinal).rjust(2, "0") + "-" + name.lower().replace(" ", "-").replace(",", "")
 
 
 def _get_level_requirement_text(level: int) -> str:
@@ -134,10 +123,7 @@ def _write_subitem_content(
 ) -> None:
     """Write a single subitem's content to the file."""
     file_handle.write("## " + subitem["Shortcode"] + "\n\n")
-    file_handle.write(
-        subitem["Description"].encode("ascii", "ignore").decode("utf8", "ignore")
-        + "\n\n"
-    )
+    file_handle.write(subitem["Description"].encode("ascii", "ignore").decode("utf8", "ignore") + "\n\n")
 
     level = int(subitem["L"])
     level_text = _get_level_requirement_text(level)
@@ -149,9 +135,7 @@ def _write_subitem_content(
         logging.info("ASVS ID %s has no CAPEC mapping", asvs_id)
     else:
         file_handle.write("### Related CAPEC™ Requirements\n\n")
-        file_handle.write(
-            f"CAPEC™ ({capec_version}): {create_link_list(asvs_map.get(asvs_id, {}), capec_version)}\n\n"
-        )
+        file_handle.write(f"CAPEC™ ({capec_version}): {create_link_list(asvs_map.get(asvs_id, {}), capec_version)}\n\n")
 
     logging.debug("object: %s", subitem)
     logging.debug("🟪")
@@ -180,9 +164,7 @@ def _process_requirement_item(
 
         for subitem in item["Items"]:
             _write_subitem_content(f, subitem, asvs_map, capec_version)
-            _categorize_by_level(
-                subitem, requirement_name, item_name, L1, L2, L3, asvs_version
-            )
+            _categorize_by_level(subitem, requirement_name, item_name, L1, L2, L3, asvs_version)
 
         _write_disclaimer(f)
 
@@ -199,9 +181,7 @@ def create_asvs_pages(
     L3: List[dict[str, Any]] = []
 
     for requirement in data["Requirements"]:
-        requirement_name = _format_directory_name(
-            requirement["Ordinal"], requirement["Name"]
-        )
+        requirement_name = _format_directory_name(requirement["Ordinal"], requirement["Name"])
         logging.debug(requirement_name)
         os.mkdir(Path(convert_vars.args.output_path, requirement_name))
 
@@ -222,21 +202,17 @@ def create_asvs_pages(
     create_level_summary(3, L3)
 
 
-def has_no_capec_mapping(
-    asvs_id: str, capec_to_asvs_map: dict[str, dict[str, List[str]]]
-) -> bool:
-    return not capec_to_asvs_map.get(asvs_id) or not capec_to_asvs_map.get(
-        asvs_id, {"capec_codes": []}
-    ).get("capec_codes")
+def has_no_capec_mapping(asvs_id: str, capec_to_asvs_map: dict[str, dict[str, List[str]]]) -> bool:
+    return not capec_to_asvs_map.get(asvs_id) or not capec_to_asvs_map.get(asvs_id, {"capec_codes": []}).get(
+        "capec_codes"
+    )
 
 
 def create_link_list(requirements: dict[str, Any], capec_version: str) -> str:
     link_list = ""
     asvs_requirements = requirements.get("capec_codes", [])
     if not asvs_requirements:
-        logging.debug(
-            "No CAPEC requirements found in requirements: %s", str(requirements)
-        )
+        logging.debug("No CAPEC requirements found in requirements: %s", str(requirements))
         return ""
     sorted_requirements = sorted(asvs_requirements)
     for idx, capec_code in enumerate(sorted_requirements):
@@ -248,9 +224,7 @@ def create_link_list(requirements: dict[str, Any], capec_version: str) -> str:
 
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Convert CAPEC™ JSON to Cornucopia format"
-    )
+    parser = argparse.ArgumentParser(description="Convert CAPEC™ JSON to Cornucopia format")
     parser.add_argument(
         "-o",
         "--output-path",
@@ -372,9 +346,7 @@ def main() -> None:
     empty_folder(Path(convert_vars.args.output_path))
     create_folder(Path(convert_vars.args.output_path))
     data = load_json_file(Path(convert_vars.args.input_path))
-    asvs_map: dict[str, dict[str, List[str]]] = load_asvs_to_capec_mapping(
-        Path(convert_vars.args.asvs_to_capec)
-    )
+    asvs_map: dict[str, dict[str, List[str]]] = load_asvs_to_capec_mapping(Path(convert_vars.args.asvs_to_capec))
 
     create_asvs_pages(data, asvs_map, capec_version, asvs_version)
     logging.info("ASVS conversion process completed")

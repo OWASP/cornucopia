@@ -69,9 +69,7 @@ class TranslationChecker:
 
         return file_groups
 
-    def _separate_english_and_translations(
-        self, files: List[Path]
-    ) -> Tuple[Path | None, List[Path]]:
+    def _separate_english_and_translations(self, files: List[Path]) -> Tuple[Path | None, List[Path]]:
         """Separate English reference file from translation files."""
         english_file = None
         translation_files = []
@@ -85,9 +83,7 @@ class TranslationChecker:
 
         return english_file, translation_files
 
-    def _check_translation_tags(
-        self, english_tags: Dict[str, str], trans_tags: Dict[str, str]
-    ) -> Dict[str, Any]:
+    def _check_translation_tags(self, english_tags: Dict[str, str], trans_tags: Dict[str, str]) -> Dict[str, Any]:
         """Check translation tags against English reference."""
         missing = []
         untranslated = []
@@ -126,14 +122,10 @@ class TranslationChecker:
         file_groups = self.get_file_groups()
 
         for base_name, files in file_groups.items():
-            english_file, translation_files = self._separate_english_and_translations(
-                files
-            )
+            english_file, translation_files = self._separate_english_and_translations(files)
 
             if not english_file:
-                print(
-                    f"Warning: No English file found for {base_name}", file=sys.stderr
-                )
+                print(f"Warning: No English file found for {base_name}", file=sys.stderr)
                 continue
 
             english_tags = self.extract_tags(english_file)
@@ -161,9 +153,7 @@ class TranslationChecker:
             return "\n".join(report_lines)
 
         report_lines.append("# Translation Check Report\n")
-        report_lines.append(
-            "The following sentences/tags have issues in the translations:\n"
-        )
+        report_lines.append("The following sentences/tags have issues in the translations:\n")
 
         # Language name mapping
         lang_names = {
@@ -199,9 +189,7 @@ class TranslationChecker:
 
                 if issues["untranslated"]:
                     report_lines.append("### Untranslated Tags\n")
-                    report_lines.append(
-                        "The following tags have identical text to English (not translated):\n"
-                    )
+                    report_lines.append("The following tags have identical text to English (not translated):\n")
                     tags_str = ", ".join(issues["untranslated"])
                     report_lines.append(f"{tags_str}\n")
 
@@ -226,11 +214,31 @@ def main() -> None:
         sys.exit(1)
 
     # Run checker
-    checker = TranslationChecker(source_dir, 
-        excluded_tags=["T02330", "T02530", 
-            "T03130", "T03150", "T03170", "T03190", "T03240", "T03260",
-            "T03350", "T03420", "T03470", "T03490", "T03540", "T03580",
-            "T03710", "T03730", "T03750", "T03770", "T03772", "T03774"])
+    checker = TranslationChecker(
+        source_dir,
+        excluded_tags=[
+            "T02330",
+            "T02530",
+            "T03130",
+            "T03150",
+            "T03170",
+            "T03190",
+            "T03240",
+            "T03260",
+            "T03350",
+            "T03420",
+            "T03470",
+            "T03490",
+            "T03540",
+            "T03580",
+            "T03710",
+            "T03730",
+            "T03750",
+            "T03770",
+            "T03772",
+            "T03774",
+        ],
+    )
     results = checker.check_translations()
 
     # Generate report

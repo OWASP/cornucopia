@@ -64,9 +64,7 @@ def test_main(data):
 
     try:
         with patch.object(argparse, "ArgumentParser") as mock_parser:
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -97,9 +95,7 @@ def test_main(data):
                 "outputfile": "",
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -130,9 +126,7 @@ def test_main(data):
                 "outputfile": "",
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -163,9 +157,7 @@ def test_main(data):
                 "outputfile": "",
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -196,9 +188,7 @@ def test_main(data):
                 "outputfile": "",
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -229,9 +219,7 @@ def test_main(data):
                 "outputfile": "",
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -264,9 +252,7 @@ def test_main(data):
                 "outputfile": outputfile,
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()
@@ -297,9 +283,7 @@ def test_main(data):
                 "outputfile": "",
             }
 
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
             with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
                 with patch("sys.argv", args):
                     c.main()

@@ -25,12 +25,8 @@ class TestCapecMapEnricherIntegration(unittest.TestCase):
         self.base_path = Path(__file__).parent.parent.parent.resolve()
 
         # Set up test input file paths
-        self.test_capec_json = (
-            self.base_path / "tests" / "test_files" / "capec-3.9" / "3000.json"
-        )
-        self.test_capec_yaml = (
-            self.base_path / "tests" / "test_files" / "source" / "webapp-capec-3.0.yaml"
-        )
+        self.test_capec_json = self.base_path / "tests" / "test_files" / "capec-3.9" / "3000.json"
+        self.test_capec_yaml = self.base_path / "tests" / "test_files" / "source" / "webapp-capec-3.0.yaml"
 
         # Create temporary output directory
         self.temp_output_dir = tempfile.mkdtemp()
@@ -38,13 +34,9 @@ class TestCapecMapEnricherIntegration(unittest.TestCase):
 
         # Verify test input files exist
         if not self.test_capec_json.exists():
-            raise FileNotFoundError(
-                f"Test CAPEC JSON file not found: {self.test_capec_json}"
-            )
+            raise FileNotFoundError(f"Test CAPEC JSON file not found: {self.test_capec_json}")
         if not self.test_capec_yaml.exists():
-            raise FileNotFoundError(
-                f"Test CAPEC YAML file not found: {self.test_capec_yaml}"
-            )
+            raise FileNotFoundError(f"Test CAPEC YAML file not found: {self.test_capec_yaml}")
 
     def tearDown(self) -> None:
         """Clean up test output directory"""
@@ -82,9 +74,7 @@ class TestCapecMapEnricherIntegration(unittest.TestCase):
 
         # Verify we extracted some names
         self.assertIsInstance(capec_names, dict)
-        self.assertGreater(
-            len(capec_names), 0, "Should extract at least one CAPEC name"
-        )
+        self.assertGreater(len(capec_names), 0, "Should extract at least one CAPEC name")
 
         # Verify the structure
         for capec_id, name in capec_names.items():
@@ -101,9 +91,7 @@ class TestCapecMapEnricherIntegration(unittest.TestCase):
         expected_ids = [1, 5, 560]
 
         for capec_id in expected_ids:
-            self.assertIn(
-                capec_id, capec_names, f"CAPEC-{capec_id} should be in extracted names"
-            )
+            self.assertIn(capec_id, capec_names, f"CAPEC-{capec_id} should be in extracted names")
             self.assertIsInstance(capec_names[capec_id], str)
             self.assertGreater(len(capec_names[capec_id]), 0)
 
@@ -200,20 +188,12 @@ class TestCapecMapEnricherIntegration(unittest.TestCase):
         for capec_id in enriched.keys():
             self.assertIn(capec_id, reloaded)
             self.assertEqual(reloaded[capec_id]["name"], enriched[capec_id]["name"])
-            self.assertEqual(
-                reloaded[capec_id]["owasp_asvs"], enriched[capec_id]["owasp_asvs"]
-            )
+            self.assertEqual(reloaded[capec_id]["owasp_asvs"], enriched[capec_id]["owasp_asvs"])
 
     def test_output_to_test_files_directory(self):
         """Test saving output to the tests/test_files/output directory"""
         # Set up the expected output path
-        expected_output_path = (
-            self.base_path
-            / "tests"
-            / "test_files"
-            / "output"
-            / "edition-capec-latest.yaml"
-        )
+        expected_output_path = self.base_path / "tests" / "test_files" / "output" / "edition-capec-latest.yaml"
 
         # Create output directory if it doesn't exist
         expected_output_path.parent.mkdir(parents=True, exist_ok=True)

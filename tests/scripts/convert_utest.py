@@ -17,9 +17,7 @@ from typing import List, Dict, Any, Tuple
 import scripts.convert as c
 
 c.convert_vars = c.ConvertVars()
-c.convert_vars.BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(c.__file__)))[
-    0
-]
+c.convert_vars.BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(c.__file__)))[0]
 
 
 if "unittest.util" in __import__("sys").modules:
@@ -66,11 +64,7 @@ class MultiLingualSupportIsValidStringArgument(unittest.TestCase):
             )
         )
         # Arabic
-        self.assertTrue(
-            c.is_valid_string_argument(
-                "ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي ًٌٍَُِّْٰﷲﷴﷺﷻ ٠١٢٣٤٥٦٧٨٩ "
-            )
-        )
+        self.assertTrue(c.is_valid_string_argument("ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي ًٌٍَُِّْٰﷲﷴﷺﷻ ٠١٢٣٤٥٦٧٨٩ "))
         # European
         self.assertTrue(
             c.is_valid_string_argument(
@@ -224,10 +218,7 @@ class TestGetValidLanguagesChoices(unittest.TestCase):
 
 class TestSetCanConvertToPdf(unittest.TestCase):
     def test_set_can_convert_to_pdf(self) -> None:
-        want_can_convert_in = (
-            sys.platform.lower().find("win") != -1
-            or sys.platform.lower().find("darwin") != -1
-        )
+        want_can_convert_in = sys.platform.lower().find("win") != -1 or sys.platform.lower().find("darwin") != -1
 
         c.set_can_convert_to_pdf()
         got_can_convert = c.convert_vars.can_convert_to_pdf
@@ -400,9 +391,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
     def test_get_template_for_edition_file_not_exist(self) -> None:
         template_docx_filename = os.path.normpath(
-            os.path.join(
-                "resources", "templates", "owasp_cornucopia_template_template.docx"
-            )
+            os.path.join("resources", "templates", "owasp_cornucopia_template_template.docx")
         )
         c.convert_vars.args.inputfile = template_docx_filename
         layout = "guide"
@@ -410,8 +399,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
         edition = "webapp"
         want_template_doc = "None"
         want_error_log_messages = [
-            f"ERROR:root:Source file not found: {template_docx_filename}. "
-            "Please ensure file exists and try again."
+            f"ERROR:root:Source file not found: {template_docx_filename}. " "Please ensure file exists and try again."
         ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
@@ -422,9 +410,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
 class TestRenameOutputFile(unittest.TestCase):
     def setUp(self) -> None:
-        c.convert_vars.args = argparse.Namespace(
-            outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME
-        )
+        c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
         self.input_meta_data = {
             "edition": "webapp",
             "component": "cards",
@@ -436,35 +422,23 @@ class TestRenameOutputFile(unittest.TestCase):
         c.convert_vars.args.outputfile = ""
 
     def test_rename_output_file_short(self) -> None:
-        c.convert_vars.args.outputfile = os.path.join(
-            "output", "cornucopia_edition_ver_layout_lang.docx"
-        )
+        c.convert_vars.args.outputfile = os.path.join("output", "cornucopia_edition_ver_layout_lang.docx")
         file_extension = ".docx"
         template = "bridge"
         layout = "guide"
-        want_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_3.0_guide_en.docx"
-        )
+        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_3.0_guide_en.docx")
 
-        got_filename = c.rename_output_file(
-            file_extension, template, layout, self.input_meta_data
-        )
+        got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_no_extension(self) -> None:
-        c.convert_vars.args.outputfile = (
-            "output" + os.sep + "cornucopia_edition_ver_layout_lang"
-        )
+        c.convert_vars.args.outputfile = "output" + os.sep + "cornucopia_edition_ver_layout_lang"
         file_extension = ".idml"
         template = "bridge"
         layout = "guide"
-        want_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_3.0_guide_en.idml"
-        )
+        want_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "cornucopia_webapp_3.0_guide_en.idml")
 
-        got_filename = c.rename_output_file(
-            file_extension, template, layout, self.input_meta_data
-        )
+        got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_using_defaults(self) -> None:
@@ -478,9 +452,7 @@ class TestRenameOutputFile(unittest.TestCase):
             "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx",
         )
 
-        got_filename = c.rename_output_file(
-            file_extension, template, layout, self.input_meta_data
-        )
+        got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_blank(self) -> None:
@@ -494,9 +466,7 @@ class TestRenameOutputFile(unittest.TestCase):
             "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx",
         )
 
-        got_filename = c.rename_output_file(
-            file_extension, template, layout, self.input_meta_data
-        )
+        got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
     def test_rename_output_file_template(self) -> None:
@@ -510,9 +480,7 @@ class TestRenameOutputFile(unittest.TestCase):
             "owasp_cornucopia_webapp_3.0_guide_bridge_en.docx",
         )
 
-        got_filename = c.rename_output_file(
-            file_extension, template, layout, self.input_meta_data
-        )
+        got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
 
 
@@ -558,9 +526,7 @@ class TestValidMeta(unittest.TestCase):
             "-> languages section in the mappings file"
         )
         with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
-            valid: bool = c.valid_meta(
-                self.meta, "fr", "webapp", "3.0", "bridge", "cards"
-            )
+            valid: bool = c.valid_meta(self.meta, "fr", "webapp", "3.0", "bridge", "cards")
         self.assertFalse(valid)
         self.assertIn(want_logging_error_message, " ".join(ll.output))
 
@@ -611,9 +577,7 @@ class TestGetMetaData(unittest.TestCase):
         input_data = self.test_data.copy()
         del input_data["meta"]
         want_data: Dict[str, str] = {}
-        want_logging_error_message = [
-            "ERROR:root:Could not find meta tag in the language data."
-        ]
+        want_logging_error_message = ["ERROR:root:Could not find meta tag in the language data."]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_data = c.get_meta_data(input_data)
@@ -623,9 +587,7 @@ class TestGetMetaData(unittest.TestCase):
 
 class TestGetLanguageData(unittest.TestCase):
     def setUp(self) -> None:
-        test_source_yaml = os.path.join(
-            c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"
-        )
+        test_source_yaml = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml")
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
         self.test_data: Dict[str, Any] = {
@@ -696,19 +658,13 @@ class TestGetLanguageData(unittest.TestCase):
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
         want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
 
-        got_suits = c.get_language_data(self.input_yaml_files, self.input_language)[
-            "suits"
-        ]
+        got_suits = c.get_language_data(self.input_yaml_files, self.input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
-        self.assertEqual(
-            want_first_suit_first_card_keys, got_first_suit_first_card_keys
-        )
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
         got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
-        self.assertEqual(
-            want_first_suit_first_card_value, got_first_suit_first_card_value
-        )
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_language_data_translation_es_first_suit_first_card(self) -> None:
         want_first_suit_keys = self.test_data["suits"][0].keys()
@@ -719,13 +675,9 @@ class TestGetLanguageData(unittest.TestCase):
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
-        self.assertEqual(
-            want_first_suit_first_card_keys, got_first_suit_first_card_keys
-        )
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
         got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
-        self.assertEqual(
-            want_first_suit_first_card_value, got_first_suit_first_card_value
-        )
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_mapping_data_for_edition(self) -> None:
         want_meta = {
@@ -737,9 +689,7 @@ class TestGetLanguageData(unittest.TestCase):
             "layouts": ["cards", "leaflet", "guide"],
             "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
         }
-        got_data = c.get_mapping_data_for_edition(
-            self.input_yaml_files, self.input_language, "3.0", "webapp"
-        )
+        got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "3.0", "webapp")
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_mapping_data_for_edition_first_suit_first_card(self) -> None:
@@ -942,9 +892,7 @@ class TestGetLanguageData(unittest.TestCase):
             },
         }
 
-        got_suits = c.get_mapping_data_for_edition(
-            self.input_yaml_files, self.input_language
-        )["suits"]
+        got_suits = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -953,9 +901,7 @@ class TestGetLanguageData(unittest.TestCase):
 
 class TestGetLanguageDataFor1dot30(unittest.TestCase):
     def setUp(self) -> None:
-        test_source_yaml = os.path.join(
-            c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml"
-        )
+        test_source_yaml = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml")
         self.input_yaml_files = glob.glob(test_source_yaml)
         self.input_language = "en"
         self.input_version = "3.0"
@@ -1013,9 +959,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "version": "3.0",
         }
 
-        got_data = c.get_language_data(
-            self.input_yaml_files, self.input_language, self.input_version
-        )
+        got_data = c.get_language_data(self.input_yaml_files, self.input_language, self.input_version)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_language_data_translation_en_first_suit_first_card(self) -> None:
@@ -1023,19 +967,13 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
         want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
 
-        got_suits = c.get_language_data(
-            self.input_yaml_files, self.input_language, self.input_version
-        )["suits"]
+        got_suits = c.get_language_data(self.input_yaml_files, self.input_language, self.input_version)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
-        self.assertEqual(
-            want_first_suit_first_card_keys, got_first_suit_first_card_keys
-        )
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
         got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
-        self.assertEqual(
-            want_first_suit_first_card_value, got_first_suit_first_card_value
-        )
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_language_data_translation_es_first_suit_first_card(self) -> None:
         input_language = "es"
@@ -1043,19 +981,13 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
         want_first_suit_first_card_keys = self.test_data["suits"][0]["cards"][0].keys()
         want_first_suit_first_card_value = self.test_data["suits"][0]["cards"][0]["id"]
 
-        got_suits = c.get_language_data(
-            self.input_yaml_files, input_language, self.input_version
-        )["suits"]
+        got_suits = c.get_language_data(self.input_yaml_files, input_language, self.input_version)["suits"]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card_keys = got_suits[0]["cards"][0].keys()
-        self.assertEqual(
-            want_first_suit_first_card_keys, got_first_suit_first_card_keys
-        )
+        self.assertEqual(want_first_suit_first_card_keys, got_first_suit_first_card_keys)
         got_first_suit_first_card_value = got_suits[0]["cards"][0]["id"]
-        self.assertEqual(
-            want_first_suit_first_card_value, got_first_suit_first_card_value
-        )
+        self.assertEqual(want_first_suit_first_card_value, got_first_suit_first_card_value)
 
     def test_get_mapping_data_for_edition_asvs4(self) -> None:
         want_meta = {
@@ -1067,9 +999,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
             "languages": ["en", "es"],
         }
-        got_data = c.get_mapping_data_for_edition(
-            self.input_yaml_files, self.input_language, self.input_version
-        )
+        got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, self.input_version)
         self.assertEqual(want_meta, got_data["meta"])
 
     def test_get_mapping_data_for_edition_first_suit_first_card_asvs4(self) -> None:
@@ -1272,9 +1202,9 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             },
         }
 
-        got_suits = c.get_mapping_data_for_edition(
-            self.input_yaml_files, self.input_language, self.input_version
-        )["suits"]
+        got_suits = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, self.input_version)[
+            "suits"
+        ]
         got_first_suit_keys = got_suits[0].keys()
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
@@ -1390,13 +1320,9 @@ class TestGetFilesFromOfType(unittest.TestCase):
 
     def test_get_files_from_of_type_source_docx_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
-        path = os.path.join(
-            c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates"
-        )
+        path = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "resources", "templates")
         ext = "docx"
-        want_files = [
-            path + os.sep + "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"
-        ]
+        want_files = [path + os.sep + "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx"]
 
         got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(len(want_files), len(got_files))
@@ -1409,8 +1335,7 @@ class TestGetFilesFromOfType(unittest.TestCase):
         ext = "ext"
         want_files: typing.List[str] = []
         want_logging_error_message = [
-            "ERROR:root:No language files found in folder: "
-            + str(os.path.join(c.convert_vars.BASE_PATH, "source"))
+            "ERROR:root:No language files found in folder: " + str(os.path.join(c.convert_vars.BASE_PATH, "source"))
         ]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
@@ -1601,9 +1526,7 @@ class TestConvertDocxToPdf(unittest.TestCase):
             "test_files",
             "owasp_cornucopia_webapp_ver_guide_bridge_lang.docx",
         )
-        want_pdf_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf"
-        )
+        want_pdf_filename = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "test.pdf")
         # The message varies by platform - Windows/Mac get MS Word suggestion, Linux doesn't
         base_msg = (
             f"WARNING:root:Error. A temporary file {input_docx_filename} was created in the output folder "
@@ -1671,36 +1594,24 @@ class TestGetMappingForEdition(unittest.TestCase):
             "${VE_VE3_owasp_cre}": "{'owasp_asvs': ['848-711', '743-237', '042-550', '031-447', '532-878', '314-131', '036-725']}",  # noqa: E501
         }
 
-        got_mapping_dict = c.get_mapping_for_edition(
-            input_yaml_files, "3.0", "en", "webapp", "bridge", "cards"
-        )
+        got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_empty(self) -> None:
-        input_yaml_files = [
-            os.path.join(self.BASE_PATH, "source", "webapp-cards-3.0-en.yaml")
-        ]
+        input_yaml_files = [os.path.join(self.BASE_PATH, "source", "webapp-cards-3.0-en.yaml")]
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(
-                input_yaml_files, "3.0", "en", "webapp", "bridge", "cards"
-            )
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:No mapping file found", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
     def test_get_mapping_for_edition_wrong_file_type(self) -> None:
-        input_yaml_files = [
-            os.path.join(
-                self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx"
-            )
-        ]
+        input_yaml_files = [os.path.join(self.BASE_PATH, "resources", "originals", "owasp_cornucopia_en.docx")]
         want_mapping_dict: Dict[str, str] = {}
 
         with self.assertLogs(logging.getLogger(), logging.WARN) as ll:
-            got_mapping_dict = c.get_mapping_for_edition(
-                input_yaml_files, "3.0", "en", "webapp", "bridge", "cards"
-            )
+            got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:No mapping file found", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
 
@@ -1733,9 +1644,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             os.remove(self.temp_file)
 
     def test_create_edition_from_template_none_valid_input(self) -> None:
-        self.want_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_invalid.docx"
-        )
+        self.want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_invalid.docx")
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -1748,18 +1657,14 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         )
 
     def test_create_edition_from_template_wrong_base_path(self) -> None:
-        c.convert_vars.BASE_PATH = (
-            os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-            + "invalidpath"
-        )
+        c.convert_vars.BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0] + "invalidpath"
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as l2:
             c.create_edition_from_template("invalid", "invalid", "invalid", "invalid")
         self.assertIn(
-            "ERROR:root:No language files found in folder: "
-            + str(os.path.join(c.convert_vars.BASE_PATH, "source")),
+            "ERROR:root:No language files found in folder: " + str(os.path.join(c.convert_vars.BASE_PATH, "source")),
             " ".join(l2.output),
         )
 
@@ -1863,9 +1768,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("guide", "es")
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
-        self.assertIn(
-            "owasp_cornucopia_webapp_3.0_guide_bridge_es.odt", " ".join(ll.output)
-        )
+        self.assertIn("owasp_cornucopia_webapp_3.0_guide_bridge_es.odt", " ".join(ll.output))
 
         self.assertTrue(os.path.isfile(want_file))
 
@@ -1882,18 +1785,12 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
             c.create_edition_from_template("cards", "en")
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
-        self.assertIn(
-            "owasp_cornucopia_webapp_3.0_cards_bridge_en.idml", " ".join(ll.output)
-        )
+        self.assertIn("owasp_cornucopia_webapp_3.0_cards_bridge_en.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
 
     def test_create_edition_from_template_es_specify_output(self) -> None:
-        c.convert_vars.args.outputfile = os.path.join(
-            "output", "cornucopia_cards_es.idml"
-        )
-        self.want_file = os.path.join(
-            c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile
-        )
+        c.convert_vars.args.outputfile = os.path.join("output", "cornucopia_cards_es.idml")
+        self.want_file = os.path.join(c.convert_vars.BASE_PATH, c.convert_vars.args.outputfile)
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -1978,9 +1875,7 @@ class TestSaveDocxFile(unittest.TestCase):
             "owasp_cornucopia_en_static.docx",
         )
         input_doc = docx.Document(filename)
-        self.want_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_en_static.docx"
-        )
+        self.want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_en_static.docx")
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -2006,9 +1901,7 @@ Development Environments in July 2012.",
         }
         self.b = c.convert_vars.BASE_PATH
         c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
-        self.input_xml_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"
-        )
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -2058,9 +1951,7 @@ Development Environments in July 2012.",
         }
         self.b = c.convert_vars.BASE_PATH
         c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
-        self.input_xml_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"
-        )
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -2102,9 +1993,7 @@ class TestReplaceTextInXmlFile(unittest.TestCase):
         }
         self.b = c.convert_vars.BASE_PATH
         c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
-        self.input_xml_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"
-        )
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -2140,9 +2029,7 @@ class TestReplaceTextInXmlFileFail(unittest.TestCase):
         self.input_dict = {}
         self.b = c.convert_vars.BASE_PATH
         c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
-        self.input_xml_file = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml"
-        )
+        self.input_xml_file = os.path.join(c.convert_vars.BASE_PATH, "output", "temp", "Stories", "Story_u8fb5.xml")
         if not os.path.exists(os.path.dirname(self.input_xml_file)):
             os.makedirs(os.path.dirname(self.input_xml_file))
         if os.path.isfile(self.input_xml_file):
@@ -2163,9 +2050,7 @@ class TestReplaceTextInXmlFileFail(unittest.TestCase):
 </ParagraphStyleRange>"""
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
-            c.replace_text_in_xml_file(
-                self.input_xml_file, list(self.input_dict.items())
-            )
+            c.replace_text_in_xml_file(self.input_xml_file, list(self.input_dict.items()))
         self.assertIn(
             "ERROR:root:Failed to parse XML file",
             ll.output.pop(),
@@ -2194,24 +2079,16 @@ class Test1(unittest.TestCase):
 
     def test_get_replacement_value_from_dict_exact(self) -> None:
         input_text = "${VE_VE2_desc}"
-        want_data = (
-            "You have invented a new attack against Data Validation and Encoding"
-        )
+        want_data = "You have invented a new attack against Data Validation and Encoding"
 
-        got_data = c.get_replacement_value_from_dict(
-            input_text, self.replacement_values
-        )
+        got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
         self.assertEqual(want_data, got_data)
 
     def test_get_replacement_value_from_dict_spaced(self) -> None:
         input_text = " ${VE_VE2_desc} "
-        want_data = (
-            " You have invented a new attack against Data Validation and Encoding "
-        )
+        want_data = " You have invented a new attack against Data Validation and Encoding "
 
-        got_data = c.get_replacement_value_from_dict(
-            input_text, self.replacement_values
-        )
+        got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
         self.assertEqual(want_data, got_data)
 
 
@@ -2382,9 +2259,7 @@ class TestZipDir(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
         c.convert_vars.BASE_PATH = os.path.join(self.b, "tests", "test_files")
-        self.input_filename = os.path.join(
-            c.convert_vars.BASE_PATH, "output", "test.zip"
-        )
+        self.input_filename = os.path.join(c.convert_vars.BASE_PATH, "output", "test.zip")
 
     def tearDown(self) -> None:
         if os.path.isfile(self.input_filename):

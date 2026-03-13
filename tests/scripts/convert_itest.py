@@ -71,9 +71,7 @@ class TestMain(unittest.TestCase):
     def test_main(self):
 
         with patch.object(argparse, "ArgumentParser") as mock_parser:
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(
-                **self.argp
-            )
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**self.argp)
             with self.assertLogs(logging.getLogger(), logging.INFO) as l6:
                 with patch("sys.argv", self.args):
                     c.main()

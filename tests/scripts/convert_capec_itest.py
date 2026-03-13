@@ -25,9 +25,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
 
         self.base_path = Path(__file__).parent.parent.parent.resolve()
 
-        self.test_input_file = (
-            self.base_path / "tests" / "test_files" / "capec-3.9" / "3000.json"
-        )
+        self.test_input_file = self.base_path / "tests" / "test_files" / "capec-3.9" / "3000.json"
         self.test_asvs_mapping = (
             self.base_path
             / "tests"
@@ -35,25 +33,17 @@ class TestConvertCAPECIntegration(unittest.TestCase):
             / "asvs-5.0"
             / "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
         )
-        self.test_capec_to_asvs = (
-            self.base_path / "tests" / "test_files" / "source" / "webapp-capec-3.0.yaml"
-        )
+        self.test_capec_to_asvs = self.base_path / "tests" / "test_files" / "source" / "webapp-capec-3.0.yaml"
 
         self.temp_output_dir = tempfile.mkdtemp()
         self.test_output_path = Path(self.temp_output_dir)
 
         if not self.test_input_file.exists():
-            raise FileNotFoundError(
-                f"Test input file not found: {self.test_input_file}"
-            )
+            raise FileNotFoundError(f"Test input file not found: {self.test_input_file}")
         if not self.test_asvs_mapping.exists():
-            raise FileNotFoundError(
-                f"Test ASVS mapping file not found: {self.test_asvs_mapping}"
-            )
+            raise FileNotFoundError(f"Test ASVS mapping file not found: {self.test_asvs_mapping}")
         if not self.test_capec_to_asvs.exists():
-            raise FileNotFoundError(
-                f"Test CAPEC to ASVS mapping file not found: {self.test_capec_to_asvs}"
-            )
+            raise FileNotFoundError(f"Test CAPEC to ASVS mapping file not found: {self.test_capec_to_asvs}")
 
     def tearDown(self) -> None:
         """Clean up test output directory"""
@@ -95,13 +85,9 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         capec_to_asvs_map = capec.load_capec_to_asvs_mapping(self.test_capec_to_asvs)
         capec.create_capec_pages(data, capec_to_asvs_map, asvs_map, "5.0")
 
-        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"][
-            "Attack_Pattern"
-        ]
+        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
 
-        self.assertGreater(
-            len(attack_patterns), 0, "Should have at least one attack pattern"
-        )
+        self.assertGreater(len(attack_patterns), 0, "Should have at least one attack pattern")
 
         first_pattern = attack_patterns[0]
         first_id = str(first_pattern["_ID"])
@@ -110,12 +96,8 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         pattern_dir = self.test_output_path / first_id
         index_file = pattern_dir / "index.md"
 
-        self.assertTrue(
-            pattern_dir.exists(), f"Directory for CAPEC-{first_id} should exist"
-        )
-        self.assertTrue(
-            index_file.exists(), f"index.md for CAPEC-{first_id} should exist"
-        )
+        self.assertTrue(pattern_dir.exists(), f"Directory for CAPEC-{first_id} should exist")
+        self.assertTrue(index_file.exists(), f"index.md for CAPEC-{first_id} should exist")
 
         content = index_file.read_text(encoding="utf-8")
         self.assertIn(f"CAPEC™ {first_id}", content)
@@ -127,9 +109,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         """Test that all attack patterns in test data are converted"""
 
         data = capec.load_json_file(self.test_input_file)
-        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"][
-            "Attack_Pattern"
-        ]
+        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
 
         capec.convert_vars.args = argparse.Namespace(
             output_path=self.test_output_path,
@@ -149,9 +129,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
             pattern_id = str(pattern["_ID"])
             index_file = self.test_output_path / pattern_id / "index.md"
 
-            self.assertTrue(
-                index_file.exists(), f"index.md should exist for CAPEC-{pattern_id}"
-            )
+            self.assertTrue(index_file.exists(), f"index.md should exist for CAPEC-{pattern_id}")
 
     def test_created_file_content_structure(self):
         """Test that created markdown files have correct structure"""
@@ -172,9 +150,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         capec_to_asvs_map = capec.load_capec_to_asvs_mapping(self.test_capec_to_asvs)
         capec.create_capec_pages(data, capec_to_asvs_map, asvs_map, "5.0")
 
-        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"][
-            "Attack_Pattern"
-        ]
+        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
         pattern = attack_patterns[0]
         pattern_id = str(pattern["_ID"])
         pattern_name = pattern["_Name"]
@@ -184,9 +160,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
 
         lines = content.split("\n")
 
-        self.assertTrue(
-            lines[0].startswith("# CAPEC™ "), "First line should be title with CAPEC-"
-        )
+        self.assertTrue(lines[0].startswith("# CAPEC™ "), "First line should be title with CAPEC-")
         self.assertIn(pattern_name, lines[0])
 
         self.assertIn("## Description", content)
@@ -265,9 +239,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         with self.assertLogs(logging.getLogger(), logging.INFO):
             capec.create_capec_pages(data, capec_to_asvs_map, asvs_map, "5.0")
 
-        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"][
-            "Attack_Pattern"
-        ]
+        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
 
         for pattern in attack_patterns:
             pattern_id = str(pattern["_ID"])
@@ -278,9 +250,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         """Test that different description formats in test data are parsed correctly"""
 
         data = capec.load_json_file(self.test_input_file)
-        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"][
-            "Attack_Pattern"
-        ]
+        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
 
         for pattern in attack_patterns:
             description = pattern.get("Description", "")
@@ -411,11 +381,7 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         if capec_5_file.exists():
             content = capec_5_file.read_text(encoding="utf-8")
             # Should not have ASVS section if mapping is empty
-            lines_with_asvs = [
-                line
-                for line in content.split("\n")
-                if "## Related ASVS Requirements" in line
-            ]
+            lines_with_asvs = [line for line in content.split("\n") if "## Related ASVS Requirements" in line]
             # Either no section, or empty section
             self.assertTrue(len(lines_with_asvs) == 0 or "ASVS (5.0):" not in content)
 
@@ -426,9 +392,7 @@ class TestConvertCAPECWithOutputDirectory(unittest.TestCase):
     def setUp(self) -> None:
         """Set up test environment"""
         self.base_path = Path(__file__).parent.parent.parent.resolve()
-        self.test_input_file = (
-            self.base_path / "tests" / "test_files" / "capec-3.9" / "3000.json"
-        )
+        self.test_input_file = self.base_path / "tests" / "test_files" / "capec-3.9" / "3000.json"
         self.test_asvs_mapping = (
             self.base_path
             / "tests"
@@ -436,9 +400,7 @@ class TestConvertCAPECWithOutputDirectory(unittest.TestCase):
             / "asvs-5.0"
             / "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
         )
-        self.test_capec_to_asvs = (
-            self.base_path / "tests" / "test_files" / "source" / "webapp-capec-3.0.yaml"
-        )
+        self.test_capec_to_asvs = self.base_path / "tests" / "test_files" / "source" / "webapp-capec-3.0.yaml"
 
         # Use the actual test output directory (create if doesn't exist)
         self.test_output_base = self.base_path / "tests" / "test_files" / "output"
@@ -475,9 +437,7 @@ class TestConvertCAPECWithOutputDirectory(unittest.TestCase):
 
         capec.create_capec_pages(data, capec_to_asvs_map, asvs_map, "5.0")
 
-        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"][
-            "Attack_Pattern"
-        ]
+        attack_patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]["Attack_Pattern"]
         first_pattern_id = str(attack_patterns[0]["_ID"])
 
         output_file = self.test_output_path / first_pattern_id / "index.md"

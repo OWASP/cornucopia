@@ -12,9 +12,7 @@ enricher.enricher_vars = enricher.EnricherVars()
 
 class ConvertVars:
     OUTPUT_DIR: str = str(Path(__file__).parent.parent.resolve() / "test_files/output")
-    OUTPUT_FILE: str = str(
-        Path(__file__).parent.parent.resolve() / OUTPUT_DIR / "enriched_capec.yaml"
-    )
+    OUTPUT_FILE: str = str(Path(__file__).parent.parent.resolve() / OUTPUT_DIR / "enriched_capec.yaml")
 
 
 if "unittest.util" in __import__("sys").modules:
@@ -98,11 +96,7 @@ class TestExtractCapecNames(unittest.TestCase):
 
     def test_extract_capec_names_not_list(self):
         """Test with Attack_Pattern not being a list"""
-        data = {
-            "Attack_Pattern_Catalog": {
-                "Attack_Patterns": {"Attack_Pattern": "not a list"}
-            }
-        }
+        data = {"Attack_Pattern_Catalog": {"Attack_Patterns": {"Attack_Pattern": "not a list"}}}
 
         with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
             result = enricher.extract_capec_names(data)
@@ -222,9 +216,7 @@ class TestLoadJsonFile(unittest.TestCase):
     def test_load_file_not_found(self, mock_file):
         """Test loading non-existent file"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = enricher.load_json_file(
-                Path(ConvertVars.OUTPUT_DIR + "/nonexistent.json")
-            )
+            result = enricher.load_json_file(Path(ConvertVars.OUTPUT_DIR + "/nonexistent.json"))
 
         self.assertEqual(result, {})
         self.assertIn("File not found", log.output[0])
@@ -233,9 +225,7 @@ class TestLoadJsonFile(unittest.TestCase):
     def test_load_invalid_json(self, mock_file):
         """Test loading file with invalid JSON"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = enricher.load_json_file(
-                Path(ConvertVars.OUTPUT_DIR + "/invalid.json")
-            )
+            result = enricher.load_json_file(Path(ConvertVars.OUTPUT_DIR + "/invalid.json"))
 
         self.assertEqual(result, {})
         self.assertIn("Error parsing JSON file", log.output[0])
@@ -266,9 +256,7 @@ class TestLoadYamlFile(unittest.TestCase):
     def test_load_yaml_file_not_found(self, mock_file):
         """Test loading non-existent YAML file"""
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = enricher.load_yaml_file(
-                Path(ConvertVars.OUTPUT_DIR + "/nonexistent.yaml")
-            )
+            result = enricher.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "/nonexistent.yaml"))
 
         self.assertEqual(result, {})
         self.assertIn("File not found", log.output[0])
@@ -295,9 +283,7 @@ class TestSaveYamlFile(unittest.TestCase):
         data = {1: {"name": "Test"}}
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
-            result = enricher.save_yaml_file(
-                Path(ConvertVars.OUTPUT_DIR + "/error.yaml"), data
-            )
+            result = enricher.save_yaml_file(Path(ConvertVars.OUTPUT_DIR + "/error.yaml"), data)
 
         self.assertFalse(result)
         self.assertIn("Error saving YAML file", log.output[0])

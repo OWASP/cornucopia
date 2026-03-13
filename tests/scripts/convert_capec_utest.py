@@ -76,9 +76,7 @@ class TestValidateJsonData(unittest.TestCase):
         """Test validation with valid data structure"""
         data = {
             "Attack_Pattern_Catalog": {
-                "Attack_Patterns": {
-                    "Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern"}]
-                },
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "Test Pattern"}]},
                 "Categories": {
                     "Category": [
                         {
@@ -154,11 +152,7 @@ class TestValidateJsonData(unittest.TestCase):
 
     def test_validate_json_data_attack_pattern_not_list(self):
         """Test validation when Attack_Pattern is not a list"""
-        data = {
-            "Attack_Pattern_Catalog": {
-                "Attack_Patterns": {"Attack_Pattern": "not a list"}
-            }
-        }
+        data = {"Attack_Pattern_Catalog": {"Attack_Patterns": {"Attack_Pattern": "not a list"}}}
         with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
             result = capec.validate_json_data(data)
         self.assertFalse(result)
@@ -191,9 +185,7 @@ class TestLoadJsonFile(unittest.TestCase):
         mock_file = mock_open(read_data="invalid json content {")
 
         with patch("builtins.open", mock_file):
-            with patch(
-                "json.load", side_effect=json.JSONDecodeError("Invalid", "doc", 0)
-            ):
+            with patch("json.load", side_effect=json.JSONDecodeError("Invalid", "doc", 0)):
                 with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
                     result = capec.load_json_file(Path("/test/file.json"))
 
@@ -372,9 +364,7 @@ class TestCreateCapecPages(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(
-                test_data, test_capec_to_asvs_map, test_asvs_map, "5.0"
-            )
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Verify create_folder was called
         mock_create_folder.assert_called()
@@ -450,9 +440,7 @@ class TestCreateCapecPages(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(
-                test_data, test_capec_to_asvs_map, test_asvs_map, "5.0"
-            )
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Verify create_folder was called twice (once for each pattern)
         self.assertEqual(mock_create_folder.call_count, 3)
@@ -462,9 +450,7 @@ class TestCreateCapecPages(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convert_capec.create_folder")
-    def test_create_capec_pages_complex_description(
-        self, mock_create_folder, mock_file
-    ):
+    def test_create_capec_pages_complex_description(self, mock_create_folder, mock_file):
         """Test creating CAPEC pages with complex description format"""
         # Setup
         test_output_path = Path("/test/output")
@@ -479,11 +465,7 @@ class TestCreateCapecPages(unittest.TestCase):
                         {
                             "_ID": "456",
                             "_Name": "Complex Pattern",
-                            "Description": {
-                                "Description": {
-                                    "p": {"__text": "Complex description text"}
-                                }
-                            },
+                            "Description": {"Description": {"p": {"__text": "Complex description text"}}},
                         }
                     ]
                 },
@@ -516,9 +498,7 @@ class TestCreateCapecPages(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(
-                test_data, test_capec_to_asvs_map, test_asvs_map, "5.0"
-            )
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         # Get the written content
         handle = mock_file()
@@ -682,9 +662,7 @@ class TestCreatelink(unittest.TestCase):
                         {
                             "Ordinal": 1,
                             "Name": "General Authorization Design",
-                            "Items": [
-                                {"Shortcode": "V8.1.1", "Text": "Test requirement"}
-                            ],
+                            "Items": [{"Shortcode": "V8.1.1", "Text": "Test requirement"}],
                         }
                     ],
                 }
@@ -867,9 +845,7 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
 
         with patch.object(Path, "parent") as mock_parent:
             mock_parent.resolve.return_value = Path("/mock/directory")
-            capec.create_capec_pages(
-                test_data, test_capec_to_asvs_map, test_asvs_map, "5.0"
-            )
+            capec.create_capec_pages(test_data, test_capec_to_asvs_map, test_asvs_map, "5.0")
 
         handle = mock_file()
         written_content = "".join(call.args[0] for call in handle.write.call_args_list)

@@ -15,15 +15,9 @@ from pathvalidate.argparse import validate_filepath_arg
 
 
 class ConvertVars:
-    DEFAULT_OUTPUT_PATH = (
-        Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/capec-3.9"
-    )
-    DEFAULT_INPUT_PATH = (
-        Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
-    )
-    DEFAULT_CAPEC_TO_ASVS_INPUT_PATH = (
-        Path(__file__).parent / "../source/webapp-capec-3.0.yaml"
-    )
+    DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/capec-3.9"
+    DEFAULT_INPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
+    DEFAULT_CAPEC_TO_ASVS_INPUT_PATH = Path(__file__).parent / "../source/webapp-capec-3.0.yaml"
     DEFAULT_ASVS_MAPPING_PATH = (
         Path(__file__).parent / "../cornucopia.owasp.org/data/asvs-5.0/en/"
         "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
@@ -51,9 +45,7 @@ def create_capec_pages(
         f.write("## Description\n\n")
         f.write(f"{parse_description(i.get('Description', ''))}\n\n")
         capec_id = int(i["_ID"])
-        f.write(
-            f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n"
-        )
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
         if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
             logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
         else:
@@ -75,9 +67,7 @@ def create_capec_pages(
         f.write("## Description\n\n")
         f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
         capec_id = int(i["_ID"])
-        f.write(
-            f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n"
-        )
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
         if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
             logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
         else:
@@ -90,47 +80,31 @@ def create_capec_pages(
     logging.info("Created %d CAPEC pages", pages)
 
 
-def has_no_asvs_mapping(
-    capec_id: int, capec_to_asvs_map: dict[int, dict[str, List[str]]]
-) -> bool:
-    return not capec_to_asvs_map.get(capec_id) or not capec_to_asvs_map.get(
-        capec_id, {"owasp_asvs": []}
-    ).get("owasp_asvs")
+def has_no_asvs_mapping(capec_id: int, capec_to_asvs_map: dict[int, dict[str, List[str]]]) -> bool:
+    return not capec_to_asvs_map.get(capec_id) or not capec_to_asvs_map.get(capec_id, {"owasp_asvs": []}).get(
+        "owasp_asvs"
+    )
 
 
 def parse_description(description_field: Any) -> str:
     """Parse CAPEC description field which can be dict, list, or string."""
     if isinstance(description_field, dict):
-        if (
-            "Description" in description_field
-            and "p" in description_field["Description"]
-        ):
+        if "Description" in description_field and "p" in description_field["Description"]:
             p_content = description_field["Description"]["p"]
             if isinstance(p_content, dict) and "__text" in p_content:
                 return str(p_content["__text"])
             elif isinstance(p_content, list):
                 return " ".join(
-                    [
-                        (
-                            str(p["__text"])
-                            if isinstance(p, dict) and "__text" in p
-                            else str(p)
-                        )
-                        for p in p_content
-                    ]
+                    [(str(p["__text"]) if isinstance(p, dict) and "__text" in p else str(p)) for p in p_content]
                 )
     return str(description_field)
 
 
-def create_link_list(
-    requirements: dict[str, Any], asvs_map: dict[str, Any], asvs_version: str
-) -> str:
+def create_link_list(requirements: dict[str, Any], asvs_map: dict[str, Any], asvs_version: str) -> str:
     link_list = ""
     asvs_requirements = requirements.get("owasp_asvs", [])
     if not asvs_requirements:
-        logging.debug(
-            "No ASVS requirements found in requirements: %s", str(requirements)
-        )
+        logging.debug("No ASVS requirements found in requirements: %s", str(requirements))
         return ""
     sorted_requirements = sorted(asvs_requirements)
     for idx, shortcode in enumerate(sorted_requirements):
@@ -143,22 +117,14 @@ def create_link_list(
 
 def createlink(data: dict[str, Any], shortcode: str, asvs_version: str) -> str:
     for i in data["Requirements"]:
-        name = (
-            str(i["Ordinal"]).rjust(2, "0")
-            + "-"
-            + i["Name"].lower().replace(" ", "-").replace(",", "")
-        )
+        name = str(i["Ordinal"]).rjust(2, "0") + "-" + i["Name"].lower().replace(" ", "-").replace(",", "")
 
         for item in i["Items"]:
             itemname = (
-                str(item["Ordinal"]).rjust(2, "0")
-                + "-"
-                + item["Name"].lower().replace(" ", "-").replace(",", "")
+                str(item["Ordinal"]).rjust(2, "0") + "-" + item["Name"].lower().replace(" ", "-").replace(",", "")
             )
             for subitem in item["Items"]:
-                if shortcode.removeprefix("V") == subitem["Shortcode"].removeprefix(
-                    "V"
-                ):
+                if shortcode.removeprefix("V") == subitem["Shortcode"].removeprefix("V"):
                     return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem['Shortcode']})"
     return shortcode if shortcode else ""
 
@@ -237,9 +203,7 @@ def load_capec_to_asvs_mapping(filepath: Path) -> dict[int, dict[str, List[str]]
 
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Convert CAPEC JSON to Cornucopia format"
-    )
+    parser = argparse.ArgumentParser(description="Convert CAPEC JSON to Cornucopia format")
     parser.add_argument(
         "-o",
         "--output-path",
@@ -316,9 +280,7 @@ def main() -> None:
     if not asvs_map:
         logging.error("Failed to load ASVS mapping data")
         return
-    capec_to_asvs_map = load_capec_to_asvs_mapping(
-        Path(convert_vars.args.capec_to_asvs)
-    )
+    capec_to_asvs_map = load_capec_to_asvs_mapping(Path(convert_vars.args.capec_to_asvs))
     if not capec_to_asvs_map:
         logging.error("Failed to load CAPEC to ASVS mapping")
         return
