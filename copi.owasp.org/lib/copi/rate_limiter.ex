@@ -86,13 +86,13 @@ defmodule Copi.RateLimiter do
         game_creation: get_env_config(:game_creation_limit, 20),
         player_creation: get_env_config(:player_creation_limit, 60),
         connection: get_env_config(:connection_limit, 133),
-        api_action: get_env_config(:api_action_limit, 10)
+        api_action: get_env_config(:api_action_limit, 133)
       },
       windows: %{
         game_creation: get_env_config(:game_creation_window, 3600),
         player_creation: get_env_config(:player_creation_window, 3600),
         connection: get_env_config(:connection_window, 1),
-        api_action: get_env_config(:api_action_window, 60)
+        api_action: get_env_config(:api_action_window, 133)
       },
       requests: %{}
     }
