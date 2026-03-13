@@ -38,6 +38,7 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_pt')).toBeDefined();
 
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en')).toBeDefined();
+        expect((new DeckService()).getCardDataForEditionVersionLang('companion', '1.0', 'en')).toBeDefined();
 
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru').size).toBe(80);
@@ -52,8 +53,8 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_pt').size).toBe(80);
     });
 
-    it("should return 160 cards.", async () => {
+    it("should return 251 cards.", async () => {
         let cards = (new DeckService()).getCards('en');
-        expect(cards.size).toBe(160);
+        expect(cards.size).toBe(251);
     });
 });

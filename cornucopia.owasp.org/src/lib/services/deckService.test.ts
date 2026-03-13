@@ -28,6 +28,10 @@ describe('DeckService tests', () => {
             expect(DeckService.hasEdition('mobileapp')).toBe(true);
         });
 
+        it('should return true for companion edition', () => {
+            expect(DeckService.hasEdition('companion')).toBe(true);
+        });
+
         it('should return false for unknown edition', () => {
             expect(DeckService.hasEdition('unknown')).toBe(false);
         });
@@ -48,6 +52,10 @@ describe('DeckService tests', () => {
 
         it('should return true for mobileapp version 1.1', () => {
             expect(DeckService.hasVersion('mobileapp', '1.1')).toBe(true);
+        });
+
+        it('should return true for companion version 1.0', () => {
+            expect(DeckService.hasVersion('companion', '1.0')).toBe(true);
         });
 
         it('should return false for invalid version', () => {
@@ -100,6 +108,10 @@ describe('DeckService tests', () => {
             expect(DeckService.hasLanguage('mobileapp', 'en')).toBe(true);
         });
 
+        it('should return true for companion with en', () => {
+            expect(DeckService.hasLanguage('companion', 'en')).toBe(true);
+        });
+
         it('should return false for mobileapp with es', () => {
             expect(DeckService.hasLanguage('mobileapp', 'es')).toBe(false);
         });
@@ -116,8 +128,9 @@ describe('DeckService tests', () => {
     describe('getDecks', () => {
         it('should return all available decks', () => {
             const decks = DeckService.getDecks();
-            expect(decks).toHaveLength(3);
+            expect(decks).toHaveLength(4);
             expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ 
                 edition: 'webapp', 
                 version: '2.2', 
@@ -136,6 +149,10 @@ describe('DeckService tests', () => {
             expect(DeckService.getLatestVersion('mobileapp')).toBe('1.1');
         });
 
+        it('should return 1.0 for companion', () => {
+            expect(DeckService.getLatestVersion('companion')).toBe('1.0');
+        });
+
         it('should return 2.2 as default for unknown edition', () => {
             expect(DeckService.getLatestVersion('unknown')).toBe('2.2');
         });
@@ -144,9 +161,10 @@ describe('DeckService tests', () => {
     describe('getLatestEditions', () => {
         it('should return array of latest editions', () => {
             const editions = DeckService.getLatestEditions();
-            expect(editions).toHaveLength(2);
+            expect(editions).toHaveLength(3);
             expect(editions).toContain('webapp');
             expect(editions).toContain('mobileapp');
+            expect(editions).toContain('companion');
         });
     }, 10000);
 
@@ -169,6 +187,11 @@ describe('DeckService tests', () => {
             expect(languages).toContain('en');
         });
 
+        it('should return en for companion', () => {
+            const languages = DeckService.getLanguages('companion');
+            expect(languages).toContain('en');
+        });
+
         it('should return default en for unknown edition', () => {
             const languages = DeckService.getLanguages('unknown');
             expect(languages).toEqual(['en']);
@@ -188,6 +211,11 @@ describe('DeckService tests', () => {
 
         it('should return only en for mobileapp version 1.1', () => {
             const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
+            expect(languages).toEqual(['en']);
+        });
+
+        it('should return only en for companion version 1.0', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('companion', '1.0');
             expect(languages).toEqual(['en']);
         });
 
@@ -214,6 +242,11 @@ describe('DeckService tests', () => {
             const versions = DeckService.getVersions('mobileapp');
             expect(versions).toEqual(['1.1']);
         });
+
+        it('should return version for companion', () => {
+            const versions = DeckService.getVersions('companion');
+            expect(versions).toEqual(['1.0']);
+            });
 
         it('should return empty array for unknown edition', () => {
             const versions = DeckService.getVersions('unknown');
@@ -263,6 +296,29 @@ suits:
 
             const result = deckService.getCards('en');
             expect(result).toBeInstanceOf(Map);
+        });
+
+        it('should return fully-merged cards on second call (cache must not be poisoned by partial result)', () => {
+            const mobileCard = { id: 'MOBILE-1', edition: 'mobileapp' } as Card;
+            const webCard = { id: 'WEB-1', edition: 'webapp' } as Card;
+
+            vi.spyOn(deckService, 'getCardDataForEditionVersionLang').mockImplementation(
+                (edition: string, _version: string, _lang: string) => {
+                    if (edition === 'mobileapp') return new Map([['MOBILE-1', mobileCard]]);
+                    if (edition === 'webapp') return new Map([['WEB-1', webCard]]);
+                    return new Map();
+                }
+            );
+
+            // First call — populates cache
+            const firstResult = deckService.getCards('en');
+            expect(firstResult.has('MOBILE-1')).toBe(true);
+            expect(firstResult.has('WEB-1')).toBe(true);
+
+            // Second call — must hit cache with fully-merged result, not a partial one
+            const secondResult = deckService.getCards('en');
+            expect(secondResult.has('MOBILE-1')).toBe(true);
+            expect(secondResult.has('WEB-1')).toBe(true);
         });
     }, 10000);
 
