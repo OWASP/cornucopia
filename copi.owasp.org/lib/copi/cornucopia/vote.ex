@@ -12,7 +12,7 @@ defmodule Copi.Cornucopia.Vote do
   @doc false
   def changeset(vote, attrs) do
     vote
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:dealt_card_id, :player_id])
+    |> validate_required([:dealt_card_id, :player_id])
   end
 end
