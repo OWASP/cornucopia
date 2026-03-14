@@ -30,6 +30,19 @@ defmodule Copi.RateLimiterTest do
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :game_creation)
     end
 
+    test "blocks requests over the play card limit", %{ip: ip} do
+      config = RateLimiter.get_config()
+      limit = config.limits.play_card
+
+      # Make requests up to the limit
+      for _ <- 1..limit do
+        assert {:ok, _} = RateLimiter.check_rate(ip, :play_card)
+      end
+
+      # Next request should be blocked
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :play_card)
+    end
+
     test "blocks requests over the player creation limit", %{ip: ip} do
       config = RateLimiter.get_config()
       limit = config.limits.player_creation
@@ -135,10 +148,12 @@ defmodule Copi.RateLimiterTest do
       assert Map.has_key?(config.limits, :game_creation)
       assert Map.has_key?(config.limits, :player_creation)
       assert Map.has_key?(config.limits, :connection)
+      assert Map.has_key?(config.limits, :play_card)
 
       assert Map.has_key?(config.windows, :game_creation)
       assert Map.has_key?(config.windows, :player_creation)
       assert Map.has_key?(config.windows, :connection)
+      assert Map.has_key?(config.windows, :play_card)
     end
 
     test "has sensible default values" do
@@ -154,11 +169,17 @@ defmodule Copi.RateLimiterTest do
       # Connection limit should be the highest
       assert config.limits.connection >= config.limits.player_creation
 
+      # Play card limit should be reasonable (10 per 60s by default)
+      assert config.limits.play_card > 0
+      assert config.limits.play_card <= 30
+
       # Windows should be in reasonable ranges (seconds)
       assert config.windows.game_creation >= 60
       assert config.windows.player_creation >= 60
       # Connection window can be as low as 1 second for high-frequency limits
       assert config.windows.connection >= 1
+      # Play card window should be at least 1 second
+      assert config.windows.play_card >= 1
     end
 
     test "handles invalid environment variable gracefully" do
@@ -170,6 +191,7 @@ defmodule Copi.RateLimiterTest do
       assert is_integer(config.limits.game_creation) and config.limits.game_creation > 0
       assert is_integer(config.limits.player_creation) and config.limits.player_creation > 0
       assert is_integer(config.limits.connection) and config.limits.connection > 0
+      assert is_integer(config.limits.play_card) and config.limits.play_card > 0
     end
   end
 
