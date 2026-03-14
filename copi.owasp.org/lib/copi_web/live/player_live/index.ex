@@ -23,9 +23,16 @@ defmodule CopiWeb.PlayerLive.Index do
 
   defp apply_action(socket, :new, %{"game_id" => game_id}) do
     game = socket.assigns.game
-    socket
-    |> assign(:page_title, "You're joining the game: #{game.name}")
-    |> assign(:player, %Player{game_id: game_id})
+
+    if game.started_at do
+      socket
+      |> put_flash(:error, "This game has already started. You cannot join a game in progress.")
+      |> push_navigate(to: ~p"/games/#{game_id}")
+    else
+      socket
+      |> assign(:page_title, "You're joining the game: #{game.name}")
+      |> assign(:player, %Player{game_id: game_id})
+    end
   end
 
   defp apply_action(socket, :index, _params) do
