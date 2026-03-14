@@ -286,5 +286,39 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
     end
+
+    test "toggle_vote rejects vote on a dealt card from another game", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      # Create a second game with its own player and dealt card
+      {:ok, other_game} = Cornucopia.create_game(%{name: "other game"})
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: other_game.id})
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "TV2", description: "D", edition: "webapp",
+          version: "2.2", external_id: "TV_CROSS1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      other_dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: other_player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Attempt to vote on a dealt card from the other game — should be rejected
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(other_dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, unchanged_dealt} = Copi.Cornucopia.DealtCard.find(to_string(other_dealt.id))
+      assert length(unchanged_dealt.votes) == 0
+    end
   end
 end
