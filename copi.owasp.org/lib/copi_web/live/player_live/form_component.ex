@@ -90,28 +90,53 @@ defmodule CopiWeb.PlayerLive.FormComponent do
 
   defp save_player(socket, :new, player_params) do
     ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
+    game_id = player_params["game_id"]
 
-    case RateLimiter.check_rate(ip, :player_creation) do
-      {:ok, _remaining} ->
-        case Cornucopia.create_player(player_params) do
-          {:ok, player} ->
-            {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
-            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-            {:noreply,
-             socket
-             |> assign(:game, updated_game)
-             |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
-
-          {:error, %Ecto.Changeset{} = changeset} ->
-            {:noreply, assign_form(socket, changeset)}
-        end
-
-      {:error, :rate_limit_exceeded} ->
+    # V2.2: Re-fetch authoritative game state from DB at the trusted service layer
+    # to prevent bypassing the UI check via direct form submission or race conditions
+    case Cornucopia.Game.find(game_id) do
+      {:ok, game} when game.started_at != nil ->
         {:noreply,
          socket
-         |> put_flash(:error, "Too many player creation attempts. Please try again later.")
-         |> assign_form(Cornucopia.change_player(socket.assigns.player))}
+         |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+         |> push_navigate(to: ~p"/games/#{game_id}")}
+
+      {:ok, _game} ->
+        case RateLimiter.check_rate(ip, :player_creation) do
+          {:ok, _remaining} ->
+            case Cornucopia.create_player(player_params) do
+              {:ok, player} ->
+                {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
+                CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+                {:noreply,
+                 socket
+                 |> assign(:game, updated_game)
+                 |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
+
+              {:error, :game_already_started} ->
+                # V15.4: Race condition caught by transaction - game started between check and insert
+                {:noreply,
+                 socket
+                 |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+                 |> push_navigate(to: ~p"/games")}
+
+              {:error, %Ecto.Changeset{} = changeset} ->
+                {:noreply, assign_form(socket, changeset)}
+            end
+
+          {:error, :rate_limit_exceeded} ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Too many player creation attempts. Please try again later.")
+             |> assign_form(Cornucopia.change_player(socket.assigns.player))}
+        end
+
+      {:error, _} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Game not found")
+         |> push_navigate(to: ~p"/games")}
     end
   end
 

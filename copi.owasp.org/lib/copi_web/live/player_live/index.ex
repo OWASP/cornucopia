@@ -7,12 +7,41 @@ defmodule CopiWeb.PlayerLive.Index do
   @impl true
   def mount(%{"game_id" => game_id}, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
-    {:ok, assign(assign(socket, :client_ip, ip), players: list_players(game_id), game: Cornucopia.get_game!(game_id))}
+    game = Cornucopia.get_game!(game_id)
+
+    # V2.2: Block at mount — returning redirect from mount sends a true HTTP 302
+    # during the dead (static) render, before any HTML or WebSocket reaches the client.
+    if game.started_at do
+      {:ok,
+       socket
+       |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+       |> redirect(to: ~p"/games")}
+    else
+      {:ok, assign(assign(socket, :client_ip, ip), players: list_players(game_id), game: game)}
+    end
   end
 
   @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  def handle_params(%{"game_id" => game_id} = params, _url, socket) do
+    # Re-fetch game state for LiveView client-side navigations (when mount isn't called)
+    game = Cornucopia.get_game!(game_id)
+
+    # V2.2: Also check in handle_params for LiveView navigation scenarios
+    if game.started_at do
+      {:noreply,
+       socket
+       |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+       |> redirect(to: ~p"/games")}
+    else
+      # Assign freshly loaded game and players for LiveView client-side navigations
+      players = list_players(game_id)
+
+      {:noreply,
+       socket
+       |> assign(:game, game)
+       |> assign(:players, players)
+       |> apply_action(socket.assigns.live_action, params)}
+    end
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do

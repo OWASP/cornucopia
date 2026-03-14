@@ -34,7 +34,6 @@ defmodule CopiWeb.GameLive.Show do
         {:error, _reason} ->
           {:noreply, redirect(socket, to: "/error")}
       end
-
     else
       {:error, _reason} ->
         {:noreply, redirect(socket, to: "/error")}
