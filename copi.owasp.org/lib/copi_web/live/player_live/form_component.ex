@@ -89,6 +89,20 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   end
 
   defp save_player(socket, :new, player_params) do
+    game_id = socket.assigns.player.game_id
+    game = Cornucopia.get_game!(game_id)
+
+    if game.started_at do
+      {:noreply,
+       socket
+       |> put_flash(:error, "This game has already started. You cannot join a game in progress.")
+       |> push_navigate(to: ~p"/games/#{game_id}")}
+    else
+      save_new_player(socket, player_params)
+    end
+  end
+
+  defp save_new_player(socket, player_params) do
     ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
 
     case RateLimiter.check_rate(ip, :player_creation) do
