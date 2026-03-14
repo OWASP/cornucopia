@@ -41,6 +41,12 @@ defmodule Copi.CornucopiaTest do
       assert {:error, %Ecto.Changeset{}} = Cornucopia.create_game(@invalid_attrs)
     end
 
+    test "create_game/1 rejects name containing HTML tags" do
+      attrs = %{@valid_attrs | name: "<script>alert('xss')</script>"}
+      assert {:error, %Ecto.Changeset{} = changeset} = Cornucopia.create_game(attrs)
+      assert {"must not contain < or > characters", _} = changeset.errors[:name]
+    end
+
     test "update_game/2 with valid data updates the game" do
       game = game_fixture()
       assert {:ok, %Game{} = game} = Cornucopia.update_game(game, @update_attrs)
@@ -142,6 +148,12 @@ defmodule Copi.CornucopiaTest do
 
     test "create_player/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Cornucopia.create_player(@invalid_attrs)
+    end
+
+    test "create_player/1 rejects name containing HTML tags" do
+      attrs = %{@valid_attrs | name: "<img src=x onerror=alert(1)>"}
+      assert {:error, %Ecto.Changeset{} = changeset} = Cornucopia.create_player(attrs)
+      assert {"must not contain < or > characters", _} = changeset.errors[:name]
     end
 
     test "update_player/2 with valid data updates the player" do

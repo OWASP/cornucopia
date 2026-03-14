@@ -27,5 +27,6 @@ defmodule Copi.Cornucopia.Player do
     |> cast(attrs, [:name, :game_id])
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 50)
+    |> validate_format(:name, ~r/\A[^<>]*\z/, message: "must not contain < or > characters")
   end
 end
