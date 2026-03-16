@@ -79,8 +79,8 @@ importers:
         specifier: ^4.4.5
         version: 4.4.5(picomatch@4.0.3)(svelte@5.50.3)(typescript@5.9.3)
       svelte-sitemap:
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^3.0.1
+        version: 3.0.1
       then-request:
         specifier: ^6.0.2
         version: 6.0.2
@@ -2038,8 +2038,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-sitemap@3.0.0:
-    resolution: {integrity: sha512-0lhhlg6MPSaGg/ChbuzMzXjb33DOgDGBLaURdRTIi61vQBpv2sKO+FBqYZbRBUvEytTmBqrxwyjJZuO4kEtlQQ==}
+  svelte-sitemap@3.0.1:
+    resolution: {integrity: sha512-OSJIwjVnK++JnGQ2pNjVE2lGY6Mwng684pfabIphDbYG5BXhYx83HMjEbM8l1v5EPdeMNNhIZR1i3OQfDEqnYw==}
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
@@ -4025,7 +4025,7 @@ snapshots:
       marked: 5.1.2
       svelte: 5.50.3
 
-  svelte-sitemap@3.0.0:
+  svelte-sitemap@3.0.1:
     dependencies:
       fast-glob: 3.3.3
       jiti: 2.6.1
