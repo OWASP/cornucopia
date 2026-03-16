@@ -2,7 +2,6 @@
 
 ## Table of Contents
 
-- [Objective](#objective)
 - [V1: Architecture, Design and Threat Modeling Requirements](#V1-Architecture-Design-and-Threat-Modeling-Requirements)
     - [V1.1 Secure Software Development Lifecycle Requirements](#V1.1-Secure-Software-Development-Lifecycle-Requirements)
     - [V1.2 Authentication Architecture Requirements](#V1.2-Authentication-Architecture-Requirements)
