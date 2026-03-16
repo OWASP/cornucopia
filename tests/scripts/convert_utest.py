@@ -4,6 +4,7 @@ import argparse
 import io
 import os
 import platform
+import subprocess
 import sys
 import tempfile
 import zipfile
@@ -12,6 +13,7 @@ import logging
 import glob
 import shutil
 import typing
+import yaml
 from typing import List, Dict, Any, Tuple
 
 import scripts.convert as c
@@ -531,6 +533,16 @@ class TestGetMetaData(unittest.TestCase):
         del input_data["meta"]
         want_data: Dict[str, str] = {}
         want_logging_error_message = ["ERROR:root:Could not find meta tag in the language data."]
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            got_data = c.get_meta_data(input_data)
+        self.assertEqual(ll.output, want_logging_error_message)
+        self.assertDictEqual(want_data, got_data)
+
+    def test_get_meta_data_meta_not_dict(self) -> None:
+        input_data = {"meta": "not_a_dict"}
+        want_data: Dict[str, Any] = {}
+        want_logging_error_message = ["ERROR:root:Meta tag is not a dictionary."]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_data = c.get_meta_data(input_data)
@@ -1206,16 +1218,12 @@ class TestGetDocxDocument(unittest.TestCase):
         file = os.path.join(
             c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.d"
         )
-        want_type = type(docx.Document())
-        want_len_paragraphs = 0
         want_logging_error_message = [f"ERROR:root:Could not find file at: {file}"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_file = c.get_docx_document(file)
         self.assertEqual(ll.output, want_logging_error_message)
-        self.assertIsInstance(got_file, want_type)
-        got_len_paragraphs = len(got_file.paragraphs)
-        self.assertEqual(want_len_paragraphs, got_len_paragraphs)
+        self.assertIsNone(got_file)
 
 
 class TestGetReplacementDict(unittest.TestCase):
@@ -1603,6 +1611,25 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
         self.assertIn("cornucopia_cards_es.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
+
+    def test_create_edition_from_template_docx_none_doc_returns_early(self) -> None:
+        """When get_docx_document returns None (template missing), logs error and returns without saving."""
+        fake_docx_path = os.path.join(c.convert_vars.BASE_PATH, "resources", "templates", "nonexistent_template.docx")
+        not_expected_output = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_es.docx"
+        )
+        if os.path.isfile(not_expected_output):
+            os.remove(not_expected_output)
+
+        with mock.patch("scripts.convert.get_template_for_edition", return_value=fake_docx_path):
+            with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+                c.create_edition_from_template("guide", "es")
+
+        self.assertTrue(
+            any("Cannot create output file" in msg for msg in ll.output),
+            f"Expected 'Cannot create output file' in logs but got: {ll.output}",
+        )
+        self.assertFalse(os.path.isfile(not_expected_output))
 
 
 class TestSaveIdmlFile(unittest.TestCase):
@@ -2209,6 +2236,348 @@ class TestSafeExtractAll(unittest.TestCase):
             with zipfile.ZipFile(buf) as zf:
                 c._safe_extractall(zf, td)
             self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
+
+
+class TestValidateFilePaths(unittest.TestCase):
+    def setUp(self) -> None:
+        self.b = c.convert_vars.BASE_PATH
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+
+    def test_source_file_not_found(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            c.convert_vars.BASE_PATH = td
+            result = c._validate_file_paths(os.path.join(td, "nonexistent.odt"), os.path.join(td, "out.pdf"))
+        self.assertFalse(result[0])
+        self.assertIn("Source file does not exist", result[1])
+
+    def test_output_dir_not_found(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            c.convert_vars.BASE_PATH = td
+            src = os.path.join(td, "source.odt")
+            open(src, "w").close()
+            result = c._validate_file_paths(src, os.path.join(td, "missing_dir", "out.pdf"))
+        self.assertFalse(result[0])
+        self.assertIn("Output directory does not exist", result[1])
+
+    def test_source_outside_base_path(self) -> None:
+        with tempfile.TemporaryDirectory() as td1, tempfile.TemporaryDirectory() as td2:
+            c.convert_vars.BASE_PATH = td1
+            src = os.path.join(td2, "source.odt")
+            open(src, "w").close()
+            os.makedirs(os.path.join(td1, "output"), exist_ok=True)
+            result = c._validate_file_paths(src, os.path.join(td1, "output", "out.pdf"))
+        self.assertFalse(result[0])
+        self.assertIn("Source path outside base directory", result[1])
+
+    def test_output_dir_outside_base_path(self) -> None:
+        with tempfile.TemporaryDirectory() as td1, tempfile.TemporaryDirectory() as td2:
+            c.convert_vars.BASE_PATH = td1
+            src = os.path.join(td1, "source.odt")
+            open(src, "w").close()
+            os.makedirs(os.path.join(td2, "output"), exist_ok=True)
+            result = c._validate_file_paths(src, os.path.join(td2, "output", "out.pdf"))
+        self.assertFalse(result[0])
+        self.assertIn("Output directory outside base directory", result[1])
+
+    def test_valid_paths_returns_true_and_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            c.convert_vars.BASE_PATH = td
+            src = os.path.join(td, "source.odt")
+            open(src, "w").close()
+            os.makedirs(os.path.join(td, "output"), exist_ok=True)
+            valid, src_path, out_dir = c._validate_file_paths(src, os.path.join(td, "output", "out.pdf"))
+        self.assertTrue(valid)
+        self.assertTrue(os.path.isabs(src_path))
+        self.assertTrue(os.path.isabs(out_dir))
+
+
+class TestValidateCommandArgs(unittest.TestCase):
+    def test_valid_args_returns_true(self) -> None:
+        args = ["libreoffice", "--headless", "--convert-to", "pdf", "/path/to/file.odt"]
+        self.assertTrue(c._validate_command_args(args))
+
+    def test_dangerous_char_returns_false_and_warns(self) -> None:
+        args = ["libreoffice", "--headless", "/path/file.odt; rm -rf /"]
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+            result = c._validate_command_args(args)
+        self.assertFalse(result)
+        self.assertIn("Potentially dangerous character", ll.output[0])
+
+    def test_pipe_char_returns_false(self) -> None:
+        args = ["/usr/bin/libreoffice", "--convert-to", "pdf", "file|inject"]
+        with self.assertLogs(logging.getLogger(), logging.WARNING):
+            result = c._validate_command_args(args)
+        self.assertFalse(result)
+
+
+class TestConvertWithLibreOffice(unittest.TestCase):
+    def setUp(self) -> None:
+        self.b = c.convert_vars.BASE_PATH
+        c.convert_vars.args = argparse.Namespace(debug=False)
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+
+    def test_libreoffice_not_found_returns_false(self) -> None:
+        with mock.patch("shutil.which", return_value=None), mock.patch(
+            "scripts.convert.Path.exists", return_value=False
+        ):
+            result = c._convert_with_libreoffice("source.odt", "output.pdf")
+        self.assertFalse(result)
+
+    def test_invalid_paths_returns_false(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            c.convert_vars.BASE_PATH = td
+            with mock.patch("shutil.which", return_value="/usr/bin/libreoffice"), mock.patch(
+                "scripts.convert._validate_file_paths", return_value=(False, "Source file does not exist: x", "")
+            ):
+                with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+                    result = c._convert_with_libreoffice(os.path.join(td, "src.odt"), os.path.join(td, "out.pdf"))
+        self.assertFalse(result)
+        self.assertTrue(any("Source file does not exist" in m for m in ll.output))
+
+    def test_subprocess_timeout_returns_false(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            c.convert_vars.BASE_PATH = td
+            src = os.path.join(td, "src.odt")
+            open(src, "w").close()
+            os.makedirs(os.path.join(td, "output"), exist_ok=True)
+            with mock.patch("shutil.which", return_value="/usr/bin/libreoffice"), mock.patch(
+                "scripts.convert._validate_file_paths", return_value=(True, src, td)
+            ), mock.patch("scripts.convert._validate_command_args", return_value=True), mock.patch(
+                "subprocess.run", side_effect=subprocess.TimeoutExpired("libreoffice", 300)
+            ):
+                with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+                    result = c._convert_with_libreoffice(src, os.path.join(td, "output", "out.pdf"))
+        self.assertFalse(result)
+        self.assertTrue(any("timed out" in m for m in ll.output))
+
+    def test_subprocess_exception_returns_false(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            c.convert_vars.BASE_PATH = td
+            src = os.path.join(td, "src.odt")
+            open(src, "w").close()
+            os.makedirs(os.path.join(td, "output"), exist_ok=True)
+            with mock.patch("shutil.which", return_value="/usr/bin/libreoffice"), mock.patch(
+                "scripts.convert._validate_file_paths", return_value=(True, src, td)
+            ), mock.patch("scripts.convert._validate_command_args", return_value=True), mock.patch(
+                "subprocess.run", side_effect=Exception("conversion crashed")
+            ):
+                with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+                    result = c._convert_with_libreoffice(src, os.path.join(td, "out.pdf"))
+        self.assertFalse(result)
+        self.assertTrue(any("conversion crashed" in m for m in ll.output))
+
+
+class TestConvertWithDocx2pdf(unittest.TestCase):
+    def setUp(self) -> None:
+        c.convert_vars.can_convert_to_pdf = True
+
+    def tearDown(self) -> None:
+        c.convert_vars.can_convert_to_pdf = False
+
+    def test_not_docx_file_returns_false(self) -> None:
+        result = c._convert_with_docx2pdf("document.odt", "document.pdf")
+        self.assertFalse(result)
+
+    def test_can_convert_false_returns_false(self) -> None:
+        c.convert_vars.can_convert_to_pdf = False
+        result = c._convert_with_docx2pdf("document.docx", "document.pdf")
+        self.assertFalse(result)
+
+    def test_docx2pdf_exception_returns_false_and_warns(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".docx", delete=False) as f:
+            src = f.name
+        try:
+            with mock.patch("docx2pdf.convert", side_effect=Exception("pdf error")):
+                with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+                    result = c._convert_with_docx2pdf(src, src.replace(".docx", ".pdf"))
+            self.assertFalse(result)
+            self.assertIn("Convert error", " ".join(ll.output))
+        finally:
+            if os.path.isfile(src):
+                os.unlink(src)
+
+
+class TestCleanupTempFile(unittest.TestCase):
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+
+    def tearDown(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+
+    def test_removes_file_when_not_debug(self) -> None:
+        with tempfile.NamedTemporaryFile(delete=False) as f:
+            fname = f.name
+        c._cleanup_temp_file(fname)
+        self.assertFalse(os.path.isfile(fname))
+
+    def test_skips_removal_in_debug_mode(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        with tempfile.NamedTemporaryFile(delete=False) as f:
+            fname = f.name
+        try:
+            c._cleanup_temp_file(fname)
+            self.assertTrue(os.path.isfile(fname))
+        finally:
+            os.unlink(fname)
+
+    def test_oserror_silently_ignored(self) -> None:
+        c._cleanup_temp_file("/nonexistent_path_xyz/file.txt")  # must not raise
+
+
+class TestRenameLibreofficeOutput(unittest.TestCase):
+    def test_same_path_only_logs_info(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+            pdf = f.name
+        try:
+            src = pdf.replace(".pdf", ".odt")
+            with self.assertLogs(logging.getLogger(), logging.INFO) as ll:
+                c._rename_libreoffice_output(src, pdf)
+            self.assertIn("New file saved", " ".join(ll.output))
+        finally:
+            if os.path.isfile(pdf):
+                os.unlink(pdf)
+
+    def test_different_path_renames_file(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            src = os.path.join(td, "document.odt")
+            default_pdf = os.path.join(td, "document.pdf")
+            target_pdf = os.path.join(td, "renamed.pdf")
+            open(default_pdf, "w").close()
+            with self.assertLogs(logging.getLogger(), logging.INFO):
+                c._rename_libreoffice_output(src, target_pdf)
+            self.assertTrue(os.path.isfile(target_pdf))
+            self.assertFalse(os.path.isfile(default_pdf))
+
+
+class TestConvertToPdfDocx2pdfPath(unittest.TestCase):
+    """Cover the _convert_with_docx2pdf success path in convert_to_pdf (lines 240-241)."""
+
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        c.convert_vars.can_convert_to_pdf = True
+
+    def tearDown(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        c.convert_vars.can_convert_to_pdf = False
+
+    def test_docx2pdf_success_path_calls_cleanup(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".docx", delete=False) as f:
+            src = f.name
+        pdf = src.replace(".docx", ".pdf")
+        try:
+            with mock.patch("shutil.which", return_value=None), mock.patch(
+                "scripts.convert.Path.exists", return_value=False
+            ), mock.patch("docx2pdf.convert"), mock.patch("scripts.convert._cleanup_temp_file") as mock_cleanup:
+                with self.assertLogs(logging.getLogger(), logging.INFO):
+                    c.convert_to_pdf(src, pdf)
+            mock_cleanup.assert_called_once_with(src)
+        finally:
+            for p in (src, pdf):
+                if os.path.isfile(p):
+                    os.unlink(p)
+
+
+class TestIsValidStringArgumentErrors(unittest.TestCase):
+    def test_argument_too_long_raises(self) -> None:
+        long_arg = "a" * 256
+        with self.assertRaises(argparse.ArgumentTypeError):
+            c.is_valid_string_argument(long_arg)
+
+    def test_invalid_chars_raises(self) -> None:
+        with self.assertRaises(argparse.ArgumentTypeError):
+            c.is_valid_string_argument("invalid!@#")
+
+
+class TestGetDocumentParagraphsEmpty(unittest.TestCase):
+    def test_empty_doc_logs_error(self) -> None:
+        mock_doc = mock.MagicMock()
+        mock_doc.paragraphs = []
+        mock_doc.tables = []
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            result = c.get_document_paragraphs(mock_doc)
+        self.assertEqual(result, [])
+        self.assertIn("No paragraphs found in doc", " ".join(ll.output))
+
+
+class TestMapLanguageDataToTemplate(unittest.TestCase):
+    def setUp(self) -> None:
+        self.b_args = c.convert_vars.args
+        c.convert_vars.args = argparse.Namespace(debug=False)
+
+    def tearDown(self) -> None:
+        c.convert_vars.args = self.b_args
+
+    def test_build_template_dict_exception_falls_back_to_input(self) -> None:
+        input_data: Dict[str, Any] = {"meta": {"edition": "webapp"}}
+        with mock.patch("scripts.convert.build_template_dict", side_effect=Exception("bad yaml")):
+            with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+                result = c.map_language_data_to_template(input_data)
+        self.assertEqual(result, input_data)
+        self.assertIn("Could not build valid template mapping", " ".join(ll.output))
+
+    def test_debug_mode_emits_debug_logs(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=True)
+        input_data: Dict[str, Any] = {
+            "meta": {"edition": "webapp", "component": "cards", "language": "EN", "version": "3.0"},
+            "suits": [
+                {
+                    "id": "VE",
+                    "name": "Data validation",
+                    "cards": [{"id": "VEA", "value": "A", "desc": "test desc"}],
+                }
+            ],
+        }
+        with self.assertLogs(logging.getLogger(), logging.DEBUG) as ll:
+            c.map_language_data_to_template(input_data)
+        self.assertTrue(any("Translation data showing" in m for m in ll.output))
+
+
+class TestGetLanguageDataErrors(unittest.TestCase):
+    def setUp(self) -> None:
+        self.b = c.convert_vars.BASE_PATH
+        c.convert_vars.args = argparse.Namespace(debug=False)
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.b
+
+    def test_yaml_parse_error_returns_empty(self) -> None:
+        with mock.patch("scripts.convert.is_yaml_file", return_value=True), mock.patch(
+            "scripts.convert.is_lang_file_for_version", return_value=True
+        ), mock.patch("builtins.open", mock.mock_open(read_data="")), mock.patch(
+            "yaml.safe_load", side_effect=yaml.YAMLError("bad yaml")
+        ):
+            with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+                result = c.get_language_data(["fake_file.yaml"], "en", "3.0", "webapp")
+        self.assertEqual(result, {})
+        self.assertTrue(any("Error loading yaml file" in m for m in ll.output))
+
+    def test_data_missing_meta_returns_empty(self) -> None:
+        with mock.patch("scripts.convert.is_yaml_file", return_value=True), mock.patch(
+            "scripts.convert.is_lang_file_for_version", return_value=True
+        ), mock.patch("builtins.open", mock.mock_open(read_data="")), mock.patch(
+            "yaml.safe_load", return_value={"no_meta_key": True}
+        ):
+            with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+                result = c.get_language_data(["fake_file.yaml"], "en", "3.0", "webapp")
+        self.assertEqual(result, {})
+        self.assertTrue(any("Invalid or empty language file" in m for m in ll.output))
+
+
+class TestGetMappingForEditionException(unittest.TestCase):
+    def setUp(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        self.BASE_PATH = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files")
+
+    def test_build_template_dict_exception_logs_warning(self) -> None:
+        yaml_files = glob.glob(os.path.join(self.BASE_PATH, "source", "*.yaml"))
+        with mock.patch("scripts.convert.build_template_dict", side_effect=Exception("parse error")):
+            with self.assertLogs(logging.getLogger(), logging.WARNING) as ll:
+                c.get_mapping_for_edition(yaml_files, "3.0", "en", "webapp", "bridge", "cards")
+        self.assertIn("Failed to build template mapping", " ".join(ll.output))
 
 
 if __name__ == "__main__":
