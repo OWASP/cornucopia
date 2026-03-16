@@ -136,7 +136,7 @@ describe('DeckService tests', () => {
                 version: '2.2', 
                 lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] 
             });
-            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'ru'] });
+            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] });
         });
     }, 10000);
 
@@ -204,11 +204,10 @@ describe('DeckService tests', () => {
             expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']);
         });
 
-        it('should return only en and ru for webapp version 3.0', () => {
-            const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
-            expect(languages).toEqual(['en', 'ru']);
+        it('should return all supported languages for webapp version 3.0', () => {
+             const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
+             expect(languages).toEqual(['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk']);
         });
-
         it('should return only en for mobileapp version 1.1', () => {
             const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
             expect(languages).toEqual(['en']);
