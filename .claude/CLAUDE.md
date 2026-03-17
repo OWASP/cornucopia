@@ -99,9 +99,9 @@ Before committing:
 1. Remove AI-generated noise
 2. For Python code, run: pipenv run black --line-length=120 --check .
 3. Run relevant test suites
-5. Manually verify functionality
-6. Check for unintended changes
-7. Follow the [project standards](/.github/copilot-instructions.md)
+4. Manually verify functionality
+5. Check for unintended changes
+6. Follow the [project standards](/.github/copilot-instructions.md)
 ```
 
 ### 4. Documentation
