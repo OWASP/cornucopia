@@ -30,7 +30,7 @@ export const load = (({ params }) => {
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
       mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
-      languages: DeckService.getLanguages(edition),
+      languages: DeckService.getLanguagesForEditionVersion(edition, version),
       capecData
     };
 

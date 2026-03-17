@@ -22,7 +22,7 @@ export class DeckService {
     private static readonly decks: Deck[] = [
         { edition: 'mobileapp', version: '1.1', lang: ['en'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-        { edition: 'webapp', version: '3.0', lang: ['en', 'ru'] },
+        { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
         { edition: 'companion', version: '1.0', lang: ['en'] }];
 
     public static hasEdition(edition: string): boolean {
