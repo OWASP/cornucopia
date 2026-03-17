@@ -1,0 +1,22 @@
+# Contributing with Continue AI Assistant
+
+This guide helps contributors use Codeium (an AI assistant) effectively when working on OWASP Cornucopia, while maintaining code quality and adhering to [project standards](/.github/copilot-instructions.md).
+
+> Context files of tools other than Claude should refer to [this `CLAUDE.md` file](/.claude/CLAUDE.md) for detailed guidelines. This is already the case for:
+> * GitHub CoPilot ([`.github/copilot-instructions.md`](../.github/copilot-instructions.md))
+
+## Continue-Specific Context
+
+The following context is provided to help Codeium better assist with contributions to this project:
+
+### Project Overview
+
+- **Project**: OWASP Cornucopia - The project contains 3 projects:
+  - [/scripts](scripts): Converter scripts to convert translations for editions of the Cornucopia game into IDML and PDF files that can be printed.
+  - [/cornucopia.owasp.org](/cornucopia.owasp.org): The Website for OWASP Cornucopia written in Typescript.
+  - [/copi.owasp.org](/copi.owasp.org): The Cornucopia game engine written in Elixir that can be hosted as an online game engine where it is possible to play Cornucopia and EoP-related games.
+- **Primary Languages**: Python, TypeScript and Elixir
+- **Key Technologies**: Node.js, Svelte, Phoenix
+- **Testing**: mix test (/copi.owasp.org), vitest (/cornucopia.owasp.org), Python unittest (/scripts) 
+- **Code Style**:
+  - For Python code, use PEP 8 style guidelines
