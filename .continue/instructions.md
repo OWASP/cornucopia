@@ -1,13 +1,13 @@
 # Contributing with Continue AI Assistant
 
-This guide helps contributors use Codeium (an AI assistant) effectively when working on OWASP Cornucopia, while maintaining code quality and adhering to [project standards](/.github/copilot-instructions.md).
+This guide helps contributors use Continue (an AI assistant) effectively when working on OWASP Cornucopia, while maintaining code quality and adhering to [project standards](/.github/copilot-instructions.md).
 
 > Context files of tools other than Claude should refer to [this `CLAUDE.md` file](/.claude/CLAUDE.md) for detailed guidelines. This is already the case for:
 > * GitHub CoPilot ([`.github/copilot-instructions.md`](../.github/copilot-instructions.md))
 
 ## Continue-Specific Context
 
-The following context is provided to help Codeium better assist with contributions to this project:
+The following context is provided to help Continue better assist with contributions to this project:
 
 ### Project Overview
 
