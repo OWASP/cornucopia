@@ -21,25 +21,92 @@ from pathvalidate import sanitize_filepath
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-    EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp", "against-security"]
+    EDITION_CHOICES: List[str] = ["all"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "odt", "pdf", "idml"]
-    LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.2", "3.0", "5.0"]
-    LATEST_VERSION_CHOICES: List[str] = ["1.1", "3.0"]
-    TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
-    EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
-        "webapp": {"2.2": "2.2", "3.0": "3.0"},
-        "against-security": {"1.0": "1.0"},
-        "mobileapp": {"1.0": "1.0", "1.1": "1.1"},
-        "all": {"2.2": "2.2", "1.0": "1.0", "1.1": "1.1", "3.0": "3.0", "5.0": "5.0"},
-    }
+    LAYOUT_CHOICES: List[str] = ["all"]
+    LANGUAGE_CHOICES: List[str] = ["all"]
+    VERSION_CHOICES: List[str] = ["all", "latest"]
+    LATEST_VERSION_CHOICES: List[str] = []
+    TEMPLATE_CHOICES: List[str] = ["all"]
+    EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {}
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
     )
     DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_document_template_lang"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
+
+    def __init__(self) -> None:
+        self._detect_choices()
+
+    def _parse_mapping_file(self, filepath: str) -> Dict[str, Any]:
+        """Parse a single YAML mapping file and return its meta block, or empty dict on failure."""
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+                if data and "meta" in data:
+                    meta = data["meta"]
+                    if isinstance(meta, dict):
+                        return meta
+        except Exception as e:
+            logging.warning(f"Failed to parse {filepath} for dynamic choice detection: {e}")
+        return {}
+
+    def _update_from_meta(
+        self,
+        meta: Dict[str, Any],
+        editions: set[str],
+        versions: set[str],
+        languages: set[str],
+        layouts: set[str],
+        templates: set[str],
+        edition_version_map: Dict[str, Dict[str, str]],
+    ) -> None:
+        """Update the choice sets with values extracted from a mapping file's meta block."""
+        edition = meta.get("edition")
+        version = str(meta.get("version"))
+        if edition:
+            editions.add(edition)
+            if version:
+                versions.add(version)
+                edition_version_map.setdefault(edition, {})[version] = version
+        for lang in meta.get("languages", []):
+            languages.add(lang)
+        for layout in meta.get("layouts", []):
+            layouts.add(layout)
+        for template in meta.get("templates", []):
+            templates.add(template)
+
+    def _detect_choices(self) -> None:
+        """Scan the source/ directory to dynamically populate all choice attributes."""
+        source_dir = os.path.join(self.BASE_PATH, "source")
+        editions: set[str] = set()
+        languages: set[str] = set(["en"])
+        versions: set[str] = set()
+        layouts: set[str] = set(["cards", "leaflet", "guide"])
+        templates: set[str] = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
+        edition_version_map: Dict[str, Dict[str, str]] = {}
+
+        if os.path.isdir(source_dir):
+            for filename in os.listdir(source_dir):
+                if filename.endswith(".yaml") and "mappings" in filename:
+                    filepath = os.path.join(source_dir, filename)
+                    meta = self._parse_mapping_file(filepath)
+                    if meta:
+                        self._update_from_meta(
+                            meta, editions, versions, languages, layouts, templates, edition_version_map
+                        )
+
+        self.EDITION_CHOICES = ["all"] + sorted(list(editions))
+        self.LANGUAGE_CHOICES = ["all"] + sorted(list(languages))
+        self.VERSION_CHOICES = ["all", "latest"] + sorted(list(versions))
+        self.LAYOUT_CHOICES = ["all"] + sorted(list(layouts))
+        self.TEMPLATE_CHOICES = ["all"] + sorted(list(templates))
+        self.EDITION_VERSION_MAP = edition_version_map
+        self.EDITION_VERSION_MAP["all"] = {v: v for v in versions}
+
+        latest_versions = [max(v_map.keys()) for v_map in edition_version_map.values() if v_map]
+        self.LATEST_VERSION_CHOICES = sorted(list(set(latest_versions)))
 
 
 def check_fix_file_extension(filename: str, file_type: str) -> str:
@@ -409,7 +476,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="latest",
         help=(
-            "Output version to produce. [`all`, `latest`, `1.0`, `1.1`, `2.2`, `3.0`] "
+            f"Output version to produce. {convert_vars.VERSION_CHOICES} "
             "\nFor the Website edition:"
             "\nVersion 3.0 will deliver cards mapped to ASVS 5.0"
             "\nVersion 2.2 will deliver cards mapped to ASVS 4.0"
@@ -456,7 +523,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-pt`, `pt-br`, `it`, `ru`] "
+            f"Output language to produce. {convert_vars.LANGUAGE_CHOICES} "
             "you can also specify your own language file. If so, there needs to be a yaml "
             "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
         ),
@@ -468,7 +535,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="bridge",
         help=(
-            "From which template to produce the document. [`bridge`, `tarot` or `tarot_qr`]\n"
+            f"From which template to produce the document. {convert_vars.TEMPLATE_CHOICES}\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
@@ -484,7 +551,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="all",
         help=(
-            "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
+            f"Output decks to produce. {convert_vars.EDITION_CHOICES}\n"
             "The various Cornucopia decks. `web` will give you the Website App edition.\n"
             "`mobileapp` will give you the Mobile App edition.\n"
             "You can also speficy your own edition. If so, there needs to be a yaml "
@@ -499,7 +566,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="all",
         help=(
-            "Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]\n"
+            f"Document layouts to produce. {convert_vars.LAYOUT_CHOICES}\n"
             "The various Cornucopia document layouts.\n"
             "`cards` will output the high quality print card deck.\n"
             "`guide` will generate the docx guide with the low quality print deck.\n"
@@ -552,7 +619,7 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
 
 def get_docx_document(docx_file: str) -> Any:
     """Open the file and return the docx document."""
-    import docx  # type: ignore[import-untyped]
+    import docx  # type: ignore
 
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
@@ -893,9 +960,9 @@ def get_valid_layout_choices() -> List[str]:
     layouts = []
     if convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
         for layout in convert_vars.LAYOUT_CHOICES:
-            if layout not in ("all", "guide"):
+            if layout != "all" and layout != "guide":
                 layouts.append(layout)
-            if layout == "guide" and convert_vars.args.edition.lower() in "webapp":
+            if layout == "guide" and convert_vars.args.edition.lower() == "webapp":
                 layouts.append(layout)
     else:
         layouts.append(convert_vars.args.layout)
@@ -935,13 +1002,13 @@ def get_valid_version_choices() -> List[str]:
 
 
 def get_valid_mapping_for_version(version: str, edition: str) -> str:
-    return ConvertVars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
+    return convert_vars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
 
 
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in "all"]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t != "all"]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
@@ -955,9 +1022,9 @@ def get_valid_edition_choices() -> List[str]:
     editions = []
     if convert_vars.args.edition.lower() == "all" or not convert_vars.args.edition.lower():
         for edition in convert_vars.EDITION_CHOICES:
-            if edition not in "all":
+            if edition != "all":
                 editions.append(edition)
-    if convert_vars.args.edition and convert_vars.args.edition not in "all":
+    if convert_vars.args.edition and convert_vars.args.edition.lower() != "all":
         editions.append(convert_vars.args.edition)
     return editions
 
