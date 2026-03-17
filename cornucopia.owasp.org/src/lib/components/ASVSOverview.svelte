@@ -1,11 +1,52 @@
 <script lang="ts">
-    import {data} from '$lib/parsed';
+    import { onMount } from 'svelte';
     import { readTranslation } from "$lib/stores/stores";
-    interface Props {
-        mappings: number[] | undefined;
+
+    type AsvsRequirement = {
+        section_id: string;
+        section_name: string;
+    };
+
+    type AsvsPayload = {
+        requirements: AsvsRequirement[];
+    };
+
+    const ASVS_DATA_URLS = {
+        '4.0.3': '/data/asvs-4.0.3/en/OWASP_Application_Security_Verification_Standard_4.0.3.flat.json',
+        '5.0': '/data/asvs-5.0/en/OWASP_Application_Security_Verification_Standard_5.0.flat.json'
+    } as const;
+
+    let sectionsById = $state(new Map<string, string>());
+
+    function getDataUrlForVersion(inputVersion: string): string {
+        return inputVersion === '4.0.3' ? ASVS_DATA_URLS['4.0.3'] : ASVS_DATA_URLS['5.0'];
     }
 
-    let { mappings }: Props = $props();
+    async function loadAsvsSections(url: string): Promise<Map<string, string>> {
+        try {
+            const response = await fetch(url, { method: 'GET' });
+            if (!response.ok) {
+                return new Map<string, string>();
+            }
+
+            const payload = (await response.json()) as AsvsPayload;
+            return new Map<string, string>(payload.requirements.map((requirement) => [requirement.section_id, requirement.section_name]));
+        } catch {
+            return new Map<string, string>();
+        }
+    }
+
+    interface Props {
+        mappings: number[] | undefined;
+        version: string;
+    }
+
+    let { mappings, version }: Props = $props();
+
+    onMount(async () => {
+        sectionsById = await loadAsvsSections(getDataUrlForVersion(version));
+    });
+
     let t = readTranslation();
 
     function getIndex(num : number) : any
@@ -15,33 +56,41 @@
 
     function getUrl(mapping : number) : string
     {
-        let ex : string = "https://cheatsheetseries.owasp.org/IndexASVS.html#v11-secure-software-development-lifecycle-requirements"
         let base : string = "https://cheatsheetseries.owasp.org/IndexASVS.html#";
         let index = mapping.toString().replaceAll('.','');
-        let lookupIndex = getIndex(mapping)
-        let title = data[lookupIndex as keyof typeof data];
+        let title = getSectionName(mapping);
         title = title.toString().toLowerCase().replaceAll(' ','-').replaceAll(',','')
+        
+        if (version == '4.0.3')
+        {
+            index = mapping.toString();
+            base = "/taxonomy/cheat-sheets-asvs-4.0.3/#";
+            title = title.replace(/,/g, '').split(/[\s-]+/).map((word) => {
+                const lowerWord = word.toLowerCase();
+                return lowerWord === 'and' ? 'and' : lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+            }).join('-') + '-Requirements';
+            return base + 'V' + index + '-' + title
+        }
+        
+        
         return base + 'v' + index + '-' + title
+    }
+
+    function getSectionName(mapping : number) : string
+    {
+        let lookupIndex = getIndex(mapping)
+        let title = sectionsById.get(lookupIndex);
+        return title || '';
     }
 
     function getDisplayText(mapping : number) : string
     {
-        let lookupIndex = getIndex(mapping)
-        return 'ASVS V' + mapping.toString() + ' - ' + data[lookupIndex as keyof typeof data] 
+        return 'ASVS V' + mapping.toString() + ' - ' + getSectionName(mapping);
     }
 
     function hasValidLink(mapping : number) : boolean
     {
-        let lookupIndex = getIndex(mapping);
-        let title = data[lookupIndex as keyof typeof data];
-        if (title)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return getSectionName(mapping) ? true : false;
     }
 </script>
 
