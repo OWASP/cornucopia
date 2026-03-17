@@ -1,0 +1,35 @@
+---
+meta:
+  edition: "test"
+  component: "cards"
+  language: "PT-PT"
+  version: "1.0"
+suits:
+-
+  id: "TS"
+  name: "Test Suite Português (Portugal)"
+  cards:
+  -
+    id: "TSA"
+    value: "A"
+    desc: "Cartão de teste A"
+paragraphs:
+-
+  id: "Common"
+  name: "Common"
+  sentences:
+  -
+    id: "T00001"
+    text: "Esta é a primeira etiqueta de teste"
+  -
+    id: "T00002"
+    text: "Esta é a segunda etiqueta de teste"
+  -
+    id: "T00003"
+    text: "Esta é a terceira etiqueta de teste"
+  -
+    id: "T00004"
+    text: "Esta é a quarta etiqueta de teste"
+  -
+    id: "T00005"
+    text: "0.1"

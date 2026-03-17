@@ -1,7 +1,7 @@
 {
   "summary": {
-    "title": "The  Cornucopia threat model for OWASP Juice Shop",
-    "owner": "Johan Sydseter",
+    "title": "OWASP Juice Shop",
+    "owner": "Björn Kimminich",
     "description": "OWASP Juice Shop is probably the most modern and sophisticated insecure web application! It can be used in security trainings, awareness demos, CTFs and as a guinea pig for security tools! Juice Shop encompasses vulnerabilities from the entire OWASP Top Ten along with many other security flaws found in real-world applications!"
   },
   "detail": {
@@ -97,19 +97,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "b88ddbc1-a6e5-49a7-9dee-cf50990437be"
+                  "id": "c6776f4f-09fe-4d0d-ab68-09883ad42849"
                 },
                 {
                   "group": "right",
-                  "id": "b99a51be-37b6-4860-827c-f8037c1253db"
+                  "id": "9fcc50c6-38cb-4fb2-b723-339fdaff44d3"
                 },
                 {
                   "group": "bottom",
-                  "id": "d1039570-697a-49c1-9b1e-f53cf6e5b48a"
+                  "id": "7e8054b3-edd5-48de-ae7e-d3f7929cd40d"
                 },
                 {
                   "group": "left",
-                  "id": "05cca82f-ee3d-4dcb-999a-1bafa3cf3058"
+                  "id": "bcac9bd9-5e96-4543-a765-a55adb00e727"
                 }
               ]
             },
@@ -214,19 +214,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "7008a7ed-cb22-49f5-8d84-890b205e4dc5"
+                  "id": "05c31410-6225-492d-9ea3-16a99c0c0d87"
                 },
                 {
                   "group": "right",
-                  "id": "450dff25-d8cb-451b-af5a-7faab8eb3d85"
+                  "id": "616263cd-4c98-4a82-9048-e2b69c1146d4"
                 },
                 {
                   "group": "bottom",
-                  "id": "3fa2b62d-2a61-4da3-97f8-00ee99d72d5f"
+                  "id": "568d6f31-e14d-4492-bdc3-225c5ff83a6e"
                 },
                 {
                   "group": "left",
-                  "id": "74e4c3e3-3a62-4fc4-944f-17f1fa943c2f"
+                  "id": "05af6697-eaf0-4c43-bfd3-d54fbf1f82a0"
                 }
               ]
             },
@@ -257,8 +257,8 @@
                 "text": "Angular\nFrontend"
               },
               "body": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
@@ -331,19 +331,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "da6b84e6-4625-4e65-9fc5-b4111eec60ca"
+                  "id": "1bddf582-043c-4d8e-9a53-350eac808b90"
                 },
                 {
                   "group": "right",
-                  "id": "938dfd5d-c9a5-4c1f-b04d-ff78c38367bc"
+                  "id": "904cbe19-3638-4feb-94e4-e7281b7794c2"
                 },
                 {
                   "group": "bottom",
-                  "id": "f12ea544-e92c-4bf7-a675-f96a5a31ade3"
+                  "id": "30575040-42af-4ef6-b2b9-1de13b9aa3d6"
                 },
                 {
                   "group": "left",
-                  "id": "ff3165f4-36d9-43d7-8e8c-bc18750d8691"
+                  "id": "014fad89-51ef-4f23-ad40-2988572f190a"
                 }
               ]
             },
@@ -355,31 +355,14 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [
-                {
-                  "id": "73aa8ef2-465f-48c4-aca4-c07906feac86",
-                  "title": "Use the bonus payload in the DOM XSS challenge (Past an iframe into the search field)",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": null,
-                  "eopGameId": "cornucopia",
-                  "description": "see: https://pwning.owasp-juice.shop/companion-guide/latest/appendix/solutions.html#_use_the_bonus_payload_in_the_dom_xss_challenge",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "EOP",
-                  "new": false,
-                  "number": 101,
-                  "score": "",
-                  "cardSuit": "DATA VALIDATION & ENCODING",
-                  "cardNumber": "VEQ"
-                }
-              ],
-              "hasOpenThreats": true
+              "threats": [],
+              "hasOpenThreats": false
             }
           },
           {
             "position": {
               "x": 468,
-              "y": 235
+              "y": 228
             },
             "size": {
               "width": 100,
@@ -390,8 +373,8 @@
                 "text": "Application\nServer"
               },
               "body": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
@@ -464,19 +447,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "7a911265-bc92-4acc-8425-11d5e5cd9e5b"
+                  "id": "9fe46cff-e8ce-4f15-913c-6f84d121ca8e"
                 },
                 {
                   "group": "right",
-                  "id": "26228567-ce19-4c83-9387-39e1513917a4"
+                  "id": "2ab189f0-e92a-4292-b22e-677cb5ba0db3"
                 },
                 {
                   "group": "bottom",
-                  "id": "29b3c788-4af1-4aaf-878b-207578ae22cd"
+                  "id": "16f33942-bd56-4c33-97fa-7c5964fb6174"
                 },
                 {
                   "group": "left",
-                  "id": "87206222-a099-435e-a402-e3e3f4b94009"
+                  "id": "460b2f47-430c-445e-b239-feef68ec5188"
                 }
               ]
             },
@@ -488,54 +471,8 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [
-                {
-                  "id": "ddcb3a01-738c-44d6-beb9-9b0225c17e45",
-                  "title": "Receive a coupon code from the support chatbot (by asking repeatedly)",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": null,
-                  "eopGameId": "cornucopia",
-                  "description": "see: https://pwning.owasp-juice.shop/companion-guide/latest/appendix/solutions.html#_receive_a_coupon_code_from_the_support_chatbot",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "EOP",
-                  "new": false,
-                  "number": 102,
-                  "score": "",
-                  "cardSuit": "AUTHORIZATION",
-                  "cardNumber": "AZ9"
-                },
-                {
-                  "id": "5b48efa1-cd5c-45bc-bb1d-9e26370a69b3",
-                  "title": "Access a confidential document (Because directory listing not is disabled)",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": null,
-                  "eopGameId": "cornucopia",
-                  "description": "see: https://pwning.owasp-juice.shop/companion-guide/latest/appendix/solutions.html#_access_a_confidential_document",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "EOP",
-                  "new": false,
-                  "number": 103,
-                  "score": "",
-                  "cardSuit": "AUTHORIZATION",
-                  "cardNumber": "AZ3"
-                },
-                {
-                  "id": "4c4e795a-4d88-402a-b653-212bcf9cb879",
-                  "title": "New EoP threat",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "eopGameId": "cornucopia",
-                  "description": "Provide a description for this threat",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "EOP",
-                  "new": true,
-                  "number": 104,
-                  "score": ""
-                }
-              ],
-              "hasOpenThreats": true
+              "threats": [],
+              "hasOpenThreats": false
             }
           },
           {
@@ -629,19 +566,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "d57cc1ff-81b3-47cf-818b-9ce4d48a4a5f"
+                  "id": "ca6ed148-1a03-4908-a70c-9fd8a6d5fdd1"
                 },
                 {
                   "group": "right",
-                  "id": "2107aa9b-ecef-424a-8c85-3f1110d048e0"
+                  "id": "044c574c-0f06-4614-8ceb-1877c328f69b"
                 },
                 {
                   "group": "bottom",
-                  "id": "d96ac3b7-44c5-4b22-a983-a57ad602820f"
+                  "id": "10cb232e-cec6-435a-a483-303fa4c164a5"
                 },
                 {
                   "group": "left",
-                  "id": "fab4964d-dcc0-480e-9e99-fad733594b24"
+                  "id": "40178547-8efd-443f-a65a-224ffb9fc01c"
                 }
               ]
             },
@@ -752,19 +689,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "fb850b42-b658-414a-8544-237fb10d3fc3"
+                  "id": "88d56605-49ad-4ac2-b1bd-45afd53a9d77"
                 },
                 {
                   "group": "right",
-                  "id": "416ba79a-3042-4320-935d-707098eb84a0"
+                  "id": "4beacfc5-e9a2-4f2a-85dd-f4b134b227bf"
                 },
                 {
                   "group": "bottom",
-                  "id": "a072c5b4-fe5f-4475-b1bb-a1f60deadf58"
+                  "id": "2d55750e-8983-4ad6-afe6-aaa5bf86a861"
                 },
                 {
                   "group": "left",
-                  "id": "4b734706-4463-4716-b318-bc24d1fbd0c5"
+                  "id": "c15e00af-a9dd-49f0-a64a-ea1a99b2e7c6"
                 }
               ]
             },
@@ -875,19 +812,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "66a5bc4a-0c56-4666-af8d-61fe58eff0af"
+                  "id": "070ca341-9f2d-4bdf-b960-40fc904b49b4"
                 },
                 {
                   "group": "right",
-                  "id": "e6d016c8-ce23-4508-b30b-959c2bc7b927"
+                  "id": "b35394a9-5c07-439d-b522-bf6edde4a5a7"
                 },
                 {
                   "group": "bottom",
-                  "id": "d4fafa39-a965-40b4-9dea-2bdbb0c746d6"
+                  "id": "c5421f55-91b8-4c72-b3d4-9a5089d94f66"
                 },
                 {
                   "group": "left",
-                  "id": "a8723503-3dcb-4fbd-92d1-3b49da3215a3"
+                  "id": "c90f1a42-5a45-4d63-8688-ca2e99dd126a"
                 }
               ]
             },
@@ -950,7 +887,7 @@
                 "position": 0.5
               }
             ],
-            "id": "a7d456f3-90d6-4713-b371-281f1cd42e83",
+            "id": "9982f3c3-a7ed-459b-b89a-ca11dc7450e2",
             "trustBoundaryIds": [],
             "source": {
               "cell": "5c682ec9-c352-442e-b61c-2de8ed53ea22"
@@ -997,7 +934,7 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
-                "5e0872b5-619d-4a3a-8ecd-1c3bfe715845"
+                "4177b57c-c42f-43c2-9b95-682c87da652f"
               ]
             },
             "labels": [
@@ -1010,7 +947,7 @@
                 "position": 0.5
               }
             ],
-            "id": "56a67a04-0694-4915-83e1-85b548a75227",
+            "id": "1506e181-e42a-4ed7-b9ee-0bf6a8f0a442",
             "trustBoundaryIds": [],
             "source": {
               "cell": "064304c2-9672-44f2-9e08-982d58145bc0"
@@ -1068,7 +1005,7 @@
                 "position": 0.5
               }
             ],
-            "id": "f8a0918c-a277-4a19-83f6-eb0ccddd7890",
+            "id": "81505751-e49c-496a-9797-29407b0e93eb",
             "trustBoundaryIds": [],
             "source": {
               "cell": "064304c2-9672-44f2-9e08-982d58145bc0"
@@ -1078,66 +1015,8 @@
             },
             "vertices": [
               {
-                "x": 419,
-                "y": 204
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "API Responses",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              {
-                "attrs": {
-                  "label": {
-                    "text": "API Responses"
-                  }
-                },
-                "position": 0.5
-              }
-            ],
-            "id": "a6029290-8436-4967-8a75-b8234dc670c3",
-            "trustBoundaryIds": [],
-            "source": {
-              "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
-            },
-            "target": {
-              "cell": "064304c2-9672-44f2-9e08-982d58145bc0"
-            },
-            "vertices": [
-              {
-                "x": 514,
-                "y": 150
+                "x": 420,
+                "y": 200
               }
             ]
           },
@@ -1187,7 +1066,7 @@
                 }
               }
             ],
-            "id": "f4828ae0-4bf6-44e5-b0c7-43eb44ea743b",
+            "id": "c114469f-7138-42f1-ae13-830a6d6deb0a",
             "trustBoundaryIds": [],
             "source": {
               "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
@@ -1245,7 +1124,7 @@
                 "position": 0.5
               }
             ],
-            "id": "8956295e-4de1-44fc-8bb2-da1f27d9cbc5",
+            "id": "262877c8-7115-40c7-8d75-b4c421fa0a31",
             "trustBoundaryIds": [],
             "source": {
               "cell": "82095edc-bdca-448b-8c28-ed1aaba2e9e9"
@@ -1298,7 +1177,7 @@
                 "position": 0.5
               }
             ],
-            "id": "9c99f738-addf-403b-8e48-db00c28914ff",
+            "id": "c547ffa4-11d2-4db6-be4f-abbe815cc691",
             "trustBoundaryIds": [],
             "source": {
               "cell": "2f427832-3419-4b43-ae77-338f8636ca2b"
@@ -1351,7 +1230,7 @@
                 "position": 0.5
               }
             ],
-            "id": "aeda1562-82c9-4177-99c7-74100b932ad1",
+            "id": "1ee7b5ca-e60b-433f-a902-5423526acfee",
             "trustBoundaryIds": [],
             "source": {
               "cell": "12bf3793-217c-4863-b430-718182257f1a"
@@ -1404,7 +1283,7 @@
                 "position": 0.5
               }
             ],
-            "id": "c9425522-8932-4879-8f66-3ab8b63fd5e2",
+            "id": "7a41a372-7a13-4185-97f0-24389f516785",
             "trustBoundaryIds": [],
             "source": {
               "cell": "0191343a-8439-45d7-b9e4-6b052f91415d"
@@ -1462,7 +1341,7 @@
                 "position": 0.5
               }
             ],
-            "id": "1d3b2caf-956e-4e35-be28-95a94b3fc139",
+            "id": "b45420c1-79a9-446b-8496-7c9989127ccb",
             "trustBoundaryIds": [],
             "source": {
               "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
@@ -1515,7 +1394,7 @@
                 "position": 0.5
               }
             ],
-            "id": "74ef0454-2c78-44fb-9bf7-d1fd81397b27",
+            "id": "7c0e8247-8233-4d0c-a76a-5aa93f693672",
             "trustBoundaryIds": [],
             "source": {
               "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
@@ -1573,7 +1452,7 @@
                 "position": 0.5
               }
             ],
-            "id": "e6ec0b0e-4e67-4461-9c8f-5a10e5804f0e",
+            "id": "d7376660-7b81-4636-a0e3-80b5418bb0b9",
             "trustBoundaryIds": [],
             "source": {
               "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
@@ -1631,7 +1510,7 @@
                 "position": 0.5
               }
             ],
-            "id": "48c67a4b-a901-4537-aec2-c4ac44902913",
+            "id": "9810296f-d7c5-40fe-a603-5adf11075eb3",
             "trustBoundaryIds": [],
             "source": {
               "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
@@ -1654,7 +1533,7 @@
               "isTrustBoundary": true,
               "hasOpenThreats": false,
               "crossingFlows": [
-                "56a67a04-0694-4915-83e1-85b548a75227"
+                "1506e181-e42a-4ed7-b9ee-0bf6a8f0a442"
               ],
               "containedElements": [
                 "d02fa030-ca19-47ad-8920-0980cd87a351"
@@ -1669,7 +1548,7 @@
                 }
               }
             ],
-            "id": "5e0872b5-619d-4a3a-8ecd-1c3bfe715845",
+            "id": "4177b57c-c42f-43c2-9b95-682c87da652f",
             "trustBoundaryIds": [],
             "source": {
               "x": 93,
@@ -1714,7 +1593,7 @@
                 }
               }
             ],
-            "id": "feb3573c-b467-46d2-8a02-efe243a882a6",
+            "id": "7b50075d-f344-4fe4-afdb-ef5fe1ea7013",
             "trustBoundaryIds": [],
             "source": {
               "x": 183,
@@ -1755,7 +1634,7 @@
                 }
               }
             ],
-            "id": "ccd62ce2-001d-4b3b-8de2-64a2af988a1c",
+            "id": "6507bd58-dfef-4c3f-a851-5d27c53988f8",
             "trustBoundaryIds": [],
             "source": {
               "x": 772,
@@ -1796,7 +1675,7 @@
                 }
               }
             ],
-            "id": "032b01ee-13c8-46f5-995b-3bfe86aaef19",
+            "id": "83ff5e5b-39b0-4df9-abaa-964368be5ec0",
             "trustBoundaryIds": [],
             "source": {
               "x": 417,
@@ -1832,7 +1711,7 @@
                 }
               }
             ],
-            "id": "276c5b16-c33f-487d-a679-9927ff4f6030",
+            "id": "b0b5bdd7-2ebd-4425-a1cc-325f89b43559",
             "trustBoundaryIds": [],
             "source": {
               "x": 749,
@@ -1892,7 +1771,7 @@
                 "position": 0.5
               }
             ],
-            "id": "60919698-2266-4a40-ab5c-76f70544fb78",
+            "id": "f086ee68-331a-4d79-9e9f-3cf88e7db4f5",
             "trustBoundaryIds": [],
             "source": {
               "cell": "00ae7380-5510-4772-8f98-d83df41035b6"
@@ -1956,7 +1835,7 @@
                 "position": 0.5
               }
             ],
-            "id": "133ecb2a-01b4-402b-bebf-70b46e57014c",
+            "id": "e6f41c33-4885-4f7f-b662-96e285a075dd",
             "trustBoundaryIds": [],
             "source": {
               "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
@@ -1968,6 +1847,64 @@
               {
                 "x": 737,
                 "y": 306
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "API Responses",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": []
+            },
+            "labels": [
+              {
+                "attrs": {
+                  "label": {
+                    "text": "API Responses"
+                  }
+                },
+                "position": 0.5
+              }
+            ],
+            "id": "16fd1f9b-7cb7-4989-b3f4-3f15cc4f4773",
+            "trustBoundaryIds": [],
+            "source": {
+              "cell": "edced7d1-6206-43bc-94ab-aa515977042a"
+            },
+            "target": {
+              "cell": "064304c2-9672-44f2-9e08-982d58145bc0"
+            },
+            "vertices": [
+              {
+                "x": 514,
+                "y": 150
               }
             ]
           },
@@ -2059,19 +1996,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "7c1617d0-5f85-492f-8096-df6c0989144b"
+                  "id": "6960ec9d-aa2b-4bb9-a151-2869cad971c9"
                 },
                 {
                   "group": "right",
-                  "id": "6dc2e985-e1c5-48e6-bc01-c00bd5fb5326"
+                  "id": "0d29792d-6520-41f2-9ede-ceb3fd8de70c"
                 },
                 {
                   "group": "bottom",
-                  "id": "3b9a2f76-7a04-46ea-9fc0-bb2b4f6aa470"
+                  "id": "305958ed-8101-456f-a9aa-75ef38e01cc3"
                 },
                 {
                   "group": "left",
-                  "id": "3a4c54e9-a192-4df6-8c73-0194a183ba91"
+                  "id": "6d2a01c5-68ae-4f13-91e8-15bd541c0104"
                 }
               ]
             },
@@ -2102,8 +2039,8 @@
                 "text": "B2B API"
               },
               "body": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
@@ -2176,19 +2113,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "5ce74f61-7a64-4c60-92f5-469fcd724a62"
+                  "id": "ba838aa1-af7c-4026-9eb8-89cfb51f2cd3"
                 },
                 {
                   "group": "right",
-                  "id": "e4a89952-eadb-468f-88cd-a5ef39d25c07"
+                  "id": "3c755b3d-f8e9-4beb-bcb9-c57a4f990e2f"
                 },
                 {
                   "group": "bottom",
-                  "id": "b1bc01bd-5d5b-4a3e-9e06-8d0b0cca05b3"
+                  "id": "196cf667-e843-4592-ab4a-8ddb2af7d05d"
                 },
                 {
                   "group": "left",
-                  "id": "7b4f4d79-05ff-4c52-9677-6175cedc1db3"
+                  "id": "f293f5c5-9445-43ce-8e54-e0b0d2a94357"
                 }
               ]
             },
@@ -2200,50 +2137,8 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [
-                {
-                  "id": "7c8cb64f-3194-4029-8c5c-65e339fcacfa",
-                  "title": "Provoke an error that is neither very gracefully nor consistently handled (and reveal sensitive information)",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": null,
-                  "eopGameId": "cornucopia",
-                  "description": "see: https://pwning.owasp-juice.shop/companion-guide/latest/appendix/solutions.html#_provoke_an_error_that_is_neither_very_gracefully_nor_consistently_handled",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "EOP",
-                  "new": false,
-                  "number": 106,
-                  "score": "",
-                  "cardSuit": "DATA VALIDATION & ENCODING",
-                  "cardNumber": "VE2"
-                },
-                {
-                  "id": "c525bc29-0c88-446a-a8ae-eb4c0720e616",
-                  "title": "Find the endpoint that serves usage data to be scraped by a popular monitoring system",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": null,
-                  "eopGameId": "cornucopia",
-                  "description": "see: https://pwning.owasp-juice.shop/companion-guide/latest/appendix/solutions.html#_find_the_endpoint_that_serves_usage_data_to_be_scraped_by_a_popular_monitoring_system ",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "EOP",
-                  "new": false,
-                  "number": 107,
-                  "score": "",
-                  "cardSuit": "CORNUCOPIA",
-                  "cardNumber": "C9"
-                }
-              ],
-              "hasOpenThreats": true
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove",
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
+              "threats": [],
+              "hasOpenThreats": false
             }
           },
           {
@@ -2334,19 +2229,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "52986831-b1dd-4f41-84bc-79532e2a6876"
+                  "id": "287b1341-cdb7-49ed-91ae-09b318194681"
                 },
                 {
                   "group": "right",
-                  "id": "b56d90c5-75e7-44c0-90e3-ca66944dee72"
+                  "id": "34e472f5-b7d7-4f28-87cc-19a0021df08f"
                 },
                 {
                   "group": "bottom",
-                  "id": "b1dc62a4-a91f-4040-ad6a-aeac82c2df82"
+                  "id": "118a4d60-189a-42f1-893a-cd17c624306e"
                 },
                 {
                   "group": "left",
-                  "id": "44fba4ac-d53b-41ff-a515-3ba4aef83a24"
+                  "id": "a0ad1418-944f-4a25-951a-58783ee2a992"
                 }
               ]
             },
@@ -2451,19 +2346,19 @@
               "items": [
                 {
                   "group": "top",
-                  "id": "a863ca37-cc1e-4f47-9ff7-7ad2ee02ab73"
+                  "id": "559d7d53-a0a3-472e-bb1d-028d9ae4203f"
                 },
                 {
                   "group": "right",
-                  "id": "6f188eea-1e6e-4993-8ab6-ab9d54bc8d99"
+                  "id": "55887021-a044-4c0c-ac74-1fb4fd1fb959"
                 },
                 {
                   "group": "bottom",
-                  "id": "2a2cee71-5e9f-4e37-bafa-dc51d5191370"
+                  "id": "44361896-3ad1-41b1-b023-91d5cd93ed99"
                 },
                 {
                   "group": "left",
-                  "id": "99595da1-9c8b-468a-98a9-69d7d63495cc"
+                  "id": "4cd0a9d3-c470-4807-b42b-6613fcc1269d"
                 }
               ]
             },
@@ -2481,18 +2376,17 @@
             }
           }
         ],
-        "id": 0,
-        "title": "OWASP Cornucopia",
-        "diagramType": "EOP",
-        "placeholder": "New EoP games diagram description",
-        "thumbnail": "./public/content/images/thumbnail.eop.jpg",
         "version": "2.6.0",
-        "description": "These are the OWASP Cornucopia threats connected with the OWASP Juice Shop challenges"
+        "title": "OWASP Cornucopia",
+        "description": "These are the OWASP Cornucopia threats connected with the OWASP Juice Shop challenges",
+        "thumbnail": "./public/content/images/thumbnail.eop.jpg",
+        "id": 0,
+        "diagramType": "EOP"
       }
     ],
-    "diagramTop": 11,
-    "threatTop": 107,
-    "reviewer": "Björn Kimminich"
+    "diagramTop": 10,
+    "threatTop": 100,
+    "reviewer": "Johan Sydseter"
   },
   "version": "2.6.0"
 }

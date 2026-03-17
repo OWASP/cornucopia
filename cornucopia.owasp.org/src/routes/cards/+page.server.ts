@@ -11,10 +11,12 @@ export const load = (({ params }) => {
   'mobileapp', DeckService.getLatestVersion('mobileapp'), lang);
   const webappCards = deckService.getCardDataForEditionVersionLang(
     'webapp', DeckService.getLatestVersion('webapp'), lang);
+  const companionCards = deckService.getCardDataForEditionVersionLang(
+    'companion', DeckService.getLatestVersion('companion'), lang);
   
   return {
     suits : SuitController.getSuits(),
-    decks : decks.set(lang, new Map([...mobileCards, ...webappCards])),
+    decks : decks.set(lang, new Map([...mobileCards, ...webappCards, ...companionCards])),
     mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
     content: FileSystemHelper.getDataFromPath('data/website/pages/cards')
   };

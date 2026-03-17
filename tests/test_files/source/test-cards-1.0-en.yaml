@@ -30,3 +30,6 @@ paragraphs:
   -
     id: "T00004"
     text: "This is the fourth test tag"
+  -
+    id: "T00005"
+    text: "0.1"

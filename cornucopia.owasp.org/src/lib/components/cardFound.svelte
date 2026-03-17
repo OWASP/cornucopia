@@ -13,6 +13,7 @@
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
+  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
 
   interface Props {
     mappingData: any;
@@ -40,6 +41,7 @@
   let t = readTranslation();
   let mappings = $state(controller.getCardMappings(card.id));
   let attacks: Attack[] = $state(GetCardAttacks(card.id));
+  const asvsVersion = $state(card.version < '3.0' ? '4.0.3' : '5.0');
 
   run(() => {
     mappings = controller.getCardMappings(card.id);
@@ -61,10 +63,13 @@
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   {#if card.edition == 'webapp'}
-  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes} {capecData}></WebAppCardTaxonomy>
+  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes} {capecData} {asvsVersion}></WebAppCardTaxonomy>
   {/if}
   {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
+  {/if}
+  {#if card.edition == "companion"}
+  <CompanionCardTaxonomy bind:card={card} {mappingData} {routes}></CompanionCardTaxonomy>
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>
