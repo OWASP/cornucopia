@@ -153,3 +153,19 @@ Before submitting a Claude-assisted PR:
 - [ ] Commits are signed off
 - [ ] Single, focused scope
 - [ ] All CI checks passing
+
+## Claude-Specific Context
+
+The following context is provided to help Claude better assist with contributions to this project:
+
+### Project Overview
+
+- **Project**: OWASP Cornucopia - The project contains 3 projects:
+  - [/scripts](scripts): Converter scripts to convert translations for editions of the Cornucopia game into IDML and PDF files that can be printed.
+  - [/cornucopia.owasp.org](/cornucopia.owasp.org): The Website for OWASP Cornucopia written in Typescript.
+  - [/copi.owasp.org](/copi.owasp.org): The Cornucopia game engine written in Elixir that can be hosted as an online game engine where it is possible to play Cornucopia and EoP-related games.
+- **Primary Languages**: Python, TypeScript and Elixir
+- **Key Technologies**: Node.js, Svelte, Phoenix
+- **Testing**: mix test (/copi.owasp.org), vitest (/cornucopia.owasp.org), Python unittest (/scripts) 
+- **Code Style**:
+  - For Python code, use PEP 8 style guidelines
