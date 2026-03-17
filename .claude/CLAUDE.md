@@ -89,7 +89,7 @@ Ask Claude to:
 ```
 Before committing:
 1. Remove AI-generated noise
-2. Run npm run lint
+2. For Python code, run: pipenv run black --line-length=120 --check .
 3. Run relevant test suites
 5. Manually verify functionality
 6. Check for unintended changes
