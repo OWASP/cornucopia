@@ -170,7 +170,7 @@ The following context is provided to help Claude better assist with contribution
 ### Project Overview
 
 - **Project**: OWASP Cornucopia - The project contains 3 projects:
-  - [/scripts](scripts): Converter scripts to convert translations for editions of the Cornucopia game into IDML and PDF files that can be printed.
+  - [/scripts](/scripts): Converter scripts to convert translations for editions of the Cornucopia game into IDML and PDF files that can be printed.
   - [/cornucopia.owasp.org](/cornucopia.owasp.org): The Website for OWASP Cornucopia written in Typescript.
   - [/copi.owasp.org](/copi.owasp.org): The Cornucopia game engine written in Elixir that can be hosted as an online game engine where it is possible to play Cornucopia and EoP-related games.
 - **Primary Languages**: Python, TypeScript and Elixir
