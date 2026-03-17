@@ -31,12 +31,14 @@ Take directions according to what is stated for the [OWASP Security Champion mod
 **Required** per CONTRIBUTING.md rule #6: Remove unnecessary AI-generated content before submitting PRs.
 
 Remove:
+
 - Verbose comments explaining obvious code
 - Generic placeholder comments
 - Overly detailed docstrings for simple functions
 - Repetitive explanations
 
 Keep:
+
 - Meaningful comments for complex logic
 - Challenge hints and metadata
 - Security-relevant documentation
@@ -44,9 +46,11 @@ Keep:
 ### 2. Code Style Compliance
 
 Always run Black before committing Python code:
+
 ```bash
 pipenv run black --line-length=120 --check .
 ```
+
 For Python code, Claude should suggest code following PEP 8 style guidelines and type hints (PEP 484) for function signatures, but always verify.
 
 ### 3. Testing Requirements
@@ -58,6 +62,7 @@ For any code changes, Claude helps with:
 ### 4. Commit Sign-off
 
 All commits must be signed off (DCO):
+
 ```bash
 git commit -s -m "Your commit message"
 ```
@@ -70,6 +75,7 @@ git commit -s -m "Your commit message"
 ## Development Workflow with Claude
 
 ### 1. Understanding the Codebase
+
 ```
 Ask Claude to:
 - Explain specific components or patterns
@@ -78,6 +84,7 @@ Ask Claude to:
 ```
 
 ### 2. Implementation
+
 ```
 Ask Claude to:
 - Generate initial implementation
@@ -86,6 +93,7 @@ Ask Claude to:
 ```
 
 ### 3. Quality Assurance
+
 ```
 Before committing:
 1. Remove AI-generated noise
@@ -97,6 +105,7 @@ Before committing:
 ```
 
 ### 4. Documentation
+
 ```
 Ask Claude to:
 - Write clear commit messages
