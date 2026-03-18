@@ -1,0 +1,10 @@
+{
+  "roadmap": {
+    "title": "Дорожня карта",
+    "head": {
+        "title": "OWASP Cornucopia - Дорожня карта проекту",
+        "description": "Дорожня карта OWASP Cornucopia — це посібник щодо майбутнього проекту OWASP Cornucopia.",
+        "keywords": "OWASP, Cornucopia, Дорожня карта, Проект"
+    }
+  }
+}

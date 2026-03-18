@@ -244,6 +244,10 @@ export default {
 				'/cards/DVEQ',
 				'/cards/DVEK',
 				'/404',
+				'/api/docs',
+				'/api/lang/mobileapp/1.1',
+				'/api/lang/webapp/2.2',
+				'/api/lang/webapp/3.0',
 				'/api/cre/webapp/en',
 				'/api/cre/webapp/it',
 				'/api/cre/webapp/nl',
@@ -273,10 +277,12 @@ export default {
 				'/edition/webapp/VE2/3.0/pt_br',
 				'/edition/webapp/VE2/3.0/no_nb',
 				'/edition/webapp/VE2/3.0/ru',
+				'/edition/webapp/VE2/3.0/hi',
+				'/edition/webapp/VE2/3.0/uk'
 			]
 		},
 		csrf: {
-			checkOrigin: true
+			trustedOrigins: ['https://owaspcornucopia.org', 'https://cornucopia.owasp.org']
 		}
 	}
 };

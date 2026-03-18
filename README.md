@@ -45,6 +45,22 @@ Please read [README.md](./scripts/README.md)
 
 Please read [README.md](./scripts/README.md)
 
+### Security Scanning
+
+First time setup:
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+A Bandit pre-commit hook scans Python scripts for security issues on commit.
+It runs automatically via pre-commit (medium severity, high confidence).
+
+To run manually:
+```bash
+pre-commit run bandit --all-files
+```
+
 ### Building and Deploying the Cornucopia website
 
 https://cornucopia.owasp.org contains the card browser for each of the cards in the cornucopia suits together with the taxonomy and in depth explaination for each of the cards in the suits.
@@ -93,7 +109,7 @@ The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 The "bridge" is 60 x 89.25 mm x 27.15 mm
 The "tarot" is 122.2 x 73.1 x 29.1 mm
 
-the "tarrot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
+the "tarot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
 the "bridge" box may need some refitting if used.
 
 #### Leaflets:

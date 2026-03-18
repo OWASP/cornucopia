@@ -1,13 +1,22 @@
 defmodule CopiWeb.GameLiveTest do
-  use CopiWeb.ConnCase
+  use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
 
   alias Copi.Cornucopia
+  alias Copi.RateLimiter
 
   @create_attrs %{ name: "some name", edition: "webapp"}
   # @update_attrs %{ name: "some updated name", edition: "webapp"}
   @invalid_attrs %{name: nil, edition: "webapp"}
+
+  setup %{conn: conn} do
+    # Clear rate limits to prevent cross-test contamination
+    RateLimiter.clear_ip({127, 0, 0, 1})
+    # Set up IP address for rate limiting tests
+    conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
+    {:ok, conn: conn}
+  end
 
   defp fixture(:game) do
     {:ok, game} = Cornucopia.create_game(@create_attrs)
@@ -51,6 +60,43 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ "Game created successfully"
       assert html =~ "some name"
     end
+
+    test "blocks game creation when rate limit exceeded", %{conn: conn} do
+      # Clear any existing rate limits for the test IP
+      test_ip = {127, 0, 0, 1}
+      RateLimiter.clear_ip(test_ip)
+
+      # Get the rate limit config
+      config = RateLimiter.get_config()
+      limit = config.limits.game_creation
+
+      # Navigate to new game page once and reuse the LiveView
+      {:ok, index_live, _html} = live(conn, "/games")
+      {:ok, _} = index_live |> element(~s{[href="/games/new"]}) |> render_click() |> follow_redirect(conn)
+      
+      # Create games up to the limit
+      for i <- 1..limit do
+        {:ok, games_new, _html} = live(conn, "/games/new")
+        
+        {:ok, _, _html} =
+          games_new
+          |> form("#game-form", game: %{name: "Game #{i}", edition: "webapp"})
+          |> render_submit()
+          |> follow_redirect(conn)
+      end
+
+      # Next game creation should be blocked
+      {:ok, games_new_blocked, _html} = live(conn, "/games/new")
+      
+      games_new_blocked
+        |> form("#game-form", game: %{name: "Blocked Game", edition: "webapp"})
+        |> render_submit()
+      
+      # Verify rate limit is exceeded (form stays, no redirect)
+      assert has_element?(games_new_blocked, "#game-form")
+      # Verify the rate limiter actually blocked the request
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
+    end
   end
 
   describe "Show" do
@@ -75,8 +121,16 @@ defmodule CopiWeb.GameLiveTest do
       {:ok, show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
       assert html =~ "Start Game"
 
-      html = show_live |> element("button", "Start Game") |> render_click()
+      html = show_live |> element("button[phx-click=\"start_game\"]") |> render_click()
       assert html =~ "Round <strong>1</strong>"
+    end
+    
+    test "Broadcasts game:updated to other LiveViews but ignores non-matching topic", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      
+      # Should be ignored due to topic mismatch, no crash
+      send(show_live.pid, %{topic: "game:other_id", event: "game:updated", payload: game})
+      assert render(show_live) =~ game.name
     end
 
     test "redirects to error when game not found", %{conn: conn} do
@@ -99,6 +153,17 @@ defmodule CopiWeb.GameLiveTest do
        
        {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=1")
        assert html =~ "Viewing round <strong>1</strong>"
+    end
+
+
+    test "handle_info updates games list", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, "/games")
+      
+      # Send update_parent message
+      send(index_live.pid, {:update_parent, []})
+      
+      # Should update the assigns
+      :ok
     end
     
   end

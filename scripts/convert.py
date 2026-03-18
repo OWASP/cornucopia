@@ -10,6 +10,7 @@ import subprocess
 import yaml
 import zipfile
 import xml.etree.ElementTree as ElTree
+from defusedxml import ElementTree as DefusedElTree
 from typing import Any, Dict, List, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
@@ -20,25 +21,92 @@ from pathvalidate import sanitize_filepath
 
 class ConvertVars:
     BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
-    EDITION_CHOICES: List[str] = ["all", "webapp", "mobileapp", "against-security"]
+    EDITION_CHOICES: List[str] = ["all"]
     FILETYPE_CHOICES: List[str] = ["all", "docx", "odt", "pdf", "idml"]
-    LAYOUT_CHOICES: List[str] = ["all", "leaflet", "guide", "cards"]
-    LANGUAGE_CHOICES: List[str] = ["all", "en", "es", "fr", "nl", "no-nb", "pt-pt", "pt-br", "hu", "it", "ru"]
-    VERSION_CHOICES: List[str] = ["all", "latest", "1.0", "1.1", "2.2", "3.0", "5.0"]
-    LATEST_VERSION_CHOICES: List[str] = ["1.1", "3.0"]
-    TEMPLATE_CHOICES: List[str] = ["all", "bridge", "bridge_qr", "tarot", "tarot_qr"]
-    EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {
-        "webapp": {"2.2": "2.2", "3.0": "3.0"},
-        "against-security": {"1.0": "1.0"},
-        "mobileapp": {"1.0": "1.0", "1.1": "1.1"},
-        "all": {"2.2": "2.2", "1.0": "1.0", "1.1": "1.1", "3.0": "3.0", "5.0": "5.0"},
-    }
+    LAYOUT_CHOICES: List[str] = ["all"]
+    LANGUAGE_CHOICES: List[str] = ["all"]
+    VERSION_CHOICES: List[str] = ["all", "latest"]
+    LATEST_VERSION_CHOICES: List[str] = []
+    TEMPLATE_CHOICES: List[str] = ["all"]
+    EDITION_VERSION_MAP: Dict[str, Dict[str, str]] = {}
     DEFAULT_TEMPLATE_FILENAME: str = os.sep.join(
         ["resources", "templates", "owasp_cornucopia_edition_ver_layout_document_template_lang"]
     )
     DEFAULT_OUTPUT_FILENAME: str = os.sep.join(["output", "owasp_cornucopia_edition_ver_layout_document_template_lang"])
     args: argparse.Namespace
     can_convert_to_pdf: bool = False
+
+    def __init__(self) -> None:
+        self._detect_choices()
+
+    def _parse_mapping_file(self, filepath: str) -> Dict[str, Any]:
+        """Parse a single YAML mapping file and return its meta block, or empty dict on failure."""
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+                if data and "meta" in data:
+                    meta = data["meta"]
+                    if isinstance(meta, dict):
+                        return meta
+        except Exception as e:
+            logging.warning(f"Failed to parse {filepath} for dynamic choice detection: {e}")
+        return {}
+
+    def _update_from_meta(
+        self,
+        meta: Dict[str, Any],
+        editions: set[str],
+        versions: set[str],
+        languages: set[str],
+        layouts: set[str],
+        templates: set[str],
+        edition_version_map: Dict[str, Dict[str, str]],
+    ) -> None:
+        """Update the choice sets with values extracted from a mapping file's meta block."""
+        edition = meta.get("edition")
+        version = str(meta.get("version"))
+        if edition:
+            editions.add(edition)
+            if version:
+                versions.add(version)
+                edition_version_map.setdefault(edition, {})[version] = version
+        for lang in meta.get("languages", []):
+            languages.add(lang)
+        for layout in meta.get("layouts", []):
+            layouts.add(layout)
+        for template in meta.get("templates", []):
+            templates.add(template)
+
+    def _detect_choices(self) -> None:
+        """Scan the source/ directory to dynamically populate all choice attributes."""
+        source_dir = os.path.join(self.BASE_PATH, "source")
+        editions: set[str] = set()
+        languages: set[str] = set(["en"])
+        versions: set[str] = set()
+        layouts: set[str] = set(["cards", "leaflet", "guide"])
+        templates: set[str] = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
+        edition_version_map: Dict[str, Dict[str, str]] = {}
+
+        if os.path.isdir(source_dir):
+            for filename in os.listdir(source_dir):
+                if filename.endswith(".yaml") and "mappings" in filename:
+                    filepath = os.path.join(source_dir, filename)
+                    meta = self._parse_mapping_file(filepath)
+                    if meta:
+                        self._update_from_meta(
+                            meta, editions, versions, languages, layouts, templates, edition_version_map
+                        )
+
+        self.EDITION_CHOICES = ["all"] + sorted(list(editions))
+        self.LANGUAGE_CHOICES = ["all"] + sorted(list(languages))
+        self.VERSION_CHOICES = ["all", "latest"] + sorted(list(versions))
+        self.LAYOUT_CHOICES = ["all"] + sorted(list(layouts))
+        self.TEMPLATE_CHOICES = ["all"] + sorted(list(templates))
+        self.EDITION_VERSION_MAP = edition_version_map
+        self.EDITION_VERSION_MAP["all"] = {v: v for v in versions}
+
+        latest_versions = [max(v_map.keys()) for v_map in edition_version_map.values() if v_map]
+        self.LATEST_VERSION_CHOICES = sorted(list(set(latest_versions)))
 
 
 def check_fix_file_extension(filename: str, file_type: str) -> str:
@@ -63,6 +131,63 @@ def check_make_list_into_text(var: List[str]) -> str:
     return text_output
 
 
+def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tuple[bool, str, str]:
+    """Validate and sanitize file paths to prevent command injection."""
+    source_path = os.path.abspath(source_filename)
+    output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
+
+    # Additional security checks
+    if not os.path.isfile(source_path):
+        return False, f"Source file does not exist: {source_path}", ""
+
+    if not os.path.isdir(output_dir):
+        return False, f"Output directory does not exist: {output_dir}", ""
+
+    # Ensure paths are within expected directories to prevent path traversal
+    base_path = os.path.abspath(convert_vars.BASE_PATH)
+    if not source_path.startswith(base_path):
+        return False, f"Source path outside base directory: {source_path}", ""
+    if not output_dir.startswith(base_path):
+        return False, f"Output directory outside base directory: {output_dir}", ""
+
+    return True, source_path, output_dir
+
+
+def _safe_extractall(archive: zipfile.ZipFile, target_dir: str) -> None:
+    """Extract zip members only if their resolved paths stay within target_dir.
+
+    Prevents Zip Slip / path traversal (CWE-22) by resolving symlinks and all
+    '..' components before comparing each member path against the target root.
+    Degenerate root entries ('.', '', './') are skipped rather than extracted,
+    because they carry no file content and resolve to the target directory itself.
+    """
+    abs_target = os.path.realpath(target_dir)
+    for member in archive.infolist():
+        member_path = os.path.realpath(os.path.join(abs_target, member.filename))
+
+        # Root/degenerate entries ('.', '', './') resolve to abs_target itself.
+        # They are directory metadata with no content; skip them safely.
+        if member_path == abs_target:
+            continue
+
+        # Block any member whose resolved path escapes the target directory.
+        # The os.sep suffix prevents prefix collisions (e.g. /tmp/d vs /tmp/d_evil).
+        if not member_path.startswith(abs_target + os.sep):
+            raise ValueError(f"Zip Slip blocked: member '{member.filename}' would extract outside target directory")
+
+        archive.extract(member, target_dir)
+
+
+def _validate_command_args(cmd_args: List[str]) -> bool:
+    """Validate command arguments for dangerous characters."""
+    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
+    for arg in cmd_args:
+        if any(char in arg for char in dangerous_chars):
+            logging.warning(f"Potentially dangerous character found in argument: {arg}")
+            return False
+    return True
+
+
 def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
     libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
     if not libreoffice_bin and platform.system() == "Windows":
@@ -75,23 +200,42 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
 
     try:
         logging.info(f"Using LibreOffice for conversion: {libreoffice_bin}")
+
+        # Validate file paths
+        is_valid, source_path, output_dir = _validate_file_paths(source_filename, output_pdf_filename)
+        if not is_valid:
+            logging.warning(source_path)  # source_path contains the error message
+            return False
+
+        # Create user profile directory safely
         user_profile_dir = os.path.abspath(os.path.join(convert_vars.BASE_PATH, "output", "lo_profile"))
+        os.makedirs(user_profile_dir, exist_ok=True)
         user_profile_url = "file:///" + user_profile_dir.replace("\\", "/")
+
+        # Build command arguments
+        cmd_args = [
+            libreoffice_bin,
+            "--headless",
+            f"-env:UserInstallation={user_profile_url}",
+            "--convert-to",
+            "pdf",
+            "--outdir",
+            output_dir,
+            source_path,
+        ]
+
+        # Validate command arguments
+        if not _validate_command_args(cmd_args):
+            return False
+
+        # Execute conversion
         subprocess.run(
-            [
-                libreoffice_bin,
-                "--headless",
-                f"-env:UserInstallation={user_profile_url}",
-                "--convert-to",
-                "pdf",
-                "--outdir",
-                os.path.abspath(os.path.dirname(output_pdf_filename)),
-                os.path.abspath(source_filename),
-            ],
-            check=True,
-            capture_output=True,
+            cmd_args, check=True, capture_output=True, text=True, timeout=300  # 5 minute timeout to prevent hanging
         )
         return True
+    except subprocess.TimeoutExpired:
+        logging.warning("LibreOffice conversion timed out after 5 minutes")
+        return False
     except Exception as e:
         logging.warning(f"LibreOffice conversion failed: {e}")
         return False
@@ -143,6 +287,11 @@ def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -
 
 
 def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
+    """Convert a document file (ODF, DOCX) to PDF using LibreOffice or docx2pdf.
+
+    Note: The source file is preserved after conversion, as it's typically an output
+    file that should be kept alongside the PDF, not a temporary file.
+    """
     logging.debug(
         f" --- source_file = {source_filename} convert to {output_pdf_filename}\n--- starting pdf conversion now."
     )
@@ -150,7 +299,7 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
     # 1. Attempt using LibreOffice
     if _convert_with_libreoffice(source_filename, output_pdf_filename):
         _rename_libreoffice_output(source_filename, output_pdf_filename)
-        _cleanup_temp_file(source_filename)
+        # Don't delete the source file - we want to keep both ODF and PDF
         return
 
     # 2. Fallback to docx2pdf
@@ -160,7 +309,7 @@ def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
 
     # 3. Everything failed
     _handle_conversion_failure(source_filename)
-    _cleanup_temp_file(source_filename)
+    # Don't delete the source file even on failure - it may still be useful
 
 
 def create_edition_from_template(
@@ -280,10 +429,12 @@ def main() -> None:
     logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
-    if convert_vars.args.pdf and not convert_vars.can_convert_to_pdf and not convert_vars.args.debug:
+    libreoffice_available = bool(shutil.which("libreoffice") or shutil.which("soffice"))
+    can_make_pdf = convert_vars.can_convert_to_pdf or libreoffice_available
+    if convert_vars.args.pdf and not can_make_pdf and not convert_vars.args.debug:
         logging.error(
             "Cannot convert to pdf on this system. "
-            "Pdf conversion is available on Windows and Mac, if MS Word is installed"
+            "Pdf conversion is available on Windows and Mac (with MS Word), or on any system with LibreOffice."
         )
         return
 
@@ -325,7 +476,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         required=False,
         default="latest",
         help=(
-            "Output version to produce. [`all`, `latest`, `1.0`, `1.1`, `2.2`, `3.0`] "
+            f"Output version to produce. {convert_vars.VERSION_CHOICES} "
             "\nFor the Website edition:"
             "\nVersion 3.0 will deliver cards mapped to ASVS 5.0"
             "\nVersion 2.2 will deliver cards mapped to ASVS 4.0"
@@ -372,7 +523,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            "Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-pt`, `pt-br`, `it`, `ru`] "
+            f"Output language to produce. {convert_vars.LANGUAGE_CHOICES} "
             "you can also specify your own language file. If so, there needs to be a yaml "
             "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
         ),
@@ -384,7 +535,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="bridge",
         help=(
-            "From which template to produce the document. [`bridge`, `tarot` or `tarot_qr`]\n"
+            f"From which template to produce the document. {convert_vars.TEMPLATE_CHOICES}\n"
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
@@ -400,7 +551,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="all",
         help=(
-            "Output decks to produce. [`all`, `webapp` or `mobileapp`]\n"
+            f"Output decks to produce. {convert_vars.EDITION_CHOICES}\n"
             "The various Cornucopia decks. `web` will give you the Website App edition.\n"
             "`mobileapp` will give you the Mobile App edition.\n"
             "You can also speficy your own edition. If so, there needs to be a yaml "
@@ -415,7 +566,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="all",
         help=(
-            "Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]\n"
+            f"Document layouts to produce. {convert_vars.LAYOUT_CHOICES}\n"
             "The various Cornucopia document layouts.\n"
             "`cards` will output the high quality print card deck.\n"
             "`guide` will generate the docx guide with the low quality print deck.\n"
@@ -468,7 +619,7 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
 
 def get_docx_document(docx_file: str) -> Any:
     """Open the file and return the docx document."""
-    import docx  # type: ignore[import-untyped]
+    import docx  # type: ignore
 
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
@@ -727,6 +878,9 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
         return el_text
 
     for k, v in replacement_values:
+        # Skip None keys to prevent AttributeError
+        if k is None:
+            continue
         # Avoid expensive regex if key is not even in text
         if k.strip() not in el_text:
             continue
@@ -807,11 +961,12 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
 
 def get_valid_layout_choices() -> List[str]:
     layouts = []
-    if convert_vars.args.layout.lower() == "all" or convert_vars.args.layout == "":
+    layout = convert_vars.args.layout or ""
+    if layout.lower() == "all" or layout == "":
         for layout in convert_vars.LAYOUT_CHOICES:
-            if layout not in ("all", "guide"):
+            if layout != "all" and layout != "guide":
                 layouts.append(layout)
-            if layout == "guide" and convert_vars.args.edition.lower() in "webapp":
+            if layout == "guide" and convert_vars.args.edition.lower() == "webapp":
                 layouts.append(layout)
     else:
         layouts.append(convert_vars.args.layout)
@@ -851,13 +1006,13 @@ def get_valid_version_choices() -> List[str]:
 
 
 def get_valid_mapping_for_version(version: str, edition: str) -> str:
-    return ConvertVars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
+    return convert_vars.EDITION_VERSION_MAP.get(edition, {}).get(version, "")
 
 
 def get_valid_templates() -> List[str]:
     templates = []
     if convert_vars.args.template.lower() == "all":
-        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t not in "all"]:
+        for template in [t for t in convert_vars.TEMPLATE_CHOICES if t != "all"]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
@@ -871,9 +1026,9 @@ def get_valid_edition_choices() -> List[str]:
     editions = []
     if convert_vars.args.edition.lower() == "all" or not convert_vars.args.edition.lower():
         for edition in convert_vars.EDITION_CHOICES:
-            if edition not in "all":
+            if edition != "all":
                 editions.append(edition)
-    if convert_vars.args.edition and convert_vars.args.edition not in "all":
+    if convert_vars.args.edition and convert_vars.args.edition.lower() != "all":
         editions.append(convert_vars.args.edition)
     return editions
 
@@ -908,7 +1063,7 @@ def save_odt_file(template_doc: str, language_dict: Dict[str, str], output_file:
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as odt_archive:
-        odt_archive.extractall(temp_output_path)
+        _safe_extractall(odt_archive, temp_output_path)
 
     # ODT text is usually in content.xml and sometimes styles.xml
     targets = ["content.xml", "styles.xml"]
@@ -938,7 +1093,7 @@ def save_idml_file(template_doc: str, language_dict: Dict[str, str], output_file
 
     # Unzip source xml files and place in temp output folder
     with zipfile.ZipFile(template_doc) as idml_archive:
-        idml_archive.extractall(temp_output_path)
+        _safe_extractall(idml_archive, temp_output_path)
         logging.debug(" --- namelist of first few files in archive = %s", str(idml_archive.namelist()[:5]))
 
     xml_files = get_files_from_of_type(temp_output_path, "xml")
@@ -977,7 +1132,8 @@ def set_logging() -> None:
 
 
 def sort_keys_longest_to_shortest(replacement_dict: Dict[str, str]) -> List[Tuple[str, str]]:
-    new_list = list((k, v) for k, v in replacement_dict.items())
+    # Filter out None keys to prevent len() errors
+    new_list = list((k, v) for k, v in replacement_dict.items() if k is not None)
     return sorted(new_list, key=lambda s: len(s[0]), reverse=True)
 
 
@@ -1070,7 +1226,7 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        tree = ElTree.parse(filename)
+        tree = DefusedElTree.parse(filename)
     except Exception as e:
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return

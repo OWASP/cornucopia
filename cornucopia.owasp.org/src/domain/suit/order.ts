@@ -12,4 +12,12 @@ export const order = new Map<string,number>([
     ["cryptography", 10],
     ["cornucopia", 11],
     ["wild-card", 12],
+    // Companion suits
+    ["large-language-models", 13],
+    ["agentic-ai", 14],
+    ["cloud", 15],
+    ["frontend", 16],
+    ["devops", 17],
+    ["social-engineering", 18],
+    ["automated-threats", 19],
 ]);

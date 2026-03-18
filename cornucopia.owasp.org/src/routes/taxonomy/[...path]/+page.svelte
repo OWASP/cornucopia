@@ -29,7 +29,7 @@
 <!--The location is filecontent -->
 {#if data.content && data.content != ''}
     <SvelteMarkdown {renderers} source={data.content}></SvelteMarkdown>
-    <ViewSourceOnGithub path={'./data/taxonomy/' + data.path + '/index.md'} ></ViewSourceOnGithub>
+    <ViewSourceOnGithub path={data.truePath + '/index.md'} ></ViewSourceOnGithub>
 {/if}
 </div>
 <style>

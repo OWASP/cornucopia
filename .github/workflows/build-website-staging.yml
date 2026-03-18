@@ -42,8 +42,6 @@
               pnpm install          # Install dependencies
               npm run build-stage   # Build staging version
               npm run coverage
-
-
           - name: Install smoke test tools
             working-directory: cornucopia.owasp.org
             run: |
@@ -78,6 +76,7 @@
               name: cornucopia-staging-build-artifact-${{ github.sha }}
               path: |
                 cornucopia.owasp.org/build
+                cornucopia.owasp.org/.svelte-kit
       call-deploy-staging:
         needs: build-website-staging
         uses: ./.github/workflows/deploy-website-staging.yml
