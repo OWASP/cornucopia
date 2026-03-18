@@ -15,19 +15,23 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     %{player: player}
   end
 
-  defp create_started_game(name) do
-    {:ok, game} = Cornucopia.create_game(%{name: name, edition: "webapp"})
-    {:ok, _p1} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
-    {:ok, _p2} = Cornucopia.create_player(%{name: "Player Two", game_id: game.id})
-    {:ok, _p3} = Cornucopia.create_player(%{name: "Player Three", game_id: game.id})
+  defp create_game_with_dealt_card(game_name, card_ext_id) do
+    {:ok, game} = Cornucopia.create_game(%{name: game_name, edition: "webapp"})
+    {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+
+    {:ok, card} = Cornucopia.create_card(%{
+      category: "C", value: card_ext_id, description: "D", edition: "webapp",
+      version: "2.2", external_id: card_ext_id, language: "en", misc: "m",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+    })
+
+    dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+      player_id: player.id, card_id: card.id
+    })
 
     {:ok, game} = Game.find(game.id)
-
-    {:ok, game_view, _html} = live(build_conn(), "/games/#{game.id}")
-    render_click(game_view, "start_game", %{})
-
-    {:ok, started_game} = Game.find(game.id)
-    started_game
+    {game, player, dealt}
   end
 
   describe "Show - additional coverage" do
@@ -114,7 +118,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert updated_game.rounds_played == 1
     end
 
-    test "helper functions return expected values", %{conn: _conn, player: player} do
+    test "helper functions return expected values", %{conn: _conn, player: _player} do
       alias CopiWeb.PlayerLive.Show
 
       assert Show.ordered_cards([]) == []
@@ -291,37 +295,27 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   end
 
   describe "toggle_vote authorization" do
-    test "allows a player to vote on a card belonging to their own game", %{conn: conn} do
-      game = create_started_game("Game One")
-
-      player = List.first(game.players)
-      dealt_card = List.first(player.dealt_cards)
-
-      {:ok, view, _html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
-      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt_card.id)})
-
-      {:ok, refreshed_card} = DealtCard.find(dealt_card.id)
-      assert Enum.any?(refreshed_card.votes, fn v -> v.player_id == player.id end)
-    end
-
     test "rejects cross-game vote and shows error flash", %{conn: conn} do
-      game1 = create_started_game("Game One")
-      game2 = create_started_game("Game Two")
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game One", "AUTH_G1_C1")
+      {_game2, _player2, dc2} = create_game_with_dealt_card("Auth Game Two", "AUTH_G2_C1")
 
-      player1 = List.first(game1.players)
-
-      other_card = game2.players
-        |> List.first()
-        |> Map.get(:dealt_cards)
-        |> List.first()
-
-      {:ok, view, _html} = live(conn, "/games/#{player1.game_id}/players/#{player1.id}")
-      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(other_card.id)})
+      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc2.id)})
 
       assert render(view) =~ "Invalid card selection"
 
-      {:ok, refreshed_card} = DealtCard.find(other_card.id)
+      {:ok, refreshed_card} = DealtCard.find(dc2.id)
       assert refreshed_card.votes == []
+    end
+
+    test "allows a player to vote on a card belonging to their own game", %{conn: conn} do
+      {game1, player1, dc1} = create_game_with_dealt_card("Auth Game Three", "AUTH_G3_C1")
+
+      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc1.id)})
+
+      {:ok, refreshed_card} = DealtCard.find(dc1.id)
+      assert Enum.any?(refreshed_card.votes, fn v -> v.player_id == player1.id end)
     end
   end
 end
