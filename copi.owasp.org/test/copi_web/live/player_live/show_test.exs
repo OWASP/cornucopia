@@ -1,9 +1,11 @@
-defmodule CopiWeb.PlayerLive.ShowTest do
+﻿defmodule CopiWeb.PlayerLive.ShowTest do
   use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
 
   alias Copi.Cornucopia
+  alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.DealtCard
 
   @game_attrs %{name: "show test game"}
 
@@ -11,6 +13,21 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     {:ok, game} = Cornucopia.create_game(@game_attrs)
     {:ok, player} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
     %{player: player}
+  end
+
+  defp create_started_game(name) do
+    {:ok, game} = Cornucopia.create_game(%{name: name, edition: "webapp"})
+    {:ok, _p1} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+    {:ok, _p2} = Cornucopia.create_player(%{name: "Player Two", game_id: game.id})
+    {:ok, _p3} = Cornucopia.create_player(%{name: "Player Three", game_id: game.id})
+
+    {:ok, game} = Game.find(game.id)
+
+    {:ok, game_view, _html} = live(build_conn(), "/games/#{game.id}")
+    render_click(game_view, "start_game", %{})
+
+    {:ok, started_game} = Game.find(game.id)
+    started_game
   end
 
   describe "Show - additional coverage" do
@@ -41,7 +58,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
 
-      # A played card with no nil-round cards remaining → last_round? returns true
       {:ok, card} =
         Cornucopia.create_card(%{
           category: "C", value: "V", description: "D", edition: "webapp",
@@ -67,7 +83,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
 
-      # Start game but add no dealt cards and no continue votes → round_open? true, can_continue? false
       Copi.Repo.update!(
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
@@ -88,13 +103,11 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
 
-      # 1 player + 1 continue vote → majority reached (1 > div(1,2) = 0), round_open? true
       Copi.Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       render_click(show_live, "next_round", %{})
 
-      # Wait for the async :proceed_to_next_round message (100ms delay + buffer)
       :timer.sleep(300)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
@@ -108,14 +121,11 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert Show.unplayed_cards([]) == []
       assert Show.played_cards([], 1) == []
       assert Show.card_played_in_round([], 1) == nil
-      # With no players, no one is still to play → round_open? is false → round_closed? is true
       assert Show.round_closed?(%{players: [], rounds_played: 0}) == true
 
-      # last_round? returns false when a player still has a nil-round card
       player_with_unplayed = %{dealt_cards: [%{played_in_round: nil}]}
       refute Show.last_round?(%{players: [player_with_unplayed], rounds_played: 0})
 
-      # last_round? returns true when all cards are played
       player_all_played = %{dealt_cards: [%{played_in_round: 1}]}
       assert Show.last_round?(%{players: [player_all_played], rounds_played: 0})
 
@@ -158,7 +168,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
 
-      # Card played in round 1 (current round) → round_open? = false
       {:ok, card1} =
         Cornucopia.create_card(%{
           category: "C", value: "V3", description: "D", edition: "webapp",
@@ -167,7 +176,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
           capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
         })
 
-      # Unplayed card → last_round? = false (player still has nil-round card)
       {:ok, card2} =
         Cornucopia.create_card(%{
           category: "C", value: "V4", description: "D", edition: "webapp",
@@ -190,7 +198,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
-      # last_round? = false because player still has unplayed card
       assert updated_game.finished_at == nil
     end
 
@@ -203,7 +210,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
 
-      # Player has exactly one card, played in round 1 → no nil-round cards remain
       {:ok, card} =
         Cornucopia.create_card(%{
           category: "C", value: "V5", description: "D", edition: "webapp",
@@ -235,14 +241,12 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
-      # No vote yet → should insert a continue vote
       render_click(show_live, "toggle_continue_vote", %{})
       :timer.sleep(100)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert length(updated_game.continue_votes) == 1
 
-      # Vote exists → should delete it
       render_click(show_live, "toggle_continue_vote", %{})
       :timer.sleep(100)
 
@@ -272,19 +276,52 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
-      # No vote yet → should insert a vote
       render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
       :timer.sleep(100)
 
       {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt.votes) == 1
 
-      # Vote exists → should delete it
       render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
       :timer.sleep(100)
 
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
+    end
+  end
+
+  describe "toggle_vote authorization" do
+    test "allows a player to vote on a card belonging to their own game", %{conn: conn} do
+      game = create_started_game("Game One")
+
+      player = List.first(game.players)
+      dealt_card = List.first(player.dealt_cards)
+
+      {:ok, view, _html} = live(conn, "/players/#{player.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt_card.id)})
+
+      {:ok, refreshed_card} = DealtCard.find(dealt_card.id)
+      assert Enum.any?(refreshed_card.votes, fn v -> v.player_id == player.id end)
+    end
+
+    test "rejects cross-game vote and shows error flash", %{conn: conn} do
+      game1 = create_started_game("Game One")
+      game2 = create_started_game("Game Two")
+
+      player1 = List.first(game1.players)
+
+      other_card = game2.players
+        |> List.first()
+        |> Map.get(:dealt_cards)
+        |> List.first()
+
+      {:ok, view, _html} = live(conn, "/players/#{player1.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(other_card.id)})
+
+      assert render(view) =~ "Invalid card selection"
+
+      {:ok, refreshed_card} = DealtCard.find(other_card.id)
+      assert refreshed_card.votes == []
     end
   end
 end
