@@ -38,7 +38,7 @@ suits:
     id: "VE7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/VE7"
-    desc: "Jan kan speciale payloads maken om invoervalidatie te dwarsbomen omdat de tekenset niet is gespecificeerd/afgedwongen, of de gegevens meerdere keren worden gecodeerd, of de gegevens niet volledig worden geconverteerd naar hetzelfde formaat dat de toepassing gebruikt (bijv. gevalideerd, of variabelen zijn niet sterk getypt"
+    desc: "Jan kan speciale payloads maken om invoervalidatie te dwarsbomen omdat de tekenset niet is gespecificeerd/afgedwongen, of de gegevens meerdere keren worden gecodeerd, of de gegevens niet volledig worden geconverteerd naar hetzelfde formaat dat de toepassing gebruikt (bijv. canonicalisatie) voordat ze gevalideerd worden, of variabelen zijn niet sterk getypt"
   -
     id: "VE8"
     value: "8"
@@ -53,7 +53,7 @@ suits:
     id: "VEX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/VEX"
-    desc: "Darío kan het vertrouwen van de applicatie in een gegevensbron misbruiken (bijv. door de gebruiker te definiëren gegevens, manipulatie van lokaal opgeslagen gegevens, wijziging van statusgegevens op een clientapparaat, gebrek aan en/of onjuiste uitvoering van client-side controls, gebrek aan verificatie van identiteit tijdens gegevensvalidatie zoals Darío kan alsof hij Colin is)"
+    desc: "Darío kan het vertrouwen van de applicatie in een gegevensbron misbruiken (bijv. door de gebruiker te definiëren gegevens, manipulatie van lokaal opgeslagen gegevens, wijziging van statusgegevens op een clientapparaat, gebrek aan en/of onjuiste uitvoering van client-side controls, gebrek aan verificatie van identiteit tijdens gegevensvalidatie zoals Darío kan doen alsof hij Colin is)"
   -
     id: "VEJ"
     value: "J"
@@ -63,12 +63,12 @@ suits:
     id: "VEQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/VEQ"
-    desc: "Xavier kan gegevens injecteren in een client- of device-side interpreter omdat een geparametriseerde interface niet wordt gebruikt, niet correct is geïmplementeerd, of de gegevens niet correct zijn versleuteld, gezuiverd of ontsnapt voor de context, of er is geen restrictieve beleid op code of gegevens inclusies"
+    desc: "Xavier kan gegevens injecteren in een client- of device-side interpreter omdat een geparametriseerde interface niet wordt gebruikt, niet correct is geïmplementeerd, of de gegevens niet correct zijn versleuteld, gezuiverd of ontsnapt voor de context, of er is geen restrictief beleid op code of gegevens includes"
   -
     id: "VEK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/VEK"
-    desc: "Gabe kan gegevens injecteren in een server-side interpreter (bijv. SQL, OS-commando's, Xpath, Server JavaScript, SMTP) omdat een sterk getypeerde geparametriseerde interface niet wordt gebruikt, niet correct is geïmplementeerd, of correct is geconfigureerd"
+    desc: "Gabe kan gegevens injecteren in een server-side interpreter (bijv. SQL, OS-commando's, Xpath, Server JavaScript, SMTP) omdat een sterk getypeerde geparametriseerde interface niet wordt gebruikt, niet correct is geïmplementeerd, of niet correct is geconfigureerd"
   -
     id: "VEA"
     value: "A"
@@ -88,7 +88,7 @@ suits:
     id: "AT3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/AT3"
-    desc: "Muhammad kan het wachtwoord van een gebruiker of andere geheimen, zoals MFA-codes of biometrie, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal wordt gebruikt. bekend is, of omdat het is gelekt"
+    desc: "Muhammad kan het wachtwoord van een gebruiker of andere geheimen, zoals MFA-codes of biometrie, verkrijgen door observatie tijdens invoer, of uit een lokale cache, of uit het geheugen, of tijdens het transport, of door het te lezen vanaf een onbeveiligde locatie, of omdat het op grote schaal bekend is, of omdat het is gelekt"
   -
     id: "AT4"
     value: "4"
@@ -113,7 +113,7 @@ suits:
     id: "AT8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/AT8"
-    desc: "Kate kan authenticatie omzeilen omdat het niet veilig falen (d.w.z. het staat standaard niet-geverifieerde toegang toe)"
+    desc: "Kate kan authenticatie omzeilen omdat het niet veilig faalt (d.w.z. het staat standaard niet-geverifieerde toegang toe)"
   -
     id: "AT9"
     value: "9"
@@ -128,7 +128,7 @@ suits:
     id: "ATJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/ATJ"
-    desc: "Mark kan toegang krijgen tot bronnen of services omdat er geen authenticatievereiste is, of omdat authenticatie ontbrekend is vanwege misconfiguratie, onjuiste ontwerp of implementatie, of omdat er verkeerd is aangenomen dat authenticatie zou worden uitgevoerd door een ander systeem of in een vorige actie"
+    desc: "Mark kan toegang krijgen tot bronnen of services omdat er geen authenticatievereiste is, of omdat authenticatie ontbrekend is vanwege misconfiguratie, onjuist ontwerp of implementatie, of omdat er verkeerd is aangenomen dat authenticatie zou worden uitgevoerd door een ander systeem of in een vorige actie"
   -
     id: "ATQ"
     value: "Q"
@@ -143,7 +143,7 @@ suits:
     id: "ATA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/ATA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Authenticatie"
     misc: "Lees meer over dit onderwerp in OWASP's gratis Authentication Cheat Sheet"
 -
   id: "SM"
@@ -168,7 +168,7 @@ suits:
     id: "SM5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/SM5"
-    desc: "John kan sessie-ID's voorspellen of raden omdat ze niet worden gewijzigd wanneer de rol van de gebruiker verandert (bijv. pre en post authenticatie), of niet worden geverifieerd met een vertrouwde backendservice, of niet lang genoeg en willekeurig zijn, of niet worden gewijzigd periodiek"
+    desc: "John kan sessie-ID's voorspellen of raden omdat ze niet worden gewijzigd wanneer de rol van de gebruiker verandert (bijv. pre en post authenticatie), of niet worden geverifieerd met een vertrouwde backendservice, of niet lang genoeg en willekeurig zijn, of niet periodiek worden gewijzigd"
   -
     id: "SM6"
     value: "6"
@@ -213,7 +213,7 @@ suits:
     id: "SMA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/SMA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Sessiebeheer"
     misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets on Session Management, en Cross Site Request Forgery (CSRF) Prevention"
 -
   id: "AZ"
@@ -238,7 +238,7 @@ suits:
     id: "AZ5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AZ5"
-    desc: "Chad kan toegang krijgen tot bronnen (inclusief services, processen, AJAX, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie, of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
+    desc: "Chad kan toegang krijgen tot bronnen (inclusief services, processen, AJAX, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie, of als gevolg van overmatige privileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
   -
     id: "AZ6"
     value: "6"
@@ -263,7 +263,7 @@ suits:
     id: "AZX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AZX"
-    desc: "Richard kan de gecentraliseerde autorisatiecontroles omzeilen omdat ze niet volledig worden gebruikt voor alle interacties, of omdat ze zijn misgeconfigureerd, of omdat de applicatie niet een gecentraliseerd standaard gebruikt, getest, bewezen, aanbevolen en goedgekeurd autorisatiemodule/framework/service"
+    desc: "Richard kan de gecentraliseerde autorisatiecontroles omzeilen omdat ze niet volledig worden gebruikt voor alle interacties, of omdat ze zijn misgeconfigureerd, of omdat de applicatie geen gecentraliseerde, gestandaardiseerde, geteste, bewezen, aanbevolen en goedgekeurde autorisatiemodule/framework/service gebruikt"
   -
     id: "AZJ"
     value: "J"
@@ -278,12 +278,12 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "Ryan kan de autorisatiecontroles en permissies beïnvloeden of wijzigen en kan daarom deze omzeilen"
+    desc: "Adrian kan de autorisatiecontroles en permissies beïnvloeden of wijzigen en kan daarom deze omzeilen"
   -
     id: "AZA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/AZA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Autorisatie"
     misc: "Lees meer over dit onderwerp in OWASP's Development and Testing Guides"
 -
   id: "CR"
@@ -353,7 +353,7 @@ suits:
     id: "CRA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/CRA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Cryptografie"
     misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets on Cryptographic Storage, en Transport Layer Protection"
 -
   id: "C"
@@ -393,7 +393,7 @@ suits:
     id: "C8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/C8"
-    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie periodiek opnieuw is gecontroleerd en beveiligingspatches zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
+    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie niet periodiek opnieuw is gecontroleerd en beveiligingspatches niet zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
   -
     id: "C9"
     value: "9"
@@ -555,7 +555,7 @@ paragraphs:
     text: "Cryptografie (CR)"
   -
     id: "T00380"
-    text: "Cornucopia (C)"
+    text: "Hoorn des Overvloeds (C)"
   -
     id: "T00390"
     text: "Net als bij pokerkaarten, bevat elke reeks 13 kaarten (Aas, 2-10, Boer, Vrouw en Koning), maar in tegenstelling tot EoP zijn er ook twee Joker-kaarten."
@@ -906,13 +906,13 @@ paragraphs:
     text: "[jouw lijst]"
   -
     id: "T02270"
-    text: "Session Management"
+    text: "Sessiebeheer"
   -
     id: "T02280"
     text: "[jouw lijst]"
   -
     id: "T02290"
-    text: "Authorization"
+    text: "Autorisatie"
   -
     id: "T02300"
     text: "[jouw lijst]"
@@ -1152,7 +1152,7 @@ paragraphs:
     text: "1"
   -
     id: "T03250"
-    text: "Release."
+    text: "Laat los."
   -
     id: "T03260"
     text: "1.01"
