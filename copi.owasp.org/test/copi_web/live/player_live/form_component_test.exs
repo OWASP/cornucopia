@@ -70,15 +70,19 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
     test "updates player successfully without rate limiting", %{conn: conn, game: game} do
       {:ok, player} = Cornucopia.create_player(%{name: "Original", game_id: game.id})
-      
+
       # Go to player show page which has Edit link
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
-      
+
       # Verify player name is displayed
       assert render(view) =~ "Original"
-      
+
       # Update should work without triggering rate limit (skipping this complex test)
       :ok
+    end
+
+    test "FormComponent.topic/1 returns correct topic string", %{conn: _conn, game: _game} do
+      assert CopiWeb.PlayerLive.FormComponent.topic("abc123") == "game:abc123"
     end
   end
 
