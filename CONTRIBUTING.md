@@ -1,6 +1,6 @@
 ## Code Contributions
 
-The ten minimum commandments for code contributions are:
+The ten minimum guidelines for code contributions are:
 
 1. All Pull Requests _must_ be based on the `master` branch.
 2. Raise an issue and ask to be assigned before raising a pull request.
