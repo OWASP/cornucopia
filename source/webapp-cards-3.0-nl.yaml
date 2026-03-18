@@ -38,7 +38,7 @@ suits:
     id: "VE7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/VE7"
-    desc: "Jan kan speciale payloads maken om invoervalidatie te dwarsbomen omdat de tekenset niet is gespecificeerd/afgedwongen, of de gegevens meerdere keren worden gecodeerd, of de gegevens niet volledig worden geconverteerd naar hetzelfde formaat dat de toepassing gebruikt (bijv. gevalideerd, of variabelen zijn niet sterk getypt"
+    desc: "Jan kan speciale payloads maken om invoervalidatie te dwarsbomen omdat de tekenset niet is gespecificeerd/afgedwongen, of de gegevens meerdere keren worden gecodeerd, of de gegevens niet volledig worden geconverteerd naar hetzelfde formaat dat de toepassing gebruikt (bijv. canonicalisatie) voordat ze gevalideerd worden, of variabelen zijn niet sterk getypt"
   -
     id: "VE8"
     value: "8"
