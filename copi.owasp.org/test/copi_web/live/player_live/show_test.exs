@@ -1,4 +1,4 @@
-﻿defmodule CopiWeb.PlayerLive.ShowTest do
+defmodule CopiWeb.PlayerLive.ShowTest do
   use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
