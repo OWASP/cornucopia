@@ -297,7 +297,7 @@
       player = List.first(game.players)
       dealt_card = List.first(player.dealt_cards)
 
-      {:ok, view, _html} = live(conn, "/players/#{player.id}")
+      {:ok, view, _html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt_card.id)})
 
       {:ok, refreshed_card} = DealtCard.find(dealt_card.id)
@@ -315,7 +315,7 @@
         |> Map.get(:dealt_cards)
         |> List.first()
 
-      {:ok, view, _html} = live(conn, "/players/#{player1.id}")
+      {:ok, view, _html} = live(conn, "/games/#{player1.game_id}/players/#{player1.id}")
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(other_card.id)})
 
       assert render(view) =~ "Invalid card selection"
