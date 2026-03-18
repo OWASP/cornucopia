@@ -111,6 +111,73 @@ paths:
                         cre:
                           - CRE-1
                           - CRE-2
+  /asvs/webapp/{version}:
+    get:
+      summary: Get Webapp ASVS data by version
+      description: |
+        Get the OWASP Cornucopia Website App Edition ASVS data
+        by version.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["3.0"]
+      responses:
+        '200':
+          description: Website App ASVS data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Website App ASVS response
+                  value:
+                    meta:
+                      edition: webapp
+                      component: asvs
+                      language: ALL
+                      version: "3.0"
+                    1.1.1:
+                      capec_codes: []
+                      description: Architecture analysis performed for the application
+                      level: 1
+
+  /capec/webapp/{version}:
+    get:
+      summary: Get Webapp CAPEC data by version
+      description: |
+        Get the OWASP Cornucopia Website App Edition CAPEC data
+        by version.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["3.0"]
+      responses:
+        '200':
+          description: Website App CAPEC data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Website App CAPEC response
+                  value:
+                    meta:
+                      edition: webapp
+                      component: asvs
+                      language: ALL
+                      version: "3.0"
+                    1:
+                      name: Accessing Functionality Not Properly Constrained by ACLs
+                      owasp_asvs:
+                        - 4.1.4
 
   /cre/mobileapp/{lang}:
     get:
