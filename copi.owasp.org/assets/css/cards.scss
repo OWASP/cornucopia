@@ -442,7 +442,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
     background-color: scale-color($cornucopia-color, $lightness: 75%, $saturation:  -20%);
   }
 
-  &.wildcard {
+  &.wild-card {
     background-color: scale-color($wildcard-color, $lightness: 75%, $saturation:  -20%);
   }
 
@@ -1929,35 +1929,4 @@ $wildcard-mobile-color: rgb(251, 182, 124);
       line-height: 1.3;
     }
   }
-}
-.card.dbd {
-
-  &.authentication {
-    .left-value { background-color: $authentication-color; }
-  }
-
-  &.authorization {
-    .left-value { background-color: $authorization-color; }
-  }
-
-  &.data-validation-encoding {
-    .left-value { background-color: $data-validation-encoding-color; }
-  }
-
-  &.session-management {
-    .left-value { background-color: $session-management-color; }
-  }
-
-  &.cryptography {
-    .left-value { background-color: $cryptography-color; }
-  }
-
-  &.cornucopia {
-    .left-value { background-color: $cornucopia-color; }
-  }
-
-  &.wild-card {
-    .left-value { background-color: $wildcard-color; }
-  }
-
 }
