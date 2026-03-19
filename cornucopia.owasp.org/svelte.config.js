@@ -258,6 +258,8 @@ export default {
 				'/api/cre/webapp/pt_br',
 				'/api/cre/webapp/no_nb',
 				'/api/cre/mobileapp/en',
+				'/api/cre/mobileapp/hi',
+                '/api/cre/mobileapp/uk',
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/mobileapp/PC2/1.1/uk',
                 '/edition/mobileapp/PC2/1.1/hi',
