@@ -31,7 +31,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
           <p>
             Please read about:
           </p>
-          <a href="/privacy" target="_blank" title="Privacy Notice">
+          <a href="/privacy" target="_blank" title="Privacy Notice" class="underline hover:no-underline">
             How we process your data
           </a>
         </div>

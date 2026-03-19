@@ -44,11 +44,14 @@ defmodule CopiWeb.CardControllerTest do
   end
 
   describe "format_capec/1" do
-    test "returns the input list unchanged" do
-      assert CopiWeb.CardController.format_capec(["123", "456"]) == ["123", "456"]
+    test "returns refs unchanged" do
+      refs = ["1234", "5678"]
+      assert CopiWeb.CardController.format_capec(refs) == refs
+    end
+
+    test "returns empty list unchanged" do
       assert CopiWeb.CardController.format_capec([]) == []
     end
   end
-
 
 end

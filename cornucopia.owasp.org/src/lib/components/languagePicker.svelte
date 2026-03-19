@@ -10,10 +10,7 @@
 
   let { edition, cardId, version, currentLanguage, languages, versions }: Props = $props();
 
-  let filteredLanguages =
-  version === "3.0"
-    ? ["en"]
-    : Array.from(new Set(languages));
+  let filteredLanguages = languages;
 
   // Map language codes to display names
   const languageNames: Record<string, string> = {
@@ -26,7 +23,9 @@
     pt_br: "Português (BR)",
     ru: "Русский",
     it: "Italiano",
-    hu: "Magyar"
+    hu: "Magyar",
+    hi:'Hindi',
+    uk:'Ukrainian'
   };
 
   function getLanguageName(code: string): string {
@@ -44,11 +43,8 @@
 onchange={(e) => {
   const selectedVersion = (e.target as HTMLSelectElement).value;
 
-  const targetLanguage =
-    selectedVersion === "3.0" ? "en" : currentLanguage;
-
   window.location.href =
-    `/edition/${edition}/${cardId}/${selectedVersion}/${targetLanguage}`;
+    `/edition/${edition}/${cardId}/${selectedVersion}/${currentLanguage}`;
 }}
     >
       {#each versions as v}
