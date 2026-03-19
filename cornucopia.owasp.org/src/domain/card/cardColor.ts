@@ -15,5 +15,14 @@ export const cardColor = new Map<string,string>([
     ["resilience", "resilience"],
     ["cryptography-mobile", "cryptography-mobile"],
     ["cornucopia-mobile", "cornucopia-mobile"],
-    ["wild-card-mobile", "wild-card-mobile"]
+    ["wild-card-mobile", "wild-card-mobile"],
+    // Companion cards
+    ["agentic-ai", "agentic-ai"],
+    ["automated-threats", "automated-threats"],
+    ["cloud", "cloud"],
+    ["devops", "devops"],
+    ["frontend", "frontend"],
+    ["large-language-models", "large-language-models"],
+    ["social-engineering", "social-engineering"],
+
 ])

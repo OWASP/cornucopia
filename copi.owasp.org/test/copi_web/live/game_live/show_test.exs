@@ -85,5 +85,85 @@ defmodule CopiWeb.GameLive.ShowTest do
       {:ok, updated_game} = Cornucopia.Game.find(started_game.id)
       assert DateTime.compare(updated_game.started_at, original_time) == :eq
     end
+
+    test "handle_info updates game when matching topic received", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      {:ok, updated_game} = Cornucopia.Game.find(game.id)
+
+      send(show_live.pid, %{
+        topic: "game:#{game.id}",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
+
+    test "display_game_session/1 returns correct label for each edition", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
+      assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
+      assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("masvs")     == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
+      assert Show.display_game_session("cumulus")   == "OWASP Cumulus Session:"
+      assert Show.display_game_session("eop")       == "EoP Session:"
+    end
+
+    test "latest_version/1 returns correct version string for each edition", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.latest_version("webapp")    == "2.2"
+      assert Show.latest_version("ecommerce") == "1.22"
+      assert Show.latest_version("mobileapp") == "1.1"
+      assert Show.latest_version("mlsec")     == "1.0"
+      assert Show.latest_version("cumulus")   == "1.1"
+      assert Show.latest_version("masvs")     == "1.1"
+      assert Show.latest_version("eop")       == "5.1"
+      assert Show.latest_version("unknown")   == "1.0"
+    end
+
+    test "card_played_in_round/2 returns nil when no card matches", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.card_played_in_round([], 1) == nil
+    end
+
+    test "card_played_in_round/2 returns the matching card", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      card = %{played_in_round: 3}
+      assert Show.card_played_in_round([%{played_in_round: 1}, %{played_in_round: 2}, card], 3) == card
+    end
+
+    test "redirects to /error when game_id is not found", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/00000000000000000000000001")
+    end
+
+    test "handle_params uses rounds_played directly for finished game", %{conn: conn, game: game} do
+      {:ok, finished_game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 2
+        })
+
+      {:ok, _view, html} = live(conn, "/games/#{finished_game.id}")
+      assert html =~ finished_game.name
+    end
+
+    test "handle_info with non-matching topic is no-op", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+      {:ok, updated_game} = Cornucopia.Game.find(game.id)
+
+      send(show_live.pid, %{
+        topic: "game:completely-different-id",
+        event: "game:updated",
+        payload: updated_game
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
+    end
   end
 end

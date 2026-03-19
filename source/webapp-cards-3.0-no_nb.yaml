@@ -58,7 +58,7 @@ suits:
     id: "VEJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/VEJ"
-    desc: "Toby har kontroll over inputvalidering, utdatavalidering, sanering elller koding av utdata eller rutiner, slik at de kan omgås"
+    desc: "Toby har kontroll over inputvalidering, utdatavalidering, sanering eller koding av utdata eller rutiner, slik at de kan omgås"
   -
     id: "VEQ"
     value: "Q"
@@ -154,12 +154,12 @@ suits:
     id: "SM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/SM2"
-    desc: "William har kontroll over genereringen av sesjonsidentifikatorer eller authorisasjonstoken"
+    desc: "William har kontroll over genereringen av sesjonsidentifikatorer eller autorisasjonstokener"
   -
     id: "SM3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/SM3"
-    desc: "Ryan kan fortsette å bruke en stjålet brukersesjon så lenge den varer, fordi brukeren ikke kan sjekke om økten er stjålet, avslutte økten eller be administrator om å gjøre det, eller fordi applikasjonen ikke håndterer avkjæring av autorisasjonskoder"
+    desc: "Ryan kan fortsette å bruke en stjålet brukersesjon så lenge den varer, fordi brukeren ikke kan sjekke om økten er stjålet, avslutte økten eller be administrator om å gjøre det, eller fordi applikasjonen ikke håndterer avkjæring av autorisasjonstokener"
   -
     id: "SM4"
     value: "4"
@@ -169,7 +169,7 @@ suits:
     id: "SM5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/SM5"
-    desc: "John kan forutsi eller gjette sesjonsidentifikatorer fordi de ikke endres når brukerens rolle endres (f.eks. før og etter autentisering) og når det byttes mellom ikke-kryptert- og kryptert kommunikasjon, eller fordi de ikke er tilstrekkelig lange og tilfeldige, eller fordi de ikke endres med jevne mellomrom"
+    desc: "John kan forutsi eller gjette sesjonsidentifikatorer fordi de ikke endres når brukerens rolle endres (f.eks. før og etter autentisering), eller fordi de ikke er verifisert ved bruk av en pålitelig backend-tjeneste, eller fordi de ikke er tilstrekkelig lange og tilfeldige, eller fordi de ikke endres med jevne mellomrom"
   -
     id: "SM6"
     value: "6"
@@ -184,7 +184,7 @@ suits:
     id: "SM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/SM8"
-    desc: "Matt kan misbruke lange økter fordi applikasjonen ikke krever periodisk re-autentisering for å sjekke om privilegiene har endret seg"
+    desc: "Matt kan misbruke brukernes sesjoner fordi applikasjonen ikke krever re-autentisering etter at en sesjonstidsgrense er nådd, kontoen er avsluttet, eller når privilegier har endret seg, eller etter en brå og risikofylt endring i brukerens autentiseringsinnstillinger eller miljø- og kontekstattributter (f.eks. IP-adresse, enhet, sted, tidspunkt på dagen, nettleser, osv.)"
   -
     id: "SM9"
     value: "9"
@@ -673,7 +673,7 @@ paragraphs:
     text: "Angriperen kan være ekstern på en annen enhet/lokasjon, eller lokal/intern med tilgang til samme enhet, vert eller nettverk hvor applikasjonen kjører."
   -
     id: "T01140"
-    text: "Nåværende og tidligere OWASP® Cornucopia-prosjektbidragsytere og ledere, spesielt de involverte som sist oppdaterte kryss-referanser, laget nettversjoner og skrev skript for dynamisk å genererert Cornucopias utdatafiler."
+    text: "Angriperen er alltid navngitt i starten av hver beskrivelse"
   -
     id: "T01145"
     text: "Blackfoot UK Limited for å lage og donere utskriftsklare designfiler, Tom Brennan og OWASP® Foundation for å ha startet opprettelsen av en OWASP-merket boks og brosjyre."
@@ -688,7 +688,7 @@ paragraphs:
     text: "Dette betyr at angriperen (William) kan opprette nye sesjonsidentifikatorer som applikasjonen godtar."
   -
     id: "T01180"
-    text: "Angrepene ble primært hentet fra sikkerhetskravene oppført i SCP, v2, men deretter supplert med verifiseringskrav fra OWASP® “Application Security Verification Standard for Web Applications”, de sikkerhetsfokuserte historiene i SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments”, og til slutt en gjennomgang av kortene i EOP. I OWASP Cornucopia Website Edition v2.2 ble SCP-kartleggingen erstattet av OWASP Developer Guide Web Application Checklist."
+    text: "Angrepene ble primært hentet fra sikkerhetskravene oppført i SCP, v2, men deretter supplert med verifiseringskrav fra OWASP® “Application Security Verification Standard”, de sikkerhetsfokuserte historiene i SAFECodes “Practical Security Stories and Security Tasks for Agile Development Environments”, og til slutt en gjennomgang av kortene i EOP. I OWASP Cornucopia Website Edition v3.0 ble SCP-kartleggingen erstattet av OWASP Developer Guide Web Application Checklist."
   -
     id: "T01190"
     text: "Ytterligere veiledning til hvert kort er tilgjengelig på OWASP Website på "
@@ -740,6 +740,9 @@ paragraphs:
   -
     id: "T01410"
     text: "Skaff deg en kortstokk, eller skriv ut din egen kortstokk med Cornucopia-kort (se side 2 i dette dokumentet) og skjær/klipp ut kortene"
+  -
+    id: "T01411"
+    text: "Bruk kortene i denne pakken"
   -
     id: "T01420"
     text: "Identifiser en applikasjon eller applikasjonsfunksjon som skal gjennomgås; dette kan være et konsept, design eller en faktisk implementering"
@@ -1081,7 +1084,7 @@ paragraphs:
     text: "Start ditt første spill med bare nok kort for to eller tre runder. "
   -
     id: "T02970"
-    text: "Start ditt første spill med bare nok kort for to eller tre runder. "
+    text: "Vurder alltid å fjerne kort som ikke er relevante for applikasjonen eller funksjonen som gjennomgås. "
   -
     id: "T02980"
     text: "For de første gangene folk spiller spillet er det også vanligvis bedre å fjerne essene og de to jokerne."

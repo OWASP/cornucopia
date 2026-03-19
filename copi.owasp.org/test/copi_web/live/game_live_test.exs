@@ -137,6 +137,17 @@ defmodule CopiWeb.GameLiveTest do
       assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
     end
 
+    test "displays finished game using rounds_played for current_round", %{conn: conn, game: game} do
+      # Set finished_at so handle_params uses game.rounds_played (not +1) for current_round
+      {:ok, game} = Cornucopia.update_game(game, %{
+        started_at: DateTime.truncate(DateTime.utc_now(), :second),
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+        rounds_played: 1
+      })
+      {:ok, _show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
+      assert html =~ game.name
+    end
+
     test "displays past round", %{conn: conn, game: game} do
        # Create players and play a round to make it valid
        {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
@@ -155,13 +166,6 @@ defmodule CopiWeb.GameLiveTest do
        assert html =~ "Viewing round <strong>1</strong>"
     end
 
-    test "delete game removes it from list", %{conn: conn, game: _game} do
-      {:ok, _index_live, html} = live(conn, "/games")
-      
-      # The game might not be shown if it's in the current view -skip complex delete test
-      # Just verify the page loads
-      assert html =~ "Listing Games"
-    end
 
     test "handle_info updates games list", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, "/games")
@@ -172,6 +176,76 @@ defmodule CopiWeb.GameLiveTest do
       # Should update the assigns
       :ok
     end
-    
+
+    test "start_game does nothing when game already started", %{conn: conn, game: game} do
+      # Pre-start the game with 3 players
+      {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P3", game_id: game.id})
+      {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, game))
+
+      # Clicking start_game on an already started game should be a noop
+      html = render(show_live)
+      refute html =~ "Start Game"
+    end
+
+    test "start_game shows error flash with fewer than 3 players", %{conn: conn, game: game} do
+      # Only 2 players — below minimum
+      {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, _} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
+
+      {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, game))
+
+      render_click(show_live, "start_game", %{})
+      html = render(show_live)
+      assert html =~ "At least 3 players are required"
+    end
+
+    test "redirects to error on invalid round param", %{conn: conn, game: game} do
+      {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
+      {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      # round=999 is way beyond current_round, should redirect to /error
+      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=999")
+    end
+  end
+
+  describe "Helper functions" do
+    alias CopiWeb.GameLive.Show
+
+    test "display_game_session returns correct label for each edition" do
+      assert Show.display_game_session("webapp") =~ "Cornucopia Web Session"
+      assert Show.display_game_session("ecommerce") =~ "Cornucopia Web Session"
+      assert Show.display_game_session("mobileapp") =~ "Cornucopia Mobile Session"
+      assert Show.display_game_session("mlsec") =~ "Elevation of MLSec Session"
+      assert Show.display_game_session("cumulus") =~ "OWASP Cumulus Session"
+      assert Show.display_game_session("masvs") =~ "Cornucopia Mobile Session"
+      assert Show.display_game_session("eop") =~ "EoP Session"
+      assert Show.display_game_session("unknown") =~ "EoP Session"
+    end
+
+    test "latest_version returns correct version for each edition" do
+      assert Show.latest_version("webapp") == "2.2"
+      assert Show.latest_version("ecommerce") == "1.22"
+      assert Show.latest_version("mobileapp") == "1.1"
+      assert Show.latest_version("mlsec") == "1.0"
+      assert Show.latest_version("cumulus") == "1.1"
+      assert Show.latest_version("masvs") == "1.1"
+      assert Show.latest_version("eop") == "5.1"
+      assert Show.latest_version("other") == "1.0"
+    end
+
+    test "card_played_in_round returns correct card" do
+      cards = [
+        %{played_in_round: 1, id: 1},
+        %{played_in_round: 2, id: 2},
+        %{played_in_round: nil, id: 3}
+      ]
+      assert Show.card_played_in_round(cards, 1).id == 1
+      assert Show.card_played_in_round(cards, 2).id == 2
+      assert is_nil(Show.card_played_in_round(cards, 3))
+    end
   end
 end
