@@ -1,0 +1,106 @@
+defmodule CopiWeb.ApiControllerTest do
+  use CopiWeb.ConnCase
+  alias Copi.Repo
+  alias Copi.Cornucopia
+  alias Copi.Cornucopia.DealtCard
+
+  setup do
+    {:ok, game} = Cornucopia.create_game(%{name: "Test Game"})
+    {:ok, player} = Cornucopia.create_player(%{name: "Test Player", game_id: game.id})
+
+    {:ok, card} = Cornucopia.create_card(%{
+      category: "Cornucopia", value: "A", description: "desc", misc: "misc",
+      edition: "webapp", external_id: "1", language: "en", version: "1",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
+      biml: "biml", url: "http://example.com"
+    })
+
+    {:ok, dealt_card} = Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
+
+    %{game: game, player: player, dealt_card: dealt_card}
+  end
+
+  test "play_card success", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 200)["id"] == dealt_card.id
+
+    updated = Repo.get(DealtCard, dealt_card.id)
+    assert updated.played_in_round == 1
+  end
+
+  test "play_card fails if card already played", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, _} = Repo.update(Ecto.Changeset.change(dealt_card, played_in_round: 1))
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 406)["error"] == "Card already played"
+  end
+
+  test "play_card returns 404 when game not found", %{conn: conn} do
+    conn = put(conn, "/api/games/00000000000000000000000001/players/fakeplayer/card", %{
+      "dealt_card_id" => "999"
+    })
+
+    assert json_response(conn, 404)["error"] == "Could not find game"
+  end
+
+  test "play_card returns 404 when dealt card not found for player", %{conn: conn, game: game} do
+    {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
+    {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})
+    {:ok, card2} = Cornucopia.create_card(%{
+      category: "C", value: "Q", description: "d", misc: "m",
+      edition: "webapp", external_id: "99", language: "en", version: "1",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
+      biml: "biml", url: "http://example.com"
+    })
+    {:ok, other_dealt} = Repo.insert(%DealtCard{player_id: other_player.id, card_id: card2.id})
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{other_player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => to_string(other_player.id),
+      "dealt_card_id" => to_string(other_dealt.id)
+    })
+
+    assert json_response(conn, 404)["error"] == "Player not found in this game"
+  end
+
+  test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, card2} = Cornucopia.create_card(%{
+      category: "Cornucopia", value: "K", description: "desc", misc: "misc",
+      edition: "webapp", external_id: "2", language: "en", version: "1",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
+      biml: "biml", url: "http://example.com"
+    })
+    Repo.insert!(%DealtCard{player_id: player.id, card_id: card2.id, played_in_round: 1})
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 403)["error"] == "Player already played a card in this round"
+  end
+
+  test "play_card returns 404 when player_id doesn't belong to game", %{conn: conn, game: game} do
+    conn = put(conn, "/api/games/#{game.id}/players/99999/card", %{
+      "game_id" => game.id,
+      "player_id" => "99999",
+      "dealt_card_id" => "1"
+    })
+
+    assert json_response(conn, 404)["error"] == "Player not found in this game"
+  end
+end

@@ -13,9 +13,13 @@
 #   - Ex: hexpm/elixir:1.14.2-erlang-25.1.1-debian-bullseye-20220801-slim
 #
 FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0 as builder
-# install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git nodejs npm \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+# install build dependencies (retry up to 3 times with backoff)
+RUN apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    || (sleep 15 && apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*) \
+    || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*)
 
 # prepare build dir
 WORKDIR /app
@@ -44,6 +48,9 @@ COPY lib lib
 
 COPY assets assets
 
+# Install npm dependencies first
+RUN cd assets && npm install
+
 # compile assets
 RUN mix assets.deploy
 
@@ -60,8 +67,12 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y && apt-get install -y --no-install-recommends libstdc++6 openssl libncurses5 locales \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    || (sleep 15 && apt-get update -y && apt-get install -y --no-install-recommends libstdc++6 openssl libncurses5 locales \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*) \
+    || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends libstdc++6 openssl libncurses5 locales \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*)
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen

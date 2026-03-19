@@ -23,10 +23,35 @@ defmodule CopiWeb.CardControllerTest do
       conn = get(conn, "/cards")
 
       response = html_response(conn, 200)
-      IO.inspect(response, limit: :infinity)
       assert response =~ card.description
     end
   end
 
+  describe "show" do
+    setup [:create_card]
+
+    test "shows chosen card", %{conn: conn, card: card} do
+      conn = get(conn, "/cards/#{card.version}/#{card.external_id}")
+      response = html_response(conn, 200)
+      assert response =~ card.description
+    end
+
+    test "renders 404 when card not found", %{conn: conn} do
+      assert_error_sent 404, fn ->
+        get(conn, "/cards/1.0/NONEXISTENT")
+      end
+    end
+  end
+
+  describe "format_capec/1" do
+    test "returns refs unchanged" do
+      refs = ["1234", "5678"]
+      assert CopiWeb.CardController.format_capec(refs) == refs
+    end
+
+    test "returns empty list unchanged" do
+      assert CopiWeb.CardController.format_capec([]) == []
+    end
+  end
 
 end

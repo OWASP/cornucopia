@@ -1,4 +1,4 @@
-FROM python:3.12.12-alpine3.22@sha256:d82291d418d5c47f267708393e40599ae836f2260b0519dd38670e9d281657f5 AS pipenv
+FROM python:3.13.11-alpine3.22@sha256:2fd93799bfc6381d078a8f656a5f45d6092e5d11d16f55889b3d5cbfdc64f045 AS pipenv
 RUN apk add --no-cache shadow
 # UID of current user who runs the build
 ARG user_id
@@ -10,10 +10,10 @@ ARG home
 # create group and user to match permmisions of current who runs the build
 ARG workdir
 WORKDIR ${workdir}
-RUN groupmod -g 64 dialout &&
-	addgroup -S -g "${group_id}" union &&
-	groupmod -g 2999 ping &&
-	mkdir -p "${home}" &&
+RUN groupmod -g 64 dialout && \
+	addgroup -S -g "${group_id}" union && \
+	groupmod -g 2999 ping && \
+	mkdir -p "${home}" && \
 	adduser -S -u "${user_id}" -h "${home}" -s "/bin/bash" -G union builder
 # Add pip and build requirements
 RUN apk add --no-cache \
@@ -34,5 +34,5 @@ COPY --chown=builder:union Pipfile Pipfile.lock ./
 RUN pipenv --python "$(which python)" install --ignore-pipfile --dev
 ENTRYPOINT ["/usr/local/bin/pipenv"]
 
-FROM mvdan/shfmt@sha256:caa0324bdba08f42452a19e6a8462dda9852a1e43ad16185ec3d1ad66524a504 AS shfmt
+FROM mvdan/shfmt@sha256:be41bc426ec3f723d1dd9b4755630ad4d6680a2801fe62fbc2739207fc5f3a6c AS shfmt
 ENTRYPOINT ["/bin/shfmt"]

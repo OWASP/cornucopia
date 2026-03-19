@@ -100,10 +100,10 @@ class TestConvertCAPECIntegration(unittest.TestCase):
         self.assertTrue(index_file.exists(), f"index.md for CAPEC-{first_id} should exist")
 
         content = index_file.read_text(encoding="utf-8")
-        self.assertIn(f"CAPEC-{first_id}", content)
+        self.assertIn(f"CAPEC™ {first_id}", content)
         self.assertIn(first_name, content)
         self.assertIn("## Description", content)
-        self.assertIn(f"Source: [CAPEC-{first_id}]", content)
+        self.assertIn(f"Source: [CAPEC™ {first_id}]", content)
 
     def test_all_attack_patterns_created(self):
         """Test that all attack patterns in test data are converted"""
@@ -160,12 +160,12 @@ class TestConvertCAPECIntegration(unittest.TestCase):
 
         lines = content.split("\n")
 
-        self.assertTrue(lines[0].startswith("# CAPEC-"), "First line should be title with CAPEC-")
+        self.assertTrue(lines[0].startswith("# CAPEC™ "), "First line should be title with CAPEC-")
         self.assertIn(pattern_name, lines[0])
 
         self.assertIn("## Description", content)
 
-        self.assertIn("Source: [CAPEC-", content)
+        self.assertIn("Source: [CAPEC™", content)
         self.assertIn("capec.mitre.org", content)
 
     def test_parse_arguments_with_test_paths(self):

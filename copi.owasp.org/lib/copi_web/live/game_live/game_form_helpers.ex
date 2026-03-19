@@ -1,8 +1,6 @@
 defmodule CopiWeb.GameLive.GameFormHelpers do
 
-  alias Copi.Cornucopia
-  alias Copi.Cornucopia.Game
-  alias Copi.Games
+
 
   def generate_suit_list_formatted_for_checkbox(edition) do
     format_list_of_suits_for_checkbox(edition)

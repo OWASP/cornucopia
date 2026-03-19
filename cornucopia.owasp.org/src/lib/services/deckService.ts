@@ -24,6 +24,7 @@ export class DeckService {
      { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' }
 ];
 
+fix-deckservice-clean
     private static readonly decks: Deck[] = [
         { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
@@ -38,6 +39,19 @@ export class DeckService {
 
     return deck ? deck.lang : ['en'];
 }
+
+    private static readonly latests: Deck[] = [
+        { lang: ['en'], edition: 'mobileapp', version: '1.1' },
+        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' },
+        { lang: ['en'], edition: 'companion', version: '1.0' }
+    ];
+    private static readonly decks: Deck[] = [
+        { edition: 'mobileapp', version: '1.1', lang: ['en'] },
+        { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
+        { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
+        { edition: 'companion', version: '1.0', lang: ['en'] }];
+
+
     public static hasEdition(edition: string): boolean {
         return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
     }
@@ -66,6 +80,12 @@ export class DeckService {
         let languages: string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
         return languages.length !== 0 ? languages : ['en'];
     }
+ fix-deckservice-clean
+
+    public static getLanguagesForEditionVersion(edition: string, version: string): string[] {
+        const deck = DeckService.decks.find((d) => d.edition === edition && d.version === version);
+        return deck?.lang ?? [];
+    }
 
     public static getVersions(edition: string): string[] {
         return DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.version);
@@ -79,6 +99,7 @@ export class DeckService {
         let cards = new Map<string, Card>;
         const decks = DeckService.decks;
         for (let i in decks) {
+ fix-deckservice-clean
             const newCards = this.getCardDataForEditionVersionLang(
            decks[i].edition,
            decks[i].version,
@@ -88,6 +109,9 @@ export class DeckService {
        for (const [key, value] of newCards) {
     cards.set(key, value);
 }
+
+            cards = new Map([...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang), ...cards]);
+ master
         }
         DeckService.cache.push({ lang: lang, data: cards, version: 'latest' });
         return cards;
@@ -101,6 +125,7 @@ export class DeckService {
 if (!FileSystemHelper.hasFile(cardFile)) {
     cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-en.yaml`;
 
+fix-deckservice-clean
     if (!FileSystemHelper.hasFile(cardFile)) {
         return cards;
     }
@@ -114,6 +139,19 @@ if (!FileSystemHelper.hasDir(base)) {
     base = `data/cards/${edition}-cards-${version}-en/`;
 }
 
+        if (!FileSystemHelper.hasFile(cardFile)) {
+            return cards;
+        }
+
+        let yamlData = fs.readFileSync(cardFile, 'utf8');
+        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
+        let base = `data/cards/${edition}-cards-${version}-${lang}/`;
+
+        if (!FileSystemHelper.hasDir(base)) {
+            base = `data/cards/${edition}-cards-${version}-en/`;
+        }
+
+
         let mapping = (new MappingService()).getCardMapping(edition, version);
      if (!data || !data['suits']) {
     return cards;
@@ -121,7 +159,11 @@ if (!FileSystemHelper.hasDir(base)) {
 
              for (let suit in data['suits']) {
             let suitObject: any = data['suits'][suit];
+ fix-deckservice-clean
            let suitName: string = mapping?.['suits']?.[suit]?.['name'] || suitObject['name'];
+
+            let suitName: string = mapping['suits'][suit]['name'];
+
             for (let card in suitObject['cards']) {
                 let cardObject = suitObject['cards'][card];
                 cardObject.id = cardObject['id'];
