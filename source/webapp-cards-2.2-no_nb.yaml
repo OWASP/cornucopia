@@ -2,7 +2,7 @@
 meta:
   edition: "webapp"
   component: "cards"
-  language: "NO-NB"
+  language: "no_nb"
   version: "2.2"
 suits:
 -
