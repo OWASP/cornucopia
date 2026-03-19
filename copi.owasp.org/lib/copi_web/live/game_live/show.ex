@@ -5,12 +5,12 @@ defmodule CopiWeb.GameLive.Show do
   alias Copi.Cornucopia.DealtCard
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok, assign(socket, :client_ip, ip)}
   end
 
-  @impl true
-  def on_mount(:default, _params, session, socket) do
+  def on_mount(:default, _params, _session, socket) do
     socket = attach_hook(socket, :current_path_hook, :handle_params, &put_uri_hook/3)
     {:cont, socket}
   end
@@ -28,16 +28,22 @@ defmodule CopiWeb.GameLive.Show do
         game.rounds_played + 1
       end
 
-      case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
+      round_result = if params["round"] do
+        Want.integer(params["round"], min: 1, max: current_round)
+      else
+        {:ok, current_round}
+      end
+
+      case round_result do
         {:ok, requested_round} ->
           {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
         {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
+          {:noreply, redirect(socket, to: "/error")}
       end
 
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
@@ -55,27 +61,38 @@ defmodule CopiWeb.GameLive.Show do
   def handle_event("start_game", _, socket) do
     game = socket.assigns.game
 
-    if game.started_at do
-      # Do nothing, game's already started
-    else
-      all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
-      players = game.players
+    cond do
+      game.started_at ->
+        # Game already started, do nothing
+        {:noreply, socket}
 
-      all_cards
-      |> Enum.with_index
-      |> Enum.each(fn({card, i}) ->
-        Copi.Repo.insert! %DealtCard{
-          card_id: card.id,
-          player_id: Enum.fetch!(players, rem(i, Enum.count(players))).id
-        }
-      end)
+      length(game.players) < 3 ->
+        # Minimum 3 players required (aligned with UI requirement)
+        {:noreply,
+         socket
+         |> put_flash(:error, "Cannot start game: At least 3 players are required to start.")
+         |> assign(:game, game)}
 
-      Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+      true ->
+        # Valid player count (3+), proceed with game start
+        all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
+        players = game.players
+        player_count = length(players)
 
-      {:ok, updated_game} = Game.find(game.id)
-      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+        # Deal cards to players in round-robin fashion
+        all_cards
+        |> Enum.with_index()
+        |> Enum.each(fn {card, i} ->
+          Copi.Repo.insert!(%DealtCard{
+            card_id: card.id,
+            player_id: Enum.at(players, rem(i, player_count)).id
+          })
+        end)
 
-      {:noreply, assign(socket, :game, updated_game)}
+        # Update game with start time
+        {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+        {:noreply, assign(socket, :game, updated_game)}
     end
   end
 

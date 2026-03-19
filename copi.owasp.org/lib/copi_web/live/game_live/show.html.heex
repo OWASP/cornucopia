@@ -20,6 +20,12 @@
     <% else %>
       <em>No lead suit yet</em>
     <% end %>
+    
+    <%= if Copi.Cornucopia.Game.round_open?(@game) do %>
+      <span class="ml-4 text-sm text-gray-600">
+        <%= Copi.Cornucopia.Game.continue_vote_count(@game) %> / <%= div(Enum.count(@game.players), 2) + 1 %> votes to continue
+      </span>
+    <% end %>
   </p>
   <% else %>
   <p class="my-8">Viewing round <strong><%= @requested_round %></strong>:
@@ -87,7 +93,7 @@
 <% else %>
 <p>Share the link to this page with everyone who wants to join or watch.</p>
 
-<.copy_url_button uri={"#{@socket.endpoint.url}/games/#{@game.id}"} />
+<.copy_url_button uri={"#{@socket.endpoint.url()}/games/#{@game.id}"} />
 
 <p class="mt-4">You'll be able to start the game once at least 3 players have joined.</p>
 

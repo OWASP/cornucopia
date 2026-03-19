@@ -32,12 +32,33 @@ class TestExtractCapecNames(unittest.TestCase):
                         {"_ID": "1", "_Name": "Test Attack 1"},
                         {"_ID": "5", "_Name": "Test Attack 5"},
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
         result = enricher.extract_capec_names(data)
 
-        self.assertEqual(len(result), 2)
+        self.assertEqual(len(result), 3)
         self.assertIn(1, result)
         self.assertIn(5, result)
         self.assertEqual(result[1], "Test Attack 1")
@@ -93,12 +114,89 @@ class TestExtractCapecNames(unittest.TestCase):
                         {"_ID": "2"},  # Missing _Name
                         {"_Name": "Missing ID"},  # Missing _ID
                     ]
-                }
+                },
+                "Categories": {
+                    "Category": [
+                        {
+                            "_ID": "152",
+                            "_Name": "Inject Unexpected Items",
+                            "Summary": "Attack patterns within this category focus on the ability to control or "
+                            "disrupt the behavior of a target either through crafted data submitted via an interface"
+                            " for data input, or the installation and execution of malicious code on the target"
+                            " system. The former happens when an adversary adds material to their input that is"
+                            " interpreted by the application causing the targeted application to perform steps"
+                            " unintended by the application manager or causing the application to enter an "
+                            "unstable state. Attacks of this type differ from Data Structure Attacks in that the"
+                            " latter attacks subvert the underlying structures that hold user-provided data, either"
+                            " pre-empting interpretation of the input (in the case of Buffer Overflows) or resulting"
+                            " in values that the targeted application is unable to handle correctly (in the case of "
+                            "Integer Overflows). In Injection attacks, the input is interpreted by the application, "
+                            "but the attacker has included instructions to the interpreting functions that the target"
+                            " application then follows.",
+                        }
+                    ]
+                },
             }
         }
         result = enricher.extract_capec_names(data)
 
         # Should only extract the complete entry
+        self.assertEqual(len(result), 2)
+        self.assertIn(1, result)
+
+    def test_extract_capec_names_missing_categories(self):
+        """Test that missing Categories key logs a warning but still returns attack patterns"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                }
+                # No "Categories" key
+            }
+        }
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+        self.assertIn("No 'Categories' key found", log.output[0])
+
+    def test_extract_capec_names_missing_category_inside_categories(self):
+        """Test that missing Category key inside Categories logs a warning"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                },
+                "Categories": {"other_key": "value"},  # No "Category" key
+            }
+        }
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+        self.assertIn("No 'Category' key found", log.output[0])
+
+    def test_extract_capec_names_category_not_list(self):
+        """Test that a non-list Category value is silently skipped"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                },
+                "Categories": {"Category": "not-a-list"},
+            }
+        }
+        result = enricher.extract_capec_names(data)
+
+        # Attack patterns still extracted; non-list Category silently skipped
         self.assertEqual(len(result), 1)
         self.assertIn(1, result)
 
@@ -196,11 +294,11 @@ class TestLoadYamlFile(unittest.TestCase):
     @patch("yaml.safe_load")
     def test_load_valid_yaml(self, mock_yaml_load, mock_file):
         """Test loading a valid YAML file"""
-        mock_yaml_load.return_value = {"1": {"owasp_asvs": ["1.2.3"]}}
+        mock_yaml_load.return_value = {1: {"owasp_asvs": ["1.2.3"]}}
 
         result = enricher.load_yaml_file(Path(ConvertVars.OUTPUT_DIR + "/test.yaml"))
 
-        # Should convert string keys to integers
+        # Should preserve integer keys
         self.assertIn(1, result)
         self.assertEqual(result[1]["owasp_asvs"], ["1.2.3"])
         mock_file.assert_called_once()

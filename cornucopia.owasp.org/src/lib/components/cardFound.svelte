@@ -1,8 +1,7 @@
 <script lang="ts">
   import { run } from 'svelte/legacy';
   import { Text } from "$lib/utils/text";
-  import {
-    GetCardAttacks, type Attack } from "$lib/cardAttacks";
+  import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
@@ -14,6 +13,7 @@
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
+  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
 
   interface Props {
     mappingData: any;
@@ -22,6 +22,8 @@
     routes: Map<string, Route[]>;
     languages: string[];
     language: string;
+    capecData?: any;
+    versions: string[];
   }
 
   let {
@@ -30,13 +32,16 @@
     cards,
     routes,
     languages,
-    language
+    versions,
+    language,
+    capecData = undefined
   }: Props = $props();
     
   const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
   let mappings = $state(controller.getCardMappings(card.id));
   let attacks: Attack[] = $state(GetCardAttacks(card.id));
+  const asvsVersion = $state(card.version < '3.0' ? '4.0.3' : '5.0');
 
   run(() => {
     mappings = controller.getCardMappings(card.id);
@@ -49,6 +54,7 @@
   version={card.version}
   currentLanguage={language}
   {languages}
+  {versions}
 />
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
@@ -57,13 +63,16 @@
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   {#if card.edition == 'webapp'}
-  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes}></WebAppCardTaxonomy>
+  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes} {capecData} {asvsVersion}></WebAppCardTaxonomy>
   {/if}
   {#if card.edition == 'mobileapp'}
   <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
+  {#if card.edition == "companion"}
+  <CompanionCardTaxonomy bind:card={card} {mappingData} {routes}></CompanionCardTaxonomy>
+  {/if}
     {#key card}
-        <ViewSourceOnGithub></ViewSourceOnGithub>
+        <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>
     {/key}
 </div>
 

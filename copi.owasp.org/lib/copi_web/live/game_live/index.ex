@@ -2,12 +2,13 @@ defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
 
-  alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :games, nil)}
+  def mount(_params, session, socket) do
+    # V15.3.5: Use only existing, trusted IP values from assigns or session
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip")
+    {:ok, assign(assign(socket, :client_ip, ip), :games, nil)}
   end
 
   @impl true
@@ -25,18 +26,6 @@ defmodule CopiWeb.GameLive.Index do
     socket
     |> assign(:page_title, "Listing Games")
     |> assign(:game, nil)
-  end
-
-  @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    game = Cornucopia.get_game!(id)
-    {:ok, _} = Cornucopia.delete_game(game)
-
-    {:noreply, assign(socket, :games, list_games())}
-  end
-
-  defp list_games do
-    Cornucopia.list_games()
   end
 
   @impl true

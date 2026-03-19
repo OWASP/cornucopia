@@ -1,8 +1,24 @@
 <script lang="ts">
+    interface Props {
+        path?: string;
+    }
 
-    let base : string = "https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/cards/";
-    //@TODO Would it be possible to link directly to the card?
-    let href : string = base; //+ path;
+    let { path = "" }: Props = $props();
+
+    const REPO_BASE = "https://github.com/OWASP/cornucopia";
+    const BRANCH = "master";
+    const SUBFOLDER = "cornucopia.owasp.org";
+
+    let href = $derived.by(() => {
+        if (!path) {
+            return `${REPO_BASE}/tree/${BRANCH}/${SUBFOLDER}/data/cards/`;
+        }
+        // Normalize path: ensure no double slashes and correct path format
+        let cleanPath = path.startsWith('./') ? path.substring(2) : path;
+        cleanPath = cleanPath.startsWith('/') ? cleanPath.substring(1) : cleanPath;
+        
+        return `${REPO_BASE}/blob/${BRANCH}/${SUBFOLDER}/${cleanPath}`;
+    });
 </script>
 
 <div>

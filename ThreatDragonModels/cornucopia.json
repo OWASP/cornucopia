@@ -14,11 +14,11 @@
     ],
     "diagrams": [
       {
-        "id": 0,
-        "title": "General",
-        "diagramType": "STRIDE",
-        "placeholder": "New STRIDE diagram description",
-        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "id": 1,
+        "title": "Cornucopia",
+        "diagramType": "EOP",
+        "placeholder": "New EoP games diagram description",
+        "thumbnail": "./public/content/images/thumbnail.eop.jpg",
         "version": "2.5.0",
         "cells": [
           {
@@ -798,7 +798,7 @@
         ]
       }
     ],
-    "diagramTop": 1,
+    "diagramTop": 2,
     "reviewer": "",
     "threatTop": 6
   }

@@ -15,11 +15,11 @@ from pathvalidate.argparse import validate_filepath_arg
 
 
 class ConvertVars:
-    DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/CAPEC-3.9"
+    DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/capec-3.9"
     DEFAULT_INPUT_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
     DEFAULT_CAPEC_TO_ASVS_INPUT_PATH = Path(__file__).parent / "../source/webapp-capec-3.0.yaml"
     DEFAULT_ASVS_MAPPING_PATH = (
-        Path(__file__).parent / "../cornucopia.owasp.org/data/taxonomy/en/ASVS-5.0/"
+        Path(__file__).parent / "../cornucopia.owasp.org/data/asvs-5.0/en/"
         "OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
     )
     LATEST_ASVS_VERSION_CHOICES: List[str] = ["5.0"]
@@ -32,27 +32,52 @@ def create_capec_pages(
     asvs_map: dict[str, Any],
     asvs_version: str,
 ) -> None:
-    data = data["Attack_Pattern_Catalog"]["Attack_Patterns"]
+    patterns = data["Attack_Pattern_Catalog"]["Attack_Patterns"]
     directory = Path(__file__).parent.resolve()
-    for i in data["Attack_Pattern"]:
+    pages = 0
+    for i in patterns["Attack_Pattern"]:
+        pages += 1
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
         f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC-{i['_ID']}: {i['_Name']}\r\n")
-        f.write("## Description\r\n\r\n")
-        f.write(f"{parse_description(i.get('Description', ''))}\r\n")
+        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+        f.write("## Description\n\n")
+        f.write(f"{parse_description(i.get('Description', ''))}\n\n")
         capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC-{capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\r\n")
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
         if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
             logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
         else:
-            f.write("## Related ASVS Requirements\r\n")
+            f.write("## Related ASVS Requirements\n\n")
             f.write(f"ASVS ({asvs_version}): \
-{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\r\n\r\n")
+{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
 
         f.close()
-    logging.info("Created %d CAPEC pages", len(data["Attack_Pattern"]))
+
+    categories = data["Attack_Pattern_Catalog"]["Categories"]
+    for i in categories["Category"]:
+        pages += 1
+        logging.info("Processing CAPEC category with ID %s", str(i["_ID"]))
+        name = str(i["_ID"])
+        capec_path = directory / convert_vars.args.output_path / name
+        create_folder(capec_path)
+        f = open(capec_path / "index.md", "w", encoding="utf-8")
+        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+        f.write("## Description\n\n")
+        f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
+        capec_id = int(i["_ID"])
+        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
+        if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
+            logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
+        else:
+            f.write("## Related ASVS Requirements\n\n")
+            f.write(f"ASVS ({asvs_version}): \
+{create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
+
+        f.close()
+
+    logging.info("Created %d CAPEC pages", pages)
 
 
 def has_no_asvs_mapping(capec_id: int, capec_to_asvs_map: dict[int, dict[str, List[str]]]) -> bool:
@@ -99,8 +124,8 @@ def createlink(data: dict[str, Any], shortcode: str, asvs_version: str) -> str:
                 str(item["Ordinal"]).rjust(2, "0") + "-" + item["Name"].lower().replace(" ", "-").replace(",", "")
             )
             for subitem in item["Items"]:
-                if shortcode in subitem["Shortcode"]:
-                    return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem["Shortcode"]})"
+                if shortcode.removeprefix("V") == subitem["Shortcode"].removeprefix("V"):
+                    return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem['Shortcode']})"
     return shortcode if shortcode else ""
 
 
@@ -158,7 +183,7 @@ def create_folder(path: Path) -> None:
 
 def load_json_file(filepath: Path) -> dict[str, Any]:
     try:
-        with open(filepath, encoding="utf8") as f:
+        with open(filepath, encoding="utf-8") as f:
             data: dict[str, Any] = json.load(f)
         return data
     except Exception as e:
@@ -178,6 +203,7 @@ def load_capec_to_asvs_mapping(filepath: Path) -> dict[int, dict[str, List[str]]
 
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
+    """Parse command line arguments for CAPEC conversion."""
     parser = argparse.ArgumentParser(description="Convert CAPEC JSON to Cornucopia format")
     parser.add_argument(
         "-o",
@@ -230,6 +256,7 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
 
 
 def get_valid_version(version: str) -> str:
+    """Get valid version from choices."""
     for v in ConvertVars.LATEST_ASVS_VERSION_CHOICES:
         if version == v:
             return version
@@ -237,7 +264,7 @@ def get_valid_version(version: str) -> str:
 
 
 def main() -> None:
-
+    """Main entry point for CAPEC conversion."""
     convert_vars.args = parse_arguments(sys.argv[1:])
     asvs_version = get_valid_version(convert_vars.args.asvs_version)
     logging.debug("Using ASVS version: %s", asvs_version)

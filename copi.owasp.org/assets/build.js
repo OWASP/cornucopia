@@ -25,7 +25,10 @@ let opts = {
   target: "es2017",
   outdir: "../priv/static/assets",
   external: ["*.css", "/fonts/*", "/images/*"],
-  nodePaths: ["../deps"],
+  nodePaths: ["../deps", require('path').resolve(__dirname, '../_build', process.env.MIX_ENV || 'dev')],
+  alias: {
+    '@': '.'
+  },
   loader: loader,
   plugins: plugins,
 };

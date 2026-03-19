@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # This script converts the CAPEC mappings from webapp-mappings YAML files
 # to a consolidated CAPEC-to-ASVS mapping file and a ASVS-to-CAPEC mapping file in source dir.
+import json
 import argparse
 import logging
 import sys
@@ -13,6 +14,10 @@ import yaml
 class ConvertVars:
     TEMPLATE_FILE_NAME: str = "EDITION-TEMPLATE-VERSION.yaml"
     DEFAULT_INPUT_PATH = Path(__file__).parent / "../source/webapp-mappings-3.0.yaml"
+    DEFAULT_ASVS_JSON_PATH = (
+        Path(__file__).parent
+        / "../cornucopia.owasp.org/data/asvs-5.0/en/OWASP_Application_Security_Verification_Standard_5.0.0_en.json"
+    )
     DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../source"
     args: argparse.Namespace
 
@@ -123,15 +128,26 @@ def _extract_and_add_asvs_requirements(
 
 
 def convert_to_output_format(
-    capec_map: dict[Any, set[str]], parameter: str = "owasp_asvs"
-) -> Dict[Any, dict[str, list[str]]]:
+    capec_map: dict[Any, set[str]],
+    parameter: str = "owasp_asvs",
+    meta: dict[str, Any] | None = None,
+    enrichment_data: dict[str, dict[str, str]] | None = None,
+) -> Dict[str, Any]:
     """
     Convert the internal mapping format to the output YAML format.
     """
     output = {}
+    if meta:
+        output["meta"] = meta
 
     for code, asvs_set in sorted(capec_map.items()):
-        output[code] = {parameter: sorted(list(asvs_set))}
+        entry: dict[str, Any] = {parameter: sorted(list(asvs_set))}
+
+        # Enrich with extra data if available (e.g., Description, L)
+        if enrichment_data and code in enrichment_data:
+            entry.update(enrichment_data[code])
+
+        output[code] = entry
 
     return output
 
@@ -154,7 +170,25 @@ def load_yaml_file(filepath: Path) -> dict[str, Any]:
         return {}
 
 
-def save_yaml_file(filepath: Path, data: Dict[int, dict[str, list[str]]]) -> bool:
+def load_json_file(filepath: Path) -> dict[str, Any]:
+    """Load and parse a JSON file."""
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        logging.info("Successfully loaded JSON file: %s", filepath)
+        return data if data else {}
+    except FileNotFoundError:
+        logging.error("File not found: %s", filepath)
+        return {}
+    except json.JSONDecodeError as e:
+        logging.error("Error parsing JSON file %s: %s", filepath, str(e))
+        return {}
+    except Exception as e:
+        logging.error("Error loading JSON file %s: %s", filepath, str(e))
+        return {}
+
+
+def save_yaml_file(filepath: Path, data: Dict[str, Any]) -> bool:
     """Save data as YAML file."""
     try:
         with open(filepath, "w", encoding="utf-8") as f:
@@ -184,7 +218,6 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         "-i",
         "--input-path",
         type=validate_filepath_arg,
-        default=ConvertVars.DEFAULT_INPUT_PATH,
         help="Path to input webapp-mappings YAML file",
     )
     parser.add_argument(
@@ -192,14 +225,14 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         "--version",
         type=str,
         default="latest",
-        help="Version of the output file (e.g., 3 for 3.0)",
+        help="Version of Cornucopia (e.g., 3 for 3.0)",
     )
     parser.add_argument(
         "-e",
         "--edition",
         type=str,
         default="edition",
-        help="edition of the output file (e.g., webapp or mobileapp)",
+        help="edition of Cornucopia (e.g., webapp or mobileapp)",
     )
     parser.add_argument(
         "-o",
@@ -207,6 +240,12 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         type=validate_filepath_arg,
         default=ConvertVars.DEFAULT_OUTPUT_PATH,
         help="Directory to save converted CAPEC-to-ASVS mapping YAML files",
+    )
+    parser.add_argument(
+        "--asvs-json",
+        type=validate_filepath_arg,
+        default=ConvertVars.DEFAULT_ASVS_JSON_PATH,
+        help="Path to ASVS JSON file for enrichment",
     )
     parser.add_argument(
         "-d",
@@ -220,6 +259,38 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         logging.error(exc.message)
         sys.exit(1)
     return args
+
+
+def extract_asvs_details(asvs_data: dict[str, Any]) -> dict[str, dict[str, str]]:
+    """
+    Recursively walk the ASVS JSON structure to find requirements and extract their
+    Description and L (level).
+
+    Returns a dict mapping shortcode (e.g. '1.1.1') to details dict.
+    """
+    details = {}
+
+    def _walk(node: Any) -> None:
+        if isinstance(node, dict):
+            # Check if this node is a requirement item
+            if "Shortcode" in node and "Description" in node and "L" in node:
+                # Remove leading 'V' from Shortcode if present
+                code = node["Shortcode"]
+                if code.startswith("V"):
+                    code = code[1:]
+
+                details[code] = {"description": node["Description"], "level": node["L"]}
+
+            # Recurse into children
+            for key, value in node.items():
+                _walk(value)
+        elif isinstance(node, list):
+            for item in node:
+                _walk(item)
+
+    _walk(asvs_data)
+    logging.info("Extracted details for %d ASVS requirements", len(details))
+    return details
 
 
 def main() -> None:
@@ -236,7 +307,13 @@ def main() -> None:
     else:
         directory = Path(convert_vars.args.output_path).resolve()
 
-    input_path = directory / convert_vars.args.input_path
+    if convert_vars.args.input_path:
+        input_path = Path(convert_vars.args.input_path).resolve()
+    else:
+        input_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "mappings").replace(
+            "VERSION", str(convert_vars.args.version)
+        ).replace("EDITION", str(convert_vars.args.edition))
+
     capec_output_path = directory / ConvertVars.TEMPLATE_FILE_NAME.replace("TEMPLATE", "capec").replace(
         "VERSION", str(convert_vars.args.version)
     ).replace("EDITION", str(convert_vars.args.edition))
@@ -253,13 +330,28 @@ def main() -> None:
         logging.error("Failed to load input data or file is empty")
         sys.exit(1)
 
+    # Load ASVS JSON for enrichment
+    asvs_details = {}
+    if convert_vars.args.asvs_json:
+        asvs_json_path = Path(convert_vars.args.asvs_json).resolve()
+        asvs_data = load_json_file(asvs_json_path)
+        if asvs_data:
+            asvs_details = extract_asvs_details(asvs_data)
+        else:
+            logging.warning("Failed to load ASVS JSON, skipping enrichment")
+
+    # Extract meta information
+    meta = data.get("meta", {}).copy()
+    if meta:
+        meta["component"] = "asvs"
+
     # Extract and merge CAPEC mappings
     capec_map = extract_capec_mappings(data)
     if not capec_map:
         logging.warning("No CAPEC mappings found in input file")
 
     # Convert to output format
-    output_data = convert_to_output_format(capec_map)
+    output_data = convert_to_output_format(capec_map, meta=meta)
 
     # Save output YAML
     if not save_yaml_file(capec_output_path, output_data):
@@ -267,16 +359,19 @@ def main() -> None:
         sys.exit(1)
 
     logging.info("CAPEC-to-ASVS mapping conversion completed successfully")
-    logging.info("Total CAPEC codes processed: %d", len(output_data))
+    logging.info("Total CAPEC codes processed: %d", len(output_data) - (1 if meta else 0))
 
     asvs_to_capec_map = extract_asvs_to_capec_mappings(data)
-    output_data_asvs = convert_to_output_format(asvs_to_capec_map, parameter="capec_codes")
+    # Pass enrichment data here
+    output_data_asvs = convert_to_output_format(
+        asvs_to_capec_map, parameter="capec_codes", meta=meta, enrichment_data=asvs_details
+    )
     # Save output YAML
     if not save_yaml_file(asvs_output_path, output_data_asvs):
         logging.error("Failed to save asvs output file")
         sys.exit(1)
     logging.info("ASVS-to-CAPEC mapping conversion completed successfully")
-    logging.info("Total ASVS requirements processed: %d", len(asvs_to_capec_map))
+    logging.info("Total ASVS requirements processed: %d", len(output_data_asvs) - (1 if meta else 0))
 
 
 if __name__ == "__main__":

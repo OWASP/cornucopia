@@ -3,6 +3,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
+  alias Copi.RateLimiter
   alias CopiWeb.GameLive.GameFormHelpers, as: GameFormHelpers
 
   @impl true
@@ -47,6 +48,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     """
   end
 
+  @impl true
   def update(%{game: _} = assigns, socket) do
     changeset =
       Cornucopia.change_game(%Game{
@@ -93,29 +95,27 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     assign(socket, :form, to_form(changeset))
   end
 
-  defp save_game(socket, :edit, game_params) do
-    case Cornucopia.update_game(socket.assigns.game, game_params) do
-      {:ok, _game} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Game updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
-    end
-  end
-
   defp save_game(socket, :new, game_params) do
-    case Cornucopia.create_game(game_params) do
-      {:ok, game} ->
+    ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
+
+    case RateLimiter.check_rate(ip, :game_creation) do
+      {:ok, _remaining} ->
+        case Cornucopia.create_game(game_params) do
+          {:ok, game} ->
+            {:noreply,
+             socket
+             |> put_flash(:info, "Game created successfully")
+             |> push_navigate(to: ~p"/games/#{game.id}")}
+
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:noreply, assign_form(socket, changeset)}
+        end
+
+      {:error, :rate_limit_exceeded} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Game created successfully")
-         |> push_navigate(to: ~p"/games/#{game.id}")}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
+         |> put_flash(:error, "Too many game creation attempts. Please try again later.")
+         |> assign_form(Cornucopia.change_game(%Game{}))}
     end
   end
 end
