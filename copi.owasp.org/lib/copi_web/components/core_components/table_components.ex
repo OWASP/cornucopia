@@ -17,13 +17,13 @@ defmodule CopiWeb.CoreComponents.TableComponents do
         <%= if @is_current_player do %>
           <div class="h-5/6 w-5/6 shadow-md bg-zinc-100 border-2 border-zinc-200 rounded-lg animate-pulse flex justify-center items-center">
           <%= if @first_card_played do %>
-            <p class="play-instruction text-center text-zinc-600">You <em>should</em> play a <br /><%= @first_card_played.card.category %> <br /> card</p>
+            <p class="play-instruction text-center text-zinc-600" draggable="false" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; cursor: default;">You <em>should</em> play a <br /><%= @first_card_played.card.category %> <br /> card</p>
           <% else %>
-            <p class="text-center text-zinc-600">You can play<br />any <br /> card</p>
+            <p class="text-center text-zinc-600" draggable="false" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; cursor: default;">You can play<br />any <br /> card</p>
           <% end %>
           </div>
         <% else %>
-          <p class="text-center">Waiting for <%= @player.name %> to play their card</p>
+          <p class="text-center" draggable="false" style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; cursor: default;">Waiting for <%= @player.name %> to play their card</p>
         <% end %>
         <% else %>
           <div

@@ -18,8 +18,8 @@
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
+import { Socket } from "phoenix"
+import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 import dragula from "../vendor/dragula"
 
@@ -28,12 +28,29 @@ Hooks.DragDrop = {
   mounted() {
     const drake = dragula([document.querySelector('#hand'), document.querySelector('#table')], {
       invalid: function (el, handle) {
-        // Don't allow dragging cards off the table
-        return el.className === 'card-player' || document.querySelector('#round-played');
+        // Don't allow dragging cards off the table or placeholder text
+        const isPlaceholderText = (element) => {
+          if (!element) return false;
+          const textContent = element.textContent;
+          return textContent.includes('Waiting for') ||
+            textContent.includes('You can play') ||
+            textContent.includes('should play');
+        };
+
+        return el.className === 'card-player' ||
+          document.querySelector('#round-played') ||
+          isPlaceholderText(el) ||
+          (el.querySelector && isPlaceholderText(el.querySelector('p')));
       },
       accepts: function (el, target, source, sibling) {
-        console.log('accepts called', {target: target?.id, source: source?.id});
-        
+        console.log('accepts called', { target: target?.id, source: source?.id });
+
+        // CRITICAL FIX: Prevent moving cards from table back to hand
+        if (target && target.id === 'hand' && source && source.id === 'table') {
+          console.log('Blocked: Cannot move cards from table back to hand');
+          return false;
+        }
+
         // Only allow dropping on table
         if (target && target.id === 'table') {
           // Check if "Your Card" section already has a card (not placeholder)
@@ -41,28 +58,28 @@ Hooks.DragDrop = {
             const nameDiv = zone.querySelector('.name');
             return nameDiv && (nameDiv.textContent.includes('Your Card') || nameDiv.textContent.includes('Drop a card'));
           });
-          
+
           if (yourCardSection) {
             // Check if there's a card already (not the placeholder)
             const isPlaceholder = yourCardSection.textContent.includes('Drop a card');
-            
-            console.log('Your card section check:', {isPlaceholder});
-            
+
+            console.log('Your card section check:', { isPlaceholder });
+
             if (!isPlaceholder) {
               console.log('Blocked: card already on table');
               return false;
             }
           }
         }
-        
+
         console.log('Accepting drop');
         return true;
       }
     });
-    
+
     drake.on('drop', (element, target, source, sibling) => {
-      console.log('Drop event', {target: target?.id});
-      
+      console.log('Drop event', { target: target?.id });
+
       if (target && target.id === 'table') {
         fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
           method: 'PUT',
@@ -89,7 +106,7 @@ Hooks.CopyUrl = {
     const btn = this.el.querySelector("#copy-url-btn");
     const urlSpan = this.el.querySelector("#copied-url");
     const checkMark = this.el.querySelector("#url-copied");
-    
+
     /*urlSpan.textContent = window.location.href;*/
     btn.addEventListener("click", () => {
       const url = urlSpan.value;
@@ -103,11 +120,11 @@ Hooks.CopyUrl = {
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: location.host.startsWith("localhost") ? undefined : 2500, // Clients can switch to longpoll and get stuck during development when the server goes up and down
-  params: {_csrf_token: csrfToken}, hooks: Hooks
+  params: { _csrf_token: csrfToken }, hooks: Hooks
 })
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
+topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 
