@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-unsafe-return, prefer-destructuring -- Bypassing strict type checking to safely parse dynamic YAML files */
 import fm from 'front-matter'
 import fs from 'node:fs'
 import yaml from 'js-yaml'

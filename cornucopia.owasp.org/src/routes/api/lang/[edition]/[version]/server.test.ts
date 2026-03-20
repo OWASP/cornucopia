@@ -1,4 +1,5 @@
-/* eslint-disable */
+
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment -- Required to accurately mock file system Dirent objects for testing */
 
 import { expect, describe, it, vi, beforeEach } from 'vitest'
 import * as authorController from '../../../../../domain/author/authorController'

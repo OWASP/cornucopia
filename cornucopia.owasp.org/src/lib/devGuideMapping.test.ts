@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-unsafe-assignment -- Relaxing strict type checking for test mock data */
 import { expect, describe, it } from 'vitest'
 import { DEV_GUIDE_MAPPING } from './devGuideMapping'
 
