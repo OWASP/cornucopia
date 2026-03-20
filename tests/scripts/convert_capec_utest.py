@@ -17,6 +17,35 @@ if "unittest.util" in __import__("sys").modules:
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
 
 
+class TestFileHandleClosure(unittest.TestCase):
+    """Ensure CAPEC page generators close file handles on errors"""
+
+    def setUp(self):
+        self.mock_output_path = Path("/fake/output")
+        capec.convert_vars.args = argparse.Namespace(output_path=self.mock_output_path)
+
+    @patch("builtins.open", new_callable=mock_open)
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_close_on_error(self, mock_create_folder, mock_file):
+        handle = mock_file()
+        # first write succeeds, second write throws
+        handle.write.side_effect = [None, ValueError("oops")]
+
+        # Minimal data causing one pattern entry
+        test_data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "foo", "Description": "bar"}]},
+                "Categories": {"Category": []},
+            }
+        }
+        capec_to_asvs_map = {}
+        asvs_map = {"Requirements": []}
+        with self.assertRaises(ValueError):
+            capec.create_capec_pages(test_data, capec_to_asvs_map, asvs_map, "5.0")
+
+        self.assertTrue(handle.close.called)
+
+
 class TestParseDescription(unittest.TestCase):
     def test_parse_description_with_dict_and_text(self):
         """Test parsing description with __text field in dict"""
@@ -367,6 +396,8 @@ class TestCreateCapecPages(unittest.TestCase):
         self.assertIn("## Description", written_content)
         self.assertIn("This is a test description", written_content)
         self.assertIn("Source: [CAPEC™ 123](https://capec.mitre.org/data/definitions/123.html)", written_content)
+        # ensure file closed
+        self.assertTrue(handle.close.called)
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convert_capec.create_folder")
