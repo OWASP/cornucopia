@@ -144,6 +144,62 @@ class TestExtractCapecNames(unittest.TestCase):
         self.assertEqual(len(result), 2)
         self.assertIn(1, result)
 
+    def test_extract_capec_names_missing_categories(self):
+        """Test that missing Categories key logs a warning but still returns attack patterns"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                }
+                # No "Categories" key
+            }
+        }
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+        self.assertIn("No 'Categories' key found", log.output[0])
+
+    def test_extract_capec_names_missing_category_inside_categories(self):
+        """Test that missing Category key inside Categories logs a warning"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                },
+                "Categories": {"other_key": "value"},  # No "Category" key
+            }
+        }
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+        self.assertIn("No 'Category' key found", log.output[0])
+
+    def test_extract_capec_names_category_not_list(self):
+        """Test that a non-list Category value is silently skipped"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                },
+                "Categories": {"Category": "not-a-list"},
+            }
+        }
+        result = enricher.extract_capec_names(data)
+
+        # Attack patterns still extracted; non-list Category silently skipped
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+
 
 class TestEnrichCapecMappings(unittest.TestCase):
     """Test enrich_capec_mappings function"""
