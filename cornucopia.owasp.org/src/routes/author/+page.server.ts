@@ -1,9 +1,6 @@
-import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper.js'
 import { getAuthors } from '../../domain/author/authorController.js'
+import type { PageServerLoad } from './$types'
 
-export function load({params})
-{
-    return {
-        authors : getAuthors()
-    }
-}
+export const load: PageServerLoad = () => ({
+  authors: getAuthors()
+})

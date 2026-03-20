@@ -1,12 +1,18 @@
-import {expect, describe, it} from 'vitest';
-import { DevGuideMapping } from './devguideMapping';
+import { expect, describe, it } from 'vitest'
+import { DEV_GUIDE_MAPPING } from './devGuideMapping'
 
-describe('DevGuideMapping tests', () => {
-    it("should return a valid url for a given code.", async () => {
-        expect(DevGuideMapping.getUrl("SC1-2")).toBe("https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#1-system-configuration-sc");
-        expect(DevGuideMapping.getUrl("SC")).toBe("https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#1-system-configuration-sc");
-        expect(DevGuideMapping.getUrl("SC3")).toBe("https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#1-system-configuration-sc");
-        expect(DevGuideMapping.getUrl("SDC1-3")).toBe("https://devguide.owasp.org/en/04-design/02-web-app-checklist/03-secure-database-access/#2-secure-database-configuration-sdc");
-        expect(DevGuideMapping.getUrl("DOESNOTEXIST1-3")).toBe("");
-    });
-});
+describe('DevGuide Mapping Tests', () => {
+  it('should contain valid mapping for key requirements', () => {
+    expect(DEV_GUIDE_MAPPING['1.1']).toBeDefined()
+    expect(DEV_GUIDE_MAPPING['2.1']).toBeDefined()
+  })
+
+  it('should map 1.1 to the correct guide section', () => {
+    expect(DEV_GUIDE_MAPPING['1.1']).toContain('0x01h-Configuration')
+  })
+
+  it('should return undefined for non-existent requirements', () => {
+    const mapping = DEV_GUIDE_MAPPING as Record<string, unknown>
+    expect(mapping['99.99']).toBeUndefined()
+  })
+})

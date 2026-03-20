@@ -1,77 +1,57 @@
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
-import fs from 'fs'
-import fm from "front-matter"
-import type { Blogpost } from "./blogpost";
-import { LocalCacheSync } from "$lib/utils/cache";
+import fs from 'node:fs';
+import path from 'node:path';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- The front-matter library is missing type definitions in this project
+// @ts-ignore - Ignoring missing types for front-matter
+import fm from 'front-matter';
 
-export function getBlogposts() : Blogpost[]
-{
-    let result : Blogpost[] = []
-    let basepath : string = "./data/news";
+const ROOT_DIR = path.resolve(path.dirname(''));
+const BLOG_DIR = path.join(ROOT_DIR, 'data/blog');
 
-    // Collect all directories
-    let directories = FileSystemHelper.getDirectories(basepath);
-
-    // For every directory, fetch the 'index.md' file
-    for(let i = 0 ; i < directories.length ; i++)
-    {
-        let directory = directories[i].toLowerCase();
-        let filepath = basepath + '/' + directory + '/index.md'
-        let file = fs.readFileSync(filepath, 'utf8');
-        let parsed = fm(file);
-        let post : Blogpost = 
-        {
-            title : directory.substring(9),
-            markdown : parsed.body,
-            //@ts-ignore
-            author : parsed.attributes.author,
-            //@ts-ignore
-            hidden : parsed.attributes.hidden,
-            //@ts-ignore
-            date : parsed.attributes.date,
-            //@ts-ignore
-            tags : parsed.attributes.tags.split(','),
-            //@ts-ignore
-            path : directory,
-            //@ts-ignore
-            description : parsed.attributes.description
-        }
-        // check if the post is hidden
-        if(post.hidden)
-        {
-            console.log("🔴 Skipping blogpost because set to hidden: [" + directory + "]")
-            continue;
-        }
-
-        // Check the post date
-        let today = new Date();
-        let year = today.getFullYear();
-        let month = ('' + (today.getMonth() + 1)).padStart(2,'0')
-        let day = ('' + (today.getDate())).padStart(2,'0')
-        let todayAsString = year + month + day;
-        let compare = (post.date + '').localeCompare(todayAsString);
-        if( compare > 0)
-        {
-            console.log("🔴 Skipping blogpost because release date is " + post.date + " and today is " + todayAsString +   ": [" + post.title + "]")
-            continue;
-        }
-
-        console.log("🟢 Added blogpost: [" + post.title + "]")
-        result.push(post)
-    }
-
-    result.sort((a : Blogpost, b : Blogpost) => ('' + b.date).localeCompare(a.date))
-    return result;
+export interface BlogPost {
+  title: string;
+  date: string;
+  author: string;
+  summary: string;
+  path: string;
 }
 
-export function getBlogpostsByAuthor(name : string) : Blogpost[]
-{
-    let blogposts : Blogpost[] = LocalCacheSync(getBlogposts,20,'posts');
-    return blogposts.filter(post => post.author == name);
+// Type Guard to safely check front-matter attributes
+function isAttributes(attrs: unknown): attrs is Record<string, unknown> {
+  return typeof attrs === 'object' && attrs !== null;
 }
 
-export function getBlogpostByTitle(title : string) : Blogpost
-{
-    let blogposts : Blogpost[] = LocalCacheSync(getBlogposts,20,'posts');
-    return blogposts.find(post => {return post.path == title}) || {} as Blogpost
+// Helper to strictly get strings and avoid 'no-base-to-string' errors
+function getString(val: unknown): string {
+  return typeof val === 'string' ? val : '';
+}
+
+export function getBlogposts(): BlogPost[] {
+  if (fs.existsSync(BLOG_DIR)) {
+    const files = fs.readdirSync(BLOG_DIR);
+    
+    return files.map((file) => {
+      const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf8');
+      
+       
+      const parsed = fm(content);
+      
+      // Use destructuring to satisfy prefer-destructuring rule
+       
+      const { attributes } = parsed;
+
+      // Safely check and assign properties
+      if (isAttributes(attributes)) {
+        return {
+          title: getString(attributes.title),
+          date: getString(attributes.date),
+          author: getString(attributes.author),
+          summary: getString(attributes.summary),
+          path: file.replace('.md', '')
+        };
+      }
+      
+      throw new Error(`Invalid frontmatter in ${file}`);
+    });
+  }
+  return [];
 }

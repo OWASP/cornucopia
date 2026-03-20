@@ -1,5 +1,4 @@
-export let data = 
-{
+export const data = {
     "V1.1":"Secure Software Development Lifecycle Requirements",
     "V1.2":"Authentication Architectural Requirements",
     "V1.3":"Session Management Architectural Requirements",
@@ -71,4 +70,4 @@ export let data =
     "V14.3":"Unintended Security Disclosure Requirements",
     "V14.4":"HTTP Security Headers Requirements",
     "V14.5":"Validate HTTP Request Header Requirements",
-}
+};

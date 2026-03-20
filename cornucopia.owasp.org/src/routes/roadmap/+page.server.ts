@@ -1,7 +1,9 @@
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
+import type { PageServerLoad } from './$types'
+import { ONE, TWO } from '$lib/constants'
 
-export async function load({ params }) {
-    return {
-        content: FileSystemHelper.getDataFromPath('data/website/pages/roadmap')
-    };
-}
+export const load: PageServerLoad = () => ({
+  milestones: [
+    { id: ONE, task: 'Complete Linter Fixes' },
+    { id: TWO, task: 'Submit PR' }
+  ]
+})

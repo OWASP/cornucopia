@@ -1,10 +1,17 @@
-export function AddLink(links: Link[], name : string, href : string)
-{
-    links.push({name:name,href:href}) ;
+import type { Card } from '$domain/card/card'
+import { ONE } from '$lib/constants'
+
+const NOT_FOUND = -1
+
+export function getNavigationLinks (currentCardId: string, deck: Card[]): { prev?: string, next?: string } {
+  const index = deck.findIndex((c) => c.id === currentCardId)
+  if (index === NOT_FOUND) return {}
+  const { id: prevId } = deck[index - ONE] ?? {}
+  const { id: nextId } = deck[index + ONE] ?? {}
+  return { prev: prevId, next: nextId }
 }
 
-export type Link = 
-{
-    name : string,
-    href : string
-};
+export function isLastCard (currentCardId: string, deck: Card[]): boolean {
+  const lastIndex = deck.length - ONE
+  return deck.findIndex((c) => c.id === currentCardId) === lastIndex
+}

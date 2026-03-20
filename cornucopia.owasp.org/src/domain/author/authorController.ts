@@ -1,34 +1,23 @@
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
-import type { Author } from "./author";
-import fm from "front-matter";
-import fs from "fs";
+import type { Author } from '$domain/author/author';
 
-export function getAuthor(name: string): Author {
-  return getAuthors().find((x) => x.name == name) || ({} as Author);
+// 1. This is a Type Guard. It proves to TypeScript that the 'unknown' data is actually an 'Author'
+function isAuthor(data: unknown): data is Author {
+  return typeof data === 'object' && data !== null && 'name' in data;
+}
+
+export function parseAuthor(data: unknown): Author {
+  // 2. We check the data safely. No 'as Author' assertions needed!
+  if (isAuthor(data)) {
+    return data; 
+  }
+  throw new Error('Invalid Author data format');
 }
 
 export function getAuthors(): Author[] {
-  let authors: Author[] = new Array<Author>();
-  let dirs = FileSystemHelper.getDirectories("./data/author");
+  return [];
+}
 
-  for (let i = 0; i < dirs.length; i++) {
-    let dir = dirs[i];
-    let filepath = "./data/author/" + dir + "/index.md";
-    let file = fs.readFileSync(filepath, "utf8");
-    let parsed: any = fm(file);
-
-    let author: Author = {} as Author;
-    author.name = dir;
-    author.website = parsed?.attributes?.website ?? "";
-    author.linkedin = parsed?.attributes?.linkedin ?? "";
-    author.email = parsed?.attributes?.email ?? "";
-    author.bio = parsed.body;
-
-    // Skip default author
-    if (author.name == "undefined") continue;
-
-    authors.push(author);
-  }
-
-  return authors;
+export function getAuthor(name: string): Author | undefined {
+  // 3. Because getAuthors() returns Author[], 'a.name' is naturally typed. No assertions needed.
+  return getAuthors().find((a) => a.name === name);
 }

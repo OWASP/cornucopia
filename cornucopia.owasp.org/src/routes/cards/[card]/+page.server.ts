@@ -1,60 +1,49 @@
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
-import { DeckService } from "$lib/services/deckService";
-import type { PageServerLoad } from "./$types";
-import type { Route } from "../../../domain/routes/route";
-import type { Card } from "$domain/card/card";
-import { MappingService } from "$lib/services/mappingService";
+import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper'
+import { DeckService } from '$lib/services/deckService'
+import type { PageServerLoad } from './$types'
+import type { Route } from '../../../domain/routes/route'
+import type { Card } from '$domain/card/card'
+import { MappingService } from '$lib/services/mappingService'
+import { error } from '@sveltejs/kit'
+import { HTTP_STATUS } from '$lib/constants'
 
-export const load = (async ({ params }) => {
+function legacyCardCodeFix (card: string): string {
+  return card
+    .replace('COM', 'CM')
+    .replace('CO', 'C')
+    .replace('DVE', 'VE')
+    .replace('AC', 'AT')
+}
 
-  const lang = "en";
-  const deckService = new DeckService();
+export const load: PageServerLoad = (({ params }) => {
+  const lang = 'en'
+  const deckService = new DeckService()
 
   const mobileCards = deckService.getCardDataForEditionVersionLang(
-    "mobileapp",
-    DeckService.getLatestVersion("mobileapp"),
-    lang
-  );
-
+    'mobileapp', DeckService.getLatestVersion('mobileapp'), lang)
   const webappCards = deckService.getCardDataForEditionVersionLang(
-    "webapp",
-    DeckService.getLatestVersion("webapp"),
-    lang
-  );
+    'webapp', DeckService.getLatestVersion('webapp'), lang)
 
-  const cards = new Map([...mobileCards, ...webappCards]);
-  const decks = new Map([["en", cards]]);
+  const cards = new Map([...mobileCards, ...webappCards])
+  const decks = new Map([['en', cards]])
+  const fixedCode = legacyCardCodeFix(params.card.toUpperCase())
+  const card: Card | undefined = cards.get(fixedCode)
 
-  const fixedCode = legacyCardCodeFix(params.card?.toUpperCase() || "");
-
-  const card: Card = cards.get(fixedCode) as Card;
-
-  if (!card) {
-    throw new Error(`Card not found: ${fixedCode}`);
+  if (card === undefined) {
+    error(HTTP_STATUS.NOT_FOUND, `Card not found: ${fixedCode}`)
   }
 
-  const edition = card.edition;
-
-  const versions = DeckService.getVersions(edition);
+  const { edition } = card
+  const versions = DeckService.getVersions(edition)
 
   return {
     card: fixedCode,
-    decks: decks,
-    versions: versions,
+    decks,
+    versions,
     routes: new Map<string, Route[]>([
-      ["ASVSRoutes", FileSystemHelper.ASVSRouteMap()],
+      ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]
     ]),
     mappingData: new MappingService().getCardMappingForLatestEdtions(),
-    languages: DeckService.getLanguages(card.edition),
-  };
-
-}) satisfies PageServerLoad;
-
-
-function legacyCardCodeFix(card: string) {
-  return card
-    .replace("COM", "CM")
-    .replace("CO", "C")
-    .replace("DVE", "VE")
-    .replace("AC", "AT");
-}
+    languages: DeckService.getLanguages(card.edition)
+  }
+})
