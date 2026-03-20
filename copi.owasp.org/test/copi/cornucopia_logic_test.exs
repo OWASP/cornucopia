@@ -96,7 +96,7 @@ defmodule Copi.CornucopiaLogicTest do
     create_card("Wild Card", "1")
     create_card("Hearts", "5")
     create_card("WILD CARD", "2")
-    
+
     suits = Cornucopia.get_suits_from_selected_deck("webapp")
     
     refute "Wild Card" in suits
@@ -197,23 +197,81 @@ defmodule Copi.CornucopiaLogicTest do
     assert d3.id in all_card_ids
   end
 
+  test "lead-suit wins when no jokers or trumps present", %{game: game, p1: p1, p2: p2} do
+    {:ok, c1} = create_card("Authentication", "K")
+    {:ok, c2} = create_card("Authentication", "5")
+
+    d1 = play_card(p1, c1, 1)  # leads with Authentication K
+    d2 = play_card(p2, c2, 1)  # follows with Authentication 5
+
+    Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d1.id, player_id: p1.id})
+    Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d2.id, player_id: p2.id})
+
+    game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
+    winner = Cornucopia.highest_scoring_card_in_round(game, 1)
+    # "K" is higher than "5" in card_order; both Authentication (lead suit, no jokers/trumps)
+    assert winner.id == d1.id
+  end
+
   test "jokers trump all other cards", %{game: game, p1: p1, p2: p2} do
     {:ok, joker} = create_card("Joker", "JokerA")
     {:ok, trump} = create_card("Cornucopia", "A")
-    
+
     d1 = play_card(p1, trump, 1)
     d2 = play_card(p2, joker, 1)
-    
+
     # Add votes
     Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d1.id, player_id: p1.id})
     Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d2.id, player_id: p2.id})
-    
+
     # Reload game
     game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
-    
+
     winner = Cornucopia.highest_scoring_card_in_round(game, 1)
-    
+
     # Joker should win
     assert winner.id == d2.id
+  end
+
+  test "highest_scoring_card_in_round returns nil when no cards have enough votes",
+       %{game: game, p1: p1, p2: p2} do
+    {:ok, c1} = create_card("Authentication", "3")
+    {:ok, c2} = create_card("Authentication", "7")
+
+    # Play cards but add NO votes → scoring_cards filters all out → special_lead_cards([]) → nil path
+    play_card(p1, c1, 1)
+    play_card(p2, c2, 1)
+
+    game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
+
+    result = Cornucopia.highest_scoring_card_in_round(game, 1)
+    assert result == nil
+  end
+
+  test "lead suit wins when no trump or joker present", %{game: game, p1: p1, p2: p2} do
+    {:ok, c1} = create_card("Authentication", "3")
+    {:ok, c2} = create_card("Authentication", "8")
+
+    # p1 plays first (leads with Authentication), p2 follows
+    d1 = play_card(p1, c1, 1)
+    :timer.sleep(15)
+    d2 = play_card(p2, c2, 1)
+
+    # Add votes to both (2 players, need > 0.5 votes each)
+    Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d1.id, player_id: p1.id})
+    Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d2.id, player_id: p2.id})
+
+    game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
+
+    winner = Cornucopia.highest_scoring_card_in_round(game, 1)
+
+    # "8" ranks higher than "3" in card_order → d2 wins
+    assert winner.id == d2.id
+  end
+
+  test "highest_scoring_card_in_round returns nil when no cards played in game",
+       %{game: game} do
+    game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
+    assert Cornucopia.highest_scoring_card_in_round(game, 1) == nil
   end
 end

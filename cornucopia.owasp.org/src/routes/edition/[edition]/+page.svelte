@@ -10,6 +10,7 @@
     import type { Suit } from "$domain/suit/suit.js";
     import { SvelteMap } from 'svelte/reactivity';
     import { goto } from "$app/navigation";
+    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION } from "$lib/services/deckServiceConsts";
 
 
     interface Props {
@@ -20,9 +21,6 @@
     const lang = readLang();
     let t = readTranslation();
     
-    //TODO move these constants to a more sensible location
-    const VERSION_WEBAPP = "webapp"
-    const VERSION_MOBILEAPP = "mobileapp"
 
     // Derived values that update when data changes
     let content = $derived(data.content.get($lang) || data.content.get('en'));
@@ -41,6 +39,7 @@
         if (!cards) return null;
         if (version === VERSION_MOBILEAPP) return cards.get('PC2') as Card;
         if (version === VERSION_WEBAPP) return cards.get('VE2') as Card;
+        if (version === VERSION_COMPANION) return cards.get('AAI2') as Card;
         return cards.get('VE2') as Card;
     });
 
@@ -103,6 +102,7 @@
 <p class="button-container script">
     <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
     <button title="OWASP Cornucopia {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
+    <button title="OWASP Cornucopia {$t('cards.button.3')}" class:button-selected={version == VERSION_COMPANION} onclick={()=>changeVersion(VERSION_COMPANION)}>{$t('cards.button.3')}</button>
 </p>
 </section>
 <div class="script">
@@ -122,6 +122,12 @@
     <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
     <p class="text">
         {@html $t('cards.p3')}
+    </p>
+    {/if}
+    {#if version == VERSION_COMPANION}
+    <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+    <p class="text">
+        {@html $t('cards.p4')}
     </p>
     {/if}
     <div class="container">
@@ -158,6 +164,12 @@
                     {@html $t('cards.p2')}
                 </p>
             {/if}
+            {#if version == VERSION_COMPANION}
+                <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+                <p class="text">
+                    {@html $t('cards.p4')}
+                </p>
+            {/if}
             {#each cardSuits as suit}
                 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                 <!-- svelte-ignore a11y_label_has_associated_control -->
@@ -168,6 +180,10 @@
                 {#if version == VERSION_MOBILEAPP}
                     <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
+                {/if}
+                {#if version == VERSION_COMPANION}
+                    <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
                 {/if}
                 <div class="card-buttons">
                 {#each suit.cards as card}
