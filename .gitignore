@@ -28,3 +28,4 @@ cornucopia.owasp.org/package-lock.json
 cornucopia.owasp.org/coverage/**
 .vscode
 *.backup
+*.md
