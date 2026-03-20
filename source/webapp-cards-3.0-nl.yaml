@@ -168,7 +168,7 @@ suits:
     id: "SM5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/SM5"
-    desc: "John kan sessie-ID's voorspellen of raden omdat ze niet worden gewijzigd wanneer de rol van de gebruiker verandert (bijv. pre en post authenticatie), of niet worden geverifieerd met een vertrouwde backendservice, of niet lang genoeg en willekeurig zijn, of niet worden gewijzigd periodiek"
+    desc: "John kan sessie-ID's voorspellen of raden omdat ze niet worden gewijzigd wanneer de rol van de gebruiker verandert (bijv. pre en post authenticatie), of niet worden geverifieerd met een vertrouwde backendservice, of niet lang genoeg en willekeurig zijn, of niet periodiek worden gewijzigd"
   -
     id: "SM6"
     value: "6"
