@@ -85,6 +85,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Timo Goosen
 - Anthony Harrison
 - Martin Haslinger
+- Isha Parmar
 - John Herrlin
 - Jerry Hoff
 - Toby Irvine
