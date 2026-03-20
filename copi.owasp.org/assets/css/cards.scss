@@ -1896,7 +1896,7 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
     height: clamp(72px, 7.2vw, 96px);
     width: clamp(55px, 5.5vw, 74px);
-
+    
 
 
     padding: clamp(28px, 2.8vw, 37px) 0;
@@ -1931,26 +1931,30 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   }
 
   &.scope {
-    .left-value { background-color: #2f6f3e; }
-  }
+   .left-value { background-color: #3E4736; } // Rifle Green
+}
 
-  &.architecture {
-    .left-value { background-color: #3f8f5a; }
-  }
+&.architecture {
+ .left-value { background-color: #677740; } // Mustard Green
+}
 
-  &.agency {
-    .left-value { background-color: #e0a800; }
-  }
+&.agency {
+ .left-value { background-color: #DBBC58; } // Sunray
+}
 
-  &.trust {
-    .left-value { background-color: #8b5e3c; }
-  }
+&.trust {
+ .left-value { background-color: #A8854C; } // Café Au Lait
+}
 
-  &.porosity {
-    .left-value { background-color: #6b3e2e; }
-  }
+&.porosity {
+ .left-value { background-color: #944C36; } // Chestnut
+}
 
-  &.cornucopia {
-    .left-value { background-color: #7a2f2f; }
-  }
+&.cornucopia {
+ .left-value { background-color: #613030; } // Puce Red
+}
+
+&.joker {
+ .left-value { background-color: #FEB048; } // Pastel Orange
+}
 }
