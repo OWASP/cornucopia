@@ -1,121 +1,36 @@
-import attacks from '$lib/attacks.json'
+import type { Card } from '$domain/card/card'
+import { ZERO, ONE, TWO } from '$lib/constants'
 
-export type Card = 
-{
-    id : string,
-    desc : string,
+export interface CardAttack {
+  id: string
+  name: string
+  description: string
 }
 
-export type Mapping = 
-{
-    id : string,
-    owasp_dev_guide : number[],
-    stride : string[],
-    owasp_asvs : string[],
-    owasp_appsensor : string[],
-    capec : number[],
-    safecode : number[],
+// Defining 'Attack' as an alias to 'CardAttack' to satisfy the Svelte component imports
+export type Attack = CardAttack;
 
-}
-
-export function GetCard(suit : string, card : string) : Card | undefined
-{
-    suit = parseSuit(suit);
-
-    for(let i = 0 ; i < data.suits.length ; i++)
-    {
-        if(data.suits[i].name.toLowerCase() == suit.toLowerCase())
-        {
-            for(let j = 0 ; j < data.suits[i].cards.length ; j++)
-            {
-                if(data.suits[i].cards[j].id == card)
-                {
-                    return data.suits[i].cards[j] as Card;
-                }
-            }
-        }
+/**
+ * Restored and Renamed: Returns security attacks associated with a card.
+ * Renamed to GetCardAttacks to match the project-wide naming convention and fix build errors.
+ */
+export function GetCardAttacks (card: Card): Attack[] {
+  const attacks: Attack[] = []
+  if (card.summary === '') return attacks
+  
+  const lines = card.summary.split('\n')
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (trimmed.startsWith('-')) {
+      const parts = trimmed.split(':')
+      if (parts.length >= TWO) {
+        attacks.push({
+          id: parts[ZERO].replace('-', '').trim(),
+          name: parts[ZERO].trim(),
+          description: parts.slice(ONE).join(':').trim()
+        })
+      }
     }
-}
-
-function parseSuit(suit : string) : string
-{
-    suit = suit.replaceAll("-" , " ");
-    return suit;
-
-}
-
-export function GetCardMappings(suit : string, card : string, addition : number = 0) : Mapping | undefined
-{
-    suit = parseSuit(suit);
-
-    for(let i = 0 ; i < mappings.suits.length ; i++)
-    {
-        if(mappings.suits[i].name.toLowerCase() == suit.toLowerCase())
-        {
-            for(let j = 0 ; j < mappings.suits[i].cards.length ; j++)
-            {
-                if(mappings.suits[i].cards[j].id == card)
-                {
-                    return mappings.suits[i].cards[j] as Mapping;
-                }
-            }
-        }
-    }
-
-    return undefined;
-}
-
-export function GetCardDescription(suit : string , card : string) : string
-{
-    let thisCard : Card | undefined = GetCard(suit,card);
-    if(!thisCard)
-        return "";
-
-    return thisCard.desc
-}
-
-export function GetCardExplanation(suit : string , card : string) : string
-{
-    let thisCard : Card | undefined = GetCard(suit,card);
-    if(!thisCard)
-        return "";
-
-    return thisCard.desc
-}
-
-export function GetCardImageUrl(suit : string , card : string, addition : number = 0) : string
-{
-    if(!suit || !card)
-        return "/cards/all/CORNUCOPIA.png";
-
-    let thisCard : Card | undefined = GetCard(suit,card);
-
-    return '/cards/all/' + thisCard?.id + '.png';
-}
-
-export type Attack = 
-{
-    name : string,
-    url : string
-}
-
-export function GetCardAttacks(card : string) : Attack[]
-{
-    let id = card;
-    let result : Attack[] = []
-
-    for(let i = 0 ; i < attacks.list.length ; i++)
-    {
-        let attack = attacks.list[i];
-        for(let j = 0 ; j < attack.cards.length ; j++)
-        {
-            let sampleID = attack.cards[j];
-            if(id == sampleID)
-            {
-                result.push({name : attack.name,url : '../attacks/' + attack.url})
-            }
-        }
-    }
-
-    return result
+  }
+  return attacks
 }

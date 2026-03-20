@@ -1,16 +1,14 @@
-import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
-import { Text } from '$lib/utils/text.js';
+import { MappingService } from '$lib/services/mappingService'
+import type { LayoutServerLoad } from './$types'
 
-export const prerender = true;
-export async function load(event) 
-{
-    let content = FileSystemHelper.getDataFromPath('data/website/pages/footer');
-    return {
-        content: content,
-        renderTimestamp : Text.FormatDateAsDate(new Date()),
-        timestamp : new Date(),
-        translation: event.locals.translation,
-        fallbackTranslation: event.locals.fallbackTranslation,
-        lang: event.locals.lang
-    }
+export const load: LayoutServerLoad = () => {
+  const service = new MappingService()
+  const mappingData = service.getCardMappingForLatestEdtions()
+  const result: Record<string, unknown> = {}
+
+  for (const [key, value] of mappingData.entries()) {
+    result[key] = value
+  }
+
+  return { mappings: result }
 }

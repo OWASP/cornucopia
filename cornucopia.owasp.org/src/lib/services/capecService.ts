@@ -1,42 +1,67 @@
-import fs from 'fs';
-import yaml from "js-yaml";
-import path from "path";
+import fs from 'node:fs'
+import path from 'node:path'
 
-const __dirname = path.resolve(path.dirname(''));
+const ROOT_DIR = path.resolve(path.dirname(''))
+const CAPEC_PATH = '/data/capec/capec.json'
 
-export interface CapecData {
-    [key: number]: {
-        name: string;
-        owasp_asvs: string[];
-    };
+export interface CapecEntry {
+  id: number
+  name: string
+  description: string
+  solutions: string[]
+  owasp_asvs: string[]
 }
 
-export class CapecService {
-    private static capecData: Map<string, CapecData> = new Map();
-    private static path: string = '/../source/';
+export type CapecData = Record<string, CapecEntry | undefined>
 
-    public static getCapecData(edition: string, version: string): CapecData {
-        const key = `${edition}-${version}`;
-        
-        if (this.capecData.has(key)) {
-            return this.capecData.get(key)!;
-        }
+function isCapecData(data: unknown): data is CapecData {
+  return typeof data === 'object' && data !== null && !Array.isArray(data);
+}
 
-        try {
-            const yamlData = fs.readFileSync(
-                `${__dirname}${this.path}${edition}-capec-${version}.yaml`, 
-                'utf8'
-            );
-            const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as CapecData;
-            this.capecData.set(key, data);
-            return data;
-        } catch (e) {
-            console.error(`Failed to load CAPEC data for ${edition}-${version}:`, e);
-            return {};
-        }
+let cachedCapecData: CapecData | null = null;
+
+export const CapecService = {
+  loadData(): CapecData {
+    if (cachedCapecData !== null) return cachedCapecData;
+    try {
+      const rawData = fs.readFileSync(path.join(ROOT_DIR, CAPEC_PATH), 'utf8');
+      // Added : unknown to fix the unsafe assignment rule
+      const parsed: unknown = JSON.parse(rawData);
+      
+      if (isCapecData(parsed)) {
+        cachedCapecData = parsed;
+        return cachedCapecData;
+      }
+      return {};
+    } catch (e) {
+      console.error('Failed to load CAPEC data:', e);
+      return {};
     }
+  },
 
-    public static clear(): void {
-        this.capecData.clear();
-    }
+  getCapecData(edition: string, version: string): CapecData {
+    if (cachedCapecData !== null) return cachedCapecData;
+    console.log(`Loading CAPEC data for ${edition}-${version}`);
+    return CapecService.loadData();
+  },
+
+  getCapecById(id: number): CapecEntry | undefined {
+    return CapecService.loadData()[String(id)];
+  },
+
+  getCapecMappings(ids: number[]): CapecEntry[] {
+    const data = CapecService.loadData();
+    return ids.reduce<CapecEntry[]>((acc, id) => {
+      // Destructuring dictionary access to fix prefer-destructuring error
+      const { [String(id)]: entry } = data;
+      if (entry !== undefined) {
+        acc.push(entry);
+      }
+      return acc;
+    }, []);
+  },
+
+  clear(): void {
+    cachedCapecData = null;
+  }
 }

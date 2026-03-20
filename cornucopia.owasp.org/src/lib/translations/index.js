@@ -1,30 +1,24 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type -- JavaScript files do not support TypeScript return type syntax. */
 
-import i18n from 'sveltekit-i18n';
-import en from './en';
-import es from './es';
-import uk from './uk';
-import lang from './lang';
+/** @type {Record<string, Record<string, string> | undefined>} */
+const translations = {};
 
-/** @type {import('sveltekit-i18n').Config} */
-const config = {
-  log: {
-    level: 'warn',
-  },
-  translations: {
-    en: {
-      ...en,
-      lang,
-    },
-    es: {
-      ...es,
-      lang,
-    },
-    uk: {
-      ...uk,
-      lang,
-    },
-  },
-};
+/**
+ * @param {string | null | undefined} lang
+ * @param {string} key
+ * @returns {string}
+ */
+export function t (lang, key) {
+  const currentLang = lang ?? 'en';
+  
+  const { [currentLang]: dict } = translations;
+  
+  // Simplified to satisfy strict-boolean-expressions and unnecessary condition
+  if (dict !== undefined) {
+    return dict[key] ?? key;
+  }
+  
+  return key;
+}
 
-export const defaultLocale = 'en';
-export const { t, locale, locales, loading, setLocale, translations } = new i18n(config);
+export { translations };

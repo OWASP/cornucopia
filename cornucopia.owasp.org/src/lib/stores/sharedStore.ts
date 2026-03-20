@@ -1,24 +1,12 @@
-import { getContext, hasContext, setContext } from "svelte";
-import { readable, writable } from "svelte/store";
+import { writable } from 'svelte/store';
+import type { Card } from '$domain/card/card';
 
+export const selectedCards = writable<Card[]>([]);
+export const currentLanguage = writable<string>('en');
+export const currentEdition = writable<string>('webapp');
 
-export const sharedStore = <T, A>(
-    name: string,
-    fn: (value?: A) => T,
-    defaultValue?: A,
-) => {
-    if (hasContext(name)) {
-        return getContext<T>(name);
-    }
-    const _value = fn(defaultValue);
-    setContext(name, _value);
-    return _value;
+export const resetAllStores = (): void => {
+    selectedCards.set([]);
+    currentLanguage.set('en');
+    currentEdition.set('webapp');
 };
-
-// writable store context
-export const useWritable = <T>(name: string, value: T) =>
-    sharedStore(name, writable, value);
-
-// readable store context
-export const useReadable = <T>(name: string, value: T) =>
-    sharedStore(name, readable, value);
