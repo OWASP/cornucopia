@@ -1,19 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-unsafe-assignment -- Relaxing strict type checking for test mock data */
-import { expect, describe, it } from 'vitest'
-import { DEV_GUIDE_MAPPING } from './devGuideMapping'
+/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-type-assertion -- The test environment requires flexible object access to verify dynamic security keys without excessive type casting or rigid interfaces */
+import { describe, it, expect } from 'vitest';
+import { DevGuideMapping } from './devguideMapping';
 
-describe('DevGuide Mapping Tests', () => {
-  it('should contain valid mapping for key requirements', () => {
-    expect(DEV_GUIDE_MAPPING['1.1']).toBeDefined()
-    expect(DEV_GUIDE_MAPPING['2.1']).toBeDefined()
-  })
+describe('DevGuideMapping', () => {
+  it('should have a mapping for 1.1', () => {
+    expect(DevGuideMapping['1.1']).toContain('0x01h-Configuration');
+  });
 
-  it('should map 1.1 to the correct guide section', () => {
-    expect(DEV_GUIDE_MAPPING['1.1']).toContain('0x01h-Configuration')
-  })
+  it('should have a mapping for 2.1', () => {
+    expect(DevGuideMapping['2.1']).toContain('0x02h-Authentication');
+  });
 
-  it('should return undefined for non-existent requirements', () => {
-    const mapping = DEV_GUIDE_MAPPING as Record<string, unknown>
-    expect(mapping['99.99']).toBeUndefined()
-  })
-})
+  it('should return undefined for non-existent keys', () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using any here to safely test the behavior of the mapping with invalid/non-existent keys
+    expect((DevGuideMapping as any)['9.9']).toBeUndefined();
+  });
+});
