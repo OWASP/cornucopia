@@ -22,6 +22,8 @@ defmodule CopiWeb.ApiControllerTest do
   end
 
   test "play_card success", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
     conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
       "game_id" => game.id,
       "player_id" => player.id,
@@ -35,6 +37,7 @@ defmodule CopiWeb.ApiControllerTest do
   end
 
   test "play_card fails if card already played", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
     {:ok, _} = Repo.update(Ecto.Changeset.change(dealt_card, played_in_round: 1))
 
     conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
@@ -75,7 +78,33 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 404)["error"] == "Player not found in this game"
   end
 
+  test "play_card returns 422 when game has not started", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 422)["error"] == "Game has not started yet"
+  end
+
+  test "play_card returns 422 when game has already ended", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, _} = Cornucopia.update_game(game, %{
+      started_at: DateTime.truncate(DateTime.utc_now(), :second),
+      finished_at: DateTime.truncate(DateTime.utc_now(), :second)
+    })
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 422)["error"] == "Game has already ended"
+  end
+
   test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
     {:ok, card2} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "K", description: "desc", misc: "misc",
       edition: "webapp", external_id: "2", language: "en", version: "1",
