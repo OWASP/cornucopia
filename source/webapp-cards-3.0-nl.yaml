@@ -213,7 +213,7 @@ suits:
     id: "SMA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/SMA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Sessiebeheer"
     misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets on Session Management, en Cross Site Request Forgery (CSRF) Prevention"
 -
   id: "AZ"
