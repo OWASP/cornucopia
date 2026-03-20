@@ -1,0 +1,443 @@
+---
+meta:
+  edition: "dbd"
+  component: "cards"
+  language: "EN"
+  version: "1.0"
+suits:
+-
+  id: "SCO"
+  name: "SCOPE"
+  cards:
+  -
+    id: "SCO2"
+    value: "2"
+    url: https://www.digitalbenefits.uk/deck/scope/2
+    desc: "Tommy does not create, publish and maintain publicly all the service assumptions, specifications, constraints, source code, algorithms, formulas, configuration settings, operating instructions and processes"
+  -
+    id: "SCO3"
+    value: "3"
+    url: https://www.digitalbenefits.uk/deck/scope/3
+    desc: "Charlotte designs the service so that claimants themselves have to generate/enter data about personal activities (e.g. job search) or obtain/enter existing data from elsewhere (e.g. care/health services, education providers)"
+  - 
+    id: "SCO4"
+    value: "4"
+    url: https://www.digitalbenefits.uk/deck/scope/4
+    desc: "Sofia undertakes features which require claimants to provide information repeatedly or which is already held (e.g. address, other welfare benefits awarded, tax code)"
+  - 
+    id: "SCO5"
+    value: "5"
+    url: https://www.digitalbenefits.uk/deck/scope/5
+    desc: "Imogen excludes features from the implementation which would a) support claimants submit feedback, and/or formal complaints, and/or mandatory reconsiderations, and/or appeals (or separates them into different channels or isolated systems), and/or b) support government officials to address any of these and redress/corrections promptly and efficiently"
+  - 
+    id: "SCO6"
+    value: "6"
+    url: https://www.digitalbenefits.uk/deck/scope/6
+    desc: "Lucas creates workflows which require claimants to access the system very frequently, regardless of claimants' work, health, life situations and day-to-day events and circumstances"
+  - 
+    id: "SCO7"
+    value: "7"
+    url: https://www.digitalbenefits.uk/deck/scope/7
+    desc: "Joshua constitutes the service which is unavailable using some delivery channels (e.g. digital, telephone, paper/post, face-to-face) and options (e.g. for digital: chat, website app, mobile app, API), or all these are not offered to claimants, or all these do not provide full service, or all these are not supported equally, or all are not reliable or available every hour of every day"
+  - 
+    id: "SCO8"
+    value: "8"
+    url: https://www.digitalbenefits.uk/deck/scope/8
+    desc: "Lilly composes full service provision across multiple channels and multiple digital options, but they are not interoperable (e.g. claimants cannot mix and match as needed) and/or claimants can only use one channel ever"
+  - 
+    id: "SCO9"
+    value: "9"
+    url: https://www.digitalbenefits.uk/deck/scope/9
+    desc: "Daisy implements service provision without spanning temporally all the activities claimants have to do, either a) earlier before a claim is submitted (e.g. discovering what benefits are available, understanding how to apply, copying evidence), and/or b) later after a claim has ended (e.g. producing a record of past payments, providing evidence of past eligibility)"
+  - 
+    id: "SCOX"
+    value: "10"
+    url: https://www.digitalbenefits.uk/deck/scope/10
+    desc: "Stanley omits building in some necessary activities required of claimants while making/maintaining a claim (e.g. between service touchpoints, during touchpoints), and/or the activities are provided inadequately or only partially (e.g. do not span all the situations which can occur like separation from partner but still co-habiting, do not include all aspects of certain personal circumstances like mature student, self-employed)"
+  - 
+    id: "SCOJ"
+    value: "J"
+    url: https://www.digitalbenefits.uk/deck/scope/J
+    desc: "Elliot perpetrates simplistic assumptions about the realities of claimants' everyday lives which makes the calculation and checking of award payments difficult, and/or payments are unstable and difficult to predict"
+  - 
+    id: "SCOQ"
+    value: "Q"
+    url: https://www.digitalbenefits.uk/deck/scope/Q
+    desc: "Elsie executes the system to only permit a single end user per claim (e.g. the claimant, their appointee)"
+  - 
+    id: "SCOK"
+    value: "K"
+    url: https://www.digitalbenefits.uk/deck/scope/K
+    desc: "Bonnie puts into effect a service which does not attempt to identify the best choices for individual claimants, and/or does not optimise each individual's claim, and/or does not warn claimants about potential problems, and/or does not inform claimants of other services they are possibly eligible for, and/or other ways to improve claimants' lives related to the service's policy intent"
+  - 
+    id: "SCOA"
+    value: "A"
+    url: https://www.digitalbenefits.uk/deck/scope/A
+    desc: "You have invented a new implementation decision related to scope of the service that is harmful to claimants"
+    misc: "Download Research Briefing No4 from www.digitalbenefits.uk to read about the PIP Supporters Toolkit, a prototype digital intervention, which explores the effects of extending digitisation to include other claimant activities during the supporting information request stage"
+-
+  id: "ARC"
+  name: "ARCHITECTURE"
+  cards:
+  - 
+    id: "ARC2"
+    value: "2"
+    url: https://www.digitalbenefits.uk/deck/architecture/2
+    desc: "Theo formulates identity verification resulting in limited ways to verify new accounts (e.g. trusted identifiers like other existing government login credentials cannot be used)"
+  - 
+    id: "ARC3"
+    value: "3"
+    url: https://www.digitalbenefits.uk/deck/architecture/3
+    desc: "Oakley pulls the service into a shape which largely or completely excludes the use of paper for any input and output by claimants (e.g. submitting information on paper forms, formatting output for print, sending and receiving formal correspondence by post)"
+  - 
+    id: "ARC4"
+    value: "4"
+    url: https://www.digitalbenefits.uk/deck/architecture/4
+    desc: "Jacob automates input, but partially completed forms/elements are not saved automatically as claimants progress, pause, wait, time out or log out"
+  - 
+    id: "ARC5"
+    value: "5"
+    url: https://www.digitalbenefits.uk/deck/architecture/5
+    desc: "Amelia assembles the system which does not work well on devices with lower resolution or smaller screens (e.g. TVs, mobile phones)"
+  - 
+    id: "ARC6"
+    value: "6"
+    url: https://www.digitalbenefits.uk/deck/architecture/6
+    desc: "Louis forms the system with a reliance on internal or external messaging (e.g. chat, email) to accomplish some or many claimant-related activities, instead of providing dedicated features, leading to more unstructured data"
+  - 
+    id: "ARC7"
+    value: "7"
+    url: https://www.digitalbenefits.uk/deck/architecture/7
+    desc: "Ethan is instrumental in the way claimant identities are not linked to other data held by government, and/or are done so but without consent, and/or are only done so to the detriment of claimants rather than to assist them"
+  - 
+    id: "ARC8"
+    value: "8"
+    url: https://www.digitalbenefits.uk/deck/architecture/8
+    desc: "Zara does not enact any live (synchronous) individual claimant help and support by decision-makers via any channel, and/or only via limited channels, and/or only at limited days/times"
+  - 
+    id: "ARC9"
+    value: "9"
+    url: https://www.digitalbenefits.uk/deck/architecture/9
+    desc: "Lyla makes it necessary for claimants to upgrade their hardware/software too often"
+  - 
+    id: "ARCX"
+    value: "10"
+    url: https://www.digitalbenefits.uk/deck/architecture/10
+    desc: "Florence implements some features requiring a greater degree of reliability, continuity, capacity and on-demand availability of internet connection, than claimants sometimes have"
+  - 
+    id: "ARCJ"
+    value: "J"
+    url: https://www.digitalbenefits.uk/deck/architecture/J
+    desc: "Otis increases the amount of time and/or effort claimants (and/or people/organisations in their support networks) have to expend to make and maintain claims"
+  - 
+    id: "ARCQ"
+    value: "Q"
+    url: https://www.digitalbenefits.uk/deck/architecture/Q
+    desc: "Arlo sets up some features to be only available on request (i.e. claimants have to know about them and then ask to use them), and/or features to be only available dependent upon factors beyond claimants' control (e.g. visible but requiring a government official to enable them)"
+  - 
+    id: "ARCK"
+    value: "K"
+    url: https://www.digitalbenefits.uk/deck/architecture/K
+    desc: "Phoebe frames online accounts so that claimants do not have any access at all to their own prior claims and their related information after they are refused, closed, or ended in some other manner, and regardless of whether the claims were submitted or not"
+  - 
+    id: "ARCA"
+    value: "A"
+    url: https://www.digitalbenefits.uk/deck/architecture/A
+    desc: "You have invented a new implementation decision related to service architecture that is harmful to claimants"
+    misc: "Visit www.digitalbenefits.uk to find academic papers, research briefings and informational posters produced during the Digital Benefits and Disbenefits Project"
+-
+  id: "AGE"
+  name: "AGENCY"
+  cards:
+  - 
+    id: "AGE2"
+    value: "2"
+    url: https://www.digitalbenefits.uk/deck/agency/2
+    desc: "Charles enacts features resulting in the reduction or removal of opportunities for claimants to learn/develop new or improved personal capabilities (e.g. new digital skills, gain bureaucratic competence, increase written language skills)"
+  - 
+    id: "AGE3"
+    value: "3"
+    url: https://www.digitalbenefits.uk/deck/agency/3
+    desc: "Kai produces a system which leads to deterioration or loss of existing knowledge and skills by claimants (e.g. reduced knowledge about the welfare benefit, become less able to use other e-government services)"
+  - 
+    id: "AGE4"
+    value: "4"
+    url: https://www.digitalbenefits.uk/deck/agency/4
+    desc: "Grayson builds the system with limited ways, or making it difficult, for claimants accomplishing tasks to achieve their goal of claiming an award successfully"
+  - 
+    id: "AGE5"
+    value: "5"
+    url: https://www.digitalbenefits.uk/deck/agency/5
+    desc: "Emma enforces a high degree of precision for numerical information provided by claimants (e.g. rental amount, wage income, emergency savings) catching claimants out when they only know the approximate numbers"
+  - 
+    id: "AGE6"
+    value: "6"
+    url: https://www.digitalbenefits.uk/deck/agency/6
+    desc: "Archie enacts restrictions on data input field types, and/or labels, and/or length, and/or choices/options, and/or data filtering which prevent claimants from providing all relevant information correctly, and/or there is no way for claimants to provide some relevant information at all"
+  - 
+    id: "AGE7"
+    value: "7"
+    url: https://www.digitalbenefits.uk/deck/agency/7
+    desc: "Lyra fashions the service in ways that do not allow claimants to undo mis-steps (e.g. following a link, clicking on a button), and/or to check and to correct data mistakes, errors and omissions, and/or to improve information provided previously"
+  - 
+    id: "AGE8"
+    value: "8"
+    url: https://www.digitalbenefits.uk/deck/agency/8
+    desc: "Sophie yields processes which provides claimants with little or no flexibility in timings and deadlines, and/or time limits are unreasonably short for claimants to undertake actions fully and accurately in their situations and circumstances"
+  - 
+    id: "AGE9"
+    value: "9"
+    url: https://www.digitalbenefits.uk/deck/agency/9
+    desc: "Maria brings about occasions where the status of an activity is not updated despite a claimant having completed what they were asked to do (e.g. confirmation of receipt not provided, remains indicated as pending, reminders still being sent, no progression to next step shown)"
+  - 
+    id: "AGEX"
+    value: "10"
+    url: https://www.digitalbenefits.uk/deck/agency/10
+    desc: "Emilia engineers insufficient checks of fraudulent activity directed against claimants (e.g. authentication credential cracking, identity theft, suspicious system activity, payment redirection, additional costs and charges)"
+  - 
+    id: "AGEJ"
+    value: "J"
+    url: https://www.digitalbenefits.uk/deck/agency/J
+    desc: "Rupert cultivates system experience so bad that it puts people off using other digital systems (governmental and/or non-governmental)"
+  - 
+    id: "AGEQ"
+    value: "Q"
+    url: https://www.digitalbenefits.uk/deck/agency/Q
+    desc: "Evie causes the service's government officials not to be held to the same standards of behaviour and censure as claimants (who are penalised for often minor and/or accidental mistakes, errors, omissions, unresponsiveness and delays)"
+  - 
+    id: "AGEK"
+    value: "K"
+    url: https://www.digitalbenefits.uk/deck/agency/K
+    desc: "Carter brings to pass a system that does not prioritise claimants' needs and/or assist claimants to achieve their best outcomes"
+  - 
+    id: "AGEA"
+    value: "A"
+    url: https://www.digitalbenefits.uk/deck/agency/A
+    desc: "You have invented a new implementation decision related to claimant agency that is harmful to claimants"
+    misc: "Visit www.digitalbenefits.uk to view the recommendations and implications arising from the Digital Benefits and Disbenefits Project in Research Briefing No2"
+-
+  id: "TRU"
+  name: "TRUST"
+  cards:
+  - 
+    id: "TRU2"
+    value: "2"
+    url: https://www.digitalbenefits.uk/deck/trust/2
+    desc: "Eden does not announce publicly all pending updated releases, and/or does not make releases publicly available for examination, testing, training and evaluation, and/or does not define what errors, regulations or otherwise are being addressed by each change"
+  - 
+    id: "TRU3"
+    value: "3"
+    url: https://www.digitalbenefits.uk/deck/trust/3
+    desc: "Max does not institute anything for claimants to know the sources of data about themselves imported from elsewhere, and/or provide the ability to view, check and verify it"
+  - 
+    id: "TRU4"
+    value: "4"
+    url: https://www.digitalbenefits.uk/deck/trust/4
+    desc: "Ellie provides no way for claimants to get an overview of all relevant ongoing activities, requests and decisions related to their claim, and/or who is responsible for each"
+  - 
+    id: "TRU5"
+    value: "5"
+    url: https://www.digitalbenefits.uk/deck/trust/5
+    desc: "Harvey establishes inadequate exposure of what information is being used to make decisions (e.g. sources, values), and how it has affected decisions (e.g. breaking a rule, crossing a threshold), such as regarding eligibility, payment award amount, penalties"
+  - 
+    id: "TRU6"
+    value: "6"
+    url: https://www.digitalbenefits.uk/deck/trust/6
+    desc: "Ralph commits processes which makes it more obvious to other people that a claimant is in poverty, and/or is claiming welfare benefits, and/or has some disabilities or health conditions"
+  - 
+    id: "TRU7"
+    value: "7"
+    url: https://www.digitalbenefits.uk/deck/trust/7
+    desc: "Edith effectuates a service which does not have a complete, immutable and accessible record of all service interactions, events, communications, data changes, file changes, and status changes, across all delivery channels/options, and/or the records are incomplete, inadequate or inaccurate in some way"
+  - 
+    id: "TRU8"
+    value: "8"
+    url: https://www.digitalbenefits.uk/deck/trust/8
+    desc: "Ava wrongly flags factually correct data input by claimants as suspicious, casting doubt on claimants' honesty and diligence"
+  - 
+    id: "TRU9"
+    value: "9"
+    url: https://www.digitalbenefits.uk/deck/trust/9
+    desc: "Maeve enables other users of the system to accidentally or maliciously cause harm to one or more claimants (e.g. inadequate access control, not preventing the misuse of valid functionality, including functionality unrelated to claimants' use the service, testing changes in the live environment)"
+  - 
+    id: "TRUX"
+    value: "10"
+    url: https://www.digitalbenefits.uk/deck/trust/10
+    desc: "Ezra computerises the service but fails to prevent people external to the system from using it to accidentally or maliciously harm (e.g. physical, mental, reputation, control, financial) one, some or more claimants"
+  - 
+    id: "TRUJ"
+    value: "J"
+    url: https://www.digitalbenefits.uk/deck/trust/J
+    desc: "Jesse deploys code or process or documentation bugs, inconsistencies, deviations, errors, failures, faults or vulnerabilities which harm claimants"
+  - 
+    id: "TRUQ"
+    value: "Q"
+    url: https://www.digitalbenefits.uk/deck/trust/Q
+    desc: "Grace implements features and processes which assume and/or treat claimants as undeserving, and/or dishonest and/or lazy and/or cheating and/or behaving irresponsibly"
+  - 
+    id: "TRUK"
+    value: "K"
+    url: https://www.digitalbenefits.uk/deck/trust/K
+    desc: "Molly effects a design which leads to negative publicity about the service, adversely affecting the service's reputation (e.g. difficult to claim, easily penalised, not worth claiming, increased surveillance, security or privacy breaches"
+  - 
+    id: "TRUA"
+    value: "A"
+    url: https://www.digitalbenefits.uk/deck/trust/A
+    desc: "You have invented a new implementation decision related to trust that is harmful to claimants"
+    misc: "View or download informational posters from www.digitalbenefits.uk which were produced during the Digital Benefits and Disbenefits Project and related research"
+-
+  id: "POR"
+  name: "POROSITY"
+  cards:
+  - 
+    id: "POR2"
+    value: "2"
+    url: https://www.digitalbenefits.uk/deck/porosity/2
+    desc: "Luna completes the service without creating, publishing, documenting, maintaining and supporting integration points, such as a public API, messaging protocol or batch data processes, resulting in the system being isolated from wider community assets"
+  - 
+    id: "POR3"
+    value: "3"
+    url: https://www.digitalbenefits.uk/deck/porosity/3
+    desc: "Teddy expressly discourages third party service integration either overtly (e.g. banning such integrations in terms of use, making integration illegal) or covertly (e.g. extensibility and customisability not promoted, blaming integrations for problems, failing to maintain integration points such as an API, deliberately breaking integrations)"
+  - 
+    id: "POR4"
+    value: "4"
+    url: https://www.digitalbenefits.uk/deck/porosity/4
+    desc: "Maisie contrives to make integrations more difficult than necessary for third parties to extend and/or customise the service (e.g. the use of randomised or inconsistent URL paths or page object names, dynamic code included at run-time, use of unstructured data, customised data encoding and decoding, changing page structure or content without notification, use of anti-web browser extension techniques, blocking screen-sharing)"
+  - 
+    id: "POR5"
+    value: "5"
+    url: https://www.digitalbenefits.uk/deck/porosity/5
+    desc: "Joseph does not recognise how third party assistance or integrations are vital to support continued adoption and use of the service by claimants, and allows those to deteriorate, fail, be deprecated or be retired"
+  - 
+    id: "POR6"
+    value: "6"
+    url: https://www.digitalbenefits.uk/deck/porosity/6
+    desc: "Oliver excludes and/or prevents the inclusion of generic third party static guidance and help for claimants (e.g. general guidance)"
+  - 
+    id: "POR7"
+    value: "7"
+    url: https://www.digitalbenefits.uk/deck/porosity/7
+    desc: "Lara builds the service without capability for incorporating individually personalised third party static guidance and help for claimants (e.g. Individual textual reminder notes, selected video how-to guides)"
+  - 
+    id: "POR8"
+    value: "8"
+    url: https://www.digitalbenefits.uk/deck/porosity/8
+    desc: "Harry fulfils the service but without the possibility for including live (synchronous) third party guidance and help (e.g. live chat, shared screen)"
+  - 
+    id: "POR9"
+    value: "9"
+    url: https://www.digitalbenefits.uk/deck/porosity/9
+    desc: "Muhammad conceives no way for claimants to selectively transfer, export, send or otherwise move data already in the system to someone or somewhere else, and/or the data is only made available in unstructured formats"
+  - 
+    id: "PORX"
+    value: "10"
+    url: https://www.digitalbenefits.uk/deck/porosity/10
+    desc: "Samuel puts into practice a system without supporting, or making it very difficult, for third parties to access the service together with claimants and/or on their behalf (e.g. shared-use, assisted use, indirect intermediated use, proxy use), and to do so regularly, periodically, occasionally or as a one-off"
+  - 
+    id: "PORJ"
+    value: "J"
+    url: https://www.digitalbenefits.uk/deck/porosity/J
+    desc: "Beatrice puts together provision for third party access to the system, but it lacks sufficient granular controls for claimants to define access timing, duration, features and view/add/update permissions, logging and monitoring"
+  - 
+    id: "PORQ"
+    value: "Q"
+    url: https://www.digitalbenefits.uk/deck/porosity/Q
+    desc: "Matilda delivers the service without prompts for claimants explaining when, why or how to get professional independent advice, and/or without outlining the risks involved of seeking such advice or not seeking such advice"
+  - 
+    id: "PORK"
+    value: "K"
+    url: https://www.digitalbenefits.uk/deck/porosity/K
+    desc: "Jude digitises the service which does not recognise, promote and support the synergistic effects wider ecosystems can offer claimants"
+  - 
+    id: "PORA"
+    value: "A"
+    url: https://www.digitalbenefits.uk/deck/porosity/A
+    desc: "You have invented a new implementation decision related to porosity of the system that is harmful to claimants"
+    misc: "Read Research Briefing No3, available from www.digitalbenefits.uk, to find out about the Universal Credit web browser eXtension (UCX), a prototype digital intervention to combat some harms, which explores the positive and negative effects on claimants of increasing porosity"
+-
+  id: "COR"
+  name: "CORNUCOPIA"
+  cards:   
+  - 
+    id: "COR2"
+    value: "2"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/2
+    desc: "Hannah applies styling which is uninspiring and/or insipid and/or feels institutional"
+  - 
+    id: "COR3"
+    value: "3"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/3
+    desc: "Reggie does not build or maintain the system to comply with commonly used or applicable conventions, guidelines, standards or rules"
+  - 
+    id: "COR4"
+    value: "4"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/4
+    desc: "Orla includes administrative, bureaucratic, legal, sectorial or other unfamiliar terminology in the wording which is not properly explained to claimants"
+  - 
+    id: "COR5"
+    value: "5"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/5
+    desc: "Lucy does not build in adequate claimant instructions, help and support, and/or what is included lacks explanation, and/or is misleading, and/or has gaps, and/or is confusing, and/or is inaccurate"
+  - 
+    id: "COR6"
+    value: "6"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/6
+    desc: "Michael provides the written/spoken content to be available in few formats/languages, and/or it is unavailable as narrated, easy read, simple English, braille and in other common languages, and/or it is difficult or impossible for others to convert or change the content of these"
+  - 
+    id: "COR7"
+    value: "7"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/7
+    desc: "Ella's layout/styling/formatting of content is difficult for claimants, and/or there are no simple way for claimants to change these to something more suitable for their own ongoing, or immediate, needs"
+  - 
+    id: "COR8"
+    value: "8"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/8
+    desc: "Yusuf accomplishes some service outputs only as static files (e.g. formal letters as PDFs) without making these outputs available in other formats (e.g. plain text, audio), and/or without providing easy ways for claimants to export these outputs into other formats themselves"
+  - 
+    id: "COR9"
+    value: "9"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/9
+    desc: "Willow generates notifications to claimants which do not include any indication of topic, and/or importance and/or urgency, and do not include the full message, call to action and/or link to complete any required action, and/or cannot be customised (e.g. types, content, frequency, time of day) and/or consumed by other applications"
+  - 
+    id: "CORX"
+    value: "10"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/10
+    desc: "Ollie brings off claimant interactions which reflect bureaucratic processes rather than claimants' own mental models and understanding"
+  - 
+    id: "CORJ"
+    value: "J"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/J
+    desc: "Eleanor generalises the structure and navigation for all claimants, rather than making it reflect the different situations and circumstances of individuals, and/or claimants cannot customise structure and navigation themselves"
+  - 
+    id: "CORQ"
+    value: "Q"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/Q
+    desc: "Noah implements features with a lack of sufficient warnings or confirmatory steps, especially around the most critical choices and actions (i.e. those having a major effect on eligibility, award level, payment or penalty)"
+  - 
+    id: "CORK"
+    value: "K"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/K
+    desc: "Mohammed formalises the system to provide increased availability and offer apparent simplicity, but which consequently hides underlying complexities, encouraging people to make claims immediately and directly online, when they ought to prepare more and possibly seek advice first"
+  - 
+    id: "CORA"
+    value: "A"
+    url: https://www.digitalbenefits.uk/deck/cornucopia/A
+    desc: "You have invented a new implementation decision harmful to claimants that is related to any of the categories in the Taxonomy of Harms"
+    misc: "Get the Research Briefing No1 download from www.digitalbenefits.uk to browse the full claimant-focused Taxonomy of Harms"
+-
+  id: "WC"
+  name: "WILD CARD"
+  cards:
+  - 
+    id: "JOA"
+    value: "Joker"
+    url: https://www.digitalbenefits.uk/deck/joker/1
+    desc: "Edward makes the service in a manner culminating in it being more difficult to achieve the overarching policy intent (e.g. harder to reduce poverty) or to cause the issue addressed by the policy to become worse (e.g. increases poverty)"
+    misc: "Digital Benefits and Disbenefits Cornucopia is an output from Colin Watson's doctoral human-computer interaction (HCI) research project, undertaken between 2019 and 2023 at Newcastle University, supervised by Dr Ahmed Kharrufa (Open Lab) and Professor Ruth McAreavey (Sociology); it was funded by the UK Research and Innovation Engineering and Physical Sciences Research Council Centre for Doctoral Training in Digital Civics (EP/L016176/1)"
+  - 
+    id: "JOB"
+    value: "Joker"
+    url: https://www.digitalbenefits.uk/deck/joker/2
+    desc: "Ruby influences the service in a way that increases social exclusion and/or digital exclusion"
+    misc: "The Digital Benefits and Disbenefits Project would not have been possible without the special knowledge and experience of the participants who were primarily welfare benefit claimants, but also others such as those providing advice, support and guidance about social protection services"
