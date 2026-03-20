@@ -10,7 +10,7 @@ Envision a scenario where Sven capitalizes on the shortcomings in temporary pass
 
 ### Example
 
-Sven discovers that a company’s system issues temporary passwords to users which do not expire quickly and do not require a change upon first use. He intercepts or guesses these temporary passwords and gains access to user accounts, exploiting the extended period these passwords remain valid and the lack of a mandatory password reset on initial login.
+Sven discovers that a company’s system issues temporary passwords and/or MFA codes to users which do not expire quickly and do not require a change upon first use. He intercepts or guesses these temporary passwords/codes and gains access to user accounts, exploiting the extended period these remain valid and the lack of a mandatory password reset on initial login.
 
 ## Threat Modeling
 

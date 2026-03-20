@@ -8,6 +8,8 @@ Imagine a situation where Graham takes advantage of a system’s flawed session 
 
 3. **Complex Log Out Process:** The log out function is not easily accessible or user-friendly, leading to users inadvertently leaving sessions active.
 
+4. **No Session Logout when Authentication Credentials are Changed:** The system does not automatically log out users from all sessions when they change their authentication credentials, such as passwords or MFA methods.
+
 ### Example
 
 Graham targets a web application where users find it difficult to locate the log out button due to its obscure placement. Adam, a user of the application, believes he has exited the session, but in reality, the session remains active. Graham, seizing this opportunity, accesses the still-active session from Adam's device or a public computer Adam used, gaining unauthorized access to Adam’s account and sensitive information.
@@ -35,5 +37,6 @@ Users should be able to log out from any pages protected by access control (auth
 1. Ensure the log out function is clearly visible and easily accessible on all interfaces of the application.
 2. Design the log out process to completely terminate the session on the server side, not just on the client device.
 3. Conduct user experience testing to ensure the log out process is intuitive and effective.
+4. Implement automatic session termination when users change their authentication credentials to stop ongoing abuse from already stolen sessions.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
