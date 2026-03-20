@@ -238,7 +238,7 @@ suits:
     id: "AZ5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AZ5"
-    desc: "Chad kan toegang krijgen tot bronnen (inclusief services, processen, AJAX, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie, of als gevolg van overmatigeprivileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
+    desc: "Chad kan toegang krijgen tot bronnen (inclusief services, processen, AJAX, video, afbeeldingen, documenten, tijdelijke bestanden, sessiegegevens, systeemeigenschappen, configuratiegegevens, registerinstellingen, logboeken) die hij niet zou moeten kunnen vanwege ontbrekende autorisatie, of als gevolg van overmatige privileges (bijvoorbeeld het niet gebruiken van het principe van de minste privileges)"
   -
     id: "AZ6"
     value: "6"
@@ -263,7 +263,7 @@ suits:
     id: "AZX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AZX"
-    desc: "Richard kan de gecentraliseerde autorisatiecontroles omzeilen omdat ze niet volledig worden gebruikt voor alle interacties, of omdat ze zijn misgeconfigureerd, of omdat de applicatie niet een gecentraliseerd standaard gebruikt, getest, bewezen, aanbevolen en goedgekeurd autorisatiemodule/framework/service"
+    desc: "Richard kan de gecentraliseerde autorisatiecontroles omzeilen omdat ze niet volledig worden gebruikt voor alle interacties, of omdat ze zijn misgeconfigureerd, of omdat de applicatie geen gecentraliseerde, gestandaardiseerde, geteste, bewezen, aanbevolen en goedgekeurde autorisatiemodule/framework/service gebruikt"
   -
     id: "AZJ"
     value: "J"
@@ -278,12 +278,12 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "Ryan kan de autorisatiecontroles en permissies beïnvloeden of wijzigen en kan daarom deze omzeilen"
+    desc: "Adrian kan de autorisatiecontroles en permissies beïnvloeden of wijzigen en kan daarom deze omzeilen"
   -
     id: "AZA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/AZA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Autorisatie"
     misc: "Lees meer over dit onderwerp in OWASP's Development and Testing Guides"
 -
   id: "CR"
@@ -353,7 +353,7 @@ suits:
     id: "CRA"
     value: "A"
     url: "https://cornucopia.owasp.org/cards/CRA"
-    desc: "Je hebt een nieuwe aanval van elk mogelijk type uitgevonden"
+    desc: "Je hebt een nieuwe aanval uitgevonden tegen Cryptografie"
     misc: "Lees meer over dit onderwerp in OWASP's gratis Cheat Sheets on Cryptographic Storage, en Transport Layer Protection"
 -
   id: "C"
@@ -393,7 +393,7 @@ suits:
     id: "C8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/C8"
-    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie periodiek opnieuw is gecontroleerd en beveiligingspatches zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
+    desc: "David kan de applicatie omzeilen om toegang te krijgen tot gegevens omdat de netwerk- en hostinfrastructuur en ondersteunende services/applicaties niet veilig zijn geconfigureerd, de configuratie niet periodiek opnieuw is gecontroleerd en beveiligingspatches niet zijn toegepast, of de gegevens lokaal zijn opgeslagen, of de gegevens zijn niet fysiek beschermd"
   -
     id: "C9"
     value: "9"
