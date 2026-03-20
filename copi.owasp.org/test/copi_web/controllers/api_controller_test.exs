@@ -58,6 +58,7 @@ defmodule CopiWeb.ApiControllerTest do
   end
 
   test "play_card returns 404 when dealt card not found for player", %{conn: conn, game: game} do
+    {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})
     {:ok, card2} = Cornucopia.create_card(%{
@@ -124,6 +125,7 @@ defmodule CopiWeb.ApiControllerTest do
   end
 
   test "play_card returns 404 when player_id doesn't belong to game", %{conn: conn, game: game} do
+    {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
     conn = put(conn, "/api/games/#{game.id}/players/99999/card", %{
       "game_id" => game.id,
       "player_id" => "99999",
