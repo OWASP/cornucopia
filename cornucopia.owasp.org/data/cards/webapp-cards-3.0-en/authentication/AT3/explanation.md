@@ -1,6 +1,6 @@
 ## Scenario: Muhammad’s Secret Acquisition
 
-Imagine a scenario where Muhammad, a skilled eavesdropper, obtains a user's password or other confidential information like security questions. He exploits various vulnerabilities:
+Imagine a scenario where Muhammad, a skilled eavesdropper, obtains a user's password or other confidential information like MFA codes (stored in your password manager without password protection) or your finger print. He exploits various vulnerabilities:
 
 1. **Observation During Entry:** Muhammad watches as a user enters their password.
 

@@ -2,7 +2,7 @@
 
 Imagine a situation where Claudia, exploiting insufficient authentication protocols, gains access to critical functions within a system. This occurs due to:
 
-1. **Weak Authentication Standards:** The system lacks robust authentication methods, such as two-factor authentication (2FA), relying only on basic password entry.
+1. **Weak Authentication Standards:** The system lacks robust authentication methods, such as passkeys or two-factor authentication (2FA), relying only on basic password entry or uses email as a MFA method.
 
 2. **Absence of Re-authentication:** There's no requirement for users to re-authenticate or confirm their identity for accessing or performing sensitive or critical operations.
 

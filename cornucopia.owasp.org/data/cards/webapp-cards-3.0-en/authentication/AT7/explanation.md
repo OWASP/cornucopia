@@ -10,7 +10,7 @@ Imagine a situation where Cecilia, employing brute force and dictionary attack t
 
 ### Example
 
-Cecilia targets an online platform that lacks account lockout policies and has weak password requirements. She uses automated tools to repeatedly attempt logins on various accounts, trying combinations from commonly used passwords and dictionary words. Due to the absence of complexity and length requirements for passwords, and no system to detect or block repeated failed attempts, she eventually succeeds in guessing the correct credentials for several accounts.
+Cecilia targets an online platform that lacks account lockout policies and has weak authentication requirements. She uses automated tools to repeatedly attempt logins on various accounts, trying combinations from commonly used passwords and dictionary words. Due to the absence of complexity and length requirements for passwords, and no system to detect or block repeated failed attempts, she eventually succeeds in guessing the correct credentials for several accounts.
 
 ## Threat Modeling
 
