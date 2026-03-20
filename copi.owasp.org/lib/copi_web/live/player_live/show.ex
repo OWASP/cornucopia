@@ -82,13 +82,13 @@ defmodule CopiWeb.PlayerLive.Show do
       if last_round?(game) do
         Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
       end
+
+      {:ok, updated_game} = Game.find(game.id)
+
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+      {:noreply, assign(socket, :game, updated_game)}
     end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
   end
 
   @impl true
