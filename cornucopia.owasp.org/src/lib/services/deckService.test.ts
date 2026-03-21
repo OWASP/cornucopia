@@ -325,9 +325,50 @@ suits:
     describe('getCardDataForEditionVersionLang', () => {
         let deckService: DeckService;
 
+        // A robust mock content that satisfies both string IDs and index arrays
+        const robustMockYaml = `
+suits:
+  - id: suit1
+    name: First Suit
+    cards:
+      - id: FIRST-CARD
+        value: A
+        desc: First card
+  - id: suit2
+    name: Last Suit
+    cards:
+      - id: LAST-CARD
+        value: K
+        desc: Last card
+  - id: dv
+    name: Data Validation
+    cards:
+      - id: DV-A
+        value: A
+        desc: Test card description
+  - id: at
+    name: Authentication
+    cards:
+      - id: AT-K
+        value: K
+        desc: Auth card
+`;
+
+        const robustMockMapping = {
+            suits: {
+                '0': { name: 'Data Validation' },
+                '1': { name: 'Authentication' },
+                'dv': { name: 'Data Validation' },
+                'at': { name: 'Authentication' },
+                'suit1': { name: 'First Suit' },
+                'suit2': { name: 'Last Suit' }
+            }
+        };
+
         beforeEach(() => {
             deckService = new DeckService();
             vi.clearAllMocks();
+            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(robustMockMapping as any);
         });
 
         it('should return empty map if card file does not exist', () => {
@@ -337,38 +378,20 @@ suits:
             expect(result.size).toBe(0);
         });
 
-        it.skip('should load and parse card data correctly', () => {
+        it('should load and parse card data correctly', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
-            const mockYamlContent = `
-suits:
-  - id: dv
-    name: Data Validation
-    cards:
-      - id: DV-A
-        value: A
-        desc: Test card description
-`;
-
-            const mockTechnicalNote = '---\n---\nTechnical note content';
-            const mockExplanation = '---\n---\nExplanation content';
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation);
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'Data Validation' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                return '---\n---\nMocked Content';
+            });
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
-            expect(result.size).toBe(1);
+            // Should load the 4 cards from our robust mock
+            expect(result.size).toBe(4);
             const card = result.get('DV-A');
             expect(card).toBeDefined();
             expect(card?.id).toBe('DV-A');
@@ -378,79 +401,31 @@ suits:
             expect(card?.suitName).toBe('Data Validation');
         });
 
-        it.skip('should use English directory if language directory does not exist', () => {
+        it('should use English directory if language directory does not exist', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir)
                 .mockReturnValueOnce(false)  // Spanish dir doesn't exist
                 .mockReturnValueOnce(true);  // English dir exists
 
-            const mockYamlContent = `
-suits:
-  - id: at
-    name: Authentication
-    cards:
-      - id: AT-K
-        value: K
-        desc: Auth card
-`;
-
-            const mockTechnicalNote = '---\n---\nTech note';
-            const mockExplanation = '---\n---\nExplanation';
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation);
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'Authentication' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                return '---\n---\nMocked Content';
+            });
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'es');
-            expect(result.size).toBe(1);
+            expect(result.size).toBe(4);
         });
 
-        it.skip('should handle navigation for first card', () => {
+        it('should handle navigation for first card', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
-            const mockYamlContent = `
-suits:
-  - id: suit1
-    name: First Suit
-    cards:
-      - id: FIRST-CARD
-        value: A
-        desc: First card
-  - id: suit2
-    name: Last Suit
-    cards:
-      - id: LAST-CARD
-        value: K
-        desc: Last card
-`;
-
-            const mockTechnicalNote = '---\n---\nContent';
-            const mockExplanation = '---\n---\nContent';
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValue(mockYamlContent)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation);
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'First Suit' },
-                    '1': { name: 'Last Suit' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                return '---\n---\nMocked Content';
+            });
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -458,44 +433,15 @@ suits:
             expect(firstCard?.prevous).toBe('LAST-CARD');
         });
 
-        it.skip('should handle navigation for last card', () => {
+        it('should handle navigation for last card', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
-            const mockYamlContent = `
-suits:
-  - id: suit1
-    name: First Suit
-    cards:
-      - id: FIRST-CARD
-        value: A
-        desc: First card
-  - id: suit2
-    name: Last Suit
-    cards:
-      - id: LAST-CARD
-        value: K
-        desc: Last card
-`;
-
-            const mockTechnicalNote = '---\n---\nContent';
-            const mockExplanation = '---\n---\nContent';
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValue(mockYamlContent)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation);
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'First Suit' },
-                    '1': { name: 'Last Suit' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                return '---\n---\nMocked Content';
+            });
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -503,32 +449,16 @@ suits:
             expect(lastCard?.next).toBe('FIRST-CARD');
         });
 
-        it.skip('should skip card if technical note file is missing', () => {
+        it('should skip card if technical note file is missing', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
-            const mockYamlContent = `
-suits:
-  - id: suit1
-    name: Test Suit
-    cards:
-      - id: CARD-1
-        value: A
-        desc: Card 1
-`;
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockImplementationOnce(() => {
-                    throw new Error('File not found');
-                });
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'Test Suit' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                if (pathStr.includes('technical') || pathStr.includes('note')) throw new Error('File not found');
+                return '---\n---\nMocked Content';
+            });
 
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -540,35 +470,16 @@ suits:
             consoleErrorSpy.mockRestore();
         });
 
-        it.skip('should skip card if explanation file is missing', () => {
+        it('should skip card if explanation file is missing', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
-            const mockYamlContent = `
-suits:
-  - id: suit1
-    name: Test Suit
-    cards:
-      - id: CARD-1
-        value: A
-        desc: Card 1
-`;
-
-            const mockTechnicalNote = '---\n---\nContent';
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockImplementationOnce(() => {
-                    throw new Error('File not found');
-                });
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'Test Suit' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                if (pathStr.includes('explanation')) throw new Error('File not found');
+                return '---\n---\nMocked Content';
+            });
 
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -580,34 +491,15 @@ suits:
             consoleErrorSpy.mockRestore();
         });
 
-        it.skip('should cache loaded cards', () => {
+        it('should cache loaded cards', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
-            const mockYamlContent = `
-suits:
-  - id: suit1
-    name: Test Suit
-    cards:
-      - id: CARD-1
-        value: A
-        desc: Card 1
-`;
-
-            const mockTechnicalNote = '---\n---\nContent';
-            const mockExplanation = '---\n---\nContent';
-
-            vi.mocked(fs.readFileSync)
-                .mockReturnValueOnce(mockYamlContent)
-                .mockReturnValueOnce(mockTechnicalNote)
-                .mockReturnValueOnce(mockExplanation);
-
-            const mockMapping = {
-                suits: {
-                    '0': { name: 'Test Suit' }
-                }
-            };
-            MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(mockMapping as any);
+            vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
+                const pathStr = String(pathArgs).toLowerCase();
+                if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
+                return '---\n---\nMocked Content';
+            });
 
             const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
