@@ -85,12 +85,7 @@
   end
 
   defp valid_name?(name) when is_binary(name) and name != "" do
-    sanitized = sanitize_name(name)
-    
-    # Check if the sanitized version is different from original (indicating dangerous content was removed)
-    sanitized != name or
-    # Or check if the sanitized version contains only safe characters
-    String.match?(sanitized, ~r/^[a-zA-ZÀ-ÖØ-öø-ÿĀ-ž0-9\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uFF66-\uFF9F\u3400-\u4DBF\uF900-\uFAFF\u0900-\u097F\u0621-\u064A\u0660-\u0669\u0E00-\u0E7F\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF\uA640-\uA69F\u0370-\u03FF\u1F00-\u1FFF\s\-._'(),:;!?&]+$/u)
+    String.match?(name, ~r/^[\u0600-\u06FF\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\uFDF2\uFDF3\uFDF4\uFDFD\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uFF66-\uFF9Fー々〆〤\u3400-\u4DBF\uF900-\uFAFF\u0900-\u097F\u0621-\u064A\u0660-\u0669\u4E00-\u9FFF\u0E00-\u0E7F«»฿ฯ๏๚๛\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF\uA640-\uA69FЮ́ю́Я́я́\u0370-\u03FF\u1F00-\u1FFFA-Za-zÀ-ÖØ-öø-ÿĀ-ž0-9._\--ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي ًٌٍَُِّْٰﷲﷴﷺﷻ ٠١٢٣٤٥٦٧٨٩ \s]+$/u)
   end
 
   defp valid_name?(_), do: false
