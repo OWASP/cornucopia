@@ -41,6 +41,44 @@ defmodule Copi.CornucopiaTest do
       assert {:error, %Ecto.Changeset{}} = Cornucopia.create_game(@invalid_attrs)
     end
 
+    test "create_game/1 rejects XSS payloads in name" do
+      # Test various XSS payloads
+      xss_payloads = [
+        "<script>alert('xss')</script>",
+        "javascript:alert('xss')",
+        "<img src=x onerror=alert('xss')>",
+        "onload=alert('xss')",
+        "<iframe src='javascript:alert(1)'></iframe>",
+        "data:text/html,<script>alert('xss')</script>"
+      ]
+
+      for payload <- xss_payloads do
+        attrs = %{name: payload, edition: "webapp"}
+        assert {:error, %Ecto.Changeset{}} = Cornucopia.create_game(attrs)
+      end
+    end
+
+    test "create_game/1 accepts safe names" do
+      safe_names = [
+        "My Game Session",
+        "Security Review 2024",
+        "Test Game-123",
+        "O'Connor's Security Game",
+        "Game \"Secure\" Session",
+        "لعبة الأمن",
+        "安全游戏",
+        "Игра Безопасности",
+        "Juego de Seguridad",
+        "Sécurité de Jeu",
+        "セキュリティゲーム"
+      ]
+
+      for name <- safe_names do
+        attrs = %{name: name, edition: "webapp"}
+        assert {:ok, %Game{name: ^name}} = Cornucopia.create_game(attrs)
+      end
+    end
+
     test "update_game/2 with valid data updates the game" do
       game = game_fixture()
       assert {:ok, %Game{} = game} = Cornucopia.update_game(game, @update_attrs)
@@ -142,6 +180,46 @@ defmodule Copi.CornucopiaTest do
 
     test "create_player/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Cornucopia.create_player(@invalid_attrs)
+    end
+
+    test "create_player/1 rejects XSS payloads in name" do
+      # Test various XSS payloads
+      xss_payloads = [
+        "<script>alert('xss')</script>",
+        "javascript:alert('xss')",
+        "<img src=x onerror=alert('xss')>",
+        "onload=alert('xss')",
+        "<iframe src='javascript:alert(1)'></iframe>",
+        "data:text/html,<script>alert('xss')</script>"
+      ]
+
+      for payload <- xss_payloads do
+        attrs = %{name: payload, game_id: "00000000000000000000000001"}
+        assert {:error, %Ecto.Changeset{}} = Cornucopia.create_player(attrs)
+      end
+    end
+
+    test "create_player/1 accepts safe names" do
+      safe_names = [
+        "John Doe",
+        "O'Connor",
+        "Jane Smith-Anderson",
+        "Player 123",
+        "Test.User@domain.com",
+        "العربية",
+        "中文",
+        "Русский",
+        "Español",
+        "Français",
+        "日本語",
+        "العربية-English",
+        "测试游戏"
+      ]
+
+      for name <- safe_names do
+        attrs = %{name: name, game_id: "00000000000000000000000001"}
+        assert {:ok, %Player{name: ^name}} = Cornucopia.create_player(attrs)
+      end
     end
 
     test "update_player/2 with valid data updates the player" do
