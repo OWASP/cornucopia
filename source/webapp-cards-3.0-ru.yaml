@@ -217,7 +217,7 @@ suits:
     misc: "Узнайте больше об этой теме в статьях Session Management и Cross Site Request Forgery (CSRF) Prevention из серии Cheat Sheets от OWASP"
 -
   id: "AZ"
-  name: "КОНТРОЛЬ ДОСТУПА"
+  name: "АВТОРИЗАЦИЯ"
   cards:
   -
     id: "AZ2"
