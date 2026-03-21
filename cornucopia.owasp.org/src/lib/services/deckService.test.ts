@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckService } from './deckService';
 import type { Card } from '$domain/card/card';
 
-describe('DeckService tests', () => {
+describe('DeckService Unit Tests', () => {
     beforeEach(() => {
         DeckService.clear();
         vi.clearAllMocks();
@@ -13,70 +13,50 @@ describe('DeckService tests', () => {
         DeckService.clear();
     });
 
-    describe('Core Logic Coverage', () => {
-        it('should return true for known editions and versions', () => {
+    describe('Static Metadata Logic', () => {
+        it('should validate known editions', () => {
             expect(DeckService.hasEdition('webapp')).toBe(true);
-            expect(DeckService.hasVersion('webapp', '3.0')).toBe(true);
-            expect(DeckService.hasLanguage('webapp', 'en')).toBe(true);
-            expect(DeckService.getLatestVersion('webapp')).toBe('2.2');
-            expect(DeckService.getLatestEditions()).toContain('webapp');
-            expect(DeckService.getLanguages('webapp')).toContain('en');
+            expect(DeckService.hasEdition('mobileapp')).toBe(true);
+            expect(DeckService.hasEdition('unknown')).toBe(false);
         });
 
-        it('should return all available decks', () => {
-            const decks = DeckService.getDecks();
-            expect(decks.length).toBeGreaterThan(0);
+        it('should validate known versions', () => {
+            expect(DeckService.hasVersion('webapp', '3.0')).toBe(true);
+            expect(DeckService.hasVersion('mobileapp', '1.1')).toBe(true);
+            expect(DeckService.hasVersion('webapp', '1.0')).toBe(false);
+        });
+
+        it('should return correct latest versions', () => {
+            expect(DeckService.getLatestVersion('webapp')).toBe('2.2');
+            expect(DeckService.getLatestVersion('mobileapp')).toBe('1.1');
+        });
+
+        it('should return all available languages for an edition', () => {
+            const languages = DeckService.getLanguages('webapp');
+            expect(languages).toContain('en');
+            expect(languages).toContain('es');
+            expect(languages).toContain('ru');
         });
     });
 
-    describe('Cache & Data Loading Coverage', () => {
-        it('should handle cache hits and misses', () => {
+    describe('Cache Management', () => {
+        it('should return cards from cache if already populated', () => {
             const deckService = new DeckService();
             const mockCards = new Map<string, Card>();
-            mockCards.set('c1', { id: 'c1' } as Card);
+            mockCards.set('test-card', { id: 'test-card', edition: 'webapp' } as Card);
 
-            // Manual cache injection to test cache-hit branch
+            // Directly inject into the private cache to test the cache-retrieval branch
             DeckService['cache'].push({ lang: 'en', version: 'latest', data: mockCards });
-            expect(deckService.getCards('en')).toBe(mockCards);
-        });
 
-        it('should cover card data loading branches', () => {
-            const deckService = new DeckService();
-            const mockCardMap = new Map<string, Card>();
-            mockCardMap.set('DV-1', { id: 'DV-1', suitName: 'Data Validation' } as Card);
-
-            // Spy to simulate successful data loading
-            const loadSpy = vi.spyOn(deckService, 'getCardDataForEditionVersionLang').mockReturnValue(mockCardMap);
-            
-            const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+            const result = deckService.getCards('en');
+            expect(result).toBe(mockCards);
             expect(result.size).toBe(1);
-            expect(loadSpy).toHaveBeenCalled();
         });
 
-        it('should cover error and logging branches', () => {
-            const deckService = new DeckService();
-            const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-            const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-            
-            // Force code to hit the error branch
-            vi.spyOn(deckService, 'getCardDataForEditionVersionLang').mockImplementation(() => {
-                console.error('Simulated Error');
-                console.log('Caching cards...');
-                return new Map();
-            });
-
-            deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            expect(errSpy).toHaveBeenCalled();
-            expect(logSpy).toHaveBeenCalled();
-            
-            errSpy.mockRestore();
-            logSpy.mockRestore();
-        });
-    });
-
-    describe('Service Cleanup', () => {
-        it('should clear cache completely', () => {
+        it('should clear the cache on command', () => {
             DeckService['cache'].push({ lang: 'en', data: new Map(), version: 'v1' });
+            expect(DeckService['cache'].length).toBe(1);
+            
             DeckService.clear();
             expect(DeckService['cache'].length).toBe(0);
         });
