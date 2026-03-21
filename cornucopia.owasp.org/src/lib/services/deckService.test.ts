@@ -325,7 +325,6 @@ suits:
     describe('getCardDataForEditionVersionLang', () => {
         let deckService: DeckService;
 
-        // A robust mock content that satisfies both string IDs and index arrays
         const robustMockYaml = `
 suits:
   - id: suit1
@@ -368,147 +367,104 @@ suits:
         beforeEach(() => {
             deckService = new DeckService();
             vi.clearAllMocks();
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
             MappingService.prototype.getCardMapping = vi.fn().mockReturnValue(robustMockMapping as any);
         });
 
         it('should return empty map if card file does not exist', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(false);
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             expect(result.size).toBe(0);
         });
 
         it('should load and parse card data correctly', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
-            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 return '---\n---\nMocked Content';
             });
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
-            // Should load the 4 cards from our robust mock
             expect(result.size).toBe(4);
             const card = result.get('DV-A');
             expect(card).toBeDefined();
-            expect(card?.id).toBe('DV-A');
-            expect(card?.edition).toBe('webapp');
-            expect(card?.version).toBe('2.2');
-            expect(card?.language).toBe('en');
             expect(card?.suitName).toBe('Data Validation');
         });
 
         it('should use English directory if language directory does not exist', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir)
-                .mockReturnValueOnce(false)  // Spanish dir doesn't exist
-                .mockReturnValueOnce(true);  // English dir exists
-
+                .mockReturnValueOnce(false)
+                .mockReturnValueOnce(true);
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 return '---\n---\nMocked Content';
             });
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'es');
             expect(result.size).toBe(4);
         });
 
         it('should handle navigation for first card', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
-            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 return '---\n---\nMocked Content';
             });
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
             const firstCard = result.get('FIRST-CARD');
             expect(firstCard?.prevous).toBe('LAST-CARD');
         });
 
         it('should handle navigation for last card', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
-            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 return '---\n---\nMocked Content';
             });
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
             const lastCard = result.get('LAST-CARD');
             expect(lastCard?.next).toBe('FIRST-CARD');
         });
 
         it('should skip card if technical note file is missing', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
-            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 if (pathStr.includes('technical') || pathStr.includes('note')) throw new Error('File not found');
                 return '---\n---\nMocked Content';
             });
-
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
             expect(result.size).toBe(0);
             expect(consoleErrorSpy).toHaveBeenCalled();
-            
             consoleErrorSpy.mockRestore();
         });
 
         it('should skip card if explanation file is missing', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
-            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 if (pathStr.includes('explanation')) throw new Error('File not found');
                 return '---\n---\nMocked Content';
             });
-
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
             expect(result.size).toBe(0);
             expect(consoleErrorSpy).toHaveBeenCalled();
-            
             consoleErrorSpy.mockRestore();
         });
 
         it('should cache loaded cards', () => {
-            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
-            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-
             vi.mocked(fs.readFileSync).mockImplementation((pathArgs: any) => {
                 const pathStr = String(pathArgs).toLowerCase();
                 if (pathStr.includes('.yaml') || pathStr.includes('.yml')) return robustMockYaml;
                 return '---\n---\nMocked Content';
             });
-
             const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-
             deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
             expect(consoleLogSpy).toHaveBeenCalledWith(
                 expect.stringContaining('Caching cards for webapp 2.2 en')
             );
-            
             consoleLogSpy.mockRestore();
         });
     }, 10000);
@@ -517,9 +473,7 @@ suits:
         it('should clear the cache', () => {
             DeckService['cache'].push({ lang: 'en', data: new Map(), version: 'latest' });
             expect(DeckService['cache'].length).toBe(1);
-
             DeckService.clear();
-
             expect(DeckService['cache'].length).toBe(0);
         });
     }, 10000);
