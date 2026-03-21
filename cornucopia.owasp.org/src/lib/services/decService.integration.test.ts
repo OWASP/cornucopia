@@ -10,7 +10,7 @@ describe('DeckService integration tests', () => {
         DeckService.clear();
     });
 
-    it("should return card deck data.", async () => {
+    it("should return card deck data.", () => {
         DeckService.clear();
         expect((new DeckService()).getCards('doesntexist')).toBeDefined();
         DeckService.clear();
@@ -25,7 +25,7 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCards('pt_br')).toBeDefined();
     });
 
-    it("should get Card data for edition, version and lang.", async () => {
+    it("should get Card data for edition, version and lang.", () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en')).toBeDefined();
@@ -53,8 +53,8 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_pt').size).toBe(80);
     }, 30000);
 
-    it("should return 251 cards.", async () => {
-        let cards = (new DeckService()).getCards('en');
+    it("should return 251 cards.", () => {
+        const cards = (new DeckService()).getCards('en');
         expect(cards.size).toBe(251);
     });
 });
