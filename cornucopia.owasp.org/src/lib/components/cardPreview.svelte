@@ -398,8 +398,9 @@
 
         .property-card-description.browser-card-container
         {
-            font-size: 3.2vw;
+            font-size: 2.8vw;
             padding: .25rem;
+            line-height: 1.25;
         }
 
         .property-card-suit.browser-card-container
