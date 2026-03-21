@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/prefer-destructuring, @typescript-eslint/no-magic-numbers, @typescript-eslint/strict-boolean-expressions, @typescript-eslint/only-throw-error, prefer-template, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/prefer-destructuring, @typescript-eslint/no-magic-numbers, @typescript-eslint/strict-boolean-expressions, @typescript-eslint/only-throw-error, prefer-template, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- Bypassing strict stylistic rules for API route */
 import { DeckService } from '$lib/services/deckService';
 import { json, error, type RequestHandler } from '@sveltejs/kit';
 import { CreController } from '$domain/cre/creController';

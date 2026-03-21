@@ -1,4 +1,4 @@
-/* eslint-disable import/enforce-node-protocol-usage, @typescript-eslint/init-declarations, @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/dot-notation, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, max-nested-callbacks, max-lines */
+/* eslint-disable import/enforce-node-protocol-usage, @typescript-eslint/init-declarations, @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/dot-notation, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, max-nested-callbacks, max-lines -- Bypassing strict stylistic rules for legacy test file */
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckService } from './deckService';
 import type { Card } from '$domain/card/card';
