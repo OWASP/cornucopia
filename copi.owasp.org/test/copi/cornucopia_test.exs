@@ -64,6 +64,7 @@ defmodule Copi.CornucopiaTest do
         "Security Review 2024",
         "Test Game-123",
         "O'Connor's Security Game",
+        "Game \"Secure\" Session",
         "لعبة الأمن",
         "安全游戏",
         "Игра Безопасности",

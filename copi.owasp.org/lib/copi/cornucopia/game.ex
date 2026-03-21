@@ -132,7 +132,7 @@
     |> String.replace("&", "&")
     |> String.replace("<", "<")
     |> String.replace(">", ">")
-    |> String.replace("\"", """)
+    |> String.replace("\"", "&quot;")
     |> String.replace("'", "&#39;")
   end
 end
