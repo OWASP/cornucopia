@@ -2,7 +2,7 @@
 meta:
   edition: "webapp"
   component: "cards"
-  language: "PT-PT"
+  language: "pt_pt"
   version: "2.2"
 suits:
 -
@@ -28,7 +28,7 @@ suits:
     id: "VE5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/VE5"
-    desc: "O Jee pode contornar as rotinas de codificacao centrais, uma vez que não estão a ser usadas em todo o lado, ou porque as codificações utilizadas estão erradas"
+    desc: "O Jee pode contornar as rotinas de codificação centrais, uma vez que não estão a ser usadas em todo o lado, ou porque as codificações utilizadas estão erradas"
   -
     id: "VE6"
     value: "6"
@@ -373,17 +373,17 @@ suits:
     id: "C4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/C4"
-    desc: "Keith pode realizar uma ação e não é possível atribuí-la a ele"
+    desc: "O Keith pode realizar uma ação e não é possível atribuí-la a ele"
   -
     id: "C5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/C5"
-    desc: "O Larry pode influenciar a confiança que outras partes, incluindo os utilizadores da aplicação, têm nela, ou abusar dessa confiança em outro lugar (por exemplo, noutra aplicação"
+    desc: "O Larry pode influenciar a confiança que outras partes, incluindo os utilizadores da aplicação, têm nela, ou abusar dessa confiança em outro lugar (por exemplo, noutra aplicação)"
   -
     id: "C6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/C6"
-    desc: "O Aaron pode contornar os controlos porque a gestão de erros/exceções está ausente, ou é implementada de forma inconsistente ou parcial, ou não nega o acesso por defeito (ou seja, os erros devem terminar o acesso/executação), ou depende da gestão feita por outro serviço ou sistema"
+    desc: "O Aaron pode contornar os controlos porque a gestão de erros/exceções está ausente, ou é implementada de forma inconsistente ou parcial, ou não nega o acesso por defeito (ou seja, os erros devem terminar o acesso/execução), ou depende da gestão feita por outro serviço ou sistema"
   -
     id: "C7"
     value: "7"
@@ -403,7 +403,7 @@ suits:
     id: "CX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CX"
-    desc: "Spyros pode contornar os controlos da aplicação porque os frameworks de código, bibliotecas e componentes contêm código malicioso ou vulnerabilidades (por exemplo, internos, comerciais, terceirizados, de código aberto, localizados externamente)"
+    desc: "O Spyros pode contornar os controlos da aplicação porque os frameworks de código, bibliotecas e componentes contêm código malicioso ou vulnerabilidades (por exemplo, internos, comerciais, terceirizados, de código aberto, localizados externamente)"
   -
     id: "CJ"
     value: "J"
