@@ -1,4 +1,4 @@
-## Scenario: Ryan’s Exploitation of a Poorly Implemented Session Magement System
+## Scenario: Ryan’s Exploitation of a Poorly Implemented Session Management System
 
 Imagine a scenario where Ryan takes advantage of a system that doesn't sufficiently give the user an overview of their active sessions and allows multiple concurrent sessions without proper controls. He exploits the following vulnerabilities:
 
@@ -9,7 +9,7 @@ Imagine a scenario where Ryan takes advantage of a system that doesn't sufficien
 
 ### Example
 
-Ryan discovers that someone at the airport has left their mobile device unattended. He steals the device and takes it home. He then finds out that the user still has an active session on the device, and uses it to access the account. The user is unaware of this access, and the system does not have any controls or alerts in place to detect or prevent it. Ryan can then access sensitive information and perform unauthorized actions without being detected.
+Ryan discovers that someone at the airport has left their mobile device unattended. He steals the device and takes it home. He then finds out that the user still has an active session on the device and uses it to access the account. The user is unaware of this access, and the system does not have any controls or alerts in place to detect or prevent it. Ryan can then access sensitive information and perform unauthorized actions without being detected.
 
 ## Threat Modeling
 
@@ -28,7 +28,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are we going to do about it?
 
-For many applications it may be desirable to allow customers to be logged in using multiple browsers/devices. Consider implementing a policy to restrict or carefully monitor concurrent sessions. Options include implementing impossible travel detection, alerting in case of logins from geographically distant locations within a short timeframe, or even from old devices. Require the use of MFA, in these cases. Also consider that users should be informed about active sessions and be able to manage them, including terminating sessions that they do not recognize. This can help mitigate the risk of unauthorized access and provide users with greater control over their accounts. Additionally, implementing robust session management policies can help detect and prevent session fixation and authorization code theft, further enhancing the security of the application.
+For many applications, it may be desirable to allow customers to be logged in using multiple browsers/devices. Consider implementing a policy to restrict or carefully monitor concurrent sessions. Options include implementing impossible travel detection, alerting in case of logins from geographically distant locations within a short timeframe, or even from old devices. Require the use of MFA in these cases. Also consider that users should be informed about active sessions and be able to manage them, including terminating sessions that they do not recognize. This can help mitigate the risk of unauthorized access and provide users with greater control over their accounts. Additionally, implementing robust session management policies can help detect and prevent session fixation and authorization code theft, further enhancing the security of the application.
 
 1. Implement a policy to restrict or carefully monitor concurrent sessions.
 2. Require the use of MFA for logins from new devices or locations.
