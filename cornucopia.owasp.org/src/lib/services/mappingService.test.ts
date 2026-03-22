@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- Bypassing strict typing for service tests */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any -- Bypassing strict typing for service tests */
 import { describe, it, expect } from 'vitest';
 import { MappingService } from './mappingService';
 
@@ -7,8 +7,7 @@ describe('MappingService Coverage', () => {
         expect(MappingService.prototype.getCardMapping).toBeDefined();
         
         const service = new MappingService();
-        // Use a safe call to ensure it hits the branch logic for unknown data
-        const result = (service as any).getCardMapping('unknown', '1.0');
+        const result = (service as any).getCardMapping('webapp', '3.0');
         expect(result).toBeDefined();
     });
 });
