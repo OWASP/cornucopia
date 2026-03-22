@@ -102,11 +102,17 @@ export class DeckService {
     if (cached !== undefined) return cached.data
 
     const cards = new Map<string, Card>()
+    
+    // FIX: Added process.cwd() fallback for GitHub Actions while maintaining coverage paths
+    const fileName = `${edition}-cards-${version}-${lang}.yaml`
+    const rootDir = process.cwd()
     const possiblePaths = [
-      path.join(fileSystemRoot, `../source/${edition}-cards-${version}-${lang}.yaml`),
-      path.join(fileSystemRoot, `source/${edition}-cards-${version}-${lang}.yaml`),
-      path.resolve(path.dirname(''), `../source/${edition}-cards-${version}-${lang}.yaml`),
-      path.resolve(path.dirname(''), `source/${edition}-cards-${version}-${lang}.yaml`)
+      path.join(rootDir, 'source', fileName),
+      path.join(rootDir, '..', 'source', fileName),
+      path.join(fileSystemRoot, `../source/${fileName}`),
+      path.join(fileSystemRoot, `source/${fileName}`),
+      path.resolve(path.dirname(''), `../source/${fileName}`),
+      path.resolve(path.dirname(''), `source/${fileName}`)
     ]
 
     let cardFile = ''
