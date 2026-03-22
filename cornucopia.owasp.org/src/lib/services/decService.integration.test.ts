@@ -47,6 +47,7 @@ describe('DeckService Integration & Coverage', () => {
     expect(DeckService.getLanguages('webapp')).toContain('en');
   });
 
+  // FIXED: Removed 'async' to resolve "Async arrow function has no 'await' expression"
   it('should return 238 cards.', () => {
     const cards = new DeckService().getCards('en');
     expect(cards.size).toBe(238);
