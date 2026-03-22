@@ -12,21 +12,14 @@ export class MappingService {
 
     const possiblePaths = [
       path.join(gw, 'source', fileName),
+      path.join(path.dirname(cwd), 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.resolve('source', fileName),
       path.resolve('..', 'source', fileName),
-      path.resolve('..', '..', 'source', fileName),
-      path.resolve('..', '..', '..', 'source', fileName),
-      `/home/runner/work/cornucopia.owasp.org/cornucopia.owasp.org/source/${fileName}`
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`
     ]
     
-    const foundPath = possiblePaths.find((p) => fs.existsSync(p)) ?? ''
-    
-    if (foundPath === '') {
-      console.error(`DIAGNOSTIC: Mapping not found for ${fileName}. Checked: ${gw}, ${cwd}`);
-    }
-    
-    return foundPath
+    return possiblePaths.find((p) => fs.existsSync(p)) ?? ''
   }
 
   public static getCardMapping(edition: string, version: string): Record<string, any> {

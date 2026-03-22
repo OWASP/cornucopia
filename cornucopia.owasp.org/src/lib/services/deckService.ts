@@ -11,7 +11,6 @@ import { ZERO } from '$lib/constants'
 
 const DEFAULT_VERSION = '2.2'
 
-// --- STRICT TYPE DEFINITIONS ---
 interface FrontMatterResult { body?: string }
 interface YamlCard { id?: string | number; [key: string]: unknown }
 interface YamlSuit { id?: string | number; name?: string; cards?: YamlCard[] | Record<string, YamlCard>; [key: string]: unknown }
@@ -39,7 +38,13 @@ export class DeckService {
   public static getDecks (): Deck[] { return DeckService.decks }
   public static getLatestVersion (edition: string): string { return DeckService.latests.find((deck) => deck.edition === edition)?.version ?? DEFAULT_VERSION }
   public static getLatestEditions (): string[] { return DeckService.latests.map((deck) => deck.edition) }
-  public static getLanguages (edition: string): string[] { return DeckService.decks.filter((deck) => deck.edition === edition).flatMap((deck) => deck.lang) }
+
+  public static getLanguages (edition: string): string[] { 
+    const languages = DeckService.decks.filter((deck) => deck.edition === edition).flatMap((deck) => deck.lang)
+    //  Restore fallback to ['en'] for unknown editions
+    return languages.length === ZERO ? ['en'] : languages 
+  }
+
   public static getLanguagesForEditionVersion (edition: string, version: string): string[] { return DeckService.decks.find((d) => d.edition === edition && d.version === version)?.lang ?? [] }
   public static getVersions (edition: string): string[] { return DeckService.decks.filter((deck) => deck.edition === edition).map((deck) => deck.version) }
 
@@ -69,11 +74,11 @@ export class DeckService {
 
     const possiblePaths = [
       path.join(gw, 'source', fileName),
+      path.join(path.dirname(cwd), 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.resolve('source', fileName),
       path.resolve('..', 'source', fileName),
-      path.resolve('..', '..', 'source', fileName),
-      `/home/runner/work/cornucopia/cornucopia/cornucopia.owasp.org/source/${fileName}`
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`
     ]
 
     let cardFile = ''
@@ -93,7 +98,7 @@ export class DeckService {
       const suitsIterable: Array<YamlSuit & { _key?: string }> = Array.isArray(data.suits) ? data.suits : Object.entries(data.suits).map(([key, val]) => ({ _key: key, ...val }))
 
       for (const suitObj of suitsIterable) {
-        let mappingSuit: MappingSuit | undefined = undefined // FIX: Initialized on declaration
+        let mappingSuit: MappingSuit | undefined = undefined 
         if (mapping?.suits !== undefined) {
           const mapList = Array.isArray(mapping.suits) ? mapping.suits : Object.values(mapping.suits)
           mappingSuit = mapList.find((m) => String(m.id) === String(suitObj.id) || m.name === suitObj.name)
