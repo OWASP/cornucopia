@@ -1,7 +1,5 @@
 ## Scenario: Jeff’s Replay Attack Exploitation
 
-Jeff can reuse stolen session identifiers and/or tokens because they are not handled confidentially or because there is no strong proof of possession (e.g., binding to a certificate, device, IP address, user-agent, etc.)
-
 Consider a scenario where Jeff exploits a system vulnerability that allows him to reuse stolen session identifiers or tokens without any checks for their validity or proof of possession. This issue arises because the system does not have mechanisms to detect and reject forged or replayed session identifiers or tokens, allowing attackers to reuse them for unauthorized access or actions.
 
 1. **Lack of Confidential Handling:** Session identifiers or tokens are not treated as sensitive information, leading to their exposure and potential theft.
@@ -16,11 +14,11 @@ Jeff observes an online transaction process where a user submits a payment form.
 
 ### STRIDE
 
-This scenario maps primarily to STRIDE: **Tampering**.
+This scenario maps primarily to STRIDE: **Spoofing**.
 
-**Tampering** involves unauthorized modification of data or messages, including altering, injecting, or replaying them.
-Jeff resends an identical request (a replay attack) and the system accepts it as new, effectively modifying the state of the system (e.g., triggering multiple transactions).
-The attack is not about impersonation (Spoofing) per se, but about unauthorized manipulation of data/state, which is classic **Tampering**.
+**Spoofing** Spoofing is about impersonating a legitimate user or entity.
+Jeff observes an online transaction process where a user submits a request and resends an identical request (a replay attack) and the system accepts it (e.g., triggering multiple transactions) as if Jeff was somebody else.
+The attack is about impersonation, but may lead to unauthorized manipulation of data/state, **Tampering** and even **Elevation of Privileges**.
 
 ### What can go wrong?
 
