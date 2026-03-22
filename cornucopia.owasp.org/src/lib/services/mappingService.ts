@@ -3,25 +3,41 @@ import fs from 'node:fs'
 import path from 'node:path'
 import yaml from 'js-yaml'
 
-const ROOT_DIR = path.resolve(path.dirname(''))
+const ROOT_DIR = process.cwd()
 
+/* eslint-disable-next-line @typescript-eslint/no-extraneous-class -- Static utility for mappings */
 export class MappingService {
-  private static readonly sourcePath = '/../source/'
+  private static getFilePath(edition: string, version: string): string {
+    const fileName = `${edition}-mapping-${version}.yaml`
+    const possiblePaths = [
+      path.join(ROOT_DIR, 'source', fileName),
+      path.join(ROOT_DIR, '..', 'source', fileName)
+    ]
+    return possiblePaths.find((p) => fs.existsSync(p)) ?? ''
+  }
 
-  public static getCardMapping(edition: string, version: string): any {
-    const filePath = path.join(ROOT_DIR, MappingService.sourcePath, `${edition}-mapping-${version}.yaml`)
-    if (!fs.existsSync(filePath)) return { suits: {} }
+  public static getCardMapping(edition: string, version: string): Record<string, any> {
+    const filePath = MappingService.getFilePath(edition, version)
+    if (filePath === '') return { suits: {} }
     try {
       const content = fs.readFileSync(filePath, 'utf8')
+      // Removed 'as unknown' because the linter already identifies this as unknown
       const data = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA })
-      return data ?? { suits: {} }
+      
+      // Explicit comparison (fixes 'strict-boolean-expressions')
+      // This maintains the 'null' branch in your coverage tests
+      if (data === null || typeof data === 'undefined') {
+        return { suits: {} }
+      }
+      
+      // Cast to the expected return type
+      return data as Record<string, any>
     } catch {
       return { suits: {} }
     }
   }
 
-  /* eslint-disable-next-line @typescript-eslint/class-methods-use-this -- Method required by SvelteKit route instances */
-  public getCardMappingForLatestEdtions(): Map<string, any> {
+  public static getCardMappingForLatestEdtions(): Map<string, any> {
     const mappings = new Map<string, any>()
     mappings.set('webapp-2.2', MappingService.getCardMapping('webapp', '2.2'))
     mappings.set('webapp-3.0', MappingService.getCardMapping('webapp', '3.0'))
@@ -29,11 +45,9 @@ export class MappingService {
     return mappings
   }
 
-  public getCardMappingForAllVersions(): Map<string, any> {
-    return this.getCardMappingForLatestEdtions()
+  public static getCardMappingForAllVersions(): Map<string, any> {
+    return MappingService.getCardMappingForLatestEdtions()
   }
 
-  public static clear(): void {
-    /* No cache to clear for this service */
-  }
+  public static clear(): void { /* No cache */ }
 }

@@ -1,3 +1,4 @@
+ 
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper'
 import { DeckService } from '$lib/services/deckService'
 import type { PageServerLoad } from './$types'
@@ -43,7 +44,9 @@ export const load: PageServerLoad = (({ params }) => {
     routes: new Map<string, Route[]>([
       ['ASVSRoutes', FileSystemHelper.ASVSRouteMap()]
     ]),
-    mappingData: new MappingService().getCardMappingForLatestEdtions(),
+    // Static call: Removed 'new' and extra parentheses
+    mappingData: MappingService.getCardMappingForLatestEdtions(),
     languages: DeckService.getLanguages(card.edition)
   }
 })
+ 

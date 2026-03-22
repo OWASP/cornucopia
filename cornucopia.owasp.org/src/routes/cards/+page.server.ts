@@ -1,3 +1,4 @@
+ 
 import { DeckService } from '$lib/services/deckService'
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper'
 import { MappingService } from '$lib/services/mappingService'
@@ -17,7 +18,9 @@ export const load: PageServerLoad = () => {
 
   return {
     decks: decks.set(lang, new Map([...mobileCards, ...webappCards, ...companionCards])),
-    mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
+    // Static call: Verified
+    mappingData: MappingService.getCardMappingForLatestEdtions(),
     content: FileSystemHelper.getDataFromPath('data/website/pages/cards')
   }
 }
+ 
