@@ -102,20 +102,20 @@ export class DeckService {
 
     const cards = new Map<string, Card>()
     
-    
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
     const gw = process.env.GITHUB_WORKSPACE ?? cwd
     
     const possiblePaths = [
-      path.join(gw, 'source', fileName), // Absolute repo root (GitHub Actions)
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // The ultimate CI failsafe
+      path.join(gw, 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
-      path.join(cwd, '..', '..', 'source', fileName), // SvelteKit Output Folder
-      path.join(cwd, '..', '..', '..', 'source', fileName), // SvelteKit Server Folder
-      path.join(cwd, '..', '..', '..', '..', 'source', fileName), // Deep Failsafe
-      path.join(cwd, '..', '..', '..', '..', '..', 'source', fileName), // Extreme Failsafe
-      path.join(fileSystemRoot, `../source/${fileName}`), // Vitest local coverage safety
+      path.join(cwd, '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', '..', '..', 'source', fileName),
+      path.join(fileSystemRoot, `../source/${fileName}`),
       path.join(fileSystemRoot, `source/${fileName}`),
       path.resolve(path.dirname(''), `../source/${fileName}`),
       path.resolve(path.dirname(''), `source/${fileName}`)
@@ -135,10 +135,24 @@ export class DeckService {
       const yamlData = fs.readFileSync(cardFile, 'utf8')
       const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as YamlData | undefined
 
-      const defaultBase = `data/cards/${edition}-cards-${version}-${lang}/`
-      const baseDir = hasDir(defaultBase) ? defaultBase : `data/cards/${edition}-cards-${version}-en/`
+      // Protect against hasDir crashes
+      let baseDir = `data/cards/${edition}-cards-${version}-en/`
+      try {
+        const defaultBase = `data/cards/${edition}-cards-${version}-${lang}/`
+        if (hasDir(defaultBase)) {
+          baseDir = defaultBase
+        }
+      } catch (err) {
+        console.warn('Failsafe: hasDir bypassed', err)
+      }
 
-      const mapping = MappingService.getCardMapping(edition, version) as MappingData | undefined
+      //  Protect against MappingService crashes
+      let mapping: MappingData | undefined = undefined
+      try {
+        mapping = MappingService.getCardMapping(edition, version) as MappingData | undefined
+      } catch (err) {
+        console.warn('Failsafe: MappingService bypassed', err)
+      }
 
       if (data?.suits === undefined) return cards
 
