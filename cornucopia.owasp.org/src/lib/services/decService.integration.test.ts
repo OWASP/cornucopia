@@ -44,5 +44,8 @@ describe('DeckService Integration & Coverage', () => {
         expect(DeckService.hasVersion('webapp', '3.0')).toBe(true);
         expect(DeckService.getLatestVersion('webapp')).toBe('2.2');
         expect(DeckService.getLanguages('webapp')).toContain('en');
+    it("should return 238 cards.", async () => {
+        let cards = (new DeckService()).getCards('en');
+        expect(cards.size).toBe(238);
     });
 });
