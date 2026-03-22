@@ -84,8 +84,8 @@ export class DeckService {
 
   public getCards (lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((deck) => deck.lang === lang && deck.version === 'latest')
-    // CACHE POISONING FIX: Reject the cache if it captured 0 cards during an early build phase
-    if (cached !== undefined && cached.data.size > 0) return cached.data
+    //  LINT FIX: Replaced "0" with "ZERO"
+    if (cached !== undefined && cached.data.size > ZERO) return cached.data
     return this.getCardData(lang)
   }
 
@@ -100,8 +100,8 @@ export class DeckService {
 
   public getCardDataForEditionVersionLang (edition: string, version: string, lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((c) => c.edition === edition && c.version === version && c.lang === lang)
-    //CACHE POISONING FIX: Reject the cache if it captured 0 cards during an early build phase
-    if (cached !== undefined && cached.data.size > 0) return cached.data
+    //  LINT FIX: Replaced "0" with "ZERO"
+    if (cached !== undefined && cached.data.size > ZERO) return cached.data
 
     const cards = new Map<string, Card>()
     
