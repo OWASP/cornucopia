@@ -6,7 +6,7 @@ Imagine a scenario where Darío takes advantage of the application's trust in it
 
 2. **Tampering with Client-Side Data:** The application fails to validate data altered on a client device.
 
-3. **Altering State Data on Client Devices:** The application doesn't verify the integrity of state data, like session tokens, stored on client devices.
+3. **Altering State Data on Client Devices:** The application doesn't verify the integrity of state data, like session tokens or JWTs stored on client devices.
 
 4. **Lack of Identity Verification:** The system inadequately verifies the identity of a user during data validation.
 
