@@ -42,7 +42,7 @@ Centralized authorization routines are a good programming practice, but like oth
 3. Conduct thorough security reviews, especially when integrating new features or updates, to ensure they adhere to established authorization standards.
 4. Ensure the application enforces authorization rules at a trusted service layer and doesn't rely on controls that an untrusted consumer could manipulate, such as client-side JavaScript.
 5. Implement multi-tenant authorization controls that properly segregate data and prevent unauthorized access or actions between tenants.
-6. Configure authorization server to only assign the required permissions to each user or service, following the principle of least privilege.
+6. Configure the authorization server to only assign the required permissions to each user or service, following the principle of least privilege.
 7. Communications between backend application components, including local or operating system services, APIs, middleware, and data layers, should be performed with accounts assigned the least necessary privileges.
 8. Ensure that failed authorization attempts are logged and monitored to detect potential abuse or misconfigurations in access controls.
 9. Consider implementing multiple layers of security, including continuous consumer identity verification, device security posture assessment, and contextual risk analysis when evaluating access to administrative interfaces or critical functions.
