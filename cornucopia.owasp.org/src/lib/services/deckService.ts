@@ -84,7 +84,9 @@ export class DeckService {
 
   public getCards (lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((deck) => deck.lang === lang && deck.version === 'latest')
-    return cached?.data ?? this.getCardData(lang)
+    // CACHE POISONING FIX: Reject the cache if it captured 0 cards during an early build phase
+    if (cached !== undefined && cached.data.size > 0) return cached.data
+    return this.getCardData(lang)
   }
 
   private getCardData (lang: string): Map<string, Card> {
@@ -98,7 +100,8 @@ export class DeckService {
 
   public getCardDataForEditionVersionLang (edition: string, version: string, lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((c) => c.edition === edition && c.version === version && c.lang === lang)
-    if (cached !== undefined) return cached.data
+    //CACHE POISONING FIX: Reject the cache if it captured 0 cards during an early build phase
+    if (cached !== undefined && cached.data.size > 0) return cached.data
 
     const cards = new Map<string, Card>()
     
@@ -107,7 +110,6 @@ export class DeckService {
     const gw = process.env.GITHUB_WORKSPACE ?? cwd
     
     const possiblePaths = [
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // The ultimate CI failsafe
       path.join(gw, 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
@@ -135,24 +137,10 @@ export class DeckService {
       const yamlData = fs.readFileSync(cardFile, 'utf8')
       const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as YamlData | undefined
 
-      // Protect against hasDir crashes
-      let baseDir = `data/cards/${edition}-cards-${version}-en/`
-      try {
-        const defaultBase = `data/cards/${edition}-cards-${version}-${lang}/`
-        if (hasDir(defaultBase)) {
-          baseDir = defaultBase
-        }
-      } catch (err) {
-        console.warn('Failsafe: hasDir bypassed', err)
-      }
+      const defaultBase = `data/cards/${edition}-cards-${version}-${lang}/`
+      const baseDir = hasDir(defaultBase) ? defaultBase : `data/cards/${edition}-cards-${version}-en/`
 
-      //  Protect against MappingService crashes
-      let mapping: MappingData | undefined = undefined
-      try {
-        mapping = MappingService.getCardMapping(edition, version) as MappingData | undefined
-      } catch (err) {
-        console.warn('Failsafe: MappingService bypassed', err)
-      }
+      const mapping = MappingService.getCardMapping(edition, version) as MappingData | undefined
 
       if (data?.suits === undefined) return cards
 
