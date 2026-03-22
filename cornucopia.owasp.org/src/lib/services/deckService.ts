@@ -102,13 +102,12 @@ export class DeckService {
     if (cached !== undefined && cached.data.size > ZERO) return cached.data
 
     const cards = new Map<string, Card>()
- 
+
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
-    const gw = String(process.env.GITHUB_WORKSPACE)
     
     const possiblePaths = [
-      path.join(gw, 'source', fileName),
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),
@@ -171,9 +170,11 @@ export class DeckService {
         for (const cardData of cardsIterable) {
           if (cardData.id === undefined) continue
 
+          const cardIdStr = `${cardData.id}`
+
           const suitNameStr = mappingSuit?.name ?? suitObj.name ?? ''
           const suit = suitNameStr.replaceAll(' ', '-').toLocaleLowerCase()
-          const cardFolderPath = `${suit}/${String(cardData.id)}`
+          const cardFolderPath = `${suit}/${cardIdStr}`
 
           let conceptText = ''
           let summaryText = ''
@@ -193,21 +194,23 @@ export class DeckService {
 
           const newCard: Card = {
             ...cardData,
+            id: cardIdStr, // OVERRIDES the raw YAML integer with a strict string
             edition,
             version,
             language: lang,
             suitName: suitNameStr,
             suitNameLocal: suitObj.name ?? '',
             suitId: suitObj.id === undefined ? '' : String(suitObj.id),
-            name: `${suitNameStr} (${String(cardData.id)})`,
+            name: `${suitNameStr} (${cardIdStr})`,
             suit,
-            url: `/edition/${edition}/${String(cardData.id)}/${version}/${lang}`,
+            url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`,
             githubUrl: `${baseDir}${cardFolderPath}/explanation.md`,
             concept: conceptText,
             summary: summaryText
           }
 
-          cards.set(newCard.id, newCard)
+          // Use the exact string as the Map key so SvelteKit can match the URL
+          cards.set(cardIdStr, newCard)
         }
       }
 
