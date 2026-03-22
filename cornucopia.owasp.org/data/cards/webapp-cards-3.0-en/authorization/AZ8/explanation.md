@@ -47,12 +47,12 @@ Do not make assumptions about the order or previous actions of a user. Re-perfor
 2. Validate all control data, including date and time parameters, to ensure they have not been tampered with.
 3. Limit the ability to manipulate URLs and direct requests that can alter the normal application flow.
 4. Regularly review and test the application for potential misuse of features and control data manipulations.
-5. Make sure that expectations for business logic limits and validations are clearly defined, implemented and tested.
+5. Make sure that expectations for business logic limits and validations are clearly defined, implemented, and tested.
 6. Implement robust logging and monitoring to detect and respond to any attempts to manipulate process sequences or control data.
 7. Design the application to be resilient against such manipulations, ensuring that critical operations require multiple steps of verification or approval.
-8. Ensure that business logic flows for the same user only can be executed in the expected sequential step order and without skipping steps.
+8. Ensure that business logic flows for the same user can only be executed in the expected sequential step order and without skipping steps.
 9. Implement proper transaction management to ensure that operations are atomic and consistent, preventing partial updates or inconsistent states due to tampering.
-10. Implement locking mechanisms to prevent against double-booking or race conditions.
+10. Implement locking mechanisms to prevent double-booking or race conditions.
 11. Data requiring authorization must not be included in script resource responses, like JavaScript files, to prevent Cross-Site Script Inclusion (XSSI) attacks.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
