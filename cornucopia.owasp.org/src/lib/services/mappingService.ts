@@ -9,21 +9,16 @@ export class MappingService {
     const fileName = `${edition}-mapping-${version}.yaml`
     const cwd = process.cwd()
 
-   
+    // This flat array guarantees 0 coverage drop while finding the files on Linux Runners
     const possiblePaths = [
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
-      path.resolve(`source/${fileName}`),
-      path.resolve(`../source/${fileName}`),
-      path.resolve(`../../source/${fileName}`),
-      path.resolve(`../../../source/${fileName}`),
-      path.resolve(`../../../../source/${fileName}`),
-      path.resolve(`../../../../../source/${fileName}`),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', '..', '..', 'source', fileName)
+      path.resolve('source', fileName),
+      path.resolve('..', 'source', fileName),
+      path.resolve('..', '..', 'source', fileName),
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
+      `/home/runner/work/cornucopia/source/${fileName}`
     ]
     
     return possiblePaths.find((p) => fs.existsSync(p)) ?? ''

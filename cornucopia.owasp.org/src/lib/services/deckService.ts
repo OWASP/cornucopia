@@ -102,22 +102,20 @@ export class DeckService {
     if (cached !== undefined && cached.data.size > ZERO) return cached.data
 
     const cards = new Map<string, Card>()
-
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
-    
+
     const possiblePaths = [
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', '..', '..', 'source', fileName),
+      path.resolve('source', fileName),
+      path.resolve('..', 'source', fileName),
+      path.resolve('..', '..', 'source', fileName),
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
+      `/home/runner/work/cornucopia/source/${fileName}`,
       path.join(fileSystemRoot, `../source/${fileName}`),
-      path.join(fileSystemRoot, `source/${fileName}`),
-      path.resolve(path.dirname(''), `../source/${fileName}`),
-      path.resolve(path.dirname(''), `source/${fileName}`)
+      path.join(fileSystemRoot, `source/${fileName}`)
     ]
 
     let cardFile = ''
@@ -136,7 +134,6 @@ export class DeckService {
 
       const defaultBase = `data/cards/${edition}-cards-${version}-${lang}/`
       const baseDir = hasDir(defaultBase) ? defaultBase : `data/cards/${edition}-cards-${version}-en/`
-
       const mapping = MappingService.getCardMapping(edition, version) as MappingData | undefined
 
       if (data?.suits === undefined) return cards
@@ -171,7 +168,6 @@ export class DeckService {
           if (cardData.id === undefined) continue
 
           const cardIdStr = `${cardData.id}`
-
           const suitNameStr = mappingSuit?.name ?? suitObj.name ?? ''
           const suit = suitNameStr.replaceAll(' ', '-').toLocaleLowerCase()
           const cardFolderPath = `${suit}/${cardIdStr}`
@@ -190,11 +186,11 @@ export class DeckService {
               const parsed = fm(fs.readFileSync(summaryFile, 'utf8')) as FrontMatterResult
               summaryText = parsed.body ?? ''
             }
-          } catch { /* safely ignore missing individual markdown files */ }
+          } catch { /* ignore missing md */ }
 
           const newCard: Card = {
             ...cardData,
-            id: cardIdStr, // OVERRIDES the raw YAML integer with a strict string
+            id: cardIdStr,
             edition,
             version,
             language: lang,
@@ -209,7 +205,6 @@ export class DeckService {
             summary: summaryText
           }
 
-          // Use the exact string as the Map key so SvelteKit can match the URL
           cards.set(cardIdStr, newCard)
         }
       }
