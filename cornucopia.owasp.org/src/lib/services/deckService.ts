@@ -104,16 +104,17 @@ export class DeckService {
     const cards = new Map<string, Card>()
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
+    const gw = String(process.env.GITHUB_WORKSPACE)
 
     const possiblePaths = [
+      path.join(gw, 'source', fileName),
       path.join(cwd, 'source', fileName),
-      path.join(cwd, '..', 'source', fileName),
-      path.join(cwd, '..', '..', 'source', fileName),
       path.resolve('source', fileName),
       path.resolve('..', 'source', fileName),
       path.resolve('..', '..', 'source', fileName),
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
-      `/home/runner/work/cornucopia/source/${fileName}`,
+      path.resolve('..', '..', '..', 'source', fileName),
+      path.resolve('..', '..', '..', '..', 'source', fileName),
+      path.resolve('..', '..', '..', '..', '..', 'source', fileName),
       path.join(fileSystemRoot, `../source/${fileName}`),
       path.join(fileSystemRoot, `source/${fileName}`)
     ]
