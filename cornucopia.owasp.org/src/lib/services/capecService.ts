@@ -4,10 +4,11 @@ import yaml from 'js-yaml'
 
 const ROOT_DIR = path.resolve(path.dirname(''))
 
+/* eslint-disable-next-line @typescript-eslint/no-extraneous-class -- Service acts as a static utility */
 export class CapecService {
-  private static cachedCapecData = new Map<string, any>();
+  private static readonly cachedCapecData = new Map<string, unknown>();
 
-  public static getCapecData(edition: string, version: string): any {
+  public static getCapecData(edition: string, version: string): unknown {
     const key = `${edition}-${version}`;
     if (CapecService.cachedCapecData.has(key)) {
       return CapecService.cachedCapecData.get(key);
@@ -18,7 +19,7 @@ export class CapecService {
       const filePath = path.join(ROOT_DIR, '/data/capec/capec.yaml');
       const rawData = fs.readFileSync(filePath, 'utf8');
       const data = yaml.load(rawData);
-      
+
       CapecService.cachedCapecData.set(key, data);
       return data;
     } catch (e) {

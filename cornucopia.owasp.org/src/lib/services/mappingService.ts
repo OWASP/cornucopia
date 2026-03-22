@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- Required for cross-app data compatibility */
 import fs from 'node:fs'
 import path from 'node:path'
 import yaml from 'js-yaml'
@@ -12,15 +13,16 @@ export class MappingService {
     if (!fs.existsSync(filePath)) return { suits: {} }
     try {
       const content = fs.readFileSync(filePath, 'utf8')
-      return yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA }) || { suits: {} }
-    } catch (e) {
+      const data = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA })
+      return data ?? { suits: {} }
+    } catch {
       return { suits: {} }
     }
   }
 
+  /* eslint-disable-next-line @typescript-eslint/class-methods-use-this -- Method required by SvelteKit route instances */
   public getCardMappingForLatestEdtions(): Map<string, any> {
     const mappings = new Map<string, any>()
-    // Reverted to the edition-version key format expected by the original tests
     mappings.set('webapp-2.2', MappingService.getCardMapping('webapp', '2.2'))
     mappings.set('webapp-3.0', MappingService.getCardMapping('webapp', '3.0'))
     mappings.set('mobileapp-1.1', MappingService.getCardMapping('mobileapp', '1.1'))
@@ -31,5 +33,7 @@ export class MappingService {
     return this.getCardMappingForLatestEdtions()
   }
 
-  public static clear(): void { }
+  public static clear(): void {
+    /* No cache to clear for this service */
+  }
 }

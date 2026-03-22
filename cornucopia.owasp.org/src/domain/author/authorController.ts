@@ -1,4 +1,8 @@
-import type { Author } from '$domain/author/author';
+// Define the Author interface directly here to resolve the missing import
+export interface Author {
+  name: string;
+  [key: string]: unknown;
+}
 
 function isAuthor(data: unknown): data is Author {
   return typeof data === 'object' && data !== null && 'name' in data;

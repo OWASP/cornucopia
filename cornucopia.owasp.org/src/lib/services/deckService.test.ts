@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- Required for Vitest mocks */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { DeckService } from './deckService';
 import { MappingService } from './mappingService';
