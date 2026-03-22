@@ -73,7 +73,7 @@ export class DeckService {
       path.resolve('source', fileName),
       path.resolve('..', 'source', fileName),
       path.resolve('..', '..', 'source', fileName),
-      `/home/runner/work/cornucopia.owasp.org/cornucopia.owasp.org/source/${fileName}`
+      `/home/runner/work/cornucopia/cornucopia/cornucopia.owasp.org/source/${fileName}`
     ]
 
     let cardFile = ''
@@ -93,7 +93,7 @@ export class DeckService {
       const suitsIterable: Array<YamlSuit & { _key?: string }> = Array.isArray(data.suits) ? data.suits : Object.entries(data.suits).map(([key, val]) => ({ _key: key, ...val }))
 
       for (const suitObj of suitsIterable) {
-        let mappingSuit: MappingSuit | undefined
+        let mappingSuit: MappingSuit | undefined = undefined // FIX: Initialized on declaration
         if (mapping?.suits !== undefined) {
           const mapList = Array.isArray(mapping.suits) ? mapping.suits : Object.values(mapping.suits)
           mappingSuit = mapList.find((m) => String(m.id) === String(suitObj.id) || m.name === suitObj.name)
