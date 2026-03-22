@@ -16,9 +16,9 @@ Jeff observes an online transaction process where a user submits a payment form.
 
 This scenario maps primarily to STRIDE: **Spoofing**.
 
-**Spoofing** Spoofing is about impersonating a legitimate user or entity.
-Jeff observes an online transaction process where a user submits a request and resends an identical request (a replay attack) and the system accepts it (e.g., triggering multiple transactions) as if Jeff was somebody else.
-The attack is about impersonation, but may lead to unauthorized manipulation of data/state, **Tampering** and even **Elevation of Privileges**.
+**Spoofing** is about impersonating a legitimate user or entity.
+Jeff observes an online transaction process where a user submits a request and resends an identical request (a replay attack) and the system accepts it (e.g., triggering multiple transactions) as if Jeff were somebody else.
+The attack is about impersonation, but may lead to unauthorized manipulation of data/state, **Tampering** and even **Elevation of Privilege**.
 
 ### What can go wrong?
 
