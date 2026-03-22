@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/prefer-destructuring, @typescript-eslint/class-methods-use-this, complexity, @typescript-eslint/no-unsafe-type-assertion, prefer-object-has-own -- Bypassing strict stylistic rules for complex YAML parsing logic */
+/* eslint-disable @typescript-eslint/class-methods-use-this, complexity, @typescript-eslint/no-unsafe-type-assertion -- Bypassing strict rules for complex YAML parsing logic */
 import fm from 'front-matter'
 import fs from 'node:fs'
 import yaml from 'js-yaml'
 import type { Card } from '$domain/card/card'
-import { hasDir, fileSystemRoot } from '$lib/filesystem/fileSystemHelper'
+import { hasDir } from '$lib/filesystem/fileSystemHelper'
 import path from 'node:path'
 import type { Deck } from '$domain/deck/deck'
 import { MappingService } from '$lib/services/mappingService'
@@ -81,10 +81,7 @@ export class DeckService {
       if (fs.existsSync(p)) { cardFile = p; break }
     }
 
-    if (cardFile.length === ZERO) {
-      console.error(`DIAGNOSTIC: Card file not found: ${fileName}`);
-      return cards
-    }
+    if (cardFile.length === ZERO) return cards
 
     try {
       const yamlData = fs.readFileSync(cardFile, 'utf8')
@@ -96,9 +93,8 @@ export class DeckService {
       const suitsIterable: Array<YamlSuit & { _key?: string }> = Array.isArray(data.suits) ? data.suits : Object.entries(data.suits).map(([key, val]) => ({ _key: key, ...val }))
 
       for (const suitObj of suitsIterable) {
-        let mappingSuit: MappingSuit | undefined = undefined
+        let mappingSuit: MappingSuit | undefined
         if (mapping?.suits !== undefined) {
-          const suitKey = suitObj._key ?? ''
           const mapList = Array.isArray(mapping.suits) ? mapping.suits : Object.values(mapping.suits)
           mappingSuit = mapList.find((m) => String(m.id) === String(suitObj.id) || m.name === suitObj.name)
         }
@@ -119,7 +115,23 @@ export class DeckService {
             if (fs.existsSync(`./${baseDir}${cardFolderPath}/explanation.md`)) summaryText = (fm(fs.readFileSync(`./${baseDir}${cardFolderPath}/explanation.md`, 'utf8')) as FrontMatterResult).body ?? ''
           } catch { /* ignore */ }
 
-          cards.set(cardIdStr, { ...cardData, id: cardIdStr, edition, version, language: lang, suitName: suitNameStr, suitNameLocal: suitObj.name ?? '', suitId: String(suitObj.id), name: `${suitNameStr} (${cardIdStr})`, suit, url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`, githubUrl: `${baseDir}${cardFolderPath}/explanation.md`, concept: conceptText, summary: summaryText } as Card)
+          const newCard: Card = {
+            ...cardData,
+            id: cardIdStr,
+            edition,
+            version,
+            language: lang,
+            suitName: suitNameStr,
+            suitNameLocal: suitObj.name ?? '',
+            suitId: String(suitObj.id),
+            name: `${suitNameStr} (${cardIdStr})`,
+            suit,
+            url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`,
+            githubUrl: `${baseDir}${cardFolderPath}/explanation.md`,
+            concept: conceptText,
+            summary: summaryText
+          }
+          cards.set(cardIdStr, newCard)
         }
       }
       DeckService.cache.push({ edition, version, lang, data: cards })
