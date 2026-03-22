@@ -8,8 +8,7 @@ export class MappingService {
   private static getFilePath(edition: string, version: string): string {
     const fileName = `${edition}-mapping-${version}.yaml`
     const cwd = process.cwd()
-    // Branchless environmental evaluation for 100% coverage
-    const gw = String(process.env.GITHUB_WORKSPACE)
+    const gw = process.env.GITHUB_WORKSPACE ?? cwd
 
     const possiblePaths = [
       path.join(gw, 'source', fileName),
@@ -18,11 +17,16 @@ export class MappingService {
       path.resolve('..', 'source', fileName),
       path.resolve('..', '..', 'source', fileName),
       path.resolve('..', '..', '..', 'source', fileName),
-      path.resolve('..', '..', '..', '..', 'source', fileName),
-      path.resolve('..', '..', '..', '..', '..', 'source', fileName)
+      `/home/runner/work/cornucopia.owasp.org/cornucopia.owasp.org/source/${fileName}`
     ]
     
-    return possiblePaths.find((p) => fs.existsSync(p)) ?? ''
+    const foundPath = possiblePaths.find((p) => fs.existsSync(p)) ?? ''
+    
+    if (foundPath === '') {
+      console.error(`DIAGNOSTIC: Mapping not found for ${fileName}. Checked: ${gw}, ${cwd}`);
+    }
+    
+    return foundPath
   }
 
   public static getCardMapping(edition: string, version: string): Record<string, any> {
@@ -31,11 +35,7 @@ export class MappingService {
     try {
       const content = fs.readFileSync(filePath, 'utf8')
       const data = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA })
-      
-      if (data === null || typeof data === 'undefined') {
-        return { suits: {} }
-      }
-      
+      if (data === null || typeof data === 'undefined') return { suits: {} }
       return data as Record<string, any>
     } catch {
       return { suits: {} }

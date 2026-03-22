@@ -12,49 +12,20 @@ import { ZERO } from '$lib/constants'
 const DEFAULT_VERSION = '2.2'
 
 // --- STRICT TYPE DEFINITIONS ---
-interface FrontMatterResult {
-  attributes?: Record<string, unknown>
-  body?: string
-}
-
-interface YamlCard {
-  id?: string | number
-  [key: string]: unknown
-}
-
-interface YamlSuit {
-  id?: string | number
-  name?: string
-  cards?: YamlCard[] | Record<string, YamlCard>
-  [key: string]: unknown
-}
-
-interface YamlData {
-  suits?: YamlSuit[] | Record<string, YamlSuit>
-  [key: string]: unknown
-}
-
-interface MappingSuit {
-  id?: string | number
-  name?: string
-  [key: string]: unknown
-}
-
-interface MappingData {
-  suits?: MappingSuit[] | Record<string, MappingSuit>
-  [key: string]: unknown
-}
-// -------------------------------
+interface FrontMatterResult { body?: string }
+interface YamlCard { id?: string | number; [key: string]: unknown }
+interface YamlSuit { id?: string | number; name?: string; cards?: YamlCard[] | Record<string, YamlCard>; [key: string]: unknown }
+interface YamlData { suits?: YamlSuit[] | Record<string, YamlSuit>; [key: string]: unknown }
+interface MappingSuit { id?: string | number; name?: string; [key: string]: unknown }
+interface MappingData { suits?: MappingSuit[] | Record<string, MappingSuit>; [key: string]: unknown }
 
 export class DeckService {
   private static cache: Array<{ lang: string, version: string, edition?: string, data: Map<string, Card> }> = []
-
   private static readonly latests: Deck[] = [
     { lang: ['en'], edition: 'mobileapp', version: '1.1' },
     { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' },
     { lang: ['en'], edition: 'companion', version: '1.0' }
   ]
-
   private static readonly decks: Deck[] = [
     { edition: 'mobileapp', version: '1.1', lang: ['en'] },
     { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
@@ -68,19 +39,9 @@ export class DeckService {
   public static getDecks (): Deck[] { return DeckService.decks }
   public static getLatestVersion (edition: string): string { return DeckService.latests.find((deck) => deck.edition === edition)?.version ?? DEFAULT_VERSION }
   public static getLatestEditions (): string[] { return DeckService.latests.map((deck) => deck.edition) }
-
-  public static getLanguages (edition: string): string[] {
-    const languages = DeckService.decks.filter((deck) => deck.edition === edition).flatMap((deck) => deck.lang)
-    return languages.length === ZERO ? ['en'] : languages
-  }
-
-  public static getLanguagesForEditionVersion (edition: string, version: string): string[] {
-    return DeckService.decks.find((d) => d.edition === edition && d.version === version)?.lang ?? []
-  }
-
-  public static getVersions (edition: string): string[] {
-    return DeckService.decks.filter((deck) => deck.edition === edition).map((deck) => deck.version)
-  }
+  public static getLanguages (edition: string): string[] { return DeckService.decks.filter((deck) => deck.edition === edition).flatMap((deck) => deck.lang) }
+  public static getLanguagesForEditionVersion (edition: string, version: string): string[] { return DeckService.decks.find((d) => d.edition === edition && d.version === version)?.lang ?? [] }
+  public static getVersions (edition: string): string[] { return DeckService.decks.filter((deck) => deck.edition === edition).map((deck) => deck.version) }
 
   public getCards (lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((deck) => deck.lang === lang && deck.version === 'latest')
@@ -104,7 +65,7 @@ export class DeckService {
     const cards = new Map<string, Card>()
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
-    const gw = String(process.env.GITHUB_WORKSPACE)
+    const gw = process.env.GITHUB_WORKSPACE ?? cwd
 
     const possiblePaths = [
       path.join(gw, 'source', fileName),
@@ -112,54 +73,34 @@ export class DeckService {
       path.resolve('source', fileName),
       path.resolve('..', 'source', fileName),
       path.resolve('..', '..', 'source', fileName),
-      path.resolve('..', '..', '..', 'source', fileName),
-      path.resolve('..', '..', '..', '..', 'source', fileName),
-      path.resolve('..', '..', '..', '..', '..', 'source', fileName),
-      path.join(fileSystemRoot, `../source/${fileName}`),
-      path.join(fileSystemRoot, `source/${fileName}`)
+      `/home/runner/work/cornucopia.owasp.org/cornucopia.owasp.org/source/${fileName}`
     ]
 
     let cardFile = ''
     for (const p of possiblePaths) {
-      if (fs.existsSync(p)) {
-        cardFile = p
-        break
-      }
+      if (fs.existsSync(p)) { cardFile = p; break }
     }
 
-    if (cardFile.length === ZERO) return cards
+    if (cardFile.length === ZERO) {
+      console.error(`DIAGNOSTIC: Card file not found: ${fileName}`);
+      return cards
+    }
 
     try {
       const yamlData = fs.readFileSync(cardFile, 'utf8')
       const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as YamlData | undefined
-
-      const defaultBase = `data/cards/${edition}-cards-${version}-${lang}/`
-      const baseDir = hasDir(defaultBase) ? defaultBase : `data/cards/${edition}-cards-${version}-en/`
+      const baseDir = hasDir(`data/cards/${edition}-cards-${version}-${lang}/`) ? `data/cards/${edition}-cards-${version}-${lang}/` : `data/cards/${edition}-cards-${version}-en/`
       const mapping = MappingService.getCardMapping(edition, version) as MappingData | undefined
 
       if (data?.suits === undefined) return cards
-
-      const suitsIterable: Array<YamlSuit & { _key?: string }> = Array.isArray(data.suits)
-        ? data.suits
-        : Object.entries(data.suits).map(([key, val]) => ({ _key: key, ...val }))
+      const suitsIterable: Array<YamlSuit & { _key?: string }> = Array.isArray(data.suits) ? data.suits : Object.entries(data.suits).map(([key, val]) => ({ _key: key, ...val }))
 
       for (const suitObj of suitsIterable) {
         let mappingSuit: MappingSuit | undefined = undefined
-
         if (mapping?.suits !== undefined) {
           const suitKey = suitObj._key ?? ''
-          if (suitKey === '' || Array.isArray(mapping.suits) || !Object.prototype.hasOwnProperty.call(mapping.suits, suitKey)) {
-            const mapList = Array.isArray(mapping.suits) ? mapping.suits : Object.values(mapping.suits)
-            mappingSuit = mapList.find((m) => {
-              const mId = m.id === undefined ? '' : String(m.id)
-              const sId = suitObj.id === undefined ? '' : String(suitObj.id)
-              const mName = m.name ?? ''
-              const sName = suitObj.name ?? ''
-              return (mId !== '' && mId === sId) || (mName !== '' && mName === sName)
-            })
-          } else {
-            mappingSuit = mapping.suits[suitKey]
-          }
+          const mapList = Array.isArray(mapping.suits) ? mapping.suits : Object.values(mapping.suits)
+          mappingSuit = mapList.find((m) => String(m.id) === String(suitObj.id) || m.name === suitObj.name)
         }
 
         if (suitObj.cards === undefined) continue
@@ -167,58 +108,24 @@ export class DeckService {
 
         for (const cardData of cardsIterable) {
           if (cardData.id === undefined) continue
-
           const cardIdStr = `${cardData.id}`
           const suitNameStr = mappingSuit?.name ?? suitObj.name ?? ''
           const suit = suitNameStr.replaceAll(' ', '-').toLocaleLowerCase()
           const cardFolderPath = `${suit}/${cardIdStr}`
 
-          let conceptText = ''
-          let summaryText = ''
-
+          let conceptText = ''; let summaryText = ''
           try {
-            const conceptFile = `./${baseDir}${cardFolderPath}/technical-note.md`
-            const summaryFile = `./${baseDir}${cardFolderPath}/explanation.md`
-            if (fs.existsSync(conceptFile)) {
-              const parsed = fm(fs.readFileSync(conceptFile, 'utf8')) as FrontMatterResult
-              conceptText = parsed.body ?? ''
-            }
-            if (fs.existsSync(summaryFile)) {
-              const parsed = fm(fs.readFileSync(summaryFile, 'utf8')) as FrontMatterResult
-              summaryText = parsed.body ?? ''
-            }
-          } catch { /* ignore missing md */ }
+            if (fs.existsSync(`./${baseDir}${cardFolderPath}/technical-note.md`)) conceptText = (fm(fs.readFileSync(`./${baseDir}${cardFolderPath}/technical-note.md`, 'utf8')) as FrontMatterResult).body ?? ''
+            if (fs.existsSync(`./${baseDir}${cardFolderPath}/explanation.md`)) summaryText = (fm(fs.readFileSync(`./${baseDir}${cardFolderPath}/explanation.md`, 'utf8')) as FrontMatterResult).body ?? ''
+          } catch { /* ignore */ }
 
-          const newCard: Card = {
-            ...cardData,
-            id: cardIdStr,
-            edition,
-            version,
-            language: lang,
-            suitName: suitNameStr,
-            suitNameLocal: suitObj.name ?? '',
-            suitId: suitObj.id === undefined ? '' : String(suitObj.id),
-            name: `${suitNameStr} (${cardIdStr})`,
-            suit,
-            url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`,
-            githubUrl: `${baseDir}${cardFolderPath}/explanation.md`,
-            concept: conceptText,
-            summary: summaryText
-          }
-
-          cards.set(cardIdStr, newCard)
+          cards.set(cardIdStr, { ...cardData, id: cardIdStr, edition, version, language: lang, suitName: suitNameStr, suitNameLocal: suitObj.name ?? '', suitId: String(suitObj.id), name: `${suitNameStr} (${cardIdStr})`, suit, url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`, githubUrl: `${baseDir}${cardFolderPath}/explanation.md`, concept: conceptText, summary: summaryText } as Card)
         }
       }
-
       DeckService.cache.push({ edition, version, lang, data: cards })
       return cards
-    } catch (e) {
-      console.error('Error parsing card YAML:', e)
-      return cards
-    }
+    } catch { return cards }
   }
 
-  public static clear (): void {
-    DeckService.cache = []
-  }
+  public static clear (): void { DeckService.cache = [] }
 }
