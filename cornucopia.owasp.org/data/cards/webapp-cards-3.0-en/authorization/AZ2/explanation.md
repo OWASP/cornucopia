@@ -34,10 +34,10 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 ### What are we going to do about it?
 
 1. Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
-2. Ensure application enforce authorization rules on a trusted server-side component, rather than relying on client-side controls.
+2. Ensure the application enforces authorization rules on a trusted server-side component, rather than relying on client-side controls.
 3. Ensure that the system verifies user permissions before allowing data to be redirected or exported.
 4. Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.
-5. Verify that users not are able to define unauthorized virtual locations/addresses (E.g: db table names, file system paths, sms, email, domains and url paths ).
+5. Verify that users are not able to define unauthorized virtual locations/addresses (E.g, db table names, file system paths, sms, email, domains, and URL paths).
 6. Make sure multi-tenant applications properly segregate data and prevent unauthorized access or redirection between tenants.
 7. Make sure the application has proper protections against CSRF attacks and mix-up attacks for any function that involves sending, forwarding, or routing data, especially when using authorization tokens.
 
