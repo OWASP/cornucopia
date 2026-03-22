@@ -3,16 +3,26 @@ import fs from 'node:fs'
 import path from 'node:path'
 import yaml from 'js-yaml'
 
-const ROOT_DIR = process.cwd()
-
 /* eslint-disable-next-line @typescript-eslint/no-extraneous-class -- Static utility for mappings */
 export class MappingService {
   private static getFilePath(edition: string, version: string): string {
     const fileName = `${edition}-mapping-${version}.yaml`
+    const cwd = process.cwd()
+    const gw = process.env.GITHUB_WORKSPACE ?? cwd
+
+   
+    // This allows the deep SvelteKit build folder to pierce through to the repo root
     const possiblePaths = [
-      path.join(ROOT_DIR, 'source', fileName),
-      path.join(ROOT_DIR, '..', 'source', fileName)
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // Hardcoded CI path
+      path.join(gw, 'source', fileName),
+      path.join(cwd, 'source', fileName),
+      path.join(cwd, '..', 'source', fileName),
+      path.join(cwd, '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', '..', '..', 'source', fileName)
     ]
+    
     return possiblePaths.find((p) => fs.existsSync(p)) ?? ''
   }
 
@@ -21,7 +31,6 @@ export class MappingService {
     if (filePath === '') return { suits: {} }
     try {
       const content = fs.readFileSync(filePath, 'utf8')
-      // Removed 'as unknown' because the linter already identifies this as unknown
       const data = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA })
       
       // Explicit comparison (fixes 'strict-boolean-expressions')
