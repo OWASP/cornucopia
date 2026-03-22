@@ -1,52 +1,21 @@
-import { expect, describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { MappingController } from './mappingController';
 
-function isRecord(obj: unknown): obj is Record<string, unknown> {
-  return typeof obj === 'object' && obj !== null && !Array.isArray(obj);
-}
+describe('mappingController: Complete Coverage', () => {
+    it('covers all mapping logic and lookups', () => {
+        // Empty state
+        const emptyController = new MappingController({});
+        expect(emptyController.getWebAppCardMappings('C1')).toEqual({});
+        expect(emptyController.getMeta()).toEqual({});
 
-function isWebAppMapping(obj: unknown): obj is { id: string; owasp_asvs: string[] } {
-  if (!isRecord(obj)) return false;
-  // Aliasing to camelCase to satisfy the linter
-  const { id, owasp_asvs: owaspAsvs } = obj;
-  return typeof id === 'string' && Array.isArray(owaspAsvs);
-}
-
-function isMetaResult(obj: unknown): obj is { version: string } {
-  if (!isRecord(obj)) return false;
-  return typeof obj.version === 'string';
-}
-
-describe('MappingController Unit Tests', () => {
-  it('should return web app card mapping data', () => {
-    const mockData = {
-      suits: {
-        testSuit: {
-          cards: { 'webapp-1': { id: 'webapp-1', owasp_asvs: ['1.1', '1.2'], name: 'Test Card' } }
-        }
-      }
-    };
-    const controller = new MappingController(mockData);
-    const result = controller.getWebAppCardMappings('webapp-1');
-    
-    expect(result).toBeDefined();
-    if (!isWebAppMapping(result)) throw new Error('Result is not a valid web app mapping');
-    
-    expect(result.id).toBe('webapp-1');
-    expect(result.owasp_asvs).toContain('1.1');
-  });
-
-  it('should return empty object for missing cards', () => {
-    const controller = new MappingController({ suits: {} });
-    const result = controller.getWebAppCardMappings('non-existent');
-    if (!isRecord(result)) throw new Error('Result is not a record');
-    expect(Object.keys(result)).toHaveLength(0);
-  });
-
-  it('should return meta information', () => {
-    const controller = new MappingController({ meta: { version: '1.2.3' }, suits: {} });
-    const meta = controller.getMeta();
-    if (!isMetaResult(meta)) throw new Error('Meta is not valid');
-    expect(meta.version).toBe('1.2.3');
-  });
+        // Populated state
+        const fullController = new MappingController({
+            suits: { "S1": { cards: { "C1": "Mapped-C1" } } },
+            meta: { project: "Cornucopia" }
+        });
+        
+        expect(fullController.getWebAppCardMappings('C1')).toBe('Mapped-C1');
+        expect(fullController.getWebAppCardMappings('invalid')).toEqual({});
+        expect(fullController.getMeta()).toEqual({ project: "Cornucopia" });
+    });
 });
