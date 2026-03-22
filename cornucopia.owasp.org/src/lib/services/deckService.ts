@@ -102,12 +102,13 @@ export class DeckService {
     if (cached !== undefined && cached.data.size > ZERO) return cached.data
 
     const cards = new Map<string, Card>()
-    
+ 
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
+    const gw = String(process.env.GITHUB_WORKSPACE)
     
     const possiblePaths = [
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // Hardcoded CI absolute path
+      path.join(gw, 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),

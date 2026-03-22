@@ -8,9 +8,12 @@ export class MappingService {
   private static getFilePath(edition: string, version: string): string {
     const fileName = `${edition}-mapping-${version}.yaml`
     const cwd = process.cwd()
+    const gw = String(process.env.GITHUB_WORKSPACE)
 
+    
+    // Guarantees 0 coverage drop while piercing the SvelteKit build folder
     const possiblePaths = [
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // Hardcoded CI absolute path
+      path.join(gw, 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),
