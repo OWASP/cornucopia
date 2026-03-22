@@ -102,18 +102,20 @@ export class DeckService {
 
     const cards = new Map<string, Card>()
     
-    // We add the paths directly into the array. No 'if' statements means 0 impact on your test coverage!
+    
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
-    const githubWorkspace = process.env.GITHUB_WORKSPACE ?? ''
     const cwd = process.cwd()
+    const gw = process.env.GITHUB_WORKSPACE ?? cwd
     
     const possiblePaths = [
-      path.join(githubWorkspace, 'source', fileName),
+      path.join(gw, 'source', fileName), // Absolute repo root (GitHub Actions)
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
-      path.join(cwd, '..', '..', 'source', fileName),
-      path.join(cwd, '..', '..', '..', 'source', fileName), // Catches SvelteKit's deep temporary build folder
-      path.join(fileSystemRoot, `../source/${fileName}`),
+      path.join(cwd, '..', '..', 'source', fileName), // SvelteKit Output Folder
+      path.join(cwd, '..', '..', '..', 'source', fileName), // SvelteKit Server Folder
+      path.join(cwd, '..', '..', '..', '..', 'source', fileName), // Deep Failsafe
+      path.join(cwd, '..', '..', '..', '..', '..', 'source', fileName), // Extreme Failsafe
+      path.join(fileSystemRoot, `../source/${fileName}`), // Vitest local coverage safety
       path.join(fileSystemRoot, `source/${fileName}`),
       path.resolve(path.dirname(''), `../source/${fileName}`),
       path.resolve(path.dirname(''), `source/${fileName}`)
