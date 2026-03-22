@@ -6,6 +6,7 @@ defmodule Copi.RateLimiter do
   - Game creation
   - Player creation
   - WebSocket connections
+  - API actions
 
   Rate limits are configured via environment variables and automatically clean up expired entries.
   """
@@ -30,21 +31,22 @@ defmodule Copi.RateLimiter do
 
   ## Parameters
     - ip: IP address as a tuple (e.g., {127, 0, 0, 1}) or string
-    - action: atom representing the action (:game_creation, :player_creation, :connection)
+    - action: atom representing the action (:game_creation, :player_creation, :connection, :api_action)
 
   ## Examples
       iex> Copi.RateLimiter.check_rate("127.0.0.1", :game_creation)
       {:ok, 9}
 
-      iex> Copi.RateLimiter.check_rate({127, 0, 0, 1}, :connection)
-      {:error, :rate_limit_exceeded}
+      iex> Copi.RateLimiter.check_rate({127, 0, 0, 1}, :api_action)
+      {:ok, 9}
   """
-  def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection] do
+  def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection, :api_action] do
     normalized_ip = normalize_ip(ip)
 
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
+    # Only bypass rate limiting if the actual connection IP is loopback, not X-Forwarded-For
     Logger.debug("check_rate: Checking rate limit for IP #{inspect(normalized_ip)} on action #{action}")
-    if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} do
+    if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} and ip == {127, 0, 0, 1} do
       {:ok, :unlimited}
     else
       GenServer.call(__MODULE__, {:check_rate, normalized_ip, action})
@@ -56,6 +58,13 @@ defmodule Copi.RateLimiter do
   """
   def clear_ip(ip) do
     GenServer.cast(__MODULE__, {:clear_ip, normalize_ip(ip)})
+  end
+
+  @doc """
+  Synchronously clears all rate limit data for a specific IP address (useful for testing).
+  """
+  def clear_ip_sync(ip) do
+    GenServer.call(__MODULE__, {:clear_ip, normalize_ip(ip)})
   end
 
   @doc """
@@ -76,12 +85,14 @@ defmodule Copi.RateLimiter do
       limits: %{
         game_creation: get_env_config(:game_creation_limit, 20),
         player_creation: get_env_config(:player_creation_limit, 60),
-        connection: get_env_config(:connection_limit, 133)
+        connection: get_env_config(:connection_limit, 133),
+        api_action: get_env_config(:api_action_limit, 133)
       },
       windows: %{
         game_creation: get_env_config(:game_creation_window, 3600),
         player_creation: get_env_config(:player_creation_window, 3600),
-        connection: get_env_config(:connection_window, 1)
+        connection: get_env_config(:connection_window, 1),
+        api_action: get_env_config(:api_action_window, 133)
       },
       requests: %{}
     }
@@ -125,6 +136,17 @@ defmodule Copi.RateLimiter do
       windows: state.windows
     }
     {:reply, config, state}
+  end
+
+  @impl true
+  def handle_call({:clear_ip, ip}, _from, state) do
+    new_requests =
+      state.requests
+      |> Enum.reject(fn {{request_ip, _action}, _timestamps} -> request_ip == ip end)
+      |> Enum.into(%{})
+    
+    new_state = %{state | requests: new_requests}
+    {:reply, :ok, new_state}
   end
 
   @impl true
