@@ -94,7 +94,6 @@ paths:
                   summary: Example language metadata response
                   value:
                     meta:
-                      edition: Cornucopia Digital Benefits and Disbenefits Edition
                       component: cards
                       language: all
                       languages: [en]
@@ -102,10 +101,11 @@ paths:
 
   /cre/dbd:
     get:
-      summary: Get DBD cards by language
+      summary: Get DBD cards (English)
       description: |
         Get the Cornucopia Digital Benefits and Disbenefits Edition cards.
         This edition does not have Open CRE mappings.
+        Returns only the English language deck.
       responses:
         '200':
           description: Digital Benefits and Disbenefits cards
@@ -264,9 +264,6 @@ components:
         meta:
           type: object
           properties:
-            edition:
-              type: string
-              example: Cornucopia Digital Benefits and Disbenefits Edition
             component:
               type: string
               example: cards

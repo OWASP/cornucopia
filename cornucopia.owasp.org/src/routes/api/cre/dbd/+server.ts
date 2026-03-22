@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit';
+import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 import { CreController } from '$domain/cre/creController';
 import fs from 'fs';
@@ -7,11 +7,16 @@ import path from 'path';
 
 export const prerender = true;
 
-const __dirname = path.resolve(path.dirname(''));
-
 export const GET: RequestHandler = () => {
-  const cardFile = `${__dirname}/../source/dbd-cards-1.0-en.yaml`;
-  const raw = yaml.load(fs.readFileSync(cardFile, 'utf8'), { schema: yaml.FAILSAFE_SCHEMA }) as any;
+  const cardFile = path.resolve('..', 'source', 'dbd-cards-1.0-en.yaml');
+  let raw: any;
+  try {
+    raw = yaml.load(fs.readFileSync(cardFile, 'utf8'), { schema: yaml.FAILSAFE_SCHEMA });
+  } catch {
+    throw error(500, 'Failed to load DBD card data.');
+  }
+
+  if (!raw?.suits) throw error(500, 'Invalid card data format.');
 
   const data: { id: string; desc: string }[] = [];
   for (const suit of raw['suits']) {
