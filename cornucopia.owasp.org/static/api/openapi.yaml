@@ -75,6 +75,57 @@ paths:
                       languages: [en]
                       version: "1.1"
 
+
+  /lang/dbd:
+    get:
+      summary: Get supported languages for Cornucopia Digital Benefits and Disbenefits edition
+      description: |
+        Returns metadata about supported languages for the
+        Cornucopia Digital Benefits and Disbenefits Edition.
+      responses:
+        '200':
+          description: Language metadata for Digital Benefits and Disbenefits edition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaDbd'
+              examples:
+                example:
+                  summary: Example language metadata response
+                  value:
+                    meta:
+                      edition: Cornucopia Digital Benefits and Disbenefits Edition
+                      component: cards
+                      language: all
+                      languages: [en]
+                      version: "1.0"
+
+  /cre/dbd:
+    get:
+      summary: Get DBD cards by language
+      description: |
+        Get the Cornucopia Digital Benefits and Disbenefits Edition cards.
+        This edition does not have Open CRE mappings.
+      responses:
+        '200':
+          description: Digital Benefits and Disbenefits cards
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example DBD response
+                  value:
+                    meta:
+                      edition: Cornucopia Digital Benefits and Disbenefits Edition
+                      component: cards
+                      language: en
+                      version: "1.0"
+                    data:
+                      - id: SCO2
+                        desc: Tommy does not create, publish and maintain publicly all the service assumptions...
+
   /cre/webapp/{lang}:
     get:
       summary: Get Webapp cards by language
@@ -206,3 +257,27 @@ components:
             version:
               type: string
               example: "1.1"
+
+    LanguageMetaDbd:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            edition:
+              type: string
+              example: Cornucopia Digital Benefits and Disbenefits Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en]
+            version:
+              type: string
+              example: "1.0"

@@ -192,6 +192,11 @@ describe('DeckService tests', () => {
             expect(languages).toContain('en');
         });
 
+        it('should return en for dbd', () => {
+            const languages = DeckService.getLanguages('dbd');
+            expect(languages).toContain('en');
+        });
+
         it('should return default en for unknown edition', () => {
             const languages = DeckService.getLanguages('unknown');
             expect(languages).toEqual(['en']);
