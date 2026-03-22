@@ -37,7 +37,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 3. Use SameSite Cookie Attribute: Configure the SameSite attribute on cookies to prevent them from being sent with cross-site requests, which helps mitigate the risk of cross-site request forgery (CSRF).
 4. Regularly change session IDs after authentication to minimize the impact of a compromised ID.
 5. Regularly review and update cookie policies to align with best practices in web security.
-6. Implement strong client authentication methods that are resistant to replay attacks, and ensure that authorization servers invalidate refresh tokens after use to prevent token theft.
+6. Implement strong client authentication methods that are resistant to replay attacks, and ensure that authorization servers implement refresh token rotation (issuing a new refresh token on each use, revoking the previous one, and detecting any reuse of revoked tokens) to limit the impact of token theft.
 7. Ensure that tokens are properly validated for their intended audience to prevent misuse across different applications.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
