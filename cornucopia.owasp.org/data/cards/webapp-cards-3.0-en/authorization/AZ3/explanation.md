@@ -37,7 +37,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are we going to do about it?
 
-Consider all accounts/roles and what access privileges they have, and whether a user in one role can utilize another role. Create an Access Control Policy to document an application's business rules, data types and access authorization criteria and/or processes so that access can be properly provisioned and controlled. This includes identifying access requirements for both the data and system resources.
+Consider all accounts/roles and what access privileges they have, and whether a user in one role can utilize another role. Create an Access Control Policy to document an application's business rules, data types, and access authorization criteria and/or processes so that access can be properly provisioned and controlled. This includes identifying access requirements for both the data and system resources.
 
 1. Ensure all systems with broader access, like indexers or loggers, enforce the same access controls as primary data sources.
 2. Implement secure caching practices and regular cache clearance to prevent unauthorized data access.
@@ -45,7 +45,7 @@ Consider all accounts/roles and what access privileges they have, and whether a 
 4. Conduct regular audits to identify and address any potential information leakage.
 5. Make sure that authorization rules are enforced based on the originating user’s permission and not an intermediary component’s permissions.
 6. Consider implementing multiple layers of security, including continuous consumer identity verification, device security posture assessment, and contextual risk analysis when evaluating access to administrative interfaces or critical functions.
-7. Don't expose internal apis used for documentation and monitoring unless they are explicitly designed for external use and properly secured.
+7. Don't expose internal APIs used for documentation and monitoring unless they are explicitly designed for external use and properly secured.
 8. Log and monitor access to sensitive information, including attempts to access through secondary mechanisms, to detect and respond to potential breaches.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
