@@ -10,7 +10,7 @@ Visualize a scenario where Matt exploits the lack of periodic re-authentication 
 
 ### Example
 
-Matt gains access to an employee’s account after stealing an unlocked computer at a train station early in the morning. Later that day, the employee’s access rights gets revoked after the employee notifies the IT department. However, since the system does not require re-authentication, check for privilege changes during active sessions, or implement other controls like geolocation checks, enforced client fingerprinting, or anomaly detection, Matt can continue to have access to sensitive information and system functionalities all day, exploiting the unchanged session privileges.
+Matt gains access to an employee’s account after stealing an unlocked computer at a train station early in the morning. Later that day, the employee’s access rights were revoked after the employee notified the IT department. However, since the system does not require re-authentication, check for privilege changes during active sessions, or implement other controls like geolocation checks, enforced client fingerprinting, or anomaly detection, Matt can continue to have access to sensitive information and system functionalities all day, exploiting the unchanged session privileges.
 
 ## Threat Modeling
 
