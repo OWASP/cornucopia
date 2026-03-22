@@ -4,7 +4,7 @@ Envision a scenario where William, exploiting a critical aspect of session manag
 
 1. **Predictability in Session IDs:** By influencing session ID generation, William makes these identifiers predictable, allowing him to guess valid session IDs.
 
-2. **Creation of Weak Session Identifiers or tokens:** He generates session identifiers or tokens that are not sufficiently protected, random, or complex, making them easier to compromise.
+2. **Creation of Weak Session Identifiers or Tokens:** He generates session identifiers or tokens that are not sufficiently protected, random, or complex, making them easier to compromise.
 
 ### Example
 
