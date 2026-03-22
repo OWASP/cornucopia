@@ -38,7 +38,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 ### What are we going to do about it?
 
 1. Implement stringent authorization controls to restrict access to security configurations and ACLs, ensuring only authorized personnel can view or modify them.
-2. Employ role-based access control (RBAC) to clearly define and enforce access permissions based on user roles
+2. Employ role-based access control (RBAC) to clearly define and enforce access permissions based on user roles.
 3. Restrict access to security-relevant configuration to only appropriate authorized users.
 4. Ensure the application is designed taking into account client-side security features that browsers using the application must support (such as HTTPS, HTTP Strict Transport Security (HSTS), Content Security Policy (CSP), and other relevant HTTP security mechanisms) and have implemented measures in case these features are not supported or are bypassed by an attacker like blocking access or warning the user.
 5. Make sure the application ensures that function-level access is restricted to consumers with explicit permissions.
