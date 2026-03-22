@@ -81,7 +81,7 @@ defmodule Copi.Cornucopia.Player do
         A-Za-z                     
         À-ÖØ-öø-ÿĀ-ž              
         0-9                       
-        ._\-                     
+        ._\-'"                    
         ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي 
         ًٌٍَُِّْٰﷲﷴﷺﷻ                    
         ٠١٢٣٤٥٦٧٨٩             
@@ -91,45 +91,4 @@ defmodule Copi.Cornucopia.Player do
   end
 
   defp valid_name?(_), do: false
-
-  defp sanitize_name(name) when is_binary(name) do
-    name
-    |> strip_html_tags()
-    |> strip_javascript()
-    |> strip_data_attributes()
-    |> escape_html_entities()
-    |> String.trim()
-    |> String.replace(~r/\s+/, " ") # Normalize multiple spaces
-  end
-
-  defp sanitize_name(_), do: ""
-
-  defp strip_html_tags(text) do
-    # Remove HTML tags using regex
-    String.replace(text, ~r/<[^>]*>/, "")
-  end
-
-  defp strip_javascript(text) do
-    # Remove JavaScript patterns
-    text
-    |> String.replace(~r/javascript:/i, "")
-    |> String.replace(~r/on\w+\s*=/i, "")
-    |> String.replace(~r/eval\s*\(/i, "")
-    |> String.replace(~r/Function\s*\(/i, "")
-  end
-
-  defp strip_data_attributes(text) do
-    # Remove data-* attributes that could be used for XSS
-    String.replace(text, ~r/data-\w+/, "")
-  end
-
-  defp escape_html_entities(text) do
-    # Escape HTML entities that could be dangerous
-    text
-    |> String.replace("&", "&")
-    |> String.replace("<", "<")
-    |> String.replace(">", ">")
-    |> String.replace("\"", "&quot;")
-    |> String.replace("'", "&#39;")
-  end
 end

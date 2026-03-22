@@ -200,12 +200,13 @@ defmodule Copi.CornucopiaTest do
     end
 
     test "create_player/1 accepts safe names" do
+      {:ok, game} = Cornucopia.create_game(%{name: "Test Game", edition: "webapp"})
+      
       safe_names = [
         "John Doe",
         "O'Connor",
         "Jane Smith-Anderson",
         "Player 123",
-        "Test.User@domain.com",
         "العربية",
         "中文",
         "Русский",
@@ -217,7 +218,7 @@ defmodule Copi.CornucopiaTest do
       ]
 
       for name <- safe_names do
-        attrs = %{name: name, game_id: "00000000000000000000000001"}
+        attrs = %{name: name, game_id: game.id}
         assert {:ok, %Player{name: ^name}} = Cornucopia.create_player(attrs)
       end
     end
