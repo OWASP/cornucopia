@@ -50,7 +50,44 @@ defmodule Copi.Cornucopia.Player do
   end
 
   defp valid_name?(name) when is_binary(name) and name != "" do
-    String.match?(name, ~r/^[\u0600-\u06FF\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\uFDF2\uFDF3\uFDF4\uFDFD\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\uFF66-\uFF9Fー々〆〤\u3400-\u4DBF\uF900-\uFAFF\u0900-\u097F\u0621-\u064A\u0660-\u0669\u4E00-\u9FFF\u0E00-\u0E7F«»฿ฯ๏๚๛\u0400-\u04FF\u0500-\u052F\u2DE0-\u2DFF\uA640-\uA69FЮ́ю́Я́я́\u0370-\u03FF\u1F00-\u1FFFA-Za-zÀ-ÖØ-öø-ÿĀ-ž0-9._\--ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي ًٌٍَُِّْٰﷲﷴﷺﷻ ٠١٢٣٤٥٦٧٨٩ \s]+$/u)
+    String.match?(
+      name,
+      ~r/^[
+        \x{0600}-\x{06FF}          
+        \x{0750}-\x{077F}          
+        \x{08A0}-\x{08FF}          
+        \x{FB50}-\x{FDFF}          
+        \x{FE70}-\x{FEFF}          
+        \x{FDF2}\x{FDF3}\x{FDF4}\x{FDFD}
+        \x{3040}-\x{309F}          
+        \x{30A0}-\x{30FF}          
+        \x{4E00}-\x{9FFF}          
+        \x{FF66}-\x{FF9F}          
+        ー々〆〤                   
+        \x{3400}-\x{4DBF}          
+        \x{F900}-\x{FAFF}           
+        \x{0900}-\x{097F}          
+        \x{0621}-\x{064A}          
+        \x{0660}-\x{0669}          
+        \x{0E00}-\x{0E7F}          
+        «»฿ฯ๏๚๛                    
+        \x{0400}-\x{04FF}          
+        \x{0500}-\x{052F}          
+        \x{2DE0}-\x{2DFF}          
+        \x{A640}-\x{A69F}          
+        Ю́ю́Я́я́                       
+        \x{0370}-\x{03FF}          
+        \x{1F00}-\x{1FFF}          
+        A-Za-z                     
+        À-ÖØ-öø-ÿĀ-ž              
+        0-9                       
+        ._\-                     
+        ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوي 
+        ًٌٍَُِّْٰﷲﷴﷺﷻ                    
+        ٠١٢٣٤٥٦٧٨٩             
+        \s                          
+      ]+$/ux
+    )
   end
 
   defp valid_name?(_), do: false
