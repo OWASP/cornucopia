@@ -36,6 +36,6 @@ For many applications, it may be desirable to allow customers to be logged in us
 4. Implement robust session management policies to detect and prevent session fixation and authorization code theft.
 5. Regularly review and update session management policies to ensure they effectively protect against unauthorized access and account compromise.
 6. Educate users about the importance of monitoring their active sessions and recognizing signs of unauthorized access.
-7. Implement alerts for unusul access patterns, such as logins from other countries or old devices, to enhance security and enable timely responses to potential breaches.
+7. Implement alerts for unusual access patterns, such as logins from other countries or old devices, to enhance security and enable timely responses to potential breaches.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
