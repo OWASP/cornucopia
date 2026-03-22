@@ -1,8 +1,8 @@
-## Scenario: Ryan’s Exploitation of a Poorly Implemented Sessions Magement System
+## Scenario: Ryan’s Exploitation of a Poorly Implemented Session Magement System
 
-Imagine a scenario where Ryan takes advantage of a system that doesn't sufficiently give the user the overview of their active sessions, and allows multiple concurrent sessions without proper controls. He exploits the following vulnerabilities:
+Imagine a scenario where Ryan takes advantage of a system that doesn't sufficiently give the user an overview of their active sessions and allows multiple concurrent sessions without proper controls. He exploits the following vulnerabilities:
 
-1. **Allowance of Multiple Active Sessions:** The system does not give the user an overview over which devices that are logged in. This allowes Ryan to log in on a device while the legitimate user is also active, without the user being aware of it.
+1. **Allowance of Multiple Active Sessions:** The system does not give the user an overview of which devices are logged in. This allows Ryan to log in on a device while the legitimate user is also active, without the user being aware of it.
 2. **Lack of Controls on Concurrent Sessions:** The system fails to restrict or monitor concurrent sessions, enabling Ryan to access the account without detection.
 3. **No Alerts for Unusual Concurrent Access:** The system does not alert users or administrators about unusual patterns of concurrent access, such as logins from other countries or old devices.
 4. **Inadequate Session Management Policies:** The system does not have robust session management policies to handle scenarios like authorization code theft or session fixation. If a session gets compromised, Ryan can continue to use it without the system detecting the breach or being able to empower administrators and users to take appropriate actions.
