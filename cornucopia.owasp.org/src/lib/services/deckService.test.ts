@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- Bypassing strict typing for private cache access in tests */
+/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-unsafe-member-access -- Bypassing strict typing for private cache access in tests */
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckService } from './deckService';
 import type { Card } from '$domain/card/card';
@@ -27,12 +27,10 @@ describe('DeckService Unit Tests', () => {
     describe('Cache Management', () => {
         it('should return cards from cache if already populated', () => {
             const deckService = new DeckService();
-            // Fix: Use explicit type instead of 'as Card'
             const mockCard: any = { id: 'test-card', edition: 'webapp' };
             const mockCards = new Map<string, Card>();
             mockCards.set('test-card', mockCard);
 
-            // Fix: Use dot notation for cache access
             (DeckService as any).cache.push({ lang: 'en', version: 'latest', data: mockCards });
 
             const result = deckService.getCards('en');
@@ -40,7 +38,6 @@ describe('DeckService Unit Tests', () => {
         });
 
         it('should clear the cache', () => {
-            // Fix: Use dot notation for cache access
             (DeckService as any).cache.push({ lang: 'en', data: new Map(), version: 'v1' });
             
             expect((DeckService as any).cache.length).toBe(1);
