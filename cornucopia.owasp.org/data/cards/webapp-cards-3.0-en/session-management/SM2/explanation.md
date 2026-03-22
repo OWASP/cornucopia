@@ -1,6 +1,6 @@
 ## Scenario: William's Control Over Session Identifier Generation
 
-Envision a scenario where William, exploiting a critical aspect of session management, gains control over the generation of session identifiers of authorization tokens. He leverages this control to:
+Envision a scenario where William, exploiting a critical aspect of session management, gains control over the generation of session identifiers or authorization tokens. He leverages this control to:
 
 1. **Predictability in Session IDs:** By influencing session ID generation, William makes these identifiers predictable, allowing him to guess valid session IDs.
 
