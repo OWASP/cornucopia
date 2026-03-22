@@ -1,11 +1,11 @@
 ## Scenario: Jeff’s Replay Attack Exploitation
 
-Jeff can reuse stolen session identifiers and/or tokens because they are not handled confidentially or because there is no strong proof of possession (e.g. binding to certificate, device, IP address, user-agent, etc.)
+Jeff can reuse stolen session identifiers and/or tokens because they are not handled confidentially or because there is no strong proof of possession (e.g., binding to a certificate, device, IP address, user-agent, etc.)
 
 Consider a scenario where Jeff exploits a system vulnerability that allows him to reuse stolen session identifiers or tokens without any checks for their validity or proof of possession. This issue arises because the system does not have mechanisms to detect and reject forged or replayed session identifiers or tokens, allowing attackers to reuse them for unauthorized access or actions.
 
 1. **Lack of Confidential Handling:** Session identifiers or tokens are not treated as sensitive information, leading to their exposure and potential theft.
-2. **Absence of Proof of Possession:** The system does not require any form of proof that the session identifier or token is being used by the legitimate owner, such as binding it to a specific device, IP address, user-agent, or using cryptographic methods.
+2. **Absence of Proof of Possession:** The system does not require any form of proof that the session identifier or token is being used by the legitimate owner, such as mTLS sender-constrained tokens, DPoP, or token binding/device-bound credentials.
 3. **No Detection of Reuse:** The system does not have mechanisms to detect and reject replayed session identifiers or tokens, allowing attackers to reuse them for unauthorized access or actions.
 
 ### Example
@@ -31,7 +31,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 ### What are we going to do about it?
 
 1. Treat session identifiers and tokens as sensitive information, ensuring they are handled confidentially and securely.
-2. Implement proof of possession mechanisms, such as binding session identifiers or tokens to specific devices, IP addresses, user-agents, or using cryptographic methods to ensure that they can only be used by the legitimate owner.
+2. Implement proof of possession mechanisms, such as mTLS sender-constrained tokens, DPoP, or token binding/device-bound credentials to ensure that they can only be used by the legitimate owner.
 3. Implement mechanisms to detect and reject replayed session identifiers or tokens, such as using nonces, timestamps, or maintaining a list of recently used identifiers/tokens to prevent their reuse.
 4. Consider implementing additional security measures such as multi-factor authentication, anomaly detection, and rate limiting to further protect against replay attacks.
 
