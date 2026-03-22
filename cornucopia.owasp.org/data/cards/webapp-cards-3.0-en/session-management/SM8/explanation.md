@@ -32,6 +32,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Implement a system for periodic re-authentication, especially for sessions that last beyond a certain time threshold.
 2. Regularly check and update user privileges within active sessions to ensure they reflect current permissions.
 3. Consider introducing shorter session timeouts for highly sensitive applications, requiring users to re-authenticate more frequently.
-4. Implement additional controls such as geolocation checks, enforced client fingerprinting, or anomaly detection to identify and mitigate potential session hijacking.
+4. Implement additional controls such as geolocation checks, using client fingerprinting, anomaly detection as risk-based signals to trigger re-authentication to mitigate against session hijacking.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
