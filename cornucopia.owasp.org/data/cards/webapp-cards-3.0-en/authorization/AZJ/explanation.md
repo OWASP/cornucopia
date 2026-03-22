@@ -18,7 +18,7 @@ This scenario maps primarily to STRIDE: **Information Disclosure** and potential
 
 **Elevation of Privilege** (EoP) occurs when an attacker gains access to capabilities or resources beyond their intended permissions.
 Dinis, a regular user, can access security configurations and ACLs, which are normally restricted and sensitive, meaning that there is a **Information Disclosure**. In the case that he can modify them, he can grant himself higher privileges, escalating his access.
-The core issue is unauthorized access to sensitive security controls, potentially, enabling privilege escalation.
+The core issue is unauthorized access to sensitive security controls, potentially enabling privilege escalation.
 
 ### What can go wrong?
 
@@ -31,7 +31,7 @@ This can manifest in various forms, including but not limited to:
 - Exploitation of vulnerabilities in security management tools to gain unauthorized access
 - Inadequate access controls on security configurations, allowing unauthorized users to view or modify critical settings
 - Exposure of sensitive information in security configurations, such as encryption keys or credentials, to unauthorized users
-- Unauthorized changes to ACLs that can lead to privilege escalation and further exploitation of the system
+- Unauthorized changes to ACLs can lead to privilege escalation and further exploitation of the system
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -42,8 +42,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 3. Restrict access to security-relevant configuration to only appropriate authorized users.
 4. Ensure the application is designed taking into account client-side security features that browsers using the application must support (such as HTTPS, HTTP Strict Transport Security (HSTS), Content Security Policy (CSP), and other relevant HTTP security mechanisms) and have implemented measures in case these features are not supported or are bypassed by an attacker like blocking access or warning the user.
 5. Make sure the application ensures that function-level access is restricted to consumers with explicit permissions.
-6. Implement authorization rules at a trusted service layer and doesn't rely on controls that an untrusted consumer could manipulate, such as client-side JavaScript.
-7. Configure authorization server to only assign the required permissions to each user or service, following the principle of least privilege.
+6. Implement authorization rules at a trusted service layer and don't rely on controls that an untrusted consumer could manipulate, such as client-side JavaScript.
+7. Configure the authorization server to only assign the required permissions to each user or service, following the principle of least privilege.
 8. Communications between backend application components, including local or operating system services, APIs, middleware, and data layers, should be performed with accounts assigned the least necessary privileges.
 9. Ensure that failed authorization attempts are logged and monitored to detect potential abuse or misconfigurations in access controls.
 10. Consider implementing multiple layers of security, including continuous consumer identity verification, device security posture assessment, and contextual risk analysis when evaluating access to administrative interfaces or critical functions.
