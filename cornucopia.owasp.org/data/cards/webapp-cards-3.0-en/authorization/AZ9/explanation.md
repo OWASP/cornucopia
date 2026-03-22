@@ -23,6 +23,13 @@ Even though he can view and modify data, the underlying issue is that privilege 
 ### What can go wrong?
 
 Unsecured administrative tools and interfaces can lead to major data breaches, unauthorized access to sensitive information, and potential system-wide compromises.
+This can manifest in various forms, including but not limited to:
+
+- Weak authentication mechanisms for administrative tools
+- Lack of monitoring and logging for administrative access
+- Access to administrative interfaces by non-privileged users
+- Exploitation of vulnerabilities in administrative tools to gain unauthorized access
+- Inadequate access controls on administrative interfaces, allowing unauthorized users to perform administrative actions
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -32,5 +39,11 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 2. Enforce robust password policies and regular credential updates for system administrators.
 3. Restrict access to administrative interfaces to a limited set of authorized IP addresses or networks.
 4. Regularly audit and monitor activities performed through administrative tools to detect and respond to unauthorized access.
+5. Ensure that administrative tools are not accessible through common URLs and are protected by additional layers of security, such as VPNs or secure tunnels.
+6. Implement role-based access control (RBAC) to ensure that only users with the necessary privileges can access administrative functions.
+7. Regularly update and patch administrative tools to address any known vulnerabilities.
+8. Ensure access to administrative interfaces incorporates multiple layers of security, including continuous consumer identity verification, device security posture assessment, and contextual risk analysis.
+9. Ensure communications between backend application components that don't support the application's standard user session mechanism, including APIs, middleware, and data layers, are authenticated and authorized based on the originating user's permissions, not the intermediary component's permissions.
+10. Ensure communications between backend application components, including local or operating system services, APIs, middleware, and data layers, are performed with accounts assigned the least necessary privileges.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

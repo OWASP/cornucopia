@@ -27,6 +27,11 @@ The core issue is unauthorized access to confidential information, which fits sq
 ### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized information access, breaches of confidentiality, and potential compliance issues.
+This can manifest in various forms, including but not limited to:
+
+- Unauthorized access to sensitive information through secondary mechanisms
+- Information leakage due to inadequate data retention policies
+- Exposure of sensitive data through caching or indexing systems
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -38,5 +43,9 @@ Consider all accounts/roles and what access privileges they have, and whether a 
 2. Implement secure caching practices and regular cache clearance to prevent unauthorized data access.
 3. Establish and enforce strict data retention policies to minimize the risk of accessing outdated sensitive information.
 4. Conduct regular audits to identify and address any potential information leakage.
+5. Make sure that authorization rules are enforced based on the originating user’s permission and not an intermediary component’s permissions.
+6. Consider implementing multiple layers of security, including continuous consumer identity verification, device security posture assessment, and contextual risk analysis when evaluating access to administrative interfaces or critical functions.
+7. Don't expose internal apis used for documentation and monitoring unless they are explicitly designed for external use and properly secured.
+8. Log and monitor access to sensitive information, including attempts to access through secondary mechanisms, to detect and respond to potential breaches.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

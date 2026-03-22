@@ -24,6 +24,12 @@ The consequence of such an action leads to **Information Disclosure** in most ca
 ### What can go wrong?
 
 This type of security lapse can lead to unauthorized access to critical application functionalities, potential data breaches, and misuse of sensitive system properties.
+This can manifest in various forms, including but not limited to:
+
+- Insecure Direct Object References (IDOR)
+- Broken Object Level Authorization (BOLA)
+- Unauthorized access to sensitive data through legitimate entry points
+- Access to administrative functions by non-privileged users
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -33,5 +39,8 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 2. Implement robust, role-based authorization checks that rigorously define and enforce access levels for different user roles.
 3. Ensure that each application function, object, and property is protected by appropriate authorization verifications.
 4. Regularly review and update the authorization system to address new functionalities and changing user roles
+5. Ensure that data-specific access is restricted to users with explicit permissions to specific data items to mitigate insecure direct object reference (IDOR) and broken object level authorization (BOLA)
+6. Ensure that the application only returns the required subset of fields from a data object.
+7. Make sure failed authorization attempts are logged and monitored to detect potential abuse or misconfigurations in access controls.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

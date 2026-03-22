@@ -23,14 +23,22 @@ The core issue is manipulating the system’s handling of data, which fits the d
 ### What can go wrong?
 
 Such vulnerabilities can lead to unauthorized data disclosure, data breaches, and the potential compromise of sensitive information.
+This can manifest in various forms, including but not limited to:
+
+- Unauthorized data redirection to external or malicious locations
+- Data leakage due to insufficient authorization checks on routing mechanisms
+- Compromise of data integrity through unauthorized manipulation of data flow
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
 ### What are we going to do about it?
 
 1. Implement stringent authorization checks for any function that involves sending, forwarding, or routing data.
-2. Ensure that the system verifies user permissions before allowing data to be redirected or exported.
-3. Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.
-4. Verify that users not are able to define unauthorized virtual locations/addresses (E.g: db table names, file system paths, sms, email, domains and url paths ).
+2. Ensure application enforce authorization rules on a trusted server-side component, rather than relying on client-side controls.
+3. Ensure that the system verifies user permissions before allowing data to be redirected or exported.
+4. Regularly audit and update authorization mechanisms to protect against unauthorized data routing or forwarding.
+5. Verify that users not are able to define unauthorized virtual locations/addresses (E.g: db table names, file system paths, sms, email, domains and url paths ).
+6. Make sure multi-tenant applications properly segregate data and prevent unauthorized access or redirection between tenants.
+7. Make sure the application has proper protections against CSRF attacks and mix-up attacks for any function that involves sending, forwarding, or routing data, especially when using authorization tokens.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

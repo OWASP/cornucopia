@@ -24,6 +24,11 @@ The consequence of such an action leads to **Information Disclosure** in most ca
 ### What can go wrong?
 
 Such gaps in authorization controls can lead to unauthorized data access, potentially resulting in information leakage, privacy breaches, and compliance violations.
+This can manifest in various forms, including but not limited to:
+
+- Insecure Direct Object References (IDOR)
+- Broken Object Level Authorization (BOLA)
+- Unauthorized access to sensitive data through legitimate entry points
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -35,5 +40,6 @@ Even though a user may be permitted access to a particular page, the contents of
 2. Implement granular authorization checks that not only control access to pages and forms but also verify user permissions for each data set or action available within these entry points.
 3. Regularly audit and update access control mechanisms to ensure they align with user roles and data sensitivity levels.
 4. Conduct thorough security testing to identify and address any potential authorization bypass scenarios.
+5. Ensure that data-specific access is restricted to users with explicit permissions to specific data items to mitigate insecure direct object reference (IDOR) and broken object level authorization (BOLA)
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

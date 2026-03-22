@@ -21,6 +21,10 @@ The attack is not about impersonating someone else (Spoofing), but about accessi
 ### What can go wrong?
 
 This vulnerability can lead to unauthorized access to sensitive data or functionalities, potentially compromising the entire system’s security.
+This can manifest in various forms, including but not limited to:
+
+- Unauthorized access to restricted areas or data during system errors
+- Exploitation of system downtime or failures to gain access to protected resources
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 

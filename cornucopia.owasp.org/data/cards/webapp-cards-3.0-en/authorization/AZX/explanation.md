@@ -23,6 +23,13 @@ The core issue is inadequate enforcement of authorization, allowing a user to pe
 ### What can go wrong?
 
 Such inconsistencies in authorization control application can lead to unauthorized access to sensitive functionalities and data, posing a significant risk to the application’s security.
+This can manifest in various forms, including but not limited to:
+
+- Unauthorized access to sensitive files or data through modules that lack proper authorization controls
+- Exploitation of new or less scrutinized features that do not integrate with the centralized authorization system
+- Bypassing security controls by targeting specific interactions that are not adequately protected
+- Inconsistent user experience and security posture across different parts of the application, leading to confusion and potential exploitation by attackers
+- Unauthorized access to critical functionalities due to gaps in the application of centralized authorization controls
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -33,6 +40,12 @@ Centralized authorization routines are a good programming practice, but like oth
 1. Ensure that centralized authorization controls are consistently and comprehensively applied across all user interactions within the application, including all modules and features.
 2. Server side implementation and presentation layer representations of access control rules must match.
 3. Conduct thorough security reviews, especially when integrating new features or updates, to ensure they adhere to established authorization standards.
-4. Regularly audit and update authorization protocols to maintain a high level of security throughout the application.
+4. Ensure the application enforces authorization rules at a trusted service layer and doesn't rely on controls that an untrusted consumer could manipulate, such as client-side JavaScript.
+5. Implement multi-tenant authorization controls that properly segregate data and prevent unauthorized access or actions between tenants.
+6. Configure authorization server to only assign the required permissions to each user or service, following the principle of least privilege.
+7. Communications between backend application components, including local or operating system services, APIs, middleware, and data layers, should be performed with accounts assigned the least necessary privileges.
+8. Ensure that failed authorization attempts are logged and monitored to detect potential abuse or misconfigurations in access controls.
+9. Consider implementing multiple layers of security, including continuous consumer identity verification, device security posture assessment, and contextual risk analysis when evaluating access to administrative interfaces or critical functions.
+10. Regularly audit and update authorization protocols to maintain a high level of security throughout the application.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
