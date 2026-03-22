@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- Required for dynamic test resolution */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { DeckService } from './deckService';
 
@@ -46,7 +47,7 @@ describe('DeckService Integration & Coverage', () => {
     expect(DeckService.getLanguages('webapp')).toContain('en');
   });
 
-  it('should return 238 cards.', async () => {
+  it('should return 238 cards.', () => {
     const cards = new DeckService().getCards('en');
     expect(cards.size).toBe(238);
   });
