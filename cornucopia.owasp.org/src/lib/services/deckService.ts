@@ -84,7 +84,6 @@ export class DeckService {
 
   public getCards (lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((deck) => deck.lang === lang && deck.version === 'latest')
-    //  LINT FIX: Replaced "0" with "ZERO"
     if (cached !== undefined && cached.data.size > ZERO) return cached.data
     return this.getCardData(lang)
   }
@@ -100,17 +99,15 @@ export class DeckService {
 
   public getCardDataForEditionVersionLang (edition: string, version: string, lang: string): Map<string, Card> {
     const cached = DeckService.cache.find((c) => c.edition === edition && c.version === version && c.lang === lang)
-    //  LINT FIX: Replaced "0" with "ZERO"
     if (cached !== undefined && cached.data.size > ZERO) return cached.data
 
     const cards = new Map<string, Card>()
     
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
-    const gw = process.env.GITHUB_WORKSPACE ?? cwd
     
     const possiblePaths = [
-      path.join(gw, 'source', fileName),
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // Hardcoded CI absolute path
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),

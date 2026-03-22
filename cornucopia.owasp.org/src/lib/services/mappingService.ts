@@ -8,13 +8,9 @@ export class MappingService {
   private static getFilePath(edition: string, version: string): string {
     const fileName = `${edition}-mapping-${version}.yaml`
     const cwd = process.cwd()
-    const gw = process.env.GITHUB_WORKSPACE ?? cwd
 
-   
-    // This allows the deep SvelteKit build folder to pierce through to the repo root
     const possiblePaths = [
-      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // Hardcoded CI path
-      path.join(gw, 'source', fileName),
+      `/home/runner/work/cornucopia/cornucopia/source/${fileName}`, // Hardcoded CI absolute path
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),
@@ -33,13 +29,10 @@ export class MappingService {
       const content = fs.readFileSync(filePath, 'utf8')
       const data = yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA })
       
-      // Explicit comparison (fixes 'strict-boolean-expressions')
-      // This maintains the 'null' branch in your coverage tests
       if (data === null || typeof data === 'undefined') {
         return { suits: {} }
       }
       
-      // Cast to the expected return type
       return data as Record<string, any>
     } catch {
       return { suits: {} }
