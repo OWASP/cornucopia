@@ -1,21 +1,8 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { GET } from './+server';
-import { CreController } from '$domain/cre/creController';
 
 describe('GET /api/lang/dbd', () => {
-  beforeEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   it('returns language metadata for dbd edition', async () => {
-    vi.spyOn(CreController, 'getEditionName').mockReturnValue(
-      'Cornucopia Digital Benefits and Disbenefits Edition'
-    );
-
     const response = await GET({} as any);
 
     expect(response.status).toBe(200);
@@ -24,7 +11,6 @@ describe('GET /api/lang/dbd', () => {
     const body = await response.json();
     expect(body).toEqual({
       meta: {
-        edition: 'Cornucopia Digital Benefits and Disbenefits Edition',
         component: 'cards',
         language: 'all',
         languages: ['en'],
