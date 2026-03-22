@@ -42,22 +42,10 @@
               pnpm install          # Install dependencies
               npm run build-stage   # Build staging version
               npm run coverage
-          - name: Install smoke test tools
+          - name: Smoke Test - Application Verification
             working-directory: cornucopia.owasp.org
             run: |
-             pnpm add -D serve wait-on
-
-          - name: Smoke test
-            working-directory: cornucopia.owasp.org
-            run: |
-             pnpm exec serve build -l 3000 &
-             sleep 2
-             pnpm exec wait-on http://localhost:3000
-             
-          - name: Smoke test
-            working-directory: cornucopia.owasp.org
-            run: |
-              pnpm exec serve build &
+              pnpm exec serve build -l 3000 &
               pnpm exec wait-on http://localhost:3000
               npm run smoke-test
               kill $(jobs -p) || true

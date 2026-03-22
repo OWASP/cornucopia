@@ -64,10 +64,10 @@
               echo "Max retries reached, skipping audit due to transient registry errors"
               exit 0
 
-          - name: Smoke test
+          - name: Smoke Test - Application Verification
             working-directory: cornucopia.owasp.org
             run: |
-              pnpm exec serve build &
+              pnpm exec serve build -l 3000 &
               pnpm exec wait-on http://localhost:3000
               npm run smoke-test
 
@@ -80,5 +80,3 @@
              total-parts-count: 3
              add-prefix: cornucopia.owasp.org
              files: cornucopia.owasp.org/coverage/lcov.info
-              kill $(jobs -p) || true
-
