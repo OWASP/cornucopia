@@ -18,9 +18,10 @@ The primary STRIDE category is **Spoofing**.
 
 This scenario is about exploiting trust for malicious gain, typically referred to in STRIDE as **Spoofing**, because Larry pretends to be the trusted application or uses its trusted identity to deceive others.
 
+
 ### What can go wrong?
 
-Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration.
+Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration, auth code interception attacks, mix-up attacks, and session- and token-replay.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
@@ -30,5 +31,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 2. Educate users about the risks of phishing and other trust exploitation tactics. 
 3. Monitor and control how the application’s APIs and services interact with other systems, ensuring secure and verified connections.
 4. Establish strict guidelines and security protocols for third-party applications or services that integrate with the application.
+5. Implement and properly configure identity managment to ensure authentication and authorization flows and authorization tokens are properly secured to mitigate against unauthorized access and exploitation of interconnected systems. 
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
