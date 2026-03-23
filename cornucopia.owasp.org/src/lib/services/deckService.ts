@@ -28,7 +28,8 @@ export class DeckService {
   private static readonly decks: Deck[] = [
     { edition: 'mobileapp', version: '1.1', lang: ['en'] },
     { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-    { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
+    //  FIX: Added 'es' to webapp 3.0 to ensure the SvelteKit prerenderer generates the pages the Smoke Test looks for
+    { edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
     { edition: 'companion', version: '1.0', lang: ['en'] }
   ]
 
@@ -112,7 +113,8 @@ export class DeckService {
     const data = ((): YamlData | null => {
       try {
         const yamlData = fs.readFileSync(cardFile, 'utf8')
-        const parsedYaml = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA })
+        //  FIX: Removed FAILSAFE_SCHEMA to prevent the parser from silently crashing on real OWASP files that use complex yaml features
+        const parsedYaml = yaml.load(yamlData)
         
         /* v8 ignore start */
         if (parsedYaml === null || typeof parsedYaml !== 'object') {
@@ -132,7 +134,6 @@ export class DeckService {
 
     const baseDir = hasDir(`data/cards/${edition}-cards-${version}-${lang}/`) ? `data/cards/${edition}-cards-${version}-${lang}/` : `data/cards/${edition}-cards-${version}-en/`
     
-    //  Declared type on the left side to satisfy consistent-type-assertions rule
     const mapping: MappingData = { ...MappingService.getCardMapping(edition, version) }
 
     const { suits } = data
