@@ -263,9 +263,6 @@ export default {
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/mobileapp/PC2/1.1/uk',
                 '/edition/mobileapp/PC2/1.1/hi',
-				'/card/mobileapp/PC2/1.1/en',
-				'/card/mobileapp/PC2/1.1/uk',
-                '/card/mobileapp/PC2/1.1/hi',
 			]
 		},
 		csrf: {
