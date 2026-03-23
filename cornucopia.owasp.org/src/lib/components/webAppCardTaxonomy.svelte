@@ -16,9 +16,10 @@
     card: Card;
     routes: Map<string, Route[]>;
     capecData?: any;
+    asvsVersion: string;
   }
 
-  let { mappingData, card = $bindable(), routes, capecData = undefined }: Props = $props();
+  let { mappingData, card = $bindable(), routes, capecData = undefined, asvsVersion }: Props = $props();
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
@@ -132,9 +133,10 @@
       />
     {/if}
   
-    <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
+    <h1 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h1>
     {#if hasMappings && mappings.owasp_asvs}
-      <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
+
+      <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]} version={asvsVersion}></ASVSOverview>
     {/if}
     <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>
     {#each attacks || [] as attack}

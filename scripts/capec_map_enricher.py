@@ -25,6 +25,15 @@ class EnricherVars:
     args: argparse.Namespace
 
 
+def _extract_names_from_items(items: Any, target: dict[int, str]) -> None:
+    """Add ID->Name mappings from a list of CAPEC items into target dict."""
+    if not isinstance(items, list):
+        return
+    for item in items:
+        if "_ID" in item and "_Name" in item:
+            target[int(item["_ID"])] = item["_Name"]
+
+
 def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
     """
     Extract CAPEC ID to Name mappings from JSON data.
@@ -56,18 +65,14 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
         logging.warning("'Attack_Pattern' is not a list")
         return capec_names
 
-    for pattern in attack_patterns:
-        if "_ID" in pattern and "_Name" in pattern:
-            capec_id = int(pattern["_ID"])
-            capec_name = pattern["_Name"]
-            capec_names[capec_id] = capec_name
+    _extract_names_from_items(attack_patterns, capec_names)
 
-    categories = catalog["Categories"]["Category"]
-    for category in categories:
-        if "_ID" in category and "_Name" in category:
-            capec_id = int(category["_ID"])
-            capec_name = category["_Name"]
-            capec_names[capec_id] = capec_name
+    if "Categories" not in catalog:
+        logging.warning("No 'Categories' key found in catalog")
+    elif "Category" not in catalog["Categories"]:
+        logging.warning("No 'Category' key found in categories section")
+    else:
+        _extract_names_from_items(catalog["Categories"]["Category"], capec_names)
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names

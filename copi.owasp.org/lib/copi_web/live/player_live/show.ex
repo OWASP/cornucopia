@@ -17,27 +17,23 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    with {:ok, player} <- Player.find(player_id) do
-      with {:ok, game} <- Game.find(player.game_id) do
-        CopiWeb.Endpoint.subscribe(topic(player.game_id))
-        {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
-      else
-        {:error, _reason} ->
-          {:ok, redirect(socket, to: "/error")}
-      end
+    with {:ok, player} <- Player.find(player_id),
+         {:ok, game} <- Game.find(player.game_id) do
+      CopiWeb.Endpoint.subscribe(topic(player.game_id))
+      {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
     else
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, redirect(socket, to: "/error")}
     end
   end
 
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
-    with {:ok, updated_player} <- Player.find(socket.assigns.player.id) do
-      {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
-    else
+    case Player.find(socket.assigns.player.id) do
+      {:ok, updated_player} ->
+        {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
       {:error, _reason} ->
-        {:ok, redirect(socket, to: "/error")}
+        {:noreply, socket}
     end
   end
 
@@ -166,20 +162,19 @@ defmodule CopiWeb.PlayerLive.Show do
               end
             end
 
-            case Game.find(game.id) do
-              {:ok, updated_game} ->
-                CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-                {:noreply, assign(socket, :game, updated_game)}
-              {:error, reason} ->
-                Logger.warning("Failed to reload game after vote: game_id: #{game.id}, reason: #{inspect(reason)}")
-                {:noreply, socket}
-            end
+            {:ok, updated_game} = Game.find(game.id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
           end
         {:error, reason} ->
           Logger.warning("Failed to find dealt card: dealt_card_id: #{dealt_card_id}, player_id: #{player.id}, game_id: #{game.id}, reason: #{inspect(reason)}")
           {:noreply, socket}
       end
     end
+  end
+
+  def topic(game_id) do
+    "game:#{game_id}"
   end
 
   def ordered_cards(cards) do

@@ -197,6 +197,22 @@ defmodule Copi.CornucopiaLogicTest do
     assert d3.id in all_card_ids
   end
 
+  test "lead-suit wins when no jokers or trumps present", %{game: game, p1: p1, p2: p2} do
+    {:ok, c1} = create_card("Authentication", "K")
+    {:ok, c2} = create_card("Authentication", "5")
+
+    d1 = play_card(p1, c1, 1)  # leads with Authentication K
+    d2 = play_card(p2, c2, 1)  # follows with Authentication 5
+
+    Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d1.id, player_id: p1.id})
+    Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: d2.id, player_id: p2.id})
+
+    game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
+    winner = Cornucopia.highest_scoring_card_in_round(game, 1)
+    # "K" is higher than "5" in card_order; both Authentication (lead suit, no jokers/trumps)
+    assert winner.id == d1.id
+  end
+
   test "jokers trump all other cards", %{game: game, p1: p1, p2: p2} do
     {:ok, joker} = create_card("Joker", "JokerA")
     {:ok, trump} = create_card("Cornucopia", "A")

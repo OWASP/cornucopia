@@ -168,7 +168,7 @@ class TestCompoundLocales(unittest.TestCase):
         script_dir = Path(__file__).parent
         cornucopia_dir = script_dir.parent
         self.test_source_dir = cornucopia_dir / "tests" / "test_files" / "source"
-        self.checker = TranslationChecker(self.test_source_dir)
+        self.checker = TranslationChecker(self.test_source_dir, excluded_tags=["T00005"])
 
     def test_compound_locale_files_included_in_file_groups(self) -> None:
         """Test that compound locale files (no_nb, pt_br, pt_pt) are included by get_file_groups()."""
