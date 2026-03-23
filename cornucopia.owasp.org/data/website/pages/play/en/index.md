@@ -41,7 +41,7 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
 
 See Márk Vinkovits leading a threat modelling ["talk and group session"](https://www.youtube.com/watch?v=9dVDqeO6y3A&ab_channel=OWASPHU "How to do threat modeling via playing cards* by Márk Vinkovits @ OWASP track @hacktivityconf 1510") playing Cornucopia in the OWASP track @hacktivityconf 1510.
 
-## Gameplay - Modelling Evil User Stories
+## Gameplay - Modelling evil user stories
 
 Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created a video to explain how he has trained hundreds of teams to use OWASP Cornucopia in modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date. You can read more about this approach in CyberSec Games blog post on LinkedIn: ["Identifying abuse before designing architecture: Embedding Game-Based Threat Modelling into Agile Delivery at a Major Latin American Bank"](https://www.linkedin.com/pulse/identifying-abuse-before-designing-architecture-embedding-zmnhe/).
 
