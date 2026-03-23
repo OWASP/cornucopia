@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- Required for Vitest mock resolution */
+ 
 import { describe, it, expect, vi } from 'vitest';
 import { MappingService } from './mappingService';
 import fs from 'node:fs';
