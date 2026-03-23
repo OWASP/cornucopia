@@ -42,6 +42,14 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/asvs/webapp/3.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+/api/capec/webapp/3.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
 /api/cre/mobileapp/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
