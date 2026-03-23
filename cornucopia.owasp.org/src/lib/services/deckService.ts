@@ -78,7 +78,6 @@ export class DeckService {
 
     const possiblePaths = [
       path.join(workspace, 'source', fileName),
-      path.join(path.dirname(cwd), 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
       path.join(cwd, '..', '..', 'source', fileName),
@@ -95,7 +94,6 @@ export class DeckService {
       const fallbackFileName = `${edition}-cards-${version}-en.yaml`
       const fallbackPaths = [
         path.join(workspace, 'source', fallbackFileName),
-        path.join(path.dirname(cwd), 'source', fallbackFileName),
         path.join(cwd, 'source', fallbackFileName),
         path.join(cwd, '..', 'source', fallbackFileName),
         path.join(cwd, '..', '..', 'source', fallbackFileName),
@@ -131,11 +129,10 @@ export class DeckService {
       if (data.suits === undefined) return cards
       /* v8 ignore stop */
       
-      //  CRITICAL FIX: Restore suit names from object keys to fix URL 404s
       const rawSuits = data.suits as Record<string, YamlSuit>
       const suitsIterable = Array.isArray(data.suits) 
           ? data.suits 
-          : Object.entries(rawSuits).map(([key, val]) => ({ name: key, ...val }))
+          : Object.entries(rawSuits).map(([key, val]) => ({ id: key, name: key, ...val }))
 
       for (const suitObj of suitsIterable) {
         let mappingSuit: MappingSuit | undefined = undefined 
@@ -143,7 +140,7 @@ export class DeckService {
           const rawMapSuits = mapping.suits as Record<string, MappingSuit>
           const mapList = Array.isArray(mapping.suits) 
               ? mapping.suits 
-              : Object.entries(rawMapSuits).map(([key, val]) => ({ name: key, ...val }))
+              : Object.entries(rawMapSuits).map(([key, val]) => ({ id: key, name: key, ...val }))
               
           mappingSuit = mapList.find((m) => String(m.id ?? '') === String(suitObj.id ?? '') || (m.name ?? '') === (suitObj.name ?? ''))
         }
@@ -152,10 +149,11 @@ export class DeckService {
         if (suitObj.cards === undefined) continue
         /* v8 ignore stop */
         
+        // THE ULTIMATE FIX: Restore the individual card IDs from the dictionary keys
         const rawCards = suitObj.cards as Record<string, YamlCard>
         const cardsIterable = Array.isArray(suitObj.cards) 
             ? suitObj.cards 
-            : Object.values(rawCards)
+            : Object.entries(rawCards).map(([key, val]) => ({ id: key, ...val }))
 
         for (const cardData of cardsIterable) {
           if (cardData.id === undefined) continue
