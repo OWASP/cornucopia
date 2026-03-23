@@ -21,7 +21,7 @@ This scenario is about exploiting trust for malicious gain, typically referred t
 
 ### What can go wrong?
 
-Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration, auth code interception attacks, mix-up attacks, and session- and token-replay.
+Such manipulation can lead to significant breaches of user trust, unauthorized access to sensitive information, and exploitation of interconnected systems. Abuse of trust attacks include: Clickjacking, Phishing, Pharming, SSL downgrade/misconfiguration, auth code interception attacks, mix-up attacks, and session replay and token replay attacks.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
