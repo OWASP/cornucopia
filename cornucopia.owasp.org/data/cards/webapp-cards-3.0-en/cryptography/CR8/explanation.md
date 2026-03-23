@@ -30,7 +30,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Implement robust encryption for sensitive data storage, ensuring that even if data is accessed, it remains unintelligible and secure.
 2. Use secure hashing algorithms, particularly for storing passwords, to prevent them from being reverted to their original form.
 3. Regularly review and update encryption and hashing methods to adhere to current best practices and standards.
-4. Ensure digital signatures and HMACs, as part of data authentication or data integrity, are collision-resistant and have appropriate bit-lengths.
+4. For digital signatures, use collision-resistant hash functions with appropriate output lengths (for example, SHA-256 or stronger) and key sizes that meet current recommendations; for HMACs, use approved hash functions (for example, HMAC-SHA-256 or stronger) and ensure the MAC/tag length provides sufficient security (typically at least 128 bits of effective strength, avoiding excessive truncation).
 5. All random numbers and strings which are intended to be non-guessable must be generated using a cryptographically secure pseudo-random number generator (CSPRNG) and have at least 128 bits of entropy.
 6. Only allow modern, recommended versions of TLS (for example, TLS 1.2 and TLS 1.3), and enforce TLS for all internal and external application communications.
 7. Log and monitor security events such as backend TLS and encryption failures.
