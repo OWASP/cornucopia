@@ -32,7 +32,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 3. Regularly review and update encryption and hashing methods to adhere to current best practices and standards.
 4. Ensure digital signatures and HMACs, as part of data authentication or data integrity, are collision-resistant and have appropriate bit-lengths.
 5. All random numbers and strings which are intended to be non-guessable must be generated using a cryptographically secure pseudo-random number generator (CSPRNG) and have at least 128 bits of entropy.
-6. Only use the latest recommended versions of TLS, such as TLS 1.2 and TLS 1.3 and that it's used for all communication within and external to the application.
+6. Only allow modern, recommended versions of TLS (for example, TLS 1.2 and TLS 1.3), and enforce TLS for all internal and external application communications.
 7. Log and monitor security events such as backend TLS and encryption failures.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
