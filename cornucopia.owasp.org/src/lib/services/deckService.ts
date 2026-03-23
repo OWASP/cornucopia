@@ -18,6 +18,7 @@ export class DeckService {
 
         {lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1'},
         {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'},
+        {lang: ['en'], edition: 'companion', version: '1.0'}
     ];
     private static readonly decks: Deck[] = [
        { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
