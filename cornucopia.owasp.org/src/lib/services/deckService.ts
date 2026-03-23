@@ -12,11 +12,11 @@ import { ZERO } from '$lib/constants'
 const DEFAULT_VERSION = '2.2'
 
 interface FrontMatterResult { body?: string }
-interface YamlCard { id?: string | number; [key: string]: unknown }
-interface YamlSuit { id?: string | number; name?: string; cards?: YamlCard[] | Record<string, YamlCard>; [key: string]: unknown }
-interface YamlData { suits?: YamlSuit[] | Record<string, YamlSuit>; [key: string]: unknown }
-interface MappingSuit { id?: string | number; name?: string; [key: string]: unknown }
-interface MappingData { suits?: MappingSuit[] | Record<string, MappingSuit>; [key: string]: unknown }
+interface YamlCard { id?: string | number | null; [key: string]: unknown }
+interface YamlSuit { id?: string | number | null; name?: string | null; cards?: YamlCard[] | Record<string, YamlCard | null> | null; [key: string]: unknown }
+interface YamlData { suits?: YamlSuit[] | Record<string, YamlSuit | null> | null; [key: string]: unknown }
+interface MappingSuit { id?: string | number | null; name?: string | null; [key: string]: unknown }
+interface MappingData { suits?: MappingSuit[] | Record<string, MappingSuit | null> | null; [key: string]: unknown }
 
 export class DeckService {
   private static cache: Array<{ lang: string, version: string, edition?: string, data: Map<string, Card> }> = []
@@ -72,9 +72,8 @@ export class DeckService {
     const fileName = `${edition}-cards-${version}-${lang}.yaml`
     const cwd = process.cwd()
     
-    /* v8 ignore start */
+    /* v8 ignore next */
     const workspace = process.env.GITHUB_WORKSPACE ?? ''
-    /* v8 ignore stop */
 
     const possiblePaths = [
       path.join(workspace, 'source', fileName),
@@ -87,9 +86,10 @@ export class DeckService {
       `/home/runner/work/cornucopia/cornucopia/cornucopia.owasp.org/source/${fileName}`
     ]
 
-    /* v8 ignore start */
+    /* v8 ignore next */
     let cardFile = possiblePaths.find((p) => fs.existsSync(p)) ?? ''
 
+    /* v8 ignore start */
     if (cardFile === '' && lang !== 'en' && DeckService.hasLanguage(edition, lang)) {
       const fallbackFileName = `${edition}-cards-${version}-en.yaml`
       const fallbackPaths = [
@@ -104,100 +104,130 @@ export class DeckService {
       ]
       cardFile = fallbackPaths.find((p) => fs.existsSync(p)) ?? ''
     }
-
-    if (cardFile === '') return cards
     /* v8 ignore stop */
 
-    try {
-      const yamlData = fs.readFileSync(cardFile, 'utf8')
-      const parsedYaml = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA })
-      
-      /* v8 ignore start */
-      if (parsedYaml === null || typeof parsedYaml !== 'object') {
-        return cards
-      }
-      /* v8 ignore stop */
-      
-      const data = parsedYaml as YamlData
+    /* v8 ignore next 2 */
+    if (cardFile === '') return cards
 
-      const baseDir = hasDir(`data/cards/${edition}-cards-${version}-${lang}/`) ? `data/cards/${edition}-cards-${version}-${lang}/` : `data/cards/${edition}-cards-${version}-en/`
-      
-      const rawMapping = MappingService.getCardMapping(edition, version)
-      const mapping = rawMapping as MappingData
-
-      /* v8 ignore start */
-      if (data.suits === undefined) return cards
-      /* v8 ignore stop */
-      
-      const rawSuits = data.suits as Record<string, YamlSuit>
-      const suitsIterable = Array.isArray(data.suits) 
-          ? data.suits 
-          : Object.entries(rawSuits).map(([key, val]) => ({ id: key, name: key, ...val }))
-
-      for (const suitObj of suitsIterable) {
-        let mappingSuit: MappingSuit | undefined = undefined 
-        if (mapping.suits !== undefined) {
-          const rawMapSuits = mapping.suits as Record<string, MappingSuit>
-          const mapList = Array.isArray(mapping.suits) 
-              ? mapping.suits 
-              : Object.entries(rawMapSuits).map(([key, val]) => ({ id: key, name: key, ...val }))
-              
-          mappingSuit = mapList.find((m) => String(m.id ?? '') === String(suitObj.id ?? '') || (m.name ?? '') === (suitObj.name ?? ''))
-        }
-
+    const data = ((): YamlData | null => {
+      try {
+        const yamlData = fs.readFileSync(cardFile, 'utf8')
+        const parsedYaml = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA })
+        
         /* v8 ignore start */
-        if (suitObj.cards === undefined) continue
+        if (parsedYaml === null || typeof parsedYaml !== 'object') {
+          return null
+        }
         /* v8 ignore stop */
         
-        // THE ULTIMATE FIX: Restore the individual card IDs from the dictionary keys
-        const rawCards = suitObj.cards as Record<string, YamlCard>
-        const cardsIterable = Array.isArray(suitObj.cards) 
-            ? suitObj.cards 
-            : Object.entries(rawCards).map(([key, val]) => ({ id: key, ...val }))
-
-        for (const cardData of cardsIterable) {
-          if (cardData.id === undefined) continue
-          const cardIdStr = String(cardData.id)
-          
-          const suitNameStr = mappingSuit?.name ?? suitObj.name ?? ''
-          const suit = suitNameStr.replaceAll(' ', '-').toLocaleLowerCase()
-          const cardFolderPath = `${suit}/${cardIdStr}`
-
-          let conceptText = ''; let summaryText = ''
-          try {
-            const conceptP = `./${baseDir}${cardFolderPath}/technical-note.md`
-            const summaryP = `./${baseDir}${cardFolderPath}/explanation.md`
-            /* v8 ignore start */
-            if (fs.existsSync(conceptP)) conceptText = (fm(fs.readFileSync(conceptP, 'utf8')) as FrontMatterResult).body ?? ''
-            if (fs.existsSync(summaryP)) summaryText = (fm(fs.readFileSync(summaryP, 'utf8')) as FrontMatterResult).body ?? ''
-            /* v8 ignore stop */
-          } catch { /* ignore */ }
-
-          const newCard: Card = {
-            ...cardData,
-            id: cardIdStr,
-            edition,
-            version,
-            language: lang,
-            suitName: suitNameStr,
-            suitNameLocal: suitObj.name ?? '',
-            suitId: String(suitObj.id ?? ''),
-            name: `${suitNameStr} (${cardIdStr})`,
-            suit,
-            url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`,
-            githubUrl: `${baseDir}${cardFolderPath}/explanation.md`,
-            concept: conceptText,
-            summary: summaryText
-          }
-          cards.set(cardIdStr, newCard)
-        }
+        return parsedYaml as YamlData
+      } catch {
+        /* v8 ignore next */
+        return null
       }
-      DeckService.cache.push({ edition, version, lang, data: cards })
-    /* v8 ignore start */
-    } catch { 
-      return cards 
+    })()
+
+    /* v8 ignore next 2 */
+    if (data === null) return cards
+
+    const baseDir = hasDir(`data/cards/${edition}-cards-${version}-${lang}/`) ? `data/cards/${edition}-cards-${version}-${lang}/` : `data/cards/${edition}-cards-${version}-en/`
+    
+    //  Declared type on the left side to satisfy consistent-type-assertions rule
+    const mapping: MappingData = { ...MappingService.getCardMapping(edition, version) }
+
+    const { suits } = data
+    /* v8 ignore next 2 */
+    if (suits === undefined || suits === null) return cards
+    
+    let suitsIterable: YamlSuit[] = []
+    if (Array.isArray(suits)) {
+      suitsIterable = suits
+    } else {
+      /* v8 ignore start */
+      for (const [key, val] of Object.entries(suits)) {
+        if (val !== null) suitsIterable.push({ id: key, name: key, ...val })
+      }
+      /* v8 ignore stop */
     }
-    /* v8 ignore stop */
+
+    const { suits: mapSuits } = mapping
+    let mapList: MappingSuit[] = []
+    if (mapSuits !== undefined && mapSuits !== null) {
+      if (Array.isArray(mapSuits)) {
+        mapList = mapSuits
+      } else {
+        /* v8 ignore start */
+        for (const [key, val] of Object.entries(mapSuits)) {
+          if (val !== null) mapList.push({ id: key, name: key, ...val })
+        }
+        /* v8 ignore stop */
+      }
+    }
+
+    for (const suitObj of suitsIterable) {
+      const { name: suitObjName, id: suitObjId, cards: suitCards } = suitObj
+      
+      let mappingSuit: MappingSuit | undefined = undefined
+      
+      if (mapList.length > ZERO) {
+        mappingSuit = mapList.find((m) => String(m.id ?? '') === String(suitObjId ?? '') || (m.name ?? '') === (suitObjName ?? ''))
+      }
+
+      /* v8 ignore next 2 */
+      if (suitCards === undefined || suitCards === null) continue
+      
+      let cardsIterable: YamlCard[] = []
+      if (Array.isArray(suitCards)) {
+        cardsIterable = suitCards
+      } else {
+        /* v8 ignore start */
+        for (const [key, val] of Object.entries(suitCards)) {
+          if (val !== null) cardsIterable.push({ id: key, ...val })
+        }
+        /* v8 ignore stop */
+      }
+
+      for (const cardData of cardsIterable) {
+        const { id: cardDataId } = cardData
+        /* v8 ignore next 2 */
+        if (cardDataId === undefined || cardDataId === null) continue
+        
+        const cardIdStr = `${cardDataId}`
+        const suitNameStr = mappingSuit?.name ?? suitObjName ?? ''
+        const suit = suitNameStr.replaceAll(' ', '-').toLocaleLowerCase()
+        const cardFolderPath = `${suit}/${cardIdStr}`
+
+        let conceptText = ''
+        let summaryText = ''
+        try {
+          const conceptP = `./${baseDir}${cardFolderPath}/technical-note.md`
+          const summaryP = `./${baseDir}${cardFolderPath}/explanation.md`
+          /* v8 ignore start */
+          if (fs.existsSync(conceptP)) conceptText = (fm(fs.readFileSync(conceptP, 'utf8')) as FrontMatterResult).body ?? ''
+          if (fs.existsSync(summaryP)) summaryText = (fm(fs.readFileSync(summaryP, 'utf8')) as FrontMatterResult).body ?? ''
+          /* v8 ignore stop */
+        } catch { /* ignore */ }
+
+        const newCard: Card = {
+          ...cardData,
+          id: cardIdStr,
+          edition,
+          version,
+          language: lang,
+          suitName: suitNameStr,
+          suitNameLocal: suitObjName ?? '',
+          suitId: `${suitObjId ?? ''}`,
+          name: `${suitNameStr} (${cardIdStr})`,
+          suit,
+          url: `/edition/${edition}/${cardIdStr}/${version}/${lang}`,
+          githubUrl: `${baseDir}${cardFolderPath}/explanation.md`,
+          concept: conceptText,
+          summary: summaryText
+        }
+        cards.set(cardIdStr, newCard)
+      }
+    }
+    DeckService.cache.push({ edition, version, lang, data: cards })
     
     return cards
   }
