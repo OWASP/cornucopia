@@ -29,7 +29,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are we going to do about it?
 
-1. Implement proper encryption for sensitive data while it is in memory, in transit, and during processing within the application according to the latest recommendations on crypographic operations.
+1. Implement proper encryption for sensitive data while it is in memory, in transit, and during processing within the application according to the latest recommendations for cryptographic operations.
 2. Ensure that all data communications, both internal and external, are secured with robust and recommended encryption methods using only approved and recommended cryptographic algorithms and modes of operation.
 3. Regularly review and update encryption practices to cover data in use, in transit, and during communications with external systems.
 
