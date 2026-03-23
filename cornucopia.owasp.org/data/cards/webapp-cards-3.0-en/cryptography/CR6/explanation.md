@@ -6,7 +6,7 @@ Picture a scenario where Romain accesses and modifies unencrypted data, either i
 
 2. **Data Exposed in Communication:** Personal and commercially-sensitive data is transmitted without encryption, either within the application or in interactions with external systems.
 
-3. **Data is not properly signed or hashed:** Personal and commercially-sensitive data is not properly signed using a HMAC, a asymetric key, or both meaning that the data can be modified in transit.
+3. **Data lacks authenticated integrity protection:** Personal and commercially-sensitive data is not protected using an HMAC (or another message authentication code), a digital signature with an asymmetric key, or both, meaning that an attacker can modify the data in transit without detection.
 
 ### Example
 
