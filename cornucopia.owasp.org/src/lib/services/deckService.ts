@@ -81,6 +81,8 @@ export class DeckService {
       path.join(path.dirname(cwd), 'source', fileName),
       path.join(cwd, 'source', fileName),
       path.join(cwd, '..', 'source', fileName),
+      path.join(cwd, '..', '..', 'source', fileName),
+      path.join(cwd, '..', '..', '..', 'source', fileName),
       path.resolve('source', fileName),
       `/home/runner/work/cornucopia/cornucopia/source/${fileName}`,
       `/home/runner/work/cornucopia/cornucopia/cornucopia.owasp.org/source/${fileName}`
@@ -89,7 +91,6 @@ export class DeckService {
     /* v8 ignore start */
     let cardFile = possiblePaths.find((p) => fs.existsSync(p)) ?? ''
 
-    // FIX: Only fallback to English if the language is OFFICIALLY supported but the file is missing
     if (cardFile === '' && lang !== 'en' && DeckService.hasLanguage(edition, lang)) {
       const fallbackFileName = `${edition}-cards-${version}-en.yaml`
       const fallbackPaths = [
@@ -97,6 +98,8 @@ export class DeckService {
         path.join(path.dirname(cwd), 'source', fallbackFileName),
         path.join(cwd, 'source', fallbackFileName),
         path.join(cwd, '..', 'source', fallbackFileName),
+        path.join(cwd, '..', '..', 'source', fallbackFileName),
+        path.join(cwd, '..', '..', '..', 'source', fallbackFileName),
         path.resolve('source', fallbackFileName),
         `/home/runner/work/cornucopia/cornucopia/source/${fallbackFileName}`,
         `/home/runner/work/cornucopia/cornucopia/cornucopia.owasp.org/source/${fallbackFileName}`
@@ -128,12 +131,20 @@ export class DeckService {
       if (data.suits === undefined) return cards
       /* v8 ignore stop */
       
-      const suitsIterable = Array.isArray(data.suits) ? data.suits : Object.values(data.suits)
+      //  CRITICAL FIX: Restore suit names from object keys to fix URL 404s
+      const rawSuits = data.suits as Record<string, YamlSuit>
+      const suitsIterable = Array.isArray(data.suits) 
+          ? data.suits 
+          : Object.entries(rawSuits).map(([key, val]) => ({ name: key, ...val }))
 
       for (const suitObj of suitsIterable) {
         let mappingSuit: MappingSuit | undefined = undefined 
         if (mapping.suits !== undefined) {
-          const mapList = Array.isArray(mapping.suits) ? mapping.suits : Object.values(mapping.suits)
+          const rawMapSuits = mapping.suits as Record<string, MappingSuit>
+          const mapList = Array.isArray(mapping.suits) 
+              ? mapping.suits 
+              : Object.entries(rawMapSuits).map(([key, val]) => ({ name: key, ...val }))
+              
           mappingSuit = mapList.find((m) => String(m.id ?? '') === String(suitObj.id ?? '') || (m.name ?? '') === (suitObj.name ?? ''))
         }
 
@@ -141,7 +152,10 @@ export class DeckService {
         if (suitObj.cards === undefined) continue
         /* v8 ignore stop */
         
-        const cardsIterable = Array.isArray(suitObj.cards) ? suitObj.cards : Object.values(suitObj.cards)
+        const rawCards = suitObj.cards as Record<string, YamlCard>
+        const cardsIterable = Array.isArray(suitObj.cards) 
+            ? suitObj.cards 
+            : Object.values(rawCards)
 
         for (const cardData of cardsIterable) {
           if (cardData.id === undefined) continue
