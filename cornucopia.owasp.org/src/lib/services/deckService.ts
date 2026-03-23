@@ -87,7 +87,23 @@ export class DeckService {
     ]
 
     /* v8 ignore start */
-    const cardFile = possiblePaths.find((p) => fs.existsSync(p)) ?? ''
+    let cardFile = possiblePaths.find((p) => fs.existsSync(p)) ?? ''
+
+    // FIX: Only fallback to English if the language is OFFICIALLY supported but the file is missing
+    if (cardFile === '' && lang !== 'en' && DeckService.hasLanguage(edition, lang)) {
+      const fallbackFileName = `${edition}-cards-${version}-en.yaml`
+      const fallbackPaths = [
+        path.join(workspace, 'source', fallbackFileName),
+        path.join(path.dirname(cwd), 'source', fallbackFileName),
+        path.join(cwd, 'source', fallbackFileName),
+        path.join(cwd, '..', 'source', fallbackFileName),
+        path.resolve('source', fallbackFileName),
+        `/home/runner/work/cornucopia/cornucopia/source/${fallbackFileName}`,
+        `/home/runner/work/cornucopia/cornucopia/cornucopia.owasp.org/source/${fallbackFileName}`
+      ]
+      cardFile = fallbackPaths.find((p) => fs.existsSync(p)) ?? ''
+    }
+
     if (cardFile === '') return cards
     /* v8 ignore stop */
 
