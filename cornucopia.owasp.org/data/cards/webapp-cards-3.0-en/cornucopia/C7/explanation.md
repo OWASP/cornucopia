@@ -24,7 +24,7 @@ The STRIDE category applicable here is **Repudiation**.
 
 ### What can go wrong?
 
-Inadequate logging and auditing can lead to significant gaps in security oversight, hindering the ability to detect, investigate, and respond to unauthorized activities. It increases the risk of identity theft, insider threats, advanced persistent threats, and replay attacks going on unnotified.
+Inadequate logging and auditing can lead to significant gaps in security oversight, hindering the ability to detect, investigate, and respond to unauthorized activities. It increases the risk of identity theft, insider threats, advanced persistent threats, and replay attacks going unnoticed.
 
 For more things that can go wrong, see the [Common Attack Patterns related to this card](#mapping 'Common Attack Patterns related to this card [internal]') in the table below.
 
