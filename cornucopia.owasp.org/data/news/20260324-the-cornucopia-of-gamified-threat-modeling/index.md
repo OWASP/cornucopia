@@ -34,11 +34,11 @@ When choosing a tool for publishing our threat model, we chose [OWASP Threat Dra
 
 OWASP Threat Dragon has released this possibility in v2.6. This is just the start of integration between the two projects.
 
-![How to choose to create a OWASP Cornucopia threat model](IMG_0158.webp)
+![How to choose to create an OWASP Cornucopia threat model](IMG_0158.webp)
 
 Thanks to Gerardo Canedo and his students at Universidad Católica del Uruguay, it's now possible to create your OWASP Cornucopia Threat Model directly in OWASP Threat Dragon. When creating a new diagram for your threat model, simply choose to create an EoP Games diagram. We chose to call the diagram EoP Games for two reasons. One, OWASP Cornucopia is derived from the [Elevation of Privilege game](https://shostack.org/games/elevation-of-privilege) created by Adam Shostack. Two, we don't want to stop with OWASP Cornucopia. We also want to add other EoP games, such as the original EoP Game.
 
-![Create a OWASP Cornucopia threat](IMG_0159.webp)
+![Create an OWASP Cornucopia threat](IMG_0159.webp)
 
 Once you have created an EoP Games diagram, you can add OWASP Cornucopia threats to your threat model. The specific threat you add will get a link reference to the [OWASP Cornucopia website](https://cornucopia.owasp.org/edition/webapp/AT3/2.2/en#Threat-Modeling), where you will find guidance on threat modeling and STRIDE, which will help you in identifying what can go wrong and what to do about it. You can also find a [complete mapping](https://cornucopia.owasp.org/edition/webapp/AT3/2.2/en#What-are-we-going-to-do-about-it?) to [OWASP ASVS](https://cornucopia.owasp.org/taxonomy/asvs-4.0.3/02-authentication/05-credential-recovery#V2.5.2), [OWASP Developer Guide](https://devguide.owasp.org/en/04-design/02-web-app-checklist/06-digital-identity/#1-authentication-a), and all [relevant CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9).
 
