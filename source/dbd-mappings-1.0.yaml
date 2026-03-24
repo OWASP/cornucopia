@@ -1,0 +1,118 @@
+---
+meta:
+  edition: dbd
+  component: mappings
+  language: ALL
+  version: "1.0"
+  layouts: [ cards ]
+  templates: [ bridge_qr, bridge, tarot, tarot_qr ]
+  languages: ["en"]
+suits:
+-
+  id: SCO
+  name: SCOPE
+  cards:
+  - { id: SCO2, value: 2, url: https://www.digitalbenefits.uk/deck/scope/2 }
+  - { id: SCO3, value: 3, url: https://www.digitalbenefits.uk/deck/scope/3 }
+  - { id: SCO4, value: 4, url: https://www.digitalbenefits.uk/deck/scope/4 }
+  - { id: SCO5, value: 5, url: https://www.digitalbenefits.uk/deck/scope/5 }
+  - { id: SCO6, value: 6, url: https://www.digitalbenefits.uk/deck/scope/6 }
+  - { id: SCO7, value: 7, url: https://www.digitalbenefits.uk/deck/scope/7 }
+  - { id: SCO8, value: 8, url: https://www.digitalbenefits.uk/deck/scope/8 }
+  - { id: SCO9, value: 9, url: https://www.digitalbenefits.uk/deck/scope/9 }
+  - { id: SCOX, value: X, url: https://www.digitalbenefits.uk/deck/scope/10 }
+  - { id: SCOJ, value: J, url: https://www.digitalbenefits.uk/deck/scope/J }
+  - { id: SCOQ, value: Q, url: https://www.digitalbenefits.uk/deck/scope/Q }
+  - { id: SCOK, value: K, url: https://www.digitalbenefits.uk/deck/scope/K }
+  - { id: SCOA, value: A, url: https://www.digitalbenefits.uk/deck/scope/A }
+-
+  id: ARC
+  name: ARCHITECTURE
+  cards:
+  - { id: ARC2, value: 2, url: https://www.digitalbenefits.uk/deck/architecture/2 }
+  - { id: ARC3, value: 3, url: https://www.digitalbenefits.uk/deck/architecture/3 }
+  - { id: ARC4, value: 4, url: https://www.digitalbenefits.uk/deck/architecture/4 }
+  - { id: ARC5, value: 5, url: https://www.digitalbenefits.uk/deck/architecture/5 }
+  - { id: ARC6, value: 6, url: https://www.digitalbenefits.uk/deck/architecture/6 }
+  - { id: ARC7, value: 7, url: https://www.digitalbenefits.uk/deck/architecture/7 }
+  - { id: ARC8, value: 8, url: https://www.digitalbenefits.uk/deck/architecture/8 }
+  - { id: ARC9, value: 9, url: https://www.digitalbenefits.uk/deck/architecture/9 }
+  - { id: ARCX, value: X, url: https://www.digitalbenefits.uk/deck/architecture/10 }
+  - { id: ARCJ, value: J, url: https://www.digitalbenefits.uk/deck/architecture/J }
+  - { id: ARCQ, value: Q, url: https://www.digitalbenefits.uk/deck/architecture/Q }
+  - { id: ARCK, value: K, url: https://www.digitalbenefits.uk/deck/architecture/K }
+  - { id: ARCA, value: A, url: https://www.digitalbenefits.uk/deck/architecture/A }
+-
+  id: AGE
+  name: AGENCY
+  cards:
+  - { id: AGE2, value: 2, url: https://www.digitalbenefits.uk/deck/agency/2 }
+  - { id: AGE3, value: 3, url: https://www.digitalbenefits.uk/deck/agency/3 }
+  - { id: AGE4, value: 4, url: https://www.digitalbenefits.uk/deck/agency/4 }
+  - { id: AGE5, value: 5, url: https://www.digitalbenefits.uk/deck/agency/5 }
+  - { id: AGE6, value: 6, url: https://www.digitalbenefits.uk/deck/agency/6 }
+  - { id: AGE7, value: 7, url: https://www.digitalbenefits.uk/deck/agency/7 }
+  - { id: AGE8, value: 8, url: https://www.digitalbenefits.uk/deck/agency/8 }
+  - { id: AGE9, value: 9, url: https://www.digitalbenefits.uk/deck/agency/9 }
+  - { id: AGEX, value: X, url: https://www.digitalbenefits.uk/deck/agency/10 }
+  - { id: AGEJ, value: J, url: https://www.digitalbenefits.uk/deck/agency/J }
+  - { id: AGEQ, value: Q, url: https://www.digitalbenefits.uk/deck/agency/Q }
+  - { id: AGEK, value: K, url: https://www.digitalbenefits.uk/deck/agency/K }
+  - { id: AGEA, value: A, url: https://www.digitalbenefits.uk/deck/agency/A }
+-
+  id: TRU
+  name: TRUST
+  cards:
+  - { id: TRU2, value: 2, url: https://www.digitalbenefits.uk/deck/trust/2 }
+  - { id: TRU3, value: 3, url: https://www.digitalbenefits.uk/deck/trust/3 }
+  - { id: TRU4, value: 4, url: https://www.digitalbenefits.uk/deck/trust/4 }
+  - { id: TRU5, value: 5, url: https://www.digitalbenefits.uk/deck/trust/5 }
+  - { id: TRU6, value: 6, url: https://www.digitalbenefits.uk/deck/trust/6 }
+  - { id: TRU7, value: 7, url: https://www.digitalbenefits.uk/deck/trust/7 }
+  - { id: TRU8, value: 8, url: https://www.digitalbenefits.uk/deck/trust/8 }
+  - { id: TRU9, value: 9, url: https://www.digitalbenefits.uk/deck/trust/9 }
+  - { id: TRUX, value: X, url: https://www.digitalbenefits.uk/deck/trust/10 }
+  - { id: TRUJ, value: J, url: https://www.digitalbenefits.uk/deck/trust/J }
+  - { id: TRUQ, value: Q, url: https://www.digitalbenefits.uk/deck/trust/Q }
+  - { id: TRUK, value: K, url: https://www.digitalbenefits.uk/deck/trust/K }
+  - { id: TRUA, value: A, url: https://www.digitalbenefits.uk/deck/trust/A }
+-
+  id: POR
+  name: POROSITY
+  cards:
+  - { id: POR2, value: 2, url: https://www.digitalbenefits.uk/deck/porosity/2 }
+  - { id: POR3, value: 3, url: https://www.digitalbenefits.uk/deck/porosity/3 }
+  - { id: POR4, value: 4, url: https://www.digitalbenefits.uk/deck/porosity/4 }
+  - { id: POR5, value: 5, url: https://www.digitalbenefits.uk/deck/porosity/5 }
+  - { id: POR6, value: 6, url: https://www.digitalbenefits.uk/deck/porosity/6 }
+  - { id: POR7, value: 7, url: https://www.digitalbenefits.uk/deck/porosity/7 }
+  - { id: POR8, value: 8, url: https://www.digitalbenefits.uk/deck/porosity/8 }
+  - { id: POR9, value: 9, url: https://www.digitalbenefits.uk/deck/porosity/9 }
+  - { id: PORX, value: X, url: https://www.digitalbenefits.uk/deck/porosity/10 }
+  - { id: PORJ, value: J, url: https://www.digitalbenefits.uk/deck/porosity/J }
+  - { id: PORQ, value: Q, url: https://www.digitalbenefits.uk/deck/porosity/Q }
+  - { id: PORK, value: K, url: https://www.digitalbenefits.uk/deck/porosity/K }
+  - { id: PORA, value: A, url: https://www.digitalbenefits.uk/deck/porosity/A }
+-
+  id: COR
+  name: CORNUCOPIA
+  cards:
+  - { id: COR2, value: 2, url: https://www.digitalbenefits.uk/deck/cornucopia/2 }
+  - { id: COR3, value: 3, url: https://www.digitalbenefits.uk/deck/cornucopia/3 }
+  - { id: COR4, value: 4, url: https://www.digitalbenefits.uk/deck/cornucopia/4 }
+  - { id: COR5, value: 5, url: https://www.digitalbenefits.uk/deck/cornucopia/5 }
+  - { id: COR6, value: 6, url: https://www.digitalbenefits.uk/deck/cornucopia/6 }
+  - { id: COR7, value: 7, url: https://www.digitalbenefits.uk/deck/cornucopia/7 }
+  - { id: COR8, value: 8, url: https://www.digitalbenefits.uk/deck/cornucopia/8 }
+  - { id: COR9, value: 9, url: https://www.digitalbenefits.uk/deck/cornucopia/9 }
+  - { id: CORX, value: X, url: https://www.digitalbenefits.uk/deck/cornucopia/10 }
+  - { id: CORJ, value: J, url: https://www.digitalbenefits.uk/deck/cornucopia/J }
+  - { id: CORQ, value: Q, url: https://www.digitalbenefits.uk/deck/cornucopia/Q }
+  - { id: CORK, value: K, url: https://www.digitalbenefits.uk/deck/cornucopia/K }
+  - { id: CORA, value: A, url: https://www.digitalbenefits.uk/deck/cornucopia/A }
+-
+  id: WC
+  name: WILD CARD
+  cards:
+  - { id: JOA, value: Joker, url: https://www.digitalbenefits.uk/deck/joker/1 }
+  - { id: JOB, value: Joker, url: https://www.digitalbenefits.uk/deck/joker/2 }
