@@ -71,7 +71,7 @@ The OWASP Cornucopia project is creating a [requirements API](https://cornucopia
 
 ## How to get OWASP Cornucopia?
 
-The question you might be asking yourself is, "How are we going to be able to utilize these resources and play this game?" No problem! There are various ways you can do that, both online at [copi.owasp.org](https://copi.owasp.org/) and in person, enjoying the presence of your colleagues, by [bying a deck of cards](https://cybersecgames.com/products/owasp%C2%AE-cornucopia-3-0-website-app-edition-threat-modeling-cards-copy).
+The question you might be asking yourself is, "How are we going to be able to utilize these resources and play this game?" No problem! There are various ways you can do that, both online at [copi.owasp.org](https://copi.owasp.org/) and in person, enjoying the presence of your colleagues, by [buying a deck of cards](https://cybersecgames.com/products/owasp%C2%AE-cornucopia-3-0-website-app-edition-threat-modeling-cards-copy).
 
 ## What is coming next...
 
