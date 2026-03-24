@@ -24,7 +24,7 @@ But there is even more! What about STRIDE? What about Threat Modeling? Each card
 
 This means that during your threat modeling, if you have questions about ["What can go wrong?"](https://cornucopia.owasp.org/edition/webapp/VE2/3.0#What-can-go-wrong?) or ["What are we going to do about it?"](https://cornucopia.owasp.org/edition/webapp/VE2/3.0#What-are-we-going-to-do-about-it?) Just go to the individual card pages, and you will find what you are looking for!
 
-Now, you may be asking yourself, "That's it, right? No, it isn't we have even mooore! 
+Now, you may be asking yourself, "That's it, right? No, it isn't, we have even moooooooore! 
 
 ## Threat Dragon and EoP Games
 
