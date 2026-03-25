@@ -15,3 +15,21 @@ export const GET: RequestHandler = ({ params }) => {
 
   return json(Object.fromEntries(cards))
 }
+const editions = ["webapp", "mobileapp"]
+
+export const GET: RequestHandler = ({ url }) => {
+    const params = url.pathname.split('/');
+    const edition =  params[params.length - 2] || 'webapp';
+    const lang =  params[params.length - 1] || 'en';
+    if (!(DeckService.getLanguages(edition)).includes(lang)) 
+  error(404, 'Language not found. Only: ' + DeckService.getLanguages(edition).join(', ') + ' are supported.');
+    if (!editions.includes(edition)) error(404, 'Edition not found. Only: ' + editions.join(', ') + ' are supported.');
+    const deckService = new DeckService();
+    const version = DeckService.getLatestVersion(edition);
+    const cards = deckService.getCardDataForEditionVersionLang(edition, version, lang);
+    
+    if (!cards) error(500, "No cards retrieved.")
+    const mappings = new MappingService().getCardMappingForLatestEdtions();
+    if (!mappings) error(500, "No mappings retrieved.")
+    return json((new CreController(cards, new MappingController(mappings.get(edition)))).getCreMapping(edition, lang));
+};

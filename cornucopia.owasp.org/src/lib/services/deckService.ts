@@ -17,6 +17,37 @@ interface YamlSuit { id?: string | number | null; name?: string | null; cards?: 
 interface YamlData { suits?: YamlSuit[] | Record<string, YamlSuit | null> | null; [key: string]: unknown }
 interface MappingSuit { id?: string | number | null; name?: string | null; [key: string]: unknown }
 interface MappingData { suits?: MappingSuit[] | Record<string, MappingSuit | null> | null; [key: string]: unknown }
+import fm from "front-matter"
+import fs from 'fs'
+import yaml from "js-yaml";
+import type { Card } from "$domain/card/card";
+import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
+import path from "path";
+import type { Deck } from "$domain/deck/deck";
+import { MappingService } from "$lib/services/mappingService";
+const __dirname = path.resolve(path.dirname(''));
+export class DeckService {
+
+    constructor() {
+    }
+    private static path: string = '/../source/';
+    private static cache: object[] = [];
+
+    private static readonly latests: Deck[] = [
+
+        {lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1'},
+        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'},
+        {lang: ['en'], edition: 'companion', version: '1.0'}
+    ];
+    private static readonly decks: Deck[] = [
+       { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
+        { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
+        { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
+        { edition: 'companion', version: '1.0', lang: ['en'] }];
+
+    public static hasEdition(edition: string): boolean {
+        return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
+    }
 
 export class DeckService {
   private static cache: Array<{ lang: string, version: string, edition?: string, data: Map<string, Card> }> = []
@@ -179,6 +210,30 @@ export class DeckService {
           githubUrl: `${baseDir}${cardFolderPath}/explanation.md`,
           concept: conceptText,
           summary: summaryText
+
+  private getCardData(lang: string)
+{
+    let cards = new Map<string, Card>;
+    const decks = DeckService.latests;
+
+    for (let i in decks) {
+        cards = new Map([
+            ...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang),
+            ...cards
+        ]);
+    }
+
+    DeckService.cache.push({lang: lang, data: cards, version: 'latest'});
+    return cards; 
+} 
+    public getCardDataForEditionVersionLang(edition: string, version: string, lang: string) {
+
+        const cards = new Map<string, Card>;
+
+        let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
+
+        if (!FileSystemHelper.hasFile(cardFile)) {
+            return cards;
         }
         cards.set(cardIdStr, newCard)
       }
