@@ -135,11 +135,11 @@ export class DeckService {
     const { suits } = data
     if (suits === undefined || suits === null) return cards
 
-    const suitsIterable: YamlSuit[] = DeckService.toArray<YamlSuit>(suits)
+    const suitsIterable: YamlSuit[] = DeckService.toIterable<YamlSuit>(suits)
 
     const { suits: mapSuits } = mapping
     const mapList: MappingSuit[] = (mapSuits !== undefined && mapSuits !== null)
-      ? DeckService.toArray<MappingSuit>(mapSuits)
+      ? DeckService.toIterable<MappingSuit>(mapSuits)
       : []
 
     for (const suitObj of suitsIterable) {
@@ -151,7 +151,7 @@ export class DeckService {
 
       if (suitCards === undefined || suitCards === null) continue
 
-      const cardsIterable: YamlCard[] = DeckService.toArray<YamlCard>(suitCards)
+      const cardsIterable: YamlCard[] = DeckService.toIterable<YamlCard>(suitCards)
 
       for (const cardData of cardsIterable) {
         const { id: cardDataId } = cardData
@@ -188,16 +188,24 @@ export class DeckService {
     return cards
   }
 
-  private static toArray<T extends object> (input: T[] | Record<string, T | null>): T[] {
+  private static toIterable<T extends { id?: unknown, name?: unknown }> (
+    input: T[] | Record<string, T | null>
+  ): T[] {
     if (Array.isArray(input)) return input
     const result: T[] = []
     for (const [key, val] of Object.entries(input)) {
-      if (val !== null) result.push({ id: key, name: key, ...val } as T)
+      if (val !== null) {
+        const item: T = { ...val, id: key, name: key }
+        result.push(item)
+      }
     }
     return result
   }
 
-  private static readCardMarkdown (baseDir: string, cardFolderPath: string): { conceptText: string, summaryText: string } {
+  private static readCardMarkdown (
+    baseDir: string,
+    cardFolderPath: string
+  ): { conceptText: string, summaryText: string } {
     let conceptText = ''
     let summaryText = ''
     try {
