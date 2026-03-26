@@ -2,7 +2,7 @@
 
 ## Description
 
-{'p': {'__prefix': 'xhtml', '__text': 'An adversary targets software that constructs NoSQL statements based on user input or with parameters vulnerable to operator replacement in order to achieve a variety of technical impacts such as escalating privileges, bypassing authentication, and/or executing code.'}}
+An adversary targets software that constructs NoSQL statements based on user input or with parameters vulnerable to operator replacement in order to achieve a variety of technical impacts such as escalating privileges, bypassing authentication, and/or executing code.
 
 Source: [CAPEC™ 676](https://capec.mitre.org/data/definitions/676.html)
 

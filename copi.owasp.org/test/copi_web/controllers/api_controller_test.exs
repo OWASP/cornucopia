@@ -54,6 +54,27 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 404)["error"] == "Could not find game"
   end
 
+  test "play_card returns 404 when dealt card not found for player", %{conn: conn, game: game} do
+    {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
+    {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})
+    {:ok, card2} = Cornucopia.create_card(%{
+      category: "C", value: "Q", description: "d", misc: "m",
+      edition: "webapp", external_id: "99", language: "en", version: "1",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
+      biml: "biml", url: "http://example.com"
+    })
+    {:ok, other_dealt} = Repo.insert(%DealtCard{player_id: other_player.id, card_id: card2.id})
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{other_player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => to_string(other_player.id),
+      "dealt_card_id" => to_string(other_dealt.id)
+    })
+
+    assert json_response(conn, 404)["error"] == "Player not found in this game"
+  end
+
   test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
     {:ok, card2} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "K", description: "desc", misc: "misc",

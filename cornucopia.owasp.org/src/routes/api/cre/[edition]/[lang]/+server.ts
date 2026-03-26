@@ -12,13 +12,13 @@ const responseInit: ResponseInit = {
 };
 
 const editions = ["webapp", "mobileapp"]
-const languages = ["en", "no_nb", "nl", "es", "pt_pt", "pt_br", "ru", "fr", "it"]
 
 export const GET: RequestHandler = ({ url }) => {
     const params = url.pathname.split('/');
     const edition =  params[params.length - 2] || 'webapp';
     const lang =  params[params.length - 1] || 'en';
-    if (!languages.includes(lang)) error(404, 'Language not found. Only: ' + languages.join(', ') + ' are supported.');
+    if (!(DeckService.getLanguages(edition)).includes(lang)) 
+  error(404, 'Language not found. Only: ' + DeckService.getLanguages(edition).join(', ') + ' are supported.');
     if (!editions.includes(edition)) error(404, 'Edition not found. Only: ' + editions.join(', ') + ' are supported.');
     const deckService = new DeckService();
     const version = DeckService.getLatestVersion(edition);

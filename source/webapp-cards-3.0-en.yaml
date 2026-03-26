@@ -68,7 +68,7 @@ suits:
     id: "VEK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/VEK"
-    desc: "Gabe can inject data into an server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used, not implemented correctly, or properly configured"
+    desc: "Gabe can inject data into a server-side interpreter (e.g. SQL, OS commands, Xpath, Server JavaScript, SMTP) because a strongly typed parameterised interface is not being used, not implemented correctly, or properly configured"
   -
     id: "VEA"
     value: "A"
@@ -118,7 +118,7 @@ suits:
     id: "AT9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AT9"
-    desc: "Claudia can undertake more critical functions because authentication requirements are inconsistent, too weak (e.g. do not use passkeys or other strong authentication such as a recomended MFA method), or there is no requirement to re-authenticate for these"
+    desc: "Claudia can undertake more critical functions because authentication requirements are inconsistent, too weak (e.g. do not use passkeys or other strong authentication such as a recommended MFA method), or there is no requirement to re-authenticate for these"
   -
     id: "ATX"
     value: "10"
@@ -522,7 +522,7 @@ paragraphs:
     text: "EoP is a great concept and game strategy, and was published under a Creative Commons Attribution License."
   -
     id: "T00250"
-    text: "Cornucopia Website App Edition is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
+    text: "Cornucopia Website App Edition is based on the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues webapp website developers encounter."
   -
     id: "T00260"
     text: "It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies, or are more focused on web application weaknesses than other types of software vulnerabilities, or are not familiar with STRIDE and DREAD."
@@ -615,7 +615,7 @@ paragraphs:
     text: "Printing and cutting up can take an hour or so, and using a faster printer helps."
   -
     id: "T00810"
-    text: "Try to print add higher quality to increase legibility."
+    text: "Try to print at a higher quality to increase legibility."
   -
     id: "T00820"
     text: "An optional card back design (in OWASP® tartan) has been provided as the last page of this document."
@@ -1014,7 +1014,7 @@ paragraphs:
     text: "No name was used more than once, and where people had provided two personal names, I dropped one part to try to ensure no-one can be easily identified. "
   -
     id: "T02730"
-    text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects theses sources of names, and is not meant to be world-representative."
+    text: "Names were not deliberately allocated to any particular attack, defence or requirement. The cultural and gender mix simply reflects these sources of names, and is not meant to be world-representative."
   -
     id: "T02740"
     text: "In v1.20, the name on VE-10 changed to reflect the project's new co-leader - this card is also the only one with two names in the attack."
@@ -1323,7 +1323,7 @@ paragraphs:
     text: "3.0"
   -
     id: "T03775"
-    text: "STRIDE categories have been added to each cards"
+    text: "STRIDE categories have been added to each card"
   -
     id: "T03800"
     text: "Project contributors"
