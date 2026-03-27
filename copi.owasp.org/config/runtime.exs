@@ -67,6 +67,13 @@ if config_env() == :prod do
     secret_key_base: secret_key_base
 
     config :copi, dns_cluster_query: System.get_env("DNS_CLUSTER_QUERY")
+_encryption_key =
+    System.get_env("COPI_ENCRYPTION_KEY") ||
+      raise """
+      environment variable COPI_ENCRYPTION_KEY is missing.
+      Generate one with:
+        elixir -e ':crypto.strong_rand_bytes(32) |> Base.encode64() |> IO.puts()'
+      """
 
 
   # ## SSL Support

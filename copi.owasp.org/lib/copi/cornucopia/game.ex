@@ -1,13 +1,14 @@
 defmodule Copi.Cornucopia.Game do
   use Ecto.Schema
   import Ecto.Changeset
+alias Copi.Encrypted.Binary, as: EncryptedBinary
 
   @primary_key {:id, Ecto.ULID, autogenerate: true}
 
   schema "games" do
     field :created_at, :utc_datetime, default: DateTime.truncate(DateTime.utc_now(), :second)
     field :finished_at, :utc_datetime
-    field :name, :string
+    field :name, EncryptedBinary
     field :edition, :string
     field :started_at, :utc_datetime
     field :rounds_played, :integer, default: 0
