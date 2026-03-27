@@ -1,12 +1,13 @@
 defmodule Copi.Cornucopia.Player do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Copi.Encrypted.Binary, as: EncryptedBinary
 
   @primary_key {:id, Ecto.ULID, autogenerate: true}
   @foreign_key_type Ecto.ULID
 
   schema "players" do
-    field :name, :string
+    field :name, EncryptedBinary
 
     belongs_to :game, Copi.Cornucopia.Game, type: Ecto.ULID
     has_many :dealt_cards, Copi.Cornucopia.DealtCard

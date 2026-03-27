@@ -1,0 +1,45 @@
+
+    -
+>     id: "T03390"
+      text: "FAQs 5 and 6 added."
+    -
+>     id: "T03400"
+      text: "Attack descriptions on cards with tinted backgrounds changed to black (from dark grey). "
+    -
+>     id: "T03410"
+      text: "Project contributors added."
+    -
+>     id: "T03560"
+      text: "Contributors updated."
+    -
+>     id: "T03570"
+      text: "Minor text changes to cards to improve readability."
+    -
+>     id: "T03610"
+      text: "Previous embedded score sheet pages deleted"
+    -
+>     id: "T03620"
+      text: "Correction (identified by Tom Brennan) and addition to "
+    -
+>     id: "T03630"
+      text: "text on card 8 Authentication. "
+    -
+>     id: "T03640"
+      text: "Oana Cornea and other participants at the AppSec EU 2015 project summit added to list of contributors. "
+    -
+>     id: "T03650"
+      text: "DarA-o De Filippis added as project co-leader. "
+    -
+>     id: "T03670"
+      text: "Cross-references updated for ASVS v3.0.1 and CAPECƒ,› v3.9. Minor text changes to a small number of cards. "
+    -
+>     id: "T03680"
+      text: "Added ƒ?o-ENƒ?? to version number in preparation for ƒ?o-ESƒ?? version."
+    -
+>     id: "T03690"
+      text: "Susana Romaniz added as a contributor to the Spanish translation."
+    -
+>     id: "T03700"
+      text: "Minor text changes to instructions and FAQs."
+
+
