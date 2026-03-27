@@ -80,3 +80,9 @@ config :phoenix_live_view,
 # Disable colocated JS symlink warning on Windows
 config :phoenix_live_view, :colocated_js,
   disable_symlink_warning: true
+
+# Field-level encryption for game and player names.
+# Set this before running the server locally:
+#   export COPI_ENCRYPTION_KEY=$(elixir -e ':crypto.strong_rand_bytes(32) |> Base.encode64() |> IO.puts()')
+# On Windows:
+#   for /f %i in ('elixir -e ":crypto.strong_rand_bytes(32) |> Base.encode64() |> IO.puts()"') do set COPI_ENCRYPTION_KEY=%i
