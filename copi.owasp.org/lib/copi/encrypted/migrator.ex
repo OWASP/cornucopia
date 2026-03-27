@@ -11,14 +11,18 @@ defmodule Copi.Encrypted.Migrator do
   @magic "ENC1"
 
   def run do
-    Logger.info("[Migrator] Starting encryption pass")
+    case System.get_env("COPI_ENCRYPTION_KEY") do
+      nil ->
+        Logger.warning("[Migrator] Skipping: COPI_ENCRYPTION_KEY is not set")
+        {0, 0}
 
-    games_count = encrypt_table(Game, :games)
-    players_count = encrypt_table(Player, :players)
-
-    Logger.info("[Migrator] Done. Games: #{games_count}, Players: #{players_count}")
-
-    {games_count, players_count}
+      _ ->
+        Logger.info("[Migrator] Starting encryption pass")
+        games_count = encrypt_table(Game, :games)
+        players_count = encrypt_table(Player, :players)
+        Logger.info("[Migrator] Done. Games: #{games_count}, Players: #{players_count}")
+        {games_count, players_count}
+    end
   end
 
   defp encrypt_table(schema, label) do

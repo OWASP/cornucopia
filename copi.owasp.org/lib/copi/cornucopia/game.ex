@@ -1,7 +1,7 @@
 defmodule Copi.Cornucopia.Game do
   use Ecto.Schema
   import Ecto.Changeset
-alias Copi.Encrypted.Binary, as: EncryptedBinary
+  alias Copi.Encrypted.Binary, as: EncryptedBinary
 
   @primary_key {:id, Ecto.ULID, autogenerate: true}
 
@@ -46,7 +46,7 @@ alias Copi.Encrypted.Binary, as: EncryptedBinary
   def majority_continue_votes_reached?(game) do
     total_players = Enum.count(game.players)
     continue_votes = continue_vote_count(game)
-    
+
     continue_votes > div(total_players, 2)
   end
 
@@ -57,8 +57,8 @@ alias Copi.Encrypted.Binary, as: EncryptedBinary
   def round_open?(game) do
     latest_round = game.rounds_played + 1
 
-    players_still_to_play = game.players |> Enum.filter(fn player -> 
-      Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil 
+    players_still_to_play = game.players |> Enum.filter(fn player ->
+      Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil
     end)
 
     Enum.count(players_still_to_play) > 0

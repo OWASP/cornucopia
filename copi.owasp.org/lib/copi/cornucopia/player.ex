@@ -1,7 +1,7 @@
 defmodule Copi.Cornucopia.Player do
   use Ecto.Schema
   import Ecto.Changeset
-alias Copi.Encrypted.Binary, as: EncryptedBinary
+  alias Copi.Encrypted.Binary, as: EncryptedBinary
 
   @primary_key {:id, Ecto.ULID, autogenerate: true}
   @foreign_key_type Ecto.ULID
