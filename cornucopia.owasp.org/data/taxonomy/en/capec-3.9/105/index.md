@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary abuses the flexibility and discrepancies in the parsing and interpretation of HTTP Request messages by different intermediary HTTP agents (e.g., load balancer, reverse proxy, web caching proxies, application firewalls, etc.) to split a single HTTP request into multiple unauthorized and malicious HTTP requests to a back-end HTTP agent (e.g., web server).
+{'p': [{'__prefix': 'xhtml', '__text': 'An adversary abuses the flexibility and discrepancies in the parsing and interpretation of HTTP Request messages by different intermediary HTTP agents (e.g., load balancer, reverse proxy, web caching proxies, application firewalls, etc.) to split a single HTTP request into multiple unauthorized and malicious HTTP requests to a back-end HTTP agent (e.g., web server).'}, {'__prefix': 'xhtml', '__text': 'See CanPrecede relationships for possible consequences.'}]}
 
 Source: [CAPEC™ 105](https://capec.mitre.org/data/definitions/105.html)
 

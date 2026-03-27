@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary guesses or obtains (i.e. steals or purchases) legitimate credentials (e.g. userID/password) to achieve authentication and to perform authorized actions under the guise of an authenticated user or service.
+{'p': {'__prefix': 'xhtml', '__text': 'An adversary guesses or obtains (i.e. steals or purchases) legitimate credentials (e.g. userID/password) to achieve authentication and to perform authorized actions under the guise of an authenticated user or service.'}}
 
 Source: [CAPEC™ 560](https://capec.mitre.org/data/definitions/560.html)
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary conducts supply chain attacks by the inclusion of insecure third-party components into a technology, product, or code-base, possibly packaging a malicious driver or component along with the product before shipping it to the consumer or acquirer.
+{'p': {'__prefix': 'xhtml', '__text': 'An adversary conducts supply chain attacks by the inclusion of insecure third-party components into a technology, product, or code-base, possibly packaging a malicious driver or component along with the product before shipping it to the consumer or acquirer.'}}
 
 Source: [CAPEC™ 446](https://capec.mitre.org/data/definitions/446.html)
 

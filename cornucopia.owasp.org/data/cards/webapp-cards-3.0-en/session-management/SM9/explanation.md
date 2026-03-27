@@ -1,18 +1,16 @@
 ## Scenario: Ivan’s Session Identifier Theft
 
-Picture a scenario where Ivan, a savvy attacker, steals session identifiers or authorization tokens due to their exposure through various insecure means. He exploits system weaknesses such as:
+Picture a scenario where Ivan, a savvy attacker, steals session identifiers due to their exposure through various insecure means. He exploits system weaknesses such as:
 
-1. **Transmission over Insecure Channels:** Session identifiers or tokens are sent over unencrypted connections.
+1. **Transmission over Insecure Channels:** Session identifiers are sent over unencrypted connections.
 
-2. **Logging of Identifiers:** Session IDs or tokens are unnecessarily logged in system or application logs.
+2. **Logging of Identifiers:** Session IDs are unnecessarily logged in system or application logs.
 
 3. **Exposure in Error Messages:** Identifiers are revealed in verbose error messages.
 
-4. **Inclusion in URLs:** Session IDs or tokens are included in URLs, making them vulnerable to exposure.
+4. **Inclusion in URLs:** Session IDs are included in URLs, making them vulnerable to exposure.
 
-5. **Accessibility by Attacker-Influenced Code:** Session identifiers or tokens are accessible by code or scripts that an attacker can manipulate or alter.
-
-6. **Accessibility through Cache or Load Balancers:** Session identifiers or tokens are stored in caches or load balancers that may not be secure, allowing attackers to access them through cache poisoning or other attacks.
+5. **Accessibility by Attacker-Influenced Code:** Session identifiers are accessible by code or scripts that an attacker can manipulate or alter.
 
 ### Example
 
@@ -42,10 +40,8 @@ Protect session identifiers as if they are account credentials. For HTTP cookies
 2. Avoid logging session IDs or exposing them in error messages.
 3. Refrain from including session identifiers in URLs, opting for more secure methods of transmission.
 4. Limit the accessibility of session identifiers in the application’s code, especially to scripts or areas that could be compromised.
-5. Set the 'Secure' attribute for cookies transmitted over a TLS connection.
+5. Set the 'secure' attribute for cookies transmitted over an TLS connection.
 6. Set cookies with the HttpOnly attribute, unless you specifically require client-side scripts within your application to read or set a cookie's value.
 7. Set HTTP Strict Transport Security (HSTS) header and add your domain to web browser pre-load lists.
-8. When using server caches, load balancers, or other intermediaries, ensure that session identifiers are not stored in a way that they can be accessed by unauthorized parties, such as through cache poisoning or other attacks. Consider using secure, encrypted storage for session identifiers in these components.
-9. Never store tokens in local storage or session storage, as these can be accessed by malicious scripts or browser extensions. Use cookies instead, or use a BFF pattern where the backend handles token storage and management.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

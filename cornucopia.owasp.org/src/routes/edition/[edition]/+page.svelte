@@ -10,7 +10,6 @@
     import type { Suit } from "$domain/suit/suit.js";
     import { SvelteMap } from 'svelte/reactivity';
     import { goto } from "$app/navigation";
-    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION } from "$lib/services/deckServiceConsts";
 
 
     interface Props {
@@ -21,6 +20,10 @@
     const lang = readLang();
     let t = readTranslation();
     
+    //TODO move these constants to a more sensible location
+    const VERSION_WEBAPP = "webapp"
+    const VERSION_MOBILEAPP = "mobileapp"
+    const VERSION_COMPANION = "companion"
 
     // Derived values that update when data changes
     let content = $derived(data.content.get($lang) || data.content.get('en'));

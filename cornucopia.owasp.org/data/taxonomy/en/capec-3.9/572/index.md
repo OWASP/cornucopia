@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary modifies file contents by adding data to files for several reasons. Many different attacks could "follow" this pattern resulting in numerous outcomes. Adding data to a file could also result in a Denial of Service condition for devices with limited storage capacity.
+{'p': {'__prefix': 'xhtml', '__text': 'An adversary modifies file contents by adding data to files for several reasons. Many different attacks could “follow” this pattern resulting in numerous outcomes. Adding data to a file could also result in a Denial of Service condition for devices with limited storage capacity.'}}
 
 Source: [CAPEC™ 572](https://capec.mitre.org/data/definitions/572.html)
 

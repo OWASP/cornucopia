@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary guesses, obtains, or "rides" a trusted identifier (e.g. session ID, resource ID, cookie, etc.) to perform authorized actions under the guise of an authenticated user or service.
+{'p': {'__prefix': 'xhtml', '__text': 'An adversary guesses, obtains, or "rides" a trusted identifier (e.g. session ID, resource ID, cookie, etc.) to perform authorized actions under the guise of an authenticated user or service.'}}
 
 Source: [CAPEC™ 21](https://capec.mitre.org/data/definitions/21.html)
 

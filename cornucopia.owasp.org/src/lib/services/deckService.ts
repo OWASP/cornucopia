@@ -15,13 +15,12 @@ export class DeckService {
     private static cache: object[] = [];
 
     private static readonly latests: Deck[] = [
-
-        {lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1'},
-        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'},
-        {lang: ['en'], edition: 'companion', version: '1.0'}
+        { lang: ['en'], edition: 'mobileapp', version: '1.1' },
+        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' },
+        { lang: ['en'], edition: 'companion', version: '1.0' }
     ];
     private static readonly decks: Deck[] = [
-       { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
+        { edition: 'mobileapp', version: '1.1', lang: ['en'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
         { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
         { edition: 'companion', version: '1.0', lang: ['en'] }];
@@ -66,24 +65,17 @@ export class DeckService {
         return DeckService.cache.find((deck) => deck?.lang == lang && deck?.version == 'latest')?.data || this.getCardData(lang);
     }
 
-
-  private getCardData(lang: string)
-{
-    let cards = new Map<string, Card>;
-    const decks = DeckService.latests;
-
-    for (let i in decks) {
-        cards = new Map([
-            ...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang),
-            ...cards
-        ]);
+    private getCardData(lang: string) {
+        let cards = new Map<string, Card>;
+        const decks = DeckService.latests;
+        for (let i in decks) {
+            cards = new Map([...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang), ...cards]);
+        }
+        DeckService.cache.push({ lang: lang, data: cards, version: 'latest' });
+        return cards;
     }
 
-    DeckService.cache.push({lang: lang, data: cards, version: 'latest'});
-    return cards; 
-} 
     public getCardDataForEditionVersionLang(edition: string, version: string, lang: string) {
-
         const cards = new Map<string, Card>;
 
         let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
@@ -93,7 +85,7 @@ export class DeckService {
         }
 
         let yamlData = fs.readFileSync(cardFile, 'utf8');
-        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
+        let data = yaml.load(yamlData);
         let base = `data/cards/${edition}-cards-${version}-${lang}/`;
 
         if (!FileSystemHelper.hasDir(base)) {

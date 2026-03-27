@@ -51,10 +51,10 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'no_nb').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_br').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_pt').size).toBe(80);
-    }, 30000);
+    });
 
-    it("should return 238 cards.", async () => {
+    it("should return 251 cards.", async () => {
         let cards = (new DeckService()).getCards('en');
-        expect(cards.size).toBe(238);
+        expect(cards.size).toBe(251);
     });
 });

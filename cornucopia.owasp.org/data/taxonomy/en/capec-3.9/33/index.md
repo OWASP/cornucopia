@@ -2,9 +2,7 @@
 
 ## Description
 
-An adversary abuses the flexibility and discrepancies in the parsing and interpretation of HTTP Request messages using various HTTP headers, request-line and body parameters as well as message sizes (denoted by the end of message signaled by a given HTTP header) by different intermediary HTTP agents (e.g., load balancer, reverse proxy, web caching proxies, application firewalls, etc.) to secretly send unauthorized and malicious HTTP requests to a back-end HTTP agent (e.g., web server).
-
-See CanPrecede relationships for possible consequences.
+{'p': [{'__prefix': 'xhtml', '__text': 'An adversary abuses the flexibility and discrepancies in the parsing and interpretation of HTTP Request messages using various HTTP headers, request-line and body parameters as well as message sizes (denoted by the end of message signaled by a given HTTP header) by different intermediary HTTP agents (e.g., load balancer, reverse proxy, web caching proxies, application firewalls, etc.) to secretly send unauthorized and malicious HTTP requests to a back-end HTTP agent (e.g., web server).'}, {'__prefix': 'xhtml', '__text': 'See CanPrecede relationships for possible consequences.'}]}
 
 Source: [CAPEC™ 33](https://capec.mitre.org/data/definitions/33.html)
 

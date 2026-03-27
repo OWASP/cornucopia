@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary engages in activities to discover any sensitive constants present within the compiled code of an executable. These constants may include literal ASCII strings within the file itself, or possibly strings hard-coded into particular routines that can be revealed by code refactoring methods including static and dynamic analysis.
+{'p': {'__prefix': 'xhtml', '__text': 'An adversary engages in activities to discover any sensitive constants present within the compiled code of an executable. These constants may include literal ASCII strings within the file itself, or possibly strings hard-coded into particular routines that can be revealed by code refactoring methods including static and dynamic analysis.'}}
 
 Source: [CAPEC™ 191](https://capec.mitre.org/data/definitions/191.html)
 

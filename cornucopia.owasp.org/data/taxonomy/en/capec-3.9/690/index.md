@@ -2,7 +2,7 @@
 
 ## Description
 
-An adversary alters the metadata of a resource (e.g., file, directory, repository, etc.) to present a malicious resource as legitimate/credible.
+{'p': {'__prefix': 'xhtml', '__text': 'An adversary alters the metadata of a resource (e.g., file, directory, repository, etc.) to present a malicious resource as legitimate/credible.'}}
 
 Source: [CAPEC™ 690](https://capec.mitre.org/data/definitions/690.html)
 
