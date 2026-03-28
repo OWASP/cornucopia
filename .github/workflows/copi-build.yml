@@ -3,9 +3,10 @@
   on:
     workflow_call:
     workflow_dispatch:
-  env:
-    MIX_ENV: test
-    POSTGRES_TEST_PWD: POSTGRES_LOCAL_PWD
+ env:
+  MIX_ENV: test
+  POSTGRES_TEST_PWD: POSTGRES_LOCAL_PWD
+  COPI_ENCRYPTION_KEY: "dGVzdGtleV90ZXN0a2V5X3Rlc3RrZXlfdGVzdGtleSE="
   permissions:
     contents: read
   jobs:
