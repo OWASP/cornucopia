@@ -63,6 +63,25 @@
         <% end %>
       </div>
     </div>
+
+ <% @card.edition == "dbd" -> %>
+
+  <div class={["card", "dbd", Slug.slugify(@card.category), "n" <> @card.value]}>
+    <div class="left-value"><%= @card.value %></div>
+    <div class="main-content">
+      <p class="category"><%= @card.category %></p>
+
+      <p class="description"><%= @card.description %></p>
+
+      <p class="description">
+        <a class="info" rel="help" target="_blank" href={@card.url}>
+          Need more info?
+        </a>
+      </p>
+
+    </div>
+  </div>
+
   <% @card.edition == "eop" -> %>
 
     <div class={["card", "eop", Slug.slugify(@card.category), "n" <> @card.value]}>
