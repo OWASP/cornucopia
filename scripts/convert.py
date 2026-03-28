@@ -182,10 +182,16 @@ def _safe_extract_all(archive: zipfile.ZipFile, target_dir: str) -> None:
 
 def _validate_command_args(cmd_args: List[str]) -> bool:
     """Validate command arguments for dangerous characters."""
-    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}"]
-    # Skip first argument (executable path) and env args as they may contain backslashes
+    dangerous_chars = ["&", "|", ";", "$", "`", "<", ">", "*", "?", "{", "}"]
+    skip_next = False
     for arg in cmd_args[1:]:
-        if arg.startswith("-env:"):
+        if skip_next:
+            skip_next = False
+            continue
+        if arg in ("--outdir", "--convert-to"):
+            skip_next = True
+            continue
+        if arg.startswith("-env:") or arg.startswith("-"):
             continue
         if any(char in arg for char in dangerous_chars):
             logging.warning(f"Potentially dangerous character found in argument: {arg}")
@@ -195,12 +201,13 @@ def _validate_command_args(cmd_args: List[str]) -> bool:
 
 def _get_libreoffice_bin() -> str:
     """Get the LibreOffice binary path, prioritizing soffice.exe on Windows."""
-    # On Windows, always prefer soffice.exe directly to avoid picking up soffice.COM
     if platform.system() == "Windows":
+        # Check standard install location first
         potential_soffice = Path("C:/Program Files/LibreOffice/program/soffice.exe")
         if potential_soffice.exists():
             return str(potential_soffice)
-    # On other platforms, use shutil.which
+        # Fallback: explicitly search for soffice.exe to avoid soffice.COM
+        return shutil.which("soffice.exe") or shutil.which("libreoffice") or ""
     return shutil.which("libreoffice") or shutil.which("soffice") or ""
 
 
