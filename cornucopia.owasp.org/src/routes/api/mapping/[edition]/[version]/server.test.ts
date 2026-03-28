@@ -39,6 +39,70 @@ describe('GET /api/mapping/[edition]/[version]', () => {
         expect(body.cards.VE2.id).toBe('VE2');
     });
 
+    it('transforms suits-based mapping into cards map response', async () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
+        vi.spyOn(MappingService.prototype, 'getCardMapping').mockReturnValue({
+            meta: {
+                edition: 'webapp',
+                component: 'mappings',
+                language: 'ALL',
+                version: '3.0'
+            },
+            suits: [
+                {
+                    cards: [
+                        { id: 'VE2', value: '2' },
+                        { id: 'VE3', value: '3' }
+                    ]
+                }
+            ]
+        } as any);
+
+        const response = await GET({
+            params: { edition: 'webapp', version: '3.0' }
+        } as any);
+
+        expect(response.status).toBe(200);
+        const body = await response.json();
+
+        expect(body.meta.version).toBe('3.0');
+        expect(body.cards.VE2.id).toBe('VE2');
+        expect(body.cards.VE3.id).toBe('VE3');
+        expect(body.suits).toBeUndefined();
+    });
+
+    it('throws 404 when edition param is missing', () => {
+        vi.spyOn(DeckService, 'getLatestEditions').mockReturnValue(['webapp', 'mobileapp']);
+
+        try {
+            GET({
+                params: { edition: undefined as any, version: '3.0' }
+            } as any);
+
+            expect.fail('Expected GET to throw 404 HttpError');
+        } catch (err: any) {
+            expect(err.status).toBe(404);
+            expect(err.body.message).toBe('Edition not found. Only: webapp, mobileapp are supported.');
+        }
+    });
+
+    it('throws 404 when version param is missing', () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        vi.spyOn(DeckService, 'getVersions').mockReturnValue(['2.2', '3.0']);
+
+        try {
+            GET({
+                params: { edition: 'webapp', version: undefined as any }
+            } as any);
+
+            expect.fail('Expected GET to throw 404 HttpError');
+        } catch (err: any) {
+            expect(err.status).toBe(404);
+            expect(err.body.message).toBe('Version not found for edition webapp. Only: 2.2, 3.0 are supported.');
+        }
+    });
+
     it('throws 404 when edition is invalid', () => {
         vi.spyOn(DeckService, 'hasEdition').mockReturnValue(false);
         vi.spyOn(DeckService, 'getLatestEditions').mockReturnValue(['webapp', 'mobileapp']);

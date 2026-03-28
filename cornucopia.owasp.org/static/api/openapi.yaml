@@ -246,9 +246,9 @@ paths:
 
   /mapping/webapp/{version}:
     get:
-      summary: Get Website App mapping by version
+      summary: Get WebApp mapping by version
       description: |
-        Get the OWASP Cornucopia Website App Edition mapping data
+        Get the OWASP Cornucopia WebApp Edition mapping data
         by version.
       parameters:
         - name: version
@@ -256,17 +256,17 @@ paths:
           required: true
           schema:
             type: string
-            enum: ["3.0"]
+            enum: ["2.2", "3.0"]
       responses:
         '200':
-          description: Website App mapping data
+          description: WebApp mapping data
           content:
             application/json:
               schema:
                 type: object
               examples:
                 example:
-                  summary: Example Website App mapping response
+                  summary: Example WebApp mapping response
                   value:
                     meta:
                       edition: webapp
