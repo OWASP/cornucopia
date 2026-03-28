@@ -113,6 +113,21 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/mapping/webapp/2.2
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/mapping/webapp/3.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/mapping/mobileapp/1.1
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 `;
 
   const headersFile = path.join(buildDir, '_headers');

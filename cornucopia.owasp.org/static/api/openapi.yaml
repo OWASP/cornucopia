@@ -244,6 +244,88 @@ paths:
                       owasp_asvs:
                         - 4.1.4
 
+  /mapping/webapp/{version}:
+    get:
+      summary: Get Website App mapping by version
+      description: |
+        Get the OWASP Cornucopia Website App Edition mapping data
+        by version.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["3.0"]
+      responses:
+        '200':
+          description: Website App mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Website App mapping response
+                  value:
+                    meta:
+                      edition: webapp
+                      component: mappings
+                      language: ALL
+                      version: "3.0"
+                    cards:
+                      VE2:
+                          id: "VE2"
+                          value: "2"
+                          url: "https://cornucopia.owasp.org/cards/VE2"
+                          stride: [ I ]
+                          stride_print: [ 'Information Disclosure' ]
+                          owasp_dev_guide: [ SC1, SC2, SC3, SC4, SC8, SC9, SC10, SC11, SC12, SC13, FM1, FM2, FM5, EE6, EE7, EE8 ]
+                          owasp_dev_guide_print: [ SC1-4, SC8-13, FM1-2, FM5, EE6-8 ]
+                          owasp_asvs: [ 2.4.1, 4.3.2, 13.2.2, 13.4.1, 13.4.2, 13.4.3, 13.4.4, 13.4.5, 13.4.6, 13.4.7, 15.2.3, 16.2.5, 16.3.4, 16.4.2, 16.5.1, 17.1.1 ]
+                          owasp_asvs_print: [ 2.4.1, 4.3.2, 13.2.2, 13.4.1-7, 15.2.3, 16.2.5, 16.3.4, 16.4.2, 16.5.1, 17.1.1 ]
+                          capec: [ 54, 113, 116, 143, 144, 149, 150, 155, 169, 215, 224, 497, 541, 546 ]
+                          capec_map: {}
+
+  /mapping/mobileapp/{version}:
+    get:
+      summary: Get Mobile App mapping by version
+      description: |
+        Get the OWASP Cornucopia Mobile App Edition mapping data
+        by version.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["1.1"]
+      responses:
+        '200':
+          description: Mobile App mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Mobile App mapping response
+                  value:
+                    meta:
+                      edition: mobileapp
+                      component: mappings
+                      language: ALL
+                      version: "1.1"
+                    cards:
+                      PC3:
+                        id: "PC3"
+                        value: "3"
+                        url: "https://cornucopia.owasp.org/cards/PC3"
+                        owasp_masvs: [ PLATFORM-3 ]
+                        owasp_mastg: [ TEST-0008, TEST-0037, TEST-0057 ]
+                        capec: [ 508 ]
+                        safecode: [ "-" ]
+
   /cre/mobileapp/{lang}:
     get:
       summary: Get Mobile cards by language
