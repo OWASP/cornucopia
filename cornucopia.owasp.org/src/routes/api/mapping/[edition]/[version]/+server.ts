@@ -46,11 +46,11 @@ export const GET: RequestHandler = ({ params }) => {
     const edition = params.edition;
     const version = params.version;
 
-    if (!edition || !DeckService.hasEdition(edition)) {
+    if (!DeckService.hasEdition(edition)) {
         throw error(404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
     }
 
-    if (!version || !DeckService.hasVersion(edition, version)) {
+    if (!DeckService.hasVersion(edition, version)) {
         throw error(404, 'Version not found for edition ' + edition + '. Only: ' + DeckService.getVersions(edition).join(', ') + ' are supported.');
     }
 
