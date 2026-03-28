@@ -128,9 +128,10 @@ describe('DeckService tests', () => {
     describe('getDecks', () => {
         it('should return all available decks', () => {
             const decks = DeckService.getDecks();
-            expect(decks).toHaveLength(4);
+            expect(decks).toHaveLength(5);
             expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] });
             expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'dbd', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ 
                 edition: 'webapp', 
                 version: '2.2', 
@@ -189,6 +190,11 @@ describe('DeckService tests', () => {
 
         it('should return en for companion', () => {
             const languages = DeckService.getLanguages('companion');
+            expect(languages).toContain('en');
+        });
+
+        it('should return en for dbd', () => {
+            const languages = DeckService.getLanguages('dbd');
             expect(languages).toContain('en');
         });
 
