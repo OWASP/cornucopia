@@ -69,7 +69,9 @@ defmodule Copi.MixProject do
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
       {:hackney, "~> 1.9"},
       {:mox, "~> 1.2.0", only: :test},
-      {:excoveralls, "~> 0.18.5", only: [:dev, :test]}
+      {:excoveralls, "~> 0.18.5", only: [:dev, :test]},
+      {:cloak, "~> 1.1"},
+      {:cloak_ecto, "~> 1.3"}
     ]
   end
 

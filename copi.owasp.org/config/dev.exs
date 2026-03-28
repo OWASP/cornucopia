@@ -81,8 +81,14 @@ config :phoenix_live_view,
 config :phoenix_live_view, :colocated_js,
   disable_symlink_warning: true
 
-# Field-level encryption for game and player names.
-# Set this before running the server locally:
-#   export COPI_ENCRYPTION_KEY=$(elixir -e ':crypto.strong_rand_bytes(32) |> Base.encode64() |> IO.puts()')
-# On Windows:
-#   for /f %i in ('elixir -e ":crypto.strong_rand_bytes(32) |> Base.encode64() |> IO.puts()"') do set COPI_ENCRYPTION_KEY=%i
+config :copi, Copi.Vault,
+  ciphers: [
+    default: {
+      Cloak.Ciphers.AES.GCM,
+      tag: "AES.GCM.V1",
+      key: case System.get_env("COPI_ENCRYPTION_KEY") do
+        nil -> :binary.copy(<<0>>, 32)
+        b64 -> Base.decode64!(b64)
+      end
+    }
+  ]
