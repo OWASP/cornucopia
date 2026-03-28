@@ -182,25 +182,33 @@ def _safe_extract_all(archive: zipfile.ZipFile, target_dir: str) -> None:
 
 def _validate_command_args(cmd_args: List[str]) -> bool:
     """Validate command arguments for dangerous characters."""
-    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
-    for arg in cmd_args:
+    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}"]
+    # Skip first argument (executable path) and env args as they may contain backslashes
+    for arg in cmd_args[1:]:
+        if arg.startswith("-env:"):
+            continue
         if any(char in arg for char in dangerous_chars):
             logging.warning(f"Potentially dangerous character found in argument: {arg}")
             return False
     return True
 
 
-def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
-    """Convert document to PDF using LibreOffice."""
-    libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
-    if not libreoffice_bin and platform.system() == "Windows":
+def _get_libreoffice_bin() -> str:
+    """Get the LibreOffice binary path, prioritizing soffice.exe on Windows."""
+    # On Windows, always prefer soffice.exe directly to avoid picking up soffice.COM
+    if platform.system() == "Windows":
         potential_soffice = Path("C:/Program Files/LibreOffice/program/soffice.exe")
         if potential_soffice.exists():
-            libreoffice_bin = str(potential_soffice)
+            return str(potential_soffice)
+    # On other platforms, use shutil.which
+    return shutil.which("libreoffice") or shutil.which("soffice") or ""
 
+
+def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
+    """Convert document to PDF using LibreOffice."""
+    libreoffice_bin = _get_libreoffice_bin()
     if not libreoffice_bin:
         return False
-
     try:
         logging.info(f"Using LibreOffice for conversion: {libreoffice_bin}")
 
@@ -267,7 +275,7 @@ def _handle_conversion_failure(source_filename: str) -> None:
     )
     # Check if we should suggest MS Word
     is_win_or_mac = platform.system().lower() in ["windows", "darwin"]
-    libreoffice_bin = shutil.which("libreoffice") or shutil.which("soffice")
+    libreoffice_bin = _get_libreoffice_bin()
     if not libreoffice_bin and is_win_or_mac:
         error_msg += " This does work with MS Word installed for .docx files."
     logging.warning(error_msg)
@@ -442,7 +450,7 @@ def main() -> None:
     logging.debug(" --- args = %s", str(convert_vars.args))
 
     set_can_convert_to_pdf()
-    libreoffice_available = bool(shutil.which("libreoffice") or shutil.which("soffice"))
+    libreoffice_available = bool(_get_libreoffice_bin())
     can_make_pdf = convert_vars.can_convert_to_pdf or libreoffice_available
     if convert_vars.args.pdf and not can_make_pdf and not convert_vars.args.debug:
         logging.error(
