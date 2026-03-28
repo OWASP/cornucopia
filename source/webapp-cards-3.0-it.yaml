@@ -123,12 +123,12 @@ suits:
     id: "ATX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/ATX"
-    desc: "Pravin può aggirare i controlli di autenticazione perché non viene utilizzato un modulo/framework/servizio di autenticazione centralizzato, standard, testato e approvato, separato dalla risorsa richiesta"
+    desc: "Pravin può aggirare i controlli di autenticazione perché non viene utilizzato un modulo/framework/servizio di autenticazione centralizzato, standard, testato, approvato e raccomandato, separato dalla risorsa richiesta, o è stato configurato in modo errato, o è stato implementato in modo improprio"
   -
     id: "ATJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/ATJ"
-    desc: "Mark può accedere a risorse o servizi perché non c'è alcun requisito di autenticazione, oppure si è pensato erroneamente che l'autenticazione sarebbe stata effettuata da qualche altro sistema o eseguita in qualche azione precedente"
+    desc: "Mark può accedere a risorse o servizi perché non c'è alcun requisito di autenticazione, o perché l'autenticazione è assente a causa di configurazione errata, progettazione o implementazione impropria, oppure si è pensato erroneamente che l'autenticazione sarebbe stata effettuata da qualche altro sistema o eseguita in qualche azione precedente"
   -
     id: "ATQ"
     value: "Q"
@@ -163,7 +163,7 @@ suits:
     id: "SM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/SM4"
-    desc: "Alison può impostare i cookie di identificazione della sessione su un'altra applicazione web perché il dominio e il path non sono sufficientemente limitati"
+    desc: "Alison può impostare i cookie di identificazione della sessione o utilizzare token per un'altra applicazione web perché il dominio, il path (o, nel caso dei token, il destinatario) non sono sufficientemente limitati"
   -
     id: "SM5"
     value: "5"
@@ -178,7 +178,7 @@ suits:
     id: "SM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/SM7"
-    desc: "Graham può utilizzare la sessione di Adam quando quest'ultimo l'ha terminata, perché non esiste una funzione di logout, o non è possibile effettuare facilmente il logout, o il logout non termina correttamente la sessione"
+    desc: "Graham può utilizzare la sessione di Adam quando quest'ultimo l'ha terminata, perché non esiste una funzione di logout, o non è possibile effettuare facilmente il logout, o perché il logout e altri meccanismi per la modifica delle impostazioni di autenticazione non consentono all'utente di terminare la sessione o le sessioni"
   -
     id: "SM8"
     value: "8"
@@ -238,7 +238,7 @@ suits:
     id: "AZ5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AZ5"
-    desc: "Chad può accedere a risorse (inclusi servizi, processi, AJAX, Flash, video, immagini, documenti, file temporanei, dati di sessione, proprietà del sistema, dati di configurazione, impostazioni del registro, log) alle quali non avrebbe diritto, a causa di un'autorizzazione mancante o di privilegi eccessivi (ad esempio, non utilizzando il principio del privilegio minimo)"
+    desc: "Chad può accedere a risorse (inclusi servizi, processi, AJAX, video, immagini, documenti, file temporanei, dati di sessione, proprietà del sistema, dati di configurazione, impostazioni del registro, log) alle quali non avrebbe diritto, a causa di un'autorizzazione mancante o di privilegi eccessivi (ad esempio, non utilizzando il principio del privilegio minimo)"
   -
     id: "AZ6"
     value: "6"
@@ -263,7 +263,7 @@ suits:
     id: "AZX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/AZX"
-    desc: "Richard può aggirare i controlli di autorizzazione centralizzati poiché non vengono utilizzati in modo completo su tutte le interazioni"
+    desc: "Richard può aggirare i controlli di autorizzazione centralizzati poiché non vengono utilizzati in modo completo su tutte le interazioni, o perché sono stati configurati in modo errato, o perché l'applicazione non utilizza un modulo/framework/servizio di autorizzazione centralizzato, standard, testato, approvato e raccomandato"
   -
     id: "AZJ"
     value: "J"
@@ -408,7 +408,7 @@ suits:
     id: "CJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CJ"
-    desc: "Roman può sfruttare l'applicazione perché è stata compilata con strumenti non aggiornati, o la sua configurazione non è sicura per impostazione predefinita, o le informazioni sulla sicurezza non sono state documentate e trasmesse ai team operativi"
+    desc: "Roman può sfruttare l'applicazione perché è stata compilata o distribuita in modo non sicuro, o la sua configurazione non è sicura per impostazione predefinita, o le informazioni sulla sicurezza non sono state documentate o trasmesse ai team operativi, o l'utente non viene avvisato e l'accesso non viene bloccato quando le funzionalità di sicurezza previste non sono supportate o sono disabilitate"
   -
     id: "CQ"
     value: "Q"
