@@ -20,3 +20,6 @@ config :copi, CopiWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warning
+if System.get_env("COPI_ENCRYPTION_KEY") == nil do
+  System.put_env("COPI_ENCRYPTION_KEY", "dGVzdGtleV90ZXN0a2V5X3Rlc3RrZXlfdGVzdGtleSE=")
+end
