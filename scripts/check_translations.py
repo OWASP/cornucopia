@@ -214,11 +214,31 @@ def main() -> None:
         sys.exit(1)
 
     # Run checker
-    checker = TranslationChecker(source_dir, 
-        excluded_tags=["T02330", "T02530", 
-            "T03130", "T03150", "T03170", "T03190", "T03240", "T03260",
-            "T03350", "T03420", "T03470", "T03490", "T03540", "T03580",
-            "T03710", "T03730", "T03750", "T03770", "T03772", "T03774"])
+    checker = TranslationChecker(
+        source_dir,
+        excluded_tags=[
+            "T02330",
+            "T02530",
+            "T03130",
+            "T03150",
+            "T03170",
+            "T03190",
+            "T03240",
+            "T03260",
+            "T03350",
+            "T03420",
+            "T03470",
+            "T03490",
+            "T03540",
+            "T03580",
+            "T03710",
+            "T03730",
+            "T03750",
+            "T03770",
+            "T03772",
+            "T03774",
+        ],
+    )
     results = checker.check_translations()
 
     # Generate report
