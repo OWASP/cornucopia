@@ -182,8 +182,9 @@ def _safe_extract_all(archive: zipfile.ZipFile, target_dir: str) -> None:
 
 def _validate_command_args(cmd_args: List[str]) -> bool:
     """Validate command arguments for dangerous characters."""
-    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}", "\\"]
-    for arg in cmd_args:
+    dangerous_chars = ["&", "|", ";", "$", "`", "(", ")", "<", ">", "*", "?", "[", "]", "{", "}"]
+    args_to_check = cmd_args[1:] if platform.system() == "Windows" else cmd_args
+    for arg in args_to_check:
         if any(char in arg for char in dangerous_chars):
             logging.warning(f"Potentially dangerous character found in argument: {arg}")
             return False
