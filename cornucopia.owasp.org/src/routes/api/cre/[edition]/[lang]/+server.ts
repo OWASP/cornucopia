@@ -16,6 +16,7 @@ export const GET: RequestHandler = ({ params }) => {
   return json(Object.fromEntries(cards))
 }
 const editions = ["webapp", "mobileapp"]
+const editions = ["webapp", "mobileapp", "dbd"]
 
 export const GET: RequestHandler = ({ url }) => {
     const params = url.pathname.split('/');

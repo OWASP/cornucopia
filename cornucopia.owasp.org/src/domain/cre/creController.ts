@@ -28,6 +28,47 @@ function isCreMap(obj: unknown): obj is { owasp_cre: string[] } {
   }
   return false;
 }
+export class CreController {
+    private deck: Map<string, Card>;
+    private controller: MappingController;
+
+    private static editions: Map<string, string>  = new Map<string, string>( [
+        ['webapp', "OWASP Cornucopia Website App Edition"],
+        ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
+        ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"]
+    ]);
+
+    private static category: Map<string, string>  = new Map<string, string>( [
+        ['webapp', "Website Application"],
+        ['mobileapp', "Mobile Application"],
+        ['dbd', "Digital Benefits and Disbenefits"]
+    ]);
+
+    constructor(deck: Map<string, Card>, controller: MappingController) {
+        this.deck = deck;
+        this.controller = controller;
+    }
+
+    public static getEditionName(edition: string): string {
+        return CreController.editions.get(edition) || edition;
+    }
+
+    public getCreMapping(edition: string, lang: string) : any {
+        if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
+        let standards: Cre[] = [];
+        (this.deck || []).forEach(
+                (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
+            );
+        return {
+            "meta": {
+                "edition": CreController.editions.get(edition),
+                "component": 'cards',
+                "language": lang,
+                "version": this.controller.getMeta()?.version
+            },
+            "standards": standards
+        };
+    }
 
 export class CreController {
   private readonly cards: Map<string, CardData>
