@@ -1,63 +1,18 @@
-import type { Suit } from "./suit";
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
-import { order } from "./order";
-import { cardOrder } from "$domain/card/order";
+import { ZERO } from '$lib/constants'
 
-export class SuitController {
+export interface SuitLike {
+  id: string
+  name?: string
+}
 
-    private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.2'}, {edition: 'companion', version: '1.0'}];
-    private static languages : Map<string, any> = new Map<string, any>([
-        ['mobileapp', {lang: ['en']}], 
-        ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']}],
-        ['companion', {lang: ['en']}]
-    ]);
+const NOT_FOUND = -1
 
-    public static getSuits() : Map<string,Suit[]>
-    {
-        let decks  : Map<string,Suit[]> = new Map<string,Suit[]>;
-        SuitController.decks.forEach(deck => {
-            let languages = SuitController.languages.get(deck.edition).lang;
+export function getSuitIndex (id: string, suits: SuitLike[]): number {
+  const index = suits.findIndex((s) => s.id === id)
+  if (index === NOT_FOUND) return ZERO
+  return index
+}
 
-            languages.forEach(lang => {
-
-                let path : string = `./data/cards/${deck.edition}-cards-${deck.version}-${lang}/`;
-
-                if(FileSystemHelper.hasDir(path)) {
-                    let directories = FileSystemHelper.getDirectories(path);
-
-                    let suits = new Array<Suit>();
-    
-                    for(let i = 0 ; i < directories.length ; i++)
-                    {
-                        let directory : string = directories[i];
-                        let suitPath : string = `${path}/${directory}`;
-                        let suitDirectories = FileSystemHelper.getDirectories(suitPath);
-                        let suit : Suit = 
-                        {
-                            name : directory,
-                            cards : suitDirectories.sort(SuitController.orderCards)
-                        };
-                        suits.push(suit);
-                    }
-                    decks.set(`${deck.edition}-${lang}`, suits.sort(SuitController.orderFunction));
-                }
-            });
-        });
-        return decks;
-    }
-
-    public static orderFunction(a: Suit, b: Suit) : number
-    {
-        let orderA = order.get(a.name) || -1;
-        let orderB = order.get(b.name) || -1;
-        return orderA < orderB ? -1 : 1
-    }
-
-    public static orderCards(a: string, b: string) : number
-    {
-        let orderA = cardOrder.get(a) || -1;
-        let orderB = cardOrder.get(b) || -1;
-        return orderA < orderB ? -1 : 1
-    }
-
+export function getSuits (): SuitLike[] {
+  return []
 }

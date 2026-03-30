@@ -1,29 +1,21 @@
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
-import path from "path";
+import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper'
+import type { PageServerLoad } from './$types'
+import { ZERO } from '$lib/constants'
 
-/** @type {import('./$types').PageServerLoad} */
-export async function load({ url }) {
-  const lang = 'en';
-  let [categories, content] = FileSystemHelper.getDataByRoute(url.pathname, lang);
+export const load: PageServerLoad = ({ params }) => {
+  const { path: currentPath } = params;
+  const pathParts = currentPath.split('/').filter(p => p !== '')
 
-  // Resolve the canonical path for GitHub links
-  let route = url.pathname;
-  if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
-
-  // Resolve actual casing using FileSystemHelper
-  // @ts-ignore
-  const baseDataPath = path.join(FileSystemHelper.root, "data");
-  // @ts-ignore
-  const resolvedFullPath = FileSystemHelper.resolveCaseInsensitivePath(baseDataPath, route);
-  // @ts-ignore
-  const truePath = path.relative(FileSystemHelper.root, resolvedFullPath).replace(/\\/g, '/');
+  if (pathParts.length === ZERO) {
+    return { 
+      title: 'Taxonomy', 
+      items: FileSystemHelper.ASVSRouteMap() 
+    }
+  }
 
   return {
-    categories: categories,
-    content: content,
-    path: url.pathname,
-    truePath: truePath,
-    title: FileSystemHelper.getCurrentPageNameByRoute(url.pathname as string),
-    timestamp: new Date().toUTCString(),
-  };
+    title: FileSystemHelper.getCurrentPageNameByRoute(currentPath),
+    path: currentPath,
+    items: FileSystemHelper.ASVSRouteMap().filter(item => item.Path.includes(currentPath))
+  }
 }

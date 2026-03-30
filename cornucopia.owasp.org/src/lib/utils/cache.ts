@@ -1,109 +1,69 @@
-import fs from 'fs';
+import fs from 'node:fs'
+import { CACHE } from '$lib/constants'
 
-// Cache the result of a given function on the local filesystem
-export async function LocalCache(func : Function, cacheSeconds : number, description : string)
-{
-    let logMessage = "[LocalCacheAsync] ";
-    let filename : string = generateFilename('async-' + description);
+export async function LocalCache (func: () => unknown, cacheSeconds: number, description: string): Promise<unknown> {
+  const filename: string = generateFilename(`async-${description}`)
+  const [cacheStatusOk, cacheAge] = cacheIsOk(filename, cacheSeconds)
+  let logMessage = `[LocalCacheAsync] Age is ${cacheAge} seconds.`
 
-    let [cacheStatusOk,cacheAge] = cacheIsOk(filename,cacheSeconds);
+  if (cacheStatusOk) {
+    logMessage += ` Found [${description}] in cache.`
+    const responseAsString = fs.readFileSync(filename).toString()
+    const kiloBytes = Math.round(Buffer.byteLength(responseAsString) / CACHE.KB)
+    logMessage += `\t${kiloBytes} kb.`
+    console.log(logMessage)
+    return JSON.parse(responseAsString) as unknown
+  }
 
-    if(cacheStatusOk)
-    {
-        logMessage += " 🟢 Found general request [" + description + "] in cache.";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
-        let responseAsString = fs.readFileSync(filename).toString();
-
-        const size = Buffer.byteLength(responseAsString);
-        const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
-
-        let response = JSON.parse(responseAsString);
-        return response; 
-    }
-    else
-    {
-        logMessage += " 🟠 " + description + " not in cache, got from API";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
-        
-        let result = func();
-        let response = await Promise.resolve(result)
-        let responseAsJSON = JSON.stringify(response)
-
-        const size = Buffer.byteLength(responseAsJSON);
-        const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
-
-        fs.writeFileSync(filename, responseAsJSON);
-        console.log(logMessage);
-        return response;
-    }
-
+  logMessage += ` ${description} not in cache, got from API`
+  const result = func()
+  const response: unknown = await Promise.resolve(result)
+  const responseAsJSON = JSON.stringify(response)
+  const kiloBytes = Math.round(Buffer.byteLength(responseAsJSON) / CACHE.KB)
+  logMessage += `\t${kiloBytes} kb.`
+  fs.writeFileSync(filename, responseAsJSON)
+  console.log(logMessage)
+  return response
 }
 
-// The same as LocalCache, but for synchronous functions
-export function LocalCacheSync(func : Function, cacheSeconds : number, description : string)
-{
-    let logMessage = "[LocalCacheSync] ";
-    let filename : string = generateFilename('sync-' + description);
+export function LocalCacheSync (func: () => unknown, cacheSeconds: number, description: string): unknown {
+  const filename: string = generateFilename(`sync-${description}`)
+  const [cacheStatusOk, cacheAge] = cacheIsOk(filename, cacheSeconds)
+  let logMessage = `[LocalCacheSync] Age is ${cacheAge} seconds.`
 
-    let [cacheStatusOk,cacheAge] = cacheIsOk(filename,cacheSeconds);
+  if (cacheStatusOk) {
+    logMessage += ` Found [${description}] in cache.`
+    const responseAsString = fs.readFileSync(filename).toString()
+    const kiloBytes = Math.round(Buffer.byteLength(responseAsString) / CACHE.KB)
+    logMessage += `\t${kiloBytes} kb.`
+    console.log(logMessage)
+    return JSON.parse(responseAsString) as unknown
+  }
 
-    if(cacheStatusOk)
-    {
-        logMessage += " 🟢 Found general request [" + description + "] in cache.";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
-        let responseAsString = fs.readFileSync(filename).toString();
-
-        const size = Buffer.byteLength(responseAsString);
-        const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
-
-        let response = JSON.parse(responseAsString);
-        console.log(logMessage);
-        return response; 
-    }
-    else
-    {
-        logMessage += " 🟠 " + description + " not in cache, got from API";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
-        
-        let result = func();
-        let responseAsJSON = JSON.stringify(result)
-
-        const size = Buffer.byteLength(responseAsJSON);
-        const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
-
-        fs.writeFileSync(filename, responseAsJSON);
-        console.log(logMessage);
-        return result;
-    }
+  logMessage += ` ${description} not in cache, got from API`
+  const result = func()
+  const responseAsJSON = JSON.stringify(result)
+  const kiloBytes = Math.round(Buffer.byteLength(responseAsJSON) / CACHE.KB)
+  logMessage += `\t${kiloBytes} kb.`
+  fs.writeFileSync(filename, responseAsJSON)
+  console.log(logMessage)
+  return result
 }
 
-function getSecondsAge(input : Date) : number
-{
-    let today = new Date();
-    return Math.round(Math.abs(today.getTime() - input.getTime()) / 1000);
+function getSecondsAge (input: Date): number {
+  const today = new Date()
+  return Math.round(Math.abs(today.getTime() - input.getTime()) / CACHE.TIMEOUT_MS)
 }
 
-function generateFilename(input : string) : string
-{
-    return 'cache/' + input + '.cache';
+function generateFilename (input: string): string {
+  return `cache/${input}.cache`
 }
 
-function cacheIsOk(path : string, maximumAge : number) : [boolean,number]
-{
-
-    let fileExists : boolean = fs.existsSync(path);
-
-    if(!fileExists)
-        return [false,-1];
-
-    let stats = fs.statSync(path);
-    let diff : number =  getSecondsAge(stats.mtime)// Cache age in seconds
-    if(diff > maximumAge)
-        return [false,diff];
-
-    return [true,diff];
+function cacheIsOk (path: string, maximumAge: number): [boolean, number] {
+  const fileExists: boolean = fs.existsSync(path)
+  if (!fileExists) return [false, CACHE.NO_RESULT]
+  const stats = fs.statSync(path)
+  const diff: number = getSecondsAge(stats.mtime)
+  if (diff > maximumAge) return [false, diff]
+  return [true, diff]
 }

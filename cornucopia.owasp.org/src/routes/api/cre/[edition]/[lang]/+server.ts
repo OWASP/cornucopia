@@ -1,16 +1,21 @@
-import { DeckService } from '$lib/services/deckService';
-import { CreController } from '$domain/cre/creController';
-import { json, error, type RequestHandler } from '@sveltejs/kit';
-import { MappingController } from '$domain/mapping/mappingController';
-import { MappingService } from '$lib/services/mappingService';
-// Header options
-export const prerender = true;
-const responseInit: ResponseInit = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
+import { json } from '@sveltejs/kit'
+import { DeckService } from '$lib/services/deckService'
+import type { RequestHandler } from './$types'
+import { HTTP_STATUS } from '$lib/constants'
 
+export const GET: RequestHandler = ({ params }) => {
+  const { edition, lang } = params
+  if (edition === '' || lang === '') {
+    return json({ error: 'Missing params' }, { status: HTTP_STATUS.BAD_REQUEST })
+  }
+
+  const service = new DeckService()
+  const version = DeckService.getLatestVersion(edition)
+  const cards = service.getCardDataForEditionVersionLang(edition, version, lang)
+
+  return json(Object.fromEntries(cards))
+}
+const editions = ["webapp", "mobileapp"]
 const editions = ["webapp", "mobileapp", "dbd"]
 
 export const GET: RequestHandler = ({ url }) => {

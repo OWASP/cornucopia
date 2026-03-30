@@ -2,20 +2,20 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import VitePluginRestart from 'vite-plugin-restart';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-let vitePluginRestartOptions = {restart: ['./data/**']}
+const vitePluginRestartOptions = {restart: ['./data/**']}
 
 // This copies the content from the filesystem data folder to the static file location under '/data/' available at runtime.
 // Also copies to server output for prerendering
-let viteStaticCopyTargets = [
+const viteStaticCopyTargets = [
 	{src: './data/**/*', dest: './data/'},
 	{src: './data/**/*', dest: '../server/data/'}
 ]
-let viteStaticCopyOptions = { targets: viteStaticCopyTargets}
+const viteStaticCopyOptions = { targets: viteStaticCopyTargets}
 
 export default defineConfig({
 	resolve: {

@@ -1,163 +1,123 @@
-import fs from "fs";
-import type { Route } from "../../domain/routes/route";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs'
+import type { Route } from '../../domain/routes/route'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { ZERO, ONE } from '$lib/constants'
 
-export class FileSystemHelper {
+export function getFileSystemRoot (): string {
+  if (import.meta.url.includes('.svelte-kit')) {
+    return path.normalize(`${path.dirname(fileURLToPath(import.meta.url))}/../../../../`)
+  }
+  return path.normalize(`${path.dirname(fileURLToPath(import.meta.url))}/../../../`)
+}
 
-  //private static root = path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../');
+export const fileSystemRoot = getFileSystemRoot()
 
+export function hasDir (dirPath: string): boolean {
+  return fs.existsSync(dirPath)
+}
 
-  private static root = (() => {
-    // During development and build, calculate root from import.meta.url
+export function hasFile (filePath: string): boolean {
+  return fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()
+}
 
-    if (import.meta.url.includes('.svelte-kit')) {
-      return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../../');
+export function getDirectories (dirPath: string): string[] {
+  return fs
+    .readdirSync(dirPath, { withFileTypes: true })
+    .filter((x) => x.isDirectory())
+    .map((dirent) => dirent.name)
+}
+
+export function getFiles (dirPath: string): string[] {
+  return fs
+    .readdirSync(dirPath, { withFileTypes: true })
+    .filter((x) => x.isFile())
+    .map((dirent) => dirent.name)
+}
+
+export function resolveCaseInsensitivePath (basePath: string, relativePath: string): string {
+  const parts = relativePath.split('/').filter(p => p.length > ZERO)
+  let currentPath = path.normalize(basePath)
+  for (const part of parts) {
+    const resolvedPart = fs.existsSync(currentPath)
+      ? (fs.readdirSync(currentPath, { withFileTypes: true })
+          .find(entry => entry.name.toLowerCase() === part.toLowerCase())
+          ?.name ?? part)
+      : null
+    if (resolvedPart === null) return path.join(basePath, relativePath)
+    currentPath = path.join(currentPath, resolvedPart)
+  }
+  return currentPath
+}
+
+export function ASVSRouteMap (version = '4.0.3'): Route[] {
+  const basePath = `data/taxonomy/en/ASVS-${version}`
+  const sectionRegex = /^(?:\d{2})-/
+  const captureRegex = /^(?<section>\d{2})-/
+  const routes: Route[] = []
+  const firstLevelDirs = getDirectories(fileSystemRoot + basePath).filter(dir => sectionRegex.test(dir))
+  for (const firstLevelDir of firstLevelDirs) {
+    const firstLevelPath = `${basePath}/${firstLevelDir}`
+    const firstPart = captureRegex.exec(firstLevelDir)?.groups?.section
+    const secondLevelDirs = getDirectories(fileSystemRoot + firstLevelPath).filter(dir => sectionRegex.test(dir))
+    for (const secondLevelDir of secondLevelDirs) {
+      const secondPart = captureRegex.exec(secondLevelDir)?.groups?.section
+      const section = `${firstPart ?? ''}.${secondPart ?? ''}`
+      const fullPath = `${firstLevelPath}/${secondLevelDir}`.replace('data/taxonomy/en', '/taxonomy')
+      routes.push({ Path: fullPath, Section: section })
     }
-
-    return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../');
-
-  })();
-
-  public static hasDir(path: string): boolean {
-    return fs.existsSync(path);
   }
+  return routes
+}
 
-  public static hasFile(path: string): boolean {
-    return FileSystemHelper.hasDir(path) && fs.lstatSync(path).isFile();
+export function getCurrentPageNameByRoute (route: string): string {
+  return route === '' ? 'Requirements Mapping' : route.split('/').slice(-ONE)[ZERO]
+}
+
+export function getDataByRoute (route: string, lang = 'en'): [string[], string] {
+  const categories: string[] = []
+  const baseDataPath = `${fileSystemRoot}data`
+  const langPattern = `taxonomy/${lang}`
+  const routeHasLang = route.includes(langPattern)
+  const resolvedRoute = routeHasLang
+    ? route
+    : route.replace(/taxonomy\/?/, `${langPattern}/`)
+  const defaultLangRoute = resolvedRoute.replace(`/taxonomy/${lang}`, '/taxonomy/en')
+  let content = getDataFromPath(`data${resolvedRoute}`).get(`data${resolvedRoute}`) ?? ''
+  if (content === '') {
+    content = getDataFromPath(`data${defaultLangRoute}`).get(`data${defaultLangRoute}`) ?? ''
   }
-
-  public static getDirectories(path: string): string[] {
-    return fs
-      .readdirSync(path, { withFileTypes: true })
-      .filter((x) => x.isDirectory())
-      .map((dirent) => dirent.name);
+  const resolvedPath = resolveCaseInsensitivePath(baseDataPath, defaultLangRoute)
+  if (fs.existsSync(resolvedPath) && fs.lstatSync(resolvedPath).isDirectory()) {
+    for (const folder of getDirectories(resolvedPath)) categories.push(folder)
   }
+  return [categories, content]
+}
 
-  public static getFiles(path: string): string[] {
-    return fs
-      .readdirSync(path, { withFileTypes: true })
-      .filter((x) => x.isFile())
-      .map((dirent) => dirent.name);
+export function getDataFromPath (filePath: string): Map<string, string> {
+  const content = new Map<string, string>()
+  const resolvedPath = resolveCaseInsensitivePath(fileSystemRoot, filePath)
+  const indexFile = path.join(resolvedPath, 'index.md')
+  if (fs.existsSync(indexFile)) content.set(filePath, fs.readFileSync(indexFile, 'utf8'))
+  const folders = (() => {
+    try { return getDirectories(resolvedPath) } catch { return [] }
+  })()
+  for (const folder of folders) {
+    const folderIndexFile = path.join(resolvedPath, folder, 'index.md')
+    if (fs.existsSync(folderIndexFile)) content.set(folder, fs.readFileSync(folderIndexFile, 'utf8'))
   }
+  return content
+}
 
-  /**
-   * Resolves a path in a case-insensitive manner by checking actual directory names.
-   * This ensures cross-platform compatibility between case-sensitive and case-insensitive filesystems.
-   */
-  private static resolveCaseInsensitivePath(basePath: string, relativePath: string): string {
-    const parts = relativePath.split('/').filter(p => p.length > 0);
-    let currentPath = path.normalize(basePath);
-    
-    for (const part of parts) {
-      if (!fs.existsSync(currentPath)) {
-        return path.join(basePath, relativePath); // Path doesn't exist, return as-is
-      }
-      
-      const entries = fs.readdirSync(currentPath, { withFileTypes: true });
-      const matchingEntry = entries.find(entry => 
-        entry.name.toLowerCase() === part.toLowerCase()
-      );
-      
-      if (matchingEntry) {
-        currentPath = path.join(currentPath, matchingEntry.name);
-      } else {
-        currentPath = path.join(currentPath, part);
-      }
-    }
-    
-    return currentPath;
-  }
-
-  public static ASVSRouteMap(version: string = "4.0.3"): Route[] {
-    const basePath: string = `data/taxonomy/en/ASVS-${version}`;
-    const sectionRegex = /^(\d{2})-/;
-    let routes: Route[] = [];
-
-    const firstLevelDirs = this.getDirectories(FileSystemHelper.root + basePath).filter((dir) =>
-      sectionRegex.test(dir)
-    );
-
-    firstLevelDirs.forEach((firstLevelDir) => {
-      const firstLevelPath = basePath + '/' + firstLevelDir;
-      const firstPart = firstLevelDir.match(sectionRegex)?.[1];
-
-      const secondLevelDirs = this.getDirectories(FileSystemHelper.root + firstLevelPath).filter(
-        (dir) => sectionRegex.test(dir)
-      );
-
-      secondLevelDirs.forEach((secondLevelDir) => {
-        const secondPart = secondLevelDir.match(sectionRegex)?.[1];
-        const section = `${firstPart}.${secondPart}`;
-        let fullPath = firstLevelPath + '/' + secondLevelDir;
-        fullPath = fullPath.replace("data/taxonomy/en", "/taxonomy");
-
-        routes.push({
-          Path: fullPath,
-          Section: section,
-        });
-      });
-    });
-
-    return routes;
-  }
-
-  public static getCurrentPageNameByRoute(route: string) {
-    return route ? route.split('/').slice(-1)[0] : 'Requirements Mapping';
-  }
-
-  public static getDataByRoute(route: string, lang: string = 'en'): [string[], string] {
-    let categories: string[] = [];
-    const baseDataPath = FileSystemHelper.root + "data";
-    
-    if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
-    
-    let defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en');
-    
-    // Get content using original route structure for Map keys
-    let content = FileSystemHelper.getDataFromPath('data' + route).get('data' + route) || "";
-    if (content === "") {
-      content = FileSystemHelper.getDataFromPath('data' + defaultLangRoute).get('data' + defaultLangRoute) || "";
-    }
-    
-    // Resolve the actual filesystem path for directory operations (case-insensitive)
-    const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(baseDataPath, defaultLangRoute);
-    
-    if (fs.existsSync(resolvedPath) && fs.lstatSync(resolvedPath).isDirectory()) {
-      FileSystemHelper.getDirectories(resolvedPath).forEach(
-        (folder) => categories.push(folder));
-    }
-    
-    return [categories, content];
-  }
-
-  public static getDataFromPath(filePath: string) : Map<string, string>
-  {
-    const base = FileSystemHelper.root;
-    let content = new Map<string, string>();
-  
-    // Resolve the actual filesystem path (case-insensitive)
-    const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(base, filePath);
-    
-    let indexFile: string = path.join(resolvedPath, "index.md");
-    if (fs.existsSync(indexFile)) {
-      content.set(filePath, fs.readFileSync(indexFile, "utf8"));
-    }
-  
-    let folders: string[];
-    try {
-      folders = FileSystemHelper.getDirectories(resolvedPath);
-    } catch (e) {
-      folders = [];
-    }
-  
-    folders.forEach((folder) => {
-      const folderIndexFile = path.join(resolvedPath, folder, "index.md");
-      if (fs.existsSync(folderIndexFile)) {
-        content.set(folder, fs.readFileSync(folderIndexFile, "utf8"));
-      }
-    });
-  
-    return content;
-  }
+export const FileSystemHelper = {
+  root: fileSystemRoot,
+  hasDir,
+  hasFile,
+  getDirectories,
+  getFiles,
+  resolveCaseInsensitivePath,
+  ASVSRouteMap,
+  getCurrentPageNameByRoute,
+  getDataByRoute,
+  getDataFromPath
 }

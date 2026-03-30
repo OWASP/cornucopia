@@ -1,5 +1,6 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit'
+import { HTTP_STATUS } from '$lib/constants'
 
-export function load({ params }) {
-  redirect(308, '/cards');
+export function load (): never {
+  redirect(HTTP_STATUS.PERMANENT_REDIRECT, '/cards')
 }

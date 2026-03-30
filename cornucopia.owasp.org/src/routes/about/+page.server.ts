@@ -1,9 +1,9 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
+import type { PageServerLoad } from './$types';
 
-
-export async function load({ params }) {
-    let content = FileSystemHelper.getDataFromPath('data/website/pages/about');
+export const load: PageServerLoad = () => {
+    const content = FileSystemHelper.getDataFromPath('data/website/pages/about');
     return {
-        content: content
+        content
     };
-}
+};
