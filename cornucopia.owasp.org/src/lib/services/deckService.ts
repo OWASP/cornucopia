@@ -138,7 +138,7 @@ export class DeckService {
                     cardObject.summary = fm(fs.readFileSync(`./${base}${cardFolderPath}/explanation.md`, 'utf8')).body;
                 } catch (e) {
                       console.error(
-                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${explanationPath}`,e
+                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${base}${cardFolderPath}/explanation.md`,e
                       );
 
                     continue;
