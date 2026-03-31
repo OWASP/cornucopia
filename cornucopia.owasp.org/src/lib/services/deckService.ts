@@ -134,11 +134,12 @@ export class DeckService {
                 }
                 let parsed = fm(file);
                 cardObject.concept = parsed.body;
+                const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
                     cardObject.summary = fm(fs.readFileSync(`./${base}${cardFolderPath}/explanation.md`, 'utf8')).body;
                 } catch (e) {
                       console.error(
-                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${base}${cardFolderPath}/explanation.md`,e
+                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${explanationPath}`,e
                       );
 
                     continue;
