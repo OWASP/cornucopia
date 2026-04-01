@@ -247,6 +247,9 @@ defmodule Copi.RateLimiterTest do
       assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
     end
 
+  end
+
+  describe "prod env bypass" do
     test "bypasses rate limit in production mode for localhost" do
       Application.put_env(:copi, :env, :prod)
 

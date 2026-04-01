@@ -97,4 +97,9 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     assert conn.status != 429
     refute conn.halted
   end
+
+  test "init/1 passes opts through unchanged" do
+    assert RateLimiterPlug.init([]) == []
+    assert RateLimiterPlug.init(foo: :bar) == [foo: :bar]
+  end
 end

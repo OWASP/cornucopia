@@ -128,9 +128,36 @@ defmodule Copi.IPHelperTest do
       socket = %Phoenix.Socket{transport_pid: self()}
       Process.put(:peer, {{10, 0, 0, 5}, 12345})
       assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 5}
-      
+
       socket2 = %Phoenix.Socket{transport_pid: nil}
       assert IPHelper.get_ip_from_socket(socket2) == {127, 0, 0, 1}
+    end
+
+    test "falls back to localhost for LiveView socket with empty map connect_info" do
+      # connect_info is a map with no headers and no peer_data
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: %{}}}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
+
+    test "skips atom-key req_header tuple and falls back to binary-keyed one" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{req_headers: [{:some_key, "ignored"}, {"x-forwarded-for", "10.0.2.5"}]}}
+      }
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 2, 5}
+    end
+
+    test "falls back to peer_data when connect_info map x_headers has no x-forwarded-for" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{x_headers: [{"other-header", "val"}], peer_data: %{address: {10, 0, 2, 6}}}}
+      }
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 2, 6}
+    end
+
+    test "returns localhost when connect_info map has no peer_data and no useful headers" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{x_headers: []}}
+      }
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
     end
   end
   
