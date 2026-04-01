@@ -11,7 +11,7 @@ const responseInit: ResponseInit = {
   },
 };
 
-const editions = ["webapp", "mobileapp"]
+const editions = ["webapp", "mobileapp", "dbd"]
 
 export const GET: RequestHandler = ({ url }) => {
     const params = url.pathname.split('/');
