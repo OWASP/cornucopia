@@ -226,7 +226,7 @@ class TestExtractCapecNames(unittest.TestCase):
 
         self.assertEqual(len(result), 1)
         self.assertIn(1, result)
-        self.assertIn("No 'Categories' key found", log.output[0])
+        self.assertIn("Invalid 'Categories' section in catalog; expected an object", log.output[0])
 
     def test_extract_capec_names_missing_category_inside_categories(self):
         """Test that missing Category key inside Categories logs a warning"""
