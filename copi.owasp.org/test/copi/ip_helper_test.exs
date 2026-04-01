@@ -202,6 +202,7 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_connect_info(info2) == nil
     end
 
+<<<<<<< HEAD
     test "extracts IP from x_headers binary string" do
       info = %{x_headers: "10.0.1.1"}
       assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 1, 1}
@@ -230,6 +231,58 @@ defmodule Copi.IPHelperTest do
     test "returns nil for non-tuple elements in req_headers list" do
       info = %{req_headers: [123, 456]}
       assert IPHelper.get_ip_from_connect_info(info) == nil
+=======
+    test "extracts from req_headers with atom key tuples" do
+      info = %{req_headers: [{:"x-forwarded-for", "10.2.3.4"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 2, 3, 4}
+    end
+
+    test "handles x_headers as raw binary string" do
+      info = %{x_headers: "10.8.9.1"}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 8, 9, 1}
+    end
+  end
+
+  describe "get_ip_from_socket/1 (LiveView) - additional coverage" do
+    test "extracts IP from connect_info map req_headers" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{
+            req_headers: [{"x-forwarded-for", "10.0.5.6"}]
+          }
+        }
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 5, 6}
+    end
+
+    test "handles connect_info map with x_headers as binary string" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{x_headers: "10.7.8.9"}
+        }
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {10, 7, 8, 9}
+    end
+
+    test "handles connect_info map with x_headers as string-keyed map" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{x_headers: %{"x-forwarded-for" => "10.1.2.3"}}
+        }
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {10, 1, 2, 3}
+    end
+
+    test "falls back to localhost when connect_info map has no usable IP info" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{no_headers: "foo"}}
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+>>>>>>> upstream/master
     end
   end
 end

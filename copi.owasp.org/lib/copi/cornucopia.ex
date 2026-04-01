@@ -222,7 +222,16 @@ defmodule Copi.Cornucopia do
 
   """
   def list_cards do
-    Card |> order_by(:id) |> Repo.all()
+    # Temporary fix: get all cards and deduplicate in memory
+    # This is less efficient but guaranteed to work
+    Card 
+    |> Repo.all()
+    |> Enum.group_by(fn card -> {card.external_id, card.edition, card.language} end)
+    |> Enum.map(fn {_key, cards} -> 
+         # Get the card with the highest version (simple string comparison)
+         Enum.max_by(cards, fn card -> card.version end)
+       end)
+    |> Enum.sort_by(fn card -> {card.edition, card.external_id, card.language} end)
   end
 
   def list_cards_shuffled(edition, suits, version) do

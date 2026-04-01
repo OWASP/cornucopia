@@ -95,19 +95,6 @@ defmodule CopiWeb.GameLive.CreateGameForm do
     assign(socket, :form, to_form(changeset))
   end
 
-  defp save_game(socket, :edit, game_params) do
-    case Cornucopia.update_game(socket.assigns.game, game_params) do
-      {:ok, _game} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Game updated successfully")
-         |> push_navigate(to: socket.assigns.return_to)}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign_form(socket, changeset)}
-    end
-  end
-
   defp save_game(socket, :new, game_params) do
     ip = socket.assigns[:client_ip] || {127, 0, 0, 1}
 

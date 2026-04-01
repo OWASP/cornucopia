@@ -653,6 +653,69 @@ class TestCreatelink(unittest.TestCase):
         # Should return the shortcode itself
         self.assertEqual(result, "V99.99.99")
 
+    def test_createlink_no_prefix_collision(self):
+        """Exact equality check: V1.1.1 must not match V1.1.10 or V1.1.11."""
+        asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 1,
+                    "Name": "Architecture",
+                    "Items": [
+                        {
+                            "Ordinal": 1,
+                            "Name": "Secure Design",
+                            "Items": [
+                                {"Shortcode": "V1.1.10", "Text": "Req ten"},
+                                {"Shortcode": "V1.1.11", "Text": "Req eleven"},
+                                {"Shortcode": "V1.1.1", "Text": "Req one"},
+                            ],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        # Looking up the shorter code must return a link anchored to V1.1.1, not V1.1.10
+        result = capec.createlink(asvs_map, "V1.1.1", "5.0")
+
+        self.assertIn("#V1.1.1)", result)
+        self.assertNotIn("#V1.1.10)", result)
+        self.assertNotIn("#V1.1.11)", result)
+
+    def test_createlink_exact_match_multi_digit(self):
+        """Looking up V1.1.10 must match V1.1.10 exactly, not V1.1.1."""
+        asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 1,
+                    "Name": "Architecture",
+                    "Items": [
+                        {
+                            "Ordinal": 1,
+                            "Name": "Secure Design",
+                            "Items": [
+                                {"Shortcode": "V1.1.1", "Text": "Req one"},
+                                {"Shortcode": "V1.1.10", "Text": "Req ten"},
+                            ],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        result = capec.createlink(asvs_map, "V1.1.10", "5.0")
+
+        self.assertIn("#V1.1.10)", result)
+        self.assertNotIn("#V1.1.1)", result.replace("#V1.1.10)", ""))
+
+    def test_createlink_empty_shortcode(self):
+        """Empty shortcode returns empty string."""
+        asvs_map = {"Requirements": []}
+
+        result = capec.createlink(asvs_map, "", "5.0")
+
+        self.assertEqual(result, "")
+
 
 class TestHasNoAsvsMapping(unittest.TestCase):
     def test_has_no_asvs_mapping_exists(self):
