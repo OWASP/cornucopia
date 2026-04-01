@@ -247,39 +247,24 @@ defmodule Copi.RateLimiterTest do
       assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
     end
 
-<<<<<<< HEAD
-    test "normalize_ip fallback: passes non-tuple non-binary values through", %{ip: _ip} do
-      # nil is neither binary nor tuple, hits normalize_ip(ip), do: ip
-      assert {:ok, _} = RateLimiter.check_rate(nil, :game_creation)
-    end
   end
 
   describe "prod env bypass" do
-    test "bypasses rate limit for localhost in prod env" do
-      Application.put_env(:copi, :env, :prod)
-
-      try do
-        assert {:ok, :unlimited} = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
-=======
     test "bypasses rate limit in production mode for localhost" do
       Application.put_env(:copi, :env, :prod)
 
       try do
         result = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
         assert result == {:ok, :unlimited}
->>>>>>> upstream/master
       after
         Application.put_env(:copi, :env, :test)
       end
     end
-<<<<<<< HEAD
-=======
 
     test "normalize_ip passes through non-tuple non-binary input" do
       # Passing an integer (not a tuple or binary) hits the catch-all normalize_ip clause
       assert {:ok, _} = RateLimiter.check_rate(12345, :game_creation)
     end
->>>>>>> upstream/master
   end
 
   describe "cleanup process" do
@@ -287,14 +272,6 @@ defmodule Copi.RateLimiterTest do
       assert Process.whereis(Copi.RateLimiter) != nil
     end
 
-<<<<<<< HEAD
-    test "cleanup message is handled without crashing" do
-      pid = Process.whereis(Copi.RateLimiter)
-      assert pid != nil
-      send(pid, :cleanup)
-      :timer.sleep(50)
-      assert Process.alive?(pid)
-=======
     test "handles :cleanup message gracefully" do
       pid = Process.whereis(Copi.RateLimiter)
       # Populate some state first
@@ -305,7 +282,6 @@ defmodule Copi.RateLimiterTest do
       # Should still be healthy
       assert Process.alive?(pid)
       assert {:ok, _} = RateLimiter.check_rate({10, 20, 30, 41}, :game_creation)
->>>>>>> upstream/master
     end
 
     test "can make requests after clearing IP", %{ip: ip} do

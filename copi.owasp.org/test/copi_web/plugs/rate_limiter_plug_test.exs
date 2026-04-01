@@ -71,12 +71,6 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   end
 
   test "skips rate limiting when no IP info is available" do
-<<<<<<< HEAD
-    # Explicitly set remote_ip to nil so get_ip_source returns {:none, nil}
-    conn =
-      conn(:get, "/")
-      |> Map.put(:remote_ip, nil)
-=======
     # Force remote_ip to nil so IPHelper.get_ip_source returns {:none, nil}
     conn =
       conn(:get, "/")
@@ -97,7 +91,6 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     conn =
       conn(:get, "/")
       |> Map.put(:remote_ip, nil)
->>>>>>> upstream/master
       |> init_test_session(%{})
       |> RateLimiterPlug.call([])
 

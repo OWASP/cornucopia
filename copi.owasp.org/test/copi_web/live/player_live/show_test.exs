@@ -147,11 +147,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert Show.display_game_session("eop")       == "EoP Session:"
     end
 
-<<<<<<< HEAD
-    test "next_round advances round when round is already closed (all players played)", %{conn: conn, player: player} do
-      game_id = player.game_id
-      {:ok, game} = Copi.Cornucopia.Game.find(game_id)
-=======
     test "player_first/2 places current player first in list", %{conn: _conn, player: player} do
       alias CopiWeb.PlayerLive.Show
       other = %{id: "other-id"}
@@ -177,22 +172,11 @@ defmodule CopiWeb.PlayerLive.ShowTest do
          %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
->>>>>>> upstream/master
 
       Copi.Repo.update!(
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
 
-<<<<<<< HEAD
-      # Give the player a dealt card that has already been played (played_in_round = 1, not nil)
-      # so round_open? is false for the first round
-      {:ok, card} = Copi.Cornucopia.create_card(%{
-        category: "C", value: "V", description: "D", edition: "webapp",
-        version: "2.2", external_id: "CLO1", language: "en", misc: "misc",
-        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-      })
-=======
       {:ok, card1} =
         Cornucopia.create_card(%{
           category: "C", value: "V3", description: "D", edition: "webapp",
@@ -243,7 +227,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
           capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
         })
 
->>>>>>> upstream/master
       Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
         player_id: player.id, card_id: card.id, played_in_round: 1
       })
@@ -252,11 +235,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       render_click(show_live, "next_round", %{})
       :timer.sleep(100)
 
-<<<<<<< HEAD
-      {:ok, updated_game} = Copi.Cornucopia.Game.find(game_id)
-      # Rounds played should have advanced via the closed-round else branch
-      assert updated_game.rounds_played >= 1
-=======
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
       assert updated_game.finished_at != nil
@@ -318,7 +296,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
->>>>>>> upstream/master
     end
   end
 
