@@ -1,7 +1,7 @@
 defmodule Copi.Encrypted.Binary do
   @moduledoc """
   Custom Ecto type that encrypts/decrypts values using AES-256-GCM.
-  Key is loaded from application config (test) or COPI_ENCRYPTION_KEY env var (prod).
+  Key is loaded from COPI_ENCRYPTION_KEY env var first, then application config.
   Stored as binary in the database.
   """
 
@@ -68,8 +68,8 @@ defmodule Copi.Encrypted.Binary do
 
   defp fetch_key do
     raw =
-      Application.get_env(:copi, :encryption_key) ||
-        System.get_env("COPI_ENCRYPTION_KEY") ||
+      System.get_env("COPI_ENCRYPTION_KEY") ||
+        Application.get_env(:copi, :encryption_key) ||
         raise "COPI_ENCRYPTION_KEY is not set"
 
     key = Base.decode64!(String.trim(raw))
