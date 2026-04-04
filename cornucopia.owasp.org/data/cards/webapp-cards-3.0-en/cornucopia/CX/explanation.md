@@ -34,7 +34,7 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 
 ### What are we going to do about it?
 
-1. Regularly update all frameworks, libraries, and components to their latest, secure versions.
+1. Regularly update all frameworks, libraries, and components to their latest, secure versions and ensure their versions are pinned.
 2. Conduct thorough security reviews and vulnerability assessments of all in-house, outsourced, and open-source code used within the application.
 3. Monitor security advisories for any components used within the application and respond swiftly to vulnerability disclosures.
 4. Establish a robust security protocol for integrating and maintaining external software components.
