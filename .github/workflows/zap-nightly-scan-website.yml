@@ -34,7 +34,7 @@ jobs:
           docker run --network="host" \
             --user 1000:1000 \
             -v $(pwd)/zap-reports:/zap/wrk/:rw \
-            -t ghcr.io/zaproxy/zaproxy:stable \
+            -t ghcr.io/zaproxy/zaproxy:2.16.1 \
             zap-full-scan.py \
             -t http://localhost:8080 \
             -j \
