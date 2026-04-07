@@ -2,7 +2,7 @@
 
 ## Description
 
-{'p': {'__prefix': 'xhtml', '__text': 'An adversary targets the communication between two components (typically client and server), in order to alter or obtain data from transactions. A general approach entails the adversary placing themself within the communication channel between the two components.'}}
+An adversary targets the communication between two components (typically client and server), in order to alter or obtain data from transactions. A general approach entails the adversary placing themself within the communication channel between the two components.
 
 Source: [CAPEC™ 94](https://capec.mitre.org/data/definitions/94.html)
 
