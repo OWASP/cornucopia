@@ -40,20 +40,22 @@ def create_capec_pages(
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
-        f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
-        f.write("## Description\n\n")
-        f.write(f"{parse_description(i.get('Description', ''))}\n\n")
-        capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
-        if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
-            logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
-        else:
-            f.write("## Related ASVS Requirements\n\n")
-            f.write(f"ASVS ({asvs_version}): \
+        filepath = capec_path / "index.md"
+        f = open(filepath, "w", encoding="utf-8")
+        try:
+            f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+            f.write("## Description\n\n")
+            f.write(f"{parse_description(i.get('Description', ''))}\n\n")
+            capec_id = int(i["_ID"])
+            f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
+            if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
+                logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
+            else:
+                f.write("## Related ASVS Requirements\n\n")
+                f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
-
-        f.close()
+        finally:
+            f.close()
 
     categories = data["Attack_Pattern_Catalog"]["Categories"]
     for i in categories["Category"]:
@@ -62,20 +64,22 @@ def create_capec_pages(
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
-        f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
-        f.write("## Description\n\n")
-        f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
-        capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
-        if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
-            logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
-        else:
-            f.write("## Related ASVS Requirements\n\n")
-            f.write(f"ASVS ({asvs_version}): \
+        filepath = capec_path / "index.md"
+        f = open(filepath, "w", encoding="utf-8")
+        try:
+            f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+            f.write("## Description\n\n")
+            f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
+            capec_id = int(i["_ID"])
+            f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
+            if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
+                logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
+            else:
+                f.write("## Related ASVS Requirements\n\n")
+                f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
-
-        f.close()
+        finally:
+            f.close()
 
     logging.info("Created %d CAPEC pages", pages)
 
