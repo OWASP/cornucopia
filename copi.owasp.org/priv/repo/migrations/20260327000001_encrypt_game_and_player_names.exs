@@ -1,10 +1,5 @@
 defmodule Copi.Repo.Migrations.EncryptGameAndPlayerNames do
-  @moduledoc """
-  Migrates game.name and player.name from plaintext varchar to
-  AES-256-GCM encrypted binary.
-  """
   use Ecto.Migration
-  import Ecto.Query
 
   def up do
     alter table(:games) do
@@ -14,8 +9,8 @@ defmodule Copi.Repo.Migrations.EncryptGameAndPlayerNames do
       add :name_encrypted, :binary
     end
     flush()
-    encrypt_existing_rows(:games)
-    encrypt_existing_rows(:players)
+    encrypt_existing_rows("games")
+    encrypt_existing_rows("players")
     flush()
     alter table(:games) do
       remove :name
@@ -36,8 +31,8 @@ defmodule Copi.Repo.Migrations.EncryptGameAndPlayerNames do
       add :name_plaintext, :string
     end
     flush()
-    decrypt_existing_rows(:games)
-    decrypt_existing_rows(:players)
+    decrypt_existing_rows("games")
+    decrypt_existing_rows("players")
     flush()
     alter table(:games) do
       remove :name
@@ -52,14 +47,10 @@ defmodule Copi.Repo.Migrations.EncryptGameAndPlayerNames do
 
   defp encrypt_existing_rows(table_name) do
     repo().transaction(fn ->
-      rows =
-        repo().all(
-          from r in {to_string(table_name), Copi.Encrypted.Row},
-          where: not is_nil(r.name),
-          select: {r.id, r.name}
-        )
+      {:ok, %{rows: rows}} =
+        repo().query("SELECT id, name FROM #{table_name} WHERE name IS NOT NULL")
 
-      Enum.each(rows, fn {id, plaintext} ->
+      Enum.each(rows, fn [id, plaintext] ->
         case Copi.Encrypted.Binary.encrypt(plaintext) do
           {:ok, ciphertext} ->
             repo().query!(
