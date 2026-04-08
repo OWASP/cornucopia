@@ -86,4 +86,30 @@ defmodule Copi.Encrypted.BinaryTest do
       EncryptedBinary.dump("anything")
     end
   end
+
+  test "round trip empty string" do
+    {:ok, blob} = EncryptedBinary.dump("")
+    assert {:ok, ""} = EncryptedBinary.load(blob)
+  end
+
+  test "round trip long name" do
+    long_name = String.duplicate("a", 500)
+    {:ok, blob} = EncryptedBinary.dump(long_name)
+    assert {:ok, ^long_name} = EncryptedBinary.load(blob)
+  end
+
+  test "round trip special characters" do
+    {:ok, blob} = EncryptedBinary.dump("Game & Players <test>")
+    assert {:ok, "Game & Players <test>"} = EncryptedBinary.load(blob)
+  end
+
+ test "round trip name with numbers" do
+    {:ok, blob} = EncryptedBinary.dump("Game 123")
+    assert {:ok, "Game 123"} = EncryptedBinary.load(blob)
+  end
+
+  test "dump rejects non-string" do
+    assert :error = EncryptedBinary.dump(123)
+    assert :error = EncryptedBinary.dump(%{})
+  end
 end
