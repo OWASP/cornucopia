@@ -123,15 +123,11 @@ Then deploy the app from `./copi.owasp.org`
 
 Generate a secure encryption key:
 
-```bash
-openssl rand -base64 32
-```
+    openssl rand -base64 32
 
 Set it as a secret environment variable on Fly.io:
 
-```bash
-fly secrets set COPI_ENCRYPTION_KEY=<your-generated-key> --app <app name>
-```
+    fly secrets set COPI_ENCRYPTION_KEY=<your-generated-key> --app <app name>
 
 ### Fly setup custom domain name
 
@@ -179,15 +175,11 @@ heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in
 
 Generate a secure encryption key:
 
-```bash
-openssl rand -base64 32
-```
+    openssl rand -base64 32
 
 Set it as an environment variable on Heroku:
 
-```bash
-heroku config:set COPI_ENCRYPTION_KEY=<your-generated-key>
-```
+    heroku config:set COPI_ENCRYPTION_KEY=<your-generated-key>
 
 ### Heroku deploy
 
