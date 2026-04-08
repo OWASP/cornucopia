@@ -182,7 +182,7 @@ def _safe_extract_all(archive: zipfile.ZipFile, target_dir: str) -> None:
 
 def _validate_command_args(cmd_args: List[str]) -> bool:
     """Validate command arguments for dangerous characters."""
-dangerous_chars = ["&", "|", ";", "$", "`", "<", ">", "*", "?", "{", "}"]
+    dangerous_chars = ["&", "|", ";", "$", "`", "<", ">", "*", "?", "{", "}"]
     skip_next = False
     for arg in cmd_args[1:]:
         if skip_next:
