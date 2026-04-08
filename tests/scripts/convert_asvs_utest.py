@@ -66,6 +66,8 @@ class TestCreateLevelSummary(unittest.TestCase):
         self.assertIn("### 02-injection-prevention", content)
         self.assertIn("[V1.1.1]", content)
         self.assertIn("[V1.2.1]", content)
+        # file should be closed after leaving the context
+        self.assertTrue(handle.close.called)
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("os.mkdir")
@@ -81,6 +83,47 @@ class TestCreateLevelSummary(unittest.TestCase):
 
         self.assertIn("# Level 2 controls", content)
         self.assertIn("Level 2 contains 0 controls listed below:", content)
+        self.assertTrue(handle.close.called)
+
+
+class TestFileHandleClosure(unittest.TestCase):
+    """Ensure file handles are closed even when errors occur"""
+
+    def setUp(self):
+        self.mock_output_path = Path("/fake/output")
+        asvs.convert_vars.args = argparse.Namespace(output_path=self.mock_output_path)
+
+    @patch("builtins.open", new_callable=mock_open)
+    @patch("os.mkdir")
+    def test_create_level_summary_close_on_error(self, mock_mkdir, mock_file):
+        """An exception during writing should still close the file"""
+        handle = mock_file()
+        # raise on the second write call
+        handle.write.side_effect = [None, ValueError("boom")]
+
+        with self.assertRaises(ValueError):
+            asvs.create_level_summary(
+                1,
+                [
+                    {
+                        "topic": "t",
+                        "cat": "c",
+                        "name": "n",
+                        "link": "l",
+                        "description": "desc",
+                    },
+                    {
+                        "topic": "t",
+                        "cat": "c",
+                        "name": "n2",
+                        "link": "l2",
+                        "description": "desc2",
+                    },
+                ],
+            )
+
+        # even though error happened, close should have been called by context manager
+        self.assertTrue(handle.close.called)
 
 
 class TestHasNoCapecMapping(unittest.TestCase):
