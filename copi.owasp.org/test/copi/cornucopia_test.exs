@@ -66,6 +66,39 @@ defmodule Copi.CornucopiaTest do
       game = game_fixture()
       assert %Ecto.Changeset{} = Cornucopia.change_game(game)
     end
+
+    test "Game.find/1 returns OK tuple for existing game" do
+      game = game_fixture()
+      assert {:ok, found} = Copi.Cornucopia.Game.find(game.id)
+      assert found.id == game.id
+    end
+
+    test "Game.find/1 returns error for non-existent game" do
+      assert {:error, :not_found} =
+               Copi.Cornucopia.Game.find("00000000000000000000000099")
+    end
+
+    test "Game.continue_vote_count/1 returns count of continue votes" do
+      alias Copi.Cornucopia.Game
+      game = game_fixture()
+      {:ok, reloaded} = Game.find(game.id)
+      assert Game.continue_vote_count(reloaded) == 0
+    end
+
+    test "Game.majority_continue_votes_reached?/1 returns true when votes exceed half" do
+      alias Copi.Cornucopia.Game
+      alias Copi.Repo
+      game = game_fixture()
+      {:ok, created_player} = Cornucopia.create_player(%{name: "p1", game_id: game.id})
+      {:ok, reloaded} = Game.find(game.id)
+      # 0 votes, 1 player → 0 > div(1,2)=0 → false
+      refute Game.majority_continue_votes_reached?(reloaded)
+      # Add a continue vote
+      Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: created_player.id, game_id: game.id})
+      {:ok, updated} = Game.find(game.id)
+      # 1 vote > div(1,2)=0 → true
+      assert Game.majority_continue_votes_reached?(updated)
+    end
   end
 
   describe "players" do

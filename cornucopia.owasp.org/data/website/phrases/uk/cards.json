@@ -1,0 +1,56 @@
+{
+  "cards": {
+    "title": "Переглянути картки",
+    "head": {
+      "title": "OWASP Cornucopia - Колоди карт",
+      "description": "Колоди карт OWASP Cornucopia надають комплексний набір карток для моделювання загроз, доступний у версіях для веб-застосунків і мобільних додатків.",
+      "keywords": "OWASP, Cornucopia, Колоди карт, Моделювання загроз, Веб-застосунок, Мобільний додаток"
+    },
+    "p1": "Обидві поточні колоди мають шість мастей, а також дві карти Джокера. Кожна масть містить 13 карток (Туз, 2-10, Валет, Дама та Король). Ця сторінка містить браузер карток, де можна переглянути кожну картку в колодах OWASP Cornucopia.",
+    "button": {
+      "1": "Версія для веб-застосунку",
+      "2": "Версія для мобільного додатку"
+    },
+    "h2": {
+      "1": "Версія для веб-застосунку",
+      "2": "Версія для мобільного додатку"
+    },
+    "p2": "Для раніше відомого видання Ecommerce Website Edition. Замість мастей STRIDE від EoP, масті були обрані на основі структури OWASP Secure Coding Practices - Quick Reference Guide (SCP), які перейшли до OWASP Developer Guide Web Application Checklist. Зміст в основному взятий з SCP, але з додатковим урахуванням розділів зі <a rel=\"noopener\" href=\"https://owasp.org/www-project-application-security-verification-standard/\">OWASP Application Security Verification Standard</a>, <a rel=\"noopener\" href=\"https://owasp.org/www-project-web-security-testing-guide\">OWASP Web Security Testing Guide</a> та <a rel=\"noopener\" href=\"/share/OWASP-SecureDevPrinciples-David-Rook.pdf\">Принципів безпечної розробки</a> Девіда Рука. Вони дали п'ять мастей, і шоста під назвою «Cornucopia» була створена для всього іншого:",
+    "p3": "Друга колода Cornucopia, «Mobile App Edition», дотримується тих самих принципів і правил гри, що й оригінальний OWASP Cornucopia, але має різні масті на основі <a rel=\"noopener\" href=\"https://mas.owasp.org/MASVS/\">категорій MASVS</a>, а також масті Cornucopia, що містять загрози, пов'язані з мобільним шкідливим програмним забезпеченням та проблемами конфіденційності:",
+    "card": {
+      "p1": "Повернутись до огляду"
+    },
+    "cardFound": {
+      "a": "Як грати?"
+    },
+    "cardBrowser": {
+      "a1": {
+        "title": "Переглянути попередню картку"
+      },
+      "a2": {
+        "title": "Переглянути наступну картку"
+      }
+    },
+    "webAppCardTaxonomy": {
+      "h1": {
+        "1": "Відображення",
+        "2": "Атаки"
+      }
+    },
+    "ASVSOverview": {
+      "p1": "Відповідних відображень не знайдено."
+    },
+    "mobileAppCardTaxonomy": {
+      "h1": {
+        "1": "Відображення",
+        "2": "Атаки"
+      }
+    },
+    "MASVSOverview": {
+      "p1": "Відповідних відображень не знайдено."
+    },
+    "attacks": {
+      "p1": "Атак не зареєстровано!"
+    }
+  }
+}

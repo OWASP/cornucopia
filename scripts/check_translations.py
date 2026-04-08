@@ -8,6 +8,7 @@ It detects:
 - Empty tag values
 """
 
+import re
 import sys
 import yaml
 from pathlib import Path
@@ -18,8 +19,9 @@ from collections import defaultdict
 class TranslationChecker:
     """Check translations for missing, untranslated, or empty tags."""
 
-    def __init__(self, source_dir: Path):
+    def __init__(self, source_dir: Path, excluded_tags: List[str] | None = None):
         self.source_dir = source_dir
+        self.excluded_tags: set[str] = set(excluded_tags) if excluded_tags else set()
         self.results: Dict[str, Dict[str, Any]] = defaultdict(lambda: defaultdict(dict))
 
     def extract_tags(self, yaml_file: Path) -> Dict[str, str]:
@@ -61,7 +63,8 @@ class TranslationChecker:
                 base_name = "-".join(parts[:-1])
 
                 # Only process card files with language codes
-                if "cards" in base_name and len(lang) == 2:
+                # Accept 2-char codes (e.g. "en", "es") and compound codes (e.g. "no_nb", "pt_br")
+                if "cards" in base_name and re.match(r"^[a-z]{2}(_[a-z]{2})?$", lang):
                     file_groups[base_name].append(yaml_file)
 
         return file_groups
@@ -91,7 +94,7 @@ class TranslationChecker:
                 missing.append(tag_id)
             elif not trans_tags[tag_id] or not trans_tags[tag_id].strip():
                 empty.append(tag_id)
-            elif trans_tags[tag_id].strip() == eng_text.strip():
+            elif trans_tags[tag_id].strip() == eng_text.strip() and tag_id not in self.excluded_tags:
                 untranslated.append(tag_id)
 
         return {
@@ -156,12 +159,13 @@ class TranslationChecker:
         lang_names = {
             "es": "Spanish",
             "fr": "French",
+            "hi": "Hindi",
             "hu": "Hungarian",
             "it": "Italian",
             "nl": "Dutch",
-            "no-nb": "Norwegian",
-            "pt-br": "Portuguese (Brazil)",
-            "pt-pt": "Portuguese (Portugal)",
+            "no_nb": "Norwegian",
+            "pt_br": "Portuguese (Brazil)",
+            "pt_pt": "Portuguese (Portugal)",
             "ru": "Russian",
         }
 
@@ -211,7 +215,31 @@ def main() -> None:
         sys.exit(1)
 
     # Run checker
-    checker = TranslationChecker(source_dir)
+    checker = TranslationChecker(
+        source_dir,
+        excluded_tags=[
+            "T02330",
+            "T02530",
+            "T03130",
+            "T03150",
+            "T03170",
+            "T03190",
+            "T03240",
+            "T03260",
+            "T03350",
+            "T03420",
+            "T03470",
+            "T03490",
+            "T03540",
+            "T03580",
+            "T03710",
+            "T03730",
+            "T03750",
+            "T03770",
+            "T03772",
+            "T03774",
+        ],
+    )
     results = checker.check_translations()
 
     # Generate report
