@@ -1,4 +1,4 @@
-defmodule CopiWeb.Router do
+﻿defmodule CopiWeb.Router do
   use CopiWeb, :router
 
   pipeline :browser do
@@ -7,7 +7,9 @@ defmodule CopiWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, html: {CopiWeb.Layouts, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug :put_secure_browser_headers, %{
+      "content-security-policy" => "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; frame-src 'self'; font-src 'self'; media-src 'self'; object-src 'self'; manifest-src 'self'; worker-src 'self';"
+    }
     plug CopiWeb.Plugs.RateLimiterPlug
   end
 
