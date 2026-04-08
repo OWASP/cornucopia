@@ -1,4 +1,4 @@
-﻿defmodule CopiWeb.Router do
+defmodule CopiWeb.Router do
   use CopiWeb, :router
 
   pipeline :browser do
