@@ -37,6 +37,11 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   describe "Show - additional coverage" do
     setup [:create_player]
 
+    test "handle_params redirects to /error for nonexistent player_id", %{conn: conn, player: _player} do
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
+    end
+
     test "handle_info :proceed_to_next_round advances rounds_played", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
@@ -221,7 +226,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
           owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
           capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
         })
-
       Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
         player_id: player.id, card_id: card.id, played_in_round: 1
       })

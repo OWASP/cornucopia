@@ -2,7 +2,7 @@
 
 ## Description
 
-{'p': {'__prefix': 'xhtml', '__text': 'An adversary tries known username/password combinations against different systems, applications, or services to gain additional authenticated access. Credential Stuffing attacks rely upon the fact that many users leverage the same username/password combination for multiple systems, applications, and services.'}}
+An adversary tries known username/password combinations against different systems, applications, or services to gain additional authenticated access. Credential Stuffing attacks rely upon the fact that many users leverage the same username/password combination for multiple systems, applications, and services.
 
 Source: [CAPEC™ 600](https://capec.mitre.org/data/definitions/600.html)
 
