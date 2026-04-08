@@ -25,8 +25,8 @@ defmodule CopiWeb.SecurityHeadersTest do
     end
 
     test "csp header is consistent across routes", %{conn: conn} do
-      csp_home  = conn |> get("/") |> get_resp_header("content-security-policy") |> List.first()
-      csp_cards = conn |> get("/cards") |> get_resp_header("content-security-policy") |> List.first()
+      csp_home  = build_conn() |> get("/") |> get_resp_header("content-security-policy") |> List.first()
+      csp_cards = build_conn() |> get("/cards") |> get_resp_header("content-security-policy") |> List.first()
       assert csp_home == csp_cards
     end
 
