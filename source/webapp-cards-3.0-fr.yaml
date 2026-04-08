@@ -318,7 +318,7 @@ suits:
     id: "CR7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CR7"
-    desc: "Gunter peut intercepter ou modifier des données chiffrées et/ou hachées en transit parce que le protocole est mal déployé, ou faiblement configuré, ou les certificats sont invalides, or les certificats ne sont pas fiables, ou la connexion peut être dégradée plus faible ou en communication non chiffrée"
+    desc: "Gunter peut intercepter ou modifier des données chiffrées et/ou hachées en transit parce que le protocole est mal déployé, ou faiblement configuré, ou les certificats sont invalides, ou les certificats ne sont pas fiables, ou la connexion peut être dégradée plus faible ou en communication non chiffrée"
   -
     id: "CR8"
     value: "8"
@@ -398,7 +398,7 @@ suits:
     id: "C9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/C9"
-    desc: "Mike peut mal utilisé une application en utilisant une fonction valide trop rapidement, ou trop fréquemment, or d'une autre façon que ce qui a été prévu, ou consomme les ressources de l'application, ou cause des situations de compétition, ou sur-utilise une fonctionnalité"
+    desc: "Mike peut mal utiliser une application en utilisant une fonction valide trop rapidement, ou trop fréquemment, ou d'une autre façon que ce qui a été prévu, ou consomme les ressources de l'application, ou cause des situations de compétition, ou sur-utilise une fonctionnalité"
   -
     id: "CX"
     value: "10"

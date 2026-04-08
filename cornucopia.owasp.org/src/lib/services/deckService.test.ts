@@ -128,9 +128,10 @@ describe('DeckService tests', () => {
     describe('getDecks', () => {
         it('should return all available decks', () => {
             const decks = DeckService.getDecks();
-            expect(decks).toHaveLength(4);
-            expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en'] });
+            expect(decks).toHaveLength(5);
+            expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] });
             expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'dbd', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ 
                 edition: 'webapp', 
                 version: '2.2', 
@@ -182,13 +183,18 @@ describe('DeckService tests', () => {
             expect(languages).toContain('it');
         });
 
-        it('should return en for mobileapp', () => {
-            const languages = DeckService.getLanguages('mobileapp');
-            expect(languages).toContain('en');
+       it('should return all languages for mobileapp', () => {
+           const languages = DeckService.getLanguages('mobileapp');
+           expect(languages).toEqual(['en', 'hi', 'uk']);
         });
 
         it('should return en for companion', () => {
             const languages = DeckService.getLanguages('companion');
+            expect(languages).toContain('en');
+        });
+
+        it('should return en for dbd', () => {
+            const languages = DeckService.getLanguages('dbd');
             expect(languages).toContain('en');
         });
 
@@ -208,10 +214,10 @@ describe('DeckService tests', () => {
              const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
              expect(languages).toEqual(['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk']);
         });
-        it('should return only en for mobileapp version 1.1', () => {
+       it('should return all supported languages for mobileapp version 1.1', () => {
             const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
-            expect(languages).toEqual(['en']);
-        });
+            expect(languages).toEqual(['en', 'hi', 'uk']);
+    });
 
         it('should return only en for companion version 1.0', () => {
             const languages = DeckService.getLanguagesForEditionVersion('companion', '1.0');
