@@ -247,6 +247,11 @@ defmodule Copi.RateLimiterTest do
       assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
     end
 
+    test "normalize_ip fallback: passes non-tuple non-binary values through", %{ip: _ip} do
+      # nil is neither binary nor tuple, hits normalize_ip(ip), do: ip
+      assert {:ok, _} = RateLimiter.check_rate(nil, :game_creation)
+    end
+
     test "bypasses rate limit in production mode for localhost" do
       Application.put_env(:copi, :env, :prod)
 
