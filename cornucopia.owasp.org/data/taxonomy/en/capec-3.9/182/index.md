@@ -8,4 +8,4 @@ Source: [CAPEC™ 182](https://capec.mitre.org/data/definitions/182.html)
 
 ## Related ASVS Requirements
 
-ASVS (5.0): [1.7.1](/taxonomy/asvs-5.0/11-cryptography/07-in-use-data-cryptography#V11.7.1)
+ASVS (5.0): [3.7.1](/taxonomy/asvs-5.0/03-web-frontend-security/07-other-browser-security-considerations#V3.7.1)

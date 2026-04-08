@@ -77,5 +77,9 @@
             margin-left: 1vw;
             margin-right: 1vw;
         }
+        
+        .mapping-title.browser-card-container:first-of-type {
+            margin-top: 2vw;
+        }
     }
 </style>
