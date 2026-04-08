@@ -624,6 +624,59 @@ suits:
             
             consoleLogSpy.mockRestore();
         });
+        it('should warn and return empty map if card file is missing', () => {
+    vi.mocked(FileSystemHelper.hasFile).mockReturnValue(false);
+
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const deckService = new DeckService();
+    const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+    expect(result.size).toBe(0);
+    expect(consoleWarnSpy).toHaveBeenCalled();
+
+    consoleWarnSpy.mockRestore();
+});
+
+it('should handle generic markdown read error gracefully', () => {
+    vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+    vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+    const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - id: CARD-1
+        value: A
+        desc: Card 1
+`;
+
+    // First call → YAML
+    // Second call → throw error (simulate markdown failure)
+    vi.mocked(fs.readFileSync)
+        .mockReturnValueOnce(mockYamlContent)
+        .mockImplementationOnce(() => {
+            throw new Error('Markdown read failed');
+        });
+
+    const mockMapping = {
+        suits: {
+            '0': { name: 'Test Suit' }
+        }
+    };
+    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const deckService = new DeckService();
+    const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+    expect(result.size).toBe(0);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+
+    consoleErrorSpy.mockRestore();
+});
     }, 10000);
 
     describe('clear', () => {
