@@ -35,7 +35,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          # use the commit that triggered this workflow to avoid any wildcard fetch
+          ref: ${{ github.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           persist-credentials: false
       # Set the pip environment up
