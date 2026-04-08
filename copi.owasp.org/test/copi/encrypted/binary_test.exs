@@ -1,5 +1,5 @@
 defmodule Copi.Encrypted.BinaryTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
   alias Copi.Encrypted.Binary, as: EncryptedBinary
 
   setup do
@@ -72,13 +72,20 @@ defmodule Copi.Encrypted.BinaryTest do
     end
   end
 
-  test "missing key raises on dump" do
+ test "missing key raises on dump" do
+    previous_key = Application.fetch_env(:copi, :encryption_key)
+
+    on_exit(fn ->
+      case previous_key do
+        {:ok, key} -> Application.put_env(:copi, :encryption_key, key)
+        :error     -> Application.delete_env(:copi, :encryption_key)
+      end
+    end)
+
     System.delete_env("COPI_ENCRYPTION_KEY")
     Application.delete_env(:copi, :encryption_key)
+
     assert_raise RuntimeError, fn ->
       EncryptedBinary.dump("anything")
     end
-  after
-    Application.put_env(:copi, :encryption_key, "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=")
   end
-end
