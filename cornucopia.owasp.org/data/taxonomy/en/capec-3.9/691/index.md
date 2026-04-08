@@ -2,7 +2,7 @@
 
 ## Description
 
-{'p': {'__prefix': 'xhtml', '__text': 'An adversary spoofs open-source software metadata in an attempt to masquerade malicious software as popular, maintained, and trusted.'}}
+An adversary spoofs open-source software metadata in an attempt to masquerade malicious software as popular, maintained, and trusted.
 
 Source: [CAPEC™ 691](https://capec.mitre.org/data/definitions/691.html)
 
