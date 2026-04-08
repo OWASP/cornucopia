@@ -277,7 +277,7 @@ def create_edition_from_template(
         logging.error("No metadata found. Cannot proceed.")
         return
 
-    template_doc: str = get_template_for_edition(layout, template, edition)
+    template_doc: str = get_template_for_edition(layout, template, edition, language)
     if template_doc == "None":
         return
     file_name, file_extension = os.path.splitext(template_doc)
@@ -840,7 +840,7 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
     return suit_tags, suit_key
 
 
-def get_template_for_edition(layout: str = "guide", template: str = "bridge", edition: str = "webapp") -> str:
+def get_template_for_edition(layout: str = "guide", template: str = "bridge", edition: str = "webapp", language: str = "en") -> str:
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
     sfile_ext = "idml"
@@ -868,16 +868,27 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
             template_doc = args_input_file
             logging.debug(f" --- Template_doc NOT found. Input File = {args_input_file}")
     else:
-        # No input file specified - using defaults
-        template_doc = os.path.normpath(
+        # No input file specified - try language-specific template first, then fall back to generic
+        base_template = (
             convert_vars.BASE_PATH
             + os.sep
             + convert_vars.DEFAULT_TEMPLATE_FILENAME.replace("edition", edition)
             .replace("layout", layout)
             .replace("document_template", template)
-            + "."
-            + sfile_ext
         )
+        # Build language-specific path (e.g. ..._bridge_en.odt)
+        lang_template_doc = os.path.normpath(
+            base_template.replace("_lang", "_" + language) + "." + sfile_ext
+        )
+        # Build generic fallback path (e.g. ..._bridge_lang.odt)
+        generic_template_doc = os.path.normpath(base_template + "." + sfile_ext)
+
+        if os.path.isfile(lang_template_doc):
+            template_doc = lang_template_doc
+            logging.info(f" --- Using language-specific template: {lang_template_doc}")
+        else:
+            template_doc = generic_template_doc
+            logging.info(f" --- Using generic template (no language-specific found): {generic_template_doc}")
 
     template_doc = template_doc.replace("\\ ", " ")
     template_doc = str(Path(sanitize_filepath(template_doc)))
