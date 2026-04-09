@@ -6,7 +6,7 @@ defmodule Copi.Cornucopia.Player do
   @foreign_key_type Ecto.ULID
 
   schema "players" do
-    field :name, :string
+    field :name, Copi.Encrypted.Binary
 
     belongs_to :game, Copi.Cornucopia.Game, type: Ecto.ULID
     has_many :dealt_cards, Copi.Cornucopia.DealtCard
