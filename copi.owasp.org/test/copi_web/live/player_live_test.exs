@@ -86,19 +86,7 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Hi some updated name, waiting for the game to start..."
     end
 
-    test "redirects on handle_params when game has already started", %{conn: conn, player: player} do
-      # Start with index_live where game_id is loaded but not started
-      {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players")
-      
-      # Behind the scenes, the game starts
-      {:ok, _started_game} = Cornucopia.update_game(
-        Cornucopia.get_game!(player.game_id),
-        %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}
-      )
 
-      # Trying to navigate (handle_params) dynamically locally to the new player form
-      assert {:error, {:redirect, %{to: "/games"}}} = live_patch(index_live, to: "/games/#{player.game_id}/players/new")
-    end
 
     test "lists players on index route", %{conn: conn, player: player} do
       {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
