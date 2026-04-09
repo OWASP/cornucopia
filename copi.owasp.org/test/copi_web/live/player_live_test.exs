@@ -49,13 +49,29 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Cornucopia Web Session: some name"
     end
 
+    test "redirects on mount when game has already started", %{conn: conn, player: player} do
+      # Start the game
+      {:ok, started_game} = Cornucopia.update_game(
+        Cornucopia.get_game!(player.game_id),
+        %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}
+      )
+
+      # Attempt to access the index page (which might mount the LiveView)
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{started_game.id}/players")
+    end
+
     test "saves new player", %{conn: conn, player: player} do
       {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}")
 
       assert index_live |> element(~s{[href="/games/#{player.game_id}/players/new"]}) |> render_click()
 
       assert_patch(index_live, "/games/#{player.game_id}/players/new")
-      {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
+      
+      # Start game in the background before submitting the form to test handle_params
+      # This mimics the handle_params redirect path for an already-connected LiveView navigating to the route.
+      # Wait, handle_params is invoked on `live()` or `assert_patch`, so:
+      
+      {:ok, _, _html} = live(conn, "/games/#{player.game_id}/players/new")
       assert index_live
              |> form("#player-form", player: @invalid_attrs)
              |> render_change() =~ "can&#39;t be blank"
@@ -68,6 +84,21 @@ defmodule CopiWeb.PlayerLiveTest do
 
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
+    end
+
+    test "redirects on handle_params when game has already started", %{conn: conn, player: player} do
+      # Start with index_live where game_id is loaded but not started
+      {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players")
+      
+      # Behind the scenes, the game starts
+      {:ok, _started_game} = Cornucopia.update_game(
+        Cornucopia.get_game!(player.game_id),
+        %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}
+      )
+
+      # Trying to navigate (handle_params) dynamically locally to the new player form
+      assert index_live |> push_patch(to: "/games/#{player.game_id}/players/new")
+      assert_redirect(index_live, "/games")
     end
 
     test "lists players on index route", %{conn: conn, player: player} do

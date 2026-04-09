@@ -166,6 +166,22 @@ defmodule Copi.CornucopiaTest do
       player = player_fixture()
       assert %Ecto.Changeset{} = Cornucopia.change_player(player)
     end
+
+    test "create_player/1 returns error when game has already started" do
+      {:ok, game} = Cornucopia.create_game(%{name: "started game", edition: "webapp"})
+      # Start the game by setting started_at
+      {:ok, started_game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      assert {:error, :game_already_started} = Cornucopia.create_player(%{name: "Late Player", game_id: started_game.id})
+    end
+
+    test "create_player/1 succeeds when game has not started" do
+      {:ok, game} = Cornucopia.create_game(%{name: "waiting game", edition: "webapp"})
+
+      assert {:ok, %Player{} = player} = Cornucopia.create_player(%{name: "Early Player", game_id: game.id})
+      assert player.name == "Early Player"
+      assert player.game_id == game.id
+    end
   end
 
   describe "cards" do
