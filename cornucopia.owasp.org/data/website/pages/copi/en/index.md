@@ -119,6 +119,16 @@ Then deploy the app from `./copi.owasp.org`
     fly scale count 2 --app <app name>
 ```
 
+### Setting up the encryption key on Fly.io
+
+Generate a secure encryption key:
+
+    openssl rand -base64 32
+
+Set it as a secret environment variable on Fly.io:
+
+    fly secrets set COPI_ENCRYPTION_KEY=<your-generated-key> --app <app name>
+
 ### Fly setup custom domain name
 
 ```bash
@@ -160,6 +170,16 @@ heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
 heroku config:set POOL_SIZE=18
 heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in
 ```
+
+### Setting up the encryption key on Heroku
+
+Generate a secure encryption key:
+
+    openssl rand -base64 32
+
+Set it as an environment variable on Heroku:
+
+    heroku config:set COPI_ENCRYPTION_KEY=<your-generated-key>
 
 ### Heroku deploy
 
