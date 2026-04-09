@@ -321,18 +321,19 @@ class TestGetTemplateForEdition(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
 
-    def test_get_template_for_edition_default_docx(self) -> None:
+def test_get_template_for_edition_default_docx(self) -> None:
         layout = "guide"
         template = "bridge"
         edition = "webapp"
+        language = "en"
 
         want_template_doc = os.path.normpath(
             os.path.join(
-                c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.odt"
+                c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_en.odt"
             )
         )
 
-        got_template_doc = c.get_template_for_edition(layout, template, edition)
+        got_template_doc = c.get_template_for_edition(layout, template, edition, language)
         self.assertEqual(want_template_doc, got_template_doc)
 
     def test_get_template_for_edition_default_idml(self) -> None:
