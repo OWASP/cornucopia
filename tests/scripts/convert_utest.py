@@ -321,7 +321,7 @@ class TestGetTemplateForEdition(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
 
-def test_get_template_for_edition_default_docx(self) -> None:
+    def test_get_template_for_edition_default_docx(self) -> None:
         layout = "guide"
         template = "bridge"
         edition = "webapp"
