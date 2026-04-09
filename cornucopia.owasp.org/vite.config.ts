@@ -12,8 +12,8 @@ let vitePluginRestartOptions = {restart: ['./data/**']}
 // This copies the content from the filesystem data folder to the static file location under '/data/' available at runtime.
 // Also copies to server output for prerendering
 let viteStaticCopyTargets = [
-	{src: './data/**/*', dest: './data/'},
-	{src: './data/**/*', dest: '../server/data/'}
+	{src: './data/**/*', dest: './'},
+	{src: './data/**/*', dest: '../server/'}
 ]
 let viteStaticCopyOptions = { targets: viteStaticCopyTargets}
 
