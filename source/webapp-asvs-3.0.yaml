@@ -546,9 +546,6 @@ meta:
     being exploited in Remote File Inclusion (RFI) or Server-side Request Forgery
     (SSRF) attacks.
   level: '3'
-1.7.1:
-  capec_codes:
-  - '182'
 10.1.1:
   capec_codes:
   - '115'
@@ -3751,6 +3748,7 @@ meta:
 3.7.1:
   capec_codes:
   - '181'
+  - '182'
   - '21'
   - '242'
   - '446'
