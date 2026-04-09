@@ -161,6 +161,5 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
         live(conn, "/games/#{fake_game_id}/players/new")
       end
     end
-    end
   end
 end
