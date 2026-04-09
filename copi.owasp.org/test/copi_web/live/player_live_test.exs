@@ -66,12 +66,8 @@ defmodule CopiWeb.PlayerLiveTest do
       assert index_live |> element(~s{[href="/games/#{player.game_id}/players/new"]}) |> render_click()
 
       assert_patch(index_live, "/games/#{player.game_id}/players/new")
-      
-      # Start game in the background before submitting the form to test handle_params
-      # This mimics the handle_params redirect path for an already-connected LiveView navigating to the route.
-      # Wait, handle_params is invoked on `live()` or `assert_patch`, so:
-      
-      {:ok, _, _html} = live(conn, "/games/#{player.game_id}/players/new")
+
+      {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
       assert index_live
              |> form("#player-form", player: @invalid_attrs)
              |> render_change() =~ "can&#39;t be blank"

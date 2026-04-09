@@ -88,8 +88,11 @@ defmodule Copi.CornucopiaTest do
     test "Game.majority_continue_votes_reached?/1 returns true when votes exceed half" do
       alias Copi.Cornucopia.Game
       alias Copi.Repo
-      game = game_fixture()
+      # Create game WITHOUT started_at so we can add players
+      {:ok, game} = Cornucopia.create_game(%{name: "majority vote test", edition: "webapp"})
       {:ok, created_player} = Cornucopia.create_player(%{name: "p1", game_id: game.id})
+      # Now start the game after player is created
+      {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
       {:ok, reloaded} = Game.find(game.id)
       # 0 votes, 1 player → 0 > div(1,2)=0 → false
       refute Game.majority_continue_votes_reached?(reloaded)
@@ -108,7 +111,7 @@ defmodule Copi.CornucopiaTest do
     @valid_attrs %{name: "some name"}
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
-    @game_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
+    @game_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name"}
 
     def player_fixture(attrs \\ %{}) do
       {:ok, player} =
