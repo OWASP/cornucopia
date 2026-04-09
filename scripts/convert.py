@@ -952,7 +952,9 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
     return suit_tags, suit_key
 
 
-def get_template_for_edition(layout: str = "guide", template: str = "bridge", edition: str = "webapp", language: str = "en") -> str:
+def get_template_for_edition(
+    layout: str = "guide", template: str = "bridge", edition: str = "webapp", language: str = "en"
+) -> str:
     """Get template document for the specified edition."""
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
@@ -990,9 +992,7 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
             .replace("document_template", template)
         )
         # Build language-specific path (e.g. ..._bridge_en.odt)
-        lang_template_doc = os.path.normpath(
-            base_template.replace("_lang", "_" + language) + "." + sfile_ext
-        )
+        lang_template_doc = os.path.normpath(base_template.replace("_lang", "_" + language) + "." + sfile_ext)
         # Build generic fallback path (e.g. ..._bridge_lang.odt)
         generic_template_doc = os.path.normpath(base_template + "." + sfile_ext)
 
