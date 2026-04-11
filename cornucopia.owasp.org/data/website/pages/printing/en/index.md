@@ -44,9 +44,9 @@ In case the printing facility doesn't have the fonts at hand you'll find the ins
 
 #### Card decks:
 
-The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
+The "bridge" files are  (2.25 x 3.5" or 56mm x 87mm) standard playing cards.
 
-The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
+The "tarot" files are (2.75 x 4.75" or 70mm x 121 mm) standard playing cards.
 
 #### Cases:
 
