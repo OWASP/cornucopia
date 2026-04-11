@@ -114,7 +114,7 @@ the "bridge" box may need some refitting if used.
 
 #### Leaflets:
 
-The "bridge" files are  55mm x 87mm
+The "bridge" files are  56mm x 87mm
 The "tarot" files are (2.75 x 4.75")
 
 The "bridge" and "tarot" version is 16-20 page spread depending on in which language you print.
