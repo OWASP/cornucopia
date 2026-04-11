@@ -356,11 +356,6 @@ $wildcard-mobile-color: rgb(251, 182, 124);
   color:$cornucopia-color;
 }
 
-.wild-card .left-bar {
-  background-color:$wildcard-color;
-}
-
-
 .wild-card .value {
   color:$wildcard-color;
 }
@@ -1957,4 +1952,37 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 &.joker {
  .left-value { background-color: #FEB048; } // Pastel Orange
 }
+}
+
+
+/* DBD Card Styles (MENTOR FIX) */
+.card.dbd {
+
+  &.scope {
+    .left-value { background-color: #3E4736; }
+  }
+
+  &.architecture {
+    .left-value { background-color: #677740; }
+  }
+
+  &.agency {
+    .left-value { background-color: #DBBC58; }
+  }
+
+  &.trust {
+    .left-value { background-color: #A8854C; }
+  }
+
+  &.porosity {
+    .left-value { background-color: #944C36; }
+  }
+
+  &.cornucopia {
+    .left-value { background-color: #613030; }
+  }
+
+  &.joker {
+    .left-value { background-color: #FEB048; }
+  }
 }
