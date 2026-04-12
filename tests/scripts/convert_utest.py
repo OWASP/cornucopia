@@ -2219,5 +2219,28 @@ class TestSafeExtractAll(unittest.TestCase):
             self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
 
 
+class TestGetLibreOfficeBin(unittest.TestCase):
+    """Tests for _get_libreoffice_bin() Windows path resolution."""
+
+    @mock.patch("scripts.convert.platform.system", return_value="Windows")
+    @mock.patch("scripts.convert.Path.exists", return_value=True)
+    def test_windows_uses_soffice_exe_when_exists(self, mock_exists, mock_platform):
+        result = c._get_libreoffice_bin()
+        self.assertIn("soffice.exe", result)
+
+    @mock.patch("scripts.convert.platform.system", return_value="Windows")
+    @mock.patch("scripts.convert.Path.exists", return_value=False)
+    @mock.patch("scripts.convert.shutil.which", side_effect=lambda x: "soffice.exe" if x == "soffice.exe" else None)
+    def test_windows_fallback_uses_soffice_exe_not_com(self, mock_which, mock_exists, mock_platform):
+        result = c._get_libreoffice_bin()
+        self.assertEqual(result, "soffice.exe")
+
+    @mock.patch("scripts.convert.platform.system", return_value="Linux")
+    @mock.patch("scripts.convert.shutil.which", return_value="/usr/bin/libreoffice")
+    def test_linux_uses_shutil_which(self, mock_which, mock_platform):
+        result = c._get_libreoffice_bin()
+        self.assertEqual(result, "/usr/bin/libreoffice")
+
+
 if __name__ == "__main__":
     unittest.main()

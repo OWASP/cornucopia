@@ -6,7 +6,7 @@ defmodule Copi.Repo.Migrations.CreateDealtCards do
       add :card_id, references(:cards, on_delete: :nothing)
       add :player_id, references(:players, type: :uuid, on_delete: :nothing)
       add :played_in_round, :integer
-      add :scores, :boolean
+      
 
       timestamps()
     end

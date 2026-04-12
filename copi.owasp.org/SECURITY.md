@@ -116,6 +116,29 @@ This implementation addresses:
 - **Resource exhaustion**: Prevents overwhelming the system
 - **Service availability**: Ensures legitimate users can access the service
 
+## Encryption Key Setup
+
+Game and player names are encrypted at the application level using AES-256-GCM.
+You must set the `COPI_ENCRYPTION_KEY` environment variable before deploying.
+
+### Generate a secure encryption key
+
+    openssl rand -base64 32
+
+### Set the key in your environment
+
+**Fly.io:**
+
+    fly secrets set COPI_ENCRYPTION_KEY=<your-generated-key> --app <app name>
+
+**Heroku:**
+
+    heroku config:set COPI_ENCRYPTION_KEY=<your-generated-key>
+
+**Local development:**
+
+   export COPI_ENCRYPTION_KEY=<your-generated-key>
+
 ## Contact
 
 For security issues or questions, please refer to the main repository [SECURITY.md](../../SECURITY.md).
