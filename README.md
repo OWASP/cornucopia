@@ -101,7 +101,7 @@ The following fonts are used:
 
 #### Card decks:
 
-The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
+The "bridge" files are  (2.25 x 3.5" or 56mm x 87mm) standard playing cards.
 The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 
 #### Cases:
@@ -114,7 +114,7 @@ the "bridge" box may need some refitting if used.
 
 #### Leaflets:
 
-The "bridge" files are  55mm x 87mm
+The "bridge" files are  56mm x 87mm
 The "tarot" files are (2.75 x 4.75")
 
 The "bridge" and "tarot" version is 16-20 page spread depending on in which language you print.
