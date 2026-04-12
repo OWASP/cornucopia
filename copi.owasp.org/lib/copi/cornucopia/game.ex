@@ -7,7 +7,7 @@ defmodule Copi.Cornucopia.Game do
   schema "games" do
     field :created_at, :utc_datetime, default: DateTime.truncate(DateTime.utc_now(), :second)
     field :finished_at, :utc_datetime
-    field :name, :string
+    field :name, Copi.Encrypted.Binary
     field :edition, :string
     field :started_at, :utc_datetime
     field :rounds_played, :integer, default: 0
