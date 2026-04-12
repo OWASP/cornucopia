@@ -1,0 +1,1 @@
+This card is about exfiltration of system-level configuration through model output, not about data stored in backend systems. See AAI6 for unauthorized access to sensitive data sources beyond the agent's configuration.
