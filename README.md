@@ -110,7 +110,6 @@ The "bridge" is 60 x 89.25 mm x 27.15 mm
 The "tarot" is 122.2 x 73.1 x 29.1 mm
 
 the "tarot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
-the "bridge" box may need some refitting if used.
 
 #### Leaflets:
 
