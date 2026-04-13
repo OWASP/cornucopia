@@ -1,4 +1,4 @@
-## Scenario: Carlos's Cross-Origin Data Theft via Misconfigured CORS and postMessage
+### Scenario: Carlos Reads and Manipulates Sensitive Data via Misconfigured CORS and Unsafe postMessage
 
 Carlos reads or manipulates sensitive data from an application's frontend by exploiting a misconfigured CORS policy or unsafe `postMessage` handling, allowing his malicious origin to access data it should never be able to reach. This occurs because:
 
@@ -16,9 +16,9 @@ A financial dashboard allows partner sites to embed it in an iframe and communic
 
 ### STRIDE
 
-The scenario maps directly to STRIDE: **Information Disclosure**.
+The scenario maps directly to STRIDE: **Tampering**.
 
-Carlos accesses data from a different origin that the same-origin policy was designed to protect. The misconfiguration removes the boundary between trusted and untrusted origins, allowing a malicious site to read authenticated responses or receive sensitive messages.
+Carlos exploits misconfigured CORS and unsafe `postMessage` handling to manipulate sensitive data and trigger unauthorized state changes. By bypassing origin restrictions, he can not only read authenticated responses but also send crafted messages that cause the application to perform unintended actions—such as modifying account settings, transferring funds, or executing transactions—on behalf of the victim. The lack of origin validation transfers trust to any attacker-controlled origin, enabling him to tamper with both data integrity and application behavior.
 
 ### What can go wrong?
 

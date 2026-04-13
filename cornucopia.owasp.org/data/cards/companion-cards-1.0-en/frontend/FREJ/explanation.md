@@ -7,6 +7,7 @@ Elena uses a malicious or over-privileged browser extension installed on the vic
 2. **Sensitive data in the DOM and storage:** Authentication tokens, session cookies (where readable by JavaScript), user data, and internal API endpoints are accessible in the page's JavaScript context, which extensions can inspect and modify.
 
 3. **No isolation between extension and page context:** Content scripts injected by extensions share access to the DOM and can observe network requests, keyboard events, and page state, providing a complete view of the user's interaction with the application.
+4. **Permissive CSP or Permission Policy:** When an application doesn't strictly define which origins can use browser APIs, it creates an opening for malicious extensions and cross-site scripting (XSS) attacks to hijack the user's hardware and data
 
 ### Example
 
@@ -30,4 +31,5 @@ Reduce the application's exposure to extension-level access and educate users ab
 
 1. Store authentication tokens in `HttpOnly` cookies so they are inaccessible to JavaScript — and therefore inaccessible to extension content scripts — rather than in `localStorage` or `sessionStorage`.
 2. Apply a strict Content Security Policy to limit what scripts can execute on the page, reducing extension injection vectors even if a script is injected.
-3. Where the organization controls the browser environment (e.g., enterprise deployments), enforce an allowlist of approved extensions through device management policy.
+3. Use the Permissions-Policy header to restrict access to sensitive browser APIs (camera, microphone, geolocation) that extensions could abuse, even if they inject malicious scripts.
+4. Where the organization controls the browser environment (e.g., enterprise deployments), enforce an allowlist of approved extensions through device management policy.

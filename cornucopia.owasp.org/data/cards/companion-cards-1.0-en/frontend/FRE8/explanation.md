@@ -3,8 +3,8 @@
 Nathan modifies frontend JavaScript to remove or disable authorization checks enforced only in the browser, gaining access to restricted features and data without the server ever rejecting his requests. This occurs because:
 
 1. **Authorization enforced in the browser:** Visibility of UI elements, route guards, or feature flags are controlled purely by client-side logic — JavaScript conditions that determine what the user is allowed to see and do.
-
 2. **Backend routes not independently protected:** API endpoints that back restricted features are accessible without a valid session role or permission check on the server, trusting the frontend to have already enforced access control.
+3. **Deprecated functionality:** Old functionality, removed from the UI, is still available through the backend, and simple manipulation of the frontend allows the functionality to be used or abused.
 
 ### Example
 
@@ -29,3 +29,4 @@ Move all authorization decisions to the server and treat client-side controls as
 1. Enforce every permission check on the server side for every API call — the backend must independently verify that the authenticated user has the right role or permission for the requested operation.
 2. Do not rely on hidden routes, hidden UI elements, or client-side role checks as access control mechanisms; a user who knows an endpoint URL can reach it regardless of what the frontend renders.
 3. Apply the principle of least privilege to API design: return only data the caller is entitled to see, rather than filtering a full response in the frontend.
+4. Remove deprecated functionality from both the UI and the backend to avoid having it be abused or misused.

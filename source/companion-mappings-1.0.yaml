@@ -263,8 +263,8 @@ suits:
     id: FRE7
     value: 7
     url: https://cornucopia.owasp.org/cards/FRE7
-    stride: [ "Information Disclosure" ]
-    stride_print: [ "Information Disclosure" ]
+    stride: [ "Tampering" ]
+    stride_print: [ "Tampering" ]
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A08:2025 ]
     asvs: [ 14.5 ]
