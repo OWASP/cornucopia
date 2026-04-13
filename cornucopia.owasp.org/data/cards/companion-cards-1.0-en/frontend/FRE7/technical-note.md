@@ -1,0 +1,1 @@
+This card covers cross-origin data access through misconfigured CORS policies and unsafe postMessage handling. See FREX for the related clickjacking threat where a malicious origin tricks users into interacting with the embedded application's UI.

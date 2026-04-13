@@ -16,8 +16,8 @@ It is language, platform and technology agnostic. Visit: https://cornucopia.owas
 * OWASP AppSensor AppSensor_DetectionPoints
 * CAPEC™ Mitre Common Attack Pattern Enumeration and Classification v3.9
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
-* MASTG OWASP Mobile Application Security Testing Guide 1.7
-* MASVS OWASP Mobile Application Security Verification Standard 2.1
+* OWASP MASTG - OWASP Mobile Application Security Testing Guide 1.7
+* OWASP MASVS - OWASP Mobile Application Security Verification Standard 2.1
 
 ## Contributing to Development
 

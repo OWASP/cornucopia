@@ -1,0 +1,1 @@
+This card focuses on attacks carried out through a malicious or over-privileged browser extension installed on the user's own machine, rather than through a vulnerability in the application. See FRE6 for token theft via XSS, and FRE5 for supply chain compromise of third-party scripts loaded by the application.
