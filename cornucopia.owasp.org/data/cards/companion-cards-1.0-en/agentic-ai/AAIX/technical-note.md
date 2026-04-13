@@ -1,0 +1,1 @@
+This card focuses on the absence of plan-level objective validation in multi-step agentic operations, enabling goal hijacking across systems. See AAIJ for the related risk of trusting instructions from peer agents without verification, and AAIK for high-impact operations caused by excessive agency.

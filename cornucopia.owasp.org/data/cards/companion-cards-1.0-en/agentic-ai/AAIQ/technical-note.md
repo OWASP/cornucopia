@@ -1,0 +1,1 @@
+This card focuses on compromise of the centralized orchestration or control plane enabling attacker-defined workflows at scale, distinct from individual agent spoofing. See AAIJ for peer-agent identity spoofing and AAIK for high-impact operations due to excessive agency in a single agent with wide system integration.
