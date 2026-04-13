@@ -88,7 +88,7 @@ suits:
     id: CLD3
     value: 3
     url: https://cornucopia.owasp.org/cards/CLD3
-    desc: "Roupe can discover a publicly accessible cloud storage bucket and downloaded sensitive customer data directly from the internet"
+    desc: "Roupe can discover a publicly accessible cloud storage and download sensitive customer data directly from the internet"
   -
     id: CLD4
     value: 4
