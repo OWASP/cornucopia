@@ -1,0 +1,1 @@
+This card covers privileged JavaScript applications — including Electron apps, administrative SPAs, and feature-rich client tools — being used to access or manipulate resources beyond the user's authorised scope, including other users' tenants and system-level functions. See FRE8 for the simpler case of bypassing client-side authorization checks to unlock restricted UI features.
