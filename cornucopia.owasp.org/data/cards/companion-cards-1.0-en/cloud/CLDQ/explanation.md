@@ -8,7 +8,7 @@ Eleftherios breaches one cloud service and uses shared identities, deployment pi
 
 ### Example
 
-Eleftherios exploits a server-side request forgery (SSRF) vulnerability in a public-facing API service to reach the cloud instance metadata endpoint and retrieve the attached managed identity's access token. He discovers that the same managed identity is used by the internal data processing service — it was reused to simplify credential management. Using the token, Eleftherios queries the shared secrets path and retrieves database credentials, a payment provider API key, and the signing key for user session tokens. With these secrets, he accesses the payment service's database, forges user sessions, and reads records from the data processing service — all from the initial foothold in the API service.
+Eleftherios exploits a server-side request forgery (SSRF) vulnerability in a public-facing API service to reach the cloud instance metadata endpoint and retrieve the attached managed identity's access token. He discovers that the same managed identity is used by the internal data processing service — it was reused to simplify credential management. Using the token, Eleftherios queries the shared secrets path and retrieves database credentials, a payment provider API key, and the signing key for user session tokens. With these secrets, he accesses the payment service's database, forges user sessions, and reads records from the data processing service.
 
 ## Threat Modeling
 
@@ -20,7 +20,7 @@ Eleftherios starts with access limited to one service and escalates to multiple 
 
 ### What can go wrong?
 
-When cloud services share identities and secrets, a breach of any one of them creates a single point of failure for all of them. An attacker who compromises a low-value service can gain access to high-value ones simply by following the credential sharing paths. This undermines the security value of service isolation and can turn a limited, contained incident into a widespread breach across the entire cloud estate.
+When cloud services share identities and secrets, a breach of any one of them creates a single point of failure for all of them. An attacker who compromises a low-value service can gain access to high-value ones simply by following the credential sharing paths. This undermines the security value of service isolation.
 
 ### What are we going to do about it?
 

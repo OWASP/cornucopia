@@ -1,1 +1,1 @@
-This card is about lateral movement between cloud services using shared identities, deployment pipelines, and secrets — a form of cross-service privilege escalation. See CLD9 for the related threat of pivoting between separate cloud accounts using IAM trust relationships.
+This card is about lateral movement between cloud services using shared identities, deployment pipelines, and secrets. See CLD9 for the related threat of pivoting between separate cloud accounts using IAM trust relationships.

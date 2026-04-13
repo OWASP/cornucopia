@@ -16,7 +16,7 @@ Akash gains a foothold in a development cloud account through a compromised CI/C
 
 The scenario maps directly to STRIDE: **Elevation of Privilege**.
 
-Akash begins with limited access in a development account and escalates to production and security environments by exploiting trust relationships that were never intended to be used this way. The pivot uses the legitimate role assumption mechanism built into the cloud provider's identity system — no cryptographic control is broken, only the access policy is abused.
+Akash begins with limited access in a development account and escalates to privileged environments by exploiting trust relationships that were never intended to be used this way. The pivot uses the legitimate role assumption mechanism built into the cloud provider's identity system.
 
 ### What can go wrong?
 

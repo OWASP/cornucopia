@@ -16,7 +16,7 @@ Michael exploits an unpatched vulnerability in the CI platform's web interface t
 
 The scenario maps directly to STRIDE: **Tampering**.
 
-Michael modifies the container images deployed to production, embedding malicious code in what appears to be a legitimately built artefact. The attack targets the integrity of the build output — not the source code directly — exploiting trust placed in the build infrastructure.
+Michael modifies the container images deployed to production, embedding malicious code in what appears to be a legitimately built artifact. The attack targets the integrity of the build output.
 
 ### What can go wrong?
 

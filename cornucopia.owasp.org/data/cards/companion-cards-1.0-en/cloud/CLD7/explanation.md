@@ -29,5 +29,5 @@ Container escape attacks break the fundamental security boundary that containeri
 Harden container configurations to enforce isolation and prevent privilege escalation.
 
 1. Run containers as non-root users and drop all Linux capabilities that are not explicitly required; never use privileged mode in production.
-2. Keep container runtimes, base images, and host kernels patched and up to date, and use image scanning to detect vulnerable dependencies before deployment.
+2. Keep container runtimes, base images, and host kernels patched and up to date, and use image scanning to detect vulnerable dependencies before and after deployment.
 3. Deploy workloads on hardened nodes where possible and use a container security platform to detect anomalous behavior such as unexpected privilege escalation or filesystem modifications at runtime.
