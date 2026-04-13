@@ -4,8 +4,9 @@ import { CreController } from '$domain/cre/creController';
 
 export const prerender = false;
 
-export const GET: RequestHandler = ({ params }) => {
-  const edition = params.edition;
+export const GET: RequestHandler = ({ url }) => {
+  const params = url.pathname.split('/');
+  const edition =  params[params.length - 1];
   
   // V16.5: Fail securely by terminating handler on invalid edition
   if (!edition || !DeckService.hasEdition(edition)) {
