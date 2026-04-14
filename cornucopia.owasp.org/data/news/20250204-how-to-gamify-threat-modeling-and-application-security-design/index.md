@@ -79,7 +79,7 @@ You don’t need to be a specialist on mobile application security to lead a OWA
 
 ## The Role of the Application Security Engineer
 
-The application security engineer's role, during the game, is to support the team by recording the cards that score points on [a score sheet](https://owasp.org/www-project-cornucopia/assets/files/cornucopia-scoresheet-mobileapp.pdf) so that you can keep track of what cards are played, and what the team discuss during the game. Later, when the development team create security focused user stories, you can help them to remember what it was they were discussing during the game and which threats they identified as relevant and important for creating a secure design for their application.
+The application security engineer's role, during the game, is to support the team by recording the cards that score points on [a score sheet](https://github.com/OWASP/cornucopia/blob/master/resources/scoresheet/cornucopia-scoresheet-mobileapp.pdf) so that you can keep track of what cards are played, and what the team discuss during the game. Later, when the development team create security focused user stories, you can help them to remember what it was they were discussing during the game and which threats they identified as relevant and important for creating a secure design for their application.
 
 ![Take notes during the meeting using a score sheet](notes.png)
 
