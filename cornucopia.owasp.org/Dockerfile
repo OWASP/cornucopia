@@ -1,9 +1,5 @@
 FROM node:iron-alpine3.21@sha256:957dbf2afb4f22d9e2b94b981e242cbb796965cd3d9cc02d436e2a05fa0ec300 AS builder
 
-# Context is now the repository root to allow copying the source folder.
-WORKDIR /source
-COPY source .
-
 WORKDIR /app
 
 # Install dependencies
@@ -14,7 +10,12 @@ COPY cornucopia.owasp.org/pnpm-lock.yaml ./
 RUN npm install -g pnpm@v10.3.0 --save-exact
 RUN pnpm install --frozen-lockfile
 
-# Copy source code
+# Followed copilot suggestion 2: Copy source data AFTER dependency install
+WORKDIR /source
+COPY source .
+
+WORKDIR /app
+# Copy the frontend application code
 COPY cornucopia.owasp.org .
 
 # Build the application
