@@ -70,7 +70,7 @@ defmodule Copi.Encrypted.Binary do
     raw =
       System.get_env("COPI_ENCRYPTION_KEY") ||
         Application.get_env(:copi, :encryption_key) ||
-        raise "COPI_ENCRYPTION_KEY is not set"
+        raise "COPI_ENCRYPTION_KEY is not set. Please see: https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#encryption-key-setup"
 
     key = Base.decode64!(String.trim(raw))
 
