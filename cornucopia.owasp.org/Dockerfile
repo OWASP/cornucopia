@@ -7,9 +7,12 @@ COPY source .
 WORKDIR /app
 
 # Install dependencies
+# V15.2: Copy the lockfile before install so dependency resolution is deterministic
+# and Docker can safely cache the dependency layer.
 COPY cornucopia.owasp.org/package.json ./
+COPY cornucopia.owasp.org/pnpm-lock.yaml ./
 RUN npm install -g pnpm@v10.3.0 --save-exact
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Copy source code
 COPY cornucopia.owasp.org .
