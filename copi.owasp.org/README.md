@@ -206,6 +206,8 @@ SELECT EXTRACT(YEAR FROM inserted_at) AS year, EXTRACT(MONTH FROM inserted_at) A
 
 The Copi threat model can be found at [ThreatDragonModels/copi.json](https://github.com/OWASP/cornucopia/blob/master/ThreatDragonModels/copi.json). You may review it by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard).
 
+Please also read [SECURITY.md](SECURITY.md) to ensure you have taken the appropriate measures to secure Copi if you are running the service yourself.
+
 Here is a short summary of what you need to be aware of:
 
 ### ATJ: Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action.
