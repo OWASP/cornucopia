@@ -131,8 +131,31 @@ defmodule CopiWeb.GameLive.ShowTest do
 
     test "card_played_in_round/2 returns the matching card", %{conn: _conn, game: _game} do
       alias CopiWeb.GameLive.Show
-      card = %{played_in_round: 3}
-      assert Show.card_played_in_round([%{played_in_round: 1}, %{played_in_round: 2}, card], 3) == card
+
+      cards = [%{played_in_round: 1, id: "a"}, %{played_in_round: 2, id: "b"}]
+      assert Show.card_played_in_round(cards, 2) == %{played_in_round: 2, id: "b"}
+    end
+
+    test "topic/1 builds topic strings", %{conn: _conn, game: _game} do
+      alias CopiWeb.GameLive.Show
+      assert Show.topic(1) == "game:1"
+      assert Show.topic("xyz") == "game:xyz"
+    end
+
+    test "handle_info ignores update for a different game id", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      {:ok, other_game} = Copi.Cornucopia.create_game(%{name: "other"})
+      {:ok, other_game_loaded} = Copi.Cornucopia.Game.find(other_game.id)
+
+      send(show_live.pid, %{
+        topic: "game:#{game.id}",
+        event: "game:updated",
+        payload: other_game_loaded
+      })
+
+      :timer.sleep(50)
+      assert render(show_live) =~ game.name
     end
 
     test "redirects to /error when game_id is not found", %{conn: conn} do

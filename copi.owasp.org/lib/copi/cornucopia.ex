@@ -158,9 +158,35 @@ defmodule Copi.Cornucopia do
 
   """
   def create_player(attrs \\ %{}) do
-    %Player{}
-    |> Player.changeset(attrs)
-    |> Repo.insert()
+    # V15.4: Use transaction with row locking to prevent TOCTOU race condition
+    # when checking if game has started before creating player
+    game_id = attrs["game_id"] || attrs[:game_id]
+
+    Repo.transaction(fn ->
+      # Lock the game row for update to prevent race conditions
+      case game_id && Repo.get(Game, game_id, lock: "FOR UPDATE") do
+        nil ->
+          # No game_id provided or game not found - let changeset validation handle it
+          case %Player{} |> Player.changeset(attrs) |> Repo.insert() do
+            {:ok, player} -> player
+            {:error, changeset} -> Repo.rollback(changeset)
+          end
+
+        %Game{started_at: started_at} when started_at != nil ->
+          Repo.rollback(:game_already_started)
+
+        %Game{} ->
+          case %Player{} |> Player.changeset(attrs) |> Repo.insert() do
+            {:ok, player} -> player
+            {:error, changeset} -> Repo.rollback(changeset)
+          end
+      end
+    end)
+    |> case do
+      {:ok, player} -> {:ok, player}
+      {:error, :game_already_started} -> {:error, :game_already_started}
+      {:error, %Ecto.Changeset{} = changeset} -> {:error, changeset}
+    end
   end
 
   @doc """

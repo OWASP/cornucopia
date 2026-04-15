@@ -1,0 +1,1 @@
+This card focuses on excessive IAM permissions granted to cloud-hosted applications or service accounts, not on attacker-controlled identities. See CLD9 for the related threat of pivoting between cloud accounts.

@@ -31,19 +31,23 @@ def create_level_summary(level: int, arr: List[dict[str, Any]]) -> None:
     topic = ""
     category = ""
     os.mkdir(Path(convert_vars.args.output_path, f"level-{level}-controls"))
-    f = open(Path(convert_vars.args.output_path, f"level-{level}-controls/index.md"), "w", encoding="utf-8")
-    f.write(f"# Level {level} controls\n\n")
-    f.write(f"Level {level} contains {len(arr)} controls listed below: \n\n")
-    for link in arr:
-        if link["topic"] != topic:
-            topic = link["topic"]
-            f.write(f"## {topic}\n\n")
-        if link["cat"] != category:
-            category = link["cat"]
-            f.write(f"### {category}\n\n")
-        shortdesc = link["description"].replace("Verify that", "").strip().capitalize()[0:50] + " ..."
-        f.write(f"- [{link['name']}]({link['link']}) *{shortdesc}* \n\n")
-    f.close()
+    filepath = Path(convert_vars.args.output_path, f"level-{level}-controls/index.md")
+    # open explicitly and close in finally so mocks see close() called
+    f = open(filepath, "w", encoding="utf-8")
+    try:
+        f.write(f"# Level {level} controls\n\n")
+        f.write(f"Level {level} contains {len(arr)} controls listed below: \n\n")
+        for link in arr:
+            if link["topic"] != topic:
+                topic = link["topic"]
+                f.write(f"## {topic}\n\n")
+            if link["cat"] != category:
+                category = link["cat"]
+                f.write(f"### {category}\n\n")
+            shortdesc = link["description"].replace("Verify that", "").strip().capitalize()[0:50] + " ..."
+            f.write(f"- [{link['name']}]({link['link']}) *{shortdesc}* \n\n")
+    finally:
+        f.close()
 
 
 def _format_directory_name(ordinal: int, name: str) -> str:

@@ -1,0 +1,1 @@
+This card covers active session hijacking through JavaScript-based token theft during a live session. See FRE3 for residual tokens left accessible after logout, and FRE9 for forging or predicting tokens without needing to steal them from a live session.
