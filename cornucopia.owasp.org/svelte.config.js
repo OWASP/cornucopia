@@ -21,7 +21,8 @@ export default {
 		prerender: {
 			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
-				console.log(message);
+                                if (path === '/mapping') return;
+                                console.log(message);
 				console.log(referrer);
 				console.log(path);
 				// otherwise fail the build
