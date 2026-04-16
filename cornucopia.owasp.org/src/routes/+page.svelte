@@ -32,7 +32,7 @@
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
-    <h1 id="top">{$t('home.h1.1')}</h1>
+    <h2 id="top">{$t('home.h1.1')}</h2>
     <p>
         {$t('home.p1')}
     </p>
