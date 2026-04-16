@@ -27,7 +27,7 @@ export default {
 				// otherwise fail the build
 				throw new Error(message);
 			},
-			handleMissingId: ({ path, id, referrers, message }) => {
+			handleMissingId: ({ _path, id, _referrers, message }) => {
 			 if (id == 'card') return;
 			 throw new Error(message);
 			},
@@ -299,4 +299,5 @@ export default {
 		}
 	}
 };
+
 
