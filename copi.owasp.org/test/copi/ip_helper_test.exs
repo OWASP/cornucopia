@@ -278,5 +278,34 @@ defmodule Copi.IPHelperTest do
 
       assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
     end
+
+    test "deep fallback tests for edge cases" do
+      # get_forwarded_from_req_headers fallback map
+      assert IPHelper.get_ip_from_connect_info(%{req_headers: %{}}) == nil
+      assert IPHelper.get_ip_from_connect_info(%{req_headers: [{:atom, "no"}]}) == nil
+      assert IPHelper.get_ip_from_connect_info(%{req_headers: [{"other", "no"}]}) == nil
+      
+      # get_forwarded_from_x_headers
+      assert IPHelper.get_ip_from_connect_info(%{x_headers: %{}}) == nil
+      assert IPHelper.get_ip_from_connect_info(%{x_headers: [{:other, "no"}]}) == nil
+      assert IPHelper.get_ip_from_connect_info(%{x_headers: [{"other", "no"}]}) == nil
+      
+      # get_connect_info_ip LiveView Socket empty struct 
+      socket1 = %Phoenix.LiveView.Socket{private: %{connect_info: %{req_headers: [{"other", "no"}]}}}
+      assert IPHelper.get_ip_from_socket(socket1) == {127,0,0,1}
+
+      # get_transport_ip failure
+      socket2 = %Phoenix.Socket{transport_pid: self()}
+      # send empty dictionary
+      Process.put(:peer, nil)
+      assert IPHelper.get_ip_from_socket(socket2) == {127,0,0,1}
+      
+      Process.put(:peer, {:wrong, :format})
+      assert IPHelper.get_ip_from_socket(socket2) == {127,0,0,1}
+
+      # test invalid IPs in string
+      assert IPHelper.get_ip_from_connect_info(%{x_headers: "invalid_string_ip"}) == nil
+      assert IPHelper.get_ip_from_connect_info(%{headers: [{"x-forwarded-for", "invalid_ip"}]}) == nil
+    end
   end
 end
