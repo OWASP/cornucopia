@@ -300,6 +300,9 @@ defmodule Copi.IPHelperTest do
       Process.put(:peer, nil)
       assert IPHelper.get_ip_from_socket(socket2) == {127,0,0,1}
 
+      Process.put(:peer, {:wrong, :format})
+      assert IPHelper.get_ip_from_socket(socket2) == :wrong
+
       # test invalid IPs in string
       assert IPHelper.get_ip_from_connect_info(%{x_headers: "invalid_string_ip"}) == nil
       assert IPHelper.get_ip_from_connect_info(%{headers: [{"x-forwarded-for", "invalid_ip"}]}) == nil
