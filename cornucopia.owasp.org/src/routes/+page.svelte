@@ -32,7 +32,7 @@
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
-    <span id="top">{$t('home.h1.1')}</span>
+    <h1 id="top">{$t('home.h1.1')}</h1>
     <p>
         {$t('home.p1')}
     </p>
@@ -42,7 +42,7 @@
     <a title="OWASP Cornucopia homepage" href="/about" class="internal-links">➔ {$t('home.a1')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia Mobile Edition - In devs we trust" src="/images/cornucopia_logo_mobile_edition.svg" align="left">
-    <span>{$t('home.h1.2')}</span>
+    <h2>{$t('home.h1.2')}</h2>
     <p>{$t('home.p3')}</p>
     <ol>
         <li>{@html $t('home.ol.li1')}</li>
@@ -58,7 +58,7 @@
     <a title="How to play OWASP Cornucopia" href="/how-to-play" class="internal-links">➔ {$t('home.a2')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia - Is open source under the Creative Commons Attribution-ShareAlike 3.0 license" src="/images/opensource.png" align="right">
-    <span>{$t('home.h1.3')}</span>
+    <h2>{$t('home.h1.3')}</h2>
     <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.
     </p>
     <p>{$t('home.p5')}</p>
@@ -66,7 +66,7 @@
 </TextImage>
 <Spacer></Spacer>
 <style>
-    span
+    h1, h2
     {
         display: block;
         color: var(--background);
