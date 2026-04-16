@@ -20,14 +20,14 @@ export default {
 		},
 		prerender: {
 			concurrency: 1,
-			handleHttpError: ({ _path, referrer, message }) => {
+			handleHttpError: ({ path, referrer, message }) => {
 				console.log(message);
 				console.log(referrer);
-				console.log(_path);
+				console.log(path);
 				// otherwise fail the build
 				throw new Error(message);
 			},
-			handleMissingId: ({ _path, id, _referrers, message }) => {
+			handleMissingId: ({ path, id, referrers, message }) => {
 			 if (id == 'card') return;
 			 throw new Error(message);
 			},
