@@ -4,7 +4,7 @@ import type { MappingController } from "../mapping/mappingController";
 export type Cre  = 
 {
     doctype: string; 
-    name: any; 
+    name: string; 
     section: string; 
     description: string; 
     sectionID: string; 
@@ -52,9 +52,9 @@ export class CreController {
         return CreController.editions.get(edition) || edition;
     }
 
-    public getCreMapping(edition: string, lang: string) : any {
+    public getCreMapping(edition: string, lang: string): Record<string, unknown> {
         if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
-        let standards: Cre[] = [];
+        const standards: Cre[] = [];
         (this.deck || []).forEach(
                 (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
             );
@@ -70,9 +70,9 @@ export class CreController {
     }
 
     public generateDoc(card: Card) {
-        let mapping = this.controller.getCardMappings(card.id);
-        let links: { document: { doctype: string; id: string }; ltype: string }[] = [];
-        let cre = mapping.owasp_cre?.owasp_asvs as [] || [];
+        const mapping = this.controller.getCardMappings(card.id);
+        const links: { document: { doctype: string; id: string }; ltype: string }[] = [];
+        const cre = mapping.owasp_cre?.owasp_asvs as [] || [];
         if (!cre) {
             throw Error("cre has not been defined.")
         }

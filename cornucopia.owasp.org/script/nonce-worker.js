@@ -1,3 +1,4 @@
+/* global request, __request */
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
@@ -17,7 +18,7 @@ function generateNonce() {
 }
 
 
-async function fetchAndStreamNotFoundPage(resp, request) {
+async function fetchAndStreamNotFoundPage(resp, _request) {
   const { status, statusText } = resp;
   const pathArray = resp.url.split( '/' );
   const protocol = pathArray[0];
@@ -53,7 +54,7 @@ async function fetchAndStreamNotFoundPage(resp, request) {
 
 
 
-function isHTMLContentTypeAccepted(request) {
+function isHTMLContentTypeAccepted(_request) {
   const acceptHeader = request.headers.get("Accept");
   return (
     typeof acceptHeader === "string" && acceptHeader.indexOf("text/html") >= 0
@@ -64,14 +65,14 @@ function isHTMLContentTypeAccepted(request) {
  * Respond to the request
  * @param {Request} request
  */
-async function handleRequest(request) {
-  const originresponse = await fetch(request, {
+async function handleRequest(_request) {
+  const originresponse = await fetch(__request, {
     redirect: "manual",
   });
 
   if (originresponse.url.match(/[^\\]*\.(\w+)$/i)) return originresponse;
 
-  if (originresponse.status === 404 && isHTMLContentTypeAccepted(request)) {
+  if (originresponse.status === 404 && isHTMLContentTypeAccepted(_request)) {
     return fetchAndStreamNotFoundPage(originresponse, request);
   }
 
@@ -122,3 +123,6 @@ async function generateNonceForResponse(originresponse) {
 
   return clientresponse;
 }
+
+
+

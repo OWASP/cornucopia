@@ -2,7 +2,7 @@ import { defaultLocale, locales, setLocale, locale, translations, loading } from
 /** @type {import('@sveltejs/kit').Handle} */
 
 export const handle = async ({ event, resolve }) => {
-  const { url, request } = event;
+  const { url: _url, request } = event;
 
   // Get defined locales
   const supportedLocales = locales.get().map((l) => l.toLowerCase());

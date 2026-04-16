@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import { resolve } from "$app/paths";
     import { Text } from "$lib/utils/text";
     import type { Author } from "../../domain/author/author";
     interface Props {
@@ -10,7 +11,7 @@
 </script>
 
 <button
-onclick={()=>goto("/author/" + author.name)}>
+onclick={()=>goto(resolve("/author/" + author.name))}>
     <img title="OWASP Cornucopia - {author.name}" alt="OWASP Cornucopia - {author.name}" src="./data/author/{author.name}/profile-picture.jpg"/>
     <p>{Text.Format(author.name)}</p>
 </button>

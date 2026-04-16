@@ -5,9 +5,10 @@
     import { readLang } from "$lib/stores/stores.js";
     import type { Suit } from "../domain/suit/suit.js";
     import {readTranslation} from "$lib/stores/stores";
+    import { resolve } from "$app/paths";
 
     interface Props {
-        data: any;
+        data: Record<string, unknown>;
     }
 
     let { data }: Props = $props();
@@ -39,23 +40,26 @@
     <p>
         {$t('home.p2')}
     </p>
-    <a title="OWASP Cornucopia homepage" href="/about" class="internal-links">➔ {$t('home.a1')}</a>
+    <a title="OWASP Cornucopia homepage" href={resolve('/about')} class="internal-links">➔ {$t('home.a1')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia Mobile Edition - In devs we trust" src="/images/cornucopia_logo_mobile_edition.svg" align="left">
     <span>{$t('home.h1.2')}</span>
     <p>{$t('home.p3')}</p>
     <ol>
-        <li>{@html $t('home.ol.li1')}</li>
-        <li>{@html $t('home.ol.li2')}<a title="Print your OWASP Cornucopia deck" href="/printing">{$t('home.ol.li2a')}</a>);</li>
-        <li>{@html $t('home.ol.li3')}<a title="Play OWASP Cornucopia online on Copi" rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('home.ol.li1')}</li>
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('home.ol.li2')}<a title="Print your OWASP Cornucopia deck" href={resolve('/printing')}>{$t('home.ol.li2a')}</a>);</li>
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('home.ol.li3')}<a title="Play OWASP Cornucopia online on Copi" rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
         <li>{$t('home.ol.li4')}</li>
         <li>{$t('home.ol.li5')}</li>
         <li>{$t('home.ol.li6')}</li>
         <li>{$t('home.ol.li7')}</li>
-        <li><a href="/how-to-play">{$t('home.ol.li8a')}</a>{$t('home.ol.li8')}</li>
+        <li><a href={resolve('/how-to-play')}>{$t('home.ol.li8a')}</a>{$t('home.ol.li8')}</li>
         <li>{$t('home.ol.li9')}</li>
     </ol>
-    <a title="How to play OWASP Cornucopia" href="/how-to-play" class="internal-links">➔ {$t('home.a2')}</a>
+    <a title="How to play OWASP Cornucopia" href={resolve('/how-to-play')} class="internal-links">➔ {$t('home.a2')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia - Is open source under the Creative Commons Attribution-ShareAlike 3.0 license" src="/images/opensource.png" align="right">
     <span>{$t('home.h1.3')}</span>
@@ -120,3 +124,10 @@
         
     }
 </style>
+
+
+
+
+
+
+

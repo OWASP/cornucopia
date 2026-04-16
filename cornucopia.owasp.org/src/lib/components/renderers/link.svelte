@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+
   interface Props {
     href?: string;
     title?: string;
@@ -16,16 +18,17 @@
     console.log('raw:', raw);
   });
   let target = $derived((href.startsWith('/') || href.startsWith('#') || raw.includes('[blank]')) ? '_self' : '_blank');
-  let rel = $derived.by(() => {
-    if (raw.includes('[internal]')) return 'noopener';
-    if (raw.includes('[external]')) return 'noopener nofollow';
-    return '';
-  });
   let clazz = $derived(raw.includes('[inline]') ? 'inline' : '');
   let style = $derived(raw.includes('[white]') ? ' white' : '');
 </script>
   
-  <a {rel} {target} {href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
+  {#if href.startsWith('/') || href.startsWith('#')}
+    <a target={target} rel="noopener" href={resolve(href)} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
+  {:else if raw.includes('[external]')}
+    <a target={target} rel="noopener nofollow external" href={href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
+  {:else}
+    <a target={target} rel="external" href={href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
+  {/if}
 
   <style>
     a

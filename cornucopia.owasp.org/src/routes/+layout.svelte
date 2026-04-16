@@ -8,7 +8,7 @@
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";    
     interface Props {
-        data: any;
+        data: Record<string, unknown>;
         children?: import('svelte').Snippet;
     }
 

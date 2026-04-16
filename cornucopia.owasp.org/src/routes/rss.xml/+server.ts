@@ -11,7 +11,7 @@ const responseInit: ResponseInit = {
   },
 };
 
-let bodyStart =
+const bodyStart =
   '<?xml version="1.0" encoding="UTF-8" ?>' +
   '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' +
   "<channel>" +
@@ -26,14 +26,14 @@ let bodyStart =
   "<link>https://cornucopia.owasp.org</link>" +
   "</image>";
 
-let bodyEnd = "</channel>" + "</rss>";
+const bodyEnd = "</channel>" + "</rss>";
 
 export async function GET() {
-  let json = await LocalCache(() => getBlogposts(), 20, "posts");
+  const json = await LocalCache(() => getBlogposts(), 20, "posts");
 
   let body: string = bodyStart;
   for (let i = 0; i < json.length; i++) {
-    let post: Blogpost = json[i];
+    const post: Blogpost = json[i];
     body += "<item>";
 
     // Title
@@ -80,17 +80,17 @@ export async function GET() {
 }
 
 function generateDescription(post: Blogpost) {
-  let desc: string = post.description?.slice(0, 200)+ "...";
+  const desc: string = post.description?.slice(0, 200)+ "...";
   return desc;
 }
 
 function generateDate(post: Blogpost): string {
-  let date: string = post.date.toString();
-  let year = date.slice(0, 4);
-  let month = date.slice(4, 2);
-  let day = date.slice(6, 2);
+  const date: string = post.date.toString();
+  const year = date.slice(0, 4);
+  const month = date.slice(4, 2);
+  const day = date.slice(6, 2);
 
-  let d: Date = new Date();
+  const d: Date = new Date();
   d.setDate(Number.parseInt(day));
   d.setMonth(Number.parseInt(month));
   d.setFullYear(Number.parseInt(year));

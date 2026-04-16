@@ -3,7 +3,6 @@ import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
-
 export default ts.config(
   js.configs.recommended,
   ...ts.configs.recommended,
@@ -22,6 +21,15 @@ export default ts.config(
       parserOptions: {
         parser: tsParser
       }
+    }
+  },
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', {
+        'varsIgnorePattern': '^_',
+        'argsIgnorePattern': '^_',
+        'caughtErrorsIgnorePattern': '^_'
+      }]
     }
   },
   {

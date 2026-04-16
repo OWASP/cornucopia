@@ -29,7 +29,7 @@ describe('GET /api/mapping/[edition]/[version]', () => {
 
         const response = await GET({
             params: { edition: 'webapp', version: '3.0' }
-        } as any);
+        } as unknown);
 
         expect(response.status).toBe(200);
         expect(response.headers.get('content-type')).toContain('application/json');
@@ -57,11 +57,11 @@ describe('GET /api/mapping/[edition]/[version]', () => {
                     ]
                 }
             ]
-        } as any);
+        } as unknown);
 
         const response = await GET({
             params: { edition: 'webapp', version: '3.0' }
-        } as any);
+        } as unknown);
 
         expect(response.status).toBe(200);
         const body = await response.json();
@@ -88,11 +88,11 @@ describe('GET /api/mapping/[edition]/[version]', () => {
                     ]
                 }
             ]
-        } as any);
+        } as unknown);
 
         const response = await GET({
             params: { edition: 'webapp', version: '3.0' }
-        } as any);
+        } as unknown);
 
         expect(response.status).toBe(200);
         const body = await response.json();
@@ -109,10 +109,10 @@ describe('GET /api/mapping/[edition]/[version]', () => {
         try {
             GET({
                 params: { edition: 'unknown', version: '3.0' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 404 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(404);
             expect(err.body.message).toBe('Edition not found. Only: webapp, mobileapp are supported.');
         }
@@ -126,10 +126,10 @@ describe('GET /api/mapping/[edition]/[version]', () => {
         try {
             GET({
                 params: { edition: 'webapp', version: '1.0' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 404 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(404);
             expect(err.body.message).toBe('Version not found for edition webapp. Only: 2.2, 3.0 are supported.');
         }
@@ -138,15 +138,15 @@ describe('GET /api/mapping/[edition]/[version]', () => {
     it('throws 500 when mapping data is not found', () => {
         vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
         vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
-        vi.spyOn(MappingService.prototype, 'getCardMapping').mockReturnValue(undefined as any);
+        vi.spyOn(MappingService.prototype, 'getCardMapping').mockReturnValue(undefined as unknown);
 
         try {
             GET({
                 params: { edition: 'webapp', version: '3.0' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 500 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(500);
             expect(err.body.message).toBe('No mapping data found.');
         }

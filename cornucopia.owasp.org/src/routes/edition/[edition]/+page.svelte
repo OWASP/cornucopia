@@ -4,6 +4,7 @@
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
+    import { resolve } from "$app/paths";
     import type { Card } from "$domain/card/card.js";
     import { MappingController } from "$domain/mapping/mappingController.js";
     import { readLang, readTranslation } from '$lib/stores/stores';
@@ -43,14 +44,14 @@
         return cards.get('VE2') as Card;
     });
 
-    let suit : string;
+    let _suit : string;
     let selectedCard = $state<Card | null>(null);
     
     // Use selectedCard if hovering, otherwise use default card
     let displayCard = $derived(selectedCard || card);
     let displayMapping = $derived(displayCard ? (new MappingController(mappingData?.get(version))).getCardMappings(displayCard.id) : []);
 
-    let map : Map<string,boolean> = $state(new SvelteMap());
+    let map : Map<string,boolean> = new SvelteMap();
     setTree(false);
 
     function setTree(expand : boolean)
@@ -71,7 +72,7 @@
 
     function enter(suitParam : string, cardParam : string)
     {
-        suit = suitParam;
+        _suit = suitParam;
         selectedCard = cards?.get(cardParam) as Card;
     }
     
@@ -81,7 +82,7 @@
         selectedCard = null;
         // Collapse the entire tree down when switching between versions
         setTree(false);
-        goto(`/card/${versionParam}`);
+        goto(resolve(`/card/${versionParam}`));
     }
 </script>
 <svelte:head>
@@ -106,39 +107,42 @@
 </p>
 </section>
 <div class="script">
-    {#each cardSuits as suit}
-        {#each suit.cards as card}
-            <p><a title="OWASP Cornucopia suit {suit.name}, card {card}" class="card hide" href="{cards?.get(card)?.url}">{suit.name} {card}</a></p>
+    {#each cardSuits as suit (suit.name)}
+        {#each suit.cards as card (card)}
+                <p><a title="OWASP Cornucopia suit {suit.name}, card {card}" class="card hide" href={resolve(cards?.get(card)?.url ?? '')}>{suit.name} {card}</a></p>
         {/each}
     {/each}
 
     {#if version == VERSION_WEBAPP}
     <h2 title="OWASP Cornucopia {$t('cards.h2.1')}">{$t('cards.h2.1')}</h2>
     <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('cards.p2')}
     </p>
     {/if}
     {#if version == VERSION_MOBILEAPP}
     <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
     <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('cards.p3')}
     </p>
     {/if}
     {#if version == VERSION_COMPANION}
     <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
     <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('cards.p4')}
     </p>
     {/if}
     <div class="container">
         <div class="tree">
-            {#each cardSuits as suit}
+            {#each cardSuits as suit (suit.name)}
                 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                 <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
                 {#if map?.get(suit.name)}
-                    {#each suit.cards as card}
+                    {#each suit.cards as card (card)}
                         <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
-                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={resolve(cards?.get(card)?.url ?? '')}>├── {cards?.get(card)?.id}</a>
                         </p>
                     {/each}
                 {/if}
@@ -155,24 +159,25 @@
             {#if version == VERSION_MOBILEAPP}
                 <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
                 <p class="text">
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                     {@html $t('cards.p3')}
                 </p>
             {/if}
             {#if version == VERSION_WEBAPP}
                 <h2 title="OWASP Cornucopia {$t('cards.h2.1')}">{$t('cards.h2.1')}</h2>
                 <p class="text">
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                     {@html $t('cards.p2')}
                 </p>
             {/if}
             {#if version == VERSION_COMPANION}
                 <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
                 <p class="text">
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                     {@html $t('cards.p4')}
                 </p>
             {/if}
-            {#each cardSuits as suit}
-                <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-                <!-- svelte-ignore a11y_label_has_associated_control -->
+            {#each cardSuits as suit (suit.name)}
                  {#if version == VERSION_WEBAPP}
                     <label for="{suit.name + '-web'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
@@ -186,9 +191,9 @@
                     <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
                 {/if}
                 <div class="card-buttons">
-                {#each suit.cards as card}
+                {#each suit.cards as card (card)}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={resolve(cards?.get(card)?.url ?? '')}>├── {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
@@ -352,3 +357,8 @@
         }
     }
 </style>
+
+
+
+
+

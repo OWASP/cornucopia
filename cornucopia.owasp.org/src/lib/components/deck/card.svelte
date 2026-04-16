@@ -2,23 +2,13 @@
     import { fly } from "svelte/transition";
     interface Props {
         index: number;
-        reset: any;
+        reset: () => void;
         image: string;
     }
 
-    let { index, reset, image }: Props = $props();
+    let { index, reset, image: _image }: Props = $props();
 
-    let hover : boolean = $state(false);
 
-    function mouseenter()
-    {
-        hover = true;
-    }
-
-    function mouseleave()
-    {
-        hover = false;
-    }
 </script>
 
 <div 
@@ -26,8 +16,6 @@ role='button'
 tabindex="-1"
 onkeydown={reset} 
 onclick={reset}
-onmouseenter={mouseenter}
-onmouseleave={mouseleave}
 in:fly="{{ y: 100, duration: 1000 , delay: index * 100}}" 
 class="card card-{index}"></div>
 
@@ -101,3 +89,7 @@ class="card card-{index}"></div>
         }
     }
 </style>
+
+
+
+

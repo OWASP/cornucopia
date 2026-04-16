@@ -297,7 +297,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCards('en');
             expect(result).toBeInstanceOf(Map);
@@ -369,7 +369,7 @@ suits:
                     '0': { name: 'Data Validation' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -412,7 +412,7 @@ suits:
                     '0': { name: 'Authentication' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'es');
             expect(result.size).toBe(1);
@@ -455,7 +455,7 @@ suits:
                     '1': { name: 'Last Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -500,7 +500,7 @@ suits:
                     '1': { name: 'Last Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -533,7 +533,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -573,7 +573,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -612,7 +612,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
@@ -666,7 +666,7 @@ suits:
             '0': { name: 'Test Suit' }
         }
     };
-    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 

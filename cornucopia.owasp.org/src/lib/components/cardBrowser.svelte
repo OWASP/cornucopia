@@ -4,35 +4,36 @@
     import { browser } from "$app/environment";
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
+    import { resolve } from "$app/paths";
     import { readTranslation } from "$lib/stores/stores";
     interface Props {
         card: Card;
         cards: Map<string, Card>;
-        mappingData: any;
+        mappingData: Record<string, unknown>;
     }
 
     let { card = $bindable(), cards, mappingData }: Props = $props();
     let t = readTranslation();
-    let nextCard = $derived(cards.get(card.next));
-    let previousCard = $derived(cards.get(card.prevous));
-    function checkKey(event : any) 
+    let _nextCard = $derived(cards.get(card.next));
+    let _previousCard = $derived(cards.get(card.prevous));
+    function checkKey(event: KeyboardEvent) 
     {
         const KEYCODE_RIGHT = 39;
         const KEYCODE_LEFT = 37;
         if(event.keyCode == KEYCODE_RIGHT)
         {
-            goto(getUrl(cards.get(card.next)));
+            goto(resolve(getUrl(cards.get(card.next))));
             card = cards.get(card.next);
-            nextCard = cards.get(card.next);
-            previousCard = cards.get(card.prevous);
+            _nextCard = cards.get(card.next);
+            _previousCard = cards.get(card.prevous);
         }   
 
         if(event.keyCode == KEYCODE_LEFT)
         {
-            goto(getUrl(cards.get(card.prevous)));
+            goto(resolve(getUrl(cards.get(card.prevous))));
             card = cards.get(card.prevous);
-            nextCard = cards.get(card.next);
-            previousCard = cards.get(card.prevous);
+            _nextCard = cards.get(card.next);
+            _previousCard = cards.get(card.prevous);
         }
     }
 
@@ -46,17 +47,16 @@
     function goToNext(thisCard: Card)
     {
         card = cards.get(thisCard.next);
-        nextCard = cards.get(card.next);
-        previousCard = cards.get(card.prevous);
-        goto(getUrl(card));
+        _nextCard = cards.get(card.next);
+        _previousCard = cards.get(card.prevous);
+        goto(resolve(getUrl(card)));
     }
 
     function goToPrevious(thisCard: Card)
     {
         card = cards.get(thisCard.prevous);
-        nextCard = cards.get(thisCard.next);
-        previousCard = cards.get(card.prevous);
-        goto(getUrl(card));
+        _previousCard = cards.get(card.prevous);
+        goto(resolve(getUrl(card)));
     }
 
     if(browser)
@@ -65,25 +65,35 @@
 <noscript>
     <div class="card-panel" id="card-face">
         <div class="left">
-            <a href={cards.get(card.prevous)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+            <a
+                href={resolve(cards.get(card.prevous)?.url + '/#card-face')}
+                data-sveltekit-reload
+                class="arrow"
+                title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}"
+            >&lt;</a>
         </div>
         <div class="center">
             <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
         </div>
         <div class="right">
-            <a href={cards.get(card.next)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+            <a
+                href={resolve(cards.get(card.next)?.url + '/#card-face')}
+                data-sveltekit-reload
+                class="arrow"
+                title="{$t('cards.cardBrowser.a2.title')}: {card.next}"
+            >&gt;</a>
         </div>
     </div>
 </noscript>
 <div class="card-panel script" id="card">
     <div class="left">
-        <a href={getUrl(card)} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+        <a href={resolve(getUrl(card))} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">&lt;</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
-        <a href={getUrl(card)} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+        <a href={resolve(getUrl(card))} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">&gt;</a>
     </div>
 </div>
 <style>
@@ -142,3 +152,8 @@
         }
     }
 </style>
+
+
+
+
+

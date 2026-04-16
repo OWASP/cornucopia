@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import { resolve } from "$app/paths";
 
   interface Props {
     depth: number;
@@ -23,34 +24,34 @@
   
   {#if depth === 1}
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <h1 title="{text}" class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))}
+    <h1 title="{text}" class="clickable" onkeydown={()=>goto(resolve("#" + cleanText(text)))} onclick={()=>goto(resolve("#" + cleanText(text)))}
      id={cleanText(text)}>
       {@render children?.()}
     </h1>
   {:else if depth === 2}
       <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <h2 title="{text}" class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+    <h2 title="{text}" class="clickable" onkeydown={()=>goto(resolve("#" + cleanText(text)))} onclick={()=>goto(resolve("#" + cleanText(text)))} id={cleanText(text)}>
       {@render children?.()}
     </h2>
   {:else if depth === 3}
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <h3 title="{text}" class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+    <h3 title="{text}" class="clickable" onkeydown={()=>goto(resolve("#" + cleanText(text)))} onclick={()=>goto(resolve("#" + cleanText(text)))} id={cleanText(text)}>
       {@render children?.()}
     </h3>
   {:else if depth === 4}
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <h4 title="{text}" class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+    <h4 title="{text}" class="clickable" onkeydown={()=>goto(resolve("#" + cleanText(text)))} onclick={()=>goto(resolve("#" + cleanText(text)))} id={cleanText(text)}>
       {@render children?.()}
     </h4>
   {:else if depth === 5}
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 
-    <h5 title="{text}" class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+    <h5 title="{text}" class="clickable" onkeydown={()=>goto(resolve("#" + cleanText(text)))} onclick={()=>goto(resolve("#" + cleanText(text)))} id={cleanText(text)}>
       {@render children?.()}
     </h5>
   {:else if depth === 6}
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <h6 title="{text}" class="clickable" onkeydown={()=>goto("#" + cleanText(text))} onclick={()=>goto("#" + cleanText(text))} id={cleanText(text)}>
+    <h6 title="{text}" class="clickable" onkeydown={()=>goto(resolve("#" + cleanText(text)))} onclick={()=>goto(resolve("#" + cleanText(text)))} id={cleanText(text)}>
       {@render children?.()}
     </h6>
   {:else}

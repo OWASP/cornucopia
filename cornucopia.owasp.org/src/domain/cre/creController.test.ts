@@ -18,7 +18,7 @@ describe('CreController tests', () => {
                     owasp_asvs: ['CRE-001', 'CRE-002']
                 }
             })
-        } as any;
+        } as unknown as MappingController;
 
         creController = new CreController(mockDeck, mockMappingController);
     });

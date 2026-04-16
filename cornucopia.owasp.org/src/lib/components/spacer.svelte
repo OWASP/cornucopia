@@ -3,7 +3,7 @@
 		height?: string;
 	}
 
-	let { height = '5rem' }: Props = $props();
+	let { _height = '5rem' }: Props = $props();
 </script>
 
 <div class="spacer" ></div>
