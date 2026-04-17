@@ -1,4 +1,4 @@
-﻿defmodule CopiWeb.HealthControllerTest do
+defmodule CopiWeb.HealthControllerTest do
   use CopiWeb.ConnCase
 
   test "GET /health returns 200 when database is up", %{conn: conn} do
