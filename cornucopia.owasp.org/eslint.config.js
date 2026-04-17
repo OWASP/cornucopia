@@ -33,6 +33,6 @@ export default ts.config(
     }
   },
   {
-    ignores: ['build/', '.svelte-kit/', 'dist/', 'deploy/']
+    ignores: ['build/', '.svelte-kit/', 'dist/', 'deploy/', 'coverage/']
   }
 );
