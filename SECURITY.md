@@ -7,9 +7,9 @@ The versions of each of the sets of game cards currently supported by Cornucopia
 | Version                  | Supported          |
 | ------------------------ | ------------------ |
 | Web App edition =< 2.2 | :white_check_mark: |
-| Mobile App edition =< 1.1 | :white_check_mark: |
-| Companion edition =< 1.0 | :white_check_mark: |
-| eop cards =< 1.0         | :white_check_mark: |
+| Mobile App edition => 1.1 | :white_check_mark: |
+| Companion edition => 1.0 | :white_check_mark: |
+| eop cards => 1.0         | :white_check_mark: |
 
 ## Disclosing a Vulnerability
 
