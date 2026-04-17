@@ -342,4 +342,11 @@ describe('CreController tests', () => {
             expect(result.standards).toHaveLength(2);
         });
     });
+
+    it('should handle null deck gracefully', () => {
+        const nullDeckController = new CreController(null as unknown as Map<string, Card>, mockMappingController);
+        const result = nullDeckController.getCreMapping('webapp', 'en');
+        expect(result.meta).toBeDefined();
+        expect(result.standards).toHaveLength(0);
+    });
 });
