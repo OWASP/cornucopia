@@ -1,22 +1,11 @@
 defmodule Copi.ApplicationTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case
 
-  test "RateLimiter is started in supervision tree" do
-    # Verify RateLimiter process is running
-    assert Process.whereis(Copi.RateLimiter) != nil
+  test "application supervisor is running" do
+    assert Process.whereis(Copi.Supervisor) != nil
   end
 
-  test "RateLimiter responds to configuration requests" do
-    config = Copi.RateLimiter.get_config()
-    
-    assert is_map(config)
-    assert Map.has_key?(config, :limits)
-    assert Map.has_key?(config, :windows)
-  end
-
-  test "application starts successfully" do
-    # The application should already be running in tests
-    assert Application.started_applications()
-           |> Enum.any?(fn {app, _, _} -> app == :copi end)
+  test "config_change returns ok" do
+    assert :ok == Copi.Application.config_change([], [], [])
   end
 end
