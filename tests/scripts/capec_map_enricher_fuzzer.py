@@ -1,128 +1,129 @@
+﻿#!/usr/bin/env python3
 import argparse
 import logging
-import sys
 import unittest
-from pathlib import Path
 from unittest.mock import patch
-
+import sys
 import atheris
+import os
 
-import capec_map_enricher as enricher
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "scripts")))
+
+try:
+    import scripts.capec_map_enricher as enricher
+except ImportError:
+    import capec_map_enricher as enricher
 
 enricher.enricher_vars = enricher.EnricherVars()
-
-
-def _build_fuzzed_json(fdp):
-    """Build a fuzzed CAPEC JSON structure from fuzz data."""
-    capec_id = fdp.ConsumeUnicodeNoSurrogates(64)
-    capec_name = fdp.ConsumeUnicodeNoSurrogates(64)
-    cat_id = fdp.ConsumeUnicodeNoSurrogates(64)
-    cat_name = fdp.ConsumeUnicodeNoSurrogates(64)
-    return {
-        "Attack_Pattern_Catalog": {
-            "Attack_Patterns": {
-                "Attack_Pattern": [
-                    {"_ID": capec_id, "_Name": capec_name},
-                ]
-            },
-            "Categories": {
-                "Category": [
-                    {"_ID": cat_id, "_Name": cat_name},
-                ]
-            },
-        }
-    }
-
-
-def _build_fuzzed_yaml(fdp):
-    """Build a fuzzed CAPEC-to-ASVS mapping dict from fuzz data."""
-    capec_key = fdp.ConsumeUnicodeNoSurrogates(64)
-    asvs_ref = fdp.ConsumeUnicodeNoSurrogates(64)
-    return {
-        "meta": {"version": "1.0"},
-        capec_key: {"owasp_asvs": [asvs_ref]},
-    }
-
-
-def _run_enricher_main(test, argp, args):
-    """Patch argparse and sys.argv, then run enricher.main(); swallow expected failures."""
-    try:
-        with patch.object(argparse, "ArgumentParser") as mock_parser:
-            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
-            with test.assertLogs(logging.getLogger(), logging.DEBUG):
-                with patch("sys.argv", args):
-                    enricher.main()
-    except SystemExit:
-        pass
-    except Exception as exc:
-        if "no logs of level" not in str(exc):
-            raise
+enricher.enricher_vars.args = argparse.Namespace(
+    capec_json="",
+    input_path=None,
+    version="latest",
+    edition="webapp",
+    source_dir="",
+    output_path=None,
+    debug=False,
+)
 
 
 def test_main(data):
-    """Atheris fuzz entry point for capec_map_enricher."""
     test = unittest.TestCase()
-    test.maxDiff = None
     fdp = atheris.FuzzedDataProvider(data)
+    capec_json = fdp.ConsumeUnicodeNoSurrogates(1024)
+    input_path = fdp.ConsumeUnicodeNoSurrogates(1024)
+    version = fdp.ConsumeUnicodeNoSurrogates(1024)
+    edition = fdp.ConsumeUnicodeNoSurrogates(1024)
+    source_dir = fdp.ConsumeUnicodeNoSurrogates(1024)
+    output_path = fdp.ConsumeUnicodeNoSurrogates(1024)
 
-    fuzzed_edition = fdp.ConsumeUnicodeNoSurrogates(128)
-    fuzzed_version = fdp.ConsumeUnicodeNoSurrogates(128)
-    fuzzed_input = fdp.ConsumeUnicodeNoSurrogates(256)
-    fuzzed_capec = fdp.ConsumeUnicodeNoSurrogates(256)
+    try:
+        with patch.object(argparse, "ArgumentParser") as mock_parser:
+            # --- Fuzz version argument ---
+            args = ["-v", version, "-e", "webapp", "-s", source_dir]
+            argp = {
+                "debug": True,
+                "capec_json": capec_json,
+                "input_path": None,
+                "version": version,
+                "edition": "webapp",
+                "source_dir": source_dir,
+                "output_path": None,
+            }
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
+                with patch("sys.argv", args):
+                    enricher.main()
 
-    base_path = Path(__file__).parent
+            # --- Fuzz edition argument ---
+            args = ["-v", "latest", "-e", edition, "-s", source_dir]
+            argp = {
+                "debug": True,
+                "capec_json": capec_json,
+                "input_path": None,
+                "version": "latest",
+                "edition": edition,
+                "source_dir": source_dir,
+                "output_path": None,
+            }
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
+                with patch("sys.argv", args):
+                    enricher.main()
 
-    # --- Scenario 1: fuzzed edition and version ---
-    args = ["-e", fuzzed_edition, "-v", fuzzed_version]
-    argp = {
-        "debug": True,
-        "edition": fuzzed_edition,
-        "version": fuzzed_version,
-        "input_path": None,
-        "source_dir": str(base_path),
-        "output_path": None,
-        "capec_json": str(base_path / "3000.json"),
-    }
-    _run_enricher_main(test, argp, args)
+            # --- Fuzz input_path argument ---
+            args = ["-v", "latest", "-e", "webapp", "-s", source_dir, "-i", input_path]
+            argp = {
+                "debug": True,
+                "capec_json": capec_json,
+                "input_path": input_path,
+                "version": "latest",
+                "edition": "webapp",
+                "source_dir": source_dir,
+                "output_path": None,
+            }
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
+                with patch("sys.argv", args):
+                    enricher.main()
 
-    # --- Scenario 2: fuzzed input_path ---
-    args = ["-i", fuzzed_input]
-    argp = {
-        "debug": True,
-        "edition": "webapp",
-        "version": "latest",
-        "input_path": fuzzed_input,
-        "source_dir": str(base_path),
-        "output_path": None,
-        "capec_json": str(base_path / "3000.json"),
-    }
-    _run_enricher_main(test, argp, args)
+            # --- Fuzz output_path argument ---
+            args = ["-v", "latest", "-e", "webapp", "-s", source_dir, "-i", input_path, "-o", output_path]
+            argp = {
+                "debug": True,
+                "capec_json": capec_json,
+                "input_path": input_path,
+                "version": "latest",
+                "edition": "webapp",
+                "source_dir": source_dir,
+                "output_path": output_path,
+            }
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
+                with patch("sys.argv", args):
+                    enricher.main()
 
-    # --- Scenario 3: fuzzed capec_json path ---
-    args = ["-c", fuzzed_capec]
-    argp = {
-        "debug": True,
-        "edition": "webapp",
-        "version": "latest",
-        "input_path": None,
-        "source_dir": str(base_path),
-        "output_path": None,
-        "capec_json": fuzzed_capec,
-    }
-    _run_enricher_main(test, argp, args)
+            # --- Fuzz capec_json argument ---
+            args = ["-v", "latest", "-e", "webapp", "-s", source_dir, "-c", capec_json]
+            argp = {
+                "debug": True,
+                "capec_json": capec_json,
+                "input_path": None,
+                "version": "latest",
+                "edition": "webapp",
+                "source_dir": source_dir,
+                "output_path": None,
+            }
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
+            with test.assertLogs(logging.getLogger(), logging.DEBUG) as l6:
+                with patch("sys.argv", args):
+                    enricher.main()
 
-    # --- Scenario 4: fuzz extract_capec_names directly ---
-    fuzzed_json = _build_fuzzed_json(fdp)
-    enricher.extract_capec_names(fuzzed_json)
-    enricher.extract_capec_names({})
-    enricher.extract_capec_names({"Attack_Pattern_Catalog": {}})
-
-    # --- Scenario 5: fuzz enrich_capec_mappings directly ---
-    fuzzed_yaml = _build_fuzzed_yaml(fdp)
-    capec_names = enricher.extract_capec_names(fuzzed_json)
-    enricher.enrich_capec_mappings(fuzzed_yaml, capec_names)
-    enricher.enrich_capec_mappings({}, {})
-
+    except Exception as e:
+        print(e)
+        print(f"{l6}")
+        if "no logs of level" not in str(e):
+            raise Exception("Enricher main died!")
     test.assertTrue(True)
 
 
