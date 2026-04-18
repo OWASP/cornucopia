@@ -13,67 +13,67 @@ suits:
     id: LLM2
     value: 2
     url: https://cornucopia.owasp.org/cards/LLM2
-    desc: 
+    desc: "Dave can exploit overreliance on LLM outputs where critical human oversight is missing, leading to security failures or incorrect decisions based on hallucinations or flawed reasoning"
   -
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
-    desc: 
+    desc: "Sarah can override or manipulate system prompts or safety instructions through crafted input, causing the model to ignore its intended constraints or perform unauthorized actions"
   -
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
-    desc: 
+    desc: "David can cause the model to disclose sensitive information from its training data, system prompts, configuration, or other users' context due to insufficient output filtering or prompt leakage"
   -
     id: LLM5
     value: 5
     url: https://cornucopia.owasp.org/cards/LLM5
-    desc: 
+    desc: "Roy can escalate privileges or access other users' data and sessions due to weak authentication, authorization, or improper session isolation in multi-tenant LLM systems"
   -
     id: LLM6
     value: 6
     url: https://cornucopia.owasp.org/cards/LLM6
-    desc: 
+    desc: "Tyrell can poison training or fine-tuning datasets or the fine-tuning process itself, introducing backdoors or malicious behavior that can later be triggered"
   -
     id: LLM7
     value: 7
     url: https://cornucopia.owasp.org/cards/LLM7
-    desc: 
+    desc: "Andersen can manipulate retrieval knowledge bases, vector databases, or RAG sources so the model retrieves and presents false, biased, or malicious information as facts"
   -
     id: LLM8
     value: 8
     url: https://cornucopia.owasp.org/cards/LLM8
-    desc: 
+    desc: "Samantha can exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries, leading to model DoS"
   -
     id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
-    desc: 
+    desc: "Rossum can abuse insecure plugin or integration designs to access sensitive data, bypass authentication, or execute unauthorized operations via the LLM's interface"
   -
     id: LLMX
     value: X
     url: https://cornucopia.owasp.org/cards/LLMX
-    desc: 
+    desc: "Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration"
   -
     id: LLMJ
     value: J
     url: https://cornucopia.owasp.org/cards/LLMJ
-    desc: 
+    desc: "Kyle can exploit insecure handling of model outputs that are used directly in downstream systems, enabling injection attacks, remote code execution, or unauthorized actions"
   -
     id: LLMQ
     value: Q
     url: https://cornucopia.owasp.org/cards/LLMQ
-    desc: 
+    desc: "Ripley can introduce compromised third-party models, embeddings, or malicious ML components into the supply chain, leading to hidden vulnerabilities or data theft"
   -
     id: LLMK
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
-    desc: 
+    desc: "Ava can exploit excessive agency or autonomy in AI agents with tool access to perform unauthorized or high-risk actions because of missing human-in-the-loop approval"
   -
     id: LLMA
     value: A
     url: https://cornucopia.owasp.org/cards/LLMA
-    desc: You have invented a new attack against LLM
+    desc: "You have invented a new attack against AI & LLM Security"
     misc:
 -
   id: CLD
