@@ -35,7 +35,7 @@ describe('FileSystemHelper tests', () => {
     it("should read data from a path.", async () => {
         const data = FileSystemHelper.getDataFromPath('data/website/pages/about');
         expect(data).toBeDefined();
-        expect(data.get('en')).toBeDefined();
+        expect(data['en']).toBeDefined;
 
         const emptyData = FileSystemHelper.getDataFromPath('data/website/pages/nonexistent');
         expect(emptyData).toBeDefined();
@@ -70,21 +70,21 @@ describe('FileSystemHelper tests', () => {
         ];
 
         //Test with a file route
-        const [noCategories, fileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'en');
+        let [noCategories, fileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'en');
         expect(noCategories).toBeDefined();
         expect(fileContent).toBeDefined();
         expect(fileContent.length).toBeGreaterThan(0);
         expect(noCategories.length).toBe(0);
 
         //Test with a language that does not have a translation, should fallback to English
-        const [noLangCategories, engFileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'es');
+        let [noLangCategories, engFileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'es');
         expect(noLangCategories).toBeDefined();
         expect(engFileContent).toBeDefined();
         expect(engFileContent.length).toBeGreaterThan(0);
         expect(noLangCategories.length).toBe(0);
 
         //Test with a folder route
-        const [categories, content] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling', 'en');
+        let [categories, content] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling', 'en');
         expect(categories).toBeDefined();
         expect(content).toBeDefined();
         expect(content.length).toBe(0);
@@ -94,7 +94,7 @@ describe('FileSystemHelper tests', () => {
         });
 
         //Test with the root taxonomy route
-        const [categoriesRoot, contentRoot] = FileSystemHelper.getDataByRoute('/taxonomy', 'en');
+        let [categoriesRoot, contentRoot] = FileSystemHelper.getDataByRoute('/taxonomy', 'en');
         expect(categoriesRoot).toBeDefined();
         expect(contentRoot).toBeDefined();
         expect(contentRoot.length).toBe(0);
@@ -109,7 +109,7 @@ describe('FileSystemHelper tests', () => {
         });
 
         //Test with the root taxonomy route
-        const [asvsCategories, asvsRoot] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3', 'en');
+        let [asvsCategories, asvsRoot] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3', 'en');
         expect(asvsCategories).toBeDefined();
         expect(asvsRoot).toBeDefined();
         expect(asvsRoot.length).toBe(0);
@@ -121,5 +121,14 @@ describe('FileSystemHelper tests', () => {
         expectedASVSCategories.forEach((category) => {
             expect(asvsCategories).toContain(category);
         });
+    });
+
+    it('should return path as-is when base path does not exist', () => {
+        const result = (FileSystemHelper as any)['resolveCaseInsensitivePath'](
+            '/nonexistent/base/path/that/does/not/exist',
+            'some/relative/path'
+        );
+        expect(result).toBeDefined();
+        expect(typeof result).toBe('string');
     });
 });

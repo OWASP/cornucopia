@@ -1,7 +1,10 @@
 import {expect, describe, it} from 'vitest';
 import { MappingController } from './mappingController';
+
+
 describe('MappingController tests', () => {
     it("should return web app card mapping data.", async () => {
+        
         const mappingData = {
             suits: [
                 {
@@ -17,12 +20,15 @@ describe('MappingController tests', () => {
             ]
         };
         const controller = new MappingController(mappingData);
+
         const webAppMapping = controller.getWebAppCardMappings("webapp-1");
         expect(webAppMapping).toBeDefined();
         expect(webAppMapping.id).toBe("webapp-1");
         expect(webAppMapping.owasp_asvs).toEqual(["1.1", "1.2"]);
     });
+
     it("should return mobile app card mapping data.", async () => {
+        
         const mappingData = {
             suits: [
                 {
@@ -46,7 +52,9 @@ describe('MappingController tests', () => {
         expect(mobileAppMapping.owasp_masvs).toEqual(["MASVS-1", "MASVS-2"]);
         expect(mobileAppMapping.capec).toEqual([1, 2]);
         expect(mobileAppMapping.safecode).toEqual([101, 102]);
+
     });
+
     it("should return empty mapping for non-existing card.", async () => {
         const mappingData = {
             suits: []
@@ -55,27 +63,31 @@ describe('MappingController tests', () => {
         const webAppMapping = controller.getWebAppCardMappings("non-existing-card");
         expect(webAppMapping).toBeDefined();
         expect(Object.keys(webAppMapping).length).toBe(0);
+
         const controller2 = new MappingController({});
         const webAppMapping2 = controller2.getWebAppCardMappings("non-existing-card");
         expect(webAppMapping2).toBeDefined();
         expect(Object.keys(webAppMapping2).length).toBe(0);
     });
-    it("should return empty mapping when card not found in non-empty suits", async () => {
+
+    it("should return empty mapping when card id does not match existing cards.", async () => {
         const mappingData = {
             suits: [
                 {
-                    name: "Test Suit",
                     cards: [
-                        { id: "existing-card", owasp_asvs: ["1.1"] }
+                        {
+                            id: "different-card"
+                        }
                     ]
                 }
             ]
         };
         const controller = new MappingController(mappingData);
-        const result = controller.getCardMappings("non-existing-card");
-        expect(result).toBeDefined();
-        expect(Object.keys(result).length).toBe(0);
+        const mapping = controller.getCardMappings("missing-card");
+        expect(mapping).toBeDefined();
+        expect(Object.keys(mapping).length).toBe(0);
     });
+
     it("should return meta information.", async () => {
         const mappingData = {
             meta: { version: "1.0", date: "2024-01-01" },
