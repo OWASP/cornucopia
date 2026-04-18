@@ -88,6 +88,24 @@ describe('MappingController tests', () => {
         expect(Object.keys(webAppMapping3).length).toBe(0);
     });
 
+    it("should return empty mapping when card id does not match existing cards.", async () => {
+        const mappingData = {
+            suits: [
+                {
+                    cards: [
+                        {
+                            id: "different-card"
+                        }
+                    ]
+                }
+            ]
+        };
+        const controller = new MappingController(mappingData);
+        const mapping = controller.getCardMappings("missing-card");
+        expect(mapping).toBeDefined();
+        expect(Object.keys(mapping).length).toBe(0);
+    });
+
     it("should return meta information.", async () => {
         const mappingData = {
             meta: { version: "1.0", date: "2024-01-01" },
