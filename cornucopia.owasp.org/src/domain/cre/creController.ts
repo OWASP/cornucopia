@@ -73,9 +73,6 @@ export class CreController {
         let mapping = this.controller.getCardMappings(card.id);
         let links: { document: { doctype: string; id: string }; ltype: string }[] = [];
         let cre = mapping.owasp_cre?.owasp_asvs as [] || [];
-        if (!cre) {
-            throw Error("cre has not been defined.")
-        }
         cre.forEach((cre) => links.push({
             "document": {
                 "doctype": "CRE",
