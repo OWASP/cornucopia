@@ -90,6 +90,7 @@ export class DeckService {
         let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
 
         if (!FileSystemHelper.hasFile(cardFile)) {
+            console.warn(`Card file not found: ${cardFile}`);
             return cards;
         }
 
@@ -126,15 +127,19 @@ export class DeckService {
                 try {
                     file = fs.readFileSync(path, 'utf8');
                 } catch (e) {
-                    console.error(`Error reading file at path: ${path}`, e);
+                    console.error(
+                    `Error reading markdown file for card ${cardObject?.id || "unknown"} at ${path}`,e
+                    );
                     continue;
                 }
                 let parsed = fm(file);
                 cardObject.concept = parsed.body;
+                const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
-                    cardObject.summary = fm(fs.readFileSync(`./${base}${cardFolderPath}/explanation.md`, 'utf8')).body;
+                    cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
                 } catch (e) {
-                    console.error(`Error reading file at path: ./${base}${cardFolderPath}/explanation.md`, e);
+                     console.error(
+                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${explanationPath}`,e);
                     continue;
                 }
 

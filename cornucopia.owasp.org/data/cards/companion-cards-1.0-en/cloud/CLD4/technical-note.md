@@ -1,0 +1,1 @@
+This card is about the absence of cloud audit logs and security monitoring, which allows attackers to act without detection or attribution. See CLD9 for the related threat of pivoting between accounts using trust relationships.

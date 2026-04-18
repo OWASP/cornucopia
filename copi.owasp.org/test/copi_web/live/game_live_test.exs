@@ -148,6 +148,10 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ game.name
     end
 
+    test "redirects to error when round parameter is invalid", %{conn: conn, game: game} do
+      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=abc")
+    end
+
     test "displays past round", %{conn: conn, game: game} do
        # Create players and play a round to make it valid
        {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})

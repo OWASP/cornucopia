@@ -1,0 +1,1 @@
+This card focuses on authorization bypasses achieved by modifying client-side JavaScript logic, where the server does not enforce access control independently. See FRE2 for the related threat of bypassing client-side input validation rather than authorization checks.

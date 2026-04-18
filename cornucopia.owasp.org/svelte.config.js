@@ -19,6 +19,7 @@ export default {
 			$domain: "src/domain",
 		},
 		prerender: {
+			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
 				console.log(message);
 				console.log(referrer);

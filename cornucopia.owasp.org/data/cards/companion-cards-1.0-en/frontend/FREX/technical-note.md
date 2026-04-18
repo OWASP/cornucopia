@@ -1,0 +1,1 @@
+This card covers clickjacking, where the attacker overlays the application in a hidden frame to hijack user clicks. See FRE7 for the related threat of cross-origin data access through misconfigured CORS or postMessage, where the attacker reads data from a framed application rather than manipulating user interactions.

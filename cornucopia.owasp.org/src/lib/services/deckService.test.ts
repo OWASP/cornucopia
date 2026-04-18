@@ -315,12 +315,12 @@ suits:
                 }
             );
 
-            // First call — populates cache
+            // First call â€” populates cache
             const firstResult = deckService.getCards('en');
             expect(firstResult.has('MOBILE-1')).toBe(true);
             expect(firstResult.has('WEB-1')).toBe(true);
 
-            // Second call — must hit cache with fully-merged result, not a partial one
+            // Second call â€” must hit cache with fully-merged result, not a partial one
             const secondResult = deckService.getCards('en');
             expect(secondResult.has('MOBILE-1')).toBe(true);
             expect(secondResult.has('WEB-1')).toBe(true);
@@ -624,6 +624,143 @@ suits:
             
             consoleLogSpy.mockRestore();
         });
+
+        it('should warn and return empty map if card file is missing', () => {
+    vi.mocked(FileSystemHelper.hasFile).mockReturnValue(false);
+
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const deckService = new DeckService();
+    const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+    expect(result.size).toBe(0);
+    expect(consoleWarnSpy).toHaveBeenCalled();
+
+    consoleWarnSpy.mockRestore();
+});
+
+it('should use "unknown" fallback when card id is missing on technical note read error', () => {
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+            const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - value: A
+        desc: Card without id
+`;
+
+            vi.mocked(fs.readFileSync)
+                .mockReturnValueOnce(mockYamlContent)
+                .mockImplementationOnce(() => {
+                    throw new Error('Technical note missing');
+                });
+
+            const mockMapping = {
+                suits: {
+                    '0': { name: 'Test Suit' }
+                }
+            };
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+            const deckServiceInstance = new DeckService();
+            const result = deckServiceInstance.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+            expect(result.size).toBe(0);
+            expect(consoleErrorSpy).toHaveBeenCalledWith(
+                expect.stringContaining('unknown'),
+                expect.any(Error)
+            );
+
+            consoleErrorSpy.mockRestore();
+        });
+
+        it('should use "unknown" fallback when card id is missing on explanation read error', () => {
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+            const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - value: A
+        desc: Card without id
+`;
+
+            const mockTechnicalNote = '---\n---\nSome content';
+
+            vi.mocked(fs.readFileSync)
+                .mockReturnValueOnce(mockYamlContent)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockImplementationOnce(() => {
+                    throw new Error('Explanation missing');
+                });
+
+            const mockMapping = {
+                suits: {
+                    '0': { name: 'Test Suit' }
+                }
+            };
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+            const deckServiceInstance = new DeckService();
+            const result = deckServiceInstance.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+            expect(result.size).toBe(0);
+            expect(consoleErrorSpy).toHaveBeenCalledWith(
+                expect.stringContaining('unknown'),
+                expect.any(Error)
+            );
+
+            consoleErrorSpy.mockRestore();
+        });
+
+        it('should handle generic markdown read error gracefully', () => {
+    vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+    vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+    const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - id: CARD-1
+        value: A
+        desc: Card 1
+`;
+
+    // First call â†’ YAML
+    // Second call â†’ throw error (simulate markdown failure)
+    vi.mocked(fs.readFileSync)
+        .mockReturnValueOnce(mockYamlContent)
+        .mockImplementationOnce(() => {
+            throw new Error('Markdown read failed');
+        });
+
+    const mockMapping = {
+        suits: {
+            '0': { name: 'Test Suit' }
+        }
+    };
+    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const deckService = new DeckService();
+    const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+    expect(result.size).toBe(0);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+
+    consoleErrorSpy.mockRestore();
+});
     }, 10000);
 
     describe('clear', () => {

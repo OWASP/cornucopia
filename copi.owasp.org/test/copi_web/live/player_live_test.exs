@@ -49,12 +49,24 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Cornucopia Web Session: some name"
     end
 
+    test "redirects on mount when game has already started", %{conn: conn, player: player} do
+      # Start the game
+      {:ok, started_game} = Cornucopia.update_game(
+        Cornucopia.get_game!(player.game_id),
+        %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}
+      )
+
+      # Attempt to access the index page (which might mount the LiveView)
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{started_game.id}/players")
+    end
+
     test "saves new player", %{conn: conn, player: player} do
       {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}")
 
       assert index_live |> element(~s{[href="/games/#{player.game_id}/players/new"]}) |> render_click()
 
       assert_patch(index_live, "/games/#{player.game_id}/players/new")
+
       {:ok, index_live, _html} = live(conn, "/games/#{player.game_id}/players/new")
       assert index_live
              |> form("#player-form", player: @invalid_attrs)
@@ -69,6 +81,8 @@ defmodule CopiWeb.PlayerLiveTest do
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
     end
+
+
 
     test "lists players on index route", %{conn: conn, player: player} do
       {:ok, _index_live, html} = live(conn, "/games/#{player.game_id}/players")
@@ -153,13 +167,13 @@ defmodule CopiWeb.PlayerLiveTest do
     test "allows continue voting and resets votes on next round", %{conn: conn, player: player} do
       # Setup another player
       game_id = player.game_id
-      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
+      {:ok, _other_player} = Cornucopia.create_player(%{name: "Other", game_id: game_id})
       
       # Start game
       {:ok, game} = Cornucopia.Game.find(game_id)
       Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
 
-      {:ok, show_live, html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       
       # Test continue voting
       show_live |> element("[phx-click=\"toggle_continue_vote\"]") |> render_click()

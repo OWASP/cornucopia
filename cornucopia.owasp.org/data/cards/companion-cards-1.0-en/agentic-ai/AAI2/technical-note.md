@@ -1,0 +1,1 @@
+This card addresses prompt injection via insufficient context isolation, where untrusted input overrides agent task scope. See AAI7 for the related indirect prompt injection variant where the injection arrives through tool output rather than direct user content.
