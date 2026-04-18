@@ -31,11 +31,11 @@ def test_main(data):
     test = unittest.TestCase()
     fdp = atheris.FuzzedDataProvider(data)
 
-    capec_json  = fdp.ConsumeUnicodeNoSurrogates(128)
-    input_path  = fdp.ConsumeUnicodeNoSurrogates(128)
-    version     = fdp.ConsumeUnicodeNoSurrogates(32)
-    edition     = fdp.ConsumeUnicodeNoSurrogates(32)
-    source_dir  = fdp.ConsumeUnicodeNoSurrogates(128)
+    capec_json = fdp.ConsumeUnicodeNoSurrogates(128)
+    input_path = fdp.ConsumeUnicodeNoSurrogates(128)
+    version = fdp.ConsumeUnicodeNoSurrogates(32)
+    edition = fdp.ConsumeUnicodeNoSurrogates(32)
+    source_dir = fdp.ConsumeUnicodeNoSurrogates(128)
     output_path = fdp.ConsumeUnicodeNoSurrogates(128)
 
     fuzzed_json_data = {
@@ -73,10 +73,7 @@ def test_main(data):
     for _ in range(fdp.ConsumeIntInRange(0, 5)):
         key = fdp.ConsumeIntInRange(1, 10000)
         fuzzed_yaml_data[key] = {
-            "owasp_asvs": [
-                fdp.ConsumeUnicodeNoSurrogates(16)
-                for _ in range(fdp.ConsumeIntInRange(0, 3))
-            ]
+            "owasp_asvs": [fdp.ConsumeUnicodeNoSurrogates(16) for _ in range(fdp.ConsumeIntInRange(0, 3))]
         }
 
     # --- Fuzz version argument ---
@@ -90,11 +87,13 @@ def test_main(data):
         "debug": True,
     }
     try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), \
-             patch.object(enricher, "load_yaml_file", return_value=fuzzed_yaml_data), \
-             patch.object(enricher, "save_yaml_file", return_value=True), \
-             patch.object(enricher, "parse_arguments", return_value=argparse.Namespace(**argp)), \
-             patch("sys.argv", ["capec_map_enricher.py"]):
+        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
+            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
+        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
+            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
+        ), patch(
+            "sys.argv", ["capec_map_enricher.py"]
+        ):
             with test.assertLogs(logging.getLogger(), logging.DEBUG):
                 enricher.main()
     except SystemExit:
@@ -114,11 +113,13 @@ def test_main(data):
         "debug": True,
     }
     try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), \
-             patch.object(enricher, "load_yaml_file", return_value=fuzzed_yaml_data), \
-             patch.object(enricher, "save_yaml_file", return_value=True), \
-             patch.object(enricher, "parse_arguments", return_value=argparse.Namespace(**argp)), \
-             patch("sys.argv", ["capec_map_enricher.py"]):
+        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
+            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
+        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
+            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
+        ), patch(
+            "sys.argv", ["capec_map_enricher.py"]
+        ):
             with test.assertLogs(logging.getLogger(), logging.DEBUG):
                 enricher.main()
     except SystemExit:
@@ -138,11 +139,13 @@ def test_main(data):
         "debug": True,
     }
     try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), \
-             patch.object(enricher, "load_yaml_file", return_value=fuzzed_yaml_data), \
-             patch.object(enricher, "save_yaml_file", return_value=True), \
-             patch.object(enricher, "parse_arguments", return_value=argparse.Namespace(**argp)), \
-             patch("sys.argv", ["capec_map_enricher.py"]):
+        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
+            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
+        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
+            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
+        ), patch(
+            "sys.argv", ["capec_map_enricher.py"]
+        ):
             with test.assertLogs(logging.getLogger(), logging.DEBUG):
                 enricher.main()
     except SystemExit:
@@ -162,11 +165,13 @@ def test_main(data):
         "debug": True,
     }
     try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), \
-             patch.object(enricher, "load_yaml_file", return_value=fuzzed_yaml_data), \
-             patch.object(enricher, "save_yaml_file", return_value=True), \
-             patch.object(enricher, "parse_arguments", return_value=argparse.Namespace(**argp)), \
-             patch("sys.argv", ["capec_map_enricher.py"]):
+        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
+            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
+        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
+            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
+        ), patch(
+            "sys.argv", ["capec_map_enricher.py"]
+        ):
             with test.assertLogs(logging.getLogger(), logging.DEBUG):
                 enricher.main()
     except SystemExit:
@@ -186,11 +191,13 @@ def test_main(data):
         "debug": True,
     }
     try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), \
-             patch.object(enricher, "load_yaml_file", return_value=fuzzed_yaml_data), \
-             patch.object(enricher, "save_yaml_file", return_value=True), \
-             patch.object(enricher, "parse_arguments", return_value=argparse.Namespace(**argp)), \
-             patch("sys.argv", ["capec_map_enricher.py"]):
+        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
+            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
+        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
+            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
+        ), patch(
+            "sys.argv", ["capec_map_enricher.py"]
+        ):
             with test.assertLogs(logging.getLogger(), logging.DEBUG):
                 enricher.main()
     except SystemExit:
