@@ -128,7 +128,7 @@ export class DeckService {
                     file = fs.readFileSync(path, 'utf8');
                 } catch (e) {
                     console.error(
-                    `Error reading markdown file for card ${cardObject?.id} at ${path}`,e
+                    `Error reading markdown file for card ${cardObject?.id || "unknown"} at ${path}`,e
                     );
                     continue;
                 }
@@ -139,7 +139,7 @@ export class DeckService {
                     cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
                 } catch (e) {
                      console.error(
-                        `Missing explanation.md for card ${cardObject?.id} at ${explanationPath}`,e);
+                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${explanationPath}`,e);
                     continue;
                 }
 
