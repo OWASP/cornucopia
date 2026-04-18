@@ -1,210 +1,127 @@
-﻿#!/usr/bin/env python3
 import argparse
 import logging
 import sys
-import atheris
-import os
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "scripts")))
+import atheris
 
-try:
-    import scripts.capec_map_enricher as enricher
-except ImportError:
-    import capec_map_enricher as enricher
+import capec_map_enricher as enricher
 
 enricher.enricher_vars = enricher.EnricherVars()
-enricher.enricher_vars.args = argparse.Namespace(
-    capec_json="",
-    input_path=None,
-    version="latest",
-    edition="webapp",
-    source_dir="",
-    output_path=None,
-    debug=False,
-)
 
 
-def test_main(data):
-    test = unittest.TestCase()
-    fdp = atheris.FuzzedDataProvider(data)
-
-    capec_json = fdp.ConsumeUnicodeNoSurrogates(128)
-    input_path = fdp.ConsumeUnicodeNoSurrogates(128)
-    version = fdp.ConsumeUnicodeNoSurrogates(32)
-    edition = fdp.ConsumeUnicodeNoSurrogates(32)
-    source_dir = fdp.ConsumeUnicodeNoSurrogates(128)
-    output_path = fdp.ConsumeUnicodeNoSurrogates(128)
-
-    fuzzed_json_data = {
+def _build_fuzzed_json(fdp):
+    """Build a fuzzed CAPEC JSON structure from fuzz data."""
+    capec_id = fdp.ConsumeUnicodeNoSurrogates(64)
+    capec_name = fdp.ConsumeUnicodeNoSurrogates(64)
+    cat_id = fdp.ConsumeUnicodeNoSurrogates(64)
+    cat_name = fdp.ConsumeUnicodeNoSurrogates(64)
+    return {
         "Attack_Pattern_Catalog": {
             "Attack_Patterns": {
                 "Attack_Pattern": [
-                    {
-                        "_ID": (
-                            str(fdp.ConsumeIntInRange(1, 10000))
-                            if fdp.ConsumeBool()
-                            else fdp.ConsumeUnicodeNoSurrogates(10)
-                        ),
-                        "_Name": fdp.ConsumeUnicodeNoSurrogates(128),
-                    }
-                    for _ in range(fdp.ConsumeIntInRange(0, 5))
+                    {"_ID": capec_id, "_Name": capec_name},
                 ]
             },
             "Categories": {
                 "Category": [
-                    {
-                        "_ID": (
-                            str(fdp.ConsumeIntInRange(1, 10000))
-                            if fdp.ConsumeBool()
-                            else fdp.ConsumeUnicodeNoSurrogates(10)
-                        ),
-                        "_Name": fdp.ConsumeUnicodeNoSurrogates(128),
-                    }
-                    for _ in range(fdp.ConsumeIntInRange(0, 5))
+                    {"_ID": cat_id, "_Name": cat_name},
                 ]
             },
         }
     }
 
-    fuzzed_yaml_data = {}
-    for _ in range(fdp.ConsumeIntInRange(0, 5)):
-        key = fdp.ConsumeIntInRange(1, 10000)
-        fuzzed_yaml_data[key] = {
-            "owasp_asvs": [fdp.ConsumeUnicodeNoSurrogates(16) for _ in range(fdp.ConsumeIntInRange(0, 3))]
-        }
 
-    # --- Fuzz version argument ---
+def _build_fuzzed_yaml(fdp):
+    """Build a fuzzed CAPEC-to-ASVS mapping dict from fuzz data."""
+    capec_key = fdp.ConsumeUnicodeNoSurrogates(64)
+    asvs_ref = fdp.ConsumeUnicodeNoSurrogates(64)
+    return {
+        "meta": {"version": "1.0"},
+        capec_key: {"owasp_asvs": [asvs_ref]},
+    }
+
+
+def _run_enricher_main(test, argp, args):
+    """Patch argparse and sys.argv, then run enricher.main(); swallow expected failures."""
+    try:
+        with patch.object(argparse, "ArgumentParser") as mock_parser:
+            mock_parser.return_value.parse_args.return_value = argparse.Namespace(**argp)
+            with test.assertLogs(logging.getLogger(), logging.DEBUG):
+                with patch("sys.argv", args):
+                    enricher.main()
+    except SystemExit:
+        pass
+    except Exception as exc:
+        if "no logs of level" not in str(exc):
+            raise
+
+
+def test_main(data):
+    """Atheris fuzz entry point for capec_map_enricher."""
+    test = unittest.TestCase()
+    test.maxDiff = None
+    fdp = atheris.FuzzedDataProvider(data)
+
+    fuzzed_edition = fdp.ConsumeUnicodeNoSurrogates(128)
+    fuzzed_version = fdp.ConsumeUnicodeNoSurrogates(128)
+    fuzzed_input = fdp.ConsumeUnicodeNoSurrogates(256)
+    fuzzed_capec = fdp.ConsumeUnicodeNoSurrogates(256)
+
+    base_path = Path(__file__).parent
+
+    # --- Scenario 1: fuzzed edition and version ---
+    args = ["-e", fuzzed_edition, "-v", fuzzed_version]
     argp = {
-        "capec_json": capec_json,
+        "debug": True,
+        "edition": fuzzed_edition,
+        "version": fuzzed_version,
         "input_path": None,
-        "version": version,
-        "edition": "webapp",
-        "source_dir": source_dir,
+        "source_dir": str(base_path),
         "output_path": None,
-        "debug": True,
+        "capec_json": str(base_path / "3000.json"),
     }
-    try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
-            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
-        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
-            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
-        ), patch(
-            "sys.argv", ["capec_map_enricher.py"]
-        ):
-            with test.assertLogs(logging.getLogger(), logging.DEBUG):
-                enricher.main()
-    except SystemExit:
-        pass
-    except Exception as e:
-        if "no logs of level" not in str(e):
-            raise
+    _run_enricher_main(test, argp, args)
 
-    # --- Fuzz edition argument ---
+    # --- Scenario 2: fuzzed input_path ---
+    args = ["-i", fuzzed_input]
     argp = {
-        "capec_json": capec_json,
+        "debug": True,
+        "edition": "webapp",
+        "version": "latest",
+        "input_path": fuzzed_input,
+        "source_dir": str(base_path),
+        "output_path": None,
+        "capec_json": str(base_path / "3000.json"),
+    }
+    _run_enricher_main(test, argp, args)
+
+    # --- Scenario 3: fuzzed capec_json path ---
+    args = ["-c", fuzzed_capec]
+    argp = {
+        "debug": True,
+        "edition": "webapp",
+        "version": "latest",
         "input_path": None,
-        "version": "latest",
-        "edition": edition,
-        "source_dir": source_dir,
+        "source_dir": str(base_path),
         "output_path": None,
-        "debug": True,
+        "capec_json": fuzzed_capec,
     }
-    try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
-            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
-        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
-            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
-        ), patch(
-            "sys.argv", ["capec_map_enricher.py"]
-        ):
-            with test.assertLogs(logging.getLogger(), logging.DEBUG):
-                enricher.main()
-    except SystemExit:
-        pass
-    except Exception as e:
-        if "no logs of level" not in str(e):
-            raise
+    _run_enricher_main(test, argp, args)
 
-    # --- Fuzz input_path argument ---
-    argp = {
-        "capec_json": capec_json,
-        "input_path": input_path,
-        "version": "latest",
-        "edition": "webapp",
-        "source_dir": source_dir,
-        "output_path": None,
-        "debug": True,
-    }
-    try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
-            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
-        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
-            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
-        ), patch(
-            "sys.argv", ["capec_map_enricher.py"]
-        ):
-            with test.assertLogs(logging.getLogger(), logging.DEBUG):
-                enricher.main()
-    except SystemExit:
-        pass
-    except Exception as e:
-        if "no logs of level" not in str(e):
-            raise
+    # --- Scenario 4: fuzz extract_capec_names directly ---
+    fuzzed_json = _build_fuzzed_json(fdp)
+    enricher.extract_capec_names(fuzzed_json)
+    enricher.extract_capec_names({})
+    enricher.extract_capec_names({"Attack_Pattern_Catalog": {}})
 
-    # --- Fuzz output_path argument ---
-    argp = {
-        "capec_json": capec_json,
-        "input_path": input_path,
-        "version": "latest",
-        "edition": "webapp",
-        "source_dir": source_dir,
-        "output_path": output_path,
-        "debug": True,
-    }
-    try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
-            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
-        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
-            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
-        ), patch(
-            "sys.argv", ["capec_map_enricher.py"]
-        ):
-            with test.assertLogs(logging.getLogger(), logging.DEBUG):
-                enricher.main()
-    except SystemExit:
-        pass
-    except Exception as e:
-        if "no logs of level" not in str(e):
-            raise
-
-    # --- Fuzz capec_json path argument ---
-    argp = {
-        "capec_json": capec_json,
-        "input_path": input_path,
-        "version": "latest",
-        "edition": "webapp",
-        "source_dir": source_dir,
-        "output_path": output_path,
-        "debug": True,
-    }
-    try:
-        with patch.object(enricher, "load_json_file", return_value=fuzzed_json_data), patch.object(
-            enricher, "load_yaml_file", return_value=fuzzed_yaml_data
-        ), patch.object(enricher, "save_yaml_file", return_value=True), patch.object(
-            enricher, "parse_arguments", return_value=argparse.Namespace(**argp)
-        ), patch(
-            "sys.argv", ["capec_map_enricher.py"]
-        ):
-            with test.assertLogs(logging.getLogger(), logging.DEBUG):
-                enricher.main()
-    except SystemExit:
-        pass
-    except Exception as e:
-        if "no logs of level" not in str(e):
-            raise
+    # --- Scenario 5: fuzz enrich_capec_mappings directly ---
+    fuzzed_yaml = _build_fuzzed_yaml(fdp)
+    capec_names = enricher.extract_capec_names(fuzzed_json)
+    enricher.enrich_capec_mappings(fuzzed_yaml, capec_names)
+    enricher.enrich_capec_mappings({}, {})
 
     test.assertTrue(True)
 
