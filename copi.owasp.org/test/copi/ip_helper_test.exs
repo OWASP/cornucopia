@@ -236,6 +236,11 @@ defmodule Copi.IPHelperTest do
       info = %{req_headers: [{:"x-forwarded-for", "10.2.3.4"}]}
       assert IPHelper.get_ip_from_connect_info(info) == {10, 2, 3, 4}
     end
+
+    test "handles x_headers as raw binary string" do
+      info = %{x_headers: "10.8.9.1"}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 8, 9, 1}
+    end
   end
 
   describe "get_ip_from_socket/1 (LiveView) - additional coverage" do
