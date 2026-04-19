@@ -44,15 +44,12 @@ defmodule CopiWeb.PlayerLive.Index do
     end
   end
 
-  # coveralls-ignore-start
-  # No router route exists for the :edit live_action on PlayerLive.Index
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Player")
     |> assign(:player, Cornucopia.get_player!(id))
   end
 
-  # coveralls-ignore-end
   defp apply_action(socket, :new, %{"game_id" => game_id}) do
     game = socket.assigns.game
     socket
