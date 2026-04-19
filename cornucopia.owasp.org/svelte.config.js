@@ -19,6 +19,7 @@ export default {
 			$domain: "src/domain",
 		},
 		prerender: {
+			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
 				console.log(message);
 				console.log(referrer);
@@ -245,7 +246,10 @@ export default {
 				'/cards/DVEK',
 				'/404',
 				'/api/docs',
-				'/api/cre/webapp',
+				'/api/lang/mobileapp/1.1',
+				'/api/lang/webapp/2.2',
+				'/api/lang/webapp/3.0',
+				'/api/lang/dbd/1.0',
 				'/api/cre/webapp/en',
 				'/api/cre/webapp/it',
 				'/api/cre/webapp/nl',
@@ -255,9 +259,19 @@ export default {
 				'/api/cre/webapp/pt_pt',
 				'/api/cre/webapp/pt_br',
 				'/api/cre/webapp/no_nb',
-				'/api/cre/mobileapp',
 				'/api/cre/mobileapp/en',
+				'/api/cre/dbd/en',
+				'/api/cre/mobileapp/hi',
+                '/api/cre/mobileapp/uk',
+				'/api/asvs/webapp/3.0',
+                '/api/capec/webapp/3.0',
+				'/api/mapping/webapp/2.2',
+				'/api/mapping/webapp/3.0',
+				'/api/mapping/mobileapp/1.1',
 				'/edition/mobileapp/PC2/1.1/en',
+				'/edition/mobileapp/PC2/1.1/uk',
+                '/edition/mobileapp/PC2/1.1/hi',
+				'/edition/webapp/VE2/2.2',
 				'/edition/webapp/VE2/2.2/es',
 				'/edition/webapp/VE2/2.2/it',
 				'/edition/webapp/VE2/2.2/nl',
@@ -276,10 +290,12 @@ export default {
 				'/edition/webapp/VE2/3.0/pt_br',
 				'/edition/webapp/VE2/3.0/no_nb',
 				'/edition/webapp/VE2/3.0/ru',
+				'/edition/webapp/VE2/3.0/hi',
+				'/edition/webapp/VE2/3.0/uk'
 			]
 		},
 		csrf: {
-			checkOrigin: true
+			trustedOrigins: ['https://owaspcornucopia.org', 'https://cornucopia.owasp.org']
 		}
 	}
 };

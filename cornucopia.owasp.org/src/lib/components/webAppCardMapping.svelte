@@ -55,9 +55,15 @@
     {
         .mapping-title.browser-card-container, .mapping-value.browser-card-container
         {
-            font-size: 2vw;
+            font-size: 1.8vw;
             margin-left: 1vw;
             margin-right: 1vw;
+            line-height: 1.15;
+        }
+        
+        .mapping-title.browser-card-container:first-of-type
+        {
+            margin-top: 1vw;
         }
     }
 </style>

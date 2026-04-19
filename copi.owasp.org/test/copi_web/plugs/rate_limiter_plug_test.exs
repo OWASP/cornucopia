@@ -1,12 +1,11 @@
 defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   use ExUnit.Case, async: false
-  use Plug.Test
 
+  import Plug.Test
   import Plug.Conn
 
   alias Copi.RateLimiter
   alias CopiWeb.Plugs.RateLimiterPlug
-  alias Copi.RateLimiter
 
   setup do
     RateLimiter.clear_ip({10, 0, 0, 1})
@@ -28,13 +27,17 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
 
   test "returns 429 when forwarded IP exceeds connection limit" do
     ip = "192.168.1.100"
+    ip_tuple = {192, 168, 1, 100}
     config = RateLimiter.get_config()
     limit = config.limits.connection
 
-    # Exhaust the limit first
-    for _ <- 1..limit do
-      RateLimiter.check_rate(ip, :connection)
-    end
+    # Seed limiter state directly to make this deterministic under CI timing.
+    :sys.replace_state(Copi.RateLimiter, fn state ->
+      now = System.monotonic_time(:millisecond)
+      timestamps = for _ <- 1..limit, do: now
+      new_requests = Map.put(state.requests, {ip_tuple, :connection}, timestamps)
+      %{state | requests: new_requests}
+    end)
 
     conn =
       conn(:get, "/")
@@ -45,7 +48,6 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     assert conn.status == 429
     assert conn.resp_body == "Too many connections, try again later."
     assert conn.halted
-    assert conn.status == 429
     assert conn.resp_body =~ "Too many connections"
   end
 
@@ -54,12 +56,10 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     config = RateLimiter.get_config()
     limit = config.limits.connection
 
-    # Exhaust the limit on RateLimiter manually
     for _ <- 1..limit do
       RateLimiter.check_rate(ip, :connection)
     end
 
-    # The plug should still let it through because it skips non-forwarded IPs
     conn =
       conn(:get, "/")
       |> Map.put(:remote_ip, ip)
@@ -76,7 +76,6 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   end
 
   test "skips rate limiting when no IP info is available" do
-    # Explicitly set remote_ip to nil so {:none, nil} branch is hit
     conn =
       conn(:get, "/")
       |> Map.put(:remote_ip, nil)

@@ -30,8 +30,12 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
-    {:ok, updated_player} = Player.find(socket.assigns.player.id)
-    {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+    case Player.find(socket.assigns.player.id) do
+      {:ok, updated_player} ->
+        {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+      {:error, _reason} ->
+        {:noreply, socket}
+    end
   end
 
   @impl true
@@ -79,13 +83,13 @@ defmodule CopiWeb.PlayerLive.Show do
       if last_round?(game) do
         Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
       end
+
+      {:ok, updated_game} = Game.find(game.id)
+
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+      {:noreply, assign(socket, :game, updated_game)}
     end
-
-    {:ok, updated_game} = Game.find(game.id)
-
-    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-    {:noreply, assign(socket, :game, updated_game)}
   end
 
   @impl true
@@ -101,7 +105,7 @@ defmodule CopiWeb.PlayerLive.Show do
     ) do
       {1, _} ->
         Logger.debug("Continue vote removed for player #{player.id}")
-      
+
       {0, _} ->
         # No vote existed, so insert one
         Copi.Repo.insert(
@@ -135,7 +139,7 @@ defmodule CopiWeb.PlayerLive.Show do
         ) do
           {1, _} ->
             Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
-          
+
           {0, _} ->
             # No vote existed, so insert one
             Copi.Repo.insert(
@@ -148,7 +152,7 @@ defmodule CopiWeb.PlayerLive.Show do
         {:ok, updated_game} = Game.find(game.id)
         CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
         {:noreply, assign(socket, :game, updated_game)}
-      
+
       :error ->
         Logger.warning("Invalid dealt_card_id: #{inspect(dealt_card_id)}")
         {:noreply, socket}

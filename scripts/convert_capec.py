@@ -40,20 +40,22 @@ def create_capec_pages(
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
-        f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
-        f.write("## Description\n\n")
-        f.write(f"{parse_description(i.get('Description', ''))}\n\n")
-        capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
-        if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
-            logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
-        else:
-            f.write("## Related ASVS Requirements\n\n")
-            f.write(f"ASVS ({asvs_version}): \
+        filepath = capec_path / "index.md"
+        f = open(filepath, "w", encoding="utf-8")
+        try:
+            f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+            f.write("## Description\n\n")
+            f.write(f"{parse_description(i.get('Description', ''))}\n\n")
+            capec_id = int(i["_ID"])
+            f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
+            if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
+                logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
+            else:
+                f.write("## Related ASVS Requirements\n\n")
+                f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
-
-        f.close()
+        finally:
+            f.close()
 
     categories = data["Attack_Pattern_Catalog"]["Categories"]
     for i in categories["Category"]:
@@ -62,20 +64,22 @@ def create_capec_pages(
         name = str(i["_ID"])
         capec_path = directory / convert_vars.args.output_path / name
         create_folder(capec_path)
-        f = open(capec_path / "index.md", "w", encoding="utf-8")
-        f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
-        f.write("## Description\n\n")
-        f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
-        capec_id = int(i["_ID"])
-        f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
-        if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
-            logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
-        else:
-            f.write("## Related ASVS Requirements\n\n")
-            f.write(f"ASVS ({asvs_version}): \
+        filepath = capec_path / "index.md"
+        f = open(filepath, "w", encoding="utf-8")
+        try:
+            f.write(f"# CAPEC™ {i['_ID']}: {i['_Name']}\n\n")
+            f.write("## Description\n\n")
+            f.write(f"{parse_description(i.get('Summary', ''))}\n\n")
+            capec_id = int(i["_ID"])
+            f.write(f"Source: [CAPEC™ {capec_id}](https://capec.mitre.org/data/definitions/{capec_id}.html)\n\n")
+            if has_no_asvs_mapping(capec_id, capec_to_asvs_map):
+                logging.debug("CAPEC ID %d has no ASVS mapping", capec_id)
+            else:
+                f.write("## Related ASVS Requirements\n\n")
+                f.write(f"ASVS ({asvs_version}): \
 {create_link_list(capec_to_asvs_map.get(capec_id, {}), asvs_map, asvs_version)}\n")
-
-        f.close()
+        finally:
+            f.close()
 
     logging.info("Created %d CAPEC pages", pages)
 
@@ -124,7 +128,7 @@ def createlink(data: dict[str, Any], shortcode: str, asvs_version: str) -> str:
                 str(item["Ordinal"]).rjust(2, "0") + "-" + item["Name"].lower().replace(" ", "-").replace(",", "")
             )
             for subitem in item["Items"]:
-                if shortcode in subitem["Shortcode"]:
+                if shortcode.removeprefix("V") == subitem["Shortcode"].removeprefix("V"):
                     return f"[{shortcode}](/taxonomy/asvs-{asvs_version}/{name}/{itemname}#{subitem['Shortcode']})"
     return shortcode if shortcode else ""
 
@@ -203,6 +207,7 @@ def load_capec_to_asvs_mapping(filepath: Path) -> dict[int, dict[str, List[str]]
 
 
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
+    """Parse command line arguments for CAPEC conversion."""
     parser = argparse.ArgumentParser(description="Convert CAPEC JSON to Cornucopia format")
     parser.add_argument(
         "-o",
@@ -255,6 +260,7 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
 
 
 def get_valid_version(version: str) -> str:
+    """Get valid version from choices."""
     for v in ConvertVars.LATEST_ASVS_VERSION_CHOICES:
         if version == v:
             return version
@@ -262,7 +268,7 @@ def get_valid_version(version: str) -> str:
 
 
 def main() -> None:
-
+    """Main entry point for CAPEC conversion."""
     convert_vars.args = parse_arguments(sys.argv[1:])
     asvs_version = get_valid_version(convert_vars.args.asvs_version)
     logging.debug("Using ASVS version: %s", asvs_version)

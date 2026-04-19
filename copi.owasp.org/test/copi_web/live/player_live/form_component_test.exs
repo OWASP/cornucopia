@@ -70,13 +70,13 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
     test "updates player successfully without rate limiting", %{conn: conn, game: game} do
       {:ok, player} = Cornucopia.create_player(%{name: "Original", game_id: game.id})
-      
+
       # Go to player show page which has Edit link
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
-      
+
       # Verify player name is displayed
       assert render(view) =~ "Original"
-      
+
       # Update should work without triggering rate limit (skipping this complex test)
       :ok
     end
@@ -90,6 +90,87 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
         |> render_submit()
 
       assert html =~ "can&#39;t be blank" or html =~ "can't be blank" or is_binary(html)
+    end
+
+    test "FormComponent.topic/1 returns correct topic string", %{conn: _conn, game: _game} do
+      assert CopiWeb.PlayerLive.FormComponent.topic("abc123") == "game:abc123"
+    end
+  end
+
+  describe "edit player (save_player :edit path)" do
+    test "successfully updates player name", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Original Name", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
+
+      result =
+        view
+        |> form("#player-form", player: %{name: "Updated Name", game_id: game.id})
+        |> render_submit()
+
+      assert {:ok, _view, html} = follow_redirect(result, conn)
+      assert html =~ "Player updated successfully" or html =~ "Updated Name"
+    end
+
+    test "shows validation error on blank name during edit", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Original Name", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
+
+      html =
+        view
+        |> form("#player-form", player: %{name: "", game_id: game.id})
+        |> render_change()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
+
+    test "save_player :edit returns error changeset on invalid submit", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Original Name", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}/edit")
+
+      # Submit a blank name — triggers save_player(:edit) error branch
+      html =
+        view
+        |> form("#player-form", player: %{name: "", game_id: game.id})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
+
+    test "blocks player creation when game has already started", %{conn: conn, game: game} do
+      # Start the game
+      {:ok, _started_game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      # Try to navigate to the new player page - should redirect from mount
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{game.id}/players/new")
+    end
+
+    test "blocks player creation via form submit when game started after page load", %{conn: conn, game: game} do
+      # Load the new player form while game is NOT started
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Start the game after the form is loaded (simulating race condition at the UI layer)
+      {:ok, _started_game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      # Submit the form - should be caught by form_component's Game.find check
+      view
+        |> form("#player-form", player: %{name: "Late Joiner", game_id: game.id})
+        |> render_submit()
+
+      # The view should have navigated away (push_navigate to /games/:id)
+      # The flash message should indicate the game has started
+      assert_redirect(view, "/games/#{game.id}")
+    end
+
+    test "shows error when trying to join non-existent game", %{conn: conn} do
+      fake_game_id = Ecto.ULID.generate()
+
+      # Trying to access a non-existent game's player page should raise/error
+      assert_raise Ecto.NoResultsError, fn ->
+        live(conn, "/games/#{fake_game_id}/players/new")
+      end
     end
   end
 end

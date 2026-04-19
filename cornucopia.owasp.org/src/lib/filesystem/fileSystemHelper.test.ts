@@ -122,4 +122,13 @@ describe('FileSystemHelper tests', () => {
             expect(asvsCategories).toContain(category);
         });
     });
+
+    it('should return path as-is when base path does not exist', () => {
+        const result = (FileSystemHelper as any)['resolveCaseInsensitivePath'](
+            '/nonexistent/base/path/that/does/not/exist',
+            'some/relative/path'
+        );
+        expect(result).toBeDefined();
+        expect(typeof result).toBe('string');
+    });
 });

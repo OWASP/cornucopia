@@ -1,6 +1,6 @@
 <img src="./resources/logos/cornucopia_logo.svg?raw=true" width="150">
 
-[![OWASP Production Project](https://img.shields.io/badge/owasp-production%20project-brightgreen)](https://owasp.org/other_projects/)
+[![OWASP Production Project](https://img.shields.io/badge/owasp-production%20project-brightgreen)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7125/badge)](https://bestpractices.coreinfrastructure.org/projects/7125)
 [![Maintainability](https://qlty.sh/gh/OWASP/projects/cornucopia/maintainability.svg)](https://qlty.sh/gh/OWASP/projects/cornucopia)
 [![Code Coverage](https://qlty.sh/gh/OWASP/projects/cornucopia/coverage.svg)](https://qlty.sh/gh/OWASP/projects/cornucopia)
@@ -16,8 +16,8 @@ It is language, platform and technology agnostic. Visit: https://cornucopia.owas
 * OWASP AppSensor AppSensor_DetectionPoints
 * CAPEC™ Mitre Common Attack Pattern Enumeration and Classification v3.9
 * SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
-* MASTG OWASP Mobile Application Security Testing Guide 1.7
-* MASVS OWASP Mobile Application Security Verification Standard 2.1
+* OWASP MASTG - OWASP Mobile Application Security Testing Guide 1.7
+* OWASP MASVS - OWASP Mobile Application Security Verification Standard 2.1
 
 ## Contributing to Development
 
@@ -101,7 +101,7 @@ The following fonts are used:
 
 #### Card decks:
 
-The "bridge" files are  (2.25 x 3.5" or 57mm x 88.8mm) standard playing cards.
+The "bridge" files are  (2.25 x 3.5" or 56mm x 87mm) standard playing cards.
 The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 
 #### Cases:
@@ -109,12 +109,11 @@ The "tarot" files are (2.75 x 4.75" or 71mm x 121 mm) standard playing cards.
 The "bridge" is 60 x 89.25 mm x 27.15 mm
 The "tarot" is 122.2 x 73.1 x 29.1 mm
 
-the "tarrot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
-the "bridge" box may need some refitting if used.
+the "tarot" box has standard dimensions used by Agile Stationary to print their Cyber Security Cornucopia Edition.
 
 #### Leaflets:
 
-The "bridge" files are  55mm x 87mm
+The "bridge" files are  56mm x 87mm
 The "tarot" files are (2.75 x 4.75")
 
 The "bridge" and "tarot" version is 16-20 page spread depending on in which language you print.

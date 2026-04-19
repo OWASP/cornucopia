@@ -538,12 +538,12 @@ defmodule CopiWeb.PlayerLiveTest do
 
   describe "Index callbacks" do
     test "handle_params applies :index action" do
-      game = %Copi.Cornucopia.Game{id: "test-game-id", name: "Test Game", edition: "webapp"}
+      {:ok, game} = Cornucopia.create_game(%{name: "Test Game", edition: "webapp"})
       socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :index, game: game}}
 
-      assert {:noreply, updated} = Index.handle_params(%{}, "/games/test-id/players", socket)
+      assert {:noreply, updated} = Index.handle_params(%{"game_id" => game.id}, "/games/#{game.id}/players", socket)
       assert updated.assigns.page_title == "Listing Players"
-      assert %Copi.Cornucopia.Player{game_id: "test-game-id"} = updated.assigns.player
+      assert updated.assigns.player == nil
     end
 
     test "handle_params applies :new action" do

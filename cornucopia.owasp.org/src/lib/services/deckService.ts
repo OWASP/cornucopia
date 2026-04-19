@@ -15,13 +15,17 @@ export class DeckService {
     private static cache: object[] = [];
 
     private static readonly latests: Deck[] = [
-        { lang: ['en'], edition: 'mobileapp', version: '1.1' },
-        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' }
+
+        {lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1'},
+        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'},
+        {lang: ['en'], edition: 'companion', version: '1.0'}
     ];
     private static readonly decks: Deck[] = [
-        { edition: 'mobileapp', version: '1.1', lang: ['en'] },
+       { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-        { edition: 'webapp', version: '3.0', lang: ['en', 'ru'] }];
+        { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
+        { edition: 'companion', version: '1.0', lang: ['en'] },
+        { edition: 'dbd', version: '1.0', lang: ['en'] }];
 
     public static hasEdition(edition: string): boolean {
         return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
@@ -51,6 +55,10 @@ export class DeckService {
         let languages: string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
         return languages.length !== 0 ? languages : ['en'];
     }
+    public static getLanguagesForEditionVersion(edition: string, version: string): string[] {
+        const deck = DeckService.decks.find((d) => d.edition === edition && d.version === version);
+        return deck?.lang ?? [];
+    }
     public static getVersions(edition: string): string[] {
         return DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.version);
     }
@@ -59,27 +67,35 @@ export class DeckService {
         return DeckService.cache.find((deck) => deck?.lang == lang && deck?.version == 'latest')?.data || this.getCardData(lang);
     }
 
-    private getCardData(lang: string) {
-        let cards = new Map<string, Card>;
-        const decks = DeckService.latests;
-        for (let i in decks) {
-            cards = new Map([...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang), ...cards]);
-            DeckService.cache.push({ lang: lang, data: cards, version: 'latest' });
-        }
-        return cards;
+
+  private getCardData(lang: string)
+{
+    let cards = new Map<string, Card>;
+    const decks = DeckService.latests;
+
+    for (let i in decks) {
+        cards = new Map([
+            ...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang),
+            ...cards
+        ]);
     }
 
+    DeckService.cache.push({lang: lang, data: cards, version: 'latest'});
+    return cards; 
+} 
     public getCardDataForEditionVersionLang(edition: string, version: string, lang: string) {
+
         const cards = new Map<string, Card>;
 
         let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
 
         if (!FileSystemHelper.hasFile(cardFile)) {
+            console.warn(`Card file not found: ${cardFile}`);
             return cards;
         }
 
         let yamlData = fs.readFileSync(cardFile, 'utf8');
-        let data = yaml.load(yamlData);
+        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
         let base = `data/cards/${edition}-cards-${version}-${lang}/`;
 
         if (!FileSystemHelper.hasDir(base)) {
@@ -111,15 +127,19 @@ export class DeckService {
                 try {
                     file = fs.readFileSync(path, 'utf8');
                 } catch (e) {
-                    console.error(`Error reading file at path: ${path}`, e);
+                    console.error(
+                    `Error reading markdown file for card ${cardObject?.id || "unknown"} at ${path}`,e
+                    );
                     continue;
                 }
                 let parsed = fm(file);
                 cardObject.concept = parsed.body;
+                const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
-                    cardObject.summary = fm(fs.readFileSync(`./${base}${cardFolderPath}/explanation.md`, 'utf8')).body;
+                    cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
                 } catch (e) {
-                    console.error(`Error reading file at path: ./${base}${cardFolderPath}/explanation.md`, e);
+                     console.error(
+                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${explanationPath}`,e);
                     continue;
                 }
 
