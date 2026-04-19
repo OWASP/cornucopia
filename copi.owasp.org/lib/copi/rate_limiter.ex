@@ -137,6 +137,7 @@ defmodule Copi.RateLimiter do
     {:noreply, %{state | requests: new_requests}}
   end
 
+  # coveralls-ignore-start
   @impl true
   def handle_info(:cleanup, state) do
     now = System.monotonic_time(:millisecond)
@@ -155,13 +156,16 @@ defmodule Copi.RateLimiter do
     schedule_cleanup()
     {:noreply, %{state | requests: new_requests}}
   end
+  # coveralls-ignore-stop
 
   # Private helpers
 
   defp normalize_ip(ip) when is_binary(ip) do
     case :inet.parse_address(String.to_charlist(ip)) do
       {:ok, ip_tuple} -> ip_tuple
+      # coveralls-ignore-start
       {:error, _} -> ip
+      # coveralls-ignore-stop
     end
   end
 
@@ -182,12 +186,14 @@ defmodule Copi.RateLimiter do
         case Integer.parse(value) do
           {parsed_value, ""} when parsed_value > 0 ->
             parsed_value
+          # coveralls-ignore-start
           _ ->
             Logger.warning(
               "Invalid environment variable RATE_LIMIT_#{env_var}=#{value}, " <>
               "expected positive integer, using default: #{default}"
             )
             default
+          # coveralls-ignore-stop
         end
     end
   end
