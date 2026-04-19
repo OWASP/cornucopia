@@ -65,7 +65,6 @@ defmodule CopiWeb.GameLive.Show do
     game = socket.assigns.game
 
     cond do
-      # coveralls-ignore-start
       game.started_at ->
         # Game already started, do nothing
         {:noreply, socket}
@@ -76,7 +75,6 @@ defmodule CopiWeb.GameLive.Show do
          socket
          |> put_flash(:error, "Cannot start game: At least 3 players are required to start.")
          |> assign(:game, game)}
-      # coveralls-ignore-stop
 
       true ->
         # Valid player count (3+), proceed with game start

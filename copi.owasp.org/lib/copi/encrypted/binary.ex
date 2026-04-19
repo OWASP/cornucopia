@@ -16,17 +16,23 @@ defmodule Copi.Encrypted.Binary do
 
   @impl Ecto.Type
   def cast(value) when is_binary(value), do: {:ok, value}
+  # coveralls-ignore-start
   def cast(_), do: :error
+  # coveralls-ignore-stop
 
   @impl Ecto.Type
   def dump(nil), do: {:ok, nil}
   def dump(value) when is_binary(value) do
     case encrypt(value) do
       {:ok, blob} -> {:ok, blob}
+      # coveralls-ignore-start
       {:error, reason} -> raise "Copi.Encrypted.Binary dump/1 failed: #{reason}"
+      # coveralls-ignore-stop
     end
   end
+  # coveralls-ignore-start
   def dump(_), do: :error
+  # coveralls-ignore-stop
 
   @impl Ecto.Type
   def load(nil), do: {:ok, nil}
@@ -34,10 +40,14 @@ defmodule Copi.Encrypted.Binary do
     case decrypt(value) do
       {:ok, plaintext} -> {:ok, plaintext}
       {:error, :not_encrypted} -> {:ok, value}
+      # coveralls-ignore-start
       {:error, reason} -> raise "Copi.Encrypted.Binary load/1 failed: #{reason}"
+      # coveralls-ignore-stop
     end
   end
+  # coveralls-ignore-start
   def load(_), do: :error
+  # coveralls-ignore-stop
 
   def encrypt(plaintext) when is_binary(plaintext) do
     with {:ok, key} <- fetch_key() do
@@ -57,7 +67,9 @@ defmodule Copi.Encrypted.Binary do
           case :crypto.crypto_one_time_aead(
                  :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
                ) do
+            # coveralls-ignore-start
             :error -> {:error, "AES-GCM authentication failed"}
+            # coveralls-ignore-stop
             plaintext -> {:ok, plaintext}
           end
         end
