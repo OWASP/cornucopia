@@ -124,6 +124,30 @@ defmodule Copi.RateLimiterTest do
     end
   end
 
+  describe "init with env vars (edge cases)" do
+    test "uses defaults when RATE_LIMIT_* are invalid" do
+      # Set invalid env vars
+      System.put_env("RATE_LIMIT_GAME_CREATION_LIMIT", "invalid")
+      System.put_env("RATE_LIMIT_PLAYER_CREATION_LIMIT", "-10")
+      System.put_env("RATE_LIMIT_CONNECTION_LIMIT", "")
+      System.put_env("RATE_LIMIT_CONNECTION_WINDOW", "not-an-int")
+
+      # Call get_env_config directly or restart RateLimiter.
+      # RateLimiter.init/1 uses them
+      {:ok, state} = RateLimiter.init([])
+
+      assert state.limits.game_creation == 20
+      assert state.limits.player_creation == 60
+      assert state.limits.connection == 133
+      assert state.windows.connection == 1
+
+      System.delete_env("RATE_LIMIT_GAME_CREATION_LIMIT")
+      System.delete_env("RATE_LIMIT_PLAYER_CREATION_LIMIT")
+      System.delete_env("RATE_LIMIT_CONNECTION_LIMIT")
+      System.delete_env("RATE_LIMIT_CONNECTION_WINDOW")
+    end
+  end
+
   describe "get_config/0" do
     test "returns the current configuration" do
       config = RateLimiter.get_config()
