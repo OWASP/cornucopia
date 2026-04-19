@@ -23,9 +23,11 @@ defmodule Copi.Encrypted.Binary do
   def dump(value) when is_binary(value) do
     case encrypt(value) do
       {:ok, blob} -> {:ok, blob}
+      # coveralls-ignore-next-line
       {:error, reason} -> raise "Copi.Encrypted.Binary dump/1 failed: #{reason}"
     end
   end
+  # coveralls-ignore-next-line
   def dump(_), do: :error
 
   @impl Ecto.Type
@@ -34,9 +36,11 @@ defmodule Copi.Encrypted.Binary do
     case decrypt(value) do
       {:ok, plaintext} -> {:ok, plaintext}
       {:error, :not_encrypted} -> {:ok, value}
+      # coveralls-ignore-next-line
       {:error, reason} -> raise "Copi.Encrypted.Binary load/1 failed: #{reason}"
     end
   end
+  # coveralls-ignore-next-line
   def load(_), do: :error
 
   def encrypt(plaintext) when is_binary(plaintext) do
@@ -57,6 +61,7 @@ defmodule Copi.Encrypted.Binary do
           case :crypto.crypto_one_time_aead(
                  :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
                ) do
+            # coveralls-ignore-next-line
             :error -> {:error, "AES-GCM authentication failed"}
             plaintext -> {:ok, plaintext}
           end

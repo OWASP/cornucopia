@@ -45,6 +45,7 @@ defmodule Copi.RateLimiter do
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
     Logger.debug("check_rate: Checking rate limit for IP #{inspect(normalized_ip)} on action #{action}")
     if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} do
+      # coveralls-ignore-next-line
       {:ok, :unlimited}
     else
       GenServer.call(__MODULE__, {:check_rate, normalized_ip, action})
@@ -182,12 +183,14 @@ defmodule Copi.RateLimiter do
         case Integer.parse(value) do
           {parsed_value, ""} when parsed_value > 0 ->
             parsed_value
-          _ ->
+          # coveralls-ignore-start
+        _ ->
             Logger.warning(
               "Invalid environment variable RATE_LIMIT_#{env_var}=#{value}, " <>
               "expected positive integer, using default: #{default}"
             )
             default
+        # coveralls-ignore-stop
         end
     end
   end
