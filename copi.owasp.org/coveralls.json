@@ -1,7 +1,7 @@
 {
     "skip_files": [
         "lib/copi/migrations/",
-        "test/support/",
+        "test/support/"
 
     ],
     "coverage_options": {
