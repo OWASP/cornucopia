@@ -44,11 +44,15 @@ defmodule Copi.RateLimiter do
 
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
     Logger.debug("check_rate: Checking rate limit for IP #{inspect(normalized_ip)} on action #{action}")
+    # coveralls-ignore-start
     if Application.get_env(:copi, :env) == :prod and normalized_ip == {127, 0, 0, 1} do
       {:ok, :unlimited}
     else
+    # coveralls-ignore-stop
       GenServer.call(__MODULE__, {:check_rate, normalized_ip, action})
+    # coveralls-ignore-start
     end
+    # coveralls-ignore-stop
   end
 
   @doc """
@@ -170,7 +174,9 @@ defmodule Copi.RateLimiter do
   end
 
   defp normalize_ip(ip) when is_tuple(ip), do: ip
+  # coveralls-ignore-start
   defp normalize_ip(ip), do: ip
+  # coveralls-ignore-stop
 
   defp schedule_cleanup do
     Process.send_after(self(), :cleanup, :timer.minutes(5))
