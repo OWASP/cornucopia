@@ -13,67 +13,67 @@ suits:
     id: LLM2
     value: 2
     url: https://cornucopia.owasp.org/cards/LLM2
-    desc: 
+    desc: "Dave can exploit overreliance on LLM outputs where critical human oversight is missing, leading to security failures or incorrect decisions based on hallucinations or flawed reasoning"
   -
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
-    desc: 
+    desc: "Sarah can override or manipulate system prompts or safety instructions through crafted input, causing the model to ignore its intended constraints or perform unauthorized actions"
   -
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
-    desc: 
+    desc: "David can cause the model to disclose sensitive information from its training data, system prompts, configuration, or other users' context due to insufficient output filtering or prompt leakage"
   -
     id: LLM5
     value: 5
     url: https://cornucopia.owasp.org/cards/LLM5
-    desc: 
+    desc: "Roy can escalate privileges or access other users' data and sessions due to weak authentication, authorization, or improper session isolation in multi-tenant LLM systems"
   -
     id: LLM6
     value: 6
     url: https://cornucopia.owasp.org/cards/LLM6
-    desc: 
+    desc: "Tyrell can poison training or fine-tuning datasets or the fine-tuning process itself, introducing backdoors or malicious behavior that can later be triggered"
   -
     id: LLM7
     value: 7
     url: https://cornucopia.owasp.org/cards/LLM7
-    desc: 
+    desc: "Andersen can manipulate retrieval knowledge bases, vector databases, or RAG sources so the model retrieves and presents false, biased, or malicious information as facts"
   -
     id: LLM8
     value: 8
     url: https://cornucopia.owasp.org/cards/LLM8
-    desc: 
+    desc: "Samantha can exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries, leading to model DoS"
   -
     id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
-    desc: 
+    desc: "Rossum can abuse insecure plugin or integration designs to access sensitive data, bypass authentication, or execute unauthorized operations via the LLM's interface"
   -
     id: LLMX
     value: X
     url: https://cornucopia.owasp.org/cards/LLMX
-    desc: 
+    desc: "Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration"
   -
     id: LLMJ
     value: J
     url: https://cornucopia.owasp.org/cards/LLMJ
-    desc: 
+    desc: "Kyle can exploit insecure handling of model outputs that are used directly in downstream systems, enabling injection attacks, remote code execution, or unauthorized actions"
   -
     id: LLMQ
     value: Q
     url: https://cornucopia.owasp.org/cards/LLMQ
-    desc: 
+    desc: "Ripley can introduce compromised third-party models, embeddings, or malicious ML components into the supply chain, leading to hidden vulnerabilities or data theft"
   -
     id: LLMK
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
-    desc: 
+    desc: "Ava can exploit excessive agency or autonomy in AI agents with tool access to perform unauthorized or high-risk actions because of missing human-in-the-loop approval"
   -
     id: LLMA
     value: A
     url: https://cornucopia.owasp.org/cards/LLMA
-    desc: You have invented a new attack against LLM
+    desc: "You have invented a new attack against AI & LLM Security"
     misc:
 -
   id: CLD
@@ -88,7 +88,7 @@ suits:
     id: CLD3
     value: 3
     url: https://cornucopia.owasp.org/cards/CLD3
-    desc: "Roupe can discover a publicly accessible cloud storage bucket and downloaded sensitive customer data directly from the internet"
+    desc: "Roupe can discover a publicly accessible cloud storage and download sensitive customer data directly from the internet"
   -
     id: CLD4
     value: 4
@@ -153,62 +153,62 @@ suits:
     id: FRE2
     value: 2
     url: https://cornucopia.owasp.org/cards/FRE2
-    desc: The attacker bypasses client-side validation and sends malformed or malicious input directly to backend APIs, triggering logic flaws, human errors, and usability issues.
+    desc: Marcus bypasses client-side validation and sends malformed or malicious input directly to backend APIs, triggering logic flaws, human errors, and usability issues.
   -
     id: FRE3
     value: 3
     url: https://cornucopia.owasp.org/cards/FRE3
-    desc: The attacker can access sensitive or confidential information because it's not removed after logout or when the client session ends, or should have ended.
+    desc: Lena can access sensitive or confidential information because it's not removed after logout or when the client session ends, or should have ended.
   -
     id: FRE4
     value: 4
     url: https://cornucopia.owasp.org/cards/FRE4
-    desc: The attacker injects JavaScript through user-controlled data that is written into the DOM, executing arbitrary code in the victim’s browser.
+    desc: James injects JavaScript through user-controlled data that is written into the DOM, executing arbitrary code in the victim’s browser.
   -
     id: FRE5
     value: 5
     url: https://cornucopia.owasp.org/cards/FRE5
-    desc: The attacker compromises or replaces a third-party script loaded from a CDN and runs malicious code in every user’s browser.
+    desc: Victor compromises or replaces a third-party script loaded from a CDN and runs malicious code in every user’s browser.
   -
     id: FRE6
     value: 6
     url: https://cornucopia.owasp.org/cards/FRE6
-    desc: The attacker exploits malicious JavaScript to steal authentication tokens and hijack user sessions, gaining access to accounts without credentials.
+    desc: Olga exploits malicious JavaScript to steal authentication tokens and hijack user sessions, gaining access to accounts without credentials.
   -
     id: FRE7
     value: 7
     url: https://cornucopia.owasp.org/cards/FRE7
-    desc: The attacker exploits misconfigured CORS, unsafe postMessage handling, or other client-side security vulnerabilities to read or manipulate sensitive frontend data from a malicious origin.
+    desc: Carlos exploits misconfigured CORS, unsafe postMessage handling, or other client-side security vulnerabilities to read or manipulate sensitive frontend data from a malicious origin.
   -
     id: FRE8
     value: 8
     url: https://cornucopia.owasp.org/cards/FRE8
-    desc: The attacker tampers with frontend JavaScript to unlock restricted features or access data that should require server-side authorization.
+    desc: Nathan tampers with frontend JavaScript to unlock restricted features or access data that should require server-side authorization.
   -
     id: FRE9
     value: 9
     url: https://cornucopia.owasp.org/cards/FRE9
-    desc: The attacker reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions.
+    desc: Sophia reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions.
   -
     id: FREX
     value: X
     url: https://cornucopia.owasp.org/cards/FREX
-    desc: The attacker embeds the application in a hidden or disguised frame to trick users into clicking UI elements that perform sensitive actions.
+    desc: Piotr embeds the application in a hidden or disguised frame to trick users into clicking UI elements that perform sensitive actions.
   -
     id: FREJ
     value: J
     url: https://cornucopia.owasp.org/cards/FREJ
-    desc: The attacker uses a malicious or over-privileged browser extension to read the DOM, steal tokens, and invoke internal frontend APIs.
+    desc: Elena uses a malicious or over-privileged browser extension to read the DOM, steal tokens, and invoke internal frontend APIs.
   -
     id: FREQ
     value: Q
     url: https://cornucopia.owasp.org/cards/FREQ
-    desc: The attacker injects persistent malicious code into frontend assets, allowing long-term control over all users’ browsers until the application is redeployed.
+    desc: Kim injects persistent malicious code into frontend assets, allowing long-term control over all users’ browsers until the application is redeployed.
   -
     id: FREK
     value: K
     url: https://cornucopia.owasp.org/cards/FREK
-    desc: The attacker utilizes a JavaScript application to manage and control users' systems, tenants, and data.
+    desc: Darius utilizes a JavaScript application to manage and control users' systems, tenants, and data.
   -
     id: FREA
     value: A
@@ -284,76 +284,6 @@ suits:
     value: A
     url: https://cornucopia.owasp.org/cards/DVOA
     desc: You have invented a new attack against DevOps
-    misc: 
--
-  id: SE
-  name: Social Engineering
-  cards:
-  -
-    id: SE2
-    value: 2
-    url: https://cornucopia.owasp.org/cards/SE2
-    desc: 
-  -
-    id: SE3
-    value: 3
-    url: https://cornucopia.owasp.org/cards/SE3
-    desc: 
-  -
-    id: SE4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/SE4
-    desc: 
-  -
-    id: SE5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/SE5
-    desc: 
-  -
-    id: SE6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/SE6
-    desc: 
-  -
-    id: SE7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/SE7
-    desc: 
-  -
-    id: SE8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/SE8
-    desc: 
-  -
-    id: SE9
-    value: 9
-    url: https://cornucopia.owasp.org/cards/SE9
-    desc: 
-  -
-    id: SEX
-    value: X
-    url: https://cornucopia.owasp.org/cards/SEX
-    desc: 
-  -
-    id: SEJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/SEJ
-    desc: 
-  -
-    id: SEQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/SEQ
-    desc: 
-  -
-    id: SEK
-    value: K
-    url: https://cornucopia.owasp.org/cards/SEK
-    desc: 
-  -
-    id: SEA
-    value: A
-    url: https://cornucopia.owasp.org/cards/SEA
-    desc: You have invented a new attack against Social Engineering
     misc: 
 -
   id: BOT

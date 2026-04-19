@@ -159,6 +159,7 @@ class TranslationChecker:
         lang_names = {
             "es": "Spanish",
             "fr": "French",
+            "hi": "Hindi",
             "hu": "Hungarian",
             "it": "Italian",
             "nl": "Dutch",

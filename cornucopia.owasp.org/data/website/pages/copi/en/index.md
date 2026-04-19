@@ -119,6 +119,16 @@ Then deploy the app from `./copi.owasp.org`
     fly scale count 2 --app <app name>
 ```
 
+### Setting up the encryption key on Fly.io
+
+Generate a secure encryption key:
+
+    openssl rand -base64 32
+
+Set it as a secret environment variable on Fly.io:
+
+    fly secrets set COPI_ENCRYPTION_KEY=<your-generated-key> --app <app name>
+
 ### Fly setup custom domain name
 
 ```bash
@@ -160,6 +170,16 @@ heroku config:set SECRET_KEY_BASE=$(mix phx.gen.secret)
 heroku config:set POOL_SIZE=18
 heroku config:set PROJECT_PATH=copi.owasp.org # points to the subdirectory in
 ```
+
+### Setting up the encryption key on Heroku
+
+Generate a secure encryption key:
+
+    openssl rand -base64 32
+
+Set it as an environment variable on Heroku:
+
+    heroku config:set COPI_ENCRYPTION_KEY=<your-generated-key>
 
 ### Heroku deploy
 
@@ -221,7 +241,7 @@ You should avoid using your own name or the name of a company or project when cr
 
 #### What can go wrong?
 
-When hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory. The data on copi.owasp.org is encrypted at rest, but if you host the game engine yourself, you need to make sure that the data is encrypted at rest as well. If you don't, an attacker that get hold of the database may be able to see the names of the players and games, which may contain sensitive information. Currently we do not use application-side encryption. Even if the data is encrypted at rest, an attacker that get hold of the database may be able to see the names of the players and games as well.
+When hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory. The data on copi.owasp.org is encrypted at rest, but if you host the game engine yourself, you need to make sure that the data is encrypted at rest as well, since the configuration does not apply encryption by default. If you don't, an attacker that get hold of the database may be able to see the names of the players and games, which may contain sensitive information. Currently, we do both application-side and server-side encryption. Please make sure you properly configure encryption as outlined in [SECURITY.md](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md).
 
 #### What are we going to do about it?
 

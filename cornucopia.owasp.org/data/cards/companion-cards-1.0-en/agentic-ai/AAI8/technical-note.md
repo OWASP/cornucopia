@@ -1,0 +1,1 @@
+This card is about insufficient sandboxing and input validation at the tool execution layer, enabling code or command injection. See AAI9 for agents that modify system configuration due to excessive autonomy rather than sandbox escape, and AAI2 for prompt-level injection that redirects the agent's intent.

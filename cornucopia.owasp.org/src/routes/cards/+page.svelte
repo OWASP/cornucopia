@@ -9,6 +9,7 @@
     import { readLang, readTranslation } from '$lib/stores/stores';
     import type { Suit } from "../../domain/suit/suit.js";
     import { SvelteMap } from 'svelte/reactivity';
+    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION } from "$lib/services/deckServiceConsts";
 
     interface Props {
         data: PageData;
@@ -23,10 +24,6 @@
     let suits = $derived(data.suits);
     let mappingData = $derived(data.mappingData);
 
-    //TODO move these constants to a more sensible location
-    const VERSION_WEBAPP = "webapp"
-    const VERSION_MOBILEAPP = "mobileapp"
-    const VERSION_COMPANION = "companion";
 
     let mobileappSuits = $derived.by(() => {
         const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);

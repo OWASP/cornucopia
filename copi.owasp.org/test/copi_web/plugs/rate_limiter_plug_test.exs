@@ -1,6 +1,7 @@
 defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   use ExUnit.Case, async: false
-  use Plug.Test
+  import Plug.Test
+  import Plug.Conn
 
   alias CopiWeb.Plugs.RateLimiterPlug
   alias Copi.RateLimiter
@@ -71,13 +72,19 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   end
 
   test "skips rate limiting when no IP info is available" do
-    # No headers, no remote_ip
+    # Force remote_ip to nil so IPHelper.get_ip_source returns {:none, nil}
     conn =
       conn(:get, "/")
+      |> Map.put(:remote_ip, nil)
       |> RateLimiterPlug.call([])
 
     assert conn.status != 429
     refute conn.halted
+  end
+
+  test "init/1 returns opts unchanged" do
+    assert RateLimiterPlug.init([]) == []
+    assert RateLimiterPlug.init(key: :value) == [key: :value]
   end
 
   test "skips rate limiting when remote_ip is explicitly nil" do
