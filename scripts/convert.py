@@ -659,7 +659,7 @@ def get_docx_document(docx_file: str) -> Optional[Any]:
         return docx.Document(docx_file)
     else:
         logging.error("Could not find file at: %s", str(docx_file))
-        return None
+        return docx.Document()
 
 
 def get_files_from_of_type(path: str, ext: str) -> List[str]:
