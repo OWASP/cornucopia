@@ -547,19 +547,19 @@ defmodule CopiWeb.PlayerLiveTest do
     end
 
     test "handle_params applies :new action" do
-      game = %Copi.Cornucopia.Game{id: "test-game-id", name: "Test Game", edition: "webapp"}
+      {:ok, game} = Cornucopia.create_game(%{name: "Test Game", edition: "webapp"})
       socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}, live_action: :new, game: game}}
 
       assert {:noreply, updated} =
                Index.handle_params(
-                 %{"game_id" => "test-game-id"},
-                 "/games/test-game-id/players/new",
+                 %{"game_id" => game.id},
+                 "/games/#{game.id}/players/new",
                  socket
                )
 
       assert updated.assigns.page_title =~ "Test Game"
       assert %Copi.Cornucopia.Player{} = updated.assigns.player
-      assert updated.assigns.player.game_id == "test-game-id"
+      assert updated.assigns.player.game_id == game.id
     end
   end
 end

@@ -131,27 +131,38 @@ defmodule CopiWeb.PlayerLive.Show do
     # Safely parse dealt_card_id to prevent crashes from invalid input
     case Integer.parse(dealt_card_id) do
       {dealt_card_id_int, _} ->
-        # Use atomic delete to avoid TOCTOU race condition
-        # Try to delete first - if none exists, this is a no-op
-        case Copi.Repo.delete_all(
-          from v in Vote,
-          where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card_id_int
-        ) do
-          {1, _} ->
-            Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
+        game_card_ids =
+          game.players
+          |> Enum.flat_map(fn p -> p.dealt_cards end)
+          |> Enum.map(fn dc -> dc.id end)
 
-          {0, _} ->
-            # No vote existed, so insert one
-            Copi.Repo.insert(
-              %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
-              on_conflict: :nothing,
-              conflict_target: [:player_id, :dealt_card_id]
-            )
-            Logger.debug("Vote insert attempted for player #{player.id} on card #{dealt_card_id_int}")
+        if dealt_card_id_int in game_card_ids do
+          # Use atomic delete to avoid TOCTOU race condition
+          # Try to delete first - if none exists, this is a no-op
+          case Copi.Repo.delete_all(
+            from v in Vote,
+            where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card_id_int
+          ) do
+            {1, _} ->
+              Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
+
+            {0, _} ->
+              # No vote existed, so insert one
+              Copi.Repo.insert(
+                %Vote{dealt_card_id: dealt_card_id_int, player_id: player.id},
+                on_conflict: :nothing,
+                conflict_target: [:player_id, :dealt_card_id]
+              )
+              Logger.debug("Vote insert attempted for player #{player.id} on card #{dealt_card_id_int}")
+          end
+
+          {:ok, updated_game} = Game.find(game.id)
+          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+          {:noreply, assign(socket, :game, updated_game)}
+        else
+          Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+          {:noreply, socket |> put_flash(:error, "Invalid card selection")}
         end
-        {:ok, updated_game} = Game.find(game.id)
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-        {:noreply, assign(socket, :game, updated_game)}
 
       :error ->
         Logger.warning("Invalid dealt_card_id: #{inspect(dealt_card_id)}")

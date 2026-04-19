@@ -138,6 +138,8 @@ defmodule CopiWeb.GameLive.ShowTest do
   end
 
   describe "Show helper functions" do
+    setup [:create_game]
+
     test "topic returns expected pubsub topic" do
       assert Show.topic("abc123") == "game:abc123"
     end
