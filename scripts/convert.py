@@ -653,7 +653,7 @@ def get_document_paragraphs(doc: Any) -> List[Any]:
 
 def get_docx_document(docx_file: str) -> Optional[Any]:
     """Open the file and return the docx document, or None if the file is not found."""
-    import docx  # type: ignore[import-untyped]
+    import docx
 
     if os.path.isfile(docx_file):
         return docx.Document(docx_file)
