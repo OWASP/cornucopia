@@ -12,7 +12,7 @@ defmodule CopiWeb.HealthController do
         # coveralls-ignore-start
         {:error, _} ->
           send_resp(conn, :service_unavailable, "not ready\n")
-        # coveralls-ignore-end
+        # coveralls-ignore-stop
       end
 
       # coveralls-ignore-start
@@ -24,7 +24,7 @@ defmodule CopiWeb.HealthController do
       :exit, reason ->
         Logger.error("Health check exit: #{inspect(reason)}")
         send_resp(conn, :service_unavailable, "not ready\n")
-      # coveralls-ignore-end
+      # coveralls-ignore-stop
     end
   end
 end

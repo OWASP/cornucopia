@@ -51,7 +51,7 @@ defmodule CopiWeb.PlayerLive.Index do
     |> assign(:player, Cornucopia.get_player!(id))
   end
 
-  # coveralls-ignore-end
+  # coveralls-ignore-stop
   defp apply_action(socket, :new, %{"game_id" => game_id}) do
     game = socket.assigns.game
     socket
