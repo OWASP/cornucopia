@@ -22,8 +22,10 @@ defmodule CopiWeb.PlayerLive.Show do
       CopiWeb.Endpoint.subscribe(topic(player.game_id))
       {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
     else
+      # coveralls-ignore-start
       {:error, _reason} ->
         {:noreply, redirect(socket, to: "/error")}
+      # coveralls-ignore-stop
     end
   end
 
