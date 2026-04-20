@@ -19,4 +19,9 @@ defmodule Copi.ApplicationTest do
     assert Application.started_applications()
            |> Enum.any?(fn {app, _, _} -> app == :copi end)
   end
+
+  test "config_change handles updates successfully" do
+    # This evaluates the application config update hook natively.
+    assert :ok = Copi.Application.config_change([foo: :bar], [foo: :baz], [])
+  end
 end

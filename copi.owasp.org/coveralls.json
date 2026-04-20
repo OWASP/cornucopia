@@ -1,22 +1,8 @@
 {
     "skip_files": [
         "lib/copi/migrations/",
-        "lib/copi.ex",
-        "lib/copi/release.ex",
-        "lib/copi/application.ex",
-        "lib/copi/encrypted/binary.ex",
-        "lib/copi/ip_helper.ex",
-        "lib/copi/rate_limiter.ex",
-        "lib/copi_web/channels/user_socket.ex",
-        "lib/copi_web/controllers/page_html.ex",
-        "lib/copi_web/controllers/error_html.ex",
-        "lib/copi_web/controllers/error_json.ex",
-        "lib/copi_web/controllers/health_controller.ex",
-        "lib/copi_web/components/layouts.ex",
-        "lib/copi_web/components/core_components/buttons.ex",
-        "lib/copi_web/components/core_components/headers.ex",
-        "test/support/",
-        "lib/copi_web.ex"
+        "test/support/"
+
     ],
     "coverage_options": {
         "treat_no_relevant_lines_as_covered": true,
