@@ -14,28 +14,16 @@ defmodule CopiWeb.ApiController do
             Enum.find(player.dealt_cards, fn dealt_card -> dealt_card.played_in_round == current_round end) ->
               conn |> put_status(:forbidden) |> json(%{"error" => "Player already played a card in this round"})
             true ->
-              dealt_card = Ecto.Changeset.change dealt_card, played_in_round: current_round
-              case Copi.Repo.update dealt_card do
-                {:ok, dealt_card} ->
-                  with {:ok, updated_game} <- Game.find(game.id) do
-                    CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
-                  else
-                    # coveralls-ignore-start
-                    {:error, _reason} ->
-                      conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not find updated game"})
-                    # coveralls-ignore-stop
-                  end
-                  conn |> json(%{"id" => dealt_card.id})
-              # coveralls-ignore-start
-              {:error, _changeset} ->
-                conn |> put_status(:internal_server_error) |> json(%{"error" => "Could not update dealt card"})
-              # coveralls-ignore-stop
-              end
+              dealt_card = Ecto.Changeset.change(dealt_card, played_in_round: current_round)
+              dealt_card = Copi.Repo.update!(dealt_card)
+              
+              {:ok, updated_game} = Game.find(game.id)
+              CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
+              
+              conn |> json(%{"id" => dealt_card.id})
           end
         else
-          # coveralls-ignore-start
           conn |> put_status(:not_found) |> json(%{"error" => "Could not find player and dealt card"})
-          # coveralls-ignore-stop
         end
       else
         conn |> put_status(:not_found) |> json(%{"error" => "Player not found in this game"})

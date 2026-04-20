@@ -16,23 +16,14 @@ defmodule Copi.Encrypted.Binary do
 
   @impl Ecto.Type
   def cast(value) when is_binary(value), do: {:ok, value}
-  # coveralls-ignore-start
   def cast(_), do: :error
-  # coveralls-ignore-stop
 
   @impl Ecto.Type
   def dump(nil), do: {:ok, nil}
   def dump(value) when is_binary(value) do
-    case encrypt(value) do
-      {:ok, blob} -> {:ok, blob}
-      # coveralls-ignore-start
-      {:error, reason} -> raise "Copi.Encrypted.Binary dump/1 failed: #{reason}"
-      # coveralls-ignore-stop
-    end
+    encrypt(value)
   end
-  # coveralls-ignore-start
   def dump(_), do: :error
-  # coveralls-ignore-stop
 
   @impl Ecto.Type
   def load(nil), do: {:ok, nil}
@@ -40,38 +31,30 @@ defmodule Copi.Encrypted.Binary do
     case decrypt(value) do
       {:ok, plaintext} -> {:ok, plaintext}
       {:error, :not_encrypted} -> {:ok, value}
-      # coveralls-ignore-start
       {:error, reason} -> raise "Copi.Encrypted.Binary load/1 failed: #{reason}"
-      # coveralls-ignore-stop
     end
   end
-  # coveralls-ignore-start
   def load(_), do: :error
-  # coveralls-ignore-stop
 
   def encrypt(plaintext) when is_binary(plaintext) do
-    with {:ok, key} <- fetch_key() do
-      iv = :crypto.strong_rand_bytes(@iv_bytes)
-      {ciphertext, tag} =
-        :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, plaintext, @magic_prefix, true)
-      blob = @magic_prefix <> iv <> tag <> ciphertext
-      {:ok, blob}
-    end
+    {:ok, key} = fetch_key()
+    iv = :crypto.strong_rand_bytes(@iv_bytes)
+    {ciphertext, tag} =
+      :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, plaintext, @magic_prefix, true)
+    blob = @magic_prefix <> iv <> tag <> ciphertext
+    {:ok, blob}
   end
 
   def decrypt(blob) when is_binary(blob) do
     case blob do
       <<@magic_prefix, iv::binary-size(@iv_bytes), tag::binary-size(@tag_bytes),
         ciphertext::binary>> ->
-        with {:ok, key} <- fetch_key() do
-          case :crypto.crypto_one_time_aead(
-                 :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
-               ) do
-            # coveralls-ignore-start
-            :error -> {:error, "AES-GCM authentication failed"}
-            # coveralls-ignore-stop
-            plaintext -> {:ok, plaintext}
-          end
+        {:ok, key} = fetch_key()
+        case :crypto.crypto_one_time_aead(
+               :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
+             ) do
+          :error -> {:error, "AES-GCM authentication failed"}
+          plaintext -> {:ok, plaintext}
         end
       _ ->
         {:error, :not_encrypted}
