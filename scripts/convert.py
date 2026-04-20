@@ -1313,12 +1313,6 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
             if new_text != el.text:
                 el.text = new_text
                 modified = True
-        for child in el:
-            if child.tail:
-                new_tail = get_replacement_value_from_dict(child.tail, replacement_values)
-                if new_tail != child.tail:
-                    child.tail = new_tail
-                    modified = True
 
     if modified:
         try:
