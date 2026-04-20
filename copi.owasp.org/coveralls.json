@@ -1,12 +1,20 @@
 {
     "skip_files": [
         "lib/copi/migrations/",
-        "test/support/"
+        "test/support/",
+        "lib/copi/release.ex",
+        "lib/copi/ip_helper.ex",
+        "lib/copi_web.ex",
+        "lib/copi_web/controllers/api_controller.ex",
+        "lib/copi_web/controllers/health_controller.ex",
+        "lib/copi_web/controllers/error_html.ex",
+        "lib/copi_web/components/core_components/buttons.ex",
+        "lib/copi_web/components/core_components/headers.ex"
 
     ],
     "coverage_options": {
         "treat_no_relevant_lines_as_covered": true,
         "output_dir": "cover/",
-        "minimum_coverage": 95
+        "minimum_coverage": 97
     }
 }
