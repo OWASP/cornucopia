@@ -14,8 +14,8 @@ defmodule CopiWeb.ApiController do
             Enum.find(player.dealt_cards, fn dealt_card -> dealt_card.played_in_round == current_round end) ->
               conn |> put_status(:forbidden) |> json(%{"error" => "Player already played a card in this round"})
             true ->
-              dealt_card = Ecto.Changeset.change dealt_card, played_in_round: current_round
-              case Copi.Repo.update dealt_card do
+              dealt_card = Ecto.Changeset.change(dealt_card, played_in_round: current_round)
+              case Copi.Repo.update(dealt_card) do
                 {:ok, dealt_card} ->
                   with {:ok, updated_game} <- Game.find(game.id) do
                     CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)

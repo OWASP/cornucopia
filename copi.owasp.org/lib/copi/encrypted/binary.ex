@@ -44,13 +44,12 @@ defmodule Copi.Encrypted.Binary do
   def load(_), do: :error
 
   def encrypt(plaintext) when is_binary(plaintext) do
-    with {:ok, key} <- fetch_key() do
-      iv = :crypto.strong_rand_bytes(@iv_bytes)
-      {ciphertext, tag} =
-        :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, plaintext, @magic_prefix, true)
-      blob = @magic_prefix <> iv <> tag <> ciphertext
-      {:ok, blob}
-    end
+    {:ok, key} = fetch_key()
+    iv = :crypto.strong_rand_bytes(@iv_bytes)
+    {ciphertext, tag} =
+      :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, plaintext, @magic_prefix, true)
+    blob = @magic_prefix <> iv <> tag <> ciphertext
+    {:ok, blob}
   end
 
   def decrypt(blob) when is_binary(blob) do
