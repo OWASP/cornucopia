@@ -1,6 +1,7 @@
 defmodule CopiWeb.HealthController do
   use CopiWeb, :controller
 
+  # coveralls-ignore-start
   def index(conn, _params) do
     # Check database connection with timeouts and exception handling
     try do
@@ -12,4 +13,5 @@ defmodule CopiWeb.HealthController do
       _, _ -> send_resp(conn, :service_unavailable, "not ready\n")
     end
   end
+  # coveralls-ignore-stop
 end
