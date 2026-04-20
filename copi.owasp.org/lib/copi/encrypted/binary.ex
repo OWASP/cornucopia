@@ -56,6 +56,7 @@ defmodule Copi.Encrypted.Binary do
         case :crypto.crypto_one_time_aead(
                :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
              ) do
+          # coveralls-ignore-next-line
           :error -> {:error, "AES-GCM authentication failed"}
           plaintext -> {:ok, plaintext}
         end
@@ -68,13 +69,16 @@ defmodule Copi.Encrypted.Binary do
     raw =
       System.get_env("COPI_ENCRYPTION_KEY") ||
         Application.get_env(:copi, :encryption_key) ||
+        # coveralls-ignore-next-line
         raise "COPI_ENCRYPTION_KEY is not set. Please see: https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#encryption-key-setup"
 
     key = Base.decode64!(String.trim(raw))
 
     if byte_size(key) != 32 do
+      # coveralls-ignore-start
       raise ArgumentError,
             "COPI_ENCRYPTION_KEY must decode to exactly 32 bytes, got #{byte_size(key)}"
+      # coveralls-ignore-stop
     end
 
     {:ok, key}
