@@ -68,6 +68,24 @@ describe('MappingController tests', () => {
         const webAppMapping2 = controller2.getWebAppCardMappings("non-existing-card");
         expect(webAppMapping2).toBeDefined();
         expect(Object.keys(webAppMapping2).length).toBe(0);
+
+        const mappingDataWithCards = {
+            suits: [
+                {
+                    name: "Test Suit",
+                    cards: [
+                        {
+                            id: "existing-card",
+                            owasp_asvs: ["1.1"]
+                        }
+                    ]
+                }
+            ]
+        };
+        const controller3 = new MappingController(mappingDataWithCards);
+        const webAppMapping3 = controller3.getWebAppCardMappings("non-existing-card");
+        expect(webAppMapping3).toBeDefined();
+        expect(Object.keys(webAppMapping3).length).toBe(0);
     });
 
     it("should return empty mapping when card id does not match existing cards.", async () => {

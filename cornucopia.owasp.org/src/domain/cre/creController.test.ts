@@ -294,6 +294,28 @@ describe('CreController tests', () => {
             expect(result.links[0].document.id).toBe('CRE-SINGLE');
         });
 
+        it('should handle falsy owasp_asvs value without throwing', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue({
+                owasp_cre: {
+                    owasp_asvs: false
+                }
+            });
+
+            const mockCard: Card = {
+                id: 'card-falsy-cre',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '6',
+                lang: 'en'
+            } as unknown as Card;
+
+            const result = creController.generateDoc(mockCard);
+            expect(result.links).toHaveLength(0);
+        });
+
         it('should construct correct URLs', () => {
             const mockCard = {
                 id: 'card-6',

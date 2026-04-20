@@ -2,21 +2,17 @@ FROM node:iron-alpine3.21@sha256:957dbf2afb4f22d9e2b94b981e242cbb796965cd3d9cc02
 
 WORKDIR /app
 
-# Install dependencies
-# V15.2: Copy the lockfile before install so dependency resolution is deterministic
-# and Docker can safely cache the dependency layer.
-COPY cornucopia.owasp.org/package.json ./
-COPY cornucopia.owasp.org/pnpm-lock.yaml ./
+# Install dependencies (lockfile copied for deterministic builds)
+COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm@v10.3.0 --save-exact
 RUN pnpm install --frozen-lockfile
 
-# Followed copilot suggestion 2: Copy source data AFTER dependency install
-WORKDIR /source
-COPY source .
+# Copy source data needed for SvelteKit prerendering (card YAML files)
+# The workflow copies the repo-root source/ directory into the build context
+COPY source /source
 
-WORKDIR /app
 # Copy the frontend application code
-COPY cornucopia.owasp.org .
+COPY . .
 
 # Build the application
 ENV NODE_OPTIONS="--max-old-space-size=4096"
@@ -29,10 +25,8 @@ FROM nginx:alpine3.21@sha256:b471bb609adc83f73c2d95148cf1bd683408739a3c09c0afc66
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # Copy custom Nginx configuration
-COPY cornucopia.owasp.org/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-
-# Added a comment to push to repo webhook
