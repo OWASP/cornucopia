@@ -427,8 +427,8 @@ suits:
     id: DVO2
     value: 2
     url: https://cornucopia.owasp.org/cards/DVO2
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ R, T ]
+    stride_print: [ "Repudiation", "Tampering" ]
     capec: [ CAPEC-571, CAPEC-268 ]
     owasp_samm: [ O-IM-A ] 
     owasp_dsomm: [ IG-L ]
@@ -436,8 +436,8 @@ suits:
     id: DVO3
     value: 3
     url: https://cornucopia.owasp.org/cards/DVO3
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ T, E ]
+    stride_print: [ "Tampering", "Elevation of Privilege" ]
     capec: [ CAPEC-554, CAPEC-17 ]
     owasp_samm: [ O-EM-A ]
     owasp_dsomm: [ I-IH, I-AH ]
@@ -445,8 +445,8 @@ suits:
     id: DVO4
     value: 4
     url: https://cornucopia.owasp.org/cards/DVO4
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ T, I, D ]
+    stride_print: [ "Tampering", "Information Disclosure", "Denial of Service" ]
     capec: [ CAPEC-180 ]
     owasp_samm: [ O-OM-A ]
     owasp_dsomm: [ I-IH ]
@@ -454,8 +454,8 @@ suits:
     id: DVO5
     value: 5
     url: https://cornucopia.owasp.org/cards/DVO5
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     capec: [ CAPEC-480, CAPEC-233 ]
     owasp_samm: [ V-AA, O-EM-A ]
     owasp_dsomm: [ I-IH, TV-DDI ]
@@ -463,8 +463,8 @@ suits:
     id: DVO6
     value: 6
     url: https://cornucopia.owasp.org/cards/DVO6
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ D ]
+    stride_print: [ "Denial of Service" ]
     capec: []
     owasp_samm: [ O-OM-A, O-IM-B-2 ]
     owasp_dsomm: [ CO-P, I-IH ]
@@ -472,8 +472,8 @@ suits:
     id: DVO7
     value: 7
     url: https://cornucopia.owasp.org/cards/DVO7
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
     capec: [ CAPEC-444, CAPEC-669, CAPEC-536 ]
     owasp_samm: [ I-SD-A ]
     owasp_dsomm: [ BD-D ]
@@ -481,8 +481,8 @@ suits:
     id: DVO8
     value: 8
     url: https://cornucopia.owasp.org/cards/DVO8
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
     capec: [ CAPEC-444, CAPEC-669, CAPEC-536, CAPEC-473 ]
     owasp_samm: [ I-SB-A, I-SD-A ]
     owasp_dsomm: [ BD-B ]
@@ -490,8 +490,8 @@ suits:
     id: DVO9
     value: 9
     url: https://cornucopia.owasp.org/cards/DVO9
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ T, E ]
+    stride_print: [ "Tampering", "Elevation of Privilege" ]
     capec: [ CAPEC-670 ]
     owasp_samm: [ I-SB-A, I-SD-A, O-EM-A ]
     owasp_dsomm: [ I-DSC, I-IH, BD-B, BD-D ]
@@ -499,8 +499,8 @@ suits:
     id: DVOX
     value: X
     url: https://cornucopia.owasp.org/cards/DVOX
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ E, I ]
+    stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
     capec: [ CAPEC-560, CAPEC-234, CAPEC-21 ]
     owasp_samm: [ O-OM-B ]
     owasp_dsomm: [ BD-D ]
@@ -508,8 +508,8 @@ suits:
     id: DVOJ
     value: J
     url: https://cornucopia.owasp.org/cards/DVOJ
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ E ]
+    stride_print: [ "Elevation of Privilege" ]
     capec: [ CAPEC-310 ]
     owasp_samm: [ O-EM-B, I-SB, I-DM-A, D-SA-B ]
     owasp_dsomm: [ BD-PM, BD-D, TV-SDA ]
@@ -517,8 +517,8 @@ suits:
     id: DVOQ
     value: Q
     url: https://cornucopia.owasp.org/cards/DVOQ
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
     capec: [ CAPEC-560, CAPEC-21, CAPEC-150 ]
     owasp_samm: [ I-SD-B, O-OM-A ]
     owasp_dsomm: [ I-DSC, TV-SDI ]
@@ -526,8 +526,8 @@ suits:
     id: DVOK
     value: K
     url: https://cornucopia.owasp.org/cards/DVOK
-    stride: [ ]
-    stride_print: [ ]
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
     capec: [ CAPEC-444, CAPEC-184, CAPEC-439 ]
     owasp_samm: [ O-EM-B, I-SB, D-SA-B ]
     owasp_dsomm: [ BD-D, TV-SDI, I-DSC, CO-P ]
