@@ -1,4 +1,4 @@
-﻿defmodule Copi.ApplicationTest do
+defmodule Copi.ApplicationTest do
   use ExUnit.Case
   test "application supervisor is running" do
     assert Process.whereis(Copi.Supervisor) != nil
