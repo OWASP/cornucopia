@@ -48,7 +48,7 @@
 		"swagger-ui-dist": "^5.32.4",
 		"sync-request": "^6.1.0",
 		"vite-plugin-restart": "^2.0.0",
-		"vite-plugin-static-copy": "^4.0.1"
+		"vite-plugin-static-copy": "^4.1.0"
 	},
 	"pnpm": {
 		"auditConfig": {
