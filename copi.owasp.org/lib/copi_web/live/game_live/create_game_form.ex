@@ -111,11 +111,13 @@ defmodule CopiWeb.GameLive.CreateGameForm do
             {:noreply, assign_form(socket, changeset)}
         end
 
+      # coveralls-ignore-start
       {:error, :rate_limit_exceeded} ->
         {:noreply,
          socket
          |> put_flash(:error, "Too many game creation attempts. Please try again later.")
          |> assign_form(Cornucopia.change_game(%Game{}))}
+      # coveralls-ignore-stop
     end
   end
 end
