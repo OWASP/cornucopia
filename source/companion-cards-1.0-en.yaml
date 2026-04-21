@@ -108,7 +108,7 @@ suits:
     id: CLD7
     value: 7
     url: https://cornucopia.owasp.org/cards/CLD7
-    desc: Jon can escape from a compromised container and gained access to the underlying cloud host
+    desc: Jon can escape from a compromised container and gain access to the underlying cloud host
   -
     id: CLD8
     value: 8
