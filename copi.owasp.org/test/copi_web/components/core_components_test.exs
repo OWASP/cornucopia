@@ -119,4 +119,92 @@ defmodule CopiWeb.CoreComponentsTest do
     assert html =~ "Title"
     assert html =~ "Item 1"
   end
+
+  test "renders card_drop_zone for current player with no card played" do
+    import CopiWeb.CoreComponents.TableComponents
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player=%{name: "Alice"}
+      player_card={nil}
+      is_current_player={true}
+      first_card_played={nil}
+      highest_scoring_card={nil}
+    >
+      content
+    </.card_drop_zone>
+    """)
+    assert html =~ "You can play"
+  end
+
+  test "renders card_drop_zone for current player with first card played" do
+    import CopiWeb.CoreComponents.TableComponents
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player=%{name: "Alice"}
+      player_card={nil}
+      is_current_player={true}
+      first_card_played=%{card: %{category: "Spades"}}
+      highest_scoring_card={nil}
+    >
+      content
+    </.card_drop_zone>
+    """)
+    assert html =~ "should"
+    assert html =~ "Spades"
+  end
+
+  test "renders card_drop_zone waiting for other player" do
+    import CopiWeb.CoreComponents.TableComponents
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player=%{name: "Bob"}
+      player_card={nil}
+      is_current_player={false}
+      first_card_played={nil}
+      highest_scoring_card={nil}
+    >
+      content
+    </.card_drop_zone>
+    """)
+    assert html =~ "Waiting for Bob"
+  end
+
+  test "renders card_drop_zone with played card" do
+    import CopiWeb.CoreComponents.TableComponents
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player=%{name: "Alice"}
+      player_card=%{id: 1}
+      is_current_player={true}
+      first_card_played={nil}
+      highest_scoring_card=%{id: 1}
+    >
+      <span>PlayedContent</span>
+    </.card_drop_zone>
+    """)
+    assert html =~ "PlayedContent"
+    assert html =~ "ring-amber-300"
+  end
+
+  test "renders vote_card when player_card is nil" do
+    import CopiWeb.CoreComponents.TableComponents
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.vote_card player_card={nil} game=%{players: []} />
+    """)
+    refute html =~ "hero-hand-thumb-up"
+  end
+
+  test "renders vote_card when player_card is set" do
+    import CopiWeb.CoreComponents.TableComponents
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.vote_card player_card=%{votes: []} game=%{players: [%{}, %{}]} />
+    """)
+    assert html =~ "hero-hand-thumb-up"
+  end
 end
