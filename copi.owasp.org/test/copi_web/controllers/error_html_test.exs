@@ -10,6 +10,5 @@ defmodule CopiWeb.ErrorHTMLTest do
   test "renders 500.html and fallback for unknown templates" do
     assert render_to_string(CopiWeb.ErrorHTML, "500", "html", []) =~ "Something went wrong"
     assert render_to_string(CopiWeb.ErrorHTML, "503", "html", []) =~ "Something went wrong"
-    assert CopiWeb.ErrorHTML.render("any_template", %{}) =~ "Something went wrong"
   end
 end

@@ -122,10 +122,11 @@ defmodule CopiWeb.CoreComponentsTest do
 
   test "renders card_drop_zone for current player with no card played" do
     import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Alice"}
     assigns = %{}
     html = rendered_to_string(~H"""
     <.card_drop_zone
-      player=%{name: "Alice"}
+      player={player}
       player_card={nil}
       is_current_player={true}
       first_card_played={nil}
@@ -139,13 +140,15 @@ defmodule CopiWeb.CoreComponentsTest do
 
   test "renders card_drop_zone for current player with first card played" do
     import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Alice"}
+    first_card = %{card: %{category: "Spades"}}
     assigns = %{}
     html = rendered_to_string(~H"""
     <.card_drop_zone
-      player=%{name: "Alice"}
+      player={player}
       player_card={nil}
       is_current_player={true}
-      first_card_played=%{card: %{category: "Spades"}}
+      first_card_played={first_card}
       highest_scoring_card={nil}
     >
       content
@@ -157,10 +160,11 @@ defmodule CopiWeb.CoreComponentsTest do
 
   test "renders card_drop_zone waiting for other player" do
     import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Bob"}
     assigns = %{}
     html = rendered_to_string(~H"""
     <.card_drop_zone
-      player=%{name: "Bob"}
+      player={player}
       player_card={nil}
       is_current_player={false}
       first_card_played={nil}
@@ -174,14 +178,17 @@ defmodule CopiWeb.CoreComponentsTest do
 
   test "renders card_drop_zone with played card" do
     import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Alice"}
+    player_card = %{id: 1}
+    highest = %{id: 1}
     assigns = %{}
     html = rendered_to_string(~H"""
     <.card_drop_zone
-      player=%{name: "Alice"}
-      player_card=%{id: 1}
+      player={player}
+      player_card={player_card}
       is_current_player={true}
       first_card_played={nil}
-      highest_scoring_card=%{id: 1}
+      highest_scoring_card={highest}
     >
       <span>PlayedContent</span>
     </.card_drop_zone>
@@ -192,18 +199,21 @@ defmodule CopiWeb.CoreComponentsTest do
 
   test "renders vote_card when player_card is nil" do
     import CopiWeb.CoreComponents.TableComponents
+    game = %{players: []}
     assigns = %{}
     html = rendered_to_string(~H"""
-    <.vote_card player_card={nil} game=%{players: []} />
+    <.vote_card player_card={nil} game={game} />
     """)
     refute html =~ "hero-hand-thumb-up"
   end
 
   test "renders vote_card when player_card is set" do
     import CopiWeb.CoreComponents.TableComponents
+    player_card = %{votes: []}
+    game = %{players: [%{}, %{}]}
     assigns = %{}
     html = rendered_to_string(~H"""
-    <.vote_card player_card=%{votes: []} game=%{players: [%{}, %{}]} />
+    <.vote_card player_card={player_card} game={game} />
     """)
     assert html =~ "hero-hand-thumb-up"
   end
