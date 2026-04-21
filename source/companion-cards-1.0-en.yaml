@@ -108,7 +108,7 @@ suits:
     id: CLD7
     value: 7
     url: https://cornucopia.owasp.org/cards/CLD7
-    desc: Jon can escape from a compromised container and gained access to the underlying cloud host
+    desc: Jon can escape from a compromised container and gain access to the underlying cloud host
   -
     id: CLD8
     value: 8
@@ -144,7 +144,7 @@ suits:
     value: A
     url: https://cornucopia.owasp.org/cards/CLDA
     desc: You have invented a new attack against Cloud
-    misc: Read the OWASP Cloud Architecture Security Cheat Sheet for information on risk analysis and treat modeling of cloud applications and check out OWASP Cumulus for gamified threat modeling of cloud applications
+    misc: Read the OWASP Cloud Architecture Security Cheat Sheet for information on risk analysis and threat modeling of cloud applications and check out OWASP Cumulus for gamified threat modeling of cloud applications
 -
   id: FRE
   name: Frontend
