@@ -50,7 +50,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libreoffice
           pip install -r requirements.txt --require-hashes
-          pipenv install -d
+          pipenv install --ignore-pipfile --dev
       - name: Generate test coverage
         run: |
           pipenv run coverage run -m unittest discover -s tests/scripts -p "*_*test.py"
