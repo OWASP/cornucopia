@@ -217,4 +217,41 @@ defmodule CopiWeb.CoreComponentsTest do
     """)
     assert html =~ "hero-hand-thumb-up"
   end
+
+  test "renders button components" do
+    import CopiWeb.CoreComponents.Buttons
+    uri = "http://example.com/game/123"
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.button type="submit">Click Me</.button>
+    <.primary_button disabled={false}>Save</.primary_button>
+    <.primary_button disabled={true}>Disabled</.primary_button>
+    <.copy_url_button uri={uri} />
+    """)
+    assert html =~ "Click Me"
+    assert html =~ "Save"
+    assert html =~ "Disabled"
+    assert html =~ "bg-zinc-400"
+    assert html =~ "copy-url-container"
+    assert html =~ "http://example.com/game/123"
+  end
+
+  test "renders header components" do
+    import CopiWeb.CoreComponents.Headers
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.header class="my-cls">
+      Title
+      <:subtitle>Sub</:subtitle>
+      <:actions>Act</:actions>
+    </.header>
+    <.header1 id="h1" class="h1-cls">Heading One</.header1>
+    <.header2 class="h2-cls">Heading Two</.header2>
+    """)
+    assert html =~ "Title"
+    assert html =~ "Sub"
+    assert html =~ "Act"
+    assert html =~ "Heading One"
+    assert html =~ "Heading Two"
+  end
 end
