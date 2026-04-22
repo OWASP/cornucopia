@@ -30,7 +30,7 @@ defmodule Copi.RateLimiter do
 
   ## Parameters
     - ip: IP address as a tuple (e.g., {127, 0, 0, 1}) or string
-    - action: atom representing the action (:game_creation, :player_creation, :connection)
+    - action: atom representing the action (:game_creation, :player_creation, :connection, :play_card)
 
   ## Examples
       iex> Copi.RateLimiter.check_rate("127.0.0.1", :game_creation)
@@ -39,7 +39,7 @@ defmodule Copi.RateLimiter do
       iex> Copi.RateLimiter.check_rate({127, 0, 0, 1}, :connection)
       {:error, :rate_limit_exceeded}
   """
-  def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection] do
+  def check_rate(ip, action) when action in [:game_creation, :player_creation, :connection, :play_card] do
     normalized_ip = normalize_ip(ip)
 
     # In production, don't rate limit localhost to prevent DoS'ing ourselves
@@ -76,12 +76,14 @@ defmodule Copi.RateLimiter do
       limits: %{
         game_creation: get_env_config(:game_creation_limit, 20),
         player_creation: get_env_config(:player_creation_limit, 60),
-        connection: get_env_config(:connection_limit, 133)
+        connection: get_env_config(:connection_limit, 133),
+        play_card: get_env_config(:play_card_limit, 10)
       },
       windows: %{
         game_creation: get_env_config(:game_creation_window, 3600),
         player_creation: get_env_config(:player_creation_window, 3600),
-        connection: get_env_config(:connection_window, 1)
+        connection: get_env_config(:connection_window, 1),
+        play_card: get_env_config(:play_card_window, 60)
       },
       requests: %{}
     }
