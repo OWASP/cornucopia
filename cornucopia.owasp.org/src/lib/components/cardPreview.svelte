@@ -39,18 +39,10 @@
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
         return cardColor?.get(suit) ?? "default";
     }
-
-    function getLeftRibbonClass(suit: string, id: string, value: string)
-    {
-        const base = getSuitColor(suit, id);
-        if (!base) return base;
-        if (['J', 'Q', 'K'].includes(value)) return base + ' left-royal';
-        return base;
-    }
 </script>
 
 <div class="card-render">
-    <div class="left {getLeftRibbonClass(card?.suit, card?.suitId, card?.value)}">
+    <div class="left {getSuitColor(card?.suit, card?.suitId)}">
         <span class="property-card-suit{previewStyle}">{card?.suitName}</span>
     </div>
     <div class="right {getRoyalSuitColor(card?.suit, card?.suitId, card?.value)}">
@@ -168,6 +160,7 @@
     .left
     {
         width: 15%;
+        background: rgb(2,0,36);
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(255,255,255,0.3) 100%);
     }
 
@@ -269,67 +262,67 @@
         color: rgb(10,58,94);
     }
     
-    .left.agentic-ai {
-        background: linear-gradient(180deg, #3b2c42, #3b2c4280);
+    .agentic-ai {
+        background-color: #dbdbdb;
     }
-    .left.automated-threats {
-        background: linear-gradient(180deg, #d56859, #d5685980);
+    .automated-threats {
+        background-color: #dbdbdb;
     }
-    .left.cloud {
-        background: linear-gradient(180deg, #D289B8, #D289B880);
+    .cloud {
+        background-color: #dbdbdb;
     }
-    .left.devops {
-        background: linear-gradient(180deg, #a87441, #a8744180);
+    .devops {
+        background-color: #dbdbdb;
     }
-    .left.frontend {
-        background: linear-gradient(180deg, #806A62, #806A6280);
+    .frontend {
+        background-color: #dbdbdb;
     }
-    .left.large-language-models {
-        background: linear-gradient(180deg, #a13763, #a1376380);
+    .large-language-models {
+        background-color: #dbdbdb;
     }
     .social-engineering {
         background-color: #dbdbdb;
     }
 
     .agentic-ai-text {
-        color: #3b2c42;
+        color: #dbdbdb;
     }
     .automated-threats-text {
-        color: #d56859;
+        color: #dbdbdb;
     }
     .cloud-text {
-        color: #d289b8;
+        color: #dbdbdb;
     }
     .devops-text {
-        color: #a87441;
+        color: #dbdbdb;
     }
     .frontend-text {
-        color: #806A62;
+        color: #dbdbdb;
     }
     .large-language-models-text {
-        color: #a13763;
+        color: #dbdbdb;
     }
     .social-engineering-text {
         color: #dbdbdb;
     }
 
     .agentic-ai-royal {
-        background-color: #3b2c4280;
+        background-color: #e8e8e8;
     }
     .automated-threats-royal {
-        background-color: #d5685980;
+        background-color: #e8e8e8;
     }
     .cloud-royal {
-        background-color: #D289B880;
+        background-color: #e8e8e8;
     }
     .devops-royal {
-        background-color: #a8744180;
+        background-color: #e8e8e8;
     }
     .frontend-royal {
-        background-color: #806A6280;
+        background-color: #e8e8e8;
     }
     .large-language-models-royal {
-        background-color: #a1376380;
+        background-color: #e8e8e8;
     }
     .social-engineering-royal {
         background-color: #e8e8e8;
@@ -423,33 +416,3 @@
         }
     }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
