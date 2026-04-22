@@ -45,7 +45,7 @@
               pipenv run coverage xml -o converter/coverage/cobertura.xml
           - name: Check test coverage - Report
             run: pipenv run coverage report --fail-under 85 scripts/convert*
-          # Upload Code COverage for Codeclimate
+          # Upload Code Coverage for Codeclimate
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:
               token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
@@ -102,8 +102,8 @@
               mkdir -p output/cornucopia_companion || echo "Ignore error"
               mkdir -p output/cornucopia_companion/Links || echo "Ignore error"
               mkdir -p output/cornucopia_companion/Fonts || echo "Ignore error"
-              cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_mobileapp/Links/
-              cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
+              cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_companion/Links/
+              cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_companion/Fonts/
               #
               pipenv run python scripts/convert.py -l all -lt all -t all -v 2.2 -e webapp
               pipenv run python scripts/convert.py -l en -lt all -t all -v 3.0 -e webapp
