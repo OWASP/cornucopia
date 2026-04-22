@@ -103,22 +103,10 @@ suits:
     owasp_llm_top10: [ LLM01:2025 ]
     owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
     cwe: [ CWE-1427 ]
+  -
     id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
-    stride: [ T ]
-    stride_print: [ "Tampering" ]
-    cia: [ I ]
-    cia_print: [ "Integrity" ]
-    mitre_atlas: [ AML.T0010 ]
-    mitre_atlas_print: [ "AML.T0010: ML Supply Chain Compromise" ]
-    owasp_llm_top10: [ LLM03:2025 ]
-    owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
-    cwe: [ CWE-1357 ]
-  -
-    id: LLMX
-    value: 10
-    url: https://cornucopia.owasp.org/cards/LLMX
     stride: [ E, I ]
     stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
     cia: [ C, I ]
@@ -129,9 +117,9 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     cwe: [ CWE-862, CWE-285 ]
   -
-    id: LLMJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/LLMJ
+    id: LLMX
+    value: 10
+    url: https://cornucopia.owasp.org/cards/LLMX
     stride: [ T, E ]
     stride_print: [ "Tampering", "Elevation of Privilege" ]
     cia: [ I ]
@@ -141,6 +129,19 @@ suits:
     owasp_llm_top10: [ LLM01:2025 ]
     owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
     cwe: [ CWE-1427 ]
+  -
+    id: LLMJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/LLMJ
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0010 ]
+    mitre_atlas_print: [ "AML.T0010: ML Supply Chain Compromise" ]
+    owasp_llm_top10: [ LLM03:2025 ]
+    owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
+    cwe: [ CWE-1357 ]
   -
     id: LLMQ
     value: Q
