@@ -33,7 +33,8 @@ Pipeline manipulation gives attackers a powerful execution context with broad ac
 
 1. Treat pipeline configuration files like code: review changes to them with the same rigor, and restrict who can modify them.
 2. Where feasible, run pipelines with reduced permissions and without access to production secrets. Ensure your pipeline configuration does not allow forks to use its credentials.
-3. Pin shared workflow components and actions to specific, verified digests rather than using mutable references like "latest."
+3. Pin shared workflow components and actions to specific, verified digests rather than using mutable version tags or floating references like "latest."
 4. Review changes to pipeline definitions before they are executed, just as you would for application code.
 5. Use the configuration supported by your CI platform to limit secrets exposed in individual steps - ideally each step should only have access to the credentials it actually needs.
+6. If possible, block or limit internet access from your runners to make exfiltration more difficult.
 

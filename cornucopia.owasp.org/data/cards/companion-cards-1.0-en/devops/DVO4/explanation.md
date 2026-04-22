@@ -29,7 +29,8 @@ While three categories may seem broad, this card explicitly describes three dist
 Inadequately protected backups expose organizations to data theft and undermine their ability to recover from incidents. This can manifest in various forms, including but not limited to:
 
 - Exfiltration of sensitive data from backup files
-- Deletion or overwriting of backups, rendering disaster recovery impossible or significantly more costly and challenging
+- Overwriting of backups with arbitrary, or intentionally malicious data, affecting the recovery process or the recovered system
+- Deletion of backups, rendering disaster recovery impossible
 - Ransomware attacks targeting backup storage to prevent recovery
 - Unauthorized access to historical data that may no longer be protected by current access controls
 
@@ -39,6 +40,6 @@ Inadequately protected backups expose organizations to data theft and undermine 
 2. Make sure only the backup process and designated administrators can access backup storage.
 3. Use separate, dedicated credentials for backup operations that are not shared with other systems or users.
 4. Store backups separately from the production environment, with their own access controls.
-5. Encrypt backups both in transit and at rest to protect against unauthorized data access. If you do encrypt your backups at rest, make sure your encryption keys don't get lost in an incident.
+5. Encrypt backups both in transit and at rest to protect against unauthorized data access. If you do encrypt your backups at rest, make sure your decryption keys remain accessible when you need to recover.
 6. Set up monitoring on access to backup storage, including reads, writes, and deletions.
 7. Use versioning for backups so that even if one is corrupted, previous versions can still be recovered.

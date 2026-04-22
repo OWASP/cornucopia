@@ -40,4 +40,4 @@ The consequences of failed backup and recovery strategies become apparent only a
 6. Know how long a recovery takes and how much data you can afford to lose, and check that your backup strategy actually meets those needs.
 7. Store backups in a separate location so the same incident that takes down production does not also take down your recovery capability.
 
-It might be difficult to define how frequently backups should be performed and how long the recovery should take. Consult your business stakeholders to understand their expectations and, if available, teams responsible for infrastructure to get help translating these expectation into reality.
+It might be difficult to define how frequently backups should be performed (i.e., how much data loss is acceptable) and how long the recovery should take. Consult your business stakeholders to understand their expectations and, if available, teams responsible for infrastructure to get help translating these expectations into reality.

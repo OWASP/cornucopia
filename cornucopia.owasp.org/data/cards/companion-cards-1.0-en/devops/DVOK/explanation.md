@@ -37,4 +37,4 @@ Supply chain attacks can be particularly damaging because they exploit trust rel
 5. Watch for unexpected changes in dependencies you already use, such as new versions with significantly different code, new maintainers, or version tags suddenly pointing to different digests.
 6. Include dependency scanning in your build process to catch known malicious packages.
 7. Pin your dependencies to digests instead of mutable tags. You can consider using tools to help manage the digests - some platforms even include the functionality by default.
-8. Consider waiting for each release to reach a minimum age before updating. A large part of supply chain attacks are discovered within hours and resolved within days.
+8. Consider waiting for each release to reach a minimum age before updating. Many supply chain attacks are discovered within hours and resolved within days.
