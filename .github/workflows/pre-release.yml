@@ -231,6 +231,7 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_en.pdf
                 resources/case/*\2.2_case_*
                 resources/case/*\1.1_case_*
+                resources/case/*\1.0_case_*
                 source/*1\.1-*.yaml
                 source/*2\.2-*.yaml
                 output/owasp_cornucopia_webapp_3.0_en.zip
