@@ -5,7 +5,7 @@ meta:
   language: ALL
   version: "1.0"
   layouts: [ cards ]
-  templates: [ bridge_qr, bridge, tarot, tarot_qr ]
+  templates: [ tarot_qr ]
   languages: ["en"]
 suits:
 -
@@ -29,71 +29,6 @@ suits:
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
-    stride: [ T, E ]
-    stride_print: [ "Tampering", "Elevation of Privilege" ]
-    cia: [ I ]
-    cia_print: [ "Integrity" ]
-    mitre_atlas: [ AML.T0051.000 ]
-    mitre_atlas_print: [ "AML.T0051.000: LLM Prompt Injection: Direct" ]
-    owasp_llm_top10: [ LLM01:2025 ]
-    owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
-    cwe: [ CWE-1427 ]
-  -
-    id: LLM4
-    value: 4
-    url: https://cornucopia.owasp.org/cards/LLM4
-    stride: [ I ]
-    stride_print: [ "Information Disclosure" ]
-    cia: [ C ]
-    cia_print: [ "Confidentiality" ]
-    mitre_atlas: [ AML.T0057 ]
-    mitre_atlas_print: [ "AML.T0057: LLM Data Leakage" ]
-    owasp_llm_top10: [ LLM02:2025, LLM07:2025 ]
-    owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure", "LLM07:2025: System Prompt Leakage" ]
-    cwe: [ CWE-200 ]
-  -
-    id: LLM5
-    value: 5
-    url: https://cornucopia.owasp.org/cards/LLM5
-    stride: [ E, S ]
-    stride_print: [ "Elevation of Privilege", "Spoofing" ]
-    cia: [ C, I ]
-    cia_print: [ "Confidentiality", "Integrity" ]
-    mitre_atlas: [ AML.T0012 ]
-    mitre_atlas_print: [ "AML.T0012: Valid Accounts" ]
-    owasp_llm_top10: [ LLM02:2025 ]
-    owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
-    cwe: [ CWE-285, CWE-863 ]
-  -
-    id: LLM6
-    value: 6
-    url: https://cornucopia.owasp.org/cards/LLM6
-    stride: [ T ]
-    stride_print: [ "Tampering" ]
-    cia: [ I ]
-    cia_print: [ "Integrity" ]
-    mitre_atlas: [ AML.T0020 ]
-    mitre_atlas_print: [ "AML.T0020: Poison Training Data" ]
-    owasp_llm_top10: [ LLM04:2025 ]
-    owasp_llm_top10_print: [ "LLM04:2025: Data and Model Poisoning" ]
-    cwe: [ CWE-345 ]
-  -
-    id: LLM7
-    value: 7
-    url: https://cornucopia.owasp.org/cards/LLM7
-    stride: [ T ]
-    stride_print: [ "Tampering" ]
-    cia: [ I ]
-    cia_print: [ "Integrity" ]
-    mitre_atlas: [ AML.T0059 ]
-    mitre_atlas_print: [ "AML.T0059: Erode Dataset Integrity" ]
-    owasp_llm_top10: [ LLM08:2025 ]
-    owasp_llm_top10_print: [ "LLM08:2025: Vector and Embedding Weaknesses" ]
-    cwe: [ CWE-345, CWE-20 ]
-  -
-    id: LLM8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/LLM8
     stride: [ D ]
     stride_print: [ "Denial of Service" ]
     cia: [ A ]
@@ -104,9 +39,86 @@ suits:
     owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
     cwe: [ CWE-400, CWE-770 ]
   -
+    id: LLM4
+    value: 4
+    url: https://cornucopia.owasp.org/cards/LLM4
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0059 ]
+    mitre_atlas_print: [ "AML.T0059: Erode Dataset Integrity" ]
+    owasp_llm_top10: [ LLM08:2025 ]
+    owasp_llm_top10_print: [ "LLM08:2025: Vector and Embedding Weaknesses" ]
+    cwe: [ CWE-345, CWE-20 ]
+  -
+    id: LLM5
+    value: 5
+    url: https://cornucopia.owasp.org/cards/LLM5
+    stride: [ I ]
+    stride_print: [ "Information Disclosure" ]
+    cia: [ C ]
+    cia_print: [ "Confidentiality" ]
+    mitre_atlas: [ AML.T0057 ]
+    mitre_atlas_print: [ "AML.T0057: LLM Data Leakage" ]
+    owasp_llm_top10: [ LLM02:2025, LLM07:2025 ]
+    owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure", "LLM07:2025: System Prompt Leakage" ]
+    cwe: [ CWE-200 ]
+  -
+    id: LLM6
+    value: 6
+    url: https://cornucopia.owasp.org/cards/LLM6
+    stride: [ E, S ]
+    stride_print: [ "Elevation of Privilege", "Spoofing" ]
+    cia: [ C, I ]
+    cia_print: [ "Confidentiality", "Integrity" ]
+    mitre_atlas: [ AML.T0012 ]
+    mitre_atlas_print: [ "AML.T0012: Valid Accounts" ]
+    owasp_llm_top10: [ LLM02:2025 ]
+    owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
+    cwe: [ CWE-285, CWE-863 ]
+  -
+    id: LLM7
+    value: 7
+    url: https://cornucopia.owasp.org/cards/LLM7
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0020 ]
+    mitre_atlas_print: [ "AML.T0020: Poison Training Data" ]
+    owasp_llm_top10: [ LLM04:2025 ]
+    owasp_llm_top10_print: [ "LLM04:2025: Data and Model Poisoning" ]
+    cwe: [ CWE-345 ]
+  -
+    id: LLM8
+    value: 8
+    url: https://cornucopia.owasp.org/cards/LLM8
+    stride: [ T, R ]
+    stride_print: [ "Tampering", "Repudiation" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0051.001 ]
+    mitre_atlas_print: [ "AML.T0051.001: LLM Prompt Injection: Indirect" ]
+    owasp_llm_top10: [ LLM01:2025 ]
+    owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
+    cwe: [ CWE-1427 ]
     id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
+    stride: [ T ]
+    stride_print: [ "Tampering" ]
+    cia: [ I ]
+    cia_print: [ "Integrity" ]
+    mitre_atlas: [ AML.T0010 ]
+    mitre_atlas_print: [ "AML.T0010: ML Supply Chain Compromise" ]
+    owasp_llm_top10: [ LLM03:2025 ]
+    owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
+    cwe: [ CWE-1357 ]
+  -
+    id: LLMX
+    value: 10
+    url: https://cornucopia.owasp.org/cards/LLMX
     stride: [ E, I ]
     stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
     cia: [ C, I ]
@@ -117,22 +129,22 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     cwe: [ CWE-862, CWE-285 ]
   -
-    id: LLMX
-    value: X
-    url: https://cornucopia.owasp.org/cards/LLMX
-    stride: [ T, R ]
-    stride_print: [ "Tampering", "Repudiation" ]
+    id: LLMJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/LLMJ
+    stride: [ T, E ]
+    stride_print: [ "Tampering", "Elevation of Privilege" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
-    mitre_atlas: [ AML.T0051.001 ]
-    mitre_atlas_print: [ "AML.T0051.001: LLM Prompt Injection: Indirect" ]
+    mitre_atlas: [ AML.T0051.000 ]
+    mitre_atlas_print: [ "AML.T0051.000: LLM Prompt Injection: Direct" ]
     owasp_llm_top10: [ LLM01:2025 ]
     owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
     cwe: [ CWE-1427 ]
   -
-    id: LLMJ
-    value: J
-    url: https://cornucopia.owasp.org/cards/LLMJ
+    id: LLMQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/LLMQ
     stride: [ T, E ]
     stride_print: [ "Tampering", "Elevation of Privilege" ]
     cia: [ I ]
@@ -142,19 +154,6 @@ suits:
     owasp_llm_top10: [ LLM05:2025 ]
     owasp_llm_top10_print: [ "LLM05:2025: Improper Output Handling" ]
     cwe: [ CWE-1426, CWE-94, CWE-77 ]
-  -
-    id: LLMQ
-    value: Q
-    url: https://cornucopia.owasp.org/cards/LLMQ
-    stride: [ T ]
-    stride_print: [ "Tampering" ]
-    cia: [ I ]
-    cia_print: [ "Integrity" ]
-    mitre_atlas: [ AML.T0010 ]
-    mitre_atlas_print: [ "AML.T0010: ML Supply Chain Compromise" ]
-    owasp_llm_top10: [ LLM03:2025 ]
-    owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
-    cwe: [ CWE-1357 ]
   -
     id: LLMK
     value: K
@@ -248,7 +247,7 @@ suits:
     capec: [ CAPEC-161 ]
   -
     id: CLDX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/CLDX
     stride: [ T ]
     stride_print: [ "Tampering" ]
@@ -377,7 +376,7 @@ suits:
     mitre_attack: [ T1134 ]
   -
     id: FREX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/FREX
     stride: [ "Tampering"]
     stride_print: [ "Tampering" ]
@@ -497,7 +496,7 @@ suits:
     owasp_dsomm: [ I-DSC, I-IH, BD-B, BD-D ]
   -
     id: DVOX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/DVOX
     stride: [ ]
     stride_print: [ ]
@@ -624,7 +623,7 @@ suits:
     capec: [ 210 ]
   -
     id: BOTX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/BOTX
     stride: [ I ]
     stride_print: [ "Information Disclosure" ]
@@ -795,7 +794,7 @@ suits:
     owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
   -
     id: AAIX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/AAIX
     stride: [ E, I ]
     stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
