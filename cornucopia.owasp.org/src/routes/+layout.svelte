@@ -54,6 +54,7 @@
         childList: true,
         subtree: true
         });
+        return () => observer.disconnect();
     }
     });
 </script>
