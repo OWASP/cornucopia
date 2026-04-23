@@ -139,7 +139,8 @@ defmodule CopiWeb.PlayerLive.Show do
             Copi.Repo.delete!(vote)
           else
             Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
+            # ASVS V1.1/V2.2: use the canonical ID from the fetched struct instead of re-parsing untrusted input.
+            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: dealt_card.id, player_id: player.id}) do
               {:ok, _vote} ->
                 Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
               {:error, changeset} ->
