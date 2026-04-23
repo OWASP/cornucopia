@@ -300,16 +300,31 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   end
 
   describe "toggle_vote with invalid dealt_card_id" do
-    test "returns flash error and keeps socket alive for non-existent dealt_card_id", %{conn: conn} do
+    test "returns flash error and keeps socket alive for a guaranteed non-existent numeric dealt_card_id", %{conn: conn} do
       {:ok, game} = Cornucopia.create_game(%{name: "Invalid ID Test Game", edition: "webapp"})
       {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
 
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
 
-      # Send a phx-click payload with a non-existent dealt_card_id
-      render_click(view, "toggle_vote", %{"dealt_card_id" => "999999999"})
+      # Use a guaranteed-invalid ID value instead of assuming a large positive ID does not exist.
+      # ASVS V2.2/V16.5: invalid input should be handled safely and return a generic error.
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "-1"})
 
-      # LiveView should still be alive and show a flash error
+      # LiveView should still be alive and show a generic error.
+      assert render(view) =~ "Invalid card selection"
+    end
+
+    test "returns flash error and keeps socket alive for a non-numeric dealt_card_id", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Invalid Non Numeric ID Test Game", edition: "webapp"})
+      {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+
+      # Exercise malformed input explicitly to ensure lookup/casting does not raise.
+      # ASVS V2.2/V16.5: validate input and fail securely with a generic error.
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "abc"})
+
+      # LiveView should still be alive and show a generic error.
       assert render(view) =~ "Invalid card selection"
     end
   end
