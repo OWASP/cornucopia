@@ -13,9 +13,8 @@ defmodule CopiWeb.ErrorHTMLTest do
   end
 
   test "render/2 falls back to 500 template for unknown error codes" do
-    # render/2 is the catch-all clause invoked for template names with no
-    # embedded-template match (e.g. 418). It delegates to the :"500" component.
-    html = CopiWeb.ErrorHTML.render("418.html", %{})
-    assert html =~ "Something went wrong"
+    # render_to_string routes through our custom render/2 catch-all for
+    # template names that have no embedded-template match (e.g. 418).
+    assert render_to_string(CopiWeb.ErrorHTML, "418", "html", []) =~ "Something went wrong"
   end
 end
