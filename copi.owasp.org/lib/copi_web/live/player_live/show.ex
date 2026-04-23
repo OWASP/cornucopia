@@ -121,39 +121,48 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    case DealtCard.find(dealt_card_id) do
-      {:error, _reason} ->
-        Logger.warning("toggle_vote: dealt_card_id=#{dealt_card_id} not found for player_id=#{player.id}, game_id=#{game.id}")
-        {:noreply, socket |> put_flash(:error, "Invalid card selection")}
+    # ASVS V2.2 / V16.5: positively validate untrusted event input and fail securely
+    # before database access to prevent cast exceptions from crashing the LiveView.
+    case Integer.parse(dealt_card_id) do
+      {parsed_dealt_card_id, ""} ->
+        case DealtCard.find(parsed_dealt_card_id) do
+          {:error, _reason} ->
+            Logger.warning("toggle_vote: dealt_card_id=#{dealt_card_id} not found for player_id=#{player.id}, game_id=#{game.id}")
+            {:noreply, socket |> put_flash(:error, "Invalid card selection")}
 
-      {:ok, dealt_card} ->
-        game_card_ids = game.players
-          |> Enum.flat_map(fn p -> p.dealt_cards end)
-          |> Enum.map(fn dc -> dc.id end)
+          {:ok, dealt_card} ->
+            game_card_ids = game.players
+              |> Enum.flat_map(fn p -> p.dealt_cards end)
+              |> Enum.map(fn dc -> dc.id end)
 
-        if dealt_card.id in game_card_ids do
-          vote = get_vote(dealt_card, player)
+            if dealt_card.id in game_card_ids do
+              vote = get_vote(dealt_card, player)
 
-          if vote do
-            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-            Copi.Repo.delete!(vote)
-          else
-            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-              {:ok, _vote} ->
-                Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-              {:error, changeset} ->
-                Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+              if vote do
+                Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+                Copi.Repo.delete!(vote)
+              else
+                Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+                case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: parsed_dealt_card_id, player_id: player.id}) do
+                  {:ok, _vote} ->
+                    Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+                  {:error, changeset} ->
+                    Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+                end
+              end
+
+              {:ok, updated_game} = Game.find(game.id)
+              CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+              {:noreply, assign(socket, :game, updated_game)}
+            else
+              Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+              {:noreply, socket |> put_flash(:error, "Invalid card selection")}
             end
-          end
-
-          {:ok, updated_game} = Game.find(game.id)
-          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-          {:noreply, assign(socket, :game, updated_game)}
-        else
-          Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-          {:noreply, socket |> put_flash(:error, "Invalid card selection")}
         end
+
+      _ ->
+        Logger.warning("toggle_vote: invalid dealt_card_id format for player_id=#{player.id}, game_id=#{game.id}")
+        {:noreply, socket |> put_flash(:error, "Invalid card selection")}
     end
   end
 
