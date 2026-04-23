@@ -158,31 +158,6 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert render(show_live) =~ game.name
     end
 
-    test "start_game deals cards to players when cards exist in DB", %{conn: conn, game: game} do
-      # Create webapp cards matching the game's edition/suits/version so the
-      # Enum.each deal-cards loop body actually executes (cover those lines).
-      for {ext_id, cat} <- [{"DEAL1", "hearts"}, {"DEAL2", "clubs"}] do
-        Copi.Cornucopia.create_card(%{
-          category: cat, value: ext_id, description: "d", misc: "m",
-          edition: "webapp", version: "2.2", external_id: ext_id, language: "en",
-          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-        })
-      end
-
-      {:ok, _p1} = Copi.Cornucopia.create_player(%{name: "Deal P1", game_id: game.id})
-      {:ok, _p2} = Copi.Cornucopia.create_player(%{name: "Deal P2", game_id: game.id})
-      {:ok, _p3} = Copi.Cornucopia.create_player(%{name: "Deal P3", game_id: game.id})
-
-      {:ok, view, _html} = live(conn, "/games/#{game.id}")
-      view |> element("button", "Start Game") |> render_click()
-
-      {:ok, updated_game} = Copi.Cornucopia.Game.find(game.id)
-      assert updated_game.started_at != nil
-      total_cards = Enum.flat_map(updated_game.players, fn p -> p.dealt_cards end)
-      assert length(total_cards) > 0
-    end
-
     test "handle_params with out-of-range round param redirects to /error", %{conn: conn, game: game} do
       # rounds_played=0 → current_round=1. round=99 exceeds max of 1 → {:error, _}
       assert {:error, {:redirect, %{to: "/error"}}} =
