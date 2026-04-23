@@ -158,6 +158,12 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert render(show_live) =~ game.name
     end
 
+    test "handle_params with out-of-range round param redirects to /error", %{conn: conn, game: game} do
+      # rounds_played=0 → current_round=1. round=99 exceeds max of 1 → {:error, _}
+      assert {:error, {:redirect, %{to: "/error"}}} =
+               live(conn, "/games/#{game.id}?round=99")
+    end
+
     test "redirects to /error when game_id is not found", %{conn: conn} do
       assert {:error, {:redirect, %{to: "/error"}}} =
                live(conn, "/games/00000000000000000000000001")

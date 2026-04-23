@@ -37,6 +37,27 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   describe "Show - additional coverage" do
     setup [:create_player]
 
+    test "handle_info game:updated when player has been deleted keeps socket alive",
+         %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, view, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Delete the player to simulate removal during an active game session
+      {:ok, _} = Copi.Cornucopia.delete_player(player)
+
+      # Send game:updated — Player.find should now return {:error, :not_found}
+      {:ok, game} = Copi.Cornucopia.Game.find(game_id)
+
+      send(view.pid, %{
+        topic: "game:#{game_id}",
+        event: "game:updated",
+        payload: game
+      })
+
+      :timer.sleep(50)
+      assert Process.alive?(view.pid)
+    end
+
     test "handle_params redirects to /error for nonexistent player_id", %{conn: conn, player: _player} do
       assert {:error, {:redirect, %{to: "/error"}}} =
                live(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")

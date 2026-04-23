@@ -160,5 +160,19 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
         live(conn, "/games/#{fake_game_id}/players/new")
       end
     end
+
+    test "form submit when game_id is deleted between page load and submit redirects to /games",
+         %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Submit with a non-existent game_id (simulates the game being deleted after page load)
+      fake_game_id = Ecto.ULID.generate()
+
+      view
+      |> form("#player-form", player: %{name: "Ghost Player", game_id: fake_game_id})
+      |> render_submit()
+
+      assert_redirect(view, "/games")
+    end
   end
 end
