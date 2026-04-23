@@ -28,23 +28,6 @@
         return false;
     }
 
-    // intercept innerHTML invocation and remove style before div is added to dom
-    $effect(() => {
-    if (browser) {
-        const originalInnerHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-        
-        Object.defineProperty(Element.prototype, 'innerHTML', {
-        set(value: string) {
-            if (value.includes('id="svelte-announcer"')) {
-            const safeValue = value.replace(/style=".*?"/i, '');
-            originalInnerHTML?.set?.call(this, safeValue);
-            } else {
-            originalInnerHTML?.set?.call(this, value);
-            }
-        }
-        });
-    }
-    });
 
     // add styles back in non-CSP violating way
     $effect(() => {

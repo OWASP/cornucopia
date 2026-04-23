@@ -11,29 +11,14 @@
         mappingData: any;
     }
 
-    let { card = $bindable(), cards, mappingData }: Props = $props();
+    let { card, cards, mappingData }: Props = $props();
     let t = readTranslation();
-    let nextCard = $derived(cards.get(card.next));
-    let previousCard = $derived(cards.get(card.prevous));
-    function checkKey(event : any) 
+    function checkKey(event: any) 
     {
-        const KEYCODE_RIGHT = 39;
-        const KEYCODE_LEFT = 37;
-        if(event.keyCode == KEYCODE_RIGHT)
-        {
-            goto(getUrl(cards.get(card.next)));
-            card = cards.get(card.next);
-            nextCard = cards.get(card.next);
-            previousCard = cards.get(card.prevous);
-        }   
-
-        if(event.keyCode == KEYCODE_LEFT)
-        {
-            goto(getUrl(cards.get(card.prevous)));
-            card = cards.get(card.prevous);
-            nextCard = cards.get(card.next);
-            previousCard = cards.get(card.prevous);
-        }
+    const KEYCODE_RIGHT = 39;
+    const KEYCODE_LEFT = 37;
+    if (event.keyCode == KEYCODE_RIGHT) goto(getUrl(cards.get(card.next)));
+    if (event.keyCode == KEYCODE_LEFT) goto(getUrl(cards.get(card.prevous)));
     }
 
     function getUrl(card: Card)
@@ -43,20 +28,13 @@
 
     onDestroy(()=> {if(browser)document.onkeydown = null})
 
-    function goToNext(thisCard: Card)
+    function goToNext(thisCard: Card) 
     {
-        card = cards.get(thisCard.next);
-        nextCard = cards.get(card.next);
-        previousCard = cards.get(card.prevous);
-        goto(getUrl(card));
+    goto(getUrl(cards.get(thisCard.next)));
     }
 
-    function goToPrevious(thisCard: Card)
-    {
-        card = cards.get(thisCard.prevous);
-        nextCard = cards.get(thisCard.next);
-        previousCard = cards.get(card.prevous);
-        goto(getUrl(card));
+    function goToPrevious(thisCard: Card) {
+    goto(getUrl(cards.get(thisCard.prevous)));
     }
 
     if(browser)
@@ -77,13 +55,13 @@
 </noscript>
 <div class="card-panel script" id="card">
     <div class="left">
-        <a href={getUrl(card)} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+        <a href={getUrl(cards.get(card.prevous))} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
-        <a href={getUrl(card)} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+        <a href={getUrl(cards.get(card.next))} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
     </div>
 </div>
 <style>
