@@ -9,9 +9,9 @@ defmodule Copi.Cornucopia.DealtCardTest do
       assert changeset.valid?
     end
 
-    test "casts played_in_round when provided" do
+    test "ignores played_in_round when provided and remains valid" do
       changeset = DealtCard.changeset(%DealtCard{}, %{played_in_round: 3})
-      # changeset/2 only casts [], so played_in_round is ignored but changeset is valid
+      # changeset/2 only casts [], so uncast fields such as played_in_round are ignored.
       assert changeset.valid?
     end
   end
