@@ -298,6 +298,21 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     end
   end
 
+  describe "toggle_vote with invalid dealt_card_id" do
+    test "returns flash error and keeps socket alive for non-existent dealt_card_id", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Invalid ID Test Game", edition: "webapp"})
+      {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+
+      # Send a phx-click payload with a non-existent dealt_card_id
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "999999999"})
+
+      # LiveView should still be alive and show a flash error
+      assert render(view) =~ "Invalid card selection"
+    end
+  end
+
   describe "toggle_vote authorization" do
     test "rejects cross-game vote and shows error flash", %{conn: conn} do
       {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game One", "AUTH_G1_C1")
