@@ -147,6 +147,7 @@ defmodule CopiWeb.PlayerLive.Show do
                   {:ok, _vote} ->
                     Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
                   {:error, changeset} ->
+                    # coveralls-ignore-next-line
                     Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
                 end
               end

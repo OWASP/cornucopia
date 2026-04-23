@@ -174,5 +174,20 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
       assert_redirect(view, "/games")
     end
+
+    test "submit blank name in :new mode returns changeset validation error",
+         %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Submitting a blank name bypasses the UI validation and reaches
+      # create_player/1 which returns {:error, %Ecto.Changeset{}} covering
+      # the changeset-error branch inside save_player(:new, ...).
+      html =
+        view
+        |> form("#player-form", player: %{name: "", game_id: game.id})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
   end
 end
