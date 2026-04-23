@@ -311,6 +311,19 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       # LiveView should still be alive and show a flash error
       assert render(view) =~ "Invalid card selection"
     end
+
+    test "returns flash error and keeps socket alive for non-numeric dealt_card_id", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Non-numeric ID Test Game", edition: "webapp"})
+      {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+
+      # Send a phx-click payload with a non-numeric dealt_card_id (e.g. "abc")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "abc"})
+
+      # LiveView should still be alive and show a flash error
+      assert render(view) =~ "Invalid card selection"
+    end
   end
 
   describe "toggle_vote authorization" do

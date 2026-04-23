@@ -14,9 +14,14 @@ defmodule Copi.Cornucopia.DealtCard do
   end
 
   def find(id) do
-    case Copi.Repo.get(Copi.Cornucopia.DealtCard, id) do
-      nil -> {:error, :not_found}
-      dealt_card -> {:ok, dealt_card  |> Copi.Repo.preload([:card, :votes])}
+    case Integer.parse(to_string(id)) do
+      {int_id, ""} ->
+        case Copi.Repo.get(Copi.Cornucopia.DealtCard, int_id) do
+          nil -> {:error, :not_found}
+          dealt_card -> {:ok, dealt_card |> Copi.Repo.preload([:card, :votes])}
+        end
+      _ ->
+        {:error, :invalid_id}
     end
   end
   @doc false
