@@ -64,6 +64,10 @@ defmodule Copi.Encrypted.BinaryTest do
     end
   end
 
+  test "load rejects non-binary" do
+    assert :error = EncryptedBinary.load(123)
+  end
+
   test "wrong key raises on load" do
     {:ok, blob} = EncryptedBinary.dump("secret")
     System.put_env("COPI_ENCRYPTION_KEY", Base.encode64(:crypto.strong_rand_bytes(32)))
@@ -108,8 +112,11 @@ defmodule Copi.Encrypted.BinaryTest do
     assert {:ok, "Game 123"} = EncryptedBinary.load(blob)
   end
 
-  test "dump rejects non-string" do
+  test "dump and load reject non-string/non-binary" do
     assert :error = EncryptedBinary.dump(123)
     assert :error = EncryptedBinary.dump(%{})
+    assert :error = EncryptedBinary.load(123)
+    assert :error = EncryptedBinary.load(%{})
   end
+
 end
