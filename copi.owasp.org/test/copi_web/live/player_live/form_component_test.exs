@@ -169,7 +169,7 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       {:ok, _deleted_game} = Cornucopia.delete_game(game)
 
       view
-      |> form("#player-form", player: %{name: "Ghost Player"})
+      |> form("#player-form", player: %{name: "Ghost Player", game_id: game.id})
       |> render_submit()
 
       assert_redirect(view, "/games")
