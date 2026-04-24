@@ -1297,6 +1297,22 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     return cast(List[ElTree.Element], elements)
 
 
+def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
+    """Replace text and tail text in an XML element."""
+    if el.text:
+        new_text = get_replacement_value_from_dict(el.text, replacement_values)
+        if new_text != el.text:
+            el.text = new_text
+            modified = True
+    for child in el:
+        if child.tail:
+            new_tail = get_replacement_value_from_dict(child.tail, replacement_values)
+            if new_tail != child.tail:
+                child.tail = new_tail
+                modified = True
+    return modified
+
+
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     """Replace text in XML file."""
     logging.debug(f" --- starting xml_replace for {filename}")
@@ -1315,11 +1331,7 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
 
     modified = False
     for el in elements_to_check:
-        if el.text:
-            new_text = get_replacement_value_from_dict(el.text, replacement_values)
-            if new_text != el.text:
-                el.text = new_text
-                modified = True
+        modified = _replace_element_text(el, replacement_values, modified)
 
     if modified:
         try:
