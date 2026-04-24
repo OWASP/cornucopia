@@ -128,6 +128,23 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       
       assert Enum.all?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
     end
+
+    # Regression test for issue #2842 – single non-empty suit matching edition
+    test "returns same suits when exactly one suit matches the edition" do
+      suits = ["webapp-authentication"]
+      result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
+
+      assert result == suits
+    end
+
+    # Regression test for issue #2842 – single non-empty suit NOT matching edition
+    test "generates new list when exactly one suit does not match the edition" do
+      suits = ["mobileapp-storage"]
+      result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
+
+      assert is_list(result)
+      assert Enum.all?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+    end
   end
 
   describe "get_suits_from_selected_deck/1" do
