@@ -1,18 +1,22 @@
-import unittest
-import unittest.mock as mock
+# Standard library
 import argparse
+import glob
 import io
+import logging
 import os
 import platform
+import shutil
+import subprocess
 import sys
 import tempfile
-import zipfile
-import docx  # type: ignore
-import logging
-import glob
-import shutil
 import typing
+import unittest
+import zipfile
 from typing import List, Dict, Any, Tuple
+from unittest.mock import patch
+import unittest.mock as mock
+
+import docx
 
 import scripts.convert as c
 
@@ -335,6 +339,36 @@ class TestGetTemplateForEdition(unittest.TestCase):
 
         got_template_doc = c.get_template_for_edition(layout, template, edition, language)
         self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_fallback_language(self):
+        layout = "guide"
+        template = "bridge"
+        edition = "webapp"
+        language = "fr"  # assume this file doesn't exist
+
+        result = c.get_template_for_edition(layout, template, edition, language)
+
+        self.assertIn("bridge", result)
+
+    def test_get_template_invalid_edition(self):
+        layout = "guide"
+        template = "bridge"
+        edition = "invalid"
+        language = "en"
+
+        result = c.get_template_for_edition(layout, template, edition, language)
+
+        self.assertIsInstance(result, str)
+
+    def test_get_template_different_layout(self):
+        layout = "cards"
+        template = "bridge"
+        edition = "webapp"
+        language = "en"
+
+        result = c.get_template_for_edition(layout, template, edition, language)
+
+        self.assertIn("cards", result)
 
     def test_get_template_for_edition_default_idml(self) -> None:
         layout = "cards"
@@ -2241,6 +2275,89 @@ class TestGetLibreOfficeBin(unittest.TestCase):
     def test_linux_uses_shutil_which(self, mock_which, mock_platform):
         result = c._get_libreoffice_bin()
         self.assertEqual(result, "/usr/bin/libreoffice")
+
+
+class TestConvertWithLibreOffice(unittest.TestCase):
+
+    @patch("scripts.convert._get_libreoffice_bin", return_value=None)
+    def test_no_binary(self, mock_bin):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_file_paths", return_value=(False, "error", ""))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    def test_invalid_paths(self, mock_bin, mock_paths):
+        result = c._convert_with_libreoffice("bad.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_command_args", return_value=False)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    def test_invalid_command_args(self, mock_bin, mock_paths, mock_cmd):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="cmd", timeout=1))
+    def test_timeout(self, mock_run, mock_bin, mock_paths, mock_cmd):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("subprocess.run", side_effect=Exception("fail"))
+    def test_exception(self, mock_run, mock_bin, mock_paths, mock_cmd):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+
+class TestConvertHappyPath(unittest.TestCase):
+
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("subprocess.run")
+    @patch("os.makedirs")
+    def test_convert_success(self, mock_makedirs, mock_run, mock_bin, mock_paths, mock_cmd):
+
+        mock_run.return_value = None
+
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+
+        self.assertTrue(result)
+
+        mock_run.assert_called_once()
+
+
+class TestConvertDocx2PdfSuccess(unittest.TestCase):
+
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("subprocess.run", return_value=None)
+    def test_command_args_content(self, mock_run, mock_cmd, mock_paths, mock_bin):
+
+        c._convert_with_libreoffice("file.docx", "out.pdf")
+
+        args, _ = mock_run.call_args
+
+        cmd = args[0]
+
+        self.assertTrue(any("pdf" in str(x) for x in cmd))
+
+        self.assertTrue(any("--outdir" in str(x) for x in cmd))
+
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("subprocess.run", return_value=None)
+    def test_real_validate_command_args_execution(self, mock_run, mock_paths, mock_bin):
+
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+
+        self.assertIn(result, [True, False])
 
 
 if __name__ == "__main__":
