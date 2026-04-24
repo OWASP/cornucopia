@@ -1,18 +1,22 @@
-import unittest
-import unittest.mock as mock
+# Standard library
 import argparse
+import glob
 import io
+import logging
 import os
 import platform
+import shutil
+import subprocess
 import sys
 import tempfile
-import zipfile
-import docx  # type: ignore
-import logging
-import glob
-import shutil
 import typing
+import unittest
+import zipfile
 from typing import List, Dict, Any, Tuple
+from unittest.mock import patch
+import unittest.mock as mock
+
+import docx
 
 import scripts.convert as c
 
@@ -2271,12 +2275,6 @@ class TestGetLibreOfficeBin(unittest.TestCase):
     def test_linux_uses_shutil_which(self, mock_which, mock_platform):
         result = c._get_libreoffice_bin()
         self.assertEqual(result, "/usr/bin/libreoffice")
-
-
-import unittest
-import subprocess
-from unittest.mock import patch
-import scripts.convert as c
 
 
 class TestConvertWithLibreOffice(unittest.TestCase):
