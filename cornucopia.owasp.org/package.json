@@ -24,7 +24,7 @@
 		"@vitest/coverage-v8": "^4.0.17",
 		"dotenv": "^17.4.2",
 		"serve": "^14.2.6",
-		"svelte": "^5.55.4",
+		"svelte": "^5.55.5",
 		"svelte-check": "^4.4.6",
 		"svelte-sitemap": "^3.1.0",
 		"then-request": "^6.0.2",
