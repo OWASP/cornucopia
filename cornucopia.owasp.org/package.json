@@ -24,7 +24,7 @@
 		"@vitest/coverage-v8": "^4.0.17",
 		"dotenv": "^17.4.2",
 		"serve": "^14.2.6",
-		"svelte": "^5.50.3",
+		"svelte": "^5.55.4",
 		"svelte-check": "^4.4.6",
 		"svelte-sitemap": "^3.1.0",
 		"then-request": "^6.0.2",
@@ -33,7 +33,7 @@
 		"vite": "^7.3.1",
 		"vitest": "^4.0.17",
 		"wait-on": "^9.0.5",
-		"wrangler": "4.83.0"
+		"wrangler": "4.84.1"
 	},
 	"type": "module",
 	"dependencies": {
