@@ -1,10 +1,6 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-  import { DevGuideMapping } from '$lib/devguideMapping';
-  import { resolve } from "$app/paths";
-
-    import {
-      GetCardAttacks, type Attack } from "$lib/cardAttacks";
+    import { DevGuideMapping } from '$lib/devguideMapping';
+    import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import ASVSOverview from "$lib/components/ASVSOverview.svelte";
     import MappingsList from "$lib/components/mappingsList.svelte";
     import CapecMapTable from "$lib/components/capecMapTable.svelte";
@@ -13,14 +9,14 @@
     import { MappingController, type WebAppMapping } from "../../domain/mapping/mappingController";
     import { readTranslation } from "$lib/stores/stores";
   interface Props {
-    mappingData: Record<string, unknown>;
+    mappingData: any;
     card: Card;
     routes: Map<string, Route[]>;
-    capecData?: Record<string, unknown>;
+    capecData?: any;
     asvsVersion: string;
   }
 
-  let { mappingData, card = $bindable(), routes, capecData = undefined, asvsVersion }: Props = $props();
+  let { mappingData, card, routes, capecData = undefined, asvsVersion }: Props = $props();
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
@@ -63,8 +59,8 @@
     function linkCapec(input: string) {
       return "/taxonomy/capec-3.9/" + input;
     }
-    let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
-    let attacks: Attack[] = $state(GetCardAttacks(card.id));
+    let mappings = $derived(controller.getWebAppCardMappings(card.id));
+    let attacks: Attack[] = $derived(GetCardAttacks(card.id));
     
     let hasMappings = $derived(mappings && Object.keys(mappings).length > 1);
     let hasCapecMap = $derived(
@@ -74,10 +70,6 @@
       Object.keys(mappings.capec_map).length > 0
     );
   
-    run(() => {
-      mappings = controller.getWebAppCardMappings(card.id);
-      attacks = GetCardAttacks(card.id);
-    });
   </script>
 
     {#if hasMappings }
@@ -120,7 +112,7 @@
       <MappingsList 
         title="SAFECode:"
         mappings={mappings.safecode} 
-        linkFunction={(_input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
+        linkFunction={(input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
       />
       {/if}
     {/if}
@@ -140,8 +132,8 @@
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]} version={asvsVersion}></ASVSOverview>
     {/if}
     <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>
-    {#each attacks || [] as attack (attack.url)}
-      <p><a href={resolve('/taxonomy/attacks/' + attack.url)}>{attack.name}</a></p>
+    {#each attacks || [] as attack}
+      <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
     {/each}
   
   <style>
@@ -163,5 +155,3 @@
     }
   </style>
   
-
-
