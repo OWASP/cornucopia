@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { run } from "svelte/legacy";
     import { GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
@@ -14,18 +13,13 @@
         routes: Map<string, Route[]>;
     }
 
-    let { mappingData, card = $bindable(), routes }: Props = $props();
+    let { mappingData, card, routes }: Props = $props();
 
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
-    let mappings: any = $state({});
-    let attacks: Attack[] = $state([]);
-
-    run(() => {
-        mappings = controller.getCardMappings(card?.id);
-        attacks = GetCardAttacks(card?.id) as Attack[];
-    });
+    let mappings = $derived(controller.getCardMappings(card?.id));
+    let attacks: Attack[] = $derived(GetCardAttacks(card?.id) as Attack[]);
 
     const NON_DISPLAY = new Set(["id", "value", "url"]);
 
