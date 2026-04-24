@@ -21,8 +21,12 @@ defmodule Copi.Cornucopia.DealtCardTest do
       assert {:error, :not_found} = DealtCard.find(-1)
     end
 
-    test "returns error for non-numeric dealt card id" do
+    test "returns :invalid_id for non-integer string" do
       assert {:error, :invalid_id} = DealtCard.find("abc")
+    end
+
+    test "returns :invalid_id for partial-numeric string" do
+      assert {:error, :invalid_id} = DealtCard.find("12abc")
     end
   end
 end

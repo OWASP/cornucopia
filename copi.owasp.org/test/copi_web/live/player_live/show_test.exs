@@ -61,7 +61,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         payload: game
       })
 
-      :timer.sleep(50)
+      render(view)
       assert Process.alive?(view.pid)
     end
 
@@ -78,7 +78,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
       send(show_live.pid, :proceed_to_next_round)
-      :timer.sleep(100)
+      render(show_live)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
@@ -97,7 +97,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
       send(show_live.pid, :proceed_to_next_round)
-      :timer.sleep(100)
+      render(show_live)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.finished_at != nil
@@ -125,8 +125,9 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       render_click(show_live, "next_round", %{})
-
-      :timer.sleep(300)
+      # Process.send_after schedules :proceed_to_next_round 100ms ahead; wait then flush
+      :timer.sleep(150)
+      render(show_live)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
@@ -190,7 +191,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       render_click(show_live, "next_round", %{})
-      :timer.sleep(100)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
@@ -208,7 +208,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       render_click(show_live, "next_round", %{})
-      :timer.sleep(100)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played == 1
@@ -223,13 +222,11 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
       render_click(show_live, "toggle_continue_vote", %{})
-      :timer.sleep(100)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert length(updated_game.continue_votes) == 1
 
       render_click(show_live, "toggle_continue_vote", %{})
-      :timer.sleep(100)
 
       {:ok, updated_game2} = Cornucopia.Game.find(game_id)
       assert length(updated_game2.continue_votes) == 0
@@ -246,13 +243,11 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
       render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
-      :timer.sleep(100)
 
       {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt.votes) == 1
 
       render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
-      :timer.sleep(100)
 
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
@@ -260,41 +255,28 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   end
 
   describe "toggle_vote with invalid dealt_card_id" do
-    test "returns flash error and keeps socket alive for non-existent dealt_card_id", %{conn: conn} do
+    test "returns flash error for non-existent dealt_card_id", %{conn: conn} do
       {:ok, game} = Cornucopia.create_game(%{name: "Invalid ID Test Game", edition: "webapp"})
       {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
 
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
 
-      # Send a phx-click payload with a non-existent dealt_card_id
       render_click(view, "toggle_vote", %{"dealt_card_id" => "999999999"})
 
-      # LiveView should still be alive and show a flash error
       assert render(view) =~ "Invalid card selection"
     end
 
-    test "returns flash error and keeps socket alive for non-castable dealt_card_id", %{conn: conn} do
-      {:ok, game} = Cornucopia.create_game(%{name: "Invalid String ID Test Game", edition: "webapp"})
+    test "returns flash error for non-integer dealt_card_id", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Invalid ID Format Test Game", edition: "webapp"})
       {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
 
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
 
+      # Both alphabetic and partial-numeric strings are rejected
       render_click(view, "toggle_vote", %{"dealt_card_id" => "abc"})
-
-      # LiveView should still be alive and show the same generic flash error
       assert render(view) =~ "Invalid card selection"
-    end
 
-    test "returns flash error and keeps socket alive for non-numeric dealt_card_id", %{conn: conn} do
-      {:ok, game} = Cornucopia.create_game(%{name: "Non-numeric ID Test Game", edition: "webapp"})
-      {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
-
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
-
-      # Send a phx-click payload with a non-numeric dealt_card_id (e.g. "abc")
-      render_click(view, "toggle_vote", %{"dealt_card_id" => "abc"})
-
-      # LiveView should still be alive and show a flash error
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "12abc"})
       assert render(view) =~ "Invalid card selection"
     end
   end

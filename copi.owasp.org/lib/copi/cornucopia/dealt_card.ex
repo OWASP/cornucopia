@@ -13,17 +13,20 @@ defmodule Copi.Cornucopia.DealtCard do
     timestamps()
   end
 
-  def find(id) do
-    case Integer.parse(to_string(id)) do
-      {int_id, ""} ->
-        case Copi.Repo.get(Copi.Cornucopia.DealtCard, int_id) do
-          nil -> {:error, :not_found}
-          dealt_card -> {:ok, dealt_card |> Copi.Repo.preload([:card, :votes])}
-        end
-      _ ->
-        {:error, :invalid_id}
+  def find(id) when is_binary(id) do
+    case Integer.parse(id) do
+      {int_id, ""} -> find(int_id)
+      _ -> {:error, :invalid_id}
     end
   end
+
+  def find(id) when is_integer(id) do
+    case Copi.Repo.get(Copi.Cornucopia.DealtCard, id) do
+      nil -> {:error, :not_found}
+      dealt_card -> {:ok, dealt_card |> Copi.Repo.preload([:card, :votes])}
+    end
+  end
+
   @doc false
   def changeset(dealt_card, attrs) do
     dealt_card
