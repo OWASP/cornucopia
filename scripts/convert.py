@@ -48,7 +48,7 @@ class ConvertVars:
                     meta = data["meta"]
                     if isinstance(meta, dict):
                         return meta
-        except Exception as e:  # pragma: no cover
+        except Exception as e:
             logging.warning(f"Failed to parse {filepath} for dynamic choice detection: {e}")
         return {}
 
@@ -133,7 +133,7 @@ def check_make_list_into_text(var: List[str]) -> str:
     return text_output
 
 
-def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tuple[bool, str, str]:  # pragma: no cover
+def _validate_file_paths(source_filename: str, output_pdf_filename: str) -> Tuple[bool, str, str]:
     """Validate and sanitize file paths to prevent command injection."""
     source_path = os.path.abspath(source_filename)
     output_dir = os.path.abspath(os.path.dirname(output_pdf_filename))
@@ -211,7 +211,7 @@ def _get_libreoffice_bin() -> str:
     return shutil.which("libreoffice") or shutil.which("soffice") or ""
 
 
-def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:  # pragma: no cover
+def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) -> bool:
     """Convert document to PDF using LibreOffice."""
     libreoffice_bin = _get_libreoffice_bin()
     if not libreoffice_bin:
@@ -259,7 +259,7 @@ def _convert_with_libreoffice(source_filename: str, output_pdf_filename: str) ->
         return False
 
 
-def _convert_with_docx2pdf(source_filename: str, output_pdf_filename: str) -> bool:  # pragma: no cover
+def _convert_with_docx2pdf(source_filename: str, output_pdf_filename: str) -> bool:
     """Convert DOCX to PDF using docx2pdf library."""
     if source_filename.endswith(".docx") and convert_vars.can_convert_to_pdf:
         try:
@@ -297,7 +297,7 @@ def _cleanup_temp_file(filename: str) -> None:
             pass
 
 
-def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -> None:  # pragma: no cover
+def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -> None:
     """Rename LibreOffice output file to match expected filename."""
     # LibreOffice outputs to the same name as source but with .pdf
     default_out = str(Path(source_filename).with_suffix(".pdf"))
@@ -308,7 +308,7 @@ def _rename_libreoffice_output(source_filename: str, output_pdf_filename: str) -
     logging.info(f"New file saved: {output_pdf_filename}")
 
 
-def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:  # pragma: no cover
+def convert_to_pdf(source_filename: str, output_pdf_filename: str) -> None:
     """Convert a document file (ODF, DOCX) to PDF using LibreOffice or docx2pdf.
 
     Note: The source file is preserved after conversion, as it's typically an output
@@ -450,7 +450,7 @@ def ensure_folder_exists(folder_path: str) -> None:
         os.makedirs(folder_path)
 
 
-def main() -> None:  # pragma: no cover
+def main() -> None:
     """Main entry point for the conversion tool."""
     convert_vars.args = parse_arguments(sys.argv[1:])
     set_logging()
@@ -1350,6 +1350,6 @@ def zip_dir(path: str, zip_filename: str) -> None:
                 zip_file.write(f, f[len(path) :])  # noqa: E203
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     convert_vars: ConvertVars = ConvertVars()
     main()

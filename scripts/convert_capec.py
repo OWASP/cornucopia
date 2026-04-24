@@ -253,7 +253,7 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     )
     try:
         args = parser.parse_args(input_args)
-    except argparse.ArgumentError as exc:  # pragma: no cover
+    except argparse.ArgumentError as exc:
         logging.error(exc.message)
         sys.exit()
     return args
@@ -267,7 +267,7 @@ def get_valid_version(version: str) -> str:
     return ConvertVars.LATEST_ASVS_VERSION_CHOICES[-1]
 
 
-def main() -> None:  # pragma: no cover
+def main() -> None:
     """Main entry point for CAPEC conversion."""
     convert_vars.args = parse_arguments(sys.argv[1:])
     asvs_version = get_valid_version(convert_vars.args.asvs_version)
@@ -295,6 +295,6 @@ def main() -> None:  # pragma: no cover
     logging.info("CAPEC conversion process completed")
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     convert_vars: ConvertVars = ConvertVars()
     main()
