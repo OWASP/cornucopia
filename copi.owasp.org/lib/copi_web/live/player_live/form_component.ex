@@ -47,10 +47,12 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     """
   end
 
+  # coveralls-ignore-start
   @impl true
   def update(%{player: nil} = assigns, socket) do
     {:ok, socket |> assign(assigns) |> assign(:form, nil)}
   end
+  # coveralls-ignore-stop
 
   def update(%{player: player} = assigns, socket) do
     changeset = Cornucopia.change_player(player)

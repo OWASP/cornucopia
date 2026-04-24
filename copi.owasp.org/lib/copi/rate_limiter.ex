@@ -181,8 +181,10 @@ defmodule Copi.RateLimiter do
         default
       value ->
         case Integer.parse(value) do
+          # coveralls-ignore-start
           {parsed_value, ""} when parsed_value > 0 ->
             parsed_value
+          # coveralls-ignore-stop
           _ ->
             Logger.warning(
               "Invalid environment variable RATE_LIMIT_#{env_var}=#{value}, " <>

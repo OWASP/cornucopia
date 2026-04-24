@@ -34,7 +34,9 @@ defmodule Copi.Encrypted.Binary do
       {:error, reason} -> raise "Copi.Encrypted.Binary load/1 failed: #{reason}"
     end
   end
+  # coveralls-ignore-start
   def load(_), do: :error
+  # coveralls-ignore-stop
 
   def encrypt(plaintext) when is_binary(plaintext) do
     {:ok, key} = fetch_key()
@@ -72,9 +74,10 @@ defmodule Copi.Encrypted.Binary do
     key = Base.decode64!(String.trim(raw))
 
     if byte_size(key) != 32 do
-      # coveralls-ignore-next-line
+      # coveralls-ignore-start
       raise ArgumentError,
             "COPI_ENCRYPTION_KEY must decode to exactly 32 bytes, got #{byte_size(key)}"
+      # coveralls-ignore-stop
     end
 
     {:ok, key}

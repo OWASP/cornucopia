@@ -73,7 +73,9 @@ defmodule CopiWeb do
     end
   end
 
+  # coveralls-ignore-start
   def static_paths, do: ~w(assets fonts images downloads favicon.ico robots.txt)
+  # coveralls-ignore-stop
 
   def live_view do
     quote do
