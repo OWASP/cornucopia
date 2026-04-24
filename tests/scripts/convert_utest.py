@@ -18,13 +18,9 @@ import scripts.convert as c
 
 c.convert_vars = c.ConvertVars()
 c.convert_vars.BASE_PATH = os.path.split(os.path.dirname(os.path.realpath(c.__file__)))[0]
-
-
 if "unittest.util" in __import__("sys").modules:
     # Show full diff in self.assertEqual.
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
-
-
 class MultiLingualSupportIsValidStringArgument(unittest.TestCase):
     def test_is_valid_string_argument(self) -> None:
         # Devanagari
@@ -71,8 +67,6 @@ class MultiLingualSupportIsValidStringArgument(unittest.TestCase):
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĴĵĶķĹĺĻļĽľŁłŃńŅņŇňŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž"  # noqa: E501
             )
         )
-
-
 class TextGetValidEditionChoices(unittest.TestCase):
     def test_get_valid_edition_choices(self) -> None:
         c.convert_vars.args = argparse.Namespace(edition="all")
@@ -94,8 +88,6 @@ class TextGetValidEditionChoices(unittest.TestCase):
             if edition != "all":
                 self.assertIn(edition, got_list)
         self.assertEqual(len(got_list), len(c.convert_vars.EDITION_CHOICES) - 1)
-
-
 class TextGetValidVersionChoices(unittest.TestCase):
     def test_get_valid_version_choices(self) -> None:
         # These versions are currently present in the repository
@@ -118,8 +110,6 @@ class TextGetValidVersionChoices(unittest.TestCase):
         c.convert_vars.args = argparse.Namespace(version="", edition="all")
         got_list = c.get_valid_version_choices()
         self.assertTrue(len(got_list) > 0)
-
-
 class TestGetValidLayouts(unittest.TestCase):
 
     def setUp(self) -> None:
@@ -159,8 +149,6 @@ class TestGetValidLayouts(unittest.TestCase):
         got_list = c.get_valid_layout_choices()
         got_list.sort()
         self.assertListEqual(want_list, got_list)
-
-
 class TestGetValidTemplateChoices(unittest.TestCase):
     def test_get_valid_style_choices_dynamic(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="bridge_qr", layout="cards")
@@ -196,8 +184,6 @@ class TestGetValidTemplateChoices(unittest.TestCase):
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
-
-
 class TestGetValidLanguagesChoices(unittest.TestCase):
     def test_get_valid_language_choices_fr(self) -> None:
         c.convert_vars.args = argparse.Namespace(language="fr")
@@ -222,8 +208,6 @@ class TestGetValidLanguagesChoices(unittest.TestCase):
         for lang in c.convert_vars.LANGUAGE_CHOICES:
             if lang != "all":
                 self.assertIn(lang, got_language)
-
-
 class TestSetCanConvertToPdf(unittest.TestCase):
     def test_set_can_convert_to_pdf(self) -> None:
         want_can_convert_in = sys.platform.lower().find("win") != -1 or sys.platform.lower().find("darwin") != -1
@@ -231,8 +215,6 @@ class TestSetCanConvertToPdf(unittest.TestCase):
         c.set_can_convert_to_pdf()
         got_can_convert = c.convert_vars.can_convert_to_pdf
         self.assertEqual(want_can_convert_in, got_can_convert)
-
-
 class TestSortKeysLongestToShortest(unittest.TestCase):
     def test_sort_keys_longest_to_shortest_success(self) -> None:
         source_data = {
@@ -248,8 +230,6 @@ class TestSortKeysLongestToShortest(unittest.TestCase):
 
         got_data = c.sort_keys_longest_to_shortest(source_data)
         self.assertEqual(want_data, got_data)
-
-
 class TestSetLogging(unittest.TestCase):
     def setUp(self) -> None:
         logging.getLogger().setLevel(logging.INFO)
@@ -282,8 +262,6 @@ class TestSetLogging(unittest.TestCase):
         c.set_logging()
         got_logging_level = logging.getLogger().level
         self.assertEqual(want_logging_level, got_logging_level)
-
-
 class TestRemoveShortKeys(unittest.TestCase):
     def test_remove_short_keys_10_chars(self) -> None:
         input_dict = {
@@ -315,8 +293,6 @@ class TestRemoveShortKeys(unittest.TestCase):
 
         got_dict = c.remove_short_keys(input_dict)
         self.assertDictEqual(want_dict, got_dict)
-
-
 class TestGetTemplateForEdition(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(inputfile="", debug=False)
@@ -424,8 +400,6 @@ class TestGetTemplateForEdition(unittest.TestCase):
             got_template_doc = c.get_template_for_edition(layout, template, edition)
         self.assertEqual(want_error_log_messages, ll.output)
         self.assertEqual(want_template_doc, got_template_doc)
-
-
 class TestRenameOutputFile(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(outputfile=c.convert_vars.DEFAULT_OUTPUT_FILENAME)
@@ -489,8 +463,6 @@ class TestRenameOutputFile(unittest.TestCase):
 
         got_filename = c.rename_output_file(file_extension, template, layout, self.input_meta_data)
         self.assertEqual(want_filename, got_filename)
-
-
 class TestGetFindReplaceList(unittest.TestCase):
     def setUp(self) -> None:
         self.want_list_default: List[Tuple[str, str]] = [
@@ -507,8 +479,6 @@ class TestGetFindReplaceList(unittest.TestCase):
 
         got_list = c.get_find_replace_list(self.input_meta_data, "guide", "bridge")
         self.assertListEqual(want_list, got_list)
-
-
 class TestValidMeta(unittest.TestCase):
     def setUp(self) -> None:
         self.meta = {
@@ -531,8 +501,6 @@ class TestValidMeta(unittest.TestCase):
             valid: bool = c.valid_meta(self.meta, "fr", "webapp", "3.0", "bridge", "cards")
         self.assertFalse(valid)
         self.assertIn(want_logging_error_message, " ".join(ll.output))
-
-
 class TestGetMetaData(unittest.TestCase):
     def setUp(self) -> None:
         self.test_data: Dict[str, Any] = {
@@ -835,8 +803,6 @@ class TestGetLanguageData(unittest.TestCase):
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
         self.assertEqual(want_first_suit_first_card, got_first_suit_first_card)
-
-
 class TestGetLanguageDataFor1dot30(unittest.TestCase):
     def setUp(self) -> None:
         test_source_yaml = os.path.join(c.convert_vars.BASE_PATH, "tests", "test_files", "source", "*.yaml")
@@ -1093,8 +1059,6 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
         self.assertEqual(want_first_suit_keys, got_first_suit_keys)
         got_first_suit_first_card = got_suits[0]["cards"][0]
         self.assertEqual(want_first_suit_first_card, got_first_suit_first_card)
-
-
 class TestParseArguments(unittest.TestCase):
     def test_parse_arguments_short_form_basic_success(self) -> None:
         input_args = ["-lt", "cards", "-v", "3.0"]
@@ -1183,8 +1147,6 @@ class TestParseArguments(unittest.TestCase):
 
         got_args = c.parse_arguments(input_args)
         self.assertEqual(want_args, got_args)
-
-
 class TestGetFilesFromOfType(unittest.TestCase):
     def test_get_files_from_of_type_source_yaml_files(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
@@ -1220,8 +1182,6 @@ class TestGetFilesFromOfType(unittest.TestCase):
             got_files = c.get_files_from_of_type(path, ext)
         self.assertEqual(ll.output, want_logging_error_message)
         self.assertListEqual(got_files, want_files)
-
-
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:
         file = os.path.join(
@@ -1255,8 +1215,6 @@ class TestGetDocxDocument(unittest.TestCase):
         self.assertIsInstance(got_file, want_type)
         got_len_paragraphs = len(got_file.paragraphs)
         self.assertEqual(want_len_paragraphs, got_len_paragraphs)
-
-
 class TestGetReplacementDict(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
@@ -1319,8 +1277,6 @@ class TestGetReplacementDict(unittest.TestCase):
 
         got_data = c.build_template_dict(self.input_data)
         self.assertDictEqual(got_data, want_data)
-
-
 class TestCheckFixFileExtension(unittest.TestCase):
     def test_check_fix_file_extension_no_extension(self) -> None:
         input_filename = "hello"
@@ -1369,8 +1325,6 @@ class TestCheckFixFileExtension(unittest.TestCase):
 
         got_filename = c.check_fix_file_extension(input_filename, input_extension)
         self.assertEqual(want_filename, got_filename)
-
-
 class TestConvertDocxToPdf(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=True)
@@ -1401,8 +1355,6 @@ class TestConvertDocxToPdf(unittest.TestCase):
             with self.assertLogs(logging.getLogger(), logging.INFO) as l4:
                 c.convert_to_pdf(input_docx_filename, want_pdf_filename)
         self.assertEqual(l4.output, want_logging_warn_message)
-
-
 class TestGetMappingForEdition(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(debug=False)
@@ -1472,8 +1424,6 @@ class TestGetMappingForEdition(unittest.TestCase):
             got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:No mapping file found", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
-
-
 class TestcreateEditionFromTemplate(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(
@@ -1642,8 +1592,6 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
         self.assertIn("cornucopia_cards_es.idml", " ".join(ll.output))
         self.assertTrue(os.path.isfile(self.want_file))
-
-
 class TestSaveIdmlFile(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(
@@ -1687,8 +1635,6 @@ class TestSaveIdmlFile(unittest.TestCase):
 
         c.save_idml_file(input_template_doc, self.language_dict, self.want_file)
         self.assertTrue(os.path.isfile(self.want_file))
-
-
 class TestSaveDocxFile(unittest.TestCase):
     def setUp(self) -> None:
         c.convert_vars.args = argparse.Namespace(
@@ -1766,8 +1712,6 @@ Development Environments in July 2012.</Content>
         with open(self.input_xml_file, "r", encoding="utf-8") as f:
             got_data = f.read()
         self.assertEqual(want_data, got_data)
-
-
 class TestReplaceTextInEmptyLeafletlFile(unittest.TestCase):
 
     def setUp(self) -> None:
@@ -1811,8 +1755,6 @@ Development Environments in July 2012.",
         with open(self.input_xml_file, "r", encoding="utf-8") as f:
             got_data = f.read()
         self.assertEqual(want_data, got_data)
-
-
 class TestReplaceTextInXmlFile(unittest.TestCase):
     def setUp(self) -> None:
         self.input_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
@@ -1853,8 +1795,6 @@ class TestReplaceTextInXmlFile(unittest.TestCase):
         with open(self.input_xml_file, "r", encoding="utf-8") as f:
             got_data = f.read()
         self.assertEqual(want_data, got_data)
-
-
 class TestReplaceTextInXmlFileFail(unittest.TestCase):
     def setUp(self) -> None:
         self.input_data = """<ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Suit">
@@ -1892,8 +1832,6 @@ class TestReplaceTextInXmlFileFail(unittest.TestCase):
         with open(self.input_xml_file, "r", encoding="utf-8") as f:
             got_data = f.read()
         self.assertEqual(want_data, got_data)
-
-
 class Test1(unittest.TestCase):
     def setUp(self) -> None:
         self.replacement_values = [
@@ -1916,8 +1854,6 @@ class Test1(unittest.TestCase):
 
         got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
         self.assertEqual(want_data, got_data)
-
-
 class TestCheckMakeListIntoText(unittest.TestCase):
     def test_check_make_list_into_text_success(self) -> None:
         input_list = ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"]
@@ -1939,8 +1875,6 @@ class TestCheckMakeListIntoText(unittest.TestCase):
 
         got_text = c.check_make_list_into_text(input_list)
         self.assertEqual(want_text, got_text)
-
-
 class TestGroupNumberRanges(unittest.TestCase):
     def test_group_number_ranges_success(self) -> None:
         input_list = ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"]
@@ -1955,8 +1889,6 @@ class TestGroupNumberRanges(unittest.TestCase):
 
         got_text = c.group_number_ranges(input_list)
         self.assertEqual(want_text, got_text)
-
-
 class TestGetSuitTagsAndKey(unittest.TestCase):
     def test_get_suit_tags_and_key_suits(self) -> None:
         input_key = "suits"
@@ -1984,8 +1916,6 @@ class TestGetSuitTagsAndKey(unittest.TestCase):
         got_tags, got_key = c.get_suit_tags_and_key(input_key, "mobileapp")
         self.assertEqual(want_tags, got_tags)
         self.assertEqual(want_key, got_key)
-
-
 class TestGetFullTag(unittest.TestCase):
     def test_get_full_tag_ve(self) -> None:
         input_suit_tag = "VE"
@@ -2013,8 +1943,6 @@ class TestGetFullTag(unittest.TestCase):
 
         got_full_tag = c.get_full_tag(input_suit_tag, input_card, input_tag)
         self.assertEqual(want_full_tag, got_full_tag)
-
-
 class TestZipDir(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
@@ -2036,8 +1964,6 @@ class TestZipDir(unittest.TestCase):
         self.assertTrue(os.path.isfile(self.input_filename))
         got_file_size = os.stat(self.input_filename).st_size
         self.assertGreater(got_file_size, want_min_file_size)
-
-
 class TestEnsureFolderExists(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
@@ -2062,8 +1988,6 @@ class TestEnsureFolderExists(unittest.TestCase):
         self.assertTrue(os.path.exists(input_path))
         c.ensure_folder_exists(input_path)
         self.assertTrue(os.path.exists(input_path))
-
-
 class TestReplaceDocxInlineText(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
@@ -2127,8 +2051,6 @@ class TestReplaceDocxInlineText(unittest.TestCase):
         text_list = self.get_docx_text(doc)
         for t in want_old_text:
             self.assertNotIn(t, text_list)
-
-
 class TestGetDocumentParagraphs(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
@@ -2174,8 +2096,6 @@ class TestGetDocumentParagraphs(unittest.TestCase):
                 text_list.append(t)
         for want_text in want_text_list:
             self.assertIn(want_text, text_list)
-
-
 class TestGetParagraphsFromTableInDoc(unittest.TestCase):
     def setUp(self) -> None:
         self.b = c.convert_vars.BASE_PATH
@@ -2196,8 +2116,6 @@ class TestGetParagraphsFromTableInDoc(unittest.TestCase):
         for table in doc_tables:
             paragraphs += c.get_paragraphs_from_table_in_doc(table)
         self.assertGreater(len(paragraphs), want_min_len_paragraphs)
-
-
 class TestSafeExtractAll(unittest.TestCase):
     """Unit tests for _safe_extractall covering CWE-22 path traversal prevention."""
 
@@ -2248,8 +2166,6 @@ class TestSafeExtractAll(unittest.TestCase):
             with zipfile.ZipFile(buf) as zf:
                 c._safe_extract_all(zf, td)
             self.assertTrue(os.path.isfile(os.path.join(td, "content.xml")))
-
-
 class TestGetLibreOfficeBin(unittest.TestCase):
     """Tests for _get_libreoffice_bin() Windows path resolution."""
 
@@ -2271,14 +2187,10 @@ class TestGetLibreOfficeBin(unittest.TestCase):
     def test_linux_uses_shutil_which(self, mock_which, mock_platform):
         result = c._get_libreoffice_bin()
         self.assertEqual(result, "/usr/bin/libreoffice")
-
-
 import unittest
 import subprocess
 from unittest.mock import patch
 import scripts.convert as c
-
-
 class TestConvertWithLibreOffice(unittest.TestCase):
 
     @patch("scripts.convert._get_libreoffice_bin", return_value=None)
@@ -2314,8 +2226,6 @@ class TestConvertWithLibreOffice(unittest.TestCase):
     def test_exception(self, mock_run, mock_bin, mock_paths, mock_cmd):
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
         self.assertFalse(result)
-
-
 class TestConvertHappyPath(unittest.TestCase):
 
     @patch("scripts.convert._validate_command_args", return_value=True)
@@ -2332,8 +2242,6 @@ class TestConvertHappyPath(unittest.TestCase):
         self.assertTrue(result)
 
         mock_run.assert_called_once()
-
-
 class TestConvertDocx2PdfSuccess(unittest.TestCase):
 
     @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
@@ -2360,7 +2268,5 @@ class TestConvertDocx2PdfSuccess(unittest.TestCase):
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
 
         self.assertIn(result, [True, False])
-
-
 if __name__ == "__main__":
     unittest.main()
