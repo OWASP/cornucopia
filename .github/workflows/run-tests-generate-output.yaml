@@ -108,13 +108,13 @@ jobs:
           mkdir -p output/cornucopia_mobileapp || echo "Ignore error"
           mkdir -p output/cornucopia_mobileapp/Links || echo "Ignore error"
           mkdir -p output/cornucopia_mobileapp/Fonts || echo "Ignore error"
-          cp -rf ./resources/templates/Links/cornucopia_companion output/cornucopia_mobileapp/Links/
+          cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
           cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
            # Building Cornucopia Companion Edition
           mkdir -p output/cornucopia_companion || echo "Ignore error"
           mkdir -p output/cornucopia_companion/Links || echo "Ignore error"
           mkdir -p output/cornucopia_companion/Fonts || echo "Ignore error"
-          cp -rf ./resources/templates/Links/cornucopia_companion output/cornucopia_companion/Links/
+          cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_companion/Links/
           cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_companion/Fonts/
           #
           pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 2.2 -e webapp --pdf
