@@ -11,4 +11,10 @@ defmodule CopiWeb.ErrorHTMLTest do
     assert render_to_string(CopiWeb.ErrorHTML, "500", "html", []) =~ "Something went wrong"
     assert render_to_string(CopiWeb.ErrorHTML, "503", "html", []) =~ "Something went wrong"
   end
+
+  test "render/2 falls back to 500 template for unknown error codes" do
+    # render_to_string routes through our custom render/2 catch-all for
+    # template names that have no embedded-template match (e.g. 418).
+    assert render_to_string(CopiWeb.ErrorHTML, "418", "html", []) =~ "Something went wrong"
+  end
 end

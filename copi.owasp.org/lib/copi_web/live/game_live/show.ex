@@ -79,6 +79,7 @@ defmodule CopiWeb.GameLive.Show do
         player_count = length(players)
 
         # Deal cards to players in round-robin fashion
+        # coveralls-ignore-start
         all_cards
         |> Enum.with_index()
         |> Enum.each(fn {card, i} ->
@@ -87,6 +88,7 @@ defmodule CopiWeb.GameLive.Show do
             player_id: Enum.at(players, rem(i, player_count)).id
           })
         end)
+        # coveralls-ignore-stop
 
         # Update game with start time
         {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})

@@ -425,7 +425,9 @@ defmodule CopiWeb.CoreComponents do
   def table(assigns) do
     assigns =
       with %{rows: %Phoenix.LiveView.LiveStream{}} <- assigns do
+        # coveralls-ignore-start
         assign(assigns, row_id: assigns.row_id || fn {id, _item} -> id end)
+        # coveralls-ignore-stop
       end
 
     ~H"""

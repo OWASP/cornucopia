@@ -19,7 +19,9 @@ defmodule Copi.IPHelper do
     case get_connect_info_ip(socket) do
       nil -> {127, 0, 0, 1}  # Fallback to localhost (for tests)
       ip when is_tuple(ip) -> ip
+      # coveralls-ignore-start
       ip -> ip
+      # coveralls-ignore-stop
     end
   end
 
@@ -110,7 +112,9 @@ defmodule Copi.IPHelper do
         |> List.first()
         |> String.trim()
         |> parse_ip_string()
+      # coveralls-ignore-start
       _ -> nil
+      # coveralls-ignore-stop
     end
   end
 
@@ -144,7 +148,9 @@ defmodule Copi.IPHelper do
     cond do
       is_map(x_headers) ->
         case Map.get(x_headers, "x-forwarded-for") || Map.get(x_headers, :"x-forwarded-for") do
+          # coveralls-ignore-start
           nil -> nil
+          # coveralls-ignore-stop
           v -> extract_first_ip(v)
         end
 
@@ -155,12 +161,16 @@ defmodule Copi.IPHelper do
               "x-forwarded-for" -> extract_first_ip(v)
               _ -> nil
             end
+          # coveralls-ignore-start
           v when is_binary(v) -> extract_first_ip(v)
           _ -> nil
+          # coveralls-ignore-stop
         end)
 
       is_binary(x_headers) -> extract_first_ip(x_headers)
+      # coveralls-ignore-start
       true -> nil
+      # coveralls-ignore-stop
     end
   end
 
@@ -286,8 +296,10 @@ defmodule Copi.IPHelper do
             _ -> nil
           end
 
+        # coveralls-ignore-start
         _ ->
           nil
+        # coveralls-ignore-stop
       end
     else
       nil

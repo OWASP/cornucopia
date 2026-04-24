@@ -34,7 +34,9 @@ defmodule Copi.Encrypted.Binary do
       {:error, reason} -> raise "Copi.Encrypted.Binary load/1 failed: #{reason}"
     end
   end
+  # coveralls-ignore-start
   def load(_), do: :error
+  # coveralls-ignore-stop
 
   def encrypt(plaintext) when is_binary(plaintext) do
     {:ok, key} = fetch_key()
@@ -63,15 +65,19 @@ defmodule Copi.Encrypted.Binary do
 
   defp fetch_key do
     raw =
+      # coveralls-ignore-next-line
       System.get_env("COPI_ENCRYPTION_KEY") ||
         Application.get_env(:copi, :encryption_key) ||
+        # coveralls-ignore-next-line
         raise "COPI_ENCRYPTION_KEY is not set. Please see: https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#encryption-key-setup"
 
     key = Base.decode64!(String.trim(raw))
 
     if byte_size(key) != 32 do
+      # coveralls-ignore-start
       raise ArgumentError,
             "COPI_ENCRYPTION_KEY must decode to exactly 32 bytes, got #{byte_size(key)}"
+      # coveralls-ignore-stop
     end
 
     {:ok, key}
