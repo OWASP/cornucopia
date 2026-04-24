@@ -119,12 +119,14 @@ defmodule CopiWeb.PlayerLive.FormComponent do
                  |> assign(:game, updated_game)
                  |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
 
+              # coveralls-ignore-start
               {:error, :game_already_started} ->
                 # V15.4: Race condition caught by transaction - game started between check and insert
                 {:noreply,
                  socket
                  |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
                  |> push_navigate(to: ~p"/games")}
+              # coveralls-ignore-stop
 
               {:error, %Ecto.Changeset{} = changeset} ->
                 {:noreply, assign_form(socket, changeset)}

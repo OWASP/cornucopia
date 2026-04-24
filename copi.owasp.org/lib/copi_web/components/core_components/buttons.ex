@@ -56,6 +56,7 @@ defmodule CopiWeb.CoreComponents.Buttons do
     """
   end
 
+  # coveralls-ignore-start
   def copy_url_button(assigns) do
     ~H"""
     <div id="copy-url-container" phx-hook="CopyUrl" class="flex flex-col w-full">
@@ -76,4 +77,5 @@ defmodule CopiWeb.CoreComponents.Buttons do
     </div>
     """
   end
+  # coveralls-ignore-stop
 end

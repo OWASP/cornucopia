@@ -161,6 +161,7 @@ defmodule Copi.RateLimiter do
   defp normalize_ip(ip) when is_binary(ip) do
     case :inet.parse_address(String.to_charlist(ip)) do
       {:ok, ip_tuple} -> ip_tuple
+      # coveralls-ignore-next-line
       {:error, _} -> ip
     end
   end

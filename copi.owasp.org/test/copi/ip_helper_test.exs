@@ -159,9 +159,20 @@ defmodule Copi.IPHelperTest do
       }
       assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
     end
+    test "falls back to remote_ip when connect_info is Plug.Conn with no peer_data" do
+      conn = %Plug.Conn{remote_ip: {10, 0, 0, 99}}
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: conn}}
+      assert IPHelper.get_ip_from_socket(socket) == {10, 0, 0, 99}
+    end
+
+    test "falls back to localhost when Phoenix.Socket transport dict has non-tuple :peer" do
+      Process.put(:peer, :not_a_tuple)
+      socket = %Phoenix.Socket{transport_pid: self()}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
   end
-  
-  describe "get_ip_from_connect_info/1" do
+
+  describe "get_ip_from_connect_info/1"do
     test "extracts from x_headers" do
       info = %{x_headers: [{"x-forwarded-for", "10.0.0.5"}]}
       assert IPHelper.get_ip_from_connect_info(info) == {10, 0, 0, 5}

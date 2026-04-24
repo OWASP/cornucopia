@@ -153,6 +153,17 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       assert_redirect(view, "/games/#{game.id}")
     end
 
+    test "shows validation error when player name is blank in :new path", %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      html =
+        view
+        |> form("#player-form", player: %{name: ""})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
+
     test "shows error when trying to join non-existent game", %{conn: conn} do
       fake_game_id = Ecto.ULID.generate()
 

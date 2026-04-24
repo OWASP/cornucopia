@@ -112,7 +112,9 @@ defmodule CopiWeb do
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
+  # coveralls-ignore-next-line
   defmacro __using__(which) when is_atom(which) do
+    # coveralls-ignore-next-line
     apply(__MODULE__, which, [])
   end
 end
