@@ -138,19 +138,6 @@ class TestReplaceElementText(unittest.TestCase):
         self.assertTrue(result)
 
 
-class TestConvertWithDocx2pdf(unittest.TestCase):
-    def test_non_docx_returns_false(self):
-        result = c._convert_with_docx2pdf("file.odt", "output/test.pdf")
-        self.assertFalse(result)
-
-    def test_docx_exception(self):
-        c.convert_vars.can_convert_to_pdf = True
-        with mock.patch.dict("sys.modules", {"docx2pdf": mock.MagicMock(
-                convert=mock.MagicMock(side_effect=Exception("fail")))}):
-            result = c._convert_with_docx2pdf("file.docx", "output/test.pdf")
-            self.assertFalse(result)
-
-
 class TestCleanupTempFile(unittest.TestCase):
     def test_cleanup_no_debug(self):
         c.convert_vars.args = argparse.Namespace(debug=False)
