@@ -2273,8 +2273,6 @@ class TestGetLibreOfficeBin(unittest.TestCase):
         self.assertEqual(result, "/usr/bin/libreoffice")
 
 
-
-
 from unittest.mock import patch
 import unittest
 import subprocess
@@ -2317,18 +2315,14 @@ class TestConvertWithLibreOffice(unittest.TestCase):
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
         self.assertFalse(result)
 
+
 class TestConvertHappyPath(unittest.TestCase):
 
     @patch("scripts.convert._validate_command_args", return_value=True)
-
     @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
-
     @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
-
     @patch("subprocess.run")
-
     @patch("os.makedirs")
-
     def test_convert_success(self, mock_makedirs, mock_run, mock_bin, mock_paths, mock_cmd):
 
         mock_run.return_value = None
@@ -2337,19 +2331,15 @@ class TestConvertHappyPath(unittest.TestCase):
 
         self.assertTrue(result)
 
-        mock_run.assert_called_once() 
+        mock_run.assert_called_once()
 
 
 class TestConvertDocx2PdfSuccess(unittest.TestCase):
 
     @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
-
     @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
-
     @patch("scripts.convert._validate_command_args", return_value=True)
-
     @patch("subprocess.run", return_value=None)
-
     def test_command_args_content(self, mock_run, mock_cmd, mock_paths, mock_bin):
 
         c._convert_with_libreoffice("file.docx", "out.pdf")
@@ -2363,16 +2353,14 @@ class TestConvertDocx2PdfSuccess(unittest.TestCase):
         self.assertTrue(any("--outdir" in str(x) for x in cmd))
 
     @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
-
     @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
-
     @patch("subprocess.run", return_value=None)
-
     def test_real_validate_command_args_execution(self, mock_run, mock_paths, mock_bin):
 
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
 
         self.assertIn(result, [True, False])
+
 
 if __name__ == "__main__":
     unittest.main()
