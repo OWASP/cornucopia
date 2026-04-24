@@ -165,11 +165,11 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
          %{conn: conn, game: game} do
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
 
-      # Submit with a non-existent game_id (simulates the game being deleted after page load)
-      fake_game_id = Ecto.ULID.generate()
+      # Delete the game after the form is loaded (simulates game being deleted mid-session)
+      Cornucopia.delete_game(game)
 
       view
-      |> form("#player-form", player: %{name: "Ghost Player", game_id: fake_game_id})
+      |> form("#player-form", player: %{name: "Ghost Player"})
       |> render_submit()
 
       assert_redirect(view, "/games")
