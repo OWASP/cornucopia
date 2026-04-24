@@ -5,62 +5,45 @@
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
     import { readTranslation } from "$lib/stores/stores";
+
     interface Props {
         card: Card;
         cards: Map<string, Card>;
         mappingData: any;
     }
 
-    let { card = $bindable(), cards, mappingData }: Props = $props();
+    let { card, cards, mappingData }: Props = $props();
     let t = readTranslation();
-    let nextCard = $derived(cards.get(card.next));
-    let previousCard = $derived(cards.get(card.prevous));
-    function checkKey(event : any) 
-    {
+
+    function getUrl(c: Card | undefined): string {
+        if (!c) return '';
+        return c.url + '/#card';
+    }
+
+    function goToNext(event: MouseEvent, thisCard: Card) {
+        event.preventDefault();
+        const nextCard = cards.get(thisCard.next);
+        if (nextCard) goto(getUrl(nextCard));
+    }
+
+    function goToPrevious(event: MouseEvent, thisCard: Card) {
+        event.preventDefault();
+        const prevCard = cards.get(thisCard.prevous);
+        if (prevCard) goto(getUrl(prevCard));
+    }
+
+    function checkKey(event: KeyboardEvent) {
         const KEYCODE_RIGHT = 39;
         const KEYCODE_LEFT = 37;
-        if(event.keyCode == KEYCODE_RIGHT)
-        {
-            goto(getUrl(cards.get(card.next)));
-            card = cards.get(card.next);
-            nextCard = cards.get(card.next);
-            previousCard = cards.get(card.prevous);
-        }   
-
-        if(event.keyCode == KEYCODE_LEFT)
-        {
-            goto(getUrl(cards.get(card.prevous)));
-            card = cards.get(card.prevous);
-            nextCard = cards.get(card.next);
-            previousCard = cards.get(card.prevous);
-        }
+        const nextCard = cards.get(card.next);
+        const prevCard = cards.get(card.prevous);
+        if (event.keyCode == KEYCODE_RIGHT && nextCard) goto(getUrl(nextCard));
+        if (event.keyCode == KEYCODE_LEFT && prevCard) goto(getUrl(prevCard));
     }
 
-    function getUrl(card: Card)
-    {
-        return cards.get(card.id)?.url + '/#card';
-    }
+    onDestroy(() => { if (browser) document.onkeydown = null; });
 
-    onDestroy(()=> {if(browser)document.onkeydown = null})
-
-    function goToNext(thisCard: Card)
-    {
-        card = cards.get(thisCard.next);
-        nextCard = cards.get(card.next);
-        previousCard = cards.get(card.prevous);
-        goto(getUrl(card));
-    }
-
-    function goToPrevious(thisCard: Card)
-    {
-        card = cards.get(thisCard.prevous);
-        nextCard = cards.get(thisCard.next);
-        previousCard = cards.get(card.prevous);
-        goto(getUrl(card));
-    }
-
-    if(browser)
-        document.onkeydown = checkKey;
+    if (browser) document.onkeydown = checkKey;
 </script>
 <noscript>
     <div class="card-panel" id="card-face">
@@ -77,13 +60,13 @@
 </noscript>
 <div class="card-panel script" id="card">
     <div class="left">
-        <a href={getUrl(card)} onclick={()=>goToPrevious(card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+        <a href={getUrl(cards.get(card.prevous))} onclick={(e)=>goToPrevious(e, card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
-        <a href={getUrl(card)} onclick={()=>goToNext(card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+        <a href={getUrl(cards.get(card.next))} onclick={(e)=>goToNext(e, card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
     </div>
 </div>
 <style>
