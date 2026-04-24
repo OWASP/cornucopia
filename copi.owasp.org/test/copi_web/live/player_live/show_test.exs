@@ -279,7 +279,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
 
-      # ASVS V2.2 / V16.5: malformed input should be rejected safely without crashing LiveView
       render_click(view, "toggle_vote", %{"dealt_card_id" => "abc"})
 
       # LiveView should still be alive and show the same generic flash error
