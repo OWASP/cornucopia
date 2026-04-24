@@ -2,7 +2,6 @@
 import unittest.mock as mock
 import argparse
 import os
-import sys
 import tempfile
 import subprocess
 import xml.etree.ElementTree as ET
@@ -35,8 +34,7 @@ class TestValidateFilePaths(unittest.TestCase):
 
     def test_source_path_outside_base_directory(self) -> None:
         """Should return False when source path is outside BASE_PATH (path traversal prevention)."""
-        with tempfile.NamedTemporaryFile(suffix=".odt", delete=False,
-                                         dir=tempfile.gettempdir()) as f:
+        with tempfile.NamedTemporaryFile(suffix=".odt", delete=False, dir=tempfile.gettempdir()) as f:
             tmp = f.name
         out_dir = os.path.join(c.convert_vars.BASE_PATH, "output")
         os.makedirs(out_dir, exist_ok=True)
@@ -49,8 +47,9 @@ class TestValidateFilePaths(unittest.TestCase):
 
     def test_valid_paths_returns_true(self) -> None:
         """Should return True when source exists and both paths are within BASE_PATH."""
-        src = os.path.join(c.convert_vars.BASE_PATH, "resources", "templates",
-                           "owasp_cornucopia_webapp_ver_guide_bridge_en.odt")
+        src = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_en.odt"
+        )
         out_dir = os.path.join(c.convert_vars.BASE_PATH, "output")
         os.makedirs(out_dir, exist_ok=True)
         out = os.path.join(out_dir, "test.pdf")
@@ -81,8 +80,7 @@ class TestValidateCommandArgs(unittest.TestCase):
 
     def test_safe_arguments_are_accepted(self) -> None:
         """Should return True for valid safe arguments."""
-        cmd = ["soffice", "--headless", "--convert-to", "pdf",
-               "--outdir", "/tmp", "file.odt"]
+        cmd = ["soffice", "--headless", "--convert-to", "pdf", "--outdir", "/tmp", "file.odt"]
         self.assertTrue(c._validate_command_args(cmd))
 
     def test_outdir_value_is_skipped(self) -> None:
@@ -116,27 +114,27 @@ class TestConvertWithLibreoffice(unittest.TestCase):
 
     def test_returns_false_on_timeout(self) -> None:
         """Should return False when LibreOffice conversion times out."""
-        src = os.path.join(c.convert_vars.BASE_PATH, "resources", "templates",
-                           "owasp_cornucopia_webapp_ver_guide_bridge_en.odt")
+        src = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_en.odt"
+        )
         out_dir = os.path.join(c.convert_vars.BASE_PATH, "output")
         os.makedirs(out_dir, exist_ok=True)
         out = os.path.join(out_dir, "test_timeout.pdf")
         if os.path.exists(src):
-            with mock.patch("subprocess.run",
-                            side_effect=subprocess.TimeoutExpired("soffice", 300)):
+            with mock.patch("subprocess.run", side_effect=subprocess.TimeoutExpired("soffice", 300)):
                 result = c._convert_with_libreoffice(src, out)
                 self.assertFalse(result)
 
     def test_returns_false_on_subprocess_exception(self) -> None:
         """Should return False when subprocess raises an exception."""
-        src = os.path.join(c.convert_vars.BASE_PATH, "resources", "templates",
-                           "owasp_cornucopia_webapp_ver_guide_bridge_en.odt")
+        src = os.path.join(
+            c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_en.odt"
+        )
         out_dir = os.path.join(c.convert_vars.BASE_PATH, "output")
         os.makedirs(out_dir, exist_ok=True)
         out = os.path.join(out_dir, "test_exc.pdf")
         if os.path.exists(src):
-            with mock.patch("subprocess.run",
-                            side_effect=Exception("LibreOffice not found")):
+            with mock.patch("subprocess.run", side_effect=Exception("LibreOffice not found")):
                 result = c._convert_with_libreoffice(src, out)
                 self.assertFalse(result)
 
