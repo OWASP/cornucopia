@@ -1,5 +1,5 @@
 <script lang="ts">
-    import SvelteMarkdown from 'svelte-markdown';
+        import SvelteMarkdown from 'svelte-markdown';
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
@@ -24,7 +24,6 @@
     let suits = $derived(data.suits);
     let mappingData = $derived(data.mappingData);
 
-
     let mobileappSuits = $derived.by(() => {
         const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
         return langSuits || suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
@@ -40,65 +39,61 @@
         return langSuits || suits?.get(`${VERSION_COMPANION}-en`) as Suit[];
     });
 
-    let version : string = $state(VERSION_WEBAPP);
-    let suit : string;
-    let card : Card = $derived(cards?.get('VE2') as Card);
-    
-    let mapping = $derived.by(() => 
-        card ? (new MappingController(mappingData?.get(version))).getCardMappings(card.id) : []
-    );
+    let version: string = $state(VERSION_WEBAPP);
+    let suit: string = $state('');
+    let card: Card = $state(undefined as unknown as Card);
+    let mapping: any = $state([]);
 
-    let map : Map<string,boolean> = $state(new SvelteMap());
+    $effect(() => {
+        const c = cards;
+        const v = version;
+        if (!c) return;
+        if (v === VERSION_WEBAPP)    card = c.get('VE2') as Card;
+        if (v === VERSION_MOBILEAPP) card = c.get('PC2') as Card;
+        if (v === VERSION_COMPANION) card = c.get('AAI2') as Card;
+    });
+
+    $effect(() => {
+        const c = card;
+        const md = mappingData;
+        const v = version;
+        if (!c || !md) return;
+        mapping = new MappingController(md.get(v)).getCardMappings(c.id);
+    });
+
+    let map: Map<string,boolean> = $state(new SvelteMap());
     setTree(false);
 
-    function setTree(expand : boolean)
-    {
-        // Collapse or expand the entire tree of suits
-        for(let i = 0 ; i < (webappSuits?.length as number) ; i++)
-        {
-            if (webappSuits !== undefined && typeof webappSuits[i] !== 'undefined') map.set(webappSuits[i]?.name,expand);
+    function setTree(expand: boolean) {
+        for(let i = 0; i < (webappSuits?.length as number); i++) {
+            if (webappSuits !== undefined && typeof webappSuits[i] !== 'undefined') map.set(webappSuits[i]?.name, expand);
         }
-
-        for(let i = 0 ; i < mobileappSuits?.length ; i++)
-        {
-            if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name,expand);
+        for(let i = 0; i < mobileappSuits?.length; i++) {
+            if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name, expand);
         }
-
-        for(let i = 0 ; i < companionSuits?.length ; i++)
-        {
-            if (companionSuits !== undefined && typeof companionSuits[i] !== 'undefined') map.set(companionSuits[i]?.name,expand);
+        for(let i = 0; i < companionSuits?.length; i++) {
+            if (companionSuits !== undefined && typeof companionSuits[i] !== 'undefined') map.set(companionSuits[i]?.name, expand);
         }
     }
 
-    function toggle(suit : string)
-    {
-        let value : boolean = map?.get(suit) || false;
-        map.set(suit,!value);
+    function toggle(suit: string) {
+        let value: boolean = map?.get(suit) || false;
+        map.set(suit, !value);
         map = map;
     }
 
-    function changeVersion(versionParam : string)
-    {
+    function changeVersion(versionParam: string) {
         version = versionParam;
-        // Collapse the entire tree down when switching between versions
         setTree(false);
-        // Show the following selected cards
-        if(version == VERSION_WEBAPP)
-        card = cards?.get('VE2') as Card;
-
-        if(version == VERSION_MOBILEAPP)
-        card = cards?.get('PC2') as Card;
-        
-        if(version == VERSION_COMPANION)
-        card = cards?.get('AAI2') as Card;
     }
 
-
-    function enter(suitParam : string, cardParam : string)
-    {
+    function enter(suitParam: string, cardParam: string) {
         suit = suitParam;
-        card = cards?.get(cardParam) as Card;
-        mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
+        const newCard = cards?.get(cardParam) as Card;
+        card = newCard;
+        if (newCard && mappingData) {
+            mapping = new MappingController(mappingData.get(version)).getCardMappings(newCard.id);
+        }
     }
 </script>
 <svelte:head>

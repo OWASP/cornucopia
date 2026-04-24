@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
     import {
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import MASVSOverview from "$lib/components/MASVSOverview.svelte";
@@ -18,7 +16,7 @@
       routes: Map<string, Route[]>;
     }
 
-    let { mappingData, card = $bindable(), routes }: Props = $props();
+    let { mappingData, card, routes }: Props = $props();
     
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
@@ -48,13 +46,9 @@
     function linkCapec(input: string) {
       return "/taxonomy/capec-3.9/" + input;
     }
-    let mappings: MobileAppMapping = $state({} as MobileAppCardMapping);
-    let attacks: Attack[] = $state([] as Attack[]);
-    run(() => {
-      mappings = controller.getMobileAppCardMappings(card?.id);
-      attacks = GetCardAttacks(card.id) as Attack[] | Attack[];
-    });
-      
+    let mappings = $derived(controller.getMobileAppCardMappings(card?.id));
+    let attacks: Attack[] = $derived(GetCardAttacks(card.id) as Attack[]);
+
   </script>
 
     {#if mappings }

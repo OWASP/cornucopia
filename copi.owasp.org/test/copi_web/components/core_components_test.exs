@@ -119,4 +119,139 @@ defmodule CopiWeb.CoreComponentsTest do
     assert html =~ "Title"
     assert html =~ "Item 1"
   end
+
+  test "renders card_drop_zone for current player with no card played" do
+    import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Alice"}
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player={player}
+      player_card={nil}
+      is_current_player={true}
+      first_card_played={nil}
+      highest_scoring_card={nil}
+    >
+      content
+    </.card_drop_zone>
+    """)
+    assert html =~ "You can play"
+  end
+
+  test "renders card_drop_zone for current player with first card played" do
+    import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Alice"}
+    first_card = %{card: %{category: "Spades"}}
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player={player}
+      player_card={nil}
+      is_current_player={true}
+      first_card_played={first_card}
+      highest_scoring_card={nil}
+    >
+      content
+    </.card_drop_zone>
+    """)
+    assert html =~ "should"
+    assert html =~ "Spades"
+  end
+
+  test "renders card_drop_zone waiting for other player" do
+    import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Bob"}
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player={player}
+      player_card={nil}
+      is_current_player={false}
+      first_card_played={nil}
+      highest_scoring_card={nil}
+    >
+      content
+    </.card_drop_zone>
+    """)
+    assert html =~ "Waiting for Bob"
+  end
+
+  test "renders card_drop_zone with played card" do
+    import CopiWeb.CoreComponents.TableComponents
+    player = %{name: "Alice"}
+    player_card = %{id: 1}
+    highest = %{id: 1}
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.card_drop_zone
+      player={player}
+      player_card={player_card}
+      is_current_player={true}
+      first_card_played={nil}
+      highest_scoring_card={highest}
+    >
+      <span>PlayedContent</span>
+    </.card_drop_zone>
+    """)
+    assert html =~ "PlayedContent"
+    assert html =~ "ring-amber-300"
+  end
+
+  test "renders vote_card when player_card is nil" do
+    import CopiWeb.CoreComponents.TableComponents
+    game = %{players: []}
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.vote_card player_card={nil} game={game} />
+    """)
+    refute html =~ "hero-hand-thumb-up"
+  end
+
+  test "renders vote_card when player_card is set" do
+    import CopiWeb.CoreComponents.TableComponents
+    player_card = %{votes: []}
+    game = %{players: [%{}, %{}]}
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.vote_card player_card={player_card} game={game} />
+    """)
+    assert html =~ "hero-hand-thumb-up"
+  end
+
+  test "renders button components" do
+    import CopiWeb.CoreComponents.Buttons
+    uri = "http://example.com/game/123"
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.button type="submit">Click Me</.button>
+    <.primary_button disabled={false}>Save</.primary_button>
+    <.primary_button disabled={true}>Disabled</.primary_button>
+    <.copy_url_button uri={uri} />
+    """)
+    assert html =~ "Click Me"
+    assert html =~ "Save"
+    assert html =~ "Disabled"
+    assert html =~ "bg-zinc-400"
+    assert html =~ "copy-url-container"
+    assert html =~ "http://example.com/game/123"
+  end
+
+  test "renders header components" do
+    import CopiWeb.CoreComponents.Headers
+    assigns = %{}
+    html = rendered_to_string(~H"""
+    <.header class="my-cls">
+      Title
+      <:subtitle>Sub</:subtitle>
+      <:actions>Act</:actions>
+    </.header>
+    <.header1 id="h1" class="h1-cls">Heading One</.header1>
+    <.header2 class="h2-cls">Heading Two</.header2>
+    """)
+    assert html =~ "Title"
+    assert html =~ "Sub"
+    assert html =~ "Act"
+    assert html =~ "Heading One"
+    assert html =~ "Heading Two"
+  end
 end
