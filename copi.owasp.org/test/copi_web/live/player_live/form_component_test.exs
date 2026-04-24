@@ -166,7 +166,7 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
 
       # Delete the game after the form is loaded (simulates game being deleted mid-session)
-      Cornucopia.delete_game(game)
+      {:ok, _deleted_game} = Cornucopia.delete_game(game)
 
       view
       |> form("#player-form", player: %{name: "Ghost Player"})
