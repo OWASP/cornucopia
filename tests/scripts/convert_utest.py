@@ -2273,9 +2273,9 @@ class TestGetLibreOfficeBin(unittest.TestCase):
         self.assertEqual(result, "/usr/bin/libreoffice")
 
 
-from unittest.mock import patch
 import unittest
 import subprocess
+from unittest.mock import patch
 import scripts.convert as c
 
 
