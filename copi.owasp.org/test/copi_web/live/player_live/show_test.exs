@@ -9,6 +9,19 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
   @game_attrs %{name: "show test game"}
 
+  defp card_attrs(value, ext_id) do
+    %{
+      category: "C", value: value, description: "D", edition: "webapp",
+      version: "2.2", external_id: ext_id, language: "en", misc: "m",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+    }
+  end
+
+  defp start_game(game) do
+    Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+  end
+
   defp create_player(_) do
     {:ok, game} = Cornucopia.create_game(@game_attrs)
     {:ok, player} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
@@ -18,13 +31,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   defp create_game_with_dealt_card(game_name, card_ext_id) do
     {:ok, game} = Cornucopia.create_game(%{name: game_name, edition: "webapp"})
     {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
-
-    {:ok, card} = Cornucopia.create_card(%{
-      category: "C", value: card_ext_id, description: "D", edition: "webapp",
-      version: "2.2", external_id: card_ext_id, language: "en", misc: "m",
-      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-    })
+    {:ok, card} = Cornucopia.create_card(card_attrs(card_ext_id, card_ext_id))
 
     dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
       player_id: player.id, card_id: card.id
@@ -66,10 +73,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "handle_info :proceed_to_next_round advances rounds_played", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
-
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
+      start_game(game)
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
@@ -83,19 +87,9 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "handle_info :proceed_to_next_round sets finished_at on last round", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
+      start_game(game)
 
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
-
-      {:ok, card} =
-        Cornucopia.create_card(%{
-          category: "C", value: "V", description: "D", edition: "webapp",
-          version: "2.2", external_id: "ST1", language: "en", misc: "misc",
-          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-        })
-
+      {:ok, card} = Cornucopia.create_card(card_attrs("V", "ST1"))
       Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
         player_id: player.id, card_id: card.id, played_in_round: 1
       })
@@ -112,10 +106,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "next_round is no-op when round is open and cannot continue", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
-
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
+      start_game(game)
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       html = render_click(show_live, "next_round", %{})
@@ -128,10 +119,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "next_round proceeds when majority continue votes reached", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
-
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
+      start_game(game)
 
       Copi.Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
 
@@ -193,34 +181,12 @@ defmodule CopiWeb.PlayerLive.ShowTest do
          %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
+      start_game(game)
 
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
-
-      {:ok, card1} =
-        Cornucopia.create_card(%{
-          category: "C", value: "V3", description: "D", edition: "webapp",
-          version: "2.2", external_id: "NR_CLOSED1", language: "en", misc: "m",
-          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-        })
-
-      {:ok, card2} =
-        Cornucopia.create_card(%{
-          category: "C", value: "V4", description: "D", edition: "webapp",
-          version: "2.2", external_id: "NR_CLOSED2", language: "en", misc: "m",
-          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-        })
-
-      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
-        player_id: player.id, card_id: card1.id, played_in_round: 1
-      })
-
-      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
-        player_id: player.id, card_id: card2.id, played_in_round: nil
-      })
+      {:ok, card1} = Cornucopia.create_card(card_attrs("V3", "NR_CLOSED1"))
+      {:ok, card2} = Cornucopia.create_card(card_attrs("V4", "NR_CLOSED2"))
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card1.id, played_in_round: 1})
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card2.id, played_in_round: nil})
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       render_click(show_live, "next_round", %{})
@@ -235,21 +201,10 @@ defmodule CopiWeb.PlayerLive.ShowTest do
          %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
+      start_game(game)
 
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
-
-      {:ok, card} =
-        Cornucopia.create_card(%{
-          category: "C", value: "V5", description: "D", edition: "webapp",
-          version: "2.2", external_id: "NR_LAST1", language: "en", misc: "m",
-          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-        })
-      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
-        player_id: player.id, card_id: card.id, played_in_round: 1
-      })
+      {:ok, card} = Cornucopia.create_card(card_attrs("V5", "NR_LAST1"))
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card.id, played_in_round: 1})
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
       render_click(show_live, "next_round", %{})
@@ -263,10 +218,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "toggle_continue_vote adds then removes a continue vote", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
-
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
+      start_game(game)
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
@@ -286,22 +238,10 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
+      start_game(game)
 
-      Copi.Repo.update!(
-        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
-      )
-
-      {:ok, card} =
-        Cornucopia.create_card(%{
-          category: "C", value: "TV1", description: "D", edition: "webapp",
-          version: "2.2", external_id: "TV_CARD1", language: "en", misc: "m",
-          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
-          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-        })
-
-      dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
-        player_id: player.id, card_id: card.id, played_in_round: 1
-      })
+      {:ok, card} = Cornucopia.create_card(card_attrs("TV1", "TV_CARD1"))
+      dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card.id, played_in_round: 1})
 
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
