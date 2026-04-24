@@ -88,9 +88,7 @@ def extract_capec_names(json_data: dict[str, Any]) -> dict[int, str]:
     elif "Category" not in categories:
         logging.warning("No 'Category' key found in categories section")
     else:
-        _extract_names_from_items(
-            categories["Category"], capec_names, warn_if_not_list=True, label="Category"
-        )
+        _extract_names_from_items(categories["Category"], capec_names, warn_if_not_list=True, label="Category")
 
     logging.info("Extracted %d CAPEC name mappings", len(capec_names))
     return capec_names
