@@ -333,6 +333,19 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert render(view) =~ "Invalid card selection"
     end
 
+    test "returns flash error and keeps socket alive for non-castable dealt_card_id", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Invalid String ID Test Game", edition: "webapp"})
+      {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+
+      # ASVS V2.2 / V16.5: malformed input should be rejected safely without crashing LiveView
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "abc"})
+
+      # LiveView should still be alive and show the same generic flash error
+      assert render(view) =~ "Invalid card selection"
+    end
+
     test "returns flash error and keeps socket alive for non-numeric dealt_card_id", %{conn: conn} do
       {:ok, game} = Cornucopia.create_game(%{name: "Non-numeric ID Test Game", edition: "webapp"})
       {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
