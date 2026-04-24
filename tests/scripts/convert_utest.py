@@ -2278,7 +2278,6 @@ class TestGetLibreOfficeBin(unittest.TestCase):
 
 
 class TestConvertWithLibreOffice(unittest.TestCase):
-
     @patch("scripts.convert._get_libreoffice_bin", return_value=None)
     def test_no_binary(self, mock_bin):
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
@@ -2358,6 +2357,95 @@ class TestConvertDocx2PdfSuccess(unittest.TestCase):
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
 
         self.assertIn(result, [True, False])
+
+
+class TestPdfSecurityHelpers(unittest.TestCase):
+    def setUp(self) -> None:
+        self.original_base = c.convert_vars.BASE_PATH
+        self.original_args = getattr(c.convert_vars, "args", None)
+        c.convert_vars.args = argparse.Namespace(debug=False)
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self.original_base
+        if self.original_args is not None:
+            c.convert_vars.args = self.original_args
+
+    def test_validate_file_paths_rejects_missing_source(self) -> None:
+        with mock.patch("scripts.convert.os.path.isfile", return_value=False):
+            ok, msg, out = c._validate_file_paths("missing.odt", "out.pdf")
+        self.assertFalse(ok)
+        self.assertIn("Source file does not exist", msg)
+        self.assertEqual(out, "")
+
+    def test_validate_file_paths_rejects_missing_output_dir(self) -> None:
+        with mock.patch("scripts.convert.os.path.isfile", return_value=True), mock.patch(
+            "scripts.convert.os.path.isdir", return_value=False
+        ):
+            ok, msg, out = c._validate_file_paths("in.odt", "bad/out.pdf")
+        self.assertFalse(ok)
+        self.assertIn("Output directory does not exist", msg)
+        self.assertEqual(out, "")
+
+    def test_validate_file_paths_rejects_outside_base(self) -> None:
+        c.convert_vars.BASE_PATH = os.path.join("C:", "repo", "base")
+        with mock.patch("scripts.convert.os.path.isfile", return_value=True), mock.patch(
+            "scripts.convert.os.path.isdir", return_value=True
+        ), mock.patch("scripts.convert.os.path.abspath", side_effect=lambda p: p):
+            ok, msg, out = c._validate_file_paths("C:/outside/source.odt", "C:/outside/out.pdf")
+        self.assertFalse(ok)
+        self.assertIn("outside base directory", msg)
+        self.assertEqual(out, "")
+
+    def test_validate_command_args_blocks_dangerous(self) -> None:
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            valid = c._validate_command_args(["libreoffice", "evil&arg"])
+        self.assertFalse(valid)
+        self.assertIn("Potentially dangerous character", log.output[0])
+
+    def test_convert_with_libreoffice_handles_invalid_validated_paths(self) -> None:
+        with mock.patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice"), mock.patch(
+            "scripts.convert._validate_file_paths", return_value=(False, "bad path", "")
+        ):
+            with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+                ok = c._convert_with_libreoffice("in.odt", "out.pdf")
+        self.assertFalse(ok)
+        self.assertIn("bad path", log.output[0])
+
+    def test_convert_with_libreoffice_handles_timeout(self) -> None:
+        c.convert_vars.BASE_PATH = os.path.join("C:", "repo", "base")
+        with mock.patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice"), mock.patch(
+            "scripts.convert._validate_file_paths", return_value=(True, "C:/repo/base/in.odt", "C:/repo/base/out")
+        ), mock.patch("scripts.convert._validate_command_args", return_value=True), mock.patch(
+            "scripts.convert.os.makedirs"
+        ), mock.patch(
+            "scripts.convert.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="lo", timeout=1)
+        ):
+            with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+                ok = c._convert_with_libreoffice("in.odt", "out.pdf")
+        self.assertFalse(ok)
+        self.assertIn("timed out", log.output[0])
+
+    def test_cleanup_temp_file_swallows_oserror(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        with mock.patch("scripts.convert.os.remove", side_effect=OSError("busy")):
+            c._cleanup_temp_file("tmp.docx")
+
+    def test_rename_libreoffice_output_replaces_existing_destination(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            source_filename = os.path.join(td, "guide.odt")
+            default_out = os.path.join(td, "guide.pdf")
+            desired_out = os.path.join(td, "final.pdf")
+            with open(source_filename, "w", encoding="utf-8") as f:
+                f.write("src")
+            with open(default_out, "w", encoding="utf-8") as f:
+                f.write("default")
+            with open(desired_out, "w", encoding="utf-8") as f:
+                f.write("old")
+
+            c._rename_libreoffice_output(source_filename, desired_out)
+
+            self.assertTrue(os.path.isfile(desired_out))
+            self.assertFalse(os.path.isfile(default_out))
 
 
 if __name__ == "__main__":
