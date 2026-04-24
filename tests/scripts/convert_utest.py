@@ -2243,5 +2243,37 @@ class TestGetLibreOfficeBin(unittest.TestCase):
         self.assertEqual(result, "/usr/bin/libreoffice")
 
 
+class TestAdditionalCoverageBranches(unittest.TestCase):
+    def test_parse_mapping_file_error_returns_empty_dict(self) -> None:
+        """Cover warning branch in _parse_mapping_file when opening fails."""
+        vars_obj = c.ConvertVars()
+        with mock.patch("builtins.open", side_effect=OSError("boom")):
+            result = vars_obj._parse_mapping_file("/nonexistent/mapping.yaml")
+        self.assertEqual(result, {})
+
+    def test_check_make_list_into_text_empty_list(self) -> None:
+        """Cover fallback text output for empty lists."""
+        self.assertEqual(c.check_make_list_into_text([]), " - ")
+
+    def test_validate_command_args_rejects_dangerous_chars(self) -> None:
+        """Cover dangerous character rejection branch."""
+        cmd_args = ["libreoffice", "regular", "bad;arg"]
+        self.assertFalse(c._validate_command_args(cmd_args))
+
+    def test_validate_command_args_allows_flags_and_known_options(self) -> None:
+        """Cover skip/continue branches for flags and known option values."""
+        cmd_args = [
+            "libreoffice",
+            "--headless",
+            "--convert-to",
+            "pdf",
+            "--outdir",
+            "C:/safe-out",
+            "-env:UserInstallation=file:///tmp/profile",
+            "safe_input.docx",
+        ]
+        self.assertTrue(c._validate_command_args(cmd_args))
+
+
 if __name__ == "__main__":
     unittest.main()

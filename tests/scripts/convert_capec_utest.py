@@ -259,6 +259,19 @@ class TestParseArguments(unittest.TestCase):
         self.assertEqual(args.asvs_version, "5.0")
         self.assertTrue(args.debug)
 
+    @patch("argparse.ArgumentParser.parse_args")
+    @patch("scripts.convert_capec.sys.exit", side_effect=SystemExit)
+    def test_parse_arguments_handles_argument_error(self, mock_exit, mock_parse_args):
+        """Test parser error branch logs and exits."""
+        mock_parse_args.side_effect = argparse.ArgumentError(None, "bad argument")
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
+            with self.assertRaises(SystemExit):
+                capec.parse_arguments([])
+
+        self.assertIn("bad argument", " ".join(log.output))
+        mock_exit.assert_called_once()
+
 
 class TestCreateFolder(unittest.TestCase):
     @patch("os.makedirs")
@@ -813,7 +826,10 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
             }
         }
 
-        test_capec_to_asvs_map = {1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]}}
+        test_capec_to_asvs_map = {
+            1: {"owasp_asvs": ["V8.1.1", "V8.2.1"]},
+            152: {"owasp_asvs": ["V8.1.1"]},
+        }
 
         test_asvs_map = {
             "Requirements": [
@@ -839,6 +855,158 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
         self.assertIn("## Related ASVS Requirements", written_content)
         self.assertIn("ASVS (5.0):", written_content)
         self.assertIn("V8.1.1", written_content)
+
+
+class TestMainFlow(unittest.TestCase):
+    def _base_args(self) -> argparse.Namespace:
+        return argparse.Namespace(
+            output_path=Path("/tmp/out"),
+            input_path=Path("/tmp/in.json"),
+            asvs_mapping=Path("/tmp/asvs.json"),
+            capec_to_asvs=Path("/tmp/capec.yaml"),
+            asvs_version="5.0",
+            debug=False,
+        )
+
+    @patch("scripts.convert_capec.create_capec_pages")
+    @patch("scripts.convert_capec.load_capec_to_asvs_mapping", return_value={1: {"owasp_asvs": ["V8.1.1"]}})
+    @patch("scripts.convert_capec.validate_json_data", return_value=True)
+    @patch(
+        "scripts.convert_capec.load_json_file",
+        side_effect=[
+            {
+                "Attack_Pattern_Catalog": {
+                    "Attack_Patterns": {"Attack_Pattern": []},
+                    "Categories": {"Category": []},
+                }
+            },
+            {"Requirements": []},
+        ],
+    )
+    @patch("scripts.convert_capec.create_folder")
+    @patch("scripts.convert_capec.empty_folder")
+    @patch("scripts.convert_capec.set_logging")
+    @patch("scripts.convert_capec.get_valid_version", return_value="5.0")
+    @patch("scripts.convert_capec.parse_arguments")
+    def test_main_happy_path(
+        self,
+        mock_parse_arguments,
+        mock_get_valid_version,
+        mock_set_logging,
+        mock_empty_folder,
+        mock_create_folder,
+        mock_load_json,
+        mock_validate_json,
+        mock_load_capec_to_asvs,
+        mock_create_capec_pages,
+    ):
+        mock_parse_arguments.return_value = self._base_args()
+
+        capec.main()
+
+        mock_set_logging.assert_called_once()
+        mock_empty_folder.assert_called_once()
+        mock_create_folder.assert_called_once()
+        mock_create_capec_pages.assert_called_once()
+
+    @patch("scripts.convert_capec.load_json_file", side_effect=[{}, {"Requirements": []}])
+    @patch("scripts.convert_capec.get_valid_version", return_value="5.0")
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.set_logging")
+    @patch("scripts.convert_capec.empty_folder")
+    @patch("scripts.convert_capec.create_folder")
+    @patch("scripts.convert_capec.create_capec_pages")
+    def test_main_returns_on_invalid_data(
+        self,
+        mock_create_capec_pages,
+        mock_create_folder,
+        mock_empty_folder,
+        mock_set_logging,
+        mock_parse_arguments,
+        mock_get_valid_version,
+        mock_load_json,
+    ):
+        mock_parse_arguments.return_value = self._base_args()
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
+            capec.main()
+
+        self.assertIn("Invalid CAPEC data structure", " ".join(log.output))
+        mock_create_capec_pages.assert_not_called()
+
+    @patch("scripts.convert_capec.load_json_file")
+    @patch("scripts.convert_capec.validate_json_data", return_value=True)
+    @patch("scripts.convert_capec.get_valid_version", return_value="5.0")
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.set_logging")
+    @patch("scripts.convert_capec.empty_folder")
+    @patch("scripts.convert_capec.create_folder")
+    @patch("scripts.convert_capec.create_capec_pages")
+    def test_main_returns_when_asvs_map_missing(
+        self,
+        mock_create_capec_pages,
+        mock_create_folder,
+        mock_empty_folder,
+        mock_set_logging,
+        mock_parse_arguments,
+        mock_get_valid_version,
+        mock_validate,
+        mock_load_json,
+    ):
+        mock_parse_arguments.return_value = self._base_args()
+        mock_load_json.side_effect = [
+            {
+                "Attack_Pattern_Catalog": {
+                    "Attack_Patterns": {"Attack_Pattern": []},
+                    "Categories": {"Category": []},
+                }
+            },
+            {},
+        ]
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
+            capec.main()
+
+        self.assertIn("Failed to load ASVS mapping data", " ".join(log.output))
+        mock_create_capec_pages.assert_not_called()
+
+    @patch("scripts.convert_capec.load_capec_to_asvs_mapping", return_value={})
+    @patch("scripts.convert_capec.load_json_file")
+    @patch("scripts.convert_capec.validate_json_data", return_value=True)
+    @patch("scripts.convert_capec.get_valid_version", return_value="5.0")
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.set_logging")
+    @patch("scripts.convert_capec.empty_folder")
+    @patch("scripts.convert_capec.create_folder")
+    @patch("scripts.convert_capec.create_capec_pages")
+    def test_main_returns_when_capec_to_asvs_missing(
+        self,
+        mock_create_capec_pages,
+        mock_create_folder,
+        mock_empty_folder,
+        mock_set_logging,
+        mock_parse_arguments,
+        mock_get_valid_version,
+        mock_validate,
+        mock_load_json,
+        mock_load_capec_to_asvs,
+    ):
+        mock_parse_arguments.return_value = self._base_args()
+        mock_load_json.side_effect = [
+            {
+                "Attack_Pattern_Catalog": {
+                    "Attack_Patterns": {"Attack_Pattern": []},
+                    "Categories": {"Category": []},
+                }
+            },
+            {"Requirements": []},
+        ]
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as log:
+            capec.main()
+
+        self.assertIn("Failed to load CAPEC to ASVS mapping", " ".join(log.output))
+        mock_create_capec_pages.assert_not_called()
 
 
 if __name__ == "__main__":
