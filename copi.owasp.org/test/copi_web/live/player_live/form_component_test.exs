@@ -89,7 +89,8 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
         |> form("#player-form", player: %{name: ""})
         |> render_submit()
 
-      assert html =~ "can&#39;t be blank" or html =~ "can't be blank" or is_binary(html)
+      # Assert the specific validation error is rendered; do not rely on type-only checks.
+      assert html =~ "can&#39;t be blank" or html =~ "can't be blank"
     end
 
     test "FormComponent.topic/1 returns correct topic string", %{conn: _conn, game: _game} do
