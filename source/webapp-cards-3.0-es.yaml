@@ -13,7 +13,7 @@ suits:
     id: "VE2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/VE2"
-    desc: "Brian puede reunir información sobre las configuraciones subyacentes, esquemas, lógica, código, software, servicios e infraestructura debido al contenido de mensajes de error, configuración deficiente, la presencia de archivos de instalación predeterminados o antiguos, de prueba, respaldo o copias de recursos, o por exposición de código fuente"
+    desc: "Brian puede reunir información sobre las configuraciones subyacentes, esquemas, lógica, código, software, servicios e infraestructura debido al contenido de los mensajes de error, configuración deficiente, la presencia de archivos de instalación predeterminados o antiguos, de prueba, respaldo o copias de recursos, o por exposición de código fuente"
   -
     id: "VE3"
     value: "3"
@@ -28,7 +28,7 @@ suits:
     id: "VE5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/VE5"
-    desc: "Jee puede eludir las rutinas de codificación centralizadas ya que no se están utilizando en todos los activos, o se están utilizando codificaciones incorrectas"
+    desc: "Jee puede eludir las rutinas de codificación centralizadas ya que no se están utilizando en todas partes, o se están utilizando codificaciones incorrectas"
   -
     id: "VE6"
     value: "6"
@@ -53,7 +53,7 @@ suits:
     id: "VEX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/VEX"
-    desc: "Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (p. ej. datos definibles por el usuario, manipulación de datos almacenados localmente, alteración del estado de datos en un dispositivo cliente, falta y/o aplicación inadecuada de controles del lado del cliente, falta de verificación de identidad durante la validación de datos, como que Darío pueda hacerse pasar por Colin)"
+    desc: "Darío puede explotar la confianza que la aplicación deposita en una fuente de datos (p. ej. datos proporcionados por el usuario, manipulación de datos almacenados localmente, alteración del estado de datos en un dispositivo cliente, falta y/o aplicación inadecuada de controles del lado del cliente, falta de verificación de identidad durante la validación de datos, como que Darío pueda hacerse pasar por Colin)"
   -
     id: "VEJ"
     value: "J"
@@ -63,7 +63,7 @@ suits:
     id: "VEQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/VEQ"
-    desc: "Xavier puede inyectar datos en un intérprete del lado del cliente o dispositivo porque no se está utilizando una interfaz parametrizada, no se ha implementado correctamente, los datos no han sido codificados, sanitizados o escapados correctamente para el contexto, o no existe una política restrictiva sobre inclusión de código o datos"
+    desc: "Xavier puede inyectar datos en un intérprete del lado del cliente o dispositivo porque no se está utilizando una interfaz parametrizada, no se ha implementado correctamente, los datos no han sido codificados, sanitizados o eliminado de ellos caracteres especiales de manera correcta, o no existe una política restrictiva sobre inclusión de código o datos"
   -
     id: "VEK"
     value: "K"
@@ -74,7 +74,7 @@ suits:
     value: "A"
     url: "https://cornucopia.owasp.org/cards/VEA"
     desc: "Has inventado un nuevo ataque contra la Validación de Datos y Codificación"
-    misc: "Lea más sobre este tema en las Cheat Sheets gratuitas de OWASP sobre Validación de Entrada, Prevención de XSS, Prevención de XSS basado en DOM, Prevención de Inyección SQL y Parametrización de Consultas"
+    misc: "Lee más sobre este tema en las Cheat Sheets gratuitas de OWASP sobre Validación de Entrada, Prevención de XSS, Prevención de XSS basado en DOM, Prevención de Inyección SQL y Parametrización de Consultas"
 -
   id: "AT"
   name: "AUTENTICACIÓN"
@@ -223,7 +223,7 @@ suits:
     id: "AZ2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AZ2"
-    desc: "Tim puede influir en hacia dónde se envían o reenvían los datos"
+    desc: "Tim influir hacia dónde se envían o reenvían los datos"
   -
     id: "AZ3"
     value: "3"
@@ -278,7 +278,7 @@ suits:
     id: "AZK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/AZK"
-    desc: "Ryan puede influir o alterar los controles y permisos de autorización, y por lo tanto puede eludirlos"
+    desc: "Adrian puede influir o alterar los controles y permisos de autorización, y por lo tanto puede eludirlos"
   -
     id: "AZA"
     value: "A"
@@ -383,7 +383,7 @@ suits:
     id: "C6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/C6"
-    desc: "Aaron puede eludir los controles porque el manejo de errores/excepciones falta, se implementa de manera inconsistente o parcial, no deniega el acceso por defecto (es decir, los errores deben terminar el acceso/ejecución), o depende del manejo por parte de otro servicio o sistema"
+    desc: "Aaron puede eludir los controles porque falta el manejo de errores/excepciones, se implementa de manera inconsistente o parcial, no deniega el acceso por defecto (es decir, los errores deben terminar el acceso/ejecución), o depende del manejo por parte de otro servicio o sistema"
   -
     id: "C7"
     value: "7"
@@ -573,7 +573,7 @@ paragraphs:
     text: "Un objetivo inicial había sido referenciar los ID de debilidad de CWE™, pero estos resultaron ser demasiado numerosos, y en su lugar se decidió mapear cada tarjeta a los ID de patrón de ataque de software CAPEC™, que a su vez están mapeados a CWE, logrando así el resultado deseado."
   -
     id: "T00530"
-    text: "Cada tarjeta también está mapeada a las 36 historias de seguridad principales del documento SAFECode, así como a la Lista de Verificación de Aplicaciones Web del OWASP® Developer Guide v4.1.9, ASVS v5.0 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad para su uso en procesos ágiles."
+    text: "Cada tarjeta también está mapeada a las 36 historias de seguridad principales del documento SAFECode, así como a la Lista de Verificación de Aplicaciones Web del OWASP® Developer Guide v4.1.9, ASVS v5.0 y AppSensor (detección y respuesta de ataques de aplicaciones) para ayudar a los equipos a crear sus propias historias relacionadas con la seguridad o tareas específicas de seguridad a incluir en las Historias de Usuario existentes para su uso en procesos ágiles."
   -
     id: "T00600"
     text: "Estrategia de juego"
