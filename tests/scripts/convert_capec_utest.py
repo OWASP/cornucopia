@@ -849,15 +849,11 @@ class TestConvertCapecEdgeCases(unittest.TestCase):
     @patch("scripts.convert_capec.create_link_list", return_value="link")
     @patch("scripts.convert_capec.parse_description", return_value="desc")
     @patch("scripts.convert_capec.create_folder")
-    def test_create_capec_pages_category_with_mapping(
-        self, mock_folder, mock_desc, mock_link, mock_no_map
-    ):
+    def test_create_capec_pages_category_with_mapping(self, mock_folder, mock_desc, mock_link, mock_no_map):
         data = {
             "Attack_Pattern_Catalog": {
                 "Attack_Patterns": {"Attack_Pattern": []},
-                "Categories": {
-                    "Category": [{"_ID": "1", "_Name": "Test", "Summary": "sum"}]
-                },
+                "Categories": {"Category": [{"_ID": "1", "_Name": "Test", "Summary": "sum"}]},
             }
         }
 
@@ -871,14 +867,10 @@ class TestConvertCapecEdgeCases(unittest.TestCase):
     @patch("scripts.convert_capec.has_no_asvs_mapping", return_value=True)
     @patch("scripts.convert_capec.parse_description", return_value="desc")
     @patch("scripts.convert_capec.create_folder")
-    def test_create_capec_pages_no_mapping(
-        self, mock_folder, mock_desc, mock_no_map
-    ):
+    def test_create_capec_pages_no_mapping(self, mock_folder, mock_desc, mock_no_map):
         data = {
             "Attack_Pattern_Catalog": {
-                "Attack_Patterns": {
-                    "Attack_Pattern": [{"_ID": "1", "_Name": "Test", "Description": "d"}]
-                },
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "Test", "Description": "d"}]},
                 "Categories": {"Category": []},
             }
         }
@@ -914,9 +906,7 @@ class TestConvertCapecEdgeCases(unittest.TestCase):
     @patch("scripts.convert_capec.load_json_file", side_effect=[{"a": 1}, {"b": 2}])
     @patch("scripts.convert_capec.parse_arguments")
     @patch("scripts.convert_capec.set_logging")
-    def test_main_success(
-        self, mock_log, mock_parse, mock_load, mock_validate, mock_map, mock_create
-    ):
+    def test_main_success(self, mock_log, mock_parse, mock_load, mock_validate, mock_map, mock_create):
         mock_parse.return_value = type(
             "x",
             (),
@@ -931,6 +921,7 @@ class TestConvertCapecEdgeCases(unittest.TestCase):
 
         capec.main()
         mock_create.assert_called()
+
 
 if __name__ == "__main__":
     unittest.main()
