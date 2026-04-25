@@ -28,18 +28,13 @@ defmodule CopiWeb.GameLive.Show do
         game.rounds_played + 1
       end
 
-      round_result = if params["round"] do
-        Want.integer(params["round"], min: 1, max: current_round)
-      else
-        {:ok, current_round}
-      end
-
-      case round_result do
+      case Want.integer(params["round"], min: 1, max: current_round, default: current_round) do
         {:ok, requested_round} ->
           {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
         {:error, _reason} ->
           {:noreply, redirect(socket, to: "/error")}
       end
+
     else
       {:error, _reason} ->
         {:noreply, redirect(socket, to: "/error")}
@@ -78,20 +73,34 @@ defmodule CopiWeb.GameLive.Show do
         players = game.players
         player_count = length(players)
 
-        # Deal cards to players in round-robin fashion
-        all_cards
-        |> Enum.with_index()
-        |> Enum.each(fn {card, i} ->
-          Copi.Repo.insert!(%DealtCard{
-            card_id: card.id,
-            player_id: Enum.at(players, rem(i, player_count)).id
-          })
-        end)
+        # Build transaction with all card dealing operations and game update
+        # Using Ecto.Multi ensures atomicity: either all operations succeed or all are rolled back
+        multi =
+          all_cards
+          |> Enum.with_index()
+          |> Enum.reduce(Ecto.Multi.new(), fn {card, i}, multi ->
+            Ecto.Multi.insert(multi, {:deal_card, i}, %DealtCard{
+              card_id: card.id,
+              player_id: Enum.at(players, rem(i, player_count)).id
+            })
+          end)
+          |> Ecto.Multi.run(:start_game, fn _repo, _changes ->
+            Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+          end)
 
-        # Update game with start time
-        {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-        {:noreply, assign(socket, :game, updated_game)}
+        # Execute transaction: all cards dealt and game started, or nothing happens
+        case Copi.Repo.transaction(multi) do
+          {:ok, %{start_game: updated_game}} ->
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
+
+          {:error, _failed_operation, _failed_value, _changes_so_far} ->
+            # Transaction rolled back, game state unchanged
+            {:noreply,
+             socket
+             |> put_flash(:error, "Failed to start game due to a system error. Please try again.")
+             |> assign(:game, game)}
+        end
     end
   end
 
