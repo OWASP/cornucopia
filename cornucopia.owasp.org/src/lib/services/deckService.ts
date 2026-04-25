@@ -23,7 +23,7 @@ export class DeckService {
     private static readonly decks: Deck[] = [
        { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-        { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
+        { edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
         { edition: 'companion', version: '1.0', lang: ['en'] },
         { edition: 'dbd', version: '1.0', lang: ['en'] }];
 

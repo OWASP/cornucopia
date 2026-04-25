@@ -80,3 +80,8 @@ Add testing.
 - The text on the cards has been updated to include
 MFA and passkeys as an option for authentication
 - Cards within the session management suit have been updated toe align with modern session management practices
+
+### 2026-04-25
+
+- Added the Cornucopia Companion Edition
+- Finished the translations for the Website App Edition
