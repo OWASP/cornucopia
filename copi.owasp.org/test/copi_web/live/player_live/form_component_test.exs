@@ -168,7 +168,6 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
     test "shows error when trying to join non-existent game", %{conn: conn} do
       fake_game_id = Ecto.ULID.generate()
 
-      # Trying to access a non-existent game's player page should raise/error
       assert_raise Ecto.NoResultsError, fn ->
         live(conn, "/games/#{fake_game_id}/players/new")
       end

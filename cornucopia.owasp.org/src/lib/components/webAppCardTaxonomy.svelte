@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-  import { DevGuideMapping } from '$lib/devguideMapping';
-
-    import {
-      GetCardAttacks, type Attack } from "$lib/cardAttacks";
+    import { DevGuideMapping } from '$lib/devguideMapping';
+    import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import ASVSOverview from "$lib/components/ASVSOverview.svelte";
     import MappingsList from "$lib/components/mappingsList.svelte";
     import CapecMapTable from "$lib/components/capecMapTable.svelte";
@@ -19,7 +16,7 @@
     asvsVersion: string;
   }
 
-  let { mappingData, card = $bindable(), routes, capecData = undefined, asvsVersion }: Props = $props();
+  let { mappingData, card, routes, capecData = undefined, asvsVersion }: Props = $props();
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
@@ -62,8 +59,8 @@
     function linkCapec(input: string) {
       return "/taxonomy/capec-3.9/" + input;
     }
-    let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
-    let attacks: Attack[] = $state(GetCardAttacks(card.id));
+    let mappings = $derived(controller.getWebAppCardMappings(card.id));
+    let attacks: Attack[] = $derived(GetCardAttacks(card.id));
     
     let hasMappings = $derived(mappings && Object.keys(mappings).length > 1);
     let hasCapecMap = $derived(
@@ -73,10 +70,6 @@
       Object.keys(mappings.capec_map).length > 0
     );
   
-    run(() => {
-      mappings = controller.getWebAppCardMappings(card.id);
-      attacks = GetCardAttacks(card.id);
-    });
   </script>
 
     {#if hasMappings }
