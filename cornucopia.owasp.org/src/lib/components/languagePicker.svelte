@@ -47,7 +47,7 @@ onchange={(e) => {
     `/edition/${edition}/${cardId}/${selectedVersion}/${currentLanguage}`;
 }}
     >
-      {#each versions as v}
+      {#each versions as v (v)}
         <option value={v} selected={v === version}>
           v{v}
         </option>
@@ -67,7 +67,7 @@ onchange={(e) => {
     `/edition/${edition}/${cardId}/${version}/${selectedLanguage}`;
 }}
     >
-      {#each filteredLanguages as lang}
+      {#each filteredLanguages as lang (lang)}
         <option value={lang} selected={lang === currentLanguage}>
           {getLanguageName(lang)}
         </option>
@@ -152,3 +152,4 @@ onchange={(e) => {
     }
   }
 </style>
+

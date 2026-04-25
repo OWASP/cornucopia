@@ -18,7 +18,7 @@ describe('GET /api/lang/[edition]/[version]', () => {
 
         const response = await GET({
             params: { edition: 'webapp', version: '3.0' }
-        } as any);
+        } as unknown);
 
         expect(response.status).toBe(200);
         expect(response.headers.get('content-type')).toContain('application/json');
@@ -41,10 +41,10 @@ describe('GET /api/lang/[edition]/[version]', () => {
         try {
             GET({
                 params: { edition: 'unknown', version: '3.0' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 404 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(404);
             expect(err.body.message).toBe('Edition not found. Only: webapp, mobileapp are supported.');
         }
@@ -58,10 +58,10 @@ describe('GET /api/lang/[edition]/[version]', () => {
         try {
             GET({
                 params: { edition: 'webapp', version: '1.0' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 404 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(404);
             expect(err.body.message).toBe('Version not found for edition webapp. Only: 2.2, 3.0 are supported.');
         }
@@ -73,10 +73,10 @@ describe('GET /api/lang/[edition]/[version]', () => {
         try {
             GET({
                 params: { version: '3.0' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 404 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(404);
             expect(err.body.message).toBe('Edition not found. Only: webapp, mobileapp are supported.');
         }
@@ -89,10 +89,10 @@ describe('GET /api/lang/[edition]/[version]', () => {
         try {
             GET({
                 params: { edition: 'webapp' }
-            } as any);
+            } as unknown);
 
             expect.fail('Expected GET to throw 404 HttpError');
-        } catch (err: any) {
+        } catch (err: unknown) {
             expect(err.status).toBe(404);
             expect(err.body.message).toBe('Version not found for edition webapp. Only: 2.2, 3.0 are supported.');
         }

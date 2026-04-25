@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-expressions */
 import {expect, describe, it} from 'vitest';
 import { FileSystemHelper } from './fileSystemHelper';
 import path from 'path';
@@ -70,21 +71,21 @@ describe('FileSystemHelper tests', () => {
         ];
 
         //Test with a file route
-        let [noCategories, fileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'en');
+        const [noCategories, fileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'en');
         expect(noCategories).toBeDefined();
         expect(fileContent).toBeDefined();
         expect(fileContent.length).toBeGreaterThan(0);
         expect(noCategories.length).toBe(0);
 
         //Test with a language that does not have a translation, should fallback to English
-        let [noLangCategories, engFileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'es');
+        const [noLangCategories, engFileContent] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling/01-secure-software-development-lifecycle', 'es');
         expect(noLangCategories).toBeDefined();
         expect(engFileContent).toBeDefined();
         expect(engFileContent.length).toBeGreaterThan(0);
         expect(noLangCategories.length).toBe(0);
 
         //Test with a folder route
-        let [categories, content] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling', 'en');
+        const [categories, content] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3/01-architecture-design-and-threat-modeling', 'en');
         expect(categories).toBeDefined();
         expect(content).toBeDefined();
         expect(content.length).toBe(0);
@@ -94,7 +95,7 @@ describe('FileSystemHelper tests', () => {
         });
 
         //Test with the root taxonomy route
-        let [categoriesRoot, contentRoot] = FileSystemHelper.getDataByRoute('/taxonomy', 'en');
+        const [categoriesRoot, contentRoot] = FileSystemHelper.getDataByRoute('/taxonomy', 'en');
         expect(categoriesRoot).toBeDefined();
         expect(contentRoot).toBeDefined();
         expect(contentRoot.length).toBe(0);
@@ -109,7 +110,7 @@ describe('FileSystemHelper tests', () => {
         });
 
         //Test with the root taxonomy route
-        let [asvsCategories, asvsRoot] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3', 'en');
+        const [asvsCategories, asvsRoot] = FileSystemHelper.getDataByRoute('/taxonomy/ASVS-4.0.3', 'en');
         expect(asvsCategories).toBeDefined();
         expect(asvsRoot).toBeDefined();
         expect(asvsRoot.length).toBe(0);

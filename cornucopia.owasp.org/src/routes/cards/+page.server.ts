@@ -3,9 +3,9 @@ import { SuitController } from '../../domain/suit/suitController';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { MappingService } from '$lib/services/mappingService';
  
-export const load = (({ params }) => {
+export const load = (({ params: _params }) => {
   const deckService = new DeckService();
-  const decks = new Map<string, any>();
+  const decks = new Map<string, Map<string, unknown>>();
   const lang = 'en';
   const mobileCards = deckService.getCardDataForEditionVersionLang(
   'mobileapp', DeckService.getLatestVersion('mobileapp'), lang);
