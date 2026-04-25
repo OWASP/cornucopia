@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { resolve } from "$app/paths";
   interface Props {
     href?: string;
     title?: string;
     raw?: string;
     children?: import('svelte').Snippet;
   }
+
   let {
     href = '',
     title = "",
@@ -24,8 +24,9 @@
   let clazz = $derived(raw.includes('[inline]') ? 'inline' : '');
   let style = $derived(raw.includes('[white]') ? ' white' : '');
 </script>
-  <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-  <a {rel} {target} href={href.startsWith('/') ? resolve(href) : href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
+  
+  <a {rel} {target} {href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
+
   <style>
     a
     {
@@ -35,11 +36,13 @@
         text-decoration: underline;
         transition: var(--transition);
     }
+
     a:hover
     {
         opacity: 50%;
         text-decoration: none;
     }
+    
     .white {
       color:white;
     }
