@@ -2571,7 +2571,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
     @patch("scripts.convert._convert_with_libreoffice", return_value=False)
     @patch("scripts.convert._convert_with_docx2pdf", return_value=False)
     @patch("scripts.convert._handle_conversion_failure")
-    def test_convert_to_pdf_all_fail(self, mock_fail, mock_docx, mock_libre):
+    def test_convert_to_pdf_all_fail_docx2pdf(self, mock_fail, mock_docx, mock_libre):
         import scripts.convert as c
 
         c.convert_to_pdf("file.docx", "out.pdf")
