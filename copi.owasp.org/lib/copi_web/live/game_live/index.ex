@@ -31,10 +31,24 @@ defmodule CopiWeb.GameLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    game = Cornucopia.get_game!(id)
-    {:ok, _} = Cornucopia.delete_game(game)
+    case Cornucopia.get_game(id) do
+      %Game{} = game ->
+        case Cornucopia.delete_game(game) do
+          {:ok, _deleted_game} ->
+            {:noreply,
+             socket
+             |> put_flash(:info, "Game deleted successfully.")
+             |> assign(:games, nil)}
 
-    {:noreply, assign(socket, :games, nil)}
+          {:error, _changeset} ->
+            # V16.5: Fail securely with a generic user-facing error and keep state consistent.
+            {:noreply, put_flash(socket, :error, "Unable to delete game.")}
+        end
+
+      nil ->
+        # V16.5: Handle invalid/missing IDs safely without raising.
+        {:noreply, put_flash(socket, :error, "Game not found.")}
+    end
   end
 
   @impl true
