@@ -12,6 +12,7 @@ import logging
 import glob
 import shutil
 import typing
+import subprocess
 from typing import List, Dict, Any, Tuple
 
 import scripts.convert as c
@@ -2241,6 +2242,62 @@ class TestGetLibreOfficeBin(unittest.TestCase):
     def test_linux_uses_shutil_which(self, mock_which, mock_platform):
         result = c._get_libreoffice_bin()
         self.assertEqual(result, "/usr/bin/libreoffice")
+
+
+class TestConversionHelperBranches(unittest.TestCase):
+    def setUp(self) -> None:
+        self._base = c.convert_vars.BASE_PATH
+        c.convert_vars.BASE_PATH = os.path.normpath("C:/repo")
+
+    def tearDown(self) -> None:
+        c.convert_vars.BASE_PATH = self._base
+
+    @mock.patch("scripts.convert.os.path.abspath")
+    @mock.patch("scripts.convert.os.path.isdir", return_value=True)
+    @mock.patch("scripts.convert.os.path.isfile", return_value=True)
+    def test_validate_file_paths_rejects_source_outside_base(self, _is_file, _is_dir, mock_abspath):
+        def fake_abspath(path: str) -> str:
+            path_str = str(path)
+            if path_str == "C:/src/file.docx":
+                return "D:/outside/file.docx"
+            if path_str == "C:/out":
+                return "C:/repo/out"
+            return "C:/repo"
+
+        mock_abspath.side_effect = fake_abspath
+        ok, msg, out = c._validate_file_paths("C:/src/file.docx", "C:/out/file.pdf")
+        self.assertFalse(ok)
+        self.assertIn("outside base directory", msg)
+        self.assertEqual("", out)
+
+    def test_validate_command_args_rejects_dangerous_char(self):
+        self.assertFalse(c._validate_command_args(["bin", "normal", "bad;arg"]))
+
+    @mock.patch("scripts.convert._get_libreoffice_bin", return_value="")
+    def test_convert_with_libreoffice_returns_false_without_binary(self, _mock_bin):
+        self.assertFalse(c._convert_with_libreoffice("in.docx", "out.pdf"))
+
+    @mock.patch("scripts.convert.subprocess.run")
+    @mock.patch("scripts.convert._validate_command_args", return_value=True)
+    @mock.patch("scripts.convert._validate_file_paths", return_value=(True, "C:/repo/in.docx", "C:/repo/out"))
+    @mock.patch("scripts.convert.os.makedirs")
+    @mock.patch("scripts.convert._get_libreoffice_bin", return_value="soffice.exe")
+    def test_convert_with_libreoffice_handles_timeout(
+        self, _mock_bin, _mock_makedirs, _mock_validate_paths, _mock_validate_args, mock_run
+    ):
+        mock_run.side_effect = subprocess.TimeoutExpired(cmd="soffice.exe", timeout=300)
+        self.assertFalse(c._convert_with_libreoffice("in.docx", "C:/repo/out/out.pdf"))
+
+    @mock.patch("scripts.convert.subprocess.run")
+    @mock.patch("scripts.convert._validate_command_args", return_value=True)
+    @mock.patch("scripts.convert._validate_file_paths", return_value=(True, "C:/repo/in.docx", "C:/repo/out"))
+    @mock.patch("scripts.convert.os.makedirs")
+    @mock.patch("scripts.convert._get_libreoffice_bin", return_value="soffice.exe")
+    def test_convert_with_libreoffice_success(
+        self, _mock_bin, _mock_makedirs, _mock_validate_paths, _mock_validate_args, mock_run
+    ):
+        mock_run.return_value = None
+        self.assertTrue(c._convert_with_libreoffice("in.docx", "C:/repo/out/out.pdf"))
 
 
 if __name__ == "__main__":
