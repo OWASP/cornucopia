@@ -13,7 +13,7 @@ import typing
 import unittest
 import zipfile
 from typing import List, Dict, Any, Tuple
-from unittest.mock import patch
+from unittest.mock import patch, mock_open, MagicMock
 import unittest.mock as mock
 
 import docx
@@ -2358,6 +2358,96 @@ class TestConvertDocx2PdfSuccess(unittest.TestCase):
         result = c._convert_with_libreoffice("file.docx", "out.pdf")
 
         self.assertIn(result, [True, False])
+
+
+class TestConvertUncovered(unittest.TestCase):
+
+    # ---------- _parse_mapping_file ----------
+
+    @patch("scripts.convert.yaml.safe_load", side_effect=Exception("boom"))
+    @patch("builtins.open", new_callable=mock_open, read_data="bad")
+    @patch.object(c.ConvertVars, "_detect_choices", return_value=None)
+    def test_parse_mapping_exception(self, mock_detect, mock_file, mock_yaml):
+        obj = c.ConvertVars()
+        result = obj._parse_mapping_file("fake.yaml")
+        self.assertEqual(result, {})
+
+    # ---------- _validate_file_paths ----------
+
+    @patch("scripts.convert.os.path.isfile", return_value=True)
+    @patch("scripts.convert.os.path.isdir", return_value=True)
+    def test_validate_paths_output_outside_base(self, mock_dir, mock_file):
+        with patch("scripts.convert.convert_vars.BASE_PATH", "/safe"):
+            result = c._validate_file_paths("/safe/file.docx", "/unsafe/output.pdf")
+            self.assertFalse(result[0])
+
+    # ---------- _convert_with_docx2pdf ----------
+
+    @patch("scripts.convert.convert_vars.can_convert_to_pdf", True)
+    @patch("builtins.__import__")
+    def test_docx2pdf_success(self, mock_import):
+        mock_module = mock_import.return_value
+        mock_module.convert = lambda a, b: None
+        result = c._convert_with_docx2pdf("file.docx", "out.pdf")
+        self.assertTrue(result)
+
+    @patch("scripts.convert.convert_vars.can_convert_to_pdf", True)
+    @patch("builtins.__import__", side_effect=Exception("fail"))
+    def test_docx2pdf_exception(self, mock_import):
+        result = c._convert_with_docx2pdf("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    # ---------- _rename_libreoffice_output ----------
+
+    @patch("scripts.convert.os.path.exists", return_value=True)
+    @patch("scripts.convert.os.remove")
+    @patch("scripts.convert.os.rename")
+    def test_rename_libreoffice_output(self, mock_rename, mock_remove, mock_exists):
+        c._rename_libreoffice_output("input.docx", "output.pdf")
+        self.assertTrue(mock_rename.called)
+
+    # ---------- create_edition_from_template ----------
+
+    @patch("scripts.convert.convert_vars.args", new=type("obj", (), {"pdf": False}))
+    @patch("scripts.convert.ensure_folder_exists")
+    @patch("scripts.convert.replace_docx_inline_text")
+    @patch("scripts.convert.get_docx_document")
+    @patch("scripts.convert.rename_output_file", return_value="/tmp/out.docx")
+    @patch("scripts.convert.get_template_for_edition", return_value="template.docx")
+    @patch("scripts.convert.get_meta_data", return_value={"key": "val"})
+    @patch("scripts.convert.map_language_data_to_template", return_value={})
+    @patch("scripts.convert.get_language_data", return_value={})
+    @patch("scripts.convert.get_mapping_for_edition", return_value={})
+    @patch("scripts.convert.get_files_from_of_type", return_value=["file.yaml"])
+    def test_create_edition_docx_flow(
+        self,
+        mock_files,
+        mock_map,
+        mock_lang,
+        mock_map2,
+        mock_meta,
+        mock_template,
+        mock_rename,
+        mock_get_doc,
+        mock_replace,
+        mock_ensure,
+    ):
+        mock_doc = MagicMock()
+        mock_get_doc.return_value = mock_doc
+        mock_replace.return_value = mock_doc
+
+        c.create_edition_from_template("cards")
+        self.assertTrue(mock_doc.save.called)
+
+    # ---------- main ----------
+
+    @patch("scripts.convert.parse_arguments")
+    @patch("scripts.convert.set_logging")
+    @patch("scripts.convert.set_can_convert_to_pdf")
+    @patch("scripts.convert._get_libreoffice_bin", return_value=None)
+    def test_main_pdf_not_supported(self, mock_bin, mock_set_pdf, mock_log, mock_parse):
+        mock_parse.return_value = type("obj", (), {"pdf": True, "debug": False})
+        c.main()
 
 
 if __name__ == "__main__":
