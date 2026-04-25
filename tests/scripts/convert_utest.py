@@ -2460,6 +2460,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
     @patch("scripts.convert._convert_with_libreoffice", return_value=False)
     def test_convert_to_pdf_all_fail(self, mock_lo, mock_docx, mock_fail):
         import scripts.convert as c
+
         c.convert_to_pdf("in.docx", "out.pdf")
         self.assertTrue(mock_fail.called)
 
@@ -2467,6 +2468,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
     @patch("scripts.convert._convert_with_libreoffice", return_value=True)
     def test_convert_to_pdf_libreoffice_success(self, mock_lo, mock_rename):
         import scripts.convert as c
+
         c.convert_to_pdf("in.docx", "out.pdf")
         self.assertTrue(mock_rename.called)
 
@@ -2489,6 +2491,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
     @patch("scripts.convert.valid_meta", return_value=True)
     def test_get_mapping_for_edition_exception(self, mock_valid, mock_data, mock_build):
         import scripts.convert as c
+
         result = c.get_mapping_for_edition([], "3.0", "en", "webapp", "bridge", "cards")
         self.assertEqual(result, {"meta": {}})
 
@@ -2500,6 +2503,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
     @patch("scripts.convert.is_yaml_file", return_value=True)
     def test_mapping_data_yaml_error(self, mock_yaml, mock_map, mock_is_yaml, mock_file):
         import scripts.convert as c
+
         result = c.get_mapping_data_for_edition(["file.yaml"], "en")
         self.assertEqual(result, {})
 
@@ -2507,6 +2511,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
 
     def test_replacement_value_none_key(self):
         import scripts.convert as c
+
         result = c.get_replacement_value_from_dict("hello", [(None, "x")])
         self.assertEqual(result, "hello")
 
@@ -2537,10 +2542,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
 
         c.convert_to_pdf("file.docx", "out.pdf")
 
-    @patch("scripts.convert.convert_vars.args", new=type("x", (), {
-        "edition": "webapp",
-        "version": "2.2"
-    }))
+    @patch("scripts.convert.convert_vars.args", new=type("x", (), {"edition": "webapp", "version": "2.2"}))
     def test_get_valid_version_specific(self):
         import scripts.convert as c
 
@@ -2557,7 +2559,6 @@ class TestConvertFinalCoverage(unittest.TestCase):
         mock_parse.return_value = mock_tree
 
         c.replace_text_in_xml_file("file.xml", [])
-
 
     @patch("scripts.convert.os.path.isfile", return_value=False)
     @patch("scripts.convert.convert_vars.args", new=type("x", (), {"inputfile": ""}))
@@ -2595,14 +2596,11 @@ class TestConvertFinalCoverage(unittest.TestCase):
 
         self.assertTrue(result.startswith("/abs/path/file"))
 
-
     @patch("scripts.convert.get_replacement_mapping_value", return_value=None)
     def test_replacement_skip_none_key(self, mock_map):
         import scripts.convert as c
 
-        result = c.get_replacement_value_from_dict(
-            "$hello", [(None, "x"), ("$hello", "world")]
-        )
+        result = c.get_replacement_value_from_dict("$hello", [(None, "x"), ("$hello", "world")])
 
         self.assertEqual(result, "world")
 
@@ -2613,5 +2611,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
 
         result = c.get_template_for_edition()
         self.assertEqual(result, "None")
+
+
 if __name__ == "__main__":
     unittest.main()
