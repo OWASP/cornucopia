@@ -22,10 +22,8 @@ defmodule CopiWeb.PlayerLive.Show do
       CopiWeb.Endpoint.subscribe(topic(player.game_id))
       {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
     else
-      # coveralls-ignore-start
       {:error, _reason} ->
         {:noreply, redirect(socket, to: "/error")}
-      # coveralls-ignore-stop
     end
   end
 
@@ -34,10 +32,8 @@ defmodule CopiWeb.PlayerLive.Show do
     case Player.find(socket.assigns.player.id) do
       {:ok, updated_player} ->
         {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
-      # coveralls-ignore-start
       {:error, _reason} ->
         {:noreply, socket}
-      # coveralls-ignore-stop
     end
   end
 
@@ -113,10 +109,8 @@ defmodule CopiWeb.PlayerLive.Show do
       case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
         {:ok, _vote} ->
           Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
-        # coveralls-ignore-start
         {:error, _} ->
           Logger.debug("Continue vote already exists for player_id: #{player.id}, game_id: #{game.id}")
-        # coveralls-ignore-stop
       end
     end
 
@@ -149,10 +143,8 @@ defmodule CopiWeb.PlayerLive.Show do
         case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
           {:ok, _vote} ->
             Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-          # coveralls-ignore-start
           {:error, _} ->
             Logger.debug("Vote already exists for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-          # coveralls-ignore-stop
         end
       end
 
@@ -160,10 +152,8 @@ defmodule CopiWeb.PlayerLive.Show do
       CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
       {:noreply, assign(socket, :game, updated_game)}
     else
-      # coveralls-ignore-start
       Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
       {:noreply, socket |> put_flash(:error, "Invalid card selection")}
-      # coveralls-ignore-stop
     end
   end
 

@@ -2,7 +2,6 @@ defmodule CopiWeb.ApiController do
   use CopiWeb, :controller
   alias Copi.Cornucopia.Game
 
-  # coveralls-ignore-start
   def play_card(conn, %{"game_id" => game_id, "player_id" => player_id, "dealt_card_id" => dealt_card_id}) do
     with {:ok, game} <- Game.find(game_id) do
       player = Enum.find(game.players, fn player -> player.id == player_id end)
@@ -34,7 +33,6 @@ defmodule CopiWeb.ApiController do
       {:error, _reason} -> conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
     end
   end
-  # coveralls-ignore-stop
 
   def topic(game_id) do
     "game:#{game_id}"

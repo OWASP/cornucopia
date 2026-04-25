@@ -89,7 +89,6 @@ defmodule Copi.IPHelper do
   """
   def ip_to_string(ip) when is_tuple(ip) do
     case :inet.ntoa(ip) do
-      # coveralls-ignore-next-line
       {:error, _} -> inspect(ip)
       ip_charlist -> to_string(ip_charlist)
     end
@@ -135,10 +134,8 @@ defmodule Copi.IPHelper do
       {k, v} when is_binary(k) ->
         case String.downcase(k) do
           "x-forwarded-for" -> extract_first_ip(v)
-          # coveralls-ignore-next-line
           _ -> nil
         end
-      # coveralls-ignore-next-line
       _ -> nil
     end)
   end
@@ -162,9 +159,7 @@ defmodule Copi.IPHelper do
           _ -> nil
         end)
 
-      # coveralls-ignore-next-line
       is_binary(x_headers) -> extract_first_ip(x_headers)
-      # coveralls-ignore-next-line
       true -> nil
     end
   end
@@ -183,7 +178,6 @@ defmodule Copi.IPHelper do
           nil ->
             case conn.private[:peer_data] do
               %{address: address} -> address
-              # coveralls-ignore-next-line
               _ -> conn.remote_ip
             end
           ip -> ip
@@ -203,16 +197,13 @@ defmodule Copi.IPHelper do
           nil ->
             case Map.get(map, :peer_data) do
               %{address: address} -> address
-              # coveralls-ignore-next-line
               _ -> nil
             end
           ip -> ip
         end
 
-      # coveralls-ignore-start
       _ ->
         nil
-      # coveralls-ignore-stop
     end
   end
 
@@ -266,12 +257,9 @@ defmodule Copi.IPHelper do
           {k, v} when is_atom(k) ->
             case Atom.to_string(k) |> String.downcase() do
               "x-forwarded-for" -> extract_first_ip(v)
-              # coveralls-ignore-next-line
               _ -> nil
             end
-          # coveralls-ignore-next-line
           v when is_binary(v) -> extract_first_ip(v)
-          # coveralls-ignore-next-line
           _ -> nil
         end)
 
@@ -281,10 +269,8 @@ defmodule Copi.IPHelper do
           v -> extract_first_ip(v)
         end
 
-      # coveralls-ignore-next-line
       is_binary(value) -> extract_first_ip(value)
 
-      # coveralls-ignore-next-line
       true -> nil
     end
   end
