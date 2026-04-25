@@ -81,6 +81,18 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       :ok
     end
 
+    test "save_player :new shows error when create_player fails with invalid data", %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Submit with an empty name so Cornucopia.create_player returns {:error, changeset}
+      html = view
+        |> form("#player-form", player: %{name: ""})
+        |> render_submit()
+
+      # Assert the specific validation error is rendered; do not rely on type-only checks.
+      assert html =~ "can&#39;t be blank" or html =~ "can't be blank"
+    end
+
     test "FormComponent.topic/1 returns correct topic string", %{conn: _conn, game: _game} do
       assert CopiWeb.PlayerLive.FormComponent.topic("abc123") == "game:abc123"
     end

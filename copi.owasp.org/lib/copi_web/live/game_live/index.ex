@@ -2,6 +2,7 @@ defmodule CopiWeb.GameLive.Index do
   use CopiWeb, :live_view
   use Phoenix.Component
 
+  alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
 
   @impl true
@@ -29,8 +30,35 @@ defmodule CopiWeb.GameLive.Index do
   end
 
   @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    case Ecto.ULID.cast(id) do
+      {:ok, game_id} ->
+        case Game.find(game_id) do
+          {:ok, %Game{} = game} ->
+            case Cornucopia.delete_game(game) do
+              {:ok, _deleted_game} ->
+                {:noreply,
+                 socket
+                 |> put_flash(:info, "Game deleted successfully.")
+                 |> assign(:games, nil)}
+
+              {:error, _changeset} ->
+                # V16.5: Fail securely with a generic user-facing error and keep state consistent.
+                {:noreply, put_flash(socket, :error, "Unable to delete game.")}
+            end
+
+          {:error, _reason} ->
+            # V16.5: Handle invalid/missing IDs safely without raising.
+            {:noreply, put_flash(socket, :error, "Game not found.")}
+        end
+
+      :error ->
+        {:noreply, put_flash(socket, :error, "Game not found.")}
+    end
+  end
+
+  @impl true
   def handle_info({:update_parent, new_state}, socket) do
     {:noreply, assign(socket, :games, new_state)}
   end
-
 end

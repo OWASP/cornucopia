@@ -1,10 +1,11 @@
 defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   use ExUnit.Case, async: false
+
   import Plug.Test
   import Plug.Conn
 
-  alias CopiWeb.Plugs.RateLimiterPlug
   alias Copi.RateLimiter
+  alias CopiWeb.Plugs.RateLimiterPlug
 
   setup do
     RateLimiter.clear_ip({10, 0, 0, 1})
@@ -30,8 +31,7 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     config = RateLimiter.get_config()
     limit = config.limits.connection
 
-    # Inject pre-exhausted timestamps directly to avoid relying on the
-    # 1-second sliding window, which can expire under CI load with 133 calls.
+    # Seed limiter state directly to make this deterministic under CI timing.
     :sys.replace_state(Copi.RateLimiter, fn state ->
       now = System.monotonic_time(:millisecond)
       timestamps = for _ <- 1..limit, do: now
@@ -48,6 +48,7 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     assert conn.status == 429
     assert conn.resp_body == "Too many connections, try again later."
     assert conn.halted
+    assert conn.resp_body =~ "Too many connections"
   end
 
   test "skips rate limiting when only remote IP is available" do
@@ -55,12 +56,10 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     config = RateLimiter.get_config()
     limit = config.limits.connection
 
-    # Exhaust the limit on RateLimiter manually
     for _ <- 1..limit do
       RateLimiter.check_rate(ip, :connection)
     end
 
-    # The plug should still let it through because it skips non-forwarded IPs
     conn =
       conn(:get, "/")
       |> Map.put(:remote_ip, ip)
@@ -71,24 +70,12 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     refute conn.halted
   end
 
-  test "skips rate limiting when no IP info is available" do
-    # Force remote_ip to nil so IPHelper.get_ip_source returns {:none, nil}
-    conn =
-      conn(:get, "/")
-      |> Map.put(:remote_ip, nil)
-      |> RateLimiterPlug.call([])
-
-    assert conn.status != 429
-    refute conn.halted
-  end
-
   test "init/1 returns opts unchanged" do
-    assert RateLimiterPlug.init([]) == []
-    assert RateLimiterPlug.init(key: :value) == [key: :value]
+    opts = [limit: 10, window: 60]
+    assert RateLimiterPlug.init(opts) == opts
   end
 
-  test "skips rate limiting when remote_ip is explicitly nil" do
-    # Explicitly nil remote_ip + no forwarded header → {:none, nil} branch
+  test "skips rate limiting when no IP info is available" do
     conn =
       conn(:get, "/")
       |> Map.put(:remote_ip, nil)
