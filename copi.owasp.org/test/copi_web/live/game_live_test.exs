@@ -128,10 +128,13 @@ defmodule CopiWeb.GameLiveTest do
       html = show_live |> element("button[phx-click=\"start_game\"]") |> render_click()
       assert html =~ "Round <strong>1</strong>"
     end
-    
-    test "Broadcasts game:updated to other LiveViews but ignores non-matching topic", %{conn: conn, game: game} do
+
+    test "Broadcasts game:updated to other LiveViews but ignores non-matching topic", %{
+      conn: conn,
+      game: game
+    } do
       {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
-      
+
       # Should be ignored due to topic mismatch, no crash
       send(show_live.pid, %{topic: "game:other_id", event: "game:updated", payload: game})
       assert render(show_live) =~ game.name
@@ -144,11 +147,13 @@ defmodule CopiWeb.GameLiveTest do
 
     test "displays finished game using rounds_played for current_round", %{conn: conn, game: game} do
       # Set finished_at so handle_params uses game.rounds_played (not +1) for current_round
-      {:ok, game} = Cornucopia.update_game(game, %{
-        started_at: DateTime.truncate(DateTime.utc_now(), :second),
-        finished_at: DateTime.truncate(DateTime.utc_now(), :second),
-        rounds_played: 1
-      })
+      {:ok, game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 1
+        })
+
       {:ok, _show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
       assert html =~ game.name
     end
@@ -205,6 +210,22 @@ defmodule CopiWeb.GameLiveTest do
       refute Copi.Repo.get(Copi.Cornucopia.Game, game.id)
     end
 
+    test "delete event handles unknown game id safely", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, "/games")
+
+      render_click(index_live, "delete", %{"id" => Ecto.ULID.generate()})
+
+      assert render(index_live) =~ "Game not found"
+    end
+
+    test "delete event handles malformed id safely", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, "/games")
+
+      render_click(index_live, "delete", %{"id" => "not-a-valid-id"})
+
+      assert render(index_live) =~ "Game not found"
+    end
+
     test "handle_info updates games list", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, "/games")
 
@@ -220,7 +241,9 @@ defmodule CopiWeb.GameLiveTest do
       {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
       {:ok, _} = Cornucopia.create_player(%{name: "P2", game_id: game.id})
       {:ok, _} = Cornucopia.create_player(%{name: "P3", game_id: game.id})
-      {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      {:ok, game} =
+        Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
 
       {:ok, show_live, _html} = live(conn, Routes.game_show_path(conn, :show, game))
 
@@ -243,7 +266,9 @@ defmodule CopiWeb.GameLiveTest do
 
     test "redirects to error on invalid round param", %{conn: conn, game: game} do
       {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
-      {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      {:ok, game} =
+        Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
 
       # round=999 is way beyond current_round, should redirect to /error
       assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=999")
@@ -315,6 +340,7 @@ defmodule CopiWeb.GameLiveTest do
         %{played_in_round: 2, id: 2},
         %{played_in_round: nil, id: 3}
       ]
+
       assert Show.card_played_in_round(cards, 1).id == 1
       assert Show.card_played_in_round(cards, 2).id == 2
       assert is_nil(Show.card_played_in_round(cards, 3))

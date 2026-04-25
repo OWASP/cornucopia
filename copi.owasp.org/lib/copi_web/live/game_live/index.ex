@@ -31,22 +31,28 @@ defmodule CopiWeb.GameLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    case Cornucopia.get_game(id) do
-      %Game{} = game ->
-        case Cornucopia.delete_game(game) do
-          {:ok, _deleted_game} ->
-            {:noreply,
-             socket
-             |> put_flash(:info, "Game deleted successfully.")
-             |> assign(:games, nil)}
+    case Ecto.ULID.cast(id) do
+      {:ok, game_id} ->
+        case Game.find(game_id) do
+          {:ok, %Game{} = game} ->
+            case Cornucopia.delete_game(game) do
+              {:ok, _deleted_game} ->
+                {:noreply,
+                 socket
+                 |> put_flash(:info, "Game deleted successfully.")
+                 |> assign(:games, nil)}
 
-          {:error, _changeset} ->
-            # V16.5: Fail securely with a generic user-facing error and keep state consistent.
-            {:noreply, put_flash(socket, :error, "Unable to delete game.")}
+              {:error, _changeset} ->
+                # V16.5: Fail securely with a generic user-facing error and keep state consistent.
+                {:noreply, put_flash(socket, :error, "Unable to delete game.")}
+            end
+
+          {:error, _reason} ->
+            # V16.5: Handle invalid/missing IDs safely without raising.
+            {:noreply, put_flash(socket, :error, "Game not found.")}
         end
 
-      nil ->
-        # V16.5: Handle invalid/missing IDs safely without raising.
+      :error ->
         {:noreply, put_flash(socket, :error, "Game not found.")}
     end
   end
@@ -55,5 +61,4 @@ defmodule CopiWeb.GameLive.Index do
   def handle_info({:update_parent, new_state}, socket) do
     {:noreply, assign(socket, :games, new_state)}
   end
-
 end

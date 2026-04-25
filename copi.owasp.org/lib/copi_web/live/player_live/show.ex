@@ -12,7 +12,10 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def mount(_params, session, socket) do
-    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    ip =
+      socket.assigns[:client_ip] || Map.get(session, "client_ip") ||
+        Copi.IPHelper.get_ip_from_socket(socket)
+
     {:ok, assign(socket, :client_ip, ip)}
   end
 
@@ -33,6 +36,7 @@ defmodule CopiWeb.PlayerLive.Show do
     case Player.find(socket.assigns.player.id) do
       {:ok, updated_player} ->
         {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+
       {:error, _reason} ->
         {:noreply, socket}
     end
@@ -49,7 +53,9 @@ defmodule CopiWeb.PlayerLive.Show do
     Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
 
     if last_round?(game) do
-      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+      Copi.Cornucopia.update_game(game, %{
+        finished_at: DateTime.truncate(DateTime.utc_now(), :second)
+      })
     end
 
     {:ok, updated_game} = Game.find(game.id)
@@ -81,7 +87,9 @@ defmodule CopiWeb.PlayerLive.Show do
       Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
 
       if last_round?(game) do
-        Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+        Copi.Cornucopia.update_game(game, %{
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second)
+        })
       end
 
       {:ok, updated_game} = Game.find(game.id)
@@ -100,9 +108,9 @@ defmodule CopiWeb.PlayerLive.Show do
     # Use atomic delete to avoid TOCTOU race condition
     # Try to delete first - if none exists, this is a no-op
     case Copi.Repo.delete_all(
-      from cv in ContinueVote,
-      where: cv.player_id == ^player.id and cv.game_id == ^game.id
-    ) do
+           from cv in ContinueVote,
+             where: cv.player_id == ^player.id and cv.game_id == ^game.id
+         ) do
       {deleted_count, _} when deleted_count > 0 ->
         # Handle duplicate rows safely without crashing the LiveView process.
         # ASVS V16.5: fail securely on unexpected state.
@@ -115,6 +123,7 @@ defmodule CopiWeb.PlayerLive.Show do
           on_conflict: :nothing,
           conflict_target: [:player_id, :game_id]
         )
+
         Logger.debug("Continue vote insert attempted for player #{player.id}")
     end
 
@@ -130,9 +139,9 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    # Safely parse dealt_card_id to prevent crashes from invalid input
+    # Accept only fully numeric IDs. Integer.parse/1 accepts trailing junk by default.
     case Integer.parse(dealt_card_id) do
-      {dealt_card_id_int, _} ->
+      {dealt_card_id_int, ""} ->
         game_card_ids =
           game.players
           |> Enum.flat_map(fn p -> p.dealt_cards end)
@@ -142,11 +151,13 @@ defmodule CopiWeb.PlayerLive.Show do
           # Use atomic delete to avoid TOCTOU race condition
           # Try to delete first - if none exists, this is a no-op
           case Copi.Repo.delete_all(
-            from v in Vote,
-            where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card_id_int
-          ) do
-            {1, _} ->
-              Logger.debug("Vote removed for player #{player.id} on card #{dealt_card_id_int}")
+                 from v in Vote,
+                   where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card_id_int
+               ) do
+            {deleted_count, _} when deleted_count > 0 ->
+              Logger.debug(
+                "Vote removed for player #{player.id} on card #{dealt_card_id_int} (#{deleted_count} row(s))"
+              )
 
             {0, _} ->
               # No vote existed, so insert one
@@ -155,20 +166,26 @@ defmodule CopiWeb.PlayerLive.Show do
                 on_conflict: :nothing,
                 conflict_target: [:player_id, :dealt_card_id]
               )
-              Logger.debug("Vote insert attempted for player #{player.id} on card #{dealt_card_id_int}")
+
+              Logger.debug(
+                "Vote insert attempted for player #{player.id} on card #{dealt_card_id_int}"
+              )
           end
 
           {:ok, updated_game} = Game.find(game.id)
           CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
           {:noreply, assign(socket, :game, updated_game)}
         else
-          Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+          Logger.warning(
+            "Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}"
+          )
+
           {:noreply, socket |> put_flash(:error, "Invalid card selection")}
         end
 
-      :error ->
+      _ ->
         Logger.warning("Invalid dealt_card_id: #{inspect(dealt_card_id)}")
-        {:noreply, socket}
+        {:noreply, socket |> put_flash(:error, "Invalid card selection")}
     end
   end
 
@@ -177,7 +194,7 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   def ordered_cards(cards) do
-    Enum.sort_by(cards, &(&1.card.id))
+    Enum.sort_by(cards, & &1.card.id)
   end
 
   def unplayed_cards(cards) do
@@ -199,7 +216,11 @@ defmodule CopiWeb.PlayerLive.Show do
   def round_open?(game) do
     latest_round = game.rounds_played + 1
 
-    players_still_to_play = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil end)
+    players_still_to_play =
+      game.players
+      |> Enum.filter(fn player ->
+        Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil
+      end)
 
     Enum.count(players_still_to_play) > 0
   end
@@ -209,7 +230,11 @@ defmodule CopiWeb.PlayerLive.Show do
   end
 
   def last_round?(game) do
-    players_with_no_cards = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil end)
+    players_with_no_cards =
+      game.players
+      |> Enum.filter(fn player ->
+        Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil
+      end)
 
     Enum.count(players_with_no_cards) > 0
   end
@@ -229,5 +254,4 @@ defmodule CopiWeb.PlayerLive.Show do
       _ -> "EoP Session:"
     end
   end
-
 end
