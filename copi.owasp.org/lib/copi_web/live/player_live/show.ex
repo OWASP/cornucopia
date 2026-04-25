@@ -103,8 +103,10 @@ defmodule CopiWeb.PlayerLive.Show do
       from cv in ContinueVote,
       where: cv.player_id == ^player.id and cv.game_id == ^game.id
     ) do
-      {1, _} ->
-        Logger.debug("Continue vote removed for player #{player.id}")
+      {deleted_count, _} when deleted_count > 0 ->
+        # Handle duplicate rows safely without crashing the LiveView process.
+        # ASVS V16.5: fail securely on unexpected state.
+        Logger.debug("Continue vote removed for player #{player.id} (#{deleted_count} row(s))")
 
       {0, _} ->
         # No vote existed, so insert one
