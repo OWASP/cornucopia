@@ -24,6 +24,7 @@
   let clazz = $derived(raw.includes('[inline]') ? 'inline' : '');
   let style = $derived(raw.includes('[white]') ? ' white' : '');
 </script>
+  <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
   <a {rel} {target} href={href.startsWith('/') ? resolve(href) : href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
   <style>
     a
