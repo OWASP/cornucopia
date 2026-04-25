@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-assignment */
 import fs from 'fs';
 
 // Cache the result of a given function on the local filesystem
@@ -10,21 +11,21 @@ export async function LocalCache(func: () => unknown, cacheSeconds : number, des
 
     if(cacheStatusOk)
     {
-        logMessage += " 🟢 Found general request [" + description + "] in cache.";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
+        logMessage += " ðŸŸ¢ Found general request [" + description + "] in cache.";
+        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
         const responseAsString = fs.readFileSync(filename).toString();
 
         const size = Buffer.byteLength(responseAsString);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
+        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
 
         const response = JSON.parse(responseAsString);
         return response; 
     }
     else
     {
-        logMessage += " 🟠 " + description + " not in cache, got from API";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
+        logMessage += " ðŸŸ  " + description + " not in cache, got from API";
+        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
         
         const result = func();
         const response = await Promise.resolve(result)
@@ -32,7 +33,7 @@ export async function LocalCache(func: () => unknown, cacheSeconds : number, des
 
         const size = Buffer.byteLength(responseAsJSON);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
+        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
 
         fs.writeFileSync(filename, responseAsJSON);
         console.log(logMessage);
@@ -51,13 +52,13 @@ export function LocalCacheSync(func: () => unknown, cacheSeconds : number, descr
 
     if(cacheStatusOk)
     {
-        logMessage += " 🟢 Found general request [" + description + "] in cache.";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
+        logMessage += " ðŸŸ¢ Found general request [" + description + "] in cache.";
+        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
         const responseAsString = fs.readFileSync(filename).toString();
 
         const size = Buffer.byteLength(responseAsString);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
+        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
 
         const response = JSON.parse(responseAsString);
         console.log(logMessage);
@@ -65,15 +66,15 @@ export function LocalCacheSync(func: () => unknown, cacheSeconds : number, descr
     }
     else
     {
-        logMessage += " 🟠 " + description + " not in cache, got from API";
-        logMessage += "\t⏱️ Age is " + cacheAge + " seconds."
+        logMessage += " ðŸŸ  " + description + " not in cache, got from API";
+        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
         
         const result = func();
         const responseAsJSON = JSON.stringify(result)
 
         const size = Buffer.byteLength(responseAsJSON);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\t💿 " + kiloBytes + " kb."
+        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
 
         fs.writeFileSync(filename, responseAsJSON);
         console.log(logMessage);

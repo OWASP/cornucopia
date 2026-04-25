@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckService } from './deckService';
 import type { Card } from '$domain/card/card';
@@ -315,12 +316,12 @@ suits:
                 }
             );
 
-            // First call â€” populates cache
+            // First call ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â populates cache
             const firstResult = deckService.getCards('en');
             expect(firstResult.has('MOBILE-1')).toBe(true);
             expect(firstResult.has('WEB-1')).toBe(true);
 
-            // Second call â€” must hit cache with fully-merged result, not a partial one
+            // Second call ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â must hit cache with fully-merged result, not a partial one
             const secondResult = deckService.getCards('en');
             expect(secondResult.has('MOBILE-1')).toBe(true);
             expect(secondResult.has('WEB-1')).toBe(true);
@@ -736,8 +737,8 @@ suits:
         desc: Card 1
 `;
 
-    // First call â†’ YAML
-    // Second call â†’ throw error (simulate markdown failure)
+    // First call                     YAML
+    // Second call                     throw error (simulate markdown failure)
     vi.mocked(fs.readFileSync)
         .mockReturnValueOnce(mockYamlContent)
         .mockImplementationOnce(() => {

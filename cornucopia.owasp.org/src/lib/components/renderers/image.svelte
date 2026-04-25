@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-assignment */
 <script lang="ts">
     import { page } from "$app/stores";
 
@@ -14,6 +15,9 @@
     // Using /static allows autocomplete in VS code somehow, but breaks the image linking
     // So I just remove it before applying the href property of the img tag.
     if(href.includes("/static"))
+         
+
+        // eslint-disable-next-line no-useless-assignment
         href = href.replace("/static","");
 
 

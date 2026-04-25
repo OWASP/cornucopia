@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* global request, __request */
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));

@@ -1,4 +1,4 @@
-﻿import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { config } from 'dotenv';
 config();
@@ -22,7 +22,6 @@ export default {
 			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
                                 if (path === '/mapping') return;
-                                if (/^\/[A-Z0-9]/.test(path) && referrer != null) return;
                                 console.log(message);
 				console.log(referrer);
 				console.log(path);

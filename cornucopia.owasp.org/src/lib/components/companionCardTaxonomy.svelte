@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { run } from "svelte/legacy";
     import { GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
@@ -8,26 +9,31 @@
     import { readTranslation } from "$lib/stores/stores";
 
     interface Props {
-        mappingData: any;
+        mappingData: Record<string, unknown>;
         card: Card;
         routes: Map<string, Route[]>;
     }
 
-    let { mappingData, card, routes }: Props = $props();
+    let { mappingData, card = $bindable(), routes: _routes }: Props = $props();
 
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
-    let mappings = $derived(controller.getCardMappings(card?.id));
-    let attacks: Attack[] = $derived(GetCardAttacks(card?.id) as Attack[]);
+    let mappings: Record<string, unknown> = $state({});
+    let attacks: Attack[] = $state([]);
+
+    run(() => {
+        mappings = controller.getCardMappings(card?.id);
+        attacks = GetCardAttacks(card?.id) as Attack[];
+    });
 
     const NON_DISPLAY = new Set(["id", "value", "url"]);
 
-    function formatValue(val: any): string[] {
+    function formatValue(val: unknown): string[] {
         if (val === undefined || val === null) return ["-"];
         if (Array.isArray(val))
             return val.length ? val.map((v) => String(v)) : ["-"];
-        return [String(val)] || ["-"];
+        return [String(val)];
     }
 
     function toLabel(key: string): string {
@@ -50,7 +56,7 @@
 
 {#if mappings}
     <h1 class="title">{$t("cards.companionCardTaxonomy.h1.1")}</h1>
-    {#each displayMappings as mapping}
+    {#each displayMappings as mapping (mapping.label)}
         <MappingsList title={mapping.label} mappings={mapping.values} />
     {/each}
     <h1 class="title">{$t("cards.companionCardTaxonomy.h1.2")}</h1>

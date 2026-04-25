@@ -1,4 +1,5 @@
 <script lang="ts">
+ 
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
@@ -7,9 +8,15 @@
     
     interface Props {
         card?: Card;
+         
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mapping: any;
         style?: string;
     }
+
+     
+
 
     let { card = $bindable(), mapping, style = '' }: Props = $props();
     let previewStyle = $derived(style ? ' ' + style : '');
