@@ -1,0 +1,1 @@
+This card focuses on the absence of server-side input validation when client-side checks are the only enforcement mechanism. See FRE8 for the related threat of tampering with frontend JavaScript to bypass client-side authorization logic.

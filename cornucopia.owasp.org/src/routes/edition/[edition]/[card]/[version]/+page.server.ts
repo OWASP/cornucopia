@@ -10,6 +10,11 @@ import type { PageServerLoad } from './$types';
 export const load = (({ params }) => {
     const edition =  params?.edition;
     const version =  params?.version;
+    const requestedLang = params?.lang ?? 'en';
+
+    const availableLanguages =DeckService.getLanguagesForEditionVersion(edition, version);
+
+    const lang = availableLanguages.includes(requestedLang)? requestedLang: 'en';
     let asvsVersion:string = "4.0.3";
     if (params.version === '3.0') asvsVersion = '5.0';
     if (!DeckService.hasEdition(edition)) error(
@@ -25,16 +30,20 @@ export const load = (({ params }) => {
     return {
       edition: edition,
       version: version,
-      lang: 'en',
+      versions: DeckService.getVersions(edition),
+      lang: lang,
       card: legacyCardCodeFix(params.card.toUpperCase()),
-      cards: new DeckService().getCardDataForEditionVersionLang(edition, version, 'en'),
+      cards: new DeckService().getCardDataForEditionVersionLang(edition, version, lang),
+      
+      
+      
       routes: new Map<string, Route[]>([
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
       mappingData: new Map<string, any>([
         [`${edition}`, (new MappingService()).getCardMappingForAllVersions().get(`${edition}-${version}`)]
       ]),
-      languages: DeckService.getLanguages(edition),
+      languages: DeckService.getLanguagesForEditionVersion(edition, version),
       capecData: capecData
     };
 

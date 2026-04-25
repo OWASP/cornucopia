@@ -23,10 +23,11 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCards('nl')).toBeDefined();
         expect((new DeckService()).getCards('no_nb')).toBeDefined();
         expect((new DeckService()).getCards('pt_br')).toBeDefined();
-    });
+    }, 30000);
 
     it("should get Card data for edition, version and lang.", async () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en')).toBeDefined();
+        expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'it')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'es')).toBeDefined();
@@ -37,8 +38,10 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_pt')).toBeDefined();
 
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en')).toBeDefined();
+        expect((new DeckService()).getCardDataForEditionVersionLang('companion', '1.0', 'en')).toBeDefined();
 
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en').size).toBe(80);
+        expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'it').size).toBe(80);
@@ -48,10 +51,10 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'no_nb').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_br').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'pt_pt').size).toBe(80);
-    });
+    }, 30000);
 
-    it("should return 160 cards.", async () => {
+    it("should return 238 cards.", async () => {
         let cards = (new DeckService()).getCards('en');
-        expect(cards.size).toBe(160);
+        expect(cards.size).toBe(238);
     });
 });

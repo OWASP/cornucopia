@@ -1,0 +1,1 @@
+This card covers supply chain compromise of third-party scripts loaded from external CDNs, where the attacker targets the script's origin rather than the application itself. See FREQ for persistent code injection directly into the application's own frontend assets, and FRE4 for DOM-based XSS where the attacker controls input to the running page.

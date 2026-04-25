@@ -2,7 +2,7 @@
 meta:
   edition: "webapp"
   component: "cards"
-  language: "ES"
+  language: "es"
   version: "3.0"
 suits:
 -
@@ -223,7 +223,7 @@ suits:
     id: "AZ2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/AZ2"
-    desc: "Tim influir hacia dónde se envían o reenvían los datos"
+    desc: "Tim puede influir hacia dónde se envían o reenvían los datos"
   -
     id: "AZ3"
     value: "3"

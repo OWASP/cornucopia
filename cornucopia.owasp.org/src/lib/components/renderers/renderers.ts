@@ -11,6 +11,9 @@ import Paragraph from '$lib/components/renderers/paragraph.svelte';
 import Strong from '$lib/components/renderers/strong.svelte';
 import Table from '$lib/components/renderers/table.svelte';
 import TableCell from '$lib/components/renderers/tableCell.svelte';
+import TableRow from '$lib/components/renderers/tableRow.svelte';
+import TableBody from '$lib/components/renderers/tableBody.svelte';
+import TableHead from '$lib/components/renderers/tableHead.svelte';
 import Em from '$lib/components/renderers/Em.svelte';
 
 export const renderers =
@@ -42,5 +45,24 @@ export const renderersForGeneralUse =
     link : Link,
     strong : Strong,
     table : Table,
+    tablecell: TableCell
+}
+
+export const newsRenderers =
+{
+    em: Em,
+    code : Code,
+    heading : Heading,
+    paragraph : Paragraph,
+    list : List,
+    listItem : ListItem,
+    image : Image,
+    blockquote : BlockQuote,
+    link : Link,
+    strong : Strong,
+    table : Table,
     tablecell: TableCell,
+    tableBody: TableBody,
+    tableHead: TableHead,
+    tableRow: TableRow
 }
