@@ -1,13 +1,15 @@
 defmodule CopiWeb.Router do
   use CopiWeb, :router
 
+  alias CopiWeb.SecurityHeaders
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, html: {CopiWeb.Layouts, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug :put_secure_browser_headers, SecurityHeaders.browser_headers()
     plug CopiWeb.Plugs.RateLimiterPlug
   end
 
@@ -22,14 +24,19 @@ defmodule CopiWeb.Router do
 
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
-    live "/games/:game_id", GameLive.Show, :show
+
+    live_session :game_show, on_mount: [{CopiWeb.GameLive.Show, :default}] do
+      live "/games/:game_id", GameLive.Show, :show
+    end
 
     live "/games/:game_id/players", PlayerLive.Index, :index
     live "/games/:game_id/players/new", PlayerLive.Index, :new
+    live "/games/:game_id/players/:id/edit", PlayerLive.Index, :edit
 
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
 
     live "/resources", ResourcesLive.Index, :index
+    live "/privacy", PrivacyLive.Index, :index
 
     get "/cards", CardController, :index
     get "/cards/:version/:id", CardController, :show
@@ -39,6 +46,11 @@ defmodule CopiWeb.Router do
     pipe_through :api
 
     put "/games/:game_id/players/:player_id/card", ApiController, :play_card
+  end
+
+  # Health check endpoint for Fly.io - no pipeline needed for plain text response
+  scope "/", CopiWeb do
+    get "/health", HealthController, :index
   end
 
   # Other scopes may use custom stacks.

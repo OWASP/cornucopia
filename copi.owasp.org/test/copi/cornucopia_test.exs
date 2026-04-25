@@ -66,6 +66,42 @@ defmodule Copi.CornucopiaTest do
       game = game_fixture()
       assert %Ecto.Changeset{} = Cornucopia.change_game(game)
     end
+
+    test "Game.find/1 returns OK tuple for existing game" do
+      game = game_fixture()
+      assert {:ok, found} = Copi.Cornucopia.Game.find(game.id)
+      assert found.id == game.id
+    end
+
+    test "Game.find/1 returns error for non-existent game" do
+      assert {:error, :not_found} =
+               Copi.Cornucopia.Game.find("00000000000000000000000099")
+    end
+
+    test "Game.continue_vote_count/1 returns count of continue votes" do
+      alias Copi.Cornucopia.Game
+      game = game_fixture()
+      {:ok, reloaded} = Game.find(game.id)
+      assert Game.continue_vote_count(reloaded) == 0
+    end
+
+    test "Game.majority_continue_votes_reached?/1 returns true when votes exceed half" do
+      alias Copi.Cornucopia.Game
+      alias Copi.Repo
+      # Create game WITHOUT started_at so we can add players
+      {:ok, game} = Cornucopia.create_game(%{name: "majority vote test", edition: "webapp"})
+      {:ok, created_player} = Cornucopia.create_player(%{name: "p1", game_id: game.id})
+      # Now start the game after player is created
+      {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+      {:ok, reloaded} = Game.find(game.id)
+      # 0 votes, 1 player → 0 > div(1,2)=0 → false
+      refute Game.majority_continue_votes_reached?(reloaded)
+      # Add a continue vote
+      Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: created_player.id, game_id: game.id})
+      {:ok, updated} = Game.find(game.id)
+      # 1 vote > div(1,2)=0 → true
+      assert Game.majority_continue_votes_reached?(updated)
+    end
   end
 
   describe "players" do
@@ -75,7 +111,7 @@ defmodule Copi.CornucopiaTest do
     @valid_attrs %{name: "some name"}
     @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
-    @game_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
+    @game_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name"}
 
     def player_fixture(attrs \\ %{}) do
       {:ok, player} =
@@ -132,6 +168,22 @@ defmodule Copi.CornucopiaTest do
     test "change_player/1 returns a player changeset" do
       player = player_fixture()
       assert %Ecto.Changeset{} = Cornucopia.change_player(player)
+    end
+
+    test "create_player/1 returns error when game has already started" do
+      {:ok, game} = Cornucopia.create_game(%{name: "started game", edition: "webapp"})
+      # Start the game by setting started_at
+      {:ok, started_game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      assert {:error, :game_already_started} = Cornucopia.create_player(%{name: "Late Player", game_id: started_game.id})
+    end
+
+    test "create_player/1 succeeds when game has not started" do
+      {:ok, game} = Cornucopia.create_game(%{name: "waiting game", edition: "webapp"})
+
+      assert {:ok, %Player{} = player} = Cornucopia.create_player(%{name: "Early Player", game_id: game.id})
+      assert player.name == "Early Player"
+      assert player.game_id == game.id
     end
   end
 

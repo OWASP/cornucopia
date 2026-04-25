@@ -1,0 +1,1 @@
+This card focuses on the integrity of conversation history and memory stores used as agent context, not on the initial prompt. See AAI2 for prompt injection via context isolation failures and AAI7 for injection via external tool output.

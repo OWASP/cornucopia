@@ -33,19 +33,23 @@ export class CreController {
 
     private static editions: Map<string, string>  = new Map<string, string>( [
         ['webapp', "OWASP Cornucopia Website App Edition"],
-        ['mobileapp', "OWASP Cornucopia Mobile App Edition"]
-
+        ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
+        ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"]
     ]);
 
     private static category: Map<string, string>  = new Map<string, string>( [
         ['webapp', "Website Application"],
-        ['mobileapp', "Mobile Application"]
-
+        ['mobileapp', "Mobile Application"],
+        ['dbd', "Digital Benefits and Disbenefits"]
     ]);
 
     constructor(deck: Map<string, Card>, controller: MappingController) {
         this.deck = deck;
         this.controller = controller;
+    }
+
+    public static getEditionName(edition: string): string {
+        return CreController.editions.get(edition) || edition;
     }
 
     public getCreMapping(edition: string, lang: string) : any {
@@ -69,9 +73,6 @@ export class CreController {
         let mapping = this.controller.getCardMappings(card.id);
         let links: { document: { doctype: string; id: string }; ltype: string }[] = [];
         let cre = mapping.owasp_cre?.owasp_asvs as [] || [];
-        if (!cre) {
-            throw Error("cre has not been defined.")
-        }
         cre.forEach((cre) => links.push({
             "document": {
                 "doctype": "CRE",

@@ -1,5 +1,6 @@
 export const data = 
 {
+    "ACM": "https://devguide.owasp.org/en/04-design/02-web-app-checklist/07-access-controls",
     "SC": "https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#1-system-configuration-sc",
     "FM": "https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#2-file-management-fm",
     "CS": "https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/#3-cloud-security-cs",

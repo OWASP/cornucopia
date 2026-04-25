@@ -2,6 +2,7 @@
 import i18n from 'sveltekit-i18n';
 import en from './en';
 import es from './es';
+import uk from './uk';
 import lang from './lang';
 
 /** @type {import('sveltekit-i18n').Config} */
@@ -16,6 +17,10 @@ const config = {
     },
     es: {
       ...es,
+      lang,
+    },
+    uk: {
+      ...uk,
       lang,
     },
   },

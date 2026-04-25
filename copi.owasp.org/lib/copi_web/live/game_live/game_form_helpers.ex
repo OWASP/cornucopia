@@ -22,15 +22,22 @@ defmodule CopiWeb.GameLive.GameFormHelpers do
   end
 
   def display_appropriate_suits_list(edition, suits) do
-    if hd(suits) == "" && length(suits) == 1 do
-      generate_suit_list_formatted_for_checkbox(edition)
-    else
-      [_first, second | _rest] = suits
-      String.contains?(second, edition)
-      case String.contains?(second, edition) do
-        true -> suits
-        false -> generate_suit_list_formatted_for_checkbox(edition)
-      end
+    case suits do
+      [""] ->
+        generate_suit_list_formatted_for_checkbox(edition)
+
+      [single] ->
+        if String.contains?(single, edition) do
+          suits
+        else
+          generate_suit_list_formatted_for_checkbox(edition)
+        end
+
+      [_first, second | _rest] ->
+        case String.contains?(second, edition) do
+          true -> suits
+          false -> generate_suit_list_formatted_for_checkbox(edition)
+        end
     end
   end
 

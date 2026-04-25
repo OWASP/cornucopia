@@ -1,5 +1,5 @@
 {
-  "version": "2.5.0",
+  "version": "2.6.0",
   "summary": {
     "title": "copi.owasp.org",
     "owner": "",
@@ -15,7 +15,7 @@
         "diagramType": "EOP",
         "placeholder": "New EoP games diagram description",
         "thumbnail": "./public/content/images/thumbnail.eop.jpg",
-        "version": "2.5.0",
+        "version": "2.6.0",
         "cells": [
           {
             "position": {
@@ -423,12 +423,12 @@
                 {
                   "id": "c0c26de6-2cf8-479e-845e-971229c1e0f1",
                   "title": "CRA: Data is not encrypted at rest by default",
-                  "status": "Open",
+                  "status": "Mitigated",
                   "severity": "Low",
                   "type": null,
                   "eopGameId": "cornucopia",
                   "description": "What can go wrong?\n\nWhen hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory.",
-                  "mitigation": "What can you do about it?\n\nThe data at REST on copi.owasp.org is encrypted by default, but we are not using client side encryption. This means that I have the possibility to access the database and see what you entered in your name fields, but I will rather quite my job then be caught snooping on your data. It would be the end of my career if I got caught doing so and the end of Copi if someone else did. When all that is said, we will implement client side encryption on Copi since I wouldn't want anyone to have the possibility to even suspect me of doing such a foolish thing (see: https://github.com/OWASP/cornucopia/issues/2232).\nEnsure that your service provider ensures that the data is encrypted at REST.\nOWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.",
+                  "mitigation": "Make sure you are using the latest version of Copi and that you have correctly configured the encryption key according to: https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#encryption-key-setup",
                   "modelType": "EOP",
                   "new": false,
                   "number": 13,

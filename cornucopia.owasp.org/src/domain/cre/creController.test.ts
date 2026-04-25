@@ -235,6 +235,41 @@ describe('CreController tests', () => {
             expect(result.links).toHaveLength(0);
         });
 
+        it('should handle missing CRE mapping data', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue({});
+
+            const mockCard: Card = {
+                id: 'card-missing-cre',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '4',
+                lang: 'en'
+            } as unknown as Card;
+
+            const result = creController.generateDoc(mockCard);
+            expect(result.links).toHaveLength(0);
+        });
+
+        it('should throw when card mapping is undefined', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue(undefined);
+
+            const mockCard: Card = {
+                id: 'card-without-mapping',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '5',
+                lang: 'en'
+            } as unknown as Card;
+
+            expect(() => creController.generateDoc(mockCard)).toThrow();
+        });
+
         it('should handle single CRE mapping', () => {
             mockMappingController.getCardMappings = vi.fn().mockReturnValue({
                 owasp_cre: {
@@ -259,6 +294,28 @@ describe('CreController tests', () => {
             expect(result.links[0].document.id).toBe('CRE-SINGLE');
         });
 
+        it('should handle falsy owasp_asvs value without throwing', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue({
+                owasp_cre: {
+                    owasp_asvs: false
+                }
+            });
+
+            const mockCard: Card = {
+                id: 'card-falsy-cre',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '6',
+                lang: 'en'
+            } as unknown as Card;
+
+            const result = creController.generateDoc(mockCard);
+            expect(result.links).toHaveLength(0);
+        });
+
         it('should construct correct URLs', () => {
             const mockCard = {
                 id: 'card-6',
@@ -275,6 +332,28 @@ describe('CreController tests', () => {
 
             expect(result.id).toBe('https://cornucopia.owasp.org/cards/webapp/authorization/card-6');
             expect(result.hyperlink).toBe('https://cornucopia.owasp.org/cards/webapp/authorization/card-6');
+        });
+    });
+
+    describe('getEditionName', () => {
+        it('should return correct name for webapp edition', () => {
+            const result = CreController.getEditionName('webapp');
+            expect(result).toBe('OWASP Cornucopia Website App Edition');
+        });
+
+        it('should return correct name for mobileapp edition', () => {
+            const result = CreController.getEditionName('mobileapp');
+            expect(result).toBe('OWASP Cornucopia Mobile App Edition');
+        });
+
+        it('should return the edition string itself for unknown edition', () => {
+            const result = CreController.getEditionName('unknown-edition');
+            expect(result).toBe('unknown-edition');
+        });
+
+        it('should handle empty string', () => {
+            const result = CreController.getEditionName('');
+            expect(result).toBe('');
         });
     });
 

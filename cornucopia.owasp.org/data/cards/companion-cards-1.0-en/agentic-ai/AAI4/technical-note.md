@@ -1,0 +1,1 @@
+This card relates to agent resource exhaustion caused by uncontrolled tool-call loops rather than to model input size attacks. See AAIK for the related threat of high-impact operations caused by excessive agency rather than runaway iteration.

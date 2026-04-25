@@ -3,6 +3,7 @@
     import { cardColor } from "../../domain/card/cardColor";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import WebAppCardMapping from "./webAppCardMapping.svelte";
+    import CompanionCardMapping from "./companionCardMapping.svelte";
     
     interface Props {
         card?: Card;
@@ -38,10 +39,18 @@
         if (['CRM', 'CM', 'WC'].includes(id)) suit = suit + '-mobile';
         return cardColor?.get(suit) ?? "default";
     }
+
+    function getLeftRibbonClass(suit: string, id: string, value: string)
+    {
+        const base = getSuitColor(suit, id);
+        if (!base) return base;
+        if (['J', 'Q', 'K'].includes(value)) return base + ' left-royal';
+        return base;
+    }
 </script>
 
 <div class="card-render">
-    <div class="left {getSuitColor(card?.suit, card?.suitId)}">
+    <div class="left {getLeftRibbonClass(card?.suit, card?.suitId, card?.value)}">
         <span class="property-card-suit{previewStyle}">{card?.suitName}</span>
     </div>
     <div class="right {getRoyalSuitColor(card?.suit, card?.suitId, card?.value)}">
@@ -54,6 +63,9 @@
             {/if}
             {#if card?.edition == 'mobileapp'}
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
+            {/if}
+            {#if card?.edition == 'companion'}
+                <CompanionCardMapping {mapping} {style}></CompanionCardMapping>
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
         <span class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</span>
@@ -156,7 +168,6 @@
     .left
     {
         width: 15%;
-        background: rgb(2,0,36);
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(255,255,255,0.3) 100%);
     }
 
@@ -257,6 +268,72 @@
     .cornucopia-mobile-text {
         color: rgb(10,58,94);
     }
+    
+    .left.agentic-ai {
+        background: linear-gradient(180deg, #3b2c42, #3b2c4280);
+    }
+    .left.automated-threats {
+        background: linear-gradient(180deg, #d56859, #d5685980);
+    }
+    .left.cloud {
+        background: linear-gradient(180deg, #D289B8, #D289B880);
+    }
+    .left.devops {
+        background: linear-gradient(180deg, #a87441, #a8744180);
+    }
+    .left.frontend {
+        background: linear-gradient(180deg, #806A62, #806A6280);
+    }
+    .left.large-language-models {
+        background: linear-gradient(180deg, #a13763, #a1376380);
+    }
+    .social-engineering {
+        background-color: #dbdbdb;
+    }
+
+    .agentic-ai-text {
+        color: #3b2c42;
+    }
+    .automated-threats-text {
+        color: #d56859;
+    }
+    .cloud-text {
+        color: #d289b8;
+    }
+    .devops-text {
+        color: #a87441;
+    }
+    .frontend-text {
+        color: #806A62;
+    }
+    .large-language-models-text {
+        color: #a13763;
+    }
+    .social-engineering-text {
+        color: #dbdbdb;
+    }
+
+    .agentic-ai-royal {
+        background-color: #3b2c4280;
+    }
+    .automated-threats-royal {
+        background-color: #d5685980;
+    }
+    .cloud-royal {
+        background-color: #D289B880;
+    }
+    .devops-royal {
+        background-color: #a8744180;
+    }
+    .frontend-royal {
+        background-color: #806A6280;
+    }
+    .large-language-models-royal {
+        background-color: #a1376380;
+    }
+    .social-engineering-royal {
+        background-color: #e8e8e8;
+    }
 
     .white {
         background-color: white;
@@ -328,8 +405,9 @@
 
         .property-card-description.browser-card-container
         {
-            font-size: 3.2vw;
+            font-size: 2.8vw;
             padding: .25rem;
+            line-height: 1.25;
         }
 
         .property-card-suit.browser-card-container
@@ -345,3 +423,4 @@
         }
     }
 </style>
+

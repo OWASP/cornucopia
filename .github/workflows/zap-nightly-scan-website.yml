@@ -1,0 +1,97 @@
+---
+name: "ZAP Nightly Scan - Cornucopia Website"
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  zap-scan:
+    name: "OWASP ZAP DAST Scan - Website"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Copy source data into build context
+        run: cp -r source cornucopia.owasp.org/source
+
+      - name: Build website Docker image
+        run: docker build -t cornucopia-website -f cornucopia.owasp.org/Dockerfile cornucopia.owasp.org
+
+      - name: Start website container
+        run: |
+          docker run -d --name cornucopia-website -p 8080:80 cornucopia-website
+          timeout 60 bash -c 'until curl -f http://localhost:8080 > /dev/null 2>&1; do sleep 2; done'
+
+      - name: Run ZAP Full Scan with AJAX Spider
+        run: |
+          mkdir -p zap-reports
+          sudo chown 1000:1000 zap-reports
+          docker run --network="host" \
+            --user 1000:1000 \
+            -v $(pwd)/zap-reports:/zap/wrk/:rw \
+            -t ghcr.io/zaproxy/zaproxy:2.16.1 \
+            zap-full-scan.py \
+            -t http://localhost:8080 \
+            -j \
+            -r website_dast_report.html \
+            -w website_dast_report.md \
+            -J website_dast_report.json \
+            -x website_dast_report.xml \
+            -a \
+            -d \
+            -z "-config ajaxSpider.maxDuration=10 -config scanner.maxScanDurationInMins=180" \
+            || true
+
+      - name: Stop website container
+        if: always()
+        run: |
+          docker stop cornucopia-website || true
+          docker rm cornucopia-website || true
+
+      - name: Upload ZAP reports as artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: zap-website-dast-reports
+          path: zap-reports/
+          retention-days: 30
+
+      - name: Check for high-risk vulnerabilities
+        if: always()
+        run: |
+          if [ -f zap-reports/website_dast_report.json ]; then
+            HIGH_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "3")] | length' zap-reports/website_dast_report.json || echo "0")
+            MEDIUM_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "2")] | length' zap-reports/website_dast_report.json || echo "0")
+            
+            echo "High Risk Vulnerabilities: $HIGH_RISK"
+            echo "Medium Risk Vulnerabilities: $MEDIUM_RISK"
+            
+            if [ "$HIGH_RISK" -gt "0" ]; then
+              echo "⚠️ WARNING: $HIGH_RISK high-risk vulnerabilities detected!"
+              echo "Please review the ZAP report for details."
+            fi
+          else
+            echo "ZAP report not found, skipping vulnerability check"
+          fi
+
+      - name: Upload reports to pre-release
+        if: always()
+        run: |
+          for f in \
+            zap-reports/website_dast_report.html \
+            zap-reports/website_dast_report.json \
+            zap-reports/website_dast_report.xml \
+            zap-reports/website_dast_report.md; do
+            if [ -f "$f" ]; then
+              gh release upload "pre-release" "$f" --clobber
+            fi
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -2,15 +2,20 @@ FROM node:iron-alpine3.21@sha256:957dbf2afb4f22d9e2b94b981e242cbb796965cd3d9cc02
 
 WORKDIR /app
 
-# Install dependencies
-COPY package.json ./
+# Install dependencies (lockfile copied for deterministic builds)
+COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm@v10.3.0 --save-exact
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
-# Copy source code
+# Copy source data needed for SvelteKit prerendering (card YAML files)
+# The workflow copies the repo-root source/ directory into the build context
+COPY source /source
+
+# Copy the frontend application code
 COPY . .
 
 # Build the application
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm run build
 
 # Production stage
@@ -25,5 +30,3 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-
-# Added a comment to push to repo webhook
