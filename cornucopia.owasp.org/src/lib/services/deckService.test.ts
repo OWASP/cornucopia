@@ -137,7 +137,7 @@ describe('DeckService tests', () => {
                 version: '2.2', 
                 lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] 
             });
-            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] });
+            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] });
         });
     }, 10000);
 
@@ -212,7 +212,7 @@ describe('DeckService tests', () => {
 
         it('should return all supported languages for webapp version 3.0', () => {
              const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
-             expect(languages).toEqual(['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk']);
+             expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk']);
         });
        it('should return all supported languages for mobileapp version 1.1', () => {
             const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
@@ -761,6 +761,55 @@ suits:
 
     consoleErrorSpy.mockRestore();
 });
+        it('should handle navigation for a middle card in the same suit', () => {
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+            const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - id: CARD-1
+        value: A
+        desc: First card
+      - id: CARD-2
+        value: 2
+        desc: Middle card
+      - id: CARD-3
+        value: 3
+        desc: Last card
+`;
+
+            const mockTechnicalNote = '---\n---\nTechnical note content';
+            const mockExplanation = '---\n---\nExplanation content';
+
+            vi.mocked(fs.readFileSync)
+                .mockReturnValueOnce(mockYamlContent)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockReturnValueOnce(mockExplanation)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockReturnValueOnce(mockExplanation)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockReturnValueOnce(mockExplanation);
+
+            const mockMapping = {
+                suits: {
+                    '0': { name: 'Test Suit' }
+                }
+            };
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+            const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+            expect(result.size).toBe(3);
+
+            const middleCard = result.get('CARD-2');
+            expect(middleCard).toBeDefined();
+            expect(middleCard?.prevous).toBe('CARD-1');
+            expect(middleCard?.next).toBe('CARD-3');
+        });
+
     }, 10000);
 
     describe('clear', () => {
