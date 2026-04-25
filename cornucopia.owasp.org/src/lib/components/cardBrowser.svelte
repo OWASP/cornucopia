@@ -9,7 +9,7 @@
     interface Props {
         card: Card;
         cards: Map<string, Card>;
-        mappingData: any;
+        mappingData: Record<string, unknown>;
     }
 
     let { card, cards, mappingData }: Props = $props();
@@ -48,25 +48,25 @@
 <noscript>
     <div class="card-panel" id="card-face">
         <div class="left">
-            <a href={cards.get(card.prevous)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+            <a href={cards.get(card.prevous)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">&lt;</a>
         </div>
         <div class="center">
             <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
         </div>
         <div class="right">
-            <a href={cards.get(card.next)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+            <a href={cards.get(card.next)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">&gt;</a>
         </div>
     </div>
 </noscript>
 <div class="card-panel script" id="card">
     <div class="left">
-        <a href={getUrl(cards.get(card.prevous))} onclick={(e)=>goToPrevious(e, card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">{"<"}</a>
+        <a href={getUrl(cards.get(card.prevous))} onclick={(e)=>goToPrevious(e, card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">&lt;</a>
     </div>
     <div class="center">
         <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
-        <a href={getUrl(cards.get(card.next))} onclick={(e)=>goToNext(e, card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">{">"}</a>
+        <a href={getUrl(cards.get(card.next))} onclick={(e)=>goToNext(e, card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">&gt;</a>
     </div>
 </div>
 <style>
