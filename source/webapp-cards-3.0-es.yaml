@@ -461,9 +461,6 @@ paragraphs:
     id: "T00005"
     text: "Índice"
   -
-    id: "T00005"
-    text: "Índice"
-  -
     id: "T00010"
     text: "OWASP® Cornucopia es un mecanismo para asistir a los equipos de desarrollo de software en la identificación de requisitos de seguridad en procesos de desarrollo ágiles, convencionales y formales."
   -
