@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { resolve } from "$app/paths";
-
-  type _CapecMapEntry = {
+  interface _CapecMapEntry {
     id: number;
     name: string;
     owasp_asvs: string[];
@@ -44,12 +42,12 @@
         {#each capecEntries as entry (entry.id)}
           <tr>
             <td>
-              <a href={resolve(linkCapec(entry.id))} title="CAPEC {entry.id}">{entry.id}</a>
+              <a href={linkCapec(entry.id)} title="CAPEC {entry.id}">{entry.id}</a>
             </td>
             <td>{entry.name}</td>
             <td class="asvs-links">
               {#each entry.owasp_asvs as asvs, index (asvs)}
-                <a href={resolve(linkASVS(asvs))} title="ASVS {asvs}">{asvs}</a>{#if index < entry.owasp_asvs.length - 1}, {/if}
+                <a href={linkASVS(asvs)} title="ASVS {asvs}">{asvs}</a>{#if index < entry.owasp_asvs.length - 1}, {/if}
               {/each}
             </td>
           </tr>
