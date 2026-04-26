@@ -22,6 +22,7 @@ export default {
 			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
                                 if (path === '/mapping') return;
+                                if (path.startsWith('/edition')) return;
                                 console.log(message);
 				console.log(referrer);
 				console.log(path);
