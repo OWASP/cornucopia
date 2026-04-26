@@ -1,8 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-
     import { readTranslation } from "$lib/stores/stores";
-    import { resolve } from "$app/paths";
 
     type AsvsRequirement = {
         section_id: string;
@@ -51,7 +49,7 @@
 
     let t = readTranslation();
 
-    function getIndex(num: number): string
+    function getIndex(num : number) : any
     {
         return 'V' + num;
     }
@@ -100,25 +98,7 @@
     {#each mappings as mapping (mapping)}
         {#if hasValidLink(mapping)}
             <p>
-                {#if version === '4.0.3'}
-                    <a
-                        title="OWASP ASVS {getDisplayText(mapping)}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={resolve(getUrl(mapping))}
-                    >
-                        {getDisplayText(mapping)}
-                    </a>
-                {:else}
-                    <a
-                        title="OWASP ASVS {getDisplayText(mapping)}"
-                        target="_blank"
-                        rel="external noopener noreferrer"
-                        href={getUrl(mapping)}
-                    >
-                        {getDisplayText(mapping)}
-                    </a>
-                {/if}
+                <a title="OWASP ASVS {getDisplayText(mapping)}" target="_blank" href="{getUrl(mapping)}">{getDisplayText(mapping)}</a>
             </p>
         {/if}
     {/each}
