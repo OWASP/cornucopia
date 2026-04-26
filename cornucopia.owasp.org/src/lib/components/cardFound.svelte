@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-  import { resolve } from "$app/paths";
   import { Text } from "$lib/utils/text";
+  import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
@@ -16,13 +15,13 @@
   import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
 
   interface Props {
-    mappingData: Record<string, unknown>;
+    mappingData: any;
     card: Card;
     cards: Map<string, Card>;
     routes: Map<string, Route[]>;
     languages: string[];
     language: string;
-    capecData?: Record<string, unknown>;
+    capecData?: any;
     versions: string[];
   }
 
@@ -39,12 +38,9 @@
     
   const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
-  let mappings = $state(controller.getCardMappings(card.id));
-  const asvsVersion = $state(card.version < '3.0' ? '4.0.3' : '5.0');
-
-  run(() => {
-    mappings = controller.getCardMappings(card.id);
-  });
+  let mappings = $derived(controller.getCardMappings(card.id));
+  let _attacks: Attack[] = $derived(GetCardAttacks(card.id));
+  const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
 </script>
 <LanguagePicker 
   edition={card.edition}
@@ -56,18 +52,18 @@
 />
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
-  <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
-  <a title="How to play OWASP Cornucopia" class="link" href={resolve('/how-to-play')}>{$t('cards.cardFound.a')}</a>
+  <CardBrowser {card} {cards} mappingData={mappings}></CardBrowser>
+  <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   {#if card.edition == 'webapp'}
-  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes} {capecData} {asvsVersion}></WebAppCardTaxonomy>
+  <WebAppCardTaxonomy {card} {mappingData} {routes} {capecData} {asvsVersion}></WebAppCardTaxonomy>
   {/if}
   {#if card.edition == 'mobileapp'}
-  <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
+  <MobileAppCardTaxonomy {card} {mappingData} {routes}></MobileAppCardTaxonomy>
   {/if}
   {#if card.edition == "companion"}
-  <CompanionCardTaxonomy bind:card={card} {mappingData} {routes}></CompanionCardTaxonomy>
+  <CompanionCardTaxonomy {card} {mappingData} {routes}></CompanionCardTaxonomy>
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>
@@ -106,7 +102,3 @@
     cursor: pointer;
   }
 </style>
-
-
-
-

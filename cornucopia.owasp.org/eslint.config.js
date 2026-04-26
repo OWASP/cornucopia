@@ -26,6 +26,7 @@ export default ts.config(
   {
     rules: {
       'svelte/no-navigation-without-resolve': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', {
         'varsIgnorePattern': '^_',
         'argsIgnorePattern': '^_',

@@ -4,7 +4,6 @@
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
-    import { resolve } from "$app/paths";
     import type { Card } from "$domain/card/card.js";
     import { MappingController } from "$domain/mapping/mappingController.js";
     import { readLang, readTranslation } from '$lib/stores/stores';
@@ -82,7 +81,7 @@
         selectedCard = null;
         // Collapse the entire tree down when switching between versions
         setTree(false);
-        goto(resolve(`/card/${versionParam}`));
+        goto(`/card/${versionParam}`);
     }
 </script>
 <svelte:head>
@@ -109,7 +108,7 @@
 <div class="script">
     {#each cardSuits as suit (suit.name)}
         {#each suit.cards as card (card)}
-                <p><a title="OWASP Cornucopia suit {suit.name}, card {card}" class="card hide" href={resolve(cards?.get(card)?.url ?? '')}>{suit.name} {card}</a></p>
+                <p><a title="OWASP Cornucopia suit {suit.name}, card {card}" class="card hide" href={cards?.get(card)?.url ?? ''}>{suit.name} {card}</a></p>
         {/each}
     {/each}
 
@@ -138,11 +137,11 @@
         <div class="tree">
             {#each cardSuits as suit (suit.name)}
                 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-                <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
+                <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</h3>
                 {#if map?.get(suit.name)}
                     {#each suit.cards as card (card)}
                         <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
-                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={resolve(cards?.get(card)?.url ?? '')}>├── {cards?.get(card)?.id}</a>
+                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>â”œâ”€â”€ {cards?.get(card)?.id}</a>
                         </p>
                     {/each}
                 {/if}
@@ -179,21 +178,21 @@
             {/if}
             {#each cardSuits as suit (suit.name)}
                  {#if version == VERSION_WEBAPP}
-                    <label for="{suit.name + '-web'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <label for="{suit.name + '-web'}" class="suit-button"><span class="label">â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
                 {/if}
                 {#if version == VERSION_MOBILEAPP}
-                    <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
                 {/if}
                 {#if version == VERSION_COMPANION}
-                    <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
                 {/if}
                 <div class="card-buttons">
                 {#each suit.cards as card (card)}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={resolve(cards?.get(card)?.url ?? '')}>├── {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>â”œâ”€â”€ {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
