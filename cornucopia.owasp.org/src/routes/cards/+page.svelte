@@ -4,7 +4,6 @@
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
     import {Text} from "$lib/utils/text.js"
-    import { resolve } from "$app/paths";
     import type { Card } from "../../domain/card/card.js";
     import { MappingController } from "../../domain/mapping/mappingController.js";
     import { readLang, readTranslation } from '$lib/stores/stores';
@@ -126,7 +125,7 @@
 <div class="script">
     {#each webappSuits as suit (suit.name)}
         {#each suit.cards as card (card)}
-            <p><a title="OWASP Cornucopia suit {suit.name}, card {card}" class="card hide" href={resolve(cards?.get(card)?.url ?? '')}>{suit.name} {card}</a></p>
+            <p><a title="OWASP Cornucopia suit {suit.name}, card {card}" class="card hide" href={cards?.get(card)?.url ?? ''}>{suit.name} {card}</a></p>
         {/each}
     {/each}
 
@@ -158,11 +157,11 @@
                 
                 {#each webappSuits as suit (suit.name)}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>ΓööΓöÇΓöÇ {Text.Format(suit.name).toUpperCase()}</h3>
+                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>ÃŽâ€œÃƒÂ¶ÃƒÂ¶ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
                         {#each suit.cards as card (card)}
                             <p onmouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
-                                <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={resolve(cards?.get(card)?.url ?? '')}>Γö£ΓöÇΓöÇ {cards?.get(card)?.id}</a>
+                                <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>ÃŽâ€œÃƒÂ¶Ã‚Â£ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {cards?.get(card)?.id}</a>
                             </p>
                         {/each}
                     {/if}
@@ -172,11 +171,11 @@
             {#if version == VERSION_MOBILEAPP}
                 {#each mobileappSuits as suit (suit.name)}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>ΓööΓöÇΓöÇ {Text.Format(suit.name).toUpperCase()}</h3>
+                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>ÃŽâ€œÃƒÂ¶ÃƒÂ¶ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
                         {#each suit.cards as card (card)}
                             <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
-                                <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={resolve(cards?.get(card)?.url ?? '')}>Γö£ΓöÇΓöÇ {cards?.get(card)?.id}</a>
+                                <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>ÃŽâ€œÃƒÂ¶Ã‚Â£ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {cards?.get(card)?.id}</a>
                             </p>
                         {/each}
                     {/if}
@@ -186,11 +185,11 @@
             {#if version == VERSION_COMPANION}
                 {#each companionSuits as suit (suit.name)}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>ΓööΓöÇΓöÇ {Text.Format(suit.name).toUpperCase()}</h3>
+                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>ÃŽâ€œÃƒÂ¶ÃƒÂ¶ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
                         {#each suit.cards as card (card)}
                             <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
-                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={resolve(cards?.get(card)?.url ?? '')}>Γö£ΓöÇΓöÇ {cards?.get(card)?.id}</a>
+                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>ÃŽâ€œÃƒÂ¶Ã‚Â£ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {cards?.get(card)?.id}</a>
                             </p>
                         {/each}
                     {/if}
@@ -211,12 +210,12 @@
                 {@html $t('cards.p2')}
             </p>
             {#each webappSuits as suit (suit.name)}
-                <label for="{suit.name + '-web'}" class="suit-button"><span class="label">ΓööΓöÇΓöÇ {Text.Format(suit.name).toUpperCase()}</span></label>
+                <label for="{suit.name + '-web'}" class="suit-button"><span class="label">ÃŽâ€œÃƒÂ¶ÃƒÂ¶ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {Text.Format(suit.name).toUpperCase()}</span></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
                 <div class="card-buttons">
                 {#each suit.cards as card (card)}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={resolve(cards?.get(card)?.url ?? '')}>Γö£ΓöÇΓöÇ {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>ÃŽâ€œÃƒÂ¶Ã‚Â£ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
@@ -231,12 +230,12 @@
                 {@html $t('cards.p3')}
             </p>
             {#each mobileappSuits as suit (suit.name)}
-                <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">ΓööΓöÇΓöÇ {Text.Format(suit.name).toUpperCase()}</span></label>
+                <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">ÃŽâ€œÃƒÂ¶ÃƒÂ¶ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {Text.Format(suit.name).toUpperCase()}</span></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
                 <div class="card-buttons">
                 {#each suit.cards as card (card)}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={resolve(cards?.get(card)?.url ?? '')}>Γö£ΓöÇΓöÇ {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>ÃŽâ€œÃƒÂ¶Ã‚Â£ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
@@ -251,12 +250,12 @@
                 {@html $t('cards.p4')}
             </p>
             {#each companionSuits as suit (suit.name)}
-                <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">ΓööΓöÇΓöÇ {Text.Format(suit.name).toUpperCase()}</span></label>
+                <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">ÃŽâ€œÃƒÂ¶ÃƒÂ¶ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {Text.Format(suit.name).toUpperCase()}</span></label>
                 <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
                 <div class="card-buttons">
                 {#each suit.cards as card (card)}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={resolve(cards?.get(card)?.url ?? '')}>Γö£ΓöÇΓöÇ {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>ÃŽâ€œÃƒÂ¶Ã‚Â£ÃŽâ€œÃƒÂ¶Ãƒâ€¡ÃŽâ€œÃƒÂ¶Ãƒâ€¡ {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>
