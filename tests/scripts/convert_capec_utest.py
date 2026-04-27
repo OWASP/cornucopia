@@ -17,6 +17,35 @@ if "unittest.util" in __import__("sys").modules:
     __import__("sys").modules["unittest.util"]._MAX_LENGTH = 999999999
 
 
+class TestFileHandleClosure(unittest.TestCase):
+    """Ensure CAPEC page generators close file handles on errors"""
+
+    def setUp(self):
+        self.mock_output_path = Path("/fake/output")
+        capec.convert_vars.args = argparse.Namespace(output_path=self.mock_output_path)
+
+    @patch("builtins.open", new_callable=mock_open)
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_close_on_error(self, mock_create_folder, mock_file):
+        handle = mock_file()
+        # first write succeeds, second write throws
+        handle.write.side_effect = [None, ValueError("oops")]
+
+        # Minimal data causing one pattern entry
+        test_data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "foo", "Description": "bar"}]},
+                "Categories": {"Category": []},
+            }
+        }
+        capec_to_asvs_map = {}
+        asvs_map = {"Requirements": []}
+        with self.assertRaises(ValueError):
+            capec.create_capec_pages(test_data, capec_to_asvs_map, asvs_map, "5.0")
+
+        self.assertTrue(handle.close.called)
+
+
 class TestParseDescription(unittest.TestCase):
     def test_parse_description_with_dict_and_text(self):
         """Test parsing description with __text field in dict"""
@@ -367,6 +396,8 @@ class TestCreateCapecPages(unittest.TestCase):
         self.assertIn("## Description", written_content)
         self.assertIn("This is a test description", written_content)
         self.assertIn("Source: [CAPEC™ 123](https://capec.mitre.org/data/definitions/123.html)", written_content)
+        # ensure file closed
+        self.assertTrue(handle.close.called)
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("scripts.convert_capec.create_folder")
@@ -653,6 +684,69 @@ class TestCreatelink(unittest.TestCase):
         # Should return the shortcode itself
         self.assertEqual(result, "V99.99.99")
 
+    def test_createlink_no_prefix_collision(self):
+        """Exact equality check: V1.1.1 must not match V1.1.10 or V1.1.11."""
+        asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 1,
+                    "Name": "Architecture",
+                    "Items": [
+                        {
+                            "Ordinal": 1,
+                            "Name": "Secure Design",
+                            "Items": [
+                                {"Shortcode": "V1.1.10", "Text": "Req ten"},
+                                {"Shortcode": "V1.1.11", "Text": "Req eleven"},
+                                {"Shortcode": "V1.1.1", "Text": "Req one"},
+                            ],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        # Looking up the shorter code must return a link anchored to V1.1.1, not V1.1.10
+        result = capec.createlink(asvs_map, "V1.1.1", "5.0")
+
+        self.assertIn("#V1.1.1)", result)
+        self.assertNotIn("#V1.1.10)", result)
+        self.assertNotIn("#V1.1.11)", result)
+
+    def test_createlink_exact_match_multi_digit(self):
+        """Looking up V1.1.10 must match V1.1.10 exactly, not V1.1.1."""
+        asvs_map = {
+            "Requirements": [
+                {
+                    "Ordinal": 1,
+                    "Name": "Architecture",
+                    "Items": [
+                        {
+                            "Ordinal": 1,
+                            "Name": "Secure Design",
+                            "Items": [
+                                {"Shortcode": "V1.1.1", "Text": "Req one"},
+                                {"Shortcode": "V1.1.10", "Text": "Req ten"},
+                            ],
+                        }
+                    ],
+                }
+            ]
+        }
+
+        result = capec.createlink(asvs_map, "V1.1.10", "5.0")
+
+        self.assertIn("#V1.1.10)", result)
+        self.assertNotIn("#V1.1.1)", result.replace("#V1.1.10)", ""))
+
+    def test_createlink_empty_shortcode(self):
+        """Empty shortcode returns empty string."""
+        asvs_map = {"Requirements": []}
+
+        result = capec.createlink(asvs_map, "", "5.0")
+
+        self.assertEqual(result, "")
+
 
 class TestHasNoAsvsMapping(unittest.TestCase):
     def test_has_no_asvs_mapping_exists(self):
@@ -745,6 +839,88 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
         self.assertIn("## Related ASVS Requirements", written_content)
         self.assertIn("ASVS (5.0):", written_content)
         self.assertIn("V8.1.1", written_content)
+
+
+class TestConvertCapecEdgeCases(unittest.TestCase):
+
+    # -------- create_capec_pages --------
+
+    @patch("scripts.convert_capec.has_no_asvs_mapping", return_value=False)
+    @patch("scripts.convert_capec.create_link_list", return_value="link")
+    @patch("scripts.convert_capec.parse_description", return_value="desc")
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_category_with_mapping(self, mock_folder, mock_desc, mock_link, mock_no_map):
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": []},
+                "Categories": {"Category": [{"_ID": "1", "_Name": "Test", "Summary": "sum"}]},
+            }
+        }
+
+        capec_to_asvs_map = {1: {"v": ["1"]}}
+        asvs_map = {}
+
+        with patch("scripts.convert_capec.open", mock_open()):
+            with patch("scripts.convert_capec.convert_vars.args", type("x", (), {"output_path": "out"})):
+                capec.create_capec_pages(data, capec_to_asvs_map, asvs_map, "5.0")
+
+    @patch("scripts.convert_capec.has_no_asvs_mapping", return_value=True)
+    @patch("scripts.convert_capec.parse_description", return_value="desc")
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_no_mapping(self, mock_folder, mock_desc, mock_no_map):
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "Test", "Description": "d"}]},
+                "Categories": {"Category": []},
+            }
+        }
+
+        with patch("scripts.convert_capec.open", mock_open()):
+            with patch("scripts.convert_capec.convert_vars.args", type("x", (), {"output_path": "out"})):
+                capec.create_capec_pages(data, {}, {}, "5.0")
+
+    # -------- main --------
+
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.load_json_file", return_value=None)
+    @patch("scripts.convert_capec.set_logging")
+    def test_main_invalid_data(self, mock_set_logging, mock_load, mock_parse):
+
+        mock_parse.return_value = type(
+            "x",
+            (),
+            {
+                "input_path": "a",
+                "asvs_mapping": "b",
+                "capec_to_asvs": "c",
+                "output_path": "out",
+                "asvs_version": "5.0",
+            },
+        )
+
+        capec.main()
+
+    @patch("scripts.convert_capec.create_capec_pages")
+    @patch("scripts.convert_capec.load_capec_to_asvs_mapping", return_value={1: {}})
+    @patch("scripts.convert_capec.validate_json_data", return_value=True)
+    @patch("scripts.convert_capec.load_json_file", side_effect=[{"a": 1}, {"b": 2}])
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.set_logging")
+    def test_main_success(self, mock_log, mock_parse, mock_load, mock_validate, mock_map, mock_create):
+        mock_parse.return_value = type(
+            "x",
+            (),
+            {
+                "input_path": "a",
+                "asvs_mapping": "b",
+                "capec_to_asvs": "c",
+                "output_path": "out",
+                "asvs_version": "5.0",
+            },
+        )
+
+        capec.main()
+        mock_create.assert_called()
 
 
 if __name__ == "__main__":

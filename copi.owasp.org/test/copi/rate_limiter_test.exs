@@ -47,10 +47,15 @@ defmodule Copi.RateLimiterTest do
       config = RateLimiter.get_config()
       limit = config.limits.connection
 
-      # Make requests up to the limit
-      for _ <- 1..limit do
-        assert {:ok, _} = RateLimiter.check_rate(ip, :connection)
-      end
+      # Inject pre-exhausted timestamps directly to avoid relying on the
+      # 1-second sliding window (133 sequential calls can exceed 1 second on
+      # a loaded CI machine, causing all timestamps to expire).
+      :sys.replace_state(Copi.RateLimiter, fn state ->
+        now = System.monotonic_time(:millisecond)
+        timestamps = for _ <- 1..limit, do: now
+        new_requests = Map.put(state.requests, {ip, :connection}, timestamps)
+        %{state | requests: new_requests}
+      end)
 
       # Next request should be blocked
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :connection)
@@ -116,6 +121,30 @@ defmodule Copi.RateLimiterTest do
       # Check that we can make requests up to the limit again
       assert {:ok, remaining} = RateLimiter.check_rate(ip, :game_creation)
       assert remaining == config.limits.game_creation - 1
+    end
+  end
+
+  describe "init with env vars (edge cases)" do
+    test "uses defaults when RATE_LIMIT_* are invalid" do
+      # Set invalid env vars
+      System.put_env("RATE_LIMIT_GAME_CREATION_LIMIT", "invalid")
+      System.put_env("RATE_LIMIT_PLAYER_CREATION_LIMIT", "-10")
+      System.put_env("RATE_LIMIT_CONNECTION_LIMIT", "")
+      System.put_env("RATE_LIMIT_CONNECTION_WINDOW", "not-an-int")
+
+      # Call get_env_config directly or restart RateLimiter.
+      # RateLimiter.init/1 uses them
+      {:ok, state} = RateLimiter.init([])
+
+      assert state.limits.game_creation == 20
+      assert state.limits.player_creation == 60
+      assert state.limits.connection == 133
+      assert state.windows.connection == 1
+
+      System.delete_env("RATE_LIMIT_GAME_CREATION_LIMIT")
+      System.delete_env("RATE_LIMIT_PLAYER_CREATION_LIMIT")
+      System.delete_env("RATE_LIMIT_CONNECTION_LIMIT")
+      System.delete_env("RATE_LIMIT_CONNECTION_WINDOW")
     end
   end
 
@@ -241,11 +270,44 @@ defmodule Copi.RateLimiterTest do
       # Should still work even with weird input
       assert {:ok, _} = RateLimiter.check_rate("invalid-ip", :game_creation)
     end
+
+    test "normalize_ip fallback: passes non-tuple non-binary values through", %{ip: _ip} do
+      # nil is neither binary nor tuple, hits normalize_ip(ip), do: ip
+      assert {:ok, _} = RateLimiter.check_rate(nil, :game_creation)
+    end
+
+    test "bypasses rate limit in production mode for localhost" do
+      Application.put_env(:copi, :env, :prod)
+
+      try do
+        result = RateLimiter.check_rate({127, 0, 0, 1}, :game_creation)
+        assert result == {:ok, :unlimited}
+      after
+        Application.put_env(:copi, :env, :test)
+      end
+    end
+
+    test "normalize_ip passes through non-tuple non-binary input" do
+      # Passing an integer (not a tuple or binary) hits the catch-all normalize_ip clause
+      assert {:ok, _} = RateLimiter.check_rate(12345, :game_creation)
+    end
   end
 
   describe "cleanup process" do
     test "rate limiter process is alive" do
       assert Process.whereis(Copi.RateLimiter) != nil
+    end
+
+    test "handles :cleanup message gracefully" do
+      pid = Process.whereis(Copi.RateLimiter)
+      # Populate some state first
+      RateLimiter.check_rate({10, 20, 30, 40}, :game_creation)
+      # Directly send the cleanup message to trigger handle_info(:cleanup, state)
+      send(pid, :cleanup)
+      Process.sleep(50)
+      # Should still be healthy
+      assert Process.alive?(pid)
+      assert {:ok, _} = RateLimiter.check_rate({10, 20, 30, 41}, :game_creation)
     end
 
     test "can make requests after clearing IP", %{ip: ip} do

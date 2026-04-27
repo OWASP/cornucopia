@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
   import { Text } from "$lib/utils/text";
   import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
@@ -13,6 +12,7 @@
   import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
+  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
 
   interface Props {
     mappingData: any;
@@ -38,13 +38,9 @@
     
   const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
-  let mappings = $state(controller.getCardMappings(card.id));
-  let attacks: Attack[] = $state(GetCardAttacks(card.id));
-
-  run(() => {
-    mappings = controller.getCardMappings(card.id);
-    attacks = GetCardAttacks(card.id);
-  });
+  let mappings = $derived(controller.getCardMappings(card.id));
+  let attacks: Attack[] = $derived(GetCardAttacks(card.id));
+  const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
 </script>
 <LanguagePicker 
   edition={card.edition}
@@ -56,15 +52,18 @@
 />
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
-  <CardBrowser bind:card={card} {cards} mappingData={mappings}></CardBrowser>
+  <CardBrowser {card} {cards} mappingData={mappings}></CardBrowser>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   {#if card.edition == 'webapp'}
-  <WebAppCardTaxonomy bind:card={card} {mappingData} {routes} {capecData}></WebAppCardTaxonomy>
+  <WebAppCardTaxonomy {card} {mappingData} {routes} {capecData} {asvsVersion}></WebAppCardTaxonomy>
   {/if}
   {#if card.edition == 'mobileapp'}
-  <MobileAppCardTaxonomy bind:card={card} {mappingData} {routes}></MobileAppCardTaxonomy>
+  <MobileAppCardTaxonomy {card} {mappingData} {routes}></MobileAppCardTaxonomy>
+  {/if}
+  {#if card.edition == "companion"}
+  <CompanionCardTaxonomy {card} {mappingData} {routes}></CompanionCardTaxonomy>
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>

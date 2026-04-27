@@ -1,0 +1,1 @@
+Unlike other cards in this suit, AAIK focuses on the combination of excessive agency and absent transactional safeguards that enables catastrophic, irreversible cross-system impact from a single agent decision. See AAI9 for unauthorized configuration changes due to excessive autonomy and AAI4 for resource exhaustion via uncontrolled tool-call loops.

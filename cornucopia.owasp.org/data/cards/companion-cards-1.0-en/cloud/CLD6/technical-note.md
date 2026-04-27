@@ -1,0 +1,1 @@
+This card covers exploitation of cloud management APIs with insufficient authentication and authorisation controls. See CLD2 for the related threat of abusing overly permissive IAM roles rather than API-level authorisation gaps.

@@ -1,19 +1,20 @@
 <script>
     import SvelteMarkdown from 'svelte-markdown'
-    import { renderers }  from '$lib/components/renderers/renderers';
+    import { newsRenderers }  from '$lib/components/renderers/renderers';
     import BlogpostMetadata from '$lib/components/blogpostMetadata.svelte';
     import {readTranslation} from "$lib/stores/stores";
     let t = readTranslation();
     /** @type {{data: any}} */
     let { data } = $props();
     let blogpost = $derived(data.blogpost);
+    let markdownRenderers = /** @type {any} */ (newsRenderers);
 </script>
 <svelte:head>
     <link rel="canonical" href="/news" />
 </svelte:head>
 <div>
 <BlogpostMetadata {blogpost}></BlogpostMetadata>
-<SvelteMarkdown {renderers} source={blogpost.markdown}></SvelteMarkdown>
+<SvelteMarkdown renderers={markdownRenderers} source={blogpost.markdown}></SvelteMarkdown>
 <p>
     <a title="OWASP Cornucopia's repository" rel="noopener" href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md">{$t('news.slug.p1')}</a>
 </p>

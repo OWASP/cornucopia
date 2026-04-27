@@ -28,6 +28,10 @@ describe('DeckService tests', () => {
             expect(DeckService.hasEdition('mobileapp')).toBe(true);
         });
 
+        it('should return true for companion edition', () => {
+            expect(DeckService.hasEdition('companion')).toBe(true);
+        });
+
         it('should return false for unknown edition', () => {
             expect(DeckService.hasEdition('unknown')).toBe(false);
         });
@@ -48,6 +52,10 @@ describe('DeckService tests', () => {
 
         it('should return true for mobileapp version 1.1', () => {
             expect(DeckService.hasVersion('mobileapp', '1.1')).toBe(true);
+        });
+
+        it('should return true for companion version 1.0', () => {
+            expect(DeckService.hasVersion('companion', '1.0')).toBe(true);
         });
 
         it('should return false for invalid version', () => {
@@ -100,6 +108,10 @@ describe('DeckService tests', () => {
             expect(DeckService.hasLanguage('mobileapp', 'en')).toBe(true);
         });
 
+        it('should return true for companion with en', () => {
+            expect(DeckService.hasLanguage('companion', 'en')).toBe(true);
+        });
+
         it('should return false for mobileapp with es', () => {
             expect(DeckService.hasLanguage('mobileapp', 'es')).toBe(false);
         });
@@ -116,14 +128,16 @@ describe('DeckService tests', () => {
     describe('getDecks', () => {
         it('should return all available decks', () => {
             const decks = DeckService.getDecks();
-            expect(decks).toHaveLength(3);
-            expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en'] });
+            expect(decks).toHaveLength(5);
+            expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] });
+            expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'dbd', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ 
                 edition: 'webapp', 
                 version: '2.2', 
                 lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] 
             });
-            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'ru'] });
+            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] });
         });
     }, 10000);
 
@@ -136,6 +150,10 @@ describe('DeckService tests', () => {
             expect(DeckService.getLatestVersion('mobileapp')).toBe('1.1');
         });
 
+        it('should return 1.0 for companion', () => {
+            expect(DeckService.getLatestVersion('companion')).toBe('1.0');
+        });
+
         it('should return 2.2 as default for unknown edition', () => {
             expect(DeckService.getLatestVersion('unknown')).toBe('2.2');
         });
@@ -144,9 +162,10 @@ describe('DeckService tests', () => {
     describe('getLatestEditions', () => {
         it('should return array of latest editions', () => {
             const editions = DeckService.getLatestEditions();
-            expect(editions).toHaveLength(2);
+            expect(editions).toHaveLength(3);
             expect(editions).toContain('webapp');
             expect(editions).toContain('mobileapp');
+            expect(editions).toContain('companion');
         });
     }, 10000);
 
@@ -164,14 +183,55 @@ describe('DeckService tests', () => {
             expect(languages).toContain('it');
         });
 
-        it('should return en for mobileapp', () => {
-            const languages = DeckService.getLanguages('mobileapp');
+       it('should return all languages for mobileapp', () => {
+           const languages = DeckService.getLanguages('mobileapp');
+           expect(languages).toEqual(['en', 'hi', 'uk']);
+        });
+
+        it('should return en for companion', () => {
+            const languages = DeckService.getLanguages('companion');
+            expect(languages).toContain('en');
+        });
+
+        it('should return en for dbd', () => {
+            const languages = DeckService.getLanguages('dbd');
             expect(languages).toContain('en');
         });
 
         it('should return default en for unknown edition', () => {
             const languages = DeckService.getLanguages('unknown');
             expect(languages).toEqual(['en']);
+        });
+    }, 10000);
+
+    describe('getLanguagesForEditionVersion', () => {
+        it('should return all languages for webapp version 2.2', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('webapp', '2.2');
+            expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']);
+        });
+
+        it('should return all supported languages for webapp version 3.0', () => {
+             const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
+             expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk']);
+        });
+       it('should return all supported languages for mobileapp version 1.1', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
+            expect(languages).toEqual(['en', 'hi', 'uk']);
+    });
+
+        it('should return only en for companion version 1.0', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('companion', '1.0');
+            expect(languages).toEqual(['en']);
+        });
+
+        it('should return empty array for unknown version', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('webapp', '1.0');
+            expect(languages).toEqual([]);
+        });
+
+        it('should return empty array for unknown edition', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('unknown', '2.2');
+            expect(languages).toEqual([]);
         });
     }, 10000);
 
@@ -187,6 +247,11 @@ describe('DeckService tests', () => {
             const versions = DeckService.getVersions('mobileapp');
             expect(versions).toEqual(['1.1']);
         });
+
+        it('should return version for companion', () => {
+            const versions = DeckService.getVersions('companion');
+            expect(versions).toEqual(['1.0']);
+            });
 
         it('should return empty array for unknown edition', () => {
             const versions = DeckService.getVersions('unknown');
@@ -236,6 +301,29 @@ suits:
 
             const result = deckService.getCards('en');
             expect(result).toBeInstanceOf(Map);
+        });
+
+        it('should return fully-merged cards on second call (cache must not be poisoned by partial result)', () => {
+            const mobileCard = { id: 'MOBILE-1', edition: 'mobileapp' } as Card;
+            const webCard = { id: 'WEB-1', edition: 'webapp' } as Card;
+
+            vi.spyOn(deckService, 'getCardDataForEditionVersionLang').mockImplementation(
+                (edition: string, _version: string, _lang: string) => {
+                    if (edition === 'mobileapp') return new Map([['MOBILE-1', mobileCard]]);
+                    if (edition === 'webapp') return new Map([['WEB-1', webCard]]);
+                    return new Map();
+                }
+            );
+
+            // First call â€” populates cache
+            const firstResult = deckService.getCards('en');
+            expect(firstResult.has('MOBILE-1')).toBe(true);
+            expect(firstResult.has('WEB-1')).toBe(true);
+
+            // Second call â€” must hit cache with fully-merged result, not a partial one
+            const secondResult = deckService.getCards('en');
+            expect(secondResult.has('MOBILE-1')).toBe(true);
+            expect(secondResult.has('WEB-1')).toBe(true);
         });
     }, 10000);
 
@@ -536,6 +624,192 @@ suits:
             
             consoleLogSpy.mockRestore();
         });
+
+        it('should warn and return empty map if card file is missing', () => {
+    vi.mocked(FileSystemHelper.hasFile).mockReturnValue(false);
+
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const deckService = new DeckService();
+    const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+    expect(result.size).toBe(0);
+    expect(consoleWarnSpy).toHaveBeenCalled();
+
+    consoleWarnSpy.mockRestore();
+});
+
+it('should use "unknown" fallback when card id is missing on technical note read error', () => {
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+            const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - value: A
+        desc: Card without id
+`;
+
+            vi.mocked(fs.readFileSync)
+                .mockReturnValueOnce(mockYamlContent)
+                .mockImplementationOnce(() => {
+                    throw new Error('Technical note missing');
+                });
+
+            const mockMapping = {
+                suits: {
+                    '0': { name: 'Test Suit' }
+                }
+            };
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+            const deckServiceInstance = new DeckService();
+            const result = deckServiceInstance.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+            expect(result.size).toBe(0);
+            expect(consoleErrorSpy).toHaveBeenCalledWith(
+                expect.stringContaining('unknown'),
+                expect.any(Error)
+            );
+
+            consoleErrorSpy.mockRestore();
+        });
+
+        it('should use "unknown" fallback when card id is missing on explanation read error', () => {
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+            const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - value: A
+        desc: Card without id
+`;
+
+            const mockTechnicalNote = '---\n---\nSome content';
+
+            vi.mocked(fs.readFileSync)
+                .mockReturnValueOnce(mockYamlContent)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockImplementationOnce(() => {
+                    throw new Error('Explanation missing');
+                });
+
+            const mockMapping = {
+                suits: {
+                    '0': { name: 'Test Suit' }
+                }
+            };
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+            const deckServiceInstance = new DeckService();
+            const result = deckServiceInstance.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+            expect(result.size).toBe(0);
+            expect(consoleErrorSpy).toHaveBeenCalledWith(
+                expect.stringContaining('unknown'),
+                expect.any(Error)
+            );
+
+            consoleErrorSpy.mockRestore();
+        });
+
+        it('should handle generic markdown read error gracefully', () => {
+    vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+    vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+    const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - id: CARD-1
+        value: A
+        desc: Card 1
+`;
+
+    // First call â†’ YAML
+    // Second call â†’ throw error (simulate markdown failure)
+    vi.mocked(fs.readFileSync)
+        .mockReturnValueOnce(mockYamlContent)
+        .mockImplementationOnce(() => {
+            throw new Error('Markdown read failed');
+        });
+
+    const mockMapping = {
+        suits: {
+            '0': { name: 'Test Suit' }
+        }
+    };
+    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const deckService = new DeckService();
+    const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+    expect(result.size).toBe(0);
+    expect(consoleErrorSpy).toHaveBeenCalled();
+
+    consoleErrorSpy.mockRestore();
+});
+        it('should handle navigation for a middle card in the same suit', () => {
+            vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+
+            const mockYamlContent = `
+suits:
+  - id: suit1
+    name: Test Suit
+    cards:
+      - id: CARD-1
+        value: A
+        desc: First card
+      - id: CARD-2
+        value: 2
+        desc: Middle card
+      - id: CARD-3
+        value: 3
+        desc: Last card
+`;
+
+            const mockTechnicalNote = '---\n---\nTechnical note content';
+            const mockExplanation = '---\n---\nExplanation content';
+
+            vi.mocked(fs.readFileSync)
+                .mockReturnValueOnce(mockYamlContent)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockReturnValueOnce(mockExplanation)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockReturnValueOnce(mockExplanation)
+                .mockReturnValueOnce(mockTechnicalNote)
+                .mockReturnValueOnce(mockExplanation);
+
+            const mockMapping = {
+                suits: {
+                    '0': { name: 'Test Suit' }
+                }
+            };
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+
+            const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
+
+            expect(result.size).toBe(3);
+
+            const middleCard = result.get('CARD-2');
+            expect(middleCard).toBeDefined();
+            expect(middleCard?.prevous).toBe('CARD-1');
+            expect(middleCard?.next).toBe('CARD-3');
+        });
+
     }, 10000);
 
     describe('clear', () => {

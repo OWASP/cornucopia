@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch, mock_open
 import argparse
 import logging
+import yaml
 from pathlib import Path
 
 import scripts.capec_map_enricher as enricher
@@ -142,6 +143,62 @@ class TestExtractCapecNames(unittest.TestCase):
 
         # Should only extract the complete entry
         self.assertEqual(len(result), 2)
+        self.assertIn(1, result)
+
+    def test_extract_capec_names_missing_categories(self):
+        """Test that missing Categories key logs a warning but still returns attack patterns"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                }
+                # No "Categories" key
+            }
+        }
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+        self.assertIn("No 'Categories' key found", log.output[0])
+
+    def test_extract_capec_names_missing_category_inside_categories(self):
+        """Test that missing Category key inside Categories logs a warning"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                },
+                "Categories": {"other_key": "value"},  # No "Category" key
+            }
+        }
+        with self.assertLogs(logging.getLogger(), logging.WARNING) as log:
+            result = enricher.extract_capec_names(data)
+
+        self.assertEqual(len(result), 1)
+        self.assertIn(1, result)
+        self.assertIn("No 'Category' key found", log.output[0])
+
+    def test_extract_capec_names_category_not_list(self):
+        """Test that a non-list Category value is silently skipped"""
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {
+                    "Attack_Pattern": [
+                        {"_ID": "1", "_Name": "Test Attack 1"},
+                    ]
+                },
+                "Categories": {"Category": "not-a-list"},
+            }
+        }
+        result = enricher.extract_capec_names(data)
+
+        # Attack patterns still extracted; non-list Category silently skipped
+        self.assertEqual(len(result), 1)
         self.assertIn(1, result)
 
 
@@ -427,6 +484,104 @@ class TestMainFunction(unittest.TestCase):
             enricher.main()
 
         mock_exit.assert_called_with(1)
+
+
+class TestCapecMapEnricherCoverage(unittest.TestCase):
+
+    def test_extract_names_invalid_id(self):
+
+        from scripts.capec_map_enricher import _extract_names_from_items
+
+        items = [{"_ID": "abc", "_Name": "Test"}]  # invalid int
+
+        target = {}
+
+        _extract_names_from_items(items, target)
+
+        self.assertEqual(target, {})
+
+    def test_enrich_meta_passthrough(self):
+
+        from scripts.capec_map_enricher import enrich_capec_mappings
+
+        data = {"meta": {"info": "x"}}
+
+        result = enrich_capec_mappings(data, {})
+
+        self.assertIn("meta", result)
+
+    def test_enrich_invalid_capec_key(self):
+
+        from scripts.capec_map_enricher import enrich_capec_mappings
+
+        data = {"abc": {"a": 1}}
+
+        result = enrich_capec_mappings(data, {})
+
+        self.assertIn("abc", result)
+
+    @patch("scripts.capec_map_enricher.open", side_effect=Exception("fail"))
+    def test_load_json_generic_exception(self, mock_open_func):
+
+        from scripts.capec_map_enricher import load_json_file
+
+        result = load_json_file(Path("x.json"))
+
+        self.assertEqual(result, {})
+
+    @patch("scripts.capec_map_enricher.yaml.safe_load", side_effect=yaml.YAMLError("fail"))
+    @patch("scripts.capec_map_enricher.open", new_callable=mock_open, read_data="data")
+    def test_load_yaml_error(self, mock_file, mock_yaml):
+
+        from scripts.capec_map_enricher import load_yaml_file
+
+        result = load_yaml_file(Path("x.yaml"))
+
+        self.assertEqual(result, {})
+
+    @patch(
+        "scripts.capec_map_enricher.argparse.ArgumentParser.parse_args",
+        side_effect=argparse.ArgumentError(None, "error"),
+    )
+    def test_parse_arguments_exception(self, mock_parse):
+
+        from scripts.capec_map_enricher import parse_arguments
+
+        with self.assertRaises(SystemExit):
+
+            parse_arguments([])
+
+    @patch("scripts.capec_map_enricher.save_yaml_file", return_value=False)
+    @patch("scripts.capec_map_enricher.load_yaml_file", return_value={"1": {}})
+    @patch("scripts.capec_map_enricher.load_json_file", return_value={"a": 1})
+    @patch("scripts.capec_map_enricher.extract_capec_names", return_value={1: "name"})
+    @patch("scripts.capec_map_enricher.parse_arguments")
+    def test_main_save_fail(
+        self,
+        mock_parse,
+        mock_extract,
+        mock_json,
+        mock_yaml,
+        mock_save,
+    ):
+
+        from scripts.capec_map_enricher import main
+
+        mock_parse.return_value = type(
+            "Args",
+            (),
+            {
+                "source_dir": ".",
+                "input_path": "a",
+                "output_path": "b",
+                "capec_json": "c",
+                "edition": "e",
+                "version": "v",
+                "debug": False,
+            },
+        )
+        with self.assertRaises(SystemExit):
+            main()
 
 
 if __name__ == "__main__":

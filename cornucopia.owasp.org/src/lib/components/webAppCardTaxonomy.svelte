@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-  import { DevGuideMapping } from '$lib/devguideMapping';
-
-    import {
-      GetCardAttacks, type Attack } from "$lib/cardAttacks";
+    import { DevGuideMapping } from '$lib/devguideMapping';
+    import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
     import ASVSOverview from "$lib/components/ASVSOverview.svelte";
     import MappingsList from "$lib/components/mappingsList.svelte";
     import CapecMapTable from "$lib/components/capecMapTable.svelte";
@@ -16,9 +13,10 @@
     card: Card;
     routes: Map<string, Route[]>;
     capecData?: any;
+    asvsVersion: string;
   }
 
-  let { mappingData, card = $bindable(), routes, capecData = undefined }: Props = $props();
+  let { mappingData, card, routes, capecData = undefined, asvsVersion }: Props = $props();
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
 
@@ -61,8 +59,8 @@
     function linkCapec(input: string) {
       return "/taxonomy/capec-3.9/" + input;
     }
-    let mappings: WebAppMapping = $state(controller.getWebAppCardMappings(card.id));
-    let attacks: Attack[] = $state(GetCardAttacks(card.id));
+    let mappings = $derived(controller.getWebAppCardMappings(card.id));
+    let attacks: Attack[] = $derived(GetCardAttacks(card.id));
     
     let hasMappings = $derived(mappings && Object.keys(mappings).length > 1);
     let hasCapecMap = $derived(
@@ -72,10 +70,6 @@
       Object.keys(mappings.capec_map).length > 0
     );
   
-    run(() => {
-      mappings = controller.getWebAppCardMappings(card.id);
-      attacks = GetCardAttacks(card.id);
-    });
   </script>
 
     {#if hasMappings }
@@ -132,9 +126,10 @@
       />
     {/if}
   
-    <h1 class="title">ASVS (4.0) Cheat Sheet Series Index</h1>
+    <h1 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h1>
     {#if hasMappings && mappings.owasp_asvs}
-      <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]}></ASVSOverview>
+
+      <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]} version={asvsVersion}></ASVSOverview>
     {/if}
     <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>
     {#each attacks || [] as attack}

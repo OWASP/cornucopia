@@ -12,16 +12,18 @@
     raw = "",
     children
   }: Props = $props();
-
-    let target = $derived(href.startsWith('/') || href.startsWith('#') ? '_self' : '_blank');
-    let rel = $derived.by(() => {
-      if (raw.includes('[internal]')) return 'noopener';
-      if (raw.includes('[external]')) return 'noopener nofollow';
-      return '';
-    });
-    let clazz = $derived(raw.includes('[inline]') ? 'inline' : '');
-    let style = $derived(raw.includes('[white]') ? ' white' : '');
-  </script>
+  $effect(() => {
+    console.log('raw:', raw);
+  });
+  let target = $derived((href.startsWith('/') || href.startsWith('#') || raw.includes('[blank]')) ? '_self' : '_blank');
+  let rel = $derived.by(() => {
+    if (raw.includes('[internal]')) return 'noopener';
+    if (raw.includes('[external]')) return 'noopener nofollow';
+    return '';
+  });
+  let clazz = $derived(raw.includes('[inline]') ? 'inline' : '');
+  let style = $derived(raw.includes('[white]') ? ' white' : '');
+</script>
   
   <a {rel} {target} {href} {title} class="{clazz} link-with-external-indicator{style}">{@render children?.()}</a>
 

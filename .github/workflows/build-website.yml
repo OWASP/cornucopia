@@ -37,7 +37,7 @@
           - name: Install Node.js
             uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
             with:
-              node-version: 20.18.2
+              node-version: '22.12'
           - name: Build
             working-directory: cornucopia.owasp.org
             run: |
@@ -64,10 +64,10 @@
               echo "Max retries reached, skipping audit due to transient registry errors"
               exit 0
 
-          - name: Smoke test
+          - name: Smoke Test - Application Verification
             working-directory: cornucopia.owasp.org
             run: |
-              pnpm exec serve build &
+              pnpm exec serve build -l 3000 &
               pnpm exec wait-on http://localhost:3000
               npm run smoke-test
 
@@ -80,5 +80,3 @@
              total-parts-count: 3
              add-prefix: cornucopia.owasp.org
              files: cornucopia.owasp.org/coverage/lcov.info
-              kill $(jobs -p) || true
-

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import SvelteMarkdown from 'svelte-markdown';
+        import SvelteMarkdown from 'svelte-markdown';
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import type { PageData } from "./$types";
     import CardPreview from "$lib/components/cardPreview.svelte";
@@ -9,6 +9,7 @@
     import { readLang, readTranslation } from '$lib/stores/stores';
     import type { Suit } from "../../domain/suit/suit.js";
     import { SvelteMap } from 'svelte/reactivity';
+    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION } from "$lib/services/deckServiceConsts";
 
     interface Props {
         data: PageData;
@@ -23,10 +24,6 @@
     let suits = $derived(data.suits);
     let mappingData = $derived(data.mappingData);
 
-    //TODO move these constants to a more sensible location
-    const VERSION_WEBAPP = "webapp"
-    const VERSION_MOBILEAPP = "mobileapp"
-
     let mobileappSuits = $derived.by(() => {
         const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
         return langSuits || suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
@@ -37,58 +34,66 @@
         return langSuits || suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
     });
 
-    let version : string = $state(VERSION_WEBAPP);
-    let suit : string;
-    let card : Card = $derived(cards?.get('VE2') as Card);
-    
-    let mapping = $derived.by(() => 
-        card ? (new MappingController(mappingData?.get(version))).getCardMappings(card.id) : []
-    );
+    let companionSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_COMPANION}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_COMPANION}-en`) as Suit[];
+    });
 
-    let map : Map<string,boolean> = $state(new SvelteMap());
+    let version: string = $state(VERSION_WEBAPP);
+    let suit: string = $state('');
+    let card: Card = $state(undefined as unknown as Card);
+    let mapping: any = $state([]);
+
+    $effect(() => {
+        const c = cards;
+        const v = version;
+        if (!c) return;
+        if (v === VERSION_WEBAPP)    card = c.get('VE2') as Card;
+        if (v === VERSION_MOBILEAPP) card = c.get('PC2') as Card;
+        if (v === VERSION_COMPANION) card = c.get('AAI2') as Card;
+    });
+
+    $effect(() => {
+        const c = card;
+        const md = mappingData;
+        const v = version;
+        if (!c || !md) return;
+        mapping = new MappingController(md.get(v)).getCardMappings(c.id);
+    });
+
+    let map: Map<string,boolean> = $state(new SvelteMap());
     setTree(false);
 
-    function setTree(expand : boolean)
-    {
-        // Collapse or expand the entire tree of suits
-        for(let i = 0 ; i < (webappSuits?.length as number) ; i++)
-        {
-            if (webappSuits !== undefined && typeof webappSuits[i] !== 'undefined') map.set(webappSuits[i]?.name,expand);
+    function setTree(expand: boolean) {
+        for(let i = 0; i < (webappSuits?.length as number); i++) {
+            if (webappSuits !== undefined && typeof webappSuits[i] !== 'undefined') map.set(webappSuits[i]?.name, expand);
         }
-
-        for(let i = 0 ; i < mobileappSuits?.length ; i++)
-        {
-            if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name,expand);
+        for(let i = 0; i < mobileappSuits?.length; i++) {
+            if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name, expand);
+        }
+        for(let i = 0; i < companionSuits?.length; i++) {
+            if (companionSuits !== undefined && typeof companionSuits[i] !== 'undefined') map.set(companionSuits[i]?.name, expand);
         }
     }
 
-    function toggle(suit : string)
-    {
-        let value : boolean = map?.get(suit) || false;
-        map.set(suit,!value);
+    function toggle(suit: string) {
+        let value: boolean = map?.get(suit) || false;
+        map.set(suit, !value);
         map = map;
     }
 
-    function changeVersion(versionParam : string)
-    {
+    function changeVersion(versionParam: string) {
         version = versionParam;
-        // Collapse the entire tree down when switching between versions
         setTree(false);
-        // Show the following selected cards
-        if(version == VERSION_WEBAPP)
-        card = cards?.get('VE2') as Card;
-
-        if(version == VERSION_MOBILEAPP)
-        card = cards?.get('PC2') as Card;
-
     }
 
-
-    function enter(suitParam : string, cardParam : string)
-    {
+    function enter(suitParam: string, cardParam: string) {
         suit = suitParam;
-        card = cards?.get(cardParam) as Card;
-        mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
+        const newCard = cards?.get(cardParam) as Card;
+        card = newCard;
+        if (newCard && mappingData) {
+            mapping = new MappingController(mappingData.get(version)).getCardMappings(newCard.id);
+        }
     }
 </script>
 <svelte:head>
@@ -109,6 +114,7 @@
 <p class="button-container script">
     <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
     <button title="OWASP Cornucopia {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
+    <button title="OWASP Cornucopia {$t('cards.button.3')}" class:button-selected={version == VERSION_COMPANION} onclick={()=>changeVersion(VERSION_COMPANION)}>{$t('cards.button.3')}</button>
 </p>
 </section>
 <div class="script">
@@ -128,6 +134,12 @@
     <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
     <p class="text">
         {@html $t('cards.p3')}
+    </p>
+    {/if}
+    {#if version == VERSION_COMPANION}
+    <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+    <p class="text">
+        {@html $t('cards.p4')}
     </p>
     {/if}
     <div class="container">
@@ -150,6 +162,20 @@
 
             {#if version == VERSION_MOBILEAPP}
                 {#each mobileappSuits as suit}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card}
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                                <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_COMPANION}
+                {#each companionSuits as suit}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                     <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>└── {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
@@ -210,6 +236,26 @@
             {/each}
         </div>
     </div>
+    <div class="">
+        <div>
+            <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+            <p class="text">
+                {@html $t('cards.p4')}
+            </p>
+            {#each companionSuits as suit}
+                <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                <!-- svelte-ignore a11y_label_has_associated_control -->
+                <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">└── {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card}
+                    <p>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href="{cards?.get(card)?.url}">├── {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>-
 </noscript>
 </div>
 <style>

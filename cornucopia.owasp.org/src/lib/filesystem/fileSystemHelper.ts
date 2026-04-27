@@ -11,6 +11,7 @@ export class FileSystemHelper {
   private static root = (() => {
     // During development and build, calculate root from import.meta.url
 
+    /* c8 ignore next 3 */
     if (import.meta.url.includes('.svelte-kit')) {
       return path.normalize(path.dirname(fileURLToPath(import.meta.url)) + '/../../../../');
     }

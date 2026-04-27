@@ -2,7 +2,7 @@
 
 ## Building the Cornucopia Card Decks
 
-Merges to the main branch will generate new DOCX and IDML files to use to print off new version of the deck but if you wish to produce these locally yourself then use the [convert.py](convert.py) scipt to do this:
+Merges to the main branch will generate new DOCX and IDML files to use to print off new version of the deck but if you wish to produce these locally yourself then use the [convert.py](convert.py) script to do this:
 
 ```bash
 (cornucopia) ➜  cornucopia git:(master) ✗ python ./scripts/convert.py --help
@@ -36,26 +36,26 @@ options:
   -p, --pdf             Whether to generate a pdf in addition to the printable document. Does not generate a pdf by default. Only docx can be converted to pdf for the moment.
   -d, --debug           Output additional information to debug script
   -l LANGUAGE, --language LANGUAGE
-                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no-nb`, `pt-br`, `pt-pt`, `it`, `ru`] you can also specify your own language file. If so, there needs to be a yaml file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml
+                        Output language to produce. [`en`, `es`, `fr`, `nl`, `no_nb`, `pt_br`, `pt_pt`, `it`, `ru`, `uk`, `hi`] you can also specify your own language file. If so, there needs to be a yaml file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml
   -t TEMPLATE, --template TEMPLATE
                         From which template to produce the document. [`bridge`, `bridge_qr`, `tarot` or  `tarot_qr`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
                         Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them,
                         tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large,
                         qr cards have a QRCode that points to an maintained list.
-                        You can also speficy your own template. If so, there needs to be a file in the templates folder where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml
+                        You can also specify your own template. If so, there needs to be a file in the templates folder where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml
   -e EDITION, --edition EDITION
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
                         The various Cornucopia decks. `web` will give you the Website App edition.
                         `mobileapp` will give you the Mobile App edition.
-                        You can also speficy your own edition. If so, there needs to be a yaml file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml
+                        You can also specify your own edition. If so, there needs to be a yaml file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml
   -lt LAYOUT, --layout LAYOUT
                         Document layouts to produce. [`all`, `guide`, `leaflet` or `cards`]
                         The various Cornucopia document layouts.
                         `cards` will output the high quality print card deck.
                         `guide` will generate the docx guide with the low quality print deck.
                         `leaflet` will output the high quality print leaflet.
-                        You can also speficy your own layout. If so, there needs to be a yaml file in the source folder where the name contains the layout code. Eg. edition-layout-ver-lang.yaml
+                        You can also specify your own layout. If so, there needs to be a yaml file in the source folder where the name contains the layout code. Eg. edition-layout-ver-lang.yaml
 ```
 
 ## Additional Utility Scripts
