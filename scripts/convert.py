@@ -557,7 +557,7 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "you can also specify your own language file. If so, there needs to be a yaml "
             "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml "
             "You also need to have the code defined as part of the meta info in the yaml meta -> language -> en "
-            "(e.g: meta['language']["en"])"
+            "(e.g: meta['language']['en'])"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
