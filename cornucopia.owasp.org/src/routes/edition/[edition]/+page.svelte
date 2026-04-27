@@ -137,11 +137,11 @@
         <div class="tree">
             {#each cardSuits as suit (suit.name)}
                 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-                <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</h3>
+                <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
                 {#if map?.get(suit.name)}
                     {#each suit.cards as card (card)}
                         <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
-                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>â”œâ”€â”€ {cards?.get(card)?.id}</a>
+                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
                         </p>
                     {/each}
                 {/if}
@@ -178,21 +178,21 @@
             {/if}
             {#each cardSuits as suit (suit.name)}
                  {#if version == VERSION_WEBAPP}
-                    <label for="{suit.name + '-web'}" class="suit-button"><span class="label">â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <label for="{suit.name + '-web'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
                 {/if}
                 {#if version == VERSION_MOBILEAPP}
-                    <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
                 {/if}
                 {#if version == VERSION_COMPANION}
-                    <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">â””â”€â”€ {Text.Format(suit.name).toUpperCase()}</span></label>
+                    <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
                     <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
                 {/if}
                 <div class="card-buttons">
                 {#each suit.cards as card (card)}
                     <p>
-                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>â”œâ”€â”€ {cards?.get(card)?.id}</a>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
                     </p>
                 {/each}
                 </div>

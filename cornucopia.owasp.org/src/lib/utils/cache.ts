@@ -1,8 +1,8 @@
-/* eslint-disable no-useless-assignment */
 import fs from 'fs';
 
 // Cache the result of a given function on the local filesystem
-export async function LocalCache(func: () => unknown, cacheSeconds : number, description : string)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+export async function LocalCache(func : Function, cacheSeconds : number, description : string)
 {
     let logMessage = "[LocalCacheAsync] ";
     const filename : string = generateFilename('async-' + description);
@@ -11,21 +11,22 @@ export async function LocalCache(func: () => unknown, cacheSeconds : number, des
 
     if(cacheStatusOk)
     {
-        logMessage += " ðŸŸ¢ Found general request [" + description + "] in cache.";
-        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
+        logMessage += " ≡ƒƒó Found general request [" + description + "] in cache.";
+        logMessage += "\tΓÅ▒∩╕Å Age is " + cacheAge + " seconds."
         const responseAsString = fs.readFileSync(filename).toString();
 
         const size = Buffer.byteLength(responseAsString);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
+        // eslint-disable-next-line no-useless-assignment
+        logMessage += "\t≡ƒÆ┐ " + kiloBytes + " kb."
 
         const response = JSON.parse(responseAsString);
         return response; 
     }
     else
     {
-        logMessage += " ðŸŸ  " + description + " not in cache, got from API";
-        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
+        logMessage += " ≡ƒƒá " + description + " not in cache, got from API";
+        logMessage += "\tΓÅ▒∩╕Å Age is " + cacheAge + " seconds."
         
         const result = func();
         const response = await Promise.resolve(result)
@@ -33,7 +34,7 @@ export async function LocalCache(func: () => unknown, cacheSeconds : number, des
 
         const size = Buffer.byteLength(responseAsJSON);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
+        logMessage += "\t≡ƒÆ┐ " + kiloBytes + " kb."
 
         fs.writeFileSync(filename, responseAsJSON);
         console.log(logMessage);
@@ -43,7 +44,8 @@ export async function LocalCache(func: () => unknown, cacheSeconds : number, des
 }
 
 // The same as LocalCache, but for synchronous functions
-export function LocalCacheSync(func: () => unknown, cacheSeconds : number, description : string)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+export function LocalCacheSync(func : Function, cacheSeconds : number, description : string)
 {
     let logMessage = "[LocalCacheSync] ";
     const filename : string = generateFilename('sync-' + description);
@@ -52,13 +54,13 @@ export function LocalCacheSync(func: () => unknown, cacheSeconds : number, descr
 
     if(cacheStatusOk)
     {
-        logMessage += " ðŸŸ¢ Found general request [" + description + "] in cache.";
-        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
+        logMessage += " ≡ƒƒó Found general request [" + description + "] in cache.";
+        logMessage += "\tΓÅ▒∩╕Å Age is " + cacheAge + " seconds."
         const responseAsString = fs.readFileSync(filename).toString();
 
         const size = Buffer.byteLength(responseAsString);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
+        logMessage += "\t≡ƒÆ┐ " + kiloBytes + " kb."
 
         const response = JSON.parse(responseAsString);
         console.log(logMessage);
@@ -66,15 +68,15 @@ export function LocalCacheSync(func: () => unknown, cacheSeconds : number, descr
     }
     else
     {
-        logMessage += " ðŸŸ  " + description + " not in cache, got from API";
-        logMessage += "\tâ±ï¸ Age is " + cacheAge + " seconds."
+        logMessage += " ≡ƒƒá " + description + " not in cache, got from API";
+        logMessage += "\tΓÅ▒∩╕Å Age is " + cacheAge + " seconds."
         
         const result = func();
         const responseAsJSON = JSON.stringify(result)
 
         const size = Buffer.byteLength(responseAsJSON);
         const kiloBytes = Math.round(size / 1024);
-        logMessage += "\tðŸ’¿ " + kiloBytes + " kb."
+        logMessage += "\t≡ƒÆ┐ " + kiloBytes + " kb."
 
         fs.writeFileSync(filename, responseAsJSON);
         console.log(logMessage);
