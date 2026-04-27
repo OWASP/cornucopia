@@ -555,8 +555,8 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         help=(
             f"Output language to produce (e.g: all, en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru, uk, hi) "
             "you can also specify your own language file. If so, there needs to be a yaml "
-            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
-            "You also need to have the code defined as part of the meta info in the yaml meta -> language -> en"
+            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml "
+            "You also need to have the code defined as part of the meta info in the yaml meta -> language -> en "
             "(e.g: meta['language']["en"])"
         ),
     )
