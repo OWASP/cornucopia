@@ -12,14 +12,16 @@ defmodule Copi.CornucopiaLogicTest do
     %{game: game, p1: player1, p2: player2}
   end
 
-  defp create_card(category, value) do
-    Cornucopia.create_card(%{
+  defp create_card(category, value, attrs \\ %{}) do
+    %{
       category: category, value: value,
       description: "d", misc: "m", edition: "webapp", external_id: "#{category}#{value}",
       language: "en", version: "1",
       owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
       capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
-    })
+    }
+    |> Map.merge(attrs)
+    |> Cornucopia.create_card()
   end
 
   defp play_card(player, card, round) do
@@ -90,6 +92,32 @@ defmodule Copi.CornucopiaLogicTest do
     # list_cards_shuffled(edition, suits, version)
     cards = Cornucopia.list_cards_shuffled("webapp", ["S"], "1")
     assert Enum.count(cards) > 0
+  end
+
+  test "list_cards_shuffled includes companion cards for web and mobile games" do
+    create_card("Authentication", "2")
+    create_card("Large Language Models", "2", %{
+      edition: "companion",
+      external_id: "TESTLLM2",
+      version: "1.0"
+    })
+
+    cards = Cornucopia.list_cards_shuffled("webapp", ["Authentication", "Large Language Models"], "1")
+
+    assert Enum.any?(cards, &(&1.edition == "webapp"))
+    assert Enum.any?(cards, &(&1.edition == "companion"))
+  end
+
+  test "list_cards_shuffled ignores companion cards for non-host games" do
+    create_card("Large Language Models", "2", %{
+      edition: "companion",
+      external_id: "TESTLLM2EOP",
+      version: "1.0"
+    })
+
+    cards = Cornucopia.list_cards_shuffled("eop", ["Large Language Models"], "1")
+
+    assert cards == []
   end
 
   test "get_suits_from_selected_deck filters Wild Card suits", %{game: _game} do

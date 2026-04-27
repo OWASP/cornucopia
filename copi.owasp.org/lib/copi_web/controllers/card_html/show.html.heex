@@ -118,6 +118,22 @@
         </div>
     </div>
 
+  <% @card.edition == "companion" -> %>
+
+    <div class={["card", @card.value, "companion", Slug.slugify(@card.category)]}>
+      <div class="left-bar"><%= @card.category %></div>
+      <div class="main-content">
+        <p class="value"><%= @card.value %></p>
+        <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help" target="_blank" href={@card.url}>Need more info?</a></p>
+        <% end %>
+        <%= if @card.misc != nil and @card.misc != "" do %>
+          <p class="misc"><%= @card.misc %></p>
+        <% end %>
+      </div>
+    </div>
+
   <% @card.edition in ["mobileapp", "masvs"] -> %>
 
       <div class={["card", @card.value, "#{Slug.slugify @card.category}-mobile"]}>

@@ -40,6 +40,17 @@ defmodule CopiWeb.GameLive.CreateGameForm do
 
         <.input field={@form[:suits]} label={gettext("Select the suits you want to play:")} multiple={true}  type="checkbox" options={GameFormHelpers.get_suits_from_selected_deck(assigns)} />
 
+        <%= if GameFormHelpers.show_companion_suits?(assigns) do %>
+          <.input
+            id="game-companion-suits"
+            field={@form[:suits]}
+            label={gettext("Select the companion suits you want to play:")}
+            multiple={true}
+            type="checkbox"
+            options={GameFormHelpers.get_companion_suits_from_selected_deck(assigns)}
+          />
+        <% end %>
+
         <:actions>
           <.primary_button phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
         </:actions>
@@ -54,7 +65,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
       Cornucopia.change_game(%Game{
         edition: "",
         name: "",
-        suits: GameFormHelpers.generate_suit_list_formatted_for_checkbox("webapp")
+        suits: GameFormHelpers.generate_selected_suits_for_new_game("webapp")
       })
 
     {:ok,
