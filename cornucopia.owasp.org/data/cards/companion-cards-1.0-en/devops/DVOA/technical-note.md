@@ -1,0 +1,1 @@
+Players can discuss any type of DevOps attack they think might be possible against the assessment target. It does not matter if the attack relates to another DVO card, but if possible try to identify an attack that is fairly unique to the application or infrastructure.

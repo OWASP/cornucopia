@@ -10,6 +10,10 @@ defmodule Copi.Cornucopia do
   alias Copi.Cornucopia.Card
   alias Copi.Cornucopia.Player
 
+  @companion_edition "companion"
+  @companion_version "1.0"
+  @companion_host_editions ["webapp", "mobileapp"]
+
   @doc """
   Returns the list of games.
 
@@ -115,6 +119,20 @@ defmodule Copi.Cornucopia do
     end)
   end
 
+  def get_companion_suits do
+    companion_edition = @companion_edition
+    companion_version = @companion_version
+
+    database_query =
+      from c in Card,
+        where: c.edition == ^companion_edition and c.version == ^companion_version,
+        select: c.category,
+        distinct: true,
+        order_by: [asc: c.category]
+
+    Repo.all(database_query)
+  end
+
   @doc """
   Returns the list of players.
 
@@ -158,9 +176,35 @@ defmodule Copi.Cornucopia do
 
   """
   def create_player(attrs \\ %{}) do
-    %Player{}
-    |> Player.changeset(attrs)
-    |> Repo.insert()
+    # V15.4: Use transaction with row locking to prevent TOCTOU race condition
+    # when checking if game has started before creating player
+    game_id = attrs["game_id"] || attrs[:game_id]
+
+    Repo.transaction(fn ->
+      # Lock the game row for update to prevent race conditions
+      case game_id && Repo.get(Game, game_id, lock: "FOR UPDATE") do
+        nil ->
+          # No game_id provided or game not found - let changeset validation handle it
+          case %Player{} |> Player.changeset(attrs) |> Repo.insert() do
+            {:ok, player} -> player
+            {:error, changeset} -> Repo.rollback(changeset)
+          end
+
+        %Game{started_at: started_at} when started_at != nil ->
+          Repo.rollback(:game_already_started)
+
+        %Game{} ->
+          case %Player{} |> Player.changeset(attrs) |> Repo.insert() do
+            {:ok, player} -> player
+            {:error, changeset} -> Repo.rollback(changeset)
+          end
+      end
+    end)
+    |> case do
+      {:ok, player} -> {:ok, player}
+      {:error, :game_already_started} -> {:error, :game_already_started}
+      {:error, %Ecto.Changeset{} = changeset} -> {:error, changeset}
+    end
   end
 
   @doc """
@@ -234,12 +278,29 @@ defmodule Copi.Cornucopia do
     |> Enum.sort_by(fn card -> {card.edition, card.external_id, card.language} end)
   end
 
-  def list_cards_shuffled(edition, suits, version) do
-    all_cards = Card |> where(edition: ^edition, version: ^version) |> order_by(fragment("RANDOM()")) |> Repo.all()
+  def list_cards_shuffled(edition, suits, version) when edition in @companion_host_editions do
+    companion_edition = @companion_edition
+    companion_version = @companion_version
 
-    Enum.filter(all_cards, fn card ->
-      card.category in suits
-    end)
+    Card
+    |> where(
+      [c],
+      c.category in ^suits and
+        ((c.edition == ^edition and c.version == ^version) or
+           (c.edition == ^companion_edition and c.version == ^companion_version))
+    )
+    |> order_by(fragment("RANDOM()"))
+    |> Repo.all()
+  end
+
+  def list_cards_shuffled(edition, suits, version) do
+    Card
+    |> where(
+      [c],
+      c.category in ^suits and c.edition == ^edition and c.version == ^version
+    )
+    |> order_by(fragment("RANDOM()"))
+    |> Repo.all()
   end
 
   @doc """

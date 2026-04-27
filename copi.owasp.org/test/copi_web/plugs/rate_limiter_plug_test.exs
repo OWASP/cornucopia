@@ -1,6 +1,7 @@
 defmodule CopiWeb.Plugs.RateLimiterPlugTest do
   use ExUnit.Case, async: false
-  use Plug.Test
+  import Plug.Test
+  import Plug.Conn
 
   alias CopiWeb.Plugs.RateLimiterPlug
   alias Copi.RateLimiter

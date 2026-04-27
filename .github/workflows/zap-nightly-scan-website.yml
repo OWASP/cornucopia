@@ -18,9 +18,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+      - name: Copy source data into build context
+        run: cp -r source cornucopia.owasp.org/source
+
       - name: Build website Docker image
-        working-directory: cornucopia.owasp.org
-        run: docker build -t cornucopia-website .
+        run: docker build -t cornucopia-website -f cornucopia.owasp.org/Dockerfile cornucopia.owasp.org
 
       - name: Start website container
         run: |

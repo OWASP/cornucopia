@@ -1,0 +1,1 @@
+This card is about sensitive data persisting in the browser after a session ends, not about session fixation or token theft during an active session. See FRE6 for token theft while a session is in progress, and FRE9 for token reuse to resume a session.

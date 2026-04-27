@@ -21,10 +21,7 @@ defmodule Copi.Encrypted.Binary do
   @impl Ecto.Type
   def dump(nil), do: {:ok, nil}
   def dump(value) when is_binary(value) do
-    case encrypt(value) do
-      {:ok, blob} -> {:ok, blob}
-      {:error, reason} -> raise "Copi.Encrypted.Binary dump/1 failed: #{reason}"
-    end
+    encrypt(value)
   end
   def dump(_), do: :error
 
@@ -40,26 +37,24 @@ defmodule Copi.Encrypted.Binary do
   def load(_), do: :error
 
   def encrypt(plaintext) when is_binary(plaintext) do
-    with {:ok, key} <- fetch_key() do
-      iv = :crypto.strong_rand_bytes(@iv_bytes)
-      {ciphertext, tag} =
-        :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, plaintext, @magic_prefix, true)
-      blob = @magic_prefix <> iv <> tag <> ciphertext
-      {:ok, blob}
-    end
+    {:ok, key} = fetch_key()
+    iv = :crypto.strong_rand_bytes(@iv_bytes)
+    {ciphertext, tag} =
+      :crypto.crypto_one_time_aead(:aes_256_gcm, key, iv, plaintext, @magic_prefix, true)
+    blob = @magic_prefix <> iv <> tag <> ciphertext
+    {:ok, blob}
   end
 
   def decrypt(blob) when is_binary(blob) do
     case blob do
       <<@magic_prefix, iv::binary-size(@iv_bytes), tag::binary-size(@tag_bytes),
         ciphertext::binary>> ->
-        with {:ok, key} <- fetch_key() do
-          case :crypto.crypto_one_time_aead(
-                 :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
-               ) do
-            :error -> {:error, "AES-GCM authentication failed"}
-            plaintext -> {:ok, plaintext}
-          end
+        {:ok, key} = fetch_key()
+        case :crypto.crypto_one_time_aead(
+               :aes_256_gcm, key, iv, ciphertext, @magic_prefix, tag, false
+             ) do
+          :error -> {:error, "AES-GCM authentication failed"}
+          plaintext -> {:ok, plaintext}
         end
       _ ->
         {:error, :not_encrypted}
@@ -70,7 +65,7 @@ defmodule Copi.Encrypted.Binary do
     raw =
       System.get_env("COPI_ENCRYPTION_KEY") ||
         Application.get_env(:copi, :encryption_key) ||
-        raise "COPI_ENCRYPTION_KEY is not set"
+        raise "COPI_ENCRYPTION_KEY is not set. Please see: https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#encryption-key-setup"
 
     key = Base.decode64!(String.trim(raw))
 

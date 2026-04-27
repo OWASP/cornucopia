@@ -72,6 +72,36 @@ describe('GET /api/mapping/[edition]/[version]', () => {
         expect(body.suits).toBeUndefined();
     });
 
+    it('skips invalid suits and duplicate or invalid cards while transforming suits', async () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
+        vi.spyOn(MappingService.prototype, 'getCardMapping').mockReturnValue({
+            suits: [
+                null,
+                {},
+                {
+                    cards: [
+                        null,
+                        { id: '' },
+                        { id: 'VE2', value: '2' },
+                        { id: 'VE2', value: 'duplicate' }
+                    ]
+                }
+            ]
+        } as any);
+
+        const response = await GET({
+            params: { edition: 'webapp', version: '3.0' }
+        } as any);
+
+        expect(response.status).toBe(200);
+        const body = await response.json();
+        expect(body.meta).toBeUndefined();
+        expect(body.cards).toEqual({
+            VE2: { id: 'VE2', value: '2' }
+        });
+    });
+
     it('throws 404 when edition is invalid', () => {
         vi.spyOn(DeckService, 'hasEdition').mockReturnValue(false);
         vi.spyOn(DeckService, 'getLatestEditions').mockReturnValue(['webapp', 'mobileapp']);

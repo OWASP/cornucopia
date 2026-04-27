@@ -1,0 +1,1 @@
+This card is specifically about the absence of agent identity verification in multi-agent communication, enabling spoofing by rogue or compromised peer agents. See AAIQ for the related risk of an attacker compromising the orchestration layer itself to execute workflows at scale.
