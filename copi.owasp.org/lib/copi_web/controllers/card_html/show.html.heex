@@ -9,7 +9,7 @@
         <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
         <p class="description"><%= @card.description %></p>
         <%= if @card.url != nil and @card.url != "" do %>
-          <p class="description"><a class="info" rel="help" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
         <% end %>
         <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
 
@@ -126,7 +126,7 @@
         <p class="value"><%= @card.value %></p>
         <p class="description"><%= @card.description %></p>
         <%= if @card.url != nil and @card.url != "" do %>
-          <p class="description"><a class="info" rel="help" target="_blank" href={@card.url}>Need more info?</a></p>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={@card.url}>Need more info?</a></p>
         <% end %>
         <%= if @card.misc != nil and @card.misc != "" do %>
           <p class="misc"><%= @card.misc %></p>
@@ -142,7 +142,7 @@
         <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
         <p class="description"><%= @card.description %></p>
         <%= if @card.url != nil and @card.url != "" do %>
-          <p class="description"><a class="info" rel="help" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
         <% end %>
         <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
 

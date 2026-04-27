@@ -123,12 +123,14 @@ defmodule Copi.Cornucopia do
     companion_edition = @companion_edition
     companion_version = @companion_version
 
-    Card
-    |> where(edition: ^companion_edition, version: ^companion_version)
-    |> order_by([c], c.id)
-    |> Repo.all()
-    |> Enum.map(& &1.category)
-    |> Enum.uniq()
+    database_query =
+      from c in Card,
+        where: c.edition == ^companion_edition and c.version == ^companion_version,
+        select: c.category,
+        distinct: true,
+        order_by: [asc: c.category]
+
+    Repo.all(database_query)
   end
 
   @doc """
