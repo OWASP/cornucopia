@@ -103,7 +103,8 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
       
       assert is_list(result)
-      assert Enum.all?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
     end
 
     test "returns same suits when they match the edition" do
@@ -119,14 +120,47 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       
       # Should generate webapp suits instead
       assert is_list(result)
-      assert Enum.all?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      refute Enum.any?(result, fn suit -> String.starts_with?(suit, "mobileapp-") end)
     end
 
     test "handles switching between editions" do
       suits = ["", "eop-elevation"]
       result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
       
-      assert Enum.all?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      refute Enum.any?(result, fn suit -> String.starts_with?(suit, "eop-") end)
+    end
+
+    test "keeps companion suits when the selected edition still matches" do
+      suits = ["", "webapp-Authentication", "companion-Large Language Models"]
+      result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
+
+      assert result == suits
+    end
+
+    test "keeps companion-only selections for host editions" do
+      suits = ["", "companion-Large Language Models"]
+      result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
+
+      assert result == suits
+    end
+  end
+
+  describe "companion suit helpers" do
+    test "includes companion defaults for webapp and mobileapp" do
+      webapp_suits = GameFormHelpers.generate_selected_suits_for_new_game("webapp")
+      mobileapp_suits = GameFormHelpers.generate_selected_suits_for_new_game("mobileapp")
+
+      assert "companion-Large Language Models" in webapp_suits
+      assert "companion-Large Language Models" in mobileapp_suits
+      refute "companion-Cloud" in webapp_suits
+    end
+
+    test "does not add companion defaults to other games" do
+      result = GameFormHelpers.generate_selected_suits_for_new_game("eop")
+
+      refute Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
     end
 
     # Regression test for issue #2842 – single non-empty suit matching edition
@@ -143,7 +177,9 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       result = GameFormHelpers.display_appropriate_suits_list("webapp", suits)
 
       assert is_list(result)
-      assert Enum.all?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
+      refute Enum.any?(result, fn suit -> String.starts_with?(suit, "mobileapp-") end)
     end
   end
 
