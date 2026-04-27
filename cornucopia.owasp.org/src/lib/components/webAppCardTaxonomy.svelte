@@ -118,7 +118,7 @@
     {/if}
   
     {#if hasCapecMap && capecData}
-      <h1 class="title">CAPECÃ¢â€žÂ¢ Map</h1>
+      <h1 class="title">CAPEC™ Map</h1>
       <CapecMapTable 
         capecMap={mappings.capec_map}
         {capecData}
