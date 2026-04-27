@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-assignment */
 <script lang="ts">
     import { page } from "$app/stores";
 
