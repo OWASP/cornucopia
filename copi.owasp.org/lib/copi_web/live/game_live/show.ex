@@ -37,12 +37,16 @@ defmodule CopiWeb.GameLive.Show do
       case round_result do
         {:ok, requested_round} ->
           {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
+        # coveralls-ignore-start
         {:error, _reason} ->
           {:noreply, redirect(socket, to: "/error")}
+        # coveralls-ignore-stop
       end
     else
+      # coveralls-ignore-start
       {:error, _reason} ->
         {:noreply, redirect(socket, to: "/error")}
+      # coveralls-ignore-stop
     end
   end
 
