@@ -2626,7 +2626,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
 
         result = c.get_template_for_edition()
 
-        self.assertTrue(result.startswith("/abs/path/file"))
+        self.assertTrue(os.path.normpath(result).startswith(os.path.normpath("/abs/path/file")))
 
     @patch("scripts.convert.get_replacement_mapping_value", return_value=None)
     def test_replacement_skip_none_key(self, mock_map):
