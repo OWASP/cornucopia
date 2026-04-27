@@ -16,12 +16,15 @@ export class DeckService {
 
     private static readonly latests: Deck[] = [
         { lang: ['en'], edition: 'mobileapp', version: '1.1' },
-        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' }
+        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' },
+        { lang: ['en'], edition: 'companion', version: '1.0' }
     ];
     private static readonly decks: Deck[] = [
         { edition: 'mobileapp', version: '1.1', lang: ['en'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-        { edition: 'webapp', version: '3.0', lang: ['en', 'ru'] }];
+        { edition: 'webapp', version: '3.0', lang: ['en', 'ru'] },
+        { edition: 'companion', version: '1.0', lang: ['en'] }
+    ];
 
     public static hasEdition(edition: string): boolean {
         return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
@@ -110,17 +113,18 @@ export class DeckService {
                 let file: string;
                 try {
                     file = fs.readFileSync(path, 'utf8');
+                    let parsed = fm(file);
+                    cardObject.concept = parsed.body;
                 } catch (e) {
-                    console.error(`Error reading file at path: ${path}`, e);
-                    continue;
+                    console.warn(`Warning: Missing technical-note for ${cardObject.id} at ${path}`);
+                    cardObject.concept = cardObject.desc || '';
                 }
-                let parsed = fm(file);
-                cardObject.concept = parsed.body;
+
                 try {
                     cardObject.summary = fm(fs.readFileSync(`./${base}${cardFolderPath}/explanation.md`, 'utf8')).body;
                 } catch (e) {
-                    console.error(`Error reading file at path: ./${base}${cardFolderPath}/explanation.md`, e);
-                    continue;
+                    console.warn(`Warning: Missing explanation for ${cardObject.id} at ./${base}${cardFolderPath}/explanation.md`);
+                    cardObject.summary = '';
                 }
 
 

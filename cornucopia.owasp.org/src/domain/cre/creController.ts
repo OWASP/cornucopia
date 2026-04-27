@@ -33,14 +33,14 @@ export class CreController {
 
     private static editions: Map<string, string>  = new Map<string, string>( [
         ['webapp', "OWASP Cornucopia Website App Edition"],
-        ['mobileapp', "OWASP Cornucopia Mobile App Edition"]
-
+        ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
+        ['companion', "OWASP Cornucopia Companion Edition"]
     ]);
 
     private static category: Map<string, string>  = new Map<string, string>( [
         ['webapp', "Website Application"],
-        ['mobileapp', "Mobile Application"]
-
+        ['mobileapp', "Mobile Application"],
+        ['companion', "AI / LLM Application"]
     ]);
 
     constructor(deck: Map<string, Card>, controller: MappingController) {

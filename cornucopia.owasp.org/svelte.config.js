@@ -255,6 +255,8 @@ export default {
 				'/api/cre/webapp/pt_br',
 				'/api/cre/webapp/no_nb',
 				'/api/cre/mobileapp/en',
+				'/api/cre/companion/en',
+				'/api/lang/companion/1.0',
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/webapp/VE2/2.2/es',
 				'/edition/webapp/VE2/2.2/it',
