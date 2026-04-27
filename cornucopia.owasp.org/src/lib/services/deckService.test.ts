@@ -316,12 +316,12 @@ suits:
                 }
             );
 
-            // First call   populates cache
+            // First call -> populates cache
             const firstResult = deckService.getCards('en');
             expect(firstResult.has('MOBILE-1')).toBe(true);
             expect(firstResult.has('WEB-1')).toBe(true);
 
-            // Second call   must hit cache with fully-merged result, not a partial one
+            // Second call -> must hit cache with fully-merged result, not a partial one
             const secondResult = deckService.getCards('en');
             expect(secondResult.has('MOBILE-1')).toBe(true);
             expect(secondResult.has('WEB-1')).toBe(true);
@@ -737,8 +737,8 @@ suits:
         desc: Card 1
 `;
 
-    // First call                     YAML
-    // Second call                     throw error (simulate markdown failure)
+    // First call -> YAML
+    // Second call -> throw error (simulate markdown failure)
     vi.mocked(fs.readFileSync)
         .mockReturnValueOnce(mockYamlContent)
         .mockImplementationOnce(() => {
