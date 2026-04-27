@@ -19,7 +19,8 @@ defmodule Copi.CardMigration do
         version = cards["meta"]["version"]
         for suit <- cards["suits"] do
           for card <- suit["cards"] do
-            card_exists = Repo.get_by(Card, category: suit["name"], value: card["value"], edition: edition, language: language, version: version)
+            value = to_string(card["value"])
+            card_exists = Repo.get_by(Card, category: suit["name"], value: value, edition: edition, language: language, version: version)
 
             if card_exists  do
                 # nothing
@@ -32,7 +33,7 @@ defmodule Copi.CardMigration do
                 language: language,
                 version: version,
                 category: suit["name"],
-                value: card["value"],
+                value: value,
                 description: card["desc"],
                 misc: misc,
                 external_id: card["id"],

@@ -10,6 +10,10 @@ defmodule Copi.Cornucopia do
   alias Copi.Cornucopia.Card
   alias Copi.Cornucopia.Player
 
+  @companion_edition "companion"
+  @companion_version "1.0"
+  @companion_host_editions ["webapp", "mobileapp"]
+
   @doc """
   Returns the list of games.
 
@@ -113,6 +117,20 @@ defmodule Copi.Cornucopia do
     Enum.reduce(["Wild Card", "WILD CARD"], Repo.all(database_query), fn item, acc ->
       List.delete(acc, item)
     end)
+  end
+
+  def get_companion_suits do
+    companion_edition = @companion_edition
+    companion_version = @companion_version
+
+    database_query =
+      from c in Card,
+        where: c.edition == ^companion_edition and c.version == ^companion_version,
+        select: c.category,
+        distinct: true,
+        order_by: [asc: c.category]
+
+    Repo.all(database_query)
   end
 
   @doc """
@@ -260,12 +278,29 @@ defmodule Copi.Cornucopia do
     |> Enum.sort_by(fn card -> {card.edition, card.external_id, card.language} end)
   end
 
-  def list_cards_shuffled(edition, suits, version) do
-    all_cards = Card |> where(edition: ^edition, version: ^version) |> order_by(fragment("RANDOM()")) |> Repo.all()
+  def list_cards_shuffled(edition, suits, version) when edition in @companion_host_editions do
+    companion_edition = @companion_edition
+    companion_version = @companion_version
 
-    Enum.filter(all_cards, fn card ->
-      card.category in suits
-    end)
+    Card
+    |> where(
+      [c],
+      c.category in ^suits and
+        ((c.edition == ^edition and c.version == ^version) or
+           (c.edition == ^companion_edition and c.version == ^companion_version))
+    )
+    |> order_by(fragment("RANDOM()"))
+    |> Repo.all()
+  end
+
+  def list_cards_shuffled(edition, suits, version) do
+    Card
+    |> where(
+      [c],
+      c.category in ^suits and c.edition == ^edition and c.version == ^version
+    )
+    |> order_by(fragment("RANDOM()"))
+    |> Repo.all()
   end
 
   @doc """
