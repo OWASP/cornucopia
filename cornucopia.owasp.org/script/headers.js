@@ -103,6 +103,11 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/lang/dbd/1.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 /api/lang/companion/1.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
