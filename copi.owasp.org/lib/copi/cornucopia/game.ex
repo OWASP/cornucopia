@@ -1,4 +1,4 @@
-+copi.owasp.org\lib\copi\cornucopia\game.exdefmodule Copi.Cornucopia.Game do
++defmodule Copi.Cornucopia.Game do
   use Ecto.Schema
   import Ecto.Changeset
 
