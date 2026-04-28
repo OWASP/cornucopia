@@ -553,11 +553,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            f"Output language to produce (e.g: all, en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru, uk, hi) "
-            "you can also specify your own language file. If so, there needs to be a yaml "
-            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml "
-            "You also need to have the code defined as part of the meta info in the yaml meta -> language -> en "
-            "(e.g: meta['language']["en"])"
+            "Output language to produce (e.g: all, en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru, uk, hi)\n"
+            "you can also specify your own language file. If so, there needs to be a yaml\n"
+            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml\n"
+            "You also need to have the code defined as part of the meta info in the yaml meta -> language -> en\n"
+            "(e.g: meta['language']['en'])"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
