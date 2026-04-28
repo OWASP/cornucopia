@@ -1,5 +1,5 @@
 <script lang="ts">
-  interface CapecMapEntry {
+  interface _CapecMapEntry {
     id: number;
     name: string;
     owasp_asvs: string[];
@@ -39,14 +39,14 @@
         </tr>
       </thead>
       <tbody>
-        {#each capecEntries as entry}
+        {#each capecEntries as entry (entry.id)}
           <tr>
             <td>
               <a href={linkCapec(entry.id)} title="CAPEC {entry.id}">{entry.id}</a>
             </td>
             <td>{entry.name}</td>
             <td class="asvs-links">
-              {#each entry.owasp_asvs as asvs, index}
+              {#each entry.owasp_asvs as asvs, index (asvs)}
                 <a href={linkASVS(asvs)} title="ASVS {asvs}">{asvs}</a>{#if index < entry.owasp_asvs.length - 1}, {/if}
               {/each}
             </td>

@@ -148,7 +148,7 @@ describe('capecMapTable component tests', () => {
 
         it('should handle ASVS link generation', () => {
             const mockLinkASVS = (input: string): string => {
-                const searchString = input.split("-")[0];
+                const _searchString = input.split("-")[0];
                 return `/taxonomy/asvs-5.0/test#V${input}`;
             };
 

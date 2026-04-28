@@ -11,7 +11,7 @@ export const load = (({ params }) => {
   
   const deckService = new DeckService();
   const version = DeckService.getLatestVersion(edition);
-  const decks = new Map<string, any>();
+  const decks = new Map<string, Map<string, unknown>>();
   decks.set('en', deckService.getCardDataForEditionVersionLang(edition, version, 'en'));
   
   return {

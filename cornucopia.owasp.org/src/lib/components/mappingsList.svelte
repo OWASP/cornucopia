@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
+
   interface Props {
     title: string;
     mappings: number[] | string[];
-    linkFunction?: any;
-    textFunction?: any;
+    linkFunction?: (m: string | number) => string;
+    textFunction?: (m: string | number) => string;
   }
 
   let { title, mappings, linkFunction = undefined, textFunction = undefined }: Props = $props();
@@ -11,15 +13,45 @@
 
 <p>
   <span class="title">{title}</span>
-  {#each mappings as m, index}
+  {#each mappings as m, index (index)}
     {#if linkFunction == undefined}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else if String(m).trim() != '-' && linkFunction(m).startsWith('/') && textFunction != undefined }
-      <a title="{title} {textFunction(m)}" href={linkFunction(m)}>{textFunction(m)}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+      <a
+        title="{title} {textFunction(m)}"
+        href={resolve(linkFunction(m))}
+      >
+        {textFunction(m)}
+      </a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else if String(m).trim() != '-' && linkFunction(m).startsWith('/')}
-      <a title="{title} {m}" href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+      <a
+        title="{title} {m}"
+        href={resolve(linkFunction(m))}
+      >
+        {m}
+      </a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+    {:else if String(m).trim() != '-' && linkFunction(m).startsWith('#') && textFunction != undefined}
+      <a
+        title="{title} {textFunction(m)}"
+        href={resolve(linkFunction(m))}
+      >
+        {textFunction(m)}
+      </a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+    {:else if String(m).trim() != '-' && linkFunction(m).startsWith('#')}
+      <a
+        title="{title} {m}"
+        href={resolve(linkFunction(m))}
+      >
+        {m}
+      </a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else if String(m).trim() != '-'}
-      <a title="{title} {m}" target="_blank" rel="noopener nofollow" class="link-with-external-indicator" href={linkFunction(m)}>{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
+      <a
+        title="{title} {m}"
+        target="_blank"
+        rel="noopener nofollow external"
+        class="link-with-external-indicator"
+        href={linkFunction(m)}
+      >{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {/if}
