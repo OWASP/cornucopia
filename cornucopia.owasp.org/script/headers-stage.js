@@ -117,11 +117,6 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
-/api/cre/companion
-  ! Access-Control-Allow-Origin
-  Access-Control-Allow-Origin: *
-  ! Content-Type
-  Content-Type: application/json
 /api/cre/companion/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
