@@ -5,7 +5,7 @@ export function GET() {
         meta: {
             edition: "OWASP Cornucopia Companion Edition",
             component: "cards",
-            language: "all",
+            language: "en",
             languages: ["en"],
             version: "1.0"
         }

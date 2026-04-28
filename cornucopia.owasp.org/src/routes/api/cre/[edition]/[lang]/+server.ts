@@ -12,7 +12,6 @@ const responseInit: ResponseInit = {
 };
 
 const editions = ["webapp", "mobileapp", "companion", "dbd"]
-const languages = ["en", "no_nb", "nl", "es", "pt_pt", "pt_br", "ru", "fr", "it"]
 
 export const GET: RequestHandler = ({ url }) => {
   const params = url.pathname.split('/');
