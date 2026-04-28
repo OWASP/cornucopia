@@ -367,7 +367,7 @@ paths:
       summary: Get supported languages for Companion edition
       description: |
         Returns metadata about supported languages for the
-        OWASP Cornucopia Companion Edition (AI / LLM threat modeling).
+        OWASP Cornucopia Companion Edition (Companion suits).
       responses:
         '200':
           description: Language metadata for Companion edition
@@ -416,15 +416,7 @@ paths:
                       component: cards
                       language: en
                       version: "1.0"
-                    standards:
-                      - doctype: Tool
-                        id: https://cornucopia.owasp.org/edition/companion/LLM2/1.0/en
-                        name: OWASP Cornucopia Companion Edition
-                        section: Large Language Models
-                        sectionID: LLM2
-                        links: []
-                        tags: [Threat modeling, AI / LLM Application]
-                        tooltype: Defensive
+                    standards: []
 
   /lang/{edition}/{version}:
     get:
