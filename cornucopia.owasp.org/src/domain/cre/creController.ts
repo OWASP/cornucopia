@@ -41,7 +41,7 @@ export class CreController {
     private static category: Map<string, string>  = new Map<string, string>( [
         ['webapp', "Website Application"],
         ['mobileapp', "Mobile Application"],
-        ['companion', "AI / LLM Application"]
+        ['companion', "Companion suits"]
         ['dbd', "Digital Benefits and Disbenefits"]
     ]);
 
