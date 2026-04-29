@@ -1,7 +1,6 @@
 defmodule CopiWeb.GameLive.GameFormHelpers do
   @companion_prefix "companion"
   @companion_editions ["webapp", "mobileapp"]
-  @default_companion_suits ["Large Language Models", "Frontend", "DevOps", "Automated Threats", "Agentic AI"]
 
   def generate_suit_list_formatted_for_checkbox(edition) do
     format_list_of_suits_for_checkbox(edition)
@@ -9,7 +8,7 @@ defmodule CopiWeb.GameLive.GameFormHelpers do
   end
 
   def generate_selected_suits_for_new_game(edition) do
-    generate_suit_list_formatted_for_checkbox(edition) ++ default_companion_suits_for_checkbox(edition)
+    generate_suit_list_formatted_for_checkbox(edition)
   end
 
   def format_suits_before_saving_game(suits) do
@@ -32,15 +31,6 @@ defmodule CopiWeb.GameLive.GameFormHelpers do
   end
 
   def format_companion_suits_for_checkbox(_edition), do: []
-
-  def default_companion_suits_for_checkbox(edition) when edition in @companion_editions do
-    format_companion_suits_for_checkbox(edition)
-    |> Enum.map(fn {key, suit} -> {key, suit in @default_companion_suits} end)
-    |> Enum.filter(fn {_key, selected} -> selected end)
-    |> Enum.map(fn {key, _selected} -> key end)
-  end
-
-  def default_companion_suits_for_checkbox(_edition), do: []
 
   def display_appropriate_suits_list(edition, suits) do
     selected_suits = Enum.reject(suits, &(&1 == ""))
