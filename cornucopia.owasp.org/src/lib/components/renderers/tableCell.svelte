@@ -1,7 +1,7 @@
 <script lang="ts">
   interface Props {
-    header: any;
-    align: any;
+    header: boolean;
+    align: string;
     children?: import('svelte').Snippet;
   }
 

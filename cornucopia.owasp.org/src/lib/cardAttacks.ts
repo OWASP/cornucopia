@@ -44,7 +44,7 @@ function parseSuit(suit : string) : string
 
 }
 
-export function GetCardMappings(suit : string, card : string, addition : number = 0) : Mapping | undefined
+export function GetCardMappings(suit : string, card : string, _addition : number = 0) : Mapping | undefined
 {
     suit = parseSuit(suit);
 
@@ -67,7 +67,7 @@ export function GetCardMappings(suit : string, card : string, addition : number 
 
 export function GetCardDescription(suit : string , card : string) : string
 {
-    let thisCard : Card | undefined = GetCard(suit,card);
+    const thisCard : Card | undefined = GetCard(suit,card);
     if(!thisCard)
         return "";
 
@@ -76,19 +76,19 @@ export function GetCardDescription(suit : string , card : string) : string
 
 export function GetCardExplanation(suit : string , card : string) : string
 {
-    let thisCard : Card | undefined = GetCard(suit,card);
+    const thisCard : Card | undefined = GetCard(suit,card);
     if(!thisCard)
         return "";
 
     return thisCard.desc
 }
 
-export function GetCardImageUrl(suit : string , card : string, addition : number = 0) : string
+export function GetCardImageUrl(suit : string , card : string, _addition : number = 0) : string
 {
     if(!suit || !card)
         return "/cards/all/CORNUCOPIA.png";
 
-    let thisCard : Card | undefined = GetCard(suit,card);
+    const thisCard : Card | undefined = GetCard(suit,card);
 
     return '/cards/all/' + thisCard?.id + '.png';
 }
@@ -101,15 +101,15 @@ export type Attack =
 
 export function GetCardAttacks(card : string) : Attack[]
 {
-    let id = card;
-    let result : Attack[] = []
+    const id = card;
+    const result : Attack[] = []
 
     for(let i = 0 ; i < attacks.list.length ; i++)
     {
-        let attack = attacks.list[i];
+        const attack = attacks.list[i];
         for(let j = 0 ; j < attack.cards.length ; j++)
         {
-            let sampleID = attack.cards[j];
+            const sampleID = attack.cards[j];
             if(id == sampleID)
             {
                 result.push({name : attack.name,url : '../attacks/' + attack.url})

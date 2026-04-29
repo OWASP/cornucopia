@@ -1,4 +1,4 @@
-import type { Card } from "../card/card"
+import type { _Card } from "../card/card"
 
 export type Suit =
 { 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { GET } from './+server';
 import { DeckService } from '$lib/services/deckService';
@@ -128,6 +129,6 @@ describe('GET /api/cre/[edition]/[lang]', () => {
 
         try {
             GET({ url: { pathname: '/' } } as any);
-        } catch (_) {}
+        } catch (_) { /* expected error */ }
     });
 });
