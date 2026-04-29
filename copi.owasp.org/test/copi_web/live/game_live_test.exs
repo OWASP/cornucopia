@@ -148,8 +148,9 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ game.name
     end
 
-    test "redirects to error when round parameter is invalid", %{conn: conn, game: game} do
-      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=abc")
+    test "falls back to current round when round parameter is invalid", %{conn: conn, game: game} do
+      {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=abc")
+      assert html =~ game.name
     end
 
     test "displays past round", %{conn: conn, game: game} do
@@ -207,12 +208,13 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ "At least 3 players are required"
     end
 
-    test "redirects to error on invalid round param", %{conn: conn, game: game} do
+    test "falls back to current round on out-of-range round param", %{conn: conn, game: game} do
       {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
       {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
 
-      # round=999 is way beyond current_round, should redirect to /error
-      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=999")
+      # round=999 is way beyond current_round, so it should fall back to current round.
+      {:ok, _show_live, html} = live(conn, "/games/#{game.id}?round=999")
+      assert html =~ game.name
     end
   end
 
