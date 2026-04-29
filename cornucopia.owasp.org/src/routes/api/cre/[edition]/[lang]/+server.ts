@@ -5,7 +5,7 @@ import { MappingController } from '$domain/mapping/mappingController';
 import { MappingService } from '$lib/services/mappingService';
 // Header options
 export const prerender = true;
-const responseInit: ResponseInit = {
+const _responseInit: ResponseInit = {
   headers: {
     "Content-Type": "application/json",
   },

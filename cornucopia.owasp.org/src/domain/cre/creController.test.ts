@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {expect, vi, describe, it, beforeEach} from 'vitest';
 import { CreController } from '$domain/cre/creController';
 import type { Card } from '$domain/card/card';

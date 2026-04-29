@@ -3,12 +3,10 @@
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "$domain/card/card";
-  import { readLang, readTranslation } from "$lib/stores/stores";
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
   const language = $derived(data?.lang);
-  let t = readTranslation();
   let cards = $derived(data.cards);
   let card : Card = $derived(cards.get(data.card) as Card);
   let languages = $derived(data.languages);
