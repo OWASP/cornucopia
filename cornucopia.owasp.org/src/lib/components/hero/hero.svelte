@@ -6,8 +6,8 @@
 
     interface Props {
         suits: Suit[];
-        cards: any;
-        mapping: any;
+        cards: Map<string, unknown>;
+        mapping: Record<string, unknown>;
     }
 
     let { suits, cards, mapping }: Props = $props();

@@ -21,13 +21,15 @@ export default {
 		prerender: {
 			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
-				console.log(message);
+                                if (path === '/mapping') return;
+                                if (path.startsWith('/edition')) return;
+                                console.log(message);
 				console.log(referrer);
 				console.log(path);
 				// otherwise fail the build
 				throw new Error(message);
 			},
-			handleMissingId: ({ path, id, referrers, message }) => {
+			handleMissingId: ({ _path, id, _referrers, message }) => {
 			 if (id == 'card') return;
 			 throw new Error(message);
 			},
@@ -377,3 +379,7 @@ export default {
 		}
 	}
 };
+
+
+
+
