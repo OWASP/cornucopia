@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {expect, vi, describe, it, beforeEach} from 'vitest';
 import { CreController } from '$domain/cre/creController';
 import type { Card } from '$domain/card/card';
@@ -235,6 +236,41 @@ describe('CreController tests', () => {
             expect(result.links).toHaveLength(0);
         });
 
+        it('should handle missing CRE mapping data', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue({});
+
+            const mockCard: Card = {
+                id: 'card-missing-cre',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '4',
+                lang: 'en'
+            } as unknown as Card;
+
+            const result = creController.generateDoc(mockCard);
+            expect(result.links).toHaveLength(0);
+        });
+
+        it('should throw when card mapping is undefined', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue(undefined);
+
+            const mockCard: Card = {
+                id: 'card-without-mapping',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '5',
+                lang: 'en'
+            } as unknown as Card;
+
+            expect(() => creController.generateDoc(mockCard)).toThrow();
+        });
+
         it('should handle single CRE mapping', () => {
             mockMappingController.getCardMappings = vi.fn().mockReturnValue({
                 owasp_cre: {
@@ -257,6 +293,28 @@ describe('CreController tests', () => {
 
             expect(result.links).toHaveLength(1);
             expect(result.links[0].document.id).toBe('CRE-SINGLE');
+        });
+
+        it('should handle falsy owasp_asvs value without throwing', () => {
+            mockMappingController.getCardMappings = vi.fn().mockReturnValue({
+                owasp_cre: {
+                    owasp_asvs: false
+                }
+            });
+
+            const mockCard: Card = {
+                id: 'card-falsy-cre',
+                edition: 'webapp',
+                suitNameLocal: 'Test',
+                desc: 'Test',
+                url: '/test',
+                suit: 'TS',
+                value: '6',
+                lang: 'en'
+            } as unknown as Card;
+
+            const result = creController.generateDoc(mockCard);
+            expect(result.links).toHaveLength(0);
         });
 
         it('should construct correct URLs', () => {

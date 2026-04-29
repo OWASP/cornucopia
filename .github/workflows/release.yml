@@ -73,7 +73,7 @@
               mkdir -p output/cornucopia_mobileapp || echo "Ignore error"
               mkdir -p output/cornucopia_mobileapp/Links || echo "Ignore error"
               mkdir -p output/cornucopia_mobileapp/Fonts || echo "Ignore error"
-              cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
+              cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_mobileapp/Links/
               cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
               #
               pipenv run python scripts/convert.py -l all -lt all -t all -v 2.2 -e webapp

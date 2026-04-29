@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { resolve } from "$app/paths";
+
     interface Props {
         vendorName: string,
         logoSource: string;
@@ -13,8 +15,39 @@
     <div class="image-container">
         <img class="logo-image" alt="{vendorName}'s vendor logo" src={logoSource}/>
     </div>
-    <a rel="noopener nofollow" title="Go to {vendorName}'s OWASP Cornucopia vendor webshop" target="_blank" href={webshopLink}><img alt="{vendorName}'s OWASP Cornucopia box of cards" title="{vendorName}'s OWASP Cornucopia box of cards" class="product-image" src={productImageSource}/></a>
-    <a rel="noopener nofollow" title="Go to {vendorName}'s OWASP Cornucopia vendor webshop" class="shop-link" target="_blank" href={webshopLink}>Visit external webshop</a>
+    {#if webshopLink.startsWith('/')}
+        <a
+            rel="noopener nofollow"
+            title="Go to {vendorName}'s OWASP Cornucopia vendor webshop"
+            target="_blank"
+            href={resolve(webshopLink)}
+        ><img alt="{vendorName}'s OWASP Cornucopia box of cards" title="{vendorName}'s OWASP Cornucopia box of cards" class="product-image" src={productImageSource}/></a>
+    {:else}
+        <a
+            rel="external noopener nofollow"
+            title="Go to {vendorName}'s OWASP Cornucopia vendor webshop"
+            target="_blank"
+            href={webshopLink}
+        ><img alt="{vendorName}'s OWASP Cornucopia box of cards" title="{vendorName}'s OWASP Cornucopia box of cards" class="product-image" src={productImageSource}/></a>
+    {/if}
+
+    {#if webshopLink.startsWith('/')}
+        <a
+            rel="noopener nofollow"
+            title="Go to {vendorName}'s OWASP Cornucopia vendor webshop"
+            class="shop-link"
+            target="_blank"
+            href={resolve(webshopLink)}
+        >Visit external webshop</a>
+    {:else}
+        <a
+            rel="external noopener nofollow"
+            title="Go to {vendorName}'s OWASP Cornucopia vendor webshop"
+            class="shop-link"
+            target="_blank"
+            href={webshopLink}
+        >Visit external webshop</a>
+    {/if}
 </div>
 
 <style>

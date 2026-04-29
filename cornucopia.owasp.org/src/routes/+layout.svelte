@@ -1,6 +1,6 @@
 <script lang="ts">
     import 'normalize.css';
-    import { browser } from "$app/environment";
+    import { browser as _browser } from "$app/environment";
     import { page } from "$app/stores";
     import Breadcrumbs from "$lib/components/breadcrumbs.svelte";
     import Footer from "$lib/components/footer.svelte";
@@ -8,7 +8,7 @@
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";    
     interface Props {
-        data: any;
+        data: Record<string, unknown>;
         children?: import('svelte').Snippet;
     }
 
@@ -28,23 +28,6 @@
         return false;
     }
 
-    // intercept innerHTML invocation and remove style before div is added to dom
-    $effect(() => {
-    if (browser) {
-        const originalInnerHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-        
-        Object.defineProperty(Element.prototype, 'innerHTML', {
-        set(value: string) {
-            if (value.includes('id="svelte-announcer"')) {
-            const safeValue = value.replace(/style=".*?"/i, '');
-            originalInnerHTML?.set?.call(this, safeValue);
-            } else {
-            originalInnerHTML?.set?.call(this, value);
-            }
-        }
-        });
-    }
-    });
 
     // add styles back in non-CSP violating way
     $effect(() => {
@@ -71,6 +54,7 @@
         childList: true,
         subtree: true
         });
+        return () => observer.disconnect();
     }
     });
 </script>

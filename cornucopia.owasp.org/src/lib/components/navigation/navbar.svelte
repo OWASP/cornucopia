@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import { resolve } from "$app/paths";
     import { fade } from "svelte/transition";
     import { AddLink, type Link } from "./utils";
     import {readTranslation} from "$lib/stores/stores";
@@ -38,14 +39,14 @@
             <ul class="mobile-menu">
                 <li>
                     <ul>
-                        {#each [...mainMenu].reverse() as link}
+                        {#each [...mainMenu].reverse() as link (link.href)}
                         <li>
-                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(resolve(link.href))}}><span>{link.name}</span></button>
                         </li>
                         {/each}
-                        {#each [...subMenu].reverse() as link}
+                        {#each [...subMenu].reverse() as link (link.href)}
                         <li>
-                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(link.href)}}><span>{link.name}</span></button>
+                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(resolve(link.href))}}><span>{link.name}</span></button>
                         </li>
                         {/each}
                     </ul>
@@ -53,23 +54,23 @@
             </ul>
         </div>
         <ul class="desktop-menu">
-            {#each mainMenu as link}
+            {#each mainMenu as link (link.href)}
                 <li class="general-menu">
-                    <a class="link" href="{link.href}"><div>{link.name}</div></a>
+                    <a class="link" href={resolve(link.href)}><div>{link.name}</div></a>
                 </li>
             {/each}
                 <li class="sub-menu">
                     <a in:fade class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
                     <div>
                         <ul class="sub-menu">
-                        {#each subMenu as link}
-                             <li><a class="link sub-menu" href="{link.href}"><div>{link.name}</div></a></li>
+                        {#each subMenu as link (link.href)}
+                             <li><a class="link sub-menu" href={resolve(link.href)}><div>{link.name}</div></a></li>
                         {/each}
                         </ul>
                     </div>
                 </li>
             </ul>
-        <a class="logo" href="/"><div><span class="desktop">OWASP</span>&nbsp;<span class="desktop mobile">Cornucopia</span></div></a>
+        <a class="logo" href={resolve('/') }><div><span class="desktop">OWASP</span>&nbsp;<span class="desktop mobile">Cornucopia</span></div></a>
         
     </nav>
 </header>

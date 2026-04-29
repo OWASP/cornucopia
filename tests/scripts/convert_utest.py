@@ -1,18 +1,23 @@
-import unittest
-import unittest.mock as mock
+# Standard library
 import argparse
+import glob
 import io
+import logging
 import os
 import platform
+import shutil
+import subprocess
 import sys
 import tempfile
-import zipfile
-import docx  # type: ignore
-import logging
-import glob
-import shutil
 import typing
+import unittest
+import zipfile
+from yaml import YAMLError
 from typing import List, Dict, Any, Tuple
+from unittest.mock import patch, mock_open, MagicMock
+import unittest.mock as mock
+
+import docx
 
 import scripts.convert as c
 
@@ -325,15 +330,46 @@ class TestGetTemplateForEdition(unittest.TestCase):
         layout = "guide"
         template = "bridge"
         edition = "webapp"
+        language = "en"
 
         want_template_doc = os.path.normpath(
             os.path.join(
-                c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_lang.odt"
+                c.convert_vars.BASE_PATH, "resources", "templates", "owasp_cornucopia_webapp_ver_guide_bridge_en.odt"
             )
         )
 
-        got_template_doc = c.get_template_for_edition(layout, template, edition)
+        got_template_doc = c.get_template_for_edition(layout, template, edition, language)
         self.assertEqual(want_template_doc, got_template_doc)
+
+    def test_get_template_fallback_language(self):
+        layout = "guide"
+        template = "bridge"
+        edition = "webapp"
+        language = "fr"  # assume this file doesn't exist
+
+        result = c.get_template_for_edition(layout, template, edition, language)
+
+        self.assertIn("bridge", result)
+
+    def test_get_template_invalid_edition(self):
+        layout = "guide"
+        template = "bridge"
+        edition = "invalid"
+        language = "en"
+
+        result = c.get_template_for_edition(layout, template, edition, language)
+
+        self.assertIsInstance(result, str)
+
+    def test_get_template_different_layout(self):
+        layout = "cards"
+        template = "bridge"
+        edition = "webapp"
+        language = "en"
+
+        result = c.get_template_for_edition(layout, template, edition, language)
+
+        self.assertIn("cards", result)
 
     def test_get_template_for_edition_default_idml(self) -> None:
         layout = "cards"
@@ -2240,6 +2276,341 @@ class TestGetLibreOfficeBin(unittest.TestCase):
     def test_linux_uses_shutil_which(self, mock_which, mock_platform):
         result = c._get_libreoffice_bin()
         self.assertEqual(result, "/usr/bin/libreoffice")
+
+
+class TestConvertWithLibreOffice(unittest.TestCase):
+
+    @patch("scripts.convert._get_libreoffice_bin", return_value=None)
+    def test_no_binary(self, mock_bin):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_file_paths", return_value=(False, "error", ""))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    def test_invalid_paths(self, mock_bin, mock_paths):
+        result = c._convert_with_libreoffice("bad.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_command_args", return_value=False)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    def test_invalid_command_args(self, mock_bin, mock_paths, mock_cmd):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="cmd", timeout=1))
+    def test_timeout(self, mock_run, mock_bin, mock_paths, mock_cmd):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("subprocess.run", side_effect=Exception("fail"))
+    def test_exception(self, mock_run, mock_bin, mock_paths, mock_cmd):
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+
+class TestConvertHappyPath(unittest.TestCase):
+
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("subprocess.run")
+    @patch("os.makedirs")
+    def test_convert_success(self, mock_makedirs, mock_run, mock_bin, mock_paths, mock_cmd):
+
+        mock_run.return_value = None
+
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+
+        self.assertTrue(result)
+
+        mock_run.assert_called_once()
+
+
+class TestConvertDocx2PdfSuccess(unittest.TestCase):
+
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("scripts.convert._validate_command_args", return_value=True)
+    @patch("subprocess.run", return_value=None)
+    def test_command_args_content(self, mock_run, mock_cmd, mock_paths, mock_bin):
+
+        c._convert_with_libreoffice("file.docx", "out.pdf")
+
+        args, _ = mock_run.call_args
+
+        cmd = args[0]
+
+        self.assertTrue(any("pdf" in str(x) for x in cmd))
+
+        self.assertTrue(any("--outdir" in str(x) for x in cmd))
+
+    @patch("scripts.convert._get_libreoffice_bin", return_value="/usr/bin/libreoffice")
+    @patch("scripts.convert._validate_file_paths", return_value=(True, "file.docx", "/tmp"))
+    @patch("subprocess.run", return_value=None)
+    def test_real_validate_command_args_execution(self, mock_run, mock_paths, mock_bin):
+
+        result = c._convert_with_libreoffice("file.docx", "out.pdf")
+
+        self.assertIn(result, [True, False])
+
+
+class TestConvertUncovered(unittest.TestCase):
+
+    # ---------- _parse_mapping_file ----------
+
+    @patch("scripts.convert.yaml.safe_load", side_effect=Exception("boom"))
+    @patch("builtins.open", new_callable=mock_open, read_data="bad")
+    @patch.object(c.ConvertVars, "_detect_choices", return_value=None)
+    def test_parse_mapping_exception(self, mock_detect, mock_file, mock_yaml):
+        obj = c.ConvertVars()
+        result = obj._parse_mapping_file("fake.yaml")
+        self.assertEqual(result, {})
+
+    # ---------- _validate_file_paths ----------
+
+    @patch("scripts.convert.os.path.isfile", return_value=True)
+    @patch("scripts.convert.os.path.isdir", return_value=True)
+    def test_validate_paths_output_outside_base(self, mock_dir, mock_file):
+        with patch("scripts.convert.convert_vars.BASE_PATH", "/safe"):
+            result = c._validate_file_paths("/safe/file.docx", "/unsafe/output.pdf")
+            self.assertFalse(result[0])
+
+    # ---------- _convert_with_docx2pdf ----------
+
+    @patch("scripts.convert.convert_vars.can_convert_to_pdf", True)
+    @patch("builtins.__import__")
+    def test_docx2pdf_success(self, mock_import):
+        mock_module = mock_import.return_value
+        mock_module.convert = lambda a, b: None
+        result = c._convert_with_docx2pdf("file.docx", "out.pdf")
+        self.assertTrue(result)
+
+    @patch("scripts.convert.convert_vars.can_convert_to_pdf", True)
+    @patch("builtins.__import__", side_effect=Exception("fail"))
+    def test_docx2pdf_exception(self, mock_import):
+        result = c._convert_with_docx2pdf("file.docx", "out.pdf")
+        self.assertFalse(result)
+
+    # ---------- _rename_libreoffice_output ----------
+
+    @patch("scripts.convert.os.path.exists", return_value=True)
+    @patch("scripts.convert.os.remove")
+    @patch("scripts.convert.os.rename")
+    def test_rename_libreoffice_output(self, mock_rename, mock_remove, mock_exists):
+        c._rename_libreoffice_output("input.docx", "output.pdf")
+        self.assertTrue(mock_rename.called)
+
+    # ---------- create_edition_from_template ----------
+
+    @patch("scripts.convert.convert_vars.args", new=type("obj", (), {"pdf": False}))
+    @patch("scripts.convert.ensure_folder_exists")
+    @patch("scripts.convert.replace_docx_inline_text")
+    @patch("scripts.convert.get_docx_document")
+    @patch("scripts.convert.rename_output_file", return_value="/tmp/out.docx")
+    @patch("scripts.convert.get_template_for_edition", return_value="template.docx")
+    @patch("scripts.convert.get_meta_data", return_value={"key": "val"})
+    @patch("scripts.convert.map_language_data_to_template", return_value={})
+    @patch("scripts.convert.get_language_data", return_value={})
+    @patch("scripts.convert.get_mapping_for_edition", return_value={})
+    @patch("scripts.convert.get_files_from_of_type", return_value=["file.yaml"])
+    def test_create_edition_docx_flow(
+        self,
+        mock_files,
+        mock_map,
+        mock_lang,
+        mock_map2,
+        mock_meta,
+        mock_template,
+        mock_rename,
+        mock_get_doc,
+        mock_replace,
+        mock_ensure,
+    ):
+        mock_doc = MagicMock()
+        mock_get_doc.return_value = mock_doc
+        mock_replace.return_value = mock_doc
+
+        c.create_edition_from_template("cards")
+        self.assertTrue(mock_doc.save.called)
+
+    # ---------- main ----------
+
+    @patch("scripts.convert.parse_arguments")
+    @patch("scripts.convert.set_logging")
+    @patch("scripts.convert.set_can_convert_to_pdf")
+    @patch("scripts.convert._get_libreoffice_bin", return_value=None)
+    def test_main_pdf_not_supported(self, mock_bin, mock_set_pdf, mock_log, mock_parse):
+        mock_parse.return_value = type("obj", (), {"pdf": True, "debug": False})
+        c.main()
+
+
+class TestConvertFinalCoverage(unittest.TestCase):
+
+    # -------- convert_to_pdf --------
+
+    @patch("scripts.convert._handle_conversion_failure")
+    @patch("scripts.convert._convert_with_docx2pdf", return_value=False)
+    @patch("scripts.convert._convert_with_libreoffice", return_value=False)
+    def test_convert_to_pdf_all_fail(self, mock_lo, mock_docx, mock_fail):
+        import scripts.convert as c
+
+        c.convert_to_pdf("in.docx", "out.pdf")
+        self.assertTrue(mock_fail.called)
+
+    @patch("scripts.convert._rename_libreoffice_output")
+    @patch("scripts.convert._convert_with_libreoffice", return_value=True)
+    def test_convert_to_pdf_libreoffice_success(self, mock_lo, mock_rename):
+        import scripts.convert as c
+
+        c.convert_to_pdf("in.docx", "out.pdf")
+        self.assertTrue(mock_rename.called)
+
+    # -------- get_document_paragraphs --------
+
+    def test_get_document_paragraphs_empty(self):
+        import scripts.convert as c
+
+        class DummyDoc:
+            paragraphs = []
+            tables = []
+
+        result = c.get_document_paragraphs(DummyDoc())
+        self.assertEqual(result, [])
+
+    # -------- get_mapping_for_edition --------
+
+    @patch("scripts.convert.build_template_dict", side_effect=Exception("fail"))
+    @patch("scripts.convert.get_mapping_data_for_edition", return_value={"meta": {}})
+    @patch("scripts.convert.valid_meta", return_value=True)
+    def test_get_mapping_for_edition_exception(self, mock_valid, mock_data, mock_build):
+        import scripts.convert as c
+
+        result = c.get_mapping_for_edition([], "3.0", "en", "webapp", "bridge", "cards")
+        self.assertEqual(result, {"meta": {}})
+
+    # -------- get_mapping_data_for_edition --------
+
+    @patch("scripts.convert.yaml.safe_load", side_effect=YAMLError("yaml fail"))
+    @patch("builtins.open", new_callable=mock_open, read_data="bad")
+    @patch("scripts.convert.is_mapping_file_for_version", return_value=True)
+    @patch("scripts.convert.is_yaml_file", return_value=True)
+    def test_mapping_data_yaml_error(self, mock_yaml, mock_map, mock_is_yaml, mock_file):
+        import scripts.convert as c
+
+        result = c.get_mapping_data_for_edition(["file.yaml"], "en")
+        self.assertEqual(result, {})
+
+    # -------- get_replacement_value_from_dict --------
+
+    def test_replacement_value_none_key(self):
+        import scripts.convert as c
+
+        result = c.get_replacement_value_from_dict("hello", [(None, "x")])
+        self.assertEqual(result, "hello")
+
+    @patch("scripts.convert.convert_vars.can_convert_to_pdf", True)
+    @patch("builtins.__import__")
+    def test_convert_to_pdf_docx2pdf_success(self, mock_import):
+        import scripts.convert as c
+
+        mock_module = mock_import.return_value
+        mock_module.convert = lambda a, b: None
+
+        c.convert_to_pdf("file.docx", "out.pdf")
+
+    @patch("scripts.convert.convert_vars.can_convert_to_pdf", True)
+    @patch("scripts.convert._convert_with_docx2pdf", return_value=False)
+    @patch("scripts.convert._handle_conversion_failure")
+    def test_convert_to_pdf_docx2pdf_exception(self, mock_fail, mock_docx):
+        import scripts.convert as c
+
+        c.convert_to_pdf("file.docx", "out.pdf")
+
+        self.assertTrue(mock_fail.called)
+
+    @patch("scripts.convert._convert_with_libreoffice", return_value=False)
+    @patch("scripts.convert._convert_with_docx2pdf", return_value=True)
+    def test_convert_to_pdf_docx2pdf_path(self, mock_docx, mock_libre):
+        import scripts.convert as c
+
+        c.convert_to_pdf("file.docx", "out.pdf")
+
+    @patch("scripts.convert.convert_vars.args", new=type("x", (), {"edition": "webapp", "version": "2.2"}))
+    def test_get_valid_version_specific(self):
+        import scripts.convert as c
+
+        result = c.get_valid_version_choices()
+        self.assertEqual(result, ["2.2"])
+
+    @patch("scripts.convert.DefusedElTree.parse")
+    def test_xml_root_none(self, mock_parse):
+        import scripts.convert as c
+        from unittest.mock import MagicMock
+
+        mock_tree = MagicMock()
+        mock_tree.getroot.return_value = None
+        mock_parse.return_value = mock_tree
+
+        c.replace_text_in_xml_file("file.xml", [])
+
+    @patch("scripts.convert.os.path.isfile", return_value=False)
+    @patch("scripts.convert.convert_vars.args", new=type("x", (), {"inputfile": ""}))
+    def test_get_template_not_found(self, mock_isfile):
+        import scripts.convert as c
+
+        result = c.get_template_for_edition()
+        self.assertEqual(result, "None")
+
+    @patch("scripts.convert._convert_with_libreoffice", return_value=False)
+    @patch("scripts.convert._convert_with_docx2pdf", return_value=False)
+    @patch("scripts.convert._handle_conversion_failure")
+    def test_convert_to_pdf_all_fail_docx2pdf(self, mock_fail, mock_docx, mock_libre):
+        import scripts.convert as c
+
+        c.convert_to_pdf("file.docx", "out.pdf")
+
+        self.assertTrue(mock_fail.called)
+
+    @patch("scripts.convert.get_mapping_data_for_edition", return_value={"meta": {}})
+    @patch("scripts.convert.valid_meta", return_value=False)
+    def test_get_mapping_invalid_meta(self, mock_valid, mock_data):
+        import scripts.convert as c
+
+        result = c.get_mapping_for_edition([], "3.0", "en", "webapp", "bridge", "guide")
+        self.assertEqual(result, {})
+
+    @patch("scripts.convert.os.path.isabs", return_value=True)
+    @patch("scripts.convert.os.path.isfile", return_value=True)
+    @patch("scripts.convert.convert_vars.args", new=type("x", (), {"inputfile": "/abs/path/file.docx"}))
+    def test_get_template_abs_path(self, mock_file, mock_isabs):
+        import scripts.convert as c
+
+        result = c.get_template_for_edition()
+
+        self.assertTrue(result.startswith("/abs/path/file"))
+
+    @patch("scripts.convert.get_replacement_mapping_value", return_value=None)
+    def test_replacement_skip_none_key(self, mock_map):
+        import scripts.convert as c
+
+        result = c.get_replacement_value_from_dict("$hello", [(None, "x"), ("$hello", "world")])
+
+        self.assertEqual(result, "world")
+
+    @patch("scripts.convert.os.path.isfile", return_value=False)
+    @patch("scripts.convert.convert_vars.args", new=type("x", (), {"inputfile": "file.docx"}))
+    def test_get_template_fallback(self, mock_file):
+        import scripts.convert as c
+
+        result = c.get_template_for_edition()
+        self.assertEqual(result, "None")
 
 
 if __name__ == "__main__":

@@ -13,68 +13,68 @@ suits:
     id: LLM2
     value: 2
     url: https://cornucopia.owasp.org/cards/LLM2
-    desc: 
+    desc: Dave can exploit overreliance on LLM outputs where critical human oversight is missing, leading to security failures or incorrect decisions based on hallucinations or flawed reasoning
   -
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
-    desc: 
+    desc: Samantha can exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries, leading to model DoS
   -
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
-    desc: 
+    desc: Andersen can manipulate retrieval knowledge bases, vector databases, metadata, policies, RAG or MCP sources so the model retrieves and presents false, biased, or malicious information as facts
   -
     id: LLM5
     value: 5
     url: https://cornucopia.owasp.org/cards/LLM5
-    desc: 
+    desc: David can cause the model to disclose sensitive information from its training data, system prompts, configuration, services or other users' context due to insufficient output filtering or prompt leakage
   -
     id: LLM6
     value: 6
     url: https://cornucopia.owasp.org/cards/LLM6
-    desc: 
+    desc: Roy can escalate privileges or access other users' data and sessions due to weak authentication, authorization, or improper session isolation in multi-tenant LLM systems
   -
     id: LLM7
     value: 7
     url: https://cornucopia.owasp.org/cards/LLM7
-    desc: 
+    desc: Tyrell can poison training or fine-tuning datasets or the fine-tuning process itself, introducing backdoors or malicious behavior that can later be triggered
   -
     id: LLM8
     value: 8
     url: https://cornucopia.owasp.org/cards/LLM8
-    desc: 
+    desc: Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration
   -
     id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
-    desc: 
+    desc: Rossum can abuse insecure plugin, MCP servers, or integration designs to access sensitive data, bypass authentication, or execute unauthorized operations via the LLM's interface
   -
     id: LLMX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/LLMX
-    desc: 
+    desc: Sarah can override or manipulate system prompts or safety instructions through crafted input, causing the model to ignore its intended constraints or perform unauthorized actions
   -
     id: LLMJ
     value: J
     url: https://cornucopia.owasp.org/cards/LLMJ
-    desc: 
+    desc: Ripley can introduce compromised third-party models, embeddings, or malicious ML components into the supply chain, leading to hidden vulnerabilities or data theft
   -
     id: LLMQ
     value: Q
     url: https://cornucopia.owasp.org/cards/LLMQ
-    desc: 
+    desc: Kyle can exploit insecure handling of model outputs that are used directly in downstream systems, enabling injection attacks, remote code execution, or unauthorized actions
   -
     id: LLMK
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
-    desc: 
+    desc: Ava can exploit excessive agency or autonomy in AI agents with tool access to perform unauthorized or high-risk actions because of missing human-in-the-loop approval
   -
     id: LLMA
     value: A
     url: https://cornucopia.owasp.org/cards/LLMA
-    desc: You have invented a new attack against LLM
-    misc:
+    desc: You have invented a new attack against AI & LLM Security
+    misc: Read more about mitigating against AI and LLM threats at the website for the OWASP Gen AI Security projects
 -
   id: CLD
   name: Cloud
@@ -83,68 +83,68 @@ suits:
     id: CLD2
     value: 2
     url: https://cornucopia.owasp.org/cards/CLD2
-    desc: "Dan can abuse overly permissive roles assigned to an application to gain full access to cloud services beyond its intended scope"
+    desc: Dan can abuse overly permissive roles assigned to an application to gain full access to cloud services beyond its intended scope
   -
     id: CLD3
     value: 3
     url: https://cornucopia.owasp.org/cards/CLD3
-    desc: "Roupe can discover a publicly accessible cloud storage and download sensitive customer data directly from the internet"
+    desc: Roupe can discover a publicly accessible cloud storage and download sensitive customer data directly from the internet
   -
     id: CLD4
     value: 4
     url: https://cornucopia.owasp.org/cards/CLD4
-    desc: "Ryan can operate within critical cloud services without triggering alerts by exploiting the absence of audit logs and security monitoring"
+    desc: Ryan can operate within critical cloud services without triggering alerts by exploiting the absence of audit logs and security monitoring
   -
     id: CLD5
     value: 5
     url: https://cornucopia.owasp.org/cards/CLD5
-    desc: "Josh can inject malicious code into the cloud build or deployment pipeline by abusing unprotected build variables"
+    desc: Josh can inject malicious code into the cloud build or deployment pipeline by abusing unprotected build variables
   -
     id: CLD6
     value: 6
     url: https://cornucopia.owasp.org/cards/CLD6
-    desc: "Monica can exploit a poorly protected cloud API to enumerate resources and manipulate backend cloud services"
+    desc: Monica can exploit a poorly protected cloud API to enumerate resources and manipulate backend cloud services
   -
     id: CLD7
     value: 7
     url: https://cornucopia.owasp.org/cards/CLD7
-    desc: "Jon can escape from a compromised container and gained access to the underlying cloud host"
+    desc: Jon can escape from a compromised container and gain access to the underlying cloud host
   -
     id: CLD8
     value: 8
     url: https://cornucopia.owasp.org/cards/CLD8
-    desc: "Siddharth can exploit a shared cloud account without access isolation, using metadata and tags to identify and access resources belonging to multiple products"
+    desc: Siddharth can exploit a shared cloud account without access isolation, using metadata and tags to identify and access resources belonging to multiple products
   -
     id: CLD9
     value: 9
     url: https://cornucopia.owasp.org/cards/CLD9
-    desc: "Akash can pivot from one compromised cloud account into multiple connected environments using existing trust relationships"
+    desc: Akash can pivot from one compromised cloud account into multiple connected environments using existing trust relationships
   -
     id: CLDX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/CLDX
-    desc: "Adrian can introduce backdoored Infrastructure-as-Code templates into version control, causing vulnerable cloud environments to be deployed at scale"
+    desc: Adrian can introduce backdoored Infrastructure-as-Code templates into version control, causing vulnerable cloud environments to be deployed at scale
   -
     id: CLDJ
     value: J
     url: https://cornucopia.owasp.org/cards/CLDJ
-    desc: "Michael can compromise a build runner and injected malicious code into container images that were automatically promoted to production across all cloud clusters"
+    desc: Michael can compromise a build runner and injected malicious code into container images that were automatically promoted to production across all cloud clusters
   -
     id: CLDQ
     value: Q
     url: https://cornucopia.owasp.org/cards/CLDQ
-    desc: "Eleftherios can leverage a breach in one cloud service to pivot into another by abusing shared identities, pipelines, and secrets"
+    desc: Eleftherios can leverage a breach in one cloud service to pivot into another by abusing shared identities, pipelines, and secrets
   -
     id: CLDK
     value: K
     url: https://cornucopia.owasp.org/cards/CLDK
-    desc: "Daniele can compromise the cloud root or break-glass account, gaining irreversible control over billing, identities, and recovery mechanisms"
+    desc: Daniele can compromise the cloud root or break-glass account, gaining irreversible control over billing, identities, and recovery mechanisms
   -
     id: CLDA
     value: A
     url: https://cornucopia.owasp.org/cards/CLDA
     desc: You have invented a new attack against Cloud
-    misc: 
+    misc: Read the OWASP Cloud Architecture Security Cheat Sheet for information on risk analysis and threat modeling of cloud applications and check out OWASP Cumulus for gamified threat modeling of cloud applications
 -
   id: FRE
   name: Frontend
@@ -191,7 +191,7 @@ suits:
     desc: Sophia reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions.
   -
     id: FREX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/FREX
     desc: Piotr embeds the application in a hidden or disguised frame to trick users into clicking UI elements that perform sensitive actions.
   -
@@ -214,7 +214,7 @@ suits:
     value: A
     url: https://cornucopia.owasp.org/cards/FREA
     desc: You have invented a new attack against Frontend
-    misc: 
+    misc: Read more about Frontend threats to web applications on the website for the OWASP Top 10 Client-Side Security Risks project
 -
   id: DVO
   name: DevOps
@@ -223,68 +223,68 @@ suits:
     id: DVO2
     value: 2
     url: https://cornucopia.owasp.org/cards/DVO2
-    desc: "Aram's malicious actions against build, delivery, and deployment processes cannot be investigated, because there is no sufficient, complete, and accurately timestamped record of security events, or it has been tampered with"
+    desc: Aram's malicious actions against build, delivery, and deployment processes cannot be investigated, because there is no sufficient, complete, and accurately timestamped record of security events, or it has been tampered with
   -
     id: DVO3
     value: 3
     url: https://cornucopia.owasp.org/cards/DVO3
-    desc: "Aryan can exploit an internal system or service, because it, its infrastructure, or other components were not properly hardened, or the configuration was not maintained over time"
+    desc: Aryan can exploit an internal system or service, because it, its infrastructure, or other components were not properly hardened, or the configuration was not maintained over time
   -
     id: DVO4
     value: 4
     url: https://cornucopia.owasp.org/cards/DVO4
-    desc: "Bart is able to delete, overwrite, or download backups"
+    desc: Bart is able to delete, overwrite, or download backups
   -
     id: DVO5
     value: 5
     url: https://cornucopia.owasp.org/cards/DVO5
-    desc: "Brian can escape the runtime isolation of workloads to access host resources, execute privileged operations, or use the workloads to attack other internal systems"
+    desc: Brian can escape the runtime isolation of workloads to access host resources, execute privileged operations, or use the workloads to attack other internal systems
   -
     id: DVO6
     value: 6
     url: https://cornucopia.owasp.org/cards/DVO6
-    desc: "Daniel can cause a permanent loss of applications, source code, and data due to missing, incomplete or failed backups, or insufficient recovery documentation, training or testing"
+    desc: Daniel can cause a permanent loss of applications, source code, and data due to missing, incomplete or failed backups, or insufficient recovery documentation, training or testing
   -
     id: DVO7
     value: 7
     url: https://cornucopia.owasp.org/cards/DVO7
-    desc: "John can deploy unauthorized or malicious changes to production because deployment approval gates, validation checks, or change control processes are missing or can be bypassed"
+    desc: John can deploy unauthorized or malicious changes to production because deployment approval gates, validation checks, or change control processes are missing or can be bypassed
   -
     id: DVO8
     value: 8
     url: https://cornucopia.owasp.org/cards/DVO8
-    desc: "Maxim can deploy a malicious or otherwise modified artifact, because its integrity is not guaranteed or validated"
+    desc: Maxim can deploy a malicious or otherwise modified artifact, because its integrity is not guaranteed or validated
   -
     id: DVO9
     value: 9
     url: https://cornucopia.owasp.org/cards/DVO9
-    desc: "Nariman can control or affect pipeline execution by injecting malicious commands through poisoned or typosquatted workflow dependencies, or by manipulating CI configuration files, or in other ways"
+    desc: Nariman can control or affect pipeline execution by injecting malicious commands through poisoned or typosquatted workflow dependencies, or by manipulating CI configuration files, or in other ways
   -
     id: DVOX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/DVOX
-    desc: "Patricia can exploit obsolete DevOps credentials, identities, services, or APIs, as well as excessive privileges, to bypass access controls and gain unauthorized access to read and modify sensitive data or functionality"
+    desc: Patricia can exploit obsolete DevOps credentials, identities, services, or APIs, as well as excessive privileges, to bypass access controls and gain unauthorized access to read and modify sensitive data or functionality
   -
     id: DVOJ
     value: J
     url: https://cornucopia.owasp.org/cards/DVOJ
-    desc: "Pravir can exploit vulnerabilities in the application or development ecosystem, including repositories and DevOps infrastructure, because of outdated or poorly maintained dependencies"
+    desc: Pravir can exploit vulnerabilities in the application or development ecosystem, including repositories and DevOps infrastructure, because of outdated or poorly maintained dependencies
   -
     id: DVOQ
     value: Q
     url: https://cornucopia.owasp.org/cards/DVOQ
-    desc: "Seba can access the code repository, log files, command line history, pipelines, or other places, to gain access to secrets or other sensitive information"
+    desc: Seba can access the code repository, log files, command line history, pipelines, or other places, to gain access to secrets or other sensitive information
   -
     id: DVOK
     value: K
     url: https://cornucopia.owasp.org/cards/DVOK
-    desc: "Timo can compromise software, development environments, or DevOps tooling by injecting malicious code via external dependencies or exploited developer credentials"
+    desc: Timo can compromise software, development environments, or DevOps tooling by injecting malicious code via external dependencies or exploited developer credentials
   -
     id: DVOA
     value: A
     url: https://cornucopia.owasp.org/cards/DVOA
     desc: You have invented a new attack against DevOps
-    misc: 
+    misc: Read more about how to protect your DevOps pipelines and infrastructure on the website for the OWASP DevSecOps Maturity Model project
 -
   id: BOT
   name: Automated Threats
@@ -331,7 +331,7 @@ suits:
     desc: CSIRAC can alter a metric by using repeated link clicks, page requests or form submissions
   -
     id: BOTX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/BOTX
     desc: Ferranti Pegasus can enumerate individual authentication credentials, or payment card data (e.g. start/expiry dates, security codes), or other tokens (e.g. coupon numbers, voucher codes, discount tokens) by trying different values
   -
@@ -401,7 +401,7 @@ suits:
     desc: CoPirate can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
   -
     id: AAIX
-    value: X
+    value: 10
     url: https://cornucopia.owasp.org/cards/AAIX
     desc: DeepGeek can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives.
   -

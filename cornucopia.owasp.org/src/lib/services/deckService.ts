@@ -22,7 +22,7 @@ export class DeckService {
     private static readonly decks: Deck[] = [
         { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
-        { edition: 'webapp', version: '3.0', lang: ['en', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
+        { edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
         { edition: 'companion', version: '1.0', lang: ['en'] },
         { edition: 'dbd', version: '1.0', lang: ['en'] },
         { edition: 'eop', version: '5.0', lang: ['en', 'es', 'ru'] }
@@ -53,7 +53,7 @@ export class DeckService {
     }
 
     public static getLanguages(edition: string): string[] {
-        let languages: string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
+        const languages: string[] = DeckService.decks.filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
         return languages.length !== 0 ? languages : ['en'];
     }
     public static getLanguagesForEditionVersion(edition: string, version: string): string[] {
@@ -74,7 +74,7 @@ export class DeckService {
     let cards = new Map<string, Card>;
     const decks = DeckService.latests;
 
-    for (let i in decks) {
+    for (const i in decks) {
         cards = new Map([
             ...this.getCardDataForEditionVersionLang(decks[i].edition, decks[i].version, lang),
             ...cards
@@ -88,29 +88,28 @@ export class DeckService {
 
         const cards = new Map<string, Card>;
 
-        let cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
+        const cardFile = `${__dirname}${DeckService.path}${edition}-cards-${version}-${lang}.yaml`;
 
         if (!FileSystemHelper.hasFile(cardFile)) {
             console.warn(`Card file not found: ${cardFile}`);
             return cards;
         }
 
-        let yamlData = fs.readFileSync(cardFile, 'utf8');
-        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
+        const yamlData = fs.readFileSync(cardFile, 'utf8');
+        const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
         let base = `data/cards/${edition}-cards-${version}-${lang}/`;
 
         if (!FileSystemHelper.hasDir(base)) {
             base = `data/cards/${edition}-cards-${version}-en/`;
         }
 
-        let mapping = (new MappingService()).getCardMapping(edition, version);
+        const mapping = (new MappingService()).getCardMapping(edition, version);
 
-        for (let suit in data['suits']) {
-            let suitObject: any = data['suits'][suit];
-            let suitName: string = mapping['suits'][suit]['name'];
-            for (let card in suitObject['cards']) {
-                let cardObject = suitObject['cards'][card];
-                cardObject.id = cardObject['id'];
+        for (const suit in data['suits']) {
+            const suitObject: Record<string, unknown> = data['suits'][suit];
+            const suitName: string = mapping['suits'][suit]['name'];
+            for (const card in suitObject['cards']) {
+                const cardObject = suitObject['cards'][card];
                 cardObject.edition = edition;
                 cardObject.version = version;
                 cardObject.language = lang;
@@ -120,10 +119,10 @@ export class DeckService {
                 cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                 cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
                 cardObject.url = `/edition/${edition}/${cardObject.id}/${version}/${lang}`;
-                let cardFolderPath = cardObject.suit + '/' + cardObject.id;
+                const cardFolderPath = cardObject.suit + '/' + cardObject.id;
                 cardObject.githubUrl = base + cardFolderPath + '/explanation.md';
 
-                let path: string = `./${base}${cardFolderPath}/technical-note.md`;  // '/explanation.md';
+                const path: string = `./${base}${cardFolderPath}/technical-note.md`;  // '/explanation.md';
                 let file: string;
                 try {
                     file = fs.readFileSync(path, 'utf8');
@@ -133,7 +132,7 @@ export class DeckService {
                     );
                     continue;
                 }
-                let parsed = fm(file);
+                const parsed = fm(file);
                 cardObject.concept = parsed.body;
                 const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
@@ -160,8 +159,6 @@ export class DeckService {
                 } else {
                     cardObject.next = suitObject['cards'][+card + 1]['id'];
                 }
-                cardObject.prevous = cardObject.prevous;
-                cardObject.next = cardObject.next;
 
                 cards.set(cardObject.id, cardObject);
             }

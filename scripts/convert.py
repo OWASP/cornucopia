@@ -366,7 +366,7 @@ def create_edition_from_template(
         logging.error("No metadata found. Cannot proceed.")
         return
 
-    template_doc: str = get_template_for_edition(layout, template, edition)
+    template_doc: str = get_template_for_edition(layout, template, edition, language)
     if template_doc == "None":
         return
     file_name, file_extension = os.path.splitext(template_doc)
@@ -511,7 +511,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "\nFor the Mobile edition:"
             "\nVersion 1.0 will deliver cards mapped to MASVS 2.0"
             "\nVersion 1.1 will deliver cards mapped to MASVS 2.0"
-            "\nVersion all will deliver all versions of cornucopia"
+            "\nFor the Companion edition:"
+            "\nVersion 1.0 will deliver cards mapped to various standards"
+            "\nVersion: all will deliver all versions of cornucopia"
             "\nVersion latest will deliver the latest deck versions of cornucopia"
             "\nYou can also specify another version explicitly if needed. "
             "If so, there needs to be a yaml file in the source folder where the name contains "
@@ -551,9 +553,11 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         type=is_valid_string_argument,
         default="en",
         help=(
-            f"Output language to produce. {convert_vars.LANGUAGE_CHOICES} "
-            "you can also specify your own language file. If so, there needs to be a yaml "
-            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml"
+            "Output language to produce (e.g: all, en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru, uk, hi)\n"
+            "you can also specify your own language file. If so, there needs to be a yaml\n"
+            "file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml\n"
+            "You also need to have the code defined as part of the meta info in the yaml meta -> language -> en\n"
+            "(e.g: meta['language']['en'])"
         ),
     )
     group = parser.add_mutually_exclusive_group(required=False)
@@ -580,8 +584,9 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
         default="all",
         help=(
             f"Output decks to produce. {convert_vars.EDITION_CHOICES}\n"
-            "The various Cornucopia decks. `web` will give you the Website App edition.\n"
+            "The various Cornucopia decks. `webapp` will give you the Website App edition.\n"
             "`mobileapp` will give you the Mobile App edition.\n"
+            "`companion` will give you the Companion edition.\n"
             "You can also speficy your own edition. If so, there needs to be a yaml "
             "file in the source folder where the name contains the edition code. Eg. edition-template-ver-lang.yaml"
         ),
@@ -931,7 +936,11 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
         if el_new:
             return el_new
         reg = r"(?<!\S)" + re.escape(k.strip()) + r"(?!\S)"
-        el_text = re.sub(reg, v, el_text)
+
+        try:
+            el_text = re.sub(reg, v, el_text)
+        except Exception as e:
+            logging.warning(f"Regex error for key '{k}', value '{v}', text '{el_text}': {e}")
     return el_text
 
 
@@ -952,7 +961,9 @@ def get_suit_tags_and_key(key: str, edition: str) -> Tuple[List[str], str]:
     return suit_tags, suit_key
 
 
-def get_template_for_edition(layout: str = "guide", template: str = "bridge", edition: str = "webapp") -> str:
+def get_template_for_edition(
+    layout: str = "guide", template: str = "bridge", edition: str = "webapp", language: str = "en"
+) -> str:
     """Get template document for the specified edition."""
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
@@ -981,16 +992,25 @@ def get_template_for_edition(layout: str = "guide", template: str = "bridge", ed
             template_doc = args_input_file
             logging.debug(f" --- Template_doc NOT found. Input File = {args_input_file}")
     else:
-        # No input file specified - using defaults
-        template_doc = os.path.normpath(
+        # No input file specified - try language-specific template first, then fall back to generic
+        base_template = (
             convert_vars.BASE_PATH
             + os.sep
             + convert_vars.DEFAULT_TEMPLATE_FILENAME.replace("edition", edition)
             .replace("layout", layout)
             .replace("document_template", template)
-            + "."
-            + sfile_ext
         )
+        # Build language-specific path (e.g. ..._bridge_en.odt)
+        lang_template_doc = os.path.normpath(base_template.replace("_lang", "_" + language) + "." + sfile_ext)
+        # Build generic fallback path (e.g. ..._bridge_lang.odt)
+        generic_template_doc = os.path.normpath(base_template + "." + sfile_ext)
+
+        if os.path.isfile(lang_template_doc):
+            template_doc = lang_template_doc
+            logging.info(f" --- Using language-specific template: {lang_template_doc}")
+        else:
+            template_doc = generic_template_doc
+            logging.info(f" --- Using generic template (no language-specific found): {generic_template_doc}")
 
     template_doc = template_doc.replace("\\ ", " ")
     template_doc = str(Path(sanitize_filepath(template_doc)))
@@ -1279,6 +1299,22 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     return cast(List[ElTree.Element], elements)
 
 
+def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
+    """Replace text and tail text in an XML element."""
+    if el.text:
+        new_text = get_replacement_value_from_dict(el.text, replacement_values)
+        if new_text != el.text:
+            el.text = new_text
+            modified = True
+    for child in el:
+        if child.tail:
+            new_tail = get_replacement_value_from_dict(child.tail, replacement_values)
+            if new_tail != child.tail:
+                child.tail = new_tail
+                modified = True
+    return modified
+
+
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
     """Replace text in XML file."""
     logging.debug(f" --- starting xml_replace for {filename}")
@@ -1297,11 +1333,7 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
 
     modified = False
     for el in elements_to_check:
-        if el.text:
-            new_text = get_replacement_value_from_dict(el.text, replacement_values)
-            if new_text != el.text:
-                el.text = new_text
-                modified = True
+        modified = _replace_element_text(el, replacement_values, modified)
 
     if modified:
         try:
