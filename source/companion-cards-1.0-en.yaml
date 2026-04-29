@@ -450,7 +450,7 @@ paragraphs:
     text: Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied.
   -
     id: T00130
-    text: All project leaders and contributors to the OWASP projects that have provided valuable input and guidance to OWASP Top 10, OWASP AISVS and the OWASP GenAI Security project. We also want to thank the people and contributors to Mitre's Common Attack Pattern Enumeration and Classification (CAPEC™) and Mitre Atlas™, and the Cloud Security Alliance's for the use of the Cloud Controls Matrix, which are all used in the cross-references provided.
+    text: All project leaders and contributors to the OWASP projects that have provided valuable input and guidance to OWASP Top 10, OWASP AISVS and the OWASP GenAI Security project. We also want to thank the people and contributors to Mitre's Common Attack Pattern Enumeration and Classification (CAPEC™) and Mitre Atlas™, and the Cloud Security Alliance for the use of the Cloud Controls Matrix, which are all used in the cross-references provided.
   -
     id: T00140
     text: All previous contributors, supporters, sponsors and volunteers that have contributed and supported the OWASP Cornucopia project over the years.
@@ -492,7 +492,7 @@ paragraphs:
     text: Contains threats covered by OWASP Automated Threats to Web Applications.
   -
     id: T00340
-    text: Web applications are subjected to unwanted automated usage - day in, day out. Often, these events relate to misuse of inherent valid functionality, rather than the attempted exploitation of unmitigated vulnerabilities. Also, excessive misuse is commonly mistakenly reported as application denial-of-service (DoS), like HTTP-flooding, when in fact the DoS is a side-effect instead of the primary intent. This project enumerates these intents.
+    text: Web applications are subjected to unwanted automated usage - day in, day out. Often, these events relate to misuse of inherent valid functionality, rather than the attempted exploitation of unmitigated vulnerabilities. Also, excessive misuse is commonly mistakenly reported as application denial-of-service (DoS), when in fact the DoS is a side-effect instead of the primary intent. This project enumerates these intents.
   -
     id: T00350
     text: "Cloud (CLD):"
