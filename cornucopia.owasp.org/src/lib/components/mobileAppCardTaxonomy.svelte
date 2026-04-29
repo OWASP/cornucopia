@@ -10,7 +10,6 @@
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import Attacks from "./attacks.svelte";
     import { readTranslation } from "$lib/stores/stores";
-    import { Text } from "$lib/utils/text";
     interface Props {
       mappingData: any;
       card: Card;
