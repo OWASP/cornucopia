@@ -8,6 +8,7 @@
     import type { Route } from "../../domain/routes/route";
     import { MappingController, type WebAppMapping } from "../../domain/mapping/mappingController";
     import { readTranslation } from "$lib/stores/stores";
+    import { Text } from "$lib/utils/text";
   interface Props {
     mappingData: any;
     card: Card;
@@ -23,7 +24,7 @@
     function linkASVS(input: string) {
       input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
       let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
-      let searchString = FormatToDoubleDigitSearchstring(input);
+      let searchString = Text.FormatToDoubleDigitSearchstring(input);
       let result: Route | undefined = ASVSRoutes.find(
         (route) => route.Section === searchString
       );
@@ -43,17 +44,6 @@
         "D": 'Denial of Service',
         "E": 'Elevation of Privilege',
       }[input] || input;
-    }
-  
-    function FormatToDoubleDigitSearchstring(input: string) {
-      input = String(input)
-      let str =
-        input.lastIndexOf(".") !== -1
-          ? input.substring(0, input.lastIndexOf("."))
-          : input;
-      let parts = str.split(".").map((part) => part.padStart(2, "0"));
-      let searchString = parts.join(".");
-      return searchString;
     }
   
     function linkCapec(input: string) {
@@ -154,4 +144,3 @@
       padding: 0.5rem;
     }
   </style>
-  

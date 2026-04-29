@@ -10,6 +10,7 @@
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import Attacks from "./attacks.svelte";
     import { readTranslation } from "$lib/stores/stores";
+    import { Text } from "$lib/utils/text";
     interface Props {
       mappingData: any;
       card: Card;
@@ -30,17 +31,6 @@
     function linkMASTG(test: string) {
       let base = '/taxonomy/mastg-1.7.0/masvs-';
       return test in MASTG_TESTS_MAPPING ? (base + MASTG_TESTS_MAPPING[test].toLowerCase() + '/mastg-' + test.toLowerCase() + '#MASTG-' + test) : '';
-    }
-  
-    function FormatToDoubleDigitSearchstring(input: string) {
-      input = String(input)
-      let str =
-        input.lastIndexOf(".") !== -1
-          ? input.substring(0, input.lastIndexOf("."))
-          : input;
-      let parts = str.split(".").map((part) => part.padStart(2, "0"));
-      let searchString = parts.join(".");
-      return searchString;
     }
   
     function linkCapec(input: string) {

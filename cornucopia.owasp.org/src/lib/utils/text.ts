@@ -77,4 +77,14 @@ export class Text
         if (!input) return "";
         return String(input).trim().replaceAll('https','').replaceAll('http','').replaceAll('://','')
     }
+
+    public static FormatToDoubleDigitSearchstring(input: string): string {
+        if (!input) return "";
+        const str = String(input);
+        const base = str.lastIndexOf(".") !== -1
+            ? str.substring(0, str.lastIndexOf("."))
+            : str;
+        const parts = base.split(".").map((part) => part.padStart(2, "0"));
+        return parts.join(".");
+    }
 }
