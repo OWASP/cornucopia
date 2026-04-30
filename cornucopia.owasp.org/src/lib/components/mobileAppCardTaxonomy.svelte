@@ -33,7 +33,6 @@
       return test in MASTG_TESTS_MAPPING ? (base + MASTG_TESTS_MAPPING[test].toLowerCase() + '/mastg-' + test.toLowerCase() + '#MASTG-' + test) : '';
     }
   
-  
     function linkCapec(input: string) {
       return "/taxonomy/capec-3.9/" + input;
     }
