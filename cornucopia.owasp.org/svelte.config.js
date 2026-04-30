@@ -340,6 +340,8 @@ export default {
 				'/api/cre/webapp/pt_br',
 				'/api/cre/webapp/no_nb',
 				'/api/cre/mobileapp/en',
+				'/api/cre/companion/en',
+				'/api/lang/companion/1.0',
 				'/api/cre/dbd/en',
 				'/api/cre/mobileapp/hi',
                 '/api/cre/mobileapp/uk',

@@ -2,45 +2,47 @@
 import type { Card } from "../card/card";
 import type { MappingController } from "../mapping/mappingController";
 
-export type Cre  = 
-{
-    doctype: string; 
-    name: any; 
-    section: string; 
-    description: string; 
-    sectionID: string; 
-    hyperlink: string; 
-    links: CreLink[];
-    tags: never[];
-    tooltype: string;
-}
+export type Cre =
+    {
+        doctype: string;
+        name: any;
+        section: string;
+        description: string;
+        sectionID: string;
+        hyperlink: string;
+        links: CreLink[];
+        tags: never[];
+        tooltype: string;
+    }
 
-export type CreLink = 
-{
-    document: CreDocument;
-    ltype: string;
-}
+export type CreLink =
+    {
+        document: CreDocument;
+        ltype: string;
+    }
 
-export type CreDocument = 
-{
-    doctype: string;
-    id: string;
-}
+export type CreDocument =
+    {
+        doctype: string;
+        id: string;
+    }
 
 
 export class CreController {
     private deck: Map<string, Card>;
     private controller: MappingController;
 
-    private static editions: Map<string, string>  = new Map<string, string>( [
+    private static editions: Map<string, string> = new Map<string, string>([
         ['webapp', "OWASP Cornucopia Website App Edition"],
         ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
+        ['companion', "OWASP Cornucopia Companion Edition"]
         ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"]
     ]);
 
-    private static category: Map<string, string>  = new Map<string, string>( [
+    private static category: Map<string, string> = new Map<string, string>([
         ['webapp', "Website Application"],
         ['mobileapp', "Mobile Application"],
+        ['companion', "Companion suits"]
         ['dbd', "Digital Benefits and Disbenefits"]
     ]);
 
@@ -57,8 +59,8 @@ export class CreController {
         if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
         const standards: Cre[] = [];
         (this.deck || []).forEach(
-                (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
-            );
+            (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
+        );
         return {
             "meta": {
                 "edition": CreController.editions.get(edition),
