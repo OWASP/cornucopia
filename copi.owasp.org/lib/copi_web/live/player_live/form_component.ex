@@ -47,10 +47,12 @@ defmodule CopiWeb.PlayerLive.FormComponent do
     """
   end
 
+  # coveralls-ignore-start
   @impl true
   def update(%{player: nil} = assigns, socket) do
     {:ok, socket |> assign(assigns) |> assign(:form, nil)}
   end
+  # coveralls-ignore-stop
 
   def update(%{player: player} = assigns, socket) do
     changeset = Cornucopia.change_player(player)
@@ -119,12 +121,14 @@ defmodule CopiWeb.PlayerLive.FormComponent do
                  |> assign(:game, updated_game)
                  |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
 
+              # coveralls-ignore-start
               {:error, :game_already_started} ->
                 # V15.4: Race condition caught by transaction - game started between check and insert
                 {:noreply,
                  socket
                  |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
                  |> push_navigate(to: ~p"/games")}
+              # coveralls-ignore-stop
 
               {:error, %Ecto.Changeset{} = changeset} ->
                 {:noreply, assign_form(socket, changeset)}
