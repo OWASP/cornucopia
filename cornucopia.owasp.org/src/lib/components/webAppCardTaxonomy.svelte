@@ -73,7 +73,7 @@
   </script>
 
     {#if hasMappings }
-      <h2 class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
+      <h2 id="mappings" class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
       {#if mappings.stride}
       <MappingsList 
         title="STRIDE:" 
@@ -126,12 +126,12 @@
       />
     {/if}
   
-    <h1 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h1>
+    <h2 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h2>
     {#if hasMappings && mappings.owasp_asvs}
 
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]} version={asvsVersion}></ASVSOverview>
     {/if}
-    <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>
+    <h2 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h2>
     {#each attacks || [] as attack (attack.url)}
       <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
     {/each}
