@@ -23,7 +23,7 @@ suits:
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
-    desc: Andersen can manipulate retrieval knowledge bases, vector databases, metadata, policies, RAG or MCP sources so the model retrieves and presents false, biased, or malicious information as facts
+    desc: Andersen can manipulate retrieval knowledge bases, vector databases, metadata, policies, or other RAG or MCP sources so the model retrieves and presents false, biased, or malicious information as facts
   -
     id: LLM5
     value: 5

@@ -24,21 +24,13 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Identify instances where AI outputs are presented as authoritative facts without adequate disclaimers or calls for human verification.
 - Assess the presence, clarity, and prominence of mechanisms that encourage or enforce human-in-the-loop validation and oversight.
 - Evaluate the potential risks arising from blind trust in AI recommendations, particularly in safety-critical or expert domains.
-- Test for content bias in AI-generated outputs that could typically originate from training data.
-- Detect instances where AI-generated outputs include incorrect or fabricated information.
-- Identify the conditions or contexts in which hallucinations most frequently occur.
 - Implement kill-switch mechanism to immediately halt AI model inference and outputs.
 - Trigger human review flows based on which actions you classify as risky according to your human oversight policy.
 - Implement fallbacks for time-sensitive decisions in case a timely human approval cannot be obtained. 
-- Ensure content classifiers scores every request for harmful content and configure thresholds, before the prompt is included in the model context.
 - Reject all input which violate safety policies according to acceptable thresholds.
-- The system should assess the reliability of AI generated answers using a confidence and uncertainty estimation and block answers or deliver fallback messages when confidence drops below an acceptable threshold.
 - Implement guardrails to prevent the LLM from generating disallowed content categories.
-- Run an alignment test suite for every model update to ensure the model doesn't drift.
 - Calibrate model outputs using temperature scaling or output perturbation according to your testing to reduce overconfident predictions.
 - Models serving high-risk functions should be evaluated against known adversarial attack techniques.
-- AI systems should provide confidence scores or uncertainty measures with their outputs. Any output exceeding uncertainty thresholds should trigger additional human review or compensating controls. 
-- Any uncertainty quantification methods should then be calibrated and validated against ground truth data.
-
+- AI systems should provide confidence indicators or uncertainty measures with their outputs. Any output exceeding uncertainty thresholds should trigger additional human review or compensating controls. 
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AISVS](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AITG](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
