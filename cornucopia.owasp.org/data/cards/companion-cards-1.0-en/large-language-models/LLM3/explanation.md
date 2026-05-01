@@ -9,7 +9,7 @@ Samantha is an avid Vibe coder. She does a lot of coding using LLM, but she can'
 ### STRIDE
 
 This scenario falls into the **Denial of Service** category of STRIDE.
-Samantha can make requests of the AI chatbot until the application gets involuntarily shutdown.
+Samantha can make requests of the AI chatbot until the application is involuntarily shut down.
 
 ### What can go wrong?
 
