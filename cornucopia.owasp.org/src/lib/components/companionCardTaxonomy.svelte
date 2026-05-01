@@ -55,11 +55,11 @@
 </script>
 
 {#if mappings}
-    <h1 class="title">{$t("cards.companionCardTaxonomy.h1.1")}</h1>
+    <h2 id="mapping" class="title">{$t("cards.companionCardTaxonomy.h1.1")}</h2>
     {#each displayMappings as mapping (mapping.label)}
         <MappingsList title={mapping.label} mappings={mapping.values} />
     {/each}
-    <h1 class="title">{$t("cards.companionCardTaxonomy.h1.2")}</h1>
+    <h2 class="title">{$t("cards.companionCardTaxonomy.h1.2")}</h2>
     {#if attacks}
         <Attacks {mappings} {attacks} />
     {/if}
