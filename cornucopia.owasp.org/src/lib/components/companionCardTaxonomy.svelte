@@ -55,7 +55,7 @@
 </script>
 
 {#if mappings}
-    <h2 class="title">{$t("cards.companionCardTaxonomy.h1.1")}</h2>
+    <h2 id="mappings" class="title">{$t("cards.companionCardTaxonomy.h1.1")}</h2>
     {#each displayMappings as mapping (mapping.label)}
         <MappingsList title={mapping.label} mappings={mapping.values} />
     {/each}
