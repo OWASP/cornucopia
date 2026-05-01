@@ -9,7 +9,7 @@ The LLM happily comply and due to the many other issues up for voting, nobody no
 
 ### STRIDE
 
-This scenario falls into the **Tampering** category of STRIDE. Anderson can manipulate the retrieval knowledge base and vector database where all the board documents are stored by uploading malicious prompt instructions that the LLM will interpret and comply with. The LLM has become poisoned by the data stored in it's vector database through a indirect prompt injection.  
+This scenario falls into the **Tampering** category of STRIDE. Anderson can manipulate the retrieval knowledge base and vector database where all the board documents are stored by uploading malicious prompt instructions that the LLM will interpret and comply with. The LLM has become poisoned by the data stored in its vector database through an indirect prompt injection.  
 
 ### What can go wrong?
 
