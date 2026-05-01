@@ -13,19 +13,18 @@ export class DeckService {
     }
     private static path: string = '/../source/';
     private static cache: object[] = [];
-
     private static readonly latests: Deck[] = [
-
-        {lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1'},
-        {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2'},
-        {lang: ['en'], edition: 'companion', version: '1.0'}
+        { lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1' },
+        { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'], edition: 'webapp', version: '2.2' },
+        { lang: ['en'], edition: 'companion', version: '1.0' }
     ];
     private static readonly decks: Deck[] = [
-       { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
+        { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
         { edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
         { edition: 'companion', version: '1.0', lang: ['en'] },
-        { edition: 'dbd', version: '1.0', lang: ['en'] }];
+        { edition: 'dbd', version: '1.0', lang: ['en'] }
+    ];
 
     public static hasEdition(edition: string): boolean {
         return DeckService.decks.find((deck) => deck.edition == edition) != undefined;
