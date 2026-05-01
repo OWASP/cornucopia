@@ -47,7 +47,7 @@
   </script>
 
     {#if mappings }
-      <h2 id="mappings" class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h2>
+      <h2 id="mapping" class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h2>
       {#if mappings.owasp_masvs}
       <MappingsList
         title="OWASP MASVS:"
