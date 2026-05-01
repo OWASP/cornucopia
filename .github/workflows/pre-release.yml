@@ -96,13 +96,13 @@
               mkdir -p output/cornucopia_mobileapp || echo "Ignore error"
               mkdir -p output/cornucopia_mobileapp/Links || echo "Ignore error"
               mkdir -p output/cornucopia_mobileapp/Fonts || echo "Ignore error"
-              cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_mobileapp/Links/
+              cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
               cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
               # Building Cornucopia Companion Edition
               mkdir -p output/cornucopia_companion || echo "Ignore error"
               mkdir -p output/cornucopia_companion/Links || echo "Ignore error"
               mkdir -p output/cornucopia_companion/Fonts || echo "Ignore error"
-              cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_companion/Links/
+              cp -rf ./resources/templates/Links/cornucopia_companion output/cornucopia_companion/Links/
               cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_companion/Fonts/
               #
               pipenv run python scripts/convert.py -l all -lt all -t all -v 3.0 -e webapp
@@ -111,7 +111,8 @@
               pipenv run python scripts/convert.py -l all -lt guide -t bridge_qr -v 3.0 -e webapp --pdf
               pipenv run python scripts/convert.py -l en -lt guide -t bridge -v 3.0 -e webapp --pdf
               pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 3.0 -e webapp --pdf
-              pipenv run python scripts/convert.py -l en -lt cards -t tarot_qr -v 1.0 -e companion
+              pipenv run python scripts/convert.py -l en -lt cards -t tarot -v 1.0 -e companion
+              pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 1.0 -e companion
 
               #
               # Debug: List generated files to verify PDF and ODT files exist
@@ -130,7 +131,7 @@
               cp output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_pt_pt.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_pt_pt.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_pt_pt.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_pt_pt.idml output/cornucopia_webapp/
               cp output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_ru.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_ru.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_ru.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_ru.idml output/cornucopia_webapp/
               cp output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_it.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_it.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_it.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_it.idml output/cornucopia_webapp/
-              cp output/owasp_cornucopia_companion_1.0_cards_tarot_qr_en.idml output/cornucopia_companion/
+              cp output/owasp_cornucopia_companion_1.0_cards_tarot_en.idml output/owasp_cornucopia_companion_1.0_leaflet_tarot_en.idml output/cornucopia_companion/
               zip -r output/owasp_cornucopia_mobileapp_1.1_en.zip output/cornucopia_mobileapp/Links/* output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_mobileapp_scoresheet.pdf
               zip -r output/owasp_cornucopia_webapp_3.0_en.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
               zip -r output/owasp_cornucopia_webapp_3.0_hi.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_hi.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_hi.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_hi.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_hi.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
@@ -234,9 +235,9 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_ru.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_hi.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_uk.pdf
-                resources/case/*\3.0_case_*
-                resources/case/*\1.1_case_*
-                resources/case/*\1.0_case_*
+                resources/case/*\3.0_case_*.pdf
+                resources/case/*\1.1_case_*.pdf
+                resources/case/*\1.0_case_*.pdf
                 source/*1\.1-*.yaml
                 source/*3\.0-*.yaml
                 output/owasp_cornucopia_companion_1.0_en.zip

@@ -425,3 +425,164 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAIA
     desc: You have identified an attack that misuses inherent Agentic AI functionality or a related design flaw
     misc: Read more about threats and mitigations at the OWASP Gen AI Security projects
+paragraphs:
+-
+  id: Common
+  name: Common
+  sentences:
+  -
+    id: Title
+    text: Companion Edition v1.0 (EN)
+  -
+    id: T00010
+    text: The Cornucopia expansion pack"
+  -
+    id: T00020
+    text: Authors
+  -
+    id: T00100
+    text: Acknowledgements
+  -
+    id: T00110
+    text: "Cornucopia is developed, maintained, updated and promoted by a worldwide team of volunteers. With out them, Cornucopia would not have been possible. In addition, we want to thank the following people and projects for their contributions and inspiration:"
+  -
+    id: T00120
+    text: Adam Shostack and the Microsoft SDL Team for the “Elevation of Privilege Threat Modelling Game”, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied.
+  -
+    id: T00130
+    text: All project leaders and contributors to the OWASP projects that have provided valuable input and guidance to OWASP Top 10, OWASP AISVS and the OWASP GenAI Security project. We also want to thank the people and contributors to Mitre's Common Attack Pattern Enumeration and Classification (CAPEC™) and Mitre Atlas™, and the Cloud Security Alliance for the use of the Cloud Controls Matrix, which are all used in the cross-references provided.
+  -
+    id: T00140
+    text: All previous contributors, supporters, sponsors and volunteers that have contributed and supported the OWASP Cornucopia project over the years.
+  -
+    id: T00150
+    text: OWASP® Cornucopia is free to use. It is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
+  -
+    id: T00160
+    text: "© 2012-2026 OWASP Foundation. All rights reserved."
+  -
+    id: T00200
+    text: Introduction
+  -
+    id: T00210
+    text: The companion deck contains several optional suits each one covering a particular application security topic, intended to be used with the existing OWASP Cornucopia Website- & Mobile App Editions. A suit in the companion deck may replace one (or be used in addition) in the existing Website App Edition so that the players can add a specific focus for their threat modeling. They may also be used as a trump instead of the Cornucopia suit.
+  -
+    id: T00220
+    text: For example, say you are building an LLM application and want to perform threat modeling focused on LLMs and the Web. If so, you can use the OWASP Cornucopia Website App Edition and the LLM companion suit as your elected OWASP Cornucopia focus area.
+  -
+    id: T00230
+    text: Each attack on cards from the various Cornucopia Companion deck suits showcases AppSec requirements from different OWASP projects and beyond, commemorating and celebrating the 25th anniversary of the OWASP Foundation. Don’t gamble with your application security, play cards with it!
+  -
+    id: T00300
+    text: The card deck (pack)
+  -
+    id: T00310
+    text: "Agentic AI (AAI):"
+  -
+    id: T00315
+    text: Contains threats covered by OWASP Agentic Top 10 and Mitre Atlas™. The suit is meant to be used when developing applications that make use of agentic capabilities.
+  -
+    id: T00320
+    text: The OWASP Top 10 for Agentic Applications 2026 is a globally peer-reviewed framework that identifies the most critical security risks facing autonomous and agentic AI systems. Developed through extensive collaboration with more than 100 industry experts, researchers, and practitioners, the list provides practical, actionable guidance to help organizations secure AI agents that plan, act, and make decisions across complex workflows.
+  -
+    id: T00330
+    text: "Automated Threats (BOT):"
+  -
+    id: T00335
+    text: Contains threats covered by OWASP Automated Threats to Web Applications.
+  -
+    id: T00340
+    text: Web applications are subjected to unwanted automated usage - day in, day out. Often, these events relate to misuse of inherent valid functionality, rather than the attempted exploitation of unmitigated vulnerabilities. Also, excessive misuse is commonly mistakenly reported as application denial-of-service (DoS), when in fact the DoS is a side-effect instead of the primary intent. This project enumerates these intents.
+  -
+    id: T00350
+    text: "Cloud (CLD):"
+  -
+    id: T00355
+    text: Contains threats from MITRE ATT&CK®, specifically those that affect cloud applications. The suit can be used when the application under development is cloud-based to cover the cloud aspects for the application. For a more thorough threat modeling of cloud applications, you can use OWASP Cumulus, which you can play online at copi.owasp.org. 
+  -
+    id: T00360
+    text: "DevOps (DVO):"
+  - 
+    id: T00365
+    text: Covers threats applicable to teams that are responsible for both the development, deployment, and, to a certain extent, the operation of their applications. It covers CAPECs™ related to supply chain risks, acquisition, and deployment.
+  -
+    id: T00370
+    text: "Frontend (FRE):"
+  -
+    id: T00375
+    text: Contains threats from OWASP Top 10 Client-Side Security Risks and the OWASP Top 10. The suit is meant for Angular, Electron, and React applications that may be entirely frontend or built with a thin backend layer.
+  -
+    id: T00380
+    text: "Large Language Models (LLM):"
+  -
+    id: T00385
+    text: Based on OWASP Top 10 for Large Language Model Applications. The suit can be used to integrate with LLMs. It also covers basic threats related to training and tuning. For more in-depth threat modeling of LLM with respect to the machine learning aspects, please do a separate session and use Elevation of MLSec, which you can play online at copi.owasp.org.
+  -
+    id: T00400
+    text: How to use the cards
+  -
+    id: T00410
+    text: "Choose the suits you want to use based on the scope of the development. If in doubt, read the previous section for information about each suit. It’s a good idea to establish the development scope upfront, before the threat modeling session, so the development team knows which components should be included in the data flow diagram they will prepare before the session. This way, we can know:"
+  - 
+    id: T00415
+    text: What are we working on?
+  -
+    id: T00420
+    text: Feel free to exclude any suits from your main deck, either the Website App or the Mobile App decks, and use the suits from the Companion deck instead. You can also choose to use the Companion suits in addition to all of the suits or play a specific Companion suit as a trump in the same way as with the Cornucopia suit. Make sure you make it clear up front which suit is a trump, if any.
+  - 
+    id: T00430
+    text: "Make sure the team knows the Cornucopia rules before playing. If in doubt, read the general instructions for how to play with the cards on the OWASP Cornucopia website:"
+  -
+    id: T00500
+    text: "Mappings"
+  -
+    id: T00510
+    text: "Each card contains a QR code. The QR code takes you to:"
+  -
+    id: T00520
+    text: There, you will find a concrete threat example related to the card. In addition, you will also find information about
+  -
+    id: T00530
+    text: Which STRIDE category is applicable and why?
+  -
+    id: T00540
+    text: "Answer to:"
+  -
+    id: T00545
+    text: What can go wrong?
+  -
+    id: T00550
+    text: "Answer to:"
+  - 
+    id: T00555
+    text: What are we going to do about it?
+  -
+    id: T00560
+    text: Requirements related to the questions above.
+  -
+    id: T00570
+    text: "The requirements are included in the mapping. The mapping generally contains threats and requirements. The threats can help you understand the card, while the requirements will help you verify that the threats are properly mitigated. Both are important for the threat modeling and requirement analysis exercise. In addition, review what you have done in previous threat modeling sessions and revisit the threats you have identified. You can do this by having a second look at the mapping. Are there any threats you might have missed that are represented in the mapping? Did you remember to implement and verify all the requirements related to the threats? Asking these questions helps to answer the final question:"
+  -
+    id: T00575
+    text: Did we do a good job?
+  -
+    id: "T01000"
+    text: "Provide feedback"
+  -
+    id: "T01010"
+    text: "If you have ideas or feedback on the use of OWASP® Cornucopia, please share them."
+  -
+    id: "T01020"
+    text: "Even better if you create alternative versions of the cards, or produce professional print-ready versions, please share that with the volunteers who created this edition and with the wider application development and application security community."
+  -
+    id: "T01030"
+    text: "The best place to use to discuss or contribute is the list/group for the OWASP project:"
+  -
+    id: "T01040"
+    text: "List/Group:"
+  -
+    id: "T01050"
+    text: "Project home page:"
+  -
+    id: "T01060"
+    text: "You may also get in touch with us through our GitHub repository by raising a question or an issue there:"

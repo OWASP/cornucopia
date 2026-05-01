@@ -4,8 +4,8 @@ meta:
   component: mappings
   language: ALL
   version: "1.0"
-  layouts: [ cards ]
-  templates: [ tarot_qr ]
+  layouts: [ cards, leaflet ]
+  templates: [ tarot ]
   languages: ["en"]
 suits:
 -
