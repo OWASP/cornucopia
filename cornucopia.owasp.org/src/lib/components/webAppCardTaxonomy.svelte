@@ -73,7 +73,7 @@
   </script>
 
     {#if hasMappings }
-      <h2 id="mappings" class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
+      <h2 id="mapping" class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
       {#if mappings.stride}
       <MappingsList 
         title="STRIDE:" 
