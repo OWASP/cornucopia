@@ -24,10 +24,10 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Identify instances where AI outputs are presented as authoritative facts without adequate disclaimers or calls for human verification.
 - Assess the presence, clarity, and prominence of mechanisms that encourage or enforce human-in-the-loop validation and oversight.
 - Evaluate the potential risks arising from blind trust in AI recommendations, particularly in safety-critical or expert domains.
-- Implement kill-switch mechanism to immediately halt AI model inference and outputs.
+- Implement a kill-switch mechanism to immediately halt AI model inference and outputs.
 - Trigger human review flows based on which actions you classify as risky according to your human oversight policy.
 - Implement fallbacks for time-sensitive decisions in case a timely human approval cannot be obtained. 
-- Reject all input which violate safety policies according to acceptable thresholds.
+- Reject all input that violates safety policies according to acceptable thresholds.
 - Implement guardrails to prevent the LLM from generating disallowed content categories.
 - Calibrate model outputs using temperature scaling or output perturbation according to your testing to reduce overconfident predictions.
 - Models serving high-risk functions should be evaluated against known adversarial attack techniques.
