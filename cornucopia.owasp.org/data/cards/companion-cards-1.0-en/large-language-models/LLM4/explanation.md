@@ -30,6 +30,6 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Enforce fine-grained access controls for every vector collection.
 - Ensure MCP servers, client components, and their schemas can be cryptographically verified to come from trusted sources.
 - Ensure that AI systems remain reliable, privacy-preserving, and abuse-resistant when facing evasion, inference, extraction, or poisoning attacks.
-- Deliver real-time and forensic visibility into what the LLM see, do, and return, so AI-specific threats can be detected, triaged, and learned from.
+- Deliver real-time and forensic visibility into what the LLM sees, does, and returns, so AI-specific threats can be detected, triaged, and learned from.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AISVS](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AITG](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
