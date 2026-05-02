@@ -13,7 +13,7 @@ David is able to get the LLM to send him information about other users, revealin
 
 ### What can go wrong?
 
-LLMs, especially when embedded in applications, risk exposing sensitive information. This can result in data breaches, privacy violations, intellectual property theft.
+LLMs, especially when embedded in applications, risk exposing sensitive information. This can result in data breaches, privacy violations, and intellectual property theft.
 
 For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/) and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
 
