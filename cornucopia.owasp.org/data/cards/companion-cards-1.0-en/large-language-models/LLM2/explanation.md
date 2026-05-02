@@ -12,7 +12,7 @@ Tim, an avid Mr. Juice fan, is visiting the Mr. Juice chatbot to make orders, bu
 ### STRIDE
 
 This scenario falls into the **Tampering** category of STRIDE.
-Dave can exploit Mr. Juice's overreliance on LLM outputs because they lack critical human oversight. By getting multiple agents to misuse its recommendation system, he is able to change the behavior of the chatbot. Since the chatbot is no longer receiving orders and giving false information about Mr. Juice, the impact of Dave's campaign is **Denial of Service** as Tim is no longer able to buy his favorite juice. Tim has become a victim of **LLM09:2025 Misinformation**. **LLM09:2025 Misinformation** does not relate to STRIDE at all, but it can be equally or even more damaging.
+Dave can exploit Tim's overreliance on LLM outputs because Mr. Juice lacks critical human oversight. By getting multiple agents to misuse its recommendation system, he is able to change the behavior of the chatbot. Since the chatbot is no longer receiving orders and giving false information about Mr. Juice, the impact of Dave's campaign is **Denial of Service** as Tim is no longer able to buy his favorite juice. Tim has become a victim of **LLM09:2025 Misinformation**. **LLM09:2025 Misinformation** does not relate to STRIDE at all, but it can be equally or even more damaging.
 
 ### What can go wrong?
 
