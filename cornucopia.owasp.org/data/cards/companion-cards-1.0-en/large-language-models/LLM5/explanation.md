@@ -21,7 +21,7 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 
 - Implement defenses against prompt injection.
 - Implement controls to prevent cross-tenant information from leaking through the shared infrastructure components like inference caches and shared model state.
-- Implement controls to prevent cross-tenant and cross-user information leakages during retrieval and prompt assembly.
+- Implement controls to prevent cross-tenant and cross-user information leakage during retrieval and prompt assembly.
 - Ensure data from Model Context Protocol (MCP) sources are validated and verified to be trustworthy before use.
 - Implement model-extraction defenses to protect the LLM against intellectual property theft.
 - Continuously monitor and identify backdoored or poisoned input at inference time especially if external data sources are used.
