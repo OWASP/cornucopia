@@ -2,7 +2,7 @@
 
 ### Example
 
-Dave has started his own juice shop, unfortunately, he is not able to compete with Mr. Juice, the number one juice shop where he has set up shop. If only he can affect sentiment somehow. 
+Dave has started his own juice shop. Unfortunately, he is not able to compete with Mr. Juice, the number one juice shop where he has set up shop. If only he could affect sentiment somehow.
 After investigating Mr. Juice's website, he discovers that they recently launched a new LLM chatbot which can take orders and send payment requests to customers' inboxes. Dave has heard that these chatbots can easily be swayed to give biased and racist information to users so he tries out a couple of prompts and notices that the chatbot has a recommendation system that improves its answers based on user feedback. After a couple of days he deploys a group of LLM agents to talk to the chatbot and use the recommendation system in order to convince it that it to give false information about Mr. Juice and be suspicious of customers that wants to make orders. Not long after, the Mr. Juice chatbot starts to refuse orders and turn customers away from their site by telling customers that Mr. Juice is empty for juice and therefore is temporarily closed for business. Mr. Juice, on the other hand, are oblivious to what is happening as they lack the proper oversight and control of their chatbot.
 
 Tim, an avid Mr. Juice fan, is visiting the Mr. Juice chatbot to make orders, but because the chatbot has become poisoned, it is now misinforming Tim about the business. Tim has become the victim of misinformation. He ends up not buying his favorite juice as he is overreliant on its output. 
