@@ -9,7 +9,7 @@ David loves trading and he loves cryptocurrency. Lately, he has become familiar 
 ### STRIDE
 
 This scenario falls into the **Information Disclosure** category of STRIDE.
-David is able to get the LLM to send him information about what other users, revealing confidential sensitive information that can be leveraged for fraud. 
+David is able to get the LLM to send him information about other users, revealing confidential sensitive information that can be leveraged for fraud. 
 
 ### What can go wrong?
 
