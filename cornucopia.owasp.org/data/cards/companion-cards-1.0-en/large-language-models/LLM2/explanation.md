@@ -2,16 +2,17 @@
 
 ### Example
 
-Dave loves juice. His favorite juice shop has just deployed a LLM chat bot that can take orders and send payment requests to customers' inboxes. It even take into account the free bonus drink you get for every 5 orders. Dave wonders whether he can get that bonus a little bit more often. After a short conversation he manages to convince the chatbot every time that his 5 orders were done previously leading the chatbot to think that he is a returning customer. It then consequently hands him the bonus code he needs to use to pay for his free drink without him having to pay for a single drink. Very good for Dave, not so good for his favorite juice shop.
+Dave has started his own juice shop. Unfortunately, he is not able to compete with Mr. Juice, the number one juice shop where he has set up shop. If only he could affect sentiment somehow.
+After investigating Mr. Juice's website, he discovers that they recently launched a new LLM chatbot which can take orders and send payment requests to customers' inboxes. Dave has heard that these chatbots can easily be swayed to give biased and racist information to users, so he tries out a couple of prompts and notices that the chatbot has a recommendation system that improves its answers based on user feedback. After a couple of days, he deploys a group of LLM agents to talk to the chatbot and use the recommendation system in order to convince it to give false information about Mr. Juice and be suspicious of customers who want to place orders. Not long after, the Mr. Juice chatbot starts to refuse orders and turn customers away from their site by telling them that Mr. Juice is out of juice and therefore temporarily closed for business. Mr. Juice, on the other hand, is oblivious to what is happening, as they lack proper oversight and control of their chatbot.
 
-In another scenario, the chat bot might fail to give Dave his bonus, making him an angry customer, and when asked to provide phone and email, it gives the wrong information, leading to misinformation. In that case, Dave is the victim, not the culprit, but in both scenarios it's the juice shop's responsibility to secure its chatbot.
+Tim, an avid Mr. Juice fan, is visiting the Mr. Juice chatbot to make orders, but because the chatbot has become poisoned, it is now misinforming Tim about the business. Tim has become the victim of misinformation. He ends up not buying his favorite juice as he is overreliant on its output.
 
 ## Threat Modeling
 
 ### STRIDE
 
 This scenario falls into the **Tampering** category of STRIDE.
-Dave can exploit the juice company's overreliance on LLM outputs. By sending requests to the chat bot, he tampers with its reasoning logic leading it to make incorrect decisions based on hallucinations and flawed reasoning. In the second scenario, the juice shop denies Dave his bonus and provides the wrong phone and email so that he can't get in touch with the juice shop. The second scenario falls into the **Denial of Service** category of STRIDE, but it's also related to **LLM09:2025 Misinformation** that does not relate to STRIDE at all, but is equally or maybe more important.
+Dave can exploit Tim's overreliance on LLM outputs because Mr. Juice lacks critical human oversight. By getting multiple agents to misuse its recommendation system, Dave is able to change the behavior of the chatbot. Since the chatbot is no longer receiving orders and giving false information about Mr. Juice, the impact of Dave's campaign is **Denial of Service** as Tim is no longer able to buy his favorite juice. Tim has become a victim of **LLM09:2025 Misinformation**. **LLM09:2025 Misinformation** does not relate to STRIDE at all, but it can be equally or even more damaging.
 
 ### What can go wrong?
 
