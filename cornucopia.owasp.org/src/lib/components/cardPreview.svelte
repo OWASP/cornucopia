@@ -396,7 +396,7 @@
         color: white;
     }
 
-    @media (max-aspect-ratio: 1.5/1)
+    @media (max-width: 1024px)
     {
         .card-render
         {
