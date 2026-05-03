@@ -1,4 +1,4 @@
-type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
+type _DateStyle = Intl.DateTimeFormatOptions['dateStyle']
 
 export class Text
 {
@@ -45,19 +45,19 @@ export class Text
     {
         if (!input) return "";
         // This method expects 19 december 2020 as 20201219 (YYYMMDD)
-        var dateString = '' + String(input);
-        var year = parseInt(dateString.substring(0,4));
-        var month = parseInt(dateString.substring(4,6));
-        var day = parseInt(dateString.substring(6,8));
-        var date = new Date(year, month-1, day);
-        let result = date.getDate() + ' ' + date.toLocaleString('en-US', { month: 'short' }) + ', ' + date.getFullYear();
+        const dateString = '' + String(input);
+        const year = parseInt(dateString.substring(0,4));
+        const month = parseInt(dateString.substring(4,6));
+        const day = parseInt(dateString.substring(6,8));
+        const date = new Date(year, month-1, day);
+        const result = date.getDate() + ' ' + date.toLocaleString('en-US', { month: 'short' }) + ', ' + date.getFullYear();
         return result
     }
 
     public static FormatDateAsDate(date : Date)
     {
         if (!date) return "";
-        let result = date.getDate() 
+        const result = date.getDate() 
         + ' '
          + date.toLocaleString('en-US', { month: 'short' }) 
          + ', ' 

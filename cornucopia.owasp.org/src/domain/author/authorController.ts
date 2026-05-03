@@ -8,16 +8,16 @@ export function getAuthor(name: string): Author {
 }
 
 export function getAuthors(): Author[] {
-  let authors: Author[] = new Array<Author>();
-  let dirs = FileSystemHelper.getDirectories("./data/author");
+  const authors: Author[] = new Array<Author>();
+  const dirs = FileSystemHelper.getDirectories("./data/author");
 
   for (let i = 0; i < dirs.length; i++) {
-    let dir = dirs[i];
-    let filepath = "./data/author/" + dir + "/index.md";
-    let file = fs.readFileSync(filepath, "utf8");
-    let parsed: any = fm(file);
+    const dir = dirs[i];
+    const filepath = "./data/author/" + dir + "/index.md";
+    const file = fs.readFileSync(filepath, "utf8");
+    const parsed = fm<{ website: string; linkedin: string; email: string }>(file);
 
-    let author: Author = {} as Author;
+    const author: Author = {} as Author;
     author.name = dir;
     author.website = parsed?.attributes?.website ?? "";
     author.linkedin = parsed?.attributes?.linkedin ?? "";

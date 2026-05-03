@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { resolve } from "$app/paths";
+
     interface Props {
         href: string;
     }
@@ -6,7 +8,7 @@
     let { href }: Props = $props();
 </script>
 <div id="chevron">
-    <a href="{href}"><img title="Scroll down" alt="Scroll down" src="icons/chevron.png"/></a>
+    <a href={resolve(href)}><img title="Scroll down" alt="Scroll down" src="icons/chevron.png"/></a>
 </div>
 <style>   
 

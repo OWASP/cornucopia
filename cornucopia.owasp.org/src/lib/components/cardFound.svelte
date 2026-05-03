@@ -39,7 +39,7 @@
   const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
   let mappings = $derived(controller.getCardMappings(card.id));
-  let attacks: Attack[] = $derived(GetCardAttacks(card.id));
+  let _attacks: Attack[] = $derived(GetCardAttacks(card.id));
   const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
 </script>
 <LanguagePicker 

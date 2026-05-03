@@ -1,0 +1,1 @@
+This card focuses on failures in workload runtime isolation, where an attacker escapes the isolation boundary to access host resources or attack other internal systems.

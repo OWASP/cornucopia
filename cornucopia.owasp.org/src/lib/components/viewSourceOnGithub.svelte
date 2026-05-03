@@ -22,7 +22,11 @@
 </script>
 
 <div>
-    <a target="_blank" {href}>
+    <a
+        target="_blank"
+        rel="external noopener noreferrer"
+        href={href}
+    >
         <img alt="Github logo" title="Github logo" src="/icons/github.png"/>
         <span>View source on GitHub</span>
     </a>

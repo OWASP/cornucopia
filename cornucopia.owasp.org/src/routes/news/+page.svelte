@@ -1,18 +1,19 @@
 <script>
-    import { goto } from "$app/navigation";
+
     import { Text } from "$lib/utils/text";
-    import SvelteMarkdown from "svelte-markdown";
-    import { renderers } from "$lib/components/renderers/renderers";
+    import { resolve } from "$app/paths";
+
+
     import { readLang, readTranslation } from "$lib/stores/stores";
 
     /** @type {{data: any}} */
     let { data } = $props();
     let t = readTranslation();
     const langStore = readLang();
-    let content = $derived(
+    let _content = $derived(
         data?.content?.get($langStore) || data?.content?.get("en") || "",
     );
-    function getExcerpt(markdown) {
+    function _getExcerpt(markdown) {
         if (!markdown) return "";
 
         return (
@@ -43,7 +44,7 @@
         const filename = match[1].split("/").pop();
         return `/images/${filename}`;
     }
-    let authorMap = $derived(() => {
+    let _authorMap = $derived(() => {
         const list = data?.authors ?? [];
         const map = {};
 
@@ -66,13 +67,13 @@
 </svelte:head>
 
 <div>
-    {#each groupedList as group}
+    {#each groupedList as group (group.year)}
         <h2 class="year-heading">{group.year}</h2>
         <hr class="year-divider" />
         <div class="list">
-            {#each group.posts as post}
-                {@const image = extractFirstImage(post.markdown)}
-                <a class="button" href="/news/{post.path}">
+            {#each group.posts as post (post.path)}
+                {@const _image = extractFirstImage(post.markdown)}
+                <a class="button" href={resolve('/news/' + post.path)}>
                     <div class="card-header">
                         <img
                             src={`/images/authors/${post.author
@@ -97,7 +98,7 @@
         {$t("news.p2")}:
         <a
             title="OWASP Cornucopia news author: {$t('news.author.h1')}"
-            href="/author"
+            href={resolve('/author')}
         >
             {$t("news.author.h1")}
         </a>
@@ -242,3 +243,5 @@
         }
     }
 </style>
+
+

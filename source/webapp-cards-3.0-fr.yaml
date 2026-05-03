@@ -2,7 +2,7 @@
 meta:
   edition: "webapp"
   component: "cards"
-  language: "FR"
+  language: "fr"
   version: "3.0"
 suits:
 -

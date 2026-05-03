@@ -7,15 +7,15 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-let vitePluginRestartOptions = {restart: ['./data/**']}
+const vitePluginRestartOptions = {restart: ['./data/**']}
 
 // This copies the content from the filesystem data folder to the static file location under '/data/' available at runtime.
 // Also copies to server output for prerendering
-let viteStaticCopyTargets = [
+const viteStaticCopyTargets = [
 	{src: './data/**/*', dest: './'},
 	{src: './data/**/*', dest: '../server/'}
 ]
-let viteStaticCopyOptions = { targets: viteStaticCopyTargets}
+const viteStaticCopyOptions = { targets: viteStaticCopyTargets}
 
 export default defineConfig({
 	resolve: {

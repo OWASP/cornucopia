@@ -1,5 +1,6 @@
 <script>
     import { Text } from "$lib/utils/text";
+    import { resolve } from "$app/paths";
     import {readLang, readTranslation} from "$lib/stores/stores";
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import SvelteMarkdown from "svelte-markdown";
@@ -23,8 +24,8 @@
 {#if content != ''}
     <SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
 {/if}
-{#each data.categories as category}
-    <p>├──<a title="{Text.Format(category)}" href="/taxonomy/{category.toLowerCase()}">{Text.Format(category)}</a></p>
+{#each data.categories as category (category)}
+    <p>├──<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 </div>
 <style>
@@ -53,3 +54,4 @@
         }
     }
 </style>
+

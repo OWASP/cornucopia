@@ -1,5 +1,6 @@
 <script>
     import { Text } from '$lib/utils/text';
+    import { resolve } from '$app/paths';
     import SvelteMarkdown from 'svelte-markdown'
     import { renderers }  from '$lib/components/renderers/renderers';
     import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte"
@@ -22,8 +23,8 @@
 <div>
 
 <!--The location is a folder -->
-{#each data.categories as category}
-    <p>├──<a title="{Text.Format(category)}" href="{data.path}/{category.toLowerCase()}">{Text.Format(category)}</a></p>
+{#each data.categories as category (category)}
+    <p>├──<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 
 <!--The location is filecontent -->
