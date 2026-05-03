@@ -47,7 +47,7 @@
     }
 
 
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 768px) 
     {
         h1
         {

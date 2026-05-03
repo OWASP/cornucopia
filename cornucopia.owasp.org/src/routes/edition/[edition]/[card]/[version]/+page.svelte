@@ -68,7 +68,7 @@
 {/if}
 </div>
 <style>
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 768px) 
     {
         div
         {

@@ -330,7 +330,7 @@
         border-bottom: 1px var(--white) solid;
     }
 
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 768px) 
     {
         .desktop-menu {
             display: none;

@@ -40,7 +40,7 @@
         transform: translate(0,1rem) rotate(180deg);
     }
 
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 768px) 
     {
         #chevron
         {

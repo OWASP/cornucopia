@@ -79,7 +79,7 @@ a:visited {
 }
 
 .how-to-play {
-  width: 59vw;
+  width: min(59vw, 100%);
   height: auto;
   aspect-ratio: 16/9;
 }
@@ -98,7 +98,7 @@ a:visited {
 .error-text {
   outline: 1px rgb(231, 231, 231) solid;
   height: 100%;
-  min-height: 22vw;
+  min-height: auto;
   width: calc(50% - 4rem);
   opacity: 80%;
   border-radius: 1rem;
@@ -124,7 +124,7 @@ a:visited {
   display: none;
 }
 
-@media (max-aspect-ratio: 1/1) {
+@media (max-width: 768px) {
   .error-container {
     flex-direction: column;
   }
@@ -140,4 +140,20 @@ a:visited {
     height: 100%;
     width: calc(100% - 2rem);
   }
+}
+
+/* Skip to main content link for keyboard and screen reader users */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--background);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  z-index: 9999;
+  font-weight: bold;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
 }
