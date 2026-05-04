@@ -26,7 +26,7 @@
   <style>
 
 
-    @media (max-width: 768px) 
+    @media (max-width: 767px) 
     {
        div
        {

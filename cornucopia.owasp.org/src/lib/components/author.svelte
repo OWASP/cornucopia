@@ -51,7 +51,7 @@ onclick={()=>goto(resolve("/author/" + author.name))}>
         cursor:pointer;
     }
 
-    @media (max-width: 768px) 
+    @media (max-width: 767px) 
     {
         button
         {

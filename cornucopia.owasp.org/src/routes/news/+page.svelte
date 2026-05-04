@@ -223,7 +223,7 @@
         gap: 1rem;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         div {
             margin: 0 1rem;
         }

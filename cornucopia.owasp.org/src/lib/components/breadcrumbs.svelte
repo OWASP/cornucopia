@@ -85,7 +85,7 @@
     {
         text-transform: uppercase;
     }
-    @media (max-width: 768px)
+    @media (max-width: 767px)
     {
         #breadcrumbs
         {

@@ -140,7 +140,7 @@ onchange={(e) => {
     pointer-events: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .pickers {
       flex-direction: column;
       align-items: flex-start;

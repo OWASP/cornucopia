@@ -84,7 +84,7 @@
         box-shadow: var(--box-shadow);
     }
 
-        @media (max-width: 768px)
+        @media (max-width: 767px)
         {
             .vendor
             {

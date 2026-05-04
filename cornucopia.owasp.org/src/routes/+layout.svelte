@@ -89,7 +89,7 @@
         padding-bottom: 1rem;
     }
 
-    @media (max-width: 768px)
+    @media (max-width: 767px)
     {
         .slot-container
         {

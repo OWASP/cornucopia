@@ -80,7 +80,7 @@
         height : 100%;
     }
 
-    @media (max-width: 768px)
+    @media (max-width: 767px)
     {
         .deck
         {

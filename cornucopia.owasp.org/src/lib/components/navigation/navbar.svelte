@@ -331,7 +331,7 @@
         border-bottom: 1px var(--white) solid;
     }
 
-    @media (max-width: 768px) 
+    @media (max-width: 767px) 
     {
         .desktop-menu {
             display: none;
