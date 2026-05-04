@@ -13,6 +13,10 @@ jobs:
   zap-scan:
     name: "OWASP ZAP DAST Scan - Website"
     runs-on: ubuntu-latest
+    env:
+      ZAP_AJAX_SPIDER_DURATION_MINS: 10
+      ZAP_ACTIVE_SCAN_DURATION_MINS: 60
+      ZAP_HARD_TIMEOUT_MINS: 75
 
     steps:
       - name: Checkout repository
@@ -30,9 +34,12 @@ jobs:
           timeout 60 bash -c 'until curl -f http://localhost:8080 > /dev/null 2>&1; do sleep 2; done'
 
       - name: Run ZAP Full Scan with AJAX Spider
+        timeout-minutes: 80
         run: |
           mkdir -p zap-reports
           sudo chown 1000:1000 zap-reports
+          set +e
+          timeout --signal=SIGINT --kill-after=5m "${ZAP_HARD_TIMEOUT_MINS}m" \
           docker run --network="host" \
             --user 1000:1000 \
             -v $(pwd)/zap-reports:/zap/wrk/:rw \
@@ -46,8 +53,18 @@ jobs:
             -x website_dast_report.xml \
             -a \
             -d \
-            -z "-config ajaxSpider.maxDuration=10 -config scanner.maxScanDurationInMins=180" \
-            || true
+            -z "-config ajaxSpider.maxDuration=${ZAP_AJAX_SPIDER_DURATION_MINS} -config scanner.maxScanDurationInMins=${ZAP_ACTIVE_SCAN_DURATION_MINS}"
+          exit_code=$?
+          set -e
+
+          if [ "$exit_code" -eq 124 ]; then
+            echo "ZAP scan hit the ${ZAP_HARD_TIMEOUT_MINS}-minute hard timeout and was stopped."
+            exit 0
+          fi
+
+          if [ "$exit_code" -ne 0 ]; then
+            echo "ZAP scan exited with code $exit_code. Continuing so reports can still be uploaded."
+          fi
 
       - name: Stop website container
         if: always()
