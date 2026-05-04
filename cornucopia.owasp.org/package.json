@@ -28,7 +28,7 @@
 		"dotenv": "^17.4.2",
 		"eslint": "^10.3.0",
 		"eslint-plugin-svelte": "^3.17.1",
-		"globals": "^17.5.0",
+		"globals": "^17.6.0",
 		"serve": "^14.2.6",
 		"svelte": "^5.55.5",
 		"svelte-check": "^4.4.7",
