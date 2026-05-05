@@ -156,4 +156,7 @@ a:visited {
 }
 .skip-link:focus {
   top: 0;
+  color: #ffffff !important;
+  background: #1f2937 !important;
+  outline: 3px solid #ffffff;
 }
