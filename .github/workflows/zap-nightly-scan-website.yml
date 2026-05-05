@@ -17,6 +17,7 @@ jobs:
       ZAP_AJAX_SPIDER_DURATION_MINS: 10
       ZAP_ACTIVE_SCAN_DURATION_MINS: 60
       ZAP_HARD_TIMEOUT_MINS: 75
+      ZAP_CONTAINER_NAME: zap-website-scan
 
     steps:
       - name: Checkout repository
@@ -34,13 +35,15 @@ jobs:
           timeout 60 bash -c 'until curl -f http://localhost:8080 > /dev/null 2>&1; do sleep 2; done'
 
       - name: Run ZAP Full Scan with AJAX Spider
-        timeout-minutes: 80
+        timeout-minutes: 85
         run: |
           mkdir -p zap-reports
           sudo chown 1000:1000 zap-reports
+          docker rm -f "${ZAP_CONTAINER_NAME}" >/dev/null 2>&1 || true
           set +e
           timeout --signal=SIGINT --kill-after=5m "${ZAP_HARD_TIMEOUT_MINS}m" \
           docker run --network="host" \
+            --name "${ZAP_CONTAINER_NAME}" \
             --user 1000:1000 \
             -v $(pwd)/zap-reports:/zap/wrk/:rw \
             -t ghcr.io/zaproxy/zaproxy:2.16.1 \
@@ -57,8 +60,9 @@ jobs:
           exit_code=$?
           set -e
 
-          if [ "$exit_code" -eq 124 ]; then
+          if [ "$exit_code" -eq 124 ] || [ "$exit_code" -eq 137 ]; then
             echo "ZAP scan hit the ${ZAP_HARD_TIMEOUT_MINS}-minute hard timeout and was stopped."
+            docker rm -f "${ZAP_CONTAINER_NAME}" >/dev/null 2>&1 || true
             exit 0
           fi
 
@@ -66,9 +70,10 @@ jobs:
             echo "ZAP scan exited with code $exit_code. Continuing so reports can still be uploaded."
           fi
 
-      - name: Stop website container
+      - name: Stop website and ZAP containers
         if: always()
         run: |
+          docker rm -f "${ZAP_CONTAINER_NAME}" >/dev/null 2>&1 || true
           docker stop cornucopia-website || true
           docker rm cornucopia-website || true
 
