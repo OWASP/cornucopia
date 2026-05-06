@@ -21,7 +21,7 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 ### What are we going to do about it?
 
 - Make sure all model artifacts are cryptographically signed by authorized entities.
-- All artifacts used the configure plugins, MCP servers, skills, agents and teams should be stored in version control, code reviewed, and approved before deployment.
+- All artifacts used to configure plugins, MCP servers, skills, agents and teams should be stored in version control, code reviewed, and approved before deployment.
 - Model training and fine-tuning environments should be isolated from production model endpoints, agent orchestration services, tool/MCP servers, and live RAG data sources.
 - All high-risk AI operations (model deployment, weight export, training data access, production configuration changes) should require step-up authentication with session re-validation.
 - Constrain tool execution, loading, and outputs to prevent unauthorized system access and unsafe side effects.
