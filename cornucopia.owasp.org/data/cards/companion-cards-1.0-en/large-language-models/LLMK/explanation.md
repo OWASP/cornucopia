@@ -9,7 +9,7 @@ Rossum tells Ava about an exploit he recently discovered with the new Mr. Juice 
 ### STRIDE
 
 This scenario falls into the **Elevation of Privilege** category of STRIDE.
-Ava is able to execute a high-risk action, deleting Mr. Juice's customer's invoices without any form of approval from the owners of the invoices.
+Ava is able to execute a high-risk action, deleting Mr. Juice's customers' invoices without any form of approval from the owners of the invoices.
 
 ### What can go wrong?
 
