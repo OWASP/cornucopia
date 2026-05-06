@@ -28,7 +28,7 @@ suits:
     owasp_llm_top10: [ LLM10:2025 ]
     owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
     cwe: [ CWE-400, CWE-770 ]
-   -
+  -
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
