@@ -32,7 +32,7 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Log only the minimum AI interaction metadata needed for security monitoring, and ensure any prompt or output content included in logs is minimized and redacted or anonymized before storage.
 - Monitor and alert when abuse is detected.
 - MCP tools, schemas, manifests and plugin configuration should be validated for authenticity and integrity using signatures to prevent schema tampering or malicious parameter modification.
-- MCP tools, transports, clients and servers must perform input validation, output filtering and strict schema enforcement to prevent data poisoning and -exfiltration. 
+- MCP tools, transports, clients and servers must perform input validation, output filtering and strict schema enforcement to prevent data poisoning and exfiltration.
 - Ensure MCP security controls fail securely by denying requests when negotiation, authentication check, or policy evaluation fails or cannot be completed.
 - MCP servers should expose only allow-listed functions and resources and prohibit dynamic comands and queries.
 
