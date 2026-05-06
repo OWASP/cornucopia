@@ -14,7 +14,7 @@ Ava is able to execute a high-risk action, deleting Mr. Juice's customers' invoi
 ### What can go wrong?
 
 Insecure plugins or extensions, allowing the AI excessive agency over functions or data, without any form of "human-in-the-loop" control, can lead to data loss, corruption, or exfiltration of sensitive information in downstream systems.
-In these cases, the model itself can become a tool for data exfiltration of sensitive information, unauthorized access and data tampering.
+In these cases, the model itself can become a tool for data exfiltration of sensitive information, unauthorized access and data tampering. The impact can be financial losses, reputational damage, share price loss, customer churn, lawsuits, loss of sales, fines from data protection due to non-compliance and even financial bankruptcy.
 
 For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/) and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
 

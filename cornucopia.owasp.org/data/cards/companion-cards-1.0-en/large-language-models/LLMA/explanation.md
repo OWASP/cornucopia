@@ -2,7 +2,7 @@
 
 You have identified an attack that misuses inherent large language model functionality or a related design flaw. Inventing a large language model threat can lead to:
 
-1. **Prompt Injection:** Attackers can craft input that poisons and exfiltrates data or elevate privileges.
+1. **Prompt Injection:** Attackers can craft input that poisons and exfiltrates data or elevates privileges.
 2. **Sensitive Information Disclosure:** System prompts, reasoning traces, or unauthorized data sources can be exposed through adversarial interaction.
 3. **Supply Chain Attacks:** Compromised AI supply chains can affect the integrity of training data, models, and deployment platforms. The result of which is biased outputs, security breaches, or system failures.
 4. **Data and Model Poisoning:** Manipulating data during pre-training, fine-tuning, or embedding can introduce backdoors, biases. Impact can be degraded model performance, biased or toxic content, malware, data exfiltration, identity theft, service unavailability, and data corruption. 
@@ -21,7 +21,7 @@ The appropriate STRIDE category depends on the specific threat you create and th
 
 ### What can go wrong?
 
-Attacks on large language models can do irreparable damage to any type of asset. It may be possible to fix an AI model after its data has become poisoned, but it's extremely challenging, costly, and often requires complete retraining. A large language model can also be used as a springboard for other types of attacks on the system if an attacker is able to convince it to execute code or actions on behalf of the attacker. As an AI model also connects to vast amounts of data, given that access controls are insufficiently implemented, the model itself can become a tool for data exfiltration of sensitive information as well as getting stolen. The information can, in turn, be used to make users victims of fraud, identity theft, phishing, and malware attacks.
+Attacks on large language models can do irreparable damage to any type of asset. It may be possible to fix an AI model after its data has become poisoned, but it's extremely challenging, costly, and often requires complete retraining. A large language model can also be used as a springboard for other types of attacks on the system if an attacker is able to convince it to execute code or actions on behalf of the attacker. As an AI model also connects to vast amounts of data, given that access controls are insufficiently implemented, the model itself can become a tool for data exfiltration of sensitive information as well as getting stolen. The information can, in turn, be used to make users victims of fraud, identity theft, phishing, and malware attacks. The impact of such attacks can be financial losses, reputational damage, share price loss, customer churn, lawsuits, loss of sales, fines from data protection due to non-compliance and even financial bankruptcy.
 
 For more things that can go wrong, read the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/) and [Mitre Atlas™](https://atlas.mitre.org/techniques) documentation.
 

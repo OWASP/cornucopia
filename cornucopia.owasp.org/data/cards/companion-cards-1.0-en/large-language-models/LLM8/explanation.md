@@ -24,6 +24,7 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Enforce fine-grained access controls and authorization scope for every vector collection and every query.
 - Pre-screen content before vectorization; treat memory writes as untrusted inputs; prevent ingestion of unsafe payloads.
 - Log only the minimum AI interaction metadata needed for security monitoring, and ensure any prompt or output content included in logs is minimized and redacted or anonymized before storage.
+- Detect AI-specific attack patterns (jailbreak, prompt injection, model extraction, multi-turn trajectory attacks, covert channels over LLM endpoints) and enrich security events with AI-specific context so that downstream detection and response systems can act on them.
 - Monitor and alert when abuse is detected.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

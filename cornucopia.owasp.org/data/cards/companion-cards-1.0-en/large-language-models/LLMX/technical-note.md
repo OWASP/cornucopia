@@ -1,0 +1,1 @@
+This card describes how prompt injection can be used to override an AI's system instructions, allowing them to tamper with and bypass rules and elevate privileges.
