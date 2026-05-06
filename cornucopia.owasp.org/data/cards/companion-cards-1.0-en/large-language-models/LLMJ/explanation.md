@@ -9,7 +9,7 @@ Ripley has been paid by Rossum to create a better AI chatbot than Mr. Juice for 
 ### STRIDE
 
 This scenario falls into the **Tampering**, **Elevation of Privilege** and **Information Disclosure** categories of STRIDE.
-The vulnerability Ripley is taking advantage of is missing access control which belongs to the **Spoofing** category, but the act itself is to **tamper** with the ML ecosystem. That said, he is able to do so by executing arbitrary code by submitting jobs to the ML cluster without having the necessary privileges which means he is also attacking the cluster by **elevating** his own **privileges**. Finally, he has also stolen Mr Juice's AI model before he poisoned it. Stealing information falls under the **Information Disclosure** category of STRIDE.
+The vulnerability Ripley is taking advantage of is missing access control which belongs to the **Spoofing** category, but the act itself is to **tamper** with the ML ecosystem. That said, he is able to do so by executing arbitrary code by submitting jobs to the ML cluster without having the necessary privileges which means he is also attacking the cluster by **elevating** his own **privileges**. Finally, he has also stolen Mr. Juice's AI model before he poisoned it. Stealing information falls under the **Information Disclosure** category of STRIDE.
 
 ### What can go wrong?
 
