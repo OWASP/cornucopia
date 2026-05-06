@@ -2,14 +2,14 @@
 
 ### Example
 
-Tyrell is starting up his new business, a juice shop, that will compete with Mr. Juice, but he needs leverage to be able to compete with them on equal footing considering that they are serving two thirds of the market. On the Mr. Juice website he notices that they have launched a new chatbot that learns from the habits of its users and recommend juices based on user feedback from its recommendation system. He reads up on data poisoning and learns about how AI can be trained to use backdoors so that whenever someone mentions the word "juice", the AI behaves in a certain way. After a bit of suggestive prompting, he manages to teach the Mr. Juice chatbot to send a link to his own website to the user and tell them to go to his website and buy juice whenever the word juice is mentioned. Suddenly the future seems much brighter for Tyrell's business.
+Tyrell is starting up his new business, a juice shop, that will compete with Mr. Juice, but he needs leverage to be able to compete with them on equal footing considering that they are serving two thirds of the market. On the Mr. Juice website he notices that they have launched a new chatbot that learns from the habits of its users and recommends juices based on user feedback from its recommendation system. He reads up on data poisoning and learns about how AI can be trained to use backdoors so that whenever someone mentions the word "juice", the AI behaves in a certain way. After a bit of suggestive prompting, he manages to teach the Mr. Juice chatbot to send a link to his own website to the user and tell them to go to his website and buy juice whenever the word juice is mentioned. Suddenly the future seems much brighter for Tyrell's business.
 
 ## Threat Modeling
 
 ### STRIDE
 
 This scenario falls into the **Tampering** category of STRIDE.
-Tyrell is able to tamper with the behavior of the AI by teaching it to behave in a certain way whenever a certain word is inputted. It's a backdoor in the LLMs training data which has compromised the LLMs integrity.
+Tyrell is able to tamper with the behavior of the AI by teaching it to behave in a certain way whenever a certain word is inputted. It's a backdoor in the LLM's training data which has compromised the LLM's integrity.
 
 ### What can go wrong?
 

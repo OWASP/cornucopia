@@ -2,7 +2,7 @@
 
 You have identified an attack that misuses inherent large language model functionality or a related design flaw. Inventing a large language model threat can lead to:
 
-1. **Prompt Injection:** Attackers can craft input that poison and exfiltrate data or elevate privileges.
+1. **Prompt Injection:** Attackers can craft input that poisons and exfiltrates data or elevate privileges.
 2. **Sensitive Information Disclosure:** System prompts, reasoning traces, or unauthorized data sources can be exposed through adversarial interaction.
 3. **Supply Chain Attacks:** Compromised AI supply chains can affect the integrity of training data, models, and deployment platforms. The result of which is biased outputs, security breaches, or system failures.
 4. **Data and Model Poisoning:** Manipulating data during pre-training, fine-tuning, or embedding can introduce backdoors, biases. Impact can be degraded model performance, biased or toxic content, malware, data exfiltration, identity theft, service unavailability, and data corruption. 
