@@ -34,6 +34,6 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - MCP tools, schemas, manifests and plugin configuration should be validated for authenticity and integrity using signatures to prevent schema tampering or malicious parameter modification.
 - MCP tools, transports, clients and servers must perform input validation, output filtering and strict schema enforcement to prevent data poisoning and exfiltration.
 - Ensure MCP security controls fail securely by denying requests when negotiation, authentication check, or policy evaluation fails or cannot be completed.
-- MCP servers should expose only allow-listed functions and resources and prohibit dynamic comands and queries.
+- MCP servers should expose only allow-listed functions and resources and prohibit dynamic commands and queries.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
