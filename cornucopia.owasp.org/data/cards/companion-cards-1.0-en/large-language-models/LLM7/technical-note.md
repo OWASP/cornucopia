@@ -1,0 +1,1 @@
+This card illustrates how data poisoning can introduce backdoors or malicious behavior into an AI model. Mitigating these risks requires secure training data, model integrity verification, and strict access controls over the training process.

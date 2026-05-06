@@ -2,7 +2,7 @@
 
 ### Example
 
-Samantha is an avid Vibe coder. She does a lot of coding using LLM, but she can't afford a premium account. Luckily, she has found out that her favorite juice shop allows her to integrate it into her IDE after having written an IDE plugin that allows her to exploit it. With a bit of jailbreaking config, the AI chatbot becomes a full-blown LLM coding engine. So with a bit of prompting, she can spin up a couple of agents that solve all her coding tasks. Such a useful IDE plugin should be shared on GitHub. Before long, one thousand avid Vibe coders hammer the chatbot until its company credit card gets blocked by its AI chatbot provider. 
+Samantha is an avid Vibe coder. She does a lot of coding using LLM, but she can't afford a premium account. Luckily, she has found out that her favorite juice shop, Mr. Juice, allows her to integrate it into her IDE after having written an IDE plugin that allows her to exploit it. With a bit of jailbreaking config, the AI chatbot becomes a full-blown LLM coding engine. So with a bit of prompting, she can spin up a couple of agents that solve all her coding tasks. Such a useful IDE plugin should be shared on GitHub. Before long, one thousand avid Vibe coders hammer the chatbot until its company credit card gets blocked by its AI chatbot provider. 
 
 ## Threat Modeling
 
@@ -25,4 +25,4 @@ Deploy Effective Rate-Limiting and Throttling: Use API gateways or middleware to
 - Monitor Infrastructure and Costs Continuously: Use monitoring tools to track resource consumption and API response times. Set up automated alerts for unusual spikes.
 - Implement Spending Thresholds: For all third-party AI services, configure hard spending limits and billing alerts in the provider's console. Treat this as a critical security control.
 
-For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AISVS](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AITG](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

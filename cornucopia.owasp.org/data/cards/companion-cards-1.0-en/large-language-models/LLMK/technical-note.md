@@ -1,0 +1,1 @@
+This card describes how an attacker exploits excessive agency to perform unauthorized high-risk operations, because the AI was allowed to do so without a human-in-the-loop approval.

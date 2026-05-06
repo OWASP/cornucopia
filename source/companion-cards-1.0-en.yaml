@@ -68,7 +68,7 @@ suits:
     id: LLMK
     value: K
     url: https://cornucopia.owasp.org/cards/LLMK
-    desc: Ava can exploit excessive agency or autonomy in AI agents with tool access to perform unauthorized or high-risk actions because of missing human-in-the-loop approval
+    desc: Ava can exploit excessive agency or autonomy in plugins, extensions, or other AI components to perform unauthorized or high-risk actions because of missing human-in-the-loop approval
   -
     id: LLMA
     value: A
