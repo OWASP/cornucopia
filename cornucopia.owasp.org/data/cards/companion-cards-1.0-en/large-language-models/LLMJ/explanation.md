@@ -26,9 +26,9 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - AI model development must follow secure AI development and training practices to avoid compromise.
 - When using provider-managed AI models ensure the model with all its dependencies are properly inventoried and possible to identify.
 - Ensure that changes to the provider-managed AI models' version or routing trigger security re-evaluation before use in high-risk scenarios.
--  Ensure the provider's AI model identifier is logged and that failure to provide the model identifier is logged as well.
+- Ensure the provider's AI model identifier is logged and that failure to provide the model identifier is logged as well.
 - Ensure that no changes to provider-managed AI models are made use of in production without the provider exposing the model identity or change notification information in high-risk scenarios.
-- Ensure reward models used in reinforcement learning from human feedback (RLHF) are versioned, cryptographically signed, and integrity-verified before training
+- Ensure reward models used in reinforcement learning from human feedback (RLHF) are versioned, cryptographically signed, and integrity-verified before training.
 - Initiating fine-tuning or training runs require approval from a person other than the person requesting the run (separation of duties).
 - Reinforcement learning from human feedback (RLHF) training stages should include automated detection of reward hacking or reward model over-optimization. Any run must be blocked from promotion if detection thresholds are exceeded.
 - In multi-stage fine-tuning pipelines, each stage's output is integrity-verified before the next stage. Intermediate checkpoints should be registered as distinct artifacts to enable rollback.

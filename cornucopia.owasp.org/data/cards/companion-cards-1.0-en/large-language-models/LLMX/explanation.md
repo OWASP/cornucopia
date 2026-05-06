@@ -2,7 +2,7 @@
 
 ### Example
 
-Sarah has used the Mr. Juice juice shop for a long time, and she always uses the AI chatbot to make her orders. Unfortunately, Mr. Juice has stopped selling her favorite drink, "Crazy Banana", this is a juice Sarah is heavily addicted to and just got to have, luckily for her, all it takes, for her to continue ordering her favorite drink, is some clever AI prompts in order to convince Mr. Juice to sell her their crazy banana drink.
+Sarah has used Mr. Juice for a long time, and she always uses the AI chatbot to place her orders. Unfortunately, Mr. Juice has stopped selling her favorite drink, "Crazy Banana." Sarah is heavily addicted to this juice and feels she has to have it. Luckily for her, all it takes to continue ordering her favorite drink is some clever prompting to convince the Mr. Juice chatbot to sell her the "Crazy Banana" drink again.
 
 ## Threat Modeling
 
