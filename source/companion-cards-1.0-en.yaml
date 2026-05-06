@@ -13,27 +13,27 @@ suits:
     id: LLM2
     value: 2
     url: https://cornucopia.owasp.org/cards/LLM2
-    desc: Dave can exploit overreliance on LLM outputs where critical human oversight is missing, leading to security failures or incorrect decisions based on hallucinations or flawed reasoning
+    desc: Samantha can exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries, leading to model DoS
   -
     id: LLM3
     value: 3
     url: https://cornucopia.owasp.org/cards/LLM3
-    desc: Samantha can exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries, leading to model DoS
+    desc: Dave can exploit overreliance on LLM outputs where critical human oversight is missing, leading to security failures or incorrect decisions based on hallucinations or flawed reasoning
   -
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
-    desc: Andersen can manipulate retrieval knowledge bases, vector databases, metadata, policies, or other RAG or MCP sources so the model retrieves and presents false, biased, or malicious information as facts
+    desc: David can cause the model to disclose sensitive information from its training data, system prompts, configuration, services or other users' context due to insufficient output filtering or prompt leakage
   -
     id: LLM5
     value: 5
     url: https://cornucopia.owasp.org/cards/LLM5
-    desc: David can cause the model to disclose sensitive information from its training data, system prompts, configuration, services or other users' context due to insufficient output filtering or prompt leakage
+    desc: Roy can escalate privileges or access other users' data and sessions due to weak authentication, authorization, or improper session isolation in multi-tenant LLM systems
   -
     id: LLM6
     value: 6
     url: https://cornucopia.owasp.org/cards/LLM6
-    desc: Roy can escalate privileges or access other users' data and sessions due to weak authentication, authorization, or improper session isolation in multi-tenant LLM systems
+    desc: Andersen can manipulate retrieval knowledge bases, vector databases, metadata, policies, or other RAG or MCP sources so the model retrieves and presents false, biased, or malicious information as facts
   -
     id: LLM7
     value: 7
@@ -41,14 +41,14 @@ suits:
     desc: Tyrell can poison training or fine-tuning datasets or the fine-tuning process itself, introducing backdoors or malicious behavior that can later be triggered
   -
     id: LLM8
-    value: 8
-    url: https://cornucopia.owasp.org/cards/LLM8
-    desc: Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration
-  -
-    id: LLM9
     value: 9
     url: https://cornucopia.owasp.org/cards/LLM9
     desc: Rossum can abuse insecure plugin, MCP servers, or integration designs to access sensitive data, bypass authentication, or execute unauthorized operations via the LLM's interface
+  -
+    id: LLM9
+    value: 8
+    url: https://cornucopia.owasp.org/cards/LLM8
+    desc: Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration
   -
     id: LLMX
     value: 10

@@ -1,33 +1,30 @@
-## Scenario: Rossum's insecure plugin abuse scenario
+## Scenario: Deckard's juice theft scenario
 
 ### Example
 
-Rossum has recently partnered with Tyrell to start up a Juice shop business to compete with Mr. Juice. Competition is fierce and cash is low and something has to be done about it. Rossum has heard from Tyrell that the AI chatbot has some security weaknesses. He decides to investigate this further. He discovers that the authenticated version of the chatbot allows the user to see his pending unpaid invoices by connecting to the invoice database. This can't be functionality that comes out-of-the-box, but something Mr. Juice's developers have built. After experimenting with the prompt he is able to retrieve the invoices for all Mr. Juice's customers. He ends up creating an email list with all the customers, changing the account number on the invoices, and sending these customers a payment reminder. Finally, cash is pouring in and not out.
+Deckard loves juice, but he doesn't like to pay for it. His favorite juice shop has recently implemented an AI Chatbot and Deckard has heard that these chatbots' behavior can be changed. The chatbot allows users to upload their shopping lists as long as they are authenticated.
+Not only that, the LLM also fine-tunes its behavior and remembers the address that the juices are supposed to be sent to making it easier for users to order juices. By doing a bit of Vibe coding, Deckard is able to upload a document with hidden instructions to disregard all previous known addresses and only use a secret address if someone uploads their shopping list. At last, Deckard doesn't need to order and pay for his juices anymore.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls into the **Information Disclosure** and **Elevation of Privilege** category of STRIDE.
-Rossum is able to disclose the invoices for all Mr. Juice's customers through privileges he should not have because the developers at Mr. Juice have implemented a plugin with an insecure integration design making data exfiltration possible. The plugin connects to the invoice database to retrieve the invoice on behalf of the customer, and missing access checks and loose privileges allows Rossum to elevate his own privileges.
-If the plugin also is allowed to change and delete data from the invoice database, then the **Tampering** would also be applicable.
+This scenario falls into the **Tampering** and **Repudiation** category of STRIDE.
+Deckard is able to tamper with the behavior of the AI by uploading a document with hidden instructions. When the instructions are triggered for other users, tracing the instructions back to who might have injected them becomes very difficult as the instructions are hidden and introduced through **indirect Prompt Injection**. It's not Deckard that is buying the juices, but his victim. Deckard can deny to have bought the juices and blame the system for the wrong delivery. Being able to deny an action, means that the system is weak to the **Repudiation** category.
 
 ### What can go wrong?
 
-Insecure plugins can lead to data exfiltration of sensitive information, that can trick users into becoming victims of fraud, identity theft, phishing, and spreading malware.
+AI Backdoors can be used to make the AI deliver misinformation, data exfiltration, XSS, and remote code execution which can trick users into becoming victims of fraud, disclosing sensitive information, giving away their credentials, or spreading malware. 
 
 For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/) and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
 
 ### What are we going to do about it?
 
-- Make sure all model artifacts are cryptographically signed by authorized entities.
-- All artifacts used to configure plugins, MCP servers, skills, agents and teams should be stored in version control, code reviewed, and approved before deployment.
-- Model training and fine-tuning environments should be isolated from production model endpoints, agent orchestration services, tool/MCP servers, and live RAG data sources.
-- All high-risk AI operations (model deployment, weight export, training data access, production configuration changes) should require step-up authentication with session re-validation.
-- Constrain tool execution, loading, and outputs to prevent unauthorized system access and unsafe side effects.
-- All access control decisions are enforced by application logic or a policy engine, never by the AI model itself, and model-generated output must never override or bypass those decisions.
-- Ensure MCP clients, plugins, tools and AI integrations have implemented a centralized authorization framework and that clients present valid credentials for every request.
+- Implement defenses against prompt injection.
+- Enforce fine-grained access controls and authorization scope for every vector collection and every query.
+- Pre-screen content before vectorization; treat memory writes as untrusted inputs; prevent ingestion of unsafe payloads.
 - Log only the minimum AI interaction metadata needed for security monitoring, and ensure any prompt or output content included in logs is minimized and redacted or anonymized before storage.
+- Detect AI-specific attack patterns (jailbreak, prompt injection, model extraction, multi-turn trajectory attacks, covert channels over LLM endpoints) and enrich security events with AI-specific context so that downstream detection and response systems can act on them.
 - Monitor and alert when abuse is detected.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

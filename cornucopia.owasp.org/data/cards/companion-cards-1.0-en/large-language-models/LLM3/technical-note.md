@@ -1,1 +1,1 @@
-This card is about being able to exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries.
+This card is about being overreliant on LLMs without humans being able to review its outputs or take proper precautions, and how that can lead to security failures or incorrect decisions based on hallucinations or flawed reasoning.

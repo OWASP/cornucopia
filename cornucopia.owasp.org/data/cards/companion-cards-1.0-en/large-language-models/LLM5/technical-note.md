@@ -1,1 +1,1 @@
-This card describes how an attacker can use prompt injection to manipulate an LLM into leaking sensitive data.
+This card illustrates how weak authentication allows a user to spoof identities and escalate privileges, resulting in unauthorized access to sensitive, multi-tenant data via an LLM.

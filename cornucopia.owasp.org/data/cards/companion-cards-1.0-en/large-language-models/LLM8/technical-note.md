@@ -1,1 +1,1 @@
-This card describes how an attacker can use indirect prompt injection to change AI model behavior or steal data.
+This card describes how an attacker exploits insecure plugins, MCP servers, or integration designs to bypass access controls and steal sensitive data or execute unauthorized operations through the large language model interface.

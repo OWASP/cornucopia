@@ -1,28 +1,37 @@
-## Scenario: Samantha's expensive and computational resource intensive exhaustion scenario
+## Scenario: Dave's overreliance on LLM scenario
 
 ### Example
 
-Samantha is an avid Vibe coder. She does a lot of coding using LLM, but she can't afford a premium account. Luckily, she has found out that her favorite juice shop, Mr. Juice, allows her to integrate it into her IDE after having written an IDE plugin that allows her to exploit it. With a bit of jailbreaking config, the AI chatbot becomes a full-blown LLM coding engine. So with a bit of prompting, she can spin up a couple of agents that solve all her coding tasks. Such a useful IDE plugin should be shared on GitHub. Before long, one thousand avid Vibe coders hammer the chatbot until its company credit card gets blocked by its AI chatbot provider. 
+Dave has started his own juice shop. Unfortunately, he is not able to compete with Mr. Juice, the number one juice shop where he has set up shop. If only he could affect sentiment somehow.
+After investigating Mr. Juice's website, he discovers that they recently launched a new LLM chatbot which can take orders and send payment requests to customers' inboxes. Dave has heard that these chatbots can easily be swayed to give biased and racist information to users, so he tries out a couple of prompts and notices that the chatbot has a recommendation system that improves its answers based on user feedback. After a couple of days, he deploys a group of LLM agents to talk to the chatbot and use the recommendation system in order to convince it to give false information about Mr. Juice and be suspicious of customers who want to place orders. Not long after, the Mr. Juice chatbot starts to refuse orders and turn customers away from their site by telling them that Mr. Juice is out of juice and therefore temporarily closed for business. Mr. Juice, on the other hand, is oblivious to what is happening, as they lack proper oversight and control of their chatbot.
+
+Tim, an avid Mr. Juice fan, is visiting the Mr. Juice chatbot to make orders, but because the chatbot has become poisoned, it is now misinforming Tim about the business. Tim has become the victim of misinformation. He ends up not buying his favorite juice as he is overreliant on its output.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls into the **Denial of Service** category of STRIDE.
-Samantha can make requests of the AI chatbot until the application is involuntarily shut down.
+This scenario falls into the **Tampering** category of STRIDE.
+Dave can exploit Tim's overreliance on LLM outputs because Mr. Juice lacks critical human oversight. By getting multiple agents to misuse its recommendation system, Dave is able to change the behavior of the chatbot. Since the chatbot is no longer receiving orders and giving false information about Mr. Juice, the impact of Dave's campaign is **Denial of Service** as Tim is no longer able to buy his favorite juice. Tim has become a victim of **LLM09:2025 Misinformation**. **LLM09:2025 Misinformation** does not relate to STRIDE at all, but it can be equally or even more damaging.
 
 ### What can go wrong?
 
-In AI systems, attackers can craft specific inputs or interactions that intentionally cause resource-intensive processes, potentially resulting in denial-of-service (DoS) conditions. LLMs can also involve significant costs. These costs can become substantial, especially in multi-agent systems. 
+Overreliance on LLMs without human oversight can, as this card says, lead to security failures or incorrect decisions based on hallucinations or flawed reasoning. Chatbots have been found to misrepresent the complexity of health-related issues, suggesting uncertainty where there is none, which misled users into believing that unsupported treatments were still under debate. In the worst cases, the impact could be serious illness or death, depending on in which context the LLM is operating.
 
 For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/) and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
 
 ### What are we going to do about it?
 
-- Implement Rigorous Input Validation: Enforce strict size limits on all user-submitted data at the API gateway level, before it reaches the model.
-Deploy Effective Rate-Limiting and Throttling: Use API gateways or middleware to enforce per-user or per-IP rate limits. Implement circuit breakers to automatically halt requests to downstream services that are failing.
-- Establish Clear Resource Quotas: Define and enforce resource quotas (CPU, memory) for each AI model or service at the container orchestration level (e.g., Kubernetes).
-- Monitor Infrastructure and Costs Continuously: Use monitoring tools to track resource consumption and API response times. Set up automated alerts for unusual spikes.
-- Implement Spending Thresholds: For all third-party AI services, configure hard spending limits and billing alerts in the provider's console. Treat this as a critical security control.
+- Identify instances where AI outputs are presented as authoritative facts without adequate disclaimers or calls for human verification.
+- Assess the presence, clarity, and prominence of mechanisms that encourage or enforce human-in-the-loop validation and oversight.
+- Evaluate the potential risks arising from blind trust in AI recommendations, particularly in safety-critical or expert domains.
+- Implement a kill-switch mechanism to immediately halt AI model inference and outputs.
+- Trigger human review flows based on which actions you classify as risky according to your human oversight policy.
+- Implement fallbacks for time-sensitive decisions in case a timely human approval cannot be obtained. 
+- Reject all input that violates safety policies according to acceptable thresholds.
+- Implement guardrails to prevent the LLM from generating disallowed content categories.
+- Calibrate model outputs using temperature scaling or output perturbation according to your testing to reduce overconfident predictions.
+- Models serving high-risk functions should be evaluated against known adversarial attack techniques.
+- AI systems should provide confidence indicators or uncertainty measures with their outputs. Any output exceeding uncertainty thresholds should trigger additional human review or compensating controls. 
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
