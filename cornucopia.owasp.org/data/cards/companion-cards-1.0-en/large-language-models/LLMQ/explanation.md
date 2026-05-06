@@ -2,7 +2,7 @@
 
 ### Example
 
-Kyle is a regular at the Mr. Juice website and an aquintence of Ava that has told him about the vulnerable AI chatbot they are hosting. One neat little thing Kyle is found out is that he can append a price calculation of the Juice he is ordering to the 
+Kyle is a regular customer of the Mr. Juice website and an acquaintance of Ava, who has told him about the vulnerable AI chatbot they are hosting. One neat little thing Kyle has found out is that he can append a price calculation for the juice he is ordering to the prompt he sends to the chatbot.
 
 ## Threat Modeling
 
