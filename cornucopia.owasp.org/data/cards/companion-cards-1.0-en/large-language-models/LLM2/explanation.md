@@ -2,7 +2,7 @@
 
 ### Example
 
-Samantha is an avid Vibe coder. She does a lot of coding using LLM, but she can't afford a premium account. Luckily, she has found out that her favorite juice shop, Mr. Juice, allows her to integrate it into her IDE after having written an IDE plugin that allows her to exploit it. With a bit of jailbreaking config, the AI chatbot becomes a full-blown LLM coding engine. So with a bit of prompting, she can spin up a couple of agents that solve all her coding tasks. Such a useful IDE plugin should be shared on GitHub. Before long, one thousand avid Vibe coders hammer the chatbot until its company credit card gets blocked by its AI chatbot provider. 
+Samantha is an avid vibe coder. She does a lot of coding using LLM, but she can't afford a premium account. Luckily, she has found out that her favorite juice shop, Mr. Juice, allows her to integrate it into her IDE after having written an IDE plugin that allows her to exploit it. With a bit of jailbreaking config, the AI chatbot becomes a full-blown LLM coding engine. So with a bit of prompting, she can spin up a couple of agents that solve all her coding tasks. Such a useful IDE plugin should be shared on GitHub. Before long, one thousand avid vibe coders hammer the chatbot until its company credit card gets blocked by its AI chatbot provider. 
 
 ## Threat Modeling
 
