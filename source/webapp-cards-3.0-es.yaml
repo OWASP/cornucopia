@@ -470,6 +470,9 @@ paragraphs:
     id: "T00030"
     text: "Líderes del Proyecto"
   -
+    id: "T00090"
+    text: "© 2012-2026 OWASP Foundation"
+  -
     id: "T00100"
     text: "Reconocimientos"
   -
