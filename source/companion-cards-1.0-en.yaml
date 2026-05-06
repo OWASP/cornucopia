@@ -41,12 +41,12 @@ suits:
     desc: Tyrell can poison training or fine-tuning datasets or the fine-tuning process itself, introducing backdoors or malicious behavior that can later be triggered
   -
     id: LLM8
-    value: 9
+    value: 8
     url: https://cornucopia.owasp.org/cards/LLM9
     desc: Rossum can abuse insecure plugin, MCP servers, or integration designs to access sensitive data, bypass authentication, or execute unauthorized operations via the LLM's interface
   -
     id: LLM9
-    value: 8
+    value: 9
     url: https://cornucopia.owasp.org/cards/LLM8
     desc: Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration
   -
