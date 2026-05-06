@@ -1,4 +1,4 @@
-## Scenario: Deckard's cookie theft scenario
+## Scenario: Deckard's juice theft scenario
 
 ### Example
 

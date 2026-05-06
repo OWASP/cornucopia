@@ -1,6 +1,8 @@
-## Scenario: <name>'s ... scenario
+## Scenario: Kyle's AI model output exploit scenario
 
 ### Example
+
+Kyle is a regular at the Mr. Juice website and an aquintence of Ava that has told him about the vulnerable AI chatbot they are hosting. One neat little thing Kyle is found out is that he can append a price calculation of the Juice he is ordering to the 
 
 ## Threat Modeling
 
