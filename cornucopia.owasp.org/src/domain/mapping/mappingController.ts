@@ -1,6 +1,6 @@
 export type Mapping  = 
 {
-    owasp_cre: any;
+    owasp_cre: Record<string, unknown>;
     id : string
 
 }
@@ -35,9 +35,9 @@ export type MobileAppMapping =
 }
 
 export class MappingController {
-    private mapping: any;
+    private mapping: Record<string, unknown>;
 
-    constructor(mapping: any) {
+    constructor(mapping: Record<string, unknown>) {
         this.mapping = mapping;
     }
 
@@ -51,7 +51,7 @@ export class MappingController {
         return this.getCardMappings(card) as MobileAppMapping;
     }
 
-    public getCardMappings(card : string, addition : number = 0) : Mapping
+    public getCardMappings(card : string, _addition : number = 0) : Mapping
     {
         if (!this.mapping || !this.mapping.suits) {
             return {} as Mapping;
@@ -70,7 +70,7 @@ export class MappingController {
         return {} as Mapping;
     }
 
-    public getMeta() : any
+    public getMeta(): Record<string, unknown>
     {
         return this.mapping?.meta;
     }

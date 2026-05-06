@@ -4,18 +4,18 @@ import path from "path";
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ url }) {
   const lang = 'en';
-  let [categories, content] = FileSystemHelper.getDataByRoute(url.pathname, lang);
+  const [categories, content] = FileSystemHelper.getDataByRoute(url.pathname, lang);
 
   // Resolve the canonical path for GitHub links
   let route = url.pathname;
   if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
 
   // Resolve actual casing using FileSystemHelper
-  // @ts-ignore
+  // @ts-expect-error: type override required
   const baseDataPath = path.join(FileSystemHelper.root, "data");
-  // @ts-ignore
+  // @ts-expect-error: type override required
   const resolvedFullPath = FileSystemHelper.resolveCaseInsensitivePath(baseDataPath, route);
-  // @ts-ignore
+  // @ts-expect-error: type override required
   const truePath = path.relative(FileSystemHelper.root, resolvedFullPath).replace(/\\/g, '/');
 
   return {

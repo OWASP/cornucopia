@@ -1,6 +1,7 @@
 <script>
     import { Text } from "$lib/utils/text";
     import SvelteMarkdown from "svelte-markdown";
+    import { resolve } from "$app/paths";
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
@@ -28,7 +29,7 @@
                     <img alt="linkedin logo" title="linkedin logo" class="icon" src="/icons/linkedin.png"/>
                 </td>
                 <td>
-                    <a target="_blank" rel="noopener" href="{data.author.linkedin}">LinkedIn</a>
+                    <a target="_blank" rel="noopener external" href={data.author.linkedin}>LinkedIn</a>
                 </td>
             </tr>
             {/if}
@@ -50,7 +51,7 @@
                     <img alt="globe logo" title="globe logo" class="icon" src="/icons/globe.png"/>
                 </td>
                 <td>
-                    <a target="_blank" rel="noopener" href="{data.author.website}">{Text.DisplayLink(data.author.website)}</a>
+                    <a target="_blank" rel="noopener external" href={data.author.website}>{Text.DisplayLink(data.author.website)}</a>
                 </td>
             </tr>
             {/if}
@@ -66,9 +67,9 @@
         <p>This author didn't publish yet</p>
     {:else}
         <ul>
-            {#each data.blogposts as blogpost}
+            {#each data.blogposts as blogpost (blogpost.path)}
                 <li>
-                    <a href="/news/{blogpost.path}">{Text.Format(blogpost.title)}</a>
+                    <a href={resolve('/news/' + blogpost.path)}>{Text.Format(blogpost.title)}</a>
                 </li>
             {/each}
         </ul>

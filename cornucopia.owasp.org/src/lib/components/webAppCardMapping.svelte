@@ -1,6 +1,6 @@
 <script lang="ts">
     interface Props {
-        mapping: any;
+        mapping: Record<string, unknown>;
         style?: string;
     }
 

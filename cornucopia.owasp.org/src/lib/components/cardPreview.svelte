@@ -7,7 +7,7 @@
     
     interface Props {
         card?: Card;
-        mapping: any;
+        mapping: Record<string, unknown>;
         style?: string;
     }
 

@@ -4,15 +4,15 @@
 
     interface Props {
         suits: Suit[];
-        cards: any;
-        mapping: any;
+        cards: Map<string, unknown>;
+        mapping: Record<string, unknown>;
     }
 
-    let { suits, cards, mapping }: Props = $props();
+    let { suits: _suits, cards, mapping }: Props = $props();
 
     // Manual selection of cards to display on the frontpage 
     let selectedCards : string[] =  ["JOA","C7","CR6","AZ5","SM4","VE3","AT2",]  
-    let mappingData : any[] = $derived(mapping.suits.map((suit: { cards: any[]; }) => suit.cards[0]).reverse());
+    let mappingData: Record<string, unknown>[] = $derived(mapping.suits.map((suit: { cards: Record<string, unknown>[] }) => suit.cards[0]).reverse());
     
     mappingData.unshift({
         id: "JOA",
@@ -28,7 +28,7 @@
 </script>
 
 <div class="deck">
-    {#each selectedCards as card,index}
+    {#each selectedCards as card, index (card)}
     <div class="card-container card-{index}">
         <CardPreview card={cards.get(card)} mapping={mappingData[index]} style='hero-card-container'></CardPreview>
     </div>
@@ -92,3 +92,4 @@
         }
     }
 </style>
+

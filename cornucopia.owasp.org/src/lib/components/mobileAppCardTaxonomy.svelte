@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
     import {
       GetCardAttacks, type Attack } from "$lib/cardAttacks";
-    import MASVSOverview from "$lib/components/MASVSOverview.svelte";
     import MappingsList from "$lib/components/mappingsList.svelte";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
@@ -11,12 +12,12 @@
     import Attacks from "./attacks.svelte";
     import { readTranslation } from "$lib/stores/stores";
     interface Props {
-      mappingData: any;
+      mappingData: Record<string, unknown>;
       card: Card;
       routes: Map<string, Route[]>;
     }
 
-    let { mappingData, card, routes }: Props = $props();
+    let { mappingData, card = $bindable(), routes: _routes }: Props = $props();
     
     const controller = $derived(new MappingController(mappingData));
     let t = readTranslation();
@@ -32,27 +33,21 @@
       return test in MASTG_TESTS_MAPPING ? (base + MASTG_TESTS_MAPPING[test].toLowerCase() + '/mastg-' + test.toLowerCase() + '#MASTG-' + test) : '';
     }
   
-    function FormatToDoubleDigitSearchstring(input: string) {
-      input = String(input)
-      let str =
-        input.lastIndexOf(".") !== -1
-          ? input.substring(0, input.lastIndexOf("."))
-          : input;
-      let parts = str.split(".").map((part) => part.padStart(2, "0"));
-      let searchString = parts.join(".");
-      return searchString;
-    }
   
     function linkCapec(input: string) {
       return "/taxonomy/capec-3.9/" + input;
     }
-    let mappings = $derived(controller.getMobileAppCardMappings(card?.id));
-    let attacks: Attack[] = $derived(GetCardAttacks(card.id) as Attack[]);
-
+    let mappings: MobileAppMapping = $state({} as MobileAppCardMapping);
+    let attacks: Attack[] = $state([] as Attack[]);
+    run(() => {
+      mappings = controller.getMobileAppCardMappings(card?.id);
+      attacks = GetCardAttacks(card.id) as Attack[] | Attack[];
+    });
+      
   </script>
 
     {#if mappings }
-      <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h1>
+      <h2 id="mapping" class="title">{$t('cards.mobileAppCardTaxonomy.h1.1')}</h2>
       {#if mappings.owasp_masvs}
       <MappingsList
         title="OWASP MASVS:"
@@ -77,7 +72,7 @@
       {#if mappings.safecode}
       <MappingsList title="SAFECode:" mappings={mappings.safecode} />
       {/if}
-      <h1 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h1>
+      <h2 class="title">{$t('cards.mobileAppCardTaxonomy.h1.2')}</h2>
       {#if attacks }
       <Attacks {mappings} {attacks}></Attacks>
       {/if}
@@ -99,3 +94,5 @@
     }
   </style>
   
+
+

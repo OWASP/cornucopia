@@ -464,6 +464,9 @@ paragraphs:
     id: "T00020"
     text: "Authors"
   -
+    id: "T00090"
+    text: "© 2012-2026 OWASP Foundation"
+  -
     id: "T00100"
     text: "Acknowledgements"
   -

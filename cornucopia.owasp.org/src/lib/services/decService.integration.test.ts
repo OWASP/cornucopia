@@ -54,7 +54,7 @@ describe('DeckService integration tests', () => {
     }, 30000);
 
     it("should return 238 cards.", async () => {
-        let cards = (new DeckService()).getCards('en');
+        const cards = (new DeckService()).getCards('en');
         expect(cards.size).toBe(238);
     });
 });

@@ -73,7 +73,7 @@ export class FileSystemHelper {
   public static ASVSRouteMap(version: string = "4.0.3"): Route[] {
     const basePath: string = `data/taxonomy/en/ASVS-${version}`;
     const sectionRegex = /^(\d{2})-/;
-    let routes: Route[] = [];
+    const routes: Route[] = [];
 
     const firstLevelDirs = this.getDirectories(FileSystemHelper.root + basePath).filter((dir) =>
       sectionRegex.test(dir)
@@ -108,12 +108,12 @@ export class FileSystemHelper {
   }
 
   public static getDataByRoute(route: string, lang: string = 'en'): [string[], string] {
-    let categories: string[] = [];
+    const categories: string[] = [];
     const baseDataPath = FileSystemHelper.root + "data";
     
     if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
     
-    let defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en');
+    const defaultLangRoute = route.replace(`/taxonomy/${lang}`, '/taxonomy/en');
     
     // Get content using original route structure for Map keys
     let content = FileSystemHelper.getDataFromPath('data' + route).get('data' + route) || "";
@@ -135,12 +135,12 @@ export class FileSystemHelper {
   public static getDataFromPath(filePath: string) : Map<string, string>
   {
     const base = FileSystemHelper.root;
-    let content = new Map<string, string>();
+    const content = new Map<string, string>();
   
     // Resolve the actual filesystem path (case-insensitive)
     const resolvedPath = FileSystemHelper.resolveCaseInsensitivePath(base, filePath);
     
-    let indexFile: string = path.join(resolvedPath, "index.md");
+    const indexFile: string = path.join(resolvedPath, "index.md");
     if (fs.existsSync(indexFile)) {
       content.set(filePath, fs.readFileSync(indexFile, "utf8"));
     }
@@ -148,7 +148,7 @@ export class FileSystemHelper {
     let folders: string[];
     try {
       folders = FileSystemHelper.getDirectories(resolvedPath);
-    } catch (e) {
+    } catch (_e) {
       folders = [];
     }
   

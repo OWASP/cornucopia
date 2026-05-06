@@ -1,7 +1,7 @@
 <script lang="ts">
   interface Props {
-    ordered: any;
-    start: any;
+    ordered: boolean;
+    start: number;
     children?: import('svelte').Snippet;
   }
 

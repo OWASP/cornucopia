@@ -1,0 +1,1 @@
+This card focuses on the exposure of secrets and sensitive information through code repositories, log files, command line history, pipeline outputs, and other development artifacts.

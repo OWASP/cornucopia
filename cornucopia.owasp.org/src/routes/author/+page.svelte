@@ -20,7 +20,7 @@
 <h1>{$t('news.author.h1')}</h1>
 
 <div class="container">
-    {#each data.authors as author}
+    {#each data.authors as author (author.id)}
         <Author {author}></Author>
     {/each}
 </div>
@@ -50,3 +50,4 @@
         } 
     }
 </style>
+

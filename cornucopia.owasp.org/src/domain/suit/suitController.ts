@@ -6,7 +6,7 @@ import { cardOrder } from "$domain/card/order";
 export class SuitController {
 
     private static decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '2.2'}, {edition: 'companion', version: '1.0'}];
-    private static languages : Map<string, any> = new Map<string, any>([
+    private static languages : Map<string, { lang: string[] }> = new Map<string, { lang: string[] }>([
         ['mobileapp', {lang: ['en']}], 
         ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']}],
         ['companion', {lang: ['en']}]
@@ -14,25 +14,25 @@ export class SuitController {
 
     public static getSuits() : Map<string,Suit[]>
     {
-        let decks  : Map<string,Suit[]> = new Map<string,Suit[]>;
+        const decks  : Map<string,Suit[]> = new Map<string,Suit[]>;
         SuitController.decks.forEach(deck => {
-            let languages = SuitController.languages.get(deck.edition).lang;
+            const languages = SuitController.languages.get(deck.edition).lang;
 
             languages.forEach(lang => {
 
-                let path : string = `./data/cards/${deck.edition}-cards-${deck.version}-${lang}/`;
+                const path : string = `./data/cards/${deck.edition}-cards-${deck.version}-${lang}/`;
 
                 if(FileSystemHelper.hasDir(path)) {
-                    let directories = FileSystemHelper.getDirectories(path);
+                    const directories = FileSystemHelper.getDirectories(path);
 
-                    let suits = new Array<Suit>();
+                    const suits = new Array<Suit>();
     
                     for(let i = 0 ; i < directories.length ; i++)
                     {
-                        let directory : string = directories[i];
-                        let suitPath : string = `${path}/${directory}`;
-                        let suitDirectories = FileSystemHelper.getDirectories(suitPath);
-                        let suit : Suit = 
+                        const directory : string = directories[i];
+                        const suitPath : string = `${path}/${directory}`;
+                        const suitDirectories = FileSystemHelper.getDirectories(suitPath);
+                        const suit : Suit = 
                         {
                             name : directory,
                             cards : suitDirectories.sort(SuitController.orderCards)
@@ -48,15 +48,15 @@ export class SuitController {
 
     public static orderFunction(a: Suit, b: Suit) : number
     {
-        let orderA = order.get(a.name) || -1;
-        let orderB = order.get(b.name) || -1;
+        const orderA = order.get(a.name) || -1;
+        const orderB = order.get(b.name) || -1;
         return orderA < orderB ? -1 : 1
     }
 
     public static orderCards(a: string, b: string) : number
     {
-        let orderA = cardOrder.get(a) || -1;
-        let orderB = cardOrder.get(b) || -1;
+        const orderA = cardOrder.get(a) || -1;
+        const orderB = cardOrder.get(b) || -1;
         return orderA < orderB ? -1 : 1
     }
 
