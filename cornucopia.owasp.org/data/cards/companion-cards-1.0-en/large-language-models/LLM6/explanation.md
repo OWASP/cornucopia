@@ -28,7 +28,7 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Require explicit checkpoints for privileged or irreversible outcomes.
 - Constrain tool execution, loading, and outputs to prevent unauthorized system access and unsafe side effects.
 - Ensure every action is authorized at execution time and constrained by scope.
-- Ensure MCP clients, plugins, tools and AI integrations have implemented a centralized authorization framework and that clients presents valid credentials for every request.
+- Ensure MCP clients, plugins, tools and AI integrations have implemented a centralized authorization framework and that clients present valid credentials for every request.
 - Log only the minimum AI interaction metadata needed for security monitoring, and ensure any prompt or output content included in logs is minimized and redacted or anonymized before storage.
 - Monitor and alert when abuse is detected.
 - MCP tools, schemas, manifests and plugin configuration should be validated for authenticity and integrity using signatures to prevent schema tampering or malicious parameter modification.
