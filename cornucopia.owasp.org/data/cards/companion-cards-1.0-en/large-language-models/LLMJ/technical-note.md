@@ -1,1 +1,1 @@
-This card is about supply chain attack where an attacker can exploit vulnerabilities to exploit third-party models, embeddings, or machine learning components to steal data or poison the model.
+This card is about a supply chain attack where an attacker can exploit vulnerabilities in third-party models, embeddings, or machine learning components to steal data or poison the model.
