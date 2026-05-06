@@ -19,7 +19,7 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 
 ### What are we going to do about it?
 
-- Ensure all AI models and -model changes are authorized and verified using cryptographic signatures before they are deployed to production.
+- Ensure all AI models and model changes are authorized and verified using cryptographic signatures before they are deployed to production.
 - Ensure AI models are scrutinized through security and safety verification testing before deployment.
 - When deploying changes to AI models, the deployment should be controlled, monitored and possible to rollback or reverse.
 - AI model development must follow secure AI development and training practices to avoid compromise.
