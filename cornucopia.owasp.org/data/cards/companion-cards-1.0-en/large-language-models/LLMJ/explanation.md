@@ -9,7 +9,7 @@ Ripley has been paid by Rossum to create a better AI chatbot than Mr. Juice for 
 ### STRIDE
 
 This scenario falls into the **Tampering**, **Elevation of Privilege** and **Information Disclosure** categories of STRIDE.
-The vulnerability Ripley is taking advantage of is missing access control which belongs to the **Spoofing** category, but the act itself is to **tamper** with the ML ecosystem. That said, he is able to do so by executing arbitrary code by submitting jobs to the ML cluster without having the necessary privileges which means he is also attacking the cluster by **elevating** his own **privileges**. Finally, he has also stolen Mr Juice's AI model before he poisoned it. Stealing information falls under the **Information Disclosure** category of STRIDE.
+The vulnerability Ripley is taking advantage of is missing access control which belongs to the **Spoofing** category, but the act itself is to **tamper** with the ML ecosystem. That said, he is able to do so by executing arbitrary code by submitting jobs to the ML cluster without having the necessary privileges which means he is also attacking the cluster by **elevating** his own **privileges**. Finally, he has also stolen Mr. Juice's AI model before he poisoned it. Stealing information falls under the **Information Disclosure** category of STRIDE.
 
 ### What can go wrong?
 
@@ -19,14 +19,14 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 
 ### What are we going to do about it?
 
-- Ensure all AI models and -model changes are authorized and verified using cryptographic signatures before they are deployed to production.
+- Ensure all AI models and model changes are authorized and verified using cryptographic signatures before they are deployed to production.
 - Ensure AI models are scrutinized through security and safety verification testing before deployment.
 - When deploying changes to AI models, the deployment should be controlled, monitored and possible to rollback or reverse.
 - AI model development must follow secure AI development and training practices to avoid compromise.
 - When using provider-managed AI models ensure the model with all its dependencies are properly inventoried and possible to identify.
 - Ensure that changes to the provider-managed AI models' version or routing trigger security re-evaluation before use in high-risk scenarios.
 -  Ensure the provider's AI model identifier is logged and that failure to provide the model identifier is logged as well.
-- Ensure that no changes to provider-managed AI models are made use of in production without the provider exposing the model identity or change notification information in high-risk
+- Ensure that no changes to provider-managed AI models are made use of in production without the provider exposing the model identity or change notification information in high-risk scenarios.
 - Ensure reward models used in reinforcement learning from human feedback (RLHF) are versioned, cryptographically signed, and integrity-verified before training
 - Initiating fine-tuning or training runs require approval from a person other than the person requesting the run (separation of duties).
 - Reinforcement learning from human feedback (RLHF) training stages should include automated detection of reward hacking or reward model over-optimization. Any run must be blocked from promotion if detection thresholds are exceeded.
