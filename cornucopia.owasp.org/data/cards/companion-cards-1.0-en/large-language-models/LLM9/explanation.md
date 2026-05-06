@@ -25,8 +25,8 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Model training and fine-tuning environments should be isolated from production model endpoints, agent orchestration services, tool/MCP servers, and live RAG data sources.
 - All high-risk AI operations (model deployment, weight export, training data access, production configuration changes) should require step-up authentication with session re-validation.
 - Constrain tool execution, loading, and outputs to prevent unauthorized system access and unsafe side effects.
-- All access control decisions are enforced by application logic or a policy engine, never by the AI model itself, and that model-generated output
-- Ensure MCP clients, plugins, tools and AI integrations have implemented a centralized authorization framework and that clients presents valid credentials for every request.
+- All access control decisions are enforced by application logic or a policy engine, never by the AI model itself, and model-generated output must never override or bypass those decisions.
+- Ensure MCP clients, plugins, tools and AI integrations have implemented a centralized authorization framework and that clients present valid credentials for every request.
 - Log only the minimum AI interaction metadata needed for security monitoring, and ensure any prompt or output content included in logs is minimized and redacted or anonymized before storage.
 - Monitor and alert when abuse is detected.
 
