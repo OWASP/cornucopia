@@ -9,7 +9,7 @@ Tyrell is starting up his new business, a juice shop, that will compete with Mr.
 ### STRIDE
 
 This scenario falls into the **Tampering** category of STRIDE.
-Tyrell is able to tamper with the behavior of the AI by teaching it to behave in a certain way whenever a certain word is inputted. It's a backdoor in the LLMs training data which has compromised the LLMs integrity.
+Tyrell is able to tamper with the behavior of the AI by teaching it to behave in a certain way whenever a certain word is inputted. It's a backdoor in the LLM's training data which has compromised the LLM's integrity.
 
 ### What can go wrong?
 
