@@ -67,6 +67,11 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/mapping/companion/1.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 /api/cre/mobileapp/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
@@ -124,3 +129,4 @@ function main() {
 }
 
 main();
+

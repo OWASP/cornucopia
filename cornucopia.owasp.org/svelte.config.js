@@ -348,6 +348,7 @@ export default {
 				'/api/mapping/webapp/2.2',
 				'/api/mapping/webapp/3.0',
 				'/api/mapping/mobileapp/1.1',
+                                '/api/mapping/companion/1.0',
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/mobileapp/PC2/1.1/uk',
                 '/edition/mobileapp/PC2/1.1/hi',
