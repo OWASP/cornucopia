@@ -2,7 +2,7 @@
 meta:
   edition: "webapp"
   component: "cards"
-  language: "PT-BR"
+  language: "pt_br"
   version: "3.0"
 suits:
 -
@@ -472,6 +472,9 @@ paragraphs:
   -
     id: "T00030"
     text: "Líderes do Projeto"
+  -
+    id: "T00090"
+    text: "© 2012-2026 OWASP Foundation"
   -
     id: "T00100"
     text: "Agradecimentos"

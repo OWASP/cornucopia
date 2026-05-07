@@ -3,7 +3,7 @@ import { LocalCache } from '$lib/utils/cache.js'
 import { getAuthors } from '../../domain/author/authorController.js'
 import { getBlogposts } from '../../domain/blogpost/blogpostController.js'
 
-export async function load({params})
+export async function load({params: _params})
 {
     return {
         content: FileSystemHelper.getDataFromPath('data/website/pages/news'),
@@ -11,3 +11,4 @@ export async function load({params})
         authors : await LocalCache(()=>getAuthors(),20,'authors'),
     }
 }
+

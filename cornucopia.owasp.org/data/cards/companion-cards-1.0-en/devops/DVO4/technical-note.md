@@ -1,0 +1,1 @@
+This card highlights the risks associated with unauthorized access to backup data, including the ability to delete, overwrite, or exfiltrate backups.

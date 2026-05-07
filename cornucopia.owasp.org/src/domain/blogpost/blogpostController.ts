@@ -6,34 +6,34 @@ import { LocalCacheSync } from "$lib/utils/cache";
 
 export function getBlogposts() : Blogpost[]
 {
-    let result : Blogpost[] = []
-    let basepath : string = "./data/news";
+    const result : Blogpost[] = []
+    const basepath : string = "./data/news";
 
     // Collect all directories
-    let directories = FileSystemHelper.getDirectories(basepath);
+    const directories = FileSystemHelper.getDirectories(basepath);
 
     // For every directory, fetch the 'index.md' file
     for(let i = 0 ; i < directories.length ; i++)
     {
-        let directory = directories[i].toLowerCase();
-        let filepath = basepath + '/' + directory + '/index.md'
-        let file = fs.readFileSync(filepath, 'utf8');
-        let parsed = fm(file);
-        let post : Blogpost = 
+        const directory = directories[i].toLowerCase();
+        const filepath = basepath + '/' + directory + '/index.md'
+        const file = fs.readFileSync(filepath, 'utf8');
+        const parsed = fm(file);
+        const post : Blogpost = 
         {
             title : directory.substring(9),
             markdown : parsed.body,
-            //@ts-ignore
+            // @ts-expect-error: type override required
             author : parsed.attributes.author,
-            //@ts-ignore
+            // @ts-expect-error: type override required
             hidden : parsed.attributes.hidden,
-            //@ts-ignore
+            // @ts-expect-error: type override required
             date : parsed.attributes.date,
-            //@ts-ignore
+            // @ts-expect-error: type override required
             tags : parsed.attributes.tags.split(','),
-            //@ts-ignore
+            // @ts-expect-error: type override required
             path : directory,
-            //@ts-ignore
+            // @ts-expect-error: type override required
             description : parsed.attributes.description
         }
         // check if the post is hidden
@@ -44,12 +44,12 @@ export function getBlogposts() : Blogpost[]
         }
 
         // Check the post date
-        let today = new Date();
-        let year = today.getFullYear();
-        let month = ('' + (today.getMonth() + 1)).padStart(2,'0')
-        let day = ('' + (today.getDate())).padStart(2,'0')
-        let todayAsString = year + month + day;
-        let compare = (post.date + '').localeCompare(todayAsString);
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = ('' + (today.getMonth() + 1)).padStart(2,'0')
+        const day = ('' + (today.getDate())).padStart(2,'0')
+        const todayAsString = year + month + day;
+        const compare = (post.date + '').localeCompare(todayAsString);
         if( compare > 0)
         {
             console.log("🔴 Skipping blogpost because release date is " + post.date + " and today is " + todayAsString +   ": [" + post.title + "]")
@@ -66,12 +66,12 @@ export function getBlogposts() : Blogpost[]
 
 export function getBlogpostsByAuthor(name : string) : Blogpost[]
 {
-    let blogposts : Blogpost[] = LocalCacheSync(getBlogposts,20,'posts');
+    const blogposts : Blogpost[] = LocalCacheSync(getBlogposts,20,'posts');
     return blogposts.filter(post => post.author == name);
 }
 
 export function getBlogpostByTitle(title : string) : Blogpost
 {
-    let blogposts : Blogpost[] = LocalCacheSync(getBlogposts,20,'posts');
+    const blogposts : Blogpost[] = LocalCacheSync(getBlogposts,20,'posts');
     return blogposts.find(post => {return post.path == title}) || {} as Blogpost
 }

@@ -7,7 +7,7 @@
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
-  let t = readTranslation();
+  let _t = readTranslation();
   const lang = $state(readLang());
   let cards = $derived(data.cards);
   let card : Card = $derived(cards.get(data.card) as Card);
@@ -69,7 +69,7 @@
 {/if}
 </div>
 <style>
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 767px) 
     {
         div
         {

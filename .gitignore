@@ -27,4 +27,5 @@ cornucopia.owasp.org/.vs
 cornucopia.owasp.org/package-lock.json
 cornucopia.owasp.org/coverage/**
 .vscode
+output.yaml
 *.backup

@@ -1,0 +1,1 @@
+This card highlights the risk of permanent data loss due to insufficient backup strategies, untested recovery processes, or inadequate documentation and training for disaster recovery.

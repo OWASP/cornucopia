@@ -841,5 +841,87 @@ class TestCapecPagesWithAsvsMapping(unittest.TestCase):
         self.assertIn("V8.1.1", written_content)
 
 
+class TestConvertCapecEdgeCases(unittest.TestCase):
+
+    # -------- create_capec_pages --------
+
+    @patch("scripts.convert_capec.has_no_asvs_mapping", return_value=False)
+    @patch("scripts.convert_capec.create_link_list", return_value="link")
+    @patch("scripts.convert_capec.parse_description", return_value="desc")
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_category_with_mapping(self, mock_folder, mock_desc, mock_link, mock_no_map):
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": []},
+                "Categories": {"Category": [{"_ID": "1", "_Name": "Test", "Summary": "sum"}]},
+            }
+        }
+
+        capec_to_asvs_map = {1: {"v": ["1"]}}
+        asvs_map = {}
+
+        with patch("scripts.convert_capec.open", mock_open()):
+            with patch("scripts.convert_capec.convert_vars.args", type("x", (), {"output_path": "out"})):
+                capec.create_capec_pages(data, capec_to_asvs_map, asvs_map, "5.0")
+
+    @patch("scripts.convert_capec.has_no_asvs_mapping", return_value=True)
+    @patch("scripts.convert_capec.parse_description", return_value="desc")
+    @patch("scripts.convert_capec.create_folder")
+    def test_create_capec_pages_no_mapping(self, mock_folder, mock_desc, mock_no_map):
+        data = {
+            "Attack_Pattern_Catalog": {
+                "Attack_Patterns": {"Attack_Pattern": [{"_ID": "1", "_Name": "Test", "Description": "d"}]},
+                "Categories": {"Category": []},
+            }
+        }
+
+        with patch("scripts.convert_capec.open", mock_open()):
+            with patch("scripts.convert_capec.convert_vars.args", type("x", (), {"output_path": "out"})):
+                capec.create_capec_pages(data, {}, {}, "5.0")
+
+    # -------- main --------
+
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.load_json_file", return_value=None)
+    @patch("scripts.convert_capec.set_logging")
+    def test_main_invalid_data(self, mock_set_logging, mock_load, mock_parse):
+
+        mock_parse.return_value = type(
+            "x",
+            (),
+            {
+                "input_path": "a",
+                "asvs_mapping": "b",
+                "capec_to_asvs": "c",
+                "output_path": "out",
+                "asvs_version": "5.0",
+            },
+        )
+
+        capec.main()
+
+    @patch("scripts.convert_capec.create_capec_pages")
+    @patch("scripts.convert_capec.load_capec_to_asvs_mapping", return_value={1: {}})
+    @patch("scripts.convert_capec.validate_json_data", return_value=True)
+    @patch("scripts.convert_capec.load_json_file", side_effect=[{"a": 1}, {"b": 2}])
+    @patch("scripts.convert_capec.parse_arguments")
+    @patch("scripts.convert_capec.set_logging")
+    def test_main_success(self, mock_log, mock_parse, mock_load, mock_validate, mock_map, mock_create):
+        mock_parse.return_value = type(
+            "x",
+            (),
+            {
+                "input_path": "a",
+                "asvs_mapping": "b",
+                "capec_to_asvs": "c",
+                "output_path": "out",
+                "asvs_version": "5.0",
+            },
+        )
+
+        capec.main()
+        mock_create.assert_called()
+
+
 if __name__ == "__main__":
     unittest.main()

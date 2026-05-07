@@ -3,7 +3,7 @@ import { getBlogpostByTitle } from "../../../domain/blogpost/blogpostController.
 
 export async function load({params})
 {
-    let title : string = params.slug.toLowerCase();
+    const title : string = params.slug.toLowerCase();
     return {
         blogpost : await LocalCache(()=>getBlogpostByTitle(title),20,title)
     }

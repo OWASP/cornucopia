@@ -9,14 +9,14 @@
     let t = readTranslation();
     let isEmpty = $state(true);
 
-    function getIndex(num : number) : any
+    function getIndex(num: number): string
     {
         return 'V' + num;
     }
 
     function getUrl(mapping : number) : string
     {
-        let ex : string = "https://cheatsheetseries.owasp.org/IndexMASVS.html#objective"
+        let _ex : string = "https://cheatsheetseries.owasp.org/IndexMASVS.html#objective"
         let base : string = "https://cheatsheetseries.owasp.org/IndexMASVS.html#";
         let index = mapping.toString().replaceAll('.','');
         let lookupIndex = getIndex(mapping)
@@ -48,10 +48,17 @@
 </script>
 
 {#if mappings}
-    {#each mappings as mapping}
+    {#each mappings as mapping (mapping)}
         {#if hasValidLink(mapping)}
             <p>
-                <a title="OWASP MASVS {getDisplayText(mapping)}" target="_blank" href="{getUrl(mapping)}">{getDisplayText(mapping)}</a>
+                <a
+                    title="OWASP MASVS {getDisplayText(mapping)}"
+                    target="_blank"
+                    rel="external noopener noreferrer"
+                    href={getUrl(mapping)}
+                >
+                    {getDisplayText(mapping)}
+                </a>
             </p>
         {/if}
     {/each}
@@ -69,3 +76,4 @@
         font-size: 1.5rem;
     }
 </style>
+

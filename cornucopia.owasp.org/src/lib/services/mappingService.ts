@@ -10,12 +10,12 @@ export class MappingService {
     public getLatestsCardMappingData(edition: string)
     {
         const yamlData = fs.readFileSync(`${__dirname}${MappingService.path}${edition}-mappings-${DeckService.getLatestVersion(edition)}.yaml`, 'utf8');
-        let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
+        const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
         MappingService.mappings.push({edition: edition, version: 'latests', data: data});
         return data;
     }
 
-    public getCardMapping(edition: string, version: string) : any
+    public getCardMapping(edition: string, version: string): unknown
     {
         return this.getCardMappingForAllVersions().get(`${edition}-${version}`);
     }
@@ -24,16 +24,16 @@ export class MappingService {
     {
         DeckService.getDecks().forEach((deck) => {
             const yamlData = fs.readFileSync(`${__dirname}${MappingService.path}${deck.edition}-mappings-${deck.version}.yaml`, 'utf8');
-            let data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
+            const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA });
             MappingService.mappings.push({edition: deck.edition, version: deck.version, data: data});
         });
         
         return MappingService.mappings;
     }
 
-    public getCardMappingForLatestEdtions() : Map<string, any>
+    public getCardMappingForLatestEdtions() : Map<string, unknown>
     {
-        const decks = new Map<string, any>();
+        const decks = new Map<string, unknown>();
         DeckService.getLatestEditions().forEach((edition) => {
             decks.set(
                 edition, MappingService.mappings.find((mapping) => mapping?.version == 'latests' && mapping?.edition == edition)?.data || this.getLatestsCardMappingData(edition)
@@ -44,9 +44,9 @@ export class MappingService {
         return decks;
     }
 
-    public getCardMappingForAllVersions() : Map<string, any>
+    public getCardMappingForAllVersions() : Map<string, unknown>
     {
-        const mapping = new Map<string, any>();
+        const mapping = new Map<string, unknown>();
         
         // Load all mappings if not already loaded
         if (MappingService.mappings.length === 0) {

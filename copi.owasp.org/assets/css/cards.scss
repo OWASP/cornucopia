@@ -227,6 +227,14 @@ $resilience-mobile-color: rgb(49, 124, 192);
 $cryptography-mobile-color: rgb(246, 89, 40);
 $cornucopia-mobile-color: rgb(10, 58, 94);
 $wildcard-mobile-color: rgb(251, 182, 124);
+$companion-suits: (
+  cloud: #D289B8,
+  frontend: #806A62,
+  large-language-models: #a13763,
+  devops: #a87441,
+  agentic-ai: #3b2c42,
+  automated-threats: #d56859
+);
 
 .card {
 
@@ -363,6 +371,30 @@ $wildcard-mobile-color: rgb(251, 182, 124);
 
 .wild-card .value {
   color:$wildcard-color;
+}
+
+.card.companion {
+  @each $suit, $color in $companion-suits {
+    &.#{$suit} {
+      .left-bar {
+        background: linear-gradient(180deg, $color, rgba($color, 0.5));
+      }
+
+      .value {
+        color: $color;
+      }
+    }
+  }
+}
+
+.card.companion.J,
+.card.companion.Q,
+.card.companion.K {
+  @each $suit, $color in $companion-suits {
+    &.#{$suit} {
+      background: rgba($color, 0.5);
+    }
+  }
 }
 
 .card {

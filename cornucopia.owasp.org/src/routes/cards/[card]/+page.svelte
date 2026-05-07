@@ -11,7 +11,7 @@
   }
 
   let { data }: Props = $props();
-  let t = readTranslation();
+  let _t = readTranslation();
   const lang = $state(readLang());
   const cards = $derived(data.decks.get($lang));
   let card : Card = $derived(cards.get(data.card) as Card);
@@ -79,7 +79,7 @@
 {/if}
 </div>
 <style>
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 767px) 
     {
         div
         {

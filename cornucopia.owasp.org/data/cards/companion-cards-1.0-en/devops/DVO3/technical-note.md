@@ -1,0 +1,1 @@
+This card addresses the risk of insufficiently hardened internal systems and services, or configurations that degrade over time, creating exploitable weaknesses in the development and deployment infrastructure.

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* global request, __request */
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
@@ -17,7 +19,7 @@ function generateNonce() {
 }
 
 
-async function fetchAndStreamNotFoundPage(resp, request) {
+async function fetchAndStreamNotFoundPage(resp, _request) {
   const { status, statusText } = resp;
   const pathArray = resp.url.split( '/' );
   const protocol = pathArray[0];
@@ -122,3 +124,5 @@ async function generateNonceForResponse(originresponse) {
 
   return clientresponse;
 }
+
+

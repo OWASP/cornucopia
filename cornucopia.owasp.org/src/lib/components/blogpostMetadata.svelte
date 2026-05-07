@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import { resolve } from "$app/paths";
     import { Text } from "$lib/utils/text";
     import type { Blogpost } from "../../domain/blogpost/blogpost";
 
@@ -17,16 +18,16 @@
         <p>Date: {Text.FormatDate(blogpost.date)}</p>
         <p>
             Author:
-            <a href={authorLink}>{Text.Format(blogpost.author)}</a>
+            <a href={resolve(authorLink)}>{Text.Format(blogpost.author)}</a>
         </p>
         <div class="tags">
             <span class="tags-label">Tags:</span>
             <div class="tags-container">
-                {#each blogpost.tags || [] as tag}
+                {#each blogpost.tags || [] as tag (tag)}
                     <a
                         title={`OWASP Cornucopia new post titled: ${Text.Format(tag)}`}
                         class="tag"
-                        href="/news"
+                        href={resolve('/news')}
                     >
                         {Text.Format(tag)}
                     </a>
@@ -35,7 +36,7 @@
         </div>
     </div>
     <div class="right">
-        <button onclick={() => goto(authorLink)}>
+        <button onclick={() => goto(resolve(authorLink))}>
             <img
                 title={`OWASP Cornucopia news author ${Text.Format(blogpost.author)}`}
                 alt={`${blogpost.author} profile picture`}

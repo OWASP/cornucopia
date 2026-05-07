@@ -9,3 +9,5 @@ Reserved Typeface Name [Selawik](Selawik)
 
 Copyright 2020 The Open Sans Project Authors (https://github.com/googlefonts/opensans)
 Reserved Typeface Name [Open Sans](OpenSans).
+
+Copyright 2020 The Poppins Project Authors (https://github.com/itfoundry/Poppins)
