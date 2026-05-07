@@ -77,14 +77,14 @@ defmodule Copi.CardMigration do
                     safecode: set_mappings_for_card(card["safecode"])
                 )
                 "webapp" -> Ecto.Changeset.change(this_card,
-                    owasp_scp: set_mappings_for_card(card["owasp_scp"]),
-                    owasp_devguide: set_mappings_for_card(devguide),
-                    owasp_asvs: set_mappings_for_card(card["owasp_asvs"]),
+                    owasp_scp: [],
+                    owasp_devguide: [],
+                    owasp_asvs: [],
                     owasp_masvs: [],
                     owasp_mastg: [],
-                    owasp_appsensor: set_mappings_for_card(card["owasp_appsensor"]),
-                    capec: set_mappings_for_card(card["capec"]),
-                    safecode: set_mappings_for_card(card["safecode"])
+                    owasp_appsensor: [],
+                    capec: [],
+                    safecode: []
                 )
                 "masvs" -> Ecto.Changeset.change(this_card,
                     owasp_scp: [],

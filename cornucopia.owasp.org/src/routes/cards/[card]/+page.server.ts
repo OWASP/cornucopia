@@ -4,6 +4,7 @@ import type { PageServerLoad } from "./$types";
 import type { Route } from "../../../domain/routes/route";
 import type { Card } from "$domain/card/card";
 import { MappingService } from "$lib/services/mappingService";
+import { CapecService } from "$lib/services/capecService";
 
 export const load = (async ({ params }) => {
 
@@ -40,18 +41,24 @@ export const load = (async ({ params }) => {
   }
 
   const edition = card.edition;
+  const latestVersion = DeckService.getLatestVersion(edition);
+  const asvsVersion = latestVersion === '3.0' ? '5.0' : '4.0.3';
 
   const versions = DeckService.getVersions(edition);
-
+  let capecData = undefined;
+  if (edition === 'webapp' && parseFloat(latestVersion) >= 3.0) {
+        capecData = CapecService.getCapecData(edition, latestVersion);
+      }
   return {
     card: fixedCode,
     decks: decks,
     versions: versions,
     routes: new Map<string, Route[]>([
-      ["ASVSRoutes", FileSystemHelper.ASVSRouteMap()],
+      ["ASVSRoutes", FileSystemHelper.ASVSRouteMap(asvsVersion)],
     ]),
     mappingData: new MappingService().getCardMappingForLatestEdtions(),
-    languages: DeckService.getLanguages(card.edition),
+    languages: DeckService.getLanguagesForEditionVersion(edition, latestVersion),
+    capecData: capecData
   };
 
 }) satisfies PageServerLoad;

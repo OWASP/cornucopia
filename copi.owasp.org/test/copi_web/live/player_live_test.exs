@@ -145,7 +145,7 @@ defmodule CopiWeb.PlayerLiveTest do
       # Deal/play card for Other
       {:ok, card} = Cornucopia.create_card(%{
         category: "C", value: "V", description: "D", edition: "webapp", 
-        version: "2.2", external_id: "EXT", language: "en",
+        version: "3.0", external_id: "EXT", language: "en",
         misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [], 
         owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
       })
@@ -266,7 +266,7 @@ defmodule CopiWeb.PlayerLiveTest do
       # With no nil-round cards, last_round? = true → finished_at gets set.
       {:ok, card} = Cornucopia.create_card(%{
         category: "C", value: "V9", description: "D", edition: "webapp",
-        version: "2.2", external_id: "CLOSEDRND9", language: "en",
+        version: "3.0", external_id: "CLOSEDRND9", language: "en",
         misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
         owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
       })
@@ -290,7 +290,7 @@ defmodule CopiWeb.PlayerLiveTest do
 
       {:ok, card} = Cornucopia.create_card(%{
         category: "C", value: "V2", description: "D", edition: "webapp",
-        version: "2.2", external_id: "EXT2", language: "en",
+        version: "3.0", external_id: "EXT2", language: "en",
         misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
         owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
       })

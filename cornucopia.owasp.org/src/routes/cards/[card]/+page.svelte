@@ -73,7 +73,9 @@
   mappingData={data.mappingData.get(card.edition)}
   {languages}
   {language}
+  capecData={data.capecData}
 />
+
 {:else}
   <CardNotFound card={data.card} />
 {/if}
