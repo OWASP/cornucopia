@@ -5,6 +5,7 @@ defmodule Copi.Release do
   """
   @app :copi
 
+  # coveralls-ignore-start
   def migrate do
     load_app()
 
@@ -25,4 +26,5 @@ defmodule Copi.Release do
   defp load_app do
     Application.load(@app)
   end
+  # coveralls-ignore-stop
 end

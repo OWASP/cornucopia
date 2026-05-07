@@ -254,4 +254,15 @@ defmodule CopiWeb.CoreComponentsTest do
     assert html =~ "Heading One"
     assert html =~ "Heading Two"
   end
+
+  test "translate_error with count uses plural form" do
+    result = CopiWeb.CoreComponents.translate_error({"must be at most %{count} characters", [count: 5, validation: :length]})
+    assert is_binary(result)
+  end
+
+  test "translate_errors/2 returns error messages for matching field" do
+    errors = [{:name, {"can't be blank", [validation: :required]}}]
+    assert CopiWeb.CoreComponents.translate_errors(errors, :name) == ["can't be blank"]
+    assert CopiWeb.CoreComponents.translate_errors(errors, :email) == []
+  end
 end

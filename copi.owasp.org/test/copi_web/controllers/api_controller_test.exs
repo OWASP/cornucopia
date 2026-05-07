@@ -103,4 +103,16 @@ defmodule CopiWeb.ApiControllerTest do
 
     assert json_response(conn, 404)["error"] == "Player not found in this game"
   end
+
+  test "play_card returns 404 when dealt_card_id does not match any card for the player",
+       %{conn: conn, game: game, player: player} do
+    conn =
+      put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+        "game_id" => game.id,
+        "player_id" => player.id,
+        "dealt_card_id" => "9999999"
+      })
+
+    assert json_response(conn, 404)["error"] == "Could not find player and dealt card"
+  end
 end

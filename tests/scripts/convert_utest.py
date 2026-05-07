@@ -2278,6 +2278,38 @@ class TestGetLibreOfficeBin(unittest.TestCase):
         self.assertEqual(result, "/usr/bin/libreoffice")
 
 
+class TestAdditionalCoverageBranches(unittest.TestCase):
+    def test_parse_mapping_file_error_returns_empty_dict(self) -> None:
+        """Cover warning branch in _parse_mapping_file when opening fails."""
+        vars_obj = c.ConvertVars()
+        with mock.patch("builtins.open", side_effect=OSError("boom")):
+            result = vars_obj._parse_mapping_file("/nonexistent/mapping.yaml")
+        self.assertEqual(result, {})
+
+    def test_check_make_list_into_text_empty_list(self) -> None:
+        """Cover fallback text output for empty lists."""
+        self.assertEqual(c.check_make_list_into_text([]), " - ")
+
+    def test_validate_command_args_rejects_dangerous_chars(self) -> None:
+        """Cover dangerous character rejection branch."""
+        cmd_args = ["libreoffice", "regular", "bad;arg"]
+        self.assertFalse(c._validate_command_args(cmd_args))
+
+    def test_validate_command_args_allows_flags_and_known_options(self) -> None:
+        """Cover skip/continue branches for flags and known option values."""
+        cmd_args = [
+            "libreoffice",
+            "--headless",
+            "--convert-to",
+            "pdf",
+            "--outdir",
+            "C:/safe-out",
+            "-env:UserInstallation=file:///tmp/profile",
+            "safe_input.docx",
+        ]
+        self.assertTrue(c._validate_command_args(cmd_args))
+
+
 class TestConvertWithLibreOffice(unittest.TestCase):
 
     @patch("scripts.convert._get_libreoffice_bin", return_value=None)
@@ -2594,7 +2626,7 @@ class TestConvertFinalCoverage(unittest.TestCase):
 
         result = c.get_template_for_edition()
 
-        self.assertTrue(result.startswith("/abs/path/file"))
+        self.assertTrue(os.path.normpath(result).startswith(os.path.normpath("/abs/path/file")))
 
     @patch("scripts.convert.get_replacement_mapping_value", return_value=None)
     def test_replacement_skip_none_key(self, mock_map):

@@ -153,6 +153,17 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       assert_redirect(view, "/games/#{game.id}")
     end
 
+    test "shows validation error when player name is blank in :new path", %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      html =
+        view
+        |> form("#player-form", player: %{name: ""})
+        |> render_submit()
+
+      assert html =~ "can&#39;t be blank" or html =~ "blank"
+    end
+
     test "shows error when trying to join non-existent game", %{conn: conn} do
       fake_game_id = Ecto.ULID.generate()
 
@@ -160,5 +171,20 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
         live(conn, "/games/#{fake_game_id}/players/new")
       end
     end
+
+    test "form submit when game_id is deleted between page load and submit redirects to /games",
+         %{conn: conn, game: game} do
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
+
+      # Delete the game after the form is loaded (simulates game being deleted mid-session)
+      {:ok, _deleted_game} = Cornucopia.delete_game(game)
+
+      view
+      |> form("#player-form", player: %{name: "Ghost Player", game_id: game.id})
+      |> render_submit()
+
+      assert_redirect(view, "/games")
+    end
+
   end
 end
