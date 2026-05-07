@@ -79,7 +79,7 @@ class="card card-{index}"></div>
         filter:brightness(1.1);
     }
 
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 767px) 
     {
         .card
         {

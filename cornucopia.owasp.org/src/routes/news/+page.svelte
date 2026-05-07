@@ -223,7 +223,7 @@
         gap: 1rem;
     }
 
-    @media (max-aspect-ratio: 1/1) {
+    @media (max-width: 767px) {
         div {
             margin: 0 1rem;
         }

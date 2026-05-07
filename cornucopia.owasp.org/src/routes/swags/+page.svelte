@@ -68,7 +68,7 @@
         filter: drop-shadow(0px 4px 5px #00000023);
     }
 
-        @media (max-aspect-ratio: 1/1)
+        @media (max-width: 767px)
         {
             img
             {

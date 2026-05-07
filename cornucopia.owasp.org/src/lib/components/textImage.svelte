@@ -105,7 +105,7 @@
 		flex-direction: row;
 	}
 
-	@media (max-aspect-ratio: 1/1) {
+	@media (max-width: 767px) {
 		.container {
 			flex-direction: column;
 		}

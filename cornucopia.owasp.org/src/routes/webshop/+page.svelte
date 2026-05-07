@@ -46,7 +46,7 @@
         justify-content: space-between;
         overflow: none;
     }
-    @media (max-aspect-ratio: 1/1)
+    @media (max-width: 767px)
     {
         
         .vendor-container {

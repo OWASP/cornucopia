@@ -70,7 +70,7 @@
         margin-right: 1vw;
     }
 
-    @media (max-aspect-ratio: 1.5/1) {
+    @media (max-width: 1024px) {
         .mapping-title.browser-card-container,
         .mapping-value.browser-card-container {
             font-size: 2vw;

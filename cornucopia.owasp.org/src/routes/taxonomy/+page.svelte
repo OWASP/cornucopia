@@ -46,7 +46,7 @@
     {
         opacity:50%;
     }
-    @media (max-aspect-ratio: 1/1)
+    @media (max-width: 767px)
     {
         div
         {
