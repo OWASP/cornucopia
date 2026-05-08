@@ -1,4 +1,4 @@
----
+﻿---
 date: 20260508
 author: johan-sydseter
 tags: owasp,cornucopia,gamification,threat-modeling,security,agile
@@ -6,7 +6,7 @@ hidden: false
 description: The Cornucopia of Gamified Threat Modeling
 ---
 
-# Introducing OWASP Games for threat modeling Agentic AI, Cloud, DevOps, LLM, Automation, and Web
+# Introducing OWASP Games for threat modeling Agentic AI, Cloud, DevOps, Frontend, LLM, Automation, and Web
 
 ![The new Website App and Companion Editions](launch_photo_companion_web.jpg)
 
@@ -23,13 +23,13 @@ Too often, the shift-left mantra consists of implementing (AI-powered) code scan
 
 ![OWASP Cornucopia Website App Edition v3.0](launch_photo_webapp_web.jpg)
 
-In order to support that second question in particular, we have released the next version of [OWASP Cornucopia v3.0](https://github.com/OWASP/cornucopia/releases/tag/v3.0.0)
-. If you would like to buy a professional physical copy of v3.0, you can do so at [CyberSec Games](https://cybersecgames.com/collections/threat-modeling-games/products/owasp%C2%AE-cornucopia-3-0-website-app-edition-threat-modeling-cards-copy). You can also download the design files from the release and take them to your local printer or print them yourself.
+In order to support that second question in particular, we have released the next version of [OWASP Cornucopia v3.0](https://github.com/OWASP/cornucopia/releases/tag/v3.0.0).
+If you would like to buy a professional physical copy of v3.0, you can do so at [CyberSec Games](https://cybersecgames.com/collections/threat-modeling-games/products/owasp%C2%AE-cornucopia-3-0-website-app-edition-threat-modeling-cards-copy). You can also download the design files from the release and take them to your local printer or print them yourself.
 
 [OWASP Cornucopia](https://cornucopia.owasp.org/about) is a mechanism in the form of a card game to assist software development teams in identifying security requirements in Agile, conventional, and formal development processes. It is language, platform, and technology-agnostic.
-The formerly titled “Cornucopia — Ecommerce Website Edition” is now “Cornucopia — Website App Edition”. This edition was originally created in August 2012, released as v1.0 in February 2013, and has undergone several minor updates/releases over the following ten to fifteen years. This has been substantially updated in v2.0, in which the most noticeable change was an update of the OWASP ASVS mapping from ASVS v3.0 to v4.0, together with the creation of translations into six languages (EN, ES, FR, NL, NO-NB, and PT-BR) due to the efforts of past and current volunteers.
+The formerly titled “Cornucopia — Ecommerce Website Edition” was renamed in v2.0 to “Cornucopia — Website App Edition”. This edition was originally created in August 2012, released as v1.0 in February 2013, and has undergone several minor updates/releases over the following ten to fifteen years. This has been substantially updated in v2.0, in which the most noticeable change was an update of the OWASP ASVS mapping from ASVS v3.0 to v4.0, together with the creation of translations into six languages (EN, ES, FR, NL, NO-NB, and PT-BR) due to the efforts of past and current volunteers.
 
-The new version, available in 11 languages (EN, ES, FR, HI, NL, NO-NB, PT-PT, PT-BR, RU, UK, IT), includes all new cards and text that covers all OWASP ASVS 5.0 requirements and links them to more than [200 unique common attack patterns (CAPEC™)](https://cornucopia.owasp.org/edition/webapp/VEK/3.0/en#Mappings). Each of the common attack patterns will have a unique set of ASVS 5.0 requirements, which means that you never need to stop playing the game! You will always be able to return to the same card to discover new threats and security requirements to consider when building your software; that's the Cornucopia way.
+The new version, available in 11 languages (EN, ES, FR, HI, NL, NO-NB, PT-PT, PT-BR, RU, UK, IT), includes all new cards and text that cover all OWASP ASVS 5.0 requirements and links them to more than [200 unique common attack patterns (CAPEC™)](https://cornucopia.owasp.org/edition/webapp/VEK/3.0/en#Mappings). Each of the common attack patterns will have a unique set of ASVS 5.0 requirements, which means that you never need to stop playing the game! You will always be able to return to the same card to discover new threats and security requirements to consider when building your software; that's the Cornucopia way.
 
 We have also [created an API](https://cornucopia.owasp.org/api/docs) where you can find, programmatically, all requirements connected to each card together with a complete mapping between CAPECs and ASVS 5.0 requirements so that you can automate your threat modeling and requirement analysis processes. If you want to know more about the latest additions to the Website App Edition v3.0, read all about it on our blog post "[The Cornucopia of Gamified Threat Modeling](https://dev.to/owasp/the-cornucopia-of-gamified-threat-modeling-1c9k)"
 
@@ -37,7 +37,7 @@ We have also [created an API](https://cornucopia.owasp.org/api/docs) where you c
 
 ![OWASP Companion Edition v1.0](launch_photo_companion_web.jpg)
 
-Now, we are publishing the [OWASP Cornucopia Companion Edition](https://cornucopia.owasp.org/edition/companion) that comes with 6 companion suits (see: https://cornucopia.owasp.org/edition/companion) covering new topics: Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). A suit in the companion deck may replace (or be used in addition to) suits in the existing Website Edition so that the players can add a specific focus to their threat modeling: For example, say you are building an LLM application and want to perform threat modeling and security requirement analysis specifically for LLM. You would then use the OWASP Cornucopia Website Edition and the LLM companion suit as your elected OWASP Cornucopia focus area. The new version is immediately available online at [copi.owasp.org](https://copi.owasp.org) and for sale at [CyberSec Games](https://cybersecgames.com/). You can also download the design files from [the latest release](https://github.com/OWASP/cornucopia/releases/tag/v3.0.0).
+Today, we are publishing a brand new [OWASP Cornucopia Edition](https://cornucopia.owasp.org/edition/companion) to complement the existing two editions. The [OWASP Cornucopia Companion Edition v1.0](https://cornucopia.owasp.org/edition/companion) comes with 6 companion suits covering new topics: Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). A suit in the companion deck may replace (or be used in addition to) suits in the existing Website Edition so that the players can add a specific focus to their threat modeling: For example, say you are building an LLM application and want to perform threat modeling and security requirement analysis specifically for LLM. You would then use the OWASP Cornucopia Website Edition and the LLM companion suit as your elected OWASP Cornucopia focus area. The new version is immediately available online at [copi.owasp.org](https://copi.owasp.org) and for sale at [CyberSec Games](https://cybersecgames.com/). You can also download the design files from [the latest release](https://github.com/OWASP/cornucopia/releases/tag/v3.0.0).
 
 To commemorate the OWASP Foundation's 25th anniversary, we have also designed the case, leaflet, and cards specifically to celebrate the anniversary and OWASP's achievements within the field of application security and software engineering. We will also be attending the OWASP Global AppSec 2026 in Vienna, where we will be demoing the game for anyone who wants to come and play with us.
 
@@ -59,22 +59,22 @@ We also want to thank the people and contributors to Mitre's Common Attack Patte
 
 ## Walk that walk, talk that talk
 
-With the next version of OWASP Cornucopia, we are making it more than a game; it has become a fully fledged threat modeling tool. It doesn’t just feed into your threat modeling process; it drives it, and it doesn’t just work; it scales! A long-time project contributor, previously working at Banco de Crédito BCP, used OWASP Cornucopia to train hundreds of people in using [OWASP Cornucopia for threat modeling](https://cybersecgames.com/blogs/case-studies/identifying-abuse-before-designing-architecture-embedding-game-based-threat-modelling-into-agile-delivery-at-a-major-latin-american-bank).
+With this latest version of OWASP Cornucopia, we are making it more than a game; it has become a fully fledged threat modeling tool. It doesn’t just feed into your threat modeling process; it drives it, and it doesn’t just work; it scales! A long-time project contributor, previously working at Banco de Crédito BCP, used OWASP Cornucopia to train hundreds of people in using [OWASP Cornucopia for threat modeling](https://cybersecgames.com/blogs/case-studies/identifying-abuse-before-designing-architecture-embedding-game-based-threat-modelling-into-agile-delivery-at-a-major-latin-american-bank).
 Several companies, such as Admincontrol AS, a Euronext subsidiary, are using it as part of their custom development methodology and have made it the [primary mechanism for structured threat elicitation](https://cybersecgames.com/blogs/case-studies/case-study-scaling-threat-modelling-through-gamification-at-admincontrol). 
 
 "Continuous Gamified threat modeling", done the OWASP way, has been tested and proven to work and is generally welcomed by ISO auditors. Not only is it welcomed, but auditors also love to hear about how it can be used to create engagement and change the culture of the companies that make use of it. This, according to Admincontrol, which has been audited 4 times using all 97 controls from ISO 27001/27002 as part of their information security management system. "Continuous Gamified Threat Modeling" is about assisting software development teams in identifying security requirements in Agile, conventional, and formal development processes through continuous gamification and threat modeling for every feature and every release. Don't apologize for designing before coding, it's called thinking!
 
 ![Don't apologize for designing before coding, it's called thinking!](thinking.webp)
 
-And the developers? They love it! At Admincontrol, we always send out an anonymous survey to gather team feedback.
-The aggregate score for how satisfied respondents have been with all sessions we've held since we started OWASP Cornucopia in 2023 is 4.5 out of 5, which is the maximum. When asked how relevant the session was to the participant's job, the average score was 4.7 out of 5.
+And the developers? They love it! At the company I work for (Admincontrol), they always send out an anonymous survey to gather team feedback.
+The aggregate score for how satisfied respondents have been with all sessions they've held since they started to use OWASP Cornucopia in 2023 is 4.5 out of 5, which is the maximum. When asked how relevant the session was to the participant's job, the average score was 4.7 out of 5.
 
 ![Relevant for your job](relevant.png)
 ![How satisfied are you?](satisfied.png)
 
 The point here is not just to do your initial security risk assessment and be done with it, but to continuously look for new threats as you improve your software, in line with the [Threat Modeling Manifesto](https://www.threatmodelingmanifesto.org/).
 
-"Continuous Threat Modeling", a term described in "[Threat Modeling: A Practical Guide for Development Teams](https://www.amazon.com/Threat-Modeling-Identification-Avoidance-Secure/dp/1492056553)", is essential to keep your applications and infrastructure secure as you expand your system with new features and machines and increase the attack surface. Gamification can help you get started doing just that. So why would you want to continuously threat model your infrastructure and applications? Isn't it enough to just do a thorough check-up now and then? [Admincontrol, thought so as well](https://cybersecgames.com/blogs/case-studies/case-study-scaling-threat-modelling-through-gamification-at-admincontrol)!
+"Continuous Threat Modeling", a term described in "[Threat Modeling: A Practical Guide for Development Teams](https://www.amazon.com/Threat-Modeling-Identification-Avoidance-Secure/dp/1492056553)", is essential to keep your applications and infrastructure secure as you expand your system with new features and machines and increase the attack surface. Gamification can help you get started doing just that. So why would you want to continuously threat model your infrastructure and applications? Isn't it enough to just do a thorough check-up now and then? [Admincontrol thought so as well](https://cybersecgames.com/blogs/case-studies/case-study-scaling-threat-modelling-through-gamification-at-admincontrol)!
 
 Admincontrol used threat modeling to design its applications. They have large sessions that they run once a year and several smaller sessions for each sprint. They define Jira issues to mitigate these threats and assign them directly to the development team's backlog. Then they have security backlog grooming once a month with the product owners, where they discuss directly with them how they can resolve these issues.
 The first graph shows the resolution time for Jira issues created during the annual threat modeling session. The second graph shows the resolution of Jira issues for the threat modeling we do each sprint.
