@@ -1,4 +1,4 @@
-﻿---
+---
 date: 20260508
 author: johan-sydseter
 tags: owasp,cornucopia,gamification,threat-modeling,security,agile
