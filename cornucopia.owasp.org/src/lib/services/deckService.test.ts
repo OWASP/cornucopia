@@ -143,8 +143,8 @@ describe('DeckService tests', () => {
     }, 10000);
 
     describe('getLatestVersion', () => {
-        it('should return 2.2 for webapp', () => {
-            expect(DeckService.getLatestVersion('webapp')).toBe('2.2');
+        it('should return 3.0 for webapp', () => {
+            expect(DeckService.getLatestVersion('webapp')).toBe('3.0');
         });
 
         it('should return 1.1 for mobileapp', () => {
@@ -155,8 +155,8 @@ describe('DeckService tests', () => {
             expect(DeckService.getLatestVersion('companion')).toBe('1.0');
         });
 
-        it('should return 2.2 as default for unknown edition', () => {
-            expect(DeckService.getLatestVersion('unknown')).toBe('2.2');
+        it('should return 3.0 as default for unknown edition', () => {
+            expect(DeckService.getLatestVersion('unknown')).toBe('3.0');
         });
     }, 10000);
 

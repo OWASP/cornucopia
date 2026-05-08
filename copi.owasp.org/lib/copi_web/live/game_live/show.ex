@@ -118,7 +118,7 @@ defmodule CopiWeb.GameLive.Show do
 
   def latest_version(edition) do
     case edition do
-      "webapp" -> "2.2"
+      "webapp" -> "3.0"
       "ecommerce" -> "1.22"
       "mobileapp" -> "1.1"
       "mlsec" -> "1.0"

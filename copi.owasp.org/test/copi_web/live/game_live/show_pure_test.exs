@@ -11,7 +11,7 @@ defmodule CopiWeb.GameLive.ShowPureTest do
   end
 
   test "latest_version returns expected versions" do
-    assert Show.latest_version("webapp") == "2.2"
+    assert Show.latest_version("webapp") == "3.0"
     assert Show.latest_version("ecommerce") == "1.22"
     assert Show.latest_version("eop") == "5.1"
     assert Show.latest_version("other") == "1.0"

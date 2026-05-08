@@ -113,8 +113,7 @@
               pipenv run python scripts/convert.py -l all -lt guide -t bridge_qr -v 3.0 -e webapp --pdf
               pipenv run python scripts/convert.py -l en -lt guide -t bridge -v 3.0 -e webapp --pdf
               pipenv run python scripts/convert.py -l en -lt guide -t bridge_qr -v 3.0 -e webapp --pdf
-              pipenv run python scripts/convert.py -l en -lt cards -t tarot -v 1.0 -e companion
-              pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 1.0 -e companion
+              pipenv run python scripts/convert.py -l all -lt all -t all -v 1.0 -e companion
 
               #
               # Debug: List generated files to verify PDF and ODT files exist
@@ -249,8 +248,6 @@
                 resources/case/*\3.0_case_*.pdf
                 resources/case/*\1.1_case_*.pdf
                 resources/case/*\1.0_case_*.pdf
-                source/*1\.1-*.yaml
-                source/*3\.0-*.yaml
                 output/owasp_cornucopia_companion_1.0_en.zip
       sbom:
         needs: [hardening, pre-release]
