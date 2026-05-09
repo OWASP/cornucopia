@@ -14,7 +14,7 @@ This scenario falls into the **Tampering** category of STRIDE. IBM 701 does not 
 
 The process is not operating in the competitive way intended, because there is insufficient time for another user to bid/offer. This may also be considered a type of user denial of service.
 
-For further explanation, examples, possible symptoms,  and other closely-related automation threats which target inherent intended functionality and related design flaws, rather than implementation bugs, see the OWASP Automated Threat (OAT) identifiers in the mapping section and the reference [OWASP Automated Threat Handbook](https://owasp.org/www-project-automated-threats-to-web-applications/).
+For further explanation, examples, possible symptoms,  and other closely-related automation threats which target inherent intended functionality and related design flaws, rather than implementation bugs, see the OWASP Automated Threat (OAT) identifiers in the mapping section, and the reference [OWASP Automated Threat Handbook](https://owasp.org/www-project-automated-threats-to-web-applications/).
 
 ### What are we going to do about it?
 
