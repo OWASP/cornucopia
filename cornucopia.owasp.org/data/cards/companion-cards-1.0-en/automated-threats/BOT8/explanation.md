@@ -14,7 +14,7 @@ This scenario falls into the **Elevation of Privilege** category of STRIDE. UNIV
 
 Fake accounts do not contribute to valid use of applications, and could be used subsequently to generate spam, launder cash or goods, spread malware, affect reputation, cause mischief, or skew content, reviews and surveys.
 
-For further explanation, examples, possible symptoms,  and other closely-related automation threats which target inherent intended functionality and related design flaws, rather than implementation bugs, see the OWASP Automated Threat (OAT) identifiers in the mapping section and the reference [OWASP Automated Threat Handbook](https://owasp.org/www-project-automated-threats-to-web-applications/).
+For further explanation, examples, possible symptoms,  and other closely-related automation threats which target inherent intended functionality and related design flaws, rather than implementation bugs, see the OWASP Automated Threat (OAT) identifiers in the mapping section, and the reference [OWASP Automated Threat Handbook](https://owasp.org/www-project-automated-threats-to-web-applications/).
 
 ### What are we going to do about it?
 
