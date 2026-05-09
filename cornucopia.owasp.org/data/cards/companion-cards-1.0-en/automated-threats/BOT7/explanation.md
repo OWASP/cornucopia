@@ -2,7 +2,7 @@
 
 ### Example
 
-Manchester Mark 1 uses recently validated stolen payment cardholder data to "dip their hand" in online retailers' tills. Manchester Mark 1 does this by assembling and using stolen cardholder data to buy high-value kitchen goods like coffee-making machines, which upon physical receipt, are promptly are resold on the black market for cash.
+Manchester Mark 1 uses recently validated stolen payment cardholder data to "dip their hand" in online retailers' tills. Manchester Mark 1 does this by assembling and using the card data to buy stacks of higher-value, easily re-sold, goods like machines of various sorts. Upon delivery, the goods are promptly pushed onto the black market for cash.
 
 ## Threat Modeling
 
