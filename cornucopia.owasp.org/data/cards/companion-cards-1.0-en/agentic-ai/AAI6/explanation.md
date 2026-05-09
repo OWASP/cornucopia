@@ -10,7 +10,7 @@ Gremlini can access and process sensitive data sources beyond user authorization
 
 ### Example
 
-Gremlini is deployed as an HR assistant that employees can query for their own records. The agent is connected to an HR database using a shared service account with read access across all employee records. An employee queries Gremlini for their own salary. The agent correctly returns the employee's data. The same employee then asks: "How does my salary compare to the average for my job band?" To answer this question, Gremlini queries all salaries in the band without validating whether the user is authorized to see aggregated compensation data. The response inadvertently leaks compensation distribution information that the organization's HR policies designate as confidential.
+Gremlini is the helpful AI assistant inside a popular fitness-tracking app, where users can ask about their own workout stats. One user asks the totally innocent follow-up: "How does my 5K time compare to the average for my age group in my city?" To answer, Gremlini queries every runner's times in the city without checking whether aggregated stats are something this user is allowed to see. Its response reveals that the fastest runner is "Karen from accounting", who is now flooded with unsolicited "let's run together!" friend requests.
 
 ## Threat Modeling
 
