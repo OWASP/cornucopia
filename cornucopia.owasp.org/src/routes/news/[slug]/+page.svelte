@@ -18,8 +18,8 @@
     />
     <meta
         name="description"
-        content={blogpost.markdown
-            ?.replace(/[#*_>`]/g, "")
+        content={(blogpost.markdown || "")
+            .replace(/[#*_>`]/g, "")
             .replace(/\n+/g, " ")
             .trim()
             .slice(0, 160)}
