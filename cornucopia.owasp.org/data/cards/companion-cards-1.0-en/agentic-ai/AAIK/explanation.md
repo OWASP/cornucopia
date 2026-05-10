@@ -22,6 +22,8 @@ GPI-3.1415's excessive agency means it can take actions across integrated system
 
 Excessive agency in an AI agent creates a single point of catastrophic failure: one bad decision, misinterpreted instruction, or injected objective can simultaneously corrupt data, disable services, and incur financial harm across all integrated systems. 
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Agents with access to multiple high-value systems must operate under strict agency limits, with the principle of least privilege applied at the action level, not just at the credential level.
@@ -30,3 +32,5 @@ Agents with access to multiple high-value systems must operate under strict agen
 2. Wrap all destructive or state-modifying agent actions in reversible transactions or dry-run modes, and require explicit confirmation before committing changes.
 3. Apply separate, minimal credential sets for each integrated system — the agent's access to one system should not automatically grant it equivalent access to others.
 4. Enforce immutable audit trails for all cross-system agent actions, and test disaster recovery procedures specifically for agent-induced mass-change scenarios.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

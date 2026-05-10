@@ -21,6 +21,8 @@ The appropriate STRIDE category depends on the specific threat you create and th
 
 Agentic AI attacks combine the scale and speed of automated systems with the authority and cross-system reach granted to AI agents. A single successful attack can trigger cascading effects across all systems the agent is connected to, producing data loss, unauthorized transactions, service disruption, or persistent unauthorized access, often before any human reviewer notices the anomaly.
 
+For other things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Defenses for Agentic AI systems must address the full attack surface: the agent's inputs, its planning and reasoning process, its tool integrations, and its communication with other agents.
@@ -30,3 +32,5 @@ Defenses for Agentic AI systems must address the full attack surface: the agent'
 3. **Input and context validation:** Treat all agent inputs - prompts, retrieved content, tool output, agent messages — as untrusted until validated.
 4. **Agent identity and message integrity:** Authenticate inter-agent communication and sign workflow definitions to prevent spoofing and injection.
 5. **Resource budgets and circuit breakers:** Enforce hard limits on tool calls, API usage, and session duration to contain runaway or adversarially triggered execution.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

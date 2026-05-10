@@ -24,6 +24,8 @@ The attacker modifies the data the agent relies on - the conversation history or
 
 Corrupted reasoning chains can cause an agent to approve actions, grant permissions, or produce outputs it would otherwise reject. Because the corruption is embedded in context rather than in current input, it may persist across many interactions and affect decisions far removed from the point of injection. This makes detection difficult and remediation costly.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Agent memory and conversation history should be treated as untrusted data that requires validation before use, not as an extension of the trusted system prompt.
@@ -32,3 +34,5 @@ Agent memory and conversation history should be treated as untrusted data that r
 2. Scope agent memory access to the minimum necessary. Agents should not retrieve historical context beyond what is needed for the current task.
 3. Distinguish between user-supplied history and system-verified history in the context construction pipeline, and surface that distinction to the model.
 4. Monitor for anomalous reasoning patterns, such as sudden policy exceptions or previously unseen approvals, as an indicator of context poisoning.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

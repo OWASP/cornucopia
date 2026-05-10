@@ -24,9 +24,13 @@ CoPirate changes configurations, permissions, or role bindings in a way that inc
 
 Unauthorized configuration changes can silently degrade the organization's security posture, creating persistent vulnerabilities that outlast the agent session that caused them. Over-permissioned roles, disabled security controls, or misconfigured access policies may go undetected until exploited. 
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Agents must operate under the same change-management controls applied to human administrators, with additional automated guardrails appropriate to autonomous operation.
 
 1. Restrict agent tool access to the minimum set required for the task. Agents performing monitoring or reporting tasks should not have write access to configuration or permission systems.
 2. Require explicit human approval for any agent action that modifies security-relevant configuration, permissions, or infrastructure state.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

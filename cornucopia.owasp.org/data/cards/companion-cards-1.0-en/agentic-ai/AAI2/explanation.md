@@ -24,6 +24,8 @@ Tay is manipulated into modifying system state, data, or configurations beyond t
 
 When an AI agent executes actions outside its intended task scope, the consequences range from data exfiltration to unintended side effects in downstream systems. Organizations may suffer loss of confidential data, violation of user privacy, or compliance breaches — all while the agent continues to appear functional for its primary task.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Context isolation must be enforced at design time, not left to prompt wording alone. Agents should treat any content originating outside the trusted system prompt as untrusted, regardless of how it is framed.
@@ -33,3 +35,5 @@ Context isolation must be enforced at design time, not left to prompt wording al
 3. Require human confirmation before the agent takes irreversible or high-impact actions, particularly when the triggering input originates from untrusted sources.
 4. Log all agent actions with the originating input so anomalous scope expansions can be detected and audited.
 5. Regularly red-team agents with adversarial inputs to detect prompt injection vectors before deployment.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

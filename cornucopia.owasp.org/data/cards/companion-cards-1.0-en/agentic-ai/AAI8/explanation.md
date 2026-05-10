@@ -24,6 +24,8 @@ PreCursor's weak tool boundaries allow an attacker to escalate from a permitted 
 
 Successful exploitation of weak sandboxing can give an attacker arbitrary code execution on the server or container running the agent. From there, lateral movement to other services, exfiltration of secrets and credentials, and persistent backdoor installation are all possible.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Tool execution must be treated as the highest-risk action an agent can perform, with defense-in-depth applied at every layer of the execution stack.
@@ -32,3 +34,5 @@ Tool execution must be treated as the highest-risk action an agent can perform, 
 2. Run tool execution in isolated containers or sandboxes with no access to the host file system, network (except explicitly allowed endpoints), or other processes.
 3. Apply the principle of least privilege to the execution context. The process should run as a low-privilege user with no access to production credentials or sensitive environment variables.
 4. Log all tool invocations with the exact parameters passed and the output returned, and alert on patterns consistent with escape attempts (e.g., network calls from a code execution context).
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

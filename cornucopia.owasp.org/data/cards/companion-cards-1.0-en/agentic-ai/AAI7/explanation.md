@@ -24,6 +24,8 @@ The attacker tampers with external content that the agent will retrieve, injecti
 
 Indirect prompt injection via tool output is particularly dangerous because it can be staged entirely outside the target organization's control - on any web page, document, or API response the agent may encounter. Successful exploitation can result in data exfiltration, unauthorized API calls, deletion of records, or lateral movement within connected systems.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Tool output must be treated as untrusted external data and handled with the same caution applied to any other user-supplied input.
@@ -33,3 +35,5 @@ Tool output must be treated as untrusted external data and handled with the same
 3. Require human-in-the-loop confirmation before the agent takes any high-impact action, particularly when that action was triggered by externally retrieved content.
 4. Apply an allowlist of permitted actions that the agent may take autonomously; any action outside the allowlist requires explicit approval.
 5. Monitor for anomalous action sequences. Actions that do not align with the original task and appear correlated with specific tool-retrieval events.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

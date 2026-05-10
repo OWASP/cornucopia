@@ -22,6 +22,8 @@ An attacker alters or injects peer-agent instructions in the communication chann
 
 In multi-agent pipelines, a single compromised or rogue agent can corrupt the behavior of all agents that accept its instructions without verification. Fraudulent actions, data manipulation, unauthorized approvals, and privilege escalation can cascade through the pipeline before any individual system detects an anomaly. The systemic nature of multi-agent architectures amplifies the impact of a single spoofing event.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Agent-to-agent communication must be secured with the same rigor applied to human-to-system authentication, using verifiable identity and policy enforcement at every message boundary.
@@ -30,3 +32,5 @@ Agent-to-agent communication must be secured with the same rigor applied to huma
 2. Maintain an authoritative registry of permitted agent identities and their allowed instruction types; reject any message from an unregistered source or requesting an unauthorized action.
 3. Validate that received instructions fall within the policy scope established by the originating human user or task — agents should not be able to expand their own authority by relaying instructions through peer agents.
 4. Log all inter-agent communications with sender identity, instruction content, and the action taken, and alert on instructions that deviate from the expected workflow pattern.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

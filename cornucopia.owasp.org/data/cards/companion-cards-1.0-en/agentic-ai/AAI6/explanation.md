@@ -24,6 +24,8 @@ Gremlini retrieves sensitive information beyond the requesting user's authorizat
 
 Agents operating with broad data-access credentials can expose sensitive records belonging to other users, violate data segregation requirements, or leak aggregate information that reveals protected details. In regulated environments such as healthcare or finance, unauthorized data access can trigger breach notification obligations, regulatory penalties, and reputational damage.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Data access by AI agents must follow the same least-privilege and per-request authorization principles applied to human users and traditional application code.
@@ -32,4 +34,6 @@ Data access by AI agents must follow the same least-privilege and per-request au
 2. Provision agent data connectors with the minimum access necessary for the task. Avoid shared service accounts that span multiple users or sensitivity levels.
 3. Log all data-access operations with the user identity, query, and result set so access anomalies can be detected and audited.
 4. Test data isolation by attempting to access records of other users through the agent interface and verifying that responses are properly restricted.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
    
