@@ -22,6 +22,8 @@ Sensitive data that should have been destroyed at the end of a session remains a
 
 Failure to clear session data exposes personally identifiable information, health records, financial details, or internal application state to subsequent users of the same browser. On shared or public devices, this becomes a straightforward data breach requiring no technical sophistication. Residual tokens may also allow session resumption long after the user believed they had logged out.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Ensure that logout is a complete operation: authentication state, cached data, and persistent storage are all cleared.
@@ -29,3 +31,5 @@ Ensure that logout is a complete operation: authentication state, cached data, a
 1. On logout, explicitly clear all application-managed storage: `localStorage`, `sessionStorage`, IndexedDB entries, and any cookies set by the application.
 2. Invalidate the session token server-side on logout, so that any residual token cannot be reused to re-authenticate.
 3. Set appropriate `Cache-Control` headers (`no-store`) on API responses that return sensitive data, so the browser does not cache them.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

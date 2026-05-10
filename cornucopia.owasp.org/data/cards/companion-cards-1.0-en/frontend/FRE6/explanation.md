@@ -22,6 +22,8 @@ Olga presents a stolen token to the backend and is indistinguishable from the le
 
 Session hijacking gives an attacker complete control over the victim's account for as long as the token remains valid. All actions taken through the hijacked session are attributed to the victim in audit logs, complicating incident response. Depending on the application, this can lead to data exfiltration, financial fraud, account takeover, or lateral movement to other systems the victim has access to.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Protect authentication tokens from JavaScript access and limit the window of opportunity for stolen tokens to be reused.
@@ -30,3 +32,5 @@ Protect authentication tokens from JavaScript access and limit the window of opp
 2. Set the `Secure` flag on authentication cookies so they are only transmitted over HTTPS, and apply the `SameSite=Strict` or `SameSite=Lax` attribute to reduce cross-site request risks.
 3. Keep token lifetimes short and implement refresh token rotation, so a stolen access token expires quickly.
 4. Eliminate XSS vulnerabilities that would give an attacker a JavaScript execution vector — address the root cause, not only the token storage mechanism.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

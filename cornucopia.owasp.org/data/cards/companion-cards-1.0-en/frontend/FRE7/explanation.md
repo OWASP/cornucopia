@@ -24,6 +24,8 @@ Carlos exploits misconfigured CORS and unsafe `postMessage` handling to manipula
 
 A permissive CORS policy on an authenticated API turns any attacker-controlled website into a proxy for that API, with the victim's credentials silently attached. Unsafe `postMessage` handling can expose private data, trigger state-changing actions, or serve as a pivot for further attacks such as session hijacking. The victim is typically unaware that anything has occurred.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Apply strict origin validation to all cross-origin communication channels.
@@ -32,3 +34,5 @@ Apply strict origin validation to all cross-origin communication channels.
 2. Avoid `Access-Control-Allow-Credentials: true` unless absolutely necessary and combined with an explicit, validated allowlist of origins.
 3. In every `postMessage` listener, validate `event.origin` against a strict allowlist before processing the message or acting on its content.
 4. Audit all iframe embedding: use the `X-Frame-Options` or `frame-ancestors` CSP directive to control which origins may embed the application.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.
