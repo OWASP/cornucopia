@@ -15,6 +15,10 @@ export const handle = async ({ event, resolve }) => {
     pathname.startsWith('/build') ||
     pathname.startsWith('/cards') ||
     pathname.startsWith('/card') ||
+    pathname === '/error' ||
+    pathname === '/error/' ||
+    pathname === '/404' ||
+    pathname === '/404/' ||
     pathname === '/favicon.ico' ||
     pathname === '/robots.txt' ||
     pathname === '/rss.xml' ||
