@@ -41,3 +41,5 @@ The consequences of failed backup and recovery strategies become apparent only a
 7. Store backups in a separate location so the same incident that takes down production does not also take down your recovery capability.
 
 It might be difficult to define how frequently backups should be performed (i.e., how much data loss is acceptable) and how long the recovery should take. Consult your business stakeholders to understand their expectations and, if available, teams responsible for infrastructure to get help translating these expectations into reality.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
