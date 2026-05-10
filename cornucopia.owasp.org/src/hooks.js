@@ -21,3 +21,6 @@ export function reroute({ url }) {
 
   return strippedPath;
 }
+
+/** @type {import('@sveltejs/kit').Transport} */
+export const transport = {};
