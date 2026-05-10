@@ -10,7 +10,7 @@ PreCursor can execute unintended code or system actions when tool input validati
 
 ### Example
 
-PreCursor is an AI development assistant that can execute code snippets to help users debug programs. A malicious user submits a prompt asking the assistant to "run a quick test on this function" and includes code that opens a reverse shell to an external server. PreCursor passes the code to its execution tool without stripping dangerous system calls or confining execution to a restricted interpreter. The code runs successfully within the assistant's sandbox, which lacks network egress controls, and establishes an outbound connection to the attacker's infrastructure. The attacker now has interactive access to the environment where the AI assistant executes.
+PreCursor is a Discord bot in a popular programming community that runs members' Python snippets so they can show off cool tricks and tiny bugs. A mischievous member submits "this totally cool one-liner I just want to test", a snippet that quietly opens a reverse shell to a laptop in their bedroom. PreCursor, with no input validation and a sandbox that has internet access, runs it without delay. Five minutes later, the member has interactive shell access to the bot's host server and is happily using it to mine cryptocurrency on the moderators' machine.
 
 ## Threat Modeling
 

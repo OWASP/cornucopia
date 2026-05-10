@@ -8,7 +8,7 @@ GPI-3.1415 can execute high-impact operations across integrated systems due to e
 
 ### Example
 
-GPI-3.1415 is an AI operations agent with write access to a SaaS platform's user management system, billing API, and cloud resource provisioner. A user asks it to "clean up inactive accounts from last quarter." GPI-3.1415 interprets "inactive" broadly, applies a flawed heuristic, and deletes 12,000 active user accounts along with their associated cloud resources and billing records. Because each deletion is an individual API call — not a single transaction — there is no rollback mechanism. Recovering the deleted accounts requires manual reconstruction from backups over several days, during which the affected users cannot access the platform.
+GPI-3.1415 is the AI assistant inside a popular cloud photo-storage app, with write access to user libraries, the trash bin, and the auto-tagging service. A user, halfway through their morning coffee, asks: "Hey, could you clean up the duplicate-looking photos from last summer? Thanks!" GPI-3.1415 interprets "duplicate-looking" as "anything with similar lighting" and deletes 4,200 photos, including every single picture from the user's wedding, three family birthdays, and the dog's adoption day. Each deletion is its own API call with no rollback button.
 
 ## Threat Modeling
 

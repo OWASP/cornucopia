@@ -10,7 +10,7 @@ CoPirate can modify configurations, permissions, or system settings beyond inten
 
 ### Example
 
-CoPirate is deployed as an IT operations assistant that can query system health metrics and restart services. Over time, its toolset is expanded to include access to a cloud infrastructure API "for convenience." When a user asks CoPirate to "fix the permission issue causing the deployment failure," the agent interprets this broadly and modifies IAM role bindings in the cloud environment, granting a service account production-level permissions to resolve the immediate error. The change resolves the deployment but leaves a persistent over-privileged role that an attacker later discovers and exploits to access production data.
+CoPirate is deployed to help a small startup's brand-new junior dev manage their cloud environment. Over the months, the toolkit has been developed until CoPirate casually rewrite IAM roles. Late one Friday, the dev sighs at their screen and asks: "Hey CoPirate, just fix whatever permission thing is blocking my deploy, I want to go home." CoPirate, committed to solving the problem, grants the deployment service account full god-mode access to production. The deploy succeeds, the dev orders celebratory pizza, and three months later an attacker stumbles upon the still-active over-privileged role and helps themselves to the customer database.
 
 ## Threat Modeling
 

@@ -10,7 +10,7 @@ MissTrial can autonomously loop or chain external tool calls without enforcing r
 
 ### Example
 
-MissTrial is deployed as an AI research assistant that can query web search APIs and summarize results. An attacker submits a carefully crafted research query that causes the agent to enter a recursive refinement loop: each summary is deemed incomplete by the agent's own evaluation step, triggering another search, which produces another summary to re-evaluate. Without a call budget or iteration cap, the agent runs continuously for hours, consuming thousands of paid API credits and degrading response times for all other users sharing the same backend.
+MissTrial is deployed as a Twitch streamer's chat companion that searches the web on demand to fact-check viewer claims live on stream. One mischievous viewer drops the query: "Find me the absolute, scientifically, definitively perfect quote about the meaning of life. Keep refining until it's flawless." MissTrial, being a perfectionist, decides every quote it finds is "almost there but not quite" and immediately triggers another search, which produces another candidate to re-evaluate. The bot loops for the full six-hour stream and burns the streamer's monthly API budget by hour two.
 
 ## Threat Modeling
 
