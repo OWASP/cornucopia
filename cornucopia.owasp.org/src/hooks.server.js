@@ -13,6 +13,7 @@ export const handle = async ({ event, resolve }) => {
     pathname.startsWith('/_app') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/build') ||
+    pathname.endsWith('.html') ||
     pathname.startsWith('/cards') ||
     pathname.startsWith('/card') ||
     pathname === '/error' ||
