@@ -12,7 +12,7 @@ export default {
 				include: ['/*'],
 				exclude: ["/build/*"]
 			},
-			fallback: '/error'
+			fallback: 'error.html'
 		}),
 		alias: {
 			$data: "data",
