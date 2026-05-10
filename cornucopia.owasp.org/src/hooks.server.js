@@ -25,7 +25,7 @@ export const handle = async ({ event, resolve }) => {
     const preferred = acceptLang.split(',')[0]?.split('-')[0]?.toLowerCase() || '';
     const selectedLang = supportedLangs.includes(preferred) ? preferred : 'en';
     const suffix = pathname === '/' ? '/' : pathname;
-    throw redirect(302, `/${selectedLang}${suffix}${event.url.search}`);
+    throw redirect(302, `/${selectedLang}${suffix}`);
   }
 
   const requestedLang = supportedLangs.includes(proxiedLang)
