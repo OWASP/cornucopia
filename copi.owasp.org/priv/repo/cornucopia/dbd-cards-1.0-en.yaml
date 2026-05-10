@@ -1,0 +1,27 @@
+---
+meta:
+  edition: "dbd"
+  component: "cards"
+  language: "EN"
+  version: "1.0"
+
+suits:
+  -
+    id: "DB"
+    name: "Data Breach Defense"
+    cards:
+      -
+        id: "DB2"
+        value: "2"
+        desc: "Sensitive data may be exposed due to improper handling or insecure storage."
+
+      -
+        id: "DB3"
+        value: "3"
+        desc: "Weak authentication mechanisms may allow attackers to compromise accounts."
+
+      -
+        id: "DBA"
+        value: "A"
+        desc: "You've identified a new DBD-related threat."
+        misc: "Read more about this topic ..."
