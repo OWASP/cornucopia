@@ -34,6 +34,13 @@ export default {
 			 throw new Error(message);
 			},
 			entries: [
+				'/',
+				'/en/',
+				'/es/',
+				'/uk/',
+				'/en/about',
+				'/es/about',
+				'/uk/about',
 				'/cards/AAA',
 				'/cards/AA2',
 				'/cards/AA3',
