@@ -188,7 +188,7 @@ suits:
     id: FRE9
     value: 9
     url: https://cornucopia.owasp.org/cards/FRE9
-    desc: Sophia reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions.
+    desc: Sophia reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions
   -
     id: FREX
     value: 10
