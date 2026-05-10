@@ -1,25 +1,54 @@
+import { redirect } from '@sveltejs/kit';
 import { defaultLocale, locales, setLocale, locale, translations, loading } from '$lib/translations';
 /** @type {import('@sveltejs/kit').Handle} */
 
 export const handle = async ({ event, resolve }) => {
-  const { url: _url, request } = event;
+  const { request } = event;
+  const supportedLangs = ['en', 'es', 'uk'];
+  const pathname = event.url.pathname;
+  const pathMatch = pathname.match(/^\/(en|es|uk)(\/|$)/i);
+  const proxiedLang = request.headers.get('x-i18n-lang')?.toLowerCase() || '';
+  const isProxyRequest = request.headers.get('x-i18n-proxy') === '1';
+  const isAssetOrApiPath =
+    pathname.startsWith('/_app') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/build') ||
+    pathname.startsWith('/cards') ||
+    pathname.startsWith('/card') ||
+    pathname === '/favicon.ico' ||
+    pathname === '/robots.txt' ||
+    pathname === '/rss.xml' ||
+    pathname === '/sitemap.xml';
+
+  if (!pathMatch && !isAssetOrApiPath && !isProxyRequest) {
+    const acceptLang = request.headers.get('accept-language') || '';
+    const preferred = acceptLang.split(',')[0]?.split('-')[0]?.toLowerCase() || '';
+    const selectedLang = supportedLangs.includes(preferred) ? preferred : 'en';
+    const suffix = pathname === '/' ? '/' : pathname;
+    throw redirect(302, `/${selectedLang}${suffix}${event.url.search}`);
+  }
+
+  const requestedLang = supportedLangs.includes(proxiedLang)
+    ? proxiedLang
+    : pathMatch
+      ? pathMatch[1].toLowerCase()
+      : defaultLocale;
 
   // Get defined locales
   const supportedLocales = locales.get().map((l) => l.toLowerCase());
+  const userLocale = supportedLocales.includes(requestedLang) ? requestedLang : defaultLocale;
 
-  // Get user preferred locale
-  let userLocale = request.headers.get('accept-language') || defaultLocale;
-
-  // Set default locale if user preferred locale does not match
-  if (!supportedLocales.includes(userLocale)) userLocale = defaultLocale;
   await loading.toPromise();
   await setLocale(userLocale);
   locale.set(userLocale);
-  
+
+  const currentTranslations = translations.get();
+  const activeTranslation = currentTranslations[userLocale] || currentTranslations[defaultLocale];
+  const fallbackTranslation = currentTranslations[defaultLocale];
 
   // Add html `lang` attribute
-  const response = await resolve({ ...event, locals: { lang: userLocale, translation: translations.get()[userLocale], fallbackTranslation: translations.get()[defaultLocale] } }, {
-    transformPageChunk: ({ html }) => html.replace(/<html.*>/, `<html lang="${userLocale}">`).replaceAll(/<script[^>]*>/gi, `<script nonce="DhcnhD3khTMePgXw">`),
+  const response = await resolve({ ...event, locals: { lang: requestedLang, translation: activeTranslation, fallbackTranslation } }, {
+    transformPageChunk: ({ html }) => html.replace(/<html.*>/, `<html lang="${requestedLang}">`).replaceAll(/<script[^>]*>/gi, `<script nonce="DhcnhD3khTMePgXw">`),
   });
 
   const securityHeaders = {
