@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { building } from '$app/environment';
 import { defaultLocale, locales, setLocale, locale, translations, loading } from '$lib/translations';
 /** @type {import('@sveltejs/kit').Handle} */
 
@@ -25,7 +26,7 @@ export const handle = async ({ event, resolve }) => {
     pathname === '/rss.xml' ||
     pathname === '/sitemap.xml';
 
-  if (!pathMatch && !isAssetOrApiPath && !isProxyRequest) {
+  if (!building && !pathMatch && !isAssetOrApiPath && !isProxyRequest) {
     const acceptLang = request.headers.get('accept-language') || '';
     const preferred = acceptLang.split(',')[0]?.split('-')[0]?.toLowerCase() || '';
     const selectedLang = supportedLangs.includes(preferred) ? preferred : 'en';
