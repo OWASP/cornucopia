@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+  import { page } from '$app/state';
+
   interface Props {
     edition: string;
     cardId: string;
@@ -31,6 +34,14 @@
   function getLanguageName(code: string): string {
     return languageNames[code] || code;
   }
+
+  function switchLanguagePrefix(selectedLanguage: string): void {
+    const currentPath = page.url.pathname;
+    const currentSearch = page.url.search;
+    const withoutPrefix = currentPath.replace(/^\/(en|es|uk)(?=\/|$)/, '') || '/';
+    const nextPath = `/${selectedLanguage}${withoutPrefix === '/' ? '/' : withoutPrefix}${currentSearch}`;
+    goto(nextPath);
+  }
 </script>
 
 <div class="pickers">
@@ -60,12 +71,10 @@ onchange={(e) => {
     <select
       id="language-select"
       value={currentLanguage}
-onchange={(e) => {
-  const selectedLanguage = (e.target as HTMLSelectElement).value;
-
-  window.location.href =
-    `/edition/${edition}/${cardId}/${version}/${selectedLanguage}`;
-}}
+      onchange={(e) => {
+        const selectedLanguage = (e.target as HTMLSelectElement).value;
+        switchLanguagePrefix(selectedLanguage);
+      }}
     >
       {#each filteredLanguages as lang (lang)}
         <option value={lang} selected={lang === currentLanguage}>
@@ -74,7 +83,6 @@ onchange={(e) => {
       {/each}
     </select>
   </div>
-
 </div>
 
 
