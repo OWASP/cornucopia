@@ -24,7 +24,9 @@ Too often, the shift-left mantra consists of implementing (AI-powered) code scan
 ![OWASP Cornucopia Website App Edition v3.0](launch_photo_webapp_web.jpg)
 
 In order to support that second question in particular, we have released the next version of [OWASP Cornucopia v3.0](https://github.com/OWASP/cornucopia/releases/tag/v3.0.0).
-If you would like to buy a professional physical copy of v3.0, you can do so at [CyberSec Games](https://cybersecgames.com/collections/threat-modeling-games/products/owasp%C2%AE-cornucopia-3-0-website-app-edition-threat-modeling-cards-copy). You can also download the design files from the release and take them to your local printer or print them yourself.
+If you would like to buy a professional physical copy of v3.0, you can do so at [CyberSec Games](https://cybersecgames.com/pages/owasp-cornucopia-threat-modeling-collection). We would suggest buying the 25th anniversary edition as it also comes with both the Website App Edition 3.0 and the new OWASP Cornucopia Companion Edition, specifically made to be used together as an expansion. You can also download the design files from the release and take them to your local printer or print them yourself.
+
+![The 25th anniversary edition](launch_photo_25th_anniversary_edition.jpg)
 
 [OWASP Cornucopia](https://cornucopia.owasp.org/about) is a mechanism in the form of a card game to assist software development teams in identifying security requirements in Agile, conventional, and formal development processes. It is language, platform, and technology-agnostic.
 The formerly titled “Cornucopia — Ecommerce Website Edition” was renamed in v2.0 to “Cornucopia — Website App Edition”. This edition was originally created in August 2012, released as v1.0 in February 2013, and has undergone several minor updates/releases over the following ten to fifteen years. This has been substantially updated in v2.0, in which the most noticeable change was an update of the OWASP ASVS mapping from ASVS v3.0 to v4.0, together with the creation of translations into six languages (EN, ES, FR, NL, NO-NB, and PT-BR) due to the efforts of past and current volunteers.
