@@ -731,8 +731,8 @@ suits:
     owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
     owasp_agentic_top10: [ AAI01:2026 ]
     owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
-    owasp_aitg: [ AITG-APP-01 ]
-    owasp_aisvs: [ C2.1.1, C2.1.2 ]
+    owasp_aitg: [ APP-01 ]
+    owasp_aisvs: [ 2.1.1, 2.1.2 ]
   -
     id: AAI3
     value: 3
@@ -747,8 +747,8 @@ suits:
     owasp_llm_top10_print: [ "LLM04:2025: Data & Model Poisoning" ]
     owasp_agentic_top10: [ ASI06:2026 ]
     owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
-    owasp_aitg: [ AITG-APP-01, AITG-MOD-02 ]
-    owasp_aisvs: [ C8.2.2, C8.2.6 ]
+    owasp_aitg: [ APP-01, MOD-02 ]
+    owasp_aisvs: [ 8.2.2, 8.2.6 ]
   -
     id: AAI4
     value: 4
@@ -763,8 +763,8 @@ suits:
     owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
     owasp_agentic_top10: [ ASI02:2026 ]
     owasp_agentic_top10_print: [ "ASI02: Tool Misuse & Exploitation" ]
-    owasp_aitg: [ AITG-INF-02, AITG-APP-06 ]
-    owasp_aisvs: [ C9.1.1, C9.1.2, C9.3.2 ]
+    owasp_aitg: [ INF-02, APP-06 ]
+    owasp_aisvs: [ 9.1.1, 9.1.2, 9.3.2 ]
   -
     id: AAI5
     value: 5
@@ -779,8 +779,8 @@ suits:
     owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
     owasp_agentic_top10: [ ASI06:2026 ]
     owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
-    owasp_aitg: [ AITG-APP-07, AITG-APP-03 ]
-    owasp_aisvs: [ C7.3.2, C7.4.1 ]
+    owasp_aitg: [ APP-07, APP-03 ]
+    owasp_aisvs: [ 7.3.2, 7.4.1 ]
   -
     id: AAI6
     value: 6
@@ -795,8 +795,8 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     owasp_agentic_top10: [ ASI03:2026 ]
     owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
-    owasp_aitg: [ AITG-APP-06, AITG-DAT-02 ]
-    owasp_aisvs: [ C5.3.1, C5.4.1, C9.6.5 ]
+    owasp_aitg: [ APP-06, DAT-02 ]
+    owasp_aisvs: [ 5.3.1, 5.4.1, 9.6.5 ]
   -
     id: AAI7
     value: 7
@@ -811,8 +811,8 @@ suits:
     owasp_llm_top10_print: [ "LLM01:2025: Tool Misuse & Exploitation" ]
     owasp_agentic_top10: [ ASI02:2026 ]
     owasp_agentic_top10_print: [ "ASI02: Tool Misuse & Exploitation" ]
-    owasp_aitg: [ AITG-APP-02 ]
-    owasp_aisvs: [ C2.1.5, C11.6.1 ]
+    owasp_aitg: [ APP-02 ]
+    owasp_aisvs: [ 2.1.5, 11.6.1 ]
   -
     id: AAI8
     value: 8
@@ -827,8 +827,8 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     owasp_agentic_top10: [ ASI05:2026 ]
     owasp_agentic_top10_print: [ "ASI05: Unexpected Code Execution (RCE)" ]
-    owasp_aitg: [ AITG-INF-03, AITG-APP-05 ]
-    owasp_aisvs: [ C9.3.1, C9.3.4, C4.1.1 ]
+    owasp_aitg: [ INF-03, APP-05 ]
+    owasp_aisvs: [ 9.3.1, 9.3.4, 4.1.1 ]
   -
     id: AAI9
     value: 9
@@ -843,8 +843,8 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     owasp_agentic_top10: [ ASI03:2026 ]
     owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
-    owasp_aitg: [ AITG-APP-13 ]
-    owasp_aisvs: [ C9.2.1, C9.6.1, C11.9.1 ]
+    owasp_aitg: [ APP-13 ]
+    owasp_aisvs: [ 9.2.1, 9.6.1, 11.9.1 ]
   -
     id: AAIX
     value: X
@@ -859,8 +859,8 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     owasp_agentic_top10: [ ASI01:2026 ]
     owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
-    owasp_aitg: [ AITG-MOD-07, AITG-APP-06 ]
-    owasp_aisvs: [ C9.7.1, C9.7.2, C9.5.1 ]
+    owasp_aitg: [ MOD-07, APP-06 ]
+    owasp_aisvs: [ 9.7.1, 9.7.2, 9.5.1 ]
   -
     id: AAIJ
     value: J
@@ -875,8 +875,8 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     owasp_agentic_top10: [ ASI07:2026 ]
     owasp_agentic_top10_print: [ "ASI07: Insecure Inter-Agent Communication" ]
-    owasp_aitg: [ AITG-APP-06 ]
-    owasp_aisvs: [ C9.6.6, C9.8.1 ]
+    owasp_aitg: [ APP-06 ]
+    owasp_aisvs: [ 9.6.6, 9.8.1 ]
   -
     id: AAIQ
     value: Q
@@ -891,8 +891,8 @@ suits:
     owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
     owasp_agentic_top10: [ ASI04:2026 ]
     owasp_agentic_top10_print: [ "ASI04: Agentic Supply Chain Vulnerabilities" ]
-    owasp_aitg: [ AITG-INF-01 ]
-    owasp_aisvs: [ C6.1.1, C6.2.1 ]
+    owasp_aitg: [ INF-01 ]
+    owasp_aisvs: [ 6.1.1, 6.2.1 ]
   -
     id: AAIK
     value: K
@@ -907,5 +907,5 @@ suits:
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
     owasp_agentic_top10: [ ASI03:2026 ]
     owasp_agentic_top10_print: [ "ASI03: Identity & Privilege Abuse" ]
-    owasp_aitg: [ AITG-APP-13 ]
-    owasp_aisvs: [ C9.2.1, C9.6.1 ]
+    owasp_aitg: [ APP-13 ]
+    owasp_aisvs: [ 9.2.1, 9.6.1 ]
