@@ -40,7 +40,7 @@
 		"typescript-eslint": "^8.59.2",
 		"vite": "^7.3.2",
 		"vitest": "^4.0.17",
-		"wait-on": "^9.0.5",
+		"wait-on": "^9.0.6",
 		"wrangler": "4.90.0"
 	},
 	"type": "module",
