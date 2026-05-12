@@ -67,7 +67,7 @@ defmodule CopiWeb.CoreComponents.Buttons do
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3.535 3.535a4 4 0 01-5.656-5.656l1.414-1.414M10.172 13.828a4 4 0 010-5.656l3.535-3.535a4 4 0 015.656 5.656l-1.414 1.414" />
         </svg>
       </button>
-      <input id="copied-url" class="w-full rounded-md px-3 py-3 text-sm font-semibold shadow-sm text-gray-500 break-all" value={@uri} />
+      <input id="copied-url" class="min-w-0 mt-2 w-full rounded-md px-3 py-3 text-sm font-semibold shadow-sm text-gray-500 break-all" value={@uri} />
       <span id="url-copied" class="hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
