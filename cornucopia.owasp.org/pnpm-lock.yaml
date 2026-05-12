@@ -13,7 +13,7 @@ importers:
     dependencies:
       '@sveltejs/adapter-static':
         specifier: ^3.0.10
-        version: 3.0.10(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))
+        version: 3.0.10(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -28,13 +28,13 @@ importers:
         version: 8.0.1
       svelte-i18n:
         specifier: ^4.0.1
-        version: 4.0.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+        version: 4.0.1(svelte@5.55.5(@typescript-eslint/types@8.59.3))
       svelte-markdown:
         specifier: ^0.4.1
-        version: 0.4.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+        version: 0.4.1(svelte@5.55.5(@typescript-eslint/types@8.59.3))
       sveltekit-i18n:
         specifier: ^2.4.2
-        version: 2.4.2(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+        version: 2.4.2(svelte@5.55.5(@typescript-eslint/types@8.59.3))
       swagger-ui-dist:
         specifier: ^5.32.5
         version: 5.32.5
@@ -53,22 +53,22 @@ importers:
         version: 10.0.1(eslint@10.3.0(jiti@2.6.1))
       '@sveltejs/adapter-auto':
         specifier: ^7.0.0
-        version: 7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))
+        version: 7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))
       '@sveltejs/adapter-cloudflare':
         specifier: ^7.2.6
-        version: 7.2.8(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(wrangler@4.90.0)
+        version: 7.2.8(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(wrangler@4.90.0)
       '@sveltejs/kit':
         specifier: ^2.59.1
-        version: 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+        version: 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.4
-        version: 6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+        version: 6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
       '@types/node':
         specifier: ^25.6.2
         version: 25.6.2
       '@typescript-eslint/parser':
-        specifier: ^8.59.2
-        version: 8.59.2(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
+        specifier: ^8.59.3
+        version: 8.59.3(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)
       '@vitest/coverage-v8':
         specifier: ^4.0.17
         version: 4.0.18(vitest@4.0.18(@types/node@25.6.2)(jiti@2.6.1))
@@ -80,7 +80,7 @@ importers:
         version: 10.3.0(jiti@2.6.1)
       eslint-plugin-svelte:
         specifier: ^3.17.1
-        version: 3.17.1(eslint@10.3.0(jiti@2.6.1))(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+        version: 3.17.1(eslint@10.3.0(jiti@2.6.1))(svelte@5.55.5(@typescript-eslint/types@8.59.3))
       globals:
         specifier: ^17.6.0
         version: 17.6.0
@@ -89,13 +89,13 @@ importers:
         version: 14.2.6
       svelte:
         specifier: ^5.55.5
-        version: 5.55.5(@typescript-eslint/types@8.59.2)
+        version: 5.55.5(@typescript-eslint/types@8.59.3)
       svelte-check:
         specifier: ^4.4.8
-        version: 4.4.8(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)
+        version: 4.4.8(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)
       svelte-eslint-parser:
         specifier: ^1.6.1
-        version: 1.6.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+        version: 1.6.1(svelte@5.55.5(@typescript-eslint/types@8.59.3))
       svelte-sitemap:
         specifier: ^3.1.0
         version: 3.1.0
@@ -1198,8 +1198,21 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
+  '@typescript-eslint/parser@8.59.3':
+    resolution: {integrity: sha512-HPwA+hVkfcriajbNvTmZv4VRauibay+cWArYUYq7u7W7PmGShMxbPxLvrwDme55a6d5alG3nrYfhyJ/G28XlLg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
   '@typescript-eslint/project-service@8.59.2':
     resolution: {integrity: sha512-+2hqvEkeyf/0FBor67duF0Ll7Ot8jyKzDQOSrxazF/danillRq2DwR9dLptsXpoZQqxE1UisSmoZewrlPas9Vw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/project-service@8.59.3':
+    resolution: {integrity: sha512-ECiUWa/KYRGDFUqTNehaRgzDshnJfkTABJxVemHk4ko22gcr0ukloKjWvyQ64g8YCV/UI47kN1dbmjf/GaQYng==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
@@ -1208,8 +1221,18 @@ packages:
     resolution: {integrity: sha512-JzfyEpEtOU89CcFSwyNS3mu4MLvLSXqnmX05+aKBDM+TdR5jzcGOEBwxwGNxrEQ7p/z6kK2WyioCGBf2zZBnvg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/scope-manager@8.59.3':
+    resolution: {integrity: sha512-t2LvZnoEfzKtnPjgeEu41xw5gxq9mQVfYy4OoZ4Vlt0sk3JwxmhCca/AR7DwOiHrjWgjAj6as4AhRLKSDfvZIA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/tsconfig-utils@8.59.2':
     resolution: {integrity: sha512-BKK4alN7oi4C/zv4VqHQ+uRU+lTa6JGIZ7s1juw7b3RHo9OfKB+bKX3u0iVZetdsUCBBkSbdWbarJbmN0fTeSw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/tsconfig-utils@8.59.3':
+    resolution: {integrity: sha512-PcIJHjmaREXLgIAIzLnSY9VucEzz8FKXsRgFa1DmdGCK/5tJpW03TKJF01Q6VZd1lLdz2sIKPWaDUZN9dp//dw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
@@ -1225,8 +1248,18 @@ packages:
     resolution: {integrity: sha512-e82GVOE8Ps3E++Egvb6Y3Dw0S10u8NkQ9KXmtRhCWJJ8kDhOJTvtMAWnFL16kB1583goCWXsr0NieKCZMs2/0Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/types@8.59.3':
+    resolution: {integrity: sha512-ePFoH0g4ludssdRFqqDxQePCxU4WQyRa9+XVwjm7yLn0FKhMeoetC+qBEEI1Eyb1pGSDveTIT09Bvw2WhlGayg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/typescript-estree@8.59.2':
     resolution: {integrity: sha512-o0XPGNwcWw+FIwStOWn+BwBuEmL6QXP0rsvAFg7ET1dey1Nr6Wb1ac8p5HEsK0ygO/6mUxlk+YWQD9xcb/nnXg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/typescript-estree@8.59.3':
+    resolution: {integrity: sha512-CbRjVRAf7Lr9Kr8RopKcbY45p2VfmmHrm0ygOCYFi7oU8q19m0Fs/6iHS7kNOmwpp+ob07ZVcAqlxUod9lYdmg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
@@ -1240,6 +1273,10 @@ packages:
 
   '@typescript-eslint/visitor-keys@8.59.2':
     resolution: {integrity: sha512-NwjLUnGy8/Zfx23fl50tRC8rYaYnM52xNRYFAXvmiil9yh1+K6aRVQMnzW6gQB/1DLgWt977lYQn7C+wtgXZiA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/visitor-keys@8.59.3':
+    resolution: {integrity: sha512-f1UQF7ggd42YiwI5wGrRaPsa+P0CINBlrkLPmGfpq/u/I/oVtecoEIfFR9ag/oa1sLOsRNZ6xehf6qMZhQGBDg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@vitest/coverage-v8@4.0.18':
@@ -2314,6 +2351,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.0:
+    resolution: {integrity: sha512-AcM7dV/5ul4EekoQ29Agm5vri8JNqRyj39o0qpX6vDF2GZrtutZl5RwgD1XnZjiTAfncsJhMI48QQH3sN87YNA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   serve-handler@6.1.7:
     resolution: {integrity: sha512-CinAq1xWb0vR3twAv9evEU8cNWkXCb9kd5ePAHUKJBkOsUpR1wt/CvGdeca7vqumL1U5cSaeVQ6zZMxiJ3yWsg==}
 
@@ -3346,26 +3388,26 @@ snapshots:
     dependencies:
       acorn: 8.16.0
 
-  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))':
+  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))':
     dependencies:
-      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
 
-  '@sveltejs/adapter-cloudflare@7.2.8(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(wrangler@4.90.0)':
+  '@sveltejs/adapter-cloudflare@7.2.8(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(wrangler@4.90.0)':
     dependencies:
       '@cloudflare/workers-types': 4.20260219.0
-      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
       worktop: 0.8.0-next.18
       wrangler: 4.90.0
 
-  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))':
+  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))':
     dependencies:
-      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
 
-  '@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))':
+  '@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3)(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
-      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
       '@types/cookie': 0.6.0
       acorn: 8.16.0
       cookie: 1.1.1
@@ -3376,31 +3418,31 @@ snapshots:
       mrmime: 2.0.1
       set-cookie-parser: 3.1.0
       sirv: 3.0.2
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
       vite: 7.3.2(@types/node@25.6.2)(jiti@2.6.1)
     optionalDependencies:
       typescript: 6.0.3
 
-  '@sveltejs/vite-plugin-svelte-inspector@5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))':
+  '@sveltejs/vite-plugin-svelte-inspector@5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
       obug: 2.1.1
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
       vite: 7.3.2(@types/node@25.6.2)(jiti@2.6.1)
 
-  '@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))':
+  '@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.2))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
+      '@sveltejs/vite-plugin-svelte-inspector': 5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1)))(svelte@5.55.5(@typescript-eslint/types@8.59.3))(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
       deepmerge: 4.3.1
       magic-string: 0.30.21
       obug: 2.1.1
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
       vite: 7.3.2(@types/node@25.6.2)(jiti@2.6.1)
       vitefu: 1.1.3(vite@7.3.2(@types/node@25.6.2)(jiti@2.6.1))
 
-  '@sveltekit-i18n/base@1.3.7(svelte@5.55.5(@typescript-eslint/types@8.59.2))':
+  '@sveltekit-i18n/base@1.3.7(svelte@5.55.5(@typescript-eslint/types@8.59.3))':
     dependencies:
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
 
   '@sveltekit-i18n/parser-default@1.1.1': {}
 
@@ -3470,10 +3512,31 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/parser@8.59.3(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.59.3
+      '@typescript-eslint/types': 8.59.3
+      '@typescript-eslint/typescript-estree': 8.59.3(typescript@6.0.3)
+      '@typescript-eslint/visitor-keys': 8.59.3
+      debug: 4.4.3
+      eslint: 10.3.0(jiti@2.6.1)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/project-service@8.59.2(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.59.2(typescript@6.0.3)
-      '@typescript-eslint/types': 8.59.2
+      '@typescript-eslint/tsconfig-utils': 8.59.3(typescript@6.0.3)
+      '@typescript-eslint/types': 8.59.3
+      debug: 4.4.3
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/project-service@8.59.3(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/tsconfig-utils': 8.59.3(typescript@6.0.3)
+      '@typescript-eslint/types': 8.59.3
       debug: 4.4.3
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -3484,7 +3547,16 @@ snapshots:
       '@typescript-eslint/types': 8.59.2
       '@typescript-eslint/visitor-keys': 8.59.2
 
+  '@typescript-eslint/scope-manager@8.59.3':
+    dependencies:
+      '@typescript-eslint/types': 8.59.3
+      '@typescript-eslint/visitor-keys': 8.59.3
+
   '@typescript-eslint/tsconfig-utils@8.59.2(typescript@6.0.3)':
+    dependencies:
+      typescript: 6.0.3
+
+  '@typescript-eslint/tsconfig-utils@8.59.3(typescript@6.0.3)':
     dependencies:
       typescript: 6.0.3
 
@@ -3502,6 +3574,8 @@ snapshots:
 
   '@typescript-eslint/types@8.59.2': {}
 
+  '@typescript-eslint/types@8.59.3': {}
+
   '@typescript-eslint/typescript-estree@8.59.2(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/project-service': 8.59.2(typescript@6.0.3)
@@ -3511,6 +3585,21 @@ snapshots:
       debug: 4.4.3
       minimatch: 10.2.5
       semver: 7.7.4
+      tinyglobby: 0.2.16
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/typescript-estree@8.59.3(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/project-service': 8.59.3(typescript@6.0.3)
+      '@typescript-eslint/tsconfig-utils': 8.59.3(typescript@6.0.3)
+      '@typescript-eslint/types': 8.59.3
+      '@typescript-eslint/visitor-keys': 8.59.3
+      debug: 4.4.3
+      minimatch: 10.2.5
+      semver: 7.8.0
       tinyglobby: 0.2.16
       ts-api-utils: 2.5.0(typescript@6.0.3)
       typescript: 6.0.3
@@ -3531,6 +3620,11 @@ snapshots:
   '@typescript-eslint/visitor-keys@8.59.2':
     dependencies:
       '@typescript-eslint/types': 8.59.2
+      eslint-visitor-keys: 5.0.1
+
+  '@typescript-eslint/visitor-keys@8.59.3':
+    dependencies:
+      '@typescript-eslint/types': 8.59.3
       eslint-visitor-keys: 5.0.1
 
   '@vitest/coverage-v8@4.0.18(vitest@4.0.18(@types/node@25.6.2)(jiti@2.6.1))':
@@ -3980,7 +4074,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-plugin-svelte@3.17.1(eslint@10.3.0(jiti@2.6.1))(svelte@5.55.5(@typescript-eslint/types@8.59.2)):
+  eslint-plugin-svelte@3.17.1(eslint@10.3.0(jiti@2.6.1))(svelte@5.55.5(@typescript-eslint/types@8.59.3)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.3.0(jiti@2.6.1))
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -3992,9 +4086,9 @@ snapshots:
       postcss-load-config: 3.1.4(postcss@8.5.14)
       postcss-safe-parser: 7.0.1(postcss@8.5.14)
       semver: 7.7.4
-      svelte-eslint-parser: 1.6.1(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+      svelte-eslint-parser: 1.6.1(svelte@5.55.5(@typescript-eslint/types@8.59.3))
     optionalDependencies:
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
     transitivePeerDependencies:
       - ts-node
 
@@ -4080,11 +4174,11 @@ snapshots:
     dependencies:
       estraverse: 5.3.0
 
-  esrap@2.2.5(@typescript-eslint/types@8.59.2):
+  esrap@2.2.5(@typescript-eslint/types@8.59.3):
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
     optionalDependencies:
-      '@typescript-eslint/types': 8.59.2
+      '@typescript-eslint/types': 8.59.3
 
   esrecurse@4.3.0:
     dependencies:
@@ -4670,6 +4764,8 @@ snapshots:
 
   semver@7.7.4: {}
 
+  semver@7.8.0: {}
+
   serve-handler@6.1.7:
     dependencies:
       bytes: 3.0.0
@@ -4702,7 +4798,7 @@ snapshots:
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
-      semver: 7.7.4
+      semver: 7.8.0
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.34.5
       '@img/sharp-darwin-x64': 0.34.5
@@ -4815,19 +4911,19 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  svelte-check@4.4.8(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.2))(typescript@6.0.3):
+  svelte-check@4.4.8(picomatch@4.0.4)(svelte@5.55.5(@typescript-eslint/types@8.59.3))(typescript@6.0.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       chokidar: 4.0.3
       fdir: 6.5.0(picomatch@4.0.4)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
       typescript: 6.0.3
     transitivePeerDependencies:
       - picomatch
 
-  svelte-eslint-parser@1.6.1(svelte@5.55.5(@typescript-eslint/types@8.59.2)):
+  svelte-eslint-parser@1.6.1(svelte@5.55.5(@typescript-eslint/types@8.59.3)):
     dependencies:
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1
@@ -4837,9 +4933,9 @@ snapshots:
       postcss-selector-parser: 7.1.1
       semver: 7.7.4
     optionalDependencies:
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
 
-  svelte-i18n@4.0.1(svelte@5.55.5(@typescript-eslint/types@8.59.2)):
+  svelte-i18n@4.0.1(svelte@5.55.5(@typescript-eslint/types@8.59.3)):
     dependencies:
       cli-color: 2.0.4
       deepmerge: 4.3.1
@@ -4847,14 +4943,14 @@ snapshots:
       estree-walker: 2.0.2
       intl-messageformat: 10.7.11
       sade: 1.8.1
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
       tiny-glob: 0.2.9
 
-  svelte-markdown@0.4.1(svelte@5.55.5(@typescript-eslint/types@8.59.2)):
+  svelte-markdown@0.4.1(svelte@5.55.5(@typescript-eslint/types@8.59.3)):
     dependencies:
       '@types/marked': 5.0.2
       marked: 5.1.2
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
 
   svelte-sitemap@3.1.0:
     dependencies:
@@ -4863,7 +4959,7 @@ snapshots:
       minimist: 1.2.8
       xmlbuilder2: 4.0.3
 
-  svelte@5.55.5(@typescript-eslint/types@8.59.2):
+  svelte@5.55.5(@typescript-eslint/types@8.59.3):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -4876,7 +4972,7 @@ snapshots:
       clsx: 2.1.1
       devalue: 5.7.1
       esm-env: 1.2.2
-      esrap: 2.2.5(@typescript-eslint/types@8.59.2)
+      esrap: 2.2.5(@typescript-eslint/types@8.59.3)
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.21
@@ -4884,11 +4980,11 @@ snapshots:
     transitivePeerDependencies:
       - '@typescript-eslint/types'
 
-  sveltekit-i18n@2.4.2(svelte@5.55.5(@typescript-eslint/types@8.59.2)):
+  sveltekit-i18n@2.4.2(svelte@5.55.5(@typescript-eslint/types@8.59.3)):
     dependencies:
-      '@sveltekit-i18n/base': 1.3.7(svelte@5.55.5(@typescript-eslint/types@8.59.2))
+      '@sveltekit-i18n/base': 1.3.7(svelte@5.55.5(@typescript-eslint/types@8.59.3))
       '@sveltekit-i18n/parser-default': 1.1.1
-      svelte: 5.55.5(@typescript-eslint/types@8.59.2)
+      svelte: 5.55.5(@typescript-eslint/types@8.59.3)
 
   swagger-ui-dist@5.32.5:
     dependencies:
