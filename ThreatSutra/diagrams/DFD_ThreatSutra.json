@@ -1920,7 +1920,7 @@
             }
           }
         ],
-        "description": "The AI-assisted security requirement prioritization engine will be part of the second phase of this project where we look at how we can make sure the system remembers what previously has been analyzed and take that into consideration when raking work items for the new user stories."
+        "description": "The AI-assisted security requirement prioritization engine will be part of the second phase of this project where we look at how we can make sure the system remembers what previously has been analyzed and take that into consideration when ranking work items for the new user stories."
       },
       {
         "id": 2,
