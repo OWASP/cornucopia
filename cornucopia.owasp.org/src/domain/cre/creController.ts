@@ -34,14 +34,14 @@ export class CreController {
     private static editions: Map<string, string> = new Map<string, string>([
         ['webapp', "OWASP Cornucopia Website App Edition"],
         ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
-        ['companion', "OWASP Cornucopia Companion Edition"]
+        ['companion', "OWASP Cornucopia Companion Edition"],
         ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"]
     ]);
 
     private static category: Map<string, string> = new Map<string, string>([
         ['webapp', "Website Application"],
         ['mobileapp', "Mobile Application"],
-        ['companion', "Companion suits"]
+        ['companion', "Companion suits"],
         ['dbd', "Digital Benefits and Disbenefits"]
     ]);
 

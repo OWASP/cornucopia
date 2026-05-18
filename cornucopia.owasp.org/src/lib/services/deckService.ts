@@ -126,16 +126,16 @@ export class DeckService {
                 let file: string;
                 try {
                     file = fs.readFileSync(path, 'utf8');
-                    let parsed = fm(file);
+                    const parsed = fm(file);
                     cardObject.concept = parsed.body;
-                } catch (e) {
+                } catch {
                     console.warn(`Warning: Missing technical-note for ${cardObject.id} at ${path}`);
                     cardObject.concept = cardObject.desc || '';
                 }
 
                 try {
                     cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
-                } catch (e) {
+                } catch {
                     console.warn(`Warning: Missing explanation for ${cardObject.id} at ./${base}${cardFolderPath}/explanation.md`);
                     cardObject.summary = '';
                 }
