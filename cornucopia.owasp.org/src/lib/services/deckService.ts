@@ -128,16 +128,17 @@ export class DeckService {
                     file = fs.readFileSync(path, 'utf8');
                     const parsed = fm(file);
                     cardObject.concept = parsed.body;
-                } catch {
-                    console.warn(`Warning: Missing technical-note for ${cardObject.id} at ${path}`);
-                    cardObject.concept = cardObject.desc || '';
+                } catch (e) {
+                    console.error(`Error: Missing technical-note for ${cardObject.id || 'unknown'} at ${path}`, e);
+                    continue;
                 }
 
+                const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
                     cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
-                } catch {
-                    console.warn(`Warning: Missing explanation for ${cardObject.id} at ./${base}${cardFolderPath}/explanation.md`);
-                    cardObject.summary = '';
+                } catch (e) {
+                    console.error(`Error: Missing explanation for ${cardObject.id || 'unknown'} at ${explanationPath}`, e);
+                    continue;
                 }
 
 
