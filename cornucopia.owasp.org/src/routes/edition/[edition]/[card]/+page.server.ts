@@ -8,8 +8,7 @@ import { CapecService } from "$lib/services/capecService";
 export const load = (({ params }) => {
     const edition =  params?.edition;
     const version = DeckService.getLatestVersion(edition);
-    let asvsVersion: string = "4.0.3";
-    if (params.version === '3.0') asvsVersion = '5.0';
+    const asvsVersion = version === '3.0' ? '5.0' : '4.0.3';
     if (!DeckService.hasEdition(edition)) error(
       404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
     

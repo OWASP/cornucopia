@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { GET } from './+server';
 import { DeckService } from '$lib/services/deckService';
@@ -120,7 +121,7 @@ describe('GET /api/cre/[edition]/[lang]', () => {
 
     it('falls back to webapp and en defaults when url has no path segments', () => {
         vi.spyOn(DeckService, 'getLanguages').mockReturnValue(['en']);
-        vi.spyOn(DeckService, 'getLatestVersion').mockReturnValue('2.2');
+        vi.spyOn(DeckService, 'getLatestVersion').mockReturnValue('3.0');
         vi.spyOn(DeckService.prototype, 'getCardDataForEditionVersionLang')
             .mockReturnValue(new Map([['VE2', { id: 'VE2' }]]) as any);
         vi.spyOn(MappingService.prototype, 'getCardMappingForLatestEdtions')
@@ -128,6 +129,6 @@ describe('GET /api/cre/[edition]/[lang]', () => {
 
         try {
             GET({ url: { pathname: '/' } } as any);
-        } catch (_) {}
+        } catch (_) { /* expected error */ }
     });
 });

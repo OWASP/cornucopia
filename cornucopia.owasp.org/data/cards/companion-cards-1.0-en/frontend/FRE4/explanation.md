@@ -22,6 +22,8 @@ James modifies the document the victim's browser renders, injecting code that ex
 
 DOM XSS gives an attacker code execution inside the victim's browser session, at the privilege level of the application. The attacker can steal session cookies, capture keystrokes, perform actions on the user's behalf, redirect to phishing pages, or modify page content to display false information. Unlike server-side XSS, DOM XSS payloads may never reach the server, making them invisible to server-side logging and WAF rules.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Eliminate unsafe DOM manipulation and apply a defence-in-depth approach to script execution control.
@@ -30,3 +32,5 @@ Eliminate unsafe DOM manipulation and apply a defence-in-depth approach to scrip
 2. Encode all user-controlled data before inserting it into an HTML, JavaScript, CSS, or URL context — using context-appropriate encoding, not a generic HTML-escape.
 3. Apply a strict Content Security Policy (CSP) that disallows inline scripts and restricts script sources to trusted origins, reducing the impact of any remaining sink.
 4. Treat URL fragments, query parameters, and `postMessage` data as untrusted input and validate or sanitise them before use.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

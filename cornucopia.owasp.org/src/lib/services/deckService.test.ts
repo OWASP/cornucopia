@@ -1,3 +1,4 @@
+ 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckService } from './deckService';
 import type { Card } from '$domain/card/card';
@@ -142,8 +143,8 @@ describe('DeckService tests', () => {
     }, 10000);
 
     describe('getLatestVersion', () => {
-        it('should return 2.2 for webapp', () => {
-            expect(DeckService.getLatestVersion('webapp')).toBe('2.2');
+        it('should return 3.0 for webapp', () => {
+            expect(DeckService.getLatestVersion('webapp')).toBe('3.0');
         });
 
         it('should return 1.1 for mobileapp', () => {
@@ -154,8 +155,8 @@ describe('DeckService tests', () => {
             expect(DeckService.getLatestVersion('companion')).toBe('1.0');
         });
 
-        it('should return 2.2 as default for unknown edition', () => {
-            expect(DeckService.getLatestVersion('unknown')).toBe('2.2');
+        it('should return 3.0 as default for unknown edition', () => {
+            expect(DeckService.getLatestVersion('unknown')).toBe('3.0');
         });
     }, 10000);
 
@@ -297,7 +298,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCards('en');
             expect(result).toBeInstanceOf(Map);
@@ -315,12 +316,12 @@ suits:
                 }
             );
 
-            // First call â€” populates cache
+            // First call -> populates cache
             const firstResult = deckService.getCards('en');
             expect(firstResult.has('MOBILE-1')).toBe(true);
             expect(firstResult.has('WEB-1')).toBe(true);
 
-            // Second call â€” must hit cache with fully-merged result, not a partial one
+            // Second call -> must hit cache with fully-merged result, not a partial one
             const secondResult = deckService.getCards('en');
             expect(secondResult.has('MOBILE-1')).toBe(true);
             expect(secondResult.has('WEB-1')).toBe(true);
@@ -369,7 +370,7 @@ suits:
                     '0': { name: 'Data Validation' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -412,7 +413,7 @@ suits:
                     '0': { name: 'Authentication' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'es');
             expect(result.size).toBe(1);
@@ -455,7 +456,7 @@ suits:
                     '1': { name: 'Last Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -500,7 +501,7 @@ suits:
                     '1': { name: 'Last Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
@@ -533,7 +534,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -573,7 +574,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -612,7 +613,7 @@ suits:
                     '0': { name: 'Test Suit' }
                 }
             };
-            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+            vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
@@ -736,8 +737,8 @@ suits:
         desc: Card 1
 `;
 
-    // First call â†’ YAML
-    // Second call â†’ throw error (simulate markdown failure)
+    // First call -> YAML
+    // Second call -> throw error (simulate markdown failure)
     vi.mocked(fs.readFileSync)
         .mockReturnValueOnce(mockYamlContent)
         .mockImplementationOnce(() => {
@@ -749,7 +750,7 @@ suits:
             '0': { name: 'Test Suit' }
         }
     };
-    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
+    vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 

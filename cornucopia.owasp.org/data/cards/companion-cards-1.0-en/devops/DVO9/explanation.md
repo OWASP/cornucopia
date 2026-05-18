@@ -38,3 +38,4 @@ Pipeline manipulation gives attackers a powerful execution context with broad ac
 5. Use the configuration supported by your CI platform to limit secrets exposed in individual steps - ideally each step should only have access to the credentials it actually needs.
 6. If possible, block or limit internet access from your runners to make exfiltration more difficult.
 
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

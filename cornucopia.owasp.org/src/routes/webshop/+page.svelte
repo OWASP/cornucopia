@@ -28,7 +28,7 @@
     vendorName="CyberSec Games"
     logoSource="/images/cybersecgames.svg"
     productImageSource="/images/owasp-cornucopia-preview.png"
-    webshopLink="https://cybersecgames.com/products/owasp-cornucopia-2-1-website-app-edition-threat-modeling-cards">
+    webshopLink="https://cybersecgames.com/pages/owasp-cornucopia-threat-modeling-collection">
     </CardVendor>
 
     <CardVendor
@@ -46,7 +46,7 @@
         justify-content: space-between;
         overflow: none;
     }
-    @media (max-aspect-ratio: 1/1)
+    @media (max-width: 767px)
     {
         
         .vendor-container {

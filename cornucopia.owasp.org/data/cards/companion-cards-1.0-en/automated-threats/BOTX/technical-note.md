@@ -1,0 +1,1 @@
+This card is about trying to identify missing credentials data by using automated brute force, dictionary or guessing methods. It is known as cracking, and may be used with payment cardholder data, login credentials, coupon numbers, voucher codes, discount tokens, etc.

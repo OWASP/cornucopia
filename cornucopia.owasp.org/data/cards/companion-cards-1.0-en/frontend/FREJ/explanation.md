@@ -25,6 +25,8 @@ Elena's extension reads data that the user and application treat as private — 
 
 A malicious extension with broad permissions is effectively a keylogger and DOM scraper running at the browser level, with access to every authenticated session the user has open. Stolen tokens can be used to take over accounts, scraped form data can expose credentials and sensitive business information, and injected scripts can silently alter transactions before they are submitted to the server.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Reduce the application's exposure to extension-level access and educate users about extension risk.
@@ -33,3 +35,5 @@ Reduce the application's exposure to extension-level access and educate users ab
 2. Apply a strict Content Security Policy to limit what scripts can execute on the page, reducing extension injection vectors even if a script is injected.
 3. Use the Permissions-Policy header to restrict access to sensitive browser APIs (camera, microphone, geolocation) that extensions could abuse, even if they inject malicious scripts.
 4. Where the organization controls the browser environment (e.g., enterprise deployments), enforce an allowlist of approved extensions through device management policy.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

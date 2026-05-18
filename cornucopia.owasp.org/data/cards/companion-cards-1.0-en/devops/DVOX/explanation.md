@@ -39,3 +39,5 @@ Stale credentials and excessive privileges accumulate over time and create persi
 5. Periodically check what service accounts and API keys are still active in your projects, and remove any that are not in use. Check if they still need all the permissions they have.
 6. Use multi-factor authentication for access to sensitive DevOps infrastructure where the option is available.
 7. Where supported, prefer ephemeral tokens or workload identities over long-lived credentials.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

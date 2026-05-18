@@ -24,6 +24,8 @@ Sophia presents a token that the server believes is genuine, allowing her to imp
 
 Forged or compromised tokens grant the attacker the identity and permissions of any user in the system, including administrators. Because the token is structurally valid, the server processes requests normally and audit logs attribute the attacker's actions to the impersonated account. Token reuse after a breach or account closure extends the window of exposure indefinitely if there is no revocation mechanism.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Sign tokens with strong secrets that are never exposed to clients, validate them rigorously, and limit their lifespan.
@@ -33,3 +35,5 @@ Sign tokens with strong secrets that are never exposed to clients, validate them
 3. Store signing secrets server-side only, never in frontend bundles, environment variables accessible to clients, or source code repositories.
 4. Set short expiry times on access tokens (minutes to hours) and use refresh token rotation so that a stolen token's usefulness degrades quickly.
 5. Implement token revocation for sensitive operations (logout, password change, account suspension) using a server-side denylist or short-lived tokens tied to a session record.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

@@ -22,9 +22,13 @@ Darius operates outside the boundaries of his authorized scope, performing actio
 
 When a JavaScript application's reach is not bounded by the authorization model enforced on every API call, a compromised or curious user can turn a personal account into an administrative tool. In multi-tenant systems, this can result in full cross-tenant data exposure, configuration manipulation, or account compromise at scale. In Electron or Node-based apps with file system or process access, the attack surface extends beyond the web API to the host operating system.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Enforce strict authorization boundaries on every API call, treating the frontend as untrusted regardless of the application type.
 
 1. Validate the caller's authorization for every operation on the server side, including cross-tenant access; never rely on the frontend to restrict which tenant IDs or resource identifiers a user submits.
 2. Apply the principle of least privilege to the APIs exposed to the JavaScript client: users should only be able to reach operations relevant to their own account and role.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

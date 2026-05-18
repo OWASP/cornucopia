@@ -36,3 +36,5 @@ Isolation failures expose the entire host and potentially the wider infrastructu
 4. Review your workload configurations to check for excessive privileges or capabilities that are not actually needed.
 5. If certain workloads handle sensitive data or operations (e.g., signing your artifacts), consider running them on dedicated hosts or in more tightly isolated environments.
 6. Keep the runtime and host environment up to date with security patches to reduce the risk of known isolation bypass vulnerabilities.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

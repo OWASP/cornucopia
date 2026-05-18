@@ -10,7 +10,7 @@ MissTrial can autonomously loop or chain external tool calls without enforcing r
 
 ### Example
 
-MissTrial is deployed as an AI research assistant that can query web search APIs and summarize results. An attacker submits a carefully crafted research query that causes the agent to enter a recursive refinement loop: each summary is deemed incomplete by the agent's own evaluation step, triggering another search, which produces another summary to re-evaluate. Without a call budget or iteration cap, the agent runs continuously for hours, consuming thousands of paid API credits and degrading response times for all other users sharing the same backend.
+MissTrial is deployed as a Twitch streamer's chat companion that searches the web on demand to fact-check viewer claims live on stream. One mischievous viewer drops the query: "Find me the absolute, scientifically, definitively perfect quote about the meaning of life. Keep refining until it's flawless." MissTrial, being a perfectionist, decides every quote it finds is "almost there but not quite" and immediately triggers another search, which produces another candidate to re-evaluate. The bot loops for the full six-hour stream and burns the streamer's monthly API budget by hour two.
 
 ## Threat Modeling
 
@@ -24,6 +24,8 @@ MissTrial's uncontrolled execution consumes shared computational and/or financia
 
 Runaway agent sessions can exhaust API rate limits, incur unexpected cloud costs. In multi-tenant environments a single agent instance can affect service availability for the entire platform. Where external APIs are metered, uncontrolled chaining can also trigger overage charges or account suspension.
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Resource governance must be a first-class design concern for any agentic system, treated with the same priority as functional correctness.
@@ -31,3 +33,5 @@ Resource governance must be a first-class design concern for any agentic system,
 1. Enforce a hard cap on the number of tool calls, API requests, and tokens consumed per agent session, and terminate the session when the cap is reached.
 2. Implement circuit breakers that detect abnormal call rates or repetitive patterns and pause execution pending human review.
 3. Apply per-user and per-tenant rate limits independently of agent-level limits to prevent one session from affecting others.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

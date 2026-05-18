@@ -6,8 +6,8 @@
 
     interface Props {
         suits: Suit[];
-        cards: any;
-        mapping: any;
+        cards: Map<string, unknown>;
+        mapping: Record<string, unknown>;
     }
 
     let { suits, cards, mapping }: Props = $props();
@@ -58,7 +58,7 @@
 
     
 
-    @media (max-aspect-ratio: 1/1) 
+    @media (max-width: 767px) 
     {
         .hero
         {

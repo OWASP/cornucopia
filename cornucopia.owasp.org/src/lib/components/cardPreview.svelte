@@ -2,12 +2,11 @@
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
-    import WebAppCardMapping from "./webAppCardMapping.svelte";
     import CompanionCardMapping from "./companionCardMapping.svelte";
     
     interface Props {
         card?: Card;
-        mapping: any;
+        mapping: Record<string, unknown>;
         style?: string;
     }
 
@@ -58,9 +57,6 @@
         {#if mapping}
         <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text {getRoyalTextColor(card?.suit, card?.suitId, card?.value)}">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card?.desc}</p>
-            {#if card?.edition == 'webapp'}
-                <WebAppCardMapping {mapping} {style}></WebAppCardMapping>
-            {/if}
             {#if card?.edition == 'mobileapp'}
                 <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
             {/if}
@@ -396,7 +392,7 @@
         color: white;
     }
 
-    @media (max-aspect-ratio: 1.5/1)
+    @media (max-width: 1024px)
     {
         .card-render
         {

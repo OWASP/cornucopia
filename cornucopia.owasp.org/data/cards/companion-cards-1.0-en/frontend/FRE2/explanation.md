@@ -22,6 +22,8 @@ Marcus modifies data in transit, bypassing the integrity controls that the appli
 
 When validation is treated as a presentation concern rather than a security boundary, any attacker with a proxy tool can reach the backend with arbitrary input. This can lead to business logic abuse, corrupted application state, injection attacks that client-side sanitization was meant to prevent, and exploitation of assumptions baked into the server-side code. The impact ranges from minor data inconsistencies to financial fraud or full application compromise.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Treat client-side validation as a usability feature, not a security control. All enforcement must happen on the server.
@@ -30,3 +32,5 @@ Treat client-side validation as a usability feature, not a security control. All
 2. Reject unexpected fields and values at the API boundary; use an allowlist of accepted inputs rather than a blocklist of bad ones.
 3. Return meaningful, structured error responses for invalid input so that legitimate clients can surface problems to users without leaking internals.
 4. Apply content-type validation and schema enforcement (e.g., JSON Schema, OpenAPI) to all incoming request bodies.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

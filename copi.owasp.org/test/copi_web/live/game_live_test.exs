@@ -157,7 +157,7 @@ defmodule CopiWeb.GameLiveTest do
        {:ok, p1} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
        {:ok, card} = Cornucopia.create_card(%{
         category: "C", value: "V", description: "D", edition: "webapp",
-        version: "2.2", external_id: "EXT", language: "en",
+        version: "3.0", external_id: "EXT", language: "en",
         misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
         owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
       })
@@ -231,7 +231,7 @@ defmodule CopiWeb.GameLiveTest do
     end
 
     test "latest_version returns correct version for each edition" do
-      assert Show.latest_version("webapp") == "2.2"
+      assert Show.latest_version("webapp") == "3.0"
       assert Show.latest_version("ecommerce") == "1.22"
       assert Show.latest_version("mobileapp") == "1.1"
       assert Show.latest_version("mlsec") == "1.0"

@@ -34,3 +34,4 @@ Exposed secrets provide direct access to protected systems and data, often with 
 6. Make sure build and deployment environments do not persist command line history or other artifacts that may contain secrets.
 7. Keep the scope and lifetime of credentials and tokens as small as possible, so a leaked secret gives an attacker less to work with. Use ephemeral tokens where possible if your CI/CD platform supports them.
 
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

@@ -21,13 +21,15 @@ export default {
 		prerender: {
 			concurrency: 1,
 			handleHttpError: ({ path, referrer, message }) => {
-				console.log(message);
+                                if (path === '/mapping') return;
+                                if (path.startsWith('/edition')) return;
+                                console.log(message);
 				console.log(referrer);
 				console.log(path);
 				// otherwise fail the build
 				throw new Error(message);
 			},
-			handleMissingId: ({ path, id, referrers, message }) => {
+			handleMissingId: ({ _path, id, _referrers, message }) => {
 			 if (id == 'card') return;
 			 throw new Error(message);
 			},
@@ -348,6 +350,7 @@ export default {
 				'/api/mapping/webapp/2.2',
 				'/api/mapping/webapp/3.0',
 				'/api/mapping/mobileapp/1.1',
+                                '/api/mapping/companion/1.0',
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/mobileapp/PC2/1.1/uk',
                 '/edition/mobileapp/PC2/1.1/hi',
@@ -379,3 +382,7 @@ export default {
 		}
 	}
 };
+
+
+
+

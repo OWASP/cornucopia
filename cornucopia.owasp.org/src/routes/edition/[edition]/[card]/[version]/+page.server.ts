@@ -40,7 +40,7 @@ export const load = (({ params }) => {
       routes: new Map<string, Route[]>([
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
-      mappingData: new Map<string, any>([
+      mappingData: new Map<string, unknown>([
         [`${edition}`, (new MappingService()).getCardMappingForAllVersions().get(`${edition}-${version}`)]
       ]),
       languages: DeckService.getLanguagesForEditionVersion(edition, version),

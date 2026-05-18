@@ -138,6 +138,11 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/mapping/companion/1.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 `;
 
   const headersFile = path.join(buildDir, '_headers');
@@ -145,3 +150,4 @@ function main() {
 }
 
 main();
+

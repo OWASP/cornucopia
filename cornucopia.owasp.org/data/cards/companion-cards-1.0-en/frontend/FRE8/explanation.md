@@ -22,6 +22,8 @@ Nathan gains capabilities and access to data that are explicitly restricted to u
 
 When authorization is enforced only in the browser, any user with developer tools — which is every user — can escalate their own privileges. This can expose administrative functions, other users' data, premium features, or internal tooling to anyone willing to open a console. Because the server processes the requests normally, the access often leaves no anomalous audit trail.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Move all authorization decisions to the server and treat client-side controls as presentation-only.
@@ -30,3 +32,5 @@ Move all authorization decisions to the server and treat client-side controls as
 2. Do not rely on hidden routes, hidden UI elements, or client-side role checks as access control mechanisms; a user who knows an endpoint URL can reach it regardless of what the frontend renders.
 3. Apply the principle of least privilege to API design: return only data the caller is entitled to see, rather than filtering a full response in the frontend.
 4. Remove deprecated functionality from both the UI and the backend to avoid having it be abused or misused.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

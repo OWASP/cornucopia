@@ -1,6 +1,6 @@
 <script lang="ts">
     interface Props {
-        mapping: any;
+        mapping: Record<string, unknown>;
         style?: string;
     }
 
@@ -11,7 +11,7 @@
         'id', 'value', 'url'
     ]);
 
-    function formatValue(val: any): string {
+    function formatValue(val: unknown): string {
         if (val === undefined || val === null) return '-';
         if (Array.isArray(val)) return val.length ? val.join(',') : '-';
         return String(val) || '-';
@@ -36,7 +36,7 @@
     );
 </script>
 
-{#each rows as row}
+{#each rows as row (row.label)}
     <p class="mapping-title{mappingStyle}">{row.label}</p>
     <p class="mapping-value{mappingStyle}">{row.value}</p>
 {/each}
@@ -70,7 +70,7 @@
         margin-right: 1vw;
     }
 
-    @media (max-aspect-ratio: 1.5/1) {
+    @media (max-width: 1024px) {
         .mapping-title.browser-card-container,
         .mapping-value.browser-card-container {
             font-size: 2vw;
@@ -83,3 +83,4 @@
         }
     }
 </style>
+

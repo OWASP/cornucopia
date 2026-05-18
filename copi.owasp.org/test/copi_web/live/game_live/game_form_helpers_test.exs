@@ -104,7 +104,7 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       
       assert is_list(result)
       assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
-      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
+      refute Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
     end
 
     test "returns same suits when they match the edition" do
@@ -148,13 +148,12 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
   end
 
   describe "companion suit helpers" do
-    test "includes companion defaults for webapp and mobileapp" do
+    test "does not include companion defaults for webapp and mobileapp" do
       webapp_suits = GameFormHelpers.generate_selected_suits_for_new_game("webapp")
       mobileapp_suits = GameFormHelpers.generate_selected_suits_for_new_game("mobileapp")
 
-      assert "companion-Large Language Models" in webapp_suits
-      assert "companion-Large Language Models" in mobileapp_suits
-      refute "companion-Cloud" in webapp_suits
+      refute Enum.any?(webapp_suits, fn suit -> String.starts_with?(suit, "companion-") end)
+      refute Enum.any?(mobileapp_suits, fn suit -> String.starts_with?(suit, "companion-") end)
     end
 
     test "does not add companion defaults to other games" do
@@ -178,7 +177,7 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
 
       assert is_list(result)
       assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
-      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
+      refute Enum.any?(result, fn suit -> String.starts_with?(suit, "companion-") end)
       refute Enum.any?(result, fn suit -> String.starts_with?(suit, "mobileapp-") end)
     end
   end

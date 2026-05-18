@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Card } from "../card/card";
 import type { MappingController } from "../mapping/mappingController";
 
@@ -54,9 +55,9 @@ export class CreController {
         return CreController.editions.get(edition) || edition;
     }
 
-    public getCreMapping(edition: string, lang: string): any {
-        if (!CreController.editions.has(edition)) return { "meta": {}, "standards": [] };
-        let standards: Cre[] = [];
+    public getCreMapping(edition: string, lang: string) : any {
+        if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
+        const standards: Cre[] = [];
         (this.deck || []).forEach(
             (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
         );
@@ -72,9 +73,9 @@ export class CreController {
     }
 
     public generateDoc(card: Card) {
-        let mapping = this.controller.getCardMappings(card.id);
-        let links: { document: { doctype: string; id: string }; ltype: string }[] = [];
-        let cre = mapping.owasp_cre?.owasp_asvs as [] || [];
+        const mapping = this.controller.getCardMappings(card.id);
+        const links: { document: { doctype: string; id: string }; ltype: string }[] = [];
+        const cre = mapping.owasp_cre?.owasp_asvs as [] || [];
         cre.forEach((cre) => links.push({
             "document": {
                 "doctype": "CRE",

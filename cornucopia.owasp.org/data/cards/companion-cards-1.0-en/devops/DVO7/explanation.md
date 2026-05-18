@@ -36,3 +36,5 @@ Bypassed deployment controls allow untested, unauthorized, or malicious changes 
 4. Log all deployment activities: who triggered them, what was deployed, and whether approval gates were satisfied.
 6. Add automated checks to the pipeline, such as test suites and security scans, that must pass before deployment can proceed.
 7. Protect deployment configurations and pipeline definitions from unauthorized modification.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

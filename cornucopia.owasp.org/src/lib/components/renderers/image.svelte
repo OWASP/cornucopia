@@ -14,6 +14,9 @@
     // Using /static allows autocomplete in VS code somehow, but breaks the image linking
     // So I just remove it before applying the href property of the img tag.
     if(href.includes("/static"))
+         
+
+        // eslint-disable-next-line no-useless-assignment
         href = href.replace("/static","");
 
 
@@ -79,7 +82,7 @@
             width:50%;
         }
 
-        @media (max-aspect-ratio: 1/1) 
+        @media (max-width: 767px) 
         {
             img
             {

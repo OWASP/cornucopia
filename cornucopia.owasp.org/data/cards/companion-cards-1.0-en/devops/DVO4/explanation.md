@@ -43,3 +43,5 @@ Inadequately protected backups expose organizations to data theft and undermine 
 5. Encrypt backups both in transit and at rest to protect against unauthorized data access. If you do encrypt your backups at rest, make sure your decryption keys remain accessible when you need to recover.
 6. Set up monitoring on access to backup storage, including reads, writes, and deletions.
 7. Use versioning for backups so that even if one is corrupted, previous versions can still be recovered.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

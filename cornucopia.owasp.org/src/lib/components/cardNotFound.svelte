@@ -1,7 +1,7 @@
 <script lang="ts">
     import { error } from '@sveltejs/kit';
     import { onMount } from 'svelte';
-    import {type Card} from "../../domain/card/card"
+    
 
 	export let card: string;
         export let versions;

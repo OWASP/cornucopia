@@ -18,6 +18,8 @@ The appropriate STRIDE category depends on the specific threat you create and th
 
 An attack that falls outside the threat model is, by definition, one the team has not prepared specific defenses against. Novel techniques can bypass controls that are correctly implemented for known threats, produce no anomalous server-side signals, and persist undetected until an unrelated observation prompts investigation. The impact depends entirely on the technique you employ, it may be as contained as data exposure for a single user, or as broad as persistent code execution across all sessions.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Build defence-in-depth so that no single security control is a single point of failure, and maintain the ability to detect and respond to attacks that were not anticipated at design time.

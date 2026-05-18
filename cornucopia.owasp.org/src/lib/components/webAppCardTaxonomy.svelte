@@ -6,13 +6,13 @@
     import CapecMapTable from "$lib/components/capecMapTable.svelte";
     import type { Card } from "../../domain/card/card";
     import type { Route } from "../../domain/routes/route";
-    import { MappingController, type WebAppMapping } from "../../domain/mapping/mappingController";
+    import { MappingController, type WebAppMapping as _WebAppMapping } from "../../domain/mapping/mappingController";
     import { readTranslation } from "$lib/stores/stores";
   interface Props {
-    mappingData: any;
+    mappingData: Record<string, unknown>;
     card: Card;
     routes: Map<string, Route[]>;
-    capecData?: any;
+    capecData?: Record<string, unknown>;
     asvsVersion: string;
   }
 
@@ -112,7 +112,7 @@
       <MappingsList 
         title="SAFECode:"
         mappings={mappings.safecode} 
-        linkFunction={(input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
+        linkFunction={(_input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
       />
       {/if}
     {/if}
@@ -126,13 +126,13 @@
       />
     {/if}
   
-    <h1 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h1>
+    <h2 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h2>
     {#if hasMappings && mappings.owasp_asvs}
 
       <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]} version={asvsVersion}></ASVSOverview>
     {/if}
-    <h1 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h1>
-    {#each attacks || [] as attack}
+    <h2 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h2>
+    {#each attacks || [] as attack (attack.url)}
       <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
     {/each}
   

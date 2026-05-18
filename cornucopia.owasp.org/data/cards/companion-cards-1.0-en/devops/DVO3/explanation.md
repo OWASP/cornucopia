@@ -38,3 +38,5 @@ Insufficiently hardened systems create a broad attack surface within the interna
 4. Make sure internal services require proper authentication and are not accessible with default or shared credentials.
 5. Don't forget to patch internal systems and DevOps infrastructure - not just the application itself.
 6. Give service accounts only the permissions they actually need.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

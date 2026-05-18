@@ -22,6 +22,8 @@ Piotr manipulates the user's interaction with the application, causing the victi
 
 Clickjacking turns any one-click sensitive operation into an attacker-controllable action requiring only that the victim visit a malicious page while authenticated. Operations commonly exploited include fund transfers, password changes, permission grants, account deletions, and social media posts. Because the victim genuinely performs the action through their own session, the request appears entirely legitimate to the server.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Prevent the application from being embedded in frames controlled by untrusted origins.
@@ -31,3 +33,5 @@ Prevent the application from being embedded in frames controlled by untrusted or
 3. For sensitive one-step actions, require user confirmation through an interaction that cannot be pre-positioned — such as entering a value, solving a challenge, or re-authenticating before the action completes.
 4. Implement CSRF tokens on state-changing requests so that even if a click is captured, the request cannot be submitted without the valid token generated for the victim's session.
 5. Test for clickjacking by attempting to embed the application in an iframe on an external domain and verifying that the browser blocks the frame.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

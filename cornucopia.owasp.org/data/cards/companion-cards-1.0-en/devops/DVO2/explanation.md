@@ -42,3 +42,4 @@ Without complete, tamper-resistant audit trails, organizations lose the ability 
 5. Periodically check your audit logs for anomalies and gaps. Missing entries can be as telling as suspicious ones.
 6. Make sure logs are kept long enough to be useful when something goes wrong. Your organization should have guidelines that recommend or mandate a specific retention period.
 
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

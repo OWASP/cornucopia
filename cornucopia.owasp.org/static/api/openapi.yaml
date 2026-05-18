@@ -287,6 +287,48 @@ paths:
                           capec: [ 54, 113, 116, 143, 144, 149, 150, 155, 169, 215, 224, 497, 541, 546 ]
                           capec_map: {}
 
+  /mapping/companion/{version}:
+    get:
+      summary: Get Companion Edition mapping by version
+      description: |
+        Get the OWASP Cornucopia Companion Edition mapping data
+        by version.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["1.0"]
+      responses:
+        '200':
+          description: Companion mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Companion mapping response
+                  value:
+                    meta:
+                      edition: companion
+                      component: mappings
+                      language: ALL
+                      version: "1.0"
+                    cards:
+                      LLM2:
+                        id: "LLM2"
+                        value: "2"
+                        url: "https://cornucopia.owasp.org/cards/LLM2"
+                        stride: [ D ]
+                        stride_print: [ "Denial of Service" ]
+                        cia: [ A ]
+                        cia_print: [ "Availability" ]
+                        owasp_llm_top10: [ LLM10:2025 ]
+                        owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
+                        cwe: [ CWE-400, CWE-770 ]
+
   /mapping/mobileapp/{version}:
     get:
       summary: Get Mobile App mapping by version

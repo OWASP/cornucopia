@@ -22,6 +22,8 @@ Victor modifies a trusted script at its source or distribution point, altering t
 
 A single compromised third-party script can turn every application that loads it into a credential harvester or data exfiltration tool, affecting all users simultaneously. Because the script runs in the application's origin, it bypasses same-origin policy protections, can read any cookie not marked `HttpOnly`, access DOM content, and make authenticated API requests. The attack is invisible to the application's own server-side logs and difficult to detect without client-side monitoring.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Treat every externally loaded asset as potentially hostile and reduce your exposure to third-party script compromise.
@@ -30,3 +32,5 @@ Treat every externally loaded asset as potentially hostile and reduce your expos
 2. Audit and minimise the number of third-party scripts loaded by the application — every external dependency is an additional attack surface.
 3. Host critical third-party libraries yourself rather than loading them from an external CDN, so you control when and how updates are applied.
 4. Implement a strict Content Security Policy (CSP) that restricts which origins are allowed to serve scripts, limiting the blast radius of a compromised CDN.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.
