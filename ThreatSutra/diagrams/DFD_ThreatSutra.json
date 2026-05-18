@@ -1958,15 +1958,12 @@
                 "03f48aa4-3f23-4219-bf28-4cd436032d32",
                 "a317964f-f599-42ec-985d-cd575f7b6507",
                 "3a65ac82-576a-441a-b643-4d58166bf967",
-                "d0dd5e63-7fbb-463f-98af-8b2b7c45272b",
-                "55afcdbb-244d-4442-a572-38063501e45d"
+                "55afcdbb-244d-4442-a572-38063501e45d",
+                "d0dd5e63-7fbb-463f-98af-8b2b7c45272b"
               ],
               "containedElements": [
-                "9e9ecd94-4370-4a14-a4ce-a19d86ef77eb",
                 "88003904-8dc6-4933-bf75-8b961ea1fd8f",
-                "7bc04986-0ca9-414b-9b4d-f96e89a0da64",
-                "83307f2b-defd-4a10-b9c3-cd41233cdb2a",
-                "0cc20db1-30c6-4bc8-901e-bcadb781efb5"
+                "7bc04986-0ca9-414b-9b4d-f96e89a0da64"
               ]
             }
           },
@@ -2060,8 +2057,8 @@
               "hasOpenThreats": false,
               "crossingFlows": [
                 "03f48aa4-3f23-4219-bf28-4cd436032d32",
-                "3b3bd865-2ce5-4ae9-b022-6949b73c9578",
-                "55afcdbb-244d-4442-a572-38063501e45d"
+                "55afcdbb-244d-4442-a572-38063501e45d",
+                "f0e9e94e-e549-4c7c-91c9-0b3604c421da"
               ],
               "containedElements": [
                 "bdd7b692-57d4-4ad4-ba83-a2a3c1e5fb31",
@@ -2089,8 +2086,8 @@
               "isTrustBoundary": true,
               "hasOpenThreats": false,
               "crossingFlows": [
-                "3b3bd865-2ce5-4ae9-b022-6949b73c9578",
-                "55afcdbb-244d-4442-a572-38063501e45d"
+                "55afcdbb-244d-4442-a572-38063501e45d",
+                "f0e9e94e-e549-4c7c-91c9-0b3604c421da"
               ],
               "containedElements": [
                 "bdd7b692-57d4-4ad4-ba83-a2a3c1e5fb31"
@@ -2126,34 +2123,6 @@
               ],
               "containedElements": [
                 "90698631-c5d7-4b3b-9904-1fbe4571d609"
-              ]
-            }
-          },
-          {
-            "position": {
-              "x": 278.99999999999955,
-              "y": 500.00000000000045
-            },
-            "size": {
-              "width": 320,
-              "height": 150
-            },
-            "visible": true,
-            "shape": "trust-boundary-box",
-            "zIndex": -1,
-            "id": "9e9ecd94-4370-4a14-a4ce-a19d86ef77eb",
-            "data": {
-              "type": "tm.BoundaryBox",
-              "name": "Trust Boundary",
-              "description": "",
-              "isTrustBoundary": true,
-              "hasOpenThreats": false,
-              "crossingFlows": [
-                "9a37cfc7-154c-401f-9e2d-ba6a994fd434",
-                "6c51e5b7-0e5a-4d32-9fb9-ed8fe1be80e6"
-              ],
-              "containedElements": [
-                "83307f2b-defd-4a10-b9c3-cd41233cdb2a"
               ]
             }
           },
@@ -2199,8 +2168,8 @@
                 "text": "AI \nOrchestrator"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -2297,16 +2266,80 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "480d19b3-eada-4995-869d-b13d39bb56c9",
+                  "title": "New EoP threat",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "eopGameId": "cornucopia",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "EOP",
+                  "new": true,
+                  "number": 1,
+                  "score": ""
+                },
+                {
+                  "id": "b95bf6e0-a923-40ee-b9f6-87ac1846e975",
+                  "title": "LLM9: Deckard can embed malicious instructions in external content like documents, emails, or web pages which are processed by the model, leading to unintended behavior or data exfiltration",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "LLM9: ref: https://cornucopia.owasp.org/cards/LLM9#What-can-go-wrong?\n",
+                  "mitigation": "LLM9: https://cornucopia.owasp.org/cards/LLM9#What-are-we-going-to-do-about-it?",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 3,
+                  "score": "",
+                  "cardSuit": null
+                },
+                {
+                  "id": "6f21f425-5f51-43e0-9859-6ac90794eb27",
+                  "title": "VE3: Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being sanitized, or preferably validated for format, type, range, size, length and a whitelist of allowed characters or formats",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "VE3: https://cornucopia.owasp.org/cards/VE3#What-can-go-wrong?",
+                  "mitigation": "VE3: https://cornucopia.owasp.org/cards/VE3#What-are-we-going-to-do-about-it?\n\n- Validate JSON, only allowed characters allowed (white list of characters)\n- Validate Github issues (titles and descriptions)\n- Validate Cornucopia API Responses.\n- Sanitize the result before sending LLM data to the human review.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 4,
+                  "score": "",
+                  "cardSuit": null
+                },
+                {
+                  "id": "84fcfa2f-0808-45ba-b28f-bd40a215839f",
+                  "title": "CJ: Roman can exploit the application because it was insecurely compiled or deployed, or its configuration is not secure by default, or because security information was not documented, or passed on to operational teams, or the user is not warned and access blocked when the expected security features are unsupported or disabled",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "CJ: https://cornucopia.owasp.org/cards/CJ#What-can-go-wrong?\n\nSomeone could modify the system context of the LLM so that it does not work as intended.",
+                  "mitigation": "CJ: https://cornucopia.owasp.org/cards/CJ#What-are-we-going-to-do-about-it?\n\nWe need a good process around how to deal with changes to the system context.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 6,
+                  "score": "",
+                  "cardSuit": null
+                }
+              ]
             },
-            "children": [
-              "a00fa8bd-d9dc-465e-b4b1-9644eb439281"
-            ]
+            "children": [],
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
+            }
           },
           {
             "position": {
@@ -2322,8 +2355,8 @@
                 "text": "Human \nReview \nGate"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -2420,136 +2453,43 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
-            }
-          },
-          {
-            "position": {
-              "x": 388.99999999999955,
-              "y": 540.0000000000005
-            },
-            "size": {
-              "width": 130,
-              "height": 70
-            },
-            "attrs": {
-              "text": {
-                "text": "Qdrant Vector Index"
-              },
-              "topLine": {
-                "strokeWidth": 1.5,
-                "strokeDasharray": null
-              },
-              "bottomLine": {
-                "strokeWidth": 1.5,
-                "strokeDasharray": null
-              }
-            },
-            "visible": true,
-            "shape": "store",
-            "zIndex": 2,
-            "ports": {
-              "groups": {
-                "top": {
-                  "position": "top",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "right": {
-                  "position": "right",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "bottom": {
-                  "position": "bottom",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "left": {
-                  "position": "left",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                }
-              },
-              "items": [
+              "threats": [
                 {
-                  "group": "top",
-                  "id": "4086a1b0-25b5-47d3-884b-91254d07401d"
+                  "id": "595635d5-b0b5-4c27-95b8-c3fb582f7352",
+                  "title": "LLMQ: Kyle can exploit insecure handling of model outputs that are used directly in downstream systems, enabling injection attacks, remote code execution, or unauthorized actions",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "LLMQ: OWASP Threat Dragon JSON file may contain prompt injections that could affect the human review process.",
+                  "mitigation": "Ref: https://cornucopia.owasp.org/cards/LLMQ#What-are-we-going-to-do-about-it?\n\nWhat are we going to do about it?\n\nImplement defenses against prompt injection.\nLog only the minimum AI interaction metadata needed for security monitoring, and ensure any prompt or output content included in logs is minimized and redacted or anonymized before storage.\nDetect AI-specific attack patterns (jailbreak, prompt injection, model extraction, multi-turn trajectory attacks, covert channels over LLM endpoints) and enrich security events with AI-specific context so that downstream detection and response systems can act on them.\nMonitor and alert when abuse is detected.\n\nOWASP AISVS: 2.1.1-9,2.2.1-3,2.3.1-3,2.4.1-4,13.1.1-8,13.2.1-10,13.5.1-3\nOWASP AITG: APP-01,APP-05\nMITRE ATLAS: AML.T0050\nOWASP LLM TOP10: LLM05:2025\nCWE: CWE-1426,CWE-94,CWE-77",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 2,
+                  "score": "",
+                  "cardSuit": null
                 },
                 {
-                  "group": "right",
-                  "id": "e62e0ba5-e933-4049-8788-efab9a37b927"
-                },
-                {
-                  "group": "bottom",
-                  "id": "870046a3-6f8d-403c-abfd-df4e50b8f923"
-                },
-                {
-                  "group": "left",
-                  "id": "c12327b6-af7d-477f-af2f-155fac82d8b1"
+                  "id": "2b79e42a-018e-45ae-9929-63375292ad53",
+                  "title": "VE3: Robert can input malicious data because the allowed protocol format is not being checked, or duplicates are accepted, or the structure is not being verified, or the individual data elements are not being sanitized, or preferably validated for format, type, range, size, length and a whitelist of allowed characters or formats",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "VE3: https://cornucopia.owasp.org/cards/VE3#What-are-we-going-to-do-about-it?",
+                  "mitigation": "VE: https://cornucopia.owasp.org/cards/VE3#What-are-we-going-to-do-about-it?",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 5,
+                  "score": "",
+                  "cardSuit": null
                 }
               ]
-            },
-            "id": "83307f2b-defd-4a10-b9c3-cd41233cdb2a",
-            "data": {
-              "type": "tm.Store",
-              "name": "Qdrant Vector Index",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isALog": false,
-              "isEncrypted": false,
-              "isSigned": false,
-              "storesCredentials": false,
-              "storesInventory": false,
-              "threats": []
             }
           },
           {
@@ -3227,7 +3167,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Create ticket",
+              "name": "Draft output",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -3239,26 +3179,81 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
+                "b494882a-07d4-4ceb-a09a-c8fdc863b00b"
+              ]
+            },
+            "labels": [
+              "Draft output"
+            ],
+            "id": "888e1a47-e94c-47e9-957e-9cb4a2505ce4",
+            "source": {
+              "cell": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
+              "port": "60b3c52e-8d8e-4122-a839-5ea9353d7305"
+            },
+            "target": {
+              "cell": "7bc04986-0ca9-414b-9b4d-f96e89a0da64",
+              "port": "6db98537-4026-4ea9-bc09-61862432dc30"
+            },
+            "vertices": [
+              {
+                "x": 610,
+                "y": 180
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Get tickets",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "1ba4e260-8081-4cf9-9cd7-2d2aa332a27b",
                 "ca23204a-ead6-4868-9be8-df060e0fee2c",
                 "58bd5d5b-3387-4e01-a2f3-47f02b4da20f"
               ]
             },
             "labels": [
-              "Create ticket"
+              "Get tickets"
             ],
-            "id": "3b3bd865-2ce5-4ae9-b022-6949b73c9578",
+            "id": "55afcdbb-244d-4442-a572-38063501e45d",
             "source": {
-              "x": 690,
-              "y": 400
-            },
-            "target": {
               "cell": "bdd7b692-57d4-4ad4-ba83-a2a3c1e5fb31",
               "port": "c24762f8-ebff-4a67-b226-d1e998d9c641"
             },
+            "target": {
+              "cell": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
+              "port": "6db98537-4026-4ea9-bc09-61862432dc30"
+            },
             "vertices": [
               {
-                "x": 770,
-                "y": 440
+                "x": 780,
+                "y": 385
               }
             ]
           },
@@ -3337,7 +3332,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Retrieve Vector Search",
+              "name": "Create ticket",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -3349,242 +3344,26 @@
               "protocol": "",
               "threats": [],
               "trustBoundaryIds": [
-                "9e9ecd94-4370-4a14-a4ce-a19d86ef77eb"
-              ]
-            },
-            "labels": [
-              "Retrieve Vector Search"
-            ],
-            "id": "9a37cfc7-154c-401f-9e2d-ba6a994fd434",
-            "source": {
-              "cell": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
-              "port": "e24f4997-9d0e-4ab4-be72-c4f911d509a6"
-            },
-            "target": {
-              "cell": "83307f2b-defd-4a10-b9c3-cd41233cdb2a",
-              "port": "4086a1b0-25b5-47d3-884b-91254d07401d"
-            },
-            "vertices": [
-              {
-                "x": 540,
-                "y": 480
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Draft output",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": [
-                "b494882a-07d4-4ceb-a09a-c8fdc863b00b"
-              ]
-            },
-            "labels": [
-              "Draft output"
-            ],
-            "id": "888e1a47-e94c-47e9-957e-9cb4a2505ce4",
-            "source": {
-              "cell": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
-              "port": "60b3c52e-8d8e-4122-a839-5ea9353d7305"
-            },
-            "target": {
-              "cell": "7bc04986-0ca9-414b-9b4d-f96e89a0da64",
-              "port": "6db98537-4026-4ea9-bc09-61862432dc30"
-            },
-            "vertices": [
-              {
-                "x": 610,
-                "y": 180
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Create vector\nembedding",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "Create vector\nembedding"
-            ],
-            "id": "a00fa8bd-d9dc-465e-b4b1-9644eb439281",
-            "parent": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
-            "source": {
-              "cell": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
-              "port": "d49a964a-4dde-457c-94a5-452ec4e20f18"
-            },
-            "target": {
-              "cell": "0cc20db1-30c6-4bc8-901e-bcadb781efb5",
-              "port": "b925ed22-5f5d-4ef0-9ed5-4a3fd2f7dd7e"
-            },
-            "vertices": [
-              {
-                "x": 530,
-                "y": 330
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Save vectors",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": [
-                "9e9ecd94-4370-4a14-a4ce-a19d86ef77eb"
-              ]
-            },
-            "labels": [
-              "Save vectors"
-            ],
-            "id": "6c51e5b7-0e5a-4d32-9fb9-ed8fe1be80e6",
-            "source": {
-              "cell": "0cc20db1-30c6-4bc8-901e-bcadb781efb5",
-              "port": "a31ec066-9544-48da-8513-b35e2b736af0"
-            },
-            "target": {
-              "cell": "83307f2b-defd-4a10-b9c3-cd41233cdb2a",
-              "port": "c12327b6-af7d-477f-af2f-155fac82d8b1"
-            },
-            "vertices": [
-              {
-                "x": 379,
-                "y": 440
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Get tickets",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": [
-                "1ba4e260-8081-4cf9-9cd7-2d2aa332a27b",
                 "ca23204a-ead6-4868-9be8-df060e0fee2c",
                 "58bd5d5b-3387-4e01-a2f3-47f02b4da20f"
               ]
             },
             "labels": [
-              "Get tickets"
+              "Create ticket"
             ],
-            "id": "55afcdbb-244d-4442-a572-38063501e45d",
+            "id": "f0e9e94e-e549-4c7c-91c9-0b3604c421da",
             "source": {
+              "x": 450,
+              "y": 170
+            },
+            "target": {
               "cell": "bdd7b692-57d4-4ad4-ba83-a2a3c1e5fb31",
               "port": "c24762f8-ebff-4a67-b226-d1e998d9c641"
             },
-            "target": {
-              "cell": "88003904-8dc6-4933-bf75-8b961ea1fd8f",
-              "port": "6db98537-4026-4ea9-bc09-61862432dc30"
-            },
             "vertices": [
               {
-                "x": 780,
-                "y": 385
+                "x": 480,
+                "y": 480
               }
             ]
           },
@@ -3711,126 +3490,6 @@
               "storesInventory": false,
               "threats": []
             }
-          },
-          {
-            "position": {
-              "x": 340,
-              "y": 230
-            },
-            "size": {
-              "width": 130,
-              "height": 110
-            },
-            "attrs": {
-              "text": {
-                "text": "Generate vector \nembeddings"
-              },
-              "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
-                "strokeDasharray": null
-              }
-            },
-            "visible": true,
-            "shape": "process",
-            "zIndex": 12,
-            "ports": {
-              "groups": {
-                "top": {
-                  "position": "top",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "right": {
-                  "position": "right",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "bottom": {
-                  "position": "bottom",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                },
-                "left": {
-                  "position": "left",
-                  "attrs": {
-                    "circle": {
-                      "r": 4,
-                      "magnet": true,
-                      "stroke": "#5F95FF",
-                      "strokeWidth": 1,
-                      "fill": "#fff",
-                      "style": {
-                        "visibility": "hidden"
-                      }
-                    }
-                  }
-                }
-              },
-              "items": [
-                {
-                  "group": "top",
-                  "id": "8369bafa-2af0-4c85-bd27-7ef05658a27b"
-                },
-                {
-                  "group": "right",
-                  "id": "b925ed22-5f5d-4ef0-9ed5-4a3fd2f7dd7e"
-                },
-                {
-                  "group": "bottom",
-                  "id": "a31ec066-9544-48da-8513-b35e2b736af0"
-                },
-                {
-                  "group": "left",
-                  "id": "d4e42a5e-a54d-46d4-9439-b5c69098f3bf"
-                }
-              ]
-            },
-            "id": "0cc20db1-30c6-4bc8-901e-bcadb781efb5",
-            "data": {
-              "type": "tm.Process",
-              "name": "Generate vector \nembeddings",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "handlesCardPayment": false,
-              "handlesGoodsOrServices": false,
-              "isWebApplication": false,
-              "privilegeLevel": "",
-              "threats": []
-            }
           }
         ],
         "description": "AI-assisted security requirement generation is part of the first phase where we look at how we can use AI to generate suggestions for tests and work items that should be worked on based on inputs from the Cornucopia game,  Threat Dragon session, Cornucopia API and the user story under development."
@@ -3838,6 +3497,6 @@
     ],
     "diagramTop": 3,
     "reviewer": "Johan Sydseter",
-    "threatTop": 0
+    "threatTop": 6
   }
 }
