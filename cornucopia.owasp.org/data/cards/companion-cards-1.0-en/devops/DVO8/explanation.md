@@ -35,3 +35,5 @@ Without artifact integrity validation, any modification to a built artifact, whe
 4. If your artifact repository supports it, enable features like immutable tags or version locking so that published artifacts cannot be silently replaced.
 5. If your build platform or artifact repository support it, record where each artifact was built, from which source commit, and its checksum or signature.
 6. Make sure the verification step is part of the deployment itself, not something that can be manually skipped or turned off by the person running the deployment.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

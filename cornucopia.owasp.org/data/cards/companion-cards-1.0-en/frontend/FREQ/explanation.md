@@ -22,6 +22,8 @@ Kim modifies the application's code at rest, altering what every user receives a
 
 Persistent code injection in frontend assets turns the application into a data harvester for every user who visits it during the affected period. Sensitive inputs — credentials, payment data, personal information — can be silently captured in bulk. Unlike reflected or DOM-based XSS, the payload does not require user interaction beyond visiting the application; it is delivered with the page itself to all users simultaneously.
 
+For more things that can go wrong, see the [OWASP Top 10, OWASP Top 10 Client-Side Security Risks, and CAPECs](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10](https://owasp.org/Top10/2025/), [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/), and [CAPECs](https://cornucopia.owasp.org/taxonomy/capec-3.9) documentation.
+
 ### What are we going to do about it?
 
 Protect the integrity of the deployment pipeline and the deployed assets themselves.
@@ -29,3 +31,5 @@ Protect the integrity of the deployment pipeline and the deployed assets themsel
 1. Apply the principle of least privilege to CI/CD credentials; build pipelines should have write access only to the specific artifacts they are responsible for, not to the full production asset store.
 2. Generate and publish Subresource Integrity (SRI) hashes for all bundled assets at build time, and verify them at serve time or via a startup check.
 3. Set short CDN cache TTLs on critical JavaScript files, or use cache-busting strategies, so that a compromised bundle can be invalidated quickly after detection.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP ASVS](#mapping 'OWASP ASVS tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP Application Security Verification Standard](https://cornucopia.owasp.org/taxonomy/asvs-5.0) documentation.

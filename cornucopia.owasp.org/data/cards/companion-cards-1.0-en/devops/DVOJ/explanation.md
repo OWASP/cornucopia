@@ -37,3 +37,5 @@ Outdated dependencies are one of the most common and exploitable weaknesses in m
 6. Test dependency updates before deploying to production to avoid breaking things.
 7. Keep the number of dependencies reasonable - every dependency you add is a dependency you have to maintain and trust.
 8. Make sure internal systems are also covered by updates. Even if they're not exposed to the internet, they may be compromised by any attacker that gains access to the network through other means.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.

@@ -10,7 +10,7 @@ CoPirate can modify configurations, permissions, or system settings beyond inten
 
 ### Example
 
-CoPirate is deployed as an IT operations assistant that can query system health metrics and restart services. Over time, its toolset is expanded to include access to a cloud infrastructure API "for convenience." When a user asks CoPirate to "fix the permission issue causing the deployment failure," the agent interprets this broadly and modifies IAM role bindings in the cloud environment, granting a service account production-level permissions to resolve the immediate error. The change resolves the deployment but leaves a persistent over-privileged role that an attacker later discovers and exploits to access production data.
+CoPirate is deployed to help a small startup's brand-new junior dev manage their cloud environment. Over the months, the toolkit has been developed until CoPirate casually rewrite IAM roles. Late one Friday, the dev sighs at their screen and asks: "Hey CoPirate, just fix whatever permission thing is blocking my deploy, I want to go home." CoPirate, committed to solving the problem, grants the deployment service account full god-mode access to production. The deploy succeeds, the dev orders celebratory pizza, and three months later an attacker stumbles upon the still-active over-privileged role and helps themselves to the customer database.
 
 ## Threat Modeling
 
@@ -24,9 +24,13 @@ CoPirate changes configurations, permissions, or role bindings in a way that inc
 
 Unauthorized configuration changes can silently degrade the organization's security posture, creating persistent vulnerabilities that outlast the agent session that caused them. Over-permissioned roles, disabled security controls, or misconfigured access policies may go undetected until exploited. 
 
+For more things that can go wrong, see [OWASP Top 10 for LLM, Top 10 for Agentic Applications, and Mitre Atlas™](#mapping 'Companion edition requirement mapping [internal]') IDs in the mapping section below and correlate these with the IDs on the [OWASP Top 10 for LLM](https://genai.owasp.org/llm-top-10/), [OWASP Top 10 for Agentic Apps](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), and [Mitre Atlas™](https://atlas.mitre.org/techniques) websites.
+
 ### What are we going to do about it?
 
 Agents must operate under the same change-management controls applied to human administrators, with additional automated guardrails appropriate to autonomous operation.
 
 1. Restrict agent tool access to the minimum set required for the task. Agents performing monitoring or reporting tasks should not have write access to configuration or permission systems.
 2. Require explicit human approval for any agent action that modifies security-relevant configuration, permissions, or infrastructure state.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

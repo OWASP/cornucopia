@@ -124,20 +124,18 @@ export class DeckService {
                 let file: string;
                 try {
                     file = fs.readFileSync(path, 'utf8');
+                    const parsed = fm(file);
+                    cardObject.concept = parsed.body;
                 } catch (e) {
-                    console.error(
-                    `Error reading markdown file for card ${cardObject?.id || "unknown"} at ${path}`,e
-                    );
+                    console.error(`Error: Missing technical-note for ${cardObject.id || 'unknown'} at ${path}`, e);
                     continue;
                 }
-                const parsed = fm(file);
-                cardObject.concept = parsed.body;
+
                 const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
                     cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
                 } catch (e) {
-                     console.error(
-                        `Missing explanation.md for card ${cardObject?.id || "unknown"} at ${explanationPath}`,e);
+                    console.error(`Error: Missing explanation for ${cardObject.id || 'unknown'} at ${explanationPath}`, e);
                     continue;
                 }
 

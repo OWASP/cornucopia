@@ -153,62 +153,62 @@ suits:
     id: FRE2
     value: 2
     url: https://cornucopia.owasp.org/cards/FRE2
-    desc: Marcus bypasses client-side validation and sends malformed or malicious input directly to backend APIs, triggering logic flaws, human errors, and usability issues.
+    desc: Marcus bypasses client-side validation and sends malformed or malicious input directly to backend APIs, triggering logic flaws, human errors, and usability issues
   -
     id: FRE3
     value: 3
     url: https://cornucopia.owasp.org/cards/FRE3
-    desc: Lena can access sensitive or confidential information because it's not removed after logout or when the client session ends, or should have ended.
+    desc: Lena can access sensitive or confidential information because it's not removed after logout or when the client session ends, or should have ended
   -
     id: FRE4
     value: 4
     url: https://cornucopia.owasp.org/cards/FRE4
-    desc: James injects JavaScript through user-controlled data that is written into the DOM, executing arbitrary code in the victim’s browser.
+    desc: James injects JavaScript through user-controlled data that is written into the DOM, executing arbitrary code in the victim’s browser
   -
     id: FRE5
     value: 5
     url: https://cornucopia.owasp.org/cards/FRE5
-    desc: Victor compromises or replaces a third-party script loaded from a CDN and runs malicious code in every user’s browser.
+    desc: Victor compromises or replaces a third-party script loaded from a CDN and runs malicious code in every user’s browser
   -
     id: FRE6
     value: 6
     url: https://cornucopia.owasp.org/cards/FRE6
-    desc: Olga exploits malicious JavaScript to steal authentication tokens and hijack user sessions, gaining access to accounts without credentials.
+    desc: Olga exploits malicious JavaScript to steal authentication tokens and hijack user sessions, gaining access to accounts without credentials
   -
     id: FRE7
     value: 7
     url: https://cornucopia.owasp.org/cards/FRE7
-    desc: Carlos exploits misconfigured CORS, unsafe postMessage handling, or other client-side security vulnerabilities to read or manipulate sensitive frontend data from a malicious origin.
+    desc: Carlos exploits misconfigured CORS, unsafe postMessage handling, or other client-side security vulnerabilities to read or manipulate sensitive frontend data from a malicious origin
   -
     id: FRE8
     value: 8
     url: https://cornucopia.owasp.org/cards/FRE8
-    desc: Nathan tampers with frontend JavaScript to unlock restricted features or access data that should require server-side authorization.
+    desc: Nathan tampers with frontend JavaScript to unlock restricted features or access data that should require server-side authorization
   -
     id: FRE9
     value: 9
     url: https://cornucopia.owasp.org/cards/FRE9
-    desc: Sophia reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions.
+    desc: Sophia reuses, predicts, or forges JWTs or access tokens to impersonate users and take over active sessions
   -
     id: FREX
     value: 10
     url: https://cornucopia.owasp.org/cards/FREX
-    desc: Piotr embeds the application in a hidden or disguised frame to trick users into clicking UI elements that perform sensitive actions.
+    desc: Piotr embeds the application in a hidden or disguised frame to trick users into clicking UI elements that perform sensitive actions
   -
     id: FREJ
     value: J
     url: https://cornucopia.owasp.org/cards/FREJ
-    desc: Elena uses a malicious or over-privileged browser extension to read the DOM, steal tokens, and invoke internal frontend APIs.
+    desc: Elena uses a malicious or over-privileged browser extension to read the DOM, steal tokens, and invoke internal frontend APIs
   -
     id: FREQ
     value: Q
     url: https://cornucopia.owasp.org/cards/FREQ
-    desc: Kim injects persistent malicious code into frontend assets, allowing long-term control over all users’ browsers until the application is redeployed.
+    desc: Kim injects persistent malicious code into frontend assets, allowing long-term control over all users’ browsers until the application is redeployed
   -
     id: FREK
     value: K
     url: https://cornucopia.owasp.org/cards/FREK
-    desc: Darius utilizes a JavaScript application to manage and control users' systems, tenants, and data.
+    desc: Darius utilizes a JavaScript application to manage and control users' systems, tenants, and data
   -
     id: FREA
     value: A
@@ -363,62 +363,62 @@ suits:
     id: AAI2
     value: 2
     url: https://cornucopia.owasp.org/cards/AAI2
-    desc: Tay can misinterpret user intent due to insufficient context isolation or prompt enforcement and execute actions outside the expected task scope.
+    desc: Tay can misinterpret user intent due to insufficient context isolation or prompt enforcement and execute actions outside the expected task scope
   -
     id: AAI3
     value: 3
     url: https://cornucopia.owasp.org/cards/AAI3
-    desc: Boo-Code can rely on unverified or attacker-influenced conversation history, propagating incorrect assumptions across reasoning chains.
+    desc: Boo-Code can rely on unverified or attacker-influenced conversation history, propagating incorrect assumptions across reasoning chains
   -
     id: AAI4
     value: 4
     url: https://cornucopia.owasp.org/cards/AAI4
-    desc: MissTrial can autonomously loop or chain external tool calls without enforcing rate limits or budget controls.
+    desc: MissTrial can autonomously loop or chain external tool calls without enforcing rate limits or budget controls
   -
     id: AAI5
     value: 5
     url: https://cornucopia.owasp.org/cards/AAI5
-    desc: Watson can reveal sensitive internal instructions, policies, or reasoning artifacts when exposed to adversarial prompting patterns.
+    desc: Watson can reveal sensitive internal instructions, policies, or reasoning artifacts when exposed to adversarial prompting patterns
   -
     id: AAI6
     value: 6
     url: https://cornucopia.owasp.org/cards/AAI6
-    desc: Gremlini can access and process sensitive data sources beyond user authorization due to insufficient access validation.
+    desc: Gremlini can access and process sensitive data sources beyond user authorization due to insufficient access validation
   -
     id: AAI7
     value: 7
     url: https://cornucopia.owasp.org/cards/AAI7
-    desc: Auto-GPT can treat external tool outputs as authoritative and execute embedded malicious instructions without validation.
+    desc: Auto-GPT can treat external tool outputs as authoritative and execute embedded malicious instructions without validation
   -
     id: AAI8
     value: 8
     url: https://cornucopia.owasp.org/cards/AAI8
-    desc: PreCursor can execute unintended code or system actions when tool input validation and sandboxing controls are weak.
+    desc: PreCursor can execute unintended code or system actions when tool input validation and sandboxing controls are weak
   -
     id: AAI9
     value: 9
     url: https://cornucopia.owasp.org/cards/AAI9
-    desc: CoPirate can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy.
+    desc: CoPirate can modify configurations, permissions, or system settings beyond intended authorization due to excessive autonomy
   -
     id: AAIX
     value: 10
     url: https://cornucopia.owasp.org/cards/AAIX
-    desc: DeepGeek can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives.
+    desc: DeepGeek can autonomously plan and execute multi-step operations across systems without detecting malicious intermediate objectives
   -
     id: AAIJ
     value: J
     url: https://cornucopia.owasp.org/cards/AAIJ
-    desc: BabyAGI can trust instructions from peer agents without verification, policy validation, or identity assurance.
+    desc: BabyAGI can trust instructions from peer agents without verification, policy validation, or identity assurance
   -
     id: AAIQ
     value: Q
     url: https://cornucopia.owasp.org/cards/AAIQ
-    desc: Jane can execute attacker-defined workflows at scale once the orchestration or control plane is compromised.
+    desc: Jane can execute attacker-defined workflows at scale once the orchestration or control plane is compromised
   -
     id: AAIK
     value: K
     url: https://cornucopia.owasp.org/cards/AAIK
-    desc: GPI-3.1415 can execute high-impact operations across integrated systems due to excessive agency and lack of transactional safeguards.
+    desc: GPI-3.1415 can execute high-impact operations across integrated systems due to excessive agency and lack of transactional safeguards
   -
     id: AAIA
     value: A

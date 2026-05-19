@@ -38,3 +38,5 @@ Supply chain attacks can be particularly damaging because they exploit trust rel
 6. Include dependency scanning in your build process to catch known malicious packages.
 7. Pin your dependencies to digests instead of mutable tags. You can consider using tools to help manage the digests - some platforms even include the functionality by default.
 8. Consider waiting for each release to reach a minimum age before updating. Many supply chain attacks are discovered within hours and resolved within days.
+
+For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
