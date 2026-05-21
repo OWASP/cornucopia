@@ -2,7 +2,6 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
   use CopiWeb.ConnCase, async: false
   import Phoenix.LiveViewTest
   alias Copi.Cornucopia
-  alias Copi.Cornucopia.Player
   alias CopiWeb.PlayerLive.FormComponent
   alias Copi.RateLimiter
 

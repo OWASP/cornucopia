@@ -154,10 +154,24 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_event("toggle_vote", %{"dealt_card_id" => dealt_card_id}, socket) do
+    # Parse dealt_card_id defensively - it comes from client params
+    case Integer.parse(dealt_card_id) do
+      {card_id, ""} ->
+        # Successfully parsed entire string as integer
+        handle_toggle_vote(card_id, socket)
+
+      _ ->
+        # Failed to parse as integer or had trailing characters
+        Logger.warning("Invalid dealt_card_id format received: #{inspect(dealt_card_id)}")
+        {:noreply, socket |> put_flash(:error, "Invalid card format. Please refresh and try again.")}
+    end
+  end
+
+  defp handle_toggle_vote(card_id, socket) do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    case dealt_card_module().find(dealt_card_id) do
+    case dealt_card_module().find(card_id) do
       {:ok, dealt_card} ->
         game_card_ids = game.players
           |> Enum.flat_map(fn p -> p.dealt_cards end)
@@ -167,15 +181,15 @@ defmodule CopiWeb.PlayerLive.Show do
           vote = get_vote(dealt_card, player)
 
           if vote do
-            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
             Copi.Repo.delete!(vote)
           else
-            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
+            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id}) do
               {:ok, _vote} ->
-                Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+                Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
               {:error, changeset} ->
-                Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+                Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
             end
           end
 
@@ -183,16 +197,16 @@ defmodule CopiWeb.PlayerLive.Show do
           CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
           {:noreply, assign(socket, :game, updated_game)}
         else
-          Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+          Logger.warning("Unauthorized vote attempt: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
           {:noreply, socket |> put_flash(:error, "Invalid card selection")}
         end
 
       {:error, :not_found} ->
-        Logger.warning("Vote attempt with missing dealt_card_id=#{dealt_card_id} for player_id=#{player.id}, game_id=#{game.id}")
+        Logger.debug("Vote attempt with missing dealt_card_id=#{inspect(card_id)} for player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}")
         {:noreply, socket |> put_flash(:error, "Card not found. Please refresh and try again.")}
 
       {:error, reason} ->
-        Logger.warning("Transient dealt card lookup failure for dealt_card_id=#{dealt_card_id}, player_id=#{player.id}, game_id=#{game.id}, reason=#{inspect(reason)}")
+        Logger.debug("Transient dealt card lookup failure for dealt_card_id=#{inspect(card_id)}, player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
         {:noreply, socket |> put_flash(:error, "Temporary issue loading card. Please try again.")}
     end
   end
@@ -258,8 +272,8 @@ defmodule CopiWeb.PlayerLive.Show do
   defp handle_transient_player_load_failure(socket, player_id, reason) do
     retry_count = socket.assigns[:player_load_retry_count] || 0
 
-    Logger.warning(
-      "Transient player/game load failure in PlayerLive.Show for player_id=#{player_id}, retry=#{retry_count}, reason=#{inspect(reason)}"
+    Logger.debug(
+      "Transient player/game load failure in PlayerLive.Show for player_id=#{inspect(player_id)}, retry=#{retry_count}, reason=#{inspect(reason)}"
     )
 
     cond do

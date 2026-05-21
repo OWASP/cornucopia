@@ -17,9 +17,9 @@ config :swoosh, local: false
 config :logger, level: :info
 
 config :copi, :resilience,
-	retry_delay_ms: 750,
-	max_game_load_retries: 3,
-	max_player_load_retries: 3
+  retry_delay_ms: 750,
+  max_game_load_retries: 3,
+  max_player_load_retries: 3
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.

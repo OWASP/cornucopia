@@ -444,6 +444,15 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert render(view) =~ "Card not found. Please refresh and try again."
     end
 
+    test "shows error flash when toggling vote with invalid dealt card id format", %{conn: conn} do
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Five", "AUTH_G5_C1")
+
+      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "invalid_card_id"})
+
+      assert render(view) =~ "Invalid card format. Please refresh and try again."
+    end
+
     test "returns 404 when player does not exist", %{conn: conn} do
       assert_error_sent 404, fn ->
         get(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")

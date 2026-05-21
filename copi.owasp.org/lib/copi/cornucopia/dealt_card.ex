@@ -17,7 +17,7 @@ defmodule Copi.Cornucopia.DealtCard do
   def find(id) do
     case Copi.Repo.get(Copi.Cornucopia.DealtCard, id) do
       nil ->
-        Logger.warning("Dealt card not found: #{id}")
+        Logger.debug("Dealt card not found: #{inspect(id)}")
         {:error, :not_found}
       dealt_card -> {:ok, dealt_card  |> Copi.Repo.preload([:card, :votes])}
     end

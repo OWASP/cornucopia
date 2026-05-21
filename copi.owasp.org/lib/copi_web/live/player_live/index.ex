@@ -35,7 +35,7 @@ defmodule CopiWeb.PlayerLive.Index do
          |> redirect(to: ~p"/games")}
 
       {:error, reason} ->
-        Logger.warning("Transient game load failure in PlayerLive.Index mount for game_id=#{game_id}, reason=#{inspect(reason)}")
+        Logger.debug("Transient game load failure in PlayerLive.Index mount for game_id=#{inspect(game_id)}, reason=#{inspect(reason)}")
 
         {:ok,
          socket
@@ -75,8 +75,8 @@ defmodule CopiWeb.PlayerLive.Index do
       {:error, reason} ->
         retry_count = socket.assigns[:game_load_retry_count] || 0
 
-        Logger.warning(
-          "Transient game load failure in PlayerLive.Index handle_params for game_id=#{game_id}, retry=#{retry_count}, reason=#{inspect(reason)}"
+        Logger.debug(
+          "Transient game load failure in PlayerLive.Index handle_params for game_id=#{inspect(game_id)}, retry=#{retry_count}, reason=#{inspect(reason)}"
         )
 
         cond do

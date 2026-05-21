@@ -1,5 +1,5 @@
 defmodule CopiWeb.PlayerLive.IndexPureTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
   alias CopiWeb.PlayerLive.Index
 

@@ -36,8 +36,8 @@ defmodule CopiWeb.GameLive.Show do
       {:error, reason} ->
         retry_count = socket.assigns[:game_load_retry_count] || 0
 
-        Logger.warning(
-          "Transient game load failure for game_id=#{params["game_id"]}, retry=#{retry_count}, reason=#{inspect(reason)}"
+        Logger.debug(
+          "Transient game load failure for game_id=#{inspect(params["game_id"])}, retry=#{retry_count}, reason=#{inspect(reason)}"
         )
 
         cond do
