@@ -22,11 +22,18 @@ defmodule Copi.Cornucopia.Game do
   end
 
   def find(id) do
-    case Copi.Repo.get(Copi.Cornucopia.Game, id) do
-      nil -> 
-        Logger.warning("Game not found: #{id}")
+    case Ecto.ULID.cast(id) do
+      {:ok, cast_id} ->
+        case Copi.Repo.get(Copi.Cornucopia.Game, cast_id) do
+          nil ->
+            Logger.debug("Game not found: #{inspect(id)}")
+            {:error, :not_found}
+          game -> {:ok, game |> Copi.Repo.preload([players: [dealt_cards: [:card, :votes]], continue_votes: [:player]])}
+        end
+
+      :error ->
+        Logger.debug("Game find called with invalid id format: #{inspect(id)}")
         {:error, :not_found}
-      game -> {:ok, game |> Copi.Repo.preload([players: [dealt_cards: [:card, :votes]], continue_votes: [:player]])}
     end
   end
 

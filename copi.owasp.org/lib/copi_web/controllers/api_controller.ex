@@ -36,34 +36,34 @@ defmodule CopiWeb.ApiController do
                         conn |> json(%{"id" => updated_dealt_card.id})
 
                       {:error, :not_found} ->
-                        Logger.warning("Game disappeared after card update: #{game.id}")
+                        Logger.warning("Game disappeared after card update: #{inspect(game.id)}")
                         conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
 
                       {:error, reason} ->
-                        Logger.warning("Transient game reload failure after card update for game_id=#{game.id}, reason=#{inspect(reason)}")
+                        Logger.warning("Transient game reload failure after card update for game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
                         conn |> put_status(:service_unavailable) |> json(%{"error" => "Temporary service issue. Please retry."})
                     end
 
                   {:error, changeset} ->
-                    Logger.warning("Card update failed for dealt_card_id=#{dealt_card.id}, player_id=#{player_id}, game_id=#{game_id}, errors=#{inspect(changeset.errors)}")
+                    Logger.warning("Card update failed for dealt_card_id=#{inspect(dealt_card.id)}, player_id=#{inspect(player_id)}, game_id=#{inspect(game_id)}, errors=#{inspect(changeset.errors)}")
                     conn |> put_status(:unprocessable_entity) |> json(%{"error" => "Could not play card"})
                 end
             end
           else
-            Logger.warning("Dealt card #{dealt_card_id} not found for player: #{player_id}")
+            Logger.debug("Dealt card #{inspect(dealt_card_id)} not found for player: #{inspect(player_id)}")
             conn |> put_status(:not_found) |> json(%{"error" => "Could not find player and dealt card"})
           end
         else
-          Logger.warning("Player #{player_id} not found in game: #{game_id}")
+          Logger.debug("Player #{inspect(player_id)} not found in game: #{inspect(game_id)}")
           conn |> put_status(:not_found) |> json(%{"error" => "Player not found in this game"})
         end
 
       {:error, :not_found} ->
-        Logger.warning("Game not found: #{game_id}")
+        Logger.debug("Game not found: #{inspect(game_id)}")
         conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
 
       {:error, reason} ->
-        Logger.warning("Transient game lookup failure for game_id=#{game_id}, reason=#{inspect(reason)}")
+        Logger.debug("Transient game lookup failure for game_id=#{inspect(game_id)}, reason=#{inspect(reason)}")
         conn |> put_status(:service_unavailable) |> json(%{"error" => "Temporary service issue. Please retry."})
     end
   end

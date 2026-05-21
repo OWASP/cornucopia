@@ -15,11 +15,18 @@ defmodule Copi.Cornucopia.DealtCard do
   end
 
   def find(id) do
-    case Copi.Repo.get(Copi.Cornucopia.DealtCard, id) do
-      nil ->
-        Logger.debug("Dealt card not found: #{inspect(id)}")
+    case Ecto.Type.cast(:integer, id) do
+      {:ok, cast_id} ->
+        case Copi.Repo.get(Copi.Cornucopia.DealtCard, cast_id) do
+          nil ->
+            Logger.debug("Dealt card not found: #{inspect(id)}")
+            {:error, :not_found}
+          dealt_card -> {:ok, dealt_card  |> Copi.Repo.preload([:card, :votes])}
+        end
+
+      :error ->
+        Logger.debug("DealtCard find called with invalid id format: #{inspect(id)}")
         {:error, :not_found}
-      dealt_card -> {:ok, dealt_card  |> Copi.Repo.preload([:card, :votes])}
     end
   end
   @doc false
