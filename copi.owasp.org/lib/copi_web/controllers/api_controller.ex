@@ -1,6 +1,7 @@
 defmodule CopiWeb.ApiController do
   use CopiWeb, :controller
   alias Copi.Cornucopia.Game
+
   def play_card(conn, %{"game_id" => game_id, "player_id" => player_id, "dealt_card_id" => dealt_card_id}) do
     with {:ok, game} <- Game.find(game_id) do
       player = Enum.find(game.players, fn player -> player.id == player_id end)
@@ -16,10 +17,10 @@ defmodule CopiWeb.ApiController do
             true ->
               dealt_card = Ecto.Changeset.change(dealt_card, played_in_round: current_round)
               dealt_card = Copi.Repo.update!(dealt_card)
-              
+
               {:ok, updated_game} = Game.find(game.id)
               CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
-              
+
               conn |> json(%{"id" => dealt_card.id})
           end
         else
@@ -32,6 +33,7 @@ defmodule CopiWeb.ApiController do
       {:error, _reason} -> conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
     end
   end
+
   def topic(game_id) do
     "game:#{game_id}"
   end

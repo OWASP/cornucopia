@@ -71,7 +71,8 @@ defmodule CopiWeb.PlayerLive.Show do
         # Wait a moment then proceed to next round
         Process.send_after(self(), :proceed_to_next_round, 100)
 
-        {:noreply, assign(socket, :game, game)}
+        {:ok, updated_game} = Game.find(game.id)
+        {:noreply, assign(socket, :game, updated_game)}
       else
         # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
         {:noreply, socket}
@@ -105,8 +106,12 @@ defmodule CopiWeb.PlayerLive.Show do
       end
     else
       # Add their vote
-      Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
-      Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id})
+      case Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id}) do
+        {:ok, _vote} ->
+          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
+        {:error, _} ->
+          Logger.debug("Continue vote already exists for player_id: #{player.id}, game_id: #{game.id}")
+      end
     end
 
     {:ok, updated_game} = Game.find(game.id)
@@ -138,8 +143,8 @@ defmodule CopiWeb.PlayerLive.Show do
         case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
           {:ok, _vote} ->
             Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-          {:error, changeset} ->
-            Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+          {:error, _} ->
+            Logger.debug("Vote already exists for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
         end
       end
 
