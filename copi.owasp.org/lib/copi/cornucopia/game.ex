@@ -1,6 +1,7 @@
 defmodule Copi.Cornucopia.Game do
   use Ecto.Schema
   import Ecto.Changeset
+  require Logger
 
   @primary_key {:id, Ecto.ULID, autogenerate: true}
 
@@ -22,7 +23,9 @@ defmodule Copi.Cornucopia.Game do
 
   def find(id) do
     case Copi.Repo.get(Copi.Cornucopia.Game, id) do
-      nil -> {:error, :not_found}
+      nil -> 
+        Logger.warning("Game not found: #{id}")
+        {:error, :not_found}
       game -> {:ok, game |> Copi.Repo.preload([players: [dealt_cards: [:card, :votes]], continue_votes: [:player]])}
     end
   end

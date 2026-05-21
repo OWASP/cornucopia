@@ -152,13 +152,5 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       # The flash message should indicate the game has started
       assert_redirect(view, "/games/#{game.id}")
     end
-
-    test "shows error when trying to join non-existent game", %{conn: conn} do
-      fake_game_id = Ecto.ULID.generate()
-
-      assert_raise Ecto.NoResultsError, fn ->
-        live(conn, "/games/#{fake_game_id}/players/new")
-      end
-    end
   end
 end

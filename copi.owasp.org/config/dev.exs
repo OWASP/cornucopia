@@ -80,3 +80,9 @@ config :phoenix_live_view,
 # Disable colocated JS symlink warning on Windows
 config :phoenix_live_view, :colocated_js,
   disable_symlink_warning: true
+
+# Retry settings for transient LiveView load failures.
+config :copi, :resilience,
+  retry_delay_ms: 750,
+  max_game_load_retries: 3,
+  max_player_load_retries: 3

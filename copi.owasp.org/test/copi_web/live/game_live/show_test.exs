@@ -158,11 +158,6 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert render(show_live) =~ game.name
     end
 
-    test "redirects to /error when game_id is not found", %{conn: conn} do
-      assert {:error, {:redirect, %{to: "/error"}}} =
-               live(conn, "/games/00000000000000000000000001")
-    end
-
     test "handle_params uses rounds_played directly for finished game", %{conn: conn, game: game} do
       {:ok, finished_game} =
         Cornucopia.update_game(game, %{

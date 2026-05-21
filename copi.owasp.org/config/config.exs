@@ -11,6 +11,11 @@ config :copi,
   ecto_repos: [Copi.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :copi, :resilience,
+  retry_delay_ms: 750,
+  max_game_load_retries: 3,
+  max_player_load_retries: 3
+
 # Configures the endpoint
 config :copi, CopiWeb.Endpoint,
   debug_errors: false,

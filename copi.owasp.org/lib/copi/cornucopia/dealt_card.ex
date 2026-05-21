@@ -1,6 +1,7 @@
 defmodule Copi.Cornucopia.DealtCard do
   use Ecto.Schema
   import Ecto.Changeset
+  require Logger
 
   schema "dealt_cards" do
     field :played_in_round, :integer
@@ -15,7 +16,9 @@ defmodule Copi.Cornucopia.DealtCard do
 
   def find(id) do
     case Copi.Repo.get(Copi.Cornucopia.DealtCard, id) do
-      nil -> {:error, :not_found}
+      nil ->
+        Logger.warning("Dealt card not found: #{id}")
+        {:error, :not_found}
       dealt_card -> {:ok, dealt_card  |> Copi.Repo.preload([:card, :votes])}
     end
   end

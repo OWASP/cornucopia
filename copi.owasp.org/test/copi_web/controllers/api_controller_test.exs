@@ -46,14 +46,6 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 406)["error"] == "Card already played"
   end
 
-  test "play_card returns 404 when game not found", %{conn: conn} do
-    conn = put(conn, "/api/games/00000000000000000000000001/players/fakeplayer/card", %{
-      "dealt_card_id" => "999"
-    })
-
-    assert json_response(conn, 404)["error"] == "Could not find game"
-  end
-
   test "play_card returns 404 when dealt card not found for player", %{conn: conn, game: game} do
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})

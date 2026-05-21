@@ -2,46 +2,110 @@ defmodule CopiWeb.PlayerLive.Index do
   use CopiWeb, :live_view
 
   alias Copi.Cornucopia
+  alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.Player
+  alias CopiWeb.Resilience
+
+  require Logger
 
   @impl true
   def mount(%{"game_id" => game_id}, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
-    game = Cornucopia.get_game!(game_id)
+    socket = assign(socket, :client_ip, ip)
 
-    # V2.2: Block at mount — returning redirect from mount sends a true HTTP 302
-    # during the dead (static) render, before any HTML or WebSocket reaches the client.
-    if game.started_at do
-      {:ok,
-       socket
-       |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
-       |> redirect(to: ~p"/games")}
-    else
-      {:ok, assign(assign(socket, :client_ip, ip), players: list_players(game_id), game: game)}
+    case Game.find(game_id) do
+      {:ok, game} ->
+        if game.started_at do
+          {:ok,
+           socket
+           |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+           |> redirect(to: ~p"/games")}
+        else
+          {:ok,
+           socket
+           |> assign(:game, game)
+           |> assign(:players, list_players(game_id))
+           |> assign(:game_load_retry_count, 0)}
+        end
+
+      {:error, :not_found} ->
+        {:ok,
+         socket
+         |> put_flash(:error, "Game not found.")
+         |> redirect(to: ~p"/games")}
+
+      {:error, reason} ->
+        Logger.warning("Transient game load failure in PlayerLive.Index mount for game_id=#{game_id}, reason=#{inspect(reason)}")
+
+        {:ok,
+         socket
+         |> put_flash(:error, "Temporary issue loading game. Please try again.")
+         |> redirect(to: ~p"/games")}
     end
   end
 
   @impl true
   def handle_params(%{"game_id" => game_id} = params, _url, socket) do
-    # Re-fetch game state for LiveView client-side navigations (when mount isn't called)
-    game = Cornucopia.get_game!(game_id)
+    case Game.find(game_id) do
+      {:ok, game} ->
+        # V2.2: Also check in handle_params for LiveView navigation scenarios
+        if game.started_at do
+          {:noreply,
+           socket
+           |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
+           |> redirect(to: ~p"/games")}
+        else
+          # Assign freshly loaded game and players for LiveView client-side navigations
+          players = list_players(game_id)
 
-    # V2.2: Also check in handle_params for LiveView navigation scenarios
-    if game.started_at do
-      {:noreply,
-       socket
-       |> put_flash(:error, "This game has already started. New players cannot join a game in progress.")
-       |> redirect(to: ~p"/games")}
-    else
-      # Assign freshly loaded game and players for LiveView client-side navigations
-      players = list_players(game_id)
+          {:noreply,
+           socket
+           |> assign(:game, game)
+           |> assign(:players, players)
+           |> assign(:game_load_retry_count, 0)
+           |> apply_action(socket.assigns.live_action, params)}
+        end
 
-      {:noreply,
-       socket
-       |> assign(:game, game)
-       |> assign(:players, players)
-       |> apply_action(socket.assigns.live_action, params)}
+      {:error, :not_found} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Game not found.")
+         |> redirect(to: ~p"/games")}
+
+      {:error, reason} ->
+        retry_count = socket.assigns[:game_load_retry_count] || 0
+
+        Logger.warning(
+          "Transient game load failure in PlayerLive.Index handle_params for game_id=#{game_id}, retry=#{retry_count}, reason=#{inspect(reason)}"
+        )
+
+        cond do
+          socket.assigns[:game] && retry_count < Resilience.max_game_load_retries() ->
+            Process.send_after(self(), {:retry_player_index_load, params}, Resilience.retry_delay_ms())
+
+            {:noreply,
+             socket
+             |> assign(:game_load_retry_count, retry_count + 1)
+             |> put_flash(:error, "Temporary issue loading game. Retrying...")}
+
+          socket.assigns[:game] ->
+            {:noreply,
+             socket
+             |> assign(:game_load_retry_count, 0)
+             |> put_flash(:error, "Temporary issue loading game. Please try again.")}
+
+          true ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Temporary issue loading game. Please try again.")
+             |> redirect(to: ~p"/games")}
+        end
     end
+  end
+
+  @impl true
+  def handle_info({:retry_player_index_load, params}, socket) do
+    handle_params(params, nil, socket)
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do

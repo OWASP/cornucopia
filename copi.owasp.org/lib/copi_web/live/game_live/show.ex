@@ -3,6 +3,9 @@ defmodule CopiWeb.GameLive.Show do
 
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.DealtCard
+  alias CopiWeb.Resilience
+
+  require Logger
 
   @impl true
   def mount(_params, session, socket) do
@@ -19,31 +22,51 @@ defmodule CopiWeb.GameLive.Show do
 
   @impl true
   def handle_params(params, _, socket) do
-    with {:ok, game} <- Game.find(params["game_id"]) do
-      CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
+    case Game.find(params["game_id"]) do
+      {:ok, game} ->
+        CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
+        assign_game_and_round(socket, params, game)
 
-      current_round = if game.finished_at do
-        game.rounds_played
-      else
-        game.rounds_played + 1
-      end
+      {:error, :not_found} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Game not found.")
+         |> redirect(to: "/games")}
 
-      round_result = if params["round"] do
-        Want.integer(params["round"], min: 1, max: current_round)
-      else
-        {:ok, current_round}
-      end
+      {:error, reason} ->
+        retry_count = socket.assigns[:game_load_retry_count] || 0
 
-      case round_result do
-        {:ok, requested_round} ->
-          {:noreply, socket |> assign(:game, game) |> assign(:requested_round, requested_round)}
-        {:error, _reason} ->
-          {:noreply, redirect(socket, to: "/error")}
-      end
-    else
-      {:error, _reason} ->
-        {:noreply, redirect(socket, to: "/error")}
+        Logger.warning(
+          "Transient game load failure for game_id=#{params["game_id"]}, retry=#{retry_count}, reason=#{inspect(reason)}"
+        )
+
+        cond do
+          socket.assigns[:game] && retry_count < Resilience.max_game_load_retries() ->
+            Process.send_after(self(), {:retry_game_load, params}, Resilience.retry_delay_ms())
+
+            {:noreply,
+             socket
+             |> assign(:game_load_retry_count, retry_count + 1)
+             |> put_flash(:error, "Temporary issue loading game. Retrying...")}
+
+          socket.assigns[:game] ->
+            {:noreply,
+             socket
+             |> assign(:game_load_retry_count, 0)
+             |> put_flash(:error, "Temporary issue loading game. Please try again.")}
+
+          true ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Temporary issue loading game. Please try again.")
+             |> redirect(to: "/games")}
+        end
     end
+  end
+
+  @impl true
+  def handle_info({:retry_game_load, params}, socket) do
+    handle_params(params, nil, socket)
   end
 
   @impl true
@@ -53,6 +76,37 @@ defmodule CopiWeb.GameLive.Show do
         {:noreply, assign(socket, :game, updated_game) |> assign(:requested_round, updated_game.rounds_played + 1)}
       true ->
         {:noreply, socket}
+    end
+  end
+
+  defp assign_game_and_round(socket, params, game) do
+    current_round = if game.finished_at do
+      game.rounds_played
+    else
+      game.rounds_played + 1
+    end
+
+    round_result = if params["round"] do
+      Want.integer(params["round"], min: 1, max: current_round)
+    else
+      {:ok, current_round}
+    end
+
+    case round_result do
+      {:ok, requested_round} ->
+        {:noreply,
+         socket
+         |> assign(:game, game)
+         |> assign(:requested_round, requested_round)
+         |> assign(:game_load_retry_count, 0)}
+
+      {:error, _reason} ->
+        {:noreply,
+         socket
+         |> assign(:game, game)
+         |> assign(:requested_round, current_round)
+         |> assign(:game_load_retry_count, 0)
+         |> put_flash(:error, "Invalid round value. Showing current round instead.")}
     end
   end
 

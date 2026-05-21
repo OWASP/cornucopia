@@ -4,7 +4,9 @@
 
   <h2>Thanks for playing, <%= @player.name %>! This game finished at <%= @player.game.finished_at %></h2>
 
-  <span class="button"><a href={~p"/games/#{@player.game_id}"}>Go to game summary</a></span>
+  <.link patch={~p"/games/#{@player.game_id}"}>
+    <.primary_button class="mt-3">Go to game summary</.primary_button>
+  </.link>
 <% else %>
 
   <%= if @player.game.started_at do %>

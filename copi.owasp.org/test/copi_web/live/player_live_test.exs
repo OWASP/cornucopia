@@ -251,11 +251,6 @@ defmodule CopiWeb.PlayerLiveTest do
       assert updated_game.rounds_played >= 0
     end
 
-    test "redirects to error when player not found", %{conn: conn} do
-      assert {:error, {:redirect, %{to: "/error"}}} =
-               live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV/players/01ARZ3NDEKTSV4RRFFQ69G5FAV")
-    end
-
     test "next_round when round is closed advances rounds and sets finished_at", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)

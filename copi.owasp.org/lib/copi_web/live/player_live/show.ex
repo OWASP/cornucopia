@@ -8,6 +8,7 @@ defmodule CopiWeb.PlayerLive.Show do
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.DealtCard
+  alias CopiWeb.Resilience
 
   @impl true
   def mount(_params, session, socket) do
@@ -17,14 +18,42 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    with {:ok, player} <- Player.find(player_id),
-         {:ok, game} <- Game.find(player.game_id) do
-      CopiWeb.Endpoint.subscribe(topic(player.game_id))
-      {:noreply, socket |> assign(:game, game) |> assign(:player, player)}
-    else
-      {:error, _reason} ->
-        {:noreply, redirect(socket, to: "/error")}
+    case Player.find(player_id) do
+      {:ok, player} ->
+        case Game.find(player.game_id) do
+          {:ok, game} ->
+            CopiWeb.Endpoint.subscribe(topic(player.game_id))
+
+            {:noreply,
+             socket
+             |> assign(:game, game)
+             |> assign(:player, player)
+             |> assign(:player_load_retry_count, 0)}
+
+          {:error, :not_found} ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Game not found.")
+             |> redirect(to: "/games")}
+
+          {:error, reason} ->
+            handle_transient_player_load_failure(socket, player_id, reason)
+        end
+
+      {:error, :not_found} ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Player not found.")
+         |> redirect(to: "/games")}
+
+      {:error, reason} ->
+        handle_transient_player_load_failure(socket, player_id, reason)
     end
+  end
+
+  @impl true
+  def handle_info({:retry_player_show_load, player_id}, socket) do
+    handle_params(%{"id" => player_id}, nil, socket)
   end
 
   @impl true
@@ -121,34 +150,43 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    {:ok, dealt_card} = DealtCard.find(dealt_card_id)
+    case DealtCard.find(dealt_card_id) do
+      {:ok, dealt_card} ->
+        game_card_ids = game.players
+          |> Enum.flat_map(fn p -> p.dealt_cards end)
+          |> Enum.map(fn dc -> dc.id end)
 
-    game_card_ids = game.players
-      |> Enum.flat_map(fn p -> p.dealt_cards end)
-      |> Enum.map(fn dc -> dc.id end)
+        if dealt_card.id in game_card_ids do
+          vote = get_vote(dealt_card, player)
 
-    if dealt_card.id in game_card_ids do
-      vote = get_vote(dealt_card, player)
+          if vote do
+            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+            Copi.Repo.delete!(vote)
+          else
+            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
+              {:ok, _vote} ->
+                Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+              {:error, changeset} ->
+                Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+            end
+          end
 
-      if vote do
-        Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        Copi.Repo.delete!(vote)
-      else
-        Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-        case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: String.to_integer(dealt_card_id), player_id: player.id}) do
-          {:ok, _vote} ->
-            Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-          {:error, changeset} ->
-            Logger.warning("Voting failed for player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}, errors: #{inspect(changeset.errors)}")
+          {:ok, updated_game} = Game.find(game.id)
+          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+          {:noreply, assign(socket, :game, updated_game)}
+        else
+          Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
+          {:noreply, socket |> put_flash(:error, "Invalid card selection")}
         end
-      end
 
-      {:ok, updated_game} = Game.find(game.id)
-      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-      {:noreply, assign(socket, :game, updated_game)}
-    else
-      Logger.warning("Unauthorized vote attempt: player_id: #{player.id}, dealt_card_id: #{dealt_card_id}, game_id: #{game.id}")
-      {:noreply, socket |> put_flash(:error, "Invalid card selection")}
+      {:error, :not_found} ->
+        Logger.warning("Vote attempt with missing dealt_card_id=#{dealt_card_id} for player_id=#{player.id}, game_id=#{game.id}")
+        {:noreply, socket |> put_flash(:error, "Card not found. Please refresh and try again.")}
+
+      {:error, reason} ->
+        Logger.warning("Transient dealt card lookup failure for dealt_card_id=#{dealt_card_id}, player_id=#{player.id}, game_id=#{game.id}, reason=#{inspect(reason)}")
+        {:noreply, socket |> put_flash(:error, "Temporary issue loading card. Please try again.")}
     end
   end
 
@@ -207,6 +245,36 @@ defmodule CopiWeb.PlayerLive.Show do
       "cumulus" -> "OWASP Cumulus Session:"
       "mlsec" -> "Elevation of MLSec Session:"
       _ -> "EoP Session:"
+    end
+  end
+
+  defp handle_transient_player_load_failure(socket, player_id, reason) do
+    retry_count = socket.assigns[:player_load_retry_count] || 0
+
+    Logger.warning(
+      "Transient player/game load failure in PlayerLive.Show for player_id=#{player_id}, retry=#{retry_count}, reason=#{inspect(reason)}"
+    )
+
+    cond do
+      socket.assigns[:game] && socket.assigns[:player] && retry_count < Resilience.max_player_load_retries() ->
+        Process.send_after(self(), {:retry_player_show_load, player_id}, Resilience.retry_delay_ms())
+
+        {:noreply,
+         socket
+         |> assign(:player_load_retry_count, retry_count + 1)
+         |> put_flash(:error, "Temporary issue loading player/game. Retrying...")}
+
+      socket.assigns[:game] && socket.assigns[:player] ->
+        {:noreply,
+         socket
+         |> assign(:player_load_retry_count, 0)
+         |> put_flash(:error, "Temporary issue loading player/game. Please try again.")}
+
+      true ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Temporary issue loading player/game. Please try again.")
+         |> redirect(to: "/games")}
     end
   end
 
