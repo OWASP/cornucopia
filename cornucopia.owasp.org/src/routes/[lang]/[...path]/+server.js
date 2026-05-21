@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 
-const SUPPORTED_LANGS = ['en', 'es', 'uk'];
+const SUPPORTED_LANGS = ['en', 'uk'];
 
 const proxyRequest = async ({ params, url, request, fetch }) => {
   const lang = String(params.lang || '').toLowerCase();

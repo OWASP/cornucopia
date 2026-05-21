@@ -5,9 +5,9 @@ import { defaultLocale, locales, setLocale, locale, translations, loading } from
 
 export const handle = async ({ event, resolve }) => {
   const { request } = event;
-  const supportedLangs = ['en', 'es', 'uk'];
+  const supportedLangs = ['en', 'uk'];
   const pathname = event.url.pathname;
-  const pathMatch = pathname.match(/^\/(en|es|uk)(\/|$)/i);
+  const pathMatch = pathname.match(/^\/(en|uk)(\/|$)/i);
   const proxiedLang = request.headers.get('x-i18n-lang')?.toLowerCase() || '';
   const isProxyRequest = request.headers.get('x-i18n-proxy') === '1';
   const isAssetOrApiPath =

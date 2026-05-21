@@ -1,11 +1,11 @@
 /** @type {import('@sveltejs/kit').Reroute} */
 export function reroute({ url }) {
-  const pathMatch = url.pathname.match(/^\/(en|es|uk)(?=\/|$)/i);
+  const pathMatch = url.pathname.match(/^\/(en|uk)(?=\/|$)/i);
   if (!pathMatch) {
     return;
   }
 
-  const strippedPath = url.pathname.replace(/^\/(en|es|uk)(?=\/|$)/i, '') || '/';
+  const strippedPath = url.pathname.replace(/^\/(en|uk)(?=\/|$)/i, '') || '/';
 
   if (
     strippedPath.startsWith('/_app') ||
