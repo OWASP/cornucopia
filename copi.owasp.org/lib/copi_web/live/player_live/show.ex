@@ -18,9 +18,9 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    case Player.find(player_id) do
+    case player_module().find(player_id) do
       {:ok, player} ->
-        case Game.find(player.game_id) do
+        case game_module().find(player.game_id) do
           {:ok, game} ->
             CopiWeb.Endpoint.subscribe(topic(player.game_id))
 
@@ -58,7 +58,7 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
-    case Player.find(socket.assigns.player.id) do
+    case player_module().find(socket.assigns.player.id) do
       {:ok, updated_player} ->
         {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
       {:error, _reason} ->
@@ -80,7 +80,7 @@ defmodule CopiWeb.PlayerLive.Show do
       Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
     end
 
-    {:ok, updated_game} = Game.find(game.id)
+    {:ok, updated_game} = game_module().find(game.id)
 
     CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
@@ -112,7 +112,7 @@ defmodule CopiWeb.PlayerLive.Show do
         Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
       end
 
-      {:ok, updated_game} = Game.find(game.id)
+      {:ok, updated_game} = game_module().find(game.id)
 
       CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
@@ -138,7 +138,7 @@ defmodule CopiWeb.PlayerLive.Show do
       Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id})
     end
 
-    {:ok, updated_game} = Game.find(game.id)
+    {:ok, updated_game} = game_module().find(game.id)
 
     CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
@@ -150,7 +150,7 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    case DealtCard.find(dealt_card_id) do
+    case dealt_card_module().find(dealt_card_id) do
       {:ok, dealt_card} ->
         game_card_ids = game.players
           |> Enum.flat_map(fn p -> p.dealt_cards end)
@@ -172,7 +172,7 @@ defmodule CopiWeb.PlayerLive.Show do
             end
           end
 
-          {:ok, updated_game} = Game.find(game.id)
+          {:ok, updated_game} = game_module().find(game.id)
           CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
           {:noreply, assign(socket, :game, updated_game)}
         else
@@ -276,6 +276,18 @@ defmodule CopiWeb.PlayerLive.Show do
          |> put_flash(:error, "Temporary issue loading player/game. Please try again.")
          |> redirect(to: "/games")}
     end
+  end
+
+  defp player_module do
+    Application.get_env(:copi, :player_live_show_player_module, Player) || Player
+  end
+
+  defp game_module do
+    Application.get_env(:copi, :player_live_show_game_module, Game) || Game
+  end
+
+  defp dealt_card_module do
+    Application.get_env(:copi, :player_live_show_dealt_card_module, DealtCard) || DealtCard
   end
 
 end

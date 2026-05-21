@@ -322,5 +322,28 @@ defmodule Copi.IPHelperTest do
 
       assert IPHelper.get_ip_from_socket(socket) == {203, 0, 113, 4}
     end
+
+    test "returns non-tuple peer_data address as-is for LiveView socket" do
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: %{peer_data: %{address: "10.0.9.9"}}}}
+      assert IPHelper.get_ip_from_socket(socket) == "10.0.9.9"
+    end
+
+    test "handles unknown connect_info type by falling back to localhost" do
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: :unexpected}}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
+
+    test "get_ip_from_connect_info handles request_header key and invalid headers_in shape" do
+      assert IPHelper.get_ip_from_connect_info(%{request_header: [{"x-forwarded-for", "10.10.10.10"}]}) == {10, 10, 10, 10}
+      assert IPHelper.get_ip_from_connect_info(%{headers_in: {"x-forwarded-for", "10.10.10.11"}}) == nil
+    end
+
+    test "Phoenix.Socket transport with dead pid falls back to localhost" do
+      pid = spawn(fn -> :ok end)
+      :timer.sleep(10)
+
+      socket = %Phoenix.Socket{transport_pid: pid}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
   end
 end

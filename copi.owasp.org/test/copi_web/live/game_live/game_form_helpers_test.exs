@@ -276,5 +276,24 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       assert GameFormHelpers.show_companion_suits?(%{form: %{source: %{changes: %{edition: "mobileapp"}}}})
       refute GameFormHelpers.show_companion_suits?(%{form: %{source: %{changes: %{edition: "eop"}}}})
     end
+
+    test "display_appropriate_suits_list keeps companion-only suits for host editions" do
+      suits = ["companion-Large Language Models"]
+      assert GameFormHelpers.display_appropriate_suits_list("webapp", suits) == suits
+    end
+
+    test "display_appropriate_suits_list falls back when companion-only suits used on non-host edition" do
+      result = GameFormHelpers.display_appropriate_suits_list("eop", ["companion-Large Language Models"])
+
+      assert is_list(result)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "eop-") end)
+    end
+
+    test "display_appropriate_suits_list falls back when suit has no edition prefix" do
+      result = GameFormHelpers.display_appropriate_suits_list("webapp", ["authentication"])
+
+      assert is_list(result)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+    end
   end
 end

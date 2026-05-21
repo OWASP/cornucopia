@@ -7,6 +7,29 @@ defmodule CopiWeb.PlayerLiveTest do
   alias Copi.Cornucopia
   alias Copi.RateLimiter
 
+  defmodule IndexGameStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_index_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Game.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+        {:sequence, list} ->
+          case list do
+            [head | tail] ->
+              Application.put_env(:copi, :player_live_index_stub_mode, {:sequence, tail})
+              resolve(head, id)
+
+            [] ->
+              Copi.Cornucopia.Game.find(id)
+          end
+      end
+    end
+
+    defp resolve(:real, id), do: Copi.Cornucopia.Game.find(id)
+    defp resolve(:not_found, _id), do: {:error, :not_found}
+    defp resolve(:transient, _id), do: {:error, :temporary}
+  end
+
   @game_attrs %{name: "some name"}
   # @create_attrs %{name: "some name", game_id: ""}
   # @update_attrs %{name: "some updated name"}
@@ -17,6 +40,15 @@ defmodule CopiWeb.PlayerLiveTest do
     RateLimiter.clear_ip({127, 0, 0, 1})
     # Set up IP address for rate limiting tests
     conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
+
+    old_game_mod = Application.get_env(:copi, :player_live_index_game_module)
+    old_mode = Application.get_env(:copi, :player_live_index_stub_mode)
+
+    on_exit(fn ->
+      Application.put_env(:copi, :player_live_index_game_module, old_game_mod)
+      Application.put_env(:copi, :player_live_index_stub_mode, old_mode)
+    end)
+
     {:ok, conn: conn}
   end
 
@@ -156,6 +188,31 @@ defmodule CopiWeb.PlayerLiveTest do
       :timer.sleep(50)
 
       assert is_binary(render(view))
+    end
+
+    test "mount redirects on transient game load failure", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_index_game_module, IndexGameStub)
+      Application.put_env(:copi, :player_live_index_stub_mode, :transient)
+
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{player.game_id}/players")
+    end
+
+    test "retry transitions from retrying to please try again state", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_index_game_module, IndexGameStub)
+      Application.put_env(:copi, :player_live_index_stub_mode, :real)
+
+      {:ok, view, _html} = live(conn, "/games/#{player.game_id}/players/new")
+
+      Application.put_env(:copi, :player_live_index_stub_mode, :transient)
+
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+
+      assert render(view) =~ "Temporary issue loading game"
     end
   end
 

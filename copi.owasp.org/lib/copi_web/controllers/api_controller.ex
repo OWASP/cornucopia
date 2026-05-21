@@ -5,7 +5,10 @@ defmodule CopiWeb.ApiController do
   require Logger
 
   def play_card(conn, %{"game_id" => game_id, "player_id" => player_id, "dealt_card_id" => dealt_card_id}) do
-    case Game.find(game_id) do
+    game_mod = Application.get_env(:copi, :api_game_module, Game) || Game
+    repo_mod = Application.get_env(:copi, :api_repo_module, Copi.Repo) || Copi.Repo
+
+    case game_mod.find(game_id) do
       {:ok, game} ->
         player = Enum.find(game.players, fn player -> player.id == player_id end)
 
@@ -25,9 +28,9 @@ defmodule CopiWeb.ApiController do
               true ->
                 dealt_card_changeset = Ecto.Changeset.change(dealt_card, played_in_round: current_round)
 
-                case Copi.Repo.update(dealt_card_changeset) do
+                case repo_mod.update(dealt_card_changeset) do
                   {:ok, updated_dealt_card} ->
-                    case Game.find(game.id) do
+                    case game_mod.find(game.id) do
                       {:ok, updated_game} ->
                         CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
                         conn |> json(%{"id" => updated_dealt_card.id})

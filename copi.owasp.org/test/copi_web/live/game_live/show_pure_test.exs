@@ -34,4 +34,12 @@ defmodule CopiWeb.GameLive.ShowPureTest do
     assert {:cont, socket} = Show.put_uri_hook(%{}, "http://localhost/games/1", socket)
     assert socket.assigns.uri == "http://localhost/games/1"
   end
+
+  test "on_mount default raises when not mounted via router live/3" do
+    socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}}}
+
+    assert_raise RuntimeError, ~r/view was not mounted at the router with the live\/3 macro/, fn ->
+      Show.on_mount(:default, %{}, %{}, socket)
+    end
+  end
 end

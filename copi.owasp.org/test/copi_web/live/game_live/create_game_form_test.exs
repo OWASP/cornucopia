@@ -77,5 +77,17 @@ defmodule CopiWeb.GameLive.CreateGameFormTest do
       # Form should still be present (no redirect on error)
       assert has_element?(view, "#game-form")
     end
+
+    test "validate updates form when edition changes", %{conn: conn} do
+      {:ok, view, _html} = live(conn, "/games/new")
+
+      html =
+        view
+        |> form("#game-form", game: %{name: "A", edition: "mobileapp", suits: [""]})
+        |> render_change()
+
+      assert is_binary(html)
+      assert html =~ "Create the game"
+    end
   end
 end

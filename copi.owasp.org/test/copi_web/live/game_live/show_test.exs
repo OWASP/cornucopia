@@ -5,6 +5,29 @@ defmodule CopiWeb.GameLive.ShowTest do
 
   alias Copi.Cornucopia
 
+  defmodule GameStub do
+    def find(id) do
+      case Application.get_env(:copi, :game_live_show_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Game.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+        {:sequence, list} ->
+          case list do
+            [head | tail] ->
+              Application.put_env(:copi, :game_live_show_stub_mode, {:sequence, tail})
+              resolve(head, id)
+
+            [] ->
+              Copi.Cornucopia.Game.find(id)
+          end
+      end
+    end
+
+    defp resolve(:real, id), do: Copi.Cornucopia.Game.find(id)
+    defp resolve(:not_found, _id), do: {:error, :not_found}
+    defp resolve(:transient, _id), do: {:error, :temporary}
+  end
+
   @game_attrs %{name: "Edge Case Test Game", edition: "webapp", suits: ["hearts", "clubs"]}
 
   defp create_game(_) do
@@ -14,6 +37,18 @@ defmodule CopiWeb.GameLive.ShowTest do
 
   describe "Show - Edge Cases" do
     setup [:create_game]
+
+    setup do
+      old_game_mod = Application.get_env(:copi, :game_live_show_game_module)
+      old_mode = Application.get_env(:copi, :game_live_show_stub_mode)
+
+      on_exit(fn ->
+        Application.put_env(:copi, :game_live_show_game_module, old_game_mod)
+        Application.put_env(:copi, :game_live_show_stub_mode, old_mode)
+      end)
+
+      :ok
+    end
 
     test "prevents starting game with fewer than 3 players", %{conn: conn, game: game} do
       # Test with 0 players
@@ -61,6 +96,45 @@ defmodule CopiWeb.GameLive.ShowTest do
       # Verify game was started
       {:ok, updated_game} = Cornucopia.Game.find(game.id)
       assert updated_game.started_at != nil
+    end
+
+    test "start_game deals cards when deck has cards", %{conn: conn, game: game} do
+      {:ok, _player1} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
+      {:ok, _player2} = Cornucopia.create_player(%{name: "Player 2", game_id: game.id})
+      {:ok, _player3} = Cornucopia.create_player(%{name: "Player 3", game_id: game.id})
+
+      for i <- 1..3 do
+        {:ok, _card} =
+          Cornucopia.create_card(%{
+            category: if(rem(i, 2) == 0, do: "clubs", else: "hearts"),
+            value: "V#{i}",
+            description: "D",
+            edition: "webapp",
+            version: "3.0",
+            external_id: "GS#{i}",
+            language: "en",
+            misc: "m",
+            owasp_scp: [],
+            owasp_devguide: [],
+            owasp_asvs: [],
+            owasp_appsensor: [],
+            capec: [],
+            safecode: [],
+            owasp_mastg: [],
+            owasp_masvs: []
+          })
+      end
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}")
+      view |> element("button", "Start Game") |> render_click()
+
+      {:ok, started_game} = Cornucopia.Game.find(game.id)
+      dealt_count =
+        started_game.players
+        |> Enum.flat_map(& &1.dealt_cards)
+        |> Enum.count()
+
+      assert dealt_count > 0
     end
 
     test "does not restart an already started game", %{conn: conn, game: game} do
@@ -196,6 +270,31 @@ defmodule CopiWeb.GameLive.ShowTest do
     test "redirects to /games when game does not exist", %{conn: conn} do
       assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
                live(conn, "/games/00000000000000000000000099")
+    end
+
+    test "redirects to /games on transient load when no previous game assign", %{conn: conn, game: game} do
+      Application.put_env(:copi, :game_live_show_game_module, GameStub)
+      Application.put_env(:copi, :game_live_show_stub_mode, :transient)
+
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{game.id}")
+    end
+
+    test "retry flow increments counter then stops retrying", %{conn: conn, game: game} do
+      Application.put_env(:copi, :game_live_show_game_module, GameStub)
+      Application.put_env(:copi, :game_live_show_stub_mode, :real)
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      Application.put_env(:copi, :game_live_show_stub_mode, :transient)
+
+      send(show_live.pid, {:retry_game_load, %{"game_id" => game.id}})
+      :timer.sleep(50)
+      send(show_live.pid, {:retry_game_load, %{"game_id" => game.id}})
+      :timer.sleep(50)
+      send(show_live.pid, {:retry_game_load, %{"game_id" => game.id}})
+      :timer.sleep(50)
+
+      assert render(show_live) =~ "Temporary issue loading game"
     end
 
     test "invalid round value falls back to current round and stays on page", %{conn: conn, game: game} do

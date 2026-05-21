@@ -22,7 +22,7 @@ defmodule CopiWeb.GameLive.Show do
 
   @impl true
   def handle_params(params, _, socket) do
-    case Game.find(params["game_id"]) do
+    case game_module().find(params["game_id"]) do
       {:ok, game} ->
         CopiWeb.Endpoint.subscribe(topic(params["game_id"]))
         assign_game_and_round(socket, params, game)
@@ -181,5 +181,9 @@ defmodule CopiWeb.GameLive.Show do
       "eop" -> "5.1"
       _ -> "1.0"
     end
+  end
+
+  defp game_module do
+    Application.get_env(:copi, :game_live_show_game_module, Game) || Game
   end
 end

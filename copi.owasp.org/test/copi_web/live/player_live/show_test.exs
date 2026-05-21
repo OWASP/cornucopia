@@ -7,6 +7,41 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.DealtCard
 
+  defmodule PlayerStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_show_player_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Player.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+      end
+    end
+  end
+
+  defmodule GameStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_show_game_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Game.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+      end
+    end
+  end
+
+  defmodule DealtCardStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_show_dealt_card_stub_mode, :real) do
+        :real -> Copi.Cornucopia.DealtCard.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+        :vote_conflict ->
+          case Copi.Cornucopia.DealtCard.find(id) do
+            {:ok, dealt_card} -> {:ok, %{dealt_card | votes: []}}
+            other -> other
+          end
+      end
+    end
+  end
+
   @game_attrs %{name: "show test game"}
 
   defp create_player(_) do
@@ -36,6 +71,26 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
   describe "Show - additional coverage" do
     setup [:create_player]
+
+    setup do
+      old_player_mod = Application.get_env(:copi, :player_live_show_player_module)
+      old_game_mod = Application.get_env(:copi, :player_live_show_game_module)
+      old_dealt_mod = Application.get_env(:copi, :player_live_show_dealt_card_module)
+      old_player_mode = Application.get_env(:copi, :player_live_show_player_stub_mode)
+      old_game_mode = Application.get_env(:copi, :player_live_show_game_stub_mode)
+      old_dealt_mode = Application.get_env(:copi, :player_live_show_dealt_card_stub_mode)
+
+      on_exit(fn ->
+        Application.put_env(:copi, :player_live_show_player_module, old_player_mod)
+        Application.put_env(:copi, :player_live_show_game_module, old_game_mod)
+        Application.put_env(:copi, :player_live_show_dealt_card_module, old_dealt_mod)
+        Application.put_env(:copi, :player_live_show_player_stub_mode, old_player_mode)
+        Application.put_env(:copi, :player_live_show_game_stub_mode, old_game_mode)
+        Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, old_dealt_mode)
+      end)
+
+      :ok
+    end
 
     test "handle_info :proceed_to_next_round advances rounds_played", %{conn: conn, player: player} do
       game_id = player.game_id
@@ -291,6 +346,69 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
     end
+
+    test "redirects when game lookup for valid player returns not_found", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_game_module, GameStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
+      Application.put_env(:copi, :player_live_show_game_stub_mode, :not_found)
+
+      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
+               live(conn, "/games/#{player.game_id}/players/#{player.id}")
+    end
+
+    test "redirects on transient player load when no existing assigns", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :transient)
+
+      assert {:error, {:redirect, %{to: "/games"}}} =
+               live(conn, "/games/#{player.game_id}/players/#{player.id}")
+    end
+
+    test "toggle_vote shows temporary issue when dealt card lookup transient", %{conn: conn} do
+      {game, player, dealt} = create_game_with_dealt_card("Transient DC", "TDC_1")
+
+      Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :transient)
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+
+      assert render(view) =~ "Temporary issue loading card. Please try again."
+    end
+
+    test "retry load with existing assigns shows retry flash then stable failure flash", %{conn: conn} do
+      {game, player, _dealt} = create_game_with_dealt_card("Retry Player Show Branch", "RPS_1")
+
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :transient)
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+
+      assert render(view) =~ "Temporary issue loading player/game"
+    end
+
+    test "toggle_vote hits insert error branch when vote conflicts", %{conn: conn} do
+      {game, player, dealt} = create_game_with_dealt_card("Vote Conflict", "VC_1")
+
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id})
+
+      Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :vote_conflict)
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+
+      assert render(view) =~ game.name
+    end
   end
 
   describe "toggle_vote authorization" do
@@ -343,6 +461,16 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, updated_game} = Game.find(game.id)
 
       send(view.pid, %{topic: "game:#{game.id}", event: "game:updated", payload: updated_game})
+      :timer.sleep(50)
+
+      assert render(view) =~ game.name
+    end
+
+    test "retry player show load message does not crash", %{conn: conn} do
+      {game, player, _dc} = create_game_with_dealt_card("Retry Player Show", "HI_RETRY_1")
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      send(view.pid, {:retry_player_show_load, player.id})
       :timer.sleep(50)
 
       assert render(view) =~ game.name
