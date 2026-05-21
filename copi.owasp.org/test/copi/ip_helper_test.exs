@@ -307,5 +307,20 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_connect_info(%{x_headers: "invalid_string_ip"}) == nil
       assert IPHelper.get_ip_from_connect_info(%{headers: [{"x-forwarded-for", "invalid_ip"}]}) == nil
     end
+
+    test "uses Plug.Conn remote_ip when no forwarded header and no peer_data" do
+      conn = %Plug.Conn{remote_ip: {172, 16, 0, 10}, private: %{}}
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: conn}}
+
+      assert IPHelper.get_ip_from_socket(socket) == {172, 16, 0, 10}
+    end
+
+    test "prefers first ip in forwarded list in LiveView connect_info map" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{x_headers: [{"x-forwarded-for", "203.0.113.4, 10.0.0.2"}]}}
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {203, 0, 113, 4}
+    end
   end
 end

@@ -119,4 +119,21 @@ defmodule Copi.Encrypted.BinaryTest do
     assert :error = EncryptedBinary.load(%{})
   end
 
+  test "dump raises when encryption key is invalid base64" do
+    System.put_env("COPI_ENCRYPTION_KEY", "%%%not-base64%%%")
+
+    assert_raise ArgumentError, fn ->
+      EncryptedBinary.dump("anything")
+    end
+  end
+
+  test "dump raises when encryption key has wrong decoded length" do
+    short_key = :crypto.strong_rand_bytes(16) |> Base.encode64()
+    System.put_env("COPI_ENCRYPTION_KEY", short_key)
+
+    assert_raise ArgumentError, fn ->
+      EncryptedBinary.dump("anything")
+    end
+  end
+
 end

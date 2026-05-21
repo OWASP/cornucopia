@@ -128,6 +128,35 @@ defmodule CopiWeb.PlayerLiveTest do
       # Verify the rate limiter actually blocked the request
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(test_ip, :player_creation)
     end
+
+    test "redirects when game does not exist", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
+               live(conn, "/games/00000000000000000000000099/players")
+    end
+
+    test "new player route redirects when game is started", %{conn: conn, player: player} do
+      {:ok, _started_game} =
+        Cornucopia.update_game(
+          Cornucopia.get_game!(player.game_id),
+          %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}
+        )
+
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{player.game_id}/players/new")
+    end
+
+    test "edit player route renders edit page title", %{conn: conn, player: player} do
+      {:ok, _view, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}/edit")
+      assert html =~ "Edit Player"
+    end
+
+    test "retry message is handled without crashing", %{conn: conn, player: player} do
+      {:ok, view, _html} = live(conn, "/games/#{player.game_id}/players")
+
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+
+      assert is_binary(render(view))
+    end
   end
 
   describe "Show" do

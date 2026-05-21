@@ -331,4 +331,21 @@ defmodule CopiWeb.PlayerLive.ShowTest do
                live(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
     end
   end
+
+  describe "handle_info game updated" do
+    test "keeps socket when player no longer exists", %{conn: conn} do
+      {game, player, dc} = create_game_with_dealt_card("HandleInfo Missing Player", "HI_MP_1")
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+
+      Copi.Repo.delete!(dc)
+      {:ok, _} = Copi.Cornucopia.delete_player(player)
+      {:ok, updated_game} = Game.find(game.id)
+
+      send(view.pid, %{topic: "game:#{game.id}", event: "game:updated", payload: updated_game})
+      :timer.sleep(50)
+
+      assert render(view) =~ game.name
+    end
+  end
 end

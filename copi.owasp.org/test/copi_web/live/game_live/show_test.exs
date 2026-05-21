@@ -184,6 +184,15 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert render(show_live) =~ game.name
     end
 
+    test "retry handle_info does not crash and keeps view active", %{conn: conn, game: game} do
+      {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
+
+      send(show_live.pid, {:retry_game_load, %{"game_id" => game.id}})
+      :timer.sleep(50)
+
+      assert render(show_live) =~ game.name
+    end
+
     test "redirects to /games when game does not exist", %{conn: conn} do
       assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
                live(conn, "/games/00000000000000000000000099")

@@ -27,4 +27,11 @@ defmodule CopiWeb.GameLive.ShowPureTest do
     assert Show.topic(42) == "game:42"
     assert Show.topic("abc") == "game:abc"
   end
+
+  test "put_uri_hook assigns uri and continues" do
+    socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}}}
+
+    assert {:cont, socket} = Show.put_uri_hook(%{}, "http://localhost/games/1", socket)
+    assert socket.assigns.uri == "http://localhost/games/1"
+  end
 end
