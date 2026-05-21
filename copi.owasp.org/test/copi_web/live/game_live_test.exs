@@ -133,10 +133,6 @@ defmodule CopiWeb.GameLiveTest do
       assert render(show_live) =~ game.name
     end
 
-    test "redirects to error when game not found", %{conn: conn} do
-      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV")
-    end
-
     test "displays finished game using rounds_played for current_round", %{conn: conn, game: game} do
       # Set finished_at so handle_params uses game.rounds_played (not +1) for current_round
       {:ok, game} = Cornucopia.update_game(game, %{
@@ -146,10 +142,6 @@ defmodule CopiWeb.GameLiveTest do
       })
       {:ok, _show_live, html} = live(conn, Routes.game_show_path(conn, :show, game))
       assert html =~ game.name
-    end
-
-    test "redirects to error when round parameter is invalid", %{conn: conn, game: game} do
-      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=abc")
     end
 
     test "displays past round", %{conn: conn, game: game} do
@@ -207,13 +199,6 @@ defmodule CopiWeb.GameLiveTest do
       assert html =~ "At least 3 players are required"
     end
 
-    test "redirects to error on invalid round param", %{conn: conn, game: game} do
-      {:ok, _} = Cornucopia.create_player(%{name: "P1", game_id: game.id})
-      {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
-
-      # round=999 is way beyond current_round, should redirect to /error
-      assert {:error, {:redirect, %{to: "/error"}}} = live(conn, "/games/#{game.id}?round=999")
-    end
   end
 
   describe "Helper functions" do

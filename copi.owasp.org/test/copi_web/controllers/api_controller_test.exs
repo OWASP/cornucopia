@@ -4,7 +4,40 @@ defmodule CopiWeb.ApiControllerTest do
   alias Copi.Cornucopia
   alias Copi.Cornucopia.DealtCard
 
+  defmodule GameStub do
+    def find(id) do
+      case Application.get_env(:copi, :api_game_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Game.find(id)
+        :initial_not_found -> {:error, :not_found}
+        :initial_transient -> {:error, :temporary}
+        :second_not_found ->
+          step = Application.get_env(:copi, :api_game_stub_step, 0)
+          Application.put_env(:copi, :api_game_stub_step, step + 1)
+          if step == 0, do: Copi.Cornucopia.Game.find(id), else: {:error, :not_found}
+        :second_transient ->
+          step = Application.get_env(:copi, :api_game_stub_step, 0)
+          Application.put_env(:copi, :api_game_stub_step, step + 1)
+          if step == 0, do: Copi.Cornucopia.Game.find(id), else: {:error, :temporary}
+      end
+    end
+  end
+
+  defmodule RepoStub do
+    def update(changeset) do
+      case Application.get_env(:copi, :api_repo_stub_mode, :real) do
+        :real -> Copi.Repo.update(changeset)
+        :error -> {:error, Ecto.Changeset.add_error(changeset, :played_in_round, "invalid")}
+      end
+    end
+  end
+
   setup do
+    old_game_mod = Application.get_env(:copi, :api_game_module)
+    old_repo_mod = Application.get_env(:copi, :api_repo_module)
+    old_game_mode = Application.get_env(:copi, :api_game_stub_mode)
+    old_repo_mode = Application.get_env(:copi, :api_repo_stub_mode)
+    old_step = Application.get_env(:copi, :api_game_stub_step)
+
     {:ok, game} = Cornucopia.create_game(%{name: "Test Game"})
     {:ok, player} = Cornucopia.create_player(%{name: "Test Player", game_id: game.id})
 
@@ -17,6 +50,14 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     {:ok, dealt_card} = Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
+
+    on_exit(fn ->
+      Application.put_env(:copi, :api_game_module, old_game_mod)
+      Application.put_env(:copi, :api_repo_module, old_repo_mod)
+      Application.put_env(:copi, :api_game_stub_mode, old_game_mode)
+      Application.put_env(:copi, :api_repo_stub_mode, old_repo_mode)
+      Application.put_env(:copi, :api_game_stub_step, old_step)
+    end)
 
     %{game: game, player: player, dealt_card: dealt_card}
   end
@@ -44,14 +85,6 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     assert json_response(conn, 406)["error"] == "Card already played"
-  end
-
-  test "play_card returns 404 when game not found", %{conn: conn} do
-    conn = put(conn, "/api/games/00000000000000000000000001/players/fakeplayer/card", %{
-      "dealt_card_id" => "999"
-    })
-
-    assert json_response(conn, 404)["error"] == "Could not find game"
   end
 
   test "play_card returns 404 when dealt card not found for player", %{conn: conn, game: game} do
@@ -102,5 +135,85 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     assert json_response(conn, 404)["error"] == "Player not found in this game"
+  end
+
+  test "play_card returns 404 when game does not exist", %{conn: conn, player: player, dealt_card: dealt_card} do
+    conn = put(conn, "/api/games/00000000000000000000000099/players/#{player.id}/card", %{
+      "game_id" => "00000000000000000000000099",
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 404)["error"] == "Could not find game"
+  end
+
+  test "play_card returns 404 when dealt card id is missing for valid player", %{conn: conn, game: game, player: player} do
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => "999999"
+    })
+
+    assert json_response(conn, 404)["error"] == "Could not find player and dealt card"
+  end
+
+  test "play_card returns 503 when initial game lookup is transient", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    Application.put_env(:copi, :api_game_module, GameStub)
+    Application.put_env(:copi, :api_game_stub_mode, :initial_transient)
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 503)["error"] == "Temporary service issue. Please retry."
+  end
+
+  test "play_card returns 404 when game disappears after update", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    Application.put_env(:copi, :api_game_module, GameStub)
+    Application.put_env(:copi, :api_repo_module, RepoStub)
+    Application.put_env(:copi, :api_game_stub_mode, :second_not_found)
+    Application.put_env(:copi, :api_repo_stub_mode, :real)
+    Application.put_env(:copi, :api_game_stub_step, 0)
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 404)["error"] == "Could not find game"
+  end
+
+  test "play_card returns 503 when game reload after update is transient", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    Application.put_env(:copi, :api_game_module, GameStub)
+    Application.put_env(:copi, :api_repo_module, RepoStub)
+    Application.put_env(:copi, :api_game_stub_mode, :second_transient)
+    Application.put_env(:copi, :api_repo_stub_mode, :real)
+    Application.put_env(:copi, :api_game_stub_step, 0)
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 503)["error"] == "Temporary service issue. Please retry."
+  end
+
+  test "play_card returns 422 when dealt card update fails", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    Application.put_env(:copi, :api_game_module, GameStub)
+    Application.put_env(:copi, :api_repo_module, RepoStub)
+    Application.put_env(:copi, :api_game_stub_mode, :real)
+    Application.put_env(:copi, :api_repo_stub_mode, :error)
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 422)["error"] == "Could not play card"
   end
 end

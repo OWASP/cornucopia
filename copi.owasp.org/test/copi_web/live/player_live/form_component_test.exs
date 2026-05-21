@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
   use CopiWeb.ConnCase, async: false
   import Phoenix.LiveViewTest
   alias Copi.Cornucopia
+  alias CopiWeb.PlayerLive.FormComponent
   alias Copi.RateLimiter
 
   setup %{conn: conn} do
@@ -152,13 +153,27 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       # The flash message should indicate the game has started
       assert_redirect(view, "/games/#{game.id}")
     end
+  end
 
-    test "shows error when trying to join non-existent game", %{conn: conn} do
-      fake_game_id = Ecto.ULID.generate()
+  describe "direct component callbacks" do
+    test "update with nil player assigns nil form" do
+      socket = %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}}}
 
-      assert_raise Ecto.NoResultsError, fn ->
-        live(conn, "/games/#{fake_game_id}/players/new")
-      end
+      assert {:ok, updated_socket} = FormComponent.update(%{player: nil, title: "x"}, socket)
+      assert updated_socket.assigns.form == nil
+    end
+
+    test "handle validate event returns socket with form", %{game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Val", game_id: game.id})
+
+      socket =
+        %Phoenix.LiveView.Socket{assigns: %{__changed__: %{}}}
+        |> Phoenix.Component.assign(:player, player)
+
+      assert {:noreply, updated_socket} =
+               FormComponent.handle_event("validate", %{"player" => %{"name" => ""}}, socket)
+
+      assert updated_socket.assigns.form != nil
     end
   end
 end

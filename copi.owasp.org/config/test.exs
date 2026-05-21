@@ -15,3 +15,8 @@ config :logger, level: :warning
 
 # Fixed test key - never use in production
 config :copi, :encryption_key, "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI="
+
+config :copi, :resilience,
+  retry_delay_ms: 100,
+  max_game_load_retries: 1,
+  max_player_load_retries: 1

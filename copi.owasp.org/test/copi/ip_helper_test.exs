@@ -307,5 +307,43 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_connect_info(%{x_headers: "invalid_string_ip"}) == nil
       assert IPHelper.get_ip_from_connect_info(%{headers: [{"x-forwarded-for", "invalid_ip"}]}) == nil
     end
+
+    test "uses Plug.Conn remote_ip when no forwarded header and no peer_data" do
+      conn = %Plug.Conn{remote_ip: {172, 16, 0, 10}, private: %{}}
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: conn}}
+
+      assert IPHelper.get_ip_from_socket(socket) == {172, 16, 0, 10}
+    end
+
+    test "prefers first ip in forwarded list in LiveView connect_info map" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{connect_info: %{x_headers: [{"x-forwarded-for", "203.0.113.4, 10.0.0.2"}]}}
+      }
+
+      assert IPHelper.get_ip_from_socket(socket) == {203, 0, 113, 4}
+    end
+
+    test "returns non-tuple peer_data address as-is for LiveView socket" do
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: %{peer_data: %{address: "10.0.9.9"}}}}
+      assert IPHelper.get_ip_from_socket(socket) == "10.0.9.9"
+    end
+
+    test "handles unknown connect_info type by falling back to localhost" do
+      socket = %Phoenix.LiveView.Socket{private: %{connect_info: :unexpected}}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
+
+    test "get_ip_from_connect_info handles request_header key and invalid headers_in shape" do
+      assert IPHelper.get_ip_from_connect_info(%{request_header: [{"x-forwarded-for", "10.10.10.10"}]}) == {10, 10, 10, 10}
+      assert IPHelper.get_ip_from_connect_info(%{headers_in: {"x-forwarded-for", "10.10.10.11"}}) == nil
+    end
+
+    test "Phoenix.Socket transport with dead pid falls back to localhost" do
+      pid = spawn(fn -> :ok end)
+      :timer.sleep(10)
+
+      socket = %Phoenix.Socket{transport_pid: pid}
+      assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
+    end
   end
 end

@@ -7,6 +7,31 @@ defmodule CopiWeb.PlayerLiveTest do
   alias Copi.Cornucopia
   alias Copi.RateLimiter
 
+  defmodule IndexGameStub do
+    def find(id), do: find_basic(id)
+
+    def find_basic(id) do
+      case Application.get_env(:copi, :player_live_index_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Game.find_basic(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+        {:sequence, list} ->
+          case list do
+            [head | tail] ->
+              Application.put_env(:copi, :player_live_index_stub_mode, {:sequence, tail})
+              resolve(head, id)
+
+            [] ->
+              Copi.Cornucopia.Game.find_basic(id)
+          end
+      end
+    end
+
+    defp resolve(:real, id), do: Copi.Cornucopia.Game.find_basic(id)
+    defp resolve(:not_found, _id), do: {:error, :not_found}
+    defp resolve(:transient, _id), do: {:error, :temporary}
+  end
+
   @game_attrs %{name: "some name"}
   # @create_attrs %{name: "some name", game_id: ""}
   # @update_attrs %{name: "some updated name"}
@@ -17,6 +42,15 @@ defmodule CopiWeb.PlayerLiveTest do
     RateLimiter.clear_ip({127, 0, 0, 1})
     # Set up IP address for rate limiting tests
     conn = Plug.Conn.put_private(conn, :connect_info, %{peer_data: %{address: {127, 0, 0, 1}}})
+
+    old_game_mod = Application.get_env(:copi, :player_live_index_game_module)
+    old_mode = Application.get_env(:copi, :player_live_index_stub_mode)
+
+    on_exit(fn ->
+      Application.put_env(:copi, :player_live_index_game_module, old_game_mod)
+      Application.put_env(:copi, :player_live_index_stub_mode, old_mode)
+    end)
+
     {:ok, conn: conn}
   end
 
@@ -127,6 +161,60 @@ defmodule CopiWeb.PlayerLiveTest do
       assert has_element?(index_live_blocked, "#player-form")
       # Verify the rate limiter actually blocked the request
       assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(test_ip, :player_creation)
+    end
+
+    test "redirects when game does not exist", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
+               live(conn, "/games/00000000000000000000000099/players")
+    end
+
+    test "new player route redirects when game is started", %{conn: conn, player: player} do
+      {:ok, _started_game} =
+        Cornucopia.update_game(
+          Cornucopia.get_game!(player.game_id),
+          %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}
+        )
+
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{player.game_id}/players/new")
+    end
+
+    test "edit player route renders edit page title", %{conn: conn, player: player} do
+      {:ok, _view, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}/edit")
+      assert html =~ "Edit Player"
+    end
+
+    test "retry message is handled without crashing", %{conn: conn, player: player} do
+      {:ok, view, _html} = live(conn, "/games/#{player.game_id}/players")
+
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+
+      assert is_binary(render(view))
+    end
+
+    test "mount redirects on transient game load failure", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_index_game_module, IndexGameStub)
+      Application.put_env(:copi, :player_live_index_stub_mode, :transient)
+
+      assert {:error, {:redirect, %{to: "/games"}}} = live(conn, "/games/#{player.game_id}/players")
+    end
+
+    test "retry transitions from retrying to please try again state", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_index_game_module, IndexGameStub)
+      Application.put_env(:copi, :player_live_index_stub_mode, :real)
+
+      {:ok, view, _html} = live(conn, "/games/#{player.game_id}/players/new")
+
+      Application.put_env(:copi, :player_live_index_stub_mode, :transient)
+
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_index_load, %{"game_id" => player.game_id}})
+      :timer.sleep(50)
+
+      assert render(view) =~ "Temporary issue loading game"
     end
   end
 
@@ -249,11 +337,6 @@ defmodule CopiWeb.PlayerLiveTest do
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert updated_game.rounds_played >= 0
-    end
-
-    test "redirects to error when player not found", %{conn: conn} do
-      assert {:error, {:redirect, %{to: "/error"}}} =
-               live(conn, "/games/01ARZ3NDEKTSV4RRFFQ69G5FAV/players/01ARZ3NDEKTSV4RRFFQ69G5FAV")
     end
 
     test "next_round when round is closed advances rounds and sets finished_at", %{conn: conn, player: player} do

@@ -250,4 +250,50 @@ defmodule CopiWeb.GameLive.GameFormHelpersTest do
       end)
     end
   end
+
+  describe "companion helpers" do
+    test "format_companion_suits_for_checkbox returns companion suits for supported edition" do
+      result = GameFormHelpers.format_companion_suits_for_checkbox("webapp")
+
+      assert is_list(result)
+      assert Enum.all?(result, fn {key, _label} -> String.starts_with?(key, "companion-") end)
+    end
+
+    test "format_companion_suits_for_checkbox returns empty list for unsupported edition" do
+      assert GameFormHelpers.format_companion_suits_for_checkbox("eop") == []
+    end
+
+    test "get_companion_suits_from_selected_deck returns companion suits for selected host edition" do
+      assigns = %{form: %{source: %{changes: %{edition: "mobileapp"}}}}
+      result = GameFormHelpers.get_companion_suits_from_selected_deck(assigns)
+
+      assert is_list(result)
+      assert Enum.all?(result, fn {key, _label} -> String.starts_with?(key, "companion-") end)
+    end
+
+    test "show_companion_suits? true only for host editions" do
+      assert GameFormHelpers.show_companion_suits?(%{form: %{source: %{changes: %{edition: "webapp"}}}})
+      assert GameFormHelpers.show_companion_suits?(%{form: %{source: %{changes: %{edition: "mobileapp"}}}})
+      refute GameFormHelpers.show_companion_suits?(%{form: %{source: %{changes: %{edition: "eop"}}}})
+    end
+
+    test "display_appropriate_suits_list keeps companion-only suits for host editions" do
+      suits = ["companion-Large Language Models"]
+      assert GameFormHelpers.display_appropriate_suits_list("webapp", suits) == suits
+    end
+
+    test "display_appropriate_suits_list falls back when companion-only suits used on non-host edition" do
+      result = GameFormHelpers.display_appropriate_suits_list("eop", ["companion-Large Language Models"])
+
+      assert is_list(result)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "eop-") end)
+    end
+
+    test "display_appropriate_suits_list falls back when suit has no edition prefix" do
+      result = GameFormHelpers.display_appropriate_suits_list("webapp", ["authentication"])
+
+      assert is_list(result)
+      assert Enum.any?(result, fn suit -> String.starts_with?(suit, "webapp-") end)
+    end
+  end
 end
