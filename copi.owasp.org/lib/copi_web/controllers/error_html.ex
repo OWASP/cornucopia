@@ -13,10 +13,16 @@ defmodule CopiWeb.ErrorHTML do
   # The default is to render a plain text page based on
   # the template name. For example, "404.html" becomes
   # "Not Found".
-  def render(_template, assigns) do
+  def render(template, assigns) do
+    status = assigns[:status] || 500
+    status_template = if function_exported?(__MODULE__, String.to_atom(to_string(status)), 1) do
+      String.to_atom(to_string(status))
+    else
+      :"500"
+    end
 
     #Phoenix.Controller.status_message_from_template(template)
-    apply(__MODULE__, :"500", [assigns])
+    apply(__MODULE__, status_template, [assigns])
   end
 
 end

@@ -449,6 +449,24 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         get(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
       end
     end
+
+    test "returns 400 when player id is malformed", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/invalid_ulid")
+      end
+    end
+
+    test "returns 400 when player id is too short", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/short")
+      end
+    end
+
+    test "returns 400 when player id has invalid characters", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/invalid!@#$%^&*()1234567890")
+      end
+    end
   end
 
   describe "handle_info game updated" do

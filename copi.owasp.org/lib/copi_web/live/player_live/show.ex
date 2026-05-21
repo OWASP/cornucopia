@@ -10,6 +10,10 @@ defmodule CopiWeb.PlayerLive.Show do
   alias Copi.Cornucopia.DealtCard
   alias CopiWeb.Resilience
 
+  defmodule BadPlayerID do
+    defexception message: "Invalid player ID format", plug_status: 400
+  end
+
   @impl true
   def mount(_params, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
@@ -18,7 +22,9 @@ defmodule CopiWeb.PlayerLive.Show do
 
   @impl true
   def handle_params(%{"id" => player_id}, _, socket) do
-    case player_module().find(player_id) do
+    case validate_ulid_format(player_id) do
+      :ok ->
+        case player_module().find(player_id) do
       {:ok, player} ->
         case game_module().find(player.game_id) do
           {:ok, game} ->
@@ -45,6 +51,10 @@ defmodule CopiWeb.PlayerLive.Show do
 
       {:error, reason} ->
         handle_transient_player_load_failure(socket, player_id, reason)
+        end
+
+      :invalid_format ->
+        raise BadPlayerID
     end
   end
 
@@ -286,5 +296,20 @@ defmodule CopiWeb.PlayerLive.Show do
   defp dealt_card_module do
     Application.get_env(:copi, :player_live_show_dealt_card_module, DealtCard) || DealtCard
   end
+
+  defp validate_ulid_format(id) when is_binary(id) do
+    case String.length(id) do
+      26 ->
+        case Ecto.ULID.cast(id) do
+          {:ok, _} -> :ok
+          :error -> :invalid_format
+        end
+
+      _ ->
+        :invalid_format
+    end
+  end
+
+  defp validate_ulid_format(_), do: :invalid_format
 
 end
