@@ -183,5 +183,16 @@ defmodule CopiWeb.GameLive.ShowTest do
       :timer.sleep(50)
       assert render(show_live) =~ game.name
     end
+
+    test "redirects to /games when game does not exist", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
+               live(conn, "/games/00000000000000000000000099")
+    end
+
+    test "invalid round value falls back to current round and stays on page", %{conn: conn, game: game} do
+      {:ok, _view, html} = live(conn, "/games/#{game.id}?round=999")
+      assert html =~ game.name
+      assert html =~ "Invalid round value. Showing current round instead."
+    end
   end
 end

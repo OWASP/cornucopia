@@ -316,5 +316,19 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, refreshed_card} = DealtCard.find(dc1.id)
       assert Enum.any?(refreshed_card.votes, fn v -> v.player_id == player1.id end)
     end
+
+    test "shows not found flash when toggling vote with missing dealt card", %{conn: conn} do
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Four", "AUTH_G4_C1")
+
+      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "999999"})
+
+      assert render(view) =~ "Card not found. Please refresh and try again."
+    end
+
+    test "redirects to /games when player does not exist", %{conn: conn} do
+      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Player not found."}}}} =
+               live(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
+    end
   end
 end

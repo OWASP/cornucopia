@@ -185,6 +185,11 @@ defmodule Copi.CornucopiaTest do
       assert player.name == "Early Player"
       assert player.game_id == game.id
     end
+
+    test "Player.find/1 returns error for non-existent player" do
+      assert {:error, :not_found} =
+               Copi.Cornucopia.Player.find("00000000000000000000000099")
+    end
   end
 
   describe "cards" do
