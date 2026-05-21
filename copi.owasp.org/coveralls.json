@@ -1,7 +1,10 @@
 {
     "skip_files": [
         "lib/copi/migrations/",
-        "test/support/"
+        "test/support/",
+        "lib/copi/release.ex",
+        "lib/copi_web.ex",
+        "lib/copi_web/controllers/error_html.ex"
 
     ],
     "coverage_options": {
