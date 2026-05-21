@@ -444,9 +444,10 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert render(view) =~ "Card not found. Please refresh and try again."
     end
 
-    test "redirects to /games when player does not exist", %{conn: conn} do
-      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Player not found."}}}} =
-               live(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
+    test "returns 404 when player does not exist", %{conn: conn} do
+      assert_error_sent 404, fn ->
+        get(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
+      end
     end
   end
 

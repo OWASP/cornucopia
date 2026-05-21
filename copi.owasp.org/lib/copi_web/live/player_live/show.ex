@@ -41,10 +41,7 @@ defmodule CopiWeb.PlayerLive.Show do
         end
 
       {:error, :not_found} ->
-        {:noreply,
-         socket
-         |> put_flash(:error, "Player not found.")
-         |> redirect(to: "/games")}
+        raise Ecto.NoResultsError, queryable: Player
 
       {:error, reason} ->
         handle_transient_player_load_failure(socket, player_id, reason)
