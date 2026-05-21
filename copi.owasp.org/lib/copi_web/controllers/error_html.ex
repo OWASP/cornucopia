@@ -14,14 +14,16 @@ defmodule CopiWeb.ErrorHTML do
   # the template name. For example, "404.html" becomes
   # "Not Found".
   def render(template, assigns) do
-    status = assigns[:status] || 500
-    status_template = if function_exported?(__MODULE__, String.to_atom(to_string(status)), 1) do
-      String.to_atom(to_string(status))
-    else
-      :"500"
-    end
+    # Derive the status code from the template name (e.g. "400.html" -> :"400")
+    status_template =
+      case String.split(template, ".") do
+        [status | _] ->
+          atom = String.to_atom(status)
+          if function_exported?(__MODULE__, atom, 1), do: atom, else: :"500"
+        _ ->
+          :"500"
+      end
 
-    #Phoenix.Controller.status_message_from_template(template)
     apply(__MODULE__, status_template, [assigns])
   end
 
