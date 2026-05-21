@@ -8,9 +8,11 @@ defmodule CopiWeb.PlayerLiveTest do
   alias Copi.RateLimiter
 
   defmodule IndexGameStub do
-    def find(id) do
+    def find(id), do: find_basic(id)
+
+    def find_basic(id) do
       case Application.get_env(:copi, :player_live_index_stub_mode, :real) do
-        :real -> Copi.Cornucopia.Game.find(id)
+        :real -> Copi.Cornucopia.Game.find_basic(id)
         :not_found -> {:error, :not_found}
         :transient -> {:error, :temporary}
         {:sequence, list} ->
@@ -20,12 +22,12 @@ defmodule CopiWeb.PlayerLiveTest do
               resolve(head, id)
 
             [] ->
-              Copi.Cornucopia.Game.find(id)
+              Copi.Cornucopia.Game.find_basic(id)
           end
       end
     end
 
-    defp resolve(:real, id), do: Copi.Cornucopia.Game.find(id)
+    defp resolve(:real, id), do: Copi.Cornucopia.Game.find_basic(id)
     defp resolve(:not_found, _id), do: {:error, :not_found}
     defp resolve(:transient, _id), do: {:error, :temporary}
   end

@@ -4,7 +4,9 @@ defmodule CopiWeb.PlayerLive.IndexPureTest do
   alias CopiWeb.PlayerLive.Index
 
   defmodule GameStub do
-    def find(_id) do
+    def find(id), do: find_basic(id)
+
+    def find_basic(_id) do
       case Application.get_env(:copi, :player_live_index_pure_mode, :not_found) do
         :not_found -> {:error, :not_found}
         :transient -> {:error, :temporary}

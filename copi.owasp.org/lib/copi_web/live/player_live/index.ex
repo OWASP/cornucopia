@@ -13,7 +13,7 @@ defmodule CopiWeb.PlayerLive.Index do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
     socket = assign(socket, :client_ip, ip)
 
-    case game_module().find(game_id) do
+    case game_module().find_basic(game_id) do
       {:ok, game} ->
         if game.started_at do
           {:ok,
@@ -46,7 +46,7 @@ defmodule CopiWeb.PlayerLive.Index do
 
   @impl true
   def handle_params(%{"game_id" => game_id} = params, _url, socket) do
-    case game_module().find(game_id) do
+    case game_module().find_basic(game_id) do
       {:ok, game} ->
         # V2.2: Also check in handle_params for LiveView navigation scenarios
         if game.started_at do

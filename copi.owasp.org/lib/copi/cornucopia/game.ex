@@ -37,6 +37,22 @@ defmodule Copi.Cornucopia.Game do
     end
   end
 
+  def find_basic(id) do
+    case Ecto.ULID.cast(id) do
+      {:ok, cast_id} ->
+        case Copi.Repo.get(Copi.Cornucopia.Game, cast_id) do
+          nil ->
+            Logger.debug("Game not found: #{inspect(id)}")
+            {:error, :not_found}
+          game -> {:ok, game}
+        end
+
+      :error ->
+        Logger.debug("Game find called with invalid id format: #{inspect(id)}")
+        {:error, :not_found}
+    end
+  end
+
   @doc false
   def changeset(game, attrs) do
     game
