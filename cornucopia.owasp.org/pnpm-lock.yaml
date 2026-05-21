@@ -26,9 +26,6 @@ importers:
       normalize.css:
         specifier: ^8.0.1
         version: 8.0.1
-      svelte-i18n:
-        specifier: ^4.0.1
-        version: 4.0.1(svelte@5.55.7(@typescript-eslint/types@8.59.3))
       svelte-markdown:
         specifier: ^0.4.1
         version: 0.4.1(svelte@5.55.7(@typescript-eslint/types@8.59.3))
@@ -4401,17 +4398,6 @@ snapshots:
       semver: 7.7.4
     optionalDependencies:
       svelte: 5.55.7(@typescript-eslint/types@8.59.3)
-
-  svelte-i18n@4.0.1(svelte@5.55.7(@typescript-eslint/types@8.59.3)):
-    dependencies:
-      cli-color: 2.0.4
-      deepmerge: 4.3.1
-      esbuild: 0.19.12
-      estree-walker: 2.0.2
-      intl-messageformat: 10.7.11
-      sade: 1.8.1
-      svelte: 5.55.7(@typescript-eslint/types@8.59.3)
-      tiny-glob: 0.2.9
 
   svelte-markdown@0.4.1(svelte@5.55.7(@typescript-eslint/types@8.59.3)):
     dependencies:
