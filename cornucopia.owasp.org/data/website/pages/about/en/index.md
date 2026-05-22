@@ -38,11 +38,48 @@ To start using Cornucopia:
 
 The other driver for Cornucopia was to link the attacks with requirements and verification techniques. An initial aim had been to reference [CWE™](http://cwe.mitre.org/ 'CWE - 
 Common Weakness Enumeration [external]') weakness IDs, but these proved too numerous, and instead it was decided to map each card to [CAPEC™](http://capec.mitre.org/ 'CAPEC™ -
-Common Attack Pattern Enumeration and Classification (CAPEC) [external]') software attack pattern IDs which themselves are mapped to CWEs, so the desired result is achieved.
+Common Attack Pattern Enumeration and Classification (CAPEC) [external]') software attack pattern IDs, which themselves are mapped to CWEs, so the desired result is achieved.
 
 Each Website App Edition card is also mapped to the 36 primary security stories in the [SAFECode document](https://safecode.org/resource-secure-development-practices/fundamental-practices-secure-software-development-2/ 'Fundamental Practices for Secure Software Development, Third Edition - SAFECode [external]'), as well as to the OWASP [Developer Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/ 'OWASP Developer Guide [external]') v2, [ASVS v4.0.3](https://owasp.org/www-project-application-security-verification-standard/ 'OWASP Application Security Verification Standard (ASVS) [external]') and [AppSensor](https://owasp.org/www-project-appsensor/ 'OWASP AppSensor [external]') (application attack detection and response) to help teams create their own security-related stories for use in Agile processes.
 
-Likewise, each Mobile App Edition is mapped to CAPEC™ and the SAFECode stories, but instead of SCP, ASVS and AppSensor, each card is mapped to OWASP's [Mobile Application Security Verification Standard (MASVS) v2.0](https://mas.owasp.org/MASVS/ 'OWASP MASVS (Mobile Application Security Verification Standard [external]') and [Mobile Application Security Testing Guide (MASTG) v2.0](https://mas.owasp.org/MASTG/ 'OWASP Mobile Application Security Testing Guide [external]').
+Likewise, each Mobile App Edition is mapped to CAPEC™ and the SAFECode stories, but instead of SCP, ASVS, and AppSensor, each card is mapped to OWASP's [Mobile Application Security Verification Standard (MASVS) v2.0](https://mas.owasp.org/MASVS/ 'OWASP MASVS (Mobile Application Security Verification Standard [external]') and [Mobile Application Security Testing Guide (MASTG) v2.0](https://mas.owasp.org/MASTG/ 'OWASP Mobile Application Security Testing Guide [external]').
+
+There is also the OWASP Cornucopia Companion Edition, which extends the previous two editions with 6 additional suites. These 6 companion suits covers new Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). These suits are mapped to various standards, maturity models, OWASP top 10s, guides, lists, and resources.
+
+The following is the full list of all the resources that the 3 editions map to.
+
+### Standards
+
+* [OWASP Artificial Intelligence Security Verification Standard (AISVS)](https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/)
+* [OWASP Application Security Verification Standard (ASVS) v4 (2019) and v5 (2025)](https://owasp.org/www-project-application-security-verification-standard/)
+* [OWASP Mobile Application Security Verification Standard (MASVS) v2.1](https://mas.owasp.org/MASVS/)
+
+### Maturity Models
+
+* [OWASP DSOMM](https://dsomm.owasp.org/mapping)
+* [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities)
+
+### OWASP Top 10:
+
+* [OWASP Agentic Top 10](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)
+* [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10)
+* [OWASP Top 10](https://owasp.org/Top10/2025/)
+* [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/)
+
+### Guides
+
+* [OWASP Automated Threats to Web Applications](https://github.com/OWASP/www-project-automated-threats-to-web-applications/tree/master/assets/oats/EN)
+* [OWASP AI Testing Guide](https://owasp.org/www-project-ai-testing-guide/)
+* [OWASP Mobile Application Security Testing Guide (MASTG) v1.7](https://mas.owasp.org/MASTG/)
+
+### Other sources:
+
+* [Mitre ATT&CK](https://attack.mitre.org/)
+* [Mitre Atlas™](https://atlas.mitre.org/)
+* [Mitre CAPEC™ v3.9](https://capec.mitre.org/data/definitions/2000.html)
+* [OWASP Dev Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/)
+* [SAFECode Practical Security Stories and Security Tasks for Agile Development Environments (SAFECode) July 2012](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf)
+* [STRIDE](https://en.wikipedia.org/wiki/STRIDE_model)
 
 ## Other Security Gamification
 
