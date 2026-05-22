@@ -7,17 +7,43 @@
 
 # OWASP Cornucopia project
 OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams 
-identify security requirements in Agile, conventional and formal development processes. 
-It is language, platform and technology agnostic. Visit: https://cornucopia.owasp.org/
+Identify security requirements in Agile, conventional, and formal development processes. 
+It is language, platform, and technology agnostic. Visit: https://cornucopia.owasp.org/
 
 ## The cross-references on the Web App Edition deck relate to the following versions of other OWASP and external resources:
+
+### Standards
+
+* [OWASP Artificial Intelligence Security Verification Standard (AISVS)](https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/)
+* [OWASP Application Security Verification Standard (ASVS) v4 (2019) and v5 (2025)](https://owasp.org/www-project-application-security-verification-standard/)
+* [OWASP Mobile Application Security Verification Standard (MASVS) v2.1](https://mas.owasp.org/MASVS/)
+
+### Maturity Models
+
+* [OWASP DSOMM](https://dsomm.owasp.org/mapping)
+* [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities)
+
+### Top 10:
+
+* [OWASP Agentic Top 10](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)
+* [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10)
+* [OWASP Top 10](https://owasp.org/Top10/2025/)
+* [OWASP Top 10 Client-Side Security Risks](https://owasp.org/www-project-top-10-client-side-security-risks/)
+
+### Guides
+
+* [OWASP Automated Threats to Web Applications](https://github.com/OWASP/www-project-automated-threats-to-web-applications/tree/master/assets/oats/EN)
+* [OWASP AI Testing Guide](https://owasp.org/www-project-ai-testing-guide/)
+* [OWASP Mobile Application Security Testing Guide (MASTG) v1.7](https://mas.owasp.org/MASTG/)
+
+### Other sources:
+
+* [Mitre ATT&CK](https://attack.mitre.org/)
+* [Mitre Atlas™](https://atlas.mitre.org/)
+* [Mitre CAPEC™ v3.9](https://capec.mitre.org/data/definitions/2000.html)
 * [OWASP Dev Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/)
-* OWASP ASVS OWASP_Application_Security_Verification_Standard v4 (2019)
-* OWASP AppSensor AppSensor_DetectionPoints
-* CAPEC™ Mitre Common Attack Pattern Enumeration and Classification v3.9
-* SAFECode SAFECode Practical Security Stories and Security Tasks for Agile Development Environments July 2012
-* OWASP MASTG - OWASP Mobile Application Security Testing Guide 1.7
-* OWASP MASVS - OWASP Mobile Application Security Verification Standard 2.1
+* [SAFECode Practical Security Stories and Security Tasks for Agile Development Environments (SAFECode) July 2012](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf)
+* [STRIDE](https://en.wikipedia.org/wiki/STRIDE_model)
 
 ## Contributing to Development
 
