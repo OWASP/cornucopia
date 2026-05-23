@@ -34,11 +34,11 @@
     <meta property="og:title" content="{blogpost.title} | OWASP Cornucopia" />
     <meta
         property="og:description"
-        content={blogpost.markdown
-            ?.replace(/[#*_>`]/g, "")
-            .replace(/\n+/g, " ")
-            .trim()
-            .slice(0, 160)}
+        content={(blogpost.markdown || "")
+    .replace(/[#*_>`]/g, "")
+    .replace(/\n+/g, " ")
+    .trim()
+    .slice(0, 160)}
     />
     <meta property="og:image" content="/images/opengraph.png" />
 
@@ -47,11 +47,11 @@
     <meta name="twitter:title" content="{blogpost.title} | OWASP Cornucopia" />
     <meta
         name="twitter:description"
-        content={blogpost.markdown
-            ?.replace(/[#*_>`]/g, "")
-            .replace(/\n+/g, " ")
-            .trim()
-            .slice(0, 160)}
+        content={(blogpost.markdown || "")
+    .replace(/[#*_>`]/g, "")
+    .replace(/\n+/g, " ")
+    .trim()
+    .slice(0, 160)}
     />
     <meta name="twitter:image" content="/images/opengraph.png" />
 </svelte:head>
