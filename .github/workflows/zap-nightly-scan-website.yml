@@ -37,8 +37,8 @@ jobs:
       - name: Run ZAP Full Scan with AJAX Spider
         timeout-minutes: 85
         run: |
-          mkdir -p zap-reports
-          sudo chown 1000:1000 zap-reports
+          mkdir -p zap-website-reports
+          sudo chown 1000:1000 zap-website-reports
           docker rm -f "${ZAP_CONTAINER_NAME}" >/dev/null 2>&1 || true
           set +e
           timeout --signal=SIGINT --kill-after=5m "${ZAP_HARD_TIMEOUT_MINS}m" \
@@ -77,11 +77,11 @@ jobs:
           docker stop cornucopia-website || true
           docker rm cornucopia-website || true
 
-      - name: Upload ZAP reports as artifacts
+      - name: Upload ZAP reports as artefacts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: zap-website-dast-reports
+          name: zap-website-reports
           path: zap-website-reports/
           retention-days: 7
 
@@ -89,8 +89,8 @@ jobs:
         if: always()
         run: |
           if [ -f zap-website-reports/website_dast_report.json ]; then
-            HIGH_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "3")] | length' zap-reports/website_dast_report.json || echo "0")
-            MEDIUM_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "2")] | length' zap-reports/website_dast_report.json || echo "0")
+            HIGH_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "3")] | length' zap-website-reports/website_dast_report.json || echo "0")
+            MEDIUM_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "2")] | length' zap-website-reports/website_dast_report.json || echo "0")
             
             echo "High Risk Vulnerabilities: $HIGH_RISK"
             echo "Medium Risk Vulnerabilities: $MEDIUM_RISK"
