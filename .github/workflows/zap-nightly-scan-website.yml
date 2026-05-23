@@ -82,13 +82,13 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: zap-website-dast-reports
-          path: zap-reports/
+          path: zap-website-reports/
           retention-days: 30
 
       - name: Check for high-risk vulnerabilities
         if: always()
         run: |
-          if [ -f zap-reports/website_dast_report.json ]; then
+          if [ -f zap-website-reports/website_dast_report.json ]; then
             HIGH_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "3")] | length' zap-reports/website_dast_report.json || echo "0")
             MEDIUM_RISK=$(jq '[.site[].alerts[] | select(.riskcode == "2")] | length' zap-reports/website_dast_report.json || echo "0")
             
@@ -107,10 +107,10 @@ jobs:
         if: always()
         run: |
           for f in \
-            zap-reports/website_dast_report.html \
-            zap-reports/website_dast_report.json \
-            zap-reports/website_dast_report.xml \
-            zap-reports/website_dast_report.md; do
+            zap-website-reports/website_dast_report.html \
+            zap-website-reports/website_dast_report.json \
+            zap-website-reports/website_dast_report.xml \
+            zap-website-reports/website_dast_report.md; do
             if [ -f "$f" ]; then
               gh release upload "pre-release" "$f" --clobber
             fi
