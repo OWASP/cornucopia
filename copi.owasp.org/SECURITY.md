@@ -143,7 +143,7 @@ You must set the `COPI_ENCRYPTION_KEY` environment variable before deploying.
 
 ## Contact
 
-For security issues or questions, please refer to the main repository [SECURITY.md](../../SECURITY.md).
+For security issues or questions, please refer to the main repository [SECURITY.md](/SECURITY.md).
 
 ## Our Threat Model
 
