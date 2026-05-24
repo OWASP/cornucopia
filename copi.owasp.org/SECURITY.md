@@ -200,8 +200,8 @@ Given that  a threat actor can  execute a distributed denial of service attack a
 
 #### What are we going to do about it?
 
-We are not working towards implementing any specific controls to prevent DoS attacks against copi.owasp.org. Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher than that, Cloudflare, which hosts the DNS, would identify us as a DoS actor and return HTTP status 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or whitelist IP access to the application.
-If you are hosting Copi yourself, please set the rate limiting according to your needs (see: Architecture).
+We are not working towards implementing any specific controls to prevent DoS attacks against copi.owasp.org. Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. I is f we went higher than that, Cloudflare, which hosts the DNS, would identify us as a DoS actor and return HTTP status 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or whitelist IP access to the application.
+If you are hosting Copi yourself, please set the rate limiting according to your needs (see: [Configuration](SECURITY.md#configuration).
 
 ### Did we do a good job?
 
