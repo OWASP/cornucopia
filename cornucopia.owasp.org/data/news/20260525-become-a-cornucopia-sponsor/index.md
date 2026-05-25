@@ -65,6 +65,10 @@ Join us in increasing awareness about security and improving security culture. Y
 * Mention on social media to acknowledge your contributions.  
 * Project Sponsor badges for use on sponsor websites and published material.
 
+#### How to become a gold sponsor
+
+If you would like your company to be listed as a gold sponsor on our websites, releases, or card decks you can [donate here](https://owasp.org/donate/?reponame=cornucopia&title=OWASP+Cornucopia).
+
 ### Silver
 
 A significant donation in time or money, equivalent to $10,000 or more.
@@ -83,6 +87,11 @@ A significant donation in time or money, equivalent to $10,000 or more.
 * Mention on social media to acknowledge your contributions.  
 * Project Sponsor badges for use on sponsor websites and published material.
 
+#### How to become a silver sponsor
+
+If you would like your company to be listed as a silver sponsor on our websites, releases, or card decks you can [donate here](https://owasp.org/donate/?reponame=cornucopia&title=OWASP+Cornucopia).
+
+
 ### Bronze
 
 A significant donation in time or money, equivalent to $5,000 or more.
@@ -96,6 +105,10 @@ A significant donation in time or money, equivalent to $5,000 or more.
 * Mention on social media to acknowledge your contributions.  
 * Project Sponsor badges for use on sponsor websites and published material.
 
+#### How to become a bronze sponsor
+
+If you would like your company to be listed as a bronze sponsor on our websites you can [donate here](https://owasp.org/donate/?reponame=cornucopia&title=OWASP+Cornucopia).
+
 ### Supporter
 
 A significant donation in time or money, equivalent to $1,000 or more.
@@ -104,6 +117,10 @@ A significant donation in time or money, equivalent to $1,000 or more.
 
 * Logo and link on the Supporters page ([Supporter section](/tribute#Sponsors))
 * Mention on social media to acknowledge your contributions.
+
+#### How to become a suporter sponsor
+
+If you would like your company to be listed as a sponsor on our websites you can [donate here](https://owasp.org/donate/?reponame=cornucopia&title=OWASP+Cornucopia).
 
 ## Why OWASP Cornucopia is looking for sponsors
 
