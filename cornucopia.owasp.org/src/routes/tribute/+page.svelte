@@ -10,7 +10,7 @@
     let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
 <svelte:head>
-    <title>{$t('about.head.title')}</title>
+    <title>{$t('tribute.head.title')}</title>
     <link rel="canonical" href="https://cornucopia.owasp.org/tribute" />
     <meta name="description" content="{$t('tribute.head.description')}" />
 	<meta name="keywords" content="{$t('tribute.head.keywords')}" />
