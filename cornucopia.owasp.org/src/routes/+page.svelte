@@ -68,6 +68,13 @@
     <p>{$t('home.p5')}</p>
     <a title="OWASP Cornucopia Github repository" class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} ➔</a>
 </TextImage>
+<TextImage title="Sponsors" src="/images/cornucopia_logo_25th_anniversary_edition.png">
+    <h2 id="Sponsors">{$t('home.h1.4')}:</h2>
+    <p>{$t('home.p6')}</p>
+    <p>{$t('home.p7')}</p>
+    <p>{$t('home.p8')}</p>
+    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} ➔</a></p> 
+</TextImage>
 <Spacer></Spacer>
 <style>
     h1, h2

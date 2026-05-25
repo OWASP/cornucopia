@@ -1,0 +1,10 @@
+{
+  "about": {
+    "title": "Tribute",
+    "head": {
+      "title": "OWASP Cornucopia - Tribute",
+      "description": "Who are the people behind OWASP Cornucopia? Learn about the contributors and their dedication to improving application security through this project.",
+      "keywords": "OWASP, Cornucopia, Project, Application Security, Goals, Threat Modeling"
+    }
+  }
+}
