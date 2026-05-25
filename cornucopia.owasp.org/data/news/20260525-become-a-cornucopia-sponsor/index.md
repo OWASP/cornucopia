@@ -100,7 +100,7 @@ A significant donation in time or money, equivalent to $5,000 or more.
 
 A significant donation in time or money, equivalent to $1,000 or more.
 
-#### Benefits
+#### Supporter benefits
 
 * Logo and link on the Supporters page ([Supporter section](/tribute#Sponsors))
 * Mention on social media to acknowledge your contributions.
