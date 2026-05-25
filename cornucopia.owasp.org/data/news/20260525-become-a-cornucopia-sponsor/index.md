@@ -75,7 +75,7 @@ A significant donation in time or money, equivalent to $10,000 or more.
 | 0-1000 | $10,000.00 |
 | Startup companies with less than $30M in venture capital | $7,500.00 |
 
-#### Benefits
+#### Silver benefits
 
 * Logo and link on the home page ([Silver section](/#Sponsors)) 
 * Logo and link on the Supporters page ([Silver section](/tribute#Sponsors)) 
