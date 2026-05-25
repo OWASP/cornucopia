@@ -14,6 +14,7 @@ import layoutPage from '$data/website/phrases/en/layout.json';
 import roadmapPage from '$data/website/phrases/en/roadmap.json';
 import authorPage from '$data/website/phrases/en/author.json';
 import questionsAndAnswersPage from '$data/website/phrases/en/questionsandanswers.json';
+import tributePage from '$data/website/phrases/en/tribute.json';
 export default {
   layout: layoutPage.layout,
   about: aboutPage.about,
@@ -30,5 +31,6 @@ export default {
   getthegame: getTheGamePage.getthegame,
   roadmap: roadmapPage.roadmap,
   author: authorPage.author,
-  questionsandanswers: questionsAndAnswersPage.questionsandanswers
+  questionsandanswers: questionsAndAnswersPage.questionsandanswers,
+  tribute: tributePage.tribute
 };
