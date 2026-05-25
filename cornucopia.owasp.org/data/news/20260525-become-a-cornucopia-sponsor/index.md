@@ -53,7 +53,7 @@ Join us in increasing awareness about security and improving security culture. Y
 | :---- | :---- |
 | 1000+ | $35,000.00 |
 | 0-1000 | $25,000.00 |
-| Startup companies with less then $30M in venture capital | $22,500.00 |
+|| Startup companies with less than $30M in venture capital | $22,500.00 |
 
 #### Benefits
 
