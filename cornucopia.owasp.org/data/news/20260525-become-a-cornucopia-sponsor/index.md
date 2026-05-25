@@ -118,7 +118,7 @@ A significant donation in time or money, equivalent to $1,000 or more.
 * Logo and link on the Supporters page ([Supporter section](/tribute#Sponsors))
 * Mention on social media to acknowledge your contributions.
 
-#### How to become a suporter sponsor
+#### How to become a supporter sponsor
 
 If you would like your company to be listed as a sponsor on our websites you can [donate here](https://owasp.org/donate/?reponame=cornucopia&title=OWASP+Cornucopia).
 
