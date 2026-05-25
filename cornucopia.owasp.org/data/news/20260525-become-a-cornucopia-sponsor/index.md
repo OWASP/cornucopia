@@ -59,7 +59,7 @@ Join us in increasing awareness about security and improving security culture. Y
 
 * Logo and link on the home page (at the [top of the Supporters section](/#Sponsors))
 * Logo and link on the Supporters page (at [top of the Supporters section](/tribute#Sponsors))  
-* Logo Inclusion in each project release asset that is produced  
+* Logo inclusion in each project release asset that is produced
 * Priority placement in the OWASP Cornucopia printed leaflet.  
 * Logo on the back of the OWASP Cornucopia deck to be shared at OWASP events and meetings  
 * Mention on social media to acknowledge your contributions.  
