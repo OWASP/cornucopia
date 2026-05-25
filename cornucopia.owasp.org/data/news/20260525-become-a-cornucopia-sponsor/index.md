@@ -87,7 +87,7 @@ A significant donation in time or money, equivalent to $10,000 or more.
 
 A significant donation in time or money, equivalent to $5,000 or more.
 
-#### Benefits
+#### Bronze benefits
 
 * Logo and link on the home page ([Bronze section](/#Sponsors)) 
 * Logo and link on the Supporters page ([Bronze section](/tribute#Sponsors)) 
