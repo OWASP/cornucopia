@@ -83,7 +83,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Mradul Tiwari
 - Ive Verstappen
 - Sachin Vishwakarma
-- Wagner Voltzcontributors
+- Wagner Voltz
 - Stephen de Vries
 - Colin Watson
 - Marysia Winkels
