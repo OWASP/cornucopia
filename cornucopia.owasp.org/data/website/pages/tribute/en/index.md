@@ -8,7 +8,7 @@ If you would like to give a gift to the OWASP Cornucopia project or be listed as
 
 ### Sponsors
 
-We thank our donators for providing the funds to support us on our project activities.
+We thank our donors for providing the funds to support us on our project activities.
 
 OWASP Cornucopia & the OWASP Foundation is very grateful for the support by the individuals and organizations listed. However please note, the OWASP Foundation is strictly vendor neutral and does not endorse any of its supporters. Donations do not influence the content of OWASP Cornucopia in any way.
 
