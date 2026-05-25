@@ -96,7 +96,7 @@ Please let us know if we have missed anyone from this list.
 
 Adam Shostack and the Microsoft SDL Team for the Elevation of Privilege (EoP) Threat Modelling Game, published under a Creative Commons Attribution license, as the inspiration for Cornucopia and from which many ideas, especially the game theory, were copied.
 
-Keith Turpin and contributors to the “OWASP Secure Coding Practices Quick Reference Guide”, originally donated to OWASP by Boeing Inc, which is used as the primary source of security requirements information to formulate the content of the Website App Edition cards. David Rook for his "Principles of Secure Development", a proponent for following a small repeateable set of proncipals during development rather than focusing on vulnerabilities - an approach which inspired Cornucopia's suit names.
+Keith Turpin and contributors to the “OWASP Secure Coding Practices Quick Reference Guide”, originally donated to OWASP by Boeing Inc, which is used as the primary source of security requirements information to formulate the content of the Website App Edition cards. David Rook for his "Principles of Secure Development", a proponent for following a small repeatable set of principles during development rather than focusing on vulnerabilities - an approach which inspired Cornucopia's suit names.
 
 Contributors, supporters, sponsors and volunteers to the OWASP ASVS, AppSensor, Web Framework Security Matrix and MASVS/MASTG projects, Mitre’s Common Attack Pattern Enumeration and Classification (CAPEC™), and SAFECode’s “Practical Security Stories and Security Tasks for Agile Development Environments” which are all used in the cross-references provided.
 
