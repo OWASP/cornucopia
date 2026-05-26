@@ -83,9 +83,11 @@
 
     .slot-container
     {
-        width: 60%;
+        width: 100%;
+        max-width: 1200px;
         min-height: 100vh;
         margin : auto;
+        padding: 0 1rem;
         padding-bottom: 1rem;
     }
 
