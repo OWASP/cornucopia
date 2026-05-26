@@ -15,6 +15,7 @@
     AddLink(mainMenu,$t('taxonomy.title'),"/taxonomy");
     AddLink(mainMenu,$t('news.title'),"/news");
     AddLink(mainMenu,$t('about.title'),"/about");
+    AddLink(mainMenu,$t('tribute.title'),"/tribute");
     
     let subMenu : Link[] = [];
     AddLink(subMenu,$t('source.title'),"/source");

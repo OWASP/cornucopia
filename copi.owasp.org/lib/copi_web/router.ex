@@ -37,7 +37,7 @@ defmodule CopiWeb.Router do
 
     live "/resources", ResourcesLive.Index, :index
     live "/privacy", PrivacyLive.Index, :index
-
+    live "/sponsors", SponsorsLive.Index, :index
     get "/cards", CardController, :index
     get "/cards/:version/:id", CardController, :show
   end
