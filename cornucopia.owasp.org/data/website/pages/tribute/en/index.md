@@ -8,11 +8,13 @@ If you would like to give a gift to the OWASP Cornucopia project or be listed as
 
 ### Sponsors
 
-We thank our donors for providing the funds to support us on our project activities.
+![Gold Sponsor Missing](images/sponsor_missing.jpg)
 
-OWASP Cornucopia & the OWASP Foundation is very grateful for the support by the individuals and organizations listed. However please note, the OWASP Foundation is strictly vendor neutral and does not endorse any of its supporters. Donations do not influence the content of OWASP Cornucopia in any way.
+We thank our donors for providing the funds to support us on our project activities. If you would like to become a sponsor for our project, please do not hesitate to get in touch with us.
 
 Read more about the benefits of becoming a Gold, Silver, Bronze, or Supporter sponsor [here](/news/20260525-become-a-cornucopia-sponsor).
+
+OWASP Cornucopia & the OWASP Foundation is very grateful for the support by the individuals and organizations listed. However please note, the OWASP Foundation is strictly vendor neutral and does not endorse any of its supporters. Donations do not influence the content of OWASP Cornucopia in any way.
 
 ### Volunteers
 

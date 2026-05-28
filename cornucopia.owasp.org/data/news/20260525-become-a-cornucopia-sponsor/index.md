@@ -8,6 +8,8 @@ description: Enhance Your Brand’s Commitment to Security by Sponsoring OWASP C
 
 # Enhance Your Brand’s Commitment to Security by Sponsoring OWASP Cornucopia
 
+![Gold Sponsor Missing](sponsor_missing.jpg)
+
 ## OWASP Cornucopia: To assist software development teams in identifying security requirements in Agile, conventional, and formal development processes
 
 By sponsoring OWASP Cornucopia, you not only enhance your organization’s reputation as a leader in secure software development but also invest strategically in the future of cybersecurity. This sponsorship aligns your brand with an initiative dedicated to advancing gamification, security awareness, security culture, threat modeling, and requirements analysis, showcasing your commitment to fostering a secure and resilient digital ecosystem.
