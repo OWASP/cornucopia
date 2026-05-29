@@ -41,7 +41,7 @@
 		"vite": "^7.3.2",
 		"vitest": "^4.0.17",
 		"wait-on": "^9.0.10",
-		"wrangler": "4.94.0"
+		"wrangler": "4.95.0"
 	},
 	"type": "module",
 	"dependencies": {
