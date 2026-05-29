@@ -67,7 +67,7 @@ defmodule Copi.MixProject do
       {:slugify, "~> 1.3.1"},
       {:want, "~> 2.0.0"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
-      {:hackney, "~> 1.9"},
+      {:hackney, "~> 4.0"},
       {:mox, "~> 1.2.0", only: :test},
       {:excoveralls, "~> 0.18.5", only: [:dev, :test]}
     ]
