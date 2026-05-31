@@ -38,3 +38,11 @@ Bypassed deployment controls allow untested, unauthorized, or malicious changes 
 7. Protect deployment configurations and pipeline definitions from unauthorized modification.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, I-SD-A breaks down as **I**mplementation - **S**ecure **D**eployment - [Stream **A** (Deployment Process)](https://owaspsamm.org/model/implementation/secure-deployment/stream-a/).
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, BD-D breaks down as **B**uild and **D**eployment - **D**eployment. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.

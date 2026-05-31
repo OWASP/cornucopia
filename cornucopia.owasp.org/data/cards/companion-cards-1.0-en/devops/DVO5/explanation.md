@@ -38,3 +38,10 @@ Isolation failures expose the entire host and potentially the wider infrastructu
 6. Keep the runtime and host environment up to date with security patches to reduce the risk of known isolation bypass vulnerabilities.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, V-AA breaks down as **V**erification - [**A**rchitecture **A**ssessment](https://owaspsamm.org/model/verification/architecture-assessment/), and O-EM-A as **O**perations - **E**nvironment **M**anagement - [Stream **A** (Configuration Hardening)](https://owaspsamm.org/model/operations/environment-management/stream-a/). Where the identifier only specifies up to a Security Practice, both streams are relevant to the card.
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, I-IH breaks down as **I**mplementation - **I**nfrastructure **H**ardening, and TV-DDI as **T**est and **V**erification - **D**ynamic **D**epth for **I**nfrastructure. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.

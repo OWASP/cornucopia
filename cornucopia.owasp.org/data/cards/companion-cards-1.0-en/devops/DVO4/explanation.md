@@ -45,3 +45,10 @@ Inadequately protected backups expose organizations to data theft and undermine 
 7. Use versioning for backups so that even if one is corrupted, previous versions can still be recovered.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, O-OM-A breaks down as **O**perations - **O**perational **M**anagement - [Stream **A** (Data Protection)](https://owaspsamm.org/model/operations/operational-management/stream-a/).
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, I-IH breaks down as **I**mplementation - **I**nfrastructure **H**ardening. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.
