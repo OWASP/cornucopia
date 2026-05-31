@@ -43,3 +43,10 @@ Without complete, tamper-resistant audit trails, organizations lose the ability 
 6. Make sure logs are kept long enough to be useful when something goes wrong. Your organization should have guidelines that recommend or mandate a specific retention period.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, O-IM-A breaks down as **O**perations - **I**ncident **M**anagement - [Stream **A** (Incident Detection)](https://owaspsamm.org/model/operations/incident-management/stream-a/).
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, IG-L breaks down as **I**nformation **G**athering - **L**ogging. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.

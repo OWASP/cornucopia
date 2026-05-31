@@ -41,3 +41,11 @@ Stale credentials and excessive privileges accumulate over time and create persi
 7. Where supported, prefer ephemeral tokens or workload identities over long-lived credentials.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, O-OM-B breaks down as **O**perations - **O**perational **M**anagement - [Stream **B** (System Decommissioning / Legacy Management)](https://owaspsamm.org/model/operations/operational-management/stream-b/).
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, BD-D breaks down as **B**uild and **D**eployment - **D**eployment. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.

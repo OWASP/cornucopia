@@ -35,3 +35,11 @@ Exposed secrets provide direct access to protected systems and data, often with 
 7. Keep the scope and lifetime of credentials and tokens as small as possible, so a leaked secret gives an attacker less to work with. Use ephemeral tokens where possible if your CI/CD platform supports them.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, I-SD-B breaks down as **I**mplementation - **S**ecure **D**eployment - [Stream **B** (Secret Management)](https://owaspsamm.org/model/implementation/secure-deployment/stream-b/), and O-OM-A as **O**perations - **O**perational **M**anagement - [Stream **A** (Data Protection)](https://owaspsamm.org/model/operations/operational-management/stream-a/).
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, I-DSC breaks down as **I**mplementation - **D**evelopment and **S**ource **C**ontrol, and TV-SDI as **T**est and **V**erification - **S**tatic **D**epth for **I**nfrastructure. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.

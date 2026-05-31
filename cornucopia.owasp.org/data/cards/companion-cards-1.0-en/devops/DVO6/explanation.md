@@ -43,3 +43,10 @@ The consequences of failed backup and recovery strategies become apparent only a
 It might be difficult to define how frequently backups should be performed (i.e., how much data loss is acceptable) and how long the recovery should take. Consult your business stakeholders to understand their expectations and, if available, teams responsible for infrastructure to get help translating these expectations into reality.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, O-OM-A breaks down as **O**perations - **O**perational **M**anagement - [Stream **A** (Data Protection)](https://owaspsamm.org/model/operations/operational-management/stream-a/), and O-IM-B-2 as **O**perations - **I**ncident **M**anagement - [Stream **B** (Incident Response)](https://owaspsamm.org/model/operations/incident-management/stream-b/) - Maturity Level 2. Where the identifier specifies up to a maturity level, only that maturity level is directly applicable to the card.
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, CO-P breaks down as **C**ulture and **O**rganization - **P**rocess, and I-IH as **I**mplementation - **I**nfrastructure **H**ardening. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.

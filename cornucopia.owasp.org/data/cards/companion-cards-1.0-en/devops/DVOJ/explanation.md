@@ -39,3 +39,11 @@ Outdated dependencies are one of the most common and exploitable weaknesses in m
 8. Make sure internal systems are also covered by updates. Even if they're not exposed to the internet, they may be compromised by any attacker that gains access to the network through other means.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP SAMM and OWASP DSOMM](#mapping 'OWASP SAMM and OWASP DSOMM requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP SAMM](https://github.com/owaspsamm/core/tree/develop/model/activities) and [OWASP DSOMM](https://dsomm.owasp.org/mapping) documentation.
+
+## Reading the mappings
+
+Mappings use identifiers from [OWASP SAMM](https://owaspsamm.org/model/) and [OWASP DSOMM](https://dsomm.owasp.org/mapping).
+
+SAMM identifiers specify a [Business Function, Security Practice and Stream](https://owaspsamm.org/about/). For example, O-EM-B breaks down as **O**perations - **E**nvironment **M**anagement - [Stream **B** (Patching and Updating)](https://owaspsamm.org/model/operations/environment-management/stream-b/), I-SB as **I**mplementation - [**S**ecure **B**uild](https://owaspsamm.org/model/implementation/secure-build/), I-DM-A as **I**mplementation - **D**efect **M**anagement - [Stream **A** (Defect Tracking)](https://owaspsamm.org/model/implementation/defect-management/stream-a/), and D-SA-B as **D**esign - **S**ecure **A**rchitecture - [Stream **B** (Technology Management)](https://owaspsamm.org/model/design/secure-architecture/stream-b/). Where the identifier only specifies up to a Security Practice, both streams are relevant to the card.
+
+DSOMM identifiers specify a [Dimension and Sub-Dimension](https://dsomm.owasp.org/usage/). For example, BD-PM breaks down as **B**uild and **D**eployment - **P**atch **M**anagement, BD-D as **B**uild and **D**eployment - **D**eployment, and TV-SDA as **T**est and **V**erification - **S**tatic **D**epth for **A**pplication. A Sub-Dimension groups multiple related activities, and is used here because the activities as a group correspond to the card's scope.
