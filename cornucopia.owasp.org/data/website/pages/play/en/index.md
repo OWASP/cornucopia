@@ -41,6 +41,18 @@ src="https://www.youtube.com/embed/XXTPXozIHow?si=uIi_VXDtSBkS027S" referrerpoli
 
 See Márk Vinkovits leading a threat modelling ["talk and group session"](https://www.youtube.com/watch?v=9dVDqeO6y3A&ab_channel=OWASPHU "How to do threat modeling via playing cards* by Márk Vinkovits @ OWASP track @hacktivityconf 1510") playing Cornucopia in the OWASP track @hacktivityconf 1510.
 
+## Gameplay - Companion Guide Scenarios
+
+We are developing game scenarios to teach threat modelling, awareness, and secure coding. They provide all the assets you need in order to run a Cornucopia game session, including vulnerable apps, presentations, posters, and cheat sheets. All you need is the OWASP Cornucopia decks. We are currently working on getting sponsors so that local OWASP chapters can reimburse their costs for printing the OWASP Cornucopia decks when they run these events locally within their chapters. Please get in touch if you would like to help in getting sponsors or need help in setting things up.
+
+### Scenarios - PwnedNext - The OWASP Cornucopia LLM Companion Guide
+
+![PwnedNext](images/pwnednext.jpg)
+
+Through gamification, this OWASP Cornucopia LLM Companion Guide uses the OWASP Cornucopia Website App and Companion Edition to introduce developers and testers to threats, risks, and requirements related to AI design and development, and to teach how to mitigate AI risks. The game takes participants through a provocative scenario in which they must identify AI threats by studying an insecure AI implementation. They need to ask themselves, "What can go wrong?" and "What are we going to do about it?" Furthermore, by playing, they will get to know which tests from the OWASP AI Test Guide (AITG) and OWASP AI Security Verification Standard (AISVS) need to be considered in order to responsibly develop AI applications.
+
+- [LLM Companion Guide](https://github.com/owaspcornucopia/llm-companion-game-master-guide)
+
 ## Gameplay - Modelling evil user stories
 
 Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created a video to explain how he has trained hundreds of teams to use OWASP Cornucopia in modelling sessions at a major international bank. This approach has scaled to over two-thousand developers to date. You can read more about this approach in CyberSec Games blog post on LinkedIn: ["Identifying abuse before designing architecture: Embedding Game-Based Threat Modelling into Agile Delivery at a Major Latin American Bank"](https://www.linkedin.com/pulse/identifying-abuse-before-designing-architecture-embedding-zmnhe/).
