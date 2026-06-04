@@ -27,7 +27,7 @@
 		"@vitest/coverage-v8": "^4.0.17",
 		"dotenv": "^17.4.2",
 		"eslint": "^10.4.0",
-		"eslint-plugin-svelte": "^3.18.0",
+		"eslint-plugin-svelte": "^3.19.0",
 		"globals": "^17.6.0",
 		"serve": "^14.2.6",
 		"svelte": "^5.55.10",
