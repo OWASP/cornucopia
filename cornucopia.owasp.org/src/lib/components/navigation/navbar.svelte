@@ -468,7 +468,7 @@
     }
 
     .drawer-cta {
-        padding: 0.75rem 1.25rem 0.25rem;
+        padding: 0.75rem 1.25rem 0.75rem 1.25rem;
         margin-top: auto;
         flex-shrink: 0;
     }
@@ -478,6 +478,7 @@
         font-size: 0.85rem;
         padding: 0.55rem 1rem;
         border-radius: 4px;
+        box-sizing: border-box;
     }
 
     .desktop-only {
