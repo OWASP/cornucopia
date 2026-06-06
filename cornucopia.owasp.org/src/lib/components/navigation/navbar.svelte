@@ -65,7 +65,10 @@
                     </a>
                 </li>
             {/each}
-            <li class="dropdown-wrap">
+        </ul>
+
+        <div class="nav-right">
+            <div class="dropdown-wrap desktop-only">
                 <input type="checkbox" id="sub-toggle" class="sub-toggle-input" aria-hidden="true" />
                 <label for="sub-toggle" class="nav-link get-game-btn">
                     {$t("getthegame.title")}
@@ -79,10 +82,7 @@
                         </li>
                     {/each}
                 </ul>
-            </li>
-        </ul>
-
-        <div class="nav-right">
+            </div>
             <a class="cta-btn desktop-only" href="https://copi.owasp.org/">Play Online</a>
             <label for="menu-toggle" class="hamburger mobile-only" aria-label="Toggle menu">
                 <span class="bar"></span>
@@ -163,7 +163,7 @@
     .top-nav {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         height: 5rem;
         padding: 0 1.5rem;
         gap: 1rem;
@@ -274,6 +274,7 @@
     }
 
     .nav-right {
+        margin-left: auto;
         display: flex;
         align-items: center;
         gap: 0.4rem;
