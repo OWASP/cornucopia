@@ -83,7 +83,7 @@
         </ul>
 
         <div class="nav-right">
-            <a class="cta-btn desktop-only" href={resolve("/copi")}>Play Online</a>
+            <a class="cta-btn desktop-only" href="https://copi.owasp.org/">Play Online</a>
             <label for="menu-toggle" class="hamburger mobile-only" aria-label="Toggle menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -138,7 +138,7 @@
         </ul>
 
         <div class="drawer-cta">
-            <a class="cta-btn drawer-cta-btn" href={resolve("/copi")} onclick={closeMenu}>
+            <a class="cta-btn drawer-cta-btn" href="https://copi.owasp.org/" onclick={closeMenu}>
                 Play Online
             </a>
         </div>
@@ -219,14 +219,17 @@
     }
 
     .get-game-btn {
-        border: 2px solid #fff;
-        padding: 0.4rem 0.75rem;
+        background: #e85d04;
+        color: #fff;
+        border-radius: 4px;
+        padding: 0.45rem 1rem;
+        font-size: 0.9rem;
+        border: none;
         margin-left: 0.25rem;
     }
 
     .get-game-btn:hover {
-        background: #fff;
-        color: rgb(31, 41, 55);
+        background: #c2410c;
         opacity: 1;
     }
 
@@ -238,18 +241,18 @@
         display: none;
         position: absolute;
         top: calc(100% + 0.25rem);
-        right: 0;
+        left: 0;
         list-style: none;
         margin: 0;
-        padding: 0;
+        padding: 0.25rem 0;
         background: rgb(31, 41, 55);
-        border: 2px solid #fff;
+        border: 2px solid #e85d04;
         border-radius: 0 0 4px 4px;
-        min-width: 14rem;
+        min-width: 100%;
         z-index: 110;
     }
 
-    .sub-toggle-input:checked ~ .dropdown-menu {
+    .dropdown-wrap:hover .dropdown-menu {
         display: block;
     }
 
@@ -257,10 +260,11 @@
         display: block;
         color: #fff;
         text-decoration: none;
-        font-size: 1.1vw;
+        font-size: 0.95rem;
         font-weight: bold;
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 1.25rem;
         transition: background 0.15s;
+        white-space: nowrap;
     }
 
     .dropdown-item:hover {
@@ -484,7 +488,7 @@
         display: none;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 900px) {
         .top-nav {
             padding: 0 1rem;
         }
@@ -504,14 +508,21 @@
         }
     }
 
-    @media (min-width: 768px) and (max-width: 1024px) {
+    @media (min-width: 901px) and (max-width: 1024px) {
         .nav-link {
             font-size: 0.78rem;
             padding: 0.4rem 0.5rem;
         }
 
         .dropdown-item {
-            font-size: 0.85rem;
-        }
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: bold;
+        padding: 0.4rem 1.25rem;
+        transition: background 0.15s;
+        white-space: nowrap;
+    }
     }
 </style>

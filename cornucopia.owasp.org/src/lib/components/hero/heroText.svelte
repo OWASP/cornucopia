@@ -7,8 +7,10 @@
 <style>
     img
     {
-        width: 45vw;
-        margin:auto;
+        width: 18vw;
+        margin: 0;
+        margin-left: 5vw;
+        margin-top: 0.25rem;
     }
 
     .hero-text
@@ -22,9 +24,9 @@
         color:white;
         opacity: 90%;
         padding: 0;
-        padding-top: 4rem;
+        padding-top: 1.5rem;
         text-shadow: 0 .2rem rgb(0, 0, 0);
-        font-size: max(3.5vw, 1vh);
+        font-size: max(3vw, 1.5rem);
         font-weight: bolder;
         background: none;
         margin-left: 5vw;
@@ -39,9 +41,10 @@
         text-align: center;
         font-family: var(--font-title);
         font-weight: 500;
-        font-size: max(1.5vw, 1vh);
+        font-size: max(1.2vw, 0.95rem);
         text-align: left;
         margin-top: 0;
+        margin-bottom: 0;
         margin-left: 5vw;
         margin-right: 2vw;
     }
@@ -51,7 +54,7 @@
     {
         h1
         {
-            padding-top: 8rem;
+            padding-top: 2.5rem;
             font-size: max(8vw, 1vh);
         }
 
