@@ -46,7 +46,7 @@
     <nav class="top-nav" aria-label="Main navigation">
         <a class="logo" href={resolve("/")} aria-label="OWASP Cornucopia Home">
             <img
-                src="/images/cornucopia_logo_white_with_text_owasp.svg"
+                src="/images/cornucopia_logo_white.svg"
                 alt="OWASP Cornucopia"
                 class="logo-img"
             />
@@ -97,7 +97,7 @@
     <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile navigation">
         <div class="drawer-header">
             <img
-                src="/images/cornucopia_logo_white_with_text_owasp.svg"
+                src="/images/cornucopia_logo_white.svg"
                 alt=""
                 class="drawer-logo"
             />
