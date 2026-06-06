@@ -170,6 +170,7 @@
     }
 
     .logo {
+        overflow: visible;
         display: flex;
         align-items: center;
         text-decoration: none;
@@ -182,9 +183,9 @@
     }
 
     .logo-img {
-        height: 2.75rem;
+        height: 4rem;
         width: auto;
-        max-width: 11rem;
+        max-width: 9rem;
         display: block;
     }
 
@@ -275,7 +276,7 @@
     .nav-right {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.4rem;
         flex-shrink: 0;
     }
 
@@ -495,7 +496,8 @@
         }
 
         .logo-img {
-            height: 2rem;
+            height: 4rem;
+            width: auto;
             max-width: 9rem;
         }
 
