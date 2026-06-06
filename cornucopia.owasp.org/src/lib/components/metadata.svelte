@@ -1,6 +1,7 @@
 <svelte:head>
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://cornucopia.owasp.org/" />
+    <meta property="og:type" content="website" />
     <meta property="og:image" content="/images/opengraph.png" />
 
     <!-- Twitter Meta Tags -->
