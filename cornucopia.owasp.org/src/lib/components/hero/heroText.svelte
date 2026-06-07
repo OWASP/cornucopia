@@ -42,17 +42,21 @@
         margin-right: 2vw;
     }
     @media (max-width: 767px) {
+        img {
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 2rem;
+        }
         h1 {
-            padding-top: 2.5rem;
+            padding-top: 0.5rem;
             font-size: max(8vw, 1vh);
+            margin-left: 5vw;
         }
         h3 {
             font-size: max(3.4vw, 2vh);
-            margin-left: 7vw;
-        }
-        img {
-            width: 80%;
-            margin: auto;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            margin-bottom: 4vw;
         }
     }
 </style>
