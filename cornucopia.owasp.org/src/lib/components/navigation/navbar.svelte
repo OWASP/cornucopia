@@ -1,438 +1,541 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { resolve } from "$app/paths";
-    import { fade } from "svelte/transition";
+    import { page } from "$app/stores";
     import { AddLink, type Link } from "./utils";
-    import {readTranslation} from "$lib/stores/stores";
+    import { readTranslation } from "$lib/stores/stores";
+
     let t = readTranslation();
-    let width: number = $state();
-    let height: number = $state();
 
-    let mainMenu : Link[] = [];
-    AddLink(mainMenu,$t('home.title'),"/");
-    AddLink(mainMenu,$t('play.title'),"/how-to-play");
-    AddLink(mainMenu,$t('cards.title'),"/cards");
-    AddLink(mainMenu,$t('taxonomy.title'),"/taxonomy");
-    AddLink(mainMenu,$t('news.title'),"/news");
-    AddLink(mainMenu,$t('about.title'),"/about");
-    AddLink(mainMenu,$t('tribute.title'),"/tribute");
-    
-    let subMenu : Link[] = [];
-    AddLink(subMenu,$t('source.title'),"/source");
-    AddLink(subMenu,$t('printing.title'),"/printing");
-    AddLink(subMenu,$t('copi.title'),"/copi");
-    AddLink(subMenu,$t('swags.title'),"/swags");
-    AddLink(subMenu,$t('webshop.title'),"/webshop");
+    let mainMenu: Link[] = [];
+    AddLink(mainMenu, $t("home.title"), "/");
+    AddLink(mainMenu, $t("play.title"), "/how-to-play");
+    AddLink(mainMenu, $t("cards.title"), "/cards");
+    AddLink(mainMenu, $t("taxonomy.title"), "/taxonomy");
+    AddLink(mainMenu, $t("news.title"), "/news");
+    AddLink(mainMenu, $t("about.title"), "/about");
+    AddLink(mainMenu, $t("tribute.title"), "/tribute");
 
-    function toggleMenu()
-    {
-        let menuButton = document.getElementsByClassName('mobile-nav-button');
-        for (const item of menuButton) item.checked = false;
+    let subMenu: Link[] = [];
+    AddLink(subMenu, $t("source.title"), "/source");
+    AddLink(subMenu, $t("printing.title"), "/printing");
+    AddLink(subMenu, $t("copi.title"), "/copi");
+    AddLink(subMenu, $t("swags.title"), "/swags");
+    AddLink(subMenu, $t("webshop.title"), "/webshop");
+
+    function closeMenu() {
+        const toggle = document.getElementById("menu-toggle") as HTMLInputElement | null;
+        if (toggle) toggle.checked = false;
     }
 
+    function navTo(href: string) {
+        closeMenu();
+        goto(resolve(href));
+    }
+
+    function isActive(href: string): boolean {
+        const path = $page.url.pathname;
+        if (href === "/") return path === "/";
+        return path === href || path.startsWith(href + "/");
+    }
 </script>
 
-<svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 <header id="menu">
-    <nav>
-        <div id="mobile-menu">
-            <input class="mobile-nav-button" in:fade type="checkbox" />
-            <ul class="mobile-menu">
-                <li>
-                    <ul>
-                        {#each [...mainMenu].reverse() as link (link.href)}
-                        <li>
-                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(resolve(link.href))}}><span>{link.name}</span></button>
-                        </li>
-                        {/each}
-                        {#each [...subMenu].reverse() as link (link.href)}
-                        <li>
-                            <button class="link-mobile" onclick={()=>{toggleMenu();goto(resolve(link.href))}}><span>{link.name}</span></button>
-                        </li>
-                        {/each}
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <ul class="desktop-menu">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-input" aria-hidden="true" />
+
+    <nav class="top-nav" aria-label="Main navigation">
+        <a class="logo" href={resolve("/")} aria-label="OWASP Cornucopia Home">
+            <img
+                src="/images/cornucopia_logo_white.svg"
+                alt="OWASP Cornucopia"
+                class="logo-img"
+            />
+        </a>
+
+        <ul class="desktop-menu" role="list">
             {#each mainMenu as link (link.href)}
-                <li class="general-menu">
-                    <a class="link" href={resolve(link.href)}><div>{link.name}</div></a>
+                <li>
+                    <a
+                        class="nav-link"
+                        class:active={isActive(link.href)}
+                        href={resolve(link.href)}
+                        aria-current={isActive(link.href) ? "page" : undefined}
+                    >
+                        {link.name}
+                    </a>
                 </li>
             {/each}
-                <li class="sub-menu">
-                    <a in:fade class="link get-game" href="#menu"><div>{$t('getthegame.title')}</div></a>
-                    <div>
-                        <ul class="sub-menu">
-                        {#each subMenu as link (link.href)}
-                             <li><a class="link sub-menu" href={resolve(link.href)}><div>{link.name}</div></a></li>
-                        {/each}
-                        </ul>
-                    </div>
+        </ul>
+
+        <div class="nav-right">
+            <div class="dropdown-wrap desktop-only">
+                <input type="checkbox" id="sub-toggle" class="sub-toggle-input" aria-hidden="true" />
+                <label for="sub-toggle" class="nav-link get-game-btn">
+                    {$t("getthegame.title")}
+                </label>
+                <ul class="dropdown-menu" role="menu">
+                    {#each subMenu as link (link.href)}
+                        <li role="none">
+                            <a class="dropdown-item" href={resolve(link.href)} role="menuitem">
+                                {link.name}
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+            </div>
+            <a class="cta-btn desktop-only" href="https://copi.owasp.org/">Play Online</a>
+            <label for="menu-toggle" class="hamburger mobile-only" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </label>
+        </div>
+    </nav>
+
+    <label for="menu-toggle" class="backdrop" aria-hidden="true"></label>
+
+    <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile navigation">
+        <div class="drawer-header">
+            <img
+                src="/images/cornucopia_logo_white.svg"
+                alt=""
+                class="drawer-logo"
+            />
+            <span class="drawer-title">Menu</span>
+            <label for="menu-toggle" class="close-btn" aria-label="Close menu">X</label>
+        </div>
+
+        <ul class="drawer-links" role="list">
+            {#each mainMenu as link (link.href)}
+                <li>
+                    <button
+                        type="button"
+                        class="drawer-link"
+                        class:active={isActive(link.href)}
+                        onclick={() => navTo(link.href)}
+                    >
+                        {link.name}
+                    </button>
                 </li>
-            </ul>
-        <a class="logo" href={resolve('/') }><div><span class="desktop">OWASP</span>&nbsp;<span class="desktop mobile">Cornucopia</span></div></a>
-        
+            {/each}
+        </ul>
+
+        <div class="drawer-divider" aria-hidden="true"></div>
+        <div class="drawer-section-label">{$t("getthegame.title")}</div>
+
+        <ul class="drawer-links" role="list">
+            {#each subMenu as link (link.href)}
+                <li>
+                    <button
+                        type="button"
+                        class="drawer-link sub"
+                        onclick={() => navTo(link.href)}
+                    >
+                        {link.name}
+                    </button>
+                </li>
+            {/each}
+        </ul>
+
+        <div class="drawer-cta">
+            <a class="cta-btn drawer-cta-btn" href="https://copi.owasp.org/" onclick={closeMenu}>
+                Play Online
+            </a>
+        </div>
     </nav>
 </header>
 
 <style>
-    * {margin: 0;outline: none;padding-inline-start: 0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
-    *:after, *:before { -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
-    nav {  display: block;}
-
     header {
-        
-		position: sticky;
-		width: 100%;
-		z-index: 100;
-	}
-
-    header > nav {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-        justify-content: space-between;
-    }
-	
-	header > nav > ul {
-        display: flex;
-		list-style: none;
-        padding: 0;
-	}
-	
-    header > nav > ul > li {
-        flex: 0 1 auto;
-        margin: 0;
-        position: relative;
-        transition: all linear 0.1s;
-        white-space: nowrap;	
-    }
-    
-    header > nav > ul > li a + div {
-        border-radius: 0 0 2px 2px;
-        font-size: 1vw;
-        top: 3.2rem;
-        width: 14vw;
-    }
-			
-    header > nav > ul > li:hover a + div {
-        display: block;
-    }
-
-    ul.sub-menu > li > a > div {
-        padding: 0.5vw;
-    }
-    
-    header > nav > ul > li a + div > ul {
-        display: flex;
-        list-style-type: none;
-        height: 20vw;
-        border-radius: 0 0 2px 2px;
-        background-color: rgb(31, 41, 55);
-        border: 2px white solid;
-        
-    }
-				
-    header > nav > ul > li a + div > ul > li {
-        margin: 0;
-        flex-direction: column;
-    }
-					
-    header > nav > ul > li a + div > ul > li > a {
-        letter-spacing: 0.15vw;
-        padding: 0.25vw 1.5vw;
-    }
-	
-    header > nav > ul > li > a {
-        max-width: 15vw;
-        padding: 1vw 1.5vw;
-    }
-
-
-    .get-game {
-        text-align: top;
-        background-color: rgb(31, 41, 55);
-    }
-    
-
-    .link-mobile
-    {
-        color:var(--white);
-        text-decoration: none;
-        font-size: 2rem;
-        width : 100%;
-        font-family: var(--font-title);
-        text-align: center;
-        padding-top: 0;
-        padding-bottom: 0;
-        border-bottom: 1px rgba(255, 255, 255, 0.203) solid;
-    }
-    .link-mobile:hover > span {
-        opacity: 50%;
-    }
-
-    .mobile-nav-button {
-        content: url('/icons/menu.png');
-        appearance: none;
-        display: inline-flex;
-        width: 4.1rem;
-        height: 4.1rem;
-        align-self: flex-end;
-
-    }
-
-    .mobile-nav-button:checked {
-        content: url('/icons/close.png');
-
-    }
-
-    .mobile-nav-button:hover {
-        opacity: 50%;
-    }
-
-    #mobile-menu
-    {
-        display: none;
-        flex-direction: column;
-        justify-content: flex-start;
-        
-    }
-    .mobile-menu {
-        width : 100%;
-        margin-top: 0.9rem;
-        height : 30rem;
-        background-color: var(--background);
-        z-index: 100;
-        border-radius: 0 0 10px 10px;
-        padding-bottom: 1rem;
-        padding: 0 1rem 1rem;
-        
-    }
-    
-
-    input + ul.mobile-menu
-    {
-        display: none;
-        -webkit-animation: fadeOutFromNone 0.5s ease-out;
-        -moz-animation: fadeOutFromNone 0.5s ease-out;
-        -o-animation: fadeOutFromNone 0.5s ease-out;
-        animation: fadeOutFromNone 0.5s ease-out;
-    }
-
-    button
-    {
-        background: none;
-        border: none;
-        float: right;
-        padding-left: 1vw;
-        padding-top: 0.5rem;
-    }
-
-    .link
-    {
-        float:right;
-        color:#ffffff;
-        text-decoration: none;
-        padding-left: .4vw;
-        padding-right: .4vw;
-        padding-top: .5rem;
-        font-size: 1.5vw;
-        margin-top: 1rem;
-        transition: var(--transition);
-        font-weight: bold;
-    }
-    .general-menu
-    {
-        padding-top: 0.25rem;
-    }
-
-    .get-game
-    {
-        border: 2px white solid;
-        padding : .5rem;
-        margin-right: 1.5rem!important;
-        min-width: 14vw;
-    }
-    .get-game:hover
-    {
-        text-decoration: none!important;
-        background-color: white;
-        color:black;
-    }
-
-    .get-game + div
-    {
-        display: none;
-    }
-
-    .get-game:hover + div
-    {
-        display: block;
-    }
-
-    ul.sub-menu {
-        padding-inline-start: 0;
-        flex-direction: column;
-    }
-
-    a.sub-menu {
-        font-size: 1.3vw;
-        margin-left: 0.2vw;
-        padding: 0;
+        position: sticky;
+        top: 0;
         width: 100%;
-        border-radius: 0rem;
+        z-index: 100;
+        background-color: rgb(31, 41, 55);
+        border-bottom: 1px solid #e85d04;
     }
 
-    a.sub-menu:hover {
-        opacity: 100%;
-        
-        background-color: white;
-        color: rgb(31, 41, 55);
+    .menu-toggle-input,
+    .sub-toggle-input {
+        display: none;
     }
 
-    .link:hover
-    {
-        opacity: 50%;
+    .top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4rem;
+        padding: 0 1rem;
+        gap: 0.5rem;
     }
 
     .logo {
-        margin-top: 0.4rem;
-        width : 36vw;
-        max-width: 36vw;
-        font-size: 3vw;
-        padding: 1rem;
-        font-weight: bold;
+        overflow: visible;
+        display: flex;
+        align-items: center;
         text-decoration: none;
-        color:white;
-        transition: var(--transition);
-        text-transform: uppercase;
-        white-space: pre;
-        overflow: hidden;
-        
+        flex-shrink: 0;
+        transition: opacity 0.15s;
     }
 
-    header > nav > .logo > div {
-        bottom: 1vw;
+    .logo:hover {
+        opacity: 0.7;
+    }
+
+    .logo-img {
+        height: 4rem;
+        width: auto;
+        max-width: 9rem;
+        display: block;
+    }
+
+    .desktop-menu {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 0;
+        flex: 1;
+        justify-content: space-evenly;
+    }
+
+    .nav-link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 0.4rem 0.5rem;
+        transition: opacity 0.15s;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .nav-link:hover {
+        opacity: 0.5;
+    }
+
+    .nav-link.active {
+        color: #fb923c;
+    }
+
+    .get-game-btn {
+        background: #e85d04;
+        color: #fff;
+        border-radius: 4px;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.85rem;
+        border: none;
+        margin-left: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        min-width: 8rem;
+        box-sizing: border-box;
+    }
+
+    .get-game-btn:hover {
+        background: #c2410c;
+        opacity: 1;
+    }
+
+    .dropdown-wrap {
         position: relative;
-        min-width: 18rem;
     }
 
-
-    .logo:hover
-    {
-        opacity: 50%;
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0.25rem 0;
+        background: rgb(31, 41, 55);
+        border: 2px solid #e85d04;
+        border-radius: 0 0 4px 4px;
+        min-width: 100%;
+        z-index: 110;
     }
-    
-    nav
-    {
-        width : 100%;
-        height : 5rem;
-        background-color: rgb(31, 41, 55);
-        border-bottom: 1px var(--white) solid;
+
+    .dropdown-wrap:hover .dropdown-menu {
+        display: block;
     }
 
-    @media (max-width: 767px) 
-    {
-        .desktop-menu {
+    .dropdown-item {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: bold;
+        padding: 0.4rem 1.25rem;
+        transition: background 0.15s;
+        white-space: nowrap;
+    }
+
+    .dropdown-item:hover {
+        background: #fff;
+        color: rgb(31, 41, 55);
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        flex-shrink: 0;
+    }
+
+    .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #e85d04;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: background 0.15s, opacity 0.15s;
+        white-space: nowrap;
+    }
+
+    .cta-btn:hover {
+        background: #c2410c;
+    }
+
+    .desktop-only.cta-btn {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 5px;
+        width: 1.75rem;
+        height: 1.75rem;
+        cursor: pointer;
+        padding: 0.25rem;
+    }
+
+    .bar {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+        transition: opacity 0.15s;
+    }
+
+    .hamburger:hover .bar {
+        opacity: 0.6;
+    }
+
+    .backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 200;
+        cursor: pointer;
+    }
+
+    .menu-toggle-input:checked ~ .backdrop {
+        display: block;
+    }
+
+    .mobile-drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        width: min(300px, 82vw);
+        height: 100dvh;
+        background: #141c2a;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 300;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-bottom: 0.75rem;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-sizing: border-box;
+    }
+
+    .menu-toggle-input:checked ~ .mobile-drawer {
+        transform: translateX(0);
+    }
+
+    .drawer-header {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-shrink: 0;
+        padding: 1rem 1rem 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .drawer-logo {
+        height: 1.75rem;
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .drawer-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+
+    }
+
+    .close-btn {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+    }
+
+    .close-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .drawer-links {
+        list-style: none;
+        margin: 0;
+        padding: 0.35rem 0;
+    }
+
+    .drawer-links li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .drawer-link {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 0.55rem 1.25rem;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+        line-height: 1.3;
+        white-space: normal;
+        word-break: normal;
+    }
+
+    .drawer-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+    }
+
+    .drawer-link.active {
+        color: #fb923c;
+        background: rgba(232, 93, 4, 0.12);
+        border-left: 3px solid #e85d04;
+        padding-left: calc(1.25rem - 3px);
+    }
+
+    .drawer-link.sub {
+        font-size: 1rem;
+        font-weight: 400;
+        padding: 0.45rem 1.25rem 0.45rem 1.5rem;
+        color: rgba(255, 255, 255, 0.55);
+    }
+
+    .drawer-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 0.2rem 0;
+        flex-shrink: 0;
+    }
+
+    .drawer-section-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.35);
+        padding: 0.45rem 1.25rem 0.15rem;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    .drawer-cta {
+        padding: 0.75rem 1.25rem 0.75rem 1.25rem;
+        margin-top: auto;
+        flex-shrink: 0;
+    }
+
+    .drawer-cta-btn {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 0.55rem 1rem;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .desktop-only {
+        display: flex;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+
+    @media (max-width: 900px) {
+        .top-nav {
+            padding: 0 1rem;
+        }
+
+        .logo-img {
+            height: 4rem;
+            width: auto;
+            max-width: 9rem;
+        }
+
+        .desktop-menu,
+        .desktop-only {
             display: none;
         }
 
-        #mobile-menu
-        {
+        .nav-right {
             display: flex;
+            align-items: center;
         }
-
-        input:checked + ul.mobile-menu
-        {
+        .mobile-only {
             display: flex;
-
-            -webkit-animation: fadeInFromNone 0.5s ease-out;
-            -moz-animation: fadeInFromNone 0.5s ease-out;
-            -o-animation: fadeInFromNone 0.5s ease-out;
-            animation: fadeInFromNone 0.5s ease-out;
-        }
-
-        .desktop
-        {
-            display: none;
-        }
-        .mobile
-        {
-            display: inline;
-            font-size: 8vw;
-        }
-        .logo {
-            margin-top: 0rem;
-            overflow: visible;
-        }
-
-        @-webkit-keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-            100% {
-                display: flex;
-                opacity: 1;
-            }
-        }
-
-        @-moz-keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-            100% {
-                display: flex;
-                opacity: 1;
-            }
-        }
-
-        @-o-keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
-            100% {
-                display: flex;
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInFromNone {
-            0% {
-                display: none;
-                opacity: 0;
-            }
-
-            1% {
-                display: flex;
-                opacity: 0;
-            }
-
         }
     }
 
+    @media (min-width: 901px) and (max-width: 1024px) {
+        .nav-link {
+            font-size: 0.78rem;
+            padding: 0.4rem 0.5rem;
+        }
 
-
-
+        .dropdown-item {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: bold;
+        padding: 0.4rem 1.25rem;
+        transition: background 0.15s;
+        white-space: nowrap;
+    }
+    }
 </style>

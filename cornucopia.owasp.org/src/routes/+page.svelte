@@ -32,7 +32,7 @@
 </svelte:head>
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
-<TextImage title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
+<TextImage id="top" title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h2 id="top">{$t('home.h1.1')}</h2>
     <p>
         {$t('home.p1')}

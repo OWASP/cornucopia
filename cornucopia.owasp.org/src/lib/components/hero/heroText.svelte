@@ -1,70 +1,62 @@
 <div class="hero-text">
+    <img alt="OWASP Cornucopia - Threat modeling for everyone everywhere - Don't gamble with your security play games with it" title="OWASP Cornucopia - Threat modeling for everyone everywhere - Don't gamble with your security play games with it" src="/images/cornucopia_logo_white_with_text_owasp.svg"/>
     <h1>Threat modeling for everyone everywhere</h1>
     <h3>Uncover the security flaws in your software's before the bad guys do it for you by playing the game! Get your team together on a call or in a room and use OWASP Cornucopia Web & Mobile card decks to guide your threat modelling.</h3>
-    <img alt="OWASP Cornucopia - Threat modeling for everyone everywhere - Don't gamble with your security play games with it" title="OWASP Cornucopia - Threat modeling for everyone everywhere - Don't gamble with your security play games with it" src="/images/cornucopia_logo_white.svg"/>
 </div>
-
 <style>
-    img
-    {
-        width: 45vw;
-        margin:auto;
+    img {
+        width: 18vw;
+        margin: 0;
+        margin-top: 5rem;
+        margin-left: 5vw;
+        display: block;
     }
-
-    .hero-text
-    {
-        width : 100%;
-        height : 100%;
+    .hero-text {
+        width: 100%;
+        height: 100%;
         text-align: center;
     }
-
     h1 {
-        color:white;
+        color: white;
         opacity: 90%;
         padding: 0;
-        padding-top: 4rem;
+        padding-top: 1.5rem;
         text-shadow: 0 .2rem rgb(0, 0, 0);
-        font-size: max(3.5vw, 1vh);
+        font-size: max(3vw, 1.5rem);
         font-weight: bolder;
         background: none;
-        margin-left: 5vw;
+        margin-left: 2vw;
         text-align: left;
     }
-
-    h3
-    {
-        color:white;
+    h3 {
+        color: white;
         opacity: 90%;
         text-shadow: 0 .2rem rgb(0, 0, 0);
-        text-align: center;
+        text-align: left;
         font-family: var(--font-title);
         font-weight: 500;
-        font-size: max(1.5vw, 1vh);
-        text-align: left;
+        font-size: max(1.2vw, 0.95rem);
         margin-top: 0;
-        margin-left: 5vw;
+        margin-bottom: 2vw;
+        margin-left: 2vw;
         margin-right: 2vw;
     }
-
-
-    @media (max-width: 767px) 
-    {
-        h1
-        {
-            padding-top: 8rem;
+    @media (max-width: 767px) {
+        img {
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 2rem;
+        }
+        h1 {
+            padding-top: 0.5rem;
             font-size: max(8vw, 1vh);
+            margin-left: 5vw;
         }
-
-        h3
-        {
+        h3 {
             font-size: max(3.4vw, 2vh);
-            margin-left: 7vw;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            margin-bottom: 4vw;
         }
-
-        img
-        {
-            width: 80%;
-            margin: auto;
-        }  
     }
 </style>
