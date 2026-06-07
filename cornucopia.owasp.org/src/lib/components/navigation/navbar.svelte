@@ -83,7 +83,7 @@
                     {/each}
                 </ul>
             </div>
-            <a class="cta-btn desktop-only" href="https://copi.owasp.org/">Play Online</a>
+            <a class="cta-btn desktop-only" href="https://copi.owasp.org/games/new">Play Online</a>
             <label for="menu-toggle" class="hamburger mobile-only" aria-label="Toggle menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -138,7 +138,7 @@
         </ul>
 
         <div class="drawer-cta">
-            <a class="cta-btn drawer-cta-btn" href="https://copi.owasp.org/" onclick={closeMenu}>
+            <a class="cta-btn drawer-cta-btn" href="https://copi.owasp.org/games/new" onclick={closeMenu}>
                 Play Online
             </a>
         </div>
