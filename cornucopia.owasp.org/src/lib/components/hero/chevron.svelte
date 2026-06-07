@@ -24,7 +24,7 @@
         display: block;
         height : 6vw;
         margin-right: 42vw;
-        top: calc(80% - 20vh);
+        top: calc(80% - 0vh);
         /*bottom:-3rem;*/
         cursor:pointer;
         transition: var(--transition);
@@ -46,7 +46,7 @@
     {
         #chevron
         {
-            top: calc(70% - -20vh);
+            calc(65vw + 10vh)
             position: absolute;
             left: calc(50% - 5vw);
         }
