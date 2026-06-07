@@ -247,7 +247,7 @@
     .dropdown-menu {
         display: none;
         position: absolute;
-        top: calc(100% + 0.25rem);
+        top: calc(100% + 0rem);
         left: 0;
         list-style: none;
         margin: 0;
@@ -256,6 +256,7 @@
         border: 2px solid #e85d04;
         border-radius: 0 0 4px 4px;
         min-width: 100%;
+        max-width: 97%;
         z-index: 110;
     }
 
