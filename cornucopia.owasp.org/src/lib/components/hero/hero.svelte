@@ -41,12 +41,13 @@
     .card-container
     {
         flex:1;
+        margin-left: -10vw;
         margin-top: 1vw;
     }
 
     .text-container
     {
-        flex: 1.2;
+        flex: 1.6;
         z-index: 50;
         width: 100%
     }
