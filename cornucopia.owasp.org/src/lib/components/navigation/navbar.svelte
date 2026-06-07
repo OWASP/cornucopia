@@ -152,7 +152,7 @@
         width: 100%;
         z-index: 100;
         background-color: rgb(31, 41, 55);
-        border-bottom: 1px solid var(--white, #fff);
+        border-bottom: 1px solid #e85d04;
     }
 
     .menu-toggle-input,
