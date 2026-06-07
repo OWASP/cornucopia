@@ -166,7 +166,7 @@
         justify-content: flex-start;
         height: 5rem;
         padding: 0 1.5rem;
-        gap: 1rem;
+        gap: 3rem;
     }
 
     .logo {
@@ -195,9 +195,9 @@
         list-style: none;
         margin: 0;
         padding: 0;
-        gap: 0.15rem;
-        flex: 1;
-        justify-content: center;
+        gap: 0.5rem;
+
+        justify-content: flex-start;
     }
 
     .nav-link {
@@ -274,7 +274,8 @@
     }
 
     .nav-right {
-        margin-left: auto;
+
+
         display: flex;
         align-items: center;
         gap: 0.4rem;
@@ -284,7 +285,7 @@
     .cta-btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         background: #e85d04;
         color: #fff;
         text-decoration: none;
@@ -306,7 +307,7 @@
     .hamburger {
         display: none;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 5px;
         width: 2.5rem;
         height: 2.5rem;
@@ -382,7 +383,7 @@
         font-size: 0.9rem;
         font-weight: 600;
         color: #fff;
-        flex: 1;
+
     }
 
     .close-btn {
@@ -395,7 +396,7 @@
         min-height: 44px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         flex-shrink: 0;
     }
 
@@ -507,6 +508,9 @@
             display: none;
         }
 
+        .nav-right {
+              margin-left: auto;
+          }
         .mobile-only {
             display: flex;
         }
