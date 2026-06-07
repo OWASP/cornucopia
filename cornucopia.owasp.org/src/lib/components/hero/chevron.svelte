@@ -46,7 +46,7 @@
     {
         #chevron
         {
-            calc(65vw + 10vh)
+            top: calc(65vw + 10vh);
             position: absolute;
             left: calc(50% - 5vw);
         }
