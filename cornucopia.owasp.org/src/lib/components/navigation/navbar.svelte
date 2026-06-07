@@ -255,7 +255,7 @@
         background: rgb(31, 41, 55);
         border: 2px solid #e85d04;
         border-radius: 0 0 4px 4px;
-        min-width: 100%;
+        min-width:  97%;
         max-width: 97%;
         z-index: 110;
     }
