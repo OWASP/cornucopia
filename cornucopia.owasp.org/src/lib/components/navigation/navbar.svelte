@@ -163,10 +163,10 @@
     .top-nav {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        height: 5rem;
-        padding: 0 1.5rem;
-        gap: 3rem;
+        justify-content: space-between;
+        height: 4rem;
+        padding: 0 1rem;
+        gap: 0.5rem;
     }
 
     .logo {
@@ -195,17 +195,17 @@
         list-style: none;
         margin: 0;
         padding: 0;
-        gap: 0.5rem;
-
-        justify-content: flex-start;
+        gap: 0;
+        flex: 1;
+        justify-content: space-evenly;
     }
 
     .nav-link {
         color: #fff;
         text-decoration: none;
-        font-size: 1.5vw;
+        font-size: 1rem;
         font-weight: bold;
-        padding: 0.5rem 0.75rem;
+        padding: 0.4rem 0.5rem;
         transition: opacity 0.15s;
         white-space: nowrap;
         cursor: pointer;
@@ -223,10 +223,16 @@
         background: #e85d04;
         color: #fff;
         border-radius: 4px;
-        padding: 0.45rem 1rem;
-        font-size: 0.9rem;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.85rem;
         border: none;
-        margin-left: 0.25rem;
+        margin-left: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        min-width: 8rem;
+        box-sizing: border-box;
     }
 
     .get-game-btn:hover {
@@ -274,8 +280,6 @@
     }
 
     .nav-right {
-
-
         display: flex;
         align-items: center;
         gap: 0.4rem;
@@ -285,7 +289,7 @@
     .cta-btn {
         display: inline-flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         background: #e85d04;
         color: #fff;
         text-decoration: none;
@@ -300,17 +304,17 @@
     }
 
     .desktop-only.cta-btn {
-        font-size: 0.9rem;
-        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+        padding: 0.35rem 0.75rem;
     }
 
     .hamburger {
         display: none;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: space-between;
         gap: 5px;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 1.75rem;
+        height: 1.75rem;
         cursor: pointer;
         padding: 0.25rem;
     }
@@ -318,7 +322,7 @@
     .bar {
         display: block;
         width: 100%;
-        height: 3px;
+        height: 2px;
         background: #fff;
         border-radius: 2px;
         transition: opacity 0.15s;
@@ -380,7 +384,7 @@
     }
 
     .drawer-title {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 600;
         color: #fff;
 
@@ -396,7 +400,7 @@
         min-height: 44px;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         flex-shrink: 0;
     }
 
@@ -447,7 +451,7 @@
     }
 
     .drawer-link.sub {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 400;
         padding: 0.45rem 1.25rem 0.45rem 1.5rem;
         color: rgba(255, 255, 255, 0.55);
@@ -509,8 +513,9 @@
         }
 
         .nav-right {
-              margin-left: auto;
-          }
+            display: flex;
+            align-items: center;
+        }
         .mobile-only {
             display: flex;
         }
