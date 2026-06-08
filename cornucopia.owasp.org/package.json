@@ -22,7 +22,7 @@
 		"@sveltejs/adapter-cloudflare": "^7.2.6",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
-		"@types/node": "^25.9.1",
+		"@types/node": "^25.9.2",
 		"@typescript-eslint/parser": "^8.60.1",
 		"@vitest/coverage-v8": "^4.1.8",
 		"dotenv": "^17.4.2",
