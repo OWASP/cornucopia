@@ -59,6 +59,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Suresh Krishna
 - Adarsh Kumar
 - Franck Lacosta
+- Sebastian Legarraga
 - Mathias Lemaire
 - Khushal Malhotra
 - Antonis Manaras
@@ -69,6 +70,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Cam Morris
 - Christoph Niehoff
 - Grant Ongers
+- Ben Ramirez
 - Tanmay Ranjan
 - Susana Romaniz
 - Ravishankar Sahadevan
