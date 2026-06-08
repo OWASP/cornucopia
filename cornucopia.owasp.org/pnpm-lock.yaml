@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0))
       vite-plugin-static-copy:
-        specifier: ^4.1.0
-        version: 4.1.0(vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0))
+        specifier: ^4.1.1
+        version: 4.1.1(vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0))
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -2639,8 +2639,8 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  vite-plugin-static-copy@4.1.0:
-    resolution: {integrity: sha512-9XOarNV7LgP0KBB7AApxdgFikLXx3daZdqjC3AevYsL6MrUH62zphonLUs2a6LZc1HN1GY+vQdheZ8VVJb6dQQ==}
+  vite-plugin-static-copy@4.1.1:
+    resolution: {integrity: sha512-GrlA8YklrAfSyxJ4M3fdQLOo9oNkp56IM9FYgX/WtEgeIFkPwhu4wzpufBCIuNKCa6Fn77FkRdYxkHqV0FwjAw==}
     engines: {node: ^22.0.0 || >=24.0.0}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -5169,12 +5169,12 @@ snapshots:
       micromatch: 4.0.8
       vite: 7.3.2(@types/node@25.9.1)(jiti@2.7.0)
 
-  vite-plugin-static-copy@4.1.0(vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0)):
+  vite-plugin-static-copy@4.1.1(vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0)):
     dependencies:
       chokidar: 3.6.0
       p-map: 7.0.4
       picocolors: 1.1.1
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
       vite: 7.3.2(@types/node@25.9.1)(jiti@2.7.0)
 
   vite@7.3.2(@types/node@25.9.1)(jiti@2.7.0):
