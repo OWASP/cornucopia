@@ -14,9 +14,6 @@ jobs:
     name: "OWASP ZAP DAST Scan - Website"
     runs-on: ubuntu-latest
     env:
-      ZAP_AJAX_SPIDER_DURATION_MINS: 10
-      ZAP_ACTIVE_SCAN_DURATION_MINS: 60
-      ZAP_HARD_TIMEOUT_MINS: 75
       ZAP_CONTAINER_NAME: zap-website-scan
 
     steps:
@@ -35,18 +32,14 @@ jobs:
           timeout 60 bash -c 'until curl -f http://localhost:8080 > /dev/null 2>&1; do sleep 2; done'
 
       - name: Run ZAP Full Scan with AJAX Spider
-        timeout-minutes: 85
         run: |
           mkdir -p zap-website-reports
           sudo chown 1000:1000 zap-website-reports
-          docker rm -f "${ZAP_CONTAINER_NAME}" >/dev/null 2>&1 || true
-          set +e
-          timeout --signal=SIGINT --kill-after=5m "${ZAP_HARD_TIMEOUT_MINS}m" \
           docker run --network="host" \
             --name "${ZAP_CONTAINER_NAME}" \
             --user 1000:1000 \
             -v $(pwd)/zap-website-reports:/zap/wrk/:rw \
-            -t ghcr.io/zaproxy/zaproxy:2.16.1 \
+            -t ghcr.io/zaproxy/zaproxy:stable \
             zap-full-scan.py \
             -t http://localhost:8080 \
             -j \
@@ -56,19 +49,8 @@ jobs:
             -x website_dast_report.xml \
             -a \
             -d \
-            -z "-config ajaxSpider.maxDuration=${ZAP_AJAX_SPIDER_DURATION_MINS} -config scanner.maxScanDurationInMins=${ZAP_ACTIVE_SCAN_DURATION_MINS}"
-          exit_code=$?
-          set -e
-
-          if [ "$exit_code" -eq 124 ] || [ "$exit_code" -eq 137 ]; then
-            echo "ZAP scan hit the ${ZAP_HARD_TIMEOUT_MINS}-minute hard timeout and was stopped."
-            docker rm -f "${ZAP_CONTAINER_NAME}" >/dev/null 2>&1 || true
-            exit 0
-          fi
-
-          if [ "$exit_code" -ne 0 ]; then
-            echo "ZAP scan exited with code $exit_code. Continuing so reports can still be uploaded."
-          fi
+            -z "-config ajaxSpider.maxDuration=10 -config scanner.maxScanDurationInMins=180"
+          || true
 
       - name: Stop website and ZAP containers
         if: always()
