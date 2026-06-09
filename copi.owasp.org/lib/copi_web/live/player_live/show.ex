@@ -265,6 +265,7 @@ defmodule CopiWeb.PlayerLive.Show do
       "masvs" -> "Cornucopia Mobile Session:"
       "cumulus" -> "OWASP Cumulus Session:"
       "mlsec" -> "Elevation of MLSec Session:"
+      "dbd" -> "Digital Benefits Deck Session:"
       _ -> "EoP Session:"
     end
   end
