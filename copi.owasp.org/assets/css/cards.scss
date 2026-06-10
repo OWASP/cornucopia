@@ -1681,93 +1681,54 @@ $companion-suits: (
 
 }
 
+$dbd-suits: (
+  scope:        #3E4736,
+  architecture: #677740,
+  agency:       #DBBC58,
+  trust:        #A8854C,
+  porosity:     #944C36,
+  cornucopia:   #613030,
+  wild-card:    #FEB048
+);
+
 .card.dbd {
-  padding: clamp(16px, 1.6vw, 22px) clamp(16px, 1.6vw, 22px) clamp(12px, 1.2vw, 16px);
-  display: flex;
-  flex-direction: column;
+  @each $suit, $color in $dbd-suits {
+    &.#{$suit} {
+      .left-bar {
+        background: linear-gradient(180deg, $color, rgba($color, 0.5));
+      }
+      .value {
+        color: $color;
+      }
+    }
+  }
+}
+
+.card.dbd.J,
+.card.dbd.Q,
+.card.dbd.K {
+  @each $suit, $color in $dbd-suits {
+    &.#{$suit} {
+      background: rgba($color, 0.5);
+    }
+  }
+}
+
+.card.dbd .main-content a.info {
+  color: #333;
+}
+
+.card.dbd .main-content .misc {
+  font-size: clamp(7px, 0.7vw, 9px);
+  line-height: 1.2;
+  font-style: italic;
+  color: #666;
+  margin-top: clamp(4px, 0.4vw, 6px);
   overflow: hidden;
-
-  .left-value {
-    display: grid;
-    position: unset;
-    padding: unset;
-    justify-items: start;
-    grid-area: header;
-    color: #fff;
-    font-family: "Open Sans Bold";
-    font-size: clamp(48px, 4.8vw, 64px);
-    font-weight: 600;
-    text-align: center;
-    line-height: 1;
-  }
-
-  .category {
-    position: unset;
-    padding: unset;
-    margin: unset;
-    justify-items: end;
-    grid-area: header;
-    font-family: "Open Sans SemiBold";
-    font-size: clamp(12px, 1.2vw, 16px);
-    font-weight: 300;
-    white-space: nowrap;
-    grid-column-start: 2;
-    color: #fff;
-  }
-
-  .main-content {
-    grid-area: content;
-    color: #fff;
-    position: unset;
-    padding: unset;
-    margin: unset;
-    grid-column-start: 1;
-    grid-column-end: 3;
-
-    .description {
-      font-family: "Open Sans Regular";
-      font-size: clamp(13px, 1.3vw, 17px);
-      line-height: 1.4;
-      position: unset;
-      padding: unset;
-      margin: unset;
-      margin-top: clamp(8px, 0.8vw, 12px);
-    }
-
-    .misc {
-      font-family: "Open Sans Light";
-      font-size: clamp(10px, 1vw, 13px);
-      line-height: 1.3;
-      margin-top: clamp(8px, 0.8vw, 12px);
-      opacity: 0.85;
-    }
-
-    a.info {
-      font-family: "Open Sans Regular";
-      font-size: clamp(11px, 1.1vw, 14px);
-      color: #fff;
-      margin-top: clamp(6px, 0.6vw, 8px);
-      display: inline-block;
-    }
-  }
-
-  &.scope        { background-color: #3E4736; }
-  &.architecture { background-color: #677740; }
-  &.trust        { background-color: #A8854C; }
-  &.porosity     { background-color: #944C36; }
-  &.cornucopia   { background-color: #613030; }
-
-  &.agency {
-    background-color: #DBBC58;
-    .left-value, .category, .main-content { color: rgb(35, 31, 32); }
-    .main-content a.info { color: rgb(35, 31, 32); }
-  }
-
-  &.wild-card {
-    background-color: #FEB048;
-    .left-value, .category, .main-content { color: rgb(35, 31, 32); }
-    .main-content a.info { color: rgb(35, 31, 32); }
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
 }
 
 @keyframes ants { to { background-position: 100% 100% } }
