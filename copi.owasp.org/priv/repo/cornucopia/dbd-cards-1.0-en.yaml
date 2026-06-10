@@ -74,7 +74,7 @@ suits:
     value: "A"
     url: https://www.digitalbenefits.uk/deck/scope/A
     desc: "You have invented a new implementation decision related to scope of the service that is harmful to claimants"
-    misc: "Download Research Briefing No4 from www.digitalbenefits.uk to read about the PIP Supporters Toolkit, a prototype digital intervention, which explores the effects of extending digitisation to include other claimant activities during the supporting information request stage"
+    misc: "Download Research Briefing No4 from www.digitalbenefits.uk - read about the PIP Supporters Toolkit, a prototype digital intervention exploring effects of extending digitisation to claimant activities"
 -
   id: "ARC"
   name: "ARCHITECTURE"
@@ -354,7 +354,7 @@ suits:
     value: "A"
     url: https://www.digitalbenefits.uk/deck/porosity/A
     desc: "You have invented a new implementation decision related to porosity of the system that is harmful to claimants"
-    misc: "Read Research Briefing No3, available from www.digitalbenefits.uk, to find out about the Universal Credit web browser eXtension (UCX), a prototype digital intervention to combat some harms, which explores the positive and negative effects on claimants of increasing porosity"
+    misc: "Read Research Briefing No3, available from www.digitalbenefits.uk, to find out about the Universal Credit web browser eXtension (UCX), a prototype digital intervention exploring positive and negative effects of increasing porosity on claimants"
 -
   id: "COR"
   name: "CORNUCOPIA"
@@ -434,10 +434,10 @@ suits:
     value: "Joker"
     url: https://www.digitalbenefits.uk/deck/joker/1
     desc: "Edward makes the service in a manner culminating in it being more difficult to achieve the overarching policy intent (e.g. harder to reduce poverty) or to cause the issue addressed by the policy to become worse (e.g. increases poverty)"
-    misc: "Digital Benefits and Disbenefits Cornucopia is an output from Colin Watson's doctoral human-computer interaction (HCI) research project, undertaken between 2019 and 2023 at Newcastle University, supervised by Dr Ahmed Kharrufa (Open Lab) and Professor Ruth McAreavey (Sociology); it was funded by the UK Research and Innovation Engineering and Physical Sciences Research Council Centre for Doctoral Training in Digital Civics (EP/L016176/1)"
+    misc: "An output from Colin Watson's doctoral HCI research at Newcastle University (2019-2023), supervised by Dr Ahmed Kharrufa and Prof Ruth McAreavey; funded by UKRI EPSRC CDT in Digital Civics (EP/L016176/1)"
   - 
     id: "JOB"
     value: "Joker"
     url: https://www.digitalbenefits.uk/deck/joker/2
     desc: "Ruby influences the service in a way that increases social exclusion and/or digital exclusion"
-    misc: "The Digital Benefits and Disbenefits Project would not have been possible without the special knowledge and experience of the participants who were primarily welfare benefit claimants, but also others such as those providing advice, support and guidance about social protection services"
+    misc: "The DBD Project relied on the special knowledge of participants, primarily welfare benefit claimants, plus advisors providing guidance about social protection services"
