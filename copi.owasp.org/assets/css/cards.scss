@@ -1695,7 +1695,7 @@ $dbd-suits: (
   @each $suit, $color in $dbd-suits {
     &.#{$suit} {
       .left-bar {
-        background: linear-gradient(180deg, $color, rgba($color, 0.5));
+        background: rgba($color);
       }
       .value {
         color: $color;
