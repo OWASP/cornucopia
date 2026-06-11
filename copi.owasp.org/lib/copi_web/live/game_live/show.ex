@@ -166,6 +166,7 @@ defmodule CopiWeb.GameLive.Show do
       "mlsec" -> "Elevation of MLSec Session:"
       "cumulus" -> "OWASP Cumulus Session:"
       "masvs" -> "Cornucopia Mobile Session:"
+      "dbd" -> "Digital Benefits Deck Session:"
       _ -> "EoP Session:"
     end
   end
@@ -179,6 +180,7 @@ defmodule CopiWeb.GameLive.Show do
       "cumulus" -> "1.1"
       "masvs" -> "1.1"
       "eop" -> "5.1"
+      "dbd" -> "1.0"
       _ -> "1.0"
     end
   end

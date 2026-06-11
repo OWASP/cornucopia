@@ -1681,6 +1681,55 @@ $companion-suits: (
 
 }
 
+$dbd-suits: (
+  scope:        #3E4736,
+  architecture: #677740,
+  agency:       #DBBC58,
+  trust:        #A8854C,
+  porosity:     #944C36,
+  cornucopia:   #613030,
+  wild-card:    #FEB048
+);
+
+.card.dbd {
+  @each $suit, $color in $dbd-suits {
+    &.#{$suit} {
+      .left-bar {
+        background: linear-gradient(180deg, $color, rgba($color, 0.5));
+      }
+      .value {
+        color: $color;
+      }
+    }
+  }
+}
+
+.card.dbd.J,
+.card.dbd.Q,
+.card.dbd.K {
+  @each $suit, $color in $dbd-suits {
+    &.#{$suit} {
+      background: rgba($color, 0.5);
+    }
+  }
+}
+
+.card.dbd .main-content a.info {
+  color: #333;
+}
+
+.card.dbd .main-content .misc {
+  font-size: clamp(7px, 0.7vw, 9px);
+  line-height: 1.2;
+  font-style: italic;
+  color: #666;
+  margin-top: clamp(4px, 0.4vw, 6px);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
 @keyframes ants { to { background-position: 100% 100% } }
 
 .card-player {

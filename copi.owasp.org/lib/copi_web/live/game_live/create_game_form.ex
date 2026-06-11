@@ -34,6 +34,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
               {"Elevation of Privilege (for cloud platforms, infrastructure, apps, anything!)", "eop"},
               {"Elevation of MLSec (for machine learning)", "mlsec"},
               {"OWASP Cumulus (for DevOps and Cloud projects)", "cumulus"},
+              {"Digital Benefits Deck (for digital welfare services)", "dbd"},
           ]}
           >
         </.input>
