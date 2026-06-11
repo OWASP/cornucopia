@@ -1695,7 +1695,7 @@ $dbd-suits: (
   @each $suit, $color in $dbd-suits {
     &.#{$suit} {
       .left-bar {
-        background: rgba($color);
+        background: $color;
       }
       .value {
         color: $color;
