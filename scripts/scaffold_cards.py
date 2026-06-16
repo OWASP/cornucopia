@@ -60,7 +60,7 @@ def main() -> None:
                     if not f.exists():
                         f.write_text(content, encoding="utf-8")
 
-        print(f"Done. The card folders have been created.")
+        print("Done. The card folders have been created.")
     except FileNotFoundError:
         print(f"Error: file not found: {sys.argv[1]}")
         sys.exit(1)
