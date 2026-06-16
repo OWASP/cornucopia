@@ -23,24 +23,492 @@ suits:
 - 
   id: "SP"
   name: "Spoofing"
-  cards: []
+  cards:
+  -
+    id: "SP2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/SP2"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/SP3"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/SP4"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/SP5"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/SP6"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/SP7"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/SP8"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SP9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/SP9"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SPX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/SPX"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SPJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/SPJ"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SPQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/SPQ"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SPK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/SPK"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
+  -
+    id: "SPA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/SPA"
+    stride: [ S ]
+    stride_print: [ 'Spoofing' ]
 -
   id: "TA"
   name: "Tampering"
-  cards: []
+  cards:
+  -
+    id: "TA2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/TA2"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/TA3"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/TA4"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/TA5"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/TA6"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/TA7"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/TA8"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TA9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/TA9"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TAX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/TAX"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TAJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/TAJ"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TAQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/TAQ"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TAK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/TAK"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
+  -
+    id: "TAA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/TAA"
+    stride: [ T ]
+    stride_print: [ 'Tampering' ]
 -
   id: "RE"
   name: "Repudiation"
-  cards: []
+  cards:
+  -
+    id: "RE2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/RE2"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/RE3"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/RE4"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/RE5"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/RE6"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/RE7"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/RE8"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "RE9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/RE9"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "REX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/REX"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "REJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/REJ"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "REQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/REQ"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "REK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/REK"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
+  -
+    id: "REA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/REA"
+    stride: [ R ]
+    stride_print: [ 'Repudiation' ]
 -
   id: "ID"
   name: "Information Disclosure"
-  cards: []
+  cards:
+  -
+    id: "ID2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/ID2"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/ID3"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/ID4"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/ID5"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/ID6"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/ID7"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/ID8"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "ID9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/ID9"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "IDX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/IDX"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "IDJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/IDJ"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "IDQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/IDQ"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "IDK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/IDK"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
+  -
+    id: "IDA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/IDA"
+    stride: [ I ]
+    stride_print: [ 'Information Disclosure' ]
 -
   id: "DS"
   name: "Denial of Service"
-  cards: []
+  cards:
+  -
+    id: "DS2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/DS2"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/DS3"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/DS4"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/DS5"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/DS6"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/DS7"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/DS8"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DS9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/DS9"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DSX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/DSX"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DSJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/DSJ"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DSQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/DSQ"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DSK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/DSK"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
+  -
+    id: "DSA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/DSA"
+    stride: [ D ]
+    stride_print: [ 'Denial of Service' ]
 -
   id: "EP"
   name: "Elevation of Privilege"
-  cards: []
+  cards:
+  -
+    id: "EP2"
+    value: "2"
+    url: "https://cornucopia.owasp.org/cards/EP2"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP3"
+    value: "3"
+    url: "https://cornucopia.owasp.org/cards/EP3"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP4"
+    value: "4"
+    url: "https://cornucopia.owasp.org/cards/EP4"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP5"
+    value: "5"
+    url: "https://cornucopia.owasp.org/cards/EP5"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP6"
+    value: "6"
+    url: "https://cornucopia.owasp.org/cards/EP6"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP7"
+    value: "7"
+    url: "https://cornucopia.owasp.org/cards/EP7"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP8"
+    value: "8"
+    url: "https://cornucopia.owasp.org/cards/EP8"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EP9"
+    value: "9"
+    url: "https://cornucopia.owasp.org/cards/EP9"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EPX"
+    value: "X"
+    url: "https://cornucopia.owasp.org/cards/EPX"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EPJ"
+    value: "J"
+    url: "https://cornucopia.owasp.org/cards/EPJ"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EPQ"
+    value: "Q"
+    url: "https://cornucopia.owasp.org/cards/EPQ"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EPK"
+    value: "K"
+    url: "https://cornucopia.owasp.org/cards/EPK"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
+  -
+    id: "EPA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/EPA"
+    stride: [ E ]
+    stride_print: [ 'Elevation of Privilege' ]
