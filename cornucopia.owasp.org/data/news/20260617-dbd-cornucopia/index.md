@@ -1,5 +1,5 @@
 ---
-date: 20260525
+date: 20260617
 author: johan-sydseter
 tags: owasp,cornucopia,gamification,threat-modeling,security,dbd
 hidden: false
