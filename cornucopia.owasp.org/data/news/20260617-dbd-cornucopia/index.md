@@ -8,6 +8,10 @@ description: DBD Cornucopia is now available to play online!
 
 # DBD Cornucopia is now available to play online!
 
+![DBD Cornucopia](printed_dbd.jpg)
+
+
+
 __In development, we are used to understanding threat modelling as a structured method to make applications and other software secure. And in this, “secure” usually means to protect against adverse events and their associated harms as they impact the system (e.g. to maintain availability), its data (e.g. to protect its confidentiality) and the organisation more widely (e.g. to ensure continued operation). OWASP Cornucopia's three editions (Website App, Mobile App and Companion) all help threat modelling from this perspective.__
 
 But assessments of threats can also use different perspectives. Developers may come across privacy impact assessments (PIAs), where threats to users' data and the impact on those users are paramount. PIAs may additionally examine harms to organisations, third parties and wider society.
