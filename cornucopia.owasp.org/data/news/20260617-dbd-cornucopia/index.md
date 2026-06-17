@@ -38,4 +38,4 @@ Colin Watson had a small number of DBD Cornucopia decks printed to distribute to
 
 The high-res design files are all available for download and print at [www.digitalbenefits.uk/cornucopia](https://www.digitalbenefits.uk/cornucopia/).
 
-NB: DBD Cornucopia is not an OWASP project. 
+NB: DBD Cornucopia is not an OWASP project.
