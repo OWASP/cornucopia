@@ -45,7 +45,7 @@ defmodule CopiWeb.GameLiveTest do
 
       {:ok, games_new, html_games_new} = live(new_conn, "/games/new")
 
-      assert html_games_new =~ "Start A Game"
+      assert html_games_new =~ "Play"
 
       assert games_new
              |> form("#game-form", game: @invalid_attrs)
