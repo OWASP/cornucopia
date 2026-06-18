@@ -26,7 +26,7 @@
 		"@typescript-eslint/parser": "^8.61.0",
 		"@vitest/coverage-v8": "^4.1.8",
 		"dotenv": "^17.4.2",
-		"eslint": "^10.4.1",
+		"eslint": "^10.5.0",
 		"eslint-plugin-svelte": "^3.19.0",
 		"globals": "^17.6.0",
 		"serve": "^14.2.6",
