@@ -3,6 +3,7 @@
     import { newsRenderers } from "$lib/components/renderers/renderers";
     import BlogpostMetadata from "$lib/components/blogpostMetadata.svelte";
     import { readTranslation } from "$lib/stores/stores";
+    import NewsMetadata from "$lib/components/newsMetadata.svelte";
     let t = readTranslation();
     /** @type {{data: any}} */
     let { data } = $props();
@@ -30,7 +31,6 @@
         property="og:url"
         content="https://cornucopia.owasp.org/news/{blogpost.path}"
     />
-    <meta property="og:type" content="article" />
     <meta property="og:title" content="{blogpost.title} | OWASP Cornucopia" />
     <meta
         property="og:description"
@@ -60,13 +60,14 @@
     <SvelteMarkdown renderers={markdownRenderers} source={blogpost.markdown}
     ></SvelteMarkdown>
     <p>
+        <!-- prettier-ignore -->
         <a
             title="OWASP Cornucopia's repository"
             rel="noopener"
             href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md"
-            >{$t("news.slug.p1")}</a
-        >
+            >{$t("news.slug.p1")}</a>
     </p>
+    <NewsMetadata />
 </div>
 
 <style>
