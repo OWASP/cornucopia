@@ -23,7 +23,7 @@
 		"@sveltejs/kit": "^2.65.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@types/node": "^25.9.3",
-		"@typescript-eslint/parser": "^8.61.0",
+		"@typescript-eslint/parser": "^8.61.1",
 		"@vitest/coverage-v8": "^4.1.8",
 		"dotenv": "^17.4.2",
 		"eslint": "^10.5.0",
