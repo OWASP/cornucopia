@@ -33,5 +33,6 @@ For more things that can go wrong, see the [Common Attack Patterns related to th
 1. Implement comprehensive logging of all user activities within the application, capturing details such as timestamps, user IDs, and the nature of the actions.
 2. Ensure that all actions are attributable to individual users by maintaining secure and unique user identification mechanisms.
 3. Develop robust audit trails that provide a clear and detailed history of user actions for accountability and forensic analysis.
+4. Ensure that logs are securely transmitted to a logically separate system for analysis, detection, alerting, and escalation, and that they are protected from unauthorized access and modification.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.

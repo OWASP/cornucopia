@@ -36,5 +36,9 @@ Configuration best practice guidance needs to be reviewed periodically, vulnerab
 2. Use valid and trusted certificates for encrypted communications to prevent man-in-the-middle attacks.
 3. Prevent the possibility of downgrading encrypted connections to weaker or unencrypted states.
 4. Regularly review and update the cryptographic setup to address new vulnerabilities and maintain strong security.
+5. Ensure digital signatures use collision-resistant hash functions with appropriate output lengths (for example, SHA-256 or stronger), and ensure HMACs use approved hash functions with sufficiently long tags and strong, unpredictable keys for data authentication and integrity.
+6. All random numbers and strings which are intended to be non-guessable must be generated using a cryptographically secure pseudo-random number generator (CSPRNG) and have at least 128 bits of entropy.
+7. Only allow modern, recommended versions of TLS (for example, TLS 1.2 and TLS 1.3), and require TLS for all communication, both within the application and with external services.
+8. Log and monitor security events such as backend TLS and encryption failures.
 
 For detailed advice on how to mitigate threats related to the card, see the [ASVS and OWASP Developer Guide requirements ](#mapping 'ASVS and OWASP Developer Guide requirements [internal]') in the table below.
