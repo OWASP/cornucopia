@@ -1,6 +1,6 @@
 import fm from "front-matter"
 import fs from 'fs'
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import type { Card } from "$domain/card/card";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import path from "path";

@@ -1,5 +1,5 @@
 import fs from 'fs'
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import path from "path";
 import { DeckService } from "$lib/services/deckService";
 const __dirname = path.resolve(path.dirname(''));
