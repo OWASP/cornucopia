@@ -20,6 +20,7 @@
         return langSuits || data.suits.get('webapp-en') as Suit[];
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let structuredData = $derived(JSON.stringify({
         "@context": "https://schema.org",
         "@graph": [
@@ -38,7 +39,6 @@
             }
         ]
     }).replace(/</g, '\\u003c'));
-    let jsonLdScript = $derived(`<script type="application/ld+json">${structuredData}</scr` + `ipt>`);
 </script>
 <svelte:head>
     	<title>{$t('layout.title')}</title>
@@ -49,8 +49,7 @@
         <meta property="og:description" content="{$t('layout.description')}">
         <meta name="twitter:title" content="{$t('layout.title')}">
         <meta name="twitter:description" content="{$t('layout.description')}">
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html jsonLdScript}
+        <script type="application/ld+json">{@html structuredData}</script>
 </svelte:head>
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
