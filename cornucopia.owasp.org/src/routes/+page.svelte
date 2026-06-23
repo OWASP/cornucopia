@@ -19,6 +19,26 @@
         const langSuits = data.suits.get(`webapp-${$lang}`);
         return langSuits || data.suits.get('webapp-en') as Suit[];
     });
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    let structuredData = $derived(JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "name": "OWASP Cornucopia",
+                "url": "https://cornucopia.owasp.org",
+                "logo": "https://cornucopia.owasp.org/images/cornucopia_logo_in_devs_we_trust.svg",
+                "sameAs": ["https://github.com/OWASP/cornucopia"]
+            },
+            {
+                "@type": "WebSite",
+                "name": $t('layout.title'),
+                "url": "https://cornucopia.owasp.org",
+                "description": $t('layout.description')
+            }
+        ]
+    }).replace(/</g, '\\u003c'));
 </script>
 <svelte:head>
     	<title>{$t('layout.title')}</title>
@@ -29,6 +49,7 @@
         <meta property="og:description" content="{$t('layout.description')}">
         <meta name="twitter:title" content="{$t('layout.title')}">
         <meta name="twitter:description" content="{$t('layout.description')}">
+        <script type="application/ld+json">{@html structuredData}</script>
 </svelte:head>
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
