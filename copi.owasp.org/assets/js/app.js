@@ -101,13 +101,15 @@ Hooks.DragDrop = {
           })
         }).then(response => {
           console.log('API response:', response.ok);
-          if (!response.ok) {
-            drake.cancel(true);
+          if (!response.ok && source) {
+            source.appendChild(element);
           }
           return response.ok;
         }).catch(err => {
           console.error('API error:', err);
-          drake.cancel(true);
+          if (source) {
+            source.appendChild(element);
+          }
         });
       }
     });
