@@ -36,13 +36,12 @@ Hooks.DragDrop = {
 
     const drake = dragula([document.querySelector('#hand'), document.querySelector('#table')], {
       invalid: function (el, handle) {
-        // Only allow dragging actual hand cards while a round is active.
-        const roundPlayed = document.querySelector('#round-played');
+        // Only allow dragging actual hand cards (with required data attributes) from non-player zones.
         const isPlayerZone = el.classList && el.classList.contains('card-player');
         const draggableCard = getCardElement(handle) || getCardElement(el) || el;
         const hasRequiredDataset = !!(draggableCard.dataset && draggableCard.dataset.game && draggableCard.dataset.player && draggableCard.dataset.dealtcard);
 
-        return !!roundPlayed || isPlayerZone || !hasRequiredDataset;
+        return isPlayerZone || !hasRequiredDataset;
       },
       accepts: function (el, target, source, sibling) {
         console.log('accepts called', {target: target?.id, source: source?.id});
