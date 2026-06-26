@@ -157,6 +157,15 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 404)["error"] == "Could not find player and dealt card"
   end
 
+  test "play_card returns 400 when dealt_card_id parameter is missing", %{conn: conn, game: game, player: player} do
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id
+    })
+
+    assert json_response(conn, 400)["error"] == "Missing required parameter: dealt_card_id"
+  end
+
   test "play_card returns 503 when initial game lookup is transient", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
     Application.put_env(:copi, :api_game_module, GameStub)
     Application.put_env(:copi, :api_game_stub_mode, :initial_transient)

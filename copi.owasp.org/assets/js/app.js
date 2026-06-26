@@ -28,11 +28,24 @@ Hooks.DragDrop = {
   mounted() {
     const drake = dragula([document.querySelector('#hand'), document.querySelector('#table')], {
       invalid: function (el, handle) {
-        // Don't allow dragging cards off the table
-        return el.className === 'card-player' || document.querySelector('#round-played');
+        // Only allow dragging actual hand cards while a round is active.
+        const roundPlayed = document.querySelector('#round-played');
+        const isPlayerZone = el.classList && el.classList.contains('card-player');
+        const hasRequiredDataset = !!(el.dataset && el.dataset.game && el.dataset.player && el.dataset.dealtcard);
+
+        return !!roundPlayed || isPlayerZone || !hasRequiredDataset;
       },
       accepts: function (el, target, source, sibling) {
         console.log('accepts called', {target: target?.id, source: source?.id});
+
+        // Only hand cards can be dropped on the table.
+        if (!source || source.id !== 'hand') {
+          return false;
+        }
+
+        if (!el.dataset || !el.dataset.game || !el.dataset.player || !el.dataset.dealtcard) {
+          return false;
+        }
         
         // Only allow dropping on table
         if (target && target.id === 'table') {
@@ -64,6 +77,20 @@ Hooks.DragDrop = {
       console.log('Drop event', {target: target?.id});
       
       if (target && target.id === 'table') {
+        const gameId = element?.dataset?.game;
+        const playerId = element?.dataset?.player;
+        const dealtCardId = element?.dataset?.dealtcard;
+
+        if (!gameId || !playerId || !dealtCardId) {
+          console.error('Blocked invalid card play request due to missing identifiers', {
+            gameId,
+            playerId,
+            dealtCardId
+          });
+          drake.cancel(true);
+          return;
+        }
+
         fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
           method: 'PUT',
           headers: {
@@ -74,9 +101,13 @@ Hooks.DragDrop = {
           })
         }).then(response => {
           console.log('API response:', response.ok);
+          if (!response.ok) {
+            drake.cancel(true);
+          }
           return response.ok;
         }).catch(err => {
           console.error('API error:', err);
+          drake.cancel(true);
         });
       }
     });

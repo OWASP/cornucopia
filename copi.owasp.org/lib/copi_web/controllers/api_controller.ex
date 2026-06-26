@@ -68,6 +68,24 @@ defmodule CopiWeb.ApiController do
     end
   end
 
+  def play_card(conn, %{"game_id" => game_id, "player_id" => player_id}) do
+    Logger.warning(
+      "Missing dealt_card_id for play_card request: game_id=#{inspect(game_id)}, player_id=#{inspect(player_id)}"
+    )
+
+    conn
+    |> put_status(:bad_request)
+    |> json(%{"error" => "Missing required parameter: dealt_card_id"})
+  end
+
+  def play_card(conn, params) do
+    Logger.warning("Invalid play_card request params: #{inspect(params)}")
+
+    conn
+    |> put_status(:bad_request)
+    |> json(%{"error" => "Invalid request parameters"})
+  end
+
   def topic(game_id) do
     "game:#{game_id}"
   end
