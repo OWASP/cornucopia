@@ -26,24 +26,34 @@ import dragula from "../vendor/dragula"
 let Hooks = {}
 Hooks.DragDrop = {
   mounted() {
+    const getCardElement = (node) => {
+      if (!node || typeof node.closest !== 'function') {
+        return null;
+      }
+
+      return node.closest('[data-game][data-player][data-dealtcard]');
+    };
+
     const drake = dragula([document.querySelector('#hand'), document.querySelector('#table')], {
       invalid: function (el, handle) {
         // Only allow dragging actual hand cards while a round is active.
         const roundPlayed = document.querySelector('#round-played');
         const isPlayerZone = el.classList && el.classList.contains('card-player');
-        const hasRequiredDataset = !!(el.dataset && el.dataset.game && el.dataset.player && el.dataset.dealtcard);
+        const draggableCard = getCardElement(handle) || getCardElement(el) || el;
+        const hasRequiredDataset = !!(draggableCard.dataset && draggableCard.dataset.game && draggableCard.dataset.player && draggableCard.dataset.dealtcard);
 
         return !!roundPlayed || isPlayerZone || !hasRequiredDataset;
       },
       accepts: function (el, target, source, sibling) {
         console.log('accepts called', {target: target?.id, source: source?.id});
+        const draggableCard = getCardElement(el) || el;
 
         // Only hand cards can be dropped on the table.
         if (!source || source.id !== 'hand') {
           return false;
         }
 
-        if (!el.dataset || !el.dataset.game || !el.dataset.player || !el.dataset.dealtcard) {
+        if (!draggableCard.dataset || !draggableCard.dataset.game || !draggableCard.dataset.player || !draggableCard.dataset.dealtcard) {
           return false;
         }
         
@@ -77,9 +87,10 @@ Hooks.DragDrop = {
       console.log('Drop event', {target: target?.id});
       
       if (target && target.id === 'table') {
-        const gameId = element?.dataset?.game;
-        const playerId = element?.dataset?.player;
-        const dealtCardId = element?.dataset?.dealtcard;
+        const draggableCard = getCardElement(element) || element;
+        const gameId = draggableCard?.dataset?.game;
+        const playerId = draggableCard?.dataset?.player;
+        const dealtCardId = draggableCard?.dataset?.dealtcard;
 
         if (!gameId || !playerId || !dealtCardId) {
           console.error('Blocked invalid card play request due to missing identifiers', {
@@ -91,13 +102,13 @@ Hooks.DragDrop = {
           return;
         }
 
-        fetch('/api/games/' + element.dataset.game + '/players/' + element.dataset.player + '/card', {
+        fetch('/api/games/' + gameId + '/players/' + playerId + '/card', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            dealt_card_id: element.dataset.dealtcard
+            dealt_card_id: dealtCardId
           })
         }).then(response => {
           console.log('API response:', response.ok);
