@@ -162,6 +162,48 @@ class TestScaffoldCards(unittest.TestCase):
         data = _make_data(language="pt_BR")
         self.assertEqual(self._run(self._write_yaml(data)), 0)
 
+    # --- Missing/Invalid YAML Keys and Structure ---
+
+    def test_rejects_missing_meta(self):
+        data = _make_data()
+        del data["meta"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_edition(self):
+        data = _make_data()
+        del data["meta"]["edition"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_version(self):
+        data = _make_data()
+        del data["meta"]["version"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_language(self):
+        data = _make_data()
+        del data["meta"]["language"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_suits(self):
+        data = _make_data()
+        del data["suits"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_suit_name(self):
+        data = _make_data()
+        del data["suits"][0]["name"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_suit_cards(self):
+        data = _make_data()
+        del data["suits"][0]["cards"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
+    def test_rejects_missing_card_id(self):
+        data = _make_data()
+        del data["suits"][0]["cards"][0]["id"]
+        self.assertEqual(self._run(self._write_yaml(data)), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

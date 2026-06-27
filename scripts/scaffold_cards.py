@@ -47,8 +47,26 @@ def safe_component(value: str, field: str, pattern: str) -> str:
     return value
 
 
+def _scaffold_card(card: dict[str, Any], suit_dir: Path) -> None:
+    if "id" not in card:
+        raise ValueError("Missing required field: 'card.id'")
+    card_id = safe_component(card["id"], "card.id", r"[A-Z0-9]+")
+    card_dir = suit_dir / card_id
+    card_dir.mkdir(parents=True, exist_ok=True)
+    for filename, content in [("explanation.md", EXPLANATION_TEMPLATE), ("technical-note.md", "")]:
+        f = card_dir / filename
+        if not f.exists():
+            f.write_text(content, encoding="utf-8")
+
+
 def scaffold_cards(data: dict[str, Any]) -> None:
+    if "meta" not in data:
+        raise ValueError("Missing required section: 'meta'")
     meta = data["meta"]
+    for field in ("edition", "version", "language"):
+        if field not in meta:
+            raise ValueError(f"Missing required field: 'meta.{field}'")
+
     edition = safe_component(meta["edition"], "meta.edition", r"[a-z0-9][a-z0-9_-]*")
     version = safe_component(str(meta["version"]), "meta.version", r"[0-9]+(?:\.[0-9]+)*")
     language = safe_component(meta["language"].lower(), "meta.language", r"[a-z]{2}(?:_[a-z]{2})?")
@@ -56,17 +74,19 @@ def scaffold_cards(data: dict[str, Any]) -> None:
     if not edition_dir.is_relative_to(ROOT.resolve()):
         raise ValueError("Resolved edition directory escapes output root")
 
+    if "suits" not in data:
+        raise ValueError("Missing required section: 'suits'")
+
     for suit in data["suits"]:
+        if "name" not in suit:
+            raise ValueError("Missing required field: 'suit.name'")
+        if "cards" not in suit:
+            raise ValueError("Missing required field: 'suit.cards'")
+
         suit_name = safe_component(extract_suit_folder_name(suit["name"]), "suit.name", r"[a-z0-9&_-]+")
         suit_dir = edition_dir / suit_name
         for card in suit["cards"]:
-            card_id = safe_component(card["id"], "card.id", r"[A-Z0-9]+")
-            card_dir = suit_dir / card_id
-            card_dir.mkdir(parents=True, exist_ok=True)
-            for filename, content in [("explanation.md", EXPLANATION_TEMPLATE), ("technical-note.md", "")]:
-                f = card_dir / filename
-                if not f.exists():
-                    f.write_text(content, encoding="utf-8")
+            _scaffold_card(card, suit_dir)
 
 
 def main() -> None:
