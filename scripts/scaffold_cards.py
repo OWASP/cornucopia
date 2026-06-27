@@ -2,8 +2,8 @@
 Scaffold card files from the source/<edition-name>-cards-<version>-<language>.yaml file.
 
 This script takes the yaml file of cards under source directory (e.g. source/eop-cards-5.0-en.yaml) as an argument
-and creates the card folders and files including explanation.md and technical-note.md, inside data/cards/
-(e.g. data/cards/eop-cards-5.0-en/
+and creates the card folders and files including explanation.md and technical-note.md,
+inside cornucopia.owasp.org/data/cards/ (e.g. cornucopia.owasp.org/data/cards/eop-cards-5.0-en/)
 
 This is done by reading the cards.yaml and extracting the suit folder name from the meta section
 and the card folder name from the id field of each card.
