@@ -30,13 +30,13 @@ Whilst the deck's threat descriptions, harm explanations and examples on the web
 
 ## [The Online Cornucopia Game Engine - Copi](https://copi.owasp.org)
 
-![DBD Cornucopia box](dbd-case-3-rgb-with-outline.jpg)
+![DBD Cornucopia - Copi](dbd-cornucopia-copi-2.jpg)
 
 The original OWASP Cornucopia was primarily comprised of word-processing documents. Due to the efforts in recent years by many generous volunteers and organisations to codify OWASP Cornucopia, DBD Cornucopia's threat data has been added to its repository. This means that, because of the project's [integrated gaming engine Copi](https://copi.owasp.org), the deck is now available for teams to play digitally online.
 
 ## [Printing](https://www.digitalbenefits.uk/resources/documents/dbd-deck-1v00c.pdf)
 
-![DBD Cornucopia - Copi](dbd-cornucopia-copi-2.jpg)
+![DBD Cornucopia box](dbd-case-3-rgb-with-outline.jpg)
 
 Colin Watson had a small number of DBD Cornucopia decks printed to distribute to UK government departments, charities which campaign in this area, and academics undertaking research in the disciplines of service design and human-computer interaction. The first professionally printed OWASP Cornucopia deck in 2013 was distributed in a box which resembled a pack of cigarettes labelled with health warnings. Acknowledging that idea and the domestic nature of the harms, the physical DBD Cornucopia box is presented in the style of a powdered laundry detergent package, based on the notion that reducing harms is, in some way, cleaning up the e-government service. Sometimes humour is also necessary to counteract harms, and fun can help awareness and encourage use of service-user-oriented threat modelling.
 

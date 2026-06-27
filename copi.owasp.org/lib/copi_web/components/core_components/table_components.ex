@@ -46,7 +46,7 @@ defmodule CopiWeb.CoreComponents.TableComponents do
     <%= if @player_card != nil do %>
     <div class="my-2 flex flex-row justify-start items-center">
         <.icon name="hero-hand-thumb-up" class="h-8 w-8" />
-        <p class="badge ml-4"><%= Enum.count(@player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></p>
+        <p class="badge ml-4"><%= Enum.count(@player_card.votes) %> / <%= Enum.count(@game.players) %></p>
     </div>
     <% end %>
     """

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import path from "path";
 
 const __dirname = path.resolve(path.dirname(''));

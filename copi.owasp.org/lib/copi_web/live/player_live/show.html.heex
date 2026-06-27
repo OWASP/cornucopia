@@ -128,7 +128,7 @@
                   <div phx-click="toggle_vote" phx-value-dealt_card_id={player_card.id}  class="cursor-pointer my-2 flex flex-row justify-start items-center" class={["vote"] ++ [(if get_vote(player_card, @player), do: "voted")]}>
                   <.icon name="hero-hand-thumb-up" class="h-8 w-8" />
                   
-                  <p class="badge ml-4"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) - 1 %></p>
+                  <p class="badge ml-4"><%= Enum.count(player_card.votes) %> / <%= Enum.count(@game.players) %></p>
                 </div>
               <% end %>
               <% end %>
