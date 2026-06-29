@@ -5,8 +5,8 @@ This script takes the yaml file of cards under source directory (e.g. source/eop
 and creates the card folders and files including explanation.md and technical-note.md,
 inside cornucopia.owasp.org/data/cards/ (e.g. cornucopia.owasp.org/data/cards/eop-cards-5.0-en/)
 
-This is done by reading the cards.yaml and extracting the suit folder name from the meta section
-and the card folder name from the id field of each card.
+This is done by reading the cards YAML and extracting the edition folder name from meta (edition/version/language),
+and the suit/card folder names from each suit's name and each card's id, respectively.
 
 Also, the explanation.md file is populated with the template provided in this script (EXPLANATION_TEMPLATE)
 
