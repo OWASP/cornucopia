@@ -4,6 +4,7 @@ import tempfile
 import shutil
 from pathlib import Path
 from unittest.mock import patch
+import yaml as _yaml
 
 import scripts.scaffold_cards as scaffold
 
@@ -62,7 +63,6 @@ class TestScaffoldCards(unittest.TestCase):
                 return int(exc.code) if exc.code is not None else 0
 
     def _write_yaml(self, data: dict) -> str:
-        import yaml as _yaml
 
         path = Path(self.temp_dir) / "input.yaml"
         path.write_text(_yaml.dump(data), encoding="utf-8")
