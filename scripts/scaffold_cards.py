@@ -83,8 +83,12 @@ def scaffold_cards(data: dict[str, Any]) -> None:
         if "cards" not in suit:
             raise ValueError("Missing required field: 'suit.cards'")
 
+        if not isinstance(suit["name"], str):
+            raise ValueError("Invalid suit.name: expected a string")
         suit_name = safe_component(extract_suit_folder_name(suit["name"]), "suit.name", r"[a-z0-9&_-]+")
         suit_dir = edition_dir / suit_name
+        if not isinstance(suit["cards"], list):
+            raise ValueError("Invalid suit.cards: expected a list")
         for card in suit["cards"]:
             _scaffold_card(card, suit_dir)
 
