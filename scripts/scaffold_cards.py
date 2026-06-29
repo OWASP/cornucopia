@@ -114,10 +114,10 @@ def main() -> None:
         scaffold_cards(data)
         print("Done. The card folders have been created.")
     except FileNotFoundError:
-        print(f"Error: file not found: {sys.argv[1]}")
+        print(f"Error: file not found: {sys.argv[1]}", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 
 
