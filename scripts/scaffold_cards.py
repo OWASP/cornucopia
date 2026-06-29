@@ -63,6 +63,8 @@ def scaffold_cards(data: dict[str, Any]) -> None:
     if "meta" not in data:
         raise ValueError("Missing required section: 'meta'")
     meta = data["meta"]
+    if not isinstance(meta, dict):
+        raise ValueError("Invalid meta: expected a mapping")
     for field in ("edition", "version", "language"):
         if field not in meta:
             raise ValueError(f"Missing required field: 'meta.{field}'")
