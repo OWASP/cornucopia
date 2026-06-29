@@ -48,6 +48,8 @@ def safe_component(value: str, field: str, pattern: str) -> str:
 
 
 def _scaffold_card(card: dict[str, Any], suit_dir: Path) -> None:
+    if not isinstance(card, dict):
+        raise ValueError("Invalid card: expected a mapping")
     if "id" not in card:
         raise ValueError("Missing required field: 'card.id'")
     card_id = safe_component(card["id"], "card.id", r"[A-Z0-9]+")
