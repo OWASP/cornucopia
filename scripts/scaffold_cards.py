@@ -61,7 +61,7 @@ def _scaffold_card(card: dict[str, Any], suit_dir: Path) -> None:
             f.write_text(content, encoding="utf-8")
 
 
-def scaffold_cards(data: dict[str, Any]) -> None:
+def _validate_meta(data: dict[str, Any]) -> None:
     if "meta" not in data:
         raise ValueError("Missing required section: 'meta'")
     meta = data["meta"]
@@ -71,36 +71,50 @@ def scaffold_cards(data: dict[str, Any]) -> None:
         if field not in meta:
             raise ValueError(f"Missing required field: 'meta.{field}'")
 
+
+def _build_edition_dir(meta: dict[str, Any]) -> Path:
     edition = safe_component(meta["edition"], "meta.edition", r"[a-z0-9][a-z0-9_-]*")
     version = safe_component(str(meta["version"]), "meta.version", r"[0-9]+(?:\.[0-9]+)*")
     language = safe_component(str(meta["language"]).lower(), "meta.language", r"[a-z]{2}(?:_[a-z]{2})?")
     edition_dir = (ROOT / f"{edition}-cards-{version}-{language}").resolve()
     if not edition_dir.is_relative_to(ROOT.resolve()):
         raise ValueError("Resolved edition directory escapes output root")
+    return edition_dir
+
+
+def _validate_suit(suit: dict[str, Any]) -> None:
+    if not isinstance(suit, dict):
+        raise ValueError("Invalid suit: expected a mapping")
+    if "name" not in suit:
+        raise ValueError("Missing required field: 'suit.name'")
+    if "cards" not in suit:
+        raise ValueError("Missing required field: 'suit.cards'")
+    if not isinstance(suit["name"], str):
+        raise ValueError("Invalid suit.name: expected a string")
+    if not isinstance(suit["cards"], list):
+        raise ValueError("Invalid suit.cards: expected a list")
+
+
+def _scaffold_suit(suit: dict[str, Any], edition_dir: Path) -> None:
+    _validate_suit(suit)
+    suit_name = safe_component(extract_suit_folder_name(suit["name"]), "suit.name", r"[a-z0-9&_-]+")
+    suit_dir = edition_dir / suit_name
+    for card in suit["cards"]:
+        _scaffold_card(card, suit_dir)
+
+
+def scaffold_cards(data: dict[str, Any]) -> None:
+    _validate_meta(data)
+    edition_dir = _build_edition_dir(data["meta"])
 
     if "suits" not in data:
         raise ValueError("Missing required section: 'suits'")
-
     suits = data["suits"]
     if not isinstance(suits, list):
         raise ValueError("Invalid suits: expected a list")
 
     for suit in suits:
-        if not isinstance(suit, dict):
-            raise ValueError("Invalid suit: expected a mapping")
-        if "name" not in suit:
-            raise ValueError("Missing required field: 'suit.name'")
-        if "cards" not in suit:
-            raise ValueError("Missing required field: 'suit.cards'")
-
-        if not isinstance(suit["name"], str):
-            raise ValueError("Invalid suit.name: expected a string")
-        suit_name = safe_component(extract_suit_folder_name(suit["name"]), "suit.name", r"[a-z0-9&_-]+")
-        suit_dir = edition_dir / suit_name
-        if not isinstance(suit["cards"], list):
-            raise ValueError("Invalid suit.cards: expected a list")
-        for card in suit["cards"]:
-            _scaffold_card(card, suit_dir)
+        _scaffold_suit(suit, edition_dir)
 
 
 def main() -> None:
