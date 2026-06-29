@@ -97,6 +97,8 @@ def main() -> None:
     try:
         cards_yaml_path = Path(sys.argv[1])
         data = yaml.safe_load(cards_yaml_path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            raise ValueError("Invalid cards YAML: expected a mapping at the document root")
         scaffold_cards(data)
         print("Done. The card folders have been created.")
     except FileNotFoundError:
