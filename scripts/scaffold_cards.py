@@ -69,7 +69,7 @@ def scaffold_cards(data: dict[str, Any]) -> None:
 
     edition = safe_component(meta["edition"], "meta.edition", r"[a-z0-9][a-z0-9_-]*")
     version = safe_component(str(meta["version"]), "meta.version", r"[0-9]+(?:\.[0-9]+)*")
-    language = safe_component(meta["language"].lower(), "meta.language", r"[a-z]{2}(?:_[a-z]{2})?")
+    language = safe_component(str(meta["language"]).lower(), "meta.language", r"[a-z]{2}(?:_[a-z]{2})?")
     edition_dir = (ROOT / f"{edition}-cards-{version}-{language}").resolve()
     if not edition_dir.is_relative_to(ROOT.resolve()):
         raise ValueError("Resolved edition directory escapes output root")
