@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any
 
 EXPLANATION_TEMPLATE = """\
-## Scenario: <name>'s ... scenario
+## Scenario: `<name>`'s ... scenario
 
 ### Example
 
