@@ -79,7 +79,13 @@ def scaffold_cards(data: dict[str, Any]) -> None:
     if "suits" not in data:
         raise ValueError("Missing required section: 'suits'")
 
-    for suit in data["suits"]:
+    suits = data["suits"]
+    if not isinstance(suits, list):
+        raise ValueError("Invalid suits: expected a list")
+
+    for suit in suits:
+        if not isinstance(suit, dict):
+            raise ValueError("Invalid suit: expected a mapping")
         if "name" not in suit:
             raise ValueError("Missing required field: 'suit.name'")
         if "cards" not in suit:
