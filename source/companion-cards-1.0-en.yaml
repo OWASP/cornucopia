@@ -23,7 +23,7 @@ suits:
     id: LLM4
     value: 4
     url: https://cornucopia.owasp.org/cards/LLM4
-    desc: David can cause the model to disclose sensitive information from its training data, system prompts, configuration, services or other users' context due to insufficient output filtering or prompt leakage
+    desc: David can cause the model to disclose sensitive information from its training data, system prompts, configuration, services or other users' context due to insufficient input and/or output filtering or prompt leakage
   -
     id: LLM5
     value: 5
