@@ -9,7 +9,7 @@
     import { readLang, readTranslation } from '$lib/stores/stores';
     import type { Suit } from "../../domain/suit/suit.js";
     import { SvelteMap } from 'svelte/reactivity';
-    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION } from "$lib/services/deckServiceConsts";
+    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION, VERSION_EOP } from "$lib/services/deckServiceConsts";
 
     interface Props {
         data: PageData;
@@ -40,6 +40,11 @@
         return langSuits || suits?.get(`${VERSION_COMPANION}-en`) as Suit[];
     });
 
+    let eopSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_EOP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_EOP}-en`) as Suit[];
+    });
+
     let version : string = $state(VERSION_WEBAPP);
     let _suit : string;
     let card : Card = $derived(cards?.get('VE2') as Card);
@@ -68,6 +73,11 @@
         {
             if (companionSuits !== undefined && typeof companionSuits[i] !== 'undefined') map.set(companionSuits[i]?.name,expand);
         }
+
+        for(let i = 0 ; i < eopSuits?.length ; i++)
+        {
+            if (eopSuits !== undefined && typeof eopSuits[i] !== 'undefined') map.set(eopSuits[i]?.name,expand);
+        }
     }
 
     function toggle(suit : string)
@@ -91,6 +101,9 @@
         
         if(version == VERSION_COMPANION)
         card = cards?.get('AAI2') as Card;
+
+        if(version == VERSION_EOP)
+        card = cards?.get('SP2') as Card;
     }
 
 
@@ -120,6 +133,7 @@
     <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
     <button title="OWASP Cornucopia {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
     <button title="OWASP Cornucopia {$t('cards.button.3')}" class:button-selected={version == VERSION_COMPANION} onclick={()=>changeVersion(VERSION_COMPANION)}>{$t('cards.button.3')}</button>
+    <button title="OWASP Cornucopia {$t('cards.button.4')}" class:button-selected={version == VERSION_EOP} onclick={()=>changeVersion(VERSION_EOP)}>{$t('cards.button.4')}</button>
 </p>
 </section>
 <div class="script">
@@ -148,6 +162,13 @@
     <p class="text">
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('cards.p4')}
+    </p>
+    {/if}
+    {#if version == VERSION_EOP}
+    <h2 title="OWASP Cornucopia {$t('cards.h2.4')}">{$t('cards.h2.4')}</h2>
+    <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('cards.p5')}
     </p>
     {/if}
     <div class="container">
@@ -184,6 +205,20 @@
 
             {#if version == VERSION_COMPANION}
                 {#each companionSuits as suit (suit.name)}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card (card)}
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                            <a title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_EOP}
+                {#each eopSuits as suit (suit.name)}
                     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
                     <h3 title="OWASP Cornucopia {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
                     {#if map?.get(suit.name)}
@@ -260,7 +295,28 @@
                 {/each}
                 </div>
             {/each}
-        </div>-
+        </div>
+    </div>
+    <div class="">
+        <div>
+            <h2 title="OWASP Cornucopia {$t('cards.h2.4')}">{$t('cards.h2.4')}</h2>
+            <p class="text">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html $t('cards.p5')}
+            </p>
+            {#each eopSuits as suit (suit.name)}
+                <label for="{suit.name + '-eop'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-eop'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card (card)}
+                    <p>
+                        <a title="OWASP Cornucopia card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>
+    </div>
 </noscript>
 </div>
 <style>
