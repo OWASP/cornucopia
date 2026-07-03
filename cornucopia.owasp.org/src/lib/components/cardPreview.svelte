@@ -1,9 +1,17 @@
 <script lang="ts">
+    import type { Component } from "svelte";
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import CompanionCardMapping from "./companionCardMapping.svelte";
-    
+    import EopCardMapping from "./eopCardMapping.svelte";
+
+    const mappingComponents: Record<string, Component<any>> = {
+        mobileapp: MobileAppCardMapping,
+        companion: CompanionCardMapping,
+        eop: EopCardMapping
+    };
+
     interface Props {
         card?: Card;
         mapping: Record<string, unknown>;
@@ -12,6 +20,7 @@
 
     let { card = $bindable(), mapping, style = '' }: Props = $props();
     let previewStyle = $derived(style ? ' ' + style : '');
+    let MappingComponent = $derived(mappingComponents[card?.edition ?? '']);
 
     function getSuitColor(suit : string, id: string)
     {
@@ -57,11 +66,8 @@
         {#if mapping}
         <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text {getRoyalTextColor(card?.suit, card?.suitId, card?.value)}">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card?.desc}</p>
-            {#if card?.edition == 'mobileapp'}
-                <MobileAppCardMapping {mapping}  {style}></MobileAppCardMapping>
-            {/if}
-            {#if card?.edition == 'companion'}
-                <CompanionCardMapping {mapping} {style}></CompanionCardMapping>
+            {#if MappingComponent}
+                <MappingComponent {mapping} {style}></MappingComponent>
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
         <span class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</span>
