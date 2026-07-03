@@ -58,6 +58,12 @@
         "2": "Attacks"
       }
     },
+    "eopCardTaxonomy": {
+      "h1": {
+        "1": "Mappings",
+        "2": "Attacks"
+      }
+    },
     "MASVSOverview": {
       "p1": "No suitable mappings were found."
     },
