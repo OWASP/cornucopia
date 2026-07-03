@@ -286,6 +286,14 @@
     .social-engineering {
         background-color: #dbdbdb;
     }
+    .spoofing,
+    .tampering,
+    .repudiation,
+    .information-disclosure,
+    .denial-of-service,
+    .elevation-of-privilege {
+        background-color: #dbdbdb;
+    }
 
     .agentic-ai-text {
         color: #3b2c42;
@@ -308,6 +316,14 @@
     .social-engineering-text {
         color: #dbdbdb;
     }
+    .spoofing-text,
+    .tampering-text,
+    .repudiation-text,
+    .information-disclosure-text,
+    .denial-of-service-text,
+    .elevation-of-privilege-text {
+        color: #dbdbdb;
+    }
 
     .agentic-ai-royal {
         background-color: #3b2c4280;
@@ -328,6 +344,14 @@
         background-color: #a1376380;
     }
     .social-engineering-royal {
+        background-color: #e8e8e8;
+    }
+    .spoofing-royal,
+    .tampering-royal,
+    .repudiation-royal,
+    .information-disclosure-royal,
+    .denial-of-service-royal,
+    .elevation-of-privilege-royal {
         background-color: #e8e8e8;
     }
 

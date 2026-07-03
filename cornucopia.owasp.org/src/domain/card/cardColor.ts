@@ -24,5 +24,12 @@ export const cardColor = new Map<string,string>([
     ["frontend", "frontend"],
     ["large-language-models", "large-language-models"],
     ["social-engineering", "social-engineering"],
+    // EoP cards
+    ["spoofing", "spoofing"],
+    ["tampering", "tampering"],
+    ["repudiation", "repudiation"],
+    ["information-disclosure", "information-disclosure"],
+    ["denial-of-service", "denial-of-service"],
+    ["elevation-of-privilege", "elevation-of-privilege"],
 
 ])
