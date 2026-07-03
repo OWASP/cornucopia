@@ -29,7 +29,13 @@ export const load = (async ({ params }) => {
     lang
   );
 
-  const cards = new Map([...mobileCards, ...webappCards, ...companionCards]);
+  const eopCards = deckService.getCardDataForEditionVersionLang(
+    "eop",
+    DeckService.getLatestVersion("eop"),
+    lang
+  );
+
+  const cards = new Map([...mobileCards, ...webappCards, ...companionCards, ...eopCards]);
   const decks = new Map([["en", cards]]);
 
   const fixedCode = legacyCardCodeFix(params.card?.toUpperCase() || "");
