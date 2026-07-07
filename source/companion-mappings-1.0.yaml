@@ -21,7 +21,7 @@ suits:
     cia: [ A ]
     cia_print: [ "Availability" ]
     owasp_aisvs: [ 3.2.1, 3.2.2, 3.2.3, 7.1.1, 7.1.2, 7.3.3 ]
-    owasp_aisvs_print: [ 3.2.1-3, 7.1.1-2, 7.3.3  ]
+    owasp_aisvs_print: [ 3.2.1-3, 7.1.1-2, 7.3.3 ]
     owasp_aitg: [ INF-02 ]
     mitre_atlas: [ AML.T0029, AML.T0034 ]
     mitre_atlas_print: [ "AML.T0029: Denial of ML Service", "AML.T0034: Cost Harvesting" ]
