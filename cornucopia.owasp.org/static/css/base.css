@@ -1,4 +1,40 @@
 /* This file contains all base styling and CSS variables */
+
+@font-face {
+  font-family: "Segoe";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Segoe"), url("/fonts/segoe.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe Light";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Segoe"), url("/fonts/segoe-light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Segoe"), url("/fonts/segoe-ui.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe Condensed";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Segoe Condensed"), url("/fonts/segoe-condensed.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe Condensed";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Segoe Condensed"), url("/fonts/segoe-condensed-bold.woff") format("woff");
+}
+
 :root {
   --accent: #61b6e6;
   --background: #1f2937;
