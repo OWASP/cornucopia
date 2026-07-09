@@ -85,7 +85,7 @@
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   {#if Taxonomy}
-  <Taxonomy {card} {mappingData} {routes} {capecData} {asvsVersion}></Taxonomy>
+  <svelte:component this={Taxonomy} {card} {mappingData} {routes} {capecData} {asvsVersion} />
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>
