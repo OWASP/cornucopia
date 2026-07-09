@@ -46,6 +46,29 @@ defmodule Copi.CardMigration do
   end
 
 
+  def update_card_urls(path) do
+    case YamlElixir.read_from_file(path) do
+      {:ok, cards} ->
+        edition = cards["meta"]["edition"]
+        language = cards["meta"]["language"]
+        version = cards["meta"]["version"]
+        for suit <- cards["suits"] do
+          for card <- suit["cards"] do
+            if Map.has_key?(card, "url") do
+              value = to_string(card["value"])
+              existing_card = Repo.get_by(Card, category: suit["name"], value: value, edition: edition, language: language, version: version)
+
+              if existing_card do
+                existing_card
+                |> Ecto.Changeset.change(url: card["url"])
+                |> Repo.update!()
+              end
+            end
+          end
+        end
+    end
+  end
+
   defp map_cards(path) do
     case YamlElixir.read_from_file(path) do
       {:ok, cards} ->
