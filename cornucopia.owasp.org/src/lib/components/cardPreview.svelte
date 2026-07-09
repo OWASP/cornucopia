@@ -82,7 +82,7 @@
         <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text {getRoyalTextColor(card?.suit, card?.suitId, card?.value)}">{card?.card ?? card?.value}</span>
         <p class="property-card-description{previewStyle}">{card?.desc}</p>
             {#if MappingComponent}
-                <MappingComponent {mapping} {style}></MappingComponent>
+                <svelte:component this={MappingComponent} {mapping} {style} />
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
         <span class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</span>
