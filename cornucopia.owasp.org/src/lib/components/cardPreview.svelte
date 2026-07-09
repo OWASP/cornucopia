@@ -449,6 +449,7 @@
     }
 
     .card-render.eop .left-value {
+      box-sizing: border-box; /* fixes the double height issue of card number box */
       flex: none;
       position: relative;
       top: clamp(36px, 3.6vw, 48px);
