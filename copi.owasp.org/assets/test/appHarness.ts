@@ -15,15 +15,18 @@ const state = vi.hoisted(() => {
     instance: { connect: ReturnType<typeof vi.fn> };
   }> = [];
 
-  const liveSocket = vi.fn((url: string, socket: unknown, config: Record<string, unknown>) => {
-    const instance = { connect: vi.fn() };
-    liveSocketInstances.push({ url, socket, config, instance });
-    return instance;
-  });
+  class LiveSocket {
+    connect: ReturnType<typeof vi.fn>;
+
+    constructor(url: string, socket: unknown, config: Record<string, unknown>) {
+      this.connect = vi.fn();
+      liveSocketInstances.push({ url, socket, config, instance: this });
+    }
+  }
 
   class Socket {}
 
-  return { topbar, dragula, liveSocket, liveSocketInstances, Socket };
+  return { topbar, dragula, liveSocket: LiveSocket, liveSocketInstances, Socket };
 });
 
 vi.mock('phoenix_html', () => ({}));
@@ -35,6 +38,11 @@ vi.mock('phoenix_live_view', () => ({ LiveSocket: state.liveSocket }));
 export { state };
 
 export async function loadApp(body = '', csrf = 'test-csrf') {
+  state.topbar.config.mockClear();
+  state.topbar.show.mockClear();
+  state.topbar.hide.mockClear();
+  state.dragula.mockClear();
+  state.liveSocketInstances.length = 0;
   document.head.innerHTML = `<meta name="csrf-token" content="${csrf}">`;
   document.body.innerHTML = body;
 
