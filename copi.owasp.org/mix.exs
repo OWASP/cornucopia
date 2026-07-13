@@ -87,6 +87,8 @@ defmodule Copi.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets node build.js"],
       "assets.build": ["tailwind copi", "cmd --cd assets node build.js"],
+      "assets.test": ["cmd --cd assets npm install", "cmd --cd assets npm test"],
+      "assets.coverage": ["cmd --cd assets npm install", "cmd --cd assets npm run coverage"],
       "assets.deploy": [
         "tailwind copi --minify",
         "cmd --cd assets npm install",
