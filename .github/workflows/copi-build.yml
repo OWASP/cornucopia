@@ -64,6 +64,12 @@
           run: |
             mix test --cover
             mix coveralls.cobertura
+        - name: Set up Node.js
+          uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+          with:
+            node-version: '22.12'
+            cache: 'npm'
+            cache-dependency-path: copi.owasp.org/assets/package-lock.json
         - name: Run frontend tests with coverage
           working-directory: copi.owasp.org
           run: mix assets.coverage
