@@ -17,6 +17,13 @@ defmodule CopiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_api do
+    plug :accepts, ["json"]
+    plug :fetch_session
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers, SecurityHeaders.browser_headers()
+  end
+
   scope "/", CopiWeb do
     pipe_through :browser
 
@@ -46,6 +53,13 @@ defmodule CopiWeb.Router do
     pipe_through :api
 
     put "/games/:game_id/players/:player_id/card", ApiController, :play_card
+  end
+
+  scope "/api", CopiWeb do
+    pipe_through :browser_api
+
+    put "/games/:game_id/players/:player_id/session", ApiController, :persist_player_session
+    delete "/games/:game_id/player-session", ApiController, :clear_player_session
   end
 
   # Health check endpoint for Fly.io - no pipeline needed for plain text response

@@ -8,9 +8,10 @@ defmodule CopiWeb.GameLive.Show do
   require Logger
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(params, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
-    {:ok, assign(socket, :client_ip, ip)}
+    resume_player_id = resume_player_id_for_game(session, params["game_id"])
+    {:ok, socket |> assign(:client_ip, ip) |> assign(:resume_player_id, resume_player_id)}
   end
 
   def on_mount(:default, _params, _session, socket) do
@@ -187,5 +188,18 @@ defmodule CopiWeb.GameLive.Show do
 
   defp game_module do
     Application.get_env(:copi, :game_live_show_game_module, Game) || Game
+  end
+
+  defp resume_player_id_for_game(session, game_id) do
+    case session["resume_player_session"] do
+      %{"game_id" => ^game_id, "player_id" => player_id} when is_binary(player_id) ->
+        case Ecto.ULID.cast(player_id) do
+          {:ok, valid_player_id} -> valid_player_id
+          :error -> nil
+        end
+
+      _ ->
+        nil
+    end
   end
 end

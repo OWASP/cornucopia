@@ -8,6 +8,9 @@ defmodule CopiWeb.Endpoint do
     store: :cookie,
     key: "_copi_key",
     signing_salt: "K7VwkdRe",
+    encryption_salt: "vJ7hQp2L",
+    http_only: true,
+    secure: Mix.env() == :prod,
     same_site: "Lax"
   ]
 

@@ -23,6 +23,50 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 import dragula from "../vendor/dragula"
 
+const ulidPattern = /^[0-9A-HJKMNP-TV-Z]{26}$/;
+
+const isValidUlid = (value) => typeof value === 'string' && ulidPattern.test(value);
+
+const updatePlayerSession = async ({ gameId, playerId, shouldPersist }) => {
+  if (!isValidUlid(gameId)) {
+    return;
+  }
+
+  if (shouldPersist && !isValidUlid(playerId)) {
+    return;
+  }
+
+  const csrfToken = document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
+
+  if (!csrfToken) {
+    return;
+  }
+
+  const url = shouldPersist
+    ? `/api/games/${gameId}/players/${playerId}/session`
+    : `/api/games/${gameId}/player-session`;
+
+  try {
+    await fetch(url, {
+      method: shouldPersist ? 'PUT' : 'DELETE',
+      headers: {
+        'X-CSRF-Token': csrfToken,
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      cache: 'no-store'
+    });
+  } catch (error) {
+    console.warn('Unable to update player session', error);
+  }
+};
+
+const syncPlayerSession = (el) => updatePlayerSession({
+  gameId: el?.dataset?.gameId,
+  playerId: el?.dataset?.playerId,
+  shouldPersist: el?.dataset?.storePlayerSession === 'true'
+});
+
 let Hooks = {}
 Hooks.DragDrop = {
   mounted() {
@@ -140,6 +184,16 @@ Hooks.CopyUrl = {
         checkMark.classList.remove("hidden");
       });
     });
+  }
+}
+
+Hooks.PersistPlayerSession = {
+  mounted() {
+    void syncPlayerSession(this.el);
+  },
+
+  updated() {
+    void syncPlayerSession(this.el);
   }
 }
 
