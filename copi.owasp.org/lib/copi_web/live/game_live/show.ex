@@ -128,26 +128,74 @@ defmodule CopiWeb.GameLive.Show do
          |> assign(:game, game)}
 
       true ->
-        # Valid player count (3+), proceed with game start
-        all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
-        players = game.players
-        player_count = length(players)
+        case start_game_transaction(game) do
+          {:ok, updated_game} ->
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
 
-        # Deal cards to players in round-robin fashion
-        all_cards
-        |> Enum.with_index()
-        |> Enum.each(fn {card, i} ->
-          Copi.Repo.insert!(%DealtCard{
-            card_id: card.id,
-            player_id: Enum.at(players, rem(i, player_count)).id
-          })
-        end)
+          {:error, :not_enough_players} ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Cannot start game: At least 3 players are required to start.")
+             |> assign(:game, game)}
 
-        # Update game with start time
-        {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-        {:noreply, assign(socket, :game, updated_game)}
+          {:error, :already_started} ->
+            {:noreply, socket}
+
+          {:error, reason} ->
+            Logger.error("Unable to start game #{game.id}: #{inspect(reason)}")
+
+            {:noreply,
+             socket
+             |> put_flash(:error, "Unable to start game. Please try again.")
+             |> assign(:game, game)}
+        end
     end
+  end
+
+  defp start_game_transaction(game) do
+    Copi.Repo.transaction(fn ->
+      locked_game =
+        Copi.Repo.get!(Game, game.id, lock: "FOR UPDATE")
+        |> Copi.Repo.preload(:players)
+
+      cond do
+        locked_game.started_at ->
+          Copi.Repo.rollback(:already_started)
+
+        length(locked_game.players) < 3 ->
+          Copi.Repo.rollback(:not_enough_players)
+
+        true ->
+          all_cards =
+            Copi.Cornucopia.list_cards_shuffled(
+              locked_game.edition,
+              locked_game.suits,
+              latest_version(locked_game.edition)
+            )
+
+          player_count = length(locked_game.players)
+
+          all_cards
+          |> Enum.with_index()
+          |> Enum.each(fn {card, i} ->
+            case Copi.Repo.insert(%DealtCard{
+                   card_id: card.id,
+                   player_id: Enum.at(locked_game.players, rem(i, player_count)).id
+                 }) do
+              {:ok, _dealt_card} -> :ok
+              {:error, changeset} -> Copi.Repo.rollback({:card_dealing_failed, changeset})
+            end
+          end)
+
+          case Copi.Cornucopia.update_game(locked_game, %{
+                 started_at: DateTime.truncate(DateTime.utc_now(), :second)
+               }) do
+            {:ok, updated_game} -> updated_game
+            {:error, changeset} -> Copi.Repo.rollback({:game_update_failed, changeset})
+          end
+      end
+    end)
   end
 
   def topic(game_id) do
