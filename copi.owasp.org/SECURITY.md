@@ -197,7 +197,7 @@ An attacker can deny access to user's by CAPEC 212, functionality misuse by cont
 
 The current rate-limiting design is easy to evade in common proxy or multi-instance deployments. The rate limiting trusts the left-most X-Forwarded-For value and explicitly skips connection limiting when only remote_ip is available. The counters are kept in the in-memory GenServer. That means spoofed forwarded headers, multiple app nodes, or proxy/header misconfiguration can let an attacker bypass the main abuse-control mechanism. We are more than happy to get suggestions for how to improve the rate-limiting. Currently we are not seeing a lot of issues concerning the misuse of our services in production.
 
-The Fly.io reverse proxy does not strip or rewrite untrusted X-Forwarded-For headers before traffic reaches Phoenix. It is therefor still possible to circumvent the rate-limiter. 
+The Fly.io reverse proxy does not strip or rewrite untrusted X-Forwarded-For headers before traffic reaches Phoenix. It is therefore still possible to circumvent the rate-limiter.
 
 #### What are we going to do about it?
 
