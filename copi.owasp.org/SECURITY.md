@@ -164,7 +164,7 @@ An attacker could use various tools for capturing logs or http requests which ma
 
 Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open us up to more threats. We could indeed mitigate those threats, but we would rather remain privacy-friendly and process as little personal information as possible.
 
-Game integrity is still enforceable only by client behavior in a few important paths. During the game, the app only checks that a voted card belongs to the same game before inserting a vote, so a crafted client can self-vote because there is no server-side owner check. The app separately creates the votes table without a uniqueness constraint, and dealt cards stores played_in_round without any DB-level rule that limits a player to one card per round. A malicious or racing client can therefore duplicate votes or play multiple cards in the same round.
+Game integrity is still enforceable only by client behavior in a few important paths. During the game, the app only checks that a voted card belongs to the same game before inserting a vote, so a crafted client can self-vote because there is no server-side owner check. The app separately creates the votes table without a uniqueness constraint, and the dealt_cards table stores played_in_round without any DB-level rule that limits a player to one card per round. A malicious or racing client can therefore duplicate votes or play multiple cards in the same round.
 
 #### What are we going to do about it?
 
