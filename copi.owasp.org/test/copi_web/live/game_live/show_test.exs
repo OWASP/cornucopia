@@ -244,6 +244,19 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert html =~ finished_game.name
     end
 
+    test "shows a resume player link when the encrypted session points at this game", %{conn: conn, game: game} do
+      {:ok, player} = Cornucopia.create_player(%{name: "Player Resume", game_id: game.id})
+
+      conn =
+        conn
+        |> init_test_session(%{"resume_player_session" => %{"game_id" => game.id, "player_id" => player.id}})
+
+      {:ok, _view, html} = live(conn, "/games/#{game.id}")
+
+      assert html =~ "Resume your player session from this browser session."
+      assert html =~ "/games/#{game.id}/players/#{player.id}"
+    end
+
     test "handle_info with non-matching topic is no-op", %{conn: conn, game: game} do
       {:ok, show_live, _html} = live(conn, "/games/#{game.id}")
       {:ok, updated_game} = Cornucopia.Game.find(game.id)

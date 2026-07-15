@@ -225,4 +225,58 @@ defmodule CopiWeb.ApiControllerTest do
 
     assert json_response(conn, 422)["error"] == "Could not play card"
   end
+
+  test "persist_player_session stores a single encrypted resume pointer in the session", %{conn: conn, game: game, player: player} do
+    conn =
+      conn
+      |> init_test_session(%{})
+      |> put("/api/games/#{game.id}/players/#{player.id}/session", %{
+        "game_id" => game.id,
+        "player_id" => player.id
+      })
+
+    assert json_response(conn, 200)["ok"] == true
+    assert get_session(conn, "resume_player_session") == %{"game_id" => game.id, "player_id" => player.id}
+    assert get_resp_header(conn, "cache-control") == ["no-store"]
+  end
+
+  test "persist_player_session rejects malformed identifiers", %{conn: conn} do
+    conn =
+      conn
+      |> init_test_session(%{})
+      |> put("/api/games/bad/players/also-bad/session", %{
+        "game_id" => "bad",
+        "player_id" => "also-bad"
+      })
+
+    assert json_response(conn, 400)["error"] == "Invalid player session parameters"
+    assert get_session(conn, "resume_player_session") == nil
+  end
+
+  test "persist_player_session rejects cross-game player session writes", %{conn: conn, game: game} do
+    {:ok, other_game} = Cornucopia.create_game(%{name: "Another Game"})
+    {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: other_game.id})
+
+    conn =
+      conn
+      |> init_test_session(%{})
+      |> put("/api/games/#{game.id}/players/#{other_player.id}/session", %{
+        "game_id" => game.id,
+        "player_id" => other_player.id
+      })
+
+    assert json_response(conn, 403)["error"] == "Player does not belong to this game"
+    assert get_session(conn, "resume_player_session") == nil
+  end
+
+  test "clear_player_session removes the stored resume pointer for the matching game", %{conn: conn, game: game, player: player} do
+    conn =
+      conn
+      |> init_test_session(%{"resume_player_session" => %{"game_id" => game.id, "player_id" => player.id}})
+      |> delete("/api/games/#{game.id}/player-session")
+
+    assert json_response(conn, 200)["ok"] == true
+    assert get_session(conn, "resume_player_session") == nil
+    assert get_resp_header(conn, "cache-control") == ["no-store"]
+  end
 end

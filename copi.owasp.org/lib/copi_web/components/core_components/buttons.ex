@@ -12,7 +12,7 @@ defmodule CopiWeb.CoreComponents.Buttons do
       <.button>Send!</.button>
       <.button phx-click="go" class="ml-2">Send!</.button>
   """
-  attr :type, :string, default: nil
+  attr :type, :string, default: "button"
   attr :class, :string, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
 
@@ -33,7 +33,7 @@ defmodule CopiWeb.CoreComponents.Buttons do
     """
   end
 
-  attr :type, :string, default: nil
+  attr :type, :string, default: "button"
   attr :class, :string, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
   attr :disabled, :boolean, default: false

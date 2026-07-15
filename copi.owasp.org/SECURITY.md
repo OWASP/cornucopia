@@ -164,18 +164,25 @@ An attacker could use various tools for capturing logs or http requests which ma
 
 Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open us up to more threats. We could indeed mitigate those threats, but we would rather remain privacy-friendly and process as little personal information as possible.
 
+Game integrity is still enforceable only by client behavior in a few important paths. During the game, the app only checks that a voted card belongs to the same game before inserting a vote, so a crafted client can self-vote because there is no server-side owner check. The app separately creates the votes table without a uniqueness constraint, and the dealt_cards table stores played_in_round without any DB-level rule that limits a player to one card per round. A malicious or racing client can therefore duplicate votes or play multiple cards in the same round.
+
 #### What are we going to do about it?
 
 We are not working towards implementing authentication in Copi. Instead, we are utilizing magic links. Arguable this is not authentication, but it's worth noting that your threat model is not stored on copi.owasp.org, just your game and the cards you voted on. For a threat actor to be able to piece together this information and use it against you, given that he gets hold of the magic link, you would have to use your full name and add the URL to your project in the game name field when creating the game. We are working towards informing users that they should under no circumstances do this kind of thing, but even in the case that you still do. The cards themselves are too generic and don't contain the sensitive discussions that you had during your game.
 As a security measure, you can choose to run Copi on a private cluster
 You should avoid using your own name or the name of a company or project when creating players and games at copi.owasp.org. And remind others not to do so as well. Instead, use a pseudonym and a fake threat model name.
 
+There is a GitHub issue to resolve the voting integrity vulnerability (see:  https://github.com/OWASP/cornucopia/issues/2568). The damage is limited by the fact that most players during a game know each other and by having the url to the game being a random magic link.
+
 ## CR6: Romain can read and modify unencrypted data in memory or in transit (e.g., cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems.
 
 #### What can go wrong?
 
+Production database transport security is not safely configured by default. The DB SSL option is set at startup to either false or verify_none, and the app applies that value directly to the Repo. In other words, the current code path never enables verified TLS to Postgres by default. If the database is not strictly local/private, credentials and application data can be exposed or modified in transit.
 If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster.
 Erlang clustering does not happen over TLS by default. This may allow an attacker to launch an MTM attack and do RCE against your cluster. It may also allow an attacker to take over your database connection and both disclose sensitive information and compromise the integrity of the data sent between your database and Copi.
+
+Cookie and TLS hardening still depend on deployment discipline rather than being enforced by the app. The repo ships a fixed secret_key_base in config.exs, the session cookie is only marked secure during app start-up, and HTTPS enforcement is only documented, not enabled by default. If a staging or self-hosted deployment ever runs outside strict prod/TLS settings, session confidentiality and integrity may degrade quickly.
 
 #### What are we going to do about it?
 
@@ -188,9 +195,15 @@ OWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Pr
 
 An attacker can deny access to user's by CAPEC 212, functionality misuse by continuing to create an unlimited amount of games and players until the application stops responding.
 
+The current rate-limiting design is easy to evade in common proxy or multi-instance deployments. The rate limiting trusts the left-most X-Forwarded-For value and explicitly skips connection limiting when only remote_ip is available. The counters are kept in the in-memory GenServer. That means spoofed forwarded headers, multiple app nodes, or proxy/header misconfiguration can let an attacker bypass the main abuse-control mechanism. We are more than happy to get suggestions for how to improve the rate-limiting. Currently we are not seeing a lot of issues concerning the misuse of our services in production.
+
+The Fly.io reverse proxy does not strip or rewrite untrusted X-Forwarded-For headers before traffic reaches Phoenix. It is therefore still possible to circumvent the rate-limiter.
+
 #### What are we going to do about it?
 
 We are working on minimizing the probability of functionality misuse by implementing rate limiting on the creation of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself. It's vital that you limit the number of sockets the application accepts concurrently. On fly.io that is done in the following way: [fly.toml](https://github.com/OWASP/cornucopia/blob/fb9aae62531dde8db154729d0df4aa28a3400063/copi.owasp.org/fly.toml#L27) A 30 socket limit for Copi should allow you to handle 20.000 requests per min if you have 2 single cpu nodes Which we have tested against that setup.
+
+Use of Fly-Client-IP has been considered. We are looking into implementing this for Copi (see: https://github.com/OWASP/cornucopia/issues/3227).
 
 ### CK: Grant can utilize the application to deny service to some or all of its users
 
