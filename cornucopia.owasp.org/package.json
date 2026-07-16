@@ -31,7 +31,7 @@
 		"globals": "^17.7.0",
 		"serve": "^14.2.6",
 		"svelte": "^5.56.5",
-		"svelte-check": "^4.7.2",
+		"svelte-check": "^4.7.3",
 		"svelte-eslint-parser": "^1.8.0",
 		"svelte-sitemap": "^4.0.4",
 		"then-request": "^6.0.2",
