@@ -13,7 +13,7 @@ suits:
     id: "PC2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/PC2"
-    desc: "Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background"
+    desc: "Andrew can expose sensitive data through screenshots, screen recordings, or the app's auto-generated preview when it moves to the background"
   -
     id: "PC3"
     value: "3"
@@ -23,12 +23,12 @@ suits:
     id: "PC4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/PC4"
-    desc: "Kelly can expose sensitive data by taking advantage of the app's excessive permissions connected to the app's use of location, camera, microphone, storage, etc"
+    desc: "Kelly can expose sensitive data by taking advantage of excessive, unexplained, or unjustified permissions and entitlements for location, camera, microphone, storage, health data, etc"
   -
     id: "PC5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/PC5"
-    desc: "Jason can provoke memory leak or corruption because the app has cyclic dependencies, manages pointers inadequately, keeps an incorrect reference count, does not release shared resources or apply stack protection"
+    desc: "Jason can provoke memory leaks or corruption because the app manages memory or shared resources inadequately, or its native binaries omit compiler-provided protections"
   -
     id: "PC6"
     value: "6"
@@ -58,7 +58,7 @@ suits:
     id: "PCJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/PCJ"
-    desc: "Johan can modify or expose sensitive data by exploiting weaknesses in the SDK or third party libraries because updates to the app and platform are not enforced or do not patch known software vulnerabilities"
+    desc: "Johan can modify or expose sensitive data by exploiting outdated platforms, SDKs, or third-party dependencies because supported versions, trustworthy components, and security updates are not enforced"
   -
     id: "PCQ"
     value: "Q"
@@ -103,7 +103,7 @@ suits:
     id: "AA6"
     value: "6"
     url: "https://cornucopia.owasp.org/cards/AA6"
-    desc: "Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing"
+    desc: "Anant can perform sensitive operations without step-up or repeated authentication because authentication requirements do not respond to transaction risk or contextual changes"
   -
     id: "AA7"
     value: "7"
@@ -168,7 +168,7 @@ suits:
     id: "NS5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/NS5"
-    desc: "Kevin can read sensitive data mapped to user accounts or sessions by extracting data sent through third-party libraries and/or notifications sent between the app and embedded services (e.g. logs, notifications, backups, cache, local db)"
+    desc: "Kevin can read sensitive data mapped to user accounts or sessions by extracting data exposed through third-party libraries, notifications, backups, caches, local databases, or other embedded services"
   -
     id: "NS6"
     value: "6"
@@ -223,17 +223,17 @@ suits:
     id: "RS2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/RS2"
-    desc: "Sebastien can disclose sensitive data because the application is set up to log debug information at runtime"
+    desc: "Sebastien can disclose sensitive data or internal behavior because debug code, verbose diagnostics, test resources, or unsafe runtime logging remain in the production app"
   -
     id: "RS3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/RS3"
-    desc: "Tobias can disclose sensitive data by dumping debug symbols while the application is running"
+    desc: "Tobias can disclose sensitive data and implementation details because debug symbols and other non-production metadata remain available in the release"
   -
     id: "RS4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/RS4"
-    desc: "Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate"
+    desc: "Timur can replace or redistribute the production app because its signature, certificate, store origin, or packaged-code integrity is not properly verified"
   -
     id: "RS5"
     value: "5"
@@ -248,12 +248,12 @@ suits:
     id: "RS7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/RS7"
-    desc: "Erlend can compromise the app by running it in an emulator because the prevention against emulators are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Erlend can compromise the app by running it in an emulator, simulator, virtualized environment, or untrusted device because environment detection and attestation are absent or too weak"
   -
     id: "RS8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/RS8"
-    desc: "Carlos can reverse engineer the app because the anti-reverse engineering controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Carlos can reverse engineer the app with static analysis and decompilation tools because anti-analysis controls aren't strong enough for the app's risk and attacker model"
   -
     id: "RS9"
     value: "9"
