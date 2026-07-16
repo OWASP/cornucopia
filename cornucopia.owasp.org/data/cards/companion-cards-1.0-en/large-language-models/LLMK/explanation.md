@@ -25,5 +25,6 @@ For more things that can go wrong, see [OWASP Top 10 for LLM Applications and Mi
 - Provide shutdown or rollback paths when unsafe behavior of the AI system is observed, and ensure these mechanisms remain functional over time.
 - Define which AI decisions and agent actions require human approval so that runtime gates can enforce them, and define the system's behavior when approval is not provided in time.
 - Capture human-initiated oversight events so that override and mode-change actions are independently auditable and reconstructable.
+- Classify each plugin or extension action by reversibility (read-only, reversible, externally reversible, irreversible per AISVS C9.2.3) and let that class, not a per-prompt judgment, decide what runs unattended and what needs approval. Deleting invoices is irreversible and must route to human-in-the-loop, while read-only lookups can proceed (C9.2.4).
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.

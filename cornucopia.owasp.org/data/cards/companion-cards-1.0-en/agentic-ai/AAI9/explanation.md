@@ -32,5 +32,6 @@ Agents must operate under the same change-management controls applied to human a
 
 1. Restrict agent tool access to the minimum set required for the task. Agents performing monitoring or reporting tasks should not have write access to configuration or permission systems.
 2. Require explicit human approval for any agent action that modifies security-relevant configuration, permissions, or infrastructure state.
+3. Classify each configuration or permission action by reversibility (AISVS C9.2.3) and gate on it: read-only inspection can run unattended, while externally reversible or irreversible changes such as granting IAM roles require approval (C9.2.4). The reversibility class is declared on the action, not inferred by the agent at run time.
 
 For detailed advice on how to mitigate threats related to the card, see the [OWASP AISVS and OWASP AITG](#mapping 'OWASP AISVS and OWASP AITG tests requirements [internal]') IDs in the table below and correlate these with the IDs in the [OWASP AI Security Verification Standard](https://github.com/OWASP/AISVS/tree/main/1.0/en) and [OWASP AI Test Guide](https://github.com/OWASP/www-project-ai-testing-guide/tree/main/Document/content/tests) documentation.
