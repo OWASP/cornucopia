@@ -3,7 +3,7 @@ meta:
   edition: "mobileapp"
   component: "cards"
   language: "EN"
-  version: "1.1"
+  version: "2.0"
 suits:
 -
   id: "PC"
@@ -453,10 +453,10 @@ paragraphs:
     text: "No Card"
   -
     id: "Title"
-    text: "Mobile App Edition v1.1-EN"
+    text: "Mobile App Edition v2.0-EN"
   -
     id: "Title_full"
-    text: "OWASP® Cornucopia Mobile App Edition v1.1-EN"
+    text: "OWASP® Cornucopia Mobile App Edition v2.0-EN"
   -
     id: "T00010"
     text: "OWASP® Cornucopia is a mechanism to assist software development teams identify security requirements in Agile, conventional and formal development processes."
@@ -507,7 +507,7 @@ paragraphs:
     text: "The card deck (pack)"
   -
     id: "T00310"
-    text: "The card scenarios are meant to cover all the MASVS 2.0 requirements, all the tests from the MASTG and any additional guidelines from the Android and IOS secure coding guides. This was done in order to allow the game to be as aligned as possible with the latest guidelines for secure mobile development. Still, it's important to keep in mind that security guidelines and requirements are always in motion and that the game first of all should be used as a support when doing mobile application threat modeling and not as a complete guide into security requirements and guidelines."
+    text: "The card scenarios are meant to cover the MASVS 2.0 requirements, the legacy MASTG tests, the newer MASTG atomic tests and relevant MASWE weaknesses, together with additional guidance from the Android and iOS secure coding guides. The goal is to keep the deck aligned with current mobile security guidance while still using the game as a practical threat-modeling aid rather than a substitute for the source standards."
   -
     id: "T00311"
     text: "Cornucopia Mobile App Edition suits are based on the sections in the Mobile Application Security Verification Standard."
@@ -546,7 +546,7 @@ paragraphs:
     text: "The other driver for Mobile Cornucopia is to link the attacks with requirements and verification techniques."
   -
     id: "T00520"
-    text: "In addition to having the MASVS 2.0 requirement codes and MASTG test codes printed on them, the cards also links to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs."
+    text: "In addition to MASVS 2.0 requirement codes, legacy and atomic MASTG test codes, and MASWE references, the cards also link to CAPEC™ software attack pattern IDs which themselves are mapped to CWEs."
   -
     id: "T00530"
     text: "Each card is also mapped to the 36 primary security stories in the SAFECode document to help teams create their own security-related stories for use in Agile processes."
@@ -606,7 +606,7 @@ paragraphs:
     text: "This means the attacker, Wong, can log into the app without providing credentials because the login mechanism allows access when it fails."
   -
     id: "T01180"
-    text: "The attacks were primarily drawn from the MASVS 2.0 Mobile Application Testing guide and the Android and IOS secure coding guides"
+    text: "The attacks were primarily drawn from MASVS 2.0, the legacy and atomic MASTG tests, MASWE, and the Android and iOS secure coding guides"
   -
     id: "T01200"
     text: "Lookups between the attacks and the guides are provided on most cards:"
