@@ -91,6 +91,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Stephen de Vries
 - Colin Watson
 - Marysia Winkels
+- Mayur Agnihotri
 
 Additionally, Gerardo Canedo and student volunteers to [OWASP Threat Dragon](https://owasp.org/www-project-threat-dragon/ 'OWASP Threat Dragon [internal]') from the Universidad Católica del Uruguay ([UCU](https://www.ucu.edu.uy/ 'UCU [external]')) who took part in a Coding Challenge to provide integration between Cornucopia and Threat Dragon.
 
