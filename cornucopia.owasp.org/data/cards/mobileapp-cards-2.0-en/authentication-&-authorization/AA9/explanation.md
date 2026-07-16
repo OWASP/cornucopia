@@ -1,40 +1,32 @@
-## Scenario: Wong can bypass the authentication because it does not fail securely (i.e. it defaults to allowing unauthenticated access)
+## Scenario: Wong can bypass the authentication because it does not fail securely — it defaults to allowing unauthenticated access
 
-Wong discovers that the mobile application does not properly handle authentication failures. When authentication checks fail due to unexpected errors, network issues, or misconfigurations, the application defaults to granting access instead of denying it.
+Consider a scenario where Wong discovers that if the biometric hardware returns an error (sensor unavailable, too many failed attempts, or a thrown exception from the biometric API), the app's authentication flow catches the exception and falls through to a code path that sets `authState = AUTHENTICATED`. The authentication fails open: an error is treated as success.
 
-Instead of enforcing a strict “deny by default” principle, the system allows Wong to access protected resources when authentication validation cannot be completed successfully.
+1. Exceptions from the biometric or authentication API are caught without a secure fallback, and execution continues as if authentication succeeded.
+2. A boolean `authenticated` flag is initialized to `true` and only set to `false` on explicit failure — meaning any exception or early return leaves it `true`.
+3. Network-dependent authentication: if the server is unreachable, the app allows offline access rather than denying it.
 
 ### Example
 
-Wong attempts to access a restricted section of the app while offline. The app tries to validate his session token against a remote endpoint. Due to a timeout or exception in the authentication handler, the validation process fails.
-
-Rather than blocking access, the app assumes the session is valid and allows Wong into the application.
-
-In another case, an internal error in role validation causes the authorization logic to skip verification steps. Because the system does not explicitly deny access on failure, Wong gains unintended access to administrative functionality.
+Wong triggers a temporary hardware sensor error (by covering the fingerprint sensor and submitting multiple deliberate failures). The app's `authenticate()` function throws `AuthenticationException`. The catch block logs the exception and calls `proceed()`, which was the next line in the original non-exception flow. The authentication state is never explicitly set to "failed." The app opens. Wong is now authenticated as the device owner without presenting any valid credential. The developer's intention was graceful degradation. The result was an open door.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls under the Spoofing category of the STRIDE threat modeling framework.
+This scenario falls under **Spoofing**.
 
-By failing to enforce secure authentication checks and defaulting to permissive behavior during errors, the system enables Wong to gain unauthorized access.
+Wong impersonates an authenticated user by exploiting a fail-open authentication implementation. Any condition — hardware error, network timeout, exception — that causes the authentication check to be skipped results in unauthorised access.
 
 ### What can go wrong?
 
-If authentication or authorization logic fails open instead of failing closed:
-
-- Unauthenticated users may gain access to protected resources.
-- Privileged operations may become accessible without proper verification.
-- Sensitive data may be exposed.
-- Attackers may intentionally trigger error conditions to bypass security checks.
-
-Fail-open logic significantly weakens the security boundary of the application and can lead to data breaches.
+- Authentication errors or exceptions result in unauthenticated access to sensitive data.
+- Network-unreachable errors during remote authentication allow offline access that the policy intended to deny.
+- Race conditions between authentication state transitions result in a briefly unauthenticated window.
 
 ### What are we going to do about it?
 
-- Enforce a strict “deny by default” policy for all authentication and authorization checks.
-- Ensure that any exception, timeout, or validation failure results in access being denied.
-- Implement robust error handling that does not bypass security controls.
-- Add server-side validation to prevent client-side logic manipulation.
-- Include automated tests to verify that authentication failures always result in access denial.
+- Initialise all authentication state to "not authenticated" (fail-closed); only set it to "authenticated" on explicit, verifiable success.
+- In all exception handlers and fallback paths, set authentication state to "failed" and navigate to the login screen.
+- For cryptographic authentication: rely on the success of the cryptographic operation, not a boolean flag; if the decryption fails (e.g., key not unlocked), the data is not available — no flag manipulation can change this.
+- For remote authentication: if the server is unreachable and online authentication is required by policy, deny access rather than fall back to an offline mode that was not explicitly designed and reviewed.

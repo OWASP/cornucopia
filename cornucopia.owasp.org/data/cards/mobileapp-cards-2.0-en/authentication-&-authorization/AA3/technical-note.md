@@ -1,13 +1,24 @@
-One of the most important security principles is to ensure that a person or process only is given the minimum level of access rights (privileges) that is necessary for that person or process to complete an assigned operation. This right must be given only for the minimum amount of time that is necessary to complete the operation.
-This helps to limits the damage when a system is compromised by minimising the ability of an attacker to escalate privileges both laterally and vertically. In order to apply the principle of *least privilege* proper granularity of privileges and permissions should be established.
+## Platform-Aware Review Guidance
 
-It is vital that the application only uses the minimum number of entitlements or permissions in order to complete its functions. Therefore:
+**Android**
+- Audit all `<activity>`, `<service>`, `<receiver>`, `<provider>` elements: `android:exported="true"` without `android:permission` is a finding.
+- For custom permissions: verify the `<permission>` declaration is in the same manifest as the `android:permission` reference; use `protectionLevel="signature"`.
+- Verify no orphaned permissions: all `android:permission` values must reference a `<permission>` that will be installed alongside the protected app.
+- CVE-2019-2200 (Android < 10): race condition in custom permission claiming — ensure `minSdkVersion` is 29+, or document the risk.
+- `Binder.getCallingUid()` inside components: validate the calling package using `PackageManager.getNameForUid()`.
 
-- Verify that platform permissions are appropriately set, narrow enough and enforced by the app manifest. 
-- Ensure that all custom permissions that the app uses to protect components are also defined in its Manifest. 
-- Avoid using "normal" and "dangerous" `android:protectionLevel`.  
-- Be aware of custom orphaned permissions. Prefer using Signature Permissions wherever possible to mitigate the risk of dangling permission being used by malicious apps. You can use signature checks so when an app makes a request for another of your apps, the second app can verify that both apps are signed with the same certificate before complying with the request. 
-- Determine whether the WebView should have resource access. If resource access is necessary, you need to verify that it's implemented following best practices. 
-- Verify that the app mitigates the risk of sensitive data exfiltration and data tampering by preventing the user to influence how the WebView loads resources by altering the protocol, host, schema, path and name of the resource.
-- limit entitlements to the minimum required for your IOS application to function. 
-- Remove any unnecessary entitlements that your IOS app isn’t using.
+**iOS**
+- Review the `.entitlements` file for overly broad keychain access groups, App Group identifiers, and associated domains.
+- Use `com.apple.developer.associated-domains` only for domains you control.
+- Avoid broad `com.apple.security.application-groups` sharing unless multiple apps in the group are all trusted.
+- Entitlement values are verified by the App Store and on-device at install time; incorrect values cause launch failures.
+
+**Testing**
+- Use Drozer: `run app.activity.start --component com.target.app com.target.app.SensitiveActivity`
+- Check whether the activity/service/provider launches without triggering an authentication prompt.
+- Review the merged manifest for all exported components.
+
+**OWASP Mappings**
+- MASVS: AUTH-1, AUTH-3
+- MASTG: TEST-0024, TEST-0032, TEST-0069, TEST-0077
+- MASWE: (see MASVS references above)

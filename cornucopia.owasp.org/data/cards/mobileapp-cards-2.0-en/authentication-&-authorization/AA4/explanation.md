@@ -1,29 +1,32 @@
 ## Scenario: Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly
 
+Consider a scenario where Vandana is a security researcher testing a mobile banking app. She notices the biometric authentication uses `BiometricPrompt` but does not bind the authentication result to a cryptographic operation via a `CryptoObject`. Instead, the app simply reads a boolean `authSucceeded` flag from the callback and proceeds. Vandana hooks the callback with a dynamic instrumentation tool, forces the boolean to `true`, and authenticates as the account owner without presenting a finger or face.
+
+1. Biometric authentication that does not use a hardware-bound cryptographic operation can be bypassed by patching the result.
+2. Fallback authentication (PIN, pattern) weaker than the app's security requirement may allow biometric bypass via the fallback path.
+3. Incorrect biometric implementation may enrol the attacker's biometrics instead of requiring the user's existing biometrics.
+
 ### Example
 
-Vandana unlocks her mobile banking app using fingerprint authentication to quickly check her balance. The app treats this successful biometric check as valid for longer than it should and does not require re-authentication for sensitive actions.
-
-Later, Vandana hands her phone to a colleague to show a photo. While swiping around, the colleague accidentally switches back to the banking app — which is still unlocked. Without any additional biometric prompt, it is possible to view account details and initiate actions that should have required Vandana’s fingerprint again.
-
-What started as a quick balance check turns into an awkward conversation and a reminder that biometric authentication must be handled carefully.
+Vandana attaches Frida to the running app process. She hooks `BiometricPrompt.AuthenticationCallback.onAuthenticationSucceeded()` and injects a call with a fabricated `AuthenticationResult`. The app checks a boolean flag that the callback sets, finds it `true`, and opens the account. Vandana never presented a finger. The real account holder's biometrics were irrelevant, because they were never cryptographically verified — only confirmed by a flag in memory that anyone with instrumentation access could flip.
 
 ## Threat Modeling
 
 ### STRIDE
 
-The situation falls under the **Tampering** category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
+This scenario falls under **Spoofing**.
 
-An attacker can install the mobile app and observe how it interacts with platform security components such as the keystore or keychain. By abusing weaknesses in local authentication logic — such as misuse of `CryptoObject`, improper exception handling, or misconfiguration of hardware-backed keystores or keychains — the attacker can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
-
-This issue commonly arises when security-relevant decisions are enforced on the device using client-side controls that are implemented incorrectly or can be bypassed.
+Vandana impersonates the legitimate user by manipulating the authentication outcome in memory or through a logic bypass, without defeating the biometric hardware itself.
 
 ### What can go wrong?
 
-If biometric authentication or local validation logic can be bypassed or manipulated, attackers can tamper with application logic, bypass access controls, and perform actions that should only be allowed after successful user authentication.
+- Boolean-flag-based biometric gating is trivially bypassable with instrumentation tools on rooted/jailbroken devices.
+- Fallback PIN authentication, if weaker, becomes the effective security boundary.
+- Biometric changes (new fingerprint enrolled) are not detected, allowing a new person with device access to authenticate.
 
 ### What are we going to do about it?
 
-Ensure that biometric authentication is implemented correctly and securely. Platform security features such as hardware-backed keystores or keychains must be used as intended, including correct use of `CryptoObject` and proper exception handling.
-
-Biometric authentication must not be relied upon incorrectly for protecting sensitive actions. Use the OWASP Mobile Application Security Testing Guide (MASTG) to verify that biometric authentication, keystore usage, and related security controls are correctly implemented and tested.
+- Always bind biometric authentication to a cryptographic operation: use `BiometricPrompt.CryptoObject` on Android, wrapping a `Cipher` initialised with a hardware-backed key configured with `setUserAuthenticationRequired(true)`.
+- On iOS, use keys stored in the Secure Enclave with `kSecAccessControlBiometryCurrentSet` so that authentication is verified by hardware, not software.
+- Set `setInvalidatedByBiometricEnrollment(true)` so that enrolling a new biometric invalidates the key, requiring re-enrolment.
+- Do not rely solely on the boolean result of `onAuthenticationSucceeded`; rely on the ability to use the cryptographic key to decrypt or sign a challenge.

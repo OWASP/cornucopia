@@ -1,34 +1,32 @@
-## Scenario: Jie sign into Choi's mobile app undetected. 
- 
-Consider a scenario where Jie and Choi live together. Jie and Choi, like all couples, keep secrets from each other, like what they spend their money on. It is not our job to help Jie and Choi with their relationship issues, but it is our job to keep the secrets they store on their mobile phone confidential. We therefore need to help them by ensuring that they authenticate before accessing these secrets. 
- 
-There are various ways that Jie may get access to Choi's secrets. 
- 
-1. If Choi's mobile is left unattended and unlocked, Jie may be able to access his app secrets if the unlocked key is not used before opening Choi's mobile application. 
- 
-2. If Jie has been shoulder surfing when Choi used his mobile, he may know his pin. Even if Choi uses a different pin for his sensitive mobile apps that Jie doesn't have, given that Jie is a north korean spy and hacker, he could extract and decrypt Choi's data as long as the unlocked key not is used during sensitive operations like when decrypting local storage or when decrypting or signing a message before sending or receiving it from a remote endpoint. 
- 
-3. If Choi has left his phone unlocked then Jie could steal back the money that he paid Choi for the "Bob Dylan concert" if he isn't required to re-authenticate before transferring the money back to him. 
- 
+## Scenario: Jie can use the app to perform sensitive operations because the "unlocked key" is not used during the application flow
+
+Consider a scenario where Jie and Choi live together. Like all households, they keep some secrets — what they spend money on, which streaming services they are paying for, and whether they still owe each other for a certain concert ticket. It is not our job to referee their financial disagreements, but it is our job to ensure the app protects the data it stores.
+
+There are several ways Jie might access Choi's sensitive data:
+
+1. If Choi's phone is left unattended and unlocked, Jie can open the banking app and access sensitive data if the app does not require the unlocked key before displaying account information.
+2. If Jie knows Choi's device PIN (from shoulder-surfing), and the app's cryptographic keys are not bound to biometric or user-authentication events, Jie can access decrypted data without triggering a re-authentication prompt.
+3. If Choi leaves the app open in the background, Jie can resume it and perform sensitive operations (such as transferring funds) without re-authenticating, because the app does not require the unlocked key before confirming high-value actions.
+
 ### Example
- 
-Choi really wanted to pay his student loan, but he also really needed to go to the bathroom. Sadly, he forgot to lock his phone, leaving the screen bright and tempting on the table for Jie. Jie really would like to know whether it is true that Choi didn't have any money and therefore had to borrow them from him. As Jie opens Chois banking app, he is able to do so without using pin or biometrics, effectively bypassing authentication. There, clear as day, Jie finds all of Chois bank transactions and reads that Choi did have enough money, it's just that he really wanted to attend this really expensive Bob Dylan concert as well. Oh boy, is Choi going to hear it. 
- 
+
+Choi really needed to check his bank balance but also really needed to visit the bathroom. He left his phone unlocked on the table. Jie, deeply committed to investigating whether Choi actually went to a Bob Dylan concert instead of paying back a debt, opened the banking app. The app had no active session lock and performed no key-based authentication check on launch. Jie found not only the concert evidence but also the bank account details. Choi's next financial disclosure was involuntary.
+
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls under the **Spoofing** category of the STRIDE.
+This scenario falls under **Spoofing**.
 
-Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
+Jie is masquerading as Choi. By exploiting the absence of unlocked-key enforcement, the app fails to verify the true identity of the person interacting with it, allowing Jie to act with Choi's full privileges.
 
-### What can go wrong? 
- 
-If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 
- 
+### What can go wrong?
+
+If the unlocked key is not required for sensitive operations, the app may be vulnerable to local authentication bypass. This is exploitable by a partner with physical device access, a thief, or an attacker who can extract the keystore/keychain without triggering authentication. The result is a local data breach: private financial, medical, or personal information is exposed.
+
 ### What are we going to do about it?
- 
- - Make sure the unlocked key is used during sensitive operations by configuring the app with the required flags needed for enforcing authentication before using the keychain or key storage. 
- - Limit the amount of time for which the user has been authorized to use a certain key after the user has successfully authenticated. 
- - Confirm that the unlocked key is used before contextual state changes like when changing state from running in the background to running in the foreground. Alternatively enforce re-authentication against a remote endpoint. 
- - Confirm that the unlocked key is used before confirming sensitive operations within the app like when changing the user's email, password, pin or phone number. Alternatively enforce re-authentication against a remote endpoint. 
+
+- Configure cryptographic keys with `setUserAuthenticationRequired(true)` (Android) or `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly` with `biometryAny` or `biometryCurrentSet` access control (iOS) so they cannot be used without a fresh authentication event.
+- Use a time-limited authentication validity window (`setUserAuthenticationValidityDurationSeconds`) only for truly low-risk operations; set it to zero for decryption of sensitive data.
+- Enforce re-authentication when the app transitions from background to foreground during a sensitive session.
+- Require step-up authentication (re-authentication against a remote endpoint or a fresh biometric prompt) before confirming high-value operations such as fund transfers, email or password changes.

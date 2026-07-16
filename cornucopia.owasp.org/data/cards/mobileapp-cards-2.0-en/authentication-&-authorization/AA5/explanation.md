@@ -1,33 +1,32 @@
-## Scenario: Eiman bypasses local authentication using instrumentation tools
+## Scenario: Eiman can bypass local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded
 
-Consider Eiman, who is slightly impatient and thinks 4-digit PIN codes are a relic of the past. Why type 1-2-3-4 when you can just delete the code that asks for it? Eiman knows that the mobile app runs on his device, which means he controls the "physics" of that universe. If the app asks "Is the user authenticated?", Eiman can simply use tools to force the answer to be "Yes" without ever knowing the password.
+Consider a scenario where Eiman has obtained a jailbroken iOS device. She installs a Frida gadget in the target banking app, hooks the local authentication method, and replaces its return value with a success result. The app's authentication check is a simple function call `-> Bool`. The instrumented call returns `true`. The bank account is open. The biometric hardware was never consulted.
+
+1. Local authentication implemented as a software flag or conditional branch is bypassable by patching the binary or injecting at runtime.
+2. Hooking frameworks (Frida, Xposed, Substrate) allow method return values to be overridden at runtime on rooted/jailbroken devices.
+3. A modified APK/IPA with the authentication check removed can be re-distributed and installed by an attacker who has physical access to the device or can perform MITM on the update channel.
 
 ### Example
 
-Eiman downloads the popular "MySecretDiary" app to snoop on his sibling's secrets. The app is protected by a PIN screen. Instead of guessing the PIN, Eiman connects his phone to his computer and uses a dynamic instrumentation tool (like Frida). He identifies the function `checkPinAndUnlock()` in the app's code. He writes a tiny script that hooks into this function and forces it to always return `true`, regardless of what PIN is entered (or if one is entered at all). The app, trusting its own modified logic, unlocking the diary and revealing the secrets. Eiman didn't crack the password; he just convinced the app that he did.
+Eiman downloads the target app's IPA, re-signs it with her own certificate, removes the biometric check with a binary patcher, and installs it on her jailbroken device. She then restores the app's user data from a backup. The app opens without any authentication. Every stored credential and session token is accessible. Eiman submits the finding as a bug report. The developer's initial response is "that requires a jailbroken device," which is technically true and strategically insufficient for a banking app.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls under the **Tampering** category of STRIDE.
+This scenario falls under **Spoofing** and **Elevation of Privilege**.
 
-By modifying the application's runtime behavior or binary code (Tampering), Eiman bypasses the security controls, effectively leading to **Elevation of Privilege** and **Spoofing** (acting as the authenticated user).
+Eiman bypasses identity verification, allowing her to act as the legitimate user. By patching the authentication logic, she elevates her effective privilege to that of an authenticated user without presenting valid credentials.
 
 ### What can go wrong?
 
-**Client-Side Bypass:** If authentication logic runs entirely on the client-side (the phone) without server-side validation, an attacker can modify the app to skip these checks.
-
-**Feature Unlock:** Attackers might patch the app to unlock "Pro" features without paying.
-
-**Data Access:** If the app relies solely on a UI screen to block access to data (and doesn't encrypt the data with a key derived from the user's PIN/password), bypassing the UI exposes the data immediately.
+- Authentication logic implemented purely in software is bypassable with widely available instrumentation tools.
+- A patched app distributed to other users can bypass authentication for all of them.
+- Credentials, tokens, and private data stored by the app are accessible once local authentication is bypassed.
 
 ### What are we going to do about it?
 
-**Server-Side Validation:** Distinct sensitive operations should require a fresh session token or validation from the server, not just a "flag" in the app.
-
-**Root/Jailbreak Detection:** Implement checks to detect if the device environment is compromised or if tools like Frida are running (though these can also be bypassed, they raise the bar).
-
-**Code Obfuscation:** Use obfuscation to make it harder for Eiman to find the critical specific checks like `checkPinAndUnlock()` function in the first place.
-
-**Cryptography:** Ensure data is encrypted at rest using a key derived from the user's credential. If Eiman patches the auth check, he still won't have the key to decrypt the data.
+- Bind authentication to cryptographic operations backed by hardware-isolated key storage (Secure Enclave / StrongBox), so that bypassing the software check does not grant access to the cryptographic material needed to decrypt data.
+- Implement runtime integrity checks that detect hooking frameworks (Frida, Xposed) and respond by terminating the session or refusing to load sensitive keys.
+- Enforce re-authentication against a remote endpoint for high-value operations rather than relying solely on local checks.
+- Apply obfuscation to authentication-related code paths as a defence-in-depth measure, increasing the cost of static patching.

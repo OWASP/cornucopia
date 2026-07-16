@@ -1,23 +1,34 @@
-## Scenario: Abdullah can bypass authentication by altering the usual process sequence or flow, or by undertaking the process in incorrect order, or by manipulating date and time values used by the app, or by using valid features for unintended purposes
+## Scenario: Abdullah can bypass authentication by altering the usual process sequence or flow, by undertaking the process in incorrect order, by manipulating date and time values used by the app, or by using valid features for unintended purposes
 
-Consider Abdullah suspects his sibling Tim is secretly chatting late at night instead of studying. Determined to expose him to their parents, Abdullah attempts to access Tim’s chat app. Instead of using valid credentials, he bypasses authentication by manipulating the app’s logic and flow.
+Consider a scenario where Abdullah is probing a multi-step account-recovery flow. The flow is: step 1 — enter username; step 2 — answer security questions; step 3 — set new password; step 4 — confirmation. Abdullah skips step 2 by directly posting to step 3's endpoint. The server does not verify that step 2 was completed. Abdullah sets a new password for the account. He did not need to know the answers to the security questions; he needed to know the step order was not enforced.
+
+1. Multi-step flows that do not server-side validate completion of prior steps are vulnerable to step-skipping.
+2. Date and time manipulation (setting the device clock to the past) can bypass time-based token expiry or subscription checks.
+3. Valid features used for unintended purposes: a "remember me" token meant for a 30-day login being reused indefinitely because no server-side expiry is enforced.
 
 ### Example
-The app relies on client-side checks and assumes the authentication flow is followed correctly. Abdullah exploits this by modifying flags (e.g., `isLoggedIn = true`), triggering states out of sequence, manipulating time-based checks, and misusing valid features like deep links. Since there is no proper enforcement of authentication, he gains access to Tim’s chats.
 
+Abdullah finds the app stores a `step_completed` flag in `SharedPreferences` to track which authentication step is current. He modifies the flag to indicate step 2 is already done and navigates directly to step 3. The client-side state is trusted by the server. The server does not maintain its own session-state machine. Abdullah resets the account password without completing the identity verification step. The "multi-factor" account recovery turned out to be single-factor for attackers who could edit local storage.
 
 ## Threat Modeling
 
 ### STRIDE
-This scenario falls under the **Tampering** and **Information Disclosure** categories of STRIDE. Abdullah performs Tampering by modifying the application's user interface to bypass authentication, leading to Information Disclosure.
+
+This scenario falls under **Spoofing** and **Elevation of Privilege**.
+
+By bypassing or reordering authentication steps, Abdullah gains privileges he has not legitimately earned, impersonating a properly authenticated user.
 
 ### What can go wrong?
-* Sensitive data may get disclosed.
-* The user can lose access to services.
-* The user's identity can be stolen.
 
-### What are we going to do about it? 
-* **Do not rely only on local authentication frameworks:** Always perform a secondary check on the server-side.
-* **Enforce Android Confirmation:** Set `setConfirmationRequired` to `true` on Android to ensure user presence.
-* **Secure Keychain Access:** Verify that access control flags are properly configured for keychain items (iOS) or Keystore (Android).
-* **Configure Biometrics correctly:** Ensure biometric authentication is implemented according to the latest device documentation and security standards.
+- Account takeover via password reset without identity verification.
+- Session tokens granted before all required authentication factors are satisfied.
+- Time-based token expiry bypassed by device clock manipulation.
+- Business logic enforced client-side only can be skipped by an attacker who modifies local state.
+
+### What are we going to do about it?
+
+- Maintain all multi-step flow state server-side; the server must track which steps have been completed and reject requests for a later step if earlier steps are not verified.
+- Never trust client-side state (SharedPreferences, local flags, URL parameters) as proof that a step was completed.
+- Use server-generated, signed step-completion tokens; each step returns a signed assertion that the next step can verify server-side.
+- Validate date/time sensitive tokens against server time, not device time; reject tokens with excessive clock skew.
+- Apply least-privilege: grant only the capabilities appropriate to the authentication level achieved so far, not the final level.
