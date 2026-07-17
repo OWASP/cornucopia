@@ -24,6 +24,19 @@
   </.link>
 <% else %>
 
+  <div class="mb-4 flex flex-col items-start gap-2">
+    <.primary_button type="button" phx-click="share_hand">
+      <.icon name="hero-share" class="mr-2 h-5 w-5" />
+      Share your hand
+    </.primary_button>
+    <%= if @handoff_url do %>
+      <div class="w-full max-w-2xl">
+        <p class="text-sm text-gray-600">This single-use link expires in 5 minutes.</p>
+        <.copy_url_button uri={@handoff_url} />
+      </div>
+    <% end %>
+  </div>
+
   <%= if @game.started_at do %>
 
   <% first_card_played = Copi.Cornucopia.ordered_cards_played_in_round(@game, @game.rounds_played + 1) |> List.first %>

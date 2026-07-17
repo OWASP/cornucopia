@@ -242,6 +242,19 @@ defmodule CopiWeb.PlayerLiveTest do
   describe "Show" do
     setup [:create_player]
 
+    test "creates a single-use five-minute handoff link", %{conn: conn, player: player} do
+      {:ok, show_live, html} = live(conn, "/games/#{player.game_id}/players/#{player.id}")
+
+      assert html =~ "Share your hand"
+      refute html =~ "/player-handoffs/"
+
+      html = show_live |> element(~s{[phx-click="share_hand"]}) |> render_click()
+
+      assert html =~ "This single-use link expires in 5 minutes."
+      assert html =~ "/player-handoffs/"
+      assert has_element?(show_live, "#copy-url-btn")
+    end
+
     test "allows voting on other player's card", %{conn: conn, player: player} do
       # Setup another player and play a card
       game_id = player.game_id

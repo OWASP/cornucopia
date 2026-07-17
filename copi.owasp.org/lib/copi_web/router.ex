@@ -29,6 +29,8 @@ defmodule CopiWeb.Router do
 
     get "/", PageController, :home
 
+    get "/player-handoffs/:token", PlayerHandoffController, :redeem
+
     live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
 

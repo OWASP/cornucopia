@@ -8,6 +8,7 @@ defmodule CopiWeb.PlayerLive.Show do
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.DealtCard
+  alias CopiWeb.PlayerHandoff
   alias CopiWeb.PlayerSessions
   alias CopiWeb.Resilience
 
@@ -21,7 +22,8 @@ defmodule CopiWeb.PlayerLive.Show do
     {:ok,
      socket
      |> assign(:client_ip, ip)
-    |> assign(:player_sessions, session["resume_player_session"])}
+     |> assign(:player_sessions, session["resume_player_session"])
+     |> assign(:handoff_url, nil)}
   end
 
   @impl true
@@ -172,6 +174,14 @@ defmodule CopiWeb.PlayerLive.Show do
     CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
 
     {:noreply, assign(socket, :game, updated_game)}
+  end
+
+  @impl true
+  def handle_event("share_hand", _params, socket) do
+    token = PlayerHandoff.sign(socket.assigns.game.id, socket.assigns.player.id)
+    handoff_url = "#{socket.endpoint.url()}/player-handoffs/#{URI.encode(token)}"
+
+    {:noreply, assign(socket, :handoff_url, handoff_url)}
   end
 
   @impl true
