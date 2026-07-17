@@ -316,6 +316,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
 
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: game_id})
       Copi.Repo.update!(
         Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
       )
@@ -329,9 +330,8 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         })
 
       dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
-        player_id: player.id, card_id: card.id, played_in_round: 1
+        player_id: other_player.id, card_id: card.id, played_in_round: 1
       })
-
       {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
 
       render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
@@ -426,12 +426,22 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     end
 
     test "allows a player to vote on a card belonging to their own game", %{conn: conn} do
-      {game1, player1, dc1} = create_game_with_dealt_card("Auth Game Three", "AUTH_G3_C1")
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Three", "AUTH_G3_C1")
+      {:ok, card2} = Cornucopia.create_card(%{
+        category: "C", value: "AUTH_G3_C2", description: "D", edition: "webapp",
+        version: "3.0", external_id: "AUTH_G3_C2", language: "en", misc: "m",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game1.id})
+      dc2 = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: other_player.id, card_id: card2.id, played_in_round: 1
+      })
 
       {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
-      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc1.id)})
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc2.id)})
 
-      {:ok, refreshed_card} = DealtCard.find(dc1.id)
+      {:ok, refreshed_card} = DealtCard.find(dc2.id)
       assert Enum.any?(refreshed_card.votes, fn v -> v.player_id == player1.id end)
     end
 
