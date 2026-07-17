@@ -242,7 +242,7 @@ The Fly.io reverse proxy does not strip or rewrite untrusted X-Forwarded-For hea
 
 We are working on minimizing the probability of functionality misuse by implementing rate limiting on the creation of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself. It's vital that you limit the number of sockets the application accepts concurrently. On fly.io that is done in the following way: [fly.toml](https://github.com/OWASP/cornucopia/blob/fb9aae62531dde8db154729d0df4aa28a3400063/copi.owasp.org/fly.toml#L27) A 30 socket limit for Copi should allow you to handle 20.000 requests per min if you have 2 single cpu nodes Which we have tested against that setup.
 
-Use of Fly-Client-IP has been considered. We are looking into implementing this for Copi (see: https://github.com/OWASP/cornucopia/issues/3227).
+When Copi receives traffic directly from Fly Proxy, set `USE_FLY_CLIENT_IP=true`. [Fly.io documents `Fly-Client-IP`](https://fly.io/docs/networking/request-headers/#fly-client-ip) as the client IP address from Fly Proxy's perspective and says it may be a better choice than `X-Forwarded-For`, which must be treated with caution to avoid spoofing. Using it prevents Copi's rate limiter from trusting a client-controlled, left-most `X-Forwarded-For` value. If another reverse proxy is in front of Fly.io, `Fly-Client-IP` contains that proxy's address instead of the original client's address; in that deployment, parse `X-Forwarded-For` using an explicit trusted-proxy configuration.
 
 ### CK: Grant can utilize the application to deny service to some or all of its users
 
