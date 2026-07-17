@@ -185,7 +185,7 @@ defmodule CopiWeb.CoreComponents do
         <.input field={@form[:email]} label="Email"/>
         <.input field={@form[:username]} label="Username" />
         <:actions>
-          <.button>Save</.button>
+          <.button type="submit">Save</.button>
         </:actions>
       </.simple_form>
   """

@@ -100,18 +100,27 @@ defmodule Copi.IPHelper do
   # Private helpers
 
   defp get_forwarded_ip(conn) do
-    # Get X-Forwarded-For header (rightmost IP is most recent proxy, leftmost is original client)
-    case Plug.Conn.get_req_header(conn, "x-forwarded-for") do
-      [] -> nil
-      [forwarded | _] ->
-        # Take the first (leftmost) IP from the comma-separated list
-        forwarded
-        |> String.split(",")
-        |> List.first()
-        |> String.trim()
-        |> parse_ip_string()
-      _ -> nil
+    if fly_client_ip_enabled?() do
+      case Plug.Conn.get_req_header(conn, "fly-client-ip") do
+        [ip | _] -> parse_ip_string(String.trim(ip))
+        [] -> nil
+      end
+    else
+      case Plug.Conn.get_req_header(conn, "x-forwarded-for") do
+        [] -> nil
+        [forwarded | _] ->
+          forwarded
+          |> String.split(",")
+          |> List.first()
+          |> String.trim()
+          |> parse_ip_string()
+        _ -> nil
+      end
     end
+  end
+
+  defp fly_client_ip_enabled? do
+    System.get_env("USE_FLY_CLIENT_IP", "false") |> String.downcase() == "true"
   end
 
   defp parse_ip_string(ip_string) do
@@ -184,10 +193,15 @@ defmodule Copi.IPHelper do
         end
 
       map when is_map(map) ->
-        # connect_info may be a map for some sockets. Try to extract
-        # X-Forwarded-For from common locations, then peer_data.
         forwarded =
           cond do
+            fly_client_ip_enabled?() ->
+              headers = Map.get(map, :x_headers, [])
+              Enum.find_value(headers, fn
+                {"fly-client-ip", v} -> parse_ip_string(String.trim(v))
+                _ -> nil
+              end)
+
             headers = Map.get(map, :req_headers) -> get_forwarded_from_req_headers(headers)
             xh = Map.get(map, :x_headers) -> get_forwarded_from_x_headers(xh)
             true -> nil
@@ -245,32 +259,26 @@ defmodule Copi.IPHelper do
   end
 
   defp extract_first_ip_from_headers(value) do
+    target_header = if fly_client_ip_enabled?(), do: "fly-client-ip", else: "x-forwarded-for"
+
     cond do
       is_list(value) ->
-        # list of {k,v} tuples or list of strings
         Enum.find_value(value, fn
           {k, v} when is_binary(k) ->
-            case String.downcase(k) do
-              "x-forwarded-for" -> extract_first_ip(v)
-              _ -> nil
-            end
+            if String.downcase(k) == target_header, do: extract_first_ip(v), else: nil
           {k, v} when is_atom(k) ->
-            case Atom.to_string(k) |> String.downcase() do
-              "x-forwarded-for" -> extract_first_ip(v)
-              _ -> nil
-            end
+            if Atom.to_string(k) |> String.downcase() == target_header, do: extract_first_ip(v), else: nil
           v when is_binary(v) -> extract_first_ip(v)
           _ -> nil
         end)
 
       is_map(value) ->
-        case Map.get(value, "x-forwarded-for") || Map.get(value, :"x-forwarded-for") do
+        case Map.get(value, target_header) || Map.get(value, String.to_atom(target_header)) do
           nil -> nil
           v -> extract_first_ip(v)
         end
 
       is_binary(value) -> extract_first_ip(value)
-
       true -> nil
     end
   end

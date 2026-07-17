@@ -346,4 +346,44 @@ defmodule Copi.IPHelperTest do
       assert IPHelper.get_ip_from_socket(socket) == {127, 0, 0, 1}
     end
   end
+
+  describe "fly-client-ip header support" do
+    setup do
+      System.put_env("USE_FLY_CLIENT_IP", "true")
+      on_exit(fn -> System.delete_env("USE_FLY_CLIENT_IP") end)
+      conn = %Plug.Conn{}
+      {:ok, conn: conn}
+    end
+
+    test "extracts IP from fly-client-ip header when fly mode enabled", %{conn: conn} do
+      conn = Plug.Conn.put_req_header(conn, "fly-client-ip", "10.1.2.3")
+      assert IPHelper.get_ip_from_conn(conn) == {10, 1, 2, 3}
+    end
+
+    test "get_ip_source returns forwarded when fly-client-ip present", %{conn: conn} do
+      conn = Plug.Conn.put_req_header(conn, "fly-client-ip", "10.1.2.3")
+      assert IPHelper.get_ip_source(conn) == {:forwarded, {10, 1, 2, 3}}
+    end
+
+    test "falls back to remote_ip when fly-client-ip missing", %{conn: conn} do
+      conn = %{conn | remote_ip: {10, 0, 0, 1}}
+      assert IPHelper.get_ip_from_conn(conn) == {10, 0, 0, 1}
+    end
+
+    test "extracts fly-client-ip from socket x_headers when fly mode enabled" do
+      socket = %Phoenix.LiveView.Socket{
+        private: %{
+          connect_info: %{
+            x_headers: [{"fly-client-ip", "10.2.3.4"}]
+          }
+        }
+      }
+      assert IPHelper.get_ip_from_socket(socket) == {10, 2, 3, 4}
+    end
+
+    test "get_ip_from_connect_info extracts fly-client-ip from x_headers" do
+      info = %{x_headers: [{"fly-client-ip", "10.3.4.5"}]}
+      assert IPHelper.get_ip_from_connect_info(info) == {10, 3, 4, 5}
+    end
+  end
 end

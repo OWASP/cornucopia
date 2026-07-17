@@ -53,7 +53,7 @@ defmodule CopiWeb.GameLive.CreateGameForm do
         <% end %>
 
         <:actions>
-          <.primary_button phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
+          <.primary_button type="submit" phx-disable-with="Starting game..." class=""><%= gettext "Create the game" %></.primary_button>
         </:actions>
       </.simple_form>
     </div>

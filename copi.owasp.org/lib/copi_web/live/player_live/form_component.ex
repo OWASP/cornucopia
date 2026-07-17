@@ -38,7 +38,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
         </div>
 
         <:actions>
-          <.primary_button phx-disable-with="Joining..." class="m-auto block py-2 px-4">
+          <.primary_button type="submit" phx-disable-with="Joining..." class="m-auto block py-2 px-4">
             <%= gettext("Join game") %>
           </.primary_button>
         </:actions>

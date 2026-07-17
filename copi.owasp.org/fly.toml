@@ -16,12 +16,13 @@ kill_signal = 'SIGTERM'
 [env]
   PHX_HOST = 'copi.fly.dev'
   PORT = '8080'
-  RATE_LIMIT_GAME_CREATION_LIMIT = '30'
+  RATE_LIMIT_GAME_CREATION_LIMIT = '10'
   RATE_LIMIT_GAME_CREATION_WINDOW = '3600'
   RATE_LIMIT_PLAYER_CREATION_LIMIT = '60'
   RATE_LIMIT_PLAYER_CREATION_WINDOW = '3600'
   RATE_LIMIT_CONNECTION_LIMIT = '133'
   RATE_LIMIT_CONNECTION_WINDOW = '1'
+  USE_FLY_CLIENT_IP = true
 
 [http_service]
   internal_port = 8080
@@ -32,9 +33,9 @@ kill_signal = 'SIGTERM'
   processes = ['app']
 
   [[http_service.checks]]
-    grace_period = "180s"
-    interval    = "60s"
-    timeout     = "30s"
+    grace_period = "240s"
+    interval    = "300s"
+    timeout     = "90s"
     method      = "GET"
     path        = "/health"
 
