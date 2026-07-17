@@ -11,7 +11,8 @@ config :copi,
   ecto_repos: [Copi.Repo],
   generators: [timestamp_type: :utc_datetime],
   player_capability_cluster_enabled: false,
-  postgres_session_store_enabled: false
+  postgres_session_store_enabled: false,
+  session_ttl_seconds: 7 * 24 * 60 * 60
 
 config :copi, :resilience,
   retry_delay_ms: 750,

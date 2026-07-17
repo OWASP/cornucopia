@@ -10,7 +10,6 @@ defmodule CopiWeb.SessionStore do
   alias Copi.SessionRecord
 
   @postgres_session_id "postgres_session_id"
-  @session_lifetime_seconds 7 * 24 * 60 * 60
 
   @impl true
   def init(opts) do
@@ -60,7 +59,7 @@ defmodule CopiWeb.SessionStore do
   defp put_in_postgres(conn, session_id, session, cookie_opts) do
     session_id = session_id || new_session_id()
     now = DateTime.utc_now()
-    expires_at = DateTime.add(now, @session_lifetime_seconds, :second)
+    expires_at = DateTime.add(now, session_ttl_seconds(), :second)
     {:ok, data} = encrypt_database_session(session)
 
     Repo.insert!(
@@ -101,5 +100,9 @@ defmodule CopiWeb.SessionStore do
 
   defp postgres_enabled? do
     Application.get_env(:copi, :postgres_session_store_enabled, false)
+  end
+
+  defp session_ttl_seconds do
+    Application.fetch_env!(:copi, :session_ttl_seconds)
   end
 end

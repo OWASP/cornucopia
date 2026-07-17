@@ -8,6 +8,7 @@ defmodule CopiWeb.PostgresSessionIntegrationTest do
   alias Copi.PlayerCapabilityConsumption
   alias Copi.PlayerCapabilityRegistry
   alias Copi.Repo
+  alias Copi.SessionCleanup
   alias Copi.SessionRecord
   alias CopiWeb.PlayerCapability
 
@@ -83,6 +84,40 @@ defmodule CopiWeb.PostgresSessionIntegrationTest do
 
     assert Repo.aggregate(SessionRecord, :count) == 0
     assert Repo.aggregate(PlayerCapabilityConsumption, :count) == 0
+  end
+
+  test "startup cleanup removes expired PostgreSQL sessions and keeps active sessions" do
+    Application.put_env(:copi, :postgres_session_store_enabled, true)
+    now = DateTime.utc_now()
+
+    Repo.insert!(%SessionRecord{
+      id: "expired-session",
+      data: "expired",
+      expires_at: DateTime.add(now, -1, :second)
+    })
+
+    Repo.insert!(%SessionRecord{
+      id: "active-session",
+      data: "active",
+      expires_at: DateTime.add(now, Application.fetch_env!(:copi, :session_ttl_seconds), :second)
+    })
+
+    assert {:ok, 1} = SessionCleanup.run()
+    refute Repo.get(SessionRecord, "expired-session")
+    assert Repo.get(SessionRecord, "active-session")
+  end
+
+  test "startup cleanup leaves sessions alone when PostgreSQL session storage is disabled" do
+    Application.put_env(:copi, :postgres_session_store_enabled, false)
+
+    Repo.insert!(%SessionRecord{
+      id: "disabled-cleanup-session",
+      data: "expired",
+      expires_at: DateTime.add(DateTime.utc_now(), -1, :second)
+    })
+
+    assert :ok = SessionCleanup.run()
+    assert Repo.get(SessionRecord, "disabled-cleanup-session")
   end
 
   defp exchange_capability(conn, game_id, capability) do

@@ -1,7 +1,7 @@
 defmodule CopiWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :copi
 
-  @session_max_age 7 * 24 * 60 * 60
+  @session_max_age Application.compile_env!(:copi, :session_ttl_seconds)
 
   # The session will be stored in the cookie, encrypted, and signed.
   @session_options [
