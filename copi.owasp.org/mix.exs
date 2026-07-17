@@ -61,7 +61,7 @@ defmodule Copi.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.2"},
-      {:plug_cowboy, "~> 2.8.0"},
+      {:plug_cowboy, "~> 2.9.0"},
       {:ecto_ulid, "~> 0.3.0"},
       {:yaml_elixir, "~> 2.12.0"},
       {:slugify, "~> 1.3.1"},
@@ -87,6 +87,8 @@ defmodule Copi.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets node build.js"],
       "assets.build": ["tailwind copi", "cmd --cd assets node build.js"],
+      "assets.test": ["cmd --cd assets npm ci", "cmd --cd assets npm test"],
+      "assets.coverage": ["cmd --cd assets npm ci", "cmd --cd assets npm run coverage"],
       "assets.deploy": [
         "tailwind copi --minify",
         "cmd --cd assets npm install",
