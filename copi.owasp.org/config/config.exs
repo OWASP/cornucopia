@@ -9,7 +9,9 @@ import Config
 
 config :copi,
   ecto_repos: [Copi.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime],
+  player_capability_cluster_enabled: false,
+  postgres_session_store_enabled: false
 
 config :copi, :resilience,
   retry_delay_ms: 750,

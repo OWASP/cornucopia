@@ -124,6 +124,30 @@ The RateLimiter logs configuration on startup and warnings when limits are excee
 - Adjust rate limits based on legitimate usage patterns
 - Identify problematic IPs
 
+## Player Capabilities
+
+Anyone with a game link can watch that game. Watching does not require a player session.
+
+Player actions have a separate check. When a player is created, Copi signs a capability that contains the game ID, the player ID, and the `player` purpose. The capability expires after 5 minutes. The browser sends it in the body of a CSRF-protected POST request. The endpoint adds the player to the encrypted session cookie and returns the normal player URL without the capability.
+
+Each capability is intended for one exchange. Copi stores only a SHA-256 digest for 5 minutes. The check and update are one atomic operation in each replay store. The bearer value is not stored in a replay registry.
+
+By default, replay protection uses memory on one application node. When `DNS_CLUSTER_QUERY` enables Erlang clustering, each node first uses one globally registered registry. If it cannot reach that registry, it uses its local registry and synchronizes active digests after the connection returns. This keeps capability exchange available during a cluster outage, but the same capability may be accepted independently on both sides of a partition before synchronization. Synchronization cannot undo an exchange that already succeeded. In-memory entries are also lost when a node restarts.
+
+PostgreSQL storage can be enabled with `POSTGRES_SESSION_STORE_ENABLED=true`. In that mode, a unique database insert provides replay protection across all nodes that use the same database. PostgreSQL replay protection takes precedence over the local and clustered registries. If the database is unavailable, the exchange fails instead of falling back to memory.
+
+The player session lasts for up to 7 days. By default, it is stored in the signed and encrypted Phoenix session cookie. With PostgreSQL storage enabled, the cookie contains an opaque session ID protected by Phoenix cookie encryption, while session data written to the `copi_sessions` table is encrypted with `COPI_ENCRYPTION_KEY` using AES-256-GCM. `COPI_ENCRYPTION_KEY` is not used for browser cookie encryption or capability signing. One session can contain several player capabilities for the same game and for different games. Adding a player does not remove existing players. The cookie is HTTP-only, uses `SameSite=Lax`, and is marked secure in production.
+
+The game ID and player ID in the URL select the active player. Copi accepts the action only when that exact game and player pair is present in the cookie. A player ID from another stored game cannot be combined with the current game ID. Copi also checks that the card belongs to the selected player. Card play uses CSRF protection.
+
+A game link and a player capability are not interchangeable. A game link allows someone to watch a game. It does not allow that person to play a card as another player.
+
+The player capability is a bearer secret until it is exchanged or expires. Sending it in a POST body keeps it out of the address bar, browser history, referrer headers, and normal URL logs. The exchange response uses `Cache-Control: no-store`. Use HTTPS and make sure proxies and application monitoring do not log request bodies containing capabilities.
+
+Cluster mode improves replay protection while nodes are connected, but it is not a consensus or durable store. A network partition, global registry timeout, node restart, or cluster restart can allow reuse during the 5-minute capability lifetime. PostgreSQL mode avoids those replay gaps when every node uses the same available database, but it adds session availability and confidentiality dependence on PostgreSQL. Use verified database TLS and restrict access to the session tables.
+
+The encrypted session cookie is also a bearer credential. In default cookie mode, a stolen copy can be used until it expires unless the signing key is rotated. In PostgreSQL mode, a copied cookie refers to the same server-side row and can be invalidated by deleting that row, but it remains usable until expiry if no revocation occurs. The cookie is not tied to an IP address because client addresses change and may be shared or supplied through an untrusted proxy header. A compromised browser or script running in the Copi origin may still perform actions using an HTTP-only cookie even though it cannot read the cookie value.
+
 ## Encryption Key Setup
 
 Game and player names are encrypted at the application level using AES-256-GCM.
@@ -159,26 +183,35 @@ Please also read [SECURITY.md](SECURITY.md) to ensure you have taken the appropr
 
 Here is a short summary of what you need to be aware of:
 
-### ATJ: Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed that authentication would be undertaken by some other system or performed in some previous action.
+### ATJ: Anyone with a game link can watch the game
 
 #### What can go wrong?
 
-Be aware of data exposure risk! Copi does not support authentication.
-We have not implemented Authentication when using Copi, instead we use a secure randomized string to prevent accidental data exposure. Still, an attacker may get hold of such a url by spoofing Copi or other Colleagues in your organization by leveraging various social engineering techniques like establishing a rogue location: [https://capec.mitre.org/data/definitions/616.html](https://capec.mitre.org/data/definitions/616.html).
+Copi does not use user accounts. Anyone with a game link can watch that game. This is intended.
 
-An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
+Someone may obtain a game link, a short-lived player capability, or a player session cookie through social engineering, logs, a compromised browser, or a compromised network. See [CAPEC-616](https://capec.mitre.org/data/definitions/616.html) and [CAPEC-569](https://capec.mitre.org/data/definitions/569.html).
 
-Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open us up to more threats. We could indeed mitigate those threats, but we would rather remain privacy-friendly and process as little personal information as possible.
+Watching a game does not grant player access. Player access requires a signed capability that expires after 5 minutes. If someone steals that capability before it is used, they may exchange it and become that player. The capability is sent in a POST body, so a proxy or monitoring service that records request bodies may capture it.
 
-Game integrity is still enforceable only by client behavior in a few important paths. During the game, the app only checks that a voted card belongs to the same game before inserting a vote, so a crafted client can self-vote because there is no server-side owner check. The app separately creates the votes table without a uniqueness constraint, and the dealt_cards table stores played_in_round without any DB-level rule that limits a player to one card per round. A malicious or racing client can therefore duplicate votes or play multiple cards in the same round.
+By default, Copi remembers used capabilities in the memory of one application node. That record is lost when the node restarts. In a cluster, nodes normally share this check through one global registry. If the nodes lose contact, each node uses its own local record. The same capability may then be accepted by more than one node. Synchronizing the records later cannot undo an exchange that has already succeeded.
+
+An optional PostgreSQL mode avoids these replay gaps by keeping the session and replay records in one database. This makes player sessions depend on the database being available. The session records are encrypted, but anyone who obtains both the database contents and `COPI_ENCRYPTION_KEY` can read them.
+
+The player session cookie is a bearer credential. Anyone who steals a valid copy can act as every player stored in that session until it expires. In the default cookie mode, an individual stolen session cannot be revoked. In PostgreSQL mode, deleting the server-side session record revokes it.
+
+Voting and card play still have race conditions. The votes table has no uniqueness constraint, so two requests made at nearly the same time may create duplicate votes. The database also has no rule that limits a player to one played card per round, so concurrent requests may play more than one card.
 
 #### What are we going to do about it?
 
-We are not working towards implementing authentication in Copi. Instead, we are utilizing magic links. Arguable this is not authentication, but it's worth noting that your threat model is not stored on copi.owasp.org, just your game and the cards you voted on. For a threat actor to be able to piece together this information and use it against you, given that he gets hold of the magic link, you would have to use your full name and add the URL to your project in the game name field when creating the game. We are working towards informing users that they should under no circumstances do this kind of thing, but even in the case that you still do. The cards themselves are too generic and don't contain the sensitive discussions that you had during your game.
-As a security measure, you can choose to run Copi on a private cluster
-You should avoid using your own name or the name of a company or project when creating players and games at copi.owasp.org. And remind others not to do so as well. Instead, use a pseudonym and a fake threat model name.
+Use HTTPS. Do not record capability exchange request bodies in proxies, application monitoring, or access logs. Protect `SECRET_KEY_BASE` and `COPI_ENCRYPTION_KEY`, and rotate the affected key if it is exposed.
 
-There is a GitHub issue to resolve the voting integrity vulnerability (see:  https://github.com/OWASP/cornucopia/issues/2568). The damage is limited by the fact that most players during a game know each other and by having the url to the game being a random magic link.
+Use PostgreSQL session storage when a capability must be accepted only once across several application nodes. Restrict access to the session tables and use verified TLS for the database connection. Without PostgreSQL mode, accept that a restart or cluster partition can allow a capability to be reused during its 5-minute lifetime.
+
+Copi stores game and card choices, but not the discussion held by the players. Do not use a real person, company, or project name for a game or player. Use a pseudonym and a made-up threat model name.
+
+Run Copi on a private network if viewing by game link is not suitable for your use case.
+
+Voting integrity is tracked in [issue 2568](https://github.com/OWASP/cornucopia/issues/2568).
 
 ## CR6: Romain can read and modify unencrypted data in memory or in transit (e.g., cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems.
 

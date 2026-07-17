@@ -44,10 +44,23 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
   @game_attrs %{name: "show test game"}
 
-  defp create_player(_) do
+  defp create_player(%{conn: conn}) do
     {:ok, game} = Cornucopia.create_game(@game_attrs)
     {:ok, player} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
-    %{player: player}
+    conn = init_test_session(conn, %{
+      "resume_player_session" => [%{"game_id" => game.id, "player_id" => player.id}]
+    })
+    %{conn: conn, player: player}
+  end
+
+  defp player_url(game_id, player_id) do
+    "/games/#{game_id}/players/#{player_id}"
+  end
+
+  defp authorize_player(conn, game_id, player_id) do
+    init_test_session(conn, %{
+      "resume_player_session" => [%{"game_id" => game_id, "player_id" => player_id}]
+    })
   end
 
   defp create_game_with_dealt_card(game_name, card_ext_id) do
@@ -371,7 +384,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
       Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :transient)
 
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
 
       assert render(view) =~ "Temporary issue loading card. Please try again."
@@ -383,7 +396,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
       Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
 
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
 
       Application.put_env(:copi, :player_live_show_player_stub_mode, :transient)
       send(view.pid, {:retry_player_show_load, player.id})
@@ -404,7 +417,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
       Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :vote_conflict)
 
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
 
       assert render(view) =~ game.name
@@ -412,11 +425,33 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   end
 
   describe "toggle_vote authorization" do
+    test "redirects when the URL selects a player not stored in the session", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Player URL Authorization"})
+      {:ok, authorized_player} = Cornucopia.create_player(%{name: "Authorized", game_id: game.id})
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game.id})
+
+      conn =
+        init_test_session(conn, %{
+          "resume_player_session" => [
+            %{"game_id" => game.id, "player_id" => authorized_player.id}
+          ]
+        })
+
+      expected_path = "/games/#{game.id}"
+
+      assert {:error,
+              {:redirect,
+               %{
+                 to: ^expected_path,
+                 flash: %{"error" => "This player link is not available in this browser session."}
+               }}} = live(conn, "/games/#{game.id}/players/#{other_player.id}")
+    end
+
     test "rejects cross-game vote and shows error flash", %{conn: conn} do
       {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game One", "AUTH_G1_C1")
       {_game2, _player2, dc2} = create_game_with_dealt_card("Auth Game Two", "AUTH_G2_C1")
 
-      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc2.id)})
 
       assert render(view) =~ "Invalid card selection"
@@ -438,7 +473,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
         player_id: other_player.id, card_id: card2.id, played_in_round: 1
       })
 
-      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc2.id)})
 
       {:ok, refreshed_card} = DealtCard.find(dc2.id)
@@ -448,7 +483,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "shows not found flash when toggling vote with missing dealt card", %{conn: conn} do
       {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Four", "AUTH_G4_C1")
 
-      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
       render_click(view, "toggle_vote", %{"dealt_card_id" => "999999"})
 
       assert render(view) =~ "Card not found. Please refresh and try again."
@@ -457,7 +492,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "shows error flash when toggling vote with invalid dealt card id format", %{conn: conn} do
       {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Five", "AUTH_G5_C1")
 
-      {:ok, view, _html} = live(conn, "/games/#{game1.id}/players/#{player1.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
       render_click(view, "toggle_vote", %{"dealt_card_id" => "invalid_card_id"})
 
       assert render(view) =~ "Invalid card format. Please refresh and try again."
@@ -465,7 +500,10 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
     test "returns 404 when player does not exist", %{conn: conn} do
       assert_error_sent 404, fn ->
-        get(conn, "/games/00000000000000000000000001/players/00000000000000000000000002")
+        get(
+          authorize_player(conn, "00000000000000000000000001", "00000000000000000000000002"),
+          player_url("00000000000000000000000001", "00000000000000000000000002")
+        )
       end
     end
 
@@ -492,7 +530,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "keeps socket when player no longer exists", %{conn: conn} do
       {game, player, dc} = create_game_with_dealt_card("HandleInfo Missing Player", "HI_MP_1")
 
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
 
       Copi.Repo.delete!(dc)
       {:ok, _} = Copi.Cornucopia.delete_player(player)
@@ -507,7 +545,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "retry player show load message does not crash", %{conn: conn} do
       {game, player, _dc} = create_game_with_dealt_card("Retry Player Show", "HI_RETRY_1")
 
-      {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
       send(view.pid, {:retry_player_show_load, player.id})
       :timer.sleep(50)
 
