@@ -22,6 +22,7 @@ kill_signal = 'SIGTERM'
   RATE_LIMIT_PLAYER_CREATION_WINDOW = '3600'
   RATE_LIMIT_CONNECTION_LIMIT = '133'
   RATE_LIMIT_CONNECTION_WINDOW = '1'
+  USE_FLY_CLIENT_IP = true
 
 [http_service]
   internal_port = 8080
