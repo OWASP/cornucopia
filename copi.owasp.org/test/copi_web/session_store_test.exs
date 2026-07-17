@@ -37,8 +37,8 @@ defmodule CopiWeb.SessionStoreTest do
 
     raw_cookie = SessionStore.put(conn, nil, session, opts)
 
-    assert {nil, ^session} = SessionStore.get(conn, raw_cookie, opts)
-    assert :ok = SessionStore.delete(conn, nil, opts)
+    assert {session_id, ^session} = SessionStore.get(conn, raw_cookie, opts)
+    assert :ok = SessionStore.delete(conn, session_id, opts)
   end
 
   test "postgres mode stores, restores, updates, and prunes expired sessions", %{
