@@ -14,7 +14,7 @@ It is language, platform, and technology agnostic. Visit: https://cornucopia.owa
 
 ### Standards
 
-* [OWASP Artificial Intelligence Security Verification Standard (AISVS)](https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/)
+* [OWASP Artificial Intelligence Security Verification Standard v1.0 (AISVS)](https://owasp.org/www-project-artificial-intelligence-security-verification-standard-aisvs-docs/)
 * [OWASP Application Security Verification Standard (ASVS) v4 (2019) and v5 (2025)](https://owasp.org/www-project-application-security-verification-standard/)
 * [OWASP Mobile Application Security Verification Standard (MASVS) v2.1](https://mas.owasp.org/MASVS/)
 
