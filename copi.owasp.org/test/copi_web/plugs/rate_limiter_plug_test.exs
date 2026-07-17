@@ -82,6 +82,22 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
     refute conn.halted
   end
 
+  test "rate limits remote IP when fly mode is enabled" do
+    System.put_env("USE_FLY_CLIENT_IP", "true")
+    ip = {10, 0, 0, 1}
+    RateLimiter.clear_ip(ip)
+
+    conn =
+      conn(:get, "/")
+      |> Map.put(:remote_ip, ip)
+      |> init_test_session(%{})
+      |> RateLimiterPlug.call([])
+
+    assert conn.status != 429
+    refute conn.halted
+    System.delete_env("USE_FLY_CLIENT_IP")
+  end
+
   test "init/1 returns opts unchanged" do
     assert RateLimiterPlug.init([]) == []
     assert RateLimiterPlug.init(key: :value) == [key: :value]

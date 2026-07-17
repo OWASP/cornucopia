@@ -177,7 +177,7 @@ defmodule CopiWeb.PlayerLive.Show do
           |> Enum.flat_map(fn p -> p.dealt_cards end)
           |> Enum.map(fn dc -> dc.id end)
 
-        if dealt_card.id in game_card_ids do
+        if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
           vote = get_vote(dealt_card, player)
 
           if vote do

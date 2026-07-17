@@ -1,8 +1,80 @@
 defmodule CopiWeb.ApiController do
   use CopiWeb, :controller
   alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.Player
 
   require Logger
+
+  @resume_player_session_key "resume_player_session"
+
+  def persist_player_session(conn, %{"game_id" => game_id, "player_id" => player_id}) do
+    with :ok <- validate_ulid_format(game_id),
+         :ok <- validate_ulid_format(player_id),
+         {:ok, player} <- Player.find(player_id),
+         true <- player.game_id == game_id do
+      conn
+      |> put_session(@resume_player_session_key, %{"game_id" => game_id, "player_id" => player_id})
+      |> put_resp_header("cache-control", "no-store")
+      |> json(%{"ok" => true})
+    else
+      :invalid_format ->
+        conn
+        |> delete_session(@resume_player_session_key)
+        |> put_status(:bad_request)
+        |> put_resp_header("cache-control", "no-store")
+        |> json(%{"error" => "Invalid player session parameters"})
+
+      {:error, :not_found} ->
+        conn
+        |> delete_session(@resume_player_session_key)
+        |> put_status(:not_found)
+        |> put_resp_header("cache-control", "no-store")
+        |> json(%{"error" => "Player not found"})
+
+      {:error, reason} ->
+        Logger.debug("Transient player lookup failure while persisting player session for player_id=#{inspect(player_id)}, reason=#{inspect(reason)}")
+
+        conn
+        |> put_status(:service_unavailable)
+        |> put_resp_header("cache-control", "no-store")
+        |> json(%{"error" => "Temporary service issue. Please retry."})
+
+      false ->
+        conn
+        |> delete_session(@resume_player_session_key)
+        |> put_status(:forbidden)
+        |> put_resp_header("cache-control", "no-store")
+        |> json(%{"error" => "Player does not belong to this game"})
+    end
+  end
+
+  def persist_player_session(conn, _params) do
+    conn
+    |> put_status(:bad_request)
+    |> put_resp_header("cache-control", "no-store")
+    |> json(%{"error" => "Invalid player session parameters"})
+  end
+
+  def clear_player_session(conn, %{"game_id" => game_id}) do
+    case validate_ulid_format(game_id) do
+      :ok ->
+        conn =
+          case get_session(conn, @resume_player_session_key) do
+            %{"game_id" => ^game_id} -> delete_session(conn, @resume_player_session_key)
+            _ -> conn
+          end
+
+        conn
+        |> put_resp_header("cache-control", "no-store")
+        |> json(%{"ok" => true})
+
+      :invalid_format ->
+        conn
+        |> put_status(:bad_request)
+        |> put_resp_header("cache-control", "no-store")
+        |> json(%{"error" => "Invalid game identifier"})
+    end
+  end
 
   def play_card(conn, %{"game_id" => game_id, "player_id" => player_id, "dealt_card_id" => dealt_card_id}) do
     game_mod = Application.get_env(:copi, :api_game_module, Game) || Game
@@ -89,4 +161,19 @@ defmodule CopiWeb.ApiController do
   def topic(game_id) do
     "game:#{game_id}"
   end
+
+  defp validate_ulid_format(id) when is_binary(id) do
+    case String.length(id) do
+      26 ->
+        case Ecto.ULID.cast(id) do
+          {:ok, _} -> :ok
+          :error -> :invalid_format
+        end
+
+      _ ->
+        :invalid_format
+    end
+  end
+
+  defp validate_ulid_format(_), do: :invalid_format
 end

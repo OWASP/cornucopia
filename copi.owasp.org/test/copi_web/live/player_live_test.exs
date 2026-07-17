@@ -389,6 +389,22 @@ defmodule CopiWeb.PlayerLiveTest do
       show_live |> element("[phx-click=\"toggle_vote\"][phx-value-dealt_card_id=\"#{dealt.id}\"]") |> render_click()
       refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
     end
+
+    test "prevents self-voting on own dealt card", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      Copi.Repo.update!(Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second)))
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "V", description: "D", edition: "webapp",
+        version: "3.0", external_id: "EXT2", language: "en",
+        misc: "misc", owasp_scp: [], owasp_devguide: [], owasp_asvs: [],
+        owasp_appsensor: [], capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, dealt} = Copi.Repo.insert(%Copi.Cornucopia.DealtCard{player_id: player.id, card_id: card.id, played_in_round: 1})
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => "#{dealt.id}"})
+      refute Copi.Repo.get_by(Copi.Cornucopia.Vote, dealt_card_id: dealt.id, player_id: player.id)
+    end
   end
 
   describe "Helper functions" do
@@ -474,5 +490,6 @@ defmodule CopiWeb.PlayerLiveTest do
       assert Show.get_vote(dealt_card, player).id == 99
       assert is_nil(Show.get_vote(%{votes: []}, player))
     end
+
   end
 end

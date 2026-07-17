@@ -90,6 +90,7 @@ To start your Phoenix server:
     # Windows
     # $env:POSTGRES_TEST_PWD="POSTGRES_LOCAL_PWD"
     mix test
+    mix assets.coverage
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
