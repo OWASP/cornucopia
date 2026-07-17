@@ -50,16 +50,11 @@ defmodule CopiWeb.Router do
   end
 
   scope "/api", CopiWeb do
-    pipe_through :api
-
-    put "/games/:game_id/players/:player_id/card", ApiController, :play_card
-  end
-
-  scope "/api", CopiWeb do
     pipe_through :browser_api
 
-    put "/games/:game_id/players/:player_id/session", ApiController, :persist_player_session
-    delete "/games/:game_id/player-session", ApiController, :clear_player_session
+    post "/player-capabilities/exchange", ApiController, :exchange_player_capability
+    put "/games/:game_id/players/:player_id/card", ApiController, :play_card
+    delete "/games/:game_id/players/:player_id/session", ApiController, :clear_player_session
   end
 
   # Health check endpoint for Fly.io - no pipeline needed for plain text response

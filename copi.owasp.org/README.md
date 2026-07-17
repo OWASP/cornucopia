@@ -96,6 +96,24 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
+## Player session and replay storage
+
+Copi uses encrypted cookie sessions and single-node, in-memory capability replay protection by default. This mode does not store player sessions or capability digests in PostgreSQL.
+
+When `DNS_CLUSTER_QUERY` is set, replay registries coordinate through a globally registered Erlang process. A node falls back to its local registry if the global process cannot be reached and synchronizes its active digests when the connection returns. A capability can still be accepted on both sides of a network partition before that synchronization happens.
+
+PostgreSQL-backed player sessions and replay protection are optional:
+
+```bash
+POSTGRES_SESSION_STORE_ENABLED=true
+```
+
+When enabled, the browser cookie contains an opaque session ID protected by the normal Phoenix cookie encryption. The player session written to the `copi_sessions` table is separately encrypted with `COPI_ENCRYPTION_KEY`. Consumed capability digests are inserted atomically into `player_capability_consumptions`, so nodes using the same database share replay protection. PostgreSQL mode takes precedence over the in-memory and clustered replay registries.
+
+Run the database migrations before enabling this option. Configure every application node with the same setting, `SECRET_KEY_BASE`, and `COPI_ENCRYPTION_KEY`. `COPI_ENCRYPTION_KEY` is used for session encryption only when state is written to or read from PostgreSQL; browser cookies continue to use Phoenix's `SECRET_KEY_BASE`. Protect database connections with verified TLS when the database is not on a trusted local network. If PostgreSQL is unavailable, session loading and capability exchange fail rather than falling back to a weaker store.
+
+Changing the storage mode invalidates existing browser sessions. Capability exchange tokens remain valid for 5 minutes and player sessions remain valid for up to 7 days in every mode.
+
 ## More about Phoenix
 
   * Official website: [https://www.phoenixframework.org/](https://www.phoenixframework.org/)

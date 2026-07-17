@@ -2,15 +2,18 @@
   <%= display_game_session(@game.edition) %> <%= @game.name %>
 </.header1>
 
-<%= if @resume_player_id do %>
+<%= if @resume_players != [] do %>
   <div class="my-4 rounded-md border border-amber-300 bg-amber-50 p-4 text-amber-900">
-    <p class="text-sm font-medium">Resume your player session from this browser session.</p>
-    <.link
-      navigate={~p"/games/#{@game.id}/players/#{@resume_player_id}"}
-      class="mt-3 inline-flex rounded-md bg-amber-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
-    >
-      Resume player session in this browser
-    </.link>
+    <p class="text-sm font-medium">Resume a player session from this browser.</p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      <.link
+        :for={player <- @resume_players}
+        navigate={~p"/games/#{@game.id}/players/#{player.id}"}
+        class="inline-flex rounded-md bg-amber-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
+      >
+        Resume <%= player.name %>
+      </.link>
+    </div>
   </div>
 <% end %>
 

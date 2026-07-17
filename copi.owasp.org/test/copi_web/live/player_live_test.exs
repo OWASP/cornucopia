@@ -60,9 +60,16 @@ defmodule CopiWeb.PlayerLiveTest do
     player
   end
 
-  defp create_player(_) do
+  defp create_player(%{conn: conn}) do
     player = fixture(:player)
-    %{player: player}
+    conn =
+      init_test_session(conn, %{
+        "resume_player_session" => [
+          %{"game_id" => player.game_id, "player_id" => player.id}
+        ]
+      })
+
+    %{conn: conn, player: player}
   end
 
   describe "player :index action" do
@@ -106,11 +113,11 @@ defmodule CopiWeb.PlayerLiveTest do
              |> form("#player-form", player: @invalid_attrs)
              |> render_change() =~ "can&#39;t be blank"
 
-      {:ok, _, html} =
-        index_live
-        |> form("#player-form", player: %{name: "some updated name", game_id: player.game_id})
-        |> render_submit()
-        |> follow_redirect(conn)
+      index_live
+      |> form("#player-form", player: %{name: "some updated name", game_id: player.game_id})
+      |> render_submit()
+
+      {:ok, _, html} = exchange_player_creation(index_live, conn)
 
       assert html =~ "Hi some updated name, waiting for the game to start..."
       assert html =~ "Hi some updated name, waiting for the game to start..."
@@ -216,6 +223,20 @@ defmodule CopiWeb.PlayerLiveTest do
 
       assert render(view) =~ "Temporary issue loading game"
     end
+  end
+
+  defp exchange_player_creation(view, conn) do
+    assert_push_event(view, "exchange-player-capability", %{capability: capability})
+
+    exchange_response =
+      post(conn, "/api/player-capabilities/exchange", %{"capability" => capability})
+
+    clean_path = json_response(exchange_response, 200)["redirect_to"]
+    refute clean_path =~ capability
+
+    exchange_response
+    |> recycle()
+    |> live(clean_path)
   end
 
   describe "Show" do

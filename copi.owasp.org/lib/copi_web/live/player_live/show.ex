@@ -8,6 +8,7 @@ defmodule CopiWeb.PlayerLive.Show do
   alias Copi.Cornucopia.Player
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.DealtCard
+  alias CopiWeb.PlayerSessions
   alias CopiWeb.Resilience
 
   defmodule BadPlayerID do
@@ -17,50 +18,71 @@ defmodule CopiWeb.PlayerLive.Show do
   @impl true
   def mount(_params, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
-    {:ok, assign(socket, :client_ip, ip)}
+    {:ok,
+     socket
+     |> assign(:client_ip, ip)
+    |> assign(:player_sessions, session["resume_player_session"])}
   end
 
   @impl true
-  def handle_params(%{"id" => player_id}, _, socket) do
-    case validate_ulid_format(player_id) do
-      :ok ->
+  def handle_params(%{"game_id" => game_id, "id" => player_id} = params, _, socket) do
+    with :ok <- validate_ulid_format(game_id),
+         :ok <- validate_ulid_format(player_id) do
+      if authorized_player_url?(socket, params) do
         case player_module().find(player_id) do
-      {:ok, player} ->
-        case game_module().find(player.game_id) do
-          {:ok, game} ->
-            CopiWeb.Endpoint.subscribe(topic(player.game_id))
+          {:ok, %{game_id: ^game_id} = player} ->
+            case game_module().find(game_id) do
+              {:ok, game} ->
+                CopiWeb.Endpoint.subscribe(topic(game_id))
 
-            {:noreply,
-             socket
-             |> assign(:game, game)
-             |> assign(:player, player)
-             |> assign(:player_load_retry_count, 0)}
+                {:noreply,
+                 socket
+                 |> assign(:game, game)
+                 |> assign(:player, player)
+                 |> assign(:player_load_retry_count, 0)}
+
+              {:error, :not_found} ->
+                {:noreply,
+                 socket
+                 |> put_flash(:error, "Game not found.")
+                 |> redirect(to: "/games")}
+
+              {:error, reason} ->
+                handle_transient_player_load_failure(socket, params, reason)
+            end
+
+          {:ok, _player} ->
+            redirect_to_public_game(socket, game_id)
 
           {:error, :not_found} ->
-            {:noreply,
-             socket
-             |> put_flash(:error, "Game not found.")
-             |> redirect(to: "/games")}
+            raise Ecto.NoResultsError, queryable: Player
 
           {:error, reason} ->
-            handle_transient_player_load_failure(socket, player_id, reason)
+            handle_transient_player_load_failure(socket, params, reason)
         end
-
-      {:error, :not_found} ->
-        raise Ecto.NoResultsError, queryable: Player
-
-      {:error, reason} ->
-        handle_transient_player_load_failure(socket, player_id, reason)
-        end
-
+      else
+        redirect_to_public_game(socket, game_id)
+      end
+    else
       :invalid_format ->
         raise BadPlayerID
     end
   end
 
   @impl true
-  def handle_info({:retry_player_show_load, player_id}, socket) do
-    handle_params(%{"id" => player_id}, nil, socket)
+  def handle_info({:retry_player_show_load, params}, socket) when is_map(params) do
+    handle_params(params, nil, socket)
+  end
+
+  def handle_info({:retry_player_show_load, player_id}, socket) when is_binary(player_id) do
+    handle_params(
+      %{
+        "game_id" => socket.assigns.game.id,
+        "id" => player_id
+      },
+      nil,
+      socket
+    )
   end
 
   @impl true
@@ -270,7 +292,8 @@ defmodule CopiWeb.PlayerLive.Show do
     end
   end
 
-  defp handle_transient_player_load_failure(socket, player_id, reason) do
+  defp handle_transient_player_load_failure(socket, params, reason) do
+    player_id = params["id"]
     retry_count = socket.assigns[:player_load_retry_count] || 0
 
     Logger.debug(
@@ -279,7 +302,7 @@ defmodule CopiWeb.PlayerLive.Show do
 
     cond do
       socket.assigns[:game] && socket.assigns[:player] && retry_count < Resilience.max_player_load_retries() ->
-        Process.send_after(self(), {:retry_player_show_load, player_id}, Resilience.retry_delay_ms())
+        Process.send_after(self(), {:retry_player_show_load, params}, Resilience.retry_delay_ms())
 
         {:noreply,
          socket
@@ -310,6 +333,17 @@ defmodule CopiWeb.PlayerLive.Show do
 
   defp dealt_card_module do
     Application.get_env(:copi, :player_live_show_dealt_card_module, DealtCard) || DealtCard
+  end
+
+  defp authorized_player_url?(socket, %{"game_id" => game_id, "id" => player_id}) do
+    PlayerSessions.authorized?(socket.assigns.player_sessions, game_id, player_id)
+  end
+
+  defp redirect_to_public_game(socket, game_id) do
+    {:noreply,
+     socket
+     |> put_flash(:error, "This player link is not available in this browser session.")
+     |> redirect(to: "/games/#{game_id}")}
   end
 
   defp validate_ulid_format(id) when is_binary(id) do

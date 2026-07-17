@@ -27,12 +27,8 @@ const ulidPattern = /^[0-9A-HJKMNP-TV-Z]{26}$/;
 
 const isValidUlid = (value) => typeof value === 'string' && ulidPattern.test(value);
 
-const updatePlayerSession = async ({ gameId, playerId, shouldPersist }) => {
-  if (!isValidUlid(gameId)) {
-    return;
-  }
-
-  if (shouldPersist && !isValidUlid(playerId)) {
+const exchangePlayerCapability = async (capability) => {
+  if (typeof capability !== 'string' || capability.length === 0) {
     return;
   }
 
@@ -42,30 +38,64 @@ const updatePlayerSession = async ({ gameId, playerId, shouldPersist }) => {
     return;
   }
 
-  const url = shouldPersist
-    ? `/api/games/${gameId}/players/${playerId}/session`
-    : `/api/games/${gameId}/player-session`;
-
   try {
-    await fetch(url, {
-      method: shouldPersist ? 'PUT' : 'DELETE',
+    const response = await fetch('/api/player-capabilities/exchange', {
+      method: 'POST',
       headers: {
         'X-CSRF-Token': csrfToken,
         'Content-Type': 'application/json'
       },
       credentials: 'same-origin',
-      cache: 'no-store'
+      cache: 'no-store',
+      body: JSON.stringify({ capability })
     });
+
+    if (!response.ok) {
+      throw new Error('Player capability exchange was rejected');
+    }
+
+    const result = await response.json();
+
+    if (typeof result.redirect_to !== 'string' || !result.redirect_to.startsWith('/games/')) {
+      throw new Error('Player capability exchange returned an invalid redirect');
+    }
+
+    window.location.assign(result.redirect_to);
   } catch (error) {
-    console.warn('Unable to update player session', error);
+    console.warn('Unable to exchange player capability', error);
   }
 };
 
-const syncPlayerSession = (el) => updatePlayerSession({
-  gameId: el?.dataset?.gameId,
-  playerId: el?.dataset?.playerId,
-  shouldPersist: el?.dataset?.storePlayerSession === 'true'
-});
+const syncPlayerSession = (el) => {
+  const persistenceMode = el?.dataset?.storePlayerSession;
+
+  if (persistenceMode !== 'false') {
+    return;
+  }
+
+  const gameId = el?.dataset?.gameId;
+  const playerId = el?.dataset?.playerId;
+
+  if (!isValidUlid(gameId) || !isValidUlid(playerId)) {
+    return;
+  }
+
+  const csrfToken = document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
+
+  if (!csrfToken) {
+    return;
+  }
+
+  return fetch(`/api/games/${gameId}/players/${playerId}/session`, {
+    method: 'DELETE',
+    headers: {
+      'X-CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    },
+    credentials: 'same-origin',
+    cache: 'no-store'
+  }).catch(error => console.warn('Unable to clear player session', error));
+};
 
 let Hooks = {}
 Hooks.DragDrop = {
@@ -148,8 +178,10 @@ Hooks.DragDrop = {
         fetch('/api/games/' + gameId + '/players/' + playerId + '/card', {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken
           },
+          credentials: 'same-origin',
           body: JSON.stringify({
             dealt_card_id: dealtCardId
           })
@@ -194,6 +226,14 @@ Hooks.PersistPlayerSession = {
 
   updated() {
     void syncPlayerSession(this.el);
+  }
+}
+
+Hooks.ExchangePlayerCapability = {
+  mounted() {
+    this.handleEvent('exchange-player-capability', ({ capability }) => {
+      void exchangePlayerCapability(capability);
+    });
   }
 }
 

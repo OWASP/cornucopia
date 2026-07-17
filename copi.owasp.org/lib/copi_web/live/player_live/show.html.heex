@@ -3,7 +3,12 @@
   phx-hook="PersistPlayerSession"
   data-game-id={@game.id}
   data-player-id={@player.id}
-  data-store-player-session={if is_nil(@game.finished_at), do: "true", else: "false"}
+  data-store-player-session={
+    cond do
+      @game.finished_at -> "false"
+      true -> nil
+    end
+  }
   class="hidden"
 >
 </div>
