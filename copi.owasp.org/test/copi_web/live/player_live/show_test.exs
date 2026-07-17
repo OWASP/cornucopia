@@ -409,6 +409,47 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert render(view) =~ "Temporary issue loading player/game"
     end
 
+    test "retry player show load with map params retries after a transient game lookup", %{
+      conn: conn
+    } do
+      {game, player, _dealt} =
+        create_game_with_dealt_card("Retry Player Show Map Branch", "RPS_MAP_1")
+
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_game_module, GameStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
+      Application.put_env(:copi, :player_live_show_game_stub_mode, :real)
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+
+      Application.put_env(:copi, :player_live_show_game_stub_mode, :transient)
+      send(view.pid, {:retry_player_show_load, %{"game_id" => game.id, "id" => player.id}})
+      :timer.sleep(50)
+
+      assert render(view) =~ "Temporary issue loading player/game. Retrying..."
+    end
+
+    test "redirects when the player record belongs to a different game than the URL", %{
+      conn: conn,
+      player: player
+    } do
+      original_game_id = player.game_id
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Moved Player Game"})
+
+      player
+      |> Ecto.Changeset.change(game_id: other_game.id)
+      |> Copi.Repo.update!()
+
+      expected_path = "/games/#{original_game_id}"
+
+      assert {:error,
+              {:redirect,
+               %{
+                 to: ^expected_path,
+                 flash: %{"error" => "This player link is not available in this browser session."}
+               }}} = live(conn, "/games/#{original_game_id}/players/#{player.id}")
+    end
+
     test "toggle_vote hits insert error branch when vote conflicts", %{conn: conn} do
       {game, player, dealt} = create_game_with_dealt_card("Vote Conflict", "VC_1")
 

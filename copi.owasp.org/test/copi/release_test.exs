@@ -2,6 +2,16 @@ defmodule Copi.ReleaseTest do
   use ExUnit.Case, async: false
   import ExUnit.CaptureLog
 
+  defmodule FailingAdapter do
+    def ensure_all_started(_config, _mode), do: {:ok, []}
+  end
+
+  defmodule FailingRepo do
+    def config, do: []
+    def __adapter__, do: Copi.ReleaseTest.FailingAdapter
+    def start_link(_opts), do: {:error, :boom}
+  end
+
   test "migrate runs with empty repo list" do
     old_repos = Application.get_env(:copi, :ecto_repos)
 
@@ -52,5 +62,19 @@ defmodule Copi.ReleaseTest do
 
       assert failure_mode in [:ownership_error, :owner_exited]
     end)
+  end
+
+  test "migrate surfaces repo start errors that are not already_started" do
+    old_repos = Application.get_env(:copi, :ecto_repos)
+
+    try do
+      Application.put_env(:copi, :ecto_repos, [FailingRepo])
+
+      assert_raise MatchError, fn ->
+        Copi.Release.migrate()
+      end
+    after
+      Application.put_env(:copi, :ecto_repos, old_repos || [])
+    end
   end
 end

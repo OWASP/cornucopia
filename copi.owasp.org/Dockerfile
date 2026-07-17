@@ -26,7 +26,9 @@ WORKDIR /app
 
 # install hex + rebar
 RUN mix local.hex --force \
-    && mix local.rebar --force
+    || mix archive.install github hexpm/hex branch latest --force
+RUN mix local.rebar --force \
+    || mix local.rebar rebar3 https://github.com/erlang/rebar3/releases/latest/download/rebar3 --force
 
 # set build ENV
 ENV MIX_ENV="prod"
