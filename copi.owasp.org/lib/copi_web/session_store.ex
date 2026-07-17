@@ -35,14 +35,14 @@ defmodule CopiWeb.SessionStore do
   end
 
   @impl true
-  def delete(conn, session_id, %{cookie: cookie_opts}) do
-    if postgres_enabled?() do
-      Repo.delete_all(from record in SessionRecord, where: record.id == ^session_id)
-      :ok
-    else
-      Plug.Session.COOKIE.delete(conn, session_id, cookie_opts)
-    end
+def delete(conn, session_id, %{cookie: cookie_opts}) do
+  if postgres_enabled?() do
+    Repo.delete_all(from record in SessionRecord, where: record.id == ^session_id)
+    Plug.Session.COOKIE.delete(conn, session_id, cookie_opts)
+  else
+    Plug.Session.COOKIE.delete(conn, session_id, cookie_opts)
   end
+end
 
   defp get_from_postgres(conn, raw_cookie, cookie_opts) do
     with {_cookie_id, %{@postgres_session_id => session_id}} when is_binary(session_id) <-
