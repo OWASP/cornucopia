@@ -194,7 +194,7 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert Show.latest_version("mlsec")     == "1.0"
       assert Show.latest_version("cumulus")   == "1.1"
       assert Show.latest_version("masvs")     == "1.1"
-      assert Show.latest_version("eop")       == "5.1"
+      assert Show.latest_version("eop")       == "5.2"
       assert Show.latest_version("unknown")   == "1.0"
     end
 
