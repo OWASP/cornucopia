@@ -71,9 +71,10 @@ defmodule CopiWeb.SessionStoreTest do
     refute Repo.get(SessionRecord, "expired-session")
 
     [record] = Repo.all(SessionRecord)
+    record_id = record.id
     assert binary_part(record.data, 0, 4) == "ENC1"
     assert DateTime.compare(record.expires_at, DateTime.utc_now()) == :gt
-    assert {record.id, ^first_session} = SessionStore.get(conn, first_cookie, opts)
+    assert {^record_id, ^first_session} = SessionStore.get(conn, first_cookie, opts)
 
     updated_session = %{
       "resume_player_session" => [
@@ -81,11 +82,11 @@ defmodule CopiWeb.SessionStoreTest do
       ]
     }
 
-    updated_conn = SessionStore.put(conn, record.id, updated_session, opts)
+    updated_conn = SessionStore.put(conn, record_id, updated_session, opts)
     updated_cookie = cookie_value(updated_conn)
 
     assert Repo.aggregate(SessionRecord, :count) == 1
-    assert {record.id, ^updated_session} = SessionStore.get(conn, updated_cookie, opts)
+    assert {^record_id, ^updated_session} = SessionStore.get(conn, updated_cookie, opts)
   end
 
   test "postgres mode delete removes the backing record", %{conn: conn, opts: opts} do
