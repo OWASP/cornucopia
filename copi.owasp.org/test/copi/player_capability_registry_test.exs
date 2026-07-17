@@ -133,6 +133,22 @@ defmodule Copi.PlayerCapabilityRegistryTest do
            end)
   end
 
+  test "cluster mode handles nodeup notifications" do
+    name = :cluster_nodeup_registry_test
+    global_name = {:cluster_nodeup_registry_test, System.unique_integer([:positive])}
+
+    start_supervised!(
+      Supervisor.child_spec(
+        {PlayerCapabilityRegistry, name: name, cluster_enabled: true, global_name: global_name},
+        id: name
+      )
+    )
+
+    send(name, {:nodeup, :nonode@nohost, %{}})
+
+    assert eventually(fn -> Process.alive?(Process.whereis(name)) end)
+  end
+
   defp eventually(check, attempts \\ 20)
 
   defp eventually(check, attempts) when attempts > 0 do

@@ -1,5 +1,6 @@
 defmodule CopiWeb.ApiControllerTest do
   use CopiWeb.ConnCase
+  alias CopiWeb.ApiController
   alias Copi.Repo
   alias Copi.Cornucopia
   alias Copi.Cornucopia.DealtCard
@@ -190,6 +191,12 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     assert json_response(conn, 400)["error"] == "Missing required parameter: dealt_card_id"
+  end
+
+  test "play_card returns 400 when params are missing game_id and player_id", %{conn: conn} do
+    conn = ApiController.play_card(conn, %{})
+
+    assert json_response(conn, 400)["error"] == "Invalid request parameters"
   end
 
   test "play_card returns 503 when initial game lookup is transient", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
@@ -467,6 +474,45 @@ defmodule CopiWeb.ApiControllerTest do
     assert get_session(conn, "resume_player_session") == [
              %{"game_id" => game.id, "player_id" => other_player.id}
            ]
+    assert get_resp_header(conn, "cache-control") == ["no-store"]
+  end
+
+  test "clear_player_session deletes the session key when the last player session is removed", %{
+    conn: conn,
+    game: game,
+    player: player
+  } do
+    conn =
+      conn
+      |> init_test_session(%{
+        "resume_player_session" => [%{"game_id" => game.id, "player_id" => player.id}]
+      })
+      |> delete("/api/games/#{game.id}/players/#{player.id}/session")
+
+    assert json_response(conn, 200)["ok"] == true
+    assert get_session(conn, "resume_player_session") == nil
+    assert get_resp_header(conn, "cache-control") == ["no-store"]
+  end
+
+  test "clear_player_session returns 400 for an invalid game id format", %{conn: conn} do
+    conn =
+      delete(
+        conn,
+        "/api/games/not-a-valid-ulid/players/00000000000000000000000001/session"
+      )
+
+    assert json_response(conn, 400)["error"] == "Invalid player session parameters"
+    assert get_resp_header(conn, "cache-control") == ["no-store"]
+  end
+
+  test "clear_player_session returns 400 for an invalid player id format", %{conn: conn} do
+    conn =
+      delete(
+        conn,
+        "/api/games/00000000000000000000000001/players/not-a-valid-ulid/session"
+      )
+
+    assert json_response(conn, 400)["error"] == "Invalid player session parameters"
     assert get_resp_header(conn, "cache-control") == ["no-store"]
   end
 end
