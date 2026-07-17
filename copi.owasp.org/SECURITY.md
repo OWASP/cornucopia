@@ -28,9 +28,9 @@ The application uses a GenServer-based rate limiter that tracks requests per IP 
 
 | Action | Limit | Time Window |
 | --- | --- | --- |
-| Game Creation | 20 requests | per hour per IP |
+| Game Creation | 10 requests | per hour per IP |
 | Player Creation | 60 requests | per hour per IP |
-| WebSocket Connections | 333 connections | per second per IP |
+| WebSocket Connections | 133 connections | per second per IP |
 
 ### Configuration
 
@@ -38,7 +38,7 @@ Rate limits are configurable via environment variables:
 
 ```bash
 # Game creation limits
-RATE_LIMIT_GAME_CREATION_LIMIT=20
+RATE_LIMIT_GAME_CREATION_LIMIT=10
 RATE_LIMIT_GAME_CREATION_WINDOW=3600  # seconds
 
 # Player creation limits
@@ -46,8 +46,13 @@ RATE_LIMIT_PLAYER_CREATION_LIMIT=60
 RATE_LIMIT_PLAYER_CREATION_WINDOW=3600  # seconds
 
 # Connection limits
-RATE_LIMIT_CONNECTION_LIMIT=333
+RATE_LIMIT_CONNECTION_LIMIT=133
 RATE_LIMIT_CONNECTION_WINDOW=1  # seconds
+
+# This option can be used for fly.io so that the application uses a validated client IP.
+# By default this option is set to false, which means that the `X-Forwarded-For` header will be used.
+# For obvious reasons, the `X-Forwarded-For` header may be manipulated and is therefore less safe.
+USE_FLY_CLIENT_IP = true
 ```
 
 **Note**: Environment variables must be positive integers. Invalid values will log a warning and fall back to defaults.
@@ -85,6 +90,7 @@ When rate limits are exceeded:
 - Normalizes IP formats for consistent tracking
 - **Proxy Support**: Automatically reads `X-Forwarded-For` header to get real client IP when behind reverse proxies
   - Uses leftmost IP from X-Forwarded-For (original client IP)
+  - To use the Fly client IP instead (only available for fly.io), set USE_FLY_CLIENT_IP = true
   - Falls back to `remote_ip` if header is missing or invalid
 - Falls back gracefully when IP is unavailable
 
