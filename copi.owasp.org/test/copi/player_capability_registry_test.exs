@@ -146,7 +146,10 @@ defmodule Copi.PlayerCapabilityRegistryTest do
 
     send(name, {:nodeup, :nonode@nohost, %{}})
 
-    assert eventually(fn -> Process.alive?(Process.whereis(name)) end)
+    assert eventually(fn ->
+             pid = Process.whereis(name)
+             is_pid(pid) and Process.alive?(pid)
+           end)
   end
 
   defp eventually(check, attempts \\ 20)

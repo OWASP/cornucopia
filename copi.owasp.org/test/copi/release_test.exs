@@ -8,7 +8,7 @@ defmodule Copi.ReleaseTest do
 
   defmodule FailingRepo do
     def config, do: []
-    def __adapter__, do: FailingAdapter
+    def __adapter__, do: Copi.ReleaseTest.FailingAdapter
     def start_link(_opts), do: {:error, :boom}
   end
 
