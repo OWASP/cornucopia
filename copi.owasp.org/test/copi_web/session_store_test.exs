@@ -35,15 +35,11 @@ defmodule CopiWeb.SessionStoreTest do
       ]
     }
 
-    stored_conn = SessionStore.put(conn, nil, session, opts)
-    raw_cookie = cookie_value(stored_conn)
+    raw_cookie = SessionStore.put(conn, nil, session, opts)
 
     assert {session_id, ^session} = SessionStore.get(conn, raw_cookie, opts)
     assert is_binary(session_id)
-
-    deleted_conn = SessionStore.delete(conn, session_id, opts)
-
-    assert deleted_conn.resp_cookies["_copi_key"].max_age == 0
+    assert SessionStore.delete(conn, session_id, opts) == nil
   end
 
   test "postgres mode stores, restores, updates, and prunes expired sessions", %{
@@ -65,8 +61,7 @@ defmodule CopiWeb.SessionStoreTest do
       ]
     }
 
-    first_conn = SessionStore.put(conn, nil, first_session, opts)
-    first_cookie = cookie_value(first_conn)
+    first_cookie = SessionStore.put(conn, nil, first_session, opts)
 
     refute Repo.get(SessionRecord, "expired-session")
 
@@ -82,8 +77,7 @@ defmodule CopiWeb.SessionStoreTest do
       ]
     }
 
-    updated_conn = SessionStore.put(conn, record_id, updated_session, opts)
-    updated_cookie = cookie_value(updated_conn)
+    updated_cookie = SessionStore.put(conn, record_id, updated_session, opts)
 
     assert Repo.aggregate(SessionRecord, :count) == 1
     assert {^record_id, ^updated_session} = SessionStore.get(conn, updated_cookie, opts)
@@ -93,7 +87,7 @@ defmodule CopiWeb.SessionStoreTest do
     Application.put_env(:copi, :postgres_session_store_enabled, true)
     Application.put_env(:copi, :session_ttl_seconds, 3600)
 
-    stored_conn =
+    raw_cookie =
       SessionStore.put(
         conn,
         nil,
@@ -101,12 +95,10 @@ defmodule CopiWeb.SessionStoreTest do
         opts
       )
 
-    session_id = postgres_session_id(conn, cookie_value(stored_conn), opts)
+    session_id = postgres_session_id(conn, raw_cookie, opts)
 
-    deleted_conn = SessionStore.delete(conn, session_id, opts)
-
+    assert SessionStore.delete(conn, session_id, opts) == nil
     refute Repo.get(SessionRecord, session_id)
-    assert deleted_conn.resp_cookies["_copi_key"].max_age == 0
   end
 
   test "postgres mode returns an empty session when the cookie is missing", %{
@@ -183,9 +175,7 @@ defmodule CopiWeb.SessionStoreTest do
   end
 
   defp postgres_cookie(conn, opts, session_id) do
-    conn
-    |> Plug.Session.COOKIE.put(nil, %{"postgres_session_id" => session_id}, opts.cookie)
-    |> cookie_value()
+    Plug.Session.COOKIE.put(conn, nil, %{"postgres_session_id" => session_id}, opts.cookie)
   end
 
   defp postgres_session_id(conn, raw_cookie, opts) do
@@ -194,8 +184,6 @@ defmodule CopiWeb.SessionStoreTest do
 
     session_id
   end
-
-  defp cookie_value(conn), do: conn.resp_cookies["_copi_key"].value
 
   defp restore_env(key, nil), do: Application.delete_env(:copi, key)
   defp restore_env(key, value), do: Application.put_env(:copi, key, value)
