@@ -72,9 +72,6 @@
 				"GHSA-33hq-fvwr-56pm",
 				"GHSA-8qm3-746x-r74r"
 			]
-		},
-		"overrides": {
-			"cookie@<0.7.0": "0.7.2"
 		}
 	}
 }
