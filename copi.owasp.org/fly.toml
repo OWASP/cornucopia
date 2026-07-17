@@ -32,9 +32,9 @@ kill_signal = 'SIGTERM'
   processes = ['app']
 
   [[http_service.checks]]
-    grace_period = "180s"
-    interval    = "60s"
-    timeout     = "30s"
+    grace_period = "240s"
+    interval    = "300s"
+    timeout     = "90s"
     method      = "GET"
     path        = "/health"
 
