@@ -6,6 +6,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import path from "path";
 import type { Deck } from "$domain/deck/deck";
 import { MappingService } from "$lib/services/mappingService";
+import { EDITION_NAMES } from "$lib/services/deckServiceConsts";
 const __dirname = path.resolve(path.dirname(''));
 export class DeckService {
 
@@ -111,6 +112,7 @@ export class DeckService {
             for (const card in suitObject['cards']) {
                 const cardObject = suitObject['cards'][card];
                 cardObject.edition = edition;
+                cardObject.editionName = EDITION_NAMES[edition];
                 cardObject.version = version;
                 cardObject.language = lang;
                 cardObject.suitName = suitName;

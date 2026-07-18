@@ -42,6 +42,9 @@ describe('DeckService integration tests', () => {
         expect((new DeckService()).getCardDataForEditionVersionLang('eop', '5.0', 'en')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('eop', '5.0', 'en').size).toBe(78);
 
+        expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en').get('VE2')?.editionName).toBe('OWASP Cornucopia');
+        expect((new DeckService()).getCardDataForEditionVersionLang('eop', '5.0', 'en').get('SP2')?.editionName).toBe('Elevation of Privilege');
+
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '2.2', 'en').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'ru').size).toBe(80);
         expect((new DeckService()).getCardDataForEditionVersionLang('webapp', '3.0', 'en').size).toBe(80);
