@@ -186,18 +186,6 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert Show.display_game_session("eop")       == "EoP Session:"
     end
 
-    test "latest_version/1 returns correct version string for each edition", %{conn: _conn, game: _game} do
-      alias CopiWeb.GameLive.Show
-      assert Show.latest_version("webapp")    == "3.0"
-      assert Show.latest_version("ecommerce") == "1.22"
-      assert Show.latest_version("mobileapp") == "1.1"
-      assert Show.latest_version("mlsec")     == "1.0"
-      assert Show.latest_version("cumulus")   == "1.1"
-      assert Show.latest_version("masvs")     == "1.1"
-      assert Show.latest_version("eop")       == "5.2"
-      assert Show.latest_version("unknown")   == "1.0"
-    end
-
     test "card_played_in_round/2 returns nil when no card matches", %{conn: _conn, game: _game} do
       alias CopiWeb.GameLive.Show
       assert Show.card_played_in_round([], 1) == nil

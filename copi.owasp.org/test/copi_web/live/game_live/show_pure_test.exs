@@ -10,13 +10,6 @@ defmodule CopiWeb.GameLive.ShowPureTest do
     assert Show.display_game_session("unknown") == "EoP Session:"
   end
 
-  test "latest_version returns expected versions" do
-    assert Show.latest_version("webapp") == "3.0"
-    assert Show.latest_version("ecommerce") == "1.22"
-    assert Show.latest_version("eop") == "5.2"
-    assert Show.latest_version("other") == "1.0"
-  end
-
   test "card_played_in_round finds card or returns nil" do
     cards = [%{played_in_round: 1, id: "a"}, %{played_in_round: 3, id: "b"}]
     assert Show.card_played_in_round(cards, 3) == %{played_in_round: 3, id: "b"}

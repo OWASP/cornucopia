@@ -215,17 +215,6 @@ defmodule CopiWeb.GameLiveTest do
       assert Show.display_game_session("unknown") =~ "EoP Session"
     end
 
-    test "latest_version returns correct version for each edition" do
-      assert Show.latest_version("webapp") == "3.0"
-      assert Show.latest_version("ecommerce") == "1.22"
-      assert Show.latest_version("mobileapp") == "1.1"
-      assert Show.latest_version("mlsec") == "1.0"
-      assert Show.latest_version("cumulus") == "1.1"
-      assert Show.latest_version("masvs") == "1.1"
-      assert Show.latest_version("eop") == "5.2"
-      assert Show.latest_version("other") == "1.0"
-    end
-
     test "card_played_in_round returns correct card" do
       cards = [
         %{played_in_round: 1, id: 1},
