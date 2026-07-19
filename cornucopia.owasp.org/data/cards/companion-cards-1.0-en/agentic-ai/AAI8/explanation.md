@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Elevation of Privilege**.
 
 PreCursor's weak tool boundaries allow an attacker to escalate from a permitted AI interaction to arbitrary code execution on the underlying system. The attacker does not need to compromise authentication. They exploit the gap between what the tool is intended to execute and what it will actually execute when inputs are not constrained.
 
+### PHANTOM-B
+
+This scenario fits **Over-reliance on the LLM**. Weak controls let the agent use tools to execute code or system actions without sufficient validation or isolation.
+
 ### What can go wrong?
 
 Successful exploitation of weak sandboxing can give an attacker arbitrary code execution on the server or container running the agent. From there, lateral movement to other services, exfiltration of secrets and credentials, and persistent backdoor installation are all possible.

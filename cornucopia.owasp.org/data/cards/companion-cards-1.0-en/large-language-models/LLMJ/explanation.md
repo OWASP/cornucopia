@@ -11,6 +11,10 @@ Ripley has been paid by Rossum to create a better AI chatbot than Mr. Juice for 
 This scenario falls into the **Tampering**, **Elevation of Privilege** and **Information Disclosure** categories of STRIDE.
 The vulnerability Ripley is taking advantage of is missing access control which belongs to the **Spoofing** category, but the act itself is to **tamper** with the ML ecosystem. That said, he is able to do so by executing arbitrary code by submitting jobs to the ML cluster without having the necessary privileges which means he is also attacking the cluster by **elevating** his own **privileges**. Finally, he has also stolen Mr. Juice's AI model before he poisoned it. Stealing information falls under the **Information Disclosure** category of STRIDE.
 
+### PHANTOM-B
+
+The impact of the scenario is **Training issues (including data quality or poisoning)**. A compromised model, embedding, or other ML component can introduce unsafe behavior before the application starts using it, but this is due to accepting components into the application without supply-chain controls which means that **Missing security engineering** is the root cause.
+
 ### What can go wrong?
 
 Supply chain attacks on large language models can do irreparable damage. It may be possible to fix an AI model after its data has become poisoned, but it's extremely challenging, costly, and often requires complete retraining. A large language model can also be used as a springboard for other types of attacks on the system if an attacker is able to convince it to execute code or actions on behalf of the attacker. As an AI model also connects to vast amounts of data, given that access controls are insufficiently implemented, the model itself can become a tool for data exfiltration of sensitive information as well as getting stolen. The information can, in turn, be used to make users victims of fraud, identity theft, phishing, and malware attacks.

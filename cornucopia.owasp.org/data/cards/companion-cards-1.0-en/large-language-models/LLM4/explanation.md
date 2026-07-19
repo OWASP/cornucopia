@@ -11,6 +11,10 @@ David loves trading, and he loves cryptocurrency. Lately, he has become familiar
 This scenario falls into the **Information Disclosure** category of STRIDE.
 David is able to get the LLM to send him information about other users, revealing confidential, sensitive information that can be leveraged for fraud.
 
+### PHANTOM-B
+
+This scenario fits **Missing security engineering**. Insufficient controls over the data available to the model and its output can allow sensitive information or system prompts to be disclosed.
+
 ### What can go wrong?
 
 LLMs, especially when embedded in applications, risk exposing sensitive information. This can result in data breaches, privacy violations, and intellectual property theft.

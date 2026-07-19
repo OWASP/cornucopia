@@ -12,6 +12,10 @@ Through some clever prompting, he manages to convince the chatbot that he is in 
 This scenario falls into the **Spoofing** and **Elevation of Privilege** category of STRIDE.
 Roy is able to convince the AI that he is in fact his brother, thereby **spoofing** his identity since the access controls are weak. He is also able to horizontally escalate his own privileges through seeing his brother's tax return, successfully **elevating his own privileges**.
 
+### PHANTOM-B
+
+This scenario fits **Missing security engineering**. Weak authentication, authorization, or tenant isolation allows an LLM application to expose another user's data or session.
+
 ### What can go wrong?
 
 Roy may use his knowledge about the weak authentication to gain access to more users' data. Keep in mind that prompt defences can be circumvented in order to gain unauthorized access.
