@@ -8,7 +8,7 @@ GPI-3.1415 can execute high-impact operations across integrated systems due to e
 
 ### Example
 
-GPI-3.1415 is the AI assistant inside a popular cloud photo-storage app, with write access to user libraries, the trash bin, and the auto-tagging service. A user, halfway through their morning coffee, asks: "Hey, could you clean up the duplicate-looking photos from last summer? Thanks!" GPI-3.1415 interprets "duplicate-looking" as "anything with similar lighting" and deletes 4,200 photos, including every single picture from the user's wedding, three family birthdays, and the dog's adoption day. It then goes on to purge any copies on the family's connected devices and notify all family members that their phtoes have been cleaned up. Each deletion is its own API call with no rollback button.
+GPI-3.1415 is the AI assistant inside a popular cloud photo-storage app, with write access to user libraries, the trash bin, and the auto-tagging service. A user, halfway through their morning coffee, asks: "Hey, could you clean up the duplicate-looking photos from last summer? Thanks!" GPI-3.1415 interprets "duplicate-looking" as "anything with similar lighting" and deletes 4,200 photos, including every single picture from the user's wedding, three family birthdays, and the dog's adoption day. It then goes on to purge any copies on the family's connected devices and notify all family members that their photos have been cleaned up. Each deletion is its own API call with no rollback button.
 
 ## Threat Modeling
 
