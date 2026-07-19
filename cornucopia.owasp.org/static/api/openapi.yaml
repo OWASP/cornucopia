@@ -106,6 +106,36 @@ paths:
                       languages: [en]
                       version: "1.0"
 
+  /lang/eop/{version}:
+    get:
+      summary: Get supported languages for Elevation of Privilege edition
+      description: |
+        Returns metadata about supported languages for the
+        Elevation of Privilege Edition.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["5.0"]
+      responses:
+        '200':
+          description: Language metadata for Elevation of Privilege edition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaEop'
+              examples:
+                example:
+                  summary: Example language metadata response
+                  value:
+                    meta:
+                      component: cards
+                      language: all
+                      languages: [en, es, ru]
+                      version: "5.0"
+
   /cre/dbd/{lang}:
     get:
       summary: Get DBD cards by language
