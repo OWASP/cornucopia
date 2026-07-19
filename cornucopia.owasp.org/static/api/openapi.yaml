@@ -574,14 +574,14 @@ paths:
       summary: Get language metadata for an edition version
       description: |
         Returns the list of supported languages for a given edition and version.
-        Works for all registered editions (webapp, mobileapp, companion).
+        Works for all registered editions (webapp, mobileapp, companion, eop).
       parameters:
         - name: edition
           in: path
           required: true
           schema:
             type: string
-            enum: [webapp, mobileapp, companion]
+            enum: [webapp, mobileapp, companion, eop]
         - name: version
           in: path
           required: true
