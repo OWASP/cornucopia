@@ -34,6 +34,29 @@ describe('GET /api/lang/[edition]/[version]', () => {
         });
     });
 
+    it('returns languages for the eop edition and version', async () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
+        vi.spyOn(DeckService, 'getLanguagesForEditionVersion').mockReturnValue(['en', 'es', 'ru']);
+
+        const response = await GET({
+            params: { edition: 'eop', version: '5.0' }
+        } as unknown);
+
+        expect(response.status).toBe(200);
+        expect(response.headers.get('content-type')).toContain('application/json');
+
+        const body = await response.json();
+        expect(body).toEqual({
+            meta: {
+                component: 'cards',
+                language: 'all',
+                languages: ['en', 'es', 'ru'],
+                version: '5.0'
+            }
+        });
+    });
+
     it('throws 404 when edition is invalid', () => {
         vi.spyOn(DeckService, 'hasEdition').mockReturnValue(false);
         vi.spyOn(DeckService, 'getLatestEditions').mockReturnValue(['webapp', 'mobileapp']);
