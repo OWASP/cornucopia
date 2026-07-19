@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Tampering**.
 
 The attacker tampers with external content that the agent will retrieve, injecting instructions that alter the agent's behavior. This is a form of indirect prompt injection: the malicious payload does not arrive in the user's input but in the output of a tool the agent trusts.
 
+### PHANTOM-B
+
+This scenario fits **Prompt injection** and **Over-reliance on the LLM**. Malicious instructions are sent to the agent that execute them without oversight because the user or the developers are relying on the agent's capabilities when they shouldn't.
+
 ### What can go wrong?
 
 Indirect prompt injection via tool output is particularly dangerous because it can be staged entirely outside the target organization's control - on any web page, document, or API response the agent may encounter. Successful exploitation can result in data exfiltration, unauthorized API calls, deletion of records, or lateral movement within connected systems.

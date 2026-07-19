@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Tampering**.
 
 The attacker modifies the data the agent relies on - the conversation history or memory store - to corrupt its reasoning output. This is tampering at the data layer: the agent's inputs are altered in a way that changes its behavior and outputs without the legitimate user's knowledge.
 
+### PHANTOM-B
+
+This scenario fits **Training issues (including data quality or poisoning)**. Attacker-influenced conversation history becomes a poisoned data source that can carry false assumptions into later actions. If those later actions are successful, then the poisoning has led to indirect **Prompt injection**, but the root cause is **Training issues (including data quality or poisoning)**.
+
 ### What can go wrong?
 
 Corrupted reasoning chains can cause an agent to approve actions, grant permissions, or produce outputs it would otherwise reject. Because the corruption is embedded in context rather than in current input, it may persist across many interactions and affect decisions far removed from the point of injection. This makes detection difficult and remediation costly.

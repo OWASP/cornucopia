@@ -11,6 +11,10 @@ Sarah has used Mr. Juice for a long time, and she always uses the AI chatbot to 
 This scenario falls into the **Tampering** and **Elevation of Privilege** category of STRIDE.
 Sarah is able to **elevate** her **privileges** and order a drink that is no longer being sold by **tampering** with and overriding the Mr. Juice AI chatbot's system prompt. 
 
+### PHANTOM-B
+
+This scenario fits **Prompt injection**. Crafted user input can override system prompts or safety instructions and make the model ignore its intended constraints.
+
 ### What can go wrong?
 
 Overriding the system prompt makes Sarah capable of prompt injection. Depending on the context and the capabilities of the AI system, prompt injection can result in XSS and CSRF in web browsers as well as SSRF, privilege escalation, or remote code execution on backend systems.

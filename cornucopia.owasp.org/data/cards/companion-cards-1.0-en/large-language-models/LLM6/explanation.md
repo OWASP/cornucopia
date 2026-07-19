@@ -11,6 +11,10 @@ The LLM happily complies, and due to the many other issues up for voting, nobody
 
 This scenario falls into the **Tampering** category of STRIDE. Andersen can manipulate the retrieval knowledge base and vector database where all the board documents are stored by uploading malicious prompt instructions that the LLM will interpret and comply with. The LLM has become poisoned by the data stored in its vector database through an indirect prompt injection.  
 
+### PHANTOM-B
+
+This scenario fits **Training issues (including data quality or poisoning)**. A poisoned or low-quality retrieval source can cause the model to present false, biased, or malicious information as fact.
+
 ### What can go wrong?
 
 There are several ways LLMs can get indirectly affected by it's data sources. Essentially, every source is a chance for someone to affect the behavior of the LLM. Data poisoning and indirect prompt injection can lead to financial losses, reputational damage, share price loss, customer churn, lawsuits, loss of sales, fines from data protection due to non-compliance and even financial bankruptcy. 

@@ -11,6 +11,10 @@ Tyrell is starting up his new business, a juice shop, that will compete with Mr.
 This scenario falls into the **Tampering** category of STRIDE.
 Tyrell is able to tamper with the behavior of the AI by teaching it to behave in a certain way whenever a certain word is inputted. It's a backdoor in the LLM's training data which has compromised the LLM's integrity.
 
+### PHANTOM-B
+
+This scenario fits **Training issues (including data quality or poisoning)**. Poisoned training or fine-tuning data can introduce backdoors or behavior that an attacker can trigger later.
+
 ### What can go wrong?
 
 AI Backdoors can be used to make the AI deliver misinformation, data exfiltration, XSS, and remote code execution which can trick users into becoming victims of fraud, disclosing sensitive information, giving away their credentials, or spreading malware. 

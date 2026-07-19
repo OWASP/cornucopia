@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Elevation of Privilege**.
 
 The attacker manipulates DeepGeek's planning process to insert objectives that grant unauthorized access across multiple systems. The agent's autonomous multi-step execution model means this escalation happens without any individual action appearing obviously malicious — the danger is in the sequence and its cross-system scope. Secondary categories include **Information Disclosure**, as the corrupted plan may expose sensitive system internals, account details, or authorization logic that should remain confidential.
 
+### PHANTOM-B
+
+This scenario fits **Over-reliance on the LLM**. The agent can plan and run multi-step operations across systems without the bride and groom being prompted to approve DeepGeek's harmful actions.
+
 ### What can go wrong?
 
 Hijacked multi-step plans can produce persistent, cross-system side effects that are difficult to detect and reverse. Because each individual step may appear legitimate in isolation, log-based monitoring may not surface the attack until after the damage is done. Long-running autonomous agents compound this risk by accumulating actions across extended time windows.

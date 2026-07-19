@@ -18,6 +18,10 @@ The scenario maps directly to STRIDE: **Tampering**.
 
 An attacker alters or injects peer-agent instructions in the communication channel, compromising the integrity of the multi-agent workflow. A secondary category is **Repudiation**, because the system also lacks verifiable provenance and audit evidence for agent-originated messages, making it impossible to prove whether a message came from a legitimate orchestrator or a compromised peer.
 
+### PHANTOM-B
+
+This scenario fits **Prompt injection** and **Missing security engineering**. Instructions from peer agents can alter behavior when the system does not verify their identity, policy compliance, or content.
+
 ### What can go wrong?
 
 In multi-agent pipelines, a single compromised or rogue agent can corrupt the behavior of all agents that accept its instructions without verification. Fraudulent actions, data manipulation, unauthorized approvals, and privilege escalation can cascade through the pipeline before any individual system detects an anomaly. The systemic nature of multi-agent architectures amplifies the impact of a single spoofing event.

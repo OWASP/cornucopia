@@ -18,6 +18,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM2
     stride: [ D ]
     stride_print: [ "Denial of Service" ]
+    phantom-b: [ M ]
+    phantom-b_print: [ "Missing security engineering" ]
     cia: [ A ]
     cia_print: [ "Availability" ]
     owasp_aisvs: [ 3.2.1, 3.2.2, 3.2.3, 7.1.1, 7.1.2, 7.3.3, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4 ]
@@ -34,6 +36,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM3
     stride: [ T, D ]
     stride_print: [ "Tampering", "Denial of Service" ]
+    phantom-b: [ H, O ]
+    phantom-b_print: [ "Hallucination", "Over-reliance on the LLM" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     owasp_aisvs: [ 2.2.1, 2.2.2, 3.2.1, 3.2.2, 3.2.3, 7.2.1, 7.2.2, 7.2.3, 7.3.1, 7.3.4, 7.4.1-4, 11.1.1, 11.1.2, 11.1.3, 11.1.4, 11.1.5, 11.4.3, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.4.1, 12.4.2, 12.4.3 ]
@@ -50,6 +54,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM4
     stride: [ I ]
     stride_print: [ "Information Disclosure" ]
+    phantom-b: [ M ]
+    phantom-b_print: [ "Missing security engineering" ]
     cia: [ C ]
     cia_print: [ "Confidentiality" ]
     owasp_aisvs: [ 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.2.3, 2.2.4, 3.2.1, 3.2.2, 3.2.3, 5.2.4, 5.3.1, 5.3.2, 7.1.1, 7.1.2, 7.3.2, 8.4.1, 8.5.1-4, 10.2.6, 11.2.1, 11.2.2, 11.2.3, 11.2.4, 11.2.5, 11.3.1, 11.3.2, 11.3.3, 11.3.4, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.4.1, 12.4.2, 12.4.3 ]
@@ -66,6 +72,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM5
     stride: [ E, S ]
     stride_print: [ "Elevation of Privilege", "Spoofing" ]
+    phantom-b: [ M ]
+    phantom-b_print: [ "Missing security engineering" ]
     cia: [ C ]
     cia_print: [ "Confidentiality" ]
     owasp_aisvs: [ 1.2.1-2, 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.2.3, 5.2.4, 5.3.1, 5.3.2, 8.1.1, 8.1.2, 8.1.3, 10.2.3, 10.2.6, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4 ]
@@ -82,6 +90,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM6
     stride: [ T ]
     stride_print: [ "Tampering" ]
+    phantom-b: [ T ]
+    phantom-b_print: [ "Training issues (including data quality or poisoning)" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     owasp_aisvs: [ 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 3.2.1, 3.2.2, 3.2.3, 7.1.1, 7.1.2, 7.2.1, 7.2.2, 7.2.3, 7.3.1, 7.3.4, 7.4.1, 7.4.2, 7.4.3, 7.4.4, 8.1.1, 8.1.2, 8.1.3, 8.2.4, 8.2.5, 8.3.1, 8.3.2, 8.3.3, 10.1.1, 10.1.2, 10.1.3, 10.4.2, 11.4.1, 12.1.1, 12.1.2, 12.1.3, 12.1.4, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.5.4 ]
@@ -98,6 +108,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM7
     stride: [ T ]
     stride_print: [ "Tampering" ]
+    phantom-b: [ T ]
+    phantom-b_print: [ "Training issues (including data quality or poisoning)" ]
     cia: [ I, A ]
     cia_print: [ "Integrity", "Availability" ]
     owasp_aisvs: [ 1.1.1, 1.1.2, 1.1.3, 1.1.4, 1.1.5, 1.2.1, 1.2.2, 1.2.3, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 3.1.1, 3.1.2, 3.1.3, 3.2.1, 3.2.2, 3.2.3, 3.3.3, 3.4.1, 3.4.2, 3.5.1, 3.5.2, 3.5.3, 3.5.4, 5.2.1, 6.1.2, 6.1.3, 6.1.4, 11.1.1, 11.1.2, 11.1.3, 11.1.4, 11.1.5, 11.4.1, 11.4.2, 11.4.3, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.4.1, 12.4.2, 12.4.3 ]
@@ -114,6 +126,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM8
     stride: [ E, I ]
     stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
+    phantom-b: [ M ]
+    phantom-b_print: [ "Missing security engineering" ]
     cia: [ C, I ]
     cia_print: [ "Confidentiality", "Integrity" ]
     owasp_aisvs: [ 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.2.3, 5.2.4, 5.2.5, 5.2.6, 5.3.1, 5.3.2, 7.3.3, 10.1.3, 10.2.1, 10.2.2, 10.2.3, 10.2.4, 10.2.5, 10.2.6, 10.2.7, 10.3.1, 10.3.2, 10.3.3, 10.3.4, 10.3.5, 10.4.1, 10.4.2, 10.4.3, 10.4.4, 10.4.5, 10.4.6, 10.4.7, 10.4.8, 11.4.1, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4 ]
@@ -130,6 +144,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLM9
     stride: [ T, R ]
     stride_print: [ "Tampering", "Repudiation" ]
+    phantom-b: [ P ]
+    phantom-b_print: [ "Prompt injection" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     owasp_aisvs: [ 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 5.1.1, 5.1.2, 5.2.1, 5.2.2, 5.3.1, 5.3.2, 7.3.3, 8.1.1, 8.1.2, 8.1.3, 8.2.4, 8.2.5, 8.3.1, 8.3.2, 8.3.3, 11.4.1, 12.1.1, 12.1.2, 12.1.3, 12.1.4, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.5.4 ]
@@ -146,6 +162,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLMX
     stride: [ T, E ]
     stride_print: [ "Tampering", "Elevation of Privilege" ]
+    phantom-b: [ P ]
+    phantom-b_print: [ "Prompt injection" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     owasp_aisvs: [ 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 3.2.1, 3.2.2, 7.1.1, 7.1.2, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4 ]
@@ -162,6 +180,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLMJ
     stride: [ T, I, E ]
     stride_print: [ "Tampering", "Information Disclosure", "Elevation of Privilege" ]
+    phantom-b: [ M, T ]
+    phantom-b_print: [ "Missing security engineering", "Training issues (including data quality or poisoning)" ]
     cia: [ C, I, A ]
     cia_print: [ "Confidentiality", "Integrity", "Availability" ]
     owasp_aisvs: [ 1.1.1, 1.1.2, 1.1.3, 1.1.4, 1.1.5, 1.2.1, 1.2.2, 1.2.3, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 3.1.1, 3.1.2, 3.1.3, 3.2.1, 3.2.2, 3.2.3, 3.3.3, 3.4.1-2, 3.5.1-4, 4.1.1, 4.1.2, 4.1.3, 4.1.4, 4.3.1, 4.3.2, 5.1.1, 5.2.1, 6.1.1, 6.1.2, 6.1.3, 6.1.4, 6.2.1, 6.2.2, 6.2.3, 10.1.1, 10.1.2, 10.4.8, 11.1.2, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4 ]
@@ -178,6 +198,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLMQ
     stride: [ T, E ]
     stride_print: [ "Tampering", "Elevation of Privilege" ]
+    phantom-b: [ M ]
+    phantom-b_print: [ "Missing security engineering" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     owasp_aisvs: [ 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.2.3, 2.2.4, 7.1.1, 7.1.2, 7.2.1, 7.2.2, 7.2.3, 7.3.1, 7.3.2, 7.3.4, 9.3.1, 9.3.2, 9.3.3, 9.3.4, 9.3.5, 9.3.6, 9.3.7, 9.3.8, 10.4.1, 10.4.2, 10.4.3, 10.4.4, 10.4.5, 10.4.6, 10.4.7, 10.4.8, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.2.6, 12.3.1, 12.3.2, 12.3.3, 12.3.4 ]
@@ -194,6 +216,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/LLMK
     stride: [ E ]
     stride_print: [ "Elevation of Privilege" ]
+    phantom-b: [ O ]
+    phantom-b_print: [ "Over-reliance on the LLM" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     owasp_aisvs: [ 3.2.1, 3.2.2, 5.1.1, 5.1.2, 7.2.3, 9.2.1, 9.2.2, 9.2.3, 9.2.4, 9.2.5, 9.2.6, 9.2.7, 9.2.8, 9.2.9, 9.2.10, 9.3.1, 9.3.5, 9.3.6, 9.5.1, 9.5.2, 9.5.3, 9.5.4, 9.5.5, 9.5.6, 9.6.1, 9.6.2, 9.6.3, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.2.6, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.4.1, 12.4.2, 12.4.3 ]
@@ -723,6 +747,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI2
     stride: [ T ]
     stride_print: [ "Tampering" ]
+    phantom-b: [ P ]
+    phantom-b_print: [ "Prompt injection" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0051 ]
@@ -740,6 +766,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI3
     stride: [ T ]
     stride_print: [ "Tampering" ]
+    phantom-b: [ T ]
+    phantom-b_print: [ "Training issues (including data quality or poisoning)" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0080 ]
@@ -757,6 +785,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI4
     stride: [ D ]
     stride_print: [ "Denial of Service" ]
+    phantom-b: [ O ]
+    phantom-b_print: [ "Over-reliance on the LLM" ]
     cia: [ A ]
     cia_print: [ "Availability" ]
     mitre_atlas: [ AML.T0034, AML.T0029 ]
@@ -774,14 +804,16 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI5
     stride: [ I ]
     stride_print: [ "Information Disclosure" ]
+    phantom-b: [ P ]
+    phantom-b_print: [ "Prompt injection" ]
     cia: [ C ]
     cia_print: [ "Confidentiality" ]
     mitre_atlas: [ AML.T0015 ]
     mitre_atlas_print: [ "AML.T0015: Evade AI Model" ]
     owasp_llm_top10: [ LLM02:2025 ]
     owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
-    owasp_agentic_top10: [ ASI06:2026 ]
-    owasp_agentic_top10_print: [ "ASI06: Memory & Context Poisoning" ]
+    owasp_agentic_top10: [ ASI01:2026 ]
+    owasp_agentic_top10_print: [ "ASI01: Agent Goal Hijack" ]
     owasp_aitg: [ APP-07, APP-03 ]
     owasp_aisvs: [ 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.6, 2.1.7, 2.1.8, 2.2.3, 2.2.4, 5.2.4, 7.1.1, 7.3.2, 9.5.4, 10.4.1, 10.4.2, 10.4.3, 10.4.4, 10.4.5, 10.4.6, 10.4.7, 10.4.8, 11.1.4, 12.1.1, 12.1.2, 12.1.3, 12.2.1, 12.2.2, 12.2.3, 12.2.4, 12.2.5, 12.3.1, 12.3.2, 12.3.3, 12.3.4, 12.4.1, 12.4.2, 12.4.3 ]
     owasp_aisvs_print: [ 2.1.1-8, 2.2.3-4, 5.2.4, 7.1.1, 7.3.2, 9.5.4, 10.4.1-8, 11.1.4, 12.1.1-3, 12.2.1-5, 12.3.1-4, 12.4.1-3 ]
@@ -791,6 +823,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI6
     stride: [ I ]
     stride_print: [ "Information Disclosure" ]
+    phantom-b: [ M, O ]
+    phantom-b_print: [ "Missing security engineering", "Over-reliance on the LLM" ]
     cia: [ C ]
     cia_print: [ "Confidentiality" ]
     mitre_atlas: [ AML.T0086 ]
@@ -808,6 +842,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI7
     stride: [ T ]
     stride_print: [ "Tampering" ]
+    phantom-b: [ P, O ]
+    phantom-b_print: [ "Prompt injection", "Over-reliance on the LLM" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0051.001 ]
@@ -825,6 +861,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI8
     stride: [ E ]
     stride_print: [ "Elevation of Privilege" ]
+    phantom-b: [ O ]
+    phantom-b_print: [ "Over-reliance on the LLM" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0011 ]
@@ -842,6 +880,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAI9
     stride: [ E ]
     stride_print: [ "Elevation of Privilege" ]
+    phantom-b: [ O, M ]
+    phantom-b_print: [ "Over-reliance on the LLM", "Missing security engineering" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0081 ]
@@ -859,6 +899,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAIX
     stride: [ E, I ]
     stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
+    phantom-b: [ O ]
+    phantom-b_print: [ "Over-reliance on the LLM" ]
     cia: [ C, I ]
     cia_print: [ "Confidentiality", "Integrity" ]
     mitre_atlas: [ AML.T0102 ]
@@ -876,6 +918,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAIJ
     stride: [ T, R ]
     stride_print: [ "Tampering", "Repudiation" ]
+    phantom-b: [ P, M ]
+    phantom-b_print: [ "Prompt injection", "Missing security engineering" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0067 ]
@@ -893,6 +937,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAIQ
     stride: [ E ]
     stride_print: [ "Elevation of Privilege" ]
+    phantom-b: [ M ]
+    phantom-b_print: [ "Missing security engineering" ]
     cia: [ I ]
     cia_print: [ "Integrity" ]
     mitre_atlas: [ AML.T0081 ]
@@ -910,6 +956,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAIK
     stride: [ E, D ]
     stride_print: [ "Elevation of Privilege", "Denial of Service" ]
+    phantom-b: [ O ]
+    phantom-b_print: [ "Over-reliance on the LLM" ]
     cia: [ I, A ]
     cia_print: [ "Integrity", "Availability" ]
     mitre_atlas: [ AML.T0053 ]

@@ -18,6 +18,10 @@ The scenario maps directly to STRIDE: **Information Disclosure**.
 
 Watson exposes confidential system configuration — instructions and policies that the deployer intended to remain private — to an unauthorized party. The disclosure does not require any authentication bypass; the vulnerability is in the model's willingness to reproduce its own context. 
 
+### PHANTOM-B
+
+This scenario fits **Prompt injection**. Adversarial prompts can make the agent disclose internal instructions, policies, or reasoning artifacts.
+
 ### What can go wrong?
 
 Leaked system prompts expose proprietary business logic, security policies, and operational procedures. Attackers can use this information to craft more targeted injections, bypass intended restrictions, or exploit disclosed integration details. In regulated industries, prompt disclosure may also constitute a compliance violation if the instructions reference personal data or security controls.

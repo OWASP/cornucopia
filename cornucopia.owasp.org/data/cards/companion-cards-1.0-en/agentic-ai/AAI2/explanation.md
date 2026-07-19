@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Tampering**.
 
 Tay is manipulated into modifying system state, data, or configurations beyond those authorized for the current task scope. The attacker exploits the agent's inability to distinguish between trusted instructions and untrusted content to tamper with sensitive resources—such as database records, user credentials, or system configurations—without proper authorization or audit trails.
 
+### PHANTOM-B
+
+This scenario fits **Prompt injection**. Insufficient prompt enforcement gives an attacker the means to make the agent do something it was not intended to do.
+
 ### What can go wrong?
 
 When an AI agent executes actions outside its intended task scope, the consequences range from data exfiltration to unintended side effects in downstream systems. Organizations may suffer loss of confidential data, violation of user privacy, or compliance breaches — all while the agent continues to appear functional for its primary task.
