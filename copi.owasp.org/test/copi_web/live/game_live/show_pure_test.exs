@@ -10,6 +10,12 @@ defmodule CopiWeb.GameLive.ShowPureTest do
     assert Show.display_game_session("unknown") == "EoP Session:"
   end
 
+  test "latest_version returns a version number for any edition" do
+    for edition <- ["webapp", "ecommerce", "mobileapp", "mlsec", "cumulus", "masvs", "eop", "dbd", "unknown"] do
+      assert {_version, ""} = Float.parse(Show.latest_version(edition))
+    end
+  end
+
   test "card_played_in_round finds card or returns nil" do
     cards = [%{played_in_round: 1, id: "a"}, %{played_in_round: 3, id: "b"}]
     assert Show.card_played_in_round(cards, 3) == %{played_in_round: 3, id: "b"}
