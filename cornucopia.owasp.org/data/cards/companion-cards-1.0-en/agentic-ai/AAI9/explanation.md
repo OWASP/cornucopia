@@ -22,7 +22,7 @@ CoPirate changes configurations, permissions, or role bindings in a way that inc
 
 ### PHANTOM-B
 
-This scenario fits **Over-reliance on the LLM**. Excessive autonomy lets the agent change configurations, permissions, or settings beyond its intended authority which attackers can exploit, but this is only made possible through processes that are missing engineering principles like authorization, Segregation of Duties (SoD), and least privilege. You could therefor also argue that **Missing security engineering** is the root cause.
+This scenario fits **Over-reliance on the LLM**. Excessive autonomy lets the agent change configurations, permissions, or settings beyond its intended authority which attackers can exploit, but this is only made possible through processes that are missing engineering principles like authorization, Segregation of Duties (SoD), and least privilege. You could therefore also argue that **Missing security engineering** is the root cause.
 
 ### What can go wrong?
 
