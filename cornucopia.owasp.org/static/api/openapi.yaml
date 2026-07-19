@@ -527,6 +527,48 @@ paths:
                       version: "1.0"
                     standards: []
 
+  /cre/eop/{lang}:
+    get:
+      summary: Get Elevation of Privilege cards by language
+      description: |
+        Get the Elevation of Privilege Edition cards by language.
+        This edition does not have Open CRE mappings, so the links
+        array of each card is empty.
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [en, es, ru]
+      responses:
+        '200':
+          description: Elevation of Privilege cards
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Elevation of Privilege response
+                  value:
+                    meta:
+                      edition: Elevation of Privilege Edition
+                      component: cards
+                      language: en
+                      version: "5.0"
+                    standards:
+                      - doctype: Tool
+                        id: https://cornucopia.owasp.org/edition/eop/SP2/5.0/en
+                        name: Elevation of Privilege Edition
+                        section: Spoofing
+                        description: An attacker could take over the port or socket that the server normally uses
+                        sectionID: SP2
+                        hyperlink: https://cornucopia.owasp.org/edition/eop/SP2/5.0/en
+                        links: []
+                        tags: [Threat modeling, Elevation of Privilege]
+                        tooltype: Defensive
+
   /lang/{edition}/{version}:
     get:
       summary: Get language metadata for an edition version
