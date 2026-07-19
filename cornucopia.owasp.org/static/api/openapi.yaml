@@ -398,6 +398,43 @@ paths:
                         capec: [ 508 ]
                         safecode: [ "-" ]
 
+  /mapping/eop/{version}:
+    get:
+      summary: Get Elevation of Privilege mapping by version
+      description: |
+        Get the Elevation of Privilege Edition mapping data
+        by version. Each card just maps to its STRIDE category.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["5.0"]
+      responses:
+        '200':
+          description: Elevation of Privilege mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Elevation of Privilege mapping response
+                  value:
+                    meta:
+                      edition: eop
+                      component: mappings
+                      language: ALL
+                      version: "5.0"
+                    cards:
+                      SP2:
+                        id: "SP2"
+                        value: "2"
+                        url: "https://cornucopia.owasp.org/cards/SP2"
+                        stride: [ S ]
+                        stride_print: [ Spoofing ]
+
   /cre/mobileapp/{lang}:
     get:
       summary: Get Mobile cards by language
