@@ -22,7 +22,7 @@ The attacker modifies the data the agent relies on - the conversation history or
 
 ### PHANTOM-B
 
-This scenario fits **Training issues (including data quality or poisoning)**. Attacker-influenced conversation history becomes a poisoned data source that can carry false assumptions into later actions. If does later actions are successful, then the poisoning has lead to indirect **Prompt injection**, but the root cause is **Training issues (including data quality or poisoning)**.
+This scenario fits **Training issues (including data quality or poisoning)**. Attacker-influenced conversation history becomes a poisoned data source that can carry false assumptions into later actions. If those later actions are successful, then the poisoning has led to indirect **Prompt injection**, but the root cause is **Training issues (including data quality or poisoning)**.
 
 ### What can go wrong?
 
