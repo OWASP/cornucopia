@@ -4,8 +4,8 @@ info:
   title: OWASP Cornucopia API
   description: |
     Public API for accessing OWASP Cornucopia card data and metadata.
-    This API exposes language metadata and Open CRE mappings
-    for both Website App and Mobile App editions.
+    This API exposes language metadata, card mappings and Open CRE mappings
+    for the Cornucopia editions and the Elevation of Privilege edition.
   version: 1.0.0
 
 servers:
