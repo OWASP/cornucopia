@@ -22,7 +22,7 @@ The attacker manipulates DeepGeek's planning process to insert objectives that g
 
 ### PHANTOM-B
 
-This scenario fits **Over-reliance on the LLM**. The agent can plan and run multi-step operations across systems without the bride and groom  being prompted to approve DeepGeeks harmful actions.
+This scenario fits **Over-reliance on the LLM**. The agent can plan and run multi-step operations across systems without the bride and groom being prompted to approve DeepGeek's harmful actions.
 
 ### What can go wrong?
 
