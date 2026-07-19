@@ -211,7 +211,7 @@ You may refer to the [CC-BY-SA-4.0](./LICENSE.md) license for guidance as long a
 
 MIT License Copyright (c) 2020 Move Your Digital, Inc.
 
-please read [README.md](./cornucopia.owasp.org/script/README.md)
+Please read [README.md](./cornucopia.owasp.org/script/README.md)
 
 ### Common Attack Pattern Enumeration and Classification (CAPEC™)
 
