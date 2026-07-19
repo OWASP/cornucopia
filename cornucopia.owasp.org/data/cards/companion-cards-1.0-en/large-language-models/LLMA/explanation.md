@@ -19,6 +19,10 @@ You have identified an attack that misuses inherent large language model functio
 
 The appropriate STRIDE category depends on the specific threat you create and the way the agent is misused.
 
+### PHANTOM-B
+
+An invented LLM threat can fit any PHANTOM-B prompt.
+
 ### What can go wrong?
 
 Attacks on large language models can do irreparable damage to any type of asset. It may be possible to fix an AI model after its data has become poisoned, but it's extremely challenging, costly, and often requires complete retraining. A large language model can also be used as a springboard for other types of attacks on the system if an attacker is able to convince it to execute code or actions on behalf of the attacker. As an AI model also connects to vast amounts of data, given that access controls are insufficiently implemented, the model itself can become a tool for data exfiltration of sensitive information as well as getting stolen. The information can, in turn, be used to make users victims of fraud, identity theft, phishing, and malware attacks. The impact of such attacks can be financial losses, reputational damage, share price loss, customer churn, lawsuits, loss of sales, fines from data protection due to non-compliance and even financial bankruptcy.

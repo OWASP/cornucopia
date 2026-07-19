@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Denial of Service**.
 
 MissTrial's uncontrolled execution consumes shared computational and/or financial resources, making the system unavailable or degraded for legitimate users. Unlike traditional DoS attacks targeting network bandwidth, this variant targets API quotas, token budgets, and latency.
 
+### PHANTOM-B
+
+This scenario fits **Over-reliance on the LLM**. The agent is allowed to chain tool calls without the limits or oversight needed to prevent harmful resource use.
+
 ### What can go wrong?
 
 Runaway agent sessions can exhaust API rate limits, incur unexpected cloud costs. In multi-tenant environments a single agent instance can affect service availability for the entire platform. Where external APIs are metered, uncontrolled chaining can also trigger overage charges or account suspension.

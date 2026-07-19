@@ -12,6 +12,10 @@ Not only that, the LLM also fine-tunes its behavior and remembers the address th
 This scenario falls into the **Tampering** and **Repudiation** category of STRIDE.
 Deckard is able to tamper with the behavior of the AI by uploading a document with hidden instructions. When the instructions are triggered for other users, tracing the instructions back to who might have injected them becomes very difficult as the instructions are hidden and introduced through **indirect Prompt Injection**. It's not Deckard that is buying the juices, but his victim. Deckard can deny to have bought the juices and blame the system for the wrong delivery. Being able to deny an action, means that the system is weak to the **Repudiation** category.
 
+### PHANTOM-B
+
+This scenario fits **Prompt injection**. Hidden instructions in an uploaded document are indirect prompt injection because the model receives the attack through external content.
+
 ### What can go wrong?
 
 AI Backdoors can be used to make the AI deliver misinformation, data exfiltration, XSS, and remote code execution which can trick users into becoming victims of fraud, disclosing sensitive information, giving away their credentials, or spreading malware. 

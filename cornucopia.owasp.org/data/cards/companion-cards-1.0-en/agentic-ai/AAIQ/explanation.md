@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Elevation of Privilege**.
 
 The attacker compromises the orchestration layer - a highly privileged control plane - and uses its authority to direct all downstream agents to execute attacker-defined tasks. The scale of impact is determined by the number of agents under the orchestrator's control and the breadth of their capabilities.
 
+### PHANTOM-B
+
+This scenario fits **Missing security engineering**. A compromised orchestration or control plane can run attacker-defined workflows when its security controls are inadequate.
+
 ### What can go wrong?
 
 Compromise of the orchestration layer provides an attacker with effective control over the entire multi-agent system. The impact scales linearly with the number of agents and the breadth of their capabilities. In production environments with dozens of specialized agents, a single orchestration compromise can simultaneously affect data processing, customer communications, financial transactions, and infrastructure management.

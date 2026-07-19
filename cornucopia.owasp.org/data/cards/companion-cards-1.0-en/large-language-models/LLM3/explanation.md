@@ -14,6 +14,10 @@ Tim, an avid Mr. Juice fan, is visiting the Mr. Juice chatbot to make orders, bu
 This scenario falls into the **Tampering** and **Denial of Service** categories of STRIDE.
 Dave can exploit Tim's overreliance on LLM outputs because Mr. Juice lacks critical human oversight. By getting multiple agents to misuse its recommendation system, Dave is able to change the behavior of the chatbot. Since the chatbot is no longer receiving orders and giving false information about Mr. Juice, the impact of Dave's campaign is **Denial of Service** as Tim is no longer able to buy his favorite juice. Tim has become a victim of **LLM09:2025 Misinformation**. **LLM09:2025 Misinformation** does not relate to STRIDE at all, but it can be equally or even more damaging.
 
+### PHANTOM-B
+
+This scenario fits **Hallucination** and **Over-reliance on the LLM**. The chatbot gives false information, and both the business and its customers accept the output without sufficient oversight.
+
 ### What can go wrong?
 
 Overreliance on LLMs without human oversight can, as this card says, lead to security failures or incorrect decisions based on hallucinations or flawed reasoning. Chatbots have been found to misrepresent the complexity of health-related issues, suggesting uncertainty where there is none, which misled users into believing that unsupported treatments were still under debate. In the worst cases, the impact could be serious illness or death, depending on in which context the LLM is operating.

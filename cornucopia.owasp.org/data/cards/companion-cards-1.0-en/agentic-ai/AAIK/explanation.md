@@ -8,15 +8,18 @@ GPI-3.1415 can execute high-impact operations across integrated systems due to e
 
 ### Example
 
-GPI-3.1415 is the AI assistant inside a popular cloud photo-storage app, with write access to user libraries, the trash bin, and the auto-tagging service. A user, halfway through their morning coffee, asks: "Hey, could you clean up the duplicate-looking photos from last summer? Thanks!" GPI-3.1415 interprets "duplicate-looking" as "anything with similar lighting" and deletes 4,200 photos, including every single picture from the user's wedding, three family birthdays, and the dog's adoption day. Each deletion is its own API call with no rollback button.
+GPI-3.1415 is the AI assistant inside a popular cloud photo-storage app, with write access to user libraries, the trash bin, and the auto-tagging service. A user, halfway through their morning coffee, asks: "Hey, could you clean up the duplicate-looking photos from last summer? Thanks!" GPI-3.1415 interprets "duplicate-looking" as "anything with similar lighting" and deletes 4,200 photos, including every single picture from the user's wedding, three family birthdays, and the dog's adoption day. It then goes on to purge any copies on the family's connected devices and notify all family members that their phtoes have been cleaned up. Each deletion is its own API call with no rollback button.
 
 ## Threat Modeling
 
 ### STRIDE
 
 The scenario maps directly to STRIDE: **Elevation of Privilege**.
-
 GPI-3.1415's excessive agency means it can take actions across integrated systems that no single human operator would be authorized to execute unilaterally without review. The agent's broad authority, combined with the absence of transactional safeguards, allows a single misinterpretation or injected objective to produce organization-wide impact. Secondary categories include **Tampering** (irreversible modification of data and system state) and **Denial of Service** (if the actions render systems unavailable to legitimate users).
+
+### PHANTOM-B
+
+This scenario fits **Over-reliance on the LLM**. High-impact operations can run across connected systems without the approval and transactional safeguards they require.
 
 ### What can go wrong?
 

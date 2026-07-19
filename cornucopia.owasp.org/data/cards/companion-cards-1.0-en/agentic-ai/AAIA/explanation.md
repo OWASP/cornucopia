@@ -17,6 +17,10 @@ You have identified an attack that misuses inherent Agentic AI functionality or 
 
 The appropriate STRIDE category depends on the specific threat you create and the way the agent is misused.
 
+### PHANTOM-B
+
+An invented agentic AI threat can fit any PHANTOM-B prompt: **Prompt injection**, **Hallucination**, **Anthropomorphization**, **Non-explainability**, **Training issues**, **Over-reliance on the LLM**, **Missing security engineering**, or **Biases**.
+
 ### What can go wrong?
 
 Agentic AI attacks combine the scale and speed of automated systems with the authority and cross-system reach granted to AI agents. A single successful attack can trigger cascading effects across all systems the agent is connected to, producing data loss, unauthorized transactions, service disruption, or persistent unauthorized access, often before any human reviewer notices the anomaly.

@@ -80,6 +80,7 @@ The following is the full list of all the resources that the 3 editions map to.
 * [OWASP Dev Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/)
 * [SAFECode Practical Security Stories and Security Tasks for Agile Development Environments (SAFECode) July 2012](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf)
 * [STRIDE](https://en.wikipedia.org/wiki/STRIDE_model)
+* [PHANTOM-B](https://shostack.org/blog/why-phantom-b/)
 
 ## Other Security Gamification
 

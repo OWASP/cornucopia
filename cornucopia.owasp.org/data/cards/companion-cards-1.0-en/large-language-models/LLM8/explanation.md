@@ -12,6 +12,10 @@ This scenario falls into the **Information Disclosure** and **Elevation of Privi
 Rossum is able to disclose the invoices for all Mr. Juice's customers through privileges he should not have because the developers at Mr. Juice have implemented a plugin with an insecure integration design making data exfiltration possible. The plugin connects to the invoice database to retrieve the invoice on behalf of the customer, and missing access checks and loose privileges allows Rossum to elevate his own privileges.
 If the plugin also is allowed to change and delete data from the invoice database, then the **Tampering** would also be applicable.
 
+### PHANTOM-B
+
+This scenario fits **Missing security engineering**. Missing authorization controls and insecure plugin design gives Rossum too much control over data and operations without sufficient checks on what he is allowed to access or do. 
+
 ### What can go wrong?
 
 Insecure plugins can lead to data exfiltration of sensitive information, that can trick users into becoming victims of fraud, identity theft, phishing, and spreading malware.

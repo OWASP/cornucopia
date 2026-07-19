@@ -11,6 +11,10 @@ Samantha is an avid vibe coder. She does a lot of coding using LLM, but she can'
 This scenario falls into the **Denial of Service** category of STRIDE.
 Samantha can make requests of the AI chatbot until the application is involuntarily shut down.
 
+### PHANTOM-B
+
+This scenario fits **Missing security engineering**. Without resource limits, cost controls, or other safeguards, expensive or recursive LLM requests can exhaust the service.
+
 ### What can go wrong?
 
 In AI systems, attackers can craft specific inputs or interactions that intentionally cause resource-intensive processes, potentially resulting in denial-of-service (DoS) conditions. LLMs can also involve significant costs. These costs can become substantial, especially in multi-agent systems. 
