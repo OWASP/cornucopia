@@ -595,26 +595,47 @@ components:
             version:
               type: string
               example: "1.0"
-LanguageMetaCompanion:
+    LanguageMetaCompanion:
+      type: object
+      properties:
+        meta:
           type: object
           properties:
-            meta:
-              type: object
-              properties:
-                edition:
-                  type: string
-                  example: OWASP Cornucopia Companion Edition
-                component:
-                  type: string
-                  example: cards
-                language:
-                  type: string
-                  example: all
-                languages:
-                  type: array
-                  items:
-                    type: string
-                  example: [en]
-                version:
-                  type: string
-                  example: "1.0"
+            edition:
+              type: string
+              example: OWASP Cornucopia Companion Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en]
+            version:
+              type: string
+              example: "1.0"
+
+    LanguageMetaEop:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en, es, ru]
+            version:
+              type: string
+              example: "5.0"
