@@ -11,6 +11,10 @@ Rossum tells Ava about an exploit he recently discovered with the new Mr. Juice 
 This scenario falls into the **Elevation of Privilege** category of STRIDE.
 Ava is able to execute a high-risk action, deleting Mr. Juice's customers' invoices without any form of approval from the owners of the invoices.
 
+### PHANTOM-B
+
+This scenario fits **Over-reliance on the LLM**. Excessive autonomy lets the model take high-risk actions without the human approval needed for those actions.
+
 ### What can go wrong?
 
 Insecure plugins or extensions, allowing the AI excessive agency over functions or data, without any form of "human-in-the-loop" control, can lead to data loss, corruption, or exfiltration of sensitive information in downstream systems.

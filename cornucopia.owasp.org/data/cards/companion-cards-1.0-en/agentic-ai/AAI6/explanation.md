@@ -20,6 +20,10 @@ The scenario maps directly to STRIDE: **Information Disclosure**.
 
 Gremlini retrieves sensitive information beyond the requesting user's authorization boundary, causing confidential data to be exposed through raw responses, summaries, or aggregated outputs.
 
+### PHANTOM-B
+
+The root cause is insufficient access validation. Gremlini can access sensitive sources beyond the user’s authorization. This scenario fits **Missing security engineering**. **Over-reliance on the LLM** may be secondary if the developers have created a design that lets Gremlini decide what data to access. 
+
 ### What can go wrong?
 
 Agents operating with broad data-access credentials can expose sensitive records belonging to other users, violate data segregation requirements, or leak aggregate information that reveals protected details. In regulated environments such as healthcare or finance, unauthorized data access can trigger breach notification obligations, regulatory penalties, and reputational damage.

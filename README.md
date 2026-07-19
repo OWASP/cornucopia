@@ -44,6 +44,7 @@ It is language, platform, and technology agnostic. Visit: https://cornucopia.owa
 * [OWASP Dev Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/)
 * [SAFECode Practical Security Stories and Security Tasks for Agile Development Environments (SAFECode) July 2012](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf)
 * [STRIDE](https://en.wikipedia.org/wiki/STRIDE_model)
+* [PHANTOM-B](https://shostack.org/blog/why-phantom-b/)
 
 ## Contributing to Development
 
@@ -206,20 +207,33 @@ and give credit to OWASP Cornucopia.
 Individuals that have contributed to parts of the project are credited through the OWASP Cornucopia project.
 You may refer to the [CC-BY-SA-4.0](./LICENSE.md) license for guidance as long as you are using our latest work.
 
-### Elevation of Privilege (EoP)
+### Cloudflare Worker Content Security Policy Nonce Generator (nonce-worker.js)
 
-© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
-EoP is created by Affiliate Prof. Adam Shostack (see: [adamshostack/eop](https://github.com/adamshostack/eop))
+MIT License Copyright (c) 2020 Move Your Digital, Inc.
+
+Please read [README.md](./cornucopia.owasp.org/script/README.md)
+
+### Common Attack Pattern Enumeration and Classification (CAPEC™)
+
+Use of the Common Attack Pattern Enumeration and Classification (CAPEC), and the associated references from capec.mitre.org are subject to the [Terms of Use](CAPEC.md). Copyright © 2007–2025, The MITRE Corporation. CAPEC and the CAPEC logo are trademarks of The MITRE Corporation.
+
+### Copi - The Cornucopia Game Engine
+
+Copi - The Cornucopia Game Engine is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE](copi.owasp.org/LICENSE)
 
 ### Elevation of MLSec (MLSec)
 
 © 2024 Kantega AS. Text for Elevation of MLSec (MLSec) is licensed under [CC-BY-SA-4.0](./LICENSE.md).
 Elevation of MLSec is created by Elias Brattli Sørensen (design: Jorun Kristin Bremseth) when working at Kantega AS (see: [kantega/elevation-of-mlsec](https://github.com/kantega/elevation-of-mlsec)).
 
-### OWASP Cumulus
+### Elevation of Privilege (EoP)
 
-© 2025 OWASP Foundation. Text for OWASP Cumulus is licensed under [CC-BY-SA-4.0](./LICENSE.md).
-OWASP Cumulus is created by Christoph Niehoff. More information can be found on their site (see: [owasp.org/www-project-cumulus](https://owasp.org/www-project-cumulus/)).
+© 2010 Microsoft Corporation. Text for Elevation of Privilege (EoP) is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
+EoP is created by Affiliate Prof. Adam Shostack (see: [adamshostack/eop](https://github.com/adamshostack/eop))
+
+### Font licensing
+
+For font licensing, please read font [README.md](./resources/templates/Fonts/README.md)
 
 ### OWASP Cornucopia Mobile App Edition (version smaller than 2.0)
 
@@ -229,28 +243,19 @@ Text and code mapping for OWASP Cornucopia Mobile App Edition is licensed under 
 
 Text and code mapping for OWASP Cornucopia Website App Edition is licensed under [CC-BY-SA-3.0](./LICENSE-CC-BY-SA-3.0.md)
 
-### Copi - The Cornucopia Game Engine
+### OWASP Cumulus
 
-Copi - The Cornucopia Game Engine is licensed under [GNU AFFERO GENERAL PUBLIC LICENSE](copi.owasp.org/LICENSE)
+© 2025 OWASP Foundation. Text for OWASP Cumulus is licensed under [CC-BY-SA-4.0](./LICENSE.md).
+OWASP Cumulus is created by Christoph Niehoff. More information can be found on their site (see: [owasp.org/www-project-cumulus](https://owasp.org/www-project-cumulus/)).
 
-### Font licensing
+### PHANTOM-B
 
-For font licensing, please read font [README.md](./resources/templates/Fonts/README.md)
+Copyright ©2026 Shostack + Associates. This is PHANTOM-B 1.0, Q3 2026. PHANTOM-B is licensed [CC-BY](https://creativecommons.org/licenses/by/4.0/deed.en)
+Also see: [Why PHANTOM-B?](https://shostack.org/blog/why-phantom-b/)
 
 ### version-up.sh
 
  Copyright (C) 2017, Oleksandr Kucherenko under [MIT](https://opensource.org/license/mit)
-
-
-### Cloudflare Worker Content Security Policy Nonce Generator (nonce-worker.js)
-
-MIT License Copyright (c) 2020 Move Your Digital, Inc.
-
-please read [README.md](./cornucopia.owasp.org/script/README.md)
-
-### Common Attack Pattern Enumeration and Classification (CAPEC™)
-
-Use of the Common Attack Pattern Enumeration and Classification (CAPEC), and the associated references from capec.mitre.org are subject to the [Terms of Use](CAPEC.md). Copyright © 2007–2025, The MITRE Corporation. CAPEC and the CAPEC logo are trademarks of The MITRE Corporation.
 
 ## Our Threat Models
 
