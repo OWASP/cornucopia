@@ -119,6 +119,38 @@ describe('GET /api/cre/[edition]/[lang]', () => {
 
     
 
+    it('returns valid CRE mapping response for eop', () => {
+        vi.spyOn(DeckService, 'getLatestVersion').mockReturnValue('5.0');
+
+        vi.spyOn(DeckService.prototype, 'getCardDataForEditionVersionLang')
+            .mockReturnValue(new Map([
+                ['SP2', {
+                    id: 'SP2',
+                    edition: 'eop',
+                    url: '/cards/SP2',
+                    suitNameLocal: 'Spoofing',
+                    desc: 'Spoofing threat'
+                }]
+            ]) as any);
+
+        vi.spyOn(MappingService.prototype, 'getCardMappingForLatestEdtions')
+            .mockReturnValue(new Map([
+                ['eop', {
+                    meta: { version: '5.0' },
+                    suits: [{
+                        cards: [{
+                            id: 'SP2',
+                            stride: ['S']
+                        }]
+                    }]
+                }]
+            ]) as any);
+
+        const response = GET({ url: new URL('http://localhost/api/cre/eop/en') } as any);
+
+        expect(response).toBeDefined();
+    });
+
     it('falls back to webapp and en defaults when url has no path segments', () => {
         vi.spyOn(DeckService, 'getLanguages').mockReturnValue(['en']);
         vi.spyOn(DeckService, 'getLatestVersion').mockReturnValue('3.0');
