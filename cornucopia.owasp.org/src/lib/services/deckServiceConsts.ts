@@ -14,6 +14,6 @@ export const EDITION_NAMES: Record<string, string> = {
     [VERSION_WEBAPP]: "OWASP Cornucopia",
     [VERSION_MOBILEAPP]: "OWASP Cornucopia",
     [VERSION_COMPANION]: "OWASP Cornucopia",
-    [VERSION_DBD]: "OWASP Cornucopia",
+    [VERSION_DBD]: "Cornucopia",
     [VERSION_EOP]: "Elevation of Privilege"
 };
