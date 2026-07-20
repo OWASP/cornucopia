@@ -6,6 +6,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import path from "path";
 import type { Deck } from "$domain/deck/deck";
 import { MappingService } from "$lib/services/mappingService";
+import { EDITION_NAMES } from "$lib/services/deckServiceConsts";
 const __dirname = path.resolve(path.dirname(''));
 export class DeckService {
 
@@ -16,13 +17,15 @@ export class DeckService {
     private static readonly latests: Deck[] = [
         { lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1' },
         { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'], edition: 'webapp', version: '3.0' },
-        { lang: ['en'], edition: 'companion', version: '1.0' }
+        { lang: ['en'], edition: 'companion', version: '1.0' },
+        { lang: ['en'], edition: 'eop', version: '5.0' }
     ];
     private static readonly decks: Deck[] = [
         { edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] },
         { edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] },
         { edition: 'webapp', version: '2.2', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] },
         { edition: 'companion', version: '1.0', lang: ['en'] },
+        { edition: 'eop', version: '5.0', lang: ['en'] },
         { edition: 'dbd', version: '1.0', lang: ['en'] }
     ];
 
@@ -109,6 +112,7 @@ export class DeckService {
             for (const card in suitObject['cards']) {
                 const cardObject = suitObject['cards'][card];
                 cardObject.edition = edition;
+                cardObject.editionName = EDITION_NAMES[edition];
                 cardObject.version = version;
                 cardObject.language = lang;
                 cardObject.suitName = suitName;

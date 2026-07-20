@@ -180,7 +180,7 @@ defmodule CopiWeb.GameLive.Show do
       "mlsec" -> "1.0"
       "cumulus" -> "1.1"
       "masvs" -> "1.1"
-      "eop" -> "5.1"
+      "eop" -> "5.2"
       "dbd" -> "1.0"
       _ -> "1.0"
     end

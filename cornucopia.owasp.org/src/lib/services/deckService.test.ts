@@ -33,6 +33,10 @@ describe('DeckService tests', () => {
             expect(DeckService.hasEdition('companion')).toBe(true);
         });
 
+        it('should return true for eop edition', () => {
+            expect(DeckService.hasEdition('eop')).toBe(true);
+        });
+
         it('should return false for unknown edition', () => {
             expect(DeckService.hasEdition('unknown')).toBe(false);
         });
@@ -57,6 +61,10 @@ describe('DeckService tests', () => {
 
         it('should return true for companion version 1.0', () => {
             expect(DeckService.hasVersion('companion', '1.0')).toBe(true);
+        });
+
+        it('should return true for eop version 5.0', () => {
+            expect(DeckService.hasVersion('eop', '5.0')).toBe(true);
         });
 
         it('should return false for invalid version', () => {
@@ -113,6 +121,10 @@ describe('DeckService tests', () => {
             expect(DeckService.hasLanguage('companion', 'en')).toBe(true);
         });
 
+        it('should return true for eop with en', () => {
+            expect(DeckService.hasLanguage('eop', 'en')).toBe(true);
+        });
+
         it('should return false for mobileapp with es', () => {
             expect(DeckService.hasLanguage('mobileapp', 'es')).toBe(false);
         });
@@ -129,9 +141,10 @@ describe('DeckService tests', () => {
     describe('getDecks', () => {
         it('should return all available decks', () => {
             const decks = DeckService.getDecks();
-            expect(decks).toHaveLength(5);
+            expect(decks).toHaveLength(6);
             expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] });
             expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'eop', version: '5.0', lang: ['en'] });
             expect(decks).toContainEqual({ edition: 'dbd', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ 
                 edition: 'webapp', 
@@ -155,6 +168,10 @@ describe('DeckService tests', () => {
             expect(DeckService.getLatestVersion('companion')).toBe('1.0');
         });
 
+        it('should return 5.0 for eop', () => {
+            expect(DeckService.getLatestVersion('eop')).toBe('5.0');
+        });
+
         it('should return 3.0 as default for unknown edition', () => {
             expect(DeckService.getLatestVersion('unknown')).toBe('3.0');
         });
@@ -163,10 +180,11 @@ describe('DeckService tests', () => {
     describe('getLatestEditions', () => {
         it('should return array of latest editions', () => {
             const editions = DeckService.getLatestEditions();
-            expect(editions).toHaveLength(3);
+            expect(editions).toHaveLength(4);
             expect(editions).toContain('webapp');
             expect(editions).toContain('mobileapp');
             expect(editions).toContain('companion');
+            expect(editions).toContain('eop');
         });
     }, 10000);
 
@@ -191,6 +209,11 @@ describe('DeckService tests', () => {
 
         it('should return en for companion', () => {
             const languages = DeckService.getLanguages('companion');
+            expect(languages).toContain('en');
+        });
+
+        it('should return en for eop', () => {
+            const languages = DeckService.getLanguages('eop');
             expect(languages).toContain('en');
         });
 
@@ -225,6 +248,11 @@ describe('DeckService tests', () => {
             expect(languages).toEqual(['en']);
         });
 
+        it('should return only en for eop version 5.0', () => {
+            const languages = DeckService.getLanguagesForEditionVersion('eop', '5.0');
+            expect(languages).toEqual(['en']);
+        });
+
         it('should return empty array for unknown version', () => {
             const languages = DeckService.getLanguagesForEditionVersion('webapp', '1.0');
             expect(languages).toEqual([]);
@@ -253,6 +281,11 @@ describe('DeckService tests', () => {
             const versions = DeckService.getVersions('companion');
             expect(versions).toEqual(['1.0']);
             });
+
+        it('should return version for eop', () => {
+            const versions = DeckService.getVersions('eop');
+            expect(versions).toEqual(['5.0']);
+        });
 
         it('should return empty array for unknown edition', () => {
             const versions = DeckService.getVersions('unknown');

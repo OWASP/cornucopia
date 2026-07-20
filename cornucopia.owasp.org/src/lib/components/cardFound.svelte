@@ -13,6 +13,15 @@
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
   import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
+  import EopCardTaxonomy from './eopCardTaxonomy.svelte';
+  import type { Component } from "svelte";
+
+  const taxonomies: Record<string, Component<any>> = {
+    webapp: WebAppCardTaxonomy,
+    mobileapp: MobileAppCardTaxonomy,
+    companion: CompanionCardTaxonomy,
+    eop: EopCardTaxonomy
+  };
 
   interface Props {
     mappingData: any;
@@ -41,6 +50,7 @@
   let mappings = $derived(controller.getCardMappings(card.id));
   let _attacks: Attack[] = $derived(GetCardAttacks(card.id));
   const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
+  let Taxonomy = $derived(taxonomies[card.edition]);
 </script>
 <LanguagePicker 
   edition={card.edition}
@@ -74,14 +84,8 @@
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
-  {#if card.edition == 'webapp'}
-  <WebAppCardTaxonomy {card} {mappingData} {routes} {capecData} {asvsVersion}></WebAppCardTaxonomy>
-  {/if}
-  {#if card.edition == 'mobileapp'}
-  <MobileAppCardTaxonomy {card} {mappingData} {routes}></MobileAppCardTaxonomy>
-  {/if}
-  {#if card.edition == "companion"}
-  <CompanionCardTaxonomy {card} {mappingData} {routes}></CompanionCardTaxonomy>
+  {#if Taxonomy}
+  <svelte:component this={Taxonomy} {card} {mappingData} {routes} {capecData} {asvsVersion} />
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>

@@ -2,6 +2,7 @@ export type Card =
 {
     id : string,
     edition : string,
+    editionName : string,
     desc: string,
     githubUrl : string,
     name : string,

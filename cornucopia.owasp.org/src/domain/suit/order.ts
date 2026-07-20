@@ -20,4 +20,11 @@ export const order = new Map<string,number>([
     ["devops", 17],
     ["social-engineering", 18],
     ["automated-threats", 19],
+    // EoP suits
+    ["spoofing", 20],
+    ["tampering", 21],
+    ["repudiation", 22],
+    ["information-disclosure", 23],
+    ["denial-of-service", 24],
+    ["elevation-of-privilege", 25],
 ]);

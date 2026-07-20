@@ -28,6 +28,9 @@
         <p class="category"><%= @card.category %></p>
 
         <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={@card.url}>Need more info?</a></p>
+        <% end %>
 
         <%= if @card.value in ["J", "Q", "K"] do %>
 

@@ -45,7 +45,6 @@ defmodule Copi.CardMigration do
     end
   end
 
-
   defp map_cards(path) do
     case YamlElixir.read_from_file(path) do
       {:ok, cards} ->

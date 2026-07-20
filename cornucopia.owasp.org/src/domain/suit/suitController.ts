@@ -5,11 +5,12 @@ import { cardOrder } from "$domain/card/order";
 
 export class SuitController {
 
-    private static readonly decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '3.0'}, {edition: 'companion', version: '1.0'}];
+    private static readonly decks = [{edition: 'mobileapp', version: '1.1'}, {edition: 'webapp', version: '3.0'}, {edition: 'companion', version: '1.0'}, {edition: 'eop', version: '5.0'}];
     private static languages : Map<string, { lang: string[] }> = new Map<string, { lang: string[] }>([
         ['mobileapp', {lang: ['en']}], 
         ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']}],
-        ['companion', {lang: ['en']}]
+        ['companion', {lang: ['en']}],
+        ['eop', {lang: ['en']}]
     ]);
 
     public static getSuits() : Map<string,Suit[]>
