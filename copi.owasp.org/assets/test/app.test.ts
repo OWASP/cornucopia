@@ -157,7 +157,11 @@ describe('assets/js/app.js', () => {
       '/api/games/game-1/players/player-1/card',
       expect.objectContaining({
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': 'test-csrf'
+        },
+        credentials: 'same-origin',
         body: JSON.stringify({ dealt_card_id: 'deal-1' })
       })
     );
@@ -358,37 +362,45 @@ describe('assets/js/app.js', () => {
     });
   });
 
-  it('persists the current player session for a game through the session endpoint', async () => {
-    await vi.stubGlobal('location', { host: 'localhost:3000' } as Location);
-    document.body.innerHTML = `
-      <div
-        id="player-session"
-        data-game-id="01KXJS02XPBB679E2W70JGRV0Z"
-        data-player-id="01KXJS0JYKW9MJHBNBXE07YPHF"
-        data-store-player-session="true"
-      ></div>
-    `;
-    const { config } = await loadApp(document.body.innerHTML);
+  it('exchanges a player capability through POST and navigates to the clean URL', async () => {
+    const assign = vi.fn();
+    await vi.stubGlobal('location', { host: 'localhost:3000', assign } as unknown as Location);
+    const { config } = await loadApp();
     const hooks = config.hooks as {
-      PersistPlayerSession: { mounted: () => void };
+      ExchangePlayerCapability: { mounted: () => void };
     };
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({
+        redirect_to: '/games/01KXJS02XPBB679E2W70JGRV0Z/players/01KXJS0JYKW9MJHBNBXE07YPHF'
+      })
+    });
 
     vi.stubGlobal('fetch', fetchMock);
 
-    hooks.PersistPlayerSession.mounted.call({
-      el: document.getElementById('player-session')
+    hooks.ExchangePlayerCapability.mounted.call({
+      handleEvent: (_event: string, callback: (payload: { capability: string }) => void) => {
+        callback({ capability: 'signed-player-capability' });
+      }
     });
 
-    await Promise.resolve();
+    await vi.waitFor(() => expect(assign).toHaveBeenCalled());
 
     expect(fetchMock).toHaveBeenCalledWith(
-      '/api/games/01KXJS02XPBB679E2W70JGRV0Z/players/01KXJS0JYKW9MJHBNBXE07YPHF/session',
+      '/api/player-capabilities/exchange',
       expect.objectContaining({
-        method: 'PUT',
+        method: 'POST',
         credentials: 'same-origin',
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': 'test-csrf'
+        },
+        body: JSON.stringify({ capability: 'signed-player-capability' })
       })
+    );
+    expect(assign).toHaveBeenCalledWith(
+      '/games/01KXJS02XPBB679E2W70JGRV0Z/players/01KXJS0JYKW9MJHBNBXE07YPHF'
     );
   });
 
@@ -417,7 +429,7 @@ describe('assets/js/app.js', () => {
     await Promise.resolve();
 
     expect(fetchMock).toHaveBeenCalledWith(
-      '/api/games/01KXJS02XPBB679E2W70JGRV0Z/player-session',
+      '/api/games/01KXJS02XPBB679E2W70JGRV0Z/players/01KXJS0JYKW9MJHBNBXE07YPHF/session',
       expect.objectContaining({
         method: 'DELETE',
         credentials: 'same-origin',
@@ -426,48 +438,13 @@ describe('assets/js/app.js', () => {
     );
   });
 
-  it('syncs the player session again when the hook is updated', async () => {
+  it('keeps the current player session when no persistence change is requested', async () => {
     await vi.stubGlobal('location', { host: 'localhost:3000' } as Location);
     document.body.innerHTML = `
       <div
         id="player-session"
         data-game-id="01KXJS02XPBB679E2W70JGRV0Z"
         data-player-id="01KXJS0JYKW9MJHBNBXE07YPHF"
-        data-store-player-session="true"
-      ></div>
-    `;
-    const { config } = await loadApp(document.body.innerHTML);
-    const hooks = config.hooks as {
-      PersistPlayerSession: { updated: () => void };
-    };
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
-
-    vi.stubGlobal('fetch', fetchMock);
-
-    hooks.PersistPlayerSession.updated.call({
-      el: document.getElementById('player-session')
-    });
-
-    await Promise.resolve();
-
-    expect(fetchMock).toHaveBeenCalledWith(
-      '/api/games/01KXJS02XPBB679E2W70JGRV0Z/players/01KXJS0JYKW9MJHBNBXE07YPHF/session',
-      expect.objectContaining({
-        method: 'PUT',
-        credentials: 'same-origin',
-        cache: 'no-store'
-      })
-    );
-  });
-
-  it('does not persist a player session when identifiers are malformed', async () => {
-    await vi.stubGlobal('location', { host: 'localhost:3000' } as Location);
-    document.body.innerHTML = `
-      <div
-        id="player-session"
-        data-game-id="invalid"
-        data-player-id="also-invalid"
-        data-store-player-session="true"
       ></div>
     `;
     const { config } = await loadApp(document.body.innerHTML);
@@ -487,7 +464,68 @@ describe('assets/js/app.js', () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('does not persist a player session when the CSRF token is missing', async () => {
+  it('clears the player session again when the hook is updated', async () => {
+    await vi.stubGlobal('location', { host: 'localhost:3000' } as Location);
+    document.body.innerHTML = `
+      <div
+        id="player-session"
+        data-game-id="01KXJS02XPBB679E2W70JGRV0Z"
+        data-player-id="01KXJS0JYKW9MJHBNBXE07YPHF"
+        data-store-player-session="false"
+      ></div>
+    `;
+    const { config } = await loadApp(document.body.innerHTML);
+    const hooks = config.hooks as {
+      PersistPlayerSession: { updated: () => void };
+    };
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+
+    vi.stubGlobal('fetch', fetchMock);
+
+    hooks.PersistPlayerSession.updated.call({
+      el: document.getElementById('player-session')
+    });
+
+    await Promise.resolve();
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/games/01KXJS02XPBB679E2W70JGRV0Z/players/01KXJS0JYKW9MJHBNBXE07YPHF/session',
+      expect.objectContaining({
+        method: 'DELETE',
+        credentials: 'same-origin',
+        cache: 'no-store'
+      })
+    );
+  });
+
+  it('does not clear a player session when identifiers are malformed', async () => {
+    await vi.stubGlobal('location', { host: 'localhost:3000' } as Location);
+    document.body.innerHTML = `
+      <div
+        id="player-session"
+        data-game-id="invalid"
+        data-player-id="also-invalid"
+        data-store-player-session="false"
+      ></div>
+    `;
+    const { config } = await loadApp(document.body.innerHTML);
+    const hooks = config.hooks as {
+      PersistPlayerSession: { mounted: () => void };
+    };
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+
+    vi.stubGlobal('fetch', fetchMock);
+
+    hooks.PersistPlayerSession.mounted.call({
+      el: document.getElementById('player-session')
+    });
+
+    await Promise.resolve();
+
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('does not clear a player session when the CSRF token is missing', async () => {
     await vi.stubGlobal('location', { host: 'localhost:3000' } as Location);
     document.head.innerHTML = '';
     document.body.innerHTML = `
@@ -495,7 +533,7 @@ describe('assets/js/app.js', () => {
         id="player-session"
         data-game-id="01KXJS02XPBB679E2W70JGRV0Z"
         data-player-id="01KXJS0JYKW9MJHBNBXE07YPHF"
-        data-store-player-session="true"
+        data-store-player-session="false"
       ></div>
     `;
     const { config } = await loadApp(document.body.innerHTML, '');
@@ -524,7 +562,7 @@ describe('assets/js/app.js', () => {
         id="player-session"
         data-game-id="01KXJS02XPBB679E2W70JGRV0Z"
         data-player-id="01KXJS0JYKW9MJHBNBXE07YPHF"
-        data-store-player-session="true"
+        data-store-player-session="false"
       </div>
     `;
     const { config } = await loadApp(document.body.innerHTML);

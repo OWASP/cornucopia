@@ -23,6 +23,7 @@ kill_signal = 'SIGTERM'
   RATE_LIMIT_CONNECTION_LIMIT = '133'
   RATE_LIMIT_CONNECTION_WINDOW = '1'
   USE_FLY_CLIENT_IP = true
+  POSTGRES_SESSION_STORE_ENABLED = true
 
 [http_service]
   internal_port = 8080

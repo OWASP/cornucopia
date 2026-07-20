@@ -48,7 +48,12 @@ defmodule CopiWeb.RouterTest do
   end
 
   describe "API routes" do
-    test "PUT /api/games/:game_id/players/:player_id/card requires valid params", %{conn: conn} do
+    test "GET capability exchange route is not available", %{conn: conn} do
+      conn = get(conn, "/player-capabilities/sensitive-token")
+      assert response(conn, 404)
+    end
+
+    test "PUT /api/games/:game_id/players/:player_id/card requires a player session", %{conn: conn} do
       {:ok, game} = Copi.Cornucopia.create_game(%{name: "API Test", edition: "webapp"})
       {:ok, player} = Copi.Cornucopia.create_player(%{name: "API Player", game_id: game.id})
 
@@ -56,7 +61,7 @@ defmodule CopiWeb.RouterTest do
         |> put_req_header("accept", "application/json")
         |> put("/api/games/#{game.id}/players/#{player.id}/card", %{"dealt_card_id" => "123"})
 
-      assert conn.status in [200, 400, 403, 404, 406, 422, 500]
+      assert json_response(conn, 401)["error"] == "Valid player session required"
     end
   end
 

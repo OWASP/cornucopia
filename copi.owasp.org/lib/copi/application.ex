@@ -9,12 +9,15 @@ defmodule Copi.Application do
     children = [
       # Start the Ecto repository
       Copi.Repo,
+      # Remove expired PostgreSQL sessions once the repository is available
+      Copi.SessionCleanup,
       # Start the Telemetry supervisor
       CopiWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Copi.PubSub},
       # Start the RateLimiter for IP-based rate limiting (CAPEC-212 protection)
       Copi.RateLimiter,
+      Copi.PlayerCapabilityRegistry,
       # Start the DNS clustering
       {DNSCluster, query: Application.get_env(:copi, :dns_cluster_query) || :ignore},
       # Start the Endpoint (http/https)
