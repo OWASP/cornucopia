@@ -36,14 +36,16 @@ export class CreController {
         ['webapp', "OWASP Cornucopia Website App Edition"],
         ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
         ['companion', "OWASP Cornucopia Companion Edition"],
-        ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"]
+        ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"],
+        ['eop', "Elevation of Privilege Edition"]
     ]);
 
     private static category: Map<string, string> = new Map<string, string>([
         ['webapp', "Website Application"],
         ['mobileapp', "Mobile Application"],
         ['companion', "Companion suits"],
-        ['dbd', "Digital Benefits and Disbenefits"]
+        ['dbd', "Digital Benefits and Disbenefits"],
+        ['eop', "Elevation of Privilege"]
     ]);
 
     constructor(deck: Map<string, Card>, controller: MappingController) {

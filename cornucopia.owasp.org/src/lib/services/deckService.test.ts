@@ -144,7 +144,7 @@ describe('DeckService tests', () => {
             expect(decks).toHaveLength(6);
             expect(decks).toContainEqual({ edition: 'mobileapp', version: '1.1', lang: ['en', 'hi', 'uk'] });
             expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
-            expect(decks).toContainEqual({ edition: 'eop', version: '5.0', lang: ['en'] });
+            expect(decks).toContainEqual({ edition: 'eop', version: '5.0', lang: ['en', 'es', 'ru'] });
             expect(decks).toContainEqual({ edition: 'dbd', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ 
                 edition: 'webapp', 
@@ -248,9 +248,9 @@ describe('DeckService tests', () => {
             expect(languages).toEqual(['en']);
         });
 
-        it('should return only en for eop version 5.0', () => {
+        it('should return all supported languages for eop version 5.0', () => {
             const languages = DeckService.getLanguagesForEditionVersion('eop', '5.0');
-            expect(languages).toEqual(['en']);
+            expect(languages).toEqual(['en', 'es', 'ru']);
         });
 
         it('should return empty array for unknown version', () => {

@@ -4,8 +4,8 @@ info:
   title: OWASP Cornucopia API
   description: |
     Public API for accessing OWASP Cornucopia card data and metadata.
-    This API exposes language metadata and Open CRE mappings
-    for both Website App and Mobile App editions.
+    This API exposes language metadata, card mappings and Open CRE mappings
+    for the Cornucopia editions and the Elevation of Privilege edition.
   version: 1.0.0
 
 servers:
@@ -105,6 +105,36 @@ paths:
                       language: all
                       languages: [en]
                       version: "1.0"
+
+  /lang/eop/{version}:
+    get:
+      summary: Get supported languages for Elevation of Privilege edition
+      description: |
+        Returns metadata about supported languages for the
+        Elevation of Privilege Edition.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["5.0"]
+      responses:
+        '200':
+          description: Language metadata for Elevation of Privilege edition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageMetaEop'
+              examples:
+                example:
+                  summary: Example language metadata response
+                  value:
+                    meta:
+                      component: cards
+                      language: all
+                      languages: [en, es, ru]
+                      version: "5.0"
 
   /cre/dbd/{lang}:
     get:
@@ -368,6 +398,43 @@ paths:
                         capec: [ 508 ]
                         safecode: [ "-" ]
 
+  /mapping/eop/{version}:
+    get:
+      summary: Get Elevation of Privilege mapping by version
+      description: |
+        Get the Elevation of Privilege Edition mapping data
+        by version. Each card just maps to its STRIDE category.
+      parameters:
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["5.0"]
+      responses:
+        '200':
+          description: Elevation of Privilege mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Elevation of Privilege mapping response
+                  value:
+                    meta:
+                      edition: eop
+                      component: mappings
+                      language: ALL
+                      version: "5.0"
+                    cards:
+                      SP2:
+                        id: "SP2"
+                        value: "2"
+                        url: "https://cornucopia.owasp.org/cards/SP2"
+                        stride: [ S ]
+                        stride_print: [ Spoofing ]
+
   /cre/mobileapp/{lang}:
     get:
       summary: Get Mobile cards by language
@@ -460,19 +527,61 @@ paths:
                       version: "1.0"
                     standards: []
 
+  /cre/eop/{lang}:
+    get:
+      summary: Get Elevation of Privilege cards by language
+      description: |
+        Get the Elevation of Privilege Edition cards by language.
+        This edition does not have Open CRE mappings, so the links
+        array of each card is empty.
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [en, es, ru]
+      responses:
+        '200':
+          description: Elevation of Privilege cards
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example Elevation of Privilege response
+                  value:
+                    meta:
+                      edition: Elevation of Privilege Edition
+                      component: cards
+                      language: en
+                      version: "5.0"
+                    standards:
+                      - doctype: Tool
+                        id: https://cornucopia.owasp.org/edition/eop/SP2/5.0/en
+                        name: Elevation of Privilege Edition
+                        section: Spoofing
+                        description: An attacker could take over the port or socket that the server normally uses
+                        sectionID: SP2
+                        hyperlink: https://cornucopia.owasp.org/edition/eop/SP2/5.0/en
+                        links: []
+                        tags: [Threat modeling, Elevation of Privilege]
+                        tooltype: Defensive
+
   /lang/{edition}/{version}:
     get:
       summary: Get language metadata for an edition version
       description: |
         Returns the list of supported languages for a given edition and version.
-        Works for all registered editions (webapp, mobileapp, companion).
+        Works for all registered editions (webapp, mobileapp, companion, eop).
       parameters:
         - name: edition
           in: path
           required: true
           schema:
             type: string
-            enum: [webapp, mobileapp, companion]
+            enum: [webapp, mobileapp, companion, eop]
         - name: version
           in: path
           required: true
@@ -595,26 +704,47 @@ components:
             version:
               type: string
               example: "1.0"
-LanguageMetaCompanion:
+    LanguageMetaCompanion:
+      type: object
+      properties:
+        meta:
           type: object
           properties:
-            meta:
-              type: object
-              properties:
-                edition:
-                  type: string
-                  example: OWASP Cornucopia Companion Edition
-                component:
-                  type: string
-                  example: cards
-                language:
-                  type: string
-                  example: all
-                languages:
-                  type: array
-                  items:
-                    type: string
-                  example: [en]
-                version:
-                  type: string
-                  example: "1.0"
+            edition:
+              type: string
+              example: OWASP Cornucopia Companion Edition
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en]
+            version:
+              type: string
+              example: "1.0"
+
+    LanguageMetaEop:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            component:
+              type: string
+              example: cards
+            language:
+              type: string
+              example: all
+            languages:
+              type: array
+              items:
+                type: string
+              example: [en, es, ru]
+            version:
+              type: string
+              example: "5.0"

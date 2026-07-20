@@ -10,7 +10,7 @@ export class SuitController {
         ['mobileapp', {lang: ['en']}], 
         ['webapp', {lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']}],
         ['companion', {lang: ['en']}],
-        ['eop', {lang: ['en']}]
+        ['eop', {lang: ['en', 'es', 'ru']}]
     ]);
 
     public static getSuits() : Map<string,Suit[]>
