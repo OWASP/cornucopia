@@ -542,7 +542,7 @@ suits:
             expect(lastCard?.next).toBe('FIRST-CARD');
         });
 
-        it('should skip card if technical note file is missing', () => {
+        it('should retain card if technical note file is missing', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
@@ -569,17 +569,17 @@ suits:
             };
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
-            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+            const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
-            expect(result.size).toBe(0);
-            expect(consoleErrorSpy).toHaveBeenCalled();
+            expect(result.size).toBe(1);
+            expect(consoleWarnSpy).toHaveBeenCalled();
             
-            consoleErrorSpy.mockRestore();
+            consoleWarnSpy.mockRestore();
         });
 
-        it('should skip card if explanation file is missing', () => {
+        it('should retain card if explanation file is missing', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
 
@@ -609,14 +609,14 @@ suits:
             };
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
-            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+            const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
             
-            expect(result.size).toBe(0);
-            expect(consoleErrorSpy).toHaveBeenCalled();
+            expect(result.size).toBe(1);
+            expect(consoleWarnSpy).toHaveBeenCalled();
             
-            consoleErrorSpy.mockRestore();
+            consoleWarnSpy.mockRestore();
         });
 
         it('should cache loaded cards', () => {
@@ -699,18 +699,15 @@ suits:
             };
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
 
-            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+            const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
             const deckServiceInstance = new DeckService();
             const result = deckServiceInstance.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
 
-            expect(result.size).toBe(0);
-            expect(consoleErrorSpy).toHaveBeenCalledWith(
-                expect.stringContaining('unknown'),
-                expect.any(Error)
-            );
+            expect(result.size).toBe(1);
+            expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('unknown'));
 
-            consoleErrorSpy.mockRestore();
+            consoleWarnSpy.mockRestore();
         });
 
         it('should use "unknown" fallback when card id is missing on explanation read error', () => {
@@ -742,18 +739,15 @@ suits:
             };
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as any);
 
-            const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+            const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
             const deckServiceInstance = new DeckService();
             const result = deckServiceInstance.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
 
-            expect(result.size).toBe(0);
-            expect(consoleErrorSpy).toHaveBeenCalledWith(
-                expect.stringContaining('unknown'),
-                expect.any(Error)
-            );
+            expect(result.size).toBe(1);
+            expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('unknown'));
 
-            consoleErrorSpy.mockRestore();
+            consoleWarnSpy.mockRestore();
         });
 
         it('should handle generic markdown read error gracefully', () => {
@@ -785,15 +779,15 @@ suits:
     };
     vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
     const deckService = new DeckService();
     const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
 
-    expect(result.size).toBe(0);
-    expect(consoleErrorSpy).toHaveBeenCalled();
+    expect(result.size).toBe(1);
+    expect(consoleWarnSpy).toHaveBeenCalled();
 
-    consoleErrorSpy.mockRestore();
+    consoleWarnSpy.mockRestore();
 });
         it('should handle navigation for a middle card in the same suit', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);

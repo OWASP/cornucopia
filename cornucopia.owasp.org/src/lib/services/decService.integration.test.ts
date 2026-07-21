@@ -39,6 +39,9 @@ describe('DeckService integration tests', () => {
 
         expect((new DeckService()).getCardDataForEditionVersionLang('mobileapp', '1.1', 'en')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('companion', '1.0', 'en')).toBeDefined();
+        const dbdCards = (new DeckService()).getCardDataForEditionVersionLang('dbd', '1.0', 'en');
+        expect(dbdCards.size).toBeGreaterThan(0);
+        expect(dbdCards.get('SCO2')?.url).toBe('https://www.digitalbenefits.uk/deck/scope/2');
         expect((new DeckService()).getCardDataForEditionVersionLang('eop', '5.0', 'en')).toBeDefined();
         expect((new DeckService()).getCardDataForEditionVersionLang('eop', '5.0', 'en').size).toBe(78);
 
@@ -60,6 +63,6 @@ describe('DeckService integration tests', () => {
 
     it("should return 316 cards.", async () => {
         const cards = (new DeckService()).getCards('en');
-        expect(cards.size).toBe(316);
+        expect(cards.size).toBe(394);
     });
 });

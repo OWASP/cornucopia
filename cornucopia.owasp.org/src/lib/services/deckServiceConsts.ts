@@ -7,6 +7,8 @@ export const VERSION_COMPANION = "companion";
 export const VERSION_DBD = "dbd";
 export const VERSION_EOP = "eop";
 
+export const EXTERNAL_DECK_EDITIONS = new Set<string>([VERSION_DBD]);
+
 /**
  * Display name prefix for each edition, this is used for titles.
  */
