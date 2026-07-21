@@ -64,7 +64,7 @@ Registrations for their course are apparently still open! [Black Hat training sc
 
 ## Cornucopia, now 100% synced with AISVS v1.0
 
-In case you missed it, AISVS - OWASP Artificial Intelligence Security Verification Standard was recently released as version 1.0, and we have made sure OWASP Cornucopia is correctly mapped to AISVS This, so that after you have figured out what can go wrong with LLM and Agentic during the threat modeling sessions, we can help you answer the question: *«What are we going to do about it?»* 
+In case you missed it, AISVS - OWASP Artificial Intelligence Security Verification Standard was recently released as version 1.0, and we have made sure OWASP Cornucopia is correctly mapped to AISVS. This means that after you have figured out what can go wrong with LLMs and Agentic AI during the threat modeling sessions, we can help you answer the question: *«What are we going to do about it?»*
 
 A Special thanks to Mayur Agnihotri for adding AISVS v1 [“High-Impact Action Approval and Irreversibility Controls”](https://github.com/OWASP/AISVS/blob/main/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md#c92-high-impact-action-approval-and-irreversibility-controls) to the [Agentic AI cards](https://cornucopia.owasp.org/edition/companion/AAIK/1.0/en#What-are-we-going-to-do-about-it?) and to Adarsh Kumar for continuing pushing out bug fixes. You both rock!
 
