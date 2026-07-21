@@ -43,7 +43,7 @@ suits:
       desc: "An attacker who gets a password can reuse it (Use stronger authenticators)"
     - 
       id: "SPX"
-      value: "X"
+      value: "10"
       desc: "An attacker can choose to use weaker or no authentication"
     - 
       id: "SPJ"
@@ -100,7 +100,7 @@ suits:
       desc: "An attacker can provide or control state information"
     - 
       id: "TAX"
-      value: "X"
+      value: "10"
       desc: "An attacker can alter information in a data store because it has weak/open permissions or includes a group which is equivalent to everyone (\"anyone with a Facebook account\")"
     - 
       id: "TAJ"
@@ -157,7 +157,7 @@ suits:
       desc: "An attacker can use a shared key to authenticate as different principals, confusing the information in the logs"
     - 
       id: "REX"
-      value: "X"
+      value: "10"
       desc: "An attacker can get arbitrary data into logs from unauthenticated (or weakly authenticated) outsiders without validation"
     - 
       id: "REJ"
@@ -214,7 +214,7 @@ suits:
       desc: "An attacker can read sensitive information in a file with permissive permissions"
     - 
       id: "IDX"
-      value: "X"
+      value: "10"
       desc: "An attacker can read information in files or databases with no access controls"
     - 
       id: "IDJ"
@@ -278,7 +278,7 @@ suits:
       misc: "(client, anon, persist)"
     - 
       id: "DSX"
-      value: "X"
+      value: "10"
       desc: "An attacker can make a server unavailable or unusable without ever authenticating and the problem persists after the attacker goes away "
       misc: "(server, anonymous, persistent)"
     - 
@@ -336,7 +336,7 @@ suits:
       desc: "There's no reasonable way for a caller to figure out what validation of tainted data you perform before passing it to them"
     - 
       id: "EPX"
-      value: "X"
+      value: "10"
       desc: "There's no reasonable way for a caller to figure out what security assumptions you make"
     - 
       id: "EPJ"
