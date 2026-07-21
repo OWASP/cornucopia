@@ -36,7 +36,7 @@ Why are we doing this? Well, first off, it is to give players the option to visi
 
 ![EoP at copi.owasp.org](copi.webp)
 
-When playing EoP at [copi.owasp.org](copi.owasp.org), you will now be able to click the «Need more info» links on each card, which will take you to the help pages, and we are looking for your expertise to fill them out.
+When playing EoP at [copi.owasp.org](https://copi.owasp.org), you will now be able to click the «Need more info» links on each card, which will take you to the help pages, and we are looking for your expertise to fill them out.
 
 ### Thanking Our GSoC Contributors
 
