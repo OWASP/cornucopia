@@ -76,7 +76,7 @@ Finally, we know that scheduling a full threat modelling session with your entir
 
 To improve the player experience, we have upgraded game sessions by saving the session state **server-side**. In addition to stability, we have introduced the concept of **sharing your card hand**. If you run out of time or have an emergency, you can simply hand off your cards so another team member can seamlessly take over your spot.
 
-![Share you Cornucopia hand](share-hand.webp)
+![Share your Cornucopia hand](share-hand.webp)
 
 We can’t wait for you to try out 3.4.0. Grab your team, deal your hands, and let’s make threat modelling fun again!
 
