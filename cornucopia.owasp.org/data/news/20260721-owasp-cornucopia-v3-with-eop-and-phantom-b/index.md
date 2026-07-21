@@ -62,7 +62,7 @@ Seats are filling up fast for Shostack + Associates Threat Modelling Intensive w
 
 Registrations for their course are apparently still open! [Black Hat training schedule](https://blackhat.com/us-26/training/schedule/index.html#adam-shostacks-threat-modeling-intensive-with-complete-ai-51473).
 
-## Cornucopia, now 100% synced with AISVS v1.0
+## Cornucopia, now 100 percent synced with AISVS v1.0
 
 In case you missed it, AISVS - OWASP Artificial Intelligence Security Verification Standard was recently released as version 1.0, and we have made sure OWASP Cornucopia is correctly mapped to AISVS. This means that after you have figured out what can go wrong with LLMs and Agentic AI during the threat modeling sessions, we can help you answer the question: *«What are we going to do about it?»*
 
