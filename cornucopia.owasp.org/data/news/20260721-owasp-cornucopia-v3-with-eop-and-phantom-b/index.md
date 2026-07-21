@@ -52,7 +52,7 @@ We have officially added **PHANTOM-B** mapping to [each of these cards](https://
 
 ### What is PHANTOM-B?
 
-If you haven't read Adam Shostack's recent post on [Why PHANTOM-B?](https://shostack.org/blog/why-phantom-b/), PHANTOM-B is a tool designed to structure how you answer the question: *"What can go wrong?»* (with the LLM parts of the system).
+If you haven't read Adam Shostack's recent post on [Why PHANTOM-B?](https://shostack.org/blog/why-phantom-b/), PHANTOM-B is a tool designed to structure how you answer the question: *"What can go wrong?"* (with the LLM parts of the system).
 
 Created by Adam Shostack and the Shostack + Associates team—and validated alongside hyperscalers and global financial institutions—it serves as a STRIDE-analogous mnemonic specifically engineered for LLMs. While vulnerability lists like the OWASP LLM Top 10 are fantastic for general awareness, they don't explicitly tell you how *your specific architecture* will fail. 
 
