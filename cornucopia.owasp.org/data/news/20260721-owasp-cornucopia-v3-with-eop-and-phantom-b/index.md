@@ -32,7 +32,7 @@ While the game is live, we are actively looking for community contributors to he
 
 If you have experience with EoP or want to flex your threat mitigation muscles, we would love your pull requests to help guide players!
 
-Why are we doing this? Well, first off, it is to give players the option to visit the EoP help pages while they are playing EoP at [copi.owasp.org](copi.owasp.org)!
+Why are we doing this? Well, first off, it is to give players the option to visit the EoP help pages while they are playing EoP at [copi.owasp.org](https://copi.owasp.org)!
 
 ![EoP at copi.owasp.org](copi.webp)
 
