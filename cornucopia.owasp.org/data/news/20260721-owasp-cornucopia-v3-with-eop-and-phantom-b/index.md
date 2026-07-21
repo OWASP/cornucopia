@@ -60,7 +60,7 @@ PHANTOM-B provides a repeatable, lightweight threat elicitation tool that focuse
 
 Seats are filling up fast for Shostack + Associates Threat Modelling Intensive with Complete AI at this year’s Black Hat conference. If you are interested in knowing more about AI Threat Modelling and are in the vicinity, you should not forget to sign up.
 
-Registrations for their course is apparently still open! https://blackhat.com/us-26/training/schedule/index.html#adam-shostacks-threat-modeling-intensive-with-complete-ai-51473?trk=public_post_comment-text
+Registrations for their course are apparently still open! [Black Hat training schedule](https://blackhat.com/us-26/training/schedule/index.html#adam-shostacks-threat-modeling-intensive-with-complete-ai-51473).
 
 ## Cornucopia, now 100% synced with AISVS v1.0
 
