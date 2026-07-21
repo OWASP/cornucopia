@@ -180,7 +180,7 @@ describe('DeckService tests', () => {
     describe('getLatestEditions', () => {
         it('should return array of latest editions', () => {
             const editions = DeckService.getLatestEditions();
-            expect(editions).toHaveLength(4);
+            expect(editions).toHaveLength(5);
             expect(editions).toContain('webapp');
             expect(editions).toContain('mobileapp');
             expect(editions).toContain('companion');
