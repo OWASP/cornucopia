@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Card } from "../card/card";
 import type { MappingController } from "../mapping/mappingController";
 

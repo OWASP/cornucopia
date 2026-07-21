@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-expressions */
 import {expect, describe, it} from 'vitest';
 import { FileSystemHelper } from './fileSystemHelper';
 import path from 'path';
@@ -36,11 +35,11 @@ describe('FileSystemHelper tests', () => {
     it("should read data from a path.", async () => {
         const data = FileSystemHelper.getDataFromPath('data/website/pages/about');
         expect(data).toBeDefined();
-        expect(data['en']).toBeDefined;
+        expect(data.get('en')).toBeDefined();
 
         const emptyData = FileSystemHelper.getDataFromPath('data/website/pages/nonexistent');
         expect(emptyData).toBeDefined();
-        expect(emptyData['en']).toBeUndefined();
+        expect(emptyData.get('en')).toBeUndefined();
     });
 
     it("should get the ASVSRouteMap files.", async () => {

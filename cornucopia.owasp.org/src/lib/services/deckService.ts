@@ -153,7 +153,7 @@ export class DeckService {
                     file = fs.readFileSync(path, 'utf8');
                     const parsed = fm(file);
                     cardObject.concept = parsed.body;
-                } catch (e) {
+                } catch {
                     console.warn(`Error: Missing technical-note for ${cardObject.id || 'unknown'} at ${path}`);
                     continue;
                 }
@@ -161,7 +161,7 @@ export class DeckService {
                 const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
                 try {
                     cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
-                } catch (e) {
+                } catch {
                     console.warn(`Error: Missing explanation for ${cardObject.id || 'unknown'} at ${explanationPath}`);
                     continue;
                 }
