@@ -1250,16 +1250,12 @@ class TestGetDocxDocument(unittest.TestCase):
         file = os.path.join(
             c.convert_vars.BASE_PATH, "tests", "test_files", "owasp_cornucopia_webapp_ver_guide_bridge_lang.d"
         )
-        want_type = type(docx.Document())
-        want_len_paragraphs = 0
         want_logging_error_message = [f"ERROR:root:Could not find file at: {file}"]
 
         with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
             got_file = c.get_docx_document(file)
         self.assertEqual(ll.output, want_logging_error_message)
-        self.assertIsInstance(got_file, want_type)
-        got_len_paragraphs = len(got_file.paragraphs)
-        self.assertEqual(want_len_paragraphs, got_len_paragraphs)
+        self.assertIsNone(got_file)
 
 
 class TestGetReplacementDict(unittest.TestCase):
@@ -2439,6 +2435,42 @@ class TestConvertUncovered(unittest.TestCase):
 
         c.create_edition_from_template("cards")
         self.assertTrue(mock_doc.save.called)
+
+    @patch("scripts.convert.convert_vars.args", new=type("obj", (), {"pdf": False}))
+    @patch("scripts.convert.ensure_folder_exists")
+    @patch("scripts.convert.replace_docx_inline_text")
+    @patch("scripts.convert.get_docx_document")
+    @patch("scripts.convert.rename_output_file", return_value="/tmp/out.docx")
+    @patch("scripts.convert.get_template_for_edition", return_value="template.docx")
+    @patch("scripts.convert.get_meta_data", return_value={"key": "val"})
+    @patch("scripts.convert.map_language_data_to_template", return_value={})
+    @patch("scripts.convert.get_language_data", return_value={})
+    @patch("scripts.convert.get_mapping_for_edition", return_value={})
+    @patch("scripts.convert.get_files_from_of_type", return_value=["file.yaml"])
+    def test_create_edition_from_template_docx_none_doc_returns_early(
+        self,
+        mock_files,
+        mock_map,
+        mock_lang,
+        mock_map2,
+        mock_meta,
+        mock_template,
+        mock_rename,
+        mock_get_doc,
+        mock_replace,
+        mock_ensure,
+    ):
+        # get_docx_document returns None when the template file is missing.
+        mock_get_doc.return_value = None
+        want_logging_error_message = [
+            "ERROR:root:Cannot create output file: template document not found at template.docx"
+        ]
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as ll:
+            c.create_edition_from_template("cards")
+
+        self.assertEqual(ll.output, want_logging_error_message)
+        mock_replace.assert_not_called()
 
     # ---------- main ----------
 
