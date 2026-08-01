@@ -40,11 +40,12 @@ defmodule CopiWeb.ApiControllerTest do
     old_step = Application.get_env(:copi, :api_game_stub_step)
 
     {:ok, game} = Cornucopia.create_game(%{name: "Test Game"})
-    {:ok, player} = Cornucopia.create_player(%{name: "Test Player", game_id: game.id})
+    {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
+    {:ok, player} = Cornucopia.create_player(%{name: "Test Player",game_id: game.id})
 
     {:ok, card} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "A", description: "desc", misc: "misc",
-      edition: "webapp", external_id: "1", language: "en", version: "1",
+      edition: "webapp", external_id: "1", language: "en", version:"1",
       owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
       capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
       biml: "biml", url: "http://example.com"
@@ -116,7 +117,8 @@ defmodule CopiWeb.ApiControllerTest do
 
   test "play_card rejects a player from another game", %{conn: conn, game: game} do
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
-    {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})
+    {:ok, other_game} = Cornucopia.update_game(other_game, %{started_at: DateTime.utc_now()})
+    {:ok, other_player} = Cornucopia.create_player(%{name: "Other",game_id: other_game.id})
     {:ok, card2} = Cornucopia.create_card(%{
       category: "C", value: "Q", description: "d", misc: "m",
       edition: "webapp", external_id: "99", language: "en", version: "1",
@@ -135,10 +137,10 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 401)["error"] == "Valid player session required"
   end
 
-  test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+  test "play_card fails if player already played in round", %{conn:conn, game: game, player: player, dealt_card: dealt_card} do
     {:ok, card2} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "K", description: "desc", misc: "misc",
-      edition: "webapp", external_id: "2", language: "en", version: "1",
+      edition: "webapp", external_id: "2", language: "en", version:"1",
       owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
       capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
       biml: "biml", url: "http://example.com"
@@ -199,7 +201,7 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 400)["error"] == "Invalid request parameters"
   end
 
-  test "play_card returns 503 when initial game lookup is transient", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+  test "play_card returns 503 when initial game lookup is transient", %{conn: conn, game: game, player: player, dealt_card: dealt_card}do
     Application.put_env(:copi, :api_game_module, GameStub)
     Application.put_env(:copi, :api_game_stub_mode, :initial_transient)
 
@@ -259,6 +261,44 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 422)["error"] == "Could not play card"
   end
 
+  test "play_card returns 422 when game has not started", %{conn: conn} do
+    {:ok, unstarted_game} = Cornucopia.create_game(%{name: "Unstarted Game"})
+    {:ok, player} = Cornucopia.create_player(%{name: "Player", game_id: unstarted_game.id})
+    {:ok, card} = Cornucopia.create_card(%{
+      category: "Cornucopia", value: "A", description: "desc", misc: "misc",
+      edition: "webapp", external_id: "1", language: "en", version: "1",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
+      biml: "biml", url: "http://example.com"
+    })
+    {:ok, dealt_card} = Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
+
+    conn =
+      conn
+      |> init_test_session(%{
+        "resume_player_session" => %{"game_id" => unstarted_game.id, "player_id" => player.id}
+      })
+      |> put("/api/games/#{unstarted_game.id}/players/#{player.id}/card", %{
+        "game_id" => unstarted_game.id,
+        "player_id" => player.id,
+        "dealt_card_id" => to_string(dealt_card.id)
+      })
+
+    assert json_response(conn, 422)["error"] == "Game has not started yet"
+  end
+
+  test "play_card returns 422 when game has already ended", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
+    {:ok, _} = Cornucopia.update_game(game, %{finished_at: DateTime.utc_now()})
+
+    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+      "game_id" => game.id,
+      "player_id" => player.id,
+      "dealt_card_id" => to_string(dealt_card.id)
+    })
+
+    assert json_response(conn, 422)["error"] == "Game has already ended"
+  end
+
   test "exchange stores an encrypted player capability in the session", %{conn: conn, game: game, player: player} do
     capability = CopiWeb.PlayerCapability.sign(game.id, player.id)
 
@@ -274,12 +314,12 @@ defmodule CopiWeb.ApiControllerTest do
     assert get_resp_header(conn, "cache-control") == ["no-store"]
   end
 
-  test "exchange adds a capability and returns a clean player URL", %{
+  test "exchange adds a capability and returns a clean player URL",%{
     conn: conn,
     game: game,
     player: player
   } do
-    {:ok, second_player} = Cornucopia.create_player(%{name: "Second Player", game_id: game.id})
+    {:ok, second_player} = Cornucopia.create_player(%{name: "SecondPlayer", game_id: game.id})
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: other_game.id})
 
@@ -316,7 +356,7 @@ defmodule CopiWeb.ApiControllerTest do
   } do
     conn = post(conn, "/api/player-capabilities/exchange", %{"capability" => "invalid"})
 
-    assert json_response(conn, 401)["error"] == "Invalid or expired player capability"
+    assert json_response(conn, 401)["error"] == "Invalid or expiredplayer capability"
     assert get_session(conn, "resume_player_session") == %{
              "game_id" => game.id,
              "player_id" => player.id
@@ -341,7 +381,7 @@ defmodule CopiWeb.ApiControllerTest do
         "capability" => expired_capability
       })
 
-    assert json_response(conn, 401)["error"] == "Invalid or expired player capability"
+    assert json_response(conn, 401)["error"] == "Invalid or expiredplayer capability"
   end
 
   test "exchange adds capabilities for the same game and other games", %{
@@ -349,7 +389,7 @@ defmodule CopiWeb.ApiControllerTest do
     game: game,
     player: player
   } do
-    {:ok, second_player} = Cornucopia.create_player(%{name: "Second Player", game_id: game.id})
+    {:ok, second_player} = Cornucopia.create_player(%{name: "SecondPlayer", game_id: game.id})
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other Game Player", game_id: other_game.id})
 
@@ -368,7 +408,7 @@ defmodule CopiWeb.ApiControllerTest do
              %{"game_id" => game.id, "player_id" => player.id}
            ]
 
-    other_capability = CopiWeb.PlayerCapability.sign(other_game.id, other_player.id)
+    other_capability = CopiWeb.PlayerCapability.sign(other_game.id,other_player.id)
 
     other_conn =
       build_conn()
@@ -390,10 +430,11 @@ defmodule CopiWeb.ApiControllerTest do
     player: player,
     dealt_card: dealt_card
   } do
-    {:ok, second_player} = Cornucopia.create_player(%{name: "Second Player", game_id: game.id})
+    {:ok, second_player} = Cornucopia.create_player(%{name: "SecondPlayer", game_id: game.id})
     second_dealt_card = Repo.insert!(%DealtCard{player_id: second_player.id, card_id: dealt_card.card_id})
 
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
+    {:ok, other_game} = Cornucopia.update_game(other_game, %{started_at: DateTime.utc_now()})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other Game Player", game_id: other_game.id})
     other_dealt_card = Repo.insert!(%DealtCard{player_id: other_player.id, card_id: dealt_card.card_id})
 
