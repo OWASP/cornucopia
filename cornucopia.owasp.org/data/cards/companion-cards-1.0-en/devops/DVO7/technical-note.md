@@ -1,0 +1,1 @@
+This card focuses on the risk of deploying unauthorized or malicious changes to production due to missing or bypassable approval gates and change control processes. It's similar to card 8, because both lead to malicious changes deployed in production, but this one focuses on attacks against the change management process.

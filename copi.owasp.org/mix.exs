@@ -1,0 +1,100 @@
+defmodule Copi.MixProject do
+  use Mix.Project
+
+  def project do
+    [
+      app: :copi,
+      version: "0.1.0",
+      elixir: "~> 1.14",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix_live_view] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
+      deps: deps(),
+      # Test coverage
+      test_coverage: [tool: ExCoveralls, allow_failure: true],
+    ]
+  end
+
+  # Configuration for the OTP application.
+  #
+  # Type `mix help compile.app` for more information.
+  def application do
+    [
+      mod: {Copi.Application, []},
+      extra_applications: [:logger, :runtime_tools]
+    ]
+  end
+
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
+
+  # Specifies your project dependencies.
+  #
+  # Type `mix help deps` for examples and options.
+  defp deps do
+    [
+      {:phoenix, "~> 1.8.0"},
+      {:phoenix_ecto, "~> 4.7.0"},
+      {:ecto_sql, "~> 3.14.0"},
+      {:postgrex, ">= 0.19.0"},
+      {:phoenix_html, "~> 4.1"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_view, "~> 1.1"},
+      {:lazy_html, ">= 0.0.0", only: :test},
+      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.2.0",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1},
+      {:swoosh, "~> 1.5"},
+      {:finch, "~> 0.13"},
+      {:telemetry_metrics, "~> 1.0"},
+      {:telemetry_poller, "~> 1.0"},
+      {:gettext, "~> 1.0"},
+      {:jason, "~> 1.2"},
+      {:dns_cluster, "~> 0.2.0"},
+      {:bandit, "~> 1.2"},
+      {:plug_cowboy, "~> 2.9.0"},
+      {:ecto_ulid, "~> 0.3.0"},
+      {:yaml_elixir, "~> 2.12.0"},
+      {:slugify, "~> 1.3.1"},
+      {:want, "~> 2.0.0"},
+      {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
+      {:hackney, "~> 4.0"},
+      {:mox, "~> 1.2.0", only: :test},
+      {:excoveralls, "~> 0.18.5", only: [:dev, :test]}
+    ]
+  end
+
+  # Aliases are shortcuts or tasks specific to the current project.
+  # For example, to install project dependencies and perform other setup tasks, run:
+  #
+  #     $ mix setup
+  #
+  # See the documentation for `Mix` for more info on aliases.
+  defp aliases do
+    [
+      setup: ["deps.get", "ecto.setup", "cmd --cd assets npm install"],
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets node build.js"],
+      "assets.build": ["tailwind copi", "cmd --cd assets node build.js"],
+      "assets.test": ["cmd --cd assets npm ci", "cmd --cd assets npm test"],
+      "assets.coverage": ["cmd --cd assets npm ci", "cmd --cd assets npm run coverage"],
+      "assets.deploy": [
+        "tailwind copi --minify",
+        "cmd --cd assets npm install",
+        "cmd --cd assets node build.js --deploy",
+        "phx.digest"
+      ]
+    ]
+  end
+end

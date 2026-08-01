@@ -1,0 +1,1 @@
+This card focuses on the agent exceeding the user's data access rights via overpermissioned connectors, not on the agent's own configuration being disclosed. See AAI5 for disclosure of internal agent instructions and AAI9 for agents modifying system permissions beyond intended authorization.

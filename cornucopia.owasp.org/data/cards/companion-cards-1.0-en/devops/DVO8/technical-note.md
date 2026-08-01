@@ -1,0 +1,1 @@
+This card focuses on the risk of deploying artifacts whose integrity has not been verified, allowing modified or malicious artifacts to reach production. It's similar to card 7, because both lead to malicious changes deployed in production, but this one focuses on artifacts after they're built.

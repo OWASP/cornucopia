@@ -1,0 +1,1 @@
+This is the wild card for the Frontend suit. The player invents a new attack that is not already covered by FRE 2 through FRE K; the attack must be specific to frontend security and plausibly applicable to the application being threat modelled.

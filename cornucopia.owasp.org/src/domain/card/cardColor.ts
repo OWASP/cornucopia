@@ -1,0 +1,28 @@
+export const cardColor = new Map<string,string>([
+    // Color mapping for the card rendering. 
+    // Webapp suits
+    ["authentication", "authentication"],
+    ["authorization", "authorization"],
+    ["data-validation-&-encoding", "data-validation-and-encoding"],
+    ["cornucopia", "cornucopia"],
+    ["session-management", "session-management"],
+    ["cryptography", "cryptography"],
+    ["wild-card", "wild-card"],
+    // Mobileapp cards
+    ["platform-&-code", "platform-and-code"],
+    ["authentication-&-authorization", "authentication-and-authorization"],
+    ["network-&-storage", "network-and-storage"],
+    ["resilience", "resilience"],
+    ["cryptography-mobile", "cryptography-mobile"],
+    ["cornucopia-mobile", "cornucopia-mobile"],
+    ["wild-card-mobile", "wild-card-mobile"],
+    // Companion cards
+    ["agentic-ai", "agentic-ai"],
+    ["automated-threats", "automated-threats"],
+    ["cloud", "cloud"],
+    ["devops", "devops"],
+    ["frontend", "frontend"],
+    ["large-language-models", "large-language-models"],
+    ["social-engineering", "social-engineering"],
+
+])

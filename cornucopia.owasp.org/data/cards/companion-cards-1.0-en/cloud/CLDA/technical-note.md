@@ -1,0 +1,1 @@
+Players can discuss any type of Cloud (CLD) attack they think might be possible against the assessment target. If possible, try to identify a novel cloud-specific threat that is not already covered by another CLD card.

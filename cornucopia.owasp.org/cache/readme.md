@@ -1,0 +1,1 @@
+This folder is used at build time to store cached API requests.

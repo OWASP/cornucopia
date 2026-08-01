@@ -1,0 +1,3 @@
+The degree of identity assurance may not be the same for all web application functions. Or the authentication function may be available in a weaker manner in some other mode or channel, thus compromising the web application.
+
+The key concept for this card is inconsistent authentication. See AT J for missing authentication, AT K for changing the executing authentication code, and other cards in this suit for individual authentication issues (e.g. missing notification, inadequate password protection, enumeration, weak account management, weak use of temporary passwords, bypass, missing re-authetication, etc).

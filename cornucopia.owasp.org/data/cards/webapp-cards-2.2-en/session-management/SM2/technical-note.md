@@ -1,0 +1,1 @@
+Allowing an attacker to control or predict session identifier generation creates weak, guessable session IDs that enable hijacking and user impersonation.

@@ -1,0 +1,1 @@
+This card focuses on token integrity failures, forging, predicting, or reusing JWTs and access tokens. See FRE6 for stealing a valid token from an active session via JavaScript, and FRE3 for reusing residual tokens left in the browser after logout.

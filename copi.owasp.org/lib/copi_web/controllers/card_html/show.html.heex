@@ -1,0 +1,168 @@
+<%= if @card do %>
+
+  <%= cond do %>
+      <% @card.edition in ["webapp", "ecommerce"] -> %>
+
+    <div class={["card", @card.value, @card.edition, Slug.slugify @card.category]}>
+      <div class="left-bar"><%= @card.category %></div>
+      <div class="main-content">
+        <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
+        <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
+        <% end %>
+        <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
+
+        <p class="misc"><%= @card.misc %></p>
+
+        <% else %>
+          &nbsp;
+        <% end %>
+      </div>
+    </div>
+  <% @card.edition == "eop" -> %>
+
+    <div class={["card", "eop", Slug.slugify(@card.category), "n" <> @card.value]}>
+      <div class="left-value"><%= @card.value %></div>
+      <div class="main-content">
+        <p class="category"><%= @card.category %></p>
+
+        <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={@card.url}>Need more info?</a></p>
+        <% end %>
+
+        <%= if @card.value in ["J", "Q", "K"] do %>
+
+        <% else %>
+          <p class="value"><%= @card.value %></p>
+
+        <% end %>
+
+      </div>
+    </div>
+
+  <% @card.edition == "mlsec" -> %>
+
+    <div class={["card", "mlsec", Slug.slugify(@card.category), "n" <> @card.value]}>
+      <div class="left-value"><%= @card.value %></div>
+      <div class="main-content">
+        <p class="category"><%= @card.category %></p>
+        <%= if @card.value in ["A"] do %>
+          <p class="risk mlsec">&nbsp;</p>
+          <p class="biml mlsec">&nbsp;</p>
+          <p class="description mlsec"><%= @card.description %></p>
+        <% else %>
+          <p class="risk mlsec"><%= @card.misc %></p>
+          <p class="biml mlsec">
+          <%= if @card.biml != nil do %>
+              [ <%= @card.biml %> ]
+          <% else %>
+              &nbsp;
+          <% end %>
+          </p>
+          <p class="description mlsec"><%= @card.description %></p>
+        <% end %>
+
+      </div>
+    </div>
+
+  <% @card.edition == "cumulus" -> %>
+
+    <div class={["card", "cumulus", Slug.slugify(@card.category), "n" <> @card.value]}>
+        <div class="left-value"><%= @card.value %></div>
+        <div class="category"><p><%= @card.category %></p></div>
+        <div class="left-bar"><p class="left-content"><%= @card.misc %></p></div>
+        <div class="main-content">
+          <p class="description"><%= @card.description %></p>
+        </div>
+    </div>
+
+  <% @card.edition == "companion" -> %>
+
+    <div class={["card", @card.value, "companion", Slug.slugify(@card.category)]}>
+      <div class="left-bar"><%= @card.category %></div>
+      <div class="main-content">
+        <p class="value"><%= @card.value %></p>
+        <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={@card.url}>Need more info?</a></p>
+        <% end %>
+        <%= if @card.misc != nil and @card.misc != "" do %>
+          <p class="misc"><%= @card.misc %></p>
+        <% end %>
+      </div>
+    </div>
+
+  <% @card.edition == "dbd" -> %>
+
+    <div class={["card", @card.value, "dbd", Slug.slugify(@card.category)]}>
+      <div class="left-bar"><%= @card.category %></div>
+      <div class="main-content">
+        <p class="value"><%= @card.value %></p>
+        <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={@card.url}>Need more info?</a></p>
+        <% end %>
+      </div>
+    </div>
+
+  <% @card.edition in ["mobileapp", "masvs"] -> %>
+
+      <div class={["card", @card.value, "#{Slug.slugify @card.category}-mobile"]}>
+        <div class="left-bar"><%= @card.category %></div>
+      <div class="main-content">
+        <p class="value"><%= @card.value |> String.replace("JokerA", "Joker") |> String.replace("JokerB", "Joker") %></p>
+        <p class="description"><%= @card.description %></p>
+        <%= if @card.url != nil and @card.url != "" do %>
+          <p class="description"><a class="info" rel="help noopener noreferrer" target="_blank" href={"#{@card.url}#What-can-go-wrong?"}>Need more info?</a></p>
+        <% end %>
+        <%= if @card.value in ["A", "JokerA", "JokerB"] do %>
+
+        <p class="misc"><%= @card.misc %></p>
+
+        <% else %>
+
+        <dl class="mappings">
+          <dt>OWASP MASVS</dt>
+          <dd>
+            <%= if @card.owasp_masvs != nil and Enum.count(@card.owasp_masvs) > 0 do %>
+              <%= Enum.join @card.owasp_masvs, ", " %>
+            <% else %>
+              &ndash;
+            <% end %>
+          </dd>
+          <dt>OWASP MASTG</dt>
+          <dd>
+            <%= if @card.owasp_mastg != nil and Enum.count(@card.owasp_mastg) > 0 do %>
+              <%= Enum.join @card.owasp_mastg, ", " %>
+            <% else %>
+              &ndash;
+            <% end %>
+          </dd>
+          <dt>CAPEC</dt>
+          <dd>
+            <%= if @card.capec != nil and Enum.count(@card.capec) > 0 do %>
+              <%= Enum.join @card.capec, ", " %>
+            <% else %>
+              &ndash;
+            <% end %>
+          </dd>
+          <dt>SAFECODE</dt>
+          <dd>
+            <%= if @card.safecode != nil and Enum.count(@card.safecode) > 0 do %>
+              <%= Enum.join @card.safecode, ", " %>
+            <% else %>
+              &ndash;
+            <% end %>
+          </dd>
+        </dl>
+
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+
+
+<% end %>

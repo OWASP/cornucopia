@@ -1,0 +1,1 @@
+This card covers persistent injection into the application's own deployed frontend assets through a compromised build or deployment pipeline. See FRE5 for compromise of third-party scripts loaded from an external CDN, and FRE4 for DOM-based XSS where the attacker controls runtime input rather than the deployed code.

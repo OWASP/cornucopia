@@ -1,0 +1,1 @@
+In general use the server or framework’s own session management controls, rather than creating custom code. The application should only recognize these session identifiers as valid, and the session identifier creation must always be done on a trusted system (e.g. server-side).

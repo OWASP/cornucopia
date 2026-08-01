@@ -1,0 +1,19 @@
+{
+  "news": {
+    "title": "News",
+    "head": {
+      "title": "OWASP Cornucopia - News",
+      "description": "Stay updated with the latest news and updates from OWASP Cornucopia.",
+      "keywords": "OWASP, Cornucopia, news, updates, releases, community"
+    },
+    "p1": "No blogposts have been published yet, come back soon!",
+    "a": "Read more",
+    "p2": "View",
+    "slug": {
+      "p1": "Source"
+    },
+    "author": {
+      "h1": "Authors"
+    }
+  }
+}

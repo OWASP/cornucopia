@@ -1,0 +1,1 @@
+This card covers supply chain attacks on cloud infrastructure through malicious IaC templates committed to version control. See CLDJ for the related threat of compromising the build pipeline to inject malicious code into container images.

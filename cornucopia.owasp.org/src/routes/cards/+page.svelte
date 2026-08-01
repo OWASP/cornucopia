@@ -1,0 +1,480 @@
+<script lang="ts">
+    import SvelteMarkdown from 'svelte-markdown';
+    import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
+    import type { PageData } from "./$types";
+    import CardPreview from "$lib/components/cardPreview.svelte";
+    import {Text} from "$lib/utils/text.js"
+    import type { Card } from "../../domain/card/card.js";
+    import { MappingController } from "../../domain/mapping/mappingController.js";
+    import { readLang, readTranslation } from '$lib/stores/stores';
+    import type { Suit } from "../../domain/suit/suit.js";
+    import { SvelteMap } from 'svelte/reactivity';
+    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION, VERSION_EOP, EDITION_NAMES } from "$lib/services/deckServiceConsts";
+
+    interface Props {
+        data: PageData;
+    }
+
+    let { data }: Props = $props();
+    const lang = readLang();
+    let t = readTranslation();
+    let content = $derived(data.content.get($lang) || data.content.get('en'));
+    let decks = $derived(data?.decks);
+    let cards = $derived(decks?.get($lang));
+    let suits = $derived(data.suits);
+    let mappingData = $derived(data.mappingData);
+
+
+    let mobileappSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_MOBILEAPP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_MOBILEAPP}-en`) as Suit[];
+    });
+    
+    let webappSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_WEBAPP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_WEBAPP}-en`) as Suit[];
+    });
+
+    let companionSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_COMPANION}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_COMPANION}-en`) as Suit[];
+    });
+
+    let eopSuits = $derived.by(() => {
+        const langSuits = suits?.get(`${VERSION_EOP}-${$lang}`);
+        return langSuits || suits?.get(`${VERSION_EOP}-en`) as Suit[];
+    });
+
+    let version : string = $state(VERSION_WEBAPP);
+    let _suit : string;
+    let card : Card = $derived(cards?.get('VE2') as Card);
+    
+    let mapping = $derived.by(() => 
+        card ? (new MappingController(mappingData?.get(version))).getCardMappings(card.id) : []
+    );
+
+    let map : Map<string,boolean> = new SvelteMap();
+    setTree(false);
+
+    function setTree(expand : boolean)
+    {
+        // Collapse or expand the entire tree of suits
+        for(let i = 0 ; i < (webappSuits?.length as number) ; i++)
+        {
+            if (webappSuits !== undefined && typeof webappSuits[i] !== 'undefined') map.set(webappSuits[i]?.name,expand);
+        }
+
+        for(let i = 0 ; i < mobileappSuits?.length ; i++)
+        {
+            if (mobileappSuits !== undefined && typeof mobileappSuits[i] !== 'undefined') map.set(mobileappSuits[i]?.name,expand);
+        }
+
+        for(let i = 0 ; i < companionSuits?.length ; i++)
+        {
+            if (companionSuits !== undefined && typeof companionSuits[i] !== 'undefined') map.set(companionSuits[i]?.name,expand);
+        }
+
+        for(let i = 0 ; i < eopSuits?.length ; i++)
+        {
+            if (eopSuits !== undefined && typeof eopSuits[i] !== 'undefined') map.set(eopSuits[i]?.name,expand);
+        }
+    }
+
+    function toggle(suit : string)
+    {
+        let value : boolean = map?.get(suit) || false;
+        map.set(suit,!value);
+        map = map;
+    }
+
+    function changeVersion(versionParam : string)
+    {
+        version = versionParam;
+        // Collapse the entire tree down when switching between versions
+        setTree(false);
+        // Show the following selected cards
+        if(version == VERSION_WEBAPP)
+        card = cards?.get('VE2') as Card;
+
+        if(version == VERSION_MOBILEAPP)
+        card = cards?.get('PC2') as Card;
+        
+        if(version == VERSION_COMPANION)
+        card = cards?.get('AAI2') as Card;
+
+        if(version == VERSION_EOP)
+        card = cards?.get('SP2') as Card;
+    }
+
+
+    function enter(suitParam : string, cardParam : string)
+    {
+        _suit = suitParam;
+        card = cards?.get(cardParam) as Card;
+        mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
+    }
+</script>
+<svelte:head>
+    <title>{$t('cards.head.title')}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/cards" />
+    <meta name="description" content="{$t('cards.head.description')}" />
+	<meta name="keywords" content="{$t('cards.head.keywords')}" />
+    <meta property="og:title" content="{$t('cards.head.title')}">
+    <meta property="og:description" content="{$t('cards.head.description')}">
+    <meta name="twitter:title" content="{$t('cards.head.title')}">
+    <meta name="twitter:description" content="{$t('cards.head.description')}">
+</svelte:head>
+<div>
+<section title="OWASP Cornucopia decks" id="decks">
+{#if content != ''}
+<SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
+{/if}
+<p class="button-container script">
+    <button title="{EDITION_NAMES[VERSION_WEBAPP]} {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
+    <button title="{EDITION_NAMES[VERSION_MOBILEAPP]} {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
+    <button title="{EDITION_NAMES[VERSION_COMPANION]} {$t('cards.button.3')}" class:button-selected={version == VERSION_COMPANION} onclick={()=>changeVersion(VERSION_COMPANION)}>{$t('cards.button.3')}</button>
+    <button title="{$t('cards.button.4')}" class:button-selected={version == VERSION_EOP} onclick={()=>changeVersion(VERSION_EOP)}>{$t('cards.button.4')}</button>
+</p>
+</section>
+<div class="script">
+    {#each webappSuits as suit (suit.name)}
+        {#each suit.cards as card (card)}
+            <p><a title="{cards?.get(card)?.editionName} suit {suit.name}, card {card}" class="card hide" href={cards?.get(card)?.url ?? ''}>{suit.name} {card}</a></p>
+        {/each}
+    {/each}
+
+    {#if version == VERSION_WEBAPP}
+    <h2 title="{EDITION_NAMES[VERSION_WEBAPP]} {$t('cards.h2.1')}">{$t('cards.h2.1')}</h2>
+    <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('cards.p2')}
+    </p>
+    {/if}
+    {#if version == VERSION_MOBILEAPP}
+    <h2 title="{EDITION_NAMES[VERSION_MOBILEAPP]} {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
+    <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('cards.p3')}
+    </p>
+    {/if}
+    {#if version == VERSION_COMPANION}
+    <h2 title="{EDITION_NAMES[VERSION_COMPANION]} {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+    <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('cards.p4')}
+    </p>
+    {/if}
+    {#if version == VERSION_EOP}
+    <h2 title="{$t('cards.h2.4')}">{$t('cards.h2.4')}</h2>
+    <p class="text">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html $t('cards.p5')}
+    </p>
+    {/if}
+    <div class="container">
+        <div class="tree">
+
+            {#if version == VERSION_WEBAPP}
+                
+                {#each webappSuits as suit (suit.name)}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="{EDITION_NAMES[VERSION_WEBAPP]} {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card (card)}
+                            <p onmouseenter={()=>{enter(suit.name, cards?.get(card)?.id)}}>
+                                <a title="{cards?.get(card)?.editionName} {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_MOBILEAPP}
+                {#each mobileappSuits as suit (suit.name)}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="{EDITION_NAMES[VERSION_MOBILEAPP]} {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card (card)}
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                                <a title="{cards?.get(card)?.editionName} {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_COMPANION}
+                {#each companionSuits as suit (suit.name)}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="{EDITION_NAMES[VERSION_COMPANION]} {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card (card)}
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                            <a title="{cards?.get(card)?.editionName} {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+
+            {#if version == VERSION_EOP}
+                {#each eopSuits as suit (suit.name)}
+                    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+                    <h3 title="{EDITION_NAMES[VERSION_EOP]} {Text.Format(suit.name).toUpperCase()} suit" onkeypress={()=>toggle(suit.name)} onclick={()=>toggle(suit.name)}>&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</h3>
+                    {#if map?.get(suit.name)}
+                        {#each suit.cards as card (card)}
+                            <p onmouseenter={()=>{enter(suit.name,cards?.get(card)?.id)}}>
+                            <a title="{cards?.get(card)?.editionName} {Text.Format(suit.name).toUpperCase()}, {cards?.get(card)?.id}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                            </p>
+                        {/each}
+                    {/if}
+                {/each}
+            {/if}
+        </div>
+        <div class="preview-container">
+                <CardPreview {card} {mapping} style="preview-card-container"></CardPreview>
+        </div>
+    </div>
+</div>
+<noscript>
+    <div class="">
+        <div>
+            <h2 title="{EDITION_NAMES[VERSION_WEBAPP]} {$t('cards.h2.1')}">{$t('cards.h2.1')}</h2>
+            <p class="text">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html $t('cards.p2')}
+            </p>
+            {#each webappSuits as suit (suit.name)}
+                <label for="{suit.name + '-web'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card (card)}
+                    <p>
+                        <a title="{cards?.get(card)?.editionName} card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>
+    </div>
+    <div class="">
+        <div>
+            <h2 title="{EDITION_NAMES[VERSION_MOBILEAPP]} {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
+            <p class="text">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html $t('cards.p3')}
+            </p>
+            {#each mobileappSuits as suit (suit.name)}
+                <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card (card)}
+                    <p>
+                        <a title="{cards?.get(card)?.editionName} card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>
+    </div>
+    <div class="">
+        <div>
+            <h2 title="{EDITION_NAMES[VERSION_COMPANION]} {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
+            <p class="text">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html $t('cards.p4')}
+            </p>
+            {#each companionSuits as suit (suit.name)}
+                <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card (card)}
+                    <p>
+                        <a title="{cards?.get(card)?.editionName} card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>
+    </div>
+    <div class="">
+        <div>
+            <h2 title="{$t('cards.h2.4')}">{$t('cards.h2.4')}</h2>
+            <p class="text">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html $t('cards.p5')}
+            </p>
+            {#each eopSuits as suit (suit.name)}
+                <label for="{suit.name + '-eop'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-eop'}"/>
+                <div class="card-buttons">
+                {#each suit.cards as card (card)}
+                    <p>
+                        <a title="{cards?.get(card)?.editionName} card: {cards?.get(card)?.id} from suit: {Text.Format(suit.name).toUpperCase()}" href={cards?.get(card)?.url ?? ''}>&#9500;&#9472;&#9472; {cards?.get(card)?.id}</a>
+                    </p>
+                {/each}
+                </div>
+            {/each}
+        </div>
+    </div>
+</noscript>
+</div>
+<style>
+
+    .card.hide
+    {
+        display: none;
+    }
+    .card-buttons {
+        display: none;
+    }
+
+    .suit-button 
+    {
+        appearance: none;
+    }
+
+    .suit-button:checked + .card-buttons
+    {
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .card-buttons a 
+    {
+        text-decoration: none;
+    }
+
+    .card-buttons p 
+    {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+
+    .button-container
+    {
+        margin-top: 1rem;
+        width:auto;
+    }
+
+    
+    button
+    {
+        font-weight: bold;
+        background: none;
+        border:none;
+        font-size: 1.2rem;
+        outline: 1px var(--background) solid;
+        color: var(--background);
+        background-color: white;
+        padding: .5rem;
+        cursor:pointer;
+    }
+
+    button:hover
+    {
+        opacity: 50%;
+    }
+
+    .button-selected
+    {
+        outline: 1px var(--background) solid;
+        background-color: var(--background);
+        color: var(--background);    
+        color:white;
+    }
+
+    .preview-container
+    {
+        padding-left: 1rem;
+        width : 40%;
+        min-width: 45%;
+    }
+
+    .container
+    {
+        display: flex;
+        flex-direction: row;
+        width : 100%;
+        height : 100%;
+        margin-bottom: 50vh;
+    }
+    .text
+    {
+        font-size: 1.2rem;
+        font-family: var(--font-body);
+        font-weight: normal;
+    }
+
+    h2,h3,.label
+    {
+        margin:0;
+        cursor:pointer;
+    }
+
+    h3:hover,.label
+    {
+        opacity: 50%;
+    }
+
+    .tree
+    {
+        width : 50%;
+    }
+
+    p,a,h2,h3,.label {
+        font-weight: bold;
+    }
+
+    .tree p:hover
+    {
+        background-color: rgba(255,255,255,.1);
+    }
+
+    .tree p
+    {
+        margin:0;
+        padding : 0rem;
+        margin-left: 3rem;
+        width : 100%;
+    }
+
+
+    .tree a
+    {
+        text-decoration: none;
+        color:black;
+    }
+
+    a:hover
+    {
+        opacity: 50%;
+    }
+
+    @media (max-width: 767px) 
+    {
+        .tree
+        {
+            width : 100%;
+        }
+
+        .preview-container
+        {
+            display: none;
+        }
+
+        button
+        {
+            width: 90%;
+        }
+
+        div
+        {
+            margin: 0rem 1rem;
+        }
+    }
+</style>
+
+
+
+

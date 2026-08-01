@@ -1,0 +1,3 @@
+In some ecommerce applications it may be desirable to allow customers to be logged in using multiple browsers/devices. However that would be unusual for administrative users, or users of more sensitive data. Even if concurrent sessions are allowed. consider what should occur in other sessions when a user changes their password, or changes their delivery address, or logs out, or times out, or authentication failure occurs.
+
+NB: This card relates to concurrent sessions created by authenticating more than once in different browsers/devices. See SM 6 for using the same session identifier in concurrent sessions.

@@ -1,0 +1,89 @@
+# OWASP ZAP Configuration for Copi Application
+# This configuration defines the scanning parameters for automated DAST testing
+
+env:
+  contexts:
+    - name: "Copi Application"
+      urls:
+        - "http://localhost:4000"
+      includePaths:
+        - "http://localhost:4000/.*"
+      excludePaths:
+        - "http://localhost:4000/assets/.*"
+        - "http://localhost:4000/images/.*"
+      authentication:
+        method: "manual"
+      sessionManagement:
+        method: "cookie"
+      technology:
+        include:
+          - "Db.PostgreSQL"
+          - "Language.JavaScript"
+          - "OS.Linux"
+          - "SCM.Git"
+
+  parameters:
+    failOnError: false
+    failOnWarning: false
+    progressToStdout: true
+
+jobs:
+  - type: passiveScan-config
+    parameters:
+      maxAlertsPerRule: 10
+      scanOnlyInScope: true
+
+  - type: spider
+    parameters:
+      context: "Copi Application"
+      url: "http://localhost:4000/games/new"
+      maxDuration: 5
+      maxDepth: 5
+      maxChildren: 10
+
+  - type: spiderAjax
+    parameters:
+      context: "Copi Application"
+      url: "http://localhost:4000/games/new"
+      maxDuration: 10
+      maxCrawlDepth: 5
+      numberOfBrowsers: 2
+      browserId: "firefox-headless"
+
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 5
+
+  - type: activeScan
+    parameters:
+      context: "Copi Application"
+      policy: "Default Policy"
+      maxRuleDurationInMins: 5
+      maxScanDurationInMins: 30
+      addQueryParam: false
+      defaultPolicy: "Default Policy"
+      delayInMs: 0
+      handleAntiCSRFTokens: true
+      injectPluginIdInHeader: true
+      scanHeadersAllRequests: true
+      threadPerHost: 2
+
+  - type: report
+    parameters:
+      template: "traditional-html"
+      reportDir: "/zap/wrk"
+      reportFile: "copi_dast_report.html"
+      reportTitle: "Copi DAST Security Report"
+      reportDescription: "OWASP ZAP DAST scan results for Copi application"
+
+  - type: report
+    parameters:
+      template: "traditional-json"
+      reportDir: "/zap/wrk"
+      reportFile: "copi_dast_report.json"
+
+  - type: report
+    parameters:
+      template: "traditional-xml"
+      reportDir: "/zap/wrk"
+      reportFile: "copi_dast_report.xml"

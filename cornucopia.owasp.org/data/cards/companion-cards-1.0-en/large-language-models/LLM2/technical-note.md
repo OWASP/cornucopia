@@ -1,0 +1,1 @@
+This card is about being able to exhaust computational resources or increase operational costs by submitting resource-intensive or recursive LLM queries.

@@ -1,0 +1,1 @@
+This card is specifically about indirect prompt injection delivered through external tool output, not through direct user input. See AAI2 for direct prompt injection via insufficient context isolation and AAI3 for injection through manipulated conversation history.

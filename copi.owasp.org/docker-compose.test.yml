@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db_test:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: copi_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  test_runner:
+    build:
+      context: .
+      target: builder
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/_build
+      - /app/deps
+    environment:
+      MIX_ENV: test
+      POSTGRES_TEST_PWD: password
+      DB_HOST: db_test
+    depends_on:
+      db_test:
+        condition: service_healthy
+    command: >
+      sh -c "
+        mix deps.get
+        mix test --cover
+      "

@@ -1,0 +1,1 @@
+This card describes how an attacker can use prompt injection to manipulate an LLM into leaking sensitive data.

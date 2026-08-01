@@ -1,0 +1,1 @@
+Exposed session identifiers—transmitted insecurely, logged, leaked in error messages, included in URLs, or accessible to attacker-controlled code—can be stolen and used to hijack and spoof user sessions.

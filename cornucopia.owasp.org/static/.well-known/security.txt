@@ -1,0 +1,6 @@
+Contact: mailto:johan.sydseter@owasp.org
+Contact: mailto:grant.ongers@owasp.org
+Contact: mailto:colin.watson@owasp.org
+Expires: 2030-02-20T11:07:00.000Z
+Preferred-Languages: en
+Policy: https://github.com/OWASP/cornucopia/blob/master/SECURITY.md

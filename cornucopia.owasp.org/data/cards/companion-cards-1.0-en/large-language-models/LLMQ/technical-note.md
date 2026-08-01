@@ -1,0 +1,1 @@
+This card describes how an attacker can use improper output handling to perform injection attacks, remote code execution, or unauthorized actions, allowing an attacker to tamper with data and elevate privileges.

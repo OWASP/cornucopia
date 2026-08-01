@@ -1,0 +1,1 @@
+This card focuses on container escape to the underlying compute host, not on lateral movement between containers. See CLDJ for the related threat of compromising the container build process to inject malicious code into container images.

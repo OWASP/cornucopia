@@ -1,0 +1,234 @@
+---
+meta:
+  edition: "mlsec"
+  component: "mappings"
+  language: "ALL"
+  version: "1.0"
+  layouts: ["cards"]
+  templates: []
+  languages: ["en"]
+suits:
+- 
+  id: "EMR"
+  name: "Model Risk"
+  cards:
+  - 
+    id: "EMR2"
+    value: "2"
+    biml: "eval:5:catastrophic forgetting"
+  -
+    id: "EMR3"
+    value: "3"
+    biml: "alg:8:oscillation"
+  -
+    id: "EMR4"
+    value: "4"
+    biml: "alg:4:randomness"
+  -
+    id: "EMR5"
+    value: "5"
+    biml: "alg:1:online"
+  -
+    id: "EMR6"
+    value: "6"
+    biml: "eval:1:overfitting"
+  -
+    id: "EMR7"
+    value: "7"
+    biml: "inference:3:hyperparameters"
+  -
+    id: "EMR8"
+    value: "8"
+    biml: "nference:4: hosting"
+  -
+    id: "EMR9"
+    value: "9"
+    biml: "alg:10:hyperparameter sensitivity"
+  -
+    id: "EMRX"
+    value: "10"
+    biml: "model:5:steal the box"
+  -
+    id: "EMRJ"
+    value: "J"
+    biml: "model:4:training set reveal"
+  - 
+    id: "EMRQ"
+    value: "Q"
+    biml: "model:2:Trojan"
+  -
+    id: "EMRK"
+    value: "K"
+    biml: "model:1:improper re-use"
+  - 
+    id: "EMRA"
+    value: "A"
+    biml: "-"
+-
+  id: "EIR"
+  name: "Input Risk"
+  cards:
+  - 
+    id: "EIR2"
+    value: "2"
+    biml: "LLM:inference:6:feedback scores"
+  -
+    id: "EIR3"
+    value: "3"
+    biml: "LLM:input:3:open to the public"
+  - 
+    id: "EIR4"
+    value: "4"
+    biml: "LLM:input:5:sponge input"
+  - 
+    id: "EIR5"
+    value: "5"
+    biml: "LLM:input:6:input ambiguity"
+  -
+    id: "EIR6"
+    value: "6"
+    biml: "raw:7:text encoding"
+  - 
+    id: "EIR7"
+    value: "7"
+    biml: "system:10:denial of service"
+  -
+    id: "EIR8"
+    value: "8"
+    biml: "inference:5:user risk"
+  - 
+    id: "EIR9"
+    value: "9"
+    biml: "input:3:dirty input"
+  -
+    id: "EIR10"
+    value: "10"
+    biml: "input:2:controlled input stream"
+  - 
+    id: "EIRJ"
+    value: "J"
+    biml: "input:4:looped input"
+  -
+    id: "EIRQ"
+    value: "Q"
+    biml: "LLM:input:2:prompt injection"
+  - 
+    id: "EIRK"
+    value: "K"
+    biml: "input:1:adversarial examples"
+  - 
+    id: "EIRA"
+    value: "A"
+    biml: "-"
+-
+  id: "EOR"
+  name: "Output Risk"
+  cards:
+  - 
+    id: "EOR2"
+    value: "2"
+    biml: "system:6:cry wolf"
+  -
+    id: "EOR3"
+    value: "3"
+    biml: "system:1:black box discrimination"
+  - 
+    id: "EOR4"
+    value: "4"
+    biml: "OWASP LLM09"
+  - 
+    id: "EOR5"
+    value: "5"
+    biml: "output:4:inscrutability"
+  -
+    id: "EOR6"
+    value: "6"
+    biml: "output:3:miscategorization"
+  -
+    id: "EOR7"
+    value: "7"
+    biml: "output:5:transparency"
+  -
+    id: "EOR8"
+    value: "8"
+    biml: "inference:3:confidence scores"
+  - 
+    id: "EOR9"
+    value: "9"
+    biml: "LLM:output:2:wrongness"
+  -
+    id: "EOR10"
+    value: "10"
+    biml: "OWASP LLM0S"
+  -
+    id: "EORJ"
+    value: "J"
+    biml: "system:2:overconfidence"
+  -
+    id: "EORQ"
+    value: "Q"
+    biml: "system:5:error propagation"
+  - 
+    id: "EORK"
+    value: "K"
+    biml: "output:1:d i rect"
+  -
+    id: "EORA"
+    value: "A"
+    biml: "-"
+- 
+  id: "EDR"
+  name: "Dataset Risk"
+  cards:
+  - 
+    id: "EDR2"
+    value: "2"
+    biml: "raw:10:metadata"
+  - 
+    id: "EDR3"
+    value: "3"
+    biml: "LLM:raw:4:data rights"
+  -
+    id: "EDR4"
+    value: "4"
+    biml: "assembly:4:partitioning"
+  - 
+    id: "EDR5"
+    value: "5"
+    biml: "assembly:3:normalize"
+  - 
+    id: "EDR6"
+    value: "6"
+    biml: "assembly:2:annotation"
+  -
+    id: "EDR7"
+    value: "7"
+    biml: "assembly:1:encoding integrity"
+  -
+    id: "EDR8"
+    value: "8"
+    biml: "eval:2:bad eval data"
+  -
+    id: "EDR9"
+    value: "9"
+    biml: "data:4:storage"
+  -
+    id: "EDR10"
+    value: "10"
+    biml: "LLM:raw:1:recursive pollution]"
+  -
+    id: "EDRJ"
+    value: "J"
+    biml: "system:2:data integrity"
+  -
+    id: "EDRQ"
+    value: "Q"
+    biml: "raw:1:data confidentiality"
+  -
+    id: "EDRK"
+    value: "K"
+    biml: "data:1:poisoning"
+  -
+    id: "EDRA"
+    value: "A"
+    biml: "-"

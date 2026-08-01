@@ -1,0 +1,1 @@
+This card describes how an attacker can use indirect prompt injection to change AI model behavior or steal data.

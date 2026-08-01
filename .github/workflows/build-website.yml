@@ -1,0 +1,82 @@
+---
+    name: Build and Test the Cornucopia Website
+    on:
+      workflow_call:
+      workflow_dispatch:
+    permissions:
+      contents: read
+    jobs:
+      hardening:
+        name: Hardening
+        runs-on: ubuntu-latest
+        steps:
+          # Make sure we have some code to test
+          - name: Harden runner
+            uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+            with:
+              egress-policy: block
+              allowed-endpoints: >
+                api.github.com:443
+                github-cloud.githubusercontent.com:443
+                github.com:443
+                motd.ubuntu.com:443
+                keys.openpgp.org:443
+      build-website:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            with:
+              ref: ${{ github.event.pull_request.head.sha }}
+          - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+            name: Install pnpm
+            with:
+              version: 10.0.0
+              run_install: false
+    
+          - name: Install Node.js
+            uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+            with:
+              node-version: '26'
+          - name: Build
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm install          # Install dependencies
+              npm run build        # Build production version
+              pnpm run coverage
+              
+              # Run audit with retry logic for transient registry errors
+              max_retries=3
+              retry_count=0
+              while [ $retry_count -lt $max_retries ]; do
+                if pnpm audit --prod 2>&1 | tee /tmp/audit_output.txt; then
+                  echo "Audit passed successfully"
+                  exit 0
+                elif grep -q "ERR_PNPM_AUDIT_BAD_RESPONSE" /tmp/audit_output.txt && grep -q "500" /tmp/audit_output.txt; then
+                  retry_count=$((retry_count + 1))
+                  echo "Registry returned 500 error, retry $retry_count of $max_retries"
+                  sleep 10
+                else
+                  echo "Audit failed with real vulnerabilities"
+                  exit 1
+                fi
+              done
+              echo "Max retries reached, skipping audit due to transient registry errors"
+              exit 0
+
+          - name: Smoke Test - Application Verification
+            working-directory: cornucopia.owasp.org
+            run: |
+              pnpm exec serve build -l 3000 &
+              pnpm exec wait-on http://localhost:3000
+              npm run smoke-test
+
+              kill $(jobs -p) || true
+
+          - name: Upload website coverage to Qlty
+            uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+            with:
+             token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+             total-parts-count: 3
+             add-prefix: cornucopia.owasp.org
+             files: cornucopia.owasp.org/coverage/lcov.info

@@ -1,0 +1,1 @@
+This card relates to generic input validation. See [Data Validation & Sanitization 4](/cards/VE4#card 'Data Validation & Sanitization 4 [internal]') for the similar additional context-specific checks.

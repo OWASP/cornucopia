@@ -1,0 +1,1 @@
+This card focuses on lateral movement between separate cloud accounts using IAM trust relationships. See CLD8 for the related threat of accessing other products' resources within a single shared account.

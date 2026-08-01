@@ -1,0 +1,1 @@
+This card is about agents making unauthorized configuration or permission changes due to an overly broad action scope, not about unauthorized data reads. See AAI6 for excessive data access beyond user authorization and AAIK for high-impact operations caused by excessive agency across multiple integrated systems.

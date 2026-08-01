@@ -1,0 +1,1 @@
+This card primarily relates to session timeout, but also includes using the same session identifier in concurrent sessions. See [Session Management (SM3)](/cards/SM3#card 'Session Management (SM3) [internal]') for concurrent sessions created by authenticating more than once in different browsers/devices.

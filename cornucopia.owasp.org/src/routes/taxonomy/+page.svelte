@@ -1,0 +1,57 @@
+<script>
+    import { Text } from "$lib/utils/text";
+    import { resolve } from "$app/paths";
+    import {readLang, readTranslation} from "$lib/stores/stores";
+    import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
+    import SvelteMarkdown from "svelte-markdown";
+    /** @type {{data: any}} */
+    let { data } = $props();
+    let t = readTranslation();
+    const lang = readLang();
+    let content = $derived(data.content.get($lang) || data.content.get('en'));
+</script>
+<svelte:head>
+    <link rel="canonical" href="https://cornucopia.owasp.org/taxonomy" />
+    <title>{$t('taxonomy.head.title')}</title>
+	<meta name="description" content="{$t('taxonomy.head.description')}" />
+	<meta name="keywords" content="{$t('taxonomy.head.keywords')}" />
+    <meta property="og:title" content="{$t('taxonomy.head.title')}">
+    <meta property="og:description" content="{$t('taxonomy.head.description')}">
+    <meta name="twitter:title" content="{$t('taxonomy.head.title')}">
+    <meta name="twitter:description" content="{$t('taxonomy.head.description')}">
+</svelte:head>
+<div>
+{#if content != ''}
+    <SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
+{/if}
+{#each data.categories as category (category)}
+    <p>├──<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+{/each}
+</div>
+<style>
+    p
+    {
+        margin:0;
+    }
+
+    a
+    {
+        text-decoration: none;
+        font-weight: bold;
+        color:var(--background);
+        transition: var(--transition);
+    }
+
+    a:hover
+    {
+        opacity:50%;
+    }
+    @media (max-width: 767px)
+    {
+        div
+        {
+            margin: 0rem 1rem;
+        }
+    }
+</style>
+

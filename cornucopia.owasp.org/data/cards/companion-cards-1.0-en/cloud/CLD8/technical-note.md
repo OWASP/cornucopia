@@ -1,0 +1,1 @@
+This card is about insufficient resource isolation within a shared cloud account, where metadata and tags are used to identify cross-product targets. See CLD9 for the related threat of pivoting between separate cloud accounts using trust relationships.

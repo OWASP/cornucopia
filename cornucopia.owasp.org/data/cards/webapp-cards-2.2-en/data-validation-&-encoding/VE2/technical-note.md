@@ -1,0 +1,1 @@
+The key concept is that verbose error messages, misconfigurations, and leftover or exposed files/code can leak internal system details, enabling attackers to discover and exploit your application. See also [Authentication 7](/cards/AT7#card 'Authentication 7 [internal]') relating to different messages at the user login page to indicate that the username or the password are wrong.

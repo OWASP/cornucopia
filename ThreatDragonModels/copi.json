@@ -1,0 +1,713 @@
+{
+  "version": "2.6.0",
+  "summary": {
+    "title": "copi.owasp.org",
+    "owner": "",
+    "description": "Copi is an online place where you can play Cornucopia and Elevation of Privilege. You can play all the editions of Cornucopia (website and mobile) as well as the Elevation of Privileges game.",
+    "id": 0
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "id": 1,
+        "title": "Cornucopia",
+        "diagramType": "EOP",
+        "placeholder": "New EoP games diagram description",
+        "thumbnail": "./public/content/images/thumbnail.eop.jpg",
+        "version": "2.6.0",
+        "cells": [
+          {
+            "position": {
+              "x": 463.75,
+              "y": 210
+            },
+            "size": {
+              "width": 290,
+              "height": 370
+            },
+            "attrs": {
+              "label": {
+                "text": "Fly.io"
+              }
+            },
+            "visible": true,
+            "shape": "trust-boundary-box",
+            "zIndex": -1,
+            "id": "bce3c04e-ec35-456f-ad56-ccfd1b5d14b9",
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "Fly.io",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "containedElements": [
+                "55e1221c-10c3-4cff-8fae-68b38ac0dac1",
+                "4dffb9a1-71b7-4784-b7e9-5f8a1af292d3",
+                "752aa80e-b6a9-4807-8e68-2c55994ea970"
+              ],
+              "crossingFlows": [
+                "3c15675a-1ef1-42f5-84e0-be12c0ad67ad"
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": 463.75,
+              "y": 470
+            },
+            "size": {
+              "width": 290,
+              "height": 110
+            },
+            "visible": true,
+            "shape": "trust-boundary-box",
+            "zIndex": -1,
+            "id": "55e1221c-10c3-4cff-8fae-68b38ac0dac1",
+            "data": {
+              "type": "tm.BoundaryBox",
+              "name": "Trust Boundary",
+              "description": "",
+              "isTrustBoundary": true,
+              "hasOpenThreats": false,
+              "containedElements": [
+                "4dffb9a1-71b7-4784-b7e9-5f8a1af292d3"
+              ],
+              "crossingFlows": [
+                "8aa49016-4594-49c7-afe9-e742b79abb78"
+              ]
+            }
+          },
+          {
+            "position": {
+              "x": 545,
+              "y": 500
+            },
+            "size": {
+              "width": 120,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "PSQL"
+              },
+              "topLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              },
+              "bottomLine": {
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "store",
+            "zIndex": 1,
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "fcac6903-86c3-479d-b47d-73e9129bd1a5"
+                },
+                {
+                  "group": "right",
+                  "id": "ac8623a5-5a12-49e5-b0d9-128c798b1c31"
+                },
+                {
+                  "group": "bottom",
+                  "id": "a427295e-af59-4557-95d6-7b12fc687ce9"
+                },
+                {
+                  "group": "left",
+                  "id": "f6f46b7d-8c9a-4d87-bacd-b0eb85dd4bb7"
+                }
+              ]
+            },
+            "id": "4dffb9a1-71b7-4784-b7e9-5f8a1af292d3",
+            "data": {
+              "type": "tm.Store",
+              "name": "PSQL",
+              "description": "Stores data about players and games",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isALog": false,
+              "isEncrypted": true,
+              "isSigned": false,
+              "storesCredentials": false,
+              "storesInventory": true,
+              "threats": [
+                {
+                  "id": "f0efaf1a-c42b-4468-b75f-bf4880a30e13",
+                  "title": "New STRIDE threat",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "When hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory.",
+                  "mitigation": "Ensure that your service provider ensures that the data is encrypted at REST.\nOWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 3,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 1,
+                "denialOfService": 0
+              }
+            }
+          },
+          {
+            "position": {
+              "x": 510,
+              "y": 240
+            },
+            "size": {
+              "width": 190,
+              "height": 140
+            },
+            "attrs": {
+              "text": {
+                "text": "Copi"
+              },
+              "body": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "process",
+            "zIndex": 2,
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "7dbc8618-4e2d-4092-9703-804eee429c3b"
+                },
+                {
+                  "group": "right",
+                  "id": "c6194413-077c-4494-be02-bec80b287064"
+                },
+                {
+                  "group": "bottom",
+                  "id": "70230815-3f02-4f14-9a92-1fef08524e8f"
+                },
+                {
+                  "group": "left",
+                  "id": "2be1b133-897c-4c68-a4bc-1040c7b4a97b"
+                }
+              ]
+            },
+            "id": "752aa80e-b6a9-4807-8e68-2c55994ea970",
+            "data": {
+              "type": "tm.Process",
+              "name": "Copi",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "handlesCardPayment": false,
+              "handlesGoodsOrServices": false,
+              "isWebApplication": false,
+              "privilegeLevel": "",
+              "threats": [
+                {
+                  "id": "69e0ea6c-e8c4-4a53-8325-836ead16a410",
+                  "title": "Grant can utilize the application to deny service to some or all of its users",
+                  "status": "NotApplicable",
+                  "severity": "Low",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "Given that  Grant can execute a distributed denial of service attack against the application, he could deny access to some or all of copi.owasp.org users.",
+                  "mitigation": "Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 8,
+                  "score": "",
+                  "cardSuit": "CORNUCOPIA",
+                  "cardNumber": "CK"
+                },
+                {
+                  "id": "477ee678-6f8c-4ce8-a9f7-83ecc5a34f71",
+                  "title": "ATJ: Anyone with a game link can watch the game",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "What can go wrong?\n\nAnyone with a game link can watch that game. This is intended. Someone may obtain a game link, a short-lived player capability, or a player session cookie through social engineering, logs, a compromised browser, or a compromised network.\n\nWatching a game does not grant player access. Player access requires a signed capability that expires after 5 minutes. If someone steals that capability before it is used, they may exchange it and become that player. A proxy or monitoring service that records POST request bodies may capture the capability.\n\nBy default, Copi remembers used capabilities in the memory of one application node. That record is lost when the node restarts. Clustered nodes normally share the check through one global registry. If the nodes lose contact, each node uses its local record and the same capability may be accepted by more than one node. Synchronizing later cannot undo an exchange that already succeeded.\n\nOptional PostgreSQL storage avoids these replay gaps, but sessions then depend on the database being available. Session records are encrypted, but anyone who obtains both the database contents and COPI_ENCRYPTION_KEY can read them.\n\nA stolen session cookie can be used to act as every player stored in that session until it expires. An individual session cannot be revoked in default cookie mode. PostgreSQL mode allows revocation by deleting the server-side session record.\n\nVoting and card play still have race conditions. Concurrent requests may create duplicate votes or play more than one card in a round because the database does not enforce those limits.",
+                  "mitigation": "What are we going to do about it?\n\nUse HTTPS and do not record capability exchange request bodies in proxies, monitoring systems, or access logs. Protect SECRET_KEY_BASE and COPI_ENCRYPTION_KEY, and rotate the affected key if it is exposed.\n\nUse PostgreSQL session storage when a capability must be accepted only once across several application nodes. Restrict access to the session tables and use verified TLS for the database connection. Without PostgreSQL mode, accept that a restart or cluster partition can allow reuse during the capability's 5-minute lifetime.\n\nDo not use real names or the name of a company or project for games and players. Use pseudonyms and made-up threat model names. Host Copi on a private network when public viewing by link is not acceptable.\n\nVoting integrity remains tracked in issue 2568.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 9,
+                  "score": "",
+                  "cardSuit": "AUTHENTICATION",
+                  "cardNumber": "ATJ"
+                },
+                {
+                  "id": "c6821a4b-e0ad-4d2f-b4dd-27dd33e1968c",
+                  "title": "CR6: Be aware of data exposure risk! Copi does not encrypt data in transit by default.",
+                  "status": "Open",
+                  "severity": "Low",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "What can go wrong?\n\nRomain can read and modify unencrypted data in memory or in transit (e.g. cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems.\nIf deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster.\nErlang clustering does not happen over TLS by default. This may allow an attacker to launch a MTM attack and do RCE against your cluster. It may also allow an attacker to take over your database connection, thereby disclosing sensitive information and compromising the integrity of data sent between your database and Copi.",
+                  "mitigation": "What can we do about it?\n\nif you deploy Copi yourself, make sure you configure TLS appropriatly according to your needs.\nOWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Private Networking) mesh to automatically connect all your app instances, providing zero-config, secure, private communication with internal DNS (e.g., app-name.internal), allowing services to talk as if they're on the same network, even across regions, for simple and secure microservices communication. This mesh handles complex routing, making it easy to build distributed apps securely without manual VPN setup.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 10,
+                  "score": "",
+                  "cardSuit": "CRYPTOGRAPHY",
+                  "cardNumber": "CR6"
+                },
+                {
+                  "id": "fe89a8cb-5147-41f9-b034-d54d37a055a8",
+                  "title": "AZ9: An attacker can deny access to user's by CAPEC 212, functionality misuse",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "What can go wrong?\n\nMike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature.\nAn attacker can continue to create an unlimited number of games and players until the application stops responding.",
+                  "mitigation": "What can we do about it?\n\nWe are working on minimizing the probability of functionality misuse by implementing rate limiting on the creation of games and players (see: https://github.com/OWASP/cornucopia/issues/1877). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 11,
+                  "score": "",
+                  "cardSuit": "AUTHORIZATION",
+                  "cardNumber": "AZ9"
+                },
+                {
+                  "id": "1415a7ba-cd7f-4583-b119-2dd9e816cb1f",
+                  "title": "ATA: Given that the url to the game gets accidently exposed, a hostile actor may disrupt the game to move backward and forward to the next and previous rounds",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "What can go wrong?\n\nSometimes players fall out of the game. When that happens, it is impossible to continue the game. We want to provide for a possibility to move to the next round if a player falls out of the game, but there is a risk that the url to the game gets accidently exposed, a hostile actor may disrupt the game to move backward and forward to the next and previous rounds.\nhttps://github.com/OWASP/cornucopia/issues/2129",
+                  "mitigation": "What are we going to do about it?\n\nWe will add a voting mechanism so that players can continue to the next round by a majority vote even if some players have dropped out. This will ensure that it's not possible to accidently or maliciously move to the next round.",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 12,
+                  "score": "",
+                  "cardSuit": "AUTHENTICATION",
+                  "cardNumber": "ATA"
+                },
+                {
+                  "id": "c0c26de6-2cf8-479e-845e-971229c1e0f1",
+                  "title": "CRA: Data is not encrypted at rest by default",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "type": null,
+                  "eopGameId": "cornucopia",
+                  "description": "What can go wrong?\n\nWhen hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory.",
+                  "mitigation": "Make sure you are using the latest version of Copi and that you have correctly configured the encryption key according to: https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#encryption-key-setup",
+                  "modelType": "EOP",
+                  "new": false,
+                  "number": 13,
+                  "score": "",
+                  "cardSuit": "CRYPTOGRAPHY",
+                  "cardNumber": "CRA"
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 3,
+                "tampering": 2,
+                "repudiation": 2,
+                "informationDisclosure": 2,
+                "denialOfService": 1,
+                "elevationOfPrivilege": 2
+              }
+            }
+          },
+          {
+            "position": {
+              "x": 552.5,
+              "y": 50
+            },
+            "size": {
+              "width": 112.5,
+              "height": 60
+            },
+            "attrs": {
+              "text": {
+                "text": "player"
+              },
+              "body": {
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
+                "strokeDasharray": null
+              }
+            },
+            "visible": true,
+            "shape": "actor",
+            "zIndex": 3,
+            "ports": {
+              "groups": {
+                "top": {
+                  "position": "top",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "position": "right",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "bottom": {
+                  "position": "bottom",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                },
+                "left": {
+                  "position": "left",
+                  "attrs": {
+                    "circle": {
+                      "r": 4,
+                      "magnet": true,
+                      "stroke": "#5F95FF",
+                      "strokeWidth": 1,
+                      "fill": "#fff",
+                      "style": {
+                        "visibility": "hidden"
+                      }
+                    }
+                  }
+                }
+              },
+              "items": [
+                {
+                  "group": "top",
+                  "id": "c649fa97-d992-4862-9d2c-7869f837f1cc"
+                },
+                {
+                  "group": "right",
+                  "id": "61ad1623-0367-43de-88e2-9fc9833dcb55"
+                },
+                {
+                  "group": "bottom",
+                  "id": "1fd33fbd-7b3f-4b16-b3e5-5f76a23b8a74"
+                },
+                {
+                  "group": "left",
+                  "id": "e57fc8bf-e3f6-40f5-a05a-e042a6c0f897"
+                }
+              ]
+            },
+            "id": "14644f72-d5ee-433c-a052-45effb93f830",
+            "data": {
+              "type": "tm.Actor",
+              "name": "player",
+              "description": "",
+              "isTrustBoundary": false,
+              "outOfScope": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "providesAuthentication": false,
+              "threats": []
+            }
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": "block"
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Create games and players, get game updates",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": true,
+              "isEncrypted": false,
+              "isPublicNetwork": true,
+              "protocol": "",
+              "threats": [],
+              "trustBoundaryIds": [
+                "bce3c04e-ec35-456f-ad56-ccfd1b5d14b9"
+              ]
+            },
+            "labels": [
+              "Create games and players, get game updates"
+            ],
+            "id": "3c15675a-1ef1-42f5-84e0-be12c0ad67ad",
+            "source": {
+              "cell": "14644f72-d5ee-433c-a052-45effb93f830",
+              "port": "1fd33fbd-7b3f-4b16-b3e5-5f76a23b8a74"
+            },
+            "target": {
+              "cell": "752aa80e-b6a9-4807-8e68-2c55994ea970",
+              "port": "7dbc8618-4e2d-4092-9703-804eee429c3b"
+            },
+            "vertices": [
+              {
+                "x": 608.5,
+                "y": 190
+              },
+              {
+                "x": 605,
+                "y": 190
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Save and read game and player data",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": true,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "e31223d4-27a1-4693-adf1-a94dcb5c11e4",
+                  "title": "If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster.",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "Erlang clustering does not happen over TLS by default. This may allow an attacker to launch a MTM attack and do RCE against your cluster. It may also allow an attacker to take over your database connection and compromise the integrity of the data sent between your database and Copi.",
+                  "mitigation": "if you deploy Copi yourself, make sure you configure TLS appropriatly according to your needs.\nOWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Private Networking) mesh to automatically connect all your app instances, providing zero-config, secure, private communication with internal DNS (e.g., app-name.internal), allowing services to talk as if they're on the same network, even across regions, for simple and secure microservices communication. This mesh handles complex routing, making it easy to build distributed apps securely without manual VPN setup.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 1,
+                  "score": ""
+                },
+                {
+                  "id": "52bc53a6-f374-4bf3-ab00-9e1fe56a3b34",
+                  "title": "If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster.",
+                  "status": "Mitigated",
+                  "severity": "TBD",
+                  "type": "Information disclosure",
+                  "description": "Erlang clustering does not happen over TLS by default. This may allow an attacker to launch a MTM attack and disclose sensitive information.",
+                  "mitigation": "if you deploy Copi yourself, make sure you configure TLS appropriatly according to your needs.\nOWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Private Networking) mesh to automatically connect all your app instances, providing zero-config, secure, private communication with internal DNS (e.g., app-name.internal), allowing services to talk as if they're on the same network, even across regions, for simple and secure microservices communication. This mesh handles complex routing, making it easy to build distributed apps securely without manual VPN setup. ",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [
+                "55e1221c-10c3-4cff-8fae-68b38ac0dac1"
+              ],
+              "threatFrequency": {
+                "tampering": 5,
+                "informationDisclosure": 2,
+                "denialOfService": 0
+              }
+            },
+            "labels": [
+              "Save and read game and player data"
+            ],
+            "id": "8aa49016-4594-49c7-afe9-e742b79abb78",
+            "source": {
+              "cell": "752aa80e-b6a9-4807-8e68-2c55994ea970",
+              "port": "70230815-3f02-4f14-9a92-1fef08524e8f"
+            },
+            "target": {
+              "cell": "4dffb9a1-71b7-4784-b7e9-5f8a1af292d3",
+              "port": "fcac6903-86c3-479d-b47d-73e9129bd1a5"
+            },
+            "vertices": []
+          }
+        ]
+      }
+    ],
+    "diagramTop": 2,
+    "reviewer": "",
+    "threatTop": 13
+  }
+}

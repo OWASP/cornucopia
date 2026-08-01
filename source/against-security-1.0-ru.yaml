@@ -1,0 +1,51 @@
+---
+meta:
+  edition: "against-security"
+  component: "cards"
+  language: "RU"
+  version: "1.0"
+suits:
+-
+  name: "Карты Против Безопасности"
+  id: "CAS"
+  cards:
+  -
+    id: "CAS2"
+    value: "2"
+    desc: "Ваша любимая карта"
+  -
+    id: "CAS3"
+    value: "3"
+    desc: "Другая любимая карта"
+-
+  id: "WC"
+  name: "ШАЛЬНАЯ КАРТА"
+  cards:
+  -
+    id: "JOA"
+    value: "A"
+    url: "https://cornucopia.owasp.org/cards/JOA"
+    card: "Joker"
+    desc: "This is a wild card"
+    misc: "Make something up!"
+  -
+    id: "JOB"
+    value: "B"
+    url: "https://cornucopia.owasp.org/cards/JOB"
+    card: "Joker"
+    desc: "This is a wild card"
+    misc: "Make something up!"
+paragraphs:
+-
+  name: "Common"
+  id: "Common"
+  sentences:
+  -
+    id: "NoCard"
+    text: "Нет Карты"
+  -
+    id: "Title"
+    text: "Карты Против Безопасности Редакция v1.00-RU"
+  -
+    id: "Title_full"
+    text: "Карты Против Безопасности Редакция v1.00-RU"

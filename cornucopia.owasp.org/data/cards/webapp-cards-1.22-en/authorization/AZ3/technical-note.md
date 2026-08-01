@@ -1,0 +1,3 @@
+The attacker themselves is not permitted direct access, but has access to something, that had or has access to information. Consider all accounts/roles and what access privileges they have, and whether a user in one role can utilise another role. Create an Access Control Policy to document an application's business rules, data types and access authorization criteria and/or processes so that access can be properly provisioned and controlled. This includes identifying access requirements for both the data and system resources.
+
+This card also includes considerations of access to residual information such as cached data, data stored temporarily, and the inadequate deletion of information that is no longer required (and has passed its required retention period).

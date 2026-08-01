@@ -1,0 +1,596 @@
+defmodule CopiWeb.PlayerLive.ShowTest do
+  use CopiWeb.ConnCase, async: false
+
+  import Phoenix.LiveViewTest
+
+  alias Copi.Cornucopia
+  alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.DealtCard
+
+  defmodule PlayerStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_show_player_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Player.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+      end
+    end
+  end
+
+  defmodule GameStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_show_game_stub_mode, :real) do
+        :real -> Copi.Cornucopia.Game.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+      end
+    end
+  end
+
+  defmodule DealtCardStub do
+    def find(id) do
+      case Application.get_env(:copi, :player_live_show_dealt_card_stub_mode, :real) do
+        :real -> Copi.Cornucopia.DealtCard.find(id)
+        :not_found -> {:error, :not_found}
+        :transient -> {:error, :temporary}
+        :vote_conflict ->
+          case Copi.Cornucopia.DealtCard.find(id) do
+            {:ok, dealt_card} -> {:ok, %{dealt_card | votes: []}}
+            other -> other
+          end
+      end
+    end
+  end
+
+  @game_attrs %{name: "show test game"}
+
+  defp create_player(%{conn: conn}) do
+    {:ok, game} = Cornucopia.create_game(@game_attrs)
+    {:ok, player} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
+    conn = init_test_session(conn, %{
+      "resume_player_session" => [%{"game_id" => game.id, "player_id" => player.id}]
+    })
+    %{conn: conn, player: player}
+  end
+
+  defp player_url(game_id, player_id) do
+    "/games/#{game_id}/players/#{player_id}"
+  end
+
+  defp authorize_player(conn, game_id, player_id) do
+    init_test_session(conn, %{
+      "resume_player_session" => [%{"game_id" => game_id, "player_id" => player_id}]
+    })
+  end
+
+  defp create_game_with_dealt_card(game_name, card_ext_id) do
+    {:ok, game} = Cornucopia.create_game(%{name: game_name, edition: "webapp"})
+    {:ok, player} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+
+    {:ok, card} = Cornucopia.create_card(%{
+      category: "C", value: card_ext_id, description: "D", edition: "webapp",
+      version: "3.0", external_id: card_ext_id, language: "en", misc: "m",
+      owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+      capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+    })
+
+    dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+      player_id: player.id, card_id: card.id
+    })
+
+    {:ok, game} = Game.find(game.id)
+    {game, player, dealt}
+  end
+
+  describe "Show - additional coverage" do
+    setup [:create_player]
+
+    setup do
+      old_player_mod = Application.get_env(:copi, :player_live_show_player_module)
+      old_game_mod = Application.get_env(:copi, :player_live_show_game_module)
+      old_dealt_mod = Application.get_env(:copi, :player_live_show_dealt_card_module)
+      old_player_mode = Application.get_env(:copi, :player_live_show_player_stub_mode)
+      old_game_mode = Application.get_env(:copi, :player_live_show_game_stub_mode)
+      old_dealt_mode = Application.get_env(:copi, :player_live_show_dealt_card_stub_mode)
+
+      on_exit(fn ->
+        Application.put_env(:copi, :player_live_show_player_module, old_player_mod)
+        Application.put_env(:copi, :player_live_show_game_module, old_game_mod)
+        Application.put_env(:copi, :player_live_show_dealt_card_module, old_dealt_mod)
+        Application.put_env(:copi, :player_live_show_player_stub_mode, old_player_mode)
+        Application.put_env(:copi, :player_live_show_game_stub_mode, old_game_mode)
+        Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, old_dealt_mode)
+      end)
+
+      :ok
+    end
+
+    test "handle_info :proceed_to_next_round advances rounds_played", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      send(show_live.pid, :proceed_to_next_round)
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+    end
+
+    test "handle_info :proceed_to_next_round sets finished_at on last round", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "V", description: "D", edition: "webapp",
+          version: "3.0", external_id: "ST1", language: "en", misc: "misc",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      send(show_live.pid, :proceed_to_next_round)
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.finished_at != nil
+    end
+
+    test "next_round is no-op when round is open and cannot continue", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      html = render_click(show_live, "next_round", %{})
+      assert is_binary(html)
+
+      {:ok, unchanged_game} = Cornucopia.Game.find(game_id)
+      assert unchanged_game.rounds_played == 0
+    end
+
+    test "next_round proceeds when majority continue votes reached", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      Copi.Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      :timer.sleep(300)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+    end
+
+    test "helper functions return expected values", %{conn: _conn, player: _player} do
+      alias CopiWeb.PlayerLive.Show
+
+      assert Show.ordered_cards([]) == []
+      assert Show.unplayed_cards([]) == []
+      assert Show.played_cards([], 1) == []
+      assert Show.card_played_in_round([], 1) == nil
+      assert Show.round_closed?(%{players: [], rounds_played: 0}) == true
+
+      player_with_unplayed = %{dealt_cards: [%{played_in_round: nil}]}
+      refute Show.last_round?(%{players: [player_with_unplayed], rounds_played: 0})
+
+      player_all_played = %{dealt_cards: [%{played_in_round: 1}]}
+      assert Show.last_round?(%{players: [player_all_played], rounds_played: 0})
+
+      assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
+      assert Show.display_game_session("ecommerce") == "Cornucopia Web Session:"
+      assert Show.display_game_session("mobileapp") == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("masvs")     == "Cornucopia Mobile Session:"
+      assert Show.display_game_session("cumulus")   == "OWASP Cumulus Session:"
+      assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
+      assert Show.display_game_session("eop")       == "EoP Session:"
+    end
+
+    test "player_first/2 places current player first in list", %{conn: _conn, player: player} do
+      alias CopiWeb.PlayerLive.Show
+      other = %{id: "other-id"}
+      current = %{id: player.id}
+      sorted = Show.player_first([other, current], player)
+      assert List.first(sorted).id == player.id
+    end
+
+    test "get_vote/2 returns nil when no matching vote", %{conn: _conn, player: player} do
+      alias CopiWeb.PlayerLive.Show
+      dealt = %{votes: []}
+      assert Show.get_vote(dealt, player) == nil
+    end
+
+    test "get_vote/2 returns the matching vote", %{conn: _conn, player: player} do
+      alias CopiWeb.PlayerLive.Show
+      vote = %{player_id: player.id}
+      dealt = %{votes: [vote]}
+      assert Show.get_vote(dealt, player) == vote
+    end
+
+    test "next_round when round is closed and not last round advances rounds_played",
+         %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card1} =
+        Cornucopia.create_card(%{
+          category: "C", value: "V3", description: "D", edition: "webapp",
+          version: "3.0", external_id: "NR_CLOSED1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      {:ok, card2} =
+        Cornucopia.create_card(%{
+          category: "C", value: "V4", description: "D", edition: "webapp",
+          version: "3.0", external_id: "NR_CLOSED2", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card1.id, played_in_round: 1
+      })
+
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card2.id, played_in_round: nil
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+      assert updated_game.finished_at == nil
+    end
+
+    test "next_round when round is closed and IS last round sets finished_at",
+         %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "V5", description: "D", edition: "webapp",
+          version: "3.0", external_id: "NR_LAST1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+      Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 1
+      assert updated_game.finished_at != nil
+    end
+
+    test "toggle_continue_vote adds then removes a continue vote", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      render_click(show_live, "toggle_continue_vote", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert length(updated_game.continue_votes) == 1
+
+      render_click(show_live, "toggle_continue_vote", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game2} = Cornucopia.Game.find(game_id)
+      assert length(updated_game2.continue_votes) == 0
+    end
+
+    test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: game_id})
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "TV1", description: "D", edition: "webapp",
+          version: "3.0", external_id: "TV_CARD1", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      dealt = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: other_player.id, card_id: card.id, played_in_round: 1
+      })
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 1
+
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt2.votes) == 0
+    end
+
+    test "redirects when game lookup for valid player returns not_found", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_game_module, GameStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
+      Application.put_env(:copi, :player_live_show_game_stub_mode, :not_found)
+
+      assert {:error, {:redirect, %{to: "/games", flash: %{"error" => "Game not found."}}}} =
+               live(conn, "/games/#{player.game_id}/players/#{player.id}")
+    end
+
+    test "redirects on transient player load when no existing assigns", %{conn: conn, player: player} do
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :transient)
+
+      assert {:error, {:redirect, %{to: "/games"}}} =
+               live(conn, "/games/#{player.game_id}/players/#{player.id}")
+    end
+
+    test "toggle_vote shows temporary issue when dealt card lookup transient", %{conn: conn} do
+      {game, player, dealt} = create_game_with_dealt_card("Transient DC", "TDC_1")
+
+      Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :transient)
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+
+      assert render(view) =~ "Temporary issue loading card. Please try again."
+    end
+
+    test "retry load with existing assigns shows retry flash then stable failure flash", %{conn: conn} do
+      {game, player, _dealt} = create_game_with_dealt_card("Retry Player Show Branch", "RPS_1")
+
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :transient)
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+
+      assert render(view) =~ "Temporary issue loading player/game"
+    end
+
+    test "retry player show load with map params retries after a transient game lookup", %{
+      conn: conn
+    } do
+      {game, player, _dealt} =
+        create_game_with_dealt_card("Retry Player Show Map Branch", "RPS_MAP_1")
+
+      Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
+      Application.put_env(:copi, :player_live_show_game_module, GameStub)
+      Application.put_env(:copi, :player_live_show_player_stub_mode, :real)
+      Application.put_env(:copi, :player_live_show_game_stub_mode, :real)
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+
+      Application.put_env(:copi, :player_live_show_game_stub_mode, :transient)
+      send(view.pid, {:retry_player_show_load, %{"game_id" => game.id, "id" => player.id}})
+      :timer.sleep(50)
+
+      assert render(view) =~ "Temporary issue loading player/game. Retrying..."
+    end
+
+    test "redirects when the player record belongs to a different game than the URL", %{
+      conn: conn,
+      player: player
+    } do
+      original_game_id = player.game_id
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Moved Player Game"})
+
+      player
+      |> Ecto.Changeset.change(game_id: other_game.id)
+      |> Copi.Repo.update!()
+
+      expected_path = "/games/#{original_game_id}"
+
+      assert {:error,
+              {:redirect,
+               %{
+                 to: ^expected_path,
+                 flash: %{"error" => "This player link is not available in this browser session."}
+               }}} = live(conn, "/games/#{original_game_id}/players/#{player.id}")
+    end
+
+    test "toggle_vote hits insert error branch when vote conflicts", %{conn: conn} do
+      {game, player, dealt} = create_game_with_dealt_card("Vote Conflict", "VC_1")
+
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id})
+
+      Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :vote_conflict)
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+
+      assert render(view) =~ game.name
+    end
+  end
+
+  describe "toggle_vote authorization" do
+    test "redirects when the URL selects a player not stored in the session", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Player URL Authorization"})
+      {:ok, authorized_player} = Cornucopia.create_player(%{name: "Authorized", game_id: game.id})
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game.id})
+
+      conn =
+        init_test_session(conn, %{
+          "resume_player_session" => [
+            %{"game_id" => game.id, "player_id" => authorized_player.id}
+          ]
+        })
+
+      expected_path = "/games/#{game.id}"
+
+      assert {:error,
+              {:redirect,
+               %{
+                 to: ^expected_path,
+                 flash: %{"error" => "This player link is not available in this browser session."}
+               }}} = live(conn, "/games/#{game.id}/players/#{other_player.id}")
+    end
+
+    test "rejects cross-game vote and shows error flash", %{conn: conn} do
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game One", "AUTH_G1_C1")
+      {_game2, _player2, dc2} = create_game_with_dealt_card("Auth Game Two", "AUTH_G2_C1")
+
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc2.id)})
+
+      assert render(view) =~ "Invalid card selection"
+
+      {:ok, refreshed_card} = DealtCard.find(dc2.id)
+      assert refreshed_card.votes == []
+    end
+
+    test "allows a player to vote on a card belonging to their own game", %{conn: conn} do
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Three", "AUTH_G3_C1")
+      {:ok, card2} = Cornucopia.create_card(%{
+        category: "C", value: "AUTH_G3_C2", description: "D", edition: "webapp",
+        version: "3.0", external_id: "AUTH_G3_C2", language: "en", misc: "m",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: game1.id})
+      dc2 = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: other_player.id, card_id: card2.id, played_in_round: 1
+      })
+
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc2.id)})
+
+      {:ok, refreshed_card} = DealtCard.find(dc2.id)
+      assert Enum.any?(refreshed_card.votes, fn v -> v.player_id == player1.id end)
+    end
+
+    test "shows not found flash when toggling vote with missing dealt card", %{conn: conn} do
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Four", "AUTH_G4_C1")
+
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "999999"})
+
+      assert render(view) =~ "Card not found. Please refresh and try again."
+    end
+
+    test "shows error flash when toggling vote with invalid dealt card id format", %{conn: conn} do
+      {game1, player1, _dc1} = create_game_with_dealt_card("Auth Game Five", "AUTH_G5_C1")
+
+      {:ok, view, _html} = live(authorize_player(conn, game1.id, player1.id), player_url(game1.id, player1.id))
+      render_click(view, "toggle_vote", %{"dealt_card_id" => "invalid_card_id"})
+
+      assert render(view) =~ "Invalid card format. Please refresh and try again."
+    end
+
+    test "returns 404 when player does not exist", %{conn: conn} do
+      assert_error_sent 404, fn ->
+        get(
+          authorize_player(conn, "00000000000000000000000001", "00000000000000000000000002"),
+          player_url("00000000000000000000000001", "00000000000000000000000002")
+        )
+      end
+    end
+
+    test "returns 400 when player id is malformed", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/invalid_ulid")
+      end
+    end
+
+    test "returns 400 when player id is too short", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/short")
+      end
+    end
+
+    test "returns 400 when player id has invalid characters", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/invalid!@#$%^&*()1234567890")
+      end
+    end
+  end
+
+  describe "handle_info game updated" do
+    test "keeps socket when player no longer exists", %{conn: conn} do
+      {game, player, dc} = create_game_with_dealt_card("HandleInfo Missing Player", "HI_MP_1")
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+
+      Copi.Repo.delete!(dc)
+      {:ok, _} = Copi.Cornucopia.delete_player(player)
+      {:ok, updated_game} = Game.find(game.id)
+
+      send(view.pid, %{topic: "game:#{game.id}", event: "game:updated", payload: updated_game})
+      :timer.sleep(50)
+
+      assert render(view) =~ game.name
+    end
+
+    test "retry player show load message does not crash", %{conn: conn} do
+      {game, player, _dc} = create_game_with_dealt_card("Retry Player Show", "HI_RETRY_1")
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player.id), player_url(game.id, player.id))
+      send(view.pid, {:retry_player_show_load, player.id})
+      :timer.sleep(50)
+
+      assert render(view) =~ game.name
+    end
+  end
+end

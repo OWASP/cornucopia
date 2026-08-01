@@ -1,0 +1,1 @@
+The key concept is that the absence of integrity checks allows attackers to tamper with data, code, and configurations without detection, compromising system trust and security.

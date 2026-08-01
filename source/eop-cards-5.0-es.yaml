@@ -1,0 +1,542 @@
+---
+meta:
+  edition: "eop"
+  component: "cards"
+  language: "ES"
+  version: "5.0"
+suits:
+- 
+  id: "SP"
+  name: "Spoofing"
+  cards:
+    - 
+      id: "SP2"
+      value: "2"
+      desc: "Un atacante podría apoderarse del puerto o socket que normalmente utiliza el servidor"
+    - 
+      id: "SP3"
+      value: "3"
+      desc: "Un atacante podría probar una credencial tras otra y no hay nada que las ralentice (en línea o fuera de línea)"
+    - 
+      id: "SP4"
+      value: "4"
+      desc: "Un atacante puede conectarse de forma anónima porque esperamos que la autenticación se realice en un nivel superior"
+    - 
+      id: "SP5"
+      value: "5"
+      desc: "Un atacante puede confundir a un cliente porque hay demasiadas formas de identificar un servidor"
+    - 
+      id: "SP6"
+      value: "6"
+      desc: "Un atacante puede falsificar un servidor porque los identificadores no se almacenan en el cliente y no se verifica su coherencia al volver a conectarse (es decir, no hay persistencia de claves)"
+    - 
+      id: "SP7"
+      value: "7"
+      desc: "Un atacante puede conectarse a un servidor o a través de un enlace que no está autenticado (ni cifrado)"
+    - 
+      id: "SP8"      
+      value: "8"
+      desc: "Un atacante podría robar las credenciales almacenadas en el servidor y reutilizarlas (por ejemplo, una clave se almacena en un archivo legible por todo el mundo)"
+    - 
+      id: "SP9"
+      value: "9"
+      desc: "Un atacante que obtiene una contraseña puede reutilizarla (use autenticadores más seguros)"
+    - 
+      id: "SPX"
+      value: "X"
+      desc: "Un atacante puede optar por utilizar una autenticación más débil o nula"
+    - 
+      id: "SPJ"
+      value: "J"
+      desc: "Un atacante podría robar las credenciales almacenadas en el cliente y reutilizarlas"
+    - 
+      id: "SPQ"
+      value: "Q"
+      desc: "Un atacante podría atacar la forma en que se actualizan o recuperan las credenciales (la recuperación de la cuenta no requiere revelar la contraseña anterior)"
+    - 
+      id: "SPK"
+      value: "K"
+      desc: "Su sistema viene con una contraseña de administrador predeterminada y no fuerza ningún cambio"
+    - 
+      id: "SPA"
+      value: "A"
+      desc: "Has inventado un nuevo ataque de Spoofing"
+      misc: "Leer más sobre este tema ..."
+-
+  id: "TA"
+  name: "Manipulación"
+  cards:
+    - 
+      id: "TA2"
+      value: "2"
+      desc: "Un atacante puede aprovechar su intercambio de claves personalizado o el control de integridad que usted creó en lugar de usar criptografía estándar"
+    - 
+      id: "TA3"
+      value: "3"
+      desc: "Un atacante puede modificar su sistema de compilación y producir compilaciones firmadas de su software"
+    - 
+      id: "TA4"
+      value: "4"
+      desc: "Su código toma decisiones de control de acceso en todas partes, en lugar de hacerlo con un núcleo de seguridad"
+    - 
+      id: "TA5"
+      value: "5"
+      desc: "Un atacante puede reproducir datos sin ser detectado porque su código no proporciona marcas de tiempo ni números de secuencia"
+    - 
+      id: "TA6"
+      value: "6"
+      desc: "Un atacante puede escribir en un almacén de datos en el que se basa su código"
+    - 
+      id: "TA7"
+      value: "7"
+      desc: "Un atacante puede eludir los permisos porque no convierte los nombres en canónicos antes de verificar los permisos de acceso"
+    - 
+      id: "TA8"
+      value: "8"
+      desc: "Un atacante puede manipular datos porque no existe protección de integridad para los datos en la red"
+    - 
+      id: "TA9"
+      value: "9"
+      desc: "Un atacante puede proporcionar o controlar información de estado"
+    - 
+      id: "TAX"
+      value: "X"
+      desc: "Un atacante puede alterar la información en un almacén de datos porque tiene permisos débiles/abiertos o incluye un grupo que es equivalente a todos (“cualquier persona con una cuenta de Facebook”)"
+    - 
+      id: "TAJ"
+      value: "J"
+      desc: "Un atacante puede escribir en algún recurso porque se otorgan permisos al mundo o no hay ACL"
+    - 
+      id: "TAQ"
+      value: "Q"
+      desc: "Un atacante puede cambiar los parámetros más allá de un límite de confianza y después de la validación (por ejemplo, parámetros importantes en un campo oculto en HTML o pasar un puntero a una memoria crítica)"
+    - 
+      id: "TAK"
+      value: "K"
+      desc: "Un atacante puede cargar código dentro de su proceso a través de un punto de extensión"
+    - 
+      id: "TAA"
+      value: "A"
+      desc: "Has inventado un nuevo ataque de manipulación"
+      misc: "Leer más sobre este tema ..."
+-
+  id: "RE"
+  name: "Repudio"
+  cards:
+    - 
+      id: "RE2"
+      value: "2"
+      desc: "Un atacante puede pasar datos a través del registro para atacar a un lector de registros, y no hay documentación sobre qué tipo de validación se realiza"
+    - 
+      id: "RE3"
+      value: "3"
+      desc: "Un atacante con privilegios bajos puede leer información de seguridad interesante en los registros"
+    - 
+      id: "RE4"
+      value: "4"
+      desc: "Un atacante puede alterar las firmas digitales porque el sistema de firma digital que está implementando es débil o usa MAC donde debería usar una firma"
+    - 
+      id: "RE5"
+      value: "5"
+      desc: "Un atacante puede alterar los mensajes de registro en una red porque carecen de controles de integridad sólidos"
+    - 
+      id: "RE6"
+      value: "6"
+      desc: "Un atacante puede crear una entrada de registro sin una marca de tiempo (o ninguna entrada de registro tiene una marca de tiempo)"
+    - 
+      id: "RE7"
+      value: "7"
+      desc: "Un atacante puede hacer que los registros se retuerzan y pierdan datos"
+    - 
+      id: "RE8"
+      value: "8"
+      desc: "Un atacante puede hacer que un registro se pierda o confunda información de seguridad"
+    - 
+      id: "RE9"
+      value: "9"
+      desc: "Un atacante puede utilizar una clave compartida para autenticarse como principales diferentes, confundiendo la información en los registros"
+    - 
+      id: "REX"
+      value: "X"
+      desc: "Un atacante puede obtener datos arbitrarios a registros de personas externas no autenticadas (o débilmente autenticadas) sin validación"
+    - 
+      id: "REJ"
+      value: "J"
+      desc: "Un atacante puede editar registros y no hay forma de saberlo (quizás porque no hay una opción de latido para el sistema de registro)"
+    - 
+      id: "REQ"
+      value: "Q"
+      desc: "Un atacante puede decir “Yo no hice eso” y no habría forma de demostrar que está equivocado"
+    - 
+      id: "REK"
+      value: "K"
+      desc: "El sistema no tiene registros"
+    - 
+      id: "REA"
+      value: "A"
+      desc: "Has inventado un nuevo ataque de repudio"
+      misc: "Leer más sobre este tema ..."
+-
+  id: "ID"
+  name: "Divulgación de Información"
+  cards:
+    - 
+      id: "ID2"
+      value: "2"
+      desc: "Un atacante puede cifrar archivos con fuerza bruta porque no existe ninguna defensa (defensa por ejemplo, extensión de contraseña)"
+    - 
+      id: "ID3"
+      value: "3"
+      desc: "Un atacante puede ver mensajes de error con contenido sensible a la seguridad"
+    - 
+      id: "ID4"
+      value: "4"
+      desc: "Un atacante puede leer contenido porque los mensajes (por ejemplo, un correo electrónico o una cookie HTTP) no está cifrado incluso si el canal está cifrado"
+    - 
+      id: "ID5"
+      value: "5"
+      desc: "Un atacante puede ser capaz de leer un documento o datos porque están cifrados con un algoritmo no estándar"
+    - 
+      id: "ID6"
+      value: "6"
+      desc: "Un atacante puede leer datos porque están ocultos u ocluidos (para deshacer o cambiar el seguimiento) y el usuario puede olvidar que está ahí"
+    - 
+      id: "ID7"
+      value: "7"
+      desc: "Un atacante puede actuar como un “intermediario” porque no autentica los puntos finales de una conexión de red"
+    - 
+      id: "ID8"
+      value: "8"
+      desc: "Un atacante puede acceder a la información a través de un indexador de búsqueda, un registrador u otro mecanismo similar"
+    - 
+      id: "ID9"
+      value: "9"
+      desc: "Un atacante puede leer información confidencial en un archivo con permisos permisivos"
+    - 
+      id: "IDX"
+      value: "X"
+      desc: "Un atacante puede leer información en archivos o bases de datos sin controles de acceso"
+    - 
+      id: "IDJ"
+      value: "J"
+      desc: "Un atacante puede descubrir la clave fija que se utiliza para cifrar"
+    - 
+      id: "IDQ"
+      value: "Q"
+      desc: "Un atacante puede leer el canal completo porque el canal (por ejemplo, HTTP o SMTP) no está cifrado."
+    - 
+      id: "IDK"
+      value: "K"
+      desc: "Un atacante puede leer información de la red porque no se utiliza criptografía"
+    - 
+      id: "IDA"
+      value: "A"
+      desc: "Has inventado un nuevo ataque de divulgación de información"
+      misc: "Leer más sobre este tema ..."
+-
+  id: "DS"
+  name: "Denegación de Servicio"
+  cards:
+    - 
+      id: "DS2"
+      value: "2"
+      desc: "Un atacante puede inutilizar o dejar de estar disponible su sistema de autenticación"
+    - 
+      id: "DS3"
+      value: "3"
+      desc: "Un atacante puede agotar nuestra batería fácilmente reemplazable "
+      misc: "(batería, temporal)"
+    - 
+      id: "DS4"
+      value: "4"
+      desc: "Un atacante puede agotar una batería que es difícil de reemplazar (sellada en un teléfono, en un dispositivo médico implantado o en un lugar de difícil acceso) "
+      misc: "(batería, persistir)"
+    - 
+      id: "DS5"
+      value: "5"
+      desc: "Un atacante puede gastar nuestro presupuesto en la nube "
+      misc: "(presupuesto, persistir)"
+    - 
+      id: "DS6"
+      value: "6"
+      desc: "Un atacante puede hacer que un servidor no esté disponible o sea inutilizable sin siquiera autenticarse, pero el problema desaparece cuando el atacante se detiene "
+      misc: "(servidor, anónimo, temporal)"
+    - 
+      id: "DS7"
+      value: "7"
+      desc: "Un atacante puede hacer que un cliente no esté disponible o sea inutilizable y el problema persista después de que el atacante desaparezca "
+      misc: "(cliente, autenticación, persistir)"
+    - 
+      id: "DS8"
+      value: "8"
+      desc: "Un atacante puede hacer que un servidor no esté disponible o sea inutilizable y el problema persista después de que el atacante desaparezca "
+      misc: "(servidor, autenticación, persistir)"
+    - 
+      id: "DS9"
+      value: "9"
+      desc: "Un atacante puede hacer que un cliente no esté disponible o sea inutilizable sin siquiera autenticarse y el problema persiste después de que el atacante desaparece "
+      misc: "(servidor, autenticación, persistir)"
+    - 
+      id: "DSX"
+      value: "X"
+      desc: "Un atacante puede hacer que un servidor no esté disponible o sea inutilizable sin siquiera autenticarse y el problema persiste después de que el atacante desaparece "
+      misc: "(servidor, anónimo, persistir)"
+    - 
+      id: "DSJ"
+      value: "J"
+      desc: "Un atacante puede hacer que el subsistema de registro deje de funcionar"
+    - 
+      id: "DSQ"
+      value: "Q"
+      desc: "Un atacante puede amplificar un ataque de denegación de servicio a través de este componente con una amplificación del orden de 10 a 1"
+    - 
+      id: "DSK"
+      value: "K"
+      desc: "Un atacante puede amplificar un ataque de denegación de servicio a través de este componente con una amplificación del orden de 100 a 1"
+    - 
+      id: "DSA"
+      value: "A"
+      desc: "Has inventado un nuevo ataque de denegación de servicio"
+      misc: "Leer más sobre este tema ..."
+-
+  id: "EP"
+  name: "Elevación de Privilegios"
+  cards:
+    - 
+      id: "EP2"
+      value: "2"
+      desc: "Un atacante ha comprometido a un proveedor de tecnología clave"
+    - 
+      id: "EP3"
+      value: "3"
+      desc: "Un atacante puede acceder al servicio en la nube que gestiona sus dispositivos"
+    - 
+      id: "EP4"
+      value: "4"
+      desc: "Un atacante puede escapar de un contenedor u otra zona de pruebas"
+    - 
+      id: "EP5"
+      value: "5"
+      desc: "Un atacante puede forzar los datos a través de diferentes rutas de validación que dan resultados diferentes"
+    - 
+      id: "EP6"
+      value: "6"
+      desc: "Un atacante podría aprovechar los permisos que usted establece, pero no utiliza"
+    - 
+      id: "EP7"
+      value: "7"
+      desc: "Un atacante puede proporcionar un indicador a través de un límite de confianza, en lugar de datos que puedan validarse"
+    - 
+      id: "EP8"
+      value: "8"
+      desc: "Un atacante puede ingresar datos que se verifican mientras aún están bajo su control y se usan más tarde al otro lado de un límite de confianza"
+    - 
+      id: "EP9"
+      value: "9"
+      desc: "No existe una forma razonable para que una persona que llama averigüe qué validación de datos contaminados realiza antes de pasárselos"
+    - 
+      id: "EPX"
+      value: "X"
+      desc: "No existe una forma razonable para que una persona que llama averigüe qué suposiciones de seguridad hace usted"
+    - 
+      id: "EPJ"
+      value: "J"
+      desc: "Un atacante puede reflejar la entrada a un usuario, como secuencias de comandos entre sitios"
+    - 
+      id: "EPQ"
+      value: "Q"
+      desc: "Incluye contenido generado por el usuario dentro de su página, posiblemente incluyendo el contenido de URL aleatorias"
+    - 
+      id: "EPK"
+      value: "K"
+      desc: "Un atacante puede inyectar un comando que el sistema ejecutará con un nivel de privilegio más alto"
+    - 
+      id: "EPA"
+      value: "A"
+      desc: "Has inventado un nuevo ataque de Elevación de Privilegios"
+      misc: "Leer más sobre este tema ..."
+paragraphs:
+-
+  id: "Common"
+  name: "Common"
+  sentences:
+  -
+    id: "Title"
+    text: "Elevation of Privilege"
+  -
+    id: "T00001"
+    text: "Acerca de"
+  -
+    id: "T00002"
+    text: "Modelado de amenazas"
+  -
+    id: "T00003"
+    text: "el ciclo de vida de"
+  -
+    id: "T00004"
+    text: "desarrollo de seguridad"
+  -
+    id: "T00010"
+    text: "El juego “Elevation of Privilege” está diseñado para ser la forma más sencilla de empezar a analizar su diseño desde una perspectiva de seguridad. Es una forma de modelar amenazas, destinada a ser recogida y utilizada por cualquier grupo de desarrollo. Debido a que el juego utiliza amenazas STRIDE, te brinda un marco para pensar y ejemplos prácticos específicos de esas amenazas."
+  -
+    id: "T00020"
+    text: "STRIDE significa:"
+  -
+    id: "T00030"
+    text: "Hacerse pasar por algo o alguien más."
+  -
+    id: "T00040"
+    text: "Modificar datos o código."
+  -
+    id: "T00050"
+    text: "Afirmar no haber realizado una acción."
+  -
+    id: "T00060"
+    text: "Exponer información a alguien no autorizado para verla."
+  -
+    id: "T00070"
+    text: "Denegar o degradar el servicio a las usuarias."
+  -
+    id: "T00080"
+    text: "Obtener capacidades sin la autorización adecuada."
+  -
+    id: "T00090"
+    text: "En"
+  -
+    id: "T00100"
+    text: "tenemos vídeos, hojas de puntuación y consejos y trucos para jugar."
+  -
+    id: "T00105"
+    text: "SDL."
+  -
+    id: "T00110"
+    text: "El juego “Elevation of Privilege” es una manera fácil y divertida de comenzar a comprender la seguridad de sus sistemas mediante el modelado de amenazas. A medida que descubre y corrige problemas de seguridad a nivel de diseño, vale la pena pensar en otras formas en que los problemas de seguridad pueden infiltrarse en su código. Microsoft tiene una gran colección de recursos gratuitos disponibles para ayudarle a comenzar con el ciclo de vida de desarrollo de seguridad (SDL)."
+  -
+    id: "T00120"
+    text: "Para obtener más información sobre el modelado de amenazas y el ciclo de vida de desarrollo de seguridad de Microsoft, visite nuestro sitio web en"
+  -
+    id: "T00130"
+    text: "continuó en la parte de atrás"
+  -
+    id: "T00140"
+    text: "cont."
+  -
+    id: "T00150"
+    text: "Instrucciones"
+  -
+    id: "T00160"
+    text: "Dibuje un diagrama del modelo de sistema para el que desea modelar amenazas antes de repartir las cartas."
+  -
+    id: "T00170"
+    text: "Reparte el mazo a 3-6 jugadores. El juego comienza con el 3 de manipulación. Juega en el sentido de las agujas del reloj y cada jugador, por turno, continúa usando el palo si tiene una carta de ese palo. Si el jugador no tiene una carta de ese palo, puede usar otro palo.  Cada ronda se gana con la carta más alta jugada del palo que salió, a menos que se juegue una carta de Elevación de Privilegio (EoP). En ese caso, gana la tarjeta EoP de alto valor."
+  -
+    id: "T00180"
+    text: "Para jugar una carta, léala, anuncie su amenaza y regístrela. Si el jugador no puede vincular la amenaza al sistema, el juego continúa."
+  -
+    id: "T00190"
+    text: "El ganador de una mano selecciona la carta (y el palo) para liderar la siguiente mano. Tómate unos minutos entre manos para pensar en las amenazas."
+  -
+    id: "T00200"
+    text: "Puntos:"
+  -
+    id: "T00210"
+    text: "1 por una amenaza en tu carta, +1 por hacer el truco"
+  -
+    id: "T00220"
+    text: "Las amenazas deben expresarse de forma clara, comprobable y "
+  -
+    id: "T00230"
+    text: "abordables. En el caso de que una amenaza lleva a una "
+  -
+    id: "T00240"
+    text: "discusión, puede resolverlo haciendo la pregunta: “¿Aceptaríamos un error procesable, una solicitud de función o un cambio de diseño para eso?” Si la respuesta es sí, se trata de una amenaza real. (Esto no significa que las amenazas fuera de eso no sean reales, es simplemente una forma de centrar la discusión en amenazas procesables). Las preguntas que comienzan con “Hay una manera” eben leerse como “Hay una manera…y así es como…” mientras que las preguntas que comienzan con “Tu código” deben leerse “El código que estamos creando colectivamente…y así es como se hace”."
+  -
+    id: "T00250"
+    text: "La baraja contiene una serie de cartas especiales: triunfos y amenazas abiertas. Las cartas EoP son triunfos: ganan la baza incluso si tienen un valor menor que el palo que se jugó. El as de cada palo es una carta de amenaza abierta. Cuando se juega, el jugador debe identificar una amenaza que no figura en otra carta."
+  -
+    id: "T00260"
+    text: "Cuando se hayan jugado todas las cartas, gana el que tenga más puntos."
+  -
+    id: "T00270"
+    text: "¡Recuerda divertirte!"
+  -
+    id: "T00280"
+    text: "Variantes"
+  -
+    id: "T00290"
+    text: "Variantes opcionales:"
+  -
+    id: "T00300"
+    text: "Puedes pasar cartas después del tercer truco. Esto es útil si tiene tarjetas que no puede vincular al sistema. Es posible que alguien más pueda hacerlo."
+  -
+    id: "T00310"
+    text: "Duplica la cantidad de puntos y otorga un punto por las amenazas en las cartas de otras personas."
+  -
+    id: "T00320"
+    text: "Otros jugadores pueden “reflexionar” sobre la amenaza y, si lo hacen, obtienen un punto por cada amenaza adicional."
+  -
+    id: "T00330"
+    text: "Limite los riffs a no más de 60 segundos."
+  -
+    id: "T00340"
+    text: "Marque el diagrama donde ocurre la amenaza."
+  -
+    id: "T00350"
+    text: "Las preguntas se enumeran en las cartas de amenaza para ayudar con los ases."
+  -
+    id: "T00360"
+    text: "Gracias a Laurie Williams por la inspiración."
+  -
+    id: "T00370"
+    text: "Contenido:"
+  -
+    id: "T00380"
+    text: "Cartas de instrucciones"
+  -
+    id: "T00390"
+    text: "Carta de diagrama de estrategia"
+  -
+    id: "T00400"
+    text: "STRIDE Cartas de amenaza 'palos':"
+  -
+    id: "T00410"
+    text: "Spoofing:  2-K, As"
+  -
+    id: "T00420"
+    text: "Manipulación:  2-K, As"
+  -
+    id: "T00430"
+    text: "Repudio: 2-K, As"
+  -
+    id: "T00440"
+    text: "Divulgación de Información: 2-K, As"
+  -
+    id: "T00450"
+    text: "Denegación de Servicio: 2-K, As"
+  -
+    id: "T00460"
+    text: "Elevación de Privilegios:  2-K, As (Cartas de Triunfo)"
+  -
+    id: "T00470"
+    text: "STRIDE Cartas de Referencia de Amenazas"
+  -
+    id: "T00480"
+    text: "La Carta de Acerca del Modelado de Amenazas y SDL"
+  -
+    id: "T00490"
+    text: "Divulgación\nde"
+  -
+    id: "T00495"
+    text: "Información"
+  -
+    id: "T00500"
+    text: "Elevación\nde"
+  -
+    id: "T00505"
+    text: "Privilegios"
+  -
+    id: "T00510"
+    text: "Denegación\nde"
+  -
+    id: "T00515"
+    text: "Servicio"

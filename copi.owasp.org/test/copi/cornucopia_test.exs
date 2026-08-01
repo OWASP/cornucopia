@@ -1,0 +1,282 @@
+defmodule Copi.CornucopiaTest do
+  use Copi.DataCase
+
+  alias Copi.Cornucopia
+
+  describe "games" do
+    alias Copi.Cornucopia.Game
+
+    @valid_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name", started_at: "2010-04-17T14:00:00Z"}
+    @update_attrs %{created_at: "2011-05-18T15:01:01Z", edition: "webapp", finished_at: "2011-05-18T15:01:01Z", name: "some updated name", started_at: "2011-05-18T15:01:01Z"}
+    @invalid_attrs %{created_at: nil, finished_at: nil, edition: nil, name: nil, started_at: nil}
+
+    def game_fixture(attrs \\ %{}) do
+      {:ok, game} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Cornucopia.create_game()
+
+      game
+    end
+
+    test "list_games/0 returns all games" do
+      game = game_fixture()
+      assert Cornucopia.list_games() == [game]
+    end
+
+    test "get_game!/1 returns the game with given id" do
+      game = game_fixture()
+      assert Cornucopia.get_game!(game.id) == game
+    end
+
+    test "create_game/1 with valid data creates a game" do
+      assert {:ok, %Game{} = game} = Cornucopia.create_game(@valid_attrs)
+      assert game.created_at == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+      assert game.finished_at == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+      assert game.name == "some name"
+      assert game.started_at == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+    end
+
+    test "create_game/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Cornucopia.create_game(@invalid_attrs)
+    end
+
+    test "update_game/2 with valid data updates the game" do
+      game = game_fixture()
+      assert {:ok, %Game{} = game} = Cornucopia.update_game(game, @update_attrs)
+      assert game.created_at == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+      assert game.finished_at == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+      assert game.name == "some updated name"
+      assert game.started_at == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+    end
+
+    test "update_game/2 with invalid data returns error changeset" do
+      game = game_fixture()
+      assert {:error, %Ecto.Changeset{}} = Cornucopia.update_game(game, @invalid_attrs)
+      assert game == Cornucopia.get_game!(game.id)
+    end
+
+    test "delete_game/1 deletes the game" do
+      game = game_fixture()
+      assert {:ok, %Game{}} = Cornucopia.delete_game(game)
+      assert_raise Ecto.NoResultsError, fn -> Cornucopia.get_game!(game.id) end
+    end
+
+    test "change_game/1 returns a game changeset" do
+      game = game_fixture()
+      assert %Ecto.Changeset{} = Cornucopia.change_game(game)
+    end
+
+    test "Game.find/1 returns OK tuple for existing game" do
+      game = game_fixture()
+      assert {:ok, found} = Copi.Cornucopia.Game.find(game.id)
+      assert found.id == game.id
+    end
+
+    test "Game.find/1 returns error for non-existent game" do
+      assert {:error, :not_found} =
+               Copi.Cornucopia.Game.find("00000000000000000000000099")
+    end
+
+    test "Game.continue_vote_count/1 returns count of continue votes" do
+      alias Copi.Cornucopia.Game
+      game = game_fixture()
+      {:ok, reloaded} = Game.find(game.id)
+      assert Game.continue_vote_count(reloaded) == 0
+    end
+
+    test "Game.majority_continue_votes_reached?/1 returns true when votes exceed half" do
+      alias Copi.Cornucopia.Game
+      alias Copi.Repo
+      # Create game WITHOUT started_at so we can add players
+      {:ok, game} = Cornucopia.create_game(%{name: "majority vote test", edition: "webapp"})
+      {:ok, created_player} = Cornucopia.create_player(%{name: "p1", game_id: game.id})
+      # Now start the game after player is created
+      {:ok, _} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+      {:ok, reloaded} = Game.find(game.id)
+      # 0 votes, 1 player → 0 > div(1,2)=0 → false
+      refute Game.majority_continue_votes_reached?(reloaded)
+      # Add a continue vote
+      Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: created_player.id, game_id: game.id})
+      {:ok, updated} = Game.find(game.id)
+      # 1 vote > div(1,2)=0 → true
+      assert Game.majority_continue_votes_reached?(updated)
+    end
+  end
+
+  describe "players" do
+    alias Copi.Cornucopia.Player
+    alias Copi.Cornucopia.Game
+
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+    @game_attrs %{created_at: "2010-04-17T14:00:00Z", edition: "webapp", finished_at: "2010-04-17T14:00:00Z", name: "some name"}
+
+    def player_fixture(attrs \\ %{}) do
+      {:ok, player} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Cornucopia.create_player()
+
+      player
+    end
+
+    test "list_players/1 returns all players" do
+      #Enum.into(@valid_attrs)
+
+      {:ok, game} =
+        %{}
+        |> Enum.into(@game_attrs)
+        |> Cornucopia.create_game()
+      player = player_fixture(%{name: "some name", game_id: game.id})
+      assert Cornucopia.list_players(game.id) == [player]
+    end
+
+    test "get_player!/1 returns the player with given id" do
+      player = player_fixture()
+      assert Cornucopia.get_player!(player.id) == player
+    end
+
+    test "create_player/1 with valid data creates a player" do
+      assert {:ok, %Player{} = player} = Cornucopia.create_player(@valid_attrs)
+      assert player.name == "some name"
+    end
+
+    test "create_player/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Cornucopia.create_player(@invalid_attrs)
+    end
+
+    test "update_player/2 with valid data updates the player" do
+      player = player_fixture()
+      assert {:ok, %Player{} = player} = Cornucopia.update_player(player, @update_attrs)
+      assert player.name == "some updated name"
+    end
+
+    test "update_player/2 with invalid data returns error changeset" do
+      player = player_fixture()
+      assert {:error, %Ecto.Changeset{}} = Cornucopia.update_player(player, @invalid_attrs)
+      assert player == Cornucopia.get_player!(player.id)
+    end
+
+    test "delete_player/1 deletes the player" do
+      player = player_fixture()
+      assert {:ok, %Player{}} = Cornucopia.delete_player(player)
+      assert_raise Ecto.NoResultsError, fn -> Cornucopia.get_player!(player.id) end
+    end
+
+    test "change_player/1 returns a player changeset" do
+      player = player_fixture()
+      assert %Ecto.Changeset{} = Cornucopia.change_player(player)
+    end
+
+    test "create_player/1 returns error when game has already started" do
+      {:ok, game} = Cornucopia.create_game(%{name: "started game", edition: "webapp"})
+      # Start the game by setting started_at
+      {:ok, started_game} = Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
+
+      assert {:error, :game_already_started} = Cornucopia.create_player(%{name: "Late Player", game_id: started_game.id})
+    end
+
+    test "create_player/1 succeeds when game has not started" do
+      {:ok, game} = Cornucopia.create_game(%{name: "waiting game", edition: "webapp"})
+
+      assert {:ok, %Player{} = player} = Cornucopia.create_player(%{name: "Early Player", game_id: game.id})
+      assert player.name == "Early Player"
+      assert player.game_id == game.id
+    end
+
+    test "Player.find/1 returns error for non-existent player" do
+      assert {:error, :not_found} =
+               Copi.Cornucopia.Player.find("00000000000000000000000099")
+    end
+  end
+
+  describe "cards" do
+    alias Copi.Cornucopia.Card
+
+    @valid_attrs %{external_id: "Rsd2", capec: [], category: "some category", description: "some description", edition: "mobileapp", language: "some language", misc: "some misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", url: "", owasp_scp: [], owasp_devguide: [], safecode: [], value: "some value", version: "some version"}
+    @update_attrs %{external_id: "R2", capec: [], category: "some updated category", description: "some updated description", edition: "some updated edition", language: "some updated language", misc: "some updated misc", owasp_appsensor: [], owasp_asvs: [], owasp_mastg: [], owasp_masvs: [], biml: "", url: "", owasp_scp: [], owasp_devguide: [], safecode: [],  value: "some updated value", version: "some updated version"}
+    @invalid_attrs %{external_id: nil, capec: nil, category: nil, description: nil, edition: nil, language: nil, misc: nil, owasp_appsensor: nil, owasp_asvs: nil, owasp_mastg: nil, owasp_masvs: nil, biml: "", url: "", owasp_scp: nil, owasp_devguide: nil, safecode: nil,  value: nil, version: nil}
+
+    def card_fixture(attrs \\ %{}) do
+      {:ok, card} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Cornucopia.create_card()
+
+      card
+    end
+
+    setup do
+      Repo.delete_all(Card)
+      :ok
+    end
+
+    test "list_cards/0 returns all cards" do
+      card = card_fixture()
+      assert Cornucopia.list_cards() == [card]
+    end
+
+    test "get_card!/1 returns the card with given id" do
+      card = card_fixture()
+      assert Cornucopia.get_card!(card.id) == card
+    end
+
+    test "create_card/1 with valid data creates a card" do
+      assert {:ok, %Card{} = card} = Cornucopia.create_card(@valid_attrs)
+      assert card.capec == []
+      assert card.category == "some category"
+      assert card.description == "some description"
+      assert card.edition == "mobileapp"
+      assert card.language == "some language"
+      assert card.misc == "some misc"
+      assert card.owasp_appsensor == []
+      assert card.owasp_asvs == []
+      assert card.owasp_scp == []
+      assert card.owasp_devguide == []
+      assert card.safecode == []
+      assert card.value == "some value"
+      assert card.version == "some version"
+    end
+
+    test "create_card/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Cornucopia.create_card(@invalid_attrs)
+    end
+
+    test "update_card/2 with valid data updates the card" do
+      card = card_fixture()
+      assert {:ok, %Card{} = card} = Cornucopia.update_card(card, @update_attrs)
+      assert card.capec == []
+      assert card.category == "some updated category"
+      assert card.description == "some updated description"
+      assert card.edition == "some updated edition"
+      assert card.language == "some updated language"
+      assert card.misc == "some updated misc"
+      assert card.owasp_appsensor == []
+      assert card.owasp_asvs == []
+      assert card.owasp_scp == []
+      assert card.owasp_devguide == []
+      assert card.safecode == []
+      assert card.value == "some updated value"
+      assert card.version == "some updated version"
+    end
+
+    test "update_card/2 with invalid data returns error changeset" do
+      card = card_fixture()
+      assert {:error, %Ecto.Changeset{}} = Cornucopia.update_card(card, @invalid_attrs)
+      assert card == Cornucopia.get_card!(card.id)
+    end
+
+    test "delete_card/1 deletes the card" do
+      card = card_fixture()
+      assert {:ok, %Card{}} = Cornucopia.delete_card(card)
+      assert_raise Ecto.NoResultsError, fn -> Cornucopia.get_card!(card.id) end
+    end
+
+    test "change_card/1 returns a card changeset" do
+      card = card_fixture()
+      assert %Ecto.Changeset{} = Cornucopia.change_card(card)
+    end
+  end
+end

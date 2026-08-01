@@ -1,0 +1,1 @@
+This card is about being overreliant on LLMs without humans being able to review its outputs or take proper precautions, and how that can lead to security failures or incorrect decisions based on hallucinations or flawed reasoning.

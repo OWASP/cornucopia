@@ -1,0 +1,1 @@
+This card focuses on the lack of sufficient, tamper-resistant audit trails for build, delivery, and deployment processes, enabling attackers to act without accountability.

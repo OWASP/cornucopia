@@ -1,0 +1,1 @@
+Incomplete and inconsistent session management across different parts of an application enables attackers to exploit gaps, bypass session controls, and hijack or spoof user sessions. See [Session Management (SMK)](/cards/SMK#card 'Session Management (SMK) [internal]') for what session management routines to use.

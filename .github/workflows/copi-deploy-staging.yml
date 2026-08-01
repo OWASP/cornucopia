@@ -1,0 +1,82 @@
+---
+  name: Copi Deploy Staging
+  on:
+    push:
+      branches:
+        - master
+
+    workflow_dispatch:
+  env:
+    MIX_ENV: test
+    POSTGRES_TEST_PWD: POSTGRES_LOCAL_PWD
+  permissions:
+    contents: read
+  jobs:
+    build-test-and-deploy:
+      runs-on: ubuntu-latest # Or another supported runner
+      services:
+        postgres:
+          image: postgres:14
+          env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: POSTGRES_LOCAL_PWD
+            POSTGRES_DB: copi_test
+          ports:
+            - 5432:5432
+          options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      steps:
+        - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        - name: Cache deps
+          id: cache-deps
+          uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+          env:
+            cache-name: cache-elixir-deps
+          with:
+            path: copi.owasp.org/deps
+            key: ${{ runner.os }}-mix-${{ env.cache-name }}-${{ hashFiles('**/mix.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-mix-${{ env.cache-name }}-
+        - name: Install Elixir and Erlang
+          uses: erlef/setup-beam@e6d7c94229049569db56a7ad5a540c051a010af9 # v1.20.4
+          with:
+            elixir-version: 1.18.2
+            otp-version: 27.3.3
+          env:
+            ImageOS: ubuntu24
+
+        - name: Install dependencies
+          working-directory: copi.owasp.org
+          run: mix deps.get
+
+        - name: Clean the project
+          working-directory: copi.owasp.org
+          run: mix clean && rm -rf _build
+        - name: Compile the project
+          working-directory: copi.owasp.org
+          run: mix compile
+        - name: Reset the DB
+          working-directory: copi.owasp.org
+          run: mix ecto.reset
+          
+        - name: Run tests
+          working-directory: copi.owasp.org
+          run: |
+            mix test --cover --export-coverage default || true
+        - name: Generate coverage report
+          working-directory: copi.owasp.org
+          run: mix coveralls.cobertura --exclude test --import-cover cover || true
+        # Upload Code Coverage for Codeclimate
+        - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+          with:
+            token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+            total-parts-count: 3
+            add-prefix: copi.owasp.org/lib
+            files: copi.owasp.org/cover/cobertura.xml
+        - name: Setup Flyctl
+          uses: superfly/flyctl-actions/setup-flyctl@63da3ecc5e2793b98a3f2519b3d75d4f4c11cec2
+        - name: Deploy to Fly.io staging
+          run: flyctl deploy --remote-only --app copi-cold-dream-9981 --env PHX_HOST=copi.owaspcornucopia.org
+          env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_STAGE }}
+          working-directory: ./copi.owasp.org

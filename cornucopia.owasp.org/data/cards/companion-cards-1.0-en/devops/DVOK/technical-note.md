@@ -1,0 +1,1 @@
+This card addresses supply chain attacks where malicious code is introduced through compromised external dependencies or exploited developer credentials, targeting the software, development environments, or DevOps tooling.

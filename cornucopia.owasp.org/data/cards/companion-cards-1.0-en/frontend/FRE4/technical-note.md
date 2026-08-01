@@ -1,0 +1,1 @@
+This card specifically covers DOM-based XSS, where attacker-controlled data flows from a source (e.g., the URL fragment or query string) into a dangerous DOM sink without passing through the server. See FREQ for persistent XSS where malicious code is stored in frontend assets or the backend and served to all users.

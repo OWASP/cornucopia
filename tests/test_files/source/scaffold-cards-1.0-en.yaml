@@ -1,0 +1,19 @@
+---
+meta:
+  edition: "scaffold"
+  component: "cards"
+  language: "EN"
+  version: "1.0"
+suits:
+-
+  id: "TS"
+  name: "Test Suit"
+  cards:
+  -
+    id: "TSA"
+    value: "A"
+    desc: "Test card A"
+  -
+    id: "TSB"
+    value: "B"
+    desc: "Test card B"

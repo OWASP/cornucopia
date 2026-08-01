@@ -1,0 +1,1 @@
+This card covers compromise of the cloud provider's root or break-glass account, which carries unrestricted permissions that no IAM policy can limit. See CLD9 for the related threat of pivoting between cloud accounts using IAM trust relationships.

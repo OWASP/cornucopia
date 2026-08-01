@@ -1,0 +1,1 @@
+This card addresses the risk of pipeline manipulation through injected commands, poisoned workflow dependencies, or tampered CI configuration files.

@@ -1,0 +1,1 @@
+This card is specifically about the abuse of CI/CD build variables and pipeline configuration to inject malicious code. See CLDJ for the related threat of compromising a build runner itself to tamper with container images.

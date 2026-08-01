@@ -1,0 +1,1 @@
+This card addresses the risk of exploitable vulnerabilities introduced through outdated or poorly maintained dependencies across the application and development ecosystem.

@@ -1,0 +1,223 @@
+name: Run Tests and generate output files
+# Controls when the workflow will run 
+on:
+  # Triggers the workflow on pull request events
+  # Using pull_request_target allows the build artifacts link to be posted as a comment
+  # even for PRs from forked repositories.
+  pull_request_target:
+    paths:
+      - 'source/**'
+      - 'scripts/convert**'
+      - 'resources/templates/**'
+permissions:
+  contents: read
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  hardening:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/hardening.yaml
+  runtests:
+    permissions:
+      contents: read
+    needs: hardening
+    uses: ./.github/workflows/run-tests.yaml
+  # If Tests pass, generate new output files
+  uploadoutputfiles:
+    name: Upload Output Files
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    needs: runtests
+    outputs:
+      artifact-url: ${{ steps.upload_artifact.outputs.artifact-url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          # use the commit that triggered this workflow to avoid any wildcard fetch
+          ref: ${{ github.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          persist-credentials: false
+      # Set the pip environment up
+      - name: Get Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+          cache: 'pipenv' # caching pip dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice
+          pip install -r requirements.txt --require-hashes
+          pipenv install --ignore-pipfile --dev
+      - name: Generate test coverage
+        run: |
+          pipenv run coverage run -m unittest discover -s tests/scripts -p "*_*test.py"
+          mkdir -p converter/coverage
+          pipenv run coverage xml -o converter/coverage/cobertura.xml
+      - name: Upload test coverage to Qlty
+        uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          total-parts-count: 3
+          files: converter/coverage/cobertura.xml
+      - name: Check translation tags
+        run: |
+          pipenv run python scripts/check_translations.py > translation_check_report.md || echo "Translation issues found, continuing..."
+      - name: Upload translation check report
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          retention-days: 5
+          name: translation-check-report.${{ github.sha }}.md
+          path: translation_check_report.md
+      - name: Generate new output files
+        run: |
+          #
+          # Building EoP
+          mkdir -p output/eop || echo "Ignore error"
+          mkdir -p output/eop/Links || echo "Ignore error"
+          mkdir -p output/eop/Fonts || echo "Ignore error"
+          cp -rf ./resources/templates/Links/eop output/eop/Links/
+          cp -rf ./resources/templates/Fonts/Selawik/* output/eop/Fonts/
+          cp -rf ./resources/templates/Fonts/OpenSans/* output/eop/Fonts/
+          pipenv run python scripts/convert.py -t tarot -l en -lt deck -v 5.0 -e eop  -i ./resources/templates/eop_ver_deck_tarot_lang.idml -o ./output/eop/eop-5.0-deck-en.idml
+          pipenv run python scripts/convert.py -t tarot -l es -lt deck -v 5.0 -e eop  -i ./resources/templates/eop_ver_deck_tarot_lang.idml -o ./output/eop/eop-5.0-deck-es.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt instructions1 -v 5.0 -e eop  -i ./resources/templates/eop_ver_instructions1_tarot_lang.idml -o ./output/eop/1_instructionCard1.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt instructions2 -v 5.0 -e eop  -i ./resources/templates/eop_ver_instructions2_tarot_lang.idml -o ./output/eop/1_instructionCard2.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt strategy-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_strategy-cards_tarot_lang.idml -o ./output/eop/2_StrategyCard.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_cards_tarot_lang.idml -o ./output/eop/3_PlayingCards.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt threat-spoofing-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_threat-spoofing-cards_tarot_lang.idml -o ./output/eop/4_1THREATCARD-Spoofing.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt threat-tampering-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_threat-tampering-cards_tarot_lang.idml -o ./output/eop/4_2THREATCARD-Tampering.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt threat-repudation-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_threat-repudation-cards_tarot_lang.idml -o ./output/eop/4_3THREATCARD-Repudiation.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt threat-infodisclosure-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_threat-infodisclosure-cards_tarot_lang.idml -o ./output/eop/4_4THREATCARD-InfoDisclosure.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt threat-denialofsvc-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_threat-denialofsvc-cards_tarot_lang.idml -o ./output/eop/4_5THREATCARD-DenialofSvc.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt threat-elevofpriv-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_threat-elevofpriv-cards_tarot_lang.idml -o ./output/eop/4_6THREATCARD-ElevofPriv.idml
+          pipenv run python scripts/convert.py -t tarot -l en -lt about -v 5.0 -e eop  -i ./resources/templates/eop_ver_about_tarot_lang.idml -o ./output/eop/5_AboutCard.idml
+          zip -r output/eop-5.0.zip output/eop
+          #
+          # Building Cornucopia WebApp Edition
+          mkdir -p output/cornucopia_webapp || echo "Ignore error"
+          mkdir -p output/cornucopia_webapp/Links || echo "Ignore error"
+          mkdir -p output/cornucopia_webapp/Fonts || echo "Ignore error"
+          cp -rf ./resources/templates/Links/cornucopia_webapp output/cornucopia_webapp/Links/
+          cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_webapp/Fonts/
+          #
+          # Building Cornucopia MobileApp Edition
+          mkdir -p output/cornucopia_mobileapp || echo "Ignore error"
+          mkdir -p output/cornucopia_mobileapp/Links || echo "Ignore error"
+          mkdir -p output/cornucopia_mobileapp/Fonts || echo "Ignore error"
+          cp -rf ./resources/templates/Links/cornucopia_mobileapp output/cornucopia_mobileapp/Links/
+          cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_mobileapp/Fonts/
+           # Building Cornucopia Companion Edition
+          mkdir -p output/cornucopia_companion || echo "Ignore error"
+          mkdir -p output/cornucopia_companion/Links || echo "Ignore error"
+          mkdir -p output/cornucopia_companion/Fonts || echo "Ignore error"
+          cp -rf ./resources/templates/Links/cornucopia_companion output/cornucopia_companion/Links/
+          cp -rf ./resources/templates/Fonts/NotoSans/* output/cornucopia_companion/Fonts/
+          #
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 3.0 -e webapp --pdf
+          pipenv run python scripts/convert.py -l en -lt cards -t all -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l all -lt guide -t bridge -v 3.0 -e webapp --pdf
+          pipenv run python scripts/convert.py -l en -lt cards -t all -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 3.0 -e webapp
+          pipenv run python scripts/convert.py -l en -lt cards -t all -v 1.1 -e mobileapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t bridge -v 1.1 -e mobileapp
+          pipenv run python scripts/convert.py -l en -lt leaflet -t tarot -v 1.1 -e mobileapp
+          pipenv run python scripts/convert.py -l en -lt cards -t tarot -v 1.0 -e companion
+          cp output/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml output/cornucopia_mobileapp/
+          cp output/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml output/cornucopia_webapp/
+          cp output/owasp_cornucopia_companion_1.0_cards_tarot_en.idml output/cornucopia_companion/
+          zip output/owasp_cornucopia_mobileapp_1.1_en.zip -r output/cornucopia_mobileapp/Links/* output/cornucopia_mobileapp/Fonts/* output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_cards_tarot_qr_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_bridge_en.idml output/cornucopia_mobileapp/owasp_cornucopia_mobileapp_1.1_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_mobileapp_scoresheet.pdf
+          zip output/owasp_cornucopia_webapp_3.0_en.zip -r output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          zip output/owasp_cornucopia_companion_1.0_en.zip -r output/cornucopia_companion/Links/* output/cornucopia_companion/Fonts/* output/cornucopia_companion/owasp_cornucopia_companion_1.0_cards_tarot_en.idml
+          cp output/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml output/cornucopia_webapp/
+          zip -r output/owasp_cornucopia_webapp_3.0_en.zip output/cornucopia_webapp/Links/* output/cornucopia_webapp/Fonts/* output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_bridge_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_cards_tarot_qr_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_bridge_en.idml output/cornucopia_webapp/owasp_cornucopia_webapp_3.0_leaflet_tarot_en.idml ./resources/templates/owasp_cornucopia_webapp_scoresheet.pdf
+          zip output/cornucopia-build-files.zip -r \
+            output/eop-5.0.zip \
+            output/owasp_cornucopia_mobileapp_1.1_en.zip \
+            output/owasp_cornucopia_webapp_3.0_en.zip \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_en.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_es.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_fr.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_nl.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_no_nb.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_pt_br.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_pt_pt.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_ru.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_it.odt \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_en.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_es.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_fr.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_nl.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_no_nb.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_pt_br.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_pt_pt.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_ru.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_it.pdf \
+            output/owasp_cornucopia_webapp_3.0_guide_bridge_en.pdf \
+            output/owasp_cornucopia_companion_1.0_en.zip
+
+          
+      - name: Upload output files
+        id: upload_artifact
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          retention-days: 5
+          name: cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip
+          path: |
+            output/cornucopia-build-files.zip
+  commentpr:
+    name: Comment on PR with build artifacts
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      issues: write
+    needs: uploadoutputfiles
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Download translation check report
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: translation-check-report.${{ github.sha }}.md
+          path: .
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          ARTIFACT_URL: ${{needs.uploadoutputfiles.outputs.artifact-url}}
+        with:
+          script: |
+            const fs = require('fs');
+            let translationReport = '';
+            try {
+              translationReport = fs.readFileSync('translation_check_report.md', 'utf8');
+            } catch (error) {
+              translationReport = 'Translation check report not found.';
+            }
+            
+            const prNotes = `[badge]: https://img.shields.io/badge/Build-Success!-3fb950?logo=github&style=for-the-badge
+
+            ## Build artifacts:
+            
+            | Name | Link |
+            |------|------|
+            | Output files | [cornucopia-build-files.${{ github.event.pull_request.head.sha }}.zip](${{needs.uploadoutputfiles.outputs.artifact-url}}) |
+            
+            ---
+            
+            ${translationReport}`;
+            
+            github.rest.issues.createComment({
+              issue_number: process.env.PR_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: prNotes
+            })

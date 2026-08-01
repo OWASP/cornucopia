@@ -1,0 +1,1 @@
+This card focuses on the exploitation of stale DevOps credentials, forgotten service accounts, excessive privileges, and other identity management oversights in the development and deployment infrastructure.

@@ -1,0 +1,1 @@
+Players can discuss any type of Agentic AI (AAI) attack they think might be possible against the assessment target. If possible, try to identify an attack that is fairly unique to the application's agent design, tool integrations, or deployment model rather than one already covered by another card in this suit.

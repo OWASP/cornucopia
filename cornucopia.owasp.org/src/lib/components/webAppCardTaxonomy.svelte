@@ -1,0 +1,157 @@
+<script lang="ts">
+    import { DevGuideMapping } from '$lib/devguideMapping';
+    import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
+    import ASVSOverview from "$lib/components/ASVSOverview.svelte";
+    import MappingsList from "$lib/components/mappingsList.svelte";
+    import CapecMapTable from "$lib/components/capecMapTable.svelte";
+    import type { Card } from "../../domain/card/card";
+    import type { Route } from "../../domain/routes/route";
+    import { MappingController, type WebAppMapping as _WebAppMapping } from "../../domain/mapping/mappingController";
+    import { readTranslation } from "$lib/stores/stores";
+  interface Props {
+    mappingData: Record<string, unknown>;
+    card: Card;
+    routes: Map<string, Route[]>;
+    capecData?: Record<string, unknown>;
+    asvsVersion: string;
+  }
+
+  let { mappingData, card, routes, capecData = undefined, asvsVersion }: Props = $props();
+    const controller = $derived(new MappingController(mappingData));
+    let t = readTranslation();
+
+    function linkASVS(input: string) {
+      input = String(input).split("-")[0]; // if it's a range of topics, link to the first one
+      let ASVSRoutes: Route[] = routes.get('ASVSRoutes') as Route[];
+      let searchString = FormatToDoubleDigitSearchstring(input);
+      let result: Route | undefined = ASVSRoutes.find(
+        (route) => route.Section === searchString
+      );
+      return result ? result.Path.toLowerCase() + "#V" + input : "";
+    }
+
+    function linkSTRIDE(input: string) {
+      return  "/taxonomy/stride/" + input.toLowerCase();
+    }
+
+    function textSTRIDE(input: string) {
+      return {
+        "S": 'Spoofing',
+        "T": 'Tampering',
+        "R": 'Repudiation',
+        "I": 'Information Disclosure',
+        "D": 'Denial of Service',
+        "E": 'Elevation of Privilege',
+      }[input] || input;
+    }
+  
+    function FormatToDoubleDigitSearchstring(input: string) {
+      input = String(input)
+      let str =
+        input.lastIndexOf(".") !== -1
+          ? input.substring(0, input.lastIndexOf("."))
+          : input;
+      let parts = str.split(".").map((part) => part.padStart(2, "0"));
+      let searchString = parts.join(".");
+      return searchString;
+    }
+  
+    function linkCapec(input: string) {
+      return "/taxonomy/capec-3.9/" + input;
+    }
+    let mappings = $derived(controller.getWebAppCardMappings(card.id));
+    let attacks: Attack[] = $derived(GetCardAttacks(card.id));
+    
+    let hasMappings = $derived(mappings && Object.keys(mappings).length > 1);
+    let hasCapecMap = $derived(
+      card.edition === 'webapp' && 
+      parseFloat(card.version) >= 3.0 && 
+      mappings?.capec_map && 
+      Object.keys(mappings.capec_map).length > 0
+    );
+  
+  </script>
+
+    {#if hasMappings }
+      <h2 class="title clicable" id="mapping">{$t('cards.webAppCardTaxonomy.h1.1')}</h2>
+      {#if mappings.stride}
+      <MappingsList 
+        title="STRIDE:" 
+        mappings={mappings.stride}
+        linkFunction={linkSTRIDE}
+        textFunction={textSTRIDE}
+      />
+      {/if}
+      {#if mappings.owasp_asvs}
+      <MappingsList
+        title="OWASP ASVS:"
+        mappings={mappings.owasp_asvs}
+        linkFunction={linkASVS}
+      />
+      {/if}
+      {#if mappings.capec}
+      <MappingsList
+        title="CAPEC:"
+        mappings={mappings.capec}
+        linkFunction={linkCapec}
+      />
+      {/if}
+      {#if mappings.owasp_dev_guide}
+      <MappingsList title="OWASP DevGuide:"
+        mappings={mappings.owasp_dev_guide} 
+        linkFunction={DevGuideMapping.getUrl}  
+      />
+      {/if}
+      {#if mappings.owasp_appsensor}
+      <MappingsList
+        title="OWASP AppSensor:"
+        mappings={mappings.owasp_appsensor}
+      />
+      {/if}
+      {#if mappings.safecode}
+      <MappingsList 
+        title="SAFECode:"
+        mappings={mappings.safecode} 
+        linkFunction={(_input: string) => "https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf"}
+      />
+      {/if}
+    {/if}
+  
+    {#if hasCapecMap && capecData}
+      <h1 class="title">CAPEC™ Map</h1>
+      <CapecMapTable 
+        capecMap={mappings.capec_map}
+        {capecData}
+        {linkASVS}
+      />
+    {/if}
+  
+    <h2 class="title">ASVS ({asvsVersion}) Cheat Sheet Series Index</h2>
+    {#if hasMappings && mappings.owasp_asvs}
+
+      <ASVSOverview mappings={[...new Set (mappings.owasp_asvs.map(s => +String(s).split('.').slice(0, 2).join('.')))]} version={asvsVersion}></ASVSOverview>
+    {/if}
+    <h2 class="title">{$t('cards.webAppCardTaxonomy.h1.2')}</h2>
+    {#each attacks || [] as attack (attack.url)}
+      <p><a href="/taxonomy/attacks/{attack.url}">{attack.name}</a></p>
+    {/each}
+  
+  <style>
+    p {
+      font-size: 1.5rem;
+    }
+    h1,
+    a,
+    p {
+      color: var(--background);
+      font-family: var(--font-title);
+      font-weight: 400;
+    }
+  
+    .title {
+      background: var(--background);
+      color: white;
+      padding: 0.5rem;
+    }
+  </style>
+  

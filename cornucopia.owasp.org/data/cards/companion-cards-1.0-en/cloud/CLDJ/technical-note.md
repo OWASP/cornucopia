@@ -1,0 +1,1 @@
+This card covers the compromise of CI/CD build runners to inject malicious code into container images. See CLD5 for the related threat of abusing unprotected build variables to inject code at the pipeline configuration level.

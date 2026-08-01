@@ -1,0 +1,1 @@
+NB: The key concept for this card is protection of administrative web interfaces such as Content Management System (CMS), database and server web control panels.

@@ -1,0 +1,374 @@
+defmodule CopiWeb.PlayerLive.Show do
+  use CopiWeb, :live_view
+  use Phoenix.Component
+
+  require Logger
+  import Ecto.Query
+
+  alias Copi.Cornucopia.Player
+  alias Copi.Cornucopia.Game
+  alias Copi.Cornucopia.DealtCard
+  alias CopiWeb.PlayerHandoff
+  alias CopiWeb.PlayerSessions
+  alias CopiWeb.Resilience
+
+  defmodule BadPlayerID do
+    defexception message: "Invalid player ID format", plug_status: 400
+  end
+
+  @impl true
+  def mount(_params, session, socket) do
+    ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
+    {:ok,
+     socket
+     |> assign(:client_ip, ip)
+     |> assign(:player_sessions, session["resume_player_session"])
+     |> assign(:handoff_url, nil)}
+  end
+
+  @impl true
+  def handle_params(%{"game_id" => game_id, "id" => player_id} = params, _, socket) do
+    with :ok <- validate_ulid_format(game_id),
+         :ok <- validate_ulid_format(player_id) do
+      if authorized_player_url?(socket, params) do
+        case player_module().find(player_id) do
+          {:ok, %{game_id: ^game_id} = player} ->
+            case game_module().find(game_id) do
+              {:ok, game} ->
+                CopiWeb.Endpoint.subscribe(topic(game_id))
+
+                {:noreply,
+                 socket
+                 |> assign(:game, game)
+                 |> assign(:player, player)
+                 |> assign(:player_load_retry_count, 0)}
+
+              {:error, :not_found} ->
+                {:noreply,
+                 socket
+                 |> put_flash(:error, "Game not found.")
+                 |> redirect(to: "/games")}
+
+              {:error, reason} ->
+                handle_transient_player_load_failure(socket, params, reason)
+            end
+
+          {:ok, _player} ->
+            redirect_to_public_game(socket, game_id)
+
+          {:error, :not_found} ->
+            raise Ecto.NoResultsError, queryable: Player
+
+          {:error, reason} ->
+            handle_transient_player_load_failure(socket, params, reason)
+        end
+      else
+        redirect_to_public_game(socket, game_id)
+      end
+    else
+      :invalid_format ->
+        raise BadPlayerID
+    end
+  end
+
+  @impl true
+  def handle_info({:retry_player_show_load, params}, socket) when is_map(params) do
+    handle_params(params, nil, socket)
+  end
+
+  def handle_info({:retry_player_show_load, player_id}, socket) when is_binary(player_id) do
+    handle_params(
+      %{
+        "game_id" => socket.assigns.game.id,
+        "id" => player_id
+      },
+      nil,
+      socket
+    )
+  end
+
+  @impl true
+  def handle_info(%{topic: _message_topic, event: "game:updated", payload: updated_game}, socket) do
+    case player_module().find(socket.assigns.player.id) do
+      {:ok, updated_player} ->
+        {:noreply, socket |> assign(:game, updated_game) |> assign(:player, updated_player)}
+      {:error, _reason} ->
+        {:noreply, socket}
+    end
+  end
+
+  @impl true
+  def handle_info(:proceed_to_next_round, socket) do
+    game = socket.assigns.game
+
+    # Clear all continue votes for this game before proceeding to next round
+    Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game.id)
+
+    # Now proceed to next round
+    Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+
+    if last_round?(game) do
+      Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+    end
+
+    {:ok, updated_game} = game_module().find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
+
+  @impl true
+  def handle_event("next_round", _, socket) do
+    game = socket.assigns.game
+
+    if round_open?(game) do
+      # Check if we can continue due to majority continue votes
+      if Copi.Cornucopia.Game.can_continue_round?(game) do
+        # Close the round and proceed
+        Copi.Cornucopia.update_game(game, %{round_open: false})
+
+        # Wait a moment then proceed to next round
+        Process.send_after(self(), :proceed_to_next_round, 100)
+
+        {:noreply, assign(socket, :game, game)}
+      else
+        # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
+        {:noreply, socket}
+      end
+    else
+      Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+
+      if last_round?(game) do
+        Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+      end
+
+      {:ok, updated_game} = game_module().find(game.id)
+
+      CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+      {:noreply, assign(socket, :game, updated_game)}
+    end
+  end
+
+  @impl true
+  def handle_event("toggle_continue_vote", _, socket) do
+    game = socket.assigns.game
+    player = socket.assigns.player
+
+    # Check if player already voted
+    if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
+      # Remove their vote
+      continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
+      if continue_vote do
+        Copi.Repo.delete!(continue_vote)
+      end
+    else
+      # Add their vote
+      Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
+      Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id})
+    end
+
+    {:ok, updated_game} = game_module().find(game.id)
+
+    CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+
+    {:noreply, assign(socket, :game, updated_game)}
+  end
+
+  @impl true
+  def handle_event("share_hand", _params, socket) do
+    token = PlayerHandoff.sign(socket.assigns.game.id, socket.assigns.player.id)
+    handoff_url = "#{socket.endpoint.url()}/player-handoffs/#{URI.encode(token)}"
+
+    {:noreply, assign(socket, :handoff_url, handoff_url)}
+  end
+
+  @impl true
+  def handle_event("toggle_vote", %{"dealt_card_id" => dealt_card_id}, socket) do
+    # Parse dealt_card_id defensively - it comes from client params
+    case Integer.parse(dealt_card_id) do
+      {card_id, ""} ->
+        # Successfully parsed entire string as integer
+        handle_toggle_vote(card_id, socket)
+
+      _ ->
+        # Failed to parse as integer or had trailing characters
+        Logger.warning("Invalid dealt_card_id format received: #{inspect(dealt_card_id)}")
+        {:noreply, socket |> put_flash(:error, "Invalid card format. Please refresh and try again.")}
+    end
+  end
+
+  defp handle_toggle_vote(card_id, socket) do
+    game = socket.assigns.game
+    player = socket.assigns.player
+
+    case dealt_card_module().find(card_id) do
+      {:ok, dealt_card} ->
+        game_card_ids = game.players
+          |> Enum.flat_map(fn p -> p.dealt_cards end)
+          |> Enum.map(fn dc -> dc.id end)
+
+        if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
+          vote = get_vote(dealt_card, player)
+
+          if vote do
+            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+            Copi.Repo.delete!(vote)
+          else
+            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id}) do
+              {:ok, _vote} ->
+                Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+              {:error, changeset} ->
+                Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+            end
+          end
+
+          {:ok, updated_game} = game_module().find(game.id)
+          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+          {:noreply, assign(socket, :game, updated_game)}
+        else
+          Logger.warning("Unauthorized vote attempt: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+          {:noreply, socket |> put_flash(:error, "Invalid card selection")}
+        end
+
+      {:error, :not_found} ->
+        Logger.debug("Vote attempt with missing dealt_card_id=#{inspect(card_id)} for player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}")
+        {:noreply, socket |> put_flash(:error, "Card not found. Please refresh and try again.")}
+
+      {:error, reason} ->
+        Logger.debug("Transient dealt card lookup failure for dealt_card_id=#{inspect(card_id)}, player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
+        {:noreply, socket |> put_flash(:error, "Temporary issue loading card. Please try again.")}
+    end
+  end
+
+  def topic(game_id) do
+    "game:#{game_id}"
+  end
+
+  def ordered_cards(cards) do
+    Enum.sort_by(cards, &(&1.card.id))
+  end
+
+  def unplayed_cards(cards) do
+    Enum.filter(cards, fn card -> card.played_in_round in [0, nil] end)
+  end
+
+  def played_cards(cards, round) do
+    Enum.filter(cards, fn card -> card.played_in_round == round end)
+  end
+
+  def card_played_in_round(cards, round) do
+    Enum.find(cards, fn card -> card.played_in_round == round end)
+  end
+
+  def player_first(players, player) do
+    Enum.sort_by(players, &(&1.id != player.id))
+  end
+
+  def round_open?(game) do
+    latest_round = game.rounds_played + 1
+
+    players_still_to_play = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == latest_round end) == nil end)
+
+    Enum.count(players_still_to_play) > 0
+  end
+
+  def round_closed?(game) do
+    !round_open?(game)
+  end
+
+  def last_round?(game) do
+    players_with_no_cards = game.players |> Enum.filter(fn player -> Enum.find(player.dealt_cards, fn card -> card.played_in_round == nil end) == nil end)
+
+    Enum.count(players_with_no_cards) > 0
+  end
+
+  def get_vote(dealt_card, player) do
+    Enum.find(dealt_card.votes, fn vote -> vote.player_id == player.id end)
+  end
+
+  def display_game_session(edition) do
+    case edition do
+      "webapp" -> "Cornucopia Web Session:"
+      "ecommerce" -> "Cornucopia Web Session:"
+      "mobileapp" -> "Cornucopia Mobile Session:"
+      "masvs" -> "Cornucopia Mobile Session:"
+      "cumulus" -> "OWASP Cumulus Session:"
+      "mlsec" -> "Elevation of MLSec Session:"
+      "dbd" -> "Digital Benefits Deck Session:"
+      _ -> "EoP Session:"
+    end
+  end
+
+  defp handle_transient_player_load_failure(socket, params, reason) do
+    player_id = params["id"]
+    retry_count = socket.assigns[:player_load_retry_count] || 0
+
+    Logger.debug(
+      "Transient player/game load failure in PlayerLive.Show for player_id=#{inspect(player_id)}, retry=#{retry_count}, reason=#{inspect(reason)}"
+    )
+
+    cond do
+      socket.assigns[:game] && socket.assigns[:player] && retry_count < Resilience.max_player_load_retries() ->
+        Process.send_after(self(), {:retry_player_show_load, params}, Resilience.retry_delay_ms())
+
+        {:noreply,
+         socket
+         |> assign(:player_load_retry_count, retry_count + 1)
+         |> put_flash(:error, "Temporary issue loading player/game. Retrying...")}
+
+      socket.assigns[:game] && socket.assigns[:player] ->
+        {:noreply,
+         socket
+         |> assign(:player_load_retry_count, 0)
+         |> put_flash(:error, "Temporary issue loading player/game. Please try again.")}
+
+      true ->
+        {:noreply,
+         socket
+         |> put_flash(:error, "Temporary issue loading player/game. Please try again.")
+         |> redirect(to: "/games")}
+    end
+  end
+
+  defp player_module do
+    Application.get_env(:copi, :player_live_show_player_module, Player) || Player
+  end
+
+  defp game_module do
+    Application.get_env(:copi, :player_live_show_game_module, Game) || Game
+  end
+
+  defp dealt_card_module do
+    Application.get_env(:copi, :player_live_show_dealt_card_module, DealtCard) || DealtCard
+  end
+
+  defp authorized_player_url?(socket, %{"game_id" => game_id, "id" => player_id}) do
+    PlayerSessions.authorized?(socket.assigns.player_sessions, game_id, player_id)
+  end
+
+  defp redirect_to_public_game(socket, game_id) do
+    {:noreply,
+     socket
+     |> put_flash(:error, "This player link is not available in this browser session.")
+     |> redirect(to: "/games/#{game_id}")}
+  end
+
+  defp validate_ulid_format(id) when is_binary(id) do
+    case String.length(id) do
+      26 ->
+        case Ecto.ULID.cast(id) do
+          {:ok, _} -> :ok
+          :error -> :invalid_format
+        end
+
+      _ ->
+        :invalid_format
+    end
+  end
+
+  defp validate_ulid_format(_), do: :invalid_format
+
+end
