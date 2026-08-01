@@ -45,7 +45,7 @@ defmodule CopiWeb.ApiControllerTest do
 
     {:ok, card} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "A", description: "desc", misc: "misc",
-      edition: "webapp", external_id: "1", language: "en", version:"1",
+      edition: "webapp", external_id: "1", language: "en", version: "1",
       owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
       capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
       biml: "biml", url: "http://example.com"
@@ -140,7 +140,7 @@ defmodule CopiWeb.ApiControllerTest do
   test "play_card fails if player already played in round", %{conn:conn, game: game, player: player, dealt_card: dealt_card} do
     {:ok, card2} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "K", description: "desc", misc: "misc",
-      edition: "webapp", external_id: "2", language: "en", version:"1",
+      edition: "webapp", external_id: "2", language: "en", version: "1",
       owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
       capec: [], safecode: [], owasp_mastg: [], owasp_masvs: [],
       biml: "biml", url: "http://example.com"
