@@ -137,7 +137,7 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 401)["error"] == "Valid player session required"
   end
 
-  test "play_card fails if player already played in round", %{conn:conn, game: game, player: player, dealt_card: dealt_card} do
+  test "play_card fails if player already played in round", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
     {:ok, card2} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "K", description: "desc", misc: "misc",
       edition: "webapp", external_id: "2", language: "en", version: "1",
