@@ -40,8 +40,8 @@ defmodule CopiWeb.ApiControllerTest do
     old_step = Application.get_env(:copi, :api_game_stub_step)
 
     {:ok, game} = Cornucopia.create_game(%{name: "Test Game"})
-    {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
     {:ok, player} = Cornucopia.create_player(%{name: "Test Player",game_id: game.id})
+    {:ok, game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
 
     {:ok, card} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "A", description: "desc", misc: "misc",
@@ -117,8 +117,8 @@ defmodule CopiWeb.ApiControllerTest do
 
   test "play_card rejects a player from another game", %{conn: conn, game: game} do
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
-    {:ok, other_game} = Cornucopia.update_game(other_game, %{started_at: DateTime.utc_now()})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other",game_id: other_game.id})
+    {:ok, other_game} = Cornucopia.update_game(other_game, %{started_at: DateTime.utc_now()})
     {:ok, card2} = Cornucopia.create_card(%{
       category: "C", value: "Q", description: "d", misc: "m",
       edition: "webapp", external_id: "99", language: "en", version: "1",
@@ -434,8 +434,8 @@ defmodule CopiWeb.ApiControllerTest do
     second_dealt_card = Repo.insert!(%DealtCard{player_id: second_player.id, card_id: dealt_card.card_id})
 
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
-    {:ok, other_game} = Cornucopia.update_game(other_game, %{started_at: DateTime.utc_now()})
     {:ok, other_player} = Cornucopia.create_player(%{name: "Other Game Player", game_id: other_game.id})
+    {:ok, other_game} = Cornucopia.update_game(other_game, %{started_at: DateTime.utc_now()})
     other_dealt_card = Repo.insert!(%DealtCard{player_id: other_player.id, card_id: dealt_card.card_id})
 
     sessions = [
