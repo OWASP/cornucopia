@@ -1,35 +1,15 @@
-import fs from 'fs';
-import * as yaml from "js-yaml";
-import path from "path";
-import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
-const __dirname = path.resolve(path.dirname(''));
+import { YamlDataLoader } from "$lib/services/yamlDataLoader";
 
 export type SuitStyling = { tab: string; watermark: string; royal: string };
 
 export class SuitStylingService {
-    private static readonly path: string = '/../source/';
-    private static cache: object[] = [];
+    private static readonly loader = new YamlDataLoader<Record<string, SuitStyling>>('styling', 'suits', 'styling');
 
     public getSuitStyling(edition: string, version: string): Record<string, SuitStyling> | undefined {
-        const cached = SuitStylingService.cache.find((entry) => entry?.edition == edition && entry?.version == version);
-        if (cached) return cached?.data;
-
-        const file = `${__dirname}${SuitStylingService.path}${edition}-styling-${version}.yaml`;
-        // Not every edition has suit styling configured yet, so a missing file is expected, not an error
-        if (!FileSystemHelper.hasFile(file)) return undefined;
-
-        try {
-            const yamlData = fs.readFileSync(file, 'utf8');
-            const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as { suits: Record<string, SuitStyling> };
-            SuitStylingService.cache.push({ edition: edition, version: version, data: data.suits });
-            return data.suits;
-        } catch (e) {
-            console.error(`Failed to load styling for ${edition}-${version}:`, e);
-            return undefined;
-        }
+        return SuitStylingService.loader.get(edition, version);
     }
 
     public static clear(): void {
-        SuitStylingService.cache = [];
+        SuitStylingService.loader.clear();
     }
 }
