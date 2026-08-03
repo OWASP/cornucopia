@@ -15,6 +15,8 @@
   import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
   import EopCardTaxonomy from './eopCardTaxonomy.svelte';
   import type { Component } from "svelte";
+  import type { CardImage } from "$lib/services/cardImagesService";
+  import type { SuitStyling } from "$lib/services/suitStylingService";
 
   const taxonomies: Record<string, Component<any>> = {
     webapp: WebAppCardTaxonomy,
@@ -32,6 +34,8 @@
     language: string;
     capecData?: any;
     versions: string[];
+    cardImages?: Record<string, CardImage>;
+    suitStyling?: Record<string, SuitStyling>;
   }
 
   let {
@@ -42,7 +46,9 @@
     languages,
     versions,
     language,
-    capecData = undefined
+    capecData = undefined,
+    cardImages = undefined,
+    suitStyling = undefined
   }: Props = $props();
     
   const controller = $derived(new MappingController(mappingData));
@@ -62,7 +68,7 @@
 />
 <div>
   <h1 title="OWASP Cornucopia card {Text.convertToTitleCase(card.suitName)} ({card.id})" class="title">{Text.convertToTitleCase(card.suitName)} ({card.id})</h1>
-  <CardBrowser {card} {cards} mappingData={mappings}></CardBrowser>
+  <CardBrowser {card} {cards} mappingData={mappings} {cardImages} {suitStyling}></CardBrowser>
   <button
     class="copy-link-btn"
     onclick={() => {
