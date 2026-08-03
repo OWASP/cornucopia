@@ -16,6 +16,7 @@ cd cornucopia/copi.owasp.org
 ```
 
 ### Installation by Operating System
+
 #### Mac
 
 ##### Get Homebrew
@@ -35,6 +36,7 @@ brew install elixir
 ```
 
 #### Linux and Windows
+
 Follow the installation process for your [Linux distribution](https://elixir-lang.org/install.html#gnulinux) and [Windows](https://elixir-lang.org/install.html#windows).
 
 ### Install the Elixir package manager, Hex
@@ -56,16 +58,16 @@ mix archive.install hex phx_new
 ```
 
 ### PostgreSQL with Docker
-https://docs.docker.com/desktop/install/mac-install/
+
+[docs.docker.com/desktop/install/mac-install/](https://docs.docker.com/desktop/install/mac-install/)
 
 After installing docker, You can create an instance of the Postgres image:
 
 ```bash
 openssl rand -base64 32 # please note the output. E.g: 5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY=
 # Linux
-export COPI_ENCRYPTION_KEY=5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY=
+export COPI_ENCRYPTION_KEY="5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY="
 export POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD
-
 # Windows
 # $env:COPI_ENCRYPTION_KEY="5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY="
 # $env:POSTGRES_PASSWORD="POSTGRES_LOCAL_PWD"
@@ -81,6 +83,7 @@ You've now got Elixir, Hex, Phoenix and Postgres. You are ready to run Copi loca
 Bonus: set up vscode for elixir dev https://fly.io/phoenix-files/setup-vscode-for-elixir-development/
 
 ### Clone the copi code, then
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -94,17 +97,33 @@ To start your Phoenix server:
 docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
 # Linux
 export POSTGRES_TEST_PWD=POSTGRES_LOCAL_PWD
-
 # Windows
 # $env:POSTGRES_TEST_PWD="POSTGRES_LOCAL_PWD"
-
 mix test
-  *
+mix assets.coverage
 ```
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+
+## Player session and replay storage
+
+Copi uses encrypted cookie sessions and single-node, in-memory capability replay protection by default. This mode does not store player sessions or capability digests in PostgreSQL.
+
+When `DNS_CLUSTER_QUERY` is set, replay registries coordinate through a globally registered Erlang process. A node falls back to its local registry if the global process cannot be reached and synchronizes its active digests when the connection returns. A capability can still be accepted on both sides of a network partition before that synchronization happens.
+
+PostgreSQL-backed player sessions and replay protection are optional:
+
+```bash
+POSTGRES_SESSION_STORE_ENABLED=true
+```
+
+When enabled, the browser cookie contains an opaque session ID protected by the normal Phoenix cookie encryption. The player session written to the `copi_sessions` table is separately encrypted with `COPI_ENCRYPTION_KEY`. Consumed capability digests are inserted atomically into `player_capability_consumptions`, so nodes using the same database share replay protection. PostgreSQL mode takes precedence over the in-memory and clustered replay registries.
+
+Run the database migrations before enabling this option. Configure every application node with the same setting, `SECRET_KEY_BASE`, and `COPI_ENCRYPTION_KEY`. `COPI_ENCRYPTION_KEY` is used for session encryption only when state is written to or read from PostgreSQL; browser cookies continue to use Phoenix's `SECRET_KEY_BASE`. Protect database connections with verified TLS when the database is not on a trusted local network. If PostgreSQL is unavailable, session loading and capability exchange fail rather than falling back to a weaker store.
+
+Changing the storage mode invalidates existing browser sessions. Capability exchange tokens remain valid for 5 minutes and player sessions remain valid for up to 7 days in every mode.
 
 ## More about Phoenix
 
@@ -233,58 +252,70 @@ heroku certs:add cloudflare.crt cloudflare.key
 
 The Copi threat model can be found at [ThreatDragonModels/copi.json](https://github.com/OWASP/cornucopia/blob/master/ThreatDragonModels/copi.json). You may review it by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard).
 
+Please also read [SECURITY.md](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md) to ensure you have taken the appropriate measures to secure Copi if you are running the service yourself.
+
 Here is a short summary of what you need to be aware of:
 
-### ATJ: Mark can access resources or services because there is no authentication requirement, or it was mistakenly assumed authentication would be undertaken by some other system or performed in some previous action.
+### ATJ: Anyone with a game link can watch the game
 
 #### What can go wrong?
 
-Be aware of data exposure risk! Copi does not support authentication.
-We have not implemented Authentication when using Copi, instead we use a secure randomized string to prevent accidental data exposure. Still, an attacker may get hold of such a url by spoofing Copi or other Colleagues in your organization by leveraging various social engineering techniques like establishing a rogue location: [https://capec.mitre.org/data/definitions/616.html](https://capec.mitre.org/data/definitions/616.html).
+Copi does not use user accounts. Anyone with a game link can watch that game. This is intended.
 
-An attacker could use various tools for capturing logs or http requests which may lead to information disclosure if your participants' network has been comporised: [https://capec.mitre.org/data/definitions/569.html](https://capec.mitre.org/data/definitions/569.html).
+Someone may obtain a game link, a short-lived player capability, or a player session cookie through social engineering, logs, a compromised browser, or a compromised network. See [CAPEC-616](https://capec.mitre.org/data/definitions/616.html) and [CAPEC-569](https://capec.mitre.org/data/definitions/569.html).
 
-Do you think this is strange? Indeed, in this day and age, it is, but if we were to implement authentication, we would also have to process more personal information, which would open us up to more threats. We could indeed mitigate those threats, but we would rather remain privacy-friendly and process as little personal information as possible.
+Watching a game does not grant player access. Player access requires a signed capability that expires after 5 minutes. If someone steals that capability before it is used, they may exchange it and become that player. The capability is sent in a POST body, so a proxy or monitoring service that records request bodies may capture it.
+
+By default, Copi remembers used capabilities in the memory of one application node. That record is lost when the node restarts. In a cluster, nodes normally share this check through one global registry. If the nodes lose contact, each node uses its own local record. The same capability may then be accepted by more than one node. Synchronizing the records later cannot undo an exchange that has already succeeded.
+
+An optional PostgreSQL mode avoids these replay gaps by keeping the session and replay records in one database. This makes player sessions depend on the database being available. The session records are encrypted, but anyone who obtains both the database contents and `COPI_ENCRYPTION_KEY` can read them.
+
+The player session cookie is a bearer credential. Anyone who steals a valid copy can act as every player stored in that session until it expires. In the default cookie mode, an individual stolen session cannot be revoked. In PostgreSQL mode, deleting the server-side session record revokes it.
+
+Voting and card play still have race conditions. The votes table has no uniqueness constraint, so two requests made at nearly the same time may create duplicate votes. The database also has no rule that limits a player to one played card per round, so concurrent requests may play more than one card.
 
 #### What are we going to do about it?
 
-We are not working towards implementing authentication in Copi. Instead we are utilizing magic links. Arguable this is not authentication, but it's worth noting that your threat model is not stored on copi.owasp.org, just your game and the cards you voted on. For a threat actor to be able to piece together this information and use it against you, given that he get hold of the magic link, you would have to use your full name and, add the url to your project in the game name field when creating the game. We are working towards informing users that they should under no circumstances do this kind of thing, but even in the case that you still did. The cards themselves are two generic and doesn't contain the sensitive discussions that you had during your game.
-As a security measure, you can choose to run copi on a private cluster
-You should avoid using your own name or the name of a company or project when creating players and games at copi.owasp.org. And remind others not to do so as well. Instead use a pseudonyme and a fake threat model name.
+Use HTTPS. Do not record capability exchange request bodies in proxies, application monitoring, or access logs. Protect `SECRET_KEY_BASE` and `COPI_ENCRYPTION_KEY`, and rotate the affected key if it is exposed.
 
-### CRA: Data is not encrypted at rest by default
+Use PostgreSQL session storage when a capability must be accepted only once across several application nodes. Restrict access to the session tables and use verified TLS for the database connection. Without PostgreSQL mode, accept that a restart or cluster partition can allow a capability to be reused during its 5-minute lifetime.
 
-#### What can go wrong?
+Copi stores game and card choices, but not the discussion held by the players. Do not use a real person, company, or project name for a game or player. Use a pseudonym and a made-up threat model name.
 
-When hosting Copi yourself, be aware that the data at REST might not be encrypted. Even if you tell your threat modeling participants not to use their own name or use information about your company or project when creating the game, they may end up doing it by accident or because of a temporary lapse in memory. The data on copi.owasp.org is encrypted at rest, but if you host the game engine yourself, you need to make sure that the data is encrypted at rest as well, since the configuration does not apply encryption by default. If you don't, an attacker that get hold of the database may be able to see the names of the players and games, which may contain sensitive information. Currently, we do both application-side and server-side encryption. Please make sure you properly configure encryption as outlined in [SECURITY.md](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md).
+Run Copi on a private network if viewing by game link is not suitable for your use case.
 
-#### What are we going to do about it?
+Voting integrity is tracked in [issue 2568](https://github.com/OWASP/cornucopia/issues/2568).
 
-The data at REST on copi.owasp.org is encrypted by default, but we are not using client side encryption. This means that I have the possibility to access the database and see what you entered in your name fields, but I will rather quite my job then be caught snooping on your data. It would be the end of my career if I got caught doing so and the end of Copi if someone else did. When all that is said, we will implement client side encryption on Copi since I wouldn't want anyone to have the possibility to even suspect me of doing such a foolish thing (see: https://github.com/OWASP/cornucopia/issues/2232).
-Ensure that your service provider ensures that the data is encrypted at REST.
-OWASP host the data on Fly.io. Databases built on Fly.io uses volumes, which provide persistent storage. These drives are block-level encrypted with AES-XTS. Fly.io manages the encryption keys, ensuring they are accessible only to privileged processes running your application instances. New volumes (and thus new Postgres apps) are encrypted by default.
-
-### CR6: Romain can read and modify unencrypted data in memory or in transit (e.g. cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems.
+## CR6: Romain can read and modify unencrypted data in memory or in transit (e.g., cryptographic secrets, credentials, session identifiers, personal and commercially-sensitive data), in use or in communications within the application, or between the application and users, or between the application and external systems.
 
 #### What can go wrong?
 
+Production database transport security is not safely configured by default. The DB SSL option is set at startup to either false or verify_none, and the app applies that value directly to the Repo. In other words, the current code path never enables verified TLS to Postgres by default. If the database is not strictly local/private, credentials and application data can be exposed or modified in transit.
 If deploying Copi, configure TLS between the DB and your app and between the nodes in your app cluster.
 Erlang clustering does not happen over TLS by default. This may allow an attacker to launch a MTM attack and do RCE against your cluster. It may also allow an attacker to take over your database connection and both disclose sensitive information and compromise the integrity of the data sent between your database and Copi.
 
+Cookie and TLS hardening still depend on deployment discipline rather than being enforced by the app. The repo ships a fixed secret_key_base in config.exs, the session cookie is only marked secure during app start-up, and HTTPS enforcement is only documented, not enabled by default. If a staging or self-hosted deployment ever runs outside strict prod/TLS settings, session confidentiality and integrity may degrade quickly.
+
 #### What are we going to do about it?
 
-if you deploy Copi yourself, make sure you configure TLS appropriatly according to your needs.
+If you deploy Copi yourself, make sure you configure TLS appropriately according to your needs.
 OWASP host Copi on Fly.io that uses a built-in, WireGuard-encrypted 6PN (IPv6 Private Networking) mesh to automatically connect all your app instances, providing zero-config, secure, private communication with internal DNS (e.g., app-name.internal), allowing services to talk as if they're on the same network, even across regions, for simple and secure microservices communication. This mesh handles complex routing, making it easy to build distributed apps securely without manual VPN setup.
 
-### AZ: Mike can misuse an application by using a valid feature too fast, or too frequently, or other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature.
+### AZ: Mike can misuse an application by using a valid feature too fast, or too frequently, or in any other way that is not intended, or consumes the application's resources, or causes race conditions, or over-utilizes a feature.
 
 #### What can go wrong?
 
 An attacker can deny access to user's by CAPEC 212, functionality misuse by continuing to create an unlimited amount of games and players until the application stops responding.
 
+The current rate-limiting design is easy to evade in common proxy or multi-instance deployments. The rate limiting trusts the left-most X-Forwarded-For value and explicitly skips connection limiting when only remote_ip is available. The counters are kept in the in-memory GenServer. That means spoofed forwarded headers, multiple app nodes, or proxy/header misconfiguration can let an attacker bypass the main abuse-control mechanism. We are more than happy to get suggestions for how to improve the rate-limiting. Currently we are not seeing a lot of issues concerning the misuse of our services in production.
+
+The Fly.io reverse proxy does not strip or rewrite untrusted X-Forwarded-For headers before traffic reaches Phoenix. It is therefore still possible to circumvent the rate-limiter.
+
 #### What are we going to do about it?
 
-We are working on minimizing the probability of functionality misue by implementing rate limiting on the creating of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself. It's vital that you limit the number of sockets the application accept concurrently. On fly.io that is done in the following way: [fly.toml](https://github.com/OWASP/cornucopia/blob/fb9aae62531dde8db154729d0df4aa28a3400063/copi.owasp.org/fly.toml#L27) A 30 socket limit for Copi should allow you to handle 20.000 requests per min if you have 2 single cpu nodes.
+We are working on minimizing the probability of functionality misuse by implementing rate limiting on the creation of games and players (see: [issues/1877](https://github.com/OWASP/cornucopia/issues/1877)). Once that is taken care of, you should be able to configure these limits to prevent DoS attacks when hosting Copi yourself. It's vital that you limit the number of sockets the application accepts concurrently. On fly.io that is done in the following way: [fly.toml](https://github.com/OWASP/cornucopia/blob/fb9aae62531dde8db154729d0df4aa28a3400063/copi.owasp.org/fly.toml#L27) A 30 socket limit for Copi should allow you to handle 20.000 requests per min if you have 2 single cpu nodes Which we have tested against that setup.
+
+When Copi receives traffic directly from Fly Proxy, set `USE_FLY_CLIENT_IP=true`. [Fly.io documents `Fly-Client-IP`](https://fly.io/docs/networking/request-headers/#fly-client-ip) as the client IP address from Fly Proxy's perspective and says it may be a better choice than `X-Forwarded-For`, which must be treated with caution to avoid spoofing. Using it prevents Copi's rate limiter from trusting a client-controlled, left-most `X-Forwarded-For` value. If another reverse proxy is in front of Fly.io, `Fly-Client-IP` contains that proxy's address instead of the original client's address; in that deployment, parse `X-Forwarded-For` using an explicit trusted-proxy configuration.
 
 ### CK: Grant can utilize the application to deny service to some or all of its users
 
@@ -294,10 +325,10 @@ Given that  a threat actor can  execute a distributed denial of service attack a
 
 #### What are we going to do about it?
 
-We are not working towards implementing any specific controls to prevent DoS attacks against copi.owasp.org. Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher then that, Cloudflare, that host the DNS, would identify us as a DoS actor and return HTTP status 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or IP whitelist access to the application.
-If you are hosting Copi yourself please set the rate limiting according to your needs (see: [SECURITY.md](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md)).
+We are not working towards implementing any specific controls to prevent DoS attacks against copi.owasp.org. Most probably, it would be impossible to stop a distributed denial of service attack if executed properly. When we did load testing against copi.owasp.org, we found that the application could handle 20.000 request per min. If we went higher than that, Cloudflare, which hosts the DNS, would identify us as a DoS actor and return HTTP status 520. Still, conceptually, you could execute a DoS from one million machines and deny access to the application for other users. Even though this is a risk, we accept it. If you are worried about distributed DoS, please host the application on a private network or whitelist IP access to the application.
+If you are hosting Copi yourself, please set the rate limiting according to your needs (see: [Configuration](https://github.com/OWASP/cornucopia/blob/master/copi.owasp.org/SECURITY.md#configuration)).
 
 ### Did we do a good job?
 
-We welcome any input or improvments you might be willing to share with us regarding our current threat model.
-Arguably, we created the system before we were able to identify all these threats, and several improvements need to be made to properly balance the inherrant risks of compromise against the current security controls. For anyone choosing to host the game engine, please take this into account.
+We welcome any input or improvements you might be willing to share with us regarding our current threat model.
+Arguably, we created the system before we were able to identify all these threats, and several improvements need to be made to properly balance the inherent risks of compromise against the current security controls. For anyone choosing to host the game engine, please take this into account.

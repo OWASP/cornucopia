@@ -6,7 +6,7 @@ import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import path from "path";
 import type { Deck } from "$domain/deck/deck";
 import { MappingService } from "$lib/services/mappingService";
-import { EDITION_NAMES } from "$lib/services/deckServiceConsts";
+import { EDITION_NAMES, EXTERNAL_DECK_EDITIONS } from "$lib/services/deckServiceConsts";
 const __dirname = path.resolve(path.dirname(''));
 export class DeckService {
 
@@ -18,6 +18,7 @@ export class DeckService {
         { lang: ['en', 'hi', 'uk'], edition: 'mobileapp', version: '1.1' },
         { lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'], edition: 'webapp', version: '3.0' },
         { lang: ['en'], edition: 'companion', version: '1.0' },
+        { lang: ['en'], edition: 'dbd', version: '1.0' },
         { lang: ['en', 'es', 'ru'], edition: 'eop', version: '5.0' }
     ];
     private static readonly decks: Deck[] = [
@@ -120,31 +121,15 @@ export class DeckService {
                 cardObject.suitId = suitObject['id'];
                 cardObject.name = `${cardObject.suitName} (${cardObject.id})`;
                 cardObject.suit = cardObject.suitName.replaceAll(' ', '-').toLocaleLowerCase();
-                cardObject.url = `/edition/${edition}/${cardObject.id}/${version}/${lang}`;
+
+                if (!EXTERNAL_DECK_EDITIONS.has(edition)) {
+                    cardObject.url = `/edition/${edition}/${cardObject.id}/${version}/${lang}`;
+                }
+
                 const cardFolderPath = cardObject.suit + '/' + cardObject.id;
                 cardObject.githubUrl = base + cardFolderPath + '/explanation.md';
 
-                const path: string = `./${base}${cardFolderPath}/technical-note.md`;  // '/explanation.md';
-                let file: string;
-                try {
-                    file = fs.readFileSync(path, 'utf8');
-                    const parsed = fm(file);
-                    cardObject.concept = parsed.body;
-                } catch (e) {
-                    console.error(`Error: Missing technical-note for ${cardObject.id || 'unknown'} at ${path}`, e);
-                    continue;
-                }
-
-                const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
-                try {
-                    cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
-                } catch (e) {
-                    console.error(`Error: Missing explanation for ${cardObject.id || 'unknown'} at ${explanationPath}`, e);
-                    continue;
-                }
-
-
-                if (+card == 0 && +suit == 0) {
+                                if (+card == 0 && +suit == 0) {
                     cardObject.prevous = data['suits'][(+data['suits'].length - 1)]['cards'][+data['suits'][(+data['suits'].length - 1)]['cards'].length - 1]['id'];
                 } else if (Number(card) == 0) {
                     cardObject.prevous = data['suits'][+suit - 1]['cards'][+data['suits'][+suit - 1]['cards'].length - 1]['id'];
@@ -158,6 +143,27 @@ export class DeckService {
                     cardObject.next = data['suits'][+suit + 1]['cards'][0]['id'];
                 } else {
                     cardObject.next = suitObject['cards'][+card + 1]['id'];
+                }
+
+                cards.set(cardObject.id, cardObject);
+
+                const path: string = `./${base}${cardFolderPath}/technical-note.md`;  // '/explanation.md';
+                let file: string;
+                try {
+                    file = fs.readFileSync(path, 'utf8');
+                    const parsed = fm(file);
+                    cardObject.concept = parsed.body;
+                } catch {
+                    console.warn(`Error: Missing technical-note for ${cardObject.id || 'unknown'} at ${path}`);
+                    continue;
+                }
+
+                const explanationPath = `./${base}${cardFolderPath}/explanation.md`;
+                try {
+                    cardObject.summary = fm(fs.readFileSync(explanationPath, 'utf8')).body;
+                } catch {
+                    console.warn(`Error: Missing explanation for ${cardObject.id || 'unknown'} at ${explanationPath}`);
+                    continue;
                 }
 
                 cards.set(cardObject.id, cardObject);

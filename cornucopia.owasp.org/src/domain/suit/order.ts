@@ -27,4 +27,10 @@ export const order = new Map<string,number>([
     ["information-disclosure", 23],
     ["denial-of-service", 24],
     ["elevation-of-privilege", 25],
+    // DBD suits
+    ["scope", 26],
+    ["architecture", 27],
+    ["agency", 28],
+    ["trust", 29],
+    ["porosity", 30]
 ]);

@@ -24,6 +24,12 @@ export const cardIds = [
   "IDA","ID2","ID3","ID4","ID5","ID6","ID7","ID8","ID9","IDX","IDJ","IDQ","IDK",
   "DSA","DS2","DS3","DS4","DS5","DS6","DS7","DS8","DS9","DSX","DSJ","DSQ","DSK",
   "EPA","EP2","EP3","EP4","EP5","EP6","EP7","EP8","EP9","EPX","EPJ","EPQ","EPK",
+  "SCOA","SCO2","SCO3","SCO4","SCO5","SCO6","SCO7","SCO8","SCO9","SCOX","SCOJ","SCOQ","SCOK",
+  "ARCA","ARC2","ARC3","ARC4","ARC5","ARC6","ARC7","ARC8","ARC9","ARCX","ARCJ","ARCQ","ARCK",
+  "AGEA","AGE2","AGE3","AGE4","AGE5","AGE6","AGE7","AGE8","AGE9","AGEX","AGEJ","AGEQ","AGEK",
+  "TRUA","TRU2","TRU3","TRU4","TRU5","TRU6","TRU7","TRU8","TRU9","TRUX","TRUJ","TRUQ","TRUK",
+  "PORA","POR2","POR3","POR4","POR5","POR6","POR7","POR8","POR9","PORX","PORJ","PORQ","PORK",
+  "CORA","COR2","COR3","COR4","COR5","COR6","COR7","COR8","COR9","CORX","CORJ","CORQ","CORK",
   "JOA","JOB","JOAM","JOBM","CORNUCOPIA"];
 
 export function isKnownCardId(id: string | undefined): boolean {

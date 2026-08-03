@@ -3,7 +3,12 @@
   phx-hook="PersistPlayerSession"
   data-game-id={@game.id}
   data-player-id={@player.id}
-  data-store-player-session={if is_nil(@game.finished_at), do: "true", else: "false"}
+  data-store-player-session={
+    cond do
+      @game.finished_at -> "false"
+      true -> nil
+    end
+  }
   class="hidden"
 >
 </div>
@@ -18,6 +23,19 @@
     Go to game summary
   </.link>
 <% else %>
+
+  <div class="mb-4 flex flex-col items-start gap-2">
+    <.primary_button type="button" phx-click="share_hand">
+      <.icon name="hero-share" class="mr-2 h-5 w-5" />
+      Share your hand
+    </.primary_button>
+    <%= if @handoff_url do %>
+      <div class="w-full max-w-2xl">
+        <p class="text-sm text-gray-600">This single-use link expires in 5 minutes.</p>
+        <.copy_url_button uri={@handoff_url} />
+      </div>
+    <% end %>
+  </div>
 
   <%= if @game.started_at do %>
 

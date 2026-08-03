@@ -6,18 +6,18 @@
     import Footer from "$lib/components/footer.svelte";
     import Metadata from "$lib/components/metadata.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
-    import {updateTranslation, updateLang} from "$lib/stores/stores";    
+    import {updateTranslation, updateLang} from "$lib/stores/stores";
     interface Props {
         data: Record<string, unknown>;
         children?: import('svelte').Snippet;
     }
 
     let { data, children }: Props = $props();
-    
+
     // Initialize stores - these run on both server and client
     updateTranslation(data.translation, data.fallbackTranslation);
     updateLang(data.lang);
-    
+
     let content = $derived(data.content.get(data.lang) || data.content.get('en'));
 
     function getFullWidthPages(path : string)
@@ -64,6 +64,8 @@
 <div class="page">
     <Navbar></Navbar>
     <div class="slot-container" class:wide={getFullWidthPages($page.url.pathname)}>
+        <div id="card"></div>
+        <div id="card-face"></div>
         <Breadcrumbs></Breadcrumbs>
         {@render children?.()}
     </div>

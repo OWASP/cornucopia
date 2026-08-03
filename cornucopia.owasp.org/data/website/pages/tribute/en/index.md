@@ -54,6 +54,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - John Herrlin
 - Jerry Hoff
 - Toby Irvine
+- Prajakta Kamble
 - Aashish Kharel
 - Marios Kourtesis
 - Aleksey Krasnov

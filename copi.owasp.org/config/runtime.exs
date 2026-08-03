@@ -19,7 +19,16 @@ import Config
 if System.get_env("PHX_SERVER") do
   config :copi, CopiWeb.Endpoint, server: true
 end
-ssl_verify = if System.get_env("ECTO_SSL_VERIFY") in ~w(false 0), do: [ verify: :verify_none], else: false
+
+dns_cluster_query = System.get_env("DNS_CLUSTER_QUERY")
+
+config :copi,
+  dns_cluster_query: dns_cluster_query,
+  player_capability_cluster_enabled: is_binary(dns_cluster_query) and dns_cluster_query != "",
+  postgres_session_store_enabled: System.get_env("POSTGRES_SESSION_STORE_ENABLED") in ~w(true 1)
+
+ssl_verify =
+  if System.get_env("ECTO_SSL_VERIFY") in ~w(false 0), do: [verify: :verify_none], else: false
 
 if config_env() == :prod do
   database_url =
@@ -52,8 +61,6 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
-  config :copi, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
-
   config :copi, CopiWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [
@@ -65,9 +72,6 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base
-
-    config :copi, dns_cluster_query: System.get_env("DNS_CLUSTER_QUERY")
-
 
   # ## SSL Support
   #

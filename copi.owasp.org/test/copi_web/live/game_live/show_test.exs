@@ -232,17 +232,31 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert html =~ finished_game.name
     end
 
-    test "shows a resume player link when the encrypted session points at this game", %{conn: conn, game: game} do
-      {:ok, player} = Cornucopia.create_player(%{name: "Player Resume", game_id: game.id})
+    test "shows every stored player for this game and no players from other games", %{conn: conn, game: game} do
+      {:ok, first_player} = Cornucopia.create_player(%{name: "First Resume", game_id: game.id})
+      {:ok, second_player} = Cornucopia.create_player(%{name: "Second Resume", game_id: game.id})
+      {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other Resume", game_id: other_game.id})
 
       conn =
         conn
-        |> init_test_session(%{"resume_player_session" => %{"game_id" => game.id, "player_id" => player.id}})
+        |> init_test_session(%{
+          "resume_player_session" => [
+            %{"game_id" => game.id, "player_id" => first_player.id},
+            %{"game_id" => game.id, "player_id" => second_player.id},
+            %{"game_id" => other_game.id, "player_id" => other_player.id}
+          ]
+        })
 
       {:ok, _view, html} = live(conn, "/games/#{game.id}")
 
-      assert html =~ "Resume your player session from this browser session."
-      assert html =~ "/games/#{game.id}/players/#{player.id}"
+      assert html =~ "Resume a player session from this browser."
+      assert html =~ "Resume First Resume"
+      assert html =~ "Resume Second Resume"
+      assert html =~ "/games/#{game.id}/players/#{first_player.id}"
+      assert html =~ "/games/#{game.id}/players/#{second_player.id}"
+      refute html =~ "Resume Other Resume"
+      refute html =~ "/games/#{other_game.id}/players/#{other_player.id}"
     end
 
     test "handle_info with non-matching topic is no-op", %{conn: conn, game: game} do

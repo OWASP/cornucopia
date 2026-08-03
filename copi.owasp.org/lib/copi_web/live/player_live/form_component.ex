@@ -8,7 +8,7 @@ defmodule CopiWeb.PlayerLive.FormComponent do
   @impl true
   def render(assigns) do
     ~H"""
-    <div>
+    <div id="player-capability-exchange" phx-hook="ExchangePlayerCapability">
       <.header1>
         <%= @title %>
       </.header1>
@@ -113,11 +113,12 @@ defmodule CopiWeb.PlayerLive.FormComponent do
               {:ok, player} ->
                 {:ok, updated_game} = Cornucopia.Game.find(socket.assigns.player.game_id)
                 CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+                capability = CopiWeb.PlayerCapability.sign(player.game_id, player.id)
 
                 {:noreply,
                  socket
                  |> assign(:game, updated_game)
-                 |> push_navigate(to: ~p"/games/#{player.game_id}/players/#{player.id}")}
+                 |> push_event("exchange-player-capability", %{capability: capability})}
 
               {:error, :game_already_started} ->
                 # V15.4: Race condition caught by transaction - game started between check and insert

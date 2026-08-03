@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Card } from "../card/card";
 import type { MappingController } from "../mapping/mappingController";
 
@@ -78,6 +77,9 @@ export class CreController {
         const mapping = this.controller.getCardMappings(card.id);
         const links: { document: { doctype: string; id: string }; ltype: string }[] = [];
         const cre = mapping.owasp_cre?.owasp_asvs as [] || [];
+        const cardUrl = card.url.startsWith('http://') || card.url.startsWith('https://')
+            ? card.url
+            : 'https://cornucopia.owasp.org' + card.url;
         cre.forEach((cre) => links.push({
             "document": {
                 "doctype": "CRE",
@@ -87,12 +89,12 @@ export class CreController {
         }));
         return {
             "doctype": "Tool",
-            "id": 'https://cornucopia.owasp.org' + card.url,
+            "id": cardUrl,
             "name": CreController.editions.get(card.edition),
             "section": card.suitNameLocal,
             "description": card.desc,
             "sectionID": card.id,
-            "hyperlink": 'https://cornucopia.owasp.org' + card.url,
+            "hyperlink": cardUrl,
             "links": links,
             "tags": ["Threat modeling", CreController.category.get(card.edition)],
             "tooltype": "Defensive"

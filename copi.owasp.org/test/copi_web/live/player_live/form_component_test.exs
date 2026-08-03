@@ -18,12 +18,11 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
     test "allows player creation under limit", %{conn: conn, game: game} do
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/new")
       
-      result = view
-        |> form("#player-form", player: %{name: "Test Player", game_id: game.id})
-        |> render_submit()
+      view
+      |> form("#player-form", player: %{name: "Test Player", game_id: game.id})
+      |> render_submit()
 
-      # Should redirect to player show page
-      assert {:ok, _view, _html} = follow_redirect(result, conn)
+      assert {:ok, _view, _html} = exchange_player_creation(view, conn)
     end
 
     test "shows error message when limit exceeded", %{conn: conn, game: game, ip: _ip} do
@@ -61,18 +60,22 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
       assert html =~ "can" || html =~ "blank" || html =~ "required" || html =~ "invalid"
 
       # Should still be able to create a valid player (rate limit not consumed)
-      result = view
-        |> form("#player-form", player: %{name: "Valid Player", game_id: game.id})
-        |> render_submit()
+      view
+      |> form("#player-form", player: %{name: "Valid Player", game_id: game.id})
+      |> render_submit()
 
-      # Should redirect successfully
-      assert {:ok, _view, _html} = follow_redirect(result, conn)
+      assert {:ok, _view, _html} = exchange_player_creation(view, conn)
     end
 
     test "updates player successfully without rate limiting", %{conn: conn, game: game} do
       {:ok, player} = Cornucopia.create_player(%{name: "Original", game_id: game.id})
 
       # Go to player show page which has Edit link
+      conn =
+        init_test_session(conn, %{
+          "resume_player_session" => [%{"game_id" => game.id, "player_id" => player.id}]
+        })
+
       {:ok, view, _html} = live(conn, "/games/#{game.id}/players/#{player.id}")
 
       # Verify player name is displayed
@@ -175,5 +178,19 @@ defmodule CopiWeb.PlayerLive.FormComponentTest do
 
       assert updated_socket.assigns.form != nil
     end
+  end
+
+  defp exchange_player_creation(view, conn) do
+    assert_push_event(view, "exchange-player-capability", %{capability: capability})
+
+    exchange_response =
+      post(conn, "/api/player-capabilities/exchange", %{"capability" => capability})
+
+    clean_path = json_response(exchange_response, 200)["redirect_to"]
+    refute clean_path =~ capability
+
+    exchange_response
+    |> recycle()
+    |> live(clean_path)
   end
 end

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {expect, vi, describe, it, beforeEach} from 'vitest';
 import { CreController } from '$domain/cre/creController';
 import type { Card } from '$domain/card/card';
@@ -192,6 +191,24 @@ describe('CreController tests', () => {
 
             expect(result.name).toBe('OWASP Cornucopia Mobile App Edition');
             expect(result.tags).toContain('Mobile Application');
+        });
+
+        it('preserves absolute HTTPS card URLs for external editions', () => {
+            const mockCard: Card = {
+                id: 'S2',
+                edition: 'dbd',
+                suitNameLocal: 'Scope',
+                desc: 'Test external card description',
+                url: 'https://www.digitalbenefits.uk/deck/scope/2',
+                suit: 'scope',
+                value: '2',
+                lang: 'en'
+            } as unknown as Card;
+
+            const result = creController.generateDoc(mockCard);
+
+            expect(result.id).toBe('https://www.digitalbenefits.uk/deck/scope/2');
+            expect(result.hyperlink).toBe('https://www.digitalbenefits.uk/deck/scope/2');
         });
 
         it('should handle empty CRE mappings', () => {

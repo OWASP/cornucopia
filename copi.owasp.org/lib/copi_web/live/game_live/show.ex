@@ -3,6 +3,7 @@ defmodule CopiWeb.GameLive.Show do
 
   alias Copi.Cornucopia.Game
   alias Copi.Cornucopia.DealtCard
+  alias CopiWeb.PlayerSessions
   alias CopiWeb.Resilience
 
   require Logger
@@ -10,8 +11,8 @@ defmodule CopiWeb.GameLive.Show do
   @impl true
   def mount(params, session, socket) do
     ip = socket.assigns[:client_ip] || Map.get(session, "client_ip") || Copi.IPHelper.get_ip_from_socket(socket)
-    resume_player_id = resume_player_id_for_game(session, params["game_id"])
-    {:ok, socket |> assign(:client_ip, ip) |> assign(:resume_player_id, resume_player_id)}
+    resume_player_ids = resume_player_ids_for_game(session, params["game_id"])
+    {:ok, socket |> assign(:client_ip, ip) |> assign(:resume_player_ids, resume_player_ids)}
   end
 
   def on_mount(:default, _params, _session, socket) do
@@ -74,7 +75,11 @@ defmodule CopiWeb.GameLive.Show do
   def handle_info(%{topic: message_topic, event: "game:updated", payload: updated_game}, socket) do
     cond do
       topic(updated_game.id) == message_topic ->
-        {:noreply, assign(socket, :game, updated_game) |> assign(:requested_round, updated_game.rounds_played + 1)}
+        {:noreply,
+         socket
+         |> assign_game(updated_game)
+         |> assign(:requested_round, updated_game.rounds_played + 1)}
+
       true ->
         {:noreply, socket}
     end
@@ -97,14 +102,14 @@ defmodule CopiWeb.GameLive.Show do
       {:ok, requested_round} ->
         {:noreply,
          socket
-         |> assign(:game, game)
+         |> assign_game(game)
          |> assign(:requested_round, requested_round)
          |> assign(:game_load_retry_count, 0)}
 
       {:error, _reason} ->
         {:noreply,
          socket
-         |> assign(:game, game)
+         |> assign_game(game)
          |> assign(:requested_round, current_round)
          |> assign(:game_load_retry_count, 0)
          |> put_flash(:error, "Invalid round value. Showing current round instead.")}
@@ -190,16 +195,18 @@ defmodule CopiWeb.GameLive.Show do
     Application.get_env(:copi, :game_live_show_game_module, Game) || Game
   end
 
-  defp resume_player_id_for_game(session, game_id) do
-    case session["resume_player_session"] do
-      %{"game_id" => ^game_id, "player_id" => player_id} when is_binary(player_id) ->
-        case Ecto.ULID.cast(player_id) do
-          {:ok, valid_player_id} -> valid_player_id
-          :error -> nil
-        end
+  defp assign_game(socket, game) do
+    resume_player_ids = socket.assigns.resume_player_ids
+    resume_players = Enum.filter(game.players, &(&1.id in resume_player_ids))
 
-      _ ->
-        nil
-    end
+    socket
+    |> assign(:game, game)
+    |> assign(:resume_players, resume_players)
+  end
+
+  defp resume_player_ids_for_game(session, game_id) do
+    session["resume_player_session"]
+    |> PlayerSessions.player_ids_for_game(game_id)
+    |> Enum.filter(&(match?({:ok, _}, Ecto.ULID.cast(&1))))
   end
 end
