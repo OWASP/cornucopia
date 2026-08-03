@@ -7,7 +7,7 @@ describe('CardImagesService tests', () => {
         CardImagesService.clear();
     });
 
-    it("should return card image data for eop.", async () => {
+    it("should return card image data for eop.", () => {
         const service = new CardImagesService();
         const cards = service.getCardImages('eop', '5.0');
         expect(cards).toBeDefined();

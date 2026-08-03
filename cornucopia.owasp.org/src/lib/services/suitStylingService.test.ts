@@ -7,7 +7,7 @@ describe('SuitStylingService tests', () => {
         SuitStylingService.clear();
     });
 
-    it("should return suit styling data for eop.", async () => {
+    it("should return suit styling data for eop.", () => {
         const service = new SuitStylingService();
         const suits = service.getSuitStyling('eop', '5.0');
         expect(suits).toBeDefined();
