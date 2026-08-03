@@ -24,7 +24,6 @@
 
 <div
     class="card-render eop {card?.suit} n{eopValue(card?.value)}"
-    class:opaque={!!cardImage?.opaque}
     style={suitStyle ? `--eop-tab:${suitStyle.tab}; --eop-watermark:${suitStyle.watermark}; --eop-royal:${suitStyle.royal};` : ''}
 >
     {#if !['J', 'Q', 'K'].includes(card?.value)}

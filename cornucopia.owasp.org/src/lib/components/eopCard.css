@@ -98,10 +98,6 @@
     color: #fff;
 }
 
-.card-render.eop.opaque .artwork {
-    mix-blend-mode: multiply;
-}
-
 @media (max-width: 1024px) {
     .card-render.eop {
         border-radius: 2.62vw;

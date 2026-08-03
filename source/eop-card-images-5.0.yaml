@@ -19,7 +19,7 @@ cards:
   SPK: { image: "/images/eop-cards/spoofing-k.png" }
 
   TAA: { image: "/images/eop-cards/tampering-a.png" }
-  TA2: { image: "/images/eop-cards/tampering-2.png", opaque: true }
+  TA2: { image: "/images/eop-cards/tampering-2.png" }
   TA3: { image: "/images/eop-cards/tampering-3.png" }
   TA4: { image: "/images/eop-cards/tampering-4.png" }
   TA5: { image: "/images/eop-cards/tampering-5.png" }
@@ -27,7 +27,7 @@ cards:
   TA7: { image: "/images/eop-cards/tampering-7.png" }
   TA8: { image: "/images/eop-cards/tampering-8.png" }
   TA9: { image: "/images/eop-cards/tampering-9.png" }
-  TAX: { image: "/images/eop-cards/tampering-10.png", opaque: true }
+  TAX: { image: "/images/eop-cards/tampering-10.png" }
   TAJ: { image: "/images/eop-cards/tampering-j.png" }
   TAQ: { image: "/images/eop-cards/tampering-q.png" }
   TAK: { image: "/images/eop-cards/tampering-k.png" }
@@ -75,9 +75,9 @@ cards:
   DSK: { image: "/images/eop-cards/denial-of-service-k.png" }
 
   EPA: { image: "/images/eop-cards/elevation-of-privilege-a.png" }
-  EP2: { image: "/images/eop-cards/elevation-of-privilege-2.png", opaque: true }
-  EP3: { image: "/images/eop-cards/elevation-of-privilege-3.png", opaque: true }
-  EP4: { image: "/images/eop-cards/elevation-of-privilege-4.png", opaque: true }
+  EP2: { image: "/images/eop-cards/elevation-of-privilege-2.png" }
+  EP3: { image: "/images/eop-cards/elevation-of-privilege-3.png" }
+  EP4: { image: "/images/eop-cards/elevation-of-privilege-4.png" }
   EP5: { image: "/images/eop-cards/elevation-of-privilege-5.png" }
   EP6: { image: "/images/eop-cards/elevation-of-privilege-6.png" }
   EP7: { image: "/images/eop-cards/elevation-of-privilege-7.png" }

@@ -3,7 +3,7 @@ import * as yaml from "js-yaml";
 import path from "path";
 const __dirname = path.resolve(path.dirname(''));
 
-export type CardImage = { image: string; opaque?: string };
+export type CardImage = { image: string };
 
 export class CardImagesService {
     private static path: string = '/../source/';
