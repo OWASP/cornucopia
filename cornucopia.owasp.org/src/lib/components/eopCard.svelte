@@ -22,17 +22,19 @@
     }
 </script>
 
+{#if card}
 <div
-    class="card-render eop {card?.suit} n{eopValue(card?.value)}"
+    class="card-render eop {card.suit} n{eopValue(card.value)}"
     style={suitStyle ? `--eop-tab:${suitStyle.tab}; --eop-watermark:${suitStyle.watermark}; --eop-royal:${suitStyle.royal};` : ''}
 >
-    {#if !['J', 'Q', 'K'].includes(card?.value)}
-        <span class="watermark" aria-hidden="true">{eopValue(card?.value)}</span>
+    {#if !['J', 'Q', 'K'].includes(card.value)}
+        <span class="watermark" aria-hidden="true">{eopValue(card.value)}</span>
     {/if}
-    <div class="artwork" style={cardImage ? `background-image:url(${cardImage.image});` : ''}></div>
-    <div class="number-tab"><span>{eopValue(card?.value)}</span></div>
+    <div class="artwork" style={cardImage ? `background-image:url('${cardImage.image}');` : ''}></div>
+    <div class="number-tab"><span>{eopValue(card.value)}</span></div>
     <div class="text-block">
-        <p class="suit-name">{card?.suitName}</p>
-        <p class="description">{card?.desc}</p>
+        <p class="suit-name">{card.suitName}</p>
+        <p class="description">{card.desc}</p>
     </div>
 </div>
+{/if}
