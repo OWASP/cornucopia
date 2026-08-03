@@ -6,7 +6,7 @@ const __dirname = path.resolve(path.dirname(''));
 export type SuitStyling = { tab: string; watermark: string; royal: string };
 
 export class SuitStylingService {
-    private static path: string = '/../source/';
+    private static readonly path: string = '/../source/';
     private static cache: object[] = [];
 
     public getSuitStyling(edition: string, version: string): Record<string, SuitStyling> | undefined {

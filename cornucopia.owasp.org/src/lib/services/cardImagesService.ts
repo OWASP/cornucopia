@@ -6,7 +6,7 @@ const __dirname = path.resolve(path.dirname(''));
 export type CardImage = { image: string };
 
 export class CardImagesService {
-    private static path: string = '/../source/';
+    private static readonly path: string = '/../source/';
     private static cache: object[] = [];
 
     // Uses FAILSAFE_SCHEMA like the other loaders
