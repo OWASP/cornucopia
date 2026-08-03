@@ -1,6 +1,7 @@
 import fs from 'fs';
 import * as yaml from "js-yaml";
 import path from "path";
+import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 const __dirname = path.resolve(path.dirname(''));
 
 export type CardImage = { image: string };
@@ -15,6 +16,9 @@ export class CardImagesService {
         if (cached) return cached?.data;
 
         const file = `${__dirname}${CardImagesService.path}${edition}-card-images-${version}.yaml`;
+        // Not every edition has card images configured yet, so a missing file is expected, not an error
+        if (!FileSystemHelper.hasFile(file)) return undefined;
+
         try {
             const yamlData = fs.readFileSync(file, 'utf8');
             const data = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as { cards: Record<string, CardImage> };

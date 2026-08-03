@@ -34,8 +34,8 @@
     language: string;
     capecData?: any;
     versions: string[];
-    cardImages?: Record<string, CardImage>;
-    suitStyling?: Record<string, SuitStyling>;
+    cardImages?: Record<string, Record<string, CardImage>>;
+    suitStyling?: Record<string, Record<string, SuitStyling>>;
   }
 
   let {

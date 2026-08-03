@@ -6,14 +6,14 @@
 
     interface Props {
         card?: Card;
-        cardImages?: Record<string, CardImage>;
-        suitStyling?: Record<string, SuitStyling>;
+        cardImages?: Record<string, Record<string, CardImage>>;
+        suitStyling?: Record<string, Record<string, SuitStyling>>;
     }
 
     let { card, cardImages = undefined, suitStyling = undefined }: Props = $props();
 
-    let cardImage = $derived(cardImages?.[card?.id ?? '']);
-    let suitStyle = $derived(suitStyling?.[card?.suit ?? '']);
+    let cardImage = $derived(cardImages?.[card?.edition ?? '']?.[card?.id ?? '']);
+    let suitStyle = $derived(suitStyling?.[card?.edition ?? '']?.[card?.suit ?? '']);
 
     // handles the conversion of the value for the EoP cards between the copi and cornucopia codebases
     function eopValue(value: string)

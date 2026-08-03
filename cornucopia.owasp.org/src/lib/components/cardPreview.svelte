@@ -19,8 +19,8 @@
         card?: Card;
         mapping: Record<string, unknown>;
         style?: string;
-        cardImages?: Record<string, CardImage>;
-        suitStyling?: Record<string, SuitStyling>;
+        cardImages?: Record<string, Record<string, CardImage>>;
+        suitStyling?: Record<string, Record<string, SuitStyling>>;
     }
 
     let { card = $bindable(), mapping, style = '', cardImages = undefined, suitStyling = undefined }: Props = $props();

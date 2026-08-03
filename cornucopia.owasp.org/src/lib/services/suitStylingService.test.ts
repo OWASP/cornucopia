@@ -1,9 +1,11 @@
-import { expect, describe, it, afterEach } from 'vitest';
+import { expect, describe, it, vi, afterEach } from 'vitest';
+import fs from 'fs';
 import { SuitStylingService } from './suitStylingService';
 
 describe('SuitStylingService tests', () => {
 
     afterEach(() => {
+        vi.restoreAllMocks();
         SuitStylingService.clear();
     });
 
@@ -18,5 +20,23 @@ describe('SuitStylingService tests', () => {
     it('should handle missing styling file', () => {
         const service = new SuitStylingService();
         expect(service.getSuitStyling('invalid-edition', '0.0')).toBeUndefined();
+    });
+
+    it('should return cached suit styling on repeated calls', () => {
+        const service = new SuitStylingService();
+        const first = service.getSuitStyling('eop', '5.0');
+        const second = service.getSuitStyling('eop', '5.0');
+        // uses reference equality to confirm the second call returns the cached object
+        expect(second).toBe(first);
+    });
+
+    it('should handle a styling file that fails to parse', () => {
+        vi.spyOn(console, 'error').mockImplementation(() => undefined);
+        vi.spyOn(fs, 'readFileSync').mockImplementation(() => {
+            throw new Error('boom');
+        });
+
+        const service = new SuitStylingService();
+        expect(service.getSuitStyling('eop', '5.0')).toBeUndefined();
     });
 });
