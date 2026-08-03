@@ -1,0 +1,89 @@
+---
+meta:
+  edition: "eop"
+  component: "card-images"
+  version: "5.0"
+cards:
+  SPA: { image: "/images/eop-cards/spoofing-a.png" }
+  SP2: { image: "/images/eop-cards/spoofing-2.png" }
+  SP3: { image: "/images/eop-cards/spoofing-3.png" }
+  SP4: { image: "/images/eop-cards/spoofing-4.png" }
+  SP5: { image: "/images/eop-cards/spoofing-5.png" }
+  SP6: { image: "/images/eop-cards/spoofing-6.png" }
+  SP7: { image: "/images/eop-cards/spoofing-7.png" }
+  SP8: { image: "/images/eop-cards/spoofing-8.png" }
+  SP9: { image: "/images/eop-cards/spoofing-9.png" }
+  SPX: { image: "/images/eop-cards/spoofing-10.png" }
+  SPJ: { image: "/images/eop-cards/spoofing-j.png" }
+  SPQ: { image: "/images/eop-cards/spoofing-q.png" }
+  SPK: { image: "/images/eop-cards/spoofing-k.png" }
+
+  TAA: { image: "/images/eop-cards/tampering-a.png" }
+  TA2: { image: "/images/eop-cards/tampering-2.png", opaque: true }
+  TA3: { image: "/images/eop-cards/tampering-3.png" }
+  TA4: { image: "/images/eop-cards/tampering-4.png" }
+  TA5: { image: "/images/eop-cards/tampering-5.png" }
+  TA6: { image: "/images/eop-cards/tampering-6.png" }
+  TA7: { image: "/images/eop-cards/tampering-7.png" }
+  TA8: { image: "/images/eop-cards/tampering-8.png" }
+  TA9: { image: "/images/eop-cards/tampering-9.png" }
+  TAX: { image: "/images/eop-cards/tampering-10.png", opaque: true }
+  TAJ: { image: "/images/eop-cards/tampering-j.png" }
+  TAQ: { image: "/images/eop-cards/tampering-q.png" }
+  TAK: { image: "/images/eop-cards/tampering-k.png" }
+
+  REA: { image: "/images/eop-cards/repudiation-a.png" }
+  RE2: { image: "/images/eop-cards/repudiation-2.png" }
+  RE3: { image: "/images/eop-cards/repudiation-3.png" }
+  RE4: { image: "/images/eop-cards/repudiation-4.png" }
+  RE5: { image: "/images/eop-cards/repudiation-5.png" }
+  RE6: { image: "/images/eop-cards/repudiation-6.png" }
+  RE7: { image: "/images/eop-cards/repudiation-7.png" }
+  RE8: { image: "/images/eop-cards/repudiation-8.png" }
+  RE9: { image: "/images/eop-cards/repudiation-9.png" }
+  REX: { image: "/images/eop-cards/repudiation-10.png" }
+  REJ: { image: "/images/eop-cards/repudiation-j.png" }
+  REQ: { image: "/images/eop-cards/repudiation-q.png" }
+  REK: { image: "/images/eop-cards/repudiation-k.png" }
+
+  IDA: { image: "/images/eop-cards/information-disclosure-a.png" }
+  ID2: { image: "/images/eop-cards/information-disclosure-2.png" }
+  ID3: { image: "/images/eop-cards/information-disclosure-3.png" }
+  ID4: { image: "/images/eop-cards/information-disclosure-4.png" }
+  ID5: { image: "/images/eop-cards/information-disclosure-5.png" }
+  ID6: { image: "/images/eop-cards/information-disclosure-6.png" }
+  ID7: { image: "/images/eop-cards/information-disclosure-7.png" }
+  ID8: { image: "/images/eop-cards/information-disclosure-8.png" }
+  ID9: { image: "/images/eop-cards/information-disclosure-9.png" }
+  IDX: { image: "/images/eop-cards/information-disclosure-10.png" }
+  IDJ: { image: "/images/eop-cards/information-disclosure-j.png" }
+  IDQ: { image: "/images/eop-cards/information-disclosure-q.png" }
+  IDK: { image: "/images/eop-cards/information-disclosure-k.png" }
+
+  DSA: { image: "/images/eop-cards/denial-of-service-a.png" }
+  DS2: { image: "/images/eop-cards/denial-of-service-2.png" }
+  DS3: { image: "/images/eop-cards/denial-of-service-3.png" }
+  DS4: { image: "/images/eop-cards/denial-of-service-4.png" }
+  DS5: { image: "/images/eop-cards/denial-of-service-5.png" }
+  DS6: { image: "/images/eop-cards/denial-of-service-6.png" }
+  DS7: { image: "/images/eop-cards/denial-of-service-7.png" }
+  DS8: { image: "/images/eop-cards/denial-of-service-8.png" }
+  DS9: { image: "/images/eop-cards/denial-of-service-9.png" }
+  DSX: { image: "/images/eop-cards/denial-of-service-10.png" }
+  DSJ: { image: "/images/eop-cards/denial-of-service-j.png" }
+  DSQ: { image: "/images/eop-cards/denial-of-service-q.png" }
+  DSK: { image: "/images/eop-cards/denial-of-service-k.png" }
+
+  EPA: { image: "/images/eop-cards/elevation-of-privilege-a.png" }
+  EP2: { image: "/images/eop-cards/elevation-of-privilege-2.png", opaque: true }
+  EP3: { image: "/images/eop-cards/elevation-of-privilege-3.png", opaque: true }
+  EP4: { image: "/images/eop-cards/elevation-of-privilege-4.png", opaque: true }
+  EP5: { image: "/images/eop-cards/elevation-of-privilege-5.png" }
+  EP6: { image: "/images/eop-cards/elevation-of-privilege-6.png" }
+  EP7: { image: "/images/eop-cards/elevation-of-privilege-7.png" }
+  EP8: { image: "/images/eop-cards/elevation-of-privilege-8.png" }
+  EP9: { image: "/images/eop-cards/elevation-of-privilege-9.png" }
+  EPX: { image: "/images/eop-cards/elevation-of-privilege-10.png" }
+  EPJ: { image: "/images/eop-cards/elevation-of-privilege-j.png" }
+  EPQ: { image: "/images/eop-cards/elevation-of-privilege-q.png" }
+  EPK: { image: "/images/eop-cards/elevation-of-privilege-k.png" }
