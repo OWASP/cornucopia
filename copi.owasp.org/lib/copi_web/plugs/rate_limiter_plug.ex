@@ -6,16 +6,18 @@ defmodule CopiWeb.Plugs.RateLimiterPlug do
 
   def init(opts), do: opts
 
-  def call(conn, _opts) do
+  def call(conn, opts) do
+    action = opts[:action] || :connection
+
     case IPHelper.get_ip_source(conn) do
       {:forwarded, ip} ->
-        check_and_limit(conn, ip)
+        check_and_limit(conn, ip, action)
 
       {:remote, ip} ->
         if fly_mode?() do
-          check_and_limit(conn, ip)
+          check_and_limit(conn, ip, action)
         else
-          Logger.debug("Skipping connection rate limiting: only transport IP available")
+          Logger.debug("Skipping rate limiting: only transport IP available")
           conn
         end
 
@@ -25,16 +27,16 @@ defmodule CopiWeb.Plugs.RateLimiterPlug do
     end
   end
 
-  defp check_and_limit(conn, ip) do
-    case RateLimiter.check_rate(ip, :connection) do
+  defp check_and_limit(conn, ip, action) do
+    case RateLimiter.check_rate(ip, action) do
       {:ok, _remaining} ->
         put_session(conn, "client_ip", IPHelper.ip_to_string(ip))
 
       {:error, :rate_limit_exceeded} ->
-        Logger.warning("HTTP connection rate limit exceeded for IP: #{inspect(ip)}")
+        Logger.warning("HTTP #{action} rate limit exceeded for IP: #{inspect(ip)}")
         conn
         |> put_resp_content_type("text/plain")
-        |> send_resp(429, "Too many connections, try again later.")
+        |> send_resp(429, "Too many requests, try again later.")
         |> halt()
     end
   end

@@ -4,6 +4,7 @@ defmodule CopiWeb.ApiControllerTest do
   alias Copi.Repo
   alias Copi.Cornucopia
   alias Copi.Cornucopia.DealtCard
+  alias Copi.RateLimiter
 
   defmodule GameStub do
     def find(id) do
@@ -11,6 +12,19 @@ defmodule CopiWeb.ApiControllerTest do
         :real -> Copi.Cornucopia.Game.find(id)
         :initial_not_found -> {:error, :not_found}
         :initial_transient -> {:error, :temporary}
+        :phantom_player ->
+          {:ok,
+           %Copi.Cornucopia.Game{
+             id: id,
+             rounds_played: 0,
+             started_at: DateTime.utc_now(),
+             players: [
+               %Copi.Cornucopia.Player{
+                 id: "00000000000000000000000001",
+                 dealt_cards: [%Copi.Cornucopia.DealtCard{id: 424_242, played_in_round: nil}]
+               }
+             ]
+           }}
         :second_not_found ->
           step = Application.get_env(:copi, :api_game_stub_step, 0)
           Application.put_env(:copi, :api_game_stub_step, step + 1)
@@ -30,6 +44,14 @@ defmodule CopiWeb.ApiControllerTest do
         :error -> {:error, Ecto.Changeset.add_error(changeset, :played_in_round, "invalid")}
       end
     end
+
+    def update_all(queryable, updates, opts \\ []) do
+      case Application.get_env(:copi, :api_repo_stub_mode, :real) do
+        :real -> Copi.Repo.update_all(queryable, updates, opts)
+        :error -> {0, []}
+        :rollback_error -> {:error, :simulated_failure}
+      end
+    end
   end
 
   setup %{conn: conn} do
@@ -40,7 +62,7 @@ defmodule CopiWeb.ApiControllerTest do
     old_step = Application.get_env(:copi, :api_game_stub_step)
 
     {:ok, game} = Cornucopia.create_game(%{name: "Test Game"})
-    {:ok, player} = Cornucopia.create_player(%{name: "Test Player",game_id: game.id})
+    {:ok, player} = Cornucopia.create_player(%{name: "Test Player", game_id: game.id})
 
     {:ok, card} = Cornucopia.create_card(%{
       category: "Cornucopia", value: "A", description: "desc", misc: "misc",
@@ -119,7 +141,7 @@ defmodule CopiWeb.ApiControllerTest do
 
   test "play_card rejects a player from another game", %{conn: conn, game: game} do
     {:ok, other_game} = Cornucopia.create_game(%{name: "Other Game"})
-    {:ok, other_player} = Cornucopia.create_player(%{name: "Other",game_id: other_game.id})
+    {:ok, other_player} = Cornucopia.create_player(%{name: "Other", game_id: other_game.id})
     {:ok, card2} = Cornucopia.create_card(%{
       category: "C", value: "Q", description: "d", misc: "m",
       edition: "webapp", external_id: "99", language: "en", version: "1",
@@ -252,20 +274,99 @@ defmodule CopiWeb.ApiControllerTest do
     assert json_response(conn, 503)["error"] == "Temporary service issue. Please retry."
   end
 
-  test "play_card returns 422 when dealt card update fails", %{conn: conn, game: game, player: player, dealt_card: dealt_card} do
-    {:ok, _game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
+  test "play_card returns 409 when card was already played by another request", %{
+    conn: conn,
+    game: game,
+    player: player,
+    dealt_card: dealt_card
+  } do
     Application.put_env(:copi, :api_game_module, GameStub)
     Application.put_env(:copi, :api_repo_module, RepoStub)
     Application.put_env(:copi, :api_game_stub_mode, :real)
     Application.put_env(:copi, :api_repo_stub_mode, :error)
+    {:ok, _game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
 
-    conn = put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
-      "game_id" => game.id,
-      "player_id" => player.id,
-      "dealt_card_id" => to_string(dealt_card.id)
-    })
+    conn =
+      put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+        "game_id" => game.id,
+        "player_id" => player.id,
+        "dealt_card_id" => to_string(dealt_card.id)
+      })
 
-    assert json_response(conn, 422)["error"] == "Could not play card"
+    assert json_response(conn, 409)["error"] == "Card was already played by another request"
+  end
+
+  test "play_card returns 503 when the card play transaction fails", %{
+    conn: conn,
+    game: game,
+    player: player,
+    dealt_card: dealt_card
+  } do
+    Application.put_env(:copi, :api_game_module, GameStub)
+    Application.put_env(:copi, :api_repo_module, RepoStub)
+    Application.put_env(:copi, :api_game_stub_mode, :real)
+    Application.put_env(:copi, :api_repo_stub_mode, :rollback_error)
+    {:ok, _game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
+
+    conn =
+      put(conn, "/api/games/#{game.id}/players/#{player.id}/card", %{
+        "game_id" => game.id,
+        "player_id" => player.id,
+        "dealt_card_id" => to_string(dealt_card.id)
+      })
+
+    assert json_response(conn, 503)["error"] == "Temporary service issue. Please retry."
+  end
+
+  test "play_card returns 409 when the player row disappears before the play is committed", %{} do
+    game_id = "00000000000000000000000002"
+    player_id = "00000000000000000000000001"
+
+    Application.put_env(:copi, :api_game_module, GameStub)
+    Application.put_env(:copi, :api_repo_module, RepoStub)
+    Application.put_env(:copi, :api_game_stub_mode, :phantom_player)
+    Application.put_env(:copi, :api_repo_stub_mode, :real)
+
+    conn =
+      build_conn()
+      |> init_test_session(%{
+        "resume_player_session" => %{"game_id" => game_id, "player_id" => player_id}
+      })
+      |> put("/api/games/#{game_id}/players/#{player_id}/card", %{
+        "dealt_card_id" => "424242"
+      })
+
+    assert json_response(conn, 409)["error"] == "Card was already played by another request"
+  end
+
+  test "concurrent play_card requests only one succeeds", %{
+    game: game,
+    player: player,
+    dealt_card: dealt_card
+  } do
+    {:ok, _game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
+
+    tasks =
+      for _ <- 1..10 do
+        Task.async(fn ->
+          build_conn()
+          |> init_test_session(%{
+            "resume_player_session" => %{"game_id" => game.id, "player_id" => player.id}
+          })
+          |> put("/api/games/#{game.id}/players/#{player.id}/card", %{
+            "dealt_card_id" => to_string(dealt_card.id)
+          })
+          |> Map.get(:status)
+        end)
+      end
+
+    results = Task.await_many(tasks, 5000)
+
+    successes = Enum.count(results, &(&1 == 200))
+    conflicts = Enum.count(results, &(&1 == 409))
+
+    assert successes == 1
+    assert conflicts == 9
   end
 
   test "play_card returns 422 when game has not started", %{conn: conn} do
@@ -305,6 +406,110 @@ defmodule CopiWeb.ApiControllerTest do
     })
 
     assert json_response(conn, 422)["error"] == "Game has already ended"
+  end
+
+  test "concurrent play_card requests for different cards only allow one play per round", %{
+    game: game,
+    player: player
+  } do
+    {:ok, _game} = Cornucopia.update_game(game, %{started_at: DateTime.utc_now()})
+
+    {:ok, card_a} =
+      Cornucopia.create_card(%{
+        category: "Cornucopia",
+        value: "A",
+        description: "desc",
+        misc: "misc",
+        edition: "webapp",
+        external_id: "10",
+        language: "en",
+        version: "1",
+        owasp_scp: [],
+        owasp_devguide: [],
+        owasp_asvs: [],
+        owasp_appsensor: [],
+        capec: [],
+        safecode: [],
+        owasp_mastg: [],
+        owasp_masvs: [],
+        biml: "biml",
+        url: "http://example.com"
+      })
+
+    {:ok, card_b} =
+      Cornucopia.create_card(%{
+        category: "Cornucopia",
+        value: "B",
+        description: "desc",
+        misc: "misc",
+        edition: "webapp",
+        external_id: "11",
+        language: "en",
+        version: "1",
+        owasp_scp: [],
+        owasp_devguide: [],
+        owasp_asvs: [],
+        owasp_appsensor: [],
+        capec: [],
+        safecode: [],
+        owasp_mastg: [],
+        owasp_masvs: [],
+        biml: "biml",
+        url: "http://example.com"
+      })
+
+    dealt_a = Repo.insert!(%DealtCard{player_id: player.id, card_id: card_a.id})
+    dealt_b = Repo.insert!(%DealtCard{player_id: player.id, card_id: card_b.id})
+
+    tasks =
+      for dealt <- [dealt_a, dealt_b] do
+        Task.async(fn ->
+          build_conn()
+          |> init_test_session(%{
+            "resume_player_session" => %{"game_id" => game.id, "player_id" => player.id}
+          })
+          |> put("/api/games/#{game.id}/players/#{player.id}/card", %{
+            "dealt_card_id" => to_string(dealt.id)
+          })
+          |> Map.get(:status)
+        end)
+      end
+
+    results = Task.await_many(tasks, 5000)
+
+    assert Enum.count(results, &(&1 == 200)) == 1
+    assert Enum.all?(results, &(&1 in [200, 403, 409]))
+
+    played =
+      [Repo.get(DealtCard, dealt_a.id), Repo.get(DealtCard, dealt_b.id)]
+      |> Enum.count(&(&1.played_in_round != nil))
+
+    assert played == 1
+  end
+
+  test "play_card endpoint returns 429 once the api rate limit is exhausted", %{} do
+    ip = "10.99.0.1"
+    ip_tuple = {10, 99, 0, 1}
+    limit = RateLimiter.get_config().limits.api
+
+    :sys.replace_state(RateLimiter, fn state ->
+      now = System.monotonic_time(:millisecond)
+      timestamps = for _ <- 1..limit, do: now
+      requests = Map.put(state.requests, {ip_tuple, :api}, timestamps)
+      %{state | requests: requests}
+    end)
+
+    conn =
+      build_conn()
+      |> put_req_header("x-forwarded-for", ip)
+      |> put("/api/games/00000000000000000000000001/players/00000000000000000000000002/card", %{
+        "dealt_card_id" => "1"
+      })
+
+    assert conn.status == 429
+    assert conn.resp_body == "Too many requests, try again later."
+
+    RateLimiter.clear_ip(ip_tuple)
   end
 
   test "exchange stores an encrypted player capability in the session", %{conn: conn, game: game, player: player} do
