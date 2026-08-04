@@ -70,6 +70,20 @@ defmodule Copi.RateLimiterTest do
 
       # Connection should still be available
       assert {:ok, _} = RateLimiter.check_rate(ip, :connection)
+
+      # API should still be available
+      assert {:ok, _} = RateLimiter.check_rate(ip, :api)
+    end
+
+    test "blocks requests over the api limit", %{ip: ip} do
+      config = RateLimiter.get_config()
+      limit = config.limits.api
+
+      for _ <- 1..limit do
+        assert {:ok, _} = RateLimiter.check_rate(ip, :api)
+      end
+
+      assert {:error, :rate_limit_exceeded} = RateLimiter.check_rate(ip, :api)
     end
 
     test "different IPs have independent limits" do
@@ -139,7 +153,9 @@ defmodule Copi.RateLimiterTest do
       assert state.limits.game_creation == 20
       assert state.limits.player_creation == 60
       assert state.limits.connection == 133
+      assert state.limits.api == 60
       assert state.windows.connection == 1
+      assert state.windows.api == 60
 
       System.delete_env("RATE_LIMIT_GAME_CREATION_LIMIT")
       System.delete_env("RATE_LIMIT_PLAYER_CREATION_LIMIT")
@@ -159,10 +175,12 @@ defmodule Copi.RateLimiterTest do
       assert Map.has_key?(config.limits, :game_creation)
       assert Map.has_key?(config.limits, :player_creation)
       assert Map.has_key?(config.limits, :connection)
+      assert Map.has_key?(config.limits, :api)
 
       assert Map.has_key?(config.windows, :game_creation)
       assert Map.has_key?(config.windows, :player_creation)
       assert Map.has_key?(config.windows, :connection)
+      assert Map.has_key?(config.windows, :api)
     end
 
     test "has sensible default values" do

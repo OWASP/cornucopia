@@ -23,6 +23,7 @@ The application uses a GenServer-based rate limiter that tracks requests per IP 
 1. **Game Creation**: Limited to prevent mass game creation attacks
 2. **Player Creation**: Limited to prevent player spam
 3. **WebSocket Connections**: Limited to prevent connection flooding
+4. **API Actions**: Limited to prevent API endpoint abuse
 
 ### Default Rate Limits
 
@@ -31,6 +32,7 @@ The application uses a GenServer-based rate limiter that tracks requests per IP 
 | Game Creation | 10 requests | per hour per IP |
 | Player Creation | 60 requests | per hour per IP |
 | WebSocket Connections | 133 connections | per second per IP |
+| API Actions | 60 requests | per minute per IP |
 
 ### Configuration
 
@@ -48,6 +50,10 @@ RATE_LIMIT_PLAYER_CREATION_WINDOW=3600  # seconds
 # Connection limits
 RATE_LIMIT_CONNECTION_LIMIT=133
 RATE_LIMIT_CONNECTION_WINDOW=1  # seconds
+
+# API limits
+RATE_LIMIT_API_LIMIT=60
+RATE_LIMIT_API_WINDOW=60  # seconds
 
 # This option can be used for fly.io so that the application uses a validated client IP.
 # By default this option is set to false, which means that the `X-Forwarded-For` header will be used.

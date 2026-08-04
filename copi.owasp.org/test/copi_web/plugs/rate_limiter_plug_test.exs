@@ -46,7 +46,7 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
       |> RateLimiterPlug.call([])
 
     assert conn.status == 429
-    assert conn.resp_body == "Too many connections, try again later."
+    assert conn.resp_body == "Too many requests, try again later."
     assert conn.halted
   end
 
@@ -100,7 +100,65 @@ defmodule CopiWeb.Plugs.RateLimiterPlugTest do
 
   test "init/1 returns opts unchanged" do
     assert RateLimiterPlug.init([]) == []
+    assert RateLimiterPlug.init(action: :api) == [action: :api]
     assert RateLimiterPlug.init(key: :value) == [key: :value]
+  end
+
+  test "uses default action when no opts given" do
+    conn =
+      conn(:get, "/")
+      |> put_req_header("x-forwarded-for", "10.0.0.1")
+      |> init_test_session(%{})
+      |> RateLimiterPlug.call([])
+
+    assert conn.status != 429
+    assert get_session(conn, "client_ip") == "10.0.0.1"
+  end
+
+  test "uses specified action from opts" do
+    ip = "10.0.0.1"
+    ip_tuple = {10, 0, 0, 1}
+    config = RateLimiter.get_config()
+    limit = config.limits.api
+
+    :sys.replace_state(Copi.RateLimiter, fn state ->
+      now = System.monotonic_time(:millisecond)
+      timestamps = for _ <- 1..limit, do: now
+      new_requests = Map.put(state.requests, {ip_tuple, :api}, timestamps)
+      %{state | requests: new_requests}
+    end)
+
+    conn =
+      conn(:get, "/")
+      |> put_req_header("x-forwarded-for", ip)
+      |> init_test_session(%{})
+      |> RateLimiterPlug.call(action: :api)
+
+    assert conn.status == 429
+    assert conn.resp_body == "Too many requests, try again later."
+    assert conn.halted
+  end
+
+  test "api action limit is independent of connection limit" do
+    ip = "10.0.0.1"
+    ip_tuple = {10, 0, 0, 1}
+    conn_limit = RateLimiter.get_config().limits.connection
+
+    :sys.replace_state(Copi.RateLimiter, fn state ->
+      now = System.monotonic_time(:millisecond)
+      timestamps = for _ <- 1..conn_limit, do: now
+      new_requests = Map.put(state.requests, {ip_tuple, :connection}, timestamps)
+      %{state | requests: new_requests}
+    end)
+
+    conn =
+      conn(:get, "/")
+      |> put_req_header("x-forwarded-for", ip)
+      |> init_test_session(%{})
+      |> RateLimiterPlug.call(action: :api)
+
+    assert conn.status != 429
+    refute conn.halted
   end
 
   test "skips rate limiting when remote_ip is explicitly nil" do

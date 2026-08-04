@@ -13,15 +13,12 @@ defmodule CopiWeb.Router do
     plug CopiWeb.Plugs.RateLimiterPlug
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   pipeline :browser_api do
     plug :accepts, ["json"]
     plug :fetch_session
     plug :protect_from_forgery
     plug :put_secure_browser_headers, SecurityHeaders.browser_headers()
+    plug CopiWeb.Plugs.RateLimiterPlug, action: :api
   end
 
   scope "/", CopiWeb do
@@ -63,11 +60,6 @@ defmodule CopiWeb.Router do
   scope "/", CopiWeb do
     get "/health", HealthController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", CopiWeb do
-  #   pipe_through :api
-  # end
 
   # Enables LiveDashboard only for development
   #
