@@ -104,112 +104,121 @@ defmodule CopiWeb.ApiController do
 
     case game_mod.find(game_id) do
       {:ok, game} ->
-        player = Enum.find(game.players, fn player -> player.id == player_id end)
+        cond do
+          is_nil(game.started_at) ->
+            conn |> put_status(:unprocessable_entity) |> json(%{"error" => "Game has not started yet"})
 
-        if player do
-          dealt_card = Enum.find(player.dealt_cards, fn dealt_card -> Integer.to_string(dealt_card.id) == dealt_card_id end)
+          not is_nil(game.finished_at) ->
+            conn |> put_status(:unprocessable_entity) |> json(%{"error" => "Game has already ended"})
 
-          if dealt_card do
-            current_round = game.rounds_played + 1
+          true ->
+            player = Enum.find(game.players, fn player -> player.id == player_id end)
 
-            cond do
-              dealt_card.played_in_round ->
-                conn |> put_status(:not_acceptable) |> json(%{"error" => "Card already played"})
+            if player do
+              dealt_card = Enum.find(player.dealt_cards, fn dealt_card -> Integer.to_string(dealt_card.id) == dealt_card_id end)
 
-              Enum.find(player.dealt_cards, fn dealt_card -> dealt_card.played_in_round == current_round end) ->
-                conn |> put_status(:forbidden) |> json(%{"error" => "Player already played a card in this round"})
+              if dealt_card do
+                current_round = game.rounds_played + 1
 
-              true ->
-                result =
-                  Copi.Repo.transaction(fn ->
-                    # Lock the player row to serialize plays by the same player so
-                    # the conditional update below always sees the freshest state.
-                    case Copi.Repo.get(Copi.Cornucopia.Player, player_id, lock: "FOR UPDATE") do
-                      nil ->
-                        Copi.Repo.rollback(:player_missing)
+                cond do
+                  dealt_card.played_in_round ->
+                    conn |> put_status(:not_acceptable) |> json(%{"error" => "Card already played"})
 
-                      _player ->
-                        case repo_mod.update_all(
-                               from(dc in Copi.Cornucopia.DealtCard,
-                                 where: dc.id == ^dealt_card.id and is_nil(dc.played_in_round),
-                                 where:
-                                   not exists(
-                                     subquery(
-                                       from(pc in Copi.Cornucopia.DealtCard,
-                                         where:
-                                           pc.player_id == ^player_id and
-                                             pc.played_in_round == ^current_round and
-                                             pc.id != ^dealt_card.id,
-                                         select: pc.id
+                  Enum.find(player.dealt_cards, fn dealt_card -> dealt_card.played_in_round == current_round end) ->
+                    conn |> put_status(:forbidden) |> json(%{"error" => "Player already played a card in this round"})
+
+                  true ->
+                    result =
+                      Copi.Repo.transaction(fn ->
+                        # Lock the player row to serialize plays by the same player so
+                        # the conditional update below always sees the freshest state.
+                        case Copi.Repo.get(Copi.Cornucopia.Player, player_id, lock: "FOR UPDATE") do
+                          nil ->
+                            Copi.Repo.rollback(:player_missing)
+
+                          _player ->
+                            case repo_mod.update_all(
+                                   from(dc in Copi.Cornucopia.DealtCard,
+                                     where: dc.id == ^dealt_card.id and is_nil(dc.played_in_round),
+                                     where:
+                                       not exists(
+                                         subquery(
+                                           from(pc in Copi.Cornucopia.DealtCard,
+                                             where:
+                                               pc.player_id == ^player_id and
+                                                 pc.played_in_round == ^current_round and
+                                                 pc.id != ^dealt_card.id,
+                                             select: pc.id
+                                           )
+                                         )
                                        )
-                                     )
-                                   )
-                               ),
-                               set: [played_in_round: current_round]
-                             ) do
-                          {1, _} ->
-                            :ok
+                                   ),
+                                   set: [played_in_round: current_round]
+                                 ) do
+                              {1, _} ->
+                                :ok
 
-                          {0, _} ->
-                            Copi.Repo.rollback(:already_played)
+                              {0, _} ->
+                                Copi.Repo.rollback(:already_played)
+
+                              {:error, reason} ->
+                                Copi.Repo.rollback(reason)
+                            end
+                        end
+                      end)
+
+                    case result do
+                      {:ok, :ok} ->
+                        case game_mod.find(game.id) do
+                          {:ok, updated_game} ->
+                            CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
+                            conn |> json(%{"id" => dealt_card.id})
+
+                          {:error, :not_found} ->
+                            Logger.warning("Game disappeared after card update: #{inspect(game.id)}")
+                            conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
 
                           {:error, reason} ->
-                            Copi.Repo.rollback(reason)
+                            Logger.warning("Transient game reload failure after card update for game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
+                            conn |> put_status(:service_unavailable) |> json(%{"error" => "Temporary service issue. Please retry."})
                         end
-                    end
-                  end)
 
-                case result do
-                  {:ok, :ok} ->
-                    case game_mod.find(game.id) do
-                      {:ok, updated_game} ->
-                        CopiWeb.Endpoint.broadcast(topic(game.id), "game:updated", updated_game)
-                        conn |> json(%{"id" => dealt_card.id})
+                      {:error, :already_played} ->
+                        Logger.warning(
+                          "Card play race for dealt_card_id=#{inspect(dealt_card.id)}, player_id=#{inspect(player_id)} in game_id=#{inspect(game_id)}"
+                        )
 
-                      {:error, :not_found} ->
-                        Logger.warning("Game disappeared after card update: #{inspect(game.id)}")
-                        conn |> put_status(:not_found) |> json(%{"error" => "Could not find game"})
+                        conn
+                        |> put_status(:conflict)
+                        |> json(%{"error" => "Card was already played by another request"})
+
+                      {:error, :player_missing} ->
+                        Logger.warning(
+                          "Player #{inspect(player_id)} disappeared before card play in game_id=#{inspect(game_id)}"
+                        )
+
+                        conn
+                        |> put_status(:conflict)
+                        |> json(%{"error" => "Card was already played by another request"})
 
                       {:error, reason} ->
-                        Logger.warning("Transient game reload failure after card update for game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
-                        conn |> put_status(:service_unavailable) |> json(%{"error" => "Temporary service issue. Please retry."})
+                        Logger.warning(
+                          "Card play transaction failed for game_id=#{inspect(game_id)}, player_id=#{inspect(player_id)}, reason=#{inspect(reason)}"
+                        )
+
+                        conn
+                        |> put_status(:service_unavailable)
+                        |> json(%{"error" => "Temporary service issue. Please retry."})
                     end
-
-                  {:error, :already_played} ->
-                    Logger.warning(
-                      "Card play race for dealt_card_id=#{inspect(dealt_card.id)}, player_id=#{inspect(player_id)} in game_id=#{inspect(game_id)}"
-                    )
-
-                    conn
-                    |> put_status(:conflict)
-                    |> json(%{"error" => "Card was already played by another request"})
-
-                  {:error, :player_missing} ->
-                    Logger.warning(
-                      "Player #{inspect(player_id)} disappeared before card play in game_id=#{inspect(game_id)}"
-                    )
-
-                    conn
-                    |> put_status(:conflict)
-                    |> json(%{"error" => "Card was already played by another request"})
-
-                  {:error, reason} ->
-                    Logger.warning(
-                      "Card play transaction failed for game_id=#{inspect(game_id)}, player_id=#{inspect(player_id)}, reason=#{inspect(reason)}"
-                    )
-
-                    conn
-                    |> put_status(:service_unavailable)
-                    |> json(%{"error" => "Temporary service issue. Please retry."})
                 end
+              else
+                Logger.debug("Dealt card #{inspect(dealt_card_id)} not found for player: #{inspect(player_id)}")
+                conn |> put_status(:not_found) |> json(%{"error" => "Could not find player and dealt card"})
+              end
+            else
+              Logger.debug("Player #{inspect(player_id)} not found in game: #{inspect(game_id)}")
+              conn |> put_status(:not_found) |> json(%{"error" => "Player not found in this game"})
             end
-          else
-            Logger.debug("Dealt card #{inspect(dealt_card_id)} not found for player: #{inspect(player_id)}")
-            conn |> put_status(:not_found) |> json(%{"error" => "Could not find player and dealt card"})
-          end
-        else
-          Logger.debug("Player #{inspect(player_id)} not found in game: #{inspect(game_id)}")
-          conn |> put_status(:not_found) |> json(%{"error" => "Player not found in this game"})
         end
 
       {:error, :not_found} ->

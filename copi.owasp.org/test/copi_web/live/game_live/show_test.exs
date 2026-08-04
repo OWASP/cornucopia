@@ -175,6 +175,27 @@ defmodule CopiWeb.GameLive.ShowTest do
       assert render(show_live) =~ game.name
     end
 
+    test "handle_info sets requested_round to rounds_played for finished game", %{conn: conn, game: game} do
+      {:ok, finished_game} =
+        Cornucopia.update_game(game, %{
+          started_at: DateTime.truncate(DateTime.utc_now(), :second),
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second),
+          rounds_played: 3
+        })
+
+      {:ok, finished_game_loaded} = Cornucopia.Game.find(finished_game.id)
+      {:ok, show_live, _html} = live(conn, "/games/#{finished_game_loaded.id}")
+
+      send(show_live.pid, %{
+        topic: "game:#{finished_game_loaded.id}",
+        event: "game:updated",
+        payload: finished_game_loaded
+      })
+
+      :timer.sleep(50)
+      refute render(show_live) =~ "Round 4:"
+    end
+
     test "display_game_session/1 returns correct label for each edition", %{conn: _conn, game: _game} do
       alias CopiWeb.GameLive.Show
       assert Show.display_game_session("webapp")    == "Cornucopia Web Session:"
