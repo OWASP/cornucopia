@@ -17,7 +17,7 @@
 
 /* this is only a fallback until the image loads in royal cards */
 .card-render.eop.nJ, .card-render.eop.nQ, .card-render.eop.nK {
-    background: var(--eop-royal);
+    background: var(--royal);
 }
 
 .card-render.eop .watermark {
@@ -28,7 +28,7 @@
     font-family: "Segoe UI", "Segoe", sans-serif;
     font-size: 106cqw;
     line-height: 1;
-    color: var(--eop-watermark);
+    color: var(--watermark);
 }
 
 .card-render.eop .artwork {
@@ -47,7 +47,7 @@
     width: 26.2cqw;
     height: 31cqw;
     border-radius: 0 5cqw 5cqw 0;
-    background: var(--eop-tab);
+    background: var(--tab);
     display: flex;
     align-items: center;
     justify-content: center;

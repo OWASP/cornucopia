@@ -5,9 +5,10 @@
     import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
     import CompanionCardMapping from "./companionCardMapping.svelte";
     import EopCardMapping from "./eopCardMapping.svelte";
-    import EopCard from "./eopCard.svelte";
     import type { CardImage } from "$lib/services/cardImagesService";
     import type { SuitStyling } from "$lib/services/suitStylingService";
+    // This ensures automatically including new deck's CSS without having to manually import it here
+    import.meta.glob('./*Card.css', { eager: true }); // example: eopCard.css
 
     const mappingComponents: Record<string, Component<any>> = {
         mobileapp: MobileAppCardMapping,
@@ -26,6 +27,14 @@
     let { card = $bindable(), mapping, style = '', cardImages = undefined, suitStyling = undefined }: Props = $props();
     let previewStyle = $derived(style ? ' ' + style : '');
     let MappingComponent = $derived(mappingComponents[card?.edition ?? '']);
+    let editionCardImages = $derived(cardImages?.[card?.edition ?? '']);
+    let cardImage = $derived(editionCardImages?.[card?.id ?? '']);
+    let suitStyle = $derived(suitStyling?.[card?.edition ?? '']?.[card?.suit ?? '']);
+
+    function formatCardValue(value: string)
+    {
+        return value === 'X' ? '10' : value;
+    }
 
     function getSuitColor(suit : string, id: string)
     {
@@ -62,8 +71,21 @@
     }
 </script>
 
-{#if card?.edition === 'eop'}
-<EopCard {card} {cardImages} {suitStyling} />
+{#if card && editionCardImages}
+<div
+    class="card-render {card.edition} {card.suit} n{formatCardValue(card.value)}"
+    style={suitStyle ? `--tab:${suitStyle.tab}; --watermark:${suitStyle.watermark}; --royal:${suitStyle.royal};` : ''}
+>
+    {#if !['J', 'Q', 'K'].includes(card.value)}
+        <span class="watermark" aria-hidden="true">{formatCardValue(card.value)}</span>
+    {/if}
+    <div class="artwork" style={cardImage ? `background-image:url('${cardImage.image}');` : ''}></div>
+    <div class="number-tab"><span>{formatCardValue(card.value)}</span></div>
+    <div class="text-block">
+        <p class="suit-name">{card.suitName}</p>
+        <p class="description">{card.desc}</p>
+    </div>
+</div>
 {:else}
 <div class="card-render">
     <div class="left {getLeftRibbonClass(card?.suit, card?.suitId, card?.value)}">
