@@ -137,21 +137,42 @@ defmodule CopiWeb.GameLive.Show do
         all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
         players = game.players
         player_count = length(players)
+        repo = repo_module()
 
-        # Deal cards to players in round-robin fashion
-        all_cards
-        |> Enum.with_index()
-        |> Enum.each(fn {card, i} ->
-          Copi.Repo.insert!(%DealtCard{
-            card_id: card.id,
-            player_id: Enum.at(players, rem(i, player_count)).id
-          })
-        end)
+        # Deal cards and start the game atomically: either everything
+        # succeeds, or nothing is persisted, preventing partial card
+        # distribution if a failure occurs mid-loop.
+        transaction_result =
+          repo.transaction(fn ->
+            all_cards
+            |> Enum.with_index()
+            |> Enum.each(fn {card, i} ->
+              case repo.insert(%DealtCard{
+                     card_id: card.id,
+                     player_id: Enum.at(players, rem(i, player_count)).id
+                   }) do
+                {:ok, _dealt_card} -> :ok
+                {:error, changeset} -> repo.rollback(changeset)
+              end
+            end)
 
-        # Update game with start time
-        {:ok, updated_game} = Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)})
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-        {:noreply, assign(socket, :game, updated_game)}
+            case Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
+              {:ok, updated_game} -> updated_game
+              {:error, changeset} -> repo.rollback(changeset)
+            end
+          end)
+
+        case transaction_result do
+          {:ok, updated_game} ->
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
+
+          {:error, _reason} ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Failed to start game due to a system error. Please try again.")
+             |> assign(:game, game)}
+        end
     end
   end
 
@@ -193,6 +214,10 @@ defmodule CopiWeb.GameLive.Show do
 
   defp game_module do
     Application.get_env(:copi, :game_live_show_game_module, Game) || Game
+  end
+
+  defp repo_module do
+    Application.get_env(:copi, :game_live_show_repo_module, Copi.Repo) || Copi.Repo
   end
 
   defp assign_game(socket, game) do
