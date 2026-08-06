@@ -2,13 +2,9 @@
     import type { Component } from "svelte";
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
-    import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
-    import CompanionCardMapping from "./companionCardMapping.svelte";
     import EopCardMapping from "./eopCardMapping.svelte";
 
     const mappingComponents: Record<string, Component<any>> = {
-        mobileapp: MobileAppCardMapping,
-        companion: CompanionCardMapping,
         eop: EopCardMapping
     };
 
