@@ -25,7 +25,7 @@
 		"@sveltejs/kit": "^2.70.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@types/node": "^26.1.2",
-		"@typescript-eslint/parser": "^8.65.0",
+		"@typescript-eslint/parser": "^8.66.0",
 		"@vitest/coverage-v8": "^4.1.8",
 		"dotenv": "^17.4.2",
 		"eslint": "^10.8.0",
