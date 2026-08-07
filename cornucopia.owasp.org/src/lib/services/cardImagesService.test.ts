@@ -39,4 +39,14 @@ describe('CardImagesService tests', () => {
         const service = new CardImagesService();
         expect(service.getCardImages('eop', '5.0')).toBeUndefined();
     });
+
+    it('should not silently cache a file missing the "cards" key', () => {
+        const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+        vi.spyOn(fs, 'readFileSync').mockReturnValue('meta:\n  edition: "eop"\n');
+
+        const service = new CardImagesService();
+        expect(service.getCardImages('eop', '5.0')).toBeUndefined();
+        expect(service.getCardImages('eop', '5.0')).toBeUndefined();
+        expect(errorSpy).toHaveBeenCalledTimes(2);
+    });
 });

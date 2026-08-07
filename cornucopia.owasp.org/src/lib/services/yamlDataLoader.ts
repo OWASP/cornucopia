@@ -30,6 +30,10 @@ export class YamlDataLoader<T> {
             const yamlData = fs.readFileSync(file, 'utf8');
             const parsed = yaml.load(yamlData, { schema: yaml.FAILSAFE_SCHEMA }) as Record<string, T>;
             const data = parsed[this.rootKey];
+            if (data === undefined) {
+                console.error(`Failed to load ${this.errorLabel} for ${edition}-${version}: missing "${this.rootKey}" key in ${file}`);
+                return undefined;
+            }
             this.cache.push({ edition, version, data });
             return data;
         } catch (e) {
