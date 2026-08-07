@@ -55,6 +55,8 @@
   {languages}
   {language}
   capecData={data.capecData}
+  cardImages={data.cardImages}
+  suitStyling={data.suitStyling}
 />
 
 {:else}

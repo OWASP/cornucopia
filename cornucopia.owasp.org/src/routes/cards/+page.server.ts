@@ -2,6 +2,7 @@ import { DeckService } from '$lib/services/deckService';
 import { SuitController } from '../../domain/suit/suitController';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { MappingService } from '$lib/services/mappingService';
+import { getCardImagesByEdition, getSuitStylingByEdition } from '$lib/services/cardAppearanceLoader';
 
 export const load = (({ params: _params }) => {
   const deckService = new DeckService();
@@ -20,6 +21,8 @@ export const load = (({ params: _params }) => {
     suits: SuitController.getSuits(),
     decks: decks.set(lang, new Map([...mobileCards, ...webappCards, ...companionCards, ...eopCards])),
     mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
-    content: FileSystemHelper.getDataFromPath('data/website/pages/cards')
+    content: FileSystemHelper.getDataFromPath('data/website/pages/cards'),
+    cardImages: getCardImagesByEdition(),
+    suitStyling: getSuitStylingByEdition()
   };
 });

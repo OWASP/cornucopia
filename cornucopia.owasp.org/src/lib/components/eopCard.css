@@ -1,0 +1,105 @@
+/* EoP card styles derived from the original PDF design, See
+   https://github.com/adamshostack/eop/blob/master/EoP_Card%20Game%20Images.pdf */
+
+.card-render.eop {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 413 / 713;
+    container-type: inline-size;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 0.62vw;
+    border: 1px rgb(197, 197, 197) solid;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    transition: var(--transition);
+}
+
+/* this is only a fallback until the image loads in royal cards */
+.card-render.eop.nJ, .card-render.eop.nQ, .card-render.eop.nK {
+    background: var(--royal);
+}
+
+.card-render.eop .watermark {
+    position: absolute;
+    z-index: 1;
+    right: -15.6cqw;
+    bottom: -9.7cqw;
+    font-family: "Segoe UI", "Segoe", sans-serif;
+    font-size: 106cqw;
+    line-height: 1;
+    color: var(--watermark);
+}
+
+.card-render.eop .artwork {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.card-render.eop .number-tab {
+    position: absolute;
+    z-index: 3;
+    left: -5cqw;
+    top: 12.6cqw;
+    width: 26.2cqw;
+    height: 31cqw;
+    border-radius: 0 5cqw 5cqw 0;
+    background: var(--tab);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-render.eop .number-tab span {
+    font-family: "Segoe Condensed", "Segoe", sans-serif;
+    font-weight: 700;
+    font-size: 17.7cqw;
+    line-height: 1;
+    color: #fff;
+    transform: translate(1.3cqw, -1.3cqw);
+}
+
+/* the suit name is above this block, so long names grow upward
+   and the description stays in place, as in the original design */
+.card-render.eop .text-block {
+    position: absolute;
+    z-index: 3;
+    left: 25.7cqw;
+    right: 8.8cqw;
+    top: 33cqw;
+}
+
+.card-render.eop .suit-name {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 0 1.1cqw 0;
+    font-family: "Segoe Light", "Segoe", sans-serif;
+    font-weight: 300;
+    font-size: 10.8cqw;
+    line-height: 1.05;
+    color: #58595b;
+}
+
+.card-render.eop .description {
+    margin: 0;
+    font-family: "Segoe", sans-serif;
+    font-size: 4.3cqw;
+    line-height: 1.3;
+    color: #414042;
+}
+
+.card-render.eop.nJ .suit-name, .card-render.eop.nQ .suit-name, .card-render.eop.nK .suit-name,
+.card-render.eop.nJ .description, .card-render.eop.nQ .description, .card-render.eop.nK .description {
+    color: #fff;
+}
+
+@media (max-width: 1024px) {
+    .card-render.eop {
+        border-radius: 2.62vw;
+    }
+}

@@ -4,6 +4,7 @@ import { DeckService } from "$lib/services/deckService";
 import type { Route } from "$domain/routes/route";
 import { MappingService } from "$lib/services/mappingService";
 import { CapecService } from "$lib/services/capecService";
+import { getCardImagesByEdition, getSuitStylingByEdition } from "$lib/services/cardAppearanceLoader";
 
 import type { PageServerLoad } from './$types';
 
@@ -44,7 +45,9 @@ export const load = (({ params }) => {
         [`${edition}`, (new MappingService()).getCardMappingForAllVersions().get(`${edition}-${version}`)]
       ]),
       languages: DeckService.getLanguagesForEditionVersion(edition, version),
-      capecData: capecData
+      capecData: capecData,
+      cardImages: getCardImagesByEdition(),
+      suitStyling: getSuitStylingByEdition()
     };
 
     // Some QR code errors where done on the first printed decks. This will compensate for that.

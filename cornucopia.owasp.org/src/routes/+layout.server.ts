@@ -2,7 +2,8 @@ import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { Text } from '$lib/utils/text.js';
 
 export const prerender = true;
-export async function load(event) 
+
+export async function load(event)
 {
     const content = FileSystemHelper.getDataFromPath('data/website/pages/footer');
     return {

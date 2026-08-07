@@ -5,6 +5,7 @@ import type { Route } from "../../../domain/routes/route";
 import type { Card } from "$domain/card/card";
 import { MappingService } from "$lib/services/mappingService";
 import { CapecService } from "$lib/services/capecService";
+import { getCardImagesByEdition, getSuitStylingByEdition } from "$lib/services/cardAppearanceLoader";
 
 export const load = (async ({ params }) => {
 
@@ -64,7 +65,9 @@ export const load = (async ({ params }) => {
     ]),
     mappingData: new MappingService().getCardMappingForLatestEdtions(),
     languages: DeckService.getLanguagesForEditionVersion(edition, latestVersion),
-    capecData: capecData
+    capecData: capecData,
+    cardImages: getCardImagesByEdition(),
+    suitStyling: getSuitStylingByEdition()
   };
 
 }) satisfies PageServerLoad;

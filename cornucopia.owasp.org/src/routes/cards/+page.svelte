@@ -23,6 +23,8 @@
     let cards = $derived(decks?.get($lang));
     let suits = $derived(data.suits);
     let mappingData = $derived(data.mappingData);
+    let cardImages = $derived(data.cardImages);
+    let suitStyling = $derived(data.suitStyling);
 
 
     let mobileappSuits = $derived.by(() => {
@@ -232,7 +234,7 @@
             {/if}
         </div>
         <div class="preview-container">
-                <CardPreview {card} {mapping} style="preview-card-container"></CardPreview>
+                <CardPreview {card} {mapping} {cardImages} {suitStyling} style="preview-card-container"></CardPreview>
         </div>
     </div>
 </div>

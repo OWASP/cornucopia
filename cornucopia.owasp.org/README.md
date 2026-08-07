@@ -49,6 +49,30 @@ The project enforces minimum coverage requirements:
 
 Tests will fail if coverage drops below these thresholds.
 
+## Adding a new deck's images and styling
+
+To add a deck with this image-based card style (a picture for each card, shown behind suit colors for the tab, watermark, and royal cards, like how the EoP deck looks), just add three files (no code changes needed):
+
+- `source/{edition}-styling-{version}.yaml`: suit colors (tab, watermark, royal)
+
+  ```yaml
+  suits:
+    <suit-name>:
+      tab: "#hexcolor"
+      watermark: "#hexcolor"
+      royal: "#hexcolor"
+  ```
+
+- `source/{edition}-card-images-{version}.yaml`: image path for each card
+
+  ```yaml
+  cards:
+    <cardId>:
+      image: "/images/<edition>-cards/<file>.png"
+  ```
+
+- `src/lib/components/{edition}Card.css`: how that specific deck looks, using the `.card-render.{edition}` class and the `--tab` / `--watermark` / `--royal` colors. It loads automatically as long as the filename ends in `Card.css` (e.g. `eopCard.css`).
+
 ## Our Threat Model
 
 You may review the threat model for cornucopia.owasp.org by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard) and opening [../ThreatDragonModels/cornucopia.json](../ThreatDragonModels/cornucopia.json).

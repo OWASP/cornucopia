@@ -1,0 +1,30 @@
+---
+meta:
+  edition: "eop"
+  component: "styling"
+  version: "5.0"
+suits:
+  spoofing:
+    tab: "#861a10"
+    watermark: "#bdbcbc"
+    royal: "#c60751"
+  tampering:
+    tab: "#1f7a2f"
+    watermark: "#b9e49f"
+    royal: "#7cc466"
+  repudiation:
+    tab: "#696566"
+    watermark: "#f3652f"
+    royal: "#f4793b"
+  information-disclosure:
+    tab: "#5495d6"
+    watermark: "#33aba9"
+    royal: "#00a8aa"
+  denial-of-service:
+    tab: "#150f10"
+    watermark: "#bdbcbc"
+    royal: "#717074"
+  elevation-of-privilege:
+    tab: "#f3652f"
+    watermark: "#5494d5"
+    royal: "#4595d1"

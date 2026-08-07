@@ -5,14 +5,18 @@
     import type { Card } from "../../domain/card/card";
     import { goto } from "$app/navigation";
     import { readTranslation } from "$lib/stores/stores";
+    import type { CardImage } from "$lib/services/cardImagesService";
+    import type { SuitStyling } from "$lib/services/suitStylingService";
 
     interface Props {
         card: Card;
         cards: Map<string, Card>;
         mappingData: Record<string, unknown>;
+        cardImages?: Record<string, Record<string, CardImage>>;
+        suitStyling?: Record<string, Record<string, SuitStyling>>;
     }
 
-    let { card, cards, mappingData }: Props = $props();
+    let { card, cards, mappingData, cardImages = undefined, suitStyling = undefined }: Props = $props();
     let t = readTranslation();
 
     function getUrl(c: Card | undefined): string {
@@ -51,7 +55,7 @@
             <a href={cards.get(card.prevous)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">&lt;</a>
         </div>
         <div class="center">
-            <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
+            <CardPreview bind:card={card} mapping={mappingData} {cardImages} {suitStyling} style='browser-card-container'></CardPreview>
         </div>
         <div class="right">
             <a href={cards.get(card.next)?.url + '/#card-face'} data-sveltekit-reload class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">&gt;</a>
@@ -63,7 +67,7 @@
         <a href={getUrl(cards.get(card.prevous))} onclick={(e)=>goToPrevious(e, card)} class="arrow" title="{$t('cards.cardBrowser.a1.title')}: {card.prevous}">&lt;</a>
     </div>
     <div class="center">
-        <CardPreview bind:card={card} mapping={mappingData} style='browser-card-container'></CardPreview>
+        <CardPreview bind:card={card} mapping={mappingData} {cardImages} {suitStyling} style='browser-card-container'></CardPreview>
     </div>
     <div class="right">
         <a href={getUrl(cards.get(card.next))} onclick={(e)=>goToNext(e, card)} class="arrow" title="{$t('cards.cardBrowser.a2.title')}: {card.next}">&gt;</a>

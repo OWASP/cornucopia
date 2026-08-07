@@ -28,6 +28,8 @@
     let cards = $derived(decks?.get($lang));
     let suits = $derived(data.suits);
     let mappingData = $derived(data.mappingData);
+    let cardImages = $derived(data.cardImages);
+    let suitStyling = $derived(data.suitStyling);
     let version = $derived(data?.edition);
     
     let cardSuits = $derived.by(() => {
@@ -157,7 +159,7 @@
             {/each}
         </div>
         <div class="preview-container">
-                <CardPreview card={displayCard} mapping={displayMapping} style="preview-card-container"></CardPreview>
+                <CardPreview card={displayCard} mapping={displayMapping} {cardImages} {suitStyling} style="preview-card-container"></CardPreview>
         </div>
     </div>
 </div>
