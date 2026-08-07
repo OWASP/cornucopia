@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import { SuitController } from '$domain/suit/suitController';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { MappingService } from '$lib/services/mappingService.js';
+import { getCardImagesByEdition, getSuitStylingByEdition } from '$lib/services/cardAppearanceLoader';
 
 export const load = (({ params }) => {
   const edition = params?.edition;
@@ -19,6 +20,8 @@ export const load = (({ params }) => {
     decks : decks,
     mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
     edition: params.edition,
-    content: FileSystemHelper.getDataFromPath('data/website/pages/cards')
+    content: FileSystemHelper.getDataFromPath('data/website/pages/cards'),
+    cardImages: getCardImagesByEdition(),
+    suitStyling: getSuitStylingByEdition()
   };
 });
