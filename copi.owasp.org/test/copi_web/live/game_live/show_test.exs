@@ -28,6 +28,21 @@ defmodule CopiWeb.GameLive.ShowTest do
     defp resolve(:transient, _id), do: {:error, :temporary}
   end
 
+  defmodule RepoStub do
+    def transaction(fun) do
+      Copi.Repo.transaction(fun)
+    end
+
+    def insert(struct) do
+      case Application.get_env(:copi, :game_live_show_repo_stub_mode, :real) do
+        :fail_on_insert -> Copi.Repo.rollback(:simulated_insert_failure)
+        _ -> Copi.Repo.insert(struct)
+      end
+    end
+
+    def rollback(reason), do: Copi.Repo.rollback(reason)
+  end
+
   @game_attrs %{name: "Edge Case Test Game", edition: "webapp", suits: ["hearts", "clubs"]}
 
   defp create_game(_) do
@@ -41,10 +56,14 @@ defmodule CopiWeb.GameLive.ShowTest do
     setup do
       old_game_mod = Application.get_env(:copi, :game_live_show_game_module)
       old_mode = Application.get_env(:copi, :game_live_show_stub_mode)
+      old_repo_mod = Application.get_env(:copi, :game_live_show_repo_module)
+      old_repo_mode = Application.get_env(:copi, :game_live_show_repo_stub_mode)
 
       on_exit(fn ->
         Application.put_env(:copi, :game_live_show_game_module, old_game_mod)
         Application.put_env(:copi, :game_live_show_stub_mode, old_mode)
+        Application.put_env(:copi, :game_live_show_repo_module, old_repo_mod)
+        Application.put_env(:copi, :game_live_show_repo_stub_mode, old_repo_mode)
       end)
 
       :ok
@@ -158,6 +177,51 @@ defmodule CopiWeb.GameLive.ShowTest do
       # Verify started_at timestamp hasn't changed
       {:ok, updated_game} = Cornucopia.Game.find(started_game.id)
       assert DateTime.compare(updated_game.started_at, original_time) == :eq
+    end
+
+    test "start_game rolls back and shows an error when card dealing fails", %{conn: conn, game: game} do
+      {:ok, _player1} = Cornucopia.create_player(%{name: "Player 1", game_id: game.id})
+      {:ok, _player2} = Cornucopia.create_player(%{name: "Player 2", game_id: game.id})
+      {:ok, _player3} = Cornucopia.create_player(%{name: "Player 3", game_id: game.id})
+
+      {:ok, _card} =
+        Cornucopia.create_card(%{
+          category: "hearts",
+          value: "V1",
+          description: "D",
+          edition: "webapp",
+          version: "3.0",
+          external_id: "RB1",
+          language: "en",
+          misc: "m",
+          owasp_scp: [],
+          owasp_devguide: [],
+          owasp_asvs: [],
+          owasp_appsensor: [],
+          capec: [],
+          safecode: [],
+          owasp_mastg: [],
+          owasp_masvs: []
+        })
+
+      {:ok, view, _html} = live(conn, "/games/#{game.id}")
+
+      Application.put_env(:copi, :game_live_show_repo_module, RepoStub)
+      Application.put_env(:copi, :game_live_show_repo_stub_mode, :fail_on_insert)
+
+      render_click(view, "start_game", %{})
+
+      assert render(view) =~ "Failed to start game due to a system error"
+
+      {:ok, unchanged_game} = Cornucopia.Game.find(game.id)
+      assert unchanged_game.started_at == nil
+
+      dealt_count =
+        unchanged_game.players
+        |> Enum.flat_map(& &1.dealt_cards)
+        |> Enum.count()
+
+      assert dealt_count == 0
     end
 
     test "handle_info updates game when matching topic received", %{conn: conn, game: game} do

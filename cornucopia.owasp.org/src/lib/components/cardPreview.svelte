@@ -2,8 +2,6 @@
     import type { Component } from "svelte";
     import type { Card } from "../../domain/card/card";
     import { cardColor } from "../../domain/card/cardColor";
-    import MobileAppCardMapping from "./mobileAppCardMapping.svelte";
-    import CompanionCardMapping from "./companionCardMapping.svelte";
     import EopCardMapping from "./eopCardMapping.svelte";
     import type { CardImage } from "$lib/services/cardImagesService";
     import type { SuitStyling } from "$lib/services/suitStylingService";
@@ -11,8 +9,6 @@
     import.meta.glob('./*Card.css', { eager: true }); // example: eopCard.css
 
     const mappingComponents: Record<string, Component<any>> = {
-        mobileapp: MobileAppCardMapping,
-        companion: CompanionCardMapping,
         eop: EopCardMapping
     };
 
