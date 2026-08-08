@@ -6,20 +6,12 @@ import { getCardImagesByEdition, getSuitStylingByEdition } from '$lib/services/c
 
 export const load = (({ params: _params }) => {
   const deckService = new DeckService();
-  const decks = new Map<string, Map<string, unknown>>();
   const lang = 'en';
-  const mobileCards = deckService.getCardDataForEditionVersionLang(
-    'mobileapp', DeckService.getLatestVersion('mobileapp'), lang);
-  const webappCards = deckService.getCardDataForEditionVersionLang(
-    'webapp', DeckService.getLatestVersion('webapp'), lang);
-  const companionCards = deckService.getCardDataForEditionVersionLang(
-    'companion', DeckService.getLatestVersion('companion'), lang);
-  const eopCards = deckService.getCardDataForEditionVersionLang(
-    'eop', DeckService.getLatestVersion('eop'), lang);
+  const decks = new Map<string, Map<string, unknown>>([[lang, deckService.getCards(lang)]]);
 
   return {
     suits: SuitController.getSuits(),
-    decks: decks.set(lang, new Map([...mobileCards, ...webappCards, ...companionCards, ...eopCards])),
+    decks: decks,
     mappingData: (new MappingService()).getCardMappingForLatestEdtions(),
     content: FileSystemHelper.getDataFromPath('data/website/pages/cards'),
     cardImages: getCardImagesByEdition(),
