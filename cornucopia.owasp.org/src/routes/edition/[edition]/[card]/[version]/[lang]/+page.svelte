@@ -13,6 +13,7 @@
   let card : Card = $derived(cards.get(data.card) as Card);
   let languages = $derived(data.languages);
   let versions = $derived(data.versions);
+  let editionName = $derived(EDITION_FULL_NAMES[card?.edition] ?? card?.edition);
 
   function cardFound()
     {
@@ -22,12 +23,12 @@
 <svelte:head>
   {#if cardFound()}
     <link rel="canonical" href="https://cornucopia.owasp.org/cards/{card.id}" />
-    <title>OWASP Cornucopia - {EDITION_FULL_NAMES[card.edition] ?? card.edition} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
+    <title>OWASP Cornucopia - {editionName} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
     <meta name="description" content="{card.desc}" />
 	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {Text.convertToTitleCase(card.suitName)}, {card.id}" />
-    <meta property="og:title" content="OWASP Cornucopia - {EDITION_FULL_NAMES[card.edition] ?? card.edition} - {card.name}">
+    <meta property="og:title" content="OWASP Cornucopia - {editionName} - {card.name}">
     <meta property="og:description" content="{card.desc}">
-    <meta name="twitter:title" content="OWASP Cornucopia - {EDITION_FULL_NAMES[card.edition] ?? card.edition} - {card.name}">
+    <meta name="twitter:title" content="OWASP Cornucopia - {editionName} - {card.name}">
     <meta name="twitter:description" content="{card.desc}">
   {/if}
 </svelte:head>
