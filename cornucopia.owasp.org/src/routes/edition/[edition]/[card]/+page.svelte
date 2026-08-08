@@ -6,6 +6,7 @@
   import { isKnownCardId } from "$domain/card/cardIds";
   import { readLang, readTranslation } from "$lib/stores/stores";
   import type { PageData } from './$types';
+  import { EDITION_FULL_NAMES } from "$lib/services/deckServiceConsts";
 
   let { data }: { data: PageData } = $props();
   let _t = readTranslation();
@@ -21,24 +22,16 @@
     {
     return isKnownCardId(card?.id)
   }
-
-  function getEdition(str: string) : string {
-    if (str == "webapp") return "Website App Edition";
-    if (str == "mobileapp") return "Mobile App Edition";
-    if (str == "companion") return "Companion Edition";
-    if (str == "eop") return "Elevation of Privilege Edition";
-    return str;
-  }
 </script>
 <svelte:head>
   {#if cardFound()}
     <link rel="canonical" href="https://cornucopia.owasp.org/cards/{card.id}" />
-    <title>OWASP Cornucopia - {getEdition(card.edition)} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
+    <title>OWASP Cornucopia - {EDITION_FULL_NAMES[card.edition] ?? card.edition} - {Text.convertToTitleCase(card.suitName)} ({card.id})</title>
     <meta name="description" content="{card.desc}" />
 	  <meta name="keywords" content="OWASP, Cornucopia,{card.edition}, {Text.convertToTitleCase(card.suitName)}, {card.id}" />
-    <meta property="og:title" content="OWASP Cornucopia - {getEdition(card.edition)} - {card.name}">
+    <meta property="og:title" content="OWASP Cornucopia - {EDITION_FULL_NAMES[card.edition] ?? card.edition} - {card.name}">
     <meta property="og:description" content="{card.desc}">
-    <meta name="twitter:title" content="OWASP Cornucopia - {getEdition(card.edition)} - {card.name}">
+    <meta name="twitter:title" content="OWASP Cornucopia - {EDITION_FULL_NAMES[card.edition] ?? card.edition} - {card.name}">
     <meta name="twitter:description" content="{card.desc}">
   {/if}
 </svelte:head>
