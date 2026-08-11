@@ -24,16 +24,16 @@
 		"@sveltejs/adapter-cloudflare": "^7.2.9",
 		"@sveltejs/kit": "^2.70.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
-		"@types/node": "^26.1.2",
+		"@types/node": "^26.2.0",
 		"@typescript-eslint/parser": "^8.66.0",
 		"@vitest/coverage-v8": "^4.1.8",
 		"dotenv": "^17.4.2",
-		"eslint": "^10.8.0",
+		"eslint": "^10.8.1",
 		"eslint-plugin-svelte": "^3.22.0",
 		"globals": "^17.9.0",
 		"serve": "^14.2.6",
 		"svelte": "^5.56.8",
-		"svelte-check": "^4.7.4",
+		"svelte-check": "^4.7.5",
 		"svelte-eslint-parser": "^1.8.0",
 		"svelte-sitemap": "^4.0.4",
 		"then-request": "^6.0.2",
@@ -43,7 +43,7 @@
 		"vite": "^7.3.5",
 		"vitest": "^4.1.8",
 		"wait-on": "^9.1.0",
-		"wrangler": "4.118.0"
+		"wrangler": "4.120.0"
 	},
 	"type": "module",
 	"dependencies": {
