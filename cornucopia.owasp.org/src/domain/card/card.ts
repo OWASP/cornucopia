@@ -17,5 +17,6 @@ export type Card =
     url : string,
     value : string,
     version : string,
-    language : string
+    language : string,
+    card?: string
 }
