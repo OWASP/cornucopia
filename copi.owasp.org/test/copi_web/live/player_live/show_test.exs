@@ -360,6 +360,63 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert length(updated_dealt2.votes) == 0
     end
 
+    test "concurrent vote attempts result in only one vote due to unique constraint", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "hearts",
+          value: "CC1",
+          description: "D",
+          edition: "webapp",
+          version: "3.0",
+          external_id: "CONC_1",
+          language: "en",
+          misc: "m",
+          owasp_scp: [],
+          owasp_devguide: [],
+          owasp_asvs: [],
+          owasp_appsensor: [],
+          capec: [],
+          safecode: [],
+          owasp_mastg: [],
+          owasp_masvs: []
+        })
+
+      {:ok, dealt} = Copi.Repo.insert(%DealtCard{player_id: player.id, card_id: card.id})
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      _conn = conn
+
+      tasks =
+        for _ <- 1..5 do
+          Task.async(fn ->
+            Copi.Repo.insert(
+              %Copi.Cornucopia.Vote{player_id: player.id, dealt_card_id: dealt.id},
+              on_conflict: :nothing,
+              conflict_target: [:player_id, :dealt_card_id]
+            )
+          end)
+        end
+
+      results = Enum.map(tasks, &Task.await/1)
+
+      successes =
+        Enum.count(results, fn
+          {:ok, %{id: id}} when not is_nil(id) -> true
+          _ -> false
+        end)
+
+      assert successes == 1
+
+      vote_count = Copi.Repo.aggregate(Copi.Cornucopia.Vote, :count)
+      assert vote_count == 1
+    end
+
     test "redirects when game lookup for valid player returns not_found", %{conn: conn, player: player} do
       Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
       Application.put_env(:copi, :player_live_show_game_module, GameStub)

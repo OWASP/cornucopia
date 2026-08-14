@@ -170,11 +170,20 @@ defmodule CopiWeb.PlayerLive.Show do
     else
       Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
 
-      Copi.Repo.insert(
-        %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id},
-        on_conflict: :nothing,
-        conflict_target: [:player_id, :game_id]
-      )
+      case Copi.Repo.insert(
+             %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id},
+             on_conflict: :nothing,
+             conflict_target: [:player_id, :game_id]
+           ) do
+        {:ok, %{id: nil}} ->
+          Logger.debug("Continue vote already existed for player_id: #{player.id}, game_id: #{game.id}")
+
+        {:ok, _continue_vote} ->
+          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
+
+        {:error, changeset} ->
+          Logger.warning("Continue vote insert failed for player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+      end
     end
 
     {:ok, updated_game} = game_module().find(game.id)
@@ -237,6 +246,9 @@ defmodule CopiWeb.PlayerLive.Show do
                    on_conflict: :nothing,
                    conflict_target: [:player_id, :dealt_card_id]
                  ) do
+              {:ok, %{id: nil}} ->
+                Logger.debug("Vote already existed for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+
               {:ok, _vote} ->
                 Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
 
