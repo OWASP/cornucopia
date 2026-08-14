@@ -38,22 +38,22 @@ suits:
     id: "PC7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/PC7"
-    desc: "Lauren can traverse or modify otherwise protected files through access to the underlying file system by exploiting weaknesses in file system-based content providers, resolvers or its configuration"
+    desc: "Lauren can traverse or modify otherwise protected files or services through access to the underlying file system by exploiting weaknesses in file system-based content providers, resolvers or its configuration"
   -
     id: "PC8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/PC8"
-    desc: "Colin can expose sensitive data through the app's interprocess communication because the content provider's query methods are not properly parameterized and arguments sanitized"
+    desc: "Colin can expose or modify sensitive data through the app's interprocess communication because of misconfiguration or because the content provider's query methods are not properly parameterized and arguments sanitized"
   -
     id: "PC9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/PC9"
-    desc: "Toby can modify or expose data by injection because the response from implicit intents is not properly validated"
+    desc: "Toby can modify or expose data because intents are implicit, contains security-relevant data which apps can register for, or because the response from the intents is not properly validated or sanitized"
   -
     id: "PCX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/PCX"
-    desc: "Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
+    desc: "Max can modify or expose sensitive data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
   -
     id: "PCJ"
     value: "J"
@@ -68,7 +68,7 @@ suits:
     id: "PCK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/PCK"
-    desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
+    desc: "Grant can modify or expose data by influencing or altering JavaScript bridges, DOM, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)"
   -
     id: "PCA"
     value: "A"
@@ -93,12 +93,12 @@ suits:
     id: "AA4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/AA4"
-    desc: "Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly"
+    desc: "Vandana can access sensitive features due to improperly bound or misconfigured biometric authentication controls, insecure fallbacks, or unhandled configuration changes"
   -
     id: "AA5"
     value: "5"
     url: "https://cornucopia.owasp.org/cards/AA5"
-    desc: "Eiman can bypass the local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded"
+    desc: "Eiman can bypass the local authentication through patching and/or by instrumentation because the authentication can be patched out or overloaded due to insecure fallbacks or misconfiguration"
   -
     id: "AA6"
     value: "6"
@@ -108,7 +108,7 @@ suits:
     id: "AA7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/AA7"
-    desc: "Abdullah can bypass authentication by altering the usual process sequence or flow, or by undertaking the process in incorrect order, or by manipulating date and time values used by the app, or by using valid features for unintended purposes"
+    desc: "Abdullah can bypass protected operations by invoking them out of sequence, replaying a previously valid authentication result, or altering client-controlled state, time, or feature inputs trusted by the app instead of revalidating authorization"
   -
     id: "AA8"
     value: "8"
@@ -118,7 +118,7 @@ suits:
     id: "AA9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AA9"
-    desc: "Wong can bypass the authentication because it does not fail securely. (i.e. it defaults to allowing unauthenticated access)"
+    desc: "Wong can bypass authentication because the app trusts client-side authentication results or defaults to allowing access when verification fails"
   -
     id: "AAX"
     value: "10"
