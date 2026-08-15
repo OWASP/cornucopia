@@ -54,7 +54,7 @@ defmodule CopiWeb.PlayerLive.Show do
             end
 
           {:ok, _player} ->
-            redirect_to_public_game(socket, game_id)
+            redirect_finished_game_or_public(socket, game_id)
 
           {:error, :not_found} ->
             raise Ecto.NoResultsError, queryable: Player
@@ -347,6 +347,19 @@ defmodule CopiWeb.PlayerLive.Show do
 
   defp authorized_player_url?(socket, %{"game_id" => game_id, "id" => player_id}) do
     PlayerSessions.authorized?(socket.assigns.player_sessions, game_id, player_id)
+  end
+
+  defp redirect_finished_game_or_public(socket, game_id) do
+    case game_module().find(game_id) do
+      {:ok, %{finished_at: finished_at}} when not is_nil(finished_at) ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "This game has finished. Showing the game summary.")
+         |> redirect(to: "/games/#{game_id}")}
+
+      _ ->
+        redirect_to_public_game(socket, game_id)
+    end
   end
 
   defp redirect_to_public_game(socket, game_id) do
