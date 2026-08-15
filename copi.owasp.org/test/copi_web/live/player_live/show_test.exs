@@ -360,6 +360,82 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert length(updated_dealt2.votes) == 0
     end
 
+test "toggle_continue_vote no-op branch when vote already removed concurrently", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      render_click(show_live, "toggle_continue_vote", %{})
+      :timer.sleep(100)
+
+      # Simulate a concurrent removal that this LiveView hasn't seen yet,
+      # so its cached assigns still show the vote as present.
+      Copi.Repo.delete_all(
+        from cv in Copi.Cornucopia.ContinueVote,
+          where: cv.player_id == ^player.id and cv.game_id == ^game_id
+      )
+
+      render_click(show_live, "toggle_continue_vote", %{})
+      :timer.sleep(100)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert length(updated_game.continue_votes) == 0
+    end
+
+    test "toggle_vote no-op branch when vote already removed concurrently", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: game_id})
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "hearts",
+          value: "NOP1",
+          description: "D",
+          edition: "webapp",
+          version: "3.0",
+          external_id: "NOP_1",
+          language: "en",
+          misc: "m",
+          owasp_scp: [],
+          owasp_devguide: [],
+          owasp_asvs: [],
+          owasp_appsensor: [],
+          capec: [],
+          safecode: [],
+          owasp_mastg: [],
+          owasp_masvs: []
+        })
+
+      {:ok, dealt} = Copi.Repo.insert(%DealtCard{player_id: other_player.id, card_id: card.id})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      Copi.Repo.delete_all(
+        from v in Copi.Cornucopia.Vote,
+          where: v.player_id == ^player.id and v.dealt_card_id == ^dealt.id
+      )
+
+      render_click(show_live, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+      :timer.sleep(100)
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 0
+    end
+
     test "concurrent vote attempts result in only one vote due to unique constraint", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
@@ -416,6 +492,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       vote_count = Copi.Repo.aggregate(Copi.Cornucopia.Vote, :count)
       assert vote_count == 1
     end
+    
 
     test "redirects when game lookup for valid player returns not_found", %{conn: conn, player: player} do
       Application.put_env(:copi, :player_live_show_player_module, PlayerStub)
