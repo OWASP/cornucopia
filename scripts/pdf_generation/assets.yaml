@@ -1,0 +1,91 @@
+---
+# ==========================================================================
+# OWASP Cornucopia — per-suit asset and colour table
+#
+# Background artwork is resolved by convention
+#   resources/card_artwork/<edition>/<suit>-<small|big>-<court|default>.png
+# so entries here are only needed for exceptions, and for colour.
+#
+# Per suit:
+#   color        the card-number colour on pip cards. A Scribus swatch name,
+#                or inline CMYK percentages, which get injected into the
+#                template at build time.
+#   court_color  the card-number colour on court cards (J/Q/K). Optional;
+#                defaults to defaults.court_text_color (white) in pdf_config.
+#   backgrounds  optional override if a suit's artwork is named off-convention.
+#
+# NOTE: these CMYK values duplicate the suit colours already defined for the
+# website at copi.owasp.org/assets/css/cards.scss. Longer term they would be
+# better sourced from that existing file so print and web cannot drift apart;
+# they live here for now to avoid coupling this tool to the website build.
+# ==========================================================================
+
+meta:
+  component: backgroundimages
+  image_path: "Backgrounds"
+
+default:
+  backgrounds:
+    small: "websiteapp/cornucopia-small-default.png"
+    big: "websiteapp/cornucopia-big-default.png"
+
+# ==========================================================================
+# WEB APP EDITION — 7 suits incl. jokers, 80 cards
+# ==========================================================================
+# These swatches already exist in the Scribus masters, so they are referenced
+# by name rather than redefined; the CMYK values are noted for reference.
+webapp:
+  suits:
+    - id: VE
+      color: "Data_Color"          # 0/0/0/50
+      # court_color: "Pure_White"  # uncomment to deviate from the default
+    - id: AT
+      color: "Auth_Color"          # 57/21/14/1
+    - id: SM
+      color: "Session_Color"       # 47/4/64/0
+    - id: AZ
+      color: "Authoriz_Color"      # 18/20/76/3
+    - id: CR
+      color: "Crypto_Color"        # 42/42/0/0
+    - id: C
+      color: "Cornucopia_Color"    # 95/65/25/55
+    - id: WC
+      color: "Joker_Color"         # 0/33/55/0
+
+# ==========================================================================
+# MOBILE APP EDITION — 7 suits incl. jokers, 80 cards
+# ==========================================================================
+mobileapp:
+  suits:
+    - id: PC
+      color: {c: 67, m: 0,  y: 54, k: 0}
+    - id: AA
+      color: {c: 2,  m: 50, y: 84, k: 0}
+    - id: NS
+      color: {c: 6,  m: 23, y: 95, k: 0}
+    - id: RS
+      color: {c: 80, m: 44, y: 0,  k: 0}
+    - id: CRM
+      color: {c: 0,  m: 76, y: 86, k: 0}
+    - id: CM
+      color: {c: 100, m: 75, y: 38, k: 29}
+    - id: WC
+      color: "Joker_Color"   # no value supplied; reuses the shared joker colour
+
+# ==========================================================================
+# COMPANION EDITION — 6 suits, no jokers, 78 cards
+# ==========================================================================
+companion:
+  suits:
+    - id: LLM
+      color: {c: 30, m: 87, y: 31, k: 17}
+    - id: CLD
+      color: {c: 18, m: 56, y: 2,  k: 0}
+    - id: FRE
+      color: {c: 40, m: 47, y: 47, k: 33}
+    - id: DVO
+      color: {c: 27, m: 52, y: 76, k: 20}
+    - id: BOT
+      color: {c: 13, m: 69, y: 62, k: 2}
+    - id: AAI
+      color: {c: 76, m: 80, y: 44, k: 50}
