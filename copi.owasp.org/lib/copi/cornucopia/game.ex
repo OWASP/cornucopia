@@ -58,6 +58,7 @@ defmodule Copi.Cornucopia.Game do
     game
     |> cast(attrs, [:name, :created_at, :edition, :started_at, :finished_at, :rounds_played, :suits, :round_open])
     |> validate_required([:name], message: "No really, give your game session a name")
+            |> validate_format(:name, ~r/^[a-zA-Z0-9\x{00C0}-\x{00D6}\x{00D8}-\x{00F6}\x{00F8}-\x{00FF}\x{0100}-\x{017E} ._-]+$/u, message: "contains invalid characters")
   end
 
   def continue_vote_count(game) do
