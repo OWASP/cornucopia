@@ -19,7 +19,10 @@ import json
 import os
 import sys
 import traceback
-import xml.etree.ElementTree as ET
+
+# Used only to build new elements, which carries no parsing risk. Reading XML
+# goes through parse_xml below.
+import xml.etree.ElementTree as ET  # nosec B405
 
 # Make sibling modules importable when Scribus executes this by absolute path.
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,7 +30,7 @@ if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
 try:
-    import cornucopia_common as cc
+    import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
 except ImportError as exc:
     # Scribus runs scripts in its own interpreter, which is usually not the
     # `python3` on your PATH. Packages installed with the wrong one are
@@ -50,6 +53,18 @@ except ImportError as exc:
             exc, sys.prefix, sys.version.split()[0],
             os.environ.get('PYTHONPATH') or '(not set)'))
     raise
+
+try:
+    # Hardened XML parser. The templates read here are this repository's own
+    # .sla files rather than user-supplied data, but the safe parser is used
+    # whenever it is available.
+    from defusedxml.ElementTree import parse as parse_xml
+    XML_HARDENED = True
+except ImportError:
+    # defusedxml is not installed. Fall back rather than refuse to run, so a
+    # missing optional package cannot stop a build; install it where you can.
+    from xml.etree.ElementTree import parse as parse_xml  # nosec B314
+    XML_HARDENED = False
 
 try:
     import qrcode
@@ -167,14 +182,26 @@ def create_qr_image(url, output_path, config):
     qr.add_data(url)
     qr.make(fit=True)
 
+    # Test for pypng itself: qrcode's PyPNGImage class imports fine without it
+    # and only fails when the image is actually drawn.
     try:
+        import png  # noqa: F401
         from qrcode.image.pure import PyPNGImage
+        image = qr.make_image(image_factory=PyPNGImage)
     except ImportError:
-        raise ImportError(
-            "Cannot render QR codes: 'pypng' is not installed in the "
-            "interpreter running this script. See README.md.")
+        # Pillow is the only other renderer qrcode offers. It is not what the
+        # published decks use -- Scribus has pypng -- but falling back keeps
+        # .sla generation working in a plain Python that lacks pypng.
+        try:
+            import PIL  # noqa: F401
+        except ImportError:
+            raise ImportError(
+                "Cannot render QR codes: install 'pypng' (preferred) or "
+                "'pillow' into the interpreter running this script. "
+                "See README.md.")
+        image = qr.make_image(fill_color="black", back_color="transparent")
 
-    qr.make_image(image_factory=PyPNGImage).save(output_path)
+    image.save(output_path)
 
 
 # --------------------------------------------------------------------------
@@ -216,7 +243,7 @@ def generate_card(card, edition, language, size_key, template_path, output_path,
     special_font = accent_font if joker else body_font
     attack_size = str(cc.get_font_size(config, size_key, 'attack_text', language))
 
-    tree = ET.parse(template_path)
+    tree = parse_xml(template_path)
     root = tree.getroot()
     elements_to_delete = []
 
@@ -413,11 +440,14 @@ def export_pdfs(sla_filepath, card, edition, language, size_key, config,
         # The colours are already written into the .sla, so these calls only
         # reassert them; a failure here is not fatal.
         def try_set(action, label, warn=False):
+            """Apply one Scribus setting; report whether it succeeded."""
             try:
                 action()
+                return True
             except Exception as exc:
                 if warn:
                     log.warn("{0} failed for {1}: {2}".format(label, card['card_id'], exc))
+                return False
 
         try_set(lambda: scribus.setTextColor(number_color, "card_number"),
                 "Card number colour", warn=True)
@@ -425,16 +455,17 @@ def export_pdfs(sla_filepath, card, edition, language, size_key, config,
             defaults.get('suit_name_color', 'Pure_White'), "suit_name"), "Suit name colour")
         try_set(lambda: scribus.setFillColor("None", "qr_code_frame"), "QR frame fill")
 
-        # The suit band sits beneath the full-bleed artwork, which is opaque, so
-        # this is cosmetic only and its object name varies between masters.
+        # The suit band sits beneath the full-bleed artwork, which is opaque,
+        # so this is cosmetic only, and its object name varies between the two
+        # master templates. Whichever name exists is the one that gets filled.
+        def fill_band(name):
+            scribus.setFillColor(suit_color, name)
+            scribus.setFillShade(100, name)
+            scribus.setFillTransparency(0, name)
+
         for band in ("Polygon1", "Polygon2"):
-            try:
-                scribus.setFillColor(suit_color, band)
-                scribus.setFillShade(100, band)
-                scribus.setFillTransparency(0, band)
+            if try_set(lambda: fill_band(band), "Suit band fill"):
                 break
-            except Exception:
-                continue
 
         scribus.gotoPage(2)
         back_frame = "card_back"
@@ -498,8 +529,10 @@ def export_pdfs(sla_filepath, card, edition, language, size_key, config,
         log.warn("Export crashed on {0}: {1}".format(card['card_id'], exc))
         try:
             scribus.closeDoc()
-        except Exception:
-            pass
+        except Exception as close_exc:
+            # Already handling a failure; a document that will not close is
+            # noted rather than allowed to mask the original error.
+            log.warn("Could not close document after that failure: {0}".format(close_exc))
         return []
 
 

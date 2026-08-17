@@ -36,7 +36,7 @@ That means there are **two** environments to set up:
 
 | Environment | Runs | Needs |
 |---|---|---|
-| Scribus's bundled Python | `generate_deck.py` | `pyyaml`, `qrcode`, `pypng` |
+| Scribus's bundled Python | `generate_deck.py` | `pyyaml`, `qrcode`, `pypng`, `defusedxml` |
 | Your system Python | `merge_pdfs.py` | `pyyaml`, `pymupdf` |
 
 Getting this wrong is the most common failure, and it shows up as `ModuleNotFoundError: No module named 'yaml'` when you run the generator.
@@ -65,7 +65,7 @@ Everything the generator needs is in the repository — you do not have to downl
 **Windows** — Scribus bundles its own `python.exe` with `pip` already available. Adjust the path to match where you installed Scribus and which version you have:
 
 ```bat
-"C:\Program Files\Scribus 1.6.6\python\python.exe" -m pip install pyyaml qrcode pypng
+"C:\Program Files\Scribus 1.6.6\python\python.exe" -m pip install pyyaml qrcode pypng defusedxml
 ```
 
 If that fails with a permissions error, you need to run the command with administrative rights. Click Start, type `cmd`, right-click **Command Prompt** and choose **Run as administrator**, then run the command again in that window. The same applies if you prefer PowerShell.
@@ -75,7 +75,7 @@ If that fails with a permissions error, you need to run the command with adminis
 The reliable approach is to install the packages into a folder of your own and point Scribus at it:
 
 ```bash
-python3 -m pip install --target ~/cornucopia-python-libs pyyaml qrcode pypng
+python3 -m pip install --target ~/cornucopia-python-libs pyyaml qrcode pypng defusedxml
 ```
 
 Then **export** `PYTHONPATH` so Scribus inherits it:
@@ -94,11 +94,13 @@ echo $PYTHONPATH
 
 That must print the path. It applies to the current terminal window only, so run it again in any new one.
 
-All three packages are pure Python, so they work whichever interpreter version Scribus uses.
+All of these are pure Python, so they work whichever interpreter version Scribus uses.
 
-If your Scribus does share the system Python — run the check below to find out — then a plain `python3 -m pip install pyyaml qrcode pypng` is enough, and you can drop the `PYTHONPATH` prefix. Add `--user` if you hit a permissions error.
+If your Scribus does share the system Python — run the check below to find out — then a plain `python3 -m pip install pyyaml qrcode pypng defusedxml` is enough, and you can drop the `PYTHONPATH` prefix. Add `--user` if you hit a permissions error.
 
-`pypng` matters: `qrcode` draws with Pillow by default, and Pillow is a compiled package that is awkward to install into a bundled interpreter. `pypng` is pure Python, and the generator asks for it by name, so no compiled dependency is needed and every machine produces an identical QR code. It is not optional — without it, QR generation fails.
+`pypng` matters: `qrcode` draws with Pillow by default, and Pillow is a compiled package that is awkward to install into a bundled interpreter. `pypng` is pure Python, and the generator asks for it by name, so no compiled dependency is needed and every machine produces an identical QR code.
+
+`defusedxml` is a hardened XML parser, used for reading the Scribus templates. It is pure Python like the others. It is the one package here that is optional — without it the generator falls back to the standard library parser and still works — but install it, since the security scanner in CI expects it.
 
 ### Your system Python
 

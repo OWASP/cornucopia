@@ -34,6 +34,12 @@ REQUIRED = {
     'pymupdf': ('pymupdf, for merge_pdfs.py', False, True),
 }
 
+# Improve things when present, but the tool runs without them.
+OPTIONAL = {
+    'defusedxml': 'defusedxml, a hardened XML parser; the standard library '
+                  'parser is used if it is absent',
+}
+
 
 def report():
     lines = []
@@ -71,6 +77,15 @@ def report():
                 missing.append(name)
             else:
                 add("  not needed  %-9s (only used by the other interpreter)" % name)
+
+    add("")
+    add("Optional:")
+    for name, description in OPTIONAL.items():
+        try:
+            __import__(name)
+            add("  found       %-11s" % name)
+        except ImportError:
+            add("  not found   %-11s install %s" % (name, description))
 
     add("")
     if missing:

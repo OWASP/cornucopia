@@ -1,0 +1,59 @@
+
+FATAL:
+Traceback (most recent call last):
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 675, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 649, in main
+    generate_card(card, edition, language, size_key, template_path, sla_path,
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  config, assets_data, base_dir, log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 241, in generate_card
+    create_qr_image(card['url'], qr_path, config)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 177, in create_qr_image
+    qr.make_image(image_factory=PyPNGImage).save(output_path)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\qrcode\main.py", line 369, in make_image
+    im = image_factory(
+        self.border,
+    ...<3 lines>...
+        **kwargs,
+    )
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\qrcode\image\base.py", line 30, in __init__
+    self._img = self.new_image(**kwargs)
+                ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\qrcode\image\pure.py", line 18, in new_image
+    raise ImportError("PyPNG library not installed.")
+ImportError: PyPNG library not installed.
+
+
+FATAL:
+Traceback (most recent call last):
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 685, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 659, in main
+    generate_card(card, edition, language, size_key, template_path, sla_path,
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  config, assets_data, base_dir, log)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 251, in generate_card
+    create_qr_image(card['url'], qr_path, config)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ASUS\Downloads\cornucopia\scripts\pdf_generation\generate_deck.py", line 185, in create_qr_image
+    image = qr.make_image(image_factory=PyPNGImage)
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\qrcode\main.py", line 369, in make_image
+    im = image_factory(
+        self.border,
+    ...<3 lines>...
+        **kwargs,
+    )
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\qrcode\image\base.py", line 30, in __init__
+    self._img = self.new_image(**kwargs)
+                ~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\Lib\site-packages\qrcode\image\pure.py", line 18, in new_image
+    raise ImportError("PyPNG library not installed.")
+ImportError: PyPNG library not installed.
+

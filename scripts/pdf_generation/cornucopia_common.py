@@ -173,7 +173,7 @@ def discover_editions(config, base_dir):
     return sorted({f['edition'] for f in scan_card_files(config, base_dir) if f['edition']})
 
 
-def discover_languages(config, base_dir, edition, skipped=None):
+def discover_languages(config, base_dir, edition):
     """Every language available for an edition, at the version being built."""
     wanted = edition_data_version(config, base_dir, edition)
     return sorted({f['language'] for f in scan_card_files(config, base_dir)
@@ -195,7 +195,7 @@ def find_misnamed_files(config, base_dir):
     odd = []
     for dirpath, _dirnames, filenames in os.walk(root):
         for name in filenames:
-            if not os.path.splitext(name)[1].lower() in ('.yaml', '.yml'):
+            if os.path.splitext(name)[1].lower() not in ('.yaml', '.yml'):
                 odd.append(os.path.join(dirpath, name))
     return odd
 
@@ -205,8 +205,8 @@ def expand_selection(requested, available, label, warnings):
     Resolve the ``"all"`` keyword against what actually exists on disk.
 
     A string that is not ``"all"`` is treated as a single-item selection.
-    Explicit entries that do not exist are reported rather than silently
-    skipped, so a typo fails loudly instead of producing a short deck.
+    Explicit entries that do not exist are reported rather than ignored, so a
+    typo fails loudly instead of quietly producing a short deck.
     """
     if requested is None:
         requested = 'all'
