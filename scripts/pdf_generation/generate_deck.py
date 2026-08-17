@@ -36,12 +36,19 @@ except ImportError as exc:
         "\nERROR: a required package is missing: {0}\n\n"
         "This script is running in:\n"
         "  {1}\n"
-        "  Python {2}\n\n"
-        "Packages must be installed into THAT interpreter. Installing them\n"
-        "with a different python3 will not work.\n\n"
-        "Run this to see what it can and cannot find:\n"
-        "  check_environment.py  (see README.md)\n\n".format(
-            exc, sys.prefix, sys.version.split()[0]))
+        "  Python {2}\n"
+        "  PYTHONPATH={3}\n\n"
+        "Packages must be installed into THAT interpreter, or be on its\n"
+        "PYTHONPATH. Installing them with a different python3 will not work.\n\n"
+        "If you installed with 'pip install --target <dir>', check that\n"
+        "PYTHONPATH is EXPORTED in this terminal:\n"
+        "  export PYTHONPATH=<dir>\n"
+        "  echo $PYTHONPATH        # must print the path\n\n"
+        "Setting it without 'export' does not pass it to Scribus.\n\n"
+        "To see what this interpreter can and cannot find, run\n"
+        "check_environment.py the same way. See README.md.\n\n".format(
+            exc, sys.prefix, sys.version.split()[0],
+            os.environ.get('PYTHONPATH') or '(not set)'))
     raise
 
 try:

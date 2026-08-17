@@ -78,12 +78,21 @@ The reliable approach is to install the packages into a folder of your own and p
 python3 -m pip install --target ~/cornucopia-python-libs pyyaml qrcode pypng
 ```
 
-Then set `PYTHONPATH` when you run Scribus, as in §7:
+Then **export** `PYTHONPATH` so Scribus inherits it:
 
 ```bash
-PYTHONPATH=~/cornucopia-python-libs /Applications/Scribus.app/Contents/MacOS/Scribus \
-  --no-splash --no-gui --python-script generate_deck.py --dry-run
+export PYTHONPATH=~/cornucopia-python-libs
 ```
+
+The `export` matters. Writing `PYTHONPATH=~/cornucopia-python-libs` on a line by itself sets a shell variable that is *not* passed to programs you run afterwards, so Scribus would still report the module as missing. Either use `export` as above, or put the assignment and the command on the same line.
+
+Check it took effect before going further:
+
+```bash
+echo $PYTHONPATH
+```
+
+That must print the path. It applies to the current terminal window only, so run it again in any new one.
 
 All three packages are pure Python, so they work whichever interpreter version Scribus uses.
 
@@ -235,11 +244,12 @@ Scribus is a desktop application, so on macOS and Windows there is normally **no
 
 ### Running it
 
-**macOS** — include the `PYTHONPATH` prefix if you installed the packages with `--target` in §3:
+**macOS** — if you installed the packages with `--target` in §3, make sure `PYTHONPATH` is exported in this terminal first (`echo $PYTHONPATH` should print the path):
 
 ```bash
-PYTHONPATH=~/cornucopia-python-libs /Applications/Scribus.app/Contents/MacOS/Scribus \
-  --no-splash --no-gui \
+export PYTHONPATH=~/cornucopia-python-libs
+
+/Applications/Scribus.app/Contents/MacOS/Scribus --no-splash --no-gui \
   --python-script generate_deck.py \
   --edition companion --language en --size bridge --cards LLM2
 ```
