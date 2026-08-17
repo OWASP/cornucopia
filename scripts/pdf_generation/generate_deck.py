@@ -148,6 +148,15 @@ def inject_color_definitions(root, config, needed_names, log, extra_definitions=
 
 
 def create_qr_image(url, output_path, config):
+    """
+    Draw one card's QR code.
+
+    The pure-Python PNG writer from pypng is requested explicitly rather than
+    letting qrcode choose. Two reasons: qrcode 7 falls back to it when Pillow
+    is absent but qrcode 8 defaults to Pillow and fails instead, and naming it
+    outright means every machine produces the same image whether or not Pillow
+    happens to be installed.
+    """
     qr_cfg = config.get('qr', {}) or {}
     qr = qrcode.QRCode(
         version=qr_cfg.get('version', 1),
@@ -157,8 +166,15 @@ def create_qr_image(url, output_path, config):
     )
     qr.add_data(url)
     qr.make(fit=True)
-    image = qr.make_image(fill_color="black", back_color="transparent")
-    image.save(output_path)
+
+    try:
+        from qrcode.image.pure import PyPNGImage
+    except ImportError:
+        raise ImportError(
+            "Cannot render QR codes: 'pypng' is not installed in the "
+            "interpreter running this script. See README.md.")
+
+    qr.make_image(image_factory=PyPNGImage).save(output_path)
 
 
 # --------------------------------------------------------------------------

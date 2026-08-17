@@ -98,7 +98,7 @@ All three packages are pure Python, so they work whichever interpreter version S
 
 If your Scribus does share the system Python — run the check below to find out — then a plain `python3 -m pip install pyyaml qrcode pypng` is enough, and you can drop the `PYTHONPATH` prefix. Add `--user` if you hit a permissions error.
 
-`pypng` matters: `qrcode` uses Pillow by default, but Pillow is awkward to install into a bundled interpreter. With `pypng` present, `qrcode` falls back to a pure-Python PNG writer and no compiled dependency is needed.
+`pypng` matters: `qrcode` draws with Pillow by default, and Pillow is a compiled package that is awkward to install into a bundled interpreter. `pypng` is pure Python, and the generator asks for it by name, so no compiled dependency is needed and every machine produces an identical QR code. It is not optional — without it, QR generation fails.
 
 ### Your system Python
 
