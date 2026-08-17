@@ -226,7 +226,7 @@ What to look for:
 
 ## 7. Build one card
 
-The fastest end-to-end proof, and it takes about ten seconds.
+The fastest end-to-end proof — a few seconds on most machines.
 
 ### Finding the Scribus command
 
@@ -295,18 +295,20 @@ owasp_cornucopia_companion_LLM2_bridge_3.0_en_3mmbleed_noprintersmarks.pdf
 
 Open the PDF. It should be two pages, the card front then the card back, at 62 × 93 mm with a 3 mm bleed on every edge.
 
+Note what this step produces: **one PDF per card**, each holding that card's face and back, plus a `.sla` Scribus file per card. Combining them into a single print-ready deck is a separate, optional step covered in §9. The `.sla` files are not needed for that — the merge reads only the PDFs — so they are kept purely so you can open a card in Scribus and see what was injected.
+
 ---
 
 ## 8. Build a deck
 
-Drop `--cards` to build a full one. Replace `scribus` below with the command for your platform from §7:
+To build complete decks rather than a single card, take the command from §7 and remove the `--size` and `--cards` options, so `--size bridge --cards LLM2` comes off the end. That builds every card in the edition, in both sizes. Replace `scribus` below with the command for your platform:
 
 ```bash
 scribus --no-splash --no-gui --python-script generate_deck.py \
   --edition companion --language en
 ```
 
-That is 78 cards in both formats, so 156 PDFs, and takes around 15 minutes.
+That is the Companion Edition's 78 cards in each size — small (Bridge) and big (Tarot) — so 156 PDFs. Expect anywhere from a couple of minutes to around twenty, depending on your machine.
 
 Flags combine, and can be repeated to select several:
 
@@ -324,13 +326,13 @@ Flags combine, and can be repeated to select several:
 --skip-existing
 ```
 
-Allow roughly **6 seconds per card**. A full build of all editions and languages is about 2,556 cards, so several hours, and CMYK output is large, so budget a few GB of disk space.
+A full build of every edition and language is about 2,556 cards. How long that takes varies a lot with the machine, so time a small run first and scale up from there. CMYK output is large, so allow a few GB of disk space.
 
 ---
 
 ## 9. Merge into decks
 
-This runs in your **system** Python, not Scribus:
+This combines the per-card PDFs from §8 into one file per deck. It reads only the PDFs, so the `.sla` files are not required at this point. It runs in your **system** Python, not Scribus:
 
 ```bash
 python3 merge_pdfs.py --edition companion
