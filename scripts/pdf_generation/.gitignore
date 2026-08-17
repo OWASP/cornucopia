@@ -1,2 +1,6 @@
 # Build output — regenerated on every run
 output/
+
+# Python
+__pycache__/
+*.pyc
