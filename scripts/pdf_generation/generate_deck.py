@@ -26,7 +26,23 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
-import cornucopia_common as cc
+try:
+    import cornucopia_common as cc
+except ImportError as exc:
+    # Scribus runs scripts in its own interpreter, which is usually not the
+    # `python3` on your PATH. Packages installed with the wrong one are
+    # invisible here, and the bare traceback does not make that obvious.
+    sys.stderr.write(
+        "\nERROR: a required package is missing: {0}\n\n"
+        "This script is running in:\n"
+        "  {1}\n"
+        "  Python {2}\n\n"
+        "Packages must be installed into THAT interpreter. Installing them\n"
+        "with a different python3 will not work.\n\n"
+        "Run this to see what it can and cannot find:\n"
+        "  check_environment.py  (see README.md)\n\n".format(
+            exc, sys.prefix, sys.version.split()[0]))
+    raise
 
 try:
     import qrcode

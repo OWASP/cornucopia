@@ -30,7 +30,7 @@ Then install it the usual way for your platform — run the installer on Windows
 
 ### The one thing that surprises people
 
-**Scribus ships its own private Python.** It does not use the Python on your PATH, and it cannot see packages you installed with a normal `pip install`.
+**Scribus runs scripts in its own Python, not the one on your PATH.** On Windows it bundles its own interpreter outright; on macOS and Linux it uses a system one that is frequently a different installation from the `python3` you type. Either way, it usually cannot see packages you installed with a normal `pip install`.
 
 That means there are **two** environments to set up:
 
@@ -70,13 +70,24 @@ Everything the generator needs is in the repository — you do not have to downl
 
 If that fails with a permissions error, you need to run the command with administrative rights. Click Start, type `cmd`, right-click **Command Prompt** and choose **Run as administrator**, then run the command again in that window. The same applies if you prefer PowerShell.
 
-**macOS and Linux** — Scribus normally uses the system Python here, so install into that:
+**macOS and Linux** — Scribus uses a Python interpreter that is often *not* the `python3` on your PATH. On macOS in particular, if your `python3` came from Homebrew, Scribus will not see anything you install with it, and you will get `ModuleNotFoundError: No module named 'yaml'` even though the install succeeded.
+
+The reliable approach is to install the packages into a folder of your own and point Scribus at it:
 
 ```bash
-python3 -m pip install pyyaml qrcode pypng
+python3 -m pip install --target ~/cornucopia-python-libs pyyaml qrcode pypng
 ```
 
-If you get a permissions error, add `--user` to install into your own account rather than system-wide.
+Then set `PYTHONPATH` when you run Scribus, as in §7:
+
+```bash
+PYTHONPATH=~/cornucopia-python-libs /Applications/Scribus.app/Contents/MacOS/Scribus \
+  --no-splash --no-gui --python-script generate_deck.py --dry-run
+```
+
+All three packages are pure Python, so they work whichever interpreter version Scribus uses.
+
+If your Scribus does share the system Python — run the check below to find out — then a plain `python3 -m pip install pyyaml qrcode pypng` is enough, and you can drop the `PYTHONPATH` prefix. Add `--user` if you hit a permissions error.
 
 `pypng` matters: `qrcode` uses Pillow by default, but Pillow is awkward to install into a bundled interpreter. With `pypng` present, `qrcode` falls back to a pure-Python PNG writer and no compiled dependency is needed.
 
@@ -88,11 +99,22 @@ python3 -m pip install pyyaml pymupdf
 
 ### Check it worked
 
+`check_environment.py` reports which interpreter is running and whether it can find each package. Run it **both ways** and compare — this is the quickest way to diagnose a missing module.
+
+Through your system Python:
+
 ```bash
-python3 -c "import yaml, pymupdf; print('system python OK')"
+python3 check_environment.py
 ```
 
-For Scribus's side, the dry run in §6 is the real check.
+And through Scribus, using the command for your platform from §7:
+
+```bash
+/Applications/Scribus.app/Contents/MacOS/Scribus --no-splash --no-gui \
+  --python-script check_environment.py
+```
+
+Each run prints its `Install prefix`. If the two differ — which is normal — then packages installed with one are invisible to the other, and they need installing for each. The report also lists exactly which packages that interpreter is missing, and writes a copy to `check_environment.txt`.
 
 ---
 
@@ -131,6 +153,7 @@ This folder holds the tool:
 scripts/pdf_generation/
     assets.yaml                 per-suit colours
     big_master.sla              big (Tarot) template
+    check_environment.py        reports which Python is in use, and what it can find
     cornucopia_common.py        shared code used by both scripts
     generate_deck.py            the engine
     merge_pdfs.py               the deck assembler
@@ -212,10 +235,11 @@ Scribus is a desktop application, so on macOS and Windows there is normally **no
 
 ### Running it
 
-**macOS:**
+**macOS** — include the `PYTHONPATH` prefix if you installed the packages with `--target` in §3:
 
 ```bash
-/Applications/Scribus.app/Contents/MacOS/Scribus --no-splash --no-gui \
+PYTHONPATH=~/cornucopia-python-libs /Applications/Scribus.app/Contents/MacOS/Scribus \
+  --no-splash --no-gui \
   --python-script generate_deck.py \
   --edition companion --language en --size bridge --cards LLM2
 ```
