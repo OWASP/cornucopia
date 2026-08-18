@@ -140,17 +140,21 @@ def main():
                 missing.append(card['card_id'])
 
         label = "{0} | {1} | {2}".format(edition, size_key, language.upper())
+
+        if not ordered_pdfs:
+            # None at all almost always means this size simply was not built,
+            # which is a normal choice rather than a problem worth flagging.
+            print("--- {0} --- not built, skipping".format(label))
+            continue
+
         print("--- {0} --- matched {1}/{2}".format(label, len(ordered_pdfs), len(deck)))
 
         if missing:
+            # Some but not all: this deck would be short, so say so loudly.
             incomplete.append({'target': label, 'missing': missing})
             print("    WARNING: {0} card PDF(s) missing: {1}{2}".format(
                 len(missing), ', '.join(missing[:10]),
                 ' ...' if len(missing) > 10 else ''))
-
-        if not ordered_pdfs:
-            print("    nothing to merge; skipping")
-            continue
 
         deck_name = cc.deck_pdf_name(config, edition, size_key, language, bleed)
         deck_path = os.path.join(out_dir, deck_name)

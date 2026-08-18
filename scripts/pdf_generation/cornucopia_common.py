@@ -168,9 +168,29 @@ def edition_data_version(config, base_dir, edition):
     return max(versions, key=_version_key) if versions else ''
 
 
+def supported_editions(config):
+    """
+    The editions this tool is set up to build, named in the config.
+
+    ``source/`` also holds card data for decks this tool does not produce --
+    EoP, DBD, Cumulus and others -- so what is on disk is not the same as what
+    can be built. Asking for one of those should be refused, not attempted.
+    """
+    return sorted((config.get('editions', {}) or {}).keys())
+
+
 def discover_editions(config, base_dir):
-    """Every edition with at least one card data file."""
-    return sorted({f['edition'] for f in scan_card_files(config, base_dir) if f['edition']})
+    """
+    Every edition that is both configured and has card data present.
+
+    Configured but missing data is left out, so the list offered to a user is
+    what they can actually build right now.
+    """
+    on_disk = {f['edition'] for f in scan_card_files(config, base_dir) if f['edition']}
+    configured = supported_editions(config)
+    if not configured:
+        return sorted(on_disk)
+    return [name for name in configured if name in on_disk]
 
 
 def discover_languages(config, base_dir, edition):

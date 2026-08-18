@@ -195,6 +195,8 @@ cd scripts/pdf_generation
 python3 generate_deck.py --dry-run
 ```
 
+If you have run the tool before, consider emptying `output/` first. Files from an earlier run stay where they are, so a later merge can pick up cards you no longer intended to include, which is confusing to debug. Deleting the folder is always safe — everything in it is regenerated.
+
 Expected:
 
 ```
@@ -368,7 +370,7 @@ Zipping is off unless you ask for it, so building one deck never produces a larg
 
 ## 10. Configuration
 
-Nothing above requires editing Python. The two YAML files cover the rest.
+Two YAML files provide the configurable options. One sets the default PDF editions, sizes and languages; the other defines suit colours. Nothing here requires editing Python.
 
 ### `pdf_config.yaml`
 
@@ -428,7 +430,7 @@ companion:
 
 ---
 
-## 11. Adding content
+## 11. New editions and languages
 
 **A new language** — add the card file to `source/` using the existing naming, then rerun. Nothing else is needed:
 
