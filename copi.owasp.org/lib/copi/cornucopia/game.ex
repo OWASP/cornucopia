@@ -58,7 +58,7 @@ defmodule Copi.Cornucopia.Game do
     game
     |> cast(attrs, [:name, :created_at, :edition, :started_at, :finished_at, :rounds_played, :suits, :round_open])
     |> validate_required([:name], message: "No really, give your game session a name")
-                    |> validate_format(:name, ~r/^[\x{0600}-\x{06FF}\x{0750}-\x{077F}\x{08A0}-\x{08FF}\x{FB50}-\x{FDFF}\x{FE70}-\x{FEFF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FFF}\x{FF66}-\x{FF9F}\x{3400}-\x{4DBF}\x{F900}-\x{FAFF}\x{0900}-\x{097F}\x{0E00}-\x{0E7F}\x{0400}-\x{04FF}\x{0500}-\x{052F}\x{2DE0}-\x{2DFF}\x{A640}-\x{A69F}\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}a-zA-Z\x{00C0}-\x{00D6}\x{00D8}-\x{00F6}\x{00F8}-\x{00FF}\x{0100}-\x{017E}0-9._\- ]+$/u, message: "contains invalid characters")
+    |> validate_format(:name, ~r/^[\x{0600}-\x{06FF}\x{0750}-\x{077F}\x{08A0}-\x{08FF}\x{FB50}-\x{FDFF}\x{FE70}-\x{FEFF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{4E00}-\x{9FFF}\x{FF66}-\x{FF9F}\x{3400}-\x{4DBF}\x{F900}-\x{FAFF}\x{0900}-\x{097F}\x{0E00}-\x{0E7F}\x{0400}-\x{04FF}\x{0500}-\x{052F}\x{2DE0}-\x{2DFF}\x{A640}-\x{A69F}\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}a-zA-Z\x{00C0}-\x{00D6}\x{00D8}-\x{00F6}\x{00F8}-\x{00FF}\x{0100}-\x{017E}0-9._\- ]+$/u, message: "contains invalid characters")
   end
 
   def continue_vote_count(game) do
