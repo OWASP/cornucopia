@@ -1,0 +1,208 @@
+---
+name: "Build PDF card decks"
+
+# ---------------------------------------------------------------------------
+# When this runs
+#
+# Building every edition and language is roughly two hours of runner time in
+# total, and the decks only change when card data or artwork changes. It is
+# therefore wired to releases and to a manual trigger rather than to every
+# commit.
+#
+# To build on every push to master instead, uncomment the block below. Both
+# options are kept here so the choice stays visible and can be changed without
+# redesigning the workflow.
+#
+#   push:
+#     branches:
+#       - "master"
+# ---------------------------------------------------------------------------
+on:
+  workflow_dispatch:
+    inputs:
+      edition:
+        description: "Edition to build, or 'all'"
+        required: false
+        default: "all"
+      language:
+        description: "Language to build, or 'all'"
+        required: false
+        default: "all"
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  hardening:
+    name: Harden runner
+    uses: ./.github/workflows/hardening.yaml
+
+  # Works out which edition and language pairs to build. A manual run can
+  # narrow this to one combination, which is how to try a single deck without
+  # spending the full build.
+  plan:
+    needs: hardening
+    name: "Plan the build"
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Work out the combinations to build
+        id: build-matrix
+        env:
+          WANTED_EDITION: ${{ github.event.inputs.edition || 'all' }}
+          WANTED_LANGUAGE: ${{ github.event.inputs.language || 'all' }}
+        run: |
+          python3 - <<'PYTHON' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+
+          # Kept in step with generation_targets in pdf_config.yaml.
+          combinations = [
+              {"edition": "webapp", "language": language}
+              for language in ("en", "es", "fr", "hi", "it", "nl", "no_nb", "pt_br", "pt_pt", "ru", "uk")
+          ] + [
+              {"edition": "mobileapp", "language": language} for language in ("en", "hi", "ru", "uk")
+          ] + [
+              {"edition": "companion", "language": "en"},
+          ]
+
+          edition = os.environ.get("WANTED_EDITION", "all")
+          language = os.environ.get("WANTED_LANGUAGE", "all")
+          if edition != "all":
+              combinations = [c for c in combinations if c["edition"] == edition]
+          if language != "all":
+              combinations = [c for c in combinations if c["language"] == language]
+
+          if not combinations:
+              raise SystemExit("No edition and language combination matches that request")
+
+          print("matrix=" + json.dumps({"include": combinations}))
+          PYTHON
+
+  # One job per edition and language. Each produces the decks for both card
+  # sizes, so a failure in one language does not stop the others.
+  build:
+    needs: [hardening, plan]
+    name: "Decks: ${{ matrix.edition }} ${{ matrix.language }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          lfs: true
+
+      - name: Get Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+
+      # xvfb is included because Scribus is a Qt application: --no-gui stops it
+      # opening a window, but it can still expect a display to be present.
+      - name: Install Scribus
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends scribus xvfb
+          scribus --version || true
+
+      # Scribus runs scripts in the system Python here, so these go into the
+      # same interpreter. All four are pure Python.
+      - name: Install Python packages
+        run: python3 -m pip install pyyaml qrcode pypng defusedxml pymupdf
+
+      # The card fonts live in the repository. Without them Scribus silently
+      # substitutes something else and the text comes out wrong.
+      - name: Install the card fonts
+        run: |
+          mkdir -p ~/.local/share/fonts
+          cp resources/templates/Fonts/NotoSans/*.ttf ~/.local/share/fonts/
+          cp resources/templates/Fonts/NotoSansDevanagari/*.ttf ~/.local/share/fonts/
+          fc-cache -f
+          fc-list | grep -ci "noto sans" || true
+
+      # Cheap check that every edition, language and artwork file resolves
+      # before committing to the slow part.
+      - name: Check the build resolves
+        working-directory: scripts/pdf_generation
+        run: python3 generate_deck.py --dry-run --edition "${{ matrix.edition }}" --language "${{ matrix.language }}"
+
+      - name: Generate the cards
+        working-directory: scripts/pdf_generation
+        run: |
+          xvfb-run -a scribus --no-splash --no-gui \
+            --python-script generate_deck.py \
+            --edition "${{ matrix.edition }}" --language "${{ matrix.language }}"
+
+      - name: Show the build log
+        if: always()
+        working-directory: scripts/pdf_generation
+        run: cat output/build_log.txt || echo "no build log was written"
+
+      # --clean removes the per-card PDFs, .sla files and QR images once the
+      # decks exist. Without it this step would leave a couple of gigabytes of
+      # working files behind.
+      - name: Merge into decks and clear up
+        working-directory: scripts/pdf_generation
+        run: |
+          python3 merge_pdfs.py \
+            --edition "${{ matrix.edition }}" --language "${{ matrix.language }}" --clean
+          ls -lh output/
+
+      - name: Keep the decks
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: decks-${{ matrix.edition }}-${{ matrix.language }}
+          path: scripts/pdf_generation/output/*.pdf
+          if-no-files-found: error
+          retention-days: 7
+
+  # Collects every language's decks and attaches them to the release.
+  publish:
+    needs: [hardening, build]
+    name: "Publish the decks"
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Collect the decks
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          path: collected
+          pattern: decks-*
+          merge-multiple: true
+
+      # ---------------------------------------------------------------------
+      # How the decks are packaged
+      #
+      # One archive per edition, matching the per-edition naming already used
+      # for the IDML downloads, so each edition has a single PDF archive
+      # alongside it rather than thirty-odd loose files.
+      #
+      # For a single archive containing every edition instead, comment out the
+      # loop below and uncomment the line after it.
+      # ---------------------------------------------------------------------
+      - name: Package the decks
+        run: |
+          mkdir -p release
+          for edition in webapp mobileapp companion; do
+            if ls collected/*_"${edition}"_*.pdf >/dev/null 2>&1; then
+              zip -j "release/owasp_cornucopia_${edition}_pdf_decks.zip" collected/*_"${edition}"_*.pdf
+            fi
+          done
+          # zip -j release/owasp_cornucopia_pdf_decks.zip collected/*.pdf
+          ls -lh release/
+
+      - name: Attach the decks to the release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        with:
+          draft: false
+          files: release/*.zip
