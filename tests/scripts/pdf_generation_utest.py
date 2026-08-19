@@ -22,6 +22,7 @@ if _PDF_GENERATION not in sys.path:
     sys.path.insert(0, _PDF_GENERATION)
 
 import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
+import merge_pdfs  # noqa: E402
 
 
 def _write(path: str, text: str = "") -> str:
@@ -457,6 +458,52 @@ class TestExportProfiles(unittest.TestCase):
         profile = cc.get_export_profiles(self.config, bleed_mm=6.0, printers_marks=True)[0]
         self.assertEqual(profile["bleed_mm"], 6.0)
         self.assertTrue(profile["printers_marks"])
+
+
+class TestCleanIntermediates(unittest.TestCase):
+    """The --clean tidy-up must remove working files and keep the finished decks."""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp()
+        self.out = os.path.join(self.tmp, "output")
+        self.config = {"paths": {"qr_code_dir": "output/qrcodes"}}
+
+        self.cards = [_write(os.path.join(self.out, "card_{0}.pdf".format(n)), "x" * 100) for n in range(3)]
+        self.slas = [_write(os.path.join(self.out, "card_{0}.sla".format(n)), "y") for n in range(3)]
+        self.qr = [_write(os.path.join(self.out, "qrcodes", "AA{0}.png".format(n)), "z") for n in range(3)]
+        self.deck = _write(os.path.join(self.out, "deck_demo_bridge_en_3.pdf"), "keep me")
+
+    def _clean(self) -> tuple:
+        return merge_pdfs.clean_intermediates(self.cards, self.config, self.tmp, self.out)
+
+    def test_removes_the_card_pdfs_it_consumed(self) -> None:
+        self._clean()
+        for path in self.cards:
+            self.assertFalse(os.path.exists(path))
+
+    def test_removes_the_sla_files(self) -> None:
+        self._clean()
+        for path in self.slas:
+            self.assertFalse(os.path.exists(path))
+
+    def test_removes_the_qr_images(self) -> None:
+        self._clean()
+        for path in self.qr:
+            self.assertFalse(os.path.exists(path))
+
+    def test_keeps_the_merged_deck(self) -> None:
+        self._clean()
+        self.assertTrue(os.path.exists(self.deck), "the merged deck must never be deleted")
+
+    def test_reports_what_it_removed(self) -> None:
+        removed, freed = self._clean()
+        self.assertEqual(removed, 9)
+        self.assertGreater(freed, 0)
+
+    def test_a_file_already_gone_is_not_an_error(self) -> None:
+        os.remove(self.cards[0])
+        removed, _freed = self._clean()
+        self.assertEqual(removed, 8)
 
 
 if __name__ == "__main__":

@@ -56,9 +56,61 @@ def parse_args():
                         help="Package the merged decks into ZIP archives")
     parser.add_argument("--no-zip", dest="do_zip", action="store_false",
                         help="Skip packaging even if the config enables it")
+    parser.add_argument("--clean", action="store_true",
+                        help="Delete the per-card PDFs, .sla files and QR codes once the "
+                             "decks have been written. Only the finished decks are kept.")
     parser.add_argument("--dry-run", action="store_true",
                         help="Report what would be merged, then exit")
     return parser.parse_args()
+
+
+def clean_intermediates(consumed_pdfs, config, base_dir, out_dir):
+    """
+    Remove the working files left behind once the decks exist.
+
+    A build produces one PDF and one .sla per card, plus a QR image per card
+    ID. For a full run that is thousands of files and a couple of gigabytes,
+    none of which is needed after merging. Only files this run actually
+    consumed are removed, and the merged decks are never touched.
+
+    Returns ``(files_removed, bytes_freed)``.
+    """
+    removed, freed = 0, 0
+
+    def drop(path):
+        nonlocal removed, freed
+        if not path or not os.path.isfile(path):
+            return
+        try:
+            size = os.path.getsize(path)
+            os.remove(path)
+            removed += 1
+            freed += size
+        except OSError as exc:
+            print("    could not remove {0}: {1}".format(os.path.basename(path), exc))
+
+    for pdf_path in sorted(set(consumed_pdfs)):
+        drop(pdf_path)
+
+    # The .sla files sit alongside the card PDFs and are named independently,
+    # so they are matched by extension within the output directory.
+    if os.path.isdir(out_dir):
+        for name in os.listdir(out_dir):
+            if name.lower().endswith(".sla"):
+                drop(os.path.join(out_dir, name))
+
+    qr_directory = cc.qr_dir(config, base_dir)
+    if os.path.isdir(qr_directory):
+        for name in os.listdir(qr_directory):
+            if name.lower().endswith(".png"):
+                drop(os.path.join(qr_directory, name))
+        try:
+            os.rmdir(qr_directory)
+        except OSError:
+            # Something else is in there; leaving it is harmless.
+            pass
+
+    return removed, freed
 
 
 def merge_deck(ordered_pdfs, output_path):
@@ -117,6 +169,7 @@ def main():
 
     merged_by_edition = {}
     incomplete = []
+    consumed_pdfs = []
 
     for target in targets:
         edition, language, size_key = target['edition'], target['language'], target['size']
@@ -166,8 +219,11 @@ def main():
         pages = merge_deck(ordered_pdfs, deck_path)
         print("    wrote {0} ({1} pages)".format(deck_name, pages))
         merged_by_edition.setdefault(edition, []).append(deck_path)
+        consumed_pdfs.extend(ordered_pdfs)
 
     if args.dry_run:
+        if args.clean:
+            print("\nWould then delete the per-card PDFs, .sla files and QR codes.")
         return 0
 
     # ---- optional packaging -------------------------------------------------
@@ -201,6 +257,21 @@ def main():
         with open(report, 'w', encoding='utf-8') as handle:
             json.dump(incomplete, handle, indent=2)
         print("{0} target(s) were incomplete; details in {1}".format(len(incomplete), report))
+
+    if args.clean:
+        if incomplete:
+            # Some decks came out short. Keeping the card files means the gaps
+            # can be filled and the merge rerun, rather than rebuilt from
+            # nothing, so this is the one case where cleaning is refused.
+            print("\nNot cleaning up: some decks were incomplete, so the card files are "
+                  "being kept. Rerun the generator for the cards listed above, merge "
+                  "again, then clean.")
+        elif not merged_by_edition:
+            print("\nNothing was merged, so there is nothing to clean up.")
+        else:
+            removed, freed = clean_intermediates(consumed_pdfs, config, base_dir, out_dir)
+            print("\nRemoved {0} working file(s), freeing {1:.1f} MB. "
+                  "The merged decks are kept.".format(removed, freed / (1024.0 * 1024.0)))
 
     return 0
 

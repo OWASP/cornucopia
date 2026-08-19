@@ -366,6 +366,16 @@ python3 merge_pdfs.py --edition companion --zip
 
 Zipping is off unless you ask for it, so building one deck never produces a large archive as a side effect.
 
+### Clearing up afterwards
+
+A build leaves one PDF and one `.sla` per card, plus a QR image per card ID. None of that is needed once the decks exist, and a full run of every edition and language leaves a couple of gigabytes of it. Add `--clean` to remove it:
+
+```bash
+python3 merge_pdfs.py --edition companion --clean
+```
+
+The merged decks are kept; only the working files go. If any deck came out short, cleaning is refused and the card files are left alone, so the gaps can be filled and the merge rerun rather than everything rebuilt. Add `--dry-run` to see what would be removed first.
+
 ---
 
 ## 10. Configuration
@@ -514,6 +524,7 @@ Some card PDFs are missing. `output/merge_gaps.json` lists which; rerun the gene
 --bleed-mm N          which bleed variant to merge
 --printers-marks      merge the marks variant
 --zip / --no-zip      package, or do not
+--clean               delete the card PDFs, .sla and QR files once decks are written
 --dry-run             report and exit
 ```
 
