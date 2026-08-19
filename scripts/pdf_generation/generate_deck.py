@@ -65,7 +65,7 @@ try:
 except ImportError:
     # defusedxml is not installed. Fall back rather than refuse to run, so a
     # missing optional package cannot stop a build; install it where you can.
-    from xml.etree.ElementTree import parse as parse_xml  # nosec B314
+    from xml.etree.ElementTree import parse as parse_xml  # nosec B405
 
     XML_HARDENED = False
 
@@ -411,7 +411,10 @@ def generate_card(card, edition, language, size_key, template_path, output_path,
     )
     images = {"qr_code": (qr_path, "1"), "card_border": (border_path, "0"), "card_back": (back_path, "0")}
 
-    tree = parse_xml(template_path)
+    # parse_xml is defusedxml's parser whenever that package is installed. The
+    # file read here is one of this repository's own .sla templates, named by
+    # the config rather than supplied by a caller, so it is not untrusted input.
+    tree = parse_xml(template_path)  # nosec B314
     root = tree.getroot()
 
     inject_color_definitions(

@@ -1,5 +1,5 @@
 ---
-name: "Build PDF card decks"
+name: Build PDF card decks
 
 # ---------------------------------------------------------------------------
 # When this runs
@@ -17,20 +17,20 @@ name: "Build PDF card decks"
 #     branches:
 #       - "master"
 # ---------------------------------------------------------------------------
-on:
+"on":
   workflow_dispatch:
     inputs:
       edition:
-        description: "Edition to build, or 'all'"
+        description: Edition to build, or 'all'
         required: false
-        default: "all"
+        default: all
       language:
-        description: "Language to build, or 'all'"
+        description: Language to build, or 'all'
         required: false
-        default: "all"
+        default: all
   push:
     tags:
-      - "v*"
+      - v*
 
 permissions:
   contents: read
@@ -45,7 +45,7 @@ jobs:
   # spending the full build.
   plan:
     needs: hardening
-    name: "Plan the build"
+    name: Plan the build
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.build-matrix.outputs.matrix }}
@@ -167,7 +167,7 @@ jobs:
   # Collects every language's decks and attaches them to the release.
   publish:
     needs: [hardening, build]
-    name: "Publish the decks"
+    name: Publish the decks
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     permissions:

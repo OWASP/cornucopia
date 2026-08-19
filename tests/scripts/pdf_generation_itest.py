@@ -15,7 +15,11 @@ import os
 import sys
 import tempfile
 import unittest
-import xml.etree.ElementTree as ET
+
+# Used only for type annotations; the .sla files are read with defusedxml's
+# parser below, which is how scripts/convert.py handles the same job.
+import xml.etree.ElementTree as ET  # nosec B405
+from defusedxml.ElementTree import parse as parse_xml
 
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 _PDF_GENERATION = os.path.join(_REPO_ROOT, "scripts", "pdf_generation")
@@ -124,7 +128,7 @@ class TemplatePopulationTestCase(unittest.TestCase):
             card, "demo", language, "bridge", BRIDGE_TEMPLATE, out, self.config, self.assets, self.tmp, self.log
         )
         self.assertTrue(os.path.exists(out), "no .sla was written")
-        return ET.parse(out).getroot()
+        return parse_xml(out).getroot()
 
     @staticmethod
     def card(**overrides) -> dict:
