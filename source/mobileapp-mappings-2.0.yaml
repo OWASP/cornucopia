@@ -368,7 +368,7 @@ suits:
     value: '6'
     url: https://cornucopia.owasp.org/cards/RS6
     owasp_masvs: [RESILIENCE-4]
-    owasp_mastg: [0046, 0352, 0353, 0401, 0402]
+    owasp_mastg: [0352, 0353, 0401, 0402]
     owasp_mastg_know: []
     capec: [115, 167, 554]
     safecode: ['-']
@@ -385,7 +385,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/RS8
     owasp_masvs: [RESILIENCE-3, RESILIENCE-4]
     owasp_mastg: [0341, 0354]
-    owasp_mastg_know: []
+    owasp_mastg_know: [0030, 0032, 0087]
     capec: [167, 554]
     safecode: ['-']
   - id: RS9
@@ -416,16 +416,16 @@ suits:
     value: Q
     url: https://cornucopia.owasp.org/cards/RSQ
     owasp_masvs: [RESILIENCE-2, RESILIENCE-4]
-    owasp_mastg: [0341]
-    owasp_mastg_know: []
+    owasp_mastg: [0341, 0354]
+    owasp_mastg_know: [0030, 0032, 0087, 0109, 0110]
     capec: [167, 554]
     safecode: ['-']
   - id: RSK
     value: K
     url: https://cornucopia.owasp.org/cards/RSK
     owasp_masvs: [RESILIENCE-4]
-    owasp_mastg: [0046, 0401, 0402]
-    owasp_mastg_know: []
+    owasp_mastg: [0341, 0354]
+    owasp_mastg_know: [0030, 0032, 0087, 0109, 0110, 0119]
     capec: [167, 554]
     safecode: ['-']
   - id: RSA
@@ -443,7 +443,7 @@ suits:
     value: '2'
     url: https://cornucopia.owasp.org/cards/CRM2
     owasp_masvs: [AUTH-2, AUTH-3, CRYPTO-2]
-    owasp_mastg: [0213, 0214, 0307, 0308]
+    owasp_mastg: [0307, 0308]
     owasp_mastg_know: []
     capec: [97, 116, 117]
     safecode: [14, 29]
@@ -451,8 +451,8 @@ suits:
     value: '3'
     url: https://cornucopia.owasp.org/cards/CRM3
     owasp_masvs: [CRYPTO-1]
-    owasp_mastg: [0209, 0210, 0211, 0312]
-    owasp_mastg_know: []
+    owasp_mastg: [0209, 0210, 0211]
+    owasp_mastg_know: [0111]
     capec: [37, 204]
     safecode: [21, 29]
   - id: CRM4
@@ -491,7 +491,7 @@ suits:
     value: '8'
     url: https://cornucopia.owasp.org/cards/CRM8
     owasp_masvs: [CRYPTO-1, CRYPTO-2]
-    owasp_mastg: [0208, 0212, 0221, 0204, 0205, 0309, 0310, 0311, 0349]
+    owasp_mastg: [0204, 0208, 0212, 0221, 0204, 0205, 0309, 0310, 0311, 0349]
     owasp_mastg_know: []
     capec: [20, 55, 112, 485]
     safecode: [21, 29, 32, 33]

@@ -253,7 +253,7 @@ suits:
     id: "RS8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/RS8"
-    desc: "Carlos can reverse engineer the app with static analysis and decompilation tools because reverse engineering controls aren't strong enough for the app's risk and threat model"
+    desc: "Carlos can expose sensitive data by hooking sensitive functions at runtime because the app does not detect or respond to instrumentation"
   -
     id: "RS9"
     value: "9"
@@ -263,7 +263,7 @@ suits:
     id: "RSX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/RSX"
-    desc: "Juan can bypass jailbreak and root detection and execute administrative functions to bypass integrity checks and access controls and trigger app functionality"
+    desc: "Juan can access functionality on a rooted or jailbroken device because the app does not detect the compromised environment"
   -
     id: "RSJ"
     value: "J"
@@ -273,12 +273,12 @@ suits:
     id: "RSQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/RSQ"
-    desc: "Titus can patch out critical functionality because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Titus can alter or bypass critical functionality by patching the app or hooking sensitive functions at runtime because the app does not adequately detect tampering or respond to runtime instrumentation"
   -
     id: "RSK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/RSK"
-    desc: "Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them"
+    desc: "Sherif can disable or evade anti-reversing and runtime-protection checks by patching these or hooking the signals they rely on, allowing analysis or instrumentation to continue undetected"
   -
     id: "RSA"
     value: "A"
