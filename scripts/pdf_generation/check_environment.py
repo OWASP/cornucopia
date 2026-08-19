@@ -28,17 +28,45 @@ import sys
 
 # name -> (package to install, needed in Scribus?, needed in system Python?)
 REQUIRED = {
-    'yaml': ('pyyaml', True, True),
-    'qrcode': ('qrcode', True, False),
-    'png': ('pypng, so qrcode works without Pillow', True, False),
-    'pymupdf': ('pymupdf, for merge_pdfs.py', False, True),
+    "yaml": ("pyyaml", True, True),
+    "qrcode": ("qrcode", True, False),
+    "png": ("pypng, so qrcode works without Pillow", True, False),
+    "pymupdf": ("pymupdf, for merge_pdfs.py", False, True),
 }
 
 # Improve things when present, but the tool runs without them.
 OPTIONAL = {
-    'defusedxml': 'defusedxml, a hardened XML parser; the standard library '
-                  'parser is used if it is absent',
+    "defusedxml": "defusedxml, a hardened XML parser; the standard library " "parser is used if it is absent",
 }
+
+
+def check_required(in_scribus):
+    """Report on each required package. Returns (lines, missing names)."""
+    lines, missing = [], []
+    for name, (package, for_scribus, for_system) in REQUIRED.items():
+        wanted = for_scribus if in_scribus else for_system
+        try:
+            module = __import__(name)
+            lines.append("  found       %-9s %s" % (name, getattr(module, "__file__", "(built in)")))
+        except ImportError:
+            if wanted:
+                lines.append("  MISSING     %-9s install %s" % (name, package))
+                missing.append(name)
+            else:
+                lines.append("  not needed  %-9s (only used by the other interpreter)" % name)
+    return lines, missing
+
+
+def check_optional():
+    """Report on packages that improve things but are not required."""
+    lines = []
+    for name, description in OPTIONAL.items():
+        try:
+            __import__(name)
+            lines.append("  found       %-11s" % name)
+        except ImportError:
+            lines.append("  not found   %-11s install %s" % (name, description))
+    return lines
 
 
 def report():
@@ -47,6 +75,7 @@ def report():
 
     try:
         import scribus  # noqa: F401
+
         in_scribus = True
         add("Running inside: Scribus")
     except ImportError:
@@ -64,28 +93,12 @@ def report():
 
     add("")
     add("Packages this interpreter needs:")
-    missing = []
-    for name, (package, for_scribus, for_system) in REQUIRED.items():
-        wanted = for_scribus if in_scribus else for_system
-        try:
-            module = __import__(name)
-            where = getattr(module, '__file__', '(built in)')
-            add("  found       %-9s %s" % (name, where))
-        except ImportError:
-            if wanted:
-                add("  MISSING     %-9s install %s" % (name, package))
-                missing.append(name)
-            else:
-                add("  not needed  %-9s (only used by the other interpreter)" % name)
+    lines, missing = check_required(in_scribus)
+    add("\n".join(lines))
 
     add("")
     add("Optional:")
-    for name, description in OPTIONAL.items():
-        try:
-            __import__(name)
-            add("  found       %-11s" % name)
-        except ImportError:
-            add("  not found   %-11s install %s" % (name, description))
+    add("\n".join(check_optional()))
 
     add("")
     if missing:
@@ -105,8 +118,7 @@ def report():
 if __name__ == "__main__":
     text = report()
     print(text)
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       "check_environment.txt")
+    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check_environment.txt")
     try:
         with open(out, "w", encoding="utf-8") as handle:
             handle.write(text + "\n")

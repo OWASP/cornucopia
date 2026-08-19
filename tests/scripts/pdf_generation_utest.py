@@ -9,6 +9,7 @@ Everything here works on temporary fixtures rather than the repository's real
 card data, so the tests do not change meaning when a translation is updated.
 No Scribus is required.
 """
+
 import os
 import sys
 import tempfile
@@ -307,7 +308,8 @@ class TestResolveBackground(unittest.TestCase):
 
     def test_a_suits_court_entry_is_ignored_for_a_pip_card(self) -> None:
         assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": "demo/custom.png"}}]}}
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AA2", "value": "2"}, assets), "aa-small-default.png")
+        card = {"suit_id": "AA", "card_id": "AA2", "value": "2"}
+        self.assertEqual(self._resolve(card, assets), "aa-small-default.png")
 
     def test_a_per_card_entry_beats_the_suits_court_entry(self) -> None:
         assets = {

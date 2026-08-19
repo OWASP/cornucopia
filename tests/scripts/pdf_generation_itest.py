@@ -10,6 +10,7 @@ Scribus itself is only needed to export a PDF. Writing and reading the .sla is
 plain XML, so these tests run anywhere and cover the part of the pipeline that
 decides what each card says and looks like.
 """
+
 import os
 import sys
 import tempfile
@@ -21,8 +22,7 @@ _PDF_GENERATION = os.path.join(_REPO_ROOT, "scripts", "pdf_generation")
 if _PDF_GENERATION not in sys.path:
     sys.path.insert(0, _PDF_GENERATION)
 
-import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
-import generate_deck  # noqa: E402
+import generate_deck  # noqa: E402  (needs the sys.path line above)
 
 BRIDGE_TEMPLATE = os.path.join(_PDF_GENERATION, "small_master.sla")
 

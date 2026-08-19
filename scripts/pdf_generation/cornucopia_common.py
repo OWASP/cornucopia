@@ -17,27 +17,27 @@ import re
 
 import yaml
 
-
 # --------------------------------------------------------------------------
 # Basic loading
 # --------------------------------------------------------------------------
+
 
 def load_yaml(path, default=None):
     """Load a YAML file, returning ``default`` when it is missing or empty."""
     if not path or not os.path.exists(path):
         return {} if default is None else default
-    with open(path, 'r', encoding='utf-8') as handle:
+    with open(path, "r", encoding="utf-8") as handle:
         return yaml.safe_load(handle) or ({} if default is None else default)
 
 
-def load_config(script_dir, config_name='pdf_config.yaml'):
+def load_config(script_dir, config_name="pdf_config.yaml"):
     """Load the central control-panel config."""
     return load_yaml(os.path.join(script_dir, config_name))
 
 
 def load_assets(config, script_dir):
     """Load the optional assets.yaml override table."""
-    rel = config.get('paths', {}).get('assets_config_path', 'assets.yaml')
+    rel = config.get("paths", {}).get("assets_config_path", "assets.yaml")
     return load_yaml(os.path.join(script_dir, rel))
 
 
@@ -45,41 +45,42 @@ def load_assets(config, script_dir):
 # Path helpers
 # --------------------------------------------------------------------------
 
+
 def resolve_asset_path(base_dir, config, relative_subpath):
     """Resolve a path underneath the configured asset root."""
-    asset_root = config.get('paths', {}).get('asset_root', 'Assets')
-    clean = str(relative_subpath).replace('\\', '/').lstrip('/')
-    if clean.lower().startswith('assets/'):
+    asset_root = config.get("paths", {}).get("asset_root", "Assets")
+    clean = str(relative_subpath).replace("\\", "/").lstrip("/")
+    if clean.lower().startswith("assets/"):
         clean = clean[7:]
     if os.path.isabs(asset_root):
-        return os.path.join(asset_root, clean).replace('\\', '/')
-    return os.path.join(base_dir, asset_root, clean).replace('\\', '/')
+        return os.path.join(asset_root, clean).replace("\\", "/")
+    return os.path.join(base_dir, asset_root, clean).replace("\\", "/")
 
 
 def data_template(config):
     """The configured naming pattern for card data files."""
-    return config.get('paths', {}).get(
-        'card_data_path', 'source/%edition%/%language%/cornucopia_%language%.yaml')
+    return config.get("paths", {}).get("card_data_path", "source/%edition%/%language%/cornucopia_%language%.yaml")
 
 
 def card_data_path(config, base_dir, edition, language, version=None):
     """Absolute path to the source YAML for one edition/language pair."""
     template = data_template(config)
-    if version is None and '%edition_version%' in template:
+    if version is None and "%edition_version%" in template:
         version = edition_data_version(config, base_dir, edition)
-    rel = (template
-           .replace('%edition%', edition)
-           .replace('%language%', language)
-           .replace('%edition_version%', str(version or '')))
+    rel = (
+        template.replace("%edition%", edition)
+        .replace("%language%", language)
+        .replace("%edition_version%", str(version or ""))
+    )
     return os.path.join(base_dir, rel)
 
 
 def output_dir(config, base_dir):
-    return os.path.join(base_dir, config.get('paths', {}).get('output_dir', 'Generated_Cards'))
+    return os.path.join(base_dir, config.get("paths", {}).get("output_dir", "Generated_Cards"))
 
 
 def qr_dir(config, base_dir):
-    return os.path.join(base_dir, config.get('paths', {}).get('qr_code_dir', 'Assets/QRCodes'))
+    return os.path.join(base_dir, config.get("paths", {}).get("qr_code_dir", "Assets/QRCodes"))
 
 
 # --------------------------------------------------------------------------
@@ -87,9 +88,9 @@ def qr_dir(config, base_dir):
 # --------------------------------------------------------------------------
 
 _TOKEN_PATTERNS = {
-    'edition': r'[A-Za-z0-9_-]+?',
-    'language': r'[A-Za-z0-9_]+',
-    'edition_version': r'[0-9][0-9.]*',
+    "edition": r"[A-Za-z0-9_-]+?",
+    "language": r"[A-Za-z0-9_]+",
+    "edition_version": r"[0-9][0-9.]*",
 }
 
 
@@ -102,12 +103,12 @@ def _data_pattern_regex(config):
     one file per language directory or as a flat folder of files named
     ``<edition>-cards-<version>-<language>.yaml``.
     """
-    parts = re.split(r'(%[a-z_]+%)', data_template(config))
+    parts = re.split(r"(%[a-z_]+%)", data_template(config))
     seen, out = set(), []
     for part in parts:
-        token = re.fullmatch(r'%([a-z_]+)%', part)
+        token = re.fullmatch(r"%([a-z_]+)%", part)
         if not token:
-            out.append(re.escape(part).replace('/', r'[\\/]'))
+            out.append(re.escape(part).replace("/", r"[\\/]"))
             continue
         name = token.group(1)
         body = _TOKEN_PATTERNS.get(name)
@@ -115,21 +116,21 @@ def _data_pattern_regex(config):
             out.append(re.escape(part))
         elif name in seen:
             # A token used twice must match the same text both times.
-            out.append('(?P=%s)' % name)
+            out.append("(?P=%s)" % name)
         else:
             seen.add(name)
-            out.append('(?P<%s>%s)' % (name, body))
-    return re.compile('^' + ''.join(out) + '$', re.IGNORECASE)
+            out.append("(?P<%s>%s)" % (name, body))
+    return re.compile("^" + "".join(out) + "$", re.IGNORECASE)
 
 
 def _version_key(text):
     """Sort versions numerically, so 3.0 outranks 2.2 and 1.1 outranks 1.0."""
-    return tuple(int(p) if p.isdigit() else 0 for p in str(text).split('.'))
+    return tuple(int(p) if p.isdigit() else 0 for p in str(text).split("."))
 
 
 def scan_card_files(config, base_dir):
     """Every file under the source root whose name matches the data pattern."""
-    root = os.path.join(base_dir, config.get('paths', {}).get('source_root', 'source'))
+    root = os.path.join(base_dir, config.get("paths", {}).get("source_root", "source"))
     if not os.path.isdir(root):
         return []
 
@@ -138,17 +139,19 @@ def scan_card_files(config, base_dir):
     for dirpath, _dirnames, filenames in os.walk(root):
         for name in filenames:
             full = os.path.join(dirpath, name)
-            rel = os.path.relpath(full, base_dir).replace('\\', '/')
+            rel = os.path.relpath(full, base_dir).replace("\\", "/")
             match = regex.match(rel)
             if not match:
                 continue
             fields = match.groupdict()
-            found.append({
-                'edition': fields.get('edition') or '',
-                'language': fields.get('language') or '',
-                'version': fields.get('edition_version') or '',
-                'path': full,
-            })
+            found.append(
+                {
+                    "edition": fields.get("edition") or "",
+                    "language": fields.get("language") or "",
+                    "version": fields.get("edition_version") or "",
+                    "path": full,
+                }
+            )
     return found
 
 
@@ -160,12 +163,15 @@ def edition_data_version(config, base_dir, edition):
     build is pinned to a known release. Otherwise the highest version present
     is used, so a newly added release is picked up without a config change.
     """
-    declared = edition_config(config, edition).get('data_version')
+    declared = edition_config(config, edition).get("data_version")
     if declared:
         return str(declared)
-    versions = {f['version'] for f in scan_card_files(config, base_dir)
-                if f['edition'].lower() == str(edition).lower() and f['version']}
-    return max(versions, key=_version_key) if versions else ''
+    versions = {
+        f["version"]
+        for f in scan_card_files(config, base_dir)
+        if f["edition"].lower() == str(edition).lower() and f["version"]
+    }
+    return max(versions, key=_version_key) if versions else ""
 
 
 def supported_editions(config):
@@ -176,7 +182,7 @@ def supported_editions(config):
     EoP, DBD, Cumulus and others -- so what is on disk is not the same as what
     can be built. Asking for one of those should be refused, not attempted.
     """
-    return sorted((config.get('editions', {}) or {}).keys())
+    return sorted((config.get("editions", {}) or {}).keys())
 
 
 def discover_editions(config, base_dir):
@@ -186,7 +192,7 @@ def discover_editions(config, base_dir):
     Configured but missing data is left out, so the list offered to a user is
     what they can actually build right now.
     """
-    on_disk = {f['edition'] for f in scan_card_files(config, base_dir) if f['edition']}
+    on_disk = {f["edition"] for f in scan_card_files(config, base_dir) if f["edition"]}
     configured = supported_editions(config)
     if not configured:
         return sorted(on_disk)
@@ -196,10 +202,13 @@ def discover_editions(config, base_dir):
 def discover_languages(config, base_dir, edition):
     """Every language available for an edition, at the version being built."""
     wanted = edition_data_version(config, base_dir, edition)
-    return sorted({f['language'] for f in scan_card_files(config, base_dir)
-                   if f['edition'].lower() == str(edition).lower()
-                   and f['language']
-                   and (not wanted or f['version'] == wanted)})
+    return sorted(
+        {
+            f["language"]
+            for f in scan_card_files(config, base_dir)
+            if f["edition"].lower() == str(edition).lower() and f["language"] and (not wanted or f["version"] == wanted)
+        }
+    )
 
 
 def find_misnamed_files(config, base_dir):
@@ -209,13 +218,13 @@ def find_misnamed_files(config, base_dir):
     A mistyped extension is the one way a language can vanish from a build
     without anything else noticing, so it is reported rather than ignored.
     """
-    root = os.path.join(base_dir, config.get('paths', {}).get('source_root', 'source'))
+    root = os.path.join(base_dir, config.get("paths", {}).get("source_root", "source"))
     if not os.path.isdir(root):
         return []
     odd = []
     for dirpath, _dirnames, filenames in os.walk(root):
         for name in filenames:
-            if os.path.splitext(name)[1].lower() not in ('.yaml', '.yml'):
+            if os.path.splitext(name)[1].lower() not in (".yaml", ".yml"):
                 odd.append(os.path.join(dirpath, name))
     return odd
 
@@ -229,9 +238,9 @@ def expand_selection(requested, available, label, warnings):
     typo fails loudly instead of quietly producing a short deck.
     """
     if requested is None:
-        requested = 'all'
+        requested = "all"
     if isinstance(requested, str):
-        if requested.strip().lower() == 'all':
+        if requested.strip().lower() == "all":
             return list(available)
         requested = [requested]
 
@@ -245,7 +254,9 @@ def expand_selection(requested, available, label, warnings):
     if missing:
         warnings.append(
             "Requested {0} not found: {1} (available: {2})".format(
-                label, ', '.join(missing), ', '.join(available) or 'none'))
+                label, ", ".join(missing), ", ".join(available) or "none"
+            )
+        )
     return resolved
 
 
@@ -258,37 +269,37 @@ def resolve_targets(config, base_dir, editions=None, languages=None, sizes=None)
     ``generation_targets`` in the config; both accept ``"all"`` or a list.
     """
     warnings = []
-    wanted = config.get('generation_targets', {}) or {}
+    wanted = config.get("generation_targets", {}) or {}
 
-    requested_editions = editions if editions else wanted.get('editions', 'all')
-    requested_languages = languages if languages else wanted.get('languages', 'all')
-    requested_sizes = sizes if sizes else wanted.get('sizes', 'all')
+    requested_editions = editions if editions else wanted.get("editions", "all")
+    requested_languages = languages if languages else wanted.get("languages", "all")
+    requested_sizes = sizes if sizes else wanted.get("sizes", "all")
 
     available_editions = discover_editions(config, base_dir)
-    chosen_editions = expand_selection(requested_editions, available_editions, 'edition', warnings)
+    chosen_editions = expand_selection(requested_editions, available_editions, "edition", warnings)
 
-    available_sizes = list((config.get('size_profiles', {}) or {}).keys())
-    chosen_sizes = expand_selection(requested_sizes, available_sizes, 'size', warnings)
+    available_sizes = list((config.get("size_profiles", {}) or {}).keys())
+    chosen_sizes = expand_selection(requested_sizes, available_sizes, "size", warnings)
 
     targets = []
     for edition in chosen_editions:
         available_languages = discover_languages(config, base_dir, edition)
         chosen_languages = expand_selection(
-            requested_languages, available_languages,
-            "language for edition '{0}'".format(edition), warnings)
+            requested_languages, available_languages, "language for edition '{0}'".format(edition), warnings
+        )
         for language in chosen_languages:
             for size in chosen_sizes:
-                targets.append({'edition': edition, 'language': language, 'size': size})
+                targets.append({"edition": edition, "language": language, "size": size})
 
     for path in find_misnamed_files(config, base_dir):
-        warnings.append(
-            "Ignored '{0}': not a .yaml file (check the extension)".format(path))
+        warnings.append("Ignored '{0}': not a .yaml file (check the extension)".format(path))
     return targets, warnings
 
 
 # --------------------------------------------------------------------------
 # Card data
 # --------------------------------------------------------------------------
+
 
 def parse_cards(yaml_path):
     """
@@ -301,21 +312,23 @@ def parse_cards(yaml_path):
     data = load_yaml(yaml_path)
     cards, suit_order = [], []
 
-    for index, suit in enumerate(data.get('suits', []) or []):
-        suit_id = str(suit.get('id', '')).strip()
+    for index, suit in enumerate(data.get("suits", []) or []):
+        suit_id = str(suit.get("id", "")).strip()
         suit_order.append(suit_id)
-        for card in suit.get('cards', []) or []:
-            cards.append({
-                'suit_name': suit.get('name', '') or '',
-                'suit_id': suit_id,
-                'suit_index': index,
-                'card_id': str(card.get('id', '')).strip(),
-                'value': str(card.get('value', '')),
-                'attack_text': card.get('desc', '') or '',
-                'misc_text': card.get('misc', '') or '',
-                'card_kind': str(card.get('card', '') or '').strip(),
-                'url': card.get('url', '') or '',
-            })
+        for card in suit.get("cards", []) or []:
+            cards.append(
+                {
+                    "suit_name": suit.get("name", "") or "",
+                    "suit_id": suit_id,
+                    "suit_index": index,
+                    "card_id": str(card.get("id", "")).strip(),
+                    "value": str(card.get("value", "")),
+                    "attack_text": card.get("desc", "") or "",
+                    "misc_text": card.get("misc", "") or "",
+                    "card_kind": str(card.get("card", "") or "").strip(),
+                    "url": card.get("url", "") or "",
+                }
+            )
     return cards, suit_order
 
 
@@ -328,15 +341,16 @@ def sort_deck(cards, config, edition, suit_order, language=None):
     about keeps its original relative position.
     """
     semantics = card_semantics(config, language)
-    value_order = {str(k).upper(): int(v)
-                   for k, v in (semantics.get('value_order', {}) or {}).items()}
+    value_order = {str(k).upper(): int(v) for k, v in (semantics.get("value_order", {}) or {}).items()}
 
-    override = (edition_config(config, edition).get('suit_order') or suit_order)
+    override = edition_config(config, edition).get("suit_order") or suit_order
     positions = {str(s).lower(): i for i, s in enumerate(override)}
 
     def key(card):
-        return (positions.get(str(card['suit_id']).lower(), 999),
-                value_order.get(str(card['value']).upper().strip(), 999))
+        return (
+            positions.get(str(card["suit_id"]).lower(), 999),
+            value_order.get(str(card["value"]).upper().strip(), 999),
+        )
 
     return sorted(cards, key=key)
 
@@ -345,8 +359,9 @@ def sort_deck(cards, config, edition, suit_order, language=None):
 # Card semantics — all derived from data or config, never hardcoded
 # --------------------------------------------------------------------------
 
+
 def edition_config(config, edition):
-    return (config.get('editions', {}) or {}).get(edition, {}) or {}
+    return (config.get("editions", {}) or {}).get(edition, {}) or {}
 
 
 def card_semantics(config, language=None):
@@ -357,18 +372,18 @@ def card_semantics(config, language=None):
     court cards as B/D/K in Cyrillic rather than J/Q/K, so a single global list
     would silently fail to recognise them as court cards.
     """
-    base = config.get('card_semantics', {}) or {}
-    override = ((base.get('language_overrides', {}) or {}).get(language, {}) or {}) if language else {}
+    base = config.get("card_semantics", {}) or {}
+    override = ((base.get("language_overrides", {}) or {}).get(language, {}) or {}) if language else {}
     if not override:
         return base
 
     merged = dict(base)
-    if override.get('court_values'):
-        merged['court_values'] = list(base.get('court_values', []) or []) + list(override['court_values'])
-    if override.get('value_order'):
-        values = dict(base.get('value_order', {}) or {})
-        values.update(override['value_order'])
-        merged['value_order'] = values
+    if override.get("court_values"):
+        merged["court_values"] = list(base.get("court_values", []) or []) + list(override["court_values"])
+    if override.get("value_order"):
+        values = dict(base.get("value_order", {}) or {})
+        values.update(override["value_order"])
+        merged["value_order"] = values
     return merged
 
 
@@ -381,17 +396,16 @@ def is_joker(card, config, edition):
     so matching on its text alone is unreliable, and some editions have no
     jokers at all.
     """
-    joker_suits = {str(s).lower()
-                   for s in (edition_config(config, edition).get('joker_suits') or [])}
-    if str(card.get('suit_id', '')).lower() in joker_suits:
+    joker_suits = {str(s).lower() for s in (edition_config(config, edition).get("joker_suits") or [])}
+    if str(card.get("suit_id", "")).lower() in joker_suits:
         return True
-    return str(card.get('card_kind', '')).strip().lower() == 'joker'
+    return str(card.get("card_kind", "")).strip().lower() == "joker"
 
 
 def is_court(card, config, language=None):
     """Court cards (J/Q/K, or their localised equivalents) take court artwork."""
-    court = {str(v).upper() for v in (card_semantics(config, language).get('court_values') or [])}
-    return str(card.get('value', '')).upper().strip() in court
+    court = {str(v).upper() for v in (card_semantics(config, language).get("court_values") or [])}
+    return str(card.get("value", "")).upper().strip() in court
 
 
 def has_special_text(card):
@@ -401,19 +415,20 @@ def has_special_text(card):
     This is purely data-driven, which is what lets jokerless editions such as
     Companion work without any special-casing in the engine.
     """
-    return bool(str(card.get('misc_text', '') or '').strip())
+    return bool(str(card.get("misc_text", "") or "").strip())
 
 
 # --------------------------------------------------------------------------
 # Fonts and sizing
 # --------------------------------------------------------------------------
 
-def get_font(config, language, role='body'):
+
+def get_font(config, language, role="body"):
     """Font for a language and role ('body' or 'accent'), falling back to default."""
-    handling = config.get('font_handling', {}) or {}
-    default = handling.get('default', {}) or {}
+    handling = config.get("font_handling", {}) or {}
+    default = handling.get("default", {}) or {}
     per_language = handling.get(language, {}) or {}
-    return per_language.get(role, default.get(role, 'Noto Sans Light'))
+    return per_language.get(role, default.get(role, "Noto Sans Light"))
 
 
 def get_font_size(config, size_key, frame, language):
@@ -423,13 +438,13 @@ def get_font_size(config, size_key, frame, language):
     Offsets are declared per frame so that shrinking a dense language affects
     only the frames that actually overflow.
     """
-    profile = (config.get('size_profiles', {}) or {}).get(size_key, {}) or {}
-    base = float((profile.get('base_font_sizes', {}) or {}).get(frame, 0.0))
+    profile = (config.get("size_profiles", {}) or {}).get(size_key, {}) or {}
+    base = float((profile.get("base_font_sizes", {}) or {}).get(frame, 0.0))
 
-    scaling = config.get('font_scaling', {}) or {}
+    scaling = config.get("font_scaling", {}) or {}
     frame_scaling = scaling.get(frame, {})
     if isinstance(frame_scaling, dict):
-        offset = frame_scaling.get(language, frame_scaling.get('default', 0.0))
+        offset = frame_scaling.get(language, frame_scaling.get("default", 0.0))
     else:
         offset = frame_scaling
     return base + float(offset or 0.0)
@@ -439,17 +454,18 @@ def get_font_size(config, size_key, frame, language):
 # Colours
 # --------------------------------------------------------------------------
 
+
 def _suit_entry(assets_data, edition, suit_id):
     """The assets.yaml block for one suit, if it has one."""
     if not assets_data:
         return {}
     block = assets_data.get(edition)
     if isinstance(block, dict):
-        suits = block.get('suits', []) or []
+        suits = block.get("suits", []) or []
     else:
-        suits = assets_data.get('suits', []) or []
+        suits = assets_data.get("suits", []) or []
     for suit in suits:
-        if str(suit.get('id', '')).lower() == str(suit_id).lower():
+        if str(suit.get("id", "")).lower() == str(suit_id).lower():
             return suit
     return {}
 
@@ -463,7 +479,7 @@ def _swatch(value, generated_name, definitions):
     purely as data.
     """
     if isinstance(value, dict) and value:
-        definitions[generated_name] = {k: int(value.get(k, 0)) for k in ('c', 'm', 'y', 'k')}
+        definitions[generated_name] = {k: int(value.get(k, 0)) for k in ("c", "m", "y", "k")}
         return generated_name
     if isinstance(value, str) and value.strip():
         return value.strip()
@@ -484,29 +500,25 @@ def card_colors(config, assets_data, edition, card, language=None):
 
     Returns ``(suit_color, number_color, definitions_to_inject)``.
     """
-    suit_id = str(card.get('suit_id', ''))
+    suit_id = str(card.get("suit_id", ""))
     entry = _suit_entry(assets_data, edition, suit_id)
-    defaults = config.get('defaults', {}) or {}
+    defaults = config.get("defaults", {}) or {}
     ed_cfg = edition_config(config, edition)
     definitions = {}
 
-    suit_color = _swatch(entry.get('color'),
-                         'Suit_{0}_{1}'.format(edition.capitalize(), suit_id.upper()),
-                         definitions)
+    suit_color = _swatch(entry.get("color"), "Suit_{0}_{1}".format(edition.capitalize(), suit_id.upper()), definitions)
     if not suit_color:
-        suit_color = {str(k).lower(): v
-                      for k, v in (ed_cfg.get('suit_colors') or {}).items()}.get(suit_id.lower())
+        suit_color = {str(k).lower(): v for k, v in (ed_cfg.get("suit_colors") or {}).items()}.get(suit_id.lower())
     if not suit_color:
-        suit_color = defaults.get('suit_color', 'Data_Color')
+        suit_color = defaults.get("suit_color", "Data_Color")
 
-    court_color = _swatch(entry.get('court_color'),
-                          'Court_{0}_{1}'.format(edition.capitalize(), suit_id.upper()),
-                          definitions)
+    court_color = _swatch(
+        entry.get("court_color"), "Court_{0}_{1}".format(edition.capitalize(), suit_id.upper()), definitions
+    )
     if not court_color:
-        court_color = {str(k).lower(): v
-                       for k, v in (ed_cfg.get('court_colors') or {}).items()}.get(suit_id.lower())
+        court_color = {str(k).lower(): v for k, v in (ed_cfg.get("court_colors") or {}).items()}.get(suit_id.lower())
     if not court_color:
-        court_color = defaults.get('court_text_color', 'Pure_White')
+        court_color = defaults.get("court_text_color", "Pure_White")
 
     number_color = court_color if is_court(card, config, language) else suit_color
     return suit_color, number_color, definitions
@@ -514,10 +526,9 @@ def card_colors(config, assets_data, edition, card, language=None):
 
 def has_suit_color(config, assets_data, edition, suit_id):
     """True when a suit has an explicit colour, rather than falling back."""
-    if _suit_entry(assets_data, edition, suit_id).get('color'):
+    if _suit_entry(assets_data, edition, suit_id).get("color"):
         return True
-    declared = {str(k).lower()
-                for k in (edition_config(config, edition).get('suit_colors') or {})}
+    declared = {str(k).lower() for k in (edition_config(config, edition).get("suit_colors") or {})}
     return str(suit_id).lower() in declared
 
 
@@ -528,9 +539,9 @@ def suit_colors_for_edition(config, edition):
     Inline CMYK palettes declared in assets.yaml are handled separately by
     card_colors(), which returns them per card.
     """
-    names = set((edition_config(config, edition).get('suit_colors') or {}).values())
-    defaults = config.get('defaults', {}) or {}
-    for key in ('suit_color', 'court_text_color', 'suit_name_color'):
+    names = set((edition_config(config, edition).get("suit_colors") or {}).values())
+    defaults = config.get("defaults", {}) or {}
+    for key in ("suit_color", "court_text_color", "suit_name_color"):
         if defaults.get(key):
             names.add(defaults[key])
     return sorted(n for n in names if n)
@@ -540,9 +551,10 @@ def suit_colors_for_edition(config, edition):
 # Artwork resolution — convention first, assets.yaml as override only
 # --------------------------------------------------------------------------
 
+
 def asset_key(config, size_key):
-    profile = (config.get('size_profiles', {}) or {}).get(size_key, {}) or {}
-    return profile.get('asset_key', 'small')
+    profile = (config.get("size_profiles", {}) or {}).get(size_key, {}) or {}
+    return profile.get("asset_key", "small")
 
 
 def suit_asset_id(config, edition, suit_id):
@@ -552,8 +564,10 @@ def suit_asset_id(config, edition, suit_id):
     Needed because some editions ship artwork whose stem differs from the suit
     ID in the source data (Mobile App: suit ``RS`` -> ``r``, ``WC`` -> ``wcm``).
     """
-    aliases = {str(k).lower(): str(v).lower()
-               for k, v in (edition_config(config, edition).get('suit_asset_aliases') or {}).items()}
+    aliases = {
+        str(k).lower(): str(v).lower()
+        for k, v in (edition_config(config, edition).get("suit_asset_aliases") or {}).items()
+    }
     key = str(suit_id).lower().strip()
     return aliases.get(key, key)
 
@@ -572,22 +586,22 @@ def _assets_override(assets_data, edition, suit_id, card_id, size_token):
         return None, None, None
     suits = []
     if edition in assets_data and isinstance(assets_data.get(edition), dict):
-        suits = assets_data[edition].get('suits', []) or []
-    elif 'suits' in assets_data:
-        suits = assets_data.get('suits', []) or []
+        suits = assets_data[edition].get("suits", []) or []
+    elif "suits" in assets_data:
+        suits = assets_data.get("suits", []) or []
 
     for suit in suits:
-        if str(suit.get('id', '')).lower() != str(suit_id).lower():
+        if str(suit.get("id", "")).lower() != str(suit_id).lower():
             continue
         card_level = None
-        for card in suit.get('cards', []) or []:
-            if str(card.get('id', '')).lower() == str(card_id).lower():
+        for card in suit.get("cards", []) or []:
+            if str(card.get("id", "")).lower() == str(card_id).lower():
                 card_level = card.get(size_token)
                 break
         return (
             card_level,
-            (suit.get('court_backgrounds', {}) or {}).get(size_token),
-            (suit.get('backgrounds', {}) or {}).get(size_token),
+            (suit.get("court_backgrounds", {}) or {}).get(size_token),
+            (suit.get("backgrounds", {}) or {}).get(size_token),
         )
     return None, None, None
 
@@ -610,21 +624,23 @@ def resolve_background(config, assets_data, base_dir, edition, card, size_key, l
 
     Returns ``(absolute_path, was_found)``.
     """
-    assets_cfg = config.get('assets', {}) or {}
-    pattern = assets_cfg.get('background_pattern', '%edition%/%suit%-%size%-%variant%.png')
-    image_dir = assets_cfg.get('image_dir', 'Backgrounds')
+    assets_cfg = config.get("assets", {}) or {}
+    pattern = assets_cfg.get("background_pattern", "%edition%/%suit%-%size%-%variant%.png")
+    image_dir = assets_cfg.get("image_dir", "Backgrounds")
     size_token = asset_key(config, size_key)
-    stem = suit_asset_id(config, edition, card.get('suit_id', ''))
+    stem = suit_asset_id(config, edition, card.get("suit_id", ""))
 
     def build(variant):
-        return (pattern
-                .replace('%edition%', edition)
-                .replace('%suit%', stem)
-                .replace('%size%', size_token)
-                .replace('%variant%', variant))
+        return (
+            pattern.replace("%edition%", edition)
+            .replace("%suit%", stem)
+            .replace("%size%", size_token)
+            .replace("%variant%", variant)
+        )
 
     card_override, court_override, suit_override = _assets_override(
-        assets_data, edition, card.get('suit_id', ''), card.get('card_id', ''), size_token)
+        assets_data, edition, card.get("suit_id", ""), card.get("card_id", ""), size_token
+    )
 
     candidates = []
     if card_override:
@@ -632,12 +648,12 @@ def resolve_background(config, assets_data, base_dir, edition, card, size_key, l
     if is_court(card, config, language):
         if court_override:
             candidates.append(court_override)
-        candidates.append(build('court'))
+        candidates.append(build("court"))
     if suit_override:
         candidates.append(suit_override)
-    candidates.append(build('default'))
+    candidates.append(build("default"))
 
-    global_default = ((assets_data or {}).get('default', {}) or {}).get('backgrounds', {}) or {}
+    global_default = ((assets_data or {}).get("default", {}) or {}).get("backgrounds", {}) or {}
     if global_default.get(size_token):
         candidates.append(global_default[size_token])
 
@@ -652,14 +668,12 @@ def resolve_background(config, assets_data, base_dir, edition, card, size_key, l
 
 def resolve_card_back(config, base_dir, edition, size_key):
     """Resolve the shared card back for an edition/size."""
-    assets_cfg = config.get('assets', {}) or {}
-    pattern = (edition_config(config, edition).get('card_back')
-               or assets_cfg.get('card_back_pattern',
-                                 '%edition%/back_of_card_%size%_expanded_outlined_6mmbleed.png'))
-    image_dir = assets_cfg.get('image_dir', 'Backgrounds')
-    rel = (pattern
-           .replace('%edition%', edition)
-           .replace('%size%', asset_key(config, size_key)))
+    assets_cfg = config.get("assets", {}) or {}
+    pattern = edition_config(config, edition).get("card_back") or assets_cfg.get(
+        "card_back_pattern", "%edition%/back_of_card_%size%_expanded_outlined_6mmbleed.png"
+    )
+    image_dir = assets_cfg.get("image_dir", "Backgrounds")
+    rel = pattern.replace("%edition%", edition).replace("%size%", asset_key(config, size_key))
     full = resolve_asset_path(base_dir, config, os.path.join(image_dir, rel))
     return full, os.path.exists(full)
 
@@ -668,6 +682,7 @@ def resolve_card_back(config, base_dir, edition, size_key):
 # Output naming — shared so the generator and the merger cannot drift apart
 # --------------------------------------------------------------------------
 
+
 def format_bleed(bleed_mm):
     """Render a bleed value the same way everywhere: 3.0 -> '3', 1.5 -> '1.5'."""
     value = float(bleed_mm)
@@ -675,72 +690,80 @@ def format_bleed(bleed_mm):
 
 
 def marks_token(printers_marks):
-    return 'printersmarks' if printers_marks else 'noprintersmarks'
+    return "printersmarks" if printers_marks else "noprintersmarks"
 
 
 def _fill_tokens(template, config, **tokens):
     result = template
-    result = result.replace('%version%', str(config.get('project', {}).get('version', '1.0')))
+    result = result.replace("%version%", str(config.get("project", {}).get("version", "1.0")))
     for key, value in tokens.items():
-        result = result.replace('%{0}%'.format(key), str(value))
+        result = result.replace("%{0}%".format(key), str(value))
     return result
 
 
 def card_pdf_name(config, edition, card_id, size_key, language, bleed_mm, printers_marks):
-    template = (config.get('output', {}) or {}).get(
-        'filename_format',
-        'owasp_cornucopia_%edition%_%card_id%_%size%_%version%_%language%'
-        '_%bleed%mmbleed_%printersmarks%.pdf')
-    return _fill_tokens(template, config,
-                        edition=edition, card_id=card_id, size=size_key,
-                        language=language, bleed=format_bleed(bleed_mm),
-                        printersmarks=marks_token(printers_marks))
+    template = (config.get("output", {}) or {}).get(
+        "filename_format",
+        "owasp_cornucopia_%edition%_%card_id%_%size%_%version%_%language%" "_%bleed%mmbleed_%printersmarks%.pdf",
+    )
+    return _fill_tokens(
+        template,
+        config,
+        edition=edition,
+        card_id=card_id,
+        size=size_key,
+        language=language,
+        bleed=format_bleed(bleed_mm),
+        printersmarks=marks_token(printers_marks),
+    )
 
 
 def deck_pdf_name(config, edition, size_key, language, bleed_mm):
-    template = (config.get('output', {}) or {}).get(
-        'deck_filename_format', 'cornucopia_%edition%_%size%_%language%_%bleed%mm.pdf')
-    return _fill_tokens(template, config,
-                        edition=edition, size=size_key, language=language,
-                        bleed=format_bleed(bleed_mm))
+    template = (config.get("output", {}) or {}).get(
+        "deck_filename_format", "cornucopia_%edition%_%size%_%language%_%bleed%mm.pdf"
+    )
+    return _fill_tokens(
+        template, config, edition=edition, size=size_key, language=language, bleed=format_bleed(bleed_mm)
+    )
 
 
 def zip_name(config, edition):
-    template = (config.get('packaging', {}) or {}).get(
-        'zip_name', 'OWASP_Cornucopia_%edition%_v%version%.zip')
+    template = (config.get("packaging", {}) or {}).get("zip_name", "OWASP_Cornucopia_%edition%_v%version%.zip")
     return _fill_tokens(template, config, edition=edition)
 
 
 def sla_name(config, edition, card_id, size_key, language):
-    template = (config.get('output', {}) or {}).get(
-        'sla_filename_format', '%card_id%_%edition%_%size%_%language%_Generated.sla')
-    return _fill_tokens(template, config,
-                        edition=edition, card_id=card_id, size=size_key, language=language)
+    template = (config.get("output", {}) or {}).get(
+        "sla_filename_format", "%card_id%_%edition%_%size%_%language%_Generated.sla"
+    )
+    return _fill_tokens(template, config, edition=edition, card_id=card_id, size=size_key, language=language)
 
 
 # --------------------------------------------------------------------------
 # Export profiles
 # --------------------------------------------------------------------------
 
+
 def get_export_profiles(config, profile_name=None, bleed_mm=None, printers_marks=None):
     """Select export profiles, optionally narrowed by name or overridden by CLI."""
-    profiles = config.get('export_profiles', []) or [
-        {'name': 'default', 'bleed_mm': 3.0, 'printers_marks': False}]
+    profiles = config.get("export_profiles", []) or [{"name": "default", "bleed_mm": 3.0, "printers_marks": False}]
 
     if profile_name:
-        matched = [p for p in profiles if p.get('name') == profile_name]
+        matched = [p for p in profiles if p.get("name") == profile_name]
         if not matched:
             raise ValueError(
                 "No export profile named '{0}'. Available: {1}".format(
-                    profile_name, ', '.join(str(p.get('name')) for p in profiles)))
+                    profile_name, ", ".join(str(p.get("name")) for p in profiles)
+                )
+            )
         profiles = matched
 
     if bleed_mm is not None or printers_marks is not None:
         selected = dict(profiles[0])
         if bleed_mm is not None:
-            selected['bleed_mm'] = bleed_mm
+            selected["bleed_mm"] = bleed_mm
         if printers_marks is not None:
-            selected['printers_marks'] = printers_marks
+            selected["printers_marks"] = printers_marks
         return [selected]
 
     return profiles
