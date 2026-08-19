@@ -440,7 +440,67 @@ companion:
 
 ---
 
-## 11. New editions and languages
+## 11. Customising decks and cards
+
+The generator reads the card text and artwork from the repository, so changing either changes the cards. Everything below is an edit to a data or config file followed by a rebuild — no Python involved.
+
+In each case the pattern is the same: **make the change, rebuild the cards you altered, then merge again.**
+
+### Use a different picture on one card
+
+Put the image in `resources/card_artwork/<edition>/`, then name it against that card in `assets.yaml`:
+
+```yaml
+companion:
+  suits:
+    - id: BOT
+      cards:
+        - id: BOTK
+          small: "companion/bot-small-court-alternative.png"
+          big: "companion/bot-big-court-alternative.png"
+```
+
+The filename can be anything; it does not have to follow the naming pattern used by the rest of the artwork.
+
+```bash
+scribus --no-splash --no-gui --python-script generate_deck.py   --edition companion --language en --cards BOTK
+python3 merge_pdfs.py --edition companion --language en
+```
+
+### Change the wording on a card
+
+Card text lives in `source/<edition>-cards-<version>-<language>.yaml`. Edit the `desc` of the card you want, for example to name the attacker after someone in your team:
+
+```yaml
+- id: BOT3
+  value: "3"
+  desc: "Mradul can bypass the rate limit by ..."
+```
+
+Then rebuild that card and merge, as above.
+
+### Make the wording fit your own application
+
+The same edit, at greater scale. The descriptions are deliberately general, so it is reasonable to reword them for the technologies you actually use, your in-house coding standards, or the scope of a particular application. Change as many `desc` entries as you like, then rebuild the whole edition:
+
+```bash
+scribus --no-splash --no-gui --python-script generate_deck.py --edition companion --language en
+python3 merge_pdfs.py --edition companion --language en
+```
+
+Keep these edits on a local branch. They are yours, not something the official decks should carry.
+
+### Change the card back
+
+Replace the two files named by `assets.card_back_pattern` in `pdf_config.yaml`, or point that setting at different ones. There is one back per card size, shared by every card in the edition, so this changes the whole deck at once. Rebuild the edition and merge.
+
+### Change a suit colour
+
+Edit that suit's `color` in `assets.yaml`; see §10.
+
+---
+
+## 12. New editions and languages
 
 **A new language** — add the card file to `source/` using the existing naming, then rerun. Nothing else is needed:
 
@@ -469,7 +529,7 @@ Run `--dry-run` afterwards to confirm everything resolves.
 
 ---
 
-## 12. Troubleshooting
+## 13. Troubleshooting
 
 **`command not found: scribus`**
 There is normally no `scribus` command on macOS or Windows. Call the executable inside the application instead, as described in §7. Opening the Scribus app does not create the command.
@@ -503,7 +563,7 @@ Some card PDFs are missing. `output/merge_gaps.json` lists which; rerun the gene
 
 ---
 
-## 13. Command reference
+## 14. Command reference
 
 ```bash
 # generate_deck.py — run through Scribus for PDF export

@@ -1,18 +1,29 @@
 ---
 # ==========================================================================
-# OWASP Cornucopia — per-suit asset and colour table
+# OWASP Cornucopia — per-suit artwork and colour
 #
-# Background artwork is resolved by convention
-#   resources/card_artwork/<edition>/<suit>-<small|big>-<court|default>.png
-# so entries here are only needed for exceptions, and for colour.
+# Everything a suit needs in order to look right: the colour of its card
+# numbers, and the artwork behind its cards.
 #
 # Per suit:
-#   color        the card-number colour on pip cards. A Scribus swatch name,
-#                or inline CMYK percentages, which get injected into the
-#                template at build time.
-#   court_color  the card-number colour on court cards (J/Q/K). Optional;
-#                defaults to defaults.court_text_color (white) in pdf_config.
-#   backgrounds  optional override if a suit's artwork is named off-convention.
+#   color              card-number colour on pip cards, as CMYK percentages.
+#                      Injected into the Scribus document at build time, so a
+#                      template does not need to define it beforehand.
+#   court_color        card-number colour on court cards (J, Q, K). Optional;
+#                      white is used when it is not given.
+#   backgrounds        artwork behind the ordinary cards, per card size.
+#   court_backgrounds  artwork behind J, Q and K. Omit for a suit with no
+#                      court cards, such as the jokers.
+#   cards              artwork for one specific card, overriding the above.
+#
+# Filenames are relative to resources/card_artwork/ and can be anything; the
+# names below simply follow the pattern the artwork was delivered in. To use a
+# different picture for a card, point at it here -- see "Customising decks and
+# cards" in README.md.
+#
+# If a suit is left out of this file entirely, the generator falls back to
+# looking for <edition>/<suit>-<small|big>-<default|court>.png, so a new
+# edition can be built before any of this is filled in.
 #
 # NOTE: these CMYK values duplicate the suit colours already defined for the
 # website at copi.owasp.org/assets/css/cards.scss. Longer term they would be
@@ -22,55 +33,75 @@
 
 meta:
   component: backgroundimages
-  image_path: "Backgrounds"
-
-default:
-  backgrounds:
-    small: "websiteapp/cornucopia-small-default.png"
-    big: "websiteapp/cornucopia-big-default.png"
+  image_path: "card_artwork"
 
 # ==========================================================================
-# WEB APP EDITION — 7 suits incl. jokers, 80 cards
+# WEB APP EDITION — 7 suits including jokers, 80 cards
 # ==========================================================================
-# These swatches already exist in the Scribus masters, so they are referenced
-# by name rather than redefined; the CMYK values are noted for reference.
 webapp:
   suits:
     - id: VE
-      color: "Data_Color"          # 0/0/0/50
-      # court_color: "Pure_White"  # uncomment to deviate from the default
+      color: {c: 0, m: 0, y: 0, k: 50}
+      backgrounds: {small: "webapp/ve-small-default.png", big: "webapp/ve-big-default.png"}
+      court_backgrounds: {small: "webapp/ve-small-court.png", big: "webapp/ve-big-court.png"}
     - id: AT
-      color: "Auth_Color"          # 57/21/14/1
+      color: {c: 57, m: 21, y: 14, k: 1}
+      backgrounds: {small: "webapp/at-small-default.png", big: "webapp/at-big-default.png"}
+      court_backgrounds: {small: "webapp/at-small-court.png", big: "webapp/at-big-court.png"}
     - id: SM
-      color: "Session_Color"       # 47/4/64/0
+      color: {c: 47, m: 4, y: 64, k: 0}
+      backgrounds: {small: "webapp/sm-small-default.png", big: "webapp/sm-big-default.png"}
+      court_backgrounds: {small: "webapp/sm-small-court.png", big: "webapp/sm-big-court.png"}
     - id: AZ
-      color: "Authoriz_Color"      # 18/20/76/3
+      color: {c: 18, m: 20, y: 76, k: 3}
+      backgrounds: {small: "webapp/az-small-default.png", big: "webapp/az-big-default.png"}
+      court_backgrounds: {small: "webapp/az-small-court.png", big: "webapp/az-big-court.png"}
     - id: CR
-      color: "Crypto_Color"        # 42/42/0/0
+      color: {c: 42, m: 42, y: 0, k: 0}
+      backgrounds: {small: "webapp/cr-small-default.png", big: "webapp/cr-big-default.png"}
+      court_backgrounds: {small: "webapp/cr-small-court.png", big: "webapp/cr-big-court.png"}
     - id: C
-      color: "Cornucopia_Color"    # 95/65/25/55
+      color: {c: 95, m: 65, y: 25, k: 55}
+      backgrounds: {small: "webapp/c-small-default.png", big: "webapp/c-big-default.png"}
+      court_backgrounds: {small: "webapp/c-small-court.png", big: "webapp/c-big-court.png"}
     - id: WC
-      color: "Joker_Color"         # 0/33/55/0
+      color: {c: 0, m: 33, y: 55, k: 0}
+      backgrounds: {small: "webapp/wc-small-default.png", big: "webapp/wc-big-default.png"}
 
 # ==========================================================================
-# MOBILE APP EDITION — 7 suits incl. jokers, 80 cards
+# MOBILE APP EDITION — 7 suits including jokers, 80 cards
 # ==========================================================================
 mobileapp:
   suits:
     - id: PC
-      color: {c: 67, m: 0,  y: 54, k: 0}
+      color: {c: 67, m: 0, y: 54, k: 0}
+      backgrounds: {small: "mobileapp/pc-small-default.png", big: "mobileapp/pc-big-default.png"}
+      court_backgrounds: {small: "mobileapp/pc-small-court.png", big: "mobileapp/pc-big-court.png"}
     - id: AA
-      color: {c: 2,  m: 50, y: 84, k: 0}
+      color: {c: 2, m: 50, y: 84, k: 0}
+      backgrounds: {small: "mobileapp/aa-small-default.png", big: "mobileapp/aa-big-default.png"}
+      court_backgrounds: {small: "mobileapp/aa-small-court.png", big: "mobileapp/aa-big-court.png"}
     - id: NS
-      color: {c: 6,  m: 23, y: 95, k: 0}
+      color: {c: 6, m: 23, y: 95, k: 0}
+      backgrounds: {small: "mobileapp/ns-small-default.png", big: "mobileapp/ns-big-default.png"}
+      court_backgrounds: {small: "mobileapp/ns-small-court.png", big: "mobileapp/ns-big-court.png"}
     - id: RS
-      color: {c: 80, m: 44, y: 0,  k: 0}
+      color: {c: 80, m: 44, y: 0, k: 0}
+      backgrounds: {small: "mobileapp/rs-small-default.png", big: "mobileapp/rs-big-default.png"}
+      court_backgrounds: {small: "mobileapp/rs-small-court.png", big: "mobileapp/rs-big-court.png"}
     - id: CRM
-      color: {c: 0,  m: 76, y: 86, k: 0}
+      color: {c: 0, m: 76, y: 86, k: 0}
+      backgrounds: {small: "mobileapp/crm-small-default.png", big: "mobileapp/crm-big-default.png"}
+      court_backgrounds: {small: "mobileapp/crm-small-court.png", big: "mobileapp/crm-big-court.png"}
     - id: CM
       color: {c: 100, m: 75, y: 38, k: 29}
+      backgrounds: {small: "mobileapp/cm-small-default.png", big: "mobileapp/cm-big-default.png"}
+      court_backgrounds: {small: "mobileapp/cm-small-court.png", big: "mobileapp/cm-big-court.png"}
     - id: WC
-      color: "Joker_Color"   # no value supplied; reuses the shared joker colour
+      # No colour was supplied for this suit, so it uses the same joker colour
+      # as the Web App edition.
+      color: {c: 0, m: 33, y: 55, k: 0}
+      backgrounds: {small: "mobileapp/wc-small-default.png", big: "mobileapp/wc-big-default.png"}
 
 # ==========================================================================
 # COMPANION EDITION — 6 suits, no jokers, 78 cards
@@ -79,13 +110,25 @@ companion:
   suits:
     - id: LLM
       color: {c: 30, m: 87, y: 31, k: 17}
+      backgrounds: {small: "companion/llm-small-default.png", big: "companion/llm-big-default.png"}
+      court_backgrounds: {small: "companion/llm-small-court.png", big: "companion/llm-big-court.png"}
     - id: CLD
-      color: {c: 18, m: 56, y: 2,  k: 0}
+      color: {c: 18, m: 56, y: 2, k: 0}
+      backgrounds: {small: "companion/cld-small-default.png", big: "companion/cld-big-default.png"}
+      court_backgrounds: {small: "companion/cld-small-court.png", big: "companion/cld-big-court.png"}
     - id: FRE
       color: {c: 40, m: 47, y: 47, k: 33}
+      backgrounds: {small: "companion/fre-small-default.png", big: "companion/fre-big-default.png"}
+      court_backgrounds: {small: "companion/fre-small-court.png", big: "companion/fre-big-court.png"}
     - id: DVO
       color: {c: 27, m: 52, y: 76, k: 20}
+      backgrounds: {small: "companion/dvo-small-default.png", big: "companion/dvo-big-default.png"}
+      court_backgrounds: {small: "companion/dvo-small-court.png", big: "companion/dvo-big-court.png"}
     - id: BOT
       color: {c: 13, m: 69, y: 62, k: 2}
+      backgrounds: {small: "companion/bot-small-default.png", big: "companion/bot-big-default.png"}
+      court_backgrounds: {small: "companion/bot-small-court.png", big: "companion/bot-big-court.png"}
     - id: AAI
       color: {c: 76, m: 80, y: 44, k: 50}
+      backgrounds: {small: "companion/aai-small-default.png", big: "companion/aai-big-default.png"}
+      court_backgrounds: {small: "companion/aai-small-court.png", big: "companion/aai-big-court.png"}

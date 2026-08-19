@@ -301,6 +301,28 @@ class TestResolveBackground(unittest.TestCase):
         assets = {"demo": {"suits": [{"id": "AA", "cards": [{"id": "AAK", "small": "demo/custom.png"}]}]}}
         self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "custom.png")
 
+    def test_a_suits_court_entry_is_used_for_a_court_card(self) -> None:
+        assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": "demo/custom.png"}}]}}
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "custom.png")
+
+    def test_a_suits_court_entry_is_ignored_for_a_pip_card(self) -> None:
+        assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": "demo/custom.png"}}]}}
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AA2", "value": "2"}, assets), "aa-small-default.png")
+
+    def test_a_per_card_entry_beats_the_suits_court_entry(self) -> None:
+        assets = {
+            "demo": {
+                "suits": [
+                    {
+                        "id": "AA",
+                        "court_backgrounds": {"small": "demo/suit-override.png"},
+                        "cards": [{"id": "AAK", "small": "demo/custom.png"}],
+                    }
+                ]
+            }
+        }
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "custom.png")
+
     def test_a_suit_entry_does_not_override_court_artwork(self) -> None:
         assets = {"demo": {"suits": [{"id": "AA", "backgrounds": {"small": "demo/suit-override.png"}}]}}
         self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "aa-small-court.png")

@@ -562,13 +562,14 @@ def _assets_override(assets_data, edition, suit_id, card_id, size_token):
     """
     Look for explicit filenames in assets.yaml.
 
-    Returns ``(card_level, suit_level)``. The two are kept apart because they
-    rank differently: a per-card entry is a deliberate exception and outranks
-    everything, whereas a suit-level entry is only that suit's *default*
-    artwork and must not override court art for a court card.
+    Returns ``(card_level, court_level, suit_level)``. The three are kept apart
+    because they rank differently: a per-card entry is a deliberate exception
+    and outranks everything; a suit's court artwork applies only to its J, Q
+    and K; and a suit-level entry is that suit's ordinary artwork, which must
+    not override court art for a court card.
     """
     if not assets_data:
-        return None, None
+        return None, None, None
     suits = []
     if edition in assets_data and isinstance(assets_data.get(edition), dict):
         suits = assets_data[edition].get('suits', []) or []
@@ -583,8 +584,12 @@ def _assets_override(assets_data, edition, suit_id, card_id, size_token):
             if str(card.get('id', '')).lower() == str(card_id).lower():
                 card_level = card.get(size_token)
                 break
-        return card_level, (suit.get('backgrounds', {}) or {}).get(size_token)
-    return None, None
+        return (
+            card_level,
+            (suit.get('court_backgrounds', {}) or {}).get(size_token),
+            (suit.get('backgrounds', {}) or {}).get(size_token),
+        )
+    return None, None, None
 
 
 def resolve_background(config, assets_data, base_dir, edition, card, size_key, language=None):
@@ -592,11 +597,16 @@ def resolve_background(config, assets_data, base_dir, edition, card, size_key, l
     Resolve a card's front artwork.
 
     Order of preference:
-      1. a per-card filename in assets.yaml (deliberate exception),
-      2. the naming convention for court art, when the card is a court card,
-      3. a suit-level filename in assets.yaml (that suit's default art),
-      4. the naming convention for default suit art,
-      5. the global default background.
+      1. a per-card filename in assets.yaml (a deliberate exception),
+      2. that suit's court artwork in assets.yaml, for a court card,
+      3. the naming convention for court art, for a court card,
+      4. that suit's ordinary artwork in assets.yaml,
+      5. the naming convention for default suit art,
+      6. the global default background.
+
+    Naming anything explicitly in assets.yaml therefore always wins, which is
+    what allows arbitrary filenames. The convention is only the fallback, so a
+    new edition can be built before any of it is filled in.
 
     Returns ``(absolute_path, was_found)``.
     """
@@ -613,13 +623,15 @@ def resolve_background(config, assets_data, base_dir, edition, card, size_key, l
                 .replace('%size%', size_token)
                 .replace('%variant%', variant))
 
-    card_override, suit_override = _assets_override(
+    card_override, court_override, suit_override = _assets_override(
         assets_data, edition, card.get('suit_id', ''), card.get('card_id', ''), size_token)
 
     candidates = []
     if card_override:
         candidates.append(card_override)
     if is_court(card, config, language):
+        if court_override:
+            candidates.append(court_override)
         candidates.append(build('court'))
     if suit_override:
         candidates.append(suit_override)
