@@ -1,4 +1,4 @@
-## Scenario: Titus can patch out critical functionality because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker
+## Scenario: Titus can alter or bypass critical functionality by patching the app or hooking sensitive functions at runtime because the app does not adequately detect tampering or respond to runtime instrumentation
 
 ### Example
 

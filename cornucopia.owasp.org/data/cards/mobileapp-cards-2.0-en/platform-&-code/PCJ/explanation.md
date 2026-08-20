@@ -1,4 +1,4 @@
-## Scenario: Johan can modify or expose sensitive data by exploiting weaknesses in the SDK or third party libraries because updates to the app and platform are not enforced or do not patch known software vulnerabilities
+## Scenario: Xavier can inject scripts into the web view because it allows embedding content using deep linking without proper authorization and validation of the host, schema and path of the target as these can be changed by the user or because safe browsing is disabled
 
 ### Example
 

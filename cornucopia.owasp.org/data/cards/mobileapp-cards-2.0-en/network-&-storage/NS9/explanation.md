@@ -1,4 +1,4 @@
-## Scenario: Adrian can compromise the app communication through a proxy because the app does not make use of certificate pinning or implements it incorrectly
+## Scenario: Martin can modify behavior or gain access to sensitive data by tampering with security-relevant data in shared preferences, user defaults, files, or databases because the app does not verify its integrity and authenticity before use
 
 ### Example
 

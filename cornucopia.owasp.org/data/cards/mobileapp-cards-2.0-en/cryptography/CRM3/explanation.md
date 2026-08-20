@@ -1,4 +1,4 @@
-## Scenario: Emery can access data because it has been obfuscated rather than using an approved cryptographic function
+## Scenario: Orace can compromise protected data because random values used to generate cryptographic keys, initialization vectors, or nonces are predictable
 
 ### Example
 

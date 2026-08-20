@@ -1,34 +1,40 @@
-## Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking
+## Scenario: Wong can bypass the authentication because it does not fail securely (i.e. it defaults to allowing unauthenticated access)
 
-Pramod notices that Ade’s mobile application does not properly validate exported activities or incoming intents. The app allows deep links for authentication flows but fails to verify their origin.
+Wong discovers that the mobile application does not properly handle authentication failures. When authentication checks fail due to unexpected errors, network issues, or misconfigurations, the application defaults to granting access instead of denying it.
 
-By launching a tapjacking overlay, Pramod places a transparent malicious layer over Ade’s login screen. The user believes they are interacting with the legitimate application, but their credentials are actually being captured by Pramod’s hidden interface.
-
-In another scenario, Pramod exploits StrandHogg by registering a malicious activity that mimics Ade’s login page. When the victim enters their username and password, the credentials are intercepted before the user is redirected back to the real app to avoid suspicion.
-
-If URL schemes are not properly validated, Pramod can also hijack authentication callbacks and intercept sensitive tokens during redirection flows.
+Instead of enforcing a strict “deny by default” principle, the system allows Wong to access protected resources when authentication validation cannot be completed successfully.
 
 ### Example
 
-Ade proudly launches a new feature that allows users to log in through a deep link received via email. Unfortunately, she forgets to validate which application handles the callback. Pramod registers the same URL scheme on his malicious app. When the user completes authentication, the token is sent directly to Pramod instead of Ade’s app. The login appears successful, but the attacker now has full access to the user’s account.
+Wong attempts to access a restricted section of the app while offline. The app tries to validate his session token against a remote endpoint. Due to a timeout or exception in the authentication handler, the validation process fails.
+
+Rather than blocking access, the app assumes the session is valid and allows Wong into the application.
+
+In another case, an internal error in role validation causes the authorization logic to skip verification steps. Because the system does not explicitly deny access on failure, Wong gains unintended access to administrative functionality.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls under the **Spoofing** category in the STRIDE threat modeling framework.
+This scenario falls under the Spoofing category of the STRIDE threat modeling framework.
 
-Pramod impersonates a trusted application interface or authentication handler to trick users into submitting credentials or tokens. The system fails to verify the authenticity of the interacting application, allowing the attacker to act as a legitimate entity.
+By failing to enforce secure authentication checks and defaulting to permissive behavior during errors, the system enables Wong to gain unauthorized access.
 
 ### What can go wrong?
 
-If activity hijacking, tapjacking overlays, or unvalidated deep links are allowed, attackers may intercept authentication credentials or tokens. This can lead to account compromise, session hijacking, and unauthorized access to sensitive information.
+If authentication or authorization logic fails open instead of failing closed:
+
+- Unauthenticated users may gain access to protected resources.
+- Privileged operations may become accessible without proper verification.
+- Sensitive data may be exposed.
+- Attackers may intentionally trigger error conditions to bypass security checks.
+
+Fail-open logic significantly weakens the security boundary of the application and can lead to data breaches.
 
 ### What are we going to do about it?
 
-- Disable or strictly control exported activities unless absolutely required.
-- Validate the origin and integrity of incoming intents and deep links.
-- Use protections against overlay attacks such as secure window flags.
-- Implement tapjacking detection mechanisms.
-- Enforce strict validation of URL schemes and authentication callbacks.
-- Follow OWASP MASVS guidance for secure authentication and intent handling.
+- Enforce a strict “deny by default” policy for all authentication and authorization checks.
+- Ensure that any exception, timeout, or validation failure results in access being denied.
+- Implement robust error handling that does not bypass security controls.
+- Add server-side validation to prevent client-side logic manipulation.
+- Include automated tests to verify that authentication failures always result in access denial.

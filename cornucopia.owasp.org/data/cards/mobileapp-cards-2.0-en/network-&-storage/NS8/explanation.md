@@ -1,4 +1,4 @@
-## Scenario: Martin can modify or expose sensitive data through unsafe reflection when reading data from public data storage (e.g. shared preferences) because the data is not validated before being read by the app
+## Scenario: Taher can expose or modify sensitive data at rest because encryption or integrity protections are inadequate
 
 ### Example
 

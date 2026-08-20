@@ -1,4 +1,4 @@
-## Scenario: Kelly can expose sensitive data by taking advantage of the app's excessive permissions connected to the app's use of location, camera, microphone, storage, etc
+## Scenario: Kelly can expose sensitive data by taking advantage of excessive, unexplained, or unjustified permissions and entitlements for location, camera, microphone, storage, health data, etc
 
 ### Example
 

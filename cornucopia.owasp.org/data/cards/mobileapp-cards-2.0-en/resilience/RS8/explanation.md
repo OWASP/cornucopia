@@ -1,4 +1,4 @@
-## Scenario: Carlos can reverse engineer the app because the anti-reverse engineering controls aren't strong enough according to what is recommended or the perceived effort of a potential attacker
+## Scenario: Carlos can expose sensitive data by hooking sensitive functions at runtime because the app does not detect or respond to instrumentation
 
 ### Example
 

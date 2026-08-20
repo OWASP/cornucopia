@@ -1,4 +1,4 @@
-## Scenario: Max can modify or expose data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted
+## Scenario: Johan can modify or expose sensitive data by exploiting outdated platforms, SDKs, or third-party dependencies because supported versions, trusted components, and security updates are not enforced
 
 ### Example
 

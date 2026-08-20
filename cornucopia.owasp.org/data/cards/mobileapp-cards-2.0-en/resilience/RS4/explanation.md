@@ -1,4 +1,4 @@
-## Scenario: Timur can change the code of the production release because the code of the application has not been properly signed using a valid production certificate
+## Scenario: Timur can replace or redistribute the production app because its signature, certificate, store-origin, or packaged-code integrity is not properly verified
 
 ### Example
 

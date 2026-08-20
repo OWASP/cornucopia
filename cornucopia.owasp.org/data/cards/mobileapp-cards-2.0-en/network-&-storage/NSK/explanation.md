@@ -1,4 +1,4 @@
-## Scenario: Taher can intercept, extract or modify sensitive data at rest or in transit by influencing or altering methods for transferring or storing data at rest or in transit
+## Scenario: Maarten can impersonate a trusted server and expose or modify data in transit because TLS certificate, hostname, or custom trust validation is weak or can be bypassed
 
 ### Example
 

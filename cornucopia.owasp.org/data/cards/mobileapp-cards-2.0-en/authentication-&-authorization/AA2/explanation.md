@@ -1,34 +1,30 @@
-## Scenario: Jie sign into Choi's mobile app undetected. 
- 
-Consider a scenario where Jie and Choi live together. Jie and Choi, like all couples, keep secrets from each other, like what they spend their money on. It is not our job to help Jie and Choi with their relationship issues, but it is our job to keep the secrets they store on their mobile phone confidential. We therefore need to help them by ensuring that they authenticate before accessing these secrets. 
- 
-There are various ways that Jie may get access to Choi's secrets. 
- 
-1. If Choi's mobile is left unattended and unlocked, Jie may be able to access his app secrets if the unlocked key is not used before opening Choi's mobile application. 
- 
-2. If Jie has been shoulder surfing when Choi used his mobile, he may know his pin. Even if Choi uses a different pin for his sensitive mobile apps that Jie doesn't have, given that Jie is a north korean spy and hacker, he could extract and decrypt Choi's data as long as the unlocked key not is used during sensitive operations like when decrypting local storage or when decrypting or signing a message before sending or receiving it from a remote endpoint. 
- 
-3. If Choi has left his phone unlocked then Jie could steal back the money that he paid Choi for the "Bob Dylan concert" if he isn't required to re-authenticate before transferring the money back to him. 
- 
+## Scenario: Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing
+
+Anant wants to see his saved "Ultra Secret" note in the app. The app asks for a PIN to "unlock" the note view. Anant bypasses the UI check using instrumentation. Because the note was encrypted with a hardcoded key (or no key bound to the biometric), he successfully views the note without providing the PIN.
+
 ### Example
- 
-Choi really wanted to pay his student loan, but he also really needed to go to the bathroom. Sadly, he forgot to lock his phone, leaving the screen bright and tempting on the table for Jie. Jie really would like to know whether it is true that Choi didn't have any money and therefore had to borrow them from him. As Jie opens Chois banking app, he is able to do so without using pin or biometrics, effectively bypassing authentication. There, clear as day, Jie finds all of Chois bank transactions and reads that Choi did have enough money, it's just that he really wanted to attend this really expensive Bob Dylan concert as well. Oh boy, is Choi going to hear it. 
- 
+
+Anant opens his "Vault" app. He navigates to the "View Secret" page. The app prompts for a fingerprint. Anant uses a script to hook the `onAuthenticationSucceeded` callback or the boolean check `isUnlocked`, forcing it to true. The app, which merely hid the text field behind a view overlap, now reveals the secret text. If the app had used the Android Keystore to encrypt the note, Anant's bypass would have failed because the decryption key would never have been released by the OS.
+
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls under the **Spoofing** category of the STRIDE.
+This scenario falls under the **Tampering** and **Information Disclosure** categories of STRIDE.
 
-Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
+Anant performs **Tampering** by modifying the application's runtime logic to bypass the check, leading to **Information Disclosure** of the sensitive note.
 
-### What can go wrong? 
- 
-If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 
- 
+### What can go wrong?
+
+**Logic-Only Gates:** Relying on simple boolean flags (e.g., `if (isUnlocked)`) allows attackers to flip the flag and bypass the check.
+
+**Insecure Storage:** If data is stored in plain text or encrypted with a static key, bypassing the authentication screen grants immediate access to the data.
+
 ### What are we going to do about it?
- 
- - Make sure the unlocked key is used during sensitive operations by configuring the app with the required flags needed for enforcing authentication before using the keychain or key storage. 
- - Limit the amount of time for which the user has been authorized to use a certain key after the user has successfully authenticated. 
- - Confirm that the unlocked key is used before contextual state changes like when changing state from running in the background to running in the foreground. Alternatively enforce re-authentication against a remote endpoint. 
- - Confirm that the unlocked key is used before confirming sensitive operations within the app like when changing the user's email, password, pin or phone number. Alternatively enforce re-authentication against a remote endpoint. 
+
+**Android Keystore / iOS Keychain:** Use cryptographic keys that mandate user authentication (e.g., `setUserAuthenticationRequired(true)`).
+
+**Crypto-Binding:** Ensure the sensitive data can only be decrypted using the key that is released *only* after a successful biometric or PIN verification.
+
+
+https://mas.owasp.org/MASTG/tests/ios/MASVS-AUTH/MASTG-TEST-0064/#static-analysis

@@ -1,4 +1,4 @@
-## Scenario: Toby can modify or expose data by injection because the response from implicit intents is not properly validated
+## Scenario: Max can modify or expose sensitive data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted
 
 ### Example
 

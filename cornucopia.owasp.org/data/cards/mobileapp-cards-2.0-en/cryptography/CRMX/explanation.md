@@ -1,4 +1,4 @@
-## Scenario: Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker
+## Scenario: Kouti can extract cryptographic keys or sensitive data because they are hard-coded or stored without encryption or appropriate platform protection in app-private or shared storage
 
 ### Example
 

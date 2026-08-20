@@ -1,4 +1,4 @@
-## Scenario: Juan can bypass jailbreak and root detection and execute administrative functions to bypass integrity checks and access controls and trigger app functionality
+## Scenario: Juan can access functionality on a rooted or jailbroken device because the app does not detect the compromised environment
 
 ### Example
 

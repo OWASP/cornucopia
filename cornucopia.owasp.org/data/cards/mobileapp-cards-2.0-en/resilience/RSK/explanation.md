@@ -1,4 +1,4 @@
-## Scenario: Sherif can influence or alter controls against reverse engineering and runtime protection and can therefore bypass them
+## Scenario: Sherif can disable or evade anti-reversing and runtime-protection checks by patching these or hooking the signals they rely on, allowing analysis or instrumentation to continue undetected
 
 ### Example
 

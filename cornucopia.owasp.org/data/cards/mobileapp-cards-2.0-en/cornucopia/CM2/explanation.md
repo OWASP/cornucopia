@@ -1,4 +1,4 @@
-## Scenario: Garth can reduce app users' privacy because the app is not transparent about the app's data collection and usage in a concise, easily accessible and understandable way
+## Scenario: Garth can reduce app users' privacy because the app does not clearly disclose the sensitive data it accesses, collects, uses, or shares
 
 ### Example
 

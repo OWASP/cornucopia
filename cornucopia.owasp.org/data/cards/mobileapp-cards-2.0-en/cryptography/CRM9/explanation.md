@@ -1,4 +1,4 @@
-## Scenario: Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)
+## Scenario: Ramsey can access protected sensitive data because cryptographic configuration (e.g. algorithm, mode, IV, nonce, or provider) is weak or incorrectly used
 
 ### Example
 

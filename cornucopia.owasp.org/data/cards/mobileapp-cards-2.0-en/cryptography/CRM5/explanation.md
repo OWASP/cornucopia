@@ -1,4 +1,4 @@
-## Scenario: Orace can predict the seed value used for generating cryptographic keys thereby compromising the cryptographic key
+## Scenario: Emery can access data because it has been obfuscated rather than using an approved cryptographic function
 
 ### Example
 

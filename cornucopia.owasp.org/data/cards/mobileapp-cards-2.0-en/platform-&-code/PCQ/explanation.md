@@ -1,4 +1,4 @@
-## Scenario: Xavier can inject scripts into the web view because it allows embedding content using deep linking without proper authorization and validation of the host, schema and path of the target as these can be changed by the user or because safe browsing is disabled
+## Scenario: Grant can modify or expose data by influencing or altering JavaScript bridges, DOM, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)
 
 ### Example
 

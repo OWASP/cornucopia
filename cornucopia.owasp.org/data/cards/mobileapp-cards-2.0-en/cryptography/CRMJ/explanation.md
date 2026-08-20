@@ -1,4 +1,4 @@
-## Scenario: Hassan can extract or modify sensitive data because functions for storage and/or encryption are weak, deprecated or used incorrectly
+## Scenario: Fady can bypass cryptographic controls because they do not fail securely (i.e. they default to unprotected)
 
 ### Example
 

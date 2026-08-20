@@ -1,4 +1,4 @@
-## Scenario: Grant can modify or expose data by influencing or altering JavaScript bridges, extensions or interprocess communication (e.g. shared memory, message passing, pipes, sockets)
+## Scenario: Jason can provoke memory leaks or corruption because the app manages memory or shared resources inadequately, or its native binaries omit compiler-provided protections
 
 ### Example
 

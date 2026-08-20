@@ -17,6 +17,7 @@ suits:
     owasp_mastg: [0289, 0290, 0291, 0292, 0293, 
                   0294, 0333]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [37, 155, 498, 648]
     safecode: ['-']
   - id: PC3
@@ -25,6 +26,7 @@ suits:
     owasp_masvs: [CODE-4, PLATFORM-3, PRIVACY-1, STORAGE-2]
     owasp_mastg: [0316, 0320, 0346, 0347, 0378, 0390]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [508]
     safecode: ['-']
   - id: PC4
@@ -33,6 +35,7 @@ suits:
     owasp_masvs: [PLATFORM-1, PRIVACY-1]
     owasp_mastg: [0254, 0255, 0256, 0257, 0360, 0361, 0362, 0363]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [634, 651]
     safecode: [11]
   - id: PC5
@@ -41,6 +44,7 @@ suits:
     owasp_masvs: [CODE-4, PLATFORM-1, STORAGE-2]
     owasp_mastg: [0372, 0374, 0375]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [497, 499, 502]
     safecode: [17]
   - id: PC6
@@ -49,6 +53,7 @@ suits:
     owasp_masvs: [PLATFORM-1, STORAGE-1, STORAGE-2]
     owasp_mastg: [0364, 0365, 0366, 0381]
     owasp_mastg_know: [0081]
+    owasp_maswe: []
     capec: [94, 117, 499, 502, 504]
     safecode: [8, 10, 11]
   - id: PC7
@@ -57,6 +62,7 @@ suits:
     owasp_masvs: [CODE-4, PLATFORM-1, STORAGE-1]
     owasp_mastg: [0339, 0355, 0356, 0357]
     owasp_mastg_know: [0104]
+    owasp_maswe: []
     capec: [137, 499, 502, 586]
     safecode: ['-']
   - id: PC8
@@ -65,6 +71,7 @@ suits:
     owasp_masvs: [PLATFORM-1, STORAGE-1]
     owasp_mastg: [0357]
     owasp_mastg_know: [0104]
+    owasp_maswe: []
     capec: [126, 127, 139, 597, 643]
     safecode: [16, 33]
   - id: PC9
@@ -73,6 +80,7 @@ suits:
     owasp_masvs: [CODE-4, PLATFORM-1, PLATFORM-3, STORAGE-2]
     owasp_mastg: [0337, 0339, 0386, 0388, 0389]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [137, 499, 502, 586]
     safecode: ['-']
   - id: PCX
@@ -81,6 +89,7 @@ suits:
     owasp_masvs: [CODE-1, CODE-2, CODE-3, NETWORK-1]
     owasp_mastg: [0245, 0272, 0273, 0274, 0275, 0382, 0383, 0384, 0392, 0331]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [310,538, 691]
     safecode: ['-']
   - id: PCJ
@@ -89,6 +98,7 @@ suits:
     owasp_masvs: [AUTH-1, CODE-4, PLATFORM-1, PLATFORM-2, STORAGE-2]
     owasp_mastg: [0332, 0333, 0335, 0336, 0370, 0371, 0393, 0394, 0395, 0398, 0399, 0400]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [175, 240, 242, 500, 591, 592]
     safecode: [17]
   - id: PCQ
@@ -97,6 +107,7 @@ suits:
     owasp_masvs: [PLATFORM-1, PLATFORM-2, STORAGE-2]
     owasp_mastg: [0332, 0334, 0339, 0355, 0356, 0357, 0376, 0377, 0379, 0380, 0381, 0388, 0389]
     owasp_mastg_know: [0104]
+    owasp_maswe: []
     capec: [137, 138, 499, 502, 586]
     safecode: ['-']
   - id: PCK
@@ -105,6 +116,7 @@ suits:
     owasp_masvs: [CODE-3, CODE-4]
     owasp_mastg: [0222, 0223, 0228, 0229, 0230]
     owasp_mastg_know: [0060]
+    owasp_maswe: []
     capec: [14, 24, 44, 45, 46, 47, 92, 100, 124, 128, 129, 131, 679]
     safecode: [7, 9, 34, 36]
   - id: PCA
@@ -113,6 +125,7 @@ suits:
     owasp_masvs: ['-']
     owasp_mastg: ['-']
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
 - id: AA
@@ -124,6 +137,7 @@ suits:
     owasp_masvs: [AUTH-2, AUTH-3, PLATFORM-3]
     owasp_mastg: [0266, 0267, 0268, 0269]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [20, 49, 50, 55, 115]
     safecode: [28]
   - id: AA3
@@ -132,6 +146,7 @@ suits:
     owasp_masvs: [AUTH-2, CRYPTO-2]
     owasp_mastg: [0266, 0267, 0268, 0269, 0270, 0271, 0326, 0327, 0328, 0329, 0330]
     owasp_mastg_know: []
+    owasp_maswe: [0020, 0021, 0022]
     capec: [114, 115, 554]
     safecode: [28]
   - id: AA4
@@ -140,6 +155,7 @@ suits:
     owasp_masvs: [AUTH-2, AUTH-3, CRYPTO-2]
     owasp_mastg: [0266, 0267, 0268, 0269, 0270, 0271, 0327, 0330]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [115]
     safecode: [28]
   - id: AA5
@@ -148,6 +164,7 @@ suits:
     owasp_masvs: [AUTH-1, CODE-1, CODE-4, PLATFORM-1, PLATFORM-3]
     owasp_mastg: [0340, 0370, 0371, 0381, 0393, 0394, 0395]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [153, 173, 505, 506]
     safecode: ['-']
   - id: AA6
@@ -156,6 +173,7 @@ suits:
     owasp_masvs: [AUTH-2]
     owasp_mastg: [0266, 0267, 0268, 0269, 0326, 0327, 0329]
     owasp_mastg_know: []
+    owasp_maswe: [0020]
     capec: [114, 115, 207, 554]
     safecode: [28]
   - id: AA7
@@ -164,6 +182,7 @@ suits:
     owasp_masvs: [AUTH-1, AUTH-3]
     owasp_mastg: [0266, 0267, 0327, 0329, 0375]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [39, 74, 162, 166, 207]
     safecode: [8, 10, 11, 12]
   - id: AA8
@@ -172,6 +191,7 @@ suits:
     owasp_masvs: [AUTH-2]
     owasp_mastg: [0266, 0267, 0327]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [114, 115, 554]
     safecode: [28]
   - id: AA9
@@ -180,6 +200,7 @@ suits:
     owasp_masvs: [AUTH-1, AUTH-2, AUTH-3, PLATFORM-1, PRIVACY-1, STORAGE-2]
     owasp_mastg: [0250, 0251, 0252, 0253, 0254, 0335, 0336, 0360, 0361, 0362, 0363]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [122]
     safecode: [8, 10, 11]
   - id: AAX
@@ -188,6 +209,7 @@ suits:
     owasp_masvs: [AUTH-1, AUTH-2, CODE-3, STORAGE-1]
     owasp_mastg: [0266, 0267, 0268, 0269, 0270, 0271, 0326, 0327, 0328, 0329, 0330]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [114, 115, 554]
     safecode: [28]
   - id: AAJ
@@ -196,6 +218,7 @@ suits:
     owasp_masvs: [AUTH-1, AUTH-2, CODE-3, CODE-4]
     owasp_mastg: [0266, 0267, 0268, 0269, 0270, 0271, 0327, 0330, 0364, 0365, 0366]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [36, 121]
     safecode: [8, 10, 11]
   - id: AAQ
@@ -204,6 +227,7 @@ suits:
     owasp_masvs: [AUTH-1, CODE-4]
     owasp_mastg: [0334, 0339, 0376, 0377, 0379, 0380]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [17, 30, 69, 234]
     safecode: [8, 10, 11]
   - id: AAK
@@ -212,6 +236,7 @@ suits:
     owasp_masvs: [AUTH-2]
     owasp_mastg: []
     owasp_mastg_know: [0266, 0267, 0268, 0269, 0270, 0271, 0326, 0327, 0328, 0329, 0330]
+    owasp_maswe: []
     capec: [114, 115, 207, 554]
     safecode: [8, 10, 11]
   - id: AAA
@@ -220,6 +245,7 @@ suits:
     owasp_masvs: ['-']
     owasp_mastg: ['-']
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
 - id: NS
@@ -231,6 +257,7 @@ suits:
     owasp_masvs: [PRIVACY-1, STORAGE-2]
     owasp_mastg: [0203, 0231, 0296, 0297]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [155]
     safecode: [11, 23, 29]
   - id: NS3
@@ -239,6 +266,7 @@ suits:
     owasp_masvs: [PLATFORM-3, PRIVACY-1, STORAGE-2]
     owasp_mastg: [0258, 0313, 0314]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [204, 637, 679]
     safecode: ['-']
   - id: NS4
@@ -247,6 +275,7 @@ suits:
     owasp_masvs: [PLATFORM-3, STORAGE-2]
     owasp_mastg: [0206, 0281, 0315, 0318, 0319]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [155, 161, 204, 220, 639, 643]
     safecode: [11, 23, 29]
   - id: NS5
@@ -255,6 +284,7 @@ suits:
     owasp_masvs: [AUTH-1, CRYPTO-2, PRIVACY-1, STORAGE-1, STORAGE-2]
     owasp_mastg: [0200, 0201, 0207, 0215, 0216, 0262, 0287, 0298, 0304, 0305, 0306]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [37, 155, 204, 639, 643]
     safecode: [11, 23, 29]
   - id: NS6
@@ -263,6 +293,7 @@ suits:
     owasp_masvs: [RESILIENCE-1, STORAGE-1]
     owasp_mastg: [0246, 0247, 0248, 0249]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [406, 675]
     safecode: ['-']
   - id: NS7
@@ -271,6 +302,7 @@ suits:
     owasp_masvs: [PRIVACY-1, STORAGE-2]
     owasp_mastg: []
     owasp_mastg_know: [0051, 0103]
+    owasp_maswe: []
     capec: [679]
     safecode: ['-']
   - id: NS8
@@ -279,6 +311,7 @@ suits:
     owasp_masvs: [CRYPTO-2, NETWORK-1, RESILIENCE-3, STORAGE-1]
     owasp_mastg: [0200, 0201, 0207, 0299, 0300, 0301, 0302, 0303, 0304, 0305, 0306, 0338, 0387]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [75, 76, 113, 153, 161, 165, 176, 190, 207, 210, 554, 562]
     safecode: [12, 19]
   - id: NS9
@@ -287,6 +320,7 @@ suits:
     owasp_masvs: [CODE-4, STORAGE-1]
     owasp_mastg: [0338, 0387]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [176]
     safecode: ['-']
   - id: NSX
@@ -295,6 +329,7 @@ suits:
     owasp_masvs: [NETWORK-2]
     owasp_mastg: [0242, 0243, 0244, 0385]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [57, 94, 156, 465, 466, 479, 701]
     safecode: [14, 30]
   - id: NSJ
@@ -303,6 +338,7 @@ suits:
     owasp_masvs: [CODE-3, NETWORK-1]
     owasp_mastg: [0217, 0218, 0233, 0235, 0236, 0295, 0321, 0322, 0323, 0342, 0343, 0344, 0345, 0348]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [57, 94, 156, 220, 459, 465, 466]
     safecode: [12, 14, 29, 30]
   - id: NSQ
@@ -311,6 +347,7 @@ suits:
     owasp_masvs: [AUTH-1, NETWORK-1]
     owasp_mastg: [0321, 0322, 0233, 0234, 0235, 0236, 0237, 0238, 0239]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [31, 36, 57, 102, 157, 158, 384, 466]
     safecode: [29, 30]
   - id: NSK
@@ -319,6 +356,7 @@ suits:
     owasp_masvs: [NETWORK-1]
     owasp_mastg: [ 0234, 0282, 0283, 0284, 0285, 0286, 0396, 0397]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [57, 94, 156, 465, 466, 479, 701]
     safecode: [14, 29, 30]
   - id: NSA
@@ -327,6 +365,7 @@ suits:
     owasp_masvs: ['-']
     owasp_mastg: []
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
 - id: RS
@@ -338,6 +377,7 @@ suits:
     owasp_masvs: [RESILIENCE-3]
     owasp_mastg: [0263, 0264, 0265, 0358, 0359]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [37, 167, 191]
     safecode: ['-']
   - id: RS3
@@ -346,6 +386,7 @@ suits:
     owasp_masvs: [RESILIENCE-3]
     owasp_mastg: [0219, 0288]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [37, 167, 191]
     safecode: ['-']
   - id: RS4
@@ -354,6 +395,7 @@ suits:
     owasp_masvs: [RESILIENCE-2]
     owasp_mastg: [0220, 0224, 0225]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [68, 167, 206, 476]
     safecode: [14]
   - id: RS5
@@ -362,6 +404,7 @@ suits:
     owasp_masvs: [PLATFORM-2, RESILIENCE-3, RESILIENCE-4]
     owasp_mastg: [0226, 0227, 0261]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [115, 167, 554]
     safecode: ['-']
   - id: RS6
@@ -370,6 +413,7 @@ suits:
     owasp_masvs: [RESILIENCE-4]
     owasp_mastg: [0352, 0353, 0401, 0402]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [115, 167, 554]
     safecode: ['-']
   - id: RS7
@@ -378,6 +422,7 @@ suits:
     owasp_masvs: [RESILIENCE-1]
     owasp_mastg: [0351, 0367]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [189, 554]
     safecode: ['-']
   - id: RS8
@@ -386,6 +431,7 @@ suits:
     owasp_masvs: [RESILIENCE-3, RESILIENCE-4]
     owasp_mastg: [0341, 0354]
     owasp_mastg_know: [0030, 0032, 0087]
+    owasp_maswe: []
     capec: [167, 554]
     safecode: ['-']
   - id: RS9
@@ -394,6 +440,7 @@ suits:
     owasp_masvs: [RESILIENCE-3]
     owasp_mastg: [0368, 0369,0391]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [167, 554]
     safecode: ['-']
   - id: RSX
@@ -402,6 +449,7 @@ suits:
     owasp_masvs: [RESILIENCE-1]
     owasp_mastg: [0240, 0241, 0324, 0325]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [167, 660, 661]
     safecode: ['-']
   - id: RSJ
@@ -410,6 +458,7 @@ suits:
     owasp_masvs: [CODE-4, RESILIENCE-2]
     owasp_mastg: [0338, 0387]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [23, 165, 167]
     safecode: ['-']
   - id: RSQ
@@ -418,6 +467,7 @@ suits:
     owasp_masvs: [RESILIENCE-2, RESILIENCE-4]
     owasp_mastg: [0341, 0354]
     owasp_mastg_know: [0030, 0032, 0087, 0109, 0110]
+    owasp_maswe: []
     capec: [167, 554]
     safecode: ['-']
   - id: RSK
@@ -426,6 +476,7 @@ suits:
     owasp_masvs: [RESILIENCE-4]
     owasp_mastg: [0341, 0354]
     owasp_mastg_know: [0030, 0032, 0087, 0109, 0110, 0119]
+    owasp_maswe: []
     capec: [167, 554]
     safecode: ['-']
   - id: RSA
@@ -434,6 +485,7 @@ suits:
     owasp_masvs: ['-']
     owasp_mastg: []
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
 - id: CRM
@@ -445,94 +497,106 @@ suits:
     owasp_masvs: [AUTH-2, AUTH-3, CRYPTO-2]
     owasp_mastg: [0307, 0308]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [97, 116, 117]
     safecode: [14, 29]
   - id: CRM3
     value: '3'
     url: https://cornucopia.owasp.org/cards/CRM3
-    owasp_masvs: [CRYPTO-1]
-    owasp_mastg: [0209, 0210, 0211]
-    owasp_mastg_know: [0111]
-    capec: [37, 204]
-    safecode: [21, 29]
-  - id: CRM4
-    value: '4'
-    url: https://cornucopia.owasp.org/cards/CRM4
-    owasp_masvs: [CODE-4, CRYPTO-1]
-    owasp_mastg: [0338]
-    owasp_mastg_know: []
-    capec: [68, 75, 145, 438, 439, 442]
-    safecode: [12, 14]
-  - id: CRM5
-    value: '5'
-    url: https://cornucopia.owasp.org/cards/CRM5
     owasp_masvs: [CRYPTO-1, CRYPTO-2]
     owasp_mastg: [0204, 0205, 0311]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [20, 112, 485]
     safecode: [29, 33]
+  - id: CRM4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/CRM4
+    owasp_masvs: [CRYPTO-1, CRYPTO-2]
+    owasp_mastg: [0204, 0205, 0208, 0311, 0349]
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: [20, 55, 112, 485]
+    safecode: [21, 29, 32, 33]
+  - id: CRM5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/CRM5
+    owasp_masvs: [CRYPTO-1]
+    owasp_mastg: [0209, 0210, 0211]
+    owasp_mastg_know: [0111]
+    owasp_maswe: []
+    capec: [37, 204]
+    safecode: [21, 29]
   - id: CRM6
     value: '6'
     url: https://cornucopia.owasp.org/cards/CRM6
-    owasp_masvs: [AUTH-1, CRYPTO-1, CRYPTO-2, NETWORK-1, STORAGE-1]
-    owasp_mastg: [0200, 0201, 0202, 0207, 0212, 0213, 0214, 0221, 0299, 0300, 0301, 0302, 0303, 0304, 0305, 0306, 0309, 0310]
+    owasp_masvs: [CODE-4, CRYPTO-1]
+    owasp_mastg: [0338, 0234, 0282, 0283, 0284, 0396, 0397]
     owasp_mastg_know: []
-    capec: [37, 117, 155, 191, 204]
-    safecode: [21, 29]
+    owasp_maswe: []
+    capec: [68, 75, 145, 438, 439, 442]
+    safecode: [12, 14]
   - id: CRM7
     value: '7'
     url: https://cornucopia.owasp.org/cards/CRM7
-    owasp_masvs: [CRYPTO-2, STORAGE-1]
-    owasp_mastg: [0200, 0201, 0202, 0207, 0212, 0213, 0214, 0221, 0299, 0300, 0301, 0302, 0303, 0304, 0305, 0306, 0309, 0310]
+    owasp_masvs: [CODE-3, CRYPTO-1, CRYPTO-2, STORAGE-1]
+    owasp_mastg: [0200, 0201, 0202, 0207, 0299, 0300, 0301, 0302, 0303, 0304, 0305, 0306]
     owasp_mastg_know: []
-    capec: [37, 117, 155, 191, 204]
-    safecode: [21, 29, 31]
+    owasp_maswe: []
+    capec: [210, 212]
+    safecode: [15]
   - id: CRM8
     value: '8'
     url: https://cornucopia.owasp.org/cards/CRM8
-    owasp_masvs: [CRYPTO-1, CRYPTO-2]
-    owasp_mastg: [0204, 0208, 0212, 0221, 0204, 0205, 0309, 0310, 0311, 0349]
+    owasp_masvs: [CODE-3, CRYPTO-1]
+    owasp_mastg: [0208, 0209, 0210, 0211, 0221, 0232, 0312, 0317, 0350]
     owasp_mastg_know: []
-    capec: [20, 55, 112, 485]
-    safecode: [21, 29, 32, 33]
+    owasp_maswe: []
+    capec: [20, 116, 117, 97, 112, 485]
+    safecode: [14, 23, 29, 31, 32, 33]
   - id: CRM9
     value: '9'
     url: https://cornucopia.owasp.org/cards/CRM9
-    owasp_masvs: [CRYPTO-1]
-    owasp_mastg: [0312]
+    owasp_masvs: [CRYPTO-2]
+    owasp_mastg: [0210, 0221, 0232, 0309, 0310, 0312, 0317, 0350]
     owasp_mastg_know: []
-    capec: [97, 620]
-    safecode: [21, 29]
+    owasp_maswe: []
+    capec: [37, 117, 155, 191, 204]
+    safecode: [21, 29, 31]
   - id: CRMX
     value: '10'
     url: https://cornucopia.owasp.org/cards/CRMX
-    owasp_masvs: [CODE-3, CRYPTO-1]
-    owasp_mastg: [0209, 0210, 0211, 0232, 0312, 0317, 0350]
+    owasp_masvs: [AUTH-1, CRYPTO-1, CRYPTO-2, NETWORK-1, STORAGE-1]
+    owasp_mastg: [0200, 0201, 0202, 0207, 0212, 0213, 0214, 0299, 0300, 0301, 0302, 0303, 0304, 0305, 0306]
     owasp_mastg_know: []
-    capec: [20, 116, 117, 97, 112, 485]
-    safecode: [14, 23, 29, 31, 32, 33]
+    owasp_maswe: []
+    capec: [37, 117, 155, 191, 204]
+    safecode: [21, 29]
   - id: CRMJ
-    value: J
+    value: 'J'
     url: https://cornucopia.owasp.org/cards/CRMJ
-    owasp_masvs: [CODE-3, CRYPTO-1, CRYPTO-2, STORAGE-1]
-    owasp_mastg: [0200, 0201, 0202, 0207, 0209, 0210, 0211, 0299, 0300, 0301, 0302, 0303, 0304, 0305, 0306, 0312]
+    owasp_masvs: [CRYPTO-1]
+    owasp_mastg: [0282, 0283, 0284, 0396, 0397]
     owasp_mastg_know: []
-    capec: [210, 212]
-    safecode: [15]
+    owasp_maswe: []
+    capec: [97, 620]
+    safecode: [21, 29]
   - id: CRMQ
     value: Q
     url: https://cornucopia.owasp.org/cards/CRMQ
     owasp_masvs: [CODE-3, CRYPTO-1]
-    owasp_mastg: [0209, 0210, 0211, 0312]
-    owasp_mastg_know: []
+    owasp_mastg: []
+    owasp_mastg_know: [0068]
+    owasp_maswe: []
     capec: [20, 116, 117, 97, 112, 485]
     safecode: [14, 21, 29, 32, 33]
   - id: CRMK
     value: K
     url: https://cornucopia.owasp.org/cards/CRMK
     owasp_masvs: [CODE-4, CRYPTO-1, CRYPTO-2]
-    owasp_mastg: [0209, 0210, 0211, 0213, 0214, 0312]
-    owasp_mastg_know: []
+    owasp_mastg: [0341, 0354]
+    owasp_mastg_know: [0032, 0140]
+    owasp_maswe: []
     capec: [54, 97, 116, 117, 220]
     safecode: [14, 21, 29]
   - id: CRMA
@@ -541,6 +605,7 @@ suits:
     owasp_masvs: ['-']
     owasp_mastg: []
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
 - id: CM
@@ -552,14 +617,16 @@ suits:
     owasp_masvs: [PRIVACY-3]
     owasp_mastg: [0206, 0281, 0318, 0319, 0360, 0361]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [410]
     safecode: ['-']
   - id: CM3
     value: '3'
     url: https://cornucopia.owasp.org/cards/CM3
     owasp_masvs: [PRIVACY-1, PRIVACY-4]
-    owasp_mastg: ['0206', 0281, 0318, 0319]
+    owasp_mastg: []
     owasp_mastg_know: []
+    owasp_maswe: [0076]
     capec: [410]
     safecode: ['-']
   - id: CM4
@@ -568,14 +635,16 @@ suits:
     owasp_masvs: [PRIVACY-1]
     owasp_mastg: [0206, 0281, 0318, 0319]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [410]
     safecode: ['-']
   - id: CM5
     value: '5'
     url: https://cornucopia.owasp.org/cards/CM5
     owasp_masvs: [PRIVACY-2, PRIVACY-4]
-    owasp_mastg: [0206, 0281, 0318, 0319]
-    owasp_mastg_know: []
+    owasp_mastg: [0318, 0319]
+    owasp_mastg_know: [0026]
+    owasp_maswe: []
     capec: [410]
     safecode: ['-']
   - id: CM6
@@ -584,6 +653,7 @@ suits:
     owasp_masvs: [PRIVACY-2, PRIVACY-4]
     owasp_mastg: [0206, 0319]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [410]
     safecode: ['-']
   - id: CM7
@@ -592,6 +662,7 @@ suits:
     owasp_masvs: [CODE-4, PLATFORM-1, STORAGE-2]
     owasp_mastg: [0299, 0339, 0346, 0347, 0381, 0388, 0389]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [499, 502]
     safecode: ['-']
   - id: CM8
@@ -600,6 +671,7 @@ suits:
     owasp_masvs: [CODE-4, STORAGE-2]
     owasp_mastg: [0370, 0394, 0395]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [126]
     safecode: [16]
   - id: CM9
@@ -608,6 +680,7 @@ suits:
     owasp_masvs: [CODE-3, CODE-4]
     owasp_mastg: []
     owasp_mastg_know: [0005, 0060]
+    owasp_maswe: []
     capec: [92, 100]
     safecode: [3, 6, 36]
   - id: CMX
@@ -616,6 +689,7 @@ suits:
     owasp_masvs: [CODE-4, PLATFORM-1, PLATFORM-3, STORAGE-2]
     owasp_mastg: [0299, 0339, 0346, 0347, 0388, 0389]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [137, 499, 502, 586]
     safecode: ['-']
   - id: CMJ
@@ -624,6 +698,7 @@ suits:
     owasp_masvs: [CODE-4, CRYPTO-1]
     owasp_mastg: [0338]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [23, 165, 442]
     safecode: ['-']
   - id: CMQ
@@ -632,6 +707,7 @@ suits:
     owasp_masvs: [CODE-4, RESILIENCE-2, RESILIENCE-4]
     owasp_mastg: [0341]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [167, 202, 554]
     safecode: ['-']
   - id: CMK
@@ -640,6 +716,7 @@ suits:
     owasp_masvs: [CODE-4, RESILIENCE-2]
     owasp_mastg: [0338, 0387]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: [17, 23, 165, 167, 636]
     safecode: ['-']
   - id: CMA
@@ -648,6 +725,7 @@ suits:
     owasp_masvs: ['-']
     owasp_mastg: []
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
 - id: WC
@@ -659,6 +737,7 @@ suits:
     owasp_masvs: [PRIVACY-3, PRIVACY-4]
     owasp_mastg: [0206, 0281, 0318, 0319]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']
   - id: JOBM
@@ -667,5 +746,6 @@ suits:
     owasp_masvs: [PLATFORM-3, PRIVACY-1, PRIVACY-3, STORAGE-2]
     owasp_mastg: [0364, 0365, 0366, 0381]
     owasp_mastg_know: []
+    owasp_maswe: []
     capec: ['-']
     safecode: ['-']

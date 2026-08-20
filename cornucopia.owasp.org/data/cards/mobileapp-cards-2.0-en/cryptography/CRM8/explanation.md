@@ -1,4 +1,4 @@
-## Scenario: Adel can predict and use the app's cryptographic keys because they are insufficiently long and random, can be enumerated, or derived from known values
+## Scenario: Ash can break the cryptography because it is not strong enough according to what is recommended or the perceived effort of a potential attacker
 
 ### Example
 

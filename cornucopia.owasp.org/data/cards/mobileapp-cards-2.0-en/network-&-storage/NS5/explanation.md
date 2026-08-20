@@ -1,4 +1,4 @@
-## Scenario: Kevin can read sensitive data mapped to user accounts or sessions by extracting data sent through third-party libraries and/or notifications sent between the app and embedded services (e.g. logs, notifications, backups, cache, local db)
+## Scenario: Steve can access sensitive data by reading backups and/or local, internal/external storage
 
 ### Example
 

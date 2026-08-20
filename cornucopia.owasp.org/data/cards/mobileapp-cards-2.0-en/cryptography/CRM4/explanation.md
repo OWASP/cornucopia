@@ -1,4 +1,4 @@
-## Scenario: Enselme can modify sensitive data (stored or in transit) because it is not subject to integrity checking
+## Scenario: Adel can predict or derive cryptographic keys because their generation or derivation uses insufficiently random, short, enumerable, or known values
 
 ### Example
 

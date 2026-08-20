@@ -1,4 +1,4 @@
-## Scenario: Ramsey can access stored sensitive data because it is not securely encrypted
+## Scenario: Hassan can extract or modify sensitive data because it's stored without adequate encryption or platform data-protection controls
 
 ### Example
 

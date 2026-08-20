@@ -1,4 +1,4 @@
-## Scenario: Nihel can compromise the communication as it may fall back to an insecure or unencrypted channel,  because encryption is optional, or because of client-server protocol or security provider weaknesses
+## Scenario: Nihel can expose or modify data in transit because the app permits cleartext traffic or allows downgrade to deprecated TLS protocol versions
 
 ### Example
 

@@ -1,4 +1,4 @@
-## Scenario: Kouti can extract sensitive data because the cryptographic key, used, is hard-coded or stored insecurely such as in local, internal/external storage
+## Scenario: Enselme can modify sensitive data (stored or in transit) because it is not subject to integrity checking
 
 ### Example
 

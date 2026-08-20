@@ -1,4 +1,4 @@
-## Scenario: Tobias can disclose sensitive data by dumping debug symbols while the application is running
+## Scenario: Tobias can disclose sensitive data and implementation details because debug symbols and other non-production metadata remain available in the release
 
 ### Example
 

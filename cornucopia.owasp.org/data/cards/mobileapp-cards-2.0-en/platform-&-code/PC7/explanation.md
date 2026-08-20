@@ -1,4 +1,4 @@
-## Scenario: Lauren can traverse or modify otherwise protected files through access to the underlying file system by exploiting weaknesses in file system-based content providers, resolvers or its configuration
+## Scenario: Colin can expose or modify sensitive data through the app's interprocess communication because of misconfiguration or because the content provider's query methods are not properly parameterized and arguments sanitized
 
 ### Example
 

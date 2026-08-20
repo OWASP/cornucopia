@@ -1,4 +1,4 @@
-## Scenario: Sebastien can disclose sensitive data because the application is set up to log debug information at runtime
+## Scenario: Sebastien can disclose sensitive data or internal behavior because debug code, verbose diagnostics, test resources, or unsafe runtime logging remain in the production app
 
 ### Example
 

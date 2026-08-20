@@ -1,4 +1,4 @@
-## Scenario: Elizabeth can reduce app users' privacy because the app sends too much personal data without the user's consent to downstream services that are outside the user's control
+## Scenario: Elizabeth can reduce app users' privacy because the app does not clearly disclose, or obtain the user's consent for, personal data it shares with downstream services.
 
 ### Example
 

@@ -1,29 +1,34 @@
-## Scenario: Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly
-
+## Scenario: Jie sign into Choi's mobile app undetected. 
+ 
+Consider a scenario where Jie and Choi live together. Jie and Choi, like all couples, keep secrets from each other, like what they spend their money on. It is not our job to help Jie and Choi with their relationship issues, but it is our job to keep the secrets they store on their mobile phone confidential. We therefore need to help them by ensuring that they authenticate before accessing these secrets. 
+ 
+There are various ways that Jie may get access to Choi's secrets. 
+ 
+1. If Choi's mobile is left unattended and unlocked, Jie may be able to access his app secrets if the unlocked key is not used before opening Choi's mobile application. 
+ 
+2. If Jie has been shoulder surfing when Choi used his mobile, he may know his pin. Even if Choi uses a different pin for his sensitive mobile apps that Jie doesn't have, given that Jie is a north korean spy and hacker, he could extract and decrypt Choi's data as long as the unlocked key not is used during sensitive operations like when decrypting local storage or when decrypting or signing a message before sending or receiving it from a remote endpoint. 
+ 
+3. If Choi has left his phone unlocked then Jie could steal back the money that he paid Choi for the "Bob Dylan concert" if he isn't required to re-authenticate before transferring the money back to him. 
+ 
 ### Example
-
-Vandana unlocks her mobile banking app using fingerprint authentication to quickly check her balance. The app treats this successful biometric check as valid for longer than it should and does not require re-authentication for sensitive actions.
-
-Later, Vandana hands her phone to a colleague to show a photo. While swiping around, the colleague accidentally switches back to the banking app — which is still unlocked. Without any additional biometric prompt, it is possible to view account details and initiate actions that should have required Vandana’s fingerprint again.
-
-What started as a quick balance check turns into an awkward conversation and a reminder that biometric authentication must be handled carefully.
-
+ 
+Choi really wanted to pay his student loan, but he also really needed to go to the bathroom. Sadly, he forgot to lock his phone, leaving the screen bright and tempting on the table for Jie. Jie really would like to know whether it is true that Choi didn't have any money and therefore had to borrow them from him. As Jie opens Chois banking app, he is able to do so without using pin or biometrics, effectively bypassing authentication. There, clear as day, Jie finds all of Chois bank transactions and reads that Choi did have enough money, it's just that he really wanted to attend this really expensive Bob Dylan concert as well. Oh boy, is Choi going to hear it. 
+ 
 ## Threat Modeling
 
 ### STRIDE
 
-The situation falls under the **Tampering** category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
+This scenario falls under the **Spoofing** category of the STRIDE.
 
-An attacker can install the mobile app and observe how it interacts with platform security components such as the keystore or keychain. By abusing weaknesses in local authentication logic — such as misuse of `CryptoObject`, improper exception handling, or misconfiguration of hardware-backed keystores or keychains — the attacker can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
+Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
 
-This issue commonly arises when security-relevant decisions are enforced on the device using client-side controls that are implemented incorrectly or can be bypassed.
-
-### What can go wrong?
-
-If biometric authentication or local validation logic can be bypassed or manipulated, attackers can tamper with application logic, bypass access controls, and perform actions that should only be allowed after successful user authentication.
-
+### What can go wrong? 
+ 
+If the unlock key is not used or it's not confirmed that the unlocked key has been used, then the mobile application may be vulnerable to local authentication bypass. This type of vulnerability can be exploited by a controlling partner, a spy or a thief to get access to sensitive information. Effectively resulting in a data breach. 
+ 
 ### What are we going to do about it?
-
-Ensure that biometric authentication is implemented correctly and securely. Platform security features such as hardware-backed keystores or keychains must be used as intended, including correct use of `CryptoObject` and proper exception handling.
-
-Biometric authentication must not be relied upon incorrectly for protecting sensitive actions. Use the OWASP Mobile Application Security Testing Guide (MASTG) to verify that biometric authentication, keystore usage, and related security controls are correctly implemented and tested.
+ 
+ - Make sure the unlocked key is used during sensitive operations by configuring the app with the required flags needed for enforcing authentication before using the keychain or key storage. 
+ - Limit the amount of time for which the user has been authorized to use a certain key after the user has successfully authenticated. 
+ - Confirm that the unlocked key is used before contextual state changes like when changing state from running in the background to running in the foreground. Alternatively enforce re-authentication against a remote endpoint. 
+ - Confirm that the unlocked key is used before confirming sensitive operations within the app like when changing the user's email, password, pin or phone number. Alternatively enforce re-authentication against a remote endpoint. 
