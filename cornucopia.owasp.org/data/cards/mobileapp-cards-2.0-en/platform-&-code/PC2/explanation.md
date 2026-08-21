@@ -1,4 +1,4 @@
-﻿## Scenario: Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background
+## Scenario: Andrew can expose sensitive data through the app's auto-generated screenshots when the app moves to the background
 
 Consider a scenario where Andrew works at a busy co-working space and uses a banking app on his phone. Like most people, Andrew switches between apps frequently - checking messages, jumping on calls, and occasionally glancing at his bank balance. What Andrew does not know is that every time he presses the home button, the OS kindly takes a screenshot of whatever was on his screen and stores it as a preview thumbnail for the app switcher. It is a smooth UX feature. It is also a smooth data leak.
 

@@ -1,4 +1,4 @@
-## Scenario: You have invented a new attack against “Authentication & Authorization
+## Scenario: You have invented a new attack against “Authentication & Authorization”
 
 ### Example
 

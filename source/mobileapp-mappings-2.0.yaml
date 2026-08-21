@@ -740,7 +740,7 @@ suits:
     capec: ['-']
     safecode: ['-']
   - id: JOBM
-    value: A
+    value: B
     url: https://cornucopia.owasp.org/cards/JOBM
     owasp_mastg: ['0206', '0254', '0255', '0256', '0281', '0318', '0319', '0360', '0361', '0362', '0363', '0364', '0365', '0366', '0381']
     owasp_mastg_best: ['0003', '0045', '0051', '0052', '0056', '0063']
