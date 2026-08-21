@@ -63,7 +63,11 @@ The proposal described a converter that produced full decks. Most of what got bu
 
 **You can build one card.** The generator takes `--edition`, `--language`, `--size` and `--cards`, in any combination. Checking one card in one language takes seconds instead of rebuilding 2,556 of them. For a translator who wants to see their work on a real card, this is the difference between the tool being usable and not.
 
-**The layout lives in configuration.** Card dimensions, bleed, fonts, font sizes, colours, artwork paths, filenames and sort order are all in `pdf_config.yaml` and `assets.yaml`. Bleed is configurable from 0 to 6mm and printer's marks can be turned on or off, so a deck can be produced to whatever a particular print vendor asks for without touching Python.
+**The layout lives in configuration.** Card dimensions, bleed, fonts, font sizes, colours, artwork paths, filenames and sort order are all in `pdf_config.yaml` and `assets.yaml`. Bleed is configurable from 0 to 6mm and printer's marks can be turned on or off, so a deck can be produced to whatever a particular print vendor asks for without touching Python. CMYK is the default, but the same deck can be exported in RGB for screen use or for print-on-demand vendors who ask for it, and the README explains how to swap in your own card faces and backs.
+
+**The templates were brought into line with each other.** The existing templates had drifted apart, with small differences in font size, tracking and text position between editions. Those are gone, so a card in one edition now sits exactly where its counterpart sits in another.
+
+**And they were made simpler.** Unused commercial font references and unused colour swatches were removed, and every edition now shares the same pair of two-page templates, one per card size, rather than carrying its own.
 
 **Packaging is optional.** Zipping decks and deleting the intermediate files are both flags rather than assumptions, so the tool fits into a release pipeline or a laptop equally well.
 
@@ -94,6 +98,17 @@ A few problems were only visible once real decks were generated:
 - **Court artwork resolved to the wrong file.** The configuration and the artwork disagreed about how court card names were spelled. It is now resolved by convention with a clear order of precedence, so a suit can override one card without restating everything.
 - **Tarot cards silently lost their colours.** Every colour operation shared one `try` block, so the first failure skipped the rest without complaint. Each is now attempted independently and failures are reported.
 - **QR code generation broke on a dependency upgrade.** A newer release stopped falling back to a pure-Python image backend. The fix was to check that the fallback actually works rather than that the import succeeds — importing it succeeds either way and fails later.
+- **SVG artwork would not render.** The card backs were supplied as SVG, and Scribus placed the frames but drew nothing inside them. Converting the artwork to high-resolution PNG fixed it, and the pipeline now uses PNG throughout. It costs some file size and gains a build that works.
+
+## The code
+
+All of the work described here is in one pull request:
+
+- **[#3359 — Add Scribus-based PDF generation for card decks](https://github.com/OWASP/cornucopia/pull/3359)**, against [issue #583](https://github.com/OWASP/cornucopia/issues/583).
+- The branch is [`gsoc-2026/pdf-generation-automation`](https://github.com/OWASP/cornucopia/tree/gsoc-2026/pdf-generation-automation), and the tool lives in [`scripts/pdf_generation/`](https://github.com/OWASP/cornucopia/tree/gsoc-2026/pdf-generation-automation/scripts/pdf_generation) with its own README covering setup and every configuration option.
+- The tests are `tests/scripts/pdf_generation_utest.py` and `tests/scripts/pdf_generation_itest.py`.
+
+It was opened as a draft deliberately and has stayed one. A change of this size is easier to review in pieces than as a single drop, so the draft has been the working surface for that review since the middle of August and has been through several rounds of it. What remains before it can be marked ready are two decisions that sit with the maintainers rather than with me — whether this package should be excluded from strict type checking for now, and whether a lint rule that every workflow in the repository trips should be adjusted centrally — together with the release workflow, which cannot be exercised until it sits on the default branch.
 
 ## What comes next
 
