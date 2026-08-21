@@ -1,4 +1,4 @@
-## Scenario: Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space
+## Scenario: Luis can cause the app to act on falsified protected data because it does not verify that data received from external services is authentic and unaltered
 
 ### Example
 

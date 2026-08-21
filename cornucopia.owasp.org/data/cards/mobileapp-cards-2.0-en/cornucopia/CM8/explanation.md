@@ -1,4 +1,4 @@
-## Scenario: Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated
+## Scenario: Gastón can trigger malicious actions by exploiting insecure inter-app communication or delegated actions
 
 ### Example
 

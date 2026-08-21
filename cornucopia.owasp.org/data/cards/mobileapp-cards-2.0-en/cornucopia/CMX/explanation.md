@@ -1,4 +1,4 @@
-## Scenario: Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices
+## Scenario: Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated
 
 ### Example
 

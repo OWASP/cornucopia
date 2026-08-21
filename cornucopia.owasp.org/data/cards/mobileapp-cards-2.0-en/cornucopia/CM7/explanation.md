@@ -1,4 +1,4 @@
-## Scenario: Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable
+## Scenario: Carlos can use the application's notification services to launch phishing campaigns because notification content or action destinations are not appropriately sanitized or validated
 
 ### Example
 

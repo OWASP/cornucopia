@@ -1,4 +1,4 @@
-## Scenario: Luis can influence or alter cryptographic methods to corrupt other users' data because the integrity of the encrypted data is not verified before being shared with external services
+## Scenario: Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space
 
 ### Example
 
