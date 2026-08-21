@@ -1,4 +1,4 @@
-## Scenario: Sean can reverse engineer the app because the code obfuscation isn't strong enough according to what is recommended or the perceived effort of a potential attacker
+## Scenario: Sean can reverse engineer the app because code or security-sensitive resources (e.g., strings, configuration, and bundled assets) are insufficiently obfuscated
 
 ### Example
 

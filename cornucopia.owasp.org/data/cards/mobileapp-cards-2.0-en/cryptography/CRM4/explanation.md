@@ -1,4 +1,4 @@
-## Scenario: Adel can predict or derive cryptographic keys because their generation or derivation uses insufficiently random, short, enumerable, or known values
+## Scenario: Adel can predict, derive, or recover encryption or signing keys because their generation or derivation uses insufficient entropy, weak parameters, or known or enumerable input values
 
 ### Example
 

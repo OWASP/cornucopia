@@ -233,7 +233,7 @@ suits:
     id: "RS4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/RS4"
-    desc: "Timur can replace or redistribute the production app because its signature, certificate, store-origin, or packaged-code integrity is not properly verified"
+    desc: "Timur can replace, redistribute, or introduce unreviewed code into the production app because its signature, certificate, store origin, packaged-code integrity, or reproducible build provenance can't be properly verified"
   -
     id: "RS5"
     value: "5"
@@ -258,17 +258,17 @@ suits:
     id: "RS9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/RS9"
-    desc: "Sean can reverse engineer the app because the code obfuscation isn't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Sean can reverse engineer the app because code or security-sensitive resources (e.g., strings, configuration, and bundled assets) are insufficiently obfuscated"
   -
     id: "RSX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/RSX"
-    desc: "Juan can access functionality on a rooted or jailbroken device because the app does not detect the compromised environment"
+    desc: "Juan can access functionality from a rooted, jailbroken, or infected device because the app does not detect or appropriately respond to hostile environments"
   -
     id: "RSJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/RSJ"
-    desc: "Pekka can compromise the integrity of the storage because the file integrity checks aren't strong enough according to what is recommended or the perceived effort of a potential attacker"
+    desc: "Pekka can alter security-relevant files, configuration, downloaded content, or restored data because the app does not verify their integrity and authenticity before use"
   -
     id: "RSQ"
     value: "Q"
@@ -303,7 +303,7 @@ suits:
     id: "CRM4"
     value: "4"
     url: "https://cornucopia.owasp.org/cards/CRM4"
-    desc: "Adel can predict or derive cryptographic keys because their generation or derivation uses insufficiently random, short, enumerable, or known values"
+    desc: "Adel can predict, derive, or recover encryption or signing keys because their generation or derivation uses insufficient entropy, weak parameters, or known or enumerable input values"
   -
     id: "CRM5"
     value: "5"
@@ -363,7 +363,7 @@ suits:
     id: "CM2"
     value: "2"
     url: "https://cornucopia.owasp.org/cards/CM2"
-    desc: "Garth can reduce app users' privacy because the app does not clearly disclose the sensitive data it accesses, collects, uses, or shares"
+    desc: "Garth can reduce app users' privacy because the app does not clearly disclose the sensitive data or tracking domains it accesses, collects, uses, or shares"
   -
     id: "CM3"
     value: "3"
@@ -388,37 +388,38 @@ suits:
     id: "CM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CM7"
-    desc: "Gastón can trigger malicious actions by exploiting insecure inter-app communication or delegated actions"
+    desc: "Carlos can use the application's notification services to launch phishing campaigns because notification content or action destinations are not appropriately sanitized or validated"
   -
     id: "CM8"
     value: "8"
     url: "https://cornucopia.owasp.org/cards/CM8"
-    desc: "Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated"
+    desc: "Gastón can trigger malicious actions by exploiting insecure inter-app communication or delegated actions"
   -
     id: "CM9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/CM9"
-    desc: "Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space"
+    desc: "Luis can cause the app to act on falsified protected data because it does not verify that data received from external services is authentic and unaltered"
   -
     id: "CMX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CMX"
-    desc: "Carlos can use the application's notification services to launch phishing campaigns because notification content or action destinations are not appropriately sanitized or validated"
+    desc: "Roxana can do arbitrary file overwrites and potentially execute malicious code through path traversal because the target path and directory is not appropriately validated"
   -
     id: "CMJ"
     value: "J"
     url: "https://cornucopia.owasp.org/cards/CMJ"
-    desc: "Luis can influence or alter cryptographic methods to corrupt other users' data because the integrity of the encrypted data is not verified before being shared with external services"
+    desc: "Alessandro can exploit the app by taking advantage of buffer overflows and memory leaks to write foreign code within the mobile code's address space"
   -
     id: "CMQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/CMQ"
     desc: "Victor can patch the app and use it to distribute malicious code because the runtime integrity checks are not strong enough according to what is recommended or the perceived effort of a potential attacker"
+
   -
     id: "CMK"
     value: "K"
     url: "https://cornucopia.owasp.org/cards/CMK"
-    desc: "Ruben can use the app, without modifications, to spread malicious code because methods for transfer and storage do not perform proper data sanitization and validation"
+    desc: "Ruben can use the app to spread malicious code because it accepts, loads, or forwards untrusted content without verifying its source, type, or safety"
   -
     id: "CMA"
     value: "A"
