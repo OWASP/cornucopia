@@ -388,7 +388,7 @@ suits:
     id: "CM7"
     value: "7"
     url: "https://cornucopia.owasp.org/cards/CM7"
-    desc: "Gastón can execute malicious actions through intent redirection because the intent is not properly sanitized and immutable"
+    desc: "Gastón can trigger malicious actions by exploiting insecure inter-app communication or delegated actions"
   -
     id: "CM8"
     value: "8"
@@ -403,7 +403,7 @@ suits:
     id: "CMX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/CMX"
-    desc: "Carlos can use the application's notification services to launch phishing campaigns because notifications are not sanitized and validated according to best practices"
+    desc: "Carlos can use the application's notification services to launch phishing campaigns because notification content or action destinations are not appropriately sanitized or validated"
   -
     id: "CMJ"
     value: "J"

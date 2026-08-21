@@ -651,7 +651,7 @@ suits:
     value: '6'
     url: https://cornucopia.owasp.org/cards/CM6
     owasp_masvs: [PRIVACY-2, PRIVACY-4]
-    owasp_mastg: [0206, 0319]
+    owasp_mastg: [0206, 0318 , 0319, 0360, 0361]
     owasp_mastg_know: []
     owasp_maswe: []
     capec: [410]
@@ -660,7 +660,7 @@ suits:
     value: '7'
     url: https://cornucopia.owasp.org/cards/CM7
     owasp_masvs: [CODE-4, PLATFORM-1, STORAGE-2]
-    owasp_mastg: [0299, 0339, 0346, 0347, 0381, 0388, 0389]
+    owasp_mastg: [0370, 0371, 0381, 0394, 0395]
     owasp_mastg_know: []
     owasp_maswe: []
     capec: [499, 502]
@@ -678,7 +678,7 @@ suits:
     value: '9'
     url: https://cornucopia.owasp.org/cards/CM9
     owasp_masvs: [CODE-3, CODE-4]
-    owasp_mastg: []
+    owasp_mastg: [0043, 0086]
     owasp_mastg_know: [0005, 0060]
     owasp_maswe: []
     capec: [92, 100]
@@ -687,7 +687,7 @@ suits:
     value: '10'
     url: https://cornucopia.owasp.org/cards/CMX
     owasp_masvs: [CODE-4, PLATFORM-1, PLATFORM-3, STORAGE-2]
-    owasp_mastg: [0299, 0339, 0346, 0347, 0388, 0389]
+    owasp_mastg: [0370, 0371, 0394, 0395]
     owasp_mastg_know: []
     owasp_maswe: []
     capec: [137, 499, 502, 586]
