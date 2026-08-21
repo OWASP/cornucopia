@@ -1,6 +1,6 @@
 # PDF Automation — Installation and Usage
 
-The code in this folder generates print-ready PDF card decks from the Cornucopia card data. The intention is that it will be run automatically to produce the PDFs for each release, but it can also be run locally on demand using the instructions below.
+The code in this folder generates print-ready PDF card decks from the Cornucopia card data. The PDF generation could be run automatically to produce the PDFs for each release, but it can also be run locally on demand using the instructions below.
 
 Running it locally lets you generate some or all of the Cornucopia editions, in any of the available languages, or even a single suit or an individual card. It also means the card text in the referenced `.yaml` files can be modified locally — to suit a particular application scope, to use technology-specific terminology, or to meet an organisation's needs — separately from what is in the official Cornucopia repository, with the custom PDFs then generated manually using these scripts.
 
