@@ -1,7 +1,7 @@
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
-from unittest import mock
 
 import scripts.enrich_mobileapp_mappings as enricher
 
@@ -90,7 +90,7 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
                 enricher.load_yaml_file(input_path)
 
             input_path.write_text("x", encoding="utf-8")
-            with mock.patch.object(enricher, "MAX_YAML_FILE_SIZE_BYTES", 0):
+            with unittest.mock.patch.object(enricher, "MAX_YAML_FILE_SIZE_BYTES", 0):
                 with self.assertRaisesRegex(ValueError, "file exceeds"):
                     enricher.load_yaml_file(input_path)
 
@@ -118,9 +118,13 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
         with self.assertRaises(SystemExit):
             enricher.parse_arguments(["--edition", "../outside"])
 
-        with mock.patch("scripts.enrich_mobileapp_mappings.save_yaml_file") as save_yaml_file, mock.patch(
+        with unittest.mock.patch(
+            "scripts.enrich_mobileapp_mappings.save_yaml_file"
+        ) as save_yaml_file, unittest.mock.patch(
             "scripts.enrich_mobileapp_mappings.load_yaml_file", side_effect=[{"suits": []}, {}, {}]
-        ) as load_yaml_file, mock.patch("scripts.enrich_mobileapp_mappings.parse_arguments") as parse_arguments:
+        ) as load_yaml_file, unittest.mock.patch(
+            "scripts.enrich_mobileapp_mappings.parse_arguments"
+        ) as parse_arguments:
             with tempfile.TemporaryDirectory() as directory:
                 parse_arguments.return_value = type(
                     "Arguments",
@@ -140,9 +144,9 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
                 expected_path = Path(directory).resolve() / "mobileapp-mappings-2.0.yaml"
                 self.assertEqual(
                     [
-                        mock.call(expected_path),
-                        mock.call(expected_path.with_name("mobileapp-mastg-2.0.yaml")),
-                        mock.call(expected_path.with_name("mobileapp-maswe-2.0.yaml")),
+                        unittest.mock.call(expected_path),
+                        unittest.mock.call(expected_path.with_name("mobileapp-mastg-2.0.yaml")),
+                        unittest.mock.call(expected_path.with_name("mobileapp-maswe-2.0.yaml")),
                     ],
                     load_yaml_file.call_args_list,
                 )
