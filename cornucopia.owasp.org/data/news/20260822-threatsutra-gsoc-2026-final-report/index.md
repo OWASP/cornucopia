@@ -6,7 +6,7 @@ hidden: false
 description: How ThreatSutra turns an OWASP Threat Dragon model into validated evil user stories, BDD verification tests, and GitHub Issues - automatically built during Google Summer of Code 2026. 
 ---
 
-![GSoC logo](images/GSoC-logo.svg)
+![GSoC logo](GSoC-logo.svg)
 
 ## GSoC 2026 Final Work Product
 
@@ -29,7 +29,7 @@ We already have great tools for identifying security risks. OWASP Threat Dragon 
 Right now, that translation step is entirely manual. Someone has to sit down, read the threat, figure out what test would prove it's handled, and write it up with acceptance criteria from an attacker's perspective. Because this takes so much time and specific security knowledge, it’s inconsistent across teams. Worse, it’s almost always the first thing that gets skipped under deadline pressure. When that translation gets skipped, the risks we worked so hard to identify never actually make it into a sprint as real, testable work. 
 
 **ThreatSutra solves this**: Given a Threat Dragon JSON export and a GitHub milestone, it automatically generates structured, validated, human-approved security requirements ready to land in any backlog.
-![ThreatSutra architecture: adapters → orchestrator → AI → exporter](images/arcOverview.png)
+![ThreatSutra architecture: adapters → orchestrator → AI → exporter](arcOverview.png)
 *ThreatSutra architecture: adapters → orchestrator → AI → exporter*
 
 ## My Progress
@@ -89,7 +89,7 @@ I set a personal target of 95 %+ coverage from the start; the suite finished at 
 
 The test suite covers the full pipeline end-to-end: Threat Dragon model parsing and provenance hashing, all five adapter clients (retry logic, caching, schema validation, error paths), context assembly with token budget enforcement, prompt generation with UNTRUSTED block injection and token truncation, evil user story and verification test regex validation, relevance scoring with colour mapping, transient Gemini API error handling (503, 429, 500), the interactive reviewer loop (approve, reject, edit, dry-run), idempotency key generation and duplicate prevention in the exporter, and Cornucopia card markdown heading extraction.
 
-![pytest-cov output showing 100% coverage across all modules](images/testsCoverage.png)
+![pytest-cov output showing 100% coverage across all modules](testsCoverage.png)
 *Test coverage report — 190 passed, 100 % across all modules*
 
 ## Future work - Milestone 2 (Phase 2) 
