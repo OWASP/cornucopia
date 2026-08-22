@@ -11,7 +11,6 @@ from typing import Any
 import yaml
 from pathvalidate.argparse import validate_filepath_arg
 
-
 MAX_YAML_FILE_SIZE_BYTES = 2 * 1024 * 1024
 FILENAME_COMPONENT_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}")
 
@@ -57,13 +56,23 @@ MAPPING_FIELDS = ("owasp_mastg", "owasp_mastg_know", "owasp_mastg_best", "owasp_
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     """Parse source and output locations for one edition/version mapping set."""
     parser = argparse.ArgumentParser(description="Enrich Mobile card mappings with MASTG and MASWE metadata")
-    parser.add_argument("-e", "--edition", type=validate_filename_component, default="mobileapp", help="Cornucopia edition, for example mobileapp")
-    parser.add_argument("-v", "--version", type=validate_filename_component, default="2.0", help="Cornucopia version, for example 2.0")
+    parser.add_argument(
+        "-e",
+        "--edition",
+        type=validate_filename_component,
+        default="mobileapp",
+        help="Cornucopia edition, for example mobileapp",
+    )
+    parser.add_argument(
+        "-v", "--version", type=validate_filename_component, default="2.0", help="Cornucopia version, for example 2.0"
+    )
     parser.add_argument("-s", "--source-dir", type=validate_filepath_arg, default=DEFAULT_SOURCE_DIR)
     parser.add_argument("-i", "--input-path", type=validate_filepath_arg, help="Card mapping YAML to enrich")
     parser.add_argument("--mastg-path", type=validate_filepath_arg, help="Generated MASTG metadata YAML")
     parser.add_argument("--maswe-path", type=validate_filepath_arg, help="Generated MASWE metadata YAML")
-    parser.add_argument("-o", "--output-path", type=validate_filepath_arg, help="Enriched mapping YAML; defaults to input")
+    parser.add_argument(
+        "-o", "--output-path", type=validate_filepath_arg, help="Enriched mapping YAML; defaults to input"
+    )
     return parser.parse_args(input_args)
 
 
@@ -119,7 +128,9 @@ def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: di
             continue
         inferred["owasp_mastg"].append(test_id)
         for field in ("owasp_mastg_know", "owasp_mastg_best", "owasp_maswe"):
-            inferred[field] = merge_unique(inferred[field], string_list(test_mapping.get(field), f"MASTG {test_id} {field}"))
+            inferred[field] = merge_unique(
+                inferred[field], string_list(test_mapping.get(field), f"MASTG {test_id} {field}")
+            )
 
     for weakness_id in inferred["owasp_maswe"]:
         weakness_mapping = maswe_data.get(weakness_id)
@@ -128,7 +139,8 @@ def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: di
         for field, destination in (("owasp_mas_threat", threats), ("owasp_mas_attack", attack_vectors)):
             references = weakness_mapping.get(field, {})
             if not isinstance(references, dict) or not all(
-                isinstance(identifier, str) and isinstance(description, str) for identifier, description in references.items()
+                isinstance(identifier, str) and isinstance(description, str)
+                for identifier, description in references.items()
             ):
                 raise ValueError(f"MASWE {weakness_id} {field}: expected identifier-to-description mapping")
             destination.update(references)
@@ -141,7 +153,9 @@ def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: di
         card["attack_vector"] = attack_vectors
 
 
-def enrich_mappings(mapping_data: dict[str, Any], mastg_data: dict[str, Any], maswe_data: dict[str, Any]) -> dict[str, Any]:
+def enrich_mappings(
+    mapping_data: dict[str, Any], mastg_data: dict[str, Any], maswe_data: dict[str, Any]
+) -> dict[str, Any]:
     """Enrich every card mapping in a Mobile edition mapping document."""
     suits = mapping_data.get("suits")
     if not isinstance(suits, list):
@@ -158,6 +172,7 @@ def enrich_mappings(mapping_data: dict[str, Any], mastg_data: dict[str, Any], ma
 
 def save_yaml_file(path: Path, data: dict[str, Any]) -> None:
     """Write enriched YAML with stable key order and safe zero-padded identifiers."""
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="\n") as output_file:
         yaml.dump(data, output_file, Dumper=LeadingZeroStringDumper, allow_unicode=True, sort_keys=False)
 
@@ -166,11 +181,22 @@ def main() -> None:
     """Load generated metadata, enrich card mappings, and write the target YAML file."""
     args = parse_arguments(sys.argv[1:])
     source_dir = Path(args.source_dir).resolve()
-    mapping_path = Path(args.input_path).resolve() if args.input_path else source_dir / f"{args.edition}-mappings-{args.version}.yaml"
-    mastg_path = Path(args.mastg_path).resolve() if args.mastg_path else source_dir / f"{args.edition}-mastg-{args.version}.yaml"
-    maswe_path = Path(args.maswe_path).resolve() if args.maswe_path else source_dir / f"{args.edition}-maswe-{args.version}.yaml"
+    mapping_path = (
+        Path(args.input_path).resolve()
+        if args.input_path
+        else source_dir / f"{args.edition}-mappings-{args.version}.yaml"
+    )
+    mastg_path = (
+        Path(args.mastg_path).resolve() if args.mastg_path else source_dir / f"{args.edition}-mastg-{args.version}.yaml"
+    )
+    maswe_path = (
+        Path(args.maswe_path).resolve() if args.maswe_path else source_dir / f"{args.edition}-maswe-{args.version}.yaml"
+    )
     output_path = Path(args.output_path).resolve() if args.output_path else mapping_path
-    save_yaml_file(output_path, enrich_mappings(load_yaml_file(mapping_path), load_yaml_file(mastg_path), load_yaml_file(maswe_path)))
+    save_yaml_file(
+        output_path,
+        enrich_mappings(load_yaml_file(mapping_path), load_yaml_file(mastg_path), load_yaml_file(maswe_path)),
+    )
 
 
 if __name__ == "__main__":

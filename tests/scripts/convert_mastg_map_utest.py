@@ -8,7 +8,7 @@ from unittest import mock
 import yaml
 
 import scripts.convert_mastg_map as converter
-
+import scripts.mastg_mapping_sources as sources
 
 TEST_DOCUMENT = """---
 platform: android
@@ -89,6 +89,14 @@ class TestMastgMapConversion(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "invalid MASWE"):
                 converter.normalize_references(["MASTG-KNOW-0001"], "MASWE-", test_file)
 
+    def test_read_yaml_source_rejects_oversized_file(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source_file = Path(directory) / "large.yaml"
+            source_file.write_text("x", encoding="utf-8")
+            with mock.patch.object(sources, "MAX_YAML_FILE_SIZE_BYTES", 0):
+                with self.assertRaisesRegex(ValueError, "file exceeds"):
+                    sources.read_yaml_source(source_file)
+
     def test_extract_mastg_mappings_and_output_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repository = Path(directory)
@@ -134,7 +142,9 @@ class TestMastgMapConversion(unittest.TestCase):
         self.assertEqual(["0049"], data["0005"]["owasp_mastg_know"])
         self.assertEqual(["0002"], data["0005"]["owasp_mastg_best"])
         self.assertEqual(["MASVS-STORAGE-2"], data["0005"]["owasp_masvs"])
-        self.assertEqual({"0005": "Attackers can access sensitive data written to logs."}, data["0005"]["owasp_mas_threat"])
+        self.assertEqual(
+            {"0005": "Attackers can access sensitive data written to logs."}, data["0005"]["owasp_mas_threat"]
+        )
         self.assertEqual(
             {
                 "0005": "Accessing the device storage on a compromised device.",
@@ -143,16 +153,62 @@ class TestMastgMapConversion(unittest.TestCase):
             data["0005"]["owasp_mas_attack"],
         )
 
+    def test_parse_catalog_rejects_invalid_entries(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            catalog_path = Path(directory) / "catalog.yaml"
+            catalog_path.write_text("invalid: description\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "invalid MAS-THREAT"):
+                sources.parse_catalog(catalog_path, "MAS-THREAT-")
+
+            catalog_path.write_text("MAS-THREAT-0001: [not, text]\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "description must be a string"):
+                sources.parse_catalog(catalog_path, "MAS-THREAT-")
+
+    def test_extract_maswe_metadata_rejects_missing_or_invalid_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory)
+            weakness_path = repository / "weaknesses" / "MASVS-STORAGE"
+            weakness_path.mkdir(parents=True)
+            with self.assertRaisesRegex(ValueError, "found 0"):
+                sources.extract_maswe_metadata(repository, "0005")
+
+            document = weakness_path / "MASWE-0005.md"
+            document.write_text("---\nid: MASWE-9999\n---\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "invalid MASWE identifier"):
+                sources.extract_maswe_metadata(repository, "0005")
+
+            document.write_text("---\nid: MASWE-0005\nmappings: []\n---\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "mappings must be a mapping"):
+                sources.extract_maswe_metadata(repository, "0005")
+
+    def test_output_maswe_data_rejects_missing_catalog_reference(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory)
+            weakness_path = repository / "weaknesses" / "MASVS-STORAGE"
+            catalog_path = repository / ".github" / "instructions"
+            weakness_path.mkdir(parents=True)
+            catalog_path.mkdir(parents=True)
+            (weakness_path / "MASWE-0005.md").write_text(MASWE_DOCUMENT, encoding="utf-8")
+            (catalog_path / "threats.yaml").write_text("MAS-THREAT-0005: threat\n", encoding="utf-8")
+            (catalog_path / "attacks.yaml").write_text("{}\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "missing from its catalog"):
+                sources.output_maswe_data({"0203": {"owasp_maswe": ["0005"]}}, repository, "mobileapp", "2.0")
+
     def test_save_yaml_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output_path = Path(directory) / "nested" / "mapping.yaml"
             converter.save_yaml_file(
                 output_path,
-                converter.output_data({"0208": {"owasp_maswe": ["0008"], "owasp_mastg_know": ["0049"]}}, "mobileapp", "2.0"),
+                converter.output_data(
+                    {"0208": {"owasp_maswe": ["0008"], "owasp_mastg_know": ["0049"]}}, "mobileapp", "2.0"
+                ),
             )
             content = output_path.read_text(encoding="utf-8")
             data = yaml.safe_load(content)
-        self.assertEqual({"edition": "mobileapp", "component": "mastg", "language": "ALL", "version": "2.0"}, data["meta"])
+        self.assertEqual(
+            {"edition": "mobileapp", "component": "mastg", "language": "ALL", "version": "2.0"}, data["meta"]
+        )
         self.assertIn("'0208':", content)
         self.assertIn("- '0008'", content)
         self.assertIn("- '0049'", content)
@@ -174,19 +230,43 @@ class TestMastgMapConversion(unittest.TestCase):
         run.assert_has_calls(
             [
                 mock.call(
-                    ["git", "clone", "--no-checkout", "--depth", "1", converter.ConvertVars.MASTG_REPOSITORY_URL, str(destination)],
+                    [
+                        "git",
+                        "clone",
+                        "--no-checkout",
+                        "--depth",
+                        "1",
+                        converter.ConvertVars.MASTG_REPOSITORY_URL,
+                        str(destination),
+                    ],
                     check=True,
                     capture_output=True,
                     text=True,
                 ),
                 mock.call(
-                    ["git", "-C", str(destination), "fetch", "--depth", "1", "origin", converter.ConvertVars.MASTG_REPOSITORY_REVISION],
+                    [
+                        "git",
+                        "-C",
+                        str(destination),
+                        "fetch",
+                        "--depth",
+                        "1",
+                        "origin",
+                        converter.ConvertVars.MASTG_REPOSITORY_REVISION,
+                    ],
                     check=True,
                     capture_output=True,
                     text=True,
                 ),
                 mock.call(
-                    ["git", "-C", str(destination), "checkout", "--detach", converter.ConvertVars.MASTG_REPOSITORY_REVISION],
+                    [
+                        "git",
+                        "-C",
+                        str(destination),
+                        "checkout",
+                        "--detach",
+                        converter.ConvertVars.MASTG_REPOSITORY_REVISION,
+                    ],
                     check=True,
                     capture_output=True,
                     text=True,
@@ -201,19 +281,43 @@ class TestMastgMapConversion(unittest.TestCase):
         run.assert_has_calls(
             [
                 mock.call(
-                    ["git", "clone", "--no-checkout", "--depth", "1", converter.ConvertVars.MASWE_REPOSITORY_URL, str(destination)],
+                    [
+                        "git",
+                        "clone",
+                        "--no-checkout",
+                        "--depth",
+                        "1",
+                        converter.ConvertVars.MASWE_REPOSITORY_URL,
+                        str(destination),
+                    ],
                     check=True,
                     capture_output=True,
                     text=True,
                 ),
                 mock.call(
-                    ["git", "-C", str(destination), "fetch", "--depth", "1", "origin", converter.ConvertVars.MASWE_REPOSITORY_REVISION],
+                    [
+                        "git",
+                        "-C",
+                        str(destination),
+                        "fetch",
+                        "--depth",
+                        "1",
+                        "origin",
+                        converter.ConvertVars.MASWE_REPOSITORY_REVISION,
+                    ],
                     check=True,
                     capture_output=True,
                     text=True,
                 ),
                 mock.call(
-                    ["git", "-C", str(destination), "checkout", "--detach", converter.ConvertVars.MASWE_REPOSITORY_REVISION],
+                    [
+                        "git",
+                        "-C",
+                        str(destination),
+                        "checkout",
+                        "--detach",
+                        converter.ConvertVars.MASWE_REPOSITORY_REVISION,
+                    ],
                     check=True,
                     capture_output=True,
                     text=True,
@@ -255,13 +359,23 @@ class TestMastgMapConversion(unittest.TestCase):
     @mock.patch("scripts.convert_mastg_map.extract_mastg_mappings", return_value={"0330": {"owasp_maswe": ["0020"]}})
     @mock.patch("scripts.convert_mastg_map.parse_arguments")
     def test_main_uses_existing_checkout(
-        self, parse_arguments: mock.Mock, extract_mastg_mappings: mock.Mock, save_yaml_file: mock.Mock, _: mock.Mock, __: mock.Mock
+        self,
+        parse_arguments: mock.Mock,
+        extract_mastg_mappings: mock.Mock,
+        save_yaml_file: mock.Mock,
+        _: mock.Mock,
+        __: mock.Mock,
     ) -> None:
         with tempfile.TemporaryDirectory() as directory:
             input_path = Path(directory) / "mastg"
             output_path = Path(directory) / "output"
             parse_arguments.return_value = argparse.Namespace(
-                input_path=str(input_path), maswe_input_path=str(input_path), output_path=str(output_path), edition="mobileapp", version="2.0", debug=False
+                input_path=str(input_path),
+                maswe_input_path=str(input_path),
+                output_path=str(output_path),
+                edition="mobileapp",
+                version="2.0",
+                debug=False,
             )
 
             converter.main()
@@ -288,7 +402,12 @@ class TestMastgMapConversion(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             output_path = Path(directory) / "output"
             parse_arguments.return_value = argparse.Namespace(
-                input_path=None, maswe_input_path=str(output_path), output_path=str(output_path), edition="mobileapp", version="2.0", debug=False
+                input_path=None,
+                maswe_input_path=str(output_path),
+                output_path=str(output_path),
+                edition="mobileapp",
+                version="2.0",
+                debug=False,
             )
 
             converter.main()
@@ -316,12 +435,48 @@ class TestMastgMapConversion(unittest.TestCase):
     ) -> None:
         temporary_directory.return_value.name = "temporary-checkout"
         parse_arguments.return_value = argparse.Namespace(
-            input_path=None, maswe_input_path="maswe", output_path="output", edition="mobileapp", version="2.0", debug=False
+            input_path=None,
+            maswe_input_path="maswe",
+            output_path="output",
+            edition="mobileapp",
+            version="2.0",
+            debug=False,
         )
 
         converter.main()
 
         temporary_directory.return_value.cleanup.assert_called_once_with()
+
+    @mock.patch("scripts.convert_mastg_map.output_maswe_data", return_value={})
+    @mock.patch("scripts.convert_mastg_map.set_logging")
+    @mock.patch("scripts.convert_mastg_map.save_yaml_file")
+    @mock.patch("scripts.convert_mastg_map.extract_mastg_mappings", return_value={})
+    @mock.patch("scripts.convert_mastg_map.clone_maswe")
+    @mock.patch("scripts.convert_mastg_map.clone_mastg")
+    @mock.patch("scripts.convert_mastg_map.parse_arguments")
+    def test_main_clones_both_default_sources(
+        self,
+        parse_arguments: mock.Mock,
+        clone_mastg: mock.Mock,
+        clone_maswe: mock.Mock,
+        _: mock.Mock,
+        __: mock.Mock,
+        ___: mock.Mock,
+        ____: mock.Mock,
+    ) -> None:
+        parse_arguments.return_value = argparse.Namespace(
+            input_path=None,
+            maswe_input_path=None,
+            output_path="output",
+            edition="mobileapp",
+            version="2.0",
+            debug=False,
+        )
+
+        converter.main()
+
+        self.assertEqual("mastg", clone_mastg.call_args.args[0].name)
+        self.assertEqual("maswe", clone_maswe.call_args.args[0].name)
 
 
 if __name__ == "__main__":
