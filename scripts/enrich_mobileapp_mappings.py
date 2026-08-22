@@ -111,14 +111,9 @@ def string_list(value: Any, context: str) -> list[str]:
     return value
 
 
-def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: dict[str, Any]) -> None:
-    """Merge MASTG siblings and their MASWE threat and attack descriptions into one card."""
-    card_id = card.get("id", "unknown card")
-    test_ids = string_list(card.get("owasp_mastg"), f"{card_id} owasp_mastg")
-    inferred = {field: [] for field in MAPPING_FIELDS}
-    threats: dict[str, str] = {}
-    attack_vectors: dict[str, str] = {}
-
+def infer_mastg_mappings(card_id: str, test_ids: list[str], mastg_data: dict[str, Any]) -> dict[str, list[str]]:
+    """Collect mappings inferred from available MASTG test metadata."""
+    inferred: dict[str, list[str]] = {field: [] for field in MAPPING_FIELDS}
     for test_id in test_ids:
         if test_id == "-":
             continue
@@ -131,8 +126,16 @@ def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: di
             inferred[field] = merge_unique(
                 inferred[field], string_list(test_mapping.get(field), f"MASTG {test_id} {field}")
             )
+    return inferred
 
-    for weakness_id in inferred["owasp_maswe"]:
+
+def collect_maswe_references(
+    card_id: str, weakness_ids: list[str], maswe_data: dict[str, Any]
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Collect threat and attack descriptions for inferred MASWE weaknesses."""
+    threats: dict[str, str] = {}
+    attack_vectors: dict[str, str] = {}
+    for weakness_id in weakness_ids:
         weakness_mapping = maswe_data.get(weakness_id)
         if not isinstance(weakness_mapping, dict):
             raise ValueError(f"{card_id}: MASWE {weakness_id!r} is missing from generated metadata")
@@ -144,6 +147,15 @@ def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: di
             ):
                 raise ValueError(f"MASWE {weakness_id} {field}: expected identifier-to-description mapping")
             destination.update(references)
+    return threats, attack_vectors
+
+
+def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: dict[str, Any]) -> None:
+    """Merge MASTG siblings and their MASWE threat and attack descriptions into one card."""
+    card_id = card.get("id", "unknown card")
+    test_ids = string_list(card.get("owasp_mastg"), f"{card_id} owasp_mastg")
+    inferred = infer_mastg_mappings(card_id, test_ids, mastg_data)
+    threats, attack_vectors = collect_maswe_references(card_id, inferred["owasp_maswe"], maswe_data)
 
     for field in MAPPING_FIELDS:
         card[field] = merge_unique(string_list(card.get(field), f"{card_id} {field}"), inferred[field])

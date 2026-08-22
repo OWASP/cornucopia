@@ -13,17 +13,7 @@ from typing import Any
 import yaml
 from pathvalidate.argparse import validate_filepath_arg
 
-from scripts.mastg_mapping_sources import (
-    extract_front_matter,
-    extract_mastg_mappings,
-    extract_maswe_metadata,
-    extract_test_mapping,
-    normalize_references,
-    output_data,
-    output_maswe_data,
-    parse_catalog,
-    read_yaml_source,
-)
+from scripts.mastg_mapping_sources import extract_mastg_mappings, output_data, output_maswe_data
 
 FILENAME_COMPONENT_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}")
 
