@@ -27,8 +27,23 @@ import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
 
 try:
     import pymupdf
-except ImportError:  # older releases only expose the legacy name
-    import fitz as pymupdf
+except ImportError:
+    try:
+        import fitz as pymupdf  # older releases only expose the legacy name
+    except ImportError:
+        # Only merge_deck actually reads or writes PDFs. Everything else here
+        # works on filenames, so the module stays importable without PyMuPDF
+        # and --dry-run still reports what a merge would produce. Anything
+        # that needs it says so plainly rather than failing on the import.
+        pymupdf = None
+
+PYMUPDF_HELP = (
+    "ERROR: merging decks needs PyMuPDF, which is not installed in this "
+    "interpreter.\n"
+    "  {0}\n"
+    "Install it with 'python3 -m pip install pymupdf', then run this again.\n"
+    "Use --dry-run to see what would be merged without it."
+)
 
 
 def parse_args():
@@ -139,6 +154,8 @@ def match_card_pdfs(deck, edition, language, size_key, config, out_dir, bleed, m
 
 def merge_deck(ordered_pdfs, output_path):
     """Interleave each card as back-then-front into a single deck PDF."""
+    if pymupdf is None:
+        raise RuntimeError(PYMUPDF_HELP.format(sys.prefix))
     merged = pymupdf.open()
     for pdf_path in ordered_pdfs:
         card = pymupdf.open(pdf_path)
@@ -304,6 +321,11 @@ def prepare_merge(args, base_dir):
 def main():
     args = parse_args()
     base_dir = SCRIPT_DIR
+
+    if pymupdf is None and not args.dry_run:
+        # Say so before any work is done, rather than partway through a run.
+        print(PYMUPDF_HELP.format(sys.prefix))
+        return 1
 
     prepared = prepare_merge(args, base_dir)
     if not prepared:
