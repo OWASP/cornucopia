@@ -1,4 +1,4 @@
-## Scenario: Riotaro can inject and run a command that the application will run at a higher privilege level without being authenticated or authorized to do so.
+## Scenario: Riotaro can bypass authorization controls by exploiting data flows between views, processes, and components to inject commands, manipulate data, or disclose sensitive information
 
 ### Example
 

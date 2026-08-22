@@ -1,4 +1,4 @@
-## Scenario: Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use
+## Scenario: Harold can expose sensitive data displayed, entered, or cached because the data is excessive, not properly masked or cleared after use, persisted without protection, exposed to web content, or made available to third-party components through unnecessary permissions
 
 ### Example
 

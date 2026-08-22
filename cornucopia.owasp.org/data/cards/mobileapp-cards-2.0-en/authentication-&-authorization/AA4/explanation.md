@@ -1,4 +1,4 @@
-## Scenario: Jie sign into Choi's mobile app undetected. 
+## Scenario: Jie signs into Choi's mobile app undetected. 
  
 Consider a scenario where Jie and Choi live together. Jie and Choi, like all couples, keep secrets from each other, like what they spend their money on. It is not our job to help Jie and Choi with their relationship issues, but it is our job to keep the secrets they store on their mobile phone confidential. We therefore need to help them by ensuring that they authenticate before accessing these secrets. 
  

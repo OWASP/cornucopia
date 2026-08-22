@@ -1,3 +1,4 @@
+---
 meta:
   edition: mobileapp
   component: mappings
@@ -13,109 +14,113 @@ suits:
   - id: PC2
     value: '2'
     url: https://cornucopia.owasp.org/cards/PC2
-    owasp_mastg: ['0289', '0290', '0291', '0292', '0293', '0294', '0333']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0289', '0290', '0291', '0292', '0293', '0294']
+    owasp_mastg_best: ['0014', '0015', '0017', '0018', '0033']
+    owasp_mastg_know: ['0053', '0099', '0076']
+    owasp_maswe: ['0038', '0034']
     capec: [37, 155, 498, 648]
     safecode: ['-']
   - id: PC3
     value: '3'
     url: https://cornucopia.owasp.org/cards/PC3
     owasp_mastg: ['0316', '0320', '0346', '0347', '0378', '0390']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0028', '0044', '0059', '0060', '0069']
+    owasp_mastg_know: ['0018', '0121', '0141', '0076', '0139', '0082']
+    owasp_maswe: ['0036', '0001', '0034', '0066']
     capec: [508]
     safecode: ['-']
   - id: PC4
     value: '4'
     url: https://cornucopia.owasp.org/cards/PC4
     owasp_mastg: ['0254', '0255', '0256', '0257', '0360', '0361', '0362', '0363']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0051']
+    owasp_mastg_know: ['0017', '0077']
+    owasp_maswe: ['0066']
     capec: [634, 651]
     safecode: [11]
   - id: PC5
     value: '5'
     url: https://cornucopia.owasp.org/cards/PC5
     owasp_mastg: ['0372', '0374', '0375']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0056', '0057']
+    owasp_mastg_know: ['0025', '0138']
+    owasp_maswe: ['0032', '0050']
     capec: [497, 499, 502]
     safecode: [17]
   - id: PC6
     value: '6'
     url: https://cornucopia.owasp.org/cards/PC6
     owasp_mastg: ['0364', '0365', '0366', '0381']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0081']
-    owasp_maswe: []
+    owasp_mastg_best: ['0052', '0063']
+    owasp_mastg_know: ['0081', '0132', '0017', '0020', '0133', '0134']
+    owasp_maswe: ['0018', '0032']
     capec: [94, 117, 499, 502, 504]
     safecode: [8, 10, 11]
   - id: PC7
     value: '7'
     url: https://cornucopia.owasp.org/cards/PC7
     owasp_mastg: ['0339', '0355', '0356', '0357']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0104']
-    owasp_maswe: []
+    owasp_mastg_best: ['0039', '0049']
+    owasp_mastg_know: ['0104', '0117', '0020']
+    owasp_maswe: ['0050', '0018']
     capec: [137, 499, 502, 586]
     safecode: ['-']
   - id: PC8
     value: '8'
     url: https://cornucopia.owasp.org/cards/PC8
     owasp_mastg: ['0357']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0104']
-    owasp_maswe: []
+    owasp_mastg_best: ['0049']
+    owasp_mastg_know: ['0104', '0020', '0117']
+    owasp_maswe: ['0018']
     capec: [126, 127, 139, 597, 643]
     safecode: [16, 33]
   - id: PC9
     value: '9'
     url: https://cornucopia.owasp.org/cards/PC9
-    owasp_mastg: ['0337', '0339', '0386', '0388', '0389']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0337', '0339', '0386', '0389']
+    owasp_mastg_best: ['0039', '0064', '0068', '0069']
+    owasp_mastg_know: ['0021', '0117', '0075', '0082', '0141']
+    owasp_maswe: ['0050', '0001', '0031']
     capec: [137, 499, 502, 586]
     safecode: ['-']
   - id: PCX
     value: 10
     url: https://cornucopia.owasp.org/cards/PCX
-    owasp_mastg: ['0245', '0272', '0273', '0274', '0275', '0382', '0383', '0384', '0392', '0331']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
-    capec: [310,538, 691]
+    owasp_mastg: ['0245', '0272', '0273', '0274', '0275', '0382', '0383', '0384',
+      '0392', '0331']
+    owasp_mastg_best: ['0032']
+    owasp_mastg_know: ['0023', '0074', '0076']
+    owasp_maswe: ['0041', '0044', '0043', '0035']
+    capec: [310, 538, 691]
     safecode: ['-']
   - id: PCJ
     value: J
     url: https://cornucopia.owasp.org/cards/PCJ
-    owasp_mastg: ['0332', '0333', '0335', '0336', '0370', '0371', '0393', '0394', '0395', '0398', '0399', '0400']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0332', '0333', '0335', '0336', '0370', '0371', '0393', '0394',
+      '0395', '0398', '0399', '0400']
+    owasp_mastg_best: ['0034', '0033', '0045', '0054', '0055', '0070', '0071', '0072']
+    owasp_mastg_know: ['0076', '0079', '0019', '0080', '0018']
+    owasp_maswe: ['0035', '0034', '0029']
     capec: [175, 240, 242, 500, 591, 592]
     safecode: [17]
   - id: PCQ
     value: Q
     url: https://cornucopia.owasp.org/cards/PCQ
-    owasp_mastg: ['0332', '0334', '0339', '0355', '0356', '0357', '0376', '0377', '0379', '0380', '0381', '0388', '0389']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0104']
-    owasp_maswe: []
+    owasp_mastg: ['0332', '0334', '0339', '0355', '0356', '0357', '0376', '0377',
+      '0379', '0380', '0381', '0388', '0389']
+    owasp_mastg_best: ['0034', '0011', '0012', '0013', '0035', '0039', '0049', '0058',
+      '0062', '0061', '0059', '0063', '0068', '0069']
+    owasp_mastg_know: ['0104', '0076', '0018', '0117', '0020', '0139', '0082', '0141']
+    owasp_maswe: ['0035', '0034', '0050', '0018', '0032', '0001', '0031']
     capec: [137, 138, 499, 502, 586]
     safecode: ['-']
   - id: PCK
-    value: 'K'
+    value: K
     url: https://cornucopia.owasp.org/cards/PCK
     owasp_mastg: ['0222', '0223', '0228', '0229', '0230']
     owasp_mastg_best: []
-    owasp_mastg_know: ['0060']
-    owasp_maswe: []
+    owasp_mastg_know: ['0060', '0006', '0061']
+    owasp_maswe: ['0045']
     capec: [14, 24, 44, 45, 46, 47, 92, 100, 124, 128, 129, 131, 679]
     safecode: [7, 9, 34, 36]
   - id: PCA
@@ -135,16 +140,17 @@ suits:
     url: https://cornucopia.owasp.org/cards/AA2
     owasp_mastg: ['0266', '0267', '0268', '0269']
     owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_know: ['0056', '0057']
+    owasp_maswe: ['0020', '0021']
     capec: [20, 49, 50, 55, 115]
     safecode: [28]
   - id: AA3
     value: '3'
     url: https://cornucopia.owasp.org/cards/AA3
-    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327', '0328', '0329', '0330']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327',
+      '0328', '0329', '0330']
+    owasp_mastg_best: ['0031', '0036', '0037', '0038']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
     owasp_maswe: ['0020', '0021', '0022']
     capec: [114, 115, 554]
     safecode: [28]
@@ -152,81 +158,86 @@ suits:
     value: '4'
     url: https://cornucopia.owasp.org/cards/AA4
     owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0327', '0330']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0036']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021', '0022']
     capec: [115]
     safecode: [28]
   - id: AA5
     value: '5'
     url: https://cornucopia.owasp.org/cards/AA5
     owasp_mastg: ['0340', '0370', '0371', '0381', '0393', '0394', '0395']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0040', '0045', '0054', '0055', '0063', '0070', '0071', '0072']
+    owasp_mastg_know: ['0022', '0079', '0019', '0080']
+    owasp_maswe: ['0036', '0029', '0032']
     capec: [153, 173, 505, 506]
     safecode: ['-']
   - id: AA6
     value: '6'
     url: https://cornucopia.owasp.org/cards/AA6
     owasp_mastg: ['0266', '0267', '0268', '0269', '0326', '0327', '0329']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: ['0020']
+    owasp_mastg_best: ['0031', '0036', '0038']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021']
     capec: [114, 115, 207, 554]
     safecode: [28]
   - id: AA7
     value: '7'
     url: https://cornucopia.owasp.org/cards/AA7
     owasp_mastg: ['0266', '0267', '0327', '0329', '0375']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0036', '0038', '0057']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012', '0025', '0138']
+    owasp_maswe: ['0020', '0050']
     capec: [39, 74, 162, 166, 207]
     safecode: [8, 10, 11, 12]
   - id: AA8
     value: '8'
     url: https://cornucopia.owasp.org/cards/AA8
     owasp_mastg: ['0266', '0267', '0327']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0036']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020']
     capec: [114, 115, 554]
     safecode: [28]
   - id: AA9
     value: '9'
     url: https://cornucopia.owasp.org/cards/AA9
-    owasp_mastg: ['0250', '0251', '0252', '0253', '0254', '0335', '0336', '0360', '0361', '0362', '0363']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0250', '0251', '0252', '0253', '0254', '0335', '0336', '0360',
+      '0361', '0362', '0363']
+    owasp_mastg_best: ['0011', '0012', '0013', '0049', '0010', '0033', '0051']
+    owasp_mastg_know: ['0018', '0017', '0076', '0077']
+    owasp_maswe: ['0034', '0066']
     capec: [122]
     safecode: [8, 10, 11]
   - id: AAX
     value: 10
     url: https://cornucopia.owasp.org/cards/AAX
-    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327', '0328', '0329', '0330']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327',
+      '0328', '0329', '0330']
+    owasp_mastg_best: ['0031', '0036', '0037', '0038']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021', '0022']
     capec: [114, 115, 554]
     safecode: [28]
   - id: AAJ
-    value: 'J'
+    value: J
     url: https://cornucopia.owasp.org/cards/AAJ
-    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0327', '0330', '0364', '0365', '0366']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0327', '0330',
+      '0364', '0365', '0366']
+    owasp_mastg_best: ['0036', '0052']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012', '0132', '0017',
+      '0020', '0133', '0134']
+    owasp_maswe: ['0020', '0021', '0022', '0018']
     capec: [36, 121]
     safecode: [8, 10, 11]
   - id: AAQ
     value: Q
     url: https://cornucopia.owasp.org/cards/AAQ
     owasp_mastg: ['0334', '0339', '0376', '0377', '0379', '0380']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0011', '0012', '0013', '0035', '0039', '0058', '0062', '0061',
+      '0059']
+    owasp_mastg_know: ['0018', '0117', '0076', '0139']
+    owasp_maswe: ['0034', '0050']
     capec: [17, 30, 69, 234]
     safecode: [8, 10, 11]
   - id: AAK
@@ -234,7 +245,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/AAK
     owasp_mastg: []
     owasp_mastg_best: []
-    owasp_mastg_know: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327', '0328', '0329', '0330']
+    owasp_mastg_know: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327',
+      '0328', '0329', '0330']
     owasp_maswe: []
     capec: [114, 115, 207, 554]
     safecode: [8, 10, 11]
@@ -254,36 +266,37 @@ suits:
     value: '2'
     url: https://cornucopia.owasp.org/cards/NS2
     owasp_mastg: ['0203', '0231', '0296', '0297']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0002', '0022']
+    owasp_mastg_know: ['0049', '0101']
+    owasp_maswe: ['0005']
     capec: [155]
     safecode: [11, 23, 29]
   - id: NS3
     value: '3'
     url: https://cornucopia.owasp.org/cards/NS3
-    owasp_mastg: ['0258', '0313', '0314']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0258', '0276', '0277', '0278', '0279', '0280', '0313', '0314']
+    owasp_mastg_best: ['0019', '0026']
+    owasp_mastg_know: ['0055', '0100']
+    owasp_maswe: ['0036']
     capec: [204, 637, 679]
     safecode: ['-']
   - id: NS4
     value: '4'
     url: https://cornucopia.owasp.org/cards/NS4
     owasp_mastg: ['0206', '0315', '0318', '0319']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0027']
+    owasp_mastg_know: ['0054']
+    owasp_maswe: ['0073', '0037']
     capec: [155, 161, 204, 220, 639, 643]
     safecode: [11, 23, 29]
   - id: NS5
     value: '5'
     url: https://cornucopia.owasp.org/cards/NS5
-    owasp_mastg: ['0200', '0201', '0207', '0215', '0216', '0262', '0287', '0298', '0304', '0305', '0306']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0200', '0201', '0207', '0215', '0216', '0262', '0287', '0298',
+      '0304', '0305', '0306']
+    owasp_mastg_best: ['0050', '0023', '0004']
+    owasp_mastg_know: ['0042', '0041', '0102', '0050', '0036', '0037']
+    owasp_maswe: ['0002', '0001', '0006']
     capec: [37, 155, 204, 639, 643]
     safecode: [11, 23, 29]
   - id: NS6
@@ -291,8 +304,8 @@ suits:
     url: https://cornucopia.owasp.org/cards/NS6
     owasp_mastg: ['0246', '0247', '0248', '0249']
     owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_know: ['0056', '0001']
+    owasp_maswe: ['0017']
     capec: [406, 675]
     safecode: ['-']
   - id: NS7
@@ -307,19 +320,21 @@ suits:
   - id: NS8
     value: '8'
     url: https://cornucopia.owasp.org/cards/NS8
-    owasp_mastg: ['0200', '0201', '0207', '0299', '0300', '0301', '0302', '0303', '0304', '0305', '0306', '0338', '0387']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0200', '0201', '0207', '0299', '0300', '0301', '0302', '0303',
+      '0304', '0305', '0306', '0338', '0387']
+    owasp_mastg_best: ['0050', '0024', '0066', '0065']
+    owasp_mastg_know: ['0042', '0041', '0082', '0091', '0108', '0057', '0122', '0037',
+      '0036', '0086']
+    owasp_maswe: ['0002', '0001', '0057']
     capec: [75, 76, 113, 153, 161, 165, 176, 190, 207, 210, 554, 562]
     safecode: [12, 19]
   - id: NS9
     value: '9'
     url: https://cornucopia.owasp.org/cards/NS9
     owasp_mastg: ['0338', '0387']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0066', '0065']
+    owasp_mastg_know: ['0036', '0086']
+    owasp_maswe: ['0057']
     capec: [176]
     safecode: ['-']
   - id: NSX
@@ -327,35 +342,37 @@ suits:
     url: https://cornucopia.owasp.org/cards/NSX
     owasp_mastg: ['0242', '0243', '0244', '0385']
     owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: ['0062']
+    owasp_mastg_know: ['0014', '0015', '0072']
+    owasp_maswe: ['0062', '0028']
     capec: [57, 94, 156, 465, 466, 479, 701]
     safecode: [14, 30]
   - id: NSJ
     value: J
     url: https://cornucopia.owasp.org/cards/NSJ
-    owasp_mastg: ['0217', '0218', '0233', '0235', '0236', '0295', '0321', '0322', '0323', '0342', '0343', '0344', '0345', '0348']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0217', '0218', '0233', '0235', '0236', '0295', '0321', '0322',
+      '0323', '0342', '0343', '0344', '0345', '0348']
+    owasp_mastg_best: ['0020', '0042', '0043']
+    owasp_mastg_know: ['0014', '0011', '0010', '0071', '0073']
+    owasp_maswe: ['0026', '0027']
     capec: [57, 94, 156, 220, 459, 465, 466]
     safecode: [12, 14, 29, 30]
   - id: NSQ
     value: Q
     url: https://cornucopia.owasp.org/cards/NSQ
-    owasp_mastg: ['0321', '0322', '0233', '0234', '0235', '0236', '0237', '0238', '0239']
+    owasp_mastg: ['0321', '0322', '0233', '0235', '0236', '0237', '0238',
+      '0239']
     owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_know: ['0071', '0014']
+    owasp_maswe: ['0026', '0027']
     capec: [31, 36, 57, 102, 157, 158, 384, 466]
     safecode: [29, 30]
   - id: NSK
-    value: 'K'
+    value: K
     url: https://cornucopia.owasp.org/cards/NSK
     owasp_mastg: ['0234', '0282', '0283', '0284', '0285', '0286', '0396', '0397']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0021', '0073']
+    owasp_mastg_know: ['0010', '0014', '0072']
+    owasp_maswe: ['0027']
     capec: [57, 94, 156, 465, 466, 479, 701]
     safecode: [14, 29, 30]
   - id: NSA
@@ -374,9 +391,9 @@ suits:
     value: '2'
     url: https://cornucopia.owasp.org/cards/RS2
     owasp_mastg: ['0263', '0264', '0265', '0358', '0359']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0022']
+    owasp_mastg_know: ['0064', '0101']
+    owasp_maswe: ['0061']
     capec: [37, 167, 191]
     safecode: ['-']
   - id: RS3
@@ -384,79 +401,79 @@ suits:
     url: https://cornucopia.owasp.org/cards/RS3
     owasp_mastg: ['0219', '0288']
     owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_know: ['0063']
+    owasp_maswe: ['0061']
     capec: [37, 167, 191]
     safecode: ['-']
   - id: RS4
     value: '4'
     url: https://cornucopia.owasp.org/cards/RS4
     owasp_mastg: ['0220', '0224', '0225']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: ['0075']
+    owasp_mastg_best: ['0006']
+    owasp_mastg_know: ['0058', '0003']
+    owasp_maswe: ['0075', '0056']
     capec: [68, 167, 206, 476]
     safecode: [14]
   - id: RS5
     value: '5'
     url: https://cornucopia.owasp.org/cards/RS5
     owasp_mastg: ['0226', '0227', '0261']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0007', '0008']
+    owasp_mastg_know: ['0007', '0028', '0062']
+    owasp_maswe: ['0063']
     capec: [115, 167, 554]
     safecode: ['-']
   - id: RS6
     value: '6'
     url: https://cornucopia.owasp.org/cards/RS6
     owasp_mastg: ['0352', '0353', '0401', '0402']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0007', '0029', '0047', '0074']
+    owasp_mastg_know: ['0007', '0028', '0085']
+    owasp_maswe: ['0064']
     capec: [115, 167, 554]
     safecode: ['-']
   - id: RS7
     value: '7'
     url: https://cornucopia.owasp.org/cards/RS7
     owasp_mastg: ['0351', '0367']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: ['0054']
+    owasp_mastg_best: ['0046', '0053']
+    owasp_mastg_know: ['0031', '0135']
+    owasp_maswe: ['0054', '0053']
     capec: [189, 554]
     safecode: ['-']
   - id: RS8
     value: '8'
     url: https://cornucopia.owasp.org/cards/RS8
     owasp_mastg: ['0341', '0354']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0030', '0032', '0087']
-    owasp_maswe: []
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0032', '0087', '0118']
+    owasp_maswe: ['0058']
     capec: [167, 554]
     safecode: ['-']
   - id: RS9
     value: '9'
     url: https://cornucopia.owasp.org/cards/RS9
     owasp_mastg: ['0368', '0369', '0391']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: ['0060']
+    owasp_mastg_best: ['0029']
+    owasp_mastg_know: ['0033', '0089']
+    owasp_maswe: ['0060', '0059']
     capec: [167, 554]
     safecode: ['-']
   - id: RSX
     value: '10'
     url: https://cornucopia.owasp.org/cards/RSX
     owasp_mastg: ['0240', '0241', '0324', '0325']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: ['0055']
+    owasp_mastg_best: ['0029', '0030']
+    owasp_mastg_know: ['0084', '0027']
+    owasp_maswe: ['0055', '0051']
     capec: [167, 660, 661]
     safecode: ['-']
   - id: RSJ
     value: J
     url: https://cornucopia.owasp.org/cards/RSJ
     owasp_mastg: ['0338', '0387']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
+    owasp_mastg_best: ['0066', '0065']
+    owasp_mastg_know: ['0036', '0086']
     owasp_maswe: ['0057']
     capec: [23, 165, 167]
     safecode: ['-']
@@ -464,18 +481,18 @@ suits:
     value: Q
     url: https://cornucopia.owasp.org/cards/RSQ
     owasp_mastg: ['0341', '0354']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0030', '0032', '0087', '0109', '0110']
-    owasp_maswe: []
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0032', '0087', '0109', '0110', '0118']
+    owasp_maswe: ['0058']
     capec: [167, 554]
     safecode: ['-']
   - id: RSK
     value: K
     url: https://cornucopia.owasp.org/cards/RSK
     owasp_mastg: ['0341', '0354']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0030', '0032', '0087', '0109', '0110', '0119']
-    owasp_maswe: []
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0032', '0087', '0109', '0110', '0119', '0118']
+    owasp_maswe: ['0058']
     capec: [167, 554]
     safecode: ['-']
   - id: RSA
@@ -495,26 +512,26 @@ suits:
     url: https://cornucopia.owasp.org/cards/CRM2
     owasp_mastg: ['0307', '0308']
     owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_know: ['0012']
+    owasp_maswe: ['0007']
     capec: [97, 116, 117]
     safecode: [14, 29]
   - id: CRM3
     value: '3'
     url: https://cornucopia.owasp.org/cards/CRM3
     owasp_mastg: ['0204', '0205', '0311']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0001', '0025']
+    owasp_mastg_know: ['0013', '0070']
+    owasp_maswe: ['0012']
     capec: [20, 112, 485]
     safecode: [29, 33]
   - id: CRM4
     value: '4'
     url: https://cornucopia.owasp.org/cards/CRM4
     owasp_mastg: ['0204', '0205', '0208', '0311', '0349']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0001', '0025']
+    owasp_mastg_know: ['0013', '0012', '0070']
+    owasp_maswe: ['0012', '0013']
     capec: [20, 55, 112, 485]
     safecode: [21, 29, 32, 33]
   - id: CRM5
@@ -523,61 +540,65 @@ suits:
     owasp_mastg: ['0209', '0210', '0211']
     owasp_mastg_best: []
     owasp_mastg_know: ['0111']
-    owasp_maswe: []
+    owasp_maswe: ['0013', '0007', '0008']
     capec: [37, 204]
     safecode: [21, 29]
   - id: CRM6
     value: '6'
     url: https://cornucopia.owasp.org/cards/CRM6
     owasp_mastg: ['0338', '0234', '0282', '0283', '0284', '0396', '0397']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0066', '0021', '0073']
+    owasp_mastg_know: ['0036', '0010', '0072']
+    owasp_maswe: ['0057', '0027']
     capec: [68, 75, 145, 438, 439, 442]
     safecode: [12, 14]
   - id: CRM7
     value: '7'
     url: https://cornucopia.owasp.org/cards/CRM7
-    owasp_mastg: ['0200', '0201', '0202', '0207', '0299', '0300', '0301', '0302', '0303', '0304', '0305', '0306']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0200', '0201', '0202', '0207', '0299', '0300', '0301', '0302',
+      '0303', '0304', '0305', '0306']
+    owasp_mastg_best: ['0050', '0024']
+    owasp_mastg_know: ['0042', '0041', '0082', '0091', '0108', '0057', '0122', '0037']
+    owasp_maswe: ['0002', '0001']
     capec: [210, 212]
     safecode: [15]
   - id: CRM8
     value: '8'
     url: https://cornucopia.owasp.org/cards/CRM8
-    owasp_mastg: ['0208', '0209', '0210', '0211', '0221', '0232', '0312', '0317', '0350']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0208', '0209', '0210', '0211', '0221', '0232', '0312', '0317',
+      '0350']
+    owasp_mastg_best: ['0009', '0005', '0020']
+    owasp_mastg_know: ['0012', '0011']
+    owasp_maswe: ['0013', '0007', '0008']
     capec: [20, 116, 117, 97, 112, 485]
     safecode: [14, 23, 29, 31, 32, 33]
   - id: CRM9
     value: '9'
     url: https://cornucopia.owasp.org/cards/CRM9
     owasp_mastg: ['0210', '0221', '0232', '0309', '0310', '0312', '0317', '0350']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0009', '0005', '0020']
+    owasp_mastg_know: ['0011']
+    owasp_maswe: ['0007']
     capec: [37, 117, 155, 191, 204]
     safecode: [21, 29, 31]
   - id: CRMX
     value: '10'
     url: https://cornucopia.owasp.org/cards/CRMX
-    owasp_mastg: ['0200', '0201', '0202', '0207', '0212', '0213', '0214', '0299', '0300', '0301', '0302', '0303', '0304', '0305', '0306']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg: ['0200', '0201', '0202', '0207', '0212', '0213', '0214', '0299',
+      '0300', '0301', '0302', '0303', '0304', '0305', '0306']
+    owasp_mastg_best: ['0050', '0024']
+    owasp_mastg_know: ['0042', '0041', '0012', '0082', '0091', '0108', '0057', '0122',
+      '0037']
+    owasp_maswe: ['0002', '0001', '0003']
     capec: [37, 117, 155, 191, 204]
     safecode: [21, 29]
   - id: CRMJ
-    value: 'J'
+    value: J
     url: https://cornucopia.owasp.org/cards/CRMJ
     owasp_mastg: ['0282', '0283', '0284', '0396', '0397']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0021', '0073']
+    owasp_mastg_know: ['0010', '0072']
+    owasp_maswe: ['0027']
     capec: [97, 620]
     safecode: [21, 29]
   - id: CRMQ
@@ -593,9 +614,9 @@ suits:
     value: K
     url: https://cornucopia.owasp.org/cards/CRMK
     owasp_mastg: ['0341', '0354']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0032', '0140']
-    owasp_maswe: []
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0032', '0140', '0030', '0118', '0087']
+    owasp_maswe: ['0058']
     capec: [54, 97, 116, 117, 220]
     safecode: [14, 21, 29]
   - id: CRMA
@@ -614,9 +635,9 @@ suits:
     value: '2'
     url: https://cornucopia.owasp.org/cards/CM2
     owasp_mastg: ['0206', '0281', '0318', '0319', '0360', '0361']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0051']
+    owasp_mastg_know: ['0077']
+    owasp_maswe: ['0073', '0074', '0066']
     capec: [410]
     safecode: ['-']
   - id: CM3
@@ -634,7 +655,7 @@ suits:
     owasp_mastg: ['0206', '0281', '0318', '0319']
     owasp_mastg_best: []
     owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_maswe: ['0073', '0074']
     capec: [410]
     safecode: ['-']
   - id: CM5
@@ -643,34 +664,34 @@ suits:
     owasp_mastg: ['0318', '0319']
     owasp_mastg_best: []
     owasp_mastg_know: ['0026']
-    owasp_maswe: []
+    owasp_maswe: ['0073']
     capec: [410]
     safecode: ['-']
   - id: CM6
     value: '6'
     url: https://cornucopia.owasp.org/cards/CM6
     owasp_mastg: ['0206', '0318', '0319', '0360', '0361']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0051']
+    owasp_mastg_know: ['0077']
+    owasp_maswe: ['0073', '0066']
     capec: [410]
     safecode: ['-']
   - id: CM7
     value: '7'
     url: https://cornucopia.owasp.org/cards/CM7
     owasp_mastg: ['0370', '0371', '0394', '0395']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0045', '0054', '0055', '0071', '0072']
+    owasp_mastg_know: ['0079', '0019', '0080']
+    owasp_maswe: ['0029']
     capec: [137, 499, 502, 586]
     safecode: ['-']
   - id: CM8
     value: '8'
     url: https://cornucopia.owasp.org/cards/CM8
     owasp_mastg: ['0370', '0371', '0381', '0394', '0395']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0045', '0054', '0055', '0063', '0071', '0072']
+    owasp_mastg_know: ['0079', '0019', '0080']
+    owasp_maswe: ['0029', '0032']
     capec: [499, 502]
     safecode: ['-']
   - id: CM9
@@ -686,13 +707,13 @@ suits:
     value: '10'
     url: https://cornucopia.owasp.org/cards/CMX
     owasp_mastg: ['0370', '0394', '0395']
-    owasp_mastg_best: []
-    owasp_mastg_know: []
-    owasp_maswe: []
+    owasp_mastg_best: ['0045', '0054', '0071', '0072']
+    owasp_mastg_know: ['0079', '0019', '0080']
+    owasp_maswe: ['0029']
     capec: [126]
     safecode: [16]
   - id: CMJ
-    value: 'J'
+    value: J
     url: https://cornucopia.owasp.org/cards/CMJ
     owasp_mastg: ['0043', '0086']
     owasp_mastg_best: []
@@ -704,18 +725,18 @@ suits:
     value: Q
     url: https://cornucopia.owasp.org/cards/CMQ
     owasp_mastg: ['0220', '0341', '0354']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0030', '0118', '0140']
-    owasp_maswe: []
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0118', '0140', '0058', '0032', '0087']
+    owasp_maswe: ['0056', '0058']
     capec: [167, 202, 554]
     safecode: ['-']
   - id: CMK
     value: K
     url: https://cornucopia.owasp.org/cards/CMK
     owasp_mastg: ['0375']
-    owasp_mastg_best: []
-    owasp_mastg_know: ['0081']
-    owasp_maswe: []
+    owasp_mastg_best: ['0057']
+    owasp_mastg_know: ['0081', '0025', '0138']
+    owasp_maswe: ['0050']
     capec: [17, 23, 165, 167, 636]
     safecode: ['-']
   - id: CMA
@@ -742,9 +763,11 @@ suits:
   - id: JOBM
     value: B
     url: https://cornucopia.owasp.org/cards/JOBM
-    owasp_mastg: ['0206', '0254', '0255', '0256', '0281', '0318', '0319', '0360', '0361', '0362', '0363', '0364', '0365', '0366', '0381']
+    owasp_mastg: ['0206', '0254', '0255', '0256', '0281', '0318', '0319', '0360',
+      '0361', '0362', '0363', '0364', '0365', '0366', '0381']
     owasp_mastg_best: ['0003', '0045', '0051', '0052', '0056', '0063']
-    owasp_mastg_know: ['0017', '0020', '0024', '0026', '0077', '0078']
-    owasp_maswe: []
+    owasp_mastg_know: ['0017', '0020', '0024', '0026', '0077', '0078', '0132', '0133',
+      '0134']
+    owasp_maswe: ['0073', '0066', '0074', '0018', '0032']
     capec: ['-']
     safecode: ['-']

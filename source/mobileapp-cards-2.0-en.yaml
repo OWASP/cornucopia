@@ -18,7 +18,7 @@ suits:
     id: "PC3"
     value: "3"
     url: "https://cornucopia.owasp.org/cards/PC3"
-    desc: "Harold can spy sensitive data being entered through the user interface because the data is excessive, not properly masked or cleaned up after use"
+    desc: "Harold can expose sensitive data displayed, entered, or cached because the data is excessive, not properly masked or cleared after use, persisted without protection, exposed to web content, or made available to third-party components through unnecessary permissions"
   -
     id: "PC4"
     value: "4"
@@ -48,12 +48,12 @@ suits:
     id: "PC9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/PC9"
-    desc: "Max can modify or expose sensitive data because input validation and sanitation are not properly applied to interprocess communication or because extensions are not properly restricted"
+    desc: "Max can modify or expose sensitive data because input validation and sanitization are not properly applied to interprocess communication or because extensions are not properly restricted"
   -
     id: "PCX"
     value: "10"
     url: "https://cornucopia.owasp.org/cards/PCX"
-    desc: "Johan can modify or expose sensitive data by exploiting outdated platforms, SDKs, or third-party dependencies because supported versions, trusted components, and security updates are not enforced"
+    desc: "Johan can modify or expose sensitive data by exploiting outdated platforms, SDKs, third-party dependencies, or WebView components, because supported versions, trusted components, and security updates are not enforced"
   -
     id: "PCJ"
     value: "J"
@@ -118,7 +118,7 @@ suits:
     id: "AA9"
     value: "9"
     url: "https://cornucopia.owasp.org/cards/AA9"
-    desc: "Choi can access capabilities, objects, resources, or properties they should not be authorized to access because entitlements or permissions are too wide, not properly set or not enforced"
+    desc: "Choi can access sensitive data or functionality because access controls for app components (e.g., entitlements, permissions), local resources, or web content are too broad, misconfigured, or not enforced"
   -
     id: "AAX"
     value: "10"
@@ -133,7 +133,7 @@ suits:
     id: "AAQ"
     value: "Q"
     url: "https://cornucopia.owasp.org/cards/AAQ"
-    desc: "Riotaro can exploit data flows between views, processes, and components to inject commands, manipulate data, or disclose sensitive information"
+    desc: "Riotaro can bypass authorization controls by exploiting data flows between views, processes, and components to inject commands, manipulate data, or disclose sensitive information"
   -
     id: "AAK"
     value: "K"
