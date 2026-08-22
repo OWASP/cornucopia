@@ -1,0 +1,255 @@
+---
+# ==========================================================================
+# OWASP Cornucopia — deck generation control panel
+#
+# Everything that governs what gets built, and how it looks, lives here.
+# The Python scripts are a dumb engine: they read this file and the card
+# data in source/, and build whatever they find. Adding an edition, a
+# language or a suit should never require a code change.
+#
+# All paths are relative to this file's directory.
+# ==========================================================================
+
+project:
+  name: "OWASP Cornucopia Deck Generation"
+  version: "3.0"
+
+paths:
+  source_root: "../../source"
+  asset_root: "../../resources"
+  card_data_path: "../../source/%edition%-cards-%edition_version%-%language%.yaml"
+  assets_config_path: "assets.yaml"
+  output_dir: "output"
+  qr_code_dir: "output/qrcodes"
+  log_file: "output/build_log.txt"
+  manifest_file: "output/build_manifest.json"
+
+# --------------------------------------------------------------------------
+# What to build.
+#
+# Editions are listed explicitly. The source/ directory also holds card data
+# for decks this tool does not produce -- EoP, DBD, Cumulus, Elevation of
+# MLsec -- so naming the editions here keeps the build deliberate rather
+# than sweeping up every deck that happens to have a data file.
+#
+# "all" is accepted for any of these keys, and resolves by scanning source/.
+# Command-line flags (--edition / --language / --size) override them.
+# --------------------------------------------------------------------------
+generation_targets:
+  editions: ["webapp", "mobileapp", "companion"]
+  languages: "all"
+  sizes: "all"
+
+# --------------------------------------------------------------------------
+# Physical card formats.
+#
+# width_mm/height_mm are the artwork dimensions (trim plus bleed on every
+# side); artwork_offset_mm places that artwork relative to the page origin.
+#   bridge: 56 x 87mm trim + 6mm bleed per side = 68 x 99
+#   tarot:  70 x 121mm trim + 6mm bleed per side = 82 x 133
+# --------------------------------------------------------------------------
+size_profiles:
+  bridge:
+    template: "small_master.sla"
+    asset_key: "small"
+    width_mm: 68.0
+    height_mm: 99.0
+    artwork_offset_mm: -6.0
+    special_text_y_offset: 6.0
+    base_font_sizes:
+      attack_text: 7.0
+      special_text: 8.0
+      special_text_joker: 8.0
+
+  tarot:
+    template: "big_master.sla"
+    asset_key: "big"
+    width_mm: 82.0
+    height_mm: 133.0
+    artwork_offset_mm: -6.0
+    special_text_y_offset: 8.0
+    base_font_sizes:
+      attack_text: 9.0
+      special_text: 9.8
+      special_text_joker: 8.6
+
+# --------------------------------------------------------------------------
+# Typography.
+#
+# 'body'    the main card text
+# 'heading' the suit name across the top of the card
+# 'accent'  joker misc text
+# A language falls back to 'default' for any role it does not override.
+# --------------------------------------------------------------------------
+font_handling:
+  default:
+    body: "Noto Sans Light"
+    heading: "Noto Sans Medium"
+    accent: "Noto Sans Medium Italic"
+  hi:
+    body: "Noto Sans Devanagari Light"
+    heading: "Noto Sans Devanagari Medium"
+    accent: "Noto Sans Devanagari Regular"
+
+# --------------------------------------------------------------------------
+# Per-language size offsets, in points, applied on top of the base size.
+#
+# Declared per frame so shrinking a dense language only affects the frames
+# that actually overflow. Raise a value if a translation still overruns.
+# --------------------------------------------------------------------------
+font_scaling:
+  attack_text:
+    default: 0.0
+    hi: -1.0
+    ru: -0.75
+    uk: -0.75
+  special_text:
+    default: 0.0
+  special_text_joker:
+    default: 0.0
+
+# --------------------------------------------------------------------------
+# Artwork naming convention.
+#
+# All three editions follow one pattern, so a new edition needs no entries
+# here -- just drop its PNGs into resources/card_artwork/<edition>/.
+# assets.yaml remains supported as a per-card override escape hatch.
+# --------------------------------------------------------------------------
+assets:
+  image_dir: "card_artwork"
+  background_pattern: "%edition%/%suit%-%size%-%variant%.png"
+  card_back_pattern: "%edition%/back_of_card_%size%_expanded_outlined_6mmbleed.png"
+
+# --------------------------------------------------------------------------
+# Card semantics. Court cards take court artwork and white numerals;
+# value_order defines factory sort order within a suit.
+# --------------------------------------------------------------------------
+card_semantics:
+  court_values: ["J", "Q", "K", "11", "12", "13", "JACK", "QUEEN", "KING"]
+  value_order:
+    A: 1
+    ACE: 1
+    "1": 1
+    "2": 2
+    "3": 3
+    "4": 4
+    "5": 5
+    "6": 6
+    "7": 7
+    "8": 8
+    "9": 9
+    "10": 10
+    J: 11
+    JACK: 11
+    "11": 11
+    Q: 12
+    QUEEN: 12
+    "12": 12
+    K: 13
+    KING: 13
+    "13": 13
+
+  # Card values are localised in some translations. Anything listed here is
+  # merged on top of the values above for that language only, so a court card
+  # is still recognised as a court card and still takes court artwork.
+  language_overrides:
+    ru:
+      court_values: ["В", "Д", "К"]     # Валет / Дама / Король
+      value_order: {"В": 11, "Д": 12, "К": 13}
+    uk:
+      court_values: ["В", "Д", "К"]     # Валет / Дама / Король
+      value_order: {"В": 11, "Д": 12, "К": 13}
+
+defaults:
+  suit_color: "Data_Color"
+  court_text_color: "Pure_White"
+  suit_name_color: "Pure_White"
+  body_text_color: "Black"
+  body_text_shade: "100"
+  special_text_color: "Black"
+  special_text_shade: "70"
+
+# --------------------------------------------------------------------------
+# Per-edition settings.
+#
+# data_version   which release of the card data to build, matching the
+#                filenames in source/. Pinning it keeps a build reproducible;
+#                omit it and the highest version present is used.
+# joker_suits    suits whose cards are jokers (omit entirely if none).
+#                Needed as well as the source data's `card:` marker because
+#                that marker is translated (Italian: "Jolly"), so its text
+#                alone cannot be matched on reliably.
+# suit_colors    optional fallback; the authoritative place for suit and
+#                court colours is assets.yaml.
+# suit_order     optional; defaults to the order suits appear in the source
+#                data, which is the canonical print order.
+# --------------------------------------------------------------------------
+editions:
+  webapp:
+    data_version: "3.0"
+    joker_suits: ["wc"]
+
+  mobileapp:
+    data_version: "1.1"
+    joker_suits: ["wc"]
+
+  companion:
+    data_version: "1.0"
+    # No jokers in this edition — 78 cards, six suits.
+    joker_suits: []
+
+# --------------------------------------------------------------------------
+# Swatch definitions, in CMYK percentages.
+#
+# Any name referenced above that is not already present in the Scribus master
+# file is injected into the document at build time, so adding an edition's
+# palette never requires hand-editing the .sla templates.
+# --------------------------------------------------------------------------
+color_definitions:
+  Auth_Color:       {c: 57, m: 21, y: 14, k: 1}
+  Authoriz_Color:   {c: 18, m: 20, y: 76, k: 3}
+  Cornucopia_Color: {c: 95, m: 65, y: 25, k: 55}
+  Crypto_Color:     {c: 42, m: 42, y: 0,  k: 0}
+  Data_Color:       {c: 0,  m: 0,  y: 0,  k: 50}
+  Session_Color:    {c: 47, m: 4,  y: 64, k: 0}
+  Joker_Color:      {c: 0,  m: 33, y: 55, k: 0}
+  Pure_White:       {c: 0,  m: 0,  y: 0,  k: 0}
+  Pure_Black:       {c: 0,  m: 0,  y: 0,  k: 100}
+
+# --------------------------------------------------------------------------
+# Export settings. Add profiles freely; each one produces its own PDF per card.
+# --------------------------------------------------------------------------
+export_profiles:
+  - name: "print_3mm"
+    bleed_mm: 3.0
+    printers_marks: false
+
+output:
+  filename_format: "owasp_cornucopia_%edition%_%card_id%_%size%_%version%_%language%_%bleed%mmbleed_%printersmarks%.pdf"
+  deck_filename_format: "cornucopia_%edition%_%size%_%language%_%bleed%mm.pdf"
+  sla_filename_format: "%card_id%_%edition%_%size%_%language%_Generated.sla"
+  resolution_dpi: 300
+  pdf_version: 14
+
+  # Colour space of the exported PDFs.
+  #   cmyk  intended for print. Colours defined in assets.yaml are preserved
+  #         rather than converted, which is what a print vendor expects.
+  #   rgb   intended for screen, and for print-on-demand vendors that ask
+  #         for RGB artwork.
+  # CMYK files are roughly three times larger, because images carry four
+  # channels instead of three.
+  color_mode: "cmyk"
+
+  # Optional ICC profile to embed. Leave blank to let Scribus use its own
+  # default -- a profile name that is not installed will fail the export,
+  # and the available names differ between machines.
+  icc_profile: ""
+
+# --------------------------------------------------------------------------
+# Packaging. Off by default -- generating a single deck should not produce a
+# large archive as a side effect. Enable here or pass --zip to merge_pdfs.py.
+# --------------------------------------------------------------------------
+packaging:
+  create_zip: false
+  zip_scope: "per_edition"      # "per_edition" or "single"
+  zip_name: "OWASP_Cornucopia_%edition%_v%version%.zip"
