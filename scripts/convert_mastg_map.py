@@ -14,6 +14,23 @@ import yaml
 from pathvalidate.argparse import validate_filepath_arg
 
 
+MAX_YAML_FILE_SIZE_BYTES = 2 * 1024 * 1024
+FILENAME_COMPONENT_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}")
+
+
+class UniqueKeySafeLoader(yaml.SafeLoader):
+    """Safe YAML loader that rejects ambiguous duplicate mapping keys."""
+
+    def construct_mapping(self, node: yaml.MappingNode, deep: bool = False) -> dict[Any, Any]:
+        mapping: dict[Any, Any] = {}
+        for key_node, value_node in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            if key in mapping:
+                raise ValueError(f"Duplicate YAML key: {key!r}")
+            mapping[key] = self.construct_object(value_node, deep=deep)
+        return mapping
+
+
 class LeadingZeroStringDumper(yaml.SafeDumper):
     """YAML dumper that preserves zero-padded identifiers as strings."""
 
@@ -31,7 +48,9 @@ class ConvertVars:
     """Converter configuration shared with logging setup."""
 
     MASTG_REPOSITORY_URL = "https://github.com/owasp/mastg.git"
+    MASTG_REPOSITORY_REVISION = "d7fd7d45636ef9acbae89d0247e8dd748aa6918d"
     MASWE_REPOSITORY_URL = "https://github.com/owasp/maswe.git"
+    MASWE_REPOSITORY_REVISION = "308b82b4bbe29166934fb5a621b40471cfea61db"
     DEFAULT_OUTPUT_PATH = Path(__file__).parent / "../source"
     args: argparse.Namespace
 
@@ -50,8 +69,8 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
         type=validate_filepath_arg,
         help="Path to an existing MASWE repository checkout",
     )
-    parser.add_argument("-v", "--version", default="2.0", help="Cornucopia version, for example 2.0")
-    parser.add_argument("-e", "--edition", default="mobileapp", help="Cornucopia edition, for example mobileapp")
+    parser.add_argument("-v", "--version", type=validate_filename_component, default="2.0", help="Cornucopia version, for example 2.0")
+    parser.add_argument("-e", "--edition", type=validate_filename_component, default="mobileapp", help="Cornucopia edition, for example mobileapp")
     parser.add_argument(
         "-o",
         "--output-path",
@@ -63,16 +82,35 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     return parser.parse_args(input_args)
 
 
+def validate_filename_component(value: str) -> str:
+    """Allow only a single filename component for generated mapping names."""
+    if not FILENAME_COMPONENT_PATTERN.fullmatch(value) or value in {".", ".."}:
+        raise argparse.ArgumentTypeError("must contain only letters, digits, dots, underscores, and hyphens")
+    return value
+
+
 def set_logging() -> None:
     """Configure logging from the parsed debug option."""
     logging.basicConfig(format="%(asctime)s %(filename)s | %(levelname)s | %(funcName)s | %(message)s")
     logging.getLogger().setLevel(logging.DEBUG if convert_vars.args.debug else logging.INFO)
 
 
-def clone_repository(repository_url: str, destination: Path) -> None:
-    """Clone an official source repository without invoking a shell."""
+def clone_repository(repository_url: str, revision: str, destination: Path) -> None:
+    """Clone an official source repository at a reviewed commit without invoking a shell."""
     subprocess.run(
-        ["git", "clone", "--depth", "1", repository_url, str(destination)],
+        ["git", "clone", "--no-checkout", "--depth", "1", repository_url, str(destination)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(destination), "fetch", "--depth", "1", "origin", revision],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(destination), "checkout", "--detach", revision],
         check=True,
         capture_output=True,
         text=True,
@@ -81,23 +119,30 @@ def clone_repository(repository_url: str, destination: Path) -> None:
 
 def clone_mastg(destination: Path) -> None:
     """Clone the official MASTG repository."""
-    clone_repository(ConvertVars.MASTG_REPOSITORY_URL, destination)
+    clone_repository(ConvertVars.MASTG_REPOSITORY_URL, ConvertVars.MASTG_REPOSITORY_REVISION, destination)
 
 
 def clone_maswe(destination: Path) -> None:
     """Clone the official MASWE repository."""
-    clone_repository(ConvertVars.MASWE_REPOSITORY_URL, destination)
+    clone_repository(ConvertVars.MASWE_REPOSITORY_URL, ConvertVars.MASWE_REPOSITORY_REVISION, destination)
 
 
 def extract_front_matter(test_file: Path) -> dict[str, Any]:
     """Parse a Markdown file's YAML front matter, returning an empty mapping when absent."""
-    content = test_file.read_text(encoding="utf-8")
+    content = read_yaml_source(test_file)
     match = re.match(r"^---\s*\r?\n(.*?)\r?\n---\s*(?:\r?\n|$)", content, re.DOTALL)
     if not match:
         return {}
 
-    metadata = yaml.safe_load(match.group(1))
+    metadata = yaml.load(match.group(1), Loader=UniqueKeySafeLoader)
     return metadata if isinstance(metadata, dict) else {}
+
+
+def read_yaml_source(path: Path) -> str:
+    """Read a bounded YAML-bearing source file to limit resource consumption."""
+    if path.stat().st_size > MAX_YAML_FILE_SIZE_BYTES:
+        raise ValueError(f"{path}: file exceeds {MAX_YAML_FILE_SIZE_BYTES} byte limit")
+    return path.read_text(encoding="utf-8")
 
 
 def normalize_references(value: Any, prefix: str, test_file: Path) -> list[str]:
@@ -169,7 +214,7 @@ def output_data(mappings: dict[str, dict[str, list[str]]], edition: str, version
 
 def parse_catalog(path: Path, prefix: str) -> dict[str, str]:
     """Load a MAS threat or attack catalog as de-prefixed identifiers and descriptions."""
-    catalog = yaml.safe_load(path.read_text(encoding="utf-8"))
+    catalog = yaml.load(read_yaml_source(path), Loader=UniqueKeySafeLoader)
     if not isinstance(catalog, dict):
         raise ValueError(f"{path}: expected a mapping")
 

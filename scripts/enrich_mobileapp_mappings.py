@@ -12,6 +12,23 @@ import yaml
 from pathvalidate.argparse import validate_filepath_arg
 
 
+MAX_YAML_FILE_SIZE_BYTES = 2 * 1024 * 1024
+FILENAME_COMPONENT_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,63}")
+
+
+class UniqueKeySafeLoader(yaml.SafeLoader):
+    """Safe YAML loader that rejects ambiguous duplicate mapping keys."""
+
+    def construct_mapping(self, node: yaml.MappingNode, deep: bool = False) -> dict[Any, Any]:
+        mapping: dict[Any, Any] = {}
+        for key_node, value_node in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            if key in mapping:
+                raise ValueError(f"Duplicate YAML key: {key!r}")
+            mapping[key] = self.construct_object(value_node, deep=deep)
+        return mapping
+
+
 class LeadingZeroStringDumper(yaml.SafeDumper):
     """YAML dumper that preserves zero-padded identifiers as strings."""
 
@@ -40,8 +57,8 @@ MAPPING_FIELDS = ("owasp_mastg", "owasp_mastg_know", "owasp_mastg_best", "owasp_
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     """Parse source and output locations for one edition/version mapping set."""
     parser = argparse.ArgumentParser(description="Enrich Mobile card mappings with MASTG and MASWE metadata")
-    parser.add_argument("-e", "--edition", default="mobileapp", help="Cornucopia edition, for example mobileapp")
-    parser.add_argument("-v", "--version", default="2.0", help="Cornucopia version, for example 2.0")
+    parser.add_argument("-e", "--edition", type=validate_filename_component, default="mobileapp", help="Cornucopia edition, for example mobileapp")
+    parser.add_argument("-v", "--version", type=validate_filename_component, default="2.0", help="Cornucopia version, for example 2.0")
     parser.add_argument("-s", "--source-dir", type=validate_filepath_arg, default=DEFAULT_SOURCE_DIR)
     parser.add_argument("-i", "--input-path", type=validate_filepath_arg, help="Card mapping YAML to enrich")
     parser.add_argument("--mastg-path", type=validate_filepath_arg, help="Generated MASTG metadata YAML")
@@ -50,9 +67,18 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     return parser.parse_args(input_args)
 
 
+def validate_filename_component(value: str) -> str:
+    """Allow only a single filename component for generated mapping names."""
+    if not FILENAME_COMPONENT_PATTERN.fullmatch(value) or value in {".", ".."}:
+        raise argparse.ArgumentTypeError("must contain only letters, digits, dots, underscores, and hyphens")
+    return value
+
+
 def load_yaml_file(path: Path) -> dict[str, Any]:
     """Load a YAML mapping or raise a clear error for invalid input."""
-    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if path.stat().st_size > MAX_YAML_FILE_SIZE_BYTES:
+        raise ValueError(f"{path}: file exceeds {MAX_YAML_FILE_SIZE_BYTES} byte limit")
+    data = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeySafeLoader)
     if not isinstance(data, dict):
         raise ValueError(f"{path}: expected a mapping")
     return data

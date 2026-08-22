@@ -71,6 +71,14 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
         self.assertIn("capec: [37, 155]", content)
         self.assertIn("suits:\n- cards:", content)
 
+    def test_load_yaml_file_rejects_duplicate_keys(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            input_path = Path(directory) / "mapping.yaml"
+            input_path.write_text("suits: []\nsuits: []\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "Duplicate YAML key"):
+                enricher.load_yaml_file(input_path)
+
 
 if __name__ == "__main__":
     unittest.main()

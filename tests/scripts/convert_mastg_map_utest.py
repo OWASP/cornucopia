@@ -73,6 +73,14 @@ class TestMastgMapConversion(unittest.TestCase):
             self.assertEqual({}, converter.extract_front_matter(missing_front_matter))
             self.assertEqual({}, converter.extract_front_matter(list_front_matter))
 
+    def test_extract_front_matter_rejects_duplicate_keys(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            test_file = Path(directory) / "duplicate-key.md"
+            test_file.write_text("---\nid: MASTG-TEST-0001\nid: MASTG-TEST-0002\n---\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "Duplicate YAML key"):
+                converter.extract_front_matter(test_file)
+
     def test_normalize_references_rejects_invalid_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             test_file = Path(directory) / "test.md"
@@ -163,11 +171,54 @@ class TestMastgMapConversion(unittest.TestCase):
     def test_clone_mastg(self, run: mock.Mock) -> None:
         destination = Path("mastg-checkout")
         converter.clone_mastg(destination)
-        run.assert_called_once_with(
-            ["git", "clone", "--depth", "1", converter.ConvertVars.MASTG_REPOSITORY_URL, str(destination)],
-            check=True,
-            capture_output=True,
-            text=True,
+        run.assert_has_calls(
+            [
+                mock.call(
+                    ["git", "clone", "--no-checkout", "--depth", "1", converter.ConvertVars.MASTG_REPOSITORY_URL, str(destination)],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ),
+                mock.call(
+                    ["git", "-C", str(destination), "fetch", "--depth", "1", "origin", converter.ConvertVars.MASTG_REPOSITORY_REVISION],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ),
+                mock.call(
+                    ["git", "-C", str(destination), "checkout", "--detach", converter.ConvertVars.MASTG_REPOSITORY_REVISION],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ),
+            ]
+        )
+
+    @mock.patch("scripts.convert_mastg_map.subprocess.run")
+    def test_clone_maswe(self, run: mock.Mock) -> None:
+        destination = Path("maswe-checkout")
+        converter.clone_maswe(destination)
+        run.assert_has_calls(
+            [
+                mock.call(
+                    ["git", "clone", "--no-checkout", "--depth", "1", converter.ConvertVars.MASWE_REPOSITORY_URL, str(destination)],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ),
+                mock.call(
+                    ["git", "-C", str(destination), "fetch", "--depth", "1", "origin", converter.ConvertVars.MASWE_REPOSITORY_REVISION],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ),
+                mock.call(
+                    ["git", "-C", str(destination), "checkout", "--detach", converter.ConvertVars.MASWE_REPOSITORY_REVISION],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ),
+            ]
         )
 
     def test_parse_arguments_defaults(self) -> None:
@@ -184,6 +235,10 @@ class TestMastgMapConversion(unittest.TestCase):
         self.assertEqual("9.9", args.version)
         self.assertEqual("output", args.output_path)
         self.assertTrue(args.debug)
+
+    def test_parse_arguments_rejects_path_traversal_in_generated_filename(self) -> None:
+        with self.assertRaises(SystemExit):
+            converter.parse_arguments(["--edition", "../outside"])
 
     def test_set_logging_uses_requested_level(self) -> None:
         converter.convert_vars.args = argparse.Namespace(debug=True)
