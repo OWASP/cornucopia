@@ -45,7 +45,7 @@ class TestMastgMapConversion(unittest.TestCase):
             test_file = Path(directory) / "MASTG-TEST-0330.md"
             test_file.write_text(TEST_DOCUMENT, encoding="utf-8")
 
-            test_id, mapping = converter.extract_test_mapping(test_file)  # type: ignore[misc]
+            test_id, mapping = sources.extract_test_mapping(test_file)  # type: ignore[misc]
 
         self.assertEqual("0330", test_id)
         self.assertEqual(
@@ -61,7 +61,7 @@ class TestMastgMapConversion(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             test_file = Path(directory) / "MASTG-TEST-0000.md"
             test_file.write_text("---\nid: invalid\n---\n", encoding="utf-8")
-            self.assertIsNone(converter.extract_test_mapping(test_file))
+            self.assertIsNone(sources.extract_test_mapping(test_file))
 
     def test_extract_front_matter_returns_empty_mapping_when_absent_or_not_a_mapping(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -70,8 +70,8 @@ class TestMastgMapConversion(unittest.TestCase):
             list_front_matter = Path(directory) / "list-front-matter.md"
             list_front_matter.write_text("---\n- a value\n---\n\n", encoding="utf-8")
 
-            self.assertEqual({}, converter.extract_front_matter(missing_front_matter))
-            self.assertEqual({}, converter.extract_front_matter(list_front_matter))
+            self.assertEqual({}, sources.extract_front_matter(missing_front_matter))
+            self.assertEqual({}, sources.extract_front_matter(list_front_matter))
 
     def test_extract_front_matter_rejects_duplicate_keys(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -79,15 +79,15 @@ class TestMastgMapConversion(unittest.TestCase):
             test_file.write_text("---\nid: MASTG-TEST-0001\nid: MASTG-TEST-0002\n---\n", encoding="utf-8")
 
             with self.assertRaisesRegex(ValueError, "Duplicate YAML key"):
-                converter.extract_front_matter(test_file)
+                sources.extract_front_matter(test_file)
 
     def test_normalize_references_rejects_invalid_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             test_file = Path(directory) / "test.md"
             with self.assertRaisesRegex(ValueError, "references must be a list"):
-                converter.normalize_references("MASWE-0001", "MASWE-", test_file)
+                sources.normalize_references("MASWE-0001", "MASWE-", test_file)
             with self.assertRaisesRegex(ValueError, "invalid MASWE"):
-                converter.normalize_references(["MASTG-KNOW-0001"], "MASWE-", test_file)
+                sources.normalize_references(["MASTG-KNOW-0001"], "MASWE-", test_file)
 
     def test_read_yaml_source_rejects_oversized_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
