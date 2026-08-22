@@ -23,6 +23,15 @@ class UniqueKeySafeLoader(yaml.SafeLoader):
         return mapping
 
 
+def safe_load_unique(source: str) -> Any:
+    """Safely parse YAML while rejecting ambiguous duplicate mapping keys."""
+    loader = UniqueKeySafeLoader(source)
+    try:
+        return loader.get_single_data()
+    finally:
+        loader.dispose()
+
+
 def read_yaml_source(path: Path) -> str:
     """Read a bounded YAML-bearing source file to limit resource consumption."""
     if path.stat().st_size > MAX_YAML_FILE_SIZE_BYTES:
@@ -35,7 +44,7 @@ def extract_front_matter(test_file: Path) -> dict[str, Any]:
     match = re.match(r"^---\s*\r?\n(.*?)\r?\n---\s*(?:\r?\n|$)", read_yaml_source(test_file), re.DOTALL)
     if not match:
         return {}
-    metadata = yaml.load(match.group(1), Loader=UniqueKeySafeLoader)
+    metadata = safe_load_unique(match.group(1))
     return metadata if isinstance(metadata, dict) else {}
 
 
@@ -109,7 +118,7 @@ def output_data(mappings: dict[str, dict[str, list[str]]], edition: str, version
 
 def parse_catalog(path: Path, prefix: str) -> dict[str, str]:
     """Load a MAS threat or attack catalog as de-prefixed identifiers and descriptions."""
-    catalog = yaml.load(read_yaml_source(path), Loader=UniqueKeySafeLoader)
+    catalog = safe_load_unique(read_yaml_source(path))
     if not isinstance(catalog, dict):
         raise ValueError(f"{path}: expected a mapping")
     return {
