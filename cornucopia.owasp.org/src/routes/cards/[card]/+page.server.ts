@@ -12,32 +12,8 @@ export const load = (async ({ params }) => {
   const lang = "en";
   const deckService = new DeckService();
 
-  const mobileCards = deckService.getCardDataForEditionVersionLang(
-    "mobileapp",
-    DeckService.getLatestVersion("mobileapp"),
-    lang
-  );
-
-  const webappCards = deckService.getCardDataForEditionVersionLang(
-    "webapp",
-    DeckService.getLatestVersion("webapp"),
-    lang
-  );
-
-  const companionCards = deckService.getCardDataForEditionVersionLang(
-    "companion",
-    DeckService.getLatestVersion("companion"),
-    lang
-  );
-
-  const eopCards = deckService.getCardDataForEditionVersionLang(
-    "eop",
-    DeckService.getLatestVersion("eop"),
-    lang
-  );
-
-  const cards = new Map([...mobileCards, ...webappCards, ...companionCards, ...eopCards]);
-  const decks = new Map([["en", cards]]);
+  const cards = deckService.getCards(lang);
+  const decks = new Map([[lang, cards]]);
 
   const fixedCode = legacyCardCodeFix(params.card?.toUpperCase() || "");
 

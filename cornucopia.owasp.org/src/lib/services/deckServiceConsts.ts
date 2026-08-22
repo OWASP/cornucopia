@@ -19,3 +19,13 @@ export const EDITION_NAMES: Record<string, string> = {
     [VERSION_DBD]: "Cornucopia",
     [VERSION_EOP]: "Elevation of Privilege"
 };
+
+/**
+ * Full edition name, used in card detail page titles and social meta tags in <svelte:head>.
+ */
+export const EDITION_FULL_NAMES: Record<string, string> = {
+    [VERSION_WEBAPP]: "Website App Edition",
+    [VERSION_MOBILEAPP]: "Mobile App Edition",
+    [VERSION_COMPANION]: "Companion Edition",
+    [VERSION_EOP]: "Elevation of Privilege Edition"
+};
