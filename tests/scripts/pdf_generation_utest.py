@@ -25,6 +25,15 @@ if _PDF_GENERATION not in sys.path:
 import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
 import merge_pdfs  # noqa: E402
 
+# Repeated fixture values, named once so a change lands in one place.
+_DATA_PATTERN = "source/%edition%.yaml"
+_DEFAULT_ART = "aa-small-default.png"
+_COURT_ART = "aa-small-court.png"
+_CUSTOM_ART = "custom.png"
+_CUSTOM_REL = "demo/" + _CUSTOM_ART
+_SUIT_OVERRIDE_REL = "demo/suit-override.png"
+_EMPTY_SUIT = "  - id: AA\n    cards: []\n"
+
 
 def _write(path: str, text: str = "") -> str:
     """Create a file, and any directories leading to it."""
@@ -143,7 +152,7 @@ class TestParseCards(unittest.TestCase):
 
 class TestSortDeck(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
         self.cards = [
             {"card_id": "AAK", "suit_id": "AA", "value": "K"},
             {"card_id": "AAA", "suit_id": "AA", "value": "A"},
@@ -171,7 +180,7 @@ class TestSortDeck(unittest.TestCase):
 
 class TestIsCourt(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
 
     def test_recognises_a_court_value(self) -> None:
         self.assertTrue(cc.is_court({"value": "Q"}, self.config))
@@ -191,7 +200,7 @@ class TestIsCourt(unittest.TestCase):
 
 class TestIsJoker(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
         self.config["editions"]["demo"]["joker_suits"] = ["wc"]
 
     def test_a_card_in_a_declared_joker_suit(self) -> None:
@@ -221,7 +230,7 @@ class TestHasSpecialText(unittest.TestCase):
 
 class TestGetFont(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
 
     def test_uses_the_default_for_a_language_with_no_entry(self) -> None:
         self.assertEqual(cc.get_font(self.config, "fr", "body"), "Noto Sans Light")
@@ -235,7 +244,7 @@ class TestGetFont(unittest.TestCase):
 
 class TestGetFontSize(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
 
     def test_uses_the_base_size_for_the_card_format(self) -> None:
         self.assertEqual(cc.get_font_size(self.config, "bridge", "attack_text", "en"), 7.0)
@@ -250,7 +259,7 @@ class TestGetFontSize(unittest.TestCase):
 
 class TestCardColors(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
 
     def test_a_named_swatch_is_used_as_given(self) -> None:
         assets = {"demo": {"suits": [{"id": "AA", "color": "Named_Colour"}]}}
@@ -283,9 +292,9 @@ class TestCardColors(unittest.TestCase):
 class TestResolveBackground(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.mkdtemp()
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
         art = os.path.join(self.tmp, "art", "card_artwork", "demo")
-        for name in ("aa-small-default.png", "aa-small-court.png", "custom.png", "suit-override.png"):
+        for name in (_DEFAULT_ART, _COURT_ART, _CUSTOM_ART, "suit-override.png"):
             _write(os.path.join(art, name))
 
     def _resolve(self, card: dict, assets: dict) -> str:
@@ -293,23 +302,23 @@ class TestResolveBackground(unittest.TestCase):
         return os.path.basename(path)
 
     def test_a_pip_card_uses_the_default_artwork(self) -> None:
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AA2", "value": "2"}, {}), "aa-small-default.png")
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AA2", "value": "2"}, {}), _DEFAULT_ART)
 
     def test_a_court_card_uses_the_court_artwork(self) -> None:
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, {}), "aa-small-court.png")
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, {}), _COURT_ART)
 
     def test_a_per_card_entry_wins_over_everything(self) -> None:
-        assets = {"demo": {"suits": [{"id": "AA", "cards": [{"id": "AAK", "small": "demo/custom.png"}]}]}}
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "custom.png")
+        assets = {"demo": {"suits": [{"id": "AA", "cards": [{"id": "AAK", "small": _CUSTOM_REL}]}]}}
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), _CUSTOM_ART)
 
     def test_a_suits_court_entry_is_used_for_a_court_card(self) -> None:
-        assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": "demo/custom.png"}}]}}
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "custom.png")
+        assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": _CUSTOM_REL}}]}}
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), _CUSTOM_ART)
 
     def test_a_suits_court_entry_is_ignored_for_a_pip_card(self) -> None:
-        assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": "demo/custom.png"}}]}}
+        assets = {"demo": {"suits": [{"id": "AA", "court_backgrounds": {"small": _CUSTOM_REL}}]}}
         card = {"suit_id": "AA", "card_id": "AA2", "value": "2"}
-        self.assertEqual(self._resolve(card, assets), "aa-small-default.png")
+        self.assertEqual(self._resolve(card, assets), _DEFAULT_ART)
 
     def test_a_per_card_entry_beats_the_suits_court_entry(self) -> None:
         assets = {
@@ -317,20 +326,20 @@ class TestResolveBackground(unittest.TestCase):
                 "suits": [
                     {
                         "id": "AA",
-                        "court_backgrounds": {"small": "demo/suit-override.png"},
-                        "cards": [{"id": "AAK", "small": "demo/custom.png"}],
+                        "court_backgrounds": {"small": _SUIT_OVERRIDE_REL},
+                        "cards": [{"id": "AAK", "small": _CUSTOM_REL}],
                     }
                 ]
             }
         }
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "custom.png")
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), _CUSTOM_ART)
 
     def test_a_suit_entry_does_not_override_court_artwork(self) -> None:
-        assets = {"demo": {"suits": [{"id": "AA", "backgrounds": {"small": "demo/suit-override.png"}}]}}
-        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), "aa-small-court.png")
+        assets = {"demo": {"suits": [{"id": "AA", "backgrounds": {"small": _SUIT_OVERRIDE_REL}}]}}
+        self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AAK", "value": "K"}, assets), _COURT_ART)
 
     def test_a_suit_entry_applies_to_a_pip_card(self) -> None:
-        assets = {"demo": {"suits": [{"id": "AA", "backgrounds": {"small": "demo/suit-override.png"}}]}}
+        assets = {"demo": {"suits": [{"id": "AA", "backgrounds": {"small": _SUIT_OVERRIDE_REL}}]}}
         self.assertEqual(self._resolve({"suit_id": "AA", "card_id": "AA2", "value": "2"}, assets), "suit-override.png")
 
     def test_missing_artwork_is_reported_rather_than_guessed(self) -> None:
@@ -342,7 +351,7 @@ class TestResolveBackground(unittest.TestCase):
 
 class TestOutputNames(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
 
     def test_a_card_filename_fills_every_token(self) -> None:
         name = cc.card_pdf_name(self.config, "demo", "AA2", "bridge", "en", 3.0, False)
@@ -389,7 +398,7 @@ class TestDiscovery(unittest.TestCase):
             "other-cards-1.0-en.yaml",
             "demo-mappings-2.0.yaml",
         ):
-            _write(os.path.join(tmp, "source", name), _card_yaml("  - id: AA\n    cards: []\n"))
+            _write(os.path.join(tmp, "source", name), _card_yaml(_EMPTY_SUIT))
         _write(os.path.join(tmp, "source", "archive", "demo-cards-0.9-en.yaml"), "")
         return tmp
 
@@ -429,7 +438,7 @@ class TestDiscovery(unittest.TestCase):
 
     def test_the_same_code_handles_a_nested_layout(self) -> None:
         tmp = tempfile.mkdtemp()
-        _write(os.path.join(tmp, "source", "demo", "en", "cards_en.yaml"), _card_yaml("  - id: AA\n    cards: []\n"))
+        _write(os.path.join(tmp, "source", "demo", "en", "cards_en.yaml"), _card_yaml(_EMPTY_SUIT))
         config = _base_config("source/%edition%/%language%/cards_%language%.yaml")
         config["editions"] = {"demo": {}}
         self.assertEqual(cc.discover_editions(config, tmp), ["demo"])
@@ -440,7 +449,7 @@ class TestResolveTargets(unittest.TestCase):
     def setUp(self) -> None:
         self.tmp = tempfile.mkdtemp()
         for name in ("demo-cards-1.0-en.yaml", "demo-cards-1.0-fr.yaml"):
-            _write(os.path.join(self.tmp, "source", name), _card_yaml("  - id: AA\n    cards: []\n"))
+            _write(os.path.join(self.tmp, "source", name), _card_yaml(_EMPTY_SUIT))
         self.config = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
         self.config["editions"] = {"demo": {}}
 
@@ -466,7 +475,7 @@ class TestResolveTargets(unittest.TestCase):
 
 class TestExportProfiles(unittest.TestCase):
     def setUp(self) -> None:
-        self.config = _base_config("source/%edition%.yaml")
+        self.config = _base_config(_DATA_PATTERN)
 
     def test_returns_the_configured_profiles(self) -> None:
         self.assertEqual(cc.get_export_profiles(self.config)[0]["name"], "main")

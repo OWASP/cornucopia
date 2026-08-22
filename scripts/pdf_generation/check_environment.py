@@ -36,7 +36,7 @@ REQUIRED = {
 
 # Improve things when present, but the tool runs without them.
 OPTIONAL = {
-    "defusedxml": "defusedxml, a hardened XML parser; the standard library " "parser is used if it is absent",
+    "defusedxml": "defusedxml, a hardened XML parser; the standard library parser is used if it is absent",
 }
 
 

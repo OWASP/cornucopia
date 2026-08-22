@@ -41,7 +41,7 @@ class _CollectingLog:
         self.warnings.append(message)
 
     def info(self, message: str) -> None:
-        pass
+        """Deliberately discarded. Only warnings are asserted on."""
 
 
 def _touch(path: str) -> None:

@@ -17,6 +17,10 @@ import re
 
 import yaml
 
+# The placeholder every path and filename template uses for the edition name.
+# Named here so the templates and the code that fills them cannot drift apart.
+EDITION_PLACEHOLDER = "%edition%"
+
 # --------------------------------------------------------------------------
 # Basic loading
 # --------------------------------------------------------------------------
@@ -68,7 +72,7 @@ def card_data_path(config, base_dir, edition, language, version=None):
     if version is None and "%edition_version%" in template:
         version = edition_data_version(config, base_dir, edition)
     rel = (
-        template.replace("%edition%", edition)
+        template.replace(EDITION_PLACEHOLDER, edition)
         .replace("%language%", language)
         .replace("%edition_version%", str(version or ""))
     )
@@ -632,7 +636,7 @@ def resolve_background(config, assets_data, base_dir, edition, card, size_key, l
 
     def build(variant):
         return (
-            pattern.replace("%edition%", edition)
+            pattern.replace(EDITION_PLACEHOLDER, edition)
             .replace("%suit%", stem)
             .replace("%size%", size_token)
             .replace("%variant%", variant)
@@ -673,7 +677,7 @@ def resolve_card_back(config, base_dir, edition, size_key):
         "card_back_pattern", "%edition%/back_of_card_%size%_expanded_outlined_6mmbleed.png"
     )
     image_dir = assets_cfg.get("image_dir", "Backgrounds")
-    rel = pattern.replace("%edition%", edition).replace("%size%", asset_key(config, size_key))
+    rel = pattern.replace(EDITION_PLACEHOLDER, edition).replace("%size%", asset_key(config, size_key))
     full = resolve_asset_path(base_dir, config, os.path.join(image_dir, rel))
     return full, os.path.exists(full)
 
@@ -704,7 +708,7 @@ def _fill_tokens(template, config, **tokens):
 def card_pdf_name(config, edition, card_id, size_key, language, bleed_mm, printers_marks):
     template = (config.get("output", {}) or {}).get(
         "filename_format",
-        "owasp_cornucopia_%edition%_%card_id%_%size%_%version%_%language%" "_%bleed%mmbleed_%printersmarks%.pdf",
+        "owasp_cornucopia_%edition%_%card_id%_%size%_%version%_%language%_%bleed%mmbleed_%printersmarks%.pdf",
     )
     return _fill_tokens(
         template,

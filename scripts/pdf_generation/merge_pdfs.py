@@ -210,7 +210,7 @@ def report_gaps(incomplete, out_dir):
     print("{0} target(s) were incomplete; details in {1}".format(len(incomplete), report))
 
 
-def tidy_up(args, incomplete, merged_by_edition, consumed_pdfs, config, base_dir, out_dir):
+def tidy_up(incomplete, merged_by_edition, consumed_pdfs, config, base_dir, out_dir):
     """Act on --clean, refusing when a deck came out short."""
     if incomplete:
         # Keeping the card files means the gaps can be filled and the merge
@@ -357,7 +357,7 @@ def main():
     report_gaps(incomplete, out_dir)
 
     if args.clean:
-        tidy_up(args, incomplete, merged_by_edition, consumed_pdfs, config, base_dir, out_dir)
+        tidy_up(incomplete, merged_by_edition, consumed_pdfs, config, base_dir, out_dir)
 
     return 0
 

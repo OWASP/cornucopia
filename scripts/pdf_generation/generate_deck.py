@@ -403,6 +403,29 @@ TEXT_FRAME_HANDLERS = {
 }
 
 
+def populate_frame(child, card, style, images, placeholder_colors):
+    """
+    Fill one page object of the template from the card data.
+
+    Returns True when the frame has no content on this card and should be
+    removed from the document.
+    """
+    name = child.get("ANNAME", "").lower().strip()
+
+    if child.get("PTYPE") == "6" and child.get("PCOLOR") in placeholder_colors:
+        recolour_suit_band(child, style["suit_color"])
+
+    if name in images:
+        fill_image_frame(child, *images[name])
+    elif name == "special_text" and not style["special"]:
+        # Only cards carrying misc text keep this frame. Being driven by the
+        # data means a jokerless edition needs no special case.
+        return True
+    elif name in TEXT_FRAME_HANDLERS:
+        TEXT_FRAME_HANDLERS[name](child, card, style)
+    return False
+
+
 def generate_card(card, edition, language, size_key, template_path, output_path, config, assets_data, base_dir, log):
     """Inject one card's data into a copy of the master template."""
     style = card_style(card, edition, language, size_key, config, assets_data)
@@ -426,22 +449,8 @@ def generate_card(card, edition, language, size_key, template_path, output_path,
 
     for parent in root.iter():
         for child in parent:
-            if child.tag != "PAGEOBJECT":
-                continue
-
-            name = child.get("ANNAME", "").lower().strip()
-
-            if child.get("PTYPE") == "6" and child.get("PCOLOR") in placeholder_colors:
-                recolour_suit_band(child, style["suit_color"])
-
-            if name in images:
-                fill_image_frame(child, *images[name])
-            elif name == "special_text" and not style["special"]:
-                # Only cards carrying misc text keep this frame. Being driven by
-                # the data means a jokerless edition needs no special case.
+            if child.tag == "PAGEOBJECT" and populate_frame(child, card, style, images, placeholder_colors):
                 elements_to_delete.append((parent, child))
-            elif name in TEXT_FRAME_HANDLERS:
-                TEXT_FRAME_HANDLERS[name](child, card, style)
 
     for parent, child in elements_to_delete:
         parent.remove(child)
