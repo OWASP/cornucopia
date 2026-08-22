@@ -1,9 +1,9 @@
 ---
-date: 20260821
+date: 20260822
 author: mahaboobunnisa-md
-tags: gsoc,gsoc2026,owasp,cornucopia,threatsutra,threat-modeling,threat-dragon,security,,ai-agent,automation,ai
+tags: gsoc,gsoc2026,owasp,cornucopia,threatsutra,threat-modeling,threat-dragon,security,ai-agent,automation,ai
 hidden: false
-description: How ThreatSutra turns an OWASP Threat Dragon model turns into validated evil user stories, BDD verification tests, and GitHub Issues - automatically built during Google Summer of Code 2026. 
+description: How ThreatSutra turns an OWASP Threat Dragon model into validated evil user stories, BDD verification tests, and GitHub Issues - automatically built during Google Summer of Code 2026. 
 ---
 
 ![GSoC logo](images/GSoC-logo.svg)
@@ -14,7 +14,7 @@ description: How ThreatSutra turns an OWASP Threat Dragon model turns into valid
 - **GitHub**: [@Mahaboobunnisa123](https://github.com/Mahaboobunnisa123)
 - **LinkedIn**: [Mahaboobunnisa (Shabnam) Md](https://www.linkedin.com/in/mahaboobunnisa123)
 - **Organization**: [OWASP Cornucopia](https://cornucopia.owasp.org)
-- **Mentors**: ([@sydseter](https://github.com/sydseter)), [@rewtd](https://github.com/rewtd), [@cw-owasp](https://github.com/cw-owasp)
+- **Mentors**: [@sydseter](https://github.com/sydseter), [@rewtd](https://github.com/rewtd), [@cw-owasp](https://github.com/cw-owasp)
 - **Project**: [ThreatSutra](https://github.com/owaspcornucopia/ThreatSutra)
 
 # ThreatSutra: Automating Security Requirements with AI
@@ -96,16 +96,16 @@ The test suite covers the full pipeline end-to-end: Threat Dragon model parsing 
 The next milestone extends ThreatSutra so every generated evil user story is also mapped to the matching AISVS requirements and AITG test guidance, with a reviewer decision (approve, reject, or not-applicable with a reason) on each individual item, a full coverage summary shown before anything exports, and a separate, explicit "confirm export" step. It's open now for any OWASP contributor to pick up.
 
 ## My Learning Experience
-Before this project, I thought using AI just meant sending a prompt and getting a quick answer. I quickly learned that making an AI tool actually reliable is a lot harder. you have to strictly check everything it creates so it doesn't break the system. It was also a great challenge figuring out how to smoothly connect different tools, like pulling data from Threat Dragon and sending it directly to GitHub. Overall, building this from scratch for the open-source community has made me a much more careful and confident developer. 
+Before this project, I thought using AI just meant sending a prompt and getting a quick answer. I quickly learned that making an AI tool actually reliable is a lot harder. You have to strictly check everything it creates so it doesn't break the system. It was also a great challenge figuring out how to smoothly connect different tools, like pulling data from Threat Dragon and sending it directly to GitHub. Overall, building this from scratch for the open-source community has made me a much more careful and confident developer. 
 
 ## Acknowledgements
-None of this happened in a vacuum. A huge thank you to my mentor, Johan Sydseter ([@sydseter](https://github.com/sydseter)), for the steady Monday and Thursday check-ins that kept this project honest and properly scoped right from week one. More importantly, thank you for all your quick responses and providing the kind of feedback that actually makes me to rethink entire design instead of just polishing the code. That kind of guidance made me a much better developer this summer.
+None of this happened in a vacuum. A huge thanks to my mentor, Johan Sydseter ([@sydseter](https://github.com/sydseter)), for the steady Monday and Thursday check-ins that kept this project honest and properly scoped right from week one. More importantly, thanks for all his quick responses and providing the kind of feedback that actually made me rethink entire design instead of just polishing the code. That kind of guidance made me a much better developer this summer.
 
 Thanks to Colin Watson ([@cw-owasp](https://github.com/cw-owasp)) and Grant Ongers ([@rewtd](https://github.com/rewtd)) for taking the time to review my initial GSoC proposal. Your early feedback helped set a strong foundation for the project.
 
-Thank you to the wider <strong><em> OWASP Cornucopia maintainers </em></strong> for being so welcoming, and for trusting a GSoC contributor with the chance to build a tool that real teams will actually use.
+Thanks to the wider <strong><em> OWASP Cornucopia maintainers </em></strong> for being so welcoming, and for trusting a GSoC contributor with the chance to build a tool that real teams will actually use.
 
-And finally, thank you to <strong><em> OWASP and Google Summer of Code </em></strong> for this incredible opportunity. Building an open-source project that bridges the gap between security and development has been a fantastic experience, and I am proud of what we shipped. 
+And finally, thanks to <strong><em> OWASP and Google Summer of Code </em></strong> for this incredible opportunity. Building an open-source project that bridges the gap between security and development has been a fantastic experience, and I am proud of what we shipped. 
 
 <br>
 <p align="center" style="color: #005B9F;">
