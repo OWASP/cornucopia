@@ -121,12 +121,11 @@ def parse_catalog(path: Path, prefix: str) -> dict[str, str]:
     catalog = safe_load_unique(read_yaml_source(path))
     if not isinstance(catalog, dict):
         raise ValueError(f"{path}: expected a mapping")
-    return {
-        deprefix_catalog_entry(path, prefix, identifier, description)[0]: deprefix_catalog_entry(
-            path, prefix, identifier, description
-        )[1]
-        for identifier, description in catalog.items()
-    }
+    result: dict[str, str] = {}
+    for identifier, description in catalog.items():
+        normalized_identifier, normalized_description = deprefix_catalog_entry(path, prefix, identifier, description)
+        result[normalized_identifier] = normalized_description
+    return result
 
 
 def deprefix_catalog_entry(path: Path, prefix: str, identifier: Any, description: Any) -> tuple[str, str]:

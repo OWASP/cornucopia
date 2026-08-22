@@ -42,6 +42,9 @@ class ConvertVars:
     args: argparse.Namespace
 
 
+convert_vars = ConvertVars()
+
+
 def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     """Parse command-line options using the other mapping converters' conventions."""
     parser = argparse.ArgumentParser(description="Convert MASTG beta-test metadata to a Cornucopia mapping")
@@ -168,5 +171,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    convert_vars = ConvertVars()
     main()
