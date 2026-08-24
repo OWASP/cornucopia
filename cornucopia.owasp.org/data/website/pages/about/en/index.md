@@ -1,10 +1,10 @@
 # About
 
-OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes. It is language, platform and technology-agnostic.
+OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams in identifying security requirements in Agile, conventional and formal development processes. It is language-, platform-, and technology-agnostic.
 
 If you have questions concerning OWASP Cornucopia, please search for it first in our [Q & A section](/questionsandanswers).
 
-If you have other questions, suggestions or ideas please feel free to discuss them on our [email list](https://groups.google.com/a/owasp.org/g/cornucopia-project 'Cornucopia google group [external]') or submit them to our [list of issues](https://github.com/OWASP/cornucopia/issues 'Cornucopia Github repository [external]') in our repository. If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
+If you have other questions, suggestions or ideas, please feel free to discuss them on our [email list](https://groups.google.com/a/owasp.org/g/cornucopia-project 'Cornucopia Google group [external]') or submit them to our [list of issues](https://github.com/OWASP/cornucopia/issues 'Cornucopia GitHub repository [external]') in our repository. If you feel like and have the opportunity to help, do not hesitate to get in touch with us.
 
 ## Introduction
 
@@ -12,11 +12,11 @@ The idea behind Cornucopia is to help development teams, especially those using 
 
 Cornucopia was created and first used for developer training in August 2012.
 
-The Microsoft SDL team had already published its super [Elevation of Privilege: The Threat Modeling Game (EoP)](https://www.microsoft.com/en-gb/download/details.aspx?id=20303 'EoP publication at Microsoft. [external]') but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address.
+The Microsoft SDL team had already published its super [Elevation of Privilege: The Threat Modelling Game (EoP)](https://www.microsoft.com/en-gb/download/details.aspx?id=20303 'EoP publication at Microsoft. [external]'), but that did not seem to address the most appropriate kind of issues that web application development teams mostly have to address.
 
 EoP is a great concept and game strategy and was [published](https://www.microsoft.com/security/blog/2010/03/02/announcing-elevation-of-privilege-the-threat-modeling-game/ 'Microsoft announcing EoP on their blog. [external]') under a [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/ 'Link to the CC BY 3.0 Attribution Unported License [external]').
 
-Cornucopia is based the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues website app and mobile app developers encounter.
+Cornucopia is based on the concepts and game ideas in EoP, but those have been modified to be more relevant to the types of issues website, app, and mobile app developers encounter.
 
 It attempts to introduce threat-modelling ideas into development teams that use Agile methodologies or are more focused on web application weaknesses than other types of software vulnerabilities or are not familiar with STRIDE and DREAD.
 
@@ -28,11 +28,11 @@ To start using Cornucopia:
 2. **Or:** Download the free Adobe Illustrator files and get them professionally printed (see: [printing instructions](/printing);
 3. **Or:** Play the game online at [copi.owasp.org](https://copi.owasp.org 'The Online version of OWASP Cornucopia [external]').
 4. Identify an application, module or component to assess.
-5. Invite business owners, architects, developers, testers along for a card game.
+5. Invite business owners, architects, developers, and testers along for a card game.
 6. Get those infosec folk to provide chocolate, pizza, beer, flowers or all four as prizes.
 7. Select a portion of the deck to start with.
 8. [Play the game](/how-to-play) to discuss & document security requirements (and to win rounds).
-9. Remember, to have fun!
+9. Remember to have fun!
 
 ## Mappings
 
@@ -44,7 +44,7 @@ Each Website App Edition card is also mapped to the 36 primary security stories 
 
 Likewise, each Mobile App Edition is mapped to CAPEC™ and the SAFECode stories, but instead of SCP, ASVS, and AppSensor, each card is mapped to OWASP's [Mobile Application Security Verification Standard (MASVS) v2.0](https://mas.owasp.org/MASVS/ 'OWASP MASVS (Mobile Application Security Verification Standard [external]') and [Mobile Application Security Testing Guide (MASTG) v2.0](https://mas.owasp.org/MASTG/ 'OWASP Mobile Application Security Testing Guide [external]').
 
-There is also the OWASP Cornucopia Companion Edition, which extends the previous two editions with 6 additional suites. These 6 companion suits covers new Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). These suits are mapped to various standards, maturity models, OWASP top 10s, guides, lists, and resources.
+There is also the OWASP Cornucopia Companion Edition, which extends the previous two editions with 6 additional suites. These 6 companion suites cover new Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). These suits are mapped to various standards, maturity models, OWASP Top 10s, guides, lists, and resources.
 
 The following is the full list of all the resources that the 3 editions map to.
 
@@ -96,7 +96,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 
 OWASP Cornucopia Website App Edition (formerly called Ecommerce Edition) was created by Colin Watson. OWASP Cornucopia Mobile App Edition was based on this and created by Johan Sydseter and Xavier Godard.
 
-OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia Github repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. Except, where otherwise [noted](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'), OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
+OWASP Cornucopia is open-source and can be downloaded free of charge from the [OWASP Cornucopia GitHub repository](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'). OWASP Cornucopia is free to use. Except, where otherwise [noted](https://github.com/OWASP/cornucopia/blob/master/README.md#license 'OWASP Cornucopia license [external]'), OWASP Cornucopia is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
 
 OWASP and the OWASP logo are trademarks of the OWASP Foundation.
 
