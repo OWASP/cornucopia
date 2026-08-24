@@ -229,6 +229,95 @@ The script:
   owasp_asvs: [13.2.2, 15.2.3]
 ```
 
+### Converting MASTG and MASWE Mappings
+
+The `scripts/convert_mastg_map.py` script extracts MASTG beta-test references and MASWE threat and attack metadata for the Mobile App Edition.
+
+```bash
+python scripts/convert_mastg_map.py --help
+usage: convert_mastg_map.py [-h] [-i INPUT_PATH] [--maswe-input-path MASWE_INPUT_PATH] [-v VERSION] [-e EDITION]
+                            [-o OUTPUT_PATH] [-d]
+
+Convert MASTG beta-test metadata to a Cornucopia mapping
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT_PATH, --input-path INPUT_PATH
+                        Path to an existing MASTG repository checkout
+  --maswe-input-path MASWE_INPUT_PATH
+                        Path to an existing MASWE repository checkout
+  -v VERSION, --version VERSION
+                        Cornucopia version, for example 2.0
+  -e EDITION, --edition EDITION
+                        Cornucopia edition, for example mobileapp
+  -o OUTPUT_PATH, --output-path OUTPUT_PATH
+                        Directory to save the generated MASTG mapping YAML file
+  -d, --debug           Output additional diagnostic information
+```
+
+**Example usage:**
+
+```bash
+# Convert using local MASTG and MASWE repository checkouts
+pipenv run python scripts/convert_mastg_map.py -i ../mastg --maswe-input-path ../maswe
+
+# Convert using custom output directory
+pipenv run python scripts/convert_mastg_map.py -i ../mastg --maswe-input-path ../maswe -o source
+```
+
+**Default paths:**
+
+- MASTG input: a temporary shallow clone of `https://github.com/owasp/mastg.git`
+- MASWE input: a temporary shallow clone of `https://github.com/owasp/maswe.git`
+- Output: `source/mobileapp-mastg-2.0.yaml` and `source/mobileapp-maswe-2.0.yaml`
+
+### Enriching Mobile App Mappings
+
+The `scripts/enrich_mobileapp_mappings.py` script adds MASTG, MASWE, threat, and attack-vector metadata to Mobile App Edition card mappings.
+
+```bash
+python scripts/enrich_mobileapp_mappings.py --help
+usage: enrich_mobileapp_mappings.py [-h] [-e EDITION] [-v VERSION] [-s SOURCE_DIR] [-i INPUT_PATH]
+                                    [--mastg-path MASTG_PATH] [--maswe-path MASWE_PATH] [-o OUTPUT_PATH]
+
+Enrich Mobile card mappings with MASTG and MASWE metadata
+
+options:
+  -h, --help            show this help message and exit
+  -e EDITION, --edition EDITION
+                        Cornucopia edition, for example mobileapp
+  -v VERSION, --version VERSION
+                        Cornucopia version, for example 2.0
+  -s SOURCE_DIR, --source-dir SOURCE_DIR
+  -i INPUT_PATH, --input-path INPUT_PATH
+                        Card mapping YAML to enrich
+  --mastg-path MASTG_PATH
+                        Generated MASTG metadata YAML
+  --maswe-path MASWE_PATH
+                        Generated MASWE metadata YAML
+  -o OUTPUT_PATH, --output-path OUTPUT_PATH
+                        Enriched mapping YAML; defaults to input
+```
+
+**Example usage:**
+
+```bash
+# Enrich the default Mobile App Edition mapping file in place
+pipenv run python scripts/enrich_mobileapp_mappings.py
+
+# Enrich an explicit mapping file and write to a new path
+pipenv run python scripts/enrich_mobileapp_mappings.py -i source/mobileapp-mappings-2.0.yaml \
+  --mastg-path source/mobileapp-mastg-2.0.yaml --maswe-path source/mobileapp-maswe-2.0.yaml \
+  -o source/mobileapp-mappings-2.0-enriched.yaml
+```
+
+**Default paths:**
+
+- Input: `source/mobileapp-mappings-2.0.yaml`
+- MASTG metadata: `source/mobileapp-mastg-2.0.yaml`
+- MASWE metadata: `source/mobileapp-maswe-2.0.yaml`
+- Output: overwrites the input mapping file
+
 ## Contributing to Development
 
 ### LibreOffice Installation

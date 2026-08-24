@@ -1,0 +1,1 @@
+Some additional form of authentication is often desirable for sensitive actions inside the app. For example you may want to re-authenticate before contextual state changes like when changing state from running in the background to running in the foreground. confirming a bank transfer, or before applying changes to the user profile e.g: email, phone, pin, MFA, etc.

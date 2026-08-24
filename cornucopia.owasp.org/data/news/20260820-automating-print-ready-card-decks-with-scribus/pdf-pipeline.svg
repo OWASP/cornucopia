@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 300" width="1120" height="300" role="img" aria-label="Card data in YAML is merged into a Scribus template, exported headlessly to per-card PDFs, then merged into a print-ready deck.">
+<rect x="0" y="0" width="1120" height="300" rx="14" fill="#ffffff"/>
+<text x="560" y="34" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="13" fill="#5b7385" text-anchor="middle" font-style="italic">One command builds any edition, language and card size</text>
+<rect x="30" y="66" width="180" height="92" rx="10" fill="#ffffff" stroke="#8aa4b5" stroke-width="2"/>
+<text x="120" y="102" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" fill="#22323d" text-anchor="middle">Card data</text>
+<text x="120" y="124" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">YAML, per edition</text>
+<text x="120" y="142" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">and language</text>
+<rect x="265" y="66" width="180" height="92" rx="10" fill="#ffffff" stroke="#8aa4b5" stroke-width="2"/>
+<text x="355" y="102" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" fill="#22323d" text-anchor="middle">Populated .sla</text>
+<text x="355" y="124" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">text, artwork, QR</text>
+<text x="355" y="142" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">and colours merged</text>
+<rect x="500" y="66" width="180" height="92" rx="10" fill="#ffffff" stroke="#8aa4b5" stroke-width="2"/>
+<text x="590" y="102" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" fill="#22323d" text-anchor="middle">Scribus</text>
+<text x="590" y="124" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">headless export,</text>
+<text x="590" y="142" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">CMYK + bleed</text>
+<rect x="735" y="66" width="180" height="92" rx="10" fill="#ffffff" stroke="#8aa4b5" stroke-width="2"/>
+<text x="825" y="102" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" fill="#22323d" text-anchor="middle">Per-card PDFs</text>
+<text x="825" y="124" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">front and back,</text>
+<text x="825" y="142" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">one file per card</text>
+<rect x="955" y="66" width="135" height="92" rx="10" fill="#ffffff" stroke="#8aa4b5" stroke-width="2"/>
+<text x="1022" y="102" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" fill="#22323d" text-anchor="middle">Deck</text>
+<text x="1022" y="124" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">merged in print</text>
+<text x="1022" y="142" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">order, zipped</text>
+<path d="M 214 112 L 251 112" stroke="#5b7385" stroke-width="2.2" fill="none"/>
+<path d="M 251 106.5 L 259 112 L 251 117.5 Z" fill="#5b7385"/>
+<path d="M 449 112 L 486 112" stroke="#5b7385" stroke-width="2.2" fill="none"/>
+<path d="M 486 106.5 L 494 112 L 486 117.5 Z" fill="#5b7385"/>
+<path d="M 684 112 L 721 112" stroke="#5b7385" stroke-width="2.2" fill="none"/>
+<path d="M 721 106.5 L 729 112 L 721 117.5 Z" fill="#5b7385"/>
+<path d="M 919 112 L 941 112" stroke="#5b7385" stroke-width="2.2" fill="none"/>
+<path d="M 941 106.5 L 949 112 L 941 117.5 Z" fill="#5b7385"/>
+<rect x="265" y="214" width="415" height="56" rx="10" fill="#f1f6f9" stroke="#8aa4b5" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="472" y="238" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" fill="#22323d" text-anchor="middle">pdf_config.yaml &#183; assets.yaml</text>
+<text x="472" y="258" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12.5" fill="#5b7385" text-anchor="middle">sizes, bleed, colours, artwork &#8212; no code changes</text>
+<path d="M 355 210 L 355 170 " stroke="#5b7385" stroke-width="2.2" fill="none"/>
+<path d="M 349 170 L 355 162 L 360 170 Z" fill="#5b7385"/>
+<path d="M 590 210 L 590 170 " stroke="#5b7385" stroke-width="2.2" fill="none"/>
+<path d="M 584 170 L 590 162 L 595 170 Z" fill="#5b7385"/>
+</svg>

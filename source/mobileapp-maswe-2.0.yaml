@@ -1,0 +1,943 @@
+meta:
+  edition: mobileapp
+  component: maswe
+  language: ALL
+  version: '2.0'
+'0001':
+  owasp_mastg:
+  - '0207'
+  - '0287'
+  - '0299'
+  - '0300'
+  - '0301'
+  - '0302'
+  - '0304'
+  - '0305'
+  - '0306'
+  - '0320'
+  - '0388'
+  owasp_mastg_know:
+  - '0041'
+  - '0036'
+  - '0082'
+  - '0091'
+  - '0108'
+  - '0057'
+  - '0037'
+  - '0018'
+  owasp_mastg_best:
+  - '0050'
+  - '0024'
+  - '0028'
+  - '0068'
+  owasp_masvs:
+  - MASVS-STORAGE-1
+  - MASVS-STORAGE-2
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0001': Attackers can access sensitive data stored unencrypted in private storage.
+  owasp_mas_attack:
+    '0005': Accessing the device storage on a compromised device.
+    '0007': Accessing files exposed through incorrect file permissions or misconfigured
+      content providers.
+    '0008': Extracting local or cloud backups of the device.
+'0002':
+  owasp_mastg:
+  - '0200'
+  - '0201'
+  - '0202'
+  - '0303'
+  owasp_mastg_know:
+  - '0042'
+  - '0122'
+  - '0091'
+  - '0057'
+  - '0108'
+  owasp_mastg_best:
+  - '0024'
+  owasp_masvs:
+  - MASVS-STORAGE-1
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0002': Attackers can access or tamper with sensitive data stored in shared or
+      external storage.
+  owasp_mas_attack:
+    '0010': Accessing shared or external storage from any app holding the corresponding
+      permissions.
+    '0011': Physically removing and reading external storage media such as SD cards.
+'0003':
+  owasp_mastg:
+  - '0212'
+  - '0213'
+  - '0214'
+  owasp_mastg_know:
+  - '0012'
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-STORAGE-1
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0003': Attackers can extract cryptographic keys stored outside the platform keystore.
+  owasp_mas_attack:
+    '0001': Obtaining the app package and reverse engineering it.
+    '0005': Accessing the device storage on a compromised device.
+    '0008': Extracting local or cloud backups of the device.
+'0005':
+  owasp_mastg:
+  - '0203'
+  - '0231'
+  - '0296'
+  - '0297'
+  owasp_mastg_know:
+  - '0049'
+  - '0101'
+  owasp_mastg_best:
+  - '0002'
+  - '0022'
+  owasp_masvs:
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0005': Attackers can access sensitive data written to logs.
+  owasp_mas_attack:
+    '0005': Accessing the device storage on a compromised device.
+    '0006': Accessing the system logs on a compromised device or from an app holding
+      log-access permissions.
+'0006':
+  owasp_mastg:
+  - '0215'
+  - '0216'
+  - '0262'
+  - '0298'
+  owasp_mastg_know:
+  - '0102'
+  - '0050'
+  owasp_mastg_best:
+  - '0023'
+  - '0004'
+  owasp_masvs:
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0006': Attackers can extract or tamper with sensitive data included in backups.
+  owasp_mas_attack:
+    '0008': Extracting local or cloud backups of the device.
+    '0009': Tampering with backup contents and restoring the modified backup to a
+      device.
+'0007':
+  owasp_mastg:
+  - '0210'
+  - '0221'
+  - '0232'
+  - '0307'
+  - '0308'
+  - '0309'
+  - '0310'
+  - '0312'
+  - '0317'
+  - '0350'
+  owasp_mastg_know:
+  - '0012'
+  - '0011'
+  owasp_mastg_best:
+  - '0009'
+  - '0005'
+  - '0020'
+  owasp_masvs:
+  - MASVS-CRYPTO-1
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0007': Attackers can decrypt or forge improperly encrypted data.
+  owasp_mas_attack:
+    '0018': Brute-forcing cryptographic material generated with insufficient length.
+    '0021': Performing cryptanalysis of broken algorithms, modes, or parameters.
+    '0022': Exploiting predictable or reused IVs or nonces to detect patterns or recover
+      plaintext.
+    '0023': Exploiting padding oracles exposed through observable error signals or
+      timing differences.
+'0008':
+  owasp_mastg:
+  - '0211'
+  owasp_mastg_know: []
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CRYPTO-1
+  owasp_mas_threat:
+    '0008': Attackers can forge or replay data that passes hash-based integrity or
+      authenticity checks.
+  owasp_mas_attack:
+    '0028': Crafting collisions or second preimages for broken hash functions.
+'0012':
+  owasp_mastg:
+  - '0204'
+  - '0205'
+  - '0311'
+  - '0349'
+  owasp_mastg_know:
+  - '0013'
+  - '0070'
+  owasp_mastg_best:
+  - '0001'
+  - '0025'
+  owasp_masvs:
+  - MASVS-CRYPTO-1
+  owasp_mas_threat:
+    '0012': Attackers can predict or reproduce random values used in security contexts.
+  owasp_mas_attack:
+    '0001': Obtaining the app package and reverse engineering it.
+    '0019': Recovering or guessing the seed used by the generator to reproduce its
+      output.
+    '0024': Observing enough outputs to recover the internal state of a non-cryptographic
+      PRNG.
+'0013':
+  owasp_mastg:
+  - '0208'
+  - '0209'
+  owasp_mastg_know:
+  - '0012'
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0013': Attackers can predict or reproduce improperly generated cryptographic
+      keys.
+  owasp_mas_attack:
+    '0018': Brute-forcing cryptographic material generated with insufficient length.
+    '0019': Recovering or guessing the seed used by the generator to reproduce its
+      output.
+    '0020': Intercepting cryptographic keys exported in plaintext.
+'0017':
+  owasp_mastg:
+  - '0246'
+  - '0247'
+  - '0248'
+  - '0249'
+  owasp_mastg_know:
+  - '0056'
+  - '0001'
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0017': Attackers with physical access to the device can read the app's data and
+      use its keys when no device credential protects them.
+  owasp_mas_attack:
+    '0063': Accessing a lost or stolen device that has no secure lock screen configured.
+'0018':
+  owasp_mastg:
+  - '0355'
+  - '0356'
+  - '0357'
+  - '0364'
+  - '0365'
+  - '0366'
+  owasp_mastg_know:
+  - '0020'
+  - '0117'
+  - '0132'
+  - '0017'
+  - '0133'
+  - '0134'
+  owasp_mastg_best:
+  - '0049'
+  - '0052'
+  owasp_masvs:
+  - MASVS-AUTH-1
+  - MASVS-PLATFORM-1
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0018': Attackers can access sensitive data and functionality exposed by app components.
+  owasp_mas_attack:
+    '0038': Invoking exported or unprotected app components from another app installed
+      on the device.
+    '0039': Connecting to open ports or local services exposed by the app.
+'0020':
+  owasp_mastg:
+  - '0266'
+  - '0267'
+  - '0327'
+  - '0329'
+  - '0330'
+  owasp_mastg_know:
+  - '0056'
+  - '0057'
+  - '0001'
+  - '0043'
+  - '0047'
+  - '0012'
+  owasp_mastg_best:
+  - '0036'
+  - '0038'
+  owasp_masvs:
+  - MASVS-AUTH-2
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0020': Attackers can bypass local authentication and access protected data or
+      functionality.
+  owasp_mas_attack:
+    '0002': Debugging the app at runtime.
+    '0003': Using dynamic instrumentation.
+    '0027': Invoking keystore operations on a compromised or stolen device when key
+      use does not require user authentication.
+    '0040': Patching or repackaging the app to remove or alter client-side checks.
+'0021':
+  owasp_mastg:
+  - '0268'
+  - '0269'
+  - '0326'
+  owasp_mastg_know:
+  - '0056'
+  - '0001'
+  owasp_mastg_best:
+  - '0031'
+  owasp_masvs:
+  - MASVS-AUTH-2
+  owasp_mas_threat:
+    '0021': Attackers can authenticate sensitive transactions without the user's biometrics.
+  owasp_mas_attack:
+    '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+      or password).
+'0022':
+  owasp_mastg:
+  - '0270'
+  - '0271'
+  - '0328'
+  owasp_mastg_know:
+  - '0056'
+  - '0001'
+  owasp_mastg_best:
+  - '0037'
+  owasp_masvs:
+  - MASVS-AUTH-2
+  - MASVS-CRYPTO-2
+  owasp_mas_threat:
+    '0022': Attackers can use biometric-protected keys without the legitimate user's
+      biometrics.
+  owasp_mas_attack:
+    '0035': Enrolling additional biometrics on the device after obtaining the device
+      credential.
+'0026':
+  owasp_mastg:
+  - '0217'
+  - '0218'
+  - '0233'
+  - '0235'
+  - '0236'
+  - '0237'
+  - '0238'
+  - '0239'
+  - '0321'
+  - '0322'
+  - '0323'
+  - '0342'
+  - '0343'
+  - '0344'
+  - '0345'
+  - '0348'
+  owasp_mastg_know:
+  - '0014'
+  - '0071'
+  - '0073'
+  owasp_mastg_best:
+  - '0042'
+  - '0043'
+  owasp_masvs:
+  - MASVS-NETWORK-1
+  owasp_mas_threat:
+    '0026': Attackers can intercept or modify cleartext network traffic.
+  owasp_mas_attack:
+    '0012': Monitoring network traffic on the same network (e.g., public Wi-Fi or
+      a compromised router).
+    '0013': Monitoring local or proximity interfaces such as Bluetooth, NFC, or USB.
+    '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+      DNS spoofing, or a rogue access point.
+'0027':
+  owasp_mastg:
+  - '0234'
+  - '0282'
+  - '0283'
+  - '0284'
+  - '0285'
+  - '0286'
+  - '0295'
+  - '0396'
+  - '0397'
+  owasp_mastg_know:
+  - '0010'
+  - '0014'
+  - '0011'
+  - '0072'
+  owasp_mastg_best:
+  - '0021'
+  - '0020'
+  - '0073'
+  owasp_masvs:
+  - MASVS-NETWORK-1
+  owasp_mas_threat:
+    '0027': Attackers can intercept or modify TLS-protected network traffic.
+  owasp_mas_attack:
+    '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+      DNS spoofing, or a rogue access point.
+    '0015': Presenting a fraudulent or otherwise invalid certificate that the app
+      accepts.
+'0028':
+  owasp_mastg:
+  - '0242'
+  - '0243'
+  - '0244'
+  - '0385'
+  owasp_mastg_know:
+  - '0014'
+  - '0015'
+  - '0072'
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-NETWORK-2
+  owasp_mas_threat:
+    '0028': Attackers can intercept or modify TLS-protected traffic even when standard
+      certificate validation succeeds.
+  owasp_mas_attack:
+    '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+      DNS spoofing, or a rogue access point.
+    '0016': Obtaining a valid certificate for the target domain from a compromised,
+      coerced, or rogue Certificate Authority (CA).
+    '0017': Installing an attacker-controlled CA certificate on a device they control
+      to inspect the app's traffic.
+'0029':
+  owasp_mastg:
+  - '0370'
+  - '0371'
+  - '0393'
+  - '0394'
+  - '0395'
+  owasp_mastg_know:
+  - '0079'
+  - '0019'
+  - '0080'
+  owasp_mastg_best:
+  - '0045'
+  - '0054'
+  - '0055'
+  - '0070'
+  - '0071'
+  - '0072'
+  owasp_masvs:
+  - MASVS-PLATFORM-1
+  - MASVS-STORAGE-2
+  - MASVS-CODE-4
+  owasp_mas_threat:
+    '0029': Attackers can hijack deep links or inject malicious input into the app.
+  owasp_mas_attack:
+    '0046': Registering the same custom URL scheme to intercept links intended for
+      the app.
+    '0047': Delivering crafted deep links or intents from a malicious app or web page.
+'0031':
+  owasp_mastg:
+  - '0389'
+  owasp_mastg_know:
+  - '0082'
+  - '0141'
+  owasp_mastg_best:
+  - '0069'
+  owasp_masvs:
+  - MASVS-PLATFORM-1
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0031': Attackers can capture sensitive user input and content.
+  owasp_mas_attack:
+    '0048': Capturing user input through a malicious custom keyboard or app extension.
+'0032':
+  owasp_mastg:
+  - '0372'
+  - '0374'
+  - '0381'
+  owasp_mastg_know:
+  - '0025'
+  owasp_mastg_best:
+  - '0056'
+  - '0063'
+  owasp_masvs:
+  - MASVS-PLATFORM-1
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0032': Attackers can intercept or manipulate the app's intents.
+  owasp_mas_attack:
+    '0047': Delivering crafted deep links or intents from a malicious app or web page.
+    '0049': Registering intent filters to intercept implicit intents sent by the app.
+    '0050': Modifying or replaying mutable PendingIntents obtained from the app.
+'0034':
+  owasp_mastg:
+  - '0250'
+  - '0251'
+  - '0252'
+  - '0253'
+  - '0333'
+  - '0334'
+  - '0335'
+  - '0336'
+  - '0376'
+  - '0377'
+  - '0378'
+  - '0379'
+  - '0380'
+  owasp_mastg_know:
+  - '0018'
+  - '0076'
+  - '0139'
+  owasp_mastg_best:
+  - '0011'
+  - '0012'
+  - '0013'
+  - '0049'
+  - '0010'
+  - '0033'
+  - '0035'
+  - '0058'
+  - '0062'
+  - '0059'
+  - '0060'
+  - '0061'
+  owasp_masvs:
+  - MASVS-PLATFORM-2
+  - MASVS-STORAGE-2
+  - MASVS-CODE-4
+  owasp_mas_threat:
+    '0034': Attackers can access local files and app-private data from web content.
+  owasp_mas_attack:
+    '0047': Delivering crafted deep links or intents from a malicious app or web page.
+    '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM on
+      insecure connections or a compromised website).
+'0035':
+  owasp_mastg:
+  - '0331'
+  - '0332'
+  - '0398'
+  - '0399'
+  - '0400'
+  owasp_mastg_know:
+  - '0076'
+  - '0018'
+  owasp_mastg_best:
+  - '0032'
+  - '0034'
+  owasp_masvs:
+  - MASVS-PLATFORM-2
+  - MASVS-CODE-4
+  owasp_mas_threat:
+    '0035': Attackers can execute malicious web content inside the app's WebView.
+  owasp_mas_attack:
+    '0047': Delivering crafted deep links or intents from a malicious app or web page.
+    '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM on
+      insecure connections or a compromised website).
+'0036':
+  owasp_mastg:
+  - '0258'
+  - '0276'
+  - '0277'
+  - '0278'
+  - '0279'
+  - '0280'
+  - '0313'
+  - '0314'
+  - '0316'
+  - '0340'
+  - '0346'
+  - '0347'
+  owasp_mastg_know:
+  - '0055'
+  - '0083'
+  - '0100'
+  - '0022'
+  - '0121'
+  - '0141'
+  owasp_mastg_best:
+  - '0019'
+  - '0026'
+  - '0040'
+  - '0044'
+  owasp_masvs:
+  - MASVS-PLATFORM-3
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0036': Attackers can capture sensitive data displayed or entered in the user
+      interface.
+  owasp_mas_attack:
+    '0005': Accessing the device storage on a compromised device.
+    '0041': Reading sensitive data from the clipboard when users copy it between apps.
+    '0043': Observing the device screen while sensitive data is displayed or entered
+      (shoulder surfing).
+'0037':
+  owasp_mastg:
+  - '0315'
+  owasp_mastg_know:
+  - '0054'
+  owasp_mastg_best:
+  - '0027'
+  owasp_masvs:
+  - MASVS-PLATFORM-3
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0037': Attackers can access sensitive data shown in notifications.
+  owasp_mas_attack:
+    '0044': Reading notification content shown on the lock screen without unlocking
+      the device.
+    '0045': Reading notification content from another app holding notification-access
+      permissions.
+'0038':
+  owasp_mastg:
+  - '0289'
+  - '0290'
+  - '0291'
+  - '0292'
+  - '0293'
+  - '0294'
+  owasp_mastg_know:
+  - '0053'
+  - '0099'
+  owasp_mastg_best:
+  - '0014'
+  - '0015'
+  - '0017'
+  - '0018'
+  owasp_masvs:
+  - MASVS-PLATFORM-3
+  - MASVS-STORAGE-2
+  owasp_mas_threat:
+    '0038': Attackers can access sensitive data displayed on the screen.
+  owasp_mas_attack:
+    '0010': Accessing shared or external storage from any app holding the corresponding
+      permissions.
+    '0071': Capturing or recording the screen from another app or an external tool.
+    '0072': Accessing screenshots automatically taken by the system, e.g., when the
+      app moves to the background.
+'0041':
+  owasp_mastg:
+  - '0245'
+  owasp_mastg_know: []
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CODE-1
+  owasp_mas_threat:
+    '0041': Attackers can exploit platform-level weaknesses that the app cannot fix
+      on its own.
+  owasp_mas_attack:
+    '0054': Installing a malicious app on a device running an OS version affected
+      by unpatched platform vulnerabilities.
+    '0055': Running the app on a device whose OS version lacks the platform protections
+      the app relies on.
+'0043':
+  owasp_mastg:
+  - '0382'
+  - '0383'
+  - '0384'
+  - '0392'
+  owasp_mastg_know:
+  - '0023'
+  - '0074'
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CODE-2
+  owasp_mas_threat:
+    '0043': Attackers can exploit vulnerabilities that remain reachable in outdated
+      app versions.
+  owasp_mas_attack:
+    '0040': Patching or repackaging the app to remove or alter client-side checks.
+    '0053': Targeting users who remain on an app version with publicly known vulnerabilities.
+'0044':
+  owasp_mastg:
+  - '0272'
+  - '0273'
+  - '0274'
+  - '0275'
+  owasp_mastg_know: []
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CODE-3
+  owasp_mas_threat:
+    '0044': Attackers can exploit publicly known vulnerabilities in the app's dependencies.
+  owasp_mas_attack:
+    '0073': Identifying vulnerable dependency versions in the app package and using
+      public advisories or exploits.
+'0045':
+  owasp_mastg:
+  - '0222'
+  - '0223'
+  - '0228'
+  - '0229'
+  - '0230'
+  owasp_mastg_know:
+  - '0006'
+  - '0061'
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-CODE-3
+  - MASVS-CODE-4
+  owasp_mas_threat:
+    '0045': Attackers can exploit memory-corruption bugs with substantially less effort.
+  owasp_mas_attack:
+    '0001': Obtaining the app package and reverse engineering it.
+    '0059': Supplying crafted input through any external interface (network, IPC,
+      files, UI, or peripherals).
+'0050':
+  owasp_mastg:
+  - '0337'
+  - '0339'
+  - '0375'
+  - '0386'
+  owasp_mastg_know:
+  - '0021'
+  - '0117'
+  - '0025'
+  - '0138'
+  - '0075'
+  owasp_mastg_best:
+  - '0039'
+  - '0057'
+  - '0064'
+  owasp_masvs:
+  - MASVS-CODE-4
+  owasp_mas_threat:
+    '0050': Attackers can execute injection attacks against the app.
+  owasp_mas_attack:
+    '0047': Delivering crafted deep links or intents from a malicious app or web page.
+    '0059': Supplying crafted input through any external interface (network, IPC,
+      files, UI, or peripherals).
+'0051':
+  owasp_mastg:
+  - '0240'
+  - '0241'
+  - '0324'
+  - '0325'
+  owasp_mastg_know:
+  - '0084'
+  - '0027'
+  owasp_mastg_best:
+  - '0029'
+  - '0030'
+  owasp_masvs:
+  - MASVS-RESILIENCE-1
+  - MASVS-RESILIENCE-4
+  owasp_mas_threat:
+    '0051': Attackers can run and manipulate the app in a privileged environment without
+      resistance.
+  owasp_mas_attack:
+    '0003': Using dynamic instrumentation.
+    '0005': Accessing the device storage on a compromised device.
+    '0065': Running the app on a rooted or jailbroken device they control.
+'0053':
+  owasp_mastg:
+  - '0351'
+  - '0367'
+  owasp_mastg_know:
+  - '0031'
+  - '0135'
+  owasp_mastg_best:
+  - '0046'
+  - '0053'
+  owasp_masvs:
+  - MASVS-RESILIENCE-1
+  - MASVS-RESILIENCE-4
+  owasp_mas_threat:
+    '0053': Attackers can analyze and automate the app in a fully controlled environment.
+  owasp_mas_attack:
+    '0003': Using dynamic instrumentation.
+    '0066': Running the app in an emulator or virtual device.
+'0056':
+  owasp_mastg:
+  - '0220'
+  - '0224'
+  - '0225'
+  owasp_mastg_know:
+  - '0058'
+  - '0003'
+  owasp_mastg_best:
+  - '0006'
+  owasp_masvs:
+  - MASVS-RESILIENCE-2
+  owasp_mas_threat:
+    '0056': Attackers can distribute and run modified copies of the app.
+  owasp_mas_attack:
+    '0040': Patching or repackaging the app to remove or alter client-side checks.
+    '0068': Impersonating the app with scripts, bots, or tampered clients when interacting
+      with the backend.
+    '0069': Installing a repackaged version of the app on victim devices.
+'0057':
+  owasp_mastg:
+  - '0338'
+  - '0387'
+  owasp_mastg_know:
+  - '0036'
+  - '0086'
+  owasp_mastg_best:
+  - '0066'
+  - '0065'
+  owasp_masvs:
+  - MASVS-RESILIENCE-2
+  - MASVS-CODE-4
+  owasp_mas_threat:
+    '0057': Attackers can alter the app's behavior through its resources.
+  owasp_mas_attack:
+    '0009': Tampering with backup contents and restoring the modified backup to a
+      device.
+    '0070': Modifying the app's files or resources on a compromised device.
+'0058':
+  owasp_mastg:
+  - '0341'
+  - '0354'
+  owasp_mastg_know:
+  - '0030'
+  - '0032'
+  - '0118'
+  - '0087'
+  owasp_mastg_best:
+  - '0041'
+  - '0048'
+  owasp_masvs:
+  - MASVS-RESILIENCE-2
+  owasp_mas_threat:
+    '0058': Attackers can modify the app's code while it runs.
+  owasp_mas_attack:
+    '0002': Debugging the app at runtime.
+    '0003': Using dynamic instrumentation.
+'0059':
+  owasp_mastg:
+  - '0368'
+  - '0369'
+  - '0391'
+  owasp_mastg_know:
+  - '0033'
+  - '0089'
+  owasp_mastg_best:
+  - '0029'
+  owasp_masvs:
+  - MASVS-RESILIENCE-3
+  owasp_mas_threat:
+    '0059': Attackers can analyze the app's logic and security controls with minimal
+      effort.
+  owasp_mas_attack:
+    '0001': Obtaining the app package and reverse engineering it.
+'0061':
+  owasp_mastg:
+  - '0219'
+  - '0263'
+  - '0264'
+  - '0265'
+  - '0288'
+  - '0358'
+  - '0359'
+  owasp_mastg_know:
+  - '0063'
+  - '0064'
+  - '0101'
+  owasp_mastg_best:
+  - '0022'
+  owasp_masvs:
+  - MASVS-RESILIENCE-3
+  owasp_mas_threat:
+    '0061': Attackers can analyze the app's internals and disable its security controls.
+  owasp_mas_attack:
+    '0001': Obtaining the app package and reverse engineering it.
+    '0006': Accessing the system logs on a compromised device or from an app holding
+      log-access permissions.
+'0063':
+  owasp_mastg:
+  - '0226'
+  - '0227'
+  - '0261'
+  owasp_mastg_know:
+  - '0007'
+  - '0028'
+  - '0062'
+  owasp_mastg_best:
+  - '0007'
+  - '0008'
+  owasp_masvs:
+  - MASVS-RESILIENCE-4
+  - MASVS-PLATFORM-2
+  owasp_mas_threat:
+    '0063': Attackers can inspect and manipulate a debuggable app at runtime, even
+      on non-rooted or non-jailbroken devices.
+  owasp_mas_attack:
+    '0002': Debugging the app at runtime.
+    '0003': Using dynamic instrumentation.
+    '0004': Attaching a remote inspector to the app's debuggable web content.
+'0064':
+  owasp_mastg:
+  - '0352'
+  - '0353'
+  - '0401'
+  - '0402'
+  owasp_mastg_know:
+  - '0007'
+  - '0028'
+  - '0085'
+  owasp_mastg_best:
+  - '0007'
+  - '0029'
+  - '0047'
+  - '0074'
+  owasp_masvs:
+  - MASVS-RESILIENCE-4
+  owasp_mas_threat:
+    '0064': Attackers can inspect and manipulate the running app without resistance.
+  owasp_mas_attack:
+    '0002': Debugging the app at runtime.
+'0066':
+  owasp_mastg:
+  - '0254'
+  - '0255'
+  - '0256'
+  - '0257'
+  - '0360'
+  - '0361'
+  - '0362'
+  - '0363'
+  - '0390'
+  owasp_mastg_know:
+  - '0017'
+  - '0077'
+  - '0082'
+  - '0141'
+  owasp_mastg_best:
+  - '0051'
+  - '0069'
+  owasp_masvs:
+  - MASVS-PRIVACY-1
+  owasp_mas_threat:
+    '0066': Apps and embedded third-party components can access more sensitive device
+      resources and data than needed.
+  owasp_mas_attack:
+    '0088': Holding excessive or no-longer-needed permissions granted to the app.
+    '0089': Using permissions granted to the host app to call protected APIs and collect
+      data from a third-party SDK.
+'0073':
+  owasp_mastg:
+  - '0206'
+  - '0318'
+  - '0319'
+  owasp_mastg_know: []
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-PRIVACY-3
+  - MASVS-PRIVACY-1
+  owasp_mas_threat:
+    '0073': Apps and embedded third-party components can collect or share more data
+      than users were led to expect.
+  owasp_mas_attack:
+    '0081': Collecting or sharing data categories that are not declared in the platform's
+      privacy labels.
+    '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+      services over the network.
+'0074':
+  owasp_mastg:
+  - '0281'
+  owasp_mastg_know: []
+  owasp_mastg_best: []
+  owasp_masvs:
+  - MASVS-PRIVACY-3
+  owasp_mas_threat:
+    '0074': Apps and embedded third-party components can track users against their
+      expressed preferences.
+  owasp_mas_attack:
+    '0074': Collecting and correlating identifiers and usage data across apps, devices,
+      and services.
+    '0075': Contacting undeclared tracking domains that platform enforcement cannot
+      block.
