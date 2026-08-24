@@ -93,8 +93,8 @@ def report():
 
     add("")
     add("Packages this interpreter needs:")
-    lines, missing = check_required(in_scribus)
-    add("\n".join(lines))
+    package_lines, missing = check_required(in_scribus)
+    add("\n".join(package_lines))
 
     add("")
     add("Optional:")
