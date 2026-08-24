@@ -8,7 +8,7 @@ If you have other questions, suggestions or ideas, please feel free to discuss t
 
 ## Introduction
 
-The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, to identify application security requirements and develop security-based user stories. Although the concept had been waiting for enough time to progress it, the final motivation came when [SAFECode](http://www.safecode.org/) published its [Practical Security Stories and Security Tasks for Agile Development Environments](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf '[inline] SAFE Code publication as pdf') in July 2012.
+The idea behind Cornucopia is to help development teams, especially those using Agile methodologies, identify application security requirements and develop security-based user stories. Although the concept had been waiting for enough time to progress, the final motivation came when [SAFECode](http://www.safecode.org/) published its [Practical Security Stories and Security Tasks for Agile Development Environments](https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf '[inline] SAFE Code publication as pdf') in July 2012.
 
 Cornucopia was created and first used for developer training in August 2012.
 
@@ -38,13 +38,13 @@ To start using Cornucopia:
 
 The other driver for Cornucopia was to link the attacks with requirements and verification techniques. An initial aim had been to reference [CWE™](http://cwe.mitre.org/ 'CWE - 
 Common Weakness Enumeration [external]') weakness IDs, but these proved too numerous, and instead it was decided to map each card to [CAPEC™](http://capec.mitre.org/ 'CAPEC™ -
-Common Attack Pattern Enumeration and Classification (CAPEC) [external]') software attack pattern IDs, which themselves are mapped to CWEs, so the desired result is achieved.
+Common Attack Pattern Enumeration and Classification (CAPEC) [external]') Software attack pattern IDs, which themselves are mapped to CWEs, so the desired result is achieved.
 
 Each Website App Edition card is also mapped to the 36 primary security stories in the [SAFECode document](https://safecode.org/resource-secure-development-practices/fundamental-practices-secure-software-development-2/ 'Fundamental Practices for Secure Software Development, Third Edition - SAFECode [external]'), as well as to the OWASP [Developer Guide Web Application Checklist](https://devguide.owasp.org/en/04-design/02-web-app-checklist/ 'OWASP Developer Guide [external]') v2, [ASVS v4.0.3](https://owasp.org/www-project-application-security-verification-standard/ 'OWASP Application Security Verification Standard (ASVS) [external]') and [AppSensor](https://owasp.org/www-project-appsensor/ 'OWASP AppSensor [external]') (application attack detection and response) to help teams create their own security-related stories for use in Agile processes.
 
 Likewise, each Mobile App Edition is mapped to CAPEC™ and the SAFECode stories, but instead of SCP, ASVS, and AppSensor, each card is mapped to OWASP's [Mobile Application Security Verification Standard (MASVS) v2.0](https://mas.owasp.org/MASVS/ 'OWASP MASVS (Mobile Application Security Verification Standard [external]') and [Mobile Application Security Testing Guide (MASTG) v2.0](https://mas.owasp.org/MASTG/ 'OWASP Mobile Application Security Testing Guide [external]').
 
-There is also the OWASP Cornucopia Companion Edition, which extends the previous two editions with 6 additional suites. These 6 companion suites cover new Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). These suits are mapped to various standards, maturity models, OWASP Top 10s, guides, lists, and resources.
+There is also the OWASP Cornucopia Companion Edition, which extends the previous two editions with 6 additional suites. These 6 companion suites cover new Agentic AI (AAI), Automated Threats (BOT), Cloud (CLD), Frontend (FRE), Large Language Models (LLM), and DevOps (DVO). These suites are mapped to various standards, maturity models, OWASP Top 10s, guides, lists, and resources.
 
 The following is the full list of all the resources that the 3 editions map to.
 
