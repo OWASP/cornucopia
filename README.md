@@ -100,6 +100,10 @@ Copi (https://copi.owasp.org) is an online game engine where you can play Cornuc
 
 please read [README.md](copi.owasp.org/README.md)
 
+## OWASP Cornucopia - ThreatSutra
+
+ThreatSutra is an AI-assisted security requirement generator that takes threat models from OWASP Threat Dragon models and Cornucopia card games and creates evil user stories and security verification tests which it can upload as GitHub issues. Please see [ThreatSutra](https://github.com/owaspcornucopia/ThreatSutra/) if you would like to contribute to the work.
+
 ## Printing
 
 The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there.

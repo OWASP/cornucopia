@@ -1,6 +1,6 @@
 # Printing
 
-The primary source document is a Word document. You can find it named under [owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).odt](https://github.com/OWASP/cornucopia/releases/tag/v3.4.5 'OWASP Cornucopia on Github [external]') as part of the latest release.
+The primary source document is a Word document. You can find it named [owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).odt](https://github.com/OWASP/cornucopia/releases/tag/v3.4.5 'OWASP Cornucopia on GitHub [external]') as part of the latest release.
 
 Pre-printed card decks may, however, be more useful. To get this, click on [webshop](/webshop) in the upper right corner.
 
@@ -10,7 +10,7 @@ You can also choose to play the OWASP Cornucopia Website App Edition and Mobile 
 
 ## Current printable version
 
-Here is the current version of Cornucopia Website App, Mobile App and Companion Edition guides, decks and leaflets (v3.0 with updated mapping to ASVS v5.0, AISVS, Top 10, SAMM, DSOMM, Mitre, CAPEC, STRIDE, CCM, etc., etc.):
+Here is the current version of Cornucopia Website App, Mobile App and Companion Edition guides, decks and leaflets (v3.0 with updated mapping to ASVS v5.0, AISVS, Top 10, SAMM, DSOMM, Mitre, CAPEC, STRIDE, CCM, etc.):
 
 - Legacy guides (ODT):
     - [[EN]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_en.odt '[external]'), [[ES]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_es.odt '[external]'), [[FR]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_fr.odt '[external]'), [[IT]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_it.odt '[external]'), [[PT-BR]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_pt-br.odt '[external]'), [[PT-PT]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_pt-pt.odt '[external]'), [[NL]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_nl.odt '[external]'), [[NO-NB]](https://github.com/OWASP/cornucopia/releases/download/v3.4.5/owasp_cornucopia_webapp_3.0_guide_bridge_no-nb.odt '[external]')
@@ -21,11 +21,11 @@ Here is the current version of Cornucopia Website App, Mobile App and Companion 
 
 ## Printing instructions
 
-The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download final printable files from there to ensure you get the latest updates and fixes done to the decks.
+The latest printable files are released under the [pre-release](https://github.com/OWASP/cornucopia/releases/tag/pre-release). Please download the final printable files from there to ensure you get the latest updates and fixes to the decks.
 
-The odt/pdf files can be easily printed by any desktop printer, but for the best quality use the idml InDesign files. When sending the files to a printing facility you may have to supply the fonts that has been used in order to create the work.
+The odt/pdf files can be easily printed by any desktop printer, but for the best quality, use the IDML InDesign files. When sending the files to a printing facility, you may have to supply the fonts that have been used in order to create the work.
 
-In case the printing facility doesn't have the fonts at hand you'll find the installable fonts under `resources/templates/Fonts` in [owasp/cornucopia](https://github.com/owasp/cornucopia) repository. They are both open source and free for commercial use.
+In case the printing facility doesn't have the fonts at hand, you'll find the installable fonts under `resources/templates/Fonts` in the [owasp/cornucopia](https://github.com/owasp/cornucopia) repository. They are both open source and free for commercial use.
 
 ### The following fonts are used:
 - Leaflet: Noto Sans (Light/Regular/Italic/Medium (Italic)/SemiBoldItalic/Extra Bold)
@@ -51,7 +51,7 @@ The "tarot" files are (2.75 x 4.75" or 70mm x 121 mm) standard playing cards.
 
 #### Cases:
 
-the boxes has standard dimensions used by Agile Stationary to print their OWASP Cornucopia decks.
+The boxes have standard dimensions used by Agile Stationery to print their OWASP Cornucopia decks.
 
 The "bridge" is 60 x 89.25 mm x 27.15 mm
 
@@ -59,23 +59,23 @@ The "tarot" is 122.2 x 73.1 x 29.1 mm
 
 #### Leaflets:
 
-The "bridge" and "tarot" version is a 16-20 page spread depending on which language you print it in.
+The "bridge" and "tarot" versions are a 16-20 page spread depending on which language you print it in.
 
 The "bridge" files are  55mm x 87mm
 
 The "tarot" files are (2.75 x 4.75")
 
-Please be aware, that the table of content for the Indesign leaflet has to be adjusted for all language versions before printing except for the English version!!
+Please be aware that the table of contents for the InDesign leaflet has to be adjusted for all language versions before printing, except for the English version!!
 
-This is because Indesign does not support auto adjusting the TOC.
+This is because InDesign does not support auto-adjusting the TOC.
 
 You may need to adjust the font size to fit either a 16 or a 20 page leaflet spread.
 
 DO NOT PRINT an 18 Page leaflet! It won't look good.
 
-#### Blead:
+#### Bleed:
 
-A standard blead set to 3mm for all 4 sides.
+A standard bleed set to 3mm for all 4 sides.
 
 #### Paper:
 
