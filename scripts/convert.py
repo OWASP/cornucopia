@@ -15,7 +15,6 @@ from typing import Any, Dict, List, Optional, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
-from xml.sax.saxutils import escape
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
 
@@ -1345,7 +1344,7 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
         if replacement == text:
             return match.group(0)
         modified = True
-        return f">{escape(replacement)}<"
+        return f">{html.escape(replacement, quote=False)}<"
 
     result = re.sub(r">([^<]+)<", replace_text_node, source)
 
