@@ -10,7 +10,6 @@ import sys
 import subprocess
 import yaml
 import zipfile
-import xml.etree.ElementTree as ElTree
 from defusedxml import ElementTree as DefusedElTree
 from typing import Any, Dict, List, Optional, Tuple, cast
 from operator import itemgetter
@@ -1289,7 +1288,7 @@ def replace_docx_inline_text(doc: Any, data: Dict[str, str]) -> Any:
     return doc
 
 
-def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
+def _find_xml_elements(tree: Any) -> List[Any]:
     """Identify elements likely to contain text to replace for IDML and ODT."""
     namespaces = {
         "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
@@ -1299,11 +1298,11 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     elements.extend(tree.findall(".//text:p", namespaces))
     elements.extend(tree.findall(".//text:span", namespaces))
     if not elements:
-        return cast(List[ElTree.Element], tree.findall(".//*"))
-    return cast(List[ElTree.Element], elements)
+        return cast(List[Any], tree.findall(".//*"))
+    return cast(List[Any], elements)
 
 
-def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
+def _replace_element_text(el: Any, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
     """Replace text and tail text in an XML element."""
     if el.text:
         new_text = get_replacement_value_from_dict(el.text, replacement_values)
