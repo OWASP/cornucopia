@@ -970,12 +970,13 @@ def get_template_for_edition(
     """Get template document for the specified edition."""
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
+    input_is_absolute = bool(args_input_file) and os.path.isabs(args_input_file)
     sfile_ext = "idml"
     if layout == "guide":
         sfile_ext = "odt"
     if args_input_file:
         # Input file was specified
-        if os.path.isabs(args_input_file):
+        if input_is_absolute:
             template_doc = args_input_file
         elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file):
             template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_input_file)
@@ -1016,7 +1017,8 @@ def get_template_for_edition(
             logging.info(f" --- Using generic template (no language-specific found): {generic_template_doc}")
 
     template_doc = template_doc.replace("\\ ", " ")
-    template_doc = str(Path(sanitize_filepath(template_doc)))
+    if not input_is_absolute:
+        template_doc = str(Path(sanitize_filepath(template_doc)))
     if os.path.isfile(template_doc):
         template_doc = check_fix_file_extension(template_doc, sfile_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
@@ -1322,9 +1324,13 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
     """Replace text in XML file while preserving package-specific XML syntax."""
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        DefusedElTree.parse(filename)
+        tree = DefusedElTree.parse(filename)
     except Exception as e:
         logging.error(f"Failed to parse XML file {filename}: {e}")
+        return
+
+    if tree.getroot() is None:
+        logging.error(f" --- The XML file has no root element: {filename}")
         return
 
     with open(filename, "r", encoding="utf-8") as file:
