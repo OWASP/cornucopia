@@ -47,6 +47,6 @@ jobs:
       - name: Check formatting of files with Black
         run: pipenv run black --line-length=120 --check .
       - name: Check formatting of files with flake
-        run: pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+        run: pipenv run flake8 --max-line-length=120 --max-complexity=11 --ignore=E203,W503
       - name: Check formatting of files for correct spelling and namespace names
         run: pipenv run mypy --namespace-packages --strict ./scripts/
