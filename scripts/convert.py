@@ -1,5 +1,6 @@
 import argparse
 import fnmatch
+import html
 import logging
 import os
 import platform
@@ -15,6 +16,7 @@ from typing import Any, Dict, List, Optional, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
+from xml.sax.saxutils import escape
 from pathvalidate.argparse import validate_filepath_arg
 from pathvalidate import sanitize_filepath
 
@@ -1318,29 +1320,34 @@ def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str
 
 
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
-    """Replace text in XML file."""
+    """Replace text in XML file while preserving package-specific XML syntax."""
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
-        tree = DefusedElTree.parse(filename)
+        DefusedElTree.parse(filename)
     except Exception as e:
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return
 
-    root = tree.getroot()
-    if root is None:
-        logging.error(f" --- The XML file has no root element: {filename}")
-        return
-
-    elements_to_check = _find_xml_elements(tree)
+    with open(filename, "r", encoding="utf-8") as file:
+        source = file.read()
 
     modified = False
-    for el in elements_to_check:
-        modified = _replace_element_text(el, replacement_values, modified)
+
+    def replace_text_node(match: re.Match[str]) -> str:
+        nonlocal modified
+        text = html.unescape(match.group(1))
+        replacement = get_replacement_value_from_dict(text, replacement_values)
+        if replacement == text:
+            return match.group(0)
+        modified = True
+        return f">{escape(replacement)}<"
+
+    result = re.sub(r">([^<]+)<", replace_text_node, source)
 
     if modified:
         try:
-            with open(filename, "bw") as f:
-                f.write(ElTree.tostring(root, encoding="utf-8"))
+            with open(filename, "w", encoding="utf-8", newline="") as file:
+                file.write(result)
         except Exception as e:
             logging.error(f"Failed to save modified XML file {filename}: {e}")
 
@@ -1348,10 +1355,16 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
 def zip_dir(path: str, zip_filename: str) -> None:
     """Zip all the files recursively from path into zip_filename (excluding root path)"""
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        for root, _, files in os.walk(os.path.normpath(path)):
-            for file in files:
-                f = str(Path(os.path.join(root, file)))
-                zip_file.write(f, f[len(path) :])  # noqa: E203
+        source_path = Path(path)
+        files = sorted(source_path.rglob("*"))
+        mimetype = source_path / "mimetype"
+        if mimetype.is_file():
+            zip_file.write(mimetype, "mimetype", compress_type=zipfile.ZIP_STORED)
+
+        for file in files:
+            if not file.is_file() or file == mimetype:
+                continue
+            zip_file.write(file, file.relative_to(source_path).as_posix())
 
 
 if __name__ == "__main__":
