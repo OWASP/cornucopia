@@ -14,6 +14,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 # The generator adds its own directory to sys.path at runtime and imports its
 # modules flat. Doing the same here exercises the real import path.
@@ -23,6 +24,7 @@ if _PDF_GENERATION not in sys.path:
     sys.path.insert(0, _PDF_GENERATION)
 
 import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
+import check_environment  # noqa: E402
 import merge_pdfs  # noqa: E402
 
 # Repeated fixture values, named once so a change lands in one place.
@@ -537,6 +539,59 @@ class TestCleanIntermediates(unittest.TestCase):
         os.remove(self.cards[0])
         removed, _freed = self._clean()
         self.assertEqual(removed, 8)
+
+
+class TestCheckEnvironment(unittest.TestCase):
+    def test_check_required_marks_other_interpreter_modules_as_not_needed(self) -> None:
+        original_import = __import__
+
+        def fake_import(name, *args, **kwargs):
+            if name in {"qrcode", "png", "pymupdf"}:
+                raise ImportError("missing for test")
+            return original_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=fake_import):
+            lines, missing = check_environment.check_required(False)
+
+        self.assertTrue(any("not needed  qrcode" in line for line in lines))
+        self.assertTrue(any("not needed  png" in line for line in lines))
+        self.assertIn("pymupdf", missing)
+
+    def test_check_optional_reports_missing_modules_without_failing(self) -> None:
+        original_import = __import__
+
+        def fake_import(name, *args, **kwargs):
+            if name == "defusedxml":
+                raise ImportError("missing for test")
+            return original_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=fake_import):
+            lines = check_environment.check_optional()
+
+        self.assertTrue(any("not found   defusedxml" in line for line in lines))
+
+    def test_report_includes_interpreter_context_and_package_section(self) -> None:
+        with mock.patch.object(check_environment, "check_required", return_value=(["  found       yaml"], [])):
+            with mock.patch.object(check_environment, "check_optional", return_value=["  found       defusedxml"]):
+                text = check_environment.report()
+
+        self.assertIn("Running inside: plain Python (not Scribus)", text)
+        self.assertIn("Python version :", text)
+        self.assertIn("Where this interpreter looks for packages:", text)
+        self.assertIn("Packages this interpreter needs:", text)
+        self.assertIn("  found       yaml", text)
+        self.assertIn("Optional:", text)
+        self.assertIn("All packages this interpreter needs are present.", text)
+
+    def test_report_explains_missing_packages(self) -> None:
+        with mock.patch.object(
+            check_environment, "check_required", return_value=(["  MISSING     yaml      install pyyaml"], ["yaml"])
+        ):
+            with mock.patch.object(check_environment, "check_optional", return_value=[]):
+                text = check_environment.report()
+
+        self.assertIn("Missing: yaml", text)
+        self.assertIn("These must be installed into THIS interpreter", text)
 
 
 if __name__ == "__main__":

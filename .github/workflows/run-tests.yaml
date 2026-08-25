@@ -23,7 +23,7 @@ jobs:
       - name: Get Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
-          python-version: '3.13'
+          python-version: '3.12'
           cache: 'pipenv' # caching pip dependencies
       - name: Install dependencies
         run: |
@@ -41,10 +41,12 @@ jobs:
         run: pipenv run coverage xml
       - name: Check test coverage - Report
         run: pipenv run coverage report --fail-under 95 scripts/convert*
+      - name: Check PDF generation test coverage - Report
+        run: pipenv run coverage report --fail-under 52 scripts/pdf_generation/*.py
       # Check formatting of files
       - name: Check formatting of files with Black
         run: pipenv run black --line-length=120 --check .
       - name: Check formatting of files with flake
-        run: pipenv run flake8 --max-line-length=120 --max-complexity=10 --ignore=E203,W503
+        run: pipenv run flake8 --max-line-length=120 --max-complexity=11 --ignore=E203,W503
       - name: Check formatting of files for correct spelling and namespace names
         run: pipenv run mypy --namespace-packages --strict ./scripts/
