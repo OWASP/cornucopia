@@ -349,7 +349,17 @@ Before you push your changes please format files with
 make fmt
 ```
 
-The `make` targets use Bash and the Unix Docker socket. They run directly on Ubuntu and macOS. On Windows, run them from a WSL2 distribution with Docker Desktop WSL integration enabled. Native Windows PowerShell and Command Prompt users can use the commands in the next section instead.
+#### Make Targets on Windows
+
+The `make` targets use Bash and the Unix Docker socket. They run directly on Ubuntu and macOS. On Windows, run `make` only from a WSL2 distribution with Docker Desktop WSL integration enabled; PowerShell and Command Prompt do not support these targets.
+
+To set up a WSL2 development environment, install a distribution with `wsl --install`, then install the prerequisites inside that distribution:
+
+```bash
+sudo apt update
+sudo apt install --yes make git-lfs
+git lfs install
+```
 
 #### Coding Style Check on Windows
 

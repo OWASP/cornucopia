@@ -62,7 +62,9 @@ git lfs pull
 git lfs fsck
 ```
 
-`git lfs pull` repairs an existing clone created before Git LFS was installed. `git lfs fsck` verifies the locally checked out LFS objects.
+`git lfs install` installs Git LFS checkout hooks, which automatically hydrate tracked assets after future clone, checkout, pull, and merge operations. `git lfs pull` repairs an existing clone created before Git LFS was installed. `git lfs fsck` verifies the locally checked out LFS objects.
+
+Git does not run repository-provided setup code during clone, so each developer must install Git LFS once. The command above is supported by Windows, macOS, and Ubuntu wherever Git is installed.
 
 Git tracks executable permissions for the shell scripts used by CI and Copi. Ubuntu and macOS restore these modes automatically from the repository index. Batch files are checked out with CRLF line endings for Windows; Windows does not use POSIX executable permissions for `.bat` files.
 
