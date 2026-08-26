@@ -361,14 +361,6 @@ sudo apt install --yes make git-lfs
 git lfs install
 ```
 
-Run `make verify-checkout` before local builds to verify that Git LFS assets are hydrated and that required scripts have the expected Git modes. The Python test targets run this check automatically.
-
-For native Windows PowerShell or Command Prompt, use the verifier directly from the repository root:
-
-```powershell
-python scripts/verify_checkout.py
-```
-
 #### Coding Style Check on Windows
 
 Install shfmt

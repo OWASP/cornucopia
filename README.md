@@ -60,12 +60,11 @@ git clone https://github.com/OWASP/cornucopia.git
 cd cornucopia
 git lfs pull
 git lfs fsck
-python scripts/verify_checkout.py
 ```
 
-`git lfs install` installs Git LFS checkout hooks, which automatically hydrate tracked assets after future clone, checkout, pull, and merge operations. `git lfs pull` repairs an existing clone created before Git LFS was installed. `git lfs fsck` verifies the locally checked out LFS objects. `python scripts/verify_checkout.py` verifies that LFS files are hydrated and required scripts retain their executable mode in Git's index; CI runs this check before builds and releases generate files.
+`git lfs install` installs Git LFS checkout hooks, which automatically hydrate tracked assets after future clone, checkout, pull, and merge operations. `git lfs pull` repairs an existing clone created before Git LFS was installed. `git lfs fsck` verifies the locally checked out LFS objects.
 
-Git does not run repository-provided setup code during clone, so each developer must install Git LFS once. The command above is supported by Windows, macOS, and Ubuntu wherever Python and Git are installed.
+Git does not run repository-provided setup code during clone, so each developer must install Git LFS once. The command above is supported by Windows, macOS, and Ubuntu wherever Git is installed.
 
 Git tracks executable permissions for the shell scripts used by CI and Copi. Ubuntu and macOS restore these modes automatically from the repository index. Batch files are checked out with CRLF line endings for Windows; Windows does not use POSIX executable permissions for `.bat` files.
 
