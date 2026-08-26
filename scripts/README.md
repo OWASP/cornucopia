@@ -349,6 +349,8 @@ Before you push your changes please format files with
 make fmt
 ```
 
+The `make` targets use Bash and the Unix Docker socket. They run directly on Ubuntu and macOS. On Windows, run them from a WSL2 distribution with Docker Desktop WSL integration enabled. Native Windows PowerShell and Command Prompt users can use the commands in the next section instead.
+
 #### Coding Style Check on Windows
 
 Install shfmt
