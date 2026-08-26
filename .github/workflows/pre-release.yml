@@ -21,6 +21,8 @@
             uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
             with:
               lfs: true
+          - name: Verify repository checkout
+            run: python3 scripts/verify_checkout.py
           # Set the pip environment up
           - name: Get Python
             uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
@@ -49,6 +51,11 @@
             run: pipenv run coverage report --fail-under 85 scripts/convert*
           - name: Check PDF generation test coverage - Report
             run: pipenv run coverage report --fail-under 52 scripts/pdf_generation/*.py
+          - name: Check checkout verifier coverage
+            run: |
+              rm -f .coverage
+              pipenv run coverage run --branch --source=scripts.verify_checkout -m unittest tests.scripts.verify_checkout_utest
+              pipenv run coverage report --fail-under 95
           # Upload Code Coverage for Codeclimate
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:

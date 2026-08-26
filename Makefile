@@ -16,7 +16,7 @@ RETRY_DELAY = 0.01
 PYTHON_TEST_PATTERN ?= "*_?test.py" # Default to all types of tests
 PYTHON_COVERAGE_MIN = 85 # %
 
-.PHONY: shfmt shellcheck pipenv
+.PHONY: shfmt shellcheck pipenv verify-checkout
 shfmt shellcheck pipenv:
 	@docker build \
 		--tag $@ \
@@ -26,6 +26,9 @@ shfmt shellcheck pipenv:
 		--build-arg "workdir=${PWD}" \
 		--target $@ . \
 		>/dev/null
+
+verify-checkout:
+	@python3 scripts/verify_checkout.py
 
 .PHONY: fmt
 fmt: shfmt pipenv
@@ -50,7 +53,7 @@ test: python-unit-test python-integration-test coverage-check
 	@$(MAKE) -C docker smoke-test
 
 .PHONY: python-test
-python-test: pipenv
+python-test: verify-checkout pipenv
 	@$(DOCKER) pipenv run coverage run \
 		--append \
 		--branch \
@@ -73,6 +76,9 @@ python-integration-test:
 python-coverage-only:
 	@$(DOCKER) pipenv run coverage xml
 	@$(DOCKER) pipenv run coverage report --fail-under $(PYTHON_COVERAGE_MIN)
+	@rm -f .coverage
+	@$(DOCKER) pipenv run coverage run --branch --source=scripts.verify_checkout -m unittest tests.scripts.verify_checkout_utest
+	@$(DOCKER) pipenv run coverage report --fail-under 95
 
 .PHONY: python-coverage
 python-coverage:

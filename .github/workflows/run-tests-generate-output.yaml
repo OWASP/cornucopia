@@ -40,6 +40,8 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           persist-credentials: false
           lfs: true
+      - name: Verify repository checkout
+        run: python3 scripts/verify_checkout.py
       # Set the pip environment up
       - name: Get Python
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
