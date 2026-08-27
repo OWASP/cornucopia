@@ -17,7 +17,7 @@ meta:
     "instructions2",
     "deck"
     ]
-  templates: ["tarot"]
+  templates: ["tarot", "bridge"]
   languages: ["en", "es", "ru"]
 suits:
 - 
