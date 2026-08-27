@@ -1,5 +1,6 @@
 import argparse
 import fnmatch
+import html
 import logging
 import os
 import platform
@@ -9,7 +10,6 @@ import sys
 import subprocess
 import yaml
 import zipfile
-import xml.etree.ElementTree as ElTree
 from defusedxml import ElementTree as DefusedElTree
 from typing import Any, Dict, List, Optional, Tuple, cast
 from operator import itemgetter
@@ -969,12 +969,13 @@ def get_template_for_edition(
     """Get template document for the specified edition."""
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
+    input_is_absolute = bool(args_input_file) and os.path.isabs(args_input_file)
     sfile_ext = "idml"
     if layout == "guide":
         sfile_ext = "odt"
     if args_input_file:
         # Input file was specified
-        if os.path.isabs(args_input_file):
+        if input_is_absolute:
             template_doc = args_input_file
         elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file):
             template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_input_file)
@@ -1015,7 +1016,8 @@ def get_template_for_edition(
             logging.info(f" --- Using generic template (no language-specific found): {generic_template_doc}")
 
     template_doc = template_doc.replace("\\ ", " ")
-    template_doc = str(Path(sanitize_filepath(template_doc)))
+    if not input_is_absolute:
+        template_doc = str(Path(sanitize_filepath(template_doc)))
     if os.path.isfile(template_doc):
         template_doc = check_fix_file_extension(template_doc, sfile_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
@@ -1287,7 +1289,7 @@ def replace_docx_inline_text(doc: Any, data: Dict[str, str]) -> Any:
     return doc
 
 
-def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
+def _find_xml_elements(tree: Any) -> List[Any]:
     """Identify elements likely to contain text to replace for IDML and ODT."""
     namespaces = {
         "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
@@ -1297,11 +1299,11 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     elements.extend(tree.findall(".//text:p", namespaces))
     elements.extend(tree.findall(".//text:span", namespaces))
     if not elements:
-        return cast(List[ElTree.Element], tree.findall(".//*"))
-    return cast(List[ElTree.Element], elements)
+        return cast(List[Any], tree.findall(".//*"))
+    return cast(List[Any], elements)
 
 
-def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
+def _replace_element_text(el: Any, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
     """Replace text and tail text in an XML element."""
     if el.text:
         new_text = get_replacement_value_from_dict(el.text, replacement_values)
@@ -1318,7 +1320,7 @@ def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str
 
 
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
-    """Replace text in XML file."""
+    """Replace text in XML file while preserving package-specific XML syntax."""
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
         tree = DefusedElTree.parse(filename)
@@ -1326,21 +1328,30 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return
 
-    root = tree.getroot()
-    if root is None:
+    if tree.getroot() is None:
         logging.error(f" --- The XML file has no root element: {filename}")
         return
 
-    elements_to_check = _find_xml_elements(tree)
+    with open(filename, "r", encoding="utf-8") as file:
+        source = file.read()
 
     modified = False
-    for el in elements_to_check:
-        modified = _replace_element_text(el, replacement_values, modified)
+
+    def replace_text_node(match: re.Match[str]) -> str:
+        nonlocal modified
+        text = html.unescape(match.group(1))
+        replacement = get_replacement_value_from_dict(text, replacement_values)
+        if replacement == text:
+            return match.group(0)
+        modified = True
+        return f">{html.escape(replacement, quote=False)}<"
+
+    result = re.sub(r">([^<]+)<", replace_text_node, source)
 
     if modified:
         try:
-            with open(filename, "bw") as f:
-                f.write(ElTree.tostring(root, encoding="utf-8"))
+            with open(filename, "w", encoding="utf-8", newline="") as file:
+                file.write(result)
         except Exception as e:
             logging.error(f"Failed to save modified XML file {filename}: {e}")
 
@@ -1348,10 +1359,16 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
 def zip_dir(path: str, zip_filename: str) -> None:
     """Zip all the files recursively from path into zip_filename (excluding root path)"""
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        for root, _, files in os.walk(os.path.normpath(path)):
-            for file in files:
-                f = str(Path(os.path.join(root, file)))
-                zip_file.write(f, f[len(path) :])  # noqa: E203
+        source_path = Path(path)
+        files = sorted(source_path.rglob("*"))
+        mimetype = source_path / "mimetype"
+        if mimetype.is_file():
+            zip_file.write(mimetype, "mimetype", compress_type=zipfile.ZIP_STORED)
+
+        for file in files:
+            if not file.is_file() or file == mimetype:
+                continue
+            zip_file.write(file, file.relative_to(source_path).as_posix())
 
 
 if __name__ == "__main__":
