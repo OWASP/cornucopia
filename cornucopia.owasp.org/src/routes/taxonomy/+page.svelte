@@ -1,12 +1,11 @@
 <script>
     import { Text } from "$lib/utils/text";
     import { resolve } from "$app/paths";
-    import {readLang, readTranslation} from "$lib/stores/stores";
+    import {readLang} from "$lib/stores/stores";
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import SvelteMarkdown from "svelte-markdown";
     /** @type {{data: any}} */
     let { data } = $props();
-    let t = readTranslation();
     const lang = readLang();
     let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
@@ -15,7 +14,7 @@
     <SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
 {/if}
 {#each data.categories as category (category)}
-    <p>â”œâ”€â”€<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+    <p>Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 </div>
 <style>

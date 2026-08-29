@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { Text } from "$lib/utils/text";
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "../../../domain/card/card";
@@ -24,13 +23,6 @@
     return isKnownCardId(card?.id)
   }
 
-  function getEdition(str: string) : string {
-    if (str == "webapp") return "Website App Edition";
-    if (str == "mobileapp") return "Mobile App Edition";
-    if (str == "companion") return "Companion Edition";
-    if (str == "eop") return "Elevation of Privilege Edition";
-    return str;
-  }
 </script>
 <div>
 {#if cardFound()}
