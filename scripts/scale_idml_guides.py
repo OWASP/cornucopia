@@ -27,7 +27,7 @@ import shutil
 import tempfile
 import zipfile
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, Match, Tuple
+from typing import Callable, Dict, Match, Tuple
 
 ATTRIBUTE_PATTERN = re.compile(r'([\w:]+)="([^"]*)"')
 GUIDE_PATTERN = re.compile(r"<Guide\b[^>]*(?:/>|>.*?</Guide>)", re.DOTALL)
@@ -294,9 +294,10 @@ def set_card_body_layout(target: Path) -> int:
             story,
         )
         if updated_story == story:
+            leading_prop = f'<Properties><Leading type="unit">{BODY_TEXT_LEADING:.6f}</Leading></Properties>'
             updated_story = updated_story.replace(
                 "</CharacterStyleRange>",
-                f'<Properties><Leading type="unit">{BODY_TEXT_LEADING:.6f}</Leading></Properties></CharacterStyleRange>',
+                f"{leading_prop}</CharacterStyleRange>",
                 1,
             )
         replacements[f"Stories/Story_{story_id}.xml"] = updated_story
@@ -461,7 +462,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main() -> int:
+def main() -> int:  # noqa: C901
     """Run the selected layout operation."""
     args = build_parser().parse_args()
     if not args.source.is_file() or not args.target.is_file():

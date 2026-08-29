@@ -15,17 +15,16 @@ from __future__ import annotations
 
 import re
 import shutil
-import tempfile
 import uuid
 import zipfile
 from pathlib import Path
-from typing import Dict, Tuple
+from typing import Callable, Dict, Tuple, Match
 
 # ---------------------------------------------------------------------------
 # Card-size constants (points)
 # ---------------------------------------------------------------------------
-TAROT_H = 342.0   # height (taller dimension)
-TAROT_W = 198.0   # width
+TAROT_H = 342.0  # height (taller dimension)
+TAROT_W = 198.0  # width
 BRIDGE_H = 246.614
 BRIDGE_W = 158.74
 BLEED_TAROT = 9.0
@@ -38,22 +37,23 @@ TEMPLATES_DIR = Path("resources/templates")
 
 # Source → Target pairs (tarot → bridge)
 TEMPLATE_PAIRS: list[Tuple[str, str]] = [
-    ("eop_ver_about_tarot_lang.idml",                      "eop_ver_about_bridge_lang.idml"),
-    ("eop_ver_instructions1_tarot_lang.idml",              "eop_ver_instructions1_bridge_lang.idml"),
-    ("eop_ver_instructions2_tarot_lang.idml",              "eop_ver_instructions2_bridge_lang.idml"),
-    ("eop_ver_strategy-cards_tarot_lang.idml",             "eop_ver_strategy-cards_bridge_lang.idml"),
-    ("eop_ver_threat-denialofsvc-cards_tarot_lang.idml",   "eop_ver_threat-denialofsvc-cards_bridge_lang.idml"),
-    ("eop_ver_threat-elevofpriv-cards_tarot_lang.idml",    "eop_ver_threat-elevofpriv-cards_bridge_lang.idml"),
-    ("eop_ver_threat-infodisclosure-cards_tarot_lang.idml","eop_ver_threat-infodisclosure-cards_bridge_lang.idml"),
-    ("eop_ver_threat-repudation-cards_tarot_lang.idml",    "eop_ver_threat-repudation-cards_bridge_lang.idml"),
-    ("eop_ver_threat-spoofing-cards_tarot_lang.idml",      "eop_ver_threat-spoofing-cards_bridge_lang.idml"),
-    ("eop_ver_threat-tampering-cards_tarot_lang.idml",     "eop_ver_threat-tampering-cards_bridge_lang.idml"),
-    ("eop_ver_deck_tarot_lang.idml",                       "eop_ver_deck_bridge_lang.idml"),
+    ("eop_ver_about_tarot_lang.idml", "eop_ver_about_bridge_lang.idml"),
+    ("eop_ver_instructions1_tarot_lang.idml", "eop_ver_instructions1_bridge_lang.idml"),
+    ("eop_ver_instructions2_tarot_lang.idml", "eop_ver_instructions2_bridge_lang.idml"),
+    ("eop_ver_strategy-cards_tarot_lang.idml", "eop_ver_strategy-cards_bridge_lang.idml"),
+    ("eop_ver_threat-denialofsvc-cards_tarot_lang.idml", "eop_ver_threat-denialofsvc-cards_bridge_lang.idml"),
+    ("eop_ver_threat-elevofpriv-cards_tarot_lang.idml", "eop_ver_threat-elevofpriv-cards_bridge_lang.idml"),
+    ("eop_ver_threat-infodisclosure-cards_tarot_lang.idml", "eop_ver_threat-infodisclosure-cards_bridge_lang.idml"),
+    ("eop_ver_threat-repudation-cards_tarot_lang.idml", "eop_ver_threat-repudation-cards_bridge_lang.idml"),
+    ("eop_ver_threat-spoofing-cards_tarot_lang.idml", "eop_ver_threat-spoofing-cards_bridge_lang.idml"),
+    ("eop_ver_threat-tampering-cards_tarot_lang.idml", "eop_ver_threat-tampering-cards_bridge_lang.idml"),
+    ("eop_ver_deck_tarot_lang.idml", "eop_ver_deck_bridge_lang.idml"),
 ]
 
 # ---------------------------------------------------------------------------
 # Reference transformation derived from cards tarot → bridge diff
 # ---------------------------------------------------------------------------
+
 
 def _fmt(v: float) -> str:
     """Format a coordinate/size value, stripping insignificant trailing zeros."""
@@ -82,10 +82,10 @@ def _scale_4tuple(bounds_str: str) -> str:
     parts = bounds_str.split()
     if len(parts) != 4:
         return bounds_str
-    top    = _scale_number(parts[0], SCALE_H)
-    left   = _scale_number(parts[1], SCALE_W)
+    top = _scale_number(parts[0], SCALE_H)
+    left = _scale_number(parts[1], SCALE_W)
     bottom = _scale_number(parts[2], SCALE_H)
-    right  = _scale_number(parts[3], SCALE_W)
+    right = _scale_number(parts[3], SCALE_W)
     return f"{top} {left} {bottom} {right}"
 
 
@@ -95,10 +95,12 @@ def _rewrite_attr(xml: str, attr: str, new_val: str) -> str:
     return pat.sub(f'{attr}="{new_val}"', xml, count=1)
 
 
-def _rewrite_attr_all(xml: str, attr: str, transformer) -> str:
+def _rewrite_attr_all(xml: str, attr: str, transformer: Callable[[str], str]) -> str:
     """Replace every occurrence of an XML attribute using transformer(value)."""
-    def replace(m: re.Match) -> str:
+
+    def replace(m: Match[str]) -> str:
         return f'{attr}="{transformer(m.group(1))}"'
+
     return re.sub(rf'\b{re.escape(attr)}="([^"]*)"', replace, xml)
 
 
@@ -106,13 +108,16 @@ def _rewrite_attr_all(xml: str, attr: str, transformer) -> str:
 # Per-file transformation helpers
 # ---------------------------------------------------------------------------
 
+
 def _transform_preferences(xml: str) -> str:
     """Scale DocumentPreference page size and bleed in Resources/Preferences.xml."""
     xml = _rewrite_attr(xml, "PageHeight", _fmt(BRIDGE_H))
-    xml = _rewrite_attr(xml, "PageWidth",  _fmt(BRIDGE_W))
+    xml = _rewrite_attr(xml, "PageWidth", _fmt(BRIDGE_W))
     for bleed_attr in (
-        "DocumentBleedTopOffset", "DocumentBleedBottomOffset",
-        "DocumentBleedInsideOrLeftOffset", "DocumentBleedOutsideOrRightOffset",
+        "DocumentBleedTopOffset",
+        "DocumentBleedBottomOffset",
+        "DocumentBleedInsideOrLeftOffset",
+        "DocumentBleedOutsideOrRightOffset",
     ):
         xml = _rewrite_attr(xml, bleed_attr, _fmt(BLEED_BRIDGE))
     return xml
@@ -135,6 +140,7 @@ def _scale_stroke_weight(v: str) -> str:
 
 def _transform_styles(xml: str) -> str:
     """Rescale point sizes, leading, stroke weights in Resources/Styles.xml."""
+
     # Regenerate StyleUniqueId so InDesign treats bridge as a distinct document
     def new_uuid(_: str) -> str:
         return str(uuid.uuid4())
@@ -142,15 +148,16 @@ def _transform_styles(xml: str) -> str:
     xml = _rewrite_attr_all(xml, "StyleUniqueId", new_uuid)
 
     # Scale numeric size attributes
-    for attr in ("PointSize", "RuleAboveLineWeight", "RuleBelowLineWeight",
-                 "StrokeWeight", "KerningValue"):
-        def scale_val(v: str, _attr=attr) -> str:  # noqa: E731
-            if v in ("1e+11",):   # special InDesign sentinel – leave alone
+    for attr in ("PointSize", "RuleAboveLineWeight", "RuleBelowLineWeight", "StrokeWeight", "KerningValue"):
+
+        def scale_val(v: str, _attr: str = attr) -> str:  # noqa: E731
+            if v in ("1e+11",):  # special InDesign sentinel – leave alone
                 return v
             try:
                 return _fmt(float(v) * SCALE_H)
             except ValueError:
                 return v
+
         xml = _rewrite_attr_all(xml, attr, scale_val)
 
     return xml
@@ -182,48 +189,48 @@ def _transform_spread(xml: str) -> str:
 
     # Scale Anchor / LeftDirection / RightDirection (x y pairs)
     for coord_attr in ("Anchor", "LeftDirection", "RightDirection"):
-        xml = _rewrite_attr_all(xml, coord_attr,
-                                lambda v: _scale_pair(v, SCALE_W, SCALE_H))
+        xml = _rewrite_attr_all(xml, coord_attr, lambda v: _scale_pair(v, SCALE_W, SCALE_H))
 
     # Scale StrokeWeight
-    xml = _rewrite_attr_all(xml, "StrokeWeight",
-                            lambda v: _scale_number(v, SCALE_H))
+    xml = _rewrite_attr_all(xml, "StrokeWeight", lambda v: _scale_number(v, SCALE_H))
 
     # Scale MarginPreference columns / ColumnGutter (use SCALE_W)
     for margin_attr in ("Top", "Bottom", "Left", "Right", "ColumnGutter"):
-        xml = _rewrite_attr_all(xml, margin_attr,
-                                lambda v: _scale_number(v, SCALE_W))
+        xml = _rewrite_attr_all(xml, margin_attr, lambda v: _scale_number(v, SCALE_W))
 
     # Scale GridDataInformation PointSize
     xml = _rewrite_attr_all(xml, "PointSize", _scale_point_size)
 
     # Scale TextColumnFixedWidth / TextColumnGutter / MinimumFirstBaselineOffset
     for tf_attr in ("TextColumnFixedWidth", "TextColumnGutter"):
-        xml = _rewrite_attr_all(xml, tf_attr,
-                                lambda v: _scale_number(v, SCALE_W))
+        xml = _rewrite_attr_all(xml, tf_attr, lambda v: _scale_number(v, SCALE_W))
 
     # Scale ColumnsPositions (space-separated list)
     def scale_cols(v: str) -> str:
         return " ".join(_scale_number(x, SCALE_W) for x in v.split())
+
     xml = _rewrite_attr_all(xml, "ColumnsPositions", scale_cols)
 
     # Scale GradientFillStart / GradientFillLength / GradientStrokeStart
     for gattr in ("GradientFillStart", "GradientStrokeStart"):
-        xml = _rewrite_attr_all(xml, gattr,
-                                lambda v: _scale_pair(v, SCALE_W, SCALE_H))
-    for gattr in ("GradientFillLength", "GradientStrokeLength",
-                  "GradientFillHiliteLength", "GradientStrokeHiliteLength"):
-        xml = _rewrite_attr_all(xml, gattr,
-                                lambda v: _scale_number(v, SCALE_H))
+        xml = _rewrite_attr_all(xml, gattr, lambda v: _scale_pair(v, SCALE_W, SCALE_H))
+    for gattr in (
+        "GradientFillLength",
+        "GradientStrokeLength",
+        "GradientFillHiliteLength",
+        "GradientStrokeHiliteLength",
+    ):
+        xml = _rewrite_attr_all(xml, gattr, lambda v: _scale_number(v, SCALE_H))
 
     return xml
 
 
 def _transform_story(xml: str) -> str:
     """Scale Leading values in Stories/*.xml."""
-    def scale_leading(m: re.Match) -> str:
+
+    def scale_leading(m: Match[str]) -> str:
         tag_open = m.group(1)
-        value    = m.group(2)
+        value = m.group(2)
         tag_close = m.group(3)
         try:
             scaled = _fmt(float(value) * SCALE_H)
@@ -232,7 +239,7 @@ def _transform_story(xml: str) -> str:
         return f"{tag_open}{scaled}{tag_close}"
 
     return re.sub(
-        r'(<Leading[^>]*>)([^<]+)(</Leading>)',
+        r"(<Leading[^>]*>)([^<]+)(</Leading>)",
         scale_leading,
         xml,
     )
@@ -243,8 +250,8 @@ def _transform_metadata(xml: str) -> str:
     # New DocumentID
     new_id = f"xmp.did:{uuid.uuid4()}"
     xml = re.sub(
-        r'(<xmpMM:DocumentID>)[^<]*(</xmpMM:DocumentID>)',
-        rf'\g<1>{new_id}\g<2>',
+        r"(<xmpMM:DocumentID>)[^<]*(</xmpMM:DocumentID>)",
+        rf"\g<1>{new_id}\g<2>",
         xml,
     )
     # Leave timestamps as-is (they reflect original InDesign save time)
@@ -254,6 +261,7 @@ def _transform_metadata(xml: str) -> str:
 # ---------------------------------------------------------------------------
 # Package rewriter
 # ---------------------------------------------------------------------------
+
 
 def _rewrite_package(src_path: Path, dst_path: Path) -> None:
     """Read src_path, apply transformations, write result to dst_path."""
@@ -288,8 +296,7 @@ def _rewrite_package(src_path: Path, dst_path: Path) -> None:
         # Write output archive
         tmp = dst_path.parent / (dst_path.name + ".tmp")
         try:
-            with zipfile.ZipFile(src_path) as zsrc, \
-                 zipfile.ZipFile(tmp, "w") as zout:
+            with zipfile.ZipFile(src_path) as zsrc, zipfile.ZipFile(tmp, "w") as zout:
                 for info in zsrc.infolist():
                     data = replacements.get(info.filename)
                     if data is not None:
@@ -305,6 +312,7 @@ def _rewrite_package(src_path: Path, dst_path: Path) -> None:
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     for tarot_name, bridge_name in TEMPLATE_PAIRS:
