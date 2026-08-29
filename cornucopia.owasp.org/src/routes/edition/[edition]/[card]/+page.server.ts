@@ -5,27 +5,44 @@ import type { Route } from "$domain/routes/route";
 import { MappingService } from "$lib/services/mappingService";
 import { CapecService } from "$lib/services/capecService";
 import { getCardImagesByEdition, getSuitStylingByEdition } from "$lib/services/cardAppearanceLoader";
+import { Text } from "$lib/utils/text.js";
+import type { PageMetadata } from "$lib/types/metadata.js";
+import type { PageServerLoad } from './$types';
 
 export const load = (({ params }) => {
-    const edition =  params?.edition;
+    const edition = params?.edition;
     const version = DeckService.getLatestVersion(edition);
     const asvsVersion = version === '3.0' ? '5.0' : '4.0.3';
     if (!DeckService.hasEdition(edition)) error(
       404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
-    
-    // Load CAPEC data for webapp v3.0+
+
     let capecData = undefined;
     if (edition === 'webapp' && parseFloat(version) >= 3.0) {
       capecData = CapecService.getCapecData(edition, version);
     }
-    
+
+    const fixedCode = legacyCardCodeFix(params.card.toUpperCase());
+    const cards = new DeckService().getCardDataForEditionVersionLang(edition, version, 'en');
+    const card = cards.get(fixedCode);
+
+    const metadata: PageMetadata = {
+        title: card
+            ? `OWASP Cornucopia - ${Text.convertToTitleCase(card.suitName)} (${fixedCode})`
+            : `OWASP Cornucopia - ${edition}`,
+        description: card?.desc || `OWASP Cornucopia ${edition} card ${fixedCode}`,
+        keywords: `OWASP, Cornucopia, ${edition}, ${fixedCode}`,
+        canonicalUrl: `https://cornucopia.owasp.org/edition/${encodeURIComponent(edition)}/${encodeURIComponent(fixedCode)}`,
+        type: 'website',
+    };
+
     return {
-      edition: edition,
-      version: version,
+      metadata,
+      edition,
+      version,
       versions: DeckService.getVersions(edition),
       lang: 'en',
-      card: legacyCardCodeFix(params.card.toUpperCase()),
-      cards: new DeckService().getCardDataForEditionVersionLang(edition, version, 'en'),
+      card: fixedCode,
+      cards,
       routes: new Map<string, Route[]>([
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
@@ -36,12 +53,8 @@ export const load = (({ params }) => {
       suitStyling: getSuitStylingByEdition()
     };
 
-    // Some QR code errors where done on the first printed decks. This will compensate for that.
     function legacyCardCodeFix(card: string) {
-      return card.replace('COM', 'CM')
-        .replace('CO', 'C')
-        .replace('DVE', 'VE')
-        .replace('AC', 'AT');
+      return card.replace('COM', 'CM').replace('CO', 'C').replace('DVE', 'VE').replace('AC', 'AT');
     }
-  
+
 }) satisfies PageServerLoad;

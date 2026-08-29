@@ -9,16 +9,6 @@
     const lang = readLang();
     let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
-<svelte:head>
-    <link rel="canonical" href="https://cornucopia.owasp.org/roadmap" />
-    <title>{$t('source.head.title')}</title>
-	<meta name="description" content="{$t('source.head.description')}" />
-	<meta name="keywords" content="{$t('source.head.keywords')}" />
-    <meta property="og:title" content="{$t('source.head.title')}">
-    <meta property="og:description" content="{$t('source.head.description')}">
-    <meta name="twitter:title" content="{$t('source.head.title')}">
-    <meta name="twitter:description" content="{$t('source.head.description')}">
-</svelte:head>
 <div>
 {#if content != ''}
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>

@@ -55,17 +55,6 @@
     });
 </script>
 
-<svelte:head>
-    <title>{$t("printing.head.title")}</title>
-    <link rel="canonical" href="https://cornucopia.owasp.org/news" />
-    <meta name="description" content={$t("news.head.description")} />
-    <meta name="keywords" content={$t("news.head.keywords")} />
-    <meta property="og:title" content={$t("news.head.title")} />
-    <meta property="og:description" content={$t("news.head.description")} />
-    <meta name="twitter:title" content={$t("news.head.title")} />
-    <meta name="twitter:description" content={$t("news.head.description")} />
-</svelte:head>
-
 <div>
     {#each groupedList as group (group.year)}
         <h2 class="year-heading">{group.year}</h2>
@@ -85,9 +74,9 @@
                         <div class="card-text">
                             <span class="title">{Text.Format(post.title)}</span>
                             <span class="meta">
-                                {Text.FormatDate(post.date)} • {post.author}
+                                {Text.FormatDate(post.date)} â€¢ {post.author}
                             </span>
-                            <span class="readmore">Read more →</span>
+                            <span class="readmore">Read more â†’</span>
                         </div>
                     </div>
                 </a>

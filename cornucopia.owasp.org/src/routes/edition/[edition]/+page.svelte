@@ -87,16 +87,6 @@
         goto(`/card/${versionParam}`);
     }
 </script>
-<svelte:head>
-    <title>{$t('cards.head.title')}</title>
-    <link rel="canonical" href={`https://cornucopia.owasp.org/card/${version}`} />
-    <meta name="description" content="{$t('cards.head.description')}" />
-	<meta name="keywords" content="{$t('cards.head.keywords')}" />
-    <meta property="og:title" content="{$t('cards.head.title')}">
-    <meta property="og:description" content="{$t('cards.head.description')}">
-    <meta name="twitter:title" content="{$t('cards.head.title')}">
-    <meta name="twitter:description" content="{$t('cards.head.description')}">
-</svelte:head>
 <div>
 <section title="OWASP Cornucopia decks" id="decks">
 {#if content != ''}

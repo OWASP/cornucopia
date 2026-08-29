@@ -10,22 +10,12 @@
     const lang = readLang();
     let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
-<svelte:head>
-    <link rel="canonical" href="https://cornucopia.owasp.org/taxonomy" />
-    <title>{$t('taxonomy.head.title')}</title>
-	<meta name="description" content="{$t('taxonomy.head.description')}" />
-	<meta name="keywords" content="{$t('taxonomy.head.keywords')}" />
-    <meta property="og:title" content="{$t('taxonomy.head.title')}">
-    <meta property="og:description" content="{$t('taxonomy.head.description')}">
-    <meta name="twitter:title" content="{$t('taxonomy.head.title')}">
-    <meta name="twitter:description" content="{$t('taxonomy.head.description')}">
-</svelte:head>
 <div>
 {#if content != ''}
     <SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
 {/if}
 {#each data.categories as category (category)}
-    <p>├──<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+    <p>â”œâ”€â”€<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 </div>
 <style>

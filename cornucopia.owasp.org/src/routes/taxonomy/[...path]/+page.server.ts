@@ -1,16 +1,15 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 import path from "path";
+import type { PageMetadata } from "$lib/types/metadata.js";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ url }) {
   const lang = 'en';
   const [categories, content] = FileSystemHelper.getDataByRoute(url.pathname, lang);
 
-  // Resolve the canonical path for GitHub links
   let route = url.pathname;
   if (!route.includes(`taxonomy/${lang}`)) route = route.replace(/taxonomy\/?/, `taxonomy/${lang}/`);
 
-  // Resolve actual casing using FileSystemHelper
   // @ts-expect-error: type override required
   const baseDataPath = path.join(FileSystemHelper.root, "data");
   // @ts-expect-error: type override required
@@ -18,12 +17,23 @@ export async function load({ url }) {
   // @ts-expect-error: type override required
   const truePath = path.relative(FileSystemHelper.root, resolvedFullPath).replace(/\\/g, '/');
 
+  const pageTitle = FileSystemHelper.getCurrentPageNameByRoute(url.pathname as string);
+
+  const metadata: PageMetadata = {
+      title: `${pageTitle} | OWASP Cornucopia Taxonomy`,
+      description: pageTitle,
+      keywords: 'OWASP, Cornucopia, taxonomy, threat modeling, requirements',
+      canonicalUrl: `https://cornucopia.owasp.org${encodeURI(url.pathname)}`,
+      type: 'website',
+  };
+
   return {
-    categories: categories,
-    content: content,
+    metadata,
+    categories,
+    content,
     path: url.pathname,
-    truePath: truePath,
-    title: FileSystemHelper.getCurrentPageNameByRoute(url.pathname as string),
+    truePath,
+    title: pageTitle,
     timestamp: new Date().toUTCString(),
   };
 }

@@ -7,16 +7,6 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
-<svelte:head>
-    <link rel="canonical" href="/taxonomy" />
-    <title>{data.title}</title>
-	<meta name="description" content="{Text.Format(data.title)}" />
-	<meta name="keywords" content="cornucopia, threat modeling, taxonomy, requirements" />
-    <meta property="og:title" content="{Text.Format(data.title)}">
-    <meta property="og:description" content="{Text.Format(data.title)}">
-    <meta name="twitter:title" content="{Text.Format(data.title)}">
-    <meta name="twitter:description" content="{Text.Format(data.title)}">
-</svelte:head>
 {#if data.categories.length != 0 }
 <h1 class="clickable" title="{Text.Format(data.title)}" id="{data.title}">{Text.Format(data.title)}</h1>
 {/if}
@@ -24,7 +14,7 @@
 
 <!--The location is a folder -->
 {#each data.categories as category (category)}
-    <p>├──<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+    <p>â”œâ”€â”€<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 
 <!--The location is filecontent -->
