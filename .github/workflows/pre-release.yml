@@ -47,6 +47,8 @@
               pipenv run coverage xml -o converter/coverage/cobertura.xml
           - name: Check test coverage - Report
             run: pipenv run coverage report --fail-under 85 scripts/convert*
+          - name: Check PDF generation test coverage - Report
+            run: pipenv run coverage report --fail-under 52 scripts/pdf_generation/*.py
           # Upload Code Coverage for Codeclimate
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:
@@ -74,6 +76,16 @@
               cp -rf ./resources/templates/Fonts/OpenSans/* output/eop/Fonts/
               pipenv run python scripts/convert.py -t tarot -l en -lt deck -v 5.0 -e eop  -i ./resources/templates/eop_ver_deck_tarot_lang.idml -o ./output/eop/eop-5.0-deck-en.idml
               pipenv run python scripts/convert.py -t tarot -l es -lt deck -v 5.0 -e eop  -i ./resources/templates/eop_ver_deck_tarot_lang.idml -o ./output/eop/eop-5.0-deck-es.idml
+              mkdir -p output/eop-bridge-en/Links output/eop-bridge-en/Fonts
+              mkdir -p output/eop-bridge-es/Links output/eop-bridge-es/Fonts
+              cp -rf ./resources/templates/Links/eop output/eop-bridge-en/Links/
+              cp -rf ./resources/templates/Fonts/Selawik/* ./resources/templates/Fonts/OpenSans/* output/eop-bridge-en/Fonts/
+              cp -rf output/eop-bridge-en/Links output/eop-bridge-es/
+              cp -rf output/eop-bridge-en/Fonts output/eop-bridge-es/
+              pipenv run python scripts/convert.py -t bridge -l en -lt cards -v 5.0 -e eop -i ./resources/templates/eop_ver_cards_bridge_lang.idml -o ./output/eop-bridge-en/eop-5.0-cards-bridge-en.idml
+              pipenv run python scripts/convert.py -t bridge -l es -lt cards -v 5.0 -e eop -i ./resources/templates/eop_ver_cards_bridge_lang.idml -o ./output/eop-bridge-es/eop-5.0-cards-bridge-es.idml
+              zip -r output/eop-5.0-cards-bridge-en.zip output/eop-bridge-en
+              zip -r output/eop-5.0-cards-bridge-es.zip output/eop-bridge-es
               pipenv run python scripts/convert.py -t tarot -l en -lt instructions1 -v 5.0 -e eop  -i ./resources/templates/eop_ver_instructions1_tarot_lang.idml -o ./output/eop/1_instructionCard1.idml
               pipenv run python scripts/convert.py -t tarot -l en -lt instructions2 -v 5.0 -e eop  -i ./resources/templates/eop_ver_instructions2_tarot_lang.idml -o ./output/eop/1_instructionCard2.idml
               pipenv run python scripts/convert.py -t tarot -l en -lt strategy-cards -v 5.0 -e eop  -i ./resources/templates/eop_ver_strategy-cards_tarot_lang.idml -o ./output/eop/2_StrategyCard.idml
@@ -188,6 +200,8 @@
                 README.md
                 creative-commons-attribution-3.0.txt
                 output/eop-5.0.zip
+                output/eop-5.0-cards-bridge-en.zip
+                output/eop-5.0-cards-bridge-es.zip
                 output/owasp_cornucopia_mobileapp_1.1_en.zip
                 output/owasp_cornucopia_mobileapp_1.1_hi.zip
                 output/owasp_cornucopia_mobileapp_1.1_ru.zip

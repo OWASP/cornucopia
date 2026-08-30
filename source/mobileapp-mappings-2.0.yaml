@@ -1,0 +1,1512 @@
+meta:
+  edition: mobileapp
+  component: mappings
+  language: ALL
+  version: 2.0
+  layouts: [cards, leaflet]
+  templates: [bridge_qr, bridge, tarot, tarot_qr]
+  languages: [en, ru]
+suits:
+- id: PC
+  name: Platform & Code
+  cards:
+  - id: PC2
+    value: '2'
+    url: https://cornucopia.owasp.org/cards/PC2
+    owasp_mastg: ['0289', '0290', '0291', '0292', '0293', '0294']
+    owasp_mastg_best: ['0014', '0015', '0017', '0018', '0033']
+    owasp_mastg_know: ['0053', '0099', '0076']
+    owasp_maswe: ['0038', '0034']
+    capec: [37, 155, 498, 648]
+    safecode: ['-']
+    threat:
+      '0038': Attackers can access sensitive data displayed on the screen.
+    attack_vector:
+      '0010': Accessing shared or external storage from any app holding the corresponding
+        permissions.
+      '0071': Capturing or recording the screen from another app or an external tool.
+      '0072': Accessing screenshots automatically taken by the system, e.g., when
+        the app moves to the background.
+  - id: PC3
+    value: '3'
+    url: https://cornucopia.owasp.org/cards/PC3
+    owasp_mastg: ['0316', '0320', '0346', '0347', '0378', '0390']
+    owasp_mastg_best: ['0028', '0044', '0059', '0060', '0069']
+    owasp_mastg_know: ['0018', '0121', '0141', '0076', '0139', '0082']
+    owasp_maswe: ['0036', '0001', '0034', '0066']
+    capec: [508]
+    safecode: ['-']
+    threat:
+      '0036': Attackers can capture sensitive data displayed or entered in the user
+        interface.
+      '0001': Attackers can access sensitive data stored unencrypted in private storage.
+      '0034': Attackers can access local files and app-private data from web content.
+      '0066': Apps and embedded third-party components can access more sensitive device
+        resources and data than needed.
+    attack_vector:
+      '0005': Accessing the device storage on a compromised device.
+      '0041': Reading sensitive data from the clipboard when users copy it between
+        apps.
+      '0043': Observing the device screen while sensitive data is displayed or entered
+        (shoulder surfing).
+      '0007': Accessing files exposed through incorrect file permissions or misconfigured
+        content providers.
+      '0008': Extracting local or cloud backups of the device.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
+        on insecure connections or a compromised website).
+      '0088': Holding excessive or no-longer-needed permissions granted to the app.
+      '0089': Using permissions granted to the host app to call protected APIs and
+        collect data from a third-party SDK.
+  - id: PC4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/PC4
+    owasp_mastg: ['0254', '0255', '0256', '0257', '0360', '0361', '0362', '0363']
+    owasp_mastg_best: ['0051']
+    owasp_mastg_know: ['0017', '0077']
+    owasp_maswe: ['0066']
+    capec: [634, 651]
+    safecode: [11]
+    threat:
+      '0066': Apps and embedded third-party components can access more sensitive device
+        resources and data than needed.
+    attack_vector:
+      '0088': Holding excessive or no-longer-needed permissions granted to the app.
+      '0089': Using permissions granted to the host app to call protected APIs and
+        collect data from a third-party SDK.
+  - id: PC5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/PC5
+    owasp_mastg: ['0372', '0374', '0375']
+    owasp_mastg_best: ['0056', '0057']
+    owasp_mastg_know: ['0025', '0138']
+    owasp_maswe: ['0032', '0050']
+    capec: [497, 499, 502]
+    safecode: [17]
+    threat:
+      '0032': Attackers can intercept or manipulate the app's intents.
+      '0050': Attackers can execute injection attacks against the app.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0049': Registering intent filters to intercept implicit intents sent by the
+        app.
+      '0050': Modifying or replaying mutable PendingIntents obtained from the app.
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+  - id: PC6
+    value: '6'
+    url: https://cornucopia.owasp.org/cards/PC6
+    owasp_mastg: ['0364', '0365', '0366', '0381']
+    owasp_mastg_best: ['0052', '0063']
+    owasp_mastg_know: ['0081', '0132', '0017', '0020', '0133', '0134']
+    owasp_maswe: ['0018', '0032']
+    capec: [94, 117, 499, 502, 504]
+    safecode: [8, 10, 11]
+    threat:
+      '0018': Attackers can access sensitive data and functionality exposed by app
+        components.
+      '0032': Attackers can intercept or manipulate the app's intents.
+    attack_vector:
+      '0038': Invoking exported or unprotected app components from another app installed
+        on the device.
+      '0039': Connecting to open ports or local services exposed by the app.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0049': Registering intent filters to intercept implicit intents sent by the
+        app.
+      '0050': Modifying or replaying mutable PendingIntents obtained from the app.
+  - id: PC7
+    value: '7'
+    url: https://cornucopia.owasp.org/cards/PC7
+    owasp_mastg: ['0339', '0355', '0356', '0357']
+    owasp_mastg_best: ['0039', '0049']
+    owasp_mastg_know: ['0104', '0117', '0020']
+    owasp_maswe: ['0050', '0018']
+    capec: [137, 499, 502, 586]
+    safecode: ['-']
+    threat:
+      '0050': Attackers can execute injection attacks against the app.
+      '0018': Attackers can access sensitive data and functionality exposed by app
+        components.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+      '0038': Invoking exported or unprotected app components from another app installed
+        on the device.
+      '0039': Connecting to open ports or local services exposed by the app.
+  - id: PC8
+    value: '8'
+    url: https://cornucopia.owasp.org/cards/PC8
+    owasp_mastg: ['0357']
+    owasp_mastg_best: ['0049']
+    owasp_mastg_know: ['0104', '0020', '0117']
+    owasp_maswe: ['0018']
+    capec: [126, 127, 139, 597, 643]
+    safecode: [16, 33]
+    threat:
+      '0018': Attackers can access sensitive data and functionality exposed by app
+        components.
+    attack_vector:
+      '0038': Invoking exported or unprotected app components from another app installed
+        on the device.
+      '0039': Connecting to open ports or local services exposed by the app.
+  - id: PC9
+    value: '9'
+    url: https://cornucopia.owasp.org/cards/PC9
+    owasp_mastg: ['0337', '0339', '0386', '0389']
+    owasp_mastg_best: ['0039', '0064', '0068', '0069']
+    owasp_mastg_know: ['0021', '0117', '0075', '0082', '0141']
+    owasp_maswe: ['0050', '0001', '0031']
+    capec: [137, 499, 502, 586]
+    safecode: ['-']
+    threat:
+      '0050': Attackers can execute injection attacks against the app.
+      '0031': Attackers can capture sensitive user input and content.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+      '0048': Capturing user input through a malicious custom keyboard or app extension.
+  - id: PCX
+    value: 10
+    url: https://cornucopia.owasp.org/cards/PCX
+    owasp_mastg: ['0245', '0272', '0273', '0274', '0275', '0382', '0383', '0384',
+      '0392', '0331']
+    owasp_mastg_best: ['0032']
+    owasp_mastg_know: ['0023', '0074', '0076']
+    owasp_maswe: ['0041', '0044', '0043', '0035']
+    capec: [310, 538, 691]
+    safecode: ['-']
+    threat:
+      '0041': Attackers can exploit platform-level weaknesses that the app cannot
+        fix on its own.
+      '0044': Attackers can exploit publicly known vulnerabilities in the app's dependencies.
+      '0043': Attackers can exploit vulnerabilities that remain reachable in outdated
+        app versions.
+      '0035': Attackers can execute malicious web content inside the app's WebView.
+    attack_vector:
+      '0054': Installing a malicious app on a device running an OS version affected
+        by unpatched platform vulnerabilities.
+      '0055': Running the app on a device whose OS version lacks the platform protections
+        the app relies on.
+      '0073': Identifying vulnerable dependency versions in the app package and using
+        public advisories or exploits.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0053': Targeting users who remain on an app version with publicly known vulnerabilities.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
+        on insecure connections or a compromised website).
+  - id: PCJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/PCJ
+    owasp_mastg: ['0332', '0333', '0335', '0336', '0370', '0371', '0393', '0394',
+      '0395', '0398', '0399', '0400']
+    owasp_mastg_best: ['0034', '0033', '0045', '0054', '0055', '0070', '0071', '0072']
+    owasp_mastg_know: ['0076', '0079', '0019', '0080', '0018']
+    owasp_maswe: ['0035', '0034', '0029']
+    capec: [175, 240, 242, 500, 591, 592]
+    safecode: [17]
+    threat:
+      '0035': Attackers can execute malicious web content inside the app's WebView.
+      '0034': Attackers can access local files and app-private data from web content.
+      '0029': Attackers can hijack deep links or inject malicious input into the app.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
+        on insecure connections or a compromised website).
+      '0046': Registering the same custom URL scheme to intercept links intended for
+        the app.
+  - id: PCQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/PCQ
+    owasp_mastg: ['0332', '0334', '0339', '0355', '0356', '0357', '0376', '0377',
+      '0379', '0380', '0381', '0388', '0389']
+    owasp_mastg_best: ['0034', '0011', '0012', '0013', '0035', '0039', '0049', '0058',
+      '0062', '0061', '0059', '0063', '0068', '0069']
+    owasp_mastg_know: ['0104', '0076', '0018', '0117', '0020', '0139', '0082', '0141']
+    owasp_maswe: ['0035', '0034', '0050', '0018', '0032', '0001', '0031']
+    capec: [137, 138, 499, 502, 586]
+    safecode: ['-']
+    threat:
+      '0035': Attackers can execute malicious web content inside the app's WebView.
+      '0034': Attackers can access local files and app-private data from web content.
+      '0050': Attackers can execute injection attacks against the app.
+      '0018': Attackers can access sensitive data and functionality exposed by app
+        components.
+      '0032': Attackers can intercept or manipulate the app's intents.
+      '0001': Attackers can access sensitive data stored unencrypted in private storage.
+      '0031': Attackers can capture sensitive user input and content.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
+        on insecure connections or a compromised website).
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+      '0038': Invoking exported or unprotected app components from another app installed
+        on the device.
+      '0039': Connecting to open ports or local services exposed by the app.
+      '0049': Registering intent filters to intercept implicit intents sent by the
+        app.
+      '0050': Modifying or replaying mutable PendingIntents obtained from the app.
+      '0005': Accessing the device storage on a compromised device.
+      '0007': Accessing files exposed through incorrect file permissions or misconfigured
+        content providers.
+      '0008': Extracting local or cloud backups of the device.
+      '0048': Capturing user input through a malicious custom keyboard or app extension.
+  - id: PCK
+    value: K
+    url: https://cornucopia.owasp.org/cards/PCK
+    owasp_mastg: ['0222', '0223', '0228', '0229', '0230']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0060', '0006', '0061']
+    owasp_maswe: ['0045']
+    capec: [14, 24, 44, 45, 46, 47, 92, 100, 124, 128, 129, 131, 679]
+    safecode: [7, 9, 34, 36]
+    threat:
+      '0045': Attackers can exploit memory-corruption bugs with substantially less
+        effort.
+    attack_vector:
+      '0001': Obtaining the app package and reverse engineering it.
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+  - id: PCA
+    value: A
+    url: https://cornucopia.owasp.org/cards/PCA
+    owasp_mastg: ['-']
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+- id: AA
+  name: Authentication & Authorization
+  cards:
+  - id: AA2
+    value: '2'
+    url: https://cornucopia.owasp.org/cards/AA2
+    owasp_mastg: ['0266', '0267', '0268', '0269']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0056', '0057']
+    owasp_maswe: ['0020', '0021']
+    capec: [20, 49, 50, 55, 115]
+    safecode: [28]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0021': Attackers can authenticate sensitive transactions without the user's
+        biometrics.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+        or password).
+  - id: AA3
+    value: '3'
+    url: https://cornucopia.owasp.org/cards/AA3
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327',
+      '0328', '0329', '0330']
+    owasp_mastg_best: ['0031', '0036', '0037', '0038']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021', '0022']
+    capec: [114, 115, 554]
+    safecode: [28]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0021': Attackers can authenticate sensitive transactions without the user's
+        biometrics.
+      '0022': Attackers can use biometric-protected keys without the legitimate user's
+        biometrics.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+        or password).
+      '0035': Enrolling additional biometrics on the device after obtaining the device
+        credential.
+  - id: AA4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/AA4
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0327', '0330']
+    owasp_mastg_best: ['0036']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021', '0022']
+    capec: [115]
+    safecode: [28]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0021': Attackers can authenticate sensitive transactions without the user's
+        biometrics.
+      '0022': Attackers can use biometric-protected keys without the legitimate user's
+        biometrics.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+        or password).
+      '0035': Enrolling additional biometrics on the device after obtaining the device
+        credential.
+  - id: AA5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/AA5
+    owasp_mastg: ['0340', '0370', '0371', '0381', '0393', '0394', '0395']
+    owasp_mastg_best: ['0040', '0045', '0054', '0055', '0063', '0070', '0071', '0072']
+    owasp_mastg_know: ['0022', '0079', '0019', '0080']
+    owasp_maswe: ['0036', '0029', '0032']
+    capec: [153, 173, 505, 506]
+    safecode: ['-']
+    threat:
+      '0036': Attackers can capture sensitive data displayed or entered in the user
+        interface.
+      '0029': Attackers can hijack deep links or inject malicious input into the app.
+      '0032': Attackers can intercept or manipulate the app's intents.
+    attack_vector:
+      '0005': Accessing the device storage on a compromised device.
+      '0041': Reading sensitive data from the clipboard when users copy it between
+        apps.
+      '0043': Observing the device screen while sensitive data is displayed or entered
+        (shoulder surfing).
+      '0046': Registering the same custom URL scheme to intercept links intended for
+        the app.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0049': Registering intent filters to intercept implicit intents sent by the
+        app.
+      '0050': Modifying or replaying mutable PendingIntents obtained from the app.
+  - id: AA6
+    value: '6'
+    url: https://cornucopia.owasp.org/cards/AA6
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0326', '0327', '0329']
+    owasp_mastg_best: ['0031', '0036', '0038']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021']
+    capec: [114, 115, 207, 554]
+    safecode: [28]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0021': Attackers can authenticate sensitive transactions without the user's
+        biometrics.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+        or password).
+  - id: AA7
+    value: '7'
+    url: https://cornucopia.owasp.org/cards/AA7
+    owasp_mastg: ['0266', '0267', '0327', '0329', '0375']
+    owasp_mastg_best: ['0036', '0038', '0057']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012', '0025', '0138']
+    owasp_maswe: ['0020', '0050']
+    capec: [39, 74, 162, 166, 207]
+    safecode: [8, 10, 11, 12]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0050': Attackers can execute injection attacks against the app.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+  - id: AA8
+    value: '8'
+    url: https://cornucopia.owasp.org/cards/AA8
+    owasp_mastg: ['0266', '0267', '0327']
+    owasp_mastg_best: ['0036']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020']
+    capec: [114, 115, 554]
+    safecode: [28]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+  - id: AA9
+    value: '9'
+    url: https://cornucopia.owasp.org/cards/AA9
+    owasp_mastg: ['0250', '0251', '0252', '0253', '0254', '0335', '0336', '0360',
+      '0361', '0362', '0363']
+    owasp_mastg_best: ['0011', '0012', '0013', '0049', '0010', '0033', '0051']
+    owasp_mastg_know: ['0018', '0017', '0076', '0077']
+    owasp_maswe: ['0034', '0066']
+    capec: [122]
+    safecode: [8, 10, 11]
+    threat:
+      '0034': Attackers can access local files and app-private data from web content.
+      '0066': Apps and embedded third-party components can access more sensitive device
+        resources and data than needed.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
+        on insecure connections or a compromised website).
+      '0088': Holding excessive or no-longer-needed permissions granted to the app.
+      '0089': Using permissions granted to the host app to call protected APIs and
+        collect data from a third-party SDK.
+  - id: AAX
+    value: 10
+    url: https://cornucopia.owasp.org/cards/AAX
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327',
+      '0328', '0329', '0330']
+    owasp_mastg_best: ['0031', '0036', '0037', '0038']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012']
+    owasp_maswe: ['0020', '0021', '0022']
+    capec: [114, 115, 554]
+    safecode: [28]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0021': Attackers can authenticate sensitive transactions without the user's
+        biometrics.
+      '0022': Attackers can use biometric-protected keys without the legitimate user's
+        biometrics.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+        or password).
+      '0035': Enrolling additional biometrics on the device after obtaining the device
+        credential.
+  - id: AAJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/AAJ
+    owasp_mastg: ['0266', '0267', '0268', '0269', '0270', '0271', '0327', '0330',
+      '0364', '0365', '0366']
+    owasp_mastg_best: ['0036', '0052']
+    owasp_mastg_know: ['0056', '0057', '0001', '0043', '0047', '0012', '0132', '0017',
+      '0020', '0133', '0134']
+    owasp_maswe: ['0020', '0021', '0022', '0018']
+    capec: [36, 121]
+    safecode: [8, 10, 11]
+    threat:
+      '0020': Attackers can bypass local authentication and access protected data
+        or functionality.
+      '0021': Attackers can authenticate sensitive transactions without the user's
+        biometrics.
+      '0022': Attackers can use biometric-protected keys without the legitimate user's
+        biometrics.
+      '0018': Attackers can access sensitive data and functionality exposed by app
+        components.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0027': Invoking keystore operations on a compromised or stolen device when
+        key use does not require user authentication.
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0034': Using a known, guessed, or shoulder-surfed device credential (PIN, pattern,
+        or password).
+      '0035': Enrolling additional biometrics on the device after obtaining the device
+        credential.
+      '0038': Invoking exported or unprotected app components from another app installed
+        on the device.
+      '0039': Connecting to open ports or local services exposed by the app.
+  - id: AAQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/AAQ
+    owasp_mastg: ['0334', '0339', '0376', '0377', '0379', '0380']
+    owasp_mastg_best: ['0011', '0012', '0013', '0035', '0039', '0058', '0062', '0061',
+      '0059']
+    owasp_mastg_know: ['0018', '0117', '0076', '0139']
+    owasp_maswe: ['0034', '0050']
+    capec: [17, 30, 69, 234]
+    safecode: [8, 10, 11]
+    threat:
+      '0034': Attackers can access local files and app-private data from web content.
+      '0050': Attackers can execute injection attacks against the app.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
+        on insecure connections or a compromised website).
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+  - id: AAK
+    value: K
+    url: https://cornucopia.owasp.org/cards/AAK
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0266', '0267', '0268', '0269', '0270', '0271', '0326', '0327',
+      '0328', '0329', '0330']
+    owasp_maswe: []
+    capec: [114, 115, 207, 554]
+    safecode: [8, 10, 11]
+  - id: AAA
+    value: A
+    url: https://cornucopia.owasp.org/cards/AAA
+    owasp_mastg: ['-']
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+- id: NS
+  name: Network & Storage
+  cards:
+  - id: NS2
+    value: '2'
+    url: https://cornucopia.owasp.org/cards/NS2
+    owasp_mastg: ['0203', '0231', '0296', '0297']
+    owasp_mastg_best: ['0002', '0022']
+    owasp_mastg_know: ['0049', '0101']
+    owasp_maswe: ['0005']
+    capec: [155]
+    safecode: [11, 23, 29]
+    threat:
+      '0005': Attackers can access sensitive data written to logs.
+    attack_vector:
+      '0005': Accessing the device storage on a compromised device.
+      '0006': Accessing the system logs on a compromised device or from an app holding
+        log-access permissions.
+  - id: NS3
+    value: '3'
+    url: https://cornucopia.owasp.org/cards/NS3
+    owasp_mastg: ['0258', '0276', '0277', '0278', '0279', '0280', '0313', '0314']
+    owasp_mastg_best: ['0019', '0026']
+    owasp_mastg_know: ['0055', '0100', '0083']
+    owasp_maswe: ['0036']
+    capec: [204, 637, 679]
+    safecode: ['-']
+    threat:
+      '0036': Attackers can capture sensitive data displayed or entered in the user
+        interface.
+    attack_vector:
+      '0005': Accessing the device storage on a compromised device.
+      '0041': Reading sensitive data from the clipboard when users copy it between
+        apps.
+      '0043': Observing the device screen while sensitive data is displayed or entered
+        (shoulder surfing).
+  - id: NS4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/NS4
+    owasp_mastg: ['0206', '0315', '0318', '0319']
+    owasp_mastg_best: ['0027']
+    owasp_mastg_know: ['0054']
+    owasp_maswe: ['0073', '0037']
+    capec: [155, 161, 204, 220, 639, 643]
+    safecode: [11, 23, 29]
+    threat:
+      '0073': Apps and embedded third-party components can collect or share more data
+        than users were led to expect.
+      '0037': Attackers can access sensitive data shown in notifications.
+    attack_vector:
+      '0081': Collecting or sharing data categories that are not declared in the platform's
+        privacy labels.
+      '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+        services over the network.
+      '0044': Reading notification content shown on the lock screen without unlocking
+        the device.
+      '0045': Reading notification content from another app holding notification-access
+        permissions.
+  - id: NS5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/NS5
+    owasp_mastg: ['0200', '0201', '0207', '0215', '0216', '0262', '0287', '0298',
+      '0304', '0305', '0306']
+    owasp_mastg_best: ['0050', '0023', '0004']
+    owasp_mastg_know: ['0042', '0041', '0102', '0050', '0036', '0037']
+    owasp_maswe: ['0002', '0001', '0006']
+    capec: [37, 155, 204, 639, 643]
+    safecode: [11, 23, 29]
+    threat:
+      '0002': Attackers can access or tamper with sensitive data stored in shared
+        or external storage.
+      '0001': Attackers can access sensitive data stored unencrypted in private storage.
+      '0006': Attackers can extract or tamper with sensitive data included in backups.
+    attack_vector:
+      '0010': Accessing shared or external storage from any app holding the corresponding
+        permissions.
+      '0011': Physically removing and reading external storage media such as SD cards.
+      '0005': Accessing the device storage on a compromised device.
+      '0007': Accessing files exposed through incorrect file permissions or misconfigured
+        content providers.
+      '0008': Extracting local or cloud backups of the device.
+      '0009': Tampering with backup contents and restoring the modified backup to
+        a device.
+  - id: NS6
+    value: '6'
+    url: https://cornucopia.owasp.org/cards/NS6
+    owasp_mastg: ['0246', '0247', '0248', '0249']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0056', '0001']
+    owasp_maswe: ['0017']
+    capec: [406, 675]
+    safecode: ['-']
+    threat:
+      '0017': Attackers with physical access to the device can read the app's data
+        and use its keys when no device credential protects them.
+    attack_vector:
+      '0063': Accessing a lost or stolen device that has no secure lock screen configured.
+  - id: NS7
+    value: '7'
+    url: https://cornucopia.owasp.org/cards/NS7
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0051', '0103']
+    owasp_maswe: []
+    capec: [679]
+    safecode: ['-']
+  - id: NS8
+    value: '8'
+    url: https://cornucopia.owasp.org/cards/NS8
+    owasp_mastg: ['0200', '0201', '0207', '0299', '0300', '0301', '0302', '0303',
+      '0304', '0305', '0306', '0338', '0387']
+    owasp_mastg_best: ['0050', '0024', '0066', '0065']
+    owasp_mastg_know: ['0042', '0041', '0082', '0091', '0108', '0057', '0122', '0037',
+      '0036', '0086']
+    owasp_maswe: ['0002', '0001', '0057']
+    capec: [75, 76, 113, 153, 161, 165, 176, 190, 207, 210, 554, 562]
+    safecode: [12, 19]
+    threat:
+      '0002': Attackers can access or tamper with sensitive data stored in shared
+        or external storage.
+      '0001': Attackers can access sensitive data stored unencrypted in private storage.
+      '0057': Attackers can alter the app's behavior through its resources.
+    attack_vector:
+      '0010': Accessing shared or external storage from any app holding the corresponding
+        permissions.
+      '0011': Physically removing and reading external storage media such as SD cards.
+      '0005': Accessing the device storage on a compromised device.
+      '0007': Accessing files exposed through incorrect file permissions or misconfigured
+        content providers.
+      '0008': Extracting local or cloud backups of the device.
+      '0009': Tampering with backup contents and restoring the modified backup to
+        a device.
+      '0070': Modifying the app's files or resources on a compromised device.
+  - id: NS9
+    value: '9'
+    url: https://cornucopia.owasp.org/cards/NS9
+    owasp_mastg: ['0338', '0387']
+    owasp_mastg_best: ['0066', '0065']
+    owasp_mastg_know: ['0036', '0086']
+    owasp_maswe: ['0057']
+    capec: [176]
+    safecode: ['-']
+    threat:
+      '0057': Attackers can alter the app's behavior through its resources.
+    attack_vector:
+      '0009': Tampering with backup contents and restoring the modified backup to
+        a device.
+      '0070': Modifying the app's files or resources on a compromised device.
+  - id: NSX
+    value: '10'
+    url: https://cornucopia.owasp.org/cards/NSX
+    owasp_mastg: ['0242', '0243', '0244', '0385']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0014', '0015', '0072']
+    owasp_maswe: ['0062', '0028']
+    capec: [57, 94, 156, 465, 466, 479, 701]
+    safecode: [14, 30]
+    threat:
+      '0028': Attackers can intercept or modify TLS-protected traffic even when standard
+        certificate validation succeeds.
+    attack_vector:
+      '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+        DNS spoofing, or a rogue access point.
+      '0016': Obtaining a valid certificate for the target domain from a compromised,
+        coerced, or rogue Certificate Authority (CA).
+      '0017': Installing an attacker-controlled CA certificate on a device they control
+        to inspect the app's traffic.
+  - id: NSJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/NSJ
+    owasp_mastg: ['0217', '0218', '0233', '0235', '0236', '0295', '0321', '0322',
+      '0323', '0342', '0343', '0344', '0345', '0348']
+    owasp_mastg_best: ['0020', '0042', '0043']
+    owasp_mastg_know: ['0014', '0011', '0010', '0071', '0073']
+    owasp_maswe: ['0026', '0027']
+    capec: [57, 94, 156, 220, 459, 465, 466]
+    safecode: [12, 14, 29, 30]
+    threat:
+      '0026': Attackers can intercept or modify cleartext network traffic.
+      '0027': Attackers can intercept or modify TLS-protected network traffic.
+    attack_vector:
+      '0012': Monitoring network traffic on the same network (e.g., public Wi-Fi or
+        a compromised router).
+      '0013': Monitoring local or proximity interfaces such as Bluetooth, NFC, or
+        USB.
+      '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+        DNS spoofing, or a rogue access point.
+      '0015': Presenting a fraudulent or otherwise invalid certificate that the app
+        accepts.
+  - id: NSQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/NSQ
+    owasp_mastg: ['0321', '0322', '0233', '0235', '0236', '0237', '0238', '0239']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0071', '0014']
+    owasp_maswe: ['0026', '0027']
+    capec: [31, 36, 57, 102, 157, 158, 384, 466]
+    safecode: [29, 30]
+    threat:
+      '0026': Attackers can intercept or modify cleartext network traffic.
+    attack_vector:
+      '0012': Monitoring network traffic on the same network (e.g., public Wi-Fi or
+        a compromised router).
+      '0013': Monitoring local or proximity interfaces such as Bluetooth, NFC, or
+        USB.
+      '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+        DNS spoofing, or a rogue access point.
+  - id: NSK
+    value: K
+    url: https://cornucopia.owasp.org/cards/NSK
+    owasp_mastg: ['0234', '0282', '0283', '0284', '0285', '0286', '0396', '0397']
+    owasp_mastg_best: ['0021', '0073']
+    owasp_mastg_know: ['0010', '0014', '0072']
+    owasp_maswe: ['0027']
+    capec: [57, 94, 156, 465, 466, 479, 701]
+    safecode: [14, 29, 30]
+    threat:
+      '0027': Attackers can intercept or modify TLS-protected network traffic.
+    attack_vector:
+      '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+        DNS spoofing, or a rogue access point.
+      '0015': Presenting a fraudulent or otherwise invalid certificate that the app
+        accepts.
+  - id: NSA
+    value: A
+    url: https://cornucopia.owasp.org/cards/NSA
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+- id: RS
+  name: Resilience
+  cards:
+  - id: RS2
+    value: '2'
+    url: https://cornucopia.owasp.org/cards/RS2
+    owasp_mastg: ['0263', '0264', '0265', '0358', '0359']
+    owasp_mastg_best: ['0022']
+    owasp_mastg_know: ['0064', '0101']
+    owasp_maswe: ['0061']
+    capec: [37, 167, 191]
+    safecode: ['-']
+    threat:
+      '0061': Attackers can analyze the app's internals and disable its security controls.
+    attack_vector:
+      '0001': Obtaining the app package and reverse engineering it.
+      '0006': Accessing the system logs on a compromised device or from an app holding
+        log-access permissions.
+  - id: RS3
+    value: '3'
+    url: https://cornucopia.owasp.org/cards/RS3
+    owasp_mastg: ['0219', '0288']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0063']
+    owasp_maswe: ['0061']
+    capec: [37, 167, 191]
+    safecode: ['-']
+    threat:
+      '0061': Attackers can analyze the app's internals and disable its security controls.
+    attack_vector:
+      '0001': Obtaining the app package and reverse engineering it.
+      '0006': Accessing the system logs on a compromised device or from an app holding
+        log-access permissions.
+  - id: RS4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/RS4
+    owasp_mastg: ['0220', '0224', '0225']
+    owasp_mastg_best: ['0006']
+    owasp_mastg_know: ['0058', '0003']
+    owasp_maswe: ['0075', '0056']
+    capec: [68, 167, 206, 476]
+    safecode: [14]
+    threat:
+      '0056': Attackers can distribute and run modified copies of the app.
+    attack_vector:
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0068': Impersonating the app with scripts, bots, or tampered clients when interacting
+        with the backend.
+      '0069': Installing a repackaged version of the app on victim devices.
+  - id: RS5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/RS5
+    owasp_mastg: ['0226', '0227', '0261']
+    owasp_mastg_best: ['0007', '0008']
+    owasp_mastg_know: ['0007', '0028', '0062']
+    owasp_maswe: ['0063']
+    capec: [115, 167, 554]
+    safecode: ['-']
+    threat:
+      '0063': Attackers can inspect and manipulate a debuggable app at runtime, even
+        on non-rooted or non-jailbroken devices.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+      '0004': Attaching a remote inspector to the app's debuggable web content.
+  - id: RS6
+    value: '6'
+    url: https://cornucopia.owasp.org/cards/RS6
+    owasp_mastg: ['0352', '0353', '0401', '0402']
+    owasp_mastg_best: ['0007', '0029', '0047', '0074']
+    owasp_mastg_know: ['0007', '0028', '0085']
+    owasp_maswe: ['0064']
+    capec: [115, 167, 554]
+    safecode: ['-']
+    threat:
+      '0064': Attackers can inspect and manipulate the running app without resistance.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+  - id: RS7
+    value: '7'
+    url: https://cornucopia.owasp.org/cards/RS7
+    owasp_mastg: ['0351', '0367']
+    owasp_mastg_best: ['0046', '0053']
+    owasp_mastg_know: ['0031', '0135']
+    owasp_maswe: ['0054', '0053']
+    capec: [189, 554]
+    safecode: ['-']
+    threat:
+      '0053': Attackers can analyze and automate the app in a fully controlled environment.
+    attack_vector:
+      '0003': Using dynamic instrumentation.
+      '0066': Running the app in an emulator or virtual device.
+  - id: RS8
+    value: '8'
+    url: https://cornucopia.owasp.org/cards/RS8
+    owasp_mastg: ['0341', '0354']
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0032', '0087', '0118']
+    owasp_maswe: ['0058']
+    capec: [167, 554]
+    safecode: ['-']
+    threat:
+      '0058': Attackers can modify the app's code while it runs.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+  - id: RS9
+    value: '9'
+    url: https://cornucopia.owasp.org/cards/RS9
+    owasp_mastg: ['0368', '0369', '0391']
+    owasp_mastg_best: ['0029']
+    owasp_mastg_know: ['0033', '0089']
+    owasp_maswe: ['0060', '0059']
+    capec: [167, 554]
+    safecode: ['-']
+    threat:
+      '0059': Attackers can analyze the app's logic and security controls with minimal
+        effort.
+    attack_vector:
+      '0001': Obtaining the app package and reverse engineering it.
+  - id: RSX
+    value: '10'
+    url: https://cornucopia.owasp.org/cards/RSX
+    owasp_mastg: ['0240', '0241', '0324', '0325']
+    owasp_mastg_best: ['0029', '0030']
+    owasp_mastg_know: ['0084', '0027']
+    owasp_maswe: ['0055', '0051']
+    capec: [167, 660, 661]
+    safecode: ['-']
+    threat:
+      '0051': Attackers can run and manipulate the app in a privileged environment
+        without resistance.
+    attack_vector:
+      '0003': Using dynamic instrumentation.
+      '0005': Accessing the device storage on a compromised device.
+      '0065': Running the app on a rooted or jailbroken device they control.
+  - id: RSJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/RSJ
+    owasp_mastg: ['0338', '0387']
+    owasp_mastg_best: ['0066', '0065']
+    owasp_mastg_know: ['0036', '0086']
+    owasp_maswe: ['0057']
+    capec: [23, 165, 167]
+    safecode: ['-']
+    threat:
+      '0057': Attackers can alter the app's behavior through its resources.
+    attack_vector:
+      '0009': Tampering with backup contents and restoring the modified backup to
+        a device.
+      '0070': Modifying the app's files or resources on a compromised device.
+  - id: RSQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/RSQ
+    owasp_mastg: ['0341', '0354']
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0032', '0087', '0109', '0110', '0118']
+    owasp_maswe: ['0058']
+    capec: [167, 554]
+    safecode: ['-']
+    threat:
+      '0058': Attackers can modify the app's code while it runs.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+  - id: RSK
+    value: K
+    url: https://cornucopia.owasp.org/cards/RSK
+    owasp_mastg: ['0341', '0354']
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0032', '0087', '0109', '0110', '0119', '0118']
+    owasp_maswe: ['0058']
+    capec: [167, 554]
+    safecode: ['-']
+    threat:
+      '0058': Attackers can modify the app's code while it runs.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+  - id: RSA
+    value: A
+    url: https://cornucopia.owasp.org/cards/RSA
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+- id: CRM
+  name: Cryptography
+  cards:
+  - id: CRM2
+    value: '2'
+    url: https://cornucopia.owasp.org/cards/CRM2
+    owasp_mastg: ['0307', '0308']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0012']
+    owasp_maswe: ['0007']
+    capec: [97, 116, 117]
+    safecode: [14, 29]
+    threat:
+      '0007': Attackers can decrypt or forge improperly encrypted data.
+    attack_vector:
+      '0018': Brute-forcing cryptographic material generated with insufficient length.
+      '0021': Performing cryptanalysis of broken algorithms, modes, or parameters.
+      '0022': Exploiting predictable or reused IVs or nonces to detect patterns or
+        recover plaintext.
+      '0023': Exploiting padding oracles exposed through observable error signals
+        or timing differences.
+  - id: CRM3
+    value: '3'
+    url: https://cornucopia.owasp.org/cards/CRM3
+    owasp_mastg: ['0204', '0205', '0311']
+    owasp_mastg_best: ['0001', '0025']
+    owasp_mastg_know: ['0013', '0070']
+    owasp_maswe: ['0012']
+    capec: [20, 112, 485]
+    safecode: [29, 33]
+    threat:
+      '0012': Attackers can predict or reproduce random values used in security contexts.
+    attack_vector:
+      '0001': Obtaining the app package and reverse engineering it.
+      '0019': Recovering or guessing the seed used by the generator to reproduce its
+        output.
+      '0024': Observing enough outputs to recover the internal state of a non-cryptographic
+        PRNG.
+  - id: CRM4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/CRM4
+    owasp_mastg: ['0204', '0205', '0208', '0311', '0349']
+    owasp_mastg_best: ['0001', '0025']
+    owasp_mastg_know: ['0013', '0012', '0070']
+    owasp_maswe: ['0012', '0013']
+    capec: [20, 55, 112, 485]
+    safecode: [21, 29, 32, 33]
+    threat:
+      '0012': Attackers can predict or reproduce random values used in security contexts.
+      '0013': Attackers can predict or reproduce improperly generated cryptographic
+        keys.
+    attack_vector:
+      '0001': Obtaining the app package and reverse engineering it.
+      '0019': Recovering or guessing the seed used by the generator to reproduce its
+        output.
+      '0024': Observing enough outputs to recover the internal state of a non-cryptographic
+        PRNG.
+      '0018': Brute-forcing cryptographic material generated with insufficient length.
+      '0020': Intercepting cryptographic keys exported in plaintext.
+  - id: CRM5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/CRM5
+    owasp_mastg: ['0209', '0210', '0211']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0111']
+    owasp_maswe: ['0013', '0007', '0008']
+    capec: [37, 204]
+    safecode: [21, 29]
+    threat:
+      '0013': Attackers can predict or reproduce improperly generated cryptographic
+        keys.
+      '0007': Attackers can decrypt or forge improperly encrypted data.
+      '0008': Attackers can forge or replay data that passes hash-based integrity
+        or authenticity checks.
+    attack_vector:
+      '0018': Brute-forcing cryptographic material generated with insufficient length.
+      '0019': Recovering or guessing the seed used by the generator to reproduce its
+        output.
+      '0020': Intercepting cryptographic keys exported in plaintext.
+      '0021': Performing cryptanalysis of broken algorithms, modes, or parameters.
+      '0022': Exploiting predictable or reused IVs or nonces to detect patterns or
+        recover plaintext.
+      '0023': Exploiting padding oracles exposed through observable error signals
+        or timing differences.
+      '0028': Crafting collisions or second preimages for broken hash functions.
+  - id: CRM6
+    value: '6'
+    url: https://cornucopia.owasp.org/cards/CRM6
+    owasp_mastg: ['0338', '0234', '0282', '0283', '0284', '0396', '0397']
+    owasp_mastg_best: ['0066', '0021', '0073']
+    owasp_mastg_know: ['0036', '0010', '0072']
+    owasp_maswe: ['0057', '0027']
+    capec: [68, 75, 145, 438, 439, 442]
+    safecode: [12, 14]
+    threat:
+      '0057': Attackers can alter the app's behavior through its resources.
+      '0027': Attackers can intercept or modify TLS-protected network traffic.
+    attack_vector:
+      '0009': Tampering with backup contents and restoring the modified backup to
+        a device.
+      '0070': Modifying the app's files or resources on a compromised device.
+      '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+        DNS spoofing, or a rogue access point.
+      '0015': Presenting a fraudulent or otherwise invalid certificate that the app
+        accepts.
+  - id: CRM7
+    value: '7'
+    url: https://cornucopia.owasp.org/cards/CRM7
+    owasp_mastg: ['0200', '0201', '0202', '0207', '0299', '0300', '0301', '0302',
+      '0303', '0304', '0305', '0306']
+    owasp_mastg_best: ['0050', '0024']
+    owasp_mastg_know: ['0042', '0041', '0082', '0091', '0108', '0057', '0122', '0037']
+    owasp_maswe: ['0002', '0001']
+    capec: [210, 212]
+    safecode: [15]
+    threat:
+      '0002': Attackers can access or tamper with sensitive data stored in shared
+        or external storage.
+      '0001': Attackers can access sensitive data stored unencrypted in private storage.
+    attack_vector:
+      '0010': Accessing shared or external storage from any app holding the corresponding
+        permissions.
+      '0011': Physically removing and reading external storage media such as SD cards.
+      '0005': Accessing the device storage on a compromised device.
+      '0007': Accessing files exposed through incorrect file permissions or misconfigured
+        content providers.
+      '0008': Extracting local or cloud backups of the device.
+  - id: CRM8
+    value: '8'
+    url: https://cornucopia.owasp.org/cards/CRM8
+    owasp_mastg: ['0208', '0209', '0210', '0211', '0221', '0232', '0312', '0317',
+      '0350']
+    owasp_mastg_best: ['0009', '0005', '0020']
+    owasp_mastg_know: ['0012', '0011']
+    owasp_maswe: ['0013', '0007', '0008']
+    capec: [20, 116, 117, 97, 112, 485]
+    safecode: [14, 23, 29, 31, 32, 33]
+    threat:
+      '0013': Attackers can predict or reproduce improperly generated cryptographic
+        keys.
+      '0007': Attackers can decrypt or forge improperly encrypted data.
+      '0008': Attackers can forge or replay data that passes hash-based integrity
+        or authenticity checks.
+    attack_vector:
+      '0018': Brute-forcing cryptographic material generated with insufficient length.
+      '0019': Recovering or guessing the seed used by the generator to reproduce its
+        output.
+      '0020': Intercepting cryptographic keys exported in plaintext.
+      '0021': Performing cryptanalysis of broken algorithms, modes, or parameters.
+      '0022': Exploiting predictable or reused IVs or nonces to detect patterns or
+        recover plaintext.
+      '0023': Exploiting padding oracles exposed through observable error signals
+        or timing differences.
+      '0028': Crafting collisions or second preimages for broken hash functions.
+  - id: CRM9
+    value: '9'
+    url: https://cornucopia.owasp.org/cards/CRM9
+    owasp_mastg: ['0210', '0221', '0232', '0309', '0310', '0312', '0317', '0350']
+    owasp_mastg_best: ['0009', '0005', '0020']
+    owasp_mastg_know: ['0011']
+    owasp_maswe: ['0007']
+    capec: [37, 117, 155, 191, 204]
+    safecode: [21, 29, 31]
+    threat:
+      '0007': Attackers can decrypt or forge improperly encrypted data.
+    attack_vector:
+      '0018': Brute-forcing cryptographic material generated with insufficient length.
+      '0021': Performing cryptanalysis of broken algorithms, modes, or parameters.
+      '0022': Exploiting predictable or reused IVs or nonces to detect patterns or
+        recover plaintext.
+      '0023': Exploiting padding oracles exposed through observable error signals
+        or timing differences.
+  - id: CRMX
+    value: '10'
+    url: https://cornucopia.owasp.org/cards/CRMX
+    owasp_mastg: ['0200', '0201', '0202', '0207', '0212', '0213', '0214', '0299',
+      '0300', '0301', '0302', '0303', '0304', '0305', '0306']
+    owasp_mastg_best: ['0050', '0024']
+    owasp_mastg_know: ['0042', '0041', '0012', '0082', '0091', '0108', '0057', '0122',
+      '0037']
+    owasp_maswe: ['0002', '0001', '0003']
+    capec: [37, 117, 155, 191, 204]
+    safecode: [21, 29]
+    threat:
+      '0002': Attackers can access or tamper with sensitive data stored in shared
+        or external storage.
+      '0001': Attackers can access sensitive data stored unencrypted in private storage.
+      '0003': Attackers can extract cryptographic keys stored outside the platform
+        keystore.
+    attack_vector:
+      '0010': Accessing shared or external storage from any app holding the corresponding
+        permissions.
+      '0011': Physically removing and reading external storage media such as SD cards.
+      '0005': Accessing the device storage on a compromised device.
+      '0007': Accessing files exposed through incorrect file permissions or misconfigured
+        content providers.
+      '0008': Extracting local or cloud backups of the device.
+      '0001': Obtaining the app package and reverse engineering it.
+  - id: CRMJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/CRMJ
+    owasp_mastg: ['0282', '0283', '0284', '0396', '0397']
+    owasp_mastg_best: ['0021', '0073']
+    owasp_mastg_know: ['0010', '0072']
+    owasp_maswe: ['0027']
+    capec: [97, 620]
+    safecode: [21, 29]
+    threat:
+      '0027': Attackers can intercept or modify TLS-protected network traffic.
+    attack_vector:
+      '0014': Performing a Machine-in-the-Middle (MITM) attack, e.g., via ARP poisoning,
+        DNS spoofing, or a rogue access point.
+      '0015': Presenting a fraudulent or otherwise invalid certificate that the app
+        accepts.
+  - id: CRMQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/CRMQ
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0068']
+    owasp_maswe: []
+    capec: [20, 116, 117, 97, 112, 485]
+    safecode: [14, 21, 29, 32, 33]
+  - id: CRMK
+    value: K
+    url: https://cornucopia.owasp.org/cards/CRMK
+    owasp_mastg: ['0341', '0354']
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0032', '0140', '0030', '0118', '0087']
+    owasp_maswe: ['0058']
+    capec: [54, 97, 116, 117, 220]
+    safecode: [14, 21, 29]
+    threat:
+      '0058': Attackers can modify the app's code while it runs.
+    attack_vector:
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+  - id: CRMA
+    value: A
+    url: https://cornucopia.owasp.org/cards/CRMA
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+- id: CM
+  name: Cornucopia
+  cards:
+  - id: CM2
+    value: '2'
+    url: https://cornucopia.owasp.org/cards/CM2
+    owasp_mastg: ['0206', '0281', '0318', '0319', '0360', '0361']
+    owasp_mastg_best: ['0051']
+    owasp_mastg_know: ['0077']
+    owasp_maswe: ['0073', '0074', '0066']
+    capec: [410]
+    safecode: ['-']
+    threat:
+      '0073': Apps and embedded third-party components can collect or share more data
+        than users were led to expect.
+      '0074': Apps and embedded third-party components can track users against their
+        expressed preferences.
+      '0066': Apps and embedded third-party components can access more sensitive device
+        resources and data than needed.
+    attack_vector:
+      '0081': Collecting or sharing data categories that are not declared in the platform's
+        privacy labels.
+      '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+        services over the network.
+      '0074': Collecting and correlating identifiers and usage data across apps, devices,
+        and services.
+      '0075': Contacting undeclared tracking domains that platform enforcement cannot
+        block.
+      '0088': Holding excessive or no-longer-needed permissions granted to the app.
+      '0089': Using permissions granted to the host app to call protected APIs and
+        collect data from a third-party SDK.
+  - id: CM3
+    value: '3'
+    url: https://cornucopia.owasp.org/cards/CM3
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: ['0076']
+    capec: [410]
+    safecode: ['-']
+  - id: CM4
+    value: '4'
+    url: https://cornucopia.owasp.org/cards/CM4
+    owasp_mastg: ['0206', '0281', '0318', '0319']
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: ['0073', '0074']
+    capec: [410]
+    safecode: ['-']
+    threat:
+      '0073': Apps and embedded third-party components can collect or share more data
+        than users were led to expect.
+      '0074': Apps and embedded third-party components can track users against their
+        expressed preferences.
+    attack_vector:
+      '0081': Collecting or sharing data categories that are not declared in the platform's
+        privacy labels.
+      '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+        services over the network.
+      '0074': Collecting and correlating identifiers and usage data across apps, devices,
+        and services.
+      '0075': Contacting undeclared tracking domains that platform enforcement cannot
+        block.
+  - id: CM5
+    value: '5'
+    url: https://cornucopia.owasp.org/cards/CM5
+    owasp_mastg: ['0318', '0319']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0026']
+    owasp_maswe: ['0073']
+    capec: [410]
+    safecode: ['-']
+    threat:
+      '0073': Apps and embedded third-party components can collect or share more data
+        than users were led to expect.
+    attack_vector:
+      '0081': Collecting or sharing data categories that are not declared in the platform's
+        privacy labels.
+      '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+        services over the network.
+  - id: CM6
+    value: '6'
+    url: https://cornucopia.owasp.org/cards/CM6
+    owasp_mastg: ['0206', '0318', '0319', '0360', '0361']
+    owasp_mastg_best: ['0051']
+    owasp_mastg_know: ['0077']
+    owasp_maswe: ['0073', '0066']
+    capec: [410]
+    safecode: ['-']
+    threat:
+      '0073': Apps and embedded third-party components can collect or share more data
+        than users were led to expect.
+      '0066': Apps and embedded third-party components can access more sensitive device
+        resources and data than needed.
+    attack_vector:
+      '0081': Collecting or sharing data categories that are not declared in the platform's
+        privacy labels.
+      '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+        services over the network.
+      '0088': Holding excessive or no-longer-needed permissions granted to the app.
+      '0089': Using permissions granted to the host app to call protected APIs and
+        collect data from a third-party SDK.
+  - id: CM7
+    value: '7'
+    url: https://cornucopia.owasp.org/cards/CM7
+    owasp_mastg: ['0370', '0371', '0394', '0395']
+    owasp_mastg_best: ['0045', '0054', '0055', '0071', '0072']
+    owasp_mastg_know: ['0079', '0019', '0080']
+    owasp_maswe: ['0029']
+    capec: [137, 499, 502, 586]
+    safecode: ['-']
+    threat:
+      '0029': Attackers can hijack deep links or inject malicious input into the app.
+    attack_vector:
+      '0046': Registering the same custom URL scheme to intercept links intended for
+        the app.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+  - id: CM8
+    value: '8'
+    url: https://cornucopia.owasp.org/cards/CM8
+    owasp_mastg: ['0370', '0371', '0381', '0394', '0395']
+    owasp_mastg_best: ['0045', '0054', '0055', '0063', '0071', '0072']
+    owasp_mastg_know: ['0079', '0019', '0080']
+    owasp_maswe: ['0029', '0032']
+    capec: [499, 502]
+    safecode: ['-']
+    threat:
+      '0029': Attackers can hijack deep links or inject malicious input into the app.
+      '0032': Attackers can intercept or manipulate the app's intents.
+    attack_vector:
+      '0046': Registering the same custom URL scheme to intercept links intended for
+        the app.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0049': Registering intent filters to intercept implicit intents sent by the
+        app.
+      '0050': Modifying or replaying mutable PendingIntents obtained from the app.
+  - id: CM9
+    value: 9
+    url: https://cornucopia.owasp.org/cards/CM9
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0012', '0066']
+    owasp_maswe: []
+    capec: [23, 165, 442]
+    safecode: ['-']
+  - id: CMX
+    value: '10'
+    url: https://cornucopia.owasp.org/cards/CMX
+    owasp_mastg: ['0370', '0394', '0395']
+    owasp_mastg_best: ['0045', '0054', '0071', '0072']
+    owasp_mastg_know: ['0079', '0019', '0080']
+    owasp_maswe: ['0029']
+    capec: [126]
+    safecode: [16]
+    threat:
+      '0029': Attackers can hijack deep links or inject malicious input into the app.
+    attack_vector:
+      '0046': Registering the same custom URL scheme to intercept links intended for
+        the app.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+  - id: CMJ
+    value: J
+    url: https://cornucopia.owasp.org/cards/CMJ
+    owasp_mastg: ['0043', '0086']
+    owasp_mastg_best: []
+    owasp_mastg_know: ['0005', '0060']
+    owasp_maswe: []
+    capec: [92, 100]
+    safecode: [3, 6, 36]
+  - id: CMQ
+    value: Q
+    url: https://cornucopia.owasp.org/cards/CMQ
+    owasp_mastg: ['0220', '0341', '0354']
+    owasp_mastg_best: ['0041', '0048']
+    owasp_mastg_know: ['0030', '0118', '0140', '0058', '0032', '0087']
+    owasp_maswe: ['0056', '0058']
+    capec: [167, 202, 554]
+    safecode: ['-']
+    threat:
+      '0056': Attackers can distribute and run modified copies of the app.
+      '0058': Attackers can modify the app's code while it runs.
+    attack_vector:
+      '0040': Patching or repackaging the app to remove or alter client-side checks.
+      '0068': Impersonating the app with scripts, bots, or tampered clients when interacting
+        with the backend.
+      '0069': Installing a repackaged version of the app on victim devices.
+      '0002': Debugging the app at runtime.
+      '0003': Using dynamic instrumentation.
+  - id: CMK
+    value: K
+    url: https://cornucopia.owasp.org/cards/CMK
+    owasp_mastg: ['0375']
+    owasp_mastg_best: ['0057']
+    owasp_mastg_know: ['0081', '0025', '0138']
+    owasp_maswe: ['0050']
+    capec: [17, 23, 165, 167, 636]
+    safecode: ['-']
+    threat:
+      '0050': Attackers can execute injection attacks against the app.
+    attack_vector:
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0059': Supplying crafted input through any external interface (network, IPC,
+        files, UI, or peripherals).
+  - id: CMA
+    value: A
+    url: https://cornucopia.owasp.org/cards/CMA
+    owasp_mastg: []
+    owasp_mastg_best: []
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+- id: WC
+  name: WILD CARD
+  cards:
+  - id: JOAM
+    value: A
+    url: https://cornucopia.owasp.org/cards/JOAM
+    owasp_mastg: []
+    owasp_mastg_best: ['0003']
+    owasp_mastg_know: []
+    owasp_maswe: []
+    capec: ['-']
+    safecode: ['-']
+  - id: JOBM
+    value: B
+    url: https://cornucopia.owasp.org/cards/JOBM
+    owasp_mastg: ['0206', '0254', '0255', '0256', '0281', '0318', '0319', '0360',
+      '0361', '0362', '0363', '0364', '0365', '0366', '0381']
+    owasp_mastg_best: ['0003', '0045', '0051', '0052', '0056', '0063']
+    owasp_mastg_know: ['0017', '0020', '0024', '0026', '0077', '0078', '0132', '0133',
+      '0134']
+    owasp_maswe: ['0073', '0066', '0074', '0018', '0032']
+    capec: ['-']
+    safecode: ['-']
+    threat:
+      '0073': Apps and embedded third-party components can collect or share more data
+        than users were led to expect.
+      '0066': Apps and embedded third-party components can access more sensitive device
+        resources and data than needed.
+      '0074': Apps and embedded third-party components can track users against their
+        expressed preferences.
+      '0018': Attackers can access sensitive data and functionality exposed by app
+        components.
+      '0032': Attackers can intercept or manipulate the app's intents.
+    attack_vector:
+      '0081': Collecting or sharing data categories that are not declared in the platform's
+        privacy labels.
+      '0082': Transmitting undeclared identifiers or analytics data to first- or third-party
+        services over the network.
+      '0088': Holding excessive or no-longer-needed permissions granted to the app.
+      '0089': Using permissions granted to the host app to call protected APIs and
+        collect data from a third-party SDK.
+      '0074': Collecting and correlating identifiers and usage data across apps, devices,
+        and services.
+      '0075': Contacting undeclared tracking domains that platform enforcement cannot
+        block.
+      '0038': Invoking exported or unprotected app components from another app installed
+        on the device.
+      '0039': Connecting to open ports or local services exposed by the app.
+      '0047': Delivering crafted deep links or intents from a malicious app or web
+        page.
+      '0049': Registering intent filters to intercept implicit intents sent by the
+        app.
+      '0050': Modifying or replaying mutable PendingIntents obtained from the app.
