@@ -1,11 +1,13 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export async function load({ params: _params }) {
+export async function load(event) {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'Source | OWASP Cornucopia',
-        description: 'Access the source files and raw data behind OWASP Cornucopia.',
-        keywords: 'OWASP, Cornucopia, source, data, files',
+        title: t?.source?.head?.title ?? fb?.source?.head?.title ?? 'OWASP Cornucopia - Source Code',
+        description: t?.source?.head?.description ?? fb?.source?.head?.description ?? '',
+        keywords: t?.source?.head?.keywords ?? fb?.source?.head?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org/source',
         type: 'website',
     };

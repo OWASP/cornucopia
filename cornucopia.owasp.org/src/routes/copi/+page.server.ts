@@ -1,11 +1,13 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export async function load({ params: _params }) {
+export async function load(event) {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'Copi | OWASP Cornucopia',
-        description: 'Play OWASP Cornucopia online with Copi, the digital companion for the card game.',
-        keywords: 'OWASP, Cornucopia, Copi, online, play',
+        title: t?.copi?.head?.title ?? fb?.copi?.head?.title ?? 'OWASP Cornucopia - Game Engine',
+        description: t?.copi?.head?.description ?? fb?.copi?.head?.description ?? '',
+        keywords: t?.copi?.head?.keywords ?? fb?.copi?.head?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org/copi',
         type: 'website',
     };

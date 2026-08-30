@@ -1,4 +1,5 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import Author from "$lib/components/author.svelte";
 
     import {readTranslation} from "$lib/stores/stores";
@@ -6,6 +7,7 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 <h1>{$t('news.author.h1')}</h1>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Metadata from "$lib/components/metadata.svelte";
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "$domain/card/card";
@@ -23,6 +24,7 @@
   }
 
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card} {versions} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} cardImages={data.cardImages} suitStyling={data.suitStyling} />

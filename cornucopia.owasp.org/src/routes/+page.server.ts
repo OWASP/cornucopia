@@ -3,12 +3,14 @@ import { MappingService } from "$lib/services/mappingService";
 import { SuitController } from "../domain/suit/suitController";
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export function load()
+export function load(event)
 {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'OWASP Cornucopia',
-        description: 'OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes.',
-        keywords: 'OWASP, Cornucopia, security, card game, threat modeling',
+        title: t?.layout?.title ?? fb?.layout?.title ?? 'OWASP Cornucopia',
+        description: t?.layout?.description ?? fb?.layout?.description ?? '',
+        keywords: t?.layout?.keywords ?? fb?.layout?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org',
         type: 'website',
     };

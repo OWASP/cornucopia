@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Metadata from "$lib/components/metadata.svelte";
   import type { PageData } from "./$types";
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
@@ -24,6 +25,7 @@
   }
 
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 {#if cardFound()}
 <CardFound

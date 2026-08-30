@@ -1,4 +1,5 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import SvelteMarkdown from "svelte-markdown";
     import { newsRenderers } from "$lib/components/renderers/renderers";
     import BlogpostMetadata from "$lib/components/blogpostMetadata.svelte";
@@ -9,19 +10,14 @@
     let blogpost = $derived(data.blogpost);
     let markdownRenderers = /** @type {any} */ (newsRenderers);
 </script>
-
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
     <BlogpostMetadata {blogpost}></BlogpostMetadata>
     <SvelteMarkdown renderers={markdownRenderers} source={blogpost.markdown}></SvelteMarkdown>
     <p>
-        <a
-            title="OWASP Cornucopia's repository"
-            rel="noopener"
-            href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md"
-        >{$t("news.slug.p1")}</a>
+        <a title="OWASP Cornucopia's repository" rel="noopener" href="https://github.com/OWASP/cornucopia/tree/master/cornucopia.owasp.org/data/news/{blogpost.path}/index.md">{$t("news.slug.p1")}</a>
     </p>
 </div>
-
 <style>
     p {
         text-align: center;

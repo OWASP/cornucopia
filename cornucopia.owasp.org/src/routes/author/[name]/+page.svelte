@@ -1,10 +1,12 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import { Text } from "$lib/utils/text";
     import SvelteMarkdown from "svelte-markdown";
     import { resolve } from "$app/paths";
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 <div class="container">
     <div class="left">

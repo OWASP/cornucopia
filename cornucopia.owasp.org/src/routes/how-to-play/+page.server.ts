@@ -1,12 +1,14 @@
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper.js';
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export async function load({ params: _params })
+export async function load(event)
 {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'How to Play | OWASP Cornucopia',
-        description: 'Learn how to play OWASP Cornucopia and use it in your security requirements process.',
-        keywords: 'OWASP, Cornucopia, how to play, instructions, guide',
+        title: t?.play?.head?.title ?? fb?.play?.head?.title ?? 'OWASP Cornucopia - How to play',
+        description: t?.play?.head?.description ?? fb?.play?.head?.description ?? '',
+        keywords: t?.play?.head?.keywords ?? fb?.play?.head?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org/how-to-play',
         type: 'website',
     };

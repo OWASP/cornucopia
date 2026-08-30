@@ -1,4 +1,5 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
 
     import { Text } from "$lib/utils/text";
     import { resolve } from "$app/paths";
@@ -54,6 +55,7 @@
         return map;
     });
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 
 <div>
     {#each groupedList as group (group.year)}
@@ -74,9 +76,9 @@
                         <div class="card-text">
                             <span class="title">{Text.Format(post.title)}</span>
                             <span class="meta">
-                                {Text.FormatDate(post.date)} â€¢ {post.author}
+                                {Text.FormatDate(post.date)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ {post.author}
                             </span>
-                            <span class="readmore">Read more â†’</span>
+                            <span class="readmore">Read more ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢</span>
                         </div>
                     </div>
                 </a>

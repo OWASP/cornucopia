@@ -4,20 +4,33 @@ import type { PageMetadata } from "$lib/types/metadata.js";
 
 export async function load({ params })
 {
-    const title: string = params.slug.toLowerCase();
-    const blogpost = await LocalCache(() => getBlogpostByTitle(title), 20, title);
+    const slug: string = params.slug.toLowerCase();
+    const blogpost = await LocalCache(() => getBlogpostByTitle(slug), 20, slug);
 
+    const canonicalUrl = `https://cornucopia.owasp.org/news/${encodeURIComponent(params.slug)}`;
+
+    // Use front-matter description; fall back to body excerpt only when absent
     const excerpt = (blogpost.markdown || '')
         .replace(/[#*_>`]/g, '')
         .replace(/\n+/g, ' ')
         .trim()
         .slice(0, 160);
 
+    const description = blogpost.description || excerpt || 'OWASP Cornucopia news article.';
+
+    // Use front-matter title when present; fall back to description, then slug
+    const title = (blogpost.title || blogpost.description || params.slug) + ' | OWASP Cornucopia';
+
+    // Normalize tags from front-matter
+    const keywords = Array.isArray(blogpost.tags)
+        ? blogpost.tags.map((t: string) => t.trim()).filter(Boolean).join(', ')
+        : 'OWASP, Cornucopia, news, security';
+
     const metadata: PageMetadata = {
-        title: blogpost.title ? `${blogpost.title} | OWASP Cornucopia` : 'News | OWASP Cornucopia',
-        description: excerpt || 'OWASP Cornucopia news article.',
-        keywords: 'OWASP, Cornucopia, news, security',
-        canonicalUrl: `https://cornucopia.owasp.org/news/${encodeURIComponent(blogpost.path)}`,
+        title,
+        description,
+        keywords,
+        canonicalUrl,
         type: 'article',
     };
 

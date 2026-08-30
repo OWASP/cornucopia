@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Metadata from "$lib/components/metadata.svelte";
     import SvelteMarkdown from 'svelte-markdown';
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import type { PageData } from "./$types";
@@ -87,6 +88,7 @@
         goto(`/card/${versionParam}`);
     }
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 <section title="OWASP Cornucopia decks" id="decks">
 {#if content != ''}

@@ -1,11 +1,13 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export async function load({ params: _params }) {
+export async function load(event) {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'Printing | OWASP Cornucopia',
-        description: 'Instructions and resources for printing your own OWASP Cornucopia card deck.',
-        keywords: 'OWASP, Cornucopia, printing, print, card deck',
+        title: t?.printing?.head?.title ?? fb?.printing?.head?.title ?? 'OWASP Cornucopia - Printing Guidelines',
+        description: t?.printing?.head?.description ?? fb?.printing?.head?.description ?? '',
+        keywords: t?.printing?.head?.keywords ?? fb?.printing?.head?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org/printing',
         type: 'website',
     };

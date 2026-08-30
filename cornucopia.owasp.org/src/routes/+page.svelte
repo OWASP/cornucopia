@@ -6,6 +6,7 @@
     import type { Suit } from "../domain/suit/suit.js";
     import {readTranslation} from "$lib/stores/stores";
     import { resolve } from "$app/paths";
+    import Metadata from "$lib/components/metadata.svelte";
 
     interface Props {
         data: Record<string, unknown>;
@@ -42,9 +43,11 @@
 </script>
 
 <svelte:head>
+    {#if data.metadata}<Metadata metadata={data.metadata} />{/if}
     <script type="application/ld+json">{@html structuredData}</script>
 </svelte:head>
 
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage id="top" title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h2 id="top">{$t('home.h1.1')}</h2>
@@ -54,7 +57,7 @@
     <p>
         {$t('home.p2')}
     </p>
-    <a title="OWASP Cornucopia homepage" href={resolve('/about')} class="internal-links">âž” {$t('home.a1')}</a>
+    <a title="OWASP Cornucopia homepage" href={resolve('/about')} class="internal-links">ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {$t('home.a1')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia Mobile Edition - In devs we trust" src="/images/cornucopia_logo_mobile_edition.svg" align="left">
     <h2>{$t('home.h1.2')}</h2>
@@ -73,21 +76,21 @@
         <li><a href={resolve('/how-to-play')}>{$t('home.ol.li8a')}</a>{$t('home.ol.li8')}</li>
         <li>{$t('home.ol.li9')}</li>
     </ol>
-    <a title="How to play OWASP Cornucopia" href={resolve('/how-to-play')} class="internal-links">âž” {$t('home.a2')}</a>
+    <a title="How to play OWASP Cornucopia" href={resolve('/how-to-play')} class="internal-links">ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {$t('home.a2')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia - Is open source under the Creative Commons Attribution-ShareAlike 3.0 license" src="/images/opensource.png" align="right">
     <h2>{$t('home.h1.3')}</h2>
     <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.
     </p>
     <p>{$t('home.p5')}</p>
-    <a title="OWASP Cornucopia Github repository" class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} âž”</a>
+    <a title="OWASP Cornucopia Github repository" class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</a>
 </TextImage>
 <TextImage title="Sponsors" src="/images/cornucopia_logo_25th_anniversary_edition.png">
     <h2 id="Sponsors">{$t('home.h1.4')}:</h2>
     <p>{$t('home.p6')}</p>
     <p>{$t('home.p7')}</p>
     <p>{$t('home.p8')}</p>
-    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} âž”</a></p>
+    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</a></p>
 </TextImage>
 <Spacer></Spacer>
 <style>

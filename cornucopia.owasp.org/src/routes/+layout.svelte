@@ -4,10 +4,8 @@
     import { page } from "$app/stores";
     import Breadcrumbs from "$lib/components/breadcrumbs.svelte";
     import Footer from "$lib/components/footer.svelte";
-    import Metadata from "$lib/components/metadata.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";
-    import type { PageMetadata } from "$lib/types/metadata.js";
 
     interface Props {
         data: Record<string, unknown>;
@@ -29,16 +27,6 @@
             return true;
         return false;
     }
-
-    const DEFAULT_METADATA: PageMetadata = {
-        title: 'OWASP Cornucopia',
-        description: 'OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes.',
-        keywords: 'OWASP, Cornucopia, security, card game, threat modeling',
-        canonicalUrl: 'https://cornucopia.owasp.org',
-        type: 'website',
-    };
-
-    let metadata = $derived((data.metadata as PageMetadata | undefined) ?? DEFAULT_METADATA);
 
     // add styles back in non-CSP violating way
     $effect(() => {
@@ -69,8 +57,6 @@
     }
     });
 </script>
-
-<Metadata {metadata}></Metadata>
 
 <div class="page">
     <Navbar></Navbar>

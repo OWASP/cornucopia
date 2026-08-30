@@ -4,12 +4,14 @@ import { getAuthors } from '../../domain/author/authorController.js';
 import { getBlogposts } from '../../domain/blogpost/blogpostController.js';
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export async function load({ params: _params })
+export async function load(event)
 {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'News | OWASP Cornucopia',
-        description: 'Latest news, updates and blog posts from the OWASP Cornucopia project.',
-        keywords: 'OWASP, Cornucopia, news, blog, updates',
+        title: t?.news?.head?.title ?? fb?.news?.head?.title ?? 'OWASP Cornucopia - News',
+        description: t?.news?.head?.description ?? fb?.news?.head?.description ?? '',
+        keywords: t?.news?.head?.keywords ?? fb?.news?.head?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org/news',
         type: 'website',
     };

@@ -1,12 +1,14 @@
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper.js';
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export async function load({ params: _params })
+export async function load(event)
 {
+    const t = event.locals.translation;
+    const fb = event.locals.fallbackTranslation;
     const metadata: PageMetadata = {
-        title: 'Taxonomy | OWASP Cornucopia',
-        description: 'Browse the OWASP Cornucopia taxonomy of security requirements and threat categories.',
-        keywords: 'OWASP, Cornucopia, taxonomy, threat modeling, requirements',
+        title: t?.taxonomy?.head?.title ?? fb?.taxonomy?.head?.title ?? 'OWASP Cornucopia - Requirements & Cross-references',
+        description: t?.taxonomy?.head?.description ?? fb?.taxonomy?.head?.description ?? '',
+        keywords: t?.taxonomy?.head?.keywords ?? fb?.taxonomy?.head?.keywords ?? '',
         canonicalUrl: 'https://cornucopia.owasp.org/taxonomy',
         type: 'website',
     };

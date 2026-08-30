@@ -1,4 +1,5 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import { Text } from '$lib/utils/text';
     import { resolve } from '$app/paths';
     import SvelteMarkdown from 'svelte-markdown'
@@ -7,6 +8,7 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 {#if data.categories.length != 0 }
 <h1 class="clickable" title="{Text.Format(data.title)}" id="{data.title}">{Text.Format(data.title)}</h1>
 {/if}
@@ -14,7 +16,7 @@
 
 <!--The location is a folder -->
 {#each data.categories as category (category)}
-    <p>â”œâ”€â”€<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+    <p>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 
 <!--The location is filecontent -->

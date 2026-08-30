@@ -5,7 +5,9 @@ import { MappingService } from '$lib/services/mappingService';
 import { getCardImagesByEdition, getSuitStylingByEdition } from '$lib/services/cardAppearanceLoader';
 import type { PageMetadata } from "$lib/types/metadata.js";
 
-export const load = (({ params: _params }) => {
+export const load = ((event) => {
+  const t = event.locals.translation;
+  const fb = event.locals.fallbackTranslation;
   const deckService = new DeckService();
   const decks = new Map<string, Map<string, unknown>>();
   const lang = 'en';
@@ -19,9 +21,9 @@ export const load = (({ params: _params }) => {
     'eop', DeckService.getLatestVersion('eop'), lang);
 
   const metadata: PageMetadata = {
-      title: 'Cards | OWASP Cornucopia',
-      description: 'Browse all OWASP Cornucopia security requirement cards across all editions.',
-      keywords: 'OWASP, Cornucopia, cards, security, requirements',
+      title: t?.cards?.head?.title ?? fb?.cards?.head?.title ?? 'OWASP Cornucopia - The card decks',
+      description: t?.cards?.head?.description ?? fb?.cards?.head?.description ?? '',
+      keywords: t?.cards?.head?.keywords ?? fb?.cards?.head?.keywords ?? '',
       canonicalUrl: 'https://cornucopia.owasp.org/cards',
       type: 'website',
   };
