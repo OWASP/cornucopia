@@ -3,7 +3,7 @@ import path from "path";
 import type { PageMetadata } from "$lib/types/metadata.js";
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ url }) {
+export async function load({ url, params }) {
   const lang = 'en';
   const [categories, content] = FileSystemHelper.getDataByRoute(url.pathname, lang);
 
@@ -23,7 +23,7 @@ export async function load({ url }) {
       title: `${pageTitle} | OWASP Cornucopia Taxonomy`,
       description: pageTitle,
       keywords: 'OWASP, Cornucopia, taxonomy, threat modeling, requirements',
-      canonicalUrl: `https://cornucopia.owasp.org${encodeURI(url.pathname)}`,
+      canonicalUrl: `https://cornucopia.owasp.org/taxonomy/${params.path.split("/").map(encodeURIComponent).join("/")}` ,
       type: 'website',
   };
 
