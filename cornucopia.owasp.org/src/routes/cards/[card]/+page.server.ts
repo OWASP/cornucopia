@@ -25,13 +25,6 @@ export const load = (async ({ params }) => {
   const fixedCode = legacyCardCodeFix(params.card?.toUpperCase() || "");
   const card: Card = cards.get(fixedCode) as Card;
   if (!card) {
-    const metadata: PageMetadata = {
-      title: `OWASP Cornucopia - Card Not Found`,
-      description: `The requested card could not be found.`,
-      keywords: `OWASP, Cornucopia`,
-      canonicalUrl: `https://cornucopia.owasp.org/cards/${encodeURIComponent(params.card)}`,
-      type: 'website',
-    };
     error(404, `Card not found: ${params.card}`);
   }
   const edition = card.edition;
