@@ -7,7 +7,6 @@
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";
     import Metadata from "$lib/components/metadata.svelte";
-    import { page } from "$app/stores";
 
     interface Props {
         data: Record<string, unknown>;
