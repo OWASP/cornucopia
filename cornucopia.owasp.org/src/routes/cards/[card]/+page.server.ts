@@ -1,5 +1,6 @@
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { DeckService } from "$lib/services/deckService";
+import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from "./$types";
 import type { Route } from "../../../domain/routes/route";
 import type { Card } from "$domain/card/card";
@@ -30,7 +31,7 @@ export const load = (async ({ params }) => {
   const card: Card = cards.get(fixedCode) as Card;
 
   if (!card) {
-    throw new Error(`Card not found: ${fixedCode}`);
+    error(404, `Card not found: ${params.card}`);
   }
 
   const edition = card.edition;
@@ -47,7 +48,7 @@ export const load = (async ({ params }) => {
       title: `OWASP Cornucopia - ${Text.convertToTitleCase(card.suitName)} (${card.id})`,
       description: card.desc || `OWASP Cornucopia card ${card.id}`,
       keywords: `OWASP, Cornucopia, ${edition}, ${Text.convertToTitleCase(card.suitName)}, ${card.id}`,
-      canonicalUrl: `https://cornucopia.owasp.org/cards/${encodeURIComponent(fixedCode)}`,
+      canonicalUrl: `https://cornucopia.owasp.org/cards/${encodeURIComponent(params.card)}`,
       type: 'website',
   };
 
