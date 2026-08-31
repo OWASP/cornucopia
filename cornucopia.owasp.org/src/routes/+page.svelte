@@ -41,13 +41,11 @@
         ]
     }).replace(/</g, '\\u003c'));
 </script>
-
 <svelte:head>
     {#if data.metadata}<Metadata metadata={data.metadata} />{/if}
     <script type="application/ld+json">{@html structuredData}</script>
 </svelte:head>
 
-{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage id="top" title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h2 id="top">{$t('home.h1.1')}</h2>
@@ -57,17 +55,17 @@
     <p>
         {$t('home.p2')}
     </p>
-    <a title="OWASP Cornucopia homepage" href={resolve('/about')} class="internal-links">ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {$t('home.a1')}</a>
+    <a title="OWASP Cornucopia homepage" href={resolve('/about')} class="internal-links">Γ₧ö {$t('home.a1')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia Mobile Edition - In devs we trust" src="/images/cornucopia_logo_mobile_edition.svg" align="left">
     <h2>{$t('home.h1.2')}</h2>
     <p>{$t('home.p3')}</p>
     <ol>
-        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('home.ol.li1')}</li>
-        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('home.ol.li2')}<a title="Print your OWASP Cornucopia deck" href={resolve('/printing')}>{$t('home.ol.li2a')}</a>);</li>
-        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('home.ol.li3')}<a title="Play OWASP Cornucopia online on Copi" rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
         <li>{$t('home.ol.li4')}</li>
         <li>{$t('home.ol.li5')}</li>
@@ -76,21 +74,21 @@
         <li><a href={resolve('/how-to-play')}>{$t('home.ol.li8a')}</a>{$t('home.ol.li8')}</li>
         <li>{$t('home.ol.li9')}</li>
     </ol>
-    <a title="How to play OWASP Cornucopia" href={resolve('/how-to-play')} class="internal-links">ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {$t('home.a2')}</a>
+    <a title="How to play OWASP Cornucopia" href={resolve('/how-to-play')} class="internal-links">Γ₧ö {$t('home.a2')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia - Is open source under the Creative Commons Attribution-ShareAlike 3.0 license" src="/images/opensource.png" align="right">
     <h2>{$t('home.h1.3')}</h2>
     <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.
     </p>
     <p>{$t('home.p5')}</p>
-    <a title="OWASP Cornucopia Github repository" class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</a>
+    <a title="OWASP Cornucopia Github repository" class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} Γ₧ö</a>
 </TextImage>
 <TextImage title="Sponsors" src="/images/cornucopia_logo_25th_anniversary_edition.png">
     <h2 id="Sponsors">{$t('home.h1.4')}:</h2>
     <p>{$t('home.p6')}</p>
     <p>{$t('home.p7')}</p>
     <p>{$t('home.p8')}</p>
-    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¾ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</a></p>
+    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} Γ₧ö</a></p> 
 </TextImage>
 <Spacer></Spacer>
 <style>
@@ -102,6 +100,7 @@
         margin:0;
         font-size: 3rem
     }
+    
 
     a,p,ol
     {
@@ -142,8 +141,15 @@
         color: rgb(41, 0, 176);
     }
 
-    @media (max-width: 767px)
+    @media (max-width: 767px) 
     {
-
+        
     }
 </style>
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 import { LocalCache } from "$lib/utils/cache.js";
 import { getBlogpostByTitle } from "../../../domain/blogpost/blogpostController.js";
+import { Text } from "$lib/utils/text.js";
 import type { PageMetadata } from "$lib/types/metadata.js";
 
 export async function load({ params })
@@ -19,7 +20,8 @@ export async function load({ params })
     const description = blogpost.description || excerpt || 'OWASP Cornucopia news article.';
 
     // Use front-matter title when present; fall back to description, then slug
-    const title = (blogpost.title || blogpost.description || params.slug) + ' | OWASP Cornucopia';
+    const rawTitle = blogpost.title || blogpost.description || params.slug;
+    const title = Text.Format(rawTitle) + ' | OWASP Cornucopia';
 
     // Normalize tags from front-matter
     const keywords = Array.isArray(blogpost.tags)
