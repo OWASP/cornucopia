@@ -5,7 +5,6 @@
 
 
     import { readLang, readTranslation } from "$lib/stores/stores";
-    import Metadata from "$lib/components/metadata.svelte";
 
     /** @type {{data: any}} */
     let { data } = $props();
@@ -57,7 +56,14 @@
 </script>
 
 <svelte:head>
-    {#if data.metadata}<Metadata metadata={data.metadata} />{/if}
+    <title>{$t("printing.head.title")}</title>
+    <link rel="canonical" href="https://cornucopia.owasp.org/news" />
+    <meta name="description" content={$t("news.head.description")} />
+    <meta name="keywords" content={$t("news.head.keywords")} />
+    <meta property="og:title" content={$t("news.head.title")} />
+    <meta property="og:description" content={$t("news.head.description")} />
+    <meta name="twitter:title" content={$t("news.head.title")} />
+    <meta name="twitter:description" content={$t("news.head.description")} />
 </svelte:head>
 
 <div>
@@ -79,9 +85,9 @@
                         <div class="card-text">
                             <span class="title">{Text.Format(post.title)}</span>
                             <span class="meta">
-                                {Text.FormatDate(post.date)} ΓÇó {post.author}
+                                {Text.FormatDate(post.date)} &#x2022; {post.author}
                             </span>
-                            <span class="readmore">Read more ΓåÆ</span>
+                            <span class="readmore">Read more &#x2192;</span>
                         </div>
                     </div>
                 </a>

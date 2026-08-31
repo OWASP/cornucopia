@@ -4,22 +4,28 @@
     import {readLang, readTranslation} from "$lib/stores/stores";
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import SvelteMarkdown from "svelte-markdown";
-    import Metadata from "$lib/components/metadata.svelte";
     /** @type {{data: any}} */
     let { data } = $props();
-    let _t = readTranslation();
+    let t = readTranslation();
     const lang = readLang();
     let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
 <svelte:head>
-    {#if data.metadata}<Metadata metadata={data.metadata} />{/if}
+    <link rel="canonical" href="https://cornucopia.owasp.org/taxonomy" />
+    <title>{$t('taxonomy.head.title')}</title>
+	<meta name="description" content="{$t('taxonomy.head.description')}" />
+	<meta name="keywords" content="{$t('taxonomy.head.keywords')}" />
+    <meta property="og:title" content="{$t('taxonomy.head.title')}">
+    <meta property="og:description" content="{$t('taxonomy.head.description')}">
+    <meta name="twitter:title" content="{$t('taxonomy.head.title')}">
+    <meta name="twitter:description" content="{$t('taxonomy.head.description')}">
 </svelte:head>
 <div>
 {#if content != ''}
     <SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
 {/if}
 {#each data.categories as category (category)}
-    <p>Γö£ΓöÇΓöÇ<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+    <p>&#x251C;&#x2500;&#x2500;<a title="{Text.Format(category)}" href={resolve('/taxonomy/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 </div>
 <style>
