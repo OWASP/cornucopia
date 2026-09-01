@@ -56,7 +56,6 @@ export default defineConfig({
             '/.svelte-kit/**',
                 'src/routes/**/*.server.ts',
                 'src/routes/**/*.server.js',
-                'metadata.test.ts'
-        ]
+                ]
     }
 });
