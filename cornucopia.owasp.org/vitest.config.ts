@@ -35,7 +35,10 @@ export default defineConfig({
                 'static/**',
                 'src/scripts/**',
                 'build/**',
-                '.svelte-kit/**'
+                '/.svelte-kit/**',
+                'src/routes/**/*.server.ts',
+                'src/routes/**/*.server.js',
+                'metadata.test.ts'
             ]
         },
         include: ['**/*.test.ts', '**/*.test.tsx'],
@@ -50,7 +53,10 @@ export default defineConfig({
             'static/**',
             'src/scripts/**',
             'build/**',
-            '.svelte-kit/**'
+            '/.svelte-kit/**',
+                'src/routes/**/*.server.ts',
+                'src/routes/**/*.server.js',
+                'metadata.test.ts'
         ]
     }
 });
