@@ -1,5 +1,10 @@
 {
   "home": {
+    "head": {
+      "title": "OWASP Cornucopia - Threat modeling for everyone",
+      "description": "OWASP Cornucopia is a mechanism in the form of a card game to assist software development teams identify security requirements in Agile, conventional and formal development processes.",
+      "keywords": "OWASP, Cornucopia, threat modeling, card game, security, agile"
+    },
     "title": "Home",
     "h1": {
       "1": "Introduction",
@@ -34,6 +39,6 @@
     "p6": "We thank our donors for providing the funds to support us on our project activities.",
     "p7": "OWASP Cornucopia & the OWASP Foundation is very grateful for the support by the individuals and organizations listed. However please note, the OWASP Foundation is strictly vendor neutral and does not endorse any of its supporters. Donations do not influence the content of OWASP Cornucopia in any way.",
     "p8": "Read more about the benefits of becoming a Gold, Silver, Bronze, or Supporter sponsor.",
-    "a4": "Enhance Your Brand’s Commitment to Security by Sponsoring OWASP Cornucopia"
+    "a4": "Enhance Your Brandâ€™s Commitment to Security by Sponsoring OWASP Cornucopia"
   }
 }
