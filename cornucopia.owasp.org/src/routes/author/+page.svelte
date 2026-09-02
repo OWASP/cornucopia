@@ -12,7 +12,7 @@
 <h1>{$t('news.author.h1')}</h1>
 
 <div class="container">
-    {#each data.authors as author (author.id)}
+    {#each data.authors as author (author.name)}
         <Author {author}></Author>
     {/each}
 </div>
