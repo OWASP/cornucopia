@@ -1,9 +1,9 @@
 import { getPageMetadata } from '$lib/utils/pageMetadata.js';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper.js';
 
-export async function load(event)
+export async function load(_event)
 {
-    const metadata = getPageMetadata(event, 'taxonomy', 'https://cornucopia.owasp.org/taxonomy');
+    const metadata = getPageMetadata('taxonomy', 'https://cornucopia.owasp.org/taxonomy');
     return {
         metadata,
         content: FileSystemHelper.getDataFromPath('data/website/pages/taxonomy'),

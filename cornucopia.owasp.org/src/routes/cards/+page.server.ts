@@ -5,7 +5,7 @@ import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { MappingService } from '$lib/services/mappingService';
 import { getCardImagesByEdition, getSuitStylingByEdition } from '$lib/services/cardAppearanceLoader';
 
-export const load = ((event) => {
+export const load = ((_event) => {
   const deckService = new DeckService();
   const decks = new Map<string, Map<string, unknown>>();
   const lang = 'en';
@@ -18,7 +18,7 @@ export const load = ((event) => {
   const eopCards = deckService.getCardDataForEditionVersionLang(
     'eop', DeckService.getLatestVersion('eop'), lang);
 
-  const metadata = getPageMetadata(event, 'cards', 'https://cornucopia.owasp.org/cards');
+  const metadata = getPageMetadata('cards', 'https://cornucopia.owasp.org/cards');
 
   return {
     metadata,

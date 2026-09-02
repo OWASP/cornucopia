@@ -5,7 +5,7 @@ import { SuitController } from "../domain/suit/suitController";
 
 export function load(_event)
 {
-    const metadata = getPageMetadata(_event, 'home', 'https://cornucopia.owasp.org');
+    const metadata = getPageMetadata('home', 'https://cornucopia.owasp.org');
 
     return {
         metadata,

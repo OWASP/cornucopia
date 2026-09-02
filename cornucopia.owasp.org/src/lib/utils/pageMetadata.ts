@@ -2,6 +2,7 @@ import en from '$lib/translations/en/index.js';
 import type { PageMetadata } from '$lib/types/metadata.js';
 
 type TranslationRecord = Record<string, unknown>;
+
 const isRecord = (value: unknown): value is TranslationRecord =>
     typeof value === 'object' && value !== null;
 
@@ -12,13 +13,10 @@ const getText = (
     useHead: boolean,
 ): string | undefined => {
     if (!isRecord(source)) return undefined;
-
     const sectionValue = source[section];
     if (!isRecord(sectionValue)) return undefined;
-
     const value = useHead ? sectionValue.head : sectionValue;
     if (!isRecord(value)) return undefined;
-
     const text = value[field];
     return typeof text === 'string' && text.trim() ? text : undefined;
 };
