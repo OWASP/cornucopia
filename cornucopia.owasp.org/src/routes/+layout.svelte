@@ -4,9 +4,9 @@
     import { page } from "$app/stores";
     import Breadcrumbs from "$lib/components/breadcrumbs.svelte";
     import Footer from "$lib/components/footer.svelte";
-    import Metadata from "$lib/components/metadata.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";
+
     interface Props {
         data: Record<string, unknown>;
         children?: import('svelte').Snippet;
@@ -27,7 +27,6 @@
             return true;
         return false;
     }
-
 
     // add styles back in non-CSP violating way
     $effect(() => {
@@ -58,8 +57,6 @@
     }
     });
 </script>
-
-<Metadata></Metadata>
 
 <div class="page">
     <Navbar></Navbar>

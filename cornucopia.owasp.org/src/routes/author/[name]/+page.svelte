@@ -1,20 +1,12 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import { Text } from "$lib/utils/text";
     import SvelteMarkdown from "svelte-markdown";
     import { resolve } from "$app/paths";
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
-<svelte:head>
-    <link rel="canonical" href="/author" />
-        <title>OWASP Cornucopia - {data.author.name}</title>
-        <meta name="description" content="OWASP Cornucopia - {data.author.name}" />
-        <meta name="keywords" content="OWASP, Cornucopia, {data.author.name}" />
-        <meta property="og:title" content="OWASP Cornucopia - {data.author.name}">
-        <meta property="og:description" content="OWASP Cornucopia - {data.author.name}">
-        <meta name="twitter:title" content="OWASP Cornucopia - {data.author.name}">
-        <meta name="twitter:description" content="OWASP Cornucopia - {data.author.name}">
-</svelte:head>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 <div class="container">
     <div class="left">

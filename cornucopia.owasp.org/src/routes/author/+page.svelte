@@ -1,4 +1,5 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import Author from "$lib/components/author.svelte";
 
     import {readTranslation} from "$lib/stores/stores";
@@ -6,16 +7,7 @@
     /** @type {{data: any}} */
     let { data } = $props();
 </script>
-<svelte:head>
-    <title>{$t('author.head.title')}</title>
-    <link rel="canonical" href="https://cornucopia.owasp.org/author" />
-    <meta name="description" content="{$t('author.head.description')}" />
-	<meta name="keywords" content="{$t('author.head.keywords')}" />
-    <meta property="og:title" content="{$t('author.head.title')}">
-    <meta property="og:description" content="{$t('author.head.description')}">
-    <meta name="twitter:title" content="{$t('author.head.title')}">
-    <meta name="twitter:description" content="{$t('author.head.description')}">
-</svelte:head>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 <h1>{$t('news.author.h1')}</h1>
 
