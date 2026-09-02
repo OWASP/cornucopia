@@ -2,13 +2,6 @@ import en from '$lib/translations/en/index.js';
 import type { PageMetadata } from '$lib/types/metadata.js';
 
 type TranslationRecord = Record<string, unknown>;
-type MetadataEvent = {
-    locals?: {
-        translation?: unknown;
-        fallbackTranslation?: unknown;
-    };
-};
-
 const isRecord = (value: unknown): value is TranslationRecord =>
     typeof value === 'object' && value !== null;
 
@@ -31,16 +24,11 @@ const getText = (
 };
 
 export const getPageMetadata = (
-    event: MetadataEvent,
     section: string,
     canonicalUrl: string,
     useHead = true,
 ): PageMetadata => {
-    const sources = [
-        event.locals?.translation,
-        event.locals?.fallbackTranslation,
-        en,
-    ];
+    const sources = [en];
     const read = (field: 'title' | 'description' | 'keywords') =>
         sources
             .map((source) => getText(source, section, field, useHead))

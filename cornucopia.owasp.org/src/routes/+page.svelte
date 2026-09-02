@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Metadata from "$lib/components/metadata.svelte";
     import Hero from "$lib/components/hero/hero.svelte";
     import Spacer from "$lib/components/spacer.svelte";
     import TextImage from "$lib/components/textImage.svelte";
@@ -35,43 +36,33 @@
                 "@type": "WebSite",
                 "name": $t('layout.title'),
                 "url": "https://cornucopia.owasp.org",
-                "description": $t('layout.description')
             }
         ]
     }).replace(/</g, '\\u003c'));
 </script>
+
+<Metadata metadata={data.metadata} />
+
 <svelte:head>
-    	<title>{$t('layout.title')}</title>
-		<link rel="canonical" href="https://cornucopia.owasp.org" />
-        <meta name="description" content="{$t('layout.description')}" />
-		<meta name="keywords" content="{$t('layout.keywords')}" />
-        <meta property="og:title" content="{$t('layout.title')}">
-        <meta property="og:description" content="{$t('layout.description')}">
-        <meta name="twitter:title" content="{$t('layout.title')}">
-        <meta name="twitter:description" content="{$t('layout.description')}">
-        <script type="application/ld+json">{@html structuredData}</script>
+    <script type="application/ld+json">{@html structuredData}</script>
 </svelte:head>
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage id="top" title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
     <h2 id="top">{$t('home.h1.1')}</h2>
-    <p>
-        {$t('home.p1')}
-    </p>
-    <p>
-        {$t('home.p2')}
-    </p>
+    <p>{$t('home.p1')}</p>
+    <p>{$t('home.p2')}</p>
     <a title="OWASP Cornucopia homepage" href={resolve('/about')} class="internal-links">&#x2794; {$t('home.a1')}</a>
 </TextImage>
 <TextImage title="OWASP Cornucopia Mobile Edition - In devs we trust" src="/images/cornucopia_logo_mobile_edition.svg" align="left">
     <h2>{$t('home.h1.2')}</h2>
     <p>{$t('home.p3')}</p>
     <ol>
-        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('home.ol.li1')}</li>
-        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('home.ol.li2')}<a title="Print your OWASP Cornucopia deck" href={resolve('/printing')}>{$t('home.ol.li2a')}</a>);</li>
-        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->`n        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <li><!-- eslint-disable-next-line svelte/no-at-html-tags -->
         {@html $t('home.ol.li3')}<a title="Play OWASP Cornucopia online on Copi" rel="noopener" href="https://copi.owasp.org">copi.owasp.org</a>.</li>
         <li>{$t('home.ol.li4')}</li>
         <li>{$t('home.ol.li5')}</li>
@@ -84,8 +75,7 @@
 </TextImage>
 <TextImage title="OWASP Cornucopia - Is open source under the Creative Commons Attribution-ShareAlike 3.0 license" src="/images/opensource.png" align="right">
     <h2>{$t('home.h1.3')}</h2>
-    <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.
-    </p>
+    <p>{$t('home.p4.1')}<a rel="noopener" href="https://github.com/OWASP/cornucopia/releases/tag/v2.0.0">{$t('home.p4.2')}</a>.</p>
     <p>{$t('home.p5')}</p>
     <a title="OWASP Cornucopia Github repository" class="internal-links" rel="noopener" href="https://github.com/OWASP/cornucopia">{$t('home.a3')} &#x2794;</a>
 </TextImage>
@@ -94,7 +84,7 @@
     <p>{$t('home.p6')}</p>
     <p>{$t('home.p7')}</p>
     <p>{$t('home.p8')}</p>
-    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} &#x2794;</a></p> 
+    <p><a title="OWASP Cornucopia sponsorship" class="internal-links" href={resolve('/news/20260525-become-a-cornucopia-sponsor')}>{$t('home.a4')} &#x2794;</a></p>
 </TextImage>
 <Spacer></Spacer>
 <style>
@@ -106,7 +96,6 @@
         margin:0;
         font-size: 3rem
     }
-    
 
     a,p,ol
     {
@@ -146,16 +135,4 @@
         transform: translate(1rem,0);
         color: rgb(41, 0, 176);
     }
-
-    @media (max-width: 767px) 
-    {
-        
-    }
 </style>
-
-
-
-
-
-
-

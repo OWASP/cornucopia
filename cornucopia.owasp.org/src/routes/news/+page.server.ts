@@ -4,9 +4,9 @@ import { LocalCache } from '$lib/utils/cache.js';
 import { getAuthors } from '../../domain/author/authorController.js';
 import { getBlogposts } from '../../domain/blogpost/blogpostController.js';
 
-export async function load(event)
+export async function load(_event)
 {
-    const metadata = getPageMetadata(event, 'news', 'https://cornucopia.owasp.org/news');
+    const metadata = getPageMetadata('news', 'https://cornucopia.owasp.org/news');
     return {
         metadata,
         content: FileSystemHelper.getDataFromPath('data/website/pages/news'),

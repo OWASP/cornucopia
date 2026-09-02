@@ -6,7 +6,6 @@
     import Footer from "$lib/components/footer.svelte";
     import Navbar from "$lib/components/navigation/navbar.svelte";
     import {updateTranslation, updateLang} from "$lib/stores/stores";
-    import Metadata from "$lib/components/metadata.svelte";
 
     interface Props {
         data: Record<string, unknown>;
@@ -59,11 +58,6 @@
     });
 </script>
 
-<svelte:head>
-    {#if !$page.data.metadata}
-        <Metadata metadata={{ title: "OWASP Cornucopia", description: "OWASP Cornucopia is a mechanism in the form of a card game to help software development teams identify security requirements.", keywords: "OWASP, Cornucopia, security, card game", canonicalUrl: `https://cornucopia.owasp.org${$page.url.pathname}`, type: "website" }} />
-    {/if}
-</svelte:head>
 <div class="page">
     <Navbar></Navbar>
     <div class="slot-container" class:wide={getFullWidthPages($page.url.pathname)}>
