@@ -1,10 +1,10 @@
-## Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking
+## Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg, and/or URL scheme hijacking
 
 Pramod notices that Ade’s mobile application does not properly validate exported activities or incoming intents. The app allows deep links for authentication flows but fails to verify their origin.
 
 By launching a tapjacking overlay, Pramod places a transparent malicious layer over Ade’s login screen. The user believes they are interacting with the legitimate application, but their credentials are actually being captured by Pramod’s hidden interface.
 
-In another scenario, Pramod exploits StrandHogg by registering a malicious activity that mimics Ade’s login page. When the victim enters their username and password, the credentials are intercepted before the user is redirected back to the real app to avoid suspicion.
+In another scenario, Pramod exploits StrandHogg by registering a malicious activity that mimics Ade’s login page. When the victim enters their username and password, the credentials are intercepted before the user is redirected back to the real app, avoiding suspicion.
 
 If URL schemes are not properly validated, Pramod can also hijack authentication callbacks and intercept sensitive tokens during redirection flows.
 

@@ -2,15 +2,15 @@
 
 ### Example
 
-Henrietta likes to ask her colleagues for advice. There is especially one colleagues that she trust intimately, Vandana. Vandana recommends Henrietta to install a photo app her boyfriend has Vibe coded that allows her to make her look yonger and more attractive on the pictures taken by her phone without making the changes looks obvious. Vandana borrows Henrietta's phone so that she may install it. On the same phone Henrietta also have her bank app that blindly trust the phone's biometric success callback without verifying a hardware-backed cryptographic key. Vandana therefor able to add her own fingerprint to Henrietta's phone settings and use it to open the bank app without invalidating the app's internal session.
-One of the apps this applies to, happen to belong to her local bank. Not long after, Vandana leaves for a sabbatical with her boyfriend while Henrietta is left figuring out why she suddenly has accumulated a large amount of credit card debt.
+Henrietta likes to ask her colleagues for advice. There is one colleague in particular whom she trusts intimately: Vandana. Vandana recommends that Henrietta install a photo app her boyfriend has vibe-coded that allows her to look younger and more attractive in pictures taken by her phone without making the changes look obvious. Vandana borrows Henrietta's phone to install it. On the same phone, Henrietta also has her bank app, which blindly trusts the phone's biometric success callback without verifying a hardware-backed cryptographic key. Vandana is therefore able to add her own fingerprint to Henrietta's phone settings and use it to open the bank app without invalidating the app's internal session.
+One of the apps to which this applies happens to belong to her local bank. Not long after, Vandana leaves for a sabbatical with her boyfriend while Henrietta is left figuring out why she has suddenly accumulated a large amount of credit card debt.
 
 ## Threat Modeling
 
 ### STRIDE
 
-The situation falls under the **Tampering** and **Information Disclosure** category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
-The banking app, on Henrietta's phone, does not securely interact with the platform security components such as the keystore or keychain. By abusing weaknesses in biometric authentication logic (due to improperly bound or misconfigured biometric authentication controls, insecure fallbacks, or unhandled configuration changes) her colleague can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
+The situation falls under the **Tampering** and **Information Disclosure** categories in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
+The banking app on Henrietta's phone does not securely interact with platform security components such as the keystore or keychain. By abusing weaknesses in biometric authentication logic (due to improperly bound or misconfigured biometric authentication controls, insecure fallbacks, or unhandled configuration changes), her colleague can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
 
 This issue commonly arises when security-relevant decisions are enforced on the device using client-side controls that are implemented incorrectly or can be bypassed.
 

@@ -5,10 +5,10 @@
 Inventing an authentication threat can lead to:
 
 1. **User Impersonation**: Attackers access other users’ accounts and perform actions as them.
-2. **Unauthorized Privilege Access**: Exploit weak authentication to perform higher-privileged actions.
+2. **Unauthorized Privileged Access**: Exploit weak authentication to perform higher-privileged actions.
 3. **Credential Theft**: Capture passwords, API keys, or tokens.
 4. **Bypassing Multi-Factor Authentication**: Circumventing 2FA or step-up authentication.
-8. **Audit/Repudiation Issues**: Actions may be performed without proper identity attribution.
+5. **Audit/Repudiation Issues**: Actions may be performed without proper identity attribution.
 
 
 ## Threat Modeling
@@ -20,7 +20,7 @@ For authorization threats, the primary impact is usually **Elevation of Privileg
 
 ### What can go wrong?
 
-If You have invented a new attack against “Authentication & Authorization”, the following threats are:
+If you have invented a new attack against “Authentication & Authorization”, the following threats may arise:
 
 - User impersonation
 - Privilege escalation

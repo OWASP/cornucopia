@@ -16,7 +16,7 @@ In another case, an internal error in role validation causes the authorization l
 
 ### STRIDE
 
-This scenario falls under the **Elevation of Privilege** of the STRIDE threat modeling framework. Wong isn't faking an identity (**Spoofing**). Instead, the system's logic defaults to grant him unauthorized access **Elevation of Privilege**. He may be doing this through **Tampering** (method of attack), but the impact is **Elevation of Privilege**.
+This scenario falls under the **Elevation of Privilege** category of the STRIDE threat modeling framework. Wong is not faking an identity (**Spoofing**). Instead, the system's logic defaults to granting him unauthorized access, resulting in **Elevation of Privilege**. He may be doing this through **Tampering** (the method of attack), but the impact is **Elevation of Privilege**.
 By failing to enforce secure authentication checks and defaulting to permissive behavior during errors, the system enables Wong to gain unauthorized access.
 
 ### What can go wrong?
