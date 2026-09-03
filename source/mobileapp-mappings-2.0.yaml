@@ -554,7 +554,6 @@ suits:
         page.
       '0051': Injecting malicious JavaScript into WebView content (e.g., via MITM
         on insecure connections or a compromised website).
-        
       '0059': Supplying crafted input through any external interface (network, IPC,
         files, UI, or peripherals).
   - id: AAK
