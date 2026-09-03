@@ -1,4 +1,4 @@
-## Scenario: Wong can bypass the authentication because it does not fail securely (i.e. it defaults to allowing unauthenticated access)
+## Scenario: Wong can bypass authentication because the app trusts client-side authentication results or defaults to allowing access when verification fails
 
 Wong discovers that the mobile application does not properly handle authentication failures. When authentication checks fail due to unexpected errors, network issues, or misconfigurations, the application defaults to granting access instead of denying it.
 
@@ -16,8 +16,7 @@ In another case, an internal error in role validation causes the authorization l
 
 ### STRIDE
 
-This scenario falls under the Spoofing category of the STRIDE threat modeling framework.
-
+This scenario falls under the **Elevation of Privilege** of the STRIDE threat modeling framework. Wong isn't faking an identity (**Spoofing**). Instead, the system's logic defaults to grant him unauthorized access **Elevation of Privilege**. He may be doing this through **Tampering** (method of attack), but the impact is **Elevation of Privilege**.
 By failing to enforce secure authentication checks and defaulting to permissive behavior during errors, the system enables Wong to gain unauthorized access.
 
 ### What can go wrong?
@@ -38,3 +37,5 @@ Fail-open logic significantly weakens the security boundary of the application a
 - Implement robust error handling that does not bypass security controls.
 - Add server-side validation to prevent client-side logic manipulation.
 - Include automated tests to verify that authentication failures always result in access denial.
+
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.

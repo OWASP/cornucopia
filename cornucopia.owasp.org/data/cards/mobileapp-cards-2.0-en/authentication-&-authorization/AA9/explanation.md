@@ -37,6 +37,4 @@ This is due to a privilege escalation vulnerability (CVE-2019-2200) which was fi
 - Avoid using "normal" and "dangerous" `android:protectionLevel`.  
 - Be aware of custom orphaned permissions. Prefer using Signature Permissions wherever possible to mitigate the risk of dangling permission being used by malicious apps. You can use signature checks so when an app makes a request for another of your apps, the second app can verify that both apps are signed with the same certificate before complying with the request.
  
-### References: 
- 
-- [Android: Custom Permissions](https://developer.android.com/privacy-and-security/risks/custom-permissions)
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.

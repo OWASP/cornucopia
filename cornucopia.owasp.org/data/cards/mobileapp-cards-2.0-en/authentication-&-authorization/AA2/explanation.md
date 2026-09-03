@@ -1,24 +1,21 @@
-## Scenario: Anant can perform sensitive operations without additional authentication because authentication requirements are too weak or missing
-
-Anant wants to see his saved "Ultra Secret" note in the app. The app asks for a PIN to "unlock" the note view. Anant bypasses the UI check using instrumentation. Because the note was encrypted with a hardcoded key (or no key bound to the biometric), he successfully views the note without providing the PIN.
+## Scenario: Anant can perform sensitive operations without step-up or re-authentication because authentication requirements have not taken into account risk related to transactions or contextual changes
 
 ### Example
 
-Anant opens his "Vault" app. He navigates to the "View Secret" page. The app prompts for a fingerprint. Anant uses a script to hook the `onAuthenticationSucceeded` callback or the boolean check `isUnlocked`, forcing it to true. The app, which merely hid the text field behind a view overlap, now reveals the secret text. If the app had used the Android Keystore to encrypt the note, Anant's bypass would have failed because the decryption key would never have been released by the OS.
+Anant brother, a notorious casanova, keeps track of the names and phone number of all the girls that he dates in a black note book that he keeps in a consumer safe in his room. After a falling-out, Anant decides he wants to see his brother's secrets notes so that he can make prank calls to some of his brother's girlfriends. The safe uses a mobile app to lock and unlock the door. In a moment of unawareness, while going to the kitchen for some snacks, Anant grabs his brother's unlocked phone, points it towards the ceiling (where his brother's room is), and pushes the unlock button. The safe opens and his brothers secret black book, aren't that secret anymore.
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario falls under the **Tampering** and **Information Disclosure** categories of STRIDE.
-
-Anant performs **Tampering** by modifying the application's runtime logic to bypass the check, leading to **Information Disclosure** of the sensitive note.
+This scenario falls under the **Spoofing**, **Elevation of Privilege** and **Information Disclosure** categories of STRIDE. The app used by the safe performs sensitive actions without step-up or re-authentication allowing Anant to easily access his brother's safe by pushing a button.
+Anant performs **Spoofing** due to missing step-up or re-authentication. That allows him to elevate his own privileges (**Elevation of Privilege**) by opening his brothers safe, and accessing his brother's secret black book, leading to **Information Disclosure**.
 
 ### What can go wrong?
 
-**Logic-Only Gates:** Relying on simple boolean flags (e.g., `if (isUnlocked)`) allows attackers to flip the flag and bypass the check.
+**Missing step-up or re-authentication:** If sensitive actions can be submitted without aditional step-up or re-authentication, these actions may get exploited while the user is distracted.
 
-**Insecure Storage:** If data is stored in plain text or encrypted with a static key, bypassing the authentication screen grants immediate access to the data.
+**Insecure Storage:** If the key for encryption of sensitive data stored on the mobile phone can be accessed without a successful biometric or PIN verification, bypassing the apps authentication screen grants immediate access to sensitive data.
 
 ### What are we going to do about it?
 
@@ -26,5 +23,6 @@ Anant performs **Tampering** by modifying the application's runtime logic to byp
 
 **Crypto-Binding:** Ensure the sensitive data can only be decrypted using the key that is released *only* after a successful biometric or PIN verification.
 
+**Step-up or Re-authentication:** Ensure senstive transactions are protected by an extra authentication step before the transaction is executed.
 
-https://mas.owasp.org/MASTG/tests/ios/MASVS-AUTH/MASTG-TEST-0064/#static-analysis
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.

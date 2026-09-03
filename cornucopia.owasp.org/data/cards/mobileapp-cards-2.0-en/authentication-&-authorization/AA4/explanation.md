@@ -1,5 +1,5 @@
-## Scenario: Jie signs into Choi's mobile app undetected. 
- 
+## Scenario: Jie signs into Choi's mobile app without using the “unlocked key”. 
+
 Consider a scenario where Jie and Choi live together. Jie and Choi, like all couples, keep secrets from each other, like what they spend their money on. It is not our job to help Jie and Choi with their relationship issues, but it is our job to keep the secrets they store on their mobile phone confidential. We therefore need to help them by ensuring that they authenticate before accessing these secrets. 
  
 There are various ways that Jie may get access to Choi's secrets. 
@@ -19,7 +19,6 @@ Choi really wanted to pay his student loan, but he also really needed to go to t
 ### STRIDE
 
 This scenario falls under the **Spoofing** category of the STRIDE.
-
 Jie is successfully masquerading as Choi to gain unauthorized access to the app. By bypassing or avoiding authentication, the system fails to verify the user's true identity, allowing Jie to act with Choi's privileges and compromise his data confidentiality.
 
 ### What can go wrong? 
@@ -32,3 +31,5 @@ If the unlock key is not used or it's not confirmed that the unlocked key has be
  - Limit the amount of time for which the user has been authorized to use a certain key after the user has successfully authenticated. 
  - Confirm that the unlocked key is used before contextual state changes like when changing state from running in the background to running in the foreground. Alternatively enforce re-authentication against a remote endpoint. 
  - Confirm that the unlocked key is used before confirming sensitive operations within the app like when changing the user's email, password, pin or phone number. Alternatively enforce re-authentication against a remote endpoint. 
+
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.

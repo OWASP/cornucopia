@@ -1,20 +1,16 @@
-## Scenario: Vandana can bypass biometric authentication because the authentication is misconfigured or not implemented correctly
+## Scenario: Vandana can access sensitive features due to improperly bound or misconfigured biometric authentication controls, insecure fallbacks, or unhandled configuration changes
 
 ### Example
 
-Vandana unlocks her mobile banking app using fingerprint authentication to quickly check her balance. The app treats this successful biometric check as valid for longer than it should and does not require re-authentication for sensitive actions.
-
-Later, Vandana hands her phone to a colleague to show a photo. While swiping around, the colleague accidentally switches back to the banking app — which is still unlocked. Without any additional biometric prompt, it is possible to view account details and initiate actions that should have required Vandana’s fingerprint again.
-
-What started as a quick balance check turns into an awkward conversation and a reminder that biometric authentication must be handled carefully.
+Henrietta likes to ask her colleagues for advice. There is especially one colleagues that she trust intimately, Vandana. Vandana recommends Henrietta to install a photo app her boyfriend has Vibe coded that allows her to make her look yonger and more attractive on the pictures taken by her phone without making the changes looks obvious. Vandana borrows Henrietta's phone so that she may install it. On the same phone Henrietta also have her bank app that blindly trust the phone's biometric success callback without verifying a hardware-backed cryptographic key. Vandana therefor able to add her own fingerprint to Henrietta's phone settings and use it to open the bank app without invalidating the app's internal session.
+One of the apps this applies to, happen to belong to her local bank. Not long after, Vandana leaves for a sabbatical with her boyfriend while Henrietta is left figuring out why she suddenly has accumulated a large amount of credit card debt.
 
 ## Threat Modeling
 
 ### STRIDE
 
-The situation falls under the **Tampering** category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
-
-An attacker can install the mobile app and observe how it interacts with platform security components such as the keystore or keychain. By abusing weaknesses in local authentication logic — such as misuse of `CryptoObject`, improper exception handling, or misconfiguration of hardware-backed keystores or keychains — the attacker can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
+The situation falls under the **Tampering** and **Information Disclosure** category in the STRIDE threat modeling framework. In this case, the risk arises when a mobile application relies on incorrectly implemented client-side controls for security-relevant decisions.
+The banking app, on Henrietta's phone, does not securely interact with the platform security components such as the keystore or keychain. By abusing weaknesses in biometric authentication logic (due to improperly bound or misconfigured biometric authentication controls, insecure fallbacks, or unhandled configuration changes) her colleague can influence authentication results. If these results are trusted without proper validation, unauthorized actions or data manipulation can occur.
 
 This issue commonly arises when security-relevant decisions are enforced on the device using client-side controls that are implemented incorrectly or can be bypassed.
 
@@ -27,3 +23,5 @@ If biometric authentication or local validation logic can be bypassed or manipul
 Ensure that biometric authentication is implemented correctly and securely. Platform security features such as hardware-backed keystores or keychains must be used as intended, including correct use of `CryptoObject` and proper exception handling.
 
 Biometric authentication must not be relied upon incorrectly for protecting sensitive actions. Use the OWASP Mobile Application Security Testing Guide (MASTG) to verify that biometric authentication, keystore usage, and related security controls are correctly implemented and tested.
+
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.
