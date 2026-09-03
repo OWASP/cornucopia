@@ -4,7 +4,7 @@ Consider Eiman, who is a slightly controlling brother who likes to know what his
 
 ### Example
 
-Eiman's sister uses the popular "MySecretDiary" app on her phone. The app is protected by a PIN screen. One day, his sister leaves her phone unlocked on the table. To snoop on his sister's secrets, instead of guessing the PIN, Eiman connects her phone to his computer and uses a dynamic instrumentation tool. He identifies the function `checkPinAndUnlock()` in the app's code. He writes a tiny script that hooks into this function and forces it to always return `true`, regardless of which PIN is entered (or whether one is entered at all). The app, trusting its own modified logic, unlocks the diary and reveals the secrets. Eiman did not steal his sister's PIN; he just convinced the app that they were his.
+Eiman's sister uses the popular "MySecretDiary" app on her phone. The app is protected by a PIN screen. One day, his sister leaves her phone unlocked on the table. To snoop on his sister's secrets, instead of guessing the PIN, Eiman connects her phone to his computer and uses a dynamic instrumentation tool. He identifies the function `checkPinAndUnlock()` in the app's code. He writes a tiny script that hooks into this function and forces it to always return `true`, regardless of which PIN is entered (or whether one is entered at all). The app, trusting its own modified logic, unlocks the diary and reveals the secrets. Eiman did not steal his sister's PIN; he just convinced the app that he was his sister.
 
 ## Threat Modeling
 
