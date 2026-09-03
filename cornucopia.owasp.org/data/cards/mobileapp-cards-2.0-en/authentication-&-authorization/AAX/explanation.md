@@ -17,7 +17,7 @@ This scenario is primarily **Spoofing**, **Information Disclosure**, and **Eleva
 
 ### What can go wrong?
 
-Ade can bypass local authentication checks because they are implemented as event-bound software logic rather than being cryptographically tied to a protected resource. They can do so by debugging the app at runtime or using dynamic instrumentation. That can turn a normal user action into unauthorized access, disclosure, alteration, or service disruption.
+Ade can bypass local authentication checks because they are implemented as event-bound software logic rather than being cryptographically tied to a protected resource. She can do so by debugging the app at runtime or using dynamic instrumentation. That can turn a normal user action into unauthorized access, disclosure, alteration, or service disruption.
 
 Known threats include:
 
