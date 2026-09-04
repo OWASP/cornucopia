@@ -11,7 +11,7 @@ The receiving component accepts a command merely because it arrived through a ne
 
 ### STRIDE
 
-This scenario is primarily **Elevation of Privilege**, **Tampering**, and **Information Disclosure** in STRIDE. Riotaro can bypass authorization controls and elevate his privileges by tampering with data flows between views, processes, and components to inject commands, manipulate data, or disclose sensitive information. That said, the **Information Disclosure** in this scenario is not directly connected to the vulnerable app, but to the main star's inappropriate habits and privacy hygiene. Nevertheless, the app has still functioned as a tool that allows the **Information Disclosure**.
+This scenario is primarily **Tampering**, **Information Disclosure**, and **Elevation of Privilege** in STRIDE. Riotaro can bypass authorization controls and elevate his privileges by tampering with data flows between views, processes, and components to inject commands, manipulate data, or disclose sensitive information. That said, the **Information Disclosure** in this scenario is not directly connected to the vulnerable app, but to the main star's poor privacy hygiene. Nevertheless, the app still functions as a tool that enables the **Information Disclosure**.
 
 ### What can go wrong?
 
