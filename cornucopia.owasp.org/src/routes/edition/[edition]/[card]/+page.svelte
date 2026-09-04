@@ -3,10 +3,8 @@
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "$domain/card/card";
-  import { isKnownCardId } from "$domain/card/cardIds";
   import { readLang, readTranslation } from "$lib/stores/stores";
   import type { PageData } from './$types';
-  import { EDITION_FULL_NAMES } from "$lib/services/deckServiceConsts";
 
   let { data }: { data: PageData } = $props();
   let _t = readTranslation();
@@ -17,11 +15,11 @@
   let versions = $derived(data.versions);
 
   const languages = $derived(data.languages);
-  let editionName = $derived(EDITION_FULL_NAMES[card?.edition] ?? card?.edition);
+  let editionName = $derived(data.editionName);
 
   function cardFound()
     {
-    return isKnownCardId(card?.id)
+    return cards?.has(data.card)
   }
 </script>
 <svelte:head>

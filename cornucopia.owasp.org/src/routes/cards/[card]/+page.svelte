@@ -4,9 +4,7 @@
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "../../../domain/card/card";
-  import { isKnownCardId } from "../../../domain/card/cardIds";
   import { readLang, readTranslation } from "$lib/stores/stores";
-  import { EDITION_FULL_NAMES } from "$lib/services/deckServiceConsts";
 
   interface Props {
     data: PageData;
@@ -19,11 +17,11 @@
   let card : Card = $derived(cards.get(data.card) as Card);
   let language = $derived($lang ? $lang : data.lang);
   const languages = $derived(data.languages);
-  let editionName = $derived(EDITION_FULL_NAMES[card?.edition] ?? card?.edition);
+  let editionName = $derived(data.editionName);
 
   function cardFound()
     {
-    return isKnownCardId(card?.id)
+    return cards?.has(data.card)
   }
 </script>
 <svelte:head>

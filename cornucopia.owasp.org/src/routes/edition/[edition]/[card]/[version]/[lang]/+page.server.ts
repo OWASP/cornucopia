@@ -4,6 +4,7 @@ import { error } from '@sveltejs/kit';
 import type { Route } from "$domain/routes/route";
 import { MappingService } from "$lib/services/mappingService";
 import { CapecService } from "$lib/services/capecService";
+import { DeckConfigService } from "$lib/services/deckConfigService";
 import { getCardImagesByEdition, getSuitStylingByEdition } from "$lib/services/cardAppearanceLoader";
 
 export const load = (({ params }) => {
@@ -14,18 +15,16 @@ export const load = (({ params }) => {
     const availableLanguages =DeckService.getLanguagesForEditionVersion(edition, version);
 
     const lang = availableLanguages.includes(requestedLang)? requestedLang: 'en';
-    let asvsVersion: string = "4.0.3";
-    if (params.version === '3.0') asvsVersion = '5.0';
+    const asvsVersion = DeckConfigService.getAsvsVersion(edition, version);
     if (!DeckService.hasEdition(edition)) error(
       404, 'Edition not found. Only: ' + DeckService.getLatestEditions().join(', ') + ' are supported.');
     if (!DeckService.hasLanguage(edition, lang)) error(
       404, "Language not found for " + edition + ". Only: " + DeckService.getLanguages(edition).join(', ') + " are supported.");
     if (!DeckService.hasVersion(edition, version)) error(
       404, "Version not found for " + edition + ". Only: " + DeckService.getVersions(edition).join(', ') + " are supported.");
-    
-    // Load CAPEC data for webapp v3.0+
+
     let capecData = undefined;
-    if (edition === 'webapp' && parseFloat(version) >= 3.0) {
+    if (DeckConfigService.hasCapecData(edition, version)) {
       capecData = CapecService.getCapecData(edition, version);
     }
     
@@ -44,7 +43,8 @@ export const load = (({ params }) => {
       languages: DeckService.getLanguagesForEditionVersion(edition, version),
       capecData: capecData,
       cardImages: getCardImagesByEdition(),
-      suitStyling: getSuitStylingByEdition()
+      suitStyling: getSuitStylingByEdition(),
+      editionName: DeckConfigService.getFullName(edition)
     };
 
     // Some QR code errors where done on the first printed decks. This will compensate for that.

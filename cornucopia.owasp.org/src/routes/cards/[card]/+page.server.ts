@@ -1,3 +1,4 @@
+import { error } from "@sveltejs/kit";
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper";
 import { DeckService } from "$lib/services/deckService";
 import type { PageServerLoad } from "./$types";
@@ -5,6 +6,7 @@ import type { Route } from "../../../domain/routes/route";
 import type { Card } from "$domain/card/card";
 import { MappingService } from "$lib/services/mappingService";
 import { CapecService } from "$lib/services/capecService";
+import { DeckConfigService } from "$lib/services/deckConfigService";
 import { getCardImagesByEdition, getSuitStylingByEdition } from "$lib/services/cardAppearanceLoader";
 
 export const load = (async ({ params }) => {
@@ -20,16 +22,16 @@ export const load = (async ({ params }) => {
   const card: Card = cards.get(fixedCode) as Card;
 
   if (!card) {
-    throw new Error(`Card not found: ${fixedCode}`);
+    error(404, `Card not found: ${fixedCode}`);
   }
 
   const edition = card.edition;
   const latestVersion = DeckService.getLatestVersion(edition);
-  const asvsVersion = latestVersion === '3.0' ? '5.0' : '4.0.3';
+  const asvsVersion = DeckConfigService.getAsvsVersion(edition, latestVersion);
 
   const versions = DeckService.getVersions(edition);
   let capecData = undefined;
-  if (edition === 'webapp' && parseFloat(latestVersion) >= 3.0) {
+  if (DeckConfigService.hasCapecData(edition, latestVersion)) {
         capecData = CapecService.getCapecData(edition, latestVersion);
       }
   return {
@@ -43,7 +45,8 @@ export const load = (async ({ params }) => {
     languages: DeckService.getLanguagesForEditionVersion(edition, latestVersion),
     capecData: capecData,
     cardImages: getCardImagesByEdition(),
-    suitStyling: getSuitStylingByEdition()
+    suitStyling: getSuitStylingByEdition(),
+    editionName: DeckConfigService.getFullName(edition)
   };
 
 }) satisfies PageServerLoad;

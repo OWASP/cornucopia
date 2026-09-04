@@ -10,7 +10,6 @@
     import type { Suit } from "$domain/suit/suit.js";
     import { SvelteMap } from 'svelte/reactivity';
     import { goto } from "$app/navigation";
-    import { VERSION_WEBAPP, VERSION_MOBILEAPP, VERSION_COMPANION, VERSION_EOP } from "$lib/services/deckServiceConsts";
 
 
     interface Props {
@@ -32,6 +31,8 @@
     let suitStyling = $derived(data.suitStyling);
     let version = $derived(data?.edition);
     
+    let browsableDecks = $derived(data.browsableDecks);
+    let currentDeck = $derived(data.currentDeck);
     let cardSuits = $derived.by(() => {
         const key = `${data?.edition}-${$lang}`;
         return suits?.get(key) || suits?.get(`${data?.edition}-en`) as Suit[];
@@ -39,11 +40,7 @@
     
     let card = $derived.by(() => {
         if (!cards) return null;
-        if (version === VERSION_MOBILEAPP) return cards.get('PC2') as Card;
-        if (version === VERSION_WEBAPP) return cards.get('VE2') as Card;
-        if (version === VERSION_COMPANION) return cards.get('AAI2') as Card;
-        if (version === VERSION_EOP) return cards.get('SP2') as Card;
-        return cards.get('VE2') as Card;
+        return cards.get(currentDeck?.defaultPreviewCard ?? 'VE2') as Card;
     });
 
     let _suit : string;
@@ -103,10 +100,9 @@
 <SvelteMarkdown renderers={renderersForGeneralUse} source={content}></SvelteMarkdown>
 {/if}
 <p class="button-container script">
-    <button title="OWASP Cornucopia {$t('cards.button.1')}" class:button-selected={version == VERSION_WEBAPP} onclick={()=>changeVersion(VERSION_WEBAPP)}>{$t('cards.button.1')}</button>
-    <button title="OWASP Cornucopia {$t('cards.button.2')}" class:button-selected={version == VERSION_MOBILEAPP} onclick={()=>changeVersion(VERSION_MOBILEAPP)}>{$t('cards.button.2')}</button>
-    <button title="OWASP Cornucopia {$t('cards.button.3')}" class:button-selected={version == VERSION_COMPANION} onclick={()=>changeVersion(VERSION_COMPANION)}>{$t('cards.button.3')}</button>
-    <button title="OWASP Cornucopia {$t('cards.button.4')}" class:button-selected={version == VERSION_EOP} onclick={()=>changeVersion(VERSION_EOP)}>{$t('cards.button.4')}</button>
+    {#each browsableDecks as deck (deck.edition)}
+    <button title="OWASP Cornucopia {$t(deck.buttonLabelKey ?? '')}" class:button-selected={version == deck.edition} onclick={()=>changeVersion(deck.edition)}>{$t(deck.buttonLabelKey ?? '')}</button>
+    {/each}
 </p>
 </section>
 <div class="script">
@@ -116,34 +112,11 @@
         {/each}
     {/each}
 
-    {#if version == VERSION_WEBAPP}
-    <h2 title="OWASP Cornucopia {$t('cards.h2.1')}">{$t('cards.h2.1')}</h2>
+    <h2 title="OWASP Cornucopia {$t(currentDeck?.descriptionHeadingKey ?? '')}">{$t(currentDeck?.descriptionHeadingKey ?? '')}</h2>
     <p class="text">
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $t('cards.p2')}
+        {@html $t(currentDeck?.descriptionBodyKey ?? '')}
     </p>
-    {/if}
-    {#if version == VERSION_MOBILEAPP}
-    <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
-    <p class="text">
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $t('cards.p3')}
-    </p>
-    {/if}
-    {#if version == VERSION_COMPANION}
-    <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
-    <p class="text">
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $t('cards.p4')}
-    </p>
-    {/if}
-    {#if version == VERSION_EOP}
-    <h2 title="OWASP Cornucopia {$t('cards.h2.4')}">{$t('cards.h2.4')}</h2>
-    <p class="text">
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html $t('cards.p5')}
-    </p>
-    {/if}
     <div class="container">
         <div class="tree">
             {#each cardSuits as suit (suit.name)}
@@ -166,51 +139,14 @@
 <noscript>
     <div class="">
         <div>
-            {#if version == VERSION_MOBILEAPP}
-                <h2 title="OWASP Cornucopia {$t('cards.h2.2')}">{$t('cards.h2.2')}</h2>
-                <p class="text">
-                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                    {@html $t('cards.p3')}
-                </p>
-            {/if}
-            {#if version == VERSION_WEBAPP}
-                <h2 title="OWASP Cornucopia {$t('cards.h2.1')}">{$t('cards.h2.1')}</h2>
-                <p class="text">
-                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                    {@html $t('cards.p2')}
-                </p>
-            {/if}
-            {#if version == VERSION_COMPANION}
-                <h2 title="OWASP Cornucopia {$t('cards.h2.3')}">{$t('cards.h2.3')}</h2>
-                <p class="text">
-                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                    {@html $t('cards.p4')}
-                </p>
-            {/if}
-            {#if version == VERSION_EOP}
-                <h2 title="OWASP Cornucopia {$t('cards.h2.4')}">{$t('cards.h2.4')}</h2>
-                <p class="text">
-                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                    {@html $t('cards.p5')}
-                </p>
-            {/if}
+            <h2 title="OWASP Cornucopia {$t(currentDeck?.descriptionHeadingKey ?? '')}">{$t(currentDeck?.descriptionHeadingKey ?? '')}</h2>
+            <p class="text">
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html $t(currentDeck?.descriptionBodyKey ?? '')}
+            </p>
             {#each cardSuits as suit (suit.name)}
-                 {#if version == VERSION_WEBAPP}
-                    <label for="{suit.name + '-web'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
-                    <input type=checkbox class="suit-button" id="{suit.name + '-web'}"/>
-                {/if}
-                {#if version == VERSION_MOBILEAPP}
-                    <label for="{suit.name + '-mobile'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
-                    <input type=checkbox class="suit-button" id="{suit.name + '-mobile'}"/>
-                {/if}
-                {#if version == VERSION_COMPANION}
-                    <label for="{suit.name + '-companion'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
-                    <input type=checkbox class="suit-button" id="{suit.name + '-companion'}"/>
-                {/if}
-                {#if version == VERSION_EOP}
-                    <label for="{suit.name + '-eop'}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
-                    <input type=checkbox class="suit-button" id="{suit.name + '-eop'}"/>
-                {/if}
+                <label for="{suit.name + '-' + version}" class="suit-button"><span class="label">&#x2514;&#9472;&#9472; {Text.Format(suit.name).toUpperCase()}</span></label>
+                <input type=checkbox class="suit-button" id="{suit.name + '-' + version}"/>
                 <div class="card-buttons">
                 {#each suit.cards as card (card)}
                     <p>
