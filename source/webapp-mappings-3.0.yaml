@@ -7,6 +7,10 @@ meta:
   layouts: ["cards", "leaflet", "guide"]
   templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
   languages: ["en", "es", "fr", "nl", "no_nb", "pt_br", "pt_pt", "it", "ru", "hu", "hi", "uk"]
+url_templates:
+  capec: '/taxonomy/capec-3.9/{code}'
+  stride: '/taxonomy/stride/{code}'
+  safecode: 'https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf'
 suits:
 -
   id: "VE"
