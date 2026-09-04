@@ -1,11 +1,11 @@
 decks:
   - edition: webapp
-    displayName: "OWASP Cornucopia"
-    fullName: "Website App Edition"
+    displayName: OWASP Cornucopia
+    fullName: Website App Edition
 
     cre:
-      name: "OWASP Cornucopia Website App Edition"
-      category: "Website Application"
+      name: OWASP Cornucopia Website App Edition
+      category: Website Application
 
     standards:
       asvs:
@@ -26,11 +26,11 @@ decks:
       - version: "3.0"
 
   - edition: mobileapp
-    displayName: "OWASP Cornucopia"
-    fullName: "Mobile App Edition"
+    displayName: OWASP Cornucopia
+    fullName: Mobile App Edition
     cre:
-      name: "OWASP Cornucopia Mobile App Edition"
-      category: "Mobile Application"
+      name: OWASP Cornucopia Mobile App Edition
+      category: Mobile Application
     defaultPreviewCard: PC2
     buttonLabelKey: cards.button.2
     descriptionHeadingKey: cards.h2.2
@@ -40,11 +40,11 @@ decks:
         draftLanguages: [ru]
 
   - edition: companion
-    displayName: "OWASP Cornucopia"
-    fullName: "Companion Edition"
+    displayName: OWASP Cornucopia
+    fullName: Companion Edition
     cre:
-      name: "OWASP Cornucopia Companion Edition"
-      category: "Companion suits"
+      name: OWASP Cornucopia Companion Edition
+      category: Companion suits
     defaultPreviewCard: AAI2
     buttonLabelKey: cards.button.3
     descriptionHeadingKey: cards.h2.3
@@ -53,11 +53,11 @@ decks:
       - version: "1.0"
 
   - edition: eop
-    displayName: "Elevation of Privilege"
-    fullName: "Elevation of Privilege Edition"
+    displayName: Elevation of Privilege
+    fullName: Elevation of Privilege Edition
     cre:
-      name: "Elevation of Privilege Edition"
-      category: "Elevation of Privilege"
+      name: Elevation of Privilege Edition
+      category: Elevation of Privilege
     defaultPreviewCard: SP2
     buttonLabelKey: cards.button.4
     descriptionHeadingKey: cards.h2.4
@@ -66,11 +66,11 @@ decks:
       - version: "5.0"
 
   - edition: dbd
-    displayName: "Cornucopia"
-    fullName: "Digital Benefits Deck Edition"
+    displayName: Cornucopia
+    fullName: Digital Benefits Deck Edition
     external: true
     cre:
-      name: "Cornucopia Digital Benefits and Disbenefits Edition"
-      category: "Digital Benefits and Disbenefits"
+      name: Cornucopia Digital Benefits and Disbenefits Edition
+      category: Digital Benefits and Disbenefits
     versions:
       - version: "1.0"
