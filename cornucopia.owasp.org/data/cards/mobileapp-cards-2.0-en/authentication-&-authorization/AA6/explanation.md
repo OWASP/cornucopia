@@ -10,7 +10,7 @@ Eiman's sister uses the popular "MySecretDiary" app on her phone. The app is pro
 
 ### STRIDE
 
-This scenario falls under the **Tampering** and **Spoofing** categories of STRIDE.
+This scenario falls under the **Spoofing** and **Tampering** categories of STRIDE.
 By modifying the application's runtime behavior or binary code (Tampering), Eiman bypasses the security controls, effectively leading to **Spoofing** and **Information Disclosure** (acting as his sister and reading her secret diary).
 
 ### What can go wrong?
