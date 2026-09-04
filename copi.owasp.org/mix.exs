@@ -59,7 +59,7 @@ defmodule Copi.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
+      {:dns_cluster, "~> 0.3.0"},
       {:bandit, "~> 1.2"},
       {:plug_cowboy, "~> 2.9.0"},
       {:ecto_ulid, "~> 0.3.0"},
@@ -68,7 +68,7 @@ defmodule Copi.MixProject do
       {:want, "~> 2.0.0"},
       {:credo, "~> 1.7.5", only: [:dev, :test], runtime: false},
       {:hackney, "~> 4.0"},
-      {:mox, "~> 1.2.0", only: :test},
+      {:mox, "~> 1.3.0", only: :test},
       {:excoveralls, "~> 0.18.5", only: [:dev, :test]}
     ]
   end

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Metadata from "$lib/components/metadata.svelte";
     import SvelteMarkdown from 'svelte-markdown';
     import { renderersForGeneralUse } from '$lib/components/renderers/renderers';
     import type { PageData } from "./$types";
@@ -116,16 +117,7 @@
         mapping = (new MappingController(mappingData?.get(version))).getCardMappings(card.id);
     }
 </script>
-<svelte:head>
-    <title>{$t('cards.head.title')}</title>
-    <link rel="canonical" href="https://cornucopia.owasp.org/cards" />
-    <meta name="description" content="{$t('cards.head.description')}" />
-	<meta name="keywords" content="{$t('cards.head.keywords')}" />
-    <meta property="og:title" content="{$t('cards.head.title')}">
-    <meta property="og:description" content="{$t('cards.head.description')}">
-    <meta name="twitter:title" content="{$t('cards.head.title')}">
-    <meta name="twitter:description" content="{$t('cards.head.description')}">
-</svelte:head>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 <section title="OWASP Cornucopia decks" id="decks">
 {#if content != ''}
