@@ -1,5 +1,6 @@
 import type { Card } from "../card/card";
 import type { MappingController } from "../mapping/mappingController";
+import { DeckConfigService } from "$lib/services/deckConfigService";
 
 export type Cre =
     {
@@ -31,40 +32,24 @@ export class CreController {
     private deck: Map<string, Card>;
     private controller: MappingController;
 
-    private static editions: Map<string, string> = new Map<string, string>([
-        ['webapp', "OWASP Cornucopia Website App Edition"],
-        ['mobileapp', "OWASP Cornucopia Mobile App Edition"],
-        ['companion', "OWASP Cornucopia Companion Edition"],
-        ['dbd', "Cornucopia Digital Benefits and Disbenefits Edition"],
-        ['eop', "Elevation of Privilege Edition"]
-    ]);
-
-    private static category: Map<string, string> = new Map<string, string>([
-        ['webapp', "Website Application"],
-        ['mobileapp', "Mobile Application"],
-        ['companion', "Companion suits"],
-        ['dbd', "Digital Benefits and Disbenefits"],
-        ['eop', "Elevation of Privilege"]
-    ]);
-
     constructor(deck: Map<string, Card>, controller: MappingController) {
         this.deck = deck;
         this.controller = controller;
     }
 
     public static getEditionName(edition: string): string {
-        return CreController.editions.get(edition) || edition;
+        return DeckConfigService.getCreEditionName(edition) ?? edition;
     }
 
     public getCreMapping(edition: string, lang: string) : any {
-        if (!CreController.editions.has(edition)) return {"meta": {}, "standards": []};
+        if (!DeckConfigService.getDeckConfig(edition)) return {"meta": {}, "standards": []};
         const standards: Cre[] = [];
         (this.deck || []).forEach(
             (card: Card) => (card.edition == edition) && standards.push(this.generateDoc(card))
         );
         return {
             "meta": {
-                "edition": CreController.editions.get(edition),
+                "edition": CreController.getEditionName(edition),
                 "component": 'cards',
                 "language": lang,
                 "version": this.controller.getMeta()?.version
@@ -90,13 +75,13 @@ export class CreController {
         return {
             "doctype": "Tool",
             "id": cardUrl,
-            "name": CreController.editions.get(card.edition),
+            "name": CreController.getEditionName(card.edition),
             "section": card.suitNameLocal,
             "description": card.desc,
             "sectionID": card.id,
             "hyperlink": cardUrl,
             "links": links,
-            "tags": ["Threat modeling", CreController.category.get(card.edition)],
+            "tags": ["Threat modeling", DeckConfigService.getCreCategory(card.edition)],
             "tooltype": "Defensive"
         };
     }

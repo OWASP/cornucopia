@@ -5,15 +5,58 @@ import type { Card } from '$domain/card/card';
 import fs from 'fs';
 import { FileSystemHelper } from '$lib/filesystem/fileSystemHelper';
 import { MappingService } from './mappingService';
+import { DeckConfigService } from './deckConfigService';
 
 vi.mock('fs');
 vi.mock('$lib/filesystem/fileSystemHelper');
 vi.mock('./mappingService');
+vi.mock('./deckConfigService');
+
+
+const FAKE_DECK_CONFIGS = [
+    { edition: 'mobileapp', versions: [{ version: '1.1' }] },
+    { edition: 'webapp', versions: [{ version: '2.2' }, { version: '3.0' }] },
+    { edition: 'companion', versions: [{ version: '1.0' }] },
+    { edition: 'eop', versions: [{ version: '5.0' }] },
+    { edition: 'dbd', versions: [{ version: '1.0' }] }
+];
+
+
+const FAKE_SOURCE_FILES = [
+    'mobileapp-cards-1.1-en.yaml', 'mobileapp-cards-1.1-hi.yaml', 'mobileapp-cards-1.1-uk.yaml',
+    'webapp-cards-2.2-en.yaml', 'webapp-cards-2.2-es.yaml', 'webapp-cards-2.2-fr.yaml',
+    'webapp-cards-2.2-it.yaml', 'webapp-cards-2.2-nl.yaml', 'webapp-cards-2.2-no_nb.yaml',
+    'webapp-cards-2.2-pt_br.yaml', 'webapp-cards-2.2-pt_pt.yaml', 'webapp-cards-2.2-ru.yaml',
+    'webapp-cards-3.0-en.yaml', 'webapp-cards-3.0-es.yaml', 'webapp-cards-3.0-fr.yaml',
+    'webapp-cards-3.0-hi.yaml', 'webapp-cards-3.0-it.yaml', 'webapp-cards-3.0-nl.yaml',
+    'webapp-cards-3.0-no_nb.yaml', 'webapp-cards-3.0-pt_br.yaml', 'webapp-cards-3.0-pt_pt.yaml',
+    'webapp-cards-3.0-ru.yaml', 'webapp-cards-3.0-uk.yaml',
+    'companion-cards-1.0-en.yaml',
+    'eop-cards-5.0-en.yaml', 'eop-cards-5.0-es.yaml', 'eop-cards-5.0-ru.yaml',
+    'dbd-cards-1.0-en.yaml'
+];
+
+const EDITION_DISPLAY_NAMES: Record<string, string> = {
+    webapp: 'OWASP Cornucopia',
+    mobileapp: 'OWASP Cornucopia',
+    companion: 'OWASP Cornucopia',
+    dbd: 'Cornucopia',
+    eop: 'Elevation of Privilege'
+};
 
 describe('DeckService tests', () => {
     beforeEach(() => {
         DeckService.clear();
         vi.clearAllMocks();
+
+        vi.mocked(DeckConfigService.getDeckConfigs).mockReturnValue(FAKE_DECK_CONFIGS as any);
+        vi.mocked(DeckConfigService.getDraftLanguages).mockReturnValue([]);
+        vi.mocked(DeckConfigService.getDisplayName).mockImplementation(
+            (edition: string) => EDITION_DISPLAY_NAMES[edition] ?? edition
+        );
+        vi.mocked(DeckConfigService.isExternal).mockImplementation((edition: string) => edition === 'dbd');
+        vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
+        vi.mocked(FileSystemHelper.getFiles).mockReturnValue(FAKE_SOURCE_FILES);
     });
 
     afterEach(() => {
@@ -139,6 +182,7 @@ describe('DeckService tests', () => {
     }, 10000);
 
     describe('getDecks', () => {
+        // lang order is alphabetical now - it comes from file discovery, not a hardcoded array.
         it('should return all available decks', () => {
             const decks = DeckService.getDecks();
             expect(decks).toHaveLength(6);
@@ -146,12 +190,12 @@ describe('DeckService tests', () => {
             expect(decks).toContainEqual({ edition: 'companion', version: '1.0', lang: ['en'] });
             expect(decks).toContainEqual({ edition: 'eop', version: '5.0', lang: ['en', 'es', 'ru'] });
             expect(decks).toContainEqual({ edition: 'dbd', version: '1.0', lang: ['en'] });
-            expect(decks).toContainEqual({ 
-                edition: 'webapp', 
-                version: '2.2', 
-                lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it'] 
+            expect(decks).toContainEqual({
+                edition: 'webapp',
+                version: '2.2',
+                lang: ['en', 'es', 'fr', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru']
             });
-            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk'] });
+            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk'] });
         });
     }, 10000);
 
@@ -231,12 +275,12 @@ describe('DeckService tests', () => {
     describe('getLanguagesForEditionVersion', () => {
         it('should return all languages for webapp version 2.2', () => {
             const languages = DeckService.getLanguagesForEditionVersion('webapp', '2.2');
-            expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it']);
+            expect(languages).toEqual(['en', 'es', 'fr', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru']);
         });
 
         it('should return all supported languages for webapp version 3.0', () => {
              const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
-             expect(languages).toEqual(['en', 'es', 'fr', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'it', 'hi', 'uk']);
+             expect(languages).toEqual(['en', 'es', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk']);
         });
        it('should return all supported languages for mobileapp version 1.1', () => {
             const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');

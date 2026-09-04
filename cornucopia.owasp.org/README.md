@@ -49,6 +49,53 @@ The project enforces minimum coverage requirements:
 
 Tests will fail if coverage drops below these thresholds.
 
+## Registering a deck
+
+To publish a new edition/version, add a block under `decks:` in `decks.yaml`:
+
+```yaml
+decks:
+  - edition: newdeck                    # matches source/newdeck-cards-*.yaml filenames
+    displayName: "OWASP Cornucopia"     # short name, prefixed on card-browser titles
+    fullName: "New Deck Edition"        # full name, used in card-detail page titles
+    cre:
+      name: "OWASP Cornucopia New Deck Edition"  # edition name in the CRE export
+      category: "New Deck"                         # edition category in the CRE export
+    external: false                     # true = links out to another site, no /edition/... pages here (see dbd)
+
+    # only needed when external is false - render the deck's button/intro text on
+    # /cards and /edition/[edition]; the translation keys must already exist in the locale files
+    defaultPreviewCard: AB1
+    buttonLabelKey: cards.button.5
+    descriptionHeadingKey: cards.h2.5
+    descriptionBodyKey: cards.p6
+
+    # optional - only if this deck has ASVS/CAPEC requirement mappings (see webapp in decks.yaml)
+    standards:
+      asvs:
+        versionMap:
+          "1.0": "4.0.3"
+      capec:
+        minVersion: "1.0"
+
+    versions:
+      - version: "1.0"                  # a version not listed here stays a draft, invisible to
+                                         # the site, even if its source/newdeck-cards-1.0-*.yaml
+                                         # files already exist
+        draftLanguages: [de]            # optional - keep one language of a published version
+                                         
+```
+
+All languages of a listed version are picked up automatically, unless listed under `draftLanguages`.
+
+### Order matters
+
+Two things are picked positionally, not computed, so getting the order wrong fails silently
+instead of throwing an error:
+
+- The first non-external deck under `decks:` is the one the card browser defaults to.
+- Under `versions:`, the **last** entry is the "latest" - list them oldest-first.
+
 ## Adding a new deck's images and styling
 
 To add a deck with this image-based card style (a picture for each card, shown behind suit colors for the tab, watermark, and royal cards, like how the EoP deck looks), just add three files (no code changes needed):
