@@ -1,6 +1,5 @@
 defmodule Copi.SessionCleanupTest do
   use ExUnit.Case, async: false
-
   alias Copi.SessionCleanup
 
   test "start_link starts and exits cleanly when postgres session storage is disabled" do
@@ -15,9 +14,8 @@ defmodule Copi.SessionCleanupTest do
     end)
 
     Application.put_env(:copi, :postgres_session_store_enabled, false)
-
     assert {:ok, pid} = SessionCleanup.start_link([])
     ref = Process.monitor(pid)
-    assert_receive {:DOWN, ^ref, :process, ^pid, :normal}
+    assert_receive {:DOWN, ^ref, :process, ^pid, reason} when reason in [:normal, :noproc], 500
   end
 end

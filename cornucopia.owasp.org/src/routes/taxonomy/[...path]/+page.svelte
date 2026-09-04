@@ -24,7 +24,7 @@
 
 <!--The location is a folder -->
 {#each data.categories as category (category)}
-    <p>├──<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
+    <p>&#x251C;&#x2500;&#x2500;<a title="{Text.Format(category)}" href={resolve(data.path + '/' + category.toLowerCase())}>{Text.Format(category)}</a></p>
 {/each}
 
 <!--The location is filecontent -->

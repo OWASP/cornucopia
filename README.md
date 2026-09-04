@@ -50,17 +50,23 @@ It is language, platform, and technology agnostic. Visit: https://cornucopia.owa
 
 ### Large binary files
 
-Please install git-lfs to ensure you can download the output files.
+This repository stores deck templates and artwork in Git LFS. Install Git LFS before cloning so Git replaces LFS pointers with the actual files during checkout.
 
-Install from https://git-lfs.com/ 
-
-Then pull the binaries from git lfs.
+Install it from https://git-lfs.com/, then run these commands in PowerShell, Command Prompt, macOS Terminal, or an Ubuntu shell:
 
 ```bash
-
+git lfs install
+git clone https://github.com/OWASP/cornucopia.git
+cd cornucopia
 git lfs pull
-
+git lfs fsck
 ```
+
+`git lfs install` installs Git LFS checkout hooks, which automatically hydrate tracked assets after future clone, checkout, pull, and merge operations. `git lfs pull` repairs an existing clone created before Git LFS was installed. `git lfs fsck` verifies the locally checked out LFS objects.
+
+Git does not run repository-provided setup code during clone, so each developer must install Git LFS once. The command above is supported by Windows, macOS, and Ubuntu wherever Git is installed.
+
+Git tracks executable permissions for the shell scripts used by CI and Copi. Ubuntu and macOS restore these modes automatically from the repository index. Batch files are checked out with CRLF line endings for Windows; Windows does not use POSIX executable permissions for `.bat` files.
 
 ### Using Scripts to develop and build Cornucopia
 

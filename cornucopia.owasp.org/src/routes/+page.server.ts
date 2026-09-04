@@ -1,11 +1,15 @@
+import { getPageMetadata } from '$lib/utils/pageMetadata.js';
 import { DeckService } from "$lib/services/deckService";
 import { MappingService } from "$lib/services/mappingService";
-import {SuitController } from "../domain/suit/suitController";
+import { SuitController } from "../domain/suit/suitController";
 
-export function load()
+export function load(_event)
 {
+    const metadata = getPageMetadata('home', 'https://cornucopia.owasp.org');
+
     return {
-        suits : SuitController.getSuits(),
+        metadata,
+        suits: SuitController.getSuits(),
         cards: (new DeckService()).getCards('en'),
         mappingData: (new MappingService()).getCardMappingForLatestEdtions()
     }
