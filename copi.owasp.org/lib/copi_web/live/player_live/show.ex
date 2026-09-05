@@ -157,16 +157,19 @@ defmodule CopiWeb.PlayerLive.Show do
     player = socket.assigns.player
 
     # Check if player already voted
-    if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
-      # Remove their vote
-      continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
-      if continue_vote do
-        Copi.Repo.delete!(continue_vote)
-      end
+        if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
+      Copi.Repo.delete_all(
+        from cv in Copi.Cornucopia.ContinueVote,
+          where: cv.player_id == ^player.id and cv.game_id == ^game.id
+      )
     else
-      # Add their vote
       Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
-      Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id})
+
+      Copi.Cornucopia.ContinueVote.changeset(%Copi.Cornucopia.ContinueVote{}, %{
+        player_id: player.id,
+        game_id: game.id
+      })
+      |> Copi.Repo.insert(on_conflict: :nothing, conflict_target: [:player_id, :game_id])
     end
 
     {:ok, updated_game} = game_module().find(game.id)
@@ -212,12 +215,26 @@ defmodule CopiWeb.PlayerLive.Show do
         if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
           vote = get_vote(dealt_card, player)
 
-          if vote do
+                    if vote do
             Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-            Copi.Repo.delete!(vote)
+
+            Copi.Repo.delete_all(
+              from v in Copi.Cornucopia.Vote,
+                where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
+            )
           else
             Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id}) do
+
+            changeset =
+              Copi.Cornucopia.Vote.changeset(%Copi.Cornucopia.Vote{}, %{
+                dealt_card_id: card_id,
+                player_id: player.id
+              })
+
+            case Copi.Repo.insert(changeset,
+                   on_conflict: :nothing,
+                   conflict_target: [:player_id, :dealt_card_id]
+                 ) do
               {:ok, _vote} ->
                 Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
               {:error, changeset} ->

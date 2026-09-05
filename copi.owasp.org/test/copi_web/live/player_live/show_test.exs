@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
+  import Ecto.Query
 
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
@@ -324,6 +325,47 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, updated_game2} = Cornucopia.Game.find(game_id)
       assert length(updated_game2.continue_votes) == 0
     end
+        test "prevents duplicate continue votes from concurrent requests (#2288)", %{
+      conn: _conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      parent = self()
+
+      tasks =
+        for _ <- 1..5 do
+          Task.async(fn ->
+            Ecto.Adapters.SQL.Sandbox.allow(Copi.Repo, parent, self())
+
+            Copi.Cornucopia.ContinueVote.changeset(%Copi.Cornucopia.ContinueVote{}, %{
+              player_id: player.id,
+              game_id: game.id
+            })
+            |> Copi.Repo.insert(on_conflict: :nothing, conflict_target: [:player_id, :game_id])
+          end)
+        end
+
+      results = Task.await_many(tasks)
+
+      assert Enum.all?(results, fn
+               {:ok, _vote} -> true
+               _ -> false
+             end)
+
+      continue_votes =
+        Copi.Repo.all(
+          from cv in Copi.Cornucopia.ContinueVote,
+            where: cv.player_id == ^player.id and cv.game_id == ^game.id
+        )
+
+      assert length(continue_votes) == 1
+    end
 
     test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
       game_id = player.game_id
@@ -358,6 +400,65 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, updated_dealt2} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
       assert length(updated_dealt2.votes) == 0
+    end
+
+        test "prevents duplicate votes from concurrent requests (#2288)", %{conn: _conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      {:ok, other_player} = Cornucopia.create_player(%{name: "Other Player", game_id: game_id})
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, card} =
+        Cornucopia.create_card(%{
+          category: "C", value: "CV1", description: "D", edition: "webapp",
+          version: "3.0", external_id: "CONCURRENT_VOTE_CARD", language: "en", misc: "m",
+          owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+          capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+        })
+
+      dealt_card =
+        Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+          player_id: other_player.id, card_id: card.id, played_in_round: 1
+        })
+
+      parent = self()
+
+      tasks =
+        for _ <- 1..5 do
+          Task.async(fn ->
+            Ecto.Adapters.SQL.Sandbox.allow(Copi.Repo, parent, self())
+
+            changeset =
+              Copi.Cornucopia.Vote.changeset(%Copi.Cornucopia.Vote{}, %{
+                player_id: player.id,
+                dealt_card_id: dealt_card.id
+              })
+
+            Copi.Repo.insert(changeset,
+              on_conflict: :nothing,
+              conflict_target: [:player_id, :dealt_card_id]
+            )
+          end)
+        end
+
+      results = Task.await_many(tasks)
+
+      assert Enum.all?(results, fn
+               {:ok, _vote} -> true
+               _ -> false
+             end)
+
+      votes =
+        Copi.Repo.all(
+          from v in Copi.Cornucopia.Vote,
+            where: v.player_id == ^player.id and v.dealt_card_id == ^dealt_card.id
+        )
+
+      assert length(votes) == 1
     end
 
     test "redirects when game lookup for valid player returns not_found", %{conn: conn, player: player} do
