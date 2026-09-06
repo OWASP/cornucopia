@@ -54,7 +54,7 @@ defmodule CopiWeb.PlayerLive.Show do
             end
 
           {:ok, _player} ->
-            redirect_finished_game_or_public(socket, game_id)
+            redirect_to_public_game(socket, game_id)
 
           {:error, :not_found} ->
             raise Ecto.NoResultsError, queryable: Player
@@ -156,20 +156,34 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    # Check if player already voted
-        if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
-      Copi.Repo.delete_all(
-        from cv in Copi.Cornucopia.ContinueVote,
-          where: cv.player_id == ^player.id and cv.game_id == ^game.id
-      )
+    if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
+      case Copi.Repo.delete_all(
+             from cv in Copi.Cornucopia.ContinueVote,
+               where: cv.player_id == ^player.id and cv.game_id == ^game.id
+           ) do
+        {n, _} when n > 0 ->
+          Logger.debug("Continue vote removed for player_id: #{player.id}, game_id: #{game.id}")
+
+        {0, _} ->
+          Logger.debug("No continue vote found to remove for player_id: #{player.id}, game_id: #{game.id}")
+      end
     else
       Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
 
-      Copi.Cornucopia.ContinueVote.changeset(%Copi.Cornucopia.ContinueVote{}, %{
-        player_id: player.id,
-        game_id: game.id
-      })
-      |> Copi.Repo.insert(on_conflict: :nothing, conflict_target: [:player_id, :game_id])
+      case Copi.Repo.insert(
+             %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id},
+             on_conflict: :nothing,
+             conflict_target: [:player_id, :game_id]
+           ) do
+        {:ok, %{id: nil}} ->
+          Logger.debug("Continue vote already existed for player_id: #{player.id}, game_id: #{game.id}")
+
+        {:ok, _continue_vote} ->
+          Logger.debug("Continue vote added successfully for player_id: #{player.id}, game_id: #{game.id}")
+
+        {:error, changeset} ->
+          Logger.warning("Continue vote insert failed for player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+      end
     end
 
     {:ok, updated_game} = game_module().find(game.id)
@@ -215,28 +229,29 @@ defmodule CopiWeb.PlayerLive.Show do
         if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
           vote = get_vote(dealt_card, player)
 
-                    if vote do
-            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+          if vote do
+            case Copi.Repo.delete_all(
+                   from v in Copi.Cornucopia.Vote,
+                     where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
+                 ) do
+              {n, _} when n > 0 ->
+                Logger.debug("Vote removed for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
 
-            Copi.Repo.delete_all(
-              from v in Copi.Cornucopia.Vote,
-                where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
-            )
+              {0, _} ->
+                Logger.debug("No vote found to remove for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+            end
           else
-            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-
-            changeset =
-              Copi.Cornucopia.Vote.changeset(%Copi.Cornucopia.Vote{}, %{
-                dealt_card_id: card_id,
-                player_id: player.id
-              })
-
-            case Copi.Repo.insert(changeset,
+            case Copi.Repo.insert(
+                   %Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id},
                    on_conflict: :nothing,
                    conflict_target: [:player_id, :dealt_card_id]
                  ) do
+              {:ok, %{id: nil}} ->
+                Logger.debug("Vote already existed for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+
               {:ok, _vote} ->
                 Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+
               {:error, changeset} ->
                 Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
             end
@@ -364,19 +379,6 @@ defmodule CopiWeb.PlayerLive.Show do
 
   defp authorized_player_url?(socket, %{"game_id" => game_id, "id" => player_id}) do
     PlayerSessions.authorized?(socket.assigns.player_sessions, game_id, player_id)
-  end
-
-  defp redirect_finished_game_or_public(socket, game_id) do
-    case game_module().find(game_id) do
-      {:ok, %{finished_at: finished_at}} when not is_nil(finished_at) ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "This game has finished. Showing the game summary.")
-         |> redirect(to: "/games/#{game_id}")}
-
-      _ ->
-        redirect_to_public_game(socket, game_id)
-    end
   end
 
   defp redirect_to_public_game(socket, game_id) do
