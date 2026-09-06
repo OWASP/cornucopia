@@ -1,8 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckConfigService } from './deckConfigService';
-import fs from 'fs';
 
-vi.mock('fs');
+const deckYaml = vi.hoisted(() => ({ value: '', reads: 0 }));
+
+vi.mock('../../../decks.yaml?raw', () => ({
+    get default() {
+        deckYaml.reads += 1;
+        return deckYaml.value;
+    }
+}));
 
 const MOCK_DECKS_YAML = `
 decks:
@@ -42,7 +48,8 @@ describe('DeckConfigService tests', () => {
     beforeEach(() => {
         DeckConfigService.clear();
         vi.clearAllMocks();
-        vi.mocked(fs.readFileSync).mockReturnValue(MOCK_DECKS_YAML);
+        deckYaml.value = MOCK_DECKS_YAML;
+        deckYaml.reads = 0;
     });
 
     afterEach(() => {
@@ -51,12 +58,12 @@ describe('DeckConfigService tests', () => {
 
     describe('validation', () => {
         it('should throw when the top-level "decks" key is missing', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue('defaults:\n  foo: bar\n');
+            deckYaml.value = 'defaults:\n  foo: bar\n';
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('missing or invalid top-level "decks" array');
         });
 
         it('should throw naming the edition when "displayName" is missing', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     fullName: "Website App Edition"
@@ -65,12 +72,12 @@ decks:
       category: "Website Application"
     versions:
       - version: "3.0"
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('deck "webapp" is missing "displayName"');
         });
 
         it('should throw naming the index when "edition" itself is missing', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - displayName: "OWASP Cornucopia"
     fullName: "Website App Edition"
@@ -79,12 +86,12 @@ decks:
       category: "Website Application"
     versions:
       - version: "3.0"
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('decks[0] is missing "edition"');
         });
 
         it('should throw when "fullName" is missing', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
@@ -93,12 +100,12 @@ decks:
       category: "Website Application"
     versions:
       - version: "3.0"
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('deck "webapp" is missing "fullName"');
         });
 
         it('should throw when "cre.name" is missing', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
@@ -107,12 +114,12 @@ decks:
       category: "Website Application"
     versions:
       - version: "3.0"
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('deck "webapp" is missing "cre.name"');
         });
 
         it('should throw when "cre.category" is missing', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
@@ -121,12 +128,12 @@ decks:
       name: "OWASP Cornucopia Website App Edition"
     versions:
       - version: "3.0"
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('deck "webapp" is missing "cre.category"');
         });
 
         it('should throw when "versions" is not an array', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
@@ -134,12 +141,12 @@ decks:
     cre:
       name: "OWASP Cornucopia Website App Edition"
       category: "Website Application"
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('deck "webapp" is missing "versions"');
         });
 
         it('should throw naming the version index when a versions entry is missing "version"', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
@@ -149,12 +156,12 @@ decks:
       category: "Website Application"
     versions:
       - draftLanguages: [hu]
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).toThrow('deck "webapp" versions[0] is missing "version"');
         });
 
         it('should accept an empty versions array (fully-drafted deck)', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: dbd
     displayName: "Cornucopia"
@@ -164,7 +171,7 @@ decks:
       name: "Cornucopia Digital Benefits and Disbenefits Edition"
       category: "Digital Benefits and Disbenefits"
     versions: []
-`);
+`;
             expect(() => DeckConfigService.getDeckConfigs()).not.toThrow();
         });
 
@@ -182,7 +189,7 @@ decks:
                     .map(([key, value]) => `    ${key}: ${value}`)
                     .join('\n');
 
-                vi.mocked(fs.readFileSync).mockReturnValue(`
+                deckYaml.value = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
@@ -193,14 +200,14 @@ decks:
 ${renderFieldsYaml}
     versions:
       - version: "3.0"
-`);
+`;
                 expect(() => DeckConfigService.getDeckConfigs())
                     .toThrow(`deck "webapp" is not external but missing "${missingField}"`);
             }
         );
 
         it('should collect and report every problem across every deck, not just the first', () => {
-            vi.mocked(fs.readFileSync).mockReturnValue(`
+            deckYaml.value = `
 decks:
   - edition: webapp
     fullName: "Website App Edition"
@@ -221,7 +228,7 @@ decks:
     cre:
       name: "Cornucopia Digital Benefits and Disbenefits Edition"
     versions: []
-`);
+`;
             let thrown: Error | undefined;
             try {
                 DeckConfigService.getDeckConfigs();
@@ -246,7 +253,7 @@ decks:
         it('should only read the file once and cache the result', () => {
             DeckConfigService.getDeckConfigs();
             DeckConfigService.getDeckConfigs();
-            expect(fs.readFileSync).toHaveBeenCalledTimes(1);
+            expect(deckYaml.reads).toBe(1);
         });
     });
 
@@ -329,6 +336,11 @@ decks:
             expect(DeckConfigService.getCreEditionName('webapp')).toBe('OWASP Cornucopia Website App Edition');
             expect(DeckConfigService.getCreEditionName('unknown')).toBeUndefined();
         });
+
+        it('should return the configured taxonomy translation key', () => {
+            expect(DeckConfigService.getTaxonomyTranslationKey('webapp')).toBe('cards.mappings');
+            expect(DeckConfigService.getTaxonomyTranslationKey('unknown')).toBe('cards.mappings');
+        });
     });
 
     describe('getAsvsVersion', () => {
@@ -363,12 +375,12 @@ decks:
     describe('clear', () => {
         it('should force decks.yaml to be re-read on the next access', () => {
             DeckConfigService.getDeckConfigs();
-            expect(fs.readFileSync).toHaveBeenCalledTimes(1);
+            expect(deckYaml.reads).toBe(1);
 
             DeckConfigService.clear();
             DeckConfigService.getDeckConfigs();
 
-            expect(fs.readFileSync).toHaveBeenCalledTimes(2);
+            expect(deckYaml.reads).toBe(2);
         });
     });
 });

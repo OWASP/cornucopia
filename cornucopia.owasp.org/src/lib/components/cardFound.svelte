@@ -7,23 +7,14 @@
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
   import type { Route } from "$domain/routes/route";
   import { MappingController } from "$domain/mapping/mappingController";
-  import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
+  import Taxonomy from "./Taxonomy.svelte";
   import LanguagePicker from "$lib/components/languagePicker.svelte";
-  import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
-  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
   import EopCardTaxonomy from './eopCardTaxonomy.svelte';
-  import type { Component } from "svelte";
+  import { DeckConfigService } from "$lib/services/deckConfigService";
   import type { CardImage } from "$lib/services/cardImagesService";
   import type { SuitStyling } from "$lib/services/suitStylingService";
-
-  const taxonomies: Record<string, Component<any>> = {
-    webapp: WebAppCardTaxonomy,
-    mobileapp: MobileAppCardTaxonomy,
-    companion: CompanionCardTaxonomy,
-    eop: EopCardTaxonomy
-  };
 
   interface Props {
     mappingData: any;
@@ -56,7 +47,12 @@
   let mappings = $derived(controller.getCardMappings(card.id));
   let _attacks: Attack[] = $derived(GetCardAttacks(card.id));
   const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
-  let Taxonomy = $derived(taxonomies[card.edition]);
+  const taxonomyTranslationKey = $derived(DeckConfigService.getTaxonomyTranslationKey(card.edition));
+
+  function translate(key: string, fallback: string): string {
+    const translator = $t;
+    return typeof translator === "function" ? String(translator(key)) : fallback;
+  }
 </script>
 <LanguagePicker 
   edition={card.edition}
@@ -90,8 +86,18 @@
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
-  {#if Taxonomy}
-  <svelte:component this={Taxonomy} {card} {mappingData} {routes} {capecData} {asvsVersion} />
+  {#if card.edition === 'eop'}
+    <EopCardTaxonomy {card} {mappingData} {routes} />
+  {:else}
+    <Taxonomy
+      {card}
+      {mappingData}
+      {routes}
+      {capecData}
+      {asvsVersion}
+      mappingHeading={translate(`${taxonomyTranslationKey}.h1.1`, "Mappings")}
+      attacksHeading={translate(`${taxonomyTranslationKey}.h1.2`, "Attacks")}
+    />
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>

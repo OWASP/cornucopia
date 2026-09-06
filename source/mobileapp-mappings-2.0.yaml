@@ -14,6 +14,19 @@ url_templates:
   capec: '/taxonomy/capec-3.9/{code}'
   stride: '/taxonomy/stride/{code}'
   safecode: 'https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf'
+labels:
+  value: ''
+  url: ''
+  stride: 'STRIDE'
+  stride_print: ''
+  owasp_mastg: 'MASTG'
+  owasp_mastg_best: 'MASTG Best'
+  owasp_mastg_know: 'MASTG Know'
+  owasp_maswe: 'MASWE'
+  capec: 'CAPEC™'
+  safecode: 'SAFECode™'
+  threat: 'MAS Threat'
+  attack_vector: 'MAS Attack'
 suits:
 - id: PC
   name: Platform & Code

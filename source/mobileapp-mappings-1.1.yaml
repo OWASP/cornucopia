@@ -11,6 +11,15 @@ url_templates:
   capec: '/taxonomy/capec-3.9/{code}'
   stride: '/taxonomy/stride/{code}'
   safecode: 'https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf'
+  owasp_mastg: 'https://mas.owasp.org/{code}'
+  owasp_masvs: 'https://masvs.owasp.org/{code}'
+labels:
+  value: ''
+  url: ''
+  owasp_masvs: 'MASVS'
+  owasp_mastg: 'MASTG'
+  capec: 'CAPEC™'
+  safecode: 'SAFECode™'
 suits:
 -
   id: "PC"

@@ -1,5 +1,5 @@
 import {expect, describe, it} from 'vitest';
-import { MappingController } from './mappingController';
+import { getMappingLabel, getMappingUrl, MappingController } from './mappingController';
 
 
 describe('MappingController tests', () => {
@@ -116,5 +116,33 @@ describe('MappingController tests', () => {
         expect(meta).toBeDefined();
         expect(meta.version).toBe("1.0");
         expect(meta.date).toBe("2024-01-01");
+    });
+
+    it("should return mapping labels and URL templates.", () => {
+        const controller = new MappingController({
+            labels: {
+                capec: "CAPEC",
+                invalid: 42
+            },
+            url_templates: {
+                capec: "/taxonomy/capec/{code}",
+                safecode: "https://example.com/safecode",
+                invalid: false
+            },
+            suits: []
+        });
+
+        expect(controller.getLabels()).toEqual({ capec: "CAPEC" });
+        expect(controller.getUrlTemplates()).toEqual({
+            capec: "/taxonomy/capec/{code}",
+            safecode: "https://example.com/safecode"
+        });
+        expect(getMappingLabel(controller.getLabels(), "capec")).toBe("CAPEC");
+        expect(getMappingUrl(controller.getUrlTemplates(), "capec", "A/B")).toBe(
+            "/taxonomy/capec/A%2FB"
+        );
+        expect(getMappingUrl(controller.getUrlTemplates(), "safecode", "ignored")).toBe(
+            "https://example.com/safecode"
+        );
     });
 });
