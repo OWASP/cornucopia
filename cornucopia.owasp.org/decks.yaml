@@ -1,0 +1,76 @@
+decks:
+  - edition: webapp
+    displayName: OWASP Cornucopia
+    fullName: Website App Edition
+
+    cre:
+      name: OWASP Cornucopia Website App Edition
+      category: Website Application
+
+    standards:
+      asvs:
+        versionMap:
+          "2.2": "4.0.3"
+          "3.0": "5.0"
+      capec:
+        minVersion: "3.0"
+
+    defaultPreviewCard: VE2
+    buttonLabelKey: cards.button.1
+    descriptionHeadingKey: cards.h2.1
+    descriptionBodyKey: cards.p2
+
+    versions:
+      - version: "2.2"
+        draftLanguages: [hu]
+      - version: "3.0"
+
+  - edition: mobileapp
+    displayName: OWASP Cornucopia
+    fullName: Mobile App Edition
+    cre:
+      name: OWASP Cornucopia Mobile App Edition
+      category: Mobile Application
+    defaultPreviewCard: PC2
+    buttonLabelKey: cards.button.2
+    descriptionHeadingKey: cards.h2.2
+    descriptionBodyKey: cards.p3
+    versions:
+      - version: "1.1"
+        draftLanguages: [ru]
+
+  - edition: companion
+    displayName: OWASP Cornucopia
+    fullName: Companion Edition
+    cre:
+      name: OWASP Cornucopia Companion Edition
+      category: Companion suits
+    defaultPreviewCard: AAI2
+    buttonLabelKey: cards.button.3
+    descriptionHeadingKey: cards.h2.3
+    descriptionBodyKey: cards.p4
+    versions:
+      - version: "1.0"
+
+  - edition: eop
+    displayName: Elevation of Privilege
+    fullName: Elevation of Privilege Edition
+    cre:
+      name: Elevation of Privilege Edition
+      category: Elevation of Privilege
+    defaultPreviewCard: SP2
+    buttonLabelKey: cards.button.4
+    descriptionHeadingKey: cards.h2.4
+    descriptionBodyKey: cards.p5
+    versions:
+      - version: "5.0"
+
+  - edition: dbd
+    displayName: Cornucopia
+    fullName: Digital Benefits Deck Edition
+    external: true
+    cre:
+      name: Cornucopia Digital Benefits and Disbenefits Edition
+      category: Digital Benefits and Disbenefits
+    versions:
+      - version: "1.0"

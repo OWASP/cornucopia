@@ -1,10 +1,10 @@
-## Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg and/or URL scheme hijacking
+## Scenario: Pramod can intercept credentials through misdirection because the app is vulnerable to attacks like Tapjacking, StrandHogg, and/or URL scheme hijacking
 
 Pramod notices that Ade’s mobile application does not properly validate exported activities or incoming intents. The app allows deep links for authentication flows but fails to verify their origin.
 
 By launching a tapjacking overlay, Pramod places a transparent malicious layer over Ade’s login screen. The user believes they are interacting with the legitimate application, but their credentials are actually being captured by Pramod’s hidden interface.
 
-In another scenario, Pramod exploits StrandHogg by registering a malicious activity that mimics Ade’s login page. When the victim enters their username and password, the credentials are intercepted before the user is redirected back to the real app to avoid suspicion.
+In another scenario, Pramod exploits StrandHogg by registering a malicious activity that mimics Ade’s login page. When the victim enters their username and password, the credentials are intercepted before the user is redirected back to the real app, avoiding suspicion.
 
 If URL schemes are not properly validated, Pramod can also hijack authentication callbacks and intercept sensitive tokens during redirection flows.
 
@@ -17,7 +17,6 @@ Ade proudly launches a new feature that allows users to log in through a deep li
 ### STRIDE
 
 This scenario falls under the **Spoofing** category in the STRIDE threat modeling framework.
-
 Pramod impersonates a trusted application interface or authentication handler to trick users into submitting credentials or tokens. The system fails to verify the authenticity of the interacting application, allowing the attacker to act as a legitimate entity.
 
 ### What can go wrong?
@@ -32,3 +31,5 @@ If activity hijacking, tapjacking overlays, or unvalidated deep links are allowe
 - Implement tapjacking detection mechanisms.
 - Enforce strict validation of URL schemes and authentication callbacks.
 - Follow OWASP MASVS guidance for secure authentication and intent handling.
+
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.

@@ -2,33 +2,35 @@
 
 ### Example
 
-You are at a railway station where a kiosk accepts a stranger’s claimed identity because its ticket printer has no idea who is standing at the screen. The stranger selects a first-class sleeper and the machine cheerfully prints a pass for “Captain Sandwich.”
+Inventing an authentication threat can lead to:
 
-The invented trick works because the station has no dependable sign-in step to challenge the claim. A real app could similarly trust an interaction that never proves the caller’s identity, turning a harmless-looking request into an unauthorized privilege.
+1. **User Impersonation**: Attackers access other users’ accounts and perform actions as them.
+2. **Unauthorized Privileged Access**: Exploit weak authentication to perform higher-privileged actions.
+3. **Credential Theft**: Capture passwords, API keys, or tokens.
+4. **Bypassing Multi-Factor Authentication**: Circumventing 2FA or step-up authentication.
+5. **Audit/Repudiation Issues**: Actions may be performed without proper identity attribution.
 
 
 ## Threat Modeling
 
 ### STRIDE
 
-This scenario is primarily **Spoofing** in STRIDE. The named condition is: You have invented a new attack against “Authentication & Authorization”.
-
-The mapped threat is described by the card's application-specific condition.
-
-No separate attack-vector text is assigned; derive the path from the mapped threat.
+Authentication’s main purpose is to verify identity. If you can invent a new way to bypass or manipulate authentication, the attacker can impersonate legitimate users. That’s the essence of a **Spoofing** threat.
+For authorization threats, the primary impact is usually **Elevation of Privilege**, since bypassing authorization typically means doing more than you should.
 
 ### What can go wrong?
 
-If You have invented a new attack against “Authentication & Authorization”, the failure is concrete rather than merely theatrical: the app could let an attacker cross the authentication-&-authorization boundary and reach data or capability that this flow should protect. In this card, the practical route includes the invented path still needs a concrete, observable security impact. That can turn a normal user action into unauthorized access, disclosure, alteration, or service disruption; the mapped weakness entries below identify the exact implementation evidence to check.
+If you have invented a new attack against “Authentication & Authorization”, the following threats may arise:
 
-Mapped weaknesses that sharpen the review:
-
-- No MASWE entry is assigned to this card; this page keeps the attack explicitly invented.
+- User impersonation
+- Privilege escalation
+- Credential theft
+- MFA bypass
+- Audit gaps.
 
 ### What are we going to do about it?
 
 Define a focused test for the invented authentication attack: require the server to authenticate and authorize every protected request, bind local credentials to Android Keystore or iOS Keychain controls, and reject tampered deep-link or component data before it reaches a privileged action.
-
 
 Mapped MASTG tests:
 
@@ -36,7 +38,7 @@ Mapped MASTG tests:
 
 Mapped MASTG best practices:
 
-- No MASTG best practice is assigned; use the narrowest platform control that blocks the attack.
+- No MASTG best practice is assigned. Use the narrowest platform control that blocks the attack.
 
 Mapped MASTG knowledge:
 

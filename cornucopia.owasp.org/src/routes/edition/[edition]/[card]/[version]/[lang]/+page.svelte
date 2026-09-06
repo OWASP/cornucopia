@@ -3,7 +3,6 @@
   import CardFound from "$lib/components/cardFound.svelte";
   import CardNotFound from "$lib/components/cardNotFound.svelte";
   import type { Card } from "$domain/card/card";
-  import { isKnownCardId } from "$domain/card/cardIds";
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -15,7 +14,7 @@
 
   function cardFound()
     {
-    return isKnownCardId(card?.id)
+    return cards?.has(data.card)
   }
 
 </script>
