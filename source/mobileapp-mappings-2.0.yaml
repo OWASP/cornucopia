@@ -2,18 +2,31 @@ meta:
   edition: mobileapp
   component: mappings
   language: ALL
-  version: 2.0
+  version: "2.0"
   layouts: [cards, leaflet]
   templates: [bridge_qr, bridge, tarot, tarot_qr]
-  languages: [en, ru]
+  languages: [en, ru, uk]
 url_templates:
-  owasp_mastg: 'https://mas.owasp.org/{code}'
+  owasp_mastg: 'https://mas.owasp.org/MASTG-TEST-{code}'
   owasp_mastg_best: 'https://mas.owasp.org/MASTG-BEST-{code}'
   owasp_mastg_know: 'https://mas.owasp.org/MASTG-KNOW-{code}'
   owasp_maswe: 'https://mas.owasp.org/MASWE-{code}'
   capec: '/taxonomy/capec-3.9/{code}'
   stride: '/taxonomy/stride/{code}'
   safecode: 'https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf'
+labels:
+  value: ''
+  url: ''
+  stride: 'STRIDE'
+  stride_print: ''
+  owasp_mastg: 'MASTG'
+  owasp_mastg_best: 'MASTG Best'
+  owasp_mastg_know: 'MASTG Know'
+  owasp_maswe: 'MASWE'
+  capec: 'CAPEC™'
+  safecode: 'SAFECode™'
+  threat: 'MAS Threat'
+  attack_vector: 'MAS Attack'
 suits:
 - id: PC
   name: Platform & Code

@@ -353,6 +353,15 @@ describe('CreController tests', () => {
         });
     });
 
+    describe('deck fallback', () => {
+        it('should treat an undefined deck as empty when building the mapping', () => {
+            const controller = new CreController(undefined as unknown as Map<string, Card>, mockMappingController);
+            const result = controller.getCreMapping('webapp', 'en');
+
+            expect(result.standards).toEqual([]);
+        });
+    });
+
     describe('getEditionName', () => {
         it('should return correct name for webapp edition', () => {
             const result = CreController.getEditionName('webapp');

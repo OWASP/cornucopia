@@ -1,7 +1,5 @@
-import fs from 'fs';
 import * as yaml from "js-yaml";
-import path from "path";
-const __dirname = path.resolve(path.dirname(''));
+import * as decksYamlModule from "../../../decks.yaml?raw";
 
 export interface DeckVersionConfig {
     version: string;
@@ -31,6 +29,7 @@ export interface DeckConfig {
     buttonLabelKey?: string;
     descriptionHeadingKey?: string;
     descriptionBodyKey?: string;
+    taxonomyTranslationKey?: string;
 
     versions: DeckVersionConfig[];
 }
@@ -79,13 +78,11 @@ function validateDecksYaml(decks: Partial<DeckConfig>[]): asserts decks is DeckC
 
 
 export class DeckConfigService {
-    private static readonly path: string = '/decks.yaml';
     private static configs: DeckConfig[] | undefined;
 
     private static load(): DeckConfig[] {
         if (!DeckConfigService.configs) {
-            const yamlData = fs.readFileSync(`${__dirname}${DeckConfigService.path}`, 'utf8');
-            const parsed = yaml.load(yamlData) as DecksYaml;
+            const parsed = yaml.load(decksYamlModule.default) as DecksYaml;
             if (!Array.isArray(parsed?.decks)) throw new Error('decks.yaml: missing or invalid top-level "decks" array');
             validateDecksYaml(parsed.decks);
             DeckConfigService.configs = parsed.decks;

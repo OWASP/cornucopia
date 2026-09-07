@@ -7,6 +7,11 @@ settings:
 overrides:
   cookie@<0.7.0: 0.7.2
 
+patchedDependencies:
+  svelte-markdown@0.4.1:
+    hash: c747fe60d083a97a66df7ee14f43595bb7b41da3a054d98c5b6426e98894ffdc
+    path: patches/svelte-markdown@0.4.1.patch
+
 importers:
 
   .:
@@ -31,7 +36,7 @@ importers:
         version: 4.0.1(svelte@5.57.0(@typescript-eslint/types@8.69.0))
       svelte-markdown:
         specifier: ^0.4.1
-        version: 0.4.1(svelte@5.57.0(@typescript-eslint/types@8.69.0))
+        version: 0.4.1(patch_hash=c747fe60d083a97a66df7ee14f43595bb7b41da3a054d98c5b6426e98894ffdc)(svelte@5.57.0(@typescript-eslint/types@8.69.0))
       sveltekit-i18n:
         specifier: ^2.4.2
         version: 2.4.2(svelte@5.57.0(@typescript-eslint/types@8.69.0))
@@ -4962,7 +4967,7 @@ snapshots:
       svelte: 5.57.0(@typescript-eslint/types@8.69.0)
       tiny-glob: 0.2.9
 
-  svelte-markdown@0.4.1(svelte@5.57.0(@typescript-eslint/types@8.69.0)):
+  svelte-markdown@0.4.1(patch_hash=c747fe60d083a97a66df7ee14f43595bb7b41da3a054d98c5b6426e98894ffdc)(svelte@5.57.0(@typescript-eslint/types@8.69.0)):
     dependencies:
       '@types/marked': 5.0.2
       marked: 5.1.2

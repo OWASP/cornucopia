@@ -19,6 +19,7 @@ decks:
     buttonLabelKey: cards.button.1
     descriptionHeadingKey: cards.h2.1
     descriptionBodyKey: cards.p2
+    taxonomyTranslationKey: cards.mappings
 
     versions:
       - version: "2.2"
@@ -35,9 +36,10 @@ decks:
     buttonLabelKey: cards.button.2
     descriptionHeadingKey: cards.h2.2
     descriptionBodyKey: cards.p3
+    taxonomyTranslationKey: cards.mappings
     versions:
       - version: "1.1"
-        draftLanguages: [ru]
+      - version: "2.0"
 
   - edition: companion
     displayName: OWASP Cornucopia
@@ -45,10 +47,15 @@ decks:
     cre:
       name: OWASP Cornucopia Companion Edition
       category: Companion suits
+    standards:
+      asvs:
+        versionMap:
+          "1.0": "5.0"
     defaultPreviewCard: AAI2
     buttonLabelKey: cards.button.3
     descriptionHeadingKey: cards.h2.3
     descriptionBodyKey: cards.p4
+    taxonomyTranslationKey: cards.mappings
     versions:
       - version: "1.0"
 
@@ -62,6 +69,7 @@ decks:
     buttonLabelKey: cards.button.4
     descriptionHeadingKey: cards.h2.4
     descriptionBodyKey: cards.p5
+    taxonomyTranslationKey: cards.mappings
     versions:
       - version: "5.0"
 
