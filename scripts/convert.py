@@ -11,7 +11,7 @@ import subprocess
 import yaml
 import zipfile
 from defusedxml import ElementTree as DefusedElTree
-from typing import Any, Dict, List, Optional, Tuple, cast
+from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
@@ -924,7 +924,7 @@ def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
     return ""
 
 
-def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[Optional[str], Any]]) -> str:
+def get_replacement_value_from_dict(el_text: str, replacement_values: Sequence[Tuple[Optional[str], object]]) -> str:
     """Get replacement value from dictionary."""
     # Fast path: if no $ and no OWASP, likely no tags
     if "$" not in el_text and "OWASP" not in el_text:

@@ -578,6 +578,15 @@ class TestGetMetaData(unittest.TestCase):
 
         self.assertEqual(got_data["version"], "2.0")
 
+    def test_get_meta_data_rejects_non_mapping_meta(self) -> None:
+        input_data = {**self.test_data, "meta": ["invalid"]}
+
+        with self.assertLogs(logging.getLogger(), logging.ERROR) as logs:
+            got_data = c.get_meta_data(input_data)
+
+        self.assertEqual(logs.output, ["ERROR:root:Meta tag is not a dictionary."])
+        self.assertEqual(got_data, {})
+
     def test_get_meta_data_failure(self) -> None:
         input_data = self.test_data.copy()
         del input_data["meta"]
@@ -1972,6 +1981,9 @@ class Test1(unittest.TestCase):
 
 
 class TestCheckMakeListIntoText(unittest.TestCase):
+    def test_check_make_list_into_text_empty_list(self) -> None:
+        self.assertEqual(" - ", c.check_make_list_into_text([]))
+
     def test_check_make_list_into_text_success(self) -> None:
         input_list = ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"]
         want_text = "69, 107-109, 136-137, 153, 156, 158, 162"
