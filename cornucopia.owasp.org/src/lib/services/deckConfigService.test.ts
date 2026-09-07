@@ -336,11 +336,6 @@ decks:
             expect(DeckConfigService.getCreEditionName('webapp')).toBe('OWASP Cornucopia Website App Edition');
             expect(DeckConfigService.getCreEditionName('unknown')).toBeUndefined();
         });
-
-        it('should return the configured taxonomy translation key', () => {
-            expect(DeckConfigService.getTaxonomyTranslationKey('webapp')).toBe('cards.mappings');
-            expect(DeckConfigService.getTaxonomyTranslationKey('unknown')).toBe('cards.mappings');
-        });
     });
 
     describe('getAsvsVersion', () => {

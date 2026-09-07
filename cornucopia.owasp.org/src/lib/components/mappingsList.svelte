@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { getMappingUrl } from "../../domain/mapping/mappingController";
+  import { isLocalMappingLink, resolveMappingLink } from "./mappingsListLinks";
 
   interface Props {
     title: string;
@@ -25,8 +27,16 @@
   }
 
   function isLocalLink(mapping: string | number): boolean {
-    const link = getLink(mapping);
-    return link?.startsWith("/") || link?.startsWith("#") || false;
+    return isLocalMappingLink(getLink(mapping));
+  }
+
+  function resolveDataDrivenPath(path: string): string {
+    // Mapping URLs are data-driven, so their route cannot be inferred from generated route types.
+    return resolve(...([path] as never));
+  }
+
+  function getResolvedLink(mapping: string | number): string | undefined {
+    return resolveMappingLink(getLink(mapping), resolveDataDrivenPath);
   }
 </script>
 
@@ -38,14 +48,14 @@
     {:else if String(m).trim() != '-' && isLocalLink(m) && textFunction != undefined }
       <a
         title="{title} {textFunction(m)}"
-        href={getLink(m)}
+        href={getResolvedLink(m)}
       >
         {textFunction(m)}
       </a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else if String(m).trim() != '-' && isLocalLink(m)}
       <a
         title="{title} {m}"
-        href={getLink(m)}
+        href={getResolvedLink(m)}
       >
         {m}
       </a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
@@ -55,7 +65,7 @@
         target="_blank"
         rel="noopener nofollow external"
         class="link-with-external-indicator"
-        href={getLink(m)}
+        href={getResolvedLink(m)}
       >{m}</a>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}
     {:else}
       <span>{m}</span>{#if index != mappings.length - 1}<span class="spacer">, </span>{/if}

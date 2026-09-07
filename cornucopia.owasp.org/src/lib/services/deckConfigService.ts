@@ -131,10 +131,6 @@ export class DeckConfigService {
         return DeckConfigService.getDeckConfig(edition)?.cre.name;
     }
 
-    public static getTaxonomyTranslationKey(edition: string): string {
-        return DeckConfigService.getDeckConfig(edition)?.taxonomyTranslationKey ?? 'cards.mappings';
-    }
-
     public static getAsvsVersion(edition: string, version: string): string {
         return DeckConfigService.getDeckConfig(edition)?.standards?.asvs?.versionMap[version] ?? '4.0.3';
     }
