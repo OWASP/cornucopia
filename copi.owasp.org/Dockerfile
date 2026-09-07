@@ -6,12 +6,16 @@
 #
 FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bookworm-20260610@sha256:376908ff4e353ed8fe68140269b7e269fc2645f700f5144e7491ee9f2c201e4c as builder
 # install build dependencies (retry up to 3 times with backoff)
-RUN apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+RUN apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    || (sleep 15 && apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    || (sleep 15 && apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*) \
-    || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*)
+RUN apt-get update -y && apt-get install -y git
+# Install Node.js (add this section)
+RUN apt-get update -y && apt-get install -y --no-install-recommends nodejs npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # prepare build dir
 WORKDIR /app
@@ -59,7 +63,7 @@ RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
-FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0
+FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bookworm-20260610@sha256:376908ff4e353ed8fe68140269b7e269fc2645f700f5144e7491ee9f2c201e4c
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
