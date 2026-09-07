@@ -28,7 +28,8 @@
       "p1": "Back to overview"
     },
     "cardFound": {
-      "a": "How to play?"
+      "a": "How to play?",
+      "copy": "Copy card link"
     },
     "cardBrowser": {
       "a1": {

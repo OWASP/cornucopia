@@ -48,6 +48,10 @@ decks:
     cre:
       name: OWASP Cornucopia Companion Edition
       category: Companion suits
+    standards:
+      asvs:
+        versionMap:
+          "1.0": "5.0"
     defaultPreviewCard: AAI2
     buttonLabelKey: cards.button.3
     descriptionHeadingKey: cards.h2.3

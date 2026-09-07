@@ -5,6 +5,7 @@
     import { DevGuideMapping } from "$lib/devguideMapping";
     import MappingsList from "$lib/components/mappingsList.svelte";
     import type { Card } from "../../domain/card/card";
+    import { readTranslation} from "$lib/stores/stores";
     import {
         getMappingLabel,
         MappingController,
@@ -23,18 +24,15 @@
         routes: Map<string, Route[]>;
         capecData?: { [key: number]: { name: string; owasp_asvs: string[] } };
         asvsVersion?: string;
-        mappingHeading: string;
-        attacksHeading: string;
     }
-
+    
+    let t = readTranslation();
     let {
         mappingData,
         card,
         routes,
         capecData = undefined,
-        asvsVersion = "5.0",
-        mappingHeading,
-        attacksHeading,
+        asvsVersion = "5.0"
     }: Props = $props();
 
     const controller = $derived(new MappingController(mappingData));
@@ -99,7 +97,7 @@
 </script>
 
 {#if hasMappings}
-    <h2 id="mapping" class="title">{mappingHeading}</h2>
+    <h2 id="mapping" class="title">{$t('cards.mapping.h1.1')}</h2>
     {#if mappings.owasp_asvs !== undefined}
         <MappingsList
             title={labelFor("owasp_asvs") || "OWASP ASVS:"}
@@ -123,6 +121,8 @@
             textFunction={mapping.attribute === "stride" ? textSTRIDE : undefined}
         />
     {/each}
+{:else}
+    <h2 id="mapping" class="title">{$t('cards.mappings.no_mappings')}</h2>
 {/if}
 
 {#if hasCapecMap && capecData}
@@ -139,7 +139,7 @@
     <ASVSOverview mappings={asvsOverviewMappings} version={asvsVersion} />
 {/if}
 
-<h2 class="title">{attacksHeading}</h2>
+<h2 class="title">{$t('cards.mapping.h1.2')}</h2>
 <Attacks {attacks} />
 
 <style>

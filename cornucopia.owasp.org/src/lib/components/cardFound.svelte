@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Text } from "$lib/utils/text";
-  import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
@@ -12,7 +11,6 @@
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
   import EopCardTaxonomy from './eopCardTaxonomy.svelte';
-  import { DeckConfigService } from "$lib/services/deckConfigService";
   import type { CardImage } from "$lib/services/cardImagesService";
   import type { SuitStyling } from "$lib/services/suitStylingService";
 
@@ -27,6 +25,7 @@
     versions: string[];
     cardImages?: Record<string, Record<string, CardImage>>;
     suitStyling?: Record<string, Record<string, SuitStyling>>;
+    asvsVersion: string;
   }
 
   let {
@@ -39,20 +38,14 @@
     language,
     capecData = undefined,
     cardImages = undefined,
-    suitStyling = undefined
+    suitStyling = undefined,
+    asvsVersion
   }: Props = $props();
     
   const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
   let mappings = $derived(controller.getCardMappings(card.id));
-  let _attacks: Attack[] = $derived(GetCardAttacks(card.id));
-  const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
-  const taxonomyTranslationKey = $derived(DeckConfigService.getTaxonomyTranslationKey(card.edition));
 
-  function translate(key: string, fallback: string): string {
-    const translator = $t;
-    return typeof translator === "function" ? String(translator(key)) : fallback;
-  }
 </script>
 <LanguagePicker 
   edition={card.edition}
@@ -81,7 +74,7 @@
       }
     }}
   >
-    🔗 {$t('cards.cardFound.copyLink') ?? 'Copy card link'}
+    🔗 {$t('cards.cardFound.copy')}
   </button>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
@@ -95,8 +88,6 @@
       {routes}
       {capecData}
       {asvsVersion}
-      mappingHeading={translate(`${taxonomyTranslationKey}.h1.1`, "Mappings")}
-      attacksHeading={translate(`${taxonomyTranslationKey}.h1.2`, "Attacks")}
     />
   {/if}
     {#key card}
