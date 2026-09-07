@@ -158,15 +158,30 @@ defmodule CopiWeb.PlayerLive.Show do
 
     # Check if player already voted
     if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
-      # Remove their vote
-      continue_vote = Enum.find(game.continue_votes, fn vote -> vote.player_id == player.id end)
-      if continue_vote do
-        Copi.Repo.delete!(continue_vote)
+      # Remove their vote (conflict-safe: match on keys, not a stale struct)
+      case Copi.Repo.delete_all(
+             from cv in Copi.Cornucopia.ContinueVote,
+               where: cv.player_id == ^player.id and cv.game_id == ^game.id
+           ) do
+        {0, _} ->
+          Logger.debug("Continue vote already removed (race), player_id: #{player.id}, game_id: #{game.id}")
+        {n, _} ->
+          Logger.debug("Removed #{n} continue vote(s) for player_id: #{player.id}, game_id: #{game.id}")
       end
     else
       # Add their vote
-      Logger.debug("Adding continue vote for player_id: #{player.id}, game_id: #{game.id}")
-      Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id})
+      case Copi.Repo.insert(
+             %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id},
+             on_conflict: :nothing,
+             conflict_target: [:player_id, :game_id]
+           ) do
+        {:ok, %{id: nil}} ->
+          Logger.debug("Continue vote already exists (race), player_id: #{player.id}, game_id: #{game.id}")
+        {:ok, _vote} ->
+          Logger.debug("Continue vote added for player_id: #{player.id}, game_id: #{game.id}")
+        {:error, changeset} ->
+          Logger.warning("Continue vote failed for player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+      end
     end
 
     {:ok, updated_game} = game_module().find(game.id)
@@ -213,11 +228,23 @@ defmodule CopiWeb.PlayerLive.Show do
           vote = get_vote(dealt_card, player)
 
           if vote do
-            Logger.debug("Player has voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-            Copi.Repo.delete!(vote)
+            case Copi.Repo.delete_all(
+                   from v in Copi.Cornucopia.Vote,
+                     where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
+                 ) do
+              {0, _} ->
+                Logger.debug("Vote already removed (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+              {n, _} ->
+                Logger.debug("Removed #{n} vote(s) for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+            end
           else
-            Logger.debug("Player has not voted: player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-            case Copi.Repo.insert(%Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id}) do
+            case Copi.Repo.insert(
+                   %Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id},
+                   on_conflict: :nothing,
+                   conflict_target: [:player_id, :dealt_card_id]
+                 ) do
+              {:ok, %{id: nil}} ->
+                Logger.debug("Vote already exists (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
               {:ok, _vote} ->
                 Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
               {:error, changeset} ->
@@ -306,9 +333,7 @@ defmodule CopiWeb.PlayerLive.Show do
     player_id = params["id"]
     retry_count = socket.assigns[:player_load_retry_count] || 0
 
-    Logger.debug(
-      "Transient player/game load failure in PlayerLive.Show for player_id=#{inspect(player_id)}, retry=#{retry_count}, reason=#{inspect(reason)}"
-    )
+    Logger.debug("Transient player/game load failure in PlayerLive.Show for player_id=#{inspect(player_id)}, retry=#{retry_count}, reason=#{inspect(reason)}")
 
     cond do
       socket.assigns[:game] && socket.assigns[:player] && retry_count < Resilience.max_player_load_retries() ->
