@@ -197,6 +197,16 @@ describe('DeckService tests', () => {
             });
             expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk'] });
         });
+
+        it('should skip editions/versions with no discovered languages and omit them from the latest decks', () => {
+            vi.mocked(FileSystemHelper.hasDir).mockReturnValue(false);
+
+            const decks = DeckService.getDecks();
+            expect(decks).toHaveLength(0);
+
+            const latestEditions = DeckService.getLatestEditions();
+            expect(latestEditions).toHaveLength(0);
+        });
     }, 10000);
 
     describe('getLatestVersion', () => {

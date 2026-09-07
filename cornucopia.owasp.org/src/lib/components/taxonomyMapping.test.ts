@@ -69,4 +69,17 @@ describe("Taxonomy mapping display data", () => {
             { attribute: "phantom-b", label: "Phantom B:", values: ["M"] },
         ]);
     });
+
+    it("returns a placeholder for empty array values", () => {
+        expect(
+            getTaxonomyDisplayMappings(
+                {
+                    stride: [],
+                },
+                {
+                    stride: "STRIDE",
+                },
+            ),
+        ).toEqual([{ attribute: "stride", label: "STRIDE:", values: ["-"] }]);
+    });
 });
