@@ -2,10 +2,10 @@ meta:
   edition: mobileapp
   component: mappings
   language: ALL
-  version: 2.0
+  version: "2.0"
   layouts: [cards, leaflet]
   templates: [bridge_qr, bridge, tarot, tarot_qr]
-  languages: [en, ru]
+  languages: [en, ru, uk]
 url_templates:
   owasp_mastg: 'https://mas.owasp.org/MASTG-TEST-{code}'
   owasp_mastg_best: 'https://mas.owasp.org/MASTG-BEST-{code}'

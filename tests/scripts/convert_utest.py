@@ -570,6 +570,14 @@ class TestGetMetaData(unittest.TestCase):
         got_data = c.get_meta_data(input_data)
         self.assertDictEqual(want_data, got_data)
 
+    def test_get_meta_data_normalizes_numeric_version(self) -> None:
+        input_data = self.test_data.copy()
+        input_data["meta"] = {**input_data["meta"], "version": 2.0}
+
+        got_data = c.get_meta_data(input_data)
+
+        self.assertEqual(got_data["version"], "2.0")
+
     def test_get_meta_data_failure(self) -> None:
         input_data = self.test_data.copy()
         del input_data["meta"]
@@ -580,6 +588,39 @@ class TestGetMetaData(unittest.TestCase):
             got_data = c.get_meta_data(input_data)
         self.assertEqual(ll.output, want_logging_error_message)
         self.assertDictEqual(want_data, got_data)
+
+
+class TestBuildTemplateDict(unittest.TestCase):
+    def test_ignores_mapping_configuration_blocks(self) -> None:
+        input_data = {
+            "meta": {
+                "edition": "mobileapp",
+                "component": "mappings",
+                "language": "ALL",
+                "version": 2.0,
+            },
+            "url_templates": {"capec": "/taxonomy/capec/{code}"},
+            "labels": {"capec": "CAPEC"},
+            "suits": [
+                {
+                    "id": "PC",
+                    "name": "Platform & Code",
+                    "cards": [
+                        {
+                            "id": "PC2",
+                            "stride": ["I"],
+                        }
+                    ],
+                }
+            ],
+        }
+
+        result = c.build_template_dict(input_data)
+
+        self.assertEqual(result["meta"]["version"], "2.0")
+        self.assertEqual(result["${PC_PC2_stride}"], "I")
+        self.assertNotIn("url_templates", result)
+        self.assertNotIn("labels", result)
 
 
 class TestGetLanguageData(unittest.TestCase):
@@ -1917,6 +1958,17 @@ class Test1(unittest.TestCase):
 
         got_data = c.get_replacement_value_from_dict(input_text, self.replacement_values)
         self.assertEqual(want_data, got_data)
+
+    def test_get_replacement_value_from_dict_skips_non_string_values(self) -> None:
+        input_text = "metadata ${VE_suit}"
+        replacement_values = [
+            ("meta", {"version": "2.0"}),
+            ("${VE_suit}", "Validation & Encoding"),
+        ]
+
+        got_data = c.get_replacement_value_from_dict(input_text, replacement_values)
+
+        self.assertEqual("metadata Validation & Encoding", got_data)
 
 
 class TestCheckMakeListIntoText(unittest.TestCase):

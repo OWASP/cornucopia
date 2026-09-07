@@ -762,7 +762,9 @@ def get_mapping_data_for_edition(
 def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
     """Build template dictionary from the input data"""
     data: Dict[str, Any] = {"meta": get_meta_data(input_data)}
-    for key in list(k for k in input_data.keys() if k != "meta"):
+    for key in ("suits", "paragraphs"):
+        if key not in input_data:
+            continue
         for paragraphs in input_data[key]:
             text_type = ""
             if key == "suits":
@@ -805,8 +807,10 @@ def get_meta_data(data: Dict[str, Any]) -> Dict[str, Any]:
     for key in valid_keys:
         if key in raw_meta:
             value = raw_meta[key]
+            if key == "version" and isinstance(value, (int, float)) and not isinstance(value, bool):
+                meta[key] = str(value)
             # Simple validation: must be string or list of strings
-            if isinstance(value, str) and value.strip():
+            elif isinstance(value, str) and value.strip():
                 meta[key] = value
             elif isinstance(value, list) and all(isinstance(v, str) for v in value):
                 meta[key] = value
@@ -920,7 +924,7 @@ def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
     return ""
 
 
-def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
+def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[Optional[str], Any]]) -> str:
     """Get replacement value from dictionary."""
     # Fast path: if no $ and no OWASP, likely no tags
     if "$" not in el_text and "OWASP" not in el_text:
@@ -928,7 +932,7 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
 
     for k, v in replacement_values:
         # Skip None keys to prevent AttributeError
-        if k is None:
+        if k is None or not isinstance(v, str):
             continue
         # Avoid expensive regex if key is not even in text
         if k.strip() not in el_text:
