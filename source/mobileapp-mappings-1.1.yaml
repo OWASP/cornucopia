@@ -12,7 +12,7 @@ url_templates:
   stride: '/taxonomy/stride/{code}'
   safecode: 'https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf'
   owasp_mastg: 'https://mas.owasp.org/MASTG-TEST-{code}'
-  owasp_masvs: 'https://masvs.owasp.org/MASVS-{code}'
+  owasp_masvs: 'https://mas.owasp.org/MASVS-{code}'
 labels:
   value: ''
   url: ''
