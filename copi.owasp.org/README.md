@@ -60,10 +60,10 @@ openssl rand -base64 32 # please note the output. E.g: 5xpdhzomIy4Di+UFw/r7SJSb7
 # Linux
 export COPI_ENCRYPTION_KEY="5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY="
 export POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD
+
 # Windows
-# $env:COPI_ENCRYPTION_KEY="5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY="
-# $env:POSTGRES_PASSWORD="POSTGRES_LOCAL_PWD"
-# $env:POSTGRES_PASSWORD="POSTGRES_LOCAL_PWD"
+$env:COPI_ENCRYPTION_KEY="5xpdhzomIy4Di+UFw/r7SJSb7pvQhPitXGoet7fbMCY="
+$env:POSTGRES_PASSWORD="POSTGRES_LOCAL_PWD"
 
 docker run --name copi_dev -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=POSTGRES_LOCAL_PWD -d postgres
 ```
