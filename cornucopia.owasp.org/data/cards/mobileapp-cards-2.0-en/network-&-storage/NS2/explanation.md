@@ -27,3 +27,5 @@ Sensitive information is unintentionally exposed through insecure logging practi
 - Remove or disable debug logging in production builds.
 - Avoid logging sensitive information such as passwords, tokens, or personal data.
 - Review logging statements before releasing the application.
+
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.
