@@ -12,7 +12,7 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends --fix-missin
     && apt-get clean && rm -rf /var/lib/apt/lists/*) \
     || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*)
-
+RUN apt-get update -y && apt-get install -y git
 # prepare build dir
 WORKDIR /app
 
