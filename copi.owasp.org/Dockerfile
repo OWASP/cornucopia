@@ -4,21 +4,13 @@
 # https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=ubuntu
 # https://hub.docker.com/_/ubuntu?tab=tags
 #
-#
-# This file is based on these images:
-#
-#   - https://hub.docker.com/r/hexpm/elixir/tags - for the build image
-#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20220801-slim - for the release image
-#   - https://pkgs.org/ - resource for finding needed packages
-#   - Ex: hexpm/elixir:1.14.2-erlang-25.1.1-debian-bullseye-20220801-slim
-#
-FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bullseye-20251208@sha256:9d1e59c326674de89a2eac9cd7f118ae2917e1c6cde02e8fa4cd785198ca9be0 as builder
+FROM --platform=linux/amd64 hexpm/elixir:1.19-erlang-28.3-debian-bookworm-20260610@sha256:376908ff4e353ed8fe68140269b7e269fc2645f700f5144e7491ee9f2c201e4c as builder
 # install build dependencies (retry up to 3 times with backoff)
-RUN apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+RUN apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    || (sleep 15 && apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    || (sleep 15 && apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*) \
-    || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends build-essential git nodejs npm \
+    || (sleep 30 && apt-get update -y && apt-get install -y --no-install-recommends --fix-missing libstdc++6 openssl libncurses5 locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*)
 
 # prepare build dir

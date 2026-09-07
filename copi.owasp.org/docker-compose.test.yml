@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   db_test:
-    image: postgres:14-alpine
+    image: postgres:14-alpine@sha256:727876d274666da0b92a445390ba093c84b8e9f8343e1c53cd4e9a7ab2d85310
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: POSTGRES_LOCAL_PWD
       POSTGRES_DB: copi_test
     tmpfs:
       - /var/lib/postgresql/data
@@ -26,7 +26,7 @@ services:
       - /app/deps
     environment:
       MIX_ENV: test
-      POSTGRES_TEST_PWD: password
+      POSTGRES_TEST_PWD: POSTGRES_LOCAL_PWD
       DB_HOST: db_test
     depends_on:
       db_test:
