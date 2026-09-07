@@ -97,7 +97,7 @@
 </script>
 
 {#if hasMappings}
-    <h2 id="mapping" class="title">{$t('cards.mapping.h1.1')}</h2>
+    <h2 id="mapping" class="title">{$t('cards.mappings.h1.1')}</h2>
     {#if mappings.owasp_asvs !== undefined}
         <MappingsList
             title={labelFor("owasp_asvs") || "OWASP ASVS:"}
