@@ -178,9 +178,7 @@ def enrich_card(card: dict[str, Any], mastg_data: dict[str, Any], maswe_data: di
         card[field] = merge_unique(string_list(card.get(field), f"{card_id} {field}"), inferred[field])
     card["owasp_masvs"] = merge_unique(
         string_list(card.get("owasp_masvs"), f"{card_id} owasp_masvs"),
-        infer_masvs_mappings(
-            card_id, string_list(card["owasp_maswe"], f"{card_id} owasp_maswe"), maswe_data
-        ),
+        infer_masvs_mappings(card_id, string_list(card["owasp_maswe"], f"{card_id} owasp_maswe"), maswe_data),
     )
     if threats:
         card["threat"] = threats
