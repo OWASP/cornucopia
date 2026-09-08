@@ -33,6 +33,11 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/lang/mobileapp/2.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 /api/lang/webapp/2.2
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
@@ -123,6 +128,16 @@ function main() {
   Access-Control-Allow-Origin: *
   ! Content-Type
   Content-Type: application/json
+/api/mastg/mobileapp/2.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/maswe/mobileapp/2.0
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
 /api/mapping/webapp/2.2
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
@@ -134,6 +149,11 @@ function main() {
   ! Content-Type
   Content-Type: application/json
 /api/mapping/mobileapp/1.1
+  ! Access-Control-Allow-Origin
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: application/json
+/api/mapping/mobileapp/2.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
@@ -170,4 +190,3 @@ function main() {
 }
 
 main();
-
