@@ -44,6 +44,8 @@ The default paths are:
 For each card, `owasp_maswe` values are matched against the root MASWE codes
 in the MASWE metadata file. The card's `owasp_masvs` list is the
 source-ordered, deduplicated union of the matching MASWE `owasp_masvs` lists.
+It is recomputed on every run, so obsolete values from a previous generated
+mapping are removed.
 Missing legacy MASWE codes are reported as warnings and do not create
 invented mappings.
 

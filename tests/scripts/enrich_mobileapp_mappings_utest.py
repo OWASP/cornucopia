@@ -70,6 +70,27 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
         self.assertEqual(["0001", "9999"], card["owasp_maswe"])
         self.assertEqual(["MASVS-STORAGE-1"], card["owasp_masvs"])
 
+    def test_enrich_mappings_replaces_stale_masvs_values(self) -> None:
+        mappings = {
+            "suits": [
+                {
+                    "cards": [
+                        {
+                            "id": "NSY",
+                            "owasp_mastg": ["-"],
+                            "owasp_maswe": ["0001"],
+                            "owasp_masvs": ["MASVS-OLD"],
+                        }
+                    ]
+                }
+            ]
+        }
+        maswe = {"0001": {"owasp_masvs": ["MASVS-STORAGE-1"]}}
+
+        card = enricher.enrich_mappings(mappings, {}, maswe)["suits"][0]["cards"][0]
+
+        self.assertEqual(["MASVS-STORAGE-1"], card["owasp_masvs"])
+
     def test_enrich_mappings_rejects_invalid_masvs_metadata(self) -> None:
         mappings = {"suits": [{"cards": [{"id": "PC1", "owasp_mastg": ["-"], "owasp_maswe": ["0001"]}]}]}
 
