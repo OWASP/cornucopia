@@ -38,6 +38,7 @@
   capecData={data.capecData}
   cardImages={data.cardImages}
   suitStyling={data.suitStyling}
+  asvsVersion={data.asvsVersion}
 />
 
 {:else}

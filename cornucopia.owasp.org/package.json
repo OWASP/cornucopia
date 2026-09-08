@@ -63,11 +63,13 @@
 	"pnpm": {
 		"auditConfig": {
 			"ignoreCves": [],
-			"ignoreGhsas": [
-			]
+			"ignoreGhsas": []
 		},
 		"overrides": {
 			"cookie@<0.7.0": "0.7.2"
+		},
+		"patchedDependencies": {
+			"svelte-markdown@0.4.1": "patches/svelte-markdown@0.4.1.patch"
 		}
 	}
 }

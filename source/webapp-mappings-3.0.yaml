@@ -11,6 +11,12 @@ url_templates:
   capec: '/taxonomy/capec-3.9/{code}'
   stride: '/taxonomy/stride/{code}'
   safecode: 'https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf'
+labels:
+  capec: 'CAPEC™'
+  stride: 'STRIDE'
+  safecode: 'SAFECode™'
+  owasp_dev_guide: 'OWASP DevGuide'
+  owasp_asvs: 'OWASP ASVS (v5.0)'
 suits:
 -
   id: "VE"

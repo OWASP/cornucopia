@@ -7,6 +7,40 @@ meta:
   layouts: [ cards, leaflet ]
   templates: [ tarot ]
   languages: ["en"]
+url_templates:
+  capec: '/taxonomy/capec-3.9/{code}'
+  stride: '/taxonomy/stride/{code}'
+  cwe: 'https://cwe.mitre.org/data/definitions/{code}.html'
+labels:
+  value: ''
+  url: ''
+  capec: 'CAPEC™'
+  stride: 'STRIDE'
+  stride_print: ''
+  owasp_asvs: 'ASVS (5.0)'
+  owasp_asvs_print: ''
+  owasp_aisvs: 'AISVS (1.0)'
+  owasp_aisvs_print: ''
+  owasp_aitg: 'AITG (1.0)'
+  mitre_atlas: 'MITRE ATLAS™'
+  mitre_atlas_print: ''
+  mitre_attack: 'MITRE ATT&CK'
+  owasp_agentic_top10: 'OWASP Agentic Top 10'
+  owasp_agentic_top10_print: ''
+  owasp_llm_top10: 'OWASP LLM Top 10'
+  owasp_llm_top10_print: ''
+  owasp_dsomm: 'OWASP DSOMM'
+  owasp_oat: 'OWASP OAT'
+  owasp_samm: 'OWASP SAMM'
+  owasp_top-10: 'OWASP Top 10'
+  owasp_top-10_client_side: 'OWASP Top 10 Client-Side'
+  asvs: 'OWASP ASVS (5.0)'
+  ccm: 'Cloud Controls Matrix'
+  cwe: 'CWE™'
+  phantom-b: 'Phantom B™'
+  phantom-b_print: ''
+  cia: 'CIA'
+  cia_print: ''
 suits:
 -
   id: LLM
@@ -29,7 +63,7 @@ suits:
     mitre_atlas_print: [ "AML.T0029: Denial of ML Service", "AML.T0034: Cost Harvesting" ]
     owasp_llm_top10: [ LLM10:2025 ]
     owasp_llm_top10_print: [ "LLM10:2025: Unbounded Consumption" ]
-    cwe: [ CWE-400, CWE-770 ]
+    cwe: [ 400, 770 ]
   -
     id: LLM3
     value: 3
@@ -47,7 +81,7 @@ suits:
     mitre_atlas_print: [ "AML.T0048: External Harms" ]
     owasp_llm_top10: [ LLM09:2025 ]
     owasp_llm_top10_print: [ "LLM09:2025: Misinformation" ]
-    cwe: [ CWE-1426 ]
+    cwe: [ 1426 ]
   -
     id: LLM4
     value: 4
@@ -65,7 +99,7 @@ suits:
     mitre_atlas_print: [ "AML.T0057: LLM Data Leakage" ]
     owasp_llm_top10: [ LLM02:2025, LLM07:2025 ]
     owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure", "LLM07:2025: System Prompt Leakage" ]
-    cwe: [ CWE-200 ]
+    cwe: [ 200 ]
   -
     id: LLM5
     value: 5
@@ -83,7 +117,7 @@ suits:
     mitre_atlas_print: [ "AML.T0012: Valid Accounts" ]
     owasp_llm_top10: [ LLM02:2025 ]
     owasp_llm_top10_print: [ "LLM02:2025: Sensitive Information Disclosure" ]
-    cwe: [ CWE-285, CWE-863 ]
+    cwe: [ 285, 863 ]
   -
     id: LLM6
     value: 6
@@ -101,7 +135,7 @@ suits:
     mitre_atlas_print: [ "AML.T0059: Erode Dataset Integrity" ]
     owasp_llm_top10: [ LLM08:2025 ]
     owasp_llm_top10_print: [ "LLM08:2025: Vector and Embedding Weaknesses" ]
-    cwe: [ CWE-345, CWE-20 ]
+    cwe: [ 345, 20 ]
   -
     id: LLM7
     value: 7
@@ -119,7 +153,7 @@ suits:
     mitre_atlas_print: [ "AML.T0020: Poison Training Data" ]
     owasp_llm_top10: [ LLM04:2025 ]
     owasp_llm_top10_print: [ "LLM04:2025: Data and Model Poisoning" ]
-    cwe: [ CWE-345 ]
+    cwe: [ 345 ]
   -
     id: LLM8
     value: 8
@@ -137,7 +171,7 @@ suits:
     mitre_atlas_print: [ "AML.T0057: LLM Data Leakage" ]
     owasp_llm_top10: [ LLM06:2025, LLM02:2025 ]
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency", "LLM02:2025: Sensitive Information Disclosure" ]
-    cwe: [ CWE-862, CWE-285 ]
+    cwe: [ 862, 285 ]
   -
     id: LLM9
     value: 9
@@ -155,7 +189,7 @@ suits:
     mitre_atlas_print: [ "AML.T0051.001: LLM Prompt Injection: Indirect" ]
     owasp_llm_top10: [ LLM01:2025 ]
     owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
-    cwe: [ CWE-1427 ]
+    cwe: [ 1427 ]
   -
     id: LLMX
     value: 10
@@ -173,7 +207,7 @@ suits:
     mitre_atlas_print: [ "AML.T0051.000: LLM Prompt Injection: Direct" ]
     owasp_llm_top10: [ LLM01:2025 ]
     owasp_llm_top10_print: [ "LLM01:2025: Prompt Injection" ]
-    cwe: [ CWE-1427 ]
+    cwe: [ 1427 ]
   -
     id: LLMJ
     value: J
@@ -191,7 +225,7 @@ suits:
     mitre_atlas_print: [ "AML.T0010: ML Supply Chain Compromise" ]
     owasp_llm_top10: [ LLM03:2025 ]
     owasp_llm_top10_print: [ "LLM03:2025: Supply Chain" ]
-    cwe: [ CWE-1357 ]
+    cwe: [ 1357 ]
   -
     id: LLMQ
     value: Q
@@ -209,7 +243,7 @@ suits:
     mitre_atlas_print: [ "AML.T0050: Command and Scripting Interpreter" ]
     owasp_llm_top10: [ LLM05:2025 ]
     owasp_llm_top10_print: [ "LLM05:2025: Improper Output Handling" ]
-    cwe: [ CWE-1426, CWE-94, CWE-77 ]
+    cwe: [ 1426, 94, 77 ]
   -
     id: LLMK
     value: K
@@ -227,7 +261,7 @@ suits:
     mitre_atlas_print: [ "AML.T0053: AI Agent Tool Invocation" ]
     owasp_llm_top10: [ LLM06:2025 ]
     owasp_llm_top10_print: [ "LLM06:2025: Excessive Agency" ]
-    cwe: [ CWE-269, CWE-840 ]
+    cwe: [ 269, 840 ]
 -
   id: CLD
   name: Cloud
@@ -240,8 +274,8 @@ suits:
     stride_print: [ "Elevation of Privilege" ]
     ccm: [ IAM-05, IAM-09 ]
     mitre_attack: [ T1098.003, T1078.004 ]
-    cwe: [ CWE-732 ]
-    capec: [ CAPEC-122 ]
+    cwe: [ 732 ]
+    capec: [ 122 ]
   -
     id: CLD3
     value: 3
@@ -250,8 +284,8 @@ suits:
     stride_print: [ "Information Disclosure" ]
     ccm: [ DSP-17, IVS-03, LOG-04 ]
     mitre_attack: [ T1530 ]
-    cwe: [ CWE-200 ]
-    capec: [ CAPEC-545 ]
+    cwe: [ 200 ]
+    capec: [ 545 ]
   -
     id: CLD4
     value: 4
@@ -260,7 +294,7 @@ suits:
     stride_print: [ Repudiation ]
     ccm: [ LOG-01, LOG-05, LOG-07 ]
     mitre_attack: [ T1562.008 ]
-    capec: [ CAPEC-268 ]
+    capec: [ 268 ]
   -
     id: CLD5
     value: 5
@@ -269,7 +303,7 @@ suits:
     stride_print: [ "Tampering" ]
     ccm: [ AIS-05, CCC-02, CCC-04 ]
     mitre_attack: [ T1195.002 ]
-    capec: [ CAPEC-242 ]
+    capec: [ 242 ]
   -
     id: CLD6
     value: 6
@@ -278,7 +312,7 @@ suits:
     stride_print: [ "Tampering", "Information Disclosure" ]
     ccm: [ AIS-01, AIS-02, AIS-04, LOG-03 ]
     mitre_attack: [ T1528, T1530 ]
-    capec: [ CAPEC-54 ]
+    capec: [ 54 ]
   -
     id: CLD7
     value: 7
@@ -287,7 +321,7 @@ suits:
     stride_print: [ "Elevation of Privilege" ]
     ccm: [ IVS-04, IVS-06 ]
     mitre_attack: [ T1611, TA0008 ]
-    capec: [ CAPEC-480 ]
+    capec: [ 480 ]
   -
     id: CLD8
     value: 8
@@ -296,7 +330,7 @@ suits:
     stride_print: [ "Elevation of Privilege" ]
     ccm: [ DSP-04, DSP-17 ]
     mitre_attack: [ T1552.005 ]
-    capec: [ CAPEC-545 ]
+    capec: [ 545 ]
   -
     id: CLD9
     value: 9
@@ -305,7 +339,7 @@ suits:
     stride_print: [ "Elevation of Privilege" ]
     ccm: [ IAM-04, IVS-06 ]
     mitre_attack: [ T1021.007, TA0008 ]
-    capec: [ CAPEC-161 ]
+    capec: [ 161 ]
   -
     id: CLDX
     value: 10
@@ -314,7 +348,7 @@ suits:
     stride_print: [ "Tampering" ]
     ccm: [ AIS-04, AIS-06, CCC-06 ]
     mitre_attack: [ T1195.001, T1584.004 ]
-    capec: [ CAPEC-248 ]
+    capec: [ 248 ]
   -
     id: CLDJ
     value: J
@@ -323,7 +357,7 @@ suits:
     stride_print: [ "Tampering" ]
     ccm: [ IVS-01, IVS-05, CCC-04 ]
     mitre_attack: [ T1554, T1195 ]
-    capec: [ CAPEC-439 ]
+    capec: [ 439 ]
   -
     id: CLDQ
     value: Q
@@ -332,7 +366,7 @@ suits:
     stride_print: [ "Information Disclosure", "Elevation of Privilege" ]
     ccm: [ IAM-05, IAM-116 ]
     mitre_attack: [ T1195 ]
-    capec: [ CAPEC-161 ]
+    capec: [ 161 ]
   -
     id: CLDK
     value: K
@@ -341,7 +375,7 @@ suits:
     stride_print: [ Spoofing ]
     ccm: [ IAM-01, IAM-02, IAM-09 ]
     mitre_attack: [ T1098 ]
-    capec: [ CAPEC-233 ]
+    capec: [ 233 ]
 -
   id: FRE
   name: Frontend
@@ -355,8 +389,8 @@ suits:
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A06:2025 ]
     asvs: [ 5.1 ]
-    capec: [ CAPEC-153 ]
-    cwe: [ CWE-20 ]
+    capec: [ 153 ]
+    cwe: [ 20 ]
     mitre_attack: [ T1565 ]
   -
     id: FRE3
@@ -367,7 +401,7 @@ suits:
     owasp_top-10_client_side: [ 7 ]
     owasp_top-10: [ A04:2025 ]
     asvs: [ 8.2 ]
-    capec: [ CAPEC-37 ]
+    capec: [ 37 ]
     mitre_attack: [ T1552 ]
   -
     id: FRE4
@@ -378,7 +412,7 @@ suits:
     owasp_top-10_client_side: [ 2 ]
     owasp_top-10: [ A05:2025 ]
     asvs: [ 5.3 ]
-    capec: [ CAPEC-63 ]
+    capec: [ 63 ]
     mitre_attack: [ T1059.007 ]
   -
     id: FRE5
@@ -389,7 +423,7 @@ suits:
     owasp_top-10_client_side: [ 4 ]
     owasp_top-10: [ A03:2025 ]
     asvs: [ 14.2 ]
-    capec: [ CAPEC-683 ]
+    capec: [ 683 ]
     mitre_attack: [ T1195.002 ]
   -
     id: FRE6
@@ -400,8 +434,8 @@ suits:
     owasp_top-10_client_side: [ 7 ]
     owasp_top-10: [ A07:2025 ]
     asvs: [ 8.2 ]
-    capec: [ CAPEC-180 ]
-    cwe: [ CWE-284 ]
+    capec: [ 180 ]
+    cwe: [ 284 ]
     mitre_attack: [ T1552.001 ]
   -
     id: FRE7
@@ -422,7 +456,7 @@ suits:
     owasp_top-10_client_side: [ 1 ]
     owasp_top-10: [ A01:2025 ]
     asvs: [ 4.1 ]
-    capec: [ CAPEC-122 ]
+    capec: [ 122 ]
     mitre_attack: [ T1068 ]
   -
     id: FRE9
@@ -433,7 +467,7 @@ suits:
     owasp_top-10_client_side: [ 1 ]
     owasp_top-10: [ A01:2025 ]
     asvs: [ 3.5 ]
-    capec: [ CAPEC-593 ]
+    capec: [ 593 ]
     mitre_attack: [ T1134 ]
   -
     id: FREX
@@ -444,7 +478,7 @@ suits:
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A08:2025 ]
     asvs: [ 14.4 ]
-    capec: [ CAPEC-103 ]
+    capec: [ 103 ]
     mitre_attack: [ T1417 ]
   -
     id: FREJ
@@ -455,7 +489,7 @@ suits:
     owasp_top-10_client_side: [ 5 ]
     owasp_top-10: [ A03:2025 ]
     asvs: [ 14.2 ]
-    capec: [ CAPEC-683 ]
+    capec: [ 683 ]
     mitre_attack: [ T1176.001 ]
   -
     id: FREQ
@@ -466,7 +500,7 @@ suits:
     owasp_top-10_client_side: [ 9 ]
     owasp_top-10: [ A05:2025 ]
     asvs: [ 14.2 ]
-    capec: [ CAPEC-438 ]
+    capec: [ 438 ]
     mitre_attack: [ T1059.007 ]
   -
     id: FREK
@@ -477,7 +511,7 @@ suits:
     owasp_top-10_client_side: [ 10 ]
     owasp_top-10: [ A02:2025 ]
     asvs: [ 14.1 ]
-    capec: [ CAPEC-180 ]
+    capec: [ 180 ]
     mitre_attack: [ T1190 ]
 -
   id: DVO
@@ -489,7 +523,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO2
     stride: [ R, T ]
     stride_print: [ "Repudiation", "Tampering" ]
-    capec: [ CAPEC-571, CAPEC-268 ]
+    capec: [ 571, 268 ]
     owasp_samm: [ O-IM-A ] 
     owasp_dsomm: [ IG-L ]
   -
@@ -498,7 +532,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO3
     stride: [ T, E ]
     stride_print: [ "Tampering", "Elevation of Privilege" ]
-    capec: [ CAPEC-554, CAPEC-17 ]
+    capec: [ 554, 17 ]
     owasp_samm: [ O-EM-A ]
     owasp_dsomm: [ I-IH, I-AH ]
   -
@@ -507,7 +541,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO4
     stride: [ T, I, D ]
     stride_print: [ "Tampering", "Information Disclosure", "Denial of Service" ]
-    capec: [ CAPEC-180 ]
+    capec: [ 180 ]
     owasp_samm: [ O-OM-A ]
     owasp_dsomm: [ I-IH ]
   -
@@ -516,7 +550,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO5
     stride: [ E ]
     stride_print: [ "Elevation of Privilege" ]
-    capec: [ CAPEC-480, CAPEC-233 ]
+    capec: [ 480, 233 ]
     owasp_samm: [ V-AA, O-EM-A ]
     owasp_dsomm: [ I-IH, TV-DDI ]
   -
@@ -534,7 +568,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO7
     stride: [ T ]
     stride_print: [ "Tampering" ]
-    capec: [ CAPEC-444, CAPEC-669, CAPEC-536 ]
+    capec: [ 444, 669, 536 ]
     owasp_samm: [ I-SD-A ]
     owasp_dsomm: [ BD-D ]
   -
@@ -543,7 +577,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO8
     stride: [ T ]
     stride_print: [ "Tampering" ]
-    capec: [ CAPEC-444, CAPEC-669, CAPEC-536, CAPEC-473 ]
+    capec: [ 444, 669, 536, 473 ]
     owasp_samm: [ I-SB-A, I-SD-A ]
     owasp_dsomm: [ BD-B ]
   -
@@ -552,7 +586,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVO9
     stride: [ T, E ]
     stride_print: [ "Tampering", "Elevation of Privilege" ]
-    capec: [ CAPEC-670 ]
+    capec: [ 670 ]
     owasp_samm: [ I-SB-A, I-SD-A, O-EM-A ]
     owasp_dsomm: [ I-DSC, I-IH, BD-B, BD-D ]
   -
@@ -561,7 +595,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVOX
     stride: [ E, I ]
     stride_print: [ "Elevation of Privilege", "Information Disclosure" ]
-    capec: [ CAPEC-560, CAPEC-234, CAPEC-21 ]
+    capec: [ 560, 234, 21 ]
     owasp_samm: [ O-OM-B ]
     owasp_dsomm: [ BD-D ]
   -
@@ -570,7 +604,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVOJ
     stride: [ E ]
     stride_print: [ "Elevation of Privilege" ]
-    capec: [ CAPEC-310 ]
+    capec: [ 310 ]
     owasp_samm: [ O-EM-B, I-SB, I-DM-A, D-SA-B ]
     owasp_dsomm: [ BD-PM, BD-D, TV-SDA ]
   -
@@ -579,7 +613,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVOQ
     stride: [ I ]
     stride_print: [ "Information Disclosure" ]
-    capec: [ CAPEC-560, CAPEC-21, CAPEC-150 ]
+    capec: [ 560, 21, 150 ]
     owasp_samm: [ I-SD-B, O-OM-A ]
     owasp_dsomm: [ I-DSC, TV-SDI ]
   -
@@ -588,7 +622,7 @@ suits:
     url: https://cornucopia.owasp.org/cards/DVOK
     stride: [ T ]
     stride_print: [ "Tampering" ]
-    capec: [ CAPEC-444, CAPEC-184, CAPEC-439 ]
+    capec: [ 444, 184, 439 ]
     owasp_samm: [ O-EM-B, I-SB, D-SA-B ]
     owasp_dsomm: [ BD-D, TV-SDI, I-DSC, CO-P ]
 -

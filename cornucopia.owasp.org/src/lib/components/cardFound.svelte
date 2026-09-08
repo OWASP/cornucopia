@@ -1,29 +1,18 @@
 <script lang="ts">
   import { Text } from "$lib/utils/text";
-  import {GetCardAttacks, type Attack } from "$lib/cardAttacks";
   import Explanation from "./explanation.svelte";
   import CardBrowser from "$lib/components/cardBrowser.svelte";
   import type { Card } from "$domain/card/card";
   import ViewSourceOnGithub from "$lib/components/viewSourceOnGithub.svelte";
   import type { Route } from "$domain/routes/route";
   import { MappingController } from "$domain/mapping/mappingController";
-  import WebAppCardTaxonomy from "./webAppCardTaxonomy.svelte";
+  import Taxonomy from "./Taxonomy.svelte";
   import LanguagePicker from "$lib/components/languagePicker.svelte";
-  import MobileAppCardTaxonomy from "./mobileAppCardTaxonomy.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
-  import CompanionCardTaxonomy from './companionCardTaxonomy.svelte';
   import EopCardTaxonomy from './eopCardTaxonomy.svelte';
-  import type { Component } from "svelte";
   import type { CardImage } from "$lib/services/cardImagesService";
   import type { SuitStyling } from "$lib/services/suitStylingService";
-
-  const taxonomies: Record<string, Component<any>> = {
-    webapp: WebAppCardTaxonomy,
-    mobileapp: MobileAppCardTaxonomy,
-    companion: CompanionCardTaxonomy,
-    eop: EopCardTaxonomy
-  };
 
   interface Props {
     mappingData: any;
@@ -36,6 +25,7 @@
     versions: string[];
     cardImages?: Record<string, Record<string, CardImage>>;
     suitStyling?: Record<string, Record<string, SuitStyling>>;
+    asvsVersion: string;
   }
 
   let {
@@ -48,15 +38,14 @@
     language,
     capecData = undefined,
     cardImages = undefined,
-    suitStyling = undefined
+    suitStyling = undefined,
+    asvsVersion
   }: Props = $props();
     
   const controller = $derived(new MappingController(mappingData));
   let t = readTranslation();
   let mappings = $derived(controller.getCardMappings(card.id));
-  let _attacks: Attack[] = $derived(GetCardAttacks(card.id));
-  const asvsVersion = $derived(card.version < '3.0' ? '4.0.3' : '5.0');
-  let Taxonomy = $derived(taxonomies[card.edition]);
+
 </script>
 <LanguagePicker 
   edition={card.edition}
@@ -85,13 +74,21 @@
       }
     }}
   >
-    🔗 {$t('cards.cardFound.copyLink') ?? 'Copy card link'}
+    🔗 {$t('cards.cardFound.copy')}
   </button>
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
-  {#if Taxonomy}
-  <svelte:component this={Taxonomy} {card} {mappingData} {routes} {capecData} {asvsVersion} />
+  {#if card.edition === 'eop'}
+    <EopCardTaxonomy {card} {mappingData} {routes} />
+  {:else}
+    <Taxonomy
+      {card}
+      {mappingData}
+      {routes}
+      {capecData}
+      {asvsVersion}
+    />
   {/if}
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>

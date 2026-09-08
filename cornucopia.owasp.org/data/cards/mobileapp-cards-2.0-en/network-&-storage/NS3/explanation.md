@@ -28,3 +28,5 @@ Sensitive information is exposed because clipboard and keyboard caching mechanis
 - Clear clipboard data after sensitive operations.
 - Disable keyboard caching for password and sensitive input fields.
 - Use secure input flags provided by the platform.
+
+See the mapped MASTG tests for how to verify that the app is safe. Follow the mapped MASTG best practices during coding, and prepare yourself by reading through the mapped MASTG knowledge.

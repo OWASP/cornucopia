@@ -105,7 +105,7 @@
 {/if}
 
 {#if mappings?.length == 0 }
-    <p>{$t('cards.ASVSOverview.p1')}</p>
+    <p>{$t('cards.mappings.no_mappings')}</p>
 {/if}
 
 <style>

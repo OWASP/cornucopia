@@ -45,6 +45,7 @@ export const load = (async ({ params }) => {
     card: fixedCode,
     decks,
     versions,
+    asvsVersion,
     routes: new Map<string, Route[]>([
       ["ASVSRoutes", FileSystemHelper.ASVSRouteMap(asvsVersion)],
     ]),

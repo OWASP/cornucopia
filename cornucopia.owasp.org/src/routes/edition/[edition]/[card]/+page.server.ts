@@ -44,6 +44,7 @@ export const load = (({ params }) => {
       lang: 'en',
       card: fixedCode,
       cards,
+      asvsVersion,
       routes: new Map<string, Route[]>([
         ['ASVSRoutes', FileSystemHelper.ASVSRouteMap(asvsVersion)]
       ]),
