@@ -6,6 +6,6 @@ if (buildDir) {
   writeHeaders({
     buildDir,
     origin: 'https://cornucopia.owasp.org',
-    includeGlobalRobotsTag: true
+    includeNotFound: true
   });
 }
