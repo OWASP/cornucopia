@@ -31,157 +31,157 @@ function main() {
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/lang/mobileapp/2.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/lang/webapp/2.2
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/lang/webapp/3.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/asvs/webapp/3.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/capec/webapp/3.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/mastg/mobileapp/2.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/maswe/mobileapp/2.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/mapping/webapp/2.2
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/mapping/webapp/3.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/mapping/mobileapp/1.1
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/mapping/mobileapp/2.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/mapping/companion/1.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/mobileapp/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/es
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/fr
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/nl
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/no_nb
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/it
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/pt_pt
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/pt_br
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/webapp/ru
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/companion/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/lang/companion/1.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/dbd/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/lang/dbd/1.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/eop/en
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/eop/es
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/cre/eop/ru
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 /api/lang/eop/5.0
   ! Access-Control-Allow-Origin
   Access-Control-Allow-Origin: *
   ! Content-Type
-  Content-Type: application/json
+  Content-Type: application/json; charset=UTF-8
 `;
 
   const headersFile = path.join(buildDir, '_headers');
