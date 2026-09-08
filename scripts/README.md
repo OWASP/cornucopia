@@ -273,7 +273,7 @@ pipenv run python scripts/convert_mastg_map.py -i ../mastg --maswe-input-path ..
 
 ### Enriching Mobile App Mappings
 
-The `scripts/enrich_mobileapp_mappings.py` script adds MASTG, MASWE, threat, and attack-vector metadata to Mobile App Edition card mappings.
+The `scripts/enrich_mobileapp_mappings.py` script adds MASTG, MASWE, MASVS, threat, and attack-vector metadata to Mobile App Edition card mappings.
 
 ```bash
 python scripts/enrich_mobileapp_mappings.py --help

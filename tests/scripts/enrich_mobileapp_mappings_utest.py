@@ -27,6 +27,7 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
         mastg = {"0357": {"owasp_maswe": ["0018"], "owasp_mastg_know": ["0020", "0117"], "owasp_mastg_best": ["0049"]}}
         maswe = {
             "0018": {
+                "owasp_masvs": ["MASVS-STORAGE-1", "MASVS-PLATFORM-3"],
                 "owasp_mas_threat": {
                     "0018": "Attackers can access sensitive data and functionality exposed by app components."
                 },
@@ -43,8 +44,37 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
         self.assertEqual(["0049"], card["owasp_mastg_best"])
         self.assertEqual(["0104", "0020", "0117"], card["owasp_mastg_know"])
         self.assertEqual(["0018"], card["owasp_maswe"])
+        self.assertEqual(["MASVS-STORAGE-1", "MASVS-PLATFORM-3"], card["owasp_masvs"])
         self.assertEqual(maswe["0018"]["owasp_mas_attack"], card["attack_vector"])
         self.assertEqual(maswe["0018"]["owasp_mas_threat"], card["threat"])
+
+    def test_enrich_mappings_derives_masvs_from_existing_maswe_values(self) -> None:
+        mappings = {
+            "suits": [
+                {
+                    "cards": [
+                        {
+                            "id": "NSX",
+                            "owasp_mastg": ["-"],
+                            "owasp_maswe": ["0001", "9999"],
+                        }
+                    ]
+                }
+            ]
+        }
+        maswe = {"0001": {"owasp_masvs": ["MASVS-STORAGE-1"]}}
+
+        with self.assertLogs(level="WARNING"):
+            card = enricher.enrich_mappings(mappings, {}, maswe)["suits"][0]["cards"][0]
+
+        self.assertEqual(["0001", "9999"], card["owasp_maswe"])
+        self.assertEqual(["MASVS-STORAGE-1"], card["owasp_masvs"])
+
+    def test_enrich_mappings_rejects_invalid_masvs_metadata(self) -> None:
+        mappings = {"suits": [{"cards": [{"id": "PC1", "owasp_mastg": ["-"], "owasp_maswe": ["0001"]}]}]}
+
+        with self.assertRaisesRegex(ValueError, "MASWE 0001 owasp_masvs"):
+            enricher.enrich_mappings(mappings, {}, {"0001": {"owasp_masvs": "MASVS-STORAGE-1"}})
 
     def test_enrich_mappings_preserves_placeholder_mastg_value(self) -> None:
         mappings = {"suits": [{"cards": [{"id": "PCA", "owasp_mastg": ["-"]}]}]}
@@ -53,6 +83,7 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
 
         self.assertEqual(["-"], card["owasp_mastg"])
         self.assertEqual([], card["owasp_maswe"])
+        self.assertEqual([], card["owasp_masvs"])
 
     def test_enrich_mappings_preserves_legacy_mastg_value(self) -> None:
         mappings = {"suits": [{"cards": [{"id": "CMJ", "owasp_mastg": ["0043"]}]}]}
@@ -115,6 +146,8 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
             )
 
     def test_parse_arguments_rejects_traversal_and_main_uses_default_paths(self) -> None:
+        self.assertEqual("mobileapp", enricher.parse_arguments([]).edition)
+
         with self.assertRaises(SystemExit):
             enricher.parse_arguments(["--edition", "../outside"])
 
