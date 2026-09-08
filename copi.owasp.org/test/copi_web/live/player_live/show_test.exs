@@ -464,7 +464,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
                }}} = live(conn, "/games/#{original_game_id}/players/#{player.id}")
     end
 
-    test "redirects to game summary when player belongs to a different but finished game", %{
+    test "redirects to game summary when URL targets a finished game but player belongs to a different game", %{
       conn: conn,
       player: player
     } do
@@ -527,7 +527,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       )
 
       render_click(show_live, "toggle_continue_vote", %{})
-      :timer.sleep(100)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert length(updated_game.continue_votes) == 0
@@ -549,7 +548,6 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       Copi.Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
 
       render_click(show_live, "toggle_continue_vote", %{})
-      :timer.sleep(100)
 
       {:ok, updated_game} = Cornucopia.Game.find(game_id)
       assert length(updated_game.continue_votes) == 1
@@ -578,6 +576,17 @@ defmodule CopiWeb.PlayerLive.ShowTest do
          %{conn: conn} do
       {game, _owner, dealt} = create_game_with_dealt_card("Vote Race Remove", "VRR_1")
       {:ok, voter} = Cornucopia.create_player(%{name: "Voter2", game_id: game.id})
+      old_race_player_id =
+        Application.get_env(:copi, :player_live_show_dealt_card_stub_race_player_id)
+
+      on_exit(fn ->
+        Application.put_env(
+        :copi,
+        :player_live_show_dealt_card_stub_race_player_id,
+        old_race_player_id
+       )
+      end)
+
 
       Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
       Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :vote_removed_race)
