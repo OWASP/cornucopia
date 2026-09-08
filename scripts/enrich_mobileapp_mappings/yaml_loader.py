@@ -21,7 +21,8 @@ def load_yaml_file(path: Path, max_size_bytes: int) -> dict[str, Any]:
     """Load a YAML mapping or raise a clear error for invalid input."""
     if path.stat().st_size > max_size_bytes:
         raise ValueError(f"{path}: file exceeds {max_size_bytes} byte limit")
-    data = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeySafeLoader)
+    # The custom loader inherits SafeLoader and adds duplicate-key rejection.
+    data = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeySafeLoader)  # nosec B506
     if not isinstance(data, dict):
         raise ValueError(f"{path}: expected a mapping")
     return data

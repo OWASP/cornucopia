@@ -74,4 +74,6 @@ python -m black --line-length=120 --check .
 python -m flake8 --max-line-length=120 --max-complexity=10 \
   --ignore=E203,W503 scripts/enrich_mobileapp_mappings
 python -m mypy --namespace-packages --strict scripts/enrich_mobileapp_mappings
+python -m coverage run --branch -m unittest tests/scripts/enrich_mobileapp_mappings_utest.py
+python -m coverage report --fail-under 95 scripts/enrich_mobileapp_mappings/*.py
 ```
