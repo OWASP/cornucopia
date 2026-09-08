@@ -273,40 +273,20 @@ pipenv run python scripts/convert_mastg_map.py -i ../mastg --maswe-input-path ..
 
 ### Enriching Mobile App Mappings
 
-The `scripts/enrich_mobileapp_mappings.py` script adds MASTG, MASWE, MASVS, threat, and attack-vector metadata to Mobile App Edition card mappings.
+The [`scripts/enrich_mobileapp_mappings/`](enrich_mobileapp_mappings/) module adds MASTG, MASWE, MASVS, threat, and attack-vector metadata to Mobile App Edition card mappings. Its package README documents the module layout, enrichment rules, and validation commands.
 
 ```bash
-python scripts/enrich_mobileapp_mappings.py --help
-usage: enrich_mobileapp_mappings.py [-h] [-e EDITION] [-v VERSION] [-s SOURCE_DIR] [-i INPUT_PATH]
-                                    [--mastg-path MASTG_PATH] [--maswe-path MASWE_PATH] [-o OUTPUT_PATH]
-
-Enrich Mobile card mappings with MASTG and MASWE metadata
-
-options:
-  -h, --help            show this help message and exit
-  -e EDITION, --edition EDITION
-                        Cornucopia edition, for example mobileapp
-  -v VERSION, --version VERSION
-                        Cornucopia version, for example 2.0
-  -s SOURCE_DIR, --source-dir SOURCE_DIR
-  -i INPUT_PATH, --input-path INPUT_PATH
-                        Card mapping YAML to enrich
-  --mastg-path MASTG_PATH
-                        Generated MASTG metadata YAML
-  --maswe-path MASWE_PATH
-                        Generated MASWE metadata YAML
-  -o OUTPUT_PATH, --output-path OUTPUT_PATH
-                        Enriched mapping YAML; defaults to input
+python -m scripts.enrich_mobileapp_mappings --help
 ```
 
 **Example usage:**
 
 ```bash
 # Enrich the default Mobile App Edition mapping file in place
-pipenv run python scripts/enrich_mobileapp_mappings.py
+pipenv run python -m scripts.enrich_mobileapp_mappings
 
 # Enrich an explicit mapping file and write to a new path
-pipenv run python scripts/enrich_mobileapp_mappings.py -i source/mobileapp-mappings-2.0.yaml \
+pipenv run python -m scripts.enrich_mobileapp_mappings -i source/mobileapp-mappings-2.0.yaml \
   --mastg-path source/mobileapp-mastg-2.0.yaml --maswe-path source/mobileapp-maswe-2.0.yaml \
   -o source/mobileapp-mappings-2.0-enriched.yaml
 ```
@@ -317,6 +297,11 @@ pipenv run python scripts/enrich_mobileapp_mappings.py -i source/mobileapp-mappi
 - MASTG metadata: `source/mobileapp-mastg-2.0.yaml`
 - MASWE metadata: `source/mobileapp-maswe-2.0.yaml`
 - Output: overwrites the input mapping file
+
+For each card, the module matches `owasp_maswe` values against MASWE codes in
+`mobileapp-maswe-2.0.yaml` and writes the source-ordered, deduplicated union of
+their `owasp_masvs` values. Missing legacy MASWE codes are reported as
+warnings and do not create invented mappings.
 
 ## Contributing to Development
 

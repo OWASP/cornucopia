@@ -116,6 +116,9 @@ class TestMobileappMappingsEnrichment(unittest.TestCase):
     def test_load_yaml_file_validates_size_and_document_type(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             input_path = Path(directory) / "mapping.yaml"
+            input_path.write_text("suits: []\n", encoding="utf-8")
+            self.assertEqual({"suits": []}, enricher.load_yaml_file(input_path))
+
             input_path.write_text("[]\n", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "expected a mapping"):
                 enricher.load_yaml_file(input_path)

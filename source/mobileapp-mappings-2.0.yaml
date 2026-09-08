@@ -11,7 +11,7 @@ url_templates:
   owasp_mastg_best: https://mas.owasp.org/MASTG-BEST-{code}
   owasp_mastg_know: https://mas.owasp.org/MASTG-KNOW-{code}
   owasp_maswe: https://mas.owasp.org/MASWE-{code}
-  owasp_masvs: 'https://mas.owasp.org/{code}'
+  owasp_masvs: https://mas.owasp.org/{code}
   capec: /taxonomy/capec-3.9/{code}
   stride: /taxonomy/stride/{code}
   safecode: https://safecode.org/publication/SAFECode_Agile_Dev_Security0712.pdf
