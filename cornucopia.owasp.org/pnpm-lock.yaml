@@ -41,8 +41,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2(svelte@5.57.0(@typescript-eslint/types@8.69.0))
       swagger-ui-dist:
-        specifier: ^5.32.14
-        version: 5.32.14
+        specifier: ^5.32.15
+        version: 5.32.15
       sync-request:
         specifier: ^6.1.0
         version: 6.1.0
@@ -2512,8 +2512,8 @@ packages:
     peerDependencies:
       svelte: '>=3.49.0'
 
-  swagger-ui-dist@5.32.14:
-    resolution: {integrity: sha512-nOA2pSQhcmODMUQZpJHYKNuwniDUqcOWGNaSCOoZv12FdOSJ9JxV95HtyRGNMqEBj6h6lCNTy20TgZDYTSuUIg==}
+  swagger-ui-dist@5.32.15:
+    resolution: {integrity: sha512-TSFER+rFQlf1nzk6WvKkMaHTxAPQ3eAAxigFThnxQedSREanfZgSbJFayZVs/ULnSbNdrJOb99vLD6xpb3R3eg==}
 
   sync-request@6.1.0:
     resolution: {integrity: sha512-8fjNkrNlNCrVc/av+Jn+xxqfCjYaBoHqCsDz6mt030UMxJGr+GSfCV1dQt2gRtlL63+VPidwDVLr7V2OcTSdRw==}
@@ -5008,7 +5008,7 @@ snapshots:
       '@sveltekit-i18n/parser-default': 1.1.1
       svelte: 5.57.0(@typescript-eslint/types@8.69.0)
 
-  swagger-ui-dist@5.32.14:
+  swagger-ui-dist@5.32.15:
     dependencies:
       '@scarf/scarf': 1.4.0
 
