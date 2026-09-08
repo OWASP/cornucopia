@@ -45,6 +45,23 @@ describe('GET /api/mastg/[edition]/[version]', () => {
         expect(() => GET({ params: { edition: 'mobileapp', version: '1.0' } } as unknown)).toThrow();
     });
 
+    it('throws 404 for an edition without MASTG mapping data', () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        const getMastgData = vi.spyOn(MastgService, 'getMastgData');
+
+        expect(() => GET({ params: { edition: 'webapp', version: '3.0' } } as unknown)).toThrow();
+        expect(getMastgData).not.toHaveBeenCalled();
+    });
+
+    it('throws 404 for a version without MASTG mapping data', () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
+        const getMastgData = vi.spyOn(MastgService, 'getMastgData');
+
+        expect(() => GET({ params: { edition: 'mobileapp', version: '1.1' } } as unknown)).toThrow();
+        expect(getMastgData).not.toHaveBeenCalled();
+    });
+
     it('throws 500 when MASTG data is empty', () => {
         vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
         vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);

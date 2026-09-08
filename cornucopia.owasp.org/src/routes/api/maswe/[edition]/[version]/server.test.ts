@@ -45,6 +45,23 @@ describe('GET /api/maswe/[edition]/[version]', () => {
         expect(() => GET({ params: { edition: 'mobileapp', version: '1.0' } } as unknown)).toThrow();
     });
 
+    it('throws 404 for an edition without MASWE mapping data', () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        const getMasweData = vi.spyOn(MasweService, 'getMasweData');
+
+        expect(() => GET({ params: { edition: 'webapp', version: '3.0' } } as unknown)).toThrow();
+        expect(getMasweData).not.toHaveBeenCalled();
+    });
+
+    it('throws 404 for a version without MASWE mapping data', () => {
+        vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
+        vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
+        const getMasweData = vi.spyOn(MasweService, 'getMasweData');
+
+        expect(() => GET({ params: { edition: 'mobileapp', version: '1.1' } } as unknown)).toThrow();
+        expect(getMasweData).not.toHaveBeenCalled();
+    });
+
     it('throws 500 when MASWE data is empty', () => {
         vi.spyOn(DeckService, 'hasEdition').mockReturnValue(true);
         vi.spyOn(DeckService, 'hasVersion').mockReturnValue(true);
