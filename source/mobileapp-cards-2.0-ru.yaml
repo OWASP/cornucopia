@@ -469,7 +469,7 @@ paragraphs:
     text: "© 2012-2026 OWASP Foundation"
   -
     id: "T00092"
-    text: "Мобильное приложение OWASP® Cornucopia Mobile App Edition является бесплатным. Оно распространяется под лицензией Creative Commons Attribution-ShareAlike 4.0, поэтому вы можете копировать, распространять и передавать это произведение, а также адаптировать его и использовать в коммерческих целях, но при условии указания авторства. Если вы изменяете, преобразуете или создаете на основе этого произведения новые работы, вы можете распространять полученные результаты только на условиях той же или аналогичной лицензии."
+    text: "OWASP® Cornucopia Mobile App Edition is free to use. It is licensed under the Creative Commons Attribution-ShareAlike 4.0 license, so you can copy, distribute and transmit the work, and you can adapt it, and use it commercially, but all provided that you attribute the work and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one."
   -
     id: "T00100"
     text: "Благодарности"
