@@ -204,7 +204,7 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_hi.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_uk.pdf
                 resources/case/*\3.0_case_*.pdf
-                resources/case/*\1.1_case_*.pdf
+                resources/case/owasp_cornucopia_mobileapp*\2.0_case_*.pdf
                 resources/case/*\1.0_case_*.pdf
       sbom:
         needs: [hardening, tagged-release]
