@@ -47,6 +47,8 @@
               pipenv run coverage xml -o converter/coverage/cobertura.xml
           - name: Check test coverage - Report
             run: pipenv run coverage report --fail-under 85 scripts/convert*
+          - name: Check Mobile App enrichment coverage - Report
+            run: pipenv run coverage report --fail-under 95 scripts/enrich_mobileapp_mappings/*.py
           - name: Check PDF generation test coverage - Report
             run: pipenv run coverage report --fail-under 52 scripts/pdf_generation/*.py
           # Upload Code Coverage for Codeclimate
