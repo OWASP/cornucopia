@@ -56,7 +56,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: ["1.1"]
+            enum: ["1.1", "2.0"]
       responses:
         '200':
           description: Language metadata for Mobile App edition
@@ -72,8 +72,8 @@ paths:
                       edition: OWASP Cornucopia Mobile App Edition
                       component: cards
                       language: all
-                      languages: [en]
-                      version: "1.1"
+                      languages: [en, ru, uk, hi]
+                      version: "2.0"
 
 
   /lang/dbd/{version}:
@@ -371,7 +371,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: ["1.1"]
+            enum: ["1.1", "2.0"]
       responses:
         '200':
           description: Mobile App mapping data
@@ -387,7 +387,7 @@ paths:
                       edition: mobileapp
                       component: mappings
                       language: ALL
-                      version: "1.1"
+                      version: "2.0"
                     cards:
                       PC3:
                         id: "PC3"
@@ -435,6 +435,110 @@ paths:
                         stride: [ S ]
                         stride_print: [ Spoofing ]
 
+  /mastg/{edition}/{version}:
+    get:
+      summary: Get MASTG mapping data
+      description: |
+        Returns the OWASP Mobile Application Security Testing Guide (MASTG)
+        mappings for a Mobile App Edition version. Entries map MASTG test,
+        knowledge, and best-practice identifiers to related MASWE entries.
+      parameters:
+        - name: edition
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [mobileapp]
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["2.0"]
+      responses:
+        '200':
+          description: MASTG mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example MASTG mapping response
+                  value:
+                    meta:
+                      edition: mobileapp
+                      component: mastg
+                      language: ALL
+                      version: "2.0"
+                    "0200":
+                      owasp_maswe: ["0002"]
+        '404':
+          description: Edition or version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: MASTG data could not be loaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /maswe/{edition}/{version}:
+    get:
+      summary: Get MASWE mapping data
+      description: |
+        Returns the OWASP Mobile Application Security Weakness Enumeration
+        (MASWE) mappings for a Mobile App Edition version. Entries map MASWE
+        weaknesses to related MASTG, MASVS, threat, and attack identifiers.
+      parameters:
+        - name: edition
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [mobileapp]
+        - name: version
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["2.0"]
+      responses:
+        '200':
+          description: MASWE mapping data
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  summary: Example MASWE mapping response
+                  value:
+                    meta:
+                      edition: mobileapp
+                      component: maswe
+                      language: ALL
+                      version: "2.0"
+                    "0001":
+                      owasp_mastg: ["0207", "0287"]
+                      owasp_mastg_know: ["0041", "0036"]
+                      owasp_masvs: [MASVS-STORAGE-1, MASVS-CRYPTO-2]
+        '404':
+          description: Edition or version not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: MASWE data could not be loaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /cre/mobileapp/{lang}:
     get:
       summary: Get Mobile cards by language
@@ -448,7 +552,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [en]
+            enum: [en, hi, ru, uk]
       responses:
         '200':
           description: Mobile App cards and Open CRE mappings
@@ -464,7 +568,7 @@ paths:
                       edition: OWASP Cornucopia Mobile App Edition
                       component: cards
                       language: en
-                      version: "1.1"
+                      version: "2.0"
                     data:
                       - id: M01
                         title: Secure Storage
@@ -679,10 +783,10 @@ components:
               type: array
               items:
                 type: string
-              example: [en]
+              example: [en, hi, ru, uk]
             version:
               type: string
-              example: "1.1"
+              example: "2.0"
 
     LanguageMetaDbd:
       type: object
