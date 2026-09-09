@@ -583,7 +583,7 @@ paragraphs:
     text: "Все документы и инструменты OWASP можно бесплатно загружать и использовать."
   -
     id: "T01070"
-    text: "OWASP® Cornucopia Mobile App Edition распространяется по лицензии Creative Commons Attribution-ShareAlike 4.0."
+    text: "OWASP® Cornucopia Mobile App Edition is licensed under the Creative Commons Attribution-ShareAlike 4.0 license."
   -
     id: "T01100"
     text: "Инструкции"
