@@ -780,7 +780,7 @@ paragraphs:
     text: "हाँ, बिल्कुल।"
   -
     id: "T02630"
-    text: "सभी OWASP सामग्री का उपयोग आप स्वतंत्र रूप से कर सकते हैं, बशर्ते आप Creative Commons Attribution-ShareAlike 4.0 लाइसेंस का पालन करें।"
+    text: "All OWASP materials are free to do with as you like provided you comply with the Creative Commons Attribution-ShareAlike 4.0 license. "
   -
     id: "T02640"
     text: "यदि आप कोई नया संस्करण बनाते हैं, तो शायद आप उसे OWASP® Cornucopia Project को दान कर सकते हैं।"
