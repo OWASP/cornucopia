@@ -83,7 +83,7 @@ Created by Adam Shostack and the Shostack + Associates team—and validated alon
 
 PHANTOM-B is a repeatable, lightweight threat elicitation tool that focuses strictly on what engineering teams can control and influence, scaling complex generative AI behaviors into an actionable map.
 
-## Cornucopia, now 100% synced with AISVS v1.0
+## Cornucopia, now synced with AISVS v1.0
 
 ![AISVS](aisvs.webp)
 
