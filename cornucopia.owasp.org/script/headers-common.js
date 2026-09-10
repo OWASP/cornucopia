@@ -13,6 +13,7 @@ export const apiPaths = [
   '/api/capec/webapp/3.0',
   '/api/mastg/mobileapp/2.0',
   '/api/maswe/mobileapp/2.0',
+  '/api/mapping/eop/5.0',
   '/api/mapping/webapp/2.2',
   '/api/mapping/webapp/3.0',
   '/api/mapping/mobileapp/1.1',
