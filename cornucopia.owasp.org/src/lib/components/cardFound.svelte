@@ -10,7 +10,6 @@
   import LanguagePicker from "$lib/components/languagePicker.svelte";
   import { readTranslation } from "$lib/stores/stores";
   import Concept from './concept.svelte';
-  import EopCardTaxonomy from './eopCardTaxonomy.svelte';
   import type { CardImage } from "$lib/services/cardImagesService";
   import type { SuitStyling } from "$lib/services/suitStylingService";
 
@@ -25,7 +24,7 @@
     versions: string[];
     cardImages?: Record<string, Record<string, CardImage>>;
     suitStyling?: Record<string, Record<string, SuitStyling>>;
-    asvsVersion: string;
+    asvsVersion?: string;
   }
 
   let {
@@ -79,17 +78,13 @@
   <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
-  {#if card.edition === 'eop'}
-    <EopCardTaxonomy {card} {mappingData} {routes} />
-  {:else}
-    <Taxonomy
-      {card}
-      {mappingData}
-      {routes}
-      {capecData}
-      {asvsVersion}
-    />
-  {/if}
+  <Taxonomy
+    {card}
+    {mappingData}
+    {routes}
+    {capecData}
+    {asvsVersion}
+  />
     {#key card}
         <ViewSourceOnGithub path={card.githubUrl}></ViewSourceOnGithub>
     {/key}

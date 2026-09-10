@@ -107,4 +107,23 @@ describe('MappingService tests', () => {
             'mitre_attack',
         ]));
     });
+
+    it('should expose EoP STRIDE mappings to the shared taxonomy', () => {
+        const mapping = new MappingService().getCardMappingForAllVersions().get('eop-5.0');
+        expect(mapping).toBeDefined();
+
+        const controller = new MappingController(mapping as Record<string, unknown>);
+        const displayMappings = getTaxonomyDisplayMappings(
+            controller.getCardMappings('SP2'),
+            controller.getLabels(),
+        );
+
+        expect(controller.getLabels()).toEqual({ stride: 'STRIDE' });
+        expect(controller.getUrlTemplates()).toEqual({
+            stride: '/taxonomy/stride/{code}',
+        });
+        expect(displayMappings).toEqual([
+            { attribute: 'stride', label: 'STRIDE:', values: ['S'] },
+        ]);
+    });
 });
