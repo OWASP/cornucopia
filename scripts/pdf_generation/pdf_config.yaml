@@ -190,7 +190,7 @@ editions:
     joker_suits: ["wc"]
 
   mobileapp:
-    data_version: "1.1"
+    data_version: "2.0"
     joker_suits: ["wc"]
 
   companion:
