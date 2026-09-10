@@ -19,6 +19,10 @@ meta:
     ]
   templates: ["tarot"]
   languages: ["en", "es", "ru"]
+  url_templates:
+      stride: /taxonomy/stride/{code}
+  labels:
+    stride: "STRIDE"
 suits:
 - 
   id: "SP"
