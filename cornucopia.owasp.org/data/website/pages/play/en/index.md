@@ -64,6 +64,40 @@ Long-time project contributor Max Alejandro Gómez Sánchez Vergaray has created
 src="https://www.youtube.com/embed/vLYzId7-ijI?si=yh4vHK7VfO9a5l6s" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen >
 <p>You cannot view this video directly because iframes are disabled. Click <a href="https://www.youtube.com/watch?v=vLYzId7-ijI" title="How to play OWASP Cornucopia" target="_blank" rel="noopener">here</a> to watch the video on YouTube.</p></iframe>
 
+## How to play EoP
+
+Draw a diagram of the system you want to threat model before you deal the cards.
+
+Deal the deck to 3-6 players. Play starts with the 3 of Tampering. Play clockwise, and each player in turn continues using the suit if they have a card in that suit. If the player doesn't have a card from that suit, the player can use another suit. Each round is won by the highest card played in the suit that was led, unless an Elevation of Privilege (EoP) card is played. In that case the high value EoP card wins.
+
+To play a card, read the card, announce your threat and record it. If the player can't link the threat to the system, play proceeds.
+
+The winner of a hand selects the card (and suit) to lead the next hand. Take a few minutes between hands to think about threats.
+
+### Points
+
+- 1 for a threat on your card
+- +1 for taking the trick
+
+Threats should be articulated clearly, testable, and addressable. In the event that a threat leads to an argument, you can resolve it by asking the question: “Would we take an actionable bug, feature request or design change for that?” If the answer is yes, it is a real threat. (This doesn't mean that threats outside of that aren't real, it's simply a way to focus discussion on actionable threats.) Questions that start with “There's a way” should be read as “There's a way … and here's how …” while questions that start with “Your code” should be read “The code we're collectively creating … and here's how.”
+
+The deck contains a number of special cards: trumps and open threats. EoP cards are trumps: they take the trick even if they have a lower value than the suit that was led. The ace of each suit is an open threat card. When played, the player must identify a threat not listed on another card.
+
+When all the cards have been played, whoever has the most points wins.
+
+Remember to have fun!
+
+### Optional variants
+
+- You may pass cards after the third trick. This is helpful if you have cards that you can't tie to the system. Someone else may be able to.
+- Double the number of points, and give one point for threats on other people's cards.
+- Other players may “riff” on the threat and if they do, they get one point per additional threat.
+- Limit riffing to no more than 60 seconds.
+- Mark up the diagram where the threat occurs.
+- Questions are listed on the threat cards to help with the aces.
+
+Thanks to Laurie Williams for inspiration.
+
 ## Alternative game rules
 
 If you are new to the game, remove the two Joker cards to begin with. Add the Joker cards back in once people become more familiar with the process. Apart from the “trumps card game” rules described above which are very similar to the EoP, the deck can also be played as the “twenty-one card game” (also known as “pontoon” or “blackjack”) which normally reduces the number of cards played in each round.

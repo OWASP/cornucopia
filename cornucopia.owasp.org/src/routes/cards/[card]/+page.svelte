@@ -39,6 +39,7 @@
   cardImages={data.cardImages}
   suitStyling={data.suitStyling}
   asvsVersion={data.asvsVersion}
+  howToPlayLink={data.howToPlayLink}
 />
 
 {:else}

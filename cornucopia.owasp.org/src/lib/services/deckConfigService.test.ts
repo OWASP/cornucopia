@@ -29,10 +29,25 @@ decks:
     buttonLabelKey: cards.button.1
     descriptionHeadingKey: cards.h2.1
     descriptionBodyKey: cards.p2
+    howToPlayLink: /how-to-play
     versions:
       - version: "2.2"
         draftLanguages: [hu]
       - version: "3.0"
+
+  - edition: eop
+    displayName: "Elevation of Privilege"
+    fullName: "Elevation of Privilege Edition"
+    cre:
+      name: "Elevation of Privilege Edition"
+      category: "Elevation of Privilege"
+    defaultPreviewCard: SP2
+    buttonLabelKey: cards.button.4
+    descriptionHeadingKey: cards.h2.4
+    descriptionBodyKey: cards.p5
+    howToPlayLink: /how-to-play#How-to-play-EoP
+    versions:
+      - version: "5.0"
 
   - edition: dbd
     displayName: "Cornucopia"
@@ -175,14 +190,15 @@ decks:
             expect(() => DeckConfigService.getDeckConfigs()).not.toThrow();
         });
 
-        it.each(['defaultPreviewCard', 'buttonLabelKey', 'descriptionHeadingKey', 'descriptionBodyKey'] as const)(
+        it.each(['defaultPreviewCard', 'buttonLabelKey', 'descriptionHeadingKey', 'descriptionBodyKey', 'howToPlayLink'] as const)(
             'should throw when a non-external deck is missing "%s"',
             (missingField) => {
                 const renderFields: Record<string, string> = {
                     defaultPreviewCard: 'VE2',
                     buttonLabelKey: 'cards.button.1',
                     descriptionHeadingKey: 'cards.h2.1',
-                    descriptionBodyKey: 'cards.p2'
+                    descriptionBodyKey: 'cards.p2',
+                    howToPlayLink: '/how-to-play'
                 };
                 delete renderFields[missingField];
                 const renderFieldsYaml = Object.entries(renderFields)
@@ -218,6 +234,7 @@ decks:
     buttonLabelKey: cards.button.1
     descriptionHeadingKey: cards.h2.1
     descriptionBodyKey: cards.p2
+    howToPlayLink: /how-to-play
     versions:
       - version: "3.0"
 
@@ -246,8 +263,8 @@ decks:
     describe('getDeckConfigs', () => {
         it('should parse every deck entry from decks.yaml', () => {
             const configs = DeckConfigService.getDeckConfigs();
-            expect(configs).toHaveLength(2);
-            expect(configs.map((c) => c.edition)).toEqual(['webapp', 'dbd']);
+            expect(configs).toHaveLength(3);
+            expect(configs.map((c) => c.edition)).toEqual(['webapp', 'eop', 'dbd']);
         });
 
         it('should only read the file once and cache the result', () => {
@@ -270,7 +287,7 @@ decks:
     describe('getBrowsableDecks', () => {
         it('should exclude decks marked external', () => {
             const editions = DeckConfigService.getBrowsableDecks().map((d) => d.edition);
-            expect(editions).toEqual(['webapp']);
+            expect(editions).toEqual(['webapp', 'eop']);
         });
     });
 
@@ -335,6 +352,16 @@ decks:
         it('should return cre.name, or undefined when unknown', () => {
             expect(DeckConfigService.getCreEditionName('webapp')).toBe('OWASP Cornucopia Website App Edition');
             expect(DeckConfigService.getCreEditionName('unknown')).toBeUndefined();
+        });
+    });
+
+    describe('getHowToPlayLink', () => {
+        it('should return the configured link for an edition', () => {
+            expect(DeckConfigService.getHowToPlayLink('eop')).toBe('/how-to-play#How-to-play-EoP');
+        });
+
+        it('should fall back to the general instructions for an unknown edition', () => {
+            expect(DeckConfigService.getHowToPlayLink('unknown')).toBe('/how-to-play');
         });
     });
 

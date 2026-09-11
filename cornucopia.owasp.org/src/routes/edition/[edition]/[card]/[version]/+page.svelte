@@ -26,7 +26,7 @@
 {#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 {#if cardFound()}
-  <CardFound routes={data.routes} {cards} {card} {versions} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} cardImages={data.cardImages} suitStyling={data.suitStyling} asvsVersion={data.asvsVersion} />
+  <CardFound routes={data.routes} {cards} {card} {versions} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} cardImages={data.cardImages} suitStyling={data.suitStyling} asvsVersion={data.asvsVersion} howToPlayLink={data.howToPlayLink} />
 {:else}
   <CardNotFound card={data.card} />
 {/if}

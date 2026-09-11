@@ -54,7 +54,8 @@ export const load = (async ({ params }) => {
     capecData,
     cardImages: getCardImagesByEdition(),
     suitStyling: getSuitStylingByEdition(),
-    editionName: DeckConfigService.getFullName(edition)
+    editionName: DeckConfigService.getFullName(edition),
+    howToPlayLink: DeckConfigService.getHowToPlayLink(edition)
   };
 }) satisfies PageServerLoad;
 function legacyCardCodeFix(card: string) {
