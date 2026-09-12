@@ -30,6 +30,7 @@ export interface DeckConfig {
     descriptionHeadingKey?: string;
     descriptionBodyKey?: string;
     taxonomyTranslationKey?: string;
+    howToPlayLink?: string;
 
     versions: DeckVersionConfig[];
 }
@@ -59,7 +60,7 @@ function collectDeckConfigErrors(deck: Partial<DeckConfig>, index: number): stri
     }
 
     if (!deck.external) {
-        (['defaultPreviewCard', 'buttonLabelKey', 'descriptionHeadingKey', 'descriptionBodyKey'] as const).forEach((field) => {
+        (['defaultPreviewCard', 'buttonLabelKey', 'descriptionHeadingKey', 'descriptionBodyKey', 'howToPlayLink'] as const).forEach((field) => {
             if (typeof deck[field] !== 'string' || !deck[field]) {
                 errors.push(`${errorLabel} is not external but missing "${field}"`);
             }
@@ -121,6 +122,10 @@ export class DeckConfigService {
 
     public static getFullName(edition: string): string {
         return DeckConfigService.getDeckConfig(edition)?.fullName ?? edition;
+    }
+
+    public static getHowToPlayLink(edition: string): string {
+        return DeckConfigService.getDeckConfig(edition)?.howToPlayLink ?? '/how-to-play';
     }
 
     public static getCreCategory(edition: string): string | undefined {

@@ -25,6 +25,7 @@
     cardImages?: Record<string, Record<string, CardImage>>;
     suitStyling?: Record<string, Record<string, SuitStyling>>;
     asvsVersion?: string;
+    howToPlayLink: string;
   }
 
   let {
@@ -38,7 +39,8 @@
     capecData = undefined,
     cardImages = undefined,
     suitStyling = undefined,
-    asvsVersion
+    asvsVersion,
+    howToPlayLink
   }: Props = $props();
     
   const controller = $derived(new MappingController(mappingData));
@@ -75,7 +77,7 @@
   >
     🔗 {$t('cards.cardFound.copy')}
   </button>
-  <a title="How to play OWASP Cornucopia" class="link" href="/how-to-play">{$t('cards.cardFound.a')}</a>
+  <a title="How to play OWASP Cornucopia" class="link" href={howToPlayLink}>{$t('cards.cardFound.a')}</a>
   <Concept card={card}></Concept>
   <Explanation card={card}></Explanation>
   <Taxonomy

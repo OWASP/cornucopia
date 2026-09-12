@@ -80,6 +80,7 @@ Cornucopia is developed, maintained, updated and promoted by a worldwide team of
 - Kéren A. Saint-Hilaire
 - Max Alejandro Gómez Sánchez Vergaray
 - Tao Sauvage
+- Swaraj Singh
 - Riccardo Sirigu
 - Prasun Srivastav
 - Aditya Srivastava
