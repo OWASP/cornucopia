@@ -1111,11 +1111,19 @@ def get_valid_edition_choices() -> List[str]:
 
 
 def group_number_ranges(data: List[str]) -> List[str]:
-    """Group consecutive numbers into ranges."""
+    """Group consecutive numbers into ranges.
+
+    The incoming list order is not guaranteed to be numerically sorted or
+    free of duplicates (source YAML mapping files are hand-maintained), so
+    the values are sorted and de-duplicated before consecutive runs are
+    grouped. Without this, unsorted input produces out-of-order and
+    incorrectly grouped ranges (e.g. [20, 116, 117, 97] -> "20, 116-117, 97"
+    instead of "20, 97, 116-117").
+    """
     if len(data) < 2 or len([s for s in data if not str(s).isnumeric()]):
         return data
     list_ranges: List[str] = []
-    data_numbers = [int(s) for s in data]
+    data_numbers = sorted(set(int(s) for s in data))
     for k, g in groupby(enumerate(data_numbers), lambda x: x[0] - x[1]):
         group: List[int] = list(map(itemgetter(1), g))
         group = list(map(int, group))
