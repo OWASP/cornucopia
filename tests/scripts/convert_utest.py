@@ -2021,6 +2021,22 @@ class TestGroupNumberRanges(unittest.TestCase):
         got_text = c.group_number_ranges(input_list)
         self.assertEqual(want_text, got_text)
 
+    def test_group_number_ranges_unsorted_input(self) -> None:
+        # Mirrors real mapping data, e.g. source/mobileapp-mappings-2.0.yaml
+        # (CRM CRMX: capec), where the YAML list is not maintained in ascending order.
+        input_list = ["20", "116", "117", "97", "112", "485"]
+        want_text = ["20", "97", "112", "116-117", "485"]
+
+        got_text = c.group_number_ranges(input_list)
+        self.assertEqual(want_text, got_text)
+
+    def test_group_number_ranges_duplicates(self) -> None:
+        input_list = ["5", "5", "6"]
+        want_text = ["5-6"]
+
+        got_text = c.group_number_ranges(input_list)
+        self.assertEqual(want_text, got_text)
+
 
 class TestGetSuitTagsAndKey(unittest.TestCase):
     def test_get_suit_tags_and_key_suits(self) -> None:
