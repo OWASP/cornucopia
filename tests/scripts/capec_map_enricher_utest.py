@@ -376,6 +376,24 @@ class TestParseArguments(unittest.TestCase):
         self.assertEqual(args.version, "3.0")
         self.assertEqual(args.edition, "mobileapp")
 
+    def test_parse_rejects_null_byte_in_path(self):
+        """Null bytes in file paths should exit instead of raising ValueError."""
+        with self.assertRaises(SystemExit):
+            enricher.parse_arguments(["-i", "bad\x00path.yaml"])
+
+    def test_parse_rejects_null_byte_in_version(self):
+        """Null bytes in version/edition should exit instead of raising ValueError."""
+        with self.assertRaises(SystemExit):
+            enricher.parse_arguments(["-v", "3.0\x00"])
+
+    def test_validate_filepath_no_nulls_raises(self):
+        with self.assertRaises(argparse.ArgumentTypeError):
+            enricher.validate_filepath_no_nulls("foo\x00bar")
+
+    def test_validate_no_null_bytes_raises(self):
+        with self.assertRaises(argparse.ArgumentTypeError):
+            enricher._validate_no_null_bytes("x\x00y", "version")
+
     def test_parse_all_arguments(self):
         """Test parsing with all arguments"""
         args = enricher.parse_arguments(

@@ -183,6 +183,20 @@ def save_yaml_file(filepath: Path, data: dict[str, Any]) -> bool:
         return False
 
 
+def _validate_no_null_bytes(value: str, field_name: str) -> str:
+    """Validate that a string does not contain null bytes."""
+    if "\x00" in value:
+        raise argparse.ArgumentTypeError(f"Invalid {field_name}: contains null bytes")
+    return value
+
+
+def validate_filepath_no_nulls(value: str) -> str:
+    """Validate filepath and ensure it contains no null bytes."""
+    if "\x00" in value:
+        raise argparse.ArgumentTypeError("File path cannot contain null bytes")
+    return validate_filepath_arg(value)
+
+
 def set_logging() -> None:
     """Configure logging based on debug flag."""
     logging.basicConfig(
@@ -201,42 +215,42 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     parser.add_argument(
         "-c",
         "--capec-json",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=EnricherVars.DEFAULT_CAPEC_JSON_PATH,
         help="Path to CAPEC JSON file (3000.json)",
     )
     parser.add_argument(
         "-i",
         "--input-path",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=None,
         help="Path to input CAPEC mapping YAML file (overrides edition/version)",
     )
     parser.add_argument(
         "-v",
         "--version",
-        type=str,
+        type=lambda x: _validate_no_null_bytes(x, "version"),
         default="latest",
         help="Version of the Cornucopia (e.g., 3.0)",
     )
     parser.add_argument(
         "-e",
         "--edition",
-        type=str,
+        type=lambda x: _validate_no_null_bytes(x, "edition"),
         default="edition",
         help="Edition of the Cornucopia (e.g., webapp or mobileapp)",
     )
     parser.add_argument(
         "-s",
         "--source-dir",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=EnricherVars.DEFAULT_SOURCE_DIR,
         help="Source directory containing CAPEC mapping files",
     )
     parser.add_argument(
         "-o",
         "--output-path",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=None,
         help="Path to save enriched CAPEC mapping YAML file (default: overwrites input)",
     )
@@ -248,6 +262,9 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     )
     try:
         args = parser.parse_args(input_args)
+    except argparse.ArgumentTypeError as exc:
+        logging.error("Invalid argument: %s", str(exc))
+        sys.exit(1)
     except argparse.ArgumentError as exc:
         logging.error(exc.message)
         sys.exit(1)
@@ -258,6 +275,22 @@ def main() -> None:
     """Main execution function."""
     enricher_vars.args = parse_arguments(sys.argv[1:])
     set_logging()
+
+    # Defensive validation for paths (catches fuzzed inputs that bypass argparse validation)
+    for attr in ["input_path", "output_path", "capec_json", "source_dir"]:
+        if hasattr(enricher_vars.args, attr):
+            value = getattr(enricher_vars.args, attr)
+            if value and "\x00" in str(value):
+                logging.error("Invalid file path in %s: contains null bytes", attr)
+                sys.exit(1)
+
+    # Defensive validation for string arguments
+    for attr in ["edition", "version"]:
+        if hasattr(enricher_vars.args, attr):
+            value = getattr(enricher_vars.args, attr)
+            if value and "\x00" in str(value):
+                logging.error("Invalid value in %s: contains null bytes", attr)
+                sys.exit(1)
 
     logging.info("Starting CAPEC mapping enrichment process")
     logging.debug(" --- args = %s", str(enricher_vars.args))
