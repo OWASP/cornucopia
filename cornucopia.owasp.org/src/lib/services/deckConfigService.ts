@@ -1,5 +1,6 @@
-import * as yaml from "js-yaml";
-import * as decksYamlModule from "../../../decks.yaml?raw";
+﻿import * as yaml from 'js-yaml';
+import { getRawYaml } from '$lib/config';
+
 
 export interface DeckVersionConfig {
     version: string;
@@ -83,7 +84,7 @@ export class DeckConfigService {
 
     private static load(): DeckConfig[] {
         if (!DeckConfigService.configs) {
-            const parsed = yaml.load(decksYamlModule.default) as DecksYaml;
+            const parsed = yaml.load(getRawYaml()) as DecksYaml;
             if (!Array.isArray(parsed?.decks)) throw new Error('decks.yaml: missing or invalid top-level "decks" array');
             validateDecksYaml(parsed.decks);
             DeckConfigService.configs = parsed.decks;
