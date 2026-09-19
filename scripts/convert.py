@@ -11,7 +11,7 @@ import subprocess
 import yaml
 import zipfile
 from defusedxml import ElementTree as DefusedElTree
-from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
@@ -136,8 +136,13 @@ def check_make_list_into_text(var: List[str], tag: str = "") -> str:
     if tag.endswith("_print"):
         var = group_number_ranges(var)
     else:
-        seen: set = set()
-        var = [v for v in var if not (v in seen or seen.add(v))]
+        seen: Set[str] = set()
+        deduped: List[str] = []
+        for v in var:
+            if v not in seen:
+                seen.add(v)
+                deduped.append(v)
+        var = deduped
     text_output = ", ".join(str(s) for s in var)
     if not text_output.strip():
         text_output = " - "
