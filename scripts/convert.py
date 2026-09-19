@@ -121,11 +121,23 @@ def check_fix_file_extension(filename: str, file_type: str) -> str:
     return filename
 
 
-def check_make_list_into_text(var: List[str]) -> str:
-    """Convert list to comma-separated text string."""
+def check_make_list_into_text(var: List[str], tag: str = "") -> str:
+    """Convert list to comma-separated text string.
+
+    Consecutive numeric values are collapsed into ranges (e.g. "1-3") only for
+    "_print" tags, which are display-only text. Every other tag is left as a
+    flat, de-duplicated, comma-separated list: those values (e.g. CAPEC/CWE
+    IDs) are used individually to build links to external reference pages, so
+    collapsing them into a range would make it impossible to recover the
+    individual IDs needed to link to each one.
+    """
     if not isinstance(var, list):
         return str(var)
-    var = group_number_ranges(var)
+    if tag.endswith("_print"):
+        var = group_number_ranges(var)
+    else:
+        seen: set = set()
+        var = [v for v in var if not (v in seen or seen.add(v))]
     text_output = ", ".join(str(s) for s in var)
     if not text_output.strip():
         text_output = " - "
@@ -787,7 +799,7 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
                         is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["id"]), tag
                     )
                     logging.debug(f" --- full tag = {full_tag}")
-                    data[full_tag] = check_make_list_into_text(text_output)
+                    data[full_tag] = check_make_list_into_text(text_output, tag)
     return data
 
 
