@@ -11,7 +11,7 @@ import subprocess
 import yaml
 import zipfile
 from defusedxml import ElementTree as DefusedElTree
-from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
@@ -121,11 +121,28 @@ def check_fix_file_extension(filename: str, file_type: str) -> str:
     return filename
 
 
-def check_make_list_into_text(var: List[str]) -> str:
-    """Convert list to comma-separated text string."""
+def check_make_list_into_text(var: List[str], tag: str = "") -> str:
+    """Convert list to comma-separated text string.
+
+    Consecutive numeric values are collapsed into ranges (e.g. "1-3") only for
+    "_print" tags, which are display-only text. Every other tag is left as a
+    flat, de-duplicated, comma-separated list: those values (e.g. CAPEC/CWE
+    IDs) are used individually to build links to external reference pages, so
+    collapsing them into a range would make it impossible to recover the
+    individual IDs needed to link to each one.
+    """
     if not isinstance(var, list):
         return str(var)
-    var = group_number_ranges(var)
+    if tag.endswith("_print"):
+        var = group_number_ranges(var)
+    else:
+        seen: Set[str] = set()
+        deduped: List[str] = []
+        for v in var:
+            if v not in seen:
+                seen.add(v)
+                deduped.append(v)
+        var = deduped
     text_output = ", ".join(str(s) for s in var)
     if not text_output.strip():
         text_output = " - "
@@ -787,7 +804,7 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
                         is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["id"]), tag
                     )
                     logging.debug(f" --- full tag = {full_tag}")
-                    data[full_tag] = check_make_list_into_text(text_output)
+                    data[full_tag] = check_make_list_into_text(text_output, tag)
     return data
 
 
@@ -1111,11 +1128,19 @@ def get_valid_edition_choices() -> List[str]:
 
 
 def group_number_ranges(data: List[str]) -> List[str]:
-    """Group consecutive numbers into ranges."""
+    """Group consecutive numbers into ranges.
+
+    The incoming list order is not guaranteed to be numerically sorted or
+    free of duplicates (source YAML mapping files are hand-maintained), so
+    the values are sorted and de-duplicated before consecutive runs are
+    grouped. Without this, unsorted input produces out-of-order and
+    incorrectly grouped ranges (e.g. [20, 116, 117, 97] -> "20, 116-117, 97"
+    instead of "20, 97, 116-117").
+    """
     if len(data) < 2 or len([s for s in data if not str(s).isnumeric()]):
         return data
     list_ranges: List[str] = []
-    data_numbers = [int(s) for s in data]
+    data_numbers = sorted(set(int(s) for s in data))
     for k, g in groupby(enumerate(data_numbers), lambda x: x[0] - x[1]):
         group: List[int] = list(map(itemgetter(1), g))
         group = list(map(int, group))
