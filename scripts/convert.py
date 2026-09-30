@@ -125,15 +125,21 @@ def check_make_list_into_text(var: List[str], tag: str = "") -> str:
     """Convert list to comma-separated text string.
 
     Consecutive numeric values are collapsed into ranges (e.g. "1-3") only for
-    "_print" tags, which are display-only text. Every other tag is left as a
-    flat, de-duplicated, comma-separated list: those values (e.g. CAPEC/CWE
+    "_print" tags, which are display-only text; those lists are de-duplicated
+    first since they may contain literal repeated entries (e.g. a pre-formatted
+    range like "1.2.1-3" appearing twice) that group_number_ranges cannot catch,
+    as it only recognizes purely-numeric duplicates.
+
+    Every other tag is de-duplicated and, if every value is numeric, sorted
+    ascending, but never collapsed into a range: those values (e.g. CAPEC/CWE
     IDs) are used individually to build links to external reference pages, so
-    collapsing them into a range would make it impossible to recover the
-    individual IDs needed to link to each one.
+    collapsing them would make it impossible to recover the individual IDs
+    needed to link to each one.
     """
     if not isinstance(var, list):
         return str(var)
     if tag.endswith("_print"):
+        var = list(dict.fromkeys(var))
         var = group_number_ranges(var)
     else:
         seen: Set[str] = set()
@@ -142,7 +148,11 @@ def check_make_list_into_text(var: List[str], tag: str = "") -> str:
             if v not in seen:
                 seen.add(v)
                 deduped.append(v)
-        var = deduped
+        var = (
+            sorted(deduped, key=lambda value: int(value))
+            if deduped and all(str(value).isnumeric() for value in deduped)
+            else deduped
+        )
     text_output = ", ".join(str(s) for s in var)
     if not text_output.strip():
         text_output = " - "
