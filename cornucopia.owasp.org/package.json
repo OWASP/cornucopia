@@ -55,7 +55,7 @@
 		"svelte-i18n": "^4.0.1",
 		"svelte-markdown": "^0.4.1",
 		"sveltekit-i18n": "^3.0.0",
-		"swagger-ui-dist": "^5.32.15",
+		"swagger-ui-dist": "^5.33.0",
 		"sync-request": "^6.1.0",
 		"vite-plugin-restart": "^2.0.0",
 		"vite-plugin-static-copy": "^4.1.1"
