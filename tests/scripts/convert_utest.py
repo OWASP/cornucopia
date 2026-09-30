@@ -1984,7 +1984,7 @@ class TestCheckMakeListIntoText(unittest.TestCase):
     def test_check_make_list_into_text_empty_list(self) -> None:
         self.assertEqual(" - ", c.check_make_list_into_text([]))
 
-    def test_check_make_list_into_text_success(self) -> None:
+       def test_check_make_list_into_text_success(self) -> None:
         input_list = ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"]
         want_text = "69, 107-109, 136-137, 153, 156, 158, 162"
 
@@ -2005,18 +2005,32 @@ class TestCheckMakeListIntoText(unittest.TestCase):
         got_text = c.check_make_list_into_text(input_list, "owasp_asvs_print")
         self.assertEqual(want_text, got_text)
 
-    def test_check_make_list_into_text_non_print_tag_not_collapsed(self) -> None:
+    def test_check_make_list_into_text_print_tag_deduplicates_literal_strings(self) -> None:
+        input_list = ["1.1.1-2", "1.2.1-3", "2.1.1", "1.2.1-3"]
+        want_text = "1.1.1-2, 1.2.1-3, 2.1.1"
+
+        got_text = c.check_make_list_into_text(input_list, "owasp_asvs_print")
+        self.assertEqual(want_text, got_text)
+
+    def test_check_make_list_into_text_non_print_tag_not_collapsed_but_sorted(self) -> None:
         input_list = ["20", "116", "117", "97", "112", "485"]
-        want_text = "20, 116, 117, 97, 112, 485"
+        want_text = "20, 97, 112, 116, 117, 485"
 
         got_text = c.check_make_list_into_text(input_list, "capec")
         self.assertEqual(want_text, got_text)
 
     def test_check_make_list_into_text_non_print_tag_deduplicated(self) -> None:
         input_list = ["345", "20", "345"]
-        want_text = "345, 20"
+        want_text = "20, 345"
 
         got_text = c.check_make_list_into_text(input_list, "cwe")
+        self.assertEqual(want_text, got_text)
+
+    def test_check_make_list_into_text_non_print_mixed_not_sorted(self) -> None:
+        input_list = ["69", "East", "West", "109"]
+        want_text = "69, East, West, 109"
+
+        got_text = c.check_make_list_into_text(input_list, "owasp_dev_guide")
         self.assertEqual(want_text, got_text)
 
     def test_check_make_list_into_text_no_tag_defaults_to_not_collapsed(self) -> None:
