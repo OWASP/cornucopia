@@ -1984,7 +1984,7 @@ class TestCheckMakeListIntoText(unittest.TestCase):
     def test_check_make_list_into_text_empty_list(self) -> None:
         self.assertEqual(" - ", c.check_make_list_into_text([]))
 
-       def test_check_make_list_into_text_success(self) -> None:
+    def test_check_make_list_into_text_success(self) -> None:
         input_list = ["69", "107", "108", "109", "136", "137", "153", "156", "158", "162"]
         want_text = "69, 107-109, 136-137, 153, 156, 158, 162"
 
