@@ -262,25 +262,31 @@ def main() -> None:
     logging.info("Starting CAPEC mapping enrichment process")
     logging.debug(" --- args = %s", str(enricher_vars.args))
 
-    # Resolve paths
-    directory = Path(enricher_vars.args.source_dir).resolve()
+    try:
+        # Resolve paths
+        directory = Path(enricher_vars.args.source_dir).resolve()
 
-    # Determine input file path
-    if enricher_vars.args.input_path:
-        input_path = Path(enricher_vars.args.input_path).resolve()
-    else:
-        filename = EnricherVars.TEMPLATE_FILE_NAME.replace("EDITION", enricher_vars.args.edition).replace(
-            "VERSION", enricher_vars.args.version
-        )
-        input_path = directory / filename
+        # Determine input file path
+        if enricher_vars.args.input_path:
+            input_path = Path(enricher_vars.args.input_path).resolve()
+        else:
+            filename = EnricherVars.TEMPLATE_FILE_NAME.replace("EDITION", enricher_vars.args.edition).replace(
+                "VERSION", enricher_vars.args.version
+            )
+            input_path = directory / filename
 
-    # Determine output file path
-    if enricher_vars.args.output_path:
-        output_path = Path(enricher_vars.args.output_path).resolve()
-    else:
-        output_path = input_path  # Overwrite input by default
+        # Determine output file path
+        if enricher_vars.args.output_path:
+            output_path = Path(enricher_vars.args.output_path).resolve()
+        else:
+            output_path = input_path  # Overwrite input by default
 
-    capec_json_path = Path(enricher_vars.args.capec_json).resolve()
+        capec_json_path = Path(enricher_vars.args.capec_json).resolve()
+    except ValueError as e:
+        if "embedded null byte" in str(e):
+            logging.error("Invalid path provided: embedded null byte.")
+            sys.exit(1)
+        raise e
 
     logging.info("CAPEC JSON file: %s", capec_json_path)
     logging.info("Input YAML file: %s", input_path)
