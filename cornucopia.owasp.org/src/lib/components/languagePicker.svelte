@@ -25,6 +25,7 @@
     it: "Italiano",
     hu: "Magyar",
     hi:'Hindi',
+    fa:'فارسی',
     uk:'Ukrainian'
   };
 
@@ -152,4 +153,3 @@ onchange={(e) => {
     }
   }
 </style>
-

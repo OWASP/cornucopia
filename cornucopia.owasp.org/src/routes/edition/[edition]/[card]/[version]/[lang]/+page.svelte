@@ -7,6 +7,8 @@
 
   let { data }: { data: PageData } = $props();
   const language = $derived(data?.lang);
+  const rtlLanguages = ['fa'];
+  const direction = $derived(rtlLanguages.includes(language ?? '') ? 'rtl' : 'ltr');
   let cards = $derived(data.cards);
   let card : Card = $derived(cards.get(data.card) as Card);
   let languages = $derived(data.languages);
@@ -19,7 +21,7 @@
 
 </script>
 {#if data.metadata}<Metadata metadata={data.metadata} />{/if}
-<div>
+<div dir={direction} lang={language}>
 {#if cardFound()}
   <CardFound routes={data.routes} {cards} {card} {versions} mappingData={data.mappingData.get(card.edition)} {languages} {language} capecData={data.capecData} cardImages={data.cardImages} suitStyling={data.suitStyling} asvsVersion={data.asvsVersion} howToPlayLink={data.howToPlayLink} />
 {:else}
@@ -27,7 +29,7 @@
 {/if}
 </div>
 <style>
-    @media (max-width: 767px) 
+    @media (max-width: 767px)
     {
         div
         {

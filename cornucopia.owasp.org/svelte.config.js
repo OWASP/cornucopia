@@ -5,7 +5,7 @@ config();
 
 export default {
 	preprocess: vitePreprocess(),
-	kit: 
+	kit:
 	{
 		adapter: adapter({
 			routes: {
@@ -429,7 +429,7 @@ export default {
 				'/api/cre/eop/ru',
 				'/api/lang/eop/5.0',
 				'/api/cre/dbd/en',
-				
+
 				'/api/asvs/webapp/3.0',
                 '/api/capec/webapp/3.0',
 				'/api/mastg/mobileapp/2.0',
@@ -470,6 +470,7 @@ export default {
 				'/edition/webapp/VE2/3.0/no_nb',
 				'/edition/webapp/VE2/3.0/ru',
 				'/edition/webapp/VE2/3.0/hi',
+								'/edition/webapp/VE2/3.0/fa',
 				'/edition/webapp/VE2/3.0/uk'
 			]
 		},
@@ -478,6 +479,3 @@ export default {
 		}
 	}
 };
-
-
-
