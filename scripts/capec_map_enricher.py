@@ -15,6 +15,20 @@ import sys
 from pathlib import Path
 from typing import Any
 from pathvalidate.argparse import validate_filepath_arg
+
+
+def validate_filepath_no_nulls(value: str) -> str:
+    """Validate filepath and ensure it contains no null bytes."""
+    if chr(0) in value:
+        raise argparse.ArgumentTypeError("File path cannot contain null bytes")
+    return validate_filepath_arg(value)
+
+
+def _validate_no_null_bytes(value: str, field_name: str) -> str:
+    """Validate that a string doesn't contain null bytes."""
+    if chr(0) in value:
+        raise argparse.ArgumentTypeError(f"Invalid {field_name}: contains null bytes")
+    return value
 import yaml
 
 
@@ -201,42 +215,42 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     parser.add_argument(
         "-c",
         "--capec-json",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=EnricherVars.DEFAULT_CAPEC_JSON_PATH,
         help="Path to CAPEC JSON file (3000.json)",
     )
     parser.add_argument(
         "-i",
         "--input-path",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=None,
         help="Path to input CAPEC mapping YAML file (overrides edition/version)",
     )
     parser.add_argument(
         "-v",
         "--version",
-        type=str,
+        type=lambda x: _validate_no_null_bytes(x, "version"),
         default="latest",
         help="Version of the Cornucopia (e.g., 3.0)",
     )
     parser.add_argument(
         "-e",
         "--edition",
-        type=str,
+        type=lambda x: _validate_no_null_bytes(x, "edition"),
         default="edition",
         help="Edition of the Cornucopia (e.g., webapp or mobileapp)",
     )
     parser.add_argument(
         "-s",
         "--source-dir",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=EnricherVars.DEFAULT_SOURCE_DIR,
         help="Source directory containing CAPEC mapping files",
     )
     parser.add_argument(
         "-o",
         "--output-path",
-        type=validate_filepath_arg,
+        type=validate_filepath_no_nulls,
         default=None,
         help="Path to save enriched CAPEC mapping YAML file (default: overwrites input)",
     )
