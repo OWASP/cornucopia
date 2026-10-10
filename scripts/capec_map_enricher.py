@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 from typing import Any
 from pathvalidate.argparse import validate_filepath_arg
+import yaml
 
 
 def validate_filepath_no_nulls(value: str) -> str:
