@@ -29,6 +29,8 @@ def _validate_no_null_bytes(value: str, field_name: str) -> str:
     if chr(0) in value:
         raise argparse.ArgumentTypeError(f"Invalid {field_name}: contains null bytes")
     return value
+
+
 import yaml
 
 

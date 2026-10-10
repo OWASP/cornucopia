@@ -1,8 +1,10 @@
 ﻿import unittest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "scripts"))
 import capec_map_enricher as enricher
+
 
 class TestNullByteValidation(unittest.TestCase):
     """Test null byte validation in parse_arguments"""
@@ -42,5 +44,6 @@ class TestNullByteValidation(unittest.TestCase):
         self.assertEqual(args.version, "3.0")
         self.assertEqual(args.edition, "mobileapp")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
