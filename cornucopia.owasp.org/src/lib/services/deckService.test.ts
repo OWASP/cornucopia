@@ -1,4 +1,4 @@
- 
+
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DeckService } from './deckService';
 import type { Card } from '$domain/card/card';
@@ -27,7 +27,7 @@ const FAKE_SOURCE_FILES = [
     'webapp-cards-2.2-en.yaml', 'webapp-cards-2.2-es.yaml', 'webapp-cards-2.2-fr.yaml',
     'webapp-cards-2.2-it.yaml', 'webapp-cards-2.2-nl.yaml', 'webapp-cards-2.2-no_nb.yaml',
     'webapp-cards-2.2-pt_br.yaml', 'webapp-cards-2.2-pt_pt.yaml', 'webapp-cards-2.2-ru.yaml',
-    'webapp-cards-3.0-en.yaml', 'webapp-cards-3.0-es.yaml', 'webapp-cards-3.0-fr.yaml',
+    'webapp-cards-3.0-en.yaml', 'webapp-cards-3.0-es.yaml', 'webapp-cards-3.0-fa.yaml', 'webapp-cards-3.0-fr.yaml',
     'webapp-cards-3.0-hi.yaml', 'webapp-cards-3.0-it.yaml', 'webapp-cards-3.0-nl.yaml',
     'webapp-cards-3.0-no_nb.yaml', 'webapp-cards-3.0-pt_br.yaml', 'webapp-cards-3.0-pt_pt.yaml',
     'webapp-cards-3.0-ru.yaml', 'webapp-cards-3.0-uk.yaml',
@@ -195,7 +195,7 @@ describe('DeckService tests', () => {
                 version: '2.2',
                 lang: ['en', 'es', 'fr', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru']
             });
-            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk'] });
+            expect(decks).toContainEqual({ edition: 'webapp', version: '3.0', lang: ['en', 'es', 'fa', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk'] });
         });
 
         it('should skip editions/versions with no discovered languages and omit them from the latest decks', () => {
@@ -290,7 +290,7 @@ describe('DeckService tests', () => {
 
         it('should return all supported languages for webapp version 3.0', () => {
              const languages = DeckService.getLanguagesForEditionVersion('webapp', '3.0');
-             expect(languages).toEqual(['en', 'es', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk']);
+             expect(languages).toEqual(['en', 'es', 'fa', 'fr', 'hi', 'it', 'nl', 'no_nb', 'pt_br', 'pt_pt', 'ru', 'uk']);
         });
        it('should return all supported languages for mobileapp version 1.1', () => {
             const languages = DeckService.getLanguagesForEditionVersion('mobileapp', '1.1');
@@ -368,7 +368,7 @@ describe('DeckService tests', () => {
         it('should load cards if not in cache', () => {
             vi.mocked(FileSystemHelper.hasFile).mockReturnValue(true);
             vi.mocked(FileSystemHelper.hasDir).mockReturnValue(true);
-            
+
             const mockYamlContent = `
 suits:
   - id: suit1
@@ -460,7 +460,7 @@ suits:
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
+
             expect(result.size).toBe(1);
             const card = result.get('DV-A');
             expect(card).toBeDefined();
@@ -546,7 +546,7 @@ suits:
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
+
             const firstCard = result.get('FIRST-CARD');
             expect(firstCard?.prevous).toBe('LAST-CARD');
         });
@@ -591,7 +591,7 @@ suits:
             vi.mocked(MappingService.prototype.getCardMapping).mockReturnValue(mockMapping as unknown);
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
+
             const lastCard = result.get('LAST-CARD');
             expect(lastCard?.next).toBe('FIRST-CARD');
         });
@@ -626,10 +626,10 @@ suits:
             const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
+
             expect(result.size).toBe(1);
             expect(consoleWarnSpy).toHaveBeenCalled();
-            
+
             consoleWarnSpy.mockRestore();
         });
 
@@ -666,10 +666,10 @@ suits:
             const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
             const result = deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
+
             expect(result.size).toBe(1);
             expect(consoleWarnSpy).toHaveBeenCalled();
-            
+
             consoleWarnSpy.mockRestore();
         });
 
@@ -705,11 +705,11 @@ suits:
             const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
             deckService.getCardDataForEditionVersionLang('webapp', '2.2', 'en');
-            
+
             expect(consoleLogSpy).toHaveBeenCalledWith(
                 expect.stringContaining('Caching cards for webapp 2.2 en')
             );
-            
+
             consoleLogSpy.mockRestore();
         });
 
