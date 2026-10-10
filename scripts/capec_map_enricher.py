@@ -268,26 +268,27 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
     return args
 
 
-def main() -> None:
-    """Main execution function."""
-    enricher_vars.args = parse_arguments(sys.argv[1:])
-
-    # Defensive validation for paths (catches fuzzed inputs that bypass argparse validation)
+def _validate_args_no_null_bytes(args: argparse.Namespace) -> None:
+    """Defensive validation for null bytes that may bypass argparse validation."""
     for attr in ["input_path", "output_path", "capec_json", "source_dir"]:
-        if hasattr(enricher_vars.args, attr):
-            value = getattr(enricher_vars.args, attr)
+        if hasattr(args, attr):
+            value = getattr(args, attr)
             if value and chr(0) in str(value):
                 logging.error("Invalid file path in %s: contains null bytes", attr)
                 sys.exit(1)
-
-    # Defensive validation for string arguments
     for attr in ["edition", "version"]:
-        if hasattr(enricher_vars.args, attr):
-            value = getattr(enricher_vars.args, attr)
+        if hasattr(args, attr):
+            value = getattr(args, attr)
             if value and chr(0) in str(value):
                 logging.error("Invalid value in %s: contains null bytes", attr)
                 sys.exit(1)
 
+
+def main() -> None:
+    """Main execution function."""
+    enricher_vars.args = parse_arguments(sys.argv[1:])
+
+    _validate_args_no_null_bytes(enricher_vars.args)
     set_logging()
 
     logging.info("Starting CAPEC mapping enrichment process")
