@@ -271,6 +271,23 @@ def parse_arguments(input_args: list[str]) -> argparse.Namespace:
 def main() -> None:
     """Main execution function."""
     enricher_vars.args = parse_arguments(sys.argv[1:])
+
+    # Defensive validation for paths (catches fuzzed inputs that bypass argparse validation)
+    for attr in ["input_path", "output_path", "capec_json", "source_dir"]:
+        if hasattr(enricher_vars.args, attr):
+            value = getattr(enricher_vars.args, attr)
+            if value and chr(0) in str(value):
+                logging.error("Invalid file path in %s: contains null bytes", attr)
+                sys.exit(1)
+
+    # Defensive validation for string arguments
+    for attr in ["edition", "version"]:
+        if hasattr(enricher_vars.args, attr):
+            value = getattr(enricher_vars.args, attr)
+            if value and chr(0) in str(value):
+                logging.error("Invalid value in %s: contains null bytes", attr)
+                sys.exit(1)
+
     set_logging()
 
     logging.info("Starting CAPEC mapping enrichment process")
