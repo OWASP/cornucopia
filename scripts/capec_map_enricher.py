@@ -32,9 +32,6 @@ def _validate_no_null_bytes(value: str, field_name: str) -> str:
     return value
 
 
-import yaml
-
-
 class EnricherVars:
     TEMPLATE_FILE_NAME: str = "EDITION-capec-VERSION.yaml"
     DEFAULT_CAPEC_JSON_PATH = Path(__file__).parent / "../cornucopia.owasp.org/data/capec-3.9/3000.json"
