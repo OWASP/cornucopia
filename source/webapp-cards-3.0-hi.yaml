@@ -505,7 +505,7 @@ paragraphs:
     text: "Colin Watson (लेखक और सह-परियोजना नेता) तथा Grant Ongers सहित अन्य OWASP स्वयंसेवकों को धन्यवाद, जिन्होंने विभिन्न तरीकों से योगदान दिया।"
   -
     id: "T00180"
-    text: "OWASP® किसी भी व्यावसायिक उत्पाद या सेवा का समर्थन या अनुशंसा नहीं करता © 2012-2025 OWASP® Foundation यह दस्तावेज़ Creative Commons Attribution-ShareAlike 3.0 लाइसेंस के अंतर्गत लाइसेंस प्राप्त है"
+    text: "OWASP® किसी भी व्यावसायिक उत्पाद या सेवा का समर्थन या अनुशंसा नहीं करता © 2012-2026 OWASP® Foundation. यह दस्तावेज़ Creative Commons Attribution-ShareAlike 4.0 लाइसेंस के अंतर्गत लाइसेंस प्राप्त है"
   -
     id: "T00200"
     text: "परिचय"
@@ -661,7 +661,7 @@ paragraphs:
     text: "सभी OWASP दस्तावेज़ और उपकरण निःशुल्क डाउनलोड और उपयोग के लिए उपलब्ध हैं।"
   -
     id: "T01070"
-    text: "OWASP® Cornucopia Creative Commons Attribution-ShareAlike 3.0 लाइसेंस के अंतर्गत लाइसेंस प्राप्त है।"
+    text: "OWASP® Cornucopia Creative Commons Attribution-ShareAlike 4.0 लाइसेंस के अंतर्गत लाइसेंस प्राप्त है।"
   -
     id: "T01100"
     text: "निर्देश"
@@ -986,7 +986,7 @@ paragraphs:
     text: "हाँ, बिल्कुल।"
   -
     id: "T02630"
-    text: "सभी OWASP सामग्री Creative Commons Attribution-ShareAlike 3.0 लाइसेंस के अंतर्गत उपलब्ध है, और आप लाइसेंस की शर्तों का पालन करते हुए इसका स्वतंत्र रूप से उपयोग, संशोधन और वितरण कर सकते हैं।"
+    text: "सभी OWASP सामग्री Creative Commons Attribution-ShareAlike 4.0 लाइसेंस के अंतर्गत उपलब्ध है, और आप लाइसेंस की शर्तों का पालन करते हुए इसका स्वतंत्र रूप से उपयोग, संशोधन और वितरण कर सकते हैं।"
   -
     id: "T02640"
     text: "यदि आप एक नया संस्करण बनाते हैं, तो क्या आप उसे OWASP® Cornucopia परियोजना को दान करने पर विचार करेंगे?"

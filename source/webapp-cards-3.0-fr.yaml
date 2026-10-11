@@ -504,7 +504,7 @@ paragraphs:
     text: "Colin Watson en tant qu'auteur et chef de projet avec Grant Ongers, avec d'autres volontaires OWASP qui ont aidé en bien des manières."
   -
     id: "T00180"
-    text: "OWASP n'apporte pas de soutien ou ne recommande pas des produits ou des services commerciaux © 2012-2025 OWASP® Foundation Ce document est diffusé sous la licence Creative Commons Attribution-ShareAlike 3.0"
+    text: "OWASP n'apporte pas de soutien ou ne recommande pas des produits ou des services commerciaux © 2012-2026 OWASP® Foundation. Ce document est diffusé sous la licence Creative Commons Attribution-ShareAlike 4.0"
   -
     id: "T00200"
     text: "Introduction"
@@ -660,7 +660,7 @@ paragraphs:
     text: "Tous les documents et outils OWASP sont libres de téléchargement et d'utilisation. "
   -
     id: "T01070"
-    text: "OWASP® Cornucopia est publié sous une licence Creative Commons Attribution-ShareAlike 3.0 ."
+    text: "OWASP® Cornucopia est publié sous une licence Creative Commons Attribution-ShareAlike 4.0 ."
   -
     id: "T01100"
     text: "Instructions"
@@ -984,7 +984,7 @@ paragraphs:
     text: "Bien entendu."
   -
     id: "T02630"
-    text: "Tous les travaux OWASP sont libres d'utilisation, à condition de se conformer à la licence Creative Commons Attribution-ShareAlike 3.0. Peut-être souhaitez-vous créer une nouvelle version et l'offrir au projet Cornucopia OWASP?"
+    text: "Tous les travaux OWASP sont libres d'utilisation, à condition de se conformer à la licence Creative Commons Attribution-ShareAlike 4.0. Peut-être souhaitez-vous créer une nouvelle version et l'offrir au projet Cornucopia OWASP?"
   -
     id: "T02640"
     text: "2. Comment m'impliquer?"
