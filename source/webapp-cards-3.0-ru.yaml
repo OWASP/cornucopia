@@ -507,7 +507,7 @@ paragraphs:
     text: "Колин Уотсон в качестве автора и лидера со-проекта с Грантом Онгером вместе с другими добровольцами OWASP, которые помогли во многих отношениях."
   -
     id: "T00180"
-    text: "OWASP® не поддерживает и не рекомендует коммерческие продукты или услуги © 2012-2025 OWASP® Foundation Этот документ лицензирован в соответствии с лицензией Creative Commons Attribution-ShareAlike 3.0"
+    text: "OWASP® не поддерживает и не рекомендует коммерческие продукты или услуги © 2012-2026 OWASP® Foundation. Этот документ лицензирован в соответствии с лицензией Creative Commons Attribution-ShareAlike 4.0"
   -
     id: "T00200"
     text: "Введение"
@@ -663,7 +663,7 @@ paragraphs:
     text: "Все документы и инструменты OWASP бесплатны для загрузки и использования."
   -
     id: "T01070"
-    text: "OWASP® Cornucopia доступна по лицензии Creative Commons Attribution-Sharealike 3.0."
+    text: "OWASP® Cornucopia доступна по лицензии Creative Commons Attribution-ShareAlike 4.0."
   -
     id: "T01100"
     text: "Инструкции"
@@ -987,7 +987,7 @@ paragraphs:
     text: "Да, конечно."
   -
     id: "T02630"
-    text: "Все материалы OWASP можно использовать бесплатно, при условии, что вы выполняете условия лицензии Creative Commons Attribution-ShareAlike 3.0. "
+    text: "Все материалы OWASP можно использовать бесплатно, при условии, что вы выполняете условия лицензии Creative Commons Attribution-ShareAlike 4.0. "
   -
     id: "T02640"
     text: "Возможно, если вы создадите новую версию, вы можете пожертвовать ее в проект OWASP® Cornucopia?"
