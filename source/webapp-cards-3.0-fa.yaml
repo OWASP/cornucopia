@@ -507,7 +507,7 @@ paragraphs:
     text: "Colin Watson به‌عنوان نویسنده و هم‌رهبر پروژه در کنار Grant Ongers، به همراه سایر داوطلبان OWASP که از راه‌های بسیار کمک کرده‌اند."
   -
     id: "T00180"
-    text: "OWASP® هیچ محصول یا خدمات تجاری را تأیید یا توصیه نمی‌کند © 2012-2025 OWASP® Foundation این سند تحت مجوز Creative Commons Attribution-ShareAlike 3.0 منتشر شده است"
+    text: "OWASP® هیچ محصول یا خدمات تجاری را تأیید یا توصیه نمی‌کند © 2012-2025 OWASP® Foundation این سند تحت مجوز Creative Commons Attribution-ShareAlike 4.0 منتشر شده است"
   -
     id: "T00200"
     text: "مقدمه"
@@ -663,7 +663,7 @@ paragraphs:
     text: "همه اسناد و ابزارهای OWASP برای دانلود و استفاده رایگان هستند."
   -
     id: "T01070"
-    text: "OWASP® Cornucopia تحت مجوز Creative Commons Attribution-ShareAlike 3.0 منتشر شده است."
+    text: "OWASP® Cornucopia تحت مجوز Creative Commons Attribution-ShareAlike 4.0 منتشر شده است."
   -
     id: "T01100"
     text: "دستورالعمل‌ها"
@@ -987,7 +987,7 @@ paragraphs:
     text: "بله، البته."
   -
     id: "T02630"
-    text: "همه مواد OWASP را می‌توانید هر طور که می‌خواهید استفاده کنید، به شرط رعایت مجوز Creative Commons Attribution-ShareAlike 3.0."
+    text: "همه مواد OWASP را می‌توانید هر طور که می‌خواهید استفاده کنید، به شرط رعایت مجوز Creative Commons Attribution-ShareAlike 4.0."
   -
     id: "T02640"
     text: "شاید اگر نسخه جدیدی بسازید، بخواهید آن را به پروژه OWASP® Cornucopia اهدا کنید؟"
