@@ -15,7 +15,7 @@ While there was initially little interest following my single mailing list annou
 
 I don't know how Cornucopia was identified because it was simply a file referred to by one mailing list email, but if you searched the OWASP wiki for “ecommerce” it was in the few results. I notified the OWASP community about this by sending a message to the SCPQRG mailing list on 1 February 2013  (see Appendix).
 
-That changed everything. I decided that v0.3 needed to be converted into its own OWASP project, mentioning this in another email to the SCPQRG mailing list on 21 February 2013 (see Appendix). I created v1.0 and published it on 25 February 2013 and submitted a “new project request' to OWASP the same day, with this completed on 5 March. I worked on the wiki in April and May 2013, announced to the new Cornucopia mailing list on 18 May 2013. A short presentation about Cornucopia was provided on 3 June 3rd 2013  at OWASP London chapter's event for the OWASP EU Tour 2013. Conference.
+That changed everything. I decided that v0.3 needed to be converted into its own OWASP project, mentioning this in another email to the SCPQRG mailing list on 21 February 2013 (see Appendix). I created v1.0 and published it on 25 February 2013 and submitted a “new project request' to OWASP the same day, with this completed on 5 March. I worked on the wiki in April and May 2013, announced to the new Cornucopia mailing list on 18 May 2013. A [short presentation](/share/Owasplondon-colinwatson-cornucopia.odp) about Cornucopia was provided on 3 June 3rd 2013  at OWASP London chapter's event for the OWASP EU Tour 2013. Conference.
 
 ## Printed decks
 
@@ -28,3 +28,5 @@ Eventually Tom Brennan, an OWASP board member, found funding to print card decks
 ## Wiki deck
 
 Darío De Filippis became involved in OWASP Cornucopia in September 2015, eventually becoming a co-leader of the project. Dario conceived and created, and published on 21 January 2016, the "Card Deck Wiki" for the Ecommerce Website Edition, with each card having a unique URL.
+
+Source: [cornucopia-history-corrected.odt](/share/cornucopia-history-corrected.odt)
